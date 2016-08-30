@@ -1,0 +1,30 @@
+{
+  "name": "eslint-plugin-vue",
+  "version": "1.0.0",
+  "description": "eslint plugin for vue.js projects",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/eslint-plugin-vue.git"
+  },
+  "keywords": [
+    "eslint",
+    "plugin",
+    "eslint-plugin",
+    "eslintplugin",
+    "vue"
+  ],
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
+  },
+  "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme",
+  "peerDependencies": {
+    "eslint": "^2.0.0 || ^3.0.0"
+  },
+  "dependencies": {
+    "eslint-plugin-html": "^1.5.2",
+    "eslint-plugin-react": "^6.2.0"
+  }
+}
