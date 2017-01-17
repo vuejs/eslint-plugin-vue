@@ -1,9 +1,12 @@
 'use strict'
 
+require('eslint-plugin-html')
+
 module.exports = {
-  processors: {
-    '.vue': require('eslint-plugin-html').processors['.vue']
-  },
+  settings: [
+    'html/html-extensions': ['.vue'],
+    'html/xml-extensions': []
+  ],
   rules: {
     'jsx-uses-vars': require('eslint-plugin-react/lib/rules/jsx-uses-vars')
   }
