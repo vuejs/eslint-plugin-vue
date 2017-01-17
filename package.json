@@ -24,7 +24,7 @@
     "eslint": "^2.0.0 || ^3.0.0"
   },
   "dependencies": {
-    "eslint-plugin-html": "^1.5.2",
+    "eslint-plugin-html": "beta",
     "eslint-plugin-react": "^6.2.0"
   }
 }
