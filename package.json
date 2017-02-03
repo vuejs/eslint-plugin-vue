@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "eslint plugin for vue.js projects",
   "main": "index.js",
   "repository": {
