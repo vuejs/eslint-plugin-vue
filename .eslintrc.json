@@ -1,0 +1,17 @@
+{
+    "root": true,
+    "extends": [
+        "mysticatea",
+        "mysticatea/node",
+        "plugin:eslint-plugin/recommended"
+    ],
+    "plugins": [
+        "eslint-plugin"
+    ],
+    "rules": {
+        "complexity": "off",
+        "eslint-plugin/report-message-format": ["error", "^[A-Z].*\\.$"],
+        "eslint-plugin/prefer-placeholders": "error",
+        "eslint-plugin/consistent-output": "error"
+    }
+}
