@@ -1,9 +1,14 @@
 module.exports = {
   root: true,
 
+  parser: "vue-eslint-parser",
+
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
 
   env: {
@@ -13,32 +18,4 @@ module.exports = {
   plugins: [
     'vue',
   ],
-
-  rules: {
-    'vue/html-end-tags': 'error',
-    'vue/html-no-self-closing': 'error',
-    'vue/html-quotes': 'off',
-    'vue/no-confusing-v-for-v-if': 'error',
-    'vue/no-duplicate-attributes': 'error',
-    'vue/no-invalid-template-root': 'error',
-    'vue/no-invalid-v-bind': 'error',
-    'vue/no-invalid-v-cloak': 'error',
-    'vue/no-invalid-v-else-if': 'error',
-    'vue/no-invalid-v-else': 'error',
-    'vue/no-invalid-v-for': 'error',
-    'vue/no-invalid-v-html': 'error',
-    'vue/no-invalid-v-if': 'error',
-    'vue/no-invalid-v-model': 'error',
-    'vue/no-invalid-v-on': 'error',
-    'vue/no-invalid-v-once': 'error',
-    'vue/no-invalid-v-pre': 'error',
-    'vue/no-invalid-v-show': 'error',
-    'vue/no-invalid-v-text': 'error',
-    'vue/no-parsing-error': 'error',
-    'vue/no-textarea-mustache': 'error',
-    'vue/require-component-is': 'error',
-    'vue/require-v-for-key': 'error',
-    'vue/v-bind-style': 'off',
-    'vue/v-on-style': 'off'
-  },
 };
