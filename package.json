@@ -44,6 +44,7 @@
     "eslint": "^3.18.0"
   },
   "dependencies": {
+    "requireindex": "^1.1.0",
     "vue-eslint-parser": "mysticatea/vue-eslint-parser#v1.1.0-4"
   },
   "devDependencies": {
