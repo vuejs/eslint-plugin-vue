@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 4
+
+test:
+  override:
+    - npm test
+    - nvm use 6 && npm test
+    - nvm use 7 && npm test
