@@ -37,11 +37,12 @@ Write `.eslintrc.*` file to configure rules. See also: http://eslint.org/docs/us
 - ✒️ the mark of a fixable rule.
 
 <!--RULES_TABLE_START-->
-### Possible Errors
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| ⭐️ | [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | disallow invalid template root. |
+  ### Possible Errors
+
+  |    | Rule ID | Description |
+  |:---|:--------|:------------|
+  | ⭐️ | [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | disallow invalid template root. |
 | ⭐️ | [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | disallow invalid v-bind directives. |
 | ⭐️ | [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | disallow invalid v-cloak directives. |
 | ⭐️ | [no-invalid-v-else-if](./docs/rules/no-invalid-v-else-if.md) | disallow invalid v-else-if directives. |
@@ -57,23 +58,26 @@ Write `.eslintrc.*` file to configure rules. See also: http://eslint.org/docs/us
 | ⭐️ | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid v-text directives. |
 | ⭐️ | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
 
-### Best Practices
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| ⭐️✒️ | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
+  ### Best Practices
+
+  |    | Rule ID | Description |
+  |:---|:--------|:------------|
+  | ⭐️✒️ | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
 | ⭐️✒️ | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
+| ⭐️ | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | Prevent variables used in JSX to be marked as unused |
 | ⭐️ | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
 | ⭐️ | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate arguments. |
 | ⭐️ | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 | ⭐️ | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
 | ⭐️ | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives. |
 
-### Stylistic Issues
 
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
+  ### Stylistic Issues
+
+  |    | Rule ID | Description |
+  |:---|:--------|:------------|
+  |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
 | ✒️ | [v-bind-style](./docs/rules/v-bind-style.md) | enforce v-bind directive style. |
 | ✒️ | [v-on-style](./docs/rules/v-on-style.md) | enforce v-on directive style. |
 
