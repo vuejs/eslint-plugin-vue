@@ -22,8 +22,8 @@ const recommendedRulesFile = path.resolve(__dirname, "../lib/recommended-rules.j
 const tablePlaceholder = /<!--RULES_TABLE_START-->[\s\S]*<!--RULES_TABLE_END-->/
 const readmeContent = fs.readFileSync(readmeFile, "utf8")
 
-const STAR = "⭐️"
-const PEN = "✒️"
+const STAR = ":white_check_mark:"
+const PEN = ":wrench:"
 
 const rules = fs.readdirSync(root)
   .filter(file => path.extname(file) === ".js")
