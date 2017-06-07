@@ -4,13 +4,13 @@
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
-    "start": "npm run update && npm run test:simple -- --watch --growl",
+    "start": "npm run test:simple -- --watch --growl",
     "test:base": "mocha tests --recursive",
     "test:simple": "npm run test:base -- --reporter nyan",
     "test": "nyc npm run test:base",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "preversion": "npm test",
+    "preversion": "npm run update && npm test",
     "postversion": "git push --follow-tags",
     "update": "node ./tools/update-rules.js"
   },
