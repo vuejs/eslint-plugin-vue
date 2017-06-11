@@ -9,6 +9,7 @@ module.exports = {
   },
   extends: [
     "plugin:eslint-plugin/recommended",
+    "plugin:vue-libs/recommended",
   ],
   plugins: [
     "eslint-plugin",

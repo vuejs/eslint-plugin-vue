@@ -2,33 +2,33 @@
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Michał Sajnóg
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Requirements
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-var eslint = require('eslint');
-var rule = require("../../../lib/rules/jsx-uses-vars");
-var ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars');
+var eslint = require('eslint')
+var rule = require('../../../lib/rules/jsx-uses-vars')
+var ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars')
 
-var RuleTester = eslint.RuleTester;
+var RuleTester = eslint.RuleTester
 var ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
-    },
-  },
-});
+      jsx: true
+    }
+  }
+})
 
-var linter = ruleTester.linter || eslint.linter;
-linter.defineRule('jsx-uses-vars', rule);
+var linter = ruleTester.linter || eslint.linter
+linter.defineRule('jsx-uses-vars', rule)
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Tests
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
 
@@ -95,7 +95,7 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         };
       `,
       errors: [{
-        message: "'SomeComponent' is defined but never used.",
+        message: "'SomeComponent' is defined but never used."
       }]
     }, {
       code: `
@@ -112,8 +112,8 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
         };
       `,
       errors: [{
-        message: "'wrapper' is assigned a value but never used.",
+        message: "'wrapper' is assigned a value but never used."
       }]
     }
   ]
-});
+})
