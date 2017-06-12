@@ -42,7 +42,7 @@
     "node": ">=4"
   },
   "peerDependencies": {
-    "eslint": "^3.18.0"
+    "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
     "requireindex": "^1.1.0",
