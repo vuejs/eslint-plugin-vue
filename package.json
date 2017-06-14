@@ -2,51 +2,58 @@
   "name": "eslint-plugin-vue",
   "version": "3.0.0",
   "description": "Official ESLint plugin for Vue.js",
-  "engines": {
-    "node": ">=4"
-  },
   "main": "lib/index.js",
+  "scripts": {
+    "start": "npm run test:simple -- --watch --growl",
+    "test:base": "mocha tests --recursive",
+    "test:simple": "npm run test:base -- --reporter nyan",
+    "test": "nyc npm run test:base",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "preversion": "npm run update && npm test",
+    "postversion": "git push --follow-tags",
+    "update": "node ./tools/update-rules.js"
+  },
   "files": [
     "lib"
   ],
+  "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "eslint-config",
+    "vue",
+    "vuejs",
+    "rules"
+  ],
+  "author": "Toru Nagashima (https://github.com/mysticatea)",
+  "contributors": [
+    "Michał Sajnóg <msajnog93@gmail.com> (http://github.com/michalsnik)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/eslint-plugin-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "peerDependencies": {
-    "eslint": "^3.18.0"
+    "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
+    "requireindex": "^1.1.0",
     "vue-eslint-parser": "mysticatea/vue-eslint-parser#v1.1.0-4"
   },
   "devDependencies": {
     "@types/node": "^4.2.6",
-    "codecov": "^2.1.0",
     "eslint": "^3.18.0",
-    "eslint-config-mysticatea": "^10.0.0",
     "eslint-plugin-eslint-plugin": "^0.7.1",
+    "eslint-plugin-vue-libs": "^1.2.0",
     "mocha": "^3.2.0",
-    "nyc": "^10.2.0",
-    "opener": "^1.4.3",
-    "rimraf": "^2.6.1"
-  },
-  "scripts": {
-    "_mocha": "_mocha \"tests/lib/**/*.js\" --reporter progress",
-    "clean": "rimraf .nyc_output coverage",
-    "coverage": "nyc report --reporter lcov && opener ./coverage/lcov-report/index.html",
-    "lint": "eslint lib \"tests/lib/**/*.js\"",
-    "postversion": "git push && git push --tags",
-    "pretest": "npm run lint",
-    "preversion": "npm test",
-    "test": "nyc npm run _mocha",
-    "watch": "npm run _mocha -- --growl --watch",
-    "codecov": "nyc report --reporter lcovonly && codecov"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vuejs/eslint-plugin-vue-trial.git"
-  },
-  "keywords": [],
-  "author": "Toru Nagashima (https://github.com/mysticatea)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
-  },
-  "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme"
+    "nyc": "^10.2.0"
+  }
 }

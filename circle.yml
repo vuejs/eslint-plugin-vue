@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 4
+
+dependencies:
+  pre:
+    - nvm install 7
+    - nvm install 8
+
+test:
+  override:
+    - npm test
+    - nvm use 6 && npm test
+    - nvm use 7 && npm test
+    - nvm use 8 && npm test

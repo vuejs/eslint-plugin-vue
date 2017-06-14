@@ -3,94 +3,89 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-"use strict"
+'use strict'
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Requirements
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-const fs = require("fs")
-const path = require("path")
+const fs = require('fs')
+const path = require('path')
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Main
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-const ROOT = path.resolve(__dirname, "../lib/rules")
-const README = path.resolve(__dirname, "../README.md")
-const RULES_JS = path.resolve(__dirname, "../lib/rules.js")
-const RECOMMENDED_JSON = path.resolve(__dirname, "../lib/recommended.json")
-const STAR = "⭐️"
-const PEN = "✒️"
-const CATEGORIES = ["Possible Errors", "Best Practices", "Stylistic Issues"]
-const TABLE_PLACE_HOLDER = /<!--RULES_TABLE_START-->[\s\S]*<!--RULES_TABLE_END-->/
+const root = path.resolve(__dirname, '../lib/rules')
+const readmeFile = path.resolve(__dirname, '../README.md')
+const recommendedRulesFile = path.resolve(__dirname, '../lib/recommended-rules.js')
+const tablePlaceholder = /<!--RULES_TABLE_START-->[\s\S]*<!--RULES_TABLE_END-->/
+const readmeContent = fs.readFileSync(readmeFile, 'utf8')
 
-const ruleNames = fs.readdirSync(ROOT)
-    .filter(file => path.extname(file) === ".js")
-    .map(file => path.basename(file, ".js"))
+const STAR = ':white_check_mark:'
+const PEN = ':wrench:'
 
-const rules = new Map(
-    ruleNames.map(name => [
-        name,
-        require(path.join(ROOT, name)),
-    ])
-)
+const rules = fs.readdirSync(root)
+  .filter(file => path.extname(file) === '.js')
+  .map(file => path.basename(file, '.js'))
+  .map(fileName => [
+    fileName,
+    require(path.join(root, fileName))
+  ])
 
-const RULE_TABLE = CATEGORIES.map(category => `### ${category}
+const categories = rules
+  .map(entry => entry[1].meta.docs.category)
+  .reduce((arr, category) => {
+    if (!arr.includes(category)) {
+      arr.push(category)
+    }
+    return arr
+  }, [])
+
+const rulesTableContent = categories.map(category => `
+### ${category}
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 ${
-    Array.from(rules.entries())
-        .filter(entry => entry[1].meta.docs.category === category)
-        .map(entry => {
-            const name = entry[0]
-            const meta = entry[1].meta
-            const mark = `${meta.docs.recommended ? STAR : ""}${meta.fixable ? PEN : ""}`
-            const link = `[${name}](./docs/rules/${name}.md)`
-            const description = meta.docs.description || "(no description)"
-            return `| ${mark} | ${link} | ${description} |`
-        })
-        .join("\n")
+  rules
+    .filter(entry => entry[1].meta.docs.category === category)
+    .map(entry => {
+      const name = entry[0]
+      const meta = entry[1].meta
+      const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`
+      const link = `[${name}](./docs/rules/${name}.md)`
+      const description = meta.docs.description || '(no description)'
+      return `| ${mark} | ${link} | ${description} |`
+    })
+    .join('\n')
 }
-`).join("\n")
+`).join('\n')
 
-const RULES_JS_CONTENT = `/**
- * @author Toru Nagashima
- * @copyright 2017 Toru Nagashima. All rights reserved.
- * See LICENSE file in root directory for full license.
+const recommendedRules = rules.reduce((obj, entry) => {
+  const name = `vue/${entry[0]}`
+  const recommended = entry[1].meta.docs.recommended
+  const status = recommended ? 'error' : 'off'
+  obj[name] = status
+  return obj
+}, {})
+
+const recommendedRulesContent = `/*
+ * IMPORTANT!
+ * This file has been automatically generated,
+ * in order to update it's content execute "npm run update"
  */
-"use strict"
-
-module.exports = {
-${ruleNames.map(name => `    "${name}": require("./rules/${name}"),`).join("\n")}
-}
-`
-
-const recommendedConf = {
-    parser: "vue-eslint-parser",
-    env: {es6: true},
-    rules: Array.from(rules.entries())
-        .reduce((obj, entry) => {
-            const name = entry[0]
-            const recommended = entry[1].meta.docs.recommended
-            obj[`vue/${name}`] = recommended ? "error" : "off"
-            return obj
-        }, {}),
-}
+module.exports = ${JSON.stringify(recommendedRules, null, 2)}`
 
 fs.writeFileSync(
-    README,
-    fs.readFileSync(README, "utf8").replace(
-        TABLE_PLACE_HOLDER,
-        `<!--RULES_TABLE_START-->\n${RULE_TABLE}\n<!--RULES_TABLE_END-->`
-    )
+  readmeFile,
+  readmeContent.replace(
+    tablePlaceholder,
+    `<!--RULES_TABLE_START-->\n${rulesTableContent}\n<!--RULES_TABLE_END-->`
+  )
 )
+
 fs.writeFileSync(
-    RULES_JS,
-    RULES_JS_CONTENT
-)
-fs.writeFileSync(
-    RECOMMENDED_JSON,
-    JSON.stringify(recommendedConf, null, 4)
+  recommendedRulesFile,
+  recommendedRulesContent
 )
