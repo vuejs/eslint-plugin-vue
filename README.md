@@ -8,7 +8,7 @@
 
 ## :exclamation: Attention - this is documentation for beta `3.0.0` :exclamation:
 
-This branch contains `eslint-plugin-vue@beta` which is pre-released `3.0.0`, but it's not an official version that you get by `npm install eslint-plugin-vue`. In order to install this you need to specify either `3.0.0` in `package.json` or do `npm install eslint-plugin-vue@beta`.
+This branch contains `eslint-plugin-vue@beta` which is pre-released `3.0.0`, but it's not an official version that you get by `npm install eslint-plugin-vue`. In order to install this you need to specify either `3.0.1` in `package.json` or do `npm install eslint-plugin-vue@beta`.
 
 Please try it and report any issues that you might experience.
 
