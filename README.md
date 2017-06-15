@@ -109,6 +109,13 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid v-text directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
 
+
+### Fill me in
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+|  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
+
 <!--RULES_TABLE_END-->
 
 ## :anchor: Semantic Versioning Policy
