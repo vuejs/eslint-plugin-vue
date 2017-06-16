@@ -6,7 +6,15 @@
 
 > Official ESLint plugin for Vue.js
 
-## :exclamation: Requirements
+## :exclamation: Attention - this is documentation for beta `3.0.0` :exclamation:
+
+This branch contains `eslint-plugin-vue@beta` which is pre-released `3.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "beta"` in `package.json` or do `npm install eslint-plugin-vue@beta`.
+
+Please try it and report any issues that you might experience.
+
+If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
+
+## :grey_exclamation: Requirements
 
 - [ESLint](http://eslint.org/) `>=3.18.0`.
 - Node.js `>=4.0.0`
@@ -14,7 +22,7 @@
 ## :cd: Installation
 
 ```
-npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue@beta
 ```
 
 ## :rocket: Usage
