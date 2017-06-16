@@ -1,30 +1,58 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "2.0.1",
-  "description": "eslint plugin for vue.js projects",
-  "main": "index.js",
+  "version": "3.0.1",
+  "description": "Official ESLint plugin for Vue.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm run test:simple -- --watch --growl",
+    "test:base": "mocha tests --recursive",
+    "test:simple": "npm run test:base -- --reporter nyan",
+    "test": "nyc npm run test:base",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "preversion": "npm run update && npm test",
+    "update": "node ./tools/update-rules.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "eslint-config",
+    "vue",
+    "vuejs",
+    "rules"
+  ],
+  "author": "Toru Nagashima (https://github.com/mysticatea)",
+  "contributors": [
+    "Michał Sajnóg <msajnog93@gmail.com> (http://github.com/michalsnik)"
+  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuejs/eslint-plugin-vue.git"
   },
-  "keywords": [
-    "eslint",
-    "plugin",
-    "eslint-plugin",
-    "eslintplugin",
-    "vue"
-  ],
-  "author": "Evan You",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
-  "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme",
+  "engines": {
+    "node": ">=4"
+  },
   "peerDependencies": {
-    "eslint": "^2.0.0 || ^3.0.0"
+    "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
-    "eslint-plugin-html": "^2.0.0",
-    "eslint-plugin-react": "^6.9.0"
+    "requireindex": "^1.1.0",
+    "vue-eslint-parser": "mysticatea/vue-eslint-parser#v1.1.0-4"
+  },
+  "devDependencies": {
+    "@types/node": "^4.2.6",
+    "eslint": "^3.18.0",
+    "eslint-plugin-eslint-plugin": "^0.7.1",
+    "eslint-plugin-vue-libs": "^1.2.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0"
   }
 }
