@@ -34,6 +34,10 @@ tester.run('no-invalid-v-else', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if="foo"></div><div v-else></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>\n    <c1 v-if="1" />\n    <c2 v-else-if="1" />\n    <c3 v-else />\n</template>`
     }
   ],
   invalid: [

@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "npm run test:simple -- --watch --growl",
-    "test:base": "mocha tests --recursive",
+    "test:base": "mocha \"tests/lib/**/*.js\" \"tests/integrations/*.js\" --timeout 60000",
     "test:simple": "npm run test:base -- --reporter nyan",
     "test": "nyc npm run test:base",
     "lint": "eslint .",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "requireindex": "^1.1.0",
-    "vue-eslint-parser": "mysticatea/vue-eslint-parser#v1.1.0-4"
+    "vue-eslint-parser": "^1.1.0-6"
   },
   "devDependencies": {
     "@types/node": "^4.2.6",
