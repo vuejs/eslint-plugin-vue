@@ -16,6 +16,8 @@ const path = require('path')
 // Tests
 // -----------------------------------------------------------------------------
 
+const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`
+
 describe('Integration with eslint-plugin-import', () => {
   let originalCwd
 
@@ -28,7 +30,10 @@ describe('Integration with eslint-plugin-import', () => {
     process.chdir(originalCwd)
   })
 
+  // https://github.com/vuejs/eslint-plugin-vue/issues/21#issuecomment-308957697
+  // eslint-plugin-vue had been breaking eslint-plugin-import if people use both at the same time.
+  // This test is in order to prevent the regression.
   it('should lint without errors', () => {
-    cp.execSync(`.${path.sep}node_modules${path.sep}.bin${path.sep}eslint a.vue`, { stdio: 'inherit' })
+    cp.execSync(`${ESLINT} a.vue`, { stdio: 'inherit' })
   })
 })

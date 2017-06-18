@@ -10,6 +10,6 @@
   "dependencies": {
     "eslint": "~3.19.0",
     "eslint-plugin-import": "~2.3.0",
-    "eslint-plugin-vue": "file:..\\..\\.."
+    "eslint-plugin-vue": "file:../../.."
   }
 }
