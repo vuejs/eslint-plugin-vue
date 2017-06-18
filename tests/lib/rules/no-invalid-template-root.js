@@ -46,6 +46,10 @@ tester.run('no-invalid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else-if="bar">abc</div>\n    <div v-else>abc</div>\n</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>\n    <c1 v-if="1" />\n    <c2 v-else-if="1" />\n    <c3 v-else />\n</template>`
     }
   ],
   invalid: [
