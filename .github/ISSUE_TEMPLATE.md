@@ -26,7 +26,7 @@
 **What did you do? Please include the actual source code causing the issue.**
 
 <!-- Paste the source code below: -->
-```js
+```vue
 
 
 
