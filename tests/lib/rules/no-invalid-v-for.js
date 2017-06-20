@@ -144,6 +144,11 @@ tester.run('no-invalid-v-for', rule, {
       filename: 'test.vue',
       code: '<template><div><custom-component v-for="x in list" :key="foo"></custom-component></div></template>',
       errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="(item, index) in suggestions" :key></div></div></template>',
+      errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."]
     }
   ]
 })
