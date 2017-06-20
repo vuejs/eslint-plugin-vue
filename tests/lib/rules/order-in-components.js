@@ -13,16 +13,44 @@ ruleTester.run('order-in-components', rule, {
 
   valid: [
     {
+      filename: 'test.vue',
       code: `
-      `
+        export default {
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     }
   ],
 
   invalid: [
     {
-      code: ``,
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Fill me in.'
+        message: 'The "props" property should be above the "data" property on line 4.',
+        line: 9
       }]
     }
   ]

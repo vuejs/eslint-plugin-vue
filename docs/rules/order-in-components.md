@@ -7,20 +7,19 @@ This rule makes sure you keep declared order of properties in components.
 Recommended order of properties is as follows:
 
 1. Options / Misc (`name`, `delimiters`, `functional`, `model`)
-2. `el`
-3. Options / Assets (`components`, `directives`, `filters`)
-4. Options / Composition (`parent`, `mixins`, `extends`, `provide`, `inject`)
-5. Options / Data
-  1. `props`
-  2. `propsData`
-  3. `data`
-  4. `computed`
-  5. `methods`
-  6. `watch`
-6. lifecycle hooks
-7. `template`
-8. `render`
-9. `renderError`
+2. Options / Assets (`components`, `directives`, `filters`)
+3. Options / Composition (`parent`, `mixins`, `extends`, `provide`, `inject`)
+4. `el`
+5. `template`
+6. `props`
+7. `propsData`
+8. `data`
+9. `computed`
+10. `watch`
+11. lifecycle hooks
+12. `methods`
+13. `render`
+14. `renderError`
 
 Examples of **incorrect** code for this rule:
 
@@ -65,17 +64,22 @@ If you want you can change the order providing the optional configuration in you
 ```
 vue/order-in-components: [2, {
   order: [
-    'name',
-    ['mixins', 'components', 'directives', 'filters'],
-    'props',
+    ['name', 'delimiters', 'functional', 'model'],
+    ['components', 'directives', 'filters'],
+    ['parent', 'mixins', 'extends', 'provide', 'inject'],
+    'el',
     'template',
+    'props',
+    'propsData',
     'data',
     'computed',
-    'methods',
+    'watch',
     'lifecycle_hooks',
+    'methods',
     'render',
+    'renderError'
   ]
 }]
 ```
 
-If you want some of properties to be treated equally in order you can group them into arrays, like we did with `mixins`, `components`, `directives` and `filters`.
+If you want some of properties to be treated equally in order you can group them into arrays, like we did with `name`, `delimiters`, `funcitonal` and `model`.
