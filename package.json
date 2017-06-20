@@ -5,9 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "npm run test:simple -- --watch --growl",
-    "test:base": "mocha \"tests/lib/**/*.js\" \"tests/integrations/*.js\" --timeout 60000",
+    "test:base": "mocha \"tests/lib/**/*.js\"",
     "test:simple": "npm run test:base -- --reporter nyan",
-    "test": "nyc npm run test:base",
+    "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "preversion": "npm run update && npm test",
