@@ -61,6 +61,22 @@ ruleTester.run('order-in-components', rule, {
     {
       filename: 'test.js',
       code: `
+        const { component } = Vue;
+        component('smart-list', {
+          name: 'app',
+          components: {},
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      filename: 'test.js',
+      code: `
         new Vue({
           name: 'app',
           components: {},
@@ -123,7 +139,10 @@ ruleTester.run('order-in-components', rule, {
         message: 'The "name" property should be above the "render" property on line 3.',
         line: 8
       }, {
-        message: 'The "props" property should be above the "data" property on line 9.',
+        message: 'The "data" property should be above the "render" property on line 3.',
+        line: 9
+      }, {
+        message: 'The "props" property should be above the "render" property on line 3.',
         line: 14
       }]
     },
@@ -148,6 +167,30 @@ ruleTester.run('order-in-components', rule, {
       }, {
         message: 'The "template" property should be above the "data" property on line 4.',
         line: 10
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('smart-list', {
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          components: {},
+          template: '<div></div>'
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [{
+        message: 'The "components" property should be above the "data" property on line 5.',
+        line: 10
+      }, {
+        message: 'The "template" property should be above the "data" property on line 5.',
+        line: 11
       }]
     },
     {
