@@ -16,10 +16,12 @@ Recommended order of properties is as follows:
 8. `data`
 9. `computed`
 10. `watch`
-11. lifecycle hooks
+11. `lifecycleHooks`
 12. `methods`
 13. `render`
 14. `renderError`
+
+Note that `lifecycleHooks` is not a regular property - it indicates the group of all lifecycle hooks just to simplify the configuration.
 
 Examples of **incorrect** code for this rule:
 
