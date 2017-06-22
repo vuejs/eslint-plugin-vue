@@ -37,6 +37,13 @@ ruleTester.run('order-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
+      filename: 'test.vue',
+      code: `
+        export default 'example-text'
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
       filename: 'test.jsx',
       code: `
         export default {
