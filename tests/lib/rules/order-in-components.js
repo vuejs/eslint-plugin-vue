@@ -30,6 +30,13 @@ ruleTester.run('order-in-components', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
+      filename: 'test.vue',
+      code: `
+        export default {}
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
       filename: 'test.jsx',
       code: `
         export default {
@@ -55,6 +62,13 @@ ruleTester.run('order-in-components', rule, {
             }
           }
         })
+      `,
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      filename: 'test.js',
+      code: `
+        Vue.component('example')
       `,
       parserOptions: { ecmaVersion: 6 }
     },
@@ -87,6 +101,13 @@ ruleTester.run('order-in-components', rule, {
             }
           }
         })
+      `,
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue()
       `,
       parserOptions: { ecmaVersion: 6 }
     }
