@@ -142,7 +142,7 @@ ruleTester.run('order-in-components', rule, {
         message: 'The "data" property should be above the "render" property on line 3.',
         line: 9
       }, {
-        message: 'The "props" property should be above the "render" property on line 3.',
+        message: 'The "props" property should be above the "data" property on line 9.',
         line: 14
       }]
     },
@@ -213,11 +213,37 @@ ruleTester.run('order-in-components', rule, {
         message: 'The "name" property should be above the "el" property on line 3.',
         line: 4
       }, {
-        message: 'The "components" property should be above the "data" property on line 5.',
+        message: 'The "components" property should be above the "el" property on line 3.',
         line: 10
       }, {
         message: 'The "template" property should be above the "data" property on line 5.',
         line: 11
+      }]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+            return {
+              isActive: false,
+            };
+          },
+          methods: {
+            toggleMenu() {
+              this.isActive = !this.isActive;
+            },
+            closeMenu() {
+              this.isActive = false;
+            }
+          },
+          name: 'burger',
+        };
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 16
       }]
     }
   ]
