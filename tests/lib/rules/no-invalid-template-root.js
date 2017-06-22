@@ -50,14 +50,21 @@ tester.run('no-invalid-template-root', rule, {
     {
       filename: 'test.vue',
       code: `<template>\n    <c1 v-if="1" />\n    <c2 v-else-if="1" />\n    <c3 v-else />\n</template>`
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>\n</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-if="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
     }
   ],
   invalid: [
-    {
-      filename: 'test.vue',
-      code: '<template>\n</template>',
-      errors: ['The template root requires exactly one element.']
-    },
     {
       filename: 'test.vue',
       code: '<template><div></div><div></div></template>',
@@ -87,16 +94,6 @@ tester.run('no-invalid-template-root', rule, {
       filename: 'test.vue',
       code: '<template><div v-for="x in list"></div></template>',
       errors: ["The template root disallows 'v-for' directives."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-if="foo"></div></template>',
-      errors: ["The template root requires the next element which has 'v-else' directives if it has 'v-if' directives."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>',
-      errors: ["The template root requires the next element which has 'v-else' directives if it has 'v-if' directives."]
     },
     {
       filename: 'test.vue',
