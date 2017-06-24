@@ -2,7 +2,7 @@
 
 This rule checks whether every `v-for` directive is valid.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports `v-for` directives in the following cases:
 
@@ -20,7 +20,7 @@ The following cases are syntax errors:
 - The directive's value is not the form `alias in expr`. E.g. `<div v-for="foo"></div>`
 - The alias is not LHS. E.g. `<div v-for="foo() in list"></div>`
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -35,7 +35,7 @@ The following cases are syntax errors:
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -47,11 +47,11 @@ The following cases are syntax errors:
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 
-## 👫 Related rules
+## :couple: Related rules
 
 - [require-v-for-key]
 - [no-parsing-error]

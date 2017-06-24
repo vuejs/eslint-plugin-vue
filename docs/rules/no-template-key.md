@@ -2,11 +2,11 @@
 
 Vue.js disallows `key` attribute on `<template>` elements.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the `<template>` elements which have `key` attribute.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -18,7 +18,7 @@ This rule reports the `<template>` elements which have `key` attribute.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -29,6 +29,6 @@ This rule reports the `<template>` elements which have `key` attribute.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

@@ -2,7 +2,7 @@
 
 This rule checks whether every `v-model` directive is valid.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports `v-model` directives in the following cases:
 
@@ -17,7 +17,7 @@ This rule reports `v-model` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -34,7 +34,7 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -50,11 +50,11 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 
-## 👫 Related rules
+## :couple: Related rules
 
 - [no-parsing-error]
 
