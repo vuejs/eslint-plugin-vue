@@ -58,6 +58,10 @@ tester.run('no-invalid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template src="foo.html"></template>'
     }
   ],
   invalid: [
@@ -105,6 +109,16 @@ tester.run('no-invalid-template-root', rule, {
       filename: 'test.vue',
       code: '<template><template></template></template>',
       errors: ["The template root disallows '<template>' elements."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template src="foo.html">abc</template>',
+      errors: ["The template root which has 'src' attribute requires empty."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template src="foo.html"><div></div></template>',
+      errors: ["The template root which has 'src' attribute requires empty."]
     }
   ]
 })
