@@ -53,10 +53,6 @@ tester.run('no-invalid-template-root', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template>\n</template>'
-    },
-    {
-      filename: 'test.vue',
       code: '<template><div v-if="foo"></div></template>'
     },
     {
@@ -65,6 +61,11 @@ tester.run('no-invalid-template-root', rule, {
     }
   ],
   invalid: [
+    {
+      filename: 'test.vue',
+      code: '<template>\n</template>',
+      errors: ['The template root requires exactly one element.']
+    },
     {
       filename: 'test.vue',
       code: '<template><div></div><div></div></template>',
