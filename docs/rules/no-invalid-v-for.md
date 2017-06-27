@@ -4,7 +4,7 @@ This rule checks whether every `v-for` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-for` directives if the following cases:
+This rule reports `v-for` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-for:aaa></div>`
 - The directive has that modifier. E.g. `<div v-for.bbb></div>`

@@ -4,7 +4,7 @@ This rule checks whether every `v-if` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-if` directives if the following cases:
+This rule reports `v-if` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-if:aaa="foo"></div>`
 - The directive has that modifier. E.g. `<div v-if.bbb="foo"></div>`

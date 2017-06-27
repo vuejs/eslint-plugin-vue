@@ -4,7 +4,7 @@ This rule checks whether every `v-on` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-on` directives if the following cases:
+This rule reports `v-on` directives in the following cases:
 
 - The directive does not have that event name. E.g. `<div v-on="foo"></div>`
 - The directive has invalid modifiers. E.g. `<div v-on:click.bbb="foo"></div>`

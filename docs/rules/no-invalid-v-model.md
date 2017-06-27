@@ -4,7 +4,7 @@ This rule checks whether every `v-model` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-model` directives if the following cases:
+This rule reports `v-model` directives in the following cases:
 
 - The directive has that argument. E.g. `<input v-model:aaa="foo">`
 - The directive has the modifiers which are not supported. E.g. `<input v-model.bbb="foo">`

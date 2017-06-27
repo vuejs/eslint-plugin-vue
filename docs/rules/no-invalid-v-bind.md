@@ -4,7 +4,7 @@ This rule checks whether every `v-bind` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-bind` directives if the following cases:
+This rule reports `v-bind` directives in the following cases:
 
 - The directive does not have that attribute value. E.g. `<div v-bind:aaa></div>`
 - The directive has invalid modifiers. E.g. `<div v-bind:aaa.bbb="ccc"></div>`
