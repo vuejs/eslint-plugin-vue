@@ -42,6 +42,18 @@ tester.run('no-invalid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @keydown.27="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><el-from @submit.native.prevent></el-form></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on:click.prevent></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on:click.native.stop></div></template>'
     }
   ],
   invalid: [
@@ -58,7 +70,12 @@ tester.run('no-invalid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on:click></div></template>',
-      errors: ["'v-on' directives require that attribute value."]
+      errors: ["'v-on' directives require that attribute value or verb modifiers."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @click></div></template>',
+      errors: ["'v-on' directives require that attribute value or verb modifiers."]
     }
   ]
 })

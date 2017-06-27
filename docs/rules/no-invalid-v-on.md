@@ -8,7 +8,7 @@ This rule reports `v-on` directives in the following cases:
 
 - The directive does not have that event name. E.g. `<div v-on="foo"></div>`
 - The directive has invalid modifiers. E.g. `<div v-on:click.bbb="foo"></div>`
-- The directive does not have that attribute value. E.g. `<div v-on:click></div>`
+- The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
@@ -31,7 +31,9 @@ This rule does not check syntax errors in directives because it's checked by [no
     <div>
         <div v-on:click="foo"></div>
         <div @click="foo"></div>
-        <div @click.left.prevent="foo"></div>
+        <div @click.left="foo"></div>
+        <div @click.prevent></div>
+        <div @click.stop></div>
     </div>
 </template>
 ```
