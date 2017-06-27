@@ -113,12 +113,12 @@ tester.run('no-invalid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template src="foo.html">abc</template>',
-      errors: ["The template root which has 'src' attribute requires empty."]
+      errors: ["The template root with 'src' attribute is required to be empty."]
     },
     {
       filename: 'test.vue',
       code: '<template src="foo.html"><div></div></template>',
-      errors: ["The template root which has 'src' attribute requires empty."]
+      errors: ["The template root with 'src' attribute is required to be empty."]
     }
   ]
 })
