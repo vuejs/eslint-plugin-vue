@@ -4,7 +4,7 @@ This rule checks whether every template root is valid.
 
 ## 📖 Rule Details
 
-This rule reports the template root if the following cases:
+This rule reports the template root in the following cases:
 
 - The root is nothing. E.g. `<template></template>`.
 - The root is text. E.g. `<template>hello</template>`.

@@ -4,7 +4,7 @@ This rule checks whether every `v-cloak` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-cloak` directives if the following cases:
+This rule reports `v-cloak` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-cloak:aaa></div>`
 - The directive has that modifier. E.g. `<div v-cloak.bbb></div>`

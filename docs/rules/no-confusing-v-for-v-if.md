@@ -8,7 +8,7 @@ So when they exist on the same node, `v-if` directive should use the reference w
 
 ## 📖 Rule Details
 
-This rule reports the elements which have both `v-for` and `v-if` directives if the following cases:
+This rule reports the elements which have both `v-for` and `v-if` directives in the following cases:
 
 - The `v-if` directive does not use the reference which is to the variables which are defined by the `v-for` directives.
 

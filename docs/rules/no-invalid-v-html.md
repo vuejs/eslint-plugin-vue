@@ -4,7 +4,7 @@ This rule checks whether every `v-html` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-html` directives if the following cases:
+This rule reports `v-html` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-html:aaa></div>`
 - The directive has that modifier. E.g. `<div v-html.bbb></div>`

@@ -4,7 +4,7 @@ This rule checks whether every `v-show` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-show` directives if the following cases:
+This rule reports `v-show` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-show:aaa></div>`
 - The directive has that modifier. E.g. `<div v-show.bbb></div>`

@@ -4,7 +4,7 @@ This rule checks whether every `v-else` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-else` directives if the following cases:
+This rule reports `v-else` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-if="foo"></div><div v-else:aaa></div>`
 - The directive has that modifier. E.g. `<div v-if="foo"></div><div v-else.bbb></div>`

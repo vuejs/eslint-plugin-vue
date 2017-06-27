@@ -4,7 +4,7 @@ This rule checks whether every `v-once` directive is valid.
 
 ## 📖 Rule Details
 
-This rule reports `v-once` directives if the following cases:
+This rule reports `v-once` directives in the following cases:
 
 - The directive has that argument. E.g. `<div v-once:aaa></div>`
 - The directive has that modifier. E.g. `<div v-once.bbb></div>`
