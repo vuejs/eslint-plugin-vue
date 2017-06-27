@@ -34,6 +34,18 @@ tester.run('no-parsing-error', rule, {
     {
       filename: 'test.vue',
       code: '<template>{{a + b + c}}</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg class="icon"><use xlink:href="#chevron"></use></svg></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg viewBox="0 0 40 40"></svg></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<table><tr><td></td></tr></table>'
     }
   ],
   invalid: [
