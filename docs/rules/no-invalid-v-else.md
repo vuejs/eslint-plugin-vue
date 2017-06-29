@@ -42,8 +42,10 @@ Nothing.
 ## 👫 Related rules
 
 - [no-invalid-v-if]
-- [no-invalid-v-else]
+- [no-invalid-v-else-if]
+- [no-parsing-error]
 
 
-[no-invalid-v-if]:   no-invalid-v-if.md
-[no-invalid-v-else]: no-invalid-v-else.md
+[no-invalid-v-if]:       no-invalid-v-if.md
+[no-invalid-v-else-if]:  no-invalid-v-else-if.md
+[no-parsing-error]:      no-parsing-error.md

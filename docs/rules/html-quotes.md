@@ -1,6 +1,6 @@
 # Enforce quotes style of HTML attributes (html-quotes)
 
-You can shoose quotes of HTML attributes from:
+You can choose quotes of HTML attributes from:
 
 - Double quotes: `<div class="foo">`
 - Single quotes: `<div class='foo'>`
