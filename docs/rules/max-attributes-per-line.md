@@ -5,12 +5,11 @@ Limits the maximum number of attributes/properties per line to improve readabili
 
 ## Rule Details
 
-This rule aims to enforce a number of attributes per line in templates. It checks all the elements in a template and verifies that the number of attributes per line does not exceed the defined maximum.
+This rule aims to enforce a number of attributes per line in templates.
+It checks all the elements in a template and verifies that the number of attributes per line does not exceed the defined maximum.
 An attribute is considered to be in a new line when there is a line break between two attributes.
 
-There is predefined number of attributes that are acceptable in one-line case, as well as how many attributes are acceptable per line in multi-line case.
-
-The default is one attribute per line for multiline and three attributes per line in singleline.
+There is a configurable number of attributes that are acceptable in one-line case (default 3), as well as how many attributes are acceptable per line in multi-line case (default 1).
 
 Examples of **incorrect** code for this rule:
 
@@ -55,9 +54,9 @@ Examples of **correct** code for this rule:
 ```
 
 ### `firstline`
-For muliline declarations, defines if it accepts an attribute in the first line.
+For multi-line declarations, defines how many attributes are acceptable to be put in the first line. (Default 0)
 
-The following patterns is considered a warning:
+Example of **incorrect** code for this setting:
 ```js
 // ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
 <component
@@ -66,7 +65,7 @@ The following patterns is considered a warning:
 </component>;
 ```
 
-The following pattern is not considered a warning:
+Example of **correct** code for this setting:
 ```js
 // ["error", { "firstline": 0, "singleline": 3, "multiline": 1}]
 <component
@@ -81,13 +80,13 @@ The following pattern is not considered a warning:
 ### `singleline`
 Number of maximum attributes per line when the opening tag is in a single line.
 
-The following patterns is considered a warning:
+Example of **incorrect** code for this setting:
 ```js
 // ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
 ```
 
-The following pattern is not considered a warning:
+Example of **correct** code for this setting:
 ```js
 // ["error", { "firstline": 1, "singleline": 3, "multiline": 1}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
@@ -97,8 +96,7 @@ The following pattern is not considered a warning:
 ### `multiline`
 Number of maximum attributes per line when a tag is in multiple lines.
 
-
-The following patterns is considered a warning:
+Example of **incorrect** code for this setting:
 ```js
 // ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
 <component foo="John" bar="Smith"
@@ -106,7 +104,7 @@ The following patterns is considered a warning:
 </component>;
 ```
 
-The following pattern is not considered a warning:
+Example of **correct** code for this setting:
 ```js
 // ["error", { "firstline": 0, "singleline": 3, "multiline": 1}]
 <component
