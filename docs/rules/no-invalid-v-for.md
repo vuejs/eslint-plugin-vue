@@ -12,7 +12,7 @@ This rule reports `v-for` directives in the following cases:
 - If the element which has the directive is a custom component, the component does not have `v-bind:key` directive. E.g. `<your-component v-for="item in list"></your-component>`
 - The `v-bind:key` directive does not use the variables which are defined by the `v-for` directive. E.g. `<div v-for="x in list" :key="foo"></div>`
 
-If the element which has the directive is a reserved element, this rule does not report even if the element does not have `v-bind:key` directive because it's not faital error. [require-v-for-key] rule reports it.
+If the element which has the directive is a reserved element, this rule does not report even if the element does not have `v-bind:key` directive because it's not fatal error. [require-v-for-key] rule reports it.
 
 This rule does not check syntax errors in directives. [no-parsing-error] rule reports it.
 The following cases are syntax errors:
@@ -57,4 +57,5 @@ Nothing.
 - [no-parsing-error]
 
 
+[require-v-for-key]: require-v-for-key.md
 [no-parsing-error]: no-parsing-error.md
