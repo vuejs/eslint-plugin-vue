@@ -3,12 +3,12 @@
 When duplicate arguments exist, only the last one is valid.
 It's possibly mistakes.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports duplicate attributes.
 `v-bind:foo` directives are handled as the attributes `foo`.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -16,7 +16,7 @@ This rule reports duplicate attributes.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -25,7 +25,7 @@ This rule reports duplicate attributes.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 

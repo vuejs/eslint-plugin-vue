@@ -4,11 +4,11 @@
 >
 > https://vuejs.org/v2/guide/forms.html#Multiline-text
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports mustaches in `<textarea>`.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -16,7 +16,7 @@ This rule reports mustaches in `<textarea>`.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -24,6 +24,6 @@ This rule reports mustaches in `<textarea>`.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

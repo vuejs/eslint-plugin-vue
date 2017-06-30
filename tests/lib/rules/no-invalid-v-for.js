@@ -62,6 +62,18 @@ tester.run('no-invalid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div :is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list"><custom-component :key="x"></custom-component></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list"><div :key="x"></div></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list"><div></div></template></div></template>'
     }
   ],
   invalid: [
@@ -108,22 +120,22 @@ tester.run('no-invalid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><your-component v-for="x in list"></your-component></div></template>',
-      errors: ["'v-for' directives on custom elements require 'v-bind:key' directives."]
+      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["'v-for' directives on custom elements require 'v-bind:key' directives."]
+      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div :is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["'v-for' directives on custom elements require 'v-bind:key' directives."]
+      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-bind:is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["'v-for' directives on custom elements require 'v-bind:key' directives."]
+      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
@@ -149,6 +161,11 @@ tester.run('no-invalid-v-for', rule, {
       filename: 'test.vue',
       code: '<template><div><div v-for="(item, index) in suggestions" :key></div></div></template>',
       errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>',
+      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     }
   ]
 })

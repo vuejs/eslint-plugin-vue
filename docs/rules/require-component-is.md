@@ -4,11 +4,11 @@
 >
 > https://vuejs.org/v2/guide/components.html#Dynamic-Components
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the `<component>` elements which do not have `v-bind:is` attributes.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -16,7 +16,7 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -24,6 +24,6 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

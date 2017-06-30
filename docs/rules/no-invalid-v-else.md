@@ -2,7 +2,7 @@
 
 This rule checks whether every `v-else` directive is valid.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports `v-else` directives in the following cases:
 
@@ -12,7 +12,7 @@ This rule reports `v-else` directives in the following cases:
 - The directive is on the elements that the previous element don't have `v-if`/`v-if-else` directives. E.g. `<div v-else></div>`
 - The directive is on the elements which have `v-if`/`v-if-else` directives. E.g. `<div v-if="foo" v-else></div>`
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -24,7 +24,7 @@ This rule reports `v-else` directives in the following cases:
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -35,11 +35,11 @@ This rule reports `v-else` directives in the following cases:
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 
-## 👫 Related rules
+## :couple: Related rules
 
 - [no-invalid-v-if]
 - [no-invalid-v-else-if]

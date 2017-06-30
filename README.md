@@ -109,6 +109,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | disallow invalid v-show directives. |
 | :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid v-text directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
+|  | [no-template-key](./docs/rules/no-template-key.md) | disallow 'key' attribute on '<template>'. |
 
 <!--RULES_TABLE_END-->
 
