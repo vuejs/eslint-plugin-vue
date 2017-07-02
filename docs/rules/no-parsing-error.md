@@ -2,12 +2,12 @@
 
 This rule reports syntax errors in directives/mustaches of `<template>`.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule tries to parse directives/mustaches in `<template>` by the parser which parses `<script>`.
 Then reports syntax errors if exist.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -15,7 +15,7 @@ Then reports syntax errors if exist.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -23,6 +23,6 @@ Then reports syntax errors if exist.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

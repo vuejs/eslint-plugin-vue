@@ -8,11 +8,11 @@ You can choose quotes of HTML attributes from:
 
 This rule enforces the quotes style of HTML attributes.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the quotes of attributes if it is different to configured quotes.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -23,7 +23,7 @@ This rule reports the quotes of attributes if it is different to configured quot
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -33,7 +33,7 @@ This rule reports the quotes of attributes if it is different to configured quot
 </template>
 ```
 
-👎 Examples of **incorrect** code for this rule with `"single"` option:
+:-1: Examples of **incorrect** code for this rule with `"single"` option:
 
 ```html
 <template>
@@ -44,7 +44,7 @@ This rule reports the quotes of attributes if it is different to configured quot
 </template>
 ```
 
-👍 Examples of **correct** code for this rule with `"single"` option:
+:+1: Examples of **correct** code for this rule with `"single"` option:
 
 ```html
 <template>
@@ -54,7 +54,7 @@ This rule reports the quotes of attributes if it is different to configured quot
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 - `"double"` (default) ... requires double quotes.
 - `"single"` ... requires single quotes.

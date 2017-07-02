@@ -2,7 +2,7 @@
 
 This rule checks whether every `v-once` directive is valid.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports `v-once` directives in the following cases:
 
@@ -10,7 +10,7 @@ This rule reports `v-once` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-once.bbb></div>`
 - The directive has that attribute value. E.g. `<div v-once="ccc"></div>`
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -22,7 +22,7 @@ This rule reports `v-once` directives in the following cases:
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -32,6 +32,6 @@ This rule reports `v-once` directives in the following cases:
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
