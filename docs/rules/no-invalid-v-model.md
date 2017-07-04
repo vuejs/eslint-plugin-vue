@@ -1,4 +1,4 @@
-# Disallow invalid v-model directives (no-invalid-v-model)
+# Disallow invalid `v-model` directives (no-invalid-v-model)
 
 This rule checks whether every `v-model` directive is valid.
 

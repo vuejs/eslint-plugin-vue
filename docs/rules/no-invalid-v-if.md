@@ -1,4 +1,4 @@
-# Disallow invalid v-if directives (no-invalid-v-if)
+# Disallow invalid `v-if` directives (no-invalid-v-if)
 
 This rule checks whether every `v-if` directive is valid.
 

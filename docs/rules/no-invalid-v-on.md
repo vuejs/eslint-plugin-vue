@@ -1,4 +1,4 @@
-# Disallow invalid v-on directives (no-invalid-v-on)
+# Disallow invalid `v-on` directives (no-invalid-v-on)
 
 This rule checks whether every `v-on` directive is valid.
 
