@@ -1,4 +1,4 @@
-# Disallow invalid v-else-if directives (no-invalid-v-else-if)
+# Disallow invalid `v-else-if` directives (no-invalid-v-else-if)
 
 This rule checks whether every `v-else-if` directive is valid.
 

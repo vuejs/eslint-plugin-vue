@@ -1,4 +1,4 @@
-# Disallow invalid v-html directives (no-invalid-v-html)
+# Disallow invalid `v-html` directives (no-invalid-v-html)
 
 This rule checks whether every `v-html` directive is valid.
 
