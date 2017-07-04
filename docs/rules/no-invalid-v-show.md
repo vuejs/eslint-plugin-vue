@@ -1,4 +1,4 @@
-# Disallow invalid v-show directives (no-invalid-v-show)
+# Disallow invalid `v-show` directives (no-invalid-v-show)
 
 This rule checks whether every `v-show` directive is valid.
 
