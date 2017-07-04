@@ -1,4 +1,4 @@
-# Disallow invalid v-text directives (no-invalid-v-text)
+# Disallow invalid `v-text` directives (no-invalid-v-text)
 
 This rule checks whether every `v-text` directive is valid.
 

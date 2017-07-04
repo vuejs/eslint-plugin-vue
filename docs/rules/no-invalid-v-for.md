@@ -1,4 +1,4 @@
-# Disallow invalid v-for directives (no-invalid-v-for)
+# Disallow invalid `v-for` directives (no-invalid-v-for)
 
 This rule checks whether every `v-for` directive is valid.
 

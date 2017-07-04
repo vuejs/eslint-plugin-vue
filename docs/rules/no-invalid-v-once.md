@@ -1,4 +1,4 @@
-# Disallow invalid v-once directives (no-invalid-v-once)
+# Disallow invalid `v-once` directives (no-invalid-v-once)
 
 This rule checks whether every `v-once` directive is valid.
 

@@ -1,4 +1,4 @@
-# Disallow invalid v-cloak directives (no-invalid-v-cloak)
+# Disallow invalid `v-cloak` directives (no-invalid-v-cloak)
 
 This rule checks whether every `v-cloak` directive is valid.
 

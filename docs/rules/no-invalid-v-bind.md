@@ -1,4 +1,4 @@
-# Disallow invalid v-bind directives (no-invalid-v-bind)
+# Disallow invalid `v-bind` directives (no-invalid-v-bind)
 
 This rule checks whether every `v-bind` directive is valid.
 

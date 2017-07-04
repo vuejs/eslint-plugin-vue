@@ -1,4 +1,4 @@
-# Disallow invalid v-pre directives (no-invalid-v-pre)
+# Disallow invalid `v-pre` directives (no-invalid-v-pre)
 
 This rule checks whether every `v-pre` directive is valid.
 
