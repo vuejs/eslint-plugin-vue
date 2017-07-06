@@ -67,7 +67,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
 | :wrench: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate arguments. |
+|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 |  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
