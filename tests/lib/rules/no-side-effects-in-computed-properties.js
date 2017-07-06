@@ -9,7 +9,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-side-effects-in-computed-properties')
-const { RuleTester } = require('eslint')
+const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
   ecmaVersion: 6,
