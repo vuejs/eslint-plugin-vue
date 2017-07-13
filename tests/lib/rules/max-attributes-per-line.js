@@ -23,19 +23,32 @@ const ruleTester = new RuleTester({
 ruleTester.run('max-attributes-per-line', rule, {
   valid: [
     {
+      code: `<template><component></component></template>`
+    },
+    {
+      code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`
+    },
+    {
+      code: `<template><component
+        name="John Doe"
+        age="30">
+        </component>
+      </template>`
+    },
+    {
       code: `<template><component></component></template>`,
-      options: [{ singleline: 1, multiline: 1, firstline: 0 }]
+      options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}]
     },
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
-      options: [{ singleline: 3, multiline: 1, firstline: 0 }]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}]
     },
     {
       code: `<template><component name="John Doe"
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 1, firstline: 1 }]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: true }}]
     },
     {
       code: `<template><component
@@ -43,7 +56,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 1, firstline: 0 }]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}]
     },
     {
       code: `<template><component
@@ -51,14 +64,26 @@ ruleTester.run('max-attributes-per-line', rule, {
         job="Vet">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 2, firstline: 0 }]
+      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}]
     }
   ],
 
   invalid: [
     {
+      code: `<template><component name="John Doe" age="30" job="Vet" petname="Snoopy"></component></template>`,
+      errors: ['It has more than 3 attributes per line.']
+    },
+    {
+      code: `<template><component job="Vet"
+        name="John Doe"
+        age="30">
+        </component>
+      </template>`,
+      errors: ['Attribute job should be on a new line.']
+    },
+    {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
-      options: [{ singleline: 1, multiline: 1, firstline: 0 }],
+      options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
       errors: ['It has more than 1 attributes per line.']
     },
     {
@@ -66,7 +91,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 1, firstline: 0 }],
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
       errors: ['Attribute name should be on a new line.']
     },
     {
@@ -75,7 +100,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         job="Vet">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 1, firstline: 0 }],
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
       errors: ['Attribute age should be on a new line.']
     },
     {
@@ -84,7 +109,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         job="Vet" pet="dog" petname="Snoopy">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: 2, firstline: 0 }],
+      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
       errors: ['Attribute petname should be on a new line.']
     }
   ]
