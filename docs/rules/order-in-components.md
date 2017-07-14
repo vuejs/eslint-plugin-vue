@@ -76,7 +76,7 @@ vue/order-in-components: [2, {
     'data',
     'computed',
     'watch',
-    'lifecycle_hooks',
+    'LIFECYCLE_HOOKS',
     'methods',
     'render',
     'renderError'
