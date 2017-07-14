@@ -81,7 +81,7 @@ vue/order-in-components: [2, {
     'render',
     'renderError'
   ]
-}
+}]
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like we did with `name`, `delimiters`, `funcitonal` and `model`.
