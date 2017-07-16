@@ -273,6 +273,23 @@ ruleTester.run('order-in-components', rule, {
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 16
       }]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          name: 'burger',
+          test: 'ok'
+        };
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      options: [{ order: ['data', 'test', 'name'] }],
+      errors: [{
+        message: 'The "test" property should be above the "name" property on line 5.',
+        line: 6
+      }]
     }
   ]
 })
