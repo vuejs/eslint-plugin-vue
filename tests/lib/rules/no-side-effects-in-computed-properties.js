@@ -9,7 +9,7 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-side-effects-in-computed-properties')
-const { RuleTester } = require('eslint')
+const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
   ecmaVersion: 6,
@@ -83,27 +83,63 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         computed: {
           test1() {
             this.firstName = 'lorem'
+            asd.qwe.zxc = 'lorem'
             return this.firstName + ' ' + this.lastName
           },
           test2() {
-            return this.something.reverse()
+            this.count += 2;
+            this.count++;
+            return this.count;
           },
           test3() {
+            return this.something.reverse()
+          },
+          test4() {
             const test = this.another.something.push('example')
             return 'something'
           },
-          test4: {
+        }
+      })`,
+      parserOptions,
+      errors: [{
+        line: 4,
+        message: 'Unexpected side effect in "test1" computed property.'
+      }, {
+        line: 9,
+        message: 'Unexpected side effect in "test2" computed property.'
+      }, {
+        line: 10,
+        message: 'Unexpected side effect in "test2" computed property.'
+      }, {
+        line: 14,
+        message: 'Unexpected side effect in "test3" computed property.'
+      }, {
+        line: 17,
+        message: 'Unexpected side effect in "test4" computed property.'
+      }]
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test1: {
             get() {
               this.firstName = 'lorem'
               return this.firstName + ' ' + this.lastName
             }
           },
-          test5: {
+          test2: {
+            get() {
+              this.count += 2;
+              this.count++;
+              return this.count;
+            }
+          },
+          test3: {
             get() {
               return this.something.reverse()
             }
           },
-          test6: {
+          test4: {
             get() {
               const test = this.another.something.push('example')
               return 'something'
@@ -116,26 +152,20 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       })`,
       parserOptions,
       errors: [{
-        line: 4,
-        message: 'Unexpected side effect in "test1" computed property'
-      }, {
-        line: 8,
-        message: 'Unexpected side effect in "test2" computed property'
+        line: 5,
+        message: 'Unexpected side effect in "test1" computed property.'
       }, {
         line: 11,
-        message: 'Unexpected side effect in "test3" computed property'
+        message: 'Unexpected side effect in "test2" computed property.'
       }, {
-        line: 15,
-        message: 'Unexpected side effect in "test4" computed property'
+        line: 12,
+        message: 'Unexpected side effect in "test2" computed property.'
       }, {
-        line: 21,
-        message: 'Unexpected side effect in "test5" computed property'
+        line: 18,
+        message: 'Unexpected side effect in "test3" computed property.'
       }, {
-        line: 26,
-        message: 'Unexpected side effect in "test6" computed property'
-      }, {
-        line: 31,
-        message: 'Unexpected side effect in "test7" computed property'
+        line: 23,
+        message: 'Unexpected side effect in "test4" computed property.'
       }]
     }
   ]
