@@ -113,6 +113,30 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 <!--RULES_TABLE_END-->
 
+## :couple: FAQ
+
+### What is the "Use the latest vue-eslint-parser" error?
+
+The most rules of `eslint-plugin-vue` require `vue-eslint-parser` to check `<template>` ASTs.
+
+Make sure you have one of the following settings in your **.eslintrc**:
+
+- `"extends": ["plugin:vue/recommended"]`
+- `"extends": ["plugin:vue/base"]`
+
+If you already use other parser (e.g. `"parser": "babel-eslint"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:
+
+```diff
+- "parser": "babel-eslint",
+  "parserOptions": {
++     "parser": "babel-eslint",
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+  }
+```
+
+The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` to parse scripts.
+
 ## :anchor: Semantic Versioning Policy
 
 This plugin follows [semantic versioning](http://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
