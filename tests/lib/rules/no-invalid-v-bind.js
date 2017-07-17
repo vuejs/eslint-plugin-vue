@@ -70,6 +70,10 @@ tester.run('no-invalid-v-bind', rule, {
     {
       filename: 'test.vue',
       code: "<template><div :aaa.camel='bbb'></div></template>"
+    },
+    {
+      filename: 'test.vue',
+      code: "<template><input v-bind='$attrs' /></template>"
     }
   ],
   invalid: [
