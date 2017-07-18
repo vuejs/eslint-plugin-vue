@@ -63,11 +63,6 @@ tester.run('no-invalid-v-on', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template><div v-on="foo"></div></template>',
-      errors: ["'v-on' directives require event names."]
-    },
-    {
-      filename: 'test.vue',
       code: '<template><div v-on:click.aaa="foo"></div></template>',
       errors: ["'v-on' directives don't support the modifier 'aaa'."]
     },
