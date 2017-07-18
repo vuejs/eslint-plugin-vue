@@ -71,7 +71,7 @@ ruleTester.run('max-attributes-per-line', rule, {
   invalid: [
     {
       code: `<template><component name="John Doe" age="30" job="Vet" petname="Snoopy"></component></template>`,
-      errors: ['It has more than 3 attributes per line.']
+      errors: ['There are 4 in this line, but the maximum is 3.']
     },
     {
       code: `<template><component job="Vet"
@@ -84,7 +84,7 @@ ruleTester.run('max-attributes-per-line', rule, {
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
-      errors: ['It has more than 1 attributes per line.']
+      errors: ['There are 3 in this line, but the maximum is 1.']
     },
     {
       code: `<template><component name="John Doe"
