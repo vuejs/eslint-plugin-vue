@@ -133,6 +133,26 @@ ruleTester.run('return-in-computed-property', rule, {
         message: 'Expected to return a value in "foo" computed property.',
         line: 7
       }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              function bar () {
+                return this.baz * 2
+              }
+              bar()
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      errors: [{
+        message: 'Expected to return a value in "foo" computed property.',
+        line: 4
+      }]
     }
   ]
 })
