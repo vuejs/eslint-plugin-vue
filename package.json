@@ -49,6 +49,8 @@
   },
   "devDependencies": {
     "@types/node": "^4.2.6",
+    "babel-eslint": "^7.2.3",
+    "chai": "^4.1.0",
     "eslint": "^3.18.0",
     "eslint-plugin-eslint-plugin": "^0.7.1",
     "eslint-plugin-vue-libs": "^1.2.0",
