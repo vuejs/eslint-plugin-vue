@@ -3,14 +3,14 @@
 When `v-for` is written on custom components, it requires `v-bind:key` at the same time.
 On other elements, it's better that `v-bind:key` is written as well.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the elements which have `v-for` and do not have `v-bind:key`.
 
 This rule does not report custom components.
 It will be reported by [no-invalid-v-for] rule.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -20,7 +20,7 @@ It will be reported by [no-invalid-v-for] rule.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -30,11 +30,11 @@ It will be reported by [no-invalid-v-for] rule.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 
-## 👫 Related rules
+## :couple: Related rules
 
 - [no-invalid-v-for]
 

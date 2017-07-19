@@ -1,20 +1,20 @@
 # Enforce end tag style (html-end-tags)
 
-- 🔧 This rule is fixable with `eslint --fix` command.
+- :wrench: This rule is fixable with `eslint --fix` command.
 
 This rule enforce the way of end tags.
 
 - [Void elements] disallow end tags.
 - Other elements require end tags.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the following elements:
 
 - [Void elements] which have end tags.
 - Other elements which do not have end tags and are not self-closing.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -28,7 +28,7 @@ This rule reports the following elements:
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -42,7 +42,7 @@ This rule reports the following elements:
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
 

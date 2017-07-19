@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/require-v-for-key')
+const rule = require('../../../lib/rules/no-template-key')
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -21,7 +21,7 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-tester.run('require-v-for-key', rule, {
+tester.run('no-template-key', rule, {
   valid: [
     {
       filename: 'test.vue',
@@ -29,36 +29,36 @@ tester.run('require-v-for-key', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list" v-bind:key="x"></div></div></template>'
+      code: '<template><template></template></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list" :key="x.foo"></div></div></template>'
+      code: '<template><div key="foo"></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><custom-component v-for="x in list"></custom-component></div></template>'
+      code: '<template><div v-bind:key="foo"></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><template v-for="x in list"><div :key="x"></div></template></div></template>'
+      code: '<template><div :key="foo"></div></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"></div></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      code: '<template><div><template key="foo"></template></div></template>',
+      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list" key="100"></div></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      code: '<template><div><template v-bind:key="foo"></template></div></template>',
+      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><template v-for="x in list"><div></div></template></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      code: '<template><div><template :key="foo"></template></div></template>',
+      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
     }
   ]
 })

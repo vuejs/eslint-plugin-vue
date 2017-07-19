@@ -1,15 +1,15 @@
 # Disallow self-closing elements (html-no-self-closing)
 
-- 🔧 This rule is fixable with `eslint --fix` command.
+- :wrench: This rule is fixable with `eslint --fix` command.
 
 Self-closing (e.g. `<br/>`) is syntax of XML/XHTML.
 HTML ignores it.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports every self-closing element except XML context.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -19,7 +19,7 @@ This rule reports every self-closing element except XML context.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -33,6 +33,6 @@ This rule reports every self-closing element except XML context.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.
