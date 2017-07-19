@@ -153,6 +153,44 @@ ruleTester.run('return-in-computed-property', rule, {
         message: 'Expected to return a value in "foo" computed property.',
         line: 4
       }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo () {
+            },
+            bar () {
+              return
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      options: [{ treatUndefinedAsUnspecified: false }],
+      errors: [{
+        message: 'Expected to return a value in "foo" computed property.',
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo () {
+              return
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      options: [{ treatUndefinedAsUnspecified: true }],
+      errors: [{
+        message: 'Expected to return a value in "foo" computed property.',
+        line: 4
+      }]
     }
   ]
 })
