@@ -4,7 +4,7 @@ const babelEslint = require('babel-eslint')
 const utils = require('../../../lib/utils/index')
 const chai = require('chai')
 
-const { assert } = chai
+const assert = chai.assert
 
 describe('parseMemberExpression', () => {
   let node
