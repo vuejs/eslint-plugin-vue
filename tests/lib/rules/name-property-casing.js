@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/name-casing')
+const rule = require('../../../lib/rules/name-property-casing')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
-ruleTester.run('name-casing', rule, {
+ruleTester.run('name-property-casing', rule, {
 
   valid: [
     {

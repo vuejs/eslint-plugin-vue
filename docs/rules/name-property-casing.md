@@ -1,4 +1,4 @@
-# Name property casing for consistency purposes (name-casing)
+# Name property casing for consistency purposes (name-property-casing)
 
 Define a style for the `name` property casing for consistency purposes
 
@@ -33,5 +33,5 @@ export default {
 Default casing is set to `PascalCase`
 
 ```
-'vue/name-casing': [2, 'camelCase'|'kebab-case'|'PascalCase']
+'vue/name-property-casing': [2, 'camelCase'|'kebab-case'|'PascalCase']
 ```
