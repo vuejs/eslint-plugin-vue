@@ -1,6 +1,6 @@
-# Name property casing for consistency purposes (name-property-casing)
+# Requires specific casing for the name property in Vue components (name-property-casing)
 
-Define a style for the `name` property casing for consistency purposes
+Define a style for the `name` property casing for consistency purposes.
 
 ## :book: Rule Details
 
@@ -33,5 +33,5 @@ export default {
 Default casing is set to `PascalCase`
 
 ```
-'vue/name-property-casing': [2, 'camelCase'|'kebab-case'|'PascalCase']
+'vue/name-property-casing': [2, 'camelCase|kebab-case|PascalCase']
 ```

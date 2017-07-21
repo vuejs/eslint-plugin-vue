@@ -120,6 +120,51 @@ ruleTester.run('name-property-casing', rule, {
         type: 'Literal',
         line: 3
       }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'foo_bar'
+        }
+      `,
+      options: ['camelCase'],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Property name "foo_bar" is not camelCase.',
+        type: 'Literal',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'foo_bar'
+        }
+      `,
+      options: ['PascalCase'],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Property name "foo_bar" is not PascalCase.',
+        type: 'Literal',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'foo_bar'
+        }
+      `,
+      options: ['kebab-case'],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Property name "foo_bar" is not kebab-case.',
+        type: 'Literal',
+        line: 3
+      }]
     }
   ]
 })
