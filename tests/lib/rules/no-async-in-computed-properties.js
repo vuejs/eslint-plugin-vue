@@ -301,30 +301,6 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       code: `
       export default {
         computed: {
-          foo: function* () {
-            yield 1
-            yield* g1()
-          }
-        }
-      }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Unexpected generator function expression in "foo" computed property.',
-        line: 4
-      }, {
-        message: 'Unexpected yield keyword in "foo" computed property.',
-        line: 5
-      }, {
-        message: 'Unexpected yield keyword in "foo" computed property.',
-        line: 6
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      export default {
-        computed: {
           foo: function () {
             setTimeout(() => { }, 0)
             window.setTimeout(() => { }, 0)
