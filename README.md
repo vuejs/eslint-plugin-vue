@@ -68,6 +68,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
 |  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
+|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | Don't introduce side effects in computed properties |
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 |  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
@@ -110,6 +111,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid `v-text` directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
+|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
 
 <!--RULES_TABLE_END-->
 
