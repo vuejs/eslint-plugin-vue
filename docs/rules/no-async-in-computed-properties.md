@@ -21,10 +21,6 @@ export default {
     bar () {
       return fetch(url).then(response => {})
     },
-    yiel: function* () {
-      yield 1
-      yield* g1()
-    },
     tim () {
       setTimeout(() => { }, 0)
     },
