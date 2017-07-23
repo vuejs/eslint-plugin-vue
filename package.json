@@ -44,7 +44,10 @@
     "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
+    "html-tag-names": "^1.1.2",
+    "mathml-tag-names": "^2.0.1",
     "requireindex": "^1.1.0",
+    "svg-tag-names": "^1.1.1",
     "vue-eslint-parser": "^1.1.0-7"
   },
   "devDependencies": {
