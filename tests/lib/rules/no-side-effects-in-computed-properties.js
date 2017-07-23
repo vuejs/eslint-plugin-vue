@@ -27,6 +27,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
     {
       code: `Vue.component('test', {
         computed: {
+          ...test0({}),
           test1() {
             return this.firstName + ' ' + this.lastName
           },
