@@ -66,6 +66,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 | :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
 | :wrench: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
+|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | Check if there are no asynchronous actions inside computed properties. |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
 |  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
 |  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | Don't introduce side effects in computed properties |
@@ -80,6 +81,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
+| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
 
@@ -110,6 +112,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | disallow invalid `v-show` directives. |
 | :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid `v-text` directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
+|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
 |  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
 
