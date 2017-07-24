@@ -29,11 +29,23 @@ ruleTester.run('max-attributes-per-line', rule, {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`
     },
     {
+      code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
+      options: [{ multiline: { allowFirstLine: true }}]
+    },
+    {
       code: `<template><component
         name="John Doe"
         age="30">
         </component>
       </template>`
+    },
+    {
+      code: `<template><component
+        name="John Doe"
+        age="30">
+        </component>
+      </template>`,
+      options: [{ singleline: 1 }]
     },
     {
       code: `<template><component></component></template>`,
@@ -71,7 +83,7 @@ ruleTester.run('max-attributes-per-line', rule, {
   invalid: [
     {
       code: `<template><component name="John Doe" age="30" job="Vet" petname="Snoopy"></component></template>`,
-      errors: ['There are 4 in this line, but the maximum is 3.']
+      errors: ['Attribute petname should be on a new line.']
     },
     {
       code: `<template><component job="Vet"
@@ -84,7 +96,7 @@ ruleTester.run('max-attributes-per-line', rule, {
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
-      errors: ['There are 3 in this line, but the maximum is 1.']
+      errors: ['Attribute age should be on a new line.', 'Attribute job should be on a new line.']
     },
     {
       code: `<template><component name="John Doe"
@@ -111,6 +123,18 @@ ruleTester.run('max-attributes-per-line', rule, {
       </template>`,
       options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
       errors: ['Attribute petname should be on a new line.']
+    },
+    {
+      code: `<template><component
+        name="John Doe" age="30"
+        job="Vet" pet="dog" petname="Snoopy" extra="foo">
+        </component>
+      </template>`,
+      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
+      errors: [
+        'Attribute petname should be on a new line.',
+        'Attribute extra should be on a new line.'
+      ]
     }
   ]
 })

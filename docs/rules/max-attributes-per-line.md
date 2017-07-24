@@ -45,29 +45,30 @@ Examples of **correct** code for this rule:
 
 ```
 {
-  "vue/max-attributes-per-line": ["error", {
-    "firstline": 1,
-    "singleline": 2,
-    "multiline": 1
+  "vue/max-attributes-per-line": [{
+    "singleline": 3,
+    "multiline": {
+      max: 1,
+      allowFirstLine: false
+    }
   }]
 }
 ```
 
-### `firstline`
-For multi-line declarations, defines how many attributes are acceptable to be put in the first line. (Default 0)
+### `allowFirstLine`
+For multi-line declarations, defines if allows attributes to be put in the first line. (Default false)
 
 Example of **incorrect** code for this setting:
 ```js
-// ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
-<component
-  foo="John" bar="Smith"
+// [{ "multiline": { "allowFirstLine": false }}]
+<component foo="John" bar="Smith"
   foobar={5555555}>
 </component>;
 ```
 
 Example of **correct** code for this setting:
 ```js
-// ["error", { "firstline": 0, "singleline": 3, "multiline": 1}]
+// [{ "multiline": { "allowFirstLine": false }}]
 <component
   foo="John"
   bar="Smith"
@@ -78,27 +79,27 @@ Example of **correct** code for this setting:
 
 
 ### `singleline`
-Number of maximum attributes per line when the opening tag is in a single line.
+Number of maximum attributes per line when the opening tag is in a single line. (Default is 3)
 
 Example of **incorrect** code for this setting:
 ```js
-// ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
+// [{"singleline": 2,}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
 ```
 
 Example of **correct** code for this setting:
 ```js
-// ["error", { "firstline": 1, "singleline": 3, "multiline": 1}]
+// [{"singleline": 3,}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
 ```
 
 
 ### `multiline`
-Number of maximum attributes per line when a tag is in multiple lines.
+Number of maximum attributes per line when a tag is in multiple lines. (Default is 1)
 
 Example of **incorrect** code for this setting:
 ```js
-// ["error", { "firstline": 1, "singleline": 2, "multiline": 1}]
+// [{"multiline": 1}]
 <component foo="John" bar="Smith"
   foobar={5555555}>
 </component>;
@@ -106,7 +107,7 @@ Example of **incorrect** code for this setting:
 
 Example of **correct** code for this setting:
 ```js
-// ["error", { "firstline": 0, "singleline": 3, "multiline": 1}]
+// [{"multiline": 1}]
 <component
   foo="John"
   bar="Smith"
