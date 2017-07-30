@@ -2,7 +2,7 @@
 
 This rule checks whether every template root is valid.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the template root in the following cases:
 
@@ -12,7 +12,7 @@ This rule reports the template root in the following cases:
 - The root element has `v-for` directives. E.g. `<template><div v-for="x in list">{{x}}</div></template>`.
 - The root element is `<template>` or `<slot>` elements. E.g. `<template><template>hello</template></template>`.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -38,7 +38,7 @@ This rule reports the template root in the following cases:
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -59,6 +59,6 @@ This rule reports the template root in the following cases:
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

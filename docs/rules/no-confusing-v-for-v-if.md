@@ -6,7 +6,7 @@
 
 So when they exist on the same node, `v-if` directive should use the reference which is to the variables which are defined by the `v-for` directives.
 
-## 📖 Rule Details
+## :book: Rule Details
 
 This rule reports the elements which have both `v-for` and `v-if` directives in the following cases:
 
@@ -14,7 +14,7 @@ This rule reports the elements which have both `v-for` and `v-if` directives in 
 
 In that case, the `v-if` should be written on the wrapper element.
 
-👎 Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
 <template>
@@ -26,7 +26,7 @@ In that case, the `v-if` should be written on the wrapper element.
 </template>
 ```
 
-👍 Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
 ```html
 <template>
@@ -48,6 +48,6 @@ In that case, the `v-if` should be written on the wrapper element.
 </template>
 ```
 
-## 🔧 Options
+## :wrench: Options
 
 Nothing.

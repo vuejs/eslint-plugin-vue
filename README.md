@@ -66,8 +66,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 | :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
 | :wrench: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
+|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | Check if there are no asynchronous actions inside computed properties. |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate arguments. |
+|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
+|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | Don't introduce side effects in computed properties |
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 |  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
@@ -79,8 +81,9 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
-| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce v-bind directive style. |
-| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce v-on directive style. |
+| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
+| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
+| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
 
 
 ### Variables
@@ -95,22 +98,49 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :white_check_mark: | [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | disallow invalid template root. |
-| :white_check_mark: | [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | disallow invalid v-bind directives. |
-| :white_check_mark: | [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | disallow invalid v-cloak directives. |
-| :white_check_mark: | [no-invalid-v-else-if](./docs/rules/no-invalid-v-else-if.md) | disallow invalid v-else-if directives. |
-| :white_check_mark: | [no-invalid-v-else](./docs/rules/no-invalid-v-else.md) | disallow invalid v-else directives. |
-| :white_check_mark: | [no-invalid-v-for](./docs/rules/no-invalid-v-for.md) | disallow invalid v-for directives. |
-| :white_check_mark: | [no-invalid-v-html](./docs/rules/no-invalid-v-html.md) | disallow invalid v-html directives. |
-| :white_check_mark: | [no-invalid-v-if](./docs/rules/no-invalid-v-if.md) | disallow invalid v-if directives. |
-| :white_check_mark: | [no-invalid-v-model](./docs/rules/no-invalid-v-model.md) | disallow invalid v-model directives. |
-| :white_check_mark: | [no-invalid-v-on](./docs/rules/no-invalid-v-on.md) | disallow invalid v-on directives. |
-| :white_check_mark: | [no-invalid-v-once](./docs/rules/no-invalid-v-once.md) | disallow invalid v-once directives. |
-| :white_check_mark: | [no-invalid-v-pre](./docs/rules/no-invalid-v-pre.md) | disallow invalid v-pre directives. |
-| :white_check_mark: | [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | disallow invalid v-show directives. |
-| :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid v-text directives. |
+| :white_check_mark: | [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | disallow invalid `v-bind` directives. |
+| :white_check_mark: | [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | disallow invalid `v-cloak` directives. |
+| :white_check_mark: | [no-invalid-v-else-if](./docs/rules/no-invalid-v-else-if.md) | disallow invalid `v-else-if` directives. |
+| :white_check_mark: | [no-invalid-v-else](./docs/rules/no-invalid-v-else.md) | disallow invalid `v-else` directives. |
+| :white_check_mark: | [no-invalid-v-for](./docs/rules/no-invalid-v-for.md) | disallow invalid `v-for` directives. |
+| :white_check_mark: | [no-invalid-v-html](./docs/rules/no-invalid-v-html.md) | disallow invalid `v-html` directives. |
+| :white_check_mark: | [no-invalid-v-if](./docs/rules/no-invalid-v-if.md) | disallow invalid `v-if` directives. |
+| :white_check_mark: | [no-invalid-v-model](./docs/rules/no-invalid-v-model.md) | disallow invalid `v-model` directives. |
+| :white_check_mark: | [no-invalid-v-on](./docs/rules/no-invalid-v-on.md) | disallow invalid `v-on` directives. |
+| :white_check_mark: | [no-invalid-v-once](./docs/rules/no-invalid-v-once.md) | disallow invalid `v-once` directives. |
+| :white_check_mark: | [no-invalid-v-pre](./docs/rules/no-invalid-v-pre.md) | disallow invalid `v-pre` directives. |
+| :white_check_mark: | [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | disallow invalid `v-show` directives. |
+| :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid `v-text` directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
+|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
+|  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
+|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
 
 <!--RULES_TABLE_END-->
+
+## :couple: FAQ
+
+### What is the "Use the latest vue-eslint-parser" error?
+
+The most rules of `eslint-plugin-vue` require `vue-eslint-parser` to check `<template>` ASTs.
+
+Make sure you have one of the following settings in your **.eslintrc**:
+
+- `"extends": ["plugin:vue/recommended"]`
+- `"extends": ["plugin:vue/base"]`
+
+If you already use other parser (e.g. `"parser": "babel-eslint"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:
+
+```diff
+- "parser": "babel-eslint",
+  "parserOptions": {
++     "parser": "babel-eslint",
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+  }
+```
+
+The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` to parse scripts.
 
 ## :anchor: Semantic Versioning Policy
 

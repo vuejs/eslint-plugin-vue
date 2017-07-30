@@ -38,18 +38,27 @@ tester.run('require-v-for-key', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom-component v-for="x in list"></custom-component></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list"><div :key="x"></div></template></div></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"></div></div></template>',
-      errors: ["'v-for' directives require 'v-bind:key' directives."]
+      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list" key="100"></div></div></template>',
-      errors: ["'v-for' directives require 'v-bind:key' directives."]
+      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x in list"><div></div></template></div></template>',
+      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
     }
   ]
 })

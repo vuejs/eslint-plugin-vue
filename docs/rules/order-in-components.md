@@ -1,4 +1,4 @@
-# Keep proper order of properties in your components (order-in-components)
+# Keep proper order of properties in your `components` (order-in-components)
 
 This rule makes sure you keep declared order of properties in components.
 
@@ -76,7 +76,7 @@ vue/order-in-components: [2, {
     'data',
     'computed',
     'watch',
-    'lifecycle_hooks',
+    'LIFECYCLE_HOOKS',
     'methods',
     'render',
     'renderError'

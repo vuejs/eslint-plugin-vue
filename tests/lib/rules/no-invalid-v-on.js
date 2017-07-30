@@ -54,14 +54,13 @@ tester.run('no-invalid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on:click.native.stop></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on="$listeners"></div></template>'
     }
   ],
   invalid: [
-    {
-      filename: 'test.vue',
-      code: '<template><div v-on="foo"></div></template>',
-      errors: ["'v-on' directives require event names."]
-    },
     {
       filename: 'test.vue',
       code: '<template><div v-on:click.aaa="foo"></div></template>',
