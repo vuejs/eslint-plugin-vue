@@ -46,6 +46,10 @@ tester.run('no-parsing-error', rule, {
     {
       filename: 'test.vue',
       code: '<table><tr><td></td></tr></table>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<a @click="foo(); bar()">link</a>'
     }
   ],
   invalid: [
@@ -72,27 +76,30 @@ tester.run('no-parsing-error', rule, {
     {
       filename: 'test.vue',
       code: '<template><div>{{ }}</div></template>',
-      errors: ['Parsing error: Expected an expression but got no code.']
+      errors: [
+        { message: 'Parsing error: Expected to be an expression, but got empty.', column: 18 }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-show="">hello</div></template>',
-      errors: ['Parsing error: Expected an expression but got no code.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-show=>hello</div></template>',
-      errors: ['Parsing error: Expected an expression but got no code.']
+      errors: [
+        { message: 'Parsing error: Expected to be an expression, but got empty.', column: 24 }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="foo">hello</div></template>',
-      errors: ['Parsing error: Unexpected token ).']
+      errors: [
+        { message: 'Parsing error: Unexpected end of expression.', column: 26 }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="foo() in list">hello</div></template>',
-      errors: ['Parsing error: Assigning to rvalue.']
+      errors: [
+        { message: 'Parsing error: Unexpected token (.', column: 26 }
+      ]
     }
   ]
 })

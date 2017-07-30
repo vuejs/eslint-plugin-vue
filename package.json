@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run test:simple -- --watch --growl",
     "test:base": "mocha \"tests/lib/**/*.js\"",
-    "test:simple": "npm run test:base -- --reporter nyan",
+    "test:simple": "npm run test:base -- --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "requireindex": "^1.1.0",
-    "vue-eslint-parser": "^1.1.0-8"
+    "vue-eslint-parser": "2.0.0-beta.0"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
