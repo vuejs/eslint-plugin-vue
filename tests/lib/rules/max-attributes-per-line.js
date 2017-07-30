@@ -94,6 +94,11 @@ ruleTester.run('max-attributes-per-line', rule, {
       errors: ['Attribute "job" should be on a new line.']
     },
     {
+      code: `<template><component name="John Doe" age="30"></component></template>`,
+      options: [{ singleline: { max: 1 }}],
+      errors: ['Attribute "age" should be on a new line.']
+    },
+    {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
       errors: ['Attribute "age" should be on a new line.', 'Attribute "job" should be on a new line.']
@@ -113,6 +118,15 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
+      errors: ['Attribute "age" should be on a new line.']
+    },
+    {
+      code: `<template><component
+        name="John Doe" age="30"
+        job="Vet">
+        </component>
+      </template>`,
+      options: [{ singleline: 3, multiline: 1 }],
       errors: ['Attribute "age" should be on a new line.']
     },
     {
