@@ -121,3 +121,48 @@ describe('getComputedProperties', () => {
     assert.ok(computedProperties[0].value)
   })
 })
+
+describe('getStaticPropertyName', () => {
+  let node
+
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
+  it('should parse property expression with identifier', () => {
+    node = parse(`const test = { computed: { } }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0])
+    assert.ok(parsed === 'computed')
+  })
+  it('should parse property expression with literal', () => {
+    node = parse(`const test = { ['computed'] () {} }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0])
+    assert.ok(parsed === 'computed')
+  })
+  it('should parse property expression with template literal', () => {
+    node = parse(`const test = { [\`computed\`] () {} }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0])
+    assert.ok(parsed === 'computed')
+  })
+  it('should parse identifier', () => {
+    node = parse(`const test = { computed: { } }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0].key)
+    assert.ok(parsed === 'computed')
+  })
+  it('should parse literal', () => {
+    node = parse(`const test = { ['computed'] () {} }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0].key)
+    assert.ok(parsed === 'computed')
+  })
+  it('should parse template literal', () => {
+    node = parse(`const test = { [\`computed\`] () {} }`)
+
+    const parsed = utils.getStaticPropertyName(node.properties[0].key)
+    assert.ok(parsed === 'computed')
+  })
+})
