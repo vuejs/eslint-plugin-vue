@@ -15,6 +15,11 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
+const parserOptions = {
+  ecmaVersion: 6,
+  sourceType: 'module'
+}
+
 const ruleTester = new RuleTester()
 ruleTester.run('name-property-casing', rule, {
 
@@ -26,7 +31,7 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -36,7 +41,7 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -46,7 +51,7 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       options: ['PascalCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -56,7 +61,7 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       options: ['kebab-case'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     }
   ],
 
@@ -68,8 +73,13 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo-bar'
         }
       `,
+      output: `
+        export default {
+          name: 'fooBar'
+        }
+      `,
       options: ['camelCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Property name "foo-bar" is not camelCase.',
         type: 'Literal',
@@ -83,8 +93,12 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo  bar'
         }
       `,
-      options: ['PascalCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      output: `
+        export default {
+          name: 'FooBar'
+        }
+      `,
+      parserOptions,
       errors: [{
         message: 'Property name "foo  bar" is not PascalCase.',
         type: 'Literal',
@@ -98,8 +112,13 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo!bar'
         }
       `,
+      output: `
+        export default {
+          name: 'fooBar'
+        }
+      `,
       options: ['camelCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Property name "foo!bar" is not camelCase.',
         type: 'Literal',
@@ -111,6 +130,11 @@ ruleTester.run('name-property-casing', rule, {
       code: `
         new Vue({
           name: 'foo!bar'
+        })
+      `,
+      output: `
+        new Vue({
+          name: 'fooBar'
         })
       `,
       options: ['camelCase'],
@@ -128,8 +152,13 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo_bar'
         }
       `,
+      output: `
+        export default {
+          name: 'foobar'
+        }
+      `,
       options: ['camelCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Property name "foo_bar" is not camelCase.',
         type: 'Literal',
@@ -143,8 +172,13 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo_bar'
         }
       `,
+      output: `
+        export default {
+          name: 'Foobar'
+        }
+      `,
       options: ['PascalCase'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Property name "foo_bar" is not PascalCase.',
         type: 'Literal',
@@ -158,8 +192,13 @@ ruleTester.run('name-property-casing', rule, {
           name: 'foo_bar'
         }
       `,
+      output: `
+        export default {
+          name: 'foo-bar'
+        }
+      `,
       options: ['kebab-case'],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Property name "foo_bar" is not kebab-case.',
         type: 'Literal',
