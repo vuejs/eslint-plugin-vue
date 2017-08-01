@@ -34,14 +34,22 @@ tester.run('no-duplicate-attributes', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div @click="foo" @click="bar"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div style :style></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div class :class></div></div></template>'
     }
   ],
   invalid: [
-        // {
-        //     filename: "test.vue",
-        //     code: "<template><div><div foo foo></div></div></template>",
-        //     errors: ["Duplicate attribute 'foo'."],
-        // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template><div><div foo foo></div></div></template>',
+    //   errors: ["Duplicate attribute 'foo'."]
+    // },
     {
       filename: 'test.vue',
       code: '<template><div><div foo v-bind:foo></div></div></template>',
@@ -51,6 +59,18 @@ tester.run('no-duplicate-attributes', rule, {
       filename: 'test.vue',
       code: '<template><div><div foo :foo></div></div></template>',
       errors: ["Duplicate attribute 'foo'."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div style :style></div></div></template>',
+      errors: ["Duplicate attribute 'style'."],
+      options: [{ allowCoexistStyle: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div class :class></div></div></template>',
+      errors: ["Duplicate attribute 'class'."],
+      options: [{ allowCoexistClass: false }]
     }
   ]
 })
