@@ -24,6 +24,7 @@ const readmeContent = fs.readFileSync(readmeFile, 'utf8')
 
 const STAR = ':white_check_mark:'
 const PEN = ':wrench:'
+const WARN = ':warning:'
 
 const rules = fs.readdirSync(root)
   .filter(file => path.extname(file) === '.js')
@@ -53,9 +54,9 @@ ${
     .map(entry => {
       const name = entry[0]
       const meta = entry[1].meta
-      const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}`
+      const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}${meta.deprecated ? WARN : ''}`
       const link = `[${name}](./docs/rules/${name}.md)`
-      const description = meta.docs.description || '(no description)'
+      const description = (meta.docs.description || '(no description)') + (meta.deprecated ? ' - (deprecated)' : '')
       return `| ${mark} | ${link} | ${description} |`
     })
     .join('\n')
