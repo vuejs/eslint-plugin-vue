@@ -58,6 +58,8 @@ No rules are enabled by `plugin:vue/base` config. The `plugin:vue/recommended` c
 
 The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
+Deprecated rules witch should be used with caution and only enabled when you know what you are doing have a warning :warning: icon.
+
 <!--RULES_TABLE_START-->
 
 ### Best Practices
@@ -65,7 +67,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
-| :wrench: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. |
+| :wrench::warning: | [html-no-self-closing](./docs/rules/html-no-self-closing.md) | disallow self-closing elements. - (deprecated) |
 |  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | Check if there are no asynchronous actions inside computed properties. |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
 |  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
@@ -73,6 +75,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 |  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
+|  | [require-prop-types](./docs/rules/require-prop-types.md) | Prop definitions should be detailed |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives. |
 
 
@@ -97,6 +100,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | Prevents duplication of field names. |
 | :white_check_mark: | [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | disallow invalid template root. |
 | :white_check_mark: | [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | disallow invalid `v-bind` directives. |
 | :white_check_mark: | [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | disallow invalid `v-cloak` directives. |
@@ -112,6 +116,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | disallow invalid `v-show` directives. |
 | :white_check_mark: | [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | disallow invalid `v-text` directives. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
+|  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | Prevent overwrite reserved keys. |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
 |  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
