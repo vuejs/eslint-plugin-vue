@@ -29,6 +29,10 @@ ruleTester.run('html-indent', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template>\n  <div></div>\n</template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template>\n  <div></div>\n</template>',
       options: [2]
     },
@@ -42,45 +46,53 @@ ruleTester.run('html-indent', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template><div></div></template>',
+      code: '<template>\n<div></div>\n</template>',
       errors: [{
-        message: 'Element has to be in new line.',
-        type: 'Me too'
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>\n<div></div></template>',
-      options: [2],
-      errors: [{
-        message: 'Element has to be in new line.',
-        type: 'Me too'
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>\n\t<div></div></template>',
-      options: [2],
-      errors: [{
-        message: 'Element has to be in new line.',
-        type: 'Me too'
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>\n  <div></div>\n</template>',
-      options: ['tab'],
-      errors: [{
-        message: 'Element has to be in new line.',
-        type: 'Me too'
-      }]
-    },
-    {
-      code: '<template>\n  <div>\n<div></div></div></template>',
-      errors: [{
-        message: 'Element has to be in new line.',
-        type: 'Me too'
+        message: 'Tag must be .',
+        type: 'VStartTag'
       }]
     }
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template><div></div></template>',
+    //   errors: [{
+    //     message: 'Element has to be in new line.',
+    //     type: 'Me too'
+    //   }]
+    // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template>\n<div></div></template>',
+    //   options: [2],
+    //   errors: [{
+    //     message: 'Element has to be in new line.',
+    //     type: 'Me too'
+    //   }]
+    // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template>\n\t<div></div></template>',
+    //   options: [2],
+    //   errors: [{
+    //     message: 'Element has to be in new line.',
+    //     type: 'Me too'
+    //   }]
+    // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template>\n  <div></div>\n</template>',
+    //   options: ['tab'],
+    //   errors: [{
+    //     message: 'Element has to be in new line.',
+    //     type: 'Me too'
+    //   }]
+    // },
+    // {
+    //   code: '<template>\n  <div>\n<div></div></div></template>',
+    //   errors: [{
+    //     message: 'Element has to be in new line.',
+    //     type: 'Me too'
+    //   }]
+    // }
   ]
 })
