@@ -120,6 +120,7 @@ Deprecated rules witch should be used with caution and only enabled when you kno
 |  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | Prevent overwrite reserved keys. |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
+|  | [require-render-return](./docs/rules/require-render-return.md) | Enforces render function to always return value. |
 |  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
 
 <!--RULES_TABLE_END-->
