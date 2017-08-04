@@ -62,6 +62,17 @@ Deprecated rules witch should be used with caution and only enabled when you kno
 
 <!--RULES_TABLE_START-->
 
+### Stylistic Issues
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | Define a style for the props casing in templates. |
+|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
+| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
+| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
+| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
+
+
 ### Best Practices
 
 |    | Rule ID | Description |
@@ -77,16 +88,6 @@ Deprecated rules witch should be used with caution and only enabled when you kno
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
 |  | [require-prop-types](./docs/rules/require-prop-types.md) | Prop definitions should be detailed |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives. |
-
-
-### Stylistic Issues
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
-| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
-| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
-| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
 
 
 ### Variables
