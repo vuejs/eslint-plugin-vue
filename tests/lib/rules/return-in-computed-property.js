@@ -38,6 +38,13 @@ ruleTester.run('return-in-computed-property', rule, {
               get () {
                 return true
               }
+            },
+            bar4 () {
+              if (foo) {
+                return true
+              } else {
+                return false
+              }
             }
           }
         }

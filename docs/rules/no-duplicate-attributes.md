@@ -27,9 +27,20 @@ This rule reports duplicate attributes.
 
 ## :wrench: Options
 
-Nothing.
+`allowCoexistClass` - Enables [`v-bind:class`] directive can coexist with the plain `class` attribute.
+`allowCoexistStyle` - Enables [`v-bind:style`] directive can coexist with the plain `style` attribute.
+
+```
+'vue/name-property-casing': [2, {
+  allowCoexistClass: Boolean // default: true
+  allowCoexistStyle: Boolean, // default: true
+}]
+```
 
 ## TODO: `<div foo foo></div>`
 
 `parse5` remove duplicate attributes on the tokenization phase.
 Needs investigation to check.
+
+[`v-bind:class`]: https://vuejs.org/v2/guide/class-and-style.html
+[`v-bind:style`]: https://vuejs.org/v2/guide/class-and-style.html
