@@ -1,5 +1,5 @@
 /**
- * @fileoverview Enforces prop default values to be valid.
+ * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
 'use strict'
@@ -18,7 +18,7 @@ const parserOptions = {
 
 function errorMessage (type) {
   return [{
-    message: `Type of default value prop 'foo' must be a ${type}.`,
+    message: `Type of the default value for 'foo' prop must be a ${type}.`,
     type: 'Property',
     line: 5
   }]
@@ -43,6 +43,18 @@ ruleTester.run('require-valid-default-prop', rule, {
       filename: 'test.vue',
       code: `export default {
         props: ['foo']
+      }`,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [Object, Number],
+            default: 10
+          }
+        }
       }`,
       parserOptions
     },
@@ -373,6 +385,19 @@ ruleTester.run('require-valid-default-prop', rule, {
       }`,
       parserOptions,
       errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [Object, Number],
+            default: {}
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('function or number')
     }
   ]
 })

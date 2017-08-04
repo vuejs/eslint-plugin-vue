@@ -1,7 +1,6 @@
-# Enforces prop default values to be valid (require-valid-default-prop)
+# Enforces props default values to be valid (require-valid-default-prop)
 
-This rule is doing basic type checking between type and default value and inform about missuesed or invalid default values.
-Type checking is working for all `Native types`, with requirement that `Array` and `Object` has to be a function.
+This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
 
 ## :book: Rule Details
 
