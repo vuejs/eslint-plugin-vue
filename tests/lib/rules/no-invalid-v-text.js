@@ -24,6 +24,10 @@ const tester = new RuleTester({
 tester.run('no-invalid-v-text', rule, {
   valid: [
     {
+      filename: 'test.js',
+      code: 'test'
+    },
+    {
       filename: 'test.vue',
       code: ''
     },
