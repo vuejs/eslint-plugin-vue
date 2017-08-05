@@ -62,6 +62,14 @@ tester.run('no-invalid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template src="foo.html"></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><textarea/>test</div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><table><custom-thead></custom-thead></table></template>'
     }
   ],
   invalid: [
