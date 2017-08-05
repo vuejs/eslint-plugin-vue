@@ -57,11 +57,46 @@ tester.run('html-self-closing-style', rule, {
     '<template><img></template>',
     '<template><x-test/></template>',
     '<template><svg><path/></svg></template>',
-    '<template><math><mspace/></math></template>'
+    '<template><math><mspace/></math></template>',
 
-    // Other cases are in `invalid` tests.
+    // Don't error if there are comments in their content.
+    {
+      code: '<template><div><!-- comment --></div></template>',
+      output: null,
+      options: [{ html: { normal: 'always' }}]
+    }
+
+    // other cases are in `invalid` tests.
   ],
   invalid: [
+    // default
+    {
+      code: '<template><div/></template>',
+      output: '<template><div></div></template>',
+      errors: ['Disallow self-closing on HTML elements.']
+    },
+    {
+      code: '<template><img/></template>',
+      output: '<template><img></template>',
+      errors: ['Disallow self-closing on HTML void elements.']
+    },
+    {
+      code: '<template><x-test></x-test></template>',
+      output: '<template><x-test/></template>',
+      errors: ['Require self-closing on Vue.js custom components.']
+    },
+    {
+      code: '<template><svg><path></path></svg></template>',
+      output: '<template><svg><path/></svg></template>',
+      errors: ['Require self-closing on SVG elements.']
+    },
+    {
+      code: '<template><math><mspace></mspace></math></template>',
+      output: '<template><math><mspace/></math></template>',
+      errors: ['Require self-closing on MathML elements.']
+    },
+
+    // others
     {
       code: ALL_CODE,
       output: `<template>
