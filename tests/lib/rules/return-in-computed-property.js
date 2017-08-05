@@ -12,6 +12,11 @@ const rule = require('../../../lib/rules/return-in-computed-property')
 
 const RuleTester = require('eslint').RuleTester
 
+const parserOptions = {
+  ecmaVersion: 6,
+  sourceType: 'module'
+}
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -49,7 +54,41 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' }
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo () {
+              const options = []
+              this.matches.forEach((match) => {
+                options.push(match)
+              })
+              return options
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo () {
+              const options = []
+              this.matches.forEach(function (match) {
+                options.push(match)
+              })
+              return options
+            }
+          }
+        }
+      `,
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -64,7 +103,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       options: [{ treatUndefinedAsUnspecified: false }]
     }
   ],
@@ -80,7 +119,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Expected to return a value in "foo" computed property.',
         line: 4
@@ -135,7 +174,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Expected to return a value in "foo" computed property.',
         line: 7
@@ -155,7 +194,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'Expected to return a value in "foo" computed property.',
         line: 4
@@ -174,7 +213,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       options: [{ treatUndefinedAsUnspecified: false }],
       errors: [{
         message: 'Expected to return a value in "foo" computed property.',
@@ -192,7 +231,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module' },
+      parserOptions,
       options: [{ treatUndefinedAsUnspecified: true }],
       errors: [{
         message: 'Expected to return a value in "foo" computed property.',
