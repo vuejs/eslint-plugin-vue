@@ -3,7 +3,7 @@
 Limits the maximum number of attributes/properties per line to improve readability.
 
 
-## Rule Details
+## :book: Rule Details
 
 This rule aims to enforce a number of attributes per line in templates.
 It checks all the elements in a template and verifies that the number of attributes per line does not exceed the defined maximum.
@@ -11,9 +11,9 @@ An attribute is considered to be in a new line when there is a line break betwee
 
 There is a configurable number of attributes that are acceptable in one-line case (default 3), as well as how many attributes are acceptable per line in multi-line case (default 1).
 
-Examples of **incorrect** code for this rule:
+:-1: Examples of **incorrect** code for this rule:
 
-```js
+```html
 <component lorem="1" ipsum="2" dolor="3" sit="4">
 </component>
 
@@ -25,9 +25,9 @@ Examples of **incorrect** code for this rule:
 </component>
 ```
 
-Examples of **correct** code for this rule:
+:+1: Examples of **correct** code for this rule:
 
-```js
+```html
 <component lorem="1" ipsum="2" dolor="3">
 </component>
 
@@ -41,7 +41,7 @@ Examples of **correct** code for this rule:
 
 ```
 
-### Options
+### :wrench:  Options
 
 ```
 {
@@ -55,19 +55,19 @@ Examples of **correct** code for this rule:
 }
 ```
 
-### `allowFirstLine`
+#### `allowFirstLine`
 For multi-line declarations, defines if allows attributes to be put in the first line. (Default false)
 
-Example of **incorrect** code for this setting:
-```js
+:-1: Example of **incorrect** code for this setting:
+```html
 // [{ "multiline": { "allowFirstLine": false }}]
 <component foo="John" bar="Smith"
   foobar={5555555}>
 </component>;
 ```
 
-Example of **correct** code for this setting:
-```js
+:+1: Example of **correct** code for this setting:
+```html
 // [{ "multiline": { "allowFirstLine": false }}]
 <component
   foo="John"
@@ -78,35 +78,35 @@ Example of **correct** code for this setting:
 ```
 
 
-### `singleline`
+#### `singleline`
 Number of maximum attributes per line when the opening tag is in a single line. (Default is 3)
 
-Example of **incorrect** code for this setting:
-```js
+:-1: Example of **incorrect** code for this setting:
+```html
 // [{"singleline": 2,}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
 ```
 
-Example of **correct** code for this setting:
-```js
+:+1: Example of **correct** code for this setting:
+```html
 // [{"singleline": 3,}]
 <component foo="John" bar="Smith" foobar={5555555}></component>;
 ```
 
 
-### `multiline`
+#### `multiline`
 Number of maximum attributes per line when a tag is in multiple lines. (Default is 1)
 
-Example of **incorrect** code for this setting:
-```js
+:-1: Example of **incorrect** code for this setting:
+```html
 // [{"multiline": 1}]
 <component foo="John" bar="Smith"
   foobar={5555555}>
 </component>;
 ```
 
-Example of **correct** code for this setting:
-```js
+:+1: Example of **correct** code for this setting:
+```html
 // [{"multiline": 1}]
 <component
   foo="John"
