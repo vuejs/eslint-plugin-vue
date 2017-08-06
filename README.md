@@ -31,7 +31,7 @@ Create `.eslintrc.*` file to configure rules. See also: [http://eslint.org/docs/
 
 Example **.eslintrc.js**:
 
-```javascript
+```js
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -44,7 +44,35 @@ module.exports = {
 }
 ```
 
-## ⚙ Configs
+### Attention
+
+All component-related rules are being applied to code that passes any of the following checks:
+
+* `Vue.component()` expression
+* `export default {}` in `.vue` or `.jsx` file
+
+If you however want to take advantage of our rules in any of your custom objects that are Vue components, you might need to use special comment `// @vue/component` that marks object in the next line as a Vue component in any file, e.g.:
+
+```js
+// @vue/component
+const CustomComponent = {
+  name: 'custom-component',
+  template: '<div></div>'
+}
+```
+```js
+Vue.component('AsyncComponent', (resolve, reject) => {
+  setTimeout(() => {
+    // @vue/component
+    resolve({
+      name: 'async-component',
+      template: '<div></div>'
+    })
+  }, 500)
+})
+```
+
+## :gear: Configs
 
 This plugin provides two predefined configs:
 - `plugin:vue/base` - contains necessary settings for this plugin to work properly
