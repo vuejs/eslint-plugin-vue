@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "preversion": "npm run update && npm test",
-    "update": "node ./tools/update-rules.js"
+    "update": "node ./tools/update-rules.js",
+    "watch": "warun lib/rules/html-indent.js tests/lib/rules/html-indent.js -- nyc --reporter lcov -- mocha tests/lib/rules/html-indent.js"
   },
   "files": [
     "lib"
