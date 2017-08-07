@@ -123,8 +123,8 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 ### Deprecated
 
-> - :warning: We are going to remove deprecated rules in future. Please migrate to its replaced rules.
-> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resource.
+> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
 
 | Rule ID | Replaced by |
 |:--------|:------------|
