@@ -1,4 +1,4 @@
-# Enforce self-closing style (html-self-closing-style)
+# Enforce self-closing style (html-self-closing)
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
 
@@ -14,7 +14,7 @@ This rule has options which specify self-closing style for each context.
 
 ```json
 {
-    "html-self-closing-style": ["error", {
+    "html-self-closing": ["error", {
         "html": {
             "normal": "never",
             "void": "never",
@@ -43,7 +43,7 @@ Every option can be set to one of the following values:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-/*eslint html-self-closing-style: "error"*/
+/*eslint html-self-closing: "error"*/
 
 <template>
     <div />
@@ -56,7 +56,7 @@ Every option can be set to one of the following values:
 :+1: Examples of **correct** code for this rule:
 
 ```html
-/*eslint html-self-closing-style: "error"*/
+/*eslint html-self-closing: "error"*/
 
 <template>
     <div></div>

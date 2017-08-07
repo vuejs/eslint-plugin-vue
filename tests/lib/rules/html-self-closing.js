@@ -9,7 +9,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/html-self-closing-style')
+const rule = require('../../../lib/rules/html-self-closing')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ const anyWith = (opts) => Object.assign(
   }
 )
 
-tester.run('html-self-closing-style', rule, {
+tester.run('html-self-closing', rule, {
   valid: [
     // default
     '<template><div></div></template>',
