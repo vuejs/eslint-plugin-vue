@@ -1,4 +1,4 @@
-# Enforces render function to always return value (require-render-return)
+# Enforces render function to always return value. (require-render-return)
 
 This rule aims to enforce render function to allways return value
 
