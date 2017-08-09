@@ -138,6 +138,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 | :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | Define a style for the props casing in templates. |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
+| :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style. |
 | :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
@@ -156,7 +157,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [html-no-self-closing](./rules/html-no-self-closing.md) | (no replacement) |
+| [html-no-self-closing](./rules/html-no-self-closing.md) | [html-self-closing-style](./rules/html-self-closing-style.md) |
 | [no-invalid-template-root](./rules/no-invalid-template-root.md) | [valid-template-root](./rules/valid-template-root.md) |
 | [no-invalid-v-bind](./rules/no-invalid-v-bind.md) | [valid-v-bind](./rules/valid-v-bind.md) |
 | [no-invalid-v-cloak](./rules/no-invalid-v-cloak.md) | [valid-v-cloak](./rules/valid-v-cloak.md) |
