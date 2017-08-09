@@ -88,6 +88,19 @@ ruleTester.run('require-render-return', rule, {
         }
       }`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render(h) {
+          const options = []
+          this.matches.forEach(function (match) {
+            options.push(match)
+          })
+          return h('div', options)
+        }
+      }`,
+      parserOptions
     }
   ],
 

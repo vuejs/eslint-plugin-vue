@@ -65,6 +65,7 @@ ruleTester.run('require-valid-default-prop', rule, {
           foo: null,
           foo: Number,
           foo: [String, Number],
+          foo: { type: Number, default: VAR_BAR },
           foo: { type: Number, default: 100 },
           foo: { type: [String, Number], default: '' },
           foo: { type: [String, Number], default: 0 },

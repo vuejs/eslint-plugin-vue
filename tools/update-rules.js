@@ -41,7 +41,7 @@ const categories = rules
       arr.push(category)
     }
     return arr
-  }, [])
+  }, ['Possible Errors', 'Best Practices', 'Stylistic Issues'])
 
 const rulesTableContent = categories.map(category => `
 ### ${category}
@@ -50,18 +50,38 @@ const rulesTableContent = categories.map(category => `
 |:---|:--------|:------------|
 ${
   rules
-    .filter(entry => entry[1].meta.docs.category === category)
+    .filter(entry => entry[1].meta.docs.category === category && !entry[1].meta.deprecated)
     .map(entry => {
       const name = entry[0]
       const meta = entry[1].meta
       const mark = `${meta.docs.recommended ? STAR : ''}${meta.fixable ? PEN : ''}${meta.deprecated ? WARN : ''}`
       const link = `[${name}](./docs/rules/${name}.md)`
-      const description = (meta.docs.description || '(no description)') + (meta.deprecated ? ' - (deprecated)' : '')
+      const description = meta.docs.description || '(no description)'
       return `| ${mark} | ${link} | ${description} |`
     })
     .join('\n')
 }
-`).join('\n')
+`).join('\n') + `
+### Deprecated
+
+> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+${
+  rules
+    .filter(entry => entry[1].meta.deprecated)
+    .map(entry => {
+      const name = entry[0]
+      const meta = entry[1].meta
+      const link = `[${name}](./rules/${name}.md)`
+      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./rules/${id}.md)`).join(', ') || '(no replacement)'
+      return `| ${link} | ${replacedBy} |`
+    })
+    .join('\n')
+}
+`
 
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `vue/${entry[0]}`
