@@ -17,7 +17,8 @@ const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
   ecmaVersion: 6,
-  sourceType: 'module'
+  sourceType: 'module',
+  ecmaFeatures: { experimentalObjectRestSpread: true }
 }
 
 const ruleTester = new RuleTester()
@@ -28,6 +29,16 @@ ruleTester.run('name-property-casing', rule, {
       filename: 'test.vue',
       code: `
         export default {
+        }
+      `,
+      options: ['camelCase'],
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          ...name
         }
       `,
       options: ['camelCase'],

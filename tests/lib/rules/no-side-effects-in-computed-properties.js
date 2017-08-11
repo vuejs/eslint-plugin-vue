@@ -26,6 +26,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
   valid: [
     {
       code: `Vue.component('test', {
+        ...foo,
         computed: {
           ...test0({}),
           test1() {

@@ -11,6 +11,12 @@
 const rule = require('../../../lib/rules/no-reservered-keys')
 const RuleTester = require('eslint').RuleTester
 
+const parserOptions = {
+  ecmaVersion: 7,
+  sourceType: 'module',
+  ecmaFeatures: { experimentalObjectRestSpread: true }
+}
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -39,7 +45,7 @@ ruleTester.run('no-reservered-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     }
   ],
 

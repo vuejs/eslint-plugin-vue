@@ -13,7 +13,8 @@ const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
   ecmaVersion: 6,
-  sourceType: 'module'
+  sourceType: 'module',
+  ecmaFeatures: { experimentalObjectRestSpread: true, jsx: true }
 }
 
 function errorMessage (type) {
@@ -32,6 +33,13 @@ const ruleTester = new RuleTester()
 ruleTester.run('require-valid-default-prop', rule, {
 
   valid: [
+    {
+      filename: 'test.vue',
+      code: `export default {
+        ...foo
+      }`,
+      parserOptions
+    },
     {
       filename: 'test.vue',
       code: `export default {

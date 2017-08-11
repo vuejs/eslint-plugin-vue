@@ -24,6 +24,7 @@ ruleTester.run('require-prop-types', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          ...foo,
           props: {
             ...test(),
             foo: String
