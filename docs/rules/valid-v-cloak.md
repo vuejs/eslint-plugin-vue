@@ -1,4 +1,4 @@
-# enforce valid `v-cloak` directives. (valid-v-cloak)
+# enforce valid `v-cloak` directives (valid-v-cloak)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

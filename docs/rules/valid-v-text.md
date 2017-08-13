@@ -1,4 +1,4 @@
-# enforce valid `v-text` directives. (valid-v-text)
+# enforce valid `v-text` directives (valid-v-text)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

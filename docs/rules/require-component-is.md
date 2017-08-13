@@ -1,4 +1,4 @@
-# require `v-bind:is` of `<component>` elements. (require-component-is)
+# require `v-bind:is` of `<component>` elements (require-component-is)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

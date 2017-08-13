@@ -1,4 +1,4 @@
-# disallow invalid template root. (no-invalid-template-root)
+# disallow invalid template root (no-invalid-template-root)
 
 - :warning: This rule was **deprecated** and replaced by [valid-template-root](valid-template-root.md) rule.
 

@@ -92,63 +92,63 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | Prevents duplication of field names. |
-| :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
-|  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | Prevent overwrite reserved keys. |
-|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
-|  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
-|  | [require-render-return](./docs/rules/require-render-return.md) | Enforces render function to always return value. |
-|  | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | Enforces props default values to be valid. |
-|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | Enforces that a return statement is present in computed property. |
-| :white_check_mark: | [valid-template-root](./docs/rules/valid-template-root.md) | enforce valid template root. |
-| :white_check_mark: | [valid-v-bind](./docs/rules/valid-v-bind.md) | enforce valid `v-bind` directives. |
-| :white_check_mark: | [valid-v-cloak](./docs/rules/valid-v-cloak.md) | enforce valid `v-cloak` directives. |
-| :white_check_mark: | [valid-v-else-if](./docs/rules/valid-v-else-if.md) | enforce valid `v-else-if` directives. |
-| :white_check_mark: | [valid-v-else](./docs/rules/valid-v-else.md) | enforce valid `v-else` directives. |
-| :white_check_mark: | [valid-v-for](./docs/rules/valid-v-for.md) | enforce valid `v-for` directives. |
-| :white_check_mark: | [valid-v-html](./docs/rules/valid-v-html.md) | enforce valid `v-html` directives. |
-| :white_check_mark: | [valid-v-if](./docs/rules/valid-v-if.md) | enforce valid `v-if` directives. |
-| :white_check_mark: | [valid-v-model](./docs/rules/valid-v-model.md) | enforce valid `v-model` directives. |
-| :white_check_mark: | [valid-v-on](./docs/rules/valid-v-on.md) | enforce valid `v-on` directives. |
-| :white_check_mark: | [valid-v-once](./docs/rules/valid-v-once.md) | enforce valid `v-once` directives. |
-| :white_check_mark: | [valid-v-pre](./docs/rules/valid-v-pre.md) | enforce valid `v-pre` directives. |
-| :white_check_mark: | [valid-v-show](./docs/rules/valid-v-show.md) | enforce valid `v-show` directives. |
-| :white_check_mark: | [valid-v-text](./docs/rules/valid-v-text.md) | enforce valid `v-text` directives. |
+|  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
+| :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
+|  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | disallow overwrite reserved keys |
+|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
+|  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
+|  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
+|  | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
+|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
+| :white_check_mark: | [valid-template-root](./docs/rules/valid-template-root.md) | enforce valid template root |
+| :white_check_mark: | [valid-v-bind](./docs/rules/valid-v-bind.md) | enforce valid `v-bind` directives |
+| :white_check_mark: | [valid-v-cloak](./docs/rules/valid-v-cloak.md) | enforce valid `v-cloak` directives |
+| :white_check_mark: | [valid-v-else-if](./docs/rules/valid-v-else-if.md) | enforce valid `v-else-if` directives |
+| :white_check_mark: | [valid-v-else](./docs/rules/valid-v-else.md) | enforce valid `v-else` directives |
+| :white_check_mark: | [valid-v-for](./docs/rules/valid-v-for.md) | enforce valid `v-for` directives |
+| :white_check_mark: | [valid-v-html](./docs/rules/valid-v-html.md) | enforce valid `v-html` directives |
+| :white_check_mark: | [valid-v-if](./docs/rules/valid-v-if.md) | enforce valid `v-if` directives |
+| :white_check_mark: | [valid-v-model](./docs/rules/valid-v-model.md) | enforce valid `v-model` directives |
+| :white_check_mark: | [valid-v-on](./docs/rules/valid-v-on.md) | enforce valid `v-on` directives |
+| :white_check_mark: | [valid-v-once](./docs/rules/valid-v-once.md) | enforce valid `v-once` directives |
+| :white_check_mark: | [valid-v-pre](./docs/rules/valid-v-pre.md) | enforce valid `v-pre` directives |
+| :white_check_mark: | [valid-v-show](./docs/rules/valid-v-show.md) | enforce valid `v-show` directives |
+| :white_check_mark: | [valid-v-text](./docs/rules/valid-v-text.md) | enforce valid `v-text` directives |
 
 
 ### Best Practices
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style. |
-|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | Check if there are no asynchronous actions inside computed properties. |
-| :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element. |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes. |
-|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | Don't introduce side effects in computed properties |
-| :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
-|  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
-| :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
-|  | [require-prop-types](./docs/rules/require-prop-types.md) | Prop definitions should be detailed |
-| :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives. |
+| :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
+|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
+| :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
+|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes |
+|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
+| :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
+|  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
+| :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
+|  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
+| :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
 
 
 ### Stylistic Issues
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | Define a style for the props casing in templates. |
-|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
-| :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style. |
-| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
-| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
-| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
+| :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
+| :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
+| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
+| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
+| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
 
 
 ### Variables
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | Prevent variables used in JSX to be marked as unused |
+| :white_check_mark: | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused. |
 
 ### Deprecated
 

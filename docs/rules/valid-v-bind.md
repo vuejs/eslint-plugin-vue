@@ -1,4 +1,4 @@
-# enforce valid `v-bind` directives. (valid-v-bind)
+# enforce valid `v-bind` directives (valid-v-bind)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

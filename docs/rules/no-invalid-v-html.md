@@ -1,4 +1,4 @@
-# disallow invalid `v-html` directives. (no-invalid-v-html)
+# disallow invalid `v-html` directives (no-invalid-v-html)
 
 - :warning: This rule was **deprecated** and replaced by [valid-v-html](valid-v-html.md) rule.
 

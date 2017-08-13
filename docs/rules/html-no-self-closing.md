@@ -1,4 +1,4 @@
-# disallow self-closing elements. (html-no-self-closing)
+# disallow self-closing elements (html-no-self-closing)
 
 - :warning: This rule was **deprecated** and replaced by [html-self-closing-style](html-self-closing-style.md) rule.
 - :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.

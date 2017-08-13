@@ -1,4 +1,4 @@
-# disallow invalid `v-cloak` directives. (no-invalid-v-cloak)
+# disallow invalid `v-cloak` directives (no-invalid-v-cloak)
 
 - :warning: This rule was **deprecated** and replaced by [valid-v-cloak](valid-v-cloak.md) rule.
 

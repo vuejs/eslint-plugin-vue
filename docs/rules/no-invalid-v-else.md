@@ -1,4 +1,4 @@
-# disallow invalid `v-else` directives. (no-invalid-v-else)
+# disallow invalid `v-else` directives (no-invalid-v-else)
 
 - :warning: This rule was **deprecated** and replaced by [valid-v-else](valid-v-else.md) rule.
 

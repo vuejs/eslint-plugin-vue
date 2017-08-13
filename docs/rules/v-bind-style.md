@@ -1,4 +1,4 @@
-# enforce `v-bind` directive style. (v-bind-style)
+# enforce `v-bind` directive style (v-bind-style)
 
 - :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 

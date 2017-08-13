@@ -1,4 +1,4 @@
-# disallow invalid `v-pre` directives. (no-invalid-v-pre)
+# disallow invalid `v-pre` directives (no-invalid-v-pre)
 
 - :warning: This rule was **deprecated** and replaced by [valid-v-pre](valid-v-pre.md) rule.
 

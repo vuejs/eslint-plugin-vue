@@ -1,4 +1,4 @@
-# Prevent overwrite reserved keys. (no-reservered-keys)
+# disallow overwrite reserved keys (no-reservered-keys)
 
 This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
 

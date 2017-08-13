@@ -1,4 +1,4 @@
-# disallow `key` attribute on `<template>`. (no-template-key)
+# disallow `key` attribute on `<template>` (no-template-key)
 
 Vue.js disallows `key` attribute on `<template>` elements.
 

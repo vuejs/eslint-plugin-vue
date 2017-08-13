@@ -1,4 +1,4 @@
-# disallow parsing errors in `<template>`. (no-parsing-error)
+# disallow parsing errors in `<template>` (no-parsing-error)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

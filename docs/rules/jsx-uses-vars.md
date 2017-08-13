@@ -1,4 +1,4 @@
-# Prevent variables used in JSX to be marked as unused (jsx-uses-vars)
+# prevent variables used in JSX to be marked as unused. (jsx-uses-vars)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 

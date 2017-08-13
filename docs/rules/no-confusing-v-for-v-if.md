@@ -1,4 +1,4 @@
-# disallow confusing `v-for` and `v-if` on the same element. (no-confusing-v-for-v-if)
+# disallow confusing `v-for` and `v-if` on the same element (no-confusing-v-for-v-if)
 
 - :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
