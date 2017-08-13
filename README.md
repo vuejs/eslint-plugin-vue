@@ -157,7 +157,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [html-no-self-closing](./rules/html-no-self-closing.md) | [html-self-closing-style](./rules/html-self-closing-style.md) |
+| [html-no-self-closing](./rules/html-no-self-closing.md) | [html-self-closing](./rules/html-self-closing.md) |
 | [no-invalid-template-root](./rules/no-invalid-template-root.md) | [valid-template-root](./rules/valid-template-root.md) |
 | [no-invalid-v-bind](./rules/no-invalid-v-bind.md) | [valid-v-bind](./rules/valid-v-bind.md) |
 | [no-invalid-v-cloak](./rules/no-invalid-v-cloak.md) | [valid-v-cloak](./rules/valid-v-cloak.md) |
