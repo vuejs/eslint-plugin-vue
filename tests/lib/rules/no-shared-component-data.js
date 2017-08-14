@@ -12,6 +12,12 @@ const rule = require('../../../lib/rules/no-shared-component-data')
 
 const RuleTester = require('eslint').RuleTester
 
+const parserOptions = {
+  ecmaVersion: 7,
+  sourceType: 'module',
+  ecmaFeatures: { experimentalObjectRestSpread: true }
+}
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -30,7 +36,8 @@ ruleTester.run('no-shared-component-data', rule, {
             }
           }
         })
-      `
+      `,
+      parserOptions
     },
     {
       filename: 'test.js',
@@ -44,11 +51,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions: {
-        ecmaVersion: 7,
-        sourceType: 'module',
-        ecmaFeatures: { experimentalObjectRestSpread: true }
-      }
+      parserOptions
     },
     {
       filename: 'test.js',
@@ -71,7 +74,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -84,7 +87,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -93,7 +96,7 @@ ruleTester.run('no-shared-component-data', rule, {
           ...foo
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+      parserOptions
     },
     {
       filename: 'test.vue',
@@ -102,7 +105,18 @@ ruleTester.run('no-shared-component-data', rule, {
           data
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          data: () => {
+
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
@@ -116,7 +130,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      parserOptions,
       errors: [{
         message: '`data` property in component must be a function',
         line: 3
@@ -131,7 +145,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: '`data` property in component must be a function',
         line: 3
