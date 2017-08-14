@@ -9,6 +9,12 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester()
 
+const parserOptions = {
+  ecmaVersion: 6,
+  sourceType: 'module',
+  ecmaFeatures: { experimentalObjectRestSpread: true }
+}
+
 ruleTester.run('order-in-components', rule, {
 
   valid: [
@@ -20,6 +26,7 @@ ruleTester.run('order-in-components', rule, {
           props: {
             propA: Number,
           },
+          ...a,
           data () {
             return {
               msg: 'Welcome to Your Vue.js App'
@@ -27,21 +34,21 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default {}
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default 'example-text'
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.jsx',
@@ -55,7 +62,7 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      parserOptions
     },
     {
       filename: 'test.js',
@@ -136,7 +143,7 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'The "props" property should be above the "data" property on line 4.',
         line: 9
@@ -268,7 +275,7 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 16
@@ -284,7 +291,7 @@ ruleTester.run('order-in-components', rule, {
           test: 'ok'
         };
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parserOptions,
       options: [{ order: ['data', 'test', 'name'] }],
       errors: [{
         message: 'The "test" property should be above the "name" property on line 5.',

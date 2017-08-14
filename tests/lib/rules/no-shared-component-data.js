@@ -36,6 +36,24 @@ ruleTester.run('no-shared-component-data', rule, {
       filename: 'test.js',
       code: `
         new Vue({
+          ...data,
+          data () {
+            return {
+              foo: 'bar'
+            }
+          }
+        })
+      `,
+      parserOptions: {
+        ecmaVersion: 7,
+        sourceType: 'module',
+        ecmaFeatures: { experimentalObjectRestSpread: true }
+      }
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
           data: {
             foo: 'bar'
           }

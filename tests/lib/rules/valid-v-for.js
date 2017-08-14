@@ -78,6 +78,10 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template v-for="x of list"><slot name="item" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template v-for="x of list">foo<div></div></template>'
     }
   ],
   invalid: [
@@ -170,6 +174,11 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       code: '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>',
       errors: ["Custom elements in iteration require 'v-bind:key' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="xin list"><div></div></template></div></template>',
+      errors: ["'v-for' directives require that attribute value."]
     }
   ]
 })

@@ -26,6 +26,7 @@ ruleTester.run('require-render-return', rule, {
   valid: [
     {
       code: `Vue.component('test', {
+        ...foo,
         render() {
           return {}
         }

@@ -32,6 +32,9 @@ ruleTester.run('no-dupe-keys', rule, {
               dat: null
             }
           },
+          data () {
+            return
+          },
           methods: {
             _foo () {},
             test () {
@@ -68,7 +71,12 @@ ruleTester.run('no-dupe-keys', rule, {
             ...foo(),
             test () {
             }
-          }
+          },
+          data () {
+            return {
+              ...dat
+            }
+          },
         }
       `,
       parserOptions: { ecmaVersion: 8, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
