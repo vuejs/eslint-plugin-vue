@@ -1,5 +1,5 @@
 /**
- * @fileoverview Enforce spacing on the style of mustache curly brackets.
+ * @fileoverview enforce unified spacing in mustache interpolations.
  * @author Armano
  */
 'use strict'
@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/mustache-curly-spacing')
+const rule = require('../../../lib/rules/mustache-interpolation-spacing')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-ruleTester.run('mustache-curly-spacing', rule, {
+ruleTester.run('mustache-interpolation-spacing', rule, {
 
   valid: [
     {
