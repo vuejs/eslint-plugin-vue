@@ -1,5 +1,5 @@
 /**
- * @fileoverview Disallow usage of `this` in the template.
+ * @fileoverview Disallow usage of `this` in template.
  * @author Armano
  */
 'use strict'

@@ -1,6 +1,6 @@
-# Disallow usage of `this` in the template. (no-this-in-template)
+# Disallow usage of `this` in template. (no-this-in-template)
 
-This rule reports expresions witch contains `this`.
+This rule reports expresions that contain `this` keyword in expressions
 
 ## :book: Rule Details
 
