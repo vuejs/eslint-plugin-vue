@@ -94,7 +94,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 |  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | Prevents duplication of field names. |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>`. |
-|  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | Prevent overwrite reserved keys. |
+|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | Prevent overwrite reserved keys. |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | Enforces component's data property to be a function. |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>`. |
 |  | [require-render-return](./docs/rules/require-render-return.md) | Enforces render function to always return value. |
@@ -139,7 +139,9 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | Define a style for the props casing in templates. |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
 | :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style. |
+|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | Define the number of attributes allows per line |
 | :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
+| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | This rule warns about the usage of extra whitespaces between attributes |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style. |
 
@@ -172,6 +174,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | [no-invalid-v-pre](./rules/no-invalid-v-pre.md) | [valid-v-pre](./rules/valid-v-pre.md) |
 | [no-invalid-v-show](./rules/no-invalid-v-show.md) | [valid-v-show](./rules/valid-v-show.md) |
 | [no-invalid-v-text](./rules/no-invalid-v-text.md) | [valid-v-text](./rules/valid-v-text.md) |
+| [no-reservered-keys](./rules/no-reservered-keys.md) | [no-reserved-keys](./rules/no-reserved-keys.md) |
 
 <!--RULES_TABLE_END-->
 
