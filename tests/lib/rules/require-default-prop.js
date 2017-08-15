@@ -10,7 +10,11 @@
 
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
-const parserOptions = { ecmaVersion: 6, sourceType: 'module' }
+const parserOptions = {
+  ecmaVersion: 6,
+  ecmaFeatures: { experimentalObjectRestSpread: true },
+  sourceType: 'module'
+}
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -40,6 +44,26 @@ ruleTester.run('require-default-prop', rule, {
             },
             // eslint-disable-next-line require-default-prop
             d: Number
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            ...x,
+            a: {
+              ...y,
+              type: Number,
+              required: true
+            },
+            b: {
+              type: Number,
+              default: 0
+            }
           }
         }
       `,
