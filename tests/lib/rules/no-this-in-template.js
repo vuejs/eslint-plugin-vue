@@ -1,5 +1,5 @@
 /**
- * @fileoverview Disallow usage of `this` in template.
+ * @fileoverview enforce usage of `this` in template.
  * @author Armano
  */
 'use strict'
@@ -21,59 +21,77 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-ruleTester.run('no-this-in-template', rule, {
-  valid: [
-    '',
-    '<template></template>',
-    '<template><div></div></template>',
-    '<template><div>{{ foo.bar }}</div></template>',
-    '<template><div v-for="foo in bar">{{ foo }}</div></template>',
-    '<template><div v-if="foo">{{ foo }}</div></template>',
-    '<template><div :class="foo">{{ foo }}</div></template>',
-    '<template><div :class="{this: foo}">{{ foo }}</div></template>'
-  ],
-  invalid: [
+function createValidTests (prefix, options) {
+  return [
     {
-      code: '<template><div>{{ this.foo }}</div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div>{{ ${prefix}foo.bar }}</div></template><!-- ${options.join('')} -->`,
+      options
     },
     {
-      code: '<template><div :class="this.foo"></div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div v-for="foo in ${prefix}bar">{{ foo }}</div></template><!-- ${options.join('')} -->`,
+      options
     },
     {
-      code: '<template><div :class="{foo: this.foo}"></div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div v-if="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      options
     },
     {
-      code: '<template><div :class="{foo: this.foo()}"></div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div :class="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      options
     },
     {
-      code: '<template><div v-if="this.foo"></div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div :class="{this: ${prefix}foo}">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      options
     },
     {
-      code: '<template><div v-for="foo in this.bar"></div></template>',
-      errors: [{
-        message: "Unexpected usage of 'this'.",
-        type: 'ThisExpression'
-      }]
+      code: `<template><div v-for="bar in ${prefix}foo" v-if="bar">{{ bar }}</div></template><!-- ${options.join('')} -->`,
+      options
     }
   ]
+}
+
+function createInvalidTests (prefix, options, message, type) {
+  return [
+    {
+      code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div :class="${prefix}foo"></div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div :class="{foo: ${prefix}foo}"></div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div :class="{foo: ${prefix}foo()}"></div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div v-if="${prefix}foo"></div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div v-for="foo in ${prefix}bar"></div></template><!-- ${options.join('')} -->`,
+      errors: [{ message, type }],
+      options
+    }
+  ]
+}
+
+ruleTester.run('no-this-in-template', rule, {
+  valid: ['', '<template></template>', '<template><div></div></template>']
+    .concat(createValidTests('', []))
+    .concat(createValidTests('', ['never']))
+    .concat(createValidTests('this.', ['always'])),
+  invalid: []
+    .concat(createInvalidTests('this.', [], "Unexpected usage of 'this'.", 'ThisExpression'))
+    .concat(createInvalidTests('this.', ['never'], "Unexpected usage of 'this'.", 'ThisExpression'))
+    .concat(createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'))
 })

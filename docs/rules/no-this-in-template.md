@@ -1,6 +1,4 @@
-# Disallow usage of `this` in template. (no-this-in-template)
-
-This rule reports expresions that contain `this` keyword in expressions
+# enforce usage of `this` in template. (no-this-in-template)
 
 ## :book: Rule Details
 
@@ -22,4 +20,52 @@ This rule reports expresions that contain `this` keyword in expressions
 
 ## :wrench: Options
 
-Nothing.
+Default is set to `never`.
+
+```
+'vue/no-this-in-template': [2, 'always'|'never']
+```
+
+### `"always"` - Always use `this` while accessing properties from vue
+
+:+1: Examples of **correct** code`:
+
+```html
+<template>
+  <div :class="{'show': this.showFoo}">
+    {{ this.foo }}
+  </div>
+</template>
+```
+
+:-1: Examples of **incorrect** code`:
+
+```html
+<template>
+  <div :class="{'show': showFoo}">
+    {{ foo }}
+  </div>
+</template>
+```
+
+### `"never"` - Never use expresions that contain `this` keyword in expressions
+
+:+1: Examples of **correct** code`:
+
+```html
+<template>
+  <div :class="{'show': this.showFoo}">
+    {{ this.foo }}
+  </div>
+</template>
+```
+
+:-1: Examples of **incorrect** code`:
+
+```html
+<template>
+  <div :class="{'show': showFoo}">
+    {{ foo }}
+  </div>
+</template>
+```
