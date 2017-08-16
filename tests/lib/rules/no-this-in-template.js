@@ -22,63 +22,84 @@ const ruleTester = new RuleTester({
 })
 
 function createValidTests (prefix, options) {
+  const comment = options.join('')
   return [
     {
-      code: `<template><div>{{ ${prefix}foo.bar }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div>{{ ${prefix}foo.bar }}</div></template><!-- ${comment} -->`,
       options
     },
     {
-      code: `<template><div v-for="foo in ${prefix}bar">{{ foo }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div v-for="foo in ${prefix}bar">{{ foo }}</div></template><!-- ${comment} -->`,
       options
     },
     {
-      code: `<template><div v-if="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div v-if="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
       options
     },
     {
-      code: `<template><div :class="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div :class="${prefix}foo">{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
       options
     },
     {
-      code: `<template><div :class="{this: ${prefix}foo}">{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div :class="{this: ${prefix}foo}">{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
       options
     },
     {
-      code: `<template><div v-for="bar in ${prefix}foo" v-if="bar">{{ bar }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div v-for="bar in ${prefix}foo" v-if="bar">{{ bar }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-if="${prefix}foo()">{{ ${prefix}bar }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template>
+        <div>
+          <div v-for="bar in ${prefix}foo" v-if="bar">{{ bar }}</div>
+          <div v-for="ssa in ${prefix}sss" v-if="ssa">
+            <div v-for="ssf in ssa" v-if="ssa">{{ ssf }}</div>
+          </div>
+        </div>
+      </template><!-- ${comment} -->`,
       options
     }
   ]
 }
 
 function createInvalidTests (prefix, options, message, type) {
+  const comment = options.join('')
   return [
     {
-      code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${options.join('')} -->`,
+      code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
-      code: `<template><div :class="${prefix}foo"></div></template><!-- ${options.join('')} -->`,
+      code: `<template><div :class="${prefix}foo"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
-      code: `<template><div :class="{foo: ${prefix}foo}"></div></template><!-- ${options.join('')} -->`,
+      code: `<template><div :class="{foo: ${prefix}foo}"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
-      code: `<template><div :class="{foo: ${prefix}foo()}"></div></template><!-- ${options.join('')} -->`,
+      code: `<template><div :class="{foo: ${prefix}foo()}"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
-      code: `<template><div v-if="${prefix}foo"></div></template><!-- ${options.join('')} -->`,
+      code: `<template><div v-if="${prefix}foo"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
-      code: `<template><div v-for="foo in ${prefix}bar"></div></template><!-- ${options.join('')} -->`,
+      code: `<template><div v-for="foo in ${prefix}bar"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     }
