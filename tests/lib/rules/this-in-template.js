@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-this-in-template')
+const rule = require('../../../lib/rules/this-in-template')
 
 const RuleTester = require('eslint').RuleTester
 
@@ -106,7 +106,7 @@ function createInvalidTests (prefix, options, message, type) {
   ]
 }
 
-ruleTester.run('no-this-in-template', rule, {
+ruleTester.run('this-in-template', rule, {
   valid: ['', '<template></template>', '<template><div></div></template>']
     .concat(createValidTests('', []))
     .concat(createValidTests('', ['never']))

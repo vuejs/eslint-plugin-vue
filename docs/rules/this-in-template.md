@@ -1,4 +1,4 @@
-# enforce usage of `this` in template. (no-this-in-template)
+# enforce usage of `this` in template. (this-in-template)
 
 ## :book: Rule Details
 
@@ -23,7 +23,7 @@
 Default is set to `never`.
 
 ```
-'vue/no-this-in-template': [2, 'always'|'never']
+'vue/this-in-template': [2, 'always'|'never']
 ```
 
 ### `"always"` - Always use `this` while accessing properties from vue
