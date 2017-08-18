@@ -53,6 +53,30 @@ function createValidTests (prefix, options) {
       options
     },
     {
+      code: `<template><div :parent="this"></div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-for="x of ${prefix}xs">{{this.x}}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-for="x of ${prefix}xs">{{this.x()}}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-for="x of ${prefix}xs">{{this.x.y()}}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-for="x of ${prefix}xs">{{this.x['foo']}}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div v-for="x of ${prefix}xs">{{this['x']}}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
       code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
       options
     },
@@ -75,6 +99,16 @@ function createInvalidTests (prefix, options, message, type) {
   return [
     {
       code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div>{{ ${prefix}foo() }}</div></template><!-- ${comment} -->`,
+      errors: [{ message, type }],
+      options
+    },
+    {
+      code: `<template><div>{{ ${prefix}foo.bar() }}</div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
@@ -103,7 +137,16 @@ function createInvalidTests (prefix, options, message, type) {
       errors: [{ message, type }],
       options
     }
-  ]
+  ].concat(options[0] === 'always'
+    ? []
+    : [
+      {
+        code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+        errors: [{ message, type }],
+        options
+      }
+    ]
+  )
 }
 
 ruleTester.run('this-in-template', rule, {
