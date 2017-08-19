@@ -77,6 +77,10 @@ function createValidTests (prefix, options) {
       options
     },
     {
+      code: `<template><div>{{ this.class }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
       code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
       options
     },
