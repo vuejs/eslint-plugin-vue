@@ -81,6 +81,18 @@ function createValidTests (prefix, options) {
       options
     },
     {
+      code: `<template><div>{{ this['0'] }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div>{{ this['this'] }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
+      code: `<template><div>{{ this['foo bar'] }}</div></template><!-- ${comment} -->`,
+      options
+    },
+    {
       code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
       options
     },
@@ -146,6 +158,11 @@ function createInvalidTests (prefix, options, message, type) {
     : [
       {
         code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+        errors: [{ message, type }],
+        options
+      },
+      {
+        code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
         errors: [{ message, type }],
         options
       }
