@@ -33,6 +33,10 @@ tester.run('valid-template-root', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template lang="pug"></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template>\n    <div>abc</div>\n</template>'
     },
     {
