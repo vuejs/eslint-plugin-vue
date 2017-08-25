@@ -17,7 +17,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: 'vue-eslint-parser',
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2015, sourceType: 'module' }
 })
 
 ruleTester.run('no-multi-spaces', rule, {
@@ -40,7 +40,11 @@ ruleTester.run('no-multi-spaces', rule, {
     '<template><div v-for="i in b">{{ i }}</div></template>',
     '<template><div v-for=" i in b ">{{ i }}</div></template>',
     '<template><div :test="`           `"> {{ a }} </div></template>',
-    '<template><div :test="`           `">          \n        {{ a }} </div></template>'
+    '<template><div :test="`           `">          \n        {{ a }} </div></template>',
+    {
+      filename: 'test.js',
+      code: 'export default { }'
+    }
   ],
   invalid: [
     {
