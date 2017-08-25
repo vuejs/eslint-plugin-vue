@@ -82,6 +82,10 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template v-for="x of list">foo<div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x of list"><div v-for="foo of x" :key="foo"></div></template></div></template>'
     }
   ],
   invalid: [
@@ -179,6 +183,11 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       code: '<template><div><template v-for="xin list"><div></div></template></div></template>',
       errors: ["'v-for' directives require that attribute value."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-for="x of list"><div v-for="foo of y" :key="foo"></div></template></div></template>',
+      errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."]
     }
   ]
 })
