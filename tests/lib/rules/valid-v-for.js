@@ -82,6 +82,10 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template v-for="x of list">foo<div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="x of list"><div v-for="foo of x" :key="foo"></div></template></template>'
     }
   ],
   invalid: [
