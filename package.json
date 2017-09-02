@@ -4,9 +4,8 @@
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
-    "start": "npm run test:simple -- --watch --growl",
-    "test:base": "mocha \"tests/lib/**/*.js\"",
-    "test:simple": "npm run test:base -- --reporter dot",
+    "start": "npm run test:base -- --watch --growl",
+    "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "lint": "eslint .",
     "pretest": "npm run lint",
