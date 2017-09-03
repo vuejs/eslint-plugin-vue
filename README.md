@@ -128,8 +128,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>`. |
 |  | [order-in-components](./docs/rules/order-in-components.md) | Keep order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements. |
+|  | [require-default-prop](./docs/rules/require-default-prop.md) | Require default value for props |
 |  | [require-prop-types](./docs/rules/require-prop-types.md) | Prop definitions should be detailed |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives. |
+|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template. |
 
 
 ### Stylistic Issues
@@ -140,6 +142,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes. |
 | :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style. |
 |  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | Define the number of attributes allows per line |
+| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations. |
 | :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | Requires specific casing for the name property in Vue components |
 | :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | This rule warns about the usage of extra whitespaces between attributes |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style. |
