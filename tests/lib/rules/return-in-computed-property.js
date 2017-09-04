@@ -237,6 +237,25 @@ ruleTester.run('return-in-computed-property', rule, {
         message: 'Expected to return a value in "foo" computed property.',
         line: 4
       }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        // @vue/component
+        export default {
+          computed: {
+              my_FALSE_test() {
+                  let aa = 2;
+                  this.my_id = aa;
+              }
+          }
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Expected to return a value in "my_FALSE_test" computed property.',
+        line: 5
+      }]
     }
   ]
 })
