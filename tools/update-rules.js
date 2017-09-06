@@ -76,7 +76,7 @@ ${
       const name = entry[0]
       const meta = entry[1].meta
       const link = `[${name}](./docs/rules/${name}.md)`
-      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./rules/${id}.md)`).join(', ') || '(no replacement)'
+      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') || '(no replacement)'
       return `| ${link} | ${replacedBy} |`
     })
     .join('\n')
