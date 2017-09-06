@@ -38,7 +38,7 @@ Default is set to `never`.
 </template>
 ```
 
-:-1: Examples of **incorrect** code`:
+:-1: Examples of **incorrect** code:
 
 ```html
 <template>
@@ -50,22 +50,22 @@ Default is set to `never`.
 
 ### `"never"` - Never use expresions that contain `this` keyword in expressions
 
-:+1: Examples of **correct** code`:
-
-```html
-<template>
-  <div :class="{'show': this.showFoo}">
-    {{ this.foo }}
-  </div>
-</template>
-```
-
-:-1: Examples of **incorrect** code`:
+:+1: Examples of **correct** code:
 
 ```html
 <template>
   <div :class="{'show': showFoo}">
     {{ foo }}
+  </div>
+</template>
+```
+
+:-1: Examples of **incorrect** code:
+
+```html
+<template>
+  <div :class="{'show': this.showFoo}">
+    {{ this.foo }}
   </div>
 </template>
 ```
