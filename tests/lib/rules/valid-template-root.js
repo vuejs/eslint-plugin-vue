@@ -70,6 +70,10 @@ tester.run('valid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template><table><custom-thead></custom-thead></table></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template lang="pug">test</template>'
     }
   ],
   invalid: [
