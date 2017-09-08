@@ -1,4 +1,4 @@
-# enforce usage of `this` in template. (this-in-template)
+# enforce usage of `this` in template (this-in-template)
 
 ## :book: Rule Details
 

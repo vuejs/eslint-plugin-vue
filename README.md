@@ -94,7 +94,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 |  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
-|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | Prevent overwrite reserved keys. |
+|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
@@ -128,10 +128,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
-|  | [require-default-prop](./docs/rules/require-default-prop.md) | Require default value for props |
+|  | [require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
 |  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
-|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template. |
+|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
 
 ### Stylistic Issues
@@ -141,10 +141,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 | :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
-|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | Define the number of attributes allows per line |
-| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations. |
+|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
+| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
 | :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
-| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | This rule warns about the usage of extra whitespaces between attributes |
+| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
 
@@ -153,7 +153,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :white_check_mark: | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused. |
+| :white_check_mark: | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
 
 ### Deprecated
 
