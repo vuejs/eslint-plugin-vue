@@ -111,8 +111,19 @@ fs.writeFileSync(
   recommendedRulesContent
 )
 
-// Update the header of rule documents.
+/*
+ * The pattern to match document header.
+ * The header is one title line and zero or more unordered list items.
+ * E.g.
+ *
+ * # description
+ * - a note. (there are 3 kinds of notes: recommended, deprecated, and autofixable)
+ * - another note.
+ *
+ */
 const headerPattern = /^#[^\n]*\n+(?:- .+\n)*\n*/
+
+// Update the header of rule documents.
 const docsRoot = path.resolve(__dirname, '../docs/rules')
 for (const rule of rules) {
   const ruleId = rule[0]
