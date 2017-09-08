@@ -122,6 +122,12 @@ function invalidTests (ext) {
     },
     {
       filename: `test.${ext}`,
+      code: `Vue.mixin({})`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
       code: `
         // @vue/component
         export default { }

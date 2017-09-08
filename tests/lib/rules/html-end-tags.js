@@ -49,21 +49,24 @@ tester.run('html-end-tags', rule, {
     }
   ],
   invalid: [
-        // {
-        //     filename: "test.vue",
-        //     code: "<template><div><hr></hr></div></template>",
-        //     errors: ["'<hr>' should not have end tag."],
-        // },
-        // {
-        //     filename: "test.vue",
-        //     code: "<template><div><img></img></div></template>",
-        //     errors: ["'<img>' should not have end tag."],
-        // },
-        // {
-        //     filename: "test.vue",
-        //     code: "<template><div><input></input></div></template>",
-        //     errors: ["'<input>' should not have end tag."],
-        // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template><div><hr></hr></div></template>',
+    //   output: '<template><div><hr></template>',
+    //   errors: ["'<hr>' should not have end tag."]
+    // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template><div><img></img></div></template>',
+    //   output: '<template><div><img></template>',
+    //   errors: ["'<img>' should not have end tag."]
+    // },
+    // {
+    //   filename: 'test.vue',
+    //   code: '<template><div><input></input></div></template>',
+    //   output: '<template><div><input></template>',
+    //   errors: ["'<input>' should not have end tag."]
+    // },
     {
       filename: 'test.vue',
       code: '<template><div><div></div></template>',

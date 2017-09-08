@@ -4,12 +4,12 @@ machine:
 
 dependencies:
   pre:
-    - nvm install 7
+    - nvm install 6
     - nvm install 8
 
 test:
   override:
-    - npm test
+    - nvm use 4 && npm test
     - nvm use 6 && npm test
-    - nvm use 7 && npm test
     - nvm use 8 && npm test
+    - nvm use 8 && npm i eslint@3.18.0 --no-save && npm run -s test:base

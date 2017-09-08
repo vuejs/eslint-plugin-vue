@@ -1,12 +1,11 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "3.11.0",
+  "version": "3.13.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
-    "start": "npm run test:simple -- --watch --growl",
-    "test:base": "mocha \"tests/lib/**/*.js\"",
-    "test:simple": "npm run test:base -- --reporter dot",
+    "start": "npm run test:base -- --watch --growl",
+    "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "pretest": "npm run lint",
@@ -45,7 +44,7 @@
   },
   "dependencies": {
     "requireindex": "^1.1.0",
-    "vue-eslint-parser": "2.0.0-beta.6"
+    "vue-eslint-parser": "^2.0.1-beta.0"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",

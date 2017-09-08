@@ -94,7 +94,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |:---|:--------|:------------|
 |  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
-|  | [no-reservered-keys](./docs/rules/no-reservered-keys.md) | disallow overwrite reserved keys |
+|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | Prevent overwrite reserved keys. |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
@@ -123,13 +123,15 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 |  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplicate attributes |
+|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
 |  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
+|  | [require-default-prop](./docs/rules/require-default-prop.md) | Require default value for props |
 |  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
+|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template. |
 
 
 ### Stylistic Issues
@@ -139,7 +141,10 @@ The `--fix` option on the command line automatically fixes problems reported by 
 | :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 | :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
+|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | Define the number of attributes allows per line |
+| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations. |
 | :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
+| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | This rule warns about the usage of extra whitespaces between attributes |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
 
@@ -157,21 +162,22 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [html-no-self-closing](./rules/html-no-self-closing.md) | [html-self-closing](./rules/html-self-closing.md) |
-| [no-invalid-template-root](./rules/no-invalid-template-root.md) | [valid-template-root](./rules/valid-template-root.md) |
-| [no-invalid-v-bind](./rules/no-invalid-v-bind.md) | [valid-v-bind](./rules/valid-v-bind.md) |
-| [no-invalid-v-cloak](./rules/no-invalid-v-cloak.md) | [valid-v-cloak](./rules/valid-v-cloak.md) |
-| [no-invalid-v-else-if](./rules/no-invalid-v-else-if.md) | [valid-v-else-if](./rules/valid-v-else-if.md) |
-| [no-invalid-v-else](./rules/no-invalid-v-else.md) | [valid-v-else](./rules/valid-v-else.md) |
-| [no-invalid-v-for](./rules/no-invalid-v-for.md) | [valid-v-for](./rules/valid-v-for.md) |
-| [no-invalid-v-html](./rules/no-invalid-v-html.md) | [valid-v-html](./rules/valid-v-html.md) |
-| [no-invalid-v-if](./rules/no-invalid-v-if.md) | [valid-v-if](./rules/valid-v-if.md) |
-| [no-invalid-v-model](./rules/no-invalid-v-model.md) | [valid-v-model](./rules/valid-v-model.md) |
-| [no-invalid-v-on](./rules/no-invalid-v-on.md) | [valid-v-on](./rules/valid-v-on.md) |
-| [no-invalid-v-once](./rules/no-invalid-v-once.md) | [valid-v-once](./rules/valid-v-once.md) |
-| [no-invalid-v-pre](./rules/no-invalid-v-pre.md) | [valid-v-pre](./rules/valid-v-pre.md) |
-| [no-invalid-v-show](./rules/no-invalid-v-show.md) | [valid-v-show](./rules/valid-v-show.md) |
-| [no-invalid-v-text](./rules/no-invalid-v-text.md) | [valid-v-text](./rules/valid-v-text.md) |
+| [html-no-self-closing](./docs/rules/html-no-self-closing.md) | [html-self-closing](./docs/rules/html-self-closing.md) |
+| [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | [valid-template-root](./docs/rules/valid-template-root.md) |
+| [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | [valid-v-bind](./docs/rules/valid-v-bind.md) |
+| [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | [valid-v-cloak](./docs/rules/valid-v-cloak.md) |
+| [no-invalid-v-else-if](./docs/rules/no-invalid-v-else-if.md) | [valid-v-else-if](./docs/rules/valid-v-else-if.md) |
+| [no-invalid-v-else](./docs/rules/no-invalid-v-else.md) | [valid-v-else](./docs/rules/valid-v-else.md) |
+| [no-invalid-v-for](./docs/rules/no-invalid-v-for.md) | [valid-v-for](./docs/rules/valid-v-for.md) |
+| [no-invalid-v-html](./docs/rules/no-invalid-v-html.md) | [valid-v-html](./docs/rules/valid-v-html.md) |
+| [no-invalid-v-if](./docs/rules/no-invalid-v-if.md) | [valid-v-if](./docs/rules/valid-v-if.md) |
+| [no-invalid-v-model](./docs/rules/no-invalid-v-model.md) | [valid-v-model](./docs/rules/valid-v-model.md) |
+| [no-invalid-v-on](./docs/rules/no-invalid-v-on.md) | [valid-v-on](./docs/rules/valid-v-on.md) |
+| [no-invalid-v-once](./docs/rules/no-invalid-v-once.md) | [valid-v-once](./docs/rules/valid-v-once.md) |
+| [no-invalid-v-pre](./docs/rules/no-invalid-v-pre.md) | [valid-v-pre](./docs/rules/valid-v-pre.md) |
+| [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | [valid-v-show](./docs/rules/valid-v-show.md) |
+| [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | [valid-v-text](./docs/rules/valid-v-text.md) |
+| [no-reservered-keys](./docs/rules/no-reservered-keys.md) | [no-reserved-keys](./docs/rules/no-reserved-keys.md) |
 
 <!--RULES_TABLE_END-->
 
