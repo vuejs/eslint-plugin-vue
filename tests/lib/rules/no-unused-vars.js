@@ -30,6 +30,12 @@ tester.run('no-unused-vars', rule, {
       code: '<template><ol v-for="i in 5"><li :prop="i"></li></ol></template>'
     },
     {
+      code: '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{j}}</comp></template>'
+    },
+    {
+      code: '<template><ol v-for="i in data"><li v-for="f in i">{{ f.bar.baz }}</li></ol></template>'
+    },
+    {
       code: '<template scope="props">{{props}}</template>'
     },
     {
@@ -44,6 +50,14 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template scope="props"></template>',
       errors: ['\'props\' is defined but never used.']
+    },
+    {
+      code: '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></template>',
+      errors: ['\'j\' is defined but never used.']
+    },
+    {
+      code: '<template><ol v-for="i in data"><li v-for="f in i"></li></ol></template>',
+      errors: ['\'f\' is defined but never used.']
     }
   ]
 })
