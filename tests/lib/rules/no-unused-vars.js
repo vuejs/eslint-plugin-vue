@@ -24,22 +24,24 @@ const tester = new RuleTester({
 tester.run('no-unused-vars', rule, {
   valid: [
     {
-      filename: 'test.vue',
       code: '<template><ol v-for="i in 5"><li>{{i}}</li></ol></template>'
     },
     {
-      filename: 'test.vue',
+      code: '<template><ol v-for="i in 5"><li :prop="i"></li></ol></template>'
+    },
+    {
       code: '<template scope="props">{{props}}</template>'
+    },
+    {
+      code: '<template scope="props"><span v-if="props"></span></template>'
     }
   ],
   invalid: [
     {
-      filename: 'test.vue',
-      code: '<template><ol v-for="i in 5"></ol></template>',
+      code: '<template><ol v-for="i in 5"><li></li></ol></template>',
       errors: ['\'i\' is defined but never used.']
     },
     {
-      filename: 'test.vue',
       code: '<template scope="props"></template>',
       errors: ['\'props\' is defined but never used.']
     }
