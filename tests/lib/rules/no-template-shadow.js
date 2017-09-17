@@ -31,6 +31,7 @@ ruleTester.run('no-template-shadow', rule, {
     '<template><div v-for="i in 5"></div></template>',
     '<template><div v-for="i in 5"><div v-for="b in 5"></div></div></template>',
     '<template><div v-for="i in 5"></div><div v-for="i in 5"></div></template>',
+    '<template> <ul v-for="i in 5"> <li> <span v-for="j in 10">{{i}},{{j}}</span> </li> </ul> </template>',
     {
       filename: 'test.vue',
       code: `<template>
