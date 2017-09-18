@@ -1,4 +1,4 @@
-# Enforce quotes style of HTML attributes (html-quotes)
+# enforce quotes style of HTML attributes (html-quotes)
 
 You can choose quotes of HTML attributes from:
 

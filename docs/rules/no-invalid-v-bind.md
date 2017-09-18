@@ -1,4 +1,6 @@
-# Disallow invalid `v-bind` directives (no-invalid-v-bind)
+# disallow invalid `v-bind` directives (no-invalid-v-bind)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-bind](valid-v-bind.md) rule.
 
 This rule checks whether every `v-bind` directive is valid.
 

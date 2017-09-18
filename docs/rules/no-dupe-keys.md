@@ -1,4 +1,4 @@
-# Prevents duplication of field names (no-dupe-keys)
+# disallow duplication of field names (no-dupe-keys)
 
 This rule prevents to use duplicated names.
 

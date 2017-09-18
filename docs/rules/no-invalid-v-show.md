@@ -1,4 +1,6 @@
-# Disallow invalid `v-show` directives (no-invalid-v-show)
+# disallow invalid `v-show` directives (no-invalid-v-show)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-show](valid-v-show.md) rule.
 
 This rule checks whether every `v-show` directive is valid.
 

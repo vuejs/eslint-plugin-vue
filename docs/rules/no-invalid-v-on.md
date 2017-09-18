@@ -1,4 +1,6 @@
-# Disallow invalid `v-on` directives (no-invalid-v-on)
+# disallow invalid `v-on` directives (no-invalid-v-on)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-on](valid-v-on.md) rule.
 
 This rule checks whether every `v-on` directive is valid.
 

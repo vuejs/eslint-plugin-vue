@@ -1,4 +1,6 @@
-# Disallow invalid `v-once` directives (no-invalid-v-once)
+# disallow invalid `v-once` directives (no-invalid-v-once)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-once](valid-v-once.md) rule.
 
 This rule checks whether every `v-once` directive is valid.
 

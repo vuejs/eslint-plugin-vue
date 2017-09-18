@@ -1,4 +1,6 @@
-# Prevent overwrite reserved keys (no-reservered-keys)
+# disallow overwriting reserved keys (no-reservered-keys)
+
+- :warning: This rule was **deprecated** and replaced by [no-reserved-keys](no-reserved-keys.md) rule.
 
 This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
 

@@ -1,4 +1,4 @@
-# Disallow duplicate arguments (no-duplicate-attributes)
+# disallow duplication of attributes (no-duplicate-attributes)
 
 When duplicate arguments exist, only the last one is valid.
 It's possibly mistakes.

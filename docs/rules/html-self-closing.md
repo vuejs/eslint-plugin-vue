@@ -1,4 +1,6 @@
-# Enforce self-closing style (html-self-closing)
+# enforce self-closing style (html-self-closing)
+
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
 

@@ -1,4 +1,4 @@
-# Define the number of attributes allows per line (max-attributes-per-line)
+# enforce the maximum number of attributes per line (max-attributes-per-line)
 
 Limits the maximum number of attributes/properties per line to improve readability.
 

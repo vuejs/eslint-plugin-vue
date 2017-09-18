@@ -1,4 +1,6 @@
-# Disallow invalid `v-else-if` directives (no-invalid-v-else-if)
+# disallow invalid `v-else-if` directives (no-invalid-v-else-if)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-else-if](valid-v-else-if.md) rule.
 
 This rule checks whether every `v-else-if` directive is valid.
 

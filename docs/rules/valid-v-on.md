@@ -1,4 +1,6 @@
-# Enforce valid `v-on` directives (valid-v-on)
+# enforce valid `v-on` directives (valid-v-on)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 This rule checks whether every `v-on` directive is valid.
 

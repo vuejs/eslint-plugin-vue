@@ -1,4 +1,4 @@
-# Enforces props default values to be valid (require-valid-default-prop)
+# enforce props default values to be valid (require-valid-default-prop)
 
 This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
 

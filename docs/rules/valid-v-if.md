@@ -1,4 +1,6 @@
-# Enforce valid `v-if` directives (valid-v-if)
+# enforce valid `v-if` directives (valid-v-if)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 This rule checks whether every `v-if` directive is valid.
 

@@ -1,4 +1,6 @@
-# Disallow invalid `v-model` directives (no-invalid-v-model)
+# disallow invalid `v-model` directives (no-invalid-v-model)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-model](valid-v-model.md) rule.
 
 This rule checks whether every `v-model` directive is valid.
 

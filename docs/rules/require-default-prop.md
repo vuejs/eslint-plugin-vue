@@ -1,4 +1,4 @@
-# Require default value for props (require-default-prop)
+# require default value for props (require-default-prop)
 
 This rule requires default value to be set for each props that are not marked as `required`.
 

@@ -1,6 +1,6 @@
-# Enforce end tag style (html-end-tags)
+# enforce end tag style (html-end-tags)
 
-- :wrench: This rule is fixable with `eslint --fix` command.
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 This rule enforce the way of end tags.
 

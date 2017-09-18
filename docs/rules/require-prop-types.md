@@ -1,4 +1,4 @@
-# Prop definitions should be detailed (require-prop-types)
+# require type definitions in props (require-prop-types)
 
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 

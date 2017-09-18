@@ -110,3 +110,32 @@ fs.writeFileSync(
   recommendedRulesFile,
   recommendedRulesContent
 )
+
+/*
+ * The pattern to match document header.
+ * The header is one title line and zero or more unordered list items.
+ * E.g.
+ *
+ * # description
+ * - a note. (there are 3 kinds of notes: recommended, deprecated, and autofixable)
+ * - another note.
+ *
+ */
+const headerPattern = /^#[^\n]*\n+(?:- .+\n)*\n*/
+
+// Update the header of rule documents.
+const docsRoot = path.resolve(__dirname, '../docs/rules')
+for (const rule of rules) {
+  const ruleId = rule[0]
+  const meta = rule[1].meta
+  const filePath = path.join(docsRoot, `${ruleId}.md`)
+  const recommended = meta.docs.recommended ? `- ${STAR} The \`"extends": "plugin:vue/recommended"\` property in a configuration file enables this rule.\n` : ''
+  const deprecated = meta.deprecated ? `- ${WARN} This rule was **deprecated** and replaced by ${meta.docs.replacedBy.map(id => `[${id}](${id}.md) rule`).join(', ')}.\n` : ''
+  const autofix = meta.fixable ? `- ${PEN} The \`--fix\` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.\n` : ''
+  const header = `# ${meta.docs.description} (${ruleId})\n${recommended || deprecated || autofix ? '\n' : ''}${recommended}${deprecated}${autofix}\n`
+
+  fs.writeFileSync(
+    filePath,
+    fs.readFileSync(filePath, 'utf8').replace(headerPattern, header)
+  )
+}

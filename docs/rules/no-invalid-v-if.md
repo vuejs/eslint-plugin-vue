@@ -1,4 +1,6 @@
-# Disallow invalid `v-if` directives (no-invalid-v-if)
+# disallow invalid `v-if` directives (no-invalid-v-if)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-if](valid-v-if.md) rule.
 
 This rule checks whether every `v-if` directive is valid.
 

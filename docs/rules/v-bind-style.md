@@ -1,6 +1,6 @@
-# Enforce v-bind directive style (v-bind-style)
+# enforce `v-bind` directive style (v-bind-style)
 
-- :wrench: This rule is fixable with `eslint --fix` command.
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 This rule enforces `v-bind` directive style which you should use shorthand or long form.
 

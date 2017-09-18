@@ -1,4 +1,6 @@
-# Disallow invalid `v-text` directives (no-invalid-v-text)
+# disallow invalid `v-text` directives (no-invalid-v-text)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-text](valid-v-text.md) rule.
 
 This rule checks whether every `v-text` directive is valid.
 

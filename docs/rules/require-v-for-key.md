@@ -1,4 +1,6 @@
-# Require `v-bind:key` with `v-for` directives (require-v-for-key)
+# require `v-bind:key` with `v-for` directives (require-v-for-key)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 When `v-for` is written on custom components, it requires `v-bind:key` at the same time.
 On other elements, it's better that `v-bind:key` is written as well.

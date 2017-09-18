@@ -1,4 +1,6 @@
-# Enforce valid `v-else` directives (valid-v-else)
+# enforce valid `v-else` directives (valid-v-else)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 This rule checks whether every `v-else` directive is valid.
 

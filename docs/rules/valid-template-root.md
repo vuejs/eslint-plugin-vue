@@ -1,4 +1,6 @@
-# Enforce valid template root (valid-root-element)
+# enforce valid template root (valid-template-root)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 This rule checks whether every template root is valid.
 

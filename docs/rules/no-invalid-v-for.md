@@ -1,4 +1,6 @@
-# Disallow invalid `v-for` directives (no-invalid-v-for)
+# disallow invalid `v-for` directives (no-invalid-v-for)
+
+- :warning: This rule was **deprecated** and replaced by [valid-v-for](valid-v-for.md) rule.
 
 This rule checks whether every `v-for` directive is valid.
 

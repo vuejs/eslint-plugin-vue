@@ -1,4 +1,6 @@
-# Disallow confusing `v-for` and `v-if` on the same element (no-confusing-v-for-v-if)
+# disallow confusing `v-for` and `v-if` on the same element (no-confusing-v-for-v-if)
+
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
 
 > When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately.
 >

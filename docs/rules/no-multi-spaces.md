@@ -1,4 +1,6 @@
-# This rule warns about the usage of extra whitespaces between attributes (no-multi-spaces)
+# disallow multiple spaces (no-multi-spaces)
+
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
 
