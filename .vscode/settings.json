@@ -1,4 +1,3 @@
 {
-    "editor.tabSize": 2,
-    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
+    "editor.tabSize": 2
 }
