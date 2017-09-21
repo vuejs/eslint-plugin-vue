@@ -869,6 +869,15 @@ tester.run('html-indent', rule, {
           ></div>
       </template>
     `,
+    unIndent`
+      <template>
+          {{
+              a,
+              b,
+              c
+          }}
+      </template>
+    `,
 
     // SwitchStatement, SwitchCase
     unIndent`
@@ -3336,6 +3345,31 @@ tester.run('html-indent', rule, {
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 18 }
+      ]
+    },
+    {
+      code: unIndent`
+        <template>
+            {{
+            a,
+            b,
+            c
+            }}
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            {{
+                a,
+                b,
+                c
+            }}
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 3 },
+        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 4 },
+        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 5 }
       ]
     },
 
