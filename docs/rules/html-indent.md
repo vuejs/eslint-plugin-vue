@@ -58,7 +58,6 @@ This rule enforces a consistent indentation style in `<template>`. The default s
     "vue/html-indent": ["error", type, {
         "attribute": 1,
         "closeBracket": 0,
-        "switchCase": 0,
         "ignores": []
     }]
 }
