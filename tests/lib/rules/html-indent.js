@@ -1548,6 +1548,34 @@ tester.run('html-indent', rule, {
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 }
       ]
     },
+    // Mix of texts and mustaches
+    {
+      code: unIndent`
+        <template>
+          aaa
+          {{bbb}}
+          ccc {{
+          ddd
+          }}
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            aaa
+            {{bbb}}
+            ccc {{
+                ddd
+            }}
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 4 },
+        { message: 'Expected indentation of 8 spaces but found 2 spaces.', line: 5 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 6 }
+      ]
+    },
 
     // ArrayExpression
     {
