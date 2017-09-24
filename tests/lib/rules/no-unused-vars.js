@@ -58,6 +58,10 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><ol v-for="i in data"><li v-for="f in i"></li></ol></template>',
       errors: ['\'f\' is defined but never used.']
+    },
+    {
+      code: '<template><div v-for="(v, i, c) in foo"></div></template>',
+      errors: ['\'v\' is defined but never used.', '\'i\' is defined but never used.', '\'c\' is defined but never used.']
     }
   ]
 })
