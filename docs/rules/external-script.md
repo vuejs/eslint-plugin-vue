@@ -28,7 +28,7 @@ The rule is set to disallow (`"never"`) the external files by default.
 'vue/external-script': [2, 'always'|'never']
 ```
 
-### `"never"` - Disallow exteranl script files.
+### `"never"` - Disallow external script files.
 
 :+1: Examples of **correct** code`:
 
