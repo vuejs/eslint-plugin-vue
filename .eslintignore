@@ -1,4 +1,4 @@
 node_modules
-lib/recommended-rules.js
+lib/*-rules.js
 coverage
 .nyc_output
