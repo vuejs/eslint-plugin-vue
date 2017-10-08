@@ -65,7 +65,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 }
 ```
 
-- `type` (`number | "tab"`) ... The type of indentation. Default is `4`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
+- `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `closeBracket` (`integer`) ... The multiplier of indentation for right brackets. Default is `0`.
 - `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.

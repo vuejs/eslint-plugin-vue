@@ -1,7 +1,5 @@
 # disallow mustaches in `<textarea>` (no-textarea-mustache)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 > Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
 >
 > https://vuejs.org/v2/guide/forms.html#Multiline-text

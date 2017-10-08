@@ -73,18 +73,6 @@ function hasMetaDocsCategory (metaPropertyNode) {
 }
 
 /**
- * Whether this `meta` ObjectExpression has a `docs.recommended` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs.recommended` property exists.
- */
-function hasMetaDocsRecommended (metaPropertyNode) {
-  const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
-
-  return metaDocs && getPropertyFromObject('recommended', metaDocs.value)
-}
-
-/**
  * Whether this `meta` ObjectExpression has a `schema` property defined or not.
  *
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
@@ -125,11 +113,6 @@ function checkMetaValidity (context, exportsNode) {
     return
   }
 
-  if (!hasMetaDocsRecommended(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.recommended property.')
-    return
-  }
-
   if (!hasMetaSchema(metaProperty)) {
     context.report(metaProperty, 'Rule is missing a meta.schema property.')
   }
@@ -153,8 +136,7 @@ module.exports = {
   meta: {
     docs: {
       description: 'enforce correct use of `meta` property in core rules',
-      category: 'Internal',
-      recommended: false
+      category: 'Internal'
     },
 
     schema: []

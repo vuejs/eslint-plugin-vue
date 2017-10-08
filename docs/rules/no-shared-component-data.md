@@ -1,7 +1,5 @@
 # enforce component's data property to be a function (no-shared-component-data)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 When using the data property on a component (i.e. anywhere except on `new Vue`), the value must be a function that returns an object.
 
 ## :book: Rule Details

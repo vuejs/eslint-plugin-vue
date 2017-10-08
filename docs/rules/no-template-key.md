@@ -1,7 +1,5 @@
 # disallow `key` attribute on `<template>` (no-template-key)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 Vue.js disallows `key` attribute on `<template>` elements.
 
 ## :book: Rule Details

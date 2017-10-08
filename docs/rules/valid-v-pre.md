@@ -1,7 +1,5 @@
 # enforce valid `v-pre` directives (valid-v-pre)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-pre` directive is valid.
 
 ## :book: Rule Details

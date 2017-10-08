@@ -1,7 +1,5 @@
 # require type definitions in props (require-prop-types)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 
 ## :book: Rule Details

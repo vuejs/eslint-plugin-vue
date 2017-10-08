@@ -1,7 +1,5 @@
 # require default value for props (require-default-prop)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule requires default value to be set for each props that are not marked as `required`.
 
 ## Rule Details

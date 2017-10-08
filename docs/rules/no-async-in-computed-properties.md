@@ -1,7 +1,5 @@
 # disallow asynchronous actions in computed properties (no-async-in-computed-properties)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 Computed properties should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
 If you need async computed properties you might want to consider using additional plugin [vue-async-computed]
 

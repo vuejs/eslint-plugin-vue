@@ -1,7 +1,5 @@
 # enforce that a return statement is present in computed property (return-in-computed-property)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 ## :book: Rule Details
 
 This rule enforces that a `return` statement is present in `computed` properties.

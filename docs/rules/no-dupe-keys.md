@@ -1,7 +1,5 @@
 # disallow duplication of field names (no-dupe-keys)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule prevents to use duplicated names.
 
 ## :book: Rule Details

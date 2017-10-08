@@ -1,7 +1,5 @@
 # enforce render function to always return value (require-render-return)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule aims to enforce render function to always return value
 
 ## :book: Rule Details
