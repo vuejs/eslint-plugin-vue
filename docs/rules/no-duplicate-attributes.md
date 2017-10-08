@@ -1,5 +1,7 @@
 # disallow duplication of attributes (no-duplicate-attributes)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 When duplicate arguments exist, only the last one is valid.
 It's possibly mistakes.
 
@@ -33,7 +35,7 @@ This rule reports duplicate attributes.
 ```
 'vue/no-duplicate-attributes': [2, {
   allowCoexistClass: Boolean // default: true
-  allowCoexistStyle: Boolean, // default: true
+  allowCoexistStyle: Boolean, // default: false
 }]
 ```
 

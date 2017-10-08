@@ -1,5 +1,7 @@
 # enforce usage of `this` in template (this-in-template)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 ## :book: Rule Details
 
 :-1: Examples of **incorrect** code for this rule:

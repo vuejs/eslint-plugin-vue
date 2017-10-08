@@ -1,5 +1,7 @@
 # enforce order of properties in components (order-in-components)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 This rule makes sure you keep declared order of properties in components.
 
 ## :book: Rule Details

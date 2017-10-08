@@ -1,5 +1,7 @@
 # disallow side effects in computed properties (no-side-effects-in-computed-properties)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 It is considered a very bad practice to introduce side effects inside computed properties. It makes the code not predictable and hard to understand.
 
 

@@ -1,5 +1,7 @@
 # enforce props default values to be valid (require-valid-default-prop)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
 
 ## :book: Rule Details

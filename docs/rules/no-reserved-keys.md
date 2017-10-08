@@ -1,5 +1,7 @@
 # disallow overwriting reserved keys (no-reserved-keys)
 
+- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
+
 This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
 
 ## Rule Details

@@ -86,7 +86,11 @@ ${
 const recommendedRules = rules.reduce((obj, entry) => {
   const name = `vue/${entry[0]}`
   const recommended = entry[1].meta.docs.recommended
-  const status = recommended ? 'error' : 'off'
+  const status = recommended
+    ? recommended === true
+      ? 'error'
+      : recommended
+    : 'off'
   obj[name] = status
   return obj
 }, {})

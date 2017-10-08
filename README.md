@@ -92,15 +92,15 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
+| :white_check_mark: | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
 | :white_check_mark: | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
-|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
-|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
-|  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
+| :white_check_mark: | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
+| :white_check_mark: | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
+| :white_check_mark: | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
-|  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
-|  | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
-|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
+| :white_check_mark: | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
+| :white_check_mark: | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
+| :white_check_mark: | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
 | :white_check_mark: | [valid-template-root](./docs/rules/valid-template-root.md) | enforce valid template root |
 | :white_check_mark: | [valid-v-bind](./docs/rules/valid-v-bind.md) | enforce valid `v-bind` directives |
 | :white_check_mark: | [valid-v-cloak](./docs/rules/valid-v-cloak.md) | enforce valid `v-cloak` directives |
@@ -121,34 +121,34 @@ The `--fix` option on the command line automatically fixes problems reported by 
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
-|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
+| :white_check_mark::wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
+| :white_check_mark: | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
 | :white_check_mark: | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
-|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
+| :white_check_mark: | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
+| :white_check_mark: | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 | :white_check_mark: | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
-|  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
+| :white_check_mark: | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 | :white_check_mark: | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
-|  | [require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
-|  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
+| :white_check_mark: | [require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
+| :white_check_mark: | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :white_check_mark: | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
-|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
+| :white_check_mark: | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
 
 ### Stylistic Issues
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :white_check_mark::wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
 | :wrench: | [html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
-| :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
-|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
-| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
-| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
-| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
-| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
-| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
+| :white_check_mark::wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
+| :white_check_mark: | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
+| :white_check_mark::wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
+| :white_check_mark::wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
+| :white_check_mark::wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
+| :white_check_mark::wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
+| :white_check_mark::wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
 
 
 ### Variables
