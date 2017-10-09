@@ -75,16 +75,14 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 ## :gear: Configs
 
 This plugin provides two predefined configs:
-- `plugin:vue/base` - contains necessary settings for this plugin to work properly
-- `plugin:vue/recommended` - extends base config with recommended rules (the ones with check mark :white_check_mark: in the table below)
+- `plugin:vue/base` - Settings and rules to enable correct ESLint parsing
+- `plugin:vue/essential` - Above, plus rules to prevent errors or unintended behavior
+- `plugin:vue/strongly-recommended` - Above, plus rules to considerably improve code readability and/or dev experience
+- `plugin:vue/recommended` - Above, plus rules to enforce subjective community defaults to ensure consistency
 
 ## :bulb: Rules
 
-Rules are grouped by category to help you understand their purpose.
-
-No rules are enabled by `plugin:vue/base` config. The `plugin:vue/recommended` config enables rules that report common problems, which have a check mark :white_check_mark: below.
-
-The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
+Rules are grouped by priority to help you understand their purpose. The `--fix` option on the command line automatically fixes problems reported by rules which have a wrench :wrench: below.
 
 <!--RULES_TABLE_START-->
 
