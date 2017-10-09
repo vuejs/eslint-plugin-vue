@@ -45,11 +45,11 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ```
 {
-  "vue/max-attributes-per-line": [{
+  "vue/max-attributes-per-line": [2, {
     "singleline": 3,
     "multiline": {
-      max: 1,
-      allowFirstLine: false
+      "max": 1,
+      "allowFirstLine": false
     }
   }]
 }
