@@ -16,7 +16,7 @@ This rule has options which specify self-closing style for each context.
 
 ```json
 {
-    "html-self-closing": ["error", {
+    "html-self-closing": [2, {
         "html": {
             "normal": "never",
             "void": "never",
