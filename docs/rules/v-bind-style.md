@@ -9,41 +9,25 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-bind:foo="foo"></div>
-    </div>
-</template>
+<div v-bind:foo="bar"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div :foo="foo"></div>
-    </div>
-</template>
+<div :foo="bar"/>
 ```
 
 :-1: Examples of **incorrect** code for this rule with `"longform"` option:
 
 ```html
-<template>
-    <div>
-        <div :foo="foo"></div>
-    </div>
-</template>
+<div :foo="bar"/>
 ```
 
 :+1: Examples of **correct** code for this rule with `"longform"` option:
 
 ```html
-<template>
-    <div>
-        <div v-bind:foo="foo"></div>
-    </div>
-</template>
+<div v-bind:foo="bar"/>
 ```
 
 ## :wrench: Options

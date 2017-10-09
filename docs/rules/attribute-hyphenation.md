@@ -15,21 +15,13 @@ Default casing is set to `always`
 :+1: Examples of **correct** code`:
 
 ```html
-<template>
-  <foo my-prop="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent my-prop="prop"/>
 ```
 
 :-1: Examples of **incorrect** code`:
 
 ```html
-<template>
-  <foo myProp="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent myProp="prop"/>
 ```
 
 ### `"never"` - Don't use hyphenated name. (It errors on hyphens except `data-` and `aria-`.)
@@ -37,19 +29,11 @@ Default casing is set to `always`
 :+1: Examples of **correct** code`:
 
 ```html
-<template>
-  <foo myProp="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent myProp="prop"/>
 ```
 
 :-1: Examples of **incorrect** code`:
 
 ```html
-<template>
-  <foo my-prop="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent my-prop="prop"/>
 ```

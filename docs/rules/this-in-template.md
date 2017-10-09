@@ -5,17 +5,17 @@
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-     <a :href="this.link">{{this.text}}</a>
-</template>
+<a :href="this.url">
+  {{ this.text }}
+</a>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-     <a :href="link">{{text}}</a>
-</template>
+<a :href="url">
+  {{ text }}
+</a>
 ```
 
 ## :wrench: Options
@@ -26,46 +26,38 @@ Default is set to `never`.
 'vue/this-in-template': [2, 'always'|'never']
 ```
 
-### `"always"` - Always use `this` while accessing properties from vue
+### `"always"` - Always use `this` while accessing properties from Vue
+
+:-1: Examples of **incorrect** code:
+
+```html
+<a :href="url">
+  {{ text }}
+</a>
+```
 
 :+1: Examples of **correct** code`:
 
 ```html
-<template>
-  <div :class="{'show': this.showFoo}">
-    {{ this.foo }}
-  </div>
-</template>
+<a :href="this.url">
+  {{ this.text }}
+</a>
 ```
+
+### `"never"` - Never use `this` keyword in expressions
 
 :-1: Examples of **incorrect** code:
 
 ```html
-<template>
-  <div :class="{'show': showFoo}">
-    {{ foo }}
-  </div>
-</template>
+<a :href="this.url">
+  {{ this.text }}
+</a>
 ```
-
-### `"never"` - Never use expresions that contain `this` keyword in expressions
 
 :+1: Examples of **correct** code:
 
 ```html
-<template>
-  <div :class="{'show': showFoo}">
-    {{ foo }}
-  </div>
-</template>
-```
-
-:-1: Examples of **incorrect** code:
-
-```html
-<template>
-  <div :class="{'show': this.showFoo}">
-    {{ this.foo }}
-  </div>
-</template>
+<a :href="url">
+  {{ text }}
+</a>
 ```

@@ -20,34 +20,26 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <input v-model>
-        <input v-model:aaa="foo">
-        <input v-model.bbb="foo">
-        <input v-model="foo + bar">
-        <div v-model="foo"></div>
-        <div v-for="x in list">
-            <input v-model="x">
-        </div>
-    </div>
-</template>
+<input v-model>
+<input v-model:aaa="foo">
+<input v-model.bbb="foo">
+<input v-model="foo + bar">
+<div v-model="foo"/>
+<div v-for="todo in todos">
+  <input v-model="todo">
+</div>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <input v-model="foo">
-        <input v-model.lazy="foo">
-        <textarea v-model="foo"></textarea>
-        <your-component v-model="foo"></your-component>
-        <div v-for="x in list">
-            <input v-model="x.name">
-        </div>
-    </div>
-</template>
+<input v-model="foo">
+<input v-model.lazy="foo">
+<textarea v-model="foo"/>
+<MyComponent v-model="foo"/>
+<div v-for="todo in todos">
+  <input v-model="todo.name">
+</div>
 ```
 
 ## :wrench: Options

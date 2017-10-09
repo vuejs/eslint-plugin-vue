@@ -14,30 +14,33 @@ There is a configurable number of attributes that are acceptable in one-line cas
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<component lorem="1" ipsum="2" dolor="3" sit="4">
-</component>
+<MyComponent lorem="1" ipsum="2"/>
 
-<component
+<MyComponent
+  lorem="1" ipsum="2"
+/>
+
+<MyComponent
   lorem="1" ipsum="2"
   dolor="3"
-  sit="4"
->
-</component>
+/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<component lorem="1" ipsum="2" dolor="3">
-</component>
+<MyComponent lorem="1"/>
 
-<component
+<MyComponent
+  lorem="1"
+  ipsum="2"
+/>
+
+<MyComponent
   lorem="1"
   ipsum="2"
   dolor="3"
-  sit="4"
->
-</component>
+/>
 ```
 
 ### :wrench:  Options
@@ -55,67 +58,67 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```
 
 #### `allowFirstLine`
+
 For multi-line declarations, defines if allows attributes to be put in the first line. (Default false)
 
 :-1: Example of **incorrect** code for this setting:
+
 ```html
-// [{ "multiline": { "allowFirstLine": false }}]
-<component foo="John" bar="Smith"
-  foobar={5555555}>
-</component>;
+<!-- [{ "multiline": { "allowFirstLine": false }}] -->
+<MyComponent foo="John"
+  bar="Smith"
+/>
 ```
 
 :+1: Example of **correct** code for this setting:
+
 ```html
-// [{ "multiline": { "allowFirstLine": false }}]
-<component
+<!-- [{ "multiline": { "allowFirstLine": false }}] -->
+<MyComponent
   foo="John"
   bar="Smith"
-  foobar={5555555}
-  >
-</component>;
+/>
 ```
 
-
 #### `singleline`
-Number of maximum attributes per line when the opening tag is in a single line. (Default is 3)
+
+Number of maximum attributes per line when the opening tag is in a single line. (Default is 1)
 
 :-1: Example of **incorrect** code for this setting:
 ```html
-// [{"singleline": 2,}]
-<component foo="John" bar="Smith" foobar={5555555}></component>;
+<!-- [{"singleline": 1}] -->
+<MyComponent foo="John" bar="Smith"/>
 ```
 
 :+1: Example of **correct** code for this setting:
 ```html
-// [{"singleline": 3,}]
-<component foo="John" bar="Smith" foobar={5555555}></component>;
+<!-- [{"singleline": 1}] -->
+<MyComponent foo="John"/>
 ```
 
-
 #### `multiline`
+
 Number of maximum attributes per line when a tag is in multiple lines. (Default is 1)
 
 :-1: Example of **incorrect** code for this setting:
+
 ```html
-// [{"multiline": 1}]
-<component foo="John" bar="Smith"
-  foobar={5555555}>
-</component>;
+<!-- [{"multiline": 1}] -->
+<MyComponent
+  foo="John" bar="Smith"
+/>
 ```
 
 :+1: Example of **correct** code for this setting:
+
 ```html
-// [{"multiline": 1}]
-<component
+<!-- [{"multiline": 1}] -->
+<MyComponent
   foo="John"
   bar="Smith"
-  foobar={5555555}
-  >
-</component>;
+/>
 ```
 
 ## When Not To Use It
 
 If you do not want to check the number of attributes declared per line you can disable this rule.
-

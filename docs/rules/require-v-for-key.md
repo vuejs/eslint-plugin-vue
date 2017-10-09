@@ -13,21 +13,16 @@ It will be reported by [no-invalid-v-for] rule.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-for="x in list"></div>
-    </div>
-</template>
+<div v-for="todo in todos"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-for="x in list" :key="x.id"></div>
-    </div>
-</template>
+<div
+  v-for="todo in todos"
+  :key="todo.id"
+/>
 ```
 
 ## :wrench: Options

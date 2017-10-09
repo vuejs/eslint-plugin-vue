@@ -15,16 +15,14 @@ export default {
   },
   computed: {
     foo: {
-      get () {
-      }
+      get () {}
     }
   },
   data: {
     foo: null
   },
   methods: {
-    foo () {
-    }
+    foo () {}
   }
 }
 ```
@@ -35,17 +33,15 @@ export default {
 export default {
   props: ['foo'],
   computed: {
-    bar () {
-    }
+    bar () {}
   },
   data () {
     return {
-      dat: null
+      baz: null
     }
   },
   methods: {
-    test () {
-    }
+    boo () {}
   }
 }
 ```
@@ -58,12 +54,10 @@ This rule has an object option:
 
 ### Example:
 
-```json
-{
-  "vue/no-dupe-keys": [2, {
-    "groups": ["asyncComputed"]
-  }]
-}
+``` json
+"vue/no-dupe-keys": [2, {
+  groups: ["firebase"]
+}]
 ```
 
 :-1: Examples of **incorrect** code for this configuration
@@ -73,7 +67,7 @@ export default {
   computed: {
     foo () {}
   },
-  asyncComputed: {
+  firebase: {
     foo () {}
   }
 }

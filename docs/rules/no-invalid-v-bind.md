@@ -18,26 +18,18 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-bind></div>
-        <div :aaa></div>
-        <div v-bind:aaa.bbb="foo"></div>
-    </div>
-</template>
+<div v-bind/>
+<div :aaa/>
+<div v-bind:aaa.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-bind="foo"></div>
-        <div v-bind:aaa="foo"></div>
-        <div :aaa="foo"></div>
-        <div :aaa.prop="foo"></div>
-    </div>
-</template>
+<div v-bind="foo"/>
+<div v-bind:aaa="foo"/>
+<div :aaa="foo"/>
+<div :aaa.prop="foo"/>
 ```
 
 ## :wrench: Options

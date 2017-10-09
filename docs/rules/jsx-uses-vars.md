@@ -10,12 +10,12 @@ This rule only has an effect when the `no-unused-vars` rule is enabled.
 Without this rule this code triggers warning:
 
 ```js
-import Hello from './Hello';
+import HelloWorld from './HelloWorld';
 
 export default {
   render () {
     return (
-      <Hello msg="world"></Hello>
+      <HelloWorld msg="world"/>
     )
   },
 };

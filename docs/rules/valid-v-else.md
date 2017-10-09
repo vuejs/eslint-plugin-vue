@@ -15,24 +15,16 @@ This rule reports `v-else` directives in the following cases:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-else="foo"></div>
-        <div v-else:aaa></div>
-        <div v-else.bbb></div>
-    </div>
-</template>
+<div v-else="foo"/>
+<div v-else:aaa/>
+<div v-else.bbb/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-if="foo"></div>
-        <div v-else></div>
-    </div>
-</template>
+<div v-if="foo"/>
+<div v-else/>
 ```
 
 ## :wrench: Options

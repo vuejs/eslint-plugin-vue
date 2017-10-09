@@ -8,15 +8,15 @@ This rule aims to enforce render function to always return value
 
 ```js
 export default {
-  render () {
-  }
+  render () {}
 }
 ```
+
 ```js
 export default {
   render (h) {
     if (foo) {
-      return
+      return h('div', 'hello')
     }
   }
 }
@@ -27,7 +27,7 @@ export default {
 ```js
 export default {
   render (h) {
-    return
+    return h('div', 'hello')
   }
 }
 ```

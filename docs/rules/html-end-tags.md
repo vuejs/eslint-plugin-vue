@@ -17,30 +17,21 @@ This rule reports the following elements:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div>
-        <p>
-        <p>
-        <input></input>
-        <br></br>
-    </div>
-</template>
+<div>
+<p>
+<p>
+<input></input>
+<br></br>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div></div>
-        <p></p>
-        <p></p>
-        <div />
-        <input>
-        <br>
-    </div>
-</template>
+<div></div>
+<p></p>
+<p></p>
+<input>
+<br>
 ```
 
 ## :wrench: Options

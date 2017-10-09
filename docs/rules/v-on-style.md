@@ -9,41 +9,25 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-on:click="foo"></div>
-    </div>
-</template>
+<div v-on:click="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div @click="foo"></div>
-    </div>
-</template>
+<div @click="foo"/>
 ```
 
 :-1: Examples of **incorrect** code for this rule with `"longform"` option:
 
 ```html
-<template>
-    <div>
-        <div @click="foo"></div>
-    </div>
-</template>
+<div @click="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule with `"longform"` option:
 
 ```html
-<template>
-    <div>
-        <div v-on:click="foo"></div>
-    </div>
-</template>
+<div v-on:click="foo"/>
 ```
 
 ## :wrench: Options

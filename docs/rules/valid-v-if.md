@@ -15,28 +15,28 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 :-1: Examples of **incorrect** code for this rule:
 
+:-1: Examples of **incorrect** code for this rule:
+
 ```html
-<template>
-    <div v-if="foo">
-        <div v-if></div>
-        <div v-if:aaa="foo"></div>
-        <div v-if.bbb="foo"></div>
-        <div v-if="foo" v-else></div>
-        <div v-if="foo" v-else-if="bar"></div>
-    </div>
-</template>
+<div v-if/>
+<div v-if:aaa="foo"/>
+<div v-if.bbb="foo"/>
+<div
+  v-if="foo"
+  v-else
+/>
+<div
+  v-if="foo"
+  v-else-if="bar"
+/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-if="foo"></div>
-        <div v-else-if="bar"></div>
-        <div v-else></div>
-    </div>
-</template>
+<div v-if="foo"/>
+<div v-else-if="bar"/>
+<div v-else/>
 ```
 
 ## :wrench: Options

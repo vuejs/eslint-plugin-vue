@@ -16,6 +16,14 @@ Vue.component('some-comp', {
 })
 ```
 
+```js
+export default {
+  data: {
+    foo: 'bar'
+  }
+})
+```
+
 :+1: Examples of **correct** code for this rule:
 
 ```js
@@ -26,6 +34,16 @@ Vue.component('some-comp', {
     }
   }
 })
+```
+
+```js
+export default {
+  data () {
+    return {
+      foo: 'bar'
+    }
+  }
+}
 ```
 
 ## :wrench: Options

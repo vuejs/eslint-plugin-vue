@@ -9,17 +9,14 @@ This rule aims to enforce unified spacing in mustache interpolations.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{   text   }}</div>
-</template>
+<div>{{   text   }}</div>
+<div>{{text}}</div>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
 ## :wrench: Options
@@ -32,36 +29,29 @@ Default spacing is set to `always`
 
 ### `"always"` - Expect one space between expression and curly brackets.
 
-:+1: Examples of **correct** code`:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{   text   }}</div>
+<div>{{text}}</div>
 ```
 
-:-1: Examples of **incorrect** code`:
+:+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{text}}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
 ### `"never"` - Expect no spaces between expression and curly brackets.
 
-:+1: Examples of **correct** code`:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{text}}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
-:-1: Examples of **incorrect** code`:
+:+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{text}}</div>
 ```

@@ -13,23 +13,15 @@ This rule reports `v-pre` directives in the following cases:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-pre:aaa></div>
-        <div v-pre.bbb></div>
-        <div v-pre="ccc"></div>
-    </div>
-</template>
+<div v-pre:aaa/>
+<div v-pre.bbb/>
+<div v-pre="ccc"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-pre></div>
-    </div>
-</template>
+<div v-pre/>
 ```
 
 ## :wrench: Options

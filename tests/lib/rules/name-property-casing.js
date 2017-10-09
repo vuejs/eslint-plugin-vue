@@ -31,7 +31,6 @@ ruleTester.run('name-property-casing', rule, {
         export default {
         }
       `,
-      options: ['camelCase'],
       parserOptions
     },
     {
@@ -41,17 +40,15 @@ ruleTester.run('name-property-casing', rule, {
           ...name
         }
       `,
-      options: ['camelCase'],
       parserOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default {
-          name: 'fooBar'
+          name: 'FooBar'
         }
       `,
-      options: ['camelCase'],
       parserOptions
     },
     {
@@ -86,13 +83,12 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: `
         export default {
-          name: 'fooBar'
+          name: 'FooBar'
         }
       `,
-      options: ['camelCase'],
       parserOptions,
       errors: [{
-        message: 'Property name "foo-bar" is not camelCase.',
+        message: 'Property name "foo-bar" is not PascalCase.',
         type: 'Literal',
         line: 3
       }]
@@ -125,13 +121,12 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: `
         export default {
-          name: 'fooBar'
+          name: 'FooBar'
         }
       `,
-      options: ['camelCase'],
       parserOptions,
       errors: [{
-        message: 'Property name "foo!bar" is not camelCase.',
+        message: 'Property name "foo!bar" is not PascalCase.',
         type: 'Literal',
         line: 3
       }]
@@ -145,13 +140,12 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: `
         new Vue({
-          name: 'fooBar'
+          name: 'FooBar'
         })
       `,
-      options: ['camelCase'],
       parserOptions: { ecmaVersion: 6 },
       errors: [{
-        message: 'Property name "foo!bar" is not camelCase.',
+        message: 'Property name "foo!bar" is not PascalCase.',
         type: 'Literal',
         line: 3
       }]
@@ -165,13 +159,12 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: `
         export default {
-          name: 'foobar'
+          name: 'FooBar'
         }
       `,
-      options: ['camelCase'],
       parserOptions,
       errors: [{
-        message: 'Property name "foo_bar" is not camelCase.',
+        message: 'Property name "foo_bar" is not PascalCase.',
         type: 'Literal',
         line: 3
       }]
@@ -185,7 +178,7 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: `
         export default {
-          name: 'Foobar'
+          name: 'FooBar'
         }
       `,
       options: ['PascalCase'],

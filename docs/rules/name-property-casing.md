@@ -22,18 +22,10 @@ export default {
 }
 ```
 
-:+1: Examples of **correct** code for `camelCase`:
-
-```js
-export default {
-  name: 'myComponent'
-}
-```
-
 ## :wrench: Options
 
-Default casing is set to `PascalCase`
+Default casing is set to `PascalCase`.
 
 ```
-'vue/name-property-casing': [2, 'camelCase|kebab-case|PascalCase']
+"vue/name-property-casing": ["error", "PascalCase|kebab-case"]
 ```

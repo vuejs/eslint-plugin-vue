@@ -29,6 +29,14 @@ tester.run('no-invalid-v-on', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div v-on="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on="{ click: foo }"></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div v-on:click="foo"></div></template>'
     },
     {
@@ -65,6 +73,11 @@ tester.run('no-invalid-v-on', rule, {
       filename: 'test.vue',
       code: '<template><div v-on:click.aaa="foo"></div></template>',
       errors: ["'v-on' directives don't support the modifier 'aaa'."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on></div></template>',
+      errors: ["'v-on' directives require that attribute value or verb modifiers."]
     },
     {
       filename: 'test.vue',

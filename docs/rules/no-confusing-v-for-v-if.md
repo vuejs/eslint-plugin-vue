@@ -17,35 +17,30 @@ In that case, the `v-if` should be written on the wrapper element.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <ol>
-            <li v-if="shown" v-for="item in items">{{item.message}}</li>
-        </ol>
-    </div>
-</template>
+<TodoItem
+  v-if="complete"
+  v-for="todo in todos"
+  :todo="todo"
+/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <ol>
-            <li v-for="item in items" v-if="item.shown">{{item.message}}</li>
-        </ol>
-    </div>
-</template>
+<TodoItem
+  v-for="todo in todos"
+  v-if="todo.shown"
+  :todo="todo"
+/>
 ```
 
 ```html
-<template>
-    <div>
-        <ol v-if="shown">
-            <li v-for="item in items">{{item.message}}</li>
-        </ol>
-    </div>
-</template>
+<ul v-if="shown">
+  <TodoItem
+    v-for="todo in todos"
+    :todo="todo"
+  />
+</ul>
 ```
 
 ## :wrench: Options

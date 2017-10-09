@@ -11,17 +11,15 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <component></component>
-</template>
+<component/>
+<component is="type"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <component :is="type"></component>
-</template>
+<component :is="type"/>
+<component v-bind:is="type"/>
 ```
 
 ## :wrench: Options

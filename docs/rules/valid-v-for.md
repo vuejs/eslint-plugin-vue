@@ -23,28 +23,33 @@ The following cases are syntax errors:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div v-for="x in list">
-        <div v-for></div>
-        <div v-for:aaa="x in list"></div>
-        <div v-for.bbb="x in list"></div>
-        <your-component v-for="x in list"></your-component>
-        <div is="your-component" v-for="x in list"></div>
-        <your-component  v-for="x in list" :key="foo"></your-component>
-    </div>
-</template>
+<div v-for/>
+<div v-for:aaa="todo in todos"/>
+<div v-for.bbb="todo in todos"/>
+<div
+  v-for="todo in todos"
+  is="MyComponent"
+/>
+<MyComponent v-for="todo in todos"/>
+<MyComponent
+  v-for="todo in todos"
+  :key="foo"
+/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-for="x in list"></div>
-        <your-component v-for="x in list" :key="x.id"></your-component>
-        <div is="your-component" v-for="x in list" :key="x.id"></div>
-    </div>
-</template>
+<div v-for="todo in todos"/>
+<MyComponent
+  v-for="todo in todos"
+  :key="todo.id"
+/>
+<div
+  v-for="todo in todos"
+  :is="MyComponent"
+  :key="todo.id"
+/>
 ```
 
 ## :wrench: Options

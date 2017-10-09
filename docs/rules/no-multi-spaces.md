@@ -11,21 +11,17 @@ This rule aims to remove multiple spaces in a row between attributes witch are n
 Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div class="foo"      :style="foo"
-    :foo="bar"         >
-  </div>
-</template>
+<div     class="foo"
+      :style="bar"         />
 ```
 
 Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div class="foo"
-    :style="foo">
-  </div>
-</template>
+<div
+  class="foo"
+  :style="bar"
+/>
 ```
 
 ### Options
