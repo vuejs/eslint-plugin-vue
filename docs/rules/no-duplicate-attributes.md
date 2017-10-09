@@ -31,7 +31,7 @@ This rule reports duplicate attributes.
 `allowCoexistStyle` - Enables [`v-bind:style`] directive can coexist with the plain `style` attribute.
 
 ```
-'vue/name-property-casing': [2, {
+'vue/no-duplicate-attributes': [2, {
   allowCoexistClass: Boolean // default: true
   allowCoexistStyle: Boolean, // default: true
 }]
