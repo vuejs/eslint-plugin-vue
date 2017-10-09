@@ -63,25 +63,27 @@ export default {
 
 If you want you can change the order providing the optional configuration in your `.eslintrc` file. Setting responsible for the above order looks like this:
 
-```
-vue/order-in-components: [2, {
-  order: [
-    ['name', 'delimiters', 'functional', 'model'],
-    ['components', 'directives', 'filters'],
-    ['parent', 'mixins', 'extends', 'provide', 'inject'],
-    'el',
-    'template',
-    'props',
-    'propsData',
-    'data',
-    'computed',
-    'watch',
-    'LIFECYCLE_HOOKS',
-    'methods',
-    'render',
-    'renderError'
-  ]
-}]
+```json
+{
+  "vue/order-in-components": [2, {
+    "order": [
+      ["name", "delimiters", "functional", "model"],
+      ["components", "directives", "filters"],
+      ["parent", "mixins", "extends", "provide", "inject"],
+      "el",
+      "template",
+      "props",
+      "propsData",
+      "data",
+      "computed",
+      "watch",
+      "LIFECYCLE_HOOKS",
+      "methods",
+      "render",
+      "renderError"
+    ]
+  }]
+}
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like we did with `name`, `delimiters`, `funcitonal` and `model`.
