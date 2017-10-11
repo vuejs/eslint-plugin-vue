@@ -38,20 +38,38 @@ tester.run('external-script', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template></template><script src="./test.js"></script>',
-      errors: ["'<script>' cannot require external script files"],
+      code: '<template></template>\n<script src="./test.js"></script>',
+      errors: [{
+        message: "'<script>' cannot require external script files",
+        line: 2
+      }],
       options: ['never']
     },
     {
       filename: 'test.vue',
       code: '<template></template><script :src="./test.js"></script>',
-      errors: ["'<script>' cannot require external script files"],
+      errors: [{
+        message: "'<script>' cannot require external script files",
+        line: 1
+      }],
       options: ['never']
     },
     {
       filename: 'test.vue',
       code: '<template></template><script></script>',
-      errors: ["'<script>' must require external script files"],
+      errors: [{
+        message: "'<script>' must require external script files",
+        line: 1
+      }],
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template></template><script>\n</script>',
+      errors: [{
+        message: "'<script>' must require external script files",
+        line: 1
+      }],
       options: ['always']
     }
   ]
