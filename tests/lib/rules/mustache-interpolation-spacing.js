@@ -76,11 +76,6 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
       filename: 'test.vue',
       code: '<template><div>{{         }}</div></template>',
       options: ['never']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div>{{   text   }}</div></template>',
-      options: ['always']
     }
   ],
 
@@ -161,6 +156,19 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
         type: 'Identifier'
       }, {
         message: 'Found 3 whitespaces, none expected.',
+        type: 'VExpressionEnd'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{   text   }}</div></template>',
+      output: '<template><div>{{ text }}</div></template>',
+      options: ['always'],
+      errors: [{
+        message: 'Found 3 whitespaces, 1 expected.',
+        type: 'Identifier'
+      }, {
+        message: 'Found 3 whitespaces, 1 expected.',
         type: 'VExpressionEnd'
       }]
     }
