@@ -39,10 +39,12 @@ This rule has an object option:
 
 ### Example:
 
-```
-vue/no-dupe-keys: [2, {
-  reserved: ['foo']
-}]
+```json
+{
+  "vue/no-dupe-keys": [2, {
+    "reserved": ["foo"]
+  }]
+}
 ```
 
 :-1: Examples of **incorrect** code for this configuration

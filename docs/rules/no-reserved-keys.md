@@ -37,11 +37,13 @@ This rule has an object option:
 
 ### Example:
 
-```
-vue/no-reserved-keys: [2, {
-  reserved: ['foo', 'foo2'],
-  groups: ['asyncComputed']
-}]
+```json
+{
+  "vue/no-reserved-keys": [2, {
+    "reserved": ["foo", "foo2"],
+    "groups": ["asyncComputed"]
+  }]
+}
 ```
 
 :-1: Examples of **incorrect** code for this configuration

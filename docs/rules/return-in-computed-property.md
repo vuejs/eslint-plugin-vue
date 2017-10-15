@@ -37,8 +37,10 @@ export default {
 This rule has an object option:
 - `"treatUndefinedAsUnspecified"`: `true` (default) disallows implicitly returning undefined with a `return;` statement.
 
-```
-vue/return-in-computed-property: [2, {
-  treatUndefinedAsUnspecified: true
-}]
+```json
+{
+  "vue/return-in-computed-property": [2, {
+    "treatUndefinedAsUnspecified": true
+  }]
+}
 ```

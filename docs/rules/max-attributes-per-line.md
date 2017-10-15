@@ -38,12 +38,11 @@ There is a configurable number of attributes that are acceptable in one-line cas
   sit="4"
 >
 </component>
-
 ```
 
 ### :wrench:  Options
 
-```
+```json
 {
   "vue/max-attributes-per-line": [2, {
     "singleline": 3,

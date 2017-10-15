@@ -37,7 +37,7 @@ Then reports syntax errors if exist.
 
 ```json
 {
-    "vue/no-parsing-error": ["error", {
+    "vue/no-parsing-error": [2, {
         "abrupt-closing-of-empty-comment": false,
         "absence-of-digits-in-numeric-character-reference": false,
         "cdata-in-html-content": false,

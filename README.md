@@ -21,7 +21,7 @@ If you want to check previous releases [go here](https://github.com/vuejs/eslint
 
 ## :cd: Installation
 
-```
+```bash
 npm install --save-dev eslint eslint-plugin-vue@beta
 ```
 

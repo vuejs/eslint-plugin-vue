@@ -58,10 +58,12 @@ This rule has an object option:
 
 ### Example:
 
-```
-vue/no-dupe-keys: [2, {
-  groups: ['asyncComputed']
-}]
+```json
+{
+  "vue/no-dupe-keys": [2, {
+    "groups": ["asyncComputed"]
+  }]
+}
 ```
 
 :-1: Examples of **incorrect** code for this configuration
