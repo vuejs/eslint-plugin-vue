@@ -139,6 +139,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 |  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 | :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
 |  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
