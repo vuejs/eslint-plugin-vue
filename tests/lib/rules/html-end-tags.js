@@ -49,7 +49,11 @@ tester.run('html-end-tags', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div /></div></template>'
+      code: '<template><div><self-closing-custom-element/></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div/></div></template>'
     }
   ],
   invalid: [
