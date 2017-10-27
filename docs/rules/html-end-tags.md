@@ -36,6 +36,7 @@ This rule reports the following elements:
         <div></div>
         <p></p>
         <p></p>
+        <div />
         <input>
         <br>
     </div>
