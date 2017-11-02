@@ -1,4 +1,4 @@
-# Disallow unused variable definitions of v-for directives or scope attributes. (no-unused-vars)
+# disallow unused variable definitions of v-for directives or scope attributes (no-unused-vars)
 
 This rule report variable definitions of v-for directives or scope attributes if those are not used.
 
