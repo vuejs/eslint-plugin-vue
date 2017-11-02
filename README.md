@@ -97,6 +97,7 @@ The `--fix` option on the command line automatically fixes problems reported by 
 |  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
 |  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
+|  | [no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
 |  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
 |  | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
 |  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
