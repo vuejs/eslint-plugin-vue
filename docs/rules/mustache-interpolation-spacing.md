@@ -45,6 +45,7 @@ Default spacing is set to `always`
 ```html
 <template>
   <div>{{text}}</div>
+  <div>{{   text   }}</div>
 </template>
 ```
 
