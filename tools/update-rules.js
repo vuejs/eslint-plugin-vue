@@ -44,13 +44,16 @@ const categories = [
     !entry[1].meta.deprecated &&
     entry[1].meta.docs.category === category
   )
-)
+  )
 
 // Throw if an invalid category has been used
 for (const entry of rules) {
   const category = entry[1].meta.docs.category
   if (!categories.includes(category)) {
-    throw new Error(`Rule category ${category} from ${entry[0]} is invalid`)
+    categories.push('uncategorized')
+    if (category) {
+      throw new Error(`Rule category ${category} from ${entry[0]} is invalid`)
+    }
   }
 }
 
@@ -59,7 +62,8 @@ const categoryTitles = {
   essential: 'Priority A: Essential (Error Prevention)',
   'strongly-recommended': 'Priority B: Strongly Recommended (Improving Readability)',
   recommended: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)',
-  'use-with-caution': 'Priority D: Use with Caution (Potentially Dangerous Patterns)'
+  'use-with-caution': 'Priority D: Use with Caution (Potentially Dangerous Patterns)',
+  uncategorized: 'Uncategorized'
 }
 
 // Throw if no title is defined for a category
@@ -71,18 +75,29 @@ for (const category of categories) {
 
 const rulesTableContent = categories.map(category => `
 ### ${categoryTitles[category]}
-
+${
+category === 'uncategorized' ? '' : `
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
 \`\`\` json
 "extends": "plugin:vue/${category}"
 \`\`\`
-
+`
+}
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 ${
   rules
-    .filter(entry => entry[1].meta.docs.category === category && !entry[1].meta.deprecated)
+    .filter(entry =>
+      (
+        category === 'uncategorized' &&
+        !entry[1].meta.docs.category
+      ) ||
+      (
+        entry[1].meta.docs.category === category &&
+        !entry[1].meta.deprecated
+      )
+    )
     .map(entry => {
       const name = entry[0]
       const meta = entry[1].meta
@@ -112,10 +127,11 @@ ${
       return `| ${link} | ${replacedBy} |`
     })
     .join('\n')
-}
+  }
 `
 
 categories.forEach((category, categoryIndex) => {
+  if (category === 'uncategorized') return
   createRulesFile(category, categories.slice(0, categoryIndex + 1))
 })
 
