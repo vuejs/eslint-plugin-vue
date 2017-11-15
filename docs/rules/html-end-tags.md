@@ -6,8 +6,8 @@
 
 This rule reports:
 
-- presence of end tags on [Void elements](https://www.w3.org/TR/html51/syntax.html#void-elements)
-- absence of end tags or self-closed endings on other elements
+- presence of and end tag on [Void elements](https://www.w3.org/TR/html51/syntax.html#void-elements)
+- absence of both an end tag (e.g. `</div>`) and a self-closing opening tag (e.g. `<div/>`) on other elements
 
 :-1: Examples of **incorrect** code for this rule:
 
