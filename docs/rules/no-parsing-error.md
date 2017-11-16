@@ -34,53 +34,52 @@ Then reports syntax errors if exist.
 ```json
 {
   "vue/no-parsing-error": [2, {
-    "abrupt-closing-of-empty-comment": false,
-    "absence-of-digits-in-numeric-character-reference": false,
-    "cdata-in-html-content": false,
-    "character-reference-outside-unicode-range": false,
-    "control-character-in-input-stream": false,
-    "control-character-reference": false,
-    "eof-before-tag-name": false,
-    "eof-in-cdata": false,
-    "eof-in-comment": false,
-    "eof-in-tag": false,
-    "incorrectly-closed-comment": false,
-    "incorrectly-opened-comment": false,
-    "invalid-first-character-of-tag-name": false,
-    "missing-attribute-value": false,
-    "missing-end-tag-name": false,
-    "missing-semicolon-after-character-reference": false,
-    "missing-whitespace-between-attributes": false,
-    "nested-comment": false,
-    "noncharacter-character-reference": false,
-    "noncharacter-in-input-stream": false,
-    "null-character-reference": false,
-    "surrogate-character-reference": false,
-    "surrogate-in-input-stream": false,
-    "unexpected-character-in-attribute-name": false,
-    "unexpected-character-in-unquoted-attribute-value": false,
-    "unexpected-equals-sign-before-attribute-name": false,
-    "unexpected-null-character": false,
-    "unexpected-question-mark-instead-of-tag-name": false,
-    "unexpected-solidus-in-tag": false,
-    "unknown-named-character-reference": false,
-    "end-tag-with-attributes": false,
-    "duplicate-attribute": false,
-    "end-tag-with-trailing-solidus": false,
+    "abrupt-closing-of-empty-comment": true,
+    "absence-of-digits-in-numeric-character-reference": true,
+    "cdata-in-html-content": true,
+    "character-reference-outside-unicode-range": true,
+    "control-character-in-input-stream": true,
+    "control-character-reference": true,
+    "eof-before-tag-name": true,
+    "eof-in-cdata": true,
+    "eof-in-comment": true,
+    "eof-in-tag": true,
+    "incorrectly-closed-comment": true,
+    "incorrectly-opened-comment": true,
+    "invalid-first-character-of-tag-name": true,
+    "missing-attribute-value": true,
+    "missing-end-tag-name": true,
+    "missing-semicolon-after-character-reference": true,
+    "missing-whitespace-between-attributes": true,
+    "nested-comment": true,
+    "noncharacter-character-reference": true,
+    "noncharacter-in-input-stream": true,
+    "null-character-reference": true,
+    "surrogate-character-reference": true,
+    "surrogate-in-input-stream": true,
+    "unexpected-character-in-attribute-name": true,
+    "unexpected-character-in-unquoted-attribute-value": true,
+    "unexpected-equals-sign-before-attribute-name": true,
+    "unexpected-null-character": true,
+    "unexpected-question-mark-instead-of-tag-name": true,
+    "unexpected-solidus-in-tag": true,
+    "unknown-named-character-reference": true,
+    "end-tag-with-attributes": true,
+    "duplicate-attribute": true,
+    "end-tag-with-trailing-solidus": true,
     "non-void-html-element-start-tag-with-trailing-solidus": false,
-    "x-invalid-end-tag": false,
-    "x-invalid-namespace": false
+    "x-invalid-end-tag": true,
+    "x-invalid-namespace": true
   }]
 }
 ```
 
-You can enable HTML syntax errors by opt-in.
+You can disable HTML syntax errors by options. Please see [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors) to know the details of HTML syntax errors.
+Only `non-void-html-element-start-tag-with-trailing-solidus` is disabled by default because Vue.js supports self-closing tags.
 
-For example, if `"x-invalid-end-tag": true` is given then this rule will catch the end tags of elements which have not opened.
-The error codes are defined in [WHATWG spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors), but this rule does not support all of those (E.g., it does not catch errors about DOCTYPE).
-Also, The codes which have `x-` prefix are original in this rule because errors in tree construction phase have not codified yet.
+> Note this rule does not support all of those (E.g., it does not catch errors about DOCTYPE).
+
+The error codes which have `x-` prefix are original of this rule because errors in tree construction phase have not codified yet.
 
 - `x-invalid-end-tag` enables the errors about the end tags of elements which have not opened.
 - `x-invalid-namespace` enables the errors about invalid `xmlns` attributes. See also [step 10. of "create an element for a token"](https://html.spec.whatwg.org/multipage/parsing.html#create-an-element-for-the-token).
-
-> TODO(mysticatea): I will revisit errors in tree construction phase after those are codified.
