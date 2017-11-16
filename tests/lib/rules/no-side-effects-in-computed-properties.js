@@ -105,6 +105,18 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test () {
+            let a;
+            a = this.something
+            return a
+          },
+        }
+      })`,
+      parserOptions
     }
   ],
   invalid: [
@@ -128,6 +140,10 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             const test = this.another.something.push('example')
             return 'something'
           },
+          test5() {
+            this.something[index] = thing[index]
+            return this.something
+          },
         }
       })`,
       parserOptions,
@@ -146,6 +162,9 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       }, {
         line: 17,
         message: 'Unexpected side effect in "test4" computed property.'
+      }, {
+        line: 21,
+        message: 'Unexpected side effect in "test5" computed property.'
       }]
     },
     {
