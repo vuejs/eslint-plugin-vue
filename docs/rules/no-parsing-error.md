@@ -1,7 +1,5 @@
 # disallow parsing errors in `<template>` (no-parsing-error)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule reports syntax errors in `<template>`. For example:
 
 - Syntax errors of scripts in directives.
@@ -20,61 +18,59 @@ Then reports syntax errors if exist.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>{{message.}}</div>
-</template>
+{{ . }}
+{{ foo. }}
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>{{message}}</div>
-</template>
+{{ foo }}
+{{ foo.bar }}
 ```
 
 ## :wrench: Options
 
 ```json
 {
-    "vue/no-parsing-error": [2, {
-        "abrupt-closing-of-empty-comment": false,
-        "absence-of-digits-in-numeric-character-reference": false,
-        "cdata-in-html-content": false,
-        "character-reference-outside-unicode-range": false,
-        "control-character-in-input-stream": false,
-        "control-character-reference": false,
-        "eof-before-tag-name": false,
-        "eof-in-cdata": false,
-        "eof-in-comment": false,
-        "eof-in-tag": false,
-        "incorrectly-closed-comment": false,
-        "incorrectly-opened-comment": false,
-        "invalid-first-character-of-tag-name": false,
-        "missing-attribute-value": false,
-        "missing-end-tag-name": false,
-        "missing-semicolon-after-character-reference": false,
-        "missing-whitespace-between-attributes": false,
-        "nested-comment": false,
-        "noncharacter-character-reference": false,
-        "noncharacter-in-input-stream": false,
-        "null-character-reference": false,
-        "surrogate-character-reference": false,
-        "surrogate-in-input-stream": false,
-        "unexpected-character-in-attribute-name": false,
-        "unexpected-character-in-unquoted-attribute-value": false,
-        "unexpected-equals-sign-before-attribute-name": false,
-        "unexpected-null-character": false,
-        "unexpected-question-mark-instead-of-tag-name": false,
-        "unexpected-solidus-in-tag": false,
-        "unknown-named-character-reference": false,
-        "end-tag-with-attributes": false,
-        "duplicate-attribute": false,
-        "end-tag-with-trailing-solidus": false,
-        "non-void-html-element-start-tag-with-trailing-solidus": false,
-        "x-invalid-end-tag": false,
-        "x-invalid-namespace": false
-    }]
+  "vue/no-parsing-error": [2, {
+    "abrupt-closing-of-empty-comment": false,
+    "absence-of-digits-in-numeric-character-reference": false,
+    "cdata-in-html-content": false,
+    "character-reference-outside-unicode-range": false,
+    "control-character-in-input-stream": false,
+    "control-character-reference": false,
+    "eof-before-tag-name": false,
+    "eof-in-cdata": false,
+    "eof-in-comment": false,
+    "eof-in-tag": false,
+    "incorrectly-closed-comment": false,
+    "incorrectly-opened-comment": false,
+    "invalid-first-character-of-tag-name": false,
+    "missing-attribute-value": false,
+    "missing-end-tag-name": false,
+    "missing-semicolon-after-character-reference": false,
+    "missing-whitespace-between-attributes": false,
+    "nested-comment": false,
+    "noncharacter-character-reference": false,
+    "noncharacter-in-input-stream": false,
+    "null-character-reference": false,
+    "surrogate-character-reference": false,
+    "surrogate-in-input-stream": false,
+    "unexpected-character-in-attribute-name": false,
+    "unexpected-character-in-unquoted-attribute-value": false,
+    "unexpected-equals-sign-before-attribute-name": false,
+    "unexpected-null-character": false,
+    "unexpected-question-mark-instead-of-tag-name": false,
+    "unexpected-solidus-in-tag": false,
+    "unknown-named-character-reference": false,
+    "end-tag-with-attributes": false,
+    "duplicate-attribute": false,
+    "end-tag-with-trailing-solidus": false,
+    "non-void-html-element-start-tag-with-trailing-solidus": false,
+    "x-invalid-end-tag": false,
+    "x-invalid-namespace": false
+  }]
 }
 ```
 

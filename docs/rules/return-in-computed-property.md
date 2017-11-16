@@ -9,10 +9,8 @@ This rule enforces that a `return` statement is present in `computed` properties
 ```js
 export default {
   computed: {
-    foo () {
-    },
-    bar: function () {
-    }
+    foo () {},
+    bar: function () {}
   }
 }
 ```

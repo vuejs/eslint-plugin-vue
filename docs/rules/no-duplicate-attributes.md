@@ -11,18 +11,20 @@ This rule reports duplicate attributes.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div foo="abc" :foo="def"></div>
-</template>
+<MyComponent
+  :foo="def"
+  foo="abc"
+/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div foo="abc"></div>
-    <div :foo="def"></div>
-</template>
+<MyComponent :foo="abc"/>
+```
+
+```html
+<MyComponent foo="abc"/>
 ```
 
 ## :wrench: Options
@@ -41,6 +43,7 @@ This rule reports duplicate attributes.
 
 `parse5` remove duplicate attributes on the tokenization phase.
 Needs investigation to check.
+
 
 [`v-bind:class`]: https://vuejs.org/v2/guide/class-and-style.html
 [`v-bind:style`]: https://vuejs.org/v2/guide/class-and-style.html

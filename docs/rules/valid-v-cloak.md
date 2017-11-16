@@ -1,7 +1,5 @@
 # enforce valid `v-cloak` directives (valid-v-cloak)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-cloak` directive is valid.
 
 ## :book: Rule Details
@@ -14,24 +12,18 @@ This rule reports `v-cloak` directives in the following cases:
 
 :-1: Examples of **incorrect** code for this rule:
 
+:-1: Examples of **incorrect** code for this rule:
+
 ```html
-<template>
-    <div>
-        <div v-cloak:aaa></div>
-        <div v-cloak.bbb></div>
-        <div v-cloak="ccc"></div>
-    </div>
-</template>
+<div v-cloak:aaa/>
+<div v-cloak.bbb/>
+<div v-cloak="ccc"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-cloak></div>
-    </div>
-</template>
+<div v-cloak/>
 ```
 
 ## :wrench: Options

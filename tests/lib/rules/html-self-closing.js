@@ -54,7 +54,7 @@ const anyWith = (opts) => Object.assign(
 tester.run('html-self-closing', rule, {
   valid: [
     // default
-    '<template><div></div></template>',
+    '<template><div/></template>',
     '<template><img></template>',
     '<template><x-test/></template>',
     '<template><svg><path/></svg></template>',
@@ -72,9 +72,9 @@ tester.run('html-self-closing', rule, {
   invalid: [
     // default
     {
-      code: '<template><div/></template>',
-      output: '<template><div></div></template>',
-      errors: ['Disallow self-closing on HTML elements (<div/>).']
+      code: '<template><div></div></template>',
+      output: '<template><div/></template>',
+      errors: ['Require self-closing on HTML elements (<div>).']
     },
     {
       code: '<template><img/></template>',

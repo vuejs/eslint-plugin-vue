@@ -8,34 +8,26 @@ It is considered a very bad practice to introduce side effects inside computed p
 Examples of **incorrect** code for this rule:
 
 ```js
-
-export default {
-  computed: {
-    fullName() {
-      this.firstName = 'lorem' // <- side effect
-      return `${this.firstName} ${this.lastName}`
-    },
-    somethingReversed() {
-      return this.something.reverse() // <- side effect
-    }
+computed: {
+  fullName () {
+    this.firstName = 'lorem' // <- side effect
+    return `${this.firstName} ${this.lastName}`
+  },
+  reversedArray () {
+    return this.array.reverse() // <- side effect
   }
 }
-
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-
-export default {
-  computed: {
-    fullName() {
-      return `${this.firstName} ${this.lastName}`
-    },
-    somethingReversed() {
-      return this.something.slice(0).reverse()
-    }
+computed: {
+  fullName () {
+    return `${this.firstName} ${this.lastName}`
+  },
+  reversedArray () {
+    return this.array.slice(0).reverse()
   }
 }
-
 ```

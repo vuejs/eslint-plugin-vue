@@ -9,34 +9,29 @@ This rule enforces that a `props` statement contains type definition.
 :-1: Examples of **incorrect** code for this rule:
 
 ```js
-export default {
-  props: ['status']
-}
+props: ['status']
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```js
-export default {
-  props: {
-    status: String
-  }
+props: {
+  status: String
 }
 ```
 
 ```js
-export default {
-  props: {
-    status: {
-      type: String,
-      required: true,
-      validate: function (value) {
-        return ['syncing', 'synced', 'version-conflict', 'error'].indexOf(value) !== -1
-      }
+props: {
+  status: {
+    type: String,
+    required: true,
+    validate: function (value) {
+      return ['syncing', 'synced', 'version-conflict', 'error'].indexOf(value) !== -1
     }
   }
 }
 ```
+
 ## :wrench: Options
 
 Nothing.

@@ -10,26 +10,24 @@ This rule is aimed at preventing asynchronous methods from being called in compu
 :-1: Examples of **incorrect** code for this rule:
 
 ```js
-export default {
-  computed: {
-    pro () {
-      return Promise.all([new Promise((resolve, reject) => {})])
-    },
-    foo: async function () {
-      return await someFunc()
-    },
-    bar () {
-      return fetch(url).then(response => {})
-    },
-    tim () {
-      setTimeout(() => { }, 0)
-    },
-    inter () {
-      setInterval(() => { }, 0)
-    },
-    anim () {
-      requestAnimationFrame(() => {})
-    }
+computed: {
+  pro () {
+    return Promise.all([new Promise((resolve, reject) => {})])
+  },
+  foo: async function () {
+    return await someFunc()
+  },
+  bar () {
+    return fetch(url).then(response => {})
+  },
+  tim () {
+    setTimeout(() => { }, 0)
+  },
+  inter () {
+    setInterval(() => { }, 0)
+  },
+  anim () {
+    requestAnimationFrame(() => {})
   }
 }
 ```
@@ -37,17 +35,15 @@ export default {
 :+1: Examples of **correct** code for this rule:
 
 ```js
-export default {
-  computed: {
-    foo () {
-      var bar = 0
-      try {
-        bar = bar / this.a
-      } catch (e) {
-        return 0
-      } finally {
-        return bar
-      }
+computed: {
+  foo () {
+    var bar = 0
+    try {
+      bar = bar / this.a
+    } catch (e) {
+      return 0
+    } finally {
+      return bar
     }
   }
 }
@@ -56,5 +52,6 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
 
 [vue-async-computed]: https://github.com/foxbenjaminfox/vue-async-computed

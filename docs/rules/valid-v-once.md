@@ -1,7 +1,5 @@
 # enforce valid `v-once` directives (valid-v-once)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-once` directive is valid.
 
 ## :book: Rule Details
@@ -15,23 +13,15 @@ This rule reports `v-once` directives in the following cases:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-once:aaa></div>
-        <div v-once.bbb></div>
-        <div v-once="ccc"></div>
-    </div>
-</template>
+<div v-once:aaa/>
+<div v-once.bbb/>
+<div v-once="ccc"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-once></div>
-    </div>
-</template>
+<div v-once/>
 ```
 
 ## :wrench: Options

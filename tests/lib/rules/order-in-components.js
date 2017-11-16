@@ -106,9 +106,9 @@ ruleTester.run('order-in-components', rule, {
       filename: 'test.js',
       code: `
         new Vue({
+          el: '#app',
           name: 'app',
           components: {},
-          el: '#app',
           data () {
             return {
               msg: 'Welcome to Your Vue.js App'
@@ -199,9 +199,6 @@ ruleTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "components" property should be above the "data" property on line 4.',
         line: 9
-      }, {
-        message: 'The "template" property should be above the "data" property on line 4.',
-        line: 10
       }]
     },
     {
@@ -223,17 +220,14 @@ ruleTester.run('order-in-components', rule, {
       errors: [{
         message: 'The "components" property should be above the "data" property on line 5.',
         line: 10
-      }, {
-        message: 'The "template" property should be above the "data" property on line 5.',
-        line: 11
       }]
     },
     {
       filename: 'test.js',
       code: `
         new Vue({
-          el: '#app',
           name: 'app',
+          el: '#app',
           data () {
             return {
               msg: 'Welcome to Your Vue.js App'
@@ -245,14 +239,11 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions: { ecmaVersion: 6 },
       errors: [{
-        message: 'The "name" property should be above the "el" property on line 3.',
+        message: 'The "el" property should be above the "name" property on line 3.',
         line: 4
       }, {
-        message: 'The "components" property should be above the "el" property on line 3.',
+        message: 'The "components" property should be above the "data" property on line 5.',
         line: 10
-      }, {
-        message: 'The "template" property should be above the "data" property on line 5.',
-        line: 11
       }]
     },
     {

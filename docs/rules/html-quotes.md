@@ -15,43 +15,27 @@ This rule reports the quotes of attributes if it is different to configured quot
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <img src='./logo.png'>
-        <img src=./logo.png>
-    </div>
-</template>
+<img src='./logo.png'>
+<img src=./logo.png>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <img src="./logo.png">
-    </div>
-</template>
+<img src="./logo.png">
 ```
 
 :-1: Examples of **incorrect** code for this rule with `"single"` option:
 
 ```html
-<template>
-    <div>
-        <img src="./logo.png">
-        <img src=./logo.png>
-    </div>
-</template>
+<img src="./logo.png">
+<img src=./logo.png>
 ```
 
 :+1: Examples of **correct** code for this rule with `"single"` option:
 
 ```html
-<template>
-    <div>
-        <img src='./logo.png'>
-    </div>
-</template>
+<img src='./logo.png'>
 ```
 
 ## :wrench: Options

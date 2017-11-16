@@ -7,55 +7,51 @@ This rule checks whether the default value of each prop is valid for the given t
 :-1: Examples of **incorrect** code for this rule:
 
 ```js
-Vue.component('example', {
-  props: {
-    propA: {
-      type: String,
-      default: {}
-    },
-    propB: {
-      type: String,
-      default: []
-    },
-    propC: {
-      type: Object,
-      default: []
-    },
-    propD: {
-      type: Array,
-      default: []
-    },
-    propE: {
-      type: Object,
-      default: { message: 'hello' }
-    }
+props: {
+  propA: {
+    type: String,
+    default: {}
+  },
+  propB: {
+    type: String,
+    default: []
+  },
+  propC: {
+    type: Object,
+    default: []
+  },
+  propD: {
+    type: Array,
+    default: []
+  },
+  propE: {
+    type: Object,
+    default: { message: 'hello' }
   }
-})
+}
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```js
-Vue.component('example', {
-  props: {
-    // basic type check (`null` means accept any type)
-    propA: Number,
-    // multiple possible types
-    propB: [String, Number],
-    // a number with default value
-    propD: {
-      type: Number,
-      default: 100
-    },
-    // object/array defaults should be returned from a factory function
-    propE: {
-      type: Object,
-      default: function () {
-        return { message: 'hello' }
-      }
+props: {
+  // basic type check (`null` means accept any type)
+  propA: Number,
+  // multiple possible types
+  propB: [String, Number],
+  // a number with default value
+  propD: {
+    type: Number,
+    default: 100
+  },
+  // object/array defaults should be returned from a factory function
+  propE: {
+    type: Object,
+    default: function () {
+      return { message: 'hello' }
     }
   }
-})
+}
 ```
 
 ## :wrench: Options

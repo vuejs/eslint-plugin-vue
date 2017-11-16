@@ -13,16 +13,14 @@ export default {
   },
   computed: {
     $on: {
-      get () {
-      }
+      get () {}
     }
   },
   data: {
     _foo: null
   },
   methods: {
-    $nextTick () {
-    }
+    $nextTick () {}
   }
 }
 ```
@@ -37,24 +35,22 @@ This rule has an object option:
 
 ### Example:
 
-```json
-{
-  "vue/no-reserved-keys": [2, {
-    "reserved": ["foo", "foo2"],
-    "groups": ["asyncComputed"]
-  }]
-}
+``` json
+"vue/no-reserved-keys": [2, {
+  reserved: ['foo', 'foo2'],
+  groups: ['firebase']
+}]
 ```
 
 :-1: Examples of **incorrect** code for this configuration
 
 ```js
 export default {
-  asyncComputed: {
-    foo2 () {}
-  },
   computed: {
     foo () {}
+  },
+  firebase: {
+    foo2 () {}
   }
 }
 ```

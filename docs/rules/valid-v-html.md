@@ -1,7 +1,5 @@
 # enforce valid `v-html` directives (valid-v-html)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-html` directive is valid.
 
 ## :book: Rule Details
@@ -17,23 +15,15 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-html></div>
-        <div v-html:aaa="foo"></div>
-        <div v-html.bbb="foo"></div>
-    </div>
-</template>
+<div v-html/>
+<div v-html:aaa="foo"/>
+<div v-html.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-html="foo"></div>
-    </div>
-</template>
+<div v-html="foo"/>
 ```
 
 ## :wrench: Options

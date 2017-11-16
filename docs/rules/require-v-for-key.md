@@ -1,7 +1,5 @@
 # require `v-bind:key` with `v-for` directives (require-v-for-key)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 When `v-for` is written on custom components, it requires `v-bind:key` at the same time.
 On other elements, it's better that `v-bind:key` is written as well.
 
@@ -15,21 +13,16 @@ It will be reported by [no-invalid-v-for] rule.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-for="x in list"></div>
-    </div>
-</template>
+<div v-for="todo in todos"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-for="x in list" :key="x.id"></div>
-    </div>
-</template>
+<div
+  v-for="todo in todos"
+  :key="todo.id"
+/>
 ```
 
 ## :wrench: Options

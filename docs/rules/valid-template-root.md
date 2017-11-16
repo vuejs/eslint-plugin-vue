@@ -1,7 +1,5 @@
 # enforce valid template root (valid-template-root)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every template root is valid.
 
 ## :book: Rule Details
@@ -16,48 +14,84 @@ This rule reports the template root in the following cases:
 
 :-1: Examples of **incorrect** code for this rule:
 
+:-1: Examples of **incorrect** code for this rule:
+
+```js
+template: ''
+```
+
 ```html
 <template>
 </template>
 ```
 
-```html
-<template>
-    <div>hello</div>
-    <div>hello</div>
-</template>
+```js
+template: `
+  <div>hello</div>
+  <div>hello</div>
+`
 ```
 
 ```html
 <template>
-    abc
+  <div>hello</div>
+  <div>hello</div>
 </template>
+```
+
+```js
+template: 'abc'
 ```
 
 ```html
 <template>
-    <div v-for="x in list"></div>
+  abc
+</template>
+```
+
+```js
+template: '<div v-for="item in items"/>'
+```
+
+```html
+<template>
+  <div v-for="item in items"/>
 </template>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
-```html
-<template>
-    <div>abc</div>
-</template>
+```js
+template: '<div>abc</div>'
 ```
 
 ```html
 <template>
-    <div v-if="foo"></div>
+  <div>abc</div>
 </template>
+```
+
+```js
+template: '<div v-if="foo">abc</div>'
 ```
 
 ```html
 <template>
-    <div v-if="foo">abc</div>
-    <div v-else>def</div>
+  <div v-if="foo">abc</div>
+</template>
+```
+
+```js
+template: `
+  <div v-if="foo">abc</div>
+  <div v-else>def</div>
+`
+```
+
+```html
+<template>
+  <div v-if="foo">abc</div>
+  <div v-else>def</div>
 </template>
 ```
 

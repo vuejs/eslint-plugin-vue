@@ -1,7 +1,5 @@
 # enforce valid `v-show` directives (valid-v-show)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-show` directive is valid.
 
 ## :book: Rule Details
@@ -17,23 +15,15 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-show></div>
-        <div v-show:aaa="foo"></div>
-        <div v-show.bbb="foo"></div>
-    </div>
-</template>
+<div v-show/>
+<div v-show:aaa="foo"/>
+<div v-show.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-show="foo"></div>
-    </div>
-</template>
+<div v-show="foo"/>
 ```
 
 ## :wrench: Options

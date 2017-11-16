@@ -15,23 +15,15 @@ This rule reports `v-cloak` directives in the following cases:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-cloak:aaa></div>
-        <div v-cloak.bbb></div>
-        <div v-cloak="ccc"></div>
-    </div>
-</template>
+<div v-cloak:aaa/>
+<div v-cloak.bbb/>
+<div v-cloak="ccc"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-cloak></div>
-    </div>
-</template>
+<div v-cloak/>
 ```
 
 ## :wrench: Options

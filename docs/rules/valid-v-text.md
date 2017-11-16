@@ -1,7 +1,5 @@
 # enforce valid `v-text` directives (valid-v-text)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-text` directive is valid.
 
 ## :book: Rule Details
@@ -17,23 +15,15 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-text></div>
-        <div v-text:aaa="foo"></div>
-        <div v-text.bbb="foo"></div>
-    </div>
-</template>
+<div v-text/>
+<div v-text:aaa="foo"/>
+<div v-text.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-text="foo"></div>
-    </div>
-</template>
+<div v-text="foo"/>
 ```
 
 ## :wrench: Options

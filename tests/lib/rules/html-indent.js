@@ -49,1069 +49,1069 @@ tester.run('html-indent', rule, {
     // Examples in docs.
     unIndent`
       <template>
-          <div class="foo">
-              Hello.
-          </div>
-          <div
-              id="a"
-              class="b"
-              :other-attr="{
-                  aaa: 1,
-                  bbb: 2
-              }"
-              @other-attr2="
-                  foo();
-                  bar();
-              "
-          >
-              {{
-                  displayMessage
-              }}
-          </div>
+        <div class="foo">
+          Hello.
+        </div>
+        <div
+          id="a"
+          class="b"
+          :other-attr="{
+            aaa: 1,
+            bbb: 2
+          }"
+          @other-attr2="
+            foo()
+            bar()
+          "
+        >
+          {{
+            displayMessage
+          }}
+        </div>
       </template>
     `,
 
     // VAttribute
     unIndent`
       <template>
-          <div
-              a="a"
-              b="b"
-              c=
-                  "c"
-              d
-                  ="d"
-              e
-              f
-                  =
-          ></div>
+        <div
+          a="a"
+          b="b"
+          c=
+            "c"
+          d
+            ="d"
+          e
+          f
+            =
+        ></div>
       </template>
     `,
     unIndent`
       <template>
-          <div a="a"
-               b="b"
-               c=
-                   "c"
-               d
-                   ="d"
-               e
-               f
-                   =
-          ></div>
+        <div a="a"
+             b="b"
+             c=
+               "c"
+             d
+               ="d"
+             e
+             f
+               =
+        ></div>
       </template>
     `,
     unIndent`
       <template>
-          <div a="
-          a" b="b"></div>
+        <div a="
+        a" b="b"></div>
       </template>
     `,
 
     // VExpressionContainer
     unIndent`
       <template>
-          <div
-              :foo="
-                  value
-              "
-          ></div>
+        <div
+          :foo="
+            value
+          "
+        ></div>
       </template>
     `,
 
     // VForExpression
     unIndent`
       <template>
-          <div
-              v-for="
-                  x
-                      in
-                          xs
-              "
-          ></div>
-          <div
-              v-for="
-                  (
-                      x
-                      ,
-                      y
-                      ,
-                      z
-                  )
-                      of
-                          xs
-              "
-          ></div>
+        <div
+          v-for="
+            x
+              in
+                xs
+          "
+        ></div>
+        <div
+          v-for="
+            (
+              x
+              ,
+              y
+              ,
+              z
+            )
+              of
+                xs
+          "
+        ></div>
       </template>
     `,
 
     // VOnExpression
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  foo(); bar();
-              "
-              v-on:b="
-                  foo()
-                  bar()
-              "
-              v-on:c="foo()
-                      bar()"
-          ></div>
+        <div
+          v-on:a="
+            foo(); bar();
+          "
+          v-on:b="
+            foo()
+            bar()
+          "
+          v-on:c="foo()
+                  bar()"
+        ></div>
       </template>
     `,
 
     // VStartTag
     unIndent`
       <template>
-          <div
-              aaa
-              bbb
+        <div
+          aaa
+          bbb
     `,
 
     // VText
     unIndent`
       <template>
-          aaa
-          bbb
-          ccc
+        aaa
+        bbb
+        ccc
       </template>
     `,
 
     // ArrayExpression
     unIndent`
       <template>
-          <div v-on:a="
-              [
-                  1
-                  ,
-                  2
-                  ,
-                  [
-                      3
-                  ],
-                  [ 4,
-                    5 ]
-              ]
-          "></div>
+        <div v-on:a="
+          [
+            1
+            ,
+            2
+            ,
+            [
+              3
+            ],
+            [ 4,
+              5 ]
+          ]
+        "></div>
       </template>
     `,
 
     // ArrowFunctionExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  (
-                  ) =>
-                      1
-              "
-              v-bind:b="
-                  a =>
-                      1
-              "
-              v-bind:c="
-                  (
-                      a
-                  ) =>
-                      1
-              "
-              v-bind:d="
-                  (
-                      a
-                      ,
-                      b
-                  ) =>
-                      1
-              "
-              v-bind:e="
-                  a =>
-                  {
-                      a
-                  }
-              "
-          ></div>
+        <div
+          v-bind:a="
+            (
+            ) =>
+              1
+          "
+          v-bind:b="
+            a =>
+              1
+          "
+          v-bind:c="
+            (
+              a
+            ) =>
+              1
+          "
+          v-bind:d="
+            (
+              a
+              ,
+              b
+            ) =>
+              1
+          "
+          v-bind:e="
+            a =>
+            {
+              a
+            }
+          "
+        ></div>
       </template>
     `,
 
     // AssignmentExpression / BinaryExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  a
-                      +
-                      b
-              "
-              v-bind:b="
-                  a
-                      +
-                      b
-                      +
-                      c
-              "
-              v-bind:c="
-                  a
-                      =
-                      b
-                          +
-                          c
-                          +
-                          d
-              "
-          ></div>
+        <div
+          v-bind:a="
+            a
+              +
+              b
+          "
+          v-bind:b="
+            a
+              +
+              b
+              +
+              c
+          "
+          v-bind:c="
+            a
+              =
+              b
+                +
+                c
+                +
+                d
+          "
+        ></div>
       </template>
     `,
 
     // AwaitExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  async () =>
-                      await
-                          1
-              "
-          ></div>
+        <div
+          v-bind:a="
+            async () =>
+              await
+                1
+          "
+        ></div>
       </template>
     `,
 
     // BreakStatement, LabeledStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  while(1)
-                      break
-                      ;
-              "
-              v-on:b="
-                  A
-                      :
-                      break A
-                      ;
-              "
-          ></div>
+        <div
+          v-on:a="
+            while(1)
+              break
+              ;
+          "
+          v-on:b="
+            A
+              :
+              break A
+              ;
+          "
+        ></div>
       </template>
     `,
 
     // CallExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  foo(
-                  )
-              "
-              v-bind:b="
-                  foo(
-                      1
-                  )
-              "
-              v-bind:c="
-                  foo(
-                      1
-                      ,
-                      2
-                      ,
-                      bar(
-                          3
-                      )
-                  )
-              "
-              v-bind:d="
-                  f(1, 2,
-                    3, 4)
-              "
-          ></div>
+        <div
+          v-bind:a="
+            foo(
+            )
+          "
+          v-bind:b="
+            foo(
+              1
+            )
+          "
+          v-bind:c="
+            foo(
+              1
+              ,
+              2
+              ,
+              bar(
+                3
+              )
+            )
+          "
+          v-bind:d="
+            f(1, 2,
+              3, 4)
+          "
+        ></div>
       </template>
     `,
 
     // ClassExpression / ClassDeclaration
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  class
-                      A
-                  {
-                      foo(){}
-                      bar(){}
-                  }
-              "
-              v-on:b="
-                  class
-                      A
-                      extends
-                          B
-                  {
-                      ;
-                      foo(){}
-                      ;
-                      bar(){}
-                      ;
-                  }
-              "
-              v-on:b="
-                  !class
-                      extends
-                          B
-                  {
-                      ;
-                      foo(){}
-                      ;
-                      bar(){}
-                      ;
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            class
+              A
+            {
+              foo(){}
+              bar(){}
+            }
+          "
+          v-on:b="
+            class
+              A
+              extends
+                B
+            {
+              ;
+              foo(){}
+              ;
+              bar(){}
+              ;
+            }
+          "
+          v-on:b="
+            !class
+              extends
+                B
+            {
+              ;
+              foo(){}
+              ;
+              bar(){}
+              ;
+            }
+          "
+        ></div>
       </template>
     `,
 
     // ConditionalExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  a
-                      ? b
-                      : c
-              "
-              v-bind:b="
-                  a ?
-                      b :
-                      c
-              "
-              v-bind:c="
-                  a
-                      ?
-                          b
-                      :
-                          c
-              "
-              v-bind:d="
-                  a
-                      ? b
-                      : c
-                          ? d
-                          : e
-              "
-              v-bind:e="
-                  a ? 1 :
-                  b ? 2 :
-                  /*else*/ 3
-              "
-          ></div>
+        <div
+          v-bind:a="
+            a
+              ? b
+              : c
+          "
+          v-bind:b="
+            a ?
+              b :
+              c
+          "
+          v-bind:c="
+            a
+              ?
+                b
+              :
+                c
+          "
+          v-bind:d="
+            a
+              ? b
+              : c
+                ? d
+                : e
+          "
+          v-bind:e="
+            a ? 1 :
+            b ? 2 :
+            /*else*/ 3
+          "
+        ></div>
       </template>
     `,
 
     // DoWhileStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  do
-                      ;
-                  while
-                      (
-                          a
-                      )
-              "
-              v-on:b="
-                  do
-                  {
-                      ;
-                  }
-                  while
-                      (
-                          a
-                      )
-              "
-              v-on:c="
-                  do {
-                      ;
-                  } while (
-                      a
-                  )
-              "
-          ></div>
+        <div
+          v-on:a="
+            do
+              ;
+            while
+              (
+                a
+              )
+          "
+          v-on:b="
+            do
+            {
+              ;
+            }
+            while
+              (
+                a
+              )
+          "
+          v-on:c="
+            do {
+              ;
+            } while (
+              a
+            )
+          "
+        ></div>
       </template>
     `,
 
     // ForInStatement, ForOfStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  for
-                      (
-                          a
-                              in
-                              b
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:b="
-                  for (
-                      a
-                          of
-                          b
-                  )
-                  {
-                      ;
-                  }
-              "
-              v-on:c="
-                  for (
-                      a
-                          in
-                          b
-                  ) {
-                      ;
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            for
+              (
+                a
+                  in
+                  b
+              )
+            {
+              ;
+            }
+          "
+          v-on:b="
+            for (
+              a
+                of
+                b
+            )
+            {
+              ;
+            }
+          "
+          v-on:c="
+            for (
+              a
+                in
+                b
+            ) {
+              ;
+            }
+          "
+        ></div>
       </template>
     `,
 
     // ForStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  for
-                      (
-                          a
-                          ;
-                          b
-                          ;
-                          c
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:b="
-                  for
-                      (
-                          ;
-                          b
-                          ;
-                          c
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:c="
-                  for
-                      (
-                          a
-                          ;
-                          ;
-                          c
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:d="
-                  for
-                      (
-                          a
-                          ;
-                          d
-                          ;
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:e="
-                  for
-                      (
-                          ;
-                          ;
-                      )
-                  {
-                      ;
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            for
+              (
+                a
+                ;
+                b
+                ;
+                c
+              )
+            {
+              ;
+            }
+          "
+          v-on:b="
+            for
+              (
+                ;
+                b
+                ;
+                c
+              )
+            {
+              ;
+            }
+          "
+          v-on:c="
+            for
+              (
+                a
+                ;
+                ;
+                c
+              )
+            {
+              ;
+            }
+          "
+          v-on:d="
+            for
+              (
+                a
+                ;
+                d
+                ;
+              )
+            {
+              ;
+            }
+          "
+          v-on:e="
+            for
+              (
+                ;
+                ;
+              )
+            {
+              ;
+            }
+          "
+        ></div>
       </template>
     `,
 
     // FunctionDeclaration, FunctionExpression
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  function
-                      foo
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:b="
-                  !function
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:c="
-                  function
-                      *
-                      foo
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:d="
-                  !function
-                      *
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:e="
-                  async function
-                      foo
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            function
+              foo
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+          "
+          v-on:b="
+            !function
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+          "
+          v-on:c="
+            function
+              *
+              foo
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+          "
+          v-on:d="
+            !function
+              *
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+          "
+          v-on:e="
+            async function
+              foo
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+          "
+        ></div>
       </template>
     `,
 
     // IfStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  if
-                      (
-                          a
-                      )
-                  {
-                      ;
-                  }
-              "
-              v-on:b="
-                  if
-                      (
-                          a
-                      )
-                  {
-                      ;
-                  }
-                  else
-                  {
-                      ;
-                  }
-              "
-              v-on:c="
-                  if (a)
-                      ;
-                  else if (b)
-                      ;
-                  else
-                      ;
-              "
-          ></div>
+        <div
+          v-on:a="
+            if
+              (
+                a
+              )
+            {
+              ;
+            }
+          "
+          v-on:b="
+            if
+              (
+                a
+              )
+            {
+              ;
+            }
+            else
+            {
+              ;
+            }
+          "
+          v-on:c="
+            if (a)
+              ;
+            else if (b)
+              ;
+            else
+              ;
+          "
+        ></div>
       </template>
     `,
 
     // MemberExpression, MetaProperty
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  obj
-                      .aaa
-                      .bbb
-                      .ccc
-              "
-              v-bind:b="
-                  obj.
-                      aaa.
-                      bbb.
-                      ccc
-              "
-              v-bind:c="
-                  obj
-                      [
-                          0
-                      ]
-                      [
-                          1
-                      ]
-                      [
-                          2
-                      ]
-              "
-              v-bind:d="
-                  function wrap() {
-                      new
-                          .
-                          target
-                  }
-              "
-          ></div>
+        <div
+          v-bind:a="
+            obj
+              .aaa
+              .bbb
+              .ccc
+          "
+          v-bind:b="
+            obj.
+              aaa.
+              bbb.
+              ccc
+          "
+          v-bind:c="
+            obj
+              [
+                0
+              ]
+              [
+                1
+              ]
+              [
+                2
+              ]
+          "
+          v-bind:d="
+            function wrap() {
+              new
+                .
+                target
+            }
+          "
+        ></div>
       </template>
     `,
 
     // MethodDefinition, Property
     unIndent`
       <template>
-          <div
-              v-bind:a="{
-                  aaa
-                      :
-                      1
-                  ,
-                  bbb
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-                  ,
-                  get
-                  ccc
-                      (
-                      )
-                  {
-                      ;
-                  },
-                  [
-                      d
-                  ]
-                      :
-                      1,
-                  get
-                  [
-                      e
-                  ]
-                      (
-                      )
-                  {
-                      ;
-                  }
-              }"
-              v-bind:b="class {
-                  bbb
-                      (
-                          a
-                          ,
-                          b
-                      )
-                  {
-                      ;
-                  }
-                  static
-                  get
-                  ccc
-                      (
-                      )
-                  {
-                      ;
-                  }
-                  [
-                      d
-                  ]
-                      (
-                      )
-                  {
-                      ;
-                  }
-                  get
-                  [
-                      e
-                  ]
-                      (
-                      )
-                  {
-                      ;
-                  }
-              }"
-          ></div>
+        <div
+          v-bind:a="{
+            aaa
+              :
+              1
+            ,
+            bbb
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+            ,
+            get
+            ccc
+              (
+              )
+            {
+              ;
+            },
+            [
+              d
+            ]
+              :
+              1,
+            get
+            [
+              e
+            ]
+              (
+              )
+            {
+              ;
+            }
+          }"
+          v-bind:b="class {
+            bbb
+              (
+                a
+                ,
+                b
+              )
+            {
+              ;
+            }
+            static
+            get
+            ccc
+              (
+              )
+            {
+              ;
+            }
+            [
+              d
+            ]
+              (
+              )
+            {
+              ;
+            }
+            get
+            [
+              e
+            ]
+              (
+              )
+            {
+              ;
+            }
+          }"
+        ></div>
       </template>
     `,
 
     // NewExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  new
-                      foo
-                          (
-                              a,
-                              b
-                          )
-              "
-              v-bind:b="
-                  new (
-                      foo
-                  )
-              "
-              v-bind:c="
-                  new (
-                      foo
-                  )(
-                      a
-                  )
-              "
-              v-bind:d="
-                  new foo(
-                      a
-                  )
-              "
-              v-bind:d="
-                  new foo(a,
-                          b)
-              "
-          ></div>
+        <div
+          v-bind:a="
+            new
+              foo
+                (
+                  a,
+                  b
+                )
+          "
+          v-bind:b="
+            new (
+              foo
+            )
+          "
+          v-bind:c="
+            new (
+              foo
+            )(
+              a
+            )
+          "
+          v-bind:d="
+            new foo(
+              a
+            )
+          "
+          v-bind:d="
+            new foo(a,
+                    b)
+          "
+        ></div>
       </template>
     `,
 
     // ObjectExpression
     unIndent`
       <template>
-          <div v-bind:a="
-              {
-                  a: 1
-                  ,
-                  b: 2
-                  ,
-                  c: {
-                      ca: 3
-                  },
-                  d: { da: 4,
-                       db: 5 }
-              }
-          "></div>
+        <div v-bind:a="
+          {
+            a: 1
+            ,
+            b: 2
+            ,
+            c: {
+              ca: 3
+            },
+            d: { da: 4,
+                 db: 5 }
+          }
+        "></div>
       </template>
     `,
 
     // RestElement / SpreadElement
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  [
-                      a,
-                      ...
-                          b
-                  ] = [
-                      a,
-                      ...
-                          b
-                  ]
-              "
-          ></div>
+        <div
+          v-bind:a="
+            [
+              a,
+              ...
+                b
+            ] = [
+              a,
+              ...
+                b
+            ]
+          "
+        ></div>
       </template>
     `,
 
     // SequenceExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  1
-                  ,
-                  2
-                  ,
-                  3
-              "
-              v-bind:b="
-                  1,
-                  2,
-                  3
-              "
-              v-bind:c="
-                  a +
-                      b,
-                  2
-              "
-          ></div>
+        <div
+          v-bind:a="
+            1
+            ,
+            2
+            ,
+            3
+          "
+          v-bind:b="
+            1,
+            2,
+            3
+          "
+          v-bind:c="
+            a +
+              b,
+            2
+          "
+        ></div>
       </template>
     `,
     unIndent`
       <template>
-          {{
-              a,
-              b,
-              c
-          }}
+        {{
+          a,
+          b,
+          c
+        }}
       </template>
     `,
 
     // SwitchStatement, SwitchCase
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  switch
-                      (
-                          a
-                      )
-                  {
-                  case
-                      1
-                      :
-                      foo;
-                  case (
-                      2
-                  ):
-                      foo;
-                  case 3:
-                      foo;
-                  case 4:
-                  {
-                      foo;
-                  }
-                  default
-                      :
-                      foo;
-                  }
-              "
-              v-on:b="
-                  switch (a) {
-                  case 1:
-                      foo;
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            switch
+              (
+                a
+              )
+            {
+            case
+              1
+              :
+              foo;
+            case (
+              2
+            ):
+              foo;
+            case 3:
+              foo;
+            case 4:
+            {
+              foo;
+            }
+            default
+              :
+              foo;
+            }
+          "
+          v-on:b="
+            switch (a) {
+            case 1:
+              foo;
+            }
+          "
+        ></div>
       </template>
     `,
 
     // TaggedTemplateExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  foo\`test\`
-              "
-              v-bind:b="
-                  foo
-                      \`test\`
-              "
-              v-bind:c="
-                  (
-                      foo
-                  )
-                      \`test\`
-              "
-          ></div>
+        <div
+          v-bind:a="
+            foo\`test\`
+          "
+          v-bind:b="
+            foo
+              \`test\`
+          "
+          v-bind:c="
+            (
+              foo
+            )
+              \`test\`
+          "
+        ></div>
       </template>
     `,
 
     // TemplateLiteral
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  \`hello, \${
-                      aaa
-                  }, \${
-                      (
-                          bbb
-                      )
-                  }\`
-              "
-              v-bind:b="
-                  \`
-                  test
-                test
-                    test
-                  \`
-              "
-          ></div>
+        <div
+          v-bind:a="
+            \`hello, \${
+              aaa
+            }, \${
+              (
+                bbb
+              )
+            }\`
+          "
+          v-bind:b="
+            \`
+            test
+          test
+            test
+            \`
+          "
+        ></div>
       </template>
     `,
 
     // ReturnStatement
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  return
-                  ;
-              "
-              v-on:b="
-                  return a
-                  ;
-              "
-          ></div>
+        <div
+          v-on:a="
+            return
+            ;
+          "
+          v-on:b="
+            return a
+            ;
+          "
+        ></div>
       </template>
     `,
 
     // TryStatement / CatchClause
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  try
-                  {
-                  }
-                  catch
-                      (
-                          err
-                      )
-                  {
-                  }
-              "
-              v-on:b="
-                  try
-                  {
-                  }
-                  finally
-                  {
-                  }
-              "
-              v-on:c="
-                  try
-                  {
-                  }
-                  catch
-                      (
-                          err
-                      )
-                  {
-                  }
-                  finally
-                  {
-                  }
-              "
-          ></div>
+        <div
+          v-on:a="
+            try
+            {
+            }
+            catch
+              (
+                err
+              )
+            {
+            }
+          "
+          v-on:b="
+            try
+            {
+            }
+            finally
+            {
+            }
+          "
+          v-on:c="
+            try
+            {
+            }
+            catch
+              (
+                err
+              )
+            {
+            }
+            finally
+            {
+            }
+          "
+        ></div>
       </template>
     `,
 
     // UnaryExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  +
-                      a
-              "
-          ></div>
+        <div
+          v-bind:a="
+            +
+              a
+          "
+        ></div>
       </template>
     `,
 
     // UpdateExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  ++
-                      a
-              "
-          ></div>
+        <div
+          v-bind:a="
+            ++
+              a
+          "
+        ></div>
       </template>
     `,
 
     // VariableDeclaration, VariableDeclarator
     unIndent`
       <template>
-          <div
-              v-on:a="
-                  var aaa
-                  var bbb = 1,
-                      ccc = 2
-                  const ddd = 3,
-                        eee = 4
-              "
-              v-on:b="
-                  var aaa
-                          =
-                          1,
-                      ccc
-                          =
-                          2
-                  const ddd 
-                            =
-                            3,
-                        eee
-                            =
-                            4
-              "
-              v-on:c="
-                  var aaa = {
-                      test: 1
+        <div
+          v-on:a="
+            var aaa
+            var bbb = 1,
+                ccc = 2
+            const ddd = 3,
+                  eee = 4
+          "
+          v-on:b="
+            var aaa
+                  =
+                  1,
+                ccc
+                  =
+                  2
+            const ddd
+                    =
+                    3,
+                  eee
+                    =
+                    4
+          "
+          v-on:c="
+            var aaa = {
+              test: 1
+            }
+            var bbb = {
+                  test: 1
+                },
+                ccc = {
+                  test: 1
+                }
+            const ddd = {
+                    test: 1
+                  },
+                  eee = (a) => {
+                    foo(a)
                   }
-                  var bbb = {
-                          test: 1
-                      },
-                      ccc = {
-                          test: 1
-                      }
-                  const ddd = {
-                            test: 1
-                        },
-                        eee = (a) => {
-                            foo(a)
-                        }
-              "
-          ></div>
+          "
+        ></div>
       </template>
     `,
 
     // YieldExpression
     unIndent`
       <template>
-          <div
-              v-bind:a="
-                  function*(){
-                      yield
-                  }
-              "
-              v-bind:b="
-                  function*(){
-                      yield
-                      a
-                  }
-              "
-              v-bind:c="
-                  function*(){
-                      yield*
-                          a
-                  }
-              "
-          ></div>
+        <div
+          v-bind:a="
+            function*(){
+              yield
+            }
+          "
+          v-bind:b="
+            function*(){
+              yield
+              a
+            }
+          "
+          v-bind:c="
+            function*(){
+              yield*
+                a
+            }
+          "
+        ></div>
       </template>
     `,
 
@@ -1272,22 +1272,22 @@ tester.run('html-indent', rule, {
     // Comments
     unIndent`
       <template>
-          <!-- comment -->
-          {{
-              // comment
-              // comment
-              message
-          }}
+        <!-- comment -->
+        {{
+          // comment
+          // comment
+          message
+        }}
       </template>
     `,
     unIndent`
       <template>
-          {{
-              /*
-               * comment
-               */
-              message
-          }}
+        {{
+          /*
+           * comment
+           */
+          message
+        }}
       </template>
     `,
 
@@ -1347,6 +1347,7 @@ tester.run('html-indent', rule, {
             </div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 3 },
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 4 },
@@ -1411,6 +1412,7 @@ tester.run('html-indent', rule, {
             </div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 5 },
@@ -1471,6 +1473,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -1519,6 +1522,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
@@ -1543,6 +1547,7 @@ tester.run('html-indent', rule, {
             ccc
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 }
@@ -1568,6 +1573,7 @@ tester.run('html-indent', rule, {
             }}
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 },
@@ -1613,6 +1619,7 @@ tester.run('html-indent', rule, {
             "></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 3 },
         { message: 'Expected indentation of 12 spaces but found 6 spaces.', line: 4 },
@@ -1700,6 +1707,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
@@ -1779,6 +1787,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -1822,6 +1831,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 5 },
         { message: 'Expected indentation of 20 spaces but found 14 spaces.', line: 6 }
@@ -1864,6 +1874,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 6 },
@@ -1936,6 +1947,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
@@ -2036,6 +2048,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2139,6 +2152,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2226,6 +2240,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2323,6 +2338,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2483,6 +2499,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2670,6 +2687,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2798,6 +2816,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -2902,6 +2921,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -3087,6 +3107,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -3238,6 +3259,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -3298,6 +3320,7 @@ tester.run('html-indent', rule, {
             "></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 3 },
         { message: 'Expected indentation of 12 spaces but found 6 spaces.', line: 4 },
@@ -3361,6 +3384,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
@@ -3378,26 +3402,26 @@ tester.run('html-indent', rule, {
     {
       code: unIndent`
         <template>
-            {{
-            a,
-            b,
-            c
-            }}
+          {{
+          a,
+          b,
+          c
+          }}
         </template>
       `,
       output: unIndent`
         <template>
-            {{
-                a,
-                b,
-                c
-            }}
+          {{
+            a,
+            b,
+            c
+          }}
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 3 },
-        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 4 },
-        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 5 }
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 4 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 5 }
       ]
     },
 
@@ -3477,6 +3501,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -3548,6 +3573,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
@@ -3605,6 +3631,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
@@ -3653,6 +3680,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 6 },
         { message: 'Expected indentation of 20 spaces but found 14 spaces.', line: 7 },
@@ -3691,6 +3719,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
@@ -3705,37 +3734,37 @@ tester.run('html-indent', rule, {
         <template>
             <div
                 v-on:a="
-                  try
-                  {
-                  }
-                  catch
-                  (
-                  err
-                  )
-                  {
-                  }
+                try
+                {
+                }
+                catch
+                (
+                err
+                )
+                {
+                }
                 "
                 v-on:b="
-                  try
-                  {
-                  }
-                  finally
-                  {
-                  }
+                try
+                {
+                }
+                finally
+                {
+                }
                 "
                 v-on:c="
-                  try
-                  {
-                  }
-                  catch
-                  (
-                  err
-                  )
-                  {
-                  }
-                  finally
-                  {
-                  }
+                try
+                {
+                }
+                catch
+                (
+                err
+                )
+                {
+                }
+                finally
+                {
+                }
                 "
             ></div>
         </template>
@@ -3779,34 +3808,35 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 6 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 8 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 9 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 10 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 11 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 15 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 18 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 19 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 20 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 23 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 25 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 26 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 27 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 28 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 30 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 31 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 32 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 33 },
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 34 }
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 4 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 5 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 6 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 7 },
+        { message: 'Expected indentation of 16 spaces but found 8 spaces.', line: 8 },
+        { message: 'Expected indentation of 20 spaces but found 8 spaces.', line: 9 },
+        { message: 'Expected indentation of 16 spaces but found 8 spaces.', line: 10 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 11 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 15 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 16 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 17 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 19 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 20 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 24 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 25 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 26 },
+        { message: 'Expected indentation of 16 spaces but found 8 spaces.', line: 27 },
+        { message: 'Expected indentation of 20 spaces but found 8 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 8 spaces.', line: 29 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 30 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 31 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 32 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 33 },
+        { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 34 }
       ]
     },
 
@@ -3814,27 +3844,27 @@ tester.run('html-indent', rule, {
     {
       code: unIndent`
         <template>
-            <div
-                v-bind:a="
-                  +
-                  a
-                "
-            ></div>
+          <div
+            v-bind:a="
+                +
+              a
+            "
+          ></div>
         </template>
       `,
       output: unIndent`
         <template>
-            <div
-                v-bind:a="
-                    +
-                        a
-                "
-            ></div>
+          <div
+            v-bind:a="
+              +
+                a
+            "
+          ></div>
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 }
+        { message: 'Expected indentation of 6 spaces but found 8 spaces.', line: 4 },
+        { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 5 }
       ]
     },
 
@@ -3842,27 +3872,27 @@ tester.run('html-indent', rule, {
     {
       code: unIndent`
         <template>
-            <div
-                v-bind:a="
-                  ++
-                  a
-                "
-            ></div>
+          <div
+            v-bind:a="
+                ++
+              a
+            "
+          ></div>
         </template>
       `,
       output: unIndent`
         <template>
-            <div
-                v-bind:a="
-                    ++
-                        a
-                "
-            ></div>
+          <div
+            v-bind:a="
+              ++
+                a
+            "
+          ></div>
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
-        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 }
+        { message: 'Expected indentation of 6 spaces but found 8 spaces.', line: 4 },
+        { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 5 }
       ]
     },
 
@@ -3885,7 +3915,7 @@ tester.run('html-indent', rule, {
                   ccc
                   =
                   2
-                  const ddd 
+                  const ddd
                   =
                   3,
                   eee
@@ -3929,7 +3959,7 @@ tester.run('html-indent', rule, {
                         ccc
                             =
                             2
-                    const ddd 
+                    const ddd
                               =
                               3,
                           eee
@@ -3956,6 +3986,7 @@ tester.run('html-indent', rule, {
             ></div>
         </template>
       `,
+      options: [4],
       errors: [
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
@@ -3996,56 +4027,56 @@ tester.run('html-indent', rule, {
     {
       code: unIndent`
         <template>
-            <div
-                v-bind:a="
-                    function*(){
-                      yield
-                    }
-                "
-                v-bind:b="
-                    function*(){
-                      yield
+          <div
+            v-bind:a="
+              function*(){
+                  yield
+              }
+            "
+            v-bind:b="
+              function*(){
+                  yield
+                  a
+              }
+            "
+            v-bind:c="
+              function*(){
+                  yield*
                       a
-                    }
-                "
-                v-bind:c="
-                    function*(){
-                      yield*
-                      a
-                    }
-                "
-            ></div>
+              }
+            "
+          ></div>
         </template>
       `,
       output: unIndent`
         <template>
-            <div
-                v-bind:a="
-                    function*(){
-                        yield
-                    }
-                "
-                v-bind:b="
-                    function*(){
-                        yield
-                        a
-                    }
-                "
-                v-bind:c="
-                    function*(){
-                        yield*
-                            a
-                    }
-                "
-            ></div>
+          <div
+            v-bind:a="
+              function*(){
+                yield
+              }
+            "
+            v-bind:b="
+              function*(){
+                yield
+                a
+              }
+            "
+            v-bind:c="
+              function*(){
+                yield*
+                  a
+              }
+            "
+          ></div>
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 5 },
-        { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 10 },
-        { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 11 },
-        { message: 'Expected indentation of 16 spaces but found 14 spaces.', line: 16 },
-        { message: 'Expected indentation of 20 spaces but found 14 spaces.', line: 17 }
+        { message: 'Expected indentation of 8 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 8 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 8 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 8 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 10 spaces but found 14 spaces.', line: 17 }
       ]
     },
 
@@ -4121,16 +4152,16 @@ tester.run('html-indent', rule, {
     {
       code: unIndent`
         <template>
-            <div>
-            \tHello
-            </div>
+          <div>
+          \tHello
+          </div>
         </template>
       `,
       output: unIndent`
         <template>
-            <div>
-                Hello
-            </div>
+          <div>
+            Hello
+          </div>
         </template>
       `,
       errors: [
@@ -4172,47 +4203,47 @@ tester.run('html-indent', rule, {
       `,
       output: unIndent`
         <template>
-            <!-- comment -->
-            {{
-                // comment
-                // comment
-                message
-            }}
+          <!-- comment -->
+          {{
+            // comment
+            // comment
+            message
+          }}
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 2 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 8 spaces but found 0 spaces.', line: 4 },
-        { message: 'Expected indentation of 8 spaces but found 0 spaces.', line: 5 },
-        { message: 'Expected indentation of 8 spaces but found 0 spaces.', line: 6 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 7 }
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 5 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 6 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 7 }
       ]
     },
     {
       code: unIndent`
         <template>
-            {{
-            /*
-             * comment
-             */
-            message
-            }}
+          {{
+          /*
+           * comment
+           */
+          message
+          }}
         </template>
       `,
       output: unIndent`
         <template>
-            {{
-                /*
-                 * comment
-                 */
-                message
-            }}
+          {{
+            /*
+             * comment
+             */
+            message
+          }}
         </template>
       `,
       errors: [
-        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 3 },
-        { message: 'Expected indentation of 8 spaces but found 4 spaces.', line: 6 }
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 6 }
       ]
     },
 

@@ -1,7 +1,5 @@
 # enforce valid `v-on` directives (valid-v-on)
 
-- :white_check_mark: The `"extends": "plugin:vue/recommended"` property in a configuration file enables this rule.
-
 This rule checks whether every `v-on` directive is valid.
 
 ## :book: Rule Details
@@ -16,28 +14,24 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 :-1: Examples of **incorrect** code for this rule:
 
+:-1: Examples of **incorrect** code for this rule:
+
 ```html
-<template>
-    <div>
-        <div v-on="foo"></div>
-        <div v-on:click="foo"></div>
-        <div v-on:click.bbb="foo"></div>
-    </div>
-</template>
+<div v-on/>
+<div v-on:click/>
+<div v-on:click.aaa="foo"/>
+<div @click/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-on:click="foo"></div>
-        <div @click="foo"></div>
-        <div @click.left="foo"></div>
-        <div @click.prevent></div>
-        <div @click.stop></div>
-    </div>
-</template>
+<div v-on="foo"/>
+<div v-on:click="foo"/>
+<div @click="foo"/>
+<div @click.left="foo"/>
+<div @click.prevent/>
+<div @click.stop/>
 ```
 
 ## :wrench: Options
