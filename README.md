@@ -179,15 +179,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
-### Deprecated
-
-> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-
-
 <!--RULES_TABLE_END-->
 
 ## :couple: FAQ
