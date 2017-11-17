@@ -44,7 +44,7 @@ const categories = [
     !entry[1].meta.deprecated &&
     entry[1].meta.docs.category === category
   )
-  )
+)
 
 // Throw if an invalid category has been used
 for (const entry of rules) {
@@ -58,12 +58,12 @@ for (const entry of rules) {
 }
 
 const categoryTitles = {
-  base: 'Base Rules (Enabling Correct ESLint Parsing)',
-  essential: 'Priority A: Essential (Error Prevention)',
+  'base': 'Base Rules (Enabling Correct ESLint Parsing)',
+  'essential': 'Priority A: Essential (Error Prevention)',
   'strongly-recommended': 'Priority B: Strongly Recommended (Improving Readability)',
-  recommended: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)',
+  'recommended': 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)',
   'use-with-caution': 'Priority D: Use with Caution (Potentially Dangerous Patterns)',
-  uncategorized: 'Uncategorized'
+  'uncategorized': 'Uncategorized'
 }
 
 // Throw if no title is defined for a category
@@ -73,7 +73,10 @@ for (const category of categories) {
   }
 }
 
-const rulesTableContent = categories.map(category => `
+const deprecatedRules = rules
+  .filter(entry => entry[1].meta.deprecated)
+
+let rulesTableContent = categories.map(category => `
 ### ${categoryTitles[category]}
 ${
 category === 'uncategorized' ? '' : `
@@ -108,27 +111,31 @@ ${
     })
     .join('\n')
 }
-`).join('\n') + `
-### Deprecated
+`).join('\n')
 
-> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+if (deprecatedRules.length) {
+  rulesTableContent += `
+  ### Deprecated
 
-| Rule ID | Replaced by |
-|:--------|:------------|
-${
-  rules
-    .filter(entry => entry[1].meta.deprecated)
-    .map(entry => {
-      const name = entry[0]
-      const meta = entry[1].meta
-      const link = `[${name}](./docs/rules/${name}.md)`
-      const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') || '(no replacement)'
-      return `| ${link} | ${replacedBy} |`
-    })
-    .join('\n')
+  > - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+  > - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+  | Rule ID | Replaced by |
+  |:--------|:------------|
+  ${
+    rules
+      .filter(entry => entry[1].meta.deprecated)
+      .map(entry => {
+        const name = entry[0]
+        const meta = entry[1].meta
+        const link = `[${name}](./docs/rules/${name}.md)`
+        const replacedBy = (meta.docs.replacedBy || []).map(id => `[${id}](./docs/rules/${id}.md)`).join(', ') || '(no replacement)'
+        return `| ${link} | ${replacedBy} |`
+      })
+      .join('\n')
   }
-`
+  `
+}
 
 categories.forEach((category, categoryIndex) => {
   if (category === 'uncategorized') return
@@ -185,9 +192,10 @@ for (const entry of rules) {
   const ruleId = entry[0]
   const meta = entry[1].meta
   const filePath = path.join(docsRoot, `${ruleId}.md`)
-  const deprecated = meta.deprecated ? `- ${WARN} This rule was **deprecated** and replaced by ${meta.docs.replacedBy.map(id => `[${id}](${id}.md) rule`).join(', ')}.\n` : ''
   const autofix = meta.fixable ? `- ${PEN} The \`--fix\` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.\n` : ''
-  const header = `# ${meta.docs.description} (${ruleId})\n${deprecated || autofix ? '\n' : ''}${deprecated}${autofix}\n`
+  let deprecated = meta.deprecated ? `- ${WARN} This rule was **deprecated**` : ''
+  deprecated += meta.deprecated && meta.docs.replacedBy ? ` and replaced by ${meta.docs.replacedBy.map(id => `[${id}](${id}.md) rule`).join(', ')}.` : ''
+  const header = `# ${meta.docs.description} (${ruleId})\n\n${deprecated ? deprecated + '\n' : ''}${autofix ? autofix + '\n' : ''}`
 
   fs.writeFileSync(
     filePath,

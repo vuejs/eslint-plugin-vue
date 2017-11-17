@@ -179,30 +179,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
-### Deprecated
-
-> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-| [html-no-self-closing](./docs/rules/html-no-self-closing.md) | [html-self-closing](./docs/rules/html-self-closing.md) |
-| [no-invalid-template-root](./docs/rules/no-invalid-template-root.md) | [valid-template-root](./docs/rules/valid-template-root.md) |
-| [no-invalid-v-bind](./docs/rules/no-invalid-v-bind.md) | [valid-v-bind](./docs/rules/valid-v-bind.md) |
-| [no-invalid-v-cloak](./docs/rules/no-invalid-v-cloak.md) | [valid-v-cloak](./docs/rules/valid-v-cloak.md) |
-| [no-invalid-v-else-if](./docs/rules/no-invalid-v-else-if.md) | [valid-v-else-if](./docs/rules/valid-v-else-if.md) |
-| [no-invalid-v-else](./docs/rules/no-invalid-v-else.md) | [valid-v-else](./docs/rules/valid-v-else.md) |
-| [no-invalid-v-for](./docs/rules/no-invalid-v-for.md) | [valid-v-for](./docs/rules/valid-v-for.md) |
-| [no-invalid-v-html](./docs/rules/no-invalid-v-html.md) | [valid-v-html](./docs/rules/valid-v-html.md) |
-| [no-invalid-v-if](./docs/rules/no-invalid-v-if.md) | [valid-v-if](./docs/rules/valid-v-if.md) |
-| [no-invalid-v-model](./docs/rules/no-invalid-v-model.md) | [valid-v-model](./docs/rules/valid-v-model.md) |
-| [no-invalid-v-on](./docs/rules/no-invalid-v-on.md) | [valid-v-on](./docs/rules/valid-v-on.md) |
-| [no-invalid-v-once](./docs/rules/no-invalid-v-once.md) | [valid-v-once](./docs/rules/valid-v-once.md) |
-| [no-invalid-v-pre](./docs/rules/no-invalid-v-pre.md) | [valid-v-pre](./docs/rules/valid-v-pre.md) |
-| [no-invalid-v-show](./docs/rules/no-invalid-v-show.md) | [valid-v-show](./docs/rules/valid-v-show.md) |
-| [no-invalid-v-text](./docs/rules/no-invalid-v-text.md) | [valid-v-text](./docs/rules/valid-v-text.md) |
-| [no-reservered-keys](./docs/rules/no-reservered-keys.md) | [no-reserved-keys](./docs/rules/no-reserved-keys.md) |
-
 <!--RULES_TABLE_END-->
 
 ## :couple: FAQ
