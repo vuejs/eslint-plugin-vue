@@ -57,43 +57,35 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: `<template><!--></template>`,
-      options: [{ 'abrupt-closing-of-empty-comment': false }],
-      errors: ['Parsing error: abrupt-closing-of-empty-comment.']
+      options: [{ 'abrupt-closing-of-empty-comment': false }]
     },
     {
       code: `<template><!---></template>`,
-      options: [{ 'abrupt-closing-of-empty-comment': false }],
-      errors: ['Parsing error: abrupt-closing-of-empty-comment.']
+      options: [{ 'abrupt-closing-of-empty-comment': false }]
     },
     {
       code: `<template>&#qux;</template>`,
-      options: [{ 'absence-of-digits-in-numeric-character-reference': false }],
-      errors: ['Parsing error: absence-of-digits-in-numeric-character-reference.']
+      options: [{ 'absence-of-digits-in-numeric-character-reference': false }]
     },
     {
       code: '<template><![CDATA[cdata]]></template>',
-      options: [{ 'cdata-in-html-content': false }],
-      errors: ['Parsing error: cdata-in-html-content.']
+      options: [{ 'cdata-in-html-content': false }]
     },
     {
       code: '<template>&#1234567;</template>',
-      options: [{ 'character-reference-outside-unicode-range': false }],
-      errors: ['Parsing error: character-reference-outside-unicode-range.']
+      options: [{ 'character-reference-outside-unicode-range': false }]
     },
     {
       code: '<template>\u0003</template>',
-      options: [{ 'control-character-in-input-stream': false }],
-      errors: ['Parsing error: control-character-in-input-stream.']
+      options: [{ 'control-character-in-input-stream': false }]
     },
     {
       code: '<template>&#0003;</template>',
-      options: [{ 'control-character-reference': false }],
-      errors: ['Parsing error: control-character-reference.']
+      options: [{ 'control-character-reference': false }]
     },
     {
       code: '<template><',
-      options: [{ 'eof-before-tag-name': false }],
-      errors: ['Parsing error: eof-before-tag-name.']
+      options: [{ 'eof-before-tag-name': false }]
     },
     {
       code: '<template><svg><![CDATA[cdata',
@@ -107,128 +99,103 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><div class=""',
-      options: [{ 'eof-in-tag': false }],
-      errors: ['Parsing error: eof-in-tag.']
+      options: [{ 'eof-in-tag': false }]
     },
     {
       code: '<template><!--comment--!></template>',
-      options: [{ 'incorrectly-closed-comment': false }],
-      errors: ['Parsing error: incorrectly-closed-comment.']
+      options: [{ 'incorrectly-closed-comment': false }]
     },
     {
       code: '<template><!ELEMENT br EMPTY></template>',
-      options: [{ 'incorrectly-opened-comment': false }],
-      errors: ['Parsing error: incorrectly-opened-comment.']
+      options: [{ 'incorrectly-opened-comment': false }]
     },
     {
       code: '<template><👍>/template>',
-      options: [{ 'invalid-first-character-of-tag-name': false }],
-      errors: ['Parsing error: invalid-first-character-of-tag-name.']
+      options: [{ 'invalid-first-character-of-tag-name': false }]
     },
     {
       code: '<template><div id=></template>',
-      options: [{ 'missing-attribute-value': false }],
-      errors: ['Parsing error: missing-attribute-value.']
+      options: [{ 'missing-attribute-value': false }]
     },
     {
       code: '<template></></template>',
-      options: [{ 'missing-end-tag-name': false }],
-      errors: ['Parsing error: missing-end-tag-name.']
+      options: [{ 'missing-end-tag-name': false }]
     },
     {
       code: '<template>&amp</template>',
-      options: [{ 'missing-semicolon-after-character-reference': false }],
-      errors: ['Parsing error: missing-semicolon-after-character-reference.']
+      options: [{ 'missing-semicolon-after-character-reference': false }]
     },
     {
       code: '<template><div id="foo"class="bar"></template>',
-      options: [{ 'missing-whitespace-between-attributes': false }],
-      errors: ['Parsing error: missing-whitespace-between-attributes.']
+      options: [{ 'missing-whitespace-between-attributes': false }]
     },
     {
       code: '<template><!--a<!--b--></template>',
-      options: [{ 'nested-comment': false }],
-      errors: ['Parsing error: nested-comment.']
+      options: [{ 'nested-comment': false }]
     },
     {
       code: '<template>&#xFFFE;</template>',
-      options: [{ 'noncharacter-character-reference': false }],
-      errors: ['Parsing error: noncharacter-character-reference.']
+      options: [{ 'noncharacter-character-reference': false }]
     },
     {
       code: '<template>\uFFFE</template>',
-      options: [{ 'noncharacter-in-input-stream': false }],
-      errors: ['Parsing error: noncharacter-in-input-stream.']
+      options: [{ 'noncharacter-in-input-stream': false }]
     },
     {
       code: '<template>&#0000;</template>',
-      options: [{ 'null-character-reference': false }],
-      errors: ['Parsing error: null-character-reference.']
+      options: [{ 'null-character-reference': false }]
     },
     {
       code: '<template>&#xD800;</template>',
-      options: [{ 'surrogate-character-reference': false }],
-      errors: ['Parsing error: surrogate-character-reference.']
+      options: [{ 'surrogate-character-reference': false }]
     },
     {
       code: '<template>\uD800</template>',
-      options: [{ 'surrogate-in-input-stream': false }],
-      errors: ['Parsing error: surrogate-in-input-stream.']
+      options: [{ 'surrogate-in-input-stream': false }]
     },
     {
       code: '<template><div a"bc=""></template>',
-      options: [{ 'unexpected-character-in-attribute-name': false }],
-      errors: ['Parsing error: unexpected-character-in-attribute-name.']
+      options: [{ 'unexpected-character-in-attribute-name': false }]
     },
     {
       code: '<template><div foo=bar"></template>',
-      options: [{ 'unexpected-character-in-unquoted-attribute-value': false }],
-      errors: ['Parsing error: unexpected-character-in-unquoted-attribute-value.']
+      options: [{ 'unexpected-character-in-unquoted-attribute-value': false }]
     },
     {
       code: '<template><div =foo></template>',
-      options: [{ 'unexpected-equals-sign-before-attribute-name': false }],
-      errors: ['Parsing error: unexpected-equals-sign-before-attribute-name.']
+      options: [{ 'unexpected-equals-sign-before-attribute-name': false }]
     },
     {
       code: '<template>\u0000</template>',
-      options: [{ 'unexpected-null-character': false }],
-      errors: ['Parsing error: unexpected-null-character.']
+      options: [{ 'unexpected-null-character': false }]
     },
     {
       code: '<template><?xml?></template>',
-      options: [{ 'unexpected-question-mark-instead-of-tag-name': false }],
-      errors: ['Parsing error: unexpected-question-mark-instead-of-tag-name.']
+      options: [{ 'unexpected-question-mark-instead-of-tag-name': false }]
     },
     {
       code: '<template><div id="" / class=""></template>',
-      options: [{ 'unexpected-solidus-in-tag': false }],
-      errors: ['Parsing error: unexpected-solidus-in-tag.']
+      options: [{ 'unexpected-solidus-in-tag': false }]
     },
     {
       code: '<template>&unknown;</template>',
-      options: [{ 'unknown-named-character-reference': false }],
-      errors: ['Parsing error: unknown-named-character-reference.']
+      options: [{ 'unknown-named-character-reference': false }]
     },
     {
       code: '<template><div></div id=""></template>',
-      options: [{ 'end-tag-with-attributes': false }],
-      errors: ['Parsing error: end-tag-with-attributes.']
+      options: [{ 'end-tag-with-attributes': false }]
     },
     {
       code: '<template><div id="" id=""></div></template>',
-      options: [{ 'duplicate-attribute': false }],
-      errors: ['Parsing error: duplicate-attribute.']
+      options: [{ 'duplicate-attribute': false }]
     },
     {
       code: '<template><div></div/></template>',
-      options: [{ 'end-tag-with-trailing-solidus': false }],
-      errors: ['Parsing error: end-tag-with-trailing-solidus.']
+      options: [{ 'end-tag-with-trailing-solidus': false }]
     },
     {
       code: '<template><div/></template>',
-      options: [{ 'non-void-html-element-start-tag-with-trailing-solidus': false }],
-      errors: ['Parsing error: non-void-html-element-start-tag-with-trailing-solidus.']
+      options: [{ 'non-void-html-element-start-tag-with-trailing-solidus': false }]
     },
     {
       code: '<template></div></template>',
@@ -237,9 +204,9 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><div xmlns=""></template>',
-      options: [{ 'x-invalid-namespace': false }],
-      errors: ['Parsing error: x-invalid-namespace.']
-    }
+      options: [{ 'x-invalid-namespace': false }]
+    },
+    '<template><div/></template>'
   ],
   invalid: [
     {
@@ -473,6 +440,150 @@ tester.run('no-parsing-error', rule, {
     {
       code: '<template><div xmlns=""></template>',
       options: [{ 'x-invalid-namespace': true }],
+      errors: ['Parsing error: x-invalid-namespace.']
+    },
+    {
+      code: `<template><!--></template>`,
+      errors: ['Parsing error: abrupt-closing-of-empty-comment.']
+    },
+    {
+      code: `<template><!---></template>`,
+      errors: ['Parsing error: abrupt-closing-of-empty-comment.']
+    },
+    {
+      code: `<template>&#qux;</template>`,
+      errors: ['Parsing error: absence-of-digits-in-numeric-character-reference.']
+    },
+    {
+      code: '<template><![CDATA[cdata]]></template>',
+      errors: ['Parsing error: cdata-in-html-content.']
+    },
+    {
+      code: '<template>&#1234567;</template>',
+      errors: ['Parsing error: character-reference-outside-unicode-range.']
+    },
+    {
+      code: '<template>\u0003</template>',
+      errors: ['Parsing error: control-character-in-input-stream.']
+    },
+    {
+      code: '<template>&#0003;</template>',
+      errors: ['Parsing error: control-character-reference.']
+    },
+    {
+      code: '<template><',
+      errors: ['Parsing error: eof-before-tag-name.']
+    },
+    {
+      code: '<template><svg><![CDATA[cdata',
+      errors: ['Parsing error: eof-in-cdata.']
+    },
+    {
+      code: '<template><!--comment',
+      errors: ['Parsing error: eof-in-comment.']
+    },
+    {
+      code: '<template><div class=""',
+      errors: ['Parsing error: eof-in-tag.']
+    },
+    {
+      code: '<template><!--comment--!></template>',
+      errors: ['Parsing error: incorrectly-closed-comment.']
+    },
+    {
+      code: '<template><!ELEMENT br EMPTY></template>',
+      errors: ['Parsing error: incorrectly-opened-comment.']
+    },
+    {
+      code: '<template><👍>/template>',
+      errors: ['Parsing error: invalid-first-character-of-tag-name.']
+    },
+    {
+      code: '<template><div id=></template>',
+      errors: ['Parsing error: missing-attribute-value.']
+    },
+    {
+      code: '<template></></template>',
+      errors: ['Parsing error: missing-end-tag-name.']
+    },
+    {
+      code: '<template>&amp</template>',
+      errors: ['Parsing error: missing-semicolon-after-character-reference.']
+    },
+    {
+      code: '<template><div id="foo"class="bar"></template>',
+      errors: ['Parsing error: missing-whitespace-between-attributes.']
+    },
+    {
+      code: '<template><!--a<!--b--></template>',
+      errors: ['Parsing error: nested-comment.']
+    },
+    {
+      code: '<template>&#xFFFE;</template>',
+      errors: ['Parsing error: noncharacter-character-reference.']
+    },
+    {
+      code: '<template>\uFFFE</template>',
+      errors: ['Parsing error: noncharacter-in-input-stream.']
+    },
+    {
+      code: '<template>&#0000;</template>',
+      errors: ['Parsing error: null-character-reference.']
+    },
+    {
+      code: '<template>&#xD800;</template>',
+      errors: ['Parsing error: surrogate-character-reference.']
+    },
+    {
+      code: '<template>\uD800</template>',
+      errors: ['Parsing error: surrogate-in-input-stream.']
+    },
+    {
+      code: '<template><div a"bc=""></template>',
+      errors: ['Parsing error: unexpected-character-in-attribute-name.']
+    },
+    {
+      code: '<template><div foo=bar"></template>',
+      errors: ['Parsing error: unexpected-character-in-unquoted-attribute-value.']
+    },
+    {
+      code: '<template><div =foo></template>',
+      errors: ['Parsing error: unexpected-equals-sign-before-attribute-name.']
+    },
+    {
+      code: '<template>\u0000</template>',
+      errors: ['Parsing error: unexpected-null-character.']
+    },
+    {
+      code: '<template><?xml?></template>',
+      errors: ['Parsing error: unexpected-question-mark-instead-of-tag-name.']
+    },
+    {
+      code: '<template><div id="" / class=""></template>',
+      errors: ['Parsing error: unexpected-solidus-in-tag.']
+    },
+    {
+      code: '<template>&unknown;</template>',
+      errors: ['Parsing error: unknown-named-character-reference.']
+    },
+    {
+      code: '<template><div></div id=""></template>',
+      errors: ['Parsing error: end-tag-with-attributes.']
+    },
+    {
+      code: '<template><div id="" id=""></div></template>',
+      errors: ['Parsing error: duplicate-attribute.']
+    },
+    {
+      code: '<template><div></div/></template>',
+      errors: ['Parsing error: end-tag-with-trailing-solidus.']
+    },
+    {
+      code: '<template></div></template>',
+      errors: ['Parsing error: x-invalid-end-tag.']
+    },
+    {
+      code: '<template><div xmlns=""></template>',
       errors: ['Parsing error: x-invalid-namespace.']
     }
   ]
