@@ -34,12 +34,13 @@ Example **.eslintrc.js**:
 ```js
 module.exports = {
   extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended' // or 'plugin:vue/base'
+    // add more generic rulesets here, such as:
+    // 'eslint:recommended',
+    'plugin:vue/essential'
   ],
   rules: {
-    // override/add rules' settings here
-    'vue/valid-v-if': 'error'
+    // override/add rules settings here, such as:
+    // 'vue/no-unused-vars': 'error'
   }
 }
 ```
