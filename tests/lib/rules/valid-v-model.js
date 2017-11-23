@@ -66,6 +66,14 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="x.foo"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[x]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[x - 1]"></div></div></template>'
     }
   ],
   invalid: [
