@@ -6,11 +6,11 @@
 
 > Official ESLint plugin for Vue.js
 
-## :exclamation: Attention - this is documentation for beta `3.0.0` :exclamation:
+## :exclamation: Attention - this is documentation for version `4.x` :exclamation:
 
-This branch contains `eslint-plugin-vue@beta` which is pre-released `3.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "beta"` in `package.json` or do `npm install eslint-plugin-vue@beta`.
+This branch contains `eslint-plugin-vue@next` which is a pre-released `4.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
 
-Please try it and report any issues that you might experience.
+Please try it and report any issues that you might have encountered.
 
 If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
 
@@ -22,7 +22,7 @@ If you want to check previous releases [go here](https://github.com/vuejs/eslint
 ## :cd: Installation
 
 ```bash
-npm install --save-dev eslint eslint-plugin-vue@beta
+npm install --save-dev eslint eslint-plugin-vue@next
 ```
 
 ## :rocket: Usage
@@ -205,6 +205,15 @@ If you already use other parser (e.g. `"parser": "babel-eslint"`), please move i
 ```
 
 The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` to parse scripts.
+
+### Can my javascript code have increased indentation?
+
+It depends on the version of eslint you're using.
+
+[indent](https://eslint.org/docs/rules/indent) rule in `eslint@3.x` makes it possible, but if you use `eslint@4.x` be aware that this rule has been rewritten and is more strict now, thus it doesn't allow to have increased initial indentation.
+
+You can however use [indent-legacy](https://eslint.org/docs/rules/indent-legacy) rule instead.
+More informations [here](https://eslint.org/docs/user-guide/migrating-to-4.0.0#indent-rewrite).
 
 ## :anchor: Semantic Versioning Policy
 
