@@ -11,7 +11,6 @@ This rule reports `v-model` directives in the following cases:
 - The directive does not have that attribute value. E.g. `<input v-model>`
 - The directive does not have the attribute value which is valid as LHS. E.g. `<input v-model="foo() + bar()">`
 - The directive is on unsupported elements. E.g. `<div v-model="foo"></div>`
-- The directive is on `<input>` elements which their types are dynamic. E.g. `<input :type="type" v-model="foo">`
 - The directive is on `<input>` elements which their types are `file`. E.g. `<input type="file" v-model="foo">`
 - The directive's reference is iteration variables. E.g. `<div v-for="x in list"><input type="file" v-model="x"></div>`
 
