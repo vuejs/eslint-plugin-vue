@@ -66,6 +66,14 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="x.foo"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input :type="a" v-model="b"></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-bind:type="a" v-model="b"></template>'
     }
   ],
   invalid: [
@@ -93,16 +101,6 @@ tester.run('valid-v-model', rule, {
       filename: 'test.vue',
       code: '<template><input v-model="a + b"></template>',
       errors: ["'v-model' directives require the attribute value which is valid as LHS."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><input :type="a" v-model="b"></template>',
-      errors: ["'v-model' directives don't support dynamic input types."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><input v-bind:type="a" v-model="b"></template>',
-      errors: ["'v-model' directives don't support dynamic input types."]
     },
     {
       filename: 'test.vue',
