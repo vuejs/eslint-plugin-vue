@@ -163,6 +163,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
 | :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
+| :wrench: | [external-script](./docs/rules/external-script.md) | Require or disallow external scripts |
 
 
 ### Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
