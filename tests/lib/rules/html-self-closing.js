@@ -65,7 +65,11 @@ tester.run('html-self-closing', rule, {
       code: '<template><div><!-- comment --></div></template>',
       output: null,
       options: [{ html: { normal: 'always' }}]
-    }
+    },
+
+    // Invalid EOF
+    '<template><div a=">test</div></template>',
+    '<template><div><!--test</div></template>'
 
     // other cases are in `invalid` tests.
   ],
