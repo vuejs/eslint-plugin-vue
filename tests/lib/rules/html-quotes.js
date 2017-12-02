@@ -54,91 +54,116 @@ tester.run('html-quotes', rule, {
       filename: 'test.vue',
       code: "<template><div :class='foo'></div></template>",
       options: ['single']
+    },
+
+    // Invalid EOF
+    {
+      code: '<template><div class="foo></div></template>',
+      options: ['single']
+    },
+    {
+      code: '<template><div class=\'foo></div></template>',
+      options: ['double']
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
       code: '<template><div class=foo></div></template>',
+      output: '<template><div class="foo"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: "<template><div class='foo'></div></template>",
+      output: '<template><div class="foo"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo></div></template>',
+      output: '<template><div :class="foo"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: "<template><div :class='foo'></div></template>",
+      output: '<template><div :class="foo"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo+"bar"></div></template>',
+      output: '<template><div :class="foo+&quot;bar&quot;"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div class=foo></div></template>',
+      output: '<template><div class="foo"></div></template>',
       options: ['double'],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: "<template><div class='foo'></div></template>",
+      output: '<template><div class="foo"></div></template>',
       options: ['double'],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo></div></template>',
+      output: '<template><div :class="foo"></div></template>',
       options: ['double'],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: "<template><div :class='foo'></div></template>",
+      output: '<template><div :class="foo"></div></template>',
       options: ['double'],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo+"bar"></div></template>',
+      output: '<template><div :class="foo+&quot;bar&quot;"></div></template>',
       options: ['double'],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div class=foo></div></template>',
+      output: '<template><div class=\'foo\'></div></template>',
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div class="foo"></div></template>',
+      output: '<template><div class=\'foo\'></div></template>',
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo></div></template>',
+      output: '<template><div :class=\'foo\'></div></template>',
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class="foo"></div></template>',
+      output: '<template><div :class=\'foo\'></div></template>',
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: "<template><div :class=foo+'bar'></div></template>",
+      output: "<template><div :class='foo+&apos;bar&apos;'></div></template>",
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     }
