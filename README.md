@@ -14,6 +14,12 @@ Please try it and report any issues that you might have encountered.
 
 If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
 
+## :art: Playground on the Web
+
+You can try this plugin on the Web.
+
+- https://mysticatea.github.io/vue-eslint-demo/
+
 ## :grey_exclamation: Requirements
 
 - [ESLint](http://eslint.org/) `>=3.18.0`.
