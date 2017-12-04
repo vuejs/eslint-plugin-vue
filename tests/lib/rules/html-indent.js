@@ -255,10 +255,10 @@ tester.run('html-indent', rule, {
             a
               =
               b
-                +
-                c
-                +
-                d
+              +
+              c
+              +
+              d
           "
         ></div>
       </template>
@@ -1307,7 +1307,42 @@ tester.run('html-indent', rule, {
         // Ignore all :D
         ignores: ['*']
       }]
-    }
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/264
+    unIndent`
+      <template>
+        <div
+          :class="{
+            foo: (
+              a === b &&
+              c === d
+            )
+          }"
+        />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="{
+            foo:
+              a === b &&
+              c === d
+          }"
+        />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="{
+            foo: a === b &&
+              c === d
+          }"
+        />
+      </template>
+    `
   ],
 
   invalid: [
@@ -1779,10 +1814,10 @@ tester.run('html-indent', rule, {
                     a
                         =
                         b
-                            +
-                            c
-                            +
-                            d
+                        +
+                        c
+                        +
+                        d
                 "
             ></div>
         </template>
@@ -1800,10 +1835,10 @@ tester.run('html-indent', rule, {
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
         { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 18 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 19 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 20 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 21 },
-        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 22 }
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 22 }
       ]
     },
 
