@@ -90,79 +90,58 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
       code: '<template><div>{{ text}}</div></template>',
       output: '<template><div>{{ text }}</div></template>',
       options: ['always'],
-      errors: [{
-        message: 'Found none whitespaces, 1 expected.',
-        type: 'VExpressionEnd'
-      }]
+      errors: ["Expected 1 space before '}}', but not found."]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{text }}</div></template>',
       output: '<template><div>{{ text }}</div></template>',
       options: ['always'],
-      errors: [{
-        message: 'Found none whitespaces, 1 expected.',
-        type: 'Identifier'
-      }]
+      errors: ["Expected 1 space after '{{', but not found."]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{ text}}</div></template>',
       output: '<template><div>{{text}}</div></template>',
       options: ['never'],
-      errors: [{
-        message: 'Found 1 whitespaces, none expected.',
-        type: 'Identifier'
-      }]
+      errors: ["Expected no space after '{{', but found."]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{text }}</div></template>',
       output: '<template><div>{{text}}</div></template>',
       options: ['never'],
-      errors: [{
-        message: 'Found 1 whitespaces, none expected.',
-        type: 'VExpressionEnd'
-      }]
+      errors: ["Expected no space before '}}', but found."]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{text}}</div></template>',
       output: '<template><div>{{ text }}</div></template>',
       options: ['always'],
-      errors: [{
-        message: 'Found none whitespaces, 1 expected.',
-        type: 'Identifier'
-      }, {
-        message: 'Found none whitespaces, 1 expected.',
-        type: 'VExpressionEnd'
-      }]
+      errors: [
+        "Expected 1 space after '{{', but not found.",
+        "Expected 1 space before '}}', but not found."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{ text }}</div></template>',
       output: '<template><div>{{text}}</div></template>',
       options: ['never'],
-      errors: [{
-        message: 'Found 1 whitespaces, none expected.',
-        type: 'Identifier'
-      }, {
-        message: 'Found 1 whitespaces, none expected.',
-        type: 'VExpressionEnd'
-      }]
+      errors: [
+        "Expected no space after '{{', but found.",
+        "Expected no space before '}}', but found."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div>{{   text   }}</div></template>',
       output: '<template><div>{{text}}</div></template>',
       options: ['never'],
-      errors: [{
-        message: 'Found 3 whitespaces, none expected.',
-        type: 'Identifier'
-      }, {
-        message: 'Found 3 whitespaces, none expected.',
-        type: 'VExpressionEnd'
-      }]
+      errors: [
+        "Expected no space after '{{', but found.",
+        "Expected no space before '}}', but found."
+      ]
     }
   ]
 })

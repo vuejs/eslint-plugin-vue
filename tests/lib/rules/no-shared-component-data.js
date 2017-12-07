@@ -130,6 +130,15 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
+      output: `
+        Vue.component('some-comp', {
+          data: function() {
+return {
+            foo: 'bar'
+          };
+}
+        })
+      `,
       parserOptions,
       errors: [{
         message: '`data` property in component must be a function',
@@ -143,6 +152,39 @@ ruleTester.run('no-shared-component-data', rule, {
           data: {
             foo: 'bar'
           }
+        }
+      `,
+      output: `
+        export default {
+          data: function() {
+return {
+            foo: 'bar'
+          };
+}
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: '`data` property in component must be a function',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          data: /*a*/ (/*b*/{
+            foo: 'bar'
+          })
+        }
+      `,
+      output: `
+        export default {
+          data: /*a*/ function() {
+return (/*b*/{
+            foo: 'bar'
+          });
+}
         }
       `,
       parserOptions,
