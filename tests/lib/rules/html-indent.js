@@ -1342,6 +1342,91 @@ tester.run('html-indent', rule, {
           }"
         />
       </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="
+            [
+              a
+                +
+                b,
+              c
+                +
+                d
+            ]
+          "
+        />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="
+            foo(
+              a
+                +
+                b,
+              c
+                +
+                d
+            )
+          "
+        />
+        <div
+          :class="
+            new Foo(
+              a
+                +
+                b,
+              c
+                +
+                d
+            )
+          "
+        />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="
+            a
+              +
+              b,
+            c
+              +
+              d
+          "
+        />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          :class="
+            foo(
+              a
+                +
+                b
+            )
+          "
+        />
+        <div
+          :class="
+            foo(
+              (
+                a +
+                b
+              ),
+              (
+                c +
+                d
+              )
+            )
+          "
+        />
+      </template>
     `
   ],
 
