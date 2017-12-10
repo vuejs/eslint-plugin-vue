@@ -32,4 +32,13 @@ describe('getConverter()', () => {
     assert.ok(converter('FooBar') === 'foo-bar')
     assert.ok(converter('Foo1Bar') === 'foo1bar')
   })
+
+  it('should conver string to snake_case', () => {
+    const converter = casing.getConverter('snake_case')
+
+    assert.ok(converter('fooBar') === 'foo_bar')
+    assert.ok(converter('foo-bar') === 'foo_bar')
+    assert.ok(converter('FooBar') === 'foo_bar')
+    assert.ok(converter('Foo1Bar') === 'foo1bar')
+  })
 })
