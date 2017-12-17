@@ -1290,6 +1290,46 @@ tester.run('html-indent', rule, {
         }}
       </template>
     `,
+    unIndent`
+      <template>
+        {{
+          message
+          // comment
+          // comment
+        }}
+        <!-- comment -->
+      </template>
+    `,
+    unIndent`
+      <template>
+        {{
+          message
+          /*
+           * comment
+           */
+        }}
+      </template>
+    `,
+    unIndent`
+      <template>
+        {{
+          message
+        // comment
+        // comment
+        }}
+        <!-- comment -->
+      </template>
+    `,
+    unIndent`
+      <template>
+        {{
+          message
+        /*
+         * comment
+         */
+        }}
+      </template>
+    `,
 
     // Ignores
     {
@@ -4244,6 +4284,63 @@ tester.run('html-indent', rule, {
       errors: [
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 3 },
         { message: 'Expected indentation of 4 spaces but found 2 spaces.', line: 6 }
+      ]
+    },
+    {
+      code: unIndent`
+        <template>
+        {{
+        message
+        // comment
+        // comment
+        }}
+        <!-- comment -->
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          {{
+            message
+            // comment
+            // comment
+          }}
+        <!-- comment -->
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 5 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 6 }
+      ]
+    },
+    {
+      code: unIndent`
+        <template>
+        {{
+        message
+        /*
+         * comment
+         */
+        }}
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          {{
+            message
+            /*
+             * comment
+             */
+          }}
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 7 }
       ]
     },
 
