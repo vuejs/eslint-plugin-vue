@@ -12,4 +12,5 @@ test:
     - nvm use 4 && npm test
     - nvm use 6 && npm test
     - nvm use 8 && npm test
-    - nvm use 8 && npm i eslint@3.18.0 --no-save && npm run -s test:base
+    # Test for the minimum version we are supporting.
+    - nvm use 8 && npm i eslint@3.18.0 --no-save && $(npm bin)/mocha tests/lib/rules/*.js --reporter dot
