@@ -68,6 +68,34 @@ ruleTester.run('require-default-prop', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const x = {
+          type: Object,
+          default() {
+            return {
+              foo: 1,
+              bar: 2
+            }
+          }
+        }
+        export default {
+          props: {
+            a: {
+              ...x,
+              default() {
+                return {
+                  ...x.default(),
+                  baz: 3
+                }
+              }
+            }
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
