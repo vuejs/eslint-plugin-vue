@@ -90,14 +90,14 @@ tester.run('html-indent', rule, {
     unIndent`
       <template>
         <div a="a"
-             b="b"
-             c=
-               "c"
-             d
-               ="d"
-             e
-             f
-               =
+          b="b"
+          c=
+            "c"
+          d
+            ="d"
+          e
+          f
+            =
         ></div>
       </template>
     `,
@@ -1466,6 +1466,28 @@ tester.run('html-indent', rule, {
             )
           "
         />
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div a="a"
+          :b="b"
+          c="c"
+        ></div>
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div
+          a="a"
+          b="b"
+        ></div>
+      </template>
+    `,
+    unIndent`
+      <template>
+        <div a="a" b="b">
+        </div>
       </template>
     `
   ],

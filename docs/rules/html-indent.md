@@ -23,33 +23,38 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ```html
 <template>
-    <div class="foo">
-        Hello.
-    </div>
+  <div class="foo">
+    Hello.
+  </div>
 </template>
 ```
 
 ```html
 <template>
-    <div class="foo">
-        Hello.
-    </div>
-    <div
-        id="a"
-        class="b"
-        :other-attr="{
-            aaa: 1,
-            bbb: 2
-        }"
-        @other-attr2="
-            foo();
-            bar();
-        "
-    >
-        {{
-            displayMessage
-        }}
-    </div>
+  <div class="foo">
+    Hello.
+  </div>
+  <div class="foo"
+    :foo="bar"
+  >
+    World.
+  </div>
+  <div
+    id="a"
+    class="b"
+    :other-attr="{
+      aaa: 1,
+      bbb: 2
+    }"
+    @other-attr2="
+      foo();
+      bar();
+    "
+  >
+    {{
+      displayMessage
+    }}
+  </div>
 </template>
 ```
 
@@ -57,11 +62,11 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ```json
 {
-    "vue/html-indent": ["error", type, {
-        "attribute": 1,
-        "closeBracket": 0,
-        "ignores": []
-    }]
+  "vue/html-indent": ["error", type, {
+    "attribute": 1,
+    "closeBracket": 0,
+    "ignores": []
+  }]
 }
 ```
 
@@ -74,16 +79,16 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ```html
 <template>
-    <div
-        id="a"
-        class="b"
-        other-attr=
-            "{longname: longvalue}"
-        other-attr2
-            ="{longname: longvalue}"
-        >
-        Text
-    </div>
+  <div
+    id="a"
+    class="b"
+    other-attr=
+      "{longname: longvalue}"
+    other-attr2
+      ="{longname: longvalue}"
+    >
+    Text
+  </div>
 </template>
 ```
 
@@ -91,16 +96,16 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ```html
 <template>
-    <div
-            id="a"
-            class="b"
-            other-attr=
-                "{longname: longvalue}"
-            other-attr2
-                ="{longname: longvalue}"
-        >
-        Text
-    </div>
+  <div
+      id="a"
+      class="b"
+      other-attr=
+        "{longname: longvalue}"
+      other-attr2
+        ="{longname: longvalue}"
+    >
+    Text
+  </div>
 </template>
 ```
 
@@ -108,9 +113,9 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ```html
 <template>
-    <div
-    id=""
-      class=""
-    />
+  <div
+  id=""
+    class=""
+  />
 </template>
 ```
