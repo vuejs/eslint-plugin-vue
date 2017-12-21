@@ -1542,6 +1542,40 @@ tester.run('html-indent', rule, {
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 11 }
       ]
     },
+    {
+      code: unIndent`
+        <template>
+            <div a="a"
+                b="b"
+                c=
+                    "c"
+            >
+                Text
+            </div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          <div a="a"
+            b="b"
+            c=
+              "c"
+          >
+            Text
+          </div>
+        </template>
+      `,
+      options: [2],
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 8 spaces.', line: 3 },
+        { message: 'Expected indentation of 4 spaces but found 8 spaces.', line: 4 },
+        { message: 'Expected indentation of 6 spaces but found 12 spaces.', line: 5 },
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 6 },
+        { message: 'Expected indentation of 4 spaces but found 8 spaces.', line: 7 },
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 8 }
+      ]
+    },
 
     // VEndTag
     {
