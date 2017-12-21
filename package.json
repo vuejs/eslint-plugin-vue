@@ -43,7 +43,7 @@
     "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
-    "requireindex": "^1.1.0",
+    "require-all": "^2.2.0",
     "vue-eslint-parser": "^2.0.1-beta.1"
   },
   "devDependencies": {
