@@ -66,12 +66,16 @@ tester.run('no-unused-vars', rule, {
       errors: ["'f' is defined but never used."]
     },
     {
-      code: '<template><div v-for="(v, i, c) in foo"></div></template>',
-      errors: ["'v' is defined but never used.", "'i' is defined but never used.", "'c' is defined but never used."]
+      code: '<template><div v-for="(a, b, c) in foo"></div></template>',
+      errors: ["'a' is defined but never used.", "'b' is defined but never used.", "'c' is defined but never used."]
     },
     {
-      code: '<template><div v-for="(v, i, c) in foo">{{i}}</div></template>',
-      errors: ["'v' is defined but never used.", "'c' is defined but never used."]
+      code: '<template><div v-for="(a, b, c) in foo">{{a}}</div></template>',
+      errors: ["'b' is defined but never used.", "'c' is defined but never used."]
+    },
+    {
+      code: '<template><div v-for="(a, b, c) in foo">{{b}}</div></template>',
+      errors: ["'c' is defined but never used."]
     },
     {
       code: '<template><div v-for="(item, key) in items" :key="item.id">{{item.name}}</div></template>',
