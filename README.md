@@ -121,7 +121,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
 |  | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
 |  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
-|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
+| :wrench: | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
 |  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
@@ -181,7 +181,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
+| :wrench: | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 |  | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |

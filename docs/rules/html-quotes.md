@@ -1,5 +1,7 @@
 # enforce quotes style of HTML attributes (html-quotes)
 
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
 You can choose quotes of HTML attributes from:
 
 - Double quotes: `<div class="foo">`
