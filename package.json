@@ -44,6 +44,10 @@
   },
   "dependencies": {
     "require-all": "^2.2.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.snakecase": "^4.1.1",
+    "lodash.upperfirst": "^4.3.1",
     "vue-eslint-parser": "^2.0.1-beta.1"
   },
   "devDependencies": {
