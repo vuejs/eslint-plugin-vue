@@ -1,0 +1,16 @@
+<!--{}-->
+<template>
+  <div
+    v-on:a="
+      try
+      {
+      }
+      catch
+        (
+          err
+        )
+      {
+      }
+    "
+  ></div>
+</template>

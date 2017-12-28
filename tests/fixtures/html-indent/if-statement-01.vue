@@ -1,0 +1,14 @@
+<!--{}-->
+<template>
+  <div
+    v-on:a="
+      if
+        (
+          a
+        )
+      {
+        ;
+      }
+    "
+  ></div>
+</template>

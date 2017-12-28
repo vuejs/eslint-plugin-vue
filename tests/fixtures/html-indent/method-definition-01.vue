@@ -1,0 +1,41 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:b="class {
+      bbb
+        (
+          a
+          ,
+          b
+        )
+      {
+        ;
+      }
+      static
+      get
+      ccc
+        (
+        )
+      {
+        ;
+      }
+      [
+        d
+      ]
+        (
+        )
+      {
+        ;
+      }
+      get
+      [
+        e
+      ]
+        (
+        )
+      {
+        ;
+      }
+    }"
+  ></div>
+</template>
