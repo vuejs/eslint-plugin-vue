@@ -1,11 +1,11 @@
 machine:
   node:
-    version: 4
+    version: 8
 
 dependencies:
   pre:
     - nvm install 6
-    - nvm install 8
+    - nvm install 4
 
 test:
   override:
