@@ -90,14 +90,14 @@ tester.run('html-indent', rule, {
     unIndent`
       <template>
         <div a="a"
-          b="b"
-          c=
-            "c"
-          d
-            ="d"
-          e
-          f
-            =
+             b="b"
+             c=
+               "c"
+             d
+               ="d"
+             e
+             f
+               =
         ></div>
       </template>
     `,
@@ -1269,6 +1269,40 @@ tester.run('html-indent', rule, {
       options: [4, { switchCase: 1 }]
     },
 
+    // options.alignAttributesVertically
+    {
+      code: unIndent`
+        <template>
+          <div a="a"
+            b="b"
+            c=
+              "c"
+            d
+              ="d"
+            e
+            f
+              =
+          ></div>
+        </template>
+      `,
+      options: [2, {
+        alignAttributesVertically: false
+      }]
+    },
+    {
+      code: unIndent`
+        <template>
+          <div a="a"
+            :b="b"
+            c="c"
+          ></div>
+        </template>
+      `,
+      options: [2, {
+        alignAttributesVertically: false
+      }]
+    },
+
     // Comments
     unIndent`
       <template>
@@ -1471,8 +1505,8 @@ tester.run('html-indent', rule, {
     unIndent`
       <template>
         <div a="a"
-          :b="b"
-          c="c"
+             :b="b"
+             c="c"
         ></div>
       </template>
     `,
@@ -1557,6 +1591,40 @@ tester.run('html-indent', rule, {
       output: unIndent`
         <template>
           <div a="a"
+               b="b"
+               c=
+                 "c"
+          >
+            Text
+          </div>
+        </template>
+      `,
+      options: [2],
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 2 },
+        { message: 'Expected indentation of 7 spaces but found 8 spaces.', line: 3 },
+        { message: 'Expected indentation of 7 spaces but found 8 spaces.', line: 4 },
+        { message: 'Expected indentation of 9 spaces but found 12 spaces.', line: 5 },
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 6 },
+        { message: 'Expected indentation of 4 spaces but found 8 spaces.', line: 7 },
+        { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 8 }
+      ]
+    },
+    {
+      code: unIndent`
+        <template>
+            <div a="a"
+                b="b"
+                c=
+                    "c"
+            >
+                Text
+            </div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          <div a="a"
             b="b"
             c=
               "c"
@@ -1565,7 +1633,9 @@ tester.run('html-indent', rule, {
           </div>
         </template>
       `,
-      options: [2],
+      options: [2, {
+        alignAttributesVertically: false
+      }],
       errors: [
         { message: 'Expected indentation of 2 spaces but found 4 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 8 spaces.', line: 3 },

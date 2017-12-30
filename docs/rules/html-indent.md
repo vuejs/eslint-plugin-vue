@@ -35,7 +35,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
     Hello.
   </div>
   <div class="foo"
-    :foo="bar"
+       :foo="bar"
   >
     World.
   </div>
@@ -65,6 +65,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   "vue/html-indent": ["error", type, {
     "attribute": 1,
     "closeBracket": 0,
+    "alignAttributesVertically": true,
     "ignores": []
   }]
 }
@@ -73,6 +74,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `closeBracket` (`integer`) ... The multiplier of indentation for right brackets. Default is `0`.
+- `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`
 - `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
 
 :+1: Examples of **correct** code for `{attribute: 1, closeBracket: 1}`:
@@ -116,6 +118,28 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   <div
   id=""
     class=""
+  />
+</template>
+```
+
+:+1: Examples of **correct** code for `{alignAttributesVertically: true}`:
+
+```html
+<template>
+  <div id=""
+       class=""
+       some-attr=""
+  />
+</template>
+```
+
+:+1: Examples of **correct** code for `{alignAttributesVertically: false}`:
+
+```html
+<template>
+  <div id=""
+    class=""
+    some-attr=""
   />
 </template>
 ```
