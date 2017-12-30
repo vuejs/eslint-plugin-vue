@@ -1,0 +1,22 @@
+<!--{}-->
+<script>
+import
+  f
+  ,
+  {
+    a
+    ,
+    b
+  }
+  from
+  "mod"
+;
+import
+  g,
+  {
+    c,
+    d
+  }
+  from
+  "mod"
+</script>

@@ -1,4 +1,6 @@
-node_modules
-lib/*-rules.js
-coverage
-.nyc_output
+/.nyc_output
+/coverage
+/lib/*-rules.js
+/node_modules
+/tests/fixtures
+/tests/integrations/*/node_modules

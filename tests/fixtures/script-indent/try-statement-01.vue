@@ -1,0 +1,12 @@
+<!--{}-->
+<script>
+try
+{
+}
+catch
+  (
+    err
+  )
+{
+}
+</script>
