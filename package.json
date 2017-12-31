@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "require-all": "^2.2.0",
-    "vue-eslint-parser": "^2.0.1-beta.1"
+    "vue-eslint-parser": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
