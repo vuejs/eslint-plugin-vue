@@ -69,6 +69,24 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: externalProps
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     }
   ],
 
