@@ -29,12 +29,12 @@ This rule enforces a line break (or no line break) before tag's closing brackets
 }
 ```
 
-- `singleline` ... the configuration for single-line elements. It's a single-line element if the element does not have attributes or the last attribute is on the same line of the opening bracket.
-    - `"never"` ... disallow line breaks before the closing bracket of elements. This is the default.
-    - `"always"` ... require one line break before the closing bracket of elements.
+- `singleline` ... the configuration for single-line elements. It's a single-line element if the element does not have attributes or the last attribute is on the same line as the opening bracket.
+    - `"never"` ... disallow line breaks before the closing bracket. This is the default.
+    - `"always"` ... require one line break before the closing bracket.
 - `multiline` ... the configuration for multiline elements. It's a multiline element if the last attribute is not on the same line of the opening bracket.
-    - `"never"` ... disallow line breaks before the closing bracket of elements. This is the default.
-    - `"always"` ... require one line break before the closing bracket of elements.
+    - `"never"` ... disallow line breaks before the closing bracket. This is the default.
+    - `"always"` ... require one line break before the closing bracket.
 
 Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-level of the closing brackets.
 
