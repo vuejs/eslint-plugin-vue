@@ -6,14 +6,6 @@
 
 > Official ESLint plugin for Vue.js
 
-## :exclamation: Attention - this is documentation for version `4.x` :exclamation:
-
-This branch contains `eslint-plugin-vue@next` which is a pre-released `4.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
-
-Please try it and report any issues that you might have encountered.
-
-If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
-
 ## :art: Playground on the Web
 
 You can try this plugin on the Web.
@@ -28,7 +20,7 @@ You can try this plugin on the Web.
 ## :cd: Installation
 
 ```bash
-npm install --save-dev eslint eslint-plugin-vue@next
+npm install --save-dev eslint eslint-plugin-vue
 ```
 
 ## :rocket: Usage
@@ -192,6 +184,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 
 <!--RULES_TABLE_END-->
 
