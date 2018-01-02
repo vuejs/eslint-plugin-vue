@@ -183,6 +183,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 | :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 
 <!--RULES_TABLE_END-->
