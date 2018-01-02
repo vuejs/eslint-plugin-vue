@@ -2,7 +2,7 @@
 
 - :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
-This rule enforces space style before `>` of tags.
+This rule enforces consistent spacing style before closing brackets `>` of tags.
 
 ```html
 <div class="foo"> or <div class="foo" >
