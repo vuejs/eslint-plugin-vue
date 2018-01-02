@@ -48,6 +48,8 @@ module.exports = {
 All component-related rules are being applied to code that passes any of the following checks:
 
 * `Vue.component()` expression
+* `Vue.extend()` expression
+* `Vue.mixin()` expression
 * `export default {}` in `.vue` or `.jsx` file
 
 If you however want to take advantage of our rules in any of your custom objects that are Vue components, you might need to use special comment `// @vue/component` that marks object in the next line as a Vue component in any file, e.g.:
