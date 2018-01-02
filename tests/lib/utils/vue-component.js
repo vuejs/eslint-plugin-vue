@@ -128,6 +128,12 @@ function invalidTests (ext) {
     },
     {
       filename: `test.${ext}`,
+      code: `Vue.extend({})`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
       code: `
         // @vue/component
         export default { }
