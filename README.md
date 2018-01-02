@@ -95,6 +95,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [comment-directive](./docs/rules/comment-directive.md) | support comment-directives in `<template>` |
 |  | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
 
 
