@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "4.0.0-beta.4",
+  "version": "4.0.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "require-all": "^2.2.0",
-    "vue-eslint-parser": "^2.0.1-beta.1"
+    "vue-eslint-parser": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
