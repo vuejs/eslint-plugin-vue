@@ -55,6 +55,7 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
   invalid: [
     {
       code: '<template>\n  <div >\n  </div >\n  <div/>\n</template>',
+      output: '<template>\n  <div>\n  </div>\n  <div />\n</template>',
       errors: [
         { message: "Expected no space before '>', but found.", line: 2, column: 7, endColumn: 9 },
         { message: "Expected no space before '>', but found.", line: 3, column: 8, endColumn: 10 },
@@ -63,6 +64,7 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
     },
     {
       code: '<template>\n  <div foo ></div>\n  <div foo/>\n</template>',
+      output: '<template>\n  <div foo></div>\n  <div foo />\n</template>',
       errors: [
         { message: "Expected no space before '>', but found.", line: 2, column: 11, endColumn: 13 },
         { message: "Expected a space before '/>', but not found.", line: 3, column: 11, endColumn: 13 }
@@ -70,6 +72,7 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
     },
     {
       code: '<template>\n  <div foo="1" ></div>\n  <div foo="1"/>\n</template>',
+      output: '<template>\n  <div foo="1"></div>\n  <div foo="1" />\n</template>',
       errors: [
         { message: "Expected no space before '>', but found.", line: 2, column: 15, endColumn: 17 },
         { message: "Expected a space before '/>', but not found.", line: 3, column: 15, endColumn: 17 }
@@ -77,6 +80,7 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
     },
     {
       code: '<template >\n  <div>\n  </div>\n  <div />\n</template >',
+      output: '<template >\n  <div >\n  </div >\n  <div/>\n</template >',
       options: [{
         startTag: 'always',
         endTag: 'always',
