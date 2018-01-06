@@ -71,6 +71,20 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 })
 ```
 
+### `eslint-disable` functionality in `<template>`
+
+You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vue` files. For example:
+
+```html
+<template>
+  <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+  <div a="1" b="2" c="3" d="4">
+  </div>
+</template>
+```
+
+If you want to disallow `eslint-disable` functionality, please disable [vue/comment-directive](./docs/rules/comment-directive.md) rule.
+
 ## :gear: Configs
 
 This plugin provides two predefined configs:
