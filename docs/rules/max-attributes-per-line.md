@@ -9,7 +9,7 @@ This rule aims to enforce a number of attributes per line in templates.
 It checks all the elements in a template and verifies that the number of attributes per line does not exceed the defined maximum.
 An attribute is considered to be in a new line when there is a line break between two attributes.
 
-There is a configurable number of attributes that are acceptable in one-line case (default 3), as well as how many attributes are acceptable per line in multi-line case (default 1).
+There is a configurable number of attributes that are acceptable in one-line case (default 1), as well as how many attributes are acceptable per line in multi-line case (default 1).
 
 :-1: Examples of **incorrect** code for this rule:
 
@@ -48,7 +48,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```json
 {
   "vue/max-attributes-per-line": [2, {
-    "singleline": 3,
+    "singleline": 1,
     "multiline": {
       "max": 1,
       "allowFirstLine": false

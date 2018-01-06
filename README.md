@@ -6,14 +6,6 @@
 
 > Official ESLint plugin for Vue.js
 
-## :exclamation: Attention - this is documentation for version `4.x` :exclamation:
-
-This branch contains `eslint-plugin-vue@next` which is a pre-released `4.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
-
-Please try it and report any issues that you might have encountered.
-
-If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
-
 ## :art: Playground on the Web
 
 You can try this plugin on the Web.
@@ -28,7 +20,7 @@ You can try this plugin on the Web.
 ## :cd: Installation
 
 ```bash
-npm install --save-dev eslint eslint-plugin-vue@next
+npm install --save-dev eslint eslint-plugin-vue
 ```
 
 ## :rocket: Usage
@@ -79,6 +71,20 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 })
 ```
 
+### `eslint-disable` functionality in `<template>`
+
+You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vue` files. For example:
+
+```html
+<template>
+  <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+  <div a="1" b="2" c="3" d="4">
+  </div>
+</template>
+```
+
+If you want to disallow `eslint-disable` functionality, please disable [vue/comment-directive](./docs/rules/comment-directive.md) rule.
+
 ## :gear: Configs
 
 This plugin provides two predefined configs:
@@ -103,6 +109,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [comment-directive](./docs/rules/comment-directive.md) | support comment-directives in `<template>` |
 |  | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
 
 
@@ -121,7 +128,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
 |  | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
 |  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
-|  | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
+| :wrench: | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
 |  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 |  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
@@ -181,10 +188,26 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
+| :wrench: | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 |  | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
 |  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
+
+
+### Uncategorized
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+
+
+### Uncategorized
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 
 <!--RULES_TABLE_END-->
 

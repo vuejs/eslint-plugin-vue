@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "4.0.0-beta.2",
+  "version": "4.1.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -43,16 +43,17 @@
     "eslint": "^3.18.0 || ^4.0.0"
   },
   "dependencies": {
-    "requireindex": "^1.1.0",
-    "vue-eslint-parser": "^2.0.1-beta.1"
+    "require-all": "^2.2.0",
+    "vue-eslint-parser": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
     "babel-eslint": "^7.2.3",
     "chai": "^4.1.0",
-    "eslint": "^3.19.0",
+    "eslint": "^4.12.1",
     "eslint-plugin-eslint-plugin": "^0.8.0",
-    "eslint-plugin-vue-libs": "^1.2.0",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-vue-libs": "^2.0.0",
     "mocha": "^3.2.0",
     "nyc": "^11.1.0"
   }
