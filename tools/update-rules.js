@@ -37,7 +37,10 @@ const categories = [
   'base',
   'essential',
   'strongly-recommended',
-  'recommended'
+  'recommended',
+  'use-with-caution',
+  'uncategorized',
+  'upcoming'
 // Only include categories with existing rules
 ].filter(category =>
   rules.some(entry =>
@@ -63,7 +66,8 @@ const categoryTitles = {
   'strongly-recommended': 'Priority B: Strongly Recommended (Improving Readability)',
   'recommended': 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)',
   'use-with-caution': 'Priority D: Use with Caution (Potentially Dangerous Patterns)',
-  'uncategorized': 'Uncategorized'
+  'uncategorized': 'Uncategorized',
+  'upcoming': 'Upcoming: New rules, that are not enabled in any preset config by default (Awaiting next major release to be categorized)'
 }
 
 // Throw if no title is defined for a category
@@ -79,7 +83,7 @@ const deprecatedRules = rules
 let rulesTableContent = categories.map(category => `
 ### ${categoryTitles[category]}
 ${
-  category === 'uncategorized' ? '' : `
+  ['uncategorized', 'upcoming'].indexOf(category) > -1 ? '' : `
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
 \`\`\` json
@@ -138,7 +142,7 @@ if (deprecatedRules.length) {
 }
 
 categories.forEach((category, categoryIndex) => {
-  if (category === 'uncategorized') return
+  if (['uncategorized', 'upcoming'].indexOf(category) > -1) return
   createRulesFile(category, categories.slice(0, categoryIndex + 1))
 })
 
