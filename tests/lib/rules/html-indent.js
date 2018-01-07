@@ -191,6 +191,28 @@ tester.run('html-indent', rule, loadPatterns(
         }}
       </template>
     `,
+    unIndent`
+      <template>
+        <div>
+          <!-- this comment is ignored because the next token doesn't exist. -->
+    `,
+    unIndent`
+      <template>
+        <div>
+          <div></div>
+          <!-- this comment is ignored because the next token doesn't exist. -->
+    `,
+    unIndent`
+      <template>
+        <div>
+      <!-- this comment is ignored because the next token doesn't exist. -->
+    `,
+    unIndent`
+      <template>
+        <div>
+          <div></div>
+      <!-- this comment is ignored because the next token doesn't exist. -->
+    `,
 
     // Ignores
     {
