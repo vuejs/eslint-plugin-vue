@@ -71,6 +71,20 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 })
 ```
 
+### `eslint-disable` functionality in `<template>`
+
+You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vue` files. For example:
+
+```html
+<template>
+  <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+  <div a="1" b="2" c="3" d="4">
+  </div>
+</template>
+```
+
+If you want to disallow `eslint-disable` functionality, please disable [vue/comment-directive](./docs/rules/comment-directive.md) rule.
+
 ## :gear: Configs
 
 This plugin provides two predefined configs:
@@ -95,6 +109,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [comment-directive](./docs/rules/comment-directive.md) | support comment-directives in `<template>` |
 |  | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
 
 
@@ -183,7 +198,10 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 | :wrench: | [script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
+
 
 <!--RULES_TABLE_END-->
 
