@@ -1,0 +1,9 @@
+<!--{}-->
+<script>
+try
+{
+}
+finally
+{
+}
+</script>

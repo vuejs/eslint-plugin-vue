@@ -1,0 +1,4 @@
+<!--{}-->
+<script>
+foo`test`
+</script>

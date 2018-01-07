@@ -1,0 +1,16 @@
+<!--{}-->
+<script>
+import
+  *
+    as
+    a
+  from
+  "mod"
+;
+import
+  *
+    as
+    b
+  from
+  "mod"
+</script>

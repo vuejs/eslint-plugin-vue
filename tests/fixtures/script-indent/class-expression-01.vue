@@ -1,0 +1,13 @@
+<!--{}-->
+<script>
+!class
+  extends
+    B
+{
+  ;
+  foo(){}
+  ;
+  bar(){}
+  ;
+}
+</script>

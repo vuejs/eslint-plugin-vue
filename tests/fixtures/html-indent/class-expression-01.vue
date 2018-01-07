@@ -1,0 +1,17 @@
+<!--{}-->
+<template>
+  <div
+    v-on:c="
+      !class
+        extends
+          B
+      {
+        ;
+        foo(){}
+        ;
+        bar(){}
+        ;
+      }
+    "
+  ></div>
+</template>

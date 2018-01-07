@@ -1,0 +1,16 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:c="
+      foo(
+        1
+        ,
+        2
+        ,
+        bar(
+          3
+        )
+      )
+    "
+  ></div>
+</template>
