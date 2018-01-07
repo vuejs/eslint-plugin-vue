@@ -1,4 +1,6 @@
-# require `v-bind:key` with `v-for` directives (require-v-for-key)
+# require `v-bind:key` with `v-for` directives (vue/require-v-for-key)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 When `v-for` is written on custom components, it requires `v-bind:key` at the same time.
 On other elements, it's better that `v-bind:key` is written as well.

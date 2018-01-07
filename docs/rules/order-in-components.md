@@ -1,4 +1,6 @@
-# enforce order of properties in components (order-in-components)
+# enforce order of properties in components (vue/order-in-components)
+
+- :gear: This rule is included in `"plugin:vue/recommended"`.
 
 This rule makes sure you keep declared order of properties in components.
 

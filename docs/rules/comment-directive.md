@@ -1,4 +1,6 @@
-# support comment-directives in `<template>` (comment-directive)
+# support comment-directives in `<template>` (vue/comment-directive)
+
+- :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Sole purpose of this rule is to provide `eslint-disable` functionality in `<template>`.
 It supports usage of the following comments:

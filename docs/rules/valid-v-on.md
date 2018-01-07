@@ -1,4 +1,6 @@
-# enforce valid `v-on` directives (valid-v-on)
+# enforce valid `v-on` directives (vue/valid-v-on)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-on` directive is valid.
 
@@ -11,8 +13,6 @@ This rule reports `v-on` directives in the following cases:
 - The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
-:-1: Examples of **incorrect** code for this rule:
 
 :-1: Examples of **incorrect** code for this rule:
 

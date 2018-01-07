@@ -1,4 +1,6 @@
-# enforce valid `v-model` directives (valid-v-model)
+# enforce valid `v-model` directives (vue/valid-v-model)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-model` directive is valid.
 
