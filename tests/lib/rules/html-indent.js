@@ -22,6 +22,15 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
 
 /**
  * Load test patterns from fixtures.
+ *
+ * - Valid tests:   All codes in FIXTURE_ROOT are valid code.
+ * - Invalid tests: There is an invalid test for every valid test. It removes
+ *                  all indentations from the valid test and checks whether
+ *                  `html-indent` rule restores the removed indentations exactly.
+ *
+ * If a test has some ignored line, we can't use the mechanism.
+ * So `additionalValid` and `additionalInvalid` exist for asymmetry test cases.
+ *
  * @param {object[]} additionalValid The array of additional valid patterns.
  * @param {object[]} additionalInvalid The array of additional invalid patterns.
  * @returns {object} The loaded patterns.
