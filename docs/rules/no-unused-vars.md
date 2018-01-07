@@ -1,4 +1,6 @@
-# disallow unused variable definitions of v-for directives or scope attributes (no-unused-vars)
+# disallow unused variable definitions of v-for directives or scope attributes (vue/no-unused-vars)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule report variable definitions of v-for directives or scope attributes if those are not used.
 

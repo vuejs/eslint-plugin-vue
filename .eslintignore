@@ -1,6 +1,5 @@
 /.nyc_output
 /coverage
-/lib/*-rules.js
 /node_modules
 /tests/fixtures
 /tests/integrations/*/node_modules

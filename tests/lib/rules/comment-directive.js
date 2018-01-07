@@ -191,5 +191,22 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
       assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
     })
+
+    it('should affect only the next line', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable-next-line vue/no-parsing-error, vue/no-duplicate-attributes -->
+          <div id id="a">Hello</div>
+          <div id id="b">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 2)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[0].line, 5)
+      assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[1].line, 5)
+    })
   })
 })
