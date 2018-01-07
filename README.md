@@ -103,111 +103,107 @@ Rules are grouped by priority to help you understand their purpose. The `--fix` 
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
-``` json
-"extends": "plugin:vue/base"
+```json
+{
+  "extends": "plugin:vue/base"
+}
 ```
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [comment-directive](./docs/rules/comment-directive.md) | support comment-directives in `<template>` |
-|  | [jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
-
+|  | [vue/comment-directive](./docs/rules/comment-directive.md) | support comment-directives in `<template>` |
+|  | [vue/jsx-uses-vars](./docs/rules/jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |
 
 ### Priority A: Essential (Error Prevention)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
-``` json
-"extends": "plugin:vue/essential"
+```json
+{
+  "extends": "plugin:vue/essential"
+}
 ```
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
-|  | [no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
-|  | [no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
-|  | [no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
-|  | [no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
-| :wrench: | [no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
-|  | [no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
-|  | [no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
-|  | [no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
-|  | [no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
-|  | [require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
-|  | [require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
-|  | [require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
-|  | [require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
-|  | [return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
-|  | [valid-template-root](./docs/rules/valid-template-root.md) | enforce valid template root |
-|  | [valid-v-bind](./docs/rules/valid-v-bind.md) | enforce valid `v-bind` directives |
-|  | [valid-v-cloak](./docs/rules/valid-v-cloak.md) | enforce valid `v-cloak` directives |
-|  | [valid-v-else-if](./docs/rules/valid-v-else-if.md) | enforce valid `v-else-if` directives |
-|  | [valid-v-else](./docs/rules/valid-v-else.md) | enforce valid `v-else` directives |
-|  | [valid-v-for](./docs/rules/valid-v-for.md) | enforce valid `v-for` directives |
-|  | [valid-v-html](./docs/rules/valid-v-html.md) | enforce valid `v-html` directives |
-|  | [valid-v-if](./docs/rules/valid-v-if.md) | enforce valid `v-if` directives |
-|  | [valid-v-model](./docs/rules/valid-v-model.md) | enforce valid `v-model` directives |
-|  | [valid-v-on](./docs/rules/valid-v-on.md) | enforce valid `v-on` directives |
-|  | [valid-v-once](./docs/rules/valid-v-once.md) | enforce valid `v-once` directives |
-|  | [valid-v-pre](./docs/rules/valid-v-pre.md) | enforce valid `v-pre` directives |
-|  | [valid-v-show](./docs/rules/valid-v-show.md) | enforce valid `v-show` directives |
-|  | [valid-v-text](./docs/rules/valid-v-text.md) | enforce valid `v-text` directives |
-
+|  | [vue/no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
+|  | [vue/no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
+|  | [vue/no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
+|  | [vue/no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
+|  | [vue/no-reserved-keys](./docs/rules/no-reserved-keys.md) | disallow overwriting reserved keys |
+| :wrench: | [vue/no-shared-component-data](./docs/rules/no-shared-component-data.md) | enforce component's data property to be a function |
+|  | [vue/no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
+|  | [vue/no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
+|  | [vue/no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
+|  | [vue/no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
+|  | [vue/require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
+|  | [vue/require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
+|  | [vue/require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
+|  | [vue/require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
+|  | [vue/return-in-computed-property](./docs/rules/return-in-computed-property.md) | enforce that a return statement is present in computed property |
+|  | [vue/valid-template-root](./docs/rules/valid-template-root.md) | enforce valid template root |
+|  | [vue/valid-v-bind](./docs/rules/valid-v-bind.md) | enforce valid `v-bind` directives |
+|  | [vue/valid-v-cloak](./docs/rules/valid-v-cloak.md) | enforce valid `v-cloak` directives |
+|  | [vue/valid-v-else-if](./docs/rules/valid-v-else-if.md) | enforce valid `v-else-if` directives |
+|  | [vue/valid-v-else](./docs/rules/valid-v-else.md) | enforce valid `v-else` directives |
+|  | [vue/valid-v-for](./docs/rules/valid-v-for.md) | enforce valid `v-for` directives |
+|  | [vue/valid-v-html](./docs/rules/valid-v-html.md) | enforce valid `v-html` directives |
+|  | [vue/valid-v-if](./docs/rules/valid-v-if.md) | enforce valid `v-if` directives |
+|  | [vue/valid-v-model](./docs/rules/valid-v-model.md) | enforce valid `v-model` directives |
+|  | [vue/valid-v-on](./docs/rules/valid-v-on.md) | enforce valid `v-on` directives |
+|  | [vue/valid-v-once](./docs/rules/valid-v-once.md) | enforce valid `v-once` directives |
+|  | [vue/valid-v-pre](./docs/rules/valid-v-pre.md) | enforce valid `v-pre` directives |
+|  | [vue/valid-v-show](./docs/rules/valid-v-show.md) | enforce valid `v-show` directives |
+|  | [vue/valid-v-text](./docs/rules/valid-v-text.md) | enforce valid `v-text` directives |
 
 ### Priority B: Strongly Recommended (Improving Readability)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
-``` json
-"extends": "plugin:vue/strongly-recommended"
+```json
+{
+  "extends": "plugin:vue/strongly-recommended"
+}
 ```
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
-| :wrench: | [html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
-| :wrench: | [html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
-| :wrench: | [html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
-|  | [max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
-| :wrench: | [mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
-| :wrench: | [name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
-| :wrench: | [no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
-|  | [require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
-|  | [require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
-| :wrench: | [v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
-| :wrench: | [v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
-
+| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
+| :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
+| :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
+|  | [vue/max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
+| :wrench: | [vue/mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
+| :wrench: | [vue/name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
+| :wrench: | [vue/no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
+|  | [vue/require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
+|  | [vue/require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
+| :wrench: | [vue/v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
+| :wrench: | [vue/v-on-style](./docs/rules/v-on-style.md) | enforce `v-on` directive style |
 
 ### Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
-``` json
-"extends": "plugin:vue/recommended"
+```json
+{
+  "extends": "plugin:vue/recommended"
+}
 ```
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
-|  | [no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
-|  | [order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
-|  | [this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
-
-
-### Uncategorized
-
-|    | Rule ID | Description |
-|:---|:--------|:------------|
-| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
-| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
-
+| :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
+|  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
+|  | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
+|  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
 ### Uncategorized
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
-| :wrench: | [html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+| :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 
 <!--RULES_TABLE_END-->
 

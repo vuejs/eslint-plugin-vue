@@ -1,4 +1,6 @@
-# disallow mustaches in `<textarea>` (no-textarea-mustache)
+# disallow mustaches in `<textarea>` (vue/no-textarea-mustache)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 > Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
 >
