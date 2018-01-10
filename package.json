@@ -10,10 +10,12 @@
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "pretest": "npm run lint",
     "preversion": "npm run update && npm test",
-    "update": "node ./tools/update.js"
+    "update": "node ./tools/update.js",
+    "install": "node ./tools/warn-moved.js"
   },
   "files": [
-    "lib"
+    "lib",
+    "tools/warn-moved.js"
   ],
   "homepage": "https://github.com/vuejs/eslint-plugin-vue#readme",
   "keywords": [
@@ -49,6 +51,7 @@
     "@types/node": "^4.2.16",
     "babel-eslint": "^8.1.2",
     "chai": "^4.1.0",
+    "chalk": "^2.3.0",
     "eslint": "^4.14.0",
     "eslint-plugin-eslint-plugin": "^0.8.0",
     "eslint-plugin-html": "^4.0.1",
