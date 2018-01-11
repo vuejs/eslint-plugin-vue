@@ -1,6 +1,6 @@
-# enforce valid `v-cloak` directives (vue/valid-v-cloak)
+# enforce valid `v-cloak` directives (@vue/valid-v-cloak)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:@vue/essential"`, `"plugin:@vue/strongly-recommended"` and `"plugin:@vue/recommended"`.
 
 This rule checks whether every `v-cloak` directive is valid.
 

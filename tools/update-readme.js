@@ -30,7 +30,7 @@ function toDeprecatedRuleRow (rule) {
   const link = `[${rule.ruleId}](./docs/rules/${rule.name}.md)`
   const replacedRules = rule.meta.docs.replacedBy || []
   const replacedBy = replacedRules
-    .map(name => `[vue/${name}](./docs/rules/${name}.md)`)
+    .map(name => `[@vue/${name}](./docs/rules/${name}.md)`)
     .join(', ')
 
   return `| ${link} | ${replacedBy || '(no replacement)'} |`
@@ -44,7 +44,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 \`\`\`json
 {
-  "extends": "plugin:vue/${category.categoryId}"
+  "extends": "plugin:@vue/${category.categoryId}"
 }
 \`\`\`
 

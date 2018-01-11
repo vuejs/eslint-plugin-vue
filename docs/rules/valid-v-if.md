@@ -1,6 +1,6 @@
-# enforce valid `v-if` directives (vue/valid-v-if)
+# enforce valid `v-if` directives (@vue/valid-v-if)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:@vue/essential"`, `"plugin:@vue/strongly-recommended"` and `"plugin:@vue/recommended"`.
 
 This rule checks whether every `v-if` directive is valid.
 

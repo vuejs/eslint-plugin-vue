@@ -39,7 +39,7 @@ for (const rule of rules) {
   const notes = []
 
   if (categoryIndex >= 0) {
-    const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
+    const presets = categories.slice(categoryIndex).map(category => `\`"plugin:@vue/${category.categoryId}"\``)
     notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
   }
   if (rule.meta.deprecated) {

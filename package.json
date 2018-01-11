@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-vue",
+  "name": "@vue/eslint-plugin",
   "version": "4.2.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",

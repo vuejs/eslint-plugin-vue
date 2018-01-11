@@ -1,6 +1,6 @@
-# enforce usage of `this` in template (vue/this-in-template)
+# enforce usage of `this` in template (@vue/this-in-template)
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:@vue/recommended"`.
 
 ## :book: Rule Details
 

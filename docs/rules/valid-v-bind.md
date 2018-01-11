@@ -1,6 +1,6 @@
-# enforce valid `v-bind` directives (vue/valid-v-bind)
+# enforce valid `v-bind` directives (@vue/valid-v-bind)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:@vue/essential"`, `"plugin:@vue/strongly-recommended"` and `"plugin:@vue/recommended"`.
 
 This rule checks whether every `v-bind` directive is valid.
 

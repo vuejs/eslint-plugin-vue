@@ -45,7 +45,7 @@ module.exports = {
     es6: true
   },
   plugins: [
-    'vue'
+    '@vue'
   ],
   rules: ${formatRules(category.rules)}
 }

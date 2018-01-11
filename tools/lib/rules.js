@@ -14,7 +14,7 @@ module.exports =
     .filter(file => path.extname(file) === '.js')
     .map(file => path.basename(file, '.js'))
     .map(name => ({
-      ruleId: `vue/${name}`,
+      ruleId: `@vue/${name}`,
       name,
       meta: require(path.join(ROOT, name)).meta
     }))

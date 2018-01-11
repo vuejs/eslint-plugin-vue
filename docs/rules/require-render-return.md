@@ -1,6 +1,6 @@
-# enforce render function to always return value (vue/require-render-return)
+# enforce render function to always return value (@vue/require-render-return)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:@vue/essential"`, `"plugin:@vue/strongly-recommended"` and `"plugin:@vue/recommended"`.
 
 This rule aims to enforce render function to always return value
 
