@@ -1,8 +1,7 @@
 <!--{}-->
 <script>
 !{
-  aaa
-    :
-    1
+  x,
+  y
 }
 </script>
