@@ -81,6 +81,36 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
       filename: 'test.vue',
       code: '<template><div>{{   text   }}</div></template>',
       options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{text}}</div></template>',
+      options: ['consistent']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{ text }}</div></template>',
+      options: ['consistent']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{  text  }}</div></template>',
+      options: ['consistent']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{      }}</div></template>',
+      options: ['consistent']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{ }}</div></template>',
+      options: ['consistent']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{}}</div></template>',
+      options: ['consistent']
     }
   ],
 
@@ -142,6 +172,20 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
         "Expected no space after '{{', but found.",
         "Expected no space before '}}', but found."
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{ text}}</div></template>',
+      output: '<template><div>{{ text }}</div></template>',
+      options: ['consistent'],
+      errors: ["Expected 1 space before '}}', but not found."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div>{{text }}</div></template>',
+      output: '<template><div>{{text}}</div></template>',
+      options: ['consistent'],
+      errors: ["Expected no space before '}}', but found."]
     }
   ]
 })
