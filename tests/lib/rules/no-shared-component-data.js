@@ -141,7 +141,7 @@ return {
       `,
       parserOptions,
       errors: [{
-        message: '`data` property in component must be a function',
+        message: '`data` property in component must be a function.',
         line: 3
       }]
     },
@@ -165,7 +165,7 @@ return {
       `,
       parserOptions,
       errors: [{
-        message: '`data` property in component must be a function',
+        message: '`data` property in component must be a function.',
         line: 3
       }]
     },
@@ -189,7 +189,7 @@ return (/*b*/{
       `,
       parserOptions,
       errors: [{
-        message: '`data` property in component must be a function',
+        message: '`data` property in component must be a function.',
         line: 3
       }]
     }

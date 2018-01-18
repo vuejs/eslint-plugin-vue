@@ -9,7 +9,8 @@
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "pretest": "npm run lint",
-    "preversion": "npm run update && npm test",
+    "preversion": "npm test && npm run update && git add .",
+    "version": "npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js"
   },
   "files": [
