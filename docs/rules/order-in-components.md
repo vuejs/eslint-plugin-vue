@@ -46,7 +46,7 @@ If you want you can change the order providing the optional configuration in you
 
 ``` json
 "vue/order-in-components": ["error", {
-  order: [
+  "order": [
     "el",
     "name",
     "parent",
