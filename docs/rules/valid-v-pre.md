@@ -1,4 +1,6 @@
-# enforce valid `v-pre` directives (valid-v-pre)
+# enforce valid `v-pre` directives (vue/valid-v-pre)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-pre` directive is valid.
 

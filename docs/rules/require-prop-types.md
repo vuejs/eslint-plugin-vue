@@ -1,4 +1,6 @@
-# require type definitions in props (require-prop-types)
+# require type definitions in props (vue/require-prop-types)
+
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 

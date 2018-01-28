@@ -1,0 +1,14 @@
+<!--{}-->
+<script>
+function
+  *
+  foo
+  (
+    a
+    ,
+    b
+  )
+{
+  ;
+}
+</script>

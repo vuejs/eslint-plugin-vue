@@ -1,4 +1,6 @@
-# enforce the maximum number of attributes per line (max-attributes-per-line)
+# enforce the maximum number of attributes per line (vue/max-attributes-per-line)
+
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Limits the maximum number of attributes/properties per line to improve readability.
 

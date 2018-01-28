@@ -1,0 +1,13 @@
+<!--{}-->
+<template>
+  <div
+    v-on:a="
+      do
+        ;
+      while
+        (
+          a
+        )
+    "
+  ></div>
+</template>

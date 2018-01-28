@@ -1,0 +1,14 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:c="
+      a
+        =
+        b
+        +
+        c
+        +
+        d
+    "
+  ></div>
+</template>

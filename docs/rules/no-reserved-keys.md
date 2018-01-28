@@ -1,4 +1,6 @@
-# disallow overwriting reserved keys (no-reserved-keys)
+# disallow overwriting reserved keys (vue/no-reserved-keys)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
 

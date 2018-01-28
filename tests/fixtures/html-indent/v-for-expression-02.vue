@@ -1,0 +1,16 @@
+<!--{}-->
+<template>
+  <div
+    v-for="
+      (
+        x
+        ,
+        y
+        ,
+        z
+      )
+        of
+          xs
+    "
+  ></div>
+</template>

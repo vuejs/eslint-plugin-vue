@@ -1,4 +1,6 @@
-# enforce valid `v-html` directives (valid-v-html)
+# enforce valid `v-html` directives (vue/valid-v-html)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-html` directive is valid.
 

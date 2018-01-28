@@ -1,4 +1,6 @@
-# enforce that a return statement is present in computed property (return-in-computed-property)
+# enforce that a return statement is present in computed property (vue/return-in-computed-property)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 

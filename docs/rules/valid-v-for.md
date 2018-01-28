@@ -1,4 +1,6 @@
-# enforce valid `v-for` directives (valid-v-for)
+# enforce valid `v-for` directives (vue/valid-v-for)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-for` directive is valid.
 

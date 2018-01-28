@@ -1,0 +1,13 @@
+<!--{}-->
+<template>
+  <div
+    v-on:a="
+      class
+        A
+      {
+        foo(){}
+        bar(){}
+      }
+    "
+  ></div>
+</template>

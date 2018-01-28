@@ -26,6 +26,7 @@ const linter = new eslint.CLIEngine({
   },
   plugins: ['vue'],
   rules: {
+    'no-unused-vars': 'error',
     'vue/comment-directive': 'error',
     'vue/no-parsing-error': 'error',
     'vue/no-duplicate-attributes': 'error'
@@ -107,6 +108,22 @@ describe('comment-directive', () => {
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
       assert.deepEqual(messages[0].line, 6)
+    })
+
+    it('should not affect to the code in <script>.', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable -->
+          <div id id="a">Hello</div>
+        </template>
+        <script>
+          var a
+        </script>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.strictEqual(messages.length, 1)
+      assert.strictEqual(messages[0].ruleId, 'no-unused-vars')
     })
   })
 
@@ -190,6 +207,23 @@ describe('comment-directive', () => {
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
       assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
+    })
+
+    it('should affect only the next line', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable-next-line vue/no-parsing-error, vue/no-duplicate-attributes -->
+          <div id id="a">Hello</div>
+          <div id id="b">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 2)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[0].line, 5)
+      assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[1].line, 5)
     })
   })
 })

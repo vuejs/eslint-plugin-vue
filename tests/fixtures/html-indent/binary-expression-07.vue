@@ -1,0 +1,13 @@
+<!--{}-->
+<template>
+  <div
+    :class="[
+      a
+        +
+        b,
+      c
+        +
+        d
+    ]"
+  />
+</template>
