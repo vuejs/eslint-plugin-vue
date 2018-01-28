@@ -25,7 +25,7 @@ This rule aims to enforce unified spacing in mustache interpolations.
 Default spacing is set to `always`
 
 ```
-'vue/mustache-interpolation-spacing': [2, 'always'|'never']
+'vue/mustache-interpolation-spacing': [2, 'always'|'never'|'consistent']
 ```
 
 ### `"always"` - Expect one space between expression and curly brackets.
@@ -55,4 +55,26 @@ Default spacing is set to `always`
 
 ```html
 <div>{{text}}</div>
+```
+
+### `"consistent"` - Expect consistent usage of space for open curly brackets and close curly brackets.
+
+:-1: Examples of **incorrect** code for this rule:
+
+```html
+<div>{{ text}}</div>
+```
+
+```html
+<div>{{text }}</div>
+```
+
+:+1: Examples of **correct** code for this rule:
+
+```html
+<div>{{text}}</div>
+```
+
+```html
+<div>{{ text }}</div>
 ```
