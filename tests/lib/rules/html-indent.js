@@ -230,6 +230,19 @@ tester.run('html-indent', rule, loadPatterns(
         // Ignore all :D
         ignores: ['*']
       }]
+    },
+
+    // Pre
+    {
+      code: unIndent`
+        <template>
+          <pre>
+        aaa
+          bbb
+            ccc
+          </pre>
+        </template>
+      `
     }
   ],
 
@@ -479,6 +492,38 @@ tester.run('html-indent', rule, loadPatterns(
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 3 },
         { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 4 },
         { message: 'Expected indentation of 12 spaces but found 8 spaces.', line: 6 }
+      ]
+    },
+
+    // Pre
+    {
+      code: unIndent`
+        <template>
+        <pre
+        style=""
+        >
+        aaa
+          bbb
+            ccc
+        </pre>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          <pre
+            style=""
+          >
+        aaa
+          bbb
+            ccc
+          </pre>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 8 }
       ]
     }
   ]
