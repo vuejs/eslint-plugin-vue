@@ -38,6 +38,26 @@ ruleTester.run('prop-name-casing', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          props: some_props
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            ...some_props,
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
           props: ['greetingText']
         }
       `,
