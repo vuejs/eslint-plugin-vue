@@ -5,7 +5,7 @@
 
 The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
 
-This rule aims to remove multiple spaces in a row between attributes witch are not used for indentation.
+This rule aims to remove multiple spaces in a row between attributes which are not used for indentation.
 
 ## Rule Details
 
