@@ -1,0 +1,3 @@
+<!--{}-->
+<script>var a
+</script>
