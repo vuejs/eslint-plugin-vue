@@ -84,11 +84,19 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-model="toggle" :bindingProp="foo" propOne="bar" model="baz"></div></template>'
+      code:
+      `<template>
+        <div
+          v-model="toggle"
+          :bindingProp="foo"
+          propOne="bar"
+          model="baz">
+        </div>
+      </template>`
     },
     {
       filename: 'test.vue',
-      code: '<template><div @click="functionCall"></div></template>'
+      code: '<template><div click="functionCall"></div></template>'
     },
     {
       filename: 'test.vue',
@@ -96,15 +104,72 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div is="header" v-for="item in items" v-if="!visible" v-once id="uniqueID" ref="header" v-model="headerData" myProp="prop" @click="functionCall" v-text="textContent"></div></template>'
+      code:
+      `<template>
+          <div
+            is="header"
+            v-for="item in items"
+            v-if="!visible"
+            v-once
+            id="uniqueID"
+            ref="header"
+            v-model="headerData"
+            myProp="prop"
+            @click="functionCall"
+            v-text="textContent">
+          </div>
+        </template>`
     },
     {
       filename: 'test.vue',
-      code: '<template><div is="header" v-for="item in items" v-if="!visible" v-once id="uniqueID" ref="header" :prop="headerData" myProp="prop" v-on:click="functionCall" v-text="textContent"></div></template>'
+      code:
+        `<template>
+          <div
+            is="header"
+            v-for="item in items"
+            v-if="!visible"
+            v-once
+            id="uniqueID"
+            ref="header"
+            v-model="headerData"
+            :myProp="prop"
+            v-on="functionCall"
+            v-text="textContent">
+          </div>
+        </template>`
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-for="item in items" v-if="!visible" propone="prop" proptwo="prop" propthree="prop"  @click="functionCall" v-text="textContent"></div></template>'
+      code:
+        `<template>
+          <div
+            is="header"
+            v-for="item in items"
+            v-if="!visible"
+            v-once
+            id="uniqueID"
+            ref="header"
+            :prop="headerData"
+            myProp="prop"
+            v-on:click="functionCall"
+            v-text="textContent">
+          </div>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-for="item in items"
+            v-if="!visible"
+            propone="prop"
+            proptwo="prop"
+            propthree="prop"
+            @click="functionCall"
+            v-text="textContent">
+          </div>
+        </template>`
     },
     {
       filename: 'test.vue',
@@ -113,12 +178,36 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div propone="prop" proptwo="prop" is="header"></div></template>',
-      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }]
+      options: [
+        { order:
+          ['LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'BINDING',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION']
+        }]
     },
     {
       filename: 'test.vue',
       code: '<template><div ref="header" is="header" propone="prop" proptwo="prop"></div></template>',
-      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }]
+      options: [
+        { order:
+          ['LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'BINDING',
+            'DEFINITION',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT']
+        }]
     }
   ],
 
@@ -141,7 +230,15 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div  model="baz" v-model="toggle" propOne="bar" :bindingProp="foo"></div></template>',
+      code:
+        `<template>
+          <div
+            model="baz"
+            v-model="toggle"
+            propOne="bar"
+            :bindingProp="foo">
+          </div>
+        </template>`,
       errors: [{
         message: 'Attribute "v-model" should go before "model".',
         type: 'VDirectiveKey'
@@ -149,6 +246,27 @@ tester.run('attributes-order', rule, {
       {
         message: 'Attribute ":bindingProp" should go before "propOne".',
         type: 'VDirectiveKey'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            :bindingProp="foo"
+            model="baz"
+            v-on="functionCall"
+            v-model="toggle"
+            propOne="bar">
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "v-model" should go before "v-on".',
+        type: 'VDirectiveKey'
+      },
+      {
+        message: 'Attribute "propOne" should go before "v-on".',
+        type: 'VIdentifier'
       }]
     },
     {
@@ -162,7 +280,19 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div ref="header" propone="prop" is="header" ></div></template>',
-      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }],
+      options: [
+        { order:
+          ['LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'BINDING',
+            'DEFINITION',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT']
+        }],
       errors: [{
         message: 'Attribute "is" should go before "propone".',
         type: 'VIdentifier'

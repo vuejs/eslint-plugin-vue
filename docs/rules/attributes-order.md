@@ -16,11 +16,11 @@ ex: 'id'
 - UNIQUE
 ex: 'ref', 'key', 'slot'
 - BINDING
-ex: 'v-model', 'v-bind'
+ex: 'v-model', 'v-bind', ':property="foo"'
 - OTHER_ATTR
 ex: 'customProp="foo"'
 - EVENTS
-ex: '@click="functionCall"'
+ex: '@click="functionCall"', 'v-on="event"'
 - CONTENT
 ex: 'v-text', 'v-html'
 
@@ -31,7 +31,8 @@ ex: 'v-text', 'v-html'
   is="header"
   v-for="item in items"
   v-if="!visible"
-  v-once id="uniqueID"
+  v-once
+  id="uniqueID"
   ref="header"
   v-model="headerData"
   myProp="prop"
