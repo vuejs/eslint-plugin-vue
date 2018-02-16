@@ -45,6 +45,30 @@ tester.run('valid-v-on', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div @keydown.enter="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.arrow-down="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.esc="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.a="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.b="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.a.b.c="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><el-from @submit.native.prevent></el-form></template>'
     },
     {
