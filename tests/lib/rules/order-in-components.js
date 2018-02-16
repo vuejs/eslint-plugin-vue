@@ -419,6 +419,395 @@ ruleTester.run('order-in-components', rule, {
         message: 'The "name" property should be above the "data" property on line 1.',
         line: 1
       }]
+    },
+    {
+      // side-effects CallExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: obj.fn(),
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: obj.fn(),
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects NewExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: new MyClass(),
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: new MyClass(),
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects UpdateExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: i++,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: i++,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects AssignmentExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: i = 0,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: i = 0,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects TaggedTemplateExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: template\`\${foo}\`,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: template\`\${foo}\`,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects key
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          [obj.fn()]: 'test',
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          [obj.fn()]: 'test',
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects object deep props
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: {test: obj.fn()},
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: {test: obj.fn()},
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects array elements
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: [obj.fn(), 1],
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: [obj.fn(), 1],
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects call at middle
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: obj.fn().prop,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: obj.fn().prop,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects delete
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: delete obj.prop,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: delete obj.prop,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects within BinaryExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: fn() + a + b,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: fn() + a + b,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects within ConditionalExpression
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: a ? fn() : null,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: a ? fn() : null,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // side-effects within TemplateLiteral
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          test: \`test \${fn()} \${a}\`,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          data() {
+          },
+          test: \`test \${fn()} \${a}\`,
+          name: 'burger',
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 6
+      }]
+    },
+    {
+      // without side-effects
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          name: 'burger',
+          test: fn(),
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: fn(),
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 5
+      }]
+    },
+    {
+      // don't side-effects
+      filename: 'example.vue',
+      code: `
+        export default {
+          data() {
+          },
+          testArray: [1, 2, 3, true, false, 'a', 'b', 'c'],
+          testRegExp: /[a-z]*/,
+          testSpreadElement: [...array],
+          testOperator: (!!(a - b + c * d / e % f)) || (a && b),
+          testArrow: (a) => a,
+          testConditional: a ? b : c,
+          testYield: function* () {},
+          testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          testArray: [1, 2, 3, true, false, 'a', 'b', 'c'],
+          testRegExp: /[a-z]*/,
+          testSpreadElement: [...array],
+          testOperator: (!!(a - b + c * d / e % f)) || (a && b),
+          testArrow: (a) => a,
+          testConditional: a ? b : c,
+          testYield: function* () {},
+          testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 3.',
+        line: 13
+      }]
     }
   ]
 })
