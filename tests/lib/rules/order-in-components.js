@@ -432,14 +432,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: obj.fn(),
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -457,14 +450,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: new MyClass(),
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -482,14 +468,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: i++,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -507,14 +486,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: i = 0,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -532,14 +504,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: template\`\${foo}\`,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -557,14 +522,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          [obj.fn()]: 'test',
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -582,14 +540,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: {test: obj.fn()},
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -607,14 +558,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: [obj.fn(), 1],
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -632,14 +576,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: obj.fn().prop,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -657,14 +594,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: delete obj.prop,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -682,14 +612,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: fn() + a + b,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -707,14 +630,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: a ? fn() : null,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
@@ -732,14 +648,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       parserOptions,
-      output: `
-        export default {
-          data() {
-          },
-          test: \`test \${fn()} \${a}\`,
-          name: 'burger',
-        };
-      `,
+      output: null,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
         line: 6
