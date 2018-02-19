@@ -18,7 +18,7 @@ const tester = new RuleTester({
   parser: 'vue-eslint-parser'
 })
 
-tester.run('html-self-closing', rule, {
+tester.run('component-name-in-template-casing', rule, {
   valid: [
     // default
     '<template><div/></template>',
