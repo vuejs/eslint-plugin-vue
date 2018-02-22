@@ -215,6 +215,7 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-cloak is="header"></div></template>',
+      output: '<template><div is="header" v-cloak></div></template>',
       errors: [{
         message: 'Attribute "is" should go before "v-cloak".',
         type: 'VIdentifier'
@@ -223,6 +224,7 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div id="uniqueID" v-cloak></div></template>',
+      output: '<template><div v-cloak id="uniqueID"></div></template>',
       errors: [{
         message: 'Attribute "v-cloak" should go before "id".',
         type: 'VDirectiveKey'
@@ -237,6 +239,15 @@ tester.run('attributes-order', rule, {
             v-model="toggle"
             propOne="bar"
             :bindingProp="foo">
+          </div>
+        </template>`,
+      output:
+        `<template>
+          <div
+            v-model="toggle"
+            model="baz"
+            :bindingProp="foo"
+            propOne="bar">
           </div>
         </template>`,
       errors: [{
@@ -260,6 +271,16 @@ tester.run('attributes-order', rule, {
             propOne="bar">
           </div>
         </template>`,
+      output:
+        `<template>
+          <div
+            :bindingProp="foo"
+            model="baz"
+            v-model="toggle"
+            v-on="functionCall"
+            propOne="bar">
+          </div>
+        </template>`,
       errors: [{
         message: 'Attribute "v-model" should go before "v-on".',
         type: 'VDirectiveKey'
@@ -272,6 +293,7 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div data-id="foo" aria-test="bar" is="custom" myProp="prop"></div></template>',
+      output: '<template><div data-id="foo" is="custom" aria-test="bar" myProp="prop"></div></template>',
       errors: [{
         message: 'Attribute "is" should go before "aria-test".',
         type: 'VIdentifier'
@@ -293,8 +315,28 @@ tester.run('attributes-order', rule, {
             'EVENTS',
             'CONTENT']
         }],
+      output: '<template><div ref="header" is="header" propone="prop" ></div></template>',
       errors: [{
         message: 'Attribute "is" should go before "propone".',
+        type: 'VIdentifier'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div v-cloak
+            is="header">
+          </div>
+        </template>`,
+      output:
+        `<template>
+          <div is="header"
+            v-cloak>
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "is" should go before "v-cloak".',
         type: 'VIdentifier'
       }]
     }
