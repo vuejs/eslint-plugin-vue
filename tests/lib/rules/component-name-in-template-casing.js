@@ -233,46 +233,43 @@ tester.run('component-name-in-template-casing', rule, {
     {
       code: `
 <template>
-  <TheComponent></TheComponent  >
-</template>
-`,
-      options: ['kebab-case'],
-      output: `
-<template>
   <the-component></the-component  >
 </template>
 `,
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      output: `
+<template>
+  <TheComponent></TheComponent  >
+</template>
+`,
+      errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <TheComponent></TheComponent
-  >
-</template>
-`,
-      options: ['kebab-case'],
-      output: `
 <template>
   <the-component></the-component
   >
 </template>
 `,
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      output: `
+<template>
+  <TheComponent></TheComponent
+  >
+</template>
+`,
+      errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
 <template>
-  <TheComponent></TheComponent end-tag-attr="attr" >
-</template>
-`,
-      options: ['kebab-case'],
-      output: `
-<template>
   <the-component></the-component end-tag-attr="attr" >
 </template>
 `,
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      output: `
+<template>
+  <TheComponent></TheComponent end-tag-attr="attr" >
+</template>
+`,
+      errors: ['Component name "the-component" is not PascalCase.']
     }
   ]
 })
