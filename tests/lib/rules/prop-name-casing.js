@@ -308,6 +308,65 @@ ruleTester.run('prop-name-casing', rule, {
         type: 'Property',
         line: 4
       }]
+    },
+    {
+      // emoji
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '\u{1F37B}': String
+          }
+        }
+      `,
+      output: null,
+      parserOptions,
+      errors: [{
+        message: 'Prop "\u{1F37B}" is not in camelCase.',
+        type: 'Property',
+        line: 4
+      }]
+    },
+    {
+      // Japanese characters
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '漢字': String
+          }
+        }
+      `,
+      output: null,
+      parserOptions,
+      errors: [{
+        message: 'Prop "漢字" is not in camelCase.',
+        type: 'Property',
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            'abc-123-def': String
+          }
+        }
+      `,
+      output: `
+        export default {
+          props: {
+            'abc123Def': String
+          }
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Prop "abc-123-def" is not in camelCase.',
+        type: 'Property',
+        line: 4
+      }]
     }
   ]
 })
