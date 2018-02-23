@@ -236,9 +236,9 @@ If you already use other parser (e.g. `"parser": "babel-eslint"`), please move i
 
 The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` to parse scripts.
 
-### Why don't work on `.vue` file?
+### Why doesn't it work on .vue file?
 
-1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extract the inside of `<script>` tags from the source code, but `eslint-vue-plugin` requires `<script>` tags and `<template>` tags in order to find script and template.
+1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-vue-plugin` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
   ```diff
     "plugins": [
@@ -247,7 +247,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
     ]
   ```
 
-2. Make sure your tool does linting for `.vue` files.
+2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
   - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
 
