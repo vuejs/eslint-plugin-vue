@@ -229,6 +229,50 @@ tester.run('component-name-in-template-casing', rule, {
 </template>
 `,
       errors: ['Component name "Thecomponent" is not kebab-case.']
+    },
+    {
+      code: `
+<template>
+  <TheComponent></TheComponent  >
+</template>
+`,
+      options: ['kebab-case'],
+      output: `
+<template>
+  <the-component></the-component  >
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
+    },
+    {
+      code: `
+<template>
+  <TheComponent></TheComponent
+  >
+</template>
+`,
+      options: ['kebab-case'],
+      output: `
+<template>
+  <the-component></the-component
+  >
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
+    },
+    {
+      code: `
+<template>
+  <TheComponent></TheComponent end-tag-attr="attr" >
+</template>
+`,
+      options: ['kebab-case'],
+      output: `
+<template>
+  <the-component></the-component end-tag-attr="attr" >
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
     }
   ]
 })
