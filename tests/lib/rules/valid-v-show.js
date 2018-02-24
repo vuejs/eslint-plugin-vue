@@ -47,6 +47,11 @@ tester.run('valid-v-show', rule, {
       filename: 'test.vue',
       code: '<template><div v-show></div></template>',
       errors: ["'v-show' directives require that attribute value."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-show=""></div></template>',
+      errors: ["'v-show' directives require that attribute value."]
     }
   ]
 })

@@ -1,4 +1,4 @@
-# enforce specific casing for the Prop name in Vue components(prop-name-casing)
+# enforce specific casing for the Prop name in Vue components (vue/prop-name-casing)
 
 This rule would enforce proper casing of props in vue components(camelCase).
 
