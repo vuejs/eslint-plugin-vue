@@ -206,7 +206,8 @@ tester.run('no-parsing-error', rule, {
       code: '<template><div xmlns=""></template>',
       options: [{ 'x-invalid-namespace': false }]
     },
-    '<template><div/></template>'
+    '<template><div/></template>',
+    '<template><div v-show="">hello</div></template>'
   ],
   invalid: [
     {
@@ -238,7 +239,7 @@ tester.run('no-parsing-error', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-show="">hello</div></template>',
+      code: '<template><div v-show=" ">hello</div></template>',
       errors: [
         { message: 'Parsing error: Expected to be an expression, but got empty.', column: 24 }
       ]
