@@ -15,6 +15,8 @@ You can try this plugin on the Web.
 ## :grey_exclamation: Requirements
 
 - [ESLint](http://eslint.org/) `>=3.18.0`.
+  - `>=4.7.0` to use `eslint --fix`.
+  - `>=4.14.0` to use with `babel-eslint`.
 - Node.js `>=4.0.0`
 
 ## :cd: Installation
@@ -235,14 +237,20 @@ If you already use other parser (e.g. `"parser": "babel-eslint"`), please move i
 
 The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` to parse scripts.
 
-### Can my javascript code have increased indentation?
+### Why doesn't it work on .vue file?
 
-It depends on the version of eslint you're using.
+1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-vue-plugin` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
-[indent](https://eslint.org/docs/rules/indent) rule in `eslint@3.x` makes it possible, but if you use `eslint@4.x` be aware that this rule has been rewritten and is more strict now, thus it doesn't allow to have increased initial indentation.
+  ```diff
+    "plugins": [
+      "vue",
+  -   "html"
+    ]
+  ```
 
-You can however use [indent-legacy](https://eslint.org/docs/rules/indent-legacy) rule instead.
-More informations [here](https://eslint.org/docs/user-guide/migrating-to-4.0.0#indent-rewrite).
+2. Make sure your tool is set to lint `.vue` files.
+  - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
+  - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
 
 ## :anchor: Semantic Versioning Policy
 
