@@ -1,5 +1,7 @@
 # enforce order of attributes (vue/attributes-order)
 
+- :gear: This rule is included in `"plugin:vue/recommended"`.
+
 ## :book: Rule Details
 
 This rule aims to enfore ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:

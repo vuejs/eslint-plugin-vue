@@ -176,7 +176,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
-|  | [vue/max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
+| :wrench: | [vue/max-attributes-per-line](./docs/rules/max-attributes-per-line.md) | enforce the maximum number of attributes per line |
 | :wrench: | [vue/mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
 | :wrench: | [vue/name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
 | :wrench: | [vue/no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
@@ -197,18 +197,19 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 |  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
-|  | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
+| :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
 ### Uncategorized
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 | :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+|  | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 <!--RULES_TABLE_END-->
