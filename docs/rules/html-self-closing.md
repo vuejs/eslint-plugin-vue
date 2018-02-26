@@ -1,5 +1,6 @@
-# enforce self-closing style (html-self-closing)
+# enforce self-closing style (vue/html-self-closing)
 
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
@@ -16,7 +17,7 @@ This rule has options which specify self-closing style for each context.
 
 ```json
 {
-  "html-self-closing": ["error", {
+  "vue/html-self-closing": ["error", {
     "html": {
       "void": "never",
       "normal": "always",

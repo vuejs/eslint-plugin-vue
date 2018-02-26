@@ -1,0 +1,9 @@
+<!--{}-->
+<template>
+  <div
+    v-on:a="
+      return
+      ;
+    "
+  ></div>
+</template>

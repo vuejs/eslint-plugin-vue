@@ -1,4 +1,6 @@
-# enforce valid `v-if` directives (valid-v-if)
+# enforce valid `v-if` directives (vue/valid-v-if)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-if` directive is valid.
 
@@ -12,8 +14,6 @@ This rule reports `v-if` directives in the following cases:
 - The directive is on the elements which have `v-else`/`v-else-if` directives. E.g. `<div v-else v-if="foo"></div>`
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
-:-1: Examples of **incorrect** code for this rule:
 
 :-1: Examples of **incorrect** code for this rule:
 

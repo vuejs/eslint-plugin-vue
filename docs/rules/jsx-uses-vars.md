@@ -1,4 +1,6 @@
-# prevent variables used in JSX to be marked as unused (jsx-uses-vars)
+# prevent variables used in JSX to be marked as unused (vue/jsx-uses-vars)
+
+- :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Since 0.17.0 the ESLint `no-unused-vars` rule does not detect variables used in JSX ([see details](http://eslint.org/blog/2015/03/eslint-0.17.0-released#changes-to-jsxreact-handling)).
 This rule will find variables used in JSX and mark them as used.

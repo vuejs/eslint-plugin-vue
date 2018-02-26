@@ -1,4 +1,6 @@
-# require `v-bind:is` of `<component>` elements (require-component-is)
+# require `v-bind:is` of `<component>` elements (vue/require-component-is)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 > You can use the same mount point and dynamically switch between multiple components using the reserved `<component>` element and dynamically bind to its `is` attribute:
 >

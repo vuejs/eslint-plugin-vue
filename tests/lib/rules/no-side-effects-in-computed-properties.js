@@ -73,6 +73,14 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
                 test: 'example'
               }
             }
+          },
+          test9() {
+            return Object.keys(this.a).sort()
+          },
+          test10: {
+            get() {
+              return Object.keys(this.a).sort()
+            }
           }
         }
       })`,
@@ -144,6 +152,9 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             this.something[index] = thing[index]
             return this.something
           },
+          test6() {
+            return this.something.keys.sort()
+          }
         }
       })`,
       parserOptions,
@@ -165,6 +176,9 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       }, {
         line: 21,
         message: 'Unexpected side effect in "test5" computed property.'
+      }, {
+        line: 25,
+        message: 'Unexpected side effect in "test6" computed property.'
       }]
     },
     {

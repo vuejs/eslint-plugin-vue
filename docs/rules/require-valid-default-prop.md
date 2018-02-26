@@ -1,4 +1,6 @@
-# enforce props default values to be valid (require-valid-default-prop)
+# enforce props default values to be valid (vue/require-valid-default-prop)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
 

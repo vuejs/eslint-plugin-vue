@@ -1,0 +1,17 @@
+<!--{}-->
+<template>
+  <div
+    v-on:b="
+      for
+        (
+          ;
+          b
+          ;
+          c
+        )
+      {
+        ;
+      }
+    "
+  ></div>
+</template>

@@ -1,0 +1,18 @@
+<!--{}-->
+<template>
+  <div
+    v-on:c="
+      function
+        *
+        foo
+        (
+          a
+          ,
+          b
+        )
+      {
+        ;
+      }
+    "
+  ></div>
+</template>

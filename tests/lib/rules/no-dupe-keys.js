@@ -80,6 +80,26 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 8, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+    },
+
+    {
+      filename: 'test.js',
+      code: `
+        // @vue/component
+        export const compA = {
+          props: {
+            propA: String
+          }
+        }
+
+        // @vue/component
+        export const compB = {
+          props: {
+            propA: String
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     }
   ],
 

@@ -1,0 +1,11 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:b="
+      function*(){
+        yield
+        a
+      }
+    "
+  ></div>
+</template>

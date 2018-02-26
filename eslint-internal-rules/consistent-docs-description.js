@@ -43,7 +43,7 @@ function getPropertyFromObject (property, node) {
  */
 function checkMetaDocsDescription (context, exportsNode) {
   if (exportsNode.type !== 'ObjectExpression') {
-        // if the exported node is not the correct format, "internal-no-invalid-meta" will already report this.
+    // if the exported node is not the correct format, "internal-no-invalid-meta" will already report this.
     return
   }
 
@@ -52,7 +52,7 @@ function checkMetaDocsDescription (context, exportsNode) {
   const metaDocsDescription = metaDocs && getPropertyFromObject('description', metaDocs.value)
 
   if (!metaDocsDescription) {
-        // if there is no `meta.docs.description` property, "internal-no-invalid-meta" will already report this.
+    // if there is no `meta.docs.description` property, "internal-no-invalid-meta" will already report this.
     return
   }
 
