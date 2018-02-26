@@ -84,6 +84,10 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div v-custom-directive></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code:
       `<template>
         <div
