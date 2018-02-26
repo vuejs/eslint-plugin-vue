@@ -5,7 +5,7 @@
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
+This rule aims to enfore ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
 - DEFINITION
 ex: 'is'
 - LIST_RENDERING
@@ -18,8 +18,8 @@ ex: 'v-once', 'v-pre'
 ex: 'id'
 - UNIQUE
 ex: 'ref', 'key', 'slot'
-- BINDING
-ex: 'v-model', 'v-bind', ':property="foo"'
+- TWO\_WAY\_BINDING
+ex: 'v-model'
 - OTHER_ATTR
 ex: 'customProp="foo"'
 - EVENTS
@@ -49,7 +49,7 @@ ex: 'v-text', 'v-html'
   v-for="item in items"
   v-if="!visible"
   propOne="prop"
-  propTwo="prop"
+  :propTwo="prop"
   propThree="prop"
   @click="functionCall"
   v-text="textContent">
@@ -59,7 +59,7 @@ ex: 'v-text', 'v-html'
 ```html
 <div
   propOne="prop"
-  propTwo="prop"
+  :propTwo="prop"
   propThree="prop">
 </div>
 ```
@@ -87,7 +87,7 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
 <div
   propOne="prop"
   propTwo="prop"
@@ -96,7 +96,7 @@ Specify custom order of attribute groups
 ```
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   is="header"
@@ -108,7 +108,7 @@ Specify custom order of attribute groups
 :-1: Examples of **incorrect** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   propOne="prop"

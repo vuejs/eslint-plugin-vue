@@ -105,7 +105,7 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code:
-      `<template>
+        `<template>
           <div
             is="header"
             v-for="item in items"
@@ -164,7 +164,7 @@ tester.run('attributes-order', rule, {
             v-for="item in items"
             v-if="!visible"
             propone="prop"
-            proptwo="prop"
+            :proptwo="prop"
             propthree="prop"
             @click="functionCall"
             v-text="textContent">
@@ -185,7 +185,7 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT',
@@ -202,7 +202,7 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'DEFINITION',
             'OTHER_ATTR',
             'EVENTS',
@@ -272,7 +272,7 @@ tester.run('attributes-order', rule, {
             model="baz"
             v-model="toggle"
             propOne="bar"
-            :bindingProp="foo">
+            :id="foo">
           </div>
         </template>`,
       output:
@@ -289,7 +289,7 @@ tester.run('attributes-order', rule, {
         type: 'VDirectiveKey'
       },
       {
-        message: 'Attribute ":bindingProp" should go before "propOne".',
+        message: 'Attribute ":id" should go before "propOne".',
         type: 'VDirectiveKey'
       }]
     },
@@ -343,7 +343,7 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'DEFINITION',
             'OTHER_ATTR',
             'EVENTS',
