@@ -395,8 +395,8 @@ tester.run('html-indent', rule, loadPatterns(
         <template>
           {{
             message
-            // comment
-            // comment
+        // comment
+        // comment
           }}
         <!-- comment -->
         </template>
@@ -404,8 +404,8 @@ tester.run('html-indent', rule, loadPatterns(
       errors: [
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 5 },
+        { message: 'Expected indentation of either 2 or 4 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of either 2 or 4 spaces but found 0 spaces.', line: 5 },
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 6 }
       ]
     },
@@ -424,16 +424,16 @@ tester.run('html-indent', rule, loadPatterns(
         <template>
           {{
             message
-            /*
-             * comment
-             */
+        /*
+         * comment
+         */
           }}
         </template>
       `,
       errors: [
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of either 2 or 4 spaces but found 0 spaces.', line: 4 },
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 7 }
       ]
     },
