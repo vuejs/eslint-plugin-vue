@@ -63,7 +63,7 @@ function loadPatterns (additionalValid, additionalInvalid) {
         .map(line =>
           line.indentSize === 0
             ? null
-            : { message: `Expected indentation of ${line.indentSize} ${kind}${line.indentSize === 1 ? '' : 's'} but found 0 ${kind}s.`, line: line.number + 1 }
+            : { message: `Expected indentation of ${line.indentSize} ${kind}${line.indentSize === 1 ? '' : 's'} but found 0.`, line: line.number + 1 }
         )
         .filter(Boolean)
 
@@ -183,7 +183,7 @@ tester.run('script-indent', rule, loadPatterns(
       `,
       options: [4],
       errors: [
-        { message: 'Expected indentation of 0 spaces but found 2 spaces.', line: 2 }
+        { message: 'Expected indentation of 0 but found 2 spaces.', line: 2 }
       ]
     },
 
@@ -202,7 +202,7 @@ tester.run('script-indent', rule, loadPatterns(
         </script>
       `,
       errors: [
-        { message: 'Expected " " character, but found "\\t" character.', line: 3 }
+        { message: 'Expected indentation of 2 spaces but found 1 tab.', line: 3 }
       ]
     },
     {
@@ -224,8 +224,8 @@ tester.run('script-indent', rule, loadPatterns(
       `,
       options: ['tab'],
       errors: [
-        { message: 'Expected "\\t" character, but found " " character.', line: 3 },
-        { message: 'Expected "\\t" character, but found " " character.', line: 4 }
+        { message: 'Expected indentation of 1 tab but found 2 spaces.', line: 3 },
+        { message: 'Expected indentation of 1 tab but found 2 spaces.', line: 4 }
       ]
     }
   ]
