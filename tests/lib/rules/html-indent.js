@@ -13,6 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/html-indent')
+const indentHumanize = require('../../../lib/utils/indent-common').indentHumanize
 
 // ------------------------------------------------------------------------------
 // Helpers
@@ -46,23 +47,25 @@ function loadPatterns (additionalValid, additionalInvalid) {
     })
   const invalid = valid
     .map(pattern => {
-      const kind = ((pattern.options && pattern.options[0]) === 'tab') ? 'tab' : 'space'
       const output = pattern.code
       const lines = output
         .split('\n')
         .map((text, number) => ({
           number,
           text,
-          indentSize: (/^[ \t]+/.exec(text) || [''])[0].length
+          indentSpec: {
+            tabs: (/^\t+/.exec(text) || [''])[0].length,
+            spaces: (/^\t*( +)/.exec(text) || ['', ''])[1].length
+          }
         }))
       const code = lines
         .map(line => line.text.replace(/^[ \t]+/, ''))
         .join('\n')
       const errors = lines
         .map(line =>
-          line.indentSize === 0
+          line.indentSpec.tabs === 0 && line.indentSpec.spaces === 0
             ? null
-            : { message: `Expected indentation of ${line.indentSize} ${kind}${line.indentSize === 1 ? '' : 's'} but found 0.`, line: line.number + 1 }
+            : { message: `Expected indentation of ${indentHumanize(line.indentSpec)} but found 0.`, line: line.number + 1 }
         )
         .filter(Boolean)
 

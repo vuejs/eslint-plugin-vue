@@ -72,7 +72,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 }
 ```
 
-- `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
+- `type` (`number | "tab" | "smart-tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.  If this is [`"smart-tab"`](https://www.emacswiki.org/emacs/SmartTabs), it uses one tab for one indent, and spaces for alignment.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `closeBracket` (`integer`) ... The multiplier of indentation for right brackets. Default is `0`.
 - `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`.  This setting is ignored (and is effectively `false`) if `type` is `"tab"`.
@@ -142,5 +142,17 @@ This rule enforces a consistent indentation style in `<template>`. The default s
     class=""
     some-attr=""
   />
+</template>
+```
+
+:+1: Examples of **correct** code for `"smart-tab"`:
+
+```html
+<template>
+	<div id=""
+	     class=""
+	     some-attr="" />
+		Text
+	</div>
 </template>
 ```
