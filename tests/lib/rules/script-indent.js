@@ -187,6 +187,29 @@ tester.run('script-indent', rule, loadPatterns(
       ]
     },
 
+    // Expected Indentation
+    {
+      code: unIndent`
+        export default {
+          foo() {
+            bar = 1;
+              return bar;
+          },
+        };
+      `,
+      output: unIndent`
+        export default {
+          foo() {
+            bar = 1;
+            return bar;
+          },
+        };
+      `,
+      errors: [
+        { message: 'Expected indentation of 4 spaces but found 6 spaces.', line: 4 }
+      ]
+    },
+
     // A mix of spaces and tabs.
     {
       code: unIndent`
