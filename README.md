@@ -91,7 +91,7 @@ If you want to disallow `eslint-disable` functionality, please disable [vue/comm
 
 ## :gear: Configs
 
-This plugin provides two predefined configs:
+This plugin provides four predefined configs:
 - `plugin:vue/base` - Settings and rules to enable correct ESLint parsing
 - `plugin:vue/essential` - Above, plus rules to prevent errors or unintended behavior
 - `plugin:vue/strongly-recommended` - Above, plus rules to considerably improve code readability and/or dev experience
