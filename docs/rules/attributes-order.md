@@ -88,7 +88,7 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
 <div
   prop-one="prop"
   prop-two="prop"
@@ -97,7 +97,7 @@ Specify custom order of attribute groups
 ```
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   is="header"
@@ -109,7 +109,7 @@ Specify custom order of attribute groups
 :-1: Examples of **incorrect** code with custom order`:
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   prop-one="prop"
