@@ -190,6 +190,7 @@ tester.run('attributes-order', rule, {
             'GLOBAL',
             'UNIQUE',
             'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT',
@@ -208,6 +209,7 @@ tester.run('attributes-order', rule, {
             'UNIQUE',
             'TWO_WAY_BINDING',
             'DEFINITION',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT']
@@ -349,6 +351,7 @@ tester.run('attributes-order', rule, {
             'UNIQUE',
             'TWO_WAY_BINDING',
             'DEFINITION',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT']
