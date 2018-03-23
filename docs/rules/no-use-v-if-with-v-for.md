@@ -80,8 +80,8 @@ computed: {
 
 ```html
 <TodoItem
-  v-if="complete"
   v-for="todo in todos"
+  v-if="todo.shown"
   :todo="todo"
 />
 ```
@@ -90,8 +90,8 @@ computed: {
 
 ```html
 <TodoItem
+  v-if="complete"
   v-for="todo in todos"
-  v-if="todo.shown"
   :todo="todo"
 />
 ```
