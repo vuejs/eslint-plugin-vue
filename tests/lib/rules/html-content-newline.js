@@ -560,6 +560,34 @@ content
           column: 27
         }
       ]
+    },
+    // multiline end tag
+    {
+      code: `
+        <template>
+          <div>content</div
+          >
+        </template>
+      `,
+      output: `
+        <template>
+          <div>
+content
+</div
+          >
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
+          line: 3,
+          column: 16
+        },
+        {
+          message: 'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.',
+          line: 3,
+          column: 23
+        }]
     }
   ]
 })
