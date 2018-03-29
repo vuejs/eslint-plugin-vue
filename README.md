@@ -231,6 +231,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
+| :wrench: | [vue/singleline-html-element-content-newline](./docs/rules/singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element |
 
 ### Deprecated
 
