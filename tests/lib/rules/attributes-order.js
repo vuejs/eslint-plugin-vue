@@ -216,12 +216,12 @@ tester.run('attributes-order', rule, {
           <div
             v-if="!visible"
             v-for="item in items"
-            v-text="textContent"
             v-once
             is="header"
             v-on:click="functionCall"
             ref="header"
             :prop="headerData"
+            v-text="textContent"
             id="uniqueID"
             myProp="prop"
             >
@@ -232,12 +232,12 @@ tester.run('attributes-order', rule, {
           [
             'CONDITIONALS',
             'LIST_RENDERING',
-            'CONTENT',
             'RENDER_MODIFIERS',
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
             'BINDING',
+            'CONTENT',
             'GLOBAL',
             'OTHER_ATTR'
           ]
