@@ -203,6 +203,12 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
+### Accessibility (a11y)
+
+|    | Rule ID | Description |
+|:---|:--------|:------------|
+| | [vue/no-onchange](./docs/rules/no-onchange.md) | onblur must be used instead of onchange |
+
 ### Uncategorized
 
 |    | Rule ID | Description |
