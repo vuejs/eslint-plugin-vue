@@ -240,7 +240,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 ### Why doesn't it work on .vue file?
 
-1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-vue-plugin` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
+1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-plugin-vue` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
   ```diff
     "plugins": [
