@@ -8,7 +8,7 @@
 Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to be ignored
 
 ```
-'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['data-', 'aria-', 'slot-scope'] }]
+'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['custom-prop'] }]
 ```
 
 ### `[2, "always"]` - Use hyphenated name. (It errors on upper case letters.)
@@ -39,16 +39,16 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 <MyComponent my-prop="prop"/>
 ```
 
-### `[2, "never", { 'ignore': ['data-', 'aria-', 'slot-scope', 'custom-prop'] }]` - Don't use hyphenated name but allow custom attributes
+### `[2, "never", { 'ignore': ['custom-prop'] }]` - Don't use hyphenated name but allow custom attributes
 
 :+1: Examples of **correct** code`:
 
 ```html
-<MyComponent myProp="prop" custom-prop="foo"/>
+<MyComponent myProp="prop" custom-prop="foo" data-id="1"/>
 ```
 
 :-1: Examples of **incorrect** code`:
 
 ```html
-<MyComponent my-prop="prop" custom-prop="foo"/>
+<MyComponent my-prop="prop" custom-prop="foo" data-id="1"/>
 ```
