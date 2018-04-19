@@ -197,7 +197,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
+| :wrench: | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 |  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
