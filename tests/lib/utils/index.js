@@ -177,18 +177,12 @@ describe('parseMemberOrCallExpression', () => {
   it('should parse CallExpression', () => {
     node = parse(`const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`)
     const parsed = utils.parseMemberOrCallExpression(node)
-    assert.equal(parsed, 'this.lorem.ipsum.map().filter().reduce()')
+    assert.equal(parsed, 'this.lorem[].map().filter().reduce()')
   })
 
   it('should parse MemberExpression', () => {
-    node = parse(`const test = this.lorem['ipsum'].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`)
+    node = parse(`const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`)
     const parsed = utils.parseMemberOrCallExpression(node)
-    assert.equal(parsed, 'this.lorem.ipsum.map().dolor.reduce().sit')
-  })
-
-  it('should ignore computed values', () => {
-    node = parse(`const test = this.lorem[ipsum].dolor.map(d => d.id)['asd']()`)
-    const parsed = utils.parseMemberOrCallExpression(node)
-    assert.equal(parsed, 'this.lorem.dolor.map().asd()')
+    assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
   })
 })
