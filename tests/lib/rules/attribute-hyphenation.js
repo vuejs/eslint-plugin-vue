@@ -46,7 +46,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></div></template>',
-      options: ['never', { 'ignore': ['data-', 'aria-', 'slot-scope', 'custom-hypen'] }]
+      options: ['never', { 'ignore': ['custom-hypen'] }]
     }
   ],
 
