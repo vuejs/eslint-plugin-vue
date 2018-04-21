@@ -97,6 +97,9 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
               // [].push('xxx')
               return t
             })
+          },
+          test13 () {
+            this.someArray.forEach(arr => console.log(arr))
           }
         }
       })`,
