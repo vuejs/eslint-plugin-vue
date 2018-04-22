@@ -30,18 +30,23 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><custom data-id="foo" aria-test="bar" my-prop="prop"></custom></div></template>',
+      code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" my-prop="prop"></custom></div></template>',
       options: ['always']
     },
     {
       filename: 'test.vue',
-      code: '<template><div><custom data-id="foo" aria-test="bar" myProp="prop"></custom></div></template>',
+      code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" myProp="prop"></custom></div></template>',
       options: ['never']
     },
     {
       filename: 'test.vue',
-      code: '<template><div data-id="foo" aria-test="bar"><a onClick="" my-prop="prop"></a></div></template>',
+      code: '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }"><a onClick="" my-prop="prop"></a></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></div></template>',
+      options: ['never', { 'ignore': ['custom-hypen'] }]
     }
   ],
 
