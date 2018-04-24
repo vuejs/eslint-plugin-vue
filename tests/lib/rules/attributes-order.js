@@ -226,9 +226,9 @@ tester.run('attributes-order', rule, {
             is="header"
             v-on:click="functionCall"
             ref="header"
-            :prop="headerData"
             v-text="textContent"
             id="uniqueID"
+            :prop="headerData"
             myProp="prop"
             >
           </div>
@@ -242,10 +242,11 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'CONTENT',
             'GLOBAL',
-            'OTHER_ATTR'
+            'OTHER_ATTR',
+            'OTHER_DIRECTIVES'
           ]
         }]
     }
@@ -286,7 +287,7 @@ tester.run('attributes-order', rule, {
           <div
             v-model="toggle"
             model="baz"
-            :bindingProp="foo"
+            :id="foo"
             propOne="bar">
           </div>
         </template>`,
@@ -464,7 +465,7 @@ tester.run('attributes-order', rule, {
         { order:
           [
             'EVENTS',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'UNIQUE',
             'DEFINITION',
             'CONDITIONALS',
@@ -472,6 +473,7 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'OTHER_ATTR',
+            'OTHER_DIRECTIVES',
             'CONTENT'
           ]
         }],
@@ -503,10 +505,6 @@ tester.run('attributes-order', rule, {
         {
           message: 'Attribute "ref" should go before "v-once".',
           nodeType: 'VIdentifier'
-        },
-        {
-          message: 'Attribute ":prop" should go before "v-once".',
-          nodeType: 'VDirectiveKey'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
