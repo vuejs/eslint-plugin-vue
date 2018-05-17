@@ -34,6 +34,20 @@ props: {
 }
 ```
 
+```js
+props: {
+  status: {
+    required: true,
+    validator: function (value) {
+      return (
+        value === null ||
+        Array.isArray(value) && value.length > 0
+      )
+    }
+  }
+}
+```
+
 ## :wrench: Options
 
 Nothing.
