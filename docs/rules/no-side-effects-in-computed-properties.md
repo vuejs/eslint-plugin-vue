@@ -16,7 +16,7 @@ computed: {
     return `${this.firstName} ${this.lastName}`
   },
   reversedArray () {
-    return this.array.reverse() // <- side effect
+    return this.array.reverse() // <- side effect - orginal array is being mutated
   }
 }
 ```
@@ -29,7 +29,7 @@ computed: {
     return `${this.firstName} ${this.lastName}`
   },
   reversedArray () {
-    return this.array.slice(0).reverse()
+    return this.array.slice(0).reverse() // .slice makes a copy of the array, instead of mutating the orginal
   }
 }
 ```
