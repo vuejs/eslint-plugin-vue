@@ -202,6 +202,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
+| :wrench: | [vue/v-on-parens](./docs/rules/v-on-parens.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives |
 
 ### Uncategorized
 
