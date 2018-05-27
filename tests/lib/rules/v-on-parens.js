@@ -50,7 +50,7 @@ tester.run('v-on-parens', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo"></div></template>',
-      errors: ["Method calls inside of 'v-on' directives always require parentheses."],
+      errors: ["Method calls inside of 'v-on' directives must have parentheses."],
       options: ['always']
     },
     {
