@@ -7,7 +7,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/component-name-in-template-casing')
+const rule = require('../../../lib/rules/html-element-name-casing')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ const tester = new RuleTester({
   parser: 'vue-eslint-parser'
 })
 
-tester.run('component-name-in-template-casing', rule, {
+tester.run('html-element-name-casing', rule, {
   valid: [
     // default
     '<template><div/></template>',
