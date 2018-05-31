@@ -7,24 +7,6 @@ Define a style for the component name in template casing for consistency purpose
 
 ## :book: Rule Details
 
-:+1: Examples of **correct** code for `PascalCase`:
-
-```html
-<template>
-  <TheComponent />
-</template>
-```
-
-:-1: Examples of **incorrect** code for `PascalCase`:
-
-```html
-<template>
-  <the-component />
-  <theComponent />
-  <The-component />
-</template>
-```
-
 :+1: Examples of **correct** code for `kebab-case`:
 
 ```html
@@ -39,6 +21,24 @@ Define a style for the component name in template casing for consistency purpose
 <template>
   <TheComponent />
   <theComponent />
+  <The-component />
+</template>
+```
+
+:+1: Examples of **correct** code for `PascalCase`:
+
+```html
+<template>
+  <TheComponent />
+</template>
+```
+
+:-1: Examples of **incorrect** code for `PascalCase`:
+
+```html
+<template>
+  <the-component />
+  <theComponent />
   <Thecomponent />
   <The-component />
 </template>
@@ -46,9 +46,9 @@ Define a style for the component name in template casing for consistency purpose
 
 ## :wrench: Options
 
-Default casing is set to `PascalCase`.
+Default casing is set to `kebab-case`.
 
 ```
-"vue/html-element-name-casing": ["error", "PascalCase|kebab-case"]
+"vue/html-element-name-casing": ["error", "kebab-case|PascalCase"]
 ```
 

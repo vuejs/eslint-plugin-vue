@@ -23,81 +23,50 @@ tester.run('html-element-name-casing', rule, {
     // default
     '<template><div/></template>',
     '<template><img></template>',
-    '<template><TheComponent/></template>',
+    '<template><the-component/></template>',
     '<template><svg><path/></svg></template>',
     '<template><math><mspace/></math></template>',
     '<template><div><slot></slot></div></template>',
 
-    // kebab-case
+    // PascalCase
     {
-      code: '<template><the-component></the-component></template>',
+      code: '<template><TheComponent></TheComponent></template>',
       output: null,
-      options: ['kebab-case']
+      options: ['PascalCase']
     },
     {
       code: '<template><div/></template>',
       output: null,
-      options: ['kebab-case']
+      options: ['PascalCase']
     },
     {
       code: '<template><img></template>',
       output: null,
-      options: ['kebab-case']
+      options: ['PascalCase']
     },
     {
       code: '<template><svg><path/></svg></template>',
       output: null,
-      options: ['kebab-case']
+      options: ['PascalCase']
     },
     {
       code: '<template><math><mspace/></math></template>',
       output: null,
-      options: ['kebab-case']
+      options: ['PascalCase']
     },
     // Invalid EOF
-    '<template><the-component a=">test</the-component></template>',
-    '<template><the-component><!--test</the-component></template>'
+    '<template><TheComponent a=">test</TheComponent></template>',
+    '<template><TheComponent><!--test</TheComponent></template>'
   ],
   invalid: [
     {
       code: `
 <template>
-  <the-component id="id">
-    <!-- comment -->
-  </the-component>
-</template>
-`,
-      output: `
-<template>
   <TheComponent id="id">
     <!-- comment -->
   </TheComponent>
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
-    },
-    {
-      code: `
-<template>
-  <the-component id="id"/>
-</template>
-`,
-      output: `
-<template>
-  <TheComponent id="id"/>
-</template>
-`,
-      errors: ['Component name "the-component" is not PascalCase.']
-    },
-    {
-      code: `
-<template>
-  <TheComponent id="id">
-    <!-- comment -->
-  </TheComponent>
-</template>
-`,
-      options: ['kebab-case'],
       output: `
 <template>
   <the-component id="id">
@@ -113,7 +82,6 @@ tester.run('html-element-name-casing', rule, {
   <TheComponent id="id"/>
 </template>
 `,
-      options: ['kebab-case'],
       output: `
 <template>
   <the-component id="id"/>
@@ -124,56 +92,75 @@ tester.run('html-element-name-casing', rule, {
     {
       code: `
 <template>
-  <the-component
-    id="id"/>
+  <TheComponent id="id">
+    <!-- comment -->
+  </TheComponent>
 </template>
 `,
+      options: ['PascalCase'],
       output: `
+<template>
+  <TheComponent id="id">
+    <!-- comment -->
+  </TheComponent>
+</template>
+`,
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
+<template>
+  <TheComponent id="id"/>
+</template>
+`,
+      options: ['PascalCase'],
+      output: `
+<template>
+  <the-component id="id"/>
+</template>
+`,
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
 <template>
   <TheComponent
     id="id"/>
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
+      output: `
+<template>
+  <the-component
+    id="id"/>
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
+<template>
+  <TheComponent/>
+</template>
+`,
+      output: `
 <template>
   <the-component/>
 </template>
 `,
-      output: `
-<template>
-  <TheComponent/>
-</template>
-`,
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <the-component></the-component>
-</template>
-`,
-      output: `
 <template>
   <TheComponent></TheComponent>
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
-    },
-    {
-      code: `
-<template>
-  <theComponent/>
-</template>
-`,
       output: `
 <template>
-  <TheComponent/>
+  <the-component></the-component>
 </template>
 `,
-      errors: ['Component name "theComponent" is not PascalCase.']
+      errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
@@ -181,7 +168,6 @@ tester.run('html-element-name-casing', rule, {
   <theComponent/>
 </template>
 `,
-      options: ['kebab-case'],
       output: `
 <template>
   <the-component/>
@@ -192,15 +178,16 @@ tester.run('html-element-name-casing', rule, {
     {
       code: `
 <template>
-  <The-component/>
+  <theComponent/>
 </template>
 `,
+      options: ['PascalCase'],
       output: `
 <template>
   <TheComponent/>
 </template>
 `,
-      errors: ['Component name "The-component" is not PascalCase.']
+      errors: ['Component name "theComponent" is not PascalCase.']
     },
     {
       code: `
@@ -208,7 +195,6 @@ tester.run('html-element-name-casing', rule, {
   <The-component/>
 </template>
 `,
-      options: ['kebab-case'],
       output: `
 <template>
   <the-component/>
@@ -219,57 +205,71 @@ tester.run('html-element-name-casing', rule, {
     {
       code: `
 <template>
-  <Thecomponent/>
+  <The-component/>
 </template>
 `,
-      options: ['kebab-case'],
+      options: ['PascalCase'],
       output: `
 <template>
-  <thecomponent/>
+  <TheComponent/>
 </template>
 `,
-      errors: ['Component name "Thecomponent" is not kebab-case.']
+      errors: ['Component name "The-component" is not PascalCase.']
     },
     {
       code: `
 <template>
-  <the-component></the-component  >
+  <Thecomponent/>
 </template>
 `,
+      options: ['PascalCase'],
       output: `
+<template>
+  <TheComponent/>
+</template>
+`,
+      errors: ['Component name "Thecomponent" is not PascalCase.']
+    },
+    {
+      code: `
 <template>
   <TheComponent></TheComponent  >
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
+      output: `
+<template>
+  <the-component></the-component  >
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <the-component></the-component
-  >
-</template>
-`,
-      output: `
 <template>
   <TheComponent></TheComponent
   >
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
+      output: `
+<template>
+  <the-component></the-component
+  >
+</template>
+`,
+      errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
 <template>
-  <the-component></the-component end-tag-attr="attr" >
+  <TheComponent></TheComponent end-tag-attr="attr" >
 </template>
 `,
       output: `
 <template>
-  <TheComponent></TheComponent end-tag-attr="attr" >
+  <the-component></the-component end-tag-attr="attr" >
 </template>
 `,
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: ['Component name "TheComponent" is not kebab-case.']
     }
   ]
 })
