@@ -92,9 +92,9 @@ tester.run('html-element-name-casing', rule, {
     {
       code: `
 <template>
-  <TheComponent id="id">
+  <the-component id="id">
     <!-- comment -->
-  </TheComponent>
+  </the-component>
 </template>
 `,
       options: ['PascalCase'],
@@ -110,13 +110,13 @@ tester.run('html-element-name-casing', rule, {
     {
       code: `
 <template>
-  <TheComponent id="id"/>
+  <the-component id="id"/>
 </template>
 `,
       options: ['PascalCase'],
       output: `
 <template>
-  <the-component id="id"/>
+  <TheComponent id="id"/>
 </template>
 `,
       errors: ['Component name "the-component" is not PascalCase.']
@@ -222,13 +222,12 @@ tester.run('html-element-name-casing', rule, {
   <Thecomponent/>
 </template>
 `,
-      options: ['PascalCase'],
       output: `
 <template>
-  <TheComponent/>
+  <thecomponent/>
 </template>
 `,
-      errors: ['Component name "Thecomponent" is not PascalCase.']
+      errors: ['Component name "Thecomponent" is not kebab-case.']
     },
     {
       code: `
