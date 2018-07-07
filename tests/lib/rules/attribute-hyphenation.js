@@ -45,8 +45,8 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></custom></template>',
-      options: ['never', { 'ignore': ['custom-hypen'] }]
+      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo" second-custom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
+      options: ['never', { 'ignore': ['custom-hypen', 'second-custom'] }]
     }
   ],
 
@@ -113,6 +113,28 @@ ruleTester.run('attribute-hyphenation', rule, {
       options: ['always'],
       errors: [{
         message: "Attribute 'v-bind:MyProp' must be hyphenated.",
+        type: 'VDirectiveKey',
+        line: 1
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
+      output: '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
+      options: ['always', { 'ignore': [] }],
+      errors: [{
+        message: "Attribute 'v-bind:MyProp' must be hyphenated.",
+        type: 'VDirectiveKey',
+        line: 1
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo" third-custom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
+      output: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo" thirdCustom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
+      options: ['never', { 'ignore': ['custom-hypen', 'second-custom'] }],
+      errors: [{
+        message: "Attribute 'third-custom' cann't be hyphenated.",
         type: 'VDirectiveKey',
         line: 1
       }]
