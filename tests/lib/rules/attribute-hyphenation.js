@@ -45,7 +45,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></div></template>',
+      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></custom></template>',
       options: ['never', { 'ignore': ['custom-hypen'] }]
     }
   ],
@@ -114,6 +114,20 @@ ruleTester.run('attribute-hyphenation', rule, {
       errors: [{
         message: "Attribute 'v-bind:MyProp' must be hyphenated.",
         type: 'VDirectiveKey',
+        line: 1
+      }]
+    },
+    {
+      // This is the same code as the `'ignore': ['custom-hypen']`
+      // valid test; to verify that setting ignore actually makes the
+      // difference.
+      filename: 'test.vue',
+      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hypen="foo"><a onClick="" my-prop="prop"></a></custom></template>',
+      output: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" customHypen="foo"><a onClick="" my-prop="prop"></a></custom></template>',
+      options: ['never'],
+      errors: [{
+        message: "Attribute 'custom-hypen' cann't be hyphenated.",
+        type: 'VIdentifier',
         line: 1
       }]
     }
