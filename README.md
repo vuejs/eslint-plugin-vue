@@ -185,6 +185,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [vue/html-element-name-casing](./docs/rules/html-element-name-casing.md) | enforce specific casing for the component naming style in template |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
