@@ -263,7 +263,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
-  - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
+  - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
 
 ## :anchor: Semantic Versioning Policy
 
