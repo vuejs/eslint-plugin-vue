@@ -18,6 +18,8 @@ ex: 'v-once', 'v-pre'
 ex: 'id'
 - UNIQUE
 ex: 'ref', 'key', 'slot'
+- OTHER_DIRECTIVE
+ex: 'v-focus', 'v-autosize'
 - BINDING
 ex: 'v-model', 'v-bind', ':property="foo"'
 - OTHER_ATTR
@@ -87,7 +89,7 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION', 'OTHER_DIRECTIVE'] }] -->
 <div
   propOne="prop"
   propTwo="prop"
@@ -96,7 +98,7 @@ Specify custom order of attribute groups
 ```
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'OTHER_DIRECTIVE'] }] -->
 <div
   ref="header"
   is="header"
@@ -108,7 +110,7 @@ Specify custom order of attribute groups
 :-1: Examples of **incorrect** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'OTHER_DIRECTIVE'] }] -->
 <div
   ref="header"
   propOne="prop"
