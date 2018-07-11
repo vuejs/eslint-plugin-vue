@@ -1,4 +1,4 @@
-# disallow use v-if on the same element as v-for. (vue/no-use-v-if-with-v-for)
+# disallow use v-if on the same element as v-for (vue/no-use-v-if-with-v-for)
 
 > Never use `v-if` on the same element as `v-for`.
 >

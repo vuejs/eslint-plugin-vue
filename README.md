@@ -151,7 +151,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [vue/no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [vue/no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
 |  | [vue/no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
-|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for. |
 |  | [vue/require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
 |  | [vue/require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
 |  | [vue/require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
@@ -184,7 +183,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
@@ -221,6 +220,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 | :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
 | :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
