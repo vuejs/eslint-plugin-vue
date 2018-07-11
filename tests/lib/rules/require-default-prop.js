@@ -39,11 +39,16 @@ ruleTester.run('require-default-prop', rule, {
             },
             c: {
               type: Number,
-              default: 0,
-              required: false
+              required: false,
+              default: 0
+            },
+            d: {
+              type: String,
+              required: false,
+              'default': 'lorem'
             },
             // eslint-disable-next-line require-default-prop
-            d: Number
+            e: Number
           }
         }
       `,
