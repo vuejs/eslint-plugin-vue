@@ -45,6 +45,17 @@ module.exports = {
 }
 ```
 
+### Single File Components
+
+ESLint only targets `.js` files by default. You must include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern.
+
+Examples:
+
+```bash
+eslint --ext .js,.vue src
+eslint src/**/*.{js,vue}
+```
+
 ### Attention
 
 All component-related rules are being applied to code that passes any of the following checks:
