@@ -120,6 +120,28 @@ describe('getComputedProperties', () => {
 
     assert.ok(computedProperties[0].value)
   })
+
+  it('should not collide with object spread operator inside CP', () => {
+    node = parse(`const test = {
+      name: 'test',
+      computed: {
+        foo: {
+          ...mapGetters({ get: 'getFoo' }),
+          ...mapActions({ set: 'setFoo' })
+        }
+      }
+    }`)
+
+    const computedProperties = utils.getComputedProperties(node)
+
+    assert.equal(
+      computedProperties.length,
+      1,
+      'it detects all computed properties'
+    )
+
+    assert.notOk(computedProperties[0].value)
+  })
 })
 
 describe('getStaticPropertyName', () => {
