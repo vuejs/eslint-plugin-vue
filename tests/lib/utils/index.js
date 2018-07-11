@@ -166,3 +166,23 @@ describe('getStaticPropertyName', () => {
     assert.ok(parsed === 'computed')
   })
 })
+
+describe('parseMemberOrCallExpression', () => {
+  let node
+
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
+  it('should parse CallExpression', () => {
+    node = parse(`const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`)
+    const parsed = utils.parseMemberOrCallExpression(node)
+    assert.equal(parsed, 'this.lorem[].map().filter().reduce()')
+  })
+
+  it('should parse MemberExpression', () => {
+    node = parse(`const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`)
+    const parsed = utils.parseMemberOrCallExpression(node)
+    assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
+  })
+})
