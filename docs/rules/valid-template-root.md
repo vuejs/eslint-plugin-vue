@@ -16,8 +16,6 @@ This rule reports the template root in the following cases:
 
 :-1: Examples of **incorrect** code for this rule:
 
-:-1: Examples of **incorrect** code for this rule:
-
 ```js
 template: ''
 ```

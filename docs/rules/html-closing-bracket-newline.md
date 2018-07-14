@@ -22,7 +22,7 @@ This rule enforces a line break (or no line break) before tag's closing brackets
 
 ```json
 {
-    "html-closing-bracket-newline": ["error", {
+    "vue/html-closing-bracket-newline": ["error", {
         "singleline": "never",
         "multiline": "never"
     }]
