@@ -1,4 +1,4 @@
-# disallow use of v-html to prevent XSS attack (no-v-html)
+# disallow use of v-html to prevent XSS attack (vue/no-v-html)
 
 This rule reports use of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross Side Scripting (XSS) attacks.
 
