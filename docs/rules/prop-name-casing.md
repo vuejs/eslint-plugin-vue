@@ -35,3 +35,7 @@ Default casing is set to `camelCase`.
 ```
 "vue/prop-name-casing": ["error", "camelCase|snake_case"]
 ```
+
+## Related links
+
+- [Style guide - Prop name casing](https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended)

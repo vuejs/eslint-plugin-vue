@@ -59,3 +59,7 @@ props: {
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
