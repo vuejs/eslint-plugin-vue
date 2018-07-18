@@ -51,10 +51,14 @@ ruleTester.run('no-async-in-computed-properties', rule, {
                 return bar
               }
             },
-            foo2: {
+            bar: {
               set () {
                 new Promise((resolve, reject) => {})
               }
+            },
+            baz: {
+              ...mapGetters({ get: 'getBaz' }),
+              ...mapActions({ set: 'setBaz' })
             }
           }
         }

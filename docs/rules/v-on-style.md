@@ -35,3 +35,7 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.
+
+## Related links
+
+- [Style guide - Directive shorthands](https://vuejs.org/v2/style-guide/#Directive-shorthands-strongly-recommended)

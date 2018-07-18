@@ -55,5 +55,6 @@ computed: {
 
 Nothing.
 
+## Related links
 
-[vue-async-computed]: https://github.com/foxbenjaminfox/vue-async-computed
+- [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)

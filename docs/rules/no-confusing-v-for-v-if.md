@@ -48,3 +48,9 @@ In that case, the `v-if` should be written on the wrapper element.
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Style guide - Avoid v-if with v-for](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
+- [Guide - Conditional / v-if with v-for](https://vuejs.org/v2/guide/conditional.html#v-if-with-v-for)
+- [Guide - List / v-for with v-if](https://vuejs.org/v2/guide/list.html#v-for-with-v-if)
