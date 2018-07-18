@@ -48,7 +48,27 @@ Define a style for the component name in template casing for consistency purpose
 
 Default casing is set to `PascalCase`.
 
-```
-"vue/component-name-in-template-casing": ["error", "PascalCase|kebab-case"]
+```json
+  "vue/component-name-in-template-casing": ["error",
+    "PascalCase|kebab-case",
+    {
+      "ignores": []
+    }
+  ]
 ```
 
+- `ignores` (`string[]`) ... The element name to ignore. Sets the element name to allow. For example, a custom element or a non-Vue component.
+
+
+:+1: Examples of **correct** code for `{ignores: ["custom-element"]}`:
+
+```html
+<template>
+  <custom-element></custom-element>
+  <TheComponent/>
+</template>
+```
+
+## Related links
+
+- [Style guide - Component name casing in templates](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended)

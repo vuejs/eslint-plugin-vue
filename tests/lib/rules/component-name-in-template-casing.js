@@ -54,6 +54,17 @@ tester.run('component-name-in-template-casing', rule, {
       output: null,
       options: ['kebab-case']
     },
+    // ignores
+    {
+      code: '<template><custom-element></custom-element></template>',
+      output: null,
+      options: ['PascalCase', { ignores: ['custom-element'] }]
+    },
+    {
+      code: '<template><custom-element><TheComponent/></custom-element></template>',
+      output: null,
+      options: ['PascalCase', { ignores: ['custom-element'] }]
+    },
     // Invalid EOF
     '<template><the-component a=">test</the-component></template>',
     '<template><the-component><!--test</the-component></template>'
@@ -270,6 +281,47 @@ tester.run('component-name-in-template-casing', rule, {
 </template>
 `,
       errors: ['Component name "the-component" is not PascalCase.']
+    },
+
+    // ignores
+    {
+      code: `
+<template>
+  <custom-element>
+    <the-component />
+  </custom-element>
+</template>`,
+      output: `
+<template>
+  <custom-element>
+    <TheComponent />
+  </custom-element>
+</template>`,
+      options: ['PascalCase', { ignores: ['custom-element'] }],
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
+<template>
+  <custom-element1>
+    <the-component />
+  </custom-element1>
+  <custom-element2 />
+  <the-component />
+</template>`,
+      output: `
+<template>
+  <custom-element1>
+    <TheComponent />
+  </custom-element1>
+  <custom-element2 />
+  <TheComponent />
+</template>`,
+      options: ['PascalCase', { ignores: ['custom-element1', 'custom-element2'] }],
+      errors: [
+        'Component name "the-component" is not PascalCase.',
+        'Component name "the-component" is not PascalCase.'
+      ]
     }
   ]
 })
