@@ -45,6 +45,17 @@ module.exports = {
 }
 ```
 
+### Single File Components
+
+ESLint only targets `.js` files by default. You must include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern.
+
+Examples:
+
+```bash
+eslint --ext .js,.vue src
+eslint src/**/*.{js,vue}
+```
+
 ### Attention
 
 All component-related rules are being applied to code that passes any of the following checks:
@@ -91,7 +102,7 @@ If you want to disallow `eslint-disable` functionality, please disable [vue/comm
 
 ## :gear: Configs
 
-This plugin provides two predefined configs:
+This plugin provides four predefined configs:
 - `plugin:vue/base` - Settings and rules to enable correct ESLint parsing
 - `plugin:vue/essential` - Above, plus rules to prevent errors or unintended behavior
 - `plugin:vue/strongly-recommended` - Above, plus rules to considerably improve code readability and/or dev experience
@@ -172,8 +183,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
-| :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
+| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
@@ -198,7 +208,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-|  | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
+| :wrench: | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
 |  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
@@ -210,7 +220,9 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 | :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
-|  | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
+|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
+|  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
+| :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 <!--RULES_TABLE_END-->
@@ -241,7 +253,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 ### Why doesn't it work on .vue file?
 
-1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-vue-plugin` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
+1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-plugin-vue` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
   ```diff
     "plugins": [
@@ -252,7 +264,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
-  - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
+  - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
 
 ## :anchor: Semantic Versioning Policy
 

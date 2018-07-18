@@ -1,10 +1,11 @@
 # enforce order of attributes (vue/attributes-order)
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
-This rule aims to enfore ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
+This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
 - DEFINITION
 ex: 'is'
 - LIST_RENDERING
@@ -86,7 +87,7 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
 <div
   propOne="prop"
   propTwo="prop"
@@ -95,7 +96,7 @@ Specify custom order of attribute groups
 ```
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   is="header"
@@ -107,7 +108,7 @@ Specify custom order of attribute groups
 :-1: Examples of **incorrect** code with custom order`:
 
 ```html
-<!-- 'vue/attribute-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   propOne="prop"

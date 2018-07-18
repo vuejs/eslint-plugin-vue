@@ -10,7 +10,7 @@ On other elements, it's better that `v-bind:key` is written as well.
 This rule reports the elements which have `v-for` and do not have `v-bind:key`.
 
 This rule does not report custom components.
-It will be reported by [no-invalid-v-for] rule.
+It will be reported by [valid-v-for] rule.
 
 :-1: Examples of **incorrect** code for this rule:
 
@@ -33,6 +33,6 @@ Nothing.
 
 ## :couple: Related rules
 
-- [no-invalid-v-for]
+- [valid-v-for]
 
-[no-invalid-v-for]: ./no-invalid-v-for.md
+[valid-v-for]: ./valid-v-for.md
