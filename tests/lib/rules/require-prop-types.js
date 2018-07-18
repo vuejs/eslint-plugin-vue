@@ -74,6 +74,32 @@ ruleTester.run('require-prop-types', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          props: {
+            foo: {
+              validator: v => v
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              ['validator']: v => v
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
           props
         }
       `,
