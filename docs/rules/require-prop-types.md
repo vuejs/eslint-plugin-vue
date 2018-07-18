@@ -37,3 +37,7 @@ props: {
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)

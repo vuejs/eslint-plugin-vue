@@ -30,3 +30,7 @@ Default casing is set to `PascalCase`.
 ```
 "vue/name-property-casing": ["error", "PascalCase|kebab-case"]
 ```
+
+## Related links
+
+- [Style guide - Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended)

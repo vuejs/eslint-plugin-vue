@@ -27,3 +27,7 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Guide - Dynamic Components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)

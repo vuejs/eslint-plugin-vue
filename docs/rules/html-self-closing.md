@@ -61,3 +61,7 @@ Every option can be set to one of the following values:
 <MyComponent/>
 <svg><path d=""/></svg>
 ```
+
+## Related links
+
+- [Style guide - Self closing components](https://vuejs.org/v2/style-guide/#Self-closing-components-strongly-recommended)
