@@ -71,3 +71,7 @@ If you want you can change the order providing the optional configuration in you
 ```
 
 If you want some of properties to be treated equally in order you can group them into arrays, like we did with `delimiters` and `comments`.
+
+## Related links
+
+- [Style guide - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)

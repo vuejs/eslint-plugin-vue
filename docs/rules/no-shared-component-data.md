@@ -52,3 +52,7 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [API - data](https://vuejs.org/v2/api/#data)

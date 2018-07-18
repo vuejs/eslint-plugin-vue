@@ -15,7 +15,7 @@ This rule has options.
 
 ```json
 {
-    "html-closing-bracket-spacing": ["error", {
+    "vue/html-closing-bracket-spacing": ["error", {
         "startTag": "always" | "never",
         "endTag": "always" | "never",
         "selfClosingTag": "always" | "never"

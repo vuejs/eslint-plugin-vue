@@ -125,3 +125,7 @@ Number of maximum attributes per line when a tag is in multiple lines. (Default 
 ## When Not To Use It
 
 If you do not want to check the number of attributes declared per line you can disable this rule.
+
+## Related links
+
+- [Style guide - Multi attribute elements](https://vuejs.org/v2/style-guide/#Multi-attribute-elements-strongly-recommended)

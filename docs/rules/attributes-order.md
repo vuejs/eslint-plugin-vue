@@ -1,6 +1,7 @@
 # enforce order of attributes (vue/attributes-order)
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -114,3 +115,7 @@ Specify custom order of attribute groups
   is="header">
 </div>
 ```
+
+## Related links
+
+- [Style guide - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
