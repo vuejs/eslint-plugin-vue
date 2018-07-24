@@ -30,14 +30,12 @@ function formatCategory (category, prevCategory) {
  * in order to update it's content execute "npm run update"
  */
 module.exports = {
-  root: true,
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true
     }
   },
   env: {
