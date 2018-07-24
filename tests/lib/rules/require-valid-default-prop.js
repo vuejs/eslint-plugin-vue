@@ -12,9 +12,9 @@ const rule = require('../../../lib/rules/require-valid-default-prop')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
+  ecmaVersion: 2018,
   sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true, jsx: true }
+  ecmaFeatures: { jsx: true }
 }
 
 function errorMessage (type) {
