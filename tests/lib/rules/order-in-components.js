@@ -10,9 +10,8 @@ const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester()
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 ruleTester.run('order-in-components', rule, {

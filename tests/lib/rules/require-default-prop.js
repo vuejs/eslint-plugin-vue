@@ -11,8 +11,7 @@
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
-  ecmaVersion: 6,
-  ecmaFeatures: { experimentalObjectRestSpread: true },
+  ecmaVersion: 2018,
   sourceType: 'module'
 }
 
@@ -39,11 +38,16 @@ ruleTester.run('require-default-prop', rule, {
             },
             c: {
               type: Number,
-              default: 0,
-              required: false
+              required: false,
+              default: 0
+            },
+            d: {
+              type: String,
+              required: false,
+              'default': 'lorem'
             },
             // eslint-disable-next-line require-default-prop
-            d: Number
+            e: Number
           }
         }
       `,

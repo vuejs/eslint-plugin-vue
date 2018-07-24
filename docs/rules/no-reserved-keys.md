@@ -2,7 +2,7 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
+This rule prevents to use [reserved names](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json) to avoid conflicts and unexpected behavior.
 
 ## Rule Details
 
@@ -31,9 +31,9 @@ export default {
 
 This rule has an object option:
 
-`"reserved"`: [] (default) array of dissalowed names inside `groups`.
+`"reserved"`: [] (default) array of additional restricted attributes inside `groups`.
 
-`"groups"`: [] (default) array of additional groups to search for duplicates.
+`"groups"`: [] (default) array of additional group names to search for duplicates in.
 
 ### Example:
 
@@ -56,3 +56,7 @@ export default {
   }
 }
 ```
+
+## Related links
+
+- [List of reserved keys](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json)

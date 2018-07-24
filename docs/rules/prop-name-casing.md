@@ -1,6 +1,6 @@
 # enforce specific casing for the Prop name in Vue components (vue/prop-name-casing)
 
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule would enforce proper casing of props in vue components(camelCase).
 
@@ -35,3 +35,7 @@ Default casing is set to `camelCase`.
 ```
 "vue/prop-name-casing": ["error", "camelCase|snake_case"]
 ```
+
+## Related links
+
+- [Style guide - Prop name casing](https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended)

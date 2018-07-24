@@ -12,9 +12,8 @@ const rule = require('../../../lib/rules/no-side-effects-in-computed-properties'
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 // ------------------------------------------------------------------------------
@@ -81,6 +80,25 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             get() {
               return Object.keys(this.a).sort()
             }
+          },
+          test11() {
+            const categories = {}
+
+            this.types.forEach(c => {
+              categories[c.category] = categories[c.category] || []
+              categories[c.category].push(c)
+            })
+
+            return categories
+          },
+          test12() {
+            return this.types.map(t => {
+              // [].push('xxx')
+              return t
+            })
+          },
+          test13 () {
+            this.someArray.forEach(arr => console.log(arr))
           }
         }
       })`,

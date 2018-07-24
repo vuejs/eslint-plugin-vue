@@ -25,3 +25,7 @@ This rule reports mustaches in `<textarea>`.
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Guide - Forms / Multiline text](https://vuejs.org/v2/guide/forms.html#Multiline-text)

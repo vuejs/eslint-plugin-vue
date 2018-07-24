@@ -6,6 +6,14 @@
 
 > Official ESLint plugin for Vue.js
 
+## :exclamation: Attention - this is documentation for version `5.x` :exclamation:
+
+This branch contains `eslint-plugin-vue@next` which is a pre-released `5.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
+
+Please try it and report any issues that you might have encountered.
+
+If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
+
 ## :art: Playground on the Web
 
 You can try this plugin on the Web.
@@ -14,15 +22,13 @@ You can try this plugin on the Web.
 
 ## :grey_exclamation: Requirements
 
-- [ESLint](http://eslint.org/) `>=3.18.0`.
-  - `>=4.7.0` to use `eslint --fix`.
-  - `>=4.14.0` to use with `babel-eslint`.
-- Node.js `>=4.0.0`
+- [ESLint](http://eslint.org/) `^5.0.0`.
+- Node.js `>=6.5.0`
 
 ## :cd: Installation
 
 ```bash
-npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue@next
 ```
 
 ## :rocket: Usage
@@ -43,6 +49,17 @@ module.exports = {
     // 'vue/no-unused-vars': 'error'
   }
 }
+```
+
+### Single File Components
+
+ESLint only targets `.js` files by default. You must include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern.
+
+Examples:
+
+```bash
+eslint --ext .js,.vue src
+eslint src/**/*.{js,vue}
 ```
 
 ### Attention
@@ -172,7 +189,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
@@ -209,6 +226,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 | :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
+|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
+|  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
 | :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
@@ -251,7 +270,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
-  - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
+  - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
 
 ## :anchor: Semantic Versioning Policy
 
