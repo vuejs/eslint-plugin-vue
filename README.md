@@ -14,10 +14,8 @@ You can try this plugin on the Web.
 
 ## :grey_exclamation: Requirements
 
-- [ESLint](http://eslint.org/) `>=3.18.0`.
-  - `>=4.7.0` to use `eslint --fix`.
-  - `>=4.14.0` to use with `babel-eslint`.
-- Node.js `>=4.0.0`
+- [ESLint](http://eslint.org/) `^5.0.0`.
+- Node.js `>=6.5.0`
 
 ## :cd: Installation
 
