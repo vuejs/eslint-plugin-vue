@@ -207,7 +207,8 @@ tester.run('no-parsing-error', rule, {
       options: [{ 'x-invalid-namespace': false }]
     },
     '<template><div/></template>',
-    '<template><div v-show="">hello</div></template>'
+    '<template><div v-show="">hello</div></template>',
+    '<template><div>{{ }}</div></template>'
   ],
   invalid: [
     {
@@ -229,13 +230,6 @@ tester.run('no-parsing-error', rule, {
       filename: 'test.vue',
       code: '<template><div v-show="a;b;">hello</div></template>',
       errors: ['Parsing error: Unexpected token ;.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div>{{ }}</div></template>',
-      errors: [
-        { message: 'Parsing error: Expected to be an expression, but got empty.', column: 18 }
-      ]
     },
     {
       filename: 'test.vue',
