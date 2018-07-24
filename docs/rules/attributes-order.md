@@ -18,10 +18,12 @@ ex: 'v-once', 'v-pre'
 ex: 'id'
 - UNIQUE
 ex: 'ref', 'key', 'slot'
-- BINDING
-ex: 'v-model', 'v-bind', ':property="foo"'
+- TWO\_WAY\_BINDING
+ex: 'v-model'
+- OTHER_DIRECTIVES
+ex: 'v-custom-directive'
 - OTHER_ATTR
-ex: 'customProp="foo"'
+ex: 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
 - EVENTS
 ex: '@click="functionCall"', 'v-on="event"'
 - CONTENT
@@ -38,7 +40,7 @@ ex: 'v-text', 'v-html'
   id="uniqueID"
   ref="header"
   v-model="headerData"
-  myProp="prop"
+  my-prop="prop"
   @click="functionCall"
   v-text="textContent">
 </div>
@@ -48,9 +50,9 @@ ex: 'v-text', 'v-html'
 <div
   v-for="item in items"
   v-if="!visible"
-  propOne="prop"
-  propTwo="prop"
-  propThree="prop"
+  prop-one="prop"
+  :prop-two="prop"
+  prop-three="prop"
   @click="functionCall"
   v-text="textContent">
 </div>
@@ -58,9 +60,9 @@ ex: 'v-text', 'v-html'
 
 ```html
 <div
-  propOne="prop"
-  propTwo="prop"
-  propThree="prop">
+  prop-one="prop"
+  :prop-two="prop"
+  prop-three="prop">
 </div>
 ```
 
@@ -70,9 +72,10 @@ ex: 'v-text', 'v-html'
 <div
   ref="header"
   v-for="item in items"
-  v-once id="uniqueID"
+  v-once
+  id="uniqueID"
   v-model="headerData"
-  myProp="prop"
+  my-prop="prop"
   v-if="!visible"
   is="header"
   @click="functionCall"
@@ -87,31 +90,31 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
 <div
-  propOne="prop"
-  propTwo="prop"
+  prop-one="prop"
+  prop-two="prop"
   is="header">
 </div>
 ```
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
   is="header"
-  propOne="prop"
-  propTwo="prop">
+  prop-one="prop"
+  prop-two="prop">
 </div>
 ```
 
 :-1: Examples of **incorrect** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
 <div
   ref="header"
-  propOne="prop"
+  prop-one="prop"
   is="header">
 </div>
 ```
