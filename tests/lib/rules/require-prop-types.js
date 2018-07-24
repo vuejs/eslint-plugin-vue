@@ -31,7 +31,7 @@ ruleTester.run('require-prop-types', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
     },
     {
       filename: 'test.vue',

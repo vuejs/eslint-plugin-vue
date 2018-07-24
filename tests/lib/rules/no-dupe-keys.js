@@ -79,7 +79,7 @@ ruleTester.run('no-dupe-keys', rule, {
           },
         }
       `,
-      parserOptions: { ecmaVersion: 8, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
     },
 
     {
