@@ -1,13 +1,13 @@
 <!--{}-->
 <template>
   <div
-    :class="
+    :class="(
       a
         +
         b,
       c
         +
         d
-    "
+    )"
   />
 </template>
