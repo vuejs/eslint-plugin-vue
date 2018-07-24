@@ -112,7 +112,7 @@ function getRuleInfo (ast) {
       return currentExports
     }, {})
 
-  return Object.prototype.hasOwnProperty.call(exportNodes, 'create') && isNormalFunctionExpression(exportNodes.create)
+  return Object.prototype.hasOwnProperty.call(exportNodes, 'create')
     ? Object.assign({ isNewStyle: !exportsIsFunction, meta: null }, exportNodes)
     : null
 }
