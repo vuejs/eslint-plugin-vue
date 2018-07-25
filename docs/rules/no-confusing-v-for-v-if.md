@@ -1,6 +1,7 @@
 # disallow confusing `v-for` and `v-if` on the same element (vue/no-confusing-v-for-v-if)
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
+- :warning: This rule was **deprecated** and replaced by [vue/no-use-v-if-with-v-for](no-use-v-if-with-v-for.md) rule.
 
 > When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately.
 >

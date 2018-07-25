@@ -190,6 +190,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
+| :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
@@ -197,6 +199,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | :wrench: | [vue/mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
 | :wrench: | [vue/name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
 | :wrench: | [vue/no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
+| :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 |  | [vue/require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
 |  | [vue/require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :wrench: | [vue/v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
@@ -216,7 +219,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
-|  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
+|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
+|  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
@@ -224,12 +228,16 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
-| :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
-|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
-|  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
-| :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
+
+### Deprecated
+
+> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) |
 
 <!--RULES_TABLE_END-->
 
