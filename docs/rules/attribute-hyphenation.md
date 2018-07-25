@@ -11,44 +11,45 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['custom-prop'] }]
 ```
 
-### `[2, "always"]` - Use hyphenated name. (It errors on upper case letters.)
+### `["error", "always"]` - Use hyphenated name. (It errors on upper case letters.)
 
-:+1: Examples of **correct** code`:
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'always']}" code="
+&lt;template&gt;
+  &lt;!-- ✔ GOOD --&gt;
+  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
 
-```html
-<MyComponent my-prop="prop"/>
-```
+  &lt;!-- ✘ BAD --&gt;
+  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
+&lt;/template&gt;
+" />
 
-:-1: Examples of **incorrect** code`:
+### `["error", "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope`.)
 
-```html
-<MyComponent myProp="prop"/>
-```
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never']}" code="
+&lt;template&gt;
+  &lt;!-- ✔ GOOD --&gt;
+  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
+  &lt;MyComponent data-id=&quot;prop&quot; /&gt;
+  &lt;MyComponent aria-role=&quot;button&quot; /&gt;
+  &lt;MyComponent slot-scope=&quot;prop&quot; /&gt;
 
-### `[2, "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope-`.)
+  &lt;!-- ✘ BAD --&gt;
+  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
+&lt;/template&gt;
+" />
 
-:+1: Examples of **correct** code`:
+### `["error", "never", { "ignore": ["custom-prop"] }]` - Don't use hyphenated name but allow custom attributes
 
-```html
-<MyComponent myProp="prop"/>
-```
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never', {'ignore': ['custom-prop']}]}" code="
+&lt;template&gt;
+  &lt;!-- ✔ GOOD --&gt;
+  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
+  &lt;MyComponent custom-prop=&quot;prop&quot; /&gt;
+  &lt;MyComponent data-id=&quot;prop&quot; /&gt;
+  &lt;MyComponent aria-role=&quot;button&quot; /&gt;
+  &lt;MyComponent slot-scope=&quot;prop&quot; /&gt;
 
-:-1: Examples of **incorrect** code`:
-
-```html
-<MyComponent my-prop="prop"/>
-```
-
-### `[2, "never", { 'ignore': ['custom-prop'] }]` - Don't use hyphenated name but allow custom attributes
-
-:+1: Examples of **correct** code`:
-
-```html
-<MyComponent myProp="prop" custom-prop="foo" data-id="1"/>
-```
-
-:-1: Examples of **incorrect** code`:
-
-```html
-<MyComponent my-prop="prop" custom-prop="foo" data-id="1"/>
-```
+  &lt;!-- ✘ BAD --&gt;
+  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
+&lt;/template&gt;
+" />

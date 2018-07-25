@@ -11,7 +11,9 @@
     "pretest": "npm run lint",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run lint -- --fix && git add .",
-    "update": "node ./tools/update.js"
+    "update": "node ./tools/update.js",
+    "docs:watch": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "files": [
     "lib"
@@ -54,8 +56,11 @@
     "eslint-plugin-eslint-plugin": "^1.4.0",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-vue-libs": "^3.0.0",
+    "eslint4b": "^5.1.0",
     "lodash": "^4.17.4",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2"
+    "nyc": "^12.0.2",
+    "vue-eslint-editor": "^0.1.0",
+    "vuepress": "github:vuejs/vuepress#9b602f2b6fb824522c8c7dbbba60a3e2abfd76ba"
   }
 }

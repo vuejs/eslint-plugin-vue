@@ -2,5 +2,10 @@
     "editor.tabSize": 2,
     "eslint.options": {
         "rulePaths": ["eslint-internal-rules"]
-    }
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        { "language": "vue", "autoFix": true }
+    ]
 }
