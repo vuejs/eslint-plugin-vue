@@ -25,7 +25,7 @@ This rule enforces a line break (or no line break) before tag's closing brackets
 {
     "vue/html-closing-bracket-newline": ["error", {
         "singleline": "never",
-        "multiline": "never"
+        "multiline": "always"
     }]
 }
 ```
@@ -34,63 +34,53 @@ This rule enforces a line break (or no line break) before tag's closing brackets
     - `"never"` ... disallow line breaks before the closing bracket. This is the default.
     - `"always"` ... require one line break before the closing bracket.
 - `multiline` ... the configuration for multiline elements. It's a multiline element if the last attribute is not on the same line of the opening bracket.
-    - `"never"` ... disallow line breaks before the closing bracket. This is the default.
-    - `"always"` ... require one line break before the closing bracket.
+    - `"never"` ... disallow line breaks before the closing bracket.
+    - `"always"` ... require one line break before the closing bracket. This is the default.
 
 Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-level of the closing brackets.
 
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-/*eslint html-closing-bracket-newline: "error"*/
+<!-- eslint html-closing-bracket-newline: "error" -->
 
 <div id="foo" class="bar"
 >
+
 <div
     id="foo"
-    class="bar"
->
-<div
-    id="foo"
-    class="bar"
-    >
+    class="bar">
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-/*eslint html-closing-bracket-newline: "error"*/
-
-<div id="foo" class="bar">
-<div
-    id="foo"
-    class="bar">
-```
-
-:-1: Examples of **incorrect** code for `{ "multiline": "always" }`:
-
-```html
-/*eslint html-closing-bracket-newline: ["error", { multiline: always }]*/
-
-<div id="foo" class="bar"
->
-<div
-    id="foo"
-    class="bar">
-```
-
-:+1: Examples of **correct** code for `{ "multiline": "always" }`:
-
-```html
-/*eslint html-closing-bracket-newline: ["error", { multiline: always }]*/
+<!-- eslint html-closing-bracket-newline: "error" -->
 
 <div id="foo" class="bar">
 <div
     id="foo"
     class="bar"
 >
+```
+
+:-1: Examples of **incorrect** code for `{ "multiline": "never" }`:
+
+```html
+<!-- eslint html-closing-bracket-newline: ["error", { multiline: never }] -->
+
 <div
     id="foo"
     class="bar"
-    >
+>
+```
+
+:+1: Examples of **correct** code for `{ "multiline": "never" }`:
+
+```html
+<!-- html-closing-bracket-newline: ["error", { multiline: never }] -->
+
+<div
+    id="foo"
+    class="bar">
 ```
