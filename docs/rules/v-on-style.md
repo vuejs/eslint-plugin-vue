@@ -1,7 +1,7 @@
 # enforce `v-on` directive style (vue/v-on-style)
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule enforces `v-on` directive style which you should use shorthand or long form.
 
@@ -35,3 +35,7 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.
+
+## Related links
+
+- [Style guide - Directive shorthands](https://vuejs.org/v2/style-guide/#Directive-shorthands-strongly-recommended)
