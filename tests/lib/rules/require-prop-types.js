@@ -31,7 +31,7 @@ ruleTester.run('require-prop-types', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -64,6 +64,32 @@ ruleTester.run('require-prop-types', rule, {
           props: {
             foo: {
               ['type']: String
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              validator: v => v
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              ['validator']: v => v
             }
           }
         }

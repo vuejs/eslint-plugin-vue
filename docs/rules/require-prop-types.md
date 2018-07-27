@@ -17,18 +17,32 @@ props: ['status']
 :+1: Examples of **correct** code for this rule:
 
 ```js
+// Without options, just type reference
 props: {
   status: String
 }
 ```
 
 ```js
+// With options with type field
 props: {
   status: {
     type: String,
     required: true,
-    validate: function (value) {
-      return ['syncing', 'synced', 'version-conflict', 'error'].indexOf(value) !== -1
+  }
+}
+```
+
+```js
+// With options without type field but with validator field
+props: {
+  status: {
+    required: true,
+    validator: function (value) {
+      return (
+        value === null ||
+        Array.isArray(value) && value.length > 0
+      )
     }
   }
 }

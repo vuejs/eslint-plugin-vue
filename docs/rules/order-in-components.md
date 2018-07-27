@@ -1,7 +1,7 @@
 # enforce order of properties in components (vue/order-in-components)
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule makes sure you keep declared order of properties in components.
 
