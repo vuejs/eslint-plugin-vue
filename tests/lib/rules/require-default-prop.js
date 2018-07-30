@@ -11,8 +11,7 @@
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
-  ecmaVersion: 6,
-  ecmaFeatures: { experimentalObjectRestSpread: true },
+  ecmaVersion: 2018,
   sourceType: 'module'
 }
 

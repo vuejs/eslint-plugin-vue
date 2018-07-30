@@ -12,9 +12,8 @@ const rule = require('../../../lib/rules/no-side-effects-in-computed-properties'
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 // ------------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 # disallow use v-if on the same element as v-for (vue/no-use-v-if-with-v-for)
 
+- :gear: This rule is included in `"plugin:vue/recommended"`.
+
 > Never use `v-if` on the same element as `v-for`.
 >
 > There are two common cases where this can be tempting:
