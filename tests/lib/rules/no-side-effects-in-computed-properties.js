@@ -12,9 +12,8 @@ const rule = require('../../../lib/rules/no-side-effects-in-computed-properties'
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 // ------------------------------------------------------------------------------
@@ -73,6 +72,33 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
                 test: 'example'
               }
             }
+          },
+          test9() {
+            return Object.keys(this.a).sort()
+          },
+          test10: {
+            get() {
+              return Object.keys(this.a).sort()
+            }
+          },
+          test11() {
+            const categories = {}
+
+            this.types.forEach(c => {
+              categories[c.category] = categories[c.category] || []
+              categories[c.category].push(c)
+            })
+
+            return categories
+          },
+          test12() {
+            return this.types.map(t => {
+              // [].push('xxx')
+              return t
+            })
+          },
+          test13 () {
+            this.someArray.forEach(arr => console.log(arr))
           }
         }
       })`,
@@ -105,6 +131,18 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test () {
+            let a;
+            a = this.something
+            return a
+          },
+        }
+      })`,
+      parserOptions
     }
   ],
   invalid: [
@@ -128,6 +166,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             const test = this.another.something.push('example')
             return 'something'
           },
+          test5() {
+            this.something[index] = thing[index]
+            return this.something
+          },
+          test6() {
+            return this.something.keys.sort()
+          }
         }
       })`,
       parserOptions,
@@ -146,6 +191,12 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       }, {
         line: 17,
         message: 'Unexpected side effect in "test4" computed property.'
+      }, {
+        line: 21,
+        message: 'Unexpected side effect in "test5" computed property.'
+      }, {
+        line: 25,
+        message: 'Unexpected side effect in "test6" computed property.'
       }]
     },
     {

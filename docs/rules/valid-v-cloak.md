@@ -1,4 +1,6 @@
-# Enforce valid `v-cloak` directives (valid-v-cloak)
+# enforce valid `v-cloak` directives (vue/valid-v-cloak)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-cloak` directive is valid.
 
@@ -13,23 +15,15 @@ This rule reports `v-cloak` directives in the following cases:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-cloak:aaa></div>
-        <div v-cloak.bbb></div>
-        <div v-cloak="ccc"></div>
-    </div>
-</template>
+<div v-cloak:aaa/>
+<div v-cloak.bbb/>
+<div v-cloak="ccc"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-cloak></div>
-    </div>
-</template>
+<div v-cloak/>
 ```
 
 ## :wrench: Options

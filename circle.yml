@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 4
+    version: 10
 
 dependencies:
   pre:
@@ -9,7 +9,8 @@ dependencies:
 
 test:
   override:
-    - nvm use 4 && npm test
     - nvm use 6 && npm test
     - nvm use 8 && npm test
-    - nvm use 8 && npm i eslint@3.18.0 --no-save && npm run -s test:base
+    - nvm use 10 && npm test
+    # Test for the minimum version we are supporting.
+    - nvm use 10 && npm i eslint@5.0.0 --no-save && $(npm bin)/mocha tests/lib/rules/*.js --reporter dot

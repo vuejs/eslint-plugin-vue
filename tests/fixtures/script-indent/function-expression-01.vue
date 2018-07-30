@@ -1,0 +1,12 @@
+<!--{}-->
+<script>
+!function
+  (
+    a
+    ,
+    b
+  )
+{
+  ;
+}
+</script>

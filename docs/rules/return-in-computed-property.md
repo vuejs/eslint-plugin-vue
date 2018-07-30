@@ -1,4 +1,6 @@
-# Enforces that a return statement is present in computed property (return-in-computed-property)
+# enforce that a return statement is present in computed property (vue/return-in-computed-property)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -9,10 +11,8 @@ This rule enforces that a `return` statement is present in `computed` properties
 ```js
 export default {
   computed: {
-    foo () {
-    },
-    bar: function () {
-    }
+    foo () {},
+    bar: function () {}
   }
 }
 ```
@@ -37,8 +37,10 @@ export default {
 This rule has an object option:
 - `"treatUndefinedAsUnspecified"`: `true` (default) disallows implicitly returning undefined with a `return;` statement.
 
-```
-vue/return-in-computed-property: [2, {
-  treatUndefinedAsUnspecified: true
-}]
+```json
+{
+  "vue/return-in-computed-property": [2, {
+    "treatUndefinedAsUnspecified": true
+  }]
+}
 ```

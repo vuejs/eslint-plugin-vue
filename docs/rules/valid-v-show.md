@@ -1,4 +1,6 @@
-# Enforce valid `v-show` directives (valid-v-show)
+# enforce valid `v-show` directives (vue/valid-v-show)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-show` directive is valid.
 
@@ -15,23 +17,15 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-show></div>
-        <div v-show:aaa="foo"></div>
-        <div v-show.bbb="foo"></div>
-    </div>
-</template>
+<div v-show/>
+<div v-show:aaa="foo"/>
+<div v-show.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-show="foo"></div>
-    </div>
-</template>
+<div v-show="foo"/>
 ```
 
 ## :wrench: Options

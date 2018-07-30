@@ -1,29 +1,28 @@
-# This rule warns about the usage of extra whitespaces between attributes (no-multi-spaces)
+# disallow multiple spaces (vue/no-multi-spaces)
+
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
 
-This rule aims to remove multiple spaces in a row between attributes witch are not used for indentation.
+This rule aims to remove multiple spaces in a row between attributes which are not used for indentation.
 
 ## Rule Details
 
 Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div class="foo"      :style="foo"
-    :foo="bar"         >
-  </div>
-</template>
+<div     class="foo"
+      :style="bar"         />
 ```
 
 Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div class="foo"
-    :style="foo">
-  </div>
-</template>
+<div
+  class="foo"
+  :style="bar"
+/>
 ```
 
 ### Options

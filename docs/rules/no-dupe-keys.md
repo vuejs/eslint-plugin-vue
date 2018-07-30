@@ -1,4 +1,6 @@
-# Prevents duplication of field names (no-dupe-keys)
+# disallow duplication of field names (vue/no-dupe-keys)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule prevents to use duplicated names.
 
@@ -15,16 +17,14 @@ export default {
   },
   computed: {
     foo: {
-      get () {
-      }
+      get () {}
     }
   },
   data: {
     foo: null
   },
   methods: {
-    foo () {
-    }
+    foo () {}
   }
 }
 ```
@@ -35,17 +35,15 @@ export default {
 export default {
   props: ['foo'],
   computed: {
-    bar () {
-    }
+    bar () {}
   },
   data () {
     return {
-      dat: null
+      baz: null
     }
   },
   methods: {
-    test () {
-    }
+    boo () {}
   }
 }
 ```
@@ -58,9 +56,9 @@ This rule has an object option:
 
 ### Example:
 
-```
-vue/no-dupe-keys: [2, {
-  groups: ['asyncComputed']
+``` json
+"vue/no-dupe-keys": [2, {
+  groups: ["firebase"]
 }]
 ```
 
@@ -71,7 +69,7 @@ export default {
   computed: {
     foo () {}
   },
-  asyncComputed: {
+  firebase: {
     foo () {}
   }
 }

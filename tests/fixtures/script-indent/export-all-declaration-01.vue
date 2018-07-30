@@ -1,0 +1,12 @@
+<!--{}-->
+<script>
+export
+  *
+  from
+  "mod"
+;
+export
+  *
+  from
+  "mod"
+</script>

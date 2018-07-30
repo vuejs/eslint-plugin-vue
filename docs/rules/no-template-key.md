@@ -1,4 +1,6 @@
-# Disallow `key` attribute on `<template>` (no-template-key)
+# disallow `key` attribute on `<template>` (vue/no-template-key)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Vue.js disallows `key` attribute on `<template>` elements.
 
@@ -9,24 +11,16 @@ This rule reports the `<template>` elements which have `key` attribute.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <template key="x"></template>
-        <template v-bind:key="y"></template>
-        <template :key="z"></template>
-    </div>
-</template>
+<template key="foo"> ... </template>
+<template v-bind:key="bar"> ... </template>
+<template :key="baz"> ... </template>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div key="x"></div>
-        <template></template>
-    </div>
-</template>
+<div key="foo"> ... </div>
+<template> ... </template>
 ```
 
 ## :wrench: Options

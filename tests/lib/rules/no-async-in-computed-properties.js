@@ -12,15 +12,8 @@ const rule = require('../../../lib/rules/no-async-in-computed-properties')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
-}
-
-const parserOptions8 = {
-  ecmaVersion: 8,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 // ------------------------------------------------------------------------------
@@ -51,12 +44,30 @@ ruleTester.run('no-async-in-computed-properties', rule, {
                 return bar
               }
             },
-            foo2: {
+            bar: {
               set () {
                 new Promise((resolve, reject) => {})
               }
+            },
+            baz: {
+              ...mapGetters({ get: 'getBaz' }),
+              ...mapActions({ set: 'setBaz' })
             }
           }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        async function resolveComponents(components) {
+          return await Promise.all(components.map(async (component) => {
+              if(typeof component === 'function') {
+                    return await component()
+                }
+                return component;
+          }));
         }
       `,
       parserOptions
@@ -75,7 +86,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions: parserOptions8,
+      parserOptions,
       errors: [{
         message: 'Unexpected async function declaration in "foo" computed property.',
         line: 4
@@ -95,7 +106,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions: parserOptions8,
+      parserOptions,
       errors: [{
         message: 'Unexpected async function declaration in "foo" computed property.',
         line: 4

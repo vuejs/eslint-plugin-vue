@@ -26,24 +26,32 @@ ruleTester.run('max-attributes-per-line', rule, {
       code: `<template><component></component></template>`
     },
     {
-      code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`
+      code: `<template><component
+        name="John Doe"
+        age="30"
+        job="Vet"
+      ></component></template>`
     },
     {
-      code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
+      code: `<template><component
+        name="John Doe"
+        age="30"
+        job="Vet"
+      ></component></template>`,
       options: [{ multiline: { allowFirstLine: true }}]
     },
     {
       code: `<template><component
         name="John Doe"
-        age="30">
-        </component>
-      </template>`
+        age="30"
+      >
+      </component></template>`
     },
     {
       code: `<template><component
         name="John Doe"
         age="30">
-        </component>
+      </component>
       </template>`,
       options: [{ singleline: 1 }]
     },
@@ -82,11 +90,19 @@ ruleTester.run('max-attributes-per-line', rule, {
 
   invalid: [
     {
-      code: `<template><component name="John Doe" age="30" job="Vet" petname="Snoopy"></component></template>`,
-      errors: ['Attribute "petname" should be on a new line.']
+      code: `<template><component name="John Doe" age="30"></component></template>`,
+      output: `<template><component name="John Doe" 
+age="30"></component></template>`,
+      errors: ['Attribute "age" should be on a new line.']
     },
     {
       code: `<template><component job="Vet"
+        name="John Doe"
+        age="30">
+        </component>
+      </template>`,
+      output: `<template><component 
+job="Vet"
         name="John Doe"
         age="30">
         </component>
@@ -98,10 +114,12 @@ ruleTester.run('max-attributes-per-line', rule, {
       }]
     },
     {
-      code: `<template><component name="John Doe" age="30"></component></template>`,
-      options: [{ singleline: { max: 1 }}],
+      code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
+      options: [{ singleline: { max: 2 }}],
+      output: `<template><component name="John Doe" age="30" 
+job="Vet"></component></template>`,
       errors: [{
-        message: 'Attribute "age" should be on a new line.',
+        message: 'Attribute "job" should be on a new line.',
         type: 'VAttribute',
         line: 1
       }]
@@ -109,6 +127,8 @@ ruleTester.run('max-attributes-per-line', rule, {
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
+      output: `<template><component name="John Doe" 
+age="30" job="Vet"></component></template>`,
       errors: [{
         message: 'Attribute "age" should be on a new line.',
         type: 'VAttribute',
@@ -125,6 +145,11 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
+      output: `<template><component 
+name="John Doe"
+        age="30">
+        </component>
+      </template>`,
       errors: [{
         message: 'Attribute "name" should be on a new line.',
         type: 'VAttribute',
@@ -138,6 +163,12 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
+      output: `<template><component
+        name="John Doe" 
+age="30"
+        job="Vet">
+        </component>
+      </template>`,
       errors: [{
         message: 'Attribute "age" should be on a new line.',
         type: 'VAttribute',
@@ -151,6 +182,12 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: 1 }],
+      output: `<template><component
+        name="John Doe" 
+age="30"
+        job="Vet">
+        </component>
+      </template>`,
       errors: [{
         message: 'Attribute "age" should be on a new line.',
         type: 'VAttribute',
@@ -164,6 +201,12 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
+      output: `<template><component
+        name="John Doe" age="30"
+        job="Vet" pet="dog" 
+petname="Snoopy">
+        </component>
+      </template>`,
       errors: [{
         message: 'Attribute "petname" should be on a new line.',
         type: 'VAttribute',
@@ -177,6 +220,12 @@ ruleTester.run('max-attributes-per-line', rule, {
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
+      output: `<template><component
+        name="John Doe" age="30"
+        job="Vet" pet="dog" 
+petname="Snoopy" extra="foo">
+        </component>
+      </template>`,
       errors: [{
         message: 'Attribute "petname" should be on a new line.',
         type: 'VAttribute',

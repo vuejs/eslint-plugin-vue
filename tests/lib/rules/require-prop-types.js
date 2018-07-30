@@ -31,7 +31,7 @@ ruleTester.run('require-prop-types', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module', ecmaFeatures: { experimentalObjectRestSpread: true }}
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -66,6 +66,50 @@ ruleTester.run('require-prop-types', rule, {
               ['type']: String
             }
           }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              validator: v => v
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              ['validator']: v => v
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: externalProps
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
@@ -111,7 +155,7 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Prop "foo" should define at least it\'s type.',
+        message: 'Prop "foo" should define at least its type.',
         line: 4
       }]
     },
@@ -128,7 +172,7 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Prop "foo" should define at least it\'s type.',
+        message: 'Prop "foo" should define at least its type.',
         line: 4
       }]
     },
@@ -143,7 +187,7 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Prop "foo" should define at least it\'s type.',
+        message: 'Prop "foo" should define at least its type.',
         line: 4
       }]
     }

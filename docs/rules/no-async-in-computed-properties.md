@@ -1,4 +1,6 @@
-# Check if there are no asynchronous actions inside computed properties (no-async-in-computed-properties)
+# disallow asynchronous actions in computed properties (vue/no-async-in-computed-properties)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Computed properties should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
 If you need async computed properties you might want to consider using additional plugin [vue-async-computed]
@@ -10,26 +12,24 @@ This rule is aimed at preventing asynchronous methods from being called in compu
 :-1: Examples of **incorrect** code for this rule:
 
 ```js
-export default {
-  computed: {
-    pro () {
-      return Promise.all([new Promise((resolve, reject) => {})])
-    },
-    foo: async function () {
-      return await someFunc()
-    },
-    bar () {
-      return fetch(url).then(response => {})
-    },
-    tim () {
-      setTimeout(() => { }, 0)
-    },
-    inter () {
-      setInterval(() => { }, 0)
-    },
-    anim () {
-      requestAnimationFrame(() => {})
-    }
+computed: {
+  pro () {
+    return Promise.all([new Promise((resolve, reject) => {})])
+  },
+  foo: async function () {
+    return await someFunc()
+  },
+  bar () {
+    return fetch(url).then(response => {})
+  },
+  tim () {
+    setTimeout(() => { }, 0)
+  },
+  inter () {
+    setInterval(() => { }, 0)
+  },
+  anim () {
+    requestAnimationFrame(() => {})
   }
 }
 ```
@@ -37,17 +37,15 @@ export default {
 :+1: Examples of **correct** code for this rule:
 
 ```js
-export default {
-  computed: {
-    foo () {
-      var bar = 0
-      try {
-        bar = bar / this.a
-      } catch (e) {
-        return 0
-      } finally {
-        return bar
-      }
+computed: {
+  foo () {
+    var bar = 0
+    try {
+      bar = bar / this.a
+    } catch (e) {
+      return 0
+    } finally {
+      return bar
     }
   }
 }
@@ -57,4 +55,6 @@ export default {
 
 Nothing.
 
-[vue-async-computed]: https://github.com/foxbenjaminfox/vue-async-computed
+## Related links
+
+- [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)

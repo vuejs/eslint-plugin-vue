@@ -54,7 +54,7 @@ const anyWith = (opts) => Object.assign(
 tester.run('html-self-closing', rule, {
   valid: [
     // default
-    '<template><div></div></template>',
+    '<template><div/></template>',
     '<template><img></template>',
     '<template><x-test/></template>',
     '<template><svg><path/></svg></template>',
@@ -65,16 +65,20 @@ tester.run('html-self-closing', rule, {
       code: '<template><div><!-- comment --></div></template>',
       output: null,
       options: [{ html: { normal: 'always' }}]
-    }
+    },
+
+    // Invalid EOF
+    '<template><div a=">test</div></template>',
+    '<template><div><!--test</div></template>'
 
     // other cases are in `invalid` tests.
   ],
   invalid: [
     // default
     {
-      code: '<template><div/></template>',
-      output: '<template><div></div></template>',
-      errors: ['Disallow self-closing on HTML elements (<div/>).']
+      code: '<template><div></div></template>',
+      output: '<template><div/></template>',
+      errors: ['Require self-closing on HTML elements (<div>).']
     },
     {
       code: '<template><img/></template>',

@@ -1,9 +1,12 @@
-# Enforce self-closing style (html-self-closing)
+# enforce self-closing style (vue/html-self-closing)
+
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
 
-1. `<your-component></your-component>`
-2. `<your-component />` (self-closing)
+1. `<YourComponent></YourComponent>`
+2. `<YourComponent/>` (self-closing)
 
 Self-closing is simple and shorter, but it's not supported in raw HTML.
 This rule helps you to unify the self-closing style.
@@ -14,20 +17,20 @@ This rule has options which specify self-closing style for each context.
 
 ```json
 {
-    "html-self-closing": ["error", {
-        "html": {
-            "normal": "never",
-            "void": "never",
-            "component": "always"
-        },
-        "svg": "always",
-        "math": "always"
-    }]
+  "vue/html-self-closing": ["error", {
+    "html": {
+      "void": "never",
+      "normal": "always",
+      "component": "always"
+    },
+    "svg": "always",
+    "math": "always"
+  }]
 }
 ```
 
-- `html.normal` (`"never"` by default) ... The style of well-known HTML elements except void elements.
 - `html.void` (`"never"` by default) ... The style of well-known HTML void elements.
+- `html.normal` (`"always"` by default) ... The style of well-known HTML elements except void elements.
 - `html.component` (`"always"` by default) ... The style of Vue.js custom components.
 - `svg`(`"always"` by default) .... The style of well-known SVG elements.
 - `math`(`"always"` by default) .... The style of well-known MathML elements.
@@ -43,25 +46,22 @@ Every option can be set to one of the following values:
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-/*eslint html-self-closing: "error"*/
-
-<template>
-    <div />
-    <img />
-    <your-component></your-component>
-    <svg><path d=""></path></svg>
-</template>
+<div></div>
+<img/>
+<img></img>
+<MyComponent/></MyComponent>
+<svg><path d=""></path></svg>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-/*eslint html-self-closing: "error"*/
-
-<template>
-    <div></div>
-    <img>
-    <your-component />
-    <svg><path d="" /></svg>
-</template>
+<div/>
+<img>
+<MyComponent/>
+<svg><path d=""/></svg>
 ```
+
+## Related links
+
+- [Style guide - Self closing components](https://vuejs.org/v2/style-guide/#Self-closing-components-strongly-recommended)

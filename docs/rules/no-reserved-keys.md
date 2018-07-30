@@ -1,6 +1,8 @@
-# Prevent overwrite reserved keys (no-reserved-keys)
+# disallow overwriting reserved keys (vue/no-reserved-keys)
 
-This rule prevents to use reserved names from to avoid conflicts and unexpected behavior.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+
+This rule prevents to use [reserved names](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json) to avoid conflicts and unexpected behavior.
 
 ## Rule Details
 
@@ -13,16 +15,14 @@ export default {
   },
   computed: {
     $on: {
-      get () {
-      }
+      get () {}
     }
   },
   data: {
     _foo: null
   },
   methods: {
-    $nextTick () {
-    }
+    $nextTick () {}
   }
 }
 ```
@@ -31,16 +31,16 @@ export default {
 
 This rule has an object option:
 
-`"reserved"`: [] (default) array of dissalowed names inside `groups`.
+`"reserved"`: [] (default) array of additional restricted attributes inside `groups`.
 
-`"groups"`: [] (default) array of additional groups to search for duplicates.
+`"groups"`: [] (default) array of additional group names to search for duplicates in.
 
 ### Example:
 
-```
-vue/no-reserved-keys: [2, {
+``` json
+"vue/no-reserved-keys": [2, {
   reserved: ['foo', 'foo2'],
-  groups: ['asyncComputed']
+  groups: ['firebase']
 }]
 ```
 
@@ -48,11 +48,15 @@ vue/no-reserved-keys: [2, {
 
 ```js
 export default {
-  asyncComputed: {
-    foo2 () {}
-  },
   computed: {
     foo () {}
+  },
+  firebase: {
+    foo2 () {}
   }
 }
 ```
+
+## Related links
+
+- [List of reserved keys](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json)

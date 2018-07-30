@@ -1,0 +1,15 @@
+<!--{}-->
+<script>
+export
+{
+  a
+  ,
+  b
+}
+;
+export
+{
+  c,
+  d
+}
+</script>

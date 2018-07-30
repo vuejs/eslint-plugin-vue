@@ -1,0 +1,11 @@
+<!--{}-->
+<script>
+do
+{
+  ;
+}
+while
+  (
+    a
+  )
+</script>

@@ -1,0 +1,10 @@
+<!--{}-->
+<template>
+  <div
+    v-for="
+      x
+        in
+          xs
+    "
+  ></div>
+</template>

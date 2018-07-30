@@ -1,53 +1,54 @@
-# Define if attributes on cusom components can be hyphened. (attribute-hyphenation)
+# enforce attribute naming style on custom components in template (vue/attribute-hyphenation)
+
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :wrench: Options
 
-Default casing is set to `always`
+Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to be ignored
 
 ```
-'vue/attribute-hyphenation': [2, 'always'|'never']
+'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['custom-prop'] }]
 ```
 
-### `"always"` - Use hyphenated name. (It errors on upper case letters.)
+### `[2, "always"]` - Use hyphenated name. (It errors on upper case letters.)
 
 :+1: Examples of **correct** code`:
 
 ```html
-<template>
-  <foo my-prop="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent my-prop="prop"/>
 ```
 
 :-1: Examples of **incorrect** code`:
 
 ```html
-<template>
-  <foo myProp="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent myProp="prop"/>
 ```
 
-### `"never"` - Don't use hyphenated name. (It errors on hyphens except `data-` and `aria-`.)
+### `[2, "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope-`.)
 
 :+1: Examples of **correct** code`:
 
 ```html
-<template>
-  <foo myProp="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent myProp="prop"/>
 ```
 
 :-1: Examples of **incorrect** code`:
 
 ```html
-<template>
-  <foo my-prop="prop">
-    <a onClick="return false"></a>
-  </foo>
-</template>
+<MyComponent my-prop="prop"/>
+```
+
+### `[2, "never", { 'ignore': ['custom-prop'] }]` - Don't use hyphenated name but allow custom attributes
+
+:+1: Examples of **correct** code`:
+
+```html
+<MyComponent myProp="prop" custom-prop="foo" data-id="1"/>
+```
+
+:-1: Examples of **incorrect** code`:
+
+```html
+<MyComponent my-prop="prop" custom-prop="foo" data-id="1"/>
 ```

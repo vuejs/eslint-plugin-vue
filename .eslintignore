@@ -1,4 +1,5 @@
-node_modules
-lib/recommended-rules.js
-coverage
-.nyc_output
+/.nyc_output
+/coverage
+/node_modules
+/tests/fixtures
+/tests/integrations/*/node_modules

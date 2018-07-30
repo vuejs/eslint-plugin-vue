@@ -1,0 +1,13 @@
+<!--{}-->
+<template>
+  <div
+    v-on:b="
+      try
+      {
+      }
+      finally
+      {
+      }
+    "
+  ></div>
+</template>

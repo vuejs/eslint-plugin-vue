@@ -1,4 +1,6 @@
-# Require `v-bind:is` of `<component>` elements (require-component-is)
+# require `v-bind:is` of `<component>` elements (vue/require-component-is)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 > You can use the same mount point and dynamically switch between multiple components using the reserved `<component>` element and dynamically bind to its `is` attribute:
 >
@@ -11,19 +13,21 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <component></component>
-</template>
+<component/>
+<component is="type"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <component :is="type"></component>
-</template>
+<component :is="type"/>
+<component v-bind:is="type"/>
 ```
 
 ## :wrench: Options
 
 Nothing.
+
+## Related links
+
+- [Guide - Dynamic Components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)

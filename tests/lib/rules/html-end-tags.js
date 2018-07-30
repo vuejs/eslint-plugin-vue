@@ -46,27 +46,29 @@ tester.run('html-end-tags', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><img></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><self-closing-custom-element/></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div/></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div a="b>test</div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><!--</div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><svg><![CDATA[test</svg></div></template>'
     }
   ],
   invalid: [
-    // {
-    //   filename: 'test.vue',
-    //   code: '<template><div><hr></hr></div></template>',
-    //   output: '<template><div><hr></template>',
-    //   errors: ["'<hr>' should not have end tag."]
-    // },
-    // {
-    //   filename: 'test.vue',
-    //   code: '<template><div><img></img></div></template>',
-    //   output: '<template><div><img></template>',
-    //   errors: ["'<img>' should not have end tag."]
-    // },
-    // {
-    //   filename: 'test.vue',
-    //   code: '<template><div><input></input></div></template>',
-    //   output: '<template><div><input></template>',
-    //   errors: ["'<input>' should not have end tag."]
-    // },
     {
       filename: 'test.vue',
       code: '<template><div><div></div></template>',

@@ -1,6 +1,7 @@
-# enforce unified spacing in mustache interpolations. (mustache-interpolation-spacing)
+# enforce unified spacing in mustache interpolations (vue/mustache-interpolation-spacing)
 
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -9,17 +10,14 @@ This rule aims to enforce unified spacing in mustache interpolations.
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{   text   }}</div>
-</template>
+<div>{{   text   }}</div>
+<div>{{text}}</div>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
 ## :wrench: Options
@@ -32,36 +30,29 @@ Default spacing is set to `always`
 
 ### `"always"` - Expect one space between expression and curly brackets.
 
-:+1: Examples of **correct** code`:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{   text   }}</div>
+<div>{{text}}</div>
 ```
 
-:-1: Examples of **incorrect** code`:
+:+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{text}}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
 ### `"never"` - Expect no spaces between expression and curly brackets.
 
-:+1: Examples of **correct** code`:
+:-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-  <div>{{text}}</div>
-</template>
+<div>{{ text }}</div>
 ```
 
-:-1: Examples of **incorrect** code`:
+:+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-  <div>{{ text }}</div>
-</template>
+<div>{{text}}</div>
 ```

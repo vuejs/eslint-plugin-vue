@@ -1,4 +1,6 @@
-# Enforce valid `v-text` directives (valid-v-text)
+# enforce valid `v-text` directives (vue/valid-v-text)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-text` directive is valid.
 
@@ -15,23 +17,15 @@ This rule does not check syntax errors in directives because it's checked by [no
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-text></div>
-        <div v-text:aaa="foo"></div>
-        <div v-text.bbb="foo"></div>
-    </div>
-</template>
+<div v-text/>
+<div v-text:aaa="foo"/>
+<div v-text.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-text="foo"></div>
-    </div>
-</template>
+<div v-text="foo"/>
 ```
 
 ## :wrench: Options

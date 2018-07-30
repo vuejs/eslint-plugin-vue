@@ -1,0 +1,30 @@
+<!--{}-->
+<script>
+import
+  f
+  ,
+  {
+    a
+      as
+      A
+    ,
+    b
+      as
+      B
+  }
+  from
+  "mod"
+;
+import
+  g,
+  {
+    c
+      as
+      C,
+    d
+      as
+      D
+  }
+  from
+  "mod"
+</script>

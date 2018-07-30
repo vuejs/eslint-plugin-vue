@@ -1,0 +1,17 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:c="
+      obj
+        [
+          0
+        ]
+        [
+          1
+        ]
+        [
+          2
+        ]
+    "
+  ></div>
+</template>

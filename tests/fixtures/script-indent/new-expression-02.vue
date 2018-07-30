@@ -1,0 +1,6 @@
+<!--{}-->
+<script>
+new (
+  foo
+)
+</script>

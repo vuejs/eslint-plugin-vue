@@ -1,4 +1,7 @@
-# Enforce quotes style of HTML attributes (html-quotes)
+# enforce quotes style of HTML attributes (vue/html-quotes)
+
+- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 You can choose quotes of HTML attributes from:
 
@@ -15,43 +18,27 @@ This rule reports the quotes of attributes if it is different to configured quot
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<template>
-    <div>
-        <img src='./logo.png'>
-        <img src=./logo.png>
-    </div>
-</template>
+<img src='./logo.png'>
+<img src=./logo.png>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <img src="./logo.png">
-    </div>
-</template>
+<img src="./logo.png">
 ```
 
 :-1: Examples of **incorrect** code for this rule with `"single"` option:
 
 ```html
-<template>
-    <div>
-        <img src="./logo.png">
-        <img src=./logo.png>
-    </div>
-</template>
+<img src="./logo.png">
+<img src=./logo.png>
 ```
 
 :+1: Examples of **correct** code for this rule with `"single"` option:
 
 ```html
-<template>
-    <div>
-        <img src='./logo.png'>
-    </div>
-</template>
+<img src='./logo.png'>
 ```
 
 ## :wrench: Options

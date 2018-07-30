@@ -1,4 +1,6 @@
-# Enforce valid `v-bind` directives (valid-v-bind)
+# enforce valid `v-bind` directives (vue/valid-v-bind)
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-bind` directive is valid.
 
@@ -13,29 +15,19 @@ This rule does not report `v-bind` directives which do not have their argument (
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
 ```html
-<template>
-    <div>
-        <div v-bind></div>
-        <div :aaa></div>
-        <div v-bind:aaa.bbb="foo"></div>
-    </div>
-</template>
+<div v-bind/>
+<div :aaa/>
+<div v-bind:aaa.bbb="foo"/>
 ```
 
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<template>
-    <div>
-        <div v-bind="foo"></div>
-        <div v-bind:aaa="foo"></div>
-        <div :aaa="foo"></div>
-        <div :aaa.prop="foo"></div>
-    </div>
-</template>
+<div v-bind="foo"/>
+<div v-bind:aaa="foo"/>
+<div :aaa="foo"/>
+<div :aaa.prop="foo"/>
 ```
 
 ## :wrench: Options

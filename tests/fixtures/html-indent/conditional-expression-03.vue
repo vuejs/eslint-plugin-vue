@@ -1,0 +1,12 @@
+<!--{}-->
+<template>
+  <div
+    v-bind:c="
+      a
+        ?
+          b
+        :
+          c
+    "
+  ></div>
+</template>
