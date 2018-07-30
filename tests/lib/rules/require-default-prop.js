@@ -57,10 +57,13 @@ ruleTester.run('require-default-prop', rule, {
               type: Boolean,
               default: true
             },
-            h: Boolean,
-            i: [Boolean],
+            h: {
+              type: [Boolean]
+            },
+            i: Boolean,
+            j: [Boolean],
             // eslint-disable-next-line require-default-prop
-            j: Number
+            k: Number
           }
         }
       `
@@ -129,6 +132,9 @@ ruleTester.run('require-default-prop', rule, {
               required: false
             },
             e: [Boolean, String],
+            f: {
+              type: [Boolean, String],
+            }
           }
         }
       `,
@@ -147,6 +153,9 @@ ruleTester.run('require-default-prop', rule, {
       }, {
         message: `Prop 'e' requires default value to be set.`,
         line: 13
+      }, {
+        message: `Prop 'f' requires default value to be set.`,
+        line: 14
       }]
     }
   ]
