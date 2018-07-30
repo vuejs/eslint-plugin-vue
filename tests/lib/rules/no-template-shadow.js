@@ -36,6 +36,7 @@ ruleTester.run('no-template-shadow', rule, {
       filename: 'test.vue',
       code: `<template>
         <div v-for="i in 5"></div>
+        <div v-for="i in f"></div>
         <div v-for="i in 5"></div>
       </template>
       <script>
@@ -60,9 +61,7 @@ ruleTester.run('no-template-shadow', rule, {
     {
       filename: 'test.vue',
       code: `<template>
-        <div v-for="i in 5">
-          <div v-for="i in 5"></div>
-        </div>
+        <div v-for="i in 5"></div>
       </template>
       <script>
         export default {
@@ -73,10 +72,8 @@ ruleTester.run('no-template-shadow', rule, {
       </script>`,
       errors: [{
         message: "Variable 'i' is already declared in the upper scope.",
-        type: 'Identifier'
-      }, {
-        message: "Variable 'i' is already declared in the upper scope.",
-        type: 'Identifier'
+        type: 'Identifier',
+        line: 2
       }]
     },
     {
@@ -94,10 +91,36 @@ ruleTester.run('no-template-shadow', rule, {
       </script>`,
       errors: [{
         message: "Variable 'i' is already declared in the upper scope.",
-        type: 'Identifier'
+        type: 'Identifier',
+        line: 2
       }, {
         message: "Variable 'i' is already declared in the upper scope.",
-        type: 'Identifier'
+        type: 'Identifier',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div v-for="i in 5">
+          <div v-for="i in 5"></div>
+        </div>
+      </template>
+      <script>
+        export default {
+          data: {
+            i: 7
+          }
+        }
+      </script>`,
+      errors: [{
+        message: "Variable 'i' is already declared in the upper scope.",
+        type: 'Identifier',
+        line: 2
+      }, {
+        message: "Variable 'i' is already declared in the upper scope.",
+        type: 'Identifier',
+        line: 3
       }]
     },
     {
@@ -118,10 +141,12 @@ ruleTester.run('no-template-shadow', rule, {
       </script>`,
       errors: [{
         message: "Variable 'i' is already declared in the upper scope.",
-        type: 'Identifier'
+        type: 'Identifier',
+        line: 2
       }, {
         message: "Variable 'f' is already declared in the upper scope.",
-        type: 'Identifier'
+        type: 'Identifier',
+        line: 3
       }]
     }
   ]

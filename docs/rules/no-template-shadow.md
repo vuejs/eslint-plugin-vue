@@ -1,6 +1,6 @@
 # Disallow variable declarations from shadowing variables declared in the outer scope. (no-template-shadow)
 
-`no-shadow` should report variable definitions of v-for directives or scope attributes if those shadows the variables in parent scopes.
+`no-template-shadow` should report variable definitions of v-for directives or scope attributes if those shadows the variables in parent scopes.
 
 ## :book: Rule Details
 
@@ -10,20 +10,30 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
 
 ```html
 <template>
-  <div>
-    <div v-for="i in 5">
-      <div v-for="i in 5"></div>
-    </div>
-  </div>
-</template>
+   <div>
+     <div v-for="i in 5">
+       <div v-for="i in 10"></div>
+     </div>
+   </div>
+ </template>
+ ```
+
+ ```html
+<template>
+   <div>
+     <div v-for="i in 5"></div>
+   </div>
+ </template>
 <script>
   export default {
-    data: {
-      i: 7
+    data () {
+      return {
+        i: 10
+      }
     }
   }
 </script>
-```
+ ```
 
 :+1: Examples of **correct** code for this rule:
 
