@@ -29,7 +29,8 @@ tester.run('html-closing-bracket-newline', rule, {
     `
       <template>
         <div
-          id="">
+          id=""
+        >
         </div>
       </template>
     `,
@@ -144,20 +145,20 @@ tester.run('html-closing-bracket-newline', rule, {
       code: `
         <template>
           <div
-            id=""
-            >
+            id="">
           </div>
         </template>
       `,
       output: `
         <template>
           <div
-            id="">
+            id=""
+>
           </div>
         </template>
       `,
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.'
+        'Expected 1 line break before closing bracket, but no line breaks found.'
       ]
     },
     {
