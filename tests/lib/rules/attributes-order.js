@@ -249,6 +249,33 @@ tester.run('attributes-order', rule, {
             'OTHER_DIRECTIVES'
           ]
         }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-if="!visible"
+            class="content"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'DEFINITION',
+            'EVENTS',
+            'UNIQUE',
+            ['BINDING', 'OTHER_ATTR'],
+            'CONTENT',
+            'GLOBAL'
+          ]
+        }]
     }
   ],
 
@@ -512,6 +539,48 @@ tester.run('attributes-order', rule, {
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
+          nodeType: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      code:
+        `<template>
+          <div
+            class="content"
+            v-if="!visible"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'DEFINITION',
+            'EVENTS',
+            'UNIQUE',
+            ['BINDING', 'OTHER_ATTR'],
+            'CONTENT',
+            'GLOBAL'
+          ]
+        }],
+      output:
+        `<template>
+          <div
+            v-if="!visible"
+            class="content"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-if" should go before "class".',
           nodeType: 'VIdentifier'
         }
       ]
