@@ -31,38 +31,31 @@ tester.run('component-name-in-template-casing', rule, {
     // kebab-case
     {
       code: '<template><the-component></the-component></template>',
-      output: null,
       options: ['kebab-case']
     },
     {
       code: '<template><div/></template>',
-      output: null,
       options: ['kebab-case']
     },
     {
       code: '<template><img></template>',
-      output: null,
       options: ['kebab-case']
     },
     {
       code: '<template><svg><path/></svg></template>',
-      output: null,
       options: ['kebab-case']
     },
     {
       code: '<template><math><mspace/></math></template>',
-      output: null,
       options: ['kebab-case']
     },
     // ignores
     {
       code: '<template><custom-element></custom-element></template>',
-      output: null,
       options: ['PascalCase', { ignores: ['custom-element'] }]
     },
     {
       code: '<template><custom-element><TheComponent/></custom-element></template>',
-      output: null,
       options: ['PascalCase', { ignores: ['custom-element'] }]
     },
     // Invalid EOF
@@ -72,251 +65,251 @@ tester.run('component-name-in-template-casing', rule, {
   invalid: [
     {
       code: `
-<template>
-  <the-component id="id">
-    <!-- comment -->
-  </the-component>
-</template>
-`,
+      <template>
+        <the-component id="id">
+          <!-- comment -->
+        </the-component>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent id="id">
-    <!-- comment -->
-  </TheComponent>
-</template>
-`,
+      <template>
+        <TheComponent id="id">
+          <!-- comment -->
+        </TheComponent>
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <the-component id="id"/>
-</template>
-`,
+      <template>
+        <the-component id="id"/>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent id="id"/>
-</template>
-`,
+      <template>
+        <TheComponent id="id"/>
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <TheComponent id="id">
-    <!-- comment -->
-  </TheComponent>
-</template>
-`,
+      <template>
+        <TheComponent id="id">
+          <!-- comment -->
+        </TheComponent>
+      </template>
+      `,
       options: ['kebab-case'],
       output: `
-<template>
-  <the-component id="id">
-    <!-- comment -->
-  </the-component>
-</template>
-`,
+      <template>
+        <the-component id="id">
+          <!-- comment -->
+        </the-component>
+      </template>
+      `,
       errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <TheComponent id="id"/>
-</template>
-`,
+      <template>
+        <TheComponent id="id"/>
+      </template>
+      `,
       options: ['kebab-case'],
       output: `
-<template>
-  <the-component id="id"/>
-</template>
-`,
+      <template>
+        <the-component id="id"/>
+      </template>
+      `,
       errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <the-component
-    id="id"/>
-</template>
-`,
+      <template>
+        <the-component
+          id="id"/>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent
-    id="id"/>
-</template>
-`,
+      <template>
+        <TheComponent
+          id="id"/>
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <the-component/>
-</template>
-`,
+      <template>
+        <the-component/>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent/>
-</template>
-`,
+      <template>
+        <TheComponent/>
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <the-component></the-component>
-</template>
-`,
+      <template>
+        <the-component></the-component>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent></TheComponent>
-</template>
-`,
+      <template>
+        <TheComponent></TheComponent>
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <theComponent/>
-</template>
-`,
+      <template>
+        <theComponent/>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent/>
-</template>
-`,
+      <template>
+        <TheComponent/>
+      </template>
+      `,
       errors: ['Component name "theComponent" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <theComponent/>
-</template>
-`,
+      <template>
+        <theComponent/>
+      </template>
+      `,
       options: ['kebab-case'],
       output: `
-<template>
-  <the-component/>
-</template>
-`,
+      <template>
+        <the-component/>
+      </template>
+      `,
       errors: ['Component name "theComponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <The-component/>
-</template>
-`,
+      <template>
+        <The-component/>
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent/>
-</template>
-`,
+      <template>
+        <TheComponent/>
+      </template>
+      `,
       errors: ['Component name "The-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <The-component/>
-</template>
-`,
+      <template>
+        <The-component/>
+      </template>
+      `,
       options: ['kebab-case'],
       output: `
-<template>
-  <the-component/>
-</template>
-`,
+      <template>
+        <the-component/>
+      </template>
+      `,
       errors: ['Component name "The-component" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <Thecomponent/>
-</template>
-`,
+      <template>
+        <Thecomponent/>
+      </template>
+      `,
       options: ['kebab-case'],
       output: `
-<template>
-  <thecomponent/>
-</template>
-`,
+      <template>
+        <thecomponent/>
+      </template>
+      `,
       errors: ['Component name "Thecomponent" is not kebab-case.']
     },
     {
       code: `
-<template>
-  <the-component></the-component  >
-</template>
-`,
+      <template>
+        <the-component></the-component  >
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent></TheComponent  >
-</template>
-`,
+      <template>
+        <TheComponent></TheComponent  >
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <the-component></the-component
-  >
-</template>
-`,
+      <template>
+        <the-component></the-component
+        >
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent></TheComponent
-  >
-</template>
-`,
+      <template>
+        <TheComponent></TheComponent
+        >
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <the-component></the-component end-tag-attr="attr" >
-</template>
-`,
+      <template>
+        <the-component></the-component end-tag-attr="attr" >
+      </template>
+      `,
       output: `
-<template>
-  <TheComponent></TheComponent end-tag-attr="attr" >
-</template>
-`,
+      <template>
+        <TheComponent></TheComponent end-tag-attr="attr" >
+      </template>
+      `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
 
     // ignores
     {
       code: `
-<template>
-  <custom-element>
-    <the-component />
-  </custom-element>
-</template>`,
+      <template>
+        <custom-element>
+          <the-component />
+        </custom-element>
+      </template>`,
       output: `
-<template>
-  <custom-element>
-    <TheComponent />
-  </custom-element>
-</template>`,
+      <template>
+        <custom-element>
+          <TheComponent />
+        </custom-element>
+      </template>`,
       options: ['PascalCase', { ignores: ['custom-element'] }],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
       code: `
-<template>
-  <custom-element1>
-    <the-component />
-  </custom-element1>
-  <custom-element2 />
-  <the-component />
-</template>`,
+      <template>
+        <custom-element1>
+          <the-component />
+        </custom-element1>
+        <custom-element2 />
+        <the-component />
+      </template>`,
       output: `
-<template>
-  <custom-element1>
-    <TheComponent />
-  </custom-element1>
-  <custom-element2 />
-  <TheComponent />
-</template>`,
+      <template>
+        <custom-element1>
+          <TheComponent />
+        </custom-element1>
+        <custom-element2 />
+        <TheComponent />
+      </template>`,
       options: ['PascalCase', { ignores: ['custom-element1', 'custom-element2'] }],
       errors: [
         'Component name "the-component" is not PascalCase.',
