@@ -2,8 +2,6 @@
 
 Official ESLint plugin for Vue.js.
 
-## 🏁 Goal
-
 This plugin allows us to check the `<template>` and `<script>` of `.vue` files with ESLint.
 
 - Finds syntax errors.

@@ -41,6 +41,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
+| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  |
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  |
@@ -74,6 +75,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
+| [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
+| [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
 | [vue/html-indent](./html-indent.md) | enforce consistent indentation in `<template>` | :wrench: |
 | [vue/html-self-closing](./html-self-closing.md) | enforce self-closing style | :wrench: |
@@ -81,6 +84,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: |
 | [vue/name-property-casing](./name-property-casing.md) | enforce specific casing for the name property in Vue components | :wrench: |
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
+| [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
+| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components | :wrench: |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
 | [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: |
@@ -100,7 +105,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:--------|:------------|:---|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: |
 | [vue/html-quotes](./html-quotes.md) | enforce quotes style of HTML attributes | :wrench: |
-| [vue/no-confusing-v-for-v-if](./no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |  |
+| [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
 | [vue/this-in-template](./this-in-template.md) | enforce usage of `this` in template |  |
 
@@ -114,16 +119,21 @@ For example:
 ```json
 {
   "rules": {
-    "vue/html-closing-bracket-newline": "error"
+    "vue/component-name-in-template-casing": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
-| [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
-| [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
-| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
-| [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
-| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components | :wrench: |
+| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
+
+## Deprecated
+
+- :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+- :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [vue/no-confusing-v-for-v-if](./no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) |
