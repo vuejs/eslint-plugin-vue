@@ -53,6 +53,19 @@ if (uncategorizedRules.length >= 1) {
   rulesTableContent += `
 ## Uncategorized
 
+No preset enables the rules in this category.
+Please enable each rule if you want.
+
+For example:
+
+\`\`\`json
+{
+  "rules": {
+    "${uncategorizedRules[0].ruleId}": "error"
+  }
+}
+\`\`\`
+
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 ${uncategorizedRules.map(toRuleRow).join('\n')}

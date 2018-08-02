@@ -106,6 +106,19 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 ## Uncategorized
 
+No preset enables the rules in this category.
+Please enable each rule if you want.
+
+For example:
+
+```json
+{
+  "rules": {
+    "vue/html-closing-bracket-newline": "error"
+  }
+}
+```
+
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
