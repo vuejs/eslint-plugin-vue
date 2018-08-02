@@ -2,7 +2,7 @@
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule requires default value to be set for each props that are not marked as `required`.
+This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
 
 ## Rule Details
 
@@ -12,10 +12,11 @@ Examples of **incorrect** code for this rule:
 props: {
   a: Number,
   b: [Number, String],
-  c: {
+  c: [Boolean, Number],
+  d: {
     type: Number
   },
-  d: {
+  e: {
     type: Number,
     required: false
   }
@@ -38,6 +39,9 @@ props: {
     type: Number,
     default: 0,
     required: false
+  },
+  d: {
+    type: Boolean, // Boolean is the only type that doesn't require default
   }
 }
 ```

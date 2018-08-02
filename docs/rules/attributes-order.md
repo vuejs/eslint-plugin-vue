@@ -90,7 +90,16 @@ Specify custom order of attribute groups
 :+1: Examples of **correct** code with custom order`:
 
 ```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
+<!-- 'vue/attributes-order': [2, { order: ['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', ['BINDING', 'OTHER_ATTR'], 'EVENTS', 'CONTENT'] }] -->
+<div
+  is="header"
+  prop-one="prop"
+  :prop-two="prop">
+</div>
+```
+
+```html
+<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
 <div
   prop-one="prop"
   prop-two="prop"

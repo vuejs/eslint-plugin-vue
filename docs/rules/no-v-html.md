@@ -1,5 +1,7 @@
 # disallow use of v-html to prevent XSS attack (vue/no-v-html)
 
+- :gear: This rule is included in `"plugin:vue/recommended"`.
+
 This rule reports use of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross Side Scripting (XSS) attacks.
 
 ## :book: Rule Details

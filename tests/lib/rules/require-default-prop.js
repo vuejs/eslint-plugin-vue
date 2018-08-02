@@ -19,7 +19,7 @@ const parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = new RuleTester({ parserOptions })
 ruleTester.run('require-default-prop', rule, {
 
   valid: [
@@ -46,12 +46,27 @@ ruleTester.run('require-default-prop', rule, {
               required: false,
               'default': 'lorem'
             },
+            e: {
+              type: Boolean
+            },
+            f: {
+              type: Boolean,
+              required: false
+            },
+            g: {
+              type: Boolean,
+              default: true
+            },
+            h: {
+              type: [Boolean]
+            },
+            i: Boolean,
+            j: [Boolean],
             // eslint-disable-next-line require-default-prop
-            e: Number
+            k: Number
           }
         }
-      `,
-      parserOptions
+      `
     },
     {
       filename: 'test.vue',
@@ -70,8 +85,7 @@ ruleTester.run('require-default-prop', rule, {
             }
           }
         }
-      `,
-      parserOptions
+      `
     },
     {
       filename: 'test.vue',
@@ -98,8 +112,7 @@ ruleTester.run('require-default-prop', rule, {
             }
           }
         }
-      `,
-      parserOptions
+      `
     }
   ],
 
@@ -117,11 +130,14 @@ ruleTester.run('require-default-prop', rule, {
             d: {
               type: Number,
               required: false
+            },
+            e: [Boolean, String],
+            f: {
+              type: [Boolean, String],
             }
           }
         }
       `,
-      parserOptions,
       errors: [{
         message: `Prop 'a' requires default value to be set.`,
         line: 4
@@ -134,6 +150,12 @@ ruleTester.run('require-default-prop', rule, {
       }, {
         message: `Prop 'd' requires default value to be set.`,
         line: 9
+      }, {
+        message: `Prop 'e' requires default value to be set.`,
+        line: 13
+      }, {
+        message: `Prop 'f' requires default value to be set.`,
+        line: 14
       }]
     }
   ]
