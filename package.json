@@ -61,6 +61,6 @@
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "vue-eslint-editor": "^0.1.0",
-    "vuepress": "github:vuejs/vuepress#9b602f2b6fb824522c8c7dbbba60a3e2abfd76ba"
+    "vuepress": "^0.13.1"
   }
 }
