@@ -29,3 +29,8 @@ Nothing.
 ## Related links
 
 - [Guide - Forms / Multiline text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-textarea-mustache.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-textarea-mustache.js)

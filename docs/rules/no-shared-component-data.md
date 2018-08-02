@@ -56,3 +56,8 @@ Nothing.
 ## Related links
 
 - [API - data](https://vuejs.org/v2/api/#data)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-shared-component-data.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-shared-component-data.js)

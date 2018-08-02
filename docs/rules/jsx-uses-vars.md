@@ -28,3 +28,8 @@ After turning on, `Hello` is being marked as used and `no-unused-vars` rule does
 ## When Not To Use It
 
 If you are not using JSX or if you do not use the `no-unused-vars` rule then you can disable this rule.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/jsx-uses-vars.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/jsx-uses-vars.js)

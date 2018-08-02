@@ -83,3 +83,8 @@ const d = {
 
 - [indent](https://eslint.org/docs/rules/indent)
 - [vue/html-indent](./html-indent.md)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/script-indent.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/script-indent.js)

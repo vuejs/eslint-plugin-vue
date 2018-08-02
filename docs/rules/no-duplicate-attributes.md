@@ -49,3 +49,8 @@ Needs investigation to check.
 
 [`v-bind:class`]: https://vuejs.org/v2/guide/class-and-style.html
 [`v-bind:style`]: https://vuejs.org/v2/guide/class-and-style.html
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-duplicate-attributes.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-duplicate-attributes.js)

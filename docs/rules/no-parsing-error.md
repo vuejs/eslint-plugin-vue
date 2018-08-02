@@ -85,3 +85,8 @@ The error codes which have `x-` prefix are original of this rule because errors 
 
 - `x-invalid-end-tag` enables the errors about the end tags of elements which have not opened.
 - `x-invalid-namespace` enables the errors about invalid `xmlns` attributes. See also [step 10. of "create an element for a token"](https://html.spec.whatwg.org/multipage/parsing.html#create-an-element-for-the-token).
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-parsing-error.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-parsing-error.js)

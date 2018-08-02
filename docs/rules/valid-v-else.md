@@ -43,3 +43,8 @@ Nothing.
 [valid-v-if]:       valid-v-if.md
 [valid-v-else-if]:  valid-v-else-if.md
 [no-parsing-error]:      no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-else.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-else.js)

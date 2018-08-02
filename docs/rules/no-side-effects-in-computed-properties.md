@@ -33,3 +33,8 @@ computed: {
   }
 }
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-side-effects-in-computed-properties.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-side-effects-in-computed-properties.js)

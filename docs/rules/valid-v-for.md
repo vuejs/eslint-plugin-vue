@@ -66,3 +66,8 @@ Nothing.
 
 [require-v-for-key]: require-v-for-key.md
 [no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-for.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-for.js)

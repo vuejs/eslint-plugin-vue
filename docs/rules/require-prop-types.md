@@ -55,3 +55,8 @@ Nothing.
 ## Related links
 
 - [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-prop-types.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-prop-types.js)

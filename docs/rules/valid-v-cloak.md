@@ -29,3 +29,8 @@ This rule reports `v-cloak` directives in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-cloak.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-cloak.js)

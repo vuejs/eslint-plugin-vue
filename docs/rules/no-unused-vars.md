@@ -29,3 +29,8 @@ This rule report variable definitions of v-for directives or scope attributes if
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-vars.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-vars.js)

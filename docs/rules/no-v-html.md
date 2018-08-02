@@ -35,3 +35,8 @@ If you are certain the content passed `to v-html` is sanitized HTML you can disa
 ## Related links
 
 - [XSS in Vue.js](https://blog.sqreen.io/xss-in-vue-js/)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-v-html.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-html.js)

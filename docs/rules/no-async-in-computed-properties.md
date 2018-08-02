@@ -58,3 +58,8 @@ Nothing.
 ## Related links
 
 - [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-async-in-computed-properties.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-async-in-computed-properties.js)

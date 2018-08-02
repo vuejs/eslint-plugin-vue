@@ -93,3 +93,8 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
     class="bar"
     >
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-closing-bracket-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-closing-bracket-newline.js)

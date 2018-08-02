@@ -144,3 +144,8 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   />
 </template>
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-indent.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-indent.js)

@@ -53,3 +53,8 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
   &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
 &lt;/template&gt;
 " />
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attribute-hyphenation.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js)

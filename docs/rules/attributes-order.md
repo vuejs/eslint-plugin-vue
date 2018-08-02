@@ -122,3 +122,8 @@ Specify custom order of attribute groups
 ## Related links
 
 - [Style guide - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attributes-order.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attributes-order.js)

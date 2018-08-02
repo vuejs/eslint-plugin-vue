@@ -45,3 +45,8 @@ This rule reports the quotes of attributes if it is different to configured quot
 
 - `"double"` (default) ... requires double quotes.
 - `"single"` ... requires single quotes.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-quotes.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-quotes.js)

@@ -33,3 +33,8 @@ This rule reports:
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-end-tags.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-end-tags.js)

@@ -129,3 +129,8 @@ If you do not want to check the number of attributes declared per line you can d
 ## Related links
 
 - [Style guide - Multi attribute elements](https://vuejs.org/v2/style-guide/#Multi-attribute-elements-strongly-recommended)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/max-attributes-per-line.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/max-attributes-per-line.js)

@@ -44,3 +44,8 @@ This rule has an object option:
   }]
 }
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/return-in-computed-property.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/return-in-computed-property.js)

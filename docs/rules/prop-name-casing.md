@@ -39,3 +39,8 @@ Default casing is set to `camelCase`.
 ## Related links
 
 - [Style guide - Prop name casing](https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prop-name-casing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prop-name-casing.js)

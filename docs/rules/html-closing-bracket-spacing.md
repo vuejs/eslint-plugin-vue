@@ -81,3 +81,8 @@ Examples of **correct** code for this rule:
 
 - [vue/no-multi-spaces](./no-multi-spaces.md)
 - [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-closing-bracket-spacing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-closing-bracket-spacing.js)

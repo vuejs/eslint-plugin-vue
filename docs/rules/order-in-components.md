@@ -75,3 +75,8 @@ If you want some of properties to be treated equally in order you can group them
 ## Related links
 
 - [Style guide - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/order-in-components.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/order-in-components.js)

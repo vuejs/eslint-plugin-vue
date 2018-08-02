@@ -38,3 +38,8 @@ Nothing.
 
 
 [no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-show.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-show.js)

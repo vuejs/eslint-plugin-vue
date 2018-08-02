@@ -24,6 +24,8 @@ const last = require('lodash/last')
 const rules = require('./lib/rules')
 const categories = require('./lib/categories')
 
+const ROOT = path.resolve(__dirname, '../docs/rules')
+
 function formatItems (items) {
   if (items.length <= 2) {
     return items.join(' and ')
@@ -31,39 +33,81 @@ function formatItems (items) {
   return `all of ${items.slice(0, -1).join(', ')} and ${last(items)}`
 }
 
-const ROOT = path.resolve(__dirname, '../docs/rules')
-for (const rule of rules) {
-  const filePath = path.join(ROOT, `${rule.name}.md`)
-  const categoryIndex = categories.findIndex(category => category.categoryId === rule.meta.docs.category)
-  const title = `# ${rule.meta.docs.description} (${rule.ruleId})`
-  const notes = []
-
-  if (categoryIndex >= 0) {
-    const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
-    notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
+class DocFile {
+  constructor (rule) {
+    this.rule = rule
+    this.filePath = path.join(ROOT, `${rule.name}.md`)
+    this.content = fs.readFileSync(this.filePath, 'utf8')
   }
-  if (rule.meta.deprecated) {
-    if (rule.meta.docs.replacedBy) {
-      const replacedRules = rule.meta.docs.replacedBy.map(name => `[vue/${name}](${name}.md) rule`)
-      notes.push(`- :warning: This rule was **deprecated** and replaced by ${formatItems(replacedRules)}.`)
-    } else {
-      notes.push(`- :warning: This rule was **deprecated**.`)
+
+  static read (rule) {
+    return new DocFile(rule)
+  }
+
+  write () {
+    fs.writeFileSync(this.filePath, this.content)
+  }
+
+  updateHeader () {
+    const { ruleId, meta } = this.rule
+    const categoryIndex = categories.findIndex(category => category.categoryId === meta.docs.category)
+    const title = `# ${meta.docs.description} (${ruleId})`
+    const notes = []
+
+    if (categoryIndex >= 0) {
+      const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
+      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
-  }
-  if (rule.meta.fixable) {
-    notes.push(`- :wrench: The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.`)
+    if (meta.deprecated) {
+      if (meta.docs.replacedBy) {
+        const replacedRules = meta.docs.replacedBy.map(name => `[vue/${name}](${name}.md) rule`)
+        notes.push(`- :warning: This rule was **deprecated** and replaced by ${formatItems(replacedRules)}.`)
+      } else {
+        notes.push(`- :warning: This rule was **deprecated**.`)
+      }
+    }
+    if (meta.fixable) {
+      notes.push(`- :wrench: The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.`)
+    }
+
+    // Add an empty line after notes.
+    if (notes.length >= 1) {
+      notes.push('', '')
+    }
+
+    const headerPattern = /^#[^\n]*\n+(?:- .+\n)*\n*/
+    const header = `${title}\n\n${notes.join('\n')}`
+    if (headerPattern.test(this.content)) {
+      this.content = this.content.replace(headerPattern, header)
+    } else {
+      this.content = `${header}${this.content.trim()}\n`
+    }
+
+    return this
   }
 
-  // Add an empty line after notes.
-  if (notes.length >= 1) {
-    notes.push('', '')
-  }
+  updateFooter () {
+    const { name } = this.rule
+    const footerPattern = /## :mag: Implementation.+$/s
+    const footer = `## :mag: Implementation
 
-  fs.writeFileSync(
-    filePath,
-    fs.readFileSync(filePath, 'utf8').replace(
-      /^#[^\n]*\n+(?:- .+\n)*\n*/,
-      `${title}\n\n${notes.join('\n')}`
-    )
-  )
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.js)
+`
+    if (footerPattern.test(this.content)) {
+      this.content = this.content.replace(footerPattern, footer)
+    } else {
+      this.content = `${this.content.trim()}\n\n${footer}`
+    }
+
+    return this
+  }
+}
+
+for (const rule of rules) {
+  DocFile
+    .read(rule)
+    .updateHeader()
+    .updateFooter()
+    .write()
 }

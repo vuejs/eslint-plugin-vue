@@ -56,3 +56,8 @@ Default spacing is set to `always`
 ```html
 <div>{{text}}</div>
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/mustache-interpolation-spacing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/mustache-interpolation-spacing.js)

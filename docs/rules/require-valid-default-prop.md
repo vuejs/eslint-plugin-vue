@@ -63,3 +63,8 @@ Nothing.
 ## Related links
 
 - [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-valid-default-prop.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-valid-default-prop.js)
