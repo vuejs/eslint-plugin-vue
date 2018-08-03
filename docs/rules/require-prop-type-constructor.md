@@ -1,11 +1,11 @@
-# disallow usage of strings as prop types (no-string-prop-type)
+# require prop type to be a constructor (vue/require-prop-type-constructor)
 
-...
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+This rule makes sure that the types used to defined props are constructors.
 
 
 ## Rule Details
-
-This rule aims to...
 
 Examples of **incorrect** code for this rule:
 
@@ -48,15 +48,3 @@ export default {
   }
 }
 ```
-
-### Options
-
--
-
-## When Not To Use It
-
--
-
-## Further Reading
-
--

@@ -1,5 +1,5 @@
 /**
- * @fileoverview disallow usage of strings as prop types
+ * @fileoverview require prop type to be a constructor
  * @author Michał Sajnóg
  */
 'use strict'
@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-string-prop-type')
+const rule = require('../../../lib/rules/require-prop-type-constructor')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ var ruleTester = new RuleTester({
     sourceType: 'module'
   }
 })
-ruleTester.run('no-string-prop-type', rule, {
+ruleTester.run('require-prop-type-constructor', rule, {
 
   valid: [
     {
@@ -34,6 +34,9 @@ ruleTester.run('no-string-prop-type', rule, {
             extraProp: {
               type: Number,
               default: 10
+            },
+            lastProp: {
+              type: [Number, Boolean]
             }
           }
         }
@@ -52,6 +55,9 @@ ruleTester.run('no-string-prop-type', rule, {
           extraProp: {
             type: 'Number',
             default: 10
+          },
+          lastProp: {
+            type: ['Boolean']
           }
         }
       }
@@ -62,21 +68,30 @@ ruleTester.run('no-string-prop-type', rule, {
           myProp: Number,
           anotherType: [Number, String],
           extraProp: {
-            type: 'Number',
+            type: Number,
             default: 10
+          },
+          lastProp: {
+            type: [Boolean]
           }
         }
       }
       `,
       errors: [{
-        message: '"type" property of prop should be of Object type, not String',
+        message: 'The "myProp" property should be a constructor.',
         line: 4
       }, {
-        message: '"type" property of prop should be of Object type, not String',
+        message: 'The "anotherType" property should be a constructor.',
         line: 5
       }, {
-        message: '"type" property of prop should be of Object type, not String',
+        message: 'The "anotherType" property should be a constructor.',
+        line: 5
+      }, {
+        message: 'The "type" property should be a constructor.',
         line: 7
+      }, {
+        message: 'The "type" property should be a constructor.',
+        line: 11
       }]
     }
   ]
