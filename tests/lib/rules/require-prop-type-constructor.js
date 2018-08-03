@@ -93,6 +93,42 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "type" property should be a constructor.',
         line: 11
       }]
+    },
+    {
+      filename: 'SomeComponent.vue',
+      code: `
+      export default {
+        props: {
+          a: \`String\`,
+          b: Foo + '',
+          c: 1,
+          d: true,
+        }
+      }
+      `,
+      output: `
+      export default {
+        props: {
+          a: String,
+          b: Foo + '',
+          c: 1,
+          d: true,
+        }
+      }
+      `,
+      errors: [{
+        message: 'The "a" property should be a constructor.',
+        line: 4
+      }, {
+        message: 'The "b" property should be a constructor.',
+        line: 5
+      }, {
+        message: 'The "c" property should be a constructor.',
+        line: 6
+      }, {
+        message: 'The "d" property should be a constructor.',
+        line: 7
+      }]
     }
   ]
 })
