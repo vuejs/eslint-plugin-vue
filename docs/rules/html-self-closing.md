@@ -1,7 +1,7 @@
 # enforce self-closing style (vue/html-self-closing)
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
 
@@ -61,3 +61,7 @@ Every option can be set to one of the following values:
 <MyComponent/>
 <svg><path d=""/></svg>
 ```
+
+## Related links
+
+- [Style guide - Self closing components](https://vuejs.org/v2/style-guide/#Self-closing-components-strongly-recommended)

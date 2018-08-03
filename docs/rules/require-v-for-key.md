@@ -33,6 +33,9 @@ Nothing.
 
 ## :couple: Related rules
 
-- [valid-v-for]
+- [valid-v-for](./valid-v-for.md)
 
-[valid-v-for]: ./valid-v-for.md
+## Related links
+
+- [Style guide - Keyed v-for](https://vuejs.org/v2/style-guide/#Keyed-v-for-essential)
+- [Guide - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)

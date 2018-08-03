@@ -1,5 +1,7 @@
 # disallow use v-if on the same element as v-for (vue/no-use-v-if-with-v-for)
 
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+
 > Never use `v-if` on the same element as `v-for`.
 >
 > There are two common cases where this can be tempting:
@@ -96,3 +98,8 @@ computed: {
 />
 ```
 
+## Related links
+
+- [Style guide - Avoid v-if with v-for](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
+- [Guide - Conditional / v-if with v-for](https://vuejs.org/v2/guide/conditional.html#v-if-with-v-for)
+- [Guide - List / v-for with v-if](https://vuejs.org/v2/guide/list.html#v-for-with-v-if)
