@@ -156,6 +156,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [vue/no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 |  | [vue/no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [vue/no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
+|  | [vue/no-unused-components](./docs/rules/no-unused-components.md) | disallow unused components |
 |  | [vue/no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
 |  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
 |  | [vue/require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
