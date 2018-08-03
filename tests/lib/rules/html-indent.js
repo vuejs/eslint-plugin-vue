@@ -108,114 +108,151 @@ tester.run('html-indent', rule, loadPatterns(
   // Valid
   [
     // TemplateLiteral
-    unIndent`
-      <template>
-        <div
-          v-bind:b="
-            \`
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div
+            v-bind:b="
+              \`
+              test
             test
-          test
-            test
-            \`
-          "
-        ></div>
-      </template>
-    `,
+              test
+              \`
+            "
+          ></div>
+        </template>
+      `
+    },
 
     // VAttribute
-    unIndent`
-      <template>
-        <div a="
-        a" b="b"></div>
-      </template>
-    `,
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div a="
+          a" b="b"></div>
+        </template>
+      `
+    },
 
     // Comments
-    unIndent`
-      <template>
-        <!-- comment -->
-        {{
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <!-- comment -->
+          {{
+            // comment
+            // comment
+            message
+          }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          {{
+            /*
+            * comment
+            */
+            message
+          }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          {{
+            message
+            // comment
+            // comment
+          }}
+          <!-- comment -->
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          {{
+            message
+            /*
+            * comment
+            */
+          }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          {{
+            message
           // comment
           // comment
-          message
-        }}
-      </template>
-    `,
-    unIndent`
-      <template>
-        {{
+          }}
+          <!-- comment -->
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          {{
+            message
           /*
-           * comment
-           */
-          message
-        }}
-      </template>
-    `,
-    unIndent`
-      <template>
-        {{
-          message
-          // comment
-          // comment
-        }}
-        <!-- comment -->
-      </template>
-    `,
-    unIndent`
-      <template>
-        {{
-          message
-          /*
-           * comment
-           */
-        }}
-      </template>
-    `,
-    unIndent`
-      <template>
-        {{
-          message
-        // comment
-        // comment
-        }}
-        <!-- comment -->
-      </template>
-    `,
-    unIndent`
-      <template>
-        {{
-          message
-        /*
-         * comment
-         */
-        }}
-      </template>
-    `,
-    unIndent`
-      <template>
-        <div>
-          <!-- this comment is ignored because the next token doesn't exist. -->
-    `,
-    unIndent`
-      <template>
-        <div>
-          <div></div>
-          <!-- this comment is ignored because the next token doesn't exist. -->
-    `,
-    unIndent`
-      <template>
-        <div>
-      <!-- this comment is ignored because the next token doesn't exist. -->
-    `,
-    unIndent`
-      <template>
-        <div>
-          <div></div>
-      <!-- this comment is ignored because the next token doesn't exist. -->
-    `,
+          * comment
+          */
+          }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div>
+            <!-- this comment is ignored because the next token doesn't exist. -->
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div>
+            <div></div>
+            <!-- this comment is ignored because the next token doesn't exist. -->
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div>
+        <!-- this comment is ignored because the next token doesn't exist. -->
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div>
+            <div></div>
+        <!-- this comment is ignored because the next token doesn't exist. -->
+      `
+    },
 
     // Ignores
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
               <div
@@ -234,6 +271,7 @@ tester.run('html-indent', rule, loadPatterns(
 
     // Pre
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
           <pre>
@@ -250,6 +288,7 @@ tester.run('html-indent', rule, loadPatterns(
   [
     // TemplateLiteral
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
             <div
@@ -284,6 +323,7 @@ tester.run('html-indent', rule, loadPatterns(
 
     // A mix of spaces and tabs.
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
           <div>
@@ -303,6 +343,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
         \t<div>
@@ -325,6 +366,7 @@ tester.run('html-indent', rule, loadPatterns(
 
     // Comments
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
         <!-- comment -->
@@ -355,6 +397,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
           {{
@@ -381,6 +424,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
         {{
@@ -410,6 +454,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
         {{
@@ -440,6 +485,7 @@ tester.run('html-indent', rule, loadPatterns(
 
     // Ignores
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
             <div
@@ -464,6 +510,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
             {{
@@ -497,6 +544,7 @@ tester.run('html-indent', rule, loadPatterns(
 
     // Pre
     {
+      filename: 'test.vue',
       code: unIndent`
         <template>
         <pre
