@@ -56,6 +56,21 @@ tester.run('no-unused-components', rule, {
       filename: 'test.vue',
       code: `<template>
         <div>
+          <component :is="'TheButton'" />
+        </div>
+      </template>
+      <script>
+        export default {
+          components: {
+            TheButton
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div>
           <component is="TheButton" />
         </div>
       </template>
