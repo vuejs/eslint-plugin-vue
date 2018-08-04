@@ -2,7 +2,7 @@
     <eslint-editor
         :linter="linter"
         :config="config"
-        :code="cookedCode"
+        :code="code"
         :style="{ height }"
         class="eslint-code-block"
         filename="example.vue"
@@ -22,10 +22,6 @@ export default {
   components: { EslintEditor },
 
   props: {
-    code: {
-      type: String,
-      default: ''
-    },
     rules: {
       type: Object,
       default () {
@@ -77,13 +73,24 @@ export default {
       }
     },
 
-    cookedCode () {
-      return `${this.code.trim()}\n`
+    code () {
+      return `${this.computeCodeFromSlot(this.$slots.default).trim()}\n`
     },
 
     height () {
-      const lines = this.cookedCode.split('\n').length
+      const lines = this.code.split('\n').length
       return `${Math.max(120, 20 * (1 + lines))}px`
+    }
+  },
+
+  methods: {
+    computeCodeFromSlot (nodes) {
+      if (!Array.isArray(nodes)) {
+        return ''
+      }
+      return nodes.map(node =>
+        node.text || this.computeCodeFromSlot(node.children)
+      ).join('')
     }
   },
 
