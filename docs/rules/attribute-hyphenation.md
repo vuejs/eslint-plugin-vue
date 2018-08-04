@@ -13,46 +13,52 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 
 ### `["error", "always"]` - Use hyphenated name. (It errors on upper case letters.)
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'always']}" code="
-&lt;template&gt;
-  &lt;!-- ✔ GOOD --&gt;
-  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
+```
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent my-prop="prop" />
 
-  &lt;!-- ✘ BAD --&gt;
-  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
-&lt;/template&gt;
-" />
+  <!-- ✘ BAD -->
+  <MyComponent myProp="prop" />
+</template>
+```
+</eslint-code-block>
 
 ### `["error", "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope`.)
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never']}" code="
-&lt;template&gt;
-  &lt;!-- ✔ GOOD --&gt;
-  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
-  &lt;MyComponent data-id=&quot;prop&quot; /&gt;
-  &lt;MyComponent aria-role=&quot;button&quot; /&gt;
-  &lt;MyComponent slot-scope=&quot;prop&quot; /&gt;
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
+```
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent myProp="prop" />
+  <MyComponent data-id="prop" />
+  <MyComponent aria-role="button" />
+  <MyComponent slot-scope="prop" />
 
-  &lt;!-- ✘ BAD --&gt;
-  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
-&lt;/template&gt;
-" />
+  <!-- ✘ BAD -->
+  <MyComponent my-prop="prop" />
+</template>
+```
+</eslint-code-block>
 
 ### `["error", "never", { "ignore": ["custom-prop"] }]` - Don't use hyphenated name but allow custom attributes
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never', {'ignore': ['custom-prop']}]}" code="
-&lt;template&gt;
-  &lt;!-- ✔ GOOD --&gt;
-  &lt;MyComponent myProp=&quot;prop&quot; /&gt;
-  &lt;MyComponent custom-prop=&quot;prop&quot; /&gt;
-  &lt;MyComponent data-id=&quot;prop&quot; /&gt;
-  &lt;MyComponent aria-role=&quot;button&quot; /&gt;
-  &lt;MyComponent slot-scope=&quot;prop&quot; /&gt;
+<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never', {'ignore': ['custom-prop']}]}">
+```
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent myProp="prop" />
+  <MyComponent custom-prop="prop" />
+  <MyComponent data-id="prop" />
+  <MyComponent aria-role="button" />
+  <MyComponent slot-scope="prop" />
 
-  &lt;!-- ✘ BAD --&gt;
-  &lt;MyComponent my-prop=&quot;prop&quot; /&gt;
-&lt;/template&gt;
-" />
+  <!-- ✘ BAD -->
+  <MyComponent my-prop="prop" />
+</template>
+```
+</eslint-code-block>
 
 ## :mag: Implementation
 
