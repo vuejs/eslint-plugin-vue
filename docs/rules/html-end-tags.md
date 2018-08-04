@@ -5,30 +5,24 @@
 
 ## :book: Rule Details
 
-This rule reports:
+This rule aims to disallow lacking end tags.
 
-- presence of and end tag on [Void elements](https://www.w3.org/TR/html51/syntax.html#void-elements)
-- absence of both an end tag (e.g. `</div>`) and a self-closing opening tag (e.g. `<div/>`) on other elements
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div>
-<p>
-<p>
-<input></input>
-<br></br>
+<eslint-code-block :rules="{'vue/html-end-tags': ['error']}">
 ```
+<template>
+  <!-- ✓ GOOD -->
+  <div></div>
+  <p></p>
+  <p></p>
+  <input>
+  <br>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div></div>
-<p></p>
-<p></p>
-<input>
-<br>
+  <!-- ✗ BAD -->
+  <div>
+  <p>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
