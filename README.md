@@ -230,6 +230,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
+| :wrench: | [vue/html-tag-attrs-content-newline](./docs/rules/html-tag-attrs-content-newline.md) | require a line break before and after contents whenever the HTML tag has any attribute |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 ### Deprecated
