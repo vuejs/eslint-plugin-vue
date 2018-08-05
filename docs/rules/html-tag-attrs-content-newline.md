@@ -36,7 +36,7 @@ This rule enforces a line break before and after html contents whenever the HTML
 
 ```json
 {
-    "vue/html-content-newline": ["error", {
+    "vue/html-tag-attrs-content-newline": ["error", {
         "ignoreNames": ["pre", "textarea"]
     }]
 }
@@ -49,7 +49,7 @@ This rule enforces a line break before and after html contents whenever the HTML
 :+1: Examples of **correct** code:
 
 ```html
-/*eslint vue/html-content-newline: ["error", { "ignoreNames": ["VueComponent", "pre", "textarea"]}] */
+/*eslint vue/html-tag-attrs-content-newline: ["error", { "ignoreNames": ["VueComponent", "pre", "textarea"]}] */
 
 <VueComponent class="panel">content</VueComponent>
 
