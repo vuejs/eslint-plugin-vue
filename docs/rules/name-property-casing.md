@@ -3,35 +3,70 @@
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-Define a style for the `name` property casing for consistency purposes.
-
 ## :book: Rule Details
 
-:+1: Examples of **correct** code for `PascalCase`:
-
-```js
-export default {
-  name: 'MyComponent'
-}
-```
-
-:+1: Examples of **correct** code for `kebab-case`:
-
-```js
-export default {
-  name: 'my-component'
-}
-```
+This rule aims at enforcing the style for the `name` property casing for consistency purposes.
 
 ## :wrench: Options
 
-Default casing is set to `PascalCase`.
-
+```json
+{
+  "vue/name-property-casing": ["error", "PascalCase" | "kebab-case"]
+}
 ```
-"vue/name-property-casing": ["error", "PascalCase|kebab-case"]
-```
 
-## Related links
+- `"PascalCase"` (default) ... Enforce the `name` property to Pascal case.
+- `"kebab-case"` ... Enforce the `name` property to kebab case.
+
+### `"PascalCase"`
+
+<eslint-code-block :rules="{'vue/name-property-casing': ['error']}">
+```
+<script>
+  /* ✓ GOOD */
+  export default {
+    name: 'MyComponent'
+  }
+</script>
+```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/name-property-casing': ['error']}">
+```
+<script>
+  /* ✗ BAD */
+  export default {
+    name: 'my-component'
+  }
+</script>
+```
+</eslint-code-block>
+
+### `"kebab-case"`
+
+<eslint-code-block :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+```
+<script>
+  /* ✓ GOOD */
+  export default {
+    name: 'my-component'
+  }
+</script>
+```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+```
+<script>
+  /* ✗ BAD */
+  export default {
+    name: 'MyComponent'
+  }
+</script>
+```
+</eslint-code-block>
+
+## :books: Further reading
 
 - [Style guide - Component name casing in JS/JSX](https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended)
 
