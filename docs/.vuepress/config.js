@@ -4,6 +4,7 @@
  */
 'use strict'
 
+const uncategorizedRules = require('../../tools/lib/rules').filter(rule => !rule.meta.docs.category)
 const categories = require('../../tools/lib/categories')
 
 module.exports = {
@@ -33,12 +34,22 @@ module.exports = {
     sidebar: {
       '/rules/': [
         '/rules/',
+
+        // Rules in each category.
         ...categories.map(({ title, rules }) => ({
           title: title.replace(/ \(.+?\)/, ''),
           collapsable: false,
           children: rules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
-        }))
+        })),
+
+        // Rules in no category.
+        {
+          title: 'Uncategorized',
+          collapsable: false,
+          children: uncategorizedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+        }
       ],
+
       '/': ['/', '/user-guide/', '/developer-guide/', '/rules/']
     }
   }
