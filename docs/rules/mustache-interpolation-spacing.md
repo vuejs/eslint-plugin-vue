@@ -5,57 +5,48 @@
 
 ## :book: Rule Details
 
-This rule aims to enforce unified spacing in mustache interpolations.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div>{{   text   }}</div>
-<div>{{text}}</div>
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div>{{ text }}</div>
-```
+This rule aims at enforcing unified spacing in mustache interpolations.
 
 ## :wrench: Options
 
-Default spacing is set to `always`
-
-```
-'vue/mustache-interpolation-spacing': [2, 'always'|'never']
-```
-
-### `"always"` - Expect one space between expression and curly brackets.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div>{{   text   }}</div>
-<div>{{text}}</div>
+```json
+{
+  "vue/mustache-interpolation-spacing": ["error", "always" | "never"]
+}
 ```
 
-:+1: Examples of **correct** code for this rule:
+- `"always"` (default) ... Expect one space between expression and curly brackets.
+- `"never"` ... Expect no spaces between expression and curly brackets.
 
-```html
-<div>{{ text }}</div>
+### `"always"`
+
+<eslint-code-block :rules="{'vue/mustache-interpolation-spacing': ['error']}">
 ```
+<template>
+  <!-- ✓ GOOD -->
+  <div>{{ text }}</div>
+  <div>{{   text   }}</div><!-- Use vue/no-multi-spaces rule to disallow multiple spaces. -->
 
-### `"never"` - Expect no spaces between expression and curly brackets.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div>{{ text }}</div>
+  <!-- ✗ BAD -->
+  <div>{{text}}</div>
+</template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for this rule:
+### `"never"`
 
-```html
-<div>{{text}}</div>
+<eslint-code-block :rules="{'vue/mustache-interpolation-spacing': ['error', 'never']}">
 ```
+<template>
+  <!-- ✓ GOOD -->
+  <div>{{text}}</div>
+
+  <!-- ✗ BAD -->
+  <div>{{   text   }}</div>
+  <div>{{ text }}</div>
+</template>
+```
+</eslint-code-block>
 
 ## :mag: Implementation
 
