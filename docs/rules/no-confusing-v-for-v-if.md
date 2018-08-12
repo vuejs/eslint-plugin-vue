@@ -17,40 +17,37 @@ This rule reports the elements which have both `v-for` and `v-if` directives in 
 
 In that case, the `v-if` should be written on the wrapper element.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<TodoItem
-  v-if="complete"
-  v-for="todo in todos"
-  :todo="todo"
-/>
+<eslint-code-block :rules="{'vue/no-confusing-v-for-v-if': ['error']}">
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<TodoItem
-  v-for="todo in todos"
-  v-if="todo.shown"
-  :todo="todo"
-/>
-```
-
-```html
-<ul v-if="shown">
+<template>
+  <!-- ✓ GOOD -->
   <TodoItem
+    v-for="todo in todos"
+    v-if="todo.shown"
+    :todo="todo"
+  />
+  <ul v-if="shown">
+    <TodoItem
+      v-for="todo in todos"
+      :todo="todo"
+    />
+  </ul>
+
+  <!-- ✗ BAD -->
+  <TodoItem
+    v-if="complete"
     v-for="todo in todos"
     :todo="todo"
   />
-</ul>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Style guide - Avoid v-if with v-for](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
 - [Guide - Conditional / v-if with v-for](https://vuejs.org/v2/guide/conditional.html#v-if-with-v-for)
