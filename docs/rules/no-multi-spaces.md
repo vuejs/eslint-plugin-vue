@@ -3,31 +3,28 @@
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-The `--fix` option on the command line can automatically fix some of the problems reported by this rule.
+## :book: Rule Details
 
-This rule aims to remove multiple spaces in a row between attributes which are not used for indentation.
+This rule aims at removing multiple spaces in tags, which are not used for indentation.
 
-## Rule Details
-
-Examples of **incorrect** code for this rule:
-
-```html
-<div     class="foo"
-      :style="bar"         />
+<eslint-code-block :rules="{'vue/no-multi-spaces': ['error']}">
 ```
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    class="foo"
+    :style="bar" />
 
-Examples of **correct** code for this rule:
-
-```html
-<div
-  class="foo"
-  :style="bar"
-/>
+  <!-- ✗ BAD -->
+  <div     class="foo"
+    :style =  "bar"         />
+</template>
 ```
+</eslint-code-block>
 
-### Options
+## :wrench: Options
 
-Nothing
+Nothing.
 
 ## :mag: Implementation
 
