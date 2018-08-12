@@ -8,9 +8,10 @@ This rule prevents to use duplicated names.
 
 This rule is aimed at preventing duplicated property names.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```js
+<eslint-code-block :rules="{'vue/no-dupe-keys': ['error']}">
+```
+<script>
+/* ✗ BAD */
 export default {
   props: {
     foo: String
@@ -27,44 +28,26 @@ export default {
     foo () {}
   }
 }
+</script>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```js
-export default {
-  props: ['foo'],
-  computed: {
-    bar () {}
-  },
-  data () {
-    return {
-      baz: null
-    }
-  },
-  methods: {
-    boo () {}
-  }
-}
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
-This rule has an object option:
-
-`"groups"`: [] (default) array of additional groups to search for duplicates.
-
-### Example:
-
 ``` json
-"vue/no-dupe-keys": [2, {
-  groups: ["firebase"]
-}]
+{
+  "vue/no-dupe-keys": ["error", { "groups": [] }]
+}
 ```
 
-:-1: Examples of **incorrect** code for this configuration
+- `"groups"` (`string[]`) Array of additional groups to search for duplicates. Defailt is empty.
 
-```js
+### `{ "groups": ["firebase"] }`
+
+<eslint-code-block :rules="{'vue/no-dupe-keys': ['error', {groups: ['firebase']}]}">
+```
+<script>
+/* ✗ BAD */
 export default {
   computed: {
     foo () {}
@@ -73,7 +56,9 @@ export default {
     foo () {}
   }
 }
+</script>
 ```
+</eslint-code-block>
 
 ## :mag: Implementation
 
