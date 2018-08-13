@@ -1,4 +1,4 @@
-# disallow unused components (vue/no-unused-components)
+# disallow registering components that are not used inside templates (vue/no-unused-components)
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

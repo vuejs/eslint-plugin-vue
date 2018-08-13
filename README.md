@@ -156,10 +156,11 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [vue/no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 |  | [vue/no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [vue/no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
-|  | [vue/no-unused-components](./docs/rules/no-unused-components.md) | disallow unused components |
+|  | [vue/no-unused-components](./docs/rules/no-unused-components.md) | disallow registering components that are not used inside templates |
 |  | [vue/no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
 |  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
 |  | [vue/require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
+| :wrench: | [vue/require-prop-type-constructor](./docs/rules/require-prop-type-constructor.md) | require prop type to be a constructor |
 |  | [vue/require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
 |  | [vue/require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
 |  | [vue/require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
@@ -231,7 +232,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
-| :wrench: | [vue/require-prop-type-constructor](./docs/rules/require-prop-type-constructor.md) | require prop type to be a constructor |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 ### Deprecated
