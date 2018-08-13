@@ -232,6 +232,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
+| :wrench: | [vue/no-spaces-around-equal-signs-in-attribute](./docs/rules/no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 ### Deprecated
