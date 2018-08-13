@@ -107,43 +107,70 @@ tester.run('script-indent', rule, loadPatterns(
   // Valid
   [
     // TemplateLiteral
-    unIndent`
-      <script>
-      \`
-        test
-      test
-        test
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <script>
         \`
-      </script>
-    `,
+          test
+        test
+          test
+          \`
+        </script>
+      `
+    },
 
     // Comments
-    unIndent`
-      <script>
-      // comment
-      // comment
-      foo
-      </script>
-    `,
-    unIndent`
-      <script>
-      /*
-       * comment
-       */
-      message
-      </script>
-    `,
-    unIndent`
-      <script>
-      message
-      /*
-       * comment
-       */
-      </script>
-    `,
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <script>
+        // comment
+        // comment
+        foo
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <script>
+        /*
+        * comment
+        */
+        message
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <script>
+        message
+        /*
+        * comment
+        */
+        </script>
+      `
+    },
+
+    // Ignores files other than .vue
+    {
+      filename: 'test.js',
+      code: unIndent`
+        <script>
+          \`
+          test
+        test
+            test
+          \`
+        </script>
+      `
+    },
 
     // Ignores
     {
+      filename: 'test.vue',
       code: unIndent`
         <script>
         var a
@@ -163,6 +190,7 @@ tester.run('script-indent', rule, loadPatterns(
   [
     // TemplateLiteral
     {
+      filename: 'test.vue',
       code: unIndent`
         <script>
           \`
@@ -189,6 +217,7 @@ tester.run('script-indent', rule, loadPatterns(
 
     // A mix of spaces and tabs.
     {
+      filename: 'test.vue',
       code: unIndent`
         <script>
         var a =
@@ -206,6 +235,7 @@ tester.run('script-indent', rule, loadPatterns(
       ]
     },
     {
+      filename: 'test.vue',
       code: unIndent`
         <script>
         var obj = {
