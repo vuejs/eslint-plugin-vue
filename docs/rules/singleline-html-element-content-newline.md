@@ -43,22 +43,21 @@ This rule enforces a line break before and after the contents of a singleline el
 ```json
 {
   "vue/singleline-html-element-content-newline": ["error", {
-    "strict": false,
-    "ignoreNames": ["pre", "textarea"]
+    "ignoreWhenNoAttributes": true,
+    "ignores": ["pre", "textarea"]
   }]
 }
 ```
 
-- `strict` ... if false, if there are no attributes on the element, this rule allows having contents in one line.  
-    if true, even if there are no attributes on the element, this rule disallows having contents in one line.  
-    default `false`
-- `ignoreNames` ... the configuration for element names to ignore line breaks style.  
+- `ignoreWhenNoAttributes` ... allows having contents in one line, when given element has no attributes.
+    default `true`
+- `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
 
-:-1: Examples of **incorrect** code for `{strict: true}`:
+:-1: Examples of **incorrect** code for `{ignoreWhenNoAttributes: false}`:
 
 ```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "strict": true}] */
+/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": false}] */
 
 <div>content</div>
 
@@ -67,10 +66,10 @@ This rule enforces a line break before and after the contents of a singleline el
 <div><!-- comment --></div>
 ```
 
-:+1: Examples of **correct** code for `{strict: false}` (default):
+:+1: Examples of **correct** code for `{ignoreWhenNoAttributes: true}` (default):
 
 ```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "strict": false}] */
+/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": true}] */
 
 <div>content</div>
 
@@ -79,10 +78,10 @@ This rule enforces a line break before and after the contents of a singleline el
 <div><!-- comment --></div>
 ```
 
-:-1: Examples of **incorrect** code for `{strict: false}` (default):
+:-1: Examples of **incorrect** code for `{ignoreWhenNoAttributes: true}` (default):
 
 ```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "strict": false}] */
+/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": true}] */
 
 <div attr>content</div>
 
@@ -91,10 +90,10 @@ This rule enforces a line break before and after the contents of a singleline el
 <div attr><!-- comment --></div>
 ```
 
-:+1: Examples of **correct** code for `ignoreNames`:
+:+1: Examples of **correct** code for `ignores`:
 
 ```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreNames": ["VueComponent", "pre", "textarea"]}] */
+/* eslint vue/singleline-html-element-content-newline: ["error", { "ignores": ["VueComponent", "pre", "textarea"]}] */
 
 <VueComponent>content</VueComponent>
 

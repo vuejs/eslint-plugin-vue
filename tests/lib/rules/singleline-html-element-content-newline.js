@@ -61,7 +61,7 @@ tester.run('singleline-html-element-content-newline', rule, {
           <!-- comment -->
         </div>
       </template>`,
-    // strict: false
+    // ignoreWhenNoAttributes: true
     `
       <template>
         <div>singleline content</div>
@@ -86,7 +86,7 @@ tester.run('singleline-html-element-content-newline', rule, {
       <template>
         <div>    </div>
       </template>`,
-    // strict: true
+    // ignoreWhenNoAttributes: false
     {
       code: `
       <template>
@@ -94,7 +94,7 @@ tester.run('singleline-html-element-content-newline', rule, {
           content
         </div>
       </template>`,
-      options: [{ strict: true }]
+      options: [{ ignoreWhenNoAttributes: false }]
     },
     {
       code: `
@@ -104,7 +104,7 @@ tester.run('singleline-html-element-content-newline', rule, {
           </div>
         </div>
       </template>`,
-      options: [{ strict: true }]
+      options: [{ ignoreWhenNoAttributes: false }]
     },
     {
       code: `
@@ -113,7 +113,7 @@ tester.run('singleline-html-element-content-newline', rule, {
           <!-- comment -->
         </div>
       </template>`,
-      options: [{ strict: true }]
+      options: [{ ignoreWhenNoAttributes: false }]
     },
     // self closing
     `
@@ -138,7 +138,7 @@ tester.run('singleline-html-element-content-newline', rule, {
           <ignore-tag><span attr>content</span></ignore-tag>
         </template>`,
       options: [{
-        ignoreNames: ['ignore-tag']
+        ignores: ['ignore-tag']
       }]
     },
     // not target
@@ -176,7 +176,7 @@ content
       `,
       errors: [
         {
-          message: 'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
+          message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 3,
           column: 30,
           nodeType: 'HTMLTagClose',
@@ -184,7 +184,7 @@ content
           endColumn: 30
         },
         {
-          message: 'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.',
+          message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 3,
           column: 37,
           nodeType: 'HTMLEndTagOpen',
@@ -207,8 +207,8 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "tr" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "tr" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<tr>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</tr>`), but no line breaks found.'
       ]
     },
     {
@@ -225,8 +225,8 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -243,8 +243,8 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -261,8 +261,8 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -281,8 +281,8 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -298,7 +298,7 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
     },
     {
@@ -314,7 +314,7 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
     },
     {
@@ -323,7 +323,7 @@ content
           <div>singleline content</div>
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -332,8 +332,8 @@ singleline content
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -342,7 +342,7 @@ singleline content
           <tr><td>singleline</td><td>children</td></tr>
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <tr>
@@ -355,12 +355,12 @@ children
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "tr" element, but no line breaks found.',
-        'Expected 1 line break after closing bracket of the "td" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "td" element, but no line breaks found.',
-        'Expected 1 line break after closing bracket of the "td" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "td" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "tr" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<tr>`), but no line breaks found.',
+        'Expected 1 line break after opening tag (`<td>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</td>`), but no line breaks found.',
+        'Expected 1 line break after opening tag (`<td>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</td>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</tr>`), but no line breaks found.'
       ]
     },
     {
@@ -369,7 +369,7 @@ children
           <div><!-- singleline comment --></div>
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -378,8 +378,8 @@ children
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -388,7 +388,7 @@ children
           <div   >   singleline element   </div   >
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div   >
@@ -397,8 +397,8 @@ singleline element
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.',
-        'Expected 1 line break before opening bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     {
@@ -407,7 +407,7 @@ singleline element
           <div></div>
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -415,7 +415,7 @@ singleline element
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
     },
     {
@@ -424,7 +424,7 @@ singleline element
           <div>    </div>
         </template>
       `,
-      options: [{ strict: true }],
+      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -432,7 +432,7 @@ singleline element
         </template>
       `,
       errors: [
-        'Expected 1 line break after closing bracket of the "div" element, but no line breaks found.'
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
     }
   ]
