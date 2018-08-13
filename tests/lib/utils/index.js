@@ -208,3 +208,42 @@ describe('parseMemberOrCallExpression', () => {
     assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
   })
 })
+
+describe('getRegisteredComponents', () => {
+  let node
+
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
+  it('should return empty array when there are no components registered', () => {
+    node = parse(`const test = {
+      name: 'test',
+    }`)
+
+    assert.equal(
+      utils.getRegisteredComponents(node).length,
+      0
+    )
+  })
+
+  it('should return an array with all registered components', () => {
+    node = parse(`const test = {
+      name: 'test',
+      components: {
+        ...test,
+        PrimaryButton,
+        secondaryButton,
+        'the-modal': TheModal,
+        the_dropdown: TheDropdown,
+        the_input,
+        ['SomeComponent']: SomeComponent
+      }
+    }`)
+
+    assert.deepEqual(
+      utils.getRegisteredComponents(node).map(c => c.name),
+      ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent'],
+    )
+  })
+})
