@@ -64,19 +64,19 @@ This rule enforces a line break before and after the contents of a multiline ele
 ```json
 {
     "vue/multiline-html-element-content-newline": ["error", {
-        "ignoreNames": ["pre", "textarea"]
+        "ignores": ["pre", "textarea"]
     }]
 }
 ```
 
-- `ignoreNames` ... the configuration for element names to ignore line breaks style.  
+- `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
 
 
 :+1: Examples of **correct** code:
 
 ```html
-/* eslint vue/multiline-html-element-content-newline: ["error", { "ignoreNames": ["VueComponent", "pre", "textarea"]}] */
+/* eslint vue/multiline-html-element-content-newline: ["error", { "ignores": ["VueComponent", "pre", "textarea"]}] */
 
 <VueComponent>multiline
 content</VueComponent>
