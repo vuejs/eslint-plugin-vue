@@ -79,6 +79,24 @@ const d = {
 </script>
 ```
 
+## Important note
+
+This rule only checks `.vue` files and does not interfere with other `.js` files. Unfortunately the default `indent` rule when turned on will try to lint both, so in order to make them complementary you can use `overrides` setting and disable `indent` rule on `.vue` files:
+
+```
+"rules": {
+  "vue/script-indent": ["error", 4, { "baseIndent": 1 }]
+},
+"overrides": [
+  {
+    "files": ["*.vue"],
+    "rules": {
+      "indent": "off"
+    }
+  }
+]
+```
+
 ## Related rules
 
 - [indent](https://eslint.org/docs/rules/indent)
