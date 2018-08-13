@@ -23,13 +23,13 @@ This rule reports components that haven't been used in the template.
   export default {
     components: {
       TheButton // Unused component
-      'the-modal': TheModal // Components registered under other than PascalCased name has to be 
+      'the-modal': TheModal // Unused component
     }
   }
 </script>
 ```
 
-Note that components registered under other than `PascalCase`d name has to be called directly under the specified name, whereas if you cregister it using `PascalCase` you can call it however you like, exept using `snake_case`.
+Note that components registered under other than `PascalCase` name have to be called directly under the specified name, whereas if you register it using `PascalCase` you can call it however you like, except using `snake_case`.
 
 :+1: Examples of **correct** code for this rule:
 
