@@ -9,27 +9,10 @@ When using the data property on a component (i.e. anywhere except on `new Vue`),
 
 When the value of `data` is an object, it’s shared across all instances of a component.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```js
-Vue.component('some-comp', {
-  data: {
-    foo: 'bar'
-  }
-})
+<eslint-code-block :rules="{'vue/no-shared-component-data': ['error']}">
 ```
-
-```js
-export default {
-  data: {
-    foo: 'bar'
-  }
-})
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```js
+<script>
+/* ✓ GOOD */
 Vue.component('some-comp', {
   data: function () {
     return {
@@ -37,9 +20,7 @@ Vue.component('some-comp', {
     }
   }
 })
-```
 
-```js
 export default {
   data () {
     return {
@@ -47,13 +28,34 @@ export default {
     }
   }
 }
+</script>
 ```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-shared-component-data': ['error']}">
+```
+<script>
+/* ✗ BAD */
+Vue.component('some-comp', {
+  data: {
+    foo: 'bar'
+  }
+})
+
+export default {
+  data: {
+    foo: 'bar'
+  }
+}
+</script>
+```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [API - data](https://vuejs.org/v2/api/#data)
 
