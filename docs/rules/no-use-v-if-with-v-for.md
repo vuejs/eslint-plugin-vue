@@ -12,93 +12,68 @@
 >
 > https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential
 
-
 ## :book: Rule Details
 
-:-1: Examples of **incorrect** code for this rule:
+This rule is aimed at preventing the use of `v-for` directives together with `v-if` directives on the same element.
 
-```html
-<TodoItem
-  v-if="complete"
-  v-for="todo in todos"
-  :todo="todo"
-/>
+<eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error']}">
 ```
-
-In this case, the `v-if` should be written on the wrapper element.
-
-
-```html
-<TodoItem
-  v-for="todo in todos"
-  v-if="todo.shown"
-  :todo="todo"
-/>
-```
-
-In this case, the `v-for` list variable should be replace with a computed property that returns your filtered list.
-
-
-:+1: Examples of **correct** code for this rule:
-
-
-```html
-<ul v-if="complete">
+<template>
+  <!-- ✓ GOOD -->
+  <ul v-if="complete">
+    <TodoItem
+      v-for="todo in todos"
+      :todo="todo"
+    />
+  </ul>
   <TodoItem
-    v-for="todo in todos"
+    v-for="todo in shownTodos"
     :todo="todo"
   />
-</ul>
+
+  <!-- ✗ BAD -->
+  <TodoItem
+    v-if="complete"
+    v-for="todo in todos"
+    :todo="todo"
+  /><!-- ↑ In this case, the `v-if` should be written on the wrapper element. -->
+  <TodoItem
+    v-for="todo in todos"
+    v-if="todo.shown"
+    :todo="todo"
+  /><!-- ↑ In this case, the `v-for` list variable should be replace with a computed property that returns your filtered list. -->
+</template>
 ```
-
-
-
-```html
-<TodoItem
-  v-for="todo in shownTodos"
-  :todo="todo"
-/>
-```
-
-```js
-computed: {
-  shownTodos() {
-    return this.todos.filter((todo) => todo.shown)
-  }
-}
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
-`allowUsingIterationVar` - Enables The `v-if` directive use the reference which is to the variables which are defined by the `v-for` directives.
-
 ```js
-'vue/no-use-v-if-with-v-for': ['error', {
-  allowUsingIterationVar: true // default: false
-}]
+{
+  "vue/no-use-v-if-with-v-for": ["error", {
+    allowUsingIterationVar: false
+  }]
+}
 ```
 
-:+1: Examples of additional **correct** code for this rule with sample `"allowUsingIterationVar": true` options:
+- `allowUsingIterationVar` (`boolean`) ... Enables The `v-if` directive use the reference which is to the variables which are defined by the `v-for` directives. Default is `false`.
 
-```html
-<TodoItem
-  v-for="todo in todos"
-  v-if="todo.shown"
-  :todo="todo"
-/>
+### { "allowUsingIterationVar": true }
+
+<eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error', {allowUsingIterationVar: true}]}">
 ```
-
-:-1: Examples of additional **incorrect** code for this rule with sample `"allowUsingIterationVar": true` options:
-
-```html
-<TodoItem
-  v-if="complete"
-  v-for="todo in todos"
-  :todo="todo"
-/>
+<template>
+  <!-- ✓ GOOD -->
+  <TodoItem
+    v-for="todo in todos"
+    v-if="todo.shown"
+    :todo="todo"
+  />
+</template>
 ```
+</eslint-code-block>
 
-## Related links
+## :books: Further reading
 
 - [Style guide - Avoid v-if with v-for](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
 - [Guide - Conditional / v-if with v-for](https://vuejs.org/v2/guide/conditional.html#v-if-with-v-for)
