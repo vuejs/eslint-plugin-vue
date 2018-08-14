@@ -17,25 +17,24 @@ This rule reports syntax errors in `<template>`. For example:
 This rule tries to parse directives/mustaches in `<template>` by the parser which parses `<script>`.
 Then reports syntax errors if exist.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-{{ . }}
-{{ foo. }}
+<eslint-code-block :rules="{'vue/no-parsing-error': ['error']}">
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-{{ foo }}
-{{ foo.bar }}
+<template>
+  <!-- ✗ BAD -->
+  {{ . }}
+  {{ foo bar }}
+  <div :class="*abc*" / @click="def(">
+    </span>
+  </div id="ghi">
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
 ```json
 {
-  "vue/no-parsing-error": [2, {
+  "vue/no-parsing-error": ["error", {
     "abrupt-closing-of-empty-comment": true,
     "absence-of-digits-in-numeric-character-reference": true,
     "cdata-in-html-content": true,
