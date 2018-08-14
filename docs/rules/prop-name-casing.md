@@ -9,35 +9,54 @@ This rule would enforce proper casing of props in vue components(camelCase).
 
 (https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended).
 
-:+1: Examples of **correct** code for `camelCase`:
-
-```js
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error']}">
+```
+<script>
 export default {
   props: {
-    greetingText: String
+    /* ✓ GOOD */
+    greetingText: String,
+
+    /* ✗ BAD */
+    'greeting-text': String,
+    greeting_text: String
   }
 }
+</script>
 ```
-
-:-1: Examples of **incorrect** code for `camelCase`:
-
-```js
-export default {
-  props: {
-    'greeting-text': String
-  }
-}
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
-Default casing is set to `camelCase`.
-
 ```
-"vue/prop-name-casing": ["error", "camelCase|snake_case"]
+{
+  "vue/prop-name-casing": ["error", "camelCase" | "snake_case"]
+}
 ```
 
-## Related links
+- `"camelCase"` (default) ... Enforce property names in `props` to camel case.
+- `"snake_case"` ... Enforce property names in `props` to snake case.
+
+### `"snake_case"`
+
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
+```
+<script>
+export default {
+  props: {
+    /* ✓ GOOD */
+    greeting_text: String,
+
+    /* ✗ BAD */
+    'greeting-text': String,
+    greetingText: String
+  }
+}
+</script>
+```
+</eslint-code-block>
+
+## :books: Further reading
 
 - [Style guide - Prop name casing](https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended)
 
