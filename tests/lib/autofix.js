@@ -47,7 +47,7 @@ describe('Complex autofix test cases', () => {
       }],
       'vue/component-name-in-template-casing': ['error']
     }})
-    it('The kebab-case should be as expected.', () => {
+    it('Even if set kebab-case, the output should be as expected.', () => {
       const code = `
       <template>
         <VueComponent />
@@ -59,21 +59,6 @@ describe('Complex autofix test cases', () => {
 
       assert.equal(
         linter.verifyAndFix(code, kebabConfig, 'test.vue').output,
-        output
-      )
-    })
-    it('Even if set kebab-case, the output should be as expected.', () => {
-      const code = `
-      <template>
-        <vue-component />
-      </template>`
-      const output = `
-      <template>
-        <VueComponent ></VueComponent>
-      </template>`
-
-      assert.equal(
-        linter.verifyAndFix(code, pascalConfig, 'test.vue').output,
         output
       )
     })
