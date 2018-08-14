@@ -10,23 +10,23 @@
 
 This rule reports mustaches in `<textarea>`.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<textarea>{{ message }}</textarea>
+<eslint-code-block :rules="{'vue/no-textarea-mustache': ['error']}">
 ```
+<template>
+  <!-- ✓ GOOD -->
+  <textarea v-model="message" />
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<textarea v-model="message"/>
+  <!-- ✗ BAD -->
+  <textarea>{{ message }}</textarea>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Guide - Forms / Multiline text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
 
