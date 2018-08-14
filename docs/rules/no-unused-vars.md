@@ -2,29 +2,25 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule report variable definitions of v-for directives or scope attributes if those are not used.
-
 ## :book: Rule Details
 
-:-1: Examples of **incorrect** code for this rule:
+This rule report variable definitions of v-for directives or scope attributes if those are not used.
 
-```html
+<eslint-code-block :rules="{'vue/no-unused-vars': ['error']}">
+```
 <template>
-  <ol v-for="i in 5"><!-- "i" is defined but never used. -->
+  <!-- ✓ GOOD -->
+  <ol v-for="i in 5">
+    <li>{{ i }}</li>
+  </ol>
+
+  <!-- ✗ BAD -->
+  <ol v-for="i in 5">
     <li>item</li>
   </ol>
 </template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<template>
-  <ol v-for="i in 5">
-    <li>{{i}}</li><!-- "i" is defined and used. -->
-  </ol>
-</template>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
