@@ -282,6 +282,30 @@ tester.run('no-unused-components', rule, {
         }
       </script>`
     },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div id="app">
+          <Header></Header>
+          <div class="content">
+            <router-view></router-view>
+          </div>
+          <Footer />
+        </div>
+      </template>
+      <script>
+        import Header from 'components/Layout/Header';
+        import Footer from 'components/Layout/Footer';
+
+        export default {
+          name: 'App',
+          components: {
+            Header,
+            Footer,
+          },
+        };
+      </script>`
+    },
 
     // Ignore when `render` is used instead of temoplate
     {
