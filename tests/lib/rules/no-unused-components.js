@@ -321,6 +321,34 @@ tester.run('no-unused-components', rule, {
           }
         }
       </script>`
+    },
+
+    // Setting: ignoreWhenBindingPresent
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <component :is="dynamicComponent"></component>
+        </div>
+      </template>
+      <script>
+        import Foo from 'components/Foo';
+        import Bar from 'components/Bar';
+
+        export default {
+          components: {
+            Foo,
+            Bar
+          },
+          computed: {
+            dynamicComponent() {
+              return '...'
+            }
+          }
+        }
+      </script>`,
+      options: [{ ignoreWhenBindingPresent: true }]
     }
   ],
   invalid: [

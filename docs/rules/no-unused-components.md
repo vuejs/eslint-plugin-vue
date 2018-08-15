@@ -64,4 +64,50 @@ Note that components registered under other than `PascalCase` name have to be ca
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-unused-components": ["error", {
+        "ignoreWhenBindingPresent": false
+    }]
+}
+```
+
+- `ignoreWhenBindingPresent` ... surpresses all error if binding has been detected in the template
+    default `false`
+
+
+:+1: Examples of **correct** code:
+
+```json
+{
+    "vue/no-unused-components": ["error", {
+        "ignoreWhenBindingPresent": true
+    }]
+}
+```
+
+```html
+<template>
+  <div>
+    <h2>Lorem ipsum</h2>
+    <component :is="computedComponent" />
+  </div>
+</template>
+
+<script>
+  import TheButton from 'components/TheButton.vue'
+  import TheSelect from 'components/TheSelect.vue'
+  import TheInput from 'components/TheInput.vue'
+
+  export default {
+    components: {
+      TheButton,
+      TheSelect,
+      TheInput,
+    },
+    computed: {
+      computedComponent() { ... }
+    }
+  }
+</script>
+```
