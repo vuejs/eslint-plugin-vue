@@ -64,4 +64,85 @@ Note that components registered under other than `PascalCase` name have to be ca
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-unused-components": ["error", {
+        "ignoreWhenBindingPresent": true
+    }]
+}
+```
+
+- `ignoreWhenBindingPresent` ... surpresses all errors if binding has been detected in the template
+    default `true`
+
+
+:+1: Examples of **incorrect** code:
+
+```json
+{
+    "vue/no-unused-components": ["error", {
+        "ignoreWhenBindingPresent": false
+    }]
+}
+```
+
+```html
+<template>
+  <div>
+    <h2>Lorem ipsum</h2>
+    <component :is="computedComponent" />
+  </div>
+</template>
+
+<script>
+  import TheButton from 'components/TheButton.vue'
+  import TheSelect from 'components/TheSelect.vue'
+  import TheInput from 'components/TheInput.vue'
+
+  export default {
+    components: {
+      TheButton, // <- not used
+      TheSelect, // <- not used
+      TheInput, // <- not used
+    },
+    computed: {
+      computedComponent() { ... }
+    }
+  }
+</script>
+```
+
+:+1: Examples of **correct** code:
+
+```json
+{
+    "vue/no-unused-components": ["error", {
+        "ignoreWhenBindingPresent": false
+    }]
+}
+```
+
+```html
+<template>
+  <div>
+    <h2>Lorem ipsum</h2>
+    <TheButton v-if="" />
+    <TheSelect v-else-if="" />
+    <TheInput v-else="" />
+  </div>
+</template>
+
+<script>
+  import TheButton from 'components/TheButton.vue'
+  import TheSelect from 'components/TheSelect.vue'
+  import TheInput from 'components/TheInput.vue'
+
+  export default {
+    components: {
+      TheButton,
+      TheSelect,
+      TheInput,
+    },
+  }
+</script>
+```

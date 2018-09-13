@@ -282,6 +282,57 @@ tester.run('no-unused-components', rule, {
         }
       </script>`
     },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div id="app">
+          <Header></Header>
+          <div class="content">
+            <router-view></router-view>
+          </div>
+          <Footer />
+        </div>
+      </template>
+      <script>
+        import Header from 'components/Layout/Header';
+        import Footer from 'components/Layout/Footer';
+
+        export default {
+          name: 'App',
+          components: {
+            Header,
+            Footer,
+          },
+        };
+      </script>`
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <component :is="dynamicComponent"></component>
+        </div>
+      </template>
+      <script>
+        import Foo from 'components/Foo';
+        import Bar from 'components/Bar';
+
+        export default {
+          components: {
+            Foo,
+            Bar
+          },
+          computed: {
+            dynamicComponent() {
+              return '...'
+            }
+          }
+        }
+      </script>`,
+      options: [{ ignoreWhenBindingPresent: true }]
+    },
 
     // Ignore when `render` is used instead of temoplate
     {
@@ -363,6 +414,40 @@ tester.run('no-unused-components', rule, {
       errors: [{
         message: 'The "the-button" component has been registered but not used.',
         line: 11
+      }]
+    },
+    // Setting: ignoreWhenBindingPresent
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <component :is="dynamicComponent"></component>
+        </div>
+      </template>
+      <script>
+        import Foo from 'components/Foo';
+        import Bar from 'components/Bar';
+
+        export default {
+          components: {
+            Foo,
+            Bar
+          },
+          computed: {
+            dynamicComponent() {
+              return '...'
+            }
+          }
+        }
+      </script>`,
+      options: [{ ignoreWhenBindingPresent: false }],
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 13
+      }, {
+        message: 'The "Bar" component has been registered but not used.',
+        line: 14
       }]
     }
   ]
