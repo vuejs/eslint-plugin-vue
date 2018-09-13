@@ -307,23 +307,6 @@ tester.run('no-unused-components', rule, {
       </script>`
     },
 
-    // Ignore when `render` is used instead of temoplate
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          components: {
-            TheButton
-          },
-          render() {
-            return
-          }
-        }
-      </script>`
-    },
-
-    // Setting: ignoreWhenBindingPresent
     {
       filename: 'test.vue',
       code: `
@@ -349,6 +332,22 @@ tester.run('no-unused-components', rule, {
         }
       </script>`,
       options: [{ ignoreWhenBindingPresent: true }]
+    },
+
+    // Ignore when `render` is used instead of temoplate
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          components: {
+            TheButton
+          },
+          render() {
+            return
+          }
+        }
+      </script>`
     }
   ],
   invalid: [
@@ -415,6 +414,40 @@ tester.run('no-unused-components', rule, {
       errors: [{
         message: 'The "the-button" component has been registered but not used.',
         line: 11
+      }]
+    },
+    // Setting: ignoreWhenBindingPresent
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <component :is="dynamicComponent"></component>
+        </div>
+      </template>
+      <script>
+        import Foo from 'components/Foo';
+        import Bar from 'components/Bar';
+
+        export default {
+          components: {
+            Foo,
+            Bar
+          },
+          computed: {
+            dynamicComponent() {
+              return '...'
+            }
+          }
+        }
+      </script>`,
+      options: [{ ignoreWhenBindingPresent: false }],
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 13
+      }, {
+        message: 'The "Bar" component has been registered but not used.',
+        line: 14
       }]
     }
   ]
