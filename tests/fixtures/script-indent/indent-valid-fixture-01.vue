@@ -187,7 +187,7 @@ var a = function () {
   f = g; // <-
 };
 
-function c(a, b) {
+function c1(a, b) {
   if (a || (a &&
     b)) {
     return d;
@@ -463,14 +463,14 @@ if (
   c++; // <-
 }
 
-function c(d) {
+function c2(d) {
   return {
     e: function(f, g) {
     }
   };
 }
 
-function a(b) {
+function a1(b) {
   switch(x) {
     case 1:
       if (foo) {
@@ -479,14 +479,14 @@ function a(b) {
   }
 }
 
-function a(b) {
+function a2(b) {
   switch(x) {
     case 1:
       c;
   }
 }
 
-function a(b) {
+function a3(b) {
   switch(x) {
     case 1: c;
   }
@@ -503,7 +503,7 @@ function test() {
   a();
 }
 
-function a(b) {
+function a4(b) {
   switch(x) {
     case 1:
       { // <-
@@ -523,7 +523,7 @@ switch (a) {
       c();
 }
 
-function test(x) {
+function test1(x) {
   switch (x) {
     case 1:
       return function() {
