@@ -42,6 +42,10 @@ props: {
   // multiple possible types
   propB: [String, Number],
   // a number with default value
+  propC: {
+    type: Array,
+    default: () => []
+  },  
   propD: {
     type: Number,
     default: 100
