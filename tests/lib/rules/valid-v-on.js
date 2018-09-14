@@ -82,6 +82,10 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on="$listeners"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on="{a, b, c: d}"></div></template>'
     }
   ],
   invalid: [

@@ -6,6 +6,14 @@
 
 > Official ESLint plugin for Vue.js
 
+## :exclamation: Attention - this is documentation for version `5.x` :exclamation:
+
+This branch contains `eslint-plugin-vue@next` which is a pre-released `5.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
+
+Please try it and report any issues that you might have encountered.
+
+If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
+
 ## :art: Playground on the Web
 
 You can try this plugin on the Web.
@@ -14,15 +22,13 @@ You can try this plugin on the Web.
 
 ## :grey_exclamation: Requirements
 
-- [ESLint](http://eslint.org/) `>=3.18.0`.
-  - `>=4.7.0` to use `eslint --fix`.
-  - `>=4.14.0` to use with `babel-eslint`.
-- Node.js `>=4.0.0`
+- [ESLint](http://eslint.org/) `^5.0.0`.
+- Node.js `>=6.5.0`
 
 ## :cd: Installation
 
 ```bash
-npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue@next
 ```
 
 ## :rocket: Usage
@@ -43,6 +49,17 @@ module.exports = {
     // 'vue/no-unused-vars': 'error'
   }
 }
+```
+
+### Single File Components
+
+ESLint only targets `.js` files by default. You must include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern.
+
+Examples:
+
+```bash
+eslint --ext .js,.vue src
+eslint src/**/*.{js,vue}
 ```
 
 ### Attention
@@ -139,8 +156,11 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |  | [vue/no-side-effects-in-computed-properties](./docs/rules/no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |
 |  | [vue/no-template-key](./docs/rules/no-template-key.md) | disallow `key` attribute on `<template>` |
 |  | [vue/no-textarea-mustache](./docs/rules/no-textarea-mustache.md) | disallow mustaches in `<textarea>` |
+|  | [vue/no-unused-components](./docs/rules/no-unused-components.md) | disallow registering components that are not used inside templates |
 |  | [vue/no-unused-vars](./docs/rules/no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |
+|  | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |
 |  | [vue/require-component-is](./docs/rules/require-component-is.md) | require `v-bind:is` of `<component>` elements |
+| :wrench: | [vue/require-prop-type-constructor](./docs/rules/require-prop-type-constructor.md) | require prop type to be a constructor |
 |  | [vue/require-render-return](./docs/rules/require-render-return.md) | enforce render function to always return value |
 |  | [vue/require-v-for-key](./docs/rules/require-v-for-key.md) | require `v-bind:key` with `v-for` directives |
 |  | [vue/require-valid-default-prop](./docs/rules/require-valid-default-prop.md) | enforce props default values to be valid |
@@ -172,7 +192,9 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style in template |
+| :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
+| :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
+| :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
 | :wrench: | [vue/html-indent](./docs/rules/html-indent.md) | enforce consistent indentation in `<template>` |
 | :wrench: | [vue/html-self-closing](./docs/rules/html-self-closing.md) | enforce self-closing style |
@@ -180,6 +202,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | :wrench: | [vue/mustache-interpolation-spacing](./docs/rules/mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations |
 | :wrench: | [vue/name-property-casing](./docs/rules/name-property-casing.md) | enforce specific casing for the name property in Vue components |
 | :wrench: | [vue/no-multi-spaces](./docs/rules/no-multi-spaces.md) | disallow multiple spaces |
+|  | [vue/no-template-shadow](./docs/rules/no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |
+| :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
 |  | [vue/require-default-prop](./docs/rules/require-default-prop.md) | require default value for props |
 |  | [vue/require-prop-types](./docs/rules/require-prop-types.md) | require type definitions in props |
 | :wrench: | [vue/v-bind-style](./docs/rules/v-bind-style.md) | enforce `v-bind` directive style |
@@ -199,7 +223,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
-|  | [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | disallow confusing `v-for` and `v-if` on the same element |
+|  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
 
@@ -207,10 +231,20 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
-| :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
-| :wrench: | [vue/prop-name-casing](./docs/rules/prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |
+| :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
+| :wrench: | [vue/multiline-html-element-content-newline](./docs/rules/multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element |
+| :wrench: | [vue/no-spaces-around-equal-signs-in-attribute](./docs/rules/no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
+| :wrench: | [vue/singleline-html-element-content-newline](./docs/rules/singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element |
+
+### Deprecated
+
+> - :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+> - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [vue/no-confusing-v-for-v-if](./docs/rules/no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./docs/rules/no-use-v-if-with-v-for.md) |
 
 <!--RULES_TABLE_END-->
 
@@ -251,7 +285,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
 
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`.
-  - VSCode targets only JavaScript or HTML files by default. You have to add `{"autoFix": true, "language": "vue"}` into `eslint.validate` entry.
+  - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
 
 ## :anchor: Semantic Versioning Policy
 
@@ -274,6 +308,30 @@ In order to add a new rule, you should:
 - Create PR and link created issue in description
 
 We're more than happy to see potential contributions, so don't hesitate. If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/vuejs/eslint-plugin-vue/issues), but first please make sure your question does not repeat previous ones.
+
+### Working with rules
+
+Before you start writing new rule, please read the [official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
+
+Next in order to get an idea how does the AST of the code that you want to check looks like, you can use one of the following applications:
+- [astexplorer.net](http://astexplorer.net/) - best tool to inspect ASTs, but it doesn't support Vue templates yet
+- [ast.js.org](https://ast.js.org/) - not fully featured, but supports Vue templates syntax
+
+Since single file components in Vue are not plain JavaScript, we can't use the default parser, and we had to introduce additional one: `vue-eslint-parser`, that generates enhanced AST with nodes that represent specific parts of the template syntax, as well as what's inside the `<script>` tag.
+
+To know more about certain nodes in produced ASTs, go here:
+- [ESTree docs](https://github.com/estree/estree)
+- [vue-eslint-parser AST docs](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md)
+
+The `vue-eslint-parser` provides few useful parser services, to help traverse the produced AST and access tokens of the template:
+- `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`
+- `context.parserServices.getTemplateBodyTokenStore()`
+
+Check out an [example rule](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/mustache-interpolation-spacing.js) to get a better understanding of how these work.
+
+Please be aware that regarding what kind of code examples you'll write in tests, you'll have to accordingly setup the parser in `RuleTester` (you can do it on per test case basis though). [See an example here](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js#L19)
+
+If you'll stuck, remember there are plenty of rules you can learn from already, and if you can't find the right solution - don't hesitate to reach out in issues. We're happy to help!
 
 ## :lock: License
 

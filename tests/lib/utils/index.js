@@ -120,6 +120,28 @@ describe('getComputedProperties', () => {
 
     assert.ok(computedProperties[0].value)
   })
+
+  it('should not collide with object spread operator inside CP', () => {
+    node = parse(`const test = {
+      name: 'test',
+      computed: {
+        foo: {
+          ...mapGetters({ get: 'getFoo' }),
+          ...mapActions({ set: 'setFoo' })
+        }
+      }
+    }`)
+
+    const computedProperties = utils.getComputedProperties(node)
+
+    assert.equal(
+      computedProperties.length,
+      1,
+      'it detects all computed properties'
+    )
+
+    assert.notOk(computedProperties[0].value)
+  })
 })
 
 describe('getStaticPropertyName', () => {
@@ -164,5 +186,64 @@ describe('getStaticPropertyName', () => {
 
     const parsed = utils.getStaticPropertyName(node.properties[0].key)
     assert.ok(parsed === 'computed')
+  })
+})
+
+describe('parseMemberOrCallExpression', () => {
+  let node
+
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
+  it('should parse CallExpression', () => {
+    node = parse(`const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`)
+    const parsed = utils.parseMemberOrCallExpression(node)
+    assert.equal(parsed, 'this.lorem[].map().filter().reduce()')
+  })
+
+  it('should parse MemberExpression', () => {
+    node = parse(`const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`)
+    const parsed = utils.parseMemberOrCallExpression(node)
+    assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
+  })
+})
+
+describe('getRegisteredComponents', () => {
+  let node
+
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
+  it('should return empty array when there are no components registered', () => {
+    node = parse(`const test = {
+      name: 'test',
+    }`)
+
+    assert.equal(
+      utils.getRegisteredComponents(node).length,
+      0
+    )
+  })
+
+  it('should return an array with all registered components', () => {
+    node = parse(`const test = {
+      name: 'test',
+      components: {
+        ...test,
+        PrimaryButton,
+        secondaryButton,
+        'the-modal': TheModal,
+        the_dropdown: TheDropdown,
+        the_input,
+        ['SomeComponent']: SomeComponent
+      }
+    }`)
+
+    assert.deepEqual(
+      utils.getRegisteredComponents(node).map(c => c.name),
+      ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent'],
+    )
   })
 })

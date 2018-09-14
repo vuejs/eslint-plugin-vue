@@ -1,6 +1,6 @@
 # enforce consistent indentation in `<script>` (vue/script-indent)
 
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is similar to core [indent](https://eslint.org/docs/rules/indent) rule, but it has an option for inside of `<script>` tag.
 
@@ -77,6 +77,24 @@ const d = {
           bar: 2
         }
 </script>
+```
+
+## Important note
+
+This rule only checks `.vue` files and does not interfere with other `.js` files. Unfortunately the default `indent` rule when turned on will try to lint both, so in order to make them complementary you can use `overrides` setting and disable `indent` rule on `.vue` files:
+
+```
+"rules": {
+  "vue/script-indent": ["error", 4, { "baseIndent": 1 }]
+},
+"overrides": [
+  {
+    "files": ["*.vue"],
+    "rules": {
+      "indent": "off"
+    }
+  }
+]
 ```
 
 ## Related rules
