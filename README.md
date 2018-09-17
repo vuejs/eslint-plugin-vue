@@ -193,6 +193,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 | :wrench: | [vue/attribute-hyphenation](./docs/rules/attribute-hyphenation.md) | enforce attribute naming style on custom components in template |
+| :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
 | :wrench: | [vue/html-closing-bracket-newline](./docs/rules/html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets |
 | :wrench: | [vue/html-closing-bracket-spacing](./docs/rules/html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets |
 | :wrench: | [vue/html-end-tags](./docs/rules/html-end-tags.md) | enforce end tag style |
@@ -231,7 +232,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
-| :wrench: | [vue/component-name-in-template-casing](./docs/rules/component-name-in-template-casing.md) | enforce specific casing for the component naming style in template |
 | :wrench: | [vue/multiline-html-element-content-newline](./docs/rules/multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element |
 | :wrench: | [vue/no-spaces-around-equal-signs-in-attribute](./docs/rules/no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
