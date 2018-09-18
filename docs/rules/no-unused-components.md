@@ -72,7 +72,7 @@ Note that components registered under other than `PascalCase` name have to be ca
 }
 ```
 
-- `ignoreWhenBindingPresent` ... surpresses all errors if binding has been detected in the template
+- `ignoreWhenBindingPresent` ... suppresses all errors if binding has been detected in the template
     default `true`
 
 
