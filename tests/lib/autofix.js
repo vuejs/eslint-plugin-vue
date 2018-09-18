@@ -29,6 +29,64 @@ describe('Complex autofix test cases', () => {
     linter.defineRule(ruleId, rules[key])
   }
 
+  // https://github.com/vuejs/eslint-plugin-vue/issues/566
+  describe('Autofix of `vue/order-in-components` and `comma-dangle` should not conflict.', () => {
+    const config = Object.assign({}, baseConfig, { 'rules': {
+      'vue/order-in-components': ['error'],
+      'comma-dangle': ['error', 'always']
+    }})
+
+    it('Even if set comma-dangle:always, the output should be as expected.', () => {
+      const code = `
+      <script>
+        export default {
+          data() {
+          },
+          name: 'burger'
+        };
+      </script>`
+      const output = `
+      <script>
+        export default {
+          name: 'burger',
+          data() {
+          },
+        };
+      </script>`
+      assert.equal(
+        linter.verifyAndFix(code, config, 'test.vue').output,
+        output
+      )
+    })
+
+    it('Even if include comments, the output should be as expected.', () => {
+      const code = `
+      <script>
+        export default {
+          /**data*/
+          data() {
+          }/*after data*/,
+          /**name*/
+          name: 'burger'/*after name*/
+        };
+      </script>`
+      const output = `
+      <script>
+        export default {
+          /**name*/
+          name: 'burger',
+          /**data*/
+          data() {
+          },/*after data*//*after name*/
+        };
+      </script>`
+      assert.equal(
+        linter.verifyAndFix(code, config, 'test.vue').output,
+        output
+      )
+    })
+  })
+
   // https://github.com/vuejs/eslint-plugin-vue/issues/554
   describe('Autofix of `html-self-closing` and `component-name-in-template-casing` should not conflict.', () => {
     const kebabConfig = Object.assign({}, baseConfig, { 'rules': {
@@ -39,6 +97,7 @@ describe('Complex autofix test cases', () => {
       }],
       'vue/component-name-in-template-casing': ['error', 'kebab-case']
     }})
+
     const pascalConfig = Object.assign({}, baseConfig, { 'rules': {
       'vue/html-self-closing': ['error', {
         'html': {
@@ -47,6 +106,7 @@ describe('Complex autofix test cases', () => {
       }],
       'vue/component-name-in-template-casing': ['error']
     }})
+
     it('Even if set kebab-case, the output should be as expected.', () => {
       const code = `
       <template>
@@ -62,6 +122,7 @@ describe('Complex autofix test cases', () => {
         output
       )
     })
+
     it('Even if set PascalCase, the output should be as expected.', () => {
       const code = `
       <template>
@@ -77,6 +138,7 @@ describe('Complex autofix test cases', () => {
         output
       )
     })
+
     it('Even if element have an attributes, the output should be as expected.', () => {
       const code = `
       <template>
