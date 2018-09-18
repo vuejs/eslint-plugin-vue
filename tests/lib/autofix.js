@@ -35,6 +35,7 @@ describe('Complex autofix test cases', () => {
       'vue/order-in-components': ['error'],
       'comma-dangle': ['error', 'always']
     }})
+
     it('Even if set comma-dangle:always, the output should be as expected.', () => {
       const code = `
       <script>
@@ -57,6 +58,7 @@ describe('Complex autofix test cases', () => {
         output
       )
     })
+
     it('Even if include comments, the output should be as expected.', () => {
       const code = `
       <script>
@@ -80,6 +82,77 @@ describe('Complex autofix test cases', () => {
       </script>`
       assert.equal(
         linter.verifyAndFix(code, config, 'test.vue').output,
+        output
+      )
+    })
+  })
+
+  // https://github.com/vuejs/eslint-plugin-vue/issues/554
+  describe('Autofix of `html-self-closing` and `component-name-in-template-casing` should not conflict.', () => {
+    const kebabConfig = Object.assign({}, baseConfig, { 'rules': {
+      'vue/html-self-closing': ['error', {
+        'html': {
+          'component': 'never'
+        }
+      }],
+      'vue/component-name-in-template-casing': ['error', 'kebab-case']
+    }})
+
+    const pascalConfig = Object.assign({}, baseConfig, { 'rules': {
+      'vue/html-self-closing': ['error', {
+        'html': {
+          'component': 'never'
+        }
+      }],
+      'vue/component-name-in-template-casing': ['error']
+    }})
+
+    it('Even if set kebab-case, the output should be as expected.', () => {
+      const code = `
+      <template>
+        <VueComponent />
+      </template>`
+      const output = `
+      <template>
+        <vue-component ></vue-component>
+      </template>`
+
+      assert.equal(
+        linter.verifyAndFix(code, kebabConfig, 'test.vue').output,
+        output
+      )
+    })
+
+    it('Even if set PascalCase, the output should be as expected.', () => {
+      const code = `
+      <template>
+        <vue-component />
+      </template>`
+      const output = `
+      <template>
+        <VueComponent ></VueComponent>
+      </template>`
+
+      assert.equal(
+        linter.verifyAndFix(code, pascalConfig, 'test.vue').output,
+        output
+      )
+    })
+
+    it('Even if element have an attributes, the output should be as expected.', () => {
+      const code = `
+      <template>
+        <vue-component attr
+          id="item1" />
+      </template>`
+      const output = `
+      <template>
+        <VueComponent attr
+          id="item1" ></VueComponent>
+      </template>`
+
+      assert.equal(
+        linter.verifyAndFix(code, pascalConfig, 'test.vue').output,
         output
       )
     })
