@@ -42,10 +42,6 @@ props: {
   // multiple possible types
   propB: [String, Number],
   // a number with default value
-  propC: {
-    type: Array,
-    default: () => []
-  },  
   propD: {
     type: Number,
     default: 100
@@ -53,10 +49,12 @@ props: {
   // object/array defaults should be returned from a factory function
   propE: {
     type: Object,
-    default: function () {
-      return { message: 'hello' }
-    }
-  }
+    default: () => { message: 'hello' }
+  },
+  propF: {
+    type: Array,
+    default: () => []
+  }  
 }
 ```
 
