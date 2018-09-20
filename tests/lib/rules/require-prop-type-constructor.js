@@ -37,7 +37,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
             },
             lastProp: {
               type: [Number, Boolean]
-            }
+            },
+            nullProp: null
           }
         }
       `
@@ -58,7 +59,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
           },
           lastProp: {
             type: ['Boolean']
-          }
+          },
+          nullProp: 'null'
         }
       }
       `,
@@ -73,7 +75,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
           },
           lastProp: {
             type: [Boolean]
-          }
+          },
+          nullProp: null
         }
       }
       `,
@@ -92,6 +95,9 @@ ruleTester.run('require-prop-type-constructor', rule, {
       }, {
         message: 'The "type" property should be a constructor.',
         line: 11
+      }, {
+        message: 'The "nullProp" property should be a constructor.',
+        line: 13
       }]
     },
     {
