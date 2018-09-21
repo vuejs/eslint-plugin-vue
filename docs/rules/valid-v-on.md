@@ -36,7 +36,24 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 ## :wrench: Options
 
-Nothing.
+This rule has an object option:
+
+`"modifiers"`: [] (default) array of additional allowed modifiers.
+
+### Example:
+
+```json
+"vue/valid-v-on": [2, {
+  modifiers: ['foo']
+}]
+```
+
+:+1: Examples of **correct** code for this rule:
+
+```html
+<div @click.foo="foo"/>
+<div v-on:click.foo="foo"/>
+```
 
 ## :couple: Related rules
 
