@@ -287,6 +287,7 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
   - If you use `Vetur` plugin in VSCode - set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://github.com/vuejs/vetur/blob/master/docs/linting-error.md) for more info.
+  - For Atom editor, you need to go into Settings -> Packages -> linter-eslint, under the option “List of scopes to run eslint on”, add `text.html.vue`.
 
 ## :anchor: Semantic Versioning Policy
 
