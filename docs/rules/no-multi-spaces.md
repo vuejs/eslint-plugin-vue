@@ -16,6 +16,15 @@ Examples of **incorrect** code for this rule:
       :style="bar"         />
 ```
 
+```html
+<i
+  :class="{
+    'fa-angle-up'   : isExpanded,
+    'fa-angle-down' : !isExpanded,
+  }"
+/>
+```
+
 Examples of **correct** code for this rule:
 
 ```html
@@ -25,6 +34,36 @@ Examples of **correct** code for this rule:
 />
 ```
 
-### Options
+```html
+<i
+  :class="{
+    'fa-angle-up' : isExpanded,
+    'fa-angle-down' : !isExpanded,
+  }"
+/>
+```
 
-Nothing
+## :wrench: Options
+
+This rule has an object option:
+
+`"ignoreProperties": false` (default) whether or not objects' properties should be ignored
+
+### Example:
+
+```json
+"vue/no-multi-spaces": [2, {
+  "ignoreProperties": true
+}]
+```
+
+:+1: Examples of **correct** code for this rule:
+
+```html
+<i
+  :class="{
+    'fa-angle-up'   : isExpanded,
+    'fa-angle-down' : !isExpanded,
+  }"
+/>
+```

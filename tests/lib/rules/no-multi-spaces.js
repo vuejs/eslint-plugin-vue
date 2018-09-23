@@ -44,6 +44,21 @@ ruleTester.run('no-multi-spaces', rule, {
     {
       filename: 'test.js',
       code: 'export default { }'
+    },
+    {
+      code: `
+      <template>
+        <i
+          :class="{
+            'fa-angle-up'   : isExpanded,
+            'fa-angle-down' : !isExpanded,
+          }"
+        />
+      </template>
+      `,
+      options: [{
+        ignoreProperties: true
+      }]
     }
   ],
   invalid: [
@@ -173,6 +188,34 @@ ruleTester.run('no-multi-spaces', rule, {
         },
         {
           message: "Multiple spaces found before '\"'.",
+          type: 'Punctuator'
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <i
+          :class="{
+            'fa-angle-up'   : isExpanded,
+            'fa-angle-down' : !isExpanded,
+          }"
+        />
+      </template>
+      `,
+      output: `
+      <template>
+        <i
+          :class="{
+            'fa-angle-up' : isExpanded,
+            'fa-angle-down' : !isExpanded,
+          }"
+        />
+      </template>
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before ':'.",
           type: 'Punctuator'
         }
       ]
