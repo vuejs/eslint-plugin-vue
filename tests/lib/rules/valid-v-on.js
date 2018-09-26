@@ -86,6 +86,16 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on="{a, b, c: d}"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.bar="foo"></div></template>',
+      options: [{ modifiers: ['bar'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on:keydown.bar.aaa="foo"></div></template>',
+      options: [{ modifiers: ['bar', 'aaa'] }]
     }
   ],
   invalid: [
@@ -103,6 +113,18 @@ tester.run('valid-v-on', rule, {
       filename: 'test.vue',
       code: '<template><div @click></div></template>',
       errors: ["'v-on' directives require that attribute value or verb modifiers."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.bar.aaa="foo"></div></template>',
+      errors: ["'v-on' directives don't support the modifier 'aaa'."],
+      options: [{ modifiers: ['bar'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @keydown.bar.aaa="foo"></div></template>',
+      errors: ["'v-on' directives don't support the modifier 'bar'."],
+      options: [{ modifiers: ['aaa'] }]
     }
   ]
 })
