@@ -37,7 +37,7 @@ This rule has options.
 Examples of **incorrect** code for this rule:
 
 ```html
-<!--eslint html-closing-bracket-spacing: "error" -->
+<!--eslint vue/html-closing-bracket-spacing: "error" -->
 
 <div >
 <div foo >
@@ -51,7 +51,7 @@ Examples of **incorrect** code for this rule:
 Examples of **correct** code for this rule:
 
 ```html
-<!--eslint html-closing-bracket-spacing: "error" -->
+<!--eslint vue/html-closing-bracket-spacing: "error" -->
 
 <div>
 <div foo>
@@ -63,7 +63,7 @@ Examples of **correct** code for this rule:
 ```
 
 ```html
-<!--eslint html-closing-bracket-spacing: ["error", {
+<!--eslint vue/html-closing-bracket-spacing: ["error", {
     "startTag": "always",
     "endTag": "always",
     "selfClosingTag": "always"

@@ -42,7 +42,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 :-1: Examples of **incorrect** code for this rule:
 
 ```html
-<!-- eslint html-closing-bracket-newline: "error" -->
+<!-- eslint vue/html-closing-bracket-newline: "error" -->
 
 <div id="foo" class="bar"
 >
@@ -55,7 +55,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 :+1: Examples of **correct** code for this rule:
 
 ```html
-<!-- eslint html-closing-bracket-newline: "error" -->
+<!-- eslint vue/html-closing-bracket-newline: "error" -->
 
 <div id="foo" class="bar">
 <div
@@ -67,7 +67,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 :-1: Examples of **incorrect** code for `{ "multiline": "never" }`:
 
 ```html
-<!-- eslint html-closing-bracket-newline: ["error", { multiline: never }] -->
+<!-- eslint vue/html-closing-bracket-newline: ["error", { multiline: never }] -->
 
 <div
     id="foo"
@@ -78,7 +78,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 :+1: Examples of **correct** code for `{ "multiline": "never" }`:
 
 ```html
-<!-- html-closing-bracket-newline: ["error", { multiline: never }] -->
+<!-- eslint vue/html-closing-bracket-newline: ["error", { multiline: never }] -->
 
 <div
     id="foo"
