@@ -38,7 +38,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
             lastProp: {
               type: [Number, Boolean]
             },
-            nullProp: null
+            nullProp: null,
+            nullTypeProp: { type: null }
           }
         }
       `
