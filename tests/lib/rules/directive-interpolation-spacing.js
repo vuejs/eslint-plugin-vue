@@ -25,6 +25,9 @@ ruleTester.run('directive-interpolation-spacing', rule, {
   valid: [
     `<template><div :class="test"></div></template>`,
     `<template><div :class="test && { a: true }"></div></template>`,
+    '<template><div :class="[ 1, 2, 3 ]"></div></template>',
+    '<template><div :class="[ 1, 2, { test: 1 } ]"></div></template>',
+    '<template><div :class="[ 1, 2, { test: [ 1, 2, 3 ] } ]"></div></template>',
     '<template><div :class="{ a: 123 }"></div></template>',
     '<template><div :class="{ [a]: 123 }"></div></template>',
     '<template><div :class="{ 1: 123 }"></div></template>',
@@ -36,6 +39,10 @@ ruleTester.run('directive-interpolation-spacing', rule, {
     `<template><div :class="{ [ false ? 'a' : true ? 'c' : 'b' ]: 123 }"></div></template>`,
     {
       code: `<template><div :class="{a: 'a', b: 'b'}"></div></template>`,
+      options: ['never']
+    },
+    {
+      code: `<template><div :class="[1, 2, 3]"></div></template>`,
       options: ['never']
     }
   ],
@@ -111,7 +118,26 @@ ruleTester.run('directive-interpolation-spacing', rule, {
         `Expected 1 space after '}', but not found.`
       ]
     },
-
+    {
+      code: '<template><div :class=" [ 1, 2, 3 ] "></div></template>',
+      output: '<template><div :class="[ 1, 2, 3 ]"></div></template>',
+      options: ['always'],
+      errors: [
+        `Expected no space before '[', but found.`,
+        `Expected no space after ']', but found.`
+      ]
+    },
+    {
+      code: '<template><div :class="[1,2,3]"></div></template>',
+      output: '<template><div :class="[ 1, 2, 3 ]"></div></template>',
+      options: ['always'],
+      errors: [
+        `Expected 1 space after '[', but not found.`,
+        `Expected 1 space after ',', but not found.`,
+        `Expected 1 space after ',', but not found.`,
+        `Expected 1 space before ']', but not found.`
+      ]
+    },
     /**
      * Options: never
      */
@@ -143,6 +169,15 @@ ruleTester.run('directive-interpolation-spacing', rule, {
         `Expected no space after '{', but found.`,
         `Expected no space before '}', but found.`,
         `Expected 1 space after '}', but not found.`
+      ]
+    },
+    {
+      code: '<template><div :class="[ 1, 2, 3 ]"></div></template>',
+      output: '<template><div :class="[1, 2, 3]"></div></template>',
+      options: ['never'],
+      errors: [
+        `Expected no space after '[', but found.`,
+        `Expected no space before ']', but found.`
       ]
     }
   ]
