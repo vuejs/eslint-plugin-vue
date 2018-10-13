@@ -334,7 +334,7 @@ tester.run('no-unused-components', rule, {
       options: [{ ignoreWhenBindingPresent: true }]
     },
 
-    // Ignore when `render` is used instead of temoplate
+    // Ignore when `render` is used instead of template
     {
       filename: 'test.vue',
       code: `
@@ -345,6 +345,30 @@ tester.run('no-unused-components', rule, {
           },
           render() {
             return
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template src="./test.html" />
+      <script>
+        export default {
+          components: {
+            TheButton
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template src="./test.html"></template>
+      <script>
+        export default {
+          components: {
+            TheButton
           }
         }
       </script>`
