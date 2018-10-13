@@ -4,7 +4,7 @@
 
 ## Rule Details
 
-This rule aims to...
+This rule aims to require that the component object be directly exported.
 
 :-1: Examples of **incorrect** code:
 
@@ -18,7 +18,7 @@ const ComponentA = {
 	}
 }
 
-export default Component A
+export default ComponentA
 ```
 
 :+1: Examples of **correct** code:
