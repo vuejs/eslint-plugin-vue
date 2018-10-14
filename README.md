@@ -148,6 +148,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |    | Rule ID | Description |
 |:---|:--------|:------------|
 |  | [vue/no-async-in-computed-properties](./docs/rules/no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |
+|  | [vue/no-boolean-default](./docs/rules/no-boolean-default.md) | Prevents boolean defaults from being set |
 |  | [vue/no-dupe-keys](./docs/rules/no-dupe-keys.md) | disallow duplication of field names |
 |  | [vue/no-duplicate-attributes](./docs/rules/no-duplicate-attributes.md) | disallow duplication of attributes |
 |  | [vue/no-parsing-error](./docs/rules/no-parsing-error.md) | disallow parsing errors in `<template>` |
