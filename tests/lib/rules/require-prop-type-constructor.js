@@ -136,6 +136,34 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "d" property should be a constructor.',
         line: 7
       }]
+    },
+    {
+      filename: 'SomeComponent.vue',
+      code: `
+      export default {
+        props: {
+          a: {
+            type: 'String',
+            default: 10
+          } as PropOptions<string>,
+        }
+      }
+      `,
+      output: `
+      export default {
+        props: {
+          a: {
+            type: String,
+            default: 10
+          } as PropOptions<string>,
+        }
+      }
+      `,
+      errors: [{
+        message: 'The "a" property should be a constructor.',
+        line: 5
+      }],
+      parser: 'typescript-eslint-parser'
     }
   ]
 })
