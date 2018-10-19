@@ -91,10 +91,10 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "anotherType" property should be a constructor.',
         line: 5
       }, {
-        message: 'The "type" property should be a constructor.',
+        message: 'The "extraProp" property should be a constructor.',
         line: 7
       }, {
-        message: 'The "type" property should be a constructor.',
+        message: 'The "lastProp" property should be a constructor.',
         line: 11
       }, {
         message: 'The "nullProp" property should be a constructor.',
