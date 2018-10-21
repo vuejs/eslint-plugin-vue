@@ -18,7 +18,7 @@ var RuleTester = require('eslint').RuleTester
 
 var ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaVersion: 2018,
     sourceType: 'module'
   }
 })
@@ -30,6 +30,18 @@ ruleTester.run('no-boolean-default', rule, {
       code: `
         export default {
           props: {
+            enabled: Boolean
+          }
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const props = {};
+        export default {
+          props: {
+            ...props,
             enabled: Boolean
           }
         }
