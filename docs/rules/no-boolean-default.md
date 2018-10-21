@@ -1,38 +1,39 @@
 # Prevents boolean defaults from being set (vue/no-boolean-default)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-
-Please describe the origin of the rule here.
+The rule prevents Boolean props from having a default value.
 
 
-## Rule Details
-
-This rule aims to...
+## :book: Rule Details
+The rule is to enforce the HTML standard of always defaulting boolean attributes to false.
 
 Examples of **incorrect** code for this rule:
-
 ```js
-
-// fill me in
-
+export default {
+  props: {
+    foo: {
+      type: Boolean,
+      default: true
+    }
+  }
+}
 ```
 
 Examples of **correct** code for this rule:
-
 ```js
-
-// fill me in
-
+export default {
+  props: {
+    foo: Boolean
+  }
+}
 ```
 
-### Options
 
-If there are any options, describe them here. Otherwise, delete this section.
+## :wrench: Options
+- `'constructor'` (default) enforces that Boolean props must use the constructor.
+- `'no-default'` allows a prop definition object, but enforces that the `default` property not be defined.
+- `'default-fase'` enforces that the default can be set but must be set to `false`.
 
-## When Not To Use It
+```json
+  "vue/no-boolean-default": ["error", "constructor|no-default|default-fase"]
+```
 
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
