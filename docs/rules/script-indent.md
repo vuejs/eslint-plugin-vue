@@ -10,7 +10,7 @@ This rule has some options.
 
 ```json
 {
-  "script-indent": ["error", TYPE, {
+  "vue/script-indent": ["error", TYPE, {
     "baseIndent": 0,
     "switchCase": 0,
     "ignores": []
