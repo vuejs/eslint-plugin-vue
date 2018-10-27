@@ -14,25 +14,25 @@ This rule reports `v-on` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
 ```html
-<div v-on/>
-<div v-on:click/>
-<div v-on:click.aaa="foo"/>
-<div @click/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-on="foo"/>
+  <div v-on:click="foo"/>
+  <div @click="foo"/>
+  <div @click.left="foo"/>
+  <div @click.prevent/>
+  <div @click.stop/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-on="foo"/>
-<div v-on:click="foo"/>
-<div @click="foo"/>
-<div @click.left="foo"/>
-<div @click.prevent/>
-<div @click.stop/>
+  <!-- ✗ BAD -->
+  <div v-on/>
+  <div v-on:click/>
+  <div v-on:click.aaa="foo"/>
+  <div @click/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -41,7 +41,6 @@ Nothing.
 ## :couple: Related rules
 
 - [no-parsing-error]
-
 
 [no-parsing-error]: no-parsing-error.md
 

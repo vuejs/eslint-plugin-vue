@@ -14,20 +14,20 @@ This rule reports `v-else` directives in the following cases:
 - The directive is on the elements that the previous element don't have `v-if`/`v-if-else` directives. E.g. `<div v-else></div>`
 - The directive is on the elements which have `v-if`/`v-if-else` directives. E.g. `<div v-if="foo" v-else></div>`
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-else': ['error']}">
 ```html
-<div v-else="foo"/>
-<div v-else:aaa/>
-<div v-else.bbb/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-if="foo"/>
+  <div v-else/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-if="foo"/>
-<div v-else/>
+  <!-- ✗ BAD -->
+  <div v-else="foo"/>
+  <div v-else:aaa/>
+  <div v-else.bbb/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

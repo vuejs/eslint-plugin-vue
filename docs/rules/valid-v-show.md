@@ -14,19 +14,20 @@ This rule reports `v-show` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
 
+<eslint-code-block :rules="{'vue/valid-v-show': ['error']}">
 ```html
-<div v-show/>
-<div v-show:aaa="foo"/>
-<div v-show.bbb="foo"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-show="foo"/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-show="foo"/>
+  <!-- ✗ BAD -->
+  <div v-show/>
+  <div v-show:aaa="foo"/>
+  <div v-show.bbb="foo"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -35,7 +36,6 @@ Nothing.
 ## :couple: Related rules
 
 - [no-parsing-error]
-
 
 [no-parsing-error]: no-parsing-error.md
 

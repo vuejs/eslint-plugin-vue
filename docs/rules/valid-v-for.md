@@ -22,37 +22,37 @@ The following cases are syntax errors:
 - The directive's value is not the form `alias in expr`. E.g. `<div v-for="foo"></div>`
 - The alias is not LHS. E.g. `<div v-for="foo() in list"></div>`
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
 ```html
-<div v-for/>
-<div v-for:aaa="todo in todos"/>
-<div v-for.bbb="todo in todos"/>
-<div
-  v-for="todo in todos"
-  is="MyComponent"
-/>
-<MyComponent v-for="todo in todos"/>
-<MyComponent
-  v-for="todo in todos"
-  :key="foo"
-/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-for="todo in todos"/>
+  <MyComponent
+    v-for="todo in todos"
+    :key="todo.id"
+  />
+  <div
+    v-for="todo in todos"
+    :is="MyComponent"
+    :key="todo.id"
+  />
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-for="todo in todos"/>
-<MyComponent
-  v-for="todo in todos"
-  :key="todo.id"
-/>
-<div
-  v-for="todo in todos"
-  :is="MyComponent"
-  :key="todo.id"
-/>
+  <!-- ✗ BAD -->
+  <div v-for/>
+  <div v-for:aaa="todo in todos"/>
+  <div v-for.bbb="todo in todos"/>
+  <div
+    v-for="todo in todos"
+    is="MyComponent"
+  />
+  <MyComponent v-for="todo in todos"/>
+  <MyComponent
+    v-for="todo in todos"
+    :key="foo"
+  />
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

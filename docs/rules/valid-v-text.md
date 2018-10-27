@@ -14,19 +14,19 @@ This rule reports `v-text` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-text': ['error']}">
 ```html
-<div v-text/>
-<div v-text:aaa="foo"/>
-<div v-text.bbb="foo"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-text="foo"/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-text="foo"/>
+  <!-- ✗ BAD -->
+  <div v-text/>
+  <div v-text:aaa="foo"/>
+  <div v-text.bbb="foo"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -35,7 +35,6 @@ Nothing.
 ## :couple: Related rules
 
 - [no-parsing-error]
-
 
 [no-parsing-error]: no-parsing-error.md
 

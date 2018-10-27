@@ -18,30 +18,30 @@ This rule reports `v-model` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-model': ['error']}">
 ```html
-<input v-model>
-<input v-model:aaa="foo">
-<input v-model.bbb="foo">
-<input v-model="foo + bar">
-<div v-model="foo"/>
-<div v-for="todo in todos">
-  <input v-model="todo">
-</div>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <input v-model="foo">
+  <input v-model.lazy="foo">
+  <textarea v-model="foo"/>
+  <MyComponent v-model="foo"/>
+  <div v-for="todo in todos">
+    <input v-model="todo.name">
+  </div>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<input v-model="foo">
-<input v-model.lazy="foo">
-<textarea v-model="foo"/>
-<MyComponent v-model="foo"/>
-<div v-for="todo in todos">
-  <input v-model="todo.name">
-</div>
+  <!-- ✗ BAD -->
+  <input v-model>
+  <input v-model:aaa="foo">
+  <input v-model.bbb="foo">
+  <input v-model="foo + bar">
+  <div v-model="foo"/>
+  <div v-for="todo in todos">
+    <input v-model="todo">
+  </div>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -50,7 +50,6 @@ Nothing.
 ## :couple: Related rules
 
 - [no-parsing-error]
-
 
 [no-parsing-error]: no-parsing-error.md
 

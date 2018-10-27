@@ -15,20 +15,22 @@ This rule does not report `v-bind` directives which do not have their argument (
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
+<eslint-code-block :rules="{'vue/valid-v-bind': ['error']}">
 ```html
-<div v-bind/>
-<div :aaa/>
-<div v-bind:aaa.bbb="foo"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-bind="foo"/>
+  <div v-bind:aaa="foo"/>
+  <div :aaa="foo"/>
+  <div :aaa.prop="foo"/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-bind="foo"/>
-<div v-bind:aaa="foo"/>
-<div :aaa="foo"/>
-<div :aaa.prop="foo"/>
+  <!-- ✗ BAD -->
+  <div v-bind/>
+  <div :aaa/>
+  <div v-bind:aaa.bbb="foo"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

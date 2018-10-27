@@ -16,20 +16,20 @@ This rule reports `v-else-if` directives in the following cases:
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-else-if': ['error']}">
 ```html
-<div v-else-if/>
-<div v-else-if:aaa="foo"/>
-<div v-else-if.bbb="foo"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-if="foo"/>
+  <div v-else-if="bar"/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-if="foo"/>
-<div v-else-if="bar"/>
+  <!-- ✗ BAD -->
+  <div v-else-if/>
+  <div v-else-if:aaa="foo"/>
+  <div v-else-if.bbb="foo"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
