@@ -46,6 +46,61 @@ ruleTester.run('no-boolean-default', rule, {
           }
         }
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              ...data
+            }
+          }
+        }
+      `,
+      options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: false,
+              ...data
+            }
+          }
+        }
+      `,
+      options: ['default-false']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: data
+          }
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              ...data
+            }
+          }
+        }
+      `
     }
   ],
 
