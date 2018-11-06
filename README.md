@@ -289,6 +289,16 @@ The `vue-eslint-parser` uses the parser which is set by `parserOptions.parser` t
   - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
   - If you use `Vetur` plugin in VSCode - set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://github.com/vuejs/vetur/blob/master/docs/linting-error.md) for more info.
   - For Atom editor, you need to go into Settings -> Packages -> linter-eslint, under the option “List of scopes to run eslint on”, add `text.html.vue`.
+  - For Sublime Text, you need to open command-pallete via cmd+shift+p (cmd => ctrl for windows) and type "Preferences: SublimeLinter Settings", paste to the config on the right side:
+  ```json
+  {
+    "linters": {
+      "eslint": {
+        "selector": "source.js, text.html.vue"
+      }
+    }
+  }
+  ```
 
 ## :anchor: Semantic Versioning Policy
 
