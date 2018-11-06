@@ -248,6 +248,24 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         line: 23,
         message: 'Unexpected side effect in "test4" computed property.'
       }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default Vue.extend({
+          computed: {
+            test1() : string {
+              return this.something.reverse()
+            }
+          }
+        });
+      `,
+      parserOptions,
+      errors: [{
+        line: 5,
+        message: 'Unexpected side effect in "test1" computed property.'
+      }],
+      parser: 'typescript-eslint-parser'
     }
   ]
 })
