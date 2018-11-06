@@ -12,19 +12,19 @@ This rule reports `v-once` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-once.bbb></div>`
 - The directive has that attribute value. E.g. `<div v-once="ccc"></div>`
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-once': ['error']}">
 ```html
-<div v-once:aaa/>
-<div v-once.bbb/>
-<div v-once="ccc"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-once/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-once/>
+  <!-- ✗ BAD -->
+  <div v-once:aaa/>
+  <div v-once.bbb/>
+  <div v-once="ccc"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

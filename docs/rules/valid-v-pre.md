@@ -12,19 +12,19 @@ This rule reports `v-pre` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-pre.bbb></div>`
 - The directive has that attribute value. E.g. `<div v-pre="ccc"></div>`
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-pre': ['error']}">
 ```html
-<div v-pre:aaa/>
-<div v-pre.bbb/>
-<div v-pre="ccc"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-pre/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-pre/>
+  <!-- ✗ BAD -->
+  <div v-pre:aaa/>
+  <div v-pre.bbb/>
+  <div v-pre="ccc"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

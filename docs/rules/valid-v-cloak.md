@@ -12,19 +12,19 @@ This rule reports `v-cloak` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-cloak.bbb></div>`
 - The directive has that attribute value. E.g. `<div v-cloak="ccc"></div>`
 
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-cloak': ['error']}">
 ```html
-<div v-cloak:aaa/>
-<div v-cloak.bbb/>
-<div v-cloak="ccc"/>
-```
+<template>
+  <!-- ✓ GOOD -->
+  <div v-cloak/>
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-cloak/>
+  <!-- ✗ BAD -->
+  <div v-cloak:aaa/>
+  <div v-cloak.bbb/>
+  <div v-cloak="ccc"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
