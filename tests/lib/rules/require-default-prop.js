@@ -141,6 +141,18 @@ ruleTester.run('require-default-prop', rule, {
         });
       `,
       parser: 'typescript-eslint-parser'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            bar,
+            baz: prop,
+            bar1: foo()
+          }
+        }
+      `
     }
   ],
 
