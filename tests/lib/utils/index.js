@@ -266,7 +266,7 @@ describe('getComputedProperties', () => {
 
     assert.notOk(node.type)
     assert.notOk(node.node)
-    assert.equal(node.props.length,0)
+    assert.equal(node.props.length, 0)
   })
 
   it('should return computed props', () => {
@@ -286,7 +286,7 @@ describe('getComputedProperties', () => {
 
     assert.ok(node.node)
     assert.equal(node.type, 'ObjectExpression', 'it detects correct type')
-    assert.equal(node.props.length, 4, 'it detects all props' )
+    assert.equal(node.props.length, 4, 'it detects all props')
 
     assert.ok(node.props[0].value)
     assert.ok(node.props[0].key.type === 'Identifier')
@@ -319,7 +319,7 @@ describe('getComputedProperties', () => {
 
     assert.ok(node.node)
     assert.equal(node.type, 'ArrayExpression', 'it detects correct type')
-    assert.equal(node.props.length, 1, 'it detects all props' )
+    assert.equal(node.props.length, 1, 'it detects all props')
 
     assert.notOk(node.props[0].value)
     assert.ok(node.props[0].key.type === 'Literal')
