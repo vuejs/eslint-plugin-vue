@@ -248,30 +248,47 @@ describe('getRegisteredComponents', () => {
   })
 })
 
-describe('getComputedProperties', () => {
-  let node
+describe('getComponentProps', () => {
+  let props
 
   const parse = function (code) {
     const data = babelEslint.parse(code).body[0].declarations[0].init
-    return utils.getPropsProperties(data)
+    return utils.getComponentProps(data)
   }
 
-  it('should return empty array when there is no props property', () => {
-    node = parse(`const test = {
+  it('should return empty array when there is no component props', () => {
+    props = parse(`const test = {
       name: 'test',
       data() {
         return {}
       }
     }`)
 
-    assert.notOk(node.type)
-    assert.notOk(node.node)
-    assert.equal(node.props.length, 0)
+    assert.equal(props.length, 0)
+  })
+
+  it('should return empty array when component props is empty array', () => {
+    props = parse(`const test = {
+      name: 'test',
+      props: []
+    }`)
+
+    assert.equal(props.length, 0)
+  })
+
+  it('should return empty array when component props is empty object', () => {
+    props = parse(`const test = {
+      name: 'test',
+      props: {}
+    }`)
+
+    assert.equal(props.length, 0)
   })
 
   it('should return computed props', () => {
-    node = parse(`const test = {
+    props = parse(`const test = {
       name: 'test',
+      ...test,
       data() {
         return {}
       },
@@ -284,32 +301,27 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    assert.ok(node.node)
-    assert.equal(node.type, 'ObjectExpression', 'it detects correct type')
-    assert.equal(node.props.length, 4, 'it detects all props')
+    assert.equal(props.length, 4, 'it detects all props')
 
-    assert.ok(node.props[0].value)
-    assert.ok(node.props[0].key.type === 'Identifier')
-    assert.ok(node.props[0].node.type === 'Property')
-    assert.ok(node.props[0].value.type === 'Identifier')
+    assert.ok(props[0].key.type === 'Identifier')
+    assert.ok(props[0].node.type === 'Property')
+    assert.ok(props[0].value.type === 'Identifier')
 
-    assert.ok(node.props[1].value)
-    assert.ok(node.props[1].key.type === 'Identifier')
-    assert.ok(node.props[1].node.type === 'Property')
-    assert.ok(node.props[1].value.type === 'ObjectExpression')
+    assert.ok(props[1].key.type === 'Identifier')
+    assert.ok(props[1].node.type === 'Property')
+    assert.ok(props[1].value.type === 'ObjectExpression')
 
-    assert.ok(node.props[2].value)
-    assert.ok(node.props[2].key.type === 'Identifier')
-    assert.ok(node.props[2].node.type === 'Property')
-    assert.ok(node.props[2].value.type === 'ArrayExpression')
+    assert.ok(props[2].key.type === 'Identifier')
+    assert.ok(props[2].node.type === 'Property')
+    assert.ok(props[2].value.type === 'ArrayExpression')
 
-    assert.ok(node.props[3].value)
-    assert.ok(node.props[3].key.type === node.props[3].value.type)
-    assert.ok(node.props[3].node.type === 'Property')
+    assert.deepEqual(props[3].key, props[3].value)
+    assert.ok(props[3].node.type === 'Property')
+    assert.ok(props[3].value.type === 'Identifier')
   })
 
   it('should return computed from array props', () => {
-    node = parse(`const test = {
+    props = parse(`const test = {
       name: 'test',
       data() {
         return {}
@@ -317,11 +329,22 @@ describe('getComputedProperties', () => {
       props: ['a', b, \`c\`, null]
     }`)
 
-    assert.ok(node.node)
-    assert.equal(node.type, 'ArrayExpression', 'it detects correct type')
-    assert.equal(node.props.length, 1, 'it detects all props')
+    assert.equal(props.length, 4, 'it detects all props')
 
-    assert.notOk(node.props[0].value)
-    assert.ok(node.props[0].key.type === 'Literal')
+    assert.ok(props[0].node.type === 'Literal')
+    assert.deepEqual(props[0].key, props[0].node)
+    assert.notOk(props[0].value)
+
+    assert.ok(props[1].node.type === 'Identifier')
+    assert.notOk(props[1].key)
+    assert.notOk(props[1].value)
+
+    assert.ok(props[2].node.type === 'TemplateLiteral')
+    assert.notOk(props[2].key)
+    assert.notOk(props[2].value)
+
+    assert.ok(props[3].node.type === 'Literal')
+    assert.notOk(props[3].key)
+    assert.notOk(props[3].value)
   })
 })
