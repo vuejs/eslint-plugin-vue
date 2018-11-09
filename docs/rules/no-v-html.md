@@ -2,7 +2,7 @@
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 
-This rule reports use of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross Side Scripting (XSS) attacks.
+This rule reports use of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
 
 ## :book: Rule Details
 

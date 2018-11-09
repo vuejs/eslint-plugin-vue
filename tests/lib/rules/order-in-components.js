@@ -374,7 +374,7 @@ ruleTester.run('order-in-components', rule, {
           data() {
           },
           test: 'ok',
-          name: 'burger',
+          name: 'burger'
         };
       `,
       options: [{ order: ['data', 'test', 'name'] }],
@@ -401,7 +401,33 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
           /** data provider */
           data() {
-          },
+          }
+        };
+      `,
+      errors: [{
+        message: 'The "name" property should be above the "data" property on line 4.',
+        line: 7
+      }]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          /** data provider */
+          data() {
+          }/*test*/,
+          /** name of vue component */
+          name: 'burger'
+        };
+      `,
+      parserOptions,
+      output: `
+        export default {
+          /** name of vue component */
+          name: 'burger',
+          /** data provider */
+          data() {
+          }/*test*/
         };
       `,
       errors: [{
@@ -413,7 +439,7 @@ ruleTester.run('order-in-components', rule, {
       filename: 'example.vue',
       code: `export default {data(){},name:'burger'};`,
       parserOptions,
-      output: `export default {name:'burger',data(){},};`,
+      output: `export default {name:'burger',data(){}};`,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 1.',
         line: 1

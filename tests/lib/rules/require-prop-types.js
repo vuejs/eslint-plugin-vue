@@ -113,6 +113,34 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default (Vue as VueConstructor<Vue>).extend({
+          props: {
+            foo: {
+              type: String
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default Vue.extend({
+          props: {
+            foo: {
+              type: String
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser'
     }
   ],
 
@@ -186,6 +214,38 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Prop "foo" should define at least its type.',
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default Vue.extend({
+          props: {
+            foo: {} as PropOptions<string>
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser',
+      errors: [{
+        message: 'Prop "foo" should define at least its type.',
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default (Vue as VueConstructor<Vue>).extend({
+          props: {
+            foo: {} as PropOptions<string>
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser',
       errors: [{
         message: 'Prop "foo" should define at least its type.',
         line: 4

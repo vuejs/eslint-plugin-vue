@@ -10,7 +10,7 @@ This rule has some options.
 
 ```json
 {
-  "script-indent": ["error", TYPE, {
+  "vue/script-indent": ["error", TYPE, {
     "baseIndent": 0,
     "switchCase": 0,
     "ignores": []
@@ -26,7 +26,7 @@ This rule has some options.
 :+1: Examples of **correct** code for this rule:
 
 ```js
-/*eslint script-indent: "error"*/
+/*eslint vue/script-indent: "error"*/
 <script>
 let a = {
   foo: 1,
@@ -54,7 +54,7 @@ const d = {
 :+1: Examples of **correct** code for this rule:
 
 ```js
-/*eslint script-indent: ["error", 2, {"baseIndent": 1}]*/
+/*eslint vue/script-indent: ["error", 2, {"baseIndent": 1}]*/
 <script>
   let a = {
     foo: 1,
@@ -77,6 +77,24 @@ const d = {
           bar: 2
         }
 </script>
+```
+
+## Important note
+
+This rule only checks `.vue` files and does not interfere with other `.js` files. Unfortunately the default `indent` rule when turned on will try to lint both, so in order to make them complementary you can use `overrides` setting and disable `indent` rule on `.vue` files:
+
+```
+"rules": {
+  "vue/script-indent": ["error", 4, { "baseIndent": 1 }]
+},
+"overrides": [
+  {
+    "files": ["*.vue"],
+    "rules": {
+      "indent": "off"
+    }
+  }
+]
 ```
 
 ## Related rules
