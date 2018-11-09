@@ -77,6 +77,38 @@ tester.run('valid-v-model', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[`${x}`]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[`prefix_${x}`]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[x ? x : \'_\']"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[x || \'_\']"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[x()]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[/r/.match(x) ? 0 : 1]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[typeof x]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="foo[tag`${x}`]"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><input :type="a" v-model="b"></template>'
     },
     {
@@ -118,6 +150,16 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="x"></div></div></template>',
+      errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="(x)"></div></div></template>',
+      errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="x in list"><input v-model="(((x)))"></div></div></template>',
       errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
     }
   ]
