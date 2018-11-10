@@ -181,7 +181,7 @@ ruleTester.run('require-prop-types', rule, {
         message: 'Prop "baz" should define at least its type.',
         line: 3
       }, {
-        message: 'Prop "***" should define at least its type.',
+        message: 'Prop "Unknown prop" should define at least its type.',
         line: 3
       }]
     },
@@ -203,7 +203,7 @@ ruleTester.run('require-prop-types', rule, {
         message: 'Prop "baz" should define at least its type.',
         line: 3
       }, {
-        message: 'Prop "***" should define at least its type.',
+        message: 'Prop "Unknown prop" should define at least its type.',
         line: 3
       }]
     },
