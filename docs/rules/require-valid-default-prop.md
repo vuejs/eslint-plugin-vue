@@ -49,10 +49,16 @@ props: {
   // object/array defaults should be returned from a factory function
   propE: {
     type: Object,
-    default: function () {
+    default() {
       return { message: 'hello' }
     }
-  }
+  },
+  propF: {
+    type: Array,
+    default() {
+      return []
+    }
+  }  
 }
 ```
 

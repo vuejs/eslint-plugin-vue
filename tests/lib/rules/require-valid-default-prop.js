@@ -100,6 +100,21 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default (Vue as VueConstructor<Vue>).extend({
+          props: {
+            foo: {
+              type: [Object, Number],
+              default: 10
+            } as PropOptions<object>
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser'
     }
   ],
 
@@ -414,6 +429,20 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       parserOptions,
+      errors: errorMessage('function or number')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default (Vue as VueConstructor<Vue>).extend({
+        props: {
+          foo: {
+            type: [Object, Number],
+            default: {}
+          } as PropOptions<object>
+        }
+      });`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: 'typescript-eslint-parser',
       errors: errorMessage('function or number')
     }
   ]
