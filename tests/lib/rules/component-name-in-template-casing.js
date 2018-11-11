@@ -27,6 +27,8 @@ tester.run('component-name-in-template-casing', rule, {
     '<template><svg><path/></svg></template>',
     '<template><math><mspace/></math></template>',
     '<template><div><slot></slot></div></template>',
+    '<template><h1>Title</h1></template>',
+    '<template><h1 :is="customTitle">Title</h1></template>',
 
     // kebab-case
     {
@@ -75,6 +77,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <TheComponent id="id">
           <!-- comment -->
+        </TheComponent>
+      </template>
+      `,
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
+      <template>
+        <the-component :is="componentName">
+          content
+        </the-component>
+      </template>
+      `,
+      output: `
+      <template>
+        <TheComponent :is="componentName">
+          content
         </TheComponent>
       </template>
       `,
