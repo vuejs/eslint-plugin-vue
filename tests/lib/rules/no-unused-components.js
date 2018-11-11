@@ -55,6 +55,30 @@ tester.run('no-unused-components', rule, {
     {
       filename: 'test.vue',
       code: `<template>
+        <svg>
+          <TheCircle />
+        </svg>
+      </template>
+      <script>
+        export default {
+          components: {
+            TheCircle
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <circle cx="0" cy="0" :d="radius" />
+      </template>
+      <script>
+        export default {}
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
         <div>
           <component :is="'TheButton'" />
         </div>
