@@ -30,6 +30,8 @@ tester.run('component-name-in-template-casing', rule, {
     '<template><h1>Title</h1></template>',
     '<template><h1 :is="customTitle">Title</h1></template>',
     '<template><svg><TheComponent /></svg></template>',
+    '<template><text /></template>',
+    '<template><circle cx="0" cy="0" :d="radius"></template>',
 
     // kebab-case
     {
