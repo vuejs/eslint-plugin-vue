@@ -102,6 +102,24 @@ age="30"></component></template>`,
       errors: ['Binding "age" should be on a new line.']
     },
     {
+      code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
+      output: `<template><component :name="user.name"
+@buy="buyProduct"></component></template>`,
+      errors: ['Event "buy" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" @click.stop></component></template>`,
+      output: `<template><component :name="user.name"
+@click.stop></component></template>`,
+      errors: ['Event "click" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" v-if="something"></component></template>`,
+      output: `<template><component :name="user.name"
+v-if="something"></component></template>`,
+      errors: ['Directive "v-if" should be on a new line.']
+    },
+    {
       code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
       output: `<template><component name="John Doe"
 v-bind:age="user.age"></component></template>`,
