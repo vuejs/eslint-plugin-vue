@@ -105,6 +105,23 @@ tester.run('component-name-in-template-casing', rule, {
     {
       code: `
       <template>
+        <the-component :is="componentName">
+          content
+        </the-component>
+      </template>
+      `,
+      output: `
+      <template>
+        <TheComponent :is="componentName">
+          content
+        </TheComponent>
+      </template>
+      `,
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
+      <template>
         <the-component id="id"/>
       </template>
       `,
