@@ -117,7 +117,7 @@ age="30"></component></template>`,
       code: `<template><component :name="user.name" v-if="something"></component></template>`,
       output: `<template><component :name="user.name"
 v-if="something"></component></template>`,
-      errors: ['Directive "v-if" should be on a new line.']
+      errors: ['Directive "if" should be on a new line.']
     },
     {
       code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
