@@ -237,6 +237,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | :wrench: | [vue/no-spaces-around-equal-signs-in-attribute](./docs/rules/no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 | :wrench: | [vue/singleline-html-element-content-newline](./docs/rules/singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element |
+|  | [vue/use-v-on-exact](./docs/rules/use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |
 
 ### Deprecated
 
