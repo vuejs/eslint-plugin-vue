@@ -85,3 +85,8 @@ content</VueComponent>
   class="bold">For example,</span>
 Defines the Vue component that accepts preformatted text.</VueComponent>
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multiline-html-element-content-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-html-element-content-newline.js)
