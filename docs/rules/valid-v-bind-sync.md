@@ -6,11 +6,13 @@ This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
 This rule reports `.sync` modifier on `v-bind` directives in the following cases:
 
-- The directive does not have the attribute value which is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`
-- The directive is on non Vue-components. E.g. `<input v-bind:aaa.sync="foo"></div>`
-- The directive's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
+- The `.sync` modifier does not have the attribute value which is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`
+- The `.sync` modifier is on non Vue-components. E.g. `<input v-bind:aaa.sync="foo"></div>`
+- The `.sync` modifier's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+
+:-1: Examples of **incorrect** code for this rule:
 
 ```vue
 <MyComponent v-bind:aaa.sync="foo + bar" />
