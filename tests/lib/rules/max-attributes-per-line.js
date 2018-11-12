@@ -102,6 +102,12 @@ age="30"></component></template>`,
       errors: ['Binding "age" should be on a new line.']
     },
     {
+      code: `<template><component :is="test" v-bind="user"></component></template>`,
+      output: `<template><component :is="test"
+v-bind="user"></component></template>`,
+      errors: ['Directive "bind" should be on a new line.']
+    },
+    {
       code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
       output: `<template><component :name="user.name"
 @buy="buyProduct"></component></template>`,
