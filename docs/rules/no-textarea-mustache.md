@@ -2,9 +2,10 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-> Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
->
-> https://vuejs.org/v2/guide/forms.html#Multiline-text
+::: warning Note
+Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
+[https://vuejs.org/v2/guide/forms.html#Multiline-text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+:::
 
 ## :book: Rule Details
 

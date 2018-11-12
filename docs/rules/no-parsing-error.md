@@ -78,7 +78,9 @@ Then reports syntax errors if exist.
 You can disable HTML syntax errors by options. Please see [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors) to know the details of HTML syntax errors.
 Only `non-void-html-element-start-tag-with-trailing-solidus` is disabled by default because Vue.js supports self-closing tags.
 
-> Note this rule does not support all of those (E.g., it does not catch errors about DOCTYPE).
+::: warning Note
+This rule does not support all of those (E.g., it does not catch errors about DOCTYPE).
+:::
 
 The error codes which have `x-` prefix are original of this rule because errors in tree construction phase have not codified yet.
 
