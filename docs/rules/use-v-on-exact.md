@@ -1,27 +1,36 @@
-# Enforce usage of `exact` modifier on `v-on`
+# Enforce usage of `exact` modifier on `v-on` (vue/use-v-on-exact)
 
-- :gear: This rule is included in `"plugin:vue/essential"`.
+## :book: Rule Details
 
 This rule enforce usage of `exact` modifier on `v-on` when there is another `v-on` with modifier.
 
-:+1: Examples of **correct** code for this rule:
-
+<eslint-code-block :rules="{'vue/use-v-on-exact': ['error']}">
 ```html
 <template>
+  <!-- ✓ GOOD -->
   <button @click="foo" :click="foo"></button>
   <button v-on:click.exact="foo" v-on:click.ctrl="foo"></button>
-</template>
-```
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<template>
+  <!-- ✗ BAD -->
   <button v-on:click="foo" v-on:click.ctrl="foo"></button>
 </template>
+```
+</eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/use-v-on-exact": ["error"]
+}
 ```
 
 ## Related rules
 
 - [vue/v-on-style](./v-on-style.md)
 - [vue/valid-v-on](./valid-v-on.md)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/use-v-on-exact.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/use-v-on-exact.js)
