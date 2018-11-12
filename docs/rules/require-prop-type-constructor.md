@@ -3,6 +3,8 @@
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+## Rule Details
+
 This rule reports prop types that can't be presumed as constructors.
 
 It's impossible to catch every possible case and know whether the prop type is a constructor or not, hence this rule black list few types of nodes, instead of white-listing correct ones.
@@ -15,8 +17,6 @@ The following types are forbidden and will be reported:
 - UpdateExpression
 
 It will catch most commonly made mistakes which are using strings instead of constructors.
-
-## Rule Details
 
 <eslint-code-block :rules="{'vue/require-prop-type-constructor': ['error']}">
 ```vue
