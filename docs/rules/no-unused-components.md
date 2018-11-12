@@ -146,3 +146,8 @@ Note that components registered under other than `PascalCase` name have to be ca
   }
 </script>
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-components.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-components.js)

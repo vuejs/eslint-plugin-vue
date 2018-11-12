@@ -1,4 +1,4 @@
-# Enforce usage of `exact` modifier on `v-on` (vue/use-v-on-exact)
+# enforce usage of `exact` modifier on `v-on` (vue/use-v-on-exact)
 
 ## :book: Rule Details
 
