@@ -48,7 +48,7 @@ This rule is aimed at preventing the use of `v-for` directives together with `v-
 
 ## :wrench: Options
 
-```js
+```json
 {
   "vue/no-use-v-if-with-v-for": ["error", {
     allowUsingIterationVar: false
