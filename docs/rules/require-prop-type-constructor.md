@@ -18,11 +18,25 @@ It will catch most commonly made mistakes which are using strings instead of con
 
 ## Rule Details
 
-Examples of **incorrect** code for this rule:
-
-```js
+<eslint-code-block :rules="{'vue/require-prop-type-constructor': ['error']}">
+```vue
+<script>
 export default {
   props: {
+    /* ✓ GOOD */
+    myProp: Number,
+    anotherProp: [Number, String],
+    myFieldWithBadType: {
+      type: Object,
+      default: function() {
+        return {}
+      },
+    },
+    myOtherFieldWithBadType: {
+      type: Number,
+      default: 1,
+    },
+    /* ✗ BAD */
     myProp: "Number",
     anotherProp: ["Number", "String"],
     myFieldWithBadType: {
@@ -37,25 +51,15 @@ export default {
     },
   }
 }
+</script>
 ```
+</eslint-code-block>
 
-Examples of **correct** code for this rule:
+## :wrench: Options
 
-```js
-export default {
-  props: {
-    myProp: Number,
-    anotherProp: [Number, String],
-    myFieldWithBadType: {
-      type: Object,
-      default: function() {
-        return {}
-      },
-    },
-    myOtherFieldWithBadType: {
-      type: Number,
-      default: 1,
-    },
-  }
-}
-```
+Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-prop-type-constructor.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-prop-type-constructor.js)
