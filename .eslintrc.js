@@ -19,7 +19,7 @@ module.exports = {
     'eslint-plugin'
   ],
   rules: {
-    'eslint-plugin/report-message-format': ['error', '^[A-Z`\'].*\\.$'],
+    'eslint-plugin/report-message-format': ['error', '^[A-Z`\'{].*\\.$'],
     'eslint-plugin/prefer-placeholders': 'error',
     'eslint-plugin/consistent-output': 'error'
   },

@@ -91,9 +91,45 @@ ruleTester.run('max-attributes-per-line', rule, {
   invalid: [
     {
       code: `<template><component name="John Doe" age="30"></component></template>`,
-      output: `<template><component name="John Doe" 
+      output: `<template><component name="John Doe"
 age="30"></component></template>`,
       errors: ['Attribute "age" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" :age="user.age"></component></template>`,
+      output: `<template><component :name="user.name"
+:age="user.age"></component></template>`,
+      errors: ['Binding "age" should be on a new line.']
+    },
+    {
+      code: `<template><component :is="test" v-bind="user"></component></template>`,
+      output: `<template><component :is="test"
+v-bind="user"></component></template>`,
+      errors: ['Directive "bind" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
+      output: `<template><component :name="user.name"
+@buy="buyProduct"></component></template>`,
+      errors: ['Event "buy" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" @click.stop></component></template>`,
+      output: `<template><component :name="user.name"
+@click.stop></component></template>`,
+      errors: ['Event "click" should be on a new line.']
+    },
+    {
+      code: `<template><component :name="user.name" v-if="something"></component></template>`,
+      output: `<template><component :name="user.name"
+v-if="something"></component></template>`,
+      errors: ['Directive "if" should be on a new line.']
+    },
+    {
+      code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
+      output: `<template><component name="John Doe"
+v-bind:age="user.age"></component></template>`,
+      errors: ['Binding "age" should be on a new line.']
     },
     {
       code: `<template><component job="Vet"
@@ -101,7 +137,7 @@ age="30"></component></template>`,
         age="30">
         </component>
       </template>`,
-      output: `<template><component 
+      output: `<template><component
 job="Vet"
         name="John Doe"
         age="30">
@@ -116,7 +152,7 @@ job="Vet"
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: { max: 2 }}],
-      output: `<template><component name="John Doe" age="30" 
+      output: `<template><component name="John Doe" age="30"
 job="Vet"></component></template>`,
       errors: [{
         message: 'Attribute "job" should be on a new line.',
@@ -127,7 +163,7 @@ job="Vet"></component></template>`,
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
       options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
-      output: `<template><component name="John Doe" 
+      output: `<template><component name="John Doe"
 age="30" job="Vet"></component></template>`,
       errors: [{
         message: 'Attribute "age" should be on a new line.',
@@ -145,7 +181,7 @@ age="30" job="Vet"></component></template>`,
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
-      output: `<template><component 
+      output: `<template><component
 name="John Doe"
         age="30">
         </component>
@@ -164,7 +200,7 @@ name="John Doe"
       </template>`,
       options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
       output: `<template><component
-        name="John Doe" 
+        name="John Doe"
 age="30"
         job="Vet">
         </component>
@@ -183,7 +219,7 @@ age="30"
       </template>`,
       options: [{ singleline: 3, multiline: 1 }],
       output: `<template><component
-        name="John Doe" 
+        name="John Doe"
 age="30"
         job="Vet">
         </component>
@@ -203,7 +239,7 @@ age="30"
       options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
       output: `<template><component
         name="John Doe" age="30"
-        job="Vet" pet="dog" 
+        job="Vet" pet="dog"
 petname="Snoopy">
         </component>
       </template>`,
@@ -222,7 +258,7 @@ petname="Snoopy">
       options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
       output: `<template><component
         name="John Doe" age="30"
-        job="Vet" pet="dog" 
+        job="Vet" pet="dog"
 petname="Snoopy" extra="foo">
         </component>
       </template>`,
