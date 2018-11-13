@@ -161,6 +161,11 @@ tester.run('valid-v-model', rule, {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="(((x)))"></div></div></template>',
       errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="e in list"><input v-model="e"></div></div></template>',
+      errors: ["'v-model' directives cannot update the iteration variable 'e' itself."]
     }
   ]
 })
