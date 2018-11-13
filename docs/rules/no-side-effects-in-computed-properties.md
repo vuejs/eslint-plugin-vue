@@ -2,11 +2,11 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-It is considered a very bad practice to introduce side effects inside computed properties. It makes the code not predictable and hard to understand.
-
 ## :book: Rule Details
 
 This rule is aimed at preventing the code which makes side effects in computed properties.
+
+It is considered a very bad practice to introduce side effects inside computed properties. It makes the code not predictable and hard to understand.
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 ```

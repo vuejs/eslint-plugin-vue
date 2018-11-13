@@ -59,7 +59,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 - `multiline.max` (`number`) ... The max number of attributes per line when the opening tag is in multiple lines. Default is `1`. This can be `{ multiline: 1 }` instead of `{ multiline: { max: 1 }}` if you don't configure `allowFirstLine` property.
 - `multiline.allowFirstLine` (`boolean`) ... If `true`, it allows attributes on the same line as that tag name. Default is `false`.
 
-### `{ "singleline": 3 }`
+### `"singleline": 3`
 
 <eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {singleline: 3}]}">
 ```
@@ -73,7 +73,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```
 </eslint-code-block>
 
-### `{ multiline: 2 }`
+### `multiline: 2`
 
 <eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {multiline: 2}]}">
 ```
@@ -93,7 +93,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```
 </eslint-code-block>
 
-### `{ multiline: 1, allowFirstLine: true }`
+### `multiline: 1, allowFirstLine: true`
 
 <eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {multiline: { allowFirstLine: true }}]}">
 ```

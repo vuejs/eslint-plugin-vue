@@ -53,7 +53,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
     - `"always"` ... requires one or more spaces.
     - `"never"` ... disallows spaces.
 
-### `{ "startTag": "always", "endTag": "always", "selfClosingTag": "always" }`
+### `"startTag": "always", "endTag": "always", "selfClosingTag": "always"`
 
 <eslint-code-block :rules="{'vue/html-closing-bracket-spacing': ['error', {startTag: 'always', endTag: 'always', selfClosingTag: 'always' }]}">
 ```

@@ -63,7 +63,7 @@ This rule aims to warn the right angle brackets which are at the location other 
 
 Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-level of the closing brackets.
 
-### `{ "multiline": "never" }`
+### `"multiline": "never"`
 
 <eslint-code-block :rules="{'vue/html-closing-bracket-newline': ['error', { 'multiline': 'never' }]}">
 ```

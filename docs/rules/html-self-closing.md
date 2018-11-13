@@ -61,7 +61,7 @@ Every option can be set to one of the following values:
 - `"never"` ... Disallow self-closing.
 - `"any"` ... Don't enforce self-closing style.
 
-### `{html: {normal: "never", void: "always"}}`
+### `html: {normal: "never", void: "always"}`
 
 <eslint-code-block :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
 ```

@@ -32,7 +32,7 @@ export default {
 
 ## :wrench: Options
 
-``` json
+```json
 {
   "vue/no-reserved-keys": ["error", {
     "reserved": [],
@@ -44,7 +44,7 @@ export default {
 - `reserved` (`string[]`) ... Array of additional restricted attributes inside `groups`. Default is empty.
 - `groups` (`string[]`) ... Array of additional group names to search for duplicates in. Default is empty.
 
-### `{ "reserved": ["foo", "foo2"], "groups": ["firebase"] }`
+### `"reserved": ["foo", "foo2"], "groups": ["firebase"]`
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error', {reserved: ['foo', 'foo2'], groups: ['firebase']}]}">
 ```

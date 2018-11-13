@@ -45,7 +45,7 @@ This rule reports duplicate attributes.
 [`v-bind:class`]: https://vuejs.org/v2/guide/class-and-style.html
 [`v-bind:style`]: https://vuejs.org/v2/guide/class-and-style.html
 
-### `{ "allowCoexistClass": false, "allowCoexistStyle": false }`
+### `"allowCoexistClass": false, "allowCoexistStyle": false`
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error', {allowCoexistClass: false, allowCoexistStyle: false}]}">
 ```

@@ -34,15 +34,17 @@ export default {
 
 ## :wrench: Options
 
-``` json
+```json
 {
-  "vue/no-dupe-keys": ["error", { "groups": [] }]
+  "vue/no-dupe-keys": ["error", {
+    "groups": []
+  }]
 }
 ```
 
 - `"groups"` (`string[]`) Array of additional groups to search for duplicates. Defailt is empty.
 
-### `{ "groups": ["firebase"] }`
+### `"groups": ["firebase"]`
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error', {groups: ['firebase']}]}">
 ```
