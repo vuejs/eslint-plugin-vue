@@ -47,6 +47,14 @@ tester.run('valid-v-bind-sync', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="this.foo().bar" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><svg><MyComponent :foo.sync="this.foo().bar" /></svg></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="x.foo" /></div></div></template>'
     },
     {
@@ -153,6 +161,34 @@ tester.run('valid-v-bind-sync', rule, {
         line: 3,
         column: 18,
         endColumn: 33
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent :foo.sync="foo()" />
+        </template>
+      `,
+      errors: [{
+        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
+        line: 3,
+        column: 24,
+        endColumn: 41
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent :foo.sync="this.foo()" />
+        </template>
+      `,
+      errors: [{
+        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
+        line: 3,
+        column: 24,
+        endColumn: 46
       }]
     },
     {
