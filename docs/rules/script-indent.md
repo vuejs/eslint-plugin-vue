@@ -2,7 +2,7 @@
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-## Rule Details
+## :book: Rule Details
 
 This rule is similar to core [indent](https://eslint.org/docs/rules/indent) rule, but it has an option for inside of `<script>` tag.
 
@@ -100,7 +100,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 ```
 </eslint-code-block>
 
-## Related rules
+## :couple: Related rules
 
 - [indent](https://eslint.org/docs/rules/indent)
 - [vue/html-indent](./html-indent.md)

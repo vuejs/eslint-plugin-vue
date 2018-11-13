@@ -2,7 +2,7 @@
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-## Rule Details
+## :book: Rule Details
 
 This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
 

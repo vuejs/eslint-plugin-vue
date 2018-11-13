@@ -70,7 +70,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 ```
 </eslint-code-block>
 
-## :bookmark: Related rules
+## :couple: Related rules
 
 - [vue/no-multi-spaces](./no-multi-spaces.md)
 - [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md)

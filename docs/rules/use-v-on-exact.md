@@ -25,7 +25,7 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
 }
 ```
 
-## Related rules
+## :couple: Related rules
 
 - [vue/v-on-style](./v-on-style.md)
 - [vue/valid-v-on](./valid-v-on.md)

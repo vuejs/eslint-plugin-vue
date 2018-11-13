@@ -7,7 +7,7 @@ This rule will find variables used in JSX and mark them as used.
 
 This rule only has an effect when the `no-unused-vars` rule is enabled.
 
-## Rule Details
+## :book: Rule Details
 
 Without this rule this code triggers warning:
 
@@ -25,7 +25,7 @@ export default {
 
 After turning on, `Hello` is being marked as used and `no-unused-vars` rule doesn't report an issue.
 
-## When Not To Use It
+## :mute: When Not To Use It
 
 If you are not using JSX or if you do not use the `no-unused-vars` rule then you can disable this rule.
 
