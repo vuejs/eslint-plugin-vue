@@ -32,6 +32,13 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 ```
 
 ## :wrench: Options
+Default is set to `shorthand`.
+
+```json
+{
+  "vue/v-on-style": [2, "shorthand" | "longform"]
+}
+```
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.

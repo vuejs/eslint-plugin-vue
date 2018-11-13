@@ -32,6 +32,13 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 ```
 
 ## :wrench: Options
+Default is set to `shorthand`.
+
+```json
+{
+  "vue/v-bind-style": [2, "shorthand" | "longform"]
+}
+```
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.

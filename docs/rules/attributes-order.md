@@ -80,7 +80,28 @@ This rule aims to enforce ordering of component attributes. The default order is
 ```
 </eslint-code-block>
 
-### custom orders
+## :wrench: Options
+```json
+{
+  "vue/attributes-order": [2, {
+    "order": [
+      "DEFINITION",
+      "LIST_RENDERING",
+      "CONDITIONALS", 
+      "RENDER_MODIFIERS",
+      "GLOBAL", 
+      "UNIQUE", 
+      "TWO_WAY_BINDING", 
+      "OTHER_DIRECTIVES", 
+      "OTHER_ATTR", 
+      "EVENTS", 
+      "CONTENT"
+    ]
+  }]
+}
+```
+
+### Custom orders
 
 #### `['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
 

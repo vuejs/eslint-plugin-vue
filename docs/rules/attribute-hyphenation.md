@@ -7,11 +7,16 @@
 
 Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to be ignored
 
-```
-'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['custom-prop'] }]
+```json
+{
+  "vue/attribute-hyphenation": [2, "always" | "never", {
+    "ignore": ["custom-prop"]
+  }}]
+}
 ```
 
-### `["error", "always"]` - Use hyphenated name. (It errors on upper case letters.)
+### `["error", "always"]` - Use hyphenated name. 
+It errors on upper case letters.
 
 <eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 ```
@@ -25,7 +30,8 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 ```
 </eslint-code-block>
 
-### `["error", "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope`.)
+### `["error", "never"]` - Don't use hyphenated name. 
+It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 <eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
 ```

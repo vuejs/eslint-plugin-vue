@@ -30,6 +30,14 @@ This rule reports the quotes of attributes if it is different to configured quot
 
 ## :wrench: Options
 
+Default is set to `double`.
+
+```json
+{
+  "vue/html-quotes": [2, "double" | "single"]
+}
+```
+
 - `"double"` (default) ... requires double quotes.
 - `"single"` ... requires single quotes.
 
