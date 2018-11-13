@@ -8,7 +8,7 @@
 This rule makes sure you keep declared order of properties in components.
 Recommended order of properties can be [found here](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended).
 
-<eslint-code-block :rules="{'vue/order-in-components': ['error']}">
+<eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">
 ```
 <script>
 /* ✓ GOOD */
@@ -27,7 +27,7 @@ export default {
 ```
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/order-in-components': ['error']}">
+<eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">
 ```
 <script>
 /* ✗ BAD */

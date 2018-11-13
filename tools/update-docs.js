@@ -86,6 +86,16 @@ class DocFile {
     return this
   }
 
+  updateCodeBlocks () {
+    const { meta } = this.rule
+
+    this.content = this.content.replace(
+      /<eslint-code-block\s(:?fix[^\s]*)?\s*/g,
+      `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
+    )
+    return this
+  }
+
   updateFooter () {
     const { name } = this.rule
     const footerPattern = /## :mag: Implementation.+$/s
@@ -109,5 +119,6 @@ for (const rule of rules) {
     .read(rule)
     .updateHeader()
     .updateFooter()
+    .updateCodeBlocks()
     .write()
 }

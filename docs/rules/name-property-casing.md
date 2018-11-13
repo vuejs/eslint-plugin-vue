@@ -20,7 +20,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ### `"PascalCase"`
 
-<eslint-code-block :rules="{'vue/name-property-casing': ['error']}">
+<eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 ```
 <script>
   /* ✓ GOOD */
@@ -31,7 +31,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 ```
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/name-property-casing': ['error']}">
+<eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 ```
 <script>
   /* ✗ BAD */
@@ -44,7 +44,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ### `"kebab-case"`
 
-<eslint-code-block :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+<eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
 ```
 <script>
   /* ✓ GOOD */
@@ -55,7 +55,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 ```
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+<eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
 ```
 <script>
   /* ✗ BAD */

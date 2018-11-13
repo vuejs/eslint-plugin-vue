@@ -18,7 +18,7 @@ The following types are forbidden and will be reported:
 
 It will catch most commonly made mistakes which are using strings instead of constructors.
 
-<eslint-code-block :rules="{'vue/require-prop-type-constructor': ['error']}">
+<eslint-code-block fix :rules="{'vue/require-prop-type-constructor': ['error']}">
 ```vue
 <script>
 export default {

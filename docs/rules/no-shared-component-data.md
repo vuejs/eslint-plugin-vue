@@ -9,7 +9,7 @@ When using the data property on a component (i.e. anywhere except on `new Vue`),
 
 When the value of `data` is an object, it’s shared across all instances of a component.
 
-<eslint-code-block :rules="{'vue/no-shared-component-data': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-shared-component-data': ['error']}">
 ```
 <script>
 /* ✓ GOOD */
@@ -32,7 +32,7 @@ export default {
 ```
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-shared-component-data': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-shared-component-data': ['error']}">
 ```
 <script>
 /* ✗ BAD */

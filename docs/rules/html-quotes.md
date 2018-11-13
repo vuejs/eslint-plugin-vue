@@ -15,7 +15,7 @@ This rule enforces the quotes style of HTML attributes.
 
 This rule reports the quotes of attributes if it is different to configured quotes.
 
-<eslint-code-block :rules="{'vue/html-quotes': ['error']}">
+<eslint-code-block fix :rules="{'vue/html-quotes': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -43,7 +43,7 @@ Default is set to `double`.
 
 ### `"single"`
 
-<eslint-code-block :rules="{'vue/html-quotes': ['error', 'single']}">
+<eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'single']}">
 ```
 <template>
   <!-- ✓ GOOD -->

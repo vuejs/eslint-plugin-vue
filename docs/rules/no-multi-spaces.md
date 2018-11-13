@@ -7,7 +7,7 @@
 
 This rule aims at removing multiple spaces in tags, which are not used for indentation.
 
-<eslint-code-block :rules="{'vue/no-multi-spaces': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -36,7 +36,7 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 ### `"ignoreProperties": true`
 
-<eslint-code-block :rules="{'vue/no-multi-spaces': ['error', { 'ignoreProperties': true }]}">
+<eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error', { 'ignoreProperties': true }]}">
 ```vue
 <template>
   <!-- ✓ GOOD -->

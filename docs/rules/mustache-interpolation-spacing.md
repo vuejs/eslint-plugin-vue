@@ -20,7 +20,7 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 
 ### `"always"`
 
-<eslint-code-block :rules="{'vue/mustache-interpolation-spacing': ['error']}">
+<eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -35,7 +35,7 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 
 ### `"never"`
 
-<eslint-code-block :rules="{'vue/mustache-interpolation-spacing': ['error', 'never']}">
+<eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error', 'never']}">
 ```
 <template>
   <!-- ✓ GOOD -->

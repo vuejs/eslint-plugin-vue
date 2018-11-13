@@ -23,7 +23,7 @@ This rule enforces a line break (or no line break) before tag's closing brackets
 
 This rule aims to warn the right angle brackets which are at the location other than the configured location.
 
-<eslint-code-block :rules="{'vue/html-closing-bracket-newline': ['error']}">
+<eslint-code-block fix :rules="{'vue/html-closing-bracket-newline': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -65,7 +65,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 
 ### `"multiline": "never"`
 
-<eslint-code-block :rules="{'vue/html-closing-bracket-newline': ['error', { 'multiline': 'never' }]}">
+<eslint-code-block fix :rules="{'vue/html-closing-bracket-newline': ['error', { 'multiline': 'never' }]}">
 ```
 <template>
   <!-- ✓ GOOD -->

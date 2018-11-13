@@ -9,7 +9,7 @@ This rule would enforce proper casing of props in vue components(camelCase).
 
 (https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended).
 
-<eslint-code-block :rules="{'vue/prop-name-casing': ['error']}">
+<eslint-code-block fix :rules="{'vue/prop-name-casing': ['error']}">
 ```
 <script>
 export default {
@@ -39,7 +39,7 @@ export default {
 
 ### `"snake_case"`
 
-<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
+<eslint-code-block fix :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
 ```
 <script>
 export default {

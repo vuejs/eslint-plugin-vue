@@ -6,7 +6,7 @@
 
 This rule is similar to core [indent](https://eslint.org/docs/rules/indent) rule, but it has an option for inside of `<script>` tag.
 
-<eslint-code-block :rules="{'vue/script-indent': ['error']}">
+<eslint-code-block fix :rules="{'vue/script-indent': ['error']}">
 ```vue
 <script>
 let a = {
@@ -73,7 +73,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 ```
 
 ### `2, "baseIndent": 1`
-<eslint-code-block :rules="{'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]}">
+<eslint-code-block fix :rules="{'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]}">
 ```vue
 <script>
   let a = {

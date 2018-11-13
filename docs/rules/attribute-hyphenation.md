@@ -18,7 +18,7 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 ### `["error", "always"]` - Use hyphenated name. 
 It errors on upper case letters.
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 ```
 <template>
   <!-- ✔ GOOD -->
@@ -33,7 +33,7 @@ It errors on upper case letters.
 ### `["error", "never"]` - Don't use hyphenated name. 
 It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
 ```
 <template>
   <!-- ✔ GOOD -->
@@ -50,7 +50,7 @@ It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 ### `["error", "never", { "ignore": ["custom-prop"] }]` - Don't use hyphenated name but allow custom attributes
 
-<eslint-code-block :rules="{'vue/attribute-hyphenation': ['error', 'never', {'ignore': ['custom-prop']}]}">
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', {'ignore': ['custom-prop']}]}">
 ```
 <template>
   <!-- ✔ GOOD -->

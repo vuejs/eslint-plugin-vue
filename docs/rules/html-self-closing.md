@@ -15,7 +15,7 @@ This rule helps you to make consistent on the self-closing style.
 
 This rule aims to enforce the self-closing sign as the configured style.
 
-<eslint-code-block :rules="{'vue/html-self-closing': ['error']}">
+<eslint-code-block fix :rules="{'vue/html-self-closing': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -63,7 +63,7 @@ Every option can be set to one of the following values:
 
 ### `html: {normal: "never", void: "always"}`
 
-<eslint-code-block :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
+<eslint-code-block fix :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
 ```
 <template>
   <!-- ✓ GOOD -->

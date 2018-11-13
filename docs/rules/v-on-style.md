@@ -7,7 +7,7 @@
 
 This rule enforces `v-on` directive style which you should use shorthand or long form.
 
-<eslint-code-block :rules="{'vue/v-on-style': ['error']}">
+<eslint-code-block fix :rules="{'vue/v-on-style': ['error']}">
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -33,7 +33,7 @@ Default is set to `shorthand`.
 
 ### `"longform"`
 
-<eslint-code-block :rules="{'vue/v-on-style': ['error', 'longform']}">
+<eslint-code-block fix :rules="{'vue/v-on-style': ['error', 'longform']}">
 ```vue
 <template>
   <!-- ✓ GOOD -->

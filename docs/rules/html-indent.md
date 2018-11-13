@@ -10,7 +10,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - This rule checks all tags, also all expressions in directives and mustaches.
 - In the expressions, this rule supports ECMAScript 2017 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
 
-<eslint-code-block :rules="{'vue/html-indent': ['error']}">
+<eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -71,7 +71,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ### `2, {"attribute": 1, "closeBracket": 1}`
 
-<eslint-code-block :rules="{'vue/html-indent': ['error', 2, {attribute: 1, closeBracket: 1}]}">
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 1, closeBracket: 1}]}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -91,7 +91,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ### `2, {"attribute": 2, "closeBracket": 1}`
 
-<eslint-code-block :rules="{'vue/html-indent': ['error', 2, {attribute: 2, closeBracket: 1}]}">
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 2, closeBracket: 1}]}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -111,7 +111,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ### `2, {"ignores": ["VAttribute"]}`
 
-<eslint-code-block :rules="{'vue/html-indent': ['error', 2, {ignores: ['VAttribute']}]}">
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {ignores: ['VAttribute']}]}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -125,7 +125,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 ### `2, {"alignAttributesVertically": false}`
 
-<eslint-code-block :rules="{'vue/html-indent': ['error', 2, {alignAttributesVertically: false}]}">
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {alignAttributesVertically: false}]}">
 ```
 <template>
   <!-- ✓ GOOD -->

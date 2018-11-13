@@ -6,7 +6,7 @@
 
 This rule enforces a line break before and after the contents of a multiline element.
 
-<eslint-code-block :rules="{'vue/multiline-html-element-content-newline': ['error']}">
+<eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error']}">
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -77,7 +77,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
 
-<eslint-code-block :rules="{'vue/multiline-html-element-content-newline': ['error', { ignores: ['VueComponent', 'pre', 'textarea'] }]}">
+<eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { ignores: ['VueComponent', 'pre', 'textarea'] }]}">
 ```vue
 <template>
   <!-- ✓ GOOD -->

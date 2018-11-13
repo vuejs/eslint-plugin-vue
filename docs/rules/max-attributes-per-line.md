@@ -13,7 +13,7 @@ An attribute is considered to be in a new line when there is a line break betwee
 
 There is a configurable number of attributes that are acceptable in one-line case (default 1), as well as how many attributes are acceptable per line in multi-line case (default 1).
 
-<eslint-code-block :rules="{'vue/max-attributes-per-line': ['error']}">
+<eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -61,7 +61,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ### `"singleline": 3`
 
-<eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {singleline: 3}]}">
+<eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {singleline: 3}]}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -75,7 +75,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ### `multiline: 2`
 
-<eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {multiline: 2}]}">
+<eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {multiline: 2}]}">
 ```
 <template>
   <!-- ✓ GOOD -->
@@ -95,7 +95,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ### `multiline: 1, allowFirstLine: true`
 
-<eslint-code-block :rules="{'vue/max-attributes-per-line': ['error', {multiline: { allowFirstLine: true }}]}">
+<eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {multiline: { allowFirstLine: true }}]}">
 ```
 <template>
   <!-- ✓ GOOD -->

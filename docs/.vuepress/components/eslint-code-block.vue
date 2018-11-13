@@ -10,7 +10,7 @@
         :preprocess="preprocess"
         :postprocess="postprocess"
         dark
-        fix
+        :fix="fix"
     />
 </template>
 
@@ -24,6 +24,10 @@ export default {
   components: { EslintEditor },
 
   props: {
+    fix: {
+      type: Boolean,
+      default: false
+    },
     rules: {
       type: Object,
       default () {

@@ -7,7 +7,7 @@
 
 This rule aims to disallow lacking end tags.
 
-<eslint-code-block :rules="{'vue/html-end-tags': ['error']}">
+<eslint-code-block fix :rules="{'vue/html-end-tags': ['error']}">
 ```
 <template>
   <!-- ✓ GOOD -->
