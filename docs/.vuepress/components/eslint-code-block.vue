@@ -7,6 +7,8 @@
         class="eslint-code-block"
         filename="example.vue"
         language="html"
+        :preprocess="preprocess"
+        :postprocess="postprocess"
         dark
         fix
     />
@@ -15,7 +17,7 @@
 <script>
 // https://github.com/vuejs/vuepress/issues/451
 import EslintEditor from '../../../node_modules/vue-eslint-editor'
-import { rules } from '../../../'
+import { rules, processors } from '../../../'
 
 export default {
   name: 'ESLintCodeBlock',
@@ -32,7 +34,9 @@ export default {
 
   data () {
     return {
-      linter: null
+      linter: null,
+      preprocess: processors['.vue'].preprocess,
+      postprocess: processors['.vue'].postprocess
     }
   },
 
