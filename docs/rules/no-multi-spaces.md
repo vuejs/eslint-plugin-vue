@@ -14,10 +14,22 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
   <div
     class="foo"
     :style="bar" />
+  <i
+    :class="{
+      'fa-angle-up' : isExpanded,
+      'fa-angle-down' : !isExpanded,
+    }"
+  />
 
   <!-- ✗ BAD -->
   <div     class="foo"
     :style =  "bar"         />
+  <i
+    :class="{
+      'fa-angle-up'   : isExpanded,
+      'fa-angle-down' : !isExpanded,
+    }"
+  />
 </template>
 ```
 </eslint-code-block>
