@@ -24,28 +24,31 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 ## :wrench: Options
 
-This rule has an object option:
-
-`"ignoreProperties": false` (default) whether or not objects' properties should be ignored
-
-### Example:
-
 ```json
-"vue/no-multi-spaces": [2, {
-  "ignoreProperties": true
-}]
+{
+  "vue/no-multi-spaces": [2, {
+    "ignoreProperties": false
+  }]
+}
 ```
 
-:+1: Examples of **correct** code for this rule:
+- `ignoreProperties` ... whether or not objects' properties should be ignored. default `false`
 
-```html
-<i
-  :class="{
-    'fa-angle-up'   : isExpanded,
-    'fa-angle-down' : !isExpanded,
-  }"
-/>
+### `"ignoreProperties": true`
+
+<eslint-code-block :rules="{'vue/no-multi-spaces': ['error', { 'ignoreProperties': true }]}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <i
+    :class="{
+      'fa-angle-up'   : isExpanded,
+      'fa-angle-down' : !isExpanded,
+    }"
+  />
+</template>
 ```
+</eslint-code-block>
 
 ## :mag: Implementation
 
