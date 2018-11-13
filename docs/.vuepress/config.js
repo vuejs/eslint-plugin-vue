@@ -4,8 +4,27 @@
  */
 'use strict'
 
-const uncategorizedRules = require('../../tools/lib/rules').filter(rule => !rule.meta.docs.category)
+const rules = require('../../tools/lib/rules')
+
+const uncategorizedRules = rules.filter(rule => !rule.meta.docs.category && !rule.meta.deprecated)
+const deprecatedRules = rules.filter(rule => rule.meta.deprecated)
 const categories = require('../../tools/lib/categories')
+
+const extraRules = []
+if (uncategorizedRules.length > 0) {
+  extraRules.push({
+    title: 'Uncategorized',
+    collapsable: false,
+    children: uncategorizedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+  })
+}
+if (deprecatedRules.length > 0) {
+  extraRules.push({
+    title: 'Deprecated',
+    collapsable: false,
+    children: deprecatedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+  })
+}
 
 module.exports = {
   base: '/eslint-plugin-vue/',
@@ -43,11 +62,7 @@ module.exports = {
         })),
 
         // Rules in no category.
-        {
-          title: 'Uncategorized',
-          collapsable: false,
-          children: uncategorizedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
-        }
+        ...extraRules
       ],
 
       '/': ['/', '/user-guide/', '/developer-guide/', '/rules/']
