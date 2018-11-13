@@ -247,3 +247,104 @@ describe('getRegisteredComponents', () => {
     )
   })
 })
+
+describe('getComponentProps', () => {
+  let props
+
+  const parse = function (code) {
+    const data = babelEslint.parse(code).body[0].declarations[0].init
+    return utils.getComponentProps(data)
+  }
+
+  it('should return empty array when there is no component props', () => {
+    props = parse(`const test = {
+      name: 'test',
+      data() {
+        return {}
+      }
+    }`)
+
+    assert.equal(props.length, 0)
+  })
+
+  it('should return empty array when component props is empty array', () => {
+    props = parse(`const test = {
+      name: 'test',
+      props: []
+    }`)
+
+    assert.equal(props.length, 0)
+  })
+
+  it('should return empty array when component props is empty object', () => {
+    props = parse(`const test = {
+      name: 'test',
+      props: {}
+    }`)
+
+    assert.equal(props.length, 0)
+  })
+
+  it('should return computed props', () => {
+    props = parse(`const test = {
+      name: 'test',
+      ...test,
+      data() {
+        return {}
+      },
+      props: {
+        ...foo,
+        a: String,
+        b: {},
+        c: [String],
+        d
+      }
+    }`)
+
+    assert.equal(props.length, 4, 'it detects all props')
+
+    assert.ok(props[0].key.type === 'Identifier')
+    assert.ok(props[0].node.type === 'Property')
+    assert.ok(props[0].value.type === 'Identifier')
+
+    assert.ok(props[1].key.type === 'Identifier')
+    assert.ok(props[1].node.type === 'Property')
+    assert.ok(props[1].value.type === 'ObjectExpression')
+
+    assert.ok(props[2].key.type === 'Identifier')
+    assert.ok(props[2].node.type === 'Property')
+    assert.ok(props[2].value.type === 'ArrayExpression')
+
+    assert.deepEqual(props[3].key, props[3].value)
+    assert.ok(props[3].node.type === 'Property')
+    assert.ok(props[3].value.type === 'Identifier')
+  })
+
+  it('should return computed from array props', () => {
+    props = parse(`const test = {
+      name: 'test',
+      data() {
+        return {}
+      },
+      props: ['a', b, \`c\`, null]
+    }`)
+
+    assert.equal(props.length, 4, 'it detects all props')
+
+    assert.ok(props[0].node.type === 'Literal')
+    assert.deepEqual(props[0].key, props[0].node)
+    assert.notOk(props[0].value)
+
+    assert.ok(props[1].node.type === 'Identifier')
+    assert.notOk(props[1].key)
+    assert.notOk(props[1].value)
+
+    assert.ok(props[2].node.type === 'TemplateLiteral')
+    assert.notOk(props[2].key)
+    assert.notOk(props[2].value)
+
+    assert.ok(props[3].node.type === 'Literal')
+    assert.notOk(props[3].key)
+    assert.notOk(props[3].value)
+  })
+})

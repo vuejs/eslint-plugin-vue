@@ -15,9 +15,9 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 7,
+    ecmaVersion: 2018,
     sourceType: 'module'
   }
 })
@@ -29,6 +29,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
       code: `
         export default {
           props: {
+            ...props,
             myProp: Number,
             anotherType: [Number, String],
             extraProp: {

@@ -2,7 +2,8 @@
 
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
-[![CircleCI](https://circleci.com/gh/vuejs/eslint-plugin-vue.svg?style=svg)](https://circleci.com/gh/vuejs/eslint-plugin-vue)
+[![CircleCI](https://img.shields.io/circleci/project/github/vuejs/eslint-plugin-vue/master.svg?style=flat)](https://circleci.com/gh/vuejs/eslint-plugin-vue)
+[![License](https://img.shields.io/github/license/vuejs/eslint-plugin-vue.svg?style=flat)](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE.md)
 
 > Official ESLint plugin for Vue.js
 

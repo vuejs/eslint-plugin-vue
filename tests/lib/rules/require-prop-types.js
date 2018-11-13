@@ -117,6 +117,24 @@ ruleTester.run('require-prop-types', rule, {
     {
       filename: 'test.vue',
       code: `
+        export default {
+          props: []
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {}
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
         export default (Vue as VueConstructor<Vue>).extend({
           props: {
             foo: {
@@ -149,12 +167,21 @@ ruleTester.run('require-prop-types', rule, {
       filename: 'test.vue',
       code: `
         export default {
-          props: ['foo']
+          props: ['foo', bar, \`baz\`, foo()]
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Props should at least define their types.',
+        message: 'Prop "foo" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "bar" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "baz" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "Unknown prop" should define at least its type.',
         line: 3
       }]
     },
@@ -162,12 +189,21 @@ ruleTester.run('require-prop-types', rule, {
       filename: 'test.js',
       code: `
         new Vue({
-          props: ['foo']
+          props: ['foo', bar, \`baz\`, foo()]
         })
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [{
-        message: 'Props should at least define their types.',
+        message: 'Prop "foo" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "bar" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "baz" should define at least its type.',
+        line: 3
+      }, {
+        message: 'Prop "Unknown prop" should define at least its type.',
         line: 3
       }]
     },
