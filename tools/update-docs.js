@@ -54,10 +54,6 @@ class DocFile {
     const title = `# ${meta.docs.description} (${ruleId})`
     const notes = []
 
-    if (categoryIndex >= 0) {
-      const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
-      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
-    }
     if (meta.deprecated) {
       if (meta.docs.replacedBy) {
         const replacedRules = meta.docs.replacedBy.map(name => `[vue/${name}](${name}.md) rule`)
@@ -65,6 +61,9 @@ class DocFile {
       } else {
         notes.push(`- :warning: This rule was **deprecated**.`)
       }
+    } else if (categoryIndex >= 0) {
+      const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
+      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
     if (meta.fixable) {
       notes.push(`- :wrench: The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.`)
