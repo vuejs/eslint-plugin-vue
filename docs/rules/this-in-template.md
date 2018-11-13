@@ -28,7 +28,6 @@ Default is set to `never`.
 {
   "vue/this-in-template": [2, "always" | "never"]
 }
-
 ```
 
 ### `"always"` - Always use `this` while accessing properties from Vue

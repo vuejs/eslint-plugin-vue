@@ -36,24 +36,28 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 ## :wrench: Options
 
+```json
+{
+  "vue/prop-name-casing": ["error", {
+    "modifiers": []
+  }]
+}
+```
+
 This rule has an object option:
 
-`"modifiers"`: [] (default) array of additional allowed modifiers.
+`"modifiers"` array of additional allowed modifiers.
 
-### Example:
+### `"modifiers": ["foo"]`
 
-```json
-"vue/valid-v-on": [2, {
-  modifiers: ['foo']
-}]
-```
-
-:+1: Examples of **correct** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-v-on': ['error', { modifiers: ['foo']}]}">
 ```html
-<div @click.foo="foo"/>
-<div v-on:click.foo="foo"/>
+<template>
+  <div @click.foo="foo"/>
+  <div v-on:click.foo="foo"/>
+</template>
 ```
+</eslint-code-block>
 
 ## :couple: Related rules
 

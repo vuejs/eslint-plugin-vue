@@ -28,7 +28,7 @@ export default {
 
 ## :wrench: Options
 
-```
+```json
 {
   "vue/prop-name-casing": ["error", "camelCase" | "snake_case"]
 }
