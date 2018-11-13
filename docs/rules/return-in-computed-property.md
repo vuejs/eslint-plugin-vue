@@ -8,29 +8,34 @@ This rule enforces that a `return` statement is present in `computed` properties
 
 :-1: Examples of **incorrect** code for this rule:
 
-```js
+<eslint-code-block :rules="{'vue/return-in-computed-property': ['error']}">
+```vue
+<script>
 export default {
   computed: {
-    foo () {},
-    bar: function () {}
-  }
-}
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```js
-export default {
-  computed: {
+    /* ✓ GOOD */
     foo () {
-      return true
+      if (this.bar) {
+        return this.baz
+      } else {
+        return this.baf
+      }
     },
     bar: function () {
       return false
-    }
+    },
+    /* ✗ BAD */
+    baz () {
+      if (this.baf) {
+        return this.baf
+      }
+    },
+    baf: function () {}
   }
 }
+</script>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 

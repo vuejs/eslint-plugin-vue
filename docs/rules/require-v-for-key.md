@@ -12,20 +12,19 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key`.
 This rule does not report custom components.
 It will be reported by [valid-v-for] rule.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div v-for="todo in todos"/>
+<eslint-code-block :rules="{'vue/require-v-for-key': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    v-for="todo in todos"
+    :key="todo.id"
+  />
+  <!-- ✗ BAD -->
+  <div v-for="todo in todos"/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div
-  v-for="todo in todos"
-  :key="todo.id"
-/>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
