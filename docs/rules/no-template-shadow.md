@@ -9,7 +9,7 @@
 This rule aims to eliminate shadowed variable declarations of v-for directives or scope attributes.
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error']}">
-```
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-for="i in 5"></div>

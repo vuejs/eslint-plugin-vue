@@ -6,34 +6,9 @@
 
 This rule reports components that haven't been used in the template.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <TheModal />
-  </div>
-</template>
-
-<script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
-
-  export default {
-    components: {
-      TheButton // Unused component
-      'the-modal': TheModal // Unused component
-    }
-  }
-</script>
-```
-
-Note that components registered under other than `PascalCase` name have to be called directly under the specified name, whereas if you register it using `PascalCase` you can call it however you like, except using `snake_case`.
-
-:+1: Examples of **correct** code for this rule:
-
-```html
+<eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+```vue
+<!-- ✓ GOOD -->
 <template>
   <div>
     <h2>Lorem ipsum</h2>
@@ -61,6 +36,35 @@ Note that components registered under other than `PascalCase` name have to be ca
   }
 </script>
 ```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+```vue
+<!-- ✗ BAD -->
+<template>
+  <div>
+    <h2>Lorem ipsum</h2>
+    <TheModal />
+  </div>
+</template>
+
+<script>
+  import TheButton from 'components/TheButton.vue'
+  import TheModal from 'components/TheModal.vue'
+
+  export default {
+    components: {
+      TheButton, // Unused component
+      'the-modal': TheModal // Unused component
+    }
+  }
+</script>
+```
+</eslint-code-block>
+
+::: warning Note
+Components registered under other than `PascalCase` name have to be called directly under the specified name, whereas if you register it using `PascalCase` you can call it however you like, except using `snake_case`.
+:::
 
 ## :wrench: Options
 
@@ -75,54 +79,11 @@ Note that components registered under other than `PascalCase` name have to be ca
 - `ignoreWhenBindingPresent` ... suppresses all errors if binding has been detected in the template
     default `true`
 
+### `ignoreWhenBindingPresent: false`
 
-:+1: Examples of **incorrect** code:
-
-```json
-{
-  "vue/no-unused-components": ["error", {
-    "ignoreWhenBindingPresent": false
-  }]
-}
-```
-
-```html
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <component :is="computedComponent" />
-  </div>
-</template>
-
-<script>
-  import TheButton from 'components/TheButton.vue'
-  import TheSelect from 'components/TheSelect.vue'
-  import TheInput from 'components/TheInput.vue'
-
-  export default {
-    components: {
-      TheButton, // <- not used
-      TheSelect, // <- not used
-      TheInput, // <- not used
-    },
-    computed: {
-      computedComponent() { ... }
-    }
-  }
-</script>
-```
-
-:+1: Examples of **correct** code:
-
-```json
-{
-  "vue/no-unused-components": ["error", {
-    "ignoreWhenBindingPresent": false
-  }]
-}
-```
-
-```html
+<eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
+```vue
+<!-- ✓ GOOD -->
 <template>
   <div>
     <h2>Lorem ipsum</h2>
@@ -146,6 +107,37 @@ Note that components registered under other than `PascalCase` name have to be ca
   }
 </script>
 ```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
+```vue
+<!-- ✗ BAD -->
+<template>
+  <div>
+    <h2>Lorem ipsum</h2>
+    <component :is="computedComponent" />
+  </div>
+</template>
+
+<script>
+  import TheButton from 'components/TheButton.vue'
+  import TheSelect from 'components/TheSelect.vue'
+  import TheInput from 'components/TheInput.vue'
+
+  export default {
+    components: {
+      TheButton, // <- not used
+      TheSelect, // <- not used
+      TheInput, // <- not used
+    },
+    computed: {
+      computedComponent() {
+      }
+    }
+  }
+</script>
+```
+</eslint-code-block>
 
 ## :mag: Implementation
 
