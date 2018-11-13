@@ -30,7 +30,7 @@ You can use the same mount point and dynamically switch between multiple compone
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Guide - Dynamic Components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)
 

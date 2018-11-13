@@ -34,7 +34,7 @@ Nothing.
 
 - [valid-v-for](./valid-v-for.md)
 
-## Related links
+## :books: Further reading
 
 - [Style guide - Keyed v-for](https://vuejs.org/v2/style-guide/#Keyed-v-for-essential)
 - [Guide - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)

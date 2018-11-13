@@ -65,7 +65,7 @@ export default {
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
 

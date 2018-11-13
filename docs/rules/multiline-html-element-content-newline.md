@@ -63,9 +63,9 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 ```json
 {
-    "vue/multiline-html-element-content-newline": ["error", {
-        "ignores": ["pre", "textarea"]
-    }]
+  "vue/multiline-html-element-content-newline": ["error", {
+    "ignores": ["pre", "textarea"]
+  }]
 }
 ```
 

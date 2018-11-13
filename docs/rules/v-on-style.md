@@ -46,8 +46,7 @@ Default is set to `shorthand`.
 ```
 </eslint-code-block>
 
-
-## Related links
+## :books: Further reading
 
 - [Style guide - Directive shorthands](https://vuejs.org/v2/style-guide/#Directive-shorthands-strongly-recommended)
 

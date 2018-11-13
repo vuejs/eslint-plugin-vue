@@ -66,9 +66,9 @@ Note that components registered under other than `PascalCase` name have to be ca
 
 ```json
 {
-    "vue/no-unused-components": ["error", {
-        "ignoreWhenBindingPresent": true
-    }]
+  "vue/no-unused-components": ["error", {
+    "ignoreWhenBindingPresent": true
+  }]
 }
 ```
 
@@ -80,9 +80,9 @@ Note that components registered under other than `PascalCase` name have to be ca
 
 ```json
 {
-    "vue/no-unused-components": ["error", {
-        "ignoreWhenBindingPresent": false
-    }]
+  "vue/no-unused-components": ["error", {
+    "ignoreWhenBindingPresent": false
+  }]
 }
 ```
 
@@ -116,9 +116,9 @@ Note that components registered under other than `PascalCase` name have to be ca
 
 ```json
 {
-    "vue/no-unused-components": ["error", {
-        "ignoreWhenBindingPresent": false
-    }]
+  "vue/no-unused-components": ["error", {
+    "ignoreWhenBindingPresent": false
+  }]
 }
 ```
 
