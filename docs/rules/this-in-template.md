@@ -4,67 +4,49 @@
 
 ## :book: Rule Details
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<a :href="this.url">
-  {{ this.text }}
-</a>
+<eslint-code-block :rules="{'vue/this-in-template': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <a :href="url">
+    {{ text }}
+  </a>
+  
+  <!-- ✗ BAD -->
+  <a :href="this.url">
+    {{ this.text }}
+  </a>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<a :href="url">
-  {{ text }}
-</a>
-```
+</eslint-code-block>
 
 ## :wrench: Options
-
-Default is set to `never`.
 
 ```json
 {
   "vue/this-in-template": [2, "always" | "never"]
 }
 ```
+- `"always"` ... Always use `this` while accessing properties from Vue.
+- `"never"` (default) ... Never use `this` keyword in expressions.
 
-### `"always"` - Always use `this` while accessing properties from Vue
+### `"always"`
 
-:-1: Examples of **incorrect** code:
-
-```html
-<a :href="url">
-  {{ text }}
-</a>
+<eslint-code-block :rules="{'vue/this-in-template': ['error', 'always']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <a :href="this.url">
+    {{ this.text }}
+  </a>
+  
+  <!-- ✗ BAD -->
+  <a :href="url">
+    {{ text }}
+  </a>
+</template>
 ```
-
-:+1: Examples of **correct** code`:
-
-```html
-<a :href="this.url">
-  {{ this.text }}
-</a>
-```
-
-### `"never"` - Never use `this` keyword in expressions
-
-:-1: Examples of **incorrect** code:
-
-```html
-<a :href="this.url">
-  {{ this.text }}
-</a>
-```
-
-:+1: Examples of **correct** code:
-
-```html
-<a :href="url">
-  {{ text }}
-</a>
-```
+</eslint-code-block>
 
 ## :mag: Implementation
 
