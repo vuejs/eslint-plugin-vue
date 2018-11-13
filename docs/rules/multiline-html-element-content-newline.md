@@ -6,58 +6,61 @@
 
 This rule enforces a line break before and after the contents of a multiline element.
 
+<eslint-code-block :rules="{'vue/multiline-html-element-content-newline': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div>
+    multiline
+    content
+  </div>
 
-:-1: Examples of **incorrect** code:
+  <pre>some
+  content</pre>
 
-```html
-<div>multiline
-  content</div>
+  <div
+    attr
+  >
+    multiline start tag
+  </div>
 
-<div
-  attr
->multiline start tag</div>
+  <table>
+    <tr>
+      <td>multiline</td>
+      <td>children</td>
+    </tr>
+  </table>
 
-<tr><td>multiline</td>
-  <td>children</td></tr>
+  <div>
+    <!-- multiline
+         comment -->
+  </div>
 
-<div><!-- multiline
-  comment --></div>
+  <div
+  >
+  </div>
 
-<div
-></div>
+  <div attr>singleline element</div>
+
+  <!-- ✗ BAD -->
+  <div>multiline
+    content</div>
+
+  <div
+    attr
+  >multiline start tag</div>
+  
+  <table><tr><td>multiline</td>
+    <td>children</td></tr></table>
+  
+  <div><!-- multiline
+    comment --></div>
+
+  <div
+  ></div>
+</template>
 ```
-
-:+1: Examples of **correct** code:
-
-```html
-<div>
-  multiline
-  content
-</div>
-
-<div
-  attr
->
-  multiline start tag
-</div>
-
-<tr>
-  <td>multiline</td>
-  <td>children</td>
-</tr>
-
-<div>
-  <!-- multiline
-       comment -->
-</div>
-
-<div
->
-</div>
-
-<div attr>singleline element</div>
-```
-
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -72,19 +75,24 @@ This rule enforces a line break before and after the contents of a multiline ele
 - `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
 
+### `"ignores": ["VueComponent", "pre", "textarea"]`
 
-:+1: Examples of **correct** code:
+<eslint-code-block :rules="{'vue/multiline-html-element-content-newline': ['error', { ignores: ['VueComponent', 'pre', 'textarea'] }]}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <VueComponent>multiline
+  content</VueComponent>
 
-```html
-/* eslint vue/multiline-html-element-content-newline: ["error", { "ignores": ["VueComponent", "pre", "textarea"]}] */
+  <pre>some
+  content</pre>
 
-<VueComponent>multiline
-content</VueComponent>
-
-<VueComponent><span
-  class="bold">For example,</span>
-Defines the Vue component that accepts preformatted text.</VueComponent>
+  <VueComponent><span
+    class="bold">For example,</span>
+  Defines the Vue component that accepts preformatted text.</VueComponent>
+</template>
 ```
+</eslint-code-block>
 
 ## :mag: Implementation
 
