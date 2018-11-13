@@ -6,8 +6,6 @@
 
 This rule enforces that a `return` statement is present in `computed` properties.
 
-:-1: Examples of **incorrect** code for this rule:
-
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error']}">
 ```vue
 <script>
