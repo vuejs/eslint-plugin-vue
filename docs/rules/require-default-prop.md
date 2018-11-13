@@ -2,51 +2,55 @@
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
-
 ## Rule Details
 
-Examples of **incorrect** code for this rule:
+This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
 
-```js
-props: {
-  a: Number,
-  b: [Number, String],
-  c: [Boolean, Number],
-  d: {
-    type: Number
-  },
-  e: {
-    type: Number,
-    required: false
+<eslint-code-block :rules="{'vue/require-default-prop': ['error']}">
+```
+<script>
+export default {
+  props: {
+    /* ✓ GOOD */
+    a: {
+      type: Number,
+      required: true
+    },
+    b: {
+      type: Number,
+      default: 0
+    },
+    c: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+    d: {
+      type: Boolean, // Boolean is the only type that doesn't require default
+    },
+
+    /* ✗ BAD */
+    e: Number,
+    f: [Number, String],
+    g: [Boolean, Number],
+    j: {
+      type: Number
+    },
+    i: {
+      type: Number,
+      required: false
+    }
   }
 }
+</script>
 ```
+</eslint-code-block>
 
-Examples of **correct** code for this rule:
+## :wrench: Options
 
-```js
-props: {
-  a: {
-    type: Number,
-    required: true
-  },
-  b: {
-    type: Number,
-    default: 0
-  },
-  c: {
-    type: Number,
-    default: 0,
-    required: false
-  },
-  d: {
-    type: Boolean, // Boolean is the only type that doesn't require default
-  }
-}
-```
+Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)
 
