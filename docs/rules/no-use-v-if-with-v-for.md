@@ -2,19 +2,13 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-> Never use `v-if` on the same element as `v-for`.
->
-> There are two common cases where this can be tempting:
->
-> * To filter items in a list (e.g. `v-for="user in users" v-if="user.isActive"`). In these cases, replace `users` with a new computed property that returns your filtered list (e.g. `activeUsers`).
->
-> * To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
->
-> https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential
-
 ## :book: Rule Details
 
 This rule is aimed at preventing the use of `v-for` directives together with `v-if` directives on the same element.
+
+There are two common cases where this can be tempting:
+ * To filter items in a list (e.g. `v-for="user in users" v-if="user.isActive"`). In these cases, replace `users` with a new computed property that returns your filtered list (e.g. `activeUsers`).
+ * To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error']}">
 ```
@@ -58,7 +52,7 @@ This rule is aimed at preventing the use of `v-for` directives together with `v-
 
 - `allowUsingIterationVar` (`boolean`) ... Enables The `v-if` directive use the reference which is to the variables which are defined by the `v-for` directives. Default is `false`.
 
-### { "allowUsingIterationVar": true }
+### `"allowUsingIterationVar": true`
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error', {allowUsingIterationVar: true}]}">
 ```

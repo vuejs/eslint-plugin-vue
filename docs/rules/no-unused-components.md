@@ -2,9 +2,9 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule reports components that haven't been used in the template.
-
 ## :book: Rule Details
+
+This rule reports components that haven't been used in the template.
 
 :-1: Examples of **incorrect** code for this rule:
 
