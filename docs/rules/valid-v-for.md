@@ -23,7 +23,7 @@ The following cases are syntax errors:
 - The alias is not LHS. E.g. `<div v-for="foo() in list"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-for="todo in todos"/>

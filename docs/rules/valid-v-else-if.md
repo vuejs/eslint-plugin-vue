@@ -17,7 +17,7 @@ This rule reports `v-else-if` directives in the following cases:
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-else-if': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-if="foo"/>

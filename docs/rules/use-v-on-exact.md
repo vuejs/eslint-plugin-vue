@@ -5,7 +5,7 @@
 This rule enforce usage of `exact` modifier on `v-on` when there is another `v-on` with modifier.
 
 <eslint-code-block :rules="{'vue/use-v-on-exact': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <button @click="foo" :click="foo"></button>

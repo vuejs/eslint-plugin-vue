@@ -16,7 +16,7 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 
 <eslint-code-block :rules="{'vue/valid-v-show': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-show="foo"/>

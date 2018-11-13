@@ -15,7 +15,7 @@ This rule reports `v-on` directives in the following cases:
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-on="foo"/>
@@ -51,7 +51,7 @@ This rule has an object option:
 ### `"modifiers": ["foo"]`
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error', { modifiers: ['foo']}]}">
-```html
+```vue
 <template>
   <div @click.foo="foo"/>
   <div v-on:click.foo="foo"/>

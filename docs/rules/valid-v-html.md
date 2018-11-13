@@ -15,7 +15,7 @@ This rule reports `v-html` directives in the following cases:
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-html': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-html="foo"/>

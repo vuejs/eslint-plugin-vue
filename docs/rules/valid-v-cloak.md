@@ -13,7 +13,7 @@ This rule reports `v-cloak` directives in the following cases:
 - The directive has that attribute value. E.g. `<div v-cloak="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-cloak': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-cloak/>

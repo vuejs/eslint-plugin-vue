@@ -13,7 +13,7 @@ This rule reports `v-pre` directives in the following cases:
 - The directive has that attribute value. E.g. `<div v-pre="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-pre': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-pre/>

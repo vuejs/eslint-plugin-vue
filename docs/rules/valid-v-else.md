@@ -15,7 +15,7 @@ This rule reports `v-else` directives in the following cases:
 - The directive is on the elements which have `v-if`/`v-if-else` directives. E.g. `<div v-if="foo" v-else></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-else': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-if="foo"/>

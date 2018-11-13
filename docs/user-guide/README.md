@@ -117,7 +117,7 @@ You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vu
 
 For example:
 
-```html
+```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
   <div a="1" b="2" c="3" d="4">

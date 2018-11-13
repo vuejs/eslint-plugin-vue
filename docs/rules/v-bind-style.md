@@ -8,7 +8,7 @@
 This rule enforces `v-bind` directive style which you should use shorthand or long form.
 
 <eslint-code-block :rules="{'vue/v-bind-style': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div :foo="bar"/>
@@ -34,7 +34,7 @@ Default is set to `shorthand`.
 ### `"longform"`
 
 <eslint-code-block :rules="{'vue/v-bind-style': ['error', 'longform']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-bind:foo="bar"/>

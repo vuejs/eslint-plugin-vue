@@ -13,7 +13,7 @@ This rule reports `v-once` directives in the following cases:
 - The directive has that attribute value. E.g. `<div v-once="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-once': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-once/>

@@ -9,7 +9,7 @@
 This rule enforces `v-on` directive style which you should use shorthand or long form.
 
 <eslint-code-block :rules="{'vue/v-on-style': ['error']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div @click="foo"/>
@@ -35,7 +35,7 @@ Default is set to `shorthand`.
 ### `"longform"`
 
 <eslint-code-block :rules="{'vue/v-on-style': ['error', 'longform']}">
-```html
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div v-on:click="foo"/>
