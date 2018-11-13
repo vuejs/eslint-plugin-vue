@@ -37,9 +37,6 @@ export default {
 
 ## :wrench: Options
 
-This rule has an object option:
-- `"treatUndefinedAsUnspecified"`: `true` (default) disallows implicitly returning undefined with a `return;` statement.
-
 ```json
 {
   "vue/return-in-computed-property": [2, {
@@ -47,6 +44,40 @@ This rule has an object option:
   }]
 }
 ```
+
+This rule has an object option:
+- `"treatUndefinedAsUnspecified"`: `true` (default) disallows implicitly returning undefined with a `return` statement.
+
+### `treatUndefinedAsUnspecified: false`
+
+<eslint-code-block :rules="{'vue/return-in-computed-property': ['error', { treatUndefinedAsUnspecified: false }]}">
+```vue
+<script>
+export default {
+  computed: {
+    /* ✓ GOOD */
+    foo () {
+      if (this.bar) {
+        return undefined
+      } else {
+        return
+      }
+    },
+    bar: function () {
+      return
+    },
+    /* ✗ BAD */
+    baz () {
+      if (this.baf) {
+        return this.baf
+      }
+    },
+    baf: function () {}
+  }
+}
+</script>
+```
+</eslint-code-block>
 
 ## :mag: Implementation
 
