@@ -3,33 +3,22 @@
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-This rule enforces `v-on` directive style which you should use shorthand or long form.
 
 ## :book: Rule Details
 
-:-1: Examples of **incorrect** code for this rule:
+This rule enforces `v-on` directive style which you should use shorthand or long form.
 
+<eslint-code-block :rules="{'vue/v-on-style': ['error']}">
 ```html
-<div v-on:click="foo"/>
+<template>
+  <!-- ✓ GOOD -->
+  <div @click="foo"/>
+
+  <!-- ✗ BAD -->
+  <div v-on:click="foo"/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div @click="foo"/>
-```
-
-:-1: Examples of **incorrect** code for this rule with `"longform"` option:
-
-```html
-<div @click="foo"/>
-```
-
-:+1: Examples of **correct** code for this rule with `"longform"` option:
-
-```html
-<div v-on:click="foo"/>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 Default is set to `shorthand`.
@@ -42,6 +31,21 @@ Default is set to `shorthand`.
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.
+
+### `"longform"`
+
+<eslint-code-block :rules="{'vue/v-on-style': ['error', 'longform']}">
+```html
+<template>
+  <!-- ✓ GOOD -->
+  <div v-on:click="foo"/>
+
+  <!-- ✗ BAD -->
+  <div @click="foo"/>
+</template>
+```
+</eslint-code-block>
+
 
 ## Related links
 

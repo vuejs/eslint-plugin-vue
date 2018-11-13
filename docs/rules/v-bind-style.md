@@ -3,33 +3,21 @@
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-This rule enforces `v-bind` directive style which you should use shorthand or long form.
-
 ## :book: Rule Details
 
-:-1: Examples of **incorrect** code for this rule:
+This rule enforces `v-bind` directive style which you should use shorthand or long form.
 
+<eslint-code-block :rules="{'vue/v-bind-style': ['error']}">
 ```html
-<div v-bind:foo="bar"/>
+<template>
+  <!-- ✓ GOOD -->
+  <div :foo="bar"/>
+
+  <!-- ✗ BAD -->
+  <div v-bind:foo="bar"/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div :foo="bar"/>
-```
-
-:-1: Examples of **incorrect** code for this rule with `"longform"` option:
-
-```html
-<div :foo="bar"/>
-```
-
-:+1: Examples of **correct** code for this rule with `"longform"` option:
-
-```html
-<div v-bind:foo="bar"/>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 Default is set to `shorthand`.
@@ -42,6 +30,21 @@ Default is set to `shorthand`.
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.
+
+### `"longform"`
+
+<eslint-code-block :rules="{'vue/v-bind-style': ['error', 'longform']}">
+```html
+<template>
+  <!-- ✓ GOOD -->
+  <div v-bind:foo="bar"/>
+
+  <!-- ✗ BAD -->
+  <div :foo="bar"/>
+</template>
+```
+</eslint-code-block>
+
 
 ## Related links
 

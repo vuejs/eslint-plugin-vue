@@ -11,7 +11,7 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 {
   "vue/attribute-hyphenation": [2, "always" | "never", {
     "ignore": ["custom-prop"]
-  }}]
+  }]
 }
 ```
 
