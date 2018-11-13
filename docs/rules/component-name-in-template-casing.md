@@ -12,11 +12,9 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 ```json
 {
-  "vue/component-name-in-template-casing": [
-    "error",
-    "PascalCase" | "kebab-case",
-    { "ignores": [] }
-  ]
+  "vue/component-name-in-template-casing": ["error", "PascalCase" | "kebab-case", { 
+    "ignores": []
+  }]
 }
 ```
 

@@ -59,6 +59,10 @@ export default {
 
 Nothing.
 
+## :books: Further reading
+
+- [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-prop-type-constructor.js)

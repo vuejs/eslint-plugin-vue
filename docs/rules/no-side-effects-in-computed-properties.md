@@ -49,6 +49,10 @@ export default {
 
 Nothing.
 
+## :books: Further reading
+
+- [Guide - Computed Caching vs Methods](https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-side-effects-in-computed-properties.js)

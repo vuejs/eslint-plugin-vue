@@ -27,6 +27,10 @@ This rule reports the `<template>` elements which have `key` attribute.
 
 Nothing.
 
+## :books: Further reading
+
+- [API - Special Attributes - key](https://vuejs.org/v2/api/#key)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-template-key.js)

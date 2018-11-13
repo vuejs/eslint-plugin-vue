@@ -40,6 +40,10 @@ export default {
 
 Nothing.
 
+## :books: Further reading
+
+- [Guide - Render Functions & JSX](https://vuejs.org/v2/guide/render-function.html)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-render-return.js)
