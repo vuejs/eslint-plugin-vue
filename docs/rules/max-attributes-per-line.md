@@ -73,7 +73,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```
 </eslint-code-block>
 
-### `multiline: 2`
+### `"multiline": 2`
 
 <eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {multiline: 2}]}">
 ```
@@ -93,7 +93,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```
 </eslint-code-block>
 
-### `multiline: 1, allowFirstLine: true`
+### `"multiline": 1, "allowFirstLine": true`
 
 <eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {multiline: { allowFirstLine: true }}]}">
 ```

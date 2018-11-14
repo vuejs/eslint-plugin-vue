@@ -3,17 +3,16 @@
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+## :book: Rule Details
+
+This rule aims to enforce the self-closing sign as the configured style.
+
 In Vue.js template, we can use either two styles for elements which don't have their content.
 
 1. `<YourComponent></YourComponent>`
 2. `<YourComponent/>` (self-closing)
 
 Self-closing is simple and shorter, but it's not supported in the HTML spec.
-This rule helps you to make consistent on the self-closing style.
-
-## :book: Rule Details
-
-This rule aims to enforce the self-closing sign as the configured style.
 
 <eslint-code-block fix :rules="{'vue/html-self-closing': ['error']}">
 ```

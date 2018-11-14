@@ -10,7 +10,7 @@ This rule reports syntax errors in `<template>`. For example:
     - Invalid end tags.
     - Attributes in end tags.
     - ...
-    - See also: https://html.spec.whatwg.org/multipage/parsing.html#parse-errors
+    - See also: [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)
 
 ## :book: Rule Details
 
@@ -86,6 +86,10 @@ The error codes which have `x-` prefix are original of this rule because errors 
 
 - `x-invalid-end-tag` enables the errors about the end tags of elements which have not opened.
 - `x-invalid-namespace` enables the errors about invalid `xmlns` attributes. See also [step 10. of "create an element for a token"](https://html.spec.whatwg.org/multipage/parsing.html#create-an-element-for-the-token).
+
+## :books: Further reading
+
+- [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)
 
 ## :mag: Implementation
 

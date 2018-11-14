@@ -30,6 +30,10 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
 - [vue/v-on-style](./v-on-style.md)
 - [vue/valid-v-on](./valid-v-on.md)
 
+## :books: Further reading
+
+- [Guide - .exact Modifier](https://vuejs.org/v2/guide/events.html#exact-Modifier)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/use-v-on-exact.js)
