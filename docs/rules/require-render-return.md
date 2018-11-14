@@ -6,30 +6,28 @@
 
 This rule aims to enforce render function to always return value
 
-:-1: Examples of **incorrect** code for this rule:
-
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
 ```vue
 <script>
 export default {
+  /* ✓ GOOD */
   render (h) {
-    if (foo) {
-      return h('div', 'hello')
-    }
+    return h('div', 'hello')
   }
 }
 </script>
 ```
 </eslint-code-block>
 
-:+1: Examples of **correct** code for this rule:
-
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
 ```vue
 <script>
 export default {
+  /* ✗ BAD */
   render (h) {
-    return h('div', 'hello')
+    if (foo) {
+      return h('div', 'hello')
+    }
   }
 }
 </script>
