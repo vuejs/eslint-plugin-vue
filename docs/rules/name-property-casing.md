@@ -7,19 +7,6 @@
 
 This rule aims at enforcing the style for the `name` property casing for consistency purposes.
 
-## :wrench: Options
-
-```json
-{
-  "vue/name-property-casing": ["error", "PascalCase" | "kebab-case"]
-}
-```
-
-- `"PascalCase"` (default) ... Enforce the `name` property to Pascal case.
-- `"kebab-case"` ... Enforce the `name` property to kebab case.
-
-### `"PascalCase"`
-
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 ```
 <script>
@@ -41,6 +28,17 @@ This rule aims at enforcing the style for the `name` property casing for consist
 </script>
 ```
 </eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/name-property-casing": ["error", "PascalCase" | "kebab-case"]
+}
+```
+
+- `"PascalCase"` (default) ... Enforce the `name` property to Pascal case.
+- `"kebab-case"` ... Enforce the `name` property to kebab case.
 
 ### `"kebab-case"`
 

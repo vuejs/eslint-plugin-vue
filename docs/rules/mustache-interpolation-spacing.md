@@ -7,19 +7,6 @@
 
 This rule aims at enforcing unified spacing in mustache interpolations.
 
-## :wrench: Options
-
-```json
-{
-  "vue/mustache-interpolation-spacing": ["error", "always" | "never"]
-}
-```
-
-- `"always"` (default) ... Expect one space between expression and curly brackets.
-- `"never"` ... Expect no spaces between expression and curly brackets.
-
-### `"always"`
-
 <eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error']}">
 ```
 <template>
@@ -32,6 +19,17 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 </template>
 ```
 </eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/mustache-interpolation-spacing": ["error", "always" | "never"]
+}
+```
+
+- `"always"` (default) ... Expect one space between expression and curly brackets.
+- `"never"` ... Expect no spaces between expression and curly brackets.
 
 ### `"never"`
 
