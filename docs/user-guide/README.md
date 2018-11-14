@@ -80,6 +80,37 @@ Example **.vscode/settings.json**:
 }
 ```
 
+If you use `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/linting-error.html) for more info.
+
+#### Sublime Text
+
+Use [SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint) extension that SublimeLinter provides for eslint.
+
+You have to open command-palette via `cmd/ctrl+shift+p` and type `Preferences: SublimeLinter Settings`, paste to the config on the right side:
+
+```json
+{
+  "linters": {
+    "eslint": {
+      "selector": "text.html.vue, source.js - meta.attribute-with-value"
+    }
+  }
+}
+```
+
+#### Atom editor
+
+You need to go into `Settings -> Packages -> linter-eslint`, under the option "List of scopes to run eslint on", add `text.html.vue`. You may need to restart Atom.
+
+#### IntelliJ IDEA / JetBrains WebStorm
+
+In the **Settings/Preferences** dialog (`Ctrl+Alt+S`), choose JavaScript under **Languages and Frameworks** and then choose **ESLint** under **Code Quality Tools**.
+On the **ESLint page** that opens, select the *Enable* checkbox.
+
+If your ESLint configuration is updated (manually or from your version control), open it in the editor and choose **Apply ESLint Code Style Rules** on the context menu.
+
+read more: [JetBrains - ESLint](https://www.jetbrains.com/help/idea/eslint.html)
+
 ### The code of components
 
 All component-related rules are being applied to code that passes any of the following checks:
@@ -155,29 +186,17 @@ See also: "[Use together with custom parsers](#use-together-with-custom-parsers)
 
 1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-plugin-vue` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
-    ```diff
-      "plugins": [
-        "vue",
-    -   "html"
-      ]
-    ```
+  ```diff
+    "plugins": [
+      "vue",
+  -   "html"
+    ]
+  ```
 
 2. Make sure your tool is set to lint `.vue` files.
-    - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
-    - VSCode targets only JavaScript or HTML files by default. You have to add `"vue"` to the `"eslint.validate"` array in vscode settings. e.g. `"eslint.validate": [ "javascript", "javascriptreact", "vue" ]`
-    - If you use `Vetur` plugin in VSCode - set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://github.com/vuejs/vetur/blob/master/docs/linting-error.md) for more info.
-    - For Atom editor, you need to go into Settings -> Packages -> linter-eslint, under the option “List of scopes to run eslint on”, add `text.html.vue`.
-    - For Sublime Text, you need to open command-pallete via cmd+shift+p (cmd => ctrl for windows) and type "Preferences: SublimeLinter Settings", paste to the config on the right side:
-      ```json
-      {
-        "linters": {
-          "eslint": {
-            "selector": "source.js, text.html.vue"
-          }
-        }
-      }
-      ```
- 
+  - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
+  - If you are having issues with configuring editor please read [editor integrations](#editor-integrations)
+
 ## 🚥 Versioning policy
 
 This plugin is following [Semantic Versioning](https://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
