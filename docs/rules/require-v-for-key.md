@@ -2,15 +2,9 @@
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-When `v-for` is written on custom components, it requires `v-bind:key` at the same time.
-On other elements, it's better that `v-bind:key` is written as well.
-
 ## :book: Rule Details
 
-This rule reports the elements which have `v-for` and do not have `v-bind:key`.
-
-This rule does not report custom components.
-It will be reported by [valid-v-for] rule.
+This rule reports the elements which have `v-for` and do not have `v-bind:key` with exception to custom components.
 
 <eslint-code-block :rules="{'vue/require-v-for-key': ['error']}">
 ```vue
@@ -25,6 +19,11 @@ It will be reported by [valid-v-for] rule.
 </template>
 ```
 </eslint-code-block>
+
+::: warning Note
+This rule does not report missing `v-bind:key` on custom components.
+It will be reported by [valid-v-for](./valid-v-for.md) rule.
+:::
 
 ## :wrench: Options
 
