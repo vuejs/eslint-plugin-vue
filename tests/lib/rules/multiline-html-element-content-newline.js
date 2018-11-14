@@ -91,7 +91,7 @@ tester.run('multiline-html-element-content-newline', rule, {
           >content</ignore-tag>
           <ignore-tag><div
             >content</div></ignore-tag>
-          <ignore-tag>>content
+          <ignore-tag>content
             content</ignore-tag>
         </template>`,
       options: [{
@@ -107,7 +107,7 @@ tester.run('multiline-html-element-content-newline', rule, {
           >content</IgnoreTag>
           <IgnoreTag><div
             >content</div></IgnoreTag>
-          <IgnoreTag>>content
+          <IgnoreTag>content
             content</IgnoreTag>
         </template>`,
       options: [{
@@ -123,7 +123,7 @@ tester.run('multiline-html-element-content-newline', rule, {
           >content</ignore-tag>
           <ignore-tag><div
             >content</div></ignore-tag>
-          <ignore-tag>>content
+          <ignore-tag>content
             content</ignore-tag>
         </template>`,
       options: [{
