@@ -14,8 +14,6 @@ This rule reports `v-else-if` directives in the following cases:
 - The directive is on the elements that the previous element don't have `v-if`/`v-else-if` directives. E.g. `<div v-else-if="bar"></div>`
 - The directive is on the elements which have `v-if`/`v-else` directives. E.g. `<div v-if="foo" v-else-if="bar"></div>`
 
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
 <eslint-code-block :rules="{'vue/valid-v-else-if': ['error']}">
 ```vue
 <template>
@@ -31,6 +29,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 ```
 </eslint-code-block>
 
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
+
 ## :wrench: Options
 
 Nothing.
@@ -42,9 +44,9 @@ Nothing.
 - [no-parsing-error]
 
 
-[valid-v-if]:   valid-v-if.md
+[valid-v-if]: valid-v-if.md
 [valid-v-else]: valid-v-else.md
-[no-parsing-error]:   no-parsing-error.md
+[no-parsing-error]: no-parsing-error.md
 
 ## :mag: Implementation
 
