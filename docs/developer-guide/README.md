@@ -2,13 +2,13 @@
 
 Contributing is welcome.
 
-## 🐛 Bug reporting
+## :bug: Bug reporting
 
 If you think you’ve found a bug in ESLint, please [create a new issue](https://github.com/vuejs/eslint-plugin-vue/issues/new?labels=&template=bug_report.md) or a pull request on GitHub.
 
 Please include as much detail as possible to help us properly address your issue. If we need to triage issues and constantly ask people for more detail, that’s time taken away from actually fixing issues. Help us be as efficient as possible by including a lot of detail in your issues.
 
-## ✨ Proposing a new rule or a rule change
+## :sparkles: Proposing a new rule or a rule change
 
 In order to add a new rule or a rule change, you should:
 
@@ -23,7 +23,7 @@ In order to add a new rule or a rule change, you should:
 
 We're more than happy to see potential contributions, so don't hesitate. If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/vuejs/eslint-plugin-vue/issues), but first please make sure your question does not repeat previous ones.
 
-## 🔥 Working with rules
+## :fire: Working with rules
 
 Before you start writing new rule, please read the [official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
 

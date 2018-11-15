@@ -1,6 +1,6 @@
 # User Guide
 
-## 💿 Installation
+## :cd: Installation
 
 Use [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install.
 
@@ -13,7 +13,7 @@ npm install --save-dev eslint eslint-plugin-vue@next
 - Node.js v6.5.0 or later
 :::
 
-## 📖 Usage
+## :book: Usage
 
 ### Configuration
 
@@ -158,7 +158,7 @@ For example:
 
 If you want to disallow `eslint-disable` functionality in `<template>`, disable [vue/comment-directive](../rules/comment-directive.md) rule.
 
-## ❓ FAQ
+## :question: FAQ
 
 ### What is the "Use the latest vue-eslint-parser" error?
 
@@ -197,14 +197,14 @@ See also: "[Use together with custom parsers](#use-together-with-custom-parsers)
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - If you are having issues with configuring editor please read [editor integrations](#editor-integrations)
 
-## 🚥 Versioning policy
+## :traffic_light: Versioning policy
 
 This plugin is following [Semantic Versioning](https://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
 
-## 📰 Changelog
+## :newspaper: Changelog
 
 We are using [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/releases).
 
-## 🔒 License
+## :lock: License
 
 See the [LICENSE](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE) file for license rights and limitations (MIT).
