@@ -35,7 +35,7 @@ module.exports = {
 }
 ```
 
-See [the rule list](../README.md) to get the `extends` &amp; `rules` that this plugin provides.
+See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
 
 #### Use together with custom parsers
 
