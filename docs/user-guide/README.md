@@ -7,6 +7,9 @@ Use [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install.
 ```bash
 npm install --save-dev eslint eslint-plugin-vue@next
 ```
+```bash
+yarn add eslint eslint-plugin-vue@next --dev
+```
 
 ::: tip Requirements
 - ESLint v5.0.0 or later
