@@ -39,7 +39,7 @@ export default {
 
 ```json
 {
-  "vue/return-in-computed-property": [2, {
+  "vue/return-in-computed-property": ["error", {
     "treatUndefinedAsUnspecified": true
   }]
 }

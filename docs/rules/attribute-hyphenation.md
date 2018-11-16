@@ -21,7 +21,7 @@
 
 ```json
 {
-  "vue/attribute-hyphenation": [2, "always" | "never", {
+  "vue/attribute-hyphenation": ["error", "always" | "never", {
     "ignore": []
   }]
 }

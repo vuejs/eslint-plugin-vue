@@ -38,7 +38,7 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 ```json
 {
-  "vue/no-multi-spaces": [2, {
+  "vue/no-multi-spaces": ["error", {
     "ignoreProperties": false
   }]
 }

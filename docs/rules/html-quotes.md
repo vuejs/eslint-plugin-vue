@@ -34,7 +34,7 @@ Default is set to `double`.
 
 ```json
 {
-  "vue/html-quotes": [2, "double" | "single"]
+  "vue/html-quotes": ["error", "double" | "single"]
 }
 ```
 

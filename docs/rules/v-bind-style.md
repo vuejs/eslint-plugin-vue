@@ -24,7 +24,7 @@ Default is set to `shorthand`.
 
 ```json
 {
-  "vue/v-bind-style": [2, "shorthand" | "longform"]
+  "vue/v-bind-style": ["error", "shorthand" | "longform"]
 }
 ```
 

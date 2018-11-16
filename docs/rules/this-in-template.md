@@ -24,7 +24,7 @@
 
 ```json
 {
-  "vue/this-in-template": [2, "always" | "never"]
+  "vue/this-in-template": ["error", "always" | "never"]
 }
 ```
 - `"always"` ... Always use `this` while accessing properties from Vue.
