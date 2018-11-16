@@ -10,6 +10,7 @@
         :preprocess="preprocess"
         :postprocess="postprocess"
         dark
+        :format="format"
         :fix="fix"
     />
 </template>
@@ -40,7 +41,11 @@ export default {
     return {
       linter: null,
       preprocess: processors['.vue'].preprocess,
-      postprocess: processors['.vue'].postprocess
+      postprocess: processors['.vue'].postprocess,
+      format: {
+        insertSpaces: true,
+        tabSize: 2
+      }
     }
   },
 
