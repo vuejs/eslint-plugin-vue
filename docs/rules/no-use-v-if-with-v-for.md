@@ -63,6 +63,13 @@ There are two common cases where this can be tempting:
     v-if="todo.shown"
     :todo="todo"
   />
+
+  <!-- ✗ BAD -->
+  <TodoItem
+    v-for="todo in todos"
+    v-if="shown"
+    :todo="todo"
+  />
 </template>
 ```
 </eslint-code-block>
