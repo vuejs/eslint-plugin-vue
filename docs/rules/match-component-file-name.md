@@ -1,20 +1,10 @@
 # require component name property to match its file name (vue/match-component-file-name)
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
-
-You can choose which file extension this rule should verify the component's name:
-
-- `.jsx` (**default**): `jsx`
-- `.jsx` and `.vue`: `both`
+You can define an array of file extensions this rule should verify for 
+the component's name.
 
 By default this rule will only verify components in a file with a `.jsx` 
-extension. Files with `.vue` extension uses their resgistered name by default. 
-The only use case where you need to specify a name for your component 
-in a `.vue` file is when implementing recursive components.
-
-The option to verify both files extensions is added to increase 
-consistency in projects where its style guide requires every component 
-to have a `name` property, although, as stated above it is unnecessary.  
+extension.
 
 ## :book: Rule Details
 
@@ -46,5 +36,6 @@ export default {
 
 ## :wrench: Options
 
-- `"jsx"` (default) ... verify components in files with `.jsx` extension.
-- `"both"` ... verify components in files with both `.jsx` and `.vue` extensions.
+- `['jsx']` (default) ... verify components in files with `.jsx` extension.
+- `['jsx', 'vue', 'js']` (*or any combinations of these extensions*) 
+  ... verify components in files with listed extensions.

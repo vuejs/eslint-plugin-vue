@@ -8,49 +8,31 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/match-component-file-name')
+const RuleTester = require('eslint').RuleTester
 
-const jsxRuleTester = new RuleTester({
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
-    }
-  }
-})
+const parserOptions = {
+  ecmaVersion: 2018,
+  sourceType: 'module'
+}
 
-const vueRuleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
-  parserOptions: {
-    ecmaVersion: 2015,
-    sourceType: 'module'
-  }
-})
+const ruleTester = new RuleTester()
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-jsxRuleTester.run('match-component-file-name', rule, {
+ruleTester.run('match-component-file-name', rule, {
   valid: [
-    {
-      filename: 'MyComponent.jsx',
-      code: `
-        export default {
-          name: 'MyComponent',
-          render() { return <div /> }
-        }
-      `
-    },
+    // ,jsx
     {
       filename: 'MyComponent.jsx',
       code: `
         export default {
           render() { return <div /> }
         }
-      `
+      `,
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }}
     },
     {
       filename: 'MyComponent.jsx',
@@ -60,16 +42,7 @@ jsxRuleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      options: ['jsx']
-    },
-    {
-      filename: 'MyComponent.jsx',
-      code: `
-        export default {
-          render() { return <div /> }
-        }
-      `,
-      options: ['jsx']
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }}
     },
     {
       filename: 'MyComponent.jsx',
@@ -79,63 +52,22 @@ jsxRuleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      options: ['both']
+      options: [['jsx']],
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }}
     },
     {
       filename: 'MyComponent.jsx',
       code: `
         export default {
+          name: 'MComponent',
           render() { return <div /> }
         }
       `,
-      options: ['both']
-    }
-  ],
+      options: [['vue']], // missing jsx in options
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }}
+    },
 
-  invalid: [
-    {
-      filename: 'MyComponent.jsx',
-      code: `
-        export default {
-          name: 'MComponent',
-          render() { return <div /> }
-        }
-      `,
-      errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
-      }]
-    },
-    {
-      filename: 'MyComponent.jsx',
-      code: `
-        export default {
-          name: 'MComponent',
-          render() { return <div /> }
-        }
-      `,
-      options: ['jsx'],
-      errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
-      }]
-    },
-    {
-      filename: 'MyComponent.jsx',
-      code: `
-        export default {
-          name: 'MComponent',
-          render() { return <div /> }
-        }
-      `,
-      options: ['both'],
-      errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
-      }]
-    }
-  ]
-})
-
-vueRuleTester.run('match-component-file-name', rule, {
-  valid: [
+    // .vue
     {
       filename: 'MyComponent.vue',
       code: `
@@ -145,7 +77,47 @@ vueRuleTester.run('match-component-file-name', rule, {
             template: '<div />'
           }
         </script>
-      ` // missing ["both"] option, so the file is ignored
+      `,
+      parser: 'vue-eslint-parser',
+      parserOptions // options default to [['jsx']]
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <script>
+          export default {
+            name: 'MComponent',
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [['jsx']], // missing 'vue' in options
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <script>
+          export default {
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [['vue']],
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <template>
+          <div />
+        </template>
+      `,
+      options: [['vue']],
+      parser: 'vue-eslint-parser',
+      parserOptions
     },
     {
       filename: 'MyComponent.vue',
@@ -157,22 +129,87 @@ vueRuleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: ['both']
+      options: [['vue']],
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+
+    // .js
+    {
+      filename: 'MyComponent.js',
+      code: `
+        new Vue({
+          name: 'MComponent',
+          template: '<div />'
+        })
+      `,
+      parserOptions // options default to [['jsx']]
     },
     {
-      filename: 'MyComponent.vue',
+      filename: 'MyComponent.js',
       code: `
-        <script>
-          export default {
-            template: '<div />'
-          }
-        </script>
+        new Vue({
+          name: 'MComponent',
+          template: '<div />'
+        })
       `,
-      options: ['both']
+      options: [['vue']], // missing 'js' in options
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        new Vue({
+          template: '<div />'
+        })
+      `,
+      options: [['js']],
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        new Vue({
+          name: 'MyComponent',
+          template: '<div />'
+        })
+      `,
+      options: [['js']],
+      parserOptions
     }
   ],
 
   invalid: [
+    // .jsx
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
+          name: 'MComponent',
+          render() { return <div /> }
+        }
+      `,
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }},
+      errors: [{
+        message: 'Component name `MComponent` should match file name MyComponent.'
+      }]
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
+          name: 'MComponent',
+          render() { return <div /> }
+        }
+      `,
+      options: [['jsx']],
+      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }},
+      errors: [{
+        message: 'Component name `MComponent` should match file name MyComponent.'
+      }]
+    },
+
+    // .vue
     {
       filename: 'MyComponent.vue',
       code: `
@@ -183,7 +220,25 @@ vueRuleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: ['both'],
+      options: [['vue']],
+      parser: 'vue-eslint-parser',
+      parserOptions,
+      errors: [{
+        message: 'Component name `MComponent` should match file name MyComponent.'
+      }]
+    },
+
+    // .js
+    {
+      filename: 'MyComponent.js',
+      code: `
+        new Vue({
+          name: 'MComponent',
+          template: '<div />'
+        })
+      `,
+      options: [['js']],
+      parserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name MyComponent.'
       }]
