@@ -48,6 +48,14 @@ jsxRuleTester.run('match-component-file-name', rule, {
       filename: 'MyComponent.jsx',
       code: `
         export default {
+          render() { return <div /> }
+        }
+      `
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
           name: 'MyComponent',
           render() { return <div /> }
         }
@@ -58,7 +66,25 @@ jsxRuleTester.run('match-component-file-name', rule, {
       filename: 'MyComponent.jsx',
       code: `
         export default {
+          render() { return <div /> }
+        }
+      `,
+      options: ['jsx']
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
           name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `,
+      options: ['both']
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
           render() { return <div /> }
         }
       `,
@@ -76,7 +102,7 @@ jsxRuleTester.run('match-component-file-name', rule, {
         }
       `,
       errors: [{
-        message: 'Component name should match file name (MyComponent / MComponent).'
+        message: 'Component name `MComponent` should match file name MyComponent.'
       }]
     },
     {
@@ -89,7 +115,7 @@ jsxRuleTester.run('match-component-file-name', rule, {
       `,
       options: ['jsx'],
       errors: [{
-        message: 'Component name should match file name (MyComponent / MComponent).'
+        message: 'Component name `MComponent` should match file name MyComponent.'
       }]
     },
     {
@@ -102,7 +128,7 @@ jsxRuleTester.run('match-component-file-name', rule, {
       `,
       options: ['both'],
       errors: [{
-        message: 'Component name should match file name (MyComponent / MComponent).'
+        message: 'Component name `MComponent` should match file name MyComponent.'
       }]
     }
   ]
@@ -132,6 +158,17 @@ vueRuleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: ['both']
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <script>
+          export default {
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: ['both']
     }
   ],
 
@@ -148,7 +185,7 @@ vueRuleTester.run('match-component-file-name', rule, {
       `,
       options: ['both'],
       errors: [{
-        message: 'Component name should match file name (MyComponent / MComponent).'
+        message: 'Component name `MComponent` should match file name MyComponent.'
       }]
     }
   ]
