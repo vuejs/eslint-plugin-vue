@@ -195,7 +195,7 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }},
+      parserOptions: jsxParserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name MyComponent.'
       }]
@@ -209,7 +209,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [['jsx']],
-      parserOptions: { ...parserOptions, ecmaFeatures: { jsx: true }},
+      parserOptions: jsxParserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name MyComponent.'
       }]
