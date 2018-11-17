@@ -477,6 +477,50 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions
+    },
+
+    // mixed cases
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <script>
+          export default {
+            name: 'my-component',
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [{ extensions: ['vue'] }],
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+    {
+      filename: 'my-component.vue',
+      code: `
+        <script>
+          export default {
+            name: 'my-component',
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [{ extensions: ['vue'] }],
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+    {
+      filename: 'my-component.vue',
+      code: `
+        <script>
+          export default {
+            name: 'MyComponent',
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [{ extensions: ['vue'] }],
+      parser: 'vue-eslint-parser',
+      parserOptions
     }
   ],
 
