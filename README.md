@@ -318,6 +318,7 @@ In order to add a new rule, you should:
 - Write test scenarios & implement logic
 - Describe the rule in the generated `docs` file
 - Make sure all tests are passing
+- Run `npm run lint` and fix any errors
 - Run `npm run update` in order to update readme and recommended configuration
 - Create PR and link created issue in description
 
