@@ -536,7 +536,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       parserOptions: jsxParserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -550,7 +550,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -564,7 +564,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
 
@@ -583,7 +583,7 @@ ruleTester.run('match-component-file-name', rule, {
       parser: 'vue-eslint-parser',
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -600,7 +600,7 @@ ruleTester.run('match-component-file-name', rule, {
       parser: 'vue-eslint-parser',
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
 
@@ -616,7 +616,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -630,7 +630,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -643,7 +643,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -656,7 +656,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -669,7 +669,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     },
     {
@@ -682,7 +682,7 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
-        message: 'Component name `MComponent` should match file name MyComponent.'
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
       }]
     }
   ]
