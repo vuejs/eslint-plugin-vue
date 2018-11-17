@@ -224,6 +224,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:---|:--------|:------------|
 | :wrench: | [vue/attributes-order](./docs/rules/attributes-order.md) | enforce order of attributes |
 | :wrench: | [vue/html-quotes](./docs/rules/html-quotes.md) | enforce quotes style of HTML attributes |
+|  | [vue/match-component-file-name](./docs/rules/match-component-file-name.md) | require component name property to match its file name |
 |  | [vue/no-v-html](./docs/rules/no-v-html.md) | disallow use of v-html to prevent XSS attack |
 | :wrench: | [vue/order-in-components](./docs/rules/order-in-components.md) | enforce order of properties in components |
 |  | [vue/this-in-template](./docs/rules/this-in-template.md) | enforce usage of `this` in template |
