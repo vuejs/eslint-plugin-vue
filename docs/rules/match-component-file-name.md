@@ -22,6 +22,8 @@ extension.
 
 You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions with this option.
 
+If you are defining multiple components within the same file, this rule will be ignored.
+
 :-1: Examples of **incorrect** code for this rule:
 
 ```jsx
@@ -118,6 +120,23 @@ new Vue({
 ```js
 // file name: src/MyComponent.js
 Vue.component('MyComponent', {
+  template: '<div />'
+})
+```
+
+```js
+// file name: src/components.js
+// defines multiple components, so this rule is ignored
+Vue.component('MyComponent', {
+  template: '<div />'
+})
+
+Vue.component('OtherComponent', {
+  template: '<div />'
+})
+
+new Vue({
+  name: 'ThirdComponent',
   template: '<div />'
 })
 ```

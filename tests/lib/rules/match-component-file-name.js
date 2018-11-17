@@ -458,6 +458,25 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions
+    },
+    {
+      filename: 'index.js',
+      code: `
+        Vue.component('MyComponent', {
+          template: '<div />'
+        })
+
+        Vue.component('OtherComponent', {
+          template: '<div />'
+        })
+
+        new Vue('OtherComponent', {
+          name: 'ThirdComponent',
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions
     }
   ],
 
