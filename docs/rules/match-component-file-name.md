@@ -143,11 +143,12 @@ new Vue({
 
 ## :wrench: Options
 
-- `{extensions: ["jsx"]}` (default) ... verify components in files with `.jsx` extension.
-- `{extensions: ["vue"]}` (default) ... verify components in files with `.vue` extension.
-- `{extensions: ["js"]}` (default) ... verify components in files with `.js` extension.
-- `{extensions: ["jsx", "vue"]}` ... verify components in files with `.jsx` or `.vue` extensions.
-- `{extensions: ["jsx", "js"]}` ... verify components in files with `.jsx` or `.js` extensions.
-- `{extensions: ["vue", "js"]}` ... verify components in files with `.vue` or `.js` extensions.
-- `{extensions: ["jsx", "vue", "js"]}` ... verify components in files with any of the 
-  provided extensions.
+```json
+{
+  "vue/match-component-file-name": ["error", {
+    "extensions": ["jsx"]
+  }]
+}
+```
+
+- `"extensions": []` ... array of file extensions to be verified. Default is set to ["jsx"]
