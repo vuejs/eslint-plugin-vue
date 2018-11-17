@@ -1,14 +1,26 @@
 # require component name property to match its file name (vue/match-component-file-name)
 
+This rule reports if a component `name` property does not match its file name.
+
 You can define an array of file extensions this rule should verify for 
 the component's name.
+
+## :book: Rule Details
+
+This rule has some options.
+
+```json
+{
+  "vue/match-component-file-name": ["error", {
+    "extensions": ["jsx"]
+  }]
+}
+```
 
 By default this rule will only verify components in a file with a `.jsx` 
 extension.
 
-## :book: Rule Details
-
-This rule reports if a component `name` property does not match its file name.
+You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions with this option.
 
 :-1: Examples of **incorrect** code for this rule:
 
@@ -112,6 +124,11 @@ Vue.component('MyComponent', {
 
 ## :wrench: Options
 
-- `{extensions: ['jsx']}` (default) ... verify components in files with `.jsx` extension.
-- `{extensions: ['jsx', 'vue', 'js']}` (*or any combinations of these extensions*) 
-  ... verify components in files with listed extensions.
+- `{extensions: ["jsx"]}` (default) ... verify components in files with `.jsx` extension.
+- `{extensions: ["vue"]}` (default) ... verify components in files with `.vue` extension.
+- `{extensions: ["js"]}` (default) ... verify components in files with `.js` extension.
+- `{extensions: ["jsx", "vue"]}` ... verify components in files with `.jsx` or `.vue` extensions.
+- `{extensions: ["jsx", "js"]}` ... verify components in files with `.jsx` or `.js` extensions.
+- `{extensions: ["vue", "js"]}` ... verify components in files with `.vue` or `.js` extensions.
+- `{extensions: ["jsx", "vue", "js"]}` ... verify components in files with any of the 
+  provided extensions.
