@@ -22,6 +22,31 @@ export default {
 }
 ```
 
+```vue
+// file name: src/MyComponent.vue
+<script>
+  export default {
+    name: 'MComponent',
+    template: '<div />'
+  }
+</script>
+```
+
+```js
+// file name: src/MyComponent.js
+new Vue({
+  name: 'MComponent',
+  template: '<div />'
+})
+```
+
+```js
+// file name: src/MyComponent.js
+Vue.component('MComponent', {
+  template: '<div />'
+})
+```
+
 :+1: Examples of **correct** code for this rule:
 
 ```jsx
@@ -34,8 +59,59 @@ export default {
 }
 ```
 
+```jsx
+// file name: src/MyComponent.jsx
+// no name property defined
+export default {
+  render: () {
+    return <h1>Hello world</h1>
+  }
+}
+```
+
+```vue
+// file name: src/MyComponent.vue
+<script>
+  export default {
+    name: 'MyComponent',
+    template: '<div />'
+  }
+</script>
+```
+
+```vue
+// file name: src/MyComponent.vue
+<script>
+  export default {
+    template: '<div />'
+  }
+</script>
+```
+
+```js
+// file name: src/MyComponent.js
+new Vue({
+  name: 'MyComponent',
+  template: '<div />'
+})
+```
+
+```js
+// file name: src/MyComponent.js
+new Vue({
+  template: '<div />'
+})
+```
+
+```js
+// file name: src/MyComponent.js
+Vue.component('MyComponent', {
+  template: '<div />'
+})
+```
+
 ## :wrench: Options
 
-- `['jsx']` (default) ... verify components in files with `.jsx` extension.
-- `['jsx', 'vue', 'js']` (*or any combinations of these extensions*) 
+- `{extensions: ['jsx']}` (default) ... verify components in files with `.jsx` extension.
+- `{extensions: ['jsx', 'vue', 'js']}` (*or any combinations of these extensions*) 
   ... verify components in files with listed extensions.

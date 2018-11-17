@@ -58,7 +58,7 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      options: [['jsx']],
+      options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions
     },
     {
@@ -69,7 +69,7 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      options: [['vue']], // missing jsx in options
+      options: [{ extensions: ['vue'] }], // missing jsx in options
       parserOptions: jsxParserOptions
     },
 
@@ -97,7 +97,7 @@ ruleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: [['jsx']], // missing 'vue' in options
+      options: [{ extensions: ['jsx'] }], // missing jsx in options
       parser: 'vue-eslint-parser',
       parserOptions
     },
@@ -110,7 +110,7 @@ ruleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: [['vue']],
+      options: [{ extensions: ['vue'] }],
       parser: 'vue-eslint-parser',
       parserOptions
     },
@@ -121,7 +121,7 @@ ruleTester.run('match-component-file-name', rule, {
           <div />
         </template>
       `,
-      options: [['vue']],
+      options: [{ extensions: ['vue'] }],
       parser: 'vue-eslint-parser',
       parserOptions
     },
@@ -135,7 +135,7 @@ ruleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: [['vue']],
+      options: [{ extensions: ['vue'] }],
       parser: 'vue-eslint-parser',
       parserOptions
     },
@@ -154,12 +154,31 @@ ruleTester.run('match-component-file-name', rule, {
     {
       filename: 'MyComponent.js',
       code: `
+        Vue.component('MComponent', {
+          template: '<div />'
+        })
+      `,
+      parserOptions // options default to [['jsx']]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
         new Vue({
           name: 'MComponent',
           template: '<div />'
         })
       `,
-      options: [['vue']], // missing 'js' in options
+      options: [{ extensions: ['vue'] }], // missing 'js' in options
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        Vue.component('MComponent', {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['vue'] }], // missing 'js' in options
       parserOptions
     },
     {
@@ -169,7 +188,7 @@ ruleTester.run('match-component-file-name', rule, {
           template: '<div />'
         })
       `,
-      options: [['js']],
+      options: [{ extensions: ['js'] }],
       parserOptions
     },
     {
@@ -180,7 +199,17 @@ ruleTester.run('match-component-file-name', rule, {
           template: '<div />'
         })
       `,
-      options: [['js']],
+      options: [{ extensions: ['js'] }],
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        Vue.component('MyComponent', {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
       parserOptions
     }
   ],
@@ -208,7 +237,7 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
-      options: [['jsx']],
+      options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name MyComponent.'
@@ -226,7 +255,7 @@ ruleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      options: [['vue']],
+      options: [{ extensions: ['vue'] }],
       parser: 'vue-eslint-parser',
       parserOptions,
       errors: [{
@@ -243,7 +272,20 @@ ruleTester.run('match-component-file-name', rule, {
           template: '<div />'
         })
       `,
-      options: [['js']],
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [{
+        message: 'Component name `MComponent` should match file name MyComponent.'
+      }]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        Vue.component('MComponent', {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
       parserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name MyComponent.'
