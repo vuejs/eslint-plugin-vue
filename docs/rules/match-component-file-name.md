@@ -12,7 +12,8 @@ This rule has some options.
 ```json
 {
   "vue/match-component-file-name": ["error", {
-    "extensions": ["jsx"]
+    "extensions": ["jsx"],
+    "shouldMatchCase": false
   }]
 }
 ```
@@ -20,7 +21,9 @@ This rule has some options.
 By default this rule will only verify components in a file with a `.jsx` 
 extension.
 
-You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions with this option.
+You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions.
+
+You can also enforce same case between the component's name and its file name.
 
 If you are defining multiple components within the same file, this rule will be ignored.
 
@@ -38,6 +41,7 @@ export default {
 
 ```vue
 // file name: src/MyComponent.vue
+// options: {extensions: ["vue"]}
 <script>
   export default {
     name: 'MComponent',
@@ -48,6 +52,7 @@ export default {
 
 ```js
 // file name: src/MyComponent.js
+// options: {extensions: ["js"]}
 new Vue({
   name: 'MComponent',
   template: '<div />'
@@ -56,9 +61,28 @@ new Vue({
 
 ```js
 // file name: src/MyComponent.js
+// options: {extensions: ["js"]}
 Vue.component('MComponent', {
   template: '<div />'
 })
+```
+
+```jsx
+// file name: src/MyComponent.jsx
+// options: {shouldMatchCase: true}
+export default {
+  name: 'my-component',
+  render() { return <div /> }
+}
+```
+
+```jsx
+// file name: src/my-component.jsx
+// options: {shouldMatchCase: true}
+export default {
+  name: 'MyComponent',
+  render() { return <div /> }
+}
 ```
 
 :+1: Examples of **correct** code for this rule:
@@ -141,14 +165,35 @@ new Vue({
 })
 ```
 
+```jsx
+// file name: src/MyComponent.jsx
+// options: {shouldMatchCase: true}
+export default {
+  name: 'MyComponent',
+  render() { return <div /> }
+}
+```
+
+```jsx
+// file name: src/my-component.jsx
+// options: {shouldMatchCase: true}
+export default {
+  name: 'my-component',
+  render() { return <div /> }
+}
+```
+
 ## :wrench: Options
 
 ```json
 {
   "vue/match-component-file-name": ["error", {
-    "extensions": ["jsx"]
+    "extensions": ["jsx"],
+    "shouldMatchCase": false
   }]
 }
 ```
 
-- `"extensions": []` ... array of file extensions to be verified. Default is set to ["jsx"]
+- `"extensions": []` ... array of file extensions to be verified. Default is set to `["jsx"]`.
+- `"shouldMatchCase": false` ... boolean indicating if component's name
+  should also match its file name case. Default is set to `false`.

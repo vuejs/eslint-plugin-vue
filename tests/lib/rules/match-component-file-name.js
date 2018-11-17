@@ -479,48 +479,58 @@ ruleTester.run('match-component-file-name', rule, {
       parserOptions
     },
 
-    // mixed cases
+    // casing
     {
-      filename: 'MyComponent.vue',
+      filename: 'my-component.jsx',
       code: `
-        <script>
-          export default {
-            name: 'my-component',
-            template: '<div />'
-          }
-        </script>
+        export default {
+          name: 'my-component',
+          render() { return <div /> }
+        }
       `,
-      options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
-      parserOptions
+      parserOptions: jsxParserOptions
     },
     {
-      filename: 'my-component.vue',
+      filename: 'my-component.jsx',
       code: `
-        <script>
-          export default {
-            name: 'my-component',
-            template: '<div />'
-          }
-        </script>
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
       `,
-      options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
-      parserOptions
+      parserOptions: jsxParserOptions
     },
     {
-      filename: 'my-component.vue',
+      filename: 'MyComponent.jsx',
       code: `
-        <script>
-          export default {
-            name: 'MyComponent',
-            template: '<div />'
-          }
-        </script>
+        export default {
+          name: 'my-component',
+          render() { return <div /> }
+        }
       `,
-      options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
-      parserOptions
+      parserOptions: jsxParserOptions
+    },
+    {
+      filename: 'my-component.jsx',
+      code: `
+        export default {
+          name: 'my-component',
+          render() { return <div /> }
+        }
+      `,
+      options: [{ shouldMatchCase: true }],
+      parserOptions: jsxParserOptions
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `,
+      options: [{ shouldMatchCase: true }],
+      parserOptions: jsxParserOptions
     }
   ],
 
@@ -683,6 +693,36 @@ ruleTester.run('match-component-file-name', rule, {
       parserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name `MyComponent`.'
+      }]
+    },
+
+    // casing
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
+          name: 'my-component',
+          render() { return <div /> }
+        }
+      `,
+      options: [{ shouldMatchCase: true }],
+      parserOptions: jsxParserOptions,
+      errors: [{
+        message: 'Component name `my-component` should match file name `MyComponent`.'
+      }]
+    },
+    {
+      filename: 'my-component.jsx',
+      code: `
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `,
+      options: [{ shouldMatchCase: true }],
+      parserOptions: jsxParserOptions,
+      errors: [{
+        message: 'Component name `MyComponent` should match file name `my-component`.'
       }]
     }
   ]
