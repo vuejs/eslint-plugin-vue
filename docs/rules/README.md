@@ -49,6 +49,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  |
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
+| [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
 | [vue/valid-v-cloak](./valid-v-cloak.md) | enforce valid `v-cloak` directives |  |
@@ -77,19 +78,23 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
+| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
 | [vue/html-indent](./html-indent.md) | enforce consistent indentation in `<template>` | :wrench: |
 | [vue/html-self-closing](./html-self-closing.md) | enforce self-closing style | :wrench: |
 | [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: |
+| [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: |
 | [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: |
 | [vue/name-property-casing](./name-property-casing.md) | enforce specific casing for the name property in Vue components | :wrench: |
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
+| [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components | :wrench: |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
+| [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
 | [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: |
 | [vue/v-on-style](./v-on-style.md) | enforce `v-on` directive style | :wrench: |
 
@@ -121,19 +126,14 @@ For example:
 ```json
 {
   "rules": {
-    "vue/component-name-in-template-casing": "error"
+    "vue/script-indent": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
-| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
-| [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: |
-| [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
-| [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
-| [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
 
 ## Deprecated
 
