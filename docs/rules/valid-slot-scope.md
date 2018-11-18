@@ -70,5 +70,8 @@ Nothing.
 
 - [no-parsing-error]
 
+## Related links
+
+- [Guide - Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots)
 
 [no-parsing-error]: no-parsing-error.md
