@@ -197,3 +197,8 @@ export default {
 - `"extensions": []` ... array of file extensions to be verified. Default is set to `["jsx"]`.
 - `"shouldMatchCase": false` ... boolean indicating if component's name
   should also match its file name case. Default is set to `false`.
+
+## :books: Further reading
+
+ - [Style guide - Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended)
+ 
