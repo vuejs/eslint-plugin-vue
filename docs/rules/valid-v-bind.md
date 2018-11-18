@@ -15,6 +15,8 @@ This rule does not report `v-bind` directives which do not have their argument (
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
+:-1: Examples of **incorrect** code for this rule:
+
 ```html
 <div v-bind/>
 <div :aaa/>
