@@ -237,7 +237,38 @@ tester.run('valid-v-bind-sync', rule, {
         endColumn: 45
       }]
     },
-
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-for="e1 in list1">
+            <div><div>
+              <div v-for="e2 in list2">
+                <MyComponent v-bind:foo.sync="e1" />
+              </div>
+            </div></div>
+          </div>
+        </template>
+      `,
+      errors: [{
+        message: "'.sync' modifiers cannot update the iteration variable 'e1' itself.",
+        line: 6
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-for="(e, index) in list">
+            <MyComponent v-bind:foo.sync="index" />
+          </div>
+        </template>
+      `,
+      errors: [{
+        message: "'.sync' modifiers cannot update the iteration variable 'index' itself.",
+        line: 4
+      }]
+    },
     {
       filename: 'test.vue',
       code: `
