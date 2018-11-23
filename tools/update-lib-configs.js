@@ -14,9 +14,11 @@ const path = require('path')
 const eslint = require('eslint')
 const categories = require('./lib/categories')
 
+const errorCategories = ['base', 'essential']
+
 function formatRules (rules) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = 'error'
+    setting[rule.ruleId] = errorCategories.includes(rule.meta.docs.category) ? 'error' : 'warn'
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)
