@@ -320,6 +320,17 @@ tester.run('html-indent', rule, loadPatterns(
       filename: 'test.vue',
       code: unIndent`
         <template>
+          <div><pre>aaa
+        bbb ccc
+        ddd
+        fff</pre></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
           <pre>
         <!-- comment -->
         <!-- comment --> <!-- comment -->
