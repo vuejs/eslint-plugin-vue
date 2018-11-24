@@ -1,5 +1,7 @@
 # enforce usage of `exact` modifier on `v-on` (vue/use-v-on-exact)
 
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+
 This rule enforce usage of `exact` modifier on `v-on` when there is another `v-on` with modifier.
 
 :+1: Examples of **correct** code for this rule:
