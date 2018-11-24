@@ -1,10 +1,8 @@
-# enforce specific casing for the name property in Vue components (vue/name-property-casing)
+# enforce specific casing for component definition name (vue/component-definition-name-casing)
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
-- :warning: This rule was **deprecated** and replaced by [vue/component-definition-name-casing](component-definition-name-casing.md) rule.
 
-Define a style for the `name` property casing for consistency purposes.
+Define a style for component definition name casing for consistency purposes.
 
 ## :book: Rule Details
 
@@ -15,6 +13,11 @@ export default {
   name: 'MyComponent'
 }
 ```
+```js
+Vue.component('MyComponent', {
+  
+})
+```
 
 :+1: Examples of **correct** code for `kebab-case`:
 
@@ -23,13 +26,20 @@ export default {
   name: 'my-component'
 }
 ```
+```js
+Vue.component('my-component', {
+  
+})
+```
 
 ## :wrench: Options
 
 Default casing is set to `PascalCase`.
 
-```
-"vue/name-property-casing": ["error", "PascalCase|kebab-case"]
+```json
+{
+  "vue/component-definition-name-casing": ["error", "PascalCase|kebab-case"]
+}
 ```
 
 ## Related links
