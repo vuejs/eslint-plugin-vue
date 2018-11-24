@@ -73,6 +73,36 @@ ruleTester.run('require-render-return', rule, {
     {
       filename: 'test.vue',
       code: `export default {
+        render() {
+          const foo = function () {}
+          return foo
+        }
+      }`,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          if (a) {
+            if (b) {
+              
+            }
+            if (c) {
+              return true
+            } else {
+              return foo
+            }
+          } else {
+            return foo
+          }
+        }
+      }`,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
         render: () => null
       }`,
       parserOptions
@@ -120,10 +150,58 @@ ruleTester.run('require-render-return', rule, {
       }]
     },
     {
+      filename: 'test.vue',
+      code: `export default {
+        render: function () {
+          if (foo) {
+            return h('div', 'hello')
+          }
+        }
+      }`,
+      parserOptions,
+      errors: [{
+        message: 'Expected to return a value in render function.',
+        type: 'Identifier',
+        line: 2
+      }]
+    },
+    {
       code: `Vue.component('test', {
         render: function () {
           if (a) {
             return
+          }
+        }
+      })`,
+      parserOptions,
+      errors: [{
+        message: 'Expected to return a value in render function.',
+        type: 'Identifier',
+        line: 2
+      }]
+    },
+    {
+      code: `Vue.component('test2', {
+        render: function () {
+          if (a) {
+            return h('div', 'hello')
+          }
+        }
+      })`,
+      parserOptions,
+      errors: [{
+        message: 'Expected to return a value in render function.',
+        type: 'Identifier',
+        line: 2
+      }]
+    },
+    {
+      code: `Vue.component('test2', {
+        render: function () {
+          if (a) {
+            
+          } else {
+            return h('div', 'hello')
           }
         }
       })`,

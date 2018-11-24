@@ -141,6 +141,28 @@ tester.run('singleline-html-element-content-newline', rule, {
         ignores: ['ignore-tag']
       }]
     },
+    {
+      code: `
+        <template>
+          <IgnoreTag>content</IgnoreTag>
+          <IgnoreTag attr>content</IgnoreTag>
+          <IgnoreTag><span attr>content</span></IgnoreTag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
+      }]
+    },
+    {
+      code: `
+        <template>
+          <ignore-tag>content</ignore-tag>
+          <ignore-tag attr>content</ignore-tag>
+          <ignore-tag><span attr>content</span></ignore-tag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
+      }]
+    },
     // not target
     `
       <template>
@@ -433,6 +455,24 @@ singleline element
       `,
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <Div class="panel">content</Div>
+        </template>
+      `,
+      output: `
+        <template>
+          <Div class="panel">
+content
+</Div>
+        </template>
+      `,
+      errors: [
+        'Expected 1 line break after opening tag (`<Div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</Div>`), but no line breaks found.'
       ]
     }
   ]
