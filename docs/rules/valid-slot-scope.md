@@ -7,8 +7,6 @@ This rule checks whether every `slot-scope` (or `scope`) attributes is valid.
 This rule reports `slot-scope` attributes in the following cases:
 
 - The `slot-scope` attribute does not have that attribute value. E.g. `<div slot-scope></div>`
-- The `slot-scope` attribute have the attribute value which is extra access to slot data. E.g. `<div slot-scope="prop, extra"></div>`
-- The `slot-scope` attribute have the attribute value which is rest parameter. E.g. `<div slot-scope="...props"></div>`
 
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
@@ -23,17 +21,6 @@ This rule does not check syntax errors in directives because it's checked by [no
   </TheComponent>
   <TheComponent>
     <template slot-scope="">
-      ...
-    </template>
-  </TheComponent>
-  <TheComponent>
-    <template slot-scope="a, b, c">
-      <!-- `b` and `c` are extra access. -->
-      ...
-    </template>
-  </TheComponent>
-  <TheComponent>
-    <template slot-scope="...props">
       ...
     </template>
   </TheComponent>

@@ -178,6 +178,127 @@ tester.run('valid-slot-scope', rule, {
           </MyComponent>
         </template>
       `
+    },
+    // parse errors
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope="...args">
+              {{args}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope="a, b  ">
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope="{a} , b">
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope="a, b, c, d /**/">
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope='a, b'>
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope=a,b>
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope=a,{b}>
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope=a,[b]>
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope="a,">
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent>
+            <div slot-scope=a,>
+              {{a}}
+            </div>
+          </MyComponent>
+        </template>
+      `
     }
   ],
   invalid: [
@@ -226,168 +347,6 @@ tester.run('valid-slot-scope', rule, {
         message: "'scope' attributes require a value.",
         line: 4
       }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope="...args">
-              {{args}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [{
-        message: 'The top level rest parameter is useless.',
-        line: 4,
-        column: 30,
-        endColumn: 37
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope="a, b  ">
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [{
-        message: 'Unexpected extra access parameters `b`.',
-        line: 4,
-        column: 31,
-        endColumn: 34
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope="{a} , b">
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [{
-        message: 'Unexpected extra access parameters `b`.',
-        line: 4,
-        column: 34,
-        endColumn: 37
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope="a, b, c, d /**/">
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [{
-        message: 'Unexpected extra access parameters `b, c, d`.',
-        line: 4,
-        column: 31,
-        endColumn: 40
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope='a, b'>
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected extra access parameters `b`.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope=a,b>
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected extra access parameters `b`.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope=a,{b}>
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected extra access parameters `{b}`.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope=a,[b]>
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected extra access parameters `[b]`.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope="a,">
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected trailing comma.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <MyComponent>
-            <div slot-scope=a,>
-              {{a}}
-            </div>
-          </MyComponent>
-        </template>
-      `,
-      errors: [
-        'Unexpected trailing comma.'
-      ]
     }
   ]
 })
