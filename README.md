@@ -237,6 +237,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+|  | [vue/match-component-file-name](./docs/rules/match-component-file-name.md) | require component name property to match its file name |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
 
 ### Deprecated
