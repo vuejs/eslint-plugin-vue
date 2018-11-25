@@ -1,18 +1,18 @@
 <template>
-    <eslint-editor
-        :linter="linter"
-        :config="config"
-        :code="code"
-        :style="{ height }"
-        class="eslint-code-block"
-        filename="example.vue"
-        language="html"
-        :preprocess="preprocess"
-        :postprocess="postprocess"
-        dark
-        :format="format"
-        :fix="fix"
-    />
+  <eslint-editor
+    :linter="linter"
+    :config="config"
+    :code="code"
+    :style="{ height }"
+    class="eslint-code-block"
+    filename="example.vue"
+    language="html"
+    :preprocess="preprocess"
+    :postprocess="postprocess"
+    dark
+    :format="format"
+    :fix="fix"
+  />
 </template>
 
 <script>
@@ -116,11 +116,13 @@ export default {
       import('eslint4b/dist/linter'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])
+
     const linter = (this.linter = new Linter())
 
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
+
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }
 }
