@@ -2,7 +2,9 @@
 sidebarDepth: 0
 ---
 
-# All rules
+# Available rules
+
+<!-- Content below is auto generated in tools/lib/categories.js -->
 
 ## Base Rules (Enabling Correct ESLint Parsing)
 
