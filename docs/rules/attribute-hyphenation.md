@@ -5,6 +5,8 @@
 
 ## :book: Rule Details
 
+This rule enforces using hyphenated attribute names on custom components in Vue templates.
+
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 ```
 <template>
