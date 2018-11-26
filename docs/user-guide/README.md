@@ -2,13 +2,19 @@
 
 ## :cd: Installation
 
-Use [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) to install.
+Via `vue-cli` (**Recommended**):
+```bash
+vue add @vue/cli-plugin-eslint
+```
 
+Via [npm](https://www.npmjs.com/):
 ```bash
 npm install --save-dev eslint eslint-plugin-vue@next
 ```
+
+Via [yarn](https://yarnpkg.com/):
 ```bash
-yarn add eslint eslint-plugin-vue@next --dev
+yarn add -D eslint eslint-plugin-vue@next
 ```
 
 ::: tip Requirements
@@ -20,7 +26,7 @@ yarn add eslint eslint-plugin-vue@next --dev
 
 ### Configuration
 
-Create `.eslintrc.*` file to configure rules. See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/docs/user-guide/configuring).
+Use `.eslintrc.*` file to configure rules. See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/docs/user-guide/configuring).
 
 Example **.eslintrc.js**:
 
@@ -40,6 +46,25 @@ module.exports = {
 
 See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
 
+:::warning Reporting rules
+By default all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application report warnings. What does it mean? By default - nothing, but if you want - you can set up a treshold and break the build after a certain amount of warnings, instead of any. More informations [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+:::
+
+### Running ESLint from command line
+
+If you want to run `eslint` from command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern because ESLint targets only `.js` files by default.
+
+Examples:
+
+```bash
+eslint --ext .js,.vue src
+eslint "src/**/*.{js,vue}"
+```
+
+::: tip
+If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint) you should have `lint` script added in your `package.json`. That means you can just run `yarn lint` or `npm run lint`.
+:::
+
 #### How to use custom parser?
 
 If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [typescript-eslint-parser](https://www.npmjs.com/package/typescript-eslint-parser), you have to use `parserOptions.parser` option instead of `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, so this plugin doesn't work if you overwrote `parser` option.
@@ -50,17 +75,6 @@ If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/p
 +     "parser": "babel-eslint",
       "sourceType": "module"
   }
-```
-
-### Command line
-
-If you want to run `eslint` from command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern because ESLint targets only `.js` files by default.
-
-Examples:
-
-```bash
-eslint --ext .js,.vue src
-eslint "src/**/*.{js,vue}"
 ```
 
 ### How ESLint detects components?
