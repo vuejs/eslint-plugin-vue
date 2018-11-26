@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/no-use-v-if-with-v-for
 > disallow use v-if on the same element as v-for

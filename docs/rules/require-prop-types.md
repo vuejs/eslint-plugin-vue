@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/require-prop-types
 > require type definitions in props

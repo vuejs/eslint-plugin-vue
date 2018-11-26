@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/require-v-for-key
 > require `v-bind:key` with `v-for` directives

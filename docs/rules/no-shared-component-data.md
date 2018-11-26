@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/no-shared-component-data
 > enforce component's data property to be a function

@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/order-in-components
 > enforce order of properties in components

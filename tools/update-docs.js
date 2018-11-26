@@ -28,6 +28,7 @@ const ROOT = path.resolve(__dirname, '../docs/rules')
 
 const fileIntro = `---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 `
 

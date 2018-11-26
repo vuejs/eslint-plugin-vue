@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/html-quotes
 > enforce quotes style of HTML attributes

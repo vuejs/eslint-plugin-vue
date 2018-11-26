@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/no-side-effects-in-computed-properties
 > disallow side effects in computed properties

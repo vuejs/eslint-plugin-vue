@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/html-closing-bracket-newline
 > require or disallow a line break before tag's closing brackets

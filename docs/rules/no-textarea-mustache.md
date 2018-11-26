@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/no-textarea-mustache
 > disallow mustaches in `<textarea>`

@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/name-property-casing
 > enforce specific casing for the name property in Vue components

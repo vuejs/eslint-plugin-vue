@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/no-unused-vars
 > disallow unused variable definitions of v-for directives or scope attributes

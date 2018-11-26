@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/require-prop-type-constructor
 > require prop type to be a constructor

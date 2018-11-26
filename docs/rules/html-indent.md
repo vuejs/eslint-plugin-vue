@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/html-indent
 > enforce consistent indentation in `<template>`

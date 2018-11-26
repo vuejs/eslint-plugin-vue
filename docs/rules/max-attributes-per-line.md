@@ -1,5 +1,6 @@
 ---
 pageClass: rule-details
+sidebarDepth: 0
 ---
 # vue/max-attributes-per-line
 > enforce the maximum number of attributes per line
