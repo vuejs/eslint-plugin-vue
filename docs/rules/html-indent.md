@@ -61,6 +61,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 {
   "vue/html-indent": ["error", type, {
     "attribute": 1,
+    "baseIndent": 1,
     "closeBracket": 0,
     "alignAttributesVertically": true,
     "ignores": []
@@ -70,6 +71,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 - `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
+- `baseIndent` (`integer`) ... The multiplier of indentation for top-level statements. Default is `1`.
 - `closeBracket` (`integer`) ... The multiplier of indentation for right brackets. Default is `0`.
 - `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`
 - `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
@@ -144,6 +146,28 @@ This rule enforces a consistent indentation style in `<template>`. The default s
        class=""
        some-attr=""
   />
+</template>
+```
+</eslint-code-block>
+
+### `2, {"baseIndent": 0}`
+
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {baseIndent: 0}]}">
+```
+<template>
+<!-- ✓ GOOD -->
+<div>
+  <span>
+    Hello!
+  </span>
+</div>
+
+  <!-- ✗ BAD -->
+  <div>
+    <span>
+      Hello!
+    </span>
+  </div>
 </template>
 ```
 </eslint-code-block>
