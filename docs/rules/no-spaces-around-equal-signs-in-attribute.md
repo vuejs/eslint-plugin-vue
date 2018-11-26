@@ -1,4 +1,8 @@
-# disallow spaces around equal signs in attribute (vue/no-spaces-around-equal-signs-in-attribute)
+---
+pageClass: rule-details
+---
+# vue/no-spaces-around-equal-signs-in-attribute
+> disallow spaces around equal signs in attribute
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

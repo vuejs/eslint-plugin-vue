@@ -1,4 +1,8 @@
-# enforce valid `v-else` directives (vue/valid-v-else)
+---
+pageClass: rule-details
+---
+# vue/valid-v-else
+> enforce valid `v-else` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

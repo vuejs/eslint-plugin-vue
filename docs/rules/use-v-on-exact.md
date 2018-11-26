@@ -1,4 +1,8 @@
-# enforce usage of `exact` modifier on `v-on` (vue/use-v-on-exact)
+---
+pageClass: rule-details
+---
+# vue/use-v-on-exact
+> enforce usage of `exact` modifier on `v-on`
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

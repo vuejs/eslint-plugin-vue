@@ -1,4 +1,8 @@
-# disallow overwriting reserved keys (vue/no-reserved-keys)
+---
+pageClass: rule-details
+---
+# vue/no-reserved-keys
+> disallow overwriting reserved keys
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

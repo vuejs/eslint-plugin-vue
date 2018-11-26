@@ -26,6 +26,11 @@ const categories = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
+const fileIntro = `---
+pageClass: rule-details
+---
+`
+
 function formatItems (items) {
   if (items.length <= 2) {
     return items.join(' and ')
@@ -51,7 +56,7 @@ class DocFile {
   updateHeader () {
     const { ruleId, meta } = this.rule
     const categoryIndex = categories.findIndex(category => category.categoryId === meta.docs.category)
-    const title = `# ${meta.docs.description} (${ruleId})`
+    const title = `# ${ruleId}\n> ${meta.docs.description}`
     const notes = []
 
     if (meta.deprecated) {
@@ -74,12 +79,12 @@ class DocFile {
       notes.push('', '')
     }
 
-    const headerPattern = /^#[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n[^\n]*\n+(?:- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
     if (headerPattern.test(this.content)) {
       this.content = this.content.replace(headerPattern, header)
     } else {
-      this.content = `${header}${this.content.trim()}\n`
+      this.content = `${fileIntro}${header}${this.content.trim()}\n`
     }
 
     return this

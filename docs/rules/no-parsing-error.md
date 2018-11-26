@@ -1,4 +1,8 @@
-# disallow parsing errors in `<template>` (vue/no-parsing-error)
+---
+pageClass: rule-details
+---
+# vue/no-parsing-error
+> disallow parsing errors in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

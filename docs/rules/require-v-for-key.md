@@ -1,4 +1,8 @@
-# require `v-bind:key` with `v-for` directives (vue/require-v-for-key)
+---
+pageClass: rule-details
+---
+# vue/require-v-for-key
+> require `v-bind:key` with `v-for` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

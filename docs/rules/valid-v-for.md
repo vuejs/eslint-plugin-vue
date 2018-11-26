@@ -1,4 +1,8 @@
-# enforce valid `v-for` directives (vue/valid-v-for)
+---
+pageClass: rule-details
+---
+# vue/valid-v-for
+> enforce valid `v-for` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

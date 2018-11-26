@@ -1,4 +1,8 @@
-# enforce valid `v-once` directives (vue/valid-v-once)
+---
+pageClass: rule-details
+---
+# vue/valid-v-once
+> enforce valid `v-once` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

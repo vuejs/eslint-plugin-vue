@@ -1,4 +1,8 @@
-# enforce valid `v-text` directives (vue/valid-v-text)
+---
+pageClass: rule-details
+---
+# vue/valid-v-text
+> enforce valid `v-text` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

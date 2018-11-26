@@ -1,4 +1,8 @@
-# disallow side effects in computed properties (vue/no-side-effects-in-computed-properties)
+---
+pageClass: rule-details
+---
+# vue/no-side-effects-in-computed-properties
+> disallow side effects in computed properties
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

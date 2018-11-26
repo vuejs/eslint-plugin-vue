@@ -1,4 +1,8 @@
-# support comment-directives in `<template>` (vue/comment-directive)
+---
+pageClass: rule-details
+---
+# vue/comment-directive
+> support comment-directives in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

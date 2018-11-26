@@ -1,4 +1,8 @@
-# disallow duplication of attributes (vue/no-duplicate-attributes)
+---
+pageClass: rule-details
+---
+# vue/no-duplicate-attributes
+> disallow duplication of attributes
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

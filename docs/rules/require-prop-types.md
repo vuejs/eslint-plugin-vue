@@ -1,4 +1,8 @@
-# require type definitions in props (vue/require-prop-types)
+---
+pageClass: rule-details
+---
+# vue/require-prop-types
+> require type definitions in props
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

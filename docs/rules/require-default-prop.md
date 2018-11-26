@@ -1,4 +1,8 @@
-# require default value for props (vue/require-default-prop)
+---
+pageClass: rule-details
+---
+# vue/require-default-prop
+> require default value for props
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

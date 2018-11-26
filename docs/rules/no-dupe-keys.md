@@ -1,4 +1,8 @@
-# disallow duplication of field names (vue/no-dupe-keys)
+---
+pageClass: rule-details
+---
+# vue/no-dupe-keys
+> disallow duplication of field names
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

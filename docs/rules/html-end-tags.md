@@ -1,4 +1,8 @@
-# enforce end tag style (vue/html-end-tags)
+---
+pageClass: rule-details
+---
+# vue/html-end-tags
+> enforce end tag style
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

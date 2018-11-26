@@ -1,4 +1,8 @@
-# disallow `key` attribute on `<template>` (vue/no-template-key)
+---
+pageClass: rule-details
+---
+# vue/no-template-key
+> disallow `key` attribute on `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

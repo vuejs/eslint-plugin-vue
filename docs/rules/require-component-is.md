@@ -1,4 +1,8 @@
-# require `v-bind:is` of `<component>` elements (vue/require-component-is)
+---
+pageClass: rule-details
+---
+# vue/require-component-is
+> require `v-bind:is` of `<component>` elements
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

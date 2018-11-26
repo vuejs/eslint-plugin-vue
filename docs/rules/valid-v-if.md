@@ -1,4 +1,8 @@
-# enforce valid `v-if` directives (vue/valid-v-if)
+---
+pageClass: rule-details
+---
+# vue/valid-v-if
+> enforce valid `v-if` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

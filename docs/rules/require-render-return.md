@@ -1,4 +1,8 @@
-# enforce render function to always return value (vue/require-render-return)
+---
+pageClass: rule-details
+---
+# vue/require-render-return
+> enforce render function to always return value
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

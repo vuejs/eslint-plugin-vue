@@ -1,4 +1,8 @@
-# disallow use v-if on the same element as v-for (vue/no-use-v-if-with-v-for)
+---
+pageClass: rule-details
+---
+# vue/no-use-v-if-with-v-for
+> disallow use v-if on the same element as v-for
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

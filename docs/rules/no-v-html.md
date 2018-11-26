@@ -1,4 +1,8 @@
-# disallow use of v-html to prevent XSS attack (vue/no-v-html)
+---
+pageClass: rule-details
+---
+# vue/no-v-html
+> disallow use of v-html to prevent XSS attack
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 

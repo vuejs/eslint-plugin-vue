@@ -1,4 +1,8 @@
-# disallow confusing `v-for` and `v-if` on the same element (vue/no-confusing-v-for-v-if)
+---
+pageClass: rule-details
+---
+# vue/no-confusing-v-for-v-if
+> disallow confusing `v-for` and `v-if` on the same element
 
 - :warning: This rule was **deprecated** and replaced by [vue/no-use-v-if-with-v-for](no-use-v-if-with-v-for.md) rule.
 

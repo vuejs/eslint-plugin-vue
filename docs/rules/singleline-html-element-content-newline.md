@@ -1,4 +1,8 @@
-# require a line break before and after the contents of a singleline element (vue/singleline-html-element-content-newline)
+---
+pageClass: rule-details
+---
+# vue/singleline-html-element-content-newline
+> require a line break before and after the contents of a singleline element
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

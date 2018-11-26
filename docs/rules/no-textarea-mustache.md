@@ -1,4 +1,8 @@
-# disallow mustaches in `<textarea>` (vue/no-textarea-mustache)
+---
+pageClass: rule-details
+---
+# vue/no-textarea-mustache
+> disallow mustaches in `<textarea>`
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

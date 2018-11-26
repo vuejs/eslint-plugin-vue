@@ -1,4 +1,8 @@
-# disallow usage of `this` in template (vue/this-in-template)
+---
+pageClass: rule-details
+---
+# vue/this-in-template
+> disallow usage of `this` in template
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 

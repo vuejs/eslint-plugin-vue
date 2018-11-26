@@ -1,4 +1,8 @@
-# disallow asynchronous actions in computed properties (vue/no-async-in-computed-properties)
+---
+pageClass: rule-details
+---
+# vue/no-async-in-computed-properties
+> disallow asynchronous actions in computed properties
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

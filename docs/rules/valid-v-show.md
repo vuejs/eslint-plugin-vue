@@ -1,4 +1,8 @@
-# enforce valid `v-show` directives (vue/valid-v-show)
+---
+pageClass: rule-details
+---
+# vue/valid-v-show
+> enforce valid `v-show` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

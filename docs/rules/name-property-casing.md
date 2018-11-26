@@ -1,4 +1,8 @@
-# enforce specific casing for the name property in Vue components (vue/name-property-casing)
+---
+pageClass: rule-details
+---
+# vue/name-property-casing
+> enforce specific casing for the name property in Vue components
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

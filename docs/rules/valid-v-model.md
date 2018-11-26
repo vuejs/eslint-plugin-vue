@@ -1,4 +1,8 @@
-# enforce valid `v-model` directives (vue/valid-v-model)
+---
+pageClass: rule-details
+---
+# vue/valid-v-model
+> enforce valid `v-model` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 

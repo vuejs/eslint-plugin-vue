@@ -1,4 +1,8 @@
-# enforce valid `v-html` directives (vue/valid-v-html)
+---
+pageClass: rule-details
+---
+# vue/valid-v-html
+> enforce valid `v-html` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
