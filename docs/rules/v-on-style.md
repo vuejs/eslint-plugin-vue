@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/v-on-style
+description: enforce `v-on` directive style
 ---
 # vue/v-on-style
 > enforce `v-on` directive style

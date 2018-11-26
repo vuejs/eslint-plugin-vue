@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/html-indent
+description: enforce consistent indentation in `<template>`
 ---
 # vue/html-indent
 > enforce consistent indentation in `<template>`

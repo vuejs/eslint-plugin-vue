@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/v-bind-style
+description: enforce `v-bind` directive style
 ---
 # vue/v-bind-style
 > enforce `v-bind` directive style

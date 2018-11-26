@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/jsx-uses-vars
+description: prevent variables used in JSX to be marked as unused
 ---
 # vue/jsx-uses-vars
 > prevent variables used in JSX to be marked as unused

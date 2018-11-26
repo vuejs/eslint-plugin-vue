@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-unused-components
+description: disallow registering components that are not used inside templates
 ---
 # vue/no-unused-components
 > disallow registering components that are not used inside templates

@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-on
+description: enforce valid `v-on` directives
 ---
 # vue/valid-v-on
 > enforce valid `v-on` directives

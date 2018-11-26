@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-multi-spaces
+description: disallow multiple spaces
 ---
 # vue/no-multi-spaces
 > disallow multiple spaces

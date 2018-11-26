@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-if
+description: enforce valid `v-if` directives
 ---
 # vue/valid-v-if
 > enforce valid `v-if` directives

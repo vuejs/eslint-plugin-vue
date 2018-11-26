@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/mustache-interpolation-spacing
+description: enforce unified spacing in mustache interpolations
 ---
 # vue/mustache-interpolation-spacing
 > enforce unified spacing in mustache interpolations

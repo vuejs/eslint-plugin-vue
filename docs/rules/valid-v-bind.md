@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-bind
+description: enforce valid `v-bind` directives
 ---
 # vue/valid-v-bind
 > enforce valid `v-bind` directives

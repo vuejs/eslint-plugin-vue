@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/html-end-tags
+description: enforce end tag style
 ---
 # vue/html-end-tags
 > enforce end tag style

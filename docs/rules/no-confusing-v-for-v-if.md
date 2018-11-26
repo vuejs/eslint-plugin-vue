@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-confusing-v-for-v-if
+description: disallow confusing `v-for` and `v-if` on the same element
 ---
 # vue/no-confusing-v-for-v-if
 > disallow confusing `v-for` and `v-if` on the same element

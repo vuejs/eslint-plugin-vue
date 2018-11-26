@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/this-in-template
+description: disallow usage of `this` in template
 ---
 # vue/this-in-template
 > disallow usage of `this` in template

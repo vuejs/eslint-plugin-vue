@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/attribute-hyphenation
+description: enforce attribute naming style on custom components in template
 ---
 # vue/attribute-hyphenation
 > enforce attribute naming style on custom components in template

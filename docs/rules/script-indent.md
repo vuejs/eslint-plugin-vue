@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/script-indent
+description: enforce consistent indentation in `<script>`
 ---
 # vue/script-indent
 > enforce consistent indentation in `<script>`

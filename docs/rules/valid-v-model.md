@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-model
+description: enforce valid `v-model` directives
 ---
 # vue/valid-v-model
 > enforce valid `v-model` directives

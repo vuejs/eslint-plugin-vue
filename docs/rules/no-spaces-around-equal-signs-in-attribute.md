@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-spaces-around-equal-signs-in-attribute
+description: disallow spaces around equal signs in attribute
 ---
 # vue/no-spaces-around-equal-signs-in-attribute
 > disallow spaces around equal signs in attribute

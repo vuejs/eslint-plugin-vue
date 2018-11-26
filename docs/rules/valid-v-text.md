@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-text
+description: enforce valid `v-text` directives
 ---
 # vue/valid-v-text
 > enforce valid `v-text` directives

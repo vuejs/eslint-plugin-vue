@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/component-name-in-template-casing
+description: enforce specific casing for the component naming style in template
 ---
 # vue/component-name-in-template-casing
 > enforce specific casing for the component naming style in template

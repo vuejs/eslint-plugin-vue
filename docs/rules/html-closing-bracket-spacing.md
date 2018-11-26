@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/html-closing-bracket-spacing
+description: require or disallow a space before tag's closing brackets
 ---
 # vue/html-closing-bracket-spacing
 > require or disallow a space before tag's closing brackets

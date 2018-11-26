@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-else
+description: enforce valid `v-else` directives
 ---
 # vue/valid-v-else
 > enforce valid `v-else` directives
