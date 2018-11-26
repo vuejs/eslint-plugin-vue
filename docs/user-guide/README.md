@@ -40,7 +40,7 @@ module.exports = {
 
 See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
 
-#### Use together with custom parsers
+#### How to use custom parser?
 
 If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [typescript-eslint-parser](https://www.npmjs.com/package/typescript-eslint-parser), you have to use `parserOptions.parser` option instead of `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, so this plugin doesn't work if you overwrote `parser` option.
 
@@ -52,9 +52,9 @@ If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/p
   }
 ```
 
-### Command
+### Command line
 
-You have to include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern because ESLint targets only `.js` files by default.
+If you want to run `eslint` from command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern because ESLint targets only `.js` files by default.
 
 Examples:
 
@@ -63,7 +63,54 @@ eslint --ext .js,.vue src
 eslint "src/**/*.{js,vue}"
 ```
 
-### Editor integrations
+### How ESLint detects components?
+
+All component-related rules are being applied to code that passes any of the following checks:
+
+* `Vue.component()` expression
+* `Vue.extend()` expression
+* `Vue.mixin()` expression
+* `export default {}` in `.vue` or `.jsx` file
+
+If you however want to take advantage of our rules in any of your custom objects that are Vue components, you might need to use special comment `// @vue/component` that marks object in the next line as a Vue component in any file, e.g.:
+
+```js
+// @vue/component
+const CustomComponent = {
+  name: 'custom-component',
+  template: '<div></div>'
+}
+```
+
+```js
+Vue.component('AsyncComponent', (resolve, reject) => {
+  setTimeout(() => {
+    // @vue/component
+    resolve({
+      name: 'async-component',
+      template: '<div></div>'
+    })
+  }, 500)
+})
+```
+
+### Disabling rules via `<!-- eslint-disable -->`
+
+You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vue` files to disable a certain rule temporarily.
+
+For example:
+
+```vue
+<template>
+  <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+  <div a="1" b="2" c="3" d="4">
+  </div>
+</template>
+```
+
+If you want to disallow `eslint-disable` functionality in `<template>`, disable [vue/comment-directive](../rules/comment-directive.md) rule.
+
+## :computer: Editor integrations
 
 #### Visual Studio Code
 
@@ -114,53 +161,6 @@ If your ESLint configuration is updated (manually or from your version control),
 
 read more: [JetBrains - ESLint](https://www.jetbrains.com/help/idea/eslint.html)
 
-### The code of components
-
-All component-related rules are being applied to code that passes any of the following checks:
-
-* `Vue.component()` expression
-* `Vue.extend()` expression
-* `Vue.mixin()` expression
-* `export default {}` in `.vue` or `.jsx` file
-
-If you however want to take advantage of our rules in any of your custom objects that are Vue components, you might need to use special comment `// @vue/component` that marks object in the next line as a Vue component in any file, e.g.:
-
-```js
-// @vue/component
-const CustomComponent = {
-  name: 'custom-component',
-  template: '<div></div>'
-}
-```
-
-```js
-Vue.component('AsyncComponent', (resolve, reject) => {
-  setTimeout(() => {
-    // @vue/component
-    resolve({
-      name: 'async-component',
-      template: '<div></div>'
-    })
-  }, 500)
-})
-```
-
-### `<!-- eslint-disable -->`
-
-You can use `<!-- eslint-disable -->`-like HTML comments in `<template>` of `.vue` files to disable a certain rule temporarily.
-
-For example:
-
-```vue
-<template>
-  <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-  <div a="1" b="2" c="3" d="4">
-  </div>
-</template>
-```
-
-If you want to disallow `eslint-disable` functionality in `<template>`, disable [vue/comment-directive](../rules/comment-directive.md) rule.
-
 ## :question: FAQ
 
 ### What is the "Use the latest vue-eslint-parser" error?
@@ -199,15 +199,3 @@ See also: "[Use together with custom parsers](#use-together-with-custom-parsers)
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions by `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - If you are having issues with configuring editor please read [editor integrations](#editor-integrations)
-
-## :traffic_light: Versioning policy
-
-This plugin is following [Semantic Versioning](https://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
-
-## :newspaper: Changelog
-
-We are using [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/releases).
-
-## :lock: License
-
-See the [LICENSE](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE) file for license rights and limitations (MIT).
