@@ -15,39 +15,45 @@ This rule reports the template root in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
 ```vue
-<script>
-  // The root is nothing
-  Vue.component('example', {
-    template: ''
-  });
-
-  // The root is text
-  Vue.component('example', {
-    template: 'abc'
-  });
-
-  // The root is multiple elements
-  Vue.component('example', {
-    template: `
-      <div>hello</div>
-      <div>hello</div>
-    `
-  });
-
-  // The root element has `v-for` directives
-  Vue.component('example', {
-    template: '<div v-for="item in items"/>'
-  });
-
-  // The root element is `<template>` or `<slot>`
-  Vue.component('example', {
-    template: '<template>Hello</template>'
-  });
-</script>
+<!-- There is no root element -->
+<template></template>
 ```
 </eslint-code-block>
 
-Same rules apply to `.vue` templates.
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root is text -->
+<template>Lorem ipsum</template>
+```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- There are multiple root elements -->
+<template>
+  <div>hello</div>
+  <div>hello</div>
+</template>
+```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root element has `v-for` directives -->
+<template>
+  <div v-for="item in items"/>
+</template>
+```
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root element is `<template>` or `<slot>` -->
+<template>
+  <slot />
+</template>
+```
+</eslint-code-block>
 
 ## :wrench: Options
 
