@@ -237,8 +237,14 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 |    | Rule ID | Description |
 |:---|:--------|:------------|
+| :wrench: | [vue/array-bracket-spacing](./docs/rules/array-bracket-spacing.md) | enforce consistent spacing inside array brackets |
+| :wrench: | [vue/eqeqeq](./docs/rules/eqeqeq.md) | require the use of `===` and `!==` |
+| :wrench: | [vue/key-spacing](./docs/rules/key-spacing.md) | enforce consistent spacing between keys and values in object literal properties |
 |  | [vue/match-component-file-name](./docs/rules/match-component-file-name.md) | require component name property to match its file name |
+| :wrench: | [vue/object-curly-spacing](./docs/rules/object-curly-spacing.md) | enforce consistent spacing inside braces |
 | :wrench: | [vue/script-indent](./docs/rules/script-indent.md) | enforce consistent indentation in `<script>` |
+| :wrench: | [vue/space-infix-ops](./docs/rules/space-infix-ops.md) | require spacing around infix operators |
+| :wrench: | [vue/space-unary-ops](./docs/rules/space-unary-ops.md) | enforce consistent spacing before or after unary operators |
 
 ### Deprecated
 
