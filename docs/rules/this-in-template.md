@@ -1,8 +1,10 @@
-# enforce usage of `this` in template (vue/this-in-template)
+# disallow usage of `this` in template (vue/this-in-template)
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
+
+This rule aims at preventing usage of `this` in Vue templates.
 
 <eslint-code-block :rules="{'vue/this-in-template': ['error']}">
 ```vue
