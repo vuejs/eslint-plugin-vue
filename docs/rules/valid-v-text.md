@@ -19,8 +19,6 @@ This rule reports `v-text` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-text.bbb></div>`
 - The directive does not have that attribute value. E.g. `<div v-text></div>`
 
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
 <eslint-code-block :rules="{'vue/valid-v-text': ['error']}">
 ```vue
 <template>
@@ -34,6 +32,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 </eslint-code-block>
+
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
 
 ## :wrench: Options
 

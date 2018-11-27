@@ -47,9 +47,9 @@ Nothing.
 - [no-parsing-error]
 
 
-[valid-v-if]:       valid-v-if.md
-[valid-v-else-if]:  valid-v-else-if.md
-[no-parsing-error]:      no-parsing-error.md
+[valid-v-if]: valid-v-if.md
+[valid-v-else-if]: valid-v-else-if.md
+[no-parsing-error]: no-parsing-error.md
 
 ## :mag: Implementation
 

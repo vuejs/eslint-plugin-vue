@@ -25,8 +25,6 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 ```
 </eslint-code-block>
 
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error](./no-parsing-error.md) rule.
-
 ## :wrench: Options
 
 Nothing.
