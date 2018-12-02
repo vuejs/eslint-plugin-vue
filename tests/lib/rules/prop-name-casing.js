@@ -287,6 +287,19 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      // Japanese characters
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '漢字': String
+          }
+        }
+      `,
+      output: null,
+      parserOptions
     }
   ],
 
@@ -503,24 +516,6 @@ ruleTester.run('prop-name-casing', rule, {
       parserOptions,
       errors: [{
         message: 'Prop "\u{1F37B}" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
-      // Japanese characters
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '漢字': String
-          }
-        }
-      `,
-      output: null,
-      parserOptions,
-      errors: [{
-        message: 'Prop "漢字" is not in camelCase.',
         type: 'Property',
         line: 4
       }]
