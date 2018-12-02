@@ -71,7 +71,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 }
 ```
 
-- `ignoreWhenEmpty` ... allows having contents in one line, when given element has no content.
+- `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
