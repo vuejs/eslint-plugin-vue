@@ -11,14 +11,6 @@
 
 See https://vuejs.github.io/eslint-plugin-vue/
 
-> :exclamation: Attention - this is documentation for version `5.x` :exclamation:
->
-> This branch contains `eslint-plugin-vue@next` which is a pre-released `5.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
->
-> Please try it and report any issues that you might have encountered.
->
-> If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
-
 ## :anchor: Versioning Policy
 
 This plugin is following [Semantic Versioning](http://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
