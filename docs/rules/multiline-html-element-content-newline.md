@@ -74,12 +74,15 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 ```json
 {
-  "vue/multiline-html-element-content-newline": ["error", {
-    "ignores": ["pre", "textarea"]
-  }]
+    "vue/multiline-html-element-content-newline": ["error", {
+        "ignoreWhenEmpty": true,
+        "ignores": ["pre", "textarea"]
+    }]
 }
 ```
 
+- `ignoreWhenEmpty` ... disables reporting when element has no content.
+    default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
 
