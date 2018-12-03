@@ -1,4 +1,11 @@
-# enforce valid `v-on` directives (vue/valid-v-on)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-v-on
+description: enforce valid `v-on` directives
+---
+# vue/valid-v-on
+> enforce valid `v-on` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
@@ -12,52 +19,62 @@ This rule reports `v-on` directives in the following cases:
 - The directive has invalid modifiers. E.g. `<div v-on:click.bbb="foo"></div>`
 - The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
 
+<eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-on="foo"/>
+  <div v-on:click="foo"/>
+  <div @click="foo"/>
+  <div @click.left="foo"/>
+  <div @click.prevent/>
+  <div @click.stop/>
+
+  <!-- ✗ BAD -->
+  <div v-on/>
+  <div v-on:click/>
+  <div v-on:click.aaa="foo"/>
+  <div @click/>
+</template>
+```
+</eslint-code-block>
+
+::: warning Note
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<div v-on/>
-<div v-on:click/>
-<div v-on:click.aaa="foo"/>
-<div @click/>
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-on="foo"/>
-<div v-on:click="foo"/>
-<div @click="foo"/>
-<div @click.left="foo"/>
-<div @click.prevent/>
-<div @click.stop/>
-```
+:::
 
 ## :wrench: Options
 
+```json
+{
+  "vue/prop-name-casing": ["error", {
+    "modifiers": []
+  }]
+}
+```
+
 This rule has an object option:
 
-`"modifiers"`: [] (default) array of additional allowed modifiers.
+`"modifiers"` array of additional allowed modifiers.
 
-### Example:
+### `"modifiers": ["foo"]`
 
-```json
-"vue/valid-v-on": [2, {
-  modifiers: ['foo']
-}]
+<eslint-code-block :rules="{'vue/valid-v-on': ['error', { modifiers: ['foo']}]}">
+```vue
+<template>
+  <div @click.foo="foo"/>
+  <div v-on:click.foo="foo"/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div @click.foo="foo"/>
-<div v-on:click.foo="foo"/>
-```
+</eslint-code-block>
 
 ## :couple: Related rules
 
 - [no-parsing-error]
 
-
 [no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-on.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-on.js)
