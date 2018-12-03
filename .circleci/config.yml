@@ -3,9 +3,21 @@ workflows:
   node-multi-build:
     jobs:
       - node-v6
+          filters:
+            branches:
+              ignore: gh-pages
       - node-v8
+          filters:
+            branches:
+              ignore: gh-pages
       - node-v10
+          filters:
+            branches:
+              ignore: gh-pages
       - node-v10-minimal
+          filters:
+            branches:
+              ignore: gh-pages
       - deploy_docs:
           requires:
             - node-v10
