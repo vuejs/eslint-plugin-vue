@@ -13,7 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const eslint = require('eslint')
 const rules = require('./lib/rules')
-const categories = require('./lib/categories')
+const configs = require('./lib/configs')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/index.js')
@@ -29,7 +29,7 @@ module.exports = {
     ${rules.map(rule => `'${rule.name}': require('./rules/${rule.name}')`).join(',\n')}
   },
   configs: {
-    ${categories.map(category => `'${category.categoryId}': require('./configs/${category.categoryId}')`).join(',\n')}
+    ${configs.map(config => `'${config}': require('./configs/${config}')`).join(',\n')}
   },
   processors: {
     '.vue': require('./processor')
