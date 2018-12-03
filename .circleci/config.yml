@@ -61,7 +61,6 @@ jobs:
     <<: *node-base
     docker:
       - image: node:10
-    working_directory: ~/node_10
   node-v10-minimal:
     steps:
       - run:
@@ -71,9 +70,6 @@ jobs:
       - restore_cache:
           keys:
             - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-            - v2-npm-lock-master-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-            - v2-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}
-            - v2-npm-cache-master-{{ .Environment.CIRCLE_JOB }}
       - run:
           name: Install dependencies
           command: npm install
@@ -94,8 +90,13 @@ jobs:
     docker:
       - image: node:10
     steps:
-      - attach_workspace:
-          at: ~/node_10
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
       - run:
           name: Deploy to Github Pages
           command: npm run docs:deploy
