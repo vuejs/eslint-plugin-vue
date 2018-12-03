@@ -2,6 +2,7 @@
 
 set -e
 npm run docs:build
+cp -R .circleci docs/.vuepress/dist
 cd docs/.vuepress/dist
 
 git config --global user.email "circleci@circleci.com"
