@@ -85,6 +85,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
 | [vue/html-indent](./html-indent.md) | enforce consistent indentation in `<template>` | :wrench: |
+| [vue/html-quotes](./html-quotes.md) | enforce quotes style of HTML attributes | :wrench: |
 | [vue/html-self-closing](./html-self-closing.md) | enforce self-closing style | :wrench: |
 | [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: |
 | [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: |
@@ -113,7 +114,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: |
-| [vue/html-quotes](./html-quotes.md) | enforce quotes style of HTML attributes | :wrench: |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
 | [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
