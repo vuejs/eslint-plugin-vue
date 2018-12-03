@@ -1,4 +1,11 @@
-# require a line break before and after the contents of a singleline element (vue/singleline-html-element-content-newline)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/singleline-html-element-content-newline
+description: require a line break before and after the contents of a singleline element
+---
+# vue/singleline-html-element-content-newline
+> require a line break before and after the contents of a singleline element
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -8,36 +15,36 @@
 This rule enforces a line break before and after the contents of a singleline element.
 
 
-:-1: Examples of **incorrect** code:
-
-```html
-<div attr>content</div>
-
-<tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
-<div attr><!-- comment --></div>
+<eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div attr>
+    content
+  </div>
+  
+  <tr attr>
+    <td>
+      {{ data1 }}
+    </td>
+    <td>
+      {{ data2 }}
+    </td>
+  </tr>
+  
+  <div attr>
+    <!-- comment -->
+  </div>
+  
+  <!-- ✗ BAD -->
+  <div attr>content</div>
+  
+  <tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
+  
+  <div attr><!-- comment --></div>
+</template>
 ```
-
-:+1: Examples of **correct** code:
-
-```html
-<div attr>
-  content
-</div>
-
-<tr attr>
-  <td>
-    {{ data1 }}
-  </td>
-  <td>
-    {{ data2 }}
-  </td>
-</tr>
-
-<div attr>
-  <!-- comment -->
-</div>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -55,48 +62,38 @@ This rule enforces a line break before and after the contents of a singleline el
 - `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
 
-:-1: Examples of **incorrect** code for `{ignoreWhenNoAttributes: false}`:
 
-```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": false}] */
+### `"ignoreWhenNoAttributes": true`
 
-<div>content</div>
-
-<tr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
-<div><!-- comment --></div>
+<eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': true}]}">
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <div attr>content</div>
+  
+  <tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
+  
+  <div attr><!-- comment --></div>
+</template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for `{ignoreWhenNoAttributes: true}` (default):
+### `"ignoreWhenNoAttributes": false`
 
-```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": true}] */
+<eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': false}]}">
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <div>content</div>
+  
+  <tr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
 
-<div>content</div>
-
-<tr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
-<div><!-- comment --></div>
+  <div><!-- comment --></div>
+</template>
 ```
+</eslint-code-block>
 
-:-1: Examples of **incorrect** code for `{ignoreWhenNoAttributes: true}` (default):
+## :mag: Implementation
 
-```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "ignoreWhenNoAttributes": true}] */
-
-<div attr>content</div>
-
-<tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
-<div attr><!-- comment --></div>
-```
-
-:+1: Examples of **correct** code for `ignores`:
-
-```html
-/* eslint vue/singleline-html-element-content-newline: ["error", { "ignores": ["VueComponent", "pre", "textarea"]}] */
-
-<VueComponent>content</VueComponent>
-
-<VueComponent attr><span>content</span></VueComponent>
-```
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/singleline-html-element-content-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/singleline-html-element-content-newline.js)

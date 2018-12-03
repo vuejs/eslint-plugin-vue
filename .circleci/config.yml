@@ -2,10 +2,28 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v6
-      - node-v8
-      - node-v10
-      - node-v10-minimal
+      - node-v6:
+          filters:
+            branches:
+              ignore: gh-pages
+      - node-v8:
+          filters:
+            branches:
+              ignore: gh-pages
+      - node-v10:
+          filters:
+            branches:
+              ignore: gh-pages
+      - node-v10-minimal:
+          filters:
+            branches:
+              ignore: gh-pages
+      - deploy_docs:
+          requires:
+            - node-v10
+          filters:
+            branches:
+              only: master
 
 version: 2
 jobs:
@@ -20,19 +38,16 @@ jobs:
       - restore_cache:
           keys:
             - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-            - v2-npm-lock-master-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-            - v2-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}
-            - v2-npm-cache-master-{{ .Environment.CIRCLE_JOB }}
       - run:
           name: Install dependencies
           command: npm install
-      - run:
-          name: Test
-          command: npm test
       - save_cache:
           key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run:
+          name: Test
+          command: npm test
 
   node-v6:
     <<: *node-base
@@ -46,6 +61,7 @@ jobs:
     <<: *node-base
     docker:
       - image: node:10
+    working_directory: ~/node_10
   node-v10-minimal:
     steps:
       - run:
@@ -73,4 +89,13 @@ jobs:
             - node_modules
     docker:
       - image: node:10
-    
+
+  deploy_docs:
+    docker:
+      - image: node:10
+    steps:
+      - attach_workspace:
+          at: ~/node_10
+      - run:
+          name: Deploy to Github Pages
+          command: npm run docs:deploy

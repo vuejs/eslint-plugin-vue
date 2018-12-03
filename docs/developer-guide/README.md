@@ -1,39 +1,30 @@
-# eslint-plugin-vue
+# Developer Guide
 
-[![NPM version](https://img.shields.io/npm/v/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
-[![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
-[![CircleCI](https://img.shields.io/circleci/project/github/vuejs/eslint-plugin-vue/master.svg?style=flat)](https://circleci.com/gh/vuejs/eslint-plugin-vue)
-[![License](https://img.shields.io/github/license/vuejs/eslint-plugin-vue.svg?style=flat)](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE.md)
+Contributing is welcome.
 
-> Official ESLint plugin for Vue.js
+## :bug: Bug reporting
 
-## :book: Documentation
+If you think you’ve found a bug in ESLint, please [create a new issue](https://github.com/vuejs/eslint-plugin-vue/issues/new?labels=&template=bug_report.md) or a pull request on GitHub.
 
-See https://vuejs.github.io/eslint-plugin-vue/
+Please include as much detail as possible to help us properly address your issue. If we need to triage issues and constantly ask people for more detail, that’s time taken away from actually fixing issues. Help us be as efficient as possible by including a lot of detail in your issues.
 
-> :exclamation: Attention - this is documentation for version `5.x` :exclamation:
->
-> This branch contains `eslint-plugin-vue@next` which is a pre-released `5.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
->
-> Please try it and report any issues that you might have encountered.
->
-> If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
+## :sparkles: Proposing a new rule or a rule change
 
-## :anchor: Versioning Policy
+In order to add a new rule or a rule change, you should:
 
-This plugin is following [Semantic Versioning](http://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
+- Create issue on GitHub with description of proposed rule
+- Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
+- Run `npm start`
+- Write test scenarios & implement logic
+- Describe the rule in the generated `docs` file
+- Make sure all tests are passing
+- Run `npm run lint` and fix any errors
+- Run `npm run update` in order to update readme and recommended configuration
+- Create PR and link created issue in description
 
-## :newspaper: Changelog
+We're more than happy to see potential contributions, so don't hesitate. If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/vuejs/eslint-plugin-vue/issues), but first please make sure your question does not repeat previous ones.
 
-We're using [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/releases).
-
-## :beers: Contribution guide
-
-Contributing is welcome!
-
-See https://vuejs.github.io/eslint-plugin-vue/developer-guide/
-
-### Working with rules
+## :fire: Working with rules
 
 Before you start writing new rule, please read the [official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
 
@@ -56,7 +47,3 @@ Check out an [example rule](https://github.com/vuejs/eslint-plugin-vue/blob/mast
 Please be aware that regarding what kind of code examples you'll write in tests, you'll have to accordingly setup the parser in `RuleTester` (you can do it on per test case basis though). [See an example here](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js#L19)
 
 If you'll stuck, remember there are plenty of rules you can learn from already, and if you can't find the right solution - don't hesitate to reach out in issues. We're happy to help!
-
-## :lock: License
-
-See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
