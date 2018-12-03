@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/use-v-on-exact
+description: enforce usage of `exact` modifier on `v-on`
 ---
 # vue/use-v-on-exact
 > enforce usage of `exact` modifier on `v-on`

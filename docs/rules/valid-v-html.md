@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-html
+description: enforce valid `v-html` directives
 ---
 # vue/valid-v-html
 > enforce valid `v-html` directives
@@ -17,8 +19,6 @@ This rule reports `v-html` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-html.bbb></div>`
 - The directive does not have that attribute value. E.g. `<div v-html></div>`
 
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
 <eslint-code-block :rules="{'vue/valid-v-html': ['error']}">
 ```vue
 <template>
@@ -32,6 +32,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 </eslint-code-block>
+
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
 
 ## :wrench: Options
 

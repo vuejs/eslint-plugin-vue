@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-on
+description: enforce valid `v-on` directives
 ---
 # vue/valid-v-on
 > enforce valid `v-on` directives
@@ -16,8 +18,6 @@ This rule reports `v-on` directives in the following cases:
 - The directive does not have that event name. E.g. `<div v-on="foo"></div>`
 - The directive has invalid modifiers. E.g. `<div v-on:click.bbb="foo"></div>`
 - The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
-
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
 ```vue
@@ -38,6 +38,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 </eslint-code-block>
+
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
 
 ## :wrench: Options
 

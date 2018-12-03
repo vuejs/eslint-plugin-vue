@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-if
+description: enforce valid `v-if` directives
 ---
 # vue/valid-v-if
 > enforce valid `v-if` directives
@@ -17,8 +19,6 @@ This rule reports `v-if` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-if.bbb="foo"></div>`
 - The directive does not have that attribute value. E.g. `<div v-if></div>`
 - The directive is on the elements which have `v-else`/`v-else-if` directives. E.g. `<div v-else v-if="foo"></div>`
-
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-if': ['error']}">
 ```vue
@@ -44,6 +44,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 ```
 </eslint-code-block>
 
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
+
 ## :wrench: Options
 
 Nothing.
@@ -55,9 +59,9 @@ Nothing.
 - [no-parsing-error]
 
 
-[valid-v-else]:    valid-v-else.md
+[valid-v-else]: valid-v-else.md
 [valid-v-else-if]: valid-v-else-if.md
-[no-parsing-error]:      no-parsing-error.md
+[no-parsing-error]: no-parsing-error.md
 
 ## :mag: Implementation
 

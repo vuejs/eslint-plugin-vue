@@ -26,12 +26,6 @@ const categories = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
-const fileIntro = `---
-pageClass: rule-details
-sidebarDepth: 0
----
-`
-
 function formatItems (items) {
   if (items.length <= 2) {
     return items.join(' and ')
@@ -52,6 +46,28 @@ class DocFile {
 
   write () {
     fs.writeFileSync(this.filePath, this.content)
+  }
+
+  updateFileIntro () {
+    const { ruleId, meta } = this.rule
+
+    const fileIntro = {
+      pageClass: 'rule-details',
+      sidebarDepth: 0,
+      title: ruleId,
+      description: meta.docs.description
+    }
+    const computed = '---\n' + Object.entries(fileIntro).map(item => `${item[0]}: ${item[1]}`).join('\n') + '\n---\n'
+
+    const fileIntroPattern = /^---\n(.*\n)+---\n*/g
+
+    if (fileIntroPattern.test(this.content)) {
+      this.content = this.content.replace(fileIntroPattern, computed)
+    } else {
+      this.content = `${computed}${this.content.trim()}\n`
+    }
+
+    return this
   }
 
   updateHeader () {
@@ -85,7 +101,7 @@ class DocFile {
     if (headerPattern.test(this.content)) {
       this.content = this.content.replace(headerPattern, header)
     } else {
-      this.content = `${fileIntro}${header}${this.content.trim()}\n`
+      this.content = `${header}${this.content.trim()}\n`
     }
 
     return this
@@ -125,5 +141,6 @@ for (const rule of rules) {
     .updateHeader()
     .updateFooter()
     .updateCodeBlocks()
+    .updateFileIntro()
     .write()
 }

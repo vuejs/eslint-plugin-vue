@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/multiline-html-element-content-newline
+description: require a line break before and after the contents of a multiline element
 ---
 # vue/multiline-html-element-content-newline
 > require a line break before and after the contents of a multiline element

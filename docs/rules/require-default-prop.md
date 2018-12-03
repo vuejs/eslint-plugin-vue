@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/require-default-prop
+description: require default value for props
 ---
 # vue/require-default-prop
 > require default value for props

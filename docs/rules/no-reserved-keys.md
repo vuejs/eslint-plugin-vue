@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-reserved-keys
+description: disallow overwriting reserved keys
 ---
 # vue/no-reserved-keys
 > disallow overwriting reserved keys

@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-duplicate-attributes
+description: disallow duplication of attributes
 ---
 # vue/no-duplicate-attributes
 > disallow duplication of attributes

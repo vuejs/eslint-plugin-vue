@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/attributes-order
+description: enforce order of attributes
 ---
 # vue/attributes-order
 > enforce order of attributes

@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-model
+description: enforce valid `v-model` directives
 ---
 # vue/valid-v-model
 > enforce valid `v-model` directives
@@ -20,8 +22,6 @@ This rule reports `v-model` directives in the following cases:
 - The directive is on unsupported elements. E.g. `<div v-model="foo"></div>`
 - The directive is on `<input>` elements which their types are `file`. E.g. `<input type="file" v-model="foo">`
 - The directive's reference is iteration variables. E.g. `<div v-for="x in list"><input type="file" v-model="x"></div>`
-
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
 
 <eslint-code-block :rules="{'vue/valid-v-model': ['error']}">
 ```vue
@@ -47,6 +47,10 @@ This rule does not check syntax errors in directives because it's checked by [no
 </template>
 ```
 </eslint-code-block>
+
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
 
 ## :wrench: Options
 

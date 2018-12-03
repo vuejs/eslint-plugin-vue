@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/html-self-closing
+description: enforce self-closing style
 ---
 # vue/html-self-closing
 > enforce self-closing style

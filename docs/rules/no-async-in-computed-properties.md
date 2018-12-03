@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-async-in-computed-properties
+description: disallow asynchronous actions in computed properties
 ---
 # vue/no-async-in-computed-properties
 > disallow asynchronous actions in computed properties

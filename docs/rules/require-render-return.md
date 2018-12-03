@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/require-render-return
+description: enforce render function to always return value
 ---
 # vue/require-render-return
 > enforce render function to always return value

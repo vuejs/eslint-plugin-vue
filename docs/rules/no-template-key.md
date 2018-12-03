@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-template-key
+description: disallow `key` attribute on `<template>`
 ---
 # vue/no-template-key
 > disallow `key` attribute on `<template>`

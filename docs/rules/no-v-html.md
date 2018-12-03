@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-v-html
+description: disallow use of v-html to prevent XSS attack
 ---
 # vue/no-v-html
 > disallow use of v-html to prevent XSS attack
@@ -22,8 +24,6 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 </template>
 ```
 </eslint-code-block>
-
-This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error](./no-parsing-error.md) rule.
 
 ## :wrench: Options
 

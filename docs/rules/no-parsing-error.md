@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-parsing-error
+description: disallow parsing errors in `<template>`
 ---
 # vue/no-parsing-error
 > disallow parsing errors in `<template>`

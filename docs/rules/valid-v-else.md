@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/valid-v-else
+description: enforce valid `v-else` directives
 ---
 # vue/valid-v-else
 > enforce valid `v-else` directives
@@ -45,9 +47,9 @@ Nothing.
 - [no-parsing-error]
 
 
-[valid-v-if]:       valid-v-if.md
-[valid-v-else-if]:  valid-v-else-if.md
-[no-parsing-error]:      no-parsing-error.md
+[valid-v-if]: valid-v-if.md
+[valid-v-else-if]: valid-v-else-if.md
+[no-parsing-error]: no-parsing-error.md
 
 ## :mag: Implementation
 

@@ -1,6 +1,8 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
+title: vue/no-template-shadow
+description: disallow variable declarations from shadowing variables declared in the outer scope
 ---
 # vue/no-template-shadow
 > disallow variable declarations from shadowing variables declared in the outer scope
