@@ -1,39 +1,43 @@
-# disallow use of v-html to prevent XSS attack (vue/no-v-html)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-v-html
+description: disallow use of v-html to prevent XSS attack
+---
+# vue/no-v-html
+> disallow use of v-html to prevent XSS attack
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 
-This rule reports use of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
-
 ## :book: Rule Details
 
-This rule reports all uses of `v-html` to help prevent XSS attacks.
+This rule reports all uses of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
 
-This rule does not check syntax errors in directives because it's checked by no-parsing-error rule.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```html
+<eslint-code-block :rules="{'vue/no-v-html': ['error']}">
+```
 <template>
-    <div v-html="someHTML"></div>
+  <!-- ✓ GOOD -->
+  <div>{{ someHTML }}</div>
+
+  <!-- ✗ BAD -->
+  <div v-html="someHTML"></div>
 </template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<template>
-    <div>{{someHTML}}</div>
-</template>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
 
-## When Not To Use It
+## :mute: When Not To Use It
 
-If you are certain the content passed `to v-html` is sanitized HTML you can disable this rule.
+If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
 
-## Related links
+## :books: Further reading
 
 - [XSS in Vue.js](https://blog.sqreen.io/xss-in-vue-js/)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-v-html.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-html.js)

@@ -1,4 +1,11 @@
-# enforce valid template root (vue/valid-template-root)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-template-root
+description: enforce valid template root
+---
+# vue/valid-template-root
+> enforce valid template root
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
@@ -8,93 +15,53 @@ This rule checks whether every template root is valid.
 
 This rule reports the template root in the following cases:
 
-- The root is nothing. E.g. `<template></template>`.
-- The root is text. E.g. `<template>hello</template>`.
-- The root is multiple elements. E.g. `<template><div>one</div><div>two</div></template>`.
-- The root element has `v-for` directives. E.g. `<template><div v-for="x in list">{{x}}</div></template>`.
-- The root element is `<template>` or `<slot>` elements. E.g. `<template><template>hello</template></template>`.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```js
-template: ''
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- There is no root element -->
+<template></template>
 ```
+</eslint-code-block>
 
-```html
-<template>
-</template>
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root is text -->
+<template>Lorem ipsum</template>
 ```
+</eslint-code-block>
 
-```js
-template: `
-  <div>hello</div>
-  <div>hello</div>
-`
-```
-
-```html
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- There are multiple root elements -->
 <template>
   <div>hello</div>
   <div>hello</div>
 </template>
 ```
+</eslint-code-block>
 
-```js
-template: 'abc'
-```
-
-```html
-<template>
-  abc
-</template>
-```
-
-```js
-template: '<div v-for="item in items"/>'
-```
-
-```html
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root element has `v-for` directives -->
 <template>
   <div v-for="item in items"/>
 </template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for this rule:
-
-```js
-template: '<div>abc</div>'
-```
-
-```html
+<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+```vue
+<!-- The root element is `<template>` or `<slot>` -->
 <template>
-  <div>abc</div>
+  <slot />
 </template>
 ```
-
-```js
-template: '<div v-if="foo">abc</div>'
-```
-
-```html
-<template>
-  <div v-if="foo">abc</div>
-</template>
-```
-
-```js
-template: `
-  <div v-if="foo">abc</div>
-  <div v-else>def</div>
-`
-```
-
-```html
-<template>
-  <div v-if="foo">abc</div>
-  <div v-else>def</div>
-</template>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-template-root.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-template-root.js)

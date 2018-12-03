@@ -1,4 +1,11 @@
-# enforce consistent indentation in `<template>` (vue/html-indent)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/html-indent
+description: enforce consistent indentation in `<template>`
+---
+# vue/html-indent
+> enforce consistent indentation in `<template>`
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -10,28 +17,13 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - This rule checks all tags, also all expressions in directives and mustaches.
 - In the expressions, this rule supports ECMAScript 2017 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
-<template>
- <div class="foo">
-   Hello.
-    </div>
-</template>
+<eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
 <template>
+  <!-- ✓ GOOD -->
   <div class="foo">
     Hello.
   </div>
-</template>
-```
-
-```html
-<template>
   <div class="foo">
     Hello.
   </div>
@@ -56,8 +48,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
       displayMessage
     }}
   </div>
+
+  <!-- ✗ BAD -->
+ <div class="foo">
+   Hello.
+    </div>
 </template>
 ```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -80,10 +78,12 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`
 - `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
 
-:+1: Examples of **correct** code for `{attribute: 1, closeBracket: 1}`:
+### `2, {"attribute": 1, "closeBracket": 1}`
 
-```html
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 1, closeBracket: 1}]}">
+```
 <template>
+  <!-- ✓ GOOD -->
   <div
     id="a"
     class="b"
@@ -96,11 +96,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   </div>
 </template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for `{attribute: 2, closeBracket: 1}`:
+### `2, {"attribute": 2, "closeBracket": 1}`
 
-```html
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 2, closeBracket: 1}]}">
+```
 <template>
+  <!-- ✓ GOOD -->
   <div
       id="a"
       class="b"
@@ -113,48 +116,65 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   </div>
 </template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for `{ignores: ["VAttribute"]}`:
+### `2, {"ignores": ["VAttribute"]}`
 
-```html
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {ignores: ['VAttribute']}]}">
+```
 <template>
+  <!-- ✓ GOOD -->
   <div
   id=""
     class=""
   />
 </template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for `{alignAttributesVertically: true}`:
+### `2, {"alignAttributesVertically": false}`
 
-```html
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {alignAttributesVertically: false}]}">
+```
 <template>
+  <!-- ✓ GOOD -->
+  <div id=""
+    class=""
+    some-attr=""
+  />
+
+  <!-- ✗ BAD -->
   <div id=""
        class=""
        some-attr=""
   />
 </template>
 ```
+</eslint-code-block>
 
-:+1: Examples of **correct** code for `{alignAttributesVertically: false}`:
+### `2, {"baseIndent": 0}`
 
-```html
-<template>
-  <div id=""
-    class=""
-    some-attr=""
-  />
-</template>
+<eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {baseIndent: 0}]}">
 ```
-
-:+1: Examples of **correct** code for `{baseIndent: 0}`:
-
-```html
 <template>
+<!-- ✓ GOOD -->
 <div>
   <span>
     Hello!
   </span>
 </div>
+
+  <!-- ✗ BAD -->
+  <div>
+    <span>
+      Hello!
+    </span>
+  </div>
 </template>
 ```
+</eslint-code-block>
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-indent.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-indent.js)
