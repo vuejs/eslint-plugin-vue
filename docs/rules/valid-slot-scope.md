@@ -1,4 +1,11 @@
-# enforce valid `slot-scope` attributes (vue/valid-slot-scope)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-slot-scope
+description: enforce valid `slot-scope` attributes
+---
+# vue/valid-slot-scope
+> enforce valid `slot-scope` attributes
 
 This rule checks whether every `slot-scope` (or `scope`) attributes is valid.
 
@@ -8,29 +15,10 @@ This rule reports `slot-scope` attributes in the following cases:
 
 - The `slot-scope` attribute does not have that attribute value. E.g. `<div slot-scope></div>`
 
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
-:-1: Examples of **incorrect** code for this rule:
-
+<eslint-code-block :rules="{'vue/valid-slot-scope': ['error']}">
 ```vue
 <template>
-  <TheComponent>
-    <template slot-scope>
-      ...
-    </template>
-  </TheComponent>
-  <TheComponent>
-    <template slot-scope="">
-      ...
-    </template>
-  </TheComponent>
-</template>
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```vue
-<template>
+  <!-- ✓ GOOD -->
   <TheComponent>
     <template slot-scope="prop">
       ...
@@ -46,8 +34,25 @@ This rule does not check syntax errors in directives because it's checked by [no
       ...
     </template>
   </TheComponent>
+
+  <!-- ✗ BAD -->
+  <TheComponent>
+    <template slot-scope>
+      ...
+    </template>
+  </TheComponent>
+  <TheComponent>
+    <template slot-scope="">
+      ...
+    </template>
+  </TheComponent>
 </template>
 ```
+</eslint-code-block>
+
+::: warning Note
+This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+:::
 
 ## :wrench: Options
 
@@ -57,8 +62,13 @@ Nothing.
 
 - [no-parsing-error]
 
-## Related links
+## :books: Further reading
 
 - [Guide - Scoped Slots](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots)
 
 [no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-slot-scope.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-slot-scope.js)

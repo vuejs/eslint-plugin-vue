@@ -136,6 +136,7 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
+| [vue/valid-slot-scope](./valid-slot-scope.md) | enforce valid `slot-scope` attributes |  |
 
 ## Deprecated
 
