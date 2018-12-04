@@ -46,6 +46,9 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="(v, i, c) in foo">{{c}}</div></template>'
+    },
+    {
+      code: '<template><div v-for="x in foo">{{value | f(x)}}</div></template>'
     }
   ],
   invalid: [
@@ -80,6 +83,10 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="(item, key) in items" :key="item.id">{{item.name}}</div></template>',
       errors: ["'key' is defined but never used."]
+    },
+    {
+      code: '<template><div v-for="x in items">{{value | x}}</div></template>',
+      errors: ["'x' is defined but never used."]
     }
   ]
 })
