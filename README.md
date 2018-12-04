@@ -7,11 +7,11 @@
 
 > Official ESLint plugin for Vue.js
 
-## :exclamation: Attention - this is documentation for version `5.x` :exclamation:
+## :book: Documentation
 
-This branch contains `eslint-plugin-vue@next` which is a pre-released `5.0`, but it's not the default version that you get with `npm install eslint-plugin-vue`. In order to install this you need to specify either `"eslint-plugin-vue": "next"` in `package.json` or do `npm install eslint-plugin-vue@next`.
+See https://vuejs.github.io/eslint-plugin-vue/
 
-Please try it and report any issues that you might have encountered.
+## :anchor: Versioning Policy
 
 If you want to check previous releases [go here](https://github.com/vuejs/eslint-plugin-vue/releases).
 
@@ -312,18 +312,9 @@ We're using [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/release
 
 ## :beers: Contribution guide
 
-In order to add a new rule, you should:
-- Create issue on GH with description of proposed rule
-- Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
-- Run `npm start`
-- Write test scenarios & implement logic
-- Describe the rule in the generated `docs` file
-- Make sure all tests are passing
-- Run `npm run lint` and fix any errors
-- Run `npm run update` in order to update readme and recommended configuration
-- Create PR and link created issue in description
+Contributing is welcome!
 
-We're more than happy to see potential contributions, so don't hesitate. If you have any suggestions, ideas or problems feel free to add new [issue](https://github.com/vuejs/eslint-plugin-vue/issues), but first please make sure your question does not repeat previous ones.
+See https://vuejs.github.io/eslint-plugin-vue/developer-guide/
 
 ### Working with rules
 

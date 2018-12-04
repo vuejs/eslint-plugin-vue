@@ -1,4 +1,11 @@
-# enforce valid `v-else` directives (vue/valid-v-else)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-v-else
+description: enforce valid `v-else` directives
+---
+# vue/valid-v-else
+> enforce valid `v-else` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
@@ -14,20 +21,20 @@ This rule reports `v-else` directives in the following cases:
 - The directive is on the elements that the previous element don't have `v-if`/`v-if-else` directives. E.g. `<div v-else></div>`
 - The directive is on the elements which have `v-if`/`v-if-else` directives. E.g. `<div v-if="foo" v-else></div>`
 
-:-1: Examples of **incorrect** code for this rule:
+<eslint-code-block :rules="{'vue/valid-v-else': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-if="foo"/>
+  <div v-else/>
 
-```html
-<div v-else="foo"/>
-<div v-else:aaa/>
-<div v-else.bbb/>
+  <!-- ✗ BAD -->
+  <div v-else="foo"/>
+  <div v-else:aaa/>
+  <div v-else.bbb/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-if="foo"/>
-<div v-else/>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -40,6 +47,11 @@ Nothing.
 - [no-parsing-error]
 
 
-[valid-v-if]:       valid-v-if.md
-[valid-v-else-if]:  valid-v-else-if.md
-[no-parsing-error]:      no-parsing-error.md
+[valid-v-if]: valid-v-if.md
+[valid-v-else-if]: valid-v-else-if.md
+[no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-else.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-else.js)

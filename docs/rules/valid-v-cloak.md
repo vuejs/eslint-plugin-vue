@@ -1,4 +1,11 @@
-# enforce valid `v-cloak` directives (vue/valid-v-cloak)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-v-cloak
+description: enforce valid `v-cloak` directives
+---
+# vue/valid-v-cloak
+> enforce valid `v-cloak` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
@@ -12,20 +19,25 @@ This rule reports `v-cloak` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-cloak.bbb></div>`
 - The directive has that attribute value. E.g. `<div v-cloak="ccc"></div>`
 
-:-1: Examples of **incorrect** code for this rule:
+<eslint-code-block :rules="{'vue/valid-v-cloak': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-cloak/>
 
-```html
-<div v-cloak:aaa/>
-<div v-cloak.bbb/>
-<div v-cloak="ccc"/>
+  <!-- ✗ BAD -->
+  <div v-cloak:aaa/>
+  <div v-cloak.bbb/>
+  <div v-cloak="ccc"/>
+</template>
 ```
-
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div v-cloak/>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-cloak.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-cloak.js)
