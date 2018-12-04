@@ -114,6 +114,10 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><input v-bind:type="a" v-model="b"></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="xx | myfilter"></template>'
     }
   ],
   invalid: [
