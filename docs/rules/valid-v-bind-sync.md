@@ -1,4 +1,11 @@
-# enforce valid `.sync` modifier on `v-bind` directives (vue/valid-v-bind-sync)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-v-bind-sync
+description: enforce valid `.sync` modifier on `v-bind` directives
+---
+# vue/valid-v-bind-sync
+> enforce valid `.sync` modifier on `v-bind` directives
 
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
@@ -10,34 +17,36 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 - The `.sync` modifier is on non Vue-components. E.g. `<input v-bind:aaa.sync="foo"></div>`
 - The `.sync` modifier's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
 
+<eslint-code-block :rules="{'vue/valid-v-bind-sync': ['error']}">
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyComponent v-bind:aaa.sync="foo + bar" />
+  <MyComponent :aaa.sync="foo + bar" />
+
+  <input v-bind:aaa.sync="foo">
+  <input :aaa.sync="foo">
+
+  <div v-for="todo in todos">
+    <MyComponent v-bind:aaa.sync="todo" />
+    <MyComponent :aaa.sync="todo" />
+  </div>
+
+  <!-- ✗ BAD -->
+  <MyComponent v-bind:aaa.sync="foo"/>
+  <MyComponent :aaa.sync="foo"/>
+
+  <div v-for="todo in todos">
+    <MyComponent v-bind:aaa.sync="todo.name"/>
+    <MyComponent :aaa.sync="todo.name"/>
+  </div>
+</template>
+```
+</eslint-code-block>
+
+::: warning Note
 This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
-
-:-1: Examples of **incorrect** code for this rule:
-
-```vue
-<MyComponent v-bind:aaa.sync="foo + bar" />
-<MyComponent :aaa.sync="foo + bar" />
-
-<input v-bind:aaa.sync="foo">
-<input :aaa.sync="foo">
-
-<div v-for="todo in todos">
-  <MyComponent v-bind:aaa.sync="todo" />
-  <MyComponent :aaa.sync="todo" />
-</div>
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```vue
-<MyComponent v-bind:aaa.sync="foo"/>
-<MyComponent :aaa.sync="foo"/>
-
-<div v-for="todo in todos">
-  <MyComponent v-bind:aaa.sync="todo.name"/>
-  <MyComponent :aaa.sync="todo.name"/>
-</div>
-```
+:::
 
 ## :wrench: Options
 
@@ -48,3 +57,8 @@ Nothing.
 - [no-parsing-error]
 
 [no-parsing-error]: no-parsing-error.md
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-bind-sync.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-bind-sync.js)

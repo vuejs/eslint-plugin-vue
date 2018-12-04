@@ -136,6 +136,7 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
+| [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 
 ## Deprecated
 
