@@ -63,7 +63,7 @@ Default is set to `double`.
 ```
 </eslint-code-block>
 
-## Related links
+## :books: Further reading
 
 - [Style guide - Quoted attribute values](https://vuejs.org/v2/style-guide/#Quoted-attribute-values-strongly-recommended)
 
