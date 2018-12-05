@@ -87,12 +87,12 @@ export default {
     },
 
     code () {
-      return `${this.computeCodeFromSlot(this.$slots.default).trim()}\n`
+      return `${this.computeCodeFromSlot(this.$slots.default).trim()}`
     },
 
     height () {
       const lines = this.code.split('\n').length
-      return `${Math.max(120, 20 * (1 + lines))}px`
+      return `${Math.max(120, 19 * lines)}px`
     }
   },
 
@@ -131,6 +131,11 @@ export default {
 <style>
 .eslint-code-block {
   width: 100%;
-  margin: 1em 0;
+  margin: 1em 0 3.5em;
+}
+
+.eslint-code-block .monaco-editor {
+  border-radius: 6px;
+  padding: 1.25rem 0;
 }
 </style>
