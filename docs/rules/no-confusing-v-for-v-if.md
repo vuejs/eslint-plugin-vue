@@ -18,7 +18,8 @@ This rule reports the elements which have both `v-for` and `v-if` directives in 
 In that case, the `v-if` should be written on the wrapper element.
 
 <eslint-code-block :rules="{'vue/no-confusing-v-for-v-if': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <TodoItem
@@ -41,6 +42,7 @@ In that case, the `v-if` should be written on the wrapper element.
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

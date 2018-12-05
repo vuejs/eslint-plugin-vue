@@ -16,7 +16,8 @@ This rule prevents to use duplicated names.
 This rule is aimed at preventing duplicated property names.
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error']}">
-```
+
+```vue
 <script>
 /* ✗ BAD */
 export default {
@@ -37,6 +38,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -54,7 +56,8 @@ export default {
 ### `"groups": ["firebase"]`
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error', {groups: ['firebase']}]}">
-```
+
+```vue
 <script>
 /* ✗ BAD */
 export default {
@@ -67,6 +70,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

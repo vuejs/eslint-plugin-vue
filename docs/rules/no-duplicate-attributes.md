@@ -18,7 +18,8 @@ This rule reports duplicate attributes.
 `v-bind:foo` directives are handled as the attributes `foo`.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <MyComponent :foo="abc" />
@@ -33,6 +34,7 @@ This rule reports duplicate attributes.
   <MyComponent class="abc" class="def" />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -55,13 +57,15 @@ This rule reports duplicate attributes.
 ### `"allowCoexistClass": false, "allowCoexistStyle": false`
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error', {allowCoexistClass: false, allowCoexistStyle: false}]}">
-```
+
+```vue
 <template>
   <!-- ✗ BAD -->
   <MyComponent class="abc" :class="def" />
   <MyComponent style="abc" :style="def" />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

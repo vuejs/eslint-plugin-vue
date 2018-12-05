@@ -25,7 +25,8 @@ This rule tries to parse directives/mustaches in `<template>` by the parser whic
 Then reports syntax errors if exist.
 
 <eslint-code-block :rules="{'vue/no-parsing-error': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✗ BAD -->
   {{ . }}
@@ -35,6 +36,7 @@ Then reports syntax errors if exist.
   </div id="ghi">
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

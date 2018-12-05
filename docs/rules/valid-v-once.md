@@ -20,6 +20,7 @@ This rule reports `v-once` directives in the following cases:
 - The directive has that attribute value. E.g. `<div v-once="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-once': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -31,6 +32,7 @@ This rule reports `v-once` directives in the following cases:
   <div v-once="ccc"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
