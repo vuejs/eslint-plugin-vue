@@ -20,7 +20,10 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 ```json
 {
-  "vue/component-name-in-template-casing": ["error", "PascalCase" | "kebab-case", { 
+  "vue/component-name-in-template-casing": ["error", "PascalCase" | "kebab-case", {
+    "registeredComponentsOnly": true,
+    "globalRegisteredComponents": [],
+    "globalRegisteredComponentPatterns": [],
     "ignores": []
   }]
 }
@@ -28,55 +31,165 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 - `"PascalCase"` (default) ... enforce tag names to pascal case. E.g. `<CoolComponent>`. This is consistent with the JSX practice.
 - `"kebab-case"` ... enforce tag names to kebab case: E.g. `<cool-component>`. This is consistent with the HTML practice which is case-insensitive originally.
+- `registeredComponentsOnly` ... If `true`, only registered components are checked. If `false`, check all.
+    default `true`
+- `globalRegisteredComponents` (`string[]`) ... (Only available when `registeredComponentsOnly` is `true`) The name of globally registered components.
+- `globalRegisteredComponentPatterns` (`string[]`) ... (Only available when `registeredComponentsOnly` is `true`) The pattern of the names of globally registered components.
+    default `true`
 - `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, a custom element or a non-Vue component.
 
-### `"PascalCase"`
+### `"PascalCase", { registeredComponentsOnly: true }` (default)
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error']}">
-```
+
+```html
 <template>
   <!-- ✓ GOOD -->
-  <TheComponent />
+  <CoolComponent />
   
   <!-- ✗ BAD -->
-  <the-component />
-  <theComponent />
-  <The-component />
+  <cool-component />
+  <coolComponent />
+  <Cool-component />
+
+  <!-- ignore -->
+  <UnregisteredComponent />
+  <unregistered-component />
 </template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
 ```
+
 </eslint-code-block>
 
 ### `"kebab-case"`
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'kebab-case']}">
+
 ```
 <template>
   <!-- ✓ GOOD -->
-  <the-component />
+  <cool-component />
 
   <!-- ✗ BAD -->
-  <TheComponent />
-  <theComponent />
-  <Thecomponent />
-  <The-component />
+  <CoolComponent />
+  <coolComponent />
+  <Cool-component />
+
+  <!-- ignore -->
+  <unregistered-component />
+  <UnregisteredComponent />
 </template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
 ```
+
 </eslint-code-block>
 
+### `"PascalCase", { globalRegisteredComponents: ["GlobalComponent"] }`
 
-### `"PascalCase", { ignores: ["custom-element"] }`
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', { globalRegisteredComponents: ['GlobalComponent'] }]}">
 
-<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['custom-element']}]}">
+```html
+<template>
+  <!-- ✓ GOOD -->
+  <CoolComponent />
+  <GlobalComponent />
+  
+  <!-- ✗ BAD -->
+  <cool-component />
+  <global-component />
+</template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"PascalCase", { globalRegisteredComponentPatterns: ["^Global"] }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', { globalRegisteredComponentPatterns: ['^Global'] }]}">
+
+```html
+<template>
+  <!-- ✓ GOOD -->
+  <CoolComponent />
+  <GlobalButton />
+  <GlobalCard />
+  <GlobalGrid />
+  
+  <!-- ✗ BAD -->
+  <cool-component />
+  <global-button />
+  <global-card />
+  <global-grid />
+</template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"PascalCase", { registeredComponentsOnly: false }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }]}">
+
+```html
+<template>
+  <!-- ✓ GOOD -->
+  <CoolComponent />
+  <UnregisteredComponent />
+  
+  <!-- ✗ BAD -->
+  <cool-component />
+  <unregistered-component />
+</template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"PascalCase", { ignores: ["custom-element"], registeredComponentsOnly: false }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['custom-element'], registeredComponentsOnly: false}]}">
+
 ```
 <template>
   <!-- ✓ GOOD -->
-  <TheComponent/>
+  <CoolComponent/>
   <custom-element></custom-element>
   
   <!-- ✗ BAD -->
   <magic-element></magic-element>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading
