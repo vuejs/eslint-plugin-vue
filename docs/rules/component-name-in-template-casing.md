@@ -35,7 +35,6 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
     default `true`
 - `globalRegisteredComponents` (`string[]`) ... (Only available when `registeredComponentsOnly` is `true`) The name of globally registered components.
 - `globalRegisteredComponentPatterns` (`string[]`) ... (Only available when `registeredComponentsOnly` is `true`) The pattern of the names of globally registered components.
-    default `true`
 - `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, a custom element or a non-Vue component.
 
 ### `"PascalCase", { registeredComponentsOnly: true }` (default)
