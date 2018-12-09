@@ -1,7 +1,5 @@
 'use strict'
 
-const version = require('./package.json').version
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -31,7 +29,7 @@ module.exports = {
       "consistent-docs-description": "error",
       "no-invalid-meta": "error",
       "require-meta-docs-url": ["error", {
-        "pattern": `https://github.com/vuejs/eslint-plugin-vue/blob/v${version}/docs/rules/{{name}}.md`
+        "pattern": `https://vuejs.github.io/eslint-plugin-vue/rules/{{name}}.html`
       }]
     }
   }]
