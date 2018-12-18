@@ -15,6 +15,7 @@ description: enforce specific casing for the name property in Vue components
 This rule aims at enforcing the style for the `name` property casing for consistency purposes.
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
+  
 ```
 <script>
   /* ✓ GOOD */
@@ -26,6 +27,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 </eslint-code-block>
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
+  
 ```
 <script>
   /* ✗ BAD */
@@ -50,6 +52,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 ### `"kebab-case"`
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+  
 ```
 <script>
   /* ✓ GOOD */
@@ -61,6 +64,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 </eslint-code-block>
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
+  
 ```
 <script>
   /* ✗ BAD */
