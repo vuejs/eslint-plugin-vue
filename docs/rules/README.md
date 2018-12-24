@@ -114,6 +114,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: |
+| [vue/no-require-false](./no-require-false.md) | disallow require: false on props |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
 | [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
