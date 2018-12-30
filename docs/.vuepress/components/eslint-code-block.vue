@@ -1,18 +1,20 @@
 <template>
-  <eslint-editor
-    :linter="linter"
-    :config="config"
-    :code="code"
-    :style="{ height }"
-    class="eslint-code-block"
-    filename="example.vue"
-    language="html"
-    :preprocess="preprocess"
-    :postprocess="postprocess"
-    dark
-    :format="format"
-    :fix="fix"
-  />
+  <div class="eslint-code-container">
+    <eslint-editor
+      :linter="linter"
+      :config="config"
+      :code="code"
+      :style="{ height }"
+      class="eslint-code-block"
+      filename="example.vue"
+      language="html"
+      :preprocess="preprocess"
+      :postprocess="postprocess"
+      dark
+      :format="format"
+      :fix="fix"
+    />
+  </div>
 </template>
 
 <script>
@@ -92,7 +94,7 @@ export default {
 
     height () {
       const lines = this.code.split('\n').length
-      return `${Math.max(120, 20 * (1 + lines))}px`
+      return `${Math.max(120, 19 * lines)}px`
     }
   },
 
@@ -129,8 +131,18 @@ export default {
 </script>
 
 <style>
+.eslint-code-container {
+  border-radius: 6px;
+  padding: 1.25rem 0;
+  margin: 1em 0;
+  background-color: #1e1e1e;
+}
+
 .eslint-code-block {
   width: 100%;
-  margin: 1em 0;
+}
+
+.eslint-editor-actions {
+  bottom: -0.9rem;
 }
 </style>
