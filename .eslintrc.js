@@ -22,6 +22,7 @@ module.exports = {
     'eslint-plugin/report-message-format': ['error', '^[A-Z`\'{].*\\.$'],
     'eslint-plugin/prefer-placeholders': 'error',
     'eslint-plugin/consistent-output': 'error',
+    'eslint-plugin/require-meta-type': 'error',
     'no-mixed-operators': 'error'
   },
 
