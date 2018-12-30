@@ -15,7 +15,8 @@ description: require or disallow a space before tag's closing brackets
 This rule aims to enforce consistent spacing style before closing brackets `>` of tags.
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-spacing': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div>
@@ -36,6 +37,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
   <div foo="bar"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -63,7 +65,8 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 ### `"startTag": "always", "endTag": "always", "selfClosingTag": "always"`
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-spacing': ['error', {startTag: 'always', endTag: 'always', selfClosingTag: 'always' }]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div >
@@ -75,6 +78,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
   <div foo="bar" />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :couple: Related rules

@@ -23,7 +23,8 @@ This rule enforces the quotes style of HTML attributes.
 This rule reports the quotes of attributes if it is different to configured quotes.
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <img src="./logo.png">
@@ -33,6 +34,7 @@ This rule reports the quotes of attributes if it is different to configured quot
   <img src=./logo.png>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -51,7 +53,8 @@ Default is set to `double`.
 ### `"single"`
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'single']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <img src='./logo.png'>
@@ -61,6 +64,7 @@ Default is set to `double`.
   <img src=./logo.png>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

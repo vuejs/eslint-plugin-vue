@@ -14,7 +14,8 @@ description: require default value for props
 This rule requires default value to be set for each props that are not marked as `required` (except `Boolean` props).
 
 <eslint-code-block :rules="{'vue/require-default-prop': ['error']}">
-```
+
+```vue
 <script>
 export default {
   props: {
@@ -51,6 +52,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

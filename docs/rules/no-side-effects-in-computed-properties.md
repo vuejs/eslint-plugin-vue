@@ -16,7 +16,8 @@ This rule is aimed at preventing the code which makes side effects in computed p
 It is considered a very bad practice to introduce side effects inside computed properties. It makes the code not predictable and hard to understand.
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
-```
+
+```vue
 <script>
 /* ✓ GOOD */
 export default {
@@ -31,10 +32,12 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
-```
+
+```vue
 <script>
 /* ✗ BAD */
 export default {
@@ -50,6 +53,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

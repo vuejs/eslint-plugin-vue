@@ -14,6 +14,7 @@ description: enforce props default values to be valid
 This rule checks whether the default value of each prop is valid for the given type. It should report an error when default value for type `Array` or `Object` is not returned using function.
 
 <eslint-code-block :rules="{'vue/require-valid-default-prop': ['error']}">
+
 ```vue
 <script>
 export default {
@@ -66,6 +67,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

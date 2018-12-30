@@ -14,7 +14,8 @@ description: disallow use of v-html to prevent XSS attack
 This rule reports all uses of `v-html` directive in order to reduce the risk of injecting potentially unsafe / unescaped html into the browser leading to Cross-Site Scripting (XSS) attacks.
 
 <eslint-code-block :rules="{'vue/no-v-html': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div>{{ someHTML }}</div>
@@ -23,6 +24,7 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
   <div v-html="someHTML"></div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
