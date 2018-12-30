@@ -15,7 +15,8 @@ description: enforce attribute naming style on custom components in template
 This rule enforces using hyphenated attribute names on custom components in Vue templates.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
-```
+
+```vue
 <template>
   <!-- ✔ GOOD -->
   <MyComponent my-prop="prop" />
@@ -24,6 +25,7 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
   <MyComponent myProp="prop" />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -46,7 +48,8 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 It errors on upper case letters.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
-```
+
+```vue
 <template>
   <!-- ✔ GOOD -->
   <MyComponent my-prop="prop" />
@@ -55,13 +58,15 @@ It errors on upper case letters.
   <MyComponent myProp="prop" />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `"never"`
 It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
-```
+
+```vue
 <template>
   <!-- ✔ GOOD -->
   <MyComponent myProp="prop" />
@@ -73,13 +78,15 @@ It errors on hyphens except `data-`, `aria-` and `slot-scope`.
   <MyComponent my-prop="prop" />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `"never", { "ignore": ["custom-prop"] }` 
 Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
-```
+
+```vue
 <template>
   <!-- ✔ GOOD -->
   <MyComponent myProp="prop" />
@@ -92,6 +99,7 @@ Don't use hyphenated name but allow custom attributes
   <MyComponent my-prop="prop" />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

@@ -14,6 +14,7 @@ description: enforce that a return statement is present in computed property
 This rule enforces that a `return` statement is present in `computed` properties.
 
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error']}">
+
 ```vue
 <script>
 export default {
@@ -40,6 +41,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -58,6 +60,7 @@ This rule has an object option:
 ### `treatUndefinedAsUnspecified: false`
 
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error', { treatUndefinedAsUnspecified: false }]}">
+
 ```vue
 <script>
 export default {
@@ -84,6 +87,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

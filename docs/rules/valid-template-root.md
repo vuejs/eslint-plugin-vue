@@ -16,20 +16,25 @@ This rule checks whether every template root is valid.
 This rule reports the template root in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+
 ```vue
 <!-- There is no root element -->
 <template></template>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+
 ```vue
 <!-- The root is text -->
 <template>Lorem ipsum</template>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+
 ```vue
 <!-- There are multiple root elements -->
 <template>
@@ -37,24 +42,29 @@ This rule reports the template root in the following cases:
   <div>hello</div>
 </template>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+
 ```vue
 <!-- The root element has `v-for` directives -->
 <template>
   <div v-for="item in items"/>
 </template>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
+
 ```vue
 <!-- The root element is `<template>` or `<slot>` -->
 <template>
   <slot />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

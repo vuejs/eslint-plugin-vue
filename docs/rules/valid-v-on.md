@@ -20,6 +20,7 @@ This rule reports `v-on` directives in the following cases:
 - The directive does not have that attribute value and any verb modifiers. E.g. `<div v-on:click></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -37,6 +38,7 @@ This rule reports `v-on` directives in the following cases:
   <div @click/>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note
@@ -60,12 +62,14 @@ This rule has an object option:
 ### `"modifiers": ["foo"]`
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error', { modifiers: ['foo']}]}">
+
 ```vue
 <template>
   <div @click.foo="foo"/>
   <div v-on:click.foo="foo"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :couple: Related rules

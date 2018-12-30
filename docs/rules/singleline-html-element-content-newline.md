@@ -16,6 +16,7 @@ This rule enforces a line break before and after the contents of a singleline el
 
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -44,6 +45,7 @@ This rule enforces a line break before and after the contents of a singleline el
   <div attr><!-- comment --></div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -69,6 +71,7 @@ This rule enforces a line break before and after the contents of a singleline el
 ### `"ignoreWhenNoAttributes": true`
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': true}]}">
+
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -79,11 +82,13 @@ This rule enforces a line break before and after the contents of a singleline el
   <div attr><!-- comment --></div>
 </template>
 ```
+
 </eslint-code-block>
 
 ### `"ignoreWhenNoAttributes": false`
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': false}]}">
+
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -94,6 +99,7 @@ This rule enforces a line break before and after the contents of a singleline el
   <div><!-- comment --></div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

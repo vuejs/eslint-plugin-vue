@@ -24,6 +24,7 @@ This rule reports `v-for` directives in the following cases:
 If the element which has the directive is a reserved element, this rule does not report it even if the element does not have `v-bind:key` directive because it's not fatal error. [require-v-for-key] rule reports it.
 
 <eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -53,6 +54,7 @@ If the element which has the directive is a reserved element, this rule does not
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

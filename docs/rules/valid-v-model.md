@@ -24,6 +24,7 @@ This rule reports `v-model` directives in the following cases:
 - The directive's reference is iteration variables. E.g. `<div v-for="x in list"><input type="file" v-model="x"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-model': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -46,6 +47,7 @@ This rule reports `v-model` directives in the following cases:
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

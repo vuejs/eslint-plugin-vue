@@ -16,7 +16,8 @@ Vue.js disallows `key` attribute on `<template>` elements.
 This rule reports the `<template>` elements which have `key` attribute.
 
 <eslint-code-block :rules="{'vue/no-template-key': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div key="foo"> ... </div>
@@ -28,6 +29,7 @@ This rule reports the `<template>` elements which have `key` attribute.
   <template :key="baz"> ... </template>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

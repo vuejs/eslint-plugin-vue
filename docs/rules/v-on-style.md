@@ -15,6 +15,7 @@ description: enforce `v-on` directive style
 This rule enforces `v-on` directive style which you should use shorthand or long form.
 
 <eslint-code-block fix :rules="{'vue/v-on-style': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -24,6 +25,7 @@ This rule enforces `v-on` directive style which you should use shorthand or long
   <div v-on:click="foo"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -41,6 +43,7 @@ Default is set to `shorthand`.
 ### `"longform"`
 
 <eslint-code-block fix :rules="{'vue/v-on-style': ['error', 'longform']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -50,6 +53,7 @@ Default is set to `shorthand`.
   <div @click="foo"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

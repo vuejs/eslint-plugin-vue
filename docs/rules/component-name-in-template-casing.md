@@ -33,7 +33,8 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 ### `"PascalCase"`
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <TheComponent />
@@ -44,12 +45,14 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
   <The-component />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `"kebab-case"`
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'kebab-case']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <the-component />
@@ -61,13 +64,15 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
   <The-component />
 </template>
 ```
+
 </eslint-code-block>
 
 
 ### `"PascalCase", { ignores: ["custom-element"] }`
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['custom-element']}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <TheComponent/>
@@ -77,6 +82,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
   <magic-element></magic-element>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

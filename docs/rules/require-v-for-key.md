@@ -14,6 +14,7 @@ description: require `v-bind:key` with `v-for` directives
 This rule reports the elements which have `v-for` and do not have `v-bind:key` with exception to custom components.
 
 <eslint-code-block :rules="{'vue/require-v-for-key': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -25,6 +26,7 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
   <div v-for="todo in todos"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

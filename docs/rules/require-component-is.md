@@ -15,6 +15,7 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 
 
 <eslint-code-block :rules="{'vue/require-component-is': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -26,6 +27,7 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
   <component is="type"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note
