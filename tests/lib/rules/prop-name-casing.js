@@ -298,7 +298,18 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
+      parserOptions
+    },
+    {
+      // emoji
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '\u{1F37B}': String
+          }
+        }
+      `,
       parserOptions
     }
   ],
@@ -498,24 +509,6 @@ ruleTester.run('prop-name-casing', rule, {
       parserOptions,
       errors: [{
         message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
-      // emoji
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '\u{1F37B}': String
-          }
-        }
-      `,
-      output: null,
-      parserOptions,
-      errors: [{
-        message: 'Prop "\u{1F37B}" is not in camelCase.',
         type: 'Property',
         line: 4
       }]

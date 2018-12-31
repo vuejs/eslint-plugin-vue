@@ -19,6 +19,10 @@ describe('getConverter()', () => {
     assert.equal(converter('Foo1BAZ'), 'foo1BAZ')
     assert.equal(converter('foo1b_a_z'), 'foo1bAZ')
     assert.equal(converter('darИībaÊÊw'), 'darИībaÊÊw')
+    assert.equal(converter('klâwen-ûf'), 'klâwenûf')
+    assert.equal(converter('пустынныхИвдалП'), 'пустынныхИвдалП')
+    assert.equal(converter('kpłĄżć'), 'kpłĄżć')
+    assert.equal(converter('ÊtreSîne'), 'ÊtreSîne')
     assert.equal(converter('    foo       Bar   '), 'fooBar')
   })
 
@@ -35,6 +39,10 @@ describe('getConverter()', () => {
     assert.equal(converter('Foo1BAZ'), 'Foo1BAZ')
     assert.equal(converter('foo1b_a_z'), 'Foo1bAZ')
     assert.equal(converter('darИībaÊÊw'), 'DarИībaÊÊw')
+    assert.equal(converter('klâwen-ûf'), 'Klâwenûf')
+    assert.equal(converter('пустынныхИвдалП'), 'пустынныхИвдалП')
+    assert.equal(converter('kpłĄżć'), 'KpłĄżć')
+    assert.equal(converter('ÊtreSîne'), 'ÊtreSîne')
     assert.equal(converter('    foo       Bar   '), 'FooBar')
   })
 
@@ -50,7 +58,11 @@ describe('getConverter()', () => {
     assert.equal(converter('FooBAR'), 'foo-b-a-r')
     assert.equal(converter('Foo1BAZ'), 'foo1-b-a-z')
     assert.equal(converter('foo1b_a_z'), 'foo1b-a-z')
-    assert.equal(converter('darИībaÊÊw'), 'dar-иība-ê-êw')
+    assert.equal(converter('darИībaÊÊw'), 'darИībaÊÊw')
+    assert.equal(converter('klâwen-ûf'), 'klâwen-ûf')
+    assert.equal(converter('пустынныхИвдалП'), 'пустынныхИвдалП')
+    assert.equal(converter('kpłĄżć'), 'kpłĄżć')
+    assert.equal(converter('ÊtreSîne'), 'Être-sîne')
     assert.equal(converter('    foo       Bar   '), 'foo-bar')
   })
 
@@ -65,25 +77,11 @@ describe('getConverter()', () => {
     assert.equal(converter('FooBAR'), 'foo_b_a_r')
     assert.equal(converter('Foo1BAZ'), 'foo1_b_a_z')
     assert.equal(converter('foo1b_a_z'), 'foo1b_a_z')
-    assert.equal(converter('darИībaÊÊw'), 'dar_иība_ê_êw')
+    assert.equal(converter('darИībaÊÊw'), 'darИībaÊÊw')
+    assert.equal(converter('klâwen-ûf'), 'klâwen_ûf')
+    assert.equal(converter('пустынныхИвдалП'), 'пустынныхИвдалП')
+    assert.equal(converter('kpłĄżć'), 'kpłĄżć')
+    assert.equal(converter('ÊtreSîne'), 'Être_sîne')
     assert.equal(converter('    foo       Bar   '), 'foo_bar')
-  })
-
-  it('unicode tests', () => {
-    const words = [
-      ['ÊtreSîne', 'être_sîne'],
-      ['darbībaÊÊw', 'darbība_ê_êw'],
-      ['klâwen-ûf', 'klâwen_ûf'],
-      ['γλώσσαΤη', 'γλώσσα_τη'],
-      ['пустынныхИвдалП', 'пустынных_ивдал_п'],
-      ['kpłĄżć', 'kpł_ążć']
-    ]
-    for (const [word, snake] of words) {
-      assert.equal(casing.camelCase(word), casing.camelCase(casing.snakeCase(word)))
-      assert.equal(casing.pascalCase(word), casing.pascalCase(casing.kebabCase(word)))
-      assert.equal(casing.kebabCase(word), casing.kebabCase(casing.camelCase(word)))
-      assert.equal(casing.snakeCase(word), casing.snakeCase(casing.pascalCase(word)))
-      assert.equal(casing.snakeCase(word), snake)
-    }
   })
 })
