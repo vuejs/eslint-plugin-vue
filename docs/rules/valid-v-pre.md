@@ -20,6 +20,7 @@ This rule reports `v-pre` directives in the following cases:
 - The directive has that attribute value. E.g. `<div v-pre="ccc"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-pre': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -31,6 +32,7 @@ This rule reports `v-pre` directives in the following cases:
   <div v-pre="ccc"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

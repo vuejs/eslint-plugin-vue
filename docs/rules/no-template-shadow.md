@@ -16,6 +16,7 @@ description: disallow variable declarations from shadowing variables declared in
 This rule aims to eliminate shadowed variable declarations of v-for directives or scope attributes.
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -42,6 +43,7 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
   }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

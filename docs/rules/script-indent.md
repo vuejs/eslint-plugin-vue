@@ -14,6 +14,7 @@ description: enforce consistent indentation in `<script>`
 This rule is similar to core [indent](https://eslint.org/docs/rules/indent) rule, but it has an option for inside of `<script>` tag.
 
 <eslint-code-block fix :rules="{'vue/script-indent': ['error']}">
+
 ```vue
 <script>
 let a = {
@@ -38,6 +39,7 @@ const d = {
       }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -81,6 +83,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 
 ### `2, "baseIndent": 1`
 <eslint-code-block fix :rules="{'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]}">
+
 ```vue
 <script>
   let a = {
@@ -105,6 +108,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
         }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :couple: Related rules

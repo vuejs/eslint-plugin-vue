@@ -21,6 +21,7 @@ This rule reports `v-if` directives in the following cases:
 - The directive is on the elements which have `v-else`/`v-else-if` directives. E.g. `<div v-else v-if="foo"></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-if': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -42,6 +43,7 @@ This rule reports `v-if` directives in the following cases:
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

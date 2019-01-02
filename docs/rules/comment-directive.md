@@ -30,6 +30,7 @@ ESLint doesn't provide any API to enhance `eslint-disable` functionality and ESL
 This rule sends all `eslint-disable`-like comments as errors to the post-process of the `.vue` file processor, then the post-process removes all `vue/comment-directive` errors and the reported errors in disabled areas.
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error']}">
+
 ```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
@@ -37,6 +38,7 @@ This rule sends all `eslint-disable`-like comments as errors to the post-process
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

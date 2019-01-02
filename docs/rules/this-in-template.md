@@ -14,6 +14,7 @@ description: disallow usage of `this` in template
 This rule aims at preventing usage of `this` in Vue templates.
 
 <eslint-code-block :rules="{'vue/this-in-template': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -27,6 +28,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   </a>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -42,6 +44,7 @@ This rule aims at preventing usage of `this` in Vue templates.
 ### `"always"`
 
 <eslint-code-block :rules="{'vue/this-in-template': ['error', 'always']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -55,6 +58,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   </a>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation
