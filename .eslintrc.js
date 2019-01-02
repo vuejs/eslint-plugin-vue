@@ -30,7 +30,7 @@ module.exports = {
       "no-invalid-meta": "error",
       'eslint-plugin/require-meta-type': 'error',
       "require-meta-docs-url": ["error", {
-        "pattern": `https://vuejs.github.io/eslint-plugin-vue/rules/{{name}}.html`
+        "pattern": `https://eslint.vuejs.org/rules/{{name}}.html`
       }]
     }
   }]

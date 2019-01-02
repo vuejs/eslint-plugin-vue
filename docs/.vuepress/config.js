@@ -27,7 +27,7 @@ if (deprecatedRules.length > 0) {
 }
 
 module.exports = {
-  base: '/eslint-plugin-vue/',
+  base: '/',
   title: 'eslint-plugin-vue',
   description: 'Official ESLint plugin for Vue.js',
   serviceWorker: true,

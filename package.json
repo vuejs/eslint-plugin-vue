@@ -19,7 +19,7 @@
   "files": [
     "lib"
   ],
-  "homepage": "https://vuejs.github.io/eslint-plugin-vue/",
+  "homepage": "https://eslint.vuejs.org",
   "keywords": [
     "eslint",
     "eslint-plugin",

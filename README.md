@@ -9,7 +9,7 @@
 
 ## :book: Documentation
 
-See https://vuejs.github.io/eslint-plugin-vue/
+See https://eslint.vuejs.org
 
 ## :anchor: Versioning Policy
 
@@ -23,7 +23,7 @@ We're using [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/release
 
 Contributing is welcome!
 
-See https://vuejs.github.io/eslint-plugin-vue/developer-guide/
+See https://eslint.vuejs.org/developer-guide/
 
 ### Working with rules
 
