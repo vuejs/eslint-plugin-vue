@@ -92,13 +92,13 @@ tester.run('component-name-in-template-casing', rule, {
     {
       code: `
         <template>
-          <GlobalButton />
-          <GlobalCard />
-          <GlobalGrid />
+          <global-button />
+          <globalCard />
+          <global-grid />
         </template>
       `,
       filename: 'test.vue',
-      options: ['PascalCase', { registeredComponentsOnly: false, ignores: ['/^Global/'] }]
+      options: ['PascalCase', { registeredComponentsOnly: false, ignores: ['/^global/'] }]
     },
 
     // Invalid EOF
