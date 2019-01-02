@@ -2,28 +2,10 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v6:
-          filters:
-            branches:
-              ignore: gh-pages
-      - node-v8:
-          filters:
-            branches:
-              ignore: gh-pages
-      - node-v10:
-          filters:
-            branches:
-              ignore: gh-pages
-      - node-v10-minimal:
-          filters:
-            branches:
-              ignore: gh-pages
-      - deploy_docs:
-          requires:
-            - node-v10
-          filters:
-            branches:
-              only: master
+      - node-v6
+      - node-v8
+      - node-v10
+      - node-v10-minimal
 
 version: 2
 jobs:
@@ -62,6 +44,8 @@ jobs:
     docker:
       - image: node:10
   node-v10-minimal:
+    docker:
+      - image: node:10
     steps:
       - run:
           name: Versions
@@ -83,20 +67,3 @@ jobs:
           key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
           paths:
             - node_modules
-    docker:
-      - image: node:10
-
-  deploy_docs:
-    docker:
-      - image: node:10
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Deploy to Github Pages
-          command: npm run docs:deploy
