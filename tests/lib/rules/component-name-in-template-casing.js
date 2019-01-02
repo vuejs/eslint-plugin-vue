@@ -79,32 +79,6 @@ tester.run('component-name-in-template-casing', rule, {
       options: ['kebab-case', { registeredComponentsOnly: false }]
     },
 
-    // globalRegisteredComponents
-    {
-      code: `
-        <template>
-          <GlobalButton />
-          <GlobalCard />
-          <GlobalGrid />
-        </template>
-      `,
-      filename: 'test.vue',
-      options: ['PascalCase', { globalRegisteredComponents: ['GlobalButton', 'GlobalCard', 'GlobalGrid'] }]
-    },
-
-    // globalRegisteredComponentPatterns
-    {
-      code: `
-        <template>
-          <GlobalButton />
-          <GlobalCard />
-          <GlobalGrid />
-        </template>
-      `,
-      filename: 'test.vue',
-      options: ['PascalCase', { globalRegisteredComponentPatterns: ['^Global'] }]
-    },
-
     // ignores
     {
       code: '<template><custom-element></custom-element></template>',
@@ -114,6 +88,19 @@ tester.run('component-name-in-template-casing', rule, {
       code: '<template><custom-element><TheComponent/></custom-element></template>',
       options: ['PascalCase', { ignores: ['custom-element'], registeredComponentsOnly: false }]
     },
+    // regexp ignores
+    {
+      code: `
+        <template>
+          <GlobalButton />
+          <GlobalCard />
+          <GlobalGrid />
+        </template>
+      `,
+      filename: 'test.vue',
+      options: ['PascalCase', { registeredComponentsOnly: false, ignores: ['/^Global/'] }]
+    },
+
     // Invalid EOF
     { code: '<template><the-component a=">test</the-component></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
     { code: '<template><the-component><!--test</the-component></template>', options: ['PascalCase', { registeredComponentsOnly: false }] }
@@ -230,16 +217,25 @@ tester.run('component-name-in-template-casing', rule, {
           <the-component />
         </svg>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <svg>
           <TheComponent />
         </svg>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -250,16 +246,25 @@ tester.run('component-name-in-template-casing', rule, {
           <!-- comment -->
         </the-component>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent id="id">
           <!-- comment -->
         </TheComponent>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -270,16 +275,25 @@ tester.run('component-name-in-template-casing', rule, {
           content
         </the-component>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent :is="componentName">
           content
         </TheComponent>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -288,14 +302,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <the-component id="id"/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent id="id"/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -348,15 +371,24 @@ tester.run('component-name-in-template-casing', rule, {
         <the-component
           id="id"/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent
           id="id"/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -365,14 +397,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <the-component/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -381,14 +422,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <the-component></the-component>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -397,14 +447,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <theComponent/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "theComponent" is not PascalCase.']
     },
@@ -413,12 +472,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <theComponent/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['kebab-case', { globalRegisteredComponents: ['TheComponent'] }],
+      filename: 'test.vue',
+      options: ['kebab-case'],
       output: `
       <template>
         <the-component/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "theComponent" is not kebab-case.']
     },
@@ -427,14 +497,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <The-component/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "The-component" is not PascalCase.']
     },
@@ -443,12 +522,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <The-component/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['kebab-case', { globalRegisteredComponentPatterns: ['Component$'] }],
+      filename: 'test.vue',
+      options: ['kebab-case'],
       output: `
       <template>
         <the-component/>
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "The-component" is not kebab-case.']
     },
@@ -471,14 +561,23 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <the-component></the-component  >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent  >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -488,15 +587,24 @@ tester.run('component-name-in-template-casing', rule, {
         <the-component></the-component
         >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent
         >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
@@ -505,93 +613,28 @@ tester.run('component-name-in-template-casing', rule, {
       <template>
         <the-component></the-component end-tag-attr="attr" >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
-      options: ['PascalCase', {
-        globalRegisteredComponents: ['TheComponent']
-      }],
+      filename: 'test.vue',
+      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent end-tag-attr="attr" >
       </template>
+      <script>
+      export default {
+        components: {TheComponent}
+      }
+      </script>
       `,
       errors: ['Component name "the-component" is not PascalCase.']
     },
 
-    // globalRegisteredComponents
-    {
-      code: `
-        <template>
-          <global-button />
-          <global-card />
-          <global-grid />
-        </template>
-      `,
-      filename: 'test.vue',
-      options: ['PascalCase', { globalRegisteredComponents: ['GlobalButton', 'GlobalCard', 'GlobalGrid'] }],
-      output: `
-        <template>
-          <GlobalButton />
-          <GlobalCard />
-          <GlobalGrid />
-        </template>
-      `,
-      errors: [
-        'Component name "global-button" is not PascalCase.',
-        'Component name "global-card" is not PascalCase.',
-        'Component name "global-grid" is not PascalCase.'
-      ]
-    },
-
-    // globalRegisteredComponentPatterns
-    {
-      code: `
-        <template>
-          <global-button />
-          <global-card />
-          <global-grid />
-        </template>
-      `,
-      filename: 'test.vue',
-      options: ['PascalCase', { globalRegisteredComponentPatterns: ['^Global'] }],
-      output: `
-        <template>
-          <GlobalButton />
-          <GlobalCard />
-          <GlobalGrid />
-        </template>
-      `,
-      errors: [
-        'Component name "global-button" is not PascalCase.',
-        'Component name "global-card" is not PascalCase.',
-        'Component name "global-grid" is not PascalCase.'
-      ]
-    },
-
     // ignores
-    {
-      code: `
-      <template>
-        <custom-element>
-          <the-component />
-        </custom-element>
-        <custom-component />
-      </template>`,
-      output: `
-      <template>
-        <custom-element>
-          <TheComponent />
-        </custom-element>
-        <CustomComponent />
-      </template>`,
-      options: ['PascalCase', {
-        ignores: ['custom-element'],
-        globalRegisteredComponentPatterns: ['^the', '^custom']
-      }],
-      errors: [
-        'Component name "the-component" is not PascalCase.',
-        'Component name "custom-component" is not PascalCase.'
-      ]
-    },
     {
       code: `
       <template>
@@ -611,7 +654,7 @@ tester.run('component-name-in-template-casing', rule, {
       </template>`,
       options: ['PascalCase', {
         ignores: ['custom-element1', 'custom-element2'],
-        globalRegisteredComponentPatterns: ['^the', '^custom']
+        registeredComponentsOnly: false
       }],
       errors: [
         'Component name "the-component" is not PascalCase.',
@@ -636,7 +679,7 @@ tester.run('component-name-in-template-casing', rule, {
         <TheComponent />
       </template>`,
       options: ['PascalCase', {
-        ignores: ['custom-element1', 'custom-element2'],
+        ignores: ['/^custom-element/'],
         registeredComponentsOnly: false
       }],
       errors: [
