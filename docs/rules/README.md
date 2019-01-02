@@ -80,7 +80,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
-| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
@@ -128,13 +127,14 @@ For example:
 ```json
 {
   "rules": {
-    "vue/script-indent": "error"
+    "vue/component-name-in-template-casing": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 
 ## Deprecated
