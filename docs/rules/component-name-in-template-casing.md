@@ -19,7 +19,8 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 ```json
 {
-  "vue/component-name-in-template-casing": ["error", "PascalCase" | "kebab-case", { 
+  "vue/component-name-in-template-casing": ["error", "PascalCase" | "kebab-case", {
+    "registeredComponentsOnly": true,
     "ignores": []
   }]
 }
@@ -27,22 +28,40 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 - `"PascalCase"` (default) ... enforce tag names to pascal case. E.g. `<CoolComponent>`. This is consistent with the JSX practice.
 - `"kebab-case"` ... enforce tag names to kebab case: E.g. `<cool-component>`. This is consistent with the HTML practice which is case-insensitive originally.
-- `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, a custom element or a non-Vue component.
+- `registeredComponentsOnly` ... If `true`, only registered components (in PascalCase) are checked. If `false`, check all.
+    default `true`
+- `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, custom elements or Vue components with special name. You can set the regexp by writing it like `"/^name/"`.
 
-### `"PascalCase"`
+### `"PascalCase", { registeredComponentsOnly: true }` (default)
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <TheComponent />
+  <CoolComponent />
   
   <!-- ✗ BAD -->
-  <the-component />
-  <theComponent />
-  <The-component />
+  <cool-component />
+  <coolComponent />
+  <Cool-component />
+
+  <!-- ignore -->
+  <UnregisteredComponent />
+  <unregistered-component />
+
+  <registered-in-kebab-case />
+  <registeredInCamelCase />
 </template>
+<script>
+export default {
+  components: {
+    CoolComponent,
+    'registered-in-kebab-case': VueComponent1,
+    'registeredInCamelCase': VueComponent2
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
@@ -54,28 +73,64 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <the-component />
+  <cool-component />
 
   <!-- ✗ BAD -->
-  <TheComponent />
-  <theComponent />
-  <Thecomponent />
-  <The-component />
+  <CoolComponent />
+  <coolComponent />
+  <Cool-component />
+
+  <!-- ignore -->
+  <unregistered-component />
+  <UnregisteredComponent />
 </template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
 
+### `"PascalCase", { registeredComponentsOnly: false }`
 
-### `"PascalCase", { ignores: ["custom-element"] }`
-
-<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['custom-element']}]}">
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <TheComponent/>
+  <CoolComponent />
+  <UnregisteredComponent />
+  
+  <!-- ✗ BAD -->
+  <cool-component />
+  <unregistered-component />
+</template>
+<script>
+export default {
+  components: {
+    CoolComponent
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"PascalCase", { ignores: ["/^custom-/"], registeredComponentsOnly: false }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['/^custom-/'], registeredComponentsOnly: false}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <CoolComponent/>
   <custom-element></custom-element>
+  <custom-button></custom-button>
+  <custom-input />
   
   <!-- ✗ BAD -->
   <magic-element></magic-element>
