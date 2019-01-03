@@ -49,6 +49,15 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><code v-pre>{{text}}</code></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><span v-pre>{{ foo }}<div>{{   bar   }}</div></span></template>',
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div>{{ }}</div></template>',
       options: ['always']
     },
@@ -141,6 +150,58 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
       errors: [
         "Expected no space after '{{', but found.",
         "Expected no space before '}}', but found."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div>
+          {{   text   }}
+          <code v-pre>{{   text   }}</code>
+        </div>
+      </template>`,
+      output: `<template>
+        <div>
+          {{text}}
+          <code v-pre>{{   text   }}</code>
+        </div>
+      </template>`,
+      options: ['never'],
+      errors: [
+        {
+          message: "Expected no space after '{{', but found.",
+          line: 3
+        },
+        {
+          message: "Expected no space before '}}', but found.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div>
+          <span v-pre>{{ text }}</span>
+          <span>{{ text }}</span>
+        </div>
+      </template>`,
+      output: `<template>
+        <div>
+          <span v-pre>{{ text }}</span>
+          <span>{{text}}</span>
+        </div>
+      </template>`,
+      options: ['never'],
+      errors: [
+        {
+          message: "Expected no space after '{{', but found.",
+          line: 4
+        },
+        {
+          message: "Expected no space before '}}', but found.",
+          line: 4
+        }
       ]
     }
   ]
