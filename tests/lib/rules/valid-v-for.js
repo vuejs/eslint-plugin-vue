@@ -77,11 +77,11 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template v-for="x of list"><slot name="item" /></template>'
+      code: '<template><template v-for="x of list"><slot name="item" /></template></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template v-for="x of list">foo<div></div></template>'
+      code: '<template><template v-for="x of list">foo<div></div></template></template>'
     },
     {
       filename: 'test.vue',
@@ -262,6 +262,5 @@ tester.run('valid-v-for', rule, {
         </template>
       `
     }
-
   ]
 })
