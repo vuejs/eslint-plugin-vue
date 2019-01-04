@@ -28,6 +28,19 @@ tester.run('multiline-html-element-content-newline', rule, {
     `<template><div class="panel"><!-- comment --></div></template>`,
     `
       <template>
+        <slot
+          name="panel"
+        ></slot>
+      </template>
+    `,
+    `
+      <template>
+        <div
+          ></div>
+      </template>
+    `,
+    `
+      <template>
         <div class="panel">
           content
         </div>
@@ -91,11 +104,43 @@ tester.run('multiline-html-element-content-newline', rule, {
           >content</ignore-tag>
           <ignore-tag><div
             >content</div></ignore-tag>
-          <ignore-tag>>content
+          <ignore-tag>content
             content</ignore-tag>
         </template>`,
       options: [{
         ignores: ['ignore-tag']
+      }]
+    },
+    {
+      code: `
+        <template>
+          <IgnoreTag>content</IgnoreTag>
+          <IgnoreTag
+            id="test-pre"
+          >content</IgnoreTag>
+          <IgnoreTag><div
+            >content</div></IgnoreTag>
+          <IgnoreTag>content
+            content</IgnoreTag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
+      }]
+    },
+    {
+      code: `
+        <template>
+          <ignore-tag>content</ignore-tag>
+          <ignore-tag
+            id="test-pre"
+          >content</ignore-tag>
+          <ignore-tag><div
+            >content</div></ignore-tag>
+          <ignore-tag>content
+            content</ignore-tag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
       }]
     },
     // Ignore if no closing brackets
@@ -493,6 +538,7 @@ content
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false }],
       errors: ['Expected 1 line break after opening tag (`<div>`), but no line breaks found.']
     }
   ]

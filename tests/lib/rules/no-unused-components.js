@@ -55,6 +55,30 @@ tester.run('no-unused-components', rule, {
     {
       filename: 'test.vue',
       code: `<template>
+        <svg>
+          <TheCircle />
+        </svg>
+      </template>
+      <script>
+        export default {
+          components: {
+            TheCircle
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <circle cx="0" cy="0" :d="radius" />
+      </template>
+      <script>
+        export default {}
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
         <div>
           <component :is="'TheButton'" />
         </div>
@@ -123,6 +147,21 @@ tester.run('no-unused-components', rule, {
         export default {
           components: {
             TheButton
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div>
+          <the-button />
+        </div>
+      </template>
+      <script>
+        export default {
+          components: {
+            theButton
           }
         }
       </script>`
@@ -334,7 +373,7 @@ tester.run('no-unused-components', rule, {
       options: [{ ignoreWhenBindingPresent: true }]
     },
 
-    // Ignore when `render` is used instead of temoplate
+    // Ignore when `render` is used instead of template
     {
       filename: 'test.vue',
       code: `
@@ -345,6 +384,30 @@ tester.run('no-unused-components', rule, {
           },
           render() {
             return
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template src="./test.html" />
+      <script>
+        export default {
+          components: {
+            TheButton
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template src="./test.html"></template>
+      <script>
+        export default {
+          components: {
+            TheButton
           }
         }
       </script>`

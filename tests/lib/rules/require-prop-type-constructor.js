@@ -15,9 +15,9 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 7,
+    ecmaVersion: 2018,
     sourceType: 'module'
   }
 })
@@ -29,6 +29,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
       code: `
         export default {
           props: {
+            ...props,
             myProp: Number,
             anotherType: [Number, String],
             extraProp: {
@@ -37,7 +38,9 @@ ruleTester.run('require-prop-type-constructor', rule, {
             },
             lastProp: {
               type: [Number, Boolean]
-            }
+            },
+            nullProp: null,
+            nullTypeProp: { type: null }
           }
         }
       `
@@ -58,7 +61,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
           },
           lastProp: {
             type: ['Boolean']
-          }
+          },
+          nullProp: 'null'
         }
       }
       `,
@@ -73,7 +77,8 @@ ruleTester.run('require-prop-type-constructor', rule, {
           },
           lastProp: {
             type: [Boolean]
-          }
+          },
+          nullProp: null
         }
       }
       `,
@@ -87,11 +92,14 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "anotherType" property should be a constructor.',
         line: 5
       }, {
-        message: 'The "type" property should be a constructor.',
+        message: 'The "extraProp" property should be a constructor.',
         line: 7
       }, {
-        message: 'The "type" property should be a constructor.',
+        message: 'The "lastProp" property should be a constructor.',
         line: 11
+      }, {
+        message: 'The "nullProp" property should be a constructor.',
+        line: 13
       }]
     },
     {
@@ -129,6 +137,34 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "d" property should be a constructor.',
         line: 7
       }]
+    },
+    {
+      filename: 'SomeComponent.vue',
+      code: `
+      export default {
+        props: {
+          a: {
+            type: 'String',
+            default: 10
+          } as PropOptions<string>,
+        }
+      }
+      `,
+      output: `
+      export default {
+        props: {
+          a: {
+            type: String,
+            default: 10
+          } as PropOptions<string>,
+        }
+      }
+      `,
+      errors: [{
+        message: 'The "a" property should be a constructor.',
+        line: 5
+      }],
+      parser: 'typescript-eslint-parser'
     }
   ]
 })

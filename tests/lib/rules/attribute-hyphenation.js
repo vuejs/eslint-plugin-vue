@@ -152,6 +152,17 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div><custom v-bind:propID="prop" :secondPropID="test"></custom></div></template>',
+      output: '<template><div><custom v-bind:prop-i-d="prop" :secondPropID="test"></custom></div></template>',
+      options: ['always', { ignore: ['secondPropID'] }],
+      errors: [{
+        message: "Attribute 'v-bind:propID' must be hyphenated.",
+        type: 'VDirectiveKey',
+        line: 1
+      }]
+    },
+    {
+      filename: 'test.vue',
       code: `
         <template>
           <custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hyphen="foo" second-custom="baz" third-custom="bar">

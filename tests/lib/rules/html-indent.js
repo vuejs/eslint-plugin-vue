@@ -269,7 +269,7 @@ tester.run('html-indent', rule, loadPatterns(
       }]
     },
 
-    // Pre
+    // Pre, Textarea
     {
       filename: 'test.vue',
       code: unIndent`
@@ -279,6 +279,106 @@ tester.run('html-indent', rule, loadPatterns(
           bbb
             ccc
           </pre>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <textarea>
+        aaa
+          bbb
+            ccc
+          </textarea>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <pre>
+        <span>aaa</span>
+          <span>bbb</span>
+            <span>ccc</span>
+          </pre>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <pre>aaa
+        bbb ccc
+        ddd
+        fff</pre>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <pre><span>aaa</span>
+        <span>bbb</span> <span>ccc</span>
+        <span>ddd</span>
+        <span>fff</span></pre>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div><pre>aaa
+        bbb ccc
+        ddd
+        fff</pre></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <div><textarea>aaa
+        bbb ccc
+        ddd
+        fff</textarea></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <pre>
+        <!-- comment -->
+        <!-- comment --> <!-- comment -->
+        <!-- comment --></pre>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+          <pre>
+        <!-- comment --> text <span />
+        <span /> <!-- comment --> text
+        text <span /> <!-- comment -->
+        </pre>
+          <div>
+            <input>
+          </div>
+          <pre>
+        <!-- comment --> text <span /></pre>
+          <pre>
+        <span /> <!-- comment --> text</pre>
+          <pre>
+        text <span /> <!-- comment --></pre>
         </template>
       `
     }
@@ -542,7 +642,7 @@ tester.run('html-indent', rule, loadPatterns(
       ]
     },
 
-    // Pre
+    // Pre, Textarea
     {
       filename: 'test.vue',
       code: unIndent`
@@ -564,13 +664,96 @@ tester.run('html-indent', rule, loadPatterns(
         aaa
           bbb
             ccc
-          </pre>
+        </pre>
         </template>
       `,
       errors: [
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
         { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 4 }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+        <pre
+        :class="[
+        'a',
+        'b',
+        'c'
+        ]"
+        >
+        aaa
+        bbb
+        ccc
+        </pre>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          <pre
+            :class="[
+              'a',
+              'b',
+              'c'
+            ]"
+          >
+        aaa
+        bbb
+        ccc
+        </pre>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 5 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 6 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 7 },
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 8 }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+        <textarea
+        :class="[
+        'a',
+        'b',
+        'c'
+        ]"
+        >
+        aaa
+        bbb
+        ccc
+        </textarea>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+          <textarea
+            :class="[
+              'a',
+              'b',
+              'c'
+            ]"
+          >
+        aaa
+        bbb
+        ccc
+        </textarea>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 4 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 5 },
+        { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 6 },
+        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 7 },
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 8 }
       ]
     }
