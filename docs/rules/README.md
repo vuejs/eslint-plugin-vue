@@ -135,6 +135,7 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 
 ## Deprecated

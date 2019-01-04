@@ -1,6 +1,11 @@
-# require the component to be directly exported (require-direct-export)
-
-- :gear: This rule is included in `"plugin:vue/essentials"`.
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/require-direct-export
+description: require the component to be directly exported
+---
+# vue/require-direct-export
+> require the component to be directly exported
 
 ## Rule Details
 
@@ -33,3 +38,8 @@ export default {
 	}
 }
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-direct-export.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-direct-export.js)
