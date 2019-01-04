@@ -77,11 +77,11 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template v-for="x of list"><slot name="item" /></template>'
+      code: '<template><template v-for="x of list"><slot name="item" /></template></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template v-for="x of list">foo<div></div></template>'
+      code: '<template><template v-for="x of list">foo<div></div></template></template>'
     },
     {
       filename: 'test.vue',
@@ -90,22 +90,26 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code: `
-        <template v-for="x in xs">
-          <template v-for="y in x.ys">
-            <li v-for="z in y.zs" :key="z.id">
-              123
-            </li>
+        <template>
+          <template v-for="x in xs">
+            <template v-for="y in x.ys">
+              <li v-for="z in y.zs" :key="z.id">
+                123
+              </li>
+            </template>
           </template>
         </template>`
     },
     {
       filename: 'test.vue',
       code: `
-        <template v-for="x in xs">
-          <template v-for="y in ys">
-            <li v-for="z in zs" :key="x.id + y.id + z.id">
-              123
-            </li>
+        <template>
+          <template v-for="x in xs">
+            <template v-for="y in ys">
+              <li v-for="z in zs" :key="x.id + y.id + z.id">
+                123
+              </li>
+            </template>
           </template>
         </template>`
     }
@@ -215,11 +219,13 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."],
       code: `
-        <template v-for="x in xs">
-          <template v-for="y in a.ys">
-            <li v-for="z in y.zs" :key="z.id">
-              123
-            </li>
+        <template>
+          <template v-for="x in xs">
+            <template v-for="y in a.ys">
+              <li v-for="z in y.zs" :key="z.id">
+                123
+              </li>
+            </template>
           </template>
         </template>`
     },
@@ -227,11 +233,13 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."],
       code: `
-        <template v-for="x in xs">
-          <template v-for="y in x.ys">
-            <li v-for="z in a.zs" :key="z.id">
-              123
-            </li>
+        <template>
+          <template v-for="x in xs">
+            <template v-for="y in x.ys">
+              <li v-for="z in a.zs" :key="z.id">
+                123
+              </li>
+            </template>
           </template>
         </template>`
     },
@@ -239,14 +247,15 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       errors: ["Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."],
       code: `
-        <template v-for="x in xs">
-          <template v-for="y in x.ys">
-            <li v-for="z in x.zs" :key="z.id">
-              123
-            </li>
+        <template>
+          <template v-for="x in xs">
+            <template v-for="y in x.ys">
+              <li v-for="z in x.zs" :key="z.id">
+                123
+              </li>
+            </template>
           </template>
         </template>`
     }
-
   ]
 })
