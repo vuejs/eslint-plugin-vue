@@ -98,6 +98,6 @@ sidebarDepth: 0
 
 # Available rules
 
-In the tables below, the 🔧 indicates the rule can be fixed by ESLint when it is called with `--fix` flag.
+In the tables below, the 🔧 indicates the rule can be fixed by ESLint when it is called with \`--fix\` flag.
 ${rulesTableContent}`
 )
