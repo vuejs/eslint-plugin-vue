@@ -82,10 +82,52 @@ ruleTester.run('use-v-on-exact', rule, {
       code: `<template><a @mouseenter="showTooltip" @mouseenter.once="attachTooltip"/></template>`
     },
     {
-      code: `<template><input @keypress.exact="foo" @keypress.middle="bar" @keypress.ctrl="baz"></template>`
+      code: `<template><input @keypress.exact="foo" @keypress.esc.exact="bar" @keypress.ctrl="baz"></template>`
     },
     {
-      code: `<template><input @keypress.middle="foo" @keypress.middle="bar"></template>`
+      code: `<template><input @keypress.a="foo" @keypress.b="bar" @keypress.a.b="baz"></template>`
+    },
+    {
+      code: `<template><input @keypress.shift="foo" @keypress.ctrl="bar"></template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keypress.27="foo"
+          @keypress.27.middle="bar"
+        >
+      </template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.a.b.c="abc"
+          @keydown.a="a"
+          @keydown.b="b"
+          @keydown.c="c"
+        >
+      </template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.a.b="ab"
+          @keydown.a="a"
+          @keydown.b="b"
+          @keydown.c="c"
+          @keydown.a.c="ac"
+        >
+      </template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.a.b="ab"
+          @keydown.a="a"
+          @keydown.b="b"
+          @keydown.c="c"
+        >
+      </template>`
     },
     {
       code: `<template><UiButton @click="foo" /></template>`
@@ -176,7 +218,7 @@ ruleTester.run('use-v-on-exact', rule, {
       code: `<template>
         <input
           @keypress.27="foo"
-          @keypress.27.middle
+          @keypress.27.shift="bar"
         >
       </template>`,
       errors: [
@@ -186,46 +228,13 @@ ruleTester.run('use-v-on-exact', rule, {
     {
       code: `<template>
         <input
-          @keydown.a.b.c="abc"
-          @keydown.a="a"
-          @keydown.b="b"
-          @keydown.c="c"
+          @keypress.exact="foo"
+          @keypress.esc="bar"
+          @keypress.ctrl="baz"
         >
       </template>`,
       errors: [
-        { message: "Consider to use '.exact' modifier.", line: 4 },
-        { message: "Consider to use '.exact' modifier.", line: 5 },
-        { message: "Consider to use '.exact' modifier.", line: 6 }
-      ]
-    },
-    {
-      code: `<template>
-        <input
-          @keydown.a.b="ab"
-          @keydown.a="a"
-          @keydown.b="b"
-          @keydown.c="c"
-          @keydown.a.c="ac"
-        >
-      </template>`,
-      errors: [
-        { message: "Consider to use '.exact' modifier.", line: 4 },
-        { message: "Consider to use '.exact' modifier.", line: 5 },
-        { message: "Consider to use '.exact' modifier.", line: 6 }
-      ]
-    },
-    {
-      code: `<template>
-        <input
-          @keydown.a.b="ab"
-          @keydown.a="a"
-          @keydown.b="b"
-          @keydown.c="c"
-        >
-      </template>`,
-      errors: [
-        { message: "Consider to use '.exact' modifier.", line: 4 },
-        { message: "Consider to use '.exact' modifier.", line: 5 }
+        { message: "Consider to use '.exact' modifier.", line: 4 }
       ]
     },
     {
