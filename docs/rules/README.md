@@ -6,6 +6,11 @@ sidebarDepth: 0
 
 # Available rules
 
+::: tip Legend
+  :wrench: Indicates that the rule is fixable, and using `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the reported problems.
+:::
+
+
 ## Base Rules (Enabling Correct ESLint Parsing)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
