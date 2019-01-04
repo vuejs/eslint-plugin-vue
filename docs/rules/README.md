@@ -135,6 +135,7 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 
 ## Deprecated
