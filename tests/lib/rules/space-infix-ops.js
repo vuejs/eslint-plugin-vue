@@ -19,15 +19,15 @@ tester.run('space-infix-ops', rule, {
   invalid: [
     {
       code: '<template><div :attr="a+1" /></template>',
-      errors: ['Infix operators must be spaced.']
+      errors: ['Operator \'+\' must be spaced.']
     },
     {
       code: '<template><div :attr="a?1 : 2" /></template>',
-      errors: ['Infix operators must be spaced.']
+      errors: ['Operator \'?\' must be spaced.']
     },
     {
       code: '<template><div :attr="a ? 1:2" /></template>',
-      errors: ['Infix operators must be spaced.']
+      errors: ['Operator \':\' must be spaced.']
     }
   ]
 })
