@@ -57,11 +57,11 @@ tester.run('no-unused-vars', rule, {
       errors: ["'i' is defined but never used."]
     },
     {
-      code: '<template scope="props"></template>',
+      code: '<template><template scope="props"></template></template>',
       errors: ["'props' is defined but never used."]
     },
     {
-      code: '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></template>',
+      code: '<template><template v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></template></template>',
       errors: ["'j' is defined but never used."]
     },
     {
