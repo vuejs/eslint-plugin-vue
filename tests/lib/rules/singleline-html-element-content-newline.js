@@ -25,6 +25,11 @@ tester.run('singleline-html-element-content-newline', rule, {
   valid: [
     `
       <template>
+        <slot name="panel"></slot>
+      </template>
+    `,
+    `
+      <template>
         <div class="panel">
           content
         </div>
@@ -319,6 +324,7 @@ content
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
@@ -429,7 +435,7 @@ singleline element
           <div></div>
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
+      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -446,7 +452,7 @@ singleline element
           <div>    </div>
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
+      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>

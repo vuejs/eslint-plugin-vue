@@ -28,6 +28,19 @@ tester.run('multiline-html-element-content-newline', rule, {
     `<template><div class="panel"><!-- comment --></div></template>`,
     `
       <template>
+        <slot
+          name="panel"
+        ></slot>
+      </template>
+    `,
+    `
+      <template>
+        <div
+          ></div>
+      </template>
+    `,
+    `
+      <template>
         <div class="panel">
           content
         </div>
@@ -525,6 +538,7 @@ content
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false }],
       errors: ['Expected 1 line break after opening tag (`<div>`), but no line breaks found.']
     }
   ]
