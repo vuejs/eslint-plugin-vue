@@ -14,6 +14,7 @@ description: disallow registering components that are not used inside templates
 This rule reports components that haven't been used in the template.
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -43,9 +44,11 @@ This rule reports components that haven't been used in the template.
   }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -67,6 +70,7 @@ This rule reports components that haven't been used in the template.
   }
 </script>
 ```
+
 </eslint-code-block>
 
 ::: warning Note
@@ -89,6 +93,7 @@ Components registered under other than `PascalCase` name have to be called direc
 ### `ignoreWhenBindingPresent: false`
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
+
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -114,9 +119,11 @@ Components registered under other than `PascalCase` name have to be called direc
   }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
+
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -144,6 +151,7 @@ Components registered under other than `PascalCase` name have to be called direc
   }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

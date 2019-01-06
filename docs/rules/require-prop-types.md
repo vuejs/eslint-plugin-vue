@@ -16,6 +16,7 @@ This rule enforces that a `props` statement contains type definition.
 In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
 
 <eslint-code-block :rules="{'vue/require-prop-types': ['error']}">
+
 ```vue
 <script>
 /* ✓ GOOD */
@@ -53,6 +54,7 @@ Vue.component('baz', {
 })
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

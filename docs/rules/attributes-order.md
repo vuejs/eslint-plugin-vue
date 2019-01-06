@@ -40,7 +40,8 @@ This rule aims to enforce ordering of component attributes. The default order is
 ### the default order
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -85,6 +86,7 @@ This rule aims to enforce ordering of component attributes. The default order is
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -113,7 +115,8 @@ This rule aims to enforce ordering of component attributes. The default order is
 #### `['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -131,12 +134,14 @@ This rule aims to enforce ordering of component attributes. The default order is
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 #### `[['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS'], ['DEFINITION', 'GLOBAL', 'UNIQUE'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: [['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS'], ['DEFINITION', 'GLOBAL', 'UNIQUE'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -153,6 +158,7 @@ This rule aims to enforce ordering of component attributes. The default order is
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

@@ -6,6 +6,11 @@ sidebarDepth: 0
 
 # Available rules
 
+::: tip Legend
+  :wrench: Indicates that the rule is fixable, and using `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the reported problems.
+:::
+
+
 ## Base Rules (Enabling Correct ESLint Parsing)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
@@ -80,7 +85,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
-| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
@@ -128,15 +132,22 @@ For example:
 ```json
 {
   "rules": {
-    "vue/script-indent": "error"
+    "vue/array-bracket-spacing": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets | :wrench: |
+| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
+| [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
+| [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
+| [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
-| [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
+| [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
+| [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
 
 ## Deprecated
 

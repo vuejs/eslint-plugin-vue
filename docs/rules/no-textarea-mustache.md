@@ -14,7 +14,8 @@ description: disallow mustaches in `<textarea>`
 This rule reports mustaches in `<textarea>`.
 
 <eslint-code-block :rules="{'vue/no-textarea-mustache': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <textarea v-model="message" />
@@ -23,6 +24,7 @@ This rule reports mustaches in `<textarea>`.
   <textarea>{{ message }}</textarea>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

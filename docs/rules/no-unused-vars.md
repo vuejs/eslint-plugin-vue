@@ -14,7 +14,8 @@ description: disallow unused variable definitions of v-for directives or scope a
 This rule report variable definitions of v-for directives or scope attributes if those are not used.
 
 <eslint-code-block :rules="{'vue/no-unused-vars': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <ol v-for="i in 5">
@@ -27,6 +28,7 @@ This rule report variable definitions of v-for directives or scope attributes if
   </ol>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

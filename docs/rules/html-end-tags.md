@@ -15,7 +15,8 @@ description: enforce end tag style
 This rule aims to disallow lacking end tags.
 
 <eslint-code-block fix :rules="{'vue/html-end-tags': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div></div>
@@ -29,6 +30,7 @@ This rule aims to disallow lacking end tags.
   <p>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

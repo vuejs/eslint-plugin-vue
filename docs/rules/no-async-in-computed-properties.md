@@ -17,7 +17,8 @@ If you need async computed properties you might want to consider using additiona
 This rule is aimed at preventing asynchronous methods from being called in computed properties.
 
 <eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
-```
+
+```vue
 <script>
 export default {
   computed: {
@@ -56,6 +57,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

@@ -14,7 +14,8 @@ description: disallow overwriting reserved keys
 This rule prevents to use [reserved names](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json) to avoid conflicts and unexpected behavior.
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error']}">
-```
+
+```vue
 <script>
 /* ✗ BAD */
 export default {
@@ -35,6 +36,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -54,7 +56,8 @@ export default {
 ### `"reserved": ["foo", "foo2"], "groups": ["firebase"]`
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error', {reserved: ['foo', 'foo2'], groups: ['firebase']}]}">
-```
+
+```vue
 <script>
 /* ✗ BAD */
 export default {
@@ -67,6 +70,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

@@ -18,7 +18,8 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - In the expressions, this rule supports ECMAScript 2017 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div class="foo">
@@ -55,6 +56,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
     </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -81,7 +83,8 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 ### `2, {"attribute": 1, "closeBracket": 1}`
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 1, closeBracket: 1}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -96,12 +99,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ### `2, {"attribute": 2, "closeBracket": 1}`
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 2, closeBracket: 1}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -116,12 +121,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ### `2, {"ignores": ["VAttribute"]}`
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {ignores: ['VAttribute']}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div
@@ -130,12 +137,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `2, {"alignAttributesVertically": false}`
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {alignAttributesVertically: false}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div id=""
@@ -150,12 +159,14 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `2, {"baseIndent": 0}`
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {baseIndent: 0}]}">
-```
+
+```vue
 <template>
 <!-- ✓ GOOD -->
 <div>
@@ -172,6 +183,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation

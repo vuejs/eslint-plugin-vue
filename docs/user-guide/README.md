@@ -150,7 +150,7 @@ If you use `Vetur` plugin, set `"vetur.validation.template": false` to avoid def
 
 Use [SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint) extension that SublimeLinter provides for eslint.
 
-You have to open command-palette via `cmd/ctrl+shift+p` and type `Preferences: SublimeLinter Settings`, paste to the config on the right side:
+You have to open command-palette via `Cmd/Ctrl+Shift+P` and type `Preferences: SublimeLinter Settings`, paste to the config on the right side:
 
 ```json
 {
@@ -168,7 +168,7 @@ You need to go into `Settings -> Packages -> linter-eslint`, under the option "L
 
 #### IntelliJ IDEA / JetBrains WebStorm
 
-In the **Settings/Preferences** dialog (`Ctrl+Alt+S`), choose JavaScript under **Languages and Frameworks** and then choose **ESLint** under **Code Quality Tools**.
+In the **Settings/Preferences** dialog (`Cmd+,`/`Ctrl+Alt+S`), choose JavaScript under **Languages and Frameworks** and then choose **ESLint** under **Code Quality Tools**.
 On the **ESLint page** that opens, select the *Enable* checkbox.
 
 If your ESLint configuration is updated (manually or from your version control), open it in the editor and choose **Apply ESLint Code Style Rules** on the context menu.

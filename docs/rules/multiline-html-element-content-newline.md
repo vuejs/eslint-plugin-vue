@@ -15,6 +15,7 @@ description: require a line break before and after the contents of a multiline e
 This rule enforces a line break before and after the contents of a multiline element.
 
 <eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -68,6 +69,7 @@ This rule enforces a line break before and after the contents of a multiline ele
   ></div>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -89,6 +91,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
 
 <eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { ignores: ['VueComponent', 'pre', 'textarea'] }]}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -103,6 +106,7 @@ This rule enforces a line break before and after the contents of a multiline ele
   Defines the Vue component that accepts preformatted text.</VueComponent>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :mag: Implementation
