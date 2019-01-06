@@ -148,6 +148,7 @@ For example:
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
+| [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 
 ## Deprecated
 

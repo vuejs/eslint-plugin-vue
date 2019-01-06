@@ -18,6 +18,7 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 - The `.sync` modifier's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-bind-sync': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -42,6 +43,7 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
   </div>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note
