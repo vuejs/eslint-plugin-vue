@@ -14,9 +14,11 @@ const path = require('path')
 const eslint = require('eslint')
 const categories = require('./lib/categories')
 
+const errorCategories = ['base', 'essential']
+
 function formatRules (rules) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = 'error'
+    setting[rule.ruleId] = errorCategories.includes(rule.meta.docs.category) ? 'error' : 'warn'
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)
@@ -30,14 +32,12 @@ function formatCategory (category, prevCategory) {
  * in order to update it's content execute "npm run update"
  */
 module.exports = {
-  root: true,
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true
     }
   },
   env: {

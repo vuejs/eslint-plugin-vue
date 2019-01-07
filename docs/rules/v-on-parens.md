@@ -1,7 +1,14 @@
-# enforce or forbid parentheses after method calls without arguments in `v-on` directives (vue/v-on-parens)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/v-on-parens
+description: enforce or forbid parentheses after method calls without arguments in `v-on` directives
+---
+# vue/v-on-parens
+> enforce or forbid parentheses after method calls without arguments in `v-on` directives
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -64,3 +71,8 @@ Default is set to `never`.
   Close
 </button>
 ```
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-parens.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-parens.js)

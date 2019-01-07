@@ -1,19 +1,47 @@
-# enforce self-closing style (vue/html-self-closing)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/html-self-closing
+description: enforce self-closing style
+---
+# vue/html-self-closing
+> enforce self-closing style
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+## :book: Rule Details
+
+This rule aims to enforce the self-closing sign as the configured style.
 
 In Vue.js template, we can use either two styles for elements which don't have their content.
 
 1. `<YourComponent></YourComponent>`
 2. `<YourComponent/>` (self-closing)
 
-Self-closing is simple and shorter, but it's not supported in raw HTML.
-This rule helps you to unify the self-closing style.
+Self-closing is simple and shorter, but it's not supported in the HTML spec.
 
-## Rule Details
+<eslint-code-block fix :rules="{'vue/html-self-closing': ['error']}">
 
-This rule has options which specify self-closing style for each context.
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div/>
+  <img>
+  <MyComponent/>
+  <svg><path d=""/></svg>
+
+  <!-- ✗ BAD -->
+  <div></div>
+  <img/>
+  <MyComponent></MyComponent>
+  <svg><path d=""></path></svg>
+</template>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
 
 ```json
 {
@@ -41,23 +69,33 @@ Every option can be set to one of the following values:
 - `"never"` ... Disallow self-closing.
 - `"any"` ... Don't enforce self-closing style.
 
-----
+### `html: {normal: "never", void: "always"}`
 
-:-1: Examples of **incorrect** code for this rule:
+<eslint-code-block fix :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
 
-```html
-<div></div>
-<img/>
-<img></img>
-<MyComponent/></MyComponent>
-<svg><path d=""></path></svg>
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div></div>
+  <img/>
+  <MyComponent/>
+  <svg><path d=""/></svg>
+
+  <!-- ✗ BAD -->
+  <div/>
+  <img>
+  <MyComponent></MyComponent>
+  <svg><path d=""></path></svg>
+</template>
 ```
 
-:+1: Examples of **correct** code for this rule:
+</eslint-code-block>
 
-```html
-<div/>
-<img>
-<MyComponent/>
-<svg><path d=""/></svg>
-```
+## :books: Further reading
+
+- [Style guide - Self closing components](https://vuejs.org/v2/style-guide/#Self-closing-components-strongly-recommended)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-self-closing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-self-closing.js)

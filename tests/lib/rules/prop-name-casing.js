@@ -16,9 +16,8 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 const ruleTester = new RuleTester()
@@ -68,7 +67,7 @@ ruleTester.run('prop-name-casing', rule, {
       filename: 'test.vue',
       code: `
         export default {
-          props: ['greetingText']
+          props: ['greeting_text']
         }
       `,
       options: ['snake_case'],
@@ -337,6 +336,26 @@ ruleTester.run('prop-name-casing', rule, {
         message: 'Prop "greeting_text" is not in camelCase.',
         type: 'Property',
         line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['greeting_text']
+        }
+      `,
+      options: ['camelCase'],
+      output: `
+        export default {
+          props: ['greetingText']
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Prop "greeting_text" is not in camelCase.',
+        type: 'Literal',
+        line: 3
       }]
     },
     {

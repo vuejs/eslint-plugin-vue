@@ -17,14 +17,15 @@
  * @returns {ASTNode} The Property node or null if not found.
  */
 function getPropertyFromObject (property, node) {
-  const properties = node.properties
+  if (node && node.type === 'ObjectExpression') {
+    const properties = node.properties
 
-  for (let i = 0; i < properties.length; i++) {
-    if (properties[i].key.name === property) {
-      return properties[i]
+    for (let i = 0; i < properties.length; i++) {
+      if (properties[i].key.name === property) {
+        return properties[i]
+      }
     }
   }
-
   return null
 }
 

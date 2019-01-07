@@ -84,6 +84,10 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div v-custom-directive></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code:
       `<template>
         <div
@@ -105,7 +109,7 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code:
-      `<template>
+        `<template>
           <div
             is="header"
             v-for="item in items"
@@ -164,7 +168,7 @@ tester.run('attributes-order', rule, {
             v-for="item in items"
             v-if="!visible"
             propone="prop"
-            proptwo="prop"
+            :proptwo="prop"
             propthree="prop"
             @click="functionCall"
             v-text="textContent">
@@ -185,7 +189,8 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT',
@@ -202,8 +207,9 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'DEFINITION',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT']
@@ -220,9 +226,9 @@ tester.run('attributes-order', rule, {
             is="header"
             v-on:click="functionCall"
             ref="header"
-            :prop="headerData"
             v-text="textContent"
             id="uniqueID"
+            :prop="headerData"
             myProp="prop"
             >
           </div>
@@ -236,10 +242,38 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'CONTENT',
             'GLOBAL',
-            'OTHER_ATTR'
+            'OTHER_ATTR',
+            'OTHER_DIRECTIVES'
+          ]
+        }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-if="!visible"
+            class="content"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'DEFINITION',
+            'EVENTS',
+            'UNIQUE',
+            ['BINDING', 'OTHER_ATTR'],
+            'CONTENT',
+            'GLOBAL'
           ]
         }]
     }
@@ -272,7 +306,7 @@ tester.run('attributes-order', rule, {
             model="baz"
             v-model="toggle"
             propOne="bar"
-            :bindingProp="foo">
+            :id="foo">
           </div>
         </template>`,
       output:
@@ -280,7 +314,7 @@ tester.run('attributes-order', rule, {
           <div
             v-model="toggle"
             model="baz"
-            :bindingProp="foo"
+            :id="foo"
             propOne="bar">
           </div>
         </template>`,
@@ -289,7 +323,7 @@ tester.run('attributes-order', rule, {
         type: 'VDirectiveKey'
       },
       {
-        message: 'Attribute ":bindingProp" should go before "propOne".',
+        message: 'Attribute ":id" should go before "propOne".',
         type: 'VDirectiveKey'
       }]
     },
@@ -343,8 +377,9 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'UNIQUE',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'DEFINITION',
+            'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT']
@@ -457,7 +492,7 @@ tester.run('attributes-order', rule, {
         { order:
           [
             'EVENTS',
-            'BINDING',
+            'TWO_WAY_BINDING',
             'UNIQUE',
             'DEFINITION',
             'CONDITIONALS',
@@ -465,6 +500,7 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'GLOBAL',
             'OTHER_ATTR',
+            'OTHER_DIRECTIVES',
             'CONTENT'
           ]
         }],
@@ -498,15 +534,53 @@ tester.run('attributes-order', rule, {
           nodeType: 'VIdentifier'
         },
         {
-          message: 'Attribute ":prop" should go before "v-once".',
-          nodeType: 'VDirectiveKey'
-        },
-        {
           message: 'Attribute "id" should go before "v-text".',
           nodeType: 'VIdentifier'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
+          nodeType: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      code:
+        `<template>
+          <div
+            class="content"
+            v-if="!visible"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'DEFINITION',
+            'EVENTS',
+            'UNIQUE',
+            ['BINDING', 'OTHER_ATTR'],
+            'CONTENT',
+            'GLOBAL'
+          ]
+        }],
+      output:
+        `<template>
+          <div
+            v-if="!visible"
+            class="content"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-if" should go before "class".',
           nodeType: 'VIdentifier'
         }
       ]

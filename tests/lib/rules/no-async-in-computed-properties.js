@@ -12,15 +12,8 @@ const rule = require('../../../lib/rules/no-async-in-computed-properties')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 6,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
-}
-
-const parserOptions8 = {
-  ecmaVersion: 8,
-  sourceType: 'module',
-  ecmaFeatures: { experimentalObjectRestSpread: true }
+  ecmaVersion: 2018,
+  sourceType: 'module'
 }
 
 // ------------------------------------------------------------------------------
@@ -51,10 +44,14 @@ ruleTester.run('no-async-in-computed-properties', rule, {
                 return bar
               }
             },
-            foo2: {
+            bar: {
               set () {
                 new Promise((resolve, reject) => {})
               }
+            },
+            baz: {
+              ...mapGetters({ get: 'getBaz' }),
+              ...mapActions({ set: 'setBaz' })
             }
           }
         }
@@ -73,7 +70,104 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }));
         }
       `,
-      parserOptions: parserOptions8
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return {
+                async bar() {
+                  const data = await baz(this.a)
+                  return data
+                }
+              }
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              const a = 'test'
+              return [
+                async () => {
+                  const baz = await bar(a)
+                  return baz
+                },
+                'b',
+                {}
+              ]
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return function () {
+                return async () => await bar()
+              }
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return new Promise.resolve()
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return new Bar(async () => await baz())
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return someFunc.doSomething({
+                async bar() {
+                  return await baz()
+                }
+              })
+            },
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
@@ -89,7 +183,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions: parserOptions8,
+      parserOptions,
       errors: [{
         message: 'Unexpected async function declaration in "foo" computed property.',
         line: 4
@@ -109,7 +203,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions: parserOptions8,
+      parserOptions,
       errors: [{
         message: 'Unexpected async function declaration in "foo" computed property.',
         line: 4

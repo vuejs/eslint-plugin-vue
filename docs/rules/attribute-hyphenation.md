@@ -1,54 +1,108 @@
-# enforce attribute naming style on custom components in template (vue/attribute-hyphenation)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/attribute-hyphenation
+description: enforce attribute naming style on custom components in template
+---
+# vue/attribute-hyphenation
+> enforce attribute naming style on custom components in template
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+## :book: Rule Details
+
+This rule enforces using hyphenated attribute names on custom components in Vue templates.
+
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
+
+```vue
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent my-prop="prop" />
+
+  <!-- ✘ BAD -->
+  <MyComponent myProp="prop" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :wrench: Options
 
+```json
+{
+  "vue/attribute-hyphenation": ["error", "always" | "never", {
+    "ignore": []
+  }]
+}
+```
+
 Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to be ignored
 
-```
-'vue/attribute-hyphenation': [2, 'always'|'never', { 'ignore': ['custom-prop'] }]
-```
+- `"always"` (default) ... Use hyphenated name.
+- `"never"` ... Don't use hyphenated name except `data-`, `aria-` and `slot-scope`.
+- `"ignore"` ... Array of ignored names
 
-### `[2, "always"]` - Use hyphenated name. (It errors on upper case letters.)
+### `"always"`
+It errors on upper case letters.
 
-:+1: Examples of **correct** code`:
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 
-```html
-<MyComponent my-prop="prop"/>
-```
+```vue
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent my-prop="prop" />
 
-:-1: Examples of **incorrect** code`:
-
-```html
-<MyComponent myProp="prop"/>
-```
-
-### `[2, "never"]` - Don't use hyphenated name. (It errors on hyphens except `data-`, `aria-` and `slot-scope-`.)
-
-:+1: Examples of **correct** code`:
-
-```html
-<MyComponent myProp="prop"/>
+  <!-- ✘ BAD -->
+  <MyComponent myProp="prop" />
+</template>
 ```
 
-:-1: Examples of **incorrect** code`:
+</eslint-code-block>
 
-```html
-<MyComponent my-prop="prop"/>
+### `"never"`
+It errors on hyphens except `data-`, `aria-` and `slot-scope`.
+
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
+
+```vue
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent myProp="prop" />
+  <MyComponent data-id="prop" />
+  <MyComponent aria-role="button" />
+  <MyComponent slot-scope="prop" />
+
+  <!-- ✘ BAD -->
+  <MyComponent my-prop="prop" />
+</template>
 ```
 
-### `[2, "never", { 'ignore': ['custom-prop'] }]` - Don't use hyphenated name but allow custom attributes
+</eslint-code-block>
 
-:+1: Examples of **correct** code`:
+### `"never", { "ignore": ["custom-prop"] }` 
+Don't use hyphenated name but allow custom attributes
 
-```html
-<MyComponent myProp="prop" custom-prop="foo" data-id="1"/>
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
+
+```vue
+<template>
+  <!-- ✔ GOOD -->
+  <MyComponent myProp="prop" />
+  <MyComponent custom-prop="prop" />
+  <MyComponent data-id="prop" />
+  <MyComponent aria-role="button" />
+  <MyComponent slot-scope="prop" />
+
+  <!-- ✘ BAD -->
+  <MyComponent my-prop="prop" />
+</template>
 ```
 
-:-1: Examples of **incorrect** code`:
+</eslint-code-block>
 
-```html
-<MyComponent my-prop="prop" custom-prop="foo" data-id="1"/>
-```
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attribute-hyphenation.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js)

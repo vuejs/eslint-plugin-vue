@@ -1,7 +1,10 @@
 .idea
+*.iml
 /.nyc_output
 /coverage
 /tests/integrations/*/node_modules
 /node_modules
 /test.*
 yarn.lock
+yarn-error.log
+docs/.vuepress/dist

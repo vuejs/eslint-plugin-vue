@@ -1,117 +1,171 @@
-# enforce order of attributes (vue/attributes-order)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/attributes-order
+description: enforce order of attributes
+---
+# vue/attributes-order
+> enforce order of attributes
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
-- DEFINITION
-ex: 'is'
-- LIST_RENDERING
-ex: 'v-for item in items'
-- CONDITIONALS
-ex: 'v-if', 'v-else-if', 'v-else', 'v-show', 'v-cloak'
-- RENDER_MODIFIERS
-ex: 'v-once', 'v-pre'
-- GLOBAL
-ex: 'id'
-- UNIQUE
-ex: 'ref', 'key', 'slot'
-- BINDING
-ex: 'v-model', 'v-bind', ':property="foo"'
-- OTHER_ATTR
-ex: 'customProp="foo"'
-- EVENTS
-ex: '@click="functionCall"', 'v-on="event"'
-- CONTENT
-ex: 'v-text', 'v-html'
 
-:+1: Examples of **correct** code`:
+- `DEFINITION`
+  ex: 'is'
+- `LIST_RENDERING`
+  ex: 'v-for item in items'
+- `CONDITIONALS`
+  ex: 'v-if', 'v-else-if', 'v-else', 'v-show', 'v-cloak'
+- `RENDER_MODIFIERS`
+  ex: 'v-once', 'v-pre'
+- `GLOBAL`
+  ex: 'id'
+- `UNIQUE`
+  ex: 'ref', 'key', 'slot'
+- `TWO_WAY_BINDING`
+  ex: 'v-model'
+- `OTHER_DIRECTIVES`
+  ex: 'v-custom-directive'
+- `OTHER_ATTR`
+  ex: 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
+- `EVENTS`
+  ex: '@click="functionCall"', 'v-on="event"'
+- `CONTENT`
+  ex: 'v-text', 'v-html'
 
-```html
-<div
-  is="header"
-  v-for="item in items"
-  v-if="!visible"
-  v-once
-  id="uniqueID"
-  ref="header"
-  v-model="headerData"
-  myProp="prop"
-  @click="functionCall"
-  v-text="textContent">
-</div>
+### the default order
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    is="header"
+    v-for="item in items"
+    v-if="!visible"
+    v-once
+    id="uniqueID"
+    ref="header"
+    v-model="headerData"
+    my-prop="prop"
+    @click="functionCall"
+    v-text="textContent">
+  </div>
+  <div
+    v-for="item in items"
+    v-if="!visible"
+    prop-one="prop"
+    :prop-two="prop"
+    prop-three="prop"
+    @click="functionCall"
+    v-text="textContent">
+  </div>
+  <div
+    prop-one="prop"
+    :prop-two="prop"
+    prop-three="prop">
+  </div>
+
+  <!-- ✗ BAD -->
+  <div
+    ref="header"
+    v-for="item in items"
+    v-once
+    id="uniqueID"
+    v-model="headerData"
+    my-prop="prop"
+    v-if="!visible"
+    is="header"
+    @click="functionCall"
+    v-text="textContent">
+  </div>
+</template>
 ```
 
-```html
-<div
-  v-for="item in items"
-  v-if="!visible"
-  propOne="prop"
-  propTwo="prop"
-  propThree="prop"
-  @click="functionCall"
-  v-text="textContent">
-</div>
+</eslint-code-block>
+
+## :wrench: Options
+```json
+{
+  "vue/attributes-order": ["error", {
+    "order": [
+      "DEFINITION",
+      "LIST_RENDERING",
+      "CONDITIONALS", 
+      "RENDER_MODIFIERS",
+      "GLOBAL", 
+      "UNIQUE", 
+      "TWO_WAY_BINDING", 
+      "OTHER_DIRECTIVES", 
+      "OTHER_ATTR", 
+      "EVENTS", 
+      "CONTENT"
+    ]
+  }]
+}
 ```
 
-```html
-<div
-  propOne="prop"
-  propTwo="prop"
-  propThree="prop">
-</div>
+### Custom orders
+
+#### `['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    ref="header"
+    is="header"
+    prop-one="prop"
+    prop-two="prop">
+  </div>
+
+  <!-- ✗ BAD -->
+  <div
+    ref="header"
+    prop-one="prop"
+    is="header">
+  </div>
+</template>
 ```
 
-:-1: Examples of **incorrect** code`:
+</eslint-code-block>
 
-```html
-<div
-  ref="header"
-  v-for="item in items"
-  v-once id="uniqueID"
-  v-model="headerData"
-  myProp="prop"
-  v-if="!visible"
-  is="header"
-  @click="functionCall"
-  v-text="textContent">
-</div>
+#### `[['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS'], ['DEFINITION', 'GLOBAL', 'UNIQUE'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: [['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS'], ['DEFINITION', 'GLOBAL', 'UNIQUE'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    ref="header"
+    is="header"
+    prop-one="prop"
+    prop-two="prop">
+  </div>
+  <div
+    is="header"
+    ref="header"
+    prop-one="prop"
+    prop-two="prop">
+  </div>
+</template>
 ```
 
-### `order`
+</eslint-code-block>
 
-Specify custom order of attribute groups
+## :books: Further reading
 
-:+1: Examples of **correct** code with custom order`:
+- [Style guide - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
 
-```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'OTHER_ATTR', 'EVENTS', 'CONTENT', 'DEFINITION'] }] -->
-<div
-  propOne="prop"
-  propTwo="prop"
-  is="header">
-</div>
-```
+## :mag: Implementation
 
-```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
-<div
-  ref="header"
-  is="header"
-  propOne="prop"
-  propTwo="prop">
-</div>
-```
-
-:-1: Examples of **incorrect** code with custom order`:
-
-```html
-<!-- 'vue/attributes-order': [2, { order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'BINDING', 'DEFINITION', 'OTHER_ATTR', 'EVENTS', 'CONTENT'] }] -->
-<div
-  ref="header"
-  propOne="prop"
-  is="header">
-</div>
-```
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attributes-order.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attributes-order.js)
