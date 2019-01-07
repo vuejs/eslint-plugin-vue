@@ -76,7 +76,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 {
     "vue/multiline-html-element-content-newline": ["error", {
         "ignoreWhenEmpty": true,
-        "ignores": ["pre", "textarea", "a"]
+        "ignores": ["pre", "textarea"]
     }]
 }
 ```
@@ -84,7 +84,11 @@ This rule enforces a line break before and after the contents of a multiline ele
 - `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.  
-    default `["pre", "textarea", "a"]`
+    default `["pre", "textarea"]`
+
+::: warning
+  All inline elements, like `a`, `strong` etc. are implicitly ignored by default.
+:::
 
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
 
