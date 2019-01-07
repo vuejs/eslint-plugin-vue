@@ -8,7 +8,7 @@
 // ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/v-on-parens')
+const rule = require('../../../lib/rules/v-on-function-call')
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -19,7 +19,7 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-tester.run('v-on-parens', rule, {
+tester.run('v-on-function-call', rule, {
   valid: [
     {
       filename: 'test.vue',

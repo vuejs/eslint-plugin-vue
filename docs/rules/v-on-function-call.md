@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/v-on-parens
+title: vue/v-on-function-call
 description: enforce or forbid parentheses after method calls without arguments in `v-on` directives
 ---
-# vue/v-on-parens
+# vue/v-on-function-call
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -73,5 +73,5 @@ Default is set to `never`.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-parens.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-parens.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-function-call.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-function-call.js)
