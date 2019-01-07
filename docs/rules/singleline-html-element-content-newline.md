@@ -53,7 +53,7 @@ This rule enforces a line break before and after the contents of a singleline el
   "vue/singleline-html-element-content-newline": ["error", {
     "ignoreWhenNoAttributes": true,
     "ignoreWhenEmpty": true,
-    "ignores": ["pre", "textarea", "a"]
+    "ignores": ["pre", "textarea"]
   }]
 }
 ```
@@ -62,8 +62,12 @@ This rule enforces a line break before and after the contents of a singleline el
     default `true`
 - `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
-- `ignores` ... the configuration for element names to ignore line breaks style.  
-    default `["pre", "textarea", "a"]`
+- `ignores` ... the configuration for element names to ignore line breaks style.
+    default `["pre", "textarea"]`
+
+::: warning
+  All inline elements, like `a`, `strong` etc. are implicitly ignored by default.
+:::
 
 
 ### `"ignoreWhenNoAttributes": true`
