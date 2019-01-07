@@ -121,7 +121,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
 | [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
-| [vue/v-on-parens](./v-on-parens.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ## Uncategorized
 
@@ -149,6 +148,7 @@ For example:
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
+| [vue/v-on-parens](./v-on-parens.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ## Deprecated
 

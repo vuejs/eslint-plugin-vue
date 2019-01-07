@@ -7,7 +7,6 @@ description: enforce or forbid parentheses after method calls without arguments 
 # vue/v-on-parens
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
