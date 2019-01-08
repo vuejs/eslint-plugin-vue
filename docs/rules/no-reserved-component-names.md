@@ -23,4 +23,5 @@ export default {
 ## :books: Further reading
 
 - [List of html elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
+- [List of SVG elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
 - [Kebab case elements](https://stackoverflow.com/questions/22545621/do-custom-elements-require-a-dash-in-their-name/22545622#22545622)
