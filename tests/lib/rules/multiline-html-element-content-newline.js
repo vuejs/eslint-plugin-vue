@@ -72,6 +72,43 @@ tester.run('multiline-html-element-content-newline', rule, {
           class="panel">
         </div>
       </template>`,
+    // arrowEmptyLine
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+        </template>`,
+      options: [{ arrowEmptyLine: true, ignoreWhenEmpty: false }]
+    },
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+            contents
+
+          </div>
+        </template>`,
+      options: [{ arrowEmptyLine: true }]
+    },
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+
+            contents
+
+
+          </div>
+        </template>`,
+      options: [{ arrowEmptyLine: true }]
+    },
     // self closing
     `
       <template>
@@ -437,6 +474,65 @@ content
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but 2 line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but 2 line breaks found.'
+      ]
+    },
+    // arrowEmptyLine
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+          <div
+            class="panel"></div>
+        </template>`,
+      options: [{ arrowEmptyLine: true, ignoreWhenEmpty: false }],
+      output: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+          <div
+            class="panel">
+</div>
+        </template>`,
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div>
+
+            content
+            content
+
+          </div>
+          <div>content
+            content</div>
+        </template>
+      `,
+      options: [{ arrowEmptyLine: true }],
+      output: `
+        <template>
+          <div>
+
+            content
+            content
+
+          </div>
+          <div>
+content
+            content
+</div>
+        </template>
+      `,
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
       ]
     },
     // mustache
