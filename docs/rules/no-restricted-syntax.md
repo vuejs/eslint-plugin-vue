@@ -14,44 +14,12 @@ This rule is the same rule as core [no-restricted-syntax] rule but it applies to
 
 Please see [no-restricted-syntax] for detailed options.
 
-You can include the AST created by `vue-eslint-parser` in the selector.
-To know more about certain nodes in produced AST, please go the [vue-eslint-parser AST docs](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md).
-
-### `"VAttribute[directive=true][key.name='on'] > VExpressionContainer > FunctionExpression"`
-
-Forbind function expressions on `v-on`
-
-<eslint-code-block :rules="{'vue/no-restricted-syntax': ['error', 'VAttribute[directive=true][key.name=\'on\'] > VExpressionContainer > FunctionExpression']}">
-
-```vue
-<template>
-  <!-- ✔ GOOD -->
-  <button
-    @click="() => onClick()">
-    GOOD
-  </button>
-  <button
-    @click="onClick()">
-    GOOD
-  </button>
-  <button
-    @click="onClick">
-    GOOD
-  </button>
-
-  <!-- ✘ BAD -->
-  <button
-    @click="function() { onClick() }">
-    BAD
-  </button>
-</template>
-```
-
-</eslint-code-block>
+You can include the AST created by [vue-eslint-parser] in the selector.
+To know more about certain nodes in produced AST, please go [vue-eslint-parser - AST docs].
 
 ### `"VElement > VExpressionContainer CallExpression"`
 
-Forbind call expressions on mustache interpolation
+Forbind call expressions on mustache interpolation.
 
 <eslint-code-block :rules="{'vue/no-restricted-syntax': ['error', 'VElement > VExpressionContainer CallExpression']}">
 
@@ -73,8 +41,13 @@ Forbind call expressions on mustache interpolation
 ## :books: Further reading
 
 - [no-restricted-syntax]
+- [ESTree]
+- [vue-eslint-parser]
 
 [no-restricted-syntax]: https://eslint.org/docs/rules/no-restricted-syntax
+[ESTree]: https://github.com/estree/estree
+[vue-eslint-parser]: https://github.com/mysticatea/vue-eslint-parser
+[vue-eslint-parser - AST docs]: https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md
 
 ## :mag: Implementation
 

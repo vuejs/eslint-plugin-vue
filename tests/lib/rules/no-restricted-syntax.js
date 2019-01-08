@@ -16,14 +16,12 @@ tester.run('no-restricted-syntax', rule, {
     {
       code: `
         <template>
-          <button @click="() => onClick()">
-            BUTTON
-          </button>
+          <input :value="value">
         </template>`,
       options: [
         {
-          'selector': 'FunctionExpression',
-          'message': 'Function expressions are not allowed.'
+          'selector': 'CallExpression',
+          'message': 'Call expressions are not allowed.'
         }
       ]
     }
@@ -32,53 +30,21 @@ tester.run('no-restricted-syntax', rule, {
     {
       code: `
         <template>
-          <button @click="function() { onClick() }">
-            BUTTON
-          </button>
+          <input :value="value()">
         </template>`,
       options: [
         {
-          'selector': 'FunctionExpression',
-          'message': 'Function expressions are not allowed.'
+          'selector': 'CallExpression',
+          'message': 'Call expressions are not allowed.'
         }
       ],
       errors: [
         {
-          message: 'Function expressions are not allowed.',
+          message: 'Call expressions are not allowed.',
           line: 3,
-          column: 27,
+          column: 26,
           endLine: 3,
-          endColumn: 51
-        }
-      ]
-    },
-
-    // Forbind function expressions on `v-on`
-    {
-      code: `
-        <template>
-          <button
-            :click="function() { onClick() }"
-            @click="function() { onClick() }"
-            @keydown="() => {
-              (function() { onClick() })()
-            }">
-            BUTTON
-          </button>
-        </template>`,
-      options: [
-        {
-          'selector': "VAttribute[directive=true][key.name='on'] > VExpressionContainer > FunctionExpression",
-          'message': 'Function expressions are not allowed on `v-on`.'
-        }
-      ],
-      errors: [
-        {
-          message: 'Function expressions are not allowed on `v-on`.',
-          line: 5,
-          column: 21,
-          endLine: 5,
-          endColumn: 45
+          endColumn: 33
         }
       ]
     },
@@ -122,7 +88,7 @@ tester.run('no-restricted-syntax', rule, {
       ]
     },
 
-    // Sample written on issue 689
+    // Sample source code on issue 689
     {
       code: `
       <template>
