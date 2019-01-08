@@ -79,7 +79,7 @@ This rule enforces a line break before and after the contents of a multiline ele
     "vue/multiline-html-element-content-newline": ["error", {
         "ignoreWhenEmpty": true,
         "ignores": ["pre", "textarea"],
-        "arrowEmptyLine": false,
+        "arrowEmptyLine": false
     }]
 }
 ```
