@@ -25,3 +25,4 @@ export default {
 - [List of html elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)
 - [List of SVG elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
 - [Kebab case elements](https://stackoverflow.com/questions/22545621/do-custom-elements-require-a-dash-in-their-name/22545622#22545622)
+- [Valid custom element name](https://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)
