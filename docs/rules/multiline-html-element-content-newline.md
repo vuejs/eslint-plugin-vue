@@ -79,7 +79,7 @@ This rule enforces a line break before and after the contents of a multiline ele
     "vue/multiline-html-element-content-newline": ["error", {
         "ignoreWhenEmpty": true,
         "ignores": ["pre", "textarea"],
-        "arrowEmptyLine": false
+        "allowEmptyLine": false
     }]
 }
 ```
@@ -88,7 +88,7 @@ This rule enforces a line break before and after the contents of a multiline ele
     default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.  
     default `["pre", "textarea"]`
-- `arrowEmptyLine` ... if `true`, allow empty line. If disallow multiple empty lines, use [no-multiple-empty-lines] in combination.  
+- `allowEmptyLine` ... if `true`, allow empty line. If disallow multiple empty lines, use [no-multiple-empty-lines] in combination.  
     default `false`
 
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
@@ -112,9 +112,9 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 </eslint-code-block>
 
-### `"arrowEmptyLine": true`
+### `"allowEmptyLine": true`
 
-<eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { arrowEmptyLine: true }]}">
+<eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { allowEmptyLine: true }]}">
 
 ```vue
 <template>
