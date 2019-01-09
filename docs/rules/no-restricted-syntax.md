@@ -19,7 +19,7 @@ To know more about certain nodes in produced AST, please go [vue-eslint-parser -
 
 ### `"VElement > VExpressionContainer CallExpression"`
 
-Forbind call expressions on mustache interpolation.
+Forbids call expressions inside mustache interpolation.
 
 <eslint-code-block :rules="{'vue/no-restricted-syntax': ['error', 'VElement > VExpressionContainer CallExpression']}">
 

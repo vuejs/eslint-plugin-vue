@@ -49,7 +49,7 @@ tester.run('no-restricted-syntax', rule, {
       ]
     },
 
-    // Forbind call expressions on mustache interpolation
+    // Forbids call expressions inside mustache interpolation.
     {
       code: `
         <template>
@@ -60,26 +60,26 @@ tester.run('no-restricted-syntax', rule, {
       options: [
         {
           'selector': 'VElement > VExpressionContainer CallExpression',
-          'message': 'Call expressions are not allowed on mustache interpolation.'
+          'message': 'Call expressions are not allowed inside mustache interpolation.'
         }
       ],
       errors: [
         {
-          message: 'Call expressions are not allowed on mustache interpolation.',
+          message: 'Call expressions are not allowed inside mustache interpolation.',
           line: 3,
           column: 20,
           endLine: 3,
           endColumn: 25
         },
         {
-          message: 'Call expressions are not allowed on mustache interpolation.',
+          message: 'Call expressions are not allowed inside mustache interpolation.',
           line: 4,
           column: 20,
           endLine: 4,
           endColumn: 29
         },
         {
-          message: 'Call expressions are not allowed on mustache interpolation.',
+          message: 'Call expressions are not allowed inside mustache interpolation.',
           line: 5,
           column: 20,
           endLine: 5,
