@@ -72,7 +72,7 @@ tester.run('multiline-html-element-content-newline', rule, {
           class="panel">
         </div>
       </template>`,
-    // allowEmptyLine
+    // allowEmptyLines
     {
       code: `
         <template>
@@ -81,7 +81,7 @@ tester.run('multiline-html-element-content-newline', rule, {
 
           </div>
         </template>`,
-      options: [{ allowEmptyLine: true, ignoreWhenEmpty: false }]
+      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }]
     },
     {
       code: `
@@ -93,7 +93,7 @@ tester.run('multiline-html-element-content-newline', rule, {
 
           </div>
         </template>`,
-      options: [{ allowEmptyLine: true }]
+      options: [{ allowEmptyLines: true }]
     },
     {
       code: `
@@ -107,7 +107,7 @@ tester.run('multiline-html-element-content-newline', rule, {
 
           </div>
         </template>`,
-      options: [{ allowEmptyLine: true }]
+      options: [{ allowEmptyLines: true }]
     },
     // self closing
     `
@@ -476,7 +476,7 @@ content
         'Expected 1 line break before closing tag (`</div>`), but 2 line breaks found.'
       ]
     },
-    // allowEmptyLine
+    // allowEmptyLines
     {
       code: `
         <template>
@@ -487,7 +487,7 @@ content
           <div
             class="panel"></div>
         </template>`,
-      options: [{ allowEmptyLine: true, ignoreWhenEmpty: false }],
+      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }],
       output: `
         <template>
           <div
@@ -515,7 +515,7 @@ content
             content</div>
         </template>
       `,
-      options: [{ allowEmptyLine: true }],
+      options: [{ allowEmptyLines: true }],
       output: `
         <template>
           <div>
