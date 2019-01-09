@@ -303,6 +303,22 @@ ruleTester.run('no-reserved-component-names', rule, {
           line: 1
         }]
       }
+    }),
+    ...invalidElements.map(name => {
+      return {
+        filename: 'test.vue',
+        code: `export default {
+          components: {
+            '${name}': {},
+          }
+        }`,
+        parserOptions,
+        errors: [{
+          message: `Name "${name}" is reserved.`,
+          type: 'Property',
+          line: 3
+        }]
+      }
     })
   ]
 })
