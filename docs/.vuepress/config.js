@@ -47,7 +47,8 @@ module.exports = {
     nav: [
       { text: 'User Guide', link: '/user-guide/' },
       { text: 'Developer Guide', link: '/developer-guide/' },
-      { text: 'Rules', link: '/rules/' }
+      { text: 'Rules', link: '/rules/' },
+      { text: 'Demo', link: 'https://mysticatea.github.io/vue-eslint-demo' }
     ],
 
     sidebar: {

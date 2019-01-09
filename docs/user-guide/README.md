@@ -26,7 +26,7 @@ yarn add -D eslint eslint-plugin-vue
 
 ### Configuration
 
-Use `.eslintrc.*` file to configure rules. See also: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/docs/user-guide/configuring).
+Use `.eslintrc.*` file to configure rules. See also: [https://eslint.org/docs/user-guide/configuring](https://eslint.org/docs/user-guide/configuring).
 
 Example **.eslintrc.js**:
 
