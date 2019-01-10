@@ -260,6 +260,30 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: 'test.vue',
       code: `Vue.component(\`fooBar\${foo}\`, component)`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            template: '<template><div /></template>'
+          }
+        </script>
+      `,
+      parser: 'vue-eslint-parser',
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            template: '<template><div><slot></slot></div></template>'
+          }
+        </script>
+      `,
+      parser: 'vue-eslint-parser',
+      parserOptions
     }
   ],
 
