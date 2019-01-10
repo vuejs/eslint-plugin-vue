@@ -204,7 +204,34 @@ const invalidElements = [
   'tspan', 'Tspan',
   'unknown', 'Unknown',
   'use', 'Use',
-  'view', 'View'
+  'view', 'View',
+
+  // Deprecated
+  'acronym', 'Acronym',
+  'applet', 'Applet',
+  'basefont', 'Basefont',
+  'bgsound', 'Bgsound',
+  'big', 'Big',
+  'blink', 'Blink',
+  'center', 'Center',
+  'command', 'Command',
+  'dir', 'Dir',
+  'font', 'Font',
+  'frame', 'Frame',
+  'frameset', 'Frameset',
+  'isindex', 'Isindex',
+  'keygen', 'Keygen',
+  'listing', 'Listing',
+  'marquee', 'Marquee',
+  'multicol', 'Multicol',
+  'nextid', 'Nextid',
+  'nobr', 'Nobr',
+  'noembed', 'Noembed',
+  'plaintext', 'Plaintext',
+  'spacer', 'Spacer',
+  'strike', 'Strike',
+  'tt', 'Tt',
+  'xmp', 'Xmp'
 ]
 
 const parserOptions = {
