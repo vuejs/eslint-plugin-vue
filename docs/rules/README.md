@@ -140,6 +140,7 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets | :wrench: |
+| [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
