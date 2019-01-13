@@ -278,6 +278,7 @@ For example:
 | [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
 | [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/comma-spacing](./comma-spacing.md) | enforce consistent spacing before and after commas | :wrench: |
+| [vue/comma-style](./comma-style.md) | enforce consistent comma style | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
@@ -308,6 +309,7 @@ For example:
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
+| [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
