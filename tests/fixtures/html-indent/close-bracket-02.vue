@@ -2,7 +2,13 @@
 <template>
   <a
     href="#"
+    >Link 1</a
+  >
+  <a
+    href="#"
     >
-    Content</a
+    Link 2</a
+  >
+  <div>Content</div
   >
 </template>
