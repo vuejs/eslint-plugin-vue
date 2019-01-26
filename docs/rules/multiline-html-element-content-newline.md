@@ -72,22 +72,22 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 ## :wrench: Options
 
-```json
+```js
 {
     "vue/multiline-html-element-content-newline": ["error", {
         "ignoreWhenEmpty": true,
-        "ignores": ["pre", "textarea"]
+        "ignores": ["pre", "textarea", ...INLINE_ELEMENTS]
     }]
 }
 ```
 
 - `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
-- `ignores` ... the configuration for element names to ignore line breaks style.  
-    default `["pre", "textarea"]`
+- `ignores` ... the configuration for element names to ignore line breaks style.
+    default `["pre", "textarea", ...INLINE_ELEMENTS]`.
 
-::: warning
-  All inline elements, like `a`, `strong` etc. are implicitly ignored by default.
+::: info
+  All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
 :::
 
 ### `"ignores": ["VueComponent", "pre", "textarea"]`
