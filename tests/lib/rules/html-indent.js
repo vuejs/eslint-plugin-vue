@@ -381,33 +381,6 @@ tester.run('html-indent', rule, loadPatterns(
         text <span /> <!-- comment --></pre>
         </template>
       `
-    },
-    // Close bracket
-    {
-      filename: 'test.vue',
-      code: unIndent`
-        <template>
-          <a
-            href="#"
-            >Content</a
-          >
-        </template>
-      `,
-      options: [2, {
-        closeBracket: 1
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
-        <template>
-          <div>Content</div
-          >
-        </template>
-      `,
-      options: [2, {
-        closeBracket: 2
-      }]
     }
   ],
 
@@ -782,65 +755,6 @@ tester.run('html-indent', rule, loadPatterns(
         { message: 'Expected indentation of 6 spaces but found 0 spaces.', line: 6 },
         { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 7 },
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 8 }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
-        <template>
-        <a
-        href="#"
-        >
-        Content</a
-        >
-        </template>
-      `,
-      output: unIndent`
-        <template>
-          <a
-            href="#"
-          >
-            Content</a
-          >
-        </template>
-      `,
-      errors: [
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 4 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 5 },
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 6 }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
-        <template>
-        <a
-        href="#"
-        >
-        Content</a
-        >
-        </template>
-      `,
-      options: [2, {
-        closeBracket: 1
-      }],
-      output: unIndent`
-        <template>
-          <a
-            href="#"
-            >
-            Content</a
-          >
-        </template>
-      `,
-      errors: [
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 2 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 3 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 4 },
-        { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 5 },
-        { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 6 }
       ]
     }
   ]
