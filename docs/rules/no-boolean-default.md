@@ -1,4 +1,13 @@
-# Prevents boolean defaults from being set (vue/no-boolean-default)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-boolean-default
+description: disallow boolean defaults
+---
+# vue/no-boolean-default
+> disallow boolean defaults
+
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 The rule prevents Boolean props from having a default value.
 
@@ -6,7 +15,7 @@ The rule prevents Boolean props from having a default value.
 ## :book: Rule Details
 The rule is to enforce the HTML standard of always defaulting boolean attributes to false.
 
-<eslint-code-block :rules="{'vue/no-boolean-default': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-boolean-default': ['error']}">
 
 ```vue
 <script>
@@ -34,3 +43,7 @@ export default {
   "vue/no-boolean-default": ["error", "no-default|default-false"]
 ```
 
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-boolean-default.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-boolean-default.js)
