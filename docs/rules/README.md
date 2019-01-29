@@ -143,6 +143,7 @@ For example:
 | [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions | :wrench: |
 | [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
 | [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks | :wrench: |
+| [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
