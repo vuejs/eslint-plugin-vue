@@ -32,6 +32,9 @@ module.exports = {
   description: 'Official ESLint plugin for Vue.js',
   serviceWorker: true,
   evergreen: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.png' }]
+  ],
 
   themeConfig: {
     repo: 'vuejs/eslint-plugin-vue',
