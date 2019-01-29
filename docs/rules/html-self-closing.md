@@ -22,7 +22,8 @@ In Vue.js template, we can use either two styles for elements which don't have t
 Self-closing is simple and shorter, but it's not supported in the HTML spec.
 
 <eslint-code-block fix :rules="{'vue/html-self-closing': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div/>
@@ -37,6 +38,7 @@ Self-closing is simple and shorter, but it's not supported in the HTML spec.
   <svg><path d=""></path></svg>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -70,7 +72,8 @@ Every option can be set to one of the following values:
 ### `html: {normal: "never", void: "always"}`
 
 <eslint-code-block fix :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <div></div>
@@ -85,6 +88,7 @@ Every option can be set to one of the following values:
   <svg><path d=""></path></svg>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

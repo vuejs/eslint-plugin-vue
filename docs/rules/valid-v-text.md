@@ -20,6 +20,7 @@ This rule reports `v-text` directives in the following cases:
 - The directive does not have that attribute value. E.g. `<div v-text></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-text': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -31,6 +32,7 @@ This rule reports `v-text` directives in the following cases:
   <div v-text.bbb="foo"/>
 </template>
 ```
+
 </eslint-code-block>
 
 ::: warning Note

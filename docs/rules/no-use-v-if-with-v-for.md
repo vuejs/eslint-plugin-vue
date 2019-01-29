@@ -18,7 +18,8 @@ There are two common cases where this can be tempting:
  * To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error']}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <ul v-if="complete">
@@ -45,6 +46,7 @@ There are two common cases where this can be tempting:
   /><!-- ↑ In this case, the `v-for` list variable should be replace with a computed property that returns your filtered list. -->
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options
@@ -62,7 +64,8 @@ There are two common cases where this can be tempting:
 ### `"allowUsingIterationVar": true`
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error', {allowUsingIterationVar: true}]}">
-```
+
+```vue
 <template>
   <!-- ✓ GOOD -->
   <TodoItem
@@ -79,6 +82,7 @@ There are two common cases where this can be tempting:
   />
 </template>
 ```
+
 </eslint-code-block>
 
 ## :books: Further reading

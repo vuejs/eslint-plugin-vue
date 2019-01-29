@@ -27,11 +27,14 @@ if (deprecatedRules.length > 0) {
 }
 
 module.exports = {
-  base: '/eslint-plugin-vue/',
+  base: '/',
   title: 'eslint-plugin-vue',
   description: 'Official ESLint plugin for Vue.js',
   serviceWorker: true,
   evergreen: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.png' }]
+  ],
 
   themeConfig: {
     repo: 'vuejs/eslint-plugin-vue',
@@ -47,7 +50,8 @@ module.exports = {
     nav: [
       { text: 'User Guide', link: '/user-guide/' },
       { text: 'Developer Guide', link: '/developer-guide/' },
-      { text: 'Rules', link: '/rules/' }
+      { text: 'Rules', link: '/rules/' },
+      { text: 'Demo', link: 'https://mysticatea.github.io/vue-eslint-demo' }
     ],
 
     sidebar: {

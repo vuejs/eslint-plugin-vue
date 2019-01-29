@@ -14,6 +14,7 @@ description: enforce render function to always return value
 This rule aims to enforce render function to always return value
 
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
+
 ```vue
 <script>
 export default {
@@ -24,9 +25,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
+
 ```vue
 <script>
 export default {
@@ -39,6 +42,7 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

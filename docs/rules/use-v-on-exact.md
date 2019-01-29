@@ -14,6 +14,7 @@ description: enforce usage of `exact` modifier on `v-on`
 This rule enforce usage of `exact` modifier on `v-on` when there is another `v-on` with modifier.
 
 <eslint-code-block :rules="{'vue/use-v-on-exact': ['error']}">
+
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -24,6 +25,7 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
   <button v-on:click="foo" v-on:click.ctrl="foo"></button>
 </template>
 ```
+
 </eslint-code-block>
 
 ## :wrench: Options

@@ -14,7 +14,7 @@ For example:
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :warning: This rule was **deprecated**.
-- :wrench: The `--fix` option on the [command line](http://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 ```
 */
 
@@ -117,6 +117,19 @@ class DocFile {
     return this
   }
 
+  adjustCodeBlocks () {
+    // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
+    this.content = this.content.replace(
+      /(<eslint-code-block([\s\S]*?)>)\n+```/gm,
+      '$1\n\n```'
+    )
+    this.content = this.content.replace(
+      /```\n+<\/eslint-code-block>/gm,
+      '```\n\n</eslint-code-block>'
+    )
+    return this
+  }
+
   updateFooter () {
     const { name } = this.rule
     const footerPattern = /## :mag: Implementation.+$/s
@@ -142,5 +155,6 @@ for (const rule of rules) {
     .updateFooter()
     .updateCodeBlocks()
     .updateFileIntro()
+    .adjustCodeBlocks()
     .write()
 }
