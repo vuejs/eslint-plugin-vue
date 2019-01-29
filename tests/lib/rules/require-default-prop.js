@@ -1,6 +1,6 @@
 /**
  * @fileoverview Require default value for props
- * @author Michał Sajnóg <msajnog93@gmail.com> (http://github.com/michalsnik)
+ * @author Michał Sajnóg <msajnog93@gmail.com> (https://github.com/michalsnik)
  */
 'use strict'
 

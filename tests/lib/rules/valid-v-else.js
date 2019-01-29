@@ -43,7 +43,7 @@ tester.run('valid-v-else', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template v-else><div></div></template>',
+      code: '<template><template v-else><div></div></template></template>',
       errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
     },
     {
