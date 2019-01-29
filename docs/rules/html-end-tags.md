@@ -1,35 +1,43 @@
-# enforce end tag style (vue/html-end-tags)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/html-end-tags
+description: enforce end tag style
+---
+# vue/html-end-tags
+> enforce end tag style
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
-This rule reports:
+This rule aims to disallow lacking end tags.
 
-- presence of and end tag on [Void elements](https://www.w3.org/TR/html51/syntax.html#void-elements)
-- absence of both an end tag (e.g. `</div>`) and a self-closing opening tag (e.g. `<div/>`) on other elements
+<eslint-code-block fix :rules="{'vue/html-end-tags': ['error']}">
 
-:-1: Examples of **incorrect** code for this rule:
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div></div>
+  <p></p>
+  <p></p>
+  <input>
+  <br>
 
-```html
-<div>
-<p>
-<p>
-<input></input>
-<br></br>
+  <!-- ✗ BAD -->
+  <div>
+  <p>
+</template>
 ```
 
-:+1: Examples of **correct** code for this rule:
-
-```html
-<div></div>
-<p></p>
-<p></p>
-<input>
-<br>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-end-tags.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-end-tags.js)

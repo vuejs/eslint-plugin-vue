@@ -107,12 +107,12 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on:click></div></template>',
-      errors: ["'v-on' directives require that attribute value or verb modifiers."]
+      errors: ["'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."]
     },
     {
       filename: 'test.vue',
       code: '<template><div @click></div></template>',
-      errors: ["'v-on' directives require that attribute value or verb modifiers."]
+      errors: ["'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."]
     },
     {
       filename: 'test.vue',
@@ -125,6 +125,16 @@ tester.run('valid-v-on', rule, {
       code: '<template><div @keydown.bar.aaa="foo"></div></template>',
       errors: ["'v-on' directives don't support the modifier 'bar'."],
       options: [{ modifiers: ['aaa'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @click="const"></div></template>',
+      errors: ['Avoid using JavaScript keyword as "v-on" value: "const".']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @click="delete"></div></template>',
+      errors: ['Avoid using JavaScript keyword as "v-on" value: "delete".']
     }
   ]
 })

@@ -71,6 +71,103 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return {
+                async bar() {
+                  const data = await baz(this.a)
+                  return data
+                }
+              }
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              const a = 'test'
+              return [
+                async () => {
+                  const baz = await bar(a)
+                  return baz
+                },
+                'b',
+                {}
+              ]
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return function () {
+                return async () => await bar()
+              }
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return new Promise.resolve()
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return new Bar(async () => await baz())
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo() {
+              return someFunc.doSomething({
+                async bar() {
+                  return await baz()
+                }
+              })
+            },
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 

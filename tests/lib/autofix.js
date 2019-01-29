@@ -95,7 +95,7 @@ describe('Complex autofix test cases', () => {
           'component': 'never'
         }
       }],
-      'vue/component-name-in-template-casing': ['error', 'kebab-case']
+      'vue/component-name-in-template-casing': ['error', 'kebab-case', { registeredComponentsOnly: false }]
     }})
 
     const pascalConfig = Object.assign({}, baseConfig, { 'rules': {
@@ -104,7 +104,7 @@ describe('Complex autofix test cases', () => {
           'component': 'never'
         }
       }],
-      'vue/component-name-in-template-casing': ['error']
+      'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }]
     }})
 
     it('Even if set kebab-case, the output should be as expected.', () => {

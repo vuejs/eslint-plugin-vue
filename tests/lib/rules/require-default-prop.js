@@ -1,6 +1,6 @@
 /**
  * @fileoverview Require default value for props
- * @author Michał Sajnóg <msajnog93@gmail.com> (http://github.com/michalsnik)
+ * @author Michał Sajnóg <msajnog93@gmail.com> (https://github.com/michalsnik)
  */
 'use strict'
 
@@ -113,6 +113,46 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default (Vue as VueConstructor<Vue>).extend({
+          props: {
+            a: {
+              type: String,
+              required: true
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parser: 'typescript-eslint-parser'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default Vue.extend({
+          props: {
+            a: {
+              type: String,
+              required: true
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parser: 'typescript-eslint-parser'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            bar,
+            baz: prop,
+            bar1: foo()
+          }
+        }
+      `
     }
   ],
 
@@ -156,6 +196,40 @@ ruleTester.run('require-default-prop', rule, {
       }, {
         message: `Prop 'f' requires default value to be set.`,
         line: 14
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default (Vue as VueConstructor<Vue>).extend({
+          props: {
+            a: {
+              type: String
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parser: 'typescript-eslint-parser',
+      errors: [{
+        message: `Prop 'a' requires default value to be set.`,
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default Vue.extend({
+          props: {
+            a: {
+              type: String
+            } as PropOptions<string>
+          }
+        });
+      `,
+      parser: 'typescript-eslint-parser',
+      errors: [{
+        message: `Prop 'a' requires default value to be set.`,
+        line: 4
       }]
     }
   ]

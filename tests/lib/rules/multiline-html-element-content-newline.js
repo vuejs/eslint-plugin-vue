@@ -28,6 +28,19 @@ tester.run('multiline-html-element-content-newline', rule, {
     `<template><div class="panel"><!-- comment --></div></template>`,
     `
       <template>
+        <slot
+          name="panel"
+        ></slot>
+      </template>
+    `,
+    `
+      <template>
+        <div
+          ></div>
+      </template>
+    `,
+    `
+      <template>
         <div class="panel">
           content
         </div>
@@ -59,6 +72,43 @@ tester.run('multiline-html-element-content-newline', rule, {
           class="panel">
         </div>
       </template>`,
+    // allowEmptyLines
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+        </template>`,
+      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }]
+    },
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+            contents
+
+          </div>
+        </template>`,
+      options: [{ allowEmptyLines: true }]
+    },
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+
+            contents
+
+
+          </div>
+        </template>`,
+      options: [{ allowEmptyLines: true }]
+    },
     // self closing
     `
       <template>
@@ -91,11 +141,43 @@ tester.run('multiline-html-element-content-newline', rule, {
           >content</ignore-tag>
           <ignore-tag><div
             >content</div></ignore-tag>
-          <ignore-tag>>content
+          <ignore-tag>content
             content</ignore-tag>
         </template>`,
       options: [{
         ignores: ['ignore-tag']
+      }]
+    },
+    {
+      code: `
+        <template>
+          <IgnoreTag>content</IgnoreTag>
+          <IgnoreTag
+            id="test-pre"
+          >content</IgnoreTag>
+          <IgnoreTag><div
+            >content</div></IgnoreTag>
+          <IgnoreTag>content
+            content</IgnoreTag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
+      }]
+    },
+    {
+      code: `
+        <template>
+          <ignore-tag>content</ignore-tag>
+          <ignore-tag
+            id="test-pre"
+          >content</ignore-tag>
+          <ignore-tag><div
+            >content</div></ignore-tag>
+          <ignore-tag>content
+            content</ignore-tag>
+        </template>`,
+      options: [{
+        ignores: ['IgnoreTag']
       }]
     },
     // Ignore if no closing brackets
@@ -394,6 +476,65 @@ content
         'Expected 1 line break before closing tag (`</div>`), but 2 line breaks found.'
       ]
     },
+    // allowEmptyLines
+    {
+      code: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+          <div
+            class="panel"></div>
+        </template>`,
+      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }],
+      output: `
+        <template>
+          <div
+            class="panel">
+
+          </div>
+          <div
+            class="panel">
+</div>
+        </template>`,
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div>
+
+            content
+            content
+
+          </div>
+          <div>content
+            content</div>
+        </template>
+      `,
+      options: [{ allowEmptyLines: true }],
+      output: `
+        <template>
+          <div>
+
+            content
+            content
+
+          </div>
+          <div>
+content
+            content
+</div>
+        </template>
+      `,
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+      ]
+    },
     // mustache
     {
       code: `
@@ -493,6 +634,7 @@ content
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false }],
       errors: ['Expected 1 line break after opening tag (`<div>`), but no line breaks found.']
     }
   ]
