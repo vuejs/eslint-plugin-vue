@@ -50,7 +50,7 @@ tester.run('v-on-function-call', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo"></div></template>',
-      output: `<template><div @click="foo()"></div></template>`,
+      output: `<template><div @click="foo"></div></template>`,
       errors: ["Method calls inside of 'v-on' directives must have parentheses."],
       options: ['always']
     },
