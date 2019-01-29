@@ -158,23 +158,6 @@ ruleTester.run('no-boolean-default', rule, {
         message: 'Boolean prop should not set a default (Vue defaults it to false).',
         line: 6
       }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            enabled: {
-              type: Boolean,
-            }
-          }
-        }
-      `,
-      options: ['constructor'],
-      errors: [{
-        message: 'Boolean prop should use a constructor.',
-        line: 4
-      }]
     }
   ]
 })
