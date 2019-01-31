@@ -231,6 +231,57 @@ ruleTester.run('require-default-prop', rule, {
         message: `Prop 'a' requires default value to be set.`,
         line: 4
       }]
+    },
+
+    // computed propertys
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            a: String,
+            'b': String,
+            ['c']: String,
+            [\`d\`]: String,
+          }
+        };
+      `,
+      errors: [{
+        message: `Prop 'a' requires default value to be set.`,
+        line: 4
+      }, {
+        message: `Prop 'b' requires default value to be set.`,
+        line: 5
+      }, {
+        message: `Prop 'c' requires default value to be set.`,
+        line: 6
+      }, {
+        message: `Prop 'd' requires default value to be set.`,
+        line: 7
+      }]
+    },
+    // unknown static name
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            [foo]: String,
+            [bar()]: String,
+            [baz.baz]: String,
+          }
+        };
+      `,
+      errors: [{
+        message: `Prop '[foo]' requires default value to be set.`,
+        line: 4
+      }, {
+        message: `Prop '[bar()]' requires default value to be set.`,
+        line: 5
+      }, {
+        message: `Prop '[baz.baz]' requires default value to be set.`,
+        line: 6
+      }]
     }
   ]
 })

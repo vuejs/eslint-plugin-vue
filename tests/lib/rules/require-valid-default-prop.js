@@ -444,6 +444,37 @@ ruleTester.run('require-valid-default-prop', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: 'typescript-eslint-parser',
       errors: errorMessage('function or number')
+    },
+
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          'foo': {
+            type: Object,
+            default: ''
+          },
+          ['bar']: {
+            type: Object,
+            default: ''
+          },
+          [baz]: {
+            type: Object,
+            default: ''
+          }
+        }
+      }`,
+      parserOptions,
+      errors: [{
+        message: `Type of the default value for 'foo' prop must be a function.`,
+        line: 5
+      }, {
+        message: `Type of the default value for 'bar' prop must be a function.`,
+        line: 9
+      }, {
+        message: `Type of the default value for '[baz]' prop must be a function.`,
+        line: 13
+      }]
     }
   ]
 })
