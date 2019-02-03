@@ -413,6 +413,22 @@ tester.run('no-unused-components', rule, {
       </script>`
     },
 
+    // empty `:is`
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is=""></component>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is></component>
+      </template>`
+    },
+
     // computed properties
     {
       filename: 'test.vue',
@@ -456,7 +472,6 @@ tester.run('no-unused-components', rule, {
         }
       </script>`
     }
-
   ],
   invalid: [
     {
@@ -556,6 +571,44 @@ tester.run('no-unused-components', rule, {
       }, {
         message: 'The "Bar" component has been registered but not used.',
         line: 14
+      }]
+    },
+
+    // empty `:is`
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is=""></component>
+      </template>
+      <script>
+        export default {
+          components: {
+            Foo,
+          },
+        }
+      </script>`,
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 8
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is></component>
+      </template>
+      <script>
+        export default {
+          components: {
+            Foo,
+          },
+        }
+      </script>`,
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 8
       }]
     },
 

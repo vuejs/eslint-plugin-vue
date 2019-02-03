@@ -33,39 +33,59 @@ tester.run('singleline-html-element-content-newline', rule, {
         <div class="panel">
           content
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div class="panel">
           <div>
           </div>
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div class="panel">
           <!-- comment -->
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div>
           content
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div>
           <div>
           </div>
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div>
           <!-- comment -->
         </div>
-      </template>`,
+      </template>
+    `,
+    `
+      <template>
+        <a href="/">Home</a>
+      </template>
+    `,
+    `
+      <template>
+        <form>
+          <label for="test">Home</label>
+          <input id="test" name="test">
+        </form>
+      </template>
+    `,
+
     // ignoreWhenNoAttributes: true
     `
       <template>
@@ -91,6 +111,7 @@ tester.run('singleline-html-element-content-newline', rule, {
       <template>
         <div>    </div>
       </template>`,
+
     // ignoreWhenNoAttributes: false
     {
       code: `
