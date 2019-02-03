@@ -50,12 +50,12 @@ This rule enforces a line break before and after the contents of a singleline el
 
 ## :wrench: Options
 
-```json
+```js
 {
   "vue/singleline-html-element-content-newline": ["error", {
     "ignoreWhenNoAttributes": true,
     "ignoreWhenEmpty": true,
-    "ignores": ["pre", "textarea"]
+    "ignores": ["pre", "textarea", ...INLINE_ELEMENTS]
   }]
 }
 ```
@@ -64,8 +64,13 @@ This rule enforces a line break before and after the contents of a singleline el
     default `true`
 - `ignoreWhenEmpty` ... disables reporting when element has no content.
     default `true`
-- `ignores` ... the configuration for element names to ignore line breaks style.  
-    default `["pre", "textarea"]`
+- `ignores` ... the configuration for element names to ignore line breaks style.
+    default `["pre", "textarea", ...INLINE_ELEMENTS]`.
+
+
+::: info
+  All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
+:::
 
 
 ### `"ignoreWhenNoAttributes": true`

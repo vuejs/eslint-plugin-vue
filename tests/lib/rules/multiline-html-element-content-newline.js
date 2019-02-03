@@ -44,7 +44,8 @@ tester.run('multiline-html-element-content-newline', rule, {
         <div class="panel">
           content
         </div>
-      </template>`,
+      </template>
+    `,
     `
       <template>
         <div
@@ -52,7 +53,71 @@ tester.run('multiline-html-element-content-newline', rule, {
         >
           content
         </div>
-      </template>`,
+      </template>
+    `,
+    `
+      <template>
+        <a
+          href="/"
+          class="link"
+        >Home</a>
+      </template>
+    `,
+    `
+      <template>
+        <a
+          href="/"
+          class="link"
+        >Home
+        </a>
+      </template>
+    `,
+    `
+      <template>
+        <a
+          href="/"
+          class="link"
+        >
+          Home
+        </a>
+      </template>
+    `,
+    `
+      <template>
+        <div>
+          <label
+            for="test"
+            class="label"
+          >Foo</label>
+          <input id="test">
+        </div>
+      </template>
+    `,
+    `
+      <template>
+        <div>
+          <label
+            for="test"
+            class="label"
+          >Foo
+          </label>
+          <input id="test">
+        </div>
+      </template>
+    `,
+    `
+      <template>
+        <div>
+          <label
+            for="test"
+            class="label"
+          >
+            Foo
+          </label>
+          <input id="test">
+        </div>
+      </template>
+    `,
     `
       <template>
         <div>
@@ -61,9 +126,13 @@ tester.run('multiline-html-element-content-newline', rule, {
             content
           </div>
         </div>
-      </template>`,
-    `<div>multiline end tag</div
-      >`,
+      </template>
+    `,
+    `
+      <div>multiline end tag</div
+      >
+    `,
+
     // empty
     `<template><div class="panel"></div></template>`,
     `
@@ -71,7 +140,9 @@ tester.run('multiline-html-element-content-newline', rule, {
         <div
           class="panel">
         </div>
-      </template>`,
+      </template>
+    `,
+
     // allowEmptyLines
     {
       code: `
@@ -109,11 +180,14 @@ tester.run('multiline-html-element-content-newline', rule, {
         </template>`,
       options: [{ allowEmptyLines: true }]
     },
+
     // self closing
     `
       <template>
         <self-closing />
-      </template>`,
+      </template>
+    `,
+
     // ignores
     `
       <template>
@@ -180,6 +254,7 @@ tester.run('multiline-html-element-content-newline', rule, {
         ignores: ['IgnoreTag']
       }]
     },
+
     // Ignore if no closing brackets
     `
       <template>
