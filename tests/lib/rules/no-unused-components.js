@@ -413,7 +413,7 @@ tester.run('no-unused-components', rule, {
       </script>`
     },
 
-    // computed propertys
+    // computed properties
     {
       filename: 'test.vue',
       code: `
