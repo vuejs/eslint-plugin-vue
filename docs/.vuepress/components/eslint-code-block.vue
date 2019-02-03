@@ -6,8 +6,8 @@
       :code="code"
       :style="{ height }"
       class="eslint-code-block"
-      filename="example.vue"
-      language="html"
+      :filename="filename"
+      :language="language"
       :preprocess="preprocess"
       :postprocess="postprocess"
       dark
@@ -36,6 +36,14 @@ export default {
       default () {
         return {}
       }
+    },
+    filename: {
+      type: String,
+      default: 'example.vue'
+    },
+    language: {
+      type: String,
+      default: 'html'
     }
   },
 
@@ -83,7 +91,10 @@ export default {
         parser: 'vue-eslint-parser',
         parserOptions: {
           ecmaVersion: 2019,
-          sourceType: 'module'
+          sourceType: 'module',
+          ecmaFeatures: {
+            jsx: true
+          }
         }
       }
     },
