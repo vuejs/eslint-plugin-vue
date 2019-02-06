@@ -1,5 +1,6 @@
 <!--{}-->
 <script>
+var foo, bar
 export
 {
   foo
