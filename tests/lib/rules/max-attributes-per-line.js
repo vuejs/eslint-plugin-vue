@@ -93,43 +93,43 @@ ruleTester.run('max-attributes-per-line', rule, {
       code: `<template><component name="John Doe" age="30"></component></template>`,
       output: `<template><component name="John Doe"
 age="30"></component></template>`,
-      errors: ['Attribute "age" should be on a new line.']
+      errors: ['\'age\' should be on a new line.']
     },
     {
       code: `<template><component :name="user.name" :age="user.age"></component></template>`,
       output: `<template><component :name="user.name"
 :age="user.age"></component></template>`,
-      errors: ['Binding "age" should be on a new line.']
+      errors: ['\':age\' should be on a new line.']
     },
     {
       code: `<template><component :is="test" v-bind="user"></component></template>`,
       output: `<template><component :is="test"
 v-bind="user"></component></template>`,
-      errors: ['Directive "bind" should be on a new line.']
+      errors: ['\'v-bind\' should be on a new line.']
     },
     {
       code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
       output: `<template><component :name="user.name"
 @buy="buyProduct"></component></template>`,
-      errors: ['Event "buy" should be on a new line.']
+      errors: ['\'@buy\' should be on a new line.']
     },
     {
       code: `<template><component :name="user.name" @click.stop></component></template>`,
       output: `<template><component :name="user.name"
 @click.stop></component></template>`,
-      errors: ['Event "click" should be on a new line.']
+      errors: ['\'@click.stop\' should be on a new line.']
     },
     {
       code: `<template><component :name="user.name" v-if="something"></component></template>`,
       output: `<template><component :name="user.name"
 v-if="something"></component></template>`,
-      errors: ['Directive "if" should be on a new line.']
+      errors: ['\'v-if\' should be on a new line.']
     },
     {
       code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
       output: `<template><component name="John Doe"
 v-bind:age="user.age"></component></template>`,
-      errors: ['Binding "age" should be on a new line.']
+      errors: ['\'v-bind:age\' should be on a new line.']
     },
     {
       code: `<template><component job="Vet"
@@ -144,7 +144,7 @@ job="Vet"
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "job" should be on a new line.',
+        message: '\'job\' should be on a new line.',
         type: 'VAttribute',
         line: 1
       }]
@@ -155,7 +155,7 @@ job="Vet"
       output: `<template><component name="John Doe" age="30"
 job="Vet"></component></template>`,
       errors: [{
-        message: 'Attribute "job" should be on a new line.',
+        message: '\'job\' should be on a new line.',
         type: 'VAttribute',
         line: 1
       }]
@@ -166,11 +166,11 @@ job="Vet"></component></template>`,
       output: `<template><component name="John Doe"
 age="30" job="Vet"></component></template>`,
       errors: [{
-        message: 'Attribute "age" should be on a new line.',
+        message: '\'age\' should be on a new line.',
         type: 'VAttribute',
         line: 1
       }, {
-        message: 'Attribute "job" should be on a new line.',
+        message: '\'job\' should be on a new line.',
         type: 'VAttribute',
         line: 1
       }]
@@ -187,7 +187,7 @@ name="John Doe"
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "name" should be on a new line.',
+        message: '\'name\' should be on a new line.',
         type: 'VAttribute',
         line: 1
       }]
@@ -206,7 +206,7 @@ age="30"
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "age" should be on a new line.',
+        message: '\'age\' should be on a new line.',
         type: 'VAttribute',
         line: 2
       }]
@@ -225,7 +225,7 @@ age="30"
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "age" should be on a new line.',
+        message: '\'age\' should be on a new line.',
         type: 'VAttribute',
         line: 2
       }]
@@ -244,7 +244,7 @@ petname="Snoopy">
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "petname" should be on a new line.',
+        message: '\'petname\' should be on a new line.',
         type: 'VAttribute',
         line: 3
       }]
@@ -263,11 +263,11 @@ petname="Snoopy" extra="foo">
         </component>
       </template>`,
       errors: [{
-        message: 'Attribute "petname" should be on a new line.',
+        message: '\'petname\' should be on a new line.',
         type: 'VAttribute',
         line: 3
       }, {
-        message: 'Attribute "extra" should be on a new line.',
+        message: '\'extra\' should be on a new line.',
         type: 'VAttribute',
         line: 3
       }]
