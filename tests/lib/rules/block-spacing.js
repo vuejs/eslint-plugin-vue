@@ -17,7 +17,8 @@ tester.run('block-spacing', rule, {
     {
       code: '<template><div :attr="function foo() {return true;}" /></template>',
       options: ['never']
-    }
+    },
+    '<template><div :[(function(){return(1)})()]="a" /></template>'
   ],
   invalid: [
     {
@@ -110,6 +111,27 @@ tester.run('block-spacing', rule, {
           line: 3
         }
       ]
+    },
+    {
+      code: '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
+      output: '<template><div :[(function(){return(1)})()]="(function(){ return(1) })()" /></template>',
+      errors: [
+        {
+          messageId: 'missing',
+          data: {
+            location: 'after',
+            token: '{'
+          }
+          // message: 'Requires a space after \'{\'',
+        },
+        {
+          messageId: 'missing',
+          data: {
+            location: 'before',
+            token: '}'
+          }
+          // message: 'Requires a space before \'}\'',
+        }]
     }
   ]
 })

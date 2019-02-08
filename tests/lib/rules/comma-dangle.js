@@ -33,6 +33,19 @@ tester.run('comma-dangle', rule, {
       options: [{
         'arrays': 'ignore'
       }]
+    },
+    {
+      code: `
+      <template>
+        <button :[[a,b][1]]="a" ></button>
+      </template>`
+    },
+    {
+      code: `
+      <template>
+        <button :[[a,b,][1]]="a" ></button>
+      </template>`,
+      options: ['always']
     }
   ],
   invalid: [
@@ -101,6 +114,37 @@ tester.run('comma-dangle', rule, {
         {
           message: 'Missing trailing comma.',
           line: 7
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <button :[[a,b,][1]]="a" ></button>
+      </template>`,
+      output: `
+      <template>
+        <button :[[a,b][1]]="a" ></button>
+      </template>`,
+      errors: [
+        {
+          message: 'Unexpected trailing comma.'
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <button :[[a,b][1]]="a" ></button>
+      </template>`,
+      output: `
+      <template>
+        <button :[[a,b,][1]]="a" ></button>
+      </template>`,
+      options: ['always'],
+      errors: [
+        {
+          message: 'Missing trailing comma.'
         }
       ]
     }
