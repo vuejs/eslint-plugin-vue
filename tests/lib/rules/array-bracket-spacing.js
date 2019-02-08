@@ -21,6 +21,16 @@ tester.run('array-bracket-spacing', rule, {
     {
       code: '<template><div :attr="[ a ]" /></template>',
       options: ['always']
+    },
+    '<template><div :[attr]="a" /></template>',
+    {
+      code: '<template><div :[attr]="a" /></template>',
+      options: ['always']
+    },
+    '<template><div :[[attr]]="a" /></template>',
+    {
+      code: '<template><div :[[attr]]="a" /></template>',
+      options: ['always']
     }
   ],
   invalid: [
