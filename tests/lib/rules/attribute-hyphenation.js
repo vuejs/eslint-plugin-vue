@@ -47,6 +47,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hyphen="foo" second-custom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
       options: ['never', { 'ignore': ['custom-hyphen', 'second-custom'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><my-component :[fooBar]></my-component></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><my-component :[foo-bar]></my-component></template>',
+      options: ['never']
     }
   ],
 
