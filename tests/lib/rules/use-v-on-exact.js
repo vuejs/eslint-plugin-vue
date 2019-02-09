@@ -152,6 +152,12 @@ ruleTester.run('use-v-on-exact', rule, {
     },
     {
       code: `<template><UiButton @click.native.stop="foo" @click.native.prevent="bar" /></template>`
+    },
+    {
+      code: `<template><button @[click]="foo"/></template>`
+    },
+    {
+      code: `<template><button @[foo]="foo" @[bar].ctrl="bar"/></template>`
     }
   ],
 
@@ -271,6 +277,17 @@ ruleTester.run('use-v-on-exact', rule, {
       errors: [
         { message: "Consider to use '.exact' modifier.", line: 3 },
         { message: "Consider to use '.exact' modifier.", line: 4 }
+      ]
+    },
+    {
+      code: `<template>
+        <button
+          @[foo]="foo"
+          @[foo].ctrl="bar"
+        />
+      </template>`,
+      errors: [
+        { message: "Consider to use '.exact' modifier.", line: 3 }
       ]
     }
   ]
