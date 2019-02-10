@@ -49,6 +49,9 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="x in foo">{{value | f(x)}}</div></template>'
+    },
+    {
+      code: '<template><div v-for="x in foo" :[x]></div></template>'
     }
   ],
   invalid: [
