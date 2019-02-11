@@ -246,6 +246,25 @@ describe('getRegisteredComponents', () => {
       ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent'],
     )
   })
+
+  it('should return an array of only components whose names can be identified', () => {
+    node = parse(`const test = {
+      name: 'test',
+      components: {
+        ...test,
+        Foo,
+        [bar]: Bar,
+        [baz.baz]: Baz,
+        [\`\${qux}\`]: Qux,
+        [\`Quux\`]: Quux
+      }
+    }`)
+
+    assert.deepEqual(
+      utils.getRegisteredComponents(node).map(c => c.name),
+      ['Foo', 'Quux'],
+    )
+  })
 })
 
 describe('getComponentProps', () => {
