@@ -29,6 +29,19 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          computed: {
+            foo: function () {
+              return;
+            },
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
           ...foo,
           computed: {
             ...mapGetters({
