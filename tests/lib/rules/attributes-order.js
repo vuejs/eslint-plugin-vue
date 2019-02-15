@@ -276,6 +276,94 @@ tester.run('attributes-order', rule, {
             'GLOBAL'
           ]
         }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            class="content"
+            :class="className"
+            v-if="!visible"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            ['class', ':class'],
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-important
+            v-if="!visible"
+            v-foo
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'v-important',
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            class="content"
+            v-if="!visible"
+            :class="className"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'class',
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }]
     }
   ],
 
@@ -581,6 +669,49 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
+          nodeType: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      code:
+        `<template>
+          <div
+            class="content"
+            :class="className"
+            v-if="!visible"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'class',
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }],
+      output:
+        `<template>
+          <div
+            class="content"
+            v-if="!visible"
+            :class="className"
+            >
+          </div>
+        </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-if" should go before ":class".',
           nodeType: 'VIdentifier'
         }
       ]
