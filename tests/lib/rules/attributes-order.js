@@ -718,6 +718,47 @@ tester.run('attributes-order', rule, {
           nodeType: 'VIdentifier'
         }
       ]
+    },
+    {
+      code:
+        `<template>
+          <div
+            class="content"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'class'
+          ]
+        }],
+      output:
+        `<template>
+          <div
+            v-text="textContent"
+            class="content"
+            >
+          </div>
+        </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-text" should go before "class".',
+          nodeType: 'VIdentifier'
+        }
+      ]
     }
   ]
 })
