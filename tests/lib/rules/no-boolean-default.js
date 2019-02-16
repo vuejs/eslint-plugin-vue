@@ -38,11 +38,73 @@ ruleTester.run('no-boolean-default', rule, {
     {
       filename: 'test.vue',
       code: `
+        export default {
+          props: {
+            enabled: Boolean
+          }
+        }
+      `,
+      options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: Boolean
+          }
+        }
+      `,
+      options: ['default-false']
+    },
+    {
+      filename: 'test.vue',
+      code: `
         const props = {};
         export default {
           props: {
             ...props,
             enabled: Boolean
+          }
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const props = {};
+        export default {
+          props: {
+            ...props,
+            enabled: Boolean
+          }
+        }
+      `,
+      options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const props = {};
+        export default {
+          props: {
+            ...props,
+            enabled: Boolean
+          }
+        }
+      `,
+      options: ['default-false']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              ...data
+            }
           }
         }
       `
@@ -61,6 +123,21 @@ ruleTester.run('no-boolean-default', rule, {
         }
       `,
       options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              ...data
+            }
+          }
+        }
+      `,
+      options: ['default-false']
     },
     {
       filename: 'test.vue',
@@ -95,12 +172,64 @@ ruleTester.run('no-boolean-default', rule, {
         const data = {};
         export default {
           props: {
+            enabled: data
+          }
+        }
+      `,
+      options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: data
+          }
+        }
+      `,
+      options: ['default-false']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
             enabled: {
               ...data
             }
           }
         }
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              ...data
+            }
+          }
+        }
+      `,
+      options: ['no-default']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const data = {};
+        export default {
+          props: {
+            enabled: {
+              ...data
+            }
+          }
+        }
+      `,
+      options: ['default-false']
     }
   ],
 
@@ -119,7 +248,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       errors: [{
-        message: 'Boolean prop should be defaulted to false.',
+        message: 'Boolean prop should only be defaulted to false.',
         line: 6
       }]
     },
@@ -137,7 +266,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       errors: [{
-        message: 'Boolean prop should be defaulted to false.',
+        message: 'Boolean prop should only be defaulted to false.',
         line: 6
       }]
     },
@@ -149,6 +278,24 @@ ruleTester.run('no-boolean-default', rule, {
             enabled: {
               type: Boolean,
               default: false,
+            }
+          }
+        }
+      `,
+      options: ['no-default'],
+      errors: [{
+        message: 'Boolean prop should not set a default (Vue defaults it to false).',
+        line: 6
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            enabled: {
+              type: Boolean,
+              default: true,
             }
           }
         }
