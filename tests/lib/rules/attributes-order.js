@@ -282,6 +282,7 @@ tester.run('attributes-order', rule, {
       code:
         `<template>
           <div
+            v-important
             class="content"
             :class="className"
             v-if="!visible"
@@ -292,36 +293,7 @@ tester.run('attributes-order', rule, {
       options: [
         { order:
           [
-            ['class', ':class'],
-            'DEFINITION',
-            'LIST_RENDERING',
-            'CONDITIONALS',
-            'RENDER_MODIFIERS',
-            'GLOBAL',
-            'UNIQUE',
-            'TWO_WAY_BINDING',
-            'OTHER_DIRECTIVES',
-            'OTHER_ATTR',
-            'EVENTS',
-            'CONTENT'
-          ]
-        }]
-    },
-    {
-      filename: 'test.vue',
-      code:
-        `<template>
-          <div
-            v-important
-            v-if="!visible"
-            v-foo
-            >
-          </div>
-        </template>`,
-      options: [
-        { order:
-          [
-            'v-important',
+            ['class', ':class', 'v-important'],
             'DEFINITION',
             'LIST_RENDERING',
             'CONDITIONALS',
@@ -343,6 +315,7 @@ tester.run('attributes-order', rule, {
           <div
             class="content"
             v-if="!visible"
+            v-directive
             :class="className"
             >
           </div>
@@ -362,6 +335,36 @@ tester.run('attributes-order', rule, {
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT'
+          ]
+        }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-text="textContent"
+            v-model="model"
+            class="content"
+            :class="className"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            ['class', ':class', 'v-model']
           ]
         }]
     }
