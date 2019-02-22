@@ -74,7 +74,7 @@ This rule reports components that haven't been used in the template.
 </eslint-code-block>
 
 ::: warning Note
-Components registered under other than `PascalCase` name have to be called directly under the specified name, whereas if you register it using `PascalCase` you can call it however you like, except using `snake_case`.
+Components registered under `PascalCase` or `camelCase` names have may be called however you like, except using `snake_case`. Otherwise, they will need to be called directly under the specified name.
 :::
 
 ## :wrench: Options
