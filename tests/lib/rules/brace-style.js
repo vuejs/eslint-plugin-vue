@@ -19,7 +19,8 @@ tester.run('brace-style', rule, {
     {
       code: `<template><div :attr="function foo() { return true; }" /></template>`,
       options: ['1tbs', { 'allowSingleLine': true }]
-    }
+    },
+    `<template><div :[(function(){return(1)})()]="a" /></template>`
   ],
   invalid: [
     {
@@ -64,6 +65,19 @@ tester.run('brace-style', rule, {
           line: 3
         }
       ]
+    },
+    {
+      code: '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
+      output: `<template><div :[(function(){return(1)})()]="(function(){
+return(1)
+})()" /></template>`,
+      errors: [
+        {
+          message: 'Statement inside of curly braces should be on next line.'
+        },
+        {
+          message: 'Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.'
+        }]
     }
   ]
 })

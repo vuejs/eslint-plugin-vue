@@ -24,6 +24,18 @@ tester.run('no-restricted-syntax', rule, {
           'message': 'Call expressions are not allowed.'
         }
       ]
+    },
+    {
+      code: `
+        <template>
+          <input :[value]="value">
+        </template>`,
+      options: [
+        {
+          'selector': 'CallExpression',
+          'message': 'Call expressions are not allowed.'
+        }
+      ]
     }
   ],
   invalid: [
@@ -113,6 +125,20 @@ tester.run('no-restricted-syntax', rule, {
           endColumn: 53
         }
       ]
+    },
+
+    {
+      code: `
+        <template>
+          <input :[fn()]="fn()">
+        </template>`,
+      options: [
+        {
+          'selector': 'CallExpression',
+          'message': 'Call expressions are not allowed.'
+        }
+      ],
+      errors: ['Call expressions are not allowed.', 'Call expressions are not allowed.']
     }
   ]
 })

@@ -118,8 +118,8 @@ ruleTester.run('no-multi-spaces', rule, {
       output: '<template><div :class="foo" /></template>',
       errors: [
         {
-          message: "Multiple spaces found before ':class'.",
-          type: 'HTMLIdentifier'
+          message: "Multiple spaces found before ':'.",
+          type: 'Punctuator'
         },
         {
           message: "Multiple spaces found before '/>'.",

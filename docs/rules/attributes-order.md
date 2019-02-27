@@ -25,7 +25,7 @@ This rule aims to enforce ordering of component attributes. The default order is
 - `GLOBAL`
   ex: 'id'
 - `UNIQUE`
-  ex: 'ref', 'key', 'slot'
+  ex: 'ref', 'key', 'v-slot', 'slot'
 - `TWO_WAY_BINDING`
   ex: 'v-model'
 - `OTHER_DIRECTIVES`
