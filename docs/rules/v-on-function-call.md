@@ -32,7 +32,7 @@ description: enforce or forbid parentheses after method calls without arguments 
 Default is set to `never`.
 
 ```
-'vue/v-on-parens': [2, 'always'|'never']
+'vue/v-on-function-call': [2, 'always'|'never']
 ```
 
 ### `"always"` - Always use parentheses in `v-on` directives
