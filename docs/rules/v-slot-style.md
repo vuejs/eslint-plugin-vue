@@ -43,8 +43,6 @@ This rule enforces `v-slot` directive style which you should use shorthand or lo
 
 ## :wrench: Options
 
-Default is set to `shorthand`.
-
 ```json
 {
   "vue/v-slot-style": ["error", {
