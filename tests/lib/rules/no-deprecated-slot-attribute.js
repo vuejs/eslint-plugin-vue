@@ -122,6 +122,166 @@ tester.run('no-deprecated-slot-attribute', rule, {
           line: 4
         }
       ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a slot="nameFoo" />
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <a v-slot:nameFoo />
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a slot="f o o" />
+          <a slot="obj.prop" />
+          <a slot="a/b" />
+          <a slot="a=b" />
+          <a slot="a>b" />
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 5
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 6
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 8
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a v-bind:slot=name />
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <a v-slot:[name] />
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a :slot="slot.name" />
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <a v-slot:[slot.name] />
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a :slot="  slotName  " />
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <a v-slot:[slotName] />
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a :slot="slot. name" />
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a :slot="  " />
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a :slot="  .error  " />
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        }
+      ]
     }
   ]
 })
