@@ -411,6 +411,66 @@ tester.run('no-unused-components', rule, {
           }
         }
       </script>`
+    },
+
+    // empty `:is`
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is=""></component>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is></component>
+      </template>`
+    },
+
+    // computed properties
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div />
+      </template>
+      <script>
+        export default {
+          components: {
+            [foo.bar]: baz
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div />
+      </template>
+      <script>
+        export default {
+          components: {
+            [foo]: Bar
+          }
+        }
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <foo />
+      </template>
+      <script>
+        export default {
+          components: {
+            ['foo']: Foo
+          }
+        }
+      </script>`
     }
   ],
   invalid: [
@@ -511,6 +571,78 @@ tester.run('no-unused-components', rule, {
       }, {
         message: 'The "Bar" component has been registered but not used.',
         line: 14
+      }]
+    },
+
+    // empty `:is`
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is=""></component>
+      </template>
+      <script>
+        export default {
+          components: {
+            Foo,
+          },
+        }
+      </script>`,
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 8
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <component :is></component>
+      </template>
+      <script>
+        export default {
+          components: {
+            Foo,
+          },
+        }
+      </script>`,
+      errors: [{
+        message: 'The "Foo" component has been registered but not used.',
+        line: 8
+      }]
+    },
+
+    // computed properties
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div />
+      </template>
+      <script>
+        export default {
+          components: {
+            ['foo']: Foo,
+            [\`bar\`]: Bar,
+            ['baz']: Baz,
+            [qux]: Qux,
+            ...components,
+            quux,
+          }
+        }
+      </script>`,
+      errors: [{
+        message: 'The "foo" component has been registered but not used.',
+        line: 8
+      }, {
+        message: 'The "bar" component has been registered but not used.',
+        line: 9
+      }, {
+        message: 'The "baz" component has been registered but not used.',
+        line: 10
+      }, {
+        message: 'The "quux" component has been registered but not used.',
+        line: 13
       }]
     }
   ]

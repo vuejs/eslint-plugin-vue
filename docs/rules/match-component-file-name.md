@@ -25,8 +25,7 @@ This rule has some options.
 }
 ```
 
-By default this rule will only verify components in a file with a `.jsx` 
-extension.
+By default this rule will only verify components in a file with a `.jsx` extension.
 
 You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions.
 
@@ -34,161 +33,77 @@ You can also enforce same case between the component's name and its file name.
 
 If you are defining multiple components within the same file, this rule will be ignored.
 
-:-1: Examples of **incorrect** code for this rule:
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
 
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
-  name: 'MComponent', // note the missing y
-  render: () {
+  /* ✓ GOOD */
+  name: 'MyComponent',
+  render() {
     return <h1>Hello world</h1>
   }
 }
 ```
 
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
+
+```jsx
+// file name: src/MyComponent.jsx
+export default {
+  /* ✓ GOOD */
+  name: 'my-component',
+  render() { return <div /> }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
+
+```jsx
+// file name: src/MyComponent.jsx
+export default {
+  /* ✗ BAD */
+  name: 'MComponent', // note the missing y
+  render() {
+    return <h1>Hello world</h1>
+  }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
+
+```jsx
+// file name: src/MyComponent.jsx
+/* no name property defined */
+export default {
+  render() {
+    return <h1>Hello world</h1>
+  }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error']}">
+
 ```vue
-// file name: src/MyComponent.vue
-// options: {extensions: ["vue"]}
+<!-- file name: src/MyComponent.vue -->
 <script>
   export default {
+    /* The default does not verify to `.vue`. */
     name: 'MComponent',
     template: '<div />'
   }
 </script>
 ```
 
-```js
-// file name: src/MyComponent.js
-// options: {extensions: ["js"]}
-new Vue({
-  name: 'MComponent',
-  template: '<div />'
-})
-```
-
-```js
-// file name: src/MyComponent.js
-// options: {extensions: ["js"]}
-Vue.component('MComponent', {
-  template: '<div />'
-})
-```
-
-```jsx
-// file name: src/MyComponent.jsx
-// options: {shouldMatchCase: true}
-export default {
-  name: 'my-component',
-  render() { return <div /> }
-}
-```
-
-```jsx
-// file name: src/my-component.jsx
-// options: {shouldMatchCase: true}
-export default {
-  name: 'MyComponent',
-  render() { return <div /> }
-}
-```
-
-:+1: Examples of **correct** code for this rule:
-
-```jsx
-// file name: src/MyComponent.jsx
-export default {
-  name: 'MyComponent',
-  render: () {
-    return <h1>Hello world</h1>
-  }
-}
-```
-
-```jsx
-// file name: src/MyComponent.jsx
-// no name property defined
-export default {
-  render: () {
-    return <h1>Hello world</h1>
-  }
-}
-```
-
-```vue
-// file name: src/MyComponent.vue
-<script>
-  export default {
-    name: 'MyComponent',
-    template: '<div />'
-  }
-</script>
-```
-
-```vue
-// file name: src/MyComponent.vue
-<script>
-  export default {
-    template: '<div />'
-  }
-</script>
-```
-
-```js
-// file name: src/MyComponent.js
-new Vue({
-  name: 'MyComponent',
-  template: '<div />'
-})
-```
-
-```js
-// file name: src/MyComponent.js
-new Vue({
-  template: '<div />'
-})
-```
-
-```js
-// file name: src/MyComponent.js
-Vue.component('MyComponent', {
-  template: '<div />'
-})
-```
-
-```js
-// file name: src/components.js
-// defines multiple components, so this rule is ignored
-Vue.component('MyComponent', {
-  template: '<div />'
-})
-
-Vue.component('OtherComponent', {
-  template: '<div />'
-})
-
-new Vue({
-  name: 'ThirdComponent',
-  template: '<div />'
-})
-```
-
-```jsx
-// file name: src/MyComponent.jsx
-// options: {shouldMatchCase: true}
-export default {
-  name: 'MyComponent',
-  render() { return <div /> }
-}
-```
-
-```jsx
-// file name: src/my-component.jsx
-// options: {shouldMatchCase: true}
-export default {
-  name: 'my-component',
-  render() { return <div /> }
-}
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
@@ -204,6 +119,191 @@ export default {
 - `"extensions": []` ... array of file extensions to be verified. Default is set to `["jsx"]`.
 - `"shouldMatchCase": false` ... boolean indicating if component's name
   should also match its file name case. Default is set to `false`.
+
+### `{extensions: ["vue"]}`
+
+<eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
+
+```vue
+<!-- file name: src/MyComponent.vue -->
+<script>
+  export default {
+    /* ✓ GOOD */
+    name: 'MyComponent',
+    template: '<div />'
+  }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
+
+```vue
+<!-- file name: src/MyComponent.vue -->
+<script>
+  export default {
+    /* ✗ BAD */
+    name: 'MComponent',
+    template: '<div />'
+  }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
+
+```vue
+<!-- file name: src/MyComponent.vue -->
+<script>
+  /* no name property defined */
+  export default {
+    template: '<div />'
+  }
+</script>
+```
+
+</eslint-code-block>
+
+### `{extensions: ["js"]}`
+
+<eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/MyComponent.js
+new Vue({
+  /* ✓ GOOD */
+  name: 'MyComponent',
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/MyComponent.js
+/* ✓ GOOD */
+Vue.component('MyComponent', {
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/MyComponent.js
+new Vue({
+  /* ✗ BAD */
+  name: 'MComponent',
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/MyComponent.js
+/* ✗ BAD */
+Vue.component('MComponent', {
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/components.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/components.js
+/* defines multiple components, so this rule is ignored */
+Vue.component('MyComponent', {
+  template: '<div />'
+})
+
+Vue.component('OtherComponent', {
+  template: '<div />'
+})
+
+new Vue({
+  name: 'ThirdComponent',
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
+
+```js
+// file name: src/MyComponent.js
+/* no name property defined */
+new Vue({
+  template: '<div />'
+})
+```
+
+</eslint-code-block>
+
+### `{shouldMatchCase: true}`
+
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error',  {shouldMatchCase: true}]}">
+
+```jsx
+// file name: src/MyComponent.jsx
+export default {
+  /* ✓ GOOD */
+  name: 'MyComponent',
+  render() { return <div /> }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/my-component.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error',  {shouldMatchCase: true}]}">
+
+```jsx
+// file name: src/my-component.jsx
+export default {
+  /* ✓ GOOD */
+  name: 'my-component',
+  render() { return <div /> }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error', {shouldMatchCase: true}]}">
+
+```jsx
+// file name: src/MyComponent.jsx
+export default {
+  /* ✗ BAD */
+  name: 'my-component',
+  render() { return <div /> }
+}
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/my-component.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error', {shouldMatchCase: true}]}">
+
+```jsx
+// file name: src/my-component.jsx
+export default {
+  /* ✗ BAD */
+  name: 'MyComponent',
+  render() { return <div /> }
+}
+```
+
+</eslint-code-block>
 
 ## :books: Further reading
 

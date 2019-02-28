@@ -19,20 +19,29 @@ const message = semver.lt(CLIEngine.version, '5.10.0')
 tester.run('space-infix-ops', rule, {
   valid: [
     '<template><div :attr="a + 1" /></template>',
-    '<template><div :attr="a ? 1 : 2" /></template>'
+    '<template><div :attr="a ? 1 : 2" /></template>',
+    '<template><div :[1+2]="a" /></template>'
   ],
   invalid: [
     {
       code: '<template><div :attr="a+1" /></template>',
+      output: '<template><div :attr="a + 1" /></template>',
       errors: [message('+')]
     },
     {
       code: '<template><div :attr="a?1 : 2" /></template>',
+      output: '<template><div :attr="a ? 1 : 2" /></template>',
       errors: [message('?')]
     },
     {
       code: '<template><div :attr="a ? 1:2" /></template>',
+      output: '<template><div :attr="a ? 1 : 2" /></template>',
       errors: [message(':')]
+    },
+    {
+      code: '<template><div :[1+2]="1+2" /></template>',
+      output: '<template><div :[1+2]="1 + 2" /></template>',
+      errors: [message('+')]
     }
   ]
 })

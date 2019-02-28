@@ -140,14 +140,26 @@ For example:
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets | :wrench: |
+| [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions | :wrench: |
+| [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
+| [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks | :wrench: |
+| [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
+| [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
+| [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
+| [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
+| [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
+| [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
+| [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
+| [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 | [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 
 ## Deprecated

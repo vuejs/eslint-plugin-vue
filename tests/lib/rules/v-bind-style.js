@@ -44,6 +44,26 @@ tester.run('v-bind-style', rule, {
       filename: 'test.vue',
       code: '<template><div v-bind:foo="foo"></div></template>',
       options: ['longform']
+    },
+
+    // Don't enforce `.prop` shorthand because of experimental.
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo.prop="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div .foo="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo.prop="foo"></div></template>',
+      options: ['shorthand']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div .foo="foo"></div></template>',
+      options: ['shorthand']
     }
   ],
   invalid: [
@@ -66,6 +86,34 @@ tester.run('v-bind-style', rule, {
       code: '<template><div :foo="foo"></div></template>',
       output: '<template><div v-bind:foo="foo"></div></template>',
       errors: ["Expected 'v-bind' before ':'."]
+    },
+    {
+      filename: 'test.vue',
+      options: ['longform'],
+      code: '<template><div .foo="foo"></div></template>',
+      output: '<template><div v-bind:foo.prop="foo"></div></template>',
+      errors: ["Expected 'v-bind:' instead of '.'."]
+    },
+    {
+      filename: 'test.vue',
+      options: ['longform'],
+      code: '<template><div .foo.sync="foo"></div></template>',
+      output: '<template><div v-bind:foo.prop.sync="foo"></div></template>',
+      errors: ["Expected 'v-bind:' instead of '.'."]
+    },
+    {
+      filename: 'test.vue',
+      options: ['longform'],
+      code: '<template><div .foo.prop="foo"></div></template>',
+      output: '<template><div v-bind:foo.prop="foo"></div></template>',
+      errors: ["Expected 'v-bind:' instead of '.'."]
+    },
+    {
+      filename: 'test.vue',
+      options: ['longform'],
+      code: '<template><div .foo.sync.prop="foo"></div></template>',
+      output: '<template><div v-bind:foo.sync.prop="foo"></div></template>',
+      errors: ["Expected 'v-bind:' instead of '.'."]
     }
   ]
 })

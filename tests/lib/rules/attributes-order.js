@@ -276,6 +276,23 @@ tester.run('attributes-order', rule, {
             'GLOBAL'
           ]
         }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            id="uniqueID"
+            ref="header"
+            :prop="headerData"
+            :[a+b]="headerData"
+            :[prop]="headerData"
+            myProp="prop"
+            v-on:click="functionCall"
+            v-on:[c]="functionCall"
+            v-text="textContent">
+          </div>
+        </template>`
     }
   ],
 
@@ -581,6 +598,32 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
+          nodeType: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      code:
+        `<template>
+          <my-component
+            v-if="!visible"
+            v-model="content"
+            v-slot="textContent"
+            >
+          </my-component>
+        </template>`,
+      output:
+        `<template>
+          <my-component
+            v-if="!visible"
+            v-slot="textContent"
+            v-model="content"
+            >
+          </my-component>
+        </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-slot" should go before "v-model".',
           nodeType: 'VIdentifier'
         }
       ]
