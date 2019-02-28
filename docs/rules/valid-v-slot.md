@@ -33,10 +33,10 @@ This rule reports `v-slot` directives in the following cases:
   <my-component>
     <template v-slot:default>
       default
-    <template>
+    </template>
     <template v-slot:one>
       one
-    <template>
+    </template>
     <template v-slot:two>
       two
     </template>
