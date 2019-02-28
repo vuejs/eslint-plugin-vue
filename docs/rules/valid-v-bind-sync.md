@@ -60,6 +60,10 @@ Nothing.
 
 [no-parsing-error]: no-parsing-error.md
 
+## :books: Further reading
+
+- [Guide - `.sync` Modifier]([https://vuejs.org/v2/guide/list.html#v-for-with-a-Component](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier))
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-bind-sync.js)
