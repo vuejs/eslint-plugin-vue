@@ -7,8 +7,8 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/comma-spacing')
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
-  parserOptions: { ecmaVersion: 2015 }
+  parser: require.resolve('vue-eslint-parser'),
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 tester.run('comma-spacing', rule, {
@@ -49,6 +49,15 @@ tester.run('comma-spacing', rule, {
         </template>`,
       options: [{ before: true, after: false }]
     },
+    `<template>
+      <div :[fn(a,b)]="val" />
+    </template>`,
+    `<template>
+      <div :[[,]]="val" />
+    </template>`,
+    `<template>
+      <div :[a,]="val" />
+    </template>`,
     `<script>
     fn = (a,b) => {}
     </script>`,
