@@ -123,6 +123,22 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
           line: 4
         }
       ]
+    },
+    // cannot fix
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a slot-scope="{a}" slot="f o o"/>
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot-scope` are deprecated.',
+          line: 4
+        }
+      ]
     }
   ]
 })
