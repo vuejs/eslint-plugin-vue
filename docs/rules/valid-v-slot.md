@@ -39,7 +39,7 @@ This rule reports `v-slot` directives in the following cases:
     <template>
     <template v-slot:two>
       two
-    <template>
+    </template>
   </my-component>
 
   <!-- ✗ BAD -->
