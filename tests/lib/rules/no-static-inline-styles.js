@@ -14,7 +14,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-style-attribute', rule, {
+tester.run('no-static-inline-styles', rule, {
   valid: [
     `
     <template>
