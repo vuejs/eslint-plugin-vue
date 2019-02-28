@@ -38,7 +38,10 @@ tester.run('keyword-spacing', rule, {
         " />
       </template>`,
       options: [{ before: false, after: false }]
-    }
+    },
+    `<template>
+      <div :[(function(){return(1)})()]="val" />
+    </template>`
   ],
   invalid: [
     {
@@ -137,6 +140,21 @@ tester.run('keyword-spacing', rule, {
           line: 7
         }
       ]
+    },
+    {
+      code:
+      `<template>
+        <div :[(function(){return(1)})()]="(function(){return(1)})()" />
+      </template>`,
+      output:
+      `<template>
+        <div :[(function(){return(1)})()]="(function(){return (1)})()" />
+      </template>`,
+      errors: [
+        {
+          message: 'Expected space(s) after "return".',
+          line: 2
+        }]
     }
   ]
 })
