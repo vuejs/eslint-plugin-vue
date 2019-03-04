@@ -7,37 +7,51 @@ description: require the component to be directly exported
 # vue/require-direct-export
 > require the component to be directly exported
 
-## Rule Details
+## :book: Rule Details
 
 This rule aims to require that the component object be directly exported.
 
-:-1: Examples of **incorrect** code:
+<eslint-code-block :rules="{'vue/require-direct-export': ['error']}">
 
-```js
-const ComponentA = {
-	name: 'ComponentA',
-	data() {
-		return {
-			state: 1
-		}
-	}
-}
-
-export default ComponentA
-```
-
-:+1: Examples of **correct** code:
-
-```js
+```vue
+<script>
+/* ✓ GOOD */
 export default {
-	name: 'ComponentA',
-	data() {
-		return {
-			state: 1
-		}
-	}
+  name: 'ComponentA',
+  data() {
+    return {
+      state: 1
+    }
+  }
 }
+</script>
 ```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/require-direct-export': ['error']}">
+
+```vue
+<script>
+const ComponentA = {
+  name: 'ComponentA',
+  data() {
+    return {
+      state: 1
+    }
+  }
+}
+
+/* ✗ BAD */
+export default ComponentA
+</script>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+Nothing.
 
 ## :mag: Implementation
 
