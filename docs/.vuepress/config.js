@@ -70,6 +70,11 @@ module.exports = {
       ],
 
       '/': ['/', '/user-guide/', '/developer-guide/', '/rules/']
+    },
+
+    algolia: {
+      apiKey: 'b2b69365da747a9a9635cda391317c36',
+      indexName: 'eslint-plugin-vue'
     }
   }
 }
