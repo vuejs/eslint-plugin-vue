@@ -30,7 +30,7 @@ See [The ESLint Vue Plugin Developer Guide](https://eslint.vuejs.org/developer-g
 Before you start writing a new rule, please read [the official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
 
 Next, in order to get an idea how does the AST of the code that you want to check looks like, use one of the following applications:
-- [astexplorer.net](https://astexplorer.net/) - the best tool to inspect ASTs, but it doesn't support Vue template yet
+- [astexplorer.net](https://astexplorer.net/) - the best tool to inspect ASTs, it support Vue template yet
 - [ast.js.org](https://ast.js.org/) - not fully featured, but supports Vue template syntax
 
 Since single file components in Vue are not plain JavaScript, the default parser couldn't be used, so a new one was introduced. `vue-eslint-parser` generates enhanced AST with nodes that represent specific parts of the template syntax, as well as what's inside the `<script>` tag.
