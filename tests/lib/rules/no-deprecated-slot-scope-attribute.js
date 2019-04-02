@@ -14,22 +14,27 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
   valid: [
     `<template>
       <LinkList>
-        <a v-slot:name />
+        <template v-slot:name><a /></template>
       </LinkList>
     </template>`,
     `<template>
       <LinkList>
-        <a #name />
+        <template #name><a /></template>
       </LinkList>
     </template>`,
     `<template>
       <LinkList>
-        <a v-slot="{a}" />
+        <template v-slot="{a}"><a /></template>
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList v-slot="{a}">
+        <a />
       </LinkList>
     </template>`,
     `<template>
       <LinkList>
-        <a #default="{a}" />
+        <template #default="{a}"><a /></template>
       </LinkList>
     </template>`,
     `<template>
@@ -39,22 +44,26 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
     </template>`,
     `<template>
       <LinkList>
-        <a />
+        <template><a /></template>
       </LinkList>
-    </template>`
+    </template>`,
+    `<template>
+      <LinkList>
+        <a />
+      </LinkList>`
   ],
   invalid: [
     {
       code: `
       <template>
         <LinkList>
-          <a slot="name" disabled slot-scope="{a}"/>
+          <template slot-scope="{a}"><a /></template>
         </LinkList>
       </template>`,
       output: `
       <template>
         <LinkList>
-          <a v-slot:name="{a}" disabled />
+          <template v-slot="{a}"><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -68,53 +77,13 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       code: `
       <template>
         <LinkList>
-          <a slot-scope />
+          <template slot-scope><a /></template>
         </LinkList>
       </template>`,
       output: `
       <template>
         <LinkList>
-          <a v-slot />
-        </LinkList>
-      </template>`,
-      errors: [
-        {
-          message: '`slot-scope` are deprecated.',
-          line: 4
-        }
-      ]
-    },
-    {
-      code: `
-      <template>
-        <LinkList>
-          <a slot-scope="{a}" />
-        </LinkList>
-      </template>`,
-      output: `
-      <template>
-        <LinkList>
-          <a v-slot="{a}" />
-        </LinkList>
-      </template>`,
-      errors: [
-        {
-          message: '`slot-scope` are deprecated.',
-          line: 4
-        }
-      ]
-    },
-    {
-      code: `
-      <template>
-        <LinkList>
-          <a slot-scope="{a}" slot="name"/>
-        </LinkList>
-      </template>`,
-      output: `
-      <template>
-        <LinkList>
-          <a  v-slot:name="{a}"/>
+          <template v-slot><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -129,7 +98,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       code: `
       <template>
         <LinkList>
-          <a slot-scope="{a}" slot="f o o"/>
+          <a slot-scope="{a}" />
         </LinkList>
       </template>`,
       output: null,
@@ -144,7 +113,22 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       code: `
       <template>
         <LinkList>
-          <a slot-scope="{a}" :slot="arg"/>
+          <template slot-scope="{a}" slot="foo"><a /></template>
+        </LinkList>
+      </template>`,
+      output: null,
+      errors: [
+        {
+          message: '`slot-scope` are deprecated.',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <template slot-scope="{a}" :slot="arg"><a /></template>
         </LinkList>
       </template>`,
       output: null,
