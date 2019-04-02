@@ -22,10 +22,13 @@ tester.run('no-unsupported-features', rule, {
     {
       code: `
       <template>
-        <a
-          v-slot:name
-          :[href]="'/xxx'"
-        />
+        <VList>
+          <template v-slot:name>
+            <a
+              :[href]="'/xxx'"
+            />
+          </template>
+        </VList>
       </template>`,
       options: [{ version: '^2.6.0' }]
     }
@@ -34,18 +37,24 @@ tester.run('no-unsupported-features', rule, {
     {
       code: `
       <template>
-        <a
-          v-slot:name
-          :[href]="'/xxx'"
-        />
+        <VList>
+          <template v-slot:name>
+            <a
+              :[href]="'/xxx'"
+            />
+          </template>
+        </VList>
       </template>`,
       options: [{ version: '^2.5.0' }],
       output: `
       <template>
-        <a
-          slot="name"
-          :[href]="'/xxx'"
-        />
+        <VList>
+          <template slot="name">
+            <a
+              :[href]="'/xxx'"
+            />
+          </template>
+        </VList>
       </template>`,
       errors: [
         {
@@ -54,7 +63,7 @@ tester.run('no-unsupported-features', rule, {
         },
         {
           message: 'Dynamic arguments are not supported until Vue.js "2.6.0".',
-          line: 5
+          line: 6
         }
       ]
     }

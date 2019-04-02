@@ -22,7 +22,7 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name />
+          <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions({ version: '^2.6.0' })
@@ -49,7 +49,7 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name />
+          <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions({ version: '^2.5.0', ignores: ['v-slot'] })
@@ -67,7 +67,7 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name />
+          <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions({ version: '2.6.0-beta.2' })
@@ -79,14 +79,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot />
+          <template v-slot ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot />
+          <template slot ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -100,14 +100,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a #default />
+          <template #default ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="default" />
+          <template slot="default" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -121,14 +121,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name />
+          <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="name" />
+          <template slot="name" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -142,14 +142,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a #name />
+          <template #name ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="name" />
+          <template slot="name" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -163,14 +163,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot="{a}" />
+          <template v-slot="{a}" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot-scope="{a}" />
+          <template slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -184,14 +184,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a #default="{a}" />
+          <template #default="{a}" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="default" slot-scope="{a}" />
+          <template slot="default" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -205,14 +205,14 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name="{a}" />
+          <template v-slot:name="{a}" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="name" slot-scope="{a}" />
+          <template slot="name" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -226,14 +226,35 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a #name="{a}" />
+          <template #name="{a}" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="name" slot-scope="{a}" />
+          <template slot="name" slot-scope="{a}" ><a /></template>
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`v-slot` are not supported until Vue.js "2.6.0".',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <template v-slot:[name]="{a}" ><a /></template>
+        </LinkList>
+      </template>`,
+      options: buildOptions(),
+      output: `
+      <template>
+        <LinkList>
+          <template :slot="name" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -248,16 +269,32 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot:name="{" />
+          <template v-slot:name="{" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
       output: `
       <template>
         <LinkList>
-          <a slot="name" slot-scope="{" />
+          <template slot="name" slot-scope="{" ><a /></template>
         </LinkList>
       </template>`,
+      errors: [
+        {
+          message: '`v-slot` are not supported until Vue.js "2.6.0".',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <template v-slot:[.]="{a}" ><a /></template>
+        </LinkList>
+      </template>`,
+      options: buildOptions(),
+      output: null,
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -271,7 +308,7 @@ tester.run('no-unsupported-features/v-slot', rule, {
       code: `
       <template>
         <LinkList>
-          <a v-slot.mod="{a}" />
+          <template v-slot.mod="{a}" ><a /></template>
         </LinkList>
       </template>`,
       options: buildOptions(),
@@ -280,6 +317,24 @@ tester.run('no-unsupported-features/v-slot', rule, {
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
           line: 4
+        }
+      ]
+    },
+
+    // cannot fix
+    {
+      code: `
+      <template>
+        <LinkList v-slot="{a}">
+          <a />
+        </LinkList>
+      </template>`,
+      options: buildOptions(),
+      output: null,
+      errors: [
+        {
+          message: '`v-slot` are not supported until Vue.js "2.6.0".',
+          line: 3
         }
       ]
     }

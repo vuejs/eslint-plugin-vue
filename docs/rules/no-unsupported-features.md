@@ -74,6 +74,7 @@ The `"ignores"` option accepts an array of the following strings.
 - [Vue RFCs - 0001-new-slot-syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md)
 - [Vue RFCs - 0002-slot-syntax-shorthand](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0002-slot-syntax-shorthand.md)
 - [Vue RFCs - 0003-dynamic-directive-arguments](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0003-dynamic-directive-arguments.md)
+- [Vue RFCs - v-bind .prop shorthand proposal](https://github.com/vuejs/rfcs/pull/18)
 
 ## :mag: Implementation
 
