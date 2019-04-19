@@ -12,7 +12,8 @@ about: Create a report to help us improve
 
 **Tell us about your environment**	
 * **ESLint version:**	
-* **eslint-plugin-vue version:**	
+* **eslint-plugin-vue version:** 
+* **vue-eslint-parser version:** 
 * **Node version:**	
 
 **Please show your full configuration:**
