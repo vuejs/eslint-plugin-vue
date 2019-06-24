@@ -128,7 +128,7 @@ ruleTester.run('match-component-file-name', rule, {
           }
         </script>
       `,
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions // options default to [['jsx']]
     },
     {
@@ -142,7 +142,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['jsx'] }], // missing jsx in options
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -155,7 +155,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -166,7 +166,7 @@ ruleTester.run('match-component-file-name', rule, {
         </template>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -180,7 +180,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -194,7 +194,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -208,7 +208,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -222,7 +222,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -236,7 +236,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
 
@@ -590,7 +590,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name `MyComponent`.'
@@ -607,7 +607,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions,
       errors: [{
         message: 'Component name `MComponent` should match file name `MyComponent`.'

@@ -126,7 +126,7 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     },
     {
       filename: 'test.vue',
@@ -140,7 +140,7 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     },
     {
       filename: 'test.vue',
@@ -209,7 +209,7 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [{
         message: `Prop 'a' requires default value to be set.`,
         line: 4
@@ -226,7 +226,7 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [{
         message: `Prop 'a' requires default value to be set.`,
         line: 4

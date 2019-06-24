@@ -144,7 +144,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     },
     {
       filename: 'test.vue',
@@ -158,7 +158,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     }
   ],
 
@@ -265,7 +265,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [{
         message: 'Prop "foo" should define at least its type.',
         line: 4
@@ -281,7 +281,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [{
         message: 'Prop "foo" should define at least its type.',
         line: 4

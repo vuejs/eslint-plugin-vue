@@ -265,7 +265,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         line: 5,
         message: 'Unexpected side effect in "test1" computed property.'
       }],
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     }
   ]
 })

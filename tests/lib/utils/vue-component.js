@@ -100,13 +100,13 @@ function validTests (ext) {
     {
       filename: `test.${ext}`,
       code: `export default (Foo as FooConstructor<Foo>).extend({})`,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       parserOptions
     },
     {
       filename: `test.${ext}`,
       code: `export default Foo.extend({})`,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       parserOptions
     }
   ]
@@ -147,14 +147,14 @@ function invalidTests (ext) {
     {
       filename: `test.${ext}`,
       code: `export default (Vue as VueConstructor<Vue>).extend({})`,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       parserOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `export default Vue.extend({})`,
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       parserOptions,
       errors: [makeError(1)]
     },
