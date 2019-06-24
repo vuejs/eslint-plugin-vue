@@ -164,7 +164,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         message: 'The "a" property should be a constructor.',
         line: 5
       }],
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     }
   ]
 })
