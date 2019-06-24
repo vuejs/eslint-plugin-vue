@@ -60,7 +60,11 @@ jobs:
           command: npm install
       - run:
           name: Install eslint 5
-          command: npm install eslint@5.0.0 --no-save
+          command: |
+            # We need to execute this command twice because of npm's bug.
+            # See also: https://npm.community/t/error-node-modules-staging-eslint-e7cf6846-node-modules-eslint
+            npm install eslint@5.0.0 --no-save
+            npm install eslint@5.0.0 --no-save
       - run:
           name: Test
           command: npm test
