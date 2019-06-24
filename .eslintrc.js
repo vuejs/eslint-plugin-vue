@@ -1,7 +1,8 @@
 'use strict'
 
 module.exports = {
-  root: true,
+  // https://github.com/eslint/eslint/issues/11888
+  root: false,
   parserOptions: {
     ecmaVersion: 6
   },

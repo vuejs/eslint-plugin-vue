@@ -7,7 +7,7 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/brace-style')
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 
