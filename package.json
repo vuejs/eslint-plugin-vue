@@ -43,7 +43,7 @@
     "node": ">=6.5"
   },
   "peerDependencies": {
-    "eslint": "^5.0.0"
+    "eslint": "^5.0.0 || ^6.0.0"
   },
   "dependencies": {
     "vue-eslint-parser": "^6.0.2"
