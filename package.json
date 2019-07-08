@@ -55,7 +55,7 @@
     "chai": "^4.1.0",
     "eslint": "^6.0.0",
     "eslint-plugin-eslint-plugin": "^2.0.1",
-    "eslint-plugin-vue-libs": "^3.0.0",
+    "eslint-plugin-vue-libs": "^4.0.0",
     "eslint-plugin-vue": "file:.",
     "eslint4b": "^5.1.0",
     "lodash": "^4.17.4",
