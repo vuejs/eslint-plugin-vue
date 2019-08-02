@@ -44,32 +44,32 @@ tester.run('valid-v-else', rule, {
     {
       filename: 'test.vue',
       code: '<template><template v-else><div></div></template></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-else></div></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-else></div></div></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div></div><div v-else></div></div></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div if="foo"></div><div v-else></div></div></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div></div><div v-else></div></div></template>',
-      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else' directive."]
+      errors: ["'v-else' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."]
     },
     {
       filename: 'test.vue',
