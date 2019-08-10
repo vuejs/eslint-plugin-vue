@@ -98,7 +98,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
 | [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
-| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components | :wrench: |
+| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
 | [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
