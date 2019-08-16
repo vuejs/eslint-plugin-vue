@@ -158,6 +158,27 @@ ruleTester.run('use-v-on-exact', rule, {
     },
     {
       code: `<template><button @[foo]="foo" @[bar].ctrl="bar"/></template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.enter="foo"
+          @keydown.shift.tab="bar"/>
+      </template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.enter="foo"
+          @keydown.shift.tab.prevent="bar"/>
+      </template>`
+    },
+    {
+      code: `<template>
+        <input-component
+          @keydown.enter.native="foo"
+          @keydown.shift.tab.native="bar"/>
+      </template>`
     }
   ],
 
