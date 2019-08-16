@@ -71,6 +71,7 @@ If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/p
 
 ```diff
 - "parser": "babel-eslint",
++ "parser": "vue-eslint-parser",
   "parserOptions": {
 +     "parser": "babel-eslint",
       "sourceType": "module"
