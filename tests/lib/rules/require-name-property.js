@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const rule = require('../../../lib/rules/name-property-required')
+const rule = require('../../../lib/rules/require-name-property')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
@@ -13,14 +13,31 @@ const parserOptions = {
 }
 
 const ruleTester = new RuleTester()
-ruleTester.run('name-property-required', rule, {
-
+ruleTester.run('require-name-property', rule, {
   valid: [
     {
       filename: 'ValidComponent.vue',
       code: `
         export default {
           name: 'IssaName'
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+        export default {
+          name: undefined
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+        export default {
+          name: ''
         }
       `,
       parserOptions
@@ -36,7 +53,7 @@ ruleTester.run('name-property-required', rule, {
       `,
       parserOptions,
       errors: [{
-        message: 'Required name property is undefined.',
+        message: 'Required name property is not set.',
         type: 'ObjectExpression'
       }]
     },
@@ -49,7 +66,7 @@ ruleTester.run('name-property-required', rule, {
       `,
       parserOptions,
       errors: [{
-        message: 'Required name property is undefined.',
+        message: 'Required name property is not set.',
         type: 'ObjectExpression'
       }]
     },
@@ -57,12 +74,14 @@ ruleTester.run('name-property-required', rule, {
       filename: 'InvalidComponent.vue',
       code: `
         export default {
-          name: ''
+          computed: {
+            name() { return 'name' }
+          }
         }
       `,
       parserOptions,
       errors: [{
-        message: 'Required name property is undefined.',
+        message: 'Required name property is not set.',
         type: 'ObjectExpression'
       }]
     },
@@ -70,25 +89,12 @@ ruleTester.run('name-property-required', rule, {
       filename: 'InvalidComponent.vue',
       code: `
         export default {
-          name: undefined
+          [name]: 'IssaName'
         }
       `,
       parserOptions,
       errors: [{
-        message: 'Required name property is undefined.',
-        type: 'ObjectExpression'
-      }]
-    },
-    {
-      filename: 'InvalidComponent.vue',
-      code: `
-        export default {
-          name: null
-        }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Required name property is undefined.',
+        message: 'Required name property is not set.',
         type: 'ObjectExpression'
       }]
     }
