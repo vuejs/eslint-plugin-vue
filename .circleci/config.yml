@@ -52,12 +52,16 @@ jobs:
           name: Versions
           command: npm version
       - checkout
-      - restore_cache:
-          keys:
-            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+      # - restore_cache:
+      #     keys:
+      #       - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           name: Install eslint 5
           command: |
@@ -68,7 +72,3 @@ jobs:
       - run:
           name: Test
           command: npm test
-      - save_cache:
-          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
