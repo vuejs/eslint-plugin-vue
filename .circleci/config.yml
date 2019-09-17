@@ -63,8 +63,8 @@ jobs:
           command: |
             # We need to execute this command twice because of npm's bug.
             # See also: https://npm.community/t/error-node-modules-staging-eslint-e7cf6846-node-modules-eslint
-            npm install eslint@5.0.0 --no-save
-            npm install eslint@5.0.0 --no-save
+            npm install eslint@5.0.0 acorn@6.0.7 --no-save
+            npm install eslint@5.0.0 acorn@6.0.7 --no-save
       - run:
           name: Test
           command: npm test
