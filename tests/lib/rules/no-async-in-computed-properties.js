@@ -181,6 +181,32 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+            computed: {
+                foo() {
+                    return this.bar ? () => Promise.resolve(1) : null
+                }
+            }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+            computed: {
+                foo() {
+                    return this.bar ? async () => 1 : null
+                }
+            }
+        }
+      `,
+      parserOptions
     }
   ],
 
