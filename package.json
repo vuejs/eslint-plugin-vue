@@ -40,7 +40,7 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": ">=6.5"
+    "node": ">=8.10"
   },
   "peerDependencies": {
     "eslint": "^5.0.0 || ^6.0.0"
