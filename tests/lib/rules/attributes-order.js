@@ -293,6 +293,27 @@ tester.run('attributes-order', rule, {
             v-text="textContent">
           </div>
         </template>`
+    },
+    {
+      // omit OTHER_ATTR and allow any place for such attrs
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            class="content"
+            v-if="!visible"
+            :class="className"
+            v-text="textContent"
+            >
+          </div>
+        </template>`,
+      options: [
+        { order:
+          [
+            'CONDITIONALS',
+            'CONTENT'
+          ]
+        }]
     }
   ],
 
