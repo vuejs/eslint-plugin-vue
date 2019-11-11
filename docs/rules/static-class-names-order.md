@@ -2,10 +2,10 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/static-class-names-order
-description: enforce classnames order
+description: enforce static class names order
 ---
 # vue/static-class-names-order
-> enforce classnames order
+> enforce static class names order
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
