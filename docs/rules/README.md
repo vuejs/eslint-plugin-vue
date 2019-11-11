@@ -144,7 +144,6 @@ For example:
 | [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
 | [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks | :wrench: |
 | [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
-| [vue/static-class-names-order](./static-class-names-order.md) | enforce classnames order | :wrench: |
 | [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
@@ -161,6 +160,7 @@ For example:
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
+| [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 | [vue/v-slot-style](./v-slot-style.md) | enforce `v-slot` directive style | :wrench: |
 | [vue/valid-v-slot](./valid-v-slot.md) | enforce valid `v-slot` directives |  |

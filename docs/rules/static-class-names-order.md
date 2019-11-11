@@ -9,17 +9,6 @@ description: enforce static class names order
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-## :books: Further reading
-
-- [static-class-names-order]
-
-[static-class-names-order]: https://eslint.org/docs/rules/static-class-names-order
-
-## :mag: Implementation
-
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/static-class-names-order.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/static-class-names-order.js)
-
 ### Example
 
 <eslint-code-block fix :rules="{'vue/static-class-names-order': ['error']}">
@@ -35,3 +24,14 @@ description: enforce static class names order
 ```
 
 </eslint-code-block>
+
+## :books: Further reading
+
+- [static-class-names-order]
+
+[static-class-names-order]: https://eslint.org/docs/rules/static-class-names-order
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/static-class-names-order.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/static-class-names-order.js)
