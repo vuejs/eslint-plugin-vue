@@ -144,7 +144,7 @@ For example:
 | [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
 | [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks | :wrench: |
 | [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
-| [vue/class-order](./class-order.md) | enforce classnames order | :wrench: |
+| [vue/static-class-names-order](./static-class-names-order.md) | enforce classnames order | :wrench: |
 | [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |

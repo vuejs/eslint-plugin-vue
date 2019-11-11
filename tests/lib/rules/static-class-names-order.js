@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/class-order')
+var rule = require('../../../lib/rules/static-class-names-order')
 var RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -19,26 +19,34 @@ var tester = new RuleTester({
   parser: 'vue-eslint-parser',
   parserOptions: { ecmaVersion: 2015 }
 })
-tester.run('class-order', rule, {
+tester.run('static-class-names-order', rule, {
 
   valid: [
     {
-      filename: 'test.vue',
+      filename: 'no-classes.vue',
       code: '<template><div></div></template>'
     },
     {
-      filename: 'test.vue',
-      code: '<template><div class="a b"></div></template>'
+      filename: 'one-class.vue',
+      code: '<template><div class="a"></div></template>'
     },
     {
-      filename: 'test.vue',
-      code: '<template><div class="a"></div></template>'
+      filename: 'single-space.vue',
+      code: '<template><div class="a b c"></div></template>'
+    },
+    {
+      filename: 'multiple-spaces.vue',
+      code: '<template><div class="a       b       c"></div></template>'
+    },
+    {
+      filename: 'tabs.vue',
+      code: '<template><div class="a  b  c"></div></template>'
     }
   ],
 
   invalid: [
     {
-      filename: 'test.vue',
+      filename: 'two-classes.vue',
       code: '<template><div class="b a"></div></template>',
       output: '<template><div class="a b"></div></template>',
       errors: [{
@@ -47,7 +55,7 @@ tester.run('class-order', rule, {
       }]
     },
     {
-      filename: 'test.vue',
+      filename: 'three-classes.vue',
       code:
         `<template>
           <div class="c b a">
