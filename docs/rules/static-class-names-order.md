@@ -19,7 +19,7 @@ description: enforce static class names order
   <div class="a b"></div>
 
   <!-- ✗ BAD -->
-  <div class="b a></div>
+  <div class="b a"></div>
 </template>
 ```
 
