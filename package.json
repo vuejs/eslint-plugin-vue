@@ -46,7 +46,7 @@
     "eslint": "^5.0.0 || ^6.0.0"
   },
   "dependencies": {
-    "vue-eslint-parser": "^6.0.4"
+    "vue-eslint-parser": "^6.0.5"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
