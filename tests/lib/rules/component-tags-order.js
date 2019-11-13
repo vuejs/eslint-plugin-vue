@@ -15,7 +15,7 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser'
+  parser: require.resolve('vue-eslint-parser')
 })
 
 tester.run('component-tags-order', rule, {
@@ -64,8 +64,6 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
     },
 
-    // No template (can not check)
-    `<style></style><script></script>`,
     `<script></script><style></style>`,
 
     // Invalid EOF
@@ -199,6 +197,19 @@ tester.run('component-tags-order', rule, {
         {
           message: 'The <script> should be above the <template> on line 4.',
           line: 5
+        }
+      ]
+    },
+    // no <template>
+    {
+      code: `
+        <style></style>
+        <script></script>
+      `,
+      errors: [
+        {
+          message: 'The <script> should be above the <style> on line 2.',
+          line: 3
         }
       ]
     }
