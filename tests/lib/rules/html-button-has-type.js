@@ -49,6 +49,10 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
+      code: `<template><button :type="buttonType">Hello World</button></template>`
+    },
+    {
+      filename: 'test.vue',
       code: ''
     }
   ],
@@ -150,6 +154,15 @@ ruleTester.run('html-button-has-type', rule, {
         },
         {
           message: 'Missing an explicit type attribute for button.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><button :type="">Hello World</button></template>`,
+      errors: [
+        {
+          message: 'A value must be set for button type attribute.'
         }
       ]
     }
