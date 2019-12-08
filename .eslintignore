@@ -2,7 +2,7 @@
 /coverage
 /node_modules
 /tests/fixtures
-/tests/integrations/*/node_modules
+/tests/integrations/eslint-plugin-import
 
 !.vuepress
 /docs/.vuepress/dist
