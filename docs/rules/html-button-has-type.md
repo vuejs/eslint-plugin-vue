@@ -2,10 +2,10 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-button-has-type
-description: Prevent usage of button without an explicit type attribute
+description: disallow usage of button without an explicit type attribute
 ---
 # vue/html-button-has-type
-> Prevent usage of button without an explicit type attribute
+> disallow usage of button without an explicit type attribute
 
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 
