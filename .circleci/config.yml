@@ -2,10 +2,9 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v6
       - node-v8
       - node-v10
-      - node-v10-minimal
+      - node-v12
 
 version: 2
 jobs:
@@ -31,10 +30,6 @@ jobs:
           name: Test
           command: npm test
 
-  node-v6:
-    <<: *node-base
-    docker:
-      - image: node:6
   node-v8:
     <<: *node-base
     docker:
@@ -43,27 +38,7 @@ jobs:
     <<: *node-base
     docker:
       - image: node:10
-  node-v10-minimal:
+  node-v12:
+    <<: *node-base
     docker:
-      - image: node:10
-    steps:
-      - run:
-          name: Versions
-          command: npm version
-      - checkout
-      - restore_cache:
-          keys:
-            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Install eslint 5
-          command: npm install eslint@5.0.0 --no-save
-      - run:
-          name: Test
-          command: npm test
-      - save_cache:
-          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+      - image: node:12

@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/max-attributes-per-line')
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 

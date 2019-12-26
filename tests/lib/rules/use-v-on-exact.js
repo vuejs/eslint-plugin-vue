@@ -17,7 +17,7 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 
@@ -158,6 +158,27 @@ ruleTester.run('use-v-on-exact', rule, {
     },
     {
       code: `<template><button @[foo]="foo" @[bar].ctrl="bar"/></template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.enter="foo"
+          @keydown.shift.tab="bar"/>
+      </template>`
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.enter="foo"
+          @keydown.shift.tab.prevent="bar"/>
+      </template>`
+    },
+    {
+      code: `<template>
+        <input-component
+          @keydown.enter.native="foo"
+          @keydown.shift.tab.native="bar"/>
+      </template>`
     }
   ],
 

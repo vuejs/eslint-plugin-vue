@@ -8,13 +8,12 @@ description: enforce specific casing for the Prop name in Vue components
 > enforce specific casing for the Prop name in Vue components
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule enforce proper casing of props in vue components(camelCase).
 
-<eslint-code-block fix :rules="{'vue/prop-name-casing': ['error']}">
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error']}">
 
 ```vue
 <script>
@@ -46,7 +45,7 @@ export default {
 
 ### `"snake_case"`
 
-<eslint-code-block fix :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
 
 ```vue
 <script>

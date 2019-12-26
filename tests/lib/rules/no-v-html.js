@@ -15,7 +15,7 @@ const rule = require('../../../lib/rules/no-v-html')
 // Tests
 // ------------------------------------------------------------------------------
 const ruleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 

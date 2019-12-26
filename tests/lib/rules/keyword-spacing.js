@@ -7,7 +7,7 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/keyword-spacing')
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 

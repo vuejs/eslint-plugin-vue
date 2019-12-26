@@ -18,8 +18,8 @@ yarn add -D eslint eslint-plugin-vue
 ```
 
 ::: tip Requirements
-- ESLint v5.0.0 or later
-- Node.js v6.5.0 or later
+- ESLint v6.0.0 and above
+- Node.js v8.10.0 and above
 :::
 
 ## :book: Usage
@@ -67,10 +67,11 @@ If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/
 
 #### How to use custom parser?
 
-If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [typescript-eslint-parser](https://www.npmjs.com/package/typescript-eslint-parser), you have to use `parserOptions.parser` option instead of `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, so this plugin doesn't work if you overwrote `parser` option.
+If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use `parserOptions.parser` option instead of `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, so this plugin doesn't work if you overwrote `parser` option.
 
 ```diff
 - "parser": "babel-eslint",
++ "parser": "vue-eslint-parser",
   "parserOptions": {
 +     "parser": "babel-eslint",
       "sourceType": "module"

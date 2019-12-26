@@ -74,11 +74,14 @@ export default {
       "inheritAttrs",
       "model",
       ["props", "propsData"],
+      "fetch",
+      "asyncData",
       "data",
       "computed",
       "watch",
       "LIFECYCLE_HOOKS",
       "methods",
+      "head",
       ["template", "render"],
       "renderError"
     ]
