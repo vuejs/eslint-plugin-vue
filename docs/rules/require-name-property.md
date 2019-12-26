@@ -2,10 +2,10 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-name-property
-description: require a component name property
+description: require a name property in Vue components
 ---
 # vue/require-name-property
-> require a component name property
+> require a name property in Vue components
 
 ## :book: Rule Details
 
@@ -19,11 +19,27 @@ This rule requires a `name` property to be set on components.
 export default {
   name: 'OurButton'
 }
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/require-name-property': ['error']}">
+
+```vue
+<script>
 /* ✗ BAD */
 export default {
 }
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/require-name-property': ['error']}">
+
+```vue
+<script>
 /* ✗ BAD */
 export default {
   notName: 'OurButton'

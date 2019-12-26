@@ -1,7 +1,11 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-reserved-component-names
+description: disallow the use of reserved names in component definitions
+---
 # vue/no-reserved-component-names
 > disallow the use of reserved names in component definitions
-
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/recommended"`, and `"plugin:vue/strongly-recommended"`.
 
 ## :book: Rule Details
 
@@ -26,3 +30,8 @@ export default {
 - [List of SVG elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
 - [Kebab case elements](https://stackoverflow.com/questions/22545621/do-custom-elements-require-a-dash-in-their-name/22545622#22545622)
 - [Valid custom element name](https://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-reserved-component-names.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-reserved-component-names.js)

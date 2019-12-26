@@ -297,7 +297,7 @@ ruleTester.run('no-reserved-component-names', rule, {
           }
         </script>
       `,
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     },
     {
@@ -309,7 +309,7 @@ ruleTester.run('no-reserved-component-names', rule, {
           }
         </script>
       `,
-      parser: 'vue-eslint-parser',
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions
     }
   ],
