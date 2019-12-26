@@ -166,6 +166,7 @@ For example:
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 | [vue/v-slot-style](./v-slot-style.md) | enforce `v-slot` directive style | :wrench: |
+| [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 | [vue/valid-v-slot](./valid-v-slot.md) | enforce valid `v-slot` directives |  |
 
 ## Deprecated
