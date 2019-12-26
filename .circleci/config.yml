@@ -5,7 +5,6 @@ workflows:
       - node-v8
       - node-v10
       - node-v12
-      - node-v12-minimal
 
 version: 2
 jobs:
@@ -43,32 +42,3 @@ jobs:
     <<: *node-base
     docker:
       - image: node:12
-
-  node-v12-minimal:
-    docker:
-      - image: node:12
-    steps:
-      - run:
-          name: Versions
-          command: npm version
-      - checkout
-      - restore_cache:
-          keys:
-            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - save_cache:
-          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Install eslint 5
-          command: |
-            # We need to execute this command twice because of npm's bug.
-            # See also: https://npm.community/t/error-node-modules-staging-eslint-e7cf6846-node-modules-eslint
-            npm install eslint@5.0.0 acorn@6.0.7 --no-save
-            npm install eslint@5.0.0 acorn@6.0.7 --no-save
-      - run:
-          name: Test
-          command: npm test

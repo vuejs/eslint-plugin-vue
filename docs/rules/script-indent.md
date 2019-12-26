@@ -115,6 +115,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 
 - [indent](https://eslint.org/docs/rules/indent)
 - [vue/html-indent](./html-indent.md)
+- [@typescript-eslint/indent](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/indent.md). The `vue/script-indent` rule does not understand TypeScript AST. Please use `@typescript-eslint/indent` rule instead of this one inside of `<script lang="ts"`
 
 ## :mag: Implementation
 
