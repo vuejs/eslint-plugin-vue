@@ -62,7 +62,7 @@ eslint "src/**/*.{js,vue}"
 ```
 
 ::: tip
-If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint) you should have `lint` script added in your `package.json`. That means you can just run `yarn lint` or `npm run lint`.
+If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint), you should have the `lint` script added to your `package.json`. That means you can just run `yarn lint` or `npm run lint`.
 :::
 
 #### How to use a custom parser?
