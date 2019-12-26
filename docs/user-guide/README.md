@@ -149,9 +149,9 @@ If you use `Vetur` plugin, set `"vetur.validation.template": false` to avoid def
 
 #### Sublime Text
 
-Use [SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint) extension that SublimeLinter provides for eslint.
+Use Package Control to install **SublimeLinter** and its ESLint extension **[SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint)**.
 
-You have to open command-palette via `Cmd/Ctrl+Shift+P` and type `Preferences: SublimeLinter Settings`, paste to the config on the right side:
+In the menu go to `Preferences > Package Settings > SublimeLinter > Settings` and paste in this:
 
 ```json
 {
