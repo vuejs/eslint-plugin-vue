@@ -146,6 +146,7 @@ For example:
 | [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
 | [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements |  |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
