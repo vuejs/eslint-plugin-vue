@@ -159,6 +159,7 @@ For example:
 | [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
+| [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
