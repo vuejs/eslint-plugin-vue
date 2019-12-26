@@ -7,6 +7,8 @@ description: disallow irregular whitespace
 # vue/no-irregular-whitespace
 > disallow irregular whitespace
 
+## :book: Rule Details
+
 `vue/no-irregular-whitespace` rule is aimed at catching invalid whitespace that is not a normal tab and space. Some of these characters may cause issues in modern browsers and others will be a debugging issue to spot.
 `vue/no-irregular-whitespace` rule is the similar rule as core [no-irregular-whitespace] rule but it applies to the source code in .vue.
 

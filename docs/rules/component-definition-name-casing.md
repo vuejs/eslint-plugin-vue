@@ -9,9 +9,11 @@ description: enforce specific casing for component definition name
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
+Define a style for component definition name casing for consistency purposes.
+
 ## :book: Rule Details
 
-Define a style for component definition name casing for consistency purposes.
+This rule aims to warn the component definition names other than the configured casing.
 
 ## :wrench: Options
 
