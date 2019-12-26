@@ -44,6 +44,56 @@ ruleTester.run('require-prop-type-constructor', rule, {
           }
         }
       `
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+        export default {
+          props: {
+            name: [String,,]
+          }
+        }
+      `
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+        export default {
+          props: {
+            name: {
+              type: [String,,]
+            }
+          }
+        }
+      `
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+        export default {
+          props: {
+            name: [String,,Number]
+          }
+        }
+      `
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+        export default {
+          props: {
+            name: [,,Number]
+          }
+        }
+      `
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+        export default {
+          props: ['name',,,]
+        }
+      `
     }
   ],
 
@@ -163,6 +213,28 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [{
         message: 'The "a" property should be a constructor.',
         line: 5
+      }],
+      parser: require.resolve('@typescript-eslint/parser')
+    },
+    {
+      filename: 'ExtraCommas.vue',
+      code: `
+      export default {
+        props: {
+          name: ['String',,]
+        }
+      }
+      `,
+      output: `
+      export default {
+        props: {
+          name: [String,,]
+        }
+      }
+      `,
+      errors: [{
+        message: 'The "name" property should be a constructor.',
+        line: 4
       }],
       parser: require.resolve('@typescript-eslint/parser')
     }
