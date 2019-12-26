@@ -300,13 +300,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: `
-        export default {
-          props: {
-            greetingText: String
-          }
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greeting_text" is not in camelCase.',
@@ -324,13 +317,6 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      output: `
-        export default {
-          props: {
-            greetingText: String
-          }
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greeting_text" is not in camelCase.',
@@ -346,11 +332,6 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      output: `
-        export default {
-          props: ['greetingText']
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greeting_text" is not in camelCase.',
@@ -368,13 +349,6 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      output: `
-        export default {
-          props: {
-            greeting_text: String
-          }
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greetingText" is not in snake_case.',
@@ -392,13 +366,6 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      output: `
-        export default {
-          props: {
-            'greetingText': String
-          }
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greeting-text" is not in camelCase.',
@@ -416,13 +383,6 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      output: `
-        export default {
-          props: {
-            'greeting_text': String
-          }
-        }
-      `,
       parserOptions,
       errors: [{
         message: 'Prop "greeting-text" is not in snake_case.',
@@ -436,13 +396,6 @@ ruleTester.run('prop-name-casing', rule, {
         export default {
           props: {
             'greeting_text': String
-          }
-        }
-      `,
-      output: `
-        export default {
-          props: {
-            'greetingText': String
           }
         }
       `,
@@ -463,7 +416,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
       parserOptions,
       errors: [{
         message: 'Prop "greeting-text" is not in camelCase.',
@@ -481,7 +433,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
       parserOptions,
       errors: [{
         message: 'Prop "greeting_text" is not in camelCase.',
@@ -499,7 +450,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
       parserOptions,
       errors: [{
         message: 'Prop "\u{1F37B}" is not in camelCase.',
@@ -517,7 +467,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
       parserOptions,
       errors: [{
         message: 'Prop "漢字" is not in camelCase.',
@@ -531,13 +480,6 @@ ruleTester.run('prop-name-casing', rule, {
         export default {
           props: {
             'abc-123-def': String
-          }
-        }
-      `,
-      output: `
-        export default {
-          props: {
-            'abc123Def': String
           }
         }
       `,
@@ -558,7 +500,6 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      output: null,
       parserOptions,
       errors: [{
         message: 'Prop "greeting-text" is not in camelCase.',

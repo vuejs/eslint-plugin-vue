@@ -18,8 +18,8 @@ yarn add -D eslint eslint-plugin-vue
 ```
 
 ::: tip Requirements
-- ESLint v5.0.0 or later
-- Node.js v6.5.0 or later
+- ESLint v6.0.0 and above
+- Node.js v8.10.0 and above
 :::
 
 ## :book: Usage
@@ -149,9 +149,9 @@ If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid
 
 #### Sublime Text
 
-Use the [SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint) extension that SublimeLinter provides for eslint.
+Use Package Control to install **SublimeLinter** and its ESLint extension **[SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint)**.
 
-Open the command-palette via `Cmd/Ctrl+Shift+P` and type `Preferences: SublimeLinter Settings`, and paste the config on the right side:
+In the menu go to `Preferences > Package Settings > SublimeLinter > Settings` and paste in this:
 
 ```json
 {
