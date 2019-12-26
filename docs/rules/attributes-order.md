@@ -15,27 +15,27 @@ description: enforce order of attributes
 This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
 
 - `DEFINITION`
-  ex: 'is'
+  e.g. 'is'
 - `LIST_RENDERING`
-  ex: 'v-for item in items'
+  e.g. 'v-for item in items'
 - `CONDITIONALS`
-  ex: 'v-if', 'v-else-if', 'v-else', 'v-show', 'v-cloak'
+  e.g. 'v-if', 'v-else-if', 'v-else', 'v-show', 'v-cloak'
 - `RENDER_MODIFIERS`
-  ex: 'v-once', 'v-pre'
+  e.g. 'v-once', 'v-pre'
 - `GLOBAL`
-  ex: 'id'
+  e.g. 'id'
 - `UNIQUE`
-  ex: 'ref', 'key', 'v-slot', 'slot'
+  e.g. 'ref', 'key', 'v-slot', 'slot'
 - `TWO_WAY_BINDING`
-  ex: 'v-model'
+  e.g. 'v-model'
 - `OTHER_DIRECTIVES`
-  ex: 'v-custom-directive'
+  e.g. 'v-custom-directive'
 - `OTHER_ATTR`
-  ex: 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
+  e.g. 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
 - `EVENTS`
-  ex: '@click="functionCall"', 'v-on="event"'
+  e.g. '@click="functionCall"', 'v-on="event"'
 - `CONTENT`
-  ex: 'v-text', 'v-html'
+  e.g. 'v-text', 'v-html'
 
 ### the default order
 
@@ -96,14 +96,14 @@ This rule aims to enforce ordering of component attributes. The default order is
     "order": [
       "DEFINITION",
       "LIST_RENDERING",
-      "CONDITIONALS", 
+      "CONDITIONALS",
       "RENDER_MODIFIERS",
-      "GLOBAL", 
-      "UNIQUE", 
-      "TWO_WAY_BINDING", 
-      "OTHER_DIRECTIVES", 
-      "OTHER_ATTR", 
-      "EVENTS", 
+      "GLOBAL",
+      "UNIQUE",
+      "TWO_WAY_BINDING",
+      "OTHER_DIRECTIVES",
+      "OTHER_ATTR",
+      "EVENTS",
       "CONTENT"
     ]
   }]

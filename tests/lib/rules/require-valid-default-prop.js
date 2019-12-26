@@ -114,7 +114,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser'
+      parser: require.resolve('@typescript-eslint/parser')
     }
   ],
 
@@ -442,7 +442,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       });`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: 'typescript-eslint-parser',
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: errorMessage('function or number')
     },
 

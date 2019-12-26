@@ -49,7 +49,7 @@ This rule does not check syntax errors in directives because it's checked by [no
 
 ```json
 {
-  "vue/prop-name-casing": ["error", {
+  "vue/valid-v-on": ["error", {
     "modifiers": []
   }]
 }

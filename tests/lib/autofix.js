@@ -5,6 +5,7 @@
 'use strict'
 
 const Linter = require('eslint').Linter
+const parser = require('vue-eslint-parser')
 const chai = require('chai')
 
 const rules = require('../..').rules
@@ -24,6 +25,7 @@ const baseConfig = {
 
 describe('Complex autofix test cases', () => {
   const linter = new Linter()
+  linter.defineParser('vue-eslint-parser', parser)
   for (const key of Object.keys(rules)) {
     const ruleId = `vue/${key}`
     linter.defineRule(ruleId, rules[key])

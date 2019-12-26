@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/no-unused-components')
 // ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'

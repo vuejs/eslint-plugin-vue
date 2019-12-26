@@ -11,65 +11,79 @@ description: enforce or forbid parentheses after method calls without arguments 
 
 ## :book: Rule Details
 
-:-1: Example of **incorrect** code for this rule:
+This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` when without arguments.
 
-```html
-<button v-on:click="closeModal()">
-  Close
-</button>
+<eslint-code-block fix :rules="{'vue/v-on-function-call': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="closeModal">
+    Close
+  </button>
+
+  <!-- ✗ BAD -->
+  <button v-on:click="closeModal()">
+    Close
+  </button>
+</template>
 ```
 
-:+1: Example of **correct** code for this rule:
-
-```html
-<button v-on:click="closeModal">
-  Close
-</button>
-```
+</eslint-code-block>
 
 ## :wrench: Options
 
 Default is set to `never`.
 
-```
-'vue/v-on-function-call': [2, 'always'|'never']
+```json
+{
+  "vue/v-on-function-call": ["error", "always"|"never"]
+}
 ```
 
 ### `"always"` - Always use parentheses in `v-on` directives
 
-:-1: Example of **incorrect** code:
+<eslint-code-block fix :rules="{'vue/v-on-function-call': ['error', 'always']}">
 
-```html
-<button v-on:click="closeModal">
-  Close
-</button>
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="closeModal()">
+    Close
+  </button>
+
+  <!-- ✗ BAD -->
+  <button v-on:click="closeModal">
+    Close
+  </button>
+</template>
 ```
 
-:+1: Example of **correct** code:
-
-```html
-<button v-on:click="closeModal()">
-  Close
-</button>
-```
+</eslint-code-block>
 
 ### `"never"` - Never use parentheses in `v-on` directives for method calls without arguments
 
-:-1: Example of **incorrect** code:
 
-```html
-<button v-on:click="closeModal()">
-  Close
-</button>
+<eslint-code-block fix :rules="{'vue/v-on-function-call': ['error', 'never']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="closeModal">
+    Close
+  </button>
+  <button v-on:click="closeModal(arg)">
+    Close
+  </button>
+
+  <!-- ✗ BAD -->
+  <button v-on:click="closeModal()">
+    Close
+  </button>
+</template>
 ```
 
-:+1: Example of **correct** code:
-
-```html
-<button v-on:click="closeModal">
-  Close
-</button>
-```
+</eslint-code-block>
 
 ## :mag: Implementation
 

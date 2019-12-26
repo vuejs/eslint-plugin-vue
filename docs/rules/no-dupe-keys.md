@@ -51,7 +51,7 @@ export default {
 }
 ```
 
-- `"groups"` (`string[]`) Array of additional groups to search for duplicates. Defailt is empty.
+- `"groups"` (`string[]`) Array of additional groups to search for duplicates. Default is empty.
 
 ### `"groups": ["firebase"]`
 
