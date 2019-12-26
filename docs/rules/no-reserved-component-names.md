@@ -24,6 +24,10 @@ export default {
 
 </eslint-code-block>
 
+## :wrench: Options
+
+Nothing.
+
 ## :books: Further reading
 
 - [List of html elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)

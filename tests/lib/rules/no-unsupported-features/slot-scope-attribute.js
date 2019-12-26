@@ -10,7 +10,7 @@ const utils = require('./utils')
 
 const buildOptions = utils.optionsBuilder('slot-scope-attribute', '^2.4.0')
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2019
   }
