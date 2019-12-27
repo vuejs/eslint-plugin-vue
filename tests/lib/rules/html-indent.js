@@ -40,6 +40,14 @@ function loadPatterns(additionalValid, additionalInvalid) {
     const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
     const code = code0.replace(/^<!--(.+?)-->/, `<!--${filename}-->`)
     const baseObj = JSON.parse(/^<!--(.+?)-->/.exec(code0)[1])
+    if ('parser' in baseObj) {
+      baseObj.parser = require.resolve(baseObj.parser)
+    }
+    if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
+      baseObj.parserOptions.parser = require.resolve(
+        baseObj.parserOptions.parser
+      )
+    }
     return Object.assign(baseObj, { code, filename })
   })
   const invalid = valid
@@ -104,7 +112,7 @@ function unIndent(strings) {
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2020,
     ecmaFeatures: {
       globalReturn: true
     }

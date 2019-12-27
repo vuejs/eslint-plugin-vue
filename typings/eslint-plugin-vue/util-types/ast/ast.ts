@@ -259,6 +259,10 @@ export type ESNodeListenerMap = {
   'ImportNamespaceSpecifier:exit': ES.ImportNamespaceSpecifier
   ExportSpecifier: ES.ExportSpecifier
   'ExportSpecifier:exit': ES.ExportSpecifier
+  ImportExpression: ES.ImportExpression
+  'ImportExpression:exit': ES.ImportExpression
+  ChainExpression: ES.ChainExpression
+  'ChainExpression:exit': ES.ChainExpression
 
   TSAsExpression: TS.TSAsExpression
   'TSAsExpression:exit': TS.TSAsExpression
