@@ -136,6 +136,12 @@ ruleTester.run('component-definition-name-casing', rule, {
       code: `Vue.component(\`fooBar\${foo}\`, component)`,
       options: ['kebab-case'],
       parserOptions
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1018
+    {
+      filename: 'test.js',
+      code: `fn1(component.data)`,
+      parserOptions
     }
   ],
 
