@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "6.0.2",
+  "version": "6.1.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
