@@ -531,6 +531,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ shouldMatchCase: true }],
       parserOptions: jsxParserOptions
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1018
+    {
+      filename: 'test.jsx',
+      code: `fn1(component.data)`,
+      parserOptions
     }
   ],
 

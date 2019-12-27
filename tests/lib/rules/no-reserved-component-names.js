@@ -311,6 +311,12 @@ ruleTester.run('no-reserved-component-names', rule, {
       `,
       parser: require.resolve('vue-eslint-parser'),
       parserOptions
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1018
+    {
+      filename: 'test.js',
+      code: `fn1(component.data)`,
+      parserOptions
     }
   ],
 
