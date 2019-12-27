@@ -756,6 +756,25 @@ tester.run('html-indent', rule, loadPatterns(
         { message: 'Expected indentation of 4 spaces but found 0 spaces.', line: 7 },
         { message: 'Expected indentation of 2 spaces but found 0 spaces.', line: 8 }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: unIndent`
+        <template>
+        \t <div attr1
+        \t\t attr2/>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+        \t<div attr1
+        \t\t attr2/>
+        </template>
+      `,
+      options: ['tab', { 'ignores': ['VAttribute'] }],
+      errors: [
+        { message: 'Expected "\\t" character, but found " " character.', line: 2 }
+      ]
     }
   ]
 ))
