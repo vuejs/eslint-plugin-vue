@@ -1,0 +1,19 @@
+<!--{"options":[2,{"ignores": ["VAttribute"]}]}-->
+<template>
+  <div>
+    <div
+attr1="a">
+    </div>
+    <div
+attr2>
+    </div>
+    <div
+:attr3="a">
+    </div>
+    <div
+:attr4="
+a
+">
+    </div>
+  </div>
+</template>
