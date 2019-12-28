@@ -199,7 +199,7 @@ If you already use another parser (e.g. `"parser": "babel-eslint"`), please move
   }
 ```
 
-See also: "[Use together with custom parsers](#use-together-with-custom-parsers)" section.
+See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 ### Why doesn't it work on .vue files?
 
