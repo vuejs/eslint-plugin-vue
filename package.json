@@ -47,7 +47,8 @@
     "eslint": "^5.0.0 || ^6.0.0"
   },
   "dependencies": {
-    "vue-eslint-parser": "^7.0.0"
+    "vue-eslint-parser": "^7.0.0",
+    "semver": "^5.6.0"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
@@ -64,7 +65,6 @@
     "lodash": "^4.17.4",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
-    "semver": "^5.6.0",
     "typescript": "^3.5.2",
     "vue-eslint-editor": "^0.1.4",
     "vuepress": "^0.14.5"
