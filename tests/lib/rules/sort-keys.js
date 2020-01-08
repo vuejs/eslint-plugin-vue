@@ -36,6 +36,29 @@ ruleTester.run('sort-keys', rule, {
       parserOptions
     },
     {
+      filename: 'propsOrder.vue',
+      code: `
+        export default {
+          name: 'app',
+          model: {
+            prop: 'checked',
+            event: 'change'
+          },
+          props: {
+            propA: {
+              type: String,
+              default: 'abc',
+            },
+            propB: {
+              type: String,
+              default: 'abc',
+            },
+          },
+        }
+      `,
+      parserOptions
+    },
+    {
       filename: 'test.vue',
       code: `
         export default {}
@@ -932,6 +955,39 @@ ruleTester.run('sort-keys', rule, {
     {
       filename: 'example.vue',
       code: `
+        export default {
+          methods: {
+            toggleMenu() {
+              return {
+                // These should have errors since they are not part of the vue component
+                model: {
+                  prop: 'checked',
+                  event: 'change'
+                },
+                props: {
+                  propA: {
+                    z: 1,
+                    a: 2
+                  },
+                },
+              };
+            }
+          },
+          name: 'burger',
+        };
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Expected object keys to be in ascending order. \'event\' should be before \'prop\'.',
+        line: 9
+      }, {
+        message: 'Expected object keys to be in ascending order. \'a\' should be before \'z\'.',
+        line: 14
+      }]
+    },
+    {
+      filename: 'example.vue',
+      code: `
         const dict = { zd: 1, a: 2 };
 
         export default {
@@ -1056,6 +1112,26 @@ ruleTester.run('sort-keys', rule, {
       {
         message: 'Expected object keys to be in ascending order. \'msg\' should be before \'z\'.',
         line: 9
+      }]
+    },
+    {
+      filename: 'propsOrder.vue',
+      code: `
+        export default {
+          name: 'app',
+          props: {
+            propA: {
+              type: String,
+              default: 'abc',
+            },
+          },
+        }
+      `,
+      options: ['asc', { ignoreGrandchildrenOf: [] }],
+      parserOptions,
+      errors: [{
+        message: 'Expected object keys to be in ascending order. \'default\' should be before \'type\'.',
+        line: 7
       }]
     }
   ]
