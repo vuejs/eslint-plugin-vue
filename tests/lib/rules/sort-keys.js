@@ -1156,14 +1156,19 @@ ruleTester.run('sort-keys', rule, {
           foo() {
             Vue.component('my-component', {
               name: 'app',
+              data: {}
             })
-          }
+          },
+          a: 2
         }
       `,
       parserOptions,
       errors: [{
         message: 'Expected object keys to be in ascending order. \'foo\' should be before \'z\'.',
         line: 4
+      }, {
+        message: 'Expected object keys to be in ascending order. \'a\' should be before \'foo\'.',
+        line: 10
       }]
     },
     {
