@@ -13,7 +13,13 @@ This rule is almost the same rule as core [sorts-keys] rule but it will not erro
 
 ```json
 {
-    "sort-keys": ["error", "asc", {"caseSensitive": true, "natural": false, "minKeys": 2}]
+    "sort-keys": ["error", "asc", {
+        "caseSensitive": true,
+        "ignoreChildrenOf": ["model"],
+        "ignoreGrandchildrenOf": ["computed", "directives", "inject", "props", "watch"],
+        "minKeys": 2,
+        "natural": false
+  }]
 }
 ```
 
@@ -25,8 +31,8 @@ The 1st option is `"asc"` or `"desc"`.
 The 2nd option is an object which has 5 properties.
 
 * `caseSensitive` - if `true`, enforce properties to be in case-sensitive order. Default is `true`.
-* `ignoreChildrenOf` - an array of properties to ignore the children of.  Default is `['model']`
-* `ignoreGrandchildrenOf` - an array of properties to ignore the grandchildren sort order. Default is `['computed', 'directives', 'inject', 'props', 'watch']`
+* `ignoreChildrenOf` - an array of properties to ignore the children of.  Default is `["model"]`
+* `ignoreGrandchildrenOf` - an array of properties to ignore the grandchildren sort order. Default is `["computed", "directives", "inject", "props", "watch"]`
 * `minKeys` - Specifies the minimum number of keys that an object should have in order for the object's unsorted keys to produce an error. Default is `2`, which means by default all objects with unsorted keys will result in lint errors.
 * `natural` - if `true`, enforce properties to be in natural order. Default is `false`. Natural Order compares strings containing combination of letters and numbers in the way a human being would sort. It basically sorts numerically, instead of sorting alphabetically. So the number 10 comes after the number 3 in Natural Sorting.
 

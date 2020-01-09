@@ -20,6 +20,20 @@ ruleTester.run('sort-keys', rule, {
     {
       filename: 'test.vue',
       code: `
+        const obj = {
+          foo() {
+            Vue.component('my-component', {
+              name: 'app',
+              data() {}
+            })
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
         export default {
           name: 'app',
           props: {
@@ -1131,6 +1145,44 @@ ruleTester.run('sort-keys', rule, {
       parserOptions,
       errors: [{
         message: 'Expected object keys to be in ascending order. \'default\' should be before \'type\'.',
+        line: 7
+      }]
+    },
+    {
+      filename: 'propsOrder.vue',
+      code: `
+        const obj = {
+          z: 1,
+          foo() {
+            Vue.component('my-component', {
+              name: 'app',
+            })
+          }
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Expected object keys to be in ascending order. \'foo\' should be before \'z\'.',
+        line: 4
+      }]
+    },
+    {
+      filename: 'propsOrder.vue',
+      code: `
+        export default {
+          computed: {
+            foo () {
+              return {
+                b,
+                a
+              }
+            }
+          }
+        }
+      `,
+      parserOptions,
+      errors: [{
+        message: 'Expected object keys to be in ascending order. \'a\' should be before \'b\'.',
         line: 7
       }]
     }
