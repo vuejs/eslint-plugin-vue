@@ -9,8 +9,7 @@ description: require component name property to match its file name
 
 This rule reports if a component `name` property does not match its file name.
 
-You can define an array of file extensions this rule should verify for 
-the component's name.
+You can define an array of file extensions this rule should verify for the component's name.
 
 ## :book: Rule Details
 
@@ -27,7 +26,7 @@ This rule has some options.
 
 By default this rule will only verify components in a file with a `.jsx` extension.
 
-You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions.
+You can use any combination of `".js"`, `".jsx"`, `".ts"`, `".tsx"`, and `".vue"` extensions.
 
 You can also enforce same case between the component's name and its file name.
 
