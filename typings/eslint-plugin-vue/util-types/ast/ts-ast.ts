@@ -8,4 +8,5 @@ export type TSNode = TSAsExpression
 export interface TSAsExpression extends HasParentNode {
   type: 'TSAsExpression'
   expression: ES.Expression
+  typeAnnotation: any;
 }
