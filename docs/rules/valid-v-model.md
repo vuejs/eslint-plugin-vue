@@ -15,7 +15,7 @@ This rule checks whether every `v-model` directive is valid.
 
 This rule reports `v-model` directives in the following cases:
 
-- The directive has that argument. E.g. `<input v-model:aaa="foo">`
+- The directive used on HTMLElement has an argument. E.g. `<input v-model:aaa="foo">`
 - The directive has the modifiers which are not supported. E.g. `<input v-model.bbb="foo">`
 - The directive does not have that attribute value. E.g. `<input v-model>`
 - The directive does not have the attribute value which is valid as LHS. E.g. `<input v-model="foo() + bar()">`
@@ -32,6 +32,7 @@ This rule reports `v-model` directives in the following cases:
   <input v-model.lazy="foo">
   <textarea v-model="foo"/>
   <MyComponent v-model="foo"/>
+  <MyComponent v-model:propName="foo"/>
   <div v-for="todo in todos">
     <input v-model="todo.name">
   </div>
