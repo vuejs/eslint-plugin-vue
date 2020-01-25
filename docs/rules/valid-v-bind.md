@@ -54,6 +54,14 @@ Nothing.
 
 [no-parsing-error]: no-parsing-error.md
 
+- [no-deprecated-v-bind-sync]
+
+[no-deprecated-v-bind-sync]: no-deprecated-v-bind-sync.md
+
+- [valid-v-bind-sync]
+
+[valid-v-bind-sync]: valid-v-bind-sync.md
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-bind.js)
