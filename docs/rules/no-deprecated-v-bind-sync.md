@@ -7,11 +7,13 @@ description: disallow use of deprecated `.sync` modifier on `v-bind` directive (
 # vue/no-deprecated-v-bind-sync
 > disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
 
-<eslint-code-block :rules="{'vue/no-deprecated-v-bind-sync': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-deprecated-v-bind-sync': ['error']}">
 
 ```vue
 <template>
@@ -22,6 +24,7 @@ This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in V
 
   <!-- ✗ BAD -->
   <MyComponent v-bind:propName.sync="foo"/>
+  <MyComponent v-bind:[dynamiArg].sync="foo"/>
   <MyComponent v-bind.sync="foo"/>
   <MyComponent :propName.sync="foo"/>
 </template>
