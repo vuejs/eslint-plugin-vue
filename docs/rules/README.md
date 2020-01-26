@@ -39,6 +39,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
+| [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  |
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
