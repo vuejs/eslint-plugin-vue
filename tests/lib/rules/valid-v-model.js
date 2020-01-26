@@ -118,6 +118,22 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model:aaa="a"></MyComponent></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model:aaa.modifier="a"></MyComponent></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model.modifier="a"></MyComponent></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model:aaa.modifier.modifierTwo="a"></MyComponent></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model.modifier.modifierTwo="a"></MyComponent></template>'
     }
   ],
   invalid: [
