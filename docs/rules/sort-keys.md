@@ -101,7 +101,7 @@ export default {
 
 - [sorts-keys]
 
-[sorts-keys]: https://eslint.org/docs/rules/sorts-keys
+[sort-keys]: https://eslint.org/docs/rules/sort-keys
 
 ## :mag: Implementation
 
