@@ -6,6 +6,9 @@
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        { "language": "vue", "autoFix": true }
-    ]
+        "vue",
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
