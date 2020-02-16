@@ -168,6 +168,7 @@ For example:
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
+| [vue/sort-keys](./sort-keys.md) | enforce sort-keys within components after the top level details |  |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
