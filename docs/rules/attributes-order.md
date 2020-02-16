@@ -105,10 +105,56 @@ This rule aims to enforce ordering of component attributes. The default order is
       "OTHER_ATTR",
       "EVENTS",
       "CONTENT"
-    ]
+    ],
+    "alphabetical": true
   }]
 }
 ```
+
+### Alphabetical order 
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+    <div
+      a-custom-prop="value"
+      :another-custom-prop="value"
+      :blue-color="false"
+      boolean-prop
+      z-prop="Z"
+      v-on:[c]="functionCall"
+      @change="functionCall"
+      v-on:click="functionCall"
+      @input="functionCall"
+      v-text="textContent">
+    </div>
+
+  <!-- ✗ BAD -->
+    <div
+      z-prop="Z"
+      a-prop="A">
+    </div>
+
+    <div
+      @input="bar"
+      @change="foo">
+    </div>
+
+    <div
+      v-on:click="functionCall"
+      v-on:[c]="functionCall">
+    </div>
+
+    <div
+      :a-prop="A"
+      :z-prop="Z">
+    </div>
+
+</template>
+```
+
+</eslint-code-block>
 
 ### Custom orders
 
