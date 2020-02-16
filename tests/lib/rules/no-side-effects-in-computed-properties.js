@@ -143,6 +143,36 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test () {
+            return {
+              action1() {
+                this.something++
+              },
+              action2() {
+                this.something = 1
+              },
+              action3() {
+                this.something.reverse()
+              }
+            }
+          },
+        }
+      })`,
+      parserOptions
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test () {
+            return this.something['a']().reverse()
+          },
+        }
+      })`,
+      parserOptions
     }
   ],
   invalid: [
