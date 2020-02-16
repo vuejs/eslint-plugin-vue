@@ -43,12 +43,18 @@ Default is set to `double`.
 
 ```json
 {
-  "vue/html-quotes": ["error", "double" | "single"]
+  "vue/html-quotes": [ "error", "double" | "single", { "avoidEscape": false } ]
 }
 ```
 
+String option:
+
 - `"double"` (default) ... requires double quotes.
 - `"single"` ... requires single quotes.
+
+Object option:
+
+- `avoidEscape` ... If `true`, allows strings to use single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise.
 
 ### `"single"`
 
@@ -62,6 +68,23 @@ Default is set to `double`.
   <!-- ✗ BAD -->
   <img src="./logo.png">
   <img src=./logo.png>
+</template>
+```
+
+</eslint-code-block>
+
+### `"double", { "avoidEscape": true }`
+
+<eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'double', { avoidEscape: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <img title='a string containing "double" quotes'>
+
+  <!-- ✗ BAD -->
+  <img title='foo'>
+  <img title=bar>
 </template>
 ```
 
