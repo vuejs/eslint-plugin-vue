@@ -5,11 +5,11 @@ title: vue/sort-keys
 description: enforce sort-keys in a manner that is compatible with order-in-components
 ---
 # vue/sort-keys
-> enforce sort-keys within components after the top level details
+> enforce sort-keys in a manner that is compatible with order-in-components
 
-This rule is almost the same rule as core [sorts-keys] rule but it will not error on top component properties allowing that order to be enforced with `order-in-components`.
+This rule is almost the same rule as core [sort-keys] rule but it will not error on top component properties allowing that order to be enforced with `order-in-components`.
 
-## Options
+## :wrench: Options
 
 ```json
 {
@@ -43,7 +43,7 @@ While using this rule, you may disable the normal `sort-keys` rule.  This rule w
 This rule forces many dictionary properties to be in alphabetical order while allowing `order-in-components`, property details,
 and other similar fields not to be in alphabetical order.
 
-<eslint-code-block fix :rules="{'vue/sort-keys': ['error']}">
+<eslint-code-block :rules="{'vue/sort-keys': ['error']}">
 
 ```vue
 <script>
@@ -70,7 +70,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/sort-keys': ['error']}">
+<eslint-code-block :rules="{'vue/sort-keys': ['error']}">
 
 ```vue
 <script>
@@ -99,7 +99,7 @@ export default {
 
 ## :books: Further reading
 
-- [sorts-keys]
+- [sort-keys]
 
 [sort-keys]: https://eslint.org/docs/rules/sort-keys
 
