@@ -345,6 +345,39 @@ tester.run('attributes-order', rule, {
           </div>
         </template>`,
       options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-if="foo"
+            v-show="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-bar="bar"
+            v-foo="foo">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-foo.a="a"
+            v-foo.b="b">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
     }
   ],
 
@@ -831,6 +864,69 @@ tester.run('attributes-order', rule, {
         </template>`,
       errors: [{
         message: 'Attribute "class" should go before ":class".'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-show="foo"
+            v-if="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }],
+      output:
+        `<template>
+          <div
+            v-if="bar"
+            v-show="foo">
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "v-if" should go before "v-show".'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-foo="foo"
+            v-bar="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }],
+      output:
+        `<template>
+          <div
+            v-bar="bar"
+            v-foo="foo">
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "v-bar" should go before "v-foo".'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            v-foo.b="b"
+            v-foo.a="a">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }],
+      output:
+        `<template>
+          <div
+            v-foo.a="a"
+            v-foo.b="b">
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "v-foo.a" should go before "v-foo.b".'
       }]
     }
   ]
