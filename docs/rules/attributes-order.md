@@ -106,12 +106,13 @@ This rule aims to enforce ordering of component attributes. The default order is
       "EVENTS",
       "CONTENT"
     ],
-    "alphabetical": true
+    "alphabetical": false
   }]
 }
 ```
 
-### Alphabetical order 
+### `"alphabetical": true` 
+
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
 
 ```vue
@@ -122,6 +123,8 @@ This rule aims to enforce ordering of component attributes. The default order is
       :another-custom-prop="value"
       :blue-color="false"
       boolean-prop
+      class="foo"
+      :class="bar"
       z-prop="Z"
       v-on:[c]="functionCall"
       @change="functionCall"
@@ -147,8 +150,13 @@ This rule aims to enforce ordering of component attributes. The default order is
     </div>
 
     <div
-      :a-prop="A"
-      :z-prop="Z">
+      :z-prop="Z"
+      :a-prop="A">
+    </div>
+
+    <div
+      :class="foo"
+      class="bar">
     </div>
 
 </template>
