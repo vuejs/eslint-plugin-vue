@@ -312,6 +312,39 @@ tester.run('attributes-order', rule, {
           </div>
         </template>`,
       options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            class="foo"
+            :class="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'duplicate.vue',
+      code:
+        `<template>
+          <div
+            class="foo"
+            class="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'duplicate.vue',
+      code:
+        `<template>
+          <div
+            :class="foo"
+            :class="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }]
     }
   ],
 
@@ -777,6 +810,27 @@ tester.run('attributes-order', rule, {
       errors: [{
         message: 'Attribute "v-on:click" should go before "v-text".',
         type: 'VDirectiveKey'
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        `<template>
+          <div
+            :class="foo"
+            class="bar">
+          </div>
+        </template>`,
+      options: [{ alphabetical: true }],
+      output:
+        `<template>
+          <div
+            class="bar"
+            :class="foo">
+          </div>
+        </template>`,
+      errors: [{
+        message: 'Attribute "class" should go before ":class".'
       }]
     }
   ]
