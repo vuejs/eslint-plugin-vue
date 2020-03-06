@@ -8,6 +8,7 @@
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
+    "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "pretest": "npm run lint",
     "preversion": "npm test && npm run update && git add .",
@@ -47,9 +48,10 @@
     "eslint": "^5.0.0 || ^6.0.0"
   },
   "dependencies": {
+    "eslint-utils": "^2.0.0",
     "natural-compare": "^1.4.0",
-    "vue-eslint-parser": "^7.0.0",
-    "semver": "^5.6.0"
+    "semver": "^5.6.0",
+    "vue-eslint-parser": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",
