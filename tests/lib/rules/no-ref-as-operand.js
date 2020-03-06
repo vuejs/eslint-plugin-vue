@@ -55,9 +55,30 @@ tester.run('no-ref-as-operand', rule, {
     `,
     `
     import { ref } from 'vue'
+    const foo = ref(true)
+    if (bar) foo
+    `,
+    `
+    import { ref } from 'vue'
+    const foo = ref(true)
+    var a = other || foo // ignore
+    var b = other && foo // ignore
+
+    let bar = ref(true)
+    var a = bar || other
+    var b = bar || other
+    `,
+    `
+    import { ref } from 'vue'
     let count = not_ref(0)
 
     count++
+    `,
+    `
+    import { ref } from 'vue'
+    const foo = ref(0)
+    const bar = ref(0)
+    var baz = x ? foo : bar
     `,
     `
     import { ref } from 'vue'
@@ -76,6 +97,11 @@ tester.run('no-ref-as-operand', rule, {
     `
     import { ref } from 'unknown'
     const count = ref(0)
+    count++
+    `,
+    `
+    import { ref } from 'vue'
+    const count = ref
     count++
     `
   ],
@@ -244,11 +270,9 @@ tester.run('no-ref-as-operand', rule, {
     {
       code: `
       import { ref } from 'vue'
-      let foo = ref(true)
+      const foo = ref(true)
       var a = foo || other
       var b = foo && other
-      var c = other || foo // ignore
-      var d = other && foo // ignore
       `,
       errors: [
         {
