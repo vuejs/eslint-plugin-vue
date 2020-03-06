@@ -37,6 +37,46 @@ tester.run('no-ref-as-operand', rule, {
         }
       }
     </script>
+    `,
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    if (count.value) {}
+    switch (count.value) {}
+    var foo = -count.value
+    var foo = +count.value
+    count.value++
+    count.value--
+    count.value + 1
+    1 - count.value
+    count.value || other
+    count.value && other
+    var foo = count.value ? x : y
+    `,
+    `
+    import { ref } from 'vue'
+    let count = not_ref(0)
+
+    count++
+    `,
+    `
+    import { ref } from 'vue'
+    // Probably wrong, but not checked by this rule.
+    const {value} = ref(0)
+    value++
+    `,
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    function foo() {
+      let count = 0
+      count++
+    }
+    `,
+    `
+    import { ref } from 'unknown'
+    const count = ref(0)
+    count++
     `
   ],
   invalid: [
@@ -51,21 +91,21 @@ tester.run('no-ref-as-operand', rule, {
       `,
       errors: [
         {
-          messageId: 'requireDotValue',
+          message: 'Must use `.value` to read or write the value wrapped with `ref()`.',
           line: 5,
           column: 7,
           endLine: 5,
           endColumn: 12
         },
         {
-          messageId: 'requireDotValue',
+          message: 'Must use `.value` to read or write the value wrapped with `ref()`.',
           line: 6,
           column: 19,
           endLine: 6,
           endColumn: 24
         },
         {
-          messageId: 'requireDotValue',
+          message: 'Must use `.value` to read or write the value wrapped with `ref()`.',
           line: 7,
           column: 23,
           endLine: 7,
@@ -112,6 +152,157 @@ tester.run('no-ref-as-operand', rule, {
           column: 29,
           endLine: 10,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      if (foo) {
+        //
+      }
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      switch (foo) {
+        //
+      }
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      const foo = ref(0)
+      var a = -foo
+      var b = +foo
+      var c = !foo
+      var d = ~foo
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 5
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 6
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 7
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      let foo = ref(0)
+      foo += 1
+      foo -= 1
+      baz += foo
+      baz -= foo
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 5
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 6
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 7
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      let foo = ref(true)
+      var a = foo || other
+      var b = foo && other
+      var c = other || foo // ignore
+      var d = other && foo // ignore
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 5
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+      let foo = ref(true)
+      var a = foo ? x : y
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref } from 'vue'
+        let count = ref(0)
+        export default {
+          setup() {
+            count++ // error
+            console.log(count + 1) // error
+            console.log(1 + count) // error
+            return {
+              count
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 7
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 8
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 9
         }
       ]
     }
