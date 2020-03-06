@@ -45,6 +45,50 @@ ruleTester.run('no-reserved-keys', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => {
+            return {
+              dat: null
+            }
+          },
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => ({
+            dat: null
+          }),
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
@@ -71,6 +115,38 @@ ruleTester.run('no-reserved-keys', rule, {
           data: {
             _foo: String
           }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [{
+        message: "Keys starting with with '_' are reserved in '_foo' group.",
+        line: 4
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
+          data: () => {
+            return {
+              _foo: String
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [{
+        message: "Keys starting with with '_' are reserved in '_foo' group.",
+        line: 5
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
+          data: () => ({
+            _foo: String
+          })
         })
       `,
       parserOptions: { ecmaVersion: 6 },
