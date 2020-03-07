@@ -84,6 +84,10 @@ export default {
 
 </eslint-code-block>
 
+## :wrench: Options
+
+Nothing.
+
 ## :books: Further reading
 
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
