@@ -118,6 +118,7 @@ tester.run('no-setup-props-destructure', rule, {
         setup(props) {
           const {x} = noProps
           ({y} = noProps)
+          const z = noProps.z
         }
       }
       </script>
@@ -156,7 +157,7 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          message: 'Destructuring the `props` will cause the value to lose reactivity.',
+          messageId: 'destructuring',
           line: 4,
           column: 15,
           endLine: 4,
@@ -177,7 +178,7 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5,
           column: 17,
           endLine: 5,
@@ -198,7 +199,7 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5
         }
       ]
@@ -216,7 +217,7 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5
         }
       ]
@@ -240,11 +241,11 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5
         },
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 11
         }
       ]
@@ -265,7 +266,7 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5
         }
       ]
@@ -284,11 +285,48 @@ tester.run('no-setup-props-destructure', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
           line: 5
         },
         {
-          messageId: 'forbidden',
+          messageId: 'getProperty',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const foo = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          let foo
+          foo = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
           line: 6
         }
       ]
