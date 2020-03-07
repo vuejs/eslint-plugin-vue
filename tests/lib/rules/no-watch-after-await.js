@@ -45,6 +45,21 @@ tester.run('no-watch-after-await', rule, {
       filename: 'test.vue',
       code: `
       <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          watchEffect(() => { /* ... */ })
+          watch(() => { /* ... */ })
+          await doSomething()
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
       import {onMounted} from 'vue'
       export default {
         async _setup() {
@@ -79,6 +94,32 @@ tester.run('no-watch-after-await', rule, {
           column: 11,
           endLine: 8,
           endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          watchEffect(() => { /* ... */ })
+          watch(() => { /* ... */ })
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'forbidden',
+          line: 8
+        },
+        {
+          messageId: 'forbidden',
+          line: 9
         }
       ]
     },
