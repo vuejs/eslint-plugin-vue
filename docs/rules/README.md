@@ -162,6 +162,7 @@ For example:
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
+| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |

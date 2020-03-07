@@ -2,14 +2,14 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-setup-props-destructure
-description: disallow destructuring the `props` passed to `setup`
+description: disallow destructuring of `props` passed to `setup`
 ---
 # vue/no-setup-props-destructure
-> disallow destructuring the `props` passed to `setup`
+> disallow destructuring of `props` passed to `setup`
 
 ## :book: Rule Details
 
-This rule reports the destructuring the `props` passed to `setup` causing the value to lose reactivity.
+This rule reports the destructuring of `props` passed to `setup` causing the value to lose reactivity.
 
 <eslint-code-block :rules="{'vue/no-setup-props-destructure': ['error']}">
 
@@ -32,7 +32,7 @@ export default {
 
 </eslint-code-block>
 
-Destructuring the props passed to setup will cause the value to lose reactivity.
+Destructuring the `props` passed to `setup` will cause the value to lose reactivity.
 
 <eslint-code-block :rules="{'vue/no-setup-props-destructure': ['error']}">
 
