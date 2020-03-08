@@ -54,69 +54,82 @@ tester.run('no-unused-vars', rule, {
       code: '<template><div v-for="x in foo" :[x]></div></template>'
     },
     {
-      code: '<template><div v-for="_ in foo" ></div></template>'
+      code: '<template><div v-for="_ in foo" ></div></template>',
+      options: [{ varIgnorePattern: '^_' }]
+
     },
     {
       code: '<template><div v-for="_i in foo" ></div></template>'
+    },
+    {
+      code: '<template><div v-for="ignorei in foo" ></div></template>',
+      options: [{ varIgnorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><div v-for="thisisignore in foo" ></div></template>',
+      options: [{ varIgnorePattern: 'ignore$' }]
     }
   ],
   invalid: [
     {
       code: '<template><ol v-for="i in 5"><li></li></ol></template>',
-      errors: ["'i' is defined but never used."],
-      output: '<template><ol v-for="_i in 5"><li></li></ol></template>'
+      errors: ["'i' is defined but never used."]
     },
     {
       code: '<template><template scope="props"></template></template>',
-      errors: ["'props' is defined but never used."],
-      output: '<template><template scope="_props"></template></template>'
+      errors: ["'props' is defined but never used."]
     },
     {
       code: '<template><span slot-scope="props"></span></template>',
-      errors: ["'props' is defined but never used."],
-      output: '<template><span slot-scope="_props"></span></template>'
+      errors: ["'props' is defined but never used."]
     },
     {
       code: '<template><span><template scope="props"></template></span></template>',
-      errors: ["'props' is defined but never used."],
-      output: '<template><span><template scope="_props"></template></span></template>'
+      errors: ["'props' is defined but never used."]
     },
     {
       code: '<template><div v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></div></template>',
-      errors: ["'j' is defined but never used."],
-      output: '<template><div v-for="i in 5"><comp v-for="_j in 10">{{i}}{{i}}</comp></div></template>'
+      errors: ["'j' is defined but never used."]
     },
     {
       code: '<template><ol v-for="i in data"><li v-for="f in i"></li></ol></template>',
-      errors: ["'f' is defined but never used."],
-      output: '<template><ol v-for="i in data"><li v-for="_f in i"></li></ol></template>'
+      errors: ["'f' is defined but never used."]
     },
     {
       code: '<template><div v-for="(a, b, c) in foo"></div></template>',
-      errors: ["'a' is defined but never used.", "'b' is defined but never used.", "'c' is defined but never used."],
-      output: '<template><div v-for="(_a, _b, _c) in foo"></div></template>'
+      errors: ["'a' is defined but never used.", "'b' is defined but never used.", "'c' is defined but never used."]
 
     },
     {
       code: '<template><div v-for="(a, b, c) in foo">{{a}}</div></template>',
-      errors: ["'b' is defined but never used.", "'c' is defined but never used."],
-      output: '<template><div v-for="(a, _b, _c) in foo">{{a}}</div></template>'
+      errors: ["'b' is defined but never used.", "'c' is defined but never used."]
     },
     {
       code: '<template><div v-for="(a, b, c) in foo">{{b}}</div></template>',
-      errors: ["'c' is defined but never used."],
-      output: '<template><div v-for="(a, b, _c) in foo">{{b}}</div></template>'
+      errors: ["'c' is defined but never used."]
     },
     {
       code: '<template><div v-for="(item, key) in items" :key="item.id">{{item.name}}</div></template>',
-      errors: ["'key' is defined but never used."],
-      output: '<template><div v-for="(item, _key) in items" :key="item.id">{{item.name}}</div></template>'
+      errors: ["'key' is defined but never used."]
     },
     {
       code: '<template><div v-for="x in items">{{value | x}}</div></template>',
-      errors: ["'x' is defined but never used."],
-      output: '<template><div v-for="_x in items">{{value | x}}</div></template>'
-
+      errors: ["'x' is defined but never used."]
+    },
+    {
+      code: '<template><div v-for="x in items">{{value}}</div></template>',
+      options: [{ varIgnorePattern: 'ignore$' }],
+      errors: ["'x' is defined but never used."]
+    },
+    {
+      code: '<template><span slot-scope="props"></span></template>',
+      errors: ["'props' is defined but never used."],
+      options: [{ varIgnorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><span><template scope="props"></template></span></template>',
+      errors: ["'props' is defined but never used."],
+      options: [{ varIgnorePattern: '^ignore' }]
     }
   ]
 })
