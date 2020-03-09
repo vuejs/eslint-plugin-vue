@@ -55,19 +55,15 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="_ in foo" ></div></template>',
-      options: [{ varIgnorePattern: '^_' }]
-
-    },
-    {
-      code: '<template><div v-for="_i in foo" ></div></template>'
+      options: [{ ignorePattern: '^_' }]
     },
     {
       code: '<template><div v-for="ignorei in foo" ></div></template>',
-      options: [{ varIgnorePattern: '^ignore' }]
+      options: [{ ignorePattern: '^ignore' }]
     },
     {
       code: '<template><div v-for="thisisignore in foo" ></div></template>',
-      options: [{ varIgnorePattern: 'ignore$' }]
+      options: [{ ignorePattern: 'ignore$' }]
     }
   ],
   invalid: [
@@ -114,22 +110,33 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="x in items">{{value | x}}</div></template>',
-      errors: ["'x' is defined but never used."]
+      errors: [{
+        message: "'x' is defined but never used.",
+        suggestions: [{
+          desc: 'Replace the x with _x',
+          output: '<template><div v-for="_x in items">{{value | x}}</div></template>'
+        }]
+      }],
+      options: [{ ignorePattern: '^_' }]
     },
     {
       code: '<template><div v-for="x in items">{{value}}</div></template>',
-      options: [{ varIgnorePattern: 'ignore$' }],
+      options: [{ ignorePattern: 'ignore$' }],
       errors: ["'x' is defined but never used."]
     },
     {
       code: '<template><span slot-scope="props"></span></template>',
       errors: ["'props' is defined but never used."],
-      options: [{ varIgnorePattern: '^ignore' }]
+      options: [{ ignorePattern: '^ignore' }]
     },
     {
       code: '<template><span><template scope="props"></template></span></template>',
       errors: ["'props' is defined but never used."],
-      options: [{ varIgnorePattern: '^ignore' }]
+      options: [{ ignorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><div v-for="_i in foo" ></div></template>',
+      errors: ["'_i' is defined but never used."]
     }
   ]
 })
