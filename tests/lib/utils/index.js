@@ -368,19 +368,16 @@ describe('getComponentProps', () => {
   })
 })
 
-describe('isEditDistanceLessEqualThanThreshold', () => {
-  const isEditDistanceLessEqualThanThreshold = utils.isEditDistanceLessEqualThanThreshold
-  it('should return false if two string editdistance greater than threshold', () => {
-    assert.equal(isEditDistanceLessEqualThanThreshold('book', 'back'), false)
-    assert.equal(isEditDistanceLessEqualThanThreshold('methods', 'metho'), false)
-    assert.equal(isEditDistanceLessEqualThanThreshold('methods', 'metds'), false)
-    assert.equal(isEditDistanceLessEqualThanThreshold('computed', 'comput'), false)
-  })
-
-  it('should return true if two string editdistance lessEqual than threshold', () => {
-    assert.equal(isEditDistanceLessEqualThanThreshold('book', 'back', 2), true)
-    assert.equal(isEditDistanceLessEqualThanThreshold('methods', 'method'), true)
-    assert.equal(isEditDistanceLessEqualThanThreshold('methods', 'methds'), true)
-    assert.equal(isEditDistanceLessEqualThanThreshold('computed', 'computd'), true)
+describe('editdistance', () => {
+  const editDistance = utils.editDistance
+  it('should return editDistance beteen two string', () => {
+    assert.equal(editDistance('book', 'back'), 2)
+    assert.equal(editDistance('methods', 'metho'), 2)
+    assert.equal(editDistance('methods', 'metds'), 2)
+    assert.equal(editDistance('computed', 'comput'), 2)
+    assert.equal(editDistance('book', 'back'), 2)
+    assert.equal(editDistance('methods', 'method'), 1)
+    assert.equal(editDistance('methods', 'methds'), 1)
+    assert.equal(editDistance('computed', 'computd'), 1)
   })
 })
