@@ -9,12 +9,12 @@ vue add @vue/cli-plugin-eslint
 
 Via [npm](https://www.npmjs.com/):
 ```bash
-npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue@next
 ```
 
 Via [yarn](https://yarnpkg.com/):
 ```bash
-yarn add -D eslint eslint-plugin-vue
+yarn add -D eslint eslint-plugin-vue@next
 ```
 
 ::: tip Requirements
