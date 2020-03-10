@@ -32,6 +32,30 @@ tester.run('no-potential-property-typo', rule, {
       }
       </script>
       `
+    },
+    {
+
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+      }
+      </script>
+      `.trim(),
+      options: [{ presets: ['vue'] }]
+    },
+    // test if give preset and the potentialTypoList length is zero, just for 100% test cover
+    {
+
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {}
+      }
+      </script>
+      `.trim(),
+      options: [{ presets: ['vue'] }]
     }
     // give me some code that won't trigger a warning
   ],
@@ -48,7 +72,7 @@ export default {
       `.trim(),
       errors: [
         {
-          message: "'dat' may be a typo, which is similar to vue component option 'data'.",
+          message: "'dat' may be a typo, which is similar to option [data].",
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -64,7 +88,7 @@ export default {
           ]
         },
         {
-          message: `'method' may be a typo, which is similar to vue component option 'methods'.`,
+          message: `'method' may be a typo, which is similar to option [methods].`,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -95,7 +119,7 @@ export default {
       `.trim(),
       errors: [
         {
-          message: "'dat' may be a typo, which is similar to vue component option 'data'.",
+          message: "'dat' may be a typo, which is similar to option [data].",
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -111,7 +135,7 @@ export default {
           ]
         },
         {
-          message: `'method' may be a typo, which is similar to vue component option 'methods'.`,
+          message: `'method' may be a typo, which is similar to option [methods].`,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -143,7 +167,7 @@ export default {
       `.trim(),
       errors: [
         {
-          message: "'dat' may be a typo, which is similar to vue component option 'data'.",
+          message: "'dat' may be a typo, which is similar to option [data].",
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -159,7 +183,7 @@ export default {
           ]
         },
         {
-          message: `'method' may be a typo, which is similar to vue component option 'methods'.`,
+          message: `'method' may be a typo, which is similar to option [methods].`,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -177,17 +201,45 @@ export default {
       ],
       options: [{ presets: ['vue'] }]
     },
-    // test if presets item is not a valid preset like 'react'?
+    // test multi suggestion
     {
 
       filename: 'test.vue',
       code: `
 <script>
 export default {
+  method: {}
 }
 </script>
       `.trim(),
-      options: [{ presets: ['react'] }]
+      errors: [
+        {
+          message: `'method' may be a typo, which is similar to option [methods,data].`,
+          suggestions: [
+            {
+              desc: `Replace property 'method' to 'methods'`,
+              output: `
+<script>
+export default {
+  methods: {}
+}
+</script>
+              `.trim()
+            },
+            {
+              desc: `Replace property 'method' to 'data'`,
+              output: `
+<script>
+export default {
+  data: {}
+}
+</script>
+              `.trim()
+            }
+          ]
+        }
+      ],
+      options: [{ custom: ['data', 'methods'], threshold: 10 }]
     }
   ]
 })
