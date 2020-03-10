@@ -1,4 +1,13 @@
-# detect if there is a potential typo in your component property (no-potential-property-typo)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-potential-property-typo
+description: disallow a potential typo in your component property
+---
+# vue/no-potential-property-typo
+> disallow a potential typo in your component property
+
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 Please describe the origin of the rule here.
 
@@ -34,3 +43,8 @@ Give a short description of when it would be appropriate to turn off this rule.
 ## Further Reading
 
 If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-potential-property-typo.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-potential-property-typo.js)
