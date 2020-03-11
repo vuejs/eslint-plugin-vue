@@ -63,12 +63,12 @@ tester.run('no-potential-property-typo', rule, {
     {
       filename: 'test.vue',
       code: `
-<script>
-export default {
-  dat: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        method: {}
+      }
+      </script>
       `.trim(),
       errors: [
         {
@@ -77,12 +77,12 @@ export default {
             {
               desc: `Replace property 'dat' to 'data'`,
               output: `
-<script>
-export default {
-  data: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        data: {},
+        method: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -93,12 +93,12 @@ export default {
             {
               desc: `Replace property 'method' to 'methods'`,
               output: `
-<script>
-export default {
-  dat: {},
-  methods: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        methods: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -110,12 +110,12 @@ export default {
     {
       filename: 'test.vue',
       code: `
-<script>
-export default {
-  dat: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        method: {}
+      }
+      </script>
       `.trim(),
       errors: [
         {
@@ -124,12 +124,12 @@ export default {
             {
               desc: `Replace property 'dat' to 'data'`,
               output: `
-<script>
-export default {
-  data: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        data: {},
+        method: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -140,12 +140,12 @@ export default {
             {
               desc: `Replace property 'method' to 'methods'`,
               output: `
-<script>
-export default {
-  dat: {},
-  methods: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        methods: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -158,12 +158,12 @@ export default {
 
       filename: 'test.vue',
       code: `
-<script>
-export default {
-  dat: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        method: {}
+      }
+      </script>
       `.trim(),
       errors: [
         {
@@ -172,12 +172,12 @@ export default {
             {
               desc: `Replace property 'dat' to 'data'`,
               output: `
-<script>
-export default {
-  data: {},
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        data: {},
+        method: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -188,12 +188,12 @@ export default {
             {
               desc: `Replace property 'method' to 'methods'`,
               output: `
-<script>
-export default {
-  dat: {},
-  methods: {}
-}
-</script>
+      <script>
+      export default {
+        dat: {},
+        methods: {}
+      }
+      </script>
               `.trim()
             }
           ]
@@ -206,11 +206,11 @@ export default {
 
       filename: 'test.vue',
       code: `
-<script>
-export default {
-  method: {}
-}
-</script>
+      <script>
+      export default {
+        method: {}
+      }
+      </script>
       `.trim(),
       errors: [
         {
@@ -219,21 +219,21 @@ export default {
             {
               desc: `Replace property 'method' to 'methods'`,
               output: `
-<script>
-export default {
-  methods: {}
-}
-</script>
+      <script>
+      export default {
+        methods: {}
+      }
+      </script>
               `.trim()
             },
             {
               desc: `Replace property 'method' to 'data'`,
               output: `
-<script>
-export default {
-  data: {}
-}
-</script>
+      <script>
+      export default {
+        data: {}
+      }
+      </script>
               `.trim()
             }
           ]
