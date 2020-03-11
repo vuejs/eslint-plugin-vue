@@ -45,8 +45,30 @@ ruleTester.run('no-computed-in-data', rule, {
       }
       </script>
       `
+    },
+    // should not warn when use computed in methods
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {
+          return {
+            a: this.b
+          }
+        },
+        computed: {
+          test() {},
+        },
+        methods: {
+          foo() {
+            this.test()
+          }
+        }
+      }
+      </script>
+      `
     }
-    // give me some code that won't trigger a warning
   ],
 
   invalid: [

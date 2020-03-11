@@ -1,4 +1,11 @@
-# Ensure computed properties are not used in the data() (no-computed-in-data)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-computed-in-data
+description: require computed properties are not used in the data()
+---
+# vue/no-computed-in-data
+> require computed properties are not used in the data()
 
 Please describe the origin of the rule here.
 
@@ -34,3 +41,8 @@ Give a short description of when it would be appropriate to turn off this rule.
 ## Further Reading
 
 If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-computed-in-data.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-computed-in-data.js)
