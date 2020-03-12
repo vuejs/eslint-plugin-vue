@@ -62,7 +62,7 @@ ruleTester.run('no-computed-in-data', rule, {
         },
         methods: {
           foo() {
-            this.test()
+            this.test
           }
         }
       }
