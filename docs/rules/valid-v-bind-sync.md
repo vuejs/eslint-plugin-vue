@@ -62,7 +62,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [Guide - `.sync` Modifier]([https://vuejs.org/v2/guide/list.html#v-for-with-a-Component](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier))
+- [Guide - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 
 ## :mag: Implementation
 
