@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-potential-property-typo')
+const rule = require('../../../lib/rules/no-unknown-component-options')
 
 const RuleTester = require('eslint').RuleTester
 
@@ -20,7 +20,7 @@ const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
 })
-tester.run('no-potential-property-typo', rule, {
+tester.run('no-unknown-component-options', rule, {
   valid: [
     {
       filename: 'test.vue',
