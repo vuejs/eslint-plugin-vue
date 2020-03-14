@@ -27,12 +27,12 @@ module.exports = {
   overrides: [{
     files: ['lib/rules/*.js'],
     rules: {
-      "consistent-docs-description": "error",
-      "no-invalid-meta": "error",
-      "no-invalid-meta-docs-categories": "error",
+      'consistent-docs-description': 'error',
+      'no-invalid-meta': 'error',
+      'no-invalid-meta-docs-categories': 'error',
       'eslint-plugin/require-meta-type': 'error',
-      "require-meta-docs-url": ["error", {
-        "pattern": `https://eslint.vuejs.org/rules/{{name}}.html`
+      'require-meta-docs-url': ['error', {
+        'pattern': `https://eslint.vuejs.org/rules/{{name}}.html`
       }]
     }
   }]

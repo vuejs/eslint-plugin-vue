@@ -5,6 +5,7 @@ workflows:
       - node-v8
       - node-v10
       - node-v12
+      - node-v12-eslint7
 
 version: 2
 jobs:
@@ -42,3 +43,22 @@ jobs:
     <<: *node-base
     docker:
       - image: node:12
+
+  node-v12-eslint7:
+    docker:
+      - image: node:12
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install eslint@next
+          command: |
+            npm install -D eslint@next
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test

@@ -227,7 +227,7 @@ content
           message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 3,
           column: 30,
-          nodeType: 'HTMLTagClose',
+          type: 'HTMLTagClose',
           endLine: 3,
           endColumn: 30
         },
@@ -235,7 +235,7 @@ content
           message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 3,
           column: 37,
-          nodeType: 'HTMLEndTagOpen',
+          type: 'HTMLEndTagOpen',
           endLine: 3,
           endColumn: 37
         }
