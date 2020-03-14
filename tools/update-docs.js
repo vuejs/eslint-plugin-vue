@@ -45,16 +45,14 @@ function formatItems (items) {
 }
 
 function getPresetIds (categoryIds) {
-  const subsetCategoryIds = categoryIds
-    .map(categoryId => {
-      for (const subsetCategoryId in presetCategories) {
-        if (presetCategories[subsetCategoryId] === categoryId) {
-          return subsetCategoryId
-        }
+  const subsetCategoryIds = []
+  for (const categoryId of categoryIds) {
+    for (const subsetCategoryId in presetCategories) {
+      if (presetCategories[subsetCategoryId] === categoryId) {
+        subsetCategoryIds.push(subsetCategoryId)
       }
-      return null
-    })
-    .filter(subsetCategoryId => !!subsetCategoryId)
+    }
+  }
   if (subsetCategoryIds.length === 0) {
     return categoryIds
   }
