@@ -7,7 +7,7 @@ description: enforce valid template root
 # vue/valid-template-root
 > enforce valid template root
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every template root is valid.
 
@@ -27,42 +27,8 @@ This rule reports the template root in the following cases:
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
 
 ```vue
-<!-- The root is text -->
-<template>Lorem ipsum</template>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
-
-```vue
-<!-- There are multiple root elements -->
-<template>
-  <div>hello</div>
-  <div>hello</div>
-</template>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
-
-```vue
-<!-- The root element has `v-for` directives -->
-<template>
-  <div v-for="item in items"/>
-</template>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
-
-```vue
-<!-- The root element is `<template>` or `<slot>` -->
-<template>
-  <slot />
-</template>
+<!-- The root with src attribute is not empty -->
+<template src="foo.html"><div></div></template>
 ```
 
 </eslint-code-block>

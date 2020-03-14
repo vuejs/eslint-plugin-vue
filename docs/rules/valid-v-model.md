@@ -7,7 +7,7 @@ description: enforce valid `v-model` directives
 # vue/valid-v-model
 > enforce valid `v-model` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-model` directive is valid.
 
@@ -15,8 +15,8 @@ This rule checks whether every `v-model` directive is valid.
 
 This rule reports `v-model` directives in the following cases:
 
-- The directive has that argument. E.g. `<input v-model:aaa="foo">`
-- The directive has the modifiers which are not supported. E.g. `<input v-model.bbb="foo">`
+- The directive used on HTMLElement has an argument. E.g. `<input v-model:aaa="foo">`
+- The directive used on HTMLElement has modifiers which are not supported. E.g. `<input v-model.bbb="foo">`
 - The directive does not have that attribute value. E.g. `<input v-model>`
 - The directive does not have the attribute value which is valid as LHS. E.g. `<input v-model="foo() + bar()">`
 - The directive is on unsupported elements. E.g. `<div v-model="foo"></div>`
@@ -32,6 +32,9 @@ This rule reports `v-model` directives in the following cases:
   <input v-model.lazy="foo">
   <textarea v-model="foo"/>
   <MyComponent v-model="foo"/>
+  <MyComponent v-model:propName="foo"/>
+  <MyComponent v-model.modifier="foo"/>
+  <MyComponent v-model:propName.modifier="foo"/>
   <div v-for="todo in todos">
     <input v-model="todo.name">
   </div>

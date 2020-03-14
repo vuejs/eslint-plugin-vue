@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "6.2.1",
+  "version": "7.0.0-alpha.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
+    "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
+    "lint:fix": "eslint . --rulesdir eslint-internal-rules --fix",
     "pretest": "npm run lint",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run lint -- --fix && git add .",
@@ -47,9 +49,10 @@
     "eslint": "^5.0.0 || ^6.0.0"
   },
   "dependencies": {
+    "eslint-utils": "^2.0.0",
     "natural-compare": "^1.4.0",
-    "vue-eslint-parser": "^7.0.0",
-    "semver": "^5.6.0"
+    "semver": "^5.6.0",
+    "vue-eslint-parser": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^4.2.16",

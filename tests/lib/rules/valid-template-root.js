@@ -74,53 +74,45 @@ tester.run('valid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template lang="pug">test</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div></div><div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>\n    <div></div>\n    <div></div>\n</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>{{a b c}}</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div></div>aaaaaa</template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>aaaaaa<div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x in list"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><slot></slot></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template></template></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
       code: '<template>\n</template>',
-      errors: ['The template root requires exactly one element.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div></div><div></div></template>',
-      errors: ['The template root requires exactly one element.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>\n    <div></div>\n    <div></div>\n</template>',
-      errors: ['The template root requires exactly one element.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>{{a b c}}</template>',
-      errors: ['The template root requires an element rather than texts.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div></div>aaaaaa</template>',
-      errors: ['The template root requires an element rather than texts.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template>aaaaaa<div></div></template>',
-      errors: ['The template root requires an element rather than texts.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-for="x in list"></div></template>',
-      errors: ["The template root disallows 'v-for' directives."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><slot></slot></template>',
-      errors: ["The template root disallows '<slot>' elements."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><template></template></template>',
-      errors: ["The template root disallows '<template>' elements."]
+      errors: ['The template requires child element.']
     },
     {
       filename: 'test.vue',

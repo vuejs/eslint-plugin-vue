@@ -49,6 +49,58 @@ ruleTester.run('no-dupe-keys', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => {
+            return {
+              dat: null
+            }
+          },
+          data: () => {
+            return
+          },
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => ({
+            dat: null
+          }),
+          data: () => {
+            return
+          },
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
           ...foo(),
           props: {
             ...foo(),
@@ -77,6 +129,78 @@ ruleTester.run('no-dupe-keys', rule, {
               ...dat
             }
           },
+        }
+      `,
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          ...foo(),
+          props: {
+            ...foo(),
+            foo: String
+          },
+          computed: {
+            ...mapGetters({
+              test: 'getTest'
+            }),
+            bar: {
+              get () {
+              }
+            }
+          },
+          data: {
+            ...foo(),
+            dat: null
+          },
+          methods: {
+            ...foo(),
+            test () {
+            }
+          },
+          data: () => {
+            return {
+              ...dat
+            }
+          },
+        }
+      `,
+      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          ...foo(),
+          props: {
+            ...foo(),
+            foo: String
+          },
+          computed: {
+            ...mapGetters({
+              test: 'getTest'
+            }),
+            bar: {
+              get () {
+              }
+            }
+          },
+          data: {
+            ...foo(),
+            dat: null
+          },
+          methods: {
+            ...foo(),
+            test () {
+            }
+          },
+          data: () => ({
+            ...dat
+          }),
         }
       `,
       parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
@@ -134,6 +258,68 @@ ruleTester.run('no-dupe-keys', rule, {
       }, {
         message: 'Duplicated key \'foo\'.',
         line: 14
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            foo () {
+            }
+          },
+          data: () => {
+            return {
+              foo: null
+            }
+          },
+          methods: {
+            foo () {
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Duplicated key \'foo\'.',
+        line: 5
+      }, {
+        message: 'Duplicated key \'foo\'.',
+        line: 10
+      }, {
+        message: 'Duplicated key \'foo\'.',
+        line: 14
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            foo () {
+            }
+          },
+          data: () => ({
+            foo: null
+          }),
+          methods: {
+            foo () {
+            }
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Duplicated key \'foo\'.',
+        line: 5
+      }, {
+        message: 'Duplicated key \'foo\'.',
+        line: 9
+      }, {
+        message: 'Duplicated key \'foo\'.',
+        line: 12
       }]
     },
     {
