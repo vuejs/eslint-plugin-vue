@@ -86,7 +86,7 @@ ruleTester.run('require-render-return', rule, {
         render() {
           if (a) {
             if (b) {
-              
+
             }
             if (c) {
               return true
@@ -181,6 +181,21 @@ ruleTester.run('require-render-return', rule, {
       }]
     },
     {
+      code: `app.component('test', {
+        render: function () {
+          if (a) {
+            return
+          }
+        }
+      })`,
+      parserOptions,
+      errors: [{
+        message: 'Expected to return a value in render function.',
+        type: 'Identifier',
+        line: 2
+      }]
+    },
+    {
       code: `Vue.component('test2', {
         render: function () {
           if (a) {
@@ -199,7 +214,7 @@ ruleTester.run('require-render-return', rule, {
       code: `Vue.component('test2', {
         render: function () {
           if (a) {
-            
+
           } else {
             return h('div', 'hello')
           }

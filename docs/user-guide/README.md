@@ -85,6 +85,9 @@ All component-related rules are applied to code that passes any of the following
 * `Vue.component()` expression
 * `Vue.extend()` expression
 * `Vue.mixin()` expression
+* `app.component()` expression
+* `app.mixin()` expression
+* `createApp()` expression
 * `export default {}` in `.vue` or `.jsx` file
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:

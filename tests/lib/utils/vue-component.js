@@ -108,6 +108,12 @@ function validTests (ext) {
       code: `export default Foo.extend({})`,
       parser: require.resolve('@typescript-eslint/parser'),
       parserOptions
+    },
+    {
+      filename: `test.${ext}`,
+      code: `export default Foo.extend({} as ComponentOptions)`,
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions
     }
   ]
 }
@@ -146,6 +152,18 @@ function invalidTests (ext) {
     },
     {
       filename: `test.${ext}`,
+      code: `app.component('name', {})`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
+      code: `app.mixin({})`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
       code: `export default (Vue as VueConstructor<Vue>).extend({})`,
       parser: require.resolve('@typescript-eslint/parser'),
       parserOptions,
@@ -155,6 +173,19 @@ function invalidTests (ext) {
       filename: `test.${ext}`,
       code: `export default Vue.extend({})`,
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
+      code: `export default Vue.extend({} as ComponentOptions)`,
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
+      code: `createApp({})`,
       parserOptions,
       errors: [makeError(1)]
     },
