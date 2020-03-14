@@ -246,6 +246,38 @@ ruleTester.run('order-in-components', rule, {
     {
       filename: 'test.js',
       code: `
+        app.component('smart-list', {
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          components: {},
+          template: '<div></div>'
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      output: `
+        app.component('smart-list', {
+          name: 'app',
+          components: {},
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          template: '<div></div>'
+        })
+      `,
+      errors: [{
+        message: 'The "components" property should be above the "data" property on line 4.',
+        line: 9
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
         const { component } = Vue;
         component('smart-list', {
           name: 'app',

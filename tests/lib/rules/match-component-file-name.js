@@ -432,6 +432,16 @@ ruleTester.run('match-component-file-name', rule, {
     {
       filename: 'MyComponent.js',
       code: `
+        app.component('MyComponent', {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
         Vue.component(myComponent, {
           template: '<div />'
         })
@@ -692,6 +702,19 @@ ruleTester.run('match-component-file-name', rule, {
       filename: 'MyComponent.js',
       code: `
         Vue.component(\`MComponent\`, {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [{
+        message: 'Component name `MComponent` should match file name `MyComponent`.'
+      }]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        app.component(\`MComponent\`, {
           template: '<div />'
         })
       `,
