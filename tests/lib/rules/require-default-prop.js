@@ -153,6 +153,33 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1040
+      filename: 'destructuring-test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              ...foo,
+              default: 0
+            },
+          }
+        }
+      `
+    },
+    {
+      filename: 'unknown-prop-details-test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              [bar]: true,
+              default: 0
+            },
+          }
+        }
+      `
     }
   ],
 
@@ -282,6 +309,33 @@ ruleTester.run('require-default-prop', rule, {
         message: `Prop '[baz.baz]' requires default value to be set.`,
         line: 6
       }]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1040
+      filename: 'destructuring-test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              ...foo
+            },
+          }
+        }
+      `,
+      errors: ['Prop \'foo\' requires default value to be set.']
+    },
+    {
+      filename: 'unknown-prop-details-test.vue',
+      code: `
+        export default {
+          props: {
+            foo: {
+              [bar]: true
+            },
+          }
+        }
+      `,
+      errors: ['Prop \'foo\' requires default value to be set.']
     }
   ]
 })

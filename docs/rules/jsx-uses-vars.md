@@ -30,7 +30,7 @@ export default {
 };
 ```
 
-After turning on, `Hello` is being marked as used and `no-unused-vars` rule doesn't report an issue.
+After turning on, `HelloWorld` is being marked as used and `no-unused-vars` rule doesn't report an issue.
 
 ## :mute: When Not To Use It
 
