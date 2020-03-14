@@ -41,6 +41,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
+| [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
