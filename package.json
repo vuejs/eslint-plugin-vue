@@ -10,6 +10,7 @@
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
     "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
+    "lint:fix": "eslint . --rulesdir eslint-internal-rules --fix",
     "pretest": "npm run lint",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run lint -- --fix && git add .",

@@ -7,6 +7,8 @@ description: disallow destructuring of `props` passed to `setup`
 # vue/no-setup-props-destructure
 > disallow destructuring of `props` passed to `setup`
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 ## :book: Rule Details
 
 This rule reports the destructuring of `props` passed to `setup` causing the value to lose reactivity.

@@ -7,7 +7,7 @@ description: enforce order of component top-level elements
 # vue/component-tags-order
 > enforce order of component top-level elements
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 

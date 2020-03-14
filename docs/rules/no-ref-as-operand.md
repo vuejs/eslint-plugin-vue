@@ -7,6 +7,8 @@ description: disallow use of value wrapped by `ref()` (Composition API) as an op
 # vue/no-ref-as-operand
 > disallow use of value wrapped by `ref()` (Composition API) as an operand
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 ## :book: Rule Details
 
 This rule reports cases where a ref is used incorrectly as an operand.
