@@ -207,6 +207,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: |
 | [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: |
 | [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: |
+| [vue/no-computed-in-data](./no-computed-in-data.md) | require computed properties are not used in the data() |  |
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
 | [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
@@ -267,10 +268,6 @@ For example:
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
-| [vue/no-computed-in-data](./no-computed-in-data.md) | require computed properties are not used in the data() |  |
-| [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: |
-| [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: |
-| [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |

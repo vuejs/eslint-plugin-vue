@@ -7,6 +7,8 @@ description: require computed properties are not used in the data()
 # vue/no-computed-in-data
 > require computed properties are not used in the data()
 
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+
 Please describe the origin of the rule here.
 
 
