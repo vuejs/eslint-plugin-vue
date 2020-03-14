@@ -7,7 +7,7 @@ description: disallow use of v-html to prevent XSS attack
 # vue/no-v-html
 > disallow use of v-html to prevent XSS attack
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 

@@ -14,18 +14,31 @@ const path = require('path')
 const eslint = require('eslint')
 const categories = require('./lib/categories')
 
-const errorCategories = ['base', 'essential']
+const errorCategories = ['base', 'essential', 'vue3-essential']
 
-function formatRules (rules) {
+const extendsCategories = {
+  'base': null,
+  'essential': 'base',
+  'vue3-essential': 'base',
+  'strongly-recommended': 'essential',
+  'vue3-strongly-recommended': 'vue3-essential',
+  'recommended': 'strongly-recommended',
+  'vue3-recommended': 'vue3-strongly-recommended',
+  'use-with-caution': 'recommended',
+  'vue3-use-with-caution': 'vue3-recommended'
+}
+
+function formatRules (rules, categoryId) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = errorCategories.includes(rule.meta.docs.category) ? 'error' : 'warn'
+    setting[rule.ruleId] = errorCategories.includes(categoryId) ? 'error' : 'warn'
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory (category, prevCategory) {
-  if (prevCategory == null) {
+function formatCategory (category) {
+  const extendsCategoryId = extendsCategories[category.categoryId]
+  if (extendsCategoryId == null) {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -47,7 +60,7 @@ module.exports = {
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules)}
+  rules: ${formatRules(category.rules, category.categoryId)}
 }
 `
   }
@@ -57,17 +70,17 @@ module.exports = {
  * in order to update it's content execute "npm run update"
  */
 module.exports = {
-  extends: require.resolve('./${prevCategory.categoryId}'),
-  rules: ${formatRules(category.rules)}
+  extends: require.resolve('./${extendsCategoryId}'),
+  rules: ${formatRules(category.rules, category.categoryId)}
 }
 `
 }
 
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/')
-categories.forEach((category, index) => {
+categories.forEach((category) => {
   const filePath = path.join(ROOT, `${category.categoryId}.js`)
-  const content = formatCategory(category, categories[index - 1])
+  const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
 })

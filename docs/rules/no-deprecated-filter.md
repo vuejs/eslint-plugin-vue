@@ -7,6 +7,7 @@ description: disallow using deprecated filters syntax
 # vue/no-deprecated-filter
 > disallow using deprecated filters syntax
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 
 ## :book: Rule Details
 

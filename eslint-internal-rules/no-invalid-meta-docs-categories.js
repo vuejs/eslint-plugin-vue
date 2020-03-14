@@ -40,50 +40,6 @@ function getMetaPropertyFromExportsNode (exportsNode) {
 }
 
 /**
- * Whether this `meta` ObjectExpression has a `docs` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs` property exists.
- */
-function hasMetaDocs (metaPropertyNode) {
-  return Boolean(getPropertyFromObject('docs', metaPropertyNode.value))
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `docs.description` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs.description` property exists.
- */
-function hasMetaDocsDescription (metaPropertyNode) {
-  const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
-
-  return metaDocs && getPropertyFromObject('description', metaDocs.value)
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `docs.category` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs.category` property exists.
- */
-function hasMetaDocsCategories (metaPropertyNode) {
-  const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
-
-  return metaDocs && getPropertyFromObject('categories', metaDocs.value)
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `schema` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `schema` property exists.
- */
-function hasMetaSchema (metaPropertyNode) {
-  return getPropertyFromObject('schema', metaPropertyNode.value)
-}
-
-/**
  * Checks the validity of the meta definition of this rule and reports any errors found.
  *
  * @param {RuleContext} context The ESLint rule context.
@@ -93,29 +49,50 @@ function hasMetaSchema (metaPropertyNode) {
  */
 function checkMetaValidity (context, exportsNode) {
   const metaProperty = getMetaPropertyFromExportsNode(exportsNode)
-
   if (!metaProperty) {
-    context.report(exportsNode, 'Rule is missing a meta property.')
     return
   }
 
-  if (!hasMetaDocs(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs property.')
+  const metaDocs = getPropertyFromObject('docs', metaProperty.value)
+  if (!metaDocs) {
     return
   }
 
-  if (!hasMetaDocsDescription(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.description property.')
+  const categories = getPropertyFromObject('categories', metaDocs.value)
+  if (!categories) {
+    context.report({
+      node: metaDocs,
+      message: 'Rule is missing a meta.docs.categories property.',
+      fix (fixer) {
+        const category = getPropertyFromObject('category', metaDocs.value)
+        if (!category) {
+          return null
+        }
+        const fixes = [fixer.replaceText(category.key, 'categories')]
+        if (category.value && category.value.type === 'Literal' && typeof category.value.value === 'string') {
+          // fixes.push(fixer.insertTextBefore(category.value, '['), fixer.insertTextAfter(category.value, ']'))
+
+          // for vue3 migration
+          if (category.value.value !== 'base') {
+            fixes.push(fixer.insertTextBefore(category.value, `['vue3-${category.value.value}', `))
+          } else {
+            fixes.push(fixer.insertTextBefore(category.value, '['))
+          }
+          fixes.push(fixer.insertTextAfter(category.value, ']'))
+        }
+        return fixes
+      }
+    })
     return
   }
 
-  if (!hasMetaDocsCategories(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.categories property.')
-    return
-  }
-
-  if (!hasMetaSchema(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.schema property.')
+  if (categories.value &&
+    (
+      categories.value.type !== 'ArrayExpression' &&
+      !(categories.value.type === 'Literal' && categories.value.value == null) &&
+      !(categories.value.type === 'Identifier' && categories.value.name === 'undefined')
+    )) {
+    context.report(categories.value, 'meta.docs.categories must be an array.')
   }
 }
 
@@ -139,7 +116,7 @@ module.exports = {
       description: 'enforce correct use of `meta` property in core rules',
       categories: ['Internal']
     },
-
+    fixable: 'code',
     schema: []
   },
 

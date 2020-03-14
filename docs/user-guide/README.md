@@ -35,7 +35,7 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:vue/recommended'
+    'plugin:vue/vue3-recommended'
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -187,7 +187,7 @@ Most `eslint-plugin-vue` rules require `vue-eslint-parser` to check `<template>`
 
 Make sure you have one of the following settings in your **.eslintrc**:
 
-- `"extends": ["plugin:vue/recommended"]`
+- `"extends": ["plugin:vue/vue3-recommended"]`
 - `"extends": ["plugin:vue/base"]`
 
 If you already use another parser (e.g. `"parser": "babel-eslint"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:

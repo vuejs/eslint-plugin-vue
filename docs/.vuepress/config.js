@@ -5,10 +5,46 @@
 'use strict'
 
 const rules = require('../../tools/lib/rules')
-const categories = require('../../tools/lib/categories')
 
-const uncategorizedRules = rules.filter(rule => !rule.meta.docs.category && !rule.meta.deprecated)
+const uncategorizedRules = rules.filter(rule => !rule.meta.docs.categories && !rule.meta.deprecated)
 const deprecatedRules = rules.filter(rule => rule.meta.deprecated)
+
+const sidebarCategories = [
+  { title: 'Base Rules', categoryIds: ['base'] },
+  { title: 'Priority A: Essential', categoryIds: ['vue3-essential', 'essential'] },
+  { title: 'Priority A: Essential for Vue.js 3.x', categoryIds: ['vue3-essential'] },
+  { title: 'Priority A: Essential for Vue.js 2.x', categoryIds: ['essential'] },
+  { title: 'Priority B: Strongly Recommended', categoryIds: ['vue3-strongly-recommended', 'strongly-recommended'] },
+  { title: 'Priority B: Strongly Recommended for Vue.js 3.x', categoryIds: ['vue3-strongly-recommended'] },
+  { title: 'Priority B: Strongly Recommended for Vue.js 2.x', categoryIds: ['strongly-recommended'] },
+  { title: 'Priority C: Recommended', categoryIds: ['vue3-recommended', 'recommended'] },
+  { title: 'Priority C: Recommended for Vue.js 3.x', categoryIds: ['vue3-recommended'] },
+  { title: 'Priority C: Recommended for Vue.js 2.x', categoryIds: ['recommended'] }
+]
+
+const categorizedRules = []
+for (const { title, categoryIds } of sidebarCategories) {
+  const categoryRules = rules
+    .filter(rule => rule.meta.docs.categories && !rule.meta.deprecated)
+    .filter(rule => categoryIds
+      .every(categoryId => rule.meta.docs.categories.includes(categoryId))
+    )
+  const children = categoryRules
+    .filter(({ ruleId }) => {
+      const exists = categorizedRules.some(({ children }) => children.some(([, alreadyRuleId]) => alreadyRuleId === ruleId))
+      return !exists
+    })
+    .map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+
+  if (children.length === 0) {
+    continue
+  }
+  categorizedRules.push({
+    title,
+    collapsable: false,
+    children
+  })
+}
 
 const extraCategories = []
 if (uncategorizedRules.length > 0) {
@@ -59,11 +95,7 @@ module.exports = {
         '/rules/',
 
         // Rules in each category.
-        ...categories.map(({ title, rules }) => ({
-          title: title.replace(/ \(.+?\)/, ''),
-          collapsable: false,
-          children: rules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
-        })),
+        ...categorizedRules,
 
         // Rules in no category.
         ...extraCategories

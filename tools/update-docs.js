@@ -22,15 +22,43 @@ const fs = require('fs')
 const path = require('path')
 const last = require('lodash/last')
 const rules = require('./lib/rules')
-const categories = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
+
+const presetCategories = {
+  'base': null,
+  'essential': 'base',
+  'vue3-essential': 'base',
+  'strongly-recommended': 'essential',
+  'vue3-strongly-recommended': 'vue3-essential',
+  'recommended': 'strongly-recommended',
+  'vue3-recommended': 'vue3-strongly-recommended'
+  // 'use-with-caution': 'recommended',
+  // 'vue3-use-with-caution': 'vue3-recommended'
+}
 
 function formatItems (items) {
   if (items.length <= 2) {
     return items.join(' and ')
   }
   return `all of ${items.slice(0, -1).join(', ')} and ${last(items)}`
+}
+
+function getPresetIds (categoryIds) {
+  const subsetCategoryIds = categoryIds
+    .map(categoryId => {
+      for (const subsetCategoryId in presetCategories) {
+        if (presetCategories[subsetCategoryId] === categoryId) {
+          return subsetCategoryId
+        }
+      }
+      return null
+    })
+    .filter(subsetCategoryId => !!subsetCategoryId)
+  if (subsetCategoryIds.length === 0) {
+    return categoryIds
+  }
+  return [...new Set([...categoryIds, ...getPresetIds(subsetCategoryIds)])]
 }
 
 class DocFile {
@@ -72,7 +100,6 @@ class DocFile {
 
   updateHeader () {
     const { ruleId, meta } = this.rule
-    const categoryIndex = categories.findIndex(category => category.categoryId === meta.docs.category)
     const title = `# ${ruleId}\n> ${meta.docs.description}`
     const notes = []
 
@@ -83,8 +110,9 @@ class DocFile {
       } else {
         notes.push(`- :warning: This rule was **deprecated**.`)
       }
-    } else if (categoryIndex >= 0) {
-      const presets = categories.slice(categoryIndex).map(category => `\`"plugin:vue/${category.categoryId}"\``)
+    } else if (meta.docs.categories) {
+      const presets = getPresetIds(meta.docs.categories).map(categoryId => `\`"plugin:vue/${categoryId}"\``)
+
       notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
     if (meta.fixable) {
