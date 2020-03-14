@@ -160,6 +160,7 @@ For example:
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
+| [vue/no-deprecated-filter](./no-deprecated-filter.md) | disallow using deprecated filters syntax |  |
 | [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: |
 | [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
