@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/no-unknown-component-options
+title: vue/no-potential-component-option-typo
 description: disallow a potential typo in your component property
 ---
-# vue/no-unknown-component-options
+# vue/no-potential-component-option-typo
 > disallow a potential typo in your component property
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
@@ -46,5 +46,5 @@ If there are other links that describe the issue this rule addresses, please inc
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unknown-component-options.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unknown-component-options.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-potential-component-option-typo.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-potential-component-option-typo.js)
