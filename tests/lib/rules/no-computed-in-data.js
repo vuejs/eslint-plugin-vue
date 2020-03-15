@@ -70,8 +70,8 @@ ruleTester.run('no-computed-in-data', rule, {
       `
     }
   ],
-
   invalid: [
+    // should warn when prop key is an String literal
     {
       filename: 'test.vue',
       code: `
@@ -79,12 +79,12 @@ ruleTester.run('no-computed-in-data', rule, {
       export default {
         data() {
           return {
-            a: this.test
+            a: this.test + this.foo
           }
         },
         computed: {
           test() {},
-          'foo': {
+          'foo'() {
 
           }
         }
@@ -92,10 +92,11 @@ ruleTester.run('no-computed-in-data', rule, {
       </script>
       `,
       errors: [
-        `The "this.test" is an computed data can't use in data property.`
+        `The "this.test" is a computed data can't use in data property.`,
+        `The "this.foo" is a computed data can't use in data property.`
       ]
     },
-    // same computed data reference by multi data property
+    // same computed data referenced by multi data property
     {
       filename: 'test.vue',
       code: `
@@ -109,21 +110,18 @@ ruleTester.run('no-computed-in-data', rule, {
         },
         computed: {
           test() {},
-          'foo': {
-
-          }
         }
       }
       </script>
       `,
       errors: [
         {
-          message: `The "this.test" is an computed data can't use in data property.`,
+          message: `The "this.test" is a computed data can't use in data property.`,
           line: 6,
           column: 16
         },
         {
-          message: `The "this.test" is an computed data can't use in data property.`,
+          message: `The "this.test" is a computed data can't use in data property.`,
           line: 7,
           column: 16
         }

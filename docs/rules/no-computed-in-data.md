@@ -12,38 +12,53 @@ description: require computed properties are not used in the data()
 Please describe the origin of the rule here.
 
 
-## Rule Details
+## :book: Rule Details
 
 This rule aims to...
 
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
+<script>
+export default {
+    data(){
+        return {
+            value: 'hello ' + this.world
+        }
+    },
+    computed: {
+        world() {
+            return 'world'
+        }
+    }
+}
+</script>
 
 ```
 
 Examples of **correct** code for this rule:
 
-```js
-
-// fill me in
-
+```javascript
+<script>
+export default {
+    data(){
+        return {
+            value: 'hello ' + 'world'
+        }
+    },
+    computed: {
+        world() {
+            return 'world'
+        }
+    }
+}
+</script>
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
+## :wrench: Options
+nothing
 
 ## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
-
+[Computed Properties](https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods)
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-computed-in-data.js)
