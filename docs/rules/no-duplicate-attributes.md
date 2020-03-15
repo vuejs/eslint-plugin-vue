@@ -7,7 +7,7 @@ description: disallow duplication of attributes
 # vue/no-duplicate-attributes
 > disallow duplication of attributes
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 When duplicate arguments exist, only the last one is valid.
 It's possibly mistakes.

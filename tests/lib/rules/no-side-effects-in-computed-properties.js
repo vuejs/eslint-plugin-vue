@@ -296,6 +296,25 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         message: 'Unexpected side effect in "test1" computed property.'
       }],
       parser: require.resolve('@typescript-eslint/parser')
+    },
+
+    {
+      code: `app.component('test', {
+        computed: {
+          test1() {
+            this.firstName = 'lorem'
+            asd.qwe.zxc = 'lorem'
+            return this.firstName + ' ' + this.lastName
+          },
+        }
+      })`,
+      parserOptions,
+      errors: [
+        {
+          line: 4,
+          message: 'Unexpected side effect in "test1" computed property.'
+        }
+      ]
     }
   ]
 })

@@ -125,7 +125,7 @@ module.exports = {
   meta: {
     docs: {
       description: 'require rules to implement a meta.docs.url property',
-      category: 'Rules',
+      categories: ['Rules'],
       recommended: false
     },
     fixable: 'code',

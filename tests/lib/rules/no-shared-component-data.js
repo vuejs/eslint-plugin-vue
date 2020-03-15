@@ -145,6 +145,30 @@ return {
       }]
     },
     {
+      filename: 'test.js',
+      code: `
+        app.component('some-comp', {
+          data: {
+            foo: 'bar'
+          }
+        })
+      `,
+      output: `
+        app.component('some-comp', {
+          data: function() {
+return {
+            foo: 'bar'
+          };
+}
+        })
+      `,
+      parserOptions,
+      errors: [{
+        message: '`data` property in component must be a function.',
+        line: 3
+      }]
+    },
+    {
       filename: 'test.vue',
       code: `
         export default {

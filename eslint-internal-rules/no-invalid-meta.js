@@ -67,10 +67,10 @@ function hasMetaDocsDescription (metaPropertyNode) {
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
  * @returns {boolean} `true` if a `docs.category` property exists.
  */
-function hasMetaDocsCategory (metaPropertyNode) {
+function hasMetaDocsCategories (metaPropertyNode) {
   const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
 
-  return metaDocs && getPropertyFromObject('category', metaDocs.value)
+  return metaDocs && getPropertyFromObject('categories', metaDocs.value)
 }
 
 /**
@@ -109,8 +109,8 @@ function checkMetaValidity (context, exportsNode) {
     return
   }
 
-  if (!hasMetaDocsCategory(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.category property.')
+  if (!hasMetaDocsCategories(metaProperty)) {
+    context.report(metaProperty, 'Rule is missing a meta.docs.categories property.')
     return
   }
 
@@ -137,7 +137,7 @@ module.exports = {
   meta: {
     docs: {
       description: 'enforce correct use of `meta` property in core rules',
-      category: 'Internal'
+      categories: ['Internal']
     },
 
     schema: []

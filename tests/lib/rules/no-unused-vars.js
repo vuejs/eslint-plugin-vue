@@ -52,6 +52,18 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="x in foo" :[x]></div></template>'
+    },
+    {
+      code: '<template><div v-for="_ in foo" ></div></template>',
+      options: [{ ignorePattern: '^_' }]
+    },
+    {
+      code: '<template><div v-for="ignorei in foo" ></div></template>',
+      options: [{ ignorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><div v-for="thisisignore in foo" ></div></template>',
+      options: [{ ignorePattern: 'ignore$' }]
     }
   ],
   invalid: [
@@ -82,6 +94,7 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="(a, b, c) in foo"></div></template>',
       errors: ["'a' is defined but never used.", "'b' is defined but never used.", "'c' is defined but never used."]
+
     },
     {
       code: '<template><div v-for="(a, b, c) in foo">{{a}}</div></template>',
@@ -97,7 +110,33 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="x in items">{{value | x}}</div></template>',
+      errors: [{
+        message: "'x' is defined but never used.",
+        suggestions: [{
+          desc: 'Replace the x with _x',
+          output: '<template><div v-for="_x in items">{{value | x}}</div></template>'
+        }]
+      }],
+      options: [{ ignorePattern: '^_' }]
+    },
+    {
+      code: '<template><div v-for="x in items">{{value}}</div></template>',
+      options: [{ ignorePattern: 'ignore$' }],
       errors: ["'x' is defined but never used."]
+    },
+    {
+      code: '<template><span slot-scope="props"></span></template>',
+      errors: ["'props' is defined but never used."],
+      options: [{ ignorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><span><template scope="props"></template></span></template>',
+      errors: ["'props' is defined but never used."],
+      options: [{ ignorePattern: '^ignore' }]
+    },
+    {
+      code: '<template><div v-for="_i in foo" ></div></template>',
+      errors: ["'_i' is defined but never used."]
     }
   ]
 })

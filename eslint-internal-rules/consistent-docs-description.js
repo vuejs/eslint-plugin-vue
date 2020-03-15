@@ -116,7 +116,7 @@ module.exports = {
   meta: {
     docs: {
       description: 'enforce correct conventions of `meta.docs.description` property in core rules',
-      category: 'Internal'
+      categories: ['Internal']
     },
     fixable: 'code',
     schema: []

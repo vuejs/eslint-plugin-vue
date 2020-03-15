@@ -29,6 +29,7 @@ module.exports = {
     rules: {
       "consistent-docs-description": "error",
       "no-invalid-meta": "error",
+      "no-invalid-meta-docs-categories": "error",
       'eslint-plugin/require-meta-type': 'error',
       "require-meta-docs-url": ["error", {
         "pattern": `https://eslint.vuejs.org/rules/{{name}}.html`

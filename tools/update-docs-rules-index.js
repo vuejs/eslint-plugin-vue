@@ -10,7 +10,7 @@ const rules = require('./lib/rules')
 const categories = require('./lib/categories')
 
 // -----------------------------------------------------------------------------
-const uncategorizedRules = rules.filter(rule => !rule.meta.docs.category && !rule.meta.deprecated)
+const uncategorizedRules = rules.filter(rule => !rule.meta.docs.categories && !rule.meta.deprecated)
 const deprecatedRules = rules.filter(rule => rule.meta.deprecated)
 
 function toRuleRow (rule) {
@@ -33,7 +33,7 @@ function toDeprecatedRuleRow (rule) {
 
 // -----------------------------------------------------------------------------
 let rulesTableContent = categories.map(category => `
-## ${category.title}
+## ${category.title.vuepress}
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
 
