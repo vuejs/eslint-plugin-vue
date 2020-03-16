@@ -11,149 +11,112 @@ description: disallow a potential typo in your component property
 
 ## :book: Rule Details
 
-This rule reports components that haven't been used in the template.
+This Rule disallow a potential typo in your component options
 
-<eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+**Here is the config**
+```js
+{'vue/no-potential-component-option-typo': ['error', {presets: ['all'], custom: ['test']}]}
+```
+
+<eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['all'], custom: ['test']}]}">
 
 ```vue
-<!-- ✓ GOOD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <the-modal>
-      <component is="TheInput" />
-      <component :is="'TheDropdown'" />
-      <TheButton>CTA</TheButton>
-    </the-modal>
-  </div>
-</template>
-
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
-  import TheInput from 'components/TheInput.vue'
-  import TheDropdown from 'components/TheDropdown.vue'
+export default {
+  /* ✓ GOOD */
+  props: {
+    
+  },
+  /* × BAD */
+  method: {
 
-  export default {
-    components: {
-      TheButton,
-      TheModal,
-      TheInput,
-      TheDropdown,
-    }
+  },
+  /* ✓ GOOD */
+  data: {
+    
+  },
+  /* × BAD */
+  beforeRouteEnteR() {
+
+  },
+  /* × BAD due to custom option 'test'*/
+  testt: {
+
   }
+}
 </script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
+> we use editdistance to compare two string similarity, threshold is an option to control upper bound of editdistance to report
+
+**Here is the another example about config option `threshold`**
+```js
+{'vue/no-potential-component-option-typo': ['error', {presets: ['vue', 'nuxt'], threshold: 5}]}
+```
+
+<eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['vue', 'nuxt'], threshold: 5}]}">
 
 ```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <TheModal />
-  </div>
-</template>
-
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
+export default {
+  /* ✓ BAD, due to threshold is 5 */
+  props: {
+    
+  },
+  /* ✓ BAD, due to threshold is 5 */
+  method: {
 
-  export default {
-    components: {
-      TheButton, // Unused component
-      'the-modal': TheModal // Unused component
-    }
+  },
+  /* ✓ BAD, due to threshold is 5 */
+  data: {
+    
+  },
+  /* × GOOD, due to we don't choose vue-router preset or add a custom option */
+  beforeRouteEnteR() {
+
   }
+}
 </script>
 ```
 
 </eslint-code-block>
-
-::: warning Note
-Components registered under `PascalCase` or `camelCase` names have may be called however you like, except using `snake_case`. Otherwise, they will need to be called directly under the specified name.
-:::
 
 ## :wrench: Options
-
-```json
+```js
 {
-  "vue/no-unused-components": ["error", {
-    "ignoreWhenBindingPresent": true
-  }]
+    "vue/no-unsed-vars": [{
+      presets: {
+        type: 'array',
+        items: {
+          type: 'string',
+          enum: ['all', 'vue', 'vue-router', 'nuxt']
+        },
+        uniqueItems: true,
+        minItems: 0
+      },
+      custom: {
+        type: 'array',
+        minItems: 0,
+        items: { type: 'string' },
+        uniqueItems: true
+      },
+      threshold: {
+        type: 'number',
+        'minimum': 1
+      }
+    }]
 }
 ```
+- `presets` ... `enum type`, contains several common vue component option set, `['all']` is the same as `['vue', 'vue-router', 'nuxt']`. **default** `[]`
+- `custom` ... `array type`, a list store your custom component option want to detect. **default** `[]`
+- `threshold` ... `number type`, a number used to control the upper limit of the reported editing distance, we recommend don't change this config option, even if it is required, not bigger than `2`. **default** `1`
+## :rocket: Suggestion
+- We provide all the possible component option that editdistance between your vue component option and configuration options is greater than 0 and lessEqual than threshold
 
-- `ignoreWhenBindingPresent` ... suppresses all errors if binding has been detected in the template
-    default `true`
-
-### `ignoreWhenBindingPresent: false`
-
-<eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
-
-```vue
-<!-- ✓ GOOD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <TheButton v-if="" />
-    <TheSelect v-else-if="" />
-    <TheInput v-else="" />
-  </div>
-</template>
-
-<script>
-  import TheButton from 'components/TheButton.vue'
-  import TheSelect from 'components/TheSelect.vue'
-  import TheInput from 'components/TheInput.vue'
-
-  export default {
-    components: {
-      TheButton,
-      TheSelect,
-      TheInput,
-    },
-  }
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <component :is="computedComponent" />
-  </div>
-</template>
-
-<script>
-  import TheButton from 'components/TheButton.vue'
-  import TheSelect from 'components/TheSelect.vue'
-  import TheInput from 'components/TheInput.vue'
-
-  export default {
-    components: {
-      TheButton, // <- not used
-      TheSelect, // <- not used
-      TheInput, // <- not used
-    },
-    computed: {
-      computedComponent() {
-      }
-    }
-  }
-</script>
-```
-
-</eslint-code-block>
-
+## :books: Further reading
+- [Edit_distance](https://en.wikipedia.org/wiki/Edit_distance)
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-potential-component-option-typo.js)
