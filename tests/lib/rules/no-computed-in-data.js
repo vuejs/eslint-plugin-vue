@@ -92,8 +92,8 @@ ruleTester.run('no-computed-in-data', rule, {
       </script>
       `,
       errors: [
-        `The "this.test" is a computed data can't use in data property.`,
-        `The "this.foo" is a computed data can't use in data property.`
+        `Computed property 'this.test' can't use in data property.`,
+        `Computed property 'this.foo' can't use in data property.`
       ]
     },
     // same computed data referenced by multi data property
@@ -116,12 +116,12 @@ ruleTester.run('no-computed-in-data', rule, {
       `,
       errors: [
         {
-          message: `The "this.test" is a computed data can't use in data property.`,
+          message: `Computed property 'this.test' can't use in data property.`,
           line: 6,
           column: 16
         },
         {
-          message: `The "this.test" is a computed data can't use in data property.`,
+          message: `Computed property 'this.test' can't use in data property.`,
           line: 7,
           column: 16
         }
