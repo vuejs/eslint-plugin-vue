@@ -9,12 +9,12 @@ vue add @vue/cli-plugin-eslint
 
 Via [npm](https://www.npmjs.com/):
 ```bash
-npm install --save-dev eslint eslint-plugin-vue
+npm install --save-dev eslint eslint-plugin-vue@next
 ```
 
 Via [yarn](https://yarnpkg.com/):
 ```bash
-yarn add -D eslint eslint-plugin-vue
+yarn add -D eslint eslint-plugin-vue@next
 ```
 
 ::: tip Requirements
@@ -35,7 +35,7 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:vue/recommended'
+    'plugin:vue/vue3-recommended'
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -85,6 +85,9 @@ All component-related rules are applied to code that passes any of the following
 * `Vue.component()` expression
 * `Vue.extend()` expression
 * `Vue.mixin()` expression
+* `app.component()` expression
+* `app.mixin()` expression
+* `createApp()` expression
 * `export default {}` in `.vue` or `.jsx` file
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:
@@ -184,7 +187,7 @@ Most `eslint-plugin-vue` rules require `vue-eslint-parser` to check `<template>`
 
 Make sure you have one of the following settings in your **.eslintrc**:
 
-- `"extends": ["plugin:vue/recommended"]`
+- `"extends": ["plugin:vue/vue3-recommended"]`
 - `"extends": ["plugin:vue/base"]`
 
 If you already use another parser (e.g. `"parser": "babel-eslint"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:

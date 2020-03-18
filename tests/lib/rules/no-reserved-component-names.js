@@ -275,6 +275,11 @@ ruleTester.run('no-reserved-component-names', rule, {
       parserOptions
     },
     {
+      filename: 'test.vue',
+      code: `app.component('FooBar', {})`,
+      parserOptions
+    },
+    {
       filename: 'test.js',
       code: `
         new Vue({
@@ -352,7 +357,31 @@ ruleTester.run('no-reserved-component-names', rule, {
     ...invalidElements.map(name => {
       return {
         filename: 'test.vue',
+        code: `app.component('${name}', component)`,
+        parserOptions,
+        errors: [{
+          message: `Name "${name}" is reserved.`,
+          type: 'Literal',
+          line: 1
+        }]
+      }
+    }),
+    ...invalidElements.map(name => {
+      return {
+        filename: 'test.vue',
         code: `Vue.component(\`${name}\`, {})`,
+        parserOptions,
+        errors: [{
+          message: `Name "${name}" is reserved.`,
+          type: 'TemplateLiteral',
+          line: 1
+        }]
+      }
+    }),
+    ...invalidElements.map(name => {
+      return {
+        filename: 'test.vue',
+        code: `app.component(\`${name}\`, {})`,
         parserOptions,
         errors: [{
           message: `Name "${name}" is reserved.`,

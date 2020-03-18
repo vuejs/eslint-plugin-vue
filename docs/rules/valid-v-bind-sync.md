@@ -7,6 +7,8 @@ description: enforce valid `.sync` modifier on `v-bind` directives
 # vue/valid-v-bind-sync
 > enforce valid `.sync` modifier on `v-bind` directives
 
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
 ## :book: Rule Details
@@ -62,7 +64,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [Guide - `.sync` Modifier]([https://vuejs.org/v2/guide/list.html#v-for-with-a-Component](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier))
+- [Guide - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 
 ## :mag: Implementation
 
