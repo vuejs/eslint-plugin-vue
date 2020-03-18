@@ -311,6 +311,18 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      // with prefix $$$$
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $$$$item: String
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
