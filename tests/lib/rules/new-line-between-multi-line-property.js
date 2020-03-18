@@ -21,7 +21,61 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('new-line-between-multi-line-property', rule, {
   valid: [
-    // give me some code that won't trigger a warning
+    // test good example of proposal https://github.com/vuejs/eslint-plugin-vue/issues/391
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        name: 'component-name',
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+          label: String,
+          icon: String
+        },
+
+        computed: {
+          formattedValue: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          },
+
+          inputClasses: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          }
+        },
+
+        methods: {
+          methodA: function () {
+            // ...
+            // ...
+            // ...
+          },
+
+          methodB: function () {
+            // ...
+            // ...
+            // ...
+          }
+        }
+      }
+      </script>
+      `
+    }
   ],
 
   invalid: [
@@ -59,7 +113,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             type: Boolean,
             default: false
           },
-          
+
           label: String,
           icon: String
         }
@@ -69,6 +123,218 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       errors: [
         'Enforce new lines between multi-line properties in Vue components.'
       ]
+    },
+    // test bad example of proposal https://github.com/vuejs/eslint-plugin-vue/issues/391
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        name: 'component-name',
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+          label: String,
+          icon: String
+        },
+        computed: {
+          formattedValue: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          },
+
+          inputClasses: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          }
+        },
+        methods: {
+          methodA: function () {
+            // ...
+            // ...
+            // ...
+          },
+
+          methodB: function () {
+            // ...
+            // ...
+            // ...
+          }
+        }
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        name: 'component-name',
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+          label: String,
+          icon: String
+        },
+
+        computed: {
+          formattedValue: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          },
+
+          inputClasses: function () {
+            // ...
+            // ...
+            // ...
+            // ...
+          }
+        },
+
+        methods: {
+          methodA: function () {
+            // ...
+            // ...
+            // ...
+          },
+
+          methodB: function () {
+            // ...
+            // ...
+            // ...
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Enforce new lines between multi-line properties in Vue components.',
+        'Enforce new lines between multi-line properties in Vue components.'
+      ]
+    },
+    // test set insertLine to 2
+    {
+      filename: 'test.vue',
+      options: [{ insertLine: 2 }],
+      code: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Enforce new lines between multi-line properties in Vue components.',
+        'Enforce new lines between multi-line properties in Vue components.'
+      ]
+
+    },
+    // test set insertLine and minLineOfMultilineProperty to 5
+    {
+      filename: 'test.vue',
+      options: [{ insertLine: 2, minLineOfMultilineProperty: 5 }],
+      code: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+          focused: {
+            type: Boolean,
+            default: false,
+            required: true
+          },
+
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+          focused: {
+            type: Boolean,
+            default: false,
+            required: true
+          },
+
+
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Enforce new lines between multi-line properties in Vue components.',
+          line: 9
+        }
+      ]
+
     }
   ]
 })

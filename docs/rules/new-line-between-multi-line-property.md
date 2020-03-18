@@ -7,7 +7,7 @@ description: enforce new lines between multi-line properties in Vue components
 # vue/new-line-between-multi-line-property
 > enforce new lines between multi-line properties in Vue components
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Please describe the origin of the rule here.
