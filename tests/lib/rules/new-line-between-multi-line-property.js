@@ -235,7 +235,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
     // test set insertLine to 2
     {
       filename: 'test.vue',
-      options: [{ insertLine: 2 }],
+      options: [{ 'insert-line': 2 }],
       code: `
       <script>
       export default {
@@ -286,7 +286,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
     // test set insertLine and minLineOfMultilineProperty to 5
     {
       filename: 'test.vue',
-      options: [{ insertLine: 2, minLineOfMultilineProperty: 5 }],
+      options: [{ 'insert-line': 2, 'min-line-of-multiline-property': 5 }],
       code: `
       <script>
       export default {
