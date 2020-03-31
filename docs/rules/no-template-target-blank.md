@@ -9,7 +9,7 @@ description: disallow target="_blank" attribute without rel="noopener noreferrer
 
 ## :book: Rule Details
 
-This rule disallows target="_blank" attribute without rel="noopener noreferrer".
+This rule disallows using `target="_blank"` attribute without `rel="noopener noreferrer"` to avoid a security vulnerability([see here for more details](https://mathiasbynens.github.io/rel-noopener/)).
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error']}">
 
