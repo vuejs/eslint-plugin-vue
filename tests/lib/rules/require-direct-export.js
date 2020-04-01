@@ -35,6 +35,13 @@ ruleTester.run('require-direct-export', rule, {
             export default {}
           `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+            module.exports = {}
+          `,
+      parserOptions
     }
   ],
 
@@ -49,6 +56,18 @@ ruleTester.run('require-direct-export', rule, {
       errors: [{
         message: 'Expected the component literal to be directly exported.',
         type: 'ExportDefaultDeclaration',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+          var A = {};
+          module.exports = A`,
+      parserOptions,
+      errors: [{
+        message: 'Expected the component literal to be directly exported.',
+        type: 'AssignmentExpression',
         line: 3
       }]
     }

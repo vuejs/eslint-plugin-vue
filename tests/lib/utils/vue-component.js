@@ -327,6 +327,11 @@ ruleTester.run('vue-component', rule, {
       filename: 'test.js',
       code: `export default { }`,
       parserOptions
+    },
+    {
+      filename: 'test.js',
+      code: `module.exports = { }`,
+      parserOptions
     }
   ].concat(validTests('js')).concat(validTests('jsx')).concat(validTests('vue')),
   invalid: [
@@ -337,8 +342,20 @@ ruleTester.run('vue-component', rule, {
       errors: [makeError(1)]
     },
     {
+      filename: 'test.vue',
+      code: `module.exports = { }`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
       filename: 'test.jsx',
       code: `export default { }`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: 'test.jsx',
+      code: `module.exports = { }`,
       parserOptions,
       errors: [makeError(1)]
     }
