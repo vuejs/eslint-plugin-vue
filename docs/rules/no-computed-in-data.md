@@ -13,8 +13,6 @@ description: disallow computed properties used in the data property
 
 This rule report computed properties that used in data property
 
-Examples of **incorrect** code for this rule:
-
 <eslint-code-block :rules="{'vue/no-computed-in-data': ['error']}">
 
 ```vue
