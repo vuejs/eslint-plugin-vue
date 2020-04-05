@@ -2,22 +2,16 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-computed-in-data
-description: require computed properties are not used in the data()
+description: disallow computed properties used in the data property
 ---
 # vue/no-computed-in-data
-> require computed properties are not used in the data()
+> disallow computed properties used in the data property
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-
-> require computed properties are not used in the data()
-
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-
-Please describe the origin of the rule here.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
-This rule report computed properties are used in data property
+This rule report computed properties that used in data property
 
 Examples of **incorrect** code for this rule:
 
@@ -28,38 +22,22 @@ Examples of **incorrect** code for this rule:
 export default {
   data() {
     return {
-      value: 'hello ' + this.world,
+      /* ✓ GOOD */
+      value: 'hello ' + 'world',
+
+      /* ✗ BAD */
       a: this.world,
       b: this.world,
+      c: [this.world, this.number]
     };
   },
   computed: {
     world() {
       return 'world';
     },
-  },
-};
-</script>
-```
-
-</eslint-code-block>
-
-Examples of **correct** code for this rule:
-
-<eslint-code-block :rules="{'vue/no-computed-in-data': ['error']}">
-
-```vue
-<script>
-export default {
-  data() {
-    return {
-      value: 'hello ' + 'world',
-    };
-  },
-  computed: {
-    world() {
-      return 'world';
-    },
+    number() {
+      return 1
+    }
   },
 };
 </script>
@@ -69,9 +47,9 @@ export default {
 
 ## :wrench: Options
 
-nothing
+Nothing.
 
-## Further Reading
+## :books: Further reading
 
 [Computed Properties](https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods)
 
