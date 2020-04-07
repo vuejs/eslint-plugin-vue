@@ -31,7 +31,8 @@ tester.run('no-potential-component-option-typo', rule, {
         method: {}
       }
       </script>
-      `
+      `,
+      options: [{ presets: [] }]
     },
     {
 
@@ -83,6 +84,18 @@ tester.run('no-potential-component-option-typo', rule, {
       </script>
       `,
       options: [{ custom: ['custom', 'foo'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        abcde: {},
+        abcd: {}
+      }
+      </script>
+      `,
+      options: [{ custom: ['abcde', 'abcd'] }]
     }
   ],
   invalid: [
@@ -336,7 +349,7 @@ tester.run('no-potential-component-option-typo', rule, {
           ]
         }
       ],
-      options: [{ custom: ['data', 'methods'], threshold: 10 }]
+      options: [{ custom: ['data', 'methods'], threshold: 10, presets: [] }]
     }
 
   ]
