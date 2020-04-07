@@ -70,6 +70,19 @@ tester.run('no-potential-component-option-typo', rule, {
       </script>
       `,
       options: [{ presets: ['vue', 'vue-router'] }]
+    },
+    //  test custom option that is not available in the presets
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        custom: {},
+        foo: {}
+      }
+      </script>
+      `,
+      options: [{ custom: ['custom', 'foo'] }]
     }
   ],
   invalid: [
@@ -117,13 +130,15 @@ tester.run('no-potential-component-option-typo', rule, {
       options: [{ custom: ['data', 'methods'] }]
     },
     // test if user define custom rule is duplicate with presets
+    //  test custom option that is not available in the presets
     {
       filename: 'test.vue',
       code: `
       <script>
       export default {
         dat: {},
-        method: {}
+        method: {},
+        custo: {}
       }
       </script>`,
       errors: [
@@ -136,7 +151,8 @@ tester.run('no-potential-component-option-typo', rule, {
       <script>
       export default {
         data: {},
-        method: {}
+        method: {},
+        custo: {}
       }
       </script>`
             }
@@ -151,14 +167,31 @@ tester.run('no-potential-component-option-typo', rule, {
       <script>
       export default {
         dat: {},
-        methods: {}
+        methods: {},
+        custo: {}
+      }
+      </script>`
+            }
+          ]
+        },
+        {
+          message: `'custo' may be a typo, which is similar to option [custom].`,
+          suggestions: [
+            {
+              desc: `Replace property 'custo' to 'custom'`,
+              output: `
+      <script>
+      export default {
+        dat: {},
+        method: {},
+        custom: {}
       }
       </script>`
             }
           ]
         }
       ],
-      options: [{ custom: ['data', 'methods'], presets: ['all'] }]
+      options: [{ custom: ['data', 'methods', 'custom', 'foo'], presets: ['all'] }]
     },
     // test if report correctly, only have preset option
     {
