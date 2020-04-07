@@ -41,7 +41,7 @@ tester.run('no-potential-component-option-typo', rule, {
       export default {
       }
       </script>
-      `.trim(),
+      `,
       options: [{ presets: ['vue'] }]
     },
     // test if give preset and the potentialTypoList length is zero, just for 100% test cover
@@ -54,10 +54,23 @@ tester.run('no-potential-component-option-typo', rule, {
         data() {}
       }
       </script>
-      `.trim(),
+      `,
       options: [{ presets: ['vue'] }]
+    },
+    // multi preset that won't report
+    {
+
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {},
+        beforeRouteEnter() {}
+      }
+      </script>
+      `,
+      options: [{ presets: ['vue', 'vue-router'] }]
     }
-    // give me some code that won't trigger a warning
   ],
   invalid: [
     {
@@ -68,8 +81,7 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         method: {}
       }
-      </script>
-      `.trim(),
+      </script>`,
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
@@ -82,8 +94,7 @@ tester.run('no-potential-component-option-typo', rule, {
         data: {},
         method: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         },
@@ -98,8 +109,7 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         methods: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         }
@@ -115,8 +125,7 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         method: {}
       }
-      </script>
-      `.trim(),
+      </script>`,
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
@@ -129,8 +138,7 @@ tester.run('no-potential-component-option-typo', rule, {
         data: {},
         method: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         },
@@ -145,8 +153,7 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         methods: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         }
@@ -163,8 +170,7 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         method: {}
       }
-      </script>
-      `.trim(),
+      </script>`,
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
@@ -177,8 +183,7 @@ tester.run('no-potential-component-option-typo', rule, {
         data: {},
         method: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         },
@@ -193,13 +198,75 @@ tester.run('no-potential-component-option-typo', rule, {
         dat: {},
         methods: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         }
       ],
       options: [{ presets: ['vue'] }]
+    },
+    // multi preset report typo
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        dat: {},
+        beforeRouteEntr,
+        method: {}
+      }
+      </script>`,
+      errors: [
+        {
+          message: "'dat' may be a typo, which is similar to option [data].",
+          suggestions: [
+            {
+              desc: `Replace property 'dat' to 'data'`,
+              output: `
+      <script>
+      export default {
+        data: {},
+        beforeRouteEntr,
+        method: {}
+      }
+      </script>`
+            }
+          ]
+        },
+        {
+          message: "'beforeRouteEntr' may be a typo, which is similar to option [beforeRouteEnter].",
+          suggestions: [
+            {
+              desc: `Replace property 'beforeRouteEntr' to 'beforeRouteEnter'`,
+              output: `
+      <script>
+      export default {
+        dat: {},
+        beforeRouteEnter,
+        method: {}
+      }
+      </script>`
+            }
+          ]
+        },
+        {
+          message: `'method' may be a typo, which is similar to option [methods].`,
+          suggestions: [
+            {
+              desc: `Replace property 'method' to 'methods'`,
+              output: `
+      <script>
+      export default {
+        dat: {},
+        beforeRouteEntr,
+        methods: {}
+      }
+      </script>`
+            }
+          ]
+        }
+      ],
+      options: [{ presets: ['vue', 'vue-router'] }]
     },
     // test multi suggestion
     {
@@ -210,8 +277,7 @@ tester.run('no-potential-component-option-typo', rule, {
       export default {
         method: {}
       }
-      </script>
-      `.trim(),
+      </script>`,
       errors: [
         {
           message: `'method' may be a typo, which is similar to option [methods,data].`,
@@ -223,8 +289,7 @@ tester.run('no-potential-component-option-typo', rule, {
       export default {
         methods: {}
       }
-      </script>
-              `.trim()
+      </script>`
             },
             {
               desc: `Replace property 'method' to 'data'`,
@@ -233,13 +298,13 @@ tester.run('no-potential-component-option-typo', rule, {
       export default {
         data: {}
       }
-      </script>
-              `.trim()
+      </script>`
             }
           ]
         }
       ],
       options: [{ custom: ['data', 'methods'], threshold: 10 }]
     }
+
   ]
 })
