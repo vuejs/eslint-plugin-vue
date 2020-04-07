@@ -7,8 +7,6 @@ description: disallow a potential typo in your component property
 # vue/no-potential-component-option-typo
 > disallow a potential typo in your component property
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-
 ## :book: Rule Details
 
 This Rule disallow a potential typo in your component options
