@@ -32,6 +32,7 @@ tester.run('no-potential-component-option-typo', rule, {
       }
       </script>
       `,
+      // because vue preset is include by default, set the presets to empty
       options: [{ presets: [] }]
     },
     {
@@ -96,6 +97,19 @@ tester.run('no-potential-component-option-typo', rule, {
       </script>
       `,
       options: [{ custom: ['abcde', 'abcd'] }]
+    },
+    // valid test case set custom and threshold
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        custom: {},
+        fooooo: {}
+      }
+      </script>
+      `,
+      options: [{ custom: ['custom', 'foo'], threshold: 2 }]
     }
   ],
   invalid: [
@@ -111,6 +125,8 @@ tester.run('no-potential-component-option-typo', rule, {
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
+          line: 4,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -126,6 +142,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: `'method' may be a typo, which is similar to option [methods].`,
+          line: 5,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -157,6 +175,8 @@ tester.run('no-potential-component-option-typo', rule, {
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
+          line: 4,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -173,6 +193,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: `'method' may be a typo, which is similar to option [methods].`,
+          line: 5,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -189,6 +211,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: `'custo' may be a typo, which is similar to option [custom].`,
+          line: 6,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'custo' to 'custom'`,
@@ -220,6 +244,8 @@ tester.run('no-potential-component-option-typo', rule, {
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
+          line: 4,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -235,6 +261,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: `'method' may be a typo, which is similar to option [methods].`,
+          line: 5,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -265,6 +293,8 @@ tester.run('no-potential-component-option-typo', rule, {
       errors: [
         {
           message: "'dat' may be a typo, which is similar to option [data].",
+          line: 4,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -281,6 +311,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: "'beforeRouteEntr' may be a typo, which is similar to option [beforeRouteEnter].",
+          line: 5,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'beforeRouteEntr' to 'beforeRouteEnter'`,
@@ -297,6 +329,8 @@ tester.run('no-potential-component-option-typo', rule, {
         },
         {
           message: `'method' may be a typo, which is similar to option [methods].`,
+          line: 6,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -327,6 +361,8 @@ tester.run('no-potential-component-option-typo', rule, {
       errors: [
         {
           message: `'method' may be a typo, which is similar to option [methods,data].`,
+          line: 4,
+          column: 9,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
