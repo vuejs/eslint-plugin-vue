@@ -20,7 +20,7 @@ tester.run('no-watch-after-await', rule, {
       import {watch} from 'vue'
       export default {
         async setup() {
-          watch(() => { /* ... */ }) // ok
+          watch(foo, () => { /* ... */ }) // ok
 
           await doSomething()
         }
@@ -35,7 +35,7 @@ tester.run('no-watch-after-await', rule, {
       import {watch} from 'vue'
       export default {
         async setup() {
-          watch(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
         }
       }
       </script>
@@ -49,7 +49,7 @@ tester.run('no-watch-after-await', rule, {
       export default {
         async setup() {
           watchEffect(() => { /* ... */ })
-          watch(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
           await doSomething()
         }
       }
@@ -70,6 +70,27 @@ tester.run('no-watch-after-await', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+          const a = watchEffect(() => { /* ... */ })
+          const b = watch(foo, () => { /* ... */ })
+          c = watch()
+          d(watch())
+          e = {
+            foo: watch()
+          }
+          f = [watch()]
+        }
+      }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -82,7 +103,7 @@ tester.run('no-watch-after-await', rule, {
         async setup() {
           await doSomething()
 
-          watch(() => { /* ... */ }) // error
+          watch(foo, () => { /* ... */ }) // error
         }
       }
       </script>
@@ -93,7 +114,7 @@ tester.run('no-watch-after-await', rule, {
           line: 8,
           column: 11,
           endLine: 8,
-          endColumn: 37
+          endColumn: 42
         }
       ]
     },
@@ -107,7 +128,7 @@ tester.run('no-watch-after-await', rule, {
           await doSomething()
 
           watchEffect(() => { /* ... */ })
-          watch(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
         }
       }
       </script>
@@ -132,11 +153,11 @@ tester.run('no-watch-after-await', rule, {
         async setup() {
           await doSomething()
 
-          watch(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
 
           await doSomething()
 
-          watch(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
         }
       }
       </script>

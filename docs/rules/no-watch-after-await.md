@@ -22,12 +22,35 @@ import { watch } from 'vue'
 export default {
   async setup() {
     /* ✓ GOOD */
-    watch(() => { /* ... */ })
+    watch(watchSource, () => { /* ... */ })
 
     await doSomething()
 
     /* ✗ BAD */
-    watch(() => { /* ... */ })
+    watch(watchSource, () => { /* ... */ })
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+This rule is not reported when using the stop handle.
+
+<eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">
+
+```vue
+<script>
+import { watch } from 'vue'
+export default {
+  async setup() {
+    await doSomething()
+
+    /* ✓ GOOD */
+    const stopHandle = watch(watchSource, () => { /* ... */ })
+
+    // later
+    stopHandle()
   }
 }
 </script>
@@ -42,6 +65,7 @@ Nothing.
 ## :books: Further reading
 
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
+- [Vue Composition API - API Reference - Stopping the Watcher](https://composition-api.vuejs.org/api.html#stopping-the-watcher)
 
 ## :mag: Implementation
 
