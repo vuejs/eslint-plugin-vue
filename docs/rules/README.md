@@ -277,6 +277,7 @@ For example:
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
+| [vue/require-shorthand-boolean-prop](./require-shorthand-boolean-prop.md) | enforce or forbid passing `true` value to a prop |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
