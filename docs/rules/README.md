@@ -61,6 +61,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
+| [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  |
