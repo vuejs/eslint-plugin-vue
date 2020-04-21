@@ -58,6 +58,7 @@
   "devDependencies": {
     "@types/node": "^4.2.16",
     "@typescript-eslint/parser": "^2.6.1",
+    "@vuepress/plugin-pwa": "^1.4.0",
     "acorn": "^7.1.0",
     "babel-eslint": "^10.0.2",
     "chai": "^4.1.0",
@@ -66,12 +67,12 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-vue": "file:.",
     "eslint-plugin-vue-libs": "^4.0.0",
-    "eslint4b": "^6.6.0",
+    "eslint4b": "^6.8.0",
     "lodash": "^4.17.4",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "typescript": "^3.5.2",
-    "vue-eslint-editor": "^0.1.4",
-    "vuepress": "^0.14.5"
+    "vue-eslint-editor": "^1.1.0",
+    "vuepress": "^1.4.0"
   }
 }

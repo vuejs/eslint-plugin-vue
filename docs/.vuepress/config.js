@@ -66,11 +66,17 @@ module.exports = {
   base: '/',
   title: 'eslint-plugin-vue',
   description: 'Official ESLint plugin for Vue.js',
-  serviceWorker: true,
   evergreen: true,
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
+
+  plugins: {
+    '@vuepress/pwa': {
+      serviceWorker: true,
+      updatePopup: true
+    }
+  },
 
   themeConfig: {
     repo: 'vuejs/eslint-plugin-vue',
@@ -79,9 +85,6 @@ module.exports = {
     docsBranch: 'master',
     editLinks: true,
     lastUpdated: true,
-    serviceWorker: {
-      updatePopup: true
-    },
 
     nav: [
       { text: 'User Guide', link: '/user-guide/' },
