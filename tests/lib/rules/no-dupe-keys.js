@@ -639,6 +639,44 @@ ruleTester.run('no-dupe-keys', rule, {
         message: 'Duplicated key \'foo\'.',
         line: 9
       }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        defineComponent({
+          foo: {
+            bar: String
+          },
+          data: {
+            bar: null
+          },
+        })
+      `,
+      options: [{ groups: ['foo'] }],
+      parserOptions: { ecmaVersion: 6 },
+      errors: [{
+        message: 'Duplicated key \'bar\'.',
+        line: 7
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        export default defineComponent({
+          foo: {
+            bar: String
+          },
+          data: {
+            bar: null
+          },
+        })
+      `,
+      options: [{ groups: ['foo'] }],
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [{
+        message: 'Duplicated key \'bar\'.',
+        line: 7
+      }]
     }
   ]
 })

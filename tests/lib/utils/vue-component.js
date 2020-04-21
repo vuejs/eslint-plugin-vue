@@ -311,6 +311,12 @@ function invalidTests (ext) {
       `,
       parserOptions,
       errors: (ext === 'js' ? [] : [makeError(2)]).concat([makeError(8)])
+    },
+    {
+      filename: `test.${ext}`,
+      code: `export default defineComponent({})`,
+      parserOptions,
+      errors: [makeError(1)]
     }
   ]
 }
