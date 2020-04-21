@@ -74,5 +74,8 @@
     "typescript": "^3.5.2",
     "vue-eslint-editor": "^1.1.0",
     "vuepress": "^1.4.0"
+  },
+  "publishConfig": {
+    "tag": "next"
   }
 }
