@@ -18,8 +18,7 @@
 </template>
 
 <script>
-// https://github.com/vuejs/vuepress/issues/451
-import EslintEditor from '../../../node_modules/vue-eslint-editor'
+import EslintEditor from 'vue-eslint-editor'
 import { rules, processors } from '../../../'
 
 export default {

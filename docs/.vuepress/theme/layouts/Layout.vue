@@ -12,7 +12,7 @@
     />
     <template
       slot="page-top">
-      <div class="content beta-doc-description">
+      <div class="theme-default-content beta-doc-description">
         <div class="warning custom-block">
           <p class="custom-block-title">Note</p>
           <p>This is a documentation for version <code>{{docVersion}}</code>.<template v-if="hasNotYetBeenReleased"> Also, this documentation may contain content that has not yet been released.</template><br>
@@ -30,14 +30,16 @@
     />
   </BaseLayout>
 </template>
+
 <script>
 /**
  * Layout definition to navigate to older versions of the document.
  */
-import BaseLayout from 'vuepress/lib/default-theme/Layout.vue'
+import BaseLayout from '@vuepress/theme-default/layouts/Layout.vue'
 import semver from 'semver'
-const version = semver.parse(require('../../../package.json').version)
+const version = semver.parse(require('../../../../package.json').version)
 export default {
+  name: 'MyLayout',
   components: {
     BaseLayout
   },
@@ -63,14 +65,15 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .beta-doc-description {
   padding-bottom: 0;
 }
-* ::v-deep .content ~ .content {
+* ::v-deep .theme-default-content ~ .theme-default-content {
   padding-top: 0;
 }
-* ::v-deep .content:not(.custom) h1{
+* ::v-deep .theme-default-content:not(.custom) h1{
   margin-top: -3.1rem;
 }
 </style>
