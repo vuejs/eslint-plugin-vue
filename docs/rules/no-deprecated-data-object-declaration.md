@@ -15,37 +15,55 @@ description: disallow using deprecated object declaration on data (in Vue.js 3.0
 This rule reports use of deprecated object declaration on `data` property (in Vue.js 3.0.0+).
 The different from `vue/no-shared-component-data` is the root instance being also disallowed.
 
+<eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}" language="javascript" filename="example.js">
+
+```js
+createApp({
+  /* ✗ BAD */
+  data: {
+    foo: null
+  }
+}).mount('#app')
+
+createApp({
+  /* ✓ GOOD */
+  data () {
+    return {
+      foo: null
+    }
+  }
+}).mount('#app')
+```
+
+</eslint-code-block>
+
 <eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}">
 
 ```vue
 <script>
-/* ✗ BAD */
-createApp({
-  data: {
-    foo: null
-  }
-}).mount('#app')
 export default {
+  /* ✗ BAD */
   data: {
     foo: null
   }
 }
+</script>
+```
 
-/* ✓ GOOD */
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}">
+
+```vue
+<script>
 export default {
+  /* ✓ GOOD */
   data () {
     return {
       foo: null
     }
   }
 }
-createApp({
-  data () {
-    return {
-      foo: null
-    }
-  }
-}).mount('#app')
 </script>
 ```
 
