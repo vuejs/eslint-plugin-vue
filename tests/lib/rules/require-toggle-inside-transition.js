@@ -9,7 +9,7 @@
 // ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/require-v-if-inside-transition')
+const rule = require('../../../lib/rules/require-toggle-inside-transition')
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -20,7 +20,7 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-tester.run('require-v-if-inside-transition', rule, {
+tester.run('require-toggle-inside-transition', rule, {
   valid: [
     {
       filename: 'test.vue',

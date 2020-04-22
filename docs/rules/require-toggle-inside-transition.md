@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/require-v-if-inside-transition
+title: vue/require-toggle-inside-transition
 description: require control the display of the content inside `<transition>`
 ---
-# vue/require-v-if-inside-transition
+# vue/require-toggle-inside-transition
 > require control the display of the content inside `<transition>`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -13,7 +13,7 @@ description: require control the display of the content inside `<transition>`
 
 This rule reports elements inside `<transition>` that do not control the display.
 
-<eslint-code-block :rules="{'vue/require-v-if-inside-transition': ['error']}">
+<eslint-code-block :rules="{'vue/require-toggle-inside-transition': ['error']}">
 
 ```vue
 <template>
@@ -38,5 +38,5 @@ Nothing.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-v-if-inside-transition.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-v-if-inside-transition.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-toggle-inside-transition.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-toggle-inside-transition.js)
