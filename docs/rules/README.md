@@ -59,6 +59,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
+| [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
@@ -162,6 +163,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
+| [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
