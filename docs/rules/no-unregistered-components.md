@@ -7,8 +7,6 @@ description: disallow using components that are not registered inside templates
 # vue/no-unregistered-components
 > disallow using components that are not registered inside templates
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
-
 ## :book: Rule Details
 
 This rule reports components that haven't been registered and are being used in the template.
