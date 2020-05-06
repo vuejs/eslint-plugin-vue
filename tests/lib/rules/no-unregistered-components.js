@@ -69,6 +69,74 @@ tester.run('no-unregistered-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
+          <custom-component>
+            Some text
+          </custom-component>
+        </template>
+      `,
+      options: [
+        {
+          ignorePatterns: [
+            /custom(\-\w+)+/
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <custom-component>
+            Some text
+          </custom-component>
+        </template>
+      `,
+      options: [
+        {
+          ignorePatterns: [
+            /Custom(\w+)+/
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <custom_component>
+            Some text
+          </custom_component>
+        </template>
+      `,
+      options: [
+        {
+          ignorePatterns: [
+            /Custom(\w+)+/
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <customComponent>
+            Some text
+          </customComponent>
+        </template>
+      `,
+      options: [
+        {
+          ignorePatterns: [
+            /Custom(\w+)+/
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
           <CustomComponent />
         </template>
         <script>
