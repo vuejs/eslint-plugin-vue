@@ -49,6 +49,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-deprecated-v-bind-sync](./no-deprecated-v-bind-sync.md) | disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-v-on-number-modifiers](./no-deprecated-v-on-number-modifiers.md) | disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+) | :wrench: |
+| [vue/no-deprecated-vue-config-keycodes](./no-deprecated-vue-config-keycodes.md) | disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+) |  |
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  |
