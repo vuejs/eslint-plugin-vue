@@ -43,7 +43,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /custom(\-\w+)+/
+            'custom(\\-\\w+)+'
           ]
         }
       ]
@@ -60,7 +60,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /custom(\-\w+)+/
+            'custom(\\-\\w+)+'
           ]
         }
       ]
@@ -77,7 +77,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /custom(\-\w+)+/
+            'custom(\\-\\w+)+'
           ]
         }
       ]
@@ -94,7 +94,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /Custom(\w+)+/
+            'Custom(\\w+)+'
           ]
         }
       ]
@@ -111,7 +111,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /Custom(\w+)+/
+            'Custom(\\w+)+'
           ]
         }
       ]
@@ -128,7 +128,27 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /Custom(\w+)+/
+            'Custom(\\w+)+'
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <customComponent>
+            <warm-code>Text</warm-code>
+            <InfoBtnPrimary value="text" />
+          </customComponent>
+        </template>
+      `,
+      options: [
+        {
+          ignorePatterns: [
+            'Custom(\\w+)+',
+            'Warm(\\w+)+',
+            'InfoBtn(\\w+)+'
           ]
         }
       ]
@@ -232,6 +252,56 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="'div'" />
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="name" />
+        </template>
+        <script>
+        export default {
+          data: () => ({ name: 'div' })
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="name" />
+        </template>
+        <script>
+        export default {
+          data: () => ({ name: 'warm-button' }),
+          components: { WarmButton }
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          components: {
+            'custom-component': InfoPrimaryWrapper
+          }
+        }
+        </script>
+      `
     }
   ],
   invalid: [
@@ -257,7 +327,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /custom(\-\w+)+/
+            'custom(\\-\\w+)+'
           ]
         }
       ],
@@ -292,7 +362,7 @@ tester.run('no-unregistered-components', rule, {
       options: [
         {
           ignorePatterns: [
-            /custom(\-\w+)+/
+            'custom(\\-\\w+)+'
           ]
         }
       ],
