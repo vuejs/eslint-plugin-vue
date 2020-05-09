@@ -11,6 +11,12 @@
 const rule = require('../../../lib/rules/no-reserved-component-names')
 const RuleTester = require('eslint').RuleTester
 
+const htmlElements = require('../../../lib/utils/html-elements.json')
+const RESERVED_NAMES_IN_HTML = new Set([
+  ...htmlElements,
+  ...htmlElements.map((word) => word[0].toUpperCase() + word.substring(1, word.length))
+])
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -234,6 +240,18 @@ const invalidElements = [
   'xmp', 'Xmp'
 ]
 
+const vue2BuiltInComponents = [
+  'component', 'Component',
+  'transition', 'Transition',
+  'transition-group', 'TransitionGroup',
+  'keep-alive', 'KeepAlive'
+]
+
+const vue3BuiltInComponents = [
+  'teleport', 'Teleport',
+  'suspense', 'Suspense'
+]
+
 const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
@@ -267,6 +285,16 @@ ruleTester.run('no-reserved-component-names', rule, {
           name: 'FooBar'
         }
       `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'FooBar'
+        }
+      `,
+      options: [{ disallowVueBuiltInComponents: true, disallowVue3BuiltInComponents: true }],
       parserOptions
     },
     {
@@ -322,7 +350,41 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: 'test.js',
       code: `fn1(component.data)`,
       parserOptions
-    }
+    },
+    ...vue2BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions
+      }
+    }),
+    ...vue3BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions
+      }
+    }),
+    ...vue3BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions,
+        options: [{ disallowVueBuiltInComponents: true }]
+      }
+    })
   ],
 
   invalid: [
@@ -336,7 +398,8 @@ ruleTester.run('no-reserved-component-names', rule, {
         `,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'Literal',
           line: 3
         }]
@@ -348,7 +411,8 @@ ruleTester.run('no-reserved-component-names', rule, {
         code: `Vue.component('${name}', component)`,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'Literal',
           line: 1
         }]
@@ -360,7 +424,8 @@ ruleTester.run('no-reserved-component-names', rule, {
         code: `app.component('${name}', component)`,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'Literal',
           line: 1
         }]
@@ -372,7 +437,8 @@ ruleTester.run('no-reserved-component-names', rule, {
         code: `Vue.component(\`${name}\`, {})`,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'TemplateLiteral',
           line: 1
         }]
@@ -384,7 +450,8 @@ ruleTester.run('no-reserved-component-names', rule, {
         code: `app.component(\`${name}\`, {})`,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'TemplateLiteral',
           line: 1
         }]
@@ -400,8 +467,63 @@ ruleTester.run('no-reserved-component-names', rule, {
         }`,
         parserOptions,
         errors: [{
-          message: `Name "${name}" is reserved.`,
+          messageId: RESERVED_NAMES_IN_HTML.has(name) ? 'reservedInHtml' : 'reserved',
+          data: { name },
           type: 'Property',
+          line: 3
+        }]
+      }
+    }),
+    ...vue2BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions,
+        options: [{ disallowVueBuiltInComponents: true }],
+        errors: [{
+          messageId: 'reservedInVue',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }]
+      }
+    }),
+    ...vue2BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions,
+        options: [{ disallowVue3BuiltInComponents: true }],
+        errors: [{
+          messageId: 'reservedInVue',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }]
+      }
+    }),
+    ...vue3BuiltInComponents.map(name => {
+      return {
+        filename: `${name}.vue`,
+        code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+        parserOptions,
+        options: [{ disallowVue3BuiltInComponents: true }],
+        errors: [{
+          messageId: 'reservedInVue3',
+          data: { name },
+          type: 'Literal',
           line: 3
         }]
       }
