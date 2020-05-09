@@ -11,6 +11,12 @@ description: disallow using components that are not registered inside templates
 
 This rule reports components that haven't been registered and are being used in the template.
 
+::: warning Note
+This rule cannot check globally registered components and components registered in mixins 
+unless you add them as part of the ignored patterns. `component`, `suspense` and `teleport` 
+are ignored by default.
+:::
+
 <eslint-code-block :rules="{'vue/no-unregistered-components': ['error']}">
 
 ```vue
@@ -77,12 +83,11 @@ This rule reports components that haven't been registered and are being used in 
 }
 ```
 
-- `ignorePatterns` ... suppresses all errors if component name matches one or more patterns
-    default `[]`
+- `ignorePatterns` Suppresses all errors if component name matches one or more patterns.
 
-### `ignorePatterns: [/custom(\-\w+)+/]`
+### `ignorePatterns: ['custom(\\-\\w+)+']`
 
-<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': [/custom(\-\w+)+/] }]}">
+<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -104,7 +109,7 @@ This rule reports components that haven't been registered and are being used in 
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': [/custom(\-\w+)+/] }]}">
+<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
