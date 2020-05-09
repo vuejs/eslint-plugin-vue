@@ -20,7 +20,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2019 }
 })
 
-ruleTester.run('no-deprecated-inline-template', rule, {
+ruleTester.run('no-deprecated-html-element-is', rule, {
   valid: [
     {
       filename: 'test.vue',
