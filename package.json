@@ -47,7 +47,7 @@
     "node": ">=8.10"
   },
   "peerDependencies": {
-    "eslint": "^5.0.0 || ^6.0.0"
+    "eslint": "^6.0.0 || ^7.0.0"
   },
   "dependencies": {
     "eslint-utils": "^2.0.0",
@@ -62,7 +62,7 @@
     "acorn": "^7.1.0",
     "babel-eslint": "^10.0.2",
     "chai": "^4.1.0",
-    "eslint": "^6.0.0",
+    "eslint": "^7.0.0",
     "eslint-plugin-eslint-plugin": "^2.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-vue": "file:.",

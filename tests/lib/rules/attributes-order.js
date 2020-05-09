@@ -625,23 +625,23 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-once".',
-          nodeType: 'VIdentifier'
+          type: 'VIdentifier'
         },
         {
           message: 'Attribute "v-on:click" should go before "v-once".',
-          nodeType: 'VDirectiveKey'
+          type: 'VDirectiveKey'
         },
         {
           message: 'Attribute "ref" should go before "v-once".',
-          nodeType: 'VIdentifier'
+          type: 'VIdentifier'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
-          nodeType: 'VIdentifier'
+          type: 'VIdentifier'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
-          nodeType: 'VIdentifier'
+          type: 'VIdentifier'
         }
       ]
     },
@@ -683,7 +683,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
-          nodeType: 'VIdentifier'
+          type: 'VDirectiveKey'
         }
       ]
     },
@@ -709,7 +709,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-slot" should go before "v-model".',
-          nodeType: 'VIdentifier'
+          type: 'VDirectiveKey'
         }
       ]
     },
