@@ -42,6 +42,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-events-api](./no-deprecated-events-api.md) | disallow using deprecated events api (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-filter](./no-deprecated-filter.md) | disallow using deprecated filters syntax (in Vue.js 3.0.0+) |  |
+| [vue/no-deprecated-functional-template](./no-deprecated-functional-template.md) | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-html-element-is](./no-deprecated-html-element-is.md) | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-inline-template](./no-deprecated-inline-template.md) | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: |
