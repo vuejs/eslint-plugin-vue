@@ -319,6 +319,29 @@ tester.run('no-unregistered-components', rule, {
           </Suspense>
         </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <transition />
+          <transition-group />
+          <keep-alive />
+          <transition>
+            <div>Text</div>
+          </transition>
+          <TransitionGroup />
+          <KeepAlive />
+          <Transition>
+            <div>Text</div>
+          </Transition>
+          <Slot />
+          <slot />
+          <slot>
+            foo
+          </slot>
+        </template>
+      `
     }
   ],
   invalid: [
