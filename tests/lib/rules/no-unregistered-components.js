@@ -265,6 +265,42 @@ tester.run('no-unregistered-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
+          <component is="div" />
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is="span">
+            Text
+          </component>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Component is="div" />
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Component is="span">
+            Text
+          </Component>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
           <component :is="name" />
         </template>
         <script>
