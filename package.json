@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "npm run test:base -- --watch --growl",
-    "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
+    "test:base": "mocha \"tests/lib/**/no-unregistered-components.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
     "cover:report": "nyc report --reporter=html",

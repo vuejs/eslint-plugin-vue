@@ -302,6 +302,23 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <teleport />
+          <suspense />
+          <suspense>
+            <div>Text</div>
+          </suspense>
+          <Teleport />
+          <Suspense />
+          <Suspense>
+            <div>Text</div>
+          </Suspense>
+        </template>
+      `
     }
   ],
   invalid: [
