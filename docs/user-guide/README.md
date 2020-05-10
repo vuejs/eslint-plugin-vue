@@ -114,7 +114,7 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 
 ### Disabling rules via `<!-- eslint-disable -->`
 
-You can use `<!-- eslint-disable -->`-like HTML comments in the `<template>` of `.vue` files to disable a certain rule temporarily.
+You can use `<!-- eslint-disable -->`-like HTML comments in the `<template>` and in the block level of `.vue` files to disable a certain rule temporarily.
 
 For example:
 
