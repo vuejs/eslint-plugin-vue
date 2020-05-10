@@ -11,6 +11,7 @@
 
 const cp = require('child_process')
 const path = require('path')
+const semver = require('semver')
 
 // -----------------------------------------------------------------------------
 // Tests
@@ -34,6 +35,10 @@ describe('Integration with eslint-plugin-import', () => {
   // eslint-plugin-vue had been breaking eslint-plugin-import if people use both at the same time.
   // This test is in order to prevent the regression.
   it('should lint without errors', () => {
+    if (!semver.satisfies(process.version, require(path.join(__dirname, 'eslint-plugin-import/node_modules/eslint/package.json')).engines.node)) {
+      return
+    }
+
     cp.execSync(`${ESLINT} a.vue`, { stdio: 'inherit' })
   })
 })
