@@ -36,6 +36,7 @@ function tokenize (code, option) {
       result.push(commentTokens)
     })
   )
+  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
   linter.verify(
     code,
     {

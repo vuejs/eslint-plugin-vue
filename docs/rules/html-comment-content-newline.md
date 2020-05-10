@@ -66,7 +66,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 - This rule can also take a 2nd option, an object with the following key: `"exceptions"`.
     - The `"exceptions"` value is an array of string patterns which are considered exceptions to the rule.
 
-    ```
+    ```json
     "vue/html-comment-content-newline": ["error", { ... }, { "exceptions": ["*"] }]
     ```
 
