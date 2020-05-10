@@ -69,8 +69,8 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  |
+| [vue/require-toggle-inside-transition](./require-toggle-inside-transition.md) | require control the display of the content inside `<transition>` |  |
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  |
-| [vue/require-v-if-inside-transition](./require-v-if-inside-transition.md) | require control the display of the content inside `<transition>` |  |
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
