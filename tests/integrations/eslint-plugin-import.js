@@ -24,7 +24,7 @@ describe('Integration with eslint-plugin-import', () => {
   before(() => {
     originalCwd = process.cwd()
     process.chdir(path.join(__dirname, 'eslint-plugin-import'))
-    cp.execSync('npm i', { stdio: 'inherit', env: { npm_config_package_lock: 'false' }})
+    cp.execSync('npm i', { stdio: 'inherit' })
   })
   after(() => {
     process.chdir(originalCwd)
