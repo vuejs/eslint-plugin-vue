@@ -328,21 +328,6 @@ tester.run('no-unregistered-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
-          <CustomComponent />
-        </template>
-        <script>
-        export default {
-          components: {
-            'custom-component': InfoPrimaryWrapper
-          }
-        }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
           <teleport />
           <suspense />
           <suspense>
@@ -376,6 +361,37 @@ tester.run('no-unregistered-components', rule, {
           <slot>
             foo
           </slot>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Custom-Component />
+        </template>
+        <script>
+        export default {
+          components: {
+            'custom-component': InfoPrimaryWrapper
+          }
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is />
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Component is />
         </template>
       `
     }
@@ -518,6 +534,25 @@ tester.run('no-unregistered-components', rule, {
         export default {
           components: {
             WarmButton
+          }
+        }
+        </script>
+      `,
+      errors: [{
+        message: 'The "CustomComponent" component has been used but not registered.',
+        line: 3
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          components: {
+            'custom-component': InfoPrimaryWrapper
           }
         }
         </script>
