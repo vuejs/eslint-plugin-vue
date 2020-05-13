@@ -135,6 +135,30 @@ tester.run('no-setup-props-destructure', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        watch: {
+          setup({val}) { }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(props) {
+          const props2 = props
+        }
+      }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -328,6 +352,42 @@ tester.run('no-setup-props-destructure', rule, {
         {
           messageId: 'getProperty',
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const {foo} = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          foo.bar = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
         }
       ]
     }

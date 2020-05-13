@@ -302,7 +302,6 @@ tester.run('require-explicit-emits', rule, {
       </script>
       `
     },
-
     {
       filename: 'test.vue',
       code: `
@@ -344,6 +343,19 @@ tester.run('require-explicit-emits', rule, {
           onClick() {
           }
         }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup: ((p, context) => {
+          context.emit('foo')
+        })()
       }
       </script>
       `
