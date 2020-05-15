@@ -23,6 +23,8 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 </temlate>
 ```
 
+</eslint-code-block>
+
 ## :wrench: Options
 
 ```json
@@ -51,6 +53,8 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 </temlate>
 ```
 
+</eslint-code-block>
+
 ### `{ allowReferrer: true }`
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { allowReferrer: true }]}">
@@ -64,6 +68,8 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
   <a link="http://example.com" target="_blank" >link</a>
 </temlate>
 ```
+
+</eslint-code-block>
 
 ### `{ "enforceDynamicLinks": "always" }` (default)
 
@@ -79,6 +85,8 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 </temlate>
 ```
 
+</eslint-code-block>
+
 ### `{ "enforceDynamicLinks": "never" }`
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { enforceDynamicLinks: 'never' }]}">
@@ -92,6 +100,8 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
   <a link="http://example.com" target="_blank" >link</a>
 </temlate>
 ```
+
+</eslint-code-block>
 
 ## :mag: Implementation
 

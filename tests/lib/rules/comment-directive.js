@@ -226,4 +226,130 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[1].line, 5)
     })
   })
+
+  describe('allow description', () => {
+    it('disable all rules if <!-- eslint-disable -- description -->', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable -- description -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 0)
+    })
+
+    it('enable all rules if <!-- eslint-enable -- description -->', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable -- description -->
+          <div id id="a">Hello</div>
+          <!-- eslint-enable -- description -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 2)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[0].line, 6)
+      assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[1].line, 6)
+    })
+
+    it('enable specific rules if <!-- eslint-enable vue/no-duplicate-attributes -- description -->', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable vue/no-parsing-error, vue/no-duplicate-attributes -- description -->
+          <div id id="a">Hello</div>
+          <!-- eslint-enable vue/no-duplicate-attributes -- description -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 1)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
+      assert.deepEqual(messages[0].line, 6)
+    })
+
+    it('disable all rules if <!-- eslint-disable-line -- description -->', () => {
+      const code = `
+        <template>
+          <div id id="a">Hello</div> <!-- eslint-disable-line -- description -->
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 0)
+    })
+
+    it('disable specific rules if <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->', () => {
+      const code = `
+        <template>
+          <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 1)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+    })
+
+    it('disable all rules if <!-- eslint-disable-next-line -- description -->', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable-next-line -- description -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 0)
+    })
+
+    it('disable specific rules if <!-- eslint-disable-next-line vue/no-duplicate-attributes -->', () => {
+      const code = `
+        <template>
+          <!-- eslint-disable-next-line vue/no-duplicate-attributes -- description -->
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 1)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+    })
+  })
+
+  describe('block level directive', () => {
+    it('disable all rules if <!-- eslint-disable -->', () => {
+      const code = `
+        <!-- eslint-disable -->
+        <template>
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 0)
+    })
+
+    it('don\'t disable rules if <!-- eslint-disable --> is on after block', () => {
+      const code = `
+        <!-- eslint-disable -->
+        <i18n>
+        </i18n>
+        <template>
+          <div id id="a">Hello</div>
+        </template>
+      `
+      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+
+      assert.deepEqual(messages.length, 2)
+      assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
+      assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
+    })
+  })
 })

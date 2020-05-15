@@ -63,6 +63,16 @@ if (deprecatedRules.length > 0) {
 }
 
 module.exports = {
+  configureWebpack (_config, _isServer) {
+    return {
+      resolve: {
+        alias: {
+          module: require.resolve('./shim/module')
+        }
+      }
+    }
+  },
+
   base: '/',
   title: 'eslint-plugin-vue',
   description: 'Official ESLint plugin for Vue.js',
