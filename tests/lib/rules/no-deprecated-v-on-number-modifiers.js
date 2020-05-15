@@ -169,6 +169,55 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><input @[dynamicArg].unknown.10='onArrowUp'></template>",
       output: null,
       errors: ["'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input @keydown.48='onKeydown'>
+        <input @keydown.57='onKeydown'>
+        <input @keydown.91='onKeydown'>
+        <input @keydown.92='onKeydown'>
+        <input @keydown.93='onKeydown'>
+        <input @keydown.96='onKeydown'>
+        <input @keydown.111='onKeydown'>
+      </template>`,
+      output: null,
+      errors: [
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input @keydown.19='onKeydown'>
+        <input @keydown.37='onKeydown'>
+        <input @keydown.38='onKeydown'>
+        <input @keydown.39='onKeydown'>
+        <input @keydown.40='onKeydown'>
+      </template>`,
+      output: `
+      <template>
+        <input @keydown.pause='onKeydown'>
+        <input @keydown.arrow-left='onKeydown'>
+        <input @keydown.arrow-up='onKeydown'>
+        <input @keydown.arrow-right='onKeydown'>
+        <input @keydown.arrow-down='onKeydown'>
+      </template>`,
+      errors: [
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+      ]
     }
   ]
 })
