@@ -73,6 +73,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  |
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
+| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
