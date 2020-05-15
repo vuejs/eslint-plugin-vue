@@ -20,6 +20,17 @@ const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
 })
+const path = require('path')
+const fs = require('fs')
+const VueComponentJsonCheckVuePath = path.resolve(
+  __dirname,
+  '../../fixtures/no-potential-component-option-typo/index.vue'
+)
+const VueComponentJsonCheckVue = fs.readFileSync(
+  VueComponentJsonCheckVuePath,
+  'utf8'
+)
+
 tester.run('no-potential-component-option-typo', rule, {
   valid: [
     {
@@ -36,7 +47,6 @@ tester.run('no-potential-component-option-typo', rule, {
       options: [{ presets: [] }]
     },
     {
-
       filename: 'test.vue',
       code: `
       <script>
@@ -48,7 +58,6 @@ tester.run('no-potential-component-option-typo', rule, {
     },
     // test if give preset and the potentialTypoList length is zero, just for 100% test cover
     {
-
       filename: 'test.vue',
       code: `
       <script>
@@ -61,7 +70,6 @@ tester.run('no-potential-component-option-typo', rule, {
     },
     // multi preset that won't report
     {
-
       filename: 'test.vue',
       code: `
       <script>
@@ -110,6 +118,11 @@ tester.run('no-potential-component-option-typo', rule, {
       </script>
       `,
       options: [{ custom: ['custom', 'foo'], threshold: 2 }]
+    },
+    {
+      filename: 'test.vue',
+      code: VueComponentJsonCheckVue,
+      options: [{ presets: ['all'] }]
     }
   ],
   invalid: [
@@ -228,11 +241,12 @@ tester.run('no-potential-component-option-typo', rule, {
           ]
         }
       ],
-      options: [{ custom: ['data', 'methods', 'custom', 'foo'], presets: ['all'] }]
+      options: [
+        { custom: ['data', 'methods', 'custom', 'foo'], presets: ['all'] }
+      ]
     },
     // test if report correctly, only have preset option
     {
-
       filename: 'test.vue',
       code: `
       <script>
@@ -310,7 +324,8 @@ tester.run('no-potential-component-option-typo', rule, {
           ]
         },
         {
-          message: "'beforeRouteEntr' may be a typo, which is similar to option [beforeRouteEnter].",
+          message:
+            "'beforeRouteEntr' may be a typo, which is similar to option [beforeRouteEnter].",
           line: 5,
           column: 9,
           suggestions: [
@@ -350,7 +365,6 @@ tester.run('no-potential-component-option-typo', rule, {
     },
     // test multi suggestion
     {
-
       filename: 'test.vue',
       code: `
       <script>
@@ -387,6 +401,5 @@ tester.run('no-potential-component-option-typo', rule, {
       ],
       options: [{ custom: ['data', 'methods'], threshold: 10, presets: [] }]
     }
-
   ]
 })
