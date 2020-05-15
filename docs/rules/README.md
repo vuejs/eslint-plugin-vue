@@ -282,6 +282,7 @@ For example:
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
+| [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
