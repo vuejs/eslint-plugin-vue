@@ -119,6 +119,7 @@ tester.run('no-potential-component-option-typo', rule, {
       `,
       options: [{ custom: ['custom', 'foo'], threshold: 2 }]
     },
+    // test all valid vue options
     {
       filename: 'test.vue',
       code: VueComponentJsonCheckVue,
