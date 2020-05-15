@@ -13,7 +13,7 @@ description: disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)
 
 This rule reports use of deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)
 
-<eslint-code-block filename="a.js" language="javascript ":rules="{'vue/no-deprecated-vue-config-keycodes': ['error']}">
+<eslint-code-block filename="a.js" language="javascript" :rules="{'vue/no-deprecated-vue-config-keycodes': ['error']}">
 
 ```js
 /* ✗ BAD */
@@ -31,14 +31,16 @@ Nothing.
 ## :couple: Related rules
 
 - [vue/no-deprecated-v-on-number-modifiers]
-- [API - Global Config - keyCodes]
 
 [vue/no-deprecated-v-on-number-modifiers]: ./no-deprecated-v-on-number-modifiers.md
-[API - Global Config - keyCodes]: https://vuejs.org/v2/api/#keyCodes
 
 ## :books: Further reading
 
-- [Vue RFCs - 0014-drop-keycode-support](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
+- [Vue RFCs - 0014-drop-keycode-support]
+- [API - Global Config - keyCodes]
+
+[Vue RFCs - 0014-drop-keycode-support]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md
+[API - Global Config - keyCodes]: https://vuejs.org/v2/api/#keyCodes
 
 ## :mag: Implementation
 
