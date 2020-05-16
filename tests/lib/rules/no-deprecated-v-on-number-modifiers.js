@@ -20,7 +20,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-ruleTester.run('no-deprecated-v-bind-sync', rule, {
+ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
 
   valid: [
     {
