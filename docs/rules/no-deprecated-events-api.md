@@ -49,7 +49,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [RFC: events api change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0020-events-api-change.md)
+- [Vue RFCs - 0020-events-api-change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0020-events-api-change.md)
 
 ## :mag: Implementation
 

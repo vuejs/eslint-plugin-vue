@@ -75,7 +75,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [RFC: remove data object declaration](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0019-remove-data-object-declaration.md)
+- [Vue RFCs - 0019-remove-data-object-declaration](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0019-remove-data-object-declaration.md)
 
 ## :mag: Implementation
 
