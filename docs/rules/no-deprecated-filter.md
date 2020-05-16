@@ -43,7 +43,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Vue RFCs - Remove support for filters.](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0015-remove-filters.md)
+- [Vue RFCs - 0015-remove-filters](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0015-remove-filters.md)
 
 ## :mag: Implementation
 

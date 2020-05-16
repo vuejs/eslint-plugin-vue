@@ -44,7 +44,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [RFC: drop keycode support](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
+- [Vue RFCs - 0014-drop-keycode-support](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
 
 ## :mag: Implementation
 
