@@ -1,4 +1,3 @@
-/* eslint-disable eslint-plugin/consistent-output */
 /**
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
