@@ -1,0 +1,94 @@
+[
+    {
+        "open": {
+            "type": "HTMLCommentOpen",
+            "value": "<!--",
+            "range": [
+                48,
+                52
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 2
+                },
+                "end": {
+                    "line": 3,
+                    "column": 6
+                }
+            }
+        },
+        "openDecoration": {
+            "type": "HTMLCommentOpenDecoration",
+            "value": "*****",
+            "range": [
+                52,
+                57
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 6
+                },
+                "end": {
+                    "line": 3,
+                    "column": 11
+                }
+            }
+        },
+        "value": {
+            "type": "HTMLCommentValue",
+            "value": "comment",
+            "range": [
+                57,
+                64
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 11
+                },
+                "end": {
+                    "line": 3,
+                    "column": 18
+                }
+            }
+        },
+        "closeDecoration": {
+            "type": "HTMLCommentCloseDecoration",
+            "value": "*****",
+            "range": [
+                64,
+                69
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 18
+                },
+                "end": {
+                    "line": 3,
+                    "column": 23
+                }
+            }
+        },
+        "close": {
+            "type": "HTMLCommentClose",
+            "value": "-->",
+            "range": [
+                69,
+                72
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 23
+                },
+                "end": {
+                    "line": 3,
+                    "column": 26
+                }
+            }
+        }
+    }
+]
