@@ -218,3 +218,49 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 2. Make sure your tool is set to lint `.vue` files.
   - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
+
+### Conflict with [Prettier].
+
+If the [Prettier] conflicts with the shareable config provided by this plugin, use [eslint-config-prettier] to resolve it.
+
+Example **.eslintrc.js**:
+
+```js
+module.exports = {
+  // ...
+  extends: [
+    // ...
+    // 'eslint:recommended',
+    // ...
+    'plugin:vue/vue3-recommended',
+    // ...
+    "prettier",
+    "prettier/vue",
+    // "prettier/@typescript-eslint", // required if you are using @typescript-eslint.
+    // Other settings may be required depending on the plugin you are using. See the eslint-config-prettier documentation for more details.
+  ],
+  // ...
+}
+```
+
+If the [Prettier] conflicts with the rule you have set, turn off that rule.
+
+Example **.eslintrc.js**:
+
+When the `vue/html-indent` rule conflict with [Prettier].
+
+```diff
+module.exports = {
+  // ...
+  rules: {
+    // ...
+-    "vue/html-indent": "error",
++    "vue/html-indent": "off",
+    // ...
+  },
+  // ...
+}
+```
+
+[prettier]: https://prettier.io/
+[eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
