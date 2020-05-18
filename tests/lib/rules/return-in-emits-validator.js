@@ -35,6 +35,7 @@ ruleTester.run('return-in-emits-validator', rule, {
             bar: function (e) {
               return true
             },
+            bar: () => true,
             baz: (e) => {
               return e
             },
