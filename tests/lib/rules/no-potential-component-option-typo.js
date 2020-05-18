@@ -20,16 +20,6 @@ const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
 })
-const path = require('path')
-const fs = require('fs')
-const VueComponentJsonCheckVuePath = path.resolve(
-  __dirname,
-  '../../fixtures/no-potential-component-option-typo/index.vue'
-)
-const VueComponentJsonCheckVue = fs.readFileSync(
-  VueComponentJsonCheckVuePath,
-  'utf8'
-)
 
 tester.run('no-potential-component-option-typo', rule, {
   valid: [
@@ -122,7 +112,63 @@ tester.run('no-potential-component-option-typo', rule, {
     // test all valid vue options
     {
       filename: 'test.vue',
-      code: VueComponentJsonCheckVue,
+      code: `
+      <script>
+      export default {
+        asyncData: {},
+        fetch: {},
+        head: {},
+        key: {},
+        layout: {},
+        loading: {},
+        middleware: {},
+        scrollToTop: {},
+        transition: {},
+        validate: {},
+        watchQuery: {},
+        beforeRouteEnter: {},
+        beforeRouteUpdate: {},
+        beforeRouteLeave: {},
+        data() {},
+        props: {},
+        propsData: {},
+        computed: {},
+        methods: {},
+        watch: {},
+        el: {},
+        template: {},
+        render() {},
+        renderError() {},
+        staticRenderFns: {},
+        beforeCreate: {},
+        created: {},
+        beforeDestroy: {},
+        destroyed: {},
+        beforeMount: {},
+        mounted: {},
+        beforeUpdate: {},
+        updated: {},
+        activated: {},
+        deactivated: {},
+        errorCaptured: {},
+        serverPrefetch: {},
+        directives: {},
+        components: {},
+        transitions: {},
+        filters: {},
+        provide: {},
+        inject: {},
+        model: {},
+        parent: {},
+        mixins: {},
+        name: {},
+        extends: {},
+        delimiters: {},
+        comments: {},
+        inheritAttrs: {},
+      }; 
+      </script>
+      `,
       options: [{ presets: ['all'] }]
     }
   ],
