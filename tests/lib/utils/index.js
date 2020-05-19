@@ -243,7 +243,7 @@ describe('getRegisteredComponents', () => {
 
     assert.deepEqual(
       utils.getRegisteredComponents(node).map(c => c.name),
-      ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent']
+      ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent'],
     )
   })
 

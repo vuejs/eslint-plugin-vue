@@ -17,7 +17,7 @@ var RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
@@ -77,6 +77,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         <template><div><div v-bind="$attrs"></div></div></template>
         <script>
         export default { inheritAttrs: 0 }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template><div><div v-bind:foo="$attrs"></div></div></template>
+        <script>
+        export default {  }
         </script>
       `
     }

@@ -1,38 +1,56 @@
-# Disable inheritAttrs when using v-bind="$attrs" (vue/no-duplicate-attr-inheritance)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-duplicate-attr-inheritance
+description: enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"`
+---
+# vue/no-duplicate-attr-inheritance
+> enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"`
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+## :book: Rule Details
 
-Please describe the origin of the rule here.
+This rule aims to prevent duplicated attribute inheritance.  
+This rule to warn to apply `inheritAttrs: false` when it detects `v-bind="$attrs"` being used.
 
+<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error']}">
 
-## Rule Details
-
-This rule aims to...
-
-Examples of **incorrect** code for this rule:
-
-```js
-
-// fill me in
-
+```vue
+<template>
+  <MyInput v-bind="$attrs" />
+</template>
+<script>
+export default {
+  /* ✓ GOOD */
+  inheritAttrs: false
+}
 ```
 
-Examples of **correct** code for this rule:
+</eslint-code-block>
 
-```js
+<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error']}">
 
-// fill me in
-
+```vue
+<template>
+  <MyInput v-bind="$attrs" />
+</template>
+<script>
+export default {
+  /* ✗ BAD */
+  // inheritAttrs: true (default)
+}
 ```
+
+</eslint-code-block>
 
 ### Options
 
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
+Nothing.
 
 ## Further Reading
 
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+- [API - inheritAttrs](https://vuejs.org/v2/api/index.html#inheritAttrs)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-duplicate-attr-inheritance.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-duplicate-attr-inheritance.js)
