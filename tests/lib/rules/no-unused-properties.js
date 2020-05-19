@@ -8,12 +8,14 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-unused-properties')
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module'
   }
 })
+
+const allOptions = [{ groups: ['props', 'computed', 'data', 'methods', 'setup'] }]
 
 tester.run('no-unused-properties', rule, {
   valid: [
@@ -27,6 +29,41 @@ tester.run('no-unused-properties', rule, {
             created() {
               alert(this.count + 1)
             }
+          };
+        </script>
+      `
+    },
+    // default options
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data () {
+              return {
+                foo: 1
+              }
+            },
+            computed: {
+              bar() {}
+            },
+            methods: {
+              baz () {}
+            }
+          };
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup () {
+              return {
+                foo
+              }
+            },
           };
         </script>
       `
@@ -184,7 +221,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data being watched
@@ -205,7 +243,8 @@ tester.run('no-unused-properties', rule, {
             },
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used as a template identifier
@@ -224,7 +263,8 @@ tester.run('no-unused-properties', rule, {
             }
           }
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in a template expression
@@ -244,7 +284,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in v-if
@@ -263,7 +304,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in v-for
@@ -282,7 +324,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in v-html
@@ -301,7 +344,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in v-model
@@ -320,7 +364,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data passed in a component
@@ -339,7 +384,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // data used in v-on
@@ -358,7 +404,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used in a script expression
@@ -377,7 +424,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property being watched
@@ -398,7 +446,8 @@ tester.run('no-unused-properties', rule, {
             },
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used as a template identifier
@@ -417,7 +466,8 @@ tester.run('no-unused-properties', rule, {
             }
           }
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed properties used in a template expression
@@ -439,7 +489,8 @@ tester.run('no-unused-properties', rule, {
             }
           }
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used in v-if
@@ -458,7 +509,8 @@ tester.run('no-unused-properties', rule, {
             }
           }
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used in v-for
@@ -477,7 +529,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used in v-html
@@ -496,7 +549,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property used in v-model
@@ -528,7 +582,8 @@ tester.run('no-unused-properties', rule, {
             }
           };
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // computed property passed in a component
@@ -547,7 +602,8 @@ tester.run('no-unused-properties', rule, {
             }
           }
         </script>
-      `
+      `,
+      options: allOptions
     },
 
     // ignores unused data when marked with eslint-disable
@@ -564,6 +620,92 @@ tester.run('no-unused-properties', rule, {
                 // eslint-disable-next-line
                 count: 2
               };
+            }
+          };
+        </script>
+      `,
+      options: allOptions
+    },
+
+    // trace this
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                const vm = this
+                fn(vm.count)
+              }
+            }
+          };
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                const vm = this
+                const {count} = vm
+              }
+            }
+          };
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                const vm = this
+                let count;
+                ({count} = vm)
+              }
+            }
+          };
+        </script>
+      `
+    },
+    // use rest
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ foo }}</div>
+        </template>
+        <script>
+          export default {
+            data () {
+              return {
+                count: 2
+              };
+            },
+            methods: {
+              click () {
+                const vm = this
+                const {...r} = vm
+              },
+              focus () {
+                fn(this.foo)
+              },
+              blur () {
+                const {foo} = this
+              },
+              keydown () {
+                let foo;
+                ({foo} = this)
+              }
             }
           };
         </script>
@@ -587,7 +729,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: 'Unused property found: "count"',
+          message: "'count' of property found, but never used.",
           line: 7
         }
       ]
@@ -610,9 +752,10 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
+      options: [{ groups: ['props', 'computed', 'data'] }],
       errors: [
         {
-          message: 'Unused data found: "count"',
+          message: "'count' of data found, but never used.",
           line: 9
         }
       ]
@@ -635,11 +778,215 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
+      options: [{ groups: ['props', 'computed', 'data'] }],
       errors: [
         {
-          message: 'Unused computed property found: "count"',
+          message: "'count' of computed property found, but never used.",
           line: 8
         }
+      ]
+    },
+
+    // all options
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ foo }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['a'],
+            data() {
+              return {b:1}
+            },
+            computed: {
+              c() {
+                return 2;
+              }
+            },
+            methods: {
+              d() {}
+            },
+            setup() {
+              return {e:3}
+            }
+          };
+        </script>
+      `,
+      options: allOptions,
+      errors: [
+        {
+          message: "'a' of property found, but never used.",
+          line: 7
+        },
+        {
+          message: "'b' of data found, but never used.",
+          line: 9
+        },
+        {
+          message: "'c' of computed property found, but never used.",
+          line: 12
+        },
+        {
+          message: "'d' of method found, but never used.",
+          line: 17
+        },
+        {
+          message: "'e' of property returned from `setup()` found, but never used.",
+          line: 20
+        }
+      ]
+    },
+
+    // trace this
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                fn(vm.count)
+              }
+            }
+          };
+        </script>
+      `,
+      errors: [
+        {
+          message: "'count' of property found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                const {count} = vm
+              }
+            }
+          };
+        </script>
+      `,
+      errors: [
+        {
+          message: "'count' of property found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            methods: {
+              click () {
+                let count;
+                ({count} = vm)
+              }
+            }
+          };
+        </script>
+      `,
+      errors: [
+        {
+          message: "'count' of property found, but never used.",
+          line: 4
+        }
+      ]
+    },
+
+    // setup
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props:['foo', 'bar'],
+            setup(props) {
+              return fn(props.foo)
+            }
+          };
+        </script>
+      `,
+      errors: [
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props:['foo', 'bar'],
+            setup({foo}) {
+              return fn(foo)
+            }
+          };
+        </script>
+      `,
+      errors: [
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props:['foo', 'bar'],
+            setup(...foo) {
+              return fn(foo)
+            }
+          };
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props:['foo', 'bar'],
+            setup([foo]) {
+              return fn(foo)
+            }
+          };
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props:['foo', 'bar'],
+            setup(props) {
+              props = 'foo'
+            }
+          };
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used."
       ]
     }
   ]
