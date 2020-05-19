@@ -27,7 +27,8 @@ tester.run('no-lifecycle-after-await', rule, {
       }
       </script>
       `
-    }, {
+    },
+    {
       filename: 'test.vue',
       code: `
       <script>
@@ -39,7 +40,8 @@ tester.run('no-lifecycle-after-await', rule, {
       }
       </script>
       `
-    }, {
+    },
+    {
       filename: 'test.vue',
       code: `
       <script>
@@ -74,6 +76,32 @@ tester.run('no-lifecycle-after-await', rule, {
           await doSomething()
 
           onMounted(() => { /* ... */ }) // error
+        }
+      }
+      </script>
+      `
+    },
+    // has target
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onErrorCaptured, onMounted, onRenderTracked, onRenderTriggered, onUnmounted, onUpdated, onActivated, onDeactivated} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          onBeforeMount(() => { /* ... */ }, instance)
+          onBeforeUnmount(() => { /* ... */ }, instance)
+          onBeforeUpdate(() => { /* ... */ }, instance)
+          onErrorCaptured(() => { /* ... */ }, instance)
+          onMounted(() => { /* ... */ }, instance)
+          onRenderTracked(() => { /* ... */ }, instance)
+          onRenderTriggered(() => { /* ... */ }, instance)
+          onUnmounted(() => { /* ... */ }, instance)
+          onUpdated(() => { /* ... */ }, instance)
+          onActivated(() => { /* ... */ }, instance)
+          onDeactivated(() => { /* ... */ }, instance)
         }
       }
       </script>
