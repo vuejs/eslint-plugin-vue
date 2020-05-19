@@ -103,6 +103,17 @@ ruleTester.run('no-deprecated-events-api', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          mounted () {
+            a(this.$on)
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
@@ -154,6 +165,24 @@ ruleTester.run('no-deprecated-events-api', rule, {
       errors: [{
         message: 'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         line: 4
+      }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        app.component('some-comp', {
+          mounted () {
+            const vm = this
+            vm.$on('start', function (args) {
+              console.log('start', args)
+            })
+          }
+        })
+      `,
+      parserOptions,
+      errors: [{
+        message: 'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+        line: 5
       }]
     }
   ]

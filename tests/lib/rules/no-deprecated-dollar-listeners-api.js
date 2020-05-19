@@ -101,6 +101,21 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            foo () {
+              const {vm} = this
+              return vm.$listeners
+            }
+          }
+        }
+        </script>
+      `
     }
   ],
 
@@ -177,6 +192,53 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
           messageId: 'deprecated',
           endLine: 10,
           endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            foo () {
+              const vm = this
+              return vm.$listeners
+            }
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          line: 7,
+          column: 25,
+          messageId: 'deprecated'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            foo () {
+              const vm = this
+              function fn() {
+                return vm.$listeners
+              }
+              return fn()
+            }
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          line: 8,
+          column: 27,
+          messageId: 'deprecated'
         }
       ]
     }
