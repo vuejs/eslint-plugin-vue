@@ -367,3 +367,17 @@ describe('getComponentProps', () => {
     assert.notOk(props[3].value)
   })
 })
+
+describe('editdistance', () => {
+  const editDistance = utils.editDistance
+  it('should return editDistance beteen two string', () => {
+    assert.equal(editDistance('book', 'back'), 2)
+    assert.equal(editDistance('methods', 'metho'), 2)
+    assert.equal(editDistance('methods', 'metds'), 2)
+    assert.equal(editDistance('computed', 'comput'), 2)
+    assert.equal(editDistance('book', 'back'), 2)
+    assert.equal(editDistance('methods', 'method'), 1)
+    assert.equal(editDistance('methods', 'methds'), 1)
+    assert.equal(editDistance('computed', 'computd'), 1)
+  })
+})
