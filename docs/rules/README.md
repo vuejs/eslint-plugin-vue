@@ -119,6 +119,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
 | [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
+| [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
@@ -222,6 +223,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
 | [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
+| [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
