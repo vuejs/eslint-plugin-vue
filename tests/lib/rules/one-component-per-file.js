@@ -60,9 +60,10 @@ ruleTester.run('one-component-per-file', rule, {
         Vue.component('name', {})
         Vue.component('name', {})
       `,
-      errors: [{
-        message: 'There is more than one component in this file.'
-      }]
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
     },
     {
       filename: 'test.js',
@@ -70,15 +71,16 @@ ruleTester.run('one-component-per-file', rule, {
         Vue.component('TodoList', {
           // ...
         })
-        
+
         Vue.component('TodoItem', {
           // ...
         })
         export default {}
       `,
-      errors: [{
-        message: 'There is more than one component in this file.'
-      }]
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
     },
     {
       filename: 'test.vue',
@@ -86,9 +88,10 @@ ruleTester.run('one-component-per-file', rule, {
         Vue.component('name', {})
         export default {}
       `,
-      errors: [{
-        message: 'There is more than one component in this file.'
-      }]
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
     }
   ]
 })
