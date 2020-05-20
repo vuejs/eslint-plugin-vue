@@ -9,11 +9,18 @@ description: disallow a potential typo in your component property
 
 ## :book: Rule Details
 
-This Rule disallow a potential typo in your component options
+This rule disallow a potential typo in your component options
 
 **Here is the config**
-```js
-{'vue/no-potential-component-option-typo': ['error', {presets: ['all'], custom: ['test']}]}
+
+```json
+{
+  "vue/no-potential-component-option-typo": ["error", {
+    "presets": ["all"],
+    "custom": ["test"]
+    }
+  ]
+}
 ```
 
 <eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['all'], custom: ['test']}]}">
@@ -50,8 +57,14 @@ export default {
 > we use editdistance to compare two string similarity, threshold is an option to control upper bound of editdistance to report
 
 **Here is the another example about config option `threshold`**
-```js
-{'vue/no-potential-component-option-typo': ['error', {presets: ['vue', 'nuxt'], threshold: 5}]}
+
+```json
+{
+  "vue/no-potential-component-option-typo": ["error", {
+    "presets": ["vue", "nuxt"],
+    "threshold": 5
+  }]
+}
 ```
 
 <eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['vue', 'nuxt'], threshold: 5}]}">
@@ -82,39 +95,29 @@ export default {
 </eslint-code-block>
 
 ## :wrench: Options
-```js
+
+```json
 {
-    "vue/no-unsed-vars": [{
-      presets: {
-        type: 'array',
-        items: {
-          type: 'string',
-          enum: ['all', 'vue', 'vue-router', 'nuxt']
-        },
-        uniqueItems: true,
-        minItems: 0
-      },
-      custom: {
-        type: 'array',
-        minItems: 0,
-        items: { type: 'string' },
-        uniqueItems: true
-      },
-      threshold: {
-        type: 'number',
-        'minimum': 1
-      }
-    }]
+  "vue/no-unsed-vars": ["error", {
+    "presets": ["vue"],
+    "custom": [],
+    "threshold": 1
+  }]
 }
 ```
-- `presets` ... `enum type`, contains several common vue component option set, `['all']` is the same as `['vue', 'vue-router', 'nuxt']`. **default** `[]`
+
+- `presets` ... `enum type`, contains several common vue component option set, `["all"]` is the same as `["vue", "vue-router", "nuxt"]`. **default** `["vue"]`
 - `custom` ... `array type`, a list store your custom component option want to detect. **default** `[]`
 - `threshold` ... `number type`, a number used to control the upper limit of the reported editing distance, we recommend don't change this config option, even if it is required, not bigger than `2`. **default** `1`
+
 ## :rocket: Suggestion
+
 - We provide all the possible component option that editdistance between your vue component option and configuration options is greater than 0 and lessEqual than threshold
 
 ## :books: Further reading
+
 - [Edit_distance](https://en.wikipedia.org/wiki/Edit_distance)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-potential-component-option-typo.js)
