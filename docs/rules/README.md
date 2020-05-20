@@ -303,6 +303,7 @@ For example:
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
+| [vue/template-curly-spacing](./template-curly-spacing.md) | require or disallow spacing around embedded expressions of template strings | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ## Deprecated
