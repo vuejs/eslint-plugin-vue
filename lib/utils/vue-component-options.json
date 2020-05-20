@@ -42,6 +42,13 @@
     "extends",
     "delimiters",
     "comments",
-    "inheritAttrs"
+    "inheritAttrs",
+
+    "setup",
+    "emits",
+    "beforeUnmount",
+    "unmounted",
+    "renderTracked",
+    "renderTriggered"
   ]
 }
