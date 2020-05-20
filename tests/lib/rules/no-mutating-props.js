@@ -16,7 +16,7 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parser: 'vue-eslint-parser',
+  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
@@ -138,6 +138,50 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="prop">
+            <div v-for="prop in data">
+              <MyComp @click="prop.foo++"></MyComp>
+              <input v-model="prop">
+            </div>
+            <input v-model="prop()">
+            <input v-model="foo">
+            <input @click="prop().foo++">
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop'],
+            methods: {
+              onKeydown() {
+                const vm = this
+                foo.prop = 1
+                vm()()()
+                vm.prop()()
+                prop++
+                prop = 1
+              }
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <button @click="foo++"></button>
+            <button @click="foo+=1"></button>
+            <button @click="foo.push($event)"></button>
+            <input v-model="foo">
+          </div>
+        </template>
+      `
     }
   ],
 
@@ -177,10 +221,6 @@ ruleTester.run('no-mutating-props', rule, {
           line: 6
         },
         {
-          message: 'Unexpected mutation of "prop4" prop.',
-          line: 7
-        },
-        {
           message: 'Unexpected mutation of "prop5" prop.',
           line: 8
         },
@@ -191,10 +231,6 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "prop7" prop.',
           line: 10
-        },
-        {
-          message: 'Unexpected mutation of "prop8" prop.',
-          line: 11
         }
       ]
     },

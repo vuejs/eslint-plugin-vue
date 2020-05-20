@@ -1,12 +1,20 @@
-# disallow mutation of component props (vue/no-mutating-props)
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-mutating-props
+description: disallow mutation of component props
+---
+# vue/no-mutating-props
+> disallow mutation of component props
+
+## :book: Rule Details
 
 This rule reports mutation of component props.
 
-## Rule Details
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
 
-:-1: Examples of **incorrect** code for this rule:
-
-```html
+```vue
+<!-- ✗ BAD -->
 <template>
   <div>
     <input v-model="value" @click="openModal">
@@ -29,9 +37,12 @@ This rule reports mutation of component props.
 </script>
 ```
 
-:+1: Examples of **correct** code for this rule:
+</eslint-code-block>
 
-```html
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
+
+```vue
+<!-- ✓ GOOD -->
 <template>
   <div>
     <input :value="value" @input="$emit('input', $event.target.value)" @click="openModal">
@@ -54,11 +65,18 @@ This rule reports mutation of component props.
 </script>
 ```
 
+</eslint-code-block>
+
 ## :wrench: Options
 
 Nothing.
 
-## Related links
+## :books: Further reading
 
 - [Vue - Prop Mutation - deprecated](https://vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
 - [Style guide - Implicit parent-child communication](https://vuejs.org/v2/style-guide/#Implicit-parent-child-communication-use-with-caution)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-mutating-props.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-mutating-props.js)
