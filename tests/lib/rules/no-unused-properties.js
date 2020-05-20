@@ -710,6 +710,45 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `
+    },
+
+    // function trace
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+            }
+          }
+
+          function fn(p) {
+            return fn2(p)
+          }
+          function fn2(p2) {
+            const {...a} = p2
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+            }
+          }
+
+          function fn(a) {
+            return a[foo]
+          }
+        </script>
+      `
     }
   ],
 
@@ -987,6 +1026,219 @@ tester.run('no-unused-properties', rule, {
       errors: [
         "'foo' of property found, but never used.",
         "'bar' of property found, but never used."
+      ]
+    },
+
+    // function trace
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar'],
+            methods: {
+              click () {
+                const vm = this
+                fn(vm)
+
+                fn(vm.vm.bar)
+              }
+            }
+          }
+
+          function fn(vm) {
+            return vm.foo
+          }
+        </script>
+      `,
+      errors: [
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+              fn3(props)
+            }
+          }
+
+          function fn(p) {
+            return fn2(p)
+          }
+          function fn2(p2) {
+            return p2.foo
+          }
+          function fn3({bar}) {}
+        </script>
+      `,
+      errors: [
+        "'baz' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar'],
+            setup (props) {
+              fn(props)
+
+              fn(props)
+            },
+            methods: {
+              click(e) {
+                fn2(e)
+                fn(this)
+              }
+            }
+          }
+
+          function fn(p) {
+            return fn(p)
+          }
+          function fn2(p2) {
+            return p2.foo
+          }
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+            }
+          }
+
+          function fn(p) {
+            return fnUnknown(p)
+          }
+          function fn3(p2) {
+            const {...a} = p2
+          }
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used.",
+        "'baz' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          const fnVar = (p) => p.baz
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(a, b, props)
+              fnVar(props)
+            }
+          }
+
+          function fn(a, b) {
+            return a.foo + b.bar
+          }
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props, props)
+            }
+          }
+
+          function fn(a, b) {
+            return a.foo + b.bar
+          }
+        </script>
+      `,
+      errors: [
+        "'baz' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn.fn(props, props)
+            }
+          }
+
+          function fn(a, b) {
+            return a.foo + b.bar
+          }
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used.",
+        "'baz' of property found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          let fnLet = function foo(p){p.foo}
+          var fnVar = function foo(p){p.bar}
+          var fnVar = function foo(p){p.bar}
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+              fn3(props)
+              fn4(props)
+              fnLet(props)
+              fnVar(props)
+            }
+          }
+
+          function fn(a) {
+            a(fn2)
+            return fn2.fn2(a)
+          }
+          function fn2(a) {
+            return a.foo
+          }
+          function fn3(b) {
+            foo[b]
+          }
+          function fn4(b) {
+            const foo = {b}
+          }
+        </script>
+      `,
+      errors: [
+        "'foo' of property found, but never used.",
+        "'bar' of property found, but never used.",
+        "'baz' of property found, but never used."
       ]
     }
   ]
