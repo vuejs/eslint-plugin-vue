@@ -38,6 +38,7 @@ ruleTester.run('return-in-emits-validator', rule, {
             baz: (e) => {
               return e
             },
+            baz2: (e) => e,
             qux () {
               if (foo) {
                 return true
@@ -171,6 +172,22 @@ ruleTester.run('return-in-emits-validator', rule, {
       `,
       errors: [{
         message: 'Expected to return a boolean value in "foo" emits validator.',
+        line: 5
+      }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          emits: {
+            foo: () => false
+          }
+        }
+        </script>
+      `,
+      errors: [{
+        message: 'Expected to return a true value in "foo" emits validator.',
         line: 5
       }]
     },
