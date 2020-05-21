@@ -287,6 +287,30 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      // Japanese characters
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '漢字': String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // emoji
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '\u{1F37B}': String
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
