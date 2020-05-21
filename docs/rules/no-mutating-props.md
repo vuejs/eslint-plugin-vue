@@ -7,6 +7,8 @@ description: disallow mutation of component props
 # vue/no-mutating-props
 > disallow mutation of component props
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+
 ## :book: Rule Details
 
 This rule reports mutation of component props.
@@ -60,6 +62,21 @@ This rule reports mutation of component props.
       openModal() {
         this.$emit('input', 'test')
       }
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
+
+```vue
+<script>
+  export default {
+    setup (props) {
+      // ✗ BAD
+      props.value = 'test'
     }
   }
 </script>

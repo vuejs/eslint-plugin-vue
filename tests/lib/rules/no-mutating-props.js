@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module'
   }
 })
@@ -151,6 +151,10 @@ ruleTester.run('no-mutating-props', rule, {
             <input v-model="prop()">
             <input v-model="foo">
             <input @click="prop().foo++">
+            <input v-model="foo[this]">
+            <input v-model="foo[this.prop]">
+            <input v-model="this">
+            <MyComp @click="bar = {prop: foo++}"></MyComp>
           </div>
         </template>
         <script>
@@ -164,6 +168,8 @@ ruleTester.run('no-mutating-props', rule, {
                 vm.prop()()
                 prop++
                 prop = 1
+                const bar = {prop: foo}
+                prop[this] ++
               }
             }
           }
@@ -179,8 +185,112 @@ ruleTester.run('no-mutating-props', rule, {
             <button @click="foo+=1"></button>
             <button @click="foo.push($event)"></button>
             <input v-model="foo">
+            <input v-model="this.foo">
           </div>
         </template>
+      `
+    },
+
+    // setup
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              props ++
+              props = 1
+              props.push(1)
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({a}) {
+              a ++
+              a = 1
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({...props}) {
+              props ++
+              props = 1
+              props.push(1)
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            ssss(props) {
+              props.a ++
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              const a = props.a
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup() {
+              props.a++
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(...props) {
+              props.a++
+            }
+          }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup([props]) {
+              props.a++
+            }
+          }
+        </script>
       `
     }
   ],
@@ -363,6 +473,167 @@ ruleTester.run('no-mutating-props', rule, {
           message: 'Unexpected mutation of "prop" prop.',
           line: 7
         }
+      ]
+    },
+
+    // setup
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              props.a ++
+              props.b = 1
+              props.c.push(1)
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({a,b,c, d: [e, , f]}) {
+              a.foo ++
+              b.foo = 1
+              c.push(1)
+
+              c.x.push(1)
+              e.foo++
+              f.foo++
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 7
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 9
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 10
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 11
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({a: foo, b: [...bar], c: baz = 1}) {
+              foo.x ++
+              bar.x = 1
+              baz.push(1)
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({...props}) {
+              props.a ++
+              props.b = 1
+              props.c.push(1)
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              props[a] ++
+            }
+          }
+        </script>
+      `,
+      errors: [
+        'Unexpected mutation of "[a]" prop.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({[a]: c}) {
+              c.foo ++
+            }
+          }
+        </script>
+      `,
+      errors: [
+        'Unexpected mutation of "[a]" prop.'
       ]
     }
   ]
