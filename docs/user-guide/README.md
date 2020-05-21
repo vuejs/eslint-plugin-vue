@@ -194,7 +194,7 @@ If you already use another parser (e.g. `"parser": "babel-eslint"`), please move
 
 ```diff
 - "parser": "babel-eslint",
-  "parser": "vue-eslint-parser",
++ "parser": "vue-eslint-parser",
   "parserOptions": {
 +     "parser": "babel-eslint",
       "ecmaVersion": 2017,
