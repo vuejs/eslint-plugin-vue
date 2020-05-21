@@ -287,6 +287,66 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      // Japanese characters
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '漢字': String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // emoji
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '\u{1F37B}': String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // #862
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $actionEl: String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // #932
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $css: String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _item: String
+          }
+        }
+      `,
+      options: ['snake_case'],
+      parserOptions
     }
   ],
 
@@ -441,40 +501,6 @@ ruleTester.run('prop-name-casing', rule, {
       }]
     },
     {
-      // emoji
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '\u{1F37B}': String
-          }
-        }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Prop "\u{1F37B}" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
-      // Japanese characters
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '漢字': String
-          }
-        }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Prop "漢字" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
       filename: 'test.vue',
       code: `
         export default {
@@ -506,6 +532,32 @@ ruleTester.run('prop-name-casing', rule, {
         type: 'Property',
         line: 4
       }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _item: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "_item" is not in camelCase.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _itemName: String
+          }
+        }
+      `,
+      options: ['snake_case'],
+      parserOptions,
+      errors: ['Prop "_itemName" is not in snake_case.']
     }
+
   ]
 })

@@ -686,6 +686,31 @@ tester.run('component-name-in-template-casing', rule, {
         'Component name "the-component" is not PascalCase.',
         'Component name "the-component" is not PascalCase.'
       ]
+    },
+    {
+      code: `
+      <template>
+        <foo--bar />
+        <Foo--Bar />
+        <FooBar />
+        <FooBar_Baz-qux />
+      </template>`,
+      output: `
+      <template>
+        <foo--bar />
+        <Foo--Bar />
+        <foo-bar />
+        <foo-bar-baz-qux />
+      </template>`,
+      options: ['kebab-case', {
+        registeredComponentsOnly: false
+      }],
+      errors: [
+        'Component name "foo--bar" is not kebab-case.',
+        'Component name "Foo--Bar" is not kebab-case.',
+        'Component name "FooBar" is not kebab-case.',
+        'Component name "FooBar_Baz-qux" is not kebab-case.'
+      ]
     }
   ]
 })
