@@ -56,6 +56,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  |
+| [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
@@ -163,6 +164,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  |
+| [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
