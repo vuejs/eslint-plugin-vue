@@ -150,7 +150,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
           bar: () => {}
         }
       }`,
-      errors: ['You should not use an arrow function to define a watcher.']
+      errors: [{
+        message: 'You should not use an arrow function to define a watcher.',
+        line: 5
+      }]
     },
     {
       filename: 'test.vue',
@@ -161,7 +164,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
           bar: () => {}
         }
       }`,
-      errors: ['You should not use an arrow function to define a watcher.']
+      errors: [{
+        message: 'You should not use an arrow function to define a watcher.',
+        line: 5
+      }]
     },
     {
       filename: 'test.vue',
@@ -202,7 +208,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
           'e.f': function (val, oldVal) { /* ... */ }
         }
       }`,
-      errors: ['You should not use an arrow function to define a watcher.']
+      errors: [{
+        message: 'You should not use an arrow function to define a watcher.',
+        line: 15
+      }]
     }
   ]
 })
