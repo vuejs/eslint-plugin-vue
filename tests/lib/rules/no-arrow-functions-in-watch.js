@@ -80,6 +80,18 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
     {
       filename: 'test.vue',
       code: `
+        export default {
+          watch: {
+            ...obj,
+            foo: function() {},
+            bar: function() {}
+          },
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       export default {
         data: {
           a: 1,
