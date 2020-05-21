@@ -184,11 +184,7 @@ ruleTester.run('component-definition-name-casing', rule, {
           name: 'foo  bar'
         }
       `,
-      output: `
-        export default {
-          name: 'FooBar'
-        }
-      `,
+      output: null,
       parserOptions,
       errors: [{
         message: 'Property name "foo  bar" is not PascalCase.',
@@ -203,11 +199,7 @@ ruleTester.run('component-definition-name-casing', rule, {
           name: 'foo!bar'
         }
       `,
-      output: `
-        export default {
-          name: 'FooBar'
-        }
-      `,
+      output: null,
       parserOptions,
       errors: [{
         message: 'Property name "foo!bar" is not PascalCase.',
@@ -222,11 +214,7 @@ ruleTester.run('component-definition-name-casing', rule, {
           name: 'foo!bar'
         })
       `,
-      output: `
-        new Vue({
-          name: 'FooBar'
-        })
-      `,
+      output: null,
       parserOptions: { ecmaVersion: 6 },
       errors: [{
         message: 'Property name "foo!bar" is not PascalCase.',
