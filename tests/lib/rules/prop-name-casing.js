@@ -325,6 +325,18 @@ ruleTester.run('prop-name-casing', rule, {
       parserOptions
     },
     {
+      // #932
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $css: String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
       filename: 'test.vue',
       code: `
         export default {
