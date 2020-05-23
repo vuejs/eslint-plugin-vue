@@ -38,6 +38,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-dollar-listeners-api](./no-deprecated-dollar-listeners-api.md) | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  |
@@ -159,6 +160,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  |
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
@@ -286,7 +288,6 @@ For example:
 | [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
-| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md)| disallows using arrow functions to define wathcer |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
