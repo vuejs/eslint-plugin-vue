@@ -105,6 +105,9 @@ ruleTester.run('require-valid-default-prop', rule, {
           foo: { type: String, default: \`Foo\` },
           foo: { type: BigInt, default: 1n },
           foo: { type: String, default: null },
+          foo: { type: String, default () { return Foo } },
+          foo: { type: Number, default () { return Foo } },
+          foo: { type: Object, default () { return Foo } },
         }
       })`,
       parserOptions
@@ -690,6 +693,35 @@ ruleTester.run('require-valid-default-prop', rule, {
       }`,
       parserOptions,
       errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [String, Boolean],
+            default() {
+              switch (kind) {
+                case 1: return 1
+                case 2: return '' // OK
+                case 3: return {}
+                case 4: return Foo // ignore?
+                case 5: return () => {}
+                case 6: return false // OK
+              }
+
+              function foo () {
+                return 1 // ignore?
+              }
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: [
+        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 7 },
+        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 9 },
+        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 11 }]
     }
   ]
 })
