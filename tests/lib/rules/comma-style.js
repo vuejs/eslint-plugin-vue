@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const { RuleTester } = require('eslint')
 const rule = require('../../../lib/rules/comma-style')
 
 const tester = new RuleTester({
@@ -92,8 +92,8 @@ tester.run('comma-style', rule, {
         </template>`,
       errors: [
         {
-          message: "',' should be placed first.",
-          line: 3
+          message: "',' should be placed first."
+          // line: 3 // eslint v7.0
         }
       ]
     },
@@ -115,8 +115,8 @@ tester.run('comma-style', rule, {
         </template>`,
       errors: [
         {
-          message: "',' should be placed first.",
-          line: 3
+          message: "',' should be placed first."
+          // line: 3 // eslint v7.0
         }
       ]
     }
