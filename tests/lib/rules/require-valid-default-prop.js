@@ -12,7 +12,7 @@ const rule = require('../../../lib/rules/require-valid-default-prop')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module',
   ecmaFeatures: { jsx: true }
 }
@@ -20,8 +20,14 @@ const parserOptions = {
 function errorMessage (type) {
   return [{
     message: `Type of the default value for 'foo' prop must be a ${type}.`,
-    type: 'Property',
     line: 5
+  }]
+}
+
+function errorMessageForFunction (type) {
+  return [{
+    message: `Type of the default value for 'foo' prop must be a ${type}.`,
+    line: 6
   }]
 }
 
@@ -96,7 +102,9 @@ ruleTester.run('require-valid-default-prop', rule, {
           foo: { type: Symbol, default: Symbol('a') },
           foo: { type: String, default: \`Foo\` },
           foo: { type: Foo, default: Foo('a') },
-          foo: { type: String, default: \`Foo\` }
+          foo: { type: String, default: \`Foo\` },
+          foo: { type: BigInt, default: 1n },
+          foo: { type: String, default: null },
         }
       })`,
       parserOptions
@@ -139,6 +147,30 @@ ruleTester.run('require-valid-default-prop', rule, {
             default() {
               return 's'
             }
+          }
+        }
+      }`,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [Number],
+            default: () => 10
+          }
+        }
+      }`,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [Function, Number],
+            default: () => 's'
           }
         }
       }`,
@@ -509,36 +541,155 @@ ruleTester.run('require-valid-default-prop', rule, {
       code: `export default {
         props: {
           foo: {
+            type: String,
+            default: 1n
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('string')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
             type: Number,
             default() {
               return ''
-            }
-          },
-          bar: {
-            type: Object,
-            default() {
-              return 123
-            }
-          },
-          baz: {
-            type: String,
-            default() {
-              return 10
             }
           }
         }
       }`,
       parserOptions,
-      errors: [{
-        message: `Type of the default value for 'foo' prop must be a function.`,
-        line: 5
-      }, {
-        message: `Type of the default value for 'bar' prop must be a function.`,
-        line: 9
-      }, {
-        message: `Type of the default value for '[baz]' prop must be a function.`,
-        line: 13
-      }]
+      errors: errorMessageForFunction('number')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Object,
+            default() {
+              return ''
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessageForFunction('object')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: String,
+            default() {
+              return 123
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessageForFunction('string')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Number,
+            default: () => {
+              return ''
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessageForFunction('number')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Object,
+            default: () => {
+              return ''
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessageForFunction('object')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: String,
+            default: () => {
+              return 123
+            }
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessageForFunction('string')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Number,
+            default: () => ''
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('number')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Object,
+            default: () => ''
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('object')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: String,
+            default: () => 123
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('string')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: Function,
+            default: 1
+          }
+        }
+      }`,
+      parserOptions,
+      errors: errorMessage('function')
     }
   ]
 })
