@@ -286,6 +286,7 @@ For example:
 | [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
+| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md)| disallows using arrow functions to define wathcer |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
