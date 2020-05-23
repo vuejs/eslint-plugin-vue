@@ -292,6 +292,7 @@ For example:
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
+| [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses | :wrench: |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
