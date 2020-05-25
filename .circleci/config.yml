@@ -6,6 +6,7 @@ workflows:
       - node-v10
       - node-v12
       - node-v14
+      - lint
 
 version: 2
 jobs:
