@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
 })
 
 ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
-
   valid: [
     {
       filename: 'test.js',
@@ -41,15 +40,17 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
     {
       filename: 'test.js',
       code: 'Vue.config.keyCodes = {}',
-      errors: [{
-        message: '`Vue.config.keyCodes` are deprecated.',
-        line: 1,
-        column: 1,
-        type: 'MemberExpression',
-        // messageId: 'unexpected',
-        endLine: 1,
-        endColumn: 20
-      }]
+      errors: [
+        {
+          message: '`Vue.config.keyCodes` are deprecated.',
+          line: 1,
+          column: 1,
+          type: 'MemberExpression',
+          // messageId: 'unexpected',
+          endLine: 1,
+          endColumn: 20
+        }
+      ]
     }
   ]
 })

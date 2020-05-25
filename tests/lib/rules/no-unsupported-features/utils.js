@@ -16,8 +16,8 @@ module.exports = {
    * @param {string} defaultVersion default Vue.js version
    * @returns {function} the options builder
    */
-  optionsBuilder (targetSyntax, defaultVersion) {
-    const baseIgnores = SYNTAXES.filter(s => s !== targetSyntax)
+  optionsBuilder(targetSyntax, defaultVersion) {
+    const baseIgnores = SYNTAXES.filter((s) => s !== targetSyntax)
     return (option) => {
       const ignores = [...baseIgnores]
       let version = defaultVersion

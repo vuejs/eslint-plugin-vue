@@ -69,4 +69,3 @@ tester.run('no-unsupported-features', rule, {
     }
   ]
 })
-

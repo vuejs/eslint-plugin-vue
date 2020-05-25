@@ -15,7 +15,6 @@ const tester = new RuleTester({
   }
 })
 tester.run('html-comment-content-spacing', rule, {
-
   valid: [
     {
       code: `
@@ -213,8 +212,18 @@ tester.run('html-comment-content-spacing', rule, {
         </template>
         `,
       errors: [
-        { message: 'Expected space after \'<!--\'.', line: 3, column: 15, endColumn: 15 },
-        { message: 'Expected space before \'-->\'.', line: 3, column: 22, endColumn: 22 }
+        {
+          message: "Expected space after '<!--'.",
+          line: 3,
+          column: 15,
+          endColumn: 15
+        },
+        {
+          message: "Expected space before '-->'.",
+          line: 3,
+          column: 22,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -230,8 +239,18 @@ tester.run('html-comment-content-spacing', rule, {
         </template>
         `,
       errors: [
-        { message: 'Unexpected space after \'<!--\'.', line: 3, column: 15, endColumn: 16 },
-        { message: 'Unexpected space before \'-->\'.', line: 3, column: 23, endColumn: 24 }
+        {
+          message: "Unexpected space after '<!--'.",
+          line: 3,
+          column: 15,
+          endColumn: 16
+        },
+        {
+          message: "Unexpected space before '-->'.",
+          line: 3,
+          column: 23,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -247,8 +266,18 @@ tester.run('html-comment-content-spacing', rule, {
         </template>
         `,
       errors: [
-        { message: 'Unexpected space after \'<!--\'.', line: 3, column: 15, endColumn: 23 },
-        { message: 'Unexpected space before \'-->\'.', line: 3, column: 30, endColumn: 38 }
+        {
+          message: "Unexpected space after '<!--'.",
+          line: 3,
+          column: 15,
+          endColumn: 23
+        },
+        {
+          message: "Unexpected space before '-->'.",
+          line: 3,
+          column: 30,
+          endColumn: 38
+        }
       ]
     },
     // exceptions
@@ -292,7 +321,7 @@ tester.run('html-comment-content-spacing', rule, {
         `,
       errors: [
         'Expected space after exception block.',
-        'Expected space before \'-->\'.'
+        "Expected space before '-->'."
       ]
     },
     {
@@ -305,7 +334,11 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       errors: [
         'Expected space after exception block.',
-        { message: 'Expected space before exception block.', line: 3, column: 27 }
+        {
+          message: 'Expected space before exception block.',
+          line: 3,
+          column: 27
+        }
       ]
     },
     {
@@ -318,9 +351,12 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       errors: [
         'Expected space after exception block.',
-        { message: 'Expected space before exception block.', line: 3, column: 28 }
+        {
+          message: 'Expected space before exception block.',
+          line: 3,
+          column: 28
+        }
       ]
     }
   ]
-
 })

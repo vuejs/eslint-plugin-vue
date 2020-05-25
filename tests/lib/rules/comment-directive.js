@@ -39,11 +39,11 @@ describe('comment-directive', () => {
   // Make `require("eslint-plugin-vue")` loading this plugin while this test.
   const resolveFilename = Module._resolveFilename
   before(() => {
-    Module._resolveFilename = function (id) {
+    Module._resolveFilename = function (id, ...args) {
       if (id === 'eslint-plugin-vue') {
         return path.resolve(__dirname, '../../../lib/index.js')
       }
-      return resolveFilename.apply(this, arguments)
+      return resolveFilename.call(this, id, ...args)
     }
   })
   after(() => {
@@ -58,7 +58,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -70,7 +71,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -85,7 +87,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -103,7 +106,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
@@ -120,7 +124,8 @@ describe('comment-directive', () => {
           var a
         </script>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.strictEqual(messages.length, 1)
       assert.strictEqual(messages[0].ruleId, 'no-unused-vars')
@@ -134,7 +139,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -145,13 +151,14 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it('don\'t disable rules if <!-- eslint-disable-line --> is on another line', () => {
+    it("don't disable rules if <!-- eslint-disable-line --> is on another line", () => {
       const code = `
         <template>
           <!-- eslint-disable-line -->
@@ -159,7 +166,8 @@ describe('comment-directive', () => {
           <!-- eslint-disable-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -175,7 +183,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -187,13 +196,14 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it('don\'t disable rules if <!-- eslint-disable-next-line --> is on another line', () => {
+    it("don't disable rules if <!-- eslint-disable-next-line --> is on another line", () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line -->
@@ -202,7 +212,8 @@ describe('comment-directive', () => {
           <!-- eslint-disable-next-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -217,7 +228,8 @@ describe('comment-directive', () => {
           <div id id="b">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -235,7 +247,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -249,7 +262,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -267,7 +281,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
@@ -280,7 +295,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line -- description -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -291,7 +307,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -304,7 +321,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
@@ -316,7 +334,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -331,12 +350,13 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('don\'t disable rules if <!-- eslint-disable --> is on after block', () => {
+    it("don't disable rules if <!-- eslint-disable --> is on after block", () => {
       const code = `
         <!-- eslint-disable -->
         <i18n>
@@ -345,7 +365,8 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0].messages
+      const messages = linter.executeOnText(code, 'test.vue').results[0]
+        .messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')

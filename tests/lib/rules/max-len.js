@@ -583,10 +583,12 @@ var b /* comment */ // trailing comments .......................................
 </script>
 `,
       options: [{ ignoreComments: true }],
-      errors: [{
-        message: 'This line has a length of 81. Maximum allowed is 80.',
-        line: 10
-      }]
+      errors: [
+        {
+          message: 'This line has a length of 81. Maximum allowed is 80.',
+          line: 10
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -609,10 +611,12 @@ var b /* comment */ // trailing comments .......................................
 </template>
 `,
       options: [{ ignoreComments: true }],
-      errors: [{
-        message: 'This line has a length of 81. Maximum allowed is 80.',
-        line: 15
-      }]
+      errors: [
+        {
+          message: 'This line has a length of 81. Maximum allowed is 80.',
+          line: 15
+        }
+      ]
     },
     // - ignoreTrailingComments: true
     {
@@ -1128,23 +1132,28 @@ var a;  // 41 cols comment                      *
 `,
       errors: [
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 3
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 4
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 9
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 12
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 13
         }
       ],
@@ -1223,15 +1232,18 @@ var b = \`81 columns                                                            
 `,
       errors: [
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 2
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 3
         },
         {
-          message: 'This line has a comment length of 41. Maximum allowed is 40.',
+          message:
+            'This line has a comment length of 41. Maximum allowed is 40.',
           line: 4
         }
       ],

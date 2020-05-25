@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
 })
 ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
-
   valid: [
     {
       filename: 'test.vue',

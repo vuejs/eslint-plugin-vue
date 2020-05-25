@@ -42,9 +42,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'custom(\\-\\w+)+'
-          ]
+          ignorePatterns: ['custom(\\-\\w+)+']
         }
       ]
     },
@@ -59,9 +57,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'custom(\\-\\w+)+'
-          ]
+          ignorePatterns: ['custom(\\-\\w+)+']
         }
       ]
     },
@@ -76,9 +72,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'custom(\\-\\w+)+'
-          ]
+          ignorePatterns: ['custom(\\-\\w+)+']
         }
       ]
     },
@@ -93,9 +87,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'Custom(\\w+)+'
-          ]
+          ignorePatterns: ['Custom(\\w+)+']
         }
       ]
     },
@@ -110,9 +102,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'Custom(\\w+)+'
-          ]
+          ignorePatterns: ['Custom(\\w+)+']
         }
       ]
     },
@@ -127,9 +117,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'Custom(\\w+)+'
-          ]
+          ignorePatterns: ['Custom(\\w+)+']
         }
       ]
     },
@@ -145,11 +133,7 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'Custom(\\w+)+',
-            'Warm(\\w+)+',
-            'InfoBtn(\\w+)+'
-          ]
+          ignorePatterns: ['Custom(\\w+)+', 'Warm(\\w+)+', 'InfoBtn(\\w+)+']
         }
       ]
     },
@@ -404,10 +388,13 @@ tester.run('no-unregistered-components', rule, {
           <CustomComponent />
         </template>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -418,15 +405,16 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'custom(\\-\\w+)+'
-          ]
+          ignorePatterns: ['custom(\\-\\w+)+']
         }
       ],
-      errors: [{
-        message: 'The "WarmButton" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "WarmButton" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -437,10 +425,13 @@ tester.run('no-unregistered-components', rule, {
           </CustomComponent>
         </template>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -453,15 +444,16 @@ tester.run('no-unregistered-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: [
-            'custom(\\-\\w+)+'
-          ]
+          ignorePatterns: ['custom(\\-\\w+)+']
         }
       ],
-      errors: [{
-        message: 'The "WarmButton" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "WarmButton" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -477,10 +469,13 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -498,10 +493,13 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -517,10 +515,13 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -538,10 +539,13 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -557,10 +561,13 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'The "CustomComponent" component has been used but not registered.',
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     }
   ]
 })

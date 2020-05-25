@@ -365,19 +365,24 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 5
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 10
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 14
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 21
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 5
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 10
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 14
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -407,19 +412,24 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 5
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 10
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 14
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 21
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 5
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 10
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 14
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -440,16 +450,20 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 5
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 9
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 12
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 5
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 9
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 12
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -481,19 +495,24 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 7
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 13
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 16
-      }, {
-        message: 'Duplicated key \'foo\'.',
-        line: 23
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 7
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 13
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 16
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 23
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -509,10 +528,12 @@ ruleTester.run('no-dupe-keys', rule, {
       `,
       options: [{ groups: ['foo'] }],
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: 'Duplicated key \'bar\'.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'bar'.",
+          line: 7
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -533,10 +554,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 12
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 12
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -555,10 +578,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 10
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 10
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -575,10 +600,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 9
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -595,10 +622,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 9
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -615,10 +644,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 9
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -635,10 +666,12 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'foo\'.',
-        line: 9
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -654,10 +687,12 @@ ruleTester.run('no-dupe-keys', rule, {
       `,
       options: [{ groups: ['foo'] }],
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: 'Duplicated key \'bar\'.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'bar'.",
+          line: 7
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -673,10 +708,12 @@ ruleTester.run('no-dupe-keys', rule, {
       `,
       options: [{ groups: ['foo'] }],
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Duplicated key \'bar\'.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: "Duplicated key 'bar'.",
+          line: 7
+        }
+      ]
     }
   ]
 })

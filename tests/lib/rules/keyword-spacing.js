@@ -25,8 +25,7 @@ tester.run('keyword-spacing', rule, {
       " />
     </template>`,
     {
-      code:
-      `<template>
+      code: `<template>
         <div @event="
           if(foo) {
             //...
@@ -45,8 +44,7 @@ tester.run('keyword-spacing', rule, {
   ],
   invalid: [
     {
-      code:
-      `<template>
+      code: `<template>
         <div @event="
           if(foo) {
             //...
@@ -57,8 +55,7 @@ tester.run('keyword-spacing', rule, {
           }
         " />
       </template>`,
-      output:
-      `<template>
+      output: `<template>
         <div @event="
           if (foo) {
             //...
@@ -93,8 +90,7 @@ tester.run('keyword-spacing', rule, {
       ]
     },
     {
-      code:
-      `<template>
+      code: `<template>
         <div @event="
           if (foo) {
             //...
@@ -106,8 +102,7 @@ tester.run('keyword-spacing', rule, {
         " />
       </template>`,
       options: [{ before: false, after: false }],
-      output:
-      `<template>
+      output: `<template>
         <div @event="
           if(foo) {
             //...
@@ -142,19 +137,18 @@ tester.run('keyword-spacing', rule, {
       ]
     },
     {
-      code:
-      `<template>
+      code: `<template>
         <div :[(function(){return(1)})()]="(function(){return(1)})()" />
       </template>`,
-      output:
-      `<template>
+      output: `<template>
         <div :[(function(){return(1)})()]="(function(){return (1)})()" />
       </template>`,
       errors: [
         {
           message: 'Expected space(s) after "return".',
           line: 2
-        }]
+        }
+      ]
     }
   ]
 })

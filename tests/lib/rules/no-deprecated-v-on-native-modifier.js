@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
 })
 
 ruleTester.run('no-deprecated-v-on-native-modifier', rule, {
-
   valid: [
     {
       filename: 'test.vue',

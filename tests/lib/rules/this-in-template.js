@@ -21,7 +21,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-function createValidTests (prefix, options) {
+function createValidTests(prefix, options) {
   const comment = options.join('')
   return [
     {
@@ -116,7 +116,7 @@ function createValidTests (prefix, options) {
   ]
 }
 
-function createInvalidTests (prefix, options, message, type) {
+function createInvalidTests(prefix, options, message, type) {
   const comment = options.join('')
   return [
     {
@@ -166,20 +166,21 @@ function createInvalidTests (prefix, options, message, type) {
     //   errors: [{ message, type }],
     //   options
     // }
-  ].concat(options[0] === 'always'
-    ? []
-    : [
-      {
-        code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
-        errors: [{ message, type }],
-        options
-      },
-      {
-        code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
-        errors: [{ message, type }],
-        options
-      }
-    ]
+  ].concat(
+    options[0] === 'always'
+      ? []
+      : [
+          {
+            code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+            errors: [{ message, type }],
+            options
+          },
+          {
+            code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
+            errors: [{ message, type }],
+            options
+          }
+        ]
   )
 }
 
@@ -189,7 +190,23 @@ ruleTester.run('this-in-template', rule, {
     .concat(createValidTests('', ['never']))
     .concat(createValidTests('this.', ['always'])),
   invalid: []
-    .concat(createInvalidTests('this.', [], "Unexpected usage of 'this'.", 'ThisExpression'))
-    .concat(createInvalidTests('this.', ['never'], "Unexpected usage of 'this'.", 'ThisExpression'))
-    .concat(createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'))
+    .concat(
+      createInvalidTests(
+        'this.',
+        [],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      )
+    )
+    .concat(
+      createInvalidTests(
+        'this.',
+        ['never'],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      )
+    )
+    .concat(
+      createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier')
+    )
 })

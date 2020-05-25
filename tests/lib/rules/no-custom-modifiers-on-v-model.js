@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
 })
 
 ruleTester.run('no-custom-modifiers-on-v-model', rule, {
-
   valid: [
     {
       filename: 'test.vue',

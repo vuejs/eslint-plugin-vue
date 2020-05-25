@@ -63,7 +63,7 @@ tester.run('html-quotes', rule, {
     },
     {
       filename: 'test.vue',
-      code: "<template><div attr=\"foo'bar\"></div></template>",
+      code: '<template><div attr="foo\'bar"></div></template>',
       options: ['single', { avoidEscape: true }]
     },
 
@@ -73,7 +73,7 @@ tester.run('html-quotes', rule, {
       options: ['single']
     },
     {
-      code: '<template><div class=\'foo></div></template>',
+      code: "<template><div class='foo></div></template>",
       options: ['double']
     }
   ],
@@ -146,28 +146,28 @@ tester.run('html-quotes', rule, {
     {
       filename: 'test.vue',
       code: '<template><div class=foo></div></template>',
-      output: '<template><div class=\'foo\'></div></template>',
+      output: "<template><div class='foo'></div></template>",
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div class="foo"></div></template>',
-      output: '<template><div class=\'foo\'></div></template>',
+      output: "<template><div class='foo'></div></template>",
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class=foo></div></template>',
-      output: '<template><div :class=\'foo\'></div></template>',
+      output: "<template><div :class='foo'></div></template>",
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
     {
       filename: 'test.vue',
       code: '<template><div :class="foo"></div></template>',
-      output: '<template><div :class=\'foo\'></div></template>',
+      output: "<template><div :class='foo'></div></template>",
       options: ['single'],
       errors: ['Expected to be enclosed by single quotes.']
     },
@@ -196,14 +196,14 @@ tester.run('html-quotes', rule, {
     {
       filename: 'test.vue',
       code: '<template><div attr=foo"bar></div></template>',
-      output: '<template><div attr=\'foo"bar\'></div></template>',
+      output: "<template><div attr='foo\"bar'></div></template>",
       options: ['double', { avoidEscape: true }],
       errors: ['Expected to be enclosed by double quotes.']
     },
     {
       filename: 'test.vue',
-      code: '<template><div attr=foo\'bar></div></template>',
-      output: "<template><div attr=\"foo'bar\"></div></template>",
+      code: "<template><div attr=foo'bar></div></template>",
+      output: '<template><div attr="foo\'bar"></div></template>',
       options: ['single', { avoidEscape: true }],
       errors: ['Expected to be enclosed by single quotes.']
     },
@@ -217,7 +217,7 @@ tester.run('html-quotes', rule, {
     {
       filename: 'test.vue',
       code: '<template><div attr=foo"bar\'baz></div></template>',
-      output: '<template><div attr=\'foo"bar&apos;baz\'></div></template>',
+      output: "<template><div attr='foo\"bar&apos;baz'></div></template>",
       options: ['single', { avoidEscape: true }],
       errors: ['Expected to be enclosed by single quotes.']
     }

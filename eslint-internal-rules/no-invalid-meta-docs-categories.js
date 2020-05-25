@@ -16,7 +16,7 @@
  * @param {ASTNode} node The ObjectExpression node.
  * @returns {ASTNode} The Property node or null if not found.
  */
-function getPropertyFromObject (property, node) {
+function getPropertyFromObject(property, node) {
   if (node && node.type === 'ObjectExpression') {
     const properties = node.properties
 
@@ -35,7 +35,7 @@ function getPropertyFromObject (property, node) {
  * @param {ASTNode} exportsNode ObjectExpression node that the rule exports.
  * @returns {ASTNode} The `meta` Property node or null if not found.
  */
-function getMetaPropertyFromExportsNode (exportsNode) {
+function getMetaPropertyFromExportsNode(exportsNode) {
   return getPropertyFromObject('meta', exportsNode)
 }
 
@@ -47,7 +47,7 @@ function getMetaPropertyFromExportsNode (exportsNode) {
  * @param {boolean} ruleIsFixable whether the rule is fixable or not.
  * @returns {void}
  */
-function checkMetaValidity (context, exportsNode) {
+function checkMetaValidity(context, exportsNode) {
   const metaProperty = getMetaPropertyFromExportsNode(exportsNode)
   if (!metaProperty) {
     return
@@ -63,18 +63,27 @@ function checkMetaValidity (context, exportsNode) {
     context.report({
       node: metaDocs,
       message: 'Rule is missing a meta.docs.categories property.',
-      fix (fixer) {
+      fix(fixer) {
         const category = getPropertyFromObject('category', metaDocs.value)
         if (!category) {
           return null
         }
         const fixes = [fixer.replaceText(category.key, 'categories')]
-        if (category.value && category.value.type === 'Literal' && typeof category.value.value === 'string') {
+        if (
+          category.value &&
+          category.value.type === 'Literal' &&
+          typeof category.value.value === 'string'
+        ) {
           // fixes.push(fixer.insertTextBefore(category.value, '['), fixer.insertTextAfter(category.value, ']'))
 
           // for vue3 migration
           if (category.value.value !== 'base') {
-            fixes.push(fixer.insertTextBefore(category.value, `['vue3-${category.value.value}', `))
+            fixes.push(
+              fixer.insertTextBefore(
+                category.value,
+                `['vue3-${category.value.value}', `
+              )
+            )
           } else {
             fixes.push(fixer.insertTextBefore(category.value, '['))
           }
@@ -86,12 +95,15 @@ function checkMetaValidity (context, exportsNode) {
     return
   }
 
-  if (categories.value &&
-    (
-      categories.value.type !== 'ArrayExpression' &&
-      !(categories.value.type === 'Literal' && categories.value.value == null) &&
-      !(categories.value.type === 'Identifier' && categories.value.name === 'undefined')
-    )) {
+  if (
+    categories.value &&
+    categories.value.type !== 'ArrayExpression' &&
+    !(categories.value.type === 'Literal' && categories.value.value == null) &&
+    !(
+      categories.value.type === 'Identifier' &&
+      categories.value.name === 'undefined'
+    )
+  ) {
     context.report(categories.value, 'meta.docs.categories must be an array.')
   }
 }
@@ -102,7 +114,7 @@ function checkMetaValidity (context, exportsNode) {
  * @param {ASTNode} node node that the rule exports.
  * @returns {boolean} `true` if the exported node is the correct format for a rule definition
  */
-function isCorrectExportsFormat (node) {
+function isCorrectExportsFormat(node) {
   return node != null && node.type === 'ObjectExpression'
 }
 
@@ -120,23 +132,29 @@ module.exports = {
     schema: []
   },
 
-  create (context) {
+  create(context) {
     let exportsNode
 
     return {
-      AssignmentExpression (node) {
-        if (node.left &&
-            node.right &&
-            node.left.type === 'MemberExpression' &&
-            node.left.object.name === 'module' &&
-            node.left.property.name === 'exports') {
+      AssignmentExpression(node) {
+        if (
+          node.left &&
+          node.right &&
+          node.left.type === 'MemberExpression' &&
+          node.left.object.name === 'module' &&
+          node.left.property.name === 'exports'
+        ) {
           exportsNode = node.right
         }
       },
 
-      'Program:exit' (programNode) {
+      'Program:exit'(programNode) {
         if (!isCorrectExportsFormat(exportsNode)) {
-          context.report({ node: exportsNode || programNode, message: 'Rule does not export an Object. Make sure the rule follows the new rule format.' })
+          context.report({
+            node: exportsNode || programNode,
+            message:
+              'Rule does not export an Object. Make sure the rule follows the new rule format.'
+          })
           return
         }
 

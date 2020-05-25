@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 ruleTester.run('return-in-emits-validator', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -136,10 +135,13 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a boolean value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -153,10 +155,13 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a boolean value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -170,10 +175,13 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a boolean value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -186,10 +194,12 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a true value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Expected to return a true value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -207,10 +217,13 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a boolean value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -229,11 +242,13 @@ ruleTester.run('return-in-emits-validator', rule, {
       `,
       errors: [
         {
-          message: 'Expected to return a boolean value in "foo" emits validator.',
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
           line: 5
         },
         {
-          message: 'Expected to return a boolean value in "bar" emits validator.',
+          message:
+            'Expected to return a boolean value in "bar" emits validator.',
           line: 7
         }
       ]
@@ -251,10 +266,13 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a boolean value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -283,10 +301,12 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `,
-      errors: [{
-        message: 'Expected to return a true value in "foo" emits validator.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Expected to return a true value in "foo" emits validator.',
+          line: 5
+        }
+      ]
     }
   ]
 })

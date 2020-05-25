@@ -23,7 +23,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester()
 ruleTester.run('return-in-computed-property', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -120,10 +119,12 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -136,10 +137,12 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -155,10 +158,12 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -175,10 +180,12 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 7
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -195,10 +202,12 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -215,10 +224,12 @@ ruleTester.run('return-in-computed-property', rule, {
       `,
       parserOptions,
       options: [{ treatUndefinedAsUnspecified: false }],
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -233,10 +244,12 @@ ruleTester.run('return-in-computed-property', rule, {
       `,
       parserOptions,
       options: [{ treatUndefinedAsUnspecified: true }],
-      errors: [{
-        message: 'Expected to return a value in "foo" computed property.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -252,10 +265,13 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in "my_FALSE_test" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected to return a value in "my_FALSE_test" computed property.',
+          line: 5
+        }
+      ]
     }
   ]
 })

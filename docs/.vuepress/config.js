@@ -6,32 +6,62 @@
 
 const rules = require('../../tools/lib/rules')
 
-const uncategorizedRules = rules.filter(rule => !rule.meta.docs.categories && !rule.meta.deprecated)
-const deprecatedRules = rules.filter(rule => rule.meta.deprecated)
+const uncategorizedRules = rules.filter(
+  (rule) => !rule.meta.docs.categories && !rule.meta.deprecated
+)
+const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
 const sidebarCategories = [
   { title: 'Base Rules', categoryIds: ['base'] },
-  { title: 'Priority A: Essential', categoryIds: ['vue3-essential', 'essential'] },
-  { title: 'Priority A: Essential for Vue.js 3.x', categoryIds: ['vue3-essential'] },
+  {
+    title: 'Priority A: Essential',
+    categoryIds: ['vue3-essential', 'essential']
+  },
+  {
+    title: 'Priority A: Essential for Vue.js 3.x',
+    categoryIds: ['vue3-essential']
+  },
   { title: 'Priority A: Essential for Vue.js 2.x', categoryIds: ['essential'] },
-  { title: 'Priority B: Strongly Recommended', categoryIds: ['vue3-strongly-recommended', 'strongly-recommended'] },
-  { title: 'Priority B: Strongly Recommended for Vue.js 3.x', categoryIds: ['vue3-strongly-recommended'] },
-  { title: 'Priority B: Strongly Recommended for Vue.js 2.x', categoryIds: ['strongly-recommended'] },
-  { title: 'Priority C: Recommended', categoryIds: ['vue3-recommended', 'recommended'] },
-  { title: 'Priority C: Recommended for Vue.js 3.x', categoryIds: ['vue3-recommended'] },
-  { title: 'Priority C: Recommended for Vue.js 2.x', categoryIds: ['recommended'] }
+  {
+    title: 'Priority B: Strongly Recommended',
+    categoryIds: ['vue3-strongly-recommended', 'strongly-recommended']
+  },
+  {
+    title: 'Priority B: Strongly Recommended for Vue.js 3.x',
+    categoryIds: ['vue3-strongly-recommended']
+  },
+  {
+    title: 'Priority B: Strongly Recommended for Vue.js 2.x',
+    categoryIds: ['strongly-recommended']
+  },
+  {
+    title: 'Priority C: Recommended',
+    categoryIds: ['vue3-recommended', 'recommended']
+  },
+  {
+    title: 'Priority C: Recommended for Vue.js 3.x',
+    categoryIds: ['vue3-recommended']
+  },
+  {
+    title: 'Priority C: Recommended for Vue.js 2.x',
+    categoryIds: ['recommended']
+  }
 ]
 
 const categorizedRules = []
 for (const { title, categoryIds } of sidebarCategories) {
   const categoryRules = rules
-    .filter(rule => rule.meta.docs.categories && !rule.meta.deprecated)
-    .filter(rule => categoryIds
-      .every(categoryId => rule.meta.docs.categories.includes(categoryId))
+    .filter((rule) => rule.meta.docs.categories && !rule.meta.deprecated)
+    .filter((rule) =>
+      categoryIds.every((categoryId) =>
+        rule.meta.docs.categories.includes(categoryId)
+      )
     )
   const children = categoryRules
     .filter(({ ruleId }) => {
-      const exists = categorizedRules.some(({ children }) => children.some(([, alreadyRuleId]) => alreadyRuleId === ruleId))
+      const exists = categorizedRules.some(({ children }) =>
+        children.some(([, alreadyRuleId]) => alreadyRuleId === ruleId)
+      )
       return !exists
     })
     .map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
@@ -51,19 +81,25 @@ if (uncategorizedRules.length > 0) {
   extraCategories.push({
     title: 'Uncategorized',
     collapsable: false,
-    children: uncategorizedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+    children: uncategorizedRules.map(({ ruleId, name }) => [
+      `/rules/${name}`,
+      ruleId
+    ])
   })
 }
 if (deprecatedRules.length > 0) {
   extraCategories.push({
     title: 'Deprecated',
     collapsable: false,
-    children: deprecatedRules.map(({ ruleId, name }) => [`/rules/${name}`, ruleId])
+    children: deprecatedRules.map(({ ruleId, name }) => [
+      `/rules/${name}`,
+      ruleId
+    ])
   })
 }
 
 module.exports = {
-  configureWebpack (_config, _isServer) {
+  configureWebpack(_config, _isServer) {
     return {
       resolve: {
         alias: {
@@ -77,9 +113,7 @@ module.exports = {
   title: 'eslint-plugin-vue',
   description: 'Official ESLint plugin for Vue.js',
   evergreen: true,
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.png' }]
-  ],
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
 
   plugins: {
     '@vuepress/pwa': {

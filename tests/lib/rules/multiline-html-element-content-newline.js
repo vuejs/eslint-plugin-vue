@@ -218,9 +218,11 @@ tester.run('multiline-html-element-content-newline', rule, {
           <ignore-tag>content
             content</ignore-tag>
         </template>`,
-      options: [{
-        ignores: ['ignore-tag']
-      }]
+      options: [
+        {
+          ignores: ['ignore-tag']
+        }
+      ]
     },
     {
       code: `
@@ -234,9 +236,11 @@ tester.run('multiline-html-element-content-newline', rule, {
           <IgnoreTag>content
             content</IgnoreTag>
         </template>`,
-      options: [{
-        ignores: ['IgnoreTag']
-      }]
+      options: [
+        {
+          ignores: ['IgnoreTag']
+        }
+      ]
     },
     {
       code: `
@@ -250,9 +254,11 @@ tester.run('multiline-html-element-content-newline', rule, {
           <ignore-tag>content
             content</ignore-tag>
         </template>`,
-      options: [{
-        ignores: ['IgnoreTag']
-      }]
+      options: [
+        {
+          ignores: ['IgnoreTag']
+        }
+      ]
     },
 
     // Ignore if no closing brackets
@@ -283,7 +289,8 @@ content
       `,
       errors: [
         {
-          message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 5,
           column: 12,
           type: 'HTMLTagClose',
@@ -291,7 +298,8 @@ content
           endColumn: 12
         },
         {
-          message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 5,
           column: 19,
           type: 'HTMLEndTagOpen',
@@ -320,14 +328,16 @@ content
       `,
       errors: [
         {
-          message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 5,
           column: 12,
           endLine: 5,
           endColumn: 15
         },
         {
-          message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 5,
           column: 22,
           endLine: 5,
@@ -353,14 +363,16 @@ content
       `,
       errors: [
         {
-          message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 3,
           column: 16,
           endLine: 3,
           endColumn: 16
         },
         {
-          message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 4,
           column: 22,
           endLine: 4,
@@ -710,7 +722,9 @@ content
         </template>
       `,
       options: [{ ignoreWhenEmpty: false }],
-      errors: ['Expected 1 line break after opening tag (`<div>`), but no line breaks found.']
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+      ]
     }
   ]
 })

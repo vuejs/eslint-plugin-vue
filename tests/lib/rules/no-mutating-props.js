@@ -24,7 +24,6 @@ const ruleTester = new RuleTester({
 })
 
 ruleTester.run('no-mutating-props', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -617,9 +616,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      errors: [
-        'Unexpected mutation of "[a]" prop.'
-      ]
+      errors: ['Unexpected mutation of "[a]" prop.']
     },
     {
       filename: 'test.vue',
@@ -632,9 +629,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      errors: [
-        'Unexpected mutation of "[a]" prop.'
-      ]
+      errors: ['Unexpected mutation of "[a]" prop.']
     }
   ]
 })

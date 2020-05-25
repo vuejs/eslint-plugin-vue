@@ -17,26 +17,28 @@ const categories = require('./lib/categories')
 const errorCategories = ['base', 'essential', 'vue3-essential']
 
 const extendsCategories = {
-  'base': null,
-  'essential': 'base',
+  base: null,
+  essential: 'base',
   'vue3-essential': 'base',
   'strongly-recommended': 'essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  'recommended': 'strongly-recommended',
+  recommended: 'strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended',
   'use-with-caution': 'recommended',
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules (rules, categoryId) {
+function formatRules(rules, categoryId) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = errorCategories.includes(categoryId) ? 'error' : 'warn'
+    setting[rule.ruleId] = errorCategories.includes(categoryId)
+      ? 'error'
+      : 'warn'
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory (category) {
+function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
     return `/*

@@ -5,11 +5,7 @@
 
 'use strict'
 
-const ALLOWED_FIRST_WORDS = [
-  'enforce',
-  'require',
-  'disallow'
-]
+const ALLOWED_FIRST_WORDS = ['enforce', 'require', 'disallow']
 
 // ------------------------------------------------------------------------------
 // Helpers
@@ -22,7 +18,7 @@ const ALLOWED_FIRST_WORDS = [
  * @param {ASTNode} node The ObjectExpression node.
  * @returns {ASTNode} The Property node or null if not found.
  */
-function getPropertyFromObject (property, node) {
+function getPropertyFromObject(property, node) {
   if (node && node.type === 'ObjectExpression') {
     const properties = node.properties
 
@@ -42,15 +38,17 @@ function getPropertyFromObject (property, node) {
  * @param {ASTNode} exportsNode ObjectExpression node that the rule exports.
  * @returns {void}
  */
-function checkMetaDocsDescription (context, exportsNode) {
+function checkMetaDocsDescription(context, exportsNode) {
   if (exportsNode.type !== 'ObjectExpression') {
     // if the exported node is not the correct format, "internal-no-invalid-meta" will already report this.
     return
   }
 
   const metaProperty = getPropertyFromObject('meta', exportsNode)
-  const metaDocs = metaProperty && getPropertyFromObject('docs', metaProperty.value)
-  const metaDocsDescription = metaDocs && getPropertyFromObject('description', metaDocs.value)
+  const metaDocs =
+    metaProperty && getPropertyFromObject('docs', metaProperty.value)
+  const metaDocsDescription =
+    metaDocs && getPropertyFromObject('description', metaDocs.value)
 
   if (!metaDocsDescription) {
     // if there is no `meta.docs.description` property, "internal-no-invalid-meta" will already report this.
@@ -88,7 +86,8 @@ function checkMetaDocsDescription (context, exportsNode) {
   if (ALLOWED_FIRST_WORDS.indexOf(firstWord) === -1) {
     context.report({
       node: metaDocsDescription.value,
-      message: '`meta.docs.description` should start with one of the following words: {{ allowedWords }}. Started with "{{ firstWord }}" instead.',
+      message:
+        '`meta.docs.description` should start with one of the following words: {{ allowedWords }}. Started with "{{ firstWord }}" instead.',
       data: {
         allowedWords: ALLOWED_FIRST_WORDS.join(', '),
         firstWord
@@ -100,7 +99,7 @@ function checkMetaDocsDescription (context, exportsNode) {
     context.report({
       node: metaDocsDescription.value,
       message: '`meta.docs.description` should not end with `.`.',
-      fix (fixer) {
+      fix(fixer) {
         const pos = metaDocsDescription.range[1] - 2
         return fixer.removeRange([pos, pos + 1])
       }
@@ -115,22 +114,25 @@ function checkMetaDocsDescription (context, exportsNode) {
 module.exports = {
   meta: {
     docs: {
-      description: 'enforce correct conventions of `meta.docs.description` property in core rules',
+      description:
+        'enforce correct conventions of `meta.docs.description` property in core rules',
       categories: ['Internal']
     },
     fixable: 'code',
     schema: []
   },
 
-  create (context) {
+  create(context) {
     return {
-      AssignmentExpression (node) {
-        if (node.left &&
-            node.right &&
-            node.left.type === 'MemberExpression' &&
-            node.left.object.name === 'module' &&
-            node.left.property.name === 'exports' &&
-            node.right.type === 'ObjectExpression') {
+      AssignmentExpression(node) {
+        if (
+          node.left &&
+          node.right &&
+          node.left.type === 'MemberExpression' &&
+          node.left.object.name === 'module' &&
+          node.left.property.name === 'exports' &&
+          node.right.type === 'ObjectExpression'
+        ) {
           checkMetaDocsDescription(context, node.right)
         }
       }

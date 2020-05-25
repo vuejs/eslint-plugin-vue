@@ -36,12 +36,17 @@ tester.run('valid-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo" v-else></div></div></template>',
-      errors: ["'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives."]
+      errors: [
+        "'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
-      errors: ["'v-if' and 'v-else-if' directives can't exist on the same element."]
+      code:
+        '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
+      errors: [
+        "'v-if' and 'v-else-if' directives can't exist on the same element."
+      ]
     },
     {
       filename: 'test.vue',

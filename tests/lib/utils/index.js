@@ -15,22 +15,18 @@ describe('parseMemberExpression', () => {
 
   it('should parse member expression', () => {
     node = parse('this.some.nested.property')
-    assert.deepEqual(
-      utils.parseMemberExpression(node),
-      ['this', 'some', 'nested', 'property']
-    )
+    assert.deepEqual(utils.parseMemberExpression(node), [
+      'this',
+      'some',
+      'nested',
+      'property'
+    ])
 
     node = parse('another.property')
-    assert.deepEqual(
-      utils.parseMemberExpression(node),
-      ['another', 'property']
-    )
+    assert.deepEqual(utils.parseMemberExpression(node), ['another', 'property'])
 
     node = parse('this.something')
-    assert.deepEqual(
-      utils.parseMemberExpression(node),
-      ['this', 'something']
-    )
+    assert.deepEqual(utils.parseMemberExpression(node), ['this', 'something'])
   })
 })
 
@@ -49,10 +45,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    assert.equal(
-      utils.getComputedProperties(node).length,
-      0
-    )
+    assert.equal(utils.getComputedProperties(node).length, 0)
   })
 
   it('should return computed properties', () => {
@@ -197,13 +190,17 @@ describe('parseMemberOrCallExpression', () => {
   }
 
   it('should parse CallExpression', () => {
-    node = parse(`const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`)
+    node = parse(
+      `const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`
+    )
     const parsed = utils.parseMemberOrCallExpression(node)
     assert.equal(parsed, 'this.lorem[].map().filter().reduce()')
   })
 
   it('should parse MemberExpression', () => {
-    node = parse(`const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`)
+    node = parse(
+      `const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`
+    )
     const parsed = utils.parseMemberOrCallExpression(node)
     assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
   })
@@ -221,10 +218,7 @@ describe('getRegisteredComponents', () => {
       name: 'test',
     }`)
 
-    assert.equal(
-      utils.getRegisteredComponents(node).length,
-      0
-    )
+    assert.equal(utils.getRegisteredComponents(node).length, 0)
   })
 
   it('should return an array with all registered components', () => {
@@ -242,8 +236,15 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map(c => c.name),
-      ['PrimaryButton', 'secondaryButton', 'the-modal', 'the_dropdown', 'the_input', 'SomeComponent'],
+      utils.getRegisteredComponents(node).map((c) => c.name),
+      [
+        'PrimaryButton',
+        'secondaryButton',
+        'the-modal',
+        'the_dropdown',
+        'the_input',
+        'SomeComponent'
+      ]
     )
   })
 
@@ -261,8 +262,8 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map(c => c.name),
-      ['Foo', 'Quux'],
+      utils.getRegisteredComponents(node).map((c) => c.name),
+      ['Foo', 'Quux']
     )
   })
 })

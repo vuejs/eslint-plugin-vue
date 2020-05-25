@@ -17,18 +17,22 @@ const parserOptions = {
   ecmaFeatures: { jsx: true }
 }
 
-function errorMessage (type) {
-  return [{
-    message: `Type of the default value for 'foo' prop must be a ${type}.`,
-    line: 5
-  }]
+function errorMessage(type) {
+  return [
+    {
+      message: `Type of the default value for 'foo' prop must be a ${type}.`,
+      line: 5
+    }
+  ]
 }
 
-function errorMessageForFunction (type) {
-  return [{
-    message: `Type of the default value for 'foo' prop must be a ${type}.`,
-    line: 6
-  }]
+function errorMessageForFunction(type) {
+  return [
+    {
+      message: `Type of the default value for 'foo' prop must be a ${type}.`,
+      line: 6
+    }
+  ]
 }
 
 // ------------------------------------------------------------------------------
@@ -37,7 +41,6 @@ function errorMessageForFunction (type) {
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-valid-default-prop', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -528,16 +531,20 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       parserOptions,
-      errors: [{
-        message: `Type of the default value for 'foo' prop must be a function.`,
-        line: 5
-      }, {
-        message: `Type of the default value for 'bar' prop must be a function.`,
-        line: 9
-      }, {
-        message: `Type of the default value for '[baz]' prop must be a function.`,
-        line: 13
-      }]
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5
+        },
+        {
+          message: `Type of the default value for 'bar' prop must be a function.`,
+          line: 9
+        },
+        {
+          message: `Type of the default value for '[baz]' prop must be a function.`,
+          line: 13
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -719,9 +726,22 @@ ruleTester.run('require-valid-default-prop', rule, {
       }`,
       parserOptions,
       errors: [
-        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 7 },
-        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 9 },
-        { message: "Type of the default value for 'foo' prop must be a string or boolean.", line: 11 }]
+        {
+          message:
+            "Type of the default value for 'foo' prop must be a string or boolean.",
+          line: 7
+        },
+        {
+          message:
+            "Type of the default value for 'foo' prop must be a string or boolean.",
+          line: 9
+        },
+        {
+          message:
+            "Type of the default value for 'foo' prop must be a string or boolean.",
+          line: 11
+        }
+      ]
     }
   ]
 })

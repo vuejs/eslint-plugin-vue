@@ -17,7 +17,7 @@ tester.run('key-spacing', rule, {
     '<template><div :[{a:1}[`a`]]="a" /></template>',
     {
       code: '<template><div :[{a:1}[`a`]]="a" /></template>',
-      options: [{ 'beforeColon': true }]
+      options: [{ beforeColon: true }]
     }
   ],
   invalid: [
@@ -31,7 +31,7 @@ tester.run('key-spacing', rule, {
     },
     {
       code: '<template><div :[{a:1}[`a`]]="{a:1}[`a`]" /></template>',
-      options: [{ 'beforeColon': true }],
+      options: [{ beforeColon: true }],
       output: '<template><div :[{a:1}[`a`]]="{a : 1}[`a`]" /></template>',
       errors: [
         "Missing space after key 'a'.",

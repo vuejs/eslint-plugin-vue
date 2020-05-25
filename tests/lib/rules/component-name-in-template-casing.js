@@ -45,17 +45,50 @@ tester.run('component-name-in-template-casing', rule, {
     },
 
     // element types test
-    { code: '<template><div/></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><img></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><TheComponent/></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><svg><path/></svg></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><math><mspace/></math></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><div><slot></slot></div></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><h1>Title</h1></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><h1 :is="customTitle">Title</h1></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><svg><TheComponent /></svg></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><text /></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><circle cx="0" cy="0" :d="radius"></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
+    {
+      code: '<template><div/></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><img></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><TheComponent/></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><svg><path/></svg></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><math><mspace/></math></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><div><slot></slot></div></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><h1>Title</h1></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><h1 :is="customTitle">Title</h1></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><svg><TheComponent /></svg></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><text /></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><circle cx="0" cy="0" :d="radius"></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
 
     // kebab-case
     {
@@ -82,11 +115,18 @@ tester.run('component-name-in-template-casing', rule, {
     // ignores
     {
       code: '<template><custom-element></custom-element></template>',
-      options: ['PascalCase', { ignores: ['custom-element'], registeredComponentsOnly: false }]
+      options: [
+        'PascalCase',
+        { ignores: ['custom-element'], registeredComponentsOnly: false }
+      ]
     },
     {
-      code: '<template><custom-element><TheComponent/></custom-element></template>',
-      options: ['PascalCase', { ignores: ['custom-element'], registeredComponentsOnly: false }]
+      code:
+        '<template><custom-element><TheComponent/></custom-element></template>',
+      options: [
+        'PascalCase',
+        { ignores: ['custom-element'], registeredComponentsOnly: false }
+      ]
     },
     // regexp ignores
     {
@@ -98,12 +138,21 @@ tester.run('component-name-in-template-casing', rule, {
         </template>
       `,
       filename: 'test.vue',
-      options: ['PascalCase', { registeredComponentsOnly: false, ignores: ['/^global/'] }]
+      options: [
+        'PascalCase',
+        { registeredComponentsOnly: false, ignores: ['/^global/'] }
+      ]
     },
 
     // Invalid EOF
-    { code: '<template><the-component a=">test</the-component></template>', options: ['PascalCase', { registeredComponentsOnly: false }] },
-    { code: '<template><the-component><!--test</the-component></template>', options: ['PascalCase', { registeredComponentsOnly: false }] }
+    {
+      code: '<template><the-component a=">test</the-component></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><the-component><!--test</the-component></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    }
   ],
   invalid: [
     {
@@ -652,10 +701,13 @@ tester.run('component-name-in-template-casing', rule, {
         <custom-element2 />
         <TheComponent />
       </template>`,
-      options: ['PascalCase', {
-        ignores: ['custom-element1', 'custom-element2'],
-        registeredComponentsOnly: false
-      }],
+      options: [
+        'PascalCase',
+        {
+          ignores: ['custom-element1', 'custom-element2'],
+          registeredComponentsOnly: false
+        }
+      ],
       errors: [
         'Component name "the-component" is not PascalCase.',
         'Component name "the-component" is not PascalCase.'
@@ -678,10 +730,13 @@ tester.run('component-name-in-template-casing', rule, {
         <custom-element2 />
         <TheComponent />
       </template>`,
-      options: ['PascalCase', {
-        ignores: ['/^custom-element/'],
-        registeredComponentsOnly: false
-      }],
+      options: [
+        'PascalCase',
+        {
+          ignores: ['/^custom-element/'],
+          registeredComponentsOnly: false
+        }
+      ],
       errors: [
         'Component name "the-component" is not PascalCase.',
         'Component name "the-component" is not PascalCase.'
@@ -702,9 +757,12 @@ tester.run('component-name-in-template-casing', rule, {
         <foo-bar />
         <foo-bar-baz-qux />
       </template>`,
-      options: ['kebab-case', {
-        registeredComponentsOnly: false
-      }],
+      options: [
+        'kebab-case',
+        {
+          registeredComponentsOnly: false
+        }
+      ],
       errors: [
         'Component name "foo--bar" is not kebab-case.',
         'Component name "Foo--Bar" is not kebab-case.',
