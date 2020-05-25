@@ -54,12 +54,14 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['template', 'docs', 'script', 'style'] }]
     },
     {
-      code: '<template></template><docs></docs><script></script><style></style>',
+      code:
+        '<template></template><docs></docs><script></script><style></style>',
       output: null,
       options: [{ order: ['template', 'script', 'style'] }]
     },
     {
-      code: '<docs><div id="id">text <!--comment--> </div><br></docs><script></script><template></template><style></style>',
+      code:
+        '<docs><div id="id">text <!--comment--> </div><br></docs><script></script><template></template><style></style>',
       output: null,
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
     },

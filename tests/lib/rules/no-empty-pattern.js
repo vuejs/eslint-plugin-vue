@@ -247,6 +247,5 @@ tester.run('no-empty-pattern', rule, {
         }
       ]
     }
-
   ]
 })

@@ -26,10 +26,14 @@ const content = `/*
 
 module.exports = {
   rules: {
-    ${rules.map(rule => `'${rule.name}': require('./rules/${rule.name}')`).join(',\n')}
+    ${rules
+      .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
+      .join(',\n')}
   },
   configs: {
-    ${configs.map(config => `'${config}': require('./configs/${config}')`).join(',\n')}
+    ${configs
+      .map((config) => `'${config}': require('./configs/${config}')`)
+      .join(',\n')}
   },
   processors: {
     '.vue': require('./processor')

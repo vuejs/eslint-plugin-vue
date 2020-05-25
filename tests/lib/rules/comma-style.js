@@ -25,7 +25,7 @@ tester.run('comma-style', rule, {
           <CustomButton @click="($event,
             data) => fn()" />
         </template>`,
-      options: ['last', { exceptions: { ArrowFunctionExpression: false }}]
+      options: ['last', { exceptions: { ArrowFunctionExpression: false } }]
     },
     {
       code: `
@@ -33,7 +33,7 @@ tester.run('comma-style', rule, {
           <CustomButton @click="($event
             , data) => fn()" />
         </template>`,
-      options: ['first', { exceptions: { ArrowFunctionExpression: false }}]
+      options: ['first', { exceptions: { ArrowFunctionExpression: false } }]
     }
   ],
   invalid: [
@@ -65,7 +65,7 @@ tester.run('comma-style', rule, {
           <CustomButton @click="($event
             , data) => fn()" />
         </template>`,
-      options: ['last', { exceptions: { ArrowFunctionExpression: false }}],
+      options: ['last', { exceptions: { ArrowFunctionExpression: false } }],
       output: `
         <template>
           <CustomButton @click="($event,
@@ -84,7 +84,7 @@ tester.run('comma-style', rule, {
           <CustomButton @click="($event,
             data) => fn()" />
         </template>`,
-      options: ['first', { exceptions: { ArrowFunctionExpression: false }}],
+      options: ['first', { exceptions: { ArrowFunctionExpression: false } }],
       output: `
         <template>
           <CustomButton @click="($event
@@ -105,7 +105,7 @@ tester.run('comma-style', rule, {
             <div/>
           </CustomButton>
         </template>`,
-      options: ['first', { exceptions: { FunctionExpression: false }}],
+      options: ['first', { exceptions: { FunctionExpression: false } }],
       output: `
         <template>
           <CustomButton v-slot="foo

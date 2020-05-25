@@ -10,29 +10,35 @@ const rules = require('./lib/rules')
 const categories = require('./lib/categories')
 
 // -----------------------------------------------------------------------------
-const uncategorizedRules = rules.filter(rule => !rule.meta.docs.categories && !rule.meta.deprecated)
-const deprecatedRules = rules.filter(rule => rule.meta.deprecated)
+const uncategorizedRules = rules.filter(
+  (rule) => !rule.meta.docs.categories && !rule.meta.deprecated
+)
+const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
-function toRuleRow (rule) {
-  const mark = `${rule.meta.fixable ? ':wrench:' : ''}${rule.meta.deprecated ? ':warning:' : ''}`
+function toRuleRow(rule) {
+  const mark = `${rule.meta.fixable ? ':wrench:' : ''}${
+    rule.meta.deprecated ? ':warning:' : ''
+  }`
   const link = `[${rule.ruleId}](./${rule.name}.md)`
   const description = rule.meta.docs.description || '(no description)'
 
   return `| ${link} | ${description} | ${mark} |`
 }
 
-function toDeprecatedRuleRow (rule) {
+function toDeprecatedRuleRow(rule) {
   const link = `[${rule.ruleId}](./${rule.name}.md)`
   const replacedRules = rule.meta.docs.replacedBy || []
   const replacedBy = replacedRules
-    .map(name => `[vue/${name}](./${name}.md)`)
+    .map((name) => `[vue/${name}](./${name}.md)`)
     .join(', ')
 
   return `| ${link} | ${replacedBy || '(no replacement)'} |`
 }
 
 // -----------------------------------------------------------------------------
-let rulesTableContent = categories.map(category => `
+let rulesTableContent = categories
+  .map(
+    (category) => `
 ## ${category.title.vuepress}
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
@@ -46,7 +52,9 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 ${category.rules.map(toRuleRow).join('\n')}
-`).join('')
+`
+  )
+  .join('')
 
 // -----------------------------------------------------------------------------
 if (uncategorizedRules.length >= 1) {

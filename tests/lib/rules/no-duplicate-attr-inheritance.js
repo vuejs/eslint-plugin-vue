@@ -8,15 +8,15 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-duplicate-attr-inheritance')
+const rule = require('../../../lib/rules/no-duplicate-attr-inheritance')
 
-var RuleTester = require('eslint').RuleTester
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2018,
@@ -24,7 +24,6 @@ var ruleTester = new RuleTester({
   }
 })
 ruleTester.run('no-duplicate-attr-inheritance', rule, {
-
   valid: [
     {
       filename: 'test.vue',

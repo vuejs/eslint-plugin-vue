@@ -125,7 +125,8 @@ tester.run('no-lifecycle-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The lifecycle hooks after `await` expression are forbidden.',
+          message:
+            'The lifecycle hooks after `await` expression are forbidden.',
           line: 8,
           column: 11,
           endLine: 8,

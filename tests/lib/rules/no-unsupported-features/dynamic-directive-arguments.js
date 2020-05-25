@@ -8,7 +8,10 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../../lib/rules/no-unsupported-features')
 const utils = require('./utils')
 
-const buildOptions = utils.optionsBuilder('dynamic-directive-arguments', '^2.5.0')
+const buildOptions = utils.optionsBuilder(
+  'dynamic-directive-arguments',
+  '^2.5.0'
+)
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
@@ -83,4 +86,3 @@ tester.run('no-unsupported-features/dynamic-directive-arguments', rule, {
     }
   ]
 })
-

@@ -26,25 +26,25 @@ const rules = require('./lib/rules')
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
 const presetCategories = {
-  'base': null,
-  'essential': 'base',
+  base: null,
+  essential: 'base',
   'vue3-essential': 'base',
   'strongly-recommended': 'essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  'recommended': 'strongly-recommended',
+  recommended: 'strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended'
   // 'use-with-caution': 'recommended',
   // 'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatItems (items) {
+function formatItems(items) {
   if (items.length <= 2) {
     return items.join(' and ')
   }
   return `all of ${items.slice(0, -1).join(', ')} and ${last(items)}`
 }
 
-function getPresetIds (categoryIds) {
+function getPresetIds(categoryIds) {
   const subsetCategoryIds = []
   for (const categoryId of categoryIds) {
     for (const subsetCategoryId in presetCategories) {
@@ -60,21 +60,21 @@ function getPresetIds (categoryIds) {
 }
 
 class DocFile {
-  constructor (rule) {
+  constructor(rule) {
     this.rule = rule
     this.filePath = path.join(ROOT, `${rule.name}.md`)
     this.content = fs.readFileSync(this.filePath, 'utf8')
   }
 
-  static read (rule) {
+  static read(rule) {
     return new DocFile(rule)
   }
 
-  write () {
+  write() {
     fs.writeFileSync(this.filePath, this.content)
   }
 
-  updateFileIntro () {
+  updateFileIntro() {
     const { ruleId, meta } = this.rule
 
     const fileIntro = {
@@ -83,7 +83,9 @@ class DocFile {
       title: ruleId,
       description: meta.docs.description
     }
-    const computed = '---\n' + Object.entries(fileIntro).map(item => `${item[0]}: ${item[1]}`).join('\n') + '\n---\n'
+    const computed = `---\n${Object.entries(fileIntro)
+      .map((item) => `${item[0]}: ${item[1]}`)
+      .join('\n')}\n---\n`
 
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
@@ -96,25 +98,35 @@ class DocFile {
     return this
   }
 
-  updateHeader () {
+  updateHeader() {
     const { ruleId, meta } = this.rule
     const title = `# ${ruleId}\n> ${meta.docs.description}`
     const notes = []
 
     if (meta.deprecated) {
       if (meta.docs.replacedBy) {
-        const replacedRules = meta.docs.replacedBy.map(name => `[vue/${name}](${name}.md) rule`)
-        notes.push(`- :warning: This rule was **deprecated** and replaced by ${formatItems(replacedRules)}.`)
+        const replacedRules = meta.docs.replacedBy.map(
+          (name) => `[vue/${name}](${name}.md) rule`
+        )
+        notes.push(
+          `- :warning: This rule was **deprecated** and replaced by ${formatItems(
+            replacedRules
+          )}.`
+        )
       } else {
         notes.push(`- :warning: This rule was **deprecated**.`)
       }
     } else if (meta.docs.categories) {
-      const presets = getPresetIds(meta.docs.categories).map(categoryId => `\`"plugin:vue/${categoryId}"\``)
+      const presets = getPresetIds(meta.docs.categories).map(
+        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      )
 
       notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
     if (meta.fixable) {
-      notes.push(`- :wrench: The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.`)
+      notes.push(
+        `- :wrench: The \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.`
+      )
     }
 
     // Add an empty line after notes.
@@ -133,7 +145,7 @@ class DocFile {
     return this
   }
 
-  updateCodeBlocks () {
+  updateCodeBlocks() {
     const { meta } = this.rule
 
     this.content = this.content.replace(
@@ -143,7 +155,7 @@ class DocFile {
     return this
   }
 
-  adjustCodeBlocks () {
+  adjustCodeBlocks() {
     // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
     this.content = this.content.replace(
       /(<eslint-code-block([\s\S]*?)>)\n+```/gm,
@@ -156,7 +168,7 @@ class DocFile {
     return this
   }
 
-  updateFooter () {
+  updateFooter() {
     const { name } = this.rule
     const footerPattern = /## :mag: Implementation.+$/s
     const footer = `## :mag: Implementation
@@ -175,8 +187,7 @@ class DocFile {
 }
 
 for (const rule of rules) {
-  DocFile
-    .read(rule)
+  DocFile.read(rule)
     .updateHeader()
     .updateFooter()
     .updateCodeBlocks()

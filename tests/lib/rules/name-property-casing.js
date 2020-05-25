@@ -22,7 +22,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester()
 ruleTester.run('name-property-casing', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -86,11 +85,13 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Property name "foo-bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo-bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -101,11 +102,13 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: null,
       parserOptions,
-      errors: [{
-        message: 'Property name "foo  bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo  bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -116,11 +119,13 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: null,
       parserOptions,
-      errors: [{
-        message: 'Property name "foo!bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo!bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -131,11 +136,13 @@ ruleTester.run('name-property-casing', rule, {
       `,
       output: null,
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: 'Property name "foo!bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo!bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -150,11 +157,13 @@ ruleTester.run('name-property-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Property name "foo_bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo_bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -170,11 +179,13 @@ ruleTester.run('name-property-casing', rule, {
       `,
       options: ['PascalCase'],
       parserOptions,
-      errors: [{
-        message: 'Property name "foo_bar" is not PascalCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo_bar" is not PascalCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -190,11 +201,13 @@ ruleTester.run('name-property-casing', rule, {
       `,
       options: ['kebab-case'],
       parserOptions,
-      errors: [{
-        message: 'Property name "foo_bar" is not kebab-case.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Property name "foo_bar" is not kebab-case.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     }
   ]
 })

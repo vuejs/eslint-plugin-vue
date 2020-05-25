@@ -107,12 +107,16 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on:click></div></template>',
-      errors: ["'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."]
+      errors: [
+        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @click></div></template>',
-      errors: ["'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."]
+      errors: [
+        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+      ]
     },
     {
       filename: 'test.vue',

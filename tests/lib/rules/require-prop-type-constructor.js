@@ -22,7 +22,6 @@ const ruleTester = new RuleTester({
   }
 })
 ruleTester.run('require-prop-type-constructor', rule, {
-
   valid: [
     {
       filename: 'SomeComponent.vue',
@@ -132,25 +131,32 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      errors: [{
-        message: 'The "myProp" property should be a constructor.',
-        line: 4
-      }, {
-        message: 'The "anotherType" property should be a constructor.',
-        line: 5
-      }, {
-        message: 'The "anotherType" property should be a constructor.',
-        line: 5
-      }, {
-        message: 'The "extraProp" property should be a constructor.',
-        line: 7
-      }, {
-        message: 'The "lastProp" property should be a constructor.',
-        line: 11
-      }, {
-        message: 'The "nullProp" property should be a constructor.',
-        line: 13
-      }]
+      errors: [
+        {
+          message: 'The "myProp" property should be a constructor.',
+          line: 4
+        },
+        {
+          message: 'The "anotherType" property should be a constructor.',
+          line: 5
+        },
+        {
+          message: 'The "anotherType" property should be a constructor.',
+          line: 5
+        },
+        {
+          message: 'The "extraProp" property should be a constructor.',
+          line: 7
+        },
+        {
+          message: 'The "lastProp" property should be a constructor.',
+          line: 11
+        },
+        {
+          message: 'The "nullProp" property should be a constructor.',
+          line: 13
+        }
+      ]
     },
     {
       filename: 'SomeComponent.vue',
@@ -174,19 +180,24 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      errors: [{
-        message: 'The "a" property should be a constructor.',
-        line: 4
-      }, {
-        message: 'The "b" property should be a constructor.',
-        line: 5
-      }, {
-        message: 'The "c" property should be a constructor.',
-        line: 6
-      }, {
-        message: 'The "d" property should be a constructor.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: 'The "a" property should be a constructor.',
+          line: 4
+        },
+        {
+          message: 'The "b" property should be a constructor.',
+          line: 5
+        },
+        {
+          message: 'The "c" property should be a constructor.',
+          line: 6
+        },
+        {
+          message: 'The "d" property should be a constructor.',
+          line: 7
+        }
+      ]
     },
     {
       filename: 'SomeComponent.vue',
@@ -210,10 +221,12 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      errors: [{
-        message: 'The "a" property should be a constructor.',
-        line: 5
-      }],
+      errors: [
+        {
+          message: 'The "a" property should be a constructor.',
+          line: 5
+        }
+      ],
       parser: require.resolve('@typescript-eslint/parser')
     },
     {
@@ -232,10 +245,12 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      errors: [{
-        message: 'The "name" property should be a constructor.',
-        line: 4
-      }],
+      errors: [
+        {
+          message: 'The "name" property should be a constructor.',
+          line: 4
+        }
+      ],
       parser: require.resolve('@typescript-eslint/parser')
     },
     {

@@ -23,7 +23,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester()
 ruleTester.run('no-deprecated-data-object-declaration', rule, {
-
   valid: [
     {
       filename: 'test.js',
@@ -160,10 +159,13 @@ return {
         })
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 4
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -184,10 +186,13 @@ return {
         })
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -208,10 +213,13 @@ return {
         }
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -232,10 +240,13 @@ return (/*b*/{
         }
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -256,10 +267,13 @@ return {
         })
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -280,10 +294,13 @@ return {
         }).mount('#app')
       `,
       parserOptions,
-      errors: [{
-        message: "Object declaration on \'data\' property is deprecated. Using function declaration instead.",
-        line: 3
-      }]
+      errors: [
+        {
+          message:
+            "Object declaration on 'data' property is deprecated. Using function declaration instead.",
+          line: 3
+        }
+      ]
     }
   ]
 })

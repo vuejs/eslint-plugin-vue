@@ -93,7 +93,7 @@ tester.run('valid-v-slot', rule, {
           <div v-slot="{data}">{{data}}</div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' }}]
+      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
     },
     {
       code: `
@@ -101,7 +101,9 @@ tester.run('valid-v-slot', rule, {
           <template v-slot:named></template>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'template' }}]
+      errors: [
+        { messageId: 'ownerMustBeCustomElement', data: { name: 'template' } }
+      ]
     },
     {
       code: `
@@ -110,7 +112,7 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'ownerMustBeCustomElement', data: { name: 'div' }},
+        { messageId: 'ownerMustBeCustomElement', data: { name: 'div' } },
         { messageId: 'namedSlotMustBeOnTemplate' }
       ]
     },
@@ -120,7 +122,7 @@ tester.run('valid-v-slot', rule, {
           <div><template v-slot></template></div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' }}]
+      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
     },
     {
       code: `

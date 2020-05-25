@@ -14,7 +14,7 @@ const tester = new RuleTester({
 
 const message = semver.lt(CLIEngine.version, '5.10.0')
   ? () => 'Infix operators must be spaced.'
-  : operator => `Operator '${operator}' must be spaced.`
+  : (operator) => `Operator '${operator}' must be spaced.`
 
 tester.run('space-infix-ops', rule, {
   valid: [

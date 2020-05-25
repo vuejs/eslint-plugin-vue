@@ -163,9 +163,11 @@ tester.run('singleline-html-element-content-newline', rule, {
           <ignore-tag attr>content</ignore-tag>
           <ignore-tag><span attr>content</span></ignore-tag>
         </template>`,
-      options: [{
-        ignores: ['ignore-tag']
-      }]
+      options: [
+        {
+          ignores: ['ignore-tag']
+        }
+      ]
     },
     {
       code: `
@@ -174,9 +176,11 @@ tester.run('singleline-html-element-content-newline', rule, {
           <IgnoreTag attr>content</IgnoreTag>
           <IgnoreTag><span attr>content</span></IgnoreTag>
         </template>`,
-      options: [{
-        ignores: ['IgnoreTag']
-      }]
+      options: [
+        {
+          ignores: ['IgnoreTag']
+        }
+      ]
     },
     {
       code: `
@@ -185,9 +189,11 @@ tester.run('singleline-html-element-content-newline', rule, {
           <ignore-tag attr>content</ignore-tag>
           <ignore-tag><span attr>content</span></ignore-tag>
         </template>`,
-      options: [{
-        ignores: ['IgnoreTag']
-      }]
+      options: [
+        {
+          ignores: ['IgnoreTag']
+        }
+      ]
     },
     // not target
     `
@@ -224,7 +230,8 @@ content
       `,
       errors: [
         {
-          message: 'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
           line: 3,
           column: 30,
           type: 'HTMLTagClose',
@@ -232,7 +239,8 @@ content
           endColumn: 30
         },
         {
-          message: 'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
           line: 3,
           column: 37,
           type: 'HTMLEndTagOpen',

@@ -490,10 +490,13 @@ tester.run('no-unused-components', rule, {
           }
         </script>
       `,
-      errors: [{
-        message: 'The "TheButton" component has been registered but not used.',
-        line: 10
-      }]
+      errors: [
+        {
+          message:
+            'The "TheButton" component has been registered but not used.',
+          line: 10
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -512,10 +515,13 @@ tester.run('no-unused-components', rule, {
           }
         </script>
       `,
-      errors: [{
-        message: 'The "TheButton" component has been registered but not used.',
-        line: 11
-      }]
+      errors: [
+        {
+          message:
+            'The "TheButton" component has been registered but not used.',
+          line: 11
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -534,10 +540,13 @@ tester.run('no-unused-components', rule, {
           }
         </script>
       `,
-      errors: [{
-        message: 'The "the-button" component has been registered but not used.',
-        line: 11
-      }]
+      errors: [
+        {
+          message:
+            'The "the-button" component has been registered but not used.',
+          line: 11
+        }
+      ]
     },
     // Setting: ignoreWhenBindingPresent
     {
@@ -565,13 +574,16 @@ tester.run('no-unused-components', rule, {
         }
       </script>`,
       options: [{ ignoreWhenBindingPresent: false }],
-      errors: [{
-        message: 'The "Foo" component has been registered but not used.',
-        line: 13
-      }, {
-        message: 'The "Bar" component has been registered but not used.',
-        line: 14
-      }]
+      errors: [
+        {
+          message: 'The "Foo" component has been registered but not used.',
+          line: 13
+        },
+        {
+          message: 'The "Bar" component has been registered but not used.',
+          line: 14
+        }
+      ]
     },
 
     // empty `:is`
@@ -588,10 +600,12 @@ tester.run('no-unused-components', rule, {
           },
         }
       </script>`,
-      errors: [{
-        message: 'The "Foo" component has been registered but not used.',
-        line: 8
-      }]
+      errors: [
+        {
+          message: 'The "Foo" component has been registered but not used.',
+          line: 8
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -606,10 +620,12 @@ tester.run('no-unused-components', rule, {
           },
         }
       </script>`,
-      errors: [{
-        message: 'The "Foo" component has been registered but not used.',
-        line: 8
-      }]
+      errors: [
+        {
+          message: 'The "Foo" component has been registered but not used.',
+          line: 8
+        }
+      ]
     },
 
     // computed properties
@@ -631,19 +647,24 @@ tester.run('no-unused-components', rule, {
           }
         }
       </script>`,
-      errors: [{
-        message: 'The "foo" component has been registered but not used.',
-        line: 8
-      }, {
-        message: 'The "bar" component has been registered but not used.',
-        line: 9
-      }, {
-        message: 'The "baz" component has been registered but not used.',
-        line: 10
-      }, {
-        message: 'The "quux" component has been registered but not used.',
-        line: 13
-      }]
+      errors: [
+        {
+          message: 'The "foo" component has been registered but not used.',
+          line: 8
+        },
+        {
+          message: 'The "bar" component has been registered but not used.',
+          line: 9
+        },
+        {
+          message: 'The "baz" component has been registered but not used.',
+          line: 10
+        },
+        {
+          message: 'The "quux" component has been registered but not used.',
+          line: 13
+        }
+      ]
     }
   ]
 })

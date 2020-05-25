@@ -23,7 +23,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester()
 ruleTester.run('no-shared-component-data', rule, {
-
   valid: [
     {
       filename: 'test.js',
@@ -139,10 +138,12 @@ return {
         })
       `,
       parserOptions,
-      errors: [{
-        message: '`data` property in component must be a function.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: '`data` property in component must be a function.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -163,10 +164,12 @@ return {
         })
       `,
       parserOptions,
-      errors: [{
-        message: '`data` property in component must be a function.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: '`data` property in component must be a function.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -187,10 +190,12 @@ return {
         }
       `,
       parserOptions,
-      errors: [{
-        message: '`data` property in component must be a function.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: '`data` property in component must be a function.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -211,10 +216,12 @@ return (/*b*/{
         }
       `,
       parserOptions,
-      errors: [{
-        message: '`data` property in component must be a function.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: '`data` property in component must be a function.',
+          line: 3
+        }
+      ]
     }
   ]
 })

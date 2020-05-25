@@ -15,7 +15,9 @@ const tester = new RuleTester({
   }
 })
 
-const allOptions = [{ groups: ['props', 'computed', 'data', 'methods', 'setup'] }]
+const allOptions = [
+  { groups: ['props', 'computed', 'data', 'methods', 'setup'] }
+]
 
 tester.run('no-unused-properties', rule, {
   valid: [
@@ -872,7 +874,8 @@ tester.run('no-unused-properties', rule, {
           line: 17
         },
         {
-          message: "'e' of property returned from `setup()` found, but never used.",
+          message:
+            "'e' of property returned from `setup()` found, but never used.",
           line: 20
         }
       ]
@@ -957,9 +960,7 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
-      errors: [
-        "'bar' of property found, but never used."
-      ]
+      errors: ["'bar' of property found, but never used."]
     },
     {
       filename: 'test.vue',
@@ -973,9 +974,7 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
-      errors: [
-        "'bar' of property found, but never used."
-      ]
+      errors: ["'bar' of property found, but never used."]
     },
     {
       filename: 'test.vue',
@@ -1051,9 +1050,7 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `,
-      errors: [
-        "'bar' of property found, but never used."
-      ]
+      errors: ["'bar' of property found, but never used."]
     },
     {
       filename: 'test.vue',
@@ -1076,9 +1073,7 @@ tester.run('no-unused-properties', rule, {
           function fn3({bar}) {}
         </script>
       `,
-      errors: [
-        "'baz' of property found, but never used."
-      ]
+      errors: ["'baz' of property found, but never used."]
     },
     {
       filename: 'test.vue',
@@ -1176,9 +1171,7 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `,
-      errors: [
-        "'baz' of property found, but never used."
-      ]
+      errors: ["'baz' of property found, but never used."]
     },
     {
       filename: 'test.vue',

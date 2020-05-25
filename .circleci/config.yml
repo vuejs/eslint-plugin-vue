@@ -6,6 +6,7 @@ workflows:
       - node-v10
       - node-v12
       - node-v14
+      - lint
 
 version: 2
 jobs:
@@ -61,3 +62,25 @@ jobs:
     <<: *node-base
     docker:
       - image: node:14
+
+  lint:
+    docker:
+      - image: node:14
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Test
+          command: npm run lint

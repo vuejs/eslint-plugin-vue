@@ -48,17 +48,24 @@ tester.run('no-template-key', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><template key="foo"></template></div></template>',
-      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
+      errors: [
+        "'<template>' cannot be keyed. Place the key on real elements instead."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><template v-bind:key="foo"></template></div></template>',
-      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
+      code:
+        '<template><div><template v-bind:key="foo"></template></div></template>',
+      errors: [
+        "'<template>' cannot be keyed. Place the key on real elements instead."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><template :key="foo"></template></div></template>',
-      errors: ["'<template>' cannot be keyed. Place the key on real elements instead."]
+      errors: [
+        "'<template>' cannot be keyed. Place the key on real elements instead."
+      ]
     }
   ]
 })

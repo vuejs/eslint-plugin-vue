@@ -74,7 +74,6 @@ tester.run('no-unsupported-features/v-slot', rule, {
     }
   ],
   invalid: [
-
     {
       code: `
       <template>

@@ -83,12 +83,12 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 4,
           column: 25
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 4,
           column: 25
         }
@@ -105,19 +105,19 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         },
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -133,19 +133,19 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         },
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -161,11 +161,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -181,11 +181,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -201,11 +201,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -225,11 +225,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 4
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 4
         }
       ]
@@ -245,11 +245,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'There should be no space before \',\'.',
+          message: "There should be no space before ','.",
           line: 3
         },
         {
-          message: 'A space is required after \',\'.',
+          message: "A space is required after ','.",
           line: 3
         }
       ]
@@ -270,11 +270,11 @@ tester.run('comma-spacing', rule, {
         </template>`,
       errors: [
         {
-          message: 'A space is required before \',\'.',
+          message: "A space is required before ','.",
           line: 4
         },
         {
-          message: 'There should be no space after \',\'.',
+          message: "There should be no space after ','.",
           line: 4
         }
       ]

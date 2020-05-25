@@ -159,55 +159,62 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 2 spaces but found 0 spaces.',
-        line: 4,
-        column: 11,
-        endLine: 4,
-        endColumn: 11
-      },
-      {
-        message: 'Expected base point indentation of 10 spaces, but found 7 spaces.',
-        line: 7,
-        column: 1,
-        endLine: 7,
-        endColumn: 8
-      },
-      {
-        message: 'Expected relative indentation of 2 spaces but found 5 spaces.',
-        line: 8,
-        column: 11,
-        endLine: 8,
-        endColumn: 16
-      },
-      {
-        message: 'Expected relative indentation of 0 spaces but found 1 space.',
-        line: 9,
-        column: 11,
-        endLine: 9,
-        endColumn: 12
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 11,
-        column: 14,
-        endLine: 11,
-        endColumn: 15
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 12,
-        column: 13,
-        endLine: 12,
-        endColumn: 14
-      },
-      {
-        message: 'Expected base point indentation of 12 spaces, but found 11 spaces.',
-        line: 13,
-        column: 1,
-        endLine: 13,
-        endColumn: 12
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 0 spaces.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected base point indentation of 10 spaces, but found 7 spaces.',
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 8
+        },
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 5 spaces.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 1 space.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 12
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 11,
+          column: 14,
+          endLine: 11,
+          endColumn: 15
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
+        },
+        {
+          message:
+            'Expected base point indentation of 12 spaces, but found 11 spaces.',
+          line: 13,
+          column: 1,
+          endLine: 13,
+          endColumn: 12
+        }
+      ]
     },
     {
       code: `
@@ -241,55 +248,59 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 1 tab but found 0 tabs.',
-        line: 4,
-        column: 11,
-        endLine: 4,
-        endColumn: 11
-      },
-      {
-        message: 'Expected base point indentation of 10 spaces, but found "        \\t".',
-        line: 7,
-        column: 1,
-        endLine: 7,
-        endColumn: 10
-      },
-      {
-        message: 'Expected relative indentation of 1 tab but found 2 tabs.',
-        line: 8,
-        column: 11,
-        endLine: 8,
-        endColumn: 13
-      },
-      {
-        message: 'Expected relative indentation of 0 tabs but found 1 tab.',
-        line: 9,
-        column: 11,
-        endLine: 9,
-        endColumn: 12
-      },
-      {
-        message: 'Expected tab character, but found space character.',
-        line: 11,
-        column: 14,
-        endLine: 11,
-        endColumn: 15
-      },
-      {
-        message: 'Expected tab character, but found space character.',
-        line: 12,
-        column: 13,
-        endLine: 12,
-        endColumn: 14
-      },
-      {
-        message: 'Expected base point indentation of 12 spaces, but found 11 spaces.',
-        line: 13,
-        column: 1,
-        endLine: 13,
-        endColumn: 12
-      }]
+      errors: [
+        {
+          message: 'Expected relative indentation of 1 tab but found 0 tabs.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected base point indentation of 10 spaces, but found "        \\t".',
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 10
+        },
+        {
+          message: 'Expected relative indentation of 1 tab but found 2 tabs.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 13
+        },
+        {
+          message: 'Expected relative indentation of 0 tabs but found 1 tab.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 12
+        },
+        {
+          message: 'Expected tab character, but found space character.',
+          line: 11,
+          column: 14,
+          endLine: 11,
+          endColumn: 15
+        },
+        {
+          message: 'Expected tab character, but found space character.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
+        },
+        {
+          message:
+            'Expected base point indentation of 12 spaces, but found 11 spaces.',
+          line: 13,
+          column: 1,
+          endLine: 13,
+          endColumn: 12
+        }
+      ]
     },
     {
       code: `
@@ -323,55 +334,62 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 4 spaces but found 0 spaces.',
-        line: 4,
-        column: 11,
-        endLine: 4,
-        endColumn: 11
-      },
-      {
-        message: 'Expected base point indentation of 10 spaces, but found 5 spaces.',
-        line: 7,
-        column: 1,
-        endLine: 7,
-        endColumn: 6
-      },
-      {
-        message: 'Expected relative indentation of 4 spaces but found 8 spaces.',
-        line: 8,
-        column: 11,
-        endLine: 8,
-        endColumn: 19
-      },
-      {
-        message: 'Expected relative indentation of 0 spaces but found 2 spaces.',
-        line: 9,
-        column: 11,
-        endLine: 9,
-        endColumn: 13
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 11,
-        column: 15,
-        endLine: 11,
-        endColumn: 16
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 12,
-        column: 13,
-        endLine: 12,
-        endColumn: 14
-      },
-      {
-        message: 'Expected base point indentation of 12 spaces, but found 10 spaces.',
-        line: 13,
-        column: 1,
-        endLine: 13,
-        endColumn: 11
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 4 spaces but found 0 spaces.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected base point indentation of 10 spaces, but found 5 spaces.',
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 6
+        },
+        {
+          message:
+            'Expected relative indentation of 4 spaces but found 8 spaces.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 19
+        },
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 2 spaces.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 13
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 16
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
+        },
+        {
+          message:
+            'Expected base point indentation of 12 spaces, but found 10 spaces.',
+          line: 13,
+          column: 1,
+          endLine: 13,
+          endColumn: 11
+        }
+      ]
     },
     {
       code: `
@@ -405,55 +423,62 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 0 spaces but found 2 spaces.',
-        line: 4,
-        column: 11,
-        endLine: 4,
-        endColumn: 13
-      },
-      {
-        message: 'Expected base point indentation of 10 spaces, but found 8 spaces.',
-        line: 7,
-        column: 1,
-        endLine: 7,
-        endColumn: 9
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 8,
-        column: 11,
-        endLine: 8,
-        endColumn: 12
-      },
-      {
-        message: 'Expected relative indentation of 0 spaces but found 2 spaces.',
-        line: 9,
-        column: 11,
-        endLine: 9,
-        endColumn: 13
-      },
-      {
-        message: 'Expected space character, but found tab character.',
-        line: 11,
-        column: 13,
-        endLine: 11,
-        endColumn: 14
-      },
-      {
-        message: 'Expected base point indentation of 12 spaces, but found "          \\t".',
-        line: 12,
-        column: 1,
-        endLine: 12,
-        endColumn: 12
-      },
-      {
-        message: 'Expected base point indentation of 12 spaces, but found 10 spaces.',
-        line: 13,
-        column: 1,
-        endLine: 13,
-        endColumn: 11
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 2 spaces.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 13
+        },
+        {
+          message:
+            'Expected base point indentation of 10 spaces, but found 8 spaces.',
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 9
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 12
+        },
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 2 spaces.',
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 13
+        },
+        {
+          message: 'Expected space character, but found tab character.',
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 14
+        },
+        {
+          message:
+            'Expected base point indentation of 12 spaces, but found "          \\t".',
+          line: 12,
+          column: 1,
+          endLine: 12,
+          endColumn: 12
+        },
+        {
+          message:
+            'Expected base point indentation of 12 spaces, but found 10 spaces.',
+          line: 13,
+          column: 1,
+          endLine: 13,
+          endColumn: 11
+        }
+      ]
     },
     {
       code: `
@@ -488,22 +513,28 @@ tester.run('html-comment-indent', rule, {
           -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 2 spaces but found 0 spaces.',
-        line: 5
-      },
-      {
-        message: 'Expected relative indentation of 2 spaces but found 4 spaces.',
-        line: 7
-      },
-      {
-        message: 'Expected relative indentation of 0 spaces but found 2 spaces.',
-        line: 12
-      },
-      {
-        message: 'Expected base point indentation of 10 spaces, but found 8 spaces.',
-        line: 14
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 0 spaces.',
+          line: 5
+        },
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 4 spaces.',
+          line: 7
+        },
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 2 spaces.',
+          line: 12
+        },
+        {
+          message:
+            'Expected base point indentation of 10 spaces, but found 8 spaces.',
+          line: 14
+        }
+      ]
     },
     {
       code: `
@@ -522,14 +553,18 @@ tester.run('html-comment-indent', rule, {
             comment -->
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 2 spaces but found 0 spaces.',
-        line: 4
-      },
-      {
-        message: 'Expected relative indentation of 2 spaces but found 4 spaces.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 0 spaces.',
+          line: 4
+        },
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 4 spaces.',
+          line: 6
+        }
+      ]
     },
     {
       code: `
@@ -550,18 +585,20 @@ comment -->
 -->
 </template>
 `,
-      errors: [{
-        message: 'Expected indentation of 2 spaces but found 0 spaces.',
-        line: 4
-      },
-      {
-        message: 'Expected indentation of 2 spaces but found 0 spaces.',
-        line: 5
-      },
-      {
-        message: 'Expected indentation of 0 spaces but found 2 spaces.',
-        line: 7
-      }]
+      errors: [
+        {
+          message: 'Expected indentation of 2 spaces but found 0 spaces.',
+          line: 4
+        },
+        {
+          message: 'Expected indentation of 2 spaces but found 0 spaces.',
+          line: 5
+        },
+        {
+          message: 'Expected indentation of 0 spaces but found 2 spaces.',
+          line: 7
+        }
+      ]
     },
     {
       code: `
@@ -582,18 +619,23 @@ comment -->
   -->
 </template>
 `,
-      errors: [{
-        message: 'Expected base point indentation of 2 spaces, but not found.',
-        line: 4
-      },
-      {
-        message: 'Expected base point indentation of 2 spaces, but not found.',
-        line: 5
-      },
-      {
-        message: 'Expected base point indentation of 2 spaces, but not found.',
-        line: 7
-      }]
+      errors: [
+        {
+          message:
+            'Expected base point indentation of 2 spaces, but not found.',
+          line: 4
+        },
+        {
+          message:
+            'Expected base point indentation of 2 spaces, but not found.',
+          line: 5
+        },
+        {
+          message:
+            'Expected base point indentation of 2 spaces, but not found.',
+          line: 7
+        }
+      ]
     },
     {
       code: `
@@ -610,14 +652,18 @@ comment -->
           --></div>
         </template>
         `,
-      errors: [{
-        message: 'Expected relative indentation of 2 spaces but found 1 space.',
-        line: 4
-      },
-      {
-        message: 'Expected relative indentation of 0 spaces but found 1 space.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected relative indentation of 2 spaces but found 1 space.',
+          line: 4
+        },
+        {
+          message:
+            'Expected relative indentation of 0 spaces but found 1 space.',
+          line: 5
+        }
+      ]
     },
     {
       code: `
@@ -634,15 +680,18 @@ comment -->
  \t \t \t -->
         </template>
         `,
-      errors: [{
-        message: 'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
-        line: 4
-      },
-      {
-        message: 'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
+          line: 4
+        },
+        {
+          message:
+            'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
+          line: 5
+        }
+      ]
     }
   ]
-
 })

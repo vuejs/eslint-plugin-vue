@@ -12,9 +12,7 @@ const tester = new RuleTester({
 })
 
 tester.run('eqeqeq', rule, {
-  valid: [
-    '<template><div :attr="a === 1" /></template>'
-  ],
+  valid: ['<template><div :attr="a === 1" /></template>'],
   invalid: [
     {
       code: '<template><div :attr="a == 1" /></template>',

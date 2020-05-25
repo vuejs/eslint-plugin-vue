@@ -56,9 +56,11 @@ ruleTester.run('no-multi-spaces', rule, {
         />
       </template>
       `,
-      options: [{
-        ignoreProperties: true
-      }]
+      options: [
+        {
+          ignoreProperties: true
+        }
+      ]
     },
     {
       code: `
@@ -71,19 +73,23 @@ ruleTester.run('no-multi-spaces', rule, {
         />
       </template>
       `,
-      options: [{
-        ignoreProperties: true
-      }]
+      options: [
+        {
+          ignoreProperties: true
+        }
+      ]
     }
   ],
   invalid: [
     {
       code: '<template><div     /></template>',
       output: '<template><div /></template>',
-      errors: [{
-        message: "Multiple spaces found before '/>'.",
-        type: 'HTMLSelfClosingTagClose'
-      }]
+      errors: [
+        {
+          message: "Multiple spaces found before '/>'.",
+          type: 'HTMLSelfClosingTagClose'
+        }
+      ]
     },
     {
       code: '<template><div   class="foo"  /></template>',
@@ -130,26 +136,32 @@ ruleTester.run('no-multi-spaces', rule, {
     {
       code: '<template><div :foo="" class="foo"  /></template>',
       output: '<template><div :foo="" class="foo" /></template>',
-      errors: [{
-        message: "Multiple spaces found before '/>'.",
-        type: 'HTMLSelfClosingTagClose'
-      }]
+      errors: [
+        {
+          message: "Multiple spaces found before '/>'.",
+          type: 'HTMLSelfClosingTagClose'
+        }
+      ]
     },
     {
       code: '<template><div foo="" class="foo"  /></template>',
       output: '<template><div foo="" class="foo" /></template>',
-      errors: [{
-        message: "Multiple spaces found before '/>'.",
-        type: 'HTMLSelfClosingTagClose'
-      }]
+      errors: [
+        {
+          message: "Multiple spaces found before '/>'.",
+          type: 'HTMLSelfClosingTagClose'
+        }
+      ]
     },
     {
       code: '<template><foo v-foo="" class="foo"  /></template>',
       output: '<template><foo v-foo="" class="foo" /></template>',
-      errors: [{
-        message: "Multiple spaces found before '/>'.",
-        type: 'HTMLSelfClosingTagClose'
-      }]
+      errors: [
+        {
+          message: "Multiple spaces found before '/>'.",
+          type: 'HTMLSelfClosingTagClose'
+        }
+      ]
     },
     {
       code: '<template><foo v-foo="" \n         class="foo"    /></template>',
@@ -186,7 +198,8 @@ ruleTester.run('no-multi-spaces', rule, {
       ]
     },
     {
-      code: '<template><div v-for="      i    in    b       ">{{ test }}</div></template>',
+      code:
+        '<template><div v-for="      i    in    b       ">{{ test }}</div></template>',
       output: '<template><div v-for=" i in b ">{{ test }}</div></template>',
       errors: [
         {

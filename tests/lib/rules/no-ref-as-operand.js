@@ -117,21 +117,24 @@ tester.run('no-ref-as-operand', rule, {
       `,
       errors: [
         {
-          message: 'Must use `.value` to read or write the value wrapped by `ref()`.',
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 5,
           column: 7,
           endLine: 5,
           endColumn: 12
         },
         {
-          message: 'Must use `.value` to read or write the value wrapped by `ref()`.',
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 6,
           column: 19,
           endLine: 6,
           endColumn: 24
         },
         {
-          message: 'Must use `.value` to read or write the value wrapped by `ref()`.',
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 7,
           column: 23,
           endLine: 7,
