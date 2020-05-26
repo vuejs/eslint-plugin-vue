@@ -157,6 +157,11 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="_i in foo" ></div></template>',
       errors: ["'_i' is defined but never used."]
+    },
+    {
+      code: '<template><div v-for="(a, _i) in foo" ></div></template>',
+      options: [{ ignorePattern: '^_' }],
+      errors: ["'a' is defined but never used."]
     }
   ]
 })
