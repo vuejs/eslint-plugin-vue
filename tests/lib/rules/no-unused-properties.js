@@ -248,6 +248,21 @@ tester.run('no-unused-properties', rule, {
       `,
       options: allOptions
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo'],
+            watch: {
+              'foo.bar'() {
+                alert('Increased!');
+              },
+            },
+          };
+        </script>
+      `
+    },
 
     // data used as a template identifier
     {
