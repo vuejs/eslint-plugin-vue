@@ -34,6 +34,23 @@ tester.run('comma-style', rule, {
             , data) => fn()" />
         </template>`,
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }]
+    },
+    {
+      code: `
+        <template>
+          <CustomButton v-slot="a,
+            b
+            ,c" />
+        </template>`
+    },
+    {
+      code: `
+        <template>
+          <CustomButton v-slot="a,
+            b
+            ,c" />
+        </template>`,
+      options: ['first', { exceptions: { FunctionExpression: true } }]
     }
   ],
   invalid: [
@@ -116,6 +133,27 @@ tester.run('comma-style', rule, {
       errors: [
         {
           message: "',' should be placed first."
+          // line: 3 // eslint v7.0
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <CustomButton v-slot="a,
+            b
+            ,c" />
+        </template>`,
+      options: ['last', { exceptions: { FunctionExpression: false } }],
+      output: `
+        <template>
+          <CustomButton v-slot="a,
+            b,
+            c" />
+        </template>`,
+      errors: [
+        {
+          message: "',' should be placed last."
           // line: 3 // eslint v7.0
         }
       ]
