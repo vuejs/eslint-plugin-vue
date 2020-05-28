@@ -91,7 +91,7 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 ```json
 {
   "vue/comment-directive": ["error", {
-    "reportUnusedDisableDirectives": true
+    "reportUnusedDisableDirectives": false
   }]
 }
 ```
