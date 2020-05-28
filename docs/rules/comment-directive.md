@@ -104,9 +104,11 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 
 ```vue
 <template>
+  <!-- ✓ GOOD -->
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
   <div a="1" b="2" c="3" d="4" />
 
+  <!-- ✗ BAD -->
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
   <div a="1" />
 </template>
