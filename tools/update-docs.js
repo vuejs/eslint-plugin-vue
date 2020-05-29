@@ -169,13 +169,19 @@ class DocFile {
   }
 
   updateFooter() {
-    const { name } = this.rule
+    const { name, meta } = this.rule
     const footerPattern = /## :mag: Implementation.+$/s
     const footer = `## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.js)
+${
+  meta.docs.extensionRule
+    ? `
+<sup>Taken with ❤️ [from ESLint core](${meta.docs.coreRuleUrl})</sup>
 `
+    : ''
+}`
     if (footerPattern.test(this.content)) {
       this.content = this.content.replace(footerPattern, footer)
     } else {

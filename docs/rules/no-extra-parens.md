@@ -43,3 +43,5 @@ This rule extends the core [no-extra-parens] rule and applies it to the `<templa
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-extra-parens.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-extra-parens.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/no-extra-parens)</sup>

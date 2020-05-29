@@ -266,10 +266,39 @@ For example:
 ```json
 {
   "rules": {
-    "vue/array-bracket-spacing": "error"
+    "vue/component-name-in-template-casing": "error"
   }
 }
 ```
+
+| Rule ID | Description |    |
+|:--------|:------------|:---|
+| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
+| [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
+| [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
+| [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: |
+| [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
+| [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
+| [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
+| [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
+| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
+| [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
+| [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
+| [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
+| [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
+| [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
+| [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
+| [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
+| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
+| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
+| [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
+| [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
+| [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
+| [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
+
+### Extension Rules
+
+The following rules extend the rules provided by ESLint itself and apply them to the expressions in the `<template>`.
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
@@ -281,45 +310,23 @@ For example:
 | [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
 | [vue/comma-spacing](./comma-spacing.md) | enforce consistent spacing before and after commas | :wrench: |
 | [vue/comma-style](./comma-style.md) | enforce consistent comma style | :wrench: |
-| [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
 | [vue/dot-notation](./dot-notation.md) | enforce dot notation whenever possible | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
-| [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
-| [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
-| [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
 | [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
-| [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
-| [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
-| [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
 | [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses | :wrench: |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
-| [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
-| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
-| [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
-| [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
-| [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
-| [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
-| [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
 | [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
-| [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation | :wrench: |
-| [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
-| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
-| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
-| [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
-| [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
 | [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
-| [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/template-curly-spacing](./template-curly-spacing.md) | require or disallow spacing around embedded expressions of template strings | :wrench: |
-| [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ## Deprecated
 

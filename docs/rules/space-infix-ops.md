@@ -21,3 +21,5 @@ This rule is the same rule as core [space-infix-ops] rule but it applies to the 
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/space-infix-ops.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/space-infix-ops.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/space-infix-ops)</sup>

@@ -11,7 +11,16 @@ const categories = require('./lib/categories')
 
 // -----------------------------------------------------------------------------
 const uncategorizedRules = rules.filter(
-  (rule) => !rule.meta.docs.categories && !rule.meta.deprecated
+  (rule) =>
+    !rule.meta.docs.categories &&
+    !rule.meta.docs.extensionRule &&
+    !rule.meta.deprecated
+)
+const uncategorizedExtensionRule = rules.filter(
+  (rule) =>
+    !rule.meta.docs.categories &&
+    rule.meta.docs.extensionRule &&
+    !rule.meta.deprecated
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
@@ -57,7 +66,7 @@ ${category.rules.map(toRuleRow).join('\n')}
   .join('')
 
 // -----------------------------------------------------------------------------
-if (uncategorizedRules.length >= 1) {
+if (uncategorizedRules.length || uncategorizedExtensionRule.length) {
   rulesTableContent += `
 ## Uncategorized
 
@@ -69,14 +78,30 @@ For example:
 \`\`\`json
 {
   "rules": {
-    "${uncategorizedRules[0].ruleId}": "error"
+    "${
+      (uncategorizedRules[0] || uncategorizedExtensionRule[0]).ruleId
+    }": "error"
   }
 }
 \`\`\`
-
+`
+}
+if (uncategorizedRules.length) {
+  rulesTableContent += `
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 ${uncategorizedRules.map(toRuleRow).join('\n')}
+`
+}
+if (uncategorizedExtensionRule.length) {
+  rulesTableContent += `
+### Extension Rules
+
+The following rules extend the rules provided by ESLint itself and apply them to the expressions in the \`<template>\`.
+
+| Rule ID | Description |    |
+|:--------|:------------|:---|
+${uncategorizedExtensionRule.map(toRuleRow).join('\n')}
 `
 }
 

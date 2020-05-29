@@ -7,7 +7,16 @@
 const rules = require('../../tools/lib/rules')
 
 const uncategorizedRules = rules.filter(
-  (rule) => !rule.meta.docs.categories && !rule.meta.deprecated
+  (rule) =>
+    !rule.meta.docs.categories &&
+    !rule.meta.docs.extensionRule &&
+    !rule.meta.deprecated
+)
+const uncategorizedExtensionRule = rules.filter(
+  (rule) =>
+    !rule.meta.docs.categories &&
+    rule.meta.docs.extensionRule &&
+    !rule.meta.deprecated
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
@@ -82,6 +91,16 @@ if (uncategorizedRules.length > 0) {
     title: 'Uncategorized',
     collapsable: false,
     children: uncategorizedRules.map(({ ruleId, name }) => [
+      `/rules/${name}`,
+      ruleId
+    ])
+  })
+}
+if (uncategorizedExtensionRule.length > 0) {
+  extraCategories.push({
+    title: 'Extension Rules',
+    collapsable: false,
+    children: uncategorizedExtensionRule.map(({ ruleId, name }) => [
       `/rules/${name}`,
       ruleId
     ])

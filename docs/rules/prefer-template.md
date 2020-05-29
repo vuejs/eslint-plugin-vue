@@ -21,3 +21,5 @@ This rule is the same rule as core [prefer-template] rule but it applies to the 
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-template.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-template.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/prefer-template)</sup>

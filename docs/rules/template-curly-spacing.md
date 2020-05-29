@@ -21,3 +21,5 @@ This rule is the same rule as core [template-curly-spacing] rule but it applies 
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/template-curly-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/template-curly-spacing.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/template-curly-spacing)</sup>
