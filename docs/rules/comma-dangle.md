@@ -21,3 +21,5 @@ This rule is the same rule as core [comma-dangle] rule but it applies to the exp
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comma-dangle.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comma-dangle.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/comma-dangle)</sup>

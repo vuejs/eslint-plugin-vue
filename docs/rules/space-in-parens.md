@@ -21,3 +21,5 @@ This rule is the same rule as core [space-in-parens] rule but it applies to the 
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/space-in-parens.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/space-in-parens.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/space-in-parens)</sup>
