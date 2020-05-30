@@ -38,6 +38,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce custom event names always use "kebab-case" |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
@@ -160,6 +161,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce custom event names always use "kebab-case" |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  |
