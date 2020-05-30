@@ -283,6 +283,7 @@ For example:
 | [vue/comma-style](./comma-style.md) | enforce consistent comma style | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
+| [vue/dot-notation](./dot-notation.md) | enforce dot notation whenever possible | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
