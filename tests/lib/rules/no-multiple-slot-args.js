@@ -117,7 +117,7 @@ ruleTester.run('no-multiple-slot-args', rule, {
         render (h) {
           let children
 
-          this.$scopedSlots.default(foo, bar)
+          this.$scopedSlots.default(foo, { bar })
 
           children = this.$scopedSlots.foo
           if (children) children(...foo)
@@ -129,9 +129,9 @@ ruleTester.run('no-multiple-slot-args', rule, {
         {
           message: 'Unexpected multiple arguments.',
           line: 7,
-          column: 36,
+          column: 42,
           endLine: 7,
-          endColumn: 39
+          endColumn: 49
         },
         {
           message: 'Unexpected spread argument.',
