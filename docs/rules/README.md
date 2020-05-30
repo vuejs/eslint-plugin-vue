@@ -304,6 +304,7 @@ For example:
 | [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
+| [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation | :wrench: |
