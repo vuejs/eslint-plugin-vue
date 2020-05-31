@@ -36,6 +36,49 @@ ruleTester.run('order-in-components', rule, {
       parserOptions
     },
     {
+      filename: 'example.vue',
+      code: `
+        export default {
+          el,
+          name,
+          parent,
+          functional,
+          delimiters, comments,
+          components, directives, filters,
+          extends: MyComp,
+          mixins,
+          provide, inject,
+          inheritAttrs,
+          model,
+          props, propsData,
+          emits,
+          setup,
+          data,
+          computed,
+          watch,
+          beforeCreate,
+          created,
+          beforeMount,
+          mounted,
+          beforeUpdate,
+          updated,
+          activated,
+          deactivated,
+          beforeUnmount,
+          unmounted,
+          beforeDestroy,
+          destroyed,
+          renderTracked,
+          renderTriggered,
+          errorCaptured,
+          methods,
+          template, render,
+          renderError,
+        };
+      `,
+      parserOptions
+    },
+    {
       filename: 'test.vue',
       code: `
         export default {}
