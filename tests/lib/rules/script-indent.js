@@ -35,35 +35,37 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
  * @param {object[]} additionalInvalid The array of additional invalid patterns.
  * @returns {object} The loaded patterns.
  */
-function loadPatterns (additionalValid, additionalInvalid) {
-  const valid = fs
-    .readdirSync(FIXTURE_ROOT)
-    .map(filename => {
-      const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
-      const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-      const code = code0.replace(commentPattern, `$1${filename}$3`)
-      const baseObj = JSON.parse(commentPattern.exec(code0)[2])
-      return Object.assign(baseObj, { code, filename })
-    })
+function loadPatterns(additionalValid, additionalInvalid) {
+  const valid = fs.readdirSync(FIXTURE_ROOT).map((filename) => {
+    const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
+    const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
+    const code = code0.replace(commentPattern, `$1${filename}$3`)
+    const baseObj = JSON.parse(commentPattern.exec(code0)[2])
+    return Object.assign(baseObj, { code, filename })
+  })
   const invalid = valid
-    .map(pattern => {
-      const kind = ((pattern.options && pattern.options[0]) === 'tab') ? 'tab' : 'space'
+    .map((pattern) => {
+      const kind =
+        (pattern.options && pattern.options[0]) === 'tab' ? 'tab' : 'space'
       const output = pattern.code
-      const lines = output
-        .split('\n')
-        .map((text, number) => ({
-          number,
-          text,
-          indentSize: (/^[ \t]+/.exec(text) || [''])[0].length
-        }))
+      const lines = output.split('\n').map((text, number) => ({
+        number,
+        text,
+        indentSize: (/^[ \t]+/.exec(text) || [''])[0].length
+      }))
       const code = lines
-        .map(line => line.text.replace(/^[ \t]+/, ''))
+        .map((line) => line.text.replace(/^[ \t]+/, ''))
         .join('\n')
       const errors = lines
-        .map(line =>
+        .map((line) =>
           line.indentSize === 0
             ? null
-            : { message: `Expected indentation of ${line.indentSize} ${kind}${line.indentSize === 1 ? '' : 's'} but found 0 ${kind}s.`, line: line.number + 1 }
+            : {
+                message: `Expected indentation of ${line.indentSize} ${kind}${
+                  line.indentSize === 1 ? '' : 's'
+                } but found 0 ${kind}s.`,
+                line: line.number + 1
+              }
         )
         .filter(Boolean)
 
@@ -82,13 +84,18 @@ function loadPatterns (additionalValid, additionalInvalid) {
  * @param {string[]} strings The strings in the template literal
  * @returns {string} The template literal, with spaces removed from all lines
  */
-function unIndent (strings) {
+function unIndent(strings) {
   const templateValue = strings[0]
-  const lines = templateValue.replace(/^\n/, '').replace(/\n\s*$/, '').split('\n')
-  const lineIndents = lines.filter(line => line.trim()).map(line => line.match(/ */)[0].length)
+  const lines = templateValue
+    .replace(/^\n/, '')
+    .replace(/\n\s*$/, '')
+    .split('\n')
+  const lineIndents = lines
+    .filter((line) => line.trim())
+    .map((line) => line.match(/ */)[0].length)
   const minLineIndent = Math.min.apply(null, lineIndents)
 
-  return lines.map(line => line.slice(minLineIndent)).join('\n')
+  return lines.map((line) => line.slice(minLineIndent)).join('\n')
 }
 
 // ------------------------------------------------------------------------------
@@ -103,13 +110,16 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('script-indent', rule, loadPatterns(
-  // Valid
-  [
-    // TemplateLiteral
-    {
-      filename: 'test.vue',
-      code: unIndent`
+tester.run(
+  'script-indent',
+  rule,
+  loadPatterns(
+    // Valid
+    [
+      // TemplateLiteral
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         \`
           test
@@ -118,22 +128,22 @@ tester.run('script-indent', rule, loadPatterns(
           \`
         </script>
       `
-    },
+      },
 
-    // Comments
-    {
-      filename: 'test.vue',
-      code: unIndent`
+      // Comments
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         // comment
         // comment
         foo
         </script>
       `
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         /*
         * comment
@@ -141,10 +151,10 @@ tester.run('script-indent', rule, loadPatterns(
         message
         </script>
       `
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         message
         /*
@@ -152,12 +162,12 @@ tester.run('script-indent', rule, loadPatterns(
         */
         </script>
       `
-    },
+      },
 
-    // Ignores files other than .vue
-    {
-      filename: 'test.js',
-      code: unIndent`
+      // Ignores files other than .vue
+      {
+        filename: 'test.js',
+        code: unIndent`
         <script>
           \`
           test
@@ -166,12 +176,12 @@ tester.run('script-indent', rule, loadPatterns(
           \`
         </script>
       `
-    },
+      },
 
-    // Ignores
-    {
-      filename: 'test.vue',
-      code: unIndent`
+      // Ignores
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         var a
                 =
@@ -179,19 +189,22 @@ tester.run('script-indent', rule, loadPatterns(
         2
         </script>
       `,
-      options: [4, {
-        // Ignore all :D
-        ignores: ['*']
-      }]
-    }
-  ],
+        options: [
+          4,
+          {
+            // Ignore all :D
+            ignores: ['*']
+          }
+        ]
+      }
+    ],
 
-  // Invalid
-  [
-    // TemplateLiteral
-    {
-      filename: 'test.vue',
-      code: unIndent`
+    // Invalid
+    [
+      // TemplateLiteral
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
           \`
           test
@@ -200,7 +213,7 @@ tester.run('script-indent', rule, loadPatterns(
           \`
         </script>
       `,
-      output: unIndent`
+        output: unIndent`
         <script>
         \`
           test
@@ -209,34 +222,40 @@ tester.run('script-indent', rule, loadPatterns(
           \`
         </script>
       `,
-      options: [4],
-      errors: [
-        { message: 'Expected indentation of 0 spaces but found 2 spaces.', line: 2 }
-      ]
-    },
+        options: [4],
+        errors: [
+          {
+            message: 'Expected indentation of 0 spaces but found 2 spaces.',
+            line: 2
+          }
+        ]
+      },
 
-    // A mix of spaces and tabs.
-    {
-      filename: 'test.vue',
-      code: unIndent`
+      // A mix of spaces and tabs.
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         var a =
         \t1
         </script>
       `,
-      output: unIndent`
+        output: unIndent`
         <script>
         var a =
           1
         </script>
       `,
-      errors: [
-        { message: 'Expected " " character, but found "\\t" character.', line: 3 }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: unIndent`
+        errors: [
+          {
+            message: 'Expected " " character, but found "\\t" character.',
+            line: 3
+          }
+        ]
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
         <script>
         var obj = {
           a: 1,
@@ -244,7 +263,7 @@ tester.run('script-indent', rule, loadPatterns(
         }
         </script>
       `,
-      output: unIndent`
+        output: unIndent`
         <script>
         var obj = {
         \ta: 1,
@@ -252,11 +271,18 @@ tester.run('script-indent', rule, loadPatterns(
         }
         </script>
       `,
-      options: ['tab'],
-      errors: [
-        { message: 'Expected "\\t" character, but found " " character.', line: 3 },
-        { message: 'Expected "\\t" character, but found " " character.', line: 4 }
-      ]
-    }
-  ]
-))
+        options: ['tab'],
+        errors: [
+          {
+            message: 'Expected "\\t" character, but found " " character.',
+            line: 3
+          },
+          {
+            message: 'Expected "\\t" character, but found " " character.',
+            line: 4
+          }
+        ]
+      }
+    ]
+  )
+)
