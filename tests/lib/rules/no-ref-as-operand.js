@@ -103,7 +103,25 @@ tester.run('no-ref-as-operand', rule, {
     import { ref } from 'vue'
     const count = ref
     count++
-    `
+    `,
+    {
+      code: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        const foo = shallowRef({})
+        foo[bar] = 123
+      </script>
+      `
+    },
+    {
+      code: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        const foo = shallowRef({})
+        const isComp = foo.effect
+      </script>
+      `
+    }
   ],
   invalid: [
     {
@@ -330,6 +348,89 @@ tester.run('no-ref-as-operand', rule, {
         {
           messageId: 'requireDotValue',
           line: 9
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        let count = ref(0)
+        let cntcnt = computed(()=>count.value+count.value)
+
+        const state = reactive({
+          foo: 1,
+          bar: 2
+        })
+
+        const fooRef = toRef(state, 'foo')
+
+        let value = 'hello'
+        const cref = customRef((track, trigger) => {
+          return {
+            get() {
+              track()
+              return value
+            },
+            set(newValue) {
+              clearTimeout(timeout)
+              timeout = setTimeout(() => {
+                value = newValue
+                trigger()
+              }, delay)
+            }
+          }
+        })
+
+        const foo = shallowRef({})
+
+        count++ // error
+        cntcnt++ // error
+
+        const s = \`\${fooRef} : \${cref}\` // error x 2
+
+        const n = foo + 1 // error
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 33
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `computed()`.',
+          line: 34
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `toRef()`.',
+          line: 36
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `customRef()`.',
+          line: 36
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `shallowRef()`.',
+          line: 38
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        const foo = shallowRef({})
+        foo.bar = 123
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue'
         }
       ]
     }
