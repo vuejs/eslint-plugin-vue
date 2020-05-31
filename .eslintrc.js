@@ -48,10 +48,6 @@ module.exports = {
         'tests/lib/rules/require-direct-export.js',
         'lib/utils/index.js',
         'tests/lib/utils/vue-component.js',
-        // https://github.com/vuejs/eslint-plugin-vue/pull/1017
-        'lib/utils/indent-common.js',
-        'tests/lib/rules/html-indent.js',
-        'tests/lib/rules/script-indent.js',
         // https://github.com/vuejs/eslint-plugin-vue/pull/982
         'lib/rules/attributes-order.js',
         'tests/lib/rules/attributes-order.js',
