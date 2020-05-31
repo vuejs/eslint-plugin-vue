@@ -1282,8 +1282,62 @@ emits: {'foo': null}
       <script>
       export default {
         name: '',
+        props: {},
+emits: ['foo']
+      }
+      </script>
+      `
+            },
+            {
+              desc:
+                'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        props: {},
+emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        watch: {}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc:
+                'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
 emits: ['foo'],
-        props: {}
+        watch: {}
       }
       </script>
       `
@@ -1299,7 +1353,7 @@ emits: ['foo'],
       export default {
         name: '',
 emits: {'foo': null},
-        props: {}
+        watch: {}
       }
       </script>
       `
