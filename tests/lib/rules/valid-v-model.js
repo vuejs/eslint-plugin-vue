@@ -150,6 +150,16 @@ tester.run('valid-v-model', rule, {
       filename: 'test.vue',
       code:
         '<template><MyComponent v-model.modifier.modifierTwo="a"></MyComponent></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent v-model="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-model="/**/" /></template>'
     }
   ],
   invalid: [
@@ -216,6 +226,12 @@ tester.run('valid-v-model', rule, {
       errors: [
         "'v-model' directives cannot update the iteration variable 'e' itself."
       ]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent v-model="" /></template>',
+      errors: ["'v-model' directives require that attribute value."]
     }
   ]
 })

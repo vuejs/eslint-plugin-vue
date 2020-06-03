@@ -120,6 +120,25 @@ tester.run('valid-v-else', rule, {
       code:
         '<template><div><div v-if="foo"></div><div v-else="foo"></div></div></template>',
       errors: ["'v-else' directives require no attribute value."]
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-if="foo"></div><div v-else="."></div></template>',
+      errors: ["'v-else' directives require no attribute value."]
+    },
+    // comment value
+    {
+      filename: 'comment-value.vue',
+      code:
+        '<template><div v-if="foo"></div><div v-else="/**/"></div></template>',
+      errors: ["'v-else' directives require no attribute value."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div v-if="foo"></div><div v-else=""></div></template>',
+      errors: ["'v-else' directives require no attribute value."]
     }
   ]
 })

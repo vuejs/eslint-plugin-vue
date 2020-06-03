@@ -30,6 +30,16 @@ tester.run('valid-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div></div></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-if="."></div></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><div v-if="/**/"></div></template>'
     }
   ],
   invalid: [
@@ -61,6 +71,12 @@ tester.run('valid-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if></div></div></template>',
+      errors: ["'v-if' directives require that attribute value."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div><div v-if=""></div></div></template>',
       errors: ["'v-if' directives require that attribute value."]
     }
   ]

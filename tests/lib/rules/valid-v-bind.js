@@ -74,6 +74,16 @@ tester.run('valid-v-bind', rule, {
     {
       filename: 'test.vue',
       code: "<template><input v-bind='$attrs' /></template>"
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent :foo="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent :foo="/**/" /></template>'
     }
   ],
   invalid: [
@@ -91,6 +101,12 @@ tester.run('valid-v-bind', rule, {
       filename: 'test.vue',
       code: "<template><div :aaa.unknown='bbb'></div></template>",
       errors: ["'v-bind' directives don't support the modifier 'unknown'."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent :foo="" /></template>',
+      errors: ["'v-bind' directives require an attribute value."]
     }
   ]
 })
