@@ -8,6 +8,8 @@
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
+    "cover": "npm run cover:test && npm run cover:report",
+    "cover:test": "nyc npm run test:base -- --timeout 60000",
     "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "lint:fix": "eslint . --rulesdir eslint-internal-rules --fix",
