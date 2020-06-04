@@ -193,6 +193,33 @@ tester.run('no-useless-mustaches', rule, {
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.'
       ]
+    },
+    {
+      code: `
+      <template>
+        {{ \`foo
+bar\` }}
+      </template>
+      `,
+      output: null,
+      errors: ['Unexpected mustache interpolation with a string literal value.']
+    },
+    {
+      code: `
+      <template>
+        {{ 'space ' }}
+        {{ ' space' }}
+        {{ ' space ' }}
+        {{ '  ' }}
+      </template>
+      `,
+      output: null,
+      errors: [
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.'
+      ]
     }
   ]
 })
