@@ -10,7 +10,7 @@ const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester()
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -751,6 +751,7 @@ ruleTester.run('order-in-components', rule, {
           testConditional: a ? b : c,
           testYield: function* () {},
           testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
+          testNullish: a ?? b,
           name: 'burger',
         };
       `,
@@ -768,11 +769,12 @@ ruleTester.run('order-in-components', rule, {
           testConditional: a ? b : c,
           testYield: function* () {},
           testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
+          testNullish: a ?? b,
         };
       `,
       errors: [{
         message: 'The "name" property should be above the "data" property on line 3.',
-        line: 13
+        line: 14
       }]
     }
   ]
