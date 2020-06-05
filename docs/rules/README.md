@@ -293,6 +293,7 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
+| [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
