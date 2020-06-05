@@ -15,7 +15,12 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  }
+})
 ruleTester.run('no-dupe-keys', rule, {
   valid: [
     {
@@ -41,8 +46,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
     },
     {
       filename: 'test.vue',
@@ -72,8 +76,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
     },
 
     {
@@ -99,8 +102,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
     },
 
     {
@@ -124,8 +126,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
     },
 
     {
@@ -161,8 +162,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           },
         }
-      `,
-      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+      `
     },
 
     {
@@ -206,8 +206,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+      `
     },
 
     {
@@ -243,8 +242,7 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           },
         }
-      `,
-      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+      `
     },
 
     {
@@ -278,8 +276,7 @@ ruleTester.run('no-dupe-keys', rule, {
             ...dat
           }),
         }
-      `,
-      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+      `
     },
 
     {
@@ -298,8 +295,7 @@ ruleTester.run('no-dupe-keys', rule, {
             propA: String
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
     },
     {
       filename: 'test.vue',
@@ -331,8 +327,59 @@ ruleTester.run('no-dupe-keys', rule, {
             }
           }
         }
-      `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        data () {
+          return {
+            get foo() {
+              return foo
+            },
+            set foo(v) {
+              foo = v
+            }
+          }
+        }
+      }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        data () {
+          return {
+            set foo(v) {
+              foo = v
+            },
+            get foo() {
+              return foo
+            }
+          }
+        }
+      }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        data () {
+          return {
+            get foo() {
+              return foo
+            },
+            bar,
+            set foo(v) {
+              foo = v
+            }
+          }
+        }
+      }
+      `
     }
   ],
 
@@ -364,7 +411,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -411,7 +457,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -449,7 +494,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -494,7 +538,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -527,7 +570,6 @@ ruleTester.run('no-dupe-keys', rule, {
         })
       `,
       options: [{ groups: ['foo'] }],
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Duplicated key 'bar'.",
@@ -553,7 +595,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -577,7 +618,6 @@ ruleTester.run('no-dupe-keys', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -599,7 +639,6 @@ ruleTester.run('no-dupe-keys', rule, {
           })
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -621,7 +660,6 @@ ruleTester.run('no-dupe-keys', rule, {
           })
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -643,7 +681,6 @@ ruleTester.run('no-dupe-keys', rule, {
           })
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -665,7 +702,6 @@ ruleTester.run('no-dupe-keys', rule, {
           })
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'foo'.",
@@ -686,7 +722,6 @@ ruleTester.run('no-dupe-keys', rule, {
         })
       `,
       options: [{ groups: ['foo'] }],
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Duplicated key 'bar'.",
@@ -707,10 +742,112 @@ ruleTester.run('no-dupe-keys', rule, {
         })
       `,
       options: [{ groups: ['foo'] }],
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Duplicated key 'bar'.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        data () {
+          return {
+            get foo() {
+              return foo
+            },
+            set foo(v) {
+              foo = v
+            }
+          }
+        }
+      }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        data () {
+          return {
+            set foo(v) {},
+            get foo() {}
+          }
+        }
+      }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        data () {
+          return {
+            set foo(v) {}
+          }
+        }
+      }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        data () {
+          return {
+            get foo() {},
+            set foo(v) {},
+            get foo() {},
+          }
+        }
+      }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        data () {
+          return {
+            get foo() {},
+            set foo(v) {},
+            set foo(v) {},
+          }
+        }
+      }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
           line: 7
         }
       ]
