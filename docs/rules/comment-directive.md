@@ -49,8 +49,8 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
 </template>
 
 <!-- eslint-disable-next-line vue/component-tags-order -->
-<script>
-</script>
+<style>
+</style>
 ```
 
 </eslint-code-block>
@@ -60,15 +60,16 @@ The `eslint-disable` comments has no effect after one block.
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
 
 ```vue
-<template>
-</template>
-
-<!-- eslint-disable vue/component-tags-order -->
-<style> /* <- Warning has been disabled. */
+<style>
 </style>
 
-<script> /* <- Warning are not disabled. */
+<!-- eslint-disable -->
+<script> /* <- Warning has been disabled. */
 </script>
+
+<template> <!-- <- Warning are not disabled. -->
+</template>
+
 ```
 
 </eslint-code-block>
