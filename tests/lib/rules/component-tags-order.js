@@ -22,10 +22,24 @@ tester.run('component-tags-order', rule, {
   valid: [
     // default
     '<script></script><template></template><style></style>',
+    '<template></template><script></script><style></style>',
     '<script> /*script*/ </script><template><div id="id">text <!--comment--> </div><br></template><style>.button{ color: red; }</style>',
     '<docs></docs><script></script><template></template><style></style>',
     '<script></script><docs></docs><template></template><style></style>',
+    '<docs></docs><template></template><script></script><style></style>',
+    '<template></template><script></script><docs></docs><style></style>',
     '<script></script><template></template>',
+    '<template></template><script></script>',
+    `
+      <template>
+      </template>
+
+      <script>
+      </script>
+
+      <style>
+      </style>
+    `,
     `
       <script>
       </script>
@@ -38,6 +52,11 @@ tester.run('component-tags-order', rule, {
     `,
 
     // order
+    {
+      code: '<script></script><template></template><style></style>',
+      output: null,
+      options: [{ order: ['script', 'template', 'style'] }]
+    },
     {
       code: '<template></template><script></script><style></style>',
       output: null,
@@ -65,6 +84,12 @@ tester.run('component-tags-order', rule, {
       output: null,
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
     },
+    {
+      code:
+        '<template></template><docs></docs><script></script><style></style>',
+      output: null,
+      options: [{ order: [['docs', 'script', 'template'], 'style'] }]
+    },
 
     `<script></script><style></style>`,
 
@@ -74,7 +99,23 @@ tester.run('component-tags-order', rule, {
   ],
   invalid: [
     {
+      code: '<style></style><template></template><script></script>',
+      errors: [
+        {
+          message: 'The <template> should be above the <style> on line 1.',
+          line: 1,
+          column: 16
+        },
+        {
+          message: 'The <script> should be above the <style> on line 1.',
+          line: 1,
+          column: 37
+        }
+      ]
+    },
+    {
       code: '<template></template><script></script><style></style>',
+      options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
           message: 'The <script> should be above the <template> on line 1.',
@@ -86,9 +127,24 @@ tester.run('component-tags-order', rule, {
     {
       code: `
         <template></template>
+
+        <style></style>
+
+        <script></script>`,
+      errors: [
+        {
+          message: 'The <script> should be above the <style> on line 4.',
+          line: 6
+        }
+      ]
+    },
+    {
+      code: `
+        <template></template>
         <script></script>
         <style></style>
       `,
+      options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
           message: 'The <script> should be above the <template> on line 2.',
@@ -132,6 +188,7 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
+      options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
           message: 'The <script> should be above the <template> on line 2.',
@@ -147,6 +204,7 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
+      options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
           message: 'The <script> should be above the <template> on line 2.',
@@ -179,7 +237,7 @@ tester.run('component-tags-order', rule, {
           line: 3
         },
         {
-          message: 'The <script> should be above the <template> on line 3.',
+          message: 'The <script> should be above the <style> on line 2.',
           line: 4
         }
       ]
@@ -197,7 +255,7 @@ tester.run('component-tags-order', rule, {
           line: 4
         },
         {
-          message: 'The <script> should be above the <template> on line 4.',
+          message: 'The <script> should be above the <style> on line 2.',
           line: 5
         }
       ]
