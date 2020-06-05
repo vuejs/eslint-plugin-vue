@@ -96,6 +96,33 @@ tester.run('valid-v-on', rule, {
       filename: 'test.vue',
       code: '<template><div v-on:keydown.bar.aaa="foo"></div></template>',
       options: [{ modifiers: ['bar', 'aaa'] }]
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent v-on:keydown="." /></template>'
+    },
+    // comment value (valid)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-on:keydown="/**/" /></template>'
+    },
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-on:keydown=/**/ /></template>'
+    },
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-on:keydown.stop="/**/" /></template>'
+    },
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-on:keydown.stop=/**/ /></template>'
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent v-on:keydown.stop="" /></template>'
     }
   ],
   invalid: [
@@ -139,6 +166,14 @@ tester.run('valid-v-on', rule, {
       filename: 'test.vue',
       code: '<template><div @click="delete"></div></template>',
       errors: ['Avoid using JavaScript keyword as "v-on" value: "delete".']
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent v-on:keydown="" /></template>',
+      errors: [
+        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+      ]
     }
   ]
 })

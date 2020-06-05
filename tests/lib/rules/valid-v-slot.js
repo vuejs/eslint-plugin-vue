@@ -83,7 +83,13 @@ tester.run('valid-v-slot', rule, {
       <MyComponent>
         <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
       </MyComponent>
-    </template>`
+    </template>`,
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code:
+        '<template><MyComponent v-slot="." ><div /></MyComponent></template>'
+    }
   ],
   invalid: [
     // Verify location.
@@ -293,6 +299,26 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot>content</MyComponent>
         </template>
       `,
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    // comment value
+    {
+      filename: 'comment-value1.vue',
+      code:
+        '<template><MyComponent v-slot="/**/" ><div /></MyComponent></template>',
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    {
+      filename: 'comment-value2.vue',
+      code:
+        '<template><MyComponent v-slot=/**/ ><div /></MyComponent></template>',
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code:
+        '<template><MyComponent v-slot="" ><div /></MyComponent></template>',
       errors: [{ messageId: 'requireAttributeValue' }]
     }
   ]

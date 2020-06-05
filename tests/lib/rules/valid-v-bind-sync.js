@@ -130,6 +130,21 @@ tester.run('valid-v-bind-sync', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync.unknown="foo" /></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent :foo.sync="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent :foo.sync="/**/" /></template>'
+    },
+    // empty value (valid-v-bind)
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent :foo.sync="" /></template>'
     }
   ],
   invalid: [

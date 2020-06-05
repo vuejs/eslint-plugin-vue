@@ -127,6 +127,21 @@ tester.run('valid-v-for', rule, {
           </template>
         </template>
       `
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-for="."></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="xin list"><div></div></template></div></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><div v-for="/**/"></div></template>'
     }
   ],
   invalid: [
@@ -248,12 +263,6 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code:
-        '<template><div><template v-for="xin list"><div></div></template></div></template>',
-      errors: ["'v-for' directives require that attribute value."]
-    },
-    {
-      filename: 'test.vue',
-      code:
         '<template><div><template v-for="x of list"><div v-for="foo of y" :key="foo"></div></template></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
@@ -309,6 +318,12 @@ tester.run('valid-v-for', rule, {
           </template>
         </template>
       `
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div v-for=""></div></template>',
+      errors: ["'v-for' directives require that attribute value."]
     }
   ]
 })
