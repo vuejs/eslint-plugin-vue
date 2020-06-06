@@ -128,6 +128,24 @@ tester.run('no-restricted-static-attribute', rule, {
       </template>`,
       options: [{ key: 'foo', element: `/^My/` }],
       errors: ['Using `foo` on `<MyButton>` is not allowed.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div foo="x" />
+      </template>`,
+      options: ['/^f/', { key: 'foo' }],
+      errors: ['Using `foo` is not allowed.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div foo="x" />
+      </template>`,
+      options: [{ key: 'foo', message: 'foo' }],
+      errors: ['foo']
     }
   ]
 })
