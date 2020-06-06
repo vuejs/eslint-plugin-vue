@@ -139,6 +139,15 @@ tester.run('no-restricted-v-bind', rule, {
       </template>`,
       options: ['/^f/', { argument: 'foo' }],
       errors: ['Using `:foo` is not allowed.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div :foo="x" />
+      </template>`,
+      options: [{ argument: 'foo', message: 'foo' }],
+      errors: ['foo']
     }
   ]
 })
