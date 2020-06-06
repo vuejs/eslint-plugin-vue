@@ -130,6 +130,15 @@ tester.run('no-restricted-v-bind', rule, {
         'Using `:v-on` is not allowed.',
         'Using `:foo` on `<MyButton>` is not allowed.'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div :foo="x" />
+      </template>`,
+      options: ['/^f/', { argument: 'foo' }],
+      errors: ['Using `:foo` is not allowed.']
     }
   ]
 })
