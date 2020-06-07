@@ -333,6 +333,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/object-property-newline](./object-property-newline.md) | enforce placing object properties on separate lines | :wrench: |
+| [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators | :wrench: |
 | [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation | :wrench: |
 | [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
