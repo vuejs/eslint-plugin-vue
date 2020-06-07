@@ -766,6 +766,221 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `
+    },
+
+    // render & functional
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('smart-list', {
+        functional: true,
+        props: {
+          items: {
+            type: Array,
+            required: true
+          },
+          isOrdered: Boolean
+        },
+        render: function (createElement, context) {
+          function appropriateListComponent () {
+            var items = context.props.items
+
+            if (items.length === 0)           return EmptyList
+            if (typeof items[0] === 'object') return TableList
+            if (context.props.isOrdered)      return OrderedList
+
+            return UnorderedList
+          }
+
+          return createElement(
+            appropriateListComponent(),
+            context.data,
+            context.children
+          )
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, {props}) {
+          return createElement('button', props.foo)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, ctx) {
+          return createElement('button', fn(ctx.props))
+        }
+      })
+
+      function fn(props) {
+        return props.foo
+      }
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, ctx) {
+          return createElement('button', fn(ctx))
+        }
+      })
+
+      function fn({props}) {
+        return props.foo
+      }
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, {props:{foo}}) {
+          return createElement('button', foo)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, {props:[bar]}) {
+          return createElement('button')
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, {props:bar={}}) {
+          return createElement('button', bar.foo)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo'],
+        render: function (createElement, {...foo}) {
+          return createElement('button')
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo', 'bar'],
+        render: function (createElement, ctx) {
+          const a = ctx.props
+          const b = ctx.props
+          return createElement('button', a.foo + b.bar)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo', 'bar'],
+        render: function (createElement, {props: a, props: b}) {
+          return createElement('button', a.foo + b.bar)
+        }
+      })
+      `
+    },
+    // render for Vue 3.x
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        render (props) {
+          return h('button', props.foo)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        render ({foo}) {
+          return h('button', foo)
+        }
+      })
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo'],
+        render (bar) {
+          const {...baz} = bar
+          return h('button')
+        }
+      })
+      `
+    },
+    // Vue.js 3.x Template Refs
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div ref="root"></div>
+      </template>
+
+      <script>
+        import { ref, onMounted } from 'vue'
+
+        export default {
+          setup() {
+            const root = ref(null)
+
+            onMounted(() => {
+              // the DOM element will be assigned to the ref after initial render
+              console.log(root.value) // <div/>
+            })
+
+            return {
+              root
+            }
+          }
+        }
+      </script>`,
+      options: [{ groups: ['props', 'setup'] }]
     }
   ],
 
@@ -1248,6 +1463,20 @@ tester.run('no-unused-properties', rule, {
         "'bar' of property found, but never used.",
         "'baz' of property found, but never used."
       ]
+    },
+
+    // render & not functional
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        props: ['foo'],
+        render: function (createElement, {props}) {
+          return createElement('button', props.foo)
+        }
+      })
+      `,
+      errors: ["'foo' of property found, but never used."]
     }
   ]
 })
