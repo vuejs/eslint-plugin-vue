@@ -23,21 +23,21 @@ See [Guide - Custom Events] for more details.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <button @click="$emit('my-event')" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <button @click="$emit('myEvent')" />
 </template>
 <script>
 export default {
   methods: {
     onClick () {
-      /* ✔ GOOD */
+      /* ✓ GOOD */
       this.$emit('my-event')
       this.$emit('update:myProp', myProp)
 
-      /* ✘ BAD */
+      /* ✗ BAD */
       this.$emit('myEvent')
     }
   }

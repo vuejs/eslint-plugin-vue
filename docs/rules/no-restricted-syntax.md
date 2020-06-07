@@ -25,11 +25,11 @@ Forbids call expressions inside mustache interpolation.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <div> {{ foo }} </div>
   <div> {{ foo.bar }} </div>
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div> {{ foo() }} </div>
   <div> {{ foo.bar() }} </div>
   <div> {{ foo().bar }} </div>
