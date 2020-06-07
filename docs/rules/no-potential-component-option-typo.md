@@ -18,8 +18,7 @@ This rule disallow a potential typo in your component options
   "vue/no-potential-component-option-typo": ["error", {
     "presets": ["all"],
     "custom": ["test"]
-    }
-  ]
+  }]
 }
 ```
 
@@ -30,21 +29,21 @@ This rule disallow a potential typo in your component options
 export default {
   /* ✓ GOOD */
   props: {
-    
+
   },
-  /* × BAD */
+  /* ✗ BAD */
   method: {
 
   },
   /* ✓ GOOD */
   data: {
-    
+
   },
-  /* × BAD */
+  /* ✗ BAD */
   beforeRouteEnteR() {
 
   },
-  /* × BAD due to custom option 'test'*/
+  /* ✗ BAD due to custom option 'test' */
   testt: {
 
   }
@@ -72,19 +71,19 @@ export default {
 ```vue
 <script>
 export default {
-  /* ✓ BAD, due to threshold is 5 */
+  /* ✓ GOOD, due to threshold is 5 */
   props: {
-    
+
   },
-  /* ✓ BAD, due to threshold is 5 */
+  /* ✓ GOOD, due to threshold is 5 */
   method: {
 
   },
-  /* ✓ BAD, due to threshold is 5 */
+  /* ✓ GOOD, due to threshold is 5 */
   data: {
-    
+
   },
-  /* × GOOD, due to we don't choose vue-router preset or add a custom option */
+  /* ✗ BAD, due to we don't choose vue-router preset or add a custom option */
   beforeRouteEnteR() {
 
   }

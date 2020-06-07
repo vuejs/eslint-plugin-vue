@@ -89,7 +89,7 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'data']}]}">
 
 ```vue
-<!-- ✓ BAD (`count` data not used) -->
+<!-- ✗ BAD (`count` data not used) -->
 <script>
   export default {
     data() {
@@ -136,7 +136,7 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'computed']}]}">
 
 ```vue
-<!-- ✓ BAD (`reversedMessage` computed property not used) -->
+<!-- ✗ BAD (`reversedMessage` computed property not used) -->
 <template>
   <p>{{ message }}</p>
 </template>

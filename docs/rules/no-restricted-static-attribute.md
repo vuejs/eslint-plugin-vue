@@ -25,7 +25,7 @@ This rule takes a list of strings, where each string is a attribute name or patt
 
 ```vue
 <template>
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div foo="x" />
   <div bar />
 </template>
@@ -62,7 +62,7 @@ The following properties can be specified for the object.
   <!-- ✓ GOOD -->
   <div foo="foo" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div foo="bar" />
 </template>
 ```
@@ -78,7 +78,7 @@ The following properties can be specified for the object.
   <!-- ✓ GOOD -->
   <CoolButton foo="x" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyButton foo="x" />
 </template>
 ```

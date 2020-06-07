@@ -25,7 +25,7 @@ This rule takes a list of strings, where each string is a argument name or patte
 
 ```vue
 <template>
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div v-bind:foo="x" />
   <div :bar="x" />
 </template>
@@ -39,7 +39,7 @@ By default, `'/^v-/'` is set. This prevents mistakes intended to be directives.
 
 ```vue
 <template>
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyInput :v-model="x" />
   <div :v-if="x" />
 </template>
@@ -84,7 +84,7 @@ The following properties can be specified for the object.
   <!-- ✓ GOOD -->
   <div :foo="x" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div :foo.prop="x" />
 </template>
 ```
@@ -100,7 +100,7 @@ The following properties can be specified for the object.
   <!-- ✓ GOOD -->
   <CoolButton :foo="x" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyButton :foo="x" />
 </template>
 ```
