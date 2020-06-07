@@ -55,8 +55,7 @@ tester.run('func-call-spacing', rule, {
       errors: [
         {
           message: 'Unexpected whitespace between function name and paren.',
-          line: 3,
-          column: 20
+          line: 3
         }
       ]
     },
@@ -75,8 +74,7 @@ tester.run('func-call-spacing', rule, {
       errors: [
         {
           message: 'Missing space between function name and paren.',
-          line: 3,
-          column: 20
+          line: 3
         }
       ]
     }
