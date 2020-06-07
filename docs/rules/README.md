@@ -322,6 +322,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
 | [vue/dot-notation](./dot-notation.md) | enforce dot notation whenever possible | :wrench: |
 | [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
+| [vue/func-call-spacing](./func-call-spacing.md) | require or disallow spacing between function identifiers and their invocations | :wrench: |
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
 | [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
