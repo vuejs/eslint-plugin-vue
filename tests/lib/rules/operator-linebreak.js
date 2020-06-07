@@ -73,8 +73,7 @@ tester.run('operator-linebreak', rule, {
       errors: [
         {
           message: "'+' should be placed at the end of the line.",
-          line: 4,
-          column: 11
+          line: 4
         }
       ]
     },
@@ -95,8 +94,7 @@ tester.run('operator-linebreak', rule, {
       errors: [
         {
           message: "'+' should be placed at the beginning of the line.",
-          line: 3,
-          column: 22
+          line: 3
         }
       ]
     },
@@ -119,13 +117,11 @@ tester.run('operator-linebreak', rule, {
       errors: [
         {
           message: "There should be no line break before or after '+'.",
-          line: 3,
-          column: 22
+          line: 3
         },
         {
           message: "There should be no line break before or after '+'.",
-          line: 6,
-          column: 11
+          line: 6
         }
       ]
     }
