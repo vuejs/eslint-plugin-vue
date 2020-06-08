@@ -74,8 +74,12 @@ export default {
       "mixins",
       ["provide", "inject"],
       "ROUTER_GUARDS",
+      "layout",
       "middleware",
       "validate",
+      "scrollToTop",
+      "transition",
+      "loading",
       "inheritAttrs",
       "model",
       ["props", "propsData"],
@@ -84,18 +88,14 @@ export default {
       "fetch",
       "asyncData",
       "data",
+      "head",
       "computed",
       "watch",
       "watchQuery",
       "LIFECYCLE_HOOKS",
       "methods",
-      "head",
-      "layout",
       ["template", "render"],
-      "renderError",
-      "transition",
-      "loading",
-      "scrollToTop"
+      "renderError"
     ]
   }]
 }
