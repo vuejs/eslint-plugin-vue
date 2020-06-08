@@ -71,6 +71,41 @@ tester.run('v-on-function-call', rule, {
       filename: 'test.vue',
       code: '<template><div @click="()=>foo.bar()"></div></template>',
       options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="
+          fn()
+          fn()
+        "></div>
+      </template>`,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="{}"></div>
+      </template>`,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="{return}"></div>
+      </template>`,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="fn() /* comment */"></div>
+      </template>`,
+      options: ['never', { ignoreIncludesComment: true }]
     }
   ],
   invalid: [
@@ -105,6 +140,103 @@ tester.run('v-on-function-call', rule, {
       filename: 'test.vue',
       code: '<template><div @click="foo(/**/)"></div></template>',
       output: null,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="/*comment*/fn()"></div>
+        <div @click="fn()/*comment*/"></div>
+        <div @click=fn()/*comment*/></div>
+        <div @click="fn()// comment
+          "></div>
+      </template>`,
+      output: null,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses.",
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses.",
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses.",
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="fn();"></div>
+      </template>`,
+      output: `
+      <template>
+        <div @click="fn"></div>
+      </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click=fn();></div>
+      </template>`,
+      output: `
+      <template>
+        <div @click=fn></div>
+      </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click=" beforeSpace()"></div>
+        <div @click='afterSpace() '></div>
+      </template>`,
+      output: `
+      <template>
+        <div @click="beforeSpace"></div>
+        <div @click='afterSpace'></div>
+      </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses.",
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click=" &#x66;oo ( ) "></div>
+      </template>`,
+      output: `
+      <template>
+        <div @click="&#x66;oo"></div>
+      </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="{(fn());;;}"></div>
+      </template>`,
+      output: `
+      <template>
+        <div @click="fn"></div>
+      </template>`,
       errors: [
         "Method calls without arguments inside of 'v-on' directives must not have parentheses."
       ],
