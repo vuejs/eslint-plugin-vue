@@ -40,17 +40,6 @@ module.exports = {
     // Introduce prettier. but ignore files to avoid conflicts with PR.
     {
       files: [
-        // https://github.com/vuejs/eslint-plugin-vue/pull/1107
-        'lib/rules/order-in-components.js',
-        'tests/lib/rules/order-in-components.js',
-        // https://github.com/vuejs/eslint-plugin-vue/pull/1090
-        'lib/rules/require-direct-export.js',
-        'tests/lib/rules/require-direct-export.js',
-        'lib/utils/index.js',
-        'tests/lib/utils/vue-component.js',
-        // https://github.com/vuejs/eslint-plugin-vue/pull/982
-        'lib/rules/attributes-order.js',
-        'tests/lib/rules/attributes-order.js',
         // https://github.com/vuejs/eslint-plugin-vue/pull/819
         'lib/rules/attributes-order.js',
         'tests/lib/rules/attributes-order.js'
