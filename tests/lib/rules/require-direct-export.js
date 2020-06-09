@@ -23,7 +23,6 @@ const ruleTester = new RuleTester({
   }
 })
 ruleTester.run('require-direct-export', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -84,11 +83,13 @@ ruleTester.run('require-direct-export', rule, {
       code: `
       const A = {};
       export default A`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -97,38 +98,46 @@ ruleTester.run('require-direct-export', rule, {
         return h('div', props.msg)
       };
       export default A`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `export default function NoReturn() {}`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 1
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `export default function () {}`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 1
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `export default () => {}`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 1
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -137,22 +146,26 @@ ruleTester.run('require-direct-export', rule, {
           return b
         }
       }`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 1
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `export default () => {
         return
       }`,
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 1
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -162,11 +175,13 @@ ruleTester.run('require-direct-export', rule, {
       };
       export default A`,
       options: [{ disallowFunctionalComponentFunction: true }],
-      errors: [{
-        message: 'Expected the component literal to be directly exported.',
-        type: 'ExportDefaultDeclaration',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          type: 'ExportDefaultDeclaration',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',

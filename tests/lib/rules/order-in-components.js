@@ -15,7 +15,6 @@ const parserOptions = {
 }
 
 ruleTester.run('order-in-components', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -199,10 +198,13 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      errors: [{
-        message: 'The "props" property should be above the "data" property on line 4.',
-        line: 9
-      }]
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "data" property on line 4.',
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.jsx',
@@ -224,7 +226,11 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module', ecmaFeatures: { jsx: true }},
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true }
+      },
       output: `
         export default {
           name: 'app',
@@ -243,16 +249,23 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      errors: [{
-        message: 'The "name" property should be above the "render" property on line 3.',
-        line: 8
-      }, {
-        message: 'The "data" property should be above the "render" property on line 3.',
-        line: 9
-      }, {
-        message: 'The "props" property should be above the "data" property on line 9.',
-        line: 14
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "render" property on line 3.',
+          line: 8
+        },
+        {
+          message:
+            'The "data" property should be above the "render" property on line 3.',
+          line: 9
+        },
+        {
+          message:
+            'The "props" property should be above the "data" property on line 9.',
+          line: 14
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -281,10 +294,13 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      errors: [{
-        message: 'The "components" property should be above the "data" property on line 4.',
-        line: 9
-      }]
+      errors: [
+        {
+          message:
+            'The "components" property should be above the "data" property on line 4.',
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -313,10 +329,13 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      errors: [{
-        message: 'The "components" property should be above the "data" property on line 4.',
-        line: 9
-      }]
+      errors: [
+        {
+          message:
+            'The "components" property should be above the "data" property on line 4.',
+          line: 9
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -347,10 +366,13 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      errors: [{
-        message: 'The "components" property should be above the "data" property on line 5.',
-        line: 10
-      }]
+      errors: [
+        {
+          message:
+            'The "components" property should be above the "data" property on line 5.',
+          line: 10
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -381,13 +403,18 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      errors: [{
-        message: 'The "el" property should be above the "name" property on line 3.',
-        line: 4
-      }, {
-        message: 'The "components" property should be above the "data" property on line 5.',
-        line: 10
-      }]
+      errors: [
+        {
+          message:
+            'The "el" property should be above the "name" property on line 3.',
+          line: 4
+        },
+        {
+          message:
+            'The "components" property should be above the "data" property on line 5.',
+          line: 10
+        }
+      ]
     },
     {
       filename: 'example.vue',
@@ -428,10 +455,13 @@ ruleTester.run('order-in-components', rule, {
           },
         };
       `,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 16
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 16
+        }
+      ]
     },
     {
       filename: 'example.vue',
@@ -453,10 +483,13 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       options: [{ order: ['data', 'test', 'name'] }],
-      errors: [{
-        message: 'The "test" property should be above the "name" property on line 5.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "test" property should be above the "name" property on line 5.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'example.vue',
@@ -479,10 +512,13 @@ ruleTester.run('order-in-components', rule, {
           }
         };
       `,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 4.',
-        line: 7
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 4.',
+          line: 7
+        }
+      ]
     },
     {
       filename: 'example.vue',
@@ -505,20 +541,26 @@ ruleTester.run('order-in-components', rule, {
           }/*test*/
         };
       `,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 4.',
-        line: 7
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 4.',
+          line: 7
+        }
+      ]
     },
     {
       filename: 'example.vue',
       code: `export default {data(){},name:'burger'};`,
       parserOptions,
       output: `export default {name:'burger',data(){}};`,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 1.',
-        line: 1
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 1.',
+          line: 1
+        }
+      ]
     },
     {
       // side-effects CallExpression
@@ -533,10 +575,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects NewExpression
@@ -551,10 +596,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects UpdateExpression
@@ -569,10 +617,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects AssignmentExpression
@@ -587,10 +638,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects TaggedTemplateExpression
@@ -605,10 +659,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects key
@@ -623,10 +680,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects object deep props
@@ -641,10 +701,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects array elements
@@ -659,10 +722,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects call at middle
@@ -677,10 +743,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects delete
@@ -695,10 +764,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects within BinaryExpression
@@ -713,10 +785,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects within ConditionalExpression
@@ -731,10 +806,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // side-effects within TemplateLiteral
@@ -749,10 +827,13 @@ ruleTester.run('order-in-components', rule, {
       `,
       parserOptions,
       output: null,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 6
+        }
+      ]
     },
     {
       // without side-effects
@@ -774,10 +855,13 @@ ruleTester.run('order-in-components', rule, {
           test: fn(),
         };
       `,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 5
+        }
+      ]
     },
     {
       // don't side-effects
@@ -815,10 +899,13 @@ ruleTester.run('order-in-components', rule, {
           testNullish: a ?? b,
         };
       `,
-      errors: [{
-        message: 'The "name" property should be above the "data" property on line 3.',
-        line: 14
-      }]
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "data" property on line 3.',
+          line: 14
+        }
+      ]
     }
   ]
 })
