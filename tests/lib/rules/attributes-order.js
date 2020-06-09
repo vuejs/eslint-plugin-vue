@@ -20,7 +20,6 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 tester.run('attributes-order', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -88,8 +87,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-      `<template>
+      code: `<template>
         <div
           v-model="toggle"
           :bindingProp="foo"
@@ -108,8 +106,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             is="header"
             v-for="item in items"
@@ -126,8 +123,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             is="header"
             v-for="item in items"
@@ -144,8 +140,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             is="header"
             v-for="item in items"
@@ -162,8 +157,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-for="item in items"
             v-if="!visible"
@@ -177,14 +171,17 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div propone="prop" proptwo="prop" propthree="prop"></div></template>'
+      code:
+        '<template><div propone="prop" proptwo="prop" propthree="prop"></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div propone="prop" proptwo="prop" is="header"></div></template>',
+      code:
+        '<template><div propone="prop" proptwo="prop" is="header"></div></template>',
       options: [
-        { order:
-          ['LIST_RENDERING',
+        {
+          order: [
+            'LIST_RENDERING',
             'CONDITIONALS',
             'RENDER_MODIFIERS',
             'GLOBAL',
@@ -194,15 +191,19 @@ tester.run('attributes-order', rule, {
             'OTHER_ATTR',
             'EVENTS',
             'CONTENT',
-            'DEFINITION']
-        }]
+            'DEFINITION'
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div ref="header" is="header" propone="prop" proptwo="prop"></div></template>',
+      code:
+        '<template><div ref="header" is="header" propone="prop" proptwo="prop"></div></template>',
       options: [
-        { order:
-          ['LIST_RENDERING',
+        {
+          order: [
+            'LIST_RENDERING',
             'CONDITIONALS',
             'RENDER_MODIFIERS',
             'GLOBAL',
@@ -212,13 +213,14 @@ tester.run('attributes-order', rule, {
             'OTHER_DIRECTIVES',
             'OTHER_ATTR',
             'EVENTS',
-            'CONTENT']
-        }]
+            'CONTENT'
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-if="!visible"
             v-for="item in items"
@@ -234,8 +236,8 @@ tester.run('attributes-order', rule, {
           </div>
         </template>`,
       options: [
-        { order:
-          [
+        {
+          order: [
             'CONDITIONALS',
             'LIST_RENDERING',
             'RENDER_MODIFIERS',
@@ -248,12 +250,12 @@ tester.run('attributes-order', rule, {
             'OTHER_ATTR',
             'OTHER_DIRECTIVES'
           ]
-        }]
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-if="!visible"
             class="content"
@@ -263,8 +265,8 @@ tester.run('attributes-order', rule, {
           </div>
         </template>`,
       options: [
-        { order:
-          [
+        {
+          order: [
             'CONDITIONALS',
             'LIST_RENDERING',
             'RENDER_MODIFIERS',
@@ -275,12 +277,12 @@ tester.run('attributes-order', rule, {
             'CONTENT',
             'GLOBAL'
           ]
-        }]
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             id="uniqueID"
             ref="header"
@@ -296,8 +298,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             a-custom-prop="value"
             :another-custom-prop="value"
@@ -315,8 +316,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             class="foo"
             :class="bar">
@@ -326,8 +326,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'duplicate.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             class="foo"
             class="bar">
@@ -337,8 +336,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'duplicate.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             :class="foo"
             :class="bar">
@@ -348,8 +346,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-if="foo"
             v-show="bar">
@@ -359,8 +356,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-bar="bar"
             v-foo="foo">
@@ -370,8 +366,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-foo.a="a"
             v-foo.b="b">
@@ -386,24 +381,27 @@ tester.run('attributes-order', rule, {
       filename: 'test.vue',
       code: '<template><div v-cloak is="header"></div></template>',
       output: '<template><div is="header" v-cloak></div></template>',
-      errors: [{
-        message: 'Attribute "is" should go before "v-cloak".',
-        type: 'VIdentifier'
-      }]
+      errors: [
+        {
+          message: 'Attribute "is" should go before "v-cloak".',
+          type: 'VIdentifier'
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div id="uniqueID" v-cloak></div></template>',
       output: '<template><div v-cloak id="uniqueID"></div></template>',
-      errors: [{
-        message: 'Attribute "v-cloak" should go before "id".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-cloak" should go before "id".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-          `<template>
+      code: `<template>
             <div
               model="baz"
               v-model="toggle"
@@ -411,8 +409,7 @@ tester.run('attributes-order', rule, {
               :id="foo">
             </div>
           </template>`,
-      output:
-          `<template>
+      output: `<template>
             <div
               v-model="toggle"
               model="baz"
@@ -420,19 +417,20 @@ tester.run('attributes-order', rule, {
               propOne="bar">
             </div>
           </template>`,
-      errors: [{
-        message: 'Attribute "v-model" should go before "model".',
-        type: 'VDirectiveKey'
-      },
-      {
-        message: 'Attribute ":id" should go before "propOne".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-model" should go before "model".',
+          type: 'VDirectiveKey'
+        },
+        {
+          message: 'Attribute ":id" should go before "propOne".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-          `<template>
+      code: `<template>
             <div
               :bindingProp="foo"
               model="baz"
@@ -441,80 +439,91 @@ tester.run('attributes-order', rule, {
               propOne="bar">
             </div>
           </template>`,
+      output: `<template>
+            <div
+              :bindingProp="foo"
+              model="baz"
+              v-model="toggle"
+              v-on="functionCall"
+              propOne="bar">
+            </div>
+          </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-model" should go before "v-on".',
+          type: 'VDirectiveKey'
+        },
+        {
+          message: 'Attribute "propOne" should go before "v-on".',
+          type: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div data-id="foo" aria-test="bar" is="custom" myProp="prop"></div></template>',
       output:
-          `<template>
-            <div
-              :bindingProp="foo"
-              model="baz"
-              v-model="toggle"
-              v-on="functionCall"
-              propOne="bar">
-            </div>
-          </template>`,
-      errors: [{
-        message: 'Attribute "v-model" should go before "v-on".',
-        type: 'VDirectiveKey'
-      },
-      {
-        message: 'Attribute "propOne" should go before "v-on".',
-        type: 'VIdentifier'
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div data-id="foo" aria-test="bar" is="custom" myProp="prop"></div></template>',
-      output: '<template><div data-id="foo" is="custom" aria-test="bar" myProp="prop"></div></template>',
-      errors: [{
-        message: 'Attribute "is" should go before "aria-test".',
-        type: 'VIdentifier'
-      }]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div ref="header" propone="prop" is="header" ></div></template>',
-      options: [
-        { order:
-            ['LIST_RENDERING',
-              'CONDITIONALS',
-              'RENDER_MODIFIERS',
-              'GLOBAL',
-              'UNIQUE',
-              'TWO_WAY_BINDING',
-              'DEFINITION',
-              'OTHER_DIRECTIVES',
-              'OTHER_ATTR',
-              'EVENTS',
-              'CONTENT']
-        }],
-      output: '<template><div ref="header" is="header" propone="prop" ></div></template>',
-      errors: [{
-        message: 'Attribute "is" should go before "propone".',
-        type: 'VIdentifier'
-      }]
+        '<template><div data-id="foo" is="custom" aria-test="bar" myProp="prop"></div></template>',
+      errors: [
+        {
+          message: 'Attribute "is" should go before "aria-test".',
+          type: 'VIdentifier'
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code:
-          `<template>
+        '<template><div ref="header" propone="prop" is="header" ></div></template>',
+      options: [
+        {
+          order: [
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'UNIQUE',
+            'TWO_WAY_BINDING',
+            'DEFINITION',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT'
+          ]
+        }
+      ],
+      output:
+        '<template><div ref="header" is="header" propone="prop" ></div></template>',
+      errors: [
+        {
+          message: 'Attribute "is" should go before "propone".',
+          type: 'VIdentifier'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
             <div v-cloak
               is="header">
             </div>
           </template>`,
-      output:
-          `<template>
+      output: `<template>
             <div is="header"
               v-cloak>
             </div>
           </template>`,
-      errors: [{
-        message: 'Attribute "is" should go before "v-cloak".',
-        type: 'VIdentifier'
-      }]
+      errors: [
+        {
+          message: 'Attribute "is" should go before "v-cloak".',
+          type: 'VIdentifier'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-          `<template>
+      code: `<template>
             <div
               v-if="!visible"
               v-for="item in items"
@@ -529,8 +538,7 @@ tester.run('attributes-order', rule, {
               >
             </div>
           </template>`,
-      output:
-          `<template>
+      output: `<template>
             <div
               v-for="item in items"
               v-if="!visible"
@@ -574,8 +582,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-          `<template>
+      code: `<template>
             <div
               v-if="!visible"
               v-for="item in items"
@@ -591,23 +598,23 @@ tester.run('attributes-order', rule, {
             </div>
           </template>`,
       options: [
-        { order:
-            [
-              'EVENTS',
-              'TWO_WAY_BINDING',
-              'UNIQUE',
-              'DEFINITION',
-              'CONDITIONALS',
-              'LIST_RENDERING',
-              'RENDER_MODIFIERS',
-              'GLOBAL',
-              'OTHER_ATTR',
-              'OTHER_DIRECTIVES',
-              'CONTENT'
-            ]
-        }],
-      output:
-          `<template>
+        {
+          order: [
+            'EVENTS',
+            'TWO_WAY_BINDING',
+            'UNIQUE',
+            'DEFINITION',
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'OTHER_ATTR',
+            'OTHER_DIRECTIVES',
+            'CONTENT'
+          ]
+        }
+      ],
+      output: `<template>
             <div
               v-if="!visible"
               v-for="item in items"
@@ -646,8 +653,7 @@ tester.run('attributes-order', rule, {
       ]
     },
     {
-      code:
-          `<template>
+      code: `<template>
             <div
               class="content"
               v-if="!visible"
@@ -657,21 +663,21 @@ tester.run('attributes-order', rule, {
             </div>
           </template>`,
       options: [
-        { order:
-            [
-              'CONDITIONALS',
-              'LIST_RENDERING',
-              'RENDER_MODIFIERS',
-              'DEFINITION',
-              'EVENTS',
-              'UNIQUE',
-              ['BINDING', 'OTHER_ATTR'],
-              'CONTENT',
-              'GLOBAL'
-            ]
-        }],
-      output:
-          `<template>
+        {
+          order: [
+            'CONDITIONALS',
+            'LIST_RENDERING',
+            'RENDER_MODIFIERS',
+            'DEFINITION',
+            'EVENTS',
+            'UNIQUE',
+            ['BINDING', 'OTHER_ATTR'],
+            'CONTENT',
+            'GLOBAL'
+          ]
+        }
+      ],
+      output: `<template>
             <div
               v-if="!visible"
               class="content"
@@ -688,8 +694,7 @@ tester.run('attributes-order', rule, {
       ]
     },
     {
-      code:
-          `<template>
+      code: `<template>
             <my-component
               v-if="!visible"
               v-model="content"
@@ -697,8 +702,7 @@ tester.run('attributes-order', rule, {
               >
             </my-component>
           </template>`,
-      output:
-          `<template>
+      output: `<template>
             <my-component
               v-if="!visible"
               v-slot="textContent"
@@ -715,219 +719,219 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-      `<template>
+      code: `<template>
           <div
             z-prop="Z"
             a-prop="A">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             a-prop="A"
             z-prop="Z">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "a-prop" should go before "z-prop".',
-        type: 'VIdentifier'
-      }]
+      errors: [
+        {
+          message: 'Attribute "a-prop" should go before "z-prop".',
+          type: 'VIdentifier'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-      `<template>
+      code: `<template>
           <div
             :z-prop="Z"
             :a-prop="A">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             :a-prop="A"
             :z-prop="Z">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute ":a-prop" should go before ":z-prop".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute ":a-prop" should go before ":z-prop".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             @input="bar"
             @change="foo">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             @change="foo"
             @input="bar">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "@change" should go before "@input".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute "@change" should go before "@input".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             z-prop="value"
             boolean-prop>
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             boolean-prop
             z-prop="value">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "boolean-prop" should go before "z-prop".',
-        type: 'VIdentifier'
-      }]
+      errors: [
+        {
+          message: 'Attribute "boolean-prop" should go before "z-prop".',
+          type: 'VIdentifier'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-on:click="functionCall"
             v-on:[c]="functionCall">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             v-on:[c]="functionCall"
             v-on:click="functionCall">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "v-on:[c]" should go before "v-on:click".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-on:[c]" should go before "v-on:click".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-text="textContent"
             v-on:click="functionCall">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             v-on:click="functionCall"
             v-text="textContent">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "v-on:click" should go before "v-text".',
-        type: 'VDirectiveKey'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-on:click" should go before "v-text".',
+          type: 'VDirectiveKey'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             :class="foo"
             class="bar">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             class="bar"
             :class="foo">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "class" should go before ":class".'
-      }]
+      errors: [
+        {
+          message: 'Attribute "class" should go before ":class".'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-show="foo"
             v-if="bar">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             v-if="bar"
             v-show="foo">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "v-if" should go before "v-show".'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-if" should go before "v-show".'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-foo="foo"
             v-bar="bar">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             v-bar="bar"
             v-foo="foo">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "v-bar" should go before "v-foo".'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-bar" should go before "v-foo".'
+        }
+      ]
     },
     {
       filename: 'test.vue',
-      code:
-        `<template>
+      code: `<template>
           <div
             v-foo.b="b"
             v-foo.a="a">
           </div>
         </template>`,
       options: [{ alphabetical: true }],
-      output:
-        `<template>
+      output: `<template>
           <div
             v-foo.a="a"
             v-foo.b="b">
           </div>
         </template>`,
-      errors: [{
-        message: 'Attribute "v-foo.a" should go before "v-foo.b".'
-      }]
+      errors: [
+        {
+          message: 'Attribute "v-foo.a" should go before "v-foo.b".'
+        }
+      ]
     }
   ]
 })

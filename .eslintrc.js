@@ -37,24 +37,6 @@ module.exports = {
     'dot-notation': 'error'
   },
   overrides: [
-    // Introduce prettier. but ignore files to avoid conflicts with PR.
-    {
-      files: [
-        // https://github.com/vuejs/eslint-plugin-vue/pull/819
-        'lib/rules/attributes-order.js',
-        'tests/lib/rules/attributes-order.js'
-      ],
-      extends: [
-        'plugin:eslint-plugin/recommended',
-        'plugin:vue-libs/recommended'
-      ],
-      rules: {
-        'prettier/prettier': 'off',
-
-        'rest-spread-spacing': 'error',
-        'no-mixed-operators': 'error'
-      }
-    },
     {
       files: ['lib/rules/*.js'],
       rules: {

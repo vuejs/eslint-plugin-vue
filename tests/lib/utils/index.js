@@ -162,22 +162,22 @@ describe('getStaticPropertyName', () => {
     const parsed = utils.getStaticPropertyName(node.properties[0])
     assert.ok(parsed === 'computed')
   })
-  it('should parse identifier', () => {
-    node = parse(`const test = { computed: { } }`)
+  // it('should parse identifier', () => {
+  //   node = parse(`const test = { computed: { } }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0].key)
-    assert.ok(parsed === 'computed')
-  })
+  //   const parsed = utils.getStaticPropertyName(node.properties[0].key)
+  //   assert.ok(parsed === 'computed')
+  // })
   it('should parse literal', () => {
     node = parse(`const test = { ['computed'] () {} }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0].key)
+    const parsed = utils.getStringLiteralValue(node.properties[0].key)
     assert.ok(parsed === 'computed')
   })
   it('should parse template literal', () => {
     node = parse(`const test = { [\`computed\`] () {} }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0].key)
+    const parsed = utils.getStringLiteralValue(node.properties[0].key)
     assert.ok(parsed === 'computed')
   })
 })
@@ -360,7 +360,7 @@ describe('getComponentProps', () => {
     assert.notOk(props[1].value)
 
     assert.ok(props[2].node.type === 'TemplateLiteral')
-    assert.notOk(props[2].key)
+    assert.deepEqual(props[2].key, props[2].node)
     assert.notOk(props[2].value)
 
     assert.ok(props[3].node.type === 'Literal')
