@@ -12,7 +12,7 @@ const rule = require('../../../lib/rules/no-side-effects-in-computed-properties'
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -337,6 +337,27 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           line: 4,
           message: 'Unexpected side effect in "test1" computed property.'
         }
+      ]
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test1() {
+            return this?.something?.reverse?.()
+          },
+          test2() {
+            return (this?.something)?.reverse?.()
+          },
+          test3() {
+            return (this?.something?.reverse)?.()
+          },
+        }
+      })`,
+      parserOptions,
+      errors: [
+        'Unexpected side effect in "test1" computed property.',
+        'Unexpected side effect in "test2" computed property.',
+        'Unexpected side effect in "test3" computed property.'
       ]
     }
   ]

@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/valid-v-bind-sync')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 tester.run('valid-v-bind-sync', rule, {
@@ -350,6 +350,42 @@ tester.run('valid-v-bind-sync', rule, {
       errors: [
         "'.sync' modifiers require the attribute value which is valid as LHS."
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="foo?.bar" /></template>',
+      errors: [
+        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="foo?.bar.baz" /></template>',
+      errors: [
+        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="(a?.b)?.c" /></template>',
+      errors: [
+        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="(a?.b).c" /></template>',
+      errors: ["'.sync' modifier has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="(null).foo" /></template>',
+      errors: ["'.sync' modifier has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :foo.sync="(a?.b).c.d" /></template>',
+      errors: ["'.sync' modifier has potential null object property access."]
     }
   ]
 })

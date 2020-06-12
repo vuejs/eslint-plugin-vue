@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 ruleTester.run('no-multiple-slot-args', rule, {
   valid: [
@@ -107,6 +107,90 @@ ruleTester.run('no-multiple-slot-args', rule, {
           endLine: 6,
           endColumn: 41
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        render (h) {
+          this?.$scopedSlots?.default?.(foo, bar)
+          this?.$scopedSlots?.foo?.(foo, bar)
+          const vm = this
+          vm?.$scopedSlots?.default?.(foo, bar)
+          vm?.$scopedSlots?.foo?.(foo, bar)
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        render (h) {
+          this.$scopedSlots.default?.(foo, bar)
+          this.$scopedSlots.foo?.(foo, bar)
+          const vm = this
+          vm.$scopedSlots.default?.(foo, bar)
+          vm.$scopedSlots.foo?.(foo, bar)
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        render (h) {
+          ;(this?.$scopedSlots)?.default?.(foo, bar)
+          ;(this?.$scopedSlots?.foo)?.(foo, bar)
+          const vm = this
+          ;(vm?.$scopedSlots)?.default?.(foo, bar)
+          ;(vm?.$scopedSlots?.foo)?.(foo, bar)
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        render (h) {
+          ;(this?.$scopedSlots).default(foo, bar)
+          ;(this?.$scopedSlots?.foo)(foo, bar)
+          const vm = this
+          ;(vm?.$scopedSlots).default(foo, bar)
+          ;(vm?.$scopedSlots?.foo)(foo, bar)
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'Unexpected multiple arguments.',
+        'Unexpected multiple arguments.'
       ]
     },
     {

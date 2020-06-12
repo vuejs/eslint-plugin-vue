@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
   valid: [
@@ -237,6 +237,30 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
         {
           line: 8,
           column: 27,
+          messageId: 'deprecated'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            foo () {
+              const vm = this
+              const a = vm?.$listeners
+              const b = this?.$listeners
+            }
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'deprecated'
+        },
+        {
           messageId: 'deprecated'
         }
       ]

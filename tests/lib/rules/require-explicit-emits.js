@@ -10,7 +10,7 @@ const rule = require('../../../lib/rules/require-explicit-emits')
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2019,
+    ecmaVersion: 2020,
     sourceType: 'module'
   }
 })
@@ -1513,6 +1513,43 @@ emits: {'foo': null}
             }
           ]
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'The "foo" event has been triggered but not declared on `emits` option.',
+        'The "bar" event has been triggered but not declared on `emits` option.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        'The "foo" event has been triggered but not declared on `emits` option.',
+        'The "bar" event has been triggered but not declared on `emits` option.'
       ]
     }
   ]

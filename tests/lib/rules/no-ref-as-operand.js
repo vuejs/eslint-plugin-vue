@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-ref-as-operand')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-ref-as-operand', rule, {
@@ -485,6 +485,20 @@ tester.run('no-ref-as-operand', rule, {
         import { ref, computed, toRef, customRef, shallowRef } from 'vue'
         const foo = shallowRef({})
         foo.bar = 123
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue'
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref } from 'vue'
+        const foo = ref(123)
+        const bar = foo?.bar
       </script>
       `,
       errors: [
