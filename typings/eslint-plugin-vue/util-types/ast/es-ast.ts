@@ -113,6 +113,7 @@ export interface ForOfStatement extends HasParentNode {
   left: VariableDeclaration | Pattern
   right: Expression
   body: Statement
+  await: boolean
 }
 export interface LabeledStatement extends HasParentNode {
   type: 'LabeledStatement'
@@ -143,7 +144,7 @@ export interface TryStatement extends HasParentNode {
 }
 export interface CatchClause extends HasParentNode {
   type: 'CatchClause'
-  param: Pattern
+  param: Pattern | null
   body: BlockStatement
 }
 export interface WithStatement extends HasParentNode {
@@ -243,6 +244,11 @@ export interface ExportDefaultDeclaration extends HasParentNode {
 export interface ExportAllDeclaration extends HasParentNode {
   type: 'ExportAllDeclaration'
   source: Literal
+  exported: Identifier | null
+}
+export interface ImportExpression extends HasParentNode {
+  type: 'ImportExpression'
+  source: Expression
 }
 export type Expression =
   | ThisExpression
@@ -268,6 +274,8 @@ export type Expression =
   | MetaProperty
   | Identifier
   | AwaitExpression
+  | ImportExpression
+  | ChainExpression
   | JSX.JSXElement
   | JSX.JSXFragment
   | TS.TSAsExpression
@@ -404,7 +412,7 @@ export interface UpdateExpression extends HasParentNode {
 }
 export interface LogicalExpression extends HasParentNode {
   type: 'LogicalExpression'
-  operator: '||' | '&&'
+  operator: '||' | '&&' | '??'
   left: Expression
   right: Expression
 }
@@ -418,6 +426,7 @@ export interface CallExpression extends HasParentNode {
   type: 'CallExpression'
   callee: Expression | Super
   arguments: (Expression | SpreadElement)[]
+  optional: boolean
 }
 export interface Super extends HasParentNode {
   type: 'Super'
@@ -432,7 +441,13 @@ export interface MemberExpression extends HasParentNode {
   computed: boolean
   object: Expression | Super
   property: Expression
+  optional: boolean
 }
+export interface ChainExpression extends HasParentNode {
+  type: 'ChainExpression'
+  expression: ChainElement
+}
+export type ChainElement = CallExpression | MemberExpression
 export interface YieldExpression extends HasParentNode {
   type: 'YieldExpression'
   delegate: boolean
@@ -457,6 +472,7 @@ export interface TemplateElement extends HasParentNode {
   tail: boolean
   value: {
     cooked: string
+    // cooked: string | null // If the template literal is tagged and the text has an invalid escape, `cooked` will be `null`, e.g., `` tag`\unicode and \u{55}` ``
     raw: string
   }
 }

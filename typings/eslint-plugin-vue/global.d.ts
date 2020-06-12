@@ -121,6 +121,8 @@ declare global {
   type ClassExpression = VAST.ClassExpression
   type MetaProperty = VAST.MetaProperty
   type AwaitExpression = VAST.AwaitExpression
+  type ChainExpression = VAST.ChainExpression
+  type ChainElement = VAST.ChainElement
   type Property = VAST.Property
   type AssignmentProperty = VAST.AssignmentProperty
   type Super = VAST.Super
@@ -143,6 +145,7 @@ declare global {
   type ImportDefaultSpecifier = VAST.ImportDefaultSpecifier
   type ImportNamespaceSpecifier = VAST.ImportNamespaceSpecifier
   type ExportSpecifier = VAST.ExportSpecifier
+  type ImportExpression = VAST.ImportExpression
 
   // ---- TS Nodes ----
 

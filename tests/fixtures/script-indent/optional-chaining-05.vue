@@ -1,0 +1,11 @@
+<!--{}-->
+<script>
+// https://github.com/estree/estree/blob/master/es2020.md
+obj.aaa?.bbb;
+obj?.aaa.bbb;
+obj?.aaa?.bbb;
+(obj.aaa).bbb;
+(obj.aaa)?.bbb;
+(obj?.aaa).bbb;
+(obj?.aaa)?.bbb;
+</script>
