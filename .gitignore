@@ -8,3 +8,4 @@
 yarn.lock
 yarn-error.log
 docs/.vuepress/dist
+typings/eslint/lib/rules
