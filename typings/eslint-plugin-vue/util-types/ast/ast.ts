@@ -5,6 +5,8 @@ import * as JSX from './jsx-ast'
 
 export type ASTNode = ES.ESNode | V.VNode | TS.TSNode | JSX.JSXNode
 
+export type ParamNode = never // You specify the node type in JSDoc.
+
 export type VNodeListenerMap = {
   VAttribute: V.VAttribute | V.VDirective
   'VAttribute:exit': V.VAttribute | V.VDirective

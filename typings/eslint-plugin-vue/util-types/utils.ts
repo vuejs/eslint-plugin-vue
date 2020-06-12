@@ -1,3 +1,4 @@
+import * as VAST from './ast'
 export type VueObjectType = 'mark' | 'export' | 'definition' | 'instance'
 export type VueObjectData = {
   node: ObjectExpression
@@ -22,5 +23,7 @@ export interface VueVisitor extends VueVisitorBase {
     node: (FunctionExpression | ArrowFunctionExpression) & { parent: Property },
     obj: VueObjectData
   ): void
-  [query: string]: ((node: never, obj: VueObjectData) => void) | undefined
+  [query: string]:
+    | ((node: VAST.ParamNode, obj: VueObjectData) => void)
+    | undefined
 }

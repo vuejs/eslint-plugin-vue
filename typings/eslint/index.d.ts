@@ -272,28 +272,31 @@ export namespace Rule {
     [T in keyof VAST.NodeListenerMap]?: (node: VAST.NodeListenerMap[T]) => void
   }
   interface NodeListener extends NodeListenerBase {
-    [key: string]: ((node: never) => void) | undefined
+    [key: string]: ((node: VAST.ParamNode) => void) | undefined
   }
 
   interface RuleListener extends NodeListenerBase {
-    onCodePathStart?(codePath: CodePath, node: VAST.ESNode): void
-    onCodePathEnd?(codePath: CodePath, node: VAST.ESNode): void
-    onCodePathSegmentStart?(segment: CodePathSegment, node: VAST.ESNode): void
-    onCodePathSegmentEnd?(segment: CodePathSegment, node: VAST.ESNode): void
+    onCodePathStart?(codePath: CodePath, node: VAST.ParamNode): void
+    onCodePathEnd?(codePath: CodePath, node: VAST.ParamNode): void
+    onCodePathSegmentStart?(
+      segment: CodePathSegment,
+      node: VAST.ParamNode
+    ): void
+    onCodePathSegmentEnd?(segment: CodePathSegment, node: VAST.ParamNode): void
     onCodePathSegmentLoop?(
       fromSegment: CodePathSegment,
       toSegment: CodePathSegment,
-      node: never
+      node: VAST.ParamNode
     ): void
     [key: string]:
-      | ((codePath: CodePath, node: never) => void)
-      | ((segment: CodePathSegment, node: never) => void)
+      | ((codePath: CodePath, node: VAST.ParamNode) => void)
+      | ((segment: CodePathSegment, node: VAST.ParamNode) => void)
       | ((
           fromSegment: CodePathSegment,
           toSegment: CodePathSegment,
-          node: never
+          node: VAST.ParamNode
         ) => void)
-      | ((node: never) => void)
+      | ((node: VAST.ParamNode) => void)
       | undefined
   }
   interface CodePath extends ESLintRule.CodePath {}

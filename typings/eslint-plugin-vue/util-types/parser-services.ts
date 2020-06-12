@@ -8,7 +8,7 @@ type TemplateListenerBase = {
 export interface TemplateListener
   extends TemplateListenerBase,
     eslint.Rule.NodeListener {
-  [key: string]: ((node: never) => void) | undefined
+  [key: string]: ((node: VAST.ParamNode) => void) | undefined
 }
 
 export interface ParserServices {
