@@ -137,18 +137,6 @@ ruleTester.run('prop-name-casing', rule, {
       code: `
         export default {
           props: {
-            [\`greeting-text\`]: String
-          }
-        }
-      `,
-      parserOptions
-    },
-    {
-      // TemplateLiteral computed property does not warn
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
             [\`greeting\${'-'}text\`]: String
           }
         }
@@ -270,18 +258,6 @@ ruleTester.run('prop-name-casing', rule, {
         export default {
           props: {
             [null]: String
-          }
-        }
-      `,
-      parserOptions
-    },
-    {
-      // RegExp Literal computed property name
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            [/greeting-text/]: String
           }
         }
       `,
@@ -578,6 +554,32 @@ ruleTester.run('prop-name-casing', rule, {
       options: ['snake_case'],
       parserOptions,
       errors: ['Prop "_itemName" is not in snake_case.']
+    },
+    {
+      // TemplateLiteral computed property
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            [\`greeting-text\`]: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "greeting-text" is not in camelCase.']
+    },
+    {
+      // RegExp Literal computed property name
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            [/greeting-text/]: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "/greeting-text/" is not in camelCase.']
     }
   ]
 })
