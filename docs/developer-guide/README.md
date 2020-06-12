@@ -47,3 +47,10 @@ Check out an [example rule](https://github.com/vuejs/eslint-plugin-vue/blob/mast
 Please be aware that regarding what kind of code examples you'll write in tests, you'll have to accordingly setup the parser in `RuleTester` (you can do it on per test case basis though). [See an example here](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js#L19)
 
 If you'll stuck, remember there are plenty of rules you can learn from already, and if you can't find the right solution - don't hesitate to reach out in issues. We're happy to help!
+
+## :white_check_mark: JSDoc type checking with TypeScript
+
+We have type checking enabled via TypeScript and JSDoc.  
+The command to perform type checking is: `npm run tsc`
+
+This is just to help you write the rules, not to do strict type checking. If you find it difficult to resolve type checking warnings, feel free to suppress warnings using the `// @ts-nocheck` and `// @ts-ignore` comment.
