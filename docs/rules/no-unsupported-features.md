@@ -27,6 +27,9 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.0.0+
+    - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
+    - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
   - Vue.js 2.6.0+
     - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://vuejs.org/v2/guide/syntax.html#Dynamic-Arguments).
     - `"v-slot"` ... [v-slot](https://vuejs.org/v2/api/#v-slot) directive.
@@ -34,6 +37,25 @@ The `"ignores"` option accepts an array of the following strings.
     - `"slot-scope-attribute"` ... [slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated) attributes.
   - Vue.js `">=2.6.0-beta.1 <=2.6.0-beta.3"` or 2.6 custom build
     - `"v-bind-prop-modifier-shorthand"` ... [v-bind](https://vuejs.org/v2/api/#v-bind) with `.prop` modifier shorthand.
+
+### `{"version": "^2.6.0"}`
+
+<eslint-code-block fix :rules="{'vue/no-unsupported-features': ['error', {'version': '^2.6.0'}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyInput v-bind:foo.sync="val" />
+
+  <!-- ✗ BAD -->
+  <!-- argument on `v-model` -->
+  <MyInput v-model:foo="val" />
+  <!-- custom modifiers on `v-model` -->
+  <MyComp v-model.foo.bar="text" />
+</template>
+```
+
+</eslint-code-block>
 
 ### `{"version": "^2.5.0"}`
 
@@ -71,10 +93,20 @@ The `"ignores"` option accepts an array of the following strings.
 - [Guide - Dynamic Arguments](https://vuejs.org/v2/guide/syntax.html#Dynamic-Arguments)
 - [API - v-slot](https://vuejs.org/v2/api/#v-slot)
 - [API - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
-- [Vue RFCs - 0001-new-slot-syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md)
-- [Vue RFCs - 0002-slot-syntax-shorthand](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0002-slot-syntax-shorthand.md)
-- [Vue RFCs - 0003-dynamic-directive-arguments](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0003-dynamic-directive-arguments.md)
-- [Vue RFCs - v-bind .prop shorthand proposal](https://github.com/vuejs/rfcs/pull/18)
+- [Vue RFCs - 0001-new-slot-syntax]
+- [Vue RFCs - 0002-slot-syntax-shorthand]
+- [Vue RFCs - 0003-dynamic-directive-arguments]
+- [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
+- [Vue RFCs - 0011-v-model-api-change]
+- [Vue RFCs - v-bind .prop shorthand proposal]
+
+[Vue RFCs - 0001-new-slot-syntax]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md
+[Vue RFCs - 0002-slot-syntax-shorthand]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0002-slot-syntax-shorthand.md
+[Vue RFCs - 0003-dynamic-directive-arguments]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0003-dynamic-directive-arguments.md
+[Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md
+[Vue RFCs - 0011-v-model-api-change]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md
+
+[Vue RFCs - v-bind .prop shorthand proposal]: https://github.com/vuejs/rfcs/pull/18
 
 ## :mag: Implementation
 
