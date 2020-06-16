@@ -57,7 +57,7 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
 ```js
 {
   "vue/no-bare-strings-in-template": ["error", {
-    "whitelist": [
+    "allowlist": [
       "(", ")", ",", ".", "&", "+", "-", "=", "*", "/", "#", "%", "!", "?", ":", "[", "]", "{", "}", "<", ">", "\u00b7", "\u2022", "\u2010", "\u2013", "\u2014", "\u2212", "|"
     ],
     "attributes": {
@@ -70,7 +70,7 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
 }
 ```
 
-- `whitelist` ... An array of whitelisted strings.
+- `allowlist` ... An array of allowed strings.
 - `attributes` ... An object whose keys are tag name or patterns and value is an array of attributes to check for that tag name.
 - `directives` ... An array of directive names to check literal value.
 
