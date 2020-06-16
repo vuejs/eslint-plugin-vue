@@ -214,7 +214,7 @@ tester.run('no-bare-strings-in-template', rule, {
         <h1>ipsum</h1>
       </template>
       `,
-      options: [{ whitelist: ['Lorem'] }],
+      options: [{ allowlist: ['Lorem'] }],
       errors: [
         {
           line: 4,
