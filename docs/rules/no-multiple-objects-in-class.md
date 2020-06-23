@@ -17,10 +17,10 @@ This rule disallows to pass multiple objects into array to class.
 <template>
   <div>
     <!-- ✓ GOOD -->
-    <div :class="[{'foo': isFoo}, {'bar': isBar}]" />
+    <div :class="[{'foo': isFoo, 'bar': isBar}]" />
 
     <!-- ✗ BAD -->
-    <div :class="[{'foo': isFoo, 'bar': isBar}]" />
+    <div :class="[{'foo': isFoo}, {'bar': isBar}]" />
   </div>
 </template>
 ```
