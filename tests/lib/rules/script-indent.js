@@ -79,6 +79,7 @@ function loadPatterns(additionalValid, additionalInvalid) {
 
       return Object.assign({}, pattern, { code, output, errors })
     })
+    .filter((invalid) => invalid.errors.length > 0) // Empty errors cannot be verified with eslint 7.3.
     .filter(Boolean)
 
   return {
