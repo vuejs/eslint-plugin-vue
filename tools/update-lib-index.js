@@ -43,10 +43,10 @@ module.exports = {
 fs.writeFileSync(filePath, content)
 
 // Format files.
-async function main() {
+async function format() {
   const linter = new eslint.ESLint({ fix: true })
   const report = await linter.lintFiles([filePath])
   eslint.ESLint.outputFixes(report)
 }
 
-main()
+format()
