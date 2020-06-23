@@ -7,7 +7,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/no-multiple-object-in-class')
+const rule = require('../../../lib/rules/no-multiple-objects-in-class')
 const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015, sourceType: 'module' }
 })
 
-ruleTester.run('no-multiple-object-in-class', rule, {
+ruleTester.run('no-multiple-objects-in-class', rule, {
   valid: [
     `<template><div :class="[{'foo': isFoo}]" /></template>`,
     `<template><div :class="[{'foo': isFoo, 'bar': isBar}]" /></template>`
