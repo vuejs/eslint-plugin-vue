@@ -22,9 +22,19 @@ const ruleTester = new RuleTester({
 ruleTester.run('no-multiple-objects-in-class', rule, {
   valid: [
     `<template><div :class="[{'foo': isFoo}]" /></template>`,
-    `<template><div :class="[{'foo': isFoo, 'bar': isBar}]" /></template>`
+    `<template><div :class="[{'foo': isFoo, 'bar': isBar}]" /></template>`,
+    `<template><div v-foo:class="[{'foo': isFoo}, {'bar': isBar}]" /></template>`
   ],
   invalid: [
+    {
+      code: `<template><div v-bind:class="[{'foo': isFoo}, {'bar': isBar}]" /></template>`,
+      errors: [
+        {
+          message: 'Unexpected multiple objects. Merge objects.',
+          type: 'VAttribute'
+        }
+      ]
+    },
     {
       code: `<template><div :class="[{'foo': isFoo}, {'bar': isBar}]" /></template>`,
       errors: [
