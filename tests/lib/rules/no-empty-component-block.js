@@ -14,21 +14,36 @@ const tester = new RuleTester({
 tester.run('no-empty-component-block', rule, {
   valid: [
     `<template><p>foo</p></template>`,
+    `<template>  foobar   </template>`,
     `<template><p>foo</p></template><script>console.log('foo')</script>`,
     `<template><p>foo</p></template><script>console.log('foo')</script><style>p{display: inline;}</style>`,
-
     `<template src="./template.html"></template>`,
     `<template src="./template.html" />`,
-
     `<template src="./template.html"></template><script src="./script.js"></script>`,
     `<template src="./template.html" /><script src="./script.js" />`,
-
     `<template src="./template.html"></template><script src="./script.js"></script><style src="./style.css"></style>`,
     `<template src="./template.html" /><script src="./script.js" /><style src="./style.css" />`
   ],
   invalid: [
     {
-      code: '<template></template>',
+      code: `<template></template>`,
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: `<template> </template>`,
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: `<template>
+</template>`,
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
