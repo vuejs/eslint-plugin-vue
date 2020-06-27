@@ -281,7 +281,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         'Enforce new lines between multi-line properties in Vue components.',
         'Enforce new lines between multi-line properties in Vue components.'
       ]
-
     },
     // test set insertLine and minLineOfMultilineProperty to 5
     {
@@ -330,11 +329,11 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       `,
       errors: [
         {
-          message: 'Enforce new lines between multi-line properties in Vue components.',
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
           line: 9
         }
       ]
-
     }
   ]
 })
