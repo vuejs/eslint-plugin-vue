@@ -327,3 +327,5 @@ var longRegExpLiteral = /this is a really really really really really long regul
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/max-len.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/max-len.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/max-len)</sup>

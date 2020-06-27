@@ -18,10 +18,10 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent my-prop="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent myProp="prop" />
 </template>
 ```
@@ -51,10 +51,10 @@ It errors on upper case letters.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent my-prop="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent myProp="prop" />
 </template>
 ```
@@ -68,34 +68,34 @@ It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent myProp="prop" />
   <MyComponent data-id="prop" />
   <MyComponent aria-role="button" />
   <MyComponent slot-scope="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />
 </template>
 ```
 
 </eslint-code-block>
 
-### `"never", { "ignore": ["custom-prop"] }` 
+### `"never", { "ignore": ["custom-prop"] }`
 Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent myProp="prop" />
   <MyComponent custom-prop="prop" />
   <MyComponent data-id="prop" />
   <MyComponent aria-role="button" />
   <MyComponent slot-scope="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />
 </template>
 ```

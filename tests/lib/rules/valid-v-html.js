@@ -30,6 +30,16 @@ tester.run('valid-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-html="foo"></div></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-html="."></div></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><div v-html="/**/"></div></template>'
     }
   ],
   invalid: [
@@ -46,6 +56,12 @@ tester.run('valid-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-html></div></template>',
+      errors: ["'v-html' directives require that attribute value."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div v-html=""></div></template>',
       errors: ["'v-html' directives require that attribute value."]
     }
   ]

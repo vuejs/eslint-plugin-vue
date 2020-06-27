@@ -8,7 +8,10 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../../lib/rules/no-unsupported-features')
 const utils = require('./utils')
 
-const buildOptions = utils.optionsBuilder('v-bind-prop-modifier-shorthand', '^2.6.0')
+const buildOptions = utils.optionsBuilder(
+  'v-bind-prop-modifier-shorthand',
+  '^2.6.0'
+)
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
@@ -60,7 +63,8 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       </template>`,
       errors: [
         {
-          message: '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
+          message:
+            '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
           line: 3
         }
       ]
@@ -77,11 +81,11 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       </template>`,
       errors: [
         {
-          message: '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
+          message:
+            '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
           line: 3
         }
       ]
     }
   ]
 })
-

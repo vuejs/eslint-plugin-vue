@@ -10,8 +10,8 @@ const utils = require('../../../lib/utils/index')
 // ------------------------------------------------------------------------------
 
 const rule = {
-  create (context) {
-    return utils.executeOnVueComponent(context, obj => {
+  create(context) {
+    return utils.executeOnVueComponent(context, (obj) => {
       context.report({
         node: obj,
         message: 'Component detected.'
@@ -30,7 +30,7 @@ const parserOptions = {
   sourceType: 'module'
 }
 
-function makeError (line) {
+function makeError(line) {
   return {
     message: 'Component detected.',
     line,
@@ -38,7 +38,7 @@ function makeError (line) {
   }
 }
 
-function validTests (ext) {
+function validTests(ext) {
   return [
     {
       filename: `test.${ext}`,
@@ -118,7 +118,7 @@ function validTests (ext) {
   ]
 }
 
-function invalidTests (ext) {
+function invalidTests(ext) {
   return [
     {
       filename: `test.${ext}`,
@@ -311,6 +311,12 @@ function invalidTests (ext) {
       `,
       parserOptions,
       errors: (ext === 'js' ? [] : [makeError(2)]).concat([makeError(8)])
+    },
+    {
+      filename: `test.${ext}`,
+      code: `export default defineComponent({})`,
+      parserOptions,
+      errors: [makeError(1)]
     }
   ]
 }
@@ -321,14 +327,16 @@ function invalidTests (ext) {
 
 const ruleTester = new RuleTester()
 ruleTester.run('vue-component', rule, {
-
   valid: [
     {
       filename: 'test.js',
       code: `export default { }`,
       parserOptions
     }
-  ].concat(validTests('js')).concat(validTests('jsx')).concat(validTests('vue')),
+  ]
+    .concat(validTests('js'))
+    .concat(validTests('jsx'))
+    .concat(validTests('vue')),
   invalid: [
     {
       filename: 'test.vue',
@@ -342,5 +350,8 @@ ruleTester.run('vue-component', rule, {
       parserOptions,
       errors: [makeError(1)]
     }
-  ].concat(invalidTests('js')).concat(invalidTests('jsx')).concat(invalidTests('vue'))
+  ]
+    .concat(invalidTests('js'))
+    .concat(invalidTests('jsx'))
+    .concat(invalidTests('vue'))
 })

@@ -16,9 +16,8 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester()
+const ruleTester = new RuleTester()
 ruleTester.run('require-prop-types', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -171,19 +170,24 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "bar" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "baz" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "Unknown prop" should define at least its type.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "bar" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "baz" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "Unknown prop" should define at least its type.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -193,19 +197,24 @@ ruleTester.run('require-prop-types', rule, {
         })
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "bar" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "baz" should define at least its type.',
-        line: 3
-      }, {
-        message: 'Prop "Unknown prop" should define at least its type.',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "bar" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "baz" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "Unknown prop" should define at least its type.',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -218,10 +227,12 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -235,10 +246,12 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -250,10 +263,12 @@ ruleTester.run('require-prop-types', rule, {
         }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -266,10 +281,12 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -282,10 +299,12 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
-      errors: [{
-        message: 'Prop "foo" should define at least its type.',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
     }
   ]
 })

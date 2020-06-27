@@ -65,23 +65,35 @@ export default {
     "order": [
       "el",
       "name",
+      "key",
       "parent",
       "functional",
       ["delimiters", "comments"],
       ["components", "directives", "filters"],
       "extends",
       "mixins",
+      ["provide", "inject"],
+      "ROUTER_GUARDS",
+      "layout",
+      "middleware",
+      "validate",
+      "scrollToTop",
+      "transition",
+      "loading",
       "inheritAttrs",
       "model",
       ["props", "propsData"],
+      "emits",
+      "setup",
       "fetch",
       "asyncData",
       "data",
+      "head",
       "computed",
       "watch",
+      "watchQuery",
       "LIFECYCLE_HOOKS",
       "methods",
-      "head",
       ["template", "render"],
       "renderError"
     ]
@@ -89,7 +101,12 @@ export default {
 }
 ```
 
-- `order` (`(string | string[])[]`) ... The order of properties. Elements are the property names or `LIFECYCLE_HOOKS`. If an element is the array of strings, it means any of those can be placed there unordered. Default is above.
+- `order` (`(string | string[])[]`) ... The order of properties. Elements are the property names or one of the following groups:
+
+  - `LIFECYCLE_HOOKS`: [Vue Lifecycle Events](https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram), in the order they are called
+  - `ROUTER_GUARDS`: [Vue Router Navigation Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards), in the order they are called
+
+  If an element is an array of strings, it means any of those can be placed there unordered. Default is above.
 
 
 ## :books: Further reading

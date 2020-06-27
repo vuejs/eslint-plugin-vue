@@ -6,6 +6,7 @@
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        { "language": "vue", "autoFix": true }
-    ]
+        "vue"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

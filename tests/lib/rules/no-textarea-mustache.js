@@ -29,7 +29,8 @@ tester.run('no-textarea-mustache', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><textarea v-model="text"></textarea></div></template>'
+      code:
+        '<template><div><textarea v-model="text"></textarea></div></template>'
     }
   ],
   invalid: [
@@ -40,7 +41,8 @@ tester.run('no-textarea-mustache', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><textarea>{{text}} and {{text}}</textarea></div></template>',
+      code:
+        '<template><div><textarea>{{text}} and {{text}}</textarea></div></template>',
       errors: [
         "Unexpected mustache. Use 'v-model' instead.",
         "Unexpected mustache. Use 'v-model' instead."

@@ -30,6 +30,16 @@ tester.run('valid-v-show', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-show="foo"></div></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent v-show="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-show="/**/" /></template>'
     }
   ],
   invalid: [
@@ -48,8 +58,9 @@ tester.run('valid-v-show', rule, {
       code: '<template><div v-show></div></template>',
       errors: ["'v-show' directives require that attribute value."]
     },
+    // empty value
     {
-      filename: 'test.vue',
+      filename: 'empty-value.vue',
       code: '<template><div v-show=""></div></template>',
       errors: ["'v-show' directives require that attribute value."]
     }

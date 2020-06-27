@@ -47,6 +47,24 @@ tester.run('valid-v-pre', rule, {
       filename: 'test.vue',
       code: '<template><div v-pre="aaa"></div></template>',
       errors: ["'v-pre' directives require no attribute value."]
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-pre="." /></template>',
+      errors: ["'v-pre' directives require no attribute value."]
+    },
+    // comment value
+    {
+      filename: 'comment-value.vue',
+      code: '<template><div v-pre="/**/" /></template>',
+      errors: ["'v-pre' directives require no attribute value."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div v-pre="" /></template>',
+      errors: ["'v-pre' directives require no attribute value."]
     }
   ]
 })

@@ -21,3 +21,5 @@ This rule is the same rule as core [keyword-spacing] rule but it applies to the 
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/keyword-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/keyword-spacing.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/keyword-spacing)</sup>

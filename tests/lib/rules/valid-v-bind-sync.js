@@ -51,51 +51,63 @@ tester.run('valid-v-bind-sync', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><svg><MyComponent :foo.sync="this.foo().bar" /></svg></template>'
+      code:
+        '<template><svg><MyComponent :foo.sync="this.foo().bar" /></svg></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="x.foo" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="x.foo" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x - 1]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x - 1]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`${x}`]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`${x}`]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`prefix_${x}`]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`prefix_${x}`]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x ? x : \'_\']" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x ? x : \'_\']" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x || \'_\']" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x || \'_\']" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x()]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x()]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[/r/.match(x) ? 0 : 1]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[/r/.match(x) ? 0 : 1]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[typeof x]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[typeof x]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[tag`${x}`]" /></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[tag`${x}`]" /></div></div></template>'
     },
     // not .sync
     {
@@ -118,6 +130,21 @@ tester.run('valid-v-bind-sync', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync.unknown="foo" /></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent :foo.sync="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent :foo.sync="/**/" /></template>'
+    },
+    // empty value (valid-v-bind)
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent :foo.sync="" /></template>'
     }
   ],
   invalid: [
@@ -128,12 +155,15 @@ tester.run('valid-v-bind-sync', rule, {
           <MyComponent :foo.sync="a + b" />
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
-        line: 3,
-        column: 24,
-        endColumn: 41
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 3,
+          column: 24,
+          endColumn: 41
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -142,12 +172,15 @@ tester.run('valid-v-bind-sync', rule, {
           <MyComponent v-bind:foo.sync="a + b" />
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
-        line: 3,
-        column: 24,
-        endColumn: 47
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 3,
+          column: 24,
+          endColumn: 47
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -156,12 +189,15 @@ tester.run('valid-v-bind-sync', rule, {
           <input :foo.sync="foo">
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers aren't supported on <input> non Vue-components.",
-        line: 3,
-        column: 18,
-        endColumn: 33
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers aren't supported on <input> non Vue-components.",
+          line: 3,
+          column: 18,
+          endColumn: 33
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -170,12 +206,15 @@ tester.run('valid-v-bind-sync', rule, {
           <MyComponent :foo.sync="foo()" />
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
-        line: 3,
-        column: 24,
-        endColumn: 41
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 3,
+          column: 24,
+          endColumn: 41
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -184,12 +223,15 @@ tester.run('valid-v-bind-sync', rule, {
           <MyComponent :foo.sync="this.foo()" />
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers require the attribute value which is valid as LHS.",
-        line: 3,
-        column: 24,
-        endColumn: 46
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 3,
+          column: 24,
+          endColumn: 46
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -198,12 +240,15 @@ tester.run('valid-v-bind-sync', rule, {
           <input v-bind:foo.sync="foo">
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers aren't supported on <input> non Vue-components.",
-        line: 3,
-        column: 18,
-        endColumn: 39
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers aren't supported on <input> non Vue-components.",
+          line: 3,
+          column: 18,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -214,12 +259,15 @@ tester.run('valid-v-bind-sync', rule, {
           </div>
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers cannot update the iteration variable 'x' itself.",
-        line: 4,
-        column: 26,
-        endColumn: 39
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers cannot update the iteration variable 'x' itself.",
+          line: 4,
+          column: 26,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -230,12 +278,15 @@ tester.run('valid-v-bind-sync', rule, {
           </div>
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers cannot update the iteration variable 'e' itself.",
-        line: 4,
-        column: 26,
-        endColumn: 45
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers cannot update the iteration variable 'e' itself.",
+          line: 4,
+          column: 26,
+          endColumn: 45
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -250,10 +301,13 @@ tester.run('valid-v-bind-sync', rule, {
           </div>
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers cannot update the iteration variable 'e1' itself.",
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers cannot update the iteration variable 'e1' itself.",
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -264,10 +318,13 @@ tester.run('valid-v-bind-sync', rule, {
           </div>
         </template>
       `,
-      errors: [{
-        message: "'.sync' modifiers cannot update the iteration variable 'index' itself.",
-        line: 4
-      }]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers cannot update the iteration variable 'index' itself.",
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -276,17 +333,23 @@ tester.run('valid-v-bind-sync', rule, {
           <div :foo.sync="foo"></div>
         </template>
       `,
-      errors: ["'.sync' modifiers aren't supported on <div> non Vue-components."]
+      errors: [
+        "'.sync' modifiers aren't supported on <div> non Vue-components."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-bind.sync="foo()" /></template>',
-      errors: ["'.sync' modifiers require the attribute value which is valid as LHS."]
+      errors: [
+        "'.sync' modifiers require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><svg><MyComponent :foo.sync="foo()" /></svg></template>',
-      errors: ["'.sync' modifiers require the attribute value which is valid as LHS."]
+      errors: [
+        "'.sync' modifiers require the attribute value which is valid as LHS."
+      ]
     }
   ]
 })

@@ -41,11 +41,13 @@ tester.run('valid-template-root', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else>abc</div>\n</template>'
+      code:
+        '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else>abc</div>\n</template>'
     },
     {
       filename: 'test.vue',
-      code: '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else-if="bar">abc</div>\n    <div v-else>abc</div>\n</template>'
+      code:
+        '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else-if="bar">abc</div>\n    <div v-else>abc</div>\n</template>'
     },
     {
       filename: 'test.vue',
@@ -57,7 +59,8 @@ tester.run('valid-template-root', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
+      code:
+        '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
     },
     {
       filename: 'test.vue',
@@ -117,12 +120,16 @@ tester.run('valid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template src="foo.html">abc</template>',
-      errors: ["The template root with 'src' attribute is required to be empty."]
+      errors: [
+        "The template root with 'src' attribute is required to be empty."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template src="foo.html"><div></div></template>',
-      errors: ["The template root with 'src' attribute is required to be empty."]
+      errors: [
+        "The template root with 'src' attribute is required to be empty."
+      ]
     }
   ]
 })

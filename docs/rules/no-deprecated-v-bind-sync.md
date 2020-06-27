@@ -45,7 +45,7 @@ Nothing.
 
 ## :books: Further reading
 
-- [RFC: Replace v-bind.sync with v-model argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
+- [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
 
 ## :mag: Implementation
 

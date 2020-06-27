@@ -8,12 +8,12 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var eslint = require('eslint')
-var rule = require('../../../lib/rules/jsx-uses-vars')
-var ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars')
+const eslint = require('eslint')
+const rule = require('../../../lib/rules/jsx-uses-vars')
+const ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars')
 
-var RuleTester = eslint.RuleTester
-var ruleTester = new RuleTester({
+const RuleTester = eslint.RuleTester
+const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
@@ -23,7 +23,7 @@ var ruleTester = new RuleTester({
   }
 })
 
-var linter = ruleTester.linter || eslint.linter
+const linter = ruleTester.linter || eslint.linter
 linter.defineRule('jsx-uses-vars', rule)
 
 // ------------------------------------------------------------------------------
@@ -31,7 +31,6 @@ linter.defineRule('jsx-uses-vars', rule)
 // ------------------------------------------------------------------------------
 
 ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
-
   valid: [
     {
       code: `
@@ -45,7 +44,8 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `
-    }, {
+    },
+    {
       code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.vue';
@@ -69,7 +69,8 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           }
         }
       `
-    }, {
+    },
+    {
       code: `
         /* eslint jsx-uses-vars: 1 */
         export default {
@@ -94,10 +95,13 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `,
-      errors: [{
-        message: "'SomeComponent' is defined but never used."
-      }]
-    }, {
+      errors: [
+        {
+          message: "'SomeComponent' is defined but never used."
+        }
+      ]
+    },
+    {
       code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
@@ -111,9 +115,11 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `,
-      errors: [{
-        message: "'wrapper' is assigned a value but never used."
-      }]
+      errors: [
+        {
+          message: "'wrapper' is assigned a value but never used."
+        }
+      ]
     }
   ]
 })

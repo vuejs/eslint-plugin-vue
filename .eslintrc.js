@@ -1,8 +1,7 @@
 'use strict'
 
 module.exports = {
-  // https://github.com/eslint/eslint/issues/11888
-  root: false,
+  root: true,
   parserOptions: {
     ecmaVersion: 6
   },
@@ -12,28 +11,46 @@ module.exports = {
   },
   extends: [
     'plugin:eslint-plugin/recommended',
-    'plugin:vue-libs/recommended'
+    'plugin:vue-libs/recommended',
+    'prettier'
   ],
-  plugins: [
-    'eslint-plugin'
-  ],
+  plugins: ['eslint-plugin', 'prettier'],
   rules: {
-    'eslint-plugin/report-message-format': ['error', '^[A-Z`\'{].*\\.$'],
+    'prettier/prettier': 'error',
+    'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
     'eslint-plugin/prefer-placeholders': 'error',
     'eslint-plugin/consistent-output': 'error',
-    'no-mixed-operators': 'error'
-  },
 
-  overrides: [{
-    files: ['lib/rules/*.js'],
-    rules: {
-      "consistent-docs-description": "error",
-      "no-invalid-meta": "error",
-      "no-invalid-meta-docs-categories": "error",
-      'eslint-plugin/require-meta-type': 'error',
-      "require-meta-docs-url": ["error", {
-        "pattern": `https://eslint.vuejs.org/rules/{{name}}.html`
-      }]
+    'no-debugger': 'error',
+    'no-console': 'error',
+    'no-alert': 'error',
+    'no-void': 'error',
+
+    'no-warning-comments': 'warn',
+    'no-var': 'error',
+    'prefer-template': 'error',
+    'object-shorthand': 'error',
+    'prefer-rest-params': 'error',
+    'prefer-arrow-callback': 'error',
+    'prefer-spread': 'error',
+
+    'dot-notation': 'error'
+  },
+  overrides: [
+    {
+      files: ['lib/rules/*.js'],
+      rules: {
+        'consistent-docs-description': 'error',
+        'no-invalid-meta': 'error',
+        'no-invalid-meta-docs-categories': 'error',
+        'eslint-plugin/require-meta-type': 'error',
+        'require-meta-docs-url': [
+          'error',
+          {
+            pattern: `https://eslint.vuejs.org/rules/{{name}}.html`
+          }
+        ]
+      }
     }
-  }]
+  ]
 }

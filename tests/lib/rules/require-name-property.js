@@ -52,10 +52,12 @@ ruleTester.run('require-name-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Required name property is not set.',
-        type: 'ObjectExpression'
-      }]
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression'
+        }
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -65,10 +67,12 @@ ruleTester.run('require-name-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Required name property is not set.',
-        type: 'ObjectExpression'
-      }]
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression'
+        }
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -80,10 +84,12 @@ ruleTester.run('require-name-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Required name property is not set.',
-        type: 'ObjectExpression'
-      }]
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression'
+        }
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -93,10 +99,12 @@ ruleTester.run('require-name-property', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Required name property is not set.',
-        type: 'ObjectExpression'
-      }]
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression'
+        }
+      ]
     }
   ]
 })

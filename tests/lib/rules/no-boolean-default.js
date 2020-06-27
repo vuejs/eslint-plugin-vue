@@ -8,22 +8,21 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-boolean-default')
+const rule = require('../../../lib/rules/no-boolean-default')
 
-var RuleTester = require('eslint').RuleTester
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   }
 })
 ruleTester.run('no-boolean-default', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -247,10 +246,12 @@ ruleTester.run('no-boolean-default', rule, {
         }
       `,
       options: ['default-false'],
-      errors: [{
-        message: 'Boolean prop should only be defaulted to false.',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -265,10 +266,12 @@ ruleTester.run('no-boolean-default', rule, {
         }
       `,
       options: ['default-false'],
-      errors: [{
-        message: 'Boolean prop should only be defaulted to false.',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -283,10 +286,13 @@ ruleTester.run('no-boolean-default', rule, {
         }
       `,
       options: ['no-default'],
-      errors: [{
-        message: 'Boolean prop should not set a default (Vue defaults it to false).',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -301,10 +307,13 @@ ruleTester.run('no-boolean-default', rule, {
         }
       `,
       options: ['no-default'],
-      errors: [{
-        message: 'Boolean prop should not set a default (Vue defaults it to false).',
-        line: 6
-      }]
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 6
+        }
+      ]
     }
   ]
 })

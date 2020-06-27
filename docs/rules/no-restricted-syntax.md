@@ -25,11 +25,11 @@ Forbids call expressions inside mustache interpolation.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <div> {{ foo }} </div>
   <div> {{ foo.bar }} </div>
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div> {{ foo() }} </div>
   <div> {{ foo.bar() }} </div>
   <div> {{ foo().bar }} </div>
@@ -53,3 +53,5 @@ Forbids call expressions inside mustache interpolation.
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-syntax.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-restricted-syntax.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/no-restricted-syntax)</sup>

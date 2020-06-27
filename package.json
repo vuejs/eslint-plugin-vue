@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "7.0.0-alpha.0",
+  "version": "7.0.0-alpha.6",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -8,10 +8,13 @@
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect-brk \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
+    "cover": "npm run cover:test && npm run cover:report",
+    "cover:test": "nyc npm run test:base -- --timeout 60000",
     "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "lint:fix": "eslint . --rulesdir eslint-internal-rules --fix",
-    "pretest": "npm run lint",
+    "pretsc": "node ./tools/setup-eslint-rule-types.js",
+    "tsc": "tsc",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
@@ -47,31 +50,40 @@
     "node": ">=8.10"
   },
   "peerDependencies": {
-    "eslint": "^5.0.0 || ^6.0.0"
+    "eslint": "^6.0.0 || ^7.0.0"
   },
   "dependencies": {
+    "@types/semver": "^7.2.0",
     "eslint-utils": "^2.0.0",
     "natural-compare": "^1.4.0",
-    "semver": "^5.6.0",
-    "vue-eslint-parser": "^7.0.0"
+    "semver": "^7.3.2",
+    "vue-eslint-parser": "^7.1.0"
   },
   "devDependencies": {
-    "@types/node": "^4.2.16",
-    "@typescript-eslint/parser": "^2.6.1",
-    "acorn": "^7.1.0",
-    "babel-eslint": "^10.0.2",
-    "chai": "^4.1.0",
-    "eslint": "^6.0.0",
-    "eslint-plugin-eslint-plugin": "^2.0.1",
-    "eslint-plugin-import": "^2.18.2",
+    "@types/eslint": "^7.2.0",
+    "@types/natural-compare": "^1.4.0",
+    "@types/node": "^13.13.5",
+    "@typescript-eslint/parser": "^3.0.2",
+    "@vuepress/plugin-pwa": "^1.4.1",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-eslint-plugin": "^2.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "file:.",
     "eslint-plugin-vue-libs": "^4.0.0",
-    "eslint4b": "^6.6.0",
-    "lodash": "^4.17.4",
-    "mocha": "^5.2.0",
-    "nyc": "^12.0.2",
-    "typescript": "^3.5.2",
-    "vue-eslint-editor": "^0.1.4",
-    "vuepress": "^0.14.5"
+    "eslint4b": "^7.0.0",
+    "lodash": "^4.17.15",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.5",
+    "vue-eslint-editor": "^1.1.0",
+    "vuepress": "^1.4.1"
+  },
+  "publishConfig": {
+    "tag": "next"
   }
 }
