@@ -180,7 +180,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         el: test.el
       })`,
       parserOptions
-    },
+    }
   ],
   invalid: [
     {
