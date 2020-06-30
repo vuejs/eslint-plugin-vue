@@ -91,6 +91,12 @@ tester.run('no-watch-after-await', rule, {
       }
       </script>
       `
+    },
+    {
+      code: `
+      Vue.component('test', {
+        el: foo()
+      })`
     }
   ],
   invalid: [
