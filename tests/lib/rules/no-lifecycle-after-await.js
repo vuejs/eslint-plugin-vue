@@ -81,22 +81,6 @@ tester.run('no-lifecycle-after-await', rule, {
       </script>
       `
     },
-    // works on @vue/composition-api
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-      import {onMounted} from '@vue/composition-api'
-      export default {
-        async _setup() {
-          await doSomething()
-
-          onMounted(() => { /* ... */ }) // error
-        }
-      }
-      </script>
-      `
-    },
     // has target
     {
       filename: 'test.vue',
@@ -130,32 +114,6 @@ tester.run('no-lifecycle-after-await', rule, {
       code: `
       <script>
       import {onMounted} from 'vue'
-      export default {
-        async setup() {
-          await doSomething()
-
-          onMounted(() => { /* ... */ }) // error
-        }
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'The lifecycle hooks after `await` expression are forbidden.',
-          line: 8,
-          column: 11,
-          endLine: 8,
-          endColumn: 41
-        }
-      ]
-    },
-    // works on @vue/composition-api
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-      import {onMounted} from '@vue/composition-api'
       export default {
         async setup() {
           await doSomething()

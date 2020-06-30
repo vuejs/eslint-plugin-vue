@@ -56,22 +56,6 @@ tester.run('no-watch-after-await', rule, {
       </script>
       `
     },
-    // works on @vue/composition-api
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-      import {watch, watchEffect} from '@vue/composition-api'
-      export default {
-        async setup() {
-          watchEffect(() => { /* ... */ })
-          watch(foo, () => { /* ... */ })
-          await doSomething()
-        }
-      }
-      </script>
-      `
-    },
     {
       filename: 'test.vue',
       code: `
@@ -115,31 +99,6 @@ tester.run('no-watch-after-await', rule, {
       code: `
       <script>
       import {watch} from 'vue'
-      export default {
-        async setup() {
-          await doSomething()
-
-          watch(foo, () => { /* ... */ }) // error
-        }
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message: 'The `watch` after `await` expression are forbidden.',
-          line: 8,
-          column: 11,
-          endLine: 8,
-          endColumn: 42
-        }
-      ]
-    },
-    // works on @vue/composition-api
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-      import {watch} from '@vue/composition-api'
       export default {
         async setup() {
           await doSomething()
