@@ -83,7 +83,8 @@ tester.run('padding-line-between-blocks', rule, {
       <style></style>
       `,
       options: ['never']
-    }
+    },
+    `var a = 1`
   ],
   invalid: [
     {

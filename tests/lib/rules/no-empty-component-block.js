@@ -22,7 +22,8 @@ tester.run('no-empty-component-block', rule, {
     `<template src="./template.html"></template><script src="./script.js"></script>`,
     `<template src="./template.html" /><script src="./script.js" />`,
     `<template src="./template.html"></template><script src="./script.js"></script><style src="./style.css"></style>`,
-    `<template src="./template.html" /><script src="./script.js" /><style src="./style.css" />`
+    `<template src="./template.html" /><script src="./script.js" /><style src="./style.css" />`,
+    `var a = 1`
   ],
   invalid: [
     {
