@@ -17,7 +17,7 @@ export interface ParserServices {
     templateBodyVisitor: TemplateListener,
     scriptVisitor?: eslint.Rule.RuleListener
   ) => eslint.Rule.RuleListener
-  getDocumentFragment?: () => VAST.VDocumentFragment
+  getDocumentFragment?: () => VAST.VDocumentFragment | null
 }
 export namespace ParserServices {
   export interface TokenStore {
