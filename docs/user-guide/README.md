@@ -272,7 +272,9 @@ If you are using JSX, you need to enable JSX in your ESLint configuration.
 ```diff
   "parserOptions": {
       "ecmaVersion": 2020,
-+     "jsx": true
+      "ecmaFeatures": {
++         "jsx": true
+      }
   }
 ```
 
