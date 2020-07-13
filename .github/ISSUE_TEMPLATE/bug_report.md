@@ -10,7 +10,7 @@ about: Create a report to help us improve
   To make sure it's not, run: yarn eslint src/your-file.vue
 -->
 
-**Tell us about your environment** 
+**Tell us about your environment**
 * **ESLint version:** 
 * **eslint-plugin-vue version:** 
 * **Node version:** 
