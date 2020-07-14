@@ -173,6 +173,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      code: `const test = { el: '#app' }
+        Vue.component('test', {
+        el: test.el
+      })`,
+      parserOptions
     }
   ],
   invalid: [

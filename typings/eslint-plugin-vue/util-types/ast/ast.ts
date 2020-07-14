@@ -12,32 +12,104 @@ export type VNodeListenerMap = {
   'VAttribute:exit': V.VAttribute | V.VDirective
   'VAttribute[directive=false]': V.VAttribute
   'VAttribute[directive=false]:exit': V.VAttribute
-  "VAttribute[directive=true][key.name.name='bind']": V.VDirective
-  "VAttribute[directive=true][key.name.name='bind']:exit": V.VDirective
+  "VAttribute[directive=true][key.name.name='bind']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & {
+          expression: ES.Expression | V.VFilterSequenceExpression | null
+        })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='bind']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & {
+          expression: ES.Expression | V.VFilterSequenceExpression | null
+        })
+      | null
+  }
   "VAttribute[directive=true][key.name.name='cloak']": V.VDirective
   "VAttribute[directive=true][key.name.name='cloak']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='else-if']": V.VDirective
-  "VAttribute[directive=true][key.name.name='else-if']:exit": V.VDirective
+  "VAttribute[directive=true][key.name.name='else-if']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='else-if']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
   "VAttribute[directive=true][key.name.name='else']": V.VDirective
   "VAttribute[directive=true][key.name.name='else']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='for']": V.VDirective
-  "VAttribute[directive=true][key.name.name='for']:exit": V.VDirective
+  "VAttribute[directive=true][key.name.name='for']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: V.VForExpression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='for']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: V.VForExpression | null })
+      | null
+  }
   "VAttribute[directive=true][key.name.name='html']": V.VDirective
   "VAttribute[directive=true][key.name.name='html']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='if']": V.VDirective
-  "VAttribute[directive=true][key.name.name='if']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='model']": V.VDirective
-  "VAttribute[directive=true][key.name.name='model']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='on']": V.VDirective
-  "VAttribute[directive=true][key.name.name='on']:exit": V.VDirective
+  "VAttribute[directive=true][key.name.name='if']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='if']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='model']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='model']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='on']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & {
+          expression: ES.Expression | V.VOnExpression | null
+        })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='on']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & {
+          expression: ES.Expression | V.VOnExpression | null
+        })
+      | null
+  }
   "VAttribute[directive=true][key.name.name='once']": V.VDirective
   "VAttribute[directive=true][key.name.name='once']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='pre']": V.VDirective
   "VAttribute[directive=true][key.name.name='pre']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='show']": V.VDirective
-  "VAttribute[directive=true][key.name.name='show']:exit": V.VDirective
-  "VAttribute[directive=true][key.name.name='slot']": V.VDirective
-  "VAttribute[directive=true][key.name.name='slot']:exit": V.VDirective
+  "VAttribute[directive=true][key.name.name='show']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='show']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: ES.Expression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='slot']": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: V.VSlotScopeExpression | null })
+      | null
+  }
+  "VAttribute[directive=true][key.name.name='slot']:exit": V.VDirective & {
+    value:
+      | (V.VExpressionContainer & { expression: V.VSlotScopeExpression | null })
+      | null
+  }
   "VAttribute[directive=true][key.name.name='text']": V.VDirective
   "VAttribute[directive=true][key.name.name='text']:exit": V.VDirective
   'VAttribute[value!=null]':

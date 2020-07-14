@@ -17,7 +17,7 @@ See: https://vue-loader.vuejs.org/spec.html#src-imports
 <eslint-code-block :rules="{'vue/no-empty-component-block': ['error']}">
 
 ```vue
-// ✓ GOOD
+<!-- ✓ GOOD -->
 <template>
   <p>foo</p>
 </template>
@@ -42,7 +42,7 @@ See: https://vue-loader.vuejs.org/spec.html#src-imports
 <style src="./style.css" />
 
 
-// ✗ BAD
+<!-- ✗ BAD -->
 <template></template>
 <template />
 <template src="" />

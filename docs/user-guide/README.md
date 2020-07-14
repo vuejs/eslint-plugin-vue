@@ -65,7 +65,7 @@ eslint "src/**/*.{js,vue}"
 If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint), you should have the `lint` script added to your `package.json`. That means you can just run `yarn lint` or `npm run lint`.
 :::
 
-#### How to use a custom parser?
+### How to use a custom parser?
 
 If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `parserOptions.parser` option instead of the `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, this plugin doesn't work if you overwrite the `parser` option.
 
@@ -197,7 +197,7 @@ If you already use another parser (e.g. `"parser": "babel-eslint"`), please move
 + "parser": "vue-eslint-parser",
   "parserOptions": {
 +     "parser": "babel-eslint",
-      "ecmaVersion": 2017,
+      "ecmaVersion": 2020,
       "sourceType": "module"
   }
 ```
@@ -264,3 +264,22 @@ module.exports = {
 
 [prettier]: https://prettier.io/
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
+
+### Using JSX.
+
+If you are using JSX, you need to enable JSX in your ESLint configuration.
+
+```diff
+  "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
++         "jsx": true
+      }
+  }
+```
+
+See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide/configuring#specifying-parser-options).
+
+The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.  
+See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
+Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`) when using `jsx: true`.
