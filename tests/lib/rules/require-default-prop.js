@@ -179,6 +179,21 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `
+    },
+
+    // sparse array
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            a: {
+              type: [,Boolean]
+            },
+            b: [,Boolean],
+          }
+        }
+      `
     }
   ],
 

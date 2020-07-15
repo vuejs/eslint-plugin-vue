@@ -43,6 +43,17 @@ ruleTester.run('no-multiple-objects-in-class', rule, {
           type: 'VAttribute'
         }
       ]
+    },
+
+    // sparse array
+    {
+      code: `<template><div v-bind:class="[,{'foo': isFoo}, {'bar': isBar}]" /></template>`,
+      errors: [
+        {
+          message: 'Unexpected multiple objects. Merge objects.',
+          type: 'VAttribute'
+        }
+      ]
     }
   ]
 })
