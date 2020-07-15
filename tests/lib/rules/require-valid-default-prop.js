@@ -181,6 +181,20 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       parserOptions
+    },
+
+    // sparse array
+    {
+      filename: 'test.vue',
+      code: `export default {
+        props: {
+          foo: {
+            type: [,Object, Number],
+            default: 10
+          }
+        }
+      }`,
+      parserOptions
     }
   ],
 

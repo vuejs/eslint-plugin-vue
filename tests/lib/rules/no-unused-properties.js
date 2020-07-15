@@ -981,6 +981,21 @@ tester.run('no-unused-properties', rule, {
         }
       </script>`,
       options: [{ groups: ['props', 'setup'] }]
+    },
+
+    // sparse array
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ count }}</div>
+        </template>
+        <script>
+          export default {
+            props: [, 'count']
+          }
+        </script>
+      `
     }
   ],
 
