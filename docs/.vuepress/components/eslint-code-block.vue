@@ -32,7 +32,7 @@ export default {
     },
     rules: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     },
@@ -46,7 +46,7 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       linter: null,
       preprocess: processors['.vue'].preprocess,
@@ -59,7 +59,7 @@ export default {
   },
 
   computed: {
-    config () {
+    config() {
       return {
         globals: {
           // ES2015 globals
@@ -98,33 +98,30 @@ export default {
       }
     },
 
-    code () {
+    code() {
       return `${this.computeCodeFromSlot(this.$slots.default).trim()}\n`
     },
 
-    height () {
+    height() {
       const lines = this.code.split('\n').length
       return `${Math.max(120, 19 * lines)}px`
     }
   },
 
   methods: {
-    computeCodeFromSlot (nodes) {
+    computeCodeFromSlot(nodes) {
       if (!Array.isArray(nodes)) {
         return ''
       }
-      return nodes.map(node =>
-        node.text || this.computeCodeFromSlot(node.children)
-      ).join('')
+      return nodes
+        .map((node) => node.text || this.computeCodeFromSlot(node.children))
+        .join('')
     }
   },
 
-  async mounted () {
+  async mounted() {
     // Load linter.
-    const [
-      { default: Linter },
-      { parseForESLint }
-    ] = await Promise.all([
+    const [{ default: Linter }, { parseForESLint }] = await Promise.all([
       import('eslint4b/dist/linter'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])

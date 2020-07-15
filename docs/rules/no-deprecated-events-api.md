@@ -26,7 +26,15 @@ export default {
     this.$emit('start')
   }
 }
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-deprecated-events-api': ['error']}">
+
+```vue
+<script>
 /* ✓ GOOD */
 import mitt from 'mitt'
 const emitter = mitt()

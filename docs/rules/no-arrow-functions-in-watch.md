@@ -40,7 +40,7 @@ export default {
         /* ... */
       }
     ],
-    'e.f': function (val, oldVal) { /* ... */ }
+    'e.f': function (val, oldVal) { /* ... */ },
 
     /* ✗ BAD */
     foo: (val, oldVal) => {
