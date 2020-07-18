@@ -8,5 +8,6 @@
         "javascriptreact",
         "vue"
     ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "vetur.validation.script": false
 }
