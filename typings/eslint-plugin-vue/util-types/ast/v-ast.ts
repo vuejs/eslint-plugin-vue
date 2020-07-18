@@ -102,7 +102,7 @@ export interface VIdentifier extends HasParentNode {
 }
 export interface VDirectiveKey extends HasParentNode {
   type: 'VDirectiveKey'
-  parent: VAttribute
+  parent: VDirective
   name: VIdentifier
   argument: VExpressionContainer | VIdentifier | null
   modifiers: VIdentifier[]
