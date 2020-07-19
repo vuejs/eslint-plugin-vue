@@ -15,7 +15,7 @@ description: enforce order of attributes
 This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
 
 - `DEFINITION`
-  e.g. 'is'
+  e.g. 'is', 'v-is'
 - `LIST_RENDERING`
   e.g. 'v-for item in items'
 - `CONDITIONALS`
