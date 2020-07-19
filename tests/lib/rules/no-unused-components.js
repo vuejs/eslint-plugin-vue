@@ -471,6 +471,21 @@ tester.run('no-unused-components', rule, {
           }
         }
       </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-is="'CustomComponent'" />
+        </template>
+        <script>
+        export default {
+          components: {
+            CustomComponent
+          }
+        }
+        </script>
+      `
     }
   ],
   invalid: [

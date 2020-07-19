@@ -932,6 +932,17 @@ tester.run('attributes-order', rule, {
           message: 'Attribute "v-foo.a" should go before "v-foo.b".'
         }
       ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: '<template><div v-cloak v-is="foo"></div></template>',
+      output: '<template><div v-is="foo" v-cloak></div></template>',
+      errors: [
+        {
+          message: 'Attribute "v-is" should go before "v-cloak".'
+        }
+      ]
     }
   ]
 })
