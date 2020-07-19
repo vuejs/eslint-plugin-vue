@@ -62,6 +62,8 @@ export type VNodeListenerMap = {
       | (V.VExpressionContainer & { expression: ES.Expression | null })
       | null
   }
+  "VAttribute[directive=true][key.name.name='is']": V.VDirective
+  "VAttribute[directive=true][key.name.name='is']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='model']": V.VDirective & {
     value:
       | (V.VExpressionContainer & { expression: ES.Expression | null })
