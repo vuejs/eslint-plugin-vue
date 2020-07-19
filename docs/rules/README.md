@@ -129,6 +129,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
+| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
 | [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
 | [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: |
@@ -306,7 +307,6 @@ For example:
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
-| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
