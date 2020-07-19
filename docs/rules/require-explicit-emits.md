@@ -7,6 +7,8 @@ description: require `emits` option with name triggered by `$emit()`
 # vue/require-explicit-emits
 > require `emits` option with name triggered by `$emit()`
 
+- :gear: This rule is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 ## :book: Rule Details
 
 This rule reports event triggers not declared with the `emits` option. (The `emits` option is a new in Vue.js 3.0.0+)
