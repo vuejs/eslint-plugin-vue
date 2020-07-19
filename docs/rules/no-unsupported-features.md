@@ -30,6 +30,7 @@ The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.0.0+
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
+    - `"v-id"` ... [v-is](https://v3.vuejs.org/api/directives.html#v-is) directive.
   - Vue.js 2.6.0+
     - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments).
     - `"v-slot"` ... [v-slot](https://v3.vuejs.org/api/directives.html#v-slot) directive.
@@ -90,6 +91,7 @@ The `"ignores"` option accepts an array of the following strings.
 
 ## :books: Further Reading
 
+- [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
 - [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
 - [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
 - [API (for v2) - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
