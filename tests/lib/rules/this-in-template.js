@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 function createValidTests(prefix, options) {
@@ -188,11 +188,18 @@ ruleTester.run('this-in-template', rule, {
   valid: ['', '<template></template>', '<template><div></div></template>']
     .concat(createValidTests('', []))
     .concat(createValidTests('', ['never']))
-    .concat(createValidTests('this.', ['always'])),
+    .concat(createValidTests('this.', ['always']))
+    .concat(createValidTests('this?.', ['always'])),
   invalid: []
     .concat(
       createInvalidTests(
         'this.',
+        [],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      ),
+      createInvalidTests(
+        'this?.',
         [],
         "Unexpected usage of 'this'.",
         'ThisExpression'
@@ -201,6 +208,12 @@ ruleTester.run('this-in-template', rule, {
     .concat(
       createInvalidTests(
         'this.',
+        ['never'],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      ),
+      createInvalidTests(
+        'this?.',
         ['never'],
         "Unexpected usage of 'this'.",
         'ThisExpression'

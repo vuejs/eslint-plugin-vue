@@ -17,7 +17,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
@@ -51,6 +51,16 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
           endColumn: 20
         }
       ]
+    },
+    {
+      filename: 'test.js',
+      code: 'Vue?.config?.keyCodes',
+      errors: ['`Vue.config.keyCodes` are deprecated.']
+    },
+    {
+      filename: 'test.js',
+      code: '(Vue?.config)?.keyCodes',
+      errors: ['`Vue.config.keyCodes` are deprecated.']
     }
   ]
 })

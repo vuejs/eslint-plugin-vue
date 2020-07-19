@@ -348,6 +348,52 @@ ruleTester.run('no-mutating-props', rule, {
       code: `
         <template>
           <div>
+            <div v-text="prop1?.shift?.()"></div>
+            <div v-text="prop2?.slice?.(0)?.shift?.()"></div>
+            <div v-if="this?.prop3"></div>
+            <div v-if="this?.prop4 < 10"></div>
+            <div v-text="this?.prop5?.shift?.()"></div>
+            <div v-text="this?.prop6?.slice?.(0)?.shift?.()"></div>
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6']
+          }
+        </script>
+      `,
+      errors: [
+        'Unexpected mutation of "prop1" prop.',
+        'Unexpected mutation of "prop5" prop.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div v-text="(prop1?.shift)?.()"></div>
+            <div v-text="(this?.prop2)?.shift?.()"></div>
+            <div v-text="(this?.prop3?.shift)?.()"></div>
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop1', 'prop2', 'prop3']
+          }
+        </script>
+      `,
+      errors: [
+        'Unexpected mutation of "prop1" prop.',
+        'Unexpected mutation of "prop2" prop.',
+        'Unexpected mutation of "prop3" prop.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
             <input v-model="prop1.text">
             <input v-model="prop2">
             <input v-model="this.prop3.text">
@@ -417,6 +463,28 @@ ruleTester.run('no-mutating-props', rule, {
           message: 'Unexpected mutation of "items" prop.',
           line: 18
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            methods: {
+              openModal() {
+                this?.foo?.push?.('something')
+                ;(this?.bar)?.push?.('something')
+                ;(this?.baz?.push)?.('something')
+              }
+            }
+          }
+        </script>
+      `,
+      errors: [
+        'Unexpected mutation of "foo" prop.',
+        'Unexpected mutation of "bar" prop.',
+        'Unexpected mutation of "baz" prop.'
       ]
     },
     {

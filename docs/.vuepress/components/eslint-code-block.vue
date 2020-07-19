@@ -89,7 +89,7 @@ export default {
         rules: this.rules,
         parser: 'vue-eslint-parser',
         parserOptions: {
-          ecmaVersion: 2019,
+          ecmaVersion: 2020,
           sourceType: 'module',
           ecmaFeatures: {
             jsx: true

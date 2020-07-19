@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/v-on-function-call')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 tester.run('v-on-function-call', rule, {
@@ -106,6 +106,11 @@ tester.run('v-on-function-call', rule, {
         <div @click="fn() /* comment */"></div>
       </template>`,
       options: ['never', { ignoreIncludesComment: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div @click="foo?.()"></div></template>',
+      options: ['never']
     }
   ],
   invalid: [

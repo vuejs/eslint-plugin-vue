@@ -11,7 +11,7 @@
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -148,7 +148,8 @@ ruleTester.run('require-default-prop', rule, {
           props: {
             bar,
             baz: prop,
-            bar1: foo()
+            baz1: prop.foo,
+            bar2: foo()
           }
         }
       `
@@ -285,7 +286,7 @@ ruleTester.run('require-default-prop', rule, {
       ]
     },
 
-    // computed propertys
+    // computed properties
     {
       filename: 'test.vue',
       code: `
@@ -370,6 +371,22 @@ ruleTester.run('require-default-prop', rule, {
         }
       `,
       errors: ["Prop 'foo' requires default value to be set."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            bar,
+            baz: prop?.foo,
+            bar1: foo?.(),
+          }
+        }
+      `,
+      errors: [
+        "Prop 'baz' requires default value to be set.",
+        "Prop 'bar1' requires default value to be set."
+      ]
     }
   ]
 })

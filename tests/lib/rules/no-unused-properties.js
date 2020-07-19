@@ -995,6 +995,41 @@ tester.run('no-unused-properties', rule, {
             props: [, 'count']
           }
         </script>
+        `
+    },
+    // optional chaining
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import { ref, onMounted } from 'vue'
+
+        export default {
+          props: ['foo', 'bar'],
+          methods: {
+            fn () {
+              fn(this)
+            }
+          }
+        }
+
+        function fn(a) {
+          return a?.foo + a?.bar
+        }
+      </script>`
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo', 'bar'],
+        render: function (createElement, ctx) {
+          const a = ctx
+          const b = a?.props?.foo
+          const c = (a?.props)?.bar
+        }
+      })
       `
     }
   ],

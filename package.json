@@ -50,10 +50,10 @@
     "node": ">=8.10"
   },
   "peerDependencies": {
-    "eslint": "^6.0.0 || ^7.0.0"
+    "eslint": "^6.2.0 || ^7.0.0"
   },
   "dependencies": {
-    "eslint-utils": "^2.0.0",
+    "eslint-utils": "^2.1.0",
     "natural-compare": "^1.4.0",
     "semver": "^7.3.2",
     "vue-eslint-parser": "^7.1.0"

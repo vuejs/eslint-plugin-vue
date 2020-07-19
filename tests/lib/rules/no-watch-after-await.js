@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-watch-after-await')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-watch-after-await', rule, {
@@ -97,6 +97,27 @@ tester.run('no-watch-after-await', rule, {
       Vue.component('test', {
         el: foo()
       })`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+          const a = watchEffect?.(() => { /* ... */ })
+          const b = watch?.(foo, () => { /* ... */ })
+          c = watch?.()
+          d(watch?.())
+          e = {
+            foo: watch?.()
+          }
+          f = [watch?.()]
+        }
+      }
+      </script>
+      `
     }
   ],
   invalid: [

@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-lifecycle-after-await')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-lifecycle-after-await', rule, {
@@ -202,6 +202,26 @@ tester.run('no-lifecycle-after-await', rule, {
         {
           messageId: 'forbidden',
           line: 18
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {onMounted} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          onMounted?.(() => { /* ... */ }) // error
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'forbidden'
         }
       ]
     }

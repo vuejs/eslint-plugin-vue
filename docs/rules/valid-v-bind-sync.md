@@ -15,7 +15,8 @@ This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
 This rule reports `.sync` modifier on `v-bind` directives in the following cases:
 
-- The `.sync` modifier does not have the attribute value which is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`
+- The `.sync` modifier does not have the attribute value which is valid as LHS. E.g. `<MyComponent v-bind:aaa.sync="foo() + bar()" />`, `<MyComponent v-bind:aaa.sync="a?.b" />`
+- The `.sync` modifier has potential null object property access. E.g. `<MyComponent v-bind:aaa.sync="(a?.b).c" />`
 - The `.sync` modifier is on non Vue-components. E.g. `<input v-bind:aaa.sync="foo"></div>`
 - The `.sync` modifier's reference is iteration variables. E.g. `<div v-for="x in list"><MyComponent v-bind:aaa.sync="x" /></div>`
 
@@ -35,6 +36,9 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
   <!-- ✗ BAD -->
   <MyComponent v-bind:aaa.sync="foo + bar" />
   <MyComponent :aaa.sync="foo + bar" />
+
+  <MyComponent :aaa.sync="a?.b.c" />
+  <MyComponent :aaa.sync="(a?.b).c" />
 
   <input v-bind:aaa.sync="foo">
   <input :aaa.sync="foo">
