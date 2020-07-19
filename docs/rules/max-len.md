@@ -317,7 +317,7 @@ var longRegExpLiteral = /this is a really really really really really long regul
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [max-len]
 

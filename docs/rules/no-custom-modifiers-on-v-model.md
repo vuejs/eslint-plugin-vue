@@ -11,7 +11,7 @@ description: disallow custom modifiers on v-model used on the component
 
 This rule checks whether `v-model `used on the component do not have custom modifiers.
 
-## Rule Details
+## :book: Rule Details
 
 This rule reports `v-model` directives in the following cases:
 
@@ -37,15 +37,15 @@ This rule reports `v-model` directives in the following cases:
 
 </eslint-code-block>
 
-### Options
+## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-model]
+- [vue/valid-v-model]
 
-[valid-v-model]: valid-v-model.md
+[vue/valid-v-model]: ./valid-v-model.md
 
 ## :mag: Implementation
 

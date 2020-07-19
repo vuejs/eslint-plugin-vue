@@ -73,7 +73,7 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [List of reserved keys](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json)
 

@@ -39,7 +39,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [vuejs/vue#9468](https://github.com/vuejs/vue/issues/9468#issuecomment-462210146)
 

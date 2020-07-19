@@ -66,9 +66,12 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [API - data](https://vuejs.org/v2/api/#data)
+
+- [Style guide (for v2) - Component data](https://vuejs.org/v2/style-guide/#Component-data-essential)
+- [API - data](https://v3.vuejs.org/api/options-data.html#data-2)
+- [API (for v2) - data](https://v3.vuejs.org/api/options-data.html#data-2)
 
 ## :mag: Implementation
 

@@ -74,7 +74,7 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 </eslint-code-block>
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-useless-v-bind]
 - [vue/no-useless-concat]

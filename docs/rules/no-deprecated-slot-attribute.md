@@ -35,7 +35,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [API - slot](https://vuejs.org/v2/api/#slot-deprecated)
 

@@ -60,9 +60,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Computed Caching vs Methods](https://vuejs.org/v2/guide/computed.html#Computed-Caching-vs-Methods)
+- [Guide - Computed Caching vs Methods](https://v3.vuejs.org/guide/computed.html#computed-caching-vs-methods)
 
 ## :mag: Implementation
 

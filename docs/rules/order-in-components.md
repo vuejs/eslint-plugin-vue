@@ -13,7 +13,7 @@ description: enforce order of properties in components
 ## :book: Rule Details
 
 This rule makes sure you keep declared order of properties in components.
-Recommended order of properties can be [found here](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended).
+Recommended order of properties can be [found here](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended).
 
 <eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">
 
@@ -103,15 +103,16 @@ export default {
 
 - `order` (`(string | string[])[]`) ... The order of properties. Elements are the property names or one of the following groups:
 
-  - `LIFECYCLE_HOOKS`: [Vue Lifecycle Events](https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram), in the order they are called
+  - `LIFECYCLE_HOOKS`: [Vue Lifecycle Events](https://v3.vuejs.org/guide/instance.html#lifecycle-diagram), in the order they are called
   - `ROUTER_GUARDS`: [Vue Router Navigation Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards), in the order they are called
 
   If an element is an array of strings, it means any of those can be placed there unordered. Default is above.
 
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
+- [Style guide - Component/instance options order](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended)
+- [Style guide (for v2) - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
 
 ## :mag: Implementation
 

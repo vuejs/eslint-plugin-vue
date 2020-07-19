@@ -36,14 +36,14 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
 }
 ```
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/v-on-style](./v-on-style.md)
 - [vue/valid-v-on](./valid-v-on.md)
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - .exact Modifier](https://vuejs.org/v2/guide/events.html#exact-Modifier)
+- [Guide - .exact Modifier](https://v3.vuejs.org/guide/events.html#exact-modifier)
 
 ## :mag: Implementation
 

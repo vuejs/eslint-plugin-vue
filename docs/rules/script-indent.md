@@ -111,7 +111,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 
 </eslint-code-block>
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [indent](https://eslint.org/docs/rules/indent)
 - [vue/html-indent](./html-indent.md)

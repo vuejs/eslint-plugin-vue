@@ -91,9 +91,9 @@ Every option can be set to one of the following values:
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Self closing components](https://vuejs.org/v2/style-guide/#Self-closing-components-strongly-recommended)
+- [Style guide - Self closing components](https://v3.vuejs.org/style-guide/#Self-closing-components-strongly-recommended)
 
 ## :mag: Implementation
 

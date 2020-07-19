@@ -39,8 +39,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
+- [Guide - Composition API - Lifecycle Hooks](https://v3.vuejs.org/guide/composition-api-lifecycle-hooks.html)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
 
 ## :mag: Implementation

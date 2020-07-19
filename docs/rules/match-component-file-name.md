@@ -304,9 +304,9 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
- - [Style guide - Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended)
+ - [Style guide - Single-file component filename casing](https://v3.vuejs.org/style-guide/#single-file-component-filename-casing-strongly-recommended)
 
 ## :mag: Implementation
 

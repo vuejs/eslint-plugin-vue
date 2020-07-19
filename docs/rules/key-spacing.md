@@ -11,7 +11,7 @@ description: enforce consistent spacing between keys and values in object litera
 
 This rule is the same rule as core [key-spacing] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [key-spacing]
 

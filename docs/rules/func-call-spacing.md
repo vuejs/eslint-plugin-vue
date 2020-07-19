@@ -11,7 +11,7 @@ description: require or disallow spacing between function identifiers and their 
 
 This rule is the same rule as core [func-call-spacing] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [func-call-spacing]
 

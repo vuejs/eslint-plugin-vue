@@ -42,13 +42,13 @@ export default {
 
 </eslint-code-block>
 
-### Options
+## :wrench: Options
 
 Nothing.
 
-## Further Reading
+## :books: Further Reading
 
-- [API - inheritAttrs](https://vuejs.org/v2/api/index.html#inheritAttrs)
+- [API - inheritAttrs](https://v3.vuejs.org/api/options-misc.html#inheritattrs)
 
 ## :mag: Implementation
 

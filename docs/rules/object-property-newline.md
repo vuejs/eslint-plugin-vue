@@ -11,7 +11,7 @@ description: enforce placing object properties on separate lines
 
 This rule is the same rule as core [object-property-newline] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [object-property-newline]
 

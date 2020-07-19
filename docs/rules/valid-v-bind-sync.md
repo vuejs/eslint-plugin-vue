@@ -53,22 +53,22 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [no-parsing-error]
+- [vue/no-parsing-error]
 
-[no-parsing-error]: no-parsing-error.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
+- [Guide (for v2) - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 
 ## :mag: Implementation
 
