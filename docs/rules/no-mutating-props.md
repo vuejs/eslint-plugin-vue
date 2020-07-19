@@ -88,10 +88,10 @@ This rule reports mutation of component props.
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
+- [Style guide - Implicit parent-child communication](https://v3.vuejs.org/style-guide/#implicit-parent-child-communication-use-with-caution)
 - [Vue - Prop Mutation - deprecated](https://vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
-- [Style guide - Implicit parent-child communication](https://vuejs.org/v2/style-guide/#Implicit-parent-child-communication-use-with-caution)
 
 ## :mag: Implementation
 

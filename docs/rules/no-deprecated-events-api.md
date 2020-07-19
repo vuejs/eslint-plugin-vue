@@ -55,7 +55,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0020-events-api-change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0020-events-api-change.md)
 

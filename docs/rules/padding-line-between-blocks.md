@@ -124,7 +124,7 @@ export default {}
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [padding-line-between-statements]
 - [lines-between-class-members]

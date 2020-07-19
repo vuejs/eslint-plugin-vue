@@ -68,7 +68,7 @@ In Vue.js 3.x, the `<template>` elements that have no specific directives render
 
 If you are using Vue.js 3.x and want to define the `<template>` element intentionally, you will have to turn this rule off or use `"ignoreAccessible"` option.
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-template-key]
 - [no-lone-blocks]

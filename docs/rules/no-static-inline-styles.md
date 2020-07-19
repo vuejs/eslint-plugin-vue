@@ -59,9 +59,9 @@ The styles reported in this rule mean that we recommend separating them into `<s
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Binding Inline Styles](https://vuejs.org/v2/guide/class-and-style.html#Binding-Inline-Styles)
+- [Guide - Class and Style Bindings / Binding Inline Styles](https://v3.vuejs.org/guide/class-and-style.html#binding-inline-styles)
 
 ## :mag: Implementation
 

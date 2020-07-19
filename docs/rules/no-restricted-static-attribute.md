@@ -85,7 +85,7 @@ The following properties can be specified for the object.
 
 </eslint-code-block>
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-restricted-v-bind]
 

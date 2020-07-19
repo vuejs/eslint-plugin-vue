@@ -38,7 +38,7 @@ This rule reports deprecated `scope` attribute in Vue.js v2.5.0+.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [API - scope](https://vuejs.org/v2/api/#scope-removed)
 

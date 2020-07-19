@@ -46,9 +46,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Component files](https://vuejs.org/v2/style-guide/#Component-files-strongly-recommended)
+- [Style guide - Component files](https://v3.vuejs.org/style-guide/#component-files-strongly-recommended)
 
 ## :mag: Implementation
 

@@ -33,7 +33,7 @@ This rule extends the core [no-extra-parens] rule and applies it to the `<templa
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [no-extra-parens]
 

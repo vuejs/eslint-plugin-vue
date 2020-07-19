@@ -11,7 +11,7 @@ description: enforce consistent brace style for blocks
 
 This rule is the same rule as core [brace-style] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [brace-style]
 

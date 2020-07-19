@@ -85,11 +85,11 @@ There are two common cases where this can be tempting:
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Avoid v-if with v-for](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
-- [Guide - Conditional / v-if with v-for](https://vuejs.org/v2/guide/conditional.html#v-if-with-v-for)
-- [Guide - List / v-for with v-if](https://vuejs.org/v2/guide/list.html#v-for-with-v-if)
+- [Style guide - Avoid v-if with v-for](https://v3.vuejs.org/style-guide/#avoid-v-if-with-v-for-essential)
+- [Guide - Conditional Rendering / v-if with v-for](https://v3.vuejs.org/guide/conditional.html#v-if-with-v-for)
+- [Guide - List Rendering / v-for with v-if](https://v3.vuejs.org/guide/list.html#v-for-with-v-if)
 
 ## :mag: Implementation
 

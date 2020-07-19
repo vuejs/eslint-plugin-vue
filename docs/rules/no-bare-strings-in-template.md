@@ -74,7 +74,7 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
 - `attributes` ... An object whose keys are tag name or patterns and value is an array of attributes to check for that tag name.
 - `directives` ... An array of directive names to check literal value.
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-useless-v-bind]
 - [vue/no-useless-mustaches]

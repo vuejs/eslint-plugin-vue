@@ -61,9 +61,9 @@ Vue.component('baz', {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)
+- [Style guide - Prop definitions](https://v3.vuejs.org/style-guide/#prop-definitions-essential)
 
 ## :mag: Implementation
 

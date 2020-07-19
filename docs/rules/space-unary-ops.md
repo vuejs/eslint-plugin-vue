@@ -11,7 +11,7 @@ description: enforce consistent spacing before or after unary operators
 
 This rule is the same rule as core [space-unary-ops] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [space-unary-ops]
 

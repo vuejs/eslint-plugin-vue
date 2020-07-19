@@ -64,7 +64,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)
 

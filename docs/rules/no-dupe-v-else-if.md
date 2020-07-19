@@ -86,7 +86,7 @@ This rule can also detect some cases where the conditions are not identical, but
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [no-dupe-else-if]
 

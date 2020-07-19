@@ -36,9 +36,9 @@ This rule reports the `<template>` elements which have `key` attribute.
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [API - Special Attributes - key](https://vuejs.org/v2/api/#key)
+- [API - Special Attributes - key](https://v3.vuejs.org/api/special-attributes.html#key)
 
 ## :mag: Implementation
 
