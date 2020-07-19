@@ -92,6 +92,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/valid-v-for](./valid-v-for.md) | enforce valid `v-for` directives |  |
 | [vue/valid-v-html](./valid-v-html.md) | enforce valid `v-html` directives |  |
 | [vue/valid-v-if](./valid-v-if.md) | enforce valid `v-if` directives |  |
+| [vue/valid-v-is](./valid-v-is.md) | enforce valid `v-is` directives |  |
 | [vue/valid-v-model](./valid-v-model.md) | enforce valid `v-model` directives |  |
 | [vue/valid-v-on](./valid-v-on.md) | enforce valid `v-on` directives |  |
 | [vue/valid-v-once](./valid-v-once.md) | enforce valid `v-once` directives |  |
