@@ -1031,6 +1031,53 @@ tester.run('no-unused-properties', rule, {
         }
       })
       `
+    },
+    // handlers
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['foo', 'bar'],
+          watch: {
+            foo: 'updateFoo',
+            bar: {
+              handler: 'updateBar',
+              immediate: true
+            }
+          },
+          methods: {
+            updateFoo() {},
+            updateBar() {}
+          }
+        };
+      </script>
+      `,
+      options: [{ groups: ['props', 'methods'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['foo', 'bar'],
+          data () {
+            return {
+              updateFoo() {},
+              updateBar() {}
+            }
+          },
+          watch: {
+            foo: 'updateFoo',
+            bar: {
+              handler: 'updateBar',
+              immediate: true
+            }
+          }
+        };
+      </script>
+      `,
+      options: [{ groups: ['props', 'data'] }]
     }
   ],
 
