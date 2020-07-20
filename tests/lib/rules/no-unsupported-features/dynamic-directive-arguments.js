@@ -54,7 +54,7 @@ tester.run('no-unsupported-features/dynamic-directive-arguments', rule, {
       <template>
         <a :[href]="'/xxx'" />
       </template>`,
-      options: buildOptions({ version: '2.6.0-beta.2' })
+      options: buildOptions({ version: '^3.0.0' })
     }
   ],
   invalid: [

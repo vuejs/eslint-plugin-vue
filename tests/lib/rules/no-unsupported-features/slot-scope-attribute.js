@@ -70,7 +70,8 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are not supported until Vue.js "2.5.0".',
+          message:
+            '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
           line: 4
         }
       ]
@@ -86,7 +87,25 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
       output: null,
       errors: [
         {
-          message: '`slot-scope` are not supported until Vue.js "2.5.0".',
+          message:
+            '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <a slot-scope />
+        </LinkList>
+      </template>`,
+      options: buildOptions({ version: '^3.0.0' }),
+      output: null,
+      errors: [
+        {
+          message:
+            '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
           line: 4
         }
       ]
