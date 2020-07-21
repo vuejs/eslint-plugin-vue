@@ -351,68 +351,76 @@ export interface SequenceExpression extends HasParentNode {
   type: 'SequenceExpression'
   expressions: Expression[]
 }
+export type UnaryOperator = '-' | '+' | '!' | '~' | 'typeof' | 'void' | 'delete'
 export interface UnaryExpression extends HasParentNode {
   type: 'UnaryExpression'
-  operator: '-' | '+' | '!' | '~' | 'typeof' | 'void' | 'delete'
+  operator: UnaryOperator
   prefix: boolean
   argument: Expression
 }
+export type BinaryOperator =
+  | '=='
+  | '!='
+  | '==='
+  | '!=='
+  | '<'
+  | '<='
+  | '>'
+  | '>='
+  | '<<'
+  | '>>'
+  | '>>>'
+  | '+'
+  | '-'
+  | '*'
+  | '/'
+  | '%'
+  | '|'
+  | '^'
+  | '&'
+  | 'in'
+  | 'instanceof'
+  | '**'
 export interface BinaryExpression extends HasParentNode {
   type: 'BinaryExpression'
-  operator:
-    | '=='
-    | '!='
-    | '==='
-    | '!=='
-    | '<'
-    | '<='
-    | '>'
-    | '>='
-    | '<<'
-    | '>>'
-    | '>>>'
-    | '+'
-    | '-'
-    | '*'
-    | '/'
-    | '%'
-    | '**'
-    | '|'
-    | '^'
-    | '&'
-    | 'in'
-    | 'instanceof'
+  operator: BinaryOperator
   left: Expression
   right: Expression
 }
+export type AssignmentOperator =
+  | '='
+  | '+='
+  | '-='
+  | '*='
+  | '/='
+  | '%='
+  | '<<='
+  | '>>='
+  | '>>>='
+  | '|='
+  | '^='
+  | '&='
+  | '**='
+  | '||='
+  | '&&='
+  | '??='
 export interface AssignmentExpression extends HasParentNode {
   type: 'AssignmentExpression'
-  operator:
-    | '='
-    | '+='
-    | '-='
-    | '*='
-    | '/='
-    | '%='
-    | '**='
-    | '<<='
-    | '>>='
-    | '>>>='
-    | '|='
-    | '^='
-    | '&='
+  operator: AssignmentOperator
   left: Pattern
   right: Expression
 }
+export type UpdateOperator = '++' | '--'
 export interface UpdateExpression extends HasParentNode {
   type: 'UpdateExpression'
-  operator: '++' | '--'
+  operator: UpdateOperator
   argument: Expression
   prefix: boolean
 }
+export type LogicalOperator = '||' | '&&' | '??'
 export interface LogicalExpression extends HasParentNode {
   type: 'LogicalExpression'
-  operator: '||' | '&&' | '??'
+  operator: LogicalOperator
   left: Expression
   right: Expression
 }
