@@ -359,6 +359,27 @@ tester.run('require-explicit-emits', rule, {
       }
       </script>
       `
+    },
+    // allowProps
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['onFoo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
     }
   ],
   invalid: [
@@ -1550,6 +1571,41 @@ emits: {'foo': null}
       errors: [
         'The "foo" event has been triggered but not declared on `emits` option.',
         'The "bar" event has been triggered but not declared on `emits` option.'
+      ]
+    },
+    // allowProps
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }],
+      errors: [
+        {
+          line: 3,
+          messageId: 'missing'
+        },
+        {
+          line: 9,
+          messageId: 'missing'
+        },
+        {
+          line: 12,
+          messageId: 'missing'
+        }
       ]
     }
   ]
