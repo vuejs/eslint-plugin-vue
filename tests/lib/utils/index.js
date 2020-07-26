@@ -3,9 +3,7 @@
 const babelEslint = require('babel-eslint')
 const espree = require('espree')
 const utils = require('../../../lib/utils/index')
-const chai = require('chai')
-
-const assert = chai.assert
+const assert = require('assert')
 
 describe('getComputedProperties', () => {
   const parse = function (code) {
@@ -59,11 +57,11 @@ describe('getComputedProperties', () => {
       'it detects all computed properties'
     )
 
-    assert.notOk(computedProperties[0].value)
+    assert.ok(!computedProperties[0].value)
     assert.ok(computedProperties[1].value)
     assert.ok(computedProperties[2].value)
-    assert.notOk(computedProperties[3].value)
-    assert.notOk(computedProperties[4].value)
+    assert.ok(!computedProperties[3].value)
+    assert.ok(!computedProperties[4].value)
     assert.ok(computedProperties[5].value)
   })
 
@@ -108,7 +106,7 @@ describe('getComputedProperties', () => {
       'it detects all computed properties'
     )
 
-    assert.notOk(computedProperties[0].value)
+    assert.ok(!computedProperties[0].value)
   })
 })
 
@@ -418,19 +416,19 @@ describe('getComponentProps', () => {
 
     assert.ok(props[0].node.type === 'Literal')
     assert.deepEqual(props[0].key, props[0].node)
-    assert.notOk(props[0].value)
+    assert.ok(!props[0].value)
 
     assert.ok(props[1].node.type === 'Identifier')
-    assert.notOk(props[1].key)
-    assert.notOk(props[1].value)
+    assert.ok(!props[1].key)
+    assert.ok(!props[1].value)
 
     assert.ok(props[2].node.type === 'TemplateLiteral')
     assert.deepEqual(props[2].key, props[2].node)
-    assert.notOk(props[2].value)
+    assert.ok(!props[2].value)
 
     assert.ok(props[3].node.type === 'Literal')
-    assert.notOk(props[3].key)
-    assert.notOk(props[3].value)
+    assert.ok(!props[3].key)
+    assert.ok(!props[3].value)
   })
 })
 

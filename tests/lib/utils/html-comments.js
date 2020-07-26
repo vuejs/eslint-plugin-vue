@@ -2,10 +2,9 @@
 
 const fs = require('fs')
 const path = require('path')
-const chai = require('chai')
+const assert = require('assert')
 
 const Linter = require('eslint').Linter
-const assert = chai.assert
 
 const htmlComments = require('../../../lib/utils/html-comments')
 
