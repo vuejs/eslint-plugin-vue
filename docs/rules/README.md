@@ -230,7 +230,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: |
 | [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: |
 | [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: |
-| [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: |
 | [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: |
 | [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: |
 | [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  |
@@ -284,6 +283,7 @@ For example:
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
 | [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
+| [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |

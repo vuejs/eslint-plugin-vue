@@ -121,7 +121,11 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       </script>
       `,
       errors: [
-        'Enforce new lines between multi-line properties in Vue components.'
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 10
+        }
       ]
     },
     // test bad example of proposal https://github.com/vuejs/eslint-plugin-vue/issues/391
@@ -228,8 +232,16 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       </script>
       `,
       errors: [
-        'Enforce new lines between multi-line properties in Vue components.',
-        'Enforce new lines between multi-line properties in Vue components.'
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 19
+        }
       ]
     },
     // test set insertLine to 2
@@ -278,8 +290,16 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       </script>
       `,
       errors: [
-        'Enforce new lines between multi-line properties in Vue components.',
-        'Enforce new lines between multi-line properties in Vue components.'
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 10
+        }
       ]
     },
     // test set insertLine and minLineOfMultilineProperty to 5
@@ -331,7 +351,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 10
+          line: 9
         }
       ]
     },
@@ -371,13 +391,16 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             type: String,
             required: true
           },
+
           focused: {
             type: Boolean,
             default: false
           },
+
           label: String,
           icon: String
         },
+
         staticMethodFn() {
           fn({
             a: {
@@ -390,8 +413,21 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       </script>
       `,
       errors: [
-        'Enforce new lines between multi-line properties in Vue components.',
-        'Enforce new lines between multi-line properties in Vue components.'
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 4
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 9
+        }
       ]
     }
   ]
