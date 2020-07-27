@@ -6,11 +6,9 @@
 
 const Linter = require('eslint').Linter
 const parser = require('vue-eslint-parser')
-const chai = require('chai')
+const assert = require('assert')
 
 const rules = require('../..').rules
-
-const assert = chai.assert
 
 const baseConfig = {
   parser: 'vue-eslint-parser',

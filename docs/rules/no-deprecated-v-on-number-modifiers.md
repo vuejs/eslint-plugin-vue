@@ -36,13 +36,13 @@ This rule reports use of deprecated `KeyboardEvent.keyCode` modifier on `v-on` d
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-on]
+- [vue/valid-v-on]
 
-[valid-v-on]: valid-v-on.md
+[vue/valid-v-on]: ./valid-v-on.md
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0014-drop-keycode-support](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
 

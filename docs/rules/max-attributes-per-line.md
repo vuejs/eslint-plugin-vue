@@ -122,9 +122,9 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Multi attribute elements](https://vuejs.org/v2/style-guide/#Multi-attribute-elements-strongly-recommended)
+- [Style guide - Multi attribute elements](https://v3.vuejs.org/style-guide/#multi-attribute-elements-strongly-recommended)
 
 ## :mag: Implementation
 

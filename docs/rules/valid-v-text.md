@@ -36,18 +36,18 @@ This rule reports `v-text` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [no-parsing-error]
+- [vue/no-parsing-error]
 
-[no-parsing-error]: no-parsing-error.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
 ## :mag: Implementation
 

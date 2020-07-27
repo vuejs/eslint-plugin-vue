@@ -32,7 +32,7 @@ This rule reports elements inside `<transition>` that do not control the display
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0017-transition-as-root](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0017-transition-as-root.md)
 

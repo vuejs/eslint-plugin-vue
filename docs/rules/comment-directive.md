@@ -121,7 +121,7 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 Unused reports cannot be suppressed with `eslint-disable` HTML comments.
 :::
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Disabling rules with inline comments]
 

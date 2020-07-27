@@ -73,7 +73,7 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 
 </eslint-code-block>
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-useless-mustaches]
 - [vue/no-useless-concat]

@@ -113,7 +113,7 @@ export default {
 
 - We provide all the possible component option that editdistance between your vue component option and configuration options is greater than 0 and lessEqual than threshold
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Edit_distance](https://en.wikipedia.org/wiki/Edit_distance)
 

@@ -11,7 +11,7 @@ description: enforce consistent newlines before and after dots
 
 This rule is the same rule as core [dot-location] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [dot-location]
 

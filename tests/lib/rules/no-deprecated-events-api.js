@@ -13,7 +13,7 @@ const rule = require('../../../lib/rules/no-deprecated-events-api')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -113,6 +113,20 @@ ruleTester.run('no-deprecated-events-api', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.js',
+      code: `
+        app.component('some-comp', {
+          mounted () {
+            // It is OK because checking whether it is deprecated.
+            this.$on?.('start', foo)
+            this.$off?.('start', foo)
+            this.$once?.('start', foo)
+          }
+        })
+      `,
+      parserOptions
     }
   ],
 
@@ -194,6 +208,42 @@ ruleTester.run('no-deprecated-events-api', rule, {
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
           line: 5
         }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        app.component('some-comp', {
+          mounted () {
+            this?.$on('start')
+            this?.$off('start')
+            this?.$once('start')
+          }
+        })
+      `,
+      parserOptions,
+      errors: [
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        app.component('some-comp', {
+          mounted () {
+            ;(this?.$on)('start')
+            ;(this?.$off)('start')
+            ;(this?.$once)('start')
+          }
+        })
+      `,
+      parserOptions,
+      errors: [
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
       ]
     }
   ]

@@ -18,7 +18,7 @@ yarn add -D eslint eslint-plugin-vue@next
 ```
 
 ::: tip Requirements
-- ESLint v6.0.0 and above
+- ESLint v6.2.0 and above
 - Node.js v8.10.0 and above
 :::
 
@@ -65,7 +65,7 @@ eslint "src/**/*.{js,vue}"
 If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint), you should have the `lint` script added to your `package.json`. That means you can just run `yarn lint` or `npm run lint`.
 :::
 
-#### How to use a custom parser?
+### How to use a custom parser?
 
 If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/package/babel-eslint) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `parserOptions.parser` option instead of the `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, this plugin doesn't work if you overwrite the `parser` option.
 
@@ -82,13 +82,14 @@ If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/p
 
 All component-related rules are applied to code that passes any of the following checks:
 
-* `Vue.component()` expression
-* `Vue.extend()` expression
-* `Vue.mixin()` expression
-* `app.component()` expression
-* `app.mixin()` expression
-* `createApp()` expression
-* `export default {}` in `.vue` or `.jsx` file
+- `Vue.component()` expression
+- `Vue.extend()` expression
+- `Vue.mixin()` expression
+- `app.component()` expression
+- `app.mixin()` expression
+- `createApp()` expression
+- `defineComponent()` expression
+- `export default {}` in `.vue` or `.jsx` file
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:
 
@@ -197,7 +198,7 @@ If you already use another parser (e.g. `"parser": "babel-eslint"`), please move
 + "parser": "vue-eslint-parser",
   "parserOptions": {
 +     "parser": "babel-eslint",
-      "ecmaVersion": 2017,
+      "ecmaVersion": 2020,
       "sourceType": "module"
   }
 ```
@@ -264,3 +265,22 @@ module.exports = {
 
 [prettier]: https://prettier.io/
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
+
+### Using JSX.
+
+If you are using JSX, you need to enable JSX in your ESLint configuration.
+
+```diff
+  "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
++         "jsx": true
+      }
+  }
+```
+
+See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide/configuring#specifying-parser-options).
+
+The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.  
+See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
+Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`) when using `jsx: true`.

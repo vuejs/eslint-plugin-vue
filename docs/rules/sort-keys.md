@@ -97,7 +97,7 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [sort-keys]
 

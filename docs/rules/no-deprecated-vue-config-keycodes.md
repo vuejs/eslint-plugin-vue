@@ -28,13 +28,13 @@ Vue.config.keyCodes = {
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/no-deprecated-v-on-number-modifiers]
 
 [vue/no-deprecated-v-on-number-modifiers]: ./no-deprecated-v-on-number-modifiers.md
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0014-drop-keycode-support]
 - [API - Global Config - keyCodes]

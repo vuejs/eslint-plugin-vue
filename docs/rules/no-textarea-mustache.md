@@ -29,16 +29,16 @@ This rule reports mustaches in `<textarea>`.
 
 ::: warning Note
 Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
-[https://vuejs.org/v2/guide/forms.html#Multiline-text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+[https://v3.vuejs.org/guide/forms.html#multiline-text](https://v3.vuejs.org/guide/forms.html#multiline-text)
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Forms / Multiline text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+- [Guide - Form Input Bindings / Multiline text](https://v3.vuejs.org/guide/forms.html#multiline-text)
 
 ## :mag: Implementation
 

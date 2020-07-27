@@ -981,6 +981,103 @@ tester.run('no-unused-properties', rule, {
         }
       </script>`,
       options: [{ groups: ['props', 'setup'] }]
+    },
+
+    // sparse array
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ count }}</div>
+        </template>
+        <script>
+          export default {
+            props: [, 'count']
+          }
+        </script>
+        `
+    },
+    // optional chaining
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import { ref, onMounted } from 'vue'
+
+        export default {
+          props: ['foo', 'bar'],
+          methods: {
+            fn () {
+              fn(this)
+            }
+          }
+        }
+
+        function fn(a) {
+          return a?.foo + a?.bar
+        }
+      </script>`
+    },
+    {
+      filename: 'test.js',
+      code: `
+      Vue.component('MyButton', {
+        functional: true,
+        props: ['foo', 'bar'],
+        render: function (createElement, ctx) {
+          const a = ctx
+          const b = a?.props?.foo
+          const c = (a?.props)?.bar
+        }
+      })
+      `
+    },
+    // handlers
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['foo', 'bar'],
+          watch: {
+            foo: 'updateFoo',
+            bar: {
+              handler: 'updateBar',
+              immediate: true
+            }
+          },
+          methods: {
+            updateFoo() {},
+            updateBar() {}
+          }
+        };
+      </script>
+      `,
+      options: [{ groups: ['props', 'methods'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['foo', 'bar'],
+          data () {
+            return {
+              updateFoo() {},
+              updateBar() {}
+            }
+          },
+          watch: {
+            foo: 'updateFoo',
+            bar: {
+              handler: 'updateBar',
+              immediate: true
+            }
+          }
+        };
+      </script>
+      `,
+      options: [{ groups: ['props', 'data'] }]
     }
   ],
 

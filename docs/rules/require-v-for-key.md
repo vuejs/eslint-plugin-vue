@@ -31,21 +31,23 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
 
 ::: warning Note
 This rule does not report missing `v-bind:key` on custom components.
-It will be reported by [valid-v-for](./valid-v-for.md) rule.
+It will be reported by [vue/valid-v-for] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-for](./valid-v-for.md)
+- [vue/valid-v-for]
 
-## :books: Further reading
+[vue/valid-v-for]: ./valid-v-for.md
 
-- [Style guide - Keyed v-for](https://vuejs.org/v2/style-guide/#Keyed-v-for-essential)
-- [Guide - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)
+## :books: Further Reading
+
+- [Style guide - Keyed v-for](https://v3.vuejs.org/style-guide/#keyed-v-for-essential)
+- [Guide (for v2) - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)
 
 ## :mag: Implementation
 

@@ -12,10 +12,10 @@ description: enforce order of attributes
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
+This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
 
 - `DEFINITION`
-  e.g. 'is'
+  e.g. 'is', 'v-is'
 - `LIST_RENDERING`
   e.g. 'v-for item in items'
 - `CONDITIONALS`
@@ -215,9 +215,10 @@ This rule aims to enforce ordering of component attributes. The default order is
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+- [Style guide - Element attribute order](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended)
+- [Style guide (for v2) - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
 
 ## :mag: Implementation
 

@@ -11,7 +11,7 @@ description: require or disallow spacing around embedded expressions of template
 
 This rule is the same rule as core [template-curly-spacing] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [template-curly-spacing]
 

@@ -101,9 +101,9 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Directive shorthands](https://vuejs.org/v2/style-guide/#Directive-shorthands-strongly-recommended)
+- [Style guide - Directive shorthands](https://v3.vuejs.org/style-guide/#directive-shorthands-strongly-recommended)
 
 ## :mag: Implementation
 

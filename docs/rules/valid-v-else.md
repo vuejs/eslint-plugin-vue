@@ -42,16 +42,15 @@ This rule reports `v-else` directives in the following cases:
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-if]
-- [valid-v-else-if]
-- [no-parsing-error]
+- [vue/valid-v-if]
+- [vue/valid-v-else-if]
+- [vue/no-parsing-error]
 
-
-[valid-v-if]: valid-v-if.md
-[valid-v-else-if]: valid-v-else-if.md
-[no-parsing-error]: no-parsing-error.md
+[vue/valid-v-if]: ./valid-v-if.md
+[vue/valid-v-else-if]: ./valid-v-else-if.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
 ## :mag: Implementation
 

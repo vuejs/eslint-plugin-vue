@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 ruleTester.run('no-deprecated-dollar-scopedslots-api', rule, {
   valid: [
@@ -280,6 +280,41 @@ ruleTester.run('no-deprecated-dollar-scopedslots-api', rule, {
         {
           line: 7,
           column: 25,
+          messageId: 'deprecated'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          render () {
+            const vm = this
+            const a = vm?.$scopedSlots
+            const b = this?.$scopedSlots
+            return a.foo('bar')
+          }
+        }
+        </script>
+      `,
+      output: `
+        <script>
+        export default {
+          render () {
+            const vm = this
+            const a = vm?.$slots
+            const b = this?.$slots
+            return a.foo('bar')
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'deprecated'
+        },
+        {
           messageId: 'deprecated'
         }
       ]

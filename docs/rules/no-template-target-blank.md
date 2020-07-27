@@ -16,10 +16,10 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 ```vue
 <template>
   <!-- ✓ Good -->
-  <a link="http://example.com" target="_blank" rel="noopener noreferrer">link</a>
+  <a href="http://example.com" target="_blank" rel="noopener noreferrer">link</a>
 
   <!-- ✗ BAD -->
-  <a link="http://example.com" target="_blank" >link</a>
+  <a href="http://example.com" target="_blank" >link</a>
 </temlate>
 ```
 
@@ -46,10 +46,10 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 ```vue
 <template>
   <!-- ✓ Good -->
-  <a link="http://example.com" target="_blank" rel="noopener noreferrer">link</a>
+  <a href="http://example.com" target="_blank" rel="noopener noreferrer">link</a>
 
   <!-- ✗ BAD -->
-  <a link="http://example.com" target="_blank" rel="noopener">link</a>
+  <a href="http://example.com" target="_blank" rel="noopener">link</a>
 </temlate>
 ```
 
@@ -62,10 +62,10 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 ```vue
 <template>
   <!-- ✓ Good -->
-  <a link="http://example.com" target="_blank" rel="noopener">link</a>
+  <a href="http://example.com" target="_blank" rel="noopener">link</a>
 
   <!-- ✗ BAD -->
-  <a link="http://example.com" target="_blank" >link</a>
+  <a href="http://example.com" target="_blank" >link</a>
 </temlate>
 ```
 
@@ -73,15 +73,15 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 ### `{ "enforceDynamicLinks": "always" }` (default)
 
-<eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { enforceDynamicLinks: 'never' }]}">
+<eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { enforceDynamicLinks: 'always' }]}">
 
 ```vue
 <template>
   <!-- ✓ Good -->
-  <a :link="link" target="_blank" rel="noopener noreferrer">link</a>
+  <a :href="link" target="_blank" rel="noopener noreferrer">link</a>
 
   <!-- ✗ BAD -->
-  <a :link="link" target="_blank">link</a>
+  <a :href="link" target="_blank">link</a>
 </temlate>
 ```
 
@@ -94,10 +94,10 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 ```vue
 <template>
   <!-- ✓ Good -->
-  <a :link="link" target="_blank">link</a>
+  <a :href="link" target="_blank">link</a>
 
   <!-- ✗ BAD -->
-  <a link="http://example.com" target="_blank" >link</a>
+  <a href="http://example.com" target="_blank" >link</a>
 </temlate>
 ```
 
