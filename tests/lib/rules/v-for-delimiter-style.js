@@ -60,39 +60,69 @@ tester.run('v-for-delimiter-style', rule, {
       filename: 'test.vue',
       code: '<template><div v-for="x of xs"></div></template>',
       output: '<template><div v-for="x in xs"></div></template>',
-      errors: ["Expected 'in' instead of 'of' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          column: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="x    of xs"></div></template>',
       output: '<template><div v-for="x    in xs"></div></template>',
-      errors: ["Expected 'in' instead of 'of' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          column: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="x of    xs"></div></template>',
       output: '<template><div v-for="x in    xs"></div></template>',
-      errors: ["Expected 'in' instead of 'of' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          column: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="x    of    xs"></div></template>',
       output: '<template><div v-for="x    in    xs"></div></template>',
-      errors: ["Expected 'in' instead of 'of' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          column: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
       options: ['in'],
       code: '<template><div v-for="x of xs"></div></template>',
       output: '<template><div v-for="x in xs"></div></template>',
-      errors: ["Expected 'in' instead of 'of' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          column: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
       options: ['of'],
       code: '<template><div v-for="x in xs"></div></template>',
       output: '<template><div v-for="x of xs"></div></template>',
-      errors: ["Expected 'of' instead of 'in' in 'v-for'."]
+      errors: [
+        {
+          message: "Expected 'of' instead of 'in' in 'v-for'.",
+          column: 23
+        }
+      ]
     }
   ]
 })
