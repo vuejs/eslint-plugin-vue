@@ -70,7 +70,7 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions({ version: '2.6.0-beta.2' })
+      options: buildOptions({ version: '^3.0.0' })
     }
   ],
   invalid: [
