@@ -7,6 +7,7 @@
 const Linter = require('eslint').Linter
 const parser = require('babel-eslint')
 const rules = require('../..').rules
+const assert = require('assert')
 
 describe("Don't crash even if without vue-eslint-parser.", () => {
   const code = '<template><div>TEST</div></template>'
@@ -25,7 +26,16 @@ describe("Don't crash even if without vue-eslint-parser.", () => {
       }
       linter.defineParser('babel-eslint', parser)
       linter.defineRule(ruleId, rules[key])
-      linter.verifyAndFix(code, config, 'test.vue')
+      const resultVue = linter.verifyAndFix(code, config, 'test.vue')
+      for (const { message } of resultVue.messages) {
+        assert.strictEqual(
+          message,
+          'Use the latest vue-eslint-parser. See also https://eslint.vuejs.org/user-guide/#what-is-the-use-the-latest-vue-eslint-parser-error.'
+        )
+      }
+
+      const resultJs = linter.verifyAndFix(code, config, 'test.js')
+      assert.strictEqual(resultJs.messages.length, 0)
     })
   }
 })
