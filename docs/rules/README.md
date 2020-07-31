@@ -312,6 +312,7 @@ For example:
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
+| [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ### Extension Rules
