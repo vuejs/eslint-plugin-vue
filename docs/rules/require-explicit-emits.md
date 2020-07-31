@@ -86,7 +86,7 @@ export default {
 
 ### `"allowProps": true`
 
-<eslint-code-block fix :rules="{'vue/require-explicit-emits': ['error', {allowProps: true}]}">
+<eslint-code-block :rules="{'vue/require-explicit-emits': ['error', {allowProps: true}]}">
 
 ```vue
 <script>
