@@ -74,7 +74,37 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-explicit-emits": ["error", {
+    "allowProps": false
+  }]
+}
+```
+
+- `"allowProps"` ... If `true`, allow event names defined in `props`. default `false`
+
+### `"allowProps": true`
+
+<eslint-code-block fix :rules="{'vue/require-explicit-emits': ['error', {allowProps: true}]}">
+
+```vue
+<script>
+export default {
+  props: ['onGood', 'bad'],
+  methods: {
+    foo () {
+      // ✓ GOOD
+      this.$emit('good')
+      // ✗ BAD
+      this.$emit('bad')
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
