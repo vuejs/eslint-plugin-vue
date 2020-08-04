@@ -244,73 +244,15 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         }
       ]
     },
-    // test set insertLine to 2
-    {
-      filename: 'test.vue',
-      options: [{ 'insert-line': 2 }],
-      code: `
-      <script>
-      export default {
-        props: {
-          value: {
-            type: String,
-            required: true
-          },
-
-          focused: {
-            type: Boolean,
-            default: false
-          },
-          label: String,
-          icon: String
-        }
-      }
-      </script>
-      `,
-      output: `
-      <script>
-      export default {
-        props: {
-          value: {
-            type: String,
-            required: true
-          },
-
-
-          focused: {
-            type: Boolean,
-            default: false
-          },
-
-
-          label: String,
-          icon: String
-        }
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
-        },
-        {
-          message:
-            'Enforce new lines between multi-line properties in Vue components.',
-          line: 10
-        }
-      ]
-    },
     // test set insertLine and minLineOfMultilineProperty to 5
     {
       filename: 'test.vue',
-      options: [{ 'insert-line': 2, 'min-line-of-multiline-property': 5 }],
+      options: [{ minLineOfMultilineProperty: 5 }],
       code: `
       <script>
       export default {
         props: {
-          value: {
+          setMultiLineProperty: {
             type: String,
             required: true
           },
@@ -319,7 +261,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             default: false,
             required: true
           },
-
           label: String,
           icon: String
         }
@@ -330,7 +271,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       <script>
       export default {
         props: {
-          value: {
+          setMultiLineProperty: {
             type: String,
             required: true
           },
@@ -339,7 +280,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             default: false,
             required: true
           },
-
 
           label: String,
           icon: String
@@ -373,11 +313,18 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
           icon: String
         },
         staticMethodFn() {
-          fn({
+          fn(
+            fn(),
+            {
             a: {
-              propA: this.propA,
+              foo,
             },
-            b: null,
+            b: {
+              foo,
+            },
+            c: {
+              foo,
+            },
           });
         },
       }
@@ -402,11 +349,18 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         },
 
         staticMethodFn() {
-          fn({
+          fn(
+            fn(),
+            {
             a: {
-              propA: this.propA,
+              foo,
             },
-            b: null,
+            b: {
+              foo,
+            },
+            c: {
+              foo,
+            },
           });
         },
       }
