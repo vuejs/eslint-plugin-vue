@@ -298,7 +298,7 @@ export interface ThisExpression extends HasParentNode {
 }
 export interface ArrayExpression extends HasParentNode {
   type: 'ArrayExpression'
-  elements: (Expression | SpreadElement)[]
+  elements: (Expression | SpreadElement | null)[]
 }
 export interface ObjectExpression extends HasParentNode {
   type: 'ObjectExpression'

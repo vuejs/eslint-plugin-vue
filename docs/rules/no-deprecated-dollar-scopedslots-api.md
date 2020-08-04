@@ -37,7 +37,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0006-slots-unification](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0006-slots-unification.md)
 

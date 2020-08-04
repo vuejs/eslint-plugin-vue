@@ -110,9 +110,9 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Single-file component top-level element order](https://vuejs.org/v2/style-guide/#Single-file-component-top-level-element-order-recommended)
+- [Style guide - Single-file component top-level element order](https://v3.vuejs.org/style-guide/#single-file-component-top-level-element-order-recommended)
 
 ## :mag: Implementation
 

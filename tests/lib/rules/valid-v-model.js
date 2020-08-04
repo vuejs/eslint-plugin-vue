@@ -18,7 +18,7 @@ const rule = require('../../../lib/rules/valid-v-model')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 tester.run('valid-v-model', rule, {
@@ -232,6 +232,36 @@ tester.run('valid-v-model', rule, {
       filename: 'empty-value.vue',
       code: '<template><MyComponent v-model="" /></template>',
       errors: ["'v-model' directives require that attribute value."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="foo?.bar"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="foo?.bar.baz"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b)?.c"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b).c"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(null).foo"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b).c.d"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
     }
   ]
 })

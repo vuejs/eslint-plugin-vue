@@ -139,9 +139,9 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Component name casing in templates](https://vuejs.org/v2/style-guide/#Component-name-casing-in-templates-strongly-recommended)
+- [Style guide - Component name casing in templates](https://v3.vuejs.org/style-guide/#component-name-casing-in-templates-strongly-recommended)
 
 ## :mag: Implementation
 

@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-setup-props-destructure')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-setup-props-destructure', rule, {
@@ -159,6 +159,12 @@ tester.run('no-setup-props-destructure', rule, {
       }
       </script>
       `
+    },
+    {
+      code: `
+      Vue.component('test', {
+        el: a = b
+      })`
     }
   ],
   invalid: [
@@ -333,6 +339,38 @@ tester.run('no-setup-props-destructure', rule, {
         {
           messageId: 'getProperty',
           line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const x = p.foo
+          const y = p?.bar
+          const z = (p?.baz).qux
+
+          const xc = p?.foo?.()
+          const yc = (p?.bar)?.()
+          const zc = (p?.baz.qux)?.()
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        },
+        {
+          messageId: 'getProperty',
+          line: 6
+        },
+        {
+          messageId: 'getProperty',
+          line: 7
         }
       ]
     },

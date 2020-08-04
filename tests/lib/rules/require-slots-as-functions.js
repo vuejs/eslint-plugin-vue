@@ -18,7 +18,7 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 ruleTester.run('require-slots-as-functions', rule, {
   valid: [
@@ -86,29 +86,27 @@ ruleTester.run('require-slots-as-functions', rule, {
         }
       ]
     },
-
     {
       filename: 'test.vue',
       code: `
       <script>
       export default {
         render (h) {
-          let children
-
-          const [node] = this.$slots.foo
-          const bar = [this.$slots[foo]]
-
-          children = this.$slots.foo
-
-          return h('div', children.filter(test))
+          var bar = this.$slots.foo?.bar // NG
+          var bar = this.$slots.foo?.() // OK
+          var bar = (this.$slots?.foo)?.bar // NG
+          var bar = (this.$slots?.foo)?.() // OK
+          var bar = (this?.$slots)?.foo?.bar // NG
+          var bar = (this?.$slots)?.foo?.() // OK
+          return h('div', bar)
         }
       }
       </script>
       `,
       errors: [
-        'Property in `$slots` should be used as function.',
-        'Property in `$slots` should be used as function.',
-        'Property in `$slots` should be used as function.'
+        { messageId: 'unexpected', line: 5 },
+        { messageId: 'unexpected', line: 7 },
+        { messageId: 'unexpected', line: 9 }
       ]
     }
   ]

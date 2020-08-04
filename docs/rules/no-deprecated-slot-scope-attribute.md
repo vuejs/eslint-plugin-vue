@@ -35,7 +35,7 @@ This rule reports deprecated `slot-scope` attribute in Vue.js v2.6.0+.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [API - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
 

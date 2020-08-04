@@ -33,13 +33,13 @@ This rule reports use of deprecated `.native` modifier on `v-on` directive (in V
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-on]
+- [vue/valid-v-on]
 
-[valid-v-on]: valid-v-on.md
+[vue/valid-v-on]: ./valid-v-on.md
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0031-attr-fallthrough](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
 

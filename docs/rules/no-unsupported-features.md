@@ -30,13 +30,14 @@ The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.0.0+
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
+    - `"v-is"` ... [v-is](https://v3.vuejs.org/api/directives.html#v-is) directive.
   - Vue.js 2.6.0+
-    - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://vuejs.org/v2/guide/syntax.html#Dynamic-Arguments).
-    - `"v-slot"` ... [v-slot](https://vuejs.org/v2/api/#v-slot) directive.
+    - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments).
+    - `"v-slot"` ... [v-slot](https://v3.vuejs.org/api/directives.html#v-slot) directive.
   - Vue.js 2.5.0+
     - `"slot-scope-attribute"` ... [slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated) attributes.
   - Vue.js `">=2.6.0-beta.1 <=2.6.0-beta.3"` or 2.6 custom build
-    - `"v-bind-prop-modifier-shorthand"` ... [v-bind](https://vuejs.org/v2/api/#v-bind) with `.prop` modifier shorthand.
+    - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
 
 ### `{"version": "^2.6.0"}`
 
@@ -88,11 +89,12 @@ The `"ignores"` option accepts an array of the following strings.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Dynamic Arguments](https://vuejs.org/v2/guide/syntax.html#Dynamic-Arguments)
-- [API - v-slot](https://vuejs.org/v2/api/#v-slot)
-- [API - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
+- [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
+- [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
+- [API (for v2) - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
 - [Vue RFCs - 0001-new-slot-syntax]
 - [Vue RFCs - 0002-slot-syntax-shorthand]
 - [Vue RFCs - 0003-dynamic-directive-arguments]

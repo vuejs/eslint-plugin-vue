@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Install eslint@6
           command: |
-            npm install -D eslint@6.0.0
+            npm install -D eslint@6.2.0
       - run:
           name: Install dependencies
           command: npm install

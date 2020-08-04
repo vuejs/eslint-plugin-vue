@@ -11,7 +11,7 @@ description: enforce consistent spacing inside parentheses
 
 This rule is the same rule as core [space-in-parens] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [space-in-parens]
 

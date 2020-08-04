@@ -41,7 +41,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0031-attr-fallthrough](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
 

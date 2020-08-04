@@ -39,23 +39,22 @@ This rule reports `v-else-if` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-if]
-- [valid-v-else]
-- [no-parsing-error]
+- [vue/valid-v-if]
+- [vue/valid-v-else]
+- [vue/no-parsing-error]
 
-
-[valid-v-if]: valid-v-if.md
-[valid-v-else]: valid-v-else.md
-[no-parsing-error]: no-parsing-error.md
+[vue/valid-v-if]: ./valid-v-if.md
+[vue/valid-v-else]: ./valid-v-else.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
 ## :mag: Implementation
 

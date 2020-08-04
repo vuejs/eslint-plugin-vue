@@ -38,7 +38,7 @@ Forbids call expressions inside mustache interpolation.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [no-restricted-syntax]
 - [ESTree]

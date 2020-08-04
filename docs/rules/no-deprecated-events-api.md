@@ -26,7 +26,15 @@ export default {
     this.$emit('start')
   }
 }
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-deprecated-events-api': ['error']}">
+
+```vue
+<script>
 /* ✓ GOOD */
 import mitt from 'mitt'
 const emitter = mitt()
@@ -47,7 +55,7 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0020-events-api-change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0020-events-api-change.md)
 

@@ -68,9 +68,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
+- [Guide - Prop Validation](https://v3.vuejs.org/guide/component-props.html#prop-validation)
 
 ## :mag: Implementation
 

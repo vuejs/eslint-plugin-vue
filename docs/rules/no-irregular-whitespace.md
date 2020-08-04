@@ -157,7 +157,7 @@ var foo = ``
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [no-irregular-whitespace]
 

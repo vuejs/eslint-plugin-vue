@@ -1,44 +1,17 @@
 'use strict'
 
 const babelEslint = require('babel-eslint')
+const espree = require('espree')
 const utils = require('../../../lib/utils/index')
-const chai = require('chai')
-
-const assert = chai.assert
-
-describe('parseMemberExpression', () => {
-  let node
-
-  const parse = function (code) {
-    return babelEslint.parse(code).body[0].expression
-  }
-
-  it('should parse member expression', () => {
-    node = parse('this.some.nested.property')
-    assert.deepEqual(utils.parseMemberExpression(node), [
-      'this',
-      'some',
-      'nested',
-      'property'
-    ])
-
-    node = parse('another.property')
-    assert.deepEqual(utils.parseMemberExpression(node), ['another', 'property'])
-
-    node = parse('this.something')
-    assert.deepEqual(utils.parseMemberExpression(node), ['this', 'something'])
-  })
-})
+const assert = require('assert')
 
 describe('getComputedProperties', () => {
-  let node
-
   const parse = function (code) {
     return babelEslint.parse(code).body[0].declarations[0].init
   }
 
   it('should return empty array when there is no computed property', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       data() {
         return {}
@@ -49,7 +22,7 @@ describe('getComputedProperties', () => {
   })
 
   it('should return computed properties', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       data() {
         return {}
@@ -84,16 +57,16 @@ describe('getComputedProperties', () => {
       'it detects all computed properties'
     )
 
-    assert.notOk(computedProperties[0].value)
+    assert.ok(!computedProperties[0].value)
     assert.ok(computedProperties[1].value)
     assert.ok(computedProperties[2].value)
-    assert.notOk(computedProperties[3].value)
-    assert.notOk(computedProperties[4].value)
+    assert.ok(!computedProperties[3].value)
+    assert.ok(!computedProperties[4].value)
     assert.ok(computedProperties[5].value)
   })
 
   it('should not collide with object spread operator', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       computed: {
         ...mapGetters(['test']),
@@ -115,7 +88,7 @@ describe('getComputedProperties', () => {
   })
 
   it('should not collide with object spread operator inside CP', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       computed: {
         foo: {
@@ -133,88 +106,180 @@ describe('getComputedProperties', () => {
       'it detects all computed properties'
     )
 
-    assert.notOk(computedProperties[0].value)
+    assert.ok(!computedProperties[0].value)
   })
 })
 
 describe('getStaticPropertyName', () => {
-  let node
-
   const parse = function (code) {
     return babelEslint.parse(code).body[0].declarations[0].init
   }
 
   it('should parse property expression with identifier', () => {
-    node = parse(`const test = { computed: { } }`)
+    const node = parse(`const test = { computed: { } }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
     assert.ok(parsed === 'computed')
   })
   it('should parse property expression with literal', () => {
-    node = parse(`const test = { ['computed'] () {} }`)
+    const node = parse(`const test = { ['computed'] () {} }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
     assert.ok(parsed === 'computed')
   })
   it('should parse property expression with template literal', () => {
-    node = parse(`const test = { [\`computed\`] () {} }`)
+    const node = parse(`const test = { [\`computed\`] () {} }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
     assert.ok(parsed === 'computed')
   })
-  // it('should parse identifier', () => {
-  //   node = parse(`const test = { computed: { } }`)
+})
 
-  //   const parsed = utils.getStaticPropertyName(node.properties[0].key)
-  //   assert.ok(parsed === 'computed')
-  // })
+describe('getStringLiteralValue', () => {
+  const parse = function (code) {
+    return babelEslint.parse(code).body[0].declarations[0].init
+  }
+
   it('should parse literal', () => {
-    node = parse(`const test = { ['computed'] () {} }`)
+    const node = parse(`const test = { ['computed'] () {} }`)
 
     const parsed = utils.getStringLiteralValue(node.properties[0].key)
     assert.ok(parsed === 'computed')
   })
   it('should parse template literal', () => {
-    node = parse(`const test = { [\`computed\`] () {} }`)
+    const node = parse(`const test = { [\`computed\`] () {} }`)
 
     const parsed = utils.getStringLiteralValue(node.properties[0].key)
     assert.ok(parsed === 'computed')
   })
 })
 
-describe('parseMemberOrCallExpression', () => {
-  let node
-
+describe('getMemberChaining', () => {
   const parse = function (code) {
-    return babelEslint.parse(code).body[0].declarations[0].init
+    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
+      .init
   }
 
-  it('should parse CallExpression', () => {
-    node = parse(
-      `const test = this.lorem['ipsum'].map(d => d.id).filter((a, b) => a > b).reduce((acc, d) => acc + d, 0)`
-    )
-    const parsed = utils.parseMemberOrCallExpression(node)
-    assert.equal(parsed, 'this.lorem[].map().filter().reduce()')
-  })
+  const jsonIgnoreKeys = ['expression', 'object']
 
   it('should parse MemberExpression', () => {
-    node = parse(
-      `const test = this.lorem['ipsum'][0].map(d => d.id).dolor.reduce((acc, d) => acc + d, 0).sit`
+    const node = parse(`const test = this.lorem['ipsum'].foo.bar`)
+    const parsed = utils.getMemberChaining(node)
+    assert.equal(
+      nodeToJson(parsed, jsonIgnoreKeys),
+      nodeToJson([
+        {
+          type: 'ThisExpression'
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'lorem'
+          },
+          computed: false,
+          optional: false
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Literal',
+            value: 'ipsum',
+            raw: "'ipsum'"
+          },
+          computed: true,
+          optional: false
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'foo'
+          },
+          computed: false,
+          optional: false
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'bar'
+          },
+          computed: false,
+          optional: false
+        }
+      ])
     )
-    const parsed = utils.parseMemberOrCallExpression(node)
-    assert.equal(parsed, 'this.lorem[][].map().dolor.reduce().sit')
+  })
+
+  it('should parse optional Chaining ', () => {
+    const node = parse(`const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`)
+    const parsed = utils.getMemberChaining(node)
+    assert.equal(
+      nodeToJson(parsed, jsonIgnoreKeys),
+      nodeToJson([
+        {
+          type: 'ThisExpression'
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'lorem'
+          },
+          computed: false,
+          optional: true
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Literal',
+            value: 'ipsum',
+            raw: "'ipsum'"
+          },
+          computed: true,
+          optional: false
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Literal',
+            value: 0,
+            raw: '0'
+          },
+          computed: true,
+          optional: true
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'foo'
+          },
+          computed: false,
+          optional: true
+        },
+        {
+          type: 'MemberExpression',
+          property: {
+            type: 'Identifier',
+            name: 'bar'
+          },
+          computed: false,
+          optional: true
+        }
+      ])
+    )
   })
 })
 
 describe('getRegisteredComponents', () => {
-  let node
-
   const parse = function (code) {
     return babelEslint.parse(code).body[0].declarations[0].init
   }
 
   it('should return empty array when there are no components registered', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
     }`)
 
@@ -222,7 +287,7 @@ describe('getRegisteredComponents', () => {
   })
 
   it('should return an array with all registered components', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       components: {
         ...test,
@@ -249,7 +314,7 @@ describe('getRegisteredComponents', () => {
   })
 
   it('should return an array of only components whose names can be identified', () => {
-    node = parse(`const test = {
+    const node = parse(`const test = {
       name: 'test',
       components: {
         ...test,
@@ -269,15 +334,13 @@ describe('getRegisteredComponents', () => {
 })
 
 describe('getComponentProps', () => {
-  let props
-
   const parse = function (code) {
     const data = babelEslint.parse(code).body[0].declarations[0].init
     return utils.getComponentProps(data)
   }
 
   it('should return empty array when there is no component props', () => {
-    props = parse(`const test = {
+    const props = parse(`const test = {
       name: 'test',
       data() {
         return {}
@@ -288,7 +351,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return empty array when component props is empty array', () => {
-    props = parse(`const test = {
+    const props = parse(`const test = {
       name: 'test',
       props: []
     }`)
@@ -297,7 +360,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return empty array when component props is empty object', () => {
-    props = parse(`const test = {
+    const props = parse(`const test = {
       name: 'test',
       props: {}
     }`)
@@ -306,7 +369,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return computed props', () => {
-    props = parse(`const test = {
+    const props = parse(`const test = {
       name: 'test',
       ...test,
       data() {
@@ -341,7 +404,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return computed from array props', () => {
-    props = parse(`const test = {
+    const props = parse(`const test = {
       name: 'test',
       data() {
         return {}
@@ -353,19 +416,19 @@ describe('getComponentProps', () => {
 
     assert.ok(props[0].node.type === 'Literal')
     assert.deepEqual(props[0].key, props[0].node)
-    assert.notOk(props[0].value)
+    assert.ok(!props[0].value)
 
     assert.ok(props[1].node.type === 'Identifier')
-    assert.notOk(props[1].key)
-    assert.notOk(props[1].value)
+    assert.ok(!props[1].key)
+    assert.ok(!props[1].value)
 
     assert.ok(props[2].node.type === 'TemplateLiteral')
     assert.deepEqual(props[2].key, props[2].node)
-    assert.notOk(props[2].value)
+    assert.ok(!props[2].value)
 
     assert.ok(props[3].node.type === 'Literal')
-    assert.notOk(props[3].key)
-    assert.notOk(props[3].value)
+    assert.ok(!props[3].key)
+    assert.ok(!props[3].value)
   })
 })
 
@@ -382,3 +445,15 @@ describe('editdistance', () => {
     assert.equal(editDistance('computed', 'computd'), 1)
   })
 })
+function nodeToJson(nodes, ignores = []) {
+  return JSON.stringify(nodes, replacer, 2)
+  function replacer(key, value) {
+    if (key === 'parent' || key === 'start' || key === 'end') {
+      return undefined
+    }
+    if (ignores.includes(key)) {
+      return undefined
+    }
+    return value
+  }
+}

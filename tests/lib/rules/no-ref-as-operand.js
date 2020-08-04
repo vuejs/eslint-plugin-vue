@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-ref-as-operand')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-ref-as-operand', rule, {
@@ -24,6 +24,23 @@ tester.run('no-ref-as-operand', rule, {
     `
     <script>
       import { ref } from 'vue'
+      export default {
+        setup() {
+          const count = ref(0)
+          console.log(count.value) // 0
+
+          count.value++
+          console.log(count.value) // 1
+          return {
+            count
+          }
+        }
+      }
+    </script>
+    `,
+    `
+    <script>
+      import { ref } from '@vue/composition-api'
       export default {
         setup() {
           const count = ref(0)
@@ -164,6 +181,48 @@ tester.run('no-ref-as-operand', rule, {
       code: `
       <script>
         import { ref } from 'vue'
+        export default {
+          setup() {
+            let count = ref(0)
+
+            count++ // error
+            console.log(count + 1) // error
+            console.log(1 + count) // error
+            return {
+              count
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue',
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 18
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 9,
+          column: 25,
+          endLine: 9,
+          endColumn: 30
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 10,
+          column: 29,
+          endLine: 10,
+          endColumn: 34
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref } from '@vue/composition-api'
         export default {
           setup() {
             let count = ref(0)
@@ -426,6 +485,20 @@ tester.run('no-ref-as-operand', rule, {
         import { ref, computed, toRef, customRef, shallowRef } from 'vue'
         const foo = shallowRef({})
         foo.bar = 123
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'requireDotValue'
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+        import { ref } from 'vue'
+        const foo = ref(123)
+        const bar = foo?.bar
       </script>
       `,
       errors: [

@@ -879,6 +879,7 @@ ruleTester.run('order-in-components', rule, {
           testYield: function* () {},
           testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
           testNullish: a ?? b,
+          testOptionalChaining: a?.b?.c,
           name: 'burger',
         };
       `,
@@ -897,13 +898,14 @@ ruleTester.run('order-in-components', rule, {
           testYield: function* () {},
           testTemplate: \`a:\${a},b:\${b},c:\${c}.\`,
           testNullish: a ?? b,
+          testOptionalChaining: a?.b?.c,
         };
       `,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 14
+          line: 15
         }
       ]
     }

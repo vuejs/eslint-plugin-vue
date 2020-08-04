@@ -37,13 +37,13 @@ This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in V
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-bind]
+- [vue/valid-v-bind]
 
-[valid-v-bind]: valid-v-bind.md
+[vue/valid-v-bind]: ./valid-v-bind.md
 
-## :books: Further reading
+## :books: Further Reading
 
 - [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
 

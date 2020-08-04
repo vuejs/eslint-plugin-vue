@@ -217,7 +217,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 </eslint-code-block>
 
-## :couple: Related rules
+## :couple: Related Rules
 
 - [vue/html-comment-indent](./html-comment-indent.md)
 - [vue/html-comment-content-spacing](./html-comment-content-spacing.md)

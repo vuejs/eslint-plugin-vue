@@ -62,10 +62,10 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
+- [Guide - Reactivity - Computed and Watch](https://v3.vuejs.org/guide/reactivity-computed-watchers.html)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
-- [Vue Composition API - API Reference - Stopping the Watcher](https://composition-api.vuejs.org/api.html#stopping-the-watcher)
 
 ## :mag: Implementation
 
