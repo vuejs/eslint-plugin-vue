@@ -75,6 +75,34 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       }
       </script>
       `
+    },
+    // should valid if there are more than one line between
+    // multiline property
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        name: 'component-name',
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+
+          label: String,
+          icon: String
+        },
+      }
+      </script>
+      `
     }
   ],
 
@@ -292,6 +320,122 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
           line: 9
+        }
+      ]
+    },
+    // test js comments
+    {
+      filename: 'test.vue',
+      options: [{ minLineOfMultilineProperty: 5 }],
+      code: `
+      <script>
+      export default {
+        props: {
+          setMultiLineProperty: {
+            type: String,
+            required: true
+          },
+          focused: {
+            type: Boolean,
+            default: false,
+            required: true
+          },
+          // comments
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        props: {
+          setMultiLineProperty: {
+            type: String,
+            required: true
+          },
+          focused: {
+            type: Boolean,
+            default: false,
+            required: true
+          },
+
+          // comments
+          label: String,
+          icon: String
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 9
+        }
+      ]
+    },
+    // test js doc
+    {
+      filename: 'test.vue',
+      options: [],
+      code: `
+      <script>
+      export default {
+        props: {
+          setMultiLineProperty: {
+            type: String,
+            required: true
+          },
+        },
+        
+        methods: {
+          test() {
+
+          },
+          /**
+          *
+          * @returns
+          */
+          test2() {
+
+          }
+        }
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        props: {
+          setMultiLineProperty: {
+            type: String,
+            required: true
+          },
+        },
+        
+        methods: {
+          test() {
+
+          },
+
+          /**
+          *
+          * @returns
+          */
+          test2() {
+
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 12
         }
       ]
     },
