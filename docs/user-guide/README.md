@@ -131,7 +131,7 @@ If you want to disallow `eslint-disable` functionality in `<template>`, disable 
 
 ## :computer: Editor integrations
 
-#### Visual Studio Code
+### Visual Studio Code
 
 Use the [dbaeumer.vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension that Microsoft provides officially.
 
@@ -151,7 +151,7 @@ Example **.vscode/settings.json**:
 
 If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/linting-error.html) for more info.
 
-#### Sublime Text
+### Sublime Text
 
 Use Package Control to install **SublimeLinter** and its ESLint extension **[SublimeLinter-eslint](https://github.com/SublimeLinter/SublimeLinter-eslint)**.
 
@@ -167,11 +167,11 @@ In the menu go to `Preferences > Package Settings > SublimeLinter > Settings` an
 }
 ```
 
-#### Atom editor
+### Atom editor
 
 Go into `Settings -> Packages -> linter-eslint`, under the option "List of scopes to run eslint on", add `text.html.vue`. You may need to restart Atom.
 
-#### IntelliJ IDEA / JetBrains WebStorm
+### IntelliJ IDEA / JetBrains WebStorm
 
 In the **Settings/Preferences** dialog (`Cmd+,`/`Ctrl+Alt+S`), choose JavaScript under **Languages and Frameworks** and then choose **ESLint** under **Code Quality Tools**.
 On the **ESLint page** that opens, select the *Enable* checkbox.
@@ -284,3 +284,14 @@ See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide
 The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.  
 See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
 Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`) when using `jsx: true`.
+
+### Trouble with Visual Studio Code
+
+- Turning off the rule in the ESLint configuration file does not ignore the warning.
+- Using the `<!-- eslint-disable -->` comment does not suppress warnings.
+- Duplicate warnings are displayed.
+- Used `babel-eslint`, but the template still show `vue/no-parsing-error` warnings.
+
+You need to turn off Vetur's template validation by adding `vetur.validation.template: false` to your `.vscode/settings.json`.
+
+See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting / Error Checking > Linting](https://vuejs.github.io/vetur/linting-error.html#linting).
