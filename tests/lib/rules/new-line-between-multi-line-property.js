@@ -527,6 +527,98 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
           line: 9
         }
       ]
+    },
+    // test Vue.component()
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      Vue.component('test', {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+          //test
+          focused: {
+            type: Boolean,
+            default: false
+          },
+          label: String,
+          icon: String
+        },
+        staticMethodFn() {
+          fn(
+            fn(),
+            {
+            a: {
+              foo,
+            },
+            b: {
+              foo,
+            },
+            c: {
+              foo,
+            },
+          });
+        },
+      })
+      </script>
+      `,
+      output: `
+      <script>
+      Vue.component('test', {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          //test
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+          label: String,
+          icon: String
+        },
+
+        staticMethodFn() {
+          fn(
+            fn(),
+            {
+            a: {
+              foo,
+            },
+            b: {
+              foo,
+            },
+            c: {
+              foo,
+            },
+          });
+        },
+      })
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 4
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 10
+        }
+      ]
     }
   ]
 })
