@@ -9,7 +9,7 @@ description: enforce new lines between multi-line properties in Vue components
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-## Rule Details
+## :book: Rule Details
 
 This rule aims at enforcing new lines between multi-line properties in Vue components to help readability
 
@@ -76,14 +76,17 @@ export default {
 
 </eslint-code-block>
 
-## Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
-
+## :wrench: Option
+```json
+{
+  "vue/new-line-between-multiline-property": ["error", {
+    "minLineOfMultilineProperty": 2
+  }]
+}
+```
+- `minLineOfMultilineProperty` ... `type: number`, Define the minimum number of rows for a multi-line property  .`type:` number, `default:` 2 , `min:`: 2
+## :books: Further Reading
+Nothing here
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/new-line-between-multi-line-property.js)
