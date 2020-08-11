@@ -1,7 +1,6 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-
 ---
 
 <!--
@@ -10,10 +9,16 @@ about: Create a report to help us improve
   To make sure it's not, run: yarn eslint src/your-file.vue
 -->
 
+**Checklist**
+
+- [ ] I checked the [FAQ](https://eslint.vuejs.org/user-guide/#faq).
+
 **Tell us about your environment**
-* **ESLint version:** 
-* **eslint-plugin-vue version:** 
-* **Node version:** 
+
+- **ESLint version:** 
+- **eslint-plugin-vue version:** 
+- **Node version:** 
+- **Operating System:** 
 
 **Please show your full configuration:**
 <!-- Paste content of your .eslintrc file -->
@@ -31,4 +36,10 @@ about: Create a report to help us improve
 
 
 **What actually happened?**
-<!-- Please include the actual, raw output from ESLint. -->
+<!--
+  Please include the actual, raw output from ESLint.
+  If you are only looking at the results of your editor extension, also check the CLI results.
+-->
+
+**Repository to reproduce this issue**
+
