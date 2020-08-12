@@ -11,7 +11,7 @@ description: disallow unnecessary mustache interpolations
 
 ## :book: Rule Details
 
-This rule reports mustache interpolation with a string literal value.  
+This rule reports mustache interpolation with a string literal value.
 The mustache interpolation with a string literal value can be changed to a static contents.
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error']}">
@@ -78,9 +78,11 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 - [vue/no-useless-v-bind]
 - [vue/no-useless-concat]
+- [vue/no-mustache]
 
 [vue/no-useless-v-bind]: ./no-useless-v-bind.md
 [vue/no-useless-concat]: ./no-useless-concat.md
+[vue/vue/no-mustache]: ./vue/no-mustache.md
 
 ## :mag: Implementation
 
