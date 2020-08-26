@@ -180,6 +180,16 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         el: test.el
       })`,
       parserOptions
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test () {
+            return [...this.items].reverse()
+          },
+        }
+      })`,
+      parserOptions
     }
   ],
   invalid: [
