@@ -87,6 +87,22 @@ tester.run('no-v-for-template-key-on-child', rule, {
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key><div /><Foo :key="x.id" /></template></div></template>',
+      errors: [
+        '`<template v-for>` key should be placed on the `<template>` tag.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div><template v-for="x in list" :key><Foo :key="'foo' + x.id" /><Bar :key="'bar' + x.id" /></template></div></template>`,
+      errors: [
+        '`<template v-for>` key should be placed on the `<template>` tag.',
+        '`<template v-for>` key should be placed on the `<template>` tag.'
+      ]
     }
   ]
 })
