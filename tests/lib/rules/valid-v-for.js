@@ -128,6 +128,63 @@ tester.run('valid-v-for', rule, {
         </template>
       `
     },
+    // key on <template> : In Vue.js 3.x, you can place key on <template>.
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" v-bind:key="x"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" v-bind:key="x"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x.id"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x.id"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="(x, i) in list" :key="i"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="(x, i) in list" :key="i"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>'
+    },
+    // key on <slot> : In Vue.js 3.x, you can place key on <slot>.
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><slot v-for="x in list" :key="x"><div /></slot></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><slot v-for="x in list" :key="x"><MyComp /></slot></div></template>'
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -253,12 +310,6 @@ tester.run('valid-v-for', rule, {
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
-    },
-    {
-      filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>',
-      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',

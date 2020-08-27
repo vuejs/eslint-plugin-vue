@@ -56,6 +56,58 @@ tester.run('require-v-for-key', rule, {
       filename: 'test.vue',
       code:
         '<template><div><slot v-for="x in list" :name="x"><div :key="x"></div></slot></div></template>'
+    },
+    // key on <template> : In Vue.js 3.x, you can place key on <template>.
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" v-bind:key="x"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" v-bind:key="x"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x.id"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="x in list" :key="x.id"><MyComp /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="(x, i) in list" :key="i"><div /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><template v-for="(x, i) in list" :key="i"><MyComp /></template></div></template>'
+    },
+    // key on <slot> : In Vue.js 3.x, you can place key on <slot>.
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><slot v-for="x in list" :key="x"><div /></slot></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><div><slot v-for="x in list" :key="x"><MyComp /></slot></div></template>'
     }
   ],
   invalid: [
