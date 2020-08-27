@@ -33,7 +33,8 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 ```json
 {
   "vue/attribute-hyphenation": ["error", "always" | "never", {
-    "ignore": []
+    "ignore": [],
+    "ignoreComponents: []
   }]
 }
 ```
@@ -43,6 +44,7 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 - `"always"` (default) ... Use hyphenated name.
 - `"never"` ... Don't use hyphenated name except `data-`, `aria-` and `slot-scope`.
 - `"ignore"` ... Array of ignored names
+- `"ignoreComponents"` ... Array of ignored components
 
 ### `"always"`
 It errors on upper case letters.
@@ -94,6 +96,26 @@ Don't use hyphenated name but allow custom attributes
   <MyComponent data-id="prop" />
   <MyComponent aria-role="button" />
   <MyComponent slot-scope="prop" />
+
+  <!-- ✗ BAD -->
+  <MyComponent my-prop="prop" />
+</template>
+```
+
+</eslint-code-block>
+
+
+### `"never", { "ignoreComponents": ["v-"] }`
+Don't use hyphenated name but allow in special components
+
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['v-']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyComponent myProp="prop" />
+  <VDialog my-prop="prop" />
+  <v-dialog my-prop="prop" />
 
   <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />

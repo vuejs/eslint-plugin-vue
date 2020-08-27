@@ -60,6 +60,18 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><my-component :[foo-bar]></my-component></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><my-comp my-prop="" :foo-prop="bar" camelCase="ok"></my-com></template>',
+      options: ['never', { ignoreComponents: ['my-'] }]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><MyComp my-prop="" :foo-prop="bar" camelCase="ok"></my-com></template>',
+      options: ['always', { ignoreComponents: ['my-'] }]
     }
   ],
 
