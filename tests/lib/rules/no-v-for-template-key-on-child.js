@@ -49,6 +49,31 @@ tester.run('no-v-for-template-key-on-child', rule, {
       filename: 'test.vue',
       code:
         '<template><div><template v-for="(x, i) in list"><Foo :key="foo" /></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <template v-for="x in list">
+            <Foo v-if="a" :key="x" />
+          </template>
+        </div>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <template v-for="x in list">
+            <Foo v-if="a" :key="x.key1" />
+            <Foo v-else-if="a" :key="x.key2" />
+            <Foo v-else :key="x.key3" />
+            <Foo v-for="y in list" :key="x.key4" />
+          </template>
+        </div>
+      </template>`
     }
   ],
   invalid: [
@@ -102,6 +127,40 @@ tester.run('no-v-for-template-key-on-child', rule, {
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.',
         '`<template v-for>` key should be placed on the `<template>` tag.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <template v-for="x in list">
+            <Foo v-if="a" :key="x.key1" />
+            <Foo v-else-if="a" :key="x.key2" />
+            <Foo v-else :key="x.key3" />
+            <Foo v-for="y in list" :key="x.key4" />
+            <Foo :key="x.error1" />
+            <div :key="x.error2" />
+            <slot :key="x.error3" ></slot>
+          </template>
+        </div>
+      </template>`,
+      errors: [
+        {
+          message:
+            '`<template v-for>` key should be placed on the `<template>` tag.',
+          line: 9
+        },
+        {
+          message:
+            '`<template v-for>` key should be placed on the `<template>` tag.',
+          line: 10
+        },
+        {
+          message:
+            '`<template v-for>` key should be placed on the `<template>` tag.',
+          line: 11
+        }
       ]
     }
   ]
