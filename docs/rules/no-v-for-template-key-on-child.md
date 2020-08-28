@@ -16,7 +16,7 @@ This rule reports the key of the `<template v-for>` placed on the child elements
 In Vue.js 3.x, with the support for fragments, the `<template v-for>` key can be placed on the `<template>` tag.  
 
 ::: warning Note
-Do not use with the [vue/no-v-for-template-key] rule for Vue.js 2.x. 
+Do not use with the [vue/no-v-for-template-key] rule for Vue.js 2.x.  
 This rule conflicts with the [vue/no-v-for-template-key] rule.
 :::
 
