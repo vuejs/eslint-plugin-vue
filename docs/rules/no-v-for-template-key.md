@@ -9,7 +9,6 @@ description: disallow `key` attribute on `<template v-for>`
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-
 ## :book: Rule Details
 
 This rule reports the `<template v-for>` elements which have `key` attribute.
