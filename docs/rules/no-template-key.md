@@ -23,6 +23,9 @@ This rule reports the `<template>` elements which have `key` attribute.
   <div key="foo"> ... </div>
   <template> ... </template>
 
+  <!-- It's valid for Vue.js 3.x -->
+  <template v-for="item in list" :key="item.id"> ... </template>
+
   <!-- ✗ BAD -->
   <template key="foo"> ... </template>
   <template v-bind:key="bar"> ... </template>
@@ -32,9 +35,19 @@ This rule reports the `<template>` elements which have `key` attribute.
 
 </eslint-code-block>
 
+::: tip Note
+This rule does not report keys placed on `<template v-for>`. It's valid for Vue.js 3.x. If you want to report keys placed on `<template v-for>` invalid for Vue.js 2.x, use [vue/no-v-for-template-key] rule.
+:::
+
 ## :wrench: Options
 
 Nothing.
+
+## :couple: Related Rules
+
+- [vue/no-v-for-template-key]
+
+[vue/no-v-for-template-key]: ./no-v-for-template-key.md
 
 ## :books: Further Reading
 
