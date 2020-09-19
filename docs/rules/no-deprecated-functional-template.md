@@ -11,7 +11,9 @@ description: disallow using deprecated the `functional` template (in Vue.js 3.0.
 
 ## :book: Rule Details
 
-This rule reports deprecated the `functional` template (in Vue.js 3.0.0+)
+This rule reports deprecated the `functional` template (in Vue.js 3.0.0+).
+
+See [Migration Guide - Functional Components](https://v3.vuejs.org/guide/migration/functional-components.html) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-functional-template': ['error']}">
 
@@ -30,6 +32,7 @@ Nothing.
 
 ## :books: Further Reading
 
+- [Migration Guide - Functional Components](https://v3.vuejs.org/guide/migration/functional-components.html)
 - [Vue RFCs - 0007-functional-async-api-change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0007-functional-async-api-change.md)
 - [Guide - Functional Components](https://vuejs.org/v2/guide/render-function.html#Functional-Components)
 
