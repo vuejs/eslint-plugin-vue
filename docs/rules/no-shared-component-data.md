@@ -68,7 +68,6 @@ Nothing.
 
 ## :books: Further Reading
 
-
 - [Style guide (for v2) - Component data](https://vuejs.org/v2/style-guide/#Component-data-essential)
 - [API - data](https://v3.vuejs.org/api/options-data.html#data-2)
 - [API (for v2) - data](https://v3.vuejs.org/api/options-data.html#data-2)

@@ -77,7 +77,7 @@ This plugin supports the basic syntax of Vue.js 3.0, but the Vue.js 3.0 experime
 
 ### Running ESLint from the command line
 
-If you want to run `eslint` from the command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
+If you want to run `eslint` from the command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-target-files-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
 
 Examples:
 
@@ -245,7 +245,7 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
   - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
 
-### Conflict with [Prettier].
+### Conflict with [Prettier]
 
 If the [Prettier] conflicts with the shareable config provided by this plugin, use [eslint-config-prettier] to resolve it.
 
@@ -291,7 +291,7 @@ module.exports = {
 [prettier]: https://prettier.io/
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
 
-### Using JSX.
+### Using JSX
 
 If you are using JSX, you need to enable JSX in your ESLint configuration.
 
