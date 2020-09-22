@@ -21,6 +21,8 @@ This rule only has an effect when the `no-undef` rule is enabled.
 
 Without this rule this code triggers warning:
 
+<eslint-code-block :rules="{'no-undef': ['error'], 'vue/experimental-script-setup-vars': ['error']}">
+
 ```vue
 <script setup="props, { emit }">
 import { watchEffect } from 'vue'
@@ -29,6 +31,8 @@ watchEffect(() => console.log(props.msg))
 emit('foo')
 </script>
 ```
+
+</eslint-code-block>
 
 After turning on, `props` and `emit` are being marked as defined and `no-undef` rule doesn't report an issue.
 

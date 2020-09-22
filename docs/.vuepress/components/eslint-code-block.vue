@@ -62,6 +62,7 @@ export default {
     config() {
       return {
         globals: {
+          console: false,
           // ES2015 globals
           ArrayBuffer: false,
           DataView: false,
@@ -121,8 +122,13 @@ export default {
 
   async mounted() {
     // Load linter.
-    const [{ default: Linter }, { parseForESLint }] = await Promise.all([
+    const [
+      { default: Linter },
+      { default: noUndefRule },
+      { parseForESLint }
+    ] = await Promise.all([
       import('eslint4b/dist/linter'),
+      import('eslint/lib/rules/no-undef'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])
 
@@ -131,6 +137,7 @@ export default {
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
+    linter.defineRule('no-undef', noUndefRule)
 
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }
