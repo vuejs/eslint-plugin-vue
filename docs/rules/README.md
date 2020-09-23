@@ -50,6 +50,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-deprecated-functional-template](./no-deprecated-functional-template.md) | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-html-element-is](./no-deprecated-html-element-is.md) | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-inline-template](./no-deprecated-inline-template.md) | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  |
+| [vue/no-deprecated-props-default-this](./no-deprecated-props-default-this.md) | disallow props default function `this` access |  |
 | [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: |
 | [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
