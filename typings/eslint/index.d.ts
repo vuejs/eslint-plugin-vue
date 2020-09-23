@@ -49,6 +49,11 @@ export namespace Scope {
     identifiers: VAST.Identifier[]
     references: Reference[]
     defs: Definition[]
+
+    writeable?: boolean | undefined
+    eslintExplicitGlobal?: boolean | undefined
+    eslintExplicitGlobalComments?: Comment[] | undefined
+    eslintImplicitGlobalSetting?: 'readonly' | 'writable' | undefined
   }
   interface Reference {
     identifier: VAST.Identifier

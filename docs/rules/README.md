@@ -24,6 +24,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 | [vue/comment-directive](./comment-directive.md) | support comment-directives in `<template>` |  |
+| [vue/experimental-script-setup-vars](./experimental-script-setup-vars.md) | prevent variables defined in `<script setup>` to be marked as undefined |  |
 | [vue/jsx-uses-vars](./jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |  |
 
 ## Priority A: Essential (Error Prevention) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>
