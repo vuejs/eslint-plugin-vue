@@ -53,7 +53,7 @@ export default {
 
 </eslint-code-block>
 
-> we use editdistance to compare two string similarity, threshold is an option to control upper bound of editdistance to report
+> we use edit distance to compare two string similarity, threshold is an option to control upper bound of edit distance to report
 
 **Here is the another example about config option `threshold`**
 
@@ -75,15 +75,15 @@ export default {
   props: {
 
   },
-  /* ✓ GOOD, due to threshold is 5 */
-  method: {
+  /* ✗ BAD, due to threshold is 5 */
+  mehtod: {
 
   },
   /* ✓ GOOD, due to threshold is 5 */
   data: {
 
   },
-  /* ✗ BAD, due to we don't choose vue-router preset or add a custom option */
+  /* ✓ GOOD, due to we don't choose vue-router preset or add a custom option */
   beforeRouteEnteR() {
 
   }
@@ -97,7 +97,7 @@ export default {
 
 ```json
 {
-  "vue/no-unsed-vars": ["error", {
+  "vue/no-potential-component-option-typo": ["error", {
     "presets": ["vue"],
     "custom": [],
     "threshold": 1
@@ -111,11 +111,11 @@ export default {
 
 ## :rocket: Suggestion
 
-- We provide all the possible component option that editdistance between your vue component option and configuration options is greater than 0 and lessEqual than threshold
+- We provide all the possible component option that edit distance between your vue component option and configuration options is greater than 0 and less equal than threshold
 
 ## :books: Further Reading
 
-- [Edit_distance](https://en.wikipedia.org/wiki/Edit_distance)
+- [Edit distance](https://en.wikipedia.org/wiki/Edit_distance)
 
 ## :mag: Implementation
 
