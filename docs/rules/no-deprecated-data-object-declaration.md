@@ -15,6 +15,8 @@ description: disallow using deprecated object declaration on data (in Vue.js 3.0
 This rule reports use of deprecated object declaration on `data` property (in Vue.js 3.0.0+).
 The different from `vue/no-shared-component-data` is the root instance being also disallowed.
 
+See [Migration Guide - Data Option](https://v3.vuejs.org/guide/migration/data-option.html) for more details.
+
 <eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}" language="javascript" filename="example.js">
 
 ```js
@@ -75,6 +77,7 @@ Nothing.
 
 ## :books: Further Reading
 
+- [Migration Guide - Data Option](https://v3.vuejs.org/guide/migration/data-option.html)
 - [Vue RFCs - 0019-remove-data-object-declaration](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0019-remove-data-object-declaration.md)
 
 ## :mag: Implementation

@@ -3,23 +3,28 @@
 ## :cd: Installation
 
 Via `vue-cli` (**Recommended**):
+
 ```bash
 vue add @vue/cli-plugin-eslint
 ```
 
 Via [npm](https://www.npmjs.com/):
+
 ```bash
-npm install --save-dev eslint eslint-plugin-vue@next
+npm install --save-dev eslint eslint-plugin-vue
 ```
 
 Via [yarn](https://yarnpkg.com/):
+
 ```bash
-yarn add -D eslint eslint-plugin-vue@next
+yarn add -D eslint eslint-plugin-vue
 ```
 
 ::: tip Requirements
+
 - ESLint v6.2.0 and above
 - Node.js v8.10.0 and above
+
 :::
 
 ## :book: Usage
@@ -35,7 +40,8 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:vue/vue3-recommended'
+    'plugin:vue/vue3-recommended',
+    // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -46,13 +52,32 @@ module.exports = {
 
 See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
 
+#### Bundle Configurations
+
+This plugin provides some predefined configs.
+You can use the following configs by adding them to `extends`.
+
+- `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
+- Configurations for using Vue.js 3.x.
+  - `"plugin:vue/vue3-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `"plugin:vue/vue3-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/vue3-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+- Configurations for using Vue.js 2.x.
+  - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency
+
 :::warning Reporting rules
-By default all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a treshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+By default all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+:::
+
+:::warning Status of Vue.js 3.x supports
+This plugin supports the basic syntax of Vue.js 3.0, but the Vue.js 3.0 experimental features `<script setup>` and `<style vars>` are not yet supported. Follow [#1248](https://github.com/vuejs/eslint-plugin-vue/issues/1248) for more details.
 :::
 
 ### Running ESLint from the command line
 
-If you want to run `eslint` from the command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-file-extensions-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
+If you want to run `eslint` from the command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-target-files-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
 
 Examples:
 
@@ -220,7 +245,7 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
   - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
   - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
 
-### Conflict with [Prettier].
+### Conflict with [Prettier]
 
 If the [Prettier] conflicts with the shareable config provided by this plugin, use [eslint-config-prettier] to resolve it.
 
@@ -266,7 +291,7 @@ module.exports = {
 [prettier]: https://prettier.io/
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
 
-### Using JSX.
+### Using JSX
 
 If you are using JSX, you need to enable JSX in your ESLint configuration.
 

@@ -14,6 +14,8 @@ description: disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)
 
 This rule reports use of deprecated `$scopedSlots`. (in Vue.js 3.0.0+).
 
+See [Migration Guide - Slots Unification](https://v3.vuejs.org/guide/migration/slots-unification.html) for more details.
+
 <eslint-code-block fix :rules="{'vue/no-deprecated-dollar-scopedslots-api': ['error']}">
 
 ```vue
@@ -39,6 +41,7 @@ Nothing.
 
 ## :books: Further Reading
 
+- [Migration Guide - Slots Unification](https://v3.vuejs.org/guide/migration/slots-unification.html)
 - [Vue RFCs - 0006-slots-unification](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0006-slots-unification.md)
 
 ## :mag: Implementation

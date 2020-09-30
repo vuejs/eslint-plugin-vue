@@ -11,7 +11,9 @@ description: disallow using deprecated the `is` attribute on HTML elements (in V
 
 ## :book: Rule Details
 
-This rule reports deprecated the `is` attribute on HTML elements (removed in Vue.js v3.0.0+)
+This rule reports deprecated the `is` attribute on HTML elements (removed in Vue.js v3.0.0+).
+
+See [Migration Guide - Custom Elements Interop](https://v3.vuejs.org/guide/migration/custom-elements-interop.html#customized-built-in-elements) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-html-element-is': ['error']}">
 
@@ -35,6 +37,7 @@ Nothing.
 
 ## :books: Further Reading
 
+- [Migration Guide - Custom Elements Interop](https://v3.vuejs.org/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 - [Vue RFCs - 0027-custom-elements-interop](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md)
 
 ## :mag: Implementation

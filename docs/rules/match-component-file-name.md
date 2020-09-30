@@ -306,7 +306,7 @@ export default {
 
 ## :books: Further Reading
 
- - [Style guide - Single-file component filename casing](https://v3.vuejs.org/style-guide/#single-file-component-filename-casing-strongly-recommended)
+- [Style guide - Single-file component filename casing](https://v3.vuejs.org/style-guide/#single-file-component-filename-casing-strongly-recommended)
 
 ## :mag: Implementation
 

@@ -12,7 +12,9 @@ description: disallow use of deprecated `.sync` modifier on `v-bind` directive (
 
 ## :book: Rule Details
 
-This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
+This rule reports use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+).
+
+See [Migration Guide - `v-model`](https://v3.vuejs.org/guide/migration/v-model.html) for more details.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-v-bind-sync': ['error']}">
 
@@ -45,6 +47,7 @@ Nothing.
 
 ## :books: Further Reading
 
+- [Migration Guide - `v-model`](https://v3.vuejs.org/guide/migration/v-model.html)
 - [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
 
 ## :mag: Implementation

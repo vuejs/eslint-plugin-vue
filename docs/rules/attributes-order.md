@@ -12,7 +12,7 @@ description: enforce order of attributes
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
+This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue.js Style Guide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
 
 - `DEFINITION`
   e.g. 'is', 'v-is'
