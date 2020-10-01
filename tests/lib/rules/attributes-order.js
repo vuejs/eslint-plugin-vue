@@ -1213,6 +1213,67 @@ tester.run('attributes-order', rule, {
         'Attribute "v-bind" should go before "v-on:click".',
         'Attribute "v-if" should go before "v-on:click".'
       ]
+    },
+    {
+      filename: 'test.vue',
+      options: [
+        {
+          order: [
+            'UNIQUE',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION',
+            'SLOT'
+          ]
+        }
+      ],
+      code:
+        '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      errors: [
+        {
+          message: 'Attribute "bar" should go before "v-slot".'
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      options: [
+        {
+          order: [
+            'UNIQUE',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION',
+            'SLOT'
+          ]
+        }
+      ],
+      code:
+        '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      errors: [
+        {
+          message: 'Attribute "ref" should go before "bar".'
+        }
+      ]
     }
   ]
 })
