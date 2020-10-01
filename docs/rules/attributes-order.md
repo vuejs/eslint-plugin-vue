@@ -36,6 +36,12 @@ This rule aims to enforce ordering of component attributes. The default order is
   e.g. '@click="functionCall"', 'v-on="event"'
 - `CONTENT`
   e.g. 'v-text', 'v-html'
+  
+Since 7.0.1:
+ 
+- `SLOT`
+  e.g. 'v-slot', 'slot' (separately from `UNIQUE`).
+  It will inherit `UNIQUE` position by default.
 
 ### the default order
 
