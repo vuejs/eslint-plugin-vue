@@ -965,12 +965,14 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code: '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
-      output: '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      code:
+        '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [
         {
           message: 'Attribute "bar" should go before "v-slot".'
-        },
+        }
       ]
     },
 
@@ -994,13 +996,15 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code: '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
-      output: '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      code:
+        '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [
         {
           message: 'Attribute "ref" should go before "bar".'
-        },
+        }
       ]
-    },
+    }
   ]
 })
