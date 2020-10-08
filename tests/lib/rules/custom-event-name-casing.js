@@ -192,6 +192,40 @@ tester.run('custom-event-name-casing', rule, {
       </script>
       `,
       options: [{ ignores: ['fooBar', 'barBaz', 'bazQux'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('input:update')">
+        <input
+          @click="$emit('search:update')">
+        <input
+          @click="$emit('click:row')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('input:update')
+              context.emit('search:update')
+              context.emit('click:row')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('input:update')
+            this.$emit('search:update')
+            this.$emit('click:row')
+          }
+        }
+      }
+      </script>
+      `,
+      options: [{ ignores: ['input:update', 'search:update', 'click:row'] }]
     }
   ],
   invalid: [
