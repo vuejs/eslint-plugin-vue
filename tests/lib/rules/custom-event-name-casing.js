@@ -166,6 +166,32 @@ tester.run('custom-event-name-casing', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('fooBar')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('barBaz')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('bazQux')
+          }
+        }
+      }
+      </script>
+      `,
+      options: [{ ignores: ['fooBar', 'barBaz', 'bazQux'] }]
     }
   ],
   invalid: [
