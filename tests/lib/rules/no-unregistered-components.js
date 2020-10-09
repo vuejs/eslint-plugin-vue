@@ -405,12 +405,7 @@ tester.run('no-unregistered-components', rule, {
           name: 'CustomComponent'
         }
         </script>
-      `,
-      options: [
-        {
-          ignoreRecursive: true
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
@@ -423,12 +418,7 @@ tester.run('no-unregistered-components', rule, {
           name: 'CustomComponent'
         }
         </script>
-      `,
-      options: [
-        {
-          ignoreRecursive: true
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
@@ -441,12 +431,7 @@ tester.run('no-unregistered-components', rule, {
           name: 'CustomComponent'
         }
         </script>
-      `,
-      options: [
-        {
-          ignoreRecursive: true
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
@@ -459,12 +444,7 @@ tester.run('no-unregistered-components', rule, {
           name: 'CustomComponent'
         }
         </script>
-      `,
-      options: [
-        {
-          ignoreRecursive: true
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
@@ -477,12 +457,7 @@ tester.run('no-unregistered-components', rule, {
           name: 'CustomComponent'
         }
         </script>
-      `,
-      options: [
-        {
-          ignoreRecursive: true
-        }
-      ]
+      `
     }
   ],
   invalid: [
@@ -663,106 +638,6 @@ tester.run('no-unregistered-components', rule, {
           components: {
             'custom-component': InfoPrimaryWrapper
           }
-        }
-        </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "CustomComponent" component has been used but not registered.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <CustomComponent />
-        </template>
-        <script>
-        export default {
-          name: 'CustomComponent'
-        }
-        </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "CustomComponent" component has been used but not registered.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <custom-component />
-        </template>
-        <script>
-        export default {
-          name: 'CustomComponent'
-        }
-        </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "custom-component" component has been used but not registered.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <component :is="'CustomComponent'" />
-        </template>
-        <script>
-        export default {
-          name: 'CustomComponent'
-        }
-        </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "CustomComponent" component has been used but not registered.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <component is="CustomComponent" />
-        </template>
-        <script>
-        export default {
-          name: 'CustomComponent'
-        }
-        </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "CustomComponent" component has been used but not registered.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <div v-is="'CustomComponent'" />
-        </template>
-        <script>
-        export default {
-          name: 'CustomComponent'
         }
         </script>
       `,
