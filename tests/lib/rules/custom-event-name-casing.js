@@ -225,7 +225,7 @@ tester.run('custom-event-name-casing', rule, {
       }
       </script>
       `,
-      options: [{ ignores: ['input:update', 'search:update', 'click:row'] }]
+      options: [{ ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }]
     }
   ],
   invalid: [
