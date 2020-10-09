@@ -57,7 +57,7 @@ export default {
   }]
 }
 ```
-- `ignores` (`string[]`) ... The event names to ignore. Sets the event name to allow. For example, custom event names, Vue components event with special name, or Vue library component event name. You can set the regexp by writing it like `"/^name/"` or `update:input` or `fooBar`.
+- `ignores` (`string[]`) ... The event names to ignore. Sets the event name to allow. For example, custom event names, Vue components event with special name, or Vue library component event name. You can set the regexp by writing it like `"/^name/"` or `click:row` or `fooBar`.
 
 
 ## :books: Further Reading
