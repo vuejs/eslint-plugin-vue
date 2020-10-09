@@ -78,8 +78,7 @@ are ignored by default.
 ```json
 {
   "vue/no-unregistered-components": ["error", {
-    "ignorePatterns": [],
-    "ignoreRecursive": false
+    "ignorePatterns": []
   }]
 }
 ```
@@ -126,56 +125,6 @@ are ignored by default.
     components: {
 
     },
-  }
-</script>
-```
-
-</eslint-code-block>
-
-- `ignoreRecursive` Suppresses all errors if component name matches its parent component name.
-
-```
-Beware: recursive components can cause infinite loops, so make sure you use it with a condition.
-```
-
-### `ignoreRecursive: true`
-
-Note that you have to declare explicitly the `name` property in your component to make the recursive component work. See https://vuejs.org/v2/guide/components-edge-cases.html#Recursive-Components
-
-<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignoreRecursive': true }]}">
-
-```vue
-<!-- ✓ GOOD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <CustomComponent />
-  </div>
-</template>
-
-<script>
-  export default {
-    name: 'CustomComponent'
-  }
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignoreRecursive': true }]}">
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
-    <h2>Lorem ipsum</h2>
-    <CustomComponent />
-  </div>
-</template>
-
-<script>
-  export default {
-    // name is not declared
   }
 </script>
 ```
