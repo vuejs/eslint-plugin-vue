@@ -336,6 +336,68 @@ tester.run('custom-event-name-casing', rule, {
         "Custom event name 'barBaz' must be kebab-case.",
         "Custom event name 'bazQux' must be kebab-case."
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('input/update')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('search/update')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('click/row')
+          }
+        }
+      }
+      </script>
+      `,
+      options: [{ ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }],
+      errors: [
+        "Custom event name 'input/update' must be kebab-case.",
+        "Custom event name 'search/update' must be kebab-case.",
+        "Custom event name 'click/row' must be kebab-case."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('input/update')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('search/update')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('click/row')
+          }
+        }
+      }
+      </script>
+      `,
+      options: [{ ignores: ['input:update', 'search:update', 'click:row'] }],
+      errors: [
+        "Custom event name 'input/update' must be kebab-case.",
+        "Custom event name 'search/update' must be kebab-case.",
+        "Custom event name 'click/row' must be kebab-case."
+      ]
     }
   ]
 })
