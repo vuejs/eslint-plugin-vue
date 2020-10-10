@@ -105,7 +105,8 @@ tester.run('no-use-computed-property-like-method', rule, {
           }
         }
       </script>
-      `
+      `,
+      errors: ['Does not allow to use computed with this expression.']
     },
     {
       filename: 'test.vue',
@@ -129,7 +130,8 @@ tester.run('no-use-computed-property-like-method', rule, {
           }
         }
       </script>
-      `
+      `,
+      errors: ['Does not allow to use computed with this expression.']
     }
   ]
 })
