@@ -4,7 +4,6 @@ sidebarDepth: 0
 title: vue/no-use-computed-property-like-method
 description: disallow use computed property like method
 ---
-
 # vue/no-use-computed-property-like-method
 > disallow use computed property like method
 
