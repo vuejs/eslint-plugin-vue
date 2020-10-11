@@ -84,6 +84,29 @@ tester.run('valid-v-slot', rule, {
         <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
       </MyComponent>
     </template>`,
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: true }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo></template>
+            <template v-slot:foo.bar></template>
+            <template v-slot:foo.baz></template>
+            <template v-slot:foo.bar.baz></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: true }]
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -279,6 +302,7 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot.foo="{data}">{{data}}</MyComponent>
         </template>
       `,
+      options: [{ allowModifiers: true }],
       errors: [{ messageId: 'disallowAnyModifier' }]
     },
     {
@@ -289,7 +313,37 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
+      options: [{ allowModifiers: true }],
       errors: [{ messageId: 'disallowAnyModifier' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: false }],
+      errors: [{ messageId: 'disallowAnyModifier' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo></template>
+            <template v-slot:foo.bar></template>
+            <template v-slot:foo.baz></template>
+            <template v-slot:foo.bar.baz></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: false }],
+      errors: [
+        { messageId: 'disallowAnyModifier' },
+        { messageId: 'disallowAnyModifier' },
+        { messageId: 'disallowAnyModifier' }
+      ]
     },
 
     // Verify value.
