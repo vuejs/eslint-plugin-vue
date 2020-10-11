@@ -314,7 +314,6 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot.foo="{data}">{{data}}</MyComponent>
         </template>
       `,
-      options: [{ allowModifiers: true }],
       errors: [{ messageId: 'disallowAnyModifier' }]
     },
     {
