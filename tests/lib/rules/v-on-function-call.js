@@ -117,7 +117,7 @@ tester.run('v-on-function-call', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo"></div></template>',
-      output: `<template><div @click="foo"></div></template>`,
+      output: null,
       errors: [
         "Method calls inside of 'v-on' directives must have parentheses."
       ],
@@ -242,6 +242,15 @@ tester.run('v-on-function-call', rule, {
       <template>
         <div @click="fn"></div>
       </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>\r\n<div\r\n@click="foo()" /></template>',
+      output: '<template>\r\n<div\r\n@click="foo" /></template>',
       errors: [
         "Method calls without arguments inside of 'v-on' directives must not have parentheses."
       ],
