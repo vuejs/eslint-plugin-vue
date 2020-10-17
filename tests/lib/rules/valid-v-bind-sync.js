@@ -145,6 +145,20 @@ tester.run('valid-v-bind-sync', rule, {
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent :foo.sync="" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <table>
+          <tr is="my-row"
+            :some-prop.sync="somePropValue"
+            :some-other-prop.sync="someOtherPropValue">
+            <td></td>
+          </tr>
+        </table>
+      </template>
+      `
     }
   ],
   invalid: [
