@@ -326,6 +326,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/array-bracket-newline](./array-bracket-newline.md) | enforce linebreaks after opening and before closing array brackets | :wrench: |
 | [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets | :wrench: |
 | [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions | :wrench: |
 | [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
