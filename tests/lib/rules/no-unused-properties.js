@@ -1078,6 +1078,48 @@ tester.run('no-unused-properties', rule, {
       </script>
       `,
       options: [{ groups: ['props', 'data'] }]
+    },
+    // contexts
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          data: ({ x }) => ({
+              y: x
+          })
+        };
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: (vm) => vm.x * 2
+          }
+        };
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              handler: (vm) => vm.x * 2
+            }
+          }
+        };
+      </script>
+      `
     }
   ],
 
@@ -1574,6 +1616,53 @@ tester.run('no-unused-properties', rule, {
       })
       `,
       errors: ["'foo' of property found, but never used."]
+    },
+
+    // contexts
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          data: () => ({
+              y: x
+          })
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            [(vm) => vm.x * 2]: y
+          }
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              handler: (vm) => vm.z * 2,
+              deep: (vm) => vm.x * 2
+            }
+          }
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
     }
   ]
 })
