@@ -49,7 +49,47 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+
+```json
+{
+  "vue/custom-event-name-casing": ["error", {
+    "ignores": []
+  }]
+}
+```
+- `ignores` (`string[]`) ... The event names to ignore. Sets the event name to allow. For example, custom event names, Vue components event with special name, or Vue library component event name. You can set the regexp by writing it like `"/^name/"` or `click:row` or `fooBar`.
+
+### `"ignores": ["fooBar", "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"]`
+
+<eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', {ignores:'/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button @click="$emit('click:row')" />
+  <button @click="$emit('fooBar')" />
+
+  <!-- ✗ BAD -->
+  <button @click="$emit('myEvent')" />
+</template>
+<script>
+export default {
+  methods: {
+    onClick () {
+      /* ✓ GOOD */
+      this.$emit('click:row')
+      this.$emit('fooBar')
+
+      /* ✗ BAD */
+      this.$emit('myEvent')
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
 
 ## :books: Further Reading
 
