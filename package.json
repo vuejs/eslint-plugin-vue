@@ -13,7 +13,6 @@
     "cover:report": "nyc report --reporter=html",
     "lint": "eslint . --rulesdir eslint-internal-rules",
     "lint:fix": "eslint . --rulesdir eslint-internal-rules --fix",
-    "pretsc": "node ./tools/setup-eslint-rule-types.js",
     "tsc": "tsc",
     "preversion": "npm test && npm run update && git add .",
     "version": "npm run lint -- --fix && git add .",

@@ -33,7 +33,7 @@ This rule report variable definitions of v-for directives or scope attributes if
 
 ## :wrench: Options
 
-```js
+```json
 {
     "vue/no-unused-vars": ["error", {
         "ignorePattern": "^_"

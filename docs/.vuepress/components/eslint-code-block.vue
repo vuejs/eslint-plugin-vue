@@ -124,11 +124,11 @@ export default {
     // Load linter.
     const [
       { default: Linter },
-      { default: noUndefRule },
+      { default: coreRules },
       { parseForESLint }
     ] = await Promise.all([
       import('eslint4b/dist/linter'),
-      import('eslint/lib/rules/no-undef'),
+      import('eslint4b/dist/core-rules'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])
 
@@ -137,7 +137,7 @@ export default {
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
-    linter.defineRule('no-undef', noUndefRule)
+    linter.defineRule('no-undef', coreRules['no-undef'])
 
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }

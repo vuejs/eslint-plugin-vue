@@ -27,10 +27,14 @@ This rule reports mustaches in `<textarea>`.
 
 </eslint-code-block>
 
+<div v-pre>
+
 ::: warning Note
 Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
 [https://v3.vuejs.org/guide/forms.html#multiline-text](https://v3.vuejs.org/guide/forms.html#multiline-text)
 :::
+
+</div>
 
 ## :wrench: Options
 
