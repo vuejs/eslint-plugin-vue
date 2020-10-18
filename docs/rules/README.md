@@ -281,13 +281,14 @@ For example:
 ```json
 {
   "rules": {
-    "vue/component-name-in-template-casing": "error"
+    "vue/block-tag-newline": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
