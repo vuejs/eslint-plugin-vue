@@ -648,6 +648,26 @@ tester.run('no-unregistered-components', rule, {
           line: 3
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          name: CustomComponent
+        }
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
     }
   ]
 })
