@@ -39,7 +39,7 @@ Since single file components in Vue are not plain JavaScript, we can't use the d
 
 To know more about certain nodes in produced ASTs, go here:
 - [ESTree docs](https://github.com/estree/estree)
-- [vue-eslint-parser AST docs](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md)
+- [vue-eslint-parser AST docs](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md)
 
 The `vue-eslint-parser` provides few useful parser services, to help traverse the produced AST and access tokens of the template:
 - `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`
