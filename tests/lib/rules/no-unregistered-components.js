@@ -393,6 +393,71 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <custom-component />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="'CustomComponent'" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is="CustomComponent" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-is="'CustomComponent'" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
     }
   ],
   invalid: [
