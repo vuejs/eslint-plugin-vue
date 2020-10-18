@@ -84,6 +84,29 @@ tester.run('valid-v-slot', rule, {
         <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
       </MyComponent>
     </template>`,
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: true }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo></template>
+            <template v-slot:foo.bar></template>
+            <template v-slot:foo.baz></template>
+            <template v-slot:foo.bar.baz></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: true }]
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -259,6 +282,18 @@ tester.run('valid-v-slot', rule, {
       `,
       errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
     },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: true }],
+      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+    },
 
     // Verify arguments.
     {
@@ -290,6 +325,56 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [{ messageId: 'disallowAnyModifier' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [{ messageId: 'disallowAnyModifier' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot.foo></template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [{ messageId: 'disallowAnyModifier' }],
+      options: [{ allowModifiers: true }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo.bar></template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [{ messageId: 'disallowAnyModifier' }],
+      options: [{ allowModifiers: false }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-slot:foo></template>
+            <template v-slot:foo.bar></template>
+            <template v-slot:foo.baz></template>
+            <template v-slot:foo.bar.baz></template>
+          </MyComponent>
+        </template>
+      `,
+      options: [{ allowModifiers: false }],
+      errors: [
+        { messageId: 'disallowAnyModifier' },
+        { messageId: 'disallowAnyModifier' },
+        { messageId: 'disallowAnyModifier' }
+      ]
     },
 
     // Verify value.

@@ -100,7 +100,43 @@ This rule does not check syntax errors in directives because it's checked by [vu
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/valid-v-slot": ["error", {
+    "allowModifiers": false
+  }]
+}
+```
+
+- `allowModifiers` (`boolean`) ... allows having modifiers in the argument of `v-slot` directives. Modifiers just after `v-slot` are still disallowed. E.g. `<template v-slot.foo>` default `false`.
+
+### `allowModifiers: true`
+
+<eslint-code-block :rules="{'vue/valid-v-slot': ['error', {allowModifiers: true}]}">
+
+```vue
+<template>
+  <!-- ignore -->
+  <MyComponent>
+    <template v-slot:foo></template>
+    <template v-slot:foo.bar></template>
+    <template v-slot:foo.baz></template>
+    <template v-slot:foo.bar.baz></template>
+  </MyComponent>
+
+  <!--  ✗ BAD */ -->
+  <MyComponent v-slot.foo="{data}">
+    {{ data }}
+  </MyComponent>
+  <MyComponent>
+    <template v-slot.foo>
+      bar
+    </template>
+  </MyComponent>
+</template>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 
