@@ -21,22 +21,83 @@ This rule disallows to use computed property like method.
 
 <script>
   export default {
+    data() {
+      return {
+        dataString: 'dataString',
+        dataNumber: 10,
+        dataObject: {
+          inside: "inside"
+        },
+        dataArray: [1,2,3,4,5],
+        dataBoolean: true,
+        dataFunction() {
+          alert('dataFunction')
+        }
+      }
+    },
     props: {
-      name: {
+      propsString: {
         type: String
+      },
+      propsNumber: {
+        type: Number
+      },
+      propsObject: {
+        type: Object
+      },
+      propsArray: {
+        type: Array
+      },
+      propsBoolean: {
+        type: Boolean
+      },
+      propsFunction: {
+        type: Function
       },
     },
     computed: {
-      isExpectedName() {
-        return this.name === 'name';
+      computedReturnString() {
+        return 'computedReturnString'
+      },
+      computedReturnNumber() {
+        return 10
+      },
+      computedReturnObject() {
+        return {
+          inside: "inside"
+        }
+      },
+      computedReturnArray() {
+        return [1,2,3,4,5]
+      },
+      computedReturnBoolean() {
+        return true
+      },
+      computedReturnFunction() {
+        const fn = () => alert('computedReturnFunction')
+        return fn
       }
     },
     methods: {
-      getName() {
-        return this.isExpectedName
+      methodsReturnString() {
+        return 'methodsReturnString'
       },
-      getNameCallLikeMethod() {
-        return this.isExpectedName()
+      methodsReturnNumber() {
+        return 'methodsReturnNumber'
+      },
+      methodsReturnObject() {
+        return {
+          inside: "inside"
+        }
+      },
+      methodsReturnArray() {
+        return [1,2,3,4,5]
+      },
+      methodsReturnBoolean() {
+        return true
+      },
+      methodsReturnFunction() {
+        console.log(this.dataObject.inside);
       }
     }
   }
