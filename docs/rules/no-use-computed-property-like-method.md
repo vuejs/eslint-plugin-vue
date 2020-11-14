@@ -239,14 +239,14 @@ This rule can't check if props is used as array:
 
 <script>
   export default {
-    props: {
+    props: [
       "propsString",
       "propsNumber",
       "propsObject",
       "propsArray",
       "propsBoolean",
       "propsFunction"
-    },
+    ],
     computed: {
       computedReturnPropsString() {
         return this.propsString
