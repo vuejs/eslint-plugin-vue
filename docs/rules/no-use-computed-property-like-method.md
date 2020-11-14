@@ -56,6 +56,44 @@ This rule disallows to use computed property like method.
       },
     },
     computed: {
+      computedReturnDataString() {
+        return this.dataString
+      },
+      computedReturnDataNumber() {
+        return this.dataNumber
+      },
+      computedReturnDataObject() {
+        return this.dataObject
+      },
+      computedReturnDataArray() {
+        return this.dataArray
+      },
+      computedReturnDataBoolean() {
+        return this.dataBoolean
+      },
+      computedReturnDataFunction() {
+        return this.dataFunction
+      },
+
+      computedReturnPropsString() {
+        return this.propsString
+      },
+      computedReturnPropsNumber() {
+        return this.propsNumber
+      },
+      computedReturnPropsObject() {
+        return this.propsObject
+      },
+      computedReturnPropsArray() {
+        return this.propsArray
+      },
+      computedReturnPropsBoolean() {
+        return this.propsBoolean
+      },
+      computedReturnPropsFunction() {
+        return this.propsFunction
+      },
+
       computedReturnString() {
         return 'computedReturnString'
       },
@@ -76,7 +114,24 @@ This rule disallows to use computed property like method.
       computedReturnFunction() {
         const fn = () => alert('computedReturnFunction')
         return fn
+      },
+
+      computedReturnMethodsReturnString() {
+        return this.methodsReturnString
+      },
+      computedReturnMethodsReturnNumber() {
+        return this.methodsReturnNumber
+      },
+      computedReturnMethodsReturnObject() {
+        return this.methodsReturnObject
+      },
+      computedReturnMethodsReturnArray() {
+        return this.methodsReturnArray
+      },
+      computedReturnMethodsReturnBoolean() {
+        return this.methodsReturnBoolean
       }
+
     },
     methods: {
       methodsReturnString() {
@@ -97,7 +152,137 @@ This rule disallows to use computed property like method.
         return true
       },
       methodsReturnFunction() {
-        console.log(this.dataObject.inside);
+        const fn = () => alert('methodsReturnFunction')
+        return fn
+      },
+
+      fn() {
+        /* Reference data */
+        /* ✓ GOOD */
+        this.computedReturnDataString
+        this.computedReturnDataNumber
+        this.computedReturnDataObject
+        this.computedReturnDataArray
+        this.computedReturnDataBoolean
+        this.computedReturnDataFunction
+        this.computedReturnDataFunction()
+        /* ✗ BAD */
+        this.computedReturnDataString()
+        this.computedReturnDataNumber()
+        this.computedReturnDataObject()
+        this.computedReturnDataArray()
+        this.computedReturnDataBoolean()
+
+        /* Reference props */
+        /* ✓ GOOD */
+        this.computedReturnPropsString
+        this.computedReturnPropsNumber
+        this.computedReturnPropsObject
+        this.computedReturnPropsArray
+        this.computedReturnPropsBoolean
+        this.computedReturnPropsFunction
+        this.computedReturnPropsFunction()
+        /* ✗ BAD */
+        this.computedReturnPropsString()
+        this.computedReturnPropsNumber()
+        this.computedReturnPropsObject()
+        this.computedReturnPropsArray()
+        this.computedReturnPropsBoolean()
+
+        /* ✓ GOOD */
+        this.computedReturnString
+        this.computedReturnNumber
+        this.computedReturnObject
+        this.computedReturnArray
+        this.computedReturnBoolean
+        this.computedReturnFunction
+        this.computedReturnFunction()
+        /* ✗ BAD */
+        this.computedReturnString()
+        this.computedReturnNumber()
+        this.computedReturnObject()
+        this.computedReturnArray()
+        this.computedReturnBoolean()
+
+        /* Reference methods */
+        /* ✓ GOOD */
+        this.computedReturnMethodsReturnString
+        this.computedReturnMethodsReturnNumber
+        this.computedReturnMethodsReturnObject
+        this.computedReturnMethodsReturnArray
+        this.computedReturnMethodsReturnBoolean
+        this.computedReturnMethodsReturnFunction
+        this.computedReturnMethodsReturnFunction()
+        /* ✗ BAD */
+        this.computedReturnMethodsReturnString()
+        this.computedReturnMethodsReturnNumber()
+        this.computedReturnMethodsReturnObject()
+        this.computedReturnMethodsReturnArray()
+        this.computedReturnMethodsReturnBoolean()
+      }
+    }
+  }
+</script>
+```
+
+This rule can't check if props is used as array:
+</eslint-code-block>
+<eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
+
+```vue
+<template>
+  <div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      "propsString",
+      "propsNumber",
+      "propsObject",
+      "propsArray",
+      "propsBoolean",
+      "propsFunction"
+    },
+    computed: {
+      computedReturnPropsString() {
+        return this.propsString
+      },
+      computedReturnPropsNumber() {
+        return this.propsNumber
+      },
+      computedReturnPropsObject() {
+        return this.propsObject
+      },
+      computedReturnPropsArray() {
+        return this.propsArray
+      },
+      computedReturnPropsBoolean() {
+        return this.propsBoolean
+      },
+      computedReturnPropsFunction() {
+        return this.propsFunction
+      },
+    },
+    methods: {
+      fn() {
+        /* Reference props */
+        /* ✓ GOOD */
+        this.computedReturnPropsString
+        this.computedReturnPropsString()
+        this.computedReturnPropsNumber
+        this.computedReturnPropsNumber()
+        this.computedReturnPropsObject
+        this.computedReturnPropsObject()
+        this.computedReturnPropsArray
+        this.computedReturnPropsArray()
+        this.computedReturnPropsBoolean
+        this.computedReturnPropsBoolean()
+        this.computedReturnPropsFunction
+        this.computedReturnPropsFunction()
+        /* ✗ BAD */
+        /* Nope. everything is GOOD!! */
       }
     }
   }

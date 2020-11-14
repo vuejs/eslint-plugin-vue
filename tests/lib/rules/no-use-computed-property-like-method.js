@@ -26,64 +26,6 @@ tester.run('no-use-computed-property-like-method', rule, {
       code: `
       <script>
         export default {
-          computed: {
-            computedReturnString() {
-              return 'computedReturnString'
-            },
-            computedReturnNumber() {
-              return 10
-            },
-            computedReturnObject() {
-              return {
-                inside: "inside"
-              }
-            },
-            computedReturnArray() {
-              return [1,2,3,4,5]
-            },
-            computedReturnBoolean() {
-              return this.computedReturnArray
-            }
-          },
-          methods: {
-            fn() {
-              this.computedReturnString
-              this.computedReturnNumber
-              this.computedReturnObject
-              this.computedReturnArray
-              this.computedReturnBoolean
-            }
-          }
-        }
-      </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          computed: {
-            computedReturnFunction() {
-              const fn = () => alert('computedReturnFunction')
-              return fn
-            }
-          },
-          methods: {
-            fn() {
-              this.computedReturnFunction
-              this.computedReturnFunction()
-            }
-          }
-        }
-      </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
           data() {
             return {
               dataString: 'dataString',
@@ -286,9 +228,7 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `
-    }
-  ],
-  invalid: [
+    },
     {
       filename: 'test.vue',
       code: `
@@ -315,24 +255,116 @@ tester.run('no-use-computed-property-like-method', rule, {
           },
           methods: {
             fn() {
-              this.computedReturnString()
-              this.computedReturnNumber()
-              this.computedReturnObject()
-              this.computedReturnArray()
-              this.computedReturnBoolean()
+              this.computedReturnString
+              this.computedReturnNumber
+              this.computedReturnObject
+              this.computedReturnArray
+              this.computedReturnBoolean
             }
           }
         }
       </script>
-      `,
-      errors: [
-        'Use this.computedReturnString instead of this.computedReturnString().',
-        'Use this.computedReturnNumber instead of this.computedReturnNumber().',
-        'Use this.computedReturnObject instead of this.computedReturnObject().',
-        'Use this.computedReturnArray instead of this.computedReturnArray().',
-        'Use this.computedReturnBoolean instead of this.computedReturnBoolean().'
-      ]
+      `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnFunction() {
+              const fn = () => alert('computedReturnFunction')
+              return fn
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnFunction
+              this.computedReturnFunction()
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnMethodsReturnString() {
+              return this.methodsReturnString
+            },
+            computedReturnMethodsReturnNumber() {
+              return this.methodsReturnNumber
+            },
+            computedReturnMethodsReturnObject() {
+              return this.methodsReturnObject
+            },
+            computedReturnMethodsReturnArray() {
+              return this.methodsReturnArray
+            },
+            computedReturnMethodsReturnBoolean() {
+              return this.methodsReturnBoolean
+            }
+          },
+          methods: {
+            methodsReturnString() {
+              return 'methodsReturnString'
+            },
+            methodsReturnNumber() {
+              return 'methodsReturnNumber'
+            },
+            methodsReturnObject() {
+              return {
+                inside: "inside"
+              }
+            },
+            methodsReturnArray() {
+              return [1,2,3,4,5]
+            },
+            methodsReturnBoolean() {
+              return true
+            },
+            fn() {
+              this.computedReturnMethodsReturnString
+              this.computedReturnMethodsReturnNumber
+              this.computedReturnMethodsReturnObject
+              this.computedReturnMethodsReturnArray
+              this.computedReturnMethodsReturnBoolean
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnMethodsReturnFunction() {
+              return this.methodsReturnFunction
+            }
+          },
+          methods: {
+            methodsReturnFunction() {
+              const fn = () => alert('methodsReturnFunction')
+              return fn
+            },
+            fn() {
+              this.computedReturnMethodsReturnFunction
+              this.computedReturnMethodsReturnFunction()
+            }
+          }
+        }
+      </script>
+      `
+    }
+  ],
+  invalid: [
     {
       filename: 'test.vue',
       code: `
@@ -443,6 +475,101 @@ tester.run('no-use-computed-property-like-method', rule, {
         'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
         'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
         'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnString() {
+              return 'computedReturnString'
+            },
+            computedReturnNumber() {
+              return 10
+            },
+            computedReturnObject() {
+              return {
+                inside: "inside"
+              }
+            },
+            computedReturnArray() {
+              return [1,2,3,4,5]
+            },
+            computedReturnBoolean() {
+              return true
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnString()
+              this.computedReturnNumber()
+              this.computedReturnObject()
+              this.computedReturnArray()
+              this.computedReturnBoolean()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnString instead of this.computedReturnString().',
+        'Use this.computedReturnNumber instead of this.computedReturnNumber().',
+        'Use this.computedReturnObject instead of this.computedReturnObject().',
+        'Use this.computedReturnArray instead of this.computedReturnArray().',
+        'Use this.computedReturnBoolean instead of this.computedReturnBoolean().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnString() {
+              return 'computedReturnString'
+            },
+            computedReturnComputedReturnString() {
+              return this.computedReturnString
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnComputedReturnString()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnComputedReturnString instead of this.computedReturnComputedReturnString().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnObject() {
+              return {
+                insideFn() {
+                  return "insideFn"
+                }
+              }
+            },
+          },
+          methods: {
+            fn() {
+              this.computedReturnObject().insideFn
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnObject instead of this.computedReturnObject().'
       ]
     }
   ]
