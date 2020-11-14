@@ -14,11 +14,6 @@ This rule disallows to use computed property like method.
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 
 ```vue
-<template>
-  <div>
-  </div>
-</template>
-
 <script>
   export default {
     data() {
@@ -232,11 +227,6 @@ This rule can't check if props is used as array:
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 
 ```vue
-<template>
-  <div>
-  </div>
-</template>
-
 <script>
   export default {
     props: [
