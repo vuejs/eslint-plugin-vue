@@ -126,6 +126,9 @@ This rule disallows to use computed property like method.
       computedReturnMethodsReturnBoolean() {
         return this.methodsReturnBoolean
       }
+      computedReturnMethodsReturnFunction() {
+        return this.methodsReturnFunction
+      }
 
     },
     methods: {
