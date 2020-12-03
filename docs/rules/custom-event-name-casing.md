@@ -2,12 +2,10 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/custom-event-name-casing
-description: enforce custom event names always use "kebab-case"
+description: enforce specific casing for custom event name
 ---
 # vue/custom-event-name-casing
-> enforce custom event names always use "kebab-case"
-
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+> enforce specific casing for custom event name
 
 Define a style for custom event name casing for consistency purposes.
 
