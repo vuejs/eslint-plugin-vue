@@ -84,6 +84,30 @@ tester.run('valid-v-slot', rule, {
         <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
       </MyComponent>
     </template>`,
+    `<template>
+      <MyComponent>
+        <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
+        <template v-for="(key, value) in yyyy" #[key]>{{value}}</template>
+      </MyComponent>
+    </template>`,
+    `<template>
+      <MyComponent>
+        <template #[key]>{{value}}</template>
+        <template v-for="(key, value) in yyyy" #[key]>{{value}}</template>
+      </MyComponent>
+    </template>`,
+    `<template>
+      <MyComponent>
+        <template v-for="(value, key) in xxxx" #[key]>{{value}}</template>
+        <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
+      </MyComponent>
+    </template>`,
+    `<template>
+      <MyComponent>
+        <template v-for="(key) in xxxx" #[key+value]>{{value}}</template>
+        <template v-for="(key, value) in xxxx" #[key+value]>{{value}}</template>
+      </MyComponent>
+    </template>`,
     {
       code: `
         <template>
@@ -277,6 +301,43 @@ tester.run('valid-v-slot', rule, {
         <template>
           <MyComponent>
             <template v-for="(key, value) in definition" v-slot:[one]>{{value}}</template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-for="(key, value) in xxxx" v-slot:key>{{value}}</template>
+            <template v-for="(key, value) in yyyy" v-slot:key>{{value}}</template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [
+        { messageId: 'disallowDuplicateSlotsOnChildren' },
+        { messageId: 'disallowDuplicateSlotsOnChildren' },
+        { messageId: 'disallowDuplicateSlotsOnChildren' }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-for="(key, value) in xxxx" v-slot:[key]>{{value}}</template>
+            <template v-for="(key, value) in xxxx" v-slot:[key]>{{value}}</template>
+          </MyComponent>
+        </template>
+      `,
+      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+    },
+    {
+      code: `
+        <template>
+          <MyComponent>
+            <template v-for="(key) in xxxx" v-slot:[key]>{{value}}</template>
+            <template v-for="(key, value) in xxxx" v-slot:[key]>{{value}}</template>
           </MyComponent>
         </template>
       `,
