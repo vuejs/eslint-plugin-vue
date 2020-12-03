@@ -39,6 +39,22 @@ See [Migration Guide - Filters](https://v3.vuejs.org/guide/migration/filters.htm
 
 </eslint-code-block>
 
+:::warning
+Do not disable [`"parserOptions.vueFeatures.filter"`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeaturesfilter) to use this rule.
+
+```json5
+{
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "vueFeatures": {
+      "filter": false // Don't!!
+    }
+  }
+}
+```
+
+:::
+
 ### :wrench: Options
 
 Nothing.
