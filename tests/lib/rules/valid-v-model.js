@@ -151,6 +151,15 @@ tester.run('valid-v-model', rule, {
       code:
         '<template><MyComponent v-model.modifier.modifierTwo="a"></MyComponent></template>'
     },
+    // svg
+    {
+      code: `
+      <template>
+        <svg>
+          <MyComponent v-model="slotProps"></MyComponent>
+        </svg>
+      </template>`
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
