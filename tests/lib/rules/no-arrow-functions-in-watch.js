@@ -218,6 +218,51 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
           line: 15
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        watch: {
+          foo:{
+            handler: function() {},
+          },
+          bar:{
+            handler: () => {}
+          }
+        }
+      }`,
+      errors: [
+        {
+          message: 'You should not use an arrow function to define a watcher.',
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        watch: {
+          e: [
+            'handle1',
+            (val, oldVal) => { /* ... */ },
+            {
+              handler: (val, oldVal) => { /* ... */ },
+            }
+          ],
+        }
+      }`,
+      errors: [
+        {
+          message: 'You should not use an arrow function to define a watcher.',
+          line: 6
+        },
+        {
+          message: 'You should not use an arrow function to define a watcher.',
+          line: 8
+        }
+      ]
     }
   ]
 })

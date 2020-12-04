@@ -263,6 +263,29 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo'],
+            watch: {
+              foo: [
+                'bar',
+                {
+                  handler: 'baz'
+                }
+              ],
+            },
+            methods: {
+              bar () {},
+              baz () {},
+            }
+          };
+        </script>
+      `,
+      options: allOptions
+    },
 
     // data used as a template identifier
     {
@@ -1114,7 +1137,7 @@ tester.run('no-unused-properties', rule, {
           props: ['x'],
           computed: {
             y: {
-              handler: (vm) => vm.x * 2
+              get: () => this.x * 2
             }
           }
         };
