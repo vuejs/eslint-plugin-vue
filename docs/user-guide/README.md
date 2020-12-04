@@ -154,6 +154,25 @@ For example:
 
 If you want to disallow `eslint-disable` functionality in `<template>`, disable the [vue/comment-directive](../rules/comment-directive.md) rule.
 
+### Parser Options
+
+This plugin uses [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser).
+For `parserOptions`, you can use the `vueFeatures` options of `vue-eslint-parser`.
+
+```json
+{
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "vueFeatures": {
+      "filter": true,
+      "interpolationAsNonHTML": false,
+    }
+  }
+}
+```
+
+See the [`parserOptions.vueFeatures` documentation for `vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeatures) for more details.
+
 ## :computer: Editor integrations
 
 ### Visual Studio Code
