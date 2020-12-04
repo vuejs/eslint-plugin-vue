@@ -131,6 +131,17 @@ tester.run('valid-v-slot', rule, {
       `,
       options: [{ allowModifiers: true }]
     },
+    // svg
+    {
+      code: `
+      <template>
+        <svg>
+          <MyComponent v-slot="slotProps">
+            <MyChildComponent :thing="slotProps.thing" />
+          </MyComponent>
+        </svg>
+      </template>`
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
