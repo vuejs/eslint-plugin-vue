@@ -179,7 +179,7 @@ tester.run('valid-v-bind-sync', rule, {
       code: `
       <template>
         <table>
-          <tr v-bind:is="my-row"
+          <tr v-bind:is="myRow"
             :some-prop.sync="somePropValue"
             :some-other-prop.sync="someOtherPropValue">
             <td></td>
