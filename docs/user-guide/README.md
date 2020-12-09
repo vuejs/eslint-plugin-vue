@@ -193,7 +193,7 @@ Example **.vscode/settings.json**:
 }
 ```
 
-If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/linting-error.html) for more info.
+If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/guide/linting-error.html#linting) for more info.
 
 ### Sublime Text
 
