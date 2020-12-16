@@ -13,12 +13,11 @@ description: enforce new lines between multi-line properties in Vue components
 
 This rule aims at enforcing new lines between multi-line properties in Vue components to help readability
 
-Examples of **incorrect** code for this rule:
-
 <eslint-code-block fix :rules="{'vue/new-line-between-multi-line-property': ['error']}">
 
 ```vue
 <script>
+/* ✗ BAD */
 export default {
   props: {
     value: {
@@ -43,13 +42,11 @@ export default {
 
 </eslint-code-block>
 
-
-Examples of **correct** code for this rule:
-
 <eslint-code-block fix :rules="{'vue/new-line-between-multi-line-property': ['error']}">
 
 ```vue
 <script>
+/* ✓ GOOD */
 export default {
   props: {
     value: {
@@ -77,6 +74,7 @@ export default {
 </eslint-code-block>
 
 ## :wrench: Option
+
 ```json
 {
   "vue/new-line-between-multiline-property": ["error", {
@@ -84,9 +82,13 @@ export default {
   }]
 }
 ```
-- `minLineOfMultilineProperty` ... `type: number`, Define the minimum number of rows for a multi-line property  .`type:` number, `default:` 2 , `min:`: 2
+
+- `minLineOfMultilineProperty` ... Define the minimum number of rows for a multi-line property. default `2`
+
 ## :books: Further Reading
-Nothing here
+
+- [Style guide - Empty lines in component/instance options](https://v3.vuejs.org/style-guide/#empty-lines-in-component-instance-options-recommended)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/new-line-between-multi-line-property.js)
