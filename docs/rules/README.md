@@ -302,6 +302,7 @@ For example:
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  |
+| [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event |  |
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props |  |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  |
