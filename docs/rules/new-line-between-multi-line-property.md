@@ -77,7 +77,7 @@ export default {
 
 ```json
 {
-  "vue/new-line-between-multiline-property": ["error", {
+  "vue/new-line-between-multi-line-property": ["error", {
     "minLineOfMultilineProperty": 2
   }]
 }
