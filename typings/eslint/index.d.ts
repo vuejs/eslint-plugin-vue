@@ -150,7 +150,7 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getLastToken(node: VNODE.HasLocation, options: number): AST.Token
   getLastToken(
     node: VNODE.HasLocation,
-    optionss: SourceCode.CursorWithSkipOptions
+    options: SourceCode.CursorWithSkipOptions
   ): AST.Token | null
   getLastTokens(
     node: VNODE.HasLocation,

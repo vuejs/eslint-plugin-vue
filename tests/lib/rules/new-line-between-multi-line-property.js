@@ -103,6 +103,19 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+        }/*A*/
+
+        ,/*B*/emits: {
+        },
+      }
+      </script>`
     }
   ],
 
@@ -152,7 +165,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 10
+          line: 13
         }
       ]
     },
@@ -263,12 +276,12 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 18
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 19
+          line: 33
         }
       ]
     },
@@ -319,7 +332,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 9
+          line: 13
         }
       ]
     },
@@ -372,7 +385,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 9
+          line: 13
         }
       ]
     },
@@ -389,7 +402,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             required: true
           },
         },
-        
+
         methods: {
           test() {
 
@@ -414,7 +427,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
             required: true
           },
         },
-        
+
         methods: {
           test() {
 
@@ -435,7 +448,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 12
+          line: 14
         }
       ]
     },
@@ -514,17 +527,17 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 4
+          line: 8
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 12
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 9
+          line: 15
         }
       ]
     },
@@ -606,8 +619,120 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 4
+          line: 8
         },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 13
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+        },emits: {
+        }
+      }
+      </script>`,
+      output: `
+      <script>
+      export default {
+        props: {
+        },
+
+emits: {
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+        }
+        ,emits: {
+        }
+      }
+      </script>`,
+      output: `
+      <script>
+      export default {
+        props: {
+        }
+
+        ,emits: {
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+        }/*A*/
+        ,/*B*/emits: {
+        },
+
+        data: {
+        }/*A*/,/*B*/computed: {
+        },
+
+        watch: {
+        }/*A*/,
+        /*B*/methods: {
+        }
+      }
+      </script>`,
+      output: `
+      <script>
+      export default {
+        props: {
+        }/*A*/
+
+        ,/*B*/emits: {
+        },
+
+        data: {
+        }/*A*/,
+
+/*B*/computed: {
+        },
+
+        watch: {
+        }/*A*/,
+
+        /*B*/methods: {
+        }
+      }
+      </script>`,
+      errors: [
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
@@ -617,6 +742,42 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
           line: 10
+        },
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 14
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+        }
+        ,
+        emits: {
+        }
+      }
+      </script>`,
+      output: `
+      <script>
+      export default {
+        props: {
+        }
+
+        ,
+        emits: {
+        }
+      }
+      </script>`,
+      errors: [
+        {
+          message:
+            'Enforce new lines between multi-line properties in Vue components.',
+          line: 5
         }
       ]
     }
