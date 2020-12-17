@@ -458,7 +458,26 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
-    }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponentWithNamedSlots>
+            <template #slotA>
+              <div>Text</div>
+            </template>
+          </CustomComponentWithNamedSlots>
+        </template>
+        <script>
+        export default {
+          components: {
+            CustomComponentWithNamedSlots
+          }
+        }
+        </script>
+      `
+    },
   ],
   invalid: [
     {
@@ -668,6 +687,25 @@ tester.run('no-unregistered-components', rule, {
           line: 3
         }
       ]
-    }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponentWithNamedSlots>
+            <template #slotA>
+              <div>Text</div>
+            </template>
+          </CustomComponentWithNamedSlots>
+        </template>
+      `,
+      errors: [
+        {
+          message:
+            'The "CustomComponentWithNamedSlots" component has been used but not registered.',
+          line: 3
+        }
+      ]
+    },
   ]
 })
