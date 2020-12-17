@@ -327,6 +327,8 @@ export namespace Rule {
     getSourceCode(): SourceCode
     markVariableAsUsed(name: string): boolean
     report(descriptor: ReportDescriptor): void
+
+    getCwd(): string
   }
 
   type ReportDescriptor =
