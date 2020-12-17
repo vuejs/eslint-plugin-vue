@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-dupe-v-else-if
 description: disallow duplicate conditions in `v-if` / `v-else-if` chains
+since: v7.0.0
 ---
 # vue/no-dupe-v-else-if
 > disallow duplicate conditions in `v-if` / `v-else-if` chains

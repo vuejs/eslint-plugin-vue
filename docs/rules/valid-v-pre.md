@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-pre
 description: enforce valid `v-pre` directives
+since: v3.11.0
 ---
 # vue/valid-v-pre
 > enforce valid `v-pre` directives

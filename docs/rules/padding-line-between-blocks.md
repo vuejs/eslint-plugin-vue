@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/padding-line-between-blocks
 description: require or disallow padding lines between blocks
+since: v6.2.0
 ---
 # vue/padding-line-between-blocks
 > require or disallow padding lines between blocks

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-sparse-arrays
 description: disallow sparse arrays
+since: v7.0.0
 ---
 # vue/no-sparse-arrays
 > disallow sparse arrays

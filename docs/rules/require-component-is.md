@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-component-is
 description: require `v-bind:is` of `<component>` elements
+since: v3.0.0
 ---
 # vue/require-component-is
 > require `v-bind:is` of `<component>` elements

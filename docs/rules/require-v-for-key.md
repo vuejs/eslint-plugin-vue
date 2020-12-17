@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-v-for-key
 description: require `v-bind:key` with `v-for` directives
+since: v3.0.0
 ---
 # vue/require-v-for-key
 > require `v-bind:key` with `v-for` directives

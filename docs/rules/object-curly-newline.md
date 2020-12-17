@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/object-curly-newline
 description: enforce consistent line breaks inside braces
+since: v7.0.0
 ---
 # vue/object-curly-newline
 > enforce consistent line breaks inside braces

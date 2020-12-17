@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comment-directive
 description: support comment-directives in `<template>`
+since: v4.1.0
 ---
 # vue/comment-directive
 > support comment-directives in `<template>`

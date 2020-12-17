@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-side-effects-in-computed-properties
 description: disallow side effects in computed properties
+since: v3.6.0
 ---
 # vue/no-side-effects-in-computed-properties
 > disallow side effects in computed properties

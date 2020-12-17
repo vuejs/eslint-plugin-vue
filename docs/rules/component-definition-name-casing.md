@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/component-definition-name-casing
 description: enforce specific casing for component definition name
+since: v7.0.0
 ---
 # vue/component-definition-name-casing
 > enforce specific casing for component definition name
@@ -62,12 +63,12 @@ export default {
 ```js
 /* ✓ GOOD */
 Vue.component('MyComponent', {
-  
+
 })
 
 /* ✗ BAD */
 Vue.component('my-component', {
-  
+
 })
 ```
 
@@ -106,12 +107,12 @@ export default {
 ```js
 /* ✓ GOOD */
 Vue.component('my-component', {
-  
+
 })
 
 /* ✗ BAD */
 Vue.component('MyComponent', {
-  
+
 })
 ```
 

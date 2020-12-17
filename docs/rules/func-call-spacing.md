@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/func-call-spacing
 description: require or disallow spacing between function identifiers and their invocations
+since: v7.0.0
 ---
 # vue/func-call-spacing
 > require or disallow spacing between function identifiers and their invocations

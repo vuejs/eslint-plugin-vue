@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/match-component-file-name
 description: require component name property to match its file name
+since: v5.2.0
 ---
 # vue/match-component-file-name
 > require component name property to match its file name

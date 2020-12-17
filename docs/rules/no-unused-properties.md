@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unused-properties
 description: disallow unused properties
+since: v7.0.0
 ---
 # vue/no-unused-properties
 > disallow unused properties

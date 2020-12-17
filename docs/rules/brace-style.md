@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/brace-style
 description: enforce consistent brace style for blocks
+since: v5.2.0
 ---
 # vue/brace-style
 > enforce consistent brace style for blocks

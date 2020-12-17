@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-parsing-error
 description: disallow parsing errors in `<template>`
+since: v3.0.0
 ---
 # vue/no-parsing-error
 > disallow parsing errors in `<template>`

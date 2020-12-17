@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/block-tag-newline
 description: enforce line breaks after opening and before closing block-level tags
+since: v7.1.0
 ---
 # vue/block-tag-newline
 > enforce line breaks after opening and before closing block-level tags

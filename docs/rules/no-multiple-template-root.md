@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-multiple-template-root
 description: disallow adding multiple root nodes to the template
+since: v7.0.0
 ---
 # vue/no-multiple-template-root
 > disallow adding multiple root nodes to the template

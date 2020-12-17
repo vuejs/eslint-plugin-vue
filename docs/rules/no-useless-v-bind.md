@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-v-bind
 description: disallow unnecessary `v-bind` directives
+since: v7.0.0
 ---
 # vue/no-useless-v-bind
 > disallow unnecessary `v-bind` directives
@@ -11,7 +12,7 @@ description: disallow unnecessary `v-bind` directives
 
 ## :book: Rule Details
 
-This rule reports `v-bind` with a string literal value.  
+This rule reports `v-bind` with a string literal value.
 The `v-bind` with a string literal value can be changed to a static attribute definition.
 
 <eslint-code-block fix :rules="{'vue/no-useless-v-bind': ['error']}">

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-props
 description: disallow specific props
+since: v7.3.0
 ---
 # vue/no-restricted-props
 > disallow specific props

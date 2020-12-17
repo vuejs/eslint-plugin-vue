@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-slot-attribute
 description: disallow deprecated `slot` attribute (in Vue.js 2.6.0+)
+since: v6.1.0
 ---
 # vue/no-deprecated-slot-attribute
 > disallow deprecated `slot` attribute (in Vue.js 2.6.0+)

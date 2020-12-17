@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-on
 description: enforce valid `v-on` directives
+since: v3.11.0
 ---
 # vue/valid-v-on
 > enforce valid `v-on` directives

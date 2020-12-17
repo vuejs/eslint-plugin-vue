@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/component-tags-order
 description: enforce order of component top-level elements
+since: v6.1.0
 ---
 # vue/component-tags-order
 > enforce order of component top-level elements

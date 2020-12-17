@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-in-parens
 description: enforce consistent spacing inside parentheses
+since: v7.0.0
 ---
 # vue/space-in-parens
 > enforce consistent spacing inside parentheses

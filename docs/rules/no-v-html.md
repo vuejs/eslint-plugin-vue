@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-html
 description: disallow use of v-html to prevent XSS attack
+since: v4.7.0
 ---
 # vue/no-v-html
 > disallow use of v-html to prevent XSS attack

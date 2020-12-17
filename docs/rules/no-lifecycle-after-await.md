@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-lifecycle-after-await
 description: disallow asynchronously registered lifecycle hooks
+since: v7.0.0
 ---
 # vue/no-lifecycle-after-await
 > disallow asynchronously registered lifecycle hooks
@@ -11,7 +12,7 @@ description: disallow asynchronously registered lifecycle hooks
 
 ## :book: Rule Details
 
-This rule reports the lifecycle hooks after `await` expression.  
+This rule reports the lifecycle hooks after `await` expression.
 In `setup()` function, `onXXX` lifecycle hooks should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-lifecycle-after-await': ['error']}">
