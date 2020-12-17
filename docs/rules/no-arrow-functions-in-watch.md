@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-arrow-functions-in-watch
 description: disallow using arrow functions to define watcher
+since: v7.0.0
 ---
 # vue/no-arrow-functions-in-watch
 > disallow using arrow functions to define watcher

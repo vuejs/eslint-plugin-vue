@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/object-property-newline
 description: enforce placing object properties on separate lines
+since: v7.0.0
 ---
 # vue/object-property-newline
 > enforce placing object properties on separate lines

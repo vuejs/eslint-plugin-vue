@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-cloak
 description: enforce valid `v-cloak` directives
+since: v3.11.0
 ---
 # vue/valid-v-cloak
 > enforce valid `v-cloak` directives

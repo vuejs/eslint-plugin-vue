@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-infix-ops
 description: require spacing around infix operators
+since: v5.2.0
 ---
 # vue/space-infix-ops
 > require spacing around infix operators

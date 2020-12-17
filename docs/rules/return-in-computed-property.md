@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/return-in-computed-property
 description: enforce that a return statement is present in computed property
+since: v3.7.0
 ---
 # vue/return-in-computed-property
 > enforce that a return statement is present in computed property

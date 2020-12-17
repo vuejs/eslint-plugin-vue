@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-template-root
 description: enforce valid template root
+since: v3.11.0
 ---
 # vue/valid-template-root
 > enforce valid template root

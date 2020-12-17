@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-inline-template
 description: disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-inline-template
 > disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+)

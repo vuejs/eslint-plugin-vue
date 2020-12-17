@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-target-blank
 description: disallow target="_blank" attribute without rel="noopener noreferrer"
+since: v7.0.0
 ---
 # vue/no-template-target-blank
 > disallow target="_blank" attribute without rel="noopener noreferrer"

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/dot-location
 description: enforce consistent newlines before and after dots
+since: v6.0.0
 ---
 # vue/dot-location
 > enforce consistent newlines before and after dots

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-mustaches
 description: disallow unnecessary mustache interpolations
+since: v7.0.0
 ---
 # vue/no-useless-mustaches
 > disallow unnecessary mustache interpolations
@@ -11,7 +12,7 @@ description: disallow unnecessary mustache interpolations
 
 ## :book: Rule Details
 
-This rule reports mustache interpolation with a string literal value.  
+This rule reports mustache interpolation with a string literal value.
 The mustache interpolation with a string literal value can be changed to a static contents.
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error']}">

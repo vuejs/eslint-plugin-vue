@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-self-closing
 description: enforce self-closing style
+since: v3.11.0
 ---
 # vue/html-self-closing
 > enforce self-closing style

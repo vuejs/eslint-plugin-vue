@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-key
 description: disallow `key` attribute on `<template>`
+since: v3.4.0
 ---
 # vue/no-template-key
 > disallow `key` attribute on `<template>`

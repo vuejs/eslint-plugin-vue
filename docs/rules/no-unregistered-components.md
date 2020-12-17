@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unregistered-components
 description: disallow using components that are not registered inside templates
+since: v7.0.0
 ---
 # vue/no-unregistered-components
 > disallow using components that are not registered inside templates
@@ -12,8 +13,8 @@ description: disallow using components that are not registered inside templates
 This rule reports components that haven't been registered and are being used in the template.
 
 ::: warning Note
-This rule cannot check globally registered components and components registered in mixins 
-unless you add them as part of the ignored patterns. `component`, `suspense` and `teleport` 
+This rule cannot check globally registered components and components registered in mixins
+unless you add them as part of the ignored patterns. `component`, `suspense` and `teleport`
 are ignored by default.
 :::
 

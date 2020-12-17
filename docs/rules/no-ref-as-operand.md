@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-ref-as-operand
 description: disallow use of value wrapped by `ref()` (Composition API) as an operand
+since: v7.0.0
 ---
 # vue/no-ref-as-operand
 > disallow use of value wrapped by `ref()` (Composition API) as an operand
@@ -11,7 +12,7 @@ description: disallow use of value wrapped by `ref()` (Composition API) as an op
 
 ## :book: Rule Details
 
-This rule reports cases where a ref is used incorrectly as an operand.  
+This rule reports cases where a ref is used incorrectly as an operand.
 You must use `.value` to access the `Ref` value.
 
 <eslint-code-block :rules="{'vue/no-ref-as-operand': ['error']}">

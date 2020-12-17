@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-custom-modifiers-on-v-model
 description: disallow custom modifiers on v-model used on the component
+since: v7.0.0
 ---
 # vue/no-custom-modifiers-on-v-model
 > disallow custom modifiers on v-model used on the component

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/key-spacing
 description: enforce consistent spacing between keys and values in object literal properties
+since: v5.2.0
 ---
 # vue/key-spacing
 > enforce consistent spacing between keys and values in object literal properties

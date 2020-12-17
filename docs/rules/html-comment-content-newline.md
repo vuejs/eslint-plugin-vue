@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-comment-content-newline
 description: enforce unified line brake in HTML comments
+since: v7.0.0
 ---
 # vue/html-comment-content-newline
 > enforce unified line brake in HTML comments

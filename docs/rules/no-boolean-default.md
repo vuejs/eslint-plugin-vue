@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-boolean-default
 description: disallow boolean defaults
+since: v7.0.0
 ---
 # vue/no-boolean-default
 > disallow boolean defaults

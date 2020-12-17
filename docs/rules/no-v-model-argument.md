@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-model-argument
 description: disallow adding an argument to `v-model` used in custom component
+since: v7.0.0
 ---
 # vue/no-v-model-argument
 > disallow adding an argument to `v-model` used in custom component

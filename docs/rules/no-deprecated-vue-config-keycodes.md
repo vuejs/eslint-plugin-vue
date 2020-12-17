@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-vue-config-keycodes
 description: disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-vue-config-keycodes
 > disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/keyword-spacing
 description: enforce consistent spacing before and after keywords
+since: v6.0.0
 ---
 # vue/keyword-spacing
 > enforce consistent spacing before and after keywords

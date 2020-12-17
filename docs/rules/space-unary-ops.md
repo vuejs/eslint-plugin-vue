@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-unary-ops
 description: enforce consistent spacing before or after unary operators
+since: v5.2.0
 ---
 # vue/space-unary-ops
 > enforce consistent spacing before or after unary operators

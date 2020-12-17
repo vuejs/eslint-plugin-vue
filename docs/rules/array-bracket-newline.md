@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/array-bracket-newline
 description: enforce linebreaks after opening and before closing array brackets
+since: v7.1.0
 ---
 # vue/array-bracket-newline
 > enforce linebreaks after opening and before closing array brackets

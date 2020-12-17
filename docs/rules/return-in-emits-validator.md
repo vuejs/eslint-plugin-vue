@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/return-in-emits-validator
 description: enforce that a return statement is present in emits validator
+since: v7.0.0
 ---
 # vue/return-in-emits-validator
 > enforce that a return statement is present in emits validator

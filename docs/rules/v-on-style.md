@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-on-style
 description: enforce `v-on` directive style
+since: v3.0.0
 ---
 # vue/v-on-style
 > enforce `v-on` directive style

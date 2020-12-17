@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/camelcase
 description: enforce camelcase naming convention
+since: v5.2.0
 ---
 # vue/camelcase
 > enforce camelcase naming convention
