@@ -328,7 +328,8 @@ export namespace Rule {
     markVariableAsUsed(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
-    getCwd(): string
+    // eslint@6 does not have this method.
+    getCwd?: () => string
   }
 
   type ReportDescriptor =
