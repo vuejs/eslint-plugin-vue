@@ -477,7 +477,7 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
-    },
+    }
   ],
   invalid: [
     {
@@ -706,6 +706,6 @@ tester.run('no-unregistered-components', rule, {
           line: 3
         }
       ]
-    },
+    }
   ]
 })
