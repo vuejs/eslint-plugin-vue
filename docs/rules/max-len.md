@@ -6,6 +6,7 @@ description: enforce a maximum line length
 since: v6.1.0
 ---
 # vue/max-len
+
 > enforce a maximum line length
 
 ## :book: Rule Details
@@ -323,6 +324,10 @@ var longRegExpLiteral = /this is a really really really really really long regul
 - [max-len]
 
 [max-len]: https://eslint.org/docs/rules/max-len
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

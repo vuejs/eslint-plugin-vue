@@ -6,6 +6,7 @@ description: enforce consistent indentation in `<template>`
 since: v3.14.0
 ---
 # vue/html-indent
+
 > enforce consistent indentation in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -190,6 +191,10 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.14.0
 
 ## :mag: Implementation
 

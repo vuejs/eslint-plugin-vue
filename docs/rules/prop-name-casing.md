@@ -6,6 +6,7 @@ description: enforce specific casing for the Prop name in Vue components
 since: v4.3.0
 ---
 # vue/prop-name-casing
+
 > enforce specific casing for the Prop name in Vue components
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -68,6 +69,10 @@ export default {
 ## :books: Further Reading
 
 - [Style guide - Prop name casing](https://v3.vuejs.org/style-guide/#prop-name-casing-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v4.3.0
 
 ## :mag: Implementation
 

@@ -6,6 +6,7 @@ description: require a name property in Vue components
 since: v6.1.0
 ---
 # vue/require-name-property
+
 > require a name property in Vue components
 
 ## :book: Rule Details
@@ -53,6 +54,10 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

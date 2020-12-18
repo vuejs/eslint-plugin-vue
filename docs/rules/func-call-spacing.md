@@ -6,6 +6,7 @@ description: require or disallow spacing between function identifiers and their 
 since: v7.0.0
 ---
 # vue/func-call-spacing
+
 > require or disallow spacing between function identifiers and their invocations
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -17,6 +18,10 @@ This rule is the same rule as core [func-call-spacing] rule but it applies to th
 - [func-call-spacing]
 
 [func-call-spacing]: https://eslint.org/docs/rules/func-call-spacing
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

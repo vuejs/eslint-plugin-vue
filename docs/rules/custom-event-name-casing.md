@@ -6,6 +6,7 @@ description: enforce specific casing for custom event name
 since: v7.0.0
 ---
 # vue/custom-event-name-casing
+
 > enforce specific casing for custom event name
 
 Define a style for custom event name casing for consistency purposes.
@@ -169,6 +170,10 @@ export default {
 
 [Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
 [Guide (for v2) - Custom Events]: https://vuejs.org/v2/guide/components-custom-events.html
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

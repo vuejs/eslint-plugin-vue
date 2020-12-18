@@ -6,6 +6,7 @@ description: enforce component's data property to be a function
 since: v3.8.0
 ---
 # vue/no-shared-component-data
+
 > enforce component's data property to be a function
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -72,6 +73,10 @@ Nothing.
 - [Style guide (for v2) - Component data](https://vuejs.org/v2/style-guide/#Component-data-essential)
 - [API - data](https://v3.vuejs.org/api/options-data.html#data-2)
 - [API (for v2) - data](https://v3.vuejs.org/api/options-data.html#data-2)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.8.0
 
 ## :mag: Implementation
 

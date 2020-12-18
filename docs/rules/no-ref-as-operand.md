@@ -6,6 +6,7 @@ description: disallow use of value wrapped by `ref()` (Composition API) as an op
 since: v7.0.0
 ---
 # vue/no-ref-as-operand
+
 > disallow use of value wrapped by `ref()` (Composition API) as an operand
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -56,6 +57,10 @@ Nothing.
 
 - [Guide - Reactivity - Reactivity Fundamentals / Creating Standalone Reactive Values as `refs`](https://v3.vuejs.org/guide/reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

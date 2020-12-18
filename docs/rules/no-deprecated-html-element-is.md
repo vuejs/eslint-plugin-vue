@@ -6,6 +6,7 @@ description: disallow using deprecated the `is` attribute on HTML elements (in V
 since: v7.0.0
 ---
 # vue/no-deprecated-html-element-is
+
 > disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -40,6 +41,10 @@ Nothing.
 
 - [Migration Guide - Custom Elements Interop](https://v3.vuejs.org/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 - [Vue RFCs - 0027-custom-elements-interop](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

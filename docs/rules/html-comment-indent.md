@@ -6,6 +6,7 @@ description: enforce consistent indentation in HTML comments
 since: v7.0.0
 ---
 # vue/html-comment-indent
+
 > enforce consistent indentation in HTML comments
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -127,6 +128,10 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

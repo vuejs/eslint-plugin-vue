@@ -6,6 +6,7 @@ description: disallow unnecessary `<template>`
 since: v7.0.0
 ---
 # vue/no-lone-template
+
 > disallow unnecessary `<template>`
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -76,6 +77,10 @@ If you are using Vue.js 3.x and want to define the `<template>` element intentio
 
 [no-lone-blocks]: https://eslint.org/docs/rules/no-lone-blocks
 [vue/no-template-key]: ./no-template-key.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

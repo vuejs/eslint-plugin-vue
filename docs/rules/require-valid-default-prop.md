@@ -6,6 +6,7 @@ description: enforce props default values to be valid
 since: v3.13.0
 ---
 # vue/require-valid-default-prop
+
 > enforce props default values to be valid
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -78,6 +79,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Guide - Prop Validation](https://v3.vuejs.org/guide/component-props.html#prop-validation)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.13.0
 
 ## :mag: Implementation
 

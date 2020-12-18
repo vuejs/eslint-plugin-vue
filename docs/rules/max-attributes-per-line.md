@@ -6,6 +6,7 @@ description: enforce the maximum number of attributes per line
 since: v3.12.0
 ---
 # vue/max-attributes-per-line
+
 > enforce the maximum number of attributes per line
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -126,6 +127,10 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ## :books: Further Reading
 
 - [Style guide - Multi attribute elements](https://v3.vuejs.org/style-guide/#multi-attribute-elements-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.12.0
 
 ## :mag: Implementation
 

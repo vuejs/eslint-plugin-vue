@@ -6,6 +6,7 @@ description: disallow specific custom event
 since: v7.3.0
 ---
 # vue/no-restricted-custom-event
+
 > disallow specific custom event
 
 ## :book: Rule Details
@@ -91,6 +92,10 @@ export default {
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.3.0
 
 ## :mag: Implementation
 

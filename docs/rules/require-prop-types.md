@@ -6,6 +6,7 @@ description: require type definitions in props
 since: v3.9.0
 ---
 # vue/require-prop-types
+
 > require type definitions in props
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -65,6 +66,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Style guide - Prop definitions](https://v3.vuejs.org/style-guide/#prop-definitions-essential)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.9.0
 
 ## :mag: Implementation
 
