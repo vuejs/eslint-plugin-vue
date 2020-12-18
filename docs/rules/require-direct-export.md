@@ -51,7 +51,41 @@ export default ComponentA
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-direct-export": ["error", {
+    "disallowFunctionalComponentFunction": false
+  }]
+}
+```
+
+- `"disallowFunctionalComponentFunction"` ... If `true`, disallow functional component functions, available in Vue 3.x. default `false`
+
+### `"disallowFunctionalComponentFunction": false`
+
+<eslint-code-block :rules="{'vue/require-direct-export': ['error', {disallowFunctionalComponentFunction: false}]}">
+
+```vue
+<script>
+/* ✓ GOOD */
+export default props => h('div', props.msg)
+</script>
+```
+
+</eslint-code-block>
+
+### `"disallowFunctionalComponentFunction": true`
+
+<eslint-code-block :rules="{'vue/require-direct-export': ['error', {disallowFunctionalComponentFunction: true}]}">
+
+```vue
+<script>
+/* ✗ BAD */
+export default props => h('div', props.msg)
+</script>
+```
+
+</eslint-code-block>
 
 ## :mag: Implementation
 

@@ -49,9 +49,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Render Functions & JSX](https://vuejs.org/v2/guide/render-function.html)
+- [Guide - Render Functions](https://v3.vuejs.org/guide/render-function.html)
 
 ## :mag: Implementation
 

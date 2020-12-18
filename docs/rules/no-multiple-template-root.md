@@ -9,8 +9,9 @@ description: disallow adding multiple root nodes to the template
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
-This rule checks whether template contains single root element valid for Vue 2.
+## :book: Rule Details
 
+This rule checks whether template contains single root element valid for Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 

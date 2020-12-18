@@ -18,7 +18,7 @@ tester.run('brace-style', rule, {
     }" /></template>`,
     {
       code: `<template><div :attr="function foo() { return true; }" /></template>`,
-      options: ['1tbs', { 'allowSingleLine': true }]
+      options: ['1tbs', { allowSingleLine: true }]
     },
     `<template><div :[(function(){return(1)})()]="a" /></template>`
   ],
@@ -39,7 +39,8 @@ tester.run('brace-style', rule, {
         </template>`,
       errors: [
         {
-          message: 'Opening curly brace does not appear on the same line as controlling statement.',
+          message:
+            'Opening curly brace does not appear on the same line as controlling statement.',
           line: 4
         }
       ]
@@ -61,13 +62,15 @@ tester.run('brace-style', rule, {
           line: 3
         },
         {
-          message: 'Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.',
+          message:
+            'Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.',
           line: 3
         }
       ]
     },
     {
-      code: '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
+      code:
+        '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
       output: `<template><div :[(function(){return(1)})()]="(function(){
 return(1)
 })()" /></template>`,
@@ -76,8 +79,10 @@ return(1)
           message: 'Statement inside of curly braces should be on next line.'
         },
         {
-          message: 'Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.'
-        }]
+          message:
+            'Closing curly brace should be on the same line as opening curly brace or on the line after the previous block.'
+        }
+      ]
     }
   ]
 })

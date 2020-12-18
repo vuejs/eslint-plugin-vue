@@ -1,0 +1,7 @@
+<!--{}-->
+<template>
+  <!--
+    comment
+    comment
+  -->
+</template>

@@ -21,18 +21,22 @@ tester.run('comma-dangle', rule, {
         <template>
           <CustomButton @click="($event) => fn()" />
         </template>`,
-      options: [{
-        'functions': 'never'
-      }]
+      options: [
+        {
+          functions: 'never'
+        }
+      ]
     },
     {
       code: `
         <template>
           <button @click="() => fn([a, b, ])" ></button>
         </template>`,
-      options: [{
-        'arrays': 'ignore'
-      }]
+      options: [
+        {
+          arrays: 'ignore'
+        }
+      ]
     },
     {
       code: `
@@ -70,9 +74,11 @@ tester.run('comma-dangle', rule, {
         <template>
           <CustomButton @click="($event, ) => fn()" />
         </template>`,
-      options: [{
-        'functions': 'never'
-      }],
+      options: [
+        {
+          functions: 'never'
+        }
+      ],
       output: `
         <template>
           <CustomButton @click="($event ) => fn()" />

@@ -37,11 +37,11 @@ This rule reports `v-model` directives in the following cases:
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-model]
+- [vue/valid-v-model]
 
-[valid-v-model]: valid-v-model.md
+[vue/valid-v-model]: ./valid-v-model.md
 
 ## :mag: Implementation
 

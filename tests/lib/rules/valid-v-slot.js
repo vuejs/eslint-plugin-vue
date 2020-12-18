@@ -83,7 +83,13 @@ tester.run('valid-v-slot', rule, {
       <MyComponent>
         <template v-for="(key, value) in xxxx" #[key]>{{value}}</template>
       </MyComponent>
-    </template>`
+    </template>`,
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code:
+        '<template><MyComponent v-slot="." ><div /></MyComponent></template>'
+    }
   ],
   invalid: [
     // Verify location.
@@ -93,7 +99,7 @@ tester.run('valid-v-slot', rule, {
           <div v-slot="{data}">{{data}}</div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' }}]
+      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
     },
     {
       code: `
@@ -101,7 +107,9 @@ tester.run('valid-v-slot', rule, {
           <template v-slot:named></template>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'template' }}]
+      errors: [
+        { messageId: 'ownerMustBeCustomElement', data: { name: 'template' } }
+      ]
     },
     {
       code: `
@@ -110,7 +118,7 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'ownerMustBeCustomElement', data: { name: 'div' }},
+        { messageId: 'ownerMustBeCustomElement', data: { name: 'div' } },
         { messageId: 'namedSlotMustBeOnTemplate' }
       ]
     },
@@ -120,7 +128,7 @@ tester.run('valid-v-slot', rule, {
           <div><template v-slot></template></div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' }}]
+      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
     },
     {
       code: `
@@ -291,6 +299,26 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot>content</MyComponent>
         </template>
       `,
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    // comment value
+    {
+      filename: 'comment-value1.vue',
+      code:
+        '<template><MyComponent v-slot="/**/" ><div /></MyComponent></template>',
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    {
+      filename: 'comment-value2.vue',
+      code:
+        '<template><MyComponent v-slot=/**/ ><div /></MyComponent></template>',
+      errors: [{ messageId: 'requireAttributeValue' }]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code:
+        '<template><MyComponent v-slot="" ><div /></MyComponent></template>',
       errors: [{ messageId: 'requireAttributeValue' }]
     }
   ]

@@ -96,7 +96,7 @@ The error codes which have `x-` prefix are original of this rule because errors 
 - `x-invalid-end-tag` enables the errors about the end tags of elements which have not opened.
 - `x-invalid-namespace` enables the errors about invalid `xmlns` attributes. See also [step 10. of "create an element for a token"](https://html.spec.whatwg.org/multipage/parsing.html#create-an-element-for-the-token).
 
-## :books: Further reading
+## :books: Further Reading
 
 - [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)
 

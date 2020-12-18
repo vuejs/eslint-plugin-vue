@@ -11,7 +11,7 @@ description: enforce consistent spacing between keys and values in object litera
 
 This rule is the same rule as core [key-spacing] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [key-spacing]
 
@@ -21,3 +21,5 @@ This rule is the same rule as core [key-spacing] rule but it applies to the expr
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/key-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/key-spacing.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/key-spacing)</sup>

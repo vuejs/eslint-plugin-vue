@@ -22,7 +22,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester()
 ruleTester.run('prop-name-casing', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -127,18 +126,6 @@ ruleTester.run('prop-name-casing', rule, {
         export default {
           props: {
             [('greetingText')]: String
-          }
-        }
-      `,
-      parserOptions
-    },
-    {
-      // TemplateLiteral computed property does not warn
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            [\`greeting-text\`]: String
           }
         }
       `,
@@ -277,15 +264,63 @@ ruleTester.run('prop-name-casing', rule, {
       parserOptions
     },
     {
-      // RegExp Literal computed property name
+      // Japanese characters
       filename: 'test.vue',
       code: `
         export default {
           props: {
-            [/greeting-text/]: String
+            '漢字': String
           }
         }
       `,
+      parserOptions
+    },
+    {
+      // emoji
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            '\u{1F37B}': String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // #862
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $actionEl: String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      // #932
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            $css: String
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _item: String
+          }
+        }
+      `,
+      options: ['snake_case'],
       parserOptions
     }
   ],
@@ -301,11 +336,13 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting_text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -318,11 +355,13 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['camelCase'],
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting_text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -333,11 +372,13 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['camelCase'],
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Literal',
-        line: 3
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting_text" is not in camelCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -350,11 +391,13 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['snake_case'],
       parserOptions,
-      errors: [{
-        message: 'Prop "greetingText" is not in snake_case.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greetingText" is not in snake_case.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -367,11 +410,13 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['camelCase'],
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting-text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting-text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -384,11 +429,13 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['snake_case'],
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting-text" is not in snake_case.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting-text" is not in snake_case.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -400,11 +447,13 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting_text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       // computed property name
@@ -417,11 +466,13 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting-text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting-text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       // shorthand
@@ -434,45 +485,13 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting_text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
-      // emoji
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '\u{1F37B}': String
-          }
+      errors: [
+        {
+          message: 'Prop "greeting_text" is not in camelCase.',
+          type: 'Property',
+          line: 4
         }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Prop "\u{1F37B}" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
-    },
-    {
-      // Japanese characters
-      filename: 'test.vue',
-      code: `
-        export default {
-          props: {
-            '漢字': String
-          }
-        }
-      `,
-      parserOptions,
-      errors: [{
-        message: 'Prop "漢字" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      ]
     },
     {
       filename: 'test.vue',
@@ -484,11 +503,13 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "abc-123-def" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "abc-123-def" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
     },
     {
       // Parentheses computed property name
@@ -501,11 +522,64 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Prop "greeting-text" is not in camelCase.',
-        type: 'Property',
-        line: 4
-      }]
+      errors: [
+        {
+          message: 'Prop "greeting-text" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _item: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "_item" is not in camelCase.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            _itemName: String
+          }
+        }
+      `,
+      options: ['snake_case'],
+      parserOptions,
+      errors: ['Prop "_itemName" is not in snake_case.']
+    },
+    {
+      // TemplateLiteral computed property
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            [\`greeting-text\`]: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "greeting-text" is not in camelCase.']
+    },
+    {
+      // RegExp Literal computed property name
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            [/greeting-text/]: String
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Prop "/greeting-text/" is not in camelCase.']
     }
   ]
 })

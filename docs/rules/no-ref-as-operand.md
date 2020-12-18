@@ -11,7 +11,8 @@ description: disallow use of value wrapped by `ref()` (Composition API) as an op
 
 ## :book: Rule Details
 
-This rule reports cases where a ref is used incorrectly as an operand.
+This rule reports cases where a ref is used incorrectly as an operand.  
+You must use `.value` to access the `Ref` value.
 
 <eslint-code-block :rules="{'vue/no-ref-as-operand': ['error']}">
 
@@ -50,8 +51,9 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
+- [Guide - Reactivity - Reactivity Fundamentals / Creating Standalone Reactive Values as `refs`](https://v3.vuejs.org/guide/reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
 
 ## :mag: Implementation

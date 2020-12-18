@@ -33,23 +33,24 @@ const ALL_CODE = `<template>
   <math><mspace/></math>
 </template>`
 
-const anyWith = (opts) => Object.assign(
-  {
-    svg: 'any',
-    math: 'any'
-  },
-  opts,
-  {
-    html: Object.assign(
-      {
-        normal: 'any',
-        void: 'any',
-        component: 'any'
-      },
-      opts.html || {}
-    )
-  }
-)
+const anyWith = (opts) =>
+  Object.assign(
+    {
+      svg: 'any',
+      math: 'any'
+    },
+    opts,
+    {
+      html: Object.assign(
+        {
+          normal: 'any',
+          void: 'any',
+          component: 'any'
+        },
+        opts.html || {}
+      )
+    }
+  )
 
 tester.run('html-self-closing', rule, {
   valid: [
@@ -64,7 +65,7 @@ tester.run('html-self-closing', rule, {
     {
       code: '<template><div><!-- comment --></div></template>',
       output: null,
-      options: [{ html: { normal: 'always' }}]
+      options: [{ html: { normal: 'always' } }]
     },
 
     // Invalid EOF
@@ -116,7 +117,7 @@ tester.run('html-self-closing', rule, {
   <math><mspace></mspace></math>
   <math><mspace/></math>
 </template>`,
-      options: [anyWith({ html: { normal: 'always' }})],
+      options: [anyWith({ html: { normal: 'always' } })],
       errors: [
         { message: 'Require self-closing on HTML elements (<div>).', line: 2 }
       ]
@@ -135,7 +136,7 @@ tester.run('html-self-closing', rule, {
   <math><mspace></mspace></math>
   <math><mspace/></math>
 </template>`,
-      options: [anyWith({ html: { normal: 'never' }})],
+      options: [anyWith({ html: { normal: 'never' } })],
       errors: [
         { message: 'Disallow self-closing on HTML elements (<div/>).', line: 3 }
       ]
@@ -154,9 +155,12 @@ tester.run('html-self-closing', rule, {
   <math><mspace></mspace></math>
   <math><mspace/></math>
 </template>`,
-      options: [anyWith({ html: { void: 'always' }})],
+      options: [anyWith({ html: { void: 'always' } })],
       errors: [
-        { message: 'Require self-closing on HTML void elements (<img>).', line: 4 }
+        {
+          message: 'Require self-closing on HTML void elements (<img>).',
+          line: 4
+        }
       ]
     },
     {
@@ -173,28 +177,12 @@ tester.run('html-self-closing', rule, {
   <math><mspace></mspace></math>
   <math><mspace/></math>
 </template>`,
-      options: [anyWith({ html: { void: 'never' }})],
+      options: [anyWith({ html: { void: 'never' } })],
       errors: [
-        { message: 'Disallow self-closing on HTML void elements (<img/>).', line: 5 }
-      ]
-    },
-    {
-      code: ALL_CODE,
-      output: `<template>
-  <div></div>
-  <div/>
-  <img>
-  <img/>
-  <x-test/>
-  <x-test/>
-  <svg><path></path></svg>
-  <svg><path/></svg>
-  <math><mspace></mspace></math>
-  <math><mspace/></math>
-</template>`,
-      options: [anyWith({ html: { component: 'always' }})],
-      errors: [
-        { message: 'Require self-closing on Vue.js custom components (<x-test>).', line: 6 }
+        {
+          message: 'Disallow self-closing on HTML void elements (<img/>).',
+          line: 5
+        }
       ]
     },
     {
@@ -204,6 +192,29 @@ tester.run('html-self-closing', rule, {
   <div/>
   <img>
   <img/>
+  <x-test/>
+  <x-test/>
+  <svg><path></path></svg>
+  <svg><path/></svg>
+  <math><mspace></mspace></math>
+  <math><mspace/></math>
+</template>`,
+      options: [anyWith({ html: { component: 'always' } })],
+      errors: [
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 6
+        }
+      ]
+    },
+    {
+      code: ALL_CODE,
+      output: `<template>
+  <div></div>
+  <div/>
+  <img>
+  <img/>
   <x-test></x-test>
   <x-test></x-test>
   <svg><path></path></svg>
@@ -211,9 +222,13 @@ tester.run('html-self-closing', rule, {
   <math><mspace></mspace></math>
   <math><mspace/></math>
 </template>`,
-      options: [anyWith({ html: { component: 'never' }})],
+      options: [anyWith({ html: { component: 'never' } })],
       errors: [
-        { message: 'Disallow self-closing on Vue.js custom components (<x-test/>).', line: 7 }
+        {
+          message:
+            'Disallow self-closing on Vue.js custom components (<x-test/>).',
+          line: 7
+        }
       ]
     },
     {
@@ -270,7 +285,10 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ math: 'always' })],
       errors: [
-        { message: 'Require self-closing on MathML elements (<mspace>).', line: 10 }
+        {
+          message: 'Require self-closing on MathML elements (<mspace>).',
+          line: 10
+        }
       ]
     },
     {
@@ -289,7 +307,10 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ math: 'never' })],
       errors: [
-        { message: 'Disallow self-closing on MathML elements (<mspace/>).', line: 11 }
+        {
+          message: 'Disallow self-closing on MathML elements (<mspace/>).',
+          line: 11
+        }
       ]
     }
   ]

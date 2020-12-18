@@ -1,0 +1,60 @@
+[
+    {
+        "open": {
+            "type": "HTMLCommentOpen",
+            "value": "<!--",
+            "range": [
+                42,
+                46
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 2
+                },
+                "end": {
+                    "line": 3,
+                    "column": 6
+                }
+            }
+        },
+        "openDecoration": null,
+        "value": {
+            "type": "HTMLCommentValue",
+            "value": "comment\n    comment",
+            "range": [
+                51,
+                70
+            ],
+            "loc": {
+                "start": {
+                    "line": 4,
+                    "column": 4
+                },
+                "end": {
+                    "line": 5,
+                    "column": 11
+                }
+            }
+        },
+        "closeDecoration": null,
+        "close": {
+            "type": "HTMLCommentClose",
+            "value": "-->",
+            "range": [
+                73,
+                76
+            ],
+            "loc": {
+                "start": {
+                    "line": 6,
+                    "column": 2
+                },
+                "end": {
+                    "line": 6,
+                    "column": 5
+                }
+            }
+        }
+    }
+]

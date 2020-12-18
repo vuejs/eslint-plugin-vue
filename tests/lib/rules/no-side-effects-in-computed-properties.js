@@ -12,7 +12,7 @@ const rule = require('../../../lib/rules/no-side-effects-in-computed-properties'
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -173,6 +173,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions
+    },
+    {
+      code: `const test = { el: '#app' }
+        Vue.component('test', {
+        el: test.el
+      })`,
+      parserOptions
     }
   ],
   invalid: [
@@ -206,28 +213,36 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions,
-      errors: [{
-        line: 4,
-        message: 'Unexpected side effect in "test1" computed property.'
-      }, {
-        line: 9,
-        message: 'Unexpected side effect in "test2" computed property.'
-      }, {
-        line: 10,
-        message: 'Unexpected side effect in "test2" computed property.'
-      }, {
-        line: 14,
-        message: 'Unexpected side effect in "test3" computed property.'
-      }, {
-        line: 17,
-        message: 'Unexpected side effect in "test4" computed property.'
-      }, {
-        line: 21,
-        message: 'Unexpected side effect in "test5" computed property.'
-      }, {
-        line: 25,
-        message: 'Unexpected side effect in "test6" computed property.'
-      }]
+      errors: [
+        {
+          line: 4,
+          message: 'Unexpected side effect in "test1" computed property.'
+        },
+        {
+          line: 9,
+          message: 'Unexpected side effect in "test2" computed property.'
+        },
+        {
+          line: 10,
+          message: 'Unexpected side effect in "test2" computed property.'
+        },
+        {
+          line: 14,
+          message: 'Unexpected side effect in "test3" computed property.'
+        },
+        {
+          line: 17,
+          message: 'Unexpected side effect in "test4" computed property.'
+        },
+        {
+          line: 21,
+          message: 'Unexpected side effect in "test5" computed property.'
+        },
+        {
+          line: 25,
+          message: 'Unexpected side effect in "test6" computed property.'
+        }
+      ]
     },
     {
       code: `Vue.component('test', {
@@ -262,22 +277,28 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       parserOptions,
-      errors: [{
-        line: 5,
-        message: 'Unexpected side effect in "test1" computed property.'
-      }, {
-        line: 11,
-        message: 'Unexpected side effect in "test2" computed property.'
-      }, {
-        line: 12,
-        message: 'Unexpected side effect in "test2" computed property.'
-      }, {
-        line: 18,
-        message: 'Unexpected side effect in "test3" computed property.'
-      }, {
-        line: 23,
-        message: 'Unexpected side effect in "test4" computed property.'
-      }]
+      errors: [
+        {
+          line: 5,
+          message: 'Unexpected side effect in "test1" computed property.'
+        },
+        {
+          line: 11,
+          message: 'Unexpected side effect in "test2" computed property.'
+        },
+        {
+          line: 12,
+          message: 'Unexpected side effect in "test2" computed property.'
+        },
+        {
+          line: 18,
+          message: 'Unexpected side effect in "test3" computed property.'
+        },
+        {
+          line: 23,
+          message: 'Unexpected side effect in "test4" computed property.'
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -291,10 +312,12 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         });
       `,
       parserOptions,
-      errors: [{
-        line: 5,
-        message: 'Unexpected side effect in "test1" computed property.'
-      }],
+      errors: [
+        {
+          line: 5,
+          message: 'Unexpected side effect in "test1" computed property.'
+        }
+      ],
       parser: require.resolve('@typescript-eslint/parser')
     },
 
@@ -314,6 +337,27 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           line: 4,
           message: 'Unexpected side effect in "test1" computed property.'
         }
+      ]
+    },
+    {
+      code: `Vue.component('test', {
+        computed: {
+          test1() {
+            return this?.something?.reverse?.()
+          },
+          test2() {
+            return (this?.something)?.reverse?.()
+          },
+          test3() {
+            return (this?.something?.reverse)?.()
+          },
+        }
+      })`,
+      parserOptions,
+      errors: [
+        'Unexpected side effect in "test1" computed property.',
+        'Unexpected side effect in "test2" computed property.',
+        'Unexpected side effect in "test3" computed property.'
       ]
     }
   ]

@@ -1,0 +1,4 @@
+<!--{ "exceptions": ["*", "+"] }-->
+<template>
+  <!-- ***** c ***** -->
+</template>

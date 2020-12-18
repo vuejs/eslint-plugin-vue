@@ -12,7 +12,7 @@ const rule = require('../../../lib/rules/no-async-in-computed-properties')
 const RuleTester = require('eslint').RuleTester
 
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -23,7 +23,6 @@ const parserOptions = {
 const ruleTester = new RuleTester()
 
 ruleTester.run('no-async-in-computed-properties', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -224,6 +223,14 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      code: `
+        Vue.component('test',{
+          data1: new Promise(),
+          data2: Promise.resolve(),
+        })`,
+      parserOptions
     }
   ],
 
@@ -240,13 +247,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected async function declaration in "foo" computed property.',
-        line: 4
-      }, {
-        message: 'Unexpected await operator in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Unexpected async function declaration in "foo" computed property.',
+          line: 4
+        },
+        {
+          message: 'Unexpected await operator in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -260,13 +271,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected async function declaration in "foo" computed property.',
-        line: 4
-      }, {
-        message: 'Unexpected Promise object in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message:
+            'Unexpected async function declaration in "foo" computed property.',
+          line: 4
+        },
+        {
+          message: 'Unexpected Promise object in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -280,10 +295,40 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return bar?.then?.(response => {})
+            }
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Unexpected asynchronous action in "foo" computed property.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return (bar?.then)?.(response => {})
+            }
+          }
+        }
+      `,
+      parserOptions,
+      errors: ['Unexpected asynchronous action in "foo" computed property.']
     },
     {
       filename: 'test.vue',
@@ -297,10 +342,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -314,10 +361,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -331,10 +380,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -348,10 +399,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -365,10 +418,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -382,10 +437,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -399,10 +456,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 5
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -418,10 +477,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -437,10 +498,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       `,
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -456,10 +519,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       `,
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: 'Unexpected asynchronous action in "foo" computed property.',
-        line: 6
-      }]
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 6
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -480,31 +545,100 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       `,
       parserOptions,
-      errors: [{
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 5
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 6
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 7
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 8
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 9
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 10
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 11
-      }, {
-        message: 'Unexpected timed function in "foo" computed property.',
-        line: 12
-      }]
+      errors: [
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 5
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 6
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 7
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 8
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 9
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 10
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 11
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 12
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        computed: {
+          foo: function () {
+            setTimeout?.(() => { }, 0)
+            window?.setTimeout?.(() => { }, 0)
+            setInterval(() => { }, 0)
+            window?.setInterval?.(() => { }, 0)
+            setImmediate?.(() => { })
+            window?.setImmediate?.(() => { })
+            requestAnimationFrame?.(() => {})
+            window?.requestAnimationFrame?.(() => {})
+          }
+        }
+      }
+      `,
+      parserOptions,
+      errors: [
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        computed: {
+          foo: function () {
+            setTimeout?.(() => { }, 0)
+            ;(window?.setTimeout)?.(() => { }, 0)
+            setInterval(() => { }, 0)
+            ;(window?.setInterval)?.(() => { }, 0)
+            setImmediate?.(() => { })
+            ;(window?.setImmediate)?.(() => { })
+            requestAnimationFrame?.(() => {})
+            ;(window?.requestAnimationFrame)?.(() => {})
+          }
+        }
+      }
+      `,
+      parserOptions,
+      errors: [
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.',
+        'Unexpected timed function in "foo" computed property.'
+      ]
     }
   ]
 })

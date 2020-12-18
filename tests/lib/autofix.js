@@ -6,11 +6,9 @@
 
 const Linter = require('eslint').Linter
 const parser = require('vue-eslint-parser')
-const chai = require('chai')
+const assert = require('assert')
 
 const rules = require('../..').rules
-
-const assert = chai.assert
 
 const baseConfig = {
   parser: 'vue-eslint-parser',
@@ -33,10 +31,12 @@ describe('Complex autofix test cases', () => {
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/566
   describe('Autofix of `vue/order-in-components` and `comma-dangle` should not conflict.', () => {
-    const config = Object.assign({}, baseConfig, { 'rules': {
-      'vue/order-in-components': ['error'],
-      'comma-dangle': ['error', 'always']
-    }})
+    const config = Object.assign({}, baseConfig, {
+      rules: {
+        'vue/order-in-components': ['error'],
+        'comma-dangle': ['error', 'always']
+      }
+    })
 
     it('Even if set comma-dangle:always, the output should be as expected.', () => {
       const code = `
@@ -55,10 +55,7 @@ describe('Complex autofix test cases', () => {
           },
         };
       </script>`
-      assert.equal(
-        linter.verifyAndFix(code, config, 'test.vue').output,
-        output
-      )
+      assert.equal(linter.verifyAndFix(code, config, 'test.vue').output, output)
     })
 
     it('Even if include comments, the output should be as expected.', () => {
@@ -82,32 +79,47 @@ describe('Complex autofix test cases', () => {
           },/*after data*//*after name*/
         };
       </script>`
-      assert.equal(
-        linter.verifyAndFix(code, config, 'test.vue').output,
-        output
-      )
+      assert.equal(linter.verifyAndFix(code, config, 'test.vue').output, output)
     })
   })
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/554
   describe('Autofix of `html-self-closing` and `component-name-in-template-casing` should not conflict.', () => {
-    const kebabConfig = Object.assign({}, baseConfig, { 'rules': {
-      'vue/html-self-closing': ['error', {
-        'html': {
-          'component': 'never'
-        }
-      }],
-      'vue/component-name-in-template-casing': ['error', 'kebab-case', { registeredComponentsOnly: false }]
-    }})
+    const kebabConfig = Object.assign({}, baseConfig, {
+      rules: {
+        'vue/html-self-closing': [
+          'error',
+          {
+            html: {
+              component: 'never'
+            }
+          }
+        ],
+        'vue/component-name-in-template-casing': [
+          'error',
+          'kebab-case',
+          { registeredComponentsOnly: false }
+        ]
+      }
+    })
 
-    const pascalConfig = Object.assign({}, baseConfig, { 'rules': {
-      'vue/html-self-closing': ['error', {
-        'html': {
-          'component': 'never'
-        }
-      }],
-      'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }]
-    }})
+    const pascalConfig = Object.assign({}, baseConfig, {
+      rules: {
+        'vue/html-self-closing': [
+          'error',
+          {
+            html: {
+              component: 'never'
+            }
+          }
+        ],
+        'vue/component-name-in-template-casing': [
+          'error',
+          'PascalCase',
+          { registeredComponentsOnly: false }
+        ]
+      }
+    })
 
     it('Even if set kebab-case, the output should be as expected.', () => {
       const code = `

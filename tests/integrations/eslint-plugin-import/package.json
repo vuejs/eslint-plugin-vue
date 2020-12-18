@@ -8,7 +8,7 @@
   "author": "Toru Nagashima (https://github.com/mysticatea)",
   "license": "MIT",
   "dependencies": {
-    "eslint": "~6.0.0",
+    "eslint": "~7.0.0",
     "eslint-plugin-import": "~2.18.2",
     "eslint-plugin-vue": "file:../../.."
   }

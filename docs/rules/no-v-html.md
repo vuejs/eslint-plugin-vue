@@ -35,7 +35,7 @@ Nothing.
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [XSS in Vue.js](https://blog.sqreen.io/xss-in-vue-js/)
 

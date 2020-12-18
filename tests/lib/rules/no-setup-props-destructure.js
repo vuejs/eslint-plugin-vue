@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-setup-props-destructure')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2019, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-setup-props-destructure', rule, {
@@ -135,6 +135,36 @@ tester.run('no-setup-props-destructure', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        watch: {
+          setup({val}) { }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(props) {
+          const props2 = props
+        }
+      }
+      </script>
+      `
+    },
+    {
+      code: `
+      Vue.component('test', {
+        el: a = b
+      })`
     }
   ],
   invalid: [
@@ -318,6 +348,38 @@ tester.run('no-setup-props-destructure', rule, {
       <script>
       export default {
         setup(p) {
+          const x = p.foo
+          const y = p?.bar
+          const z = (p?.baz).qux
+
+          const xc = p?.foo?.()
+          const yc = (p?.bar)?.()
+          const zc = (p?.baz.qux)?.()
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        },
+        {
+          messageId: 'getProperty',
+          line: 6
+        },
+        {
+          messageId: 'getProperty',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
           let foo
           foo = p.bar
         }
@@ -328,6 +390,42 @@ tester.run('no-setup-props-destructure', rule, {
         {
           messageId: 'getProperty',
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const {foo} = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          foo.bar = p.bar
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
         }
       ]
     }

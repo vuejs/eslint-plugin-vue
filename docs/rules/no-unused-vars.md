@@ -35,14 +35,18 @@ This rule report variable definitions of v-for directives or scope attributes if
 
 ```js
 {
-    "vue/no-unsed-vars": [{
-        "ignorePattern": '^_',
+    "vue/no-unused-vars": ["error", {
+        "ignorePattern": "^_"
     }]
 }
 ```
+
 - `ignorePattern` ... disables reporting when your definitions of v-for directives or scope attributes match your ignorePattern Regular expression. default `null`, will ignore nothing
+
 ## :rocket: Suggestion
+
 - When your ignorePattern set to `^_`, we could provide a suggestion which add a prefix`_` to your variable and no more eslint error
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-vars.js)

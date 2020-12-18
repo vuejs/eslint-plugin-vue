@@ -11,7 +11,7 @@ description: enforce consistent spacing inside array brackets
 
 This rule is the same rule as core [array-bracket-spacing] rule but it applies to the expressions in `<template>`.
 
-## :books: Further reading
+## :books: Further Reading
 
 - [array-bracket-spacing]
 
@@ -21,3 +21,5 @@ This rule is the same rule as core [array-bracket-spacing] rule but it applies t
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/array-bracket-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-bracket-spacing.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/array-bracket-spacing)</sup>

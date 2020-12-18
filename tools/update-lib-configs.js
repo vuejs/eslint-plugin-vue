@@ -17,26 +17,28 @@ const categories = require('./lib/categories')
 const errorCategories = ['base', 'essential', 'vue3-essential']
 
 const extendsCategories = {
-  'base': null,
-  'essential': 'base',
+  base: null,
+  essential: 'base',
   'vue3-essential': 'base',
   'strongly-recommended': 'essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  'recommended': 'strongly-recommended',
+  recommended: 'strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended',
   'use-with-caution': 'recommended',
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules (rules, categoryId) {
+function formatRules(rules, categoryId) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = errorCategories.includes(categoryId) ? 'error' : 'warn'
+    setting[rule.ruleId] = errorCategories.includes(categoryId)
+      ? 'error'
+      : 'warn'
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory (category) {
+function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
     return `/*
@@ -47,11 +49,8 @@ function formatCategory (category) {
 module.exports = {
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    }
+    ecmaVersion: 2020,
+    sourceType: 'module'
   },
   env: {
     browser: true,
@@ -86,6 +85,10 @@ categories.forEach((category) => {
 })
 
 // Format files.
-const linter = new eslint.CLIEngine({ fix: true })
-const report = linter.executeOnFiles([ROOT])
-eslint.CLIEngine.outputFixes(report)
+async function format() {
+  const linter = new eslint.ESLint({ fix: true })
+  const report = await linter.lintFiles([ROOT])
+  eslint.ESLint.outputFixes(report)
+}
+
+format()

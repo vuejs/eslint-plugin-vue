@@ -11,7 +11,7 @@
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
-  ecmaVersion: 2018,
+  ecmaVersion: 2020,
   sourceType: 'module'
 }
 
@@ -21,7 +21,6 @@ const parserOptions = {
 
 const ruleTester = new RuleTester({ parserOptions })
 ruleTester.run('require-default-prop', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -149,7 +148,8 @@ ruleTester.run('require-default-prop', rule, {
           props: {
             bar,
             baz: prop,
-            bar1: foo()
+            baz1: prop.foo,
+            bar2: foo()
           }
         }
       `
@@ -180,6 +180,21 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `
+    },
+
+    // sparse array
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            a: {
+              type: [,Boolean]
+            },
+            b: [,Boolean],
+          }
+        }
+      `
     }
   ],
 
@@ -205,25 +220,32 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `,
-      errors: [{
-        message: `Prop 'a' requires default value to be set.`,
-        line: 4
-      }, {
-        message: `Prop 'b' requires default value to be set.`,
-        line: 5
-      }, {
-        message: `Prop 'c' requires default value to be set.`,
-        line: 6
-      }, {
-        message: `Prop 'd' requires default value to be set.`,
-        line: 9
-      }, {
-        message: `Prop 'e' requires default value to be set.`,
-        line: 13
-      }, {
-        message: `Prop 'f' requires default value to be set.`,
-        line: 14
-      }]
+      errors: [
+        {
+          message: `Prop 'a' requires default value to be set.`,
+          line: 4
+        },
+        {
+          message: `Prop 'b' requires default value to be set.`,
+          line: 5
+        },
+        {
+          message: `Prop 'c' requires default value to be set.`,
+          line: 6
+        },
+        {
+          message: `Prop 'd' requires default value to be set.`,
+          line: 9
+        },
+        {
+          message: `Prop 'e' requires default value to be set.`,
+          line: 13
+        },
+        {
+          message: `Prop 'f' requires default value to be set.`,
+          line: 14
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -237,10 +259,12 @@ ruleTester.run('require-default-prop', rule, {
         });
       `,
       parser: require.resolve('@typescript-eslint/parser'),
-      errors: [{
-        message: `Prop 'a' requires default value to be set.`,
-        line: 4
-      }]
+      errors: [
+        {
+          message: `Prop 'a' requires default value to be set.`,
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -254,13 +278,15 @@ ruleTester.run('require-default-prop', rule, {
         });
       `,
       parser: require.resolve('@typescript-eslint/parser'),
-      errors: [{
-        message: `Prop 'a' requires default value to be set.`,
-        line: 4
-      }]
+      errors: [
+        {
+          message: `Prop 'a' requires default value to be set.`,
+          line: 4
+        }
+      ]
     },
 
-    // computed propertys
+    // computed properties
     {
       filename: 'test.vue',
       code: `
@@ -273,19 +299,24 @@ ruleTester.run('require-default-prop', rule, {
           }
         };
       `,
-      errors: [{
-        message: `Prop 'a' requires default value to be set.`,
-        line: 4
-      }, {
-        message: `Prop 'b' requires default value to be set.`,
-        line: 5
-      }, {
-        message: `Prop 'c' requires default value to be set.`,
-        line: 6
-      }, {
-        message: `Prop 'd' requires default value to be set.`,
-        line: 7
-      }]
+      errors: [
+        {
+          message: `Prop 'a' requires default value to be set.`,
+          line: 4
+        },
+        {
+          message: `Prop 'b' requires default value to be set.`,
+          line: 5
+        },
+        {
+          message: `Prop 'c' requires default value to be set.`,
+          line: 6
+        },
+        {
+          message: `Prop 'd' requires default value to be set.`,
+          line: 7
+        }
+      ]
     },
     // unknown static name
     {
@@ -299,16 +330,20 @@ ruleTester.run('require-default-prop', rule, {
           }
         };
       `,
-      errors: [{
-        message: `Prop '[foo]' requires default value to be set.`,
-        line: 4
-      }, {
-        message: `Prop '[bar()]' requires default value to be set.`,
-        line: 5
-      }, {
-        message: `Prop '[baz.baz]' requires default value to be set.`,
-        line: 6
-      }]
+      errors: [
+        {
+          message: `Prop '[foo]' requires default value to be set.`,
+          line: 4
+        },
+        {
+          message: `Prop '[bar()]' requires default value to be set.`,
+          line: 5
+        },
+        {
+          message: `Prop '[baz.baz]' requires default value to be set.`,
+          line: 6
+        }
+      ]
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1040
@@ -322,7 +357,7 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `,
-      errors: ['Prop \'foo\' requires default value to be set.']
+      errors: ["Prop 'foo' requires default value to be set."]
     },
     {
       filename: 'unknown-prop-details-test.vue',
@@ -335,7 +370,23 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `,
-      errors: ['Prop \'foo\' requires default value to be set.']
+      errors: ["Prop 'foo' requires default value to be set."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            bar,
+            baz: prop?.foo,
+            bar1: foo?.(),
+          }
+        }
+      `,
+      errors: [
+        "Prop 'baz' requires default value to be set.",
+        "Prop 'bar1' requires default value to be set."
+      ]
     }
   ]
 })

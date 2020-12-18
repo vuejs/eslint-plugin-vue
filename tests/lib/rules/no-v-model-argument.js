@@ -21,7 +21,6 @@ const ruleTester = new RuleTester({
 })
 
 ruleTester.run('no-v-model-argument', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -32,12 +31,14 @@ ruleTester.run('no-v-model-argument', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model:foo="bar"></MyComponent></template>',
+      code:
+        '<template><MyComponent v-model:foo="bar"></MyComponent></template>',
       errors: ["'v-model' directives require no argument."]
     },
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model:foo.trim="bar"></MyComponent></template>',
+      code:
+        '<template><MyComponent v-model:foo.trim="bar"></MyComponent></template>',
       errors: ["'v-model' directives require no argument."]
     }
   ]

@@ -39,9 +39,9 @@ You can use the same mount point and dynamically switch between multiple compone
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Dynamic Components](https://vuejs.org/v2/guide/components.html#Dynamic-Components)
+- [Guide - Components Basics / Dynamic Components](https://v3.vuejs.org/guide/component-basics.html#dynamic-components)
 
 ## :mag: Implementation
 

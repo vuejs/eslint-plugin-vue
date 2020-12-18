@@ -18,7 +18,7 @@ const rule = require('../../../lib/rules/valid-v-model')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
 tester.run('valid-v-model', rule, {
@@ -61,51 +61,63 @@ tester.run('valid-v-model', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><your-component v-model="foo"></your-component></template>'
+      code:
+        '<template><your-component v-model="foo"></your-component></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="x.foo"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="x.foo"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[x]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[x]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[x - 1]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[x - 1]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[`${x}`]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[`${x}`]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[`prefix_${x}`]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[`prefix_${x}`]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[x ? x : \'_\']"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[x ? x : \'_\']"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[x || \'_\']"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[x || \'_\']"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[x()]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[x()]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[/r/.match(x) ? 0 : 1]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[/r/.match(x) ? 0 : 1]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[typeof x]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[typeof x]"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="foo[tag`${x}`]"></div></div></template>'
+      code:
+        '<template><div><div v-for="x in list"><input v-model="foo[tag`${x}`]"></div></div></template>'
     },
     {
       filename: 'test.vue',
@@ -121,19 +133,33 @@ tester.run('valid-v-model', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model:aaa.modifier="a"></MyComponent></template>'
+      code:
+        '<template><MyComponent v-model:aaa.modifier="a"></MyComponent></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model.modifier="a"></MyComponent></template>'
+      code:
+        '<template><MyComponent v-model.modifier="a"></MyComponent></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model:aaa.modifier.modifierTwo="a"></MyComponent></template>'
+      code:
+        '<template><MyComponent v-model:aaa.modifier.modifierTwo="a"></MyComponent></template>'
     },
     {
       filename: 'test.vue',
-      code: '<template><MyComponent v-model.modifier.modifierTwo="a"></MyComponent></template>'
+      code:
+        '<template><MyComponent v-model.modifier.modifierTwo="a"></MyComponent></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><MyComponent v-model="." /></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><MyComponent v-model="/**/" /></template>'
     }
   ],
   invalid: [
@@ -160,7 +186,9 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><input v-model="a + b"></template>',
-      errors: ["'v-model' directives require the attribute value which is valid as LHS."]
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
@@ -169,23 +197,71 @@ tester.run('valid-v-model', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="x"></div></div></template>',
-      errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+      code:
+        '<template><div><div v-for="x in list"><input v-model="x"></div></div></template>',
+      errors: [
+        "'v-model' directives cannot update the iteration variable 'x' itself."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="(x)"></div></div></template>',
-      errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+      code:
+        '<template><div><div v-for="x in list"><input v-model="(x)"></div></div></template>',
+      errors: [
+        "'v-model' directives cannot update the iteration variable 'x' itself."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="x in list"><input v-model="(((x)))"></div></div></template>',
-      errors: ["'v-model' directives cannot update the iteration variable 'x' itself."]
+      code:
+        '<template><div><div v-for="x in list"><input v-model="(((x)))"></div></div></template>',
+      errors: [
+        "'v-model' directives cannot update the iteration variable 'x' itself."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="e in list"><input v-model="e"></div></div></template>',
-      errors: ["'v-model' directives cannot update the iteration variable 'e' itself."]
+      code:
+        '<template><div><div v-for="e in list"><input v-model="e"></div></div></template>',
+      errors: [
+        "'v-model' directives cannot update the iteration variable 'e' itself."
+      ]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><MyComponent v-model="" /></template>',
+      errors: ["'v-model' directives require that attribute value."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="foo?.bar"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="foo?.bar.baz"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b)?.c"></template>',
+      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b).c"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(null).foo"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><input v-model="(a?.b).c.d"></template>',
+      errors: ["'v-model' directive has potential null object property access."]
     }
   ]
 })

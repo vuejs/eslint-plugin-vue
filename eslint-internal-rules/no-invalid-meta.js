@@ -16,7 +16,7 @@
  * @param {ASTNode} node The ObjectExpression node.
  * @returns {ASTNode} The Property node or null if not found.
  */
-function getPropertyFromObject (property, node) {
+function getPropertyFromObject(property, node) {
   if (node && node.type === 'ObjectExpression') {
     const properties = node.properties
 
@@ -35,7 +35,7 @@ function getPropertyFromObject (property, node) {
  * @param {ASTNode} exportsNode ObjectExpression node that the rule exports.
  * @returns {ASTNode} The `meta` Property node or null if not found.
  */
-function getMetaPropertyFromExportsNode (exportsNode) {
+function getMetaPropertyFromExportsNode(exportsNode) {
   return getPropertyFromObject('meta', exportsNode)
 }
 
@@ -45,7 +45,7 @@ function getMetaPropertyFromExportsNode (exportsNode) {
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
  * @returns {boolean} `true` if a `docs` property exists.
  */
-function hasMetaDocs (metaPropertyNode) {
+function hasMetaDocs(metaPropertyNode) {
   return Boolean(getPropertyFromObject('docs', metaPropertyNode.value))
 }
 
@@ -55,7 +55,7 @@ function hasMetaDocs (metaPropertyNode) {
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
  * @returns {boolean} `true` if a `docs.description` property exists.
  */
-function hasMetaDocsDescription (metaPropertyNode) {
+function hasMetaDocsDescription(metaPropertyNode) {
   const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
 
   return metaDocs && getPropertyFromObject('description', metaDocs.value)
@@ -67,7 +67,7 @@ function hasMetaDocsDescription (metaPropertyNode) {
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
  * @returns {boolean} `true` if a `docs.category` property exists.
  */
-function hasMetaDocsCategories (metaPropertyNode) {
+function hasMetaDocsCategories(metaPropertyNode) {
   const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
 
   return metaDocs && getPropertyFromObject('categories', metaDocs.value)
@@ -79,7 +79,7 @@ function hasMetaDocsCategories (metaPropertyNode) {
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
  * @returns {boolean} `true` if a `schema` property exists.
  */
-function hasMetaSchema (metaPropertyNode) {
+function hasMetaSchema(metaPropertyNode) {
   return getPropertyFromObject('schema', metaPropertyNode.value)
 }
 
@@ -91,7 +91,7 @@ function hasMetaSchema (metaPropertyNode) {
  * @param {boolean} ruleIsFixable whether the rule is fixable or not.
  * @returns {void}
  */
-function checkMetaValidity (context, exportsNode) {
+function checkMetaValidity(context, exportsNode) {
   const metaProperty = getMetaPropertyFromExportsNode(exportsNode)
 
   if (!metaProperty) {
@@ -105,12 +105,18 @@ function checkMetaValidity (context, exportsNode) {
   }
 
   if (!hasMetaDocsDescription(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.description property.')
+    context.report(
+      metaProperty,
+      'Rule is missing a meta.docs.description property.'
+    )
     return
   }
 
   if (!hasMetaDocsCategories(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs.categories property.')
+    context.report(
+      metaProperty,
+      'Rule is missing a meta.docs.categories property.'
+    )
     return
   }
 
@@ -125,7 +131,7 @@ function checkMetaValidity (context, exportsNode) {
  * @param {ASTNode} node node that the rule exports.
  * @returns {boolean} `true` if the exported node is the correct format for a rule definition
  */
-function isCorrectExportsFormat (node) {
+function isCorrectExportsFormat(node) {
   return node != null && node.type === 'ObjectExpression'
 }
 
@@ -143,23 +149,29 @@ module.exports = {
     schema: []
   },
 
-  create (context) {
+  create(context) {
     let exportsNode
 
     return {
-      AssignmentExpression (node) {
-        if (node.left &&
-            node.right &&
-            node.left.type === 'MemberExpression' &&
-            node.left.object.name === 'module' &&
-            node.left.property.name === 'exports') {
+      AssignmentExpression(node) {
+        if (
+          node.left &&
+          node.right &&
+          node.left.type === 'MemberExpression' &&
+          node.left.object.name === 'module' &&
+          node.left.property.name === 'exports'
+        ) {
           exportsNode = node.right
         }
       },
 
-      'Program:exit' (programNode) {
+      'Program:exit'(programNode) {
         if (!isCorrectExportsFormat(exportsNode)) {
-          context.report({ node: exportsNode || programNode, message: 'Rule does not export an Object. Make sure the rule follows the new rule format.' })
+          context.report({
+            node: exportsNode || programNode,
+            message:
+              'Rule does not export an Object. Make sure the rule follows the new rule format.'
+          })
           return
         }
 

@@ -52,7 +52,10 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
           <a slot-scope="{a}" />
         </LinkList>
       </template>`,
-      options: buildOptions({ version: '^2.4.0', ignores: ['slot-scope-attribute'] })
+      options: buildOptions({
+        version: '^2.4.0',
+        ignores: ['slot-scope-attribute']
+      })
     }
   ],
   invalid: [

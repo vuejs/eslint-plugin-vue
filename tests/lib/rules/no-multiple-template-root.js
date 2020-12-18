@@ -8,9 +8,9 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-multiple-template-root')
+const rule = require('../../../lib/rules/no-multiple-template-root')
 
-var RuleTester = require('eslint').RuleTester
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -36,11 +36,13 @@ ruleTester.run('no-multiple-template-root', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else>abc</div>\n</template>'
+      code:
+        '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else>abc</div>\n</template>'
     },
     {
       filename: 'test.vue',
-      code: '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else-if="bar">abc</div>\n    <div v-else>abc</div>\n</template>'
+      code:
+        '<template>\n    <!-- comment -->\n    <div v-if="foo">abc</div>\n    <div v-else-if="bar">abc</div>\n    <div v-else>abc</div>\n</template>'
     },
     {
       filename: 'test.vue',
@@ -52,7 +54,8 @@ ruleTester.run('no-multiple-template-root', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
+      code:
+        '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
     }
   ],
   invalid: [
