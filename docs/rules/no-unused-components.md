@@ -5,7 +5,6 @@ title: vue/no-unused-components
 description: disallow registering components that are not used inside templates
 since: v7.0.0
 ---
-# vue/no-unused-components
 > disallow registering components that are not used inside templates
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

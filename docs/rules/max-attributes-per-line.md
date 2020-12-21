@@ -5,7 +5,6 @@ title: vue/max-attributes-per-line
 description: enforce the maximum number of attributes per line
 since: v3.12.0
 ---
-# vue/max-attributes-per-line
 > enforce the maximum number of attributes per line
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

@@ -5,7 +5,6 @@ title: vue/require-default-prop
 description: require default value for props
 since: v3.13.0
 ---
-# vue/require-default-prop
 > require default value for props
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

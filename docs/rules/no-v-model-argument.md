@@ -5,7 +5,6 @@ title: vue/no-v-model-argument
 description: disallow adding an argument to `v-model` used in custom component
 since: v7.0.0
 ---
-# vue/no-v-model-argument
 > disallow adding an argument to `v-model` used in custom component
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.

@@ -5,7 +5,6 @@ title: vue/html-indent
 description: enforce consistent indentation in `<template>`
 since: v3.14.0
 ---
-# vue/html-indent
 > enforce consistent indentation in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -77,7 +76,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `baseIndent` (`integer`) ... The multiplier of indentation for top-level statements. Default is `1`.
-- `closeBracket` (`integer | object`) ... The multiplier of indentation for right brackets. Default is `0`.
+- `closeBracket` (`integer | object`) ... The multiplier of indentation for right brackets. Default is `0`.  
   You can apply all of the following by setting a number value.
   - `closeBracket.startTag` (`integer`) ... The multiplier of indentation for right brackets of start tags (`<div>`). Default is `0`.
   - `closeBracket.endTag` (`integer`) ... The multiplier of indentation for right brackets of end tags (`</div>`). Default is `0`.

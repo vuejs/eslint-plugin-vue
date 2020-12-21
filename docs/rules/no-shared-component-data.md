@@ -5,7 +5,6 @@ title: vue/no-shared-component-data
 description: enforce component's data property to be a function
 since: v3.8.0
 ---
-# vue/no-shared-component-data
 > enforce component's data property to be a function
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

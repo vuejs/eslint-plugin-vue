@@ -5,7 +5,6 @@ title: vue/no-deprecated-v-on-native-modifier
 description: disallow using deprecated `.native` modifiers (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
-# vue/no-deprecated-v-on-native-modifier
 > disallow using deprecated `.native` modifiers (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.

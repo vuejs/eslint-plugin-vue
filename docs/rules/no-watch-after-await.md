@@ -5,14 +5,13 @@ title: vue/no-watch-after-await
 description: disallow asynchronously registered `watch`
 since: v7.0.0
 ---
-# vue/no-watch-after-await
 > disallow asynchronously registered `watch`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 
 ## :book: Rule Details
 
-This rule reports the `watch()` after `await` expression.
+This rule reports the `watch()` after `await` expression.  
 In `setup()` function, `watch()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">

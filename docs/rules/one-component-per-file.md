@@ -5,7 +5,6 @@ title: vue/one-component-per-file
 description: enforce that each component should be in its own file
 since: v7.0.0
 ---
-# vue/one-component-per-file
 > enforce that each component should be in its own file
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

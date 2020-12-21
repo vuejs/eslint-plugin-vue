@@ -5,7 +5,6 @@ title: vue/singleline-html-element-content-newline
 description: require a line break before and after the contents of a singleline element
 since: v5.0.0
 ---
-# vue/singleline-html-element-content-newline
 > require a line break before and after the contents of a singleline element
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -24,7 +23,7 @@ This rule enforces a line break before and after the contents of a singleline el
   <div attr>
     content
   </div>
-
+  
   <tr attr>
     <td>
       {{ data1 }}
@@ -33,16 +32,16 @@ This rule enforces a line break before and after the contents of a singleline el
       {{ data2 }}
     </td>
   </tr>
-
+  
   <div attr>
     <!-- comment -->
   </div>
-
+  
   <!-- ✗ BAD -->
   <div attr>content</div>
-
+  
   <tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
+  
   <div attr><!-- comment --></div>
 </template>
 ```
@@ -82,9 +81,9 @@ This rule enforces a line break before and after the contents of a singleline el
 <template>
   <!-- ✗ BAD -->
   <div attr>content</div>
-
+  
   <tr attr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
-
+  
   <div attr><!-- comment --></div>
 </template>
 ```
@@ -99,7 +98,7 @@ This rule enforces a line break before and after the contents of a singleline el
 <template>
   <!-- ✗ BAD -->
   <div>content</div>
-
+  
   <tr><td>{{ data1 }}</td><td>{{ data2 }}</td></tr>
 
   <div><!-- comment --></div>

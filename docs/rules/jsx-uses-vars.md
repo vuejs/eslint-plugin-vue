@@ -5,7 +5,6 @@ title: vue/jsx-uses-vars
 description: prevent variables used in JSX to be marked as unused
 since: v2.0.0
 ---
-# vue/jsx-uses-vars
 > prevent variables used in JSX to be marked as unused
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.

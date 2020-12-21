@@ -5,7 +5,6 @@ title: vue/return-in-emits-validator
 description: enforce that a return statement is present in emits validator
 since: v7.0.0
 ---
-# vue/return-in-emits-validator
 > enforce that a return statement is present in emits validator
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.

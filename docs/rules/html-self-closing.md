@@ -5,7 +5,6 @@ title: vue/html-self-closing
 description: enforce self-closing style
 since: v3.11.0
 ---
-# vue/html-self-closing
 > enforce self-closing style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

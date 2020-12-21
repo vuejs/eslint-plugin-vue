@@ -5,7 +5,6 @@ title: vue/html-comment-content-newline
 description: enforce unified line brake in HTML comments
 since: v7.0.0
 ---
-# vue/html-comment-content-newline
 > enforce unified line brake in HTML comments
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

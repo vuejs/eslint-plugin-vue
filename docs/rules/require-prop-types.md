@@ -5,7 +5,6 @@ title: vue/require-prop-types
 description: require type definitions in props
 since: v3.9.0
 ---
-# vue/require-prop-types
 > require type definitions in props
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

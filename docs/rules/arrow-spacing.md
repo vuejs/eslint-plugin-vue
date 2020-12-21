@@ -5,7 +5,6 @@ title: vue/arrow-spacing
 description: enforce consistent spacing before and after the arrow in arrow functions
 since: v5.2.0
 ---
-# vue/arrow-spacing
 > enforce consistent spacing before and after the arrow in arrow functions
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

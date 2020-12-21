@@ -5,13 +5,12 @@ title: vue/no-bare-strings-in-template
 description: disallow the use of bare strings in `<template>`
 since: v7.0.0
 ---
-# vue/no-bare-strings-in-template
 > disallow the use of bare strings in `<template>`
 
 ## :book: Rule Details
 
-This rule disallows the use of bare strings in `<template>`.
-In order to be able to internationalize your application, you will need to avoid using plain strings in your templates. Instead, you would need to use a template helper specializing in translation.
+This rule disallows the use of bare strings in `<template>`.  
+In order to be able to internationalize your application, you will need to avoid using plain strings in your templates. Instead, you would need to use a template helper specializing in translation.  
 
 This rule was inspired by [no-bare-strings rule in ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-bare-strings.md).
 
@@ -49,7 +48,7 @@ This rule was inspired by [no-bare-strings rule in ember-template-lint](https://
 </eslint-code-block>
 
 :::tip
-This rule does not check for string literals, in bindings and mustaches interpolation. This is because it looks like a conscious decision.
+This rule does not check for string literals, in bindings and mustaches interpolation. This is because it looks like a conscious decision.  
 If you want to report these string literals, enable the [vue/no-useless-v-bind] and [vue/no-useless-mustaches] rules and fix the useless string literals.
 :::
 

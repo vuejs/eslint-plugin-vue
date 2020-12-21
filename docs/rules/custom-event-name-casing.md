@@ -5,7 +5,6 @@ title: vue/custom-event-name-casing
 description: enforce specific casing for custom event name
 since: v7.0.0
 ---
-# vue/custom-event-name-casing
 > enforce specific casing for custom event name
 
 Define a style for custom event name casing for consistency purposes.

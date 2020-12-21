@@ -5,7 +5,6 @@ title: vue/no-unused-properties
 description: disallow unused properties
 since: v7.0.0
 ---
-# vue/no-unused-properties
 > disallow unused properties
 
 ## :book: Rule Details

@@ -5,7 +5,6 @@ title: vue/v-slot-style
 description: enforce `v-slot` directive style
 since: v6.0.0
 ---
-# vue/v-slot-style
 > enforce `v-slot` directive style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

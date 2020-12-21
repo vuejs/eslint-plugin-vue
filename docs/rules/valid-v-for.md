@@ -5,7 +5,6 @@ title: vue/valid-v-for
 description: enforce valid `v-for` directives
 since: v3.11.0
 ---
-# vue/valid-v-for
 > enforce valid `v-for` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

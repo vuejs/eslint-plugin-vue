@@ -5,7 +5,6 @@ title: vue/operator-linebreak
 description: enforce consistent linebreak style for operators
 since: v7.0.0
 ---
-# vue/operator-linebreak
 > enforce consistent linebreak style for operators
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

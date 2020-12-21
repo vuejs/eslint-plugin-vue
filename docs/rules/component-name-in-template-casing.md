@@ -5,7 +5,6 @@ title: vue/component-name-in-template-casing
 description: enforce specific casing for the component naming style in template
 since: v5.0.0
 ---
-# vue/component-name-in-template-casing
 > enforce specific casing for the component naming style in template
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -41,7 +40,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 <template>
   <!-- ✓ GOOD -->
   <CoolComponent />
-
+  
   <!-- ✗ BAD -->
   <cool-component />
   <coolComponent />
@@ -105,7 +104,7 @@ export default {
   <!-- ✓ GOOD -->
   <CoolComponent />
   <UnregisteredComponent />
-
+  
   <!-- ✗ BAD -->
   <cool-component />
   <unregistered-component />
@@ -132,7 +131,7 @@ export default {
   <custom-element></custom-element>
   <custom-button></custom-button>
   <custom-input />
-
+  
   <!-- ✗ BAD -->
   <magic-element></magic-element>
 </template>

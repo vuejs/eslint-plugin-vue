@@ -5,7 +5,6 @@ title: vue/valid-v-else-if
 description: enforce valid `v-else-if` directives
 since: v3.11.0
 ---
-# vue/valid-v-else-if
 > enforce valid `v-else-if` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

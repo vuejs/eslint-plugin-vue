@@ -5,7 +5,6 @@ title: vue/no-extra-parens
 description: disallow unnecessary parentheses
 since: v7.0.0
 ---
-# vue/no-extra-parens
 > disallow unnecessary parentheses
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -14,7 +13,7 @@ This rule is the same rule as core [no-extra-parens] rule but it applies to the 
 
 ## :book: Rule Details
 
-This rule restricts the use of parentheses to only where they are necessary.
+This rule restricts the use of parentheses to only where they are necessary.  
 This rule extends the core [no-extra-parens] rule and applies it to the `<template>`. This rule also checks some Vue.js syntax.
 
 <eslint-code-block fix :rules="{'vue/no-extra-parens': ['error']}">

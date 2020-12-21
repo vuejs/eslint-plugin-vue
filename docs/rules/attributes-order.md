@@ -5,7 +5,6 @@ title: vue/attributes-order
 description: enforce order of attributes
 since: v4.3.0
 ---
-# vue/attributes-order
 > enforce order of attributes
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -112,7 +111,7 @@ This rule aims to enforce ordering of component attributes. The default order is
 }
 ```
 
-### `"alphabetical": true`
+### `"alphabetical": true` 
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
 

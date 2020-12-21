@@ -5,7 +5,6 @@ title: vue/space-unary-ops
 description: enforce consistent spacing before or after unary operators
 since: v5.2.0
 ---
-# vue/space-unary-ops
 > enforce consistent spacing before or after unary operators
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

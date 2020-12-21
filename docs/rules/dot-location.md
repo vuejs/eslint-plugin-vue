@@ -5,7 +5,6 @@ title: vue/dot-location
 description: enforce consistent newlines before and after dots
 since: v6.0.0
 ---
-# vue/dot-location
 > enforce consistent newlines before and after dots
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
