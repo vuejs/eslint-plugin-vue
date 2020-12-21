@@ -5,6 +5,7 @@ title: vue/no-lone-template
 description: disallow unnecessary `<template>`
 since: v7.0.0
 ---
+# vue/no-lone-template
 > disallow unnecessary `<template>`
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

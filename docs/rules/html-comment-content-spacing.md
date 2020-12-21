@@ -5,6 +5,7 @@ title: vue/html-comment-content-spacing
 description: enforce unified spacing in HTML comments
 since: v7.0.0
 ---
+# vue/html-comment-content-spacing
 > enforce unified spacing in HTML comments
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

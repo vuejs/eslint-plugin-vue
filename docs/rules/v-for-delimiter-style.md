@@ -5,6 +5,7 @@ title: vue/v-for-delimiter-style
 description: enforce `v-for` directive's delimiter style
 since: v7.0.0
 ---
+# vue/v-for-delimiter-style
 > enforce `v-for` directive's delimiter style
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

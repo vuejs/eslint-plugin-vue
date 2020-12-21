@@ -5,6 +5,7 @@ title: vue/no-unregistered-components
 description: disallow using components that are not registered inside templates
 since: v7.0.0
 ---
+# vue/no-unregistered-components
 > disallow using components that are not registered inside templates
 
 ## :book: Rule Details

@@ -4,6 +4,7 @@ sidebarDepth: 0
 title: vue/valid-v-is
 description: enforce valid `v-is` directives
 ---
+---
 # vue/valid-v-is
 > enforce valid `v-is` directives
 

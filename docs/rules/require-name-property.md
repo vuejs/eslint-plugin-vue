@@ -5,6 +5,7 @@ title: vue/require-name-property
 description: require a name property in Vue components
 since: v6.1.0
 ---
+# vue/require-name-property
 > require a name property in Vue components
 
 ## :book: Rule Details

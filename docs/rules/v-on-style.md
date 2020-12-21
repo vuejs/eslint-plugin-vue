@@ -5,6 +5,7 @@ title: vue/v-on-style
 description: enforce `v-on` directive style
 since: v3.0.0
 ---
+# vue/v-on-style
 > enforce `v-on` directive style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

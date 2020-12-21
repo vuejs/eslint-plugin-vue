@@ -5,6 +5,7 @@ title: vue/script-indent
 description: enforce consistent indentation in `<script>`
 since: v4.2.0
 ---
+# vue/script-indent
 > enforce consistent indentation in `<script>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

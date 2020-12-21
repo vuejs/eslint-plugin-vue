@@ -5,6 +5,7 @@ title: vue/no-bare-strings-in-template
 description: disallow the use of bare strings in `<template>`
 since: v7.0.0
 ---
+# vue/no-bare-strings-in-template
 > disallow the use of bare strings in `<template>`
 
 ## :book: Rule Details

@@ -5,6 +5,7 @@ title: vue/no-multi-spaces
 description: disallow multiple spaces
 since: v3.12.0
 ---
+# vue/no-multi-spaces
 > disallow multiple spaces
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

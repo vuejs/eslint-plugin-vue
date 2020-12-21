@@ -5,6 +5,7 @@ title: vue/comment-directive
 description: support comment-directives in `<template>`
 since: v4.1.0
 ---
+# vue/comment-directive
 > support comment-directives in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.

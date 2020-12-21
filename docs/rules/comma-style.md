@@ -5,6 +5,7 @@ title: vue/comma-style
 description: enforce consistent comma style
 since: v7.0.0
 ---
+# vue/comma-style
 > enforce consistent comma style
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

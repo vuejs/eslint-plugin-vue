@@ -4,6 +4,7 @@ sidebarDepth: 0
 title: vue/html-comment-indent
 since: v7.0.0
 ---
+---
 # vue/html-comment-indent
 > enforce consistent indentation in HTML comments
 

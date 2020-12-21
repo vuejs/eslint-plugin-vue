@@ -5,6 +5,7 @@ title: vue/no-multiple-template-root
 description: disallow adding multiple root nodes to the template
 since: v7.0.0
 ---
+# vue/no-multiple-template-root
 > disallow adding multiple root nodes to the template
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.

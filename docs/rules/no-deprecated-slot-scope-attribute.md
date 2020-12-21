@@ -5,6 +5,7 @@ title: vue/no-deprecated-slot-scope-attribute
 description: disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+)
 since: v6.1.0
 ---
+# vue/no-deprecated-slot-scope-attribute
 > disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.

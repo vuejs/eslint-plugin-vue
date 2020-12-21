@@ -5,6 +5,7 @@ title: vue/name-property-casing
 description: enforce specific casing for the name property in Vue components
 since: v3.8.0
 ---
+# vue/name-property-casing
 > enforce specific casing for the name property in Vue components
 
 - :warning: This rule was **deprecated** and replaced by [vue/component-definition-name-casing](component-definition-name-casing.md) rule.

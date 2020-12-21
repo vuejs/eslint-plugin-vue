@@ -5,6 +5,7 @@ title: vue/no-template-shadow
 description: disallow variable declarations from shadowing variables declared in the outer scope
 since: v5.0.0
 ---
+# vue/no-template-shadow
 > disallow variable declarations from shadowing variables declared in the outer scope
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

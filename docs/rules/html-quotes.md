@@ -5,6 +5,7 @@ title: vue/html-quotes
 description: enforce quotes style of HTML attributes
 since: v3.0.0
 ---
+# vue/html-quotes
 > enforce quotes style of HTML attributes
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

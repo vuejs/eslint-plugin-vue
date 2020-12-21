@@ -5,6 +5,7 @@ title: vue/order-in-components
 description: enforce order of properties in components
 since: v3.2.0
 ---
+# vue/order-in-components
 > enforce order of properties in components
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

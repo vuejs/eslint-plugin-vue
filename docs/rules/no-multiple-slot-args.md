@@ -5,6 +5,7 @@ title: vue/no-multiple-slot-args
 description: disallow to pass multiple arguments to scoped slots
 since: v7.0.0
 ---
+# vue/no-multiple-slot-args
 > disallow to pass multiple arguments to scoped slots
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

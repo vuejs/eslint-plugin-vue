@@ -5,6 +5,7 @@ title: vue/require-direct-export
 description: require the component to be directly exported
 since: v5.2.0
 ---
+# vue/require-direct-export
 > require the component to be directly exported
 
 ## :book: Rule Details

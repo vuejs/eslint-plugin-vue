@@ -5,6 +5,7 @@ title: vue/comma-dangle
 description: require or disallow trailing commas
 since: v5.2.0
 ---
+# vue/comma-dangle
 > require or disallow trailing commas
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

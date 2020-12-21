@@ -5,6 +5,7 @@ title: vue/max-len
 description: enforce a maximum line length
 since: v6.1.0
 ---
+# vue/max-len
 > enforce a maximum line length
 
 ## :book: Rule Details

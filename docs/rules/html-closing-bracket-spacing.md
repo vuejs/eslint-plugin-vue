@@ -5,6 +5,7 @@ title: vue/html-closing-bracket-spacing
 description: require or disallow a space before tag's closing brackets
 since: v4.1.0
 ---
+# vue/html-closing-bracket-spacing
 > require or disallow a space before tag's closing brackets
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.

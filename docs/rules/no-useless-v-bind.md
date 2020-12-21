@@ -5,6 +5,7 @@ title: vue/no-useless-v-bind
 description: disallow unnecessary `v-bind` directives
 since: v7.0.0
 ---
+# vue/no-useless-v-bind
 > disallow unnecessary `v-bind` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

@@ -1,6 +1,7 @@
 ---
 sidebarDepth: 0
 ---
+---
 
 # Available rules
 
