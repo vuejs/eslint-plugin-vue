@@ -6,6 +6,7 @@ description: enforce valid `v-model` directives
 since: v3.11.0
 ---
 # vue/valid-v-model
+
 > enforce valid `v-model` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -70,6 +71,10 @@ Nothing.
 - [vue/no-parsing-error]
 
 [vue/no-parsing-error]: ./no-parsing-error.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

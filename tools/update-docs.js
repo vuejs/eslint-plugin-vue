@@ -59,11 +59,30 @@ function getPresetIds(categoryIds) {
   return [...new Set([...categoryIds, ...getPresetIds(subsetCategoryIds)])]
 }
 
+function pickSince(content) {
+  const fileIntro = /^---\n(.*\n)+---\n*/g.exec(content)
+  if (fileIntro) {
+    const since = /since: (v\d+\.\d+\.\d+)/.exec(fileIntro[0])
+    if (since) {
+      return since[1]
+    }
+  }
+  if (
+    process.env.npm_package_version &&
+    process.env.npm_package_version !== require('../package.json').version
+  ) {
+    // Maybe version script
+    return `v${process.env.npm_package_version}`
+  }
+  return null
+}
+
 class DocFile {
   constructor(rule) {
     this.rule = rule
     this.filePath = path.join(ROOT, `${rule.name}.md`)
     this.content = fs.readFileSync(this.filePath, 'utf8')
+    this.since = pickSince(this.content)
   }
 
   static read(rule) {
@@ -81,7 +100,8 @@ class DocFile {
       pageClass: 'rule-details',
       sidebarDepth: 0,
       title: ruleId,
-      description: meta.docs.description
+      description: meta.docs.description,
+      ...(this.since ? { since: this.since } : {})
     }
     const computed = `---\n${Object.entries(fileIntro)
       .map((item) => `${item[0]}: ${item[1]}`)
@@ -100,7 +120,7 @@ class DocFile {
 
   updateHeader() {
     const { ruleId, meta } = this.rule
-    const title = `# ${ruleId}\n> ${meta.docs.description}`
+    const title = `# ${ruleId}\n\n> ${meta.docs.description}`
     const notes = []
 
     if (meta.deprecated) {
@@ -129,12 +149,18 @@ class DocFile {
       )
     }
 
+    if (!this.since) {
+      notes.unshift(
+        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`
+      )
+    }
+
     // Add an empty line after notes.
     if (notes.length >= 1) {
       notes.push('', '')
     }
 
-    const headerPattern = /#.+\n[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n\n*[^\n]*\n+(?:- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
     if (headerPattern.test(this.content)) {
       this.content = this.content.replace(headerPattern, header)
@@ -170,8 +196,16 @@ class DocFile {
 
   updateFooter() {
     const { name, meta } = this.rule
-    const footerPattern = /## :mag: Implementation.+$/s
-    const footer = `## :mag: Implementation
+    const footerPattern = /## (?::mag: Implementation|:rocket: Version).+$/s
+    const footer = `${
+      this.since
+        ? `## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue ${this.since}
+
+`
+        : ''
+    }## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.js)

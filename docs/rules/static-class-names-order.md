@@ -6,6 +6,7 @@ description: enforce static class names order
 since: v6.1.0
 ---
 # vue/static-class-names-order
+
 > enforce static class names order
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -31,6 +32,10 @@ This rule aims to enforce the order of static class names.
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

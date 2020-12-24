@@ -6,6 +6,7 @@ description: enforce unified spacing in mustache interpolations
 since: v3.13.0
 ---
 # vue/mustache-interpolation-spacing
+
 > enforce unified spacing in mustache interpolations
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -57,6 +58,10 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.13.0
 
 ## :mag: Implementation
 

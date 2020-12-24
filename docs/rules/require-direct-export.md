@@ -6,6 +6,7 @@ description: require the component to be directly exported
 since: v5.2.0
 ---
 # vue/require-direct-export
+
 > require the component to be directly exported
 
 ## :book: Rule Details
@@ -87,6 +88,10 @@ export default props => h('div', props.msg)
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

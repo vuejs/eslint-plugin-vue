@@ -6,6 +6,7 @@ description: disallow irregular whitespace
 since: v6.1.0
 ---
 # vue/no-irregular-whitespace
+
 > disallow irregular whitespace
 
 ## :book: Rule Details
@@ -163,6 +164,10 @@ var foo = ``
 - [no-irregular-whitespace]
 
 [no-irregular-whitespace]: https://eslint.org/docs/rules/no-irregular-whitespace
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

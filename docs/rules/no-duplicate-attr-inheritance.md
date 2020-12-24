@@ -6,6 +6,7 @@ description: enforce `inheritAttrs` to be set to `false` when using `v-bind="$at
 since: v7.0.0
 ---
 # vue/no-duplicate-attr-inheritance
+
 > enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"`
 
 ## :book: Rule Details
@@ -50,6 +51,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API - inheritAttrs](https://v3.vuejs.org/api/options-misc.html#inheritattrs)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

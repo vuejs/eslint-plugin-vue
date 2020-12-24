@@ -6,6 +6,7 @@ description: disallow specific props
 since: v7.3.0
 ---
 # vue/no-restricted-props
+
 > disallow specific props
 
 ## :book: Rule Details
@@ -98,6 +99,10 @@ export default {
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.3.0
 
 ## :mag: Implementation
 

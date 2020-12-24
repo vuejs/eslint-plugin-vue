@@ -6,6 +6,7 @@ description: disallow usage of `this` in template
 since: v3.13.0
 ---
 # vue/this-in-template
+
 > disallow usage of `this` in template
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -61,6 +62,10 @@ This rule aims at preventing usage of `this` in Vue templates.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.13.0
 
 ## :mag: Implementation
 

@@ -6,6 +6,7 @@ description: disallow using components that are not registered inside templates
 since: v7.0.0
 ---
 # vue/no-unregistered-components
+
 > disallow using components that are not registered inside templates
 
 ## :book: Rule Details
@@ -131,6 +132,10 @@ are ignored by default.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

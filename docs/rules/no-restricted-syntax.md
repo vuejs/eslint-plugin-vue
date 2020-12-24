@@ -6,6 +6,7 @@ description: disallow specified syntax
 since: v5.2.0
 ---
 # vue/no-restricted-syntax
+
 > disallow specified syntax
 
 This rule is the same rule as core [no-restricted-syntax] rule but it applies to the expressions in `<template>`.
@@ -49,6 +50,10 @@ Forbids call expressions inside mustache interpolation.
 [ESTree]: https://github.com/estree/estree
 [vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser
 [vue-eslint-parser - AST docs]: https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

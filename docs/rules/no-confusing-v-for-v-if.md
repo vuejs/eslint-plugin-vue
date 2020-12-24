@@ -6,6 +6,7 @@ description: disallow confusing `v-for` and `v-if` on the same element
 since: v3.0.0
 ---
 # vue/no-confusing-v-for-v-if
+
 > disallow confusing `v-for` and `v-if` on the same element
 
 - :warning: This rule was **deprecated** and replaced by [vue/no-use-v-if-with-v-for](no-use-v-if-with-v-for.md) rule.
@@ -61,6 +62,10 @@ Nothing.
 - [Style guide - Avoid v-if with v-for](https://v3.vuejs.org/style-guide/#avoid-v-if-with-v-for-essential)
 - [Guide - Conditional Rendering / v-if with v-for](https://v3.vuejs.org/guide/conditional.html#v-if-with-v-for)
 - [Guide - List Rendering / v-for with v-if](https://v3.vuejs.org/guide/list.html#v-for-with-v-if)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

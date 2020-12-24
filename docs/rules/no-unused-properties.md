@@ -6,6 +6,7 @@ description: disallow unused properties
 since: v7.0.0
 ---
 # vue/no-unused-properties
+
 > disallow unused properties
 
 ## :book: Rule Details
@@ -158,6 +159,10 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 
