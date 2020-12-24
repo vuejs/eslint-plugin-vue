@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-duplicate-attributes
 description: disallow duplication of attributes
+since: v3.0.0
 ---
 # vue/no-duplicate-attributes
 > disallow duplication of attributes

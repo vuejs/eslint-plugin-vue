@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/object-curly-spacing
 description: enforce consistent spacing inside braces
+since: v5.2.0
 ---
 # vue/object-curly-spacing
 > enforce consistent spacing inside braces

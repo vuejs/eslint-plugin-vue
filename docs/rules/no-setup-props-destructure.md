@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-setup-props-destructure
 description: disallow destructuring of `props` passed to `setup`
+since: v7.0.0
 ---
 # vue/no-setup-props-destructure
 > disallow destructuring of `props` passed to `setup`

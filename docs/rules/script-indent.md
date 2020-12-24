@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/script-indent
 description: enforce consistent indentation in `<script>`
+since: v4.2.0
 ---
 # vue/script-indent
 > enforce consistent indentation in `<script>`

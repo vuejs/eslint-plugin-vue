@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/singleline-html-element-content-newline
 description: require a line break before and after the contents of a singleline element
+since: v5.0.0
 ---
 # vue/singleline-html-element-content-newline
 > require a line break before and after the contents of a singleline element

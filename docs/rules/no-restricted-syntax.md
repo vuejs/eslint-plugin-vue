@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-syntax
 description: disallow specified syntax
+since: v5.2.0
 ---
 # vue/no-restricted-syntax
 > disallow specified syntax

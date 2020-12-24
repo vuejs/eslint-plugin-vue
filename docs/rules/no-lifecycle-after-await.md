@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-lifecycle-after-await
 description: disallow asynchronously registered lifecycle hooks
+since: v7.0.0
 ---
 # vue/no-lifecycle-after-await
 > disallow asynchronously registered lifecycle hooks

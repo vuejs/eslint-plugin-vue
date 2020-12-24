@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-use-v-if-with-v-for
 description: disallow use v-if on the same element as v-for
+since: v4.6.0
 ---
 # vue/no-use-v-if-with-v-for
 > disallow use v-if on the same element as v-for

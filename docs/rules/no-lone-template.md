@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-lone-template
 description: disallow unnecessary `<template>`
+since: v7.0.0
 ---
 # vue/no-lone-template
 > disallow unnecessary `<template>`

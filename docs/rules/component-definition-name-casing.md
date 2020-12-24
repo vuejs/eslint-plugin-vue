@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/component-definition-name-casing
 description: enforce specific casing for component definition name
+since: v7.0.0
 ---
 # vue/component-definition-name-casing
 > enforce specific casing for component definition name

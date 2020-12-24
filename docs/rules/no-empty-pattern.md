@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-empty-pattern
 description: disallow empty destructuring patterns
+since: v6.0.0
 ---
 # vue/no-empty-pattern
 > disallow empty destructuring patterns

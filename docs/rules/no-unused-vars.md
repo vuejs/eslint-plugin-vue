@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unused-vars
 description: disallow unused variable definitions of v-for directives or scope attributes
+since: v3.14.0
 ---
 # vue/no-unused-vars
 > disallow unused variable definitions of v-for directives or scope attributes

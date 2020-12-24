@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comma-spacing
 description: enforce consistent spacing before and after commas
+since: v7.0.0
 ---
 # vue/comma-spacing
 > enforce consistent spacing before and after commas

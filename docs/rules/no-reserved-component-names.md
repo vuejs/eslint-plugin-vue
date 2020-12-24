@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-reserved-component-names
 description: disallow the use of reserved names in component definitions
+since: v6.1.0
 ---
 # vue/no-reserved-component-names
 > disallow the use of reserved names in component definitions

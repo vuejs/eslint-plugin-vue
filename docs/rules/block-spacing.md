@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/block-spacing
 description: disallow or enforce spaces inside of blocks after opening block and before closing block
+since: v5.2.0
 ---
 # vue/block-spacing
 > disallow or enforce spaces inside of blocks after opening block and before closing block

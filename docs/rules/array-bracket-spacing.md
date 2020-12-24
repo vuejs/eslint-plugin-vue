@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/array-bracket-spacing
 description: enforce consistent spacing inside array brackets
+since: v5.2.0
 ---
 # vue/array-bracket-spacing
 > enforce consistent spacing inside array brackets

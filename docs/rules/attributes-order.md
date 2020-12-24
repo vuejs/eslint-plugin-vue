@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/attributes-order
 description: enforce order of attributes
+since: v4.3.0
 ---
 # vue/attributes-order
 > enforce order of attributes

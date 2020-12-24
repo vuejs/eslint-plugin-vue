@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-duplicate-attr-inheritance
 description: enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"`
+since: v7.0.0
 ---
 # vue/no-duplicate-attr-inheritance
 > enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"`

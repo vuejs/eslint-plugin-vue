@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-reserved-keys
 description: disallow overwriting reserved keys
+since: v3.9.0
 ---
 # vue/no-reserved-keys
 > disallow overwriting reserved keys

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/eqeqeq
 description: require the use of `===` and `!==`
+since: v5.2.0
 ---
 # vue/eqeqeq
 > require the use of `===` and `!==`

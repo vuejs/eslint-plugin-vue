@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-types
 description: require type definitions in props
+since: v3.9.0
 ---
 # vue/require-prop-types
 > require type definitions in props

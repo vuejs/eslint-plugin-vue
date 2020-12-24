@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-for-template-key
 description: disallow `key` attribute on `<template v-for>`
+since: v7.0.0
 ---
 # vue/no-v-for-template-key
 > disallow `key` attribute on `<template v-for>`

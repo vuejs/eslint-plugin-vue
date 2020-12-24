@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comma-dangle
 description: require or disallow trailing commas
+since: v5.2.0
 ---
 # vue/comma-dangle
 > require or disallow trailing commas

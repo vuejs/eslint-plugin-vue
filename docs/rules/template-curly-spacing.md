@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/template-curly-spacing
 description: require or disallow spacing around embedded expressions of template strings
+since: v7.0.0
 ---
 # vue/template-curly-spacing
 > require or disallow spacing around embedded expressions of template strings

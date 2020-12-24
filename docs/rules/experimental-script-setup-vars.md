@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/experimental-script-setup-vars
 description: prevent variables defined in `<script setup>` to be marked as undefined
+since: v7.0.0
 ---
 # vue/experimental-script-setup-vars
 > prevent variables defined in `<script setup>` to be marked as undefined

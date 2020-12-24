@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comma-style
 description: enforce consistent comma style
+since: v7.0.0
 ---
 # vue/comma-style
 > enforce consistent comma style

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/new-line-between-multi-line-property
 description: enforce new lines between multi-line properties in Vue components
+since: v7.3.0
 ---
 # vue/new-line-between-multi-line-property
 > enforce new lines between multi-line properties in Vue components

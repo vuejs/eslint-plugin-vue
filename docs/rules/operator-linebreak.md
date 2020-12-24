@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/operator-linebreak
 description: enforce consistent linebreak style for operators
+since: v7.0.0
 ---
 # vue/operator-linebreak
 > enforce consistent linebreak style for operators

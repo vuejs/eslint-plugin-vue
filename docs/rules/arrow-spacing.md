@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/arrow-spacing
 description: enforce consistent spacing before and after the arrow in arrow functions
+since: v5.2.0
 ---
 # vue/arrow-spacing
 > enforce consistent spacing before and after the arrow in arrow functions

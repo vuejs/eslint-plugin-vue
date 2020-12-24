@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-v-bind
 description: disallow unnecessary `v-bind` directives
+since: v7.0.0
 ---
 # vue/no-useless-v-bind
 > disallow unnecessary `v-bind` directives

@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prop-name-casing
 description: enforce specific casing for the Prop name in Vue components
+since: v4.3.0
 ---
 # vue/prop-name-casing
 > enforce specific casing for the Prop name in Vue components

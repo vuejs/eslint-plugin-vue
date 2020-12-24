@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-html-element-is
 description: disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-html-element-is
 > disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+)

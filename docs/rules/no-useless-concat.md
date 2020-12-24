@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-concat
 description: disallow unnecessary concatenation of literals or template literals
+since: v7.0.0
 ---
 # vue/no-useless-concat
 > disallow unnecessary concatenation of literals or template literals

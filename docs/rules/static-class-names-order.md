@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/static-class-names-order
 description: enforce static class names order
+since: v6.1.0
 ---
 # vue/static-class-names-order
 > enforce static class names order

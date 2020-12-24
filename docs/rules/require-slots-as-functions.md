@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-slots-as-functions
 description: enforce properties of `$slots` to be used as a function
+since: v7.0.0
 ---
 # vue/require-slots-as-functions
 > enforce properties of `$slots` to be used as a function

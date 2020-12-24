@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/dot-notation
 description: enforce dot notation whenever possible
+since: v7.0.0
 ---
 # vue/dot-notation
 > enforce dot notation whenever possible

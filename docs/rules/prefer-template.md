@@ -3,6 +3,7 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-template
 description: require template literals instead of string concatenation
+since: v7.0.0
 ---
 # vue/prefer-template
 > require template literals instead of string concatenation
