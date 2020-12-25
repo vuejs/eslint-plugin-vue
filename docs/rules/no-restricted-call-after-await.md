@@ -5,7 +5,10 @@ title: vue/no-restricted-call-after-await
 description: disallow asynchronously called restricted methods
 ---
 # vue/no-restricted-call-after-await
+
 > disallow asynchronously called restricted methods
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
