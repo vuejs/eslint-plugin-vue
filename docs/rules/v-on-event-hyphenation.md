@@ -102,6 +102,10 @@ Don't use hyphenated name but allow custom event names
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/attribute-hyphenation](./attribute-hyphenation.md)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-event-hyphenation.js)

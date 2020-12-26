@@ -107,6 +107,10 @@ Don't use hyphenated name but allow custom attributes
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v3.9.0
