@@ -102,8 +102,15 @@ Don't use hyphenated name but allow custom event names
 
 </eslint-code-block>
 
+## :books: Further Reading
+
+- [Guide - Custom Events]
+
+[Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
+
 ## :couple: Related Rules
 
+- [vue/custom-event-name-casing](./custom-event-name-casing.md)
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
 
 ## :mag: Implementation

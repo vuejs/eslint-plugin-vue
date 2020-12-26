@@ -23,9 +23,9 @@ Vue 2 recommends using kebab-case for custom event names.
 
 See [Guide (for v2) - Custom Events] for more details.
 
-Vue 3 recommends using camelCase for custom event names.
+In Vue 3, using either camelCase or kebab-case for your custom event name does not limit its use in v-on. However, following JavaScript conventions, camelCase is more natural.
 
-See [vuejs/docs-next#656](https://github.com/vuejs/docs-next/issues/656) for more details.
+See [Guide - Custom Events] for more details.
 
 This rule enforces kebab-case by default.
 
@@ -170,6 +170,11 @@ export default {
 
 [Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
 [Guide (for v2) - Custom Events]: https://vuejs.org/v2/guide/components-custom-events.html
+
+## :couple: Related Rules
+
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+- [vue/prop-name-casing](./prop-name-casing.md)
 
 ## :rocket: Version
 
