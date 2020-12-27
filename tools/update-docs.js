@@ -67,12 +67,8 @@ function pickSince(content) {
       return since[1]
     }
   }
-  if (
-    process.env.npm_package_version &&
-    process.env.npm_package_version !== require('../package.json').version
-  ) {
-    // Maybe version script
-    return `v${process.env.npm_package_version}`
+  if (process.env.IN_VERSION_SCRIPT) {
+    return `v${require('../package.json').version}`
   }
   return null
 }
