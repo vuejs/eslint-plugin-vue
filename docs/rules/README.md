@@ -302,6 +302,7 @@ For example:
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  |
+| [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  |
 | [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event |  |
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props |  |
@@ -321,6 +322,7 @@ For example:
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: |
+| [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md) | enforce v-on event naming style on custom components in template | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
 
 ### Extension Rules

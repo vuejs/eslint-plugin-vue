@@ -18,6 +18,7 @@
     "version": "npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
     "docs:watch": "vuepress dev docs",
+    "predocs:build": "npm run update",
     "docs:build": "vuepress build docs"
   },
   "files": [

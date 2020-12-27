@@ -47,6 +47,7 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 - `"ignore"` ... Array of ignored names
 
 ### `"always"`
+
 It errors on upper case letters.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
@@ -64,6 +65,7 @@ It errors on upper case letters.
 </eslint-code-block>
 
 ### `"never"`
+
 It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
@@ -84,6 +86,7 @@ It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 </eslint-code-block>
 
 ### `"never", { "ignore": ["custom-prop"] }`
+
 Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
@@ -103,6 +106,11 @@ Don't use hyphenated name but allow custom attributes
 ```
 
 </eslint-code-block>
+
+## :couple: Related Rules
+
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+- [vue/prop-name-casing](./prop-name-casing.md)
 
 ## :rocket: Version
 

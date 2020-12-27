@@ -327,6 +327,9 @@ export namespace Rule {
     getSourceCode(): SourceCode
     markVariableAsUsed(name: string): boolean
     report(descriptor: ReportDescriptor): void
+
+    // eslint@6 does not have this method.
+    getCwd?: () => string
   }
 
   type ReportDescriptor =

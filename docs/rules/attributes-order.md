@@ -91,7 +91,33 @@ This rule aims to enforce ordering of component attributes. The default order is
 
 </eslint-code-block>
 
+Note that `v-bind="object"` syntax is considered to be the same as the next or previous attribute categories.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD (`v-bind="object"` is considered GLOBAL category) -->
+  <MyComponent
+    v-bind="object"
+    id="x"
+    v-model="x"
+    v-bind:foo="x">
+  </MyComponent>
+
+  <!-- ✗ BAD (`v-bind="object"` is considered UNIQUE category) -->
+  <MyComponent
+    key="x"
+    v-model="x"
+    v-bind="object">
+  </MyComponent>
+</template>
+```
+
+</eslint-code-block>
+
 ## :wrench: Options
+
 ```json
 {
   "vue/attributes-order": ["error", {
@@ -113,7 +139,7 @@ This rule aims to enforce ordering of component attributes. The default order is
 }
 ```
 
-### `"alphabetical": true` 
+### `"alphabetical": true`
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
 
