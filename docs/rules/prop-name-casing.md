@@ -70,6 +70,11 @@ export default {
 
 - [Style guide - Prop name casing](https://v3.vuejs.org/style-guide/#prop-name-casing-strongly-recommended)
 
+## :couple: Related Rules
+
+- [vue/attribute-hyphenation](./attribute-hyphenation.md)
+- [vue/custom-event-name-casing](./custom-event-name-casing.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v4.3.0
