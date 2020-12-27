@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-on-event-hyphenation
 description: enforce v-on event naming style on custom components in template
+since: v7.4.0
 ---
 # vue/v-on-event-hyphenation
 
 > enforce v-on event naming style on custom components in template
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -112,6 +112,10 @@ Don't use hyphenated name but allow custom event names
 
 - [vue/custom-event-name-casing](./custom-event-name-casing.md)
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.4.0
 
 ## :mag: Implementation
 

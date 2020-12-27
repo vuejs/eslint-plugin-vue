@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-block
 description: disallow specific block
+since: v7.4.0
 ---
 # vue/no-restricted-block
 
 > disallow specific block
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -81,6 +80,10 @@ The following properties can be specified for the object.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.4.0
 
 ## :mag: Implementation
 
