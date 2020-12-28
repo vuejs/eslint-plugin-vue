@@ -432,7 +432,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-cloak".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -443,7 +443,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-cloak" should go before "id".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -468,11 +468,11 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-model" should go before "model".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute ":id" should go before "propOne".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -499,11 +499,11 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-model" should go before "v-on".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "propOne" should go before "v-on".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -516,7 +516,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "aria-test".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -546,7 +546,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "propone".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -565,7 +565,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-cloak".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -604,27 +604,27 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-for" should go before "v-if".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "is" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "ref" should go before "v-on:click".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute ":prop" should go before "v-on:click".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -680,23 +680,23 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "v-on:click" should go before "v-once".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "ref" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -737,7 +737,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -761,7 +761,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-slot" should go before "v-model".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -783,7 +783,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "a-prop" should go before "z-prop".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -805,7 +805,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute ":a-prop" should go before ":z-prop".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -827,7 +827,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "@change" should go before "@input".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -849,7 +849,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "boolean-prop" should go before "z-prop".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -871,7 +871,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-on:[c]" should go before "v-on:click".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -893,7 +893,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-on:click" should go before "v-text".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
