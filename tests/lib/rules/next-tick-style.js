@@ -1,5 +1,5 @@
 /**
- * @fileoverview enforce `Vue.nextTick` / `this.$nextTick` style
+ * @fileoverview enforce Promise or callback style in `nextTick`
  * @author Flo Edelmann
  * @copyright 2020 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
