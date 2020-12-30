@@ -2,21 +2,21 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-async-in-computed-properties
-description: disallow asynchronous actions in computed properties
+description: disallow asynchronous actions in computed properties and functions
 since: v3.8.0
 ---
 # vue/no-async-in-computed-properties
 
-> disallow asynchronous actions in computed properties
+> disallow asynchronous actions in computed properties and functions
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
-Computed properties should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
+Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
 If you need async computed properties you might want to consider using additional plugin [vue-async-computed]
 
 ## :book: Rule Details
 
-This rule is aimed at preventing asynchronous methods from being called in computed properties.
+This rule is aimed at preventing asynchronous methods from being called in computed properties and functions.
 
 <eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
 
@@ -55,6 +55,47 @@ export default {
     anim () {
       requestAnimationFrame(() => {})
     }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
+
+```vue
+<script>
+import {computed} from 'vue'
+export default {
+  setup() {
+    /* ✓ GOOD */
+    const foo = computed(() => {
+      var bar = 0
+      try {
+        bar = bar / this.a
+      } catch (e) {
+        return 0
+      } finally {
+        return bar
+      }
+    })
+
+    /* ✗ BAD */
+    const pro = computed(() => Promise.all([new Promise((resolve, reject) => {})]))
+    const foo1 = computed(async () => await someFunc())
+    const bar = computed(() => {
+      return fetch(url).then(response => {})
+    })
+    const tim = computed(() => {
+      setTimeout(() => { }, 0)
+    })
+    const inter = computed(() => {
+      setInterval(() => { }, 0)
+    })
+    const anim = computed(() => {
+      requestAnimationFrame(() => {})
+    })
   }
 }
 </script>
