@@ -347,6 +347,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
 | [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length |  |
+| [vue/no-constant-condition](./no-constant-condition.md) | disallow constant expressions in conditions |  |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
 | [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses | :wrench: |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
