@@ -226,18 +226,7 @@ tester.run('next-tick-style', rule, {
           await nt(); callback();
         }
       }</script>`,
-      output: `<script>import { nextTick as nt } from 'vue';
-      export default {
-        async mounted() {
-          this.$nextTick().then(() => callback());
-          Vue.nextTick().then(() => callback());
-          nt().then(() => callback());
-
-          await this.$nextTick(); callback();
-          await Vue.nextTick(); callback();
-          await nt(); callback();
-        }
-      }</script>`,
+      output: null,
       errors: [
         {
           message:
