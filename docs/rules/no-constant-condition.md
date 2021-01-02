@@ -3,11 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-constant-condition
 description: disallow constant expressions in conditions
-since: v7.5.0
 ---
 # vue/no-constant-condition
 
 > disallow constant expressions in conditions
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule is the same rule as core [no-constant-condition] rule but it applies to the expressions in `<template>`.
 
@@ -16,10 +17,6 @@ This rule is the same rule as core [no-constant-condition] rule but it applies t
 - [no-constant-condition]
 
 [no-constant-condition]: https://eslint.org/docs/rules/no-constant-condition
-
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v7.5.0
 
 ## :mag: Implementation
 
