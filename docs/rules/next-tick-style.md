@@ -19,19 +19,23 @@ This rule enforces whether the callback version or Promise version (which was in
 
 ```vue
 <script>
-import { nextTick } from 'vue';
+import { nextTick as nt } from 'vue';
 
 export default {
   async mounted() {
     /* ✓ GOOD */
-    nextTick().then(() => callback());
-    await nextTick(); callback();
+    nt().then(() => callback());
+    await nt(); callback();
+    Vue.nextTick().then(() => callback());
+    await Vue.nextTick(); callback();
     this.$nextTick().then(() => callback());
     await this.$nextTick(); callback();
 
     /* ✗ BAD */
-    nextTick(() => callback());
-    nextTick(callback);
+    nt(() => callback());
+    nt(callback);
+    Vue.$nextTick(() => callback());
+    Vue.$nextTick(callback);
     this.$nextTick(() => callback());
     this.$nextTick(callback);
   }
@@ -59,19 +63,23 @@ Default is set to `promise`.
 
 ```vue
 <script>
-import { nextTick } from 'vue';
+import { nextTick as nt } from 'vue';
 
 export default {
   async mounted() {
     /* ✓ GOOD */
-    nextTick(() => callback());
-    nextTick(callback);
+    nt(() => callback());
+    nt(callback);
+    Vue.nextTick(() => callback());
+    Vue.nextTick(callback);
     this.$nextTick(() => callback());
     this.$nextTick(callback);
 
     /* ✗ BAD */
-    nextTick().then(() => callback());
-    await nextTick(); callback();
+    nt().then(() => callback());
+    await nt(); callback();
+    Vue.nextTick().then(() => callback());
+    await Vue.nextTick(); callback();
     this.$nextTick().then(() => callback());
     await this.$nextTick(); callback();
   }
