@@ -31,35 +31,35 @@ tester.run('no-constant-condition', rule, {
       ]
     },
     {
-      code: '<template><CustomButton v-if="true" /></template>',
+      code: '<template><CustomButton v-else-if="true" /></template>',
       errors: [
         {
           messageId: 'unexpected',
           type: 'Literal',
-          column: 31,
-          endColumn: 35
+          column: 36,
+          endColumn: 40
         }
       ]
     },
     {
-      code: '<template><CustomButton v-if="1" /></template>',
+      code: '<template><CustomButton v-else="1" /></template>',
       errors: [
         {
           messageId: 'unexpected',
           type: 'Literal',
-          column: 31,
-          endColumn: 32
+          column: 33,
+          endColumn: 34
         }
       ]
     },
     {
-      code: '<template><CustomButton v-if="{}" /></template>',
+      code: '<template><CustomButton v-show="{}" /></template>',
       errors: [
         {
           messageId: 'unexpected',
           type: 'ObjectExpression',
-          column: 31,
-          endColumn: 33
+          column: 33,
+          endColumn: 35
         }
       ]
     },
