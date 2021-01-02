@@ -217,6 +217,89 @@ tester.run('valid-next-tick', rule, {
           column: 22
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          nt(callback, anotherCallback);
+          Vue.nextTick(callback, anotherCallback);
+          this.$nextTick(callback, anotherCallback);
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          message: '`nextTick` expects zero or one parameters.',
+          line: 4,
+          column: 11
+        },
+        {
+          message: '`nextTick` expects zero or one parameters.',
+          line: 5,
+          column: 15
+        },
+        {
+          message: '`nextTick` expects zero or one parameters.',
+          line: 6,
+          column: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          nt(callback).then(anotherCallback);
+          Vue.nextTick(callback).then(anotherCallback);
+          this.$nextTick(callback).then(anotherCallback);
+
+          await nt(callback);
+          await Vue.nextTick(callback);
+          await this.$nextTick(callback);
+        }
+      }</script>`,
+      output: null,
+      errors: [
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 4,
+          column: 11
+        },
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 5,
+          column: 15
+        },
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 6,
+          column: 16
+        },
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 8,
+          column: 17
+        },
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 9,
+          column: 21
+        },
+        {
+          message:
+            'Either await the Promise or pass a callback function to `nextTick`.',
+          line: 10,
+          column: 22
+        }
+      ]
     }
   ]
 })

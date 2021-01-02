@@ -24,15 +24,30 @@ import { nextTick } from 'vue';
 
 export default {
   async mounted() {
-    /* ✗ BAD */
+    /* ✗ BAD: no callback function or awaited Promise */
     nt();
     Vue.nextTick();
     this.$nextTick();
 
-    /* ✗ BAD */
+    /* ✗ BAD: no function call */
     nt;
     Vue.nextTick;
     this.$nextTick;
+
+    /* ✗ BAD: too many parameters */
+    nt(callback, anotherCallback);
+    Vue.nextTick(callback, anotherCallback);
+    this.$nextTick(callback, anotherCallback);
+
+    /* ✗ BAD: both callback function and awaited Promise */
+    nt(callback).then(anotherCallback);
+    Vue.nextTick(callback).then(anotherCallback);
+    this.$nextTick(callback).then(anotherCallback);
+
+    /* ✗ BAD: both callback function and awaited Promise */
+    await nt(callback);
+    await Vue.nextTick(callback);
+    await this.$nextTick(callback);
 
     /* ✓ GOOD */
     await nt();
