@@ -299,6 +299,9 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             const test12 = computed(() => {
               return this.bar ? async () => 1 : null
             })
+            const test13 = computed(() => {
+              bar()
+            })
           }
         }
         `,
@@ -894,6 +897,27 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message: 'Unexpected timed function in computed function.',
           line: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      import {computed} from 'vue'
+      export default {
+        setup() {
+          const test = computed(async () => {
+            bar()
+          })
+        }
+      }
+      `,
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Unexpected async function declaration in computed function.',
+          line: 5
         }
       ]
     }
