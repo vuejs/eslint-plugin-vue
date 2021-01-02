@@ -20,7 +20,7 @@ Calling `Vue.nextTick` or `vm.$nextTick` without passing a callback and without 
 
 ```vue
 <script>
-import { nextTick } from 'vue';
+import { nextTick as nt } from 'vue';
 
 export default {
   async mounted() {
