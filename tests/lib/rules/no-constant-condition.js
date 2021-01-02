@@ -42,13 +42,13 @@ tester.run('no-constant-condition', rule, {
       ]
     },
     {
-      code: '<template><CustomButton v-else="1" /></template>',
+      code: '<template><CustomButton v-if="1" /></template>',
       errors: [
         {
           messageId: 'unexpected',
           type: 'Literal',
-          column: 33,
-          endColumn: 34
+          column: 31,
+          endColumn: 32
         }
       ]
     },
