@@ -1,0 +1,73 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/valid-next-tick
+description: enforce valid `nextTick` function calls
+---
+# vue/valid-next-tick
+
+> enforce valid `nextTick` function calls
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
+## :book: Rule Details
+
+Calling `Vue.nextTick` or `vm.$nextTick` without passing a callback and without awaiting the returned Promise is likely a mistake (probably a missing `await`).
+
+<eslint-code-block fix :rules="{'vue/valid-next-tick': ['error']}">
+
+```vue
+<script>
+import { nextTick } from 'vue';
+
+export default {
+  async mounted() {
+    /* ✗ BAD */
+    nt();
+    Vue.nextTick();
+    this.$nextTick();
+
+    /* ✗ BAD */
+    nt;
+    Vue.nextTick;
+    this.$nextTick;
+
+    /* ✓ GOOD */
+    await nt();
+    await Vue.nextTick();
+    await this.$nextTick();
+
+    /* ✓ GOOD */
+    nt().then(callback);
+    Vue.nextTick().then(callback);
+    this.$nextTick().then(callback);
+
+    /* ✓ GOOD */
+    nt(callback);
+    Vue.nextTick(callback);
+    this.$nextTick(callback);
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+Nothing.
+
+## :books: Further Reading
+
+- [`Vue.nextTick` API in Vue 2](https://vuejs.org/v2/api/#Vue-nextTick)
+- [`vm.$nextTick` API in Vue 2](https://vuejs.org/v2/api/#vm-nextTick)
+- [Global API Treeshaking](https://v3.vuejs.org/guide/migration/global-api-treeshaking.html)
+- [Global `nextTick` API in Vue 3](https://v3.vuejs.org/api/global-api.html#nexttick)
+- [Instance `$nextTick` API in Vue 3](https://v3.vuejs.org/api/instance-methods.html#nexttick)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-next-tick.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-next-tick.js)
