@@ -29,22 +29,23 @@ export default {
     Vue.nextTick();
     this.$nextTick();
 
-    /* ✗ BAD: no function call */
-    nt;
-    Vue.nextTick;
-    this.$nextTick;
-
     /* ✗ BAD: too many parameters */
     nt(callback, anotherCallback);
     Vue.nextTick(callback, anotherCallback);
     this.$nextTick(callback, anotherCallback);
 
+    /* ✗ BAD: no function call */
+    nt.then(callback);
+    Vue.nextTick.then(callback);
+    this.$nextTick.then(callback);
+    await nt;
+    await Vue.nextTick;
+    await this.$nextTick;
+
     /* ✗ BAD: both callback function and awaited Promise */
     nt(callback).then(anotherCallback);
     Vue.nextTick(callback).then(anotherCallback);
     this.$nextTick(callback).then(anotherCallback);
-
-    /* ✗ BAD: both callback function and awaited Promise */
     await nt(callback);
     await Vue.nextTick(callback);
     await this.$nextTick(callback);
