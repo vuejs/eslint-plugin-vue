@@ -34,8 +34,8 @@ export default {
     /* ✗ BAD */
     nt(() => callback());
     nt(callback);
-    Vue.$nextTick(() => callback());
-    Vue.$nextTick(callback);
+    Vue.nextTick(() => callback());
+    Vue.nextTick(callback);
     this.$nextTick(() => callback());
     this.$nextTick(callback);
   }
