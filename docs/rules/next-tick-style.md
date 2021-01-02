@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/next-tick-style
-description: enforce `v-for` directive's delimiter style
-since: v7.5.0
+description: enforce Promise or callback style in `nextTick`
 ---
 # vue/next-tick-style
 
 > enforce Promise or callback style in `nextTick`
 
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -55,7 +55,7 @@ Default is set to `promise`.
 
 ### `"callback"`
 
-<eslint-code-block :rules="{'vue/next-tick-style': ['error', 'callback']}">
+<eslint-code-block fix :rules="{'vue/next-tick-style': ['error', 'callback']}">
 
 ```vue
 <script>
@@ -88,10 +88,6 @@ export default {
 - [Global API Treeshaking](https://v3.vuejs.org/guide/migration/global-api-treeshaking.html)
 - [Global `nextTick` API in Vue 3](https://v3.vuejs.org/api/global-api.html#nexttick)
 - [Instance `$nextTick` API in Vue 3](https://v3.vuejs.org/api/instance-methods.html#nexttick)
-
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v7.5.0
 
 ## :mag: Implementation
 
