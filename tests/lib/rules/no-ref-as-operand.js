@@ -150,6 +150,14 @@ tester.run('no-ref-as-operand', rule, {
       console.log(count + 1) // error
       console.log(1 + count) // error
       `,
+      output: `
+      import { ref } from 'vue'
+      let count = ref(0)
+
+      count.value++ // error
+      console.log(count.value + 1) // error
+      console.log(1 + count.value) // error
+      `,
       errors: [
         {
           message:
@@ -188,6 +196,23 @@ tester.run('no-ref-as-operand', rule, {
             count++ // error
             console.log(count + 1) // error
             console.log(1 + count) // error
+            return {
+              count
+            }
+          }
+        }
+      </script>
+      `,
+      output: `
+      <script>
+        import { ref } from 'vue'
+        export default {
+          setup() {
+            let count = ref(0)
+
+            count.value++ // error
+            console.log(count.value + 1) // error
+            console.log(1 + count.value) // error
             return {
               count
             }
@@ -237,6 +262,23 @@ tester.run('no-ref-as-operand', rule, {
         }
       </script>
       `,
+      output: `
+      <script>
+        import { ref } from '@vue/composition-api'
+        export default {
+          setup() {
+            let count = ref(0)
+
+            count.value++ // error
+            console.log(count.value + 1) // error
+            console.log(1 + count.value) // error
+            return {
+              count
+            }
+          }
+        }
+      </script>
+      `,
       errors: [
         {
           messageId: 'requireDotValue',
@@ -269,6 +311,13 @@ tester.run('no-ref-as-operand', rule, {
         //
       }
       `,
+      output: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      if (foo.value) {
+        //
+      }
+      `,
       errors: [
         {
           messageId: 'requireDotValue',
@@ -281,6 +330,13 @@ tester.run('no-ref-as-operand', rule, {
       import { ref } from 'vue'
       const foo = ref(true)
       switch (foo) {
+        //
+      }
+      `,
+      output: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      switch (foo.value) {
         //
       }
       `,
@@ -299,6 +355,14 @@ tester.run('no-ref-as-operand', rule, {
       var b = +foo
       var c = !foo
       var d = ~foo
+      `,
+      output: `
+      import { ref } from 'vue'
+      const foo = ref(0)
+      var a = -foo.value
+      var b = +foo.value
+      var c = !foo.value
+      var d = ~foo.value
       `,
       errors: [
         {
@@ -328,6 +392,14 @@ tester.run('no-ref-as-operand', rule, {
       baz += foo
       baz -= foo
       `,
+      output: `
+      import { ref } from 'vue'
+      let foo = ref(0)
+      foo.value += 1
+      foo.value -= 1
+      baz += foo.value
+      baz -= foo.value
+      `,
       errors: [
         {
           messageId: 'requireDotValue',
@@ -354,6 +426,12 @@ tester.run('no-ref-as-operand', rule, {
       var a = foo || other
       var b = foo && other
       `,
+      output: `
+      import { ref } from 'vue'
+      const foo = ref(true)
+      var a = foo.value || other
+      var b = foo.value && other
+      `,
       errors: [
         {
           messageId: 'requireDotValue',
@@ -370,6 +448,11 @@ tester.run('no-ref-as-operand', rule, {
       import { ref } from 'vue'
       let foo = ref(true)
       var a = foo ? x : y
+      `,
+      output: `
+      import { ref } from 'vue'
+      let foo = ref(true)
+      var a = foo.value ? x : y
       `,
       errors: [
         {
@@ -388,6 +471,22 @@ tester.run('no-ref-as-operand', rule, {
             count++ // error
             console.log(count + 1) // error
             console.log(1 + count) // error
+            return {
+              count
+            }
+          }
+        }
+      </script>
+      `,
+      output: `
+      <script>
+        import { ref } from 'vue'
+        let count = ref(0)
+        export default {
+          setup() {
+            count.value++ // error
+            console.log(count.value + 1) // error
+            console.log(1 + count.value) // error
             return {
               count
             }
@@ -451,6 +550,46 @@ tester.run('no-ref-as-operand', rule, {
         const n = foo + 1 // error
       </script>
       `,
+      output: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        let count = ref(0)
+        let cntcnt = computed(()=>count.value+count.value)
+
+        const state = reactive({
+          foo: 1,
+          bar: 2
+        })
+
+        const fooRef = toRef(state, 'foo')
+
+        let value = 'hello'
+        const cref = customRef((track, trigger) => {
+          return {
+            get() {
+              track()
+              return value
+            },
+            set(newValue) {
+              clearTimeout(timeout)
+              timeout = setTimeout(() => {
+                value = newValue
+                trigger()
+              }, delay)
+            }
+          }
+        })
+
+        const foo = shallowRef({})
+
+        count.value++ // error
+        cntcnt.value++ // error
+
+        const s = \`\${fooRef.value} : \${cref.value}\` // error x 2
+
+        const n = foo.value + 1 // error
+      </script>
+      `,
       errors: [
         {
           message:
@@ -487,6 +626,13 @@ tester.run('no-ref-as-operand', rule, {
         foo.bar = 123
       </script>
       `,
+      output: `
+      <script>
+        import { ref, computed, toRef, customRef, shallowRef } from 'vue'
+        const foo = shallowRef({})
+        foo.value.bar = 123
+      </script>
+      `,
       errors: [
         {
           messageId: 'requireDotValue'
@@ -499,6 +645,13 @@ tester.run('no-ref-as-operand', rule, {
         import { ref } from 'vue'
         const foo = ref(123)
         const bar = foo?.bar
+      </script>
+      `,
+      output: `
+      <script>
+        import { ref } from 'vue'
+        const foo = ref(123)
+        const bar = foo.value?.bar
       </script>
       `,
       errors: [
