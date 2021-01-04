@@ -49,6 +49,23 @@ tester.run('valid-next-tick', rule, {
           this.$nextTick(callback);
         }
       }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1404#discussion_r550937500
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          foo.then(nt);
+          foo.then(Vue.nextTick);
+          foo.then(this.$nextTick);
+
+          foo.then(nt, catchHandler);
+          foo.then(Vue.nextTick, catchHandler);
+          foo.then(this.$nextTick, catchHandler);
+        }
+      }</script>`
     }
   ],
   invalid: [
