@@ -89,6 +89,10 @@ tester.run('next-tick-style', rule, {
           foo.then(this.$nextTick);
           foo.then(Vue.nextTick);
           foo.then(nt);
+
+          foo.then(nt, catchHandler);
+          foo.then(Vue.nextTick, catchHandler);
+          foo.then(this.$nextTick, catchHandler);
         }
       }</script>`
     },
@@ -101,6 +105,10 @@ tester.run('next-tick-style', rule, {
           foo.then(this.$nextTick);
           foo.then(Vue.nextTick);
           foo.then(nt);
+
+          foo.then(nt, catchHandler);
+          foo.then(Vue.nextTick, catchHandler);
+          foo.then(this.$nextTick, catchHandler);
         }
       }</script>`
     }
