@@ -77,6 +77,32 @@ tester.run('next-tick-style', rule, {
           nt(callback);
         }
       }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1400#discussion_r550937977
+    {
+      filename: 'test.vue',
+      options: ['promise'],
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          foo.then(this.$nextTick);
+          foo.then(Vue.nextTick);
+          foo.then(nt);
+        }
+      }</script>`
+    },
+    {
+      filename: 'test.vue',
+      options: ['callback'],
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          foo.then(this.$nextTick);
+          foo.then(Vue.nextTick);
+          foo.then(nt);
+        }
+      }</script>`
     }
   ],
   invalid: [
