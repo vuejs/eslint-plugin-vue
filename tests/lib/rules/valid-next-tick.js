@@ -73,7 +73,7 @@ tester.run('valid-next-tick', rule, {
       filename: 'test.vue',
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
-        mounted() {
+        async mounted() {
           nt();
           Vue.nextTick();
           this.$nextTick();
@@ -85,58 +85,55 @@ tester.run('valid-next-tick', rule, {
           message:
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 4,
-          column: 11
+          column: 11,
+          suggestions: [
+            {
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          await nt();
+          Vue.nextTick();
+          this.$nextTick();
+        }
+      }</script>`
+            }
+          ]
         },
         {
           message:
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 5,
-          column: 15
+          column: 15,
+          suggestions: [
+            {
+              output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          nt();
+          await Vue.nextTick();
+          this.$nextTick();
+        }
+      }</script>`
+            }
+          ]
         },
         {
           message:
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 6,
-          column: 16
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `<script>import { nextTick as nt } from 'vue';
+          column: 16,
+          suggestions: [
+            {
+              output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
           nt();
           Vue.nextTick();
-          this.$nextTick();
-        }
-      }</script>`,
-      output: `<script>import { nextTick as nt } from 'vue';
-      export default {
-        async mounted() {
-          await nt();
-          await Vue.nextTick();
           await this.$nextTick();
         }
-      }</script>`,
-      errors: [
-        {
-          message:
-            'Await the Promise returned by `nextTick` or pass a callback function.',
-          line: 4,
-          column: 11
-        },
-        {
-          message:
-            'Await the Promise returned by `nextTick` or pass a callback function.',
-          line: 5,
-          column: 15
-        },
-        {
-          message:
-            'Await the Promise returned by `nextTick` or pass a callback function.',
-          line: 6,
-          column: 16
+      }</script>`
+            }
+          ]
         }
       ]
     },
