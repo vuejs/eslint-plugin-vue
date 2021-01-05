@@ -558,6 +558,27 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script>
+      import {reactive, computed} from 'vue'
+      export default {
+        setup() {
+          const arr = reactive([])
+
+          const test1 = computed(() => arr.reverse())
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 8,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script lang="ts">
       import {ref, computed} from 'vue'
       export default {
