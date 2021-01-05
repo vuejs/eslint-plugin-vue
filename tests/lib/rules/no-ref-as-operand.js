@@ -121,6 +121,16 @@ tester.run('no-ref-as-operand', rule, {
     const count = ref
     count++
     `,
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    foo = count
+    `,
+    `
+    import { ref } from 'vue'
+    const count = ref(0)
+    const foo = count
+    `,
     {
       code: `
       <script>
