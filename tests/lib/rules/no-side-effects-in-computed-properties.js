@@ -192,6 +192,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       code: `
       <script>
       import { computed } from 'vue'
+      const utils = {}
       export default {
         setup() {
           const foo = useFoo()
@@ -266,6 +267,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             C.name = 'D'
           })
           const test18 = computed(() => (console.log('a'), true))
+          const test19 = computed(() => utils.reverse(foo.array))
         }
       }
       </script>`
@@ -487,10 +489,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           const test9 = computed(() => {
             A.name = ''
           })
-          const test10 = computed(() => {
-            console.log = () => {}
-          })
-          const test11 = computed(() => (foo.a = '', true))
+          const test10 = computed(() => (foo.a = '', true))
 
           const test100 = computed(() => {
             const a = foo
@@ -546,11 +545,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           message: 'Unexpected side effect in computed function.'
         },
         {
-          line: 43,
-          message: 'Unexpected side effect in computed function.'
-        },
-        {
-          line: 45,
+          line: 42,
           message: 'Unexpected side effect in computed function.'
         }
       ]
