@@ -66,6 +66,53 @@ tester.run('valid-next-tick', rule, {
           foo.then(this.$nextTick, catchHandler);
         }
       }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1404#discussion_r550936410
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          let foo = nt;
+          foo = Vue.nextTick;
+          foo = this.$nextTick;
+        }
+      }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1404#discussion_r550936933
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          Promise.all([nt(), someOtherPromise]);
+          Promise.all([Vue.nextTick(), someOtherPromise]);
+          Promise.all([this.$nextTick(), someOtherPromise]);
+        }
+      }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1404#discussion_r551769969
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        created() {
+          let queue = nt();
+          queue = queue.then(nt);
+          return nt();
+        },
+        mounted() {
+          const queue = Vue.nextTick();
+          return Vue.nextTick();
+        },
+        updated() {
+          const queue = this.$nextTick();
+          return this.$nextTick();
+        }
+      }</script>`
     }
   ],
   invalid: [
@@ -203,7 +250,7 @@ tester.run('valid-next-tick', rule, {
         async mounted() {
           await nt;
           await Vue.nextTick;
-          await this.$nextTick;
+          return this.$nextTick;
         }
       }</script>`,
       output: `<script>import { nextTick as nt } from 'vue';
@@ -211,7 +258,7 @@ tester.run('valid-next-tick', rule, {
         async mounted() {
           await nt();
           await Vue.nextTick();
-          await this.$nextTick();
+          return this.$nextTick();
         }
       }</script>`,
       errors: [
@@ -228,10 +275,49 @@ tester.run('valid-next-tick', rule, {
         {
           message: '`nextTick` is a function.',
           line: 6,
-          column: 22
+          column: 23
         }
       ]
     },
+
+    // https://github.com/vuejs/eslint-plugin-vue/pull/1404#discussion_r550936933
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          Promise.all([nt, someOtherPromise]);
+          Promise.all([Vue.nextTick, someOtherPromise]);
+          Promise.all([this.$nextTick, someOtherPromise]);
+        }
+      }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          Promise.all([nt(), someOtherPromise]);
+          Promise.all([Vue.nextTick(), someOtherPromise]);
+          Promise.all([this.$nextTick(), someOtherPromise]);
+        }
+      }</script>`,
+      errors: [
+        {
+          message: '`nextTick` is a function.',
+          line: 4,
+          column: 24
+        },
+        {
+          message: '`nextTick` is a function.',
+          line: 5,
+          column: 28
+        },
+        {
+          message: '`nextTick` is a function.',
+          line: 6,
+          column: 29
+        }
+      ]
+    },
+
     {
       filename: 'test.vue',
       code: `<script>import { nextTick as nt } from 'vue';
