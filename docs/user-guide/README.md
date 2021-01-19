@@ -338,4 +338,4 @@ Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`
 
 You need to turn off Vetur's template validation by adding `vetur.validation.template: false` to your `.vscode/settings.json`.
 
-See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting](https://vuejs.github.io/vetur/linting-error.html#linting).
+See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting](https://vuejs.github.io/vetur/guide/linting-error.html#linting).
