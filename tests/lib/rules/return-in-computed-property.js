@@ -394,6 +394,23 @@ ruleTester.run('return-in-computed-property', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        'computed': {
+          foo() {
+          }
+        }
+      }`,
+      parserOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in "foo" computed property.',
+          line: 4
+        }
+      ]
     }
   ]
 })
