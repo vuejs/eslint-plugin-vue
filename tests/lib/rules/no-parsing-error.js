@@ -249,7 +249,10 @@ tester.run('no-parsing-error', rule, {
       filename: 'test.vue',
       code: '<template><div v-for="foo">hello</div></template>',
       errors: [
-        { message: 'Parsing error: Unexpected end of expression.', column: 26 }
+        {
+          message: 'Parsing error: Expected to be an alias, but got empty.',
+          column: 23
+        }
       ]
     },
     {
