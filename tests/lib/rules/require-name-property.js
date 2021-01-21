@@ -41,6 +41,16 @@ ruleTester.run('require-name-property', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      code: `
+        Vue.mixin({
+          methods: {
+            $foo () {}
+          }
+        })
+      `,
+      parserOptions
     }
   ],
 
