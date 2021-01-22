@@ -140,6 +140,20 @@ tester.run('require-explicit-emits', rule, {
       </script>
       `
     },
+    // quoted
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('welcome')"/>
+      </template>
+      <script>
+      export default {
+        'emits': ['welcome']
+      }
+      </script>
+      `
+    },
     // unknown
     {
       filename: 'test.vue',
