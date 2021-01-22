@@ -51,6 +51,13 @@ ruleTester.run('one-component-per-file', rule, {
           }
         }
       }`
+    },
+    {
+      filename: 'test.js',
+      code: `
+        Vue.mixin({})
+        Vue.component('name', {})
+      `
     }
   ],
   invalid: [
