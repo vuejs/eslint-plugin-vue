@@ -1411,6 +1411,23 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div> {{ obj.num.toLocaleString() }} </div>
+      </template>
+      <script>
+      export default {
+        data () {
+          return {
+            obj: { num: 42 }
+          }
+        }
+      }
+      </script>`,
+      options: deepDataOptions
     }
   ],
 
