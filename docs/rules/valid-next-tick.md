@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-next-tick
 description: enforce valid `nextTick` function calls
+since: v7.5.0
 ---
 # vue/valid-next-tick
 
 > enforce valid `nextTick` function calls
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -81,6 +81,10 @@ Nothing.
 - [Global API Treeshaking](https://v3.vuejs.org/guide/migration/global-api-treeshaking.html)
 - [Global `nextTick` API in Vue 3](https://v3.vuejs.org/api/global-api.html#nexttick)
 - [Instance `$nextTick` API in Vue 3](https://v3.vuejs.org/api/instance-methods.html#nexttick)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.5.0
 
 ## :mag: Implementation
 
