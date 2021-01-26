@@ -1428,6 +1428,28 @@ tester.run('no-unused-properties', rule, {
       }
       </script>`,
       options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template functional>
+        <time
+          :datetime="props.date.toISOString()"
+          :title="props.date.toISOString()">
+          {{props.date.toISOString()}}
+        </time>
+      </template>
+      <script>
+        export default {
+          props: {
+          date: {
+            type: Date,
+            required: true,
+            },
+          },
+        };
+      </script>`,
+      options: allOptions
     }
   ],
 
