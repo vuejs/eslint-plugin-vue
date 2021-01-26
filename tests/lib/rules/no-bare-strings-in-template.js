@@ -119,7 +119,33 @@ tester.run('no-bare-strings-in-template', rule, {
         title="( ) , . & + - = * / # % ! ? : [ ] { } < > • —   | &lpar; &rpar; &comma; &period; &amp; &AMP; &plus; &minus; &equals; &ast; &midast; &sol; &num; &percnt; &excl; &quest; &colon; &lsqb; &lbrack; &rsqb; &rbrack; &lcub; &lbrace; &rcub; &rbrace; &lt; &LT; &gt; &GT; &bull; &bullet; &mdash; &ndash; &nbsp; &Tab; &NewLine; &verbar; &vert; &VerticalLine;"
       />
     </template>
-    `
+    `,
+    {
+      code: `
+      <template>
+        <h1>Heading 1</h1>
+        <custom-component>Some text</custom-component>
+        <CustomComponent>Some more text</CustomComponent>
+      </template>
+      `,
+      options: [{ ignores: ['h1', 'custom-component', 'CustomComponent'] }],
+      errors: [
+        {
+          message: 'Unexpected non-translated string used.',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 22
+        },
+        {
+          message: 'Unexpected non-translated string used.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
+    }
   ],
   invalid: [
     {
