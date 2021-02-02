@@ -421,6 +421,20 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ alphabetical: true }]
+    },
+
+    // omit order
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-for="a in items"
+          v-if="a"
+          attr="a">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }]
     }
   ],
 
@@ -1214,6 +1228,52 @@ tester.run('attributes-order', rule, {
         'Attribute "v-if" should go before "v-on:click".'
       ]
     },
+
+    // omit order
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="a"
+          attr="a"
+          v-for="a in items">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
+      output: `
+      <template>
+        <div
+          v-for="a in items"
+          v-if="a"
+          attr="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-for" should go before "v-if".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          attr="a"
+          v-if="a"
+          v-for="a in items">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
+      output: `
+      <template>
+        <div
+          attr="a"
+          v-for="a in items"
+          v-if="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-for" should go before "v-if".']
+    },
+
+    // slot
     {
       filename: 'test.vue',
       options: [
