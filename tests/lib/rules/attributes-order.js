@@ -259,7 +259,7 @@ tester.run('attributes-order', rule, {
           <div
             v-if="!visible"
             class="content"
-            :class="className"
+            v-model="foo"
             v-text="textContent"
             >
           </div>
@@ -273,7 +273,7 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            ['BINDING', 'OTHER_ATTR'],
+            ['TWO_WAY_BINDING', 'OTHER_ATTR'],
             'CONTENT',
             'GLOBAL'
           ]
@@ -719,7 +719,7 @@ tester.run('attributes-order', rule, {
             <div
               class="content"
               v-if="!visible"
-              :class="className"
+              v-model="foo"
               v-text="textContent"
               >
             </div>
@@ -733,7 +733,7 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            ['BINDING', 'OTHER_ATTR'],
+            ['TWO_WAY_BINDING', 'OTHER_ATTR'],
             'CONTENT',
             'GLOBAL'
           ]
@@ -743,7 +743,7 @@ tester.run('attributes-order', rule, {
             <div
               v-if="!visible"
               class="content"
-              :class="className"
+              v-model="foo"
               v-text="textContent"
               >
             </div>
