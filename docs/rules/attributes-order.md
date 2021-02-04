@@ -27,7 +27,9 @@ This rule aims to enforce ordering of component attributes. The default order is
 - `GLOBAL`
   e.g. 'id'
 - `UNIQUE`
-  e.g. 'ref', 'key', 'v-slot', 'slot'
+  e.g. 'ref', 'key'
+- `SLOT`
+  e.g. 'v-slot', 'slot'.
 - `TWO_WAY_BINDING`
   e.g. 'v-model'
 - `OTHER_DIRECTIVES`
@@ -127,7 +129,7 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       "CONDITIONALS",
       "RENDER_MODIFIERS",
       "GLOBAL",
-      "UNIQUE",
+      ["UNIQUE", "SLOT"],
       "TWO_WAY_BINDING",
       "OTHER_DIRECTIVES",
       "OTHER_ATTR",
