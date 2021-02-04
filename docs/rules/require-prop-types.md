@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-types
 description: require type definitions in props
+since: v3.9.0
 ---
 # vue/require-prop-types
+
 > require type definitions in props
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -61,9 +63,13 @@ Vue.component('baz', {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)
+- [Style guide - Prop definitions](https://v3.vuejs.org/style-guide/#prop-definitions-essential)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.9.0
 
 ## :mag: Implementation
 

@@ -3,9 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-slot
 description: enforce valid `v-slot` directives
+since: v7.0.0
 ---
 # vue/valid-v-slot
+
 > enforce valid `v-slot` directives
+
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-slot` directive is valid.
 
@@ -93,18 +97,58 @@ This rule reports `v-slot` directives in the following cases:
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
 :::
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/valid-v-slot": ["error", {
+    "allowModifiers": false
+  }]
+}
+```
 
-## :couple: Related rules
+- `allowModifiers` (`boolean`) ... allows having modifiers in the argument of `v-slot` directives. Modifiers just after `v-slot` are still disallowed. E.g. `<template v-slot.foo>` default `false`.
 
-- [no-parsing-error]
+### `allowModifiers: true`
 
-[no-parsing-error]: no-parsing-error.md
+<eslint-code-block :rules="{'vue/valid-v-slot': ['error', {allowModifiers: true}]}">
+
+```vue
+<template>
+  <!-- ignore -->
+  <MyComponent>
+    <template v-slot:foo></template>
+    <template v-slot:foo.bar></template>
+    <template v-slot:foo.baz></template>
+    <template v-slot:foo.bar.baz></template>
+  </MyComponent>
+
+  <!--  ✗ BAD */ -->
+  <MyComponent v-slot.foo="{data}">
+    {{ data }}
+  </MyComponent>
+  <MyComponent>
+    <template v-slot.foo>
+      bar
+    </template>
+  </MyComponent>
+</template>
+```
+
+</eslint-code-block>
+
+## :couple: Related Rules
+
+- [vue/no-parsing-error]
+
+[vue/no-parsing-error]: ./no-parsing-error.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

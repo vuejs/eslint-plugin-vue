@@ -18,10 +18,10 @@ const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2020 }
 })
 
-function createValidTests (prefix, options) {
+function createValidTests(prefix, options) {
   const comment = options.join('')
   return [
     {
@@ -116,7 +116,7 @@ function createValidTests (prefix, options) {
   ]
 }
 
-function createInvalidTests (prefix, options, message, type) {
+function createInvalidTests(prefix, options, message, type) {
   const comment = options.join('')
   return [
     {
@@ -166,20 +166,21 @@ function createInvalidTests (prefix, options, message, type) {
     //   errors: [{ message, type }],
     //   options
     // }
-  ].concat(options[0] === 'always'
-    ? []
-    : [
-      {
-        code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
-        errors: [{ message, type }],
-        options
-      },
-      {
-        code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
-        errors: [{ message, type }],
-        options
-      }
-    ]
+  ].concat(
+    options[0] === 'always'
+      ? []
+      : [
+          {
+            code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+            errors: [{ message, type }],
+            options
+          },
+          {
+            code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
+            errors: [{ message, type }],
+            options
+          }
+        ]
   )
 }
 
@@ -187,9 +188,38 @@ ruleTester.run('this-in-template', rule, {
   valid: ['', '<template></template>', '<template><div></div></template>']
     .concat(createValidTests('', []))
     .concat(createValidTests('', ['never']))
-    .concat(createValidTests('this.', ['always'])),
+    .concat(createValidTests('this.', ['always']))
+    .concat(createValidTests('this?.', ['always'])),
   invalid: []
-    .concat(createInvalidTests('this.', [], "Unexpected usage of 'this'.", 'ThisExpression'))
-    .concat(createInvalidTests('this.', ['never'], "Unexpected usage of 'this'.", 'ThisExpression'))
-    .concat(createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'))
+    .concat(
+      createInvalidTests(
+        'this.',
+        [],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      ),
+      createInvalidTests(
+        'this?.',
+        [],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      )
+    )
+    .concat(
+      createInvalidTests(
+        'this.',
+        ['never'],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      ),
+      createInvalidTests(
+        'this?.',
+        ['never'],
+        "Unexpected usage of 'this'.",
+        'ThisExpression'
+      )
+    )
+    .concat(
+      createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier')
+    )
 })

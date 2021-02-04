@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/attribute-hyphenation
 description: enforce attribute naming style on custom components in template
+since: v3.9.0
 ---
 # vue/attribute-hyphenation
+
 > enforce attribute naming style on custom components in template
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -18,10 +20,10 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent my-prop="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent myProp="prop" />
 </template>
 ```
@@ -45,16 +47,17 @@ Default casing is set to `always` with `['data-', 'aria-', 'slot-scope']` set to
 - `"ignore"` ... Array of ignored names
 
 ### `"always"`
+
 It errors on upper case letters.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent my-prop="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent myProp="prop" />
 </template>
 ```
@@ -62,45 +65,56 @@ It errors on upper case letters.
 </eslint-code-block>
 
 ### `"never"`
+
 It errors on hyphens except `data-`, `aria-` and `slot-scope`.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent myProp="prop" />
   <MyComponent data-id="prop" />
   <MyComponent aria-role="button" />
   <MyComponent slot-scope="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />
 </template>
 ```
 
 </eslint-code-block>
 
-### `"never", { "ignore": ["custom-prop"] }` 
+### `"never", { "ignore": ["custom-prop"] }`
+
 Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <MyComponent myProp="prop" />
   <MyComponent custom-prop="prop" />
   <MyComponent data-id="prop" />
   <MyComponent aria-role="button" />
   <MyComponent slot-scope="prop" />
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />
 </template>
 ```
 
 </eslint-code-block>
+
+## :couple: Related Rules
+
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+- [vue/prop-name-casing](./prop-name-casing.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.9.0
 
 ## :mag: Implementation
 

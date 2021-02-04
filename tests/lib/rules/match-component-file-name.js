@@ -432,6 +432,16 @@ ruleTester.run('match-component-file-name', rule, {
     {
       filename: 'MyComponent.js',
       code: `
+        app.component('MyComponent', {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
         Vue.component(myComponent, {
           template: '<div />'
         })
@@ -531,6 +541,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ shouldMatchCase: true }],
       parserOptions: jsxParserOptions
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1018
+    {
+      filename: 'test.jsx',
+      code: `fn1(component.data)`,
+      parserOptions
     }
   ],
 
@@ -545,9 +561,12 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       parserOptions: jsxParserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.jsx',
@@ -559,9 +578,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.jsx',
@@ -573,9 +595,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['jsx'] }],
       parserOptions: jsxParserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
 
     // .vue
@@ -592,9 +617,12 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['vue'] }],
       parser: require.resolve('vue-eslint-parser'),
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.vue',
@@ -609,9 +637,12 @@ ruleTester.run('match-component-file-name', rule, {
       options: [{ extensions: ['vue'] }],
       parser: require.resolve('vue-eslint-parser'),
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
 
     // .js
@@ -625,9 +656,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -639,9 +673,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -652,9 +689,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -665,9 +705,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -678,9 +721,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -691,9 +737,28 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['js'] }],
       parserOptions,
-      errors: [{
-        message: 'Component name `MComponent` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        app.component(\`MComponent\`, {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.'
+        }
+      ]
     },
 
     // casing
@@ -707,9 +772,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ shouldMatchCase: true }],
       parserOptions: jsxParserOptions,
-      errors: [{
-        message: 'Component name `my-component` should match file name `MyComponent`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `my-component` should match file name `MyComponent`.'
+        }
+      ]
     },
     {
       filename: 'my-component.jsx',
@@ -721,9 +789,12 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ shouldMatchCase: true }],
       parserOptions: jsxParserOptions,
-      errors: [{
-        message: 'Component name `MyComponent` should match file name `my-component`.'
-      }]
+      errors: [
+        {
+          message:
+            'Component name `MyComponent` should match file name `my-component`.'
+        }
+      ]
     }
   ]
 })

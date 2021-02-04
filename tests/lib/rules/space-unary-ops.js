@@ -29,23 +29,23 @@ tester.run('space-unary-ops', rule, {
     {
       code: '<template><div :attr="- a" /></template>',
       output: '<template><div :attr="-a" /></template>',
-      errors: ['Unexpected space after unary operator \'-\'.']
+      errors: ["Unexpected space after unary operator '-'."]
     },
     {
       code: '<template><div :attr="typeof(a)" /></template>',
       output: '<template><div :attr="typeof (a)" /></template>',
-      errors: ['Unary word operator \'typeof\' must be followed by whitespace.']
+      errors: ["Unary word operator 'typeof' must be followed by whitespace."]
     },
     {
       code: '<template><div :[typeof(a)]="typeof(a)" /></template>',
       output: '<template><div :[typeof(a)]="typeof (a)" /></template>',
-      errors: ['Unary word operator \'typeof\' must be followed by whitespace.']
+      errors: ["Unary word operator 'typeof' must be followed by whitespace."]
     },
     {
       code: '<template><div :[!a]="!a" /></template>',
       options: [{ nonwords: true }],
       output: '<template><div :[!a]="! a" /></template>',
-      errors: ['Unary operator \'!\' must be followed by whitespace.']
+      errors: ["Unary operator '!' must be followed by whitespace."]
     }
   ]
 })

@@ -9,7 +9,7 @@ const fs = require('fs')
 const path = require('path')
 const ROOT = path.resolve(__dirname, '../../lib/configs')
 
-module.exports =
-  fs.readdirSync(ROOT)
-    .filter(file => path.extname(file) === '.js')
-    .map(file => path.basename(file, '.js'))
+module.exports = fs
+  .readdirSync(ROOT)
+  .filter((file) => path.extname(file) === '.js')
+  .map((file) => path.basename(file, '.js'))

@@ -3,18 +3,20 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-type-constructor
 description: require prop type to be a constructor
+since: v5.0.0
 ---
 # vue/require-prop-type-constructor
+
 > require prop type to be a constructor
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule reports prop types that can't be presumed as constructors.
 
-It's impossible to catch every possible case and know whether the prop type is a constructor or not, hence this rule black list few types of nodes, instead of white-listing correct ones.
+It's impossible to catch every possible case and know whether the prop type is a constructor or not, hence this rule restricts few types of nodes, instead of allowing correct ones.
 
 The following types are forbidden and will be reported:
 
@@ -68,9 +70,13 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Prop Validation](https://vuejs.org/v2/guide/components-props.html#Prop-Validation)
+- [Guide - Prop Validation](https://v3.vuejs.org/guide/component-props.html#prop-validation)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

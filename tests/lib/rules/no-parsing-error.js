@@ -37,7 +37,8 @@ tester.run('no-parsing-error', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><svg class="icon"><use xlink:href="#chevron"></use></svg></template>'
+      code:
+        '<template><svg class="icon"><use xlink:href="#chevron"></use></svg></template>'
     },
     {
       filename: 'test.vue',
@@ -195,7 +196,9 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><div/></template>',
-      options: [{ 'non-void-html-element-start-tag-with-trailing-solidus': false }]
+      options: [
+        { 'non-void-html-element-start-tag-with-trailing-solidus': false }
+      ]
     },
     {
       code: '<template></div></template>',
@@ -235,22 +238,27 @@ tester.run('no-parsing-error', rule, {
       filename: 'test.vue',
       code: '<template><div v-show=" ">hello</div></template>',
       errors: [
-        { message: 'Parsing error: Expected to be an expression, but got empty.', column: 24 }
+        {
+          message:
+            'Parsing error: Expected to be an expression, but got empty.',
+          column: 24
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="foo">hello</div></template>',
       errors: [
-        { message: 'Parsing error: Unexpected end of expression.', column: 26 }
+        {
+          message: 'Parsing error: Expected to be an alias, but got empty.',
+          column: 23
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="foo() in list">hello</div></template>',
-      errors: [
-        { message: 'Parsing error: Unexpected token (.', column: 26 }
-      ]
+      errors: [{ message: 'Parsing error: Unexpected token (.', column: 26 }]
     },
     {
       code: `<template><!--></template>`,
@@ -265,7 +273,9 @@ tester.run('no-parsing-error', rule, {
     {
       code: `<template>&#qux;</template>`,
       options: [{ 'absence-of-digits-in-numeric-character-reference': true }],
-      errors: ['Parsing error: absence-of-digits-in-numeric-character-reference.']
+      errors: [
+        'Parsing error: absence-of-digits-in-numeric-character-reference.'
+      ]
     },
     {
       code: '<template><![CDATA[cdata]]></template>',
@@ -380,7 +390,9 @@ tester.run('no-parsing-error', rule, {
     {
       code: '<template><div foo=bar"></template>',
       options: [{ 'unexpected-character-in-unquoted-attribute-value': true }],
-      errors: ['Parsing error: unexpected-character-in-unquoted-attribute-value.']
+      errors: [
+        'Parsing error: unexpected-character-in-unquoted-attribute-value.'
+      ]
     },
     {
       code: '<template><div =foo></template>',
@@ -424,8 +436,12 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><div/></template>',
-      options: [{ 'non-void-html-element-start-tag-with-trailing-solidus': true }],
-      errors: ['Parsing error: non-void-html-element-start-tag-with-trailing-solidus.']
+      options: [
+        { 'non-void-html-element-start-tag-with-trailing-solidus': true }
+      ],
+      errors: [
+        'Parsing error: non-void-html-element-start-tag-with-trailing-solidus.'
+      ]
     },
     {
       code: '<template></div></template>',
@@ -447,7 +463,9 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: `<template>&#qux;</template>`,
-      errors: ['Parsing error: absence-of-digits-in-numeric-character-reference.']
+      errors: [
+        'Parsing error: absence-of-digits-in-numeric-character-reference.'
+      ]
     },
     {
       code: '<template><![CDATA[cdata]]></template>',
@@ -539,7 +557,9 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><div foo=bar"></template>',
-      errors: ['Parsing error: unexpected-character-in-unquoted-attribute-value.']
+      errors: [
+        'Parsing error: unexpected-character-in-unquoted-attribute-value.'
+      ]
     },
     {
       code: '<template><div =foo></template>',

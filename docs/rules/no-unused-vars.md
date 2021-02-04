@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unused-vars
 description: disallow unused variable definitions of v-for directives or scope attributes
+since: v3.14.0
 ---
 # vue/no-unused-vars
+
 > disallow unused variable definitions of v-for directives or scope attributes
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -33,7 +35,23 @@ This rule report variable definitions of v-for directives or scope attributes if
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-unused-vars": ["error", {
+        "ignorePattern": "^_"
+    }]
+}
+```
+
+- `ignorePattern` ... disables reporting when your definitions of v-for directives or scope attributes match your ignorePattern Regular expression. default `null`, will ignore nothing
+
+## :rocket: Suggestion
+
+- When your ignorePattern set to `^_`, we could provide a suggestion which add a prefix`_` to your variable and no more eslint error
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.14.0
 
 ## :mag: Implementation
 

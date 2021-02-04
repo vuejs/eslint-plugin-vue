@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-default-prop
 description: require default value for props
+since: v3.13.0
 ---
 # vue/require-default-prop
+
 > require default value for props
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -59,9 +61,13 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Prop definitions](https://vuejs.org/v2/style-guide/#Prop-definitions-essential)
+- [Style guide - Prop definitions](https://v3.vuejs.org/style-guide/#prop-definitions-essential)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.13.0
 
 ## :mag: Implementation
 

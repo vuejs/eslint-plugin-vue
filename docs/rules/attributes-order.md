@@ -3,19 +3,21 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/attributes-order
 description: enforce order of attributes
+since: v4.3.0
 ---
 # vue/attributes-order
+
 > enforce order of attributes
 
-- :gear: This rule is included in `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue styleguide](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended) and is:
+This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue.js Style Guide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
 
 - `DEFINITION`
-  e.g. 'is'
+  e.g. 'is', 'v-is'
 - `LIST_RENDERING`
   e.g. 'v-for item in items'
 - `CONDITIONALS`
@@ -25,7 +27,9 @@ This rule aims to enforce ordering of component attributes. The default order is
 - `GLOBAL`
   e.g. 'id'
 - `UNIQUE`
-  e.g. 'ref', 'key', 'v-slot', 'slot'
+  e.g. 'ref', 'key'
+- `SLOT`
+  e.g. 'v-slot', 'slot'.
 - `TWO_WAY_BINDING`
   e.g. 'v-model'
 - `OTHER_DIRECTIVES`
@@ -89,7 +93,33 @@ This rule aims to enforce ordering of component attributes. The default order is
 
 </eslint-code-block>
 
+Note that `v-bind="object"` syntax is considered to be the same as the next or previous attribute categories.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD (`v-bind="object"` is considered GLOBAL category) -->
+  <MyComponent
+    v-bind="object"
+    id="x"
+    v-model="x"
+    v-bind:foo="x">
+  </MyComponent>
+
+  <!-- ✗ BAD (`v-bind="object"` is considered UNIQUE category) -->
+  <MyComponent
+    key="x"
+    v-model="x"
+    v-bind="object">
+  </MyComponent>
+</template>
+```
+
+</eslint-code-block>
+
 ## :wrench: Options
+
 ```json
 {
   "vue/attributes-order": ["error", {
@@ -99,16 +129,70 @@ This rule aims to enforce ordering of component attributes. The default order is
       "CONDITIONALS",
       "RENDER_MODIFIERS",
       "GLOBAL",
-      "UNIQUE",
+      ["UNIQUE", "SLOT"],
       "TWO_WAY_BINDING",
       "OTHER_DIRECTIVES",
       "OTHER_ATTR",
       "EVENTS",
       "CONTENT"
-    ]
+    ],
+    "alphabetical": false
   }]
 }
 ```
+
+### `"alphabetical": true`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+    <div
+      a-custom-prop="value"
+      :another-custom-prop="value"
+      :blue-color="false"
+      boolean-prop
+      class="foo"
+      :class="bar"
+      z-prop="Z"
+      v-on:[c]="functionCall"
+      @change="functionCall"
+      v-on:click="functionCall"
+      @input="functionCall"
+      v-text="textContent">
+    </div>
+
+  <!-- ✗ BAD -->
+    <div
+      z-prop="Z"
+      a-prop="A">
+    </div>
+
+    <div
+      @input="bar"
+      @change="foo">
+    </div>
+
+    <div
+      v-on:click="functionCall"
+      v-on:[c]="functionCall">
+    </div>
+
+    <div
+      :z-prop="Z"
+      :a-prop="A">
+    </div>
+
+    <div
+      :class="foo"
+      class="bar">
+    </div>
+
+</template>
+```
+
+</eslint-code-block>
 
 ### Custom orders
 
@@ -161,9 +245,14 @@ This rule aims to enforce ordering of component attributes. The default order is
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Style guide - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+- [Style guide - Element attribute order](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended)
+- [Style guide (for v2) - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v4.3.0
 
 ## :mag: Implementation
 

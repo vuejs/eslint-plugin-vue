@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-duplicate-attributes
 description: disallow duplication of attributes
+since: v3.0.0
 ---
 # vue/no-duplicate-attributes
+
 > disallow duplication of attributes
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 When duplicate arguments exist, only the last one is valid.
 It's possibly mistakes.
@@ -51,8 +53,8 @@ This rule reports duplicate attributes.
 - `allowCoexistClass` (`boolean`) ... Enables [`v-bind:class`] directive can coexist with the plain `class` attribute. Default is `true`.
 - `allowCoexistStyle` (`boolean`) ... Enables [`v-bind:style`] directive can coexist with the plain `style` attribute. Default is `true`.
 
-[`v-bind:class`]: https://vuejs.org/v2/guide/class-and-style.html
-[`v-bind:style`]: https://vuejs.org/v2/guide/class-and-style.html
+[`v-bind:class`]: https://v3.vuejs.org/guide/class-and-style.html
+[`v-bind:style`]: https://v3.vuejs.org/guide/class-and-style.html
 
 ### `"allowCoexistClass": false, "allowCoexistStyle": false`
 
@@ -67,6 +69,10 @@ This rule reports duplicate attributes.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

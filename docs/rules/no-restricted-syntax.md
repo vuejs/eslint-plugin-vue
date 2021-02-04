@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-syntax
 description: disallow specified syntax
+since: v5.2.0
 ---
 # vue/no-restricted-syntax
+
 > disallow specified syntax
 
 This rule is the same rule as core [no-restricted-syntax] rule but it applies to the expressions in `<template>`.
@@ -25,11 +27,11 @@ Forbids call expressions inside mustache interpolation.
 
 ```vue
 <template>
-  <!-- ✔ GOOD -->
+  <!-- ✓ GOOD -->
   <div> {{ foo }} </div>
   <div> {{ foo.bar }} </div>
 
-  <!-- ✘ BAD -->
+  <!-- ✗ BAD -->
   <div> {{ foo() }} </div>
   <div> {{ foo.bar() }} </div>
   <div> {{ foo().bar }} </div>
@@ -38,7 +40,7 @@ Forbids call expressions inside mustache interpolation.
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [no-restricted-syntax]
 - [ESTree]
@@ -46,10 +48,16 @@ Forbids call expressions inside mustache interpolation.
 
 [no-restricted-syntax]: https://eslint.org/docs/rules/no-restricted-syntax
 [ESTree]: https://github.com/estree/estree
-[vue-eslint-parser]: https://github.com/mysticatea/vue-eslint-parser
-[vue-eslint-parser - AST docs]: https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md
+[vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser
+[vue-eslint-parser - AST docs]: https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-syntax.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-restricted-syntax.js)
+
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/no-restricted-syntax)</sup>

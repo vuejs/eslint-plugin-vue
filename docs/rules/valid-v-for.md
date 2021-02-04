@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-for
 description: enforce valid `v-for` directives
+since: v3.11.0
 ---
 # vue/valid-v-for
+
 > enforce valid `v-for` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-for` directive is valid.
 
@@ -21,7 +23,7 @@ This rule reports `v-for` directives in the following cases:
 - If the element which has the directive is a custom component, the component does not have `v-bind:key` directive. E.g. `<your-component v-for="item in list"></your-component>`
 - The `v-bind:key` directive does not use the variables which are defined by the `v-for` directive. E.g. `<div v-for="x in list" :key="foo"></div>`
 
-If the element which has the directive is a reserved element, this rule does not report it even if the element does not have `v-bind:key` directive because it's not fatal error. [require-v-for-key] rule reports it.
+If the element which has the directive is a reserved element, this rule does not report it even if the element does not have `v-bind:key` directive because it's not fatal error. [vue/require-v-for-key] rule reports it.
 
 <eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
 
@@ -58,7 +60,7 @@ If the element which has the directive is a reserved element, this rule does not
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives. [no-parsing-error] rule reports it.
+This rule does not check syntax errors in directives. [vue/no-parsing-error] rule reports it.
 The following cases are syntax errors:
 
 - The directive's value isn't `alias in expr`. E.g. `<div v-for="foo"></div>`
@@ -69,14 +71,17 @@ The following cases are syntax errors:
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [require-v-for-key]
-- [no-parsing-error]
+- [vue/require-v-for-key]
+- [vue/no-parsing-error]
 
+[vue/require-v-for-key]: ./require-v-for-key.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
-[require-v-for-key]: require-v-for-key.md
-[no-parsing-error]: no-parsing-error.md
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

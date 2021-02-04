@@ -30,18 +30,33 @@ tester.run('valid-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div></div></template>'
+    },
+    // parsing error
+    {
+      filename: 'parsing-error.vue',
+      code: '<template><div v-if="."></div></template>'
+    },
+    // comment value (parsing error)
+    {
+      filename: 'comment-value.vue',
+      code: '<template><div v-if="/**/"></div></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo" v-else></div></div></template>',
-      errors: ["'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives."]
+      errors: [
+        "'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives."
+      ]
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
-      errors: ["'v-if' and 'v-else-if' directives can't exist on the same element."]
+      code:
+        '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
+      errors: [
+        "'v-if' and 'v-else-if' directives can't exist on the same element."
+      ]
     },
     {
       filename: 'test.vue',
@@ -56,6 +71,12 @@ tester.run('valid-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-if></div></div></template>',
+      errors: ["'v-if' directives require that attribute value."]
+    },
+    // empty value
+    {
+      filename: 'empty-value.vue',
+      code: '<template><div><div v-if=""></div></div></template>',
       errors: ["'v-if' directives require that attribute value."]
     }
   ]

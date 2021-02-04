@@ -3,14 +3,15 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/match-component-file-name
 description: require component name property to match its file name
+since: v5.2.0
 ---
 # vue/match-component-file-name
+
 > require component name property to match its file name
 
 This rule reports if a component `name` property does not match its file name.
 
-You can define an array of file extensions this rule should verify for 
-the component's name.
+You can define an array of file extensions this rule should verify for the component's name.
 
 ## :book: Rule Details
 
@@ -27,7 +28,7 @@ This rule has some options.
 
 By default this rule will only verify components in a file with a `.jsx` extension.
 
-You can use any combination of `".jsx"`, `".vue"` and `".js"` extensions.
+You can use any combination of `".js"`, `".jsx"`, `".ts"`, `".tsx"`, and `".vue"` extensions.
 
 You can also enforce same case between the component's name and its file name.
 
@@ -305,9 +306,13 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
- - [Style guide - Single-file component filename casing](https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended)
+- [Style guide - Single-file component filename casing](https://v3.vuejs.org/style-guide/#single-file-component-filename-casing-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

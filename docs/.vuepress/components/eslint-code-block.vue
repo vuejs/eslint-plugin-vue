@@ -18,8 +18,7 @@
 </template>
 
 <script>
-// https://github.com/vuejs/vuepress/issues/451
-import EslintEditor from '../../../node_modules/vue-eslint-editor'
+import EslintEditor from 'vue-eslint-editor'
 import { rules, processors } from '../../../'
 
 export default {
@@ -33,7 +32,7 @@ export default {
     },
     rules: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     },
@@ -47,7 +46,7 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       linter: null,
       preprocess: processors['.vue'].preprocess,
@@ -60,9 +59,10 @@ export default {
   },
 
   computed: {
-    config () {
+    config() {
       return {
         globals: {
+          console: false,
           // ES2015 globals
           ArrayBuffer: false,
           DataView: false,
@@ -90,7 +90,7 @@ export default {
         rules: this.rules,
         parser: 'vue-eslint-parser',
         parserOptions: {
-          ecmaVersion: 2019,
+          ecmaVersion: 2020,
           sourceType: 'module',
           ecmaFeatures: {
             jsx: true
@@ -99,34 +99,36 @@ export default {
       }
     },
 
-    code () {
+    code() {
       return `${this.computeCodeFromSlot(this.$slots.default).trim()}\n`
     },
 
-    height () {
+    height() {
       const lines = this.code.split('\n').length
       return `${Math.max(120, 19 * lines)}px`
     }
   },
 
   methods: {
-    computeCodeFromSlot (nodes) {
+    computeCodeFromSlot(nodes) {
       if (!Array.isArray(nodes)) {
         return ''
       }
-      return nodes.map(node =>
-        node.text || this.computeCodeFromSlot(node.children)
-      ).join('')
+      return nodes
+        .map((node) => node.text || this.computeCodeFromSlot(node.children))
+        .join('')
     }
   },
 
-  async mounted () {
+  async mounted() {
     // Load linter.
     const [
       { default: Linter },
+      { default: coreRules },
       { parseForESLint }
     ] = await Promise.all([
       import('eslint4b/dist/linter'),
+      import('eslint4b/dist/core-rules'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])
 
@@ -135,6 +137,7 @@ export default {
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
+    linter.defineRule('no-undef', coreRules['no-undef'])
 
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }

@@ -38,7 +38,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         age="30"
         job="Vet"
       ></component></template>`,
-      options: [{ multiline: { allowFirstLine: true }}]
+      options: [{ multiline: { allowFirstLine: true } }]
     },
     {
       code: `<template><component
@@ -57,18 +57,18 @@ ruleTester.run('max-attributes-per-line', rule, {
     },
     {
       code: `<template><component></component></template>`,
-      options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}]
+      options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false } }]
     },
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
-      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false } }]
     },
     {
       code: `<template><component name="John Doe"
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: true }}]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: true } }]
     },
     {
       code: `<template><component
@@ -76,7 +76,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}]
+      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false } }]
     },
     {
       code: `<template><component
@@ -84,7 +84,7 @@ ruleTester.run('max-attributes-per-line', rule, {
         job="Vet">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}]
+      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false } }]
     }
   ],
 
@@ -93,43 +93,43 @@ ruleTester.run('max-attributes-per-line', rule, {
       code: `<template><component name="John Doe" age="30"></component></template>`,
       output: `<template><component name="John Doe"
 age="30"></component></template>`,
-      errors: ['\'age\' should be on a new line.']
+      errors: ["'age' should be on a new line."]
     },
     {
       code: `<template><component :name="user.name" :age="user.age"></component></template>`,
       output: `<template><component :name="user.name"
 :age="user.age"></component></template>`,
-      errors: ['\':age\' should be on a new line.']
+      errors: ["':age' should be on a new line."]
     },
     {
       code: `<template><component :is="test" v-bind="user"></component></template>`,
       output: `<template><component :is="test"
 v-bind="user"></component></template>`,
-      errors: ['\'v-bind\' should be on a new line.']
+      errors: ["'v-bind' should be on a new line."]
     },
     {
       code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
       output: `<template><component :name="user.name"
 @buy="buyProduct"></component></template>`,
-      errors: ['\'@buy\' should be on a new line.']
+      errors: ["'@buy' should be on a new line."]
     },
     {
       code: `<template><component :name="user.name" @click.stop></component></template>`,
       output: `<template><component :name="user.name"
 @click.stop></component></template>`,
-      errors: ['\'@click.stop\' should be on a new line.']
+      errors: ["'@click.stop' should be on a new line."]
     },
     {
       code: `<template><component :name="user.name" v-if="something"></component></template>`,
       output: `<template><component :name="user.name"
 v-if="something"></component></template>`,
-      errors: ['\'v-if\' should be on a new line.']
+      errors: ["'v-if' should be on a new line."]
     },
     {
       code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
       output: `<template><component name="John Doe"
 v-bind:age="user.age"></component></template>`,
-      errors: ['\'v-bind:age\' should be on a new line.']
+      errors: ["'v-bind:age' should be on a new line."]
     },
     {
       code: `<template><component job="Vet"
@@ -143,54 +143,67 @@ job="Vet"
         age="30">
         </component>
       </template>`,
-      errors: [{
-        message: '\'job\' should be on a new line.',
-        type: 'VAttribute',
-        line: 1
-      }]
+      errors: [
+        {
+          message: "'job' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        }
+      ]
     },
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
-      options: [{ singleline: { max: 2 }}],
+      options: [{ singleline: { max: 2 } }],
       output: `<template><component name="John Doe" age="30"
 job="Vet"></component></template>`,
-      errors: [{
-        message: '\'job\' should be on a new line.',
-        type: 'VAttribute',
-        line: 1
-      }]
+      errors: [
+        {
+          message: "'job' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        }
+      ]
     },
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
-      options: [{ singleline: 1, multiline: { max: 1, allowFirstLine: false }}],
+      options: [
+        { singleline: 1, multiline: { max: 1, allowFirstLine: false } }
+      ],
       output: `<template><component name="John Doe"
 age="30" job="Vet"></component></template>`,
-      errors: [{
-        message: '\'age\' should be on a new line.',
-        type: 'VAttribute',
-        line: 1
-      }, {
-        message: '\'job\' should be on a new line.',
-        type: 'VAttribute',
-        line: 1
-      }]
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        },
+        {
+          message: "'job' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        }
+      ]
     },
     {
       code: `<template><component name="John Doe"
         age="30">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
+      options: [
+        { singleline: 3, multiline: { max: 1, allowFirstLine: false } }
+      ],
       output: `<template><component
 name="John Doe"
         age="30">
         </component>
       </template>`,
-      errors: [{
-        message: '\'name\' should be on a new line.',
-        type: 'VAttribute',
-        line: 1
-      }]
+      errors: [
+        {
+          message: "'name' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        }
+      ]
     },
     {
       code: `<template><component
@@ -198,18 +211,22 @@ name="John Doe"
         job="Vet">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 1, allowFirstLine: false }}],
+      options: [
+        { singleline: 3, multiline: { max: 1, allowFirstLine: false } }
+      ],
       output: `<template><component
         name="John Doe"
 age="30"
         job="Vet">
         </component>
       </template>`,
-      errors: [{
-        message: '\'age\' should be on a new line.',
-        type: 'VAttribute',
-        line: 2
-      }]
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          type: 'VAttribute',
+          line: 2
+        }
+      ]
     },
     {
       code: `<template><component
@@ -224,11 +241,13 @@ age="30"
         job="Vet">
         </component>
       </template>`,
-      errors: [{
-        message: '\'age\' should be on a new line.',
-        type: 'VAttribute',
-        line: 2
-      }]
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          type: 'VAttribute',
+          line: 2
+        }
+      ]
     },
     {
       code: `<template><component
@@ -236,18 +255,22 @@ age="30"
         job="Vet" pet="dog" petname="Snoopy">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
+      options: [
+        { singleline: 3, multiline: { max: 2, allowFirstLine: false } }
+      ],
       output: `<template><component
         name="John Doe" age="30"
         job="Vet" pet="dog"
 petname="Snoopy">
         </component>
       </template>`,
-      errors: [{
-        message: '\'petname\' should be on a new line.',
-        type: 'VAttribute',
-        line: 3
-      }]
+      errors: [
+        {
+          message: "'petname' should be on a new line.",
+          type: 'VAttribute',
+          line: 3
+        }
+      ]
     },
     {
       code: `<template><component
@@ -255,22 +278,27 @@ petname="Snoopy">
         job="Vet" pet="dog" petname="Snoopy" extra="foo">
         </component>
       </template>`,
-      options: [{ singleline: 3, multiline: { max: 2, allowFirstLine: false }}],
+      options: [
+        { singleline: 3, multiline: { max: 2, allowFirstLine: false } }
+      ],
       output: `<template><component
         name="John Doe" age="30"
         job="Vet" pet="dog"
 petname="Snoopy" extra="foo">
         </component>
       </template>`,
-      errors: [{
-        message: '\'petname\' should be on a new line.',
-        type: 'VAttribute',
-        line: 3
-      }, {
-        message: '\'extra\' should be on a new line.',
-        type: 'VAttribute',
-        line: 3
-      }]
+      errors: [
+        {
+          message: "'petname' should be on a new line.",
+          type: 'VAttribute',
+          line: 3
+        },
+        {
+          message: "'extra' should be on a new line.",
+          type: 'VAttribute',
+          line: 3
+        }
+      ]
     }
   ]
 })

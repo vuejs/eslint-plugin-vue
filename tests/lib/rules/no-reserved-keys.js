@@ -45,6 +45,76 @@ ruleTester.run('no-reserved-keys', rule, {
         }
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => {
+            return {
+              dat: null
+            }
+          },
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => ({
+            dat: null
+          }),
+          methods: {
+            _foo () {},
+            test () {
+            }
+          }
+        }
+      `,
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['foo'],
+          computed: {
+            bar () {
+            }
+          },
+          data: () => ({
+            dat: null
+          }),
+          methods: {
+            _foo () {},
+            test () {
+            }
+          },
+          setup () {
+            return {
+              _bar: () => {}
+            }
+          }
+        }
+      `,
+      parserOptions
     }
   ],
 
@@ -59,10 +129,31 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       `,
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: "Key '$el' is reserved.",
-        line: 4
-      }]
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
+          setup () {
+            return {
+              $el: ''
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 5
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -74,10 +165,48 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       `,
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: "Keys starting with with '_' are reserved in '_foo' group.",
-        line: 4
-      }]
+      errors: [
+        {
+          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
+          data: () => {
+            return {
+              _foo: String
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        new Vue({
+          data: () => ({
+            _foo: String
+          })
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          line: 4
+        }
+      ]
     },
     {
       filename: 'test.js',
@@ -90,10 +219,12 @@ ruleTester.run('no-reserved-keys', rule, {
       `,
       options: [{ reserved: ['bar'], groups: ['foo'] }],
       parserOptions: { ecmaVersion: 6 },
-      errors: [{
-        message: "Key 'bar' is reserved.",
-        line: 4
-      }]
+      errors: [
+        {
+          message: "Key 'bar' is reserved.",
+          line: 4
+        }
+      ]
     }
   ]
 })

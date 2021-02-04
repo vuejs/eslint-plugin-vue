@@ -26,10 +26,14 @@ const content = `/*
 
 module.exports = {
   rules: {
-    ${rules.map(rule => `'${rule.name}': require('./rules/${rule.name}')`).join(',\n')}
+    ${rules
+      .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
+      .join(',\n')}
   },
   configs: {
-    ${configs.map(config => `'${config}': require('./configs/${config}')`).join(',\n')}
+    ${configs
+      .map((config) => `'${config}': require('./configs/${config}')`)
+      .join(',\n')}
   },
   processors: {
     '.vue': require('./processor')
@@ -39,6 +43,10 @@ module.exports = {
 fs.writeFileSync(filePath, content)
 
 // Format files.
-const linter = new eslint.CLIEngine({ fix: true })
-const report = linter.executeOnFiles([filePath])
-eslint.CLIEngine.outputFixes(report)
+async function format() {
+  const linter = new eslint.ESLint({ fix: true })
+  const report = await linter.lintFiles([filePath])
+  eslint.ESLint.outputFixes(report)
+}
+
+format()

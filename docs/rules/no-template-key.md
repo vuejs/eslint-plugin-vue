@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-key
 description: disallow `key` attribute on `<template>`
+since: v3.4.0
 ---
 # vue/no-template-key
+
 > disallow `key` attribute on `<template>`
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 Vue.js disallows `key` attribute on `<template>` elements.
 
@@ -23,6 +25,9 @@ This rule reports the `<template>` elements which have `key` attribute.
   <div key="foo"> ... </div>
   <template> ... </template>
 
+  <!-- It's valid for Vue.js 3.x -->
+  <template v-for="item in list" :key="item.id"> ... </template>
+
   <!-- ✗ BAD -->
   <template key="foo"> ... </template>
   <template v-bind:key="bar"> ... </template>
@@ -32,13 +37,27 @@ This rule reports the `<template>` elements which have `key` attribute.
 
 </eslint-code-block>
 
+::: tip Note
+This rule does not report keys placed on `<template v-for>`. It's valid for Vue.js 3.x. If you want to report keys placed on `<template v-for>` invalid for Vue.js 2.x, use [vue/no-v-for-template-key] rule.
+:::
+
 ## :wrench: Options
 
 Nothing.
 
-## :books: Further reading
+## :couple: Related Rules
 
-- [API - Special Attributes - key](https://vuejs.org/v2/api/#key)
+- [vue/no-v-for-template-key]
+
+[vue/no-v-for-template-key]: ./no-v-for-template-key.md
+
+## :books: Further Reading
+
+- [API - Special Attributes - key](https://v3.vuejs.org/api/special-attributes.html#key)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.4.0
 
 ## :mag: Implementation
 

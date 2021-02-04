@@ -1,0 +1,14 @@
+<!--{}-->
+<script>
+try
+{
+}
+catch
+{
+  ;
+}
+finally
+{
+  ;
+}
+</script>

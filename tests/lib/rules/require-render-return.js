@@ -86,7 +86,7 @@ ruleTester.run('require-render-return', rule, {
         render() {
           if (a) {
             if (b) {
-              
+
             }
             if (c) {
               return true
@@ -143,11 +143,13 @@ ruleTester.run('require-render-return', rule, {
         }
       }`,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in render function.',
-        type: 'Identifier',
-        line: 2
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -159,11 +161,13 @@ ruleTester.run('require-render-return', rule, {
         }
       }`,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in render function.',
-        type: 'Identifier',
-        line: 2
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
     },
     {
       code: `Vue.component('test', {
@@ -174,11 +178,30 @@ ruleTester.run('require-render-return', rule, {
         }
       })`,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in render function.',
-        type: 'Identifier',
-        line: 2
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
+    },
+    {
+      code: `app.component('test', {
+        render: function () {
+          if (a) {
+            return
+          }
+        }
+      })`,
+      parserOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
     },
     {
       code: `Vue.component('test2', {
@@ -189,28 +212,32 @@ ruleTester.run('require-render-return', rule, {
         }
       })`,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in render function.',
-        type: 'Identifier',
-        line: 2
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
     },
     {
       code: `Vue.component('test2', {
         render: function () {
           if (a) {
-            
+
           } else {
             return h('div', 'hello')
           }
         }
       })`,
       parserOptions,
-      errors: [{
-        message: 'Expected to return a value in render function.',
-        type: 'Identifier',
-        line: 2
-      }]
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          type: 'Identifier',
+          line: 2
+        }
+      ]
     }
   ]
 })

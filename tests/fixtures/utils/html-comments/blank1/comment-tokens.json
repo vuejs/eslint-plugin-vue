@@ -1,0 +1,43 @@
+[
+    {
+        "open": {
+            "type": "HTMLCommentOpen",
+            "value": "<!--",
+            "range": [
+                43,
+                47
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 2
+                },
+                "end": {
+                    "line": 3,
+                    "column": 6
+                }
+            }
+        },
+        "openDecoration": null,
+        "value": null,
+        "closeDecoration": null,
+        "close": {
+            "type": "HTMLCommentClose",
+            "value": "-->",
+            "range": [
+                50,
+                53
+            ],
+            "loc": {
+                "start": {
+                    "line": 3,
+                    "column": 9
+                },
+                "end": {
+                    "line": 3,
+                    "column": 12
+                }
+            }
+        }
+    }
+]

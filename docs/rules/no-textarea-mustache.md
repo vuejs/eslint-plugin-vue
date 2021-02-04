@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-textarea-mustache
 description: disallow mustaches in `<textarea>`
+since: v3.0.0
 ---
 # vue/no-textarea-mustache
+
 > disallow mustaches in `<textarea>`
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -27,18 +29,26 @@ This rule reports mustaches in `<textarea>`.
 
 </eslint-code-block>
 
+<div v-pre>
+
 ::: warning Note
 Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
-[https://vuejs.org/v2/guide/forms.html#Multiline-text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+[https://v3.vuejs.org/guide/forms.html#multiline-text](https://v3.vuejs.org/guide/forms.html#multiline-text)
 :::
+
+</div>
 
 ## :wrench: Options
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [Guide - Forms / Multiline text](https://vuejs.org/v2/guide/forms.html#Multiline-text)
+- [Guide - Form Input Bindings / Multiline text](https://v3.vuejs.org/guide/forms.html#multiline-text)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

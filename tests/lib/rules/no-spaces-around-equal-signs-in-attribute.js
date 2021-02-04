@@ -22,7 +22,7 @@ tester.run('no-spaces-around-equal-signs-in-attribute', rule, {
   valid: [
     '<template><div attr="value" /></template>',
     '<template><div attr="" /></template>',
-    '<template><div attr=\'value\' /></template>',
+    "<template><div attr='value' /></template>",
     '<template><div attr=value /></template>',
     '<template><div attr /></template>',
     '<template><div/></template>',
@@ -69,8 +69,8 @@ tester.run('no-spaces-around-equal-signs-in-attribute', rule, {
       ]
     },
     {
-      code: '<template><div attr = \'value\' /></template>',
-      output: '<template><div attr=\'value\' /></template>',
+      code: "<template><div attr = 'value' /></template>",
+      output: "<template><div attr='value' /></template>",
       errors: [
         {
           message: 'Unexpected spaces found around equal signs.',
@@ -134,8 +134,7 @@ tester.run('no-spaces-around-equal-signs-in-attribute', rule, {
       ]
     },
     {
-      code:
-        `<template>
+      code: `<template>
           <div
             is = "header"
             v-for = "item in items"
@@ -149,8 +148,7 @@ tester.run('no-spaces-around-equal-signs-in-attribute', rule, {
             v-text = "textContent">
           </div>
         </template>`,
-      output:
-        `<template>
+      output: `<template>
           <div
             is="header"
             v-for="item in items"

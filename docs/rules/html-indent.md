@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-indent
 description: enforce consistent indentation in `<template>`
+since: v3.14.0
 ---
 # vue/html-indent
+
 > enforce consistent indentation in `<template>`
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -15,7 +17,7 @@ description: enforce consistent indentation in `<template>`
 This rule enforces a consistent indentation style in `<template>`. The default style is 2 spaces.
 
 - This rule checks all tags, also all expressions in directives and mustaches.
-- In the expressions, this rule supports ECMAScript 2017 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
+- In the expressions, this rule supports ECMAScript 2020 syntaxes. It ignores unknown AST nodes, but it might be confused by non-standard syntaxes.
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
 
@@ -76,9 +78,13 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `baseIndent` (`integer`) ... The multiplier of indentation for top-level statements. Default is `1`.
-- `closeBracket` (`integer`) ... The multiplier of indentation for right brackets. Default is `0`.
+- `closeBracket` (`integer | object`) ... The multiplier of indentation for right brackets. Default is `0`.  
+  You can apply all of the following by setting a number value.
+  - `closeBracket.startTag` (`integer`) ... The multiplier of indentation for right brackets of start tags (`<div>`). Default is `0`.
+  - `closeBracket.endTag` (`integer`) ... The multiplier of indentation for right brackets of end tags (`</div>`). Default is `0`.
+  - `closeBracket.selfClosingTag` (`integer`) ... The multiplier of indentation for right brackets of start tags (`<div/>`). Default is `0`.
 - `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`
-- `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
+- `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
 
 ### `2, {"attribute": 1, "closeBracket": 1}`
 
@@ -185,6 +191,10 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.14.0
 
 ## :mag: Implementation
 

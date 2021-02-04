@@ -5,8 +5,10 @@ title: vue/html-button-has-type
 description: disallow usage of button without an explicit type attribute
 ---
 # vue/html-button-has-type
+
 > disallow usage of button without an explicit type attribute
 
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :gear: This rule is included in `"plugin:vue/recommended"`.
 
 Forgetting the type attribute on a button defaults it to being a submit type. 

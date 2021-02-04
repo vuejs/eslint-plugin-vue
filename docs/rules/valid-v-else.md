@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-else
 description: enforce valid `v-else` directives
+since: v3.11.0
 ---
 # vue/valid-v-else
+
 > enforce valid `v-else` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-else` directive is valid.
 
@@ -42,16 +44,19 @@ This rule reports `v-else` directives in the following cases:
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-if]
-- [valid-v-else-if]
-- [no-parsing-error]
+- [vue/valid-v-if]
+- [vue/valid-v-else-if]
+- [vue/no-parsing-error]
 
+[vue/valid-v-if]: ./valid-v-if.md
+[vue/valid-v-else-if]: ./valid-v-else-if.md
+[vue/no-parsing-error]: ./no-parsing-error.md
 
-[valid-v-if]: valid-v-if.md
-[valid-v-else-if]: valid-v-else-if.md
-[no-parsing-error]: no-parsing-error.md
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

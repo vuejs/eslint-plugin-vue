@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-shared-component-data
 description: enforce component's data property to be a function
+since: v3.8.0
 ---
 # vue/no-shared-component-data
+
 > enforce component's data property to be a function
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 When using the data property on a component (i.e. anywhere except on `new Vue`), the value must be a function that returns an object.
@@ -66,9 +68,15 @@ export default {
 
 Nothing.
 
-## :books: Further reading
+## :books: Further Reading
 
-- [API - data](https://vuejs.org/v2/api/#data)
+- [Style guide (for v2) - Component data](https://vuejs.org/v2/style-guide/#Component-data-essential)
+- [API - data](https://v3.vuejs.org/api/options-data.html#data-2)
+- [API (for v2) - data](https://v3.vuejs.org/api/options-data.html#data-2)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.8.0
 
 ## :mag: Implementation
 

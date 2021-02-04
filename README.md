@@ -29,15 +29,18 @@ See [The ESLint Vue Plugin Developer Guide](https://eslint.vuejs.org/developer-g
 
 Before you start writing a new rule, please read [the official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
 
-Next, in order to get an idea how does the AST of the code that you want to check looks like, use one of the following applications:
-- [astexplorer.net](https://astexplorer.net/) - the best tool to inspect ASTs, but it doesn't support Vue template yet
-- [ast.js.org](https://ast.js.org/) - not fully featured, but supports Vue template syntax
+Next, in order to get an idea how does the AST of the code that you want to check looks like, use the [astexplorer.net].
+The [astexplorer.net] is a great tool to inspect ASTs, also Vue templates are supported.
+
+After opening [astexplorer.net], select `Vue` as the syntax and `vue-eslint-parser` as the parser.
+
+[astexplorer.net]: https://astexplorer.net/
 
 Since single file components in Vue are not plain JavaScript, the default parser couldn't be used, so a new one was introduced. `vue-eslint-parser` generates enhanced AST with nodes that represent specific parts of the template syntax, as well as what's inside the `<script>` tag.
 
 To know more about certain nodes in produced ASTs, go here:
 - [ESTree docs](https://github.com/estree/estree)
-- [vue-eslint-parser AST docs](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md)
+- [vue-eslint-parser AST docs](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md)
 
 The `vue-eslint-parser` provides a few useful parser services that help traverse the produced AST and access tokens of the template:
 - `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`

@@ -34,7 +34,7 @@ tester.run('camelcase', rule, {
         </template>`,
       errors: [
         {
-          message: 'Identifier \'my_pref\' is not in camel case.',
+          message: "Identifier 'my_pref' is not in camel case.",
           line: 3
         }
       ]
@@ -48,7 +48,7 @@ tester.run('camelcase', rule, {
         </template>`,
       errors: [
         {
-          message: 'Identifier \'my_pref\' is not in camel case.',
+          message: "Identifier 'my_pref' is not in camel case.",
           line: 4
         }
       ]

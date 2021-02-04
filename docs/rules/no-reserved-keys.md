@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-reserved-keys
 description: disallow overwriting reserved keys
+since: v3.9.0
 ---
 # vue/no-reserved-keys
+
 > disallow overwriting reserved keys
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -73,9 +75,13 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further reading
+## :books: Further Reading
 
 - [List of reserved keys](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/vue-reserved.json)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.9.0
 
 ## :mag: Implementation
 

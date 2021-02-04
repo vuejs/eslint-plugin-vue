@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-shadow
 description: disallow variable declarations from shadowing variables declared in the outer scope
+since: v5.0.0
 ---
 # vue/no-template-shadow
+
 > disallow variable declarations from shadowing variables declared in the outer scope
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 `no-template-shadow` should report variable definitions of v-for directives or scope attributes if those shadows the variables in parent scopes.
 
@@ -49,6 +51,10 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

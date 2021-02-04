@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-quotes
 description: enforce quotes style of HTML attributes
+since: v3.0.0
 ---
 # vue/html-quotes
+
 > enforce quotes style of HTML attributes
 
-- :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 You can choose quotes of HTML attributes from:
@@ -43,12 +45,18 @@ Default is set to `double`.
 
 ```json
 {
-  "vue/html-quotes": ["error", "double" | "single"]
+  "vue/html-quotes": [ "error", "double" | "single", { "avoidEscape": false } ]
 }
 ```
 
+String option:
+
 - `"double"` (default) ... requires double quotes.
 - `"single"` ... requires single quotes.
+
+Object option:
+
+- `avoidEscape` ... If `true`, allows strings to use single-quotes or double-quotes so long as the string contains a quote that would have to be escaped otherwise.
 
 ### `"single"`
 
@@ -67,9 +75,30 @@ Default is set to `double`.
 
 </eslint-code-block>
 
-## :books: Further reading
+### `"double", { "avoidEscape": true }`
 
-- [Style guide - Quoted attribute values](https://vuejs.org/v2/style-guide/#Quoted-attribute-values-strongly-recommended)
+<eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'double', { avoidEscape: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <img title='a string containing "double" quotes'>
+
+  <!-- ✗ BAD -->
+  <img title='foo'>
+  <img title=bar>
+</template>
+```
+
+</eslint-code-block>
+
+## :books: Further Reading
+
+- [Style guide - Quoted attribute values](https://v3.vuejs.org/style-guide/#Quoted-attribute-values-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

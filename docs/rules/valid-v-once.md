@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-once
 description: enforce valid `v-once` directives
+since: v3.11.0
 ---
 # vue/valid-v-once
+
 > enforce valid `v-once` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-once` directive is valid.
 
@@ -38,6 +40,10 @@ This rule reports `v-once` directives in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

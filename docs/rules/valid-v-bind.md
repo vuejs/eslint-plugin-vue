@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-bind
 description: enforce valid `v-bind` directives
+since: v3.11.0
 ---
 # vue/valid-v-bind
+
 > enforce valid `v-bind` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-bind` directive is valid.
 
@@ -40,19 +42,26 @@ This rule does not report `v-bind` directives which do not have their argument (
 </eslint-code-block>
 
 ::: warning Note
-This rule does not check syntax errors in directives because it's checked by [no-parsing-error] rule.
+This rule does not check syntax errors in directives because it's checked by [vue/no-parsing-error] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [no-parsing-error]
+- [vue/no-parsing-error]
+- [vue/no-deprecated-v-bind-sync]
+- [vue/valid-v-bind-sync]
 
+[vue/no-parsing-error]: ./no-parsing-error.md
+[vue/no-deprecated-v-bind-sync]: ./no-deprecated-v-bind-sync.md
+[vue/valid-v-bind-sync]: ./valid-v-bind-sync.md
 
-[no-parsing-error]: no-parsing-error.md
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

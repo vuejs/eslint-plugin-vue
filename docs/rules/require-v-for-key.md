@@ -3,11 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-v-for-key
 description: require `v-bind:key` with `v-for` directives
+since: v3.0.0
 ---
 # vue/require-v-for-key
+
 > require `v-bind:key` with `v-for` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
@@ -31,21 +33,27 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
 
 ::: warning Note
 This rule does not report missing `v-bind:key` on custom components.
-It will be reported by [valid-v-for](./valid-v-for.md) rule.
+It will be reported by [vue/valid-v-for] rule.
 :::
 
 ## :wrench: Options
 
 Nothing.
 
-## :couple: Related rules
+## :couple: Related Rules
 
-- [valid-v-for](./valid-v-for.md)
+- [vue/valid-v-for]
 
-## :books: Further reading
+[vue/valid-v-for]: ./valid-v-for.md
 
-- [Style guide - Keyed v-for](https://vuejs.org/v2/style-guide/#Keyed-v-for-essential)
-- [Guide - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)
+## :books: Further Reading
+
+- [Style guide - Keyed v-for](https://v3.vuejs.org/style-guide/#keyed-v-for-essential)
+- [Guide (for v2) - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 
