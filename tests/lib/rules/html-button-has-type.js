@@ -8,20 +8,19 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/html-button-has-type')
+const rule = require('../../../lib/rules/html-button-has-type')
 
-var RuleTester = require('eslint').RuleTester
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester({
+const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 ruleTester.run('html-button-has-type', rule, {
-
   valid: [
     {
       filename: 'test.vue',
@@ -37,7 +36,8 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><slot><button type="button">Hello World</button></slot></template>'
+      code:
+        '<template><slot><button type="button">Hello World</button></slot></template>'
     },
     {
       filename: 'test.vue',
@@ -54,6 +54,10 @@ ruleTester.run('html-button-has-type', rule, {
     {
       filename: 'test.vue',
       code: ''
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><Button>Hello World</Button></template>`
     }
   ],
 
@@ -61,47 +65,75 @@ ruleTester.run('html-button-has-type', rule, {
     {
       filename: 'test.vue',
       code: '<template><button>Hello World</button></template>',
-      errors: [{
-        message: 'Missing an explicit type attribute for button.'
-      }]
+      errors: [
+        {
+          message: 'Missing an explicit type attribute for button.',
+          column: 11
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><button type="">Hello World</button></template>',
-      errors: [{
-        message: 'A value must be set for button type attribute.'
-      }]
+      errors: [
+        {
+          message: 'A value must be set for button type attribute.',
+          column: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><button type>Hello World</button></template>',
+      errors: [
+        {
+          message: 'A value must be set for button type attribute.',
+          column: 19
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><button type="foo">Hello World</button></template>',
-      errors: [{
-        message: 'foo is an invalid value for button type attribute.'
-      }]
+      errors: [
+        {
+          message: 'foo is an invalid value for button type attribute.',
+          column: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
       options: [{ button: false }],
       code: '<template><button type="button">Hello World</button></template>',
-      errors: [{
-        message: 'button is a forbidden value for button type attribute.'
-      }]
+      errors: [
+        {
+          message: 'button is a forbidden value for button type attribute.',
+          column: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
       options: [{ submit: false }],
       code: '<template><button type="submit">Hello World</button></template>',
-      errors: [{
-        message: 'submit is a forbidden value for button type attribute.'
-      }]
+      errors: [
+        {
+          message: 'submit is a forbidden value for button type attribute.',
+          column: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
       options: [{ reset: false }],
       code: '<template><button type="reset">Hello World</button></template>',
-      errors: [{
-        message: 'reset is a forbidden value for button type attribute.'
-      }]
+      errors: [
+        {
+          message: 'reset is a forbidden value for button type attribute.',
+          column: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -113,13 +145,19 @@ ruleTester.run('html-button-has-type', rule, {
              </template>`,
       errors: [
         {
-          message: 'button is a forbidden value for button type attribute.'
+          message: 'button is a forbidden value for button type attribute.',
+          line: 2,
+          column: 30
         },
         {
-          message: 'submit is a forbidden value for button type attribute.'
+          message: 'submit is a forbidden value for button type attribute.',
+          line: 3,
+          column: 30
         },
         {
-          message: 'reset is a forbidden value for button type attribute.'
+          message: 'reset is a forbidden value for button type attribute.',
+          line: 4,
+          column: 30
         }
       ]
     },
@@ -135,25 +173,34 @@ ruleTester.run('html-button-has-type', rule, {
              </template>`,
       errors: [
         {
-          message: 'reset is a forbidden value for button type attribute.'
+          message: 'reset is a forbidden value for button type attribute.',
+          line: 4,
+          column: 30
         },
         {
-          message: 'A value must be set for button type attribute.'
+          message: 'A value must be set for button type attribute.',
+          line: 5,
+          column: 30
         },
         {
-          message: 'foo is an invalid value for button type attribute.'
+          message: 'foo is an invalid value for button type attribute.',
+          line: 6,
+          column: 30
         }
       ]
     },
     {
       filename: 'test.vue',
-      code: '<template><button>Hello World</button><button>Hello World</button></template>',
+      code:
+        '<template><button>Hello World</button><button>Hello World</button></template>',
       errors: [
         {
-          message: 'Missing an explicit type attribute for button.'
+          message: 'Missing an explicit type attribute for button.',
+          column: 11
         },
         {
-          message: 'Missing an explicit type attribute for button.'
+          message: 'Missing an explicit type attribute for button.',
+          column: 39
         }
       ]
     },
@@ -162,7 +209,18 @@ ruleTester.run('html-button-has-type', rule, {
       code: `<template><button :type="">Hello World</button></template>`,
       errors: [
         {
-          message: 'A value must be set for button type attribute.'
+          message: 'A value must be set for button type attribute.',
+          column: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><button v-bind:type>Hello World</button></template>`,
+      errors: [
+        {
+          message: 'A value must be set for button type attribute.',
+          column: 19
         }
       ]
     }

@@ -263,7 +263,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:--------|:------------|:---|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: |
 | [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements |  |
-| [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  |
 | [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  |
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
@@ -290,6 +289,7 @@ For example:
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  |
+| [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
 | [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: |

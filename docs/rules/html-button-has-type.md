@@ -9,9 +9,8 @@ description: disallow usage of button without an explicit type attribute
 > disallow usage of button without an explicit type attribute
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :gear: This rule is included in `"plugin:vue/recommended"`.
 
-Forgetting the type attribute on a button defaults it to being a submit type. 
+Forgetting the type attribute on a button defaults it to being a submit type.
 This is nearly never what is intended, especially in your average one-page application.
 
 ## :book: Rule Details
@@ -49,14 +48,14 @@ This rule aims to warn if no type or an invalid type is used on a button type at
 ```
 
 - `button` ... `<button type="button"></button>`
-    - `true` (default) ... allow value `button`.
-    - `false"` ... disallow value `button`.
-- `sumbit` ... `<button type="sumbit"></button>`
-    - `true` (default) ... allow value `submit`.
-    - `false"` ... disallow value `submit`.
+  - `true` (default) ... allow value `button`.
+  - `false"` ... disallow value `button`.
+- `submit` ... `<button type="submit"></button>`
+  - `true` (default) ... allow value `submit`.
+  - `false"` ... disallow value `submit`.
 - `reset` ... `<button type="reset"></button>`
-    - `true` (default) ... allow value `reset`.
-    - `false"` ... disallow value `reset`.
+  - `true` (default) ... allow value `reset`.
+  - `false"` ... disallow value `reset`.
 
 ## :mag: Implementation
 
