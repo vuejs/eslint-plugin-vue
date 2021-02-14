@@ -22,6 +22,29 @@ const tester = new RuleTester({
 tester.run('attributes-order', rule, {
   valid: [
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1433
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          v-model="model"
+          v-bind="object"
+          @click="handleClick"/>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          ref="ref"
+          v-model="model"
+          @click="handleClick"/>
+      </template>`
+    },
+    {
       filename: 'test.vue',
       code: '<template><div></div></template>'
     },
@@ -1334,6 +1357,112 @@ tester.run('attributes-order', rule, {
           message: 'Attribute "ref" should go before "bar".'
         }
       ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          v-if="show"
+          v-model="model"
+          ref="ref"
+          @click="handleClick"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-if="show"
+          v-bind="object"
+          ref="ref"
+          v-model="model"
+          @click="handleClick"/>
+      </template>`,
+      errors: [
+        'Attribute "v-if" should go before "v-bind".',
+        'Attribute "ref" should go before "v-model".'
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="object"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="object"
+          @click="handleClick"/>
+      </template>`,
+      errors: ['Attribute "v-bind" should go before "@click".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="object"
+          @input="handleInput"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          ref="ref"
+          v-bind="object"
+          @click="handleClick"
+          @input="handleInput"/>
+      </template>`,
+      errors: ['Attribute "v-bind" should go before "@click".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="object"
+          @input="handleInput"/>
+      </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
+      output: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          @input="handleInput"
+          v-bind="object"/>
+      </template>`,
+      errors: ['Attribute "@input" should go before "v-bind".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          @click="handleClick"
+          attr="foo"/>
+      </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
+      output: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="object"
+          attr="foo"/>
+      </template>`,
+      errors: ['Attribute "@click" should go before "v-bind".']
     }
   ]
 })
