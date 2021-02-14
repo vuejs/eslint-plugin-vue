@@ -121,32 +121,17 @@ tester.run('no-bare-strings-in-template', rule, {
     </template>
     `,
     {
+      options: [
+        { ignoreComponents: ['h1', 'custom-component', 'CustomComponent'] }
+      ],
       code: `
       <template>
         <h1>Heading 1</h1>
         <custom-component>Some text</custom-component>
         <CustomComponent>Some more text</CustomComponent>
+        <CustomComponent v-text="Some more text" />
       </template>
-      `,
-      options: [
-        { ignoreComponents: ['h1', 'custom-component', 'CustomComponent'] }
-      ],
-      errors: [
-        {
-          message: 'Unexpected non-translated string used.',
-          line: 3,
-          column: 13,
-          endLine: 3,
-          endColumn: 22
-        },
-        {
-          message: 'Unexpected non-translated string used.',
-          line: 4,
-          column: 13,
-          endLine: 4,
-          endColumn: 22
-        }
-      ]
+      `
     }
   ],
   invalid: [
