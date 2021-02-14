@@ -5,7 +5,6 @@ title: vue/no-bare-strings-in-template
 description: disallow the use of bare strings in `<template>`
 since: v7.0.0
 ---
-
 # vue/no-bare-strings-in-template
 
 > disallow the use of bare strings in `<template>`
@@ -16,6 +15,7 @@ This rule disallows the use of bare strings in `<template>`.
 In order to be able to internationalize your application, you will need to avoid using plain strings in your templates. Instead, you would need to use a template helper specializing in translation.
 
 This rule was inspired by [no-bare-strings rule in ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-bare-strings.md).
+
 
 <eslint-code-block :rules="{'vue/no-bare-strings-in-template': ['error']}">
 
@@ -35,13 +35,15 @@ This rule was inspired by [no-bare-strings rule in ember-template-lint](https://
     aria-roledescription="Lorem ipsum"
     aria-valuetext="Lorem ipsum"
   />
-  <img alt="Lorem ipsum" />
-  <input placeholder="Lorem ipsum" />
+  <img alt="Lorem ipsum">
+  <input placeholder="Lorem ipsum">
   <h1 v-text="'Lorem ipsum'" />
 
   <!-- Does not check -->
   <h1>{{ 'Lorem ipsum' }}</h1>
-  <div v-bind:title="'Lorem ipsum'" />
+  <div
+    v-bind:title="'Lorem ipsum'"
+  />
 </template>
 ```
 
@@ -54,8 +56,7 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
 
 ## :wrench: Options
 
-<!-- prettier-ignore -->
-```json
+```js
 {
   "vue/no-bare-strings-in-template": ["error", {
     "allowlist": [
@@ -67,21 +68,19 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
       "img": ["alt"]
     },
     "directives": ["v-text"],
-    "ignores": ["h1", "custom-component", "CustomComponent"]
+    "ignoreComponents": ["h1", "custom-component", "CustomComponent"]
   }]
 }
 ```
-
-<!-- prettier-ignore-end -->
 
 - `allowlist` ... An array of allowed strings.
 - `attributes` ... An object whose keys are tag name or patterns and value is an array of attributes to check for that tag name.
 - `directives` ... An array of directive names to check literal value.
 - `ignores` ... An array of element names to ignore. RegExp is allowed.
 
-### `{ "ignores": ["h1", "custom-component", "CustomComponent"] }`
+### `{ "ignoreComponents": ["h1", "custom-component", "CustomComponent"] }`
 
-<eslint-code-block fix :rules="{'vue/no-bare-strings-in-template': ['error', { 'ignores': ['h1', 'custom-component', 'CustomComponent'] }]}">
+<eslint-code-block fix :rules="{'vue/no-bare-strings-in-template': ['error', { 'ignoreComponents': ['h1', 'custom-component', 'CustomComponent'] }]}">
 
 ```vue
 <template>

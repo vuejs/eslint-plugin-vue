@@ -128,7 +128,9 @@ tester.run('no-bare-strings-in-template', rule, {
         <CustomComponent>Some more text</CustomComponent>
       </template>
       `,
-      options: [{ ignores: ['h1', 'custom-component', 'CustomComponent'] }],
+      options: [
+        { ignoreComponents: ['h1', 'custom-component', 'CustomComponent'] }
+      ],
       errors: [
         {
           message: 'Unexpected non-translated string used.',
