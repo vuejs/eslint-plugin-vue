@@ -36,6 +36,20 @@ tester.run('no-restricted-syntax', rule, {
           message: 'Call expressions are not allowed.'
         }
       ]
+    },
+
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/870
+      code: `
+        <template>
+          <input :value="interpolate(foo, bar, true)">
+        </template>`,
+      options: [
+        {
+          selector: 'CallExpression > :nth-child(3)[value!=true]',
+          message: 'Third argument of interpolate must be true'
+        }
+      ]
     }
   ],
   invalid: [
@@ -147,6 +161,27 @@ tester.run('no-restricted-syntax', rule, {
       errors: [
         'Call expressions are not allowed.',
         'Call expressions are not allowed.'
+      ]
+    },
+
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/870
+      code: `
+        <template>
+          <input :value="interpolate(foo, bar, false)">
+        </template>`,
+      options: [
+        {
+          selector: 'CallExpression > :nth-child(3)[value!=true]',
+          message: 'Third argument of interpolate must be true'
+        }
+      ],
+      errors: [
+        {
+          message: 'Third argument of interpolate must be true',
+          line: 3,
+          column: 48
+        }
       ]
     }
   ]
