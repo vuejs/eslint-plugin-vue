@@ -348,6 +348,63 @@ tester.run('no-deprecated-slot-attribute', rule, {
           line: 4
         }
       ]
+    },
+    {
+      code: `
+      <template>
+        <MyComponent>
+          <template slot="foo-bar">
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      output: `
+      <template>
+        <MyComponent>
+          <template v-slot:foo-bar>
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <MyComponent>
+          <template slot="foo_bar">
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      output: `
+      <template>
+        <MyComponent>
+          <template v-slot:foo_bar>
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <MyComponent>
+          <template slot="123">
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      output: `
+      <template>
+        <MyComponent>
+          <template v-slot:123>
+            <a/>
+          </template>
+        </MyComponent>
+      </template>`,
+      errors: ['`slot` attributes are deprecated.']
     }
   ]
 })
