@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-button-has-type
 description: disallow usage of button without an explicit type attribute
+since: v7.6.0
 ---
 # vue/html-button-has-type
 
 > disallow usage of button without an explicit type attribute
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 Forgetting the type attribute on a button defaults it to being a submit type.
 This is nearly never what is intended, especially in your average one-page application.
@@ -56,6 +55,10 @@ This rule aims to warn if no type or an invalid type is used on a button type at
 - `reset` ... `<button type="reset"></button>`
   - `true` (default) ... allow value `reset`.
   - `false"` ... disallow value `reset`.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.6.0
 
 ## :mag: Implementation
 
