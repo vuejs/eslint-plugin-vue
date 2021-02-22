@@ -1,4 +1,5 @@
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
+import { Token, Comment } from '../eslint-plugin-vue/util-types/node'
 import { ParserServices } from '../eslint-plugin-vue/util-types/parser-services'
 import eslint from 'eslint'
 
@@ -70,3 +71,5 @@ export namespace ReferenceTracker {
   const CONSTRUCT: unique symbol
   const ESM: unique symbol
 }
+
+export function isCommentToken(token: Token): token is Comment
