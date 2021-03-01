@@ -222,4 +222,16 @@ ruleTester.run('this-in-template', rule, {
     .concat(
       createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier')
     )
+    .concat([
+      {
+        code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
+        errors: ["Unexpected usage of 'this'."],
+        options: ['never']
+      },
+      {
+        code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
+        errors: ["Unexpected usage of 'this'."],
+        options: ['never']
+      }
+    ])
 })
