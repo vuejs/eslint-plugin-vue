@@ -1428,6 +1428,113 @@ tester.run('no-unused-properties', rule, {
       }
       </script>`,
       options: deepDataOptions
+    },
+
+    // ignore public members
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          data: () => ({
+            /** @public */
+            publicData: 'foo'
+          })
+        }
+        </script>
+      `,
+      options: [{ groups: ['data'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            /** @public */
+            unusedComputed() {
+              return 'foo'
+            }
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['computed'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          methods: {
+            /** @public */
+            publicMethod() {}
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['methods'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          setup() {
+            return {
+              /** @public */
+              publicRef: 3
+            }
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['setup'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          a: String,
+        },
+        setup() {
+          return {
+            /** @public */
+            b: 42
+          }
+        },
+        data () {
+          return {
+            /** @public */
+            c: 42
+          }
+        },
+        computed: {
+          /** @public */
+          d () { return this.a }
+        },
+        methods: {
+          /** @public */
+          e () {},
+          f:
+            /** @public */
+            function () {},
+          g:
+            /** @public */
+            () => {},
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true
+        }
+      ]
     }
   ],
 
@@ -2193,6 +2300,105 @@ tester.run('no-unused-properties', rule, {
           line: 9,
           column: 17
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          _a: String,
+          /** @public Props do not support public. */
+          a: String,
+        },
+        setup() {
+          return {
+            /** @public */
+            b: 42,
+            _b: 42
+          }
+        },
+        data () {
+          return {
+            c: {
+              /** @public */
+              _c1: 42,
+              /** @public */
+              _c2: 42
+            },
+            _c: 42
+          }
+        },
+        computed: {
+          /** @public */
+          // _eslint-disable-next-line foo
+          d () { return this.c._c1 },
+          /* non jsdoc @public */
+          _d () { return 42 }
+        },
+        methods: {
+          /** @public */
+          e () {},
+          _e () {},
+          f:
+            /** @public */
+            function () {},
+          _f: function () {},
+          g:
+            /** @public */
+            () => {},
+          _g: () => {},
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true,
+          deepData: true
+        }
+      ],
+      errors: [
+        "'_a' of property found, but never used.",
+        "'a' of property found, but never used.",
+        "'_b' of property returned from `setup()` found, but never used.",
+        "'c._c2' of data found, but never used.",
+        "'_c' of data found, but never used.",
+        "'_d' of computed property found, but never used.",
+        "'_e' of method found, but never used.",
+        "'_f' of method found, but never used.",
+        "'_g' of method found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        // Edge case
+        data: [
+          /** @public doesn't public supports array style */
+          'a',
+          /** @public doesn't public supports array style */
+          'b'
+        ]
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['data'],
+          ignorePublicMembers: true,
+          deepData: true
+        }
+      ],
+      errors: [
+        "'a' of data found, but never used.",
+        "'b' of data found, but never used."
       ]
     }
   ]

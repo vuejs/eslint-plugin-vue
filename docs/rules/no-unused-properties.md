@@ -55,18 +55,20 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
 {
   "vue/no-unused-properties": ["error", {
     "groups": ["props"],
-    "deepData": false
+    "deepData": false,
+    "ignorePublicMembers": false
   }]
 }
 ```
 
-- `"groups"` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
+- `groups` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
   - `"props"`
   - `"data"`
   - `"computed"`
   - `"methods"`
   - `"setup"`
-- `"deepData"` (`boolean`) If `true`, the object of the property defined in `data` will be searched deeply. Default is `false`. Include `"data"` in `groups` to use this option.
+- `deepData` (`boolean`) If `true`, the object of the property defined in `data` will be searched deeply. Default is `false`. Include `"data"` in `groups` to use this option.
+- `ignorePublicMembers` (`boolean`) If `true`, members marked with a [JSDoc `/** @public */` tag](https://jsdoc.app/tags-public.html) will be ignored. Default is `false`.
 
 ### `"groups": ["props", "data"]`
 
@@ -181,6 +183,34 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
       reversedMessage() {
         return this.message.split('').reverse().join('')
       }
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "groups": ["props", "methods"], "ignorePublicMembers": true }`
+
+<eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'methods'], ignorePublicMembers: true}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<template>
+  <button @click="usedInTemplate()" />
+</template>
+<script>
+  export default {
+    methods: {
+      /* ✓ GOOD */
+      usedInTemplate() {},
+      
+      /* ✓ GOOD */
+      /** @public */
+      publicMethod() {},
+      
+      /* ✗ BAD */
+      unusedMethod() {}
     }
   }
 </script>
