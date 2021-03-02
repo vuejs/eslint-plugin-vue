@@ -211,7 +211,23 @@ tester.run('no-parsing-error', rule, {
     },
     '<template><div/></template>',
     '<template><div v-show="">hello</div></template>',
-    '<template><div>{{ }}</div></template>'
+    '<template><div>{{ }}</div></template>',
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1403
+    {
+      code: `
+      <template>
+        <div>
+          <p>
+            <Address
+              value=""
+              onchange="await setTokenAddress(event.target.value)"/>
+          </p>
+        </div>
+      </template>
+      `,
+      filename: 'test.vue'
+    }
   ],
   invalid: [
     {
