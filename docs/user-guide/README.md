@@ -266,7 +266,7 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 ### Conflict with [Prettier]
 
-If the [Prettier] conflicts with the shareable config provided by this plugin, use [eslint-config-prettier] to resolve it.
+Use [eslint-config-prettier] for [Prettier] not to conflict with the shareable config provided by this plugin.
 
 Example **.eslintrc.js**:
 
@@ -279,20 +279,14 @@ module.exports = {
     // ...
     'plugin:vue/vue3-recommended',
     // ...
-    "prettier",
-    "prettier/vue",
-    // "prettier/@typescript-eslint", // required if you are using @typescript-eslint.
-    // Other settings may be required depending on the plugin you are using. See the eslint-config-prettier documentation for more details.
+    "prettier"
+    // Make sure "prettier" is the last element in this list.
   ],
   // ...
 }
 ```
 
-If the [Prettier] conflicts with the rule you have set, turn off that rule.
-
-Example **.eslintrc.js**:
-
-When the `vue/html-indent` rule conflict with [Prettier].
+If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters]. For example, if you have `vue/html-indent` configured as `error` in `rules`, but it conflicts with Prettier, remove that line:
 
 ```diff
 module.exports = {
@@ -300,7 +294,6 @@ module.exports = {
   rules: {
     // ...
 -    "vue/html-indent": "error",
-+    "vue/html-indent": "off",
     // ...
   },
   // ...
@@ -308,6 +301,7 @@ module.exports = {
 ```
 
 [prettier]: https://prettier.io/
+[prettier-linters]: https://prettier.io/docs/en/integrating-with-linters.html
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
 
 ### Using JSX
