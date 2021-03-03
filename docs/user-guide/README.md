@@ -286,7 +286,26 @@ module.exports = {
 }
 ```
 
+If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters].
+
+Example **.eslintrc.js**:
+
+You have `vue/html-indent` configured as `error` in `rules`, but it conflicts with Prettier.
+
+```diff
+module.exports = {
+  // ...
+  rules: {
+    // ...
+-    "vue/html-indent": "error",
+    // ...
+  },
+  // ...
+}
+```
+
 [prettier]: https://prettier.io/
+[prettier-linters]: https://prettier.io/docs/en/integrating-with-linters.html
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
 
 ### Using JSX
