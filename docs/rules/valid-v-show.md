@@ -20,6 +20,7 @@ This rule reports `v-show` directives in the following cases:
 - The directive has that argument. E.g. `<div v-show:aaa></div>`
 - The directive has that modifier. E.g. `<div v-show.bbb></div>`
 - The directive does not have that attribute value. E.g. `<div v-show></div>`
+- The directive is put on `<template>` tag. E.g. `<template v-show="condition" />`
 
 <eslint-code-block :rules="{'vue/valid-v-show': ['error']}">
 
@@ -32,6 +33,7 @@ This rule reports `v-show` directives in the following cases:
   <div v-show/>
   <div v-show:aaa="foo"/>
   <div v-show.bbb="foo"/>
+  <template v-show="condition" />
 </template>
 ```
 
