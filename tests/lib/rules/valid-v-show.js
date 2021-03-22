@@ -63,6 +63,16 @@ tester.run('valid-v-show', rule, {
       filename: 'empty-value.vue',
       code: '<template><div v-show=""></div></template>',
       errors: ["'v-show' directives require that attribute value."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-show="condition"></template></template>',
+      errors: ["'v-show' directives cannot be put on <template> tags."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-show="condition" /></template>',
+      errors: ["'v-show' directives cannot be put on <template> tags."]
     }
   ]
 })
