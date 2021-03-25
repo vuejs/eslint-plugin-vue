@@ -57,7 +57,10 @@ There is a configurable number of attributes that are acceptable in one-line cas
 ```json
 {
   "vue/max-attributes-per-line": ["error", {
-    "singleline": 1,
+    "singleline": {
+      "max": 1,
+      "allowFirstLine": true
+    },      
     "multiline": {
       "max": 1,
       "allowFirstLine": false
@@ -66,7 +69,8 @@ There is a configurable number of attributes that are acceptable in one-line cas
 }
 ```
 
-- `singleline` (`number`) ... The number of maximum attributes per line when the opening tag is in a single line. Default is `1`.
+- `singleline.max` (`number`) ... The number of maximum attributes per line when the opening tag is in a single line. Default is `1`.
+- `singleline.allowFirstLine` (`boolean`) ... If `true`, it allows attributes on the same line as that tag name. Default is `true`.
 - `multiline.max` (`number`) ... The max number of attributes per line when the opening tag is in multiple lines. Default is `1`. This can be `{ multiline: 1 }` instead of `{ multiline: { max: 1 }}` if you don't configure `allowFirstLine` property.
 - `multiline.allowFirstLine` (`boolean`) ... If `true`, it allows attributes on the same line as that tag name. Default is `false`.
 
@@ -81,6 +85,24 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
   <!-- ✗ BAD -->
   <MyComponent lorem="1" ipsum="2" dolor="3" sit="4" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"singleline": 1, "allowFirstLine": false`
+
+<eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {singleline: { allowFirstLine: false }}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyComponent
+    lorem="1"
+  />
+
+  <!-- ✗ BAD -->
+  <MyComponent lorem="1" />
 </template>
 ```
 
