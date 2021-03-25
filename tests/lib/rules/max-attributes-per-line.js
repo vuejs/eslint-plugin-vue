@@ -302,7 +302,7 @@ petname="Snoopy" extra="foo">
     },
     {
       code: `<template><component name="John Doe"></component></template>`,
-      options: [{ singleline: { max: 0 } }],
+      options: [{ singleline: { allowFirstLine: false } }],
       output: `<template><component
 name="John Doe"></component></template>`,
       errors: [
