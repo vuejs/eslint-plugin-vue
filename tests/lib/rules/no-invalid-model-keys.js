@@ -126,11 +126,6 @@ ruleTester.run('no-invalid-model-keys', rule, {
             prop: 'checked',
             props: 'list',
             event: 'update'
-          },
-          data () {
-            return {
-              dat: null
-            }
           }
         }
       `,
