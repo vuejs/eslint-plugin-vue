@@ -6,7 +6,7 @@ description: require valid keys in model prop
 ---
 # vue/no-invalid-model-keys
 
-> require valid keys in model prop
+> require valid keys in model option
 
 
 ## :book: Rule Details
