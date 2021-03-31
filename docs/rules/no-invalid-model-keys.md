@@ -11,7 +11,7 @@ description: require valid keys in model prop
 
 ## :book: Rule Details
 
-This rule is aimed at preventing invalid keys in model property.
+This rule is aimed at preventing invalid keys in model option.
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
 ```vue
