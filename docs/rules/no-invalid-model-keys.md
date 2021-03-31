@@ -96,9 +96,6 @@ export default {
 ```
 </eslint-code-block>
 
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v7.9.0
 
 ## :mag: Implementation
 
