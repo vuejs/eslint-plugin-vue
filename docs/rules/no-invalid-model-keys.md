@@ -3,7 +3,6 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-invalid-model-keys
 description: require valid keys in model prop
-since: v3.9.0
 ---
 # vue/no-invalid-model-keys
 
