@@ -1,5 +1,5 @@
 /**
- * @fileoverview Prevents invalid keys in model property.
+ * @fileoverview Prevents invalid keys in model option.
  * @author Alex Sokolov
  */
 'use strict'
