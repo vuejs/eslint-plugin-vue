@@ -66,7 +66,7 @@ ruleTester.run('no-invalid-model-keys', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model prop."]
+      errors: ["Invalid key 'props' in model option."]
     },
     {
       filename: 'test.vue',
@@ -77,7 +77,7 @@ ruleTester.run('no-invalid-model-keys', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'events' in model prop."]
+      errors: ["Invalid key 'events' in model option."]
     },
     {
       filename: 'test.vue',
@@ -89,7 +89,7 @@ ruleTester.run('no-invalid-model-keys', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model prop."]
+      errors: ["Invalid key 'props' in model option."]
     },
     {
       filename: 'test.vue',
@@ -101,7 +101,7 @@ ruleTester.run('no-invalid-model-keys', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'events' in model prop."]
+      errors: ["Invalid key 'events' in model option."]
     },
     {
       filename: 'test.vue',
@@ -114,8 +114,8 @@ ruleTester.run('no-invalid-model-keys', rule, {
         }
       `,
       errors: [
-        "Invalid key 'props' in model prop.",
-        "Invalid key 'events' in model prop."
+        "Invalid key 'props' in model option.",
+        "Invalid key 'events' in model option."
       ]
     },
     {
@@ -129,7 +129,7 @@ ruleTester.run('no-invalid-model-keys', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model prop."]
+      errors: ["Invalid key 'props' in model option."]
     },
     {
       filename: 'test.vue',
@@ -143,8 +143,8 @@ ruleTester.run('no-invalid-model-keys', rule, {
         }
       `,
       errors: [
-        "Invalid key 'name' in model prop.",
-        "Invalid key 'props' in model prop."
+        "Invalid key 'name' in model option.",
+        "Invalid key 'props' in model option."
       ]
     }
   ]
