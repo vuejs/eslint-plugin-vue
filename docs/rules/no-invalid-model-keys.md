@@ -2,7 +2,7 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-invalid-model-keys
-description: require valid keys in model prop
+description: require valid keys in model option
 ---
 # vue/no-invalid-model-keys
 
