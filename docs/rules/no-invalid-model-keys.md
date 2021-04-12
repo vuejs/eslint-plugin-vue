@@ -3,17 +3,18 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-invalid-model-keys
 description: require valid keys in model option
+since: v7.9.0
 ---
 # vue/no-invalid-model-keys
 
 > require valid keys in model option
-
 
 ## :book: Rule Details
 
 This rule is aimed at preventing invalid keys in model option.
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✓ GOOD */
@@ -24,9 +25,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✓ GOOD */
@@ -37,9 +40,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✓ GOOD */
@@ -51,9 +56,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✗ BAD */
@@ -65,9 +72,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✗ BAD */
@@ -79,9 +88,11 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
 <eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+
 ```vue
 <script>
 /* ✗ BAD */
@@ -94,8 +105,13 @@ export default {
 }
 </script>
 ```
+
 </eslint-code-block>
 
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.9.0
 
 ## :mag: Implementation
 

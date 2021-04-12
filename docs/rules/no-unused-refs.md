@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unused-refs
 description: disallow unused refs
+since: v7.9.0
 ---
 # vue/no-unused-refs
 
 > disallow unused refs
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -43,6 +42,10 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.9.0
 
 ## :mag: Implementation
 
