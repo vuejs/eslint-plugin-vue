@@ -299,6 +299,19 @@ petname="Snoopy" extra="foo">
           line: 3
         }
       ]
+    },
+    {
+      code: `<template><component name="John Doe"></component></template>`,
+      options: [{ singleline: { allowFirstLine: false } }],
+      output: `<template><component
+name="John Doe"></component></template>`,
+      errors: [
+        {
+          message: "'name' should be on a new line.",
+          type: 'VAttribute',
+          line: 1
+        }
+      ]
     }
   ]
 })
