@@ -13,6 +13,7 @@ description: disallow unused refs
 ## :book: Rule Details
 
 This rule is aimed at eliminating unused refs.
+This rule reports refs that are defined using the `ref` attribute in `<template>` but are not used via `$refs`.
 
 ::: warning Note
 This rule cannot be checked for use in other components (e.g. `mixins`, Access via `$refs.x.$refs`).
