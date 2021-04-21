@@ -9,6 +9,7 @@ import * as TS from './ts-ast'
 import * as JSX from './jsx-ast'
 
 export type ESNode =
+  | PrivateIdentifier
   | Identifier
   | Literal
   | Program
@@ -25,6 +26,7 @@ export type ESNode =
   | Pattern
   | ClassBody
   | MethodDefinition
+  | PropertyDefinition
   | ModuleDeclaration
   | ModuleSpecifier
 
@@ -185,16 +187,61 @@ export interface ClassDeclaration extends HasParentNode {
 }
 export interface ClassBody extends HasParentNode {
   type: 'ClassBody'
-  body: MethodDefinition[]
+  body: (MethodDefinition | PropertyDefinition)[]
 }
-export interface MethodDefinition extends HasParentNode {
+interface BaseMethodDefinition extends HasParentNode {
   type: 'MethodDefinition'
-  kind: 'constructor' | 'method' | 'get' | 'set'
-  computed: boolean
+  // computed: boolean
   static: boolean
-  key: Expression
+  // key: Expression
   value: FunctionExpression
+  parent: ClassBody
 }
+export interface MethodDefinitionNonComputedName extends BaseMethodDefinition {
+  kind: 'constructor' | 'method' | 'get' | 'set'
+  computed: false
+  key: Identifier | Literal
+}
+export interface MethodDefinitionComputedName extends BaseMethodDefinition {
+  kind: 'constructor' | 'method' | 'get' | 'set'
+  computed: true
+  key: Expression
+}
+export interface MethodDefinitionPrivate extends BaseMethodDefinition {
+  kind: 'constructor'
+  computed: false
+  key: PrivateIdentifier
+}
+export type MethodDefinition =
+  | MethodDefinitionNonComputedName
+  | MethodDefinitionComputedName
+  | MethodDefinitionPrivate
+interface BasePropertyDefinition extends HasParentNode {
+  type: 'PropertyDefinition'
+  // key: Expression | PrivateIdentifier
+  value: Expression | null
+  // computed: boolean
+  static: boolean
+  parent: ClassBody
+}
+export interface PropertyDefinitionNonComputedName
+  extends BasePropertyDefinition {
+  computed: false
+  key: Identifier | Literal
+}
+export interface PropertyDefinitionComputedName extends BasePropertyDefinition {
+  computed: true
+  key: Expression
+}
+export interface PropertyDefinitionPrivate extends BasePropertyDefinition {
+  computed: false
+  key: PrivateIdentifier
+}
+export type PropertyDefinition =
+  | PropertyDefinitionNonComputedName
+  | PropertyDefinitionComputedName
+  | PropertyDefinitionPrivate
+
 export type ModuleDeclaration =
   | ImportDeclaration
   | ExportNamedDeclaration
@@ -284,6 +331,10 @@ export interface Identifier extends HasParentNode {
   type: 'Identifier'
   name: string
 }
+export interface PrivateIdentifier extends HasParentNode {
+  type: 'PrivateIdentifier'
+  name: string
+}
 export interface Literal extends HasParentNode {
   type: 'Literal'
   value: string | boolean | null | number | RegExp | BigInt
@@ -304,16 +355,25 @@ export interface ObjectExpression extends HasParentNode {
   type: 'ObjectExpression'
   properties: (Property | SpreadElement)[]
 }
-export interface Property extends HasParentNode {
+interface BaseProperty extends HasParentNode {
   type: 'Property'
   kind: 'init' | 'get' | 'set'
   method: boolean
   shorthand: boolean
-  computed: boolean
-  key: Expression
+  // computed: boolean
+  // key: Expression
   value: Expression
   parent: ObjectExpression
 }
+export interface PropertyNonComputedName extends BaseProperty {
+  computed: false
+  key: Identifier | Literal
+}
+export interface PropertyComputedName extends BaseProperty {
+  computed: true
+  key: Expression
+}
+export type Property = PropertyNonComputedName | PropertyComputedName
 export interface FunctionExpression extends HasParentNode {
   type: 'FunctionExpression'
   async: boolean
@@ -444,13 +504,32 @@ export interface NewExpression extends HasParentNode {
   callee: Expression
   arguments: (Expression | SpreadElement)[]
 }
-export interface MemberExpression extends HasParentNode {
+interface BaseMemberExpression extends HasParentNode {
   type: 'MemberExpression'
-  computed: boolean
-  object: Expression | Super
-  property: Expression
+  // computed: boolean
+  // object: Expression | Super
+  // property: Expression
   optional: boolean
 }
+export interface MemberExpressionNonComputedName extends BaseMemberExpression {
+  computed: false
+  object: Expression | Super
+  property: Identifier
+}
+export interface MemberExpressionComputedName extends BaseMemberExpression {
+  computed: true
+  object: Expression | Super
+  property: Expression
+}
+export interface MemberExpressionPrivate extends BaseMemberExpression {
+  computed: false
+  object: Expression
+  property: PrivateIdentifier
+}
+export type MemberExpression =
+  | MemberExpressionNonComputedName
+  | MemberExpressionComputedName
+  | MemberExpressionPrivate
 export interface ChainExpression extends HasParentNode {
   type: 'ChainExpression'
   expression: ChainElement
@@ -506,16 +585,28 @@ export interface ObjectPattern extends HasParentNode {
   type: 'ObjectPattern'
   properties: (AssignmentProperty | RestElement)[]
 }
-export interface AssignmentProperty extends HasParentNode {
+interface BaseAssignmentProperty extends HasParentNode {
   type: 'Property'
   kind: 'init'
   method: false
   shorthand: boolean
-  computed: boolean
-  key: Expression
+  // computed: boolean
+  // key: Expression
   value: Pattern
   parent: ObjectPattern
 }
+export interface AssignmentPropertyNonComputedName
+  extends BaseAssignmentProperty {
+  computed: false
+  key: Identifier | Literal
+}
+export interface AssignmentPropertyComputedName extends BaseAssignmentProperty {
+  computed: true
+  key: Expression
+}
+export type AssignmentProperty =
+  | AssignmentPropertyNonComputedName
+  | AssignmentPropertyComputedName
 export interface ArrayPattern extends HasParentNode {
   type: 'ArrayPattern'
   elements: Pattern[]

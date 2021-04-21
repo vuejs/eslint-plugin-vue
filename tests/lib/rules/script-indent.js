@@ -114,7 +114,7 @@ function unIndent(strings) {
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 2022,
     sourceType: 'module'
   }
 })

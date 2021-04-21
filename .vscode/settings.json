@@ -9,5 +9,9 @@
         "vue"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",
-    "vetur.validation.script": false
+    "vetur.validation.script": false,
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
