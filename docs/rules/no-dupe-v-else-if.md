@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-dupe-v-else-if
 description: disallow duplicate conditions in `v-if` / `v-else-if` chains
+since: v7.0.0
 ---
 # vue/no-dupe-v-else-if
+
 > disallow duplicate conditions in `v-if` / `v-else-if` chains
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -91,6 +93,10 @@ Nothing.
 - [no-dupe-else-if]
 
 [no-dupe-else-if]: https://eslint.org/docs/rules/no-dupe-else-if
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

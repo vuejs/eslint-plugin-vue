@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-multi-spaces
 description: disallow multiple spaces
+since: v3.12.0
 ---
 # vue/no-multi-spaces
+
 > disallow multiple spaces
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -72,6 +74,10 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.12.0
 
 ## :mag: Implementation
 

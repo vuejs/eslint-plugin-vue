@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-in-parens
 description: enforce consistent spacing inside parentheses
+since: v7.0.0
 ---
 # vue/space-in-parens
+
 > enforce consistent spacing inside parentheses
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -16,6 +18,10 @@ This rule is the same rule as core [space-in-parens] rule but it applies to the 
 - [space-in-parens]
 
 [space-in-parens]: https://eslint.org/docs/rules/space-in-parens
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

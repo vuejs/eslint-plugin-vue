@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-for-delimiter-style
 description: enforce `v-for` directive's delimiter style
+since: v7.0.0
 ---
 # vue/v-for-delimiter-style
+
 > enforce `v-for` directive's delimiter style
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -58,6 +60,10 @@ Default is set to `in`.
 ## :books: Further Reading
 
 - [Guide - List Rendering](https://v3.vuejs.org/guide/list.html)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

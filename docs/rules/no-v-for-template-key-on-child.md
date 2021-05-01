@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-for-template-key-on-child
 description: disallow key of `<template v-for>` placed on child elements
+since: v7.0.0
 ---
 # vue/no-v-for-template-key-on-child
+
 > disallow key of `<template v-for>` placed on child elements
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -53,6 +55,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Migration Guide - `key` attribute > With `<template v-for>`](https://v3.vuejs.org/guide/migration/key-attribute.html#with-template-v-for)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

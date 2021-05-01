@@ -18,6 +18,7 @@ const tester = new RuleTester({
 const allOptions = [
   { groups: ['props', 'computed', 'data', 'methods', 'setup'] }
 ]
+const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
 tester.run('no-unused-properties', rule, {
   valid: [
@@ -262,6 +263,29 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo'],
+            watch: {
+              foo: [
+                'bar',
+                {
+                  handler: 'baz'
+                }
+              ],
+            },
+            methods: {
+              bar () {},
+              baz () {},
+            }
+          };
+        </script>
+      `,
+      options: allOptions
     },
 
     // data used as a template identifier
@@ -1078,6 +1102,439 @@ tester.run('no-unused-properties', rule, {
       </script>
       `,
       options: [{ groups: ['props', 'data'] }]
+    },
+    // contexts
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          data: ({ x }) => ({
+              y: x
+          })
+        };
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: (vm) => vm.x * 2
+          }
+        };
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              get: () => this.x * 2
+            }
+          }
+        };
+      </script>
+      `
+    },
+
+    // deep data
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+         {{ foo.baz.b }}
+        </template>
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              a () {
+                return this.foo.bar.a
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            created() {
+              alert(this.foo)
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            created() {
+              fn(this.foo)
+            }
+          };
+          function fn(foo) {
+            return foo.bar.a + foo.baz.b
+          }
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          {{ foo.bar }}
+          {{ foo.baz }}
+        </template>
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              a () {
+                return this.foo
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Foo :param="{ a: foo.bar }"></Foo>
+        </template>
+
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              fn () {
+                return {
+                  b: this.foo.baz
+                }
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Foo :class="[ foo.bar ]"></Foo>
+        </template>
+
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              fn () {
+                return [this.foo.baz]
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Foo :param="[ {a: foo.bar} ]"></Foo>
+        </template>
+
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              fn () {
+                return {
+                  b: [this.foo.baz]
+                }
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              fn () {
+                unknown(this.foo.bar)
+                f( () => this.foo.baz )
+              }
+            }
+          };
+
+          function f (a) {
+
+          }
+        </script>
+      `,
+      options: deepDataOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div> {{ obj.num.toLocaleString() }} </div>
+      </template>
+      <script>
+      export default {
+        data () {
+          return {
+            obj: { num: 42 }
+          }
+        }
+      }
+      </script>`,
+      options: deepDataOptions
+    },
+
+    // ignore public members
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          data: () => ({
+            /** @public */
+            publicData: 'foo'
+          })
+        }
+        </script>
+      `,
+      options: [{ groups: ['data'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          computed: {
+            /** @public */
+            unusedComputed() {
+              return 'foo'
+            }
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['computed'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          methods: {
+            /** @public */
+            publicMethod() {}
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['methods'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        export default {
+          setup() {
+            return {
+              /** @public */
+              publicRef: 3
+            }
+          }
+        }
+        </script>
+      `,
+      options: [{ groups: ['setup'], ignorePublicMembers: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          a: String,
+        },
+        setup() {
+          return {
+            /** @public */
+            b: 42
+          }
+        },
+        data () {
+          return {
+            /** @public */
+            c: 42
+          }
+        },
+        computed: {
+          /** @public */
+          d () { return this.a }
+        },
+        methods: {
+          /** @public */
+          e () {},
+          f:
+            /** @public */
+            function () {},
+          g:
+            /** @public */
+            () => {},
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true
+        }
+      ]
     }
   ],
 
@@ -1574,6 +2031,375 @@ tester.run('no-unused-properties', rule, {
       })
       `,
       errors: ["'foo' of property found, but never used."]
+    },
+
+    // contexts
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          data: () => ({
+              y: x
+          })
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            [(vm) => vm.x * 2]: y
+          }
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              handler: (vm) => vm.z * 2,
+              deep: (vm) => vm.x * 2
+            }
+          }
+        };
+      </script>
+      `,
+      errors: ["'x' of property found, but never used."]
+    },
+
+    // deep data
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+         {{ foo.baz.a }}
+        </template>
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            methods: {
+              a () {
+                return this.foo.bar
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        {
+          message: "'foo.baz.b' of data found, but never used.",
+          line: 14,
+          column: 21
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            created() {
+              fn(this.foo)
+            }
+          };
+          function fn(b) {
+            b.baz()
+          }
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        "'foo.bar' of data found, but never used.",
+        "'foo.baz.b' of data found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            created() {
+              fn(this.foo)
+            }
+          };
+          function fn(foo) {
+            return foo.bar + foo.baz.b
+          }
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: ["'foo.bar.a' of data found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                  baz: {
+                    b: 1
+                  }
+                }
+              }
+            },
+            created() {
+              fn(this.foo)
+              this.foo.baz
+            }
+          };
+          function fn(foo) {
+            foo.bar
+          }
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        "'foo.bar.a' of data found, but never used.",
+        "'foo.baz.b' of data found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                }
+              }
+            },
+            mounted () {
+              if (this.foo.bar) {
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: ["'foo.bar.a' of data found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              return {
+                foo: {
+                  bar: {
+                    a: 1
+                  },
+                }
+              }
+            },
+            methods: {
+              fn () {
+                return this.foo.bar ? 1 : 2
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: ["'foo.bar.a' of data found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            data() {
+              const bar = {
+                a: 1
+              }
+              const baz = {
+                a: 1
+              }
+              return {
+                foo: {
+                  bar,
+                  baz,
+                }
+              }
+            },
+            methods: {
+              fn () {
+                console.log(this.foo.bar + this.foo.baz)
+              }
+            }
+          };
+        </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        {
+          message: "'foo.bar.a' of data found, but never used.",
+          line: 6,
+          column: 17
+        },
+        {
+          message: "'foo.baz.a' of data found, but never used.",
+          line: 9,
+          column: 17
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          _a: String,
+          /** @public Props do not support public. */
+          a: String,
+        },
+        setup() {
+          return {
+            /** @public */
+            b: 42,
+            _b: 42
+          }
+        },
+        data () {
+          return {
+            c: {
+              /** @public */
+              _c1: 42,
+              /** @public */
+              _c2: 42
+            },
+            _c: 42
+          }
+        },
+        computed: {
+          /** @public */
+          // _eslint-disable-next-line foo
+          d () { return this.c._c1 },
+          /* non jsdoc @public */
+          _d () { return 42 }
+        },
+        methods: {
+          /** @public */
+          e () {},
+          _e () {},
+          f:
+            /** @public */
+            function () {},
+          _f: function () {},
+          g:
+            /** @public */
+            () => {},
+          _g: () => {},
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true,
+          deepData: true
+        }
+      ],
+      errors: [
+        "'_a' of property found, but never used.",
+        "'a' of property found, but never used.",
+        "'_b' of property returned from `setup()` found, but never used.",
+        "'c._c2' of data found, but never used.",
+        "'_c' of data found, but never used.",
+        "'_d' of computed property found, but never used.",
+        "'_e' of method found, but never used.",
+        "'_f' of method found, but never used.",
+        "'_g' of method found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        // Edge case
+        data: [
+          /** @public doesn't public supports array style */
+          'a',
+          /** @public doesn't public supports array style */
+          'b'
+        ]
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['data'],
+          ignorePublicMembers: true,
+          deepData: true
+        }
+      ],
+      errors: [
+        "'a' of data found, but never used.",
+        "'b' of data found, but never used."
+      ]
     }
   ]
 })

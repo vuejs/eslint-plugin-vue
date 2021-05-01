@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/experimental-script-setup-vars
 description: prevent variables defined in `<script setup>` to be marked as undefined
+since: v7.0.0
 ---
 # vue/experimental-script-setup-vars
+
 > prevent variables defined in `<script setup>` to be marked as undefined
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -35,6 +37,10 @@ emit('foo')
 </eslint-code-block>
 
 After turning on, `props` and `emit` are being marked as defined and `no-undef` rule doesn't report an issue.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

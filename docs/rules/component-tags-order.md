@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/component-tags-order
 description: enforce order of component top-level elements
+since: v6.1.0
 ---
 # vue/component-tags-order
+
 > enforce order of component top-level elements
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -113,6 +115,10 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 ## :books: Further Reading
 
 - [Style guide - Single-file component top-level element order](https://v3.vuejs.org/style-guide/#single-file-component-top-level-element-order-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

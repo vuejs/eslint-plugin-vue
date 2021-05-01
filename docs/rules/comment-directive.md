@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comment-directive
 description: support comment-directives in `<template>`
+since: v4.1.0
 ---
 # vue/comment-directive
+
 > support comment-directives in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -126,6 +128,10 @@ Unused reports cannot be suppressed with `eslint-disable` HTML comments.
 - [Disabling rules with inline comments]
 
 [Disabling rules with inline comments]: https://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v4.1.0
 
 ## :mag: Implementation
 

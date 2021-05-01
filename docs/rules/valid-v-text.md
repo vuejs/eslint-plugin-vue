@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-text
 description: enforce valid `v-text` directives
+since: v3.11.0
 ---
 # vue/valid-v-text
+
 > enforce valid `v-text` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -48,6 +50,10 @@ Nothing.
 - [vue/no-parsing-error]
 
 [vue/no-parsing-error]: ./no-parsing-error.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/component-definition-name-casing
 description: enforce specific casing for component definition name
+since: v7.0.0
 ---
 # vue/component-definition-name-casing
+
 > enforce specific casing for component definition name
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -120,6 +122,10 @@ Vue.component('MyComponent', {
 ## :books: Further Reading
 
 - [Style guide - Component name casing in JS/JSX](https://v3.vuejs.org/style-guide/#component-name-casing-in-js-jsx-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/padding-line-between-blocks
 description: require or disallow padding lines between blocks
+since: v6.2.0
 ---
 # vue/padding-line-between-blocks
+
 > require or disallow padding lines between blocks
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -132,6 +134,10 @@ export default {}
 [padding-line-between-statements]: https://eslint.org/docs/rules/padding-line-between-statements
 [lines-between-class-members]: https://eslint.org/docs/rules/lines-between-class-members
 
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.2.0
 
 ## :mag: Implementation
 

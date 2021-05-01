@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/v-on-function-call')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('v-on-function-call', rule, {
@@ -111,13 +111,64 @@ tester.run('v-on-function-call', rule, {
       filename: 'test.vue',
       code: '<template><div @click="foo?.()"></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template><div @click="foo()" /></template>
+      <script>
+      export default {
+        methods: {
+          foo(a) {}
+        }
+      }
+      </script>`,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="foo()" />
+        <div @click="bar()" />
+        <div @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a,b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="foo()" />
+        <div @click="bar()" />
+        <div @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a,b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`,
+      options: ['never']
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
       code: '<template><div @click="foo"></div></template>',
-      output: `<template><div @click="foo"></div></template>`,
+      output: null,
       errors: [
         "Method calls inside of 'v-on' directives must have parentheses."
       ],
@@ -242,6 +293,65 @@ tester.run('v-on-function-call', rule, {
       <template>
         <div @click="fn"></div>
       </template>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template>\r\n<div\r\n@click="foo()" /></template>',
+      output: '<template>\r\n<div\r\n@click="foo" /></template>',
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template><div @click="foo()" /></template>
+      <script>
+      export default {
+        methods: {
+          foo() {}
+        }
+      }
+      </script>`,
+      output: `
+      <template><div @click="foo" /></template>
+      <script>
+      export default {
+        methods: {
+          foo() {}
+        }
+      }
+      </script>`,
+      errors: [
+        "Method calls without arguments inside of 'v-on' directives must not have parentheses."
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template><div @click="foo()" /></template>
+      <script>
+      export default {
+        methods: {
+          foo: () => {}
+        }
+      }
+      </script>`,
+      output: `
+      <template><div @click="foo" /></template>
+      <script>
+      export default {
+        methods: {
+          foo: () => {}
+        }
+      }
+      </script>`,
       errors: [
         "Method calls without arguments inside of 'v-on' directives must not have parentheses."
       ],

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/return-in-emits-validator
 description: enforce that a return statement is present in emits validator
+since: v7.0.0
 ---
 # vue/return-in-emits-validator
+
 > enforce that a return statement is present in emits validator
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -57,6 +59,10 @@ Nothing.
 
 - [Guide - Custom Events / Validate Emitted Events](https://v3.vuejs.org/guide/component-custom-events.html#validate-emitted-events)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

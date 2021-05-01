@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/comma-dangle
 description: require or disallow trailing commas
+since: v5.2.0
 ---
 # vue/comma-dangle
+
 > require or disallow trailing commas
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -16,6 +18,10 @@ This rule is the same rule as core [comma-dangle] rule but it applies to the exp
 - [comma-dangle]
 
 [comma-dangle]: https://eslint.org/docs/rules/comma-dangle
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

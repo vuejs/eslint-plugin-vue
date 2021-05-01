@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-end-tags
 description: enforce end tag style
+since: v3.0.0
 ---
 # vue/html-end-tags
+
 > enforce end tag style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -36,6 +38,10 @@ This rule aims to disallow lacking end tags.
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

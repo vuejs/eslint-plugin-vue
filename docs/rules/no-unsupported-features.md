@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unsupported-features
 description: disallow unsupported Vue.js syntax on the specified version
+since: v6.1.0
 ---
 # vue/no-unsupported-features
+
 > disallow unsupported Vue.js syntax on the specified version
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -109,6 +111,10 @@ The `"ignores"` option accepts an array of the following strings.
 [Vue RFCs - 0011-v-model-api-change]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md
 
 [Vue RFCs - v-bind .prop shorthand proposal]: https://github.com/vuejs/rfcs/pull/18
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

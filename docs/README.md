@@ -6,7 +6,7 @@ sidebarDepth: 0
 
 Official ESLint plugin for Vue.js.
 
-This plugin allows us to check the `<template>` and `<script>` of `.vue` files with ESLint.
+This plugin allows us to check the `<template>` and `<script>` of `.vue` files with ESLint, as well as Vue code in `.js` files.
 
 - Finds syntax errors.
 - Finds the wrong use of [Vue.js Directives](https://v3.vuejs.org/api/directives.html).

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-comment-content-newline
 description: enforce unified line brake in HTML comments
+since: v7.0.0
 ---
 # vue/html-comment-content-newline
+
 > enforce unified line brake in HTML comments
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -222,6 +224,10 @@ This rule will enforce consistency of line break after the `<!--` and before the
 - [vue/html-comment-indent](./html-comment-indent.md)
 - [vue/html-comment-content-spacing](./html-comment-content-spacing.md)
 - [spaced-comment](https://eslint.org/docs/rules/spaced-comment)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

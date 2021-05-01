@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-closing-bracket-spacing
 description: require or disallow a space before tag's closing brackets
+since: v4.1.0
 ---
 # vue/html-closing-bracket-spacing
+
 > require or disallow a space before tag's closing brackets
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -85,6 +87,10 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 
 - [vue/no-multi-spaces](./no-multi-spaces.md)
 - [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v4.1.0
 
 ## :mag: Implementation
 

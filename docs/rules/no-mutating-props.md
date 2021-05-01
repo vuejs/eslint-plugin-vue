@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-mutating-props
 description: disallow mutation of component props
+since: v7.0.0
 ---
 # vue/no-mutating-props
+
 > disallow mutation of component props
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -92,6 +94,10 @@ Nothing.
 
 - [Style guide - Implicit parent-child communication](https://v3.vuejs.org/style-guide/#implicit-parent-child-communication-use-with-caution)
 - [Vue - Prop Mutation - deprecated](https://vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

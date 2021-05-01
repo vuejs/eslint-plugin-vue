@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-bare-strings-in-template
 description: disallow the use of bare strings in `<template>`
+since: v7.0.0
 ---
 # vue/no-bare-strings-in-template
+
 > disallow the use of bare strings in `<template>`
 
 ## :book: Rule Details
@@ -81,6 +83,10 @@ If you want to report these string literals, enable the [vue/no-useless-v-bind] 
 
 [vue/no-useless-v-bind]: ./no-useless-v-bind.md
 [vue/no-useless-mustaches]: ./no-useless-mustaches.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

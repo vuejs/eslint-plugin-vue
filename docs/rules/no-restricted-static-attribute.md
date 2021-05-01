@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-static-attribute
 description: disallow specific attribute
+since: v7.0.0
 ---
 # vue/no-restricted-static-attribute
+
 > disallow specific attribute
 
 ## :book: Rule Details
@@ -90,6 +92,10 @@ The following properties can be specified for the object.
 - [vue/no-restricted-v-bind]
 
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

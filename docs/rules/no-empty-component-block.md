@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-empty-component-block
 description: disallow the `<template>` `<script>` `<style>` block to be empty
+since: v7.0.0
 ---
 # vue/no-empty-component-block
+
 > disallow the `<template>` `<script>` `<style>` block to be empty
 
 ## :book: Rule Details
@@ -61,6 +63,10 @@ See: https://vue-loader.vuejs.org/spec.html#src-imports
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

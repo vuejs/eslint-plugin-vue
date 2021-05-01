@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-slot-attribute
 description: disallow deprecated `slot` attribute (in Vue.js 2.6.0+)
+since: v6.1.0
 ---
 # vue/no-deprecated-slot-attribute
+
 > disallow deprecated `slot` attribute (in Vue.js 2.6.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -38,6 +40,10 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 ## :books: Further Reading
 
 - [API - slot](https://vuejs.org/v2/api/#slot-deprecated)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

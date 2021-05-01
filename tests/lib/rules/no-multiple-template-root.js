@@ -56,6 +56,24 @@ ruleTester.run('no-multiple-template-root', rule, {
       filename: 'test.vue',
       code:
         '<template><div v-if="foo"></div><div v-else-if="bar"></div></template>'
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1439
+    {
+      code: `
+      <template>
+        <Link :to="to" class="flex items-center">
+          <span v-if="prefixIcon || $slots.prefix" class="mr-1">
+            <slot name="prefix">
+              <FontAwesomeIcon v-if="prefixIcon" :icon="prefixIcon" fixedWidth />
+            </slot>
+          </span>
+
+          <slot />
+        </Link>
+      </template>
+      `,
+      filename: 'test.vue'
     }
   ],
   invalid: [

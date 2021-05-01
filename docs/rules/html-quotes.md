@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-quotes
 description: enforce quotes style of HTML attributes
+since: v3.0.0
 ---
 # vue/html-quotes
+
 > enforce quotes style of HTML attributes
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -93,6 +95,10 @@ Object option:
 ## :books: Further Reading
 
 - [Style guide - Quoted attribute values](https://v3.vuejs.org/style-guide/#Quoted-attribute-values-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.0.0
 
 ## :mag: Implementation
 

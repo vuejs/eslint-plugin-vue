@@ -150,7 +150,7 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getLastToken(node: VNODE.HasLocation, options: number): AST.Token
   getLastToken(
     node: VNODE.HasLocation,
-    optionss: SourceCode.CursorWithSkipOptions
+    options: SourceCode.CursorWithSkipOptions
   ): AST.Token | null
   getLastTokens(
     node: VNODE.HasLocation,
@@ -327,6 +327,9 @@ export namespace Rule {
     getSourceCode(): SourceCode
     markVariableAsUsed(name: string): boolean
     report(descriptor: ReportDescriptor): void
+
+    // eslint@6 does not have this method.
+    getCwd?: () => string
   }
 
   type ReportDescriptor =
@@ -357,6 +360,9 @@ export namespace Rule {
 }
 
 export class RuleTester extends ESLintRuleTester {}
+export class Linter {
+  getRules(): Map<string, Rule.RuleModule>
+}
 
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage

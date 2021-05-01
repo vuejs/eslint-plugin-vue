@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/sort-keys
 description: enforce sort-keys in a manner that is compatible with order-in-components
+since: v6.2.0
 ---
 # vue/sort-keys
+
 > enforce sort-keys in a manner that is compatible with order-in-components
 
 This rule is almost the same rule as core [sort-keys] rule but it will not error on top component properties allowing that order to be enforced with `order-in-components`.
@@ -102,6 +104,10 @@ export default {
 - [sort-keys]
 
 [sort-keys]: https://eslint.org/docs/rules/sort-keys
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.2.0
 
 ## :mag: Implementation
 

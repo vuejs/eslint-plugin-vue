@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-custom-modifiers-on-v-model
 description: disallow custom modifiers on v-model used on the component
+since: v7.0.0
 ---
 # vue/no-custom-modifiers-on-v-model
+
 > disallow custom modifiers on v-model used on the component
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
@@ -46,6 +48,10 @@ Nothing.
 - [vue/valid-v-model]
 
 [vue/valid-v-model]: ./valid-v-model.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

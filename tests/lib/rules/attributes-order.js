@@ -22,6 +22,29 @@ const tester = new RuleTester({
 tester.run('attributes-order', rule, {
   valid: [
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1433
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          v-model="model"
+          v-bind="object"
+          @click="handleClick"/>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          ref="ref"
+          v-model="model"
+          @click="handleClick"/>
+      </template>`
+    },
+    {
       filename: 'test.vue',
       code: '<template><div></div></template>'
     },
@@ -259,7 +282,7 @@ tester.run('attributes-order', rule, {
           <div
             v-if="!visible"
             class="content"
-            :class="className"
+            v-model="foo"
             v-text="textContent"
             >
           </div>
@@ -273,7 +296,7 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            ['BINDING', 'OTHER_ATTR'],
+            ['TWO_WAY_BINDING', 'OTHER_ATTR'],
             'CONTENT',
             'GLOBAL'
           ]
@@ -373,6 +396,68 @@ tester.run('attributes-order', rule, {
           </div>
         </template>`,
       options: [{ alphabetical: true }]
+    },
+
+    // v-bind="..."
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-bind="b">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="b"
+          v-bind:id="a">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-bind:id="a"
+          v-bind="b">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-bind="b"
+          v-bind:id="a">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }]
+    },
+
+    // omit order
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-for="a in items"
+          v-if="a"
+          attr="a">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }]
     }
   ],
 
@@ -384,7 +469,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-cloak".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -395,7 +480,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-cloak" should go before "id".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -420,11 +505,11 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-model" should go before "model".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute ":id" should go before "propOne".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -451,11 +536,11 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-model" should go before "v-on".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "propOne" should go before "v-on".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -468,7 +553,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "aria-test".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -498,7 +583,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "propone".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -517,7 +602,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-cloak".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -556,27 +641,27 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-for" should go before "v-if".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "is" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "ref" should go before "v-on:click".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute ":prop" should go before "v-on:click".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -632,23 +717,23 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "is" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "v-on:click" should go before "v-once".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "ref" should go before "v-once".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "id" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         },
         {
           message: 'Attribute "myProp" should go before "v-text".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -657,7 +742,7 @@ tester.run('attributes-order', rule, {
             <div
               class="content"
               v-if="!visible"
-              :class="className"
+              v-model="foo"
               v-text="textContent"
               >
             </div>
@@ -671,7 +756,7 @@ tester.run('attributes-order', rule, {
             'DEFINITION',
             'EVENTS',
             'UNIQUE',
-            ['BINDING', 'OTHER_ATTR'],
+            ['TWO_WAY_BINDING', 'OTHER_ATTR'],
             'CONTENT',
             'GLOBAL'
           ]
@@ -681,7 +766,7 @@ tester.run('attributes-order', rule, {
             <div
               v-if="!visible"
               class="content"
-              :class="className"
+              v-model="foo"
               v-text="textContent"
               >
             </div>
@@ -689,7 +774,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -713,7 +798,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-slot" should go before "v-model".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -735,7 +820,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "a-prop" should go before "z-prop".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -757,7 +842,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute ":a-prop" should go before ":z-prop".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -779,7 +864,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "@change" should go before "@input".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -801,7 +886,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "boolean-prop" should go before "z-prop".',
-          type: 'VIdentifier'
+          type: 'VAttribute'
         }
       ]
     },
@@ -823,7 +908,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-on:[c]" should go before "v-on:click".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -845,7 +930,7 @@ tester.run('attributes-order', rule, {
       errors: [
         {
           message: 'Attribute "v-on:click" should go before "v-text".',
-          type: 'VDirectiveKey'
+          type: 'VAttribute'
         }
       ]
     },
@@ -943,6 +1028,441 @@ tester.run('attributes-order', rule, {
           message: 'Attribute "v-is" should go before "v-cloak".'
         }
       ]
+    },
+
+    // v-bind="..."
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-bind="b"
+          v-if="x">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-if="x"
+          v-bind:id="a"
+          v-bind="b">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-if" should go before "v-bind:id".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-if="x"
+          v-bind="b">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-if="x"
+          v-bind:id="a"
+          v-bind="b">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-if" should go before "v-bind:id".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="b"
+          v-bind:id="a"
+          v-if="x">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="b"
+          v-if="x"
+          v-bind:id="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-if" should go before "v-bind:id".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-on:click="x"
+          v-bind:id="a"
+          v-bind="b">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-on:click="x"
+          v-bind="b">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-bind:id" should go before "v-on:click".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-on:click="x"
+          v-bind="b">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind:id="a"
+          v-bind="b"
+          v-on:click="x">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-bind" should go before "v-on:click".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-on:click="x"
+          v-bind="b"
+          v-bind:id="a">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind="b"
+          v-bind:id="a"
+          v-on:click="x">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-bind:id" should go before "v-on:click".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-on:click="x"
+          v-bind:a="x"
+          v-bind="x"
+          v-if="x">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind:a="x"
+          v-on:click="x"
+          v-bind="x"
+          v-if="x">
+        </div>
+      </template>`,
+      errors: [
+        'Attribute "v-bind:a" should go before "v-on:click".',
+        'Attribute "v-if" should go before "v-on:click".'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:a="x"
+          v-on:click="x"
+          v-bind="x"
+          v-if="x">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind:a="x"
+          v-bind="x"
+          v-on:click="x"
+          v-if="x">
+        </div>
+      </template>`,
+      errors: [
+        'Attribute "v-bind" should go before "v-on:click".',
+        'Attribute "v-if" should go before "v-on:click".'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          a="x"
+          v-bind="x"
+          v-if="x">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-if="x"
+          a="x"
+          v-bind="x">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-if" should go before "a".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-on:click="x"
+          v-bind="x"
+          v-if="x">
+        </div>
+      </template>`,
+      options: [{ alphabetical: true }],
+      output: `
+      <template>
+        <div
+          v-bind="x"
+          v-on:click="x"
+          v-if="x">
+        </div>
+      </template>`,
+      errors: [
+        'Attribute "v-bind" should go before "v-on:click".',
+        'Attribute "v-if" should go before "v-on:click".'
+      ]
+    },
+
+    // omit order
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="a"
+          attr="a"
+          v-for="a in items">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
+      output: `
+      <template>
+        <div
+          v-for="a in items"
+          v-if="a"
+          attr="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-for" should go before "v-if".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          attr="a"
+          v-if="a"
+          v-for="a in items">
+        </div>
+      </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
+      output: `
+      <template>
+        <div
+          attr="a"
+          v-for="a in items"
+          v-if="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-for" should go before "v-if".']
+    },
+
+    // slot
+    {
+      filename: 'test.vue',
+      options: [
+        {
+          order: [
+            'UNIQUE',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION',
+            'SLOT'
+          ]
+        }
+      ],
+      code:
+        '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      errors: [
+        {
+          message: 'Attribute "bar" should go before "v-slot".'
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      options: [
+        {
+          order: [
+            'UNIQUE',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION',
+            'SLOT'
+          ]
+        }
+      ],
+      code:
+        '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
+      errors: [
+        {
+          message: 'Attribute "ref" should go before "bar".'
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          v-if="show"
+          v-model="model"
+          ref="ref"
+          @click="handleClick"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-if="show"
+          v-bind="object"
+          ref="ref"
+          v-model="model"
+          @click="handleClick"/>
+      </template>`,
+      errors: [
+        'Attribute "v-if" should go before "v-bind".',
+        'Attribute "ref" should go before "v-model".'
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="object"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="object"
+          @click="handleClick"/>
+      </template>`,
+      errors: ['Attribute "v-bind" should go before "@click".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="object"
+          @input="handleInput"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          ref="ref"
+          v-bind="object"
+          @click="handleClick"
+          @input="handleInput"/>
+      </template>`,
+      errors: ['Attribute "v-bind" should go before "@click".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="object"
+          @input="handleInput"/>
+      </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
+      output: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          @input="handleInput"
+          v-bind="object"/>
+      </template>`,
+      errors: ['Attribute "@input" should go before "v-bind".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind="object"
+          @click="handleClick"
+          attr="foo"/>
+      </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
+      output: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="object"
+          attr="foo"/>
+      </template>`,
+      errors: ['Attribute "@click" should go before "v-bind".']
     }
   ]
 })

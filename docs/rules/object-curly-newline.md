@@ -2,10 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/object-curly-newline
-description: enforce consistent line breaks inside braces
+description: enforce consistent line breaks after opening and before closing braces
+since: v7.0.0
 ---
 # vue/object-curly-newline
-> enforce consistent line breaks inside braces
+
+> enforce consistent line breaks after opening and before closing braces
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -16,6 +18,10 @@ This rule is the same rule as core [object-curly-newline] rule but it applies to
 - [object-curly-newline]
 
 [object-curly-newline]: https://eslint.org/docs/rules/object-curly-newline
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

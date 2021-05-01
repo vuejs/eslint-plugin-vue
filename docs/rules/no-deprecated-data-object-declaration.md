@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-data-object-declaration
 description: disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-data-object-declaration
+
 > disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -79,6 +81,10 @@ Nothing.
 
 - [Migration Guide - Data Option](https://v3.vuejs.org/guide/migration/data-option.html)
 - [Vue RFCs - 0019-remove-data-object-declaration](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0019-remove-data-object-declaration.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

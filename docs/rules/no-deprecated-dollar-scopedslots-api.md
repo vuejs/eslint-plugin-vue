@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-dollar-scopedslots-api
 description: disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-dollar-scopedslots-api
+
 > disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -43,6 +45,10 @@ Nothing.
 
 - [Migration Guide - Slots Unification](https://v3.vuejs.org/guide/migration/slots-unification.html)
 - [Vue RFCs - 0006-slots-unification](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0006-slots-unification.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

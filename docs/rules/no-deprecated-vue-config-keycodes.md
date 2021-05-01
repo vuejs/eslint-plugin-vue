@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-vue-config-keycodes
 description: disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-vue-config-keycodes
+
 > disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -45,6 +47,10 @@ Nothing.
 [Migration Guide - KeyCode Modifiers]: https://v3.vuejs.org/guide/migration/keycode-modifiers.html
 [Vue RFCs - 0014-drop-keycode-support]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md
 [API - Global Config - keyCodes]: https://vuejs.org/v2/api/#keyCodes
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

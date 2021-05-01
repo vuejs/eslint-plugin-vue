@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/jsx-uses-vars
 description: prevent variables used in JSX to be marked as unused
+since: v2.0.0
 ---
 # vue/jsx-uses-vars
+
 > prevent variables used in JSX to be marked as unused
 
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -35,6 +37,10 @@ After turning on, `HelloWorld` is being marked as used and `no-unused-vars` rule
 ## :mute: When Not To Use It
 
 If you are not using JSX or if you do not use the `no-unused-vars` rule then you can disable this rule.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v2.0.0
 
 ## :mag: Implementation
 

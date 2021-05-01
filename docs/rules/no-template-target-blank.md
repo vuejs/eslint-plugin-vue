@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-target-blank
 description: disallow target="_blank" attribute without rel="noopener noreferrer"
+since: v7.0.0
 ---
 # vue/no-template-target-blank
+
 > disallow target="_blank" attribute without rel="noopener noreferrer"
 
 ## :book: Rule Details
@@ -102,6 +104,10 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

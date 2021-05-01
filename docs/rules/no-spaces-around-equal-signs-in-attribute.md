@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-spaces-around-equal-signs-in-attribute
 description: disallow spaces around equal signs in attribute
+since: v5.0.0
 ---
 # vue/no-spaces-around-equal-signs-in-attribute
+
 > disallow spaces around equal signs in attribute
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -42,6 +44,10 @@ HTML5 allows spaces around equal signs. But space-less is easier to read, and gr
 ## :books: Further Reading
 
 * [HTML5 Style Guide - W3Schools *Spaces and Equal Signs*](https://www.w3schools.com/html/html5_syntax.asp)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

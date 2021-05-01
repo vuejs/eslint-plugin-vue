@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-v-bind
 description: disallow unnecessary `v-bind` directives
+since: v7.0.0
 ---
 # vue/no-useless-v-bind
+
 > disallow unnecessary `v-bind` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -80,6 +82,10 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 
 [vue/no-useless-mustaches]: ./no-useless-mustaches.md
 [vue/no-useless-concat]: ./no-useless-concat.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

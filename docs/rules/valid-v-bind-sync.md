@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-bind-sync
 description: enforce valid `.sync` modifier on `v-bind` directives
+since: v7.0.0
 ---
 # vue/valid-v-bind-sync
+
 > enforce valid `.sync` modifier on `v-bind` directives
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
@@ -69,6 +71,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Guide (for v2) - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

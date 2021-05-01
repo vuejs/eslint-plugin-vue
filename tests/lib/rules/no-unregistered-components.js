@@ -393,6 +393,90 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <custom-component />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component :is="'CustomComponent'" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <component is="CustomComponent" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-is="'CustomComponent'" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponentWithNamedSlots>
+            <template #slotA>
+              <div>Text</div>
+            </template>
+          </CustomComponentWithNamedSlots>
+        </template>
+        <script>
+        export default {
+          components: {
+            CustomComponentWithNamedSlots
+          }
+        }
+        </script>
+      `
     }
   ],
   invalid: [
@@ -580,6 +664,45 @@ tester.run('no-unregistered-components', rule, {
         {
           message:
             'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
+        export default {
+          name: CustomComponent
+        }
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "CustomComponent" component has been used but not registered.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponentWithNamedSlots>
+            <template #slotA>
+              <div>Text</div>
+            </template>
+          </CustomComponentWithNamedSlots>
+        </template>
+      `,
+      errors: [
+        {
+          message:
+            'The "CustomComponentWithNamedSlots" component has been used but not registered.',
           line: 3
         }
       ]

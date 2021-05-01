@@ -66,6 +66,22 @@ tester.run('html-end-tags', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><svg><![CDATA[test</svg></div></template>'
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1403
+    {
+      code: `
+      <template>
+        <div>
+          <p>
+            <Address
+              value=""
+              onchange="await setTokenAddress(event.target.value)"/>
+          </p>
+        </div>
+      </template>
+      `,
+      filename: 'test.vue'
     }
   ],
   invalid: [

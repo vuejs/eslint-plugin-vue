@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/dot-notation
 description: enforce dot notation whenever possible
+since: v7.0.0
 ---
 # vue/dot-notation
+
 > enforce dot notation whenever possible
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -16,6 +18,10 @@ This rule is the same rule as core [dot-notation] rule but it applies to the exp
 - [dot-notation]
 
 [dot-notation]: https://eslint.org/docs/rules/dot-notation
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

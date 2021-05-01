@@ -70,7 +70,23 @@ tester.run('html-self-closing', rule, {
 
     // Invalid EOF
     '<template><div a=">test</div></template>',
-    '<template><div><!--test</div></template>'
+    '<template><div><!--test</div></template>',
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1403
+    {
+      code: `
+      <template>
+        <div>
+          <p>
+            <Address
+              value=""
+              onchange="await setTokenAddress(event.target.value)"/>
+          </p>
+        </div>
+      </template>
+      `,
+      filename: 'test.vue'
+    }
 
     // other cases are in `invalid` tests.
   ],

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-closing-bracket-newline
 description: require or disallow a line break before tag's closing brackets
+since: v4.1.0
 ---
 # vue/html-closing-bracket-newline
+
 > require or disallow a line break before tag's closing brackets
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -92,6 +94,10 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v4.1.0
 
 ## :mag: Implementation
 

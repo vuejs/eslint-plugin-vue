@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-model-argument
 description: disallow adding an argument to `v-model` used in custom component
+since: v7.0.0
 ---
 # vue/no-v-model-argument
+
 > disallow adding an argument to `v-model` used in custom component
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
@@ -42,6 +44,10 @@ Nothing.
 - [vue/valid-v-model]
 
 [vue/valid-v-model]: ./valid-v-model.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

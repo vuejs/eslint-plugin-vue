@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-filter
 description: disallow using deprecated filters syntax (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-filter
+
 > disallow using deprecated filters syntax (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -39,6 +41,22 @@ See [Migration Guide - Filters](https://v3.vuejs.org/guide/migration/filters.htm
 
 </eslint-code-block>
 
+:::warning
+Do not disable [`"parserOptions.vueFeatures.filter"`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeaturesfilter) to use this rule.
+
+```json5
+{
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "vueFeatures": {
+      "filter": false // Don't!!
+    }
+  }
+}
+```
+
+:::
+
 ### :wrench: Options
 
 Nothing.
@@ -47,6 +65,10 @@ Nothing.
 
 - [Migration Guide - Filters](https://v3.vuejs.org/guide/migration/filters.html)
 - [Vue RFCs - 0015-remove-filters](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0015-remove-filters.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-comment-content-spacing
 description: enforce unified spacing in HTML comments
+since: v7.0.0
 ---
 # vue/html-comment-content-spacing
+
 > enforce unified spacing in HTML comments
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -108,6 +110,10 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 
 - [spaced-comment](https://eslint.org/docs/rules/spaced-comment)
 - [vue/html-comment-content-newline](./html-comment-content-newline.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

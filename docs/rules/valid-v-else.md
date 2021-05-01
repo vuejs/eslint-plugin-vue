@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-else
 description: enforce valid `v-else` directives
+since: v3.11.0
 ---
 # vue/valid-v-else
+
 > enforce valid `v-else` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -51,6 +53,10 @@ Nothing.
 [vue/valid-v-if]: ./valid-v-if.md
 [vue/valid-v-else-if]: ./valid-v-else-if.md
 [vue/no-parsing-error]: ./no-parsing-error.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-on-function-call
 description: enforce or forbid parentheses after method calls without arguments in `v-on` directives
+since: v5.2.0
 ---
 # vue/v-on-function-call
+
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -115,6 +117,10 @@ Default is set to `never`.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

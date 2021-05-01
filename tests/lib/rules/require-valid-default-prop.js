@@ -207,6 +207,51 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Array as PropType<string[]>,
+              default: () => []
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Object as PropType<{ [key: number]: number }>,
+              default: () => {}
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Function as PropType<() => number>,
+              default: () => 10
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
     }
   ],
 
@@ -781,6 +826,51 @@ ruleTester.run('require-valid-default-prop', rule, {
       }`,
       parserOptions,
       errors: errorMessage('string')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Array as PropType<string[]>,
+              default: []
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Object as PropType<{ [key: number]: number }>,
+              default: {}
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
+    },
+    {
+      filename: 'test.vue',
+      code: `export default Vue.extend({
+          props: {
+            foo: {
+              type: Function as PropType<() => number>,
+              default: 10
+            }
+          }
+        });
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('@typescript-eslint/parser'),
+      errors: errorMessage('function')
     }
   ]
 })

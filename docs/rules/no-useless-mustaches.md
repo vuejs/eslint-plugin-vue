@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-mustaches
 description: disallow unnecessary mustache interpolations
+since: v7.0.0
 ---
 # vue/no-useless-mustaches
+
 > disallow unnecessary mustache interpolations
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -81,6 +83,10 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 [vue/no-useless-v-bind]: ./no-useless-v-bind.md
 [vue/no-useless-concat]: ./no-useless-concat.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

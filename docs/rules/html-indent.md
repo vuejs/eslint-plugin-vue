@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-indent
 description: enforce consistent indentation in `<template>`
+since: v3.14.0
 ---
 # vue/html-indent
+
 > enforce consistent indentation in `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -82,7 +84,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
   - `closeBracket.endTag` (`integer`) ... The multiplier of indentation for right brackets of end tags (`</div>`). Default is `0`.
   - `closeBracket.selfClosingTag` (`integer`) ... The multiplier of indentation for right brackets of start tags (`<div/>`). Default is `0`.
 - `alignAttributesVertically` (`boolean`) ... Condition for whether attributes should be vertically aligned to the first attribute in multiline case or not. Default is `true`
-- `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/mysticatea/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
+- `ignores` (`string[]`) ... The selector to ignore nodes. The AST spec is [here](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md). You can use [esquery](https://github.com/estools/esquery#readme) to select nodes. Default is an empty array.
 
 ### `2, {"attribute": 1, "closeBracket": 1}`
 
@@ -189,6 +191,10 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.14.0
 
 ## :mag: Implementation
 

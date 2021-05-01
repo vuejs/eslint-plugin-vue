@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-potential-component-option-typo
 description: disallow a potential typo in your component property
+since: v7.0.0
 ---
 # vue/no-potential-component-option-typo
+
 > disallow a potential typo in your component property
 
 ## :book: Rule Details
@@ -116,6 +118,10 @@ export default {
 ## :books: Further Reading
 
 - [Edit distance](https://en.wikipedia.org/wiki/Edit_distance)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

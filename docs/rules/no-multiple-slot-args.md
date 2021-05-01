@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-multiple-slot-args
 description: disallow to pass multiple arguments to scoped slots
+since: v7.0.0
 ---
 # vue/no-multiple-slot-args
+
 > disallow to pass multiple arguments to scoped slots
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -42,6 +44,10 @@ Nothing.
 ## :books: Further Reading
 
 - [vuejs/vue#9468](https://github.com/vuejs/vue/issues/9468#issuecomment-462210146)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

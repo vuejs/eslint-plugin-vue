@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/order-in-components
 description: enforce order of properties in components
+since: v3.2.0
 ---
 # vue/order-in-components
+
 > enforce order of properties in components
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -113,6 +115,10 @@ export default {
 
 - [Style guide - Component/instance options order](https://v3.vuejs.org/style-guide/#component-instance-options-order-recommended)
 - [Style guide (for v2) - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.2.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-component-options
 description: disallow specific component option
+since: v7.0.0
 ---
 # vue/no-restricted-component-options
+
 > disallow specific component option
 
 ## :book: Rule Details
@@ -117,6 +119,10 @@ The following properties can be specified for the object.
 
 - `name` ... Specify the component option name or pattern, or the path by its array.
 - `message` ... Specify an optional custom message.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

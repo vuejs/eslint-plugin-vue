@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/multiline-html-element-content-newline
 description: require a line break before and after the contents of a multiline element
+since: v5.0.0
 ---
 # vue/multiline-html-element-content-newline
+
 > require a line break before and after the contents of a multiline element
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -145,6 +147,10 @@ This rule enforces a line break before and after the contents of a multiline ele
 - [no-multiple-empty-lines]
 
 [no-multiple-empty-lines]: https://eslint.org/docs/rules/no-multiple-empty-lines
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

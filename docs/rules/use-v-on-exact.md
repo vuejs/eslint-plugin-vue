@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/use-v-on-exact
 description: enforce usage of `exact` modifier on `v-on`
+since: v5.0.0
 ---
 # vue/use-v-on-exact
+
 > enforce usage of `exact` modifier on `v-on`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -44,6 +46,10 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
 ## :books: Further Reading
 
 - [Guide - .exact Modifier](https://v3.vuejs.org/guide/events.html#exact-modifier)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

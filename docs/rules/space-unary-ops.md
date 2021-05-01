@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-unary-ops
 description: enforce consistent spacing before or after unary operators
+since: v5.2.0
 ---
 # vue/space-unary-ops
+
 > enforce consistent spacing before or after unary operators
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -16,6 +18,10 @@ This rule is the same rule as core [space-unary-ops] rule but it applies to the 
 - [space-unary-ops]
 
 [space-unary-ops]: https://eslint.org/docs/rules/space-unary-ops
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-template-key
 description: disallow `key` attribute on `<template>`
+since: v3.4.0
 ---
 # vue/no-template-key
+
 > disallow `key` attribute on `<template>`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -52,6 +54,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API - Special Attributes - key](https://v3.vuejs.org/api/special-attributes.html#key)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.4.0
 
 ## :mag: Implementation
 

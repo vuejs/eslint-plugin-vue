@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-reserved-component-names
 description: disallow the use of reserved names in component definitions
+since: v6.1.0
 ---
 # vue/no-reserved-component-names
+
 > disallow the use of reserved names in component definitions
 
 ## :book: Rule Details
@@ -76,6 +78,10 @@ export default {
 - [Valid custom element name](https://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)
 - [API - Built-In Components](https://v3.vuejs.org/api/built-in-components.html)
 - [API (for v2) - Built-In Components](https://vuejs.org/v2/api/index.html#Built-In-Components)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 

@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-is
 description: enforce valid `v-is` directives
+since: v7.0.0
 ---
 # vue/valid-v-is
+
 > enforce valid `v-is` directives
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -56,6 +58,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

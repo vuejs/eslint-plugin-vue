@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/match-component-file-name
 description: require component name property to match its file name
+since: v5.2.0
 ---
 # vue/match-component-file-name
+
 > require component name property to match its file name
 
 This rule reports if a component `name` property does not match its file name.
@@ -307,6 +309,10 @@ export default {
 ## :books: Further Reading
 
 - [Style guide - Single-file component filename casing](https://v3.vuejs.org/style-guide/#single-file-component-filename-casing-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.2.0
 
 ## :mag: Implementation
 

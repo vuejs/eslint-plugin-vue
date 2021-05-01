@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/one-component-per-file
 description: enforce that each component should be in its own file
+since: v7.0.0
 ---
 # vue/one-component-per-file
+
 > enforce that each component should be in its own file
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -49,6 +51,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Style guide - Component files](https://v3.vuejs.org/style-guide/#component-files-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

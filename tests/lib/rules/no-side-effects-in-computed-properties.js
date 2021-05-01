@@ -20,7 +20,11 @@ const parserOptions = {
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = new RuleTester({
+  parser: require.resolve('vue-eslint-parser'),
+  parserOptions
+})
+
 ruleTester.run('no-side-effects-in-computed-properties', rule, {
   valid: [
     {
@@ -101,8 +105,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             this.someArray.forEach(arr => console.log(arr))
           }
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -120,8 +123,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return something.b
           }
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -129,8 +131,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         data() {
           return {}
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -141,8 +142,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return a
           },
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -161,8 +161,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             }
           },
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -171,15 +170,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return this.something['a']().reverse()
           },
         }
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `const test = { el: '#app' }
         Vue.component('test', {
         el: test.el
-      })`,
-      parserOptions
+      })`
     },
     {
       code: `Vue.component('test', {
@@ -188,8 +185,92 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return [...this.items].reverse()
           },
         }
-      })`,
-      parserOptions
+      })`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { computed } from 'vue'
+      const utils = {}
+      export default {
+        setup() {
+          const foo = useFoo()
+          function bar () {}
+          class Baz {}
+
+          const test0 = computed(test0f)
+          const test1 = computed(() => foo.firstName + ' ' + foo.lastName)
+          const test2 = computed(() => foo.something.slice(0).reverse())
+          const test3 = computed(() => {
+            return {
+              ...foo.something,
+              test: 'example'
+            }
+          })
+          const test5 = computed({
+            get: () => foo.firstName + ' ' + foo.lastName,
+            set: newValue => {
+              const names = newValue.split(' ')
+              foo.firstName = names[0]
+              foo.lastName = names[names.length - 1]
+            }
+          })
+          const test6 = computed({
+            get: () => foo.something.slice(0).reverse()
+          })
+          const test7 = computed({
+            get: () => {
+              const example = foo.something * 2
+              return example + 'test'
+            }
+          })
+          const test8 = computed({
+            get: () => {
+              return {
+                ...foo.something,
+                test: 'example'
+              }
+            }
+          })
+          const test9 = computed(() => Object.keys(foo.a).sort())
+          const test10 = computed({
+            get: () => Object.keys(foo.a).sort()
+          })
+          const test11 = computed(() => {
+            const categories = {}
+
+            foo.types.forEach(c => {
+              categories[c.category] = categories[c.category] || []
+              categories[c.category].push(c)
+            })
+
+            return categories
+          })
+          const test12 = computed(() => {
+            return foo.types.map(t => {
+              // [].push('xxx')
+              return t
+            })
+          })
+          const test13 = computed(() => {
+            foo.someArray.forEach(arr => console.log(arr))
+          })
+          const test14 = computed(() => bar.name)
+          const test15 = computed(() => Baz.name)
+          const test16 = computed(() => {
+            function b () {}
+            b.name = 'c'
+          })
+          const test17 = computed(() => {
+            class C {}
+            C.name = 'D'
+          })
+          const test18 = computed(() => (console.log('a'), true))
+          const test19 = computed(() => utils.reverse(foo.array))
+        }
+      }
+      </script>`
     }
   ],
   invalid: [
@@ -222,7 +303,6 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           }
         }
       })`,
-      parserOptions,
       errors: [
         {
           line: 4,
@@ -286,7 +366,6 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           },
         }
       })`,
-      parserOptions,
       errors: [
         {
           line: 5,
@@ -321,7 +400,6 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           }
         });
       `,
-      parserOptions,
       errors: [
         {
           line: 5,
@@ -341,7 +419,6 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           },
         }
       })`,
-      parserOptions,
       errors: [
         {
           line: 4,
@@ -363,11 +440,156 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           },
         }
       })`,
-      parserOptions,
       errors: [
         'Unexpected side effect in "test1" computed property.',
         'Unexpected side effect in "test2" computed property.',
         'Unexpected side effect in "test3" computed property.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {ref, computed} from 'vue'
+      export default {
+        setup() {
+          const foo = useFoo()
+          const asd = { qwe: {} }
+          function a () {}
+          class A {}
+
+          const test1 = computed(() => {
+            foo.firstName = 'lorem'
+            asd.qwe.zxc = 'lorem'
+            return foo.firstName + ' ' + foo.lastName
+          })
+          const test2 = computed(() => {
+            foo.count += 2;
+            foo.count++;
+            return foo.count;
+          })
+          const test3 = computed(() => foo.something.reverse())
+          const test4 = computed(() => {
+            const test = foo.another.something.push('example')
+            return 'something'
+          })
+          const test5 = computed(() => {
+            foo.something[index] = foo.thing[index]
+            return foo.something
+          })
+          const test6 = computed(() => foo.something.keys.sort())
+          const test7 = computed({
+            get() {
+              return foo.something.reverse()
+            }
+          })
+          const test8 = computed(() => {
+            a.name = ''
+          })
+          const test9 = computed(() => {
+            A.name = ''
+          })
+          const test10 = computed(() => (foo.a = '', true))
+
+          const test100 = computed(() => {
+            const a = foo
+            a.count++ // false negative
+          })
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 12,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 13,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 17,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 18,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 21,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 23,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 27,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 30,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 33,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 37,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 40,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 42,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {reactive, computed} from 'vue'
+      export default {
+        setup() {
+          const arr = reactive([])
+
+          const test1 = computed(() => arr.reverse())
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 8,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+      import {ref, computed} from 'vue'
+      export default {
+        setup() {
+          const foo = useFoo()
+
+          const test1 = computed(() => foo.something.reverse())
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 8,
+          message: 'Unexpected side effect in computed function.'
+        }
       ]
     }
   ]

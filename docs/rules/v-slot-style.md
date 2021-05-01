@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-slot-style
 description: enforce `v-slot` directive style
+since: v6.0.0
 ---
 # vue/v-slot-style
+
 > enforce `v-slot` directive style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -104,6 +106,10 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 ## :books: Further Reading
 
 - [Style guide - Directive shorthands](https://v3.vuejs.org/style-guide/#directive-shorthands-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v6.0.0
 
 ## :mag: Implementation
 

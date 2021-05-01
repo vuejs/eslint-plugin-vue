@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-extra-parens
 description: disallow unnecessary parentheses
+since: v7.0.0
 ---
 # vue/no-extra-parens
+
 > disallow unnecessary parentheses
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -38,6 +40,10 @@ This rule extends the core [no-extra-parens] rule and applies it to the `<templa
 - [no-extra-parens]
 
 [no-extra-parens]: https://eslint.org/docs/rules/no-extra-parens
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

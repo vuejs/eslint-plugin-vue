@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/html-self-closing
 description: enforce self-closing style
+since: v3.11.0
 ---
 # vue/html-self-closing
+
 > enforce self-closing style
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -94,6 +96,10 @@ Every option can be set to one of the following values:
 ## :books: Further Reading
 
 - [Style guide - Self closing components](https://v3.vuejs.org/style-guide/#Self-closing-components-strongly-recommended)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v3.11.0
 
 ## :mag: Implementation
 

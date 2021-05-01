@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-v-bind
 description: disallow specific argument in `v-bind`
+since: v7.0.0
 ---
 # vue/no-restricted-v-bind
+
 > disallow specific argument in `v-bind`
 
 ## :book: Rule Details
@@ -112,6 +114,10 @@ The following properties can be specified for the object.
 - [vue/no-restricted-static-attribute]
 
 [vue/no-restricted-static-attribute]: ./no-restricted-static-attribute.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

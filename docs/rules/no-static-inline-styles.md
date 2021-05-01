@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-static-inline-styles
 description: disallow static inline `style` attributes
+since: v7.0.0
 ---
 # vue/no-static-inline-styles
+
 > disallow static inline `style` attributes
 
 ## :book: Rule Details
@@ -62,6 +64,10 @@ The styles reported in this rule mean that we recommend separating them into `<s
 ## :books: Further Reading
 
 - [Guide - Class and Style Bindings / Binding Inline Styles](https://v3.vuejs.org/guide/class-and-style.html#binding-inline-styles)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

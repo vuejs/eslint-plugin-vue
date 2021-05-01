@@ -145,6 +145,48 @@ tester.run('valid-v-bind-sync', rule, {
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent :foo.sync="" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <table>
+          <tr is="my-row"
+            :some-prop.sync="somePropValue"
+            :some-other-prop.sync="someOtherPropValue">
+            <td></td>
+          </tr>
+        </table>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <table>
+          <tr :is="my-row"
+            :some-prop.sync="somePropValue"
+            :some-other-prop.sync="someOtherPropValue">
+            <td></td>
+          </tr>
+        </table>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <table>
+          <tr v-bind:is="myRow"
+            :some-prop.sync="somePropValue"
+            :some-other-prop.sync="someOtherPropValue">
+            <td></td>
+          </tr>
+        </table>
+      </template>
+      `
     }
   ],
   invalid: [
@@ -386,6 +428,18 @@ tester.run('valid-v-bind-sync', rule, {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="(a?.b).c.d" /></template>',
       errors: ["'.sync' modifier has potential null object property access."]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><tr v-on:is="myRow" :some-prop.sync="somePropValue"></template>',
+      errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
+    },
+    {
+      filename: 'test.vue',
+      code:
+        '<template><tr v-bind="myRow" :some-prop.sync="somePropValue"></template>',
+      errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
     }
   ]
 })

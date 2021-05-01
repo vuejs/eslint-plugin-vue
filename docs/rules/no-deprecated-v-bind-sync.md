@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-v-bind-sync
 description: disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
+since: v7.0.0
 ---
 # vue/no-deprecated-v-bind-sync
+
 > disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
@@ -49,6 +51,10 @@ Nothing.
 
 - [Migration Guide - `v-model`](https://v3.vuejs.org/guide/migration/v-model.html)
 - [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 

@@ -5,6 +5,7 @@
 'use strict'
 
 const rules = require('../../tools/lib/rules')
+const path = require('path')
 
 const uncategorizedRules = rules.filter(
   (rule) =>
@@ -122,7 +123,8 @@ module.exports = {
     return {
       resolve: {
         alias: {
-          module: require.resolve('./shim/module')
+          module: require.resolve('./shim/module'),
+          eslint: path.resolve(__dirname, './shim/eslint')
         }
       }
     }

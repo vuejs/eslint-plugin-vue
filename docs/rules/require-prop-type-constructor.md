@@ -3,8 +3,10 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-type-constructor
 description: require prop type to be a constructor
+since: v5.0.0
 ---
 # vue/require-prop-type-constructor
+
 > require prop type to be a constructor
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
@@ -71,6 +73,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Guide - Prop Validation](https://v3.vuejs.org/guide/component-props.html#prop-validation)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 

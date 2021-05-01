@@ -154,6 +154,25 @@ For example:
 
 If you want to disallow `eslint-disable` functionality in `<template>`, disable the [vue/comment-directive](../rules/comment-directive.md) rule.
 
+### Parser Options
+
+This plugin uses [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser).
+For `parserOptions`, you can use the `vueFeatures` options of `vue-eslint-parser`.
+
+```json
+{
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "vueFeatures": {
+      "filter": true,
+      "interpolationAsNonHTML": false,
+    }
+  }
+}
+```
+
+See the [`parserOptions.vueFeatures` documentation for `vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeatures) for more details.
+
 ## :computer: Editor integrations
 
 ### Visual Studio Code
@@ -174,7 +193,7 @@ Example **.vscode/settings.json**:
 }
 ```
 
-If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/linting-error.html) for more info.
+If you use the `Vetur` plugin, set `"vetur.validation.template": false` to avoid default Vetur template validation. Check out [vetur documentation](https://vuejs.github.io/vetur/guide/linting-error.html#linting) for more info.
 
 ### Sublime Text
 
@@ -247,7 +266,7 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 ### Conflict with [Prettier]
 
-If the [Prettier] conflicts with the shareable config provided by this plugin, use [eslint-config-prettier] to resolve it.
+Use [eslint-config-prettier] for [Prettier] not to conflict with the shareable config provided by this plugin.
 
 Example **.eslintrc.js**:
 
@@ -260,20 +279,14 @@ module.exports = {
     // ...
     'plugin:vue/vue3-recommended',
     // ...
-    "prettier",
-    "prettier/vue",
-    // "prettier/@typescript-eslint", // required if you are using @typescript-eslint.
-    // Other settings may be required depending on the plugin you are using. See the eslint-config-prettier documentation for more details.
+    "prettier"
+    // Make sure "prettier" is the last element in this list.
   ],
   // ...
 }
 ```
 
-If the [Prettier] conflicts with the rule you have set, turn off that rule.
-
-Example **.eslintrc.js**:
-
-When the `vue/html-indent` rule conflict with [Prettier].
+If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters]. For example, if you have `vue/html-indent` configured as `error` in `rules`, but it conflicts with Prettier, remove that line:
 
 ```diff
 module.exports = {
@@ -281,7 +294,6 @@ module.exports = {
   rules: {
     // ...
 -    "vue/html-indent": "error",
-+    "vue/html-indent": "off",
     // ...
   },
   // ...
@@ -289,6 +301,7 @@ module.exports = {
 ```
 
 [prettier]: https://prettier.io/
+[prettier-linters]: https://prettier.io/docs/en/integrating-with-linters.html
 [eslint-config-prettier]: https://github.com/prettier/eslint-config-prettier
 
 ### Using JSX
@@ -319,4 +332,4 @@ Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`
 
 You need to turn off Vetur's template validation by adding `vetur.validation.template: false` to your `.vscode/settings.json`.
 
-See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting](https://vuejs.github.io/vetur/linting-error.html#linting).
+See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting](https://vuejs.github.io/vetur/guide/linting-error.html#linting).
