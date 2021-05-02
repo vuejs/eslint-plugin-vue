@@ -100,6 +100,48 @@ tester.run('no-use-computed-property-like-method', rule, {
       <script>
         export default {
           props: {
+            propsString: String,
+            propsNumber: Number,
+            propsObject: Object,
+            propsArray: Array,
+            propsBoolean: Boolean
+          },
+          computed: {
+            computedReturnPropsString() {
+              return this.propsString
+            },
+            computedReturnPropsNumber() {
+              return this.propsNumber
+            },
+            computedReturnPropsObject() {
+              return this.propsObject
+            },
+            computedReturnPropsArray() {
+              return this.propsArray
+            },
+            computedReturnPropsBoolean() {
+              return this.propsBoolean
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnPropsString
+              this.computedReturnPropsNumber
+              this.computedReturnPropsObject
+              this.computedReturnPropsArray
+              this.computedReturnPropsBoolean
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
             propsString: {
               type: String
             },
@@ -416,6 +458,55 @@ tester.run('no-use-computed-property-like-method', rule, {
         'Use this.computedReturnDataObject instead of this.computedReturnDataObject().',
         'Use this.computedReturnDataArray instead of this.computedReturnDataArray().',
         'Use this.computedReturnDataBoolean instead of this.computedReturnDataBoolean().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            propsString: String,
+            propsNumber: Number,
+            propsObject: Object,
+            propsArray: Array,
+            propsBoolean: Boolean
+          },
+          computed: {
+            computedReturnPropsString() {
+              return this.propsString
+            },
+            computedReturnPropsNumber() {
+              return this.propsNumber
+            },
+            computedReturnPropsObject() {
+              return this.propsObject
+            },
+            computedReturnPropsArray() {
+              return this.propsArray
+            },
+            computedReturnPropsBoolean() {
+              return this.propsBoolean
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnPropsString()
+              this.computedReturnPropsNumber()
+              this.computedReturnPropsObject()
+              this.computedReturnPropsArray()
+              this.computedReturnPropsBoolean()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnPropsString instead of this.computedReturnPropsString().',
+        'Use this.computedReturnPropsNumber instead of this.computedReturnPropsNumber().',
+        'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
+        'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
+        'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().'
       ]
     },
     {
