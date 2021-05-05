@@ -48,13 +48,13 @@ This rule aims to warn if no type or an invalid type is used on a button type at
 
 - `button` ... `<button type="button"></button>`
   - `true` (default) ... allow value `button`.
-  - `false"` ... disallow value `button`.
+  - `false` ... disallow value `button`.
 - `submit` ... `<button type="submit"></button>`
   - `true` (default) ... allow value `submit`.
-  - `false"` ... disallow value `submit`.
+  - `false` ... disallow value `submit`.
 - `reset` ... `<button type="reset"></button>`
   - `true` (default) ... allow value `reset`.
-  - `false"` ... disallow value `reset`.
+  - `false` ... disallow value `reset`.
 
 ## :rocket: Version
 
