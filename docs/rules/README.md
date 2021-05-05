@@ -132,6 +132,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
+| [vue/require-emit-types](./require-emit-types.md) | require type definitions in emits |  |
 | [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
 | [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
