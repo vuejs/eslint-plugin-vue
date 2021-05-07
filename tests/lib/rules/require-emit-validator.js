@@ -8,7 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/require-emit-types')
+const rule = require('../../../lib/rules/require-emit-validator')
 
 const RuleTester = require('eslint').RuleTester
 
@@ -17,7 +17,7 @@ const RuleTester = require('eslint').RuleTester
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
-ruleTester.run('require-emit-types', rule, {
+ruleTester.run('require-emit-validator', rule, {
   valid: [
     {
       filename: 'test.vue',
