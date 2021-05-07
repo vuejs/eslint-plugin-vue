@@ -139,6 +139,30 @@ ruleTester.run('require-emit-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        function foo () {}
+        export default {
+          emits: {
+            foo
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { isNumber } from './mod'
+        export default {
+          emits: {
+            foo: isNumber
+          }
+        }
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     }
   ],
 
