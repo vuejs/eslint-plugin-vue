@@ -236,14 +236,54 @@ ruleTester.run('require-emit-types', rule, {
           emits: {
             foo: null
           }
-        }
-      `,
+        }`,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'skipped',
           data: { name: 'foo' },
-          line: 4
+          line: 4,
+          suggestions: [
+            {
+              messageId: 'emptyValidation',
+              output: `
+        export default {
+          emits: {
+            foo: () => true
+          }
+        }`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          emits: {
+            foo: null,
+            bar: (payload) => {}
+          }
+        }`,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      errors: [
+        {
+          messageId: 'skipped',
+          data: { name: 'foo' },
+          line: 4,
+          suggestions: [
+            {
+              messageId: 'emptyValidation',
+              output: `
+        export default {
+          emits: {
+            foo: () => true,
+            bar: (payload) => {}
+          }
+        }`
+            }
+          ]
         }
       ]
     },
