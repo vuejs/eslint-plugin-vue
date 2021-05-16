@@ -69,8 +69,7 @@ tester.run('brace-style', rule, {
       ]
     },
     {
-      code:
-        '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
+      code: '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
       output: `<template><div :[(function(){return(1)})()]="(function(){
 return(1)
 })()" /></template>`,

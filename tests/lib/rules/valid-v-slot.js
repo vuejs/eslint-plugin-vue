@@ -145,8 +145,7 @@ tester.run('valid-v-slot', rule, {
     // parsing error
     {
       filename: 'parsing-error.vue',
-      code:
-        '<template><MyComponent v-slot="." ><div /></MyComponent></template>'
+      code: '<template><MyComponent v-slot="." ><div /></MyComponent></template>'
     }
   ],
   invalid: [
@@ -461,21 +460,18 @@ tester.run('valid-v-slot', rule, {
     // comment value
     {
       filename: 'comment-value1.vue',
-      code:
-        '<template><MyComponent v-slot="/**/" ><div /></MyComponent></template>',
+      code: '<template><MyComponent v-slot="/**/" ><div /></MyComponent></template>',
       errors: [{ messageId: 'requireAttributeValue' }]
     },
     {
       filename: 'comment-value2.vue',
-      code:
-        '<template><MyComponent v-slot=/**/ ><div /></MyComponent></template>',
+      code: '<template><MyComponent v-slot=/**/ ><div /></MyComponent></template>',
       errors: [{ messageId: 'requireAttributeValue' }]
     },
     // empty value
     {
       filename: 'empty-value.vue',
-      code:
-        '<template><MyComponent v-slot="" ><div /></MyComponent></template>',
+      code: '<template><MyComponent v-slot="" ><div /></MyComponent></template>',
       errors: [{ messageId: 'requireAttributeValue' }]
     }
   ]

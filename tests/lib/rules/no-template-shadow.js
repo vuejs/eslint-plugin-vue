@@ -121,8 +121,7 @@ ruleTester.run('no-template-shadow', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-for="i in 5"><div v-for="i in 5"></div></div></template>',
+      code: '<template><div v-for="i in 5"><div v-for="i in 5"></div></div></template>',
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",

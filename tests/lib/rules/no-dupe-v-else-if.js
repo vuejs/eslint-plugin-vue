@@ -370,56 +370,47 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /><div v-else-if="c" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /><div v-else-if="c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="a" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="b" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="b" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="b" /><div v-else-if="d" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="b" /><div v-else-if="d" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="b" /><div v-else-if="e" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="b" /><div v-else-if="e" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="a" /><div v-else-if="a" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="a" /><div v-else-if="a" /></template>',
       errors: [{ messageId: 'unexpected' }, { messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /><div v-else-if="b" /><div v-else-if="a" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a" /><div v-else-if="b" /><div v-else-if="a" /></template>',
       errors: [
         { messageId: 'unexpected' },
         { messageId: 'unexpected' },
@@ -428,20 +419,17 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a"><div v-if="b" /></div><div v-else-if="a" /></template>',
+      code: '<template><div v-if="a"><div v-if="b" /></div><div v-else-if="a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a === 1" /><div v-else-if="a === 1" /></template>',
+      code: '<template><div v-if="a === 1" /><div v-else-if="a === 1" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="1 < a" /><div v-else-if="1 < a" /></template>',
+      code: '<template><div v-if="1 < a" /><div v-else-if="1 < a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -451,14 +439,12 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a && b" /><div v-else-if="a && b" /></template>',
+      code: '<template><div v-if="a && b" /><div v-else-if="a && b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a && b || c" /><div v-else-if="a && b || c" /></template>',
+      code: '<template><div v-if="a && b || c" /><div v-else-if="a && b || c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -468,14 +454,12 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a === 1" /><div v-else-if="a===1" /></template>',
+      code: '<template><div v-if="a === 1" /><div v-else-if="a===1" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a === 1" /><div v-else-if="a === /* comment */ 1" /></template>',
+      code: '<template><div v-if="a === 1" /><div v-else-if="a === /* comment */ 1" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -485,32 +469,27 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="a" /><div v-else-if="b" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="a" /><div v-else-if="b" /></template>',
       errors: [{ messageId: 'unexpected' }, { messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="b || a" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="b || a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a || b" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="a || b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="c || d" /><div v-else-if="a || d" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="c || d" /><div v-else-if="a || d" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="(a === b && fn(c)) || d" /><div v-else-if="fn(c) && a === b" /></template>',
+      code: '<template><div v-if="(a === b && fn(c)) || d" /><div v-else-if="fn(c) && a === b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -520,110 +499,92 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a && b" /><div v-else-if="a && b && c" /></template>',
+      code: '<template><div v-if="a && b" /><div v-else-if="a && b && c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || c" /><div v-else-if="a && b || c" /></template>',
+      code: '<template><div v-if="a || c" /><div v-else-if="a && b || c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && a || b" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && a || b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && (a || b)" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && (a || b)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b && c" /><div v-else-if="d && (a || e && c && b)" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b && c" /><div v-else-if="d && (a || e && c && b)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b && c" /><div v-else-if="b && c && d" /></template>',
+      code: '<template><div v-if="a || b && c" /><div v-else-if="b && c && d" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="b && c" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="b && c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="(a || b) && c" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="(a || b) && c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="(a && (b || c)) || d" /><div v-else-if="(c || b) && e && a" /></template>',
+      code: '<template><div v-if="(a && (b || c)) || d" /><div v-else-if="(c || b) && e && a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a && b || b && c" /><div v-else-if="a && b && c" /></template>',
+      code: '<template><div v-if="a && b || b && c" /><div v-else-if="a && b && c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b && c" /><div v-else-if="d && (c && e && b || a)" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b && c" /><div v-else-if="d && (c && e && b || a)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || (b && (c || d))" /><div v-else-if="(d || c) && b" /></template>',
+      code: '<template><div v-if="a || (b && (c || d))" /><div v-else-if="(d || c) && b" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="(b || a) && c" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="(b || a) && c" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="b && (a || c)" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="b && (a || c)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b || c" /><div v-else-if="a || (b && d) || (c && e)" /></template>',
+      code: '<template><div v-if="a || b || c" /><div v-else-if="a || (b && d) || (c && e)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || (b || c)" /><div v-else-if="a || (b && c)" /></template>',
+      code: '<template><div v-if="a || (b || c)" /><div v-else-if="a || (b && c)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="(a || c) && (b || d)" /></template>',
+      code: '<template><div v-if="a || b" /><div v-else-if="c" /><div v-else-if="d" /><div v-else-if="(a || c) && (b || d)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && (a || d && b)" /></template>',
+      code: '<template><div v-if="a" /><div v-else-if="b" /><div v-else-if="c && (a || d && b)" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -633,8 +594,7 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a || a" /><div v-else-if="a || a" /></template>',
+      code: '<template><div v-if="a || a" /><div v-else-if="a || a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
@@ -649,8 +609,7 @@ tester.run('no-dupe-v-else-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="a && a" /><div v-else-if="a && a" /></template>',
+      code: '<template><div v-if="a && a" /><div v-else-if="a && a" /></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {

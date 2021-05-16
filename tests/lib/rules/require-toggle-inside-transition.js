@@ -32,8 +32,7 @@ tester.run('require-toggle-inside-transition', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><transition><div v-show="show" /></transition></template>'
+      code: '<template><transition><div v-show="show" /></transition></template>'
     },
     {
       filename: 'test.vue',
@@ -41,8 +40,7 @@ tester.run('require-toggle-inside-transition', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><Transition><div v-show="show" /></Transition></template>'
+      code: '<template><Transition><div v-show="show" /></Transition></template>'
     },
     {
       filename: 'test.vue',
@@ -50,28 +48,23 @@ tester.run('require-toggle-inside-transition', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><Transition><component :is="component" /></Transition></template>'
+      code: '<template><Transition><component :is="component" /></Transition></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><Transition><div :is="component" /></Transition></template>'
+      code: '<template><Transition><div :is="component" /></Transition></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><svg height="100" width="100"><transition><circle v-if="show" /></transition></svg> </template>'
+      code: '<template><svg height="100" width="100"><transition><circle v-if="show" /></transition></svg> </template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><svg height="100" width="100"><transition><MyComponent /></transition></svg> </template>'
+      code: '<template><svg height="100" width="100"><transition><MyComponent /></transition></svg> </template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><transition><template v-if="show"><div /></template></transition></template>'
+      code: '<template><transition><template v-if="show"><div /></template></transition></template>'
     }
   ],
   invalid: [
@@ -100,20 +93,17 @@ tester.run('require-toggle-inside-transition', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><transition><div v-for="e in list" /></transition></template>',
+      code: '<template><transition><div v-for="e in list" /></transition></template>',
       errors: [{ messageId: 'expected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><svg height="100" width="100"><transition><circle /></transition></svg> </template>',
+      code: '<template><svg height="100" width="100"><transition><circle /></transition></svg> </template>',
       errors: [{ messageId: 'expected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><transition><template v-for="e in list"><div /></template></transition></template>',
+      code: '<template><transition><template v-for="e in list"><div /></template></transition></template>',
       errors: [{ messageId: 'expected' }]
     }
   ]

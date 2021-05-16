@@ -194,13 +194,11 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div propone="prop" proptwo="prop" propthree="prop"></div></template>'
+      code: '<template><div propone="prop" proptwo="prop" propthree="prop"></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div propone="prop" proptwo="prop" is="header"></div></template>',
+      code: '<template><div propone="prop" proptwo="prop" is="header"></div></template>',
       options: [
         {
           order: [
@@ -221,8 +219,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div ref="header" is="header" propone="prop" proptwo="prop"></div></template>',
+      code: '<template><div ref="header" is="header" propone="prop" proptwo="prop"></div></template>',
       options: [
         {
           order: [
@@ -546,8 +543,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div data-id="foo" aria-test="bar" is="custom" myProp="prop"></div></template>',
+      code: '<template><div data-id="foo" aria-test="bar" is="custom" myProp="prop"></div></template>',
       output:
         '<template><div data-id="foo" is="custom" aria-test="bar" myProp="prop"></div></template>',
       errors: [
@@ -559,8 +555,7 @@ tester.run('attributes-order', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div ref="header" propone="prop" is="header" ></div></template>',
+      code: '<template><div ref="header" propone="prop" is="header" ></div></template>',
       options: [
         {
           order: [
@@ -1317,8 +1312,7 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code:
-        '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
+      code: '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
       output:
         '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [
@@ -1348,8 +1342,7 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code:
-        '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
+      code: '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
       output:
         '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [

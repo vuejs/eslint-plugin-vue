@@ -198,8 +198,7 @@ ruleTester.run('no-multi-spaces', rule, {
       ]
     },
     {
-      code:
-        '<template><div v-for="      i    in    b       ">{{ test }}</div></template>',
+      code: '<template><div v-for="      i    in    b       ">{{ test }}</div></template>',
       output: '<template><div v-for=" i in b ">{{ test }}</div></template>',
       errors: [
         {
