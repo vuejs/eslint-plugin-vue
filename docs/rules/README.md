@@ -157,7 +157,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
-| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
+| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: |
 
 ## Priority A: Essential (Error Prevention) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>
 
@@ -267,7 +267,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
-| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
+| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: |
 
 ## Uncategorized
 
