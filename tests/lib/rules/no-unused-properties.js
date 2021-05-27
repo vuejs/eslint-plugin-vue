@@ -1006,6 +1006,26 @@ tester.run('no-unused-properties', rule, {
       </script>`,
       options: [{ groups: ['props', 'setup'] }]
     },
+    // prop usage in toRef()
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import { toRef } from 'vue'
+
+        export default {
+          props: ['testId'],
+
+          setup(props) {
+            const testIdRef = toRef(props, 'testId');
+
+            // do something with testIdRef
+            console.log(testIdRef);
+          }
+        }
+      </script>`,
+      options: [{ groups: ['props'] }]
+    },
 
     // sparse array
     {
