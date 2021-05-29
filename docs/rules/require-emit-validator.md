@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-emit-validator
 description: require type definitions in emits
+since: v7.10.0
 ---
 # vue/require-emit-validator
 
 > require type definitions in emits
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :gear: This rule is included in .
 
 ## :book: Rule Details
@@ -54,6 +54,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API Reference](https://v3.vuejs.org/api/options-data.html#emits)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.10.0
 
 ## :mag: Implementation
 
