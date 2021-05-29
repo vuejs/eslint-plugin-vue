@@ -56,8 +56,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        "<template><input v-on:keyup.page-down.native='onArrowUp'></template>"
+      code: "<template><input v-on:keyup.page-down.native='onArrowUp'></template>"
     },
     {
       filename: 'test.vue',
@@ -111,8 +110,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        "<template><input v-on:[dynamicArg].unknown.34='onArrowUp'></template>",
+      code: "<template><input v-on:[dynamicArg].unknown.34='onArrowUp'></template>",
       output:
         "<template><input v-on:[dynamicArg].unknown.page-down='onArrowUp'></template>",
       errors: [
@@ -121,8 +119,7 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        "<template><input v-on:[dynamicArg].34.unknown='onArrowUp'></template>",
+      code: "<template><input v-on:[dynamicArg].34.unknown='onArrowUp'></template>",
       output:
         "<template><input v-on:[dynamicArg].page-down.unknown='onArrowUp'></template>",
       errors: [

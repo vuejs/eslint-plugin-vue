@@ -121,8 +121,7 @@ tester.run('component-name-in-template-casing', rule, {
       ]
     },
     {
-      code:
-        '<template><custom-element><TheComponent/></custom-element></template>',
+      code: '<template><custom-element><TheComponent/></custom-element></template>',
       options: [
         'PascalCase',
         { ignores: ['custom-element'], registeredComponentsOnly: false }

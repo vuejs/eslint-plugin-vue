@@ -15,8 +15,7 @@ tester.run('block-spacing', rule, {
   valid: [
     '<template><div :attr="function foo() { return true; }" /></template>',
     {
-      code:
-        '<template><div :attr="function foo() {return true;}" /></template>',
+      code: '<template><div :attr="function foo() {return true;}" /></template>',
       options: ['never']
     },
     '<template><div :[(function(){return(1)})()]="a" /></template>'
@@ -114,8 +113,7 @@ tester.run('block-spacing', rule, {
       ]
     },
     {
-      code:
-        '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
+      code: '<template><div :[(function(){return(1)})()]="(function(){return(1)})()" /></template>',
       output:
         '<template><div :[(function(){return(1)})()]="(function(){ return(1) })()" /></template>',
       errors: [

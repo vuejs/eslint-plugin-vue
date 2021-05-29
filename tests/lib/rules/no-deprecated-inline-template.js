@@ -32,21 +32,18 @@ ruleTester.run('no-deprecated-inline-template', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><my-component :inline-template="foo"><div /></my-component></template>'
+      code: '<template><my-component :inline-template="foo"><div /></my-component></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><my-component Inline-Template="foo"><div /></my-component></template>'
+      code: '<template><my-component Inline-Template="foo"><div /></my-component></template>'
     }
   ],
 
   invalid: [
     {
       filename: 'test.vue',
-      code:
-        '<template><my-component inline-template><div /></my-component></template>',
+      code: '<template><my-component inline-template><div /></my-component></template>',
       errors: [
         {
           line: 1,
@@ -59,14 +56,12 @@ ruleTester.run('no-deprecated-inline-template', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><my-component inline-template=""><div /></my-component></template>',
+      code: '<template><my-component inline-template=""><div /></my-component></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><my-component inline-template="foo"><div /></my-component></template>',
+      code: '<template><my-component inline-template="foo"><div /></my-component></template>',
       errors: [{ messageId: 'unexpected' }]
     }
   ]

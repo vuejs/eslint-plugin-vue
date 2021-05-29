@@ -157,15 +157,13 @@ tester.run('no-extra-parens', rule, {
       errors: [{ messageId: 'unexpected' }]
     },
     {
-      code:
-        '<template><button>{{ ((foo + bar | bitwise)) }}</button></template>',
+      code: '<template><button>{{ ((foo + bar | bitwise)) }}</button></template>',
       output:
         '<template><button>{{ (foo + bar | bitwise) }}</button></template>',
       errors: [{ messageId: 'unexpected' }]
     },
     {
-      code:
-        '<template><button>{{ ((foo | bitwise)) | filter }}</button></template>',
+      code: '<template><button>{{ ((foo | bitwise)) | filter }}</button></template>',
       output:
         '<template><button>{{ (foo | bitwise) | filter }}</button></template>',
       errors: [{ messageId: 'unexpected' }]

@@ -11,9 +11,10 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2018 }
 })
 
-const IRREGULAR_WHITESPACES = '\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000'.split(
-  ''
-)
+const IRREGULAR_WHITESPACES =
+  '\f\v\u0085\ufeff\u00a0\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u202f\u205f\u3000'.split(
+    ''
+  )
 const IRREGULAR_LINE_TERMINATORS = '\u2028\u2029'.split('')
 const ALL_IRREGULAR_WHITESPACES = [].concat(
   IRREGULAR_WHITESPACES,

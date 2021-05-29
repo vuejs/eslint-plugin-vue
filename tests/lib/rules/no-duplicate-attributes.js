@@ -33,8 +33,7 @@ tester.run('no-duplicate-attributes', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div @click="foo" @click="bar"></div></div></template>'
+      code: '<template><div><div @click="foo" @click="bar"></div></div></template>'
     },
     {
       filename: 'test.vue',

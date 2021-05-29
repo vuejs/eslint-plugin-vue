@@ -104,8 +104,7 @@ tester.run('no-restricted-static-attribute', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div foo v bar /><div foo="foo" vv="foo" bar="vfoo" /><div vvv="foo" bar="vv" /></template>',
+      code: '<template><div foo v bar /><div foo="foo" vv="foo" bar="vfoo" /><div vvv="foo" bar="vv" /></template>',
       options: [
         '/^vv/',
         { key: 'foo', value: true },

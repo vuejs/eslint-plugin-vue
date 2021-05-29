@@ -18,20 +18,17 @@ const categoryTitles = {
       'Priority A: Essential (Error Prevention) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>'
   },
   'vue3-strongly-recommended': {
-    text:
-      'Priority B: Strongly Recommended (Improving Readability) for Vue.js 3.x',
+    text: 'Priority B: Strongly Recommended (Improving Readability) for Vue.js 3.x',
     vuepress:
       'Priority B: Strongly Recommended (Improving Readability) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>'
   },
   'vue3-recommended': {
-    text:
-      'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 3.x',
+    text: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 3.x',
     vuepress:
       'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>'
   },
   'vue3-use-with-caution': {
-    text:
-      'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 3.x',
+    text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 3.x',
     vuepress:
       'Priority D: Use with Caution (Potentially Dangerous Patterns) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>'
   },
@@ -41,20 +38,17 @@ const categoryTitles = {
       'Priority A: Essential (Error Prevention) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>'
   },
   'strongly-recommended': {
-    text:
-      'Priority B: Strongly Recommended (Improving Readability) for Vue.js 2.x',
+    text: 'Priority B: Strongly Recommended (Improving Readability) for Vue.js 2.x',
     vuepress:
       'Priority B: Strongly Recommended (Improving Readability) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>'
   },
   recommended: {
-    text:
-      'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 2.x',
+    text: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 2.x',
     vuepress:
       'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>'
   },
   'use-with-caution': {
-    text:
-      'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 2.x',
+    text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 2.x',
     vuepress:
       'Priority D: Use with Caution (Potentially Dangerous Patterns) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>'
   }
