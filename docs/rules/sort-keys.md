@@ -15,7 +15,7 @@ This rule is almost the same rule as core [sort-keys] rule but it will not error
 
 ```json
 {
-    "sort-keys": ["error", "asc", {
+    "vue/sort-keys": ["error", "asc", {
         "caseSensitive": true,
         "ignoreChildrenOf": ["model"],
         "ignoreGrandchildrenOf": ["computed", "directives", "inject", "props", "watch"],
