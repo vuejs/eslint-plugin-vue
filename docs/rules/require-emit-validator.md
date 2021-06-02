@@ -9,8 +9,6 @@ since: v7.10.0
 
 > require type definitions in emits
 
-- :gear: This rule is included in .
-
 ## :book: Rule Details
 
 This rule enforces that a `emits` statement contains type definition.
