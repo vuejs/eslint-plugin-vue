@@ -52,7 +52,7 @@ export default {
 
 ### Options
 
-If there are any options, describe them here. Otherwise, delete this section.
+Nothing.
 
 ## When Not To Use It
 
