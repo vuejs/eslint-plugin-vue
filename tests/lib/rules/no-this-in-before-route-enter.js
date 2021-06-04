@@ -87,7 +87,12 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 7,
+          endLine: 14,
+          endColumn: 11
         }
       ]
     },
@@ -96,7 +101,12 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 7,
+          endLine: 14,
+          endColumn: 11
         }
       ]
     },
@@ -105,7 +115,20 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 7,
+          endLine: 14,
+          endColumn: 11
+        },
+        {
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 19,
+          endLine: 14,
+          endColumn: 23
         }
       ]
     },
@@ -114,7 +137,20 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 7,
+          endLine: 14,
+          endColumn: 11
+        },
+        {
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 14,
+          column: 19,
+          endLine: 14,
+          endColumn: 23
         }
       ]
     },
@@ -125,7 +161,12 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 15,
+          column: 21,
+          endLine: 15,
+          endColumn: 25
         }
       ]
     },
@@ -136,7 +177,12 @@ export default {
       filename: 'ValidComponent.vue',
       errors: [
         {
-          message: rule.errorMessage
+          message:
+            "'beforeRouteEnter' does NOT have access to `this` component instance. https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards.",
+          line: 15,
+          column: 29,
+          endLine: 15,
+          endColumn: 33
         }
       ]
     }
