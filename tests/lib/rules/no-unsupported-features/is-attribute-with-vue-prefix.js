@@ -9,7 +9,7 @@ const rule = require('../../../../lib/rules/no-unsupported-features')
 const utils = require('./utils')
 
 const buildOptions = utils.optionsBuilder(
-  'is-attribute-with-prefixed-vue',
+  'is-attribute-with-vue-prefix',
   '^3.1.0'
 )
 const tester = new RuleTester({
@@ -19,7 +19,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-unsupported-features/is-attribute-with-prefixed-vue', rule, {
+tester.run('no-unsupported-features/is-attribute-with-vue-prefix', rule, {
   valid: [
     {
       code: `
@@ -42,7 +42,7 @@ tester.run('no-unsupported-features/is-attribute-with-prefixed-vue', rule, {
        </template>`,
       options: buildOptions({
         version: '^2.5.0',
-        ignores: ['is-attribute-with-prefixed-vue']
+        ignores: ['is-attribute-with-vue-prefix']
       })
     }
   ],

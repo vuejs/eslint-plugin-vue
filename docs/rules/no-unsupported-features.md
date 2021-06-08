@@ -30,7 +30,7 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.1.0+
-    - `"is-attribute-with-prefixed-vue"` ... [`is` attribute with the prefixed `vue:`](https://v3.vuejs.org/api/special-attributes.html#is)
+    - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
   - Vue.js 3.0.0+
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
