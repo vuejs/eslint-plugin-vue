@@ -2,77 +2,29 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-this-in-before-route-enter
-description: disallow this usage in a beforeRouteEnter method
+description: disallow `this` usage in a `beforeRouteEnter` method
 ---
 # vue/no-this-in-before-route-enter
 
-> disallow this usage in a beforeRouteEnter method
+> disallow `this` usage in a `beforeRouteEnter` method
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
-## Rule Details
+## :book: Rule Details
 
 Because lack of `this` in the `beforeRouteEnter` [(docs)](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards). This behavior isn't obvious, so it's pretty easy to make a `TypeError`. Especially during some refactor. 
 
-Bad:
-
 <eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
 
 ```vue
 <script>
 export default {
   beforeRouteEnter() {
-    this.method(); // Uncaught TypeError: Cannot read property 'method' of undefined      
-  }   
-}
-</script>
-```
-
-</eslint-code-block>
-
-Bad:
-
-<eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
-
-```vue
-<script>
-export default {
-  beforeRouteEnter() {
+    /* ✗ BAD */
+    this.method(); // Uncaught TypeError: Cannot read property 'method' of undefined
     this.attribute = 42;
-  }   
-}
-</script>
-```
-
-</eslint-code-block>
-
-Bad:
-
-<eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
-
-```vue
-<script>
-export default {
-  beforeRouteEnter() {
     if (this.value === 42) {
-        
     }
-  }   
-}
-</script>
-```
-
-</eslint-code-block>
-
-
-Bad:
-
-<eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
-
-```vue
-<script>
-export default {
-  beforeRouteEnter() {
     this.attribute = this.method();
   }   
 }
@@ -81,14 +33,13 @@ export default {
 
 </eslint-code-block>
 
-Good:
-
 <eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
 
 ```vue
 <script>
 export default {
   beforeRouteEnter() {
+    /* ✓ GOOD */
     // anything without this
   }   
 }
@@ -97,15 +48,15 @@ export default {
 
 </eslint-code-block>
 
-### Options
+## :wrench: Options
 
 Nothing.
 
-## When Not To Use It
+## :mute: When Not To Use It
 
 When [vue-router](https://router.vuejs.org/) is not installed.
 
-## Further Reading
+## :books: Further Reading
 
 [vue-router - in-component-guards](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards)
 
