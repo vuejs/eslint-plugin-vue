@@ -32,9 +32,16 @@ Use [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attribu
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/valid-v-is]
+
+[vue/valid-v-is]: ./valid-v-is.md
+
 ## :books: Further Reading
 
-- [v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 
 ## :mag: Implementation
 

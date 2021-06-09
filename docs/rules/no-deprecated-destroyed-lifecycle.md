@@ -10,12 +10,13 @@ since: v7.0.0
 > disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule reports use of deprecated `destroyed` and `beforeDestroy` lifecycle hooks. (in Vue.js 3.0.0+).
 
-<eslint-code-block :rules="{'vue/no-deprecated-destroyed-lifecycle': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-deprecated-destroyed-lifecycle': ['error']}">
 
 ```vue
 <script>

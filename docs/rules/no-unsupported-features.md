@@ -96,6 +96,7 @@ The `"ignores"` option accepts an array of the following strings.
 ## :books: Further Reading
 
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 - [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
 - [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
 - [API (for v2) - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
