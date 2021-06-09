@@ -313,6 +313,7 @@ For example:
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
+| [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow this usage in a beforeRouteEnter method |  |
 | [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
