@@ -10,6 +10,7 @@ since: v6.1.0
 > enforce order of component top-level elements
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -29,7 +30,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 ### `{ "order": [ [ "script", "template" ], "style" ] }` (default)
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error']}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -40,7 +41,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error']}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -51,7 +52,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error']}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error']}">
 
 ```vue
 <!-- ✗ BAD -->
@@ -64,7 +65,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 ### `{ "order": ["template", "script", "style"] }`
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -75,7 +76,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
@@ -88,7 +89,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 ### `{ "order": ["docs", "template", "script", "style"] }`
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -100,7 +101,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
