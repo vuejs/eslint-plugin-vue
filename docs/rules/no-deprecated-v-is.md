@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-v-is
 description: disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
+since: v7.11.0
 ---
 # vue/no-deprecated-v-is
 
 > disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -42,6 +42,10 @@ Use [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attribu
 
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.11.0
 
 ## :mag: Implementation
 
