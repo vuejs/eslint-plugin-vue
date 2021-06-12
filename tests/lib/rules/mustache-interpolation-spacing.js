@@ -32,13 +32,11 @@ ruleTester.run('mustache-interpolation-spacing', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template>             <div id="               "></div>         </template>'
+      code: '<template>             <div id="               "></div>         </template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template> <div :style="  " :class="       foo      " v-if=foo   ></div>      </template>'
+      code: '<template> <div :style="  " :class="       foo      " v-if=foo   ></div>      </template>'
     },
     {
       filename: 'test.vue',

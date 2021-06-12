@@ -24,13 +24,11 @@ tester.run('block-tag-newline', rule, {
       options: [{ singleline: 'never', multiline: 'never' }]
     },
     {
-      code:
-        '<template>\n<input>\n</template>\n<script>\nlet a\nlet b\n</script>',
+      code: '<template>\n<input>\n</template>\n<script>\nlet a\nlet b\n</script>',
       options: [{ singleline: 'always', multiline: 'always' }]
     },
     {
-      code:
-        '<template>\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n</script>',
+      code: '<template>\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n</script>',
       options: [{ singleline: 'always', multiline: 'always', maxEmptyLines: 1 }]
     },
     {
@@ -42,8 +40,7 @@ tester.run('block-tag-newline', rule, {
       options: [{ multiline: 'never' }]
     },
     {
-      code:
-        '<template>\n<div>\n</div>\n</template>\n<script>\nlet a\nlet b\n</script>',
+      code: '<template>\n<div>\n</div>\n</template>\n<script>\nlet a\nlet b\n</script>',
       options: [{ singleline: 'never' }]
     },
     // invalid
@@ -110,8 +107,7 @@ tester.run('block-tag-newline', rule, {
       ]
     },
     {
-      code:
-        '<template>\n<div>\n</div>\n</template>\n<script>\nlet a\n</script>',
+      code: '<template>\n<div>\n</div>\n</template>\n<script>\nlet a\n</script>',
       output: '<template><div>\n</div></template>\n<script>let a</script>',
       options: [{ singleline: 'never', multiline: 'never' }],
       errors: [
@@ -166,8 +162,7 @@ tester.run('block-tag-newline', rule, {
       ]
     },
     {
-      code:
-        '<template>\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n</script>',
+      code: '<template>\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n</script>',
       output:
         '<template>\n<input>\n</template>\n<script>\nlet a\nlet b\n</script>',
       options: [{ singleline: 'always', multiline: 'always' }],
@@ -199,8 +194,7 @@ tester.run('block-tag-newline', rule, {
       ]
     },
     {
-      code:
-        '<template>\n\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n\n</script>',
+      code: '<template>\n\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n\n</script>',
       output:
         '<template>\n\n<input>\n\n</template>\n<script>\n\nlet a\nlet b\n\n</script>',
       options: [
@@ -222,8 +216,7 @@ tester.run('block-tag-newline', rule, {
       ]
     },
     {
-      code:
-        '<template><input>\n\n</template>\n<script>let a\nlet b\n\n\n</script><docs>\n#</docs>',
+      code: '<template><input>\n\n</template>\n<script>let a\nlet b\n\n\n</script><docs>\n#</docs>',
       output:
         '<template><input>\n\n</template>\n<script>let a\nlet b</script><docs>\n#\n</docs>',
       options: [

@@ -37,6 +37,12 @@ ruleTester.run('no-deprecated-html-element-is', rule, {
     {
       filename: 'test.vue',
       code: '<template><component :is="\'foo\'" /></template>'
+    },
+
+    // is="vue:xxx"
+    {
+      filename: 'test.vue',
+      code: '<template><div is="vue:foo" /></template>'
     }
   ],
 

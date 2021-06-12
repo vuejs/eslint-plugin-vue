@@ -29,36 +29,30 @@ tester.run('no-confusing-v-for-v-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" v-if="x"></div></div></template>'
+      code: '<template><div><div v-for="x in list" v-if="x"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" v-if="x.foo"></div></div></template>'
+      code: '<template><div><div v-for="x in list" v-if="x.foo"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(x,i) in list" v-if="i%2==0"></div></div></template>'
+      code: '<template><div><div v-for="(x,i) in list" v-if="i%2==0"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-if="shown"><div v-for="(x,i) in list"></div></div></template>'
+      code: '<template><div v-if="shown"><div v-for="(x,i) in list"></div></div></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" v-if="shown"></div></div></template>',
+      code: '<template><div><div v-for="x in list" v-if="shown"></div></div></template>',
       errors: ["This 'v-if' should be moved to the wrapper element."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" v-if="list.length&gt;0"></div></div></template>',
+      code: '<template><div><div v-for="x in list" v-if="list.length&gt;0"></div></div></template>',
       errors: ["This 'v-if' should be moved to the wrapper element."]
     }
   ]

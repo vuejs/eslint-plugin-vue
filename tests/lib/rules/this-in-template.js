@@ -121,41 +121,73 @@ function createInvalidTests(prefix, options, message, type) {
   return [
     {
       code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
+      output: `<template><div>{{ ${suggestionPrefix(
+        prefix,
+        options
+      )}foo }}</div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div>{{ ${prefix}foo() }}</div></template><!-- ${comment} -->`,
+      output: `<template><div>{{ ${suggestionPrefix(
+        prefix,
+        options
+      )}foo() }}</div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div>{{ ${prefix}foo.bar() }}</div></template><!-- ${comment} -->`,
+      output: `<template><div>{{ ${suggestionPrefix(
+        prefix,
+        options
+      )}foo.bar() }}</div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div :class="${prefix}foo"></div></template><!-- ${comment} -->`,
+      output: `<template><div :class="${suggestionPrefix(
+        prefix,
+        options
+      )}foo"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div :class="{foo: ${prefix}foo}"></div></template><!-- ${comment} -->`,
+      output: `<template><div :class="{foo: ${suggestionPrefix(
+        prefix,
+        options
+      )}foo}"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div :class="{foo: ${prefix}foo()}"></div></template><!-- ${comment} -->`,
+      output: `<template><div :class="{foo: ${suggestionPrefix(
+        prefix,
+        options
+      )}foo()}"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div v-if="${prefix}foo"></div></template><!-- ${comment} -->`,
+      output: `<template><div v-if="${suggestionPrefix(
+        prefix,
+        options
+      )}foo"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     },
     {
       code: `<template><div v-for="foo in ${prefix}bar"></div></template><!-- ${comment} -->`,
+      output: `<template><div v-for="foo in ${suggestionPrefix(
+        prefix,
+        options
+      )}bar"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
     }
@@ -172,11 +204,13 @@ function createInvalidTests(prefix, options, message, type) {
       : [
           {
             code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+            output: `<template><div>{{ xs }}</div></template><!-- ${comment} -->`,
             errors: [{ message, type }],
             options
           },
           {
             code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
+            output: `<template><div>{{ xs0AZ_foo }}</div></template><!-- ${comment} -->`,
             errors: [{ message, type }],
             options
           }
@@ -225,13 +259,23 @@ ruleTester.run('this-in-template', rule, {
     .concat([
       {
         code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
+        output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,
         errors: ["Unexpected usage of 'this'."],
         options: ['never']
       },
       {
         code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
+        output: `<template><div :class="{ foo: $foo }"></div></template><!-- never -->`,
         errors: ["Unexpected usage of 'this'."],
         options: ['never']
       }
     ])
 })
+
+function suggestionPrefix(prefix, options) {
+  if (options[0] === 'always' && !['this.', 'this?.'].includes(prefix)) {
+    return 'this.'
+  } else {
+    return ''
+  }
+}

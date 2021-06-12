@@ -57,8 +57,7 @@ ruleTester.run('no-deprecated-filter', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-for="msg in messages">{{ msg | filter }}</div></template>',
+      code: '<template><div v-for="msg in messages">{{ msg | filter }}</div></template>',
       errors: ['Filters are deprecated.']
     },
     {
@@ -73,8 +72,7 @@ ruleTester.run('no-deprecated-filter', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div v-bind:id="msg | filterA | filterB"></div></template>',
+      code: '<template><div v-bind:id="msg | filterA | filterB"></div></template>',
       errors: ['Filters are deprecated.']
     }
   ]

@@ -51,63 +51,51 @@ tester.run('valid-v-bind-sync', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><svg><MyComponent :foo.sync="this.foo().bar" /></svg></template>'
+      code: '<template><svg><MyComponent :foo.sync="this.foo().bar" /></svg></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="x.foo" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="x.foo" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x - 1]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x - 1]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`${x}`]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`${x}`]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`prefix_${x}`]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[`prefix_${x}`]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x ? x : \'_\']" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x ? x : \'_\']" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x || \'_\']" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x || \'_\']" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x()]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[x()]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[/r/.match(x) ? 0 : 1]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[/r/.match(x) ? 0 : 1]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[typeof x]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[typeof x]" /></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[tag`${x}`]" /></div></div></template>'
+      code: '<template><div><div v-for="x in list"><MyComponent :foo.sync="foo[tag`${x}`]" /></div></div></template>'
     },
     // not .sync
     {
@@ -431,14 +419,12 @@ tester.run('valid-v-bind-sync', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><tr v-on:is="myRow" :some-prop.sync="somePropValue"></template>',
+      code: '<template><tr v-on:is="myRow" :some-prop.sync="somePropValue"></template>',
       errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><tr v-bind="myRow" :some-prop.sync="somePropValue"></template>',
+      code: '<template><tr v-bind="myRow" :some-prop.sync="somePropValue"></template>',
       errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
     }
   ]

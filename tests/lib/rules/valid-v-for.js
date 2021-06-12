@@ -37,68 +37,55 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(x, i, k) in list"></div></div></template>'
+      code: '<template><div><div v-for="(x, i, k) in list"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(x, i, k) of list"></div></div></template>'
+      code: '<template><div><div v-for="(x, i, k) of list"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="({id, name}, i, k) of list"></div></div></template>'
+      code: '<template><div><div v-for="({id, name}, i, k) of list"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="([id, name], i, k) of list"></div></div></template>'
+      code: '<template><div><div v-for="([id, name], i, k) of list"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><your-component v-for="x in list" :key="x.id"></your-component></div></template>'
+      code: '<template><div><your-component v-for="x in list" :key="x.id"></your-component></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
+      code: '<template><div><div is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div :is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
+      code: '<template><div><div :is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><custom-component :key="x"></custom-component></template></div></template>'
+      code: '<template><div><template v-for="x in list"><custom-component :key="x"></custom-component></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><div :key="x"></div></template></div></template>'
+      code: '<template><div><template v-for="x in list"><div :key="x"></div></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><div></div></template></div></template>'
+      code: '<template><div><template v-for="x in list"><div></div></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="x of list"><slot name="item" /></template></template>'
+      code: '<template><template v-for="x of list"><slot name="item" /></template></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="x of list">foo<div></div></template></template>'
+      code: '<template><template v-for="x of list">foo<div></div></template></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x of list"><div v-for="foo of x" :key="foo"></div></template></div></template>'
+      code: '<template><div><template v-for="x of list"><div v-for="foo of x" :key="foo"></div></template></div></template>'
     },
     {
       filename: 'test.vue',
@@ -131,59 +118,48 @@ tester.run('valid-v-for', rule, {
     // key on <template> : In Vue.js 3.x, you can place key on <template>.
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" v-bind:key="x"><div /></template></div></template>'
+      code: '<template><div><template v-for="x in list" v-bind:key="x"><div /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" v-bind:key="x"><MyComp /></template></div></template>'
+      code: '<template><div><template v-for="x in list" v-bind:key="x"><MyComp /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x"><div /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x"><div /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x"><MyComp /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x"><MyComp /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x.id"><div /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x.id"><div /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x.id"><MyComp /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x.id"><MyComp /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="(x, i) in list" :key="i"><div /></template></div></template>'
+      code: '<template><div><template v-for="(x, i) in list" :key="i"><div /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="(x, i) in list" :key="i"><MyComp /></template></div></template>'
+      code: '<template><div><template v-for="(x, i) in list" :key="i"><MyComp /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x"><custom-component></custom-component></template></div></template>'
     },
     // key on <slot> : In Vue.js 3.x, you can place key on <slot>.
     {
       filename: 'test.vue',
-      code:
-        '<template><div><slot v-for="x in list" :key="x"><div /></slot></div></template>'
+      code: '<template><div><slot v-for="x in list" :key="x"><div /></slot></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><slot v-for="x in list" :key="x"><MyComp /></slot></div></template>'
+      code: '<template><div><slot v-for="x in list" :key="x"><MyComp /></slot></div></template>'
     },
     // parsing error
     {
@@ -192,8 +168,7 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="xin list"><div></div></template></div></template>'
+      code: '<template><div><template v-for="xin list"><div></div></template></div></template>'
     },
     // comment value (parsing error)
     {
@@ -219,102 +194,87 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(,a,b) in list"></div></div></template>',
+      code: '<template><div><div v-for="(,a,b) in list"></div></div></template>',
       errors: ["Invalid alias ''."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(a,,b) in list"></div></div></template>',
+      code: '<template><div><div v-for="(a,,b) in list"></div></div></template>',
       errors: ["Invalid alias ''."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(a,b,,) in list"></div></div></template>',
+      code: '<template><div><div v-for="(a,b,,) in list"></div></div></template>',
       errors: ["Invalid alias ''."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(a,{b,c}) in list"></div></div></template>',
+      code: '<template><div><div v-for="(a,{b,c}) in list"></div></div></template>',
       errors: ["Invalid alias '{b,c}'."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(a,b,{c,d}) in list"></div></div></template>',
+      code: '<template><div><div v-for="(a,b,{c,d}) in list"></div></div></template>',
       errors: ["Invalid alias '{c,d}'."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><your-component v-for="x in list"></your-component></div></template>',
+      code: '<template><div><your-component v-for="x in list"></your-component></div></template>',
       errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div is="your-component" v-for="x in list"></div></div></template>',
+      code: '<template><div><div is="your-component" v-for="x in list"></div></div></template>',
       errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div :is="your-component" v-for="x in list"></div></div></template>',
+      code: '<template><div><div :is="your-component" v-for="x in list"></div></div></template>',
       errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-bind:is="your-component" v-for="x in list"></div></div></template>',
+      code: '<template><div><div v-bind:is="your-component" v-for="x in list"></div></div></template>',
       errors: ["Custom elements in iteration require 'v-bind:key' directives."]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" :key="100"></div></div></template>',
+      code: '<template><div><div v-for="x in list" :key="100"></div></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom-component v-for="x in list" :key="100"></custom-component></div></template>',
+      code: '<template><div><custom-component v-for="x in list" :key="100"></custom-component></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="x in list" :key="foo"></div></div></template>',
+      code: '<template><div><div v-for="x in list" :key="foo"></div></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom-component v-for="x in list" :key="foo"></custom-component></div></template>',
+      code: '<template><div><custom-component v-for="x in list" :key="foo"></custom-component></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-for="(item, index) in suggestions" :key></div></div></template>',
+      code: '<template><div><div v-for="(item, index) in suggestions" :key></div></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x of list"><div v-for="foo of y" :key="foo"></div></template></div></template>',
+      code: '<template><div><template v-for="x of list"><div v-for="foo of y" :key="foo"></div></template></div></template>',
       errors: [
         "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
       ]

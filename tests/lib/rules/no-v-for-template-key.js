@@ -47,8 +47,7 @@ tester.run('no-v-for-template-key', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-bind:key="foo"></template></div></template>'
+      code: '<template><div><template v-bind:key="foo"></template></div></template>'
     },
     {
       filename: 'test.vue',
@@ -56,44 +55,38 @@ tester.run('no-v-for-template-key', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-slot="item" :key="item.id"><div /></template></template>'
+      code: '<template><template v-slot="item" :key="item.id"><div /></template></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="item in list"><template :key="item.id"><div /></template></template></template>'
+      code: '<template><template v-for="item in list"><template :key="item.id"><div /></template></template></template>'
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="item in list" :key="item.id"><div /></template></template>',
+      code: '<template><template v-for="item in list" :key="item.id"><div /></template></template>',
       errors: [
         "'<template v-for>' cannot be keyed. Place the key on real elements instead."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="(item, i) in list" :key="i"><div /></template></template>',
+      code: '<template><template v-for="(item, i) in list" :key="i"><div /></template></template>',
       errors: [
         "'<template v-for>' cannot be keyed. Place the key on real elements instead."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="item in list" :key="foo + item.id"><div /></template></template>',
+      code: '<template><template v-for="item in list" :key="foo + item.id"><div /></template></template>',
       errors: [
         "'<template v-for>' cannot be keyed. Place the key on real elements instead."
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><template v-for="item in list" key="foo"><div /></template></template>',
+      code: '<template><template v-for="item in list" key="foo"><div /></template></template>',
       errors: [
         "'<template v-for>' cannot be keyed. Place the key on real elements instead."
       ]

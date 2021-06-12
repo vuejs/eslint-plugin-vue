@@ -42,7 +42,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
-| [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) |  |
+| [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-dollar-listeners-api](./no-deprecated-dollar-listeners-api.md) | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-dollar-scopedslots-api](./no-deprecated-dollar-scopedslots-api.md) | disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-events-api](./no-deprecated-events-api.md) | disallow using deprecated events api (in Vue.js 3.0.0+) |  |
@@ -50,7 +50,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-deprecated-functional-template](./no-deprecated-functional-template.md) | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-html-element-is](./no-deprecated-html-element-is.md) | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-inline-template](./no-deprecated-inline-template.md) | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  |
-| [vue/no-deprecated-props-default-this](./no-deprecated-props-default-this.md) | disallow props default function `this` access |  |
+| [vue/no-deprecated-props-default-this](./no-deprecated-props-default-this.md) | disallow deprecated `this` access in props default function (in Vue.js 3.0.0+) |  |
 | [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: |
 | [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: |
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: |
@@ -157,7 +157,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
-| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
+| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: |
 
 ## Priority A: Essential (Error Prevention) <badge text="for Vue.js 2.x" vertical="middle" type="warn">for Vue.js 2.x</badge>
 
@@ -267,7 +267,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: |
-| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template |  |
+| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: |
 
 ## Uncategorized
 
@@ -298,6 +298,7 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
+| [vue/no-deprecated-v-is](./no-deprecated-v-is.md) | disallow deprecated `v-is` directive (in Vue.js 3.1.0+) | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
@@ -313,6 +314,7 @@ For example:
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
+| [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  |
 | [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
@@ -321,6 +323,7 @@ For example:
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
+| [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits |  |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |

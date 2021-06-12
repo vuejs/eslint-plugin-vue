@@ -417,8 +417,7 @@ tester.run('require-explicit-emits', rule, {
           endColumn: 33,
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -431,8 +430,7 @@ emits: ['foo']
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -797,8 +795,7 @@ emits: {'foo': null}
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -813,8 +810,7 @@ emits: ['foo']
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1308,8 +1304,7 @@ emits: {'foo': null}
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1324,8 +1319,7 @@ emits: ['foo']
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1362,8 +1356,7 @@ emits: {'foo': null}
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1378,8 +1371,7 @@ emits: ['foo'],
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1415,8 +1407,7 @@ emits: {'foo': null},
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1430,8 +1421,7 @@ emits: ['foo'],
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1466,8 +1456,7 @@ emits: {'foo': null},
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1481,8 +1470,7 @@ emits: ['foo']
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1517,8 +1505,7 @@ emits: {'foo': null}
             'The "foo" event has been triggered but not declared on `emits` option.',
           suggestions: [
             {
-              desc:
-                'Add the `emits` option with array syntax and define "foo" event.',
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>
@@ -1532,8 +1519,7 @@ emits: ['foo']
       `
             },
             {
-              desc:
-                'Add the `emits` option with object syntax and define "foo" event.',
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
               output: `
       <template>
         <div @click="$emit('foo')"/>

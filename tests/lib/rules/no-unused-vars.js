@@ -30,23 +30,19 @@ tester.run('no-unused-vars', rule, {
       code: '<template><ol v-for="i in 5"><li :prop="i"></li></ol></template>'
     },
     {
-      code:
-        '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{j}}</comp></template>'
+      code: '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{j}}</comp></template>'
     },
     {
-      code:
-        '<template><ol v-for="i in data"><li v-for="f in i">{{ f.bar.baz }}</li></ol></template>'
+      code: '<template><ol v-for="i in data"><li v-for="f in i">{{ f.bar.baz }}</li></ol></template>'
     },
     {
       code: '<template><template scope="props">{{props}}</template></template>'
     },
     {
-      code:
-        '<template><template scope="props"><span v-if="props"></span></template></template>'
+      code: '<template><template scope="props"><span v-if="props"></span></template></template>'
     },
     {
-      code:
-        '<template><div v-for="(item, key) in items" :key="key">{{item.name}}</div></template>'
+      code: '<template><div v-for="(item, key) in items" :key="key">{{item.name}}</div></template>'
     },
     {
       code: '<template><div v-for="(v, i, c) in foo">{{c}}</div></template>'
@@ -84,18 +80,15 @@ tester.run('no-unused-vars', rule, {
       errors: ["'props' is defined but never used."]
     },
     {
-      code:
-        '<template><span><template scope="props"></template></span></template>',
+      code: '<template><span><template scope="props"></template></span></template>',
       errors: ["'props' is defined but never used."]
     },
     {
-      code:
-        '<template><div v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></div></template>',
+      code: '<template><div v-for="i in 5"><comp v-for="j in 10">{{i}}{{i}}</comp></div></template>',
       errors: ["'j' is defined but never used."]
     },
     {
-      code:
-        '<template><ol v-for="i in data"><li v-for="f in i"></li></ol></template>',
+      code: '<template><ol v-for="i in data"><li v-for="f in i"></li></ol></template>',
       errors: ["'f' is defined but never used."]
     },
     {
@@ -118,8 +111,7 @@ tester.run('no-unused-vars', rule, {
       errors: ["'c' is defined but never used."]
     },
     {
-      code:
-        '<template><div v-for="(item, key) in items" :key="item.id">{{item.name}}</div></template>',
+      code: '<template><div v-for="(item, key) in items" :key="item.id">{{item.name}}</div></template>',
       errors: ["'key' is defined but never used."]
     },
     {
@@ -149,8 +141,7 @@ tester.run('no-unused-vars', rule, {
       options: [{ ignorePattern: '^ignore' }]
     },
     {
-      code:
-        '<template><span><template scope="props"></template></span></template>',
+      code: '<template><span><template scope="props"></template></span></template>',
       errors: ["'props' is defined but never used."],
       options: [{ ignorePattern: '^ignore' }]
     },
@@ -164,23 +155,19 @@ tester.run('no-unused-vars', rule, {
       errors: ["'a' is defined but never used."]
     },
     {
-      code:
-        '<template><my-component v-slot="a" >{{d}}</my-component></template>',
+      code: '<template><my-component v-slot="a" >{{d}}</my-component></template>',
       errors: ["'a' is defined but never used."]
     },
     {
-      code:
-        '<template><my-component v-for="i in foo" v-slot="a" >{{a}}</my-component></template>',
+      code: '<template><my-component v-for="i in foo" v-slot="a" >{{a}}</my-component></template>',
       errors: ["'i' is defined but never used."]
     },
     {
-      code:
-        '<template><my-component v-for="i in foo" v-slot="a" >{{i}}</my-component></template>',
+      code: '<template><my-component v-for="i in foo" v-slot="a" >{{i}}</my-component></template>',
       errors: ["'a' is defined but never used."]
     },
     {
-      code:
-        '<template><div v-for="({a, b}, [c, d], e, f) in foo" >{{f}}</div></template>',
+      code: '<template><div v-for="({a, b}, [c, d], e, f) in foo" >{{f}}</div></template>',
       errors: [
         "'a' is defined but never used.",
         "'b' is defined but never used.",
@@ -189,8 +176,7 @@ tester.run('no-unused-vars', rule, {
       ]
     },
     {
-      code:
-        '<template><div v-for="({a, b}, c, [d], e, f) in foo" >{{f}}</div></template>',
+      code: '<template><div v-for="({a, b}, c, [d], e, f) in foo" >{{f}}</div></template>',
       errors: [
         "'a' is defined but never used.",
         "'b' is defined but never used.",
@@ -198,8 +184,7 @@ tester.run('no-unused-vars', rule, {
       ]
     },
     {
-      code:
-        '<template><my-component v-slot="{a, b, c, d}" >{{d}}</my-component></template>',
+      code: '<template><my-component v-slot="{a, b, c, d}" >{{d}}</my-component></template>',
       errors: [
         "'a' is defined but never used.",
         "'b' is defined but never used.",
@@ -207,8 +192,7 @@ tester.run('no-unused-vars', rule, {
       ]
     },
     {
-      code:
-        '<template><div v-for="({a, b: bar}, c = 1, [d], e, f) in foo" >{{f}}</div></template>',
+      code: '<template><div v-for="({a, b: bar}, c = 1, [d], e, f) in foo" >{{f}}</div></template>',
       errors: [
         "'a' is defined but never used.",
         "'bar' is defined but never used.",

@@ -36,8 +36,7 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><slot><button type="button">Hello World</button></slot></template>'
+      code: '<template><slot><button type="button">Hello World</button></slot></template>'
     },
     {
       filename: 'test.vue',
@@ -191,8 +190,7 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><button>Hello World</button><button>Hello World</button></template>',
+      code: '<template><button>Hello World</button><button>Hello World</button></template>',
       errors: [
         {
           message: 'Missing an explicit type attribute for button.',

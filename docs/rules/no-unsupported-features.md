@@ -29,6 +29,8 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.1.0+
+    - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
   - Vue.js 3.0.0+
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
@@ -94,6 +96,7 @@ The `"ignores"` option accepts an array of the following strings.
 ## :books: Further Reading
 
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 - [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
 - [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
 - [API (for v2) - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
