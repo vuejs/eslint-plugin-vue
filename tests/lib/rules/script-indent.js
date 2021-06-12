@@ -115,7 +115,8 @@ const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 2022,
-    sourceType: 'module'
+    sourceType: 'module',
+    parser: require.resolve('espree') // espree v8.0.0-beta.x
   }
 })
 
