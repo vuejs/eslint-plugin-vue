@@ -26,6 +26,20 @@ tester.run('object-curly-spacing', rule, {
     {
       code: '<template><div :[{a:1}]="a" /></template>',
       options: ['always']
+    },
+    {
+      code: `
+      <template>
+        <div v-bind="{foo: {bar: 'baz'} }">
+          Hello World
+        </div>
+      </template>`,
+      options: [
+        'never',
+        {
+          objectsInObjects: true
+        }
+      ]
     }
   ],
   invalid: [
@@ -96,6 +110,52 @@ tester.run('object-curly-spacing', rule, {
       errors: [
         "A space is required after '{'.",
         "A space is required before '}'."
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div v-bind="{ foo: { bar: 'baz' }}">
+          Hello World
+        </div>
+      </template>`,
+      options: [
+        'never',
+        {
+          objectsInObjects: true
+        }
+      ],
+      output: `
+      <template>
+        <div v-bind="{foo: {bar: 'baz'} }">
+          Hello World
+        </div>
+      </template>`,
+      errors: [
+        "There should be no space after '{'.",
+        "There should be no space after '{'.",
+        "There should be no space before '}'.",
+        "A space is required before '}'."
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div v-bind="{ foo: { bar: 'baz' }}">
+          Hello World
+        </div>
+      </template>`,
+      options: ['never'],
+      output: `
+      <template>
+        <div v-bind="{foo: {bar: 'baz'}}">
+          Hello World
+        </div>
+      </template>`,
+      errors: [
+        "There should be no space after '{'.",
+        "There should be no space after '{'.",
+        "There should be no space before '}'."
       ]
     }
   ]
