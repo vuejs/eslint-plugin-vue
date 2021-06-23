@@ -11,6 +11,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const semver = require('semver')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/script-indent')
 
@@ -36,21 +37,37 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
  * @returns {object} The loaded patterns.
  */
 function loadPatterns(additionalValid, additionalInvalid) {
-  const valid = fs.readdirSync(FIXTURE_ROOT).map((filename) => {
-    const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
-    const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-    const code = code0.replace(commentPattern, `$1${filename}$3`)
-    const baseObj = JSON.parse(commentPattern.exec(code0)[2])
-    if ('parser' in baseObj) {
-      baseObj.parser = require.resolve(baseObj.parser)
-    }
-    if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
-      baseObj.parserOptions.parser = require.resolve(
-        baseObj.parserOptions.parser
-      )
-    }
-    return Object.assign(baseObj, { code, filename })
-  })
+  const valid = fs
+    .readdirSync(FIXTURE_ROOT)
+    .map((filename) => {
+      const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
+      const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
+      const code = code0.replace(commentPattern, `$1${filename}$3`)
+      const baseObj = JSON.parse(commentPattern.exec(code0)[2])
+      if ('parser' in baseObj) {
+        baseObj.parser = require.resolve(baseObj.parser)
+      }
+      if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
+        baseObj.parserOptions.parser = require.resolve(
+          baseObj.parserOptions.parser
+        )
+      }
+      return Object.assign(baseObj, { code, filename })
+    })
+    .filter((obj) => {
+      if (obj.requirements) {
+        if (
+          Object.entries(obj.requirements).some(([pkgName, pkgVersion]) => {
+            const pkg = require(`${pkgName}/package.json`)
+            return !semver.satisfies(pkg.version, pkgVersion)
+          })
+        ) {
+          return false
+        }
+        delete obj.requirements
+      }
+      return true
+    })
   const invalid = valid
     .map((pattern) => {
       const kind =
