@@ -82,7 +82,7 @@ export function isOpeningBracketToken(token: Token): boolean
 export function isClosingBracketToken(token: Token): boolean
 export function isOpeningBraceToken(token: Token): boolean
 export function isClosingBraceToken(token: Token): boolean
-// export function isCommentToken(token: Token): token is Comment
+export function isCommentToken(token: Token): token is Comment
 export function isNotArrowToken(token: Token): boolean
 export function isNotCommaToken(token: Token): boolean
 export function isNotSemicolonToken(token: Token): boolean
@@ -93,4 +93,4 @@ export function isNotOpeningBracketToken(token: Token): boolean
 export function isNotClosingBracketToken(token: Token): boolean
 export function isNotOpeningBraceToken(token: Token): boolean
 export function isNotClosingBraceToken(token: Token): boolean
-// export function isNotCommentToken(token: Token): boolean
+export function isNotCommentToken(token: Token): boolean
