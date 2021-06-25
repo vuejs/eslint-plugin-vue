@@ -405,6 +405,205 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </MyComponent>
       </template>`,
       errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1499
+      code: `
+      <template>
+        <some-component>
+          <template slot="some-slot">
+            This works 1
+          </template>
+
+          <template v-if="true"> <!-- some arbitrary conditional -->
+            <template slot="some-slot">
+              This works 2
+            </template>
+          </template>
+        </some-component>
+      </template>`,
+      output: `
+      <template>
+        <some-component>
+          <template v-slot:some-slot>
+            This works 1
+          </template>
+
+          <template v-if="true"> <!-- some arbitrary conditional -->
+            <template slot="some-slot">
+              This works 2
+            </template>
+          </template>
+        </some-component>
+      </template>`,
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 9
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-for="x in xs" slot="one">
+            A
+          </template>
+          <template v-for="x in xs" :slot="x">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-for="x in xs" slot="one">
+            A
+          </template>
+          <template v-for="x in xs" v-slot:[x]>
+            B
+          </template>
+        </my-component>
+      </template>`,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template slot="one">
+            A
+          </template>
+          <template slot="one">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template slot="one">
+            A
+          </template>
+          <template slot="one">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-if="c" slot="one">
+            A
+          </template>
+          <template v-else slot="one">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-if="c" v-slot:one>
+            A
+          </template>
+          <template v-else v-slot:one>
+            B
+          </template>
+        </my-component>
+      </template>`,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-for="x in xs" :slot="x">
+            A
+          </template>
+          <template v-for="x in xs" :slot="x">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: null,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-for="x in ys" :slot="x">
+            A
+          </template>
+          <template v-for="x in xs" :slot="x">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-for="x in ys" v-slot:[x]>
+            A
+          </template>
+          <template v-for="x in xs" v-slot:[x]>
+            B
+          </template>
+        </my-component>
+      </template>`,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-for="(x,y) in xs" :slot="x+y">
+            A
+          </template>
+          <template v-for="x in xs" :slot="x">
+            B
+          </template>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-for="(x,y) in xs" :slot="x+y">
+            A
+          </template>
+          <template v-for="x in xs" v-slot:[x]>
+            B
+          </template>
+        </my-component>
+      </template>`,
+      errors: [
+        '`slot` attributes are deprecated.',
+        '`slot` attributes are deprecated.'
+      ]
     }
   ]
 })
