@@ -179,6 +179,8 @@ export type NodeListenerMap = {
 export type ESNodeListenerMap = {
   Identifier: ES.Identifier
   'Identifier:exit': ES.Identifier
+  PrivateIdentifier: ES.PrivateIdentifier
+  'PrivateIdentifier:exit': ES.PrivateIdentifier
   Literal: ES.Literal
   'Literal:exit': ES.Literal
   Program: ES.Program
@@ -317,6 +319,8 @@ export type ESNodeListenerMap = {
   'ClassBody:exit': ES.ClassBody
   MethodDefinition: ES.MethodDefinition
   'MethodDefinition:exit': ES.MethodDefinition
+  PropertyDefinition: ES.PropertyDefinition
+  'PropertyDefinition:exit': ES.PropertyDefinition
   ImportDeclaration: ES.ImportDeclaration
   'ImportDeclaration:exit': ES.ImportDeclaration
   ExportNamedDeclaration: ES.ExportNamedDeclaration
