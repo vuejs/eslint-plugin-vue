@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Install eslint@6
           command: |
-            npm install -D eslint@6.2.0
+            npm install --save-exact eslint@6.8.0 @typescript-eslint/parser@3.10.1 typescript@4.0.8
       - run:
           name: Install dependencies
           command: npm install
