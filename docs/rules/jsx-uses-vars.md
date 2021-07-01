@@ -38,6 +38,11 @@ After turning on, `HelloWorld` is being marked as used and `no-unused-vars` rule
 
 If you are not using JSX or if you do not use the `no-unused-vars` rule then you can disable this rule.
 
+## :couple: Related Rules
+
+- [vue/script-setup-uses-vars](./script-setup-uses-vars.md)
+- [no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v2.0.0

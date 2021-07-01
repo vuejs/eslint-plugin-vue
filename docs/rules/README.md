@@ -25,6 +25,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:--------|:------------|:---|
 | [vue/comment-directive](./comment-directive.md) | support comment-directives in `<template>` |  |
 | [vue/jsx-uses-vars](./jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |  |
+| [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | prevent `<script setup>` variables used in `<template>` to be marked as unused |  |
 
 ## Priority A: Essential (Error Prevention) <badge text="for Vue.js 3.x" vertical="middle">for Vue.js 3.x</badge>
 

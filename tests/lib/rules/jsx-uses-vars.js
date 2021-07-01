@@ -30,10 +30,11 @@ linter.defineRule('jsx-uses-vars', rule)
 // Tests
 // ------------------------------------------------------------------------------
 
-ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
-  valid: [
-    {
-      code: `
+describe('jsx-uses-vars', () => {
+  ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
+    valid: [
+      {
+        code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         export default {
@@ -44,9 +45,9 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `
-    },
-    {
-      code: `
+      },
+      {
+        code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.vue';
         import OtherComponent from './OtherComponent.vue';
@@ -69,9 +70,9 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           }
         }
       `
-    },
-    {
-      code: `
+      },
+      {
+        code: `
         /* eslint jsx-uses-vars: 1 */
         export default {
           render () {
@@ -81,12 +82,12 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           }
         }
       `
-    }
-  ],
+      }
+    ],
 
-  invalid: [
-    {
-      code: `
+    invalid: [
+      {
+        code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         export default {
@@ -95,14 +96,14 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `,
-      errors: [
-        {
-          message: "'SomeComponent' is defined but never used."
-        }
-      ]
-    },
-    {
-      code: `
+        errors: [
+          {
+            message: "'SomeComponent' is defined but never used."
+          }
+        ]
+      },
+      {
+        code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         const wrapper = {
@@ -115,11 +116,12 @@ ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
           },
         };
       `,
-      errors: [
-        {
-          message: "'wrapper' is assigned a value but never used."
-        }
-      ]
-    }
-  ]
+        errors: [
+          {
+            message: "'wrapper' is assigned a value but never used."
+          }
+        ]
+      }
+    ]
+  })
 })

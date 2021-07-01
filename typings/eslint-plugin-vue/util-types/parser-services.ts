@@ -15,7 +15,10 @@ export interface ParserServices {
   getTemplateBodyTokenStore: () => ParserServices.TokenStore
   defineTemplateBodyVisitor?: (
     templateBodyVisitor: TemplateListener,
-    scriptVisitor?: eslint.Rule.RuleListener
+    scriptVisitor?: eslint.Rule.RuleListener,
+    options?: {
+      templateBodyTriggerSelector: 'Program' | 'Program:exit'
+    }
   ) => eslint.Rule.RuleListener
   getDocumentFragment?: () => VAST.VDocumentFragment | null
 }
