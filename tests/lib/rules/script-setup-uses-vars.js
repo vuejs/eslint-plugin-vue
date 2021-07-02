@@ -252,6 +252,27 @@ describe('script-setup-uses-vars', () => {
             line: 4
           }
         ]
+      },
+
+      // Not `<script setup>`
+      {
+        filename: 'test.vue',
+        code: `
+        <script>
+          /* eslint script-setup-uses-vars: 1 */
+          const msg = 'Hello!'
+        </script>
+
+        <template>
+          <div>{{ msg }}</div>
+        </template>
+        `,
+        errors: [
+          {
+            message: "'msg' is assigned a value but never used.",
+            line: 4
+          }
+        ]
       }
     ]
   })

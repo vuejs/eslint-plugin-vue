@@ -54,6 +54,10 @@ If you are not using `<script setup>` or if you do not use the `no-unused-vars` 
 - [vue/jsx-uses-vars](./jsx-uses-vars.md)
 - [no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
 
+## :books: Further Reading
+
+- [Vue RFCs - 0040-script-setup](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/script-setup-uses-vars.js)
