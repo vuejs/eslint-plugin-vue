@@ -291,6 +291,33 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        // not <script setup>
+        const {value} = defineProps({
+          value: Object,
+        })
+        value.value++
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+        // not <script setup>
+        const {value} = defineProps({
+          value: Object,
+        })
+        value.value++
+        </script>
+        <script setup>
+        value.value++
+        </script>
+      `
     }
   ],
 
@@ -698,6 +725,65 @@ ruleTester.run('no-mutating-props', rule, {
         </script>
       `,
       errors: ['Unexpected mutation of "[a]" prop.']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <input v-model="value">
+          <input v-model="props.value">
+        </template>
+        <script setup>
+        const props = defineProps({
+          value: String,
+        })
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "value" prop.',
+          line: 3
+        },
+        {
+          message: 'Unexpected mutation of "props" prop.',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        const props = defineProps({
+          value: String,
+        })
+        props.value++
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "value" prop.',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        const {value} = defineProps({
+          value: Object,
+        })
+        value.value++
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "value" prop.',
+          line: 6
+        }
+      ]
     }
   ]
 })
