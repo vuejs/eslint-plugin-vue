@@ -19,6 +19,10 @@ This rule will find variables defined in `<script setup="args">` and mark them a
 
 This rule only has an effect when the `no-undef` rule is enabled.
 
+:::warning
+`<script setup="args">` syntax wasn't rejected by Vue's RFC. Check out the [new syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md).
+:::
+
 ## :book: Rule Details
 
 Without this rule this code triggers warning:
