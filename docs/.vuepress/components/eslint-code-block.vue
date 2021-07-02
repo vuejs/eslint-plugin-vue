@@ -135,6 +135,7 @@ export default {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
     linter.defineRule('no-undef', coreRules['no-undef'])
+    linter.defineRule('no-unused-vars', coreRules['no-unused-vars'])
 
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }
