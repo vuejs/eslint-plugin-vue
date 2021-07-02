@@ -225,6 +225,24 @@ ruleTester.run('no-reserved-keys', rule, {
           line: 4
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineProps({
+          $el: String
+        })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 4
+        }
+      ]
     }
   ]
 })
