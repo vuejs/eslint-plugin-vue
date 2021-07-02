@@ -27,3 +27,60 @@ export interface VueVisitor extends VueVisitorBase {
     | ((node: VAST.ParamNode, obj: VueObjectData) => void)
     | undefined
 }
+
+type ScriptSetupVisitorBase = {
+  [T in keyof NodeListenerMap]?: (node: NodeListenerMap[T]) => void
+}
+export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
+  onDefinePropsEnter?(
+    node: CallExpression,
+    props: (ComponentArrayProp | ComponentObjectProp)[]
+  ): void
+  onDefinePropsExit?(
+    node: CallExpression,
+    props: (ComponentArrayProp | ComponentObjectProp)[]
+  ): void
+  [query: string]:
+    | ((node: VAST.ParamNode) => void)
+    | ((
+        node: CallExpression,
+        props: (ComponentArrayProp | ComponentObjectProp)[]
+      ) => void)
+    | undefined
+}
+
+type ComponentArrayPropDetectName = {
+  type: 'array'
+  key: Literal | TemplateLiteral
+  propName: string
+  value: null
+  node: Expression | SpreadElement
+}
+type ComponentArrayPropUnknownName = {
+  type: 'array'
+  key: null
+  propName: null
+  value: null
+  node: Expression | SpreadElement
+}
+export type ComponentArrayProp =
+  | ComponentArrayPropDetectName
+  | ComponentArrayPropUnknownName
+
+type ComponentObjectPropDetectName = {
+  type: 'object'
+  key: Expression
+  propName: string
+  value: Expression
+  node: Property
+}
+type ComponentObjectPropUnknownName = {
+  type: 'object'
+  key: null
+  propName: null
+  value: Expression
+  node: Property
+}
+export type ComponentObjectProp =
+  | ComponentObjectPropDetectName
+  | ComponentObjectPropUnknownName
