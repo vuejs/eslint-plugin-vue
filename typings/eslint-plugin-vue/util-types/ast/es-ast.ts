@@ -495,6 +495,7 @@ export interface CallExpression extends HasParentNode {
   callee: Expression | Super
   arguments: (Expression | SpreadElement)[]
   optional: boolean
+  typeParameters?: TS.TSTypeParameterInstantiation
 }
 export interface Super extends HasParentNode {
   type: 'Super'
