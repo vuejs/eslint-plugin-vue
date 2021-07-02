@@ -34,11 +34,11 @@ type ScriptSetupVisitorBase = {
 export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefinePropsEnter?(
     node: CallExpression,
-    props: (ComponentArrayProp | ComponentObjectProp)[]
+    props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
   ): void
   onDefinePropsExit?(
     node: CallExpression,
-    props: (ComponentArrayProp | ComponentObjectProp)[]
+    props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
   ): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
@@ -84,3 +84,14 @@ type ComponentObjectPropUnknownName = {
 export type ComponentObjectProp =
   | ComponentObjectPropDetectName
   | ComponentObjectPropUnknownName
+
+export type ComponentTypeProp = {
+  type: 'type'
+  key: Identifier
+  propName: string
+  value: null
+  node: TSPropertySignature | TSMethodSignature
+
+  required: boolean
+  types: string[]
+}

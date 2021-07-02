@@ -152,6 +152,9 @@ declare global {
   // ---- TS Nodes ----
 
   type TSAsExpression = VAST.TSAsExpression
+  type TSTypeParameterInstantiation = VAST.TSTypeParameterInstantiation
+  type TSPropertySignature = VAST.TSPropertySignature
+  type TSMethodSignature = VAST.TSMethodSignature
 
   // ---- JSX Nodes ----
 
