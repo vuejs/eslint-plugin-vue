@@ -18,10 +18,7 @@ const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
-    }
+    sourceType: 'module'
   }
 })
 
@@ -147,6 +144,25 @@ describe('script-setup-uses-vars', () => {
           <bar-camel-case />
         </template>
         `
+      },
+
+      // TopLevel await
+      {
+        filename: 'test.vue',
+        code: `
+        <script setup>
+          /* eslint script-setup-uses-vars: 1 */
+          const post = await fetch(\`/api/post/1\`).then((r) => r.json())
+        </script>
+
+        <template>
+          {{post}}
+        </template>
+        `,
+        parserOptions: {
+          ecmaVersion: 2022,
+          sourceType: 'module'
+        }
       }
     ],
 
