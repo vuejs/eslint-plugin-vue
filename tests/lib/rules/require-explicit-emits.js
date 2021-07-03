@@ -1791,6 +1791,24 @@ emits: {'foo': null}
           line: 3
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo') => void>()
+      emit('foo');
+      emit('bar')
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5
+        }
+      ]
     }
   ]
 })
