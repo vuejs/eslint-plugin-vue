@@ -171,7 +171,12 @@ tester.run('no-setup-props-destructure', rule, {
       code: `
       <script setup>
       const props = defineProps({count:Number})
-      const {count} = props
+      watch(() => {
+        const {count} = props
+      })
+      watch(() => {
+        const count = props.count
+      })
       </script>
       `,
       errors: [
