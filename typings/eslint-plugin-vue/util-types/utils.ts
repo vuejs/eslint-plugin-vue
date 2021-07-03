@@ -19,6 +19,10 @@ export interface VueVisitor extends VueVisitorBase {
     node: (FunctionExpression | ArrowFunctionExpression) & { parent: Property },
     obj: VueObjectData
   ): void
+  onSetupFunctionExit?(
+    node: (FunctionExpression | ArrowFunctionExpression) & { parent: Property },
+    obj: VueObjectData
+  ): void
   onRenderFunctionEnter?(
     node: (FunctionExpression | ArrowFunctionExpression) & { parent: Property },
     obj: VueObjectData
