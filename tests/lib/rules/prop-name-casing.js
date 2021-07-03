@@ -8,6 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const semver = require('semver')
 const rule = require('../../../lib/rules/prop-name-casing')
 const RuleTester = require('eslint').RuleTester
 
@@ -653,27 +654,34 @@ ruleTester.run('prop-name-casing', rule, {
         }
       ]
     },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      interface Props {
-        greeting_text: number
-      }
-      defineProps<Props>()
-      </script>
-      `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      errors: [
-        {
-          message: 'Prop "greeting_text" is not in camelCase.',
-          line: 4
-        }
-      ]
-    }
+    ...(semver.lt(
+      require('@typescript-eslint/parser/package.json').version,
+      '4.0.0'
+    )
+      ? []
+      : [
+          {
+            filename: 'test.vue',
+            code: `
+            <script setup lang="ts">
+            interface Props {
+              greeting_text: number
+            }
+            defineProps<Props>()
+            </script>
+            `,
+            parser: require.resolve('vue-eslint-parser'),
+            parserOptions: {
+              ...parserOptions,
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            errors: [
+              {
+                message: 'Prop "greeting_text" is not in camelCase.',
+                line: 4
+              }
+            ]
+          }
+        ])
   ]
 })
