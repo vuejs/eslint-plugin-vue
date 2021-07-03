@@ -119,6 +119,18 @@ ruleTester.run('return-in-emits-validator', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        defineEmits({
+          foo () {
+            return true
+          }
+        })
+        </script>
+      `
     }
   ],
 
@@ -305,6 +317,24 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message: 'Expected to return a true value in "foo" emits validator.',
           line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        defineEmits({
+          foo () {
+          }
+        })
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'Expected to return a boolean value in "foo" emits validator.',
+          line: 4
         }
       ]
     }
