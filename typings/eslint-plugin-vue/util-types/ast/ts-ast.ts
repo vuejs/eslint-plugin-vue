@@ -9,6 +9,9 @@ export type TSNode =
   | TSTypeParameterInstantiation
   | TSPropertySignature
   | TSMethodSignatureBase
+  | TSLiteralType
+  | TSCallSignatureDeclaration
+  | TSFunctionType
 
 export interface TSAsExpression extends HasParentNode {
   type: 'TSAsExpression'
@@ -69,4 +72,21 @@ interface TSMethodSignatureComputedName extends TSMethodSignatureBase {
 interface TSMethodSignatureNonComputedName extends TSMethodSignatureBase {
   key: TSESTree.PropertyNameNonComputed
   computed: false
+}
+
+export interface TSLiteralType extends HasParentNode {
+  type: 'TSLiteralType'
+  literal: ES.Literal | ES.UnaryExpression | ES.UpdateExpression
+}
+
+interface TSFunctionSignatureBase extends HasParentNode {
+  params: TSESTree.Parameter[]
+  returnType?: TSESTree.TSTypeAnnotation
+  typeParameters?: TSESTree.TSTypeParameterDeclaration
+}
+export interface TSCallSignatureDeclaration extends TSFunctionSignatureBase {
+  type: 'TSCallSignatureDeclaration'
+}
+export interface TSFunctionType extends TSFunctionSignatureBase {
+  type: 'TSFunctionType'
 }

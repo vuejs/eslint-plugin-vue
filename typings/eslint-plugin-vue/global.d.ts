@@ -155,6 +155,9 @@ declare global {
   type TSTypeParameterInstantiation = VAST.TSTypeParameterInstantiation
   type TSPropertySignature = VAST.TSPropertySignature
   type TSMethodSignature = VAST.TSMethodSignature
+  type TSLiteralType = VAST.TSLiteralType
+  type TSCallSignatureDeclaration = VAST.TSCallSignatureDeclaration
+  type TSFunctionType = VAST.TSFunctionType
 
   // ---- JSX Nodes ----
 

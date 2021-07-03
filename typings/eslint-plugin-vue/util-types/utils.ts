@@ -44,11 +44,23 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
     node: CallExpression,
     props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
   ): void
+  onDefineEmitsEnter?(
+    node: CallExpression,
+    props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
+  ): void
+  onDefineEmitsExit?(
+    node: CallExpression,
+    props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
+  ): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
     | ((
         node: CallExpression,
-        props: (ComponentArrayProp | ComponentObjectProp)[]
+        props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
+      ) => void)
+    | ((
+        node: CallExpression,
+        props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
       ) => void)
     | undefined
 }
@@ -98,4 +110,47 @@ export type ComponentTypeProp = {
 
   required: boolean
   types: string[]
+}
+
+type ComponentArrayEmitDetectName = {
+  type: 'array'
+  key: Literal | TemplateLiteral
+  emitName: string
+  value: null
+  node: Expression | SpreadElement
+}
+type ComponentArrayEmitUnknownName = {
+  type: 'array'
+  key: null
+  emitName: null
+  value: null
+  node: Expression | SpreadElement
+}
+export type ComponentArrayEmit =
+  | ComponentArrayEmitDetectName
+  | ComponentArrayEmitUnknownName
+type ComponentObjectEmitDetectName = {
+  type: 'object'
+  key: Expression
+  emitName: string
+  value: Expression
+  node: Property
+}
+type ComponentObjectEmitUnknownName = {
+  type: 'object'
+  key: null
+  emitName: null
+  value: Expression
+  node: Property
+}
+export type ComponentObjectEmit =
+  | ComponentObjectEmitDetectName
+  | ComponentObjectEmitUnknownName
+
+export type ComponentTypeEmit = {
+  type: 'type'
+  key: TSLiteralType
+  emitName: string
+  value: null
+  node: TSCallSignatureDeclaration | TSFunctionType
 }
