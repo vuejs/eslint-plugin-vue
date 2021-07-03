@@ -106,6 +106,43 @@ tester.run('no-lifecycle-after-await', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {onMounted} from 'vue'
+      onMounted(() => { /* ... */ })
+      await doSomething()
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      await doSomething()
+      </script>
+      <script>
+      import {onMounted} from 'vue'
+      onMounted(() => { /* ... */ }) // not error
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      </script>
+      <script>
+      import {onMounted} from 'vue'
+      await doSomething()
+      onMounted(() => { /* ... */ }) // not error
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
@@ -222,6 +259,24 @@ tester.run('no-lifecycle-after-await', rule, {
       errors: [
         {
           messageId: 'forbidden'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {onMounted} from 'vue'
+      await doSomething()
+
+      onMounted(() => { /* ... */ }) // error
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 },
+      errors: [
+        {
+          messageId: 'forbidden',
+          line: 6
         }
       ]
     }
