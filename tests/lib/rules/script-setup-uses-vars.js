@@ -163,6 +163,22 @@ describe('script-setup-uses-vars', () => {
           ecmaVersion: 2022,
           sourceType: 'module'
         }
+      },
+
+      // ref
+      {
+        filename: 'test.vue',
+        code: `
+        <script setup>
+          /* eslint script-setup-uses-vars: 1 */
+          import {ref} from 'vue'
+          const v = ref(null)
+        </script>
+
+        <template>
+          <div ref="v"/>
+        </template>
+        `
       }
     ],
 
