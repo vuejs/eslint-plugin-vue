@@ -72,8 +72,7 @@ By default all rules from **base** and **essential** categories report ESLint er
 :::
 
 :::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.0, but `<script setup>` does not yet fully support it.
-Also, the Vue.js 3.0 experimental feature CSS variable injection is not yet supported. Follow [#1248](https://github.com/vuejs/eslint-plugin-vue/issues/1248) for more details.
+This plugin supports the basic syntax of Vue.js 3.0 and `<script setup>`, but the Vue.js 3.0 experimental feature CSS variable injection is not yet supported. Follow [#1248](https://github.com/vuejs/eslint-plugin-vue/issues/1248) for more details.
 :::
 
 ### Running ESLint from the command line
@@ -395,5 +394,5 @@ module.exports = {
 
 #### Other Problems
 
-This `eslint-plugin-vue` does not yet fully support `<script setup>`.
-Follow [#1248](https://github.com/vuejs/eslint-plugin-vue/issues/1248) for more details.
+Try searching for existing issues.
+If it does not exist, you should open a new issue and share your repository to reproduce the issue.
