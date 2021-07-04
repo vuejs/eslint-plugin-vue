@@ -490,6 +490,17 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <TheModal />
+      </template>
+
+      <script setup>
+      import TheModal from 'foo'
+      </script>`
     }
   ],
   invalid: [
