@@ -8,6 +8,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const semver = require('semver')
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
 const parserOptions = {
@@ -181,6 +182,14 @@ ruleTester.run('require-default-prop', rule, {
         }
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      export default {
+        props: ['foo']
+      }`,
+      parserOptions
+    },
 
     // sparse array
     {
@@ -195,6 +204,83 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({
+        foo: {
+          type: String,
+          default: ''
+        }
+      })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['foo'])
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: number
+      }
+      defineProps<Props>()
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: number
+      }
+      withDefaults(defineProps<Props>(), {foo:42})
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo: number
+      }
+      defineProps<Props>({
+        foo:{
+          default: 42
+        }
+      })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
 
@@ -387,6 +473,53 @@ ruleTester.run('require-default-prop', rule, {
         "Prop 'baz' requires default value to be set.",
         "Prop 'bar1' requires default value to be set."
       ]
-    }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({
+        foo: String
+      })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 4
+        }
+      ]
+    },
+    ...(semver.lt(
+      require('@typescript-eslint/parser/package.json').version,
+      '4.0.0'
+    )
+      ? []
+      : [
+          {
+            filename: 'test.vue',
+            code: `
+            <script setup lang="ts">
+            interface Props {
+              foo: number
+            }
+            withDefaults(defineProps<Props>(), {bar:42})
+            </script>
+            `,
+            parser: require.resolve('vue-eslint-parser'),
+            parserOptions: {
+              ...parserOptions,
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            errors: [
+              {
+                message: "Prop 'foo' requires default value to be set.",
+                line: 4
+              }
+            ]
+          }
+        ])
   ]
 })
