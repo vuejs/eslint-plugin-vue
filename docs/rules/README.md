@@ -331,6 +331,7 @@ For example:
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: |
 | [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md) | enforce v-on event naming style on custom components in template | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
+| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  |
 | [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
 
 ### Extension Rules
