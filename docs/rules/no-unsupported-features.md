@@ -32,6 +32,7 @@ The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.1.0+
     - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
   - Vue.js 3.0.0+
+    - `"script-setup"` ... [`<script setup>`][Vue RFCs - 0040-script-setup]
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
     - `"v-is"` ... [v-is](https://v3.vuejs.org/api/directives.html#v-is) directive.
@@ -105,6 +106,7 @@ The `"ignores"` option accepts an array of the following strings.
 - [Vue RFCs - 0003-dynamic-directive-arguments]
 - [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
 - [Vue RFCs - 0011-v-model-api-change]
+- [Vue RFCs - 0040-script-setup]
 - [Vue RFCs - v-bind .prop shorthand proposal]
 
 [Vue RFCs - 0001-new-slot-syntax]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md
@@ -112,6 +114,7 @@ The `"ignores"` option accepts an array of the following strings.
 [Vue RFCs - 0003-dynamic-directive-arguments]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0003-dynamic-directive-arguments.md
 [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md
 [Vue RFCs - 0011-v-model-api-change]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md
+[Vue RFCs - 0040-script-setup]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
 
 [Vue RFCs - v-bind .prop shorthand proposal]: https://github.com/vuejs/rfcs/pull/18
 
