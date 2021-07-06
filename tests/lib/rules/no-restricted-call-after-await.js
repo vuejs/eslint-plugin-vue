@@ -125,6 +125,18 @@ tester.run('no-restricted-call-after-await', rule, {
         { module: './baz', path: 'qux' },
         { module: 'vue-i18n', path: 'useI18n' }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {useI18n} from 'vue-i18n'
+      useI18n()
+      await doSomething()
+      </script>
+      `,
+      options: [{ module: 'vue-i18n', path: 'useI18n' }],
+      parserOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
@@ -375,6 +387,25 @@ tester.run('no-restricted-call-after-await', rule, {
           message:
             'The `import("..").foo` after `await` expression are forbidden.',
           line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {useI18n} from 'vue-i18n'
+      await doSomething()
+      useI18n()
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 },
+      options: [{ module: 'vue-i18n', path: 'useI18n' }],
+      errors: [
+        {
+          message:
+            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+          line: 5
         }
       ]
     }
