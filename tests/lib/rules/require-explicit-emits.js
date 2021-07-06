@@ -394,6 +394,69 @@ tester.run('require-explicit-emits', rule, {
       </script>
       `,
       options: [{ allowProps: true }]
+    },
+
+    // <script setup>
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo'])
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null})
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<{
+        (e: 'foo'): void
+      }>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo' | 'bar') => void>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     }
   ],
   invalid: [
@@ -1605,6 +1668,145 @@ emits: {'foo': null}
         {
           line: 12,
           messageId: 'missing'
+        }
+      ]
+    },
+
+    // <script setup>
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo'])
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo', 'bar'])
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null})
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null, 'bar': null})
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<{
+        (e: 'foo'): void
+      }>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo') => void>()
+      emit('foo');
+      emit('bar')
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5
         }
       ]
     }
