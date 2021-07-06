@@ -301,6 +301,7 @@ For example:
 | [vue/no-deprecated-v-is](./no-deprecated-v-is.md) | disallow deprecated `v-is` directive (in Vue.js 3.1.0+) | :wrench: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
+| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |

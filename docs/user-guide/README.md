@@ -103,6 +103,8 @@ If you want to use custom parsers such as [babel-eslint](https://www.npmjs.com/p
   }
 ```
 
+The `parserOptions.parser` option can also specify an object to specify multiple parsers. See [vue-eslint-parser README](https://github.com/vuejs/vue-eslint-parser#readme) for more details.
+
 ### How does ESLint detect components?
 
 All component-related rules are applied to code that passes any of the following checks:
