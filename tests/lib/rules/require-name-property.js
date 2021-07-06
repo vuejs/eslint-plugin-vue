@@ -51,6 +51,19 @@ ruleTester.run('require-name-property', rule, {
         })
       `,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+      }
+      </script>
+      <script setup>
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
     }
   ],
 
