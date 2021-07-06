@@ -284,6 +284,37 @@ tester.run('no-unused-refs', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input ref="x" />
+      </template>
+      <script>
+      import {ref} from 'vue'
+      export default {
+        setup() {
+          const x = ref(null)
+          return {
+            x
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input ref="x" />
+      </template>
+      <script setup>
+      import {ref} from 'vue'
+      const x = ref(null)
+      </script>
+      `
     }
   ],
 
