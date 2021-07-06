@@ -158,6 +158,32 @@ ruleTester.run('require-prop-types', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({
+        foo: String
+      })
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{foo:string}>()
+      </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
     }
   ],
 
@@ -303,6 +329,40 @@ ruleTester.run('require-prop-types', rule, {
         {
           message: 'Prop "foo" should define at least its type.',
           line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({
+        foo: {}
+      })
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['foo'])
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 3
         }
       ]
     }

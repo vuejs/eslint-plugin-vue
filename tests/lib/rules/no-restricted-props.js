@@ -7,6 +7,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const semver = require('semver')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-restricted-props')
 
@@ -326,6 +327,265 @@ tester.run('no-restricted-props', rule, {
           ]
         }
       ]
-    }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({
+        foo: {},
+      })
+      </script>
+      `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 4,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
+      <script setup>
+      defineProps({
+        Foo: {},
+      })
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['foo'])
+      </script>
+      `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
+      <script setup>
+      defineProps(["Foo"])
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{
+        foo:boolean
+      }>()
+      </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 4,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
+      <script setup lang="ts">
+      defineProps<{
+        Foo:boolean
+      }>()
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    ...(semver.lt(
+      require('@typescript-eslint/parser/package.json').version,
+      '4.0.0'
+    )
+      ? []
+      : [
+          {
+            filename: 'test.vue',
+            code: `
+      <script setup lang="ts">
+      interface Props {
+        foo:boolean
+      }
+      defineProps<Props>()
+      </script>
+      `,
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            options: [{ name: 'foo', suggest: 'Foo' }],
+            errors: [
+              {
+                message: 'Using `foo` props is not allowed.',
+                line: 4,
+                suggestions: [
+                  {
+                    desc: 'Instead, change to `Foo`.',
+                    output: `
+      <script setup lang="ts">
+      interface Props {
+        Foo:boolean
+      }
+      defineProps<Props>()
+      </script>
+      `
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            filename: 'test.vue',
+            code: `
+      <script setup lang="ts">
+      interface Props {
+        foo:boolean
+      }
+      withDefaults(defineProps<Props>(),
+        {
+          foo: false
+        }
+      )
+      </script>
+      `,
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            options: [{ name: 'foo', suggest: 'Foo' }],
+            errors: [
+              {
+                message: 'Using `foo` props is not allowed.',
+                line: 4,
+                suggestions: [
+                  {
+                    desc: 'Instead, change to `Foo`.',
+                    output: `
+      <script setup lang="ts">
+      interface Props {
+        Foo:boolean
+      }
+      withDefaults(defineProps<Props>(),
+        {
+          Foo: false
+        }
+      )
+      </script>
+      `
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            filename: 'test.vue',
+            code: `
+      <script>
+      const foo = false
+      </script>
+      <script setup lang="ts">
+      interface Props {
+        foo:boolean
+      }
+      withDefaults(defineProps<Props>(),
+        {
+          foo
+        }
+      )
+      </script>
+      `,
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            options: [{ name: 'foo', suggest: 'Foo' }],
+            errors: [
+              {
+                message: 'Using `foo` props is not allowed.',
+                line: 7,
+                suggestions: [
+                  {
+                    desc: 'Instead, change to `Foo`.',
+                    output: `
+      <script>
+      const foo = false
+      </script>
+      <script setup lang="ts">
+      interface Props {
+        Foo:boolean
+      }
+      withDefaults(defineProps<Props>(),
+        {
+          Foo:foo
+        }
+      )
+      </script>
+      `
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            filename: 'test.vue',
+            code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<Props>(),
+        {
+          foo: false
+        }
+      )
+      interface Props {
+        foo:boolean
+      }
+      </script>
+      `,
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            options: [{ name: 'foo', suggest: 'Foo' }],
+            errors: [
+              {
+                message: 'Using `foo` props is not allowed.',
+                line: 9,
+                suggestions: [
+                  {
+                    desc: 'Instead, change to `Foo`.',
+                    output: `
+      <script setup lang="ts">
+      withDefaults(defineProps<Props>(),
+        {
+          Foo: false
+        }
+      )
+      interface Props {
+        Foo:boolean
+      }
+      </script>
+      `
+                  }
+                ]
+              }
+            ]
+          }
+        ])
   ]
 })

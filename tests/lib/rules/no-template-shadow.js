@@ -115,6 +115,54 @@ ruleTester.run('no-template-shadow', rule, {
           }
         }
       </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script>
+        export default {
+          setup() {
+            return {
+              k: 42
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      let k = 42
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      defineProps({k:Number})
+      </script>
+      `
     }
   ],
 
@@ -343,6 +391,72 @@ ruleTester.run('no-template-shadow', rule, {
           message: "Variable 'f' is already declared in the upper scope.",
           type: 'Identifier',
           line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script>
+        export default {
+          setup() {
+            return {
+              j: 42
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          message: "Variable 'j' is already declared in the upper scope.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      let j = 42
+      </script>
+      `,
+      errors: [
+        {
+          message: "Variable 'j' is already declared in the upper scope.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="j in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      defineProps({j:Number})
+      </script>
+      `,
+      errors: [
+        {
+          message: "Variable 'j' is already declared in the upper scope.",
+          line: 4
         }
       ]
     }

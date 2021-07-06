@@ -165,6 +165,46 @@ tester.run('no-setup-props-destructure', rule, {
       Vue.component('test', {
         el: a = b
       })`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({count:Number})
+      watch(() => {
+        const {count} = props
+      })
+      watch(() => {
+        const count = props.count
+      })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({count:Number})
+      watch(() => {
+        ({ count } = props)
+      })
+      watch(() => {
+        count = props.count
+      })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
     }
   ],
   invalid: [
@@ -423,6 +463,63 @@ tester.run('no-setup-props-destructure', rule, {
       </script>
       `,
       errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {count} = defineProps({count:Number})
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Destructuring the `props` will cause the value to lose reactivity.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({count:Number})
+      const {count} = props
+      ;({count} = props)
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
+          line: 4
+        },
+        {
+          message:
+            'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({count:Number})
+      const count = props.count
+      count = props.count
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        },
         {
           messageId: 'getProperty',
           line: 5
