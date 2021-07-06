@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-define-props
 description: enforce valid `defineProps` compiler macro
+since: v7.13.0
 ---
 # vue/valid-define-props
 
 > enforce valid `defineProps` compiler macro
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule checks whether `defineProps` compiler macro is valid.
 
@@ -126,6 +125,10 @@ This rule reports `defineProps` compiler macros in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.13.0
 
 ## :mag: Implementation
 

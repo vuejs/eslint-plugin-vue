@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-export-in-script-setup
 description: disallow `export` in `<script setup>`
+since: v7.13.0
 ---
 # vue/no-export-in-script-setup
 
 > disallow `export` in `<script setup>`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -48,6 +47,10 @@ Nothing.
 - [Vue RFCs - 0040-script-setup]
 
 [Vue RFCs - 0040-script-setup]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.13.0
 
 ## :mag: Implementation
 

@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/script-setup-uses-vars
 description: prevent `<script setup>` variables used in `<template>` to be marked as unused
+since: v7.13.0
 ---
 # vue/script-setup-uses-vars
 
 > prevent `<script setup>` variables used in `<template>` to be marked as unused
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
 
 ESLint `no-unused-vars` rule does not detect variables in `<script setup>` used in `<template>`.
@@ -57,6 +57,10 @@ If you are not using `<script setup>` or if you do not use the `no-unused-vars` 
 ## :books: Further Reading
 
 - [Vue RFCs - 0040-script-setup](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.13.0
 
 ## :mag: Implementation
 

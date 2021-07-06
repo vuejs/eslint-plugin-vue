@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-define-emits
 description: enforce valid `defineEmits` compiler macro
+since: v7.13.0
 ---
 # vue/valid-define-emits
 
 > enforce valid `defineEmits` compiler macro
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule checks whether `defineEmits` compiler macro is valid.
 
@@ -126,6 +125,10 @@ This rule reports `defineEmits` compiler macros in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.13.0
 
 ## :mag: Implementation
 
