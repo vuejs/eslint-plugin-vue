@@ -16,7 +16,7 @@ ESLint editor integrations are useful to check your code in real-time.
 
 :::warning Status of Vue.js 3.x supports
 This plugin supports the basic syntax of Vue.js 3.0 and `<script setup>`, but the Vue.js 3.0 experimental feature CSS variable injection is not yet supported.  
-If you have issues with these, you will need to search for the issues and if it does not exist, open a new issue.
+If you have issues with these, please also refer to the [FAQ](./user-guide/README.md#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
 
 ## :traffic_light: Versioning policy
