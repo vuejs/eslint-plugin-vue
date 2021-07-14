@@ -441,12 +441,21 @@ export type BinaryOperator =
   | 'in'
   | 'instanceof'
   | '**'
-export interface BinaryExpression extends HasParentNode {
+interface BinaryExpressionWithoutIn extends HasParentNode {
   type: 'BinaryExpression'
-  operator: BinaryOperator
+  operator: Exclude<BinaryOperator, 'in'>
   left: Expression
   right: Expression
 }
+interface BinaryExpressionWithIn extends HasParentNode {
+  type: 'BinaryExpression'
+  operator: 'in'
+  left: Expression | PrivateIdentifier
+  right: Expression
+}
+export type BinaryExpression =
+  | BinaryExpressionWithoutIn
+  | BinaryExpressionWithIn
 export type AssignmentOperator =
   | '='
   | '+='
