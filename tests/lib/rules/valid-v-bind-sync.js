@@ -190,8 +190,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
-          column: 24,
-          endColumn: 41
+          column: 35,
+          endColumn: 40
         }
       ]
     },
@@ -207,8 +207,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
-          column: 24,
-          endColumn: 47
+          column: 41,
+          endColumn: 46
         }
       ]
     },
@@ -241,8 +241,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
-          column: 24,
-          endColumn: 41
+          column: 35,
+          endColumn: 40
         }
       ]
     },
@@ -258,8 +258,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
-          column: 24,
-          endColumn: 46
+          column: 35,
+          endColumn: 45
         }
       ]
     },
@@ -294,8 +294,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers cannot update the iteration variable 'x' itself.",
           line: 4,
-          column: 26,
-          endColumn: 39
+          column: 37,
+          endColumn: 38
         }
       ]
     },
@@ -313,8 +313,8 @@ tester.run('valid-v-bind-sync', rule, {
           message:
             "'.sync' modifiers cannot update the iteration variable 'e' itself.",
           line: 4,
-          column: 26,
-          endColumn: 45
+          column: 43,
+          endColumn: 44
         }
       ]
     },

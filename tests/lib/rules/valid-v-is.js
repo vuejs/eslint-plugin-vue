@@ -55,8 +55,8 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require no argument.",
-          column: 16,
-          endColumn: 28
+          column: 21,
+          endColumn: 22
         }
       ]
     },
@@ -66,8 +66,8 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require no modifier.",
-          column: 16,
-          endColumn: 28
+          column: 21,
+          endColumn: 22
         }
       ]
     },
