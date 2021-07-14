@@ -338,6 +338,7 @@ For example:
 | [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  |
 | [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  |
 | [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
+| [vue/valid-v-memo](./valid-v-memo.md) | enforce valid `v-memo` directives |  |
 
 ### Extension Rules
 
