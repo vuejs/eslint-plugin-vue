@@ -325,6 +325,7 @@ For example:
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits |  |
+| [vue/require-expose](./require-expose.md) | require declare public properties using `expose` |  |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
