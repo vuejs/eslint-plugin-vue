@@ -1535,6 +1535,33 @@ tester.run('no-unused-properties', rule, {
           ignorePublicMembers: true
         }
       ]
+    },
+
+    // expose
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{a}}
+      </template>
+      <script>
+      export default {
+        expose: ['a', 'b', 'c', 'd'],
+        props: ['a'],
+        data() {
+          return {
+            b: 42,
+          }
+        },
+        computed:{
+          c() {},
+        },
+        methods:{
+          d() {},
+        }
+      }
+      </script>`,
+      options: allOptions
     }
   ],
 
@@ -2412,6 +2439,42 @@ tester.run('no-unused-properties', rule, {
       props.b
       </script>`,
       errors: ["'c' of property found, but never used."]
+    },
+
+    // expose
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{a}}
+      </template>
+      <script>
+      export default {
+        expose: ['a', 'c', 'e', 'g'],
+        props: ['a', 'b'],
+        data() {
+          return {
+            c: 42,
+            d: 42
+          }
+        },
+        computed:{
+          e() {},
+          f() {}
+        },
+        methods:{
+          g() {},
+          h() {}
+        }
+      }
+      </script>`,
+      options: allOptions,
+      errors: [
+        "'b' of property found, but never used.",
+        "'d' of data found, but never used.",
+        "'f' of computed property found, but never used.",
+        "'h' of method found, but never used."
+      ]
     }
   ]
 })
