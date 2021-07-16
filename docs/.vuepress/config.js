@@ -155,7 +155,10 @@ module.exports = {
       { text: 'User Guide', link: '/user-guide/' },
       { text: 'Developer Guide', link: '/developer-guide/' },
       { text: 'Rules', link: '/rules/' },
-      { text: 'Demo', link: 'https://mysticatea.github.io/vue-eslint-demo' }
+      {
+        text: 'Demo',
+        link: 'https://ota-meshi.github.io/eslint-plugin-vue-demo/'
+      }
     ],
 
     sidebar: {
