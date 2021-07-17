@@ -155,6 +155,20 @@ tester.run('no-watch-after-await', rule, {
       </script>
       `,
       parserOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {watch} from 'vue'
+      watch(foo, () => { /* ... */ })
+
+      await doSomething()
+
+      watch(foo, () => { /* ... */ })
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
@@ -234,26 +248,6 @@ tester.run('no-watch-after-await', rule, {
         {
           messageId: 'forbidden',
           line: 12
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-      import {watch} from 'vue'
-      watch(foo, () => { /* ... */ })
-
-      await doSomething()
-
-      watch(foo, () => { /* ... */ })
-      </script>
-      `,
-      parserOptions: { ecmaVersion: 2022 },
-      errors: [
-        {
-          message: 'The `watch` after `await` expression are forbidden.',
-          line: 8
         }
       ]
     }
