@@ -111,42 +111,24 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
       }
       </script>
       `,
-      errors: [
-        {
-          message:
-            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4,
-          suggestions: [
-            {
-              desc: 'Instead, change to `beforeUnmount`.',
-              output: `
+      output: `
       <script>
       export default {
         beforeUnmount () {},
-        destroyed () {},
-      }
-      </script>
-      `
-            }
-          ]
-        },
-        {
-          message:
-            'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5,
-          suggestions: [
-            {
-              desc: 'Instead, change to `unmounted`.',
-              output: `
-      <script>
-      export default {
-        beforeDestroy () {},
         unmounted () {},
       }
       </script>
-      `
-            }
-          ]
+      `,
+      errors: [
+        {
+          message:
+            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
+          line: 4
+        },
+        {
+          message:
+            'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
+          line: 5
         }
       ]
     },
@@ -160,42 +142,24 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
       }
       </script>
       `,
+      output: `
+      <script>
+      export default {
+        beforeUnmount:beforeDestroy,
+        unmounted:destroyed,
+      }
+      </script>
+      `,
       errors: [
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4,
-          suggestions: [
-            {
-              desc: 'Instead, change to `beforeUnmount`.',
-              output: `
-      <script>
-      export default {
-        beforeUnmount:beforeDestroy,
-        destroyed,
-      }
-      </script>
-      `
-            }
-          ]
+          line: 4
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5,
-          suggestions: [
-            {
-              desc: 'Instead, change to `unmounted`.',
-              output: `
-      <script>
-      export default {
-        beforeDestroy,
-        unmounted:destroyed,
-      }
-      </script>
-      `
-            }
-          ]
+          line: 5
         }
       ]
     },
@@ -218,15 +182,7 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
       }
       </script>
       `,
-      errors: [
-        {
-          message:
-            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 12,
-          suggestions: [
-            {
-              desc: 'Instead, change to `beforeUnmount`.',
-              output: `
+      output: `
       <script>
       export default {
         beforeCreate,
@@ -238,40 +194,21 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         activated,
         deactivated,
         beforeUnmount:beforeDestroy,
-        destroyed,
-        errorCaptured,
-      }
-      </script>
-      `
-            }
-          ]
-        },
-        {
-          message:
-            'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 13,
-          suggestions: [
-            {
-              desc: 'Instead, change to `unmounted`.',
-              output: `
-      <script>
-      export default {
-        beforeCreate,
-        created,
-        beforeMount,
-        mounted,
-        beforeUpdate,
-        updated,
-        activated,
-        deactivated,
-        beforeDestroy,
         unmounted:destroyed,
         errorCaptured,
       }
       </script>
-      `
-            }
-          ]
+      `,
+      errors: [
+        {
+          message:
+            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
+          line: 12
+        },
+        {
+          message:
+            'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
+          line: 13
         }
       ]
     },
@@ -285,42 +222,24 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
       }
       </script>
       `,
-      errors: [
-        {
-          message:
-            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4,
-          suggestions: [
-            {
-              desc: 'Instead, change to `beforeUnmount`.',
-              output: `
+      output: `
       <script>
       export default {
         ['beforeUnmount']() {},
-        ['destroyed']() {},
+        ['unmounted']() {},
       }
       </script>
-      `
-            }
-          ]
+      `,
+      errors: [
+        {
+          message:
+            'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
+          line: 4
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5,
-          suggestions: [
-            {
-              desc: 'Instead, change to `unmounted`.',
-              output: `
-      <script>
-      export default {
-        ['beforeDestroy']() {},
-        ['unmounted']() {},
-      }
-      </script>
-      `
-            }
-          ]
+          line: 5
         }
       ]
     },
@@ -334,42 +253,24 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
       }
       </script>
       `,
+      output: `
+      <script>
+      export default {
+        [\`beforeUnmount\`]() {},
+        [\`unmounted\`]() {},
+      }
+      </script>
+      `,
       errors: [
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4,
-          suggestions: [
-            {
-              desc: 'Instead, change to `beforeUnmount`.',
-              output: `
-      <script>
-      export default {
-        [\`beforeUnmount\`]() {},
-        [\`destroyed\`]() {},
-      }
-      </script>
-      `
-            }
-          ]
+          line: 4
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5,
-          suggestions: [
-            {
-              desc: 'Instead, change to `unmounted`.',
-              output: `
-      <script>
-      export default {
-        [\`beforeDestroy\`]() {},
-        [\`unmounted\`]() {},
-      }
-      </script>
-      `
-            }
-          ]
+          line: 5
         }
       ]
     }

@@ -29,26 +29,22 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" my-prop="prop"></custom></div></template>',
+      code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" my-prop="prop"></custom></div></template>',
       options: ['always']
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" myProp="prop"></custom></div></template>',
+      code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" myProp="prop"></custom></div></template>',
       options: ['never']
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }"><a onClick="" my-prop="prop"></a></div></template>',
+      code: '<template><div data-id="foo" aria-test="bar" slot-scope="{ data }"><a onClick="" my-prop="prop"></a></div></template>',
       options: ['never']
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hyphen="foo" second-custom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
+      code: '<template><custom data-id="foo" aria-test="bar" slot-scope="{ data }" custom-hyphen="foo" second-custom="bar"><a onClick="" my-prop="prop"></a></custom></template>',
       options: ['never', { ignore: ['custom-hyphen', 'second-custom'] }]
     },
     {
@@ -120,8 +116,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
+      code: '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
       output:
         '<template><div><custom v-bind:myProp="prop"></custom></div></template>',
       options: ['never'],
@@ -135,8 +130,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
+      code: '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
       output:
         '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
       options: ['always'],
@@ -150,8 +144,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
+      code: '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
       output:
         '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
       options: ['always', { ignore: [] }],
@@ -165,8 +158,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:my-prop="prop" :second-prop="test"></custom></div></template>',
+      code: '<template><div><custom v-bind:my-prop="prop" :second-prop="test"></custom></div></template>',
       output:
         '<template><div><custom v-bind:my-prop="prop" :secondProp="test"></custom></div></template>',
       options: ['never', { ignore: ['my-prop'] }],
@@ -180,8 +172,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:myProp="prop" :secondProp="test"></custom></div></template>',
+      code: '<template><div><custom v-bind:myProp="prop" :secondProp="test"></custom></div></template>',
       output:
         '<template><div><custom v-bind:my-prop="prop" :secondProp="test"></custom></div></template>',
       options: ['always', { ignore: ['secondProp'] }],
@@ -195,8 +186,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><custom v-bind:propID="prop" :secondPropID="test"></custom></div></template>',
+      code: '<template><div><custom v-bind:propID="prop" :secondPropID="test"></custom></div></template>',
       output:
         '<template><div><custom v-bind:prop-i-d="prop" :secondPropID="test"></custom></div></template>',
       options: ['always', { ignore: ['secondPropID'] }],

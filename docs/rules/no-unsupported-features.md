@@ -29,7 +29,10 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.1.0+
+    - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
   - Vue.js 3.0.0+
+    - `"script-setup"` ... [`<script setup>`][Vue RFCs - 0040-script-setup]
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
     - `"v-is"` ... [v-is](https://v3.vuejs.org/api/directives.html#v-is) directive.
@@ -94,6 +97,7 @@ The `"ignores"` option accepts an array of the following strings.
 ## :books: Further Reading
 
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 - [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
 - [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
 - [API (for v2) - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
@@ -102,6 +106,7 @@ The `"ignores"` option accepts an array of the following strings.
 - [Vue RFCs - 0003-dynamic-directive-arguments]
 - [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
 - [Vue RFCs - 0011-v-model-api-change]
+- [Vue RFCs - 0040-script-setup]
 - [Vue RFCs - v-bind .prop shorthand proposal]
 
 [Vue RFCs - 0001-new-slot-syntax]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md
@@ -109,6 +114,7 @@ The `"ignores"` option accepts an array of the following strings.
 [Vue RFCs - 0003-dynamic-directive-arguments]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0003-dynamic-directive-arguments.md
 [Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md
 [Vue RFCs - 0011-v-model-api-change]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md
+[Vue RFCs - 0040-script-setup]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
 
 [Vue RFCs - v-bind .prop shorthand proposal]: https://github.com/vuejs/rfcs/pull/18
 

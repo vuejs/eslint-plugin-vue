@@ -27,28 +27,23 @@ tester.run('no-v-for-template-key-on-child', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><Foo /></template></div></template>'
+      code: '<template><div><template v-for="x in list"><Foo /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x"><Foo /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x"><Foo /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="x.id"><Foo :key="x.id" /></template></div></template>'
+      code: '<template><div><template v-for="x in list" :key="x.id"><Foo :key="x.id" /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="(x, i) in list" :key="i"><Foo :key="x" /></template></div></template>'
+      code: '<template><div><template v-for="(x, i) in list" :key="i"><Foo :key="x" /></template></div></template>'
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="(x, i) in list"><Foo :key="foo" /></template></div></template>'
+      code: '<template><div><template v-for="(x, i) in list"><Foo :key="foo" /></template></div></template>'
     },
     {
       filename: 'test.vue',
@@ -79,8 +74,7 @@ tester.run('no-v-for-template-key-on-child', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><Foo :key="x" /></template></div></template>',
+      code: '<template><div><template v-for="x in list"><Foo :key="x" /></template></div></template>',
       errors: [
         {
           message:
@@ -91,32 +85,28 @@ tester.run('no-v-for-template-key-on-child', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list"><Foo :key="x.id" /></template></div></template>',
+      code: '<template><div><template v-for="x in list"><Foo :key="x.id" /></template></div></template>',
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.'
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key="foo"><Foo :key="x.id" /></template></div></template>',
+      code: '<template><div><template v-for="x in list" :key="foo"><Foo :key="x.id" /></template></div></template>',
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.'
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key><Foo :key="x.id" /></template></div></template>',
+      code: '<template><div><template v-for="x in list" :key><Foo :key="x.id" /></template></div></template>',
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.'
       ]
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><template v-for="x in list" :key><div /><Foo :key="x.id" /></template></div></template>',
+      code: '<template><div><template v-for="x in list" :key><div /><Foo :key="x.id" /></template></div></template>',
       errors: [
         '`<template v-for>` key should be placed on the `<template>` tag.'
       ]

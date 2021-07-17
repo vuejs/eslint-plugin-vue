@@ -2400,6 +2400,18 @@ tester.run('no-unused-properties', rule, {
         "'a' of data found, but never used.",
         "'b' of data found, but never used."
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{a}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b', 'c'])
+      props.b
+      </script>`,
+      errors: ["'c' of property found, but never used."]
     }
   ]
 })

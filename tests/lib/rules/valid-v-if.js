@@ -52,8 +52,7 @@ tester.run('valid-v-if', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
+      code: '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
       errors: [
         "'v-if' and 'v-else-if' directives can't exist on the same element."
       ]

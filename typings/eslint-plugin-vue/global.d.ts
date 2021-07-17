@@ -71,6 +71,7 @@ declare global {
   // ---- ES Nodes ----
 
   type Identifier = VAST.Identifier
+  type PrivateIdentifier = VAST.PrivateIdentifier
   type Literal = VAST.Literal
   type Program = VAST.Program
   type SwitchCase = VAST.SwitchCase
@@ -135,6 +136,7 @@ declare global {
   type AssignmentPattern = VAST.AssignmentPattern
   type ClassBody = VAST.ClassBody
   type MethodDefinition = VAST.MethodDefinition
+  type PropertyDefinition = VAST.PropertyDefinition
   type ModuleDeclaration = VAST.ModuleDeclaration
   type ImportDeclaration = VAST.ImportDeclaration
   type ExportNamedDeclaration = VAST.ExportNamedDeclaration
@@ -150,6 +152,12 @@ declare global {
   // ---- TS Nodes ----
 
   type TSAsExpression = VAST.TSAsExpression
+  type TSTypeParameterInstantiation = VAST.TSTypeParameterInstantiation
+  type TSPropertySignature = VAST.TSPropertySignature
+  type TSMethodSignature = VAST.TSMethodSignature
+  type TSLiteralType = VAST.TSLiteralType
+  type TSCallSignatureDeclaration = VAST.TSCallSignatureDeclaration
+  type TSFunctionType = VAST.TSFunctionType
 
   // ---- JSX Nodes ----
 

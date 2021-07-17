@@ -10,12 +10,13 @@ since: v3.13.0
 > disallow usage of `this` in template
 
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule aims at preventing usage of `this` in Vue templates.
 
-<eslint-code-block :rules="{'vue/this-in-template': ['error']}">
+<eslint-code-block fix :rules="{'vue/this-in-template': ['error']}">
 
 ```vue
 <template>
@@ -45,7 +46,7 @@ This rule aims at preventing usage of `this` in Vue templates.
 
 ### `"always"`
 
-<eslint-code-block :rules="{'vue/this-in-template': ['error', 'always']}">
+<eslint-code-block fix :rules="{'vue/this-in-template': ['error', 'always']}">
 
 ```vue
 <template>

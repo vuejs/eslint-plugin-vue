@@ -109,8 +109,7 @@ tester.run('no-restricted-v-bind', rule, {
     },
     {
       filename: 'test.vue',
-      code:
-        '<template><div :v-on :foo.sync /><div :foo="foo" v-bind="listener" /></template>',
+      code: '<template><div :v-on :foo.sync /><div :foo="foo" v-bind="listener" /></template>',
       options: ['/^v-/', { argument: 'foo', modifiers: ['sync'] }, null],
       errors: [
         'Using `:v-on` is not allowed.',

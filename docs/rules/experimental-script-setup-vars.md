@@ -9,7 +9,7 @@ since: v7.0.0
 
 > prevent variables defined in `<script setup>` to be marked as undefined
 
-- :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
+- :warning: This rule was **deprecated**.
 
 :::warning
 This rule is an experimental rule. It may be removed without notice.
@@ -18,6 +18,10 @@ This rule is an experimental rule. It may be removed without notice.
 This rule will find variables defined in `<script setup="args">` and mark them as defined variables.
 
 This rule only has an effect when the `no-undef` rule is enabled.
+
+:::warning
+`<script setup="args">` syntax was rejected by Vue's RFC. Check out the [new syntax](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md).
+:::
 
 ## :book: Rule Details
 

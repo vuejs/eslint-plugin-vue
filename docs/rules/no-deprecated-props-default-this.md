@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-props-default-this
-description: disallow props default function `this` access
+description: disallow deprecated `this` access in props default function (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
 # vue/no-deprecated-props-default-this
 
-> disallow props default function `this` access
+> disallow deprecated `this` access in props default function (in Vue.js 3.0.0+)
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 

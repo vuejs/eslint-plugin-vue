@@ -22,7 +22,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
   <!-- ✗ BAD -->
   <a href="http://example.com" target="_blank" >link</a>
-</temlate>
+</template>
 ```
 
 </eslint-code-block>
@@ -52,7 +52,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
   <!-- ✗ BAD -->
   <a href="http://example.com" target="_blank" rel="noopener">link</a>
-</temlate>
+</template>
 ```
 
 </eslint-code-block>
@@ -68,7 +68,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
   <!-- ✗ BAD -->
   <a href="http://example.com" target="_blank" >link</a>
-</temlate>
+</template>
 ```
 
 </eslint-code-block>
@@ -84,7 +84,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
   <!-- ✗ BAD -->
   <a :href="link" target="_blank">link</a>
-</temlate>
+</template>
 ```
 
 </eslint-code-block>
@@ -100,7 +100,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
   <!-- ✗ BAD -->
   <a href="http://example.com" target="_blank" >link</a>
-</temlate>
+</template>
 ```
 
 </eslint-code-block>

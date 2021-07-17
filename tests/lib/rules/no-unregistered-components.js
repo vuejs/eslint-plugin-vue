@@ -450,6 +450,19 @@ tester.run('no-unregistered-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
+          <component is="vue:CustomComponent" />
+        </template>
+        <script>
+        export default {
+          name: 'CustomComponent'
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
           <div v-is="'CustomComponent'" />
         </template>
         <script>
@@ -477,6 +490,17 @@ tester.run('no-unregistered-components', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <TheModal />
+      </template>
+
+      <script setup>
+      import TheModal from 'foo'
+      </script>`
     }
   ],
   invalid: [
@@ -703,6 +727,48 @@ tester.run('no-unregistered-components', rule, {
         {
           message:
             'The "CustomComponentWithNamedSlots" component has been used but not registered.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div is="vue:foo" />
+        </template>
+        <script>
+        export default {
+          components: {
+            bar
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "foo" component has been used but not registered.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-is="'foo'" />
+        </template>
+        <script>
+        export default {
+          components: {
+            bar
+          }
+        }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "foo" component has been used but not registered.',
           line: 3
         }
       ]

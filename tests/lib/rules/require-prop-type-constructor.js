@@ -355,6 +355,36 @@ ruleTester.run('require-prop-type-constructor', rule, {
           line: 18
         }
       ]
+    },
+    {
+      filename: 'SomeComponent.vue',
+      code: `
+      <script setup>
+      defineProps({
+        a: {
+          type: 'String',
+          default: 'abc'
+        },
+      })
+      </script>
+      `,
+      output: `
+      <script setup>
+      defineProps({
+        a: {
+          type: String,
+          default: 'abc'
+        },
+      })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: 'The "a" property should be a constructor.',
+          line: 5
+        }
+      ]
     }
   ]
 })

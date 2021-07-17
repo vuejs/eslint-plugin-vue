@@ -96,6 +96,31 @@ ruleTester.run('no-deprecated-props-default-this', rule, {
         }
         </script>
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1464
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="printMessage">Print message</button>
+      </template>
+
+      <script>
+
+      export default {
+        name: 'App',
+        props: {
+          message: String,
+          printMessage: {
+            type: Function,
+            default() {
+              console.log(this.message);
+            }
+          }
+        }
+      }
+      </script>
+      `
     }
   ],
 

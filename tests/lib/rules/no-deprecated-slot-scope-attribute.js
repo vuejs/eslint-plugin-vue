@@ -138,6 +138,31 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
           line: 4
         }
       ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template v-for="x in xs" slot-scope="{a}" >
+          {{a}}
+          </template>
+        </my-component>
+      </template>`,
+      output: null,
+      errors: ['`slot-scope` are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <template slot-scope="{a}" >
+            {{a}}
+          </template>
+          <div />
+        </my-component>
+      </template>`,
+      output: null,
+      errors: ['`slot-scope` are deprecated.']
     }
   ]
 })

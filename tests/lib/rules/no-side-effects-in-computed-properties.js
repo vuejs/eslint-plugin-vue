@@ -591,6 +591,141 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           message: 'Unexpected side effect in computed function.'
         }
       ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {ref, computed} from 'vue'
+      const foo = useFoo()
+      const asd = { qwe: {} }
+      function a () {}
+      class A {}
+
+      const test1 = computed(() => {
+        foo.firstName = 'lorem'
+        asd.qwe.zxc = 'lorem'
+        return foo.firstName + ' ' + foo.lastName
+      })
+      const test2 = computed(() => {
+        foo.count += 2;
+        foo.count++;
+        return foo.count;
+      })
+      const test3 = computed(() => foo.something.reverse())
+      const test4 = computed(() => {
+        const test = foo.another.something.push('example')
+        return 'something'
+      })
+      const test5 = computed(() => {
+        foo.something[index] = foo.thing[index]
+        return foo.something
+      })
+      const test6 = computed(() => foo.something.keys.sort())
+      const test7 = computed({
+        get() {
+          return foo.something.reverse()
+        }
+      })
+      const test8 = computed(() => {
+        a.name = ''
+      })
+      const test9 = computed(() => {
+        A.name = ''
+      })
+      const test10 = computed(() => (foo.a = '', true))
+
+      const test100 = computed(() => {
+        const a = foo
+        a.count++ // false negative
+      })
+      </script>
+      `,
+      errors: [
+        {
+          line: 10,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 11,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 15,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 16,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 19,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 21,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 25,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 28,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 31,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 35,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 38,
+          message: 'Unexpected side effect in computed function.'
+        },
+        {
+          line: 40,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {reactive, computed} from 'vue'
+      const arr = reactive([])
+
+      const test1 = computed(() => arr.reverse())
+      </script>
+      `,
+      errors: [
+        {
+          line: 6,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts" setup>
+      import {ref, computed} from 'vue'
+      const foo = useFoo()
+
+      const test1 = computed(() => foo.something.reverse())
+      </script>
+      `,
+      errors: [
+        {
+          line: 6,
+          message: 'Unexpected side effect in computed function.'
+        }
+      ]
     }
   ]
 })
