@@ -662,6 +662,28 @@ tester.run('no-use-computed-property-like-method', rule, {
       errors: [
         'Use this.computedReturnObject instead of this.computedReturnObject().'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnNothing() {
+              return
+            },
+          },
+          methods: {
+            fn() {
+              this.computedReturnNothing()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnNothing instead of this.computedReturnNothing().'
+      ]
     }
   ]
 })
