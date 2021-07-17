@@ -615,6 +615,32 @@ tester.run('no-parsing-error', rule, {
     {
       code: '<template><div xmlns=""></template>',
       errors: ['Parsing error: x-invalid-namespace.']
+    },
+
+    //style vars
+    {
+      filename: 'test.vue',
+      code: `
+        <template></template>
+        <style>
+          .text {
+            color: v-bind(color.);
+            font-size: v-bind('font size');
+          }
+        </style>
+        `,
+      errors: [
+        {
+          message: 'Parsing error: Unexpected end of expression.',
+          line: 5,
+          column: 33
+        },
+        {
+          message: 'Parsing error: Unexpected token size.',
+          line: 6,
+          column: 37
+        }
+      ]
     }
   ]
 })
