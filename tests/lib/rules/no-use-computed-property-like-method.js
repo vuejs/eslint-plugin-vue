@@ -404,6 +404,20 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          methods: {
+            fn() {
+              this.foo()
+            }
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
