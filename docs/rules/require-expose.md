@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-expose
 description: require declare public properties using `expose`
+since: v7.14.0
 ---
 # vue/require-expose
 
 > require declare public properties using `expose`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -113,6 +112,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue RFCs - 0042-expose-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0042-expose-api.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.14.0
 
 ## :mag: Implementation
 
