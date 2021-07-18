@@ -29,6 +29,36 @@ tester.run('dot-notation', rule, {
       code: `<template><div :[foo[\`bar\`]]="a" /></template>`,
       output: `<template><div :[foo.bar]="a" /></template>`,
       errors: ['[`bar`] is better written in dot notation.']
+    },
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind(foo[\`bar\`])
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind(foo.bar)
+      }
+      </style>`,
+      errors: ['[`bar`] is better written in dot notation.']
+    },
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind("foo[\`bar\`]")
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind("foo.bar")
+      }
+      </style>`,
+      errors: ['[`bar`] is better written in dot notation.']
     }
   ]
 })
