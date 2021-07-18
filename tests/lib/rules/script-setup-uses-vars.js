@@ -335,7 +335,7 @@ describe('script-setup-uses-vars', () => {
           const color = 'red'
         </script>
 
-        <style>
+        <style lang="scss">
           .v-bind .color {
             color: 'v-bind(color)';
             background-color: 'v-bind(color)';
