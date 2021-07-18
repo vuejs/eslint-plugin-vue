@@ -179,6 +179,25 @@ describe('script-setup-uses-vars', () => {
           <div ref="v"/>
         </template>
         `
+      },
+
+      //style vars
+      {
+        filename: 'test.vue',
+        code: `
+        <script setup>
+          /* eslint script-setup-uses-vars: 1 */
+          const color = 'red'
+          const font = { size: '2em' }
+        </script>
+
+        <style>
+          * {
+            color: v-bind(color);
+            font-size: v-bind('font.size');
+          }
+        </style>
+        `
       }
     ],
 
@@ -305,6 +324,27 @@ describe('script-setup-uses-vars', () => {
             line: 4
           }
         ]
+      },
+
+      //style vars
+      {
+        filename: 'test.vue',
+        code: `
+        <script setup>
+          /* eslint script-setup-uses-vars: 1 */
+          const color = 'red'
+        </script>
+
+        <style lang="scss">
+          .v-bind .color {
+            color: 'v-bind(color)';
+            background-color: 'v-bind(color)';
+          }
+          /* v-bind(color) */
+          // v-bind(color)
+        </style>
+        `,
+        errors: ["'color' is assigned a value but never used."]
       }
     ]
   })
