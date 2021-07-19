@@ -38,6 +38,16 @@ tester.run('template-curly-spacing', rule, {
       </template>
       `,
       options: ['always']
+    },
+
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        padding: v-bind(\`\${a}px\`)
+      }
+      </style>`
     }
   ],
   invalid: [
@@ -83,6 +93,32 @@ tester.run('template-curly-spacing', rule, {
         {
           message: "Expected space(s) before '}'.",
           line: 3
+        }
+      ]
+    },
+
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        padding: v-bind(\`\${ a }px\`)
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        padding: v-bind(\`\${a}px\`)
+      }
+      </style>`,
+      errors: [
+        {
+          message: "Unexpected space(s) after '${'.",
+          line: 4
+        },
+        {
+          message: "Unexpected space(s) before '}'.",
+          line: 4
         }
       ]
     }
