@@ -41,7 +41,14 @@ tester.run('no-extra-parens', rule, {
     '<template><button :class="(a+b | bitwise)" /></template>',
     '<template><button>{{ (foo + bar | bitwise) }}</button></template>',
     '<template><button>{{ (foo | bitwise) | filter }}</button></template>',
-    '<template><button>{{ (function () {} ()) }}</button></template>'
+    '<template><button>{{ (function () {} ()) }}</button></template>',
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('a')
+    }
+    </style>`
   ],
   invalid: [
     {
@@ -191,6 +198,22 @@ tester.run('no-extra-parens', rule, {
     {
       code: '<template><button>{{ ((function () {})()) }}</button></template>',
       output: '<template><button>{{ (function () {})() }}</button></template>',
+      errors: [{ messageId: 'unexpected' }]
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('(a)')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('a')
+      }
+      </style>`,
       errors: [{ messageId: 'unexpected' }]
     }
   ]
