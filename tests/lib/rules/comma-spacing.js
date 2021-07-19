@@ -61,7 +61,14 @@ tester.run('comma-spacing', rule, {
     `<script>
     fn = (a,b) => {}
     </script>`,
-    `fn = (a,b) => {}`
+    `fn = (a,b) => {}`,
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('foo(a, b)')
+    }
+    </style>`
   ],
   invalid: [
     {
@@ -275,6 +282,26 @@ tester.run('comma-spacing', rule, {
         },
         {
           message: "There should be no space after ','.",
+          line: 4
+        }
+      ]
+    },
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('foo(a,b)')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('foo(a, b)')
+      }
+      </style>`,
+      errors: [
+        {
+          message: "A space is required after ','.",
           line: 4
         }
       ]

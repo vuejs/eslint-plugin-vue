@@ -17,7 +17,14 @@ tester.run('dot-notation', rule, {
     '<template><div attr="foo[\'bar\']" /></template>',
     `<template><div :[foo.bar]="a" /></template>`,
     `<template><div :attr="foo[bar]" /></template>`,
-    `<template><div :[foo[bar]]="a" /></template>`
+    `<template><div :[foo[bar]]="a" /></template>`,
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind(foo.bar)
+    }
+    </style>`
   ],
   invalid: [
     {
@@ -30,6 +37,7 @@ tester.run('dot-notation', rule, {
       output: `<template><div :[foo.bar]="a" /></template>`,
       errors: ['[`bar`] is better written in dot notation.']
     },
+    // CSS vars injection
     {
       code: `
       <style>
