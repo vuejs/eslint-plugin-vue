@@ -222,7 +222,7 @@ tester.run('space-in-parens', rule, {
       output: `
       <style>
       .text {
-        color: v-bind('foo( arg )')
+        color: v-bind('foo(arg)')
       }
       </style>`,
       errors: [
