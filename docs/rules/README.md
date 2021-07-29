@@ -320,6 +320,7 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  |
+| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
@@ -366,7 +367,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/no-sparse-arrays](./no-sparse-arrays.md) | disallow sparse arrays |  |
 | [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
-| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks after opening and before closing braces | :wrench: |
+| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/object-property-newline](./object-property-newline.md) | enforce placing object properties on separate lines | :wrench: |
 | [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators | :wrench: |

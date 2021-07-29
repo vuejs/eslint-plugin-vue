@@ -8,6 +8,11 @@ export function findVariable(
   nameOrNode: VAST.Identifier | string
 ): eslint.Scope.Variable
 
+export function getStaticValue(
+  node: VAST.ESNode,
+  initialScope?: eslint.Scope.Scope
+): { value: any } | null
+
 export function isParenthesized(
   num: number,
   node: VAST.ESNode,
