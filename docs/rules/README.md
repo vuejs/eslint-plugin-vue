@@ -367,7 +367,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/no-sparse-arrays](./no-sparse-arrays.md) | disallow sparse arrays |  |
 | [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
-| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks inside braces | :wrench: |
+| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks after opening and before closing braces | :wrench: |
 | [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
 | [vue/object-property-newline](./object-property-newline.md) | enforce placing object properties on separate lines | :wrench: |
 | [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators | :wrench: |
