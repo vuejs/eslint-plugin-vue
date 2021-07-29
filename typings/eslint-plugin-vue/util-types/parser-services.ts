@@ -20,6 +20,12 @@ export interface ParserServices {
       templateBodyTriggerSelector: 'Program' | 'Program:exit'
     }
   ) => eslint.Rule.RuleListener
+  defineDocumentVisitor?: (
+    documentVisitor: TemplateListener,
+    options?: {
+      triggerSelector: 'Program' | 'Program:exit'
+    }
+  ) => eslint.Rule.RuleListener
   getDocumentFragment?: () => VAST.VDocumentFragment | null
 }
 export namespace ParserServices {

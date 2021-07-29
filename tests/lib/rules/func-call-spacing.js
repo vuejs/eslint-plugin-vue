@@ -39,7 +39,14 @@ tester.run('func-call-spacing', rule, {
       </template>
       `,
       options: ['always']
+    },
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('foo()')
     }
+    </style>`
   ],
   invalid: [
     {
@@ -78,6 +85,30 @@ tester.run('func-call-spacing', rule, {
         {
           message: 'Missing space between function name and paren.',
           line: 3
+        }
+      ]
+    },
+
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('foo ()')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('foo()')
+      }
+      </style>`,
+      errors: [
+        {
+          message: semver.lt(CLIEngine.version, '7.0.0')
+            ? 'Unexpected newline between function name and paren.'
+            : 'Unexpected whitespace between function name and paren.',
+          line: 4
         }
       ]
     }

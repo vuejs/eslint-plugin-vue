@@ -23,7 +23,14 @@ tester.run('space-unary-ops', rule, {
     {
       code: '<template><div :[!a]="a" /></template>',
       options: [{ nonwords: true }]
+    },
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      padding: v-bind(\`\${-num}px\`)
     }
+    </style>`
   ],
   invalid: [
     {
@@ -46,6 +53,23 @@ tester.run('space-unary-ops', rule, {
       options: [{ nonwords: true }],
       output: '<template><div :[!a]="! a" /></template>',
       errors: ["Unary operator '!' must be followed by whitespace."]
+    },
+
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        padding: v-bind(\`\${- num}px\`)
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        padding: v-bind(\`\${-num}px\`)
+      }
+      </style>`,
+      errors: ["Unexpected space after unary operator '-'."]
     }
   ]
 })

@@ -53,7 +53,14 @@ tester.run('space-in-parens', rule, {
         />
       </template>`,
       options: ['always']
+    },
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('foo(arg)')
     }
+    </style>`
   ],
   invalid: [
     {
@@ -199,6 +206,32 @@ tester.run('space-in-parens', rule, {
         }),
         errorMessage({
           messageId: 'missingClosingSpace',
+          line: 4
+        })
+      ]
+    },
+
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('foo( arg )')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('foo(arg)')
+      }
+      </style>`,
+      errors: [
+        errorMessage({
+          messageId: 'rejectedOpeningSpace',
+          line: 4
+        }),
+        errorMessage({
+          messageId: 'rejectedClosingSpace',
           line: 4
         })
       ]

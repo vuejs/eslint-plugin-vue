@@ -22,7 +22,14 @@ tester.run('prefer-template', rule, {
     <template>
       <div :[\`foo\${bar}\`]="value" />
     </template>
+    `,
+    // CSS vars injection
     `
+    <style>
+    .text {
+      color: v-bind('\`#\${hex}\`')
+    }
+    </style>`
   ],
   invalid: [
     {
@@ -56,6 +63,27 @@ tester.run('prefer-template', rule, {
         {
           message: 'Unexpected string concatenation.',
           line: 3
+        }
+      ]
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('"#"+hex')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('\`#\${hex}\`')
+      }
+      </style>`,
+      errors: [
+        {
+          message: 'Unexpected string concatenation.',
+          line: 4
         }
       ]
     }

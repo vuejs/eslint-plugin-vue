@@ -145,6 +145,8 @@ export type VNodeListenerMap = {
   'VFilterSequenceExpression:exit': V.VFilterSequenceExpression
   VFilter: V.VFilter
   'VFilter:exit': V.VFilter
+  VDocumentFragment: V.VDocumentFragment
+  'VDocumentFragment:exit': V.VDocumentFragment
 } & ESNodeListenerMap
 export type NodeListenerMap = {
   JSXAttribute: JSX.JSXAttribute

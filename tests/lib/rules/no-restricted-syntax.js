@@ -50,6 +50,21 @@ tester.run('no-restricted-syntax', rule, {
           message: 'Third argument of interpolate must be true'
         }
       ]
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('foo')
+      }
+      </style>`,
+      options: [
+        {
+          selector: 'CallExpression',
+          message: 'Call expressions are not allowed.'
+        }
+      ]
     }
   ],
   invalid: [
@@ -181,6 +196,28 @@ tester.run('no-restricted-syntax', rule, {
           message: 'Third argument of interpolate must be true',
           line: 3,
           column: 48
+        }
+      ]
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('foo()')
+      }
+      </style>`,
+      options: [
+        {
+          selector: 'CallExpression',
+          message: 'Call expressions are not allowed.'
+        }
+      ],
+      errors: [
+        {
+          message: 'Call expressions are not allowed.',
+          line: 4,
+          column: 24
         }
       ]
     }
