@@ -318,6 +318,19 @@ ruleTester.run('no-mutating-props', rule, {
         value.value++
         </script>
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1579
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['prop'],
+          setup(props) {
+            props.prop.sortAscending()
+          }
+        }
+      </script>`
     }
   ],
 
