@@ -23,7 +23,7 @@ yarn add -D eslint eslint-plugin-vue
 ::: tip Requirements
 
 - ESLint v6.2.0 and above
-- Node.js v12.22.x, v14.17.x, and v16.x and above
+- Node.js v12.22.x, v14.17.x, v16.x and above
 
 We have started supporting ESLint v8.0.0 beta, but note that beta support will be dropped once the stable version is released.
 
