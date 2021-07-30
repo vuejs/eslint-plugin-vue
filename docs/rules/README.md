@@ -279,13 +279,14 @@ For example:
 ```json
 {
   "rules": {
-    "vue/block-tag-newline": "error"
+    "vue/block-lang": "error"
   }
 }
 ```
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
+| [vue/block-lang](./block-lang.md) | disallow use other than available `lang` |  |
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  |
