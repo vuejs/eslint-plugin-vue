@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/block-lang
 description: disallow use other than available `lang`
+since: v7.15.0
 ---
 # vue/block-lang
 
 > disallow use other than available `lang`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -84,6 +83,10 @@ Same as `{ script: { allowNoLang: true } }`.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.15.0
 
 ## :mag: Implementation
 
