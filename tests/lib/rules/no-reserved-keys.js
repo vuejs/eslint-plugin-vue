@@ -168,7 +168,7 @@ ruleTester.run('no-reserved-keys', rule, {
       parserOptions: { ecmaVersion: 6 },
       errors: [
         {
-          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
       ]
@@ -187,7 +187,7 @@ ruleTester.run('no-reserved-keys', rule, {
       parserOptions: { ecmaVersion: 6 },
       errors: [
         {
-          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 5
         }
       ]
@@ -204,7 +204,7 @@ ruleTester.run('no-reserved-keys', rule, {
       parserOptions: { ecmaVersion: 6 },
       errors: [
         {
-          message: "Keys starting with with '_' are reserved in '_foo' group.",
+          message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
       ]
