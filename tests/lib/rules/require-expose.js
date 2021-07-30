@@ -22,16 +22,6 @@ tester.run('require-expose', rule, {
       code: `
       <script>
         export default {
-          setup:() => function () {}
-        }
-      </script>
-      `
-    },
-    {
-      filename: 'ValidComponent.vue',
-      code: `
-      <script>
-        export default {
           expose: ['foo'],
           methods: {
             foo() {},
@@ -159,6 +149,16 @@ tester.run('require-expose', rule, {
             const foo = function () {}
             return foo
           }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+      <script>
+        export default {
+          setup:() => function () {}
         }
       </script>
       `
