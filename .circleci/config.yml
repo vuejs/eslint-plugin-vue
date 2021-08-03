@@ -120,5 +120,8 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Test
+          name: Lint
           command: npm run lint
+      - run:
+          name: Check
+          command: npm run valid

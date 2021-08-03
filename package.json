@@ -20,7 +20,8 @@
     "update": "node ./tools/update.js",
     "docs:watch": "vuepress dev docs",
     "predocs:build": "npm run update",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "valid": "node tools/valid-dependencies-engines"
   },
   "files": [
     "lib"
