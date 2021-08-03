@@ -1,13 +1,13 @@
 'use strict'
 
-const babelEslint = require('babel-eslint')
 const espree = require('espree')
 const utils = require('../../../lib/utils/index')
 const assert = require('assert')
 
 describe('getComputedProperties', () => {
   const parse = function (code) {
-    return babelEslint.parse(code).body[0].declarations[0].init
+    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
+      .init
   }
 
   it('should return empty array when there is no computed property', () => {
@@ -112,7 +112,8 @@ describe('getComputedProperties', () => {
 
 describe('getStaticPropertyName', () => {
   const parse = function (code) {
-    return babelEslint.parse(code).body[0].declarations[0].init
+    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
+      .init
   }
 
   it('should parse property expression with identifier', () => {
@@ -137,7 +138,8 @@ describe('getStaticPropertyName', () => {
 
 describe('getStringLiteralValue', () => {
   const parse = function (code) {
-    return babelEslint.parse(code).body[0].declarations[0].init
+    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
+      .init
   }
 
   it('should parse literal', () => {
@@ -275,7 +277,8 @@ describe('getMemberChaining', () => {
 
 describe('getRegisteredComponents', () => {
   const parse = function (code) {
-    return babelEslint.parse(code).body[0].declarations[0].init
+    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
+      .init
   }
 
   it('should return empty array when there are no components registered', () => {
@@ -335,7 +338,8 @@ describe('getRegisteredComponents', () => {
 
 describe('getComponentProps', () => {
   const parse = function (code) {
-    const data = babelEslint.parse(code).body[0].declarations[0].init
+    const data = espree.parse(code, { ecmaVersion: 2020 }).body[0]
+      .declarations[0].init
     return utils.getComponentProps(data)
   }
 

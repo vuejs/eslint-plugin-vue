@@ -235,7 +235,7 @@ ruleTester.run('require-default-prop', rule, {
       code: `
       <script setup lang="ts">
       interface Props {
-        foo: number
+        foo?: number
       }
       defineProps<Props>()
       </script>
@@ -251,7 +251,7 @@ ruleTester.run('require-default-prop', rule, {
       code: `
       <script setup lang="ts">
       interface Props {
-        foo: number
+        foo?: number
       }
       withDefaults(defineProps<Props>(), {foo:42})
       </script>
@@ -267,13 +267,60 @@ ruleTester.run('require-default-prop', rule, {
       code: `
       <script setup lang="ts">
       interface Props {
-        foo: number
+        foo?: number
       }
       defineProps<Props>({
         foo:{
           default: 42
         }
       })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1591
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          {{ required }}
+          {{ optional }}
+        </div>
+      </template>
+
+      <script setup lang="ts">
+      import { defineProps, withDefaults } from 'vue';
+
+      interface Props {
+        required: boolean;
+        optional?: boolean;
+      }
+
+      const props = withDefaults(defineProps<Props>(), {
+        optional: false,
+      });
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        optional?: boolean;
+      }
+
+      const props = defineProps<Props>();
       </script>
       `,
       parser: require.resolve('vue-eslint-parser'),
@@ -503,7 +550,7 @@ ruleTester.run('require-default-prop', rule, {
             code: `
             <script setup lang="ts">
             interface Props {
-              foo: number
+              foo?: number
             }
             withDefaults(defineProps<Props>(), {bar:42})
             </script>
