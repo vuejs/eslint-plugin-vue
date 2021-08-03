@@ -72,7 +72,7 @@ By default all rules from **base** and **essential** categories report ESLint er
 :::
 
 :::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.0 and `<script setup>`, but the Vue.js 3.0 experimental feature CSS variable injection is not yet supported.  
+This plugin supports the basic syntax of Vue.js 3.1, `<script setup>`, and CSS variable injection.  
 If you have issues with these, please also refer to the [FAQ](#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
 
