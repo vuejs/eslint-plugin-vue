@@ -418,6 +418,26 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnArray() {
+              return [1,2,3,4,5]
+            },
+            computedReturnArray2() {
+              return [1,2,3,4,5]
+            },
+            computedReturnComputedReturnString() {
+              return this.computedReturnArray.map(() => this.computedReturnArray2)
+            }
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -697,6 +717,50 @@ tester.run('no-use-computed-property-like-method', rule, {
       `,
       errors: [
         'Use this.computedReturnNothing instead of this.computedReturnNothing().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnString() {
+              return 'computedReturnString'
+            },
+            computedReturnComputedReturnString() {
+              return this.computedReturnString()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnString instead of this.computedReturnString().'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            computedReturnArray() {
+              return [1,2,3,4,5]
+            },
+            computedReturnArray2() {
+              return [1,2,3,4,5]
+            },
+            computedReturnComputedReturnString() {
+              return this.computedReturnArray.map([...this.computedReturnArray(), ...this.computedReturnArray2()])
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnArray instead of this.computedReturnArray().',
+        'Use this.computedReturnArray2 instead of this.computedReturnArray2().'
       ]
     }
   ]
