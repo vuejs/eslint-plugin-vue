@@ -198,6 +198,22 @@ describe('script-setup-uses-vars', () => {
           }
         </style>
         `
+      },
+      // ns
+      {
+        filename: 'test.vue',
+        code: `
+        <script setup>
+        /* eslint script-setup-uses-vars: 1 */
+        import * as Form from './form-components'
+        </script>
+
+        <template>
+          <Form.Input>
+            <Form.Label>label</Form.Label>
+          </Form.Input>
+        </template>
+        `
       }
     ],
 
