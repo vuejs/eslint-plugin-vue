@@ -72,7 +72,7 @@ By default all rules from **base** and **essential** categories report ESLint er
 :::
 
 :::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.1, `<script setup>`, and CSS variable injection.  
+This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.  
 If you have issues with these, please also refer to the [FAQ](#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
 
