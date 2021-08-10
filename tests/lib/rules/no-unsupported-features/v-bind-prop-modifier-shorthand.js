@@ -33,6 +33,13 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       <template>
         <a .href="'/xxx'" />
       </template>`,
+      options: buildOptions({ version: '3.2.0' })
+    },
+    {
+      code: `
+      <template>
+        <a .href="'/xxx'" />
+      </template>`,
       options: buildOptions({ version: '2.6.0-beta.2' })
     },
     {
@@ -63,8 +70,7 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       </template>`,
       errors: [
         {
-          message:
-            '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
+          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
           line: 3
         }
       ]
@@ -81,8 +87,24 @@ tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
       </template>`,
       errors: [
         {
-          message:
-            '`.prop` shorthand are not supported except Vue.js ">=2.6.0-beta.1 <=2.6.0-beta.3".',
+          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
+          line: 3
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <a .href="'/xxx'" />
+      </template>`,
+      options: buildOptions({ version: '3.1.0' }),
+      output: `
+      <template>
+        <a :href.prop="'/xxx'" />
+      </template>`,
+      errors: [
+        {
+          message: '`.prop` shorthand are not supported until Vue.js "3.2.0".',
           line: 3
         }
       ]

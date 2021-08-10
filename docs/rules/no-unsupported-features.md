@@ -29,6 +29,10 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.2.0+
+    - `"v-memo"` ... [v-memo](https://v3.vuejs.org/api/directives.html#v-memo) directive.
+    - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
+    - `"v-bind-attr-modifier"` ... `.attr` modifier on `v-bind` directive.
   - Vue.js 3.1.0+
     - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
   - Vue.js 3.0.0+
@@ -42,8 +46,6 @@ The `"ignores"` option accepts an array of the following strings.
     - `"v-slot"` ... [v-slot](https://v3.vuejs.org/api/directives.html#v-slot) directive.
   - Vue.js 2.5.0+
     - `"slot-scope-attribute"` ... [slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated) attributes.
-  - Vue.js `">=2.6.0-beta.1 <=2.6.0-beta.3"` or 2.6 custom build
-    - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
 
 ### `{"version": "^2.6.0"}`
 
@@ -97,6 +99,7 @@ The `"ignores"` option accepts an array of the following strings.
 
 ## :books: Further Reading
 
+- [API - v-memo](https://v3.vuejs.org/api/directives.html#v-memo)
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 - [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
