@@ -73,6 +73,10 @@ tester.run('valid-v-bind', rule, {
     },
     {
       filename: 'test.vue',
+      code: "<template><div :aaa.attr='bbb'></div></template>"
+    },
+    {
+      filename: 'test.vue',
       code: "<template><input v-bind='$attrs' /></template>"
     },
     // parsing error

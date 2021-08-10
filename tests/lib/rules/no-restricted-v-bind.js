@@ -147,6 +147,13 @@ tester.run('no-restricted-v-bind', rule, {
       </template>`,
       options: [{ argument: 'foo', message: 'foo' }],
       errors: ['foo']
+    },
+
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo.attr="foo" /><div :bar.attr="foo" /></template>',
+      options: [{ argument: 'foo', modifiers: ['attr'] }],
+      errors: ['Using `:foo.attr` is not allowed.']
     }
   ]
 })
