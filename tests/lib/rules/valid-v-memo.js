@@ -51,6 +51,11 @@ tester.run('valid-v-memo', rule, {
     {
       filename: 'parsing-error.vue',
       code: '<template><div v-memo="/**/" /></template>'
+    },
+    // v-for
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="i in items" v-memo="[x]"></div></template>'
     }
   ],
   invalid: [
@@ -121,6 +126,18 @@ tester.run('valid-v-memo', rule, {
             "'v-memo' directives require the attribute value to be an array.",
           line: 7,
           column: 24
+        }
+      ]
+    },
+    // v-for
+    {
+      filename: 'test.vue',
+      code: `<template><div v-for="i in items"><div v-memo="[x]" /></div></template>`,
+      errors: [
+        {
+          message: "'v-memo' directive does not work inside 'v-for'.",
+          line: 1,
+          column: 40
         }
       ]
     }

@@ -20,6 +20,7 @@ This rule reports `v-memo` directives in the following cases:
 - The directive has that modifier. E.g. `<div v-memo.bbb></div>`
 - The directive does not have that attribute value. E.g. `<div v-memo></div>`
 - The attribute value of the directive is definitely not array. E.g. `<div v-memo="{x}"></div>`
+- The directive was used inside v-for. E.g. `<div v-for="i in items"><div v-memo="[i]" /></div>`
 
 <eslint-code-block :rules="{'vue/valid-v-memo': ['error']}">
 
@@ -33,6 +34,9 @@ This rule reports `v-memo` directives in the following cases:
   <div v-memo:aaa="[x]"/>
   <div v-memo.bbb="[x]"/>
   <div v-memo="{x}"/>
+  <div v-for="i in items">
+    <div v-memo="[i]" />
+  </div>
 </template>
 ```
 
@@ -51,6 +55,10 @@ Nothing.
 - [vue/no-parsing-error]
 
 [vue/no-parsing-error]: ./no-parsing-error.md
+
+## :books: Further Reading
+
+- [API - v-memo](https://v3.vuejs.org/api/directives.html#v-memo)
 
 ## :mag: Implementation
 
