@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-v-memo
 description: enforce valid `v-memo` directives
+since: v7.16.0
 ---
 # vue/valid-v-memo
 
 > enforce valid `v-memo` directives
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule checks whether every `v-memo` directive is valid.
 
@@ -59,6 +58,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API - v-memo](https://v3.vuejs.org/api/directives.html#v-memo)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.16.0
 
 ## :mag: Implementation
 
