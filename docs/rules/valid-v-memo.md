@@ -9,6 +9,8 @@ since: v7.16.0
 
 > enforce valid `v-memo` directives
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 This rule checks whether every `v-memo` directive is valid.
 
 ## :book: Rule Details

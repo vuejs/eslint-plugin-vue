@@ -21,16 +21,6 @@ tester.run('require-expose', rule, {
       filename: 'ValidComponent.vue',
       code: `
       <script>
-        export default { // TODO
-          setup:() => function () {}
-        }
-      </script>
-      `
-    },
-    {
-      filename: 'ValidComponent.vue',
-      code: `
-      <script>
         export default {
           expose: ['foo'],
           methods: {
