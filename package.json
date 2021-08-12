@@ -20,8 +20,7 @@
     "update": "node ./tools/update.js",
     "docs:watch": "vuepress dev docs",
     "predocs:build": "npm run update",
-    "docs:build": "vuepress build docs",
-    "valid": "node tools/valid-dependencies-engines"
+    "docs:build": "vuepress build docs"
   },
   "files": [
     "lib"
@@ -74,6 +73,8 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-eslint-plugin": "^3.5.3",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsonc": "^1.4.0",
+    "eslint-plugin-node-dependencies": "^0.1.0",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "file:.",
     "espree": "^9.0.0",

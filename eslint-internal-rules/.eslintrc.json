@@ -2,5 +2,13 @@
   "rules": {
     "no-invalid-meta-docs-categories": "error",
     "no-invalid-meta": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "rules": {
+        "no-invalid-meta": "off"
+      }
+    }
+  ]
 }

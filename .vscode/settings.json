@@ -6,7 +6,9 @@
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        "vue"
+        "vue",
+        "json",
+        "jsonc"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",
     "vetur.validation.script": false,
