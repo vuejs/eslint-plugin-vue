@@ -50,18 +50,6 @@ function hasMetaDocs(metaPropertyNode) {
 }
 
 /**
- * Whether this `meta` ObjectExpression has a `docs.description` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs.description` property exists.
- */
-function hasMetaDocsDescription(metaPropertyNode) {
-  const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
-
-  return metaDocs && getPropertyFromObject('description', metaDocs.value)
-}
-
-/**
  * Whether this `meta` ObjectExpression has a `docs.category` property defined or not.
  *
  * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
@@ -71,16 +59,6 @@ function hasMetaDocsCategories(metaPropertyNode) {
   const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
 
   return metaDocs && getPropertyFromObject('categories', metaDocs.value)
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `schema` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `schema` property exists.
- */
-function hasMetaSchema(metaPropertyNode) {
-  return getPropertyFromObject('schema', metaPropertyNode.value)
 }
 
 /**
@@ -104,14 +82,6 @@ function checkMetaValidity(context, exportsNode) {
     return
   }
 
-  if (!hasMetaDocsDescription(metaProperty)) {
-    context.report(
-      metaProperty,
-      'Rule is missing a meta.docs.description property.'
-    )
-    return
-  }
-
   if (!hasMetaDocsCategories(metaProperty)) {
     context.report(
       metaProperty,
@@ -119,20 +89,6 @@ function checkMetaValidity(context, exportsNode) {
     )
     return
   }
-
-  if (!hasMetaSchema(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.schema property.')
-  }
-}
-
-/**
- * Whether this node is the correct format for a rule definition or not.
- *
- * @param {ASTNode} node node that the rule exports.
- * @returns {boolean} `true` if the exported node is the correct format for a rule definition
- */
-function isCorrectExportsFormat(node) {
-  return node != null && node.type === 'ObjectExpression'
 }
 
 // ------------------------------------------------------------------------------
@@ -166,15 +122,6 @@ module.exports = {
       },
 
       'Program:exit'(programNode) {
-        if (!isCorrectExportsFormat(exportsNode)) {
-          context.report({
-            node: exportsNode || programNode,
-            message:
-              'Rule does not export an Object. Make sure the rule follows the new rule format.'
-          })
-          return
-        }
-
         checkMetaValidity(context, exportsNode)
       }
     }

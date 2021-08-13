@@ -108,16 +108,6 @@ function checkMetaValidity(context, exportsNode) {
   }
 }
 
-/**
- * Whether this node is the correct format for a rule definition or not.
- *
- * @param {ASTNode} node node that the rule exports.
- * @returns {boolean} `true` if the exported node is the correct format for a rule definition
- */
-function isCorrectExportsFormat(node) {
-  return node != null && node.type === 'ObjectExpression'
-}
-
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------
@@ -149,15 +139,6 @@ module.exports = {
       },
 
       'Program:exit'(programNode) {
-        if (!isCorrectExportsFormat(exportsNode)) {
-          context.report({
-            node: exportsNode || programNode,
-            message:
-              'Rule does not export an Object. Make sure the rule follows the new rule format.'
-          })
-          return
-        }
-
         checkMetaValidity(context, exportsNode)
       }
     }

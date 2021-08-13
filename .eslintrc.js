@@ -126,18 +126,21 @@ module.exports = {
     {
       files: ['lib/rules/*.js'],
       rules: {
-        'consistent-docs-description': 'error',
-        'no-invalid-meta': 'error',
-        'no-invalid-meta-docs-categories': 'error',
-        'eslint-plugin/require-meta-type': 'error',
-        'require-meta-docs-url': [
+        'eslint-plugin/no-deprecated-context-methods': 'error',
+        'eslint-plugin/no-only-tests': 'error',
+        'eslint-plugin/prefer-object-rule': 'error',
+        'eslint-plugin/require-meta-docs-description': 'error',
+        'eslint-plugin/require-meta-docs-url': [
           'error',
           {
             pattern: `https://eslint.vuejs.org/rules/{{name}}.html`
           }
         ],
-
-        'eslint-plugin/fixer-return': 'off'
+        'eslint-plugin/require-meta-has-suggestions': 'error',
+        'eslint-plugin/require-meta-schema': 'error',
+        'eslint-plugin/require-meta-type': 'error',
+        'no-invalid-meta': 'error',
+        'no-invalid-meta-docs-categories': 'error'
       }
     }
   ]

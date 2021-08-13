@@ -1,6 +1,6 @@
 {
   "rules": {
-    "consistent-docs-description": "error",
+    "no-invalid-meta-docs-categories": "error",
     "no-invalid-meta": "error"
   }
 }
