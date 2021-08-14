@@ -79,9 +79,9 @@ jobs:
           command: npm version
       - checkout
       - run:
-          name: Install @typescript-eslint/parser@4
+          name: Install @typescript-eslint/parser@4 eslint@7
           command: |
-            npm install @typescript-eslint/parser@^4
+            npm install @typescript-eslint/parser@^4 eslint@7
       - run:
           name: Install dependencies
           command: npm install
