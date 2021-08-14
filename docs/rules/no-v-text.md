@@ -3,7 +3,6 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-text
 description: disallow use of v-text
-since: v7.17.0
 ---
 # vue/no-v-text
 
@@ -11,12 +10,10 @@ since: v7.17.0
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-  - However, when using selfClose to element with v-text like `<div v-text="foobar" />`, it can't be fixed.
-
 ## :book: Rule Details
 
 This rule reports all uses of `v-text` directive.
-
+When using selfClose to element with v-text like `<div v-text="foobar" />`, it can't be fixed.
 
 <eslint-code-block fix :rules="{'vue/no-v-text': ['error']}">
 
