@@ -333,7 +333,8 @@ Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`
 - Duplicate warnings are displayed.
 - Used `babel-eslint`, but the template still show `vue/no-parsing-error` warnings.
 
-You need to turn off Vetur's template validation by adding `vetur.validation.template: false` to your `.vscode/settings.json`.
+You need to turn off Vetur's template validation by adding `vetur.validation.interpolation: false` and `vetur.validation.script: false` to your `.vscode/settings.json`.
+Additionally, to have VS Code ignore some rules, you can `override` the rules in ESlint Config. See also "[Configure ESlint](https://eslint.bootcss.com/docs/user-guide/configuring)".
 
 See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Linting](https://vuejs.github.io/vetur/guide/linting-error.html#linting).
 
