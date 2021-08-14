@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const { RuleTester, CLIEngine } = require('eslint')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const semver = require('semver')
 const rule = require('../../../lib/rules/space-infix-ops')
 
@@ -12,7 +12,7 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
-const message = semver.lt(CLIEngine.version, '5.10.0')
+const message = semver.lt(ESLint.version, '5.10.0')
   ? () => 'Infix operators must be spaced.'
   : (operator) => `Operator '${operator}' must be spaced.`
 
