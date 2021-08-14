@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const { RuleTester, CLIEngine } = require('eslint')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const semver = require('semver')
 const rule = require('../../../lib/rules/func-call-spacing')
 
@@ -62,7 +62,7 @@ tester.run('func-call-spacing', rule, {
       `,
       errors: [
         {
-          message: semver.lt(CLIEngine.version, '7.0.0')
+          message: semver.lt(ESLint.version, '7.0.0')
             ? 'Unexpected newline between function name and paren.'
             : 'Unexpected whitespace between function name and paren.',
           line: 3
@@ -105,7 +105,7 @@ tester.run('func-call-spacing', rule, {
       </style>`,
       errors: [
         {
-          message: semver.lt(CLIEngine.version, '7.0.0')
+          message: semver.lt(ESLint.version, '7.0.0')
             ? 'Unexpected newline between function name and paren.'
             : 'Unexpected whitespace between function name and paren.',
           line: 4

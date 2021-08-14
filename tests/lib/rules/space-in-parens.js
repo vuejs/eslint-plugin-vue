@@ -3,11 +3,11 @@
  */
 'use strict'
 
-const { RuleTester, CLIEngine } = require('eslint')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const semver = require('semver')
 const rule = require('../../../lib/rules/space-in-parens')
 
-const errorMessage = semver.lt(CLIEngine.version, '6.4.0')
+const errorMessage = semver.lt(ESLint.version, '6.4.0')
   ? (obj) => {
       const messageId = obj.messageId
       delete obj.messageId

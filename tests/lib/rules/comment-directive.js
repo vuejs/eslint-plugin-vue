@@ -10,75 +10,63 @@
 // -----------------------------------------------------------------------------
 
 const assert = require('assert')
-const path = require('path')
-const Module = require('module')
-const eslint = require('eslint')
+const { ESLint } = require('../../eslint-compat')
 
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------
 
 // Initialize linter.
-const linter = new eslint.CLIEngine({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2015
+const eslint = new ESLint({
+  overrideConfig: {
+    parser: require.resolve('vue-eslint-parser'),
+    parserOptions: {
+      ecmaVersion: 2015
+    },
+    plugins: ['vue'],
+    rules: {
+      'no-unused-vars': 'error',
+      'vue/comment-directive': 'error',
+      'vue/no-parsing-error': 'error',
+      'vue/no-duplicate-attributes': 'error'
+    }
   },
-  plugins: ['vue'],
-  rules: {
-    'no-unused-vars': 'error',
-    'vue/comment-directive': 'error',
-    'vue/no-parsing-error': 'error',
-    'vue/no-duplicate-attributes': 'error'
-  },
-  useEslintrc: false
+  useEslintrc: false,
+  plugins: { vue: require('../../../lib/index') }
 })
 
 describe('comment-directive', () => {
-  // Preparation.
-  // Make `require("eslint-plugin-vue")` loading this plugin while this test.
-  const resolveFilename = Module._resolveFilename
-  before(() => {
-    Module._resolveFilename = function (id, ...args) {
-      if (id === 'eslint-plugin-vue') {
-        return path.resolve(__dirname, '../../../lib/index.js')
-      }
-      return resolveFilename.call(this, id, ...args)
-    }
-  })
-  after(() => {
-    Module._resolveFilename = resolveFilename
-  })
-
   describe('eslint-disable/eslint-enable', () => {
-    it('disable all rules if <!-- eslint-disable -->', () => {
+    it('disable all rules if <!-- eslint-disable -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes -->', () => {
+    it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable vue/no-duplicate-attributes -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it('enable all rules if <!-- eslint-enable -->', () => {
+    it('enable all rules if <!-- eslint-enable -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
@@ -87,8 +75,9 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -97,7 +86,7 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[1].line, 6)
     })
 
-    it('enable specific rules if <!-- eslint-enable vue/no-duplicate-attributes -->', () => {
+    it('enable specific rules if <!-- eslint-enable vue/no-duplicate-attributes -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable vue/no-parsing-error, vue/no-duplicate-attributes -->
@@ -106,15 +95,16 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
       assert.deepEqual(messages[0].line, 6)
     })
 
-    it('should not affect to the code in <script>.', () => {
+    it('should not affect to the code in <script>.', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
@@ -124,54 +114,58 @@ describe('comment-directive', () => {
           var a
         </script>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.strictEqual(messages.length, 1)
       assert.strictEqual(messages[0].ruleId, 'no-unused-vars')
     })
 
-    it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes ,, , vue/no-parsing-error -->', () => {
+    it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes ,, , vue/no-parsing-error -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable vue/no-duplicate-attributes ,, , vue/no-parsing-error -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
   })
 
   describe('eslint-disable-line', () => {
-    it('disable all rules if <!-- eslint-disable-line -->', () => {
+    it('disable all rules if <!-- eslint-disable-line -->', async () => {
       const code = `
         <template>
           <div id id="a">Hello</div> <!-- eslint-disable-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('disable specific rules if <!-- eslint-disable-line vue/no-duplicate-attributes -->', () => {
+    it('disable specific rules if <!-- eslint-disable-line vue/no-duplicate-attributes -->', async () => {
       const code = `
         <template>
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it("don't disable rules if <!-- eslint-disable-line --> is on another line", () => {
+    it("don't disable rules if <!-- eslint-disable-line --> is on another line", async () => {
       const code = `
         <template>
           <!-- eslint-disable-line -->
@@ -179,8 +173,9 @@ describe('comment-directive', () => {
           <!-- eslint-disable-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -189,34 +184,36 @@ describe('comment-directive', () => {
   })
 
   describe('eslint-disable-next-line', () => {
-    it('disable all rules if <!-- eslint-disable-next-line -->', () => {
+    it('disable all rules if <!-- eslint-disable-next-line -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('disable specific rules if <!-- eslint-disable-next-line vue/no-duplicate-attributes -->', () => {
+    it('disable specific rules if <!-- eslint-disable-next-line vue/no-duplicate-attributes -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line vue/no-duplicate-attributes -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it("don't disable rules if <!-- eslint-disable-next-line --> is on another line", () => {
+    it("don't disable rules if <!-- eslint-disable-next-line --> is on another line", async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line -->
@@ -225,15 +222,16 @@ describe('comment-directive', () => {
           <!-- eslint-disable-next-line -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
       assert.deepEqual(messages[1].ruleId, 'vue/no-duplicate-attributes')
     })
 
-    it('should affect only the next line', () => {
+    it('should affect only the next line', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line vue/no-parsing-error, vue/no-duplicate-attributes -->
@@ -241,8 +239,10 @@ describe('comment-directive', () => {
           <div id id="b">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -253,20 +253,21 @@ describe('comment-directive', () => {
   })
 
   describe('allow description', () => {
-    it('disable all rules if <!-- eslint-disable -- description -->', () => {
+    it('disable all rules if <!-- eslint-disable -- description -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -- description -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('enable all rules if <!-- eslint-enable -- description -->', () => {
+    it('enable all rules if <!-- eslint-enable -- description -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -- description -->
@@ -275,8 +276,9 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -285,7 +287,7 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[1].line, 6)
     })
 
-    it('enable specific rules if <!-- eslint-enable vue/no-duplicate-attributes -- description -->', () => {
+    it('enable specific rules if <!-- eslint-enable vue/no-duplicate-attributes -- description -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable vue/no-parsing-error, vue/no-duplicate-attributes -- description -->
@@ -294,61 +296,66 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
       assert.deepEqual(messages[0].line, 6)
     })
 
-    it('disable all rules if <!-- eslint-disable-line -- description -->', () => {
+    it('disable all rules if <!-- eslint-disable-line -- description -->', async () => {
       const code = `
         <template>
           <div id id="a">Hello</div> <!-- eslint-disable-line -- description -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('disable specific rules if <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->', () => {
+    it('disable specific rules if <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->', async () => {
       const code = `
         <template>
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
     })
 
-    it('disable all rules if <!-- eslint-disable-next-line -- description -->', () => {
+    it('disable all rules if <!-- eslint-disable-next-line -- description -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line -- description -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('disable specific rules if <!-- eslint-disable-next-line vue/no-duplicate-attributes -->', () => {
+    it('disable specific rules if <!-- eslint-disable-next-line vue/no-duplicate-attributes -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line vue/no-duplicate-attributes -- description -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -356,20 +363,21 @@ describe('comment-directive', () => {
   })
 
   describe('block level directive', () => {
-    it('disable all rules if <!-- eslint-disable -->', () => {
+    it('disable all rules if <!-- eslint-disable -->', async () => {
       const code = `
         <!-- eslint-disable -->
         <template>
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it("don't disable rules if <!-- eslint-disable --> is on after block", () => {
+    it("don't disable rules if <!-- eslint-disable --> is on after block", async () => {
       const code = `
         <!-- eslint-disable -->
         <i18n>
@@ -378,8 +386,10 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -388,32 +398,36 @@ describe('comment-directive', () => {
   })
 
   describe('reportUnusedDisableDirectives', () => {
-    const linter = new eslint.CLIEngine({
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ecmaVersion: 2015
-      },
-      plugins: ['vue'],
-      rules: {
-        'no-unused-vars': 'error',
-        'vue/comment-directive': [
-          'error',
-          { reportUnusedDisableDirectives: true }
-        ],
-        'vue/no-parsing-error': 'error',
-        'vue/no-duplicate-attributes': 'error'
+    const eslint = new ESLint({
+      overrideConfig: {
+        parser: require.resolve('vue-eslint-parser'),
+        parserOptions: {
+          ecmaVersion: 2015
+        },
+        plugins: ['vue'],
+        rules: {
+          'no-unused-vars': 'error',
+          'vue/comment-directive': [
+            'error',
+            { reportUnusedDisableDirectives: true }
+          ],
+          'vue/no-parsing-error': 'error',
+          'vue/no-duplicate-attributes': 'error'
+        }
       },
       useEslintrc: false
     })
-    it('report unused <!-- eslint-disable -->', () => {
+    it('report unused <!-- eslint-disable -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
           <div id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/comment-directive')
@@ -425,19 +439,21 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[0].column, 11)
     })
 
-    it('dont report unused <!-- eslint-disable -->', () => {
+    it('dont report unused <!-- eslint-disable -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
-    it('disable and report unused <!-- eslint-disable -->', () => {
+    it('disable and report unused <!-- eslint-disable -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
@@ -447,8 +463,10 @@ describe('comment-directive', () => {
           <div id="b">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/comment-directive')
@@ -460,15 +478,17 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[0].column, 11)
     })
 
-    it('report unused <!-- eslint-disable vue/no-duplicate-attributes, vue/no-parsing-error -->', () => {
+    it('report unused <!-- eslint-disable vue/no-duplicate-attributes, vue/no-parsing-error -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable vue/no-duplicate-attributes, vue/no-parsing-error -->
           <div id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 2)
 
@@ -489,7 +509,7 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[1].column, 60)
     })
 
-    it('report unused <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->', () => {
+    it('report unused <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->
@@ -497,8 +517,10 @@ describe('comment-directive', () => {
           <div id id="b">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 4)
 
@@ -524,20 +546,22 @@ describe('comment-directive', () => {
       assert.deepEqual(messages[3].line, 5)
     })
 
-    it('dont report used <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->', () => {
+    it('dont report used <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->', async () => {
       const code = `
         <template>
           <!-- eslint-disable-next-line vue/no-duplicate-attributes, vue/no-parsing-error -->
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
 
-    it('dont report used, with duplicate eslint-disable', () => {
+    it('dont report used, with duplicate eslint-disable', async () => {
       const code = `
         <template>
           <!-- eslint-disable -->
@@ -545,8 +569,10 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div><!-- eslint-disable-line vue/no-duplicate-attributes, vue/no-parsing-error -->
         </template>
       `
-      const messages = linter.executeOnText(code, 'test.vue').results[0]
-        .messages
+
+      const messages = (
+        await eslint.lintText(code, { filePath: 'test.vue' })
+      )[0].messages
 
       assert.deepEqual(messages.length, 0)
     })
