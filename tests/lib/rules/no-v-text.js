@@ -39,13 +39,6 @@ ruleTester.run('no-v-text', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-text="foobar"></div></template>',
-      output: '<template><div >{{foobar}}</div></template>',
-      errors: ["Don't use 'v-text'."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-text="foobar" /></template>',
-      output: '<template><div v-text="foobar" /></template>',
       errors: ["Don't use 'v-text'."]
     }
   ]
