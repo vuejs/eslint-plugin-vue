@@ -8,14 +8,12 @@ description: disallow use of v-text
 
 > disallow use of v-text
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule reports all uses of `v-text` directive.
-When using selfClose to element with v-text like `<div v-text="foobar" />`, it can't be fixed.
 
-<eslint-code-block fix :rules="{'vue/no-v-text': ['error']}">
+<eslint-code-block :rules="{'vue/no-v-text': ['error']}">
 
 ```vue
 <template>
@@ -24,8 +22,6 @@ When using selfClose to element with v-text like `<div v-text="foobar" />`, it c
 
   <!-- ✗ BAD -->
   <div v-text="foobar"></div>
-  <!-- Reported. However, Not fixable -->
-  <div v-text="foobar" />
 </template>
 ```
 
