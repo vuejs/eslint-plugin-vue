@@ -8,6 +8,7 @@ description: disallow use of v-text
 
 > disallow use of v-text
 
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -30,10 +31,6 @@ This rule reports all uses of `v-text` directive.
 ## :wrench: Options
 
 Nothing.
-
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v7.17.0
 
 ## :mag: Implementation
 
