@@ -3,7 +3,7 @@ workflows:
   node-multi-build:
     jobs:
       - node-v8
-      - node-v10
+      - eslint-v7
       - node-v12
       - node-v14
       - lint
