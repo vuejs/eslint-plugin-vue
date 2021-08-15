@@ -50,10 +50,24 @@ jobs:
       - run:
           name: Test
           command: npm test
-  node-v10:
-    <<: *node-base
+  eslint-v7:
     docker:
       - image: node:10
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install eslint@7
+          command: |
+            npm install --save-exact eslint@7
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
   node-v12:
     <<: *node-base
     docker:
