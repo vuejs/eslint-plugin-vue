@@ -3,6 +3,7 @@ workflows:
   node-multi-build:
     jobs:
       - node-v8
+      - node-v10
       - eslint-v7
       - eslint-v8
       - node-v12
@@ -51,6 +52,10 @@ jobs:
       - run:
           name: Test
           command: npm test
+  node-v10:
+    <<: *node-base
+    docker:
+      - image: node:10
   eslint-v7:
     docker:
       - image: node:10
