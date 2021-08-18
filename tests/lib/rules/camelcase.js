@@ -52,6 +52,20 @@ tester.run('camelcase', rule, {
           line: 4
         }
       ]
+    },
+    {
+      code: `
+        <template>
+          <div @click="
+            const { my_pref } = $event
+          " />
+        </template>`,
+      errors: [
+        {
+          message: "Identifier 'my_pref' is not in camel case.",
+          line: 4
+        }
+      ]
     }
   ]
 })
