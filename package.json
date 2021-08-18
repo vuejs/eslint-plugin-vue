@@ -67,7 +67,7 @@
     "@typescript-eslint/parser": "^4.28.0",
     "@vuepress/plugin-pwa": "^1.4.1",
     "env-cmd": "^10.1.0",
-    "eslint": "^8.0.0-0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-eslint-plugin": "^3.5.3",
     "eslint-plugin-import": "^2.20.2",

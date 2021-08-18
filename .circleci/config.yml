@@ -68,6 +68,24 @@ jobs:
       - run:
           name: Test
           command: npm test
+  eslint-v8:
+    docker:
+      - image: node:14
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install eslint@8
+          command: |
+            npm install --save-exact eslint@^8.0.0-0
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
   node-v12:
     <<: *node-base
     docker:
