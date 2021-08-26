@@ -356,6 +356,7 @@ module.exports = {
   }
 }
 ```
+Note: If you've already set rule `@typescript-eslint/no-unused-vars`, you must set `vue/script-setup-uses-vars` before it.
 
 #### Compiler macros such as `defineProps` and `defineEmits` are warned by `no-undef` rule
 
