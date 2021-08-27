@@ -16,24 +16,39 @@ function getESLintClassForV6() {
     /** @param {eslint.ESLint.Options} options */
     constructor(options) {
       const {
-        overrideConfig: { plugins, globals, ...overrideConfig },
+        overrideConfig: { plugins, globals, rules, ...overrideConfig } = {
+          plugins: [],
+          globals: {},
+          rules: {}
+        },
         fix,
         reportUnusedDisableDirectives,
         plugins: pluginsMap,
         ...otherOptions
-      } = options
-      this.engine = new eslint.CLIEngine({
+      } = options || {}
+      /** @type {eslint.CLIEngine.Options} */
+      const newOptions = {
         fix: Boolean(fix),
+        reportUnusedDisableDirectives: reportUnusedDisableDirectives
+          ? reportUnusedDisableDirectives !== 'off'
+          : undefined,
+        ...otherOptions,
+
         globals: globals
           ? Object.keys(globals).filter((n) => globals[n])
           : undefined,
-        ...otherOptions,
-        ...overrideConfig,
         plugins: plugins || [],
-        reportUnusedDisableDirectives: reportUnusedDisableDirectives
-          ? reportUnusedDisableDirectives !== 'off'
-          : undefined
-      })
+        rules: rules
+          ? Object.entries(rules).reduce((o, [ruleId, opt]) => {
+              if (opt) {
+                o[ruleId] = opt
+              }
+              return o
+            }, /** @type {NonNullable<eslint.CLIEngine.Options["rules"]>}*/ ({}))
+          : undefined,
+        ...overrideConfig
+      }
+      this.engine = new eslint.CLIEngine(newOptions)
 
       for (const [name, plugin] of Object.entries(pluginsMap || {})) {
         this.engine.addPlugin(name, plugin)

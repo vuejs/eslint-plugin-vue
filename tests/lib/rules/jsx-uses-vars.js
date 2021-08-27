@@ -10,7 +10,9 @@
 
 const eslint = require('eslint')
 const rule = require('../../../lib/rules/jsx-uses-vars')
-const ruleNoUnusedVars = require('eslint/lib/rules/no-unused-vars')
+const ruleNoUnusedVars = new (require('eslint').Linter)()
+  .getRules()
+  .get('no-unused-vars')
 
 const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({

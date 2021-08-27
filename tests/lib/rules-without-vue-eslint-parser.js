@@ -5,7 +5,6 @@
 'use strict'
 
 const Linter = require('eslint').Linter
-const parser = require('babel-eslint')
 const rules = require('../..').rules
 const assert = require('assert')
 
@@ -18,13 +17,11 @@ describe("Don't crash even if without vue-eslint-parser.", () => {
     it(ruleId, () => {
       const linter = new Linter()
       const config = {
-        parser: 'babel-eslint',
-        parserOptions: { ecmaVersion: 2015 },
+        parserOptions: { ecmaVersion: 2015, ecmaFeatures: { jsx: true } },
         rules: {
           [ruleId]: 'error'
         }
       }
-      linter.defineParser('babel-eslint', parser)
       linter.defineRule(ruleId, rules[key])
       const resultVue = linter.verifyAndFix(code, config, 'test.vue')
       for (const { message } of resultVue.messages) {

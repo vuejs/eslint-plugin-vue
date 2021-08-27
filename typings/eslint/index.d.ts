@@ -123,9 +123,6 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   ): string
   getLines(): string[]
   getAllComments(): VNODE.Comment[]
-  getComments(
-    node: VAST.ESNode
-  ): { leading: VNODE.Comment[]; trailing: VNODE.Comment[] }
   getJSDocComment(node: VAST.ESNode): AST.Token | null
   getNodeByRangeIndex(index: number): VAST.ESNode | VAST.JSXNode
   isSpaceBetweenTokens(first: AST.Token, second: AST.Token): boolean
