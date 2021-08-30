@@ -18,11 +18,12 @@ class Foo {
     ?
     :
     number;
-  abstract absopt2
-    ?
-    :
-    number
-    =
-    42;
+// parser v5 does not parse value.
+// abstract absopt2
+//   ?
+//   :
+//   number
+//   =
+//   42;
 }
 </script>
