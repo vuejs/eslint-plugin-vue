@@ -27,6 +27,7 @@ export type ESNode =
   | ClassBody
   | MethodDefinition
   | PropertyDefinition
+  | StaticBlock
   | ModuleDeclaration
   | ModuleSpecifier
 
@@ -63,9 +64,11 @@ export type Statement =
 export interface EmptyStatement extends HasParentNode {
   type: 'EmptyStatement'
 }
-export interface BlockStatement extends HasParentNode {
-  type: 'BlockStatement'
+interface BaseBlock extends HasParentNode {
   body: Statement[]
+}
+export interface BlockStatement extends BaseBlock {
+  type: 'BlockStatement'
 }
 export interface ExpressionStatement extends HasParentNode {
   type: 'ExpressionStatement'
@@ -187,7 +190,7 @@ export interface ClassDeclaration extends HasParentNode {
 }
 export interface ClassBody extends HasParentNode {
   type: 'ClassBody'
-  body: (MethodDefinition | PropertyDefinition)[]
+  body: (MethodDefinition | PropertyDefinition | StaticBlock)[]
 }
 interface BaseMethodDefinition extends HasParentNode {
   type: 'MethodDefinition'
@@ -241,6 +244,11 @@ export type PropertyDefinition =
   | PropertyDefinitionNonComputedName
   | PropertyDefinitionComputedName
   | PropertyDefinitionPrivate
+
+export interface StaticBlock extends BaseBlock {
+  type: 'StaticBlock'
+  parent: ClassBody
+}
 
 export type ModuleDeclaration =
   | ImportDeclaration
