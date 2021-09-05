@@ -64,7 +64,7 @@
     "@types/natural-compare": "^1.4.0",
     "@types/node": "^13.13.5",
     "@types/semver": "^7.2.0",
-    "@typescript-eslint/parser": "^4.28.0",
+    "@typescript-eslint/parser": "^5.0.0-0",
     "@vuepress/plugin-pwa": "^1.4.1",
     "env-cmd": "^10.1.0",
     "eslint": "^7.0.0",

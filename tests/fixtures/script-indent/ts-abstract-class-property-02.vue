@@ -6,12 +6,14 @@ abstract class A {
     1
   ;
   abstract public b
-    =
-    's'
+  // parser v5 does not parse value.
+  //   =
+  //   's'
   ;
   protected abstract c
-    =
-    i
+  // parser v5 does not parse value.
+  //   =
+  //   i
   ;
 }
 </script>

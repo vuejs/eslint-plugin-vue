@@ -6,6 +6,7 @@ workflows:
       - node-v10
       - eslint-v7
       - eslint-v8
+      - ts-eslint-v4
       - node-v12
       - node-v14
       - lint
@@ -20,19 +21,19 @@ jobs:
           name: Versions
           command: npm version
       - checkout
-      - restore_cache:
-          keys:
-            - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+      # - restore_cache:
+      #     keys:
+      #       - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: npm install
-      - save_cache:
-          key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
-          paths:
-            - node_modules
       - run:
           name: Test
           command: npm test
+      # - save_cache:
+      #     key: v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
+      #     paths:
+      #       - node_modules
 
   node-v8:
     docker:
@@ -53,9 +54,23 @@ jobs:
           name: Test
           command: npm test
   node-v10:
-    <<: *node-base
     docker:
       - image: node:10
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install @typescript-eslint/parser@4
+          command: |
+            npm install @typescript-eslint/parser@^4
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
   eslint-v7:
     docker:
       - image: node:10
@@ -67,7 +82,7 @@ jobs:
       - run:
           name: Install eslint@7
           command: |
-            npm install --save-exact eslint@7
+            npm install eslint@7
       - run:
           name: Install dependencies
           command: npm install
@@ -85,7 +100,25 @@ jobs:
       - run:
           name: Install eslint@8
           command: |
-            npm install --save-exact eslint@^8.0.0-0
+            npm install eslint@^8.0.0-0
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
+  ts-eslint-v4:
+    docker:
+      - image: node:14
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install @typescript-eslint/parser@4
+          command: |
+            npm install @typescript-eslint/parser@^4
       - run:
           name: Install dependencies
           command: npm install

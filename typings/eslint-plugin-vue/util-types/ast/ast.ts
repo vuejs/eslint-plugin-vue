@@ -333,6 +333,8 @@ export type ESNodeListenerMap = {
   'MethodDefinition:exit': ES.MethodDefinition
   PropertyDefinition: ES.PropertyDefinition
   'PropertyDefinition:exit': ES.PropertyDefinition
+  StaticBlock: ES.StaticBlock
+  'StaticBlock:exit': ES.StaticBlock
   ImportDeclaration: ES.ImportDeclaration
   'ImportDeclaration:exit': ES.ImportDeclaration
   ExportNamedDeclaration: ES.ExportNamedDeclaration

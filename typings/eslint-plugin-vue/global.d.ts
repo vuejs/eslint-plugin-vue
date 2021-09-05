@@ -137,6 +137,7 @@ declare global {
   type ClassBody = VAST.ClassBody
   type MethodDefinition = VAST.MethodDefinition
   type PropertyDefinition = VAST.PropertyDefinition
+  type StaticBlock = VAST.StaticBlock
   type ModuleDeclaration = VAST.ModuleDeclaration
   type ImportDeclaration = VAST.ImportDeclaration
   type ExportNamedDeclaration = VAST.ExportNamedDeclaration
