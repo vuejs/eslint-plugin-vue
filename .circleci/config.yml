@@ -54,9 +54,23 @@ jobs:
           name: Test
           command: npm test
   node-v10:
-    <<: *node-base
     docker:
       - image: node:10
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install @typescript-eslint/parser@4
+          command: |
+            npm install @typescript-eslint/parser@^4
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
   eslint-v7:
     docker:
       - image: node:10
