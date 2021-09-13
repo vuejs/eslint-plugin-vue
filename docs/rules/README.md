@@ -90,6 +90,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
 | [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  |
 | [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  |
+| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
 | [vue/valid-v-cloak](./valid-v-cloak.md) | enforce valid `v-cloak` directives |  |
@@ -203,6 +204,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
+| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
@@ -343,7 +345,6 @@ For example:
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
-| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
 
 ### Extension Rules
 
