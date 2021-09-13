@@ -265,9 +265,10 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
     ]
   ```
 
-2. Make sure your tool is set to lint `.vue` files.
-  - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
-  - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
+1. Make sure your tool is set to lint `.vue` files.
+
+    - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
+    - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
 
 ### Conflict with [Prettier]
 
@@ -384,8 +385,8 @@ See also [ESLint - Specifying Globals > Using configuration files](https://eslin
 ##### Using ESLint <= v7.x
 
 The parser `espree` that comes with `ESLint` v7.x doesn't understand the syntax of ES2022, so it can't parse the Top Level `await` either.  
-However, `espree` v8+ can understand the syntax of ES2022 and parse the Top Level `await`.  
-You install `espree` v8+ and specify `"espree"` and ES2022 in your configuration, the parser will be able to parse it.
+However, `espree` >= v8 can understand the syntax of ES2022 and parse the Top Level `await`.  
+You install `espree` >= v8 and specify `"espree"` and ES2022 in your configuration, the parser will be able to parse it.
 
 ```js
 module.exports = {
