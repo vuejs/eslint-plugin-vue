@@ -288,6 +288,7 @@ For example:
 |:--------|:------------|:---|
 | [vue/block-lang](./block-lang.md) | disallow use other than available `lang` |  |
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: |
+| [vue/component-api-style](./component-api-style.md) | enforce component API style |  |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  |
