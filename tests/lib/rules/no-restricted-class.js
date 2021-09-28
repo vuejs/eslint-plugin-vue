@@ -22,6 +22,10 @@ ruleTester.run('no-restricted-class', rule, {
     {
       code: `<template><div :class="'allowed' + forbidden">Content</div></template>`,
       options: ['forbidden']
+    },
+    {
+      code: `<template><div @class="forbidden">Content</div></template>`,
+      options: ['forbidden']
     }
   ],
 
@@ -41,7 +45,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ],
       options: ['forbidden']
@@ -51,7 +55,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ],
       options: ['forbidden']
@@ -61,7 +65,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Identifier'
         }
       ],
       options: ['forbidden']
@@ -71,7 +75,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'TemplateElement'
         }
       ],
       options: ['forbidden']
@@ -81,7 +85,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ],
       options: ['forbidden']
@@ -91,7 +95,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ],
       options: ['forbidden']
@@ -101,7 +105,7 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ],
       options: ['forbidden']
