@@ -17,11 +17,11 @@ ruleTester.run('no-restricted-class', rule, {
     { code: `<template><div class="allowed">Content</div></template>` },
     {
       code: `<template><div class="allowed"">Content</div></template>`,
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: `<template><div :class="'allowed' + forbidden">Content</div></template>`,
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     }
   ],
 
@@ -34,7 +34,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: `<template><div :class="'forbidden' + ' ' + 'allowed' + someVar" /></template>`,
@@ -44,7 +44,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: `<template><div :class="{'forbidden': someBool, someVar: true}" /></template>`,
@@ -54,7 +54,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: `<template><div :class="{forbidden: someBool}" /></template>`,
@@ -64,7 +64,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: '<template><div :class="`forbidden ${someVar}`" /></template>',
@@ -74,7 +74,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
+      options: ['forbidden']
     },
     {
       code: `<template><div :class="'forbidden'" /></template>`,
@@ -84,19 +84,7 @@ ruleTester.run('no-restricted-class', rule, {
           type: 'VAttribute'
         }
       ],
-      options: [{ classes: ['forbidden'] }]
-    },
-    {
-      code: `<template><div class="forbidden allowed" /></template>`,
-      errors: [
-        {
-          message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
-        }
-      ],
-      options: [
-        { files: ['tests/fixtures/no-restricted-class/forbidden.json'] }
-      ]
+      options: ['forbidden']
     }
   ]
 })

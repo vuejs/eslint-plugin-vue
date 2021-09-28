@@ -3,7 +3,6 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-class
 description: disallow specific classes
-since: v7.19.0
 ---
 # vue/no-restricted-classes
 
@@ -20,11 +19,11 @@ in the rule configuration.
 
 ```json
 {
-  "vue/no-restricted-props": ["error", { classes: ["forbidden"] }]
+  "vue/no-restricted-props": ["error", "forbidden", "forbidden-two", "forbidden-three"]
 }
 ```
 
-<eslint-code-block :rules="{'vue/no-restricted-class': ['error', { classes: ['forbidden'] }]}">
+<eslint-code-block :rules="{'vue/no-restricted-class': ['error', 'forbidden']}">
 
 ```vue
 <template>
@@ -49,29 +48,6 @@ export default {
 ```
 
 </eslint-code-block>
-
-
-Alternatively, you can also specify a list of files that contain forbidden classes. Each file
-must contain a JSON-formatted array of strings.
-
-```json
-{
-  "vue/no-restricted-props": ["error",
-    {
-      files: [".eslint/forbidden-classes.json"]
-    },
-  ]
-}
-```
-
-`.eslint/forbidden-classes.json`:
-
-```
-[
-  "forbidden-class",
-  "another-forbidden-class"
-]
-```
 
 ::: warning Note
 This rule will only detect classes that are used as strings in your templates. Passing classes via
