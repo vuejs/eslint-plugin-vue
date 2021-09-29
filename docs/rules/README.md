@@ -310,6 +310,7 @@ For example:
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  |
+| [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  |
 | [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event |  |
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props |  |
