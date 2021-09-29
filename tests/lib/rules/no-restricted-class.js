@@ -26,6 +26,10 @@ ruleTester.run('no-restricted-class', rule, {
     {
       code: `<template><div @class="forbidden">Content</div></template>`,
       options: ['forbidden']
+    },
+    {
+      code: `<template><div :class="'' + {forbidden: true}">Content</div></template>`,
+      options: ['forbidden']
     }
   ],
 
