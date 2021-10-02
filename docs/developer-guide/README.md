@@ -13,8 +13,7 @@ Please include as much detail as possible to help us properly address your issue
 In order to add a new rule or a rule change, you should:
 
 - Create issue on GitHub with description of proposed rule
-- Generate a new rule using the [official yeoman generator](https://github.com/eslint/generator-eslint)
-- Run `npm start`
+- Generate a new rule using the `npm run new -- [rule-name]` command
 - Write test scenarios & implement logic
 - Describe the rule in the generated `docs` file
 - Make sure all tests are passing
@@ -38,10 +37,12 @@ After opening [astexplorer.net], select `Vue` as the syntax and `vue-eslint-pars
 Since single file components in Vue are not plain JavaScript, we can't use the default parser, and we had to introduce additional one: `vue-eslint-parser`, that generates enhanced AST with nodes that represent specific parts of the template syntax, as well as what's inside the `<script>` tag.
 
 To know more about certain nodes in produced ASTs, go here:
+
 - [ESTree docs](https://github.com/estree/estree)
 - [vue-eslint-parser AST docs](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md)
 
 The `vue-eslint-parser` provides few useful parser services, to help traverse the produced AST and access tokens of the template:
+
 - `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`
 - `context.parserServices.getTemplateBodyTokenStore()`
 

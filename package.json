@@ -4,6 +4,7 @@
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
+    "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch --growl",
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
