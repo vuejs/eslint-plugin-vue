@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-template-attributes
 description: disallow useless attribute on `<template>`
+since: v7.19.0
 ---
 # vue/no-useless-template-attributes
 
 > disallow useless attribute on `<template>`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -57,6 +56,10 @@ Nothing.
 - [vue/no-lone-template]
 
 [vue/no-lone-template]: ./no-lone-template.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.19.0
 
 ## :mag: Implementation
 
