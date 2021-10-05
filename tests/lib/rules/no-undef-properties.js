@@ -1034,6 +1034,41 @@ tester.run('no-undef-properties', rule, {
           line: 13
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <!-- ✓ GOOD -->
+        <div>{{ name }}: {{ count }}</div>
+        <!-- ✗ BAD -->
+        <div>{{ label }}: {{ cnt }}</div>
+      </template>
+      <script setup>
+      const prop = defineProps(['name', 'def'])
+      let count = 0
+
+      /* ✓ GOOD */
+      watch(() => prop.def, () => console.log('Updated!'))
+
+      /* ✗ BAD */
+      watch(() => prop.undef, () => console.log('Updated!'))
+      </script>
+      `,
+      errors: [
+        {
+          message: "'label' is not defined.",
+          line: 6
+        },
+        {
+          message: "'cnt' is not defined.",
+          line: 6
+        },
+        {
+          message: "'undef' is not defined.",
+          line: 16
+        }
+      ]
     }
   ]
 })

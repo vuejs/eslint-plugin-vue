@@ -29,6 +29,29 @@ Note that there are many false positives if you are using mixins.
   <!-- ✗ BAD -->
   <div>{{ label }}: {{ cnt }}</div>
 </template>
+<script setup>
+const prop = defineProps(['name', 'def'])
+let count = 0
+
+/* ✓ GOOD */
+watch(() => prop.def, () => console.log('Updated!'))
+
+/* ✗ BAD */
+watch(() => prop.undef, () => console.log('Updated!'))
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-undef-properties': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div>{{ name }}: {{ count }}</div>
+  <!-- ✗ BAD -->
+  <div>{{ label }}: {{ cnt }}</div>
+</template>
 <script>
   export default {
     props: ['name'],
