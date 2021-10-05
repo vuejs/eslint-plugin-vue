@@ -20,7 +20,7 @@ in the rule configuration.
 
 ```json
 {
-  "vue/no-restricted-props": ["error", "forbidden", "forbidden-two", "forbidden-three"]
+  "vue/no-restricted-class": ["error", "forbidden", "forbidden-two", "forbidden-three"]
 }
 ```
 
