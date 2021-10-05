@@ -1594,6 +1594,70 @@ tester.run('no-unused-properties', rule, {
           }
         </style>
         `
+    },
+
+    // toRefs
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1643
+      filename: 'test.vue',
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      },
+      code: `
+      <template>
+        <span v-for="(item, index) of pages" :key="index" @click="changePage(item)">
+          {{ item }}
+        </span>
+      </template>
+
+      <script setup lang="ts">
+      import {
+        computed,
+        defineProps,
+        toRefs,
+        withDefaults,
+        defineEmits,
+        ComputedRef,
+      } from 'vue';
+      import { getPagesOnPagination } from '@/libs/pagination';
+
+      const props = withDefaults(
+        defineProps<{
+          currentPage: number;
+          totalRows: number;
+          rowsPerPage: number;
+        }>(),
+        {
+          currentPage: 1,
+          totalRows: 100,
+          rowsPerPage: 10,
+        }
+      );
+      const { currentPage, totalRows, rowsPerPage } = toRefs(props);
+
+      const totalPages = computed(() =>
+        Math.ceil(totalRows.value / rowsPerPage.value)
+      );
+
+      const pages: ComputedRef<(number | '...')[]> = computed(() =>
+        getPagesOnPagination(currentPage.value, totalPages.value)
+      );
+
+      const emit = defineEmits<{
+        (e: 'changePage', page: number): void;
+      }>();
+
+      function changePage(page: number | '...') {
+        if (page === '...') {
+          return;
+        }
+        emit('changePage', page);
+      }
+      </script>
+
+      <style lang="scss" scoped>
+      //
+      </style>`
     }
   ],
 
@@ -2506,6 +2570,145 @@ tester.run('no-unused-properties', rule, {
         "'d' of data found, but never used.",
         "'f' of computed property found, but never used.",
         "'h' of method found, but never used."
+      ]
+    },
+
+    // toRef, toRefs
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import {toRefs} from 'vue'
+
+        export default {
+          props: ['foo', 'bar'],
+          setup(props) {
+            const {foo} = toRefs(props)
+          },
+        }
+      </script>
+      `,
+      errors: ["'bar' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import {toRef} from 'vue'
+
+        export default {
+          props: ['foo', 'bar'],
+          setup(props) {
+            const foo = toRef(props, 'foo')
+          },
+        }
+      </script>
+      `,
+      errors: ["'bar' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import {toRefs} from 'vue'
+
+        export default {
+          data() {
+            return {
+              foo: {
+                bar: {
+                  a: 1
+                },
+                baz: {
+                  b: 1
+                }
+              }
+            }
+          },
+          methods: {
+            m () {
+              const {foo} = toRefs(this)
+              f(foo.value.bar)
+            }
+          }
+        }
+      </script>
+      `,
+      options: deepDataOptions,
+      errors: ["'foo.baz' of data found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import {toRefs} from 'vue'
+
+        export default {
+          data() {
+            return {
+              foo: {
+                bar: {
+                  a: 1,
+                  b: 1,
+                },
+                baz: {
+                  a: 1
+                }
+              }
+            }
+          },
+          methods: {
+            m () {
+              const {bar, baz} = toRefs(this.foo)
+              f(bar.value.a)
+              f(bar.unknown.b)
+              f(bar.b)
+            }
+          }
+        }
+      </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        "'foo.bar.b' of data found, but never used.",
+        "'foo.baz.a' of data found, but never used."
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        import {toRef} from 'vue'
+
+        export default {
+          data() {
+            return {
+              foo: {
+                bar: {
+                  a: 1,
+                  b: 1,
+                },
+                baz: {
+                  a: 1
+                }
+              }
+            }
+          },
+          methods: {
+            m () {
+              const bar = toRef(this.foo, 'bar')
+              f(bar.value.a)
+              f(bar.unknown.b)
+              f(bar.b)
+            }
+          }
+        }
+      </script>
+      `,
+      options: deepDataOptions,
+      errors: [
+        "'foo.bar.b' of data found, but never used.",
+        "'foo.baz' of data found, but never used."
       ]
     }
   ]
