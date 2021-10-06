@@ -61,6 +61,21 @@ tester.run('valid-define-props', rule, {
         defineProps(def)
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineProps({
+          addFunction: {
+            type: Function,
+            default (a, b) {
+              return a + b
+            }
+          }
+        })
+      </script>
+      `
     }
   ],
   invalid: [

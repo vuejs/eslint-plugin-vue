@@ -61,6 +61,18 @@ tester.run('valid-define-emits', rule, {
         defineEmits(def)
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineEmits({
+          notify (payload) {
+            return typeof payload === 'string'
+          }
+        })
+      </script>
+      `
     }
   ],
   invalid: [
