@@ -76,6 +76,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
+| [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  |
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
@@ -195,6 +196,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
+| [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  |
 | [vue/no-v-model-argument](./no-v-model-argument.md) | disallow adding an argument to `v-model` used in custom component |  |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
@@ -332,7 +334,6 @@ For example:
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  |
 | [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
-| [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
