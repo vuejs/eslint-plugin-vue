@@ -122,20 +122,16 @@ export default {
 
   async mounted() {
     // Load linter.
-    const [{ default: Linter }, { default: coreRules }, { parseForESLint }] =
-      await Promise.all([
-        import('eslint4b/dist/linter'),
-        import('eslint4b/dist/core-rules'),
-        import('espree').then(() => import('vue-eslint-parser'))
-      ])
+    const [{ Linter }, { parseForESLint }] = await Promise.all([
+      import('eslint/lib/linter'),
+      import('espree').then(() => import('vue-eslint-parser'))
+    ])
 
     const linter = (this.linter = new Linter())
 
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
     }
-    linter.defineRule('no-undef', coreRules['no-undef'])
-    linter.defineRule('no-unused-vars', coreRules['no-unused-vars'])
 
     linter.defineParser('vue-eslint-parser', { parseForESLint })
   }
