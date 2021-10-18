@@ -73,6 +73,50 @@ tester.run('valid-define-emits', rule, {
         })
       </script>
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1656
+      filename: 'test.vue',
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      code: `
+      <script setup lang="ts">
+      import type { PropType } from 'vue';
+
+      type X = string;
+
+      const props = defineProps({
+        myProp: Array as PropType<string[]>,
+      });
+
+      const emit = defineEmits({
+        myProp: (x: X) => true,
+      });
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      code: `
+      <script setup lang="ts">
+      import type { PropType } from 'vue';
+
+      const strList = ['a', 'b', 'c']
+      const str = 'abc'
+
+      const props = defineProps({
+        myProp: Array as PropType<typeof strList>,
+      });
+
+      const emit = defineEmits({
+        myProp: (x: typeof str) => true,
+      });
+      </script>
+      `
     }
   ],
   invalid: [
