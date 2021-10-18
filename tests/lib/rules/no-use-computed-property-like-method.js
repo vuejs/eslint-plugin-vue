@@ -16,7 +16,7 @@ const rule = require('../../../lib/rules/no-use-computed-property-like-method')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015, sourceType: 'module' }
+  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
 tester.run('no-use-computed-property-like-method', rule, {
@@ -438,6 +438,137 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `
+    },
+    {
+      //https://github.com/vuejs/eslint-plugin-vue/issues/1649
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'vuex'
+
+      export default {
+        props: [\`user\`],
+        computed: {
+          ...mapGetters(\`auth\`, [\`statusForUser\`]),
+          status () {
+            return this.statusForUser(this.user)
+          },
+        },
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        const s = s
+        export default {
+          props: {
+            str: s
+          },
+          computed: {
+            x() {
+              const str = this.str
+              return str
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        const s = String
+        export default {
+          computed: {
+            x() {
+              return s
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            x() {
+              return this.x
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            x() {
+              return this.foo()
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            },
+            foo () {
+              return this.foo()
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            val: b ? [String] : Function
+          },
+          computed: {
+            x() {
+              return this.val
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -762,6 +893,214 @@ tester.run('no-use-computed-property-like-method', rule, {
         'Use this.computedReturnArray instead of this.computedReturnArray().',
         'Use this.computedReturnArray2 instead of this.computedReturnArray2().'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            str: String
+          },
+          computed: {
+            x() {
+              const str = this.str
+              return str
+            },
+            y() {
+              return
+            }
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        const s = String
+        export default {
+          props: {
+            str: s
+          },
+          computed: {
+            x() {
+              const str = this.str
+              return str
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        const s = String
+        export default {
+          props: {
+            val: [s, Number]
+          },
+          computed: {
+            x() {
+              return this.val
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            x: {
+              get: () => 42
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            x() {
+              return b ? this.foo() : 'str'
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            },
+            foo () {
+              return 42
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            val: b ? [String] : Number
+          },
+          computed: {
+            x() {
+              return this.val
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        let t = [String]
+        if (b) {
+          t = Number
+        }
+        let t2 = [String]
+        if (b) {
+          t2 = Function
+        }
+        export default {
+          props: {
+            val: t,
+            f: t2
+          },
+          computed: {
+            x() {
+              return this.val
+            },
+            y() {
+              return this.f
+            },
+          },
+          methods: {
+            fn() {
+              const vm = this
+              vm.x()
+              vm.y()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: ['Use this.x instead of this.x().']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{x()}}
+        {{y()}}
+        {{y(x)}}
+      </template>
+      <script>
+        export default {
+          computed: {
+            x() {
+              return 42
+            },
+            y() {
+              return String
+            },
+          }
+        }
+      </script>
+      `,
+      errors: ['Use x instead of x().']
     }
   ]
 })
