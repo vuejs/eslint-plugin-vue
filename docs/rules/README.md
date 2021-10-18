@@ -39,7 +39,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
-| [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
@@ -172,7 +171,6 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
-| [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  |
@@ -298,6 +296,7 @@ For example:
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
 | [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name |  |
+| [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  |
 | [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: |
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  |

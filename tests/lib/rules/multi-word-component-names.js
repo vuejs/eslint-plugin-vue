@@ -232,7 +232,7 @@ tester.run('multi-word-component-names', rule, {
       errors: [
         {
           message: 'Component name "invalid" should always be multi-word.',
-          line: 3
+          line: 1
         }
       ]
     },

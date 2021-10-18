@@ -9,39 +9,65 @@ description: require component names to be always multi-word
 > require component names to be always multi-word
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
-This rule ....
+This rule require component names to be always multi-word, except for root `App`
+components, and built-in components provided by Vue, such as `<transition>` or
+`<component>`. This prevents conflicts with existing and future HTML elements,
+since all HTML elements are a single word.
 
-<eslint-code-block :rules="{'vue/multi-word-component-names': ['error']}">
+<eslint-code-block filename="src/TodoItem.js" language="javascript" :rules="{'vue/multi-word-component-names': ['error']}">
 
-```vue
-<template>
+```js
 /* ✓ GOOD */
 Vue.component('todo-item', {
   // ...
 })
 
+/* ✗ BAD */
+Vue.component('Todo', {
+  // ...
+})
+```
+</eslint-code-block>
+
+<eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<script>
+/* ✓ GOOD */
 export default {
   name: 'TodoItem',
   // ...
 }
+</script>
+```
+</eslint-code-block>
 
+<eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<script>
 /* ✗ BAD */
-
-Vue.component('todo', {
-  // ...
-})
-
 export default {
   name: 'Todo',
   // ...
 }
-</template>
+</script>
 ```
+</eslint-code-block>
 
+<eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<script>
+/* ✗ BAD */
+export default {
+  // ...
+}
+</script>
+```
 </eslint-code-block>
 
 ## :wrench: Options
