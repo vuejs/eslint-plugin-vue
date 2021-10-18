@@ -52,7 +52,7 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
         </NuxtLink>
       </template>
       `
-    },
+    }
   ],
   invalid: [
     {
@@ -64,10 +64,11 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       `,
       errors: [
         {
-          message: "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 21
-        },
+        }
       ]
     },
     {
@@ -80,10 +81,11 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       options: [{ components: ['RouterLink'] }],
       errors: [
         {
-          message: "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 21
-        },
+        }
       ]
     },
     {
@@ -95,10 +97,11 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       `,
       errors: [
         {
-          message: "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 22
-        },
+        }
       ]
     },
     {
@@ -111,10 +114,11 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       options: [{ components: ['RouterLink'] }],
       errors: [
         {
-          message: "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'RouterLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 22
-        },
+        }
       ]
     },
     {
@@ -127,10 +131,11 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       options: [{ components: ['NuxtLink'] }],
       errors: [
         {
-          message: "'tag' property on 'NuxtLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'NuxtLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 19
-        },
+        }
       ]
     },
     {
@@ -143,11 +148,12 @@ tester.run('no-deprecated-router-link-tag-prop', rule, {
       options: [{ components: ['NuxtLink'] }],
       errors: [
         {
-          message: "'tag' property on 'NuxtLink' component is deprecated. Use scoped slots instead.",
+          message:
+            "'tag' property on 'NuxtLink' component is deprecated. Use scoped slots instead.",
           line: 3,
           column: 20
-        },
+        }
       ]
-    },
+    }
   ]
 })
