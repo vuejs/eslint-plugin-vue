@@ -25,8 +25,6 @@ yarn add -D eslint eslint-plugin-vue
 - ESLint v6.2.0 and above
 - Node.js v8.10.0 and above
 
-We have started supporting ESLint v8.0.0 beta, but note that beta support will be dropped once the stable version is released.
-
 :::
 
 ## :book: Usage
