@@ -65,6 +65,7 @@ export default {
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
 ```vue
+<!-- filename: Todo.vue -->
 <script>
 /* ✗ BAD */
 export default {
@@ -77,11 +78,47 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/multi-word-component-names": ["error", {
+    "ignores": []
+  }]
+}
+```
+
+- `ignores` (`string[]`) ... The component names to ignore. Sets the component name to allow.
+
+### `ignores: ["Todo"]`
+
+<eslint-code-block fix :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
+
+```vue
+<script>
+export default {
+  /* ✓ GOOD */
+  name: 'Todo'
+}
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
+
+```vue
+<script>
+export default {
+  /* ✗ BAD */
+  name: 'Item'
+}
+</script>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
-- [Style guide - Multi-word component names](https://vuejs.org/v2/style-guide/#Multi-word-component-names-essential)
+- [Style guide - Multi-word component names](https://v3.vuejs.org/style-guide/#multi-word-component-names-essential)
 
 ## :rocket: Version
 
