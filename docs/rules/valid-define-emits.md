@@ -9,6 +9,8 @@ since: v7.13.0
 
 > enforce valid `defineEmits` compiler macro
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 This rule checks whether `defineEmits` compiler macro is valid.
 
 ## :book: Rule Details

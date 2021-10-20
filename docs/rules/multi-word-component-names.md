@@ -9,6 +9,8 @@ since: v7.20.0
 
 > require component names to be always multi-word
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+
 ## :book: Rule Details
 
 This rule require component names to be always multi-word, except for root `App`

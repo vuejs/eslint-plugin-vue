@@ -9,6 +9,8 @@ since: v7.20.0
 
 > disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+)
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 ## :book: Rule Details
 
 This rule reports deprecated the `tag` attribute on `RouterLink` elements (removed in Vue.js v3.0.0+).
