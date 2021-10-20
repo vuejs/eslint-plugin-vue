@@ -117,6 +117,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
 | [vue/component-definition-name-casing](./component-definition-name-casing.md) | enforce specific casing for component definition name | :wrench: |
+| [vue/first-attribute-linebreak](./first-attribute-linebreak.md) | enforce the location of first attribute | :wrench: |
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
@@ -228,6 +229,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 |:--------|:------------|:---|
 | [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: |
 | [vue/component-definition-name-casing](./component-definition-name-casing.md) | enforce specific casing for component definition name | :wrench: |
+| [vue/first-attribute-linebreak](./first-attribute-linebreak.md) | enforce the location of first attribute | :wrench: |
 | [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: |
 | [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: |
 | [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: |
