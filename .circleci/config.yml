@@ -2,13 +2,12 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v8
-      - node-v10
+      - eslint-v6
       - eslint-v7
-      - eslint-v8
       - ts-eslint-v4
       - node-v12
       - node-v14
+      - node-v16
       - lint
 
 version: 2
@@ -35,9 +34,9 @@ jobs:
       #     paths:
       #       - node_modules
 
-  node-v8:
+  eslint-v6:
     docker:
-      - image: node:8
+      - image: node:12
     steps:
       - run:
           name: Versions
@@ -46,25 +45,7 @@ jobs:
       - run:
           name: Install eslint@6
           command: |
-            npm install --save-exact eslint@6.8.0 @typescript-eslint/parser@3.10.1 typescript@4.0.8
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Test
-          command: npm test
-  node-v10:
-    docker:
-      - image: node:10
-    steps:
-      - run:
-          name: Versions
-          command: npm version
-      - checkout
-      - run:
-          name: Install eslint@7 and @typescript-eslint/parser@4
-          command: |
-            npm install eslint@7 @typescript-eslint/parser@^4
+            npm install --save-exact eslint@6.8.0
       - run:
           name: Install dependencies
           command: npm install
@@ -73,7 +54,7 @@ jobs:
           command: npm test
   eslint-v7:
     docker:
-      - image: node:10
+      - image: node:14
     steps:
       - run:
           name: Versions
@@ -89,24 +70,6 @@ jobs:
       - run:
           name: Test
           command: npm test
-  eslint-v8:
-    docker:
-      - image: node:14
-    steps:
-      - run:
-          name: Versions
-          command: npm version
-      - checkout
-      - run:
-          name: Install eslint@8
-          command: |
-            npm install eslint@^8.0.0-0
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Test
-          command: npm test
   ts-eslint-v4:
     docker:
       - image: node:14
@@ -116,9 +79,9 @@ jobs:
           command: npm version
       - checkout
       - run:
-          name: Install @typescript-eslint/parser@4
+          name: Install @typescript-eslint/parser@4 eslint@7
           command: |
-            npm install @typescript-eslint/parser@^4
+            npm install @typescript-eslint/parser@^4 eslint@7
       - run:
           name: Install dependencies
           command: npm install
@@ -133,6 +96,10 @@ jobs:
     <<: *node-base
     docker:
       - image: node:14
+  node-v16:
+    <<: *node-base
+    docker:
+      - image: node:16
 
   lint:
     docker:
@@ -153,5 +120,5 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Test
+          name: Lint
           command: npm run lint

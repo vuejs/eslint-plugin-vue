@@ -10,7 +10,12 @@ module.exports = {
     node: true,
     mocha: true
   },
-  extends: ['plugin:eslint-plugin/recommended', 'prettier'],
+  extends: [
+    'plugin:eslint-plugin/recommended',
+    'prettier',
+    'plugin:node-dependencies/recommended',
+    'plugin:jsonc/recommended-with-jsonc'
+  ],
   plugins: ['eslint-plugin', 'prettier'],
   rules: {
     'accessor-pairs': 2,
@@ -141,6 +146,12 @@ module.exports = {
         'eslint-plugin/require-meta-type': 'error',
         'no-invalid-meta': 'error',
         'no-invalid-meta-docs-categories': 'error'
+      }
+    },
+    {
+      files: ['*.json'],
+      rules: {
+        'prettier/prettier': 'off'
       }
     }
   ]
