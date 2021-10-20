@@ -55,7 +55,7 @@ This rule reports deprecated the `tag` attribute on `RouterLink` elements (remov
 
 - `components` (`string[]`) ... Component names which will be checked with the `tag` attribute. default `['RouterLink']`.
 
-Note: this rule will check both `CamelCase` and `PascalCase` versions of the
+Note: this rule will check both `kebab-case` and `PascalCase` versions of the
 given component names.
 
 ### `{ "components": ['RouterLink', 'NuxtLink'] }`
