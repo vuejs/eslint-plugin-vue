@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-computed-properties-in-data
 description: disallow accessing computed properties in `data`.
+since: v7.20.0
 ---
 # vue/no-computed-properties-in-data
 
 > disallow accessing computed properties in `data`.
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -38,6 +37,10 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.20.0
 
 ## :mag: Implementation
 

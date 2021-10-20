@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-undef-properties
 description: disallow undefined properties
+since: v7.20.0
 ---
 # vue/no-undef-properties
 
 > disallow undefined properties
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -107,6 +106,10 @@ watch(() => prop.undef, () => console.log('Updated!'))
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.20.0
 
 ## :mag: Implementation
 

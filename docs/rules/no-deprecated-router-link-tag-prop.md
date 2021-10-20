@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-router-link-tag-prop
 description: disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+)
+since: v7.20.0
 ---
 # vue/no-deprecated-router-link-tag-prop
 
 > disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+)
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -84,6 +83,10 @@ given component names.
 ## :books: Further Reading
 
 - [Vue RFCs - 0021-router-link-scoped-slot](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0021-router-link-scoped-slot.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v7.20.0
 
 ## :mag: Implementation
 
