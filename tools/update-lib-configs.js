@@ -30,9 +30,17 @@ const extendsCategories = {
 
 function formatRules(rules, categoryId) {
   const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = errorCategories.includes(categoryId)
-      ? 'error'
-      : 'warn'
+    let options = errorCategories.includes(categoryId) ? 'error' : 'warn'
+    const defaultOptions =
+      rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
+    if (defaultOptions) {
+      const v = categoryId.startsWith('vue3') ? 3 : 2
+      const defaultOption = defaultOptions[`vue${v}`]
+      if (defaultOption) {
+        options = [options, ...defaultOption]
+      }
+    }
+    setting[rule.ruleId] = options
     return setting
   }, {})
   return JSON.stringify(obj, null, 2)

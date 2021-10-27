@@ -71,6 +71,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
+| [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  |
 | [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  |
@@ -195,6 +196,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
+| [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
