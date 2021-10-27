@@ -254,6 +254,28 @@ ruleTester.run('no-template-shadow', rule, {
       filename: 'test.vue',
       code: `<template>
         <div v-for="i in 5"></div>
+      </template>
+      <script>
+        export default {
+          asyncData() {
+            return {
+              i: 27,
+            }
+          }
+        }
+      </script>`,
+      errors: [
+        {
+          message: "Variable 'i' is already declared in the upper scope.",
+          type: 'Identifier',
+          line: 2
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div v-for="i in 5"></div>
         <div v-for="f in 5"></div>
       </template>
       <script>
