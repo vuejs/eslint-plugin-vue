@@ -710,6 +710,29 @@ ruleTester.run('no-dupe-keys', rule, {
       ]
     },
     {
+      filename: 'test.vue',
+      code: `
+        export default {
+          asyncData() {
+            return {
+              foo: 1
+            }
+          },
+          data() {
+            return {
+              foo: 2
+            }
+          },
+        }
+      `,
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 10
+        }
+      ]
+    },
+    {
       filename: 'test.js',
       code: `
         defineComponent({
