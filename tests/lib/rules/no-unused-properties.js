@@ -16,7 +16,7 @@ const tester = new RuleTester({
 })
 
 const allOptions = [
-  { groups: ['props', 'computed', 'data', 'methods', 'setup'] }
+  { groups: ['props', 'computed', 'data', 'asyncData', 'methods', 'setup'] }
 ]
 const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
@@ -639,6 +639,26 @@ tester.run('no-unused-properties', rule, {
             computed: {
               count() {
                 return 2;
+              }
+            }
+          }
+        </script>
+      `,
+      options: allOptions
+    },
+
+    // async data passed in a component
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <counter :count="foo" />
+        </template>
+        <script>
+          export default {
+            asyncData() {
+              return {
+                foo: 2
               }
             }
           }
@@ -1704,6 +1724,32 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of data found, but never used.",
+          line: 9
+        }
+      ]
+    },
+
+    // unused async data
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ cont }}</div>
+        </template>
+        <script>
+          export default {
+            asyncData () {
+              return {
+                count: 2
+              };
+            }
+          };
+        </script>
+      `,
+      options: [{ groups: ['props', 'computed', 'data', 'asyncData'] }],
+      errors: [
+        {
+          message: "'count' of async data found, but never used.",
           line: 9
         }
       ]
