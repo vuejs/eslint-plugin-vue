@@ -358,25 +358,20 @@ module.exports = {
 }
 ```
 
-#### Compiler macros such as `defineProps` and `defineEmits` are warned by `no-undef` rule
+#### Compiler macros such as `defineProps` and `defineEmits` generate `no-undef` warnings
 
-You need to define [global variables](https://eslint.org/docs/user-guide/configuring/language-options#using-configuration-files-1) in your ESLint configuration file.  
-If you don't want to define global variables, use `import { defineProps, defineEmits } from 'vue'`.
+You need to enable the compiler macros environment in your ESLint configuration file.
+If you don't want to expose these variables globally, you can use `/* global defineProps, defineEmits */` instead.
 
 Example **.eslintrc.js**:
 
 ```js
 module.exports = {
-  globals: {
-    defineProps: "readonly",
-    defineEmits: "readonly",
-    defineExpose: "readonly",
-    withDefaults: "readonly"
+  env: {
+    'vue/setup-compiler-macros': true
   }
 }
 ```
-
-See also [ESLint - Specifying Globals > Using configuration files](https://eslint.org/docs/user-guide/configuring/language-options#using-configuration-files-1).
 
 #### Parsing error with Top Level `await`
 
