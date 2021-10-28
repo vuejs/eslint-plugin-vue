@@ -158,6 +158,17 @@ tester.run('multi-word-component-names', rule, {
       Vue.component('TheTest', {})
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      options: [{ ignores: ['Todo'] }],
+      code: `
+      <script>
+      export default {
+        name: 'Todo'
+      }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -246,6 +257,23 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "" should always be multi-word.',
           line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      options: [{ ignores: ['Todo'] }],
+      code: `
+      <script>
+      export default {
+        name: 'Item'
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Component name "Item" should always be multi-word.',
+          line: 4
         }
       ]
     }
