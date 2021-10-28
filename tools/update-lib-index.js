@@ -20,7 +20,7 @@ const filePath = path.resolve(__dirname, '../lib/index.js')
 const content = `/*
  * IMPORTANT!
  * This file has been automatically generated,
- * in order to update it's content execute "npm run update"
+ * in order to update its content execute "npm run update"
  */
 'use strict'
 
