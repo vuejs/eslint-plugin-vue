@@ -37,6 +37,16 @@ module.exports = {
   },
   processors: {
     '.vue': require('./processor')
+  },
+  environments: {
+    'setup-compiler-macros': {
+      globals: {
+        defineProps: 'readonly',
+        defineEmits: 'readonly',
+        defineExpose: 'readonly',
+        withDefaults: 'readonly'
+      }
+    }
   }
 }
 `
