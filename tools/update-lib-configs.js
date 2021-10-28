@@ -71,6 +71,7 @@ module.exports = {
 module.exports = {
   extends: require.resolve('./${extendsCategoryId}'),
   rules: ${formatRules(category.rules, category.categoryId)}
+  ${category.globals ? `,globals: ${JSON.stringify(category.globals)}` : ''}
 }
 `
 }

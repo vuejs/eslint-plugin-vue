@@ -6,6 +6,7 @@
 'use strict'
 
 const rules = require('./rules')
+const categoryGlobals = require('./globals')
 
 const categoryTitles = {
   base: {
@@ -75,6 +76,7 @@ module.exports = categoryIds
     title: categoryTitles[categoryId],
     rules: (categoryRules[categoryId] || []).filter(
       (rule) => !rule.meta.deprecated
-    )
+    ),
+    globals: categoryGlobals[categoryId]
   }))
   .filter((category) => category.rules.length >= 1)
