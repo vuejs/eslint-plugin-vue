@@ -169,6 +169,35 @@ tester.run('multi-word-component-names', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      new Vue({})
+      `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1670
+      filename: 'main.ts',
+      code: `
+      import Vue from 'vue'
+      import VueCompositionAPI, { h } from '@vue/composition-api'
+      import i18n from '@/i18n'
+      import router from '@/router'
+      import store from '@/store'
+      // ...
+
+      Vue.use(VueCompositionAPI)
+
+      new Vue({
+          i18n,
+          router,
+          store,
+          setup() {
+              return () => h(App)
+          },
+      }).$mount('#app')
+      `
     }
   ],
   invalid: [
