@@ -103,7 +103,7 @@ export type ComponentObjectProp =
 
 export type ComponentTypeProp = {
   type: 'type'
-  key: Identifier
+  key: Identifier | Literal
   propName: string
   value: null
   node: TSPropertySignature | TSMethodSignature
