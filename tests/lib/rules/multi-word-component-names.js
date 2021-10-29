@@ -40,6 +40,10 @@ tester.run('multi-word-component-names', rule, {
       code: ''
     },
     {
+      filename: 'path/to/app.vue',
+      code: '<script></script>'
+    },
+    {
       filename: 'invalid.vue',
       code: `
         <script>
