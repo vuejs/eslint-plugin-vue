@@ -90,7 +90,7 @@ export default {
 
 ### `ignores: ["Todo"]`
 
-<eslint-code-block fix :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
+<eslint-code-block :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
 
 ```vue
 <script>
@@ -103,7 +103,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
+<eslint-code-block :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
 
 ```vue
 <script>
