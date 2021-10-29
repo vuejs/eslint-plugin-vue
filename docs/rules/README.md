@@ -382,6 +382,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
 | [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses | :wrench: |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
+| [vue/no-loss-of-precision](./no-loss-of-precision.md) | disallow literal numbers that lose precision |  |
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
 | [vue/no-sparse-arrays](./no-sparse-arrays.md) | disallow sparse arrays |  |
 | [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
