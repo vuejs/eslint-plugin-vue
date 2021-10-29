@@ -67,6 +67,23 @@ tester.run('no-undef-properties', rule, {
       </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div> {{ foo }} </div>
+      </template>
+      <script>
+        export default {
+          asyncData() {
+            return {
+              foo: 42
+            }
+          },
+        };
+      </script>
+      `
+    },
     //default ignores
     {
       filename: 'test.vue',
