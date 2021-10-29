@@ -113,6 +113,22 @@ tester.run('valid-next-tick', rule, {
           return this.$nextTick();
         }
       }</script>`
+    },
+
+    {
+      filename: 'test.vue',
+      code: `<script>;
+      export default {
+        methods: {
+          fn1 () {
+            return this.$nextTick()
+          },
+          fn2 () {
+            return this.$nextTick()
+              .then(() => this.$nextTick())
+          },
+        }
+      }</script>`
     }
   ],
   invalid: [
