@@ -333,7 +333,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       }
       </script>`
     }
-  ].reverse(),
+  ],
 
   invalid: [
     {
