@@ -67,8 +67,8 @@ There is a configurable number of attributes that are acceptable in one-line cas
 }
 ```
 
-- `singleline.max` (`number`) ... The number of maximum attributes per line when the opening tag is in a single line. Default is `1`.
-- `multiline.max` (`number`) ... The max number of attributes per line when the opening tag is in multiple lines. Default is `1`. This can be `{ multiline: 1 }` instead of `{ multiline: { max: 1 }}` if you don't configure `allowFirstLine` property.
+- `singleline.max` (`number`) ... The number of maximum attributes per line when the opening tag is in a single line. Default is `1`. This can be `{ singleline: 1 }` instead of `{ singleline: { max: 1 }}`.
+- `multiline.max` (`number`) ... The max number of attributes per line when the opening tag is in multiple lines. Default is `1`. This can be `{ multiline: 1 }` instead of `{ multiline: { max: 1 }}`.
 
 ### `"singleline": 3`
 
