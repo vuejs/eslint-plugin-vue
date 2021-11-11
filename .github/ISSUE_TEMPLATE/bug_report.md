@@ -52,7 +52,8 @@ about: Create a report to help us improve
 
 **Repository to reproduce this issue**
 <!--
-  Please share a repository that can reproduce your issue.
-  If you don't share it, we will most likely add a comment asking you to share the repository.
+  ❗ Please share a repository that can reproduce your issue.
+  ❗ If you don't share it, we just label it as requesting a repository that can reproduce your issue.
+  ❗ If you don't share it for a few days, we silently close this issue.
 -->
 
