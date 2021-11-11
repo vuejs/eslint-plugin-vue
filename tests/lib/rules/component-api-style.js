@@ -654,8 +654,8 @@ tester.run('component-api-style', rule, {
         destroyed() {},
         unmounted() {},
         render() {}, // allowed
-        renderTracked() {},
-        renderTriggered() {},
+        renderTracked() {}, // allowed
+        renderTriggered() {}, // allowed
         errorCaptured() {},
         // public API
         expose: [],
@@ -781,18 +781,6 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `unmounted` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 25,
-          column: 9
-        },
-        {
-          message:
-            'Options API is not allowed in your project. `renderTracked` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
-          line: 27,
-          column: 9
-        },
-        {
-          message:
-            'Options API is not allowed in your project. `renderTriggered` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
-          line: 28,
           column: 9
         },
         {
