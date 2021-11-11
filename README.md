@@ -9,48 +9,40 @@
 
 ## :book: Documentation
 
-See [the official website](https://eslint.vuejs.org).
+Please refer to [official website](https://eslint.vuejs.org).
 
 ## :anchor: Versioning Policy
 
-This plugin is following [Semantic Versioning](https://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
+This plugin follows [Semantic Versioning](https://semver.org) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
 
-## :newspaper: Changelog
+## :newspaper: Releases
 
 This project uses [GitHub Releases](https://github.com/vuejs/eslint-plugin-vue/releases).
 
 ## :beers: Contribution Guide
 
-Contribution is welcome!
+Contributing is welcome! See the [ESLint Vue Plugin Developer Guide](https://eslint.vuejs.org/developer-guide).
 
-See [The ESLint Vue Plugin Developer Guide](https://eslint.vuejs.org/developer-guide/).
+### Working With Rules
 
-### Working with Rules
+Be sure to read the [official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules) before you start writing a new rule.
 
-Before you start writing a new rule, please read [the official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules).
+To see what an abtract syntax tree (AST) of your code looks like, you may use [AST Explorer](https://astexplorer.net). After opening [AST Explorer](https://astexplorer.net), select `Vue` as the syntax and `vue-eslint-parser` as the parser.
 
-Next, in order to get an idea how does the AST of the code that you want to check looks like, use the [astexplorer.net].
-The [astexplorer.net] is a great tool to inspect ASTs, also Vue templates are supported.
+The default parser must be replaced since Vue's single file components are not plain JavaScript. `vue-eslint-parser` is a replacement parser that generates an enhanced AST with nodes that represent specific parts of the template syntax, as well as the contents of the `<script>` tag.
 
-After opening [astexplorer.net], select `Vue` as the syntax and `vue-eslint-parser` as the parser.
+To learn more about certain nodes in the produced ASTs, see the [ESTree project page](https://github.com/estree/estree) and the [vue-eslint-parser AST documentation](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md).
 
-[astexplorer.net]: https://astexplorer.net/
+The `vue-eslint-parser` provides a few useful parser services to help traverse the produced AST and access template tokens:
 
-Since single file components in Vue are not plain JavaScript, the default parser couldn't be used, so a new one was introduced. `vue-eslint-parser` generates enhanced AST with nodes that represent specific parts of the template syntax, as well as what's inside the `<script>` tag.
-
-To know more about certain nodes in produced ASTs, go here:
-- [ESTree docs](https://github.com/estree/estree)
-- [vue-eslint-parser AST docs](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md)
-
-The `vue-eslint-parser` provides a few useful parser services that help traverse the produced AST and access tokens of the template:
 - `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`
 - `context.parserServices.getTemplateBodyTokenStore()`
 
-Check out [an example rule](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/mustache-interpolation-spacing.js) to get a better understanding of how these work.
+Check out an [example rule](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/mustache-interpolation-spacing.js) to see usage of these services.
 
-Please be aware that regarding what kind of code examples you'll write in tests, you'll have to accordingly set up the parser in `RuleTester` (you can do it on a per test case basis). See an example [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js#L19).
+Be aware that depending on the code samples you write in tests, the `RuleTester` parser property must be set accordingly (this can be done on a test by test basis). See an [example here](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js#L19).
 
-If you'll stuck, remember there are plenty of rules you can learn from already. If you can't find the right solution, don't hesitate to reach out in [issues](https://github.com/vuejs/eslint-plugin-vue/issues) – we're happy to help!
+If you're stuck, remember there are many rules available for reference. If you can't find the right solution, don't hesitate to reach out in [issues](https://github.com/vuejs/eslint-plugin-vue/issues) – we're happy to help!
 
 ## :lock: License
 
