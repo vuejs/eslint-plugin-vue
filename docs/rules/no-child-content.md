@@ -9,7 +9,6 @@ description: disallow element's child contents which would be overwritten by a d
 > disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :gear: This rule is included in .
 
 ## :book: Rule Details
 
