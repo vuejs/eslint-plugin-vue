@@ -25,9 +25,11 @@ const uncategorizedExtensionRule = rules.filter(
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
 function toRuleRow(rule) {
-  const mark = `${rule.meta.fixable ? ':wrench:' : ''}${
+  const mark = [
+    rule.meta.fixable ? ':wrench:' : '',
+    rule.meta.hasSuggestions ? ':bulb:' : '',
     rule.meta.deprecated ? ':warning:' : ''
-  }`
+  ].join('')
   const link = `[${rule.ruleId}](./${rule.name}.md)`
   const description = rule.meta.docs.description || '(no description)'
 
@@ -133,6 +135,8 @@ sidebarDepth: 0
 
 ::: tip Legend
   :wrench: Indicates that the rule is fixable, and using \`--fix\` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the reported problems.
+
+  :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
 ${rulesTableContent}`

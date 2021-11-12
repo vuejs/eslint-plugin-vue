@@ -9,6 +9,8 @@ since: v7.0.0
 
 > disallow a potential typo in your component property
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule disallow a potential typo in your component options

@@ -9,6 +9,8 @@ since: v7.14.0
 
 > require declare public properties using `expose`
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule enforces the component to explicitly declare the exposed properties to the component using `expose`. You can use `expose` to control the internal properties of a component so that they cannot be referenced externally.

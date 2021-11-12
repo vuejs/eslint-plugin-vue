@@ -8,6 +8,8 @@ sidebarDepth: 0
 
 ::: tip Legend
   :wrench: Indicates that the rule is fixable, and using `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the reported problems.
+
+  :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
 
@@ -78,7 +80,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
-| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
+| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  |
@@ -95,7 +97,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
 | [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  |
 | [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  |
-| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
+| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
 | [vue/valid-v-cloak](./valid-v-cloak.md) | enforce valid `v-cloak` directives |  |
@@ -144,7 +146,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  |
 | [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  |
 | [vue/require-default-prop](./require-default-prop.md) | require default value for props |  |
-| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` |  |
+| [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` | :bulb: |
 | [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  |
 | [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: |
 | [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: |
@@ -202,7 +204,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
-| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes |  |
+| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  |
@@ -214,7 +216,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
-| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench: |
+| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
 | [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  |
@@ -323,14 +325,14 @@ For example:
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  |
-| [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property |  |
+| [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  |
-| [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event |  |
-| [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props |  |
+| [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event | :bulb: |
+| [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props | :bulb: |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
@@ -347,8 +349,8 @@ For example:
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  |
-| [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits |  |
-| [vue/require-expose](./require-expose.md) | require declare public properties using `expose` |  |
+| [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: |
+| [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
