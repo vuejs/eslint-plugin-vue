@@ -47,6 +47,21 @@ ruleTester.run('no-child-content', rule, {
       code: '<template><div v-html="foo"></div></template>'
     },
     {
+      // v-html directive and whitespace-only text content
+      filename: 'test.vue',
+      code: '<template><div v-html="foo"> </div></template>'
+    },
+    {
+      // v-html directive and whitespace-only text content with newline
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-html="foo">
+          </div>
+        </template>
+      `
+    },
+    {
       // self-closing element with v-t directive
       filename: 'test.vue',
       options: [{ additionalDirectives: ['t'] }],
@@ -64,22 +79,6 @@ ruleTester.run('no-child-content', rule, {
             'Child content is disallowed because it will be overwritten by the v-html directive.',
           column: 29,
           endColumn: 32,
-          suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
-          ]
-        }
-      ]
-    },
-    {
-      // v-html directive and whitespace-only text content
-      filename: 'test.vue',
-      code: '<template><div v-html="foo"> </div></template>',
-      errors: [
-        {
-          message:
-            'Child content is disallowed because it will be overwritten by the v-html directive.',
-          column: 29,
-          endColumn: 30,
           suggestions: [
             { output: '<template><div v-html="foo"></div></template>' }
           ]
