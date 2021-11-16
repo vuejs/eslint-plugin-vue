@@ -9,6 +9,8 @@ since: v7.3.0
 
 > disallow specific props
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule allows you to specify props that you don't want to use in your application.

@@ -9,7 +9,7 @@
 
 ## :book: Documentation
 
-Please refer to [official website](https://eslint.vuejs.org).
+Please refer to the [official website](https://eslint.vuejs.org).
 
 ## :anchor: Versioning Policy
 
@@ -27,13 +27,13 @@ Contributing is welcome! See the [ESLint Vue Plugin Developer Guide](https://esl
 
 Be sure to read the [official ESLint guide](https://eslint.org/docs/developer-guide/working-with-rules) before you start writing a new rule.
 
-To see what an abtract syntax tree (AST) of your code looks like, you may use [AST Explorer](https://astexplorer.net). After opening [AST Explorer](https://astexplorer.net), select `Vue` as the syntax and `vue-eslint-parser` as the parser.
+To see what an abstract syntax tree (AST) of your code looks like, you may use [AST Explorer](https://astexplorer.net). After opening [AST Explorer](https://astexplorer.net), select `Vue` as the syntax and `vue-eslint-parser` as the parser.
 
-The default parser must be replaced since Vue's single file components are not plain JavaScript. `vue-eslint-parser` is a replacement parser that generates an enhanced AST with nodes that represent specific parts of the template syntax, as well as the contents of the `<script>` tag.
+The default JavaScript parser must be replaced because [Vue.js single file components](https://v3.vuejs.org/guide/single-file-component.html#single-file-components) are not plain JavaScript, but a custom file format. [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) is a replacement parser that generates an enhanced AST with nodes that represent specific parts of the template syntax, as well as the contents of the `<script>` tag.
 
-To learn more about certain nodes in the produced ASTs, see the [ESTree project page](https://github.com/estree/estree) and the [vue-eslint-parser AST documentation](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md).
+To learn more about certain nodes in a produced AST, see the [ESTree project page](https://github.com/estree/estree) and the [vue-eslint-parser AST documentation](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md).
 
-The `vue-eslint-parser` provides a few useful parser services to help traverse the produced AST and access template tokens:
+`vue-eslint-parser` provides a few useful parser services to help traverse the produced AST and access template tokens:
 
 - `context.parserServices.defineTemplateBodyVisitor(visitor, scriptVisitor)`
 - `context.parserServices.getTemplateBodyTokenStore()`
