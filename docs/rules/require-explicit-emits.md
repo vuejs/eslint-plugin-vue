@@ -10,6 +10,7 @@ since: v7.0.0
 > require `emits` option with name triggered by `$emit()`
 
 - :gear: This rule is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 

@@ -9,6 +9,8 @@ since: v7.10.0
 
 > require type definitions in emits
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule enforces that a `emits` statement contains type definition.
