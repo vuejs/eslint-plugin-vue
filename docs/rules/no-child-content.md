@@ -9,6 +9,7 @@ description: disallow element's child contents which would be overwritten by a d
 > disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
