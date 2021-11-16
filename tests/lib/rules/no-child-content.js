@@ -66,6 +66,11 @@ ruleTester.run('no-child-content', rule, {
       filename: 'test.vue',
       options: [{ additionalDirectives: ['t'] }],
       code: '<template><div v-t="foo" /></template>'
+    },
+    {
+      // self-closing element with v-html directive and sibling comment element
+      filename: 'test.vue',
+      code: '<template><div v-html="foo" /><!-- bar --></template>'
     }
   ],
   invalid: [
@@ -113,6 +118,54 @@ ruleTester.run('no-child-content', rule, {
           endColumn: 37,
           suggestions: [
             { output: '<template><div v-html="foo"></div></template>' }
+          ]
+        }
+      ]
+    },
+    {
+      // v-html directive and child comment element
+      filename: 'test.vue',
+      code: '<template><div v-html="foo"><!-- bar --></div></template>',
+      errors: [
+        {
+          message:
+            'Child content is disallowed because it will be overwritten by the v-html directive.',
+          column: 29,
+          endColumn: 41,
+          suggestions: [
+            { output: '<template><div v-html="foo"></div></template>' }
+          ]
+        }
+      ]
+    },
+    {
+      // v-html directive and multiple child elements
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-html="foo">
+            <!-- this is a test -->
+            <span>foo</span>
+            bar
+          </div>
+        </template>
+      `,
+      errors: [
+        {
+          message:
+            'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 3,
+          column: 29,
+          endLine: 7,
+          endColumn: 11,
+          suggestions: [
+            {
+              output: `
+        <template>
+          <div v-html="foo"></div>
+        </template>
+      `
+            }
           ]
         }
       ]
