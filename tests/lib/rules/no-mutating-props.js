@@ -331,6 +331,28 @@ ruleTester.run('no-mutating-props', rule, {
           }
         }
       </script>`
+    },
+
+    {
+      // script setup with shadow
+      filename: 'test.vue',
+      code: `
+        <template>
+          <input v-model="foo">
+          <input v-model="bar">
+          <input v-model="Infinity">
+        </template>
+        <script setup>
+        import { ref } from 'vue'
+        import { bar } from './my-script'
+        defineProps({
+          foo: String,
+          bar: String,
+          Infinity: Number
+        })
+        const foo = ref('')
+        </script>
+      `
     }
   ],
 
@@ -582,6 +604,42 @@ ruleTester.run('no-mutating-props', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <MyComponent :data.sync="this.prop" />
+            <MyComponent :data.sync="prop" />
+            <MyComponent :data="this.prop" />
+            <MyComponent :data="prop" />
+            <template v-for="prop of data">
+              <MyComponent :data.sync="prop" />
+              <MyComponent :data.sync="this.prop" />
+            </template>
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop']
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "prop" prop.',
+          line: 4
+        },
+        {
+          message: 'Unexpected mutation of "prop" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "prop" prop.',
+          line: 10
+        }
+      ]
+    },
 
     // setup
     {
@@ -814,6 +872,43 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
+          line: 6
+        }
+      ]
+    },
+
+    {
+      // script setup with shadow
+      filename: 'test.vue',
+      code: `
+        <template>
+          <input v-model="foo">
+          <input v-model="bar">
+          <input v-model="window">
+          <input v-model="Infinity">
+        </template>
+        <script setup>
+        import { ref } from 'vue'
+        const { Infinity } = defineProps({
+          foo: String,
+          bar: String,
+          Infinity: String,
+          window: String,
+        })
+        const foo = ref('')
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "bar" prop.',
+          line: 4
+        },
+        {
+          message: 'Unexpected mutation of "window" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "Infinity" prop.',
           line: 6
         }
       ]
