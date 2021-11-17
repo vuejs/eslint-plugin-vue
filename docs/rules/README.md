@@ -321,6 +321,7 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
+| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
