@@ -1,0 +1,64 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+    - name: Install dependencies
+      run: npm install
+    - name: Lint
+      run: npm run lint
+
+  test:
+    name: 'Test for ESLint ${{ matrix.eslint }} with TS-ESLint parser ${{ matrix.tseslint }} on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [12, 14, 16, 17]
+        eslint: [8]
+        tseslint: [5]
+        include:
+          # On old ESLint versions
+          - eslint: 7
+            node: 14
+            os: ubuntu-latest
+            tseslint: 5
+          - eslint: 6
+            node: 12
+            os: ubuntu-latest
+            tseslint: 5
+          # On old typescript-eslint versions
+          - eslint: 7
+            node: 14
+            os: ubuntu-latest
+            tseslint: 4
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Node.js v${{ matrix.node }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Install eslint ${{ matrix.eslint }}
+      run: npm install eslint@${{ matrix.eslint }}
+      if: matrix.eslint != 8
+    - name: Install @typescript-eslint/parser ${{ matrix.tseslint }}
+      run: npm install @typescript-eslint/parser@${{ matrix.tseslint }}
+      if: matrix.tseslint != 5
+    - name: Install dependencies
+      run: npm install
+    - name: Test
+      run: npm test
