@@ -184,7 +184,8 @@ module.exports = {
     },
 
     algolia: {
-      apiKey: 'b2b69365da747a9a9635cda391317c36',
+      appId: '2L4MGZSULB',
+      apiKey: 'fdf57932b27a6c230d01a890492ab76d',
       indexName: 'eslint-plugin-vue'
     }
   }
