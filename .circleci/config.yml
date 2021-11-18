@@ -25,7 +25,7 @@ jobs:
       #       - v2-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
-          command: npm install
+          command: npm install --legacy-peer-deps
       - run:
           name: Test
           command: npm test
