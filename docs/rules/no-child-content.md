@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-child-content
 description: disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`
+since: v8.1.0
 ---
 # vue/no-child-content
 
 > disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -46,6 +46,10 @@ This rule reports child content of elements that have a directive which overwrit
 
 - [`v-html` directive](https://v3.vuejs.org/api/directives.html#v-html)
 - [`v-text` directive](https://v3.vuejs.org/api/directives.html#v-text)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.1.0
 
 ## :mag: Implementation
 

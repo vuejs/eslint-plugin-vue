@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-expose-after-await
 description: disallow asynchronously registered `expose`
+since: v8.1.0
 ---
 # vue/no-expose-after-await
 
 > disallow asynchronously registered `expose`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -44,6 +43,10 @@ Nothing.
 
 - [Vue RFCs - 0042-expose-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0042-expose-api.md)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.1.0
 
 ## :mag: Implementation
 
