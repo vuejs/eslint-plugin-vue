@@ -181,6 +181,35 @@ tester.run('component-api-style', rule, {
       }
       </script>
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1720
+      filename: 'test.vue',
+      options: [['composition']],
+      code: `
+      <template>
+        <div id="app">
+          <header>
+            <Navigation />
+          </header>
+          <main class="container-fluid mb-4" role="main">
+            <RouterView />
+          </main>
+        </div>
+      </template>
+
+      <script lang="ts">
+      import { defineComponent } from '@vue/composition-api'
+
+      import Navigation from '@/components/app/nav/Navigation.vue'
+
+      export default defineComponent({
+        name: 'App',
+        components: {
+          Navigation,
+        },
+      })
+      </script>`
     }
   ],
   invalid: [
