@@ -129,6 +129,8 @@ export default {
 </script>
 ```
 
+</eslint-code-block>
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/component-options-name-casing.js)
