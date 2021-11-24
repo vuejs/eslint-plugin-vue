@@ -10,6 +10,7 @@ description: enforce the casing of component name in `components` options
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
@@ -31,7 +32,7 @@ This rule has an option which can be one of these values:
 
 Please note that if you use kebab case in `components` options,
 you can **only** use kebab case in template;
-and, if you use camel case in `components` options,
+and if you use camel case in `components` options,
 you **can't** use pascal case in template.
 
 For demonstration, the code example is invalid:
