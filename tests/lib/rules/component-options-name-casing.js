@@ -231,6 +231,36 @@ tester.run('component-options-name-casing', rule, {
       code: `
         export default {
           components: {
+            'foo-bar': FooBar
+          }
+        }
+      `,
+      options: ['PascalCase'],
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'foo-bar',
+            caseType: 'PascalCase'
+          },
+          line: 4,
+          column: 13,
+          endColumn: 22
+        }
+      ],
+      output: `
+        export default {
+          components: {
+            FooBar: FooBar
+          }
+        }
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
             FooBar
           }
         }
@@ -270,6 +300,30 @@ tester.run('component-options-name-casing', rule, {
           line: 4,
           column: 13,
           endColumn: 19
+        }
+      ],
+      output: null
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
+            'foo-bar': fooBar
+          }
+        }
+      `,
+      options: ['camelCase'],
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'foo-bar',
+            caseType: 'camelCase'
+          },
+          line: 4,
+          column: 13,
+          endColumn: 22
         }
       ],
       output: null
