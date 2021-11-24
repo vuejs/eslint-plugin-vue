@@ -275,7 +275,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'camelCase' },
+              output: `
+        export default {
+          components: {
+            fooBar: FooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -299,7 +312,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'camelCase' },
+              output: `
+        export default {
+          components: {
+            fooBar: fooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -323,7 +349,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 22
+          endColumn: 22,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'camelCase' },
+              output: `
+        export default {
+          components: {
+            fooBar: fooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -347,7 +386,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            'foo-bar': FooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -371,7 +423,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            'foo-bar': fooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -395,7 +460,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            'foo-bar': fooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -419,7 +497,20 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            'foo-bar': FooBar
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null
@@ -444,7 +535,21 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
-          endColumn: 19
+          endColumn: 19,
+          suggestions: [
+            {
+              messageId: 'possibleRenaming',
+              data: { caseType: 'kebab-case' },
+              output: `
+        export default {
+          components: {
+            'foo-bar': FooBar,
+            'my-component': MyComponent
+          }
+        }
+      `
+            }
+          ]
         }
       ],
       output: null

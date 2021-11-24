@@ -29,6 +29,33 @@ This rule has an option which can be one of these values:
 - `"kebab-case"` ... enforce component names to kebab case.
 - `"camelCase"` ... enforce component names to camel case.
 
+Please note that if you use kebab case in `components` options,
+you can **only** use kebab case in template;
+and, if you use camel case in `components` options,
+you **can't** use pascal case in template.
+
+For demonstration, the code example is invalid:
+
+```vue
+<template>
+  <div>
+    <!-- All are invalid. DO NOT use like these. -->
+    <KebabCase />
+    <kebabCase />
+    <CamelCase />
+  </div>
+</template>
+
+<script>
+export default {
+  components: {
+    camelCase: MyComponent,
+    'kebab-case': MyComponent
+  }
+}
+</script>
+```
+
 ### `"PascalCase"` (default)
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error']}">
