@@ -132,7 +132,7 @@ tester.run('component-options-name-casing', rule, {
       output: `
         export default {
           components: {
-            FooBar
+            FooBar: fooBar
           }
         }
       `
@@ -191,7 +191,7 @@ tester.run('component-options-name-casing', rule, {
       output: `
         export default {
           components: {
-            FooBar
+            FooBar: fooBar
           }
         }
       `
@@ -248,13 +248,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            fooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -278,13 +272,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            fooBar: fooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -308,13 +296,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            'foo-bar': FooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -338,13 +320,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            'foo-bar': fooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -368,13 +344,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            'foo-bar': fooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -398,13 +368,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            'foo-bar': FooBar
-          }
-        }
-      `
+      output: null
     },
     {
       filename: 'test.vue',
@@ -429,14 +393,7 @@ tester.run('component-options-name-casing', rule, {
           endColumn: 19
         }
       ],
-      output: `
-        export default {
-          components: {
-            'foo-bar': FooBar,
-            'my-component': MyComponent
-          }
-        }
-      `
+      output: null
     }
   ]
 })
