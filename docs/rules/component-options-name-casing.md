@@ -31,7 +31,7 @@ This rule has an option which can be one of these values:
 
 ### `"PascalCase"` (default)
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error']}">
 
 ```vue
 <script>
@@ -47,7 +47,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error']}">
 
 ```vue
 <script>
@@ -65,7 +65,7 @@ export default {
 
 ### `"kebab-case"`
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'kebab-case']}">
 
 ```vue
 <script>
@@ -81,7 +81,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'kebab-case']}">
 
 ```vue
 <script>
@@ -99,7 +99,7 @@ export default {
 
 ### `"camelCase"`
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'camelCase']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'camelCase']}">
 
 ```vue
 <script>
@@ -115,7 +115,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'camelCase']}">
+<eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'camelCase']}">
 
 ```vue
 <script>
