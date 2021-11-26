@@ -1,0 +1,42 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/prefer-separate-static-class
+description: require static class names in template to be in a separate `class` attribute
+---
+# vue/prefer-separate-static-class
+
+> require static class names in template to be in a separate `class` attribute
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+
+## :book: Rule Details
+
+This rule reports static class names in dynamic class attributes.
+
+<eslint-code-block :rules="{'vue/prefer-separate-static-class': ['error']}">
+
+```vue
+<template>
+  <!-- FAIL -->
+  <div :class="'static-class'" />
+  <div :class="{'static-class': true, 'dynamic-class': foo}" />
+  <div :class="['static-class', dynamicClass]" />
+
+  <!-- PASS -->
+  <div class="static-class" />
+  <div class="static-class" :class="{'dynamic-class': foo}" />
+  <div class="static-class" :class="[dynamicClass]" />
+</template>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-separate-static-class.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-separate-static-class.js)
