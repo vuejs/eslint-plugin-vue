@@ -58,6 +58,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div v-bind:class="'static-class'" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -72,6 +73,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="'static-class'" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -86,6 +88,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: '<template><div :class="`static-class`" /></template>',
+      output: '<template><div class="static-class" /></template>',
       errors: [
         {
           message:
@@ -100,6 +103,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class='"static-class"' /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -114,6 +118,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="['static-class']" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -128,6 +133,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="{'static-class': true}" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -142,6 +148,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="{foo: true}" /></template>`,
+      output: `<template><div class="foo" /></template>`,
       errors: [
         {
           message:
@@ -156,6 +163,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="{['static-class']: true}" /></template>`,
+      output: `<template><div class="static-class" /></template>`,
       errors: [
         {
           message:
@@ -170,6 +178,7 @@ tester.run('prefer-separate-static-class', rule, {
     {
       filename: 'test.vue',
       code: `<template><div :class="['static-class', dynamicClass]" /></template>`,
+      output: `<template><div class="static-class" :class="[dynamicClass]" /></template>`,
       errors: [
         {
           message:
@@ -183,7 +192,23 @@ tester.run('prefer-separate-static-class', rule, {
     },
     {
       filename: 'test.vue',
+      code: `<template><div :class="[dynamicClass, otherDynamicClass, 'static-class']" /></template>`,
+      output: `<template><div class="static-class" :class="[dynamicClass, otherDynamicClass]" /></template>`,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          endLine: 1,
+          column: 58,
+          endColumn: 72
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
       code: `<template><div :class="{'static-class': true, 'dynamic-class': foo}" /></template>`,
+      output: `<template><div class="static-class" :class="{'dynamic-class': foo}" /></template>`,
       errors: [
         {
           message:
@@ -192,6 +217,56 @@ tester.run('prefer-separate-static-class', rule, {
           endLine: 1,
           column: 25,
           endColumn: 39
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div :class="[{'dynamic-class': foo, 'static-class': true}]" /></template>`,
+      output: `<template><div class="static-class" :class="[{'dynamic-class': foo}]" /></template>`,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          endLine: 1,
+          column: 48,
+          endColumn: 62
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div
+            class="other-class"
+            other-attribute
+            :class="[
+              {'dynamic-class-a': foo, 'static-class': true},
+              dynamicClassB,
+            ]" />
+        </template>
+      `,
+      output: `
+        <template>
+          <div
+            class="other-class static-class"
+            other-attribute
+            :class="[
+              {'dynamic-class-a': foo},
+              dynamicClassB,
+            ]" />
+        </template>
+      `,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 7,
+          endLine: 7,
+          column: 40,
+          endColumn: 54
         }
       ]
     },
@@ -204,6 +279,17 @@ tester.run('prefer-separate-static-class', rule, {
             other-attribute
             :class="[
               'static-class-a',
+              {'static-class-b': true, 'dynamic-class-a': foo},
+              dynamicClassB,
+            ]" />
+        </template>
+      `,
+      output: `
+        <template>
+          <div
+            class="other-class-a other-class-b static-class-a"
+            other-attribute
+            :class="[
               {'static-class-b': true, 'dynamic-class-a': foo},
               dynamicClassB,
             ]" />

@@ -9,12 +9,13 @@ description: require static class names in template to be in a separate `class` 
 > require static class names in template to be in a separate `class` attribute
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
 This rule reports static class names in dynamic class attributes.
 
-<eslint-code-block :rules="{'vue/prefer-separate-static-class': ['error']}">
+<eslint-code-block fix :rules="{'vue/prefer-separate-static-class': ['error']}">
 
 ```vue
 <template>
