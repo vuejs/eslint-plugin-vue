@@ -141,6 +141,20 @@ tester.run('prefer-separate-static-class', rule, {
     },
     {
       filename: 'test.vue',
+      code: `<template><div :class="{foo: true}" /></template>`,
+      errors: [
+        {
+          message:
+            'Static class "foo" should be in a static `class` attribute.',
+          line: 1,
+          endLine: 1,
+          column: 25,
+          endColumn: 28
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
       code: `<template><div :class="{['static-class']: true}" /></template>`,
       errors: [
         {
