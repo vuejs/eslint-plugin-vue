@@ -31,7 +31,7 @@ Default casing is set to `PascalCase`.
 - `"PascalCase"` (default) ... enforce component definition names to pascal case.
 - `"kebab-case"` ... enforce component definition names to kebab case.
 
-### `"PascalCase" (default)
+### `"PascalCase"` (default)
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error']}">
 
@@ -64,18 +64,18 @@ export default {
 ```js
 /* ✓ GOOD */
 Vue.component('MyComponent', {
-  
+
 })
 
 /* ✗ BAD */
 Vue.component('my-component', {
-  
+
 })
 ```
 
 </eslint-code-block>
 
-### `"kebab-case"
+### `"kebab-case"`
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
 
@@ -108,12 +108,12 @@ export default {
 ```js
 /* ✓ GOOD */
 Vue.component('my-component', {
-  
+
 })
 
 /* ✗ BAD */
 Vue.component('MyComponent', {
-  
+
 })
 ```
 
