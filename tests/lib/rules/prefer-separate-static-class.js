@@ -237,6 +237,21 @@ tester.run('prefer-separate-static-class', rule, {
     },
     {
       filename: 'test.vue',
+      code: `<template><div :class="[dynamicClass, {staticClass: true}]" /></template>`,
+      output: `<template><div class="staticClass" :class="[dynamicClass]" /></template>`,
+      errors: [
+        {
+          message:
+            'Static class "staticClass" should be in a static `class` attribute.',
+          line: 1,
+          endLine: 1,
+          column: 40,
+          endColumn: 51
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
       code: `
         <template>
           <div
