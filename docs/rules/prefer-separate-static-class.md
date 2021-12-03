@@ -19,12 +19,12 @@ This rule reports static class names in dynamic class attributes.
 
 ```vue
 <template>
-  <!-- FAIL -->
+  <!-- ✗ BAD -->
   <div :class="'static-class'" />
   <div :class="{'static-class': true, 'dynamic-class': foo}" />
   <div :class="['static-class', dynamicClass]" />
 
-  <!-- PASS -->
+  <!-- ✓ GOOD -->
   <div class="static-class" />
   <div class="static-class" :class="{'dynamic-class': foo}" />
   <div class="static-class" :class="[dynamicClass]" />
