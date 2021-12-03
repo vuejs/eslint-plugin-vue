@@ -120,6 +120,16 @@ tester.run('valid-define-props', rule, {
       });
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { propsDef, emitsDef } from './defs';
+
+      defineProps(propsDef);
+      defineEmits(emitsDef);
+      </script>`
     }
   ],
   invalid: [
