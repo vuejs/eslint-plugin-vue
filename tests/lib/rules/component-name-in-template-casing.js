@@ -70,6 +70,10 @@ tester.run('component-name-in-template-casing', rule, {
       options: ['PascalCase', { registeredComponentsOnly: false }]
     },
     {
+      code: '<template><div><template v-if="foo">bar</template></div></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+    {
       code: '<template><h1>Title</h1></template>',
       options: ['PascalCase', { registeredComponentsOnly: false }]
     },
@@ -151,6 +155,19 @@ tester.run('component-name-in-template-casing', rule, {
     {
       code: '<template><the-component><!--test</the-component></template>',
       options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
+
+    // built-in components (behave the same way as other components)
+    {
+      code: `
+        <template>
+          <component />
+          <suspense />
+          <teleport />
+          <client-only />
+          <keep-alive />
+        </template>
+      `
     }
   ],
   invalid: [
@@ -767,6 +784,35 @@ tester.run('component-name-in-template-casing', rule, {
         'Component name "Foo--Bar" is not kebab-case.',
         'Component name "FooBar" is not kebab-case.',
         'Component name "FooBar_Baz-qux" is not kebab-case.'
+      ]
+    },
+    {
+      // built-in components (behave the same way as other components)
+      code: `
+        <template>
+          <component />
+          <suspense />
+          <teleport />
+          <client-only />
+          <keep-alive />
+        </template>
+      `,
+      output: `
+        <template>
+          <Component />
+          <Suspense />
+          <Teleport />
+          <ClientOnly />
+          <KeepAlive />
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }],
+      errors: [
+        'Component name "component" is not PascalCase.',
+        'Component name "suspense" is not PascalCase.',
+        'Component name "teleport" is not PascalCase.',
+        'Component name "client-only" is not PascalCase.',
+        'Component name "keep-alive" is not PascalCase.'
       ]
     }
   ]
