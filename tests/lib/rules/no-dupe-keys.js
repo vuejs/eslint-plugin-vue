@@ -380,6 +380,24 @@ ruleTester.run('no-dupe-keys', rule, {
         }
       }
       `
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1687
+      filename: 'test.vue',
+      code: `
+        export default {
+          asyncData() {
+            return {
+              foo: 1
+            }
+          },
+          data() {
+            return {
+              foo: 2
+            }
+          },
+        }
+      `
     }
   ],
 
@@ -706,29 +724,6 @@ ruleTester.run('no-dupe-keys', rule, {
         {
           message: "Duplicated key 'foo'.",
           line: 9
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        export default {
-          asyncData() {
-            return {
-              foo: 1
-            }
-          },
-          data() {
-            return {
-              foo: 2
-            }
-          },
-        }
-      `,
-      errors: [
-        {
-          message: "Duplicated key 'foo'.",
-          line: 10
         }
       ]
     },
