@@ -85,6 +85,15 @@ tester.run('singleline-html-element-content-newline', rule, {
         </form>
       </template>
     `,
+    `
+      <template>
+        <select>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </template>
+    `,
 
     // ignoreWhenNoAttributes: true
     `
