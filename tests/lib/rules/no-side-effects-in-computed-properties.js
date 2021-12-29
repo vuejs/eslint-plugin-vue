@@ -447,6 +447,40 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       ]
     },
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1744
+      code: `app.component('test', {
+        computed: {
+          fooBar() {
+            this.$set(this, 'foo', 'lorem');
+            Vue.set(this, 'bar', 'ipsum');
+
+            this.$nextTick(() => {});
+            Vue.nextTick(() => {});
+
+            return this.foo + ' ' + this.bar
+          },
+        }
+      })`,
+      errors: [
+        {
+          line: 4,
+          message: 'Unexpected side effect in "fooBar" computed property.'
+        },
+        {
+          line: 5,
+          message: 'Unexpected side effect in "fooBar" computed property.'
+        },
+        {
+          line: 7,
+          message: 'Unexpected side effect in "fooBar" computed property.'
+        },
+        {
+          line: 8,
+          message: 'Unexpected side effect in "fooBar" computed property.'
+        }
+      ]
+    },
+    {
       filename: 'test.vue',
       code: `
       <script>
