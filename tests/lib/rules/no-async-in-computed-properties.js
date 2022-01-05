@@ -630,6 +630,69 @@ ruleTester.run('no-async-in-computed-properties', rule, {
     {
       filename: 'test.vue',
       code: `
+      new Vue({
+        computed: {
+          foo () {
+            this.$nextTick(() => {})
+            Vue.nextTick(() => {})
+            return 'foo'
+          }
+        }
+      })
+      `,
+      parserOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        },
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      new Vue({
+        computed: {
+          async foo () {
+            await this.$nextTick()
+            await Vue.nextTick()
+            return 'foo'
+          }
+        }
+      })
+      `,
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Unexpected async function declaration in "foo" computed property.',
+          line: 4
+        },
+        {
+          message: 'Unexpected await operator in "foo" computed property.',
+          line: 5
+        },
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5
+        },
+        {
+          message: 'Unexpected await operator in "foo" computed property.',
+          line: 6
+        },
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       export default {
         computed: {
           foo: function () {
