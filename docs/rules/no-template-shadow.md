@@ -11,7 +11,7 @@ since: v5.0.0
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
-`no-template-shadow` should report variable definitions of v-for directives or scope attributes if those shadows the variables in parent scopes.
+`no-template-shadow` should report variable definitions of v-for directives or scope attributes if they shadow the variables in parent scopes.
 
 ## :book: Rule Details
 
