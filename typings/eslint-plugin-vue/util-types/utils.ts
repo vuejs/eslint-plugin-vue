@@ -36,32 +36,14 @@ type ScriptSetupVisitorBase = {
   [T in keyof NodeListenerMap]?: (node: NodeListenerMap[T]) => void
 }
 export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
-  onDefinePropsEnter?(
-    node: CallExpression,
-    props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
-  ): void
-  onDefinePropsExit?(
-    node: CallExpression,
-    props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
-  ): void
-  onDefineEmitsEnter?(
-    node: CallExpression,
-    props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
-  ): void
-  onDefineEmitsExit?(
-    node: CallExpression,
-    props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
-  ): void
+  onDefinePropsEnter?(node: CallExpression, props: ComponentProp[]): void
+  onDefinePropsExit?(node: CallExpression, props: ComponentProp[]): void
+  onDefineEmitsEnter?(node: CallExpression, emits: ComponentEmit[]): void
+  onDefineEmitsExit?(node: CallExpression, emits: ComponentEmit[]): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
-    | ((
-        node: CallExpression,
-        props: (ComponentArrayProp | ComponentObjectProp | ComponentTypeProp)[]
-      ) => void)
-    | ((
-        node: CallExpression,
-        props: (ComponentArrayEmit | ComponentObjectEmit | ComponentTypeEmit)[]
-      ) => void)
+    | ((node: CallExpression, props: ComponentProp[]) => void)
+    | ((node: CallExpression, emits: ComponentEmit[]) => void)
     | undefined
 }
 
@@ -101,6 +83,14 @@ export type ComponentObjectProp =
   | ComponentObjectPropDetectName
   | ComponentObjectPropUnknownName
 
+export type ComponentUnknownProp = {
+  type: 'unknown'
+  key: null
+  propName: null
+  value: null
+  node: Expression | SpreadElement | null
+}
+
 export type ComponentTypeProp = {
   type: 'type'
   key: Identifier | Literal
@@ -111,6 +101,12 @@ export type ComponentTypeProp = {
   required: boolean
   types: string[]
 }
+
+export type ComponentProp =
+  | ComponentArrayProp
+  | ComponentObjectProp
+  | ComponentTypeProp
+  | ComponentUnknownProp
 
 type ComponentArrayEmitDetectName = {
   type: 'array'
@@ -143,9 +139,18 @@ type ComponentObjectEmitUnknownName = {
   value: Expression
   node: Property
 }
+
 export type ComponentObjectEmit =
   | ComponentObjectEmitDetectName
   | ComponentObjectEmitUnknownName
+
+export type ComponentUnknownEmit = {
+  type: 'unknown'
+  key: null
+  emitName: null
+  value: null
+  node: Expression | SpreadElement | null
+}
 
 export type ComponentTypeEmit = {
   type: 'type'
@@ -154,3 +159,9 @@ export type ComponentTypeEmit = {
   value: null
   node: TSCallSignatureDeclaration | TSFunctionType
 }
+
+export type ComponentEmit =
+  | ComponentArrayEmit
+  | ComponentObjectEmit
+  | ComponentTypeEmit
+  | ComponentUnknownEmit
