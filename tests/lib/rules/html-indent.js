@@ -403,6 +403,22 @@ tester.run(
         text <span /> <!-- comment --></pre>
         </template>
       `
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
+        <template>
+          <textarea>
+        </template>
+        `
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
+        <template>
+          <pre>
+        </template>
+        `
       }
     ],
 
@@ -926,6 +942,25 @@ tester.run(
         errors: [
           {
             message: 'Expected "\\t" character, but found " " character.',
+            line: 2
+          }
+        ]
+      },
+      {
+        filename: 'test.vue',
+        code: unIndent`
+        <template>
+            <textarea>
+        </template>
+        `,
+        output: unIndent`
+        <template>
+          <textarea>
+        </template>
+        `,
+        errors: [
+          {
+            message: 'Expected indentation of 2 spaces but found 4 spaces.',
             line: 2
           }
         ]
