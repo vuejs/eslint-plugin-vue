@@ -120,19 +120,19 @@ describe('getStaticPropertyName', () => {
     const node = parse(`const test = { computed: { } }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
-    assert.ok(parsed === 'computed')
+    assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with literal', () => {
     const node = parse(`const test = { ['computed'] () {} }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
-    assert.ok(parsed === 'computed')
+    assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with template literal', () => {
     const node = parse(`const test = { [\`computed\`] () {} }`)
 
     const parsed = utils.getStaticPropertyName(node.properties[0])
-    assert.ok(parsed === 'computed')
+    assert.strictEqual(parsed, 'computed')
   })
 })
 
@@ -146,13 +146,13 @@ describe('getStringLiteralValue', () => {
     const node = parse(`const test = { ['computed'] () {} }`)
 
     const parsed = utils.getStringLiteralValue(node.properties[0].key)
-    assert.ok(parsed === 'computed')
+    assert.strictEqual(parsed, 'computed')
   })
   it('should parse template literal', () => {
     const node = parse(`const test = { [\`computed\`] () {} }`)
 
     const parsed = utils.getStringLiteralValue(node.properties[0].key)
-    assert.ok(parsed === 'computed')
+    assert.strictEqual(parsed, 'computed')
   })
 })
 
@@ -388,23 +388,27 @@ describe('getComponentProps', () => {
       }
     }`)
 
-    assert.equal(props.length, 4, 'it detects all props')
+    assert.equal(props.length, 5, 'it detects all props')
 
-    assert.ok(props[0].key.type === 'Identifier')
-    assert.ok(props[0].node.type === 'Property')
-    assert.ok(props[0].value.type === 'Identifier')
+    assert.strictEqual(props[0].key, null)
+    assert.strictEqual(props[0].node.type, 'SpreadElement')
+    assert.strictEqual(props[0].value, null)
 
-    assert.ok(props[1].key.type === 'Identifier')
-    assert.ok(props[1].node.type === 'Property')
-    assert.ok(props[1].value.type === 'ObjectExpression')
+    assert.strictEqual(props[1].key.type, 'Identifier')
+    assert.strictEqual(props[1].node.type, 'Property')
+    assert.strictEqual(props[1].value.type, 'Identifier')
 
-    assert.ok(props[2].key.type === 'Identifier')
-    assert.ok(props[2].node.type === 'Property')
-    assert.ok(props[2].value.type === 'ArrayExpression')
+    assert.strictEqual(props[2].key.type, 'Identifier')
+    assert.strictEqual(props[2].node.type, 'Property')
+    assert.strictEqual(props[2].value.type, 'ObjectExpression')
 
-    assert.deepEqual(props[3].key, props[3].value)
-    assert.ok(props[3].node.type === 'Property')
-    assert.ok(props[3].value.type === 'Identifier')
+    assert.strictEqual(props[3].key.type, 'Identifier')
+    assert.strictEqual(props[3].node.type, 'Property')
+    assert.strictEqual(props[3].value.type, 'ArrayExpression')
+
+    assert.deepEqual(props[4].key, props[4].value)
+    assert.strictEqual(props[4].node.type, 'Property')
+    assert.strictEqual(props[4].value.type, 'Identifier')
   })
 
   it('should return computed from array props', () => {
@@ -418,21 +422,21 @@ describe('getComponentProps', () => {
 
     assert.equal(props.length, 4, 'it detects all props')
 
-    assert.ok(props[0].node.type === 'Literal')
+    assert.strictEqual(props[0].node.type, 'Literal')
     assert.deepEqual(props[0].key, props[0].node)
-    assert.ok(!props[0].value)
+    assert.strictEqual(props[0].value, null)
 
-    assert.ok(props[1].node.type === 'Identifier')
-    assert.ok(!props[1].key)
-    assert.ok(!props[1].value)
+    assert.strictEqual(props[1].node.type, 'Identifier')
+    assert.strictEqual(props[1].key, null)
+    assert.strictEqual(props[1].value, null)
 
-    assert.ok(props[2].node.type === 'TemplateLiteral')
+    assert.strictEqual(props[2].node.type, 'TemplateLiteral')
     assert.deepEqual(props[2].key, props[2].node)
-    assert.ok(!props[2].value)
+    assert.strictEqual(props[2].value, null)
 
-    assert.ok(props[3].node.type === 'Literal')
-    assert.ok(!props[3].key)
-    assert.ok(!props[3].value)
+    assert.strictEqual(props[3].node.type, 'Literal')
+    assert.strictEqual(props[3].key, null)
+    assert.strictEqual(props[3].value, null)
   })
 })
 

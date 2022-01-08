@@ -457,6 +457,142 @@ tester.run('require-explicit-emits', rule, {
       </script>
       `,
       parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+
+    // unknown emits definition
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: unknown,
+        setup(_, {emit}) {
+          emit('bar')
+        },
+        methods: {
+          click() {
+            this.$emit('baz')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      const emit = defineEmits(unknown)
+      emit('bar')
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {...foo}
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: [foo]
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: [...foo]
+      }
+      </script>
+      `
+    },
+
+    // unknown props definition
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: unknown,
+        methods: {
+          fn() { this.$emit('bar') }
+        },
+        setup(p, ctx) {
+          ctx.emit('baz')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineProps(unknown)
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: [foo],
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: [...foo],
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
     }
   ],
   invalid: [
@@ -1234,40 +1370,6 @@ emits: {'foo': null}
       </template>
       <script>
       export default {
-        emits: {...foo}
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "foo" event has been triggered but not declared on `emits` option.',
-          suggestions: [
-            {
-              desc: 'Add the "foo" to `emits` option.',
-              output: `
-      <template>
-        <div @click="$emit('foo')"/>
-      </template>
-      <script>
-      export default {
-        emits: {'foo': null,...foo}
-      }
-      </script>
-      `
-            }
-          ]
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <div @click="$emit('foo')"/>
-      </template>
-      <script>
-      export default {
         emits: []
       }
       </script>
@@ -1291,60 +1393,6 @@ emits: {'foo': null}
       `
             }
           ]
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <div @click="$emit('foo')"/>
-      </template>
-      <script>
-      export default {
-        emits: [...foo]
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "foo" event has been triggered but not declared on `emits` option.',
-          suggestions: [
-            {
-              desc: 'Add the "foo" to `emits` option.',
-              output: `
-      <template>
-        <div @click="$emit('foo')"/>
-      </template>
-      <script>
-      export default {
-        emits: ['foo',...foo]
-      }
-      </script>
-      `
-            }
-          ]
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <div @click="$emit('foo')"/>
-      </template>
-      <script>
-      export default {
-        emits: foo
-      }
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'The "foo" event has been triggered but not declared on `emits` option.',
-          suggestions: []
         }
       ]
     },
