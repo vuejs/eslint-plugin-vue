@@ -32,6 +32,14 @@ tester.run('no-v-text-v-html-on-component', rule, {
         <div v-html="content" />
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComponent v-if="content" />
+      </template>
+      `
     }
   ],
   invalid: [
