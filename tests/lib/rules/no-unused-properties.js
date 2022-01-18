@@ -1678,6 +1678,24 @@ tester.run('no-unused-properties', rule, {
       <style lang="scss" scoped>
       //
       </style>`
+    },
+
+    // Vue2 functional component
+    {
+      filename: 'test.vue',
+      code: `
+      <template functional>
+        <div>{{props.a}} {{props.b}}</div>
+      </template>
+
+      <script>
+      export default {
+        props: {
+          a: String,
+          b: String,
+        },
+      };
+      </script>`
     }
   ],
 
@@ -2755,6 +2773,34 @@ tester.run('no-unused-properties', rule, {
       errors: [
         "'foo.bar.b' of data found, but never used.",
         "'foo.baz' of data found, but never used."
+      ]
+    },
+
+    // Vue2 functional component
+    {
+      filename: 'test.vue',
+      code: `
+      <template functional>
+        <div>{{a}} {{b}} {{props.c}}</div>
+      </template>
+
+      <script>
+      export default {
+        props: {
+          a: String,
+          b: String,
+        },
+      };
+      </script>`,
+      errors: [
+        {
+          message: "'a' of property found, but never used.",
+          line: 9
+        },
+        {
+          message: "'b' of property found, but never used.",
+          line: 10
+        }
       ]
     }
   ]
