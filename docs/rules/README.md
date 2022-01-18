@@ -349,6 +349,7 @@ For example:
 | [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
+| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: |
