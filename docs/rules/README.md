@@ -341,6 +341,7 @@ For example:
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  |
 | [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  |
+| [vue/no-undef-components-in-script-setup](./no-undef-components-in-script-setup.md) | disallow undefined components in `<template>` with `<script setup>` |  |
 | [vue/no-undef-properties](./no-undef-properties.md) | disallow undefined properties |  |
 | [vue/no-unregistered-components](./no-unregistered-components.md) | disallow using components that are not registered inside templates |  |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
