@@ -12,8 +12,6 @@ description: disallow use of undefined components in `<template>`
 
 ## :book: Rule Details
 
-This rule warns that the component used in the `<template>` is not defined in `<script setup>`.  
-
 This rule reports components that haven't been defined and are being used in the `<template>`.
 
 Undefined components will be resolved from globally registered components. However, if you are not using global components, you can use this rule to prevent run-time errors.
