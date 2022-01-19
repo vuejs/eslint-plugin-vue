@@ -163,7 +163,7 @@ tester.run('no-undef-components-in-script-setup', rule, {
         {
           message:
             "The '<Foo.Input>' component has been used, but not defined in <script setup>.",
-          line: 8,
+          line: 7,
           column: 9
         }
       ]
