@@ -172,7 +172,6 @@ export default {
 
 ## :couple: Related Rules
 
-- [vue/no-unregistered-components](./no-unregistered-components.md)
 - [vue/no-undef-properties](./no-undef-properties.md)
 
 ## :mag: Implementation
