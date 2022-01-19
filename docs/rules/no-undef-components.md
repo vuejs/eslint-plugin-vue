@@ -10,7 +10,7 @@ description: disallow use of undefined components in `<template>`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
-This rule warns reports component that are used in the `<template>`, but that are not defined in the `<script setup>` or the Options API's `components` section.
+This rule reports component that are used in the `<template>`, but that are not defined in the `<script setup>` or the Options API's `components` section.
 
 Undefined components will be resolved from globally registered components. However, if you are not using global components, you can use this rule to prevent run-time errors.
 
