@@ -9,6 +9,8 @@ since: v7.0.0
 
 > disallow using components that are not registered inside templates
 
+- :warning: This rule was **deprecated** and replaced by [vue/no-undef-components](no-undef-components.md) rule.
+
 ## :book: Rule Details
 
 This rule reports components that haven't been registered and are being used in the template.
