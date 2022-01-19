@@ -126,7 +126,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-unbdef-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
+<eslint-code-block :rules="{'vue/no-undef-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -148,7 +148,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-unbdef-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
+<eslint-code-block :rules="{'vue/no-undef-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
