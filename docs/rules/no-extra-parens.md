@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-extra-parens
-description: disallow unnecessary parentheses
+description: disallow unnecessary parentheses in `<template>`
 since: v7.0.0
 ---
 # vue/no-extra-parens
 
-> disallow unnecessary parentheses
+> disallow unnecessary parentheses in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

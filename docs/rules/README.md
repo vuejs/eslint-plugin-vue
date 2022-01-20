@@ -369,40 +369,40 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Description |    |
 |:--------|:------------|:---|
-| [vue/array-bracket-newline](./array-bracket-newline.md) | enforce linebreaks after opening and before closing array brackets | :wrench: |
-| [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets | :wrench: |
-| [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions | :wrench: |
-| [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block | :wrench: |
-| [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks | :wrench: |
-| [vue/camelcase](./camelcase.md) | enforce camelcase naming convention |  |
-| [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas | :wrench: |
-| [vue/comma-spacing](./comma-spacing.md) | enforce consistent spacing before and after commas | :wrench: |
-| [vue/comma-style](./comma-style.md) | enforce consistent comma style | :wrench: |
-| [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots | :wrench: |
-| [vue/dot-notation](./dot-notation.md) | enforce dot notation whenever possible | :wrench: |
-| [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` | :wrench: |
-| [vue/func-call-spacing](./func-call-spacing.md) | require or disallow spacing between function identifiers and their invocations | :wrench: |
-| [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties | :wrench: |
-| [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords | :wrench: |
-| [vue/max-len](./max-len.md) | enforce a maximum line length |  |
-| [vue/no-constant-condition](./no-constant-condition.md) | disallow constant expressions in conditions |  |
-| [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns |  |
-| [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses | :wrench: |
-| [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace |  |
-| [vue/no-loss-of-precision](./no-loss-of-precision.md) | disallow literal numbers that lose precision |  |
-| [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax |  |
-| [vue/no-sparse-arrays](./no-sparse-arrays.md) | disallow sparse arrays |  |
-| [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals |  |
-| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks after opening and before closing braces | :wrench: |
-| [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces | :wrench: |
-| [vue/object-property-newline](./object-property-newline.md) | enforce placing object properties on separate lines | :wrench: |
-| [vue/object-shorthand](./object-shorthand.md) | require or disallow method and property shorthand syntax for object literals | :wrench: |
-| [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators | :wrench: |
-| [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation | :wrench: |
-| [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses | :wrench: |
-| [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators | :wrench: |
-| [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators | :wrench: |
-| [vue/template-curly-spacing](./template-curly-spacing.md) | require or disallow spacing around embedded expressions of template strings | :wrench: |
+| [vue/array-bracket-newline](./array-bracket-newline.md) | enforce linebreaks after opening and before closing array brackets in `<template>` | :wrench: |
+| [vue/array-bracket-spacing](./array-bracket-spacing.md) | enforce consistent spacing inside array brackets in `<template>` | :wrench: |
+| [vue/arrow-spacing](./arrow-spacing.md) | enforce consistent spacing before and after the arrow in arrow functions in `<template>` | :wrench: |
+| [vue/block-spacing](./block-spacing.md) | disallow or enforce spaces inside of blocks after opening block and before closing block in `<template>` | :wrench: |
+| [vue/brace-style](./brace-style.md) | enforce consistent brace style for blocks in `<template>` | :wrench: |
+| [vue/camelcase](./camelcase.md) | enforce camelcase naming convention in `<template>` |  |
+| [vue/comma-dangle](./comma-dangle.md) | require or disallow trailing commas in `<template>` | :wrench: |
+| [vue/comma-spacing](./comma-spacing.md) | enforce consistent spacing before and after commas in `<template>` | :wrench: |
+| [vue/comma-style](./comma-style.md) | enforce consistent comma style in `<template>` | :wrench: |
+| [vue/dot-location](./dot-location.md) | enforce consistent newlines before and after dots in `<template>` | :wrench: |
+| [vue/dot-notation](./dot-notation.md) | enforce dot notation whenever possible in `<template>` | :wrench: |
+| [vue/eqeqeq](./eqeqeq.md) | require the use of `===` and `!==` in `<template>` | :wrench: |
+| [vue/func-call-spacing](./func-call-spacing.md) | require or disallow spacing between function identifiers and their invocations in `<template>` | :wrench: |
+| [vue/key-spacing](./key-spacing.md) | enforce consistent spacing between keys and values in object literal properties in `<template>` | :wrench: |
+| [vue/keyword-spacing](./keyword-spacing.md) | enforce consistent spacing before and after keywords in `<template>` | :wrench: |
+| [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  |
+| [vue/no-constant-condition](./no-constant-condition.md) | disallow constant expressions in conditions in `<template>` |  |
+| [vue/no-empty-pattern](./no-empty-pattern.md) | disallow empty destructuring patterns in `<template>` |  |
+| [vue/no-extra-parens](./no-extra-parens.md) | disallow unnecessary parentheses in `<template>` | :wrench: |
+| [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace in `.vue` files |  |
+| [vue/no-loss-of-precision](./no-loss-of-precision.md) | disallow literal numbers that lose precision in `<template>` |  |
+| [vue/no-restricted-syntax](./no-restricted-syntax.md) | disallow specified syntax in `<template>` |  |
+| [vue/no-sparse-arrays](./no-sparse-arrays.md) | disallow sparse arrays in `<template>` |  |
+| [vue/no-useless-concat](./no-useless-concat.md) | disallow unnecessary concatenation of literals or template literals in `<template>` |  |
+| [vue/object-curly-newline](./object-curly-newline.md) | enforce consistent line breaks after opening and before closing braces in `<template>` | :wrench: |
+| [vue/object-curly-spacing](./object-curly-spacing.md) | enforce consistent spacing inside braces in `<template>` | :wrench: |
+| [vue/object-property-newline](./object-property-newline.md) | enforce placing object properties on separate lines in `<template>` | :wrench: |
+| [vue/object-shorthand](./object-shorthand.md) | require or disallow method and property shorthand syntax for object literals in `<template>` | :wrench: |
+| [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators in `<template>` | :wrench: |
+| [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation in `<template>` | :wrench: |
+| [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses in `<template>` | :wrench: |
+| [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators in `<template>` | :wrench: |
+| [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators in `<template>` | :wrench: |
+| [vue/template-curly-spacing](./template-curly-spacing.md) | require or disallow spacing around embedded expressions of template strings in `<template>` | :wrench: |
 
 ## Deprecated
 

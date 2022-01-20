@@ -92,7 +92,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 ```vue
 <!-- ✓ GOOD -->
-<docs> documents </docs>
+<docs> documentation </docs>
 <template>...</template>
 <script>/* ... */</script>
 <style>/* ... */</style>
@@ -106,7 +106,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 <!-- ✗ BAD -->
 <template>...</template>
 <script>/* ... */</script>
-<docs> documents </docs>
+<docs> documentation </docs>
 <style>/* ... */</style>
 ```
 

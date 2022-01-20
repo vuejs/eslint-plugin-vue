@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/camelcase
-description: enforce camelcase naming convention
+description: enforce camelcase naming convention in `<template>`
 since: v5.2.0
 ---
 # vue/camelcase
 
-> enforce camelcase naming convention
+> enforce camelcase naming convention in `<template>`
 
 This rule is the same rule as core [camelcase] rule but it applies to the expressions in `<template>`.
 

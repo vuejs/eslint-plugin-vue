@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-in-parens
-description: enforce consistent spacing inside parentheses
+description: enforce consistent spacing inside parentheses in `<template>`
 since: v7.0.0
 ---
 # vue/space-in-parens
 
-> enforce consistent spacing inside parentheses
+> enforce consistent spacing inside parentheses in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
