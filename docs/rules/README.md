@@ -399,6 +399,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/object-shorthand](./object-shorthand.md) | require or disallow method and property shorthand syntax for object literals in `<template>` | :wrench: |
 | [vue/operator-linebreak](./operator-linebreak.md) | enforce consistent linebreak style for operators in `<template>` | :wrench: |
 | [vue/prefer-template](./prefer-template.md) | require template literals instead of string concatenation in `<template>` | :wrench: |
+| [vue/quote-props](./quote-props.md) | require quotes around object literal property names in `<template>` | :wrench: |
 | [vue/space-in-parens](./space-in-parens.md) | enforce consistent spacing inside parentheses in `<template>` | :wrench: |
 | [vue/space-infix-ops](./space-infix-ops.md) | require spacing around infix operators in `<template>` | :wrench: |
 | [vue/space-unary-ops](./space-unary-ops.md) | enforce consistent spacing before or after unary operators in `<template>` | :wrench: |

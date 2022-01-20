@@ -124,8 +124,8 @@ export namespace ParserServices {
       left: VNODE.HasLocation,
       right: VNODE.HasLocation
     ): boolean
-    getCommentsBefore(nodeOrToken: VNODE.HasLocation): VNODE.Token[]
-    getCommentsAfter(nodeOrToken: VNODE.HasLocation): VNODE.Token[]
-    getCommentsInside(node: VNODE.HasLocation): VNODE.Token[]
+    getCommentsBefore(nodeOrToken: VNODE.HasLocation): VNODE.Comment[]
+    getCommentsAfter(nodeOrToken: VNODE.HasLocation): VNODE.Comment[]
+    getCommentsInside(node: VNODE.HasLocation): VNODE.Comment[]
   }
 }

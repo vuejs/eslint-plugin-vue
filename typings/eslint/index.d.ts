@@ -116,6 +116,8 @@ export class SourceCode /*extends ESLintSourceCode*/ {
 
   static splitLines(text: string): string[]
 
+  tokensAndComments: (AST.Token | VNODE.Comment)[]
+
   getText(
     node?: VNODE.HasLocation,
     beforeCount?: number,
