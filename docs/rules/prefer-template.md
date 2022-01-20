@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-template
-description: require template literals instead of string concatenation
+description: require template literals instead of string concatenation in `<template>`
 since: v7.0.0
 ---
 # vue/prefer-template
 
-> require template literals instead of string concatenation
+> require template literals instead of string concatenation in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-sparse-arrays
-description: disallow sparse arrays
+description: disallow sparse arrays in `<template>`
 since: v7.0.0
 ---
 # vue/no-sparse-arrays
 
-> disallow sparse arrays
+> disallow sparse arrays in `<template>`
 
 This rule is the same rule as core [no-sparse-arrays] rule but it applies to the expressions in `<template>`.
 

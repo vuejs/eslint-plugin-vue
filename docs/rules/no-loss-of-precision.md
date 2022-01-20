@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-loss-of-precision
-description: disallow literal numbers that lose precision
+description: disallow literal numbers that lose precision in `<template>`
 since: v8.0.0
 ---
 # vue/no-loss-of-precision
 
-> disallow literal numbers that lose precision
+> disallow literal numbers that lose precision in `<template>`
 
 This rule is the same rule as core [no-loss-of-precision] rule but it applies to the expressions in `<template>`.
 

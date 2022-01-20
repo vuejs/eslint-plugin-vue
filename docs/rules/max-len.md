@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/max-len
-description: enforce a maximum line length
+description: enforce a maximum line length in `.vue` files
 since: v6.1.0
 ---
 # vue/max-len
 
-> enforce a maximum line length
+> enforce a maximum line length in `.vue` files
 
 ## :book: Rule Details
 

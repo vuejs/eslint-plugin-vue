@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/dot-location
-description: enforce consistent newlines before and after dots
+description: enforce consistent newlines before and after dots in `<template>`
 since: v6.0.0
 ---
 # vue/dot-location
 
-> enforce consistent newlines before and after dots
+> enforce consistent newlines before and after dots in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
