@@ -129,6 +129,19 @@ tester.run('valid-next-tick', rule, {
           },
         }
       }</script>`
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1776
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          let foo = bar ? nt : undefined;
+          foo = bar ? Vue.nextTick : undefined;
+          foo = bar ? this.$nextTick : undefined;
+        }
+      }</script>`
     }
   ],
   invalid: [
