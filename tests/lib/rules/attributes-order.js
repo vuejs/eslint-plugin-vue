@@ -442,6 +442,42 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [{ alphabetical: true }]
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-bind="b"
+          v-model="c"
+          v-bind:value="a">
+        </div>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-model="c"
+          v-bind="b"
+          v-bind:value="a">
+        </div>
+      </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-bind="b"
+          v-bind:id="a"
+          v-model="c">
+        </div>
+      </template>`
+    },
 
     // omit order
     {
@@ -1245,6 +1281,50 @@ tester.run('attributes-order', rule, {
         'Attribute "v-bind" should go before "v-on:click".',
         'Attribute "v-if" should go before "v-on:click".'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-custom-directive="x"
+          v-bind="b"
+          v-model="c"
+          v-bind:value="a">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="b"
+          v-model="c"
+          v-custom-directive="x"
+          v-bind:value="a">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-model" should go before "v-custom-directive".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="x"
+          v-model="c"
+          v-bind="b"
+          v-bind:id="a">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-if="x"
+          v-bind="b"
+          v-bind:id="a"
+          v-model="c">
+        </div>
+      </template>`,
+      errors: ['Attribute "v-bind:id" should go before "v-model".']
     },
 
     // omit order
