@@ -48,6 +48,12 @@ tester.run('no-extra-parens', rule, {
     .text {
       color: v-bind('a')
     }
+    </style>`,
+    `
+    <style>
+    .text {
+      color: v-bind(a)
+    }
     </style>`
   ],
   invalid: [
