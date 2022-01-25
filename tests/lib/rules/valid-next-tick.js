@@ -127,6 +127,12 @@ tester.run('valid-next-tick', rule, {
             return this.$nextTick()
               .then(() => this.$nextTick())
           },
+          fn3 () {
+            return this.$nextTick(() => {})
+          },
+          fn4 () {
+            return this.$nextTick().then(() => this.$nextTick(() => {}))
+          }
         }
       }</script>`
     },
