@@ -508,6 +508,19 @@ tester.run('no-undef-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
+          <custom-component />
+        </template>
+        <script>
+        export default {
+          name: \`CustomComponent\`
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
           <component :is="'CustomComponent'" />
         </template>
         <script>
