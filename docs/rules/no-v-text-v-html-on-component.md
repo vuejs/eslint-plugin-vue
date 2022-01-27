@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-v-text-v-html-on-component
 description: disallow v-text / v-html on component
+since: v8.4.0
 ---
 # vue/no-v-text-v-html-on-component
 
 > disallow v-text / v-html on component
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -36,6 +35,10 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.4.0
 
 ## :mag: Implementation
 

@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-undef-components
 description: disallow use of undefined components in `<template>`
+since: v8.4.0
 ---
 # vue/no-undef-components
 
 > disallow use of undefined components in `<template>`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule reports components that are used in the `<template>`, but that are not defined in the `<script setup>` or the Options API's `components` section.
 
@@ -171,6 +170,10 @@ export default {
 ## :couple: Related Rules
 
 - [vue/no-undef-properties](./no-undef-properties.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.4.0
 
 ## :mag: Implementation
 

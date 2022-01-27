@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/quote-props
 description: require quotes around object literal property names in `<template>`
+since: v8.4.0
 ---
 # vue/quote-props
 
 > require quotes around object literal property names in `<template>`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as core [quote-props] rule but it applies to the expressions in `<template>`.
@@ -18,6 +18,10 @@ This rule is the same rule as core [quote-props] rule but it applies to the expr
 - [quote-props]
 
 [quote-props]: https://eslint.org/docs/rules/quote-props
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.4.0
 
 ## :mag: Implementation
 
