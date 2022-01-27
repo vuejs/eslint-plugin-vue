@@ -38,7 +38,7 @@ function toRuleRow(rule) {
 
 function toDeprecatedRuleRow(rule) {
   const link = `[${rule.ruleId}](./${rule.name}.md)`
-  const replacedRules = rule.meta.docs.replacedBy || []
+  const replacedRules = rule.meta.replacedBy || []
   const replacedBy = replacedRules
     .map((name) => `[vue/${name}](./${name}.md)`)
     .join(', ')

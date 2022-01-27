@@ -120,8 +120,8 @@ class DocFile {
     const notes = []
 
     if (meta.deprecated) {
-      if (meta.docs.replacedBy) {
-        const replacedRules = meta.docs.replacedBy.map(
+      if (meta.replacedBy) {
+        const replacedRules = meta.replacedBy.map(
           (name) => `[vue/${name}](${name}.md) rule`
         )
         notes.push(
