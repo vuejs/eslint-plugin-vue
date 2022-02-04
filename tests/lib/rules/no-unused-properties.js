@@ -4,7 +4,8 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const { RuleTester, Linter } = require('eslint')
+const assert = require('assert')
 const rule = require('../../../lib/rules/no-unused-properties')
 
 const tester = new RuleTester({
@@ -2804,4 +2805,43 @@ tester.run('no-unused-properties', rule, {
       ]
     }
   ]
+})
+
+// https://github.com/vuejs/eslint-plugin-vue/issues/1789
+describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
+  const linter = new Linter()
+  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
+  linter.defineRule(
+    'vue/no-unused-components',
+    require('../../../lib/rules/no-unused-components')
+  )
+  linter.defineRule('vue/no-unused-properties', rule)
+
+  const config = {
+    parser: 'vue-eslint-parser',
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module'
+    },
+    rules: {
+      'vue/no-unused-components': 'error',
+      'vue/no-unused-properties': 'error'
+    }
+  }
+
+  it('should not be a false positive when using CSS v-bind().', () => {
+    const code = `
+      <template></template>
+      <script>
+        export default {
+          props: ['a']
+        };
+      </script>
+      <style>
+      a {
+        color: v-bind(a);
+      }
+      </style>`
+    assert.deepStrictEqual(linter.verify(code, config, 'test.vue'), [])
+  })
 })
