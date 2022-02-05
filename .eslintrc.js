@@ -71,6 +71,18 @@ module.exports = {
     'no-proto': 2,
     'no-redeclare': 2,
     'no-regex-spaces': 2,
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          '@vue/reactivity',
+          '@vue/runtime-core',
+          '@vue/runtime-dom',
+          '@vue/shared'
+        ],
+        message: "Please always import these APIs from the main 'vue' package"
+      }
+    ],
     'no-return-assign': [2, 'except-parens'],
     'no-self-assign': 2,
     'no-self-compare': 2,
