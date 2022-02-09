@@ -32,7 +32,7 @@ description: require shorthand form attribute when `v-bind` value is `true`.
 </eslint-code-block>
 
 However, those two representations are not always equivalent.
-This case will be occurred if the definition of a prop include `String`:
+This case will be occurred if the definition of a prop includes `String`:
 
 ```vue
 <template>
