@@ -2,11 +2,11 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-true-attribute-shorthand
-description: require shorthand form attribute when `v-bind` value is `true`.
+description: require shorthand form attribute when `v-bind` value is `true`
 ---
 # vue/prefer-true-attribute-shorthand
 
-> require shorthand form attribute when `v-bind` value is `true`.
+> require shorthand form attribute when `v-bind` value is `true`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
@@ -31,32 +31,48 @@ description: require shorthand form attribute when `v-bind` value is `true`.
 
 </eslint-code-block>
 
-However, those two representations are not always equivalent.
-This case will be occurred if the definition of a prop includes `String`:
+::: warning Warning
+The shorthand form is not always equivalent! If a prop accepts multiple types, but Boolean is not the first one, a shorthand prop won't pass `true`.
+:::
 
 ```vue
-<template>
-  <pre>{{ prop }}</pre>
-</template>
-
 <script>
 export default {
   name: 'MyComponent',
   props: {
-    prop: [String, Boolean]
+    bool: Boolean,
+    boolOrString: [Boolean, String],
+    stringOrBool: [String, Boolean],
   }
 }
 </script>
 ```
 
+**Shorthand form:**
+
 ```vue
-<template>
-  <MyComponent prop />
-  <MyComponent :prop="true"/>
-</template>
+<MyComponent bool bool-or-string string-or-bool />
 ```
 
-Those two calls will introduce different render result. See [this demo](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCBNeUNvbXBvbmVudCBmcm9tICcuL015Q29tcG9uZW50LnZ1ZSdcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxNeUNvbXBvbmVudCBhIGIvPlxuICA8TXlDb21wb25lbnQgOmE9XCJ0cnVlXCIgOmI9XCJ0cnVlXCIvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiTXlDb21wb25lbnQudnVlIjoiPHNjcmlwdD5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgcHJvcHM6IHtcbiAgICBhOiBCb29sZWFuLFxuICAgIGI6IFtTdHJpbmcsIEJvb2xlYW5dXG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxwcmU+XG5hOiB7e2F9fVxuYjoge3tifX1cbiAgPC9wcmU+XG48L3RlbXBsYXRlPiJ9).
+```
+bool: true (boolean)
+boolOrString: true (boolean)
+stringOrBool: "" (string)
+```
+
+**Longhand form:**
+
+```vue
+<MyComponent :bool="true" :bool-or-string="true" :string-or-bool="true" />
+```
+
+```
+bool: true (boolean)
+boolOrString: true (boolean)
+stringOrBool: true (boolean)
+```
+
+Those two calls will introduce different render result. See [this demo](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltcG9ydCBNeUNvbXBvbmVudCBmcm9tICcuL015Q29tcG9uZW50LnZ1ZSdcbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIFNob3J0aGFuZCBmb3JtOlxuICA8TXlDb21wb25lbnQgYm9vbCBib29sLW9yLXN0cmluZyBzdHJpbmctb3ItYm9vbCAvPlxuICBcbiAgTG9uZ2hhbmQgZm9ybTpcbiAgPE15Q29tcG9uZW50IDpib29sPVwidHJ1ZVwiIDpib29sLW9yLXN0cmluZz1cInRydWVcIiA6c3RyaW5nLW9yLWJvb2w9XCJ0cnVlXCIgLz5cbjwvdGVtcGxhdGU+IiwiaW1wb3J0LW1hcC5qc29uIjoie1xuICBcImltcG9ydHNcIjoge1xuICAgIFwidnVlXCI6IFwiaHR0cHM6Ly9zZmMudnVlanMub3JnL3Z1ZS5ydW50aW1lLmVzbS1icm93c2VyLmpzXCJcbiAgfVxufSIsIk15Q29tcG9uZW50LnZ1ZSI6IjxzY3JpcHQ+XG5leHBvcnQgZGVmYXVsdCB7XG4gIHByb3BzOiB7XG4gICAgYm9vbDogQm9vbGVhbixcbiAgICBib29sT3JTdHJpbmc6IFtCb29sZWFuLCBTdHJpbmddLFxuICAgIHN0cmluZ09yQm9vbDogW1N0cmluZywgQm9vbGVhbl0sXG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxwcmU+XG5ib29sOiB7e2Jvb2x9fSAoe3sgdHlwZW9mIGJvb2wgfX0pXG5ib29sT3JTdHJpbmc6IHt7Ym9vbE9yU3RyaW5nfX0gKHt7IHR5cGVvZiBib29sT3JTdHJpbmcgfX0pXG5zdHJpbmdPckJvb2w6IHt7c3RyaW5nT3JCb29sfX0gKHt7IHR5cGVvZiBzdHJpbmdPckJvb2wgfX0pXG4gIDwvcHJlPlxuPC90ZW1wbGF0ZT4ifQ==).
 
 ## :wrench: Options
 
