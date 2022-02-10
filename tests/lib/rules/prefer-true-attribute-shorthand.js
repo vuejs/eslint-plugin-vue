@@ -80,6 +80,41 @@ tester.run('prefer-true-attribute-shorthand', rule, {
         <MyComp :show="false" />
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp show />
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp show />
+      </template>
+      `,
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp :show="true" />
+      </template>
+      `,
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp v-bind:show="true" />
+      </template>
+      `,
+      options: ['never']
     }
   ],
   invalid: [
@@ -91,12 +126,12 @@ tester.run('prefer-true-attribute-shorthand', rule, {
       </template>`,
       errors: [
         {
-          messageId: 'report',
+          messageId: 'expectShort',
           line: 3,
           column: 17,
           suggestions: [
             {
-              messageId: 'fix',
+              messageId: 'suggestion',
               output: `
       <template>
         <MyComp show />
@@ -104,7 +139,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
             }
           ]
         }
-      ]
+      ],
+      output: null
     },
     {
       filename: 'test.vue',
@@ -114,12 +150,12 @@ tester.run('prefer-true-attribute-shorthand', rule, {
       </template>`,
       errors: [
         {
-          messageId: 'report',
+          messageId: 'expectShort',
           line: 3,
           column: 17,
           suggestions: [
             {
-              messageId: 'fix',
+              messageId: 'suggestion',
               output: `
       <template>
         <MyComp show />
@@ -127,7 +163,77 @@ tester.run('prefer-true-attribute-shorthand', rule, {
             }
           ]
         }
-      ]
+      ],
+      output: null
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp v-bind:show="true" />
+      </template>`,
+      options: ['always'],
+      errors: [
+        {
+          messageId: 'expectShort',
+          line: 3,
+          column: 17,
+          suggestions: [
+            {
+              messageId: 'suggestion',
+              output: `
+      <template>
+        <MyComp show />
+      </template>`
+            }
+          ]
+        }
+      ],
+      output: null
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp :show="true" />
+      </template>`,
+      options: ['always'],
+      errors: [
+        {
+          messageId: 'expectShort',
+          line: 3,
+          column: 17,
+          suggestions: [
+            {
+              messageId: 'suggestion',
+              output: `
+      <template>
+        <MyComp show />
+      </template>`
+            }
+          ]
+        }
+      ],
+      output: null
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp show />
+      </template>`,
+      options: ['never'],
+      errors: [
+        {
+          messageId: 'expectLong',
+          line: 3,
+          column: 17
+        }
+      ],
+      output: `
+      <template>
+        <MyComp :show="true" />
+      </template>`
     }
   ]
 })
