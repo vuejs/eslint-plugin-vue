@@ -9,14 +9,13 @@ description: require shorthand form attribute when `v-bind` value is `true`
 > require shorthand form attribute when `v-bind` value is `true`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
 `v-bind` attribute with `true` value usually can be written in shorthand form. This can reduce verbosity.
 
-<eslint-code-block fix :rules="{'vue/prefer-true-attribute-shorthand': ['error']}">
+<eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error']}">
 
 ```vue
 <template>
@@ -90,7 +89,7 @@ Default options is `"always"`.
 
 ### `"never"`
 
-<eslint-code-block fix :rules="{'vue/prefer-true-attribute-shorthand': ['error', 'never']}">
+<eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error', 'never']}">
 
 ```vue
 <template>
