@@ -115,6 +115,39 @@ tester.run('prefer-true-attribute-shorthand', rule, {
       </template>
       `,
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input v-bind:checked="true" />
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input :checked="true" />
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input checked="checked" />
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input checked />
+      </template>
+      `,
+      options: ['never']
     }
   ],
   invalid: [
