@@ -164,7 +164,7 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           column: 17,
           suggestions: [
             {
-              messageId: 'suggestion',
+              messageId: 'rewriteIntoShort',
               output: `
       <template>
         <MyComp show />
@@ -188,7 +188,7 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           column: 17,
           suggestions: [
             {
-              messageId: 'suggestion',
+              messageId: 'rewriteIntoShort',
               output: `
       <template>
         <MyComp show />
@@ -213,7 +213,7 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           column: 17,
           suggestions: [
             {
-              messageId: 'suggestion',
+              messageId: 'rewriteIntoShort',
               output: `
       <template>
         <MyComp show />
@@ -238,7 +238,7 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           column: 17,
           suggestions: [
             {
-              messageId: 'suggestion',
+              messageId: 'rewriteIntoShort',
               output: `
       <template>
         <MyComp show />
@@ -260,13 +260,24 @@ tester.run('prefer-true-attribute-shorthand', rule, {
         {
           messageId: 'expectLong',
           line: 3,
-          column: 17
-        }
-      ],
-      output: `
+          column: 17,
+          suggestions: [
+            {
+              output: `
       <template>
         <MyComp :show="true" />
       </template>`
+            },
+            {
+              output: `
+      <template>
+        <MyComp show="show" />
+      </template>`
+            }
+          ]
+        }
+      ],
+      output: null
     }
   ]
 })
