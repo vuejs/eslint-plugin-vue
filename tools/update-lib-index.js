@@ -41,9 +41,16 @@ module.exports = {
   environments: {
     'setup-compiler-macros': {
       globals: {
-        defineProps: 'readonly',
+        $$: 'readonly',
+        $: 'readonly',
+        $computed: 'readonly',
+        $customRef: 'readonly',
+        $ref: 'readonly',
+        $shallowRef: 'readonly',
+        $toRef: 'readonly',
         defineEmits: 'readonly',
         defineExpose: 'readonly',
+        defineProps: 'readonly',
         withDefaults: 'readonly'
       }
     }

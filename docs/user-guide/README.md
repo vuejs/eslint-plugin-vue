@@ -358,10 +358,10 @@ module.exports = {
 }
 ```
 
-#### Compiler macros such as `defineProps` and `defineEmits` generate `no-undef` warnings
+#### Compiler macros such as `defineProps` and `$ref` generate `no-undef` warnings
 
 You need to enable the compiler macros environment in your ESLint configuration file.
-If you don't want to expose these variables globally, you can use `/* global defineProps, defineEmits */` instead.
+If you don't want to expose these variables globally, you can use `/* global defineProps, $ref */` instead.
 
 Example **.eslintrc.js**:
 
