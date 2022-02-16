@@ -114,7 +114,7 @@ export default {
 ## :books: Further Reading
 
 - [Style guide - Component/instance options order](https://vuejs.org/style-guide/rules-recommended.html#component-instance-options-order)
-- [Style guide (for v2) - Component/instance options order](https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
+- [Style guide (for v2) - Component/instance options order](https://v2.vuejs.org/v2/style-guide/#Component-instance-options-order-recommended)
 
 ## :rocket: Version
 

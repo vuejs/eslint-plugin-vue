@@ -46,7 +46,7 @@ Nothing.
 
 [Migration Guide - KeyCode Modifiers]: https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html
 [Vue RFCs - 0014-drop-keycode-support]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md
-[API - Global Config - keyCodes]: https://vuejs.org/v2/api/#keyCodes
+[API - Global Config - keyCodes]: https://v2.vuejs.org/v2/api/#keyCodes
 
 ## :rocket: Version
 

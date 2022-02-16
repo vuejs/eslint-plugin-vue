@@ -93,7 +93,7 @@ Nothing.
 ## :books: Further Reading
 
 - [Style guide - Implicit parent-child communication](https://vuejs.org/style-guide/rules-use-with-caution.html#implicit-parent-child-communication)
-- [Vue - Prop Mutation - deprecated](https://vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
+- [Vue - Prop Mutation - deprecated](https://v2.vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
 
 ## :rocket: Version
 

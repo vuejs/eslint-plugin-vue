@@ -169,7 +169,7 @@ export default {
 - [Guide (for v2) - Custom Events]
 
 [Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
-[Guide (for v2) - Custom Events]: https://vuejs.org/v2/guide/components-custom-events.html
+[Guide (for v2) - Custom Events]: https://v2.vuejs.org/v2/guide/components-custom-events.html
 
 ## :couple: Related Rules
 

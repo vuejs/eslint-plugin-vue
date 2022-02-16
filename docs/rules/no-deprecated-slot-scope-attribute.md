@@ -39,7 +39,7 @@ This rule reports deprecated `slot-scope` attribute in Vue.js v2.6.0+.
 
 ## :books: Further Reading
 
-- [API - slot-scope](https://vuejs.org/v2/api/#slot-scope-deprecated)
+- [API - slot-scope](https://v2.vuejs.org/v2/api/#slot-scope-deprecated)
 
 ## :rocket: Version
 
