@@ -16,7 +16,7 @@ since: v7.0.0
 This rule reports the use of `this` within the props default value factory functions.
 In Vue.js 3.0.0+, props default value factory functions no longer have access to `this`.
 
-See [Migration Guide - Props Default Function `this` Access](https://v3.vuejs.org/guide/migration/props-default-this.html) for more details.
+See [Migration Guide - Props Default Function `this` Access](https://v3-migration.vuejs.org/breaking-changes/props-default-this.html) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-props-default-this': ['error']}">
 
@@ -64,7 +64,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Migration Guide - Props Default Function `this` Access](https://v3.vuejs.org/guide/migration/props-default-this.html)
+- [Migration Guide - Props Default Function `this` Access](https://v3-migration.vuejs.org/breaking-changes/props-default-this.html)
 
 ## :rocket: Version
 

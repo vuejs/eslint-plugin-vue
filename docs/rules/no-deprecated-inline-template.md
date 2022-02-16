@@ -15,7 +15,7 @@ since: v7.0.0
 
 This rule reports deprecated `inline-template` attributes (removed in Vue.js v3.0.0+).
 
-See [Migration Guide - Inline Template Attribute](https://v3.vuejs.org/guide/migration/inline-template-attribute.html) for more details.
+See [Migration Guide - Inline Template Attribute](https://v3-migration.vuejs.org/breaking-changes/inline-template-attribute.html) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-inline-template': ['error']}">
 
@@ -42,7 +42,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Migration Guide - Inline Template Attribute](https://v3.vuejs.org/guide/migration/inline-template-attribute.html)
+- [Migration Guide - Inline Template Attribute](https://v3-migration.vuejs.org/breaking-changes/inline-template-attribute.html)
 - [Vue RFCs - 0016-remove-inline-templates](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0016-remove-inline-templates.md)
 
 ## :rocket: Version
