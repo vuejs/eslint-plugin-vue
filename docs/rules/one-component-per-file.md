@@ -50,7 +50,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Style guide - Component files](https://v3.vuejs.org/style-guide/#component-files-strongly-recommended)
+- [Style guide - Component files](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-files)
 
 ## :rocket: Version
 

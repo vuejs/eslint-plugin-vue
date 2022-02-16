@@ -105,7 +105,7 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 
 ## :books: Further Reading
 
-- [Style guide - Directive shorthands](https://v3.vuejs.org/style-guide/#directive-shorthands-strongly-recommended)
+- [Style guide - Directive shorthands](https://vuejs.org/style-guide/rules-strongly-recommended.html#directive-shorthands)
 
 ## :rocket: Version
 

@@ -114,7 +114,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ## :books: Further Reading
 
-- [Style guide - Multi attribute elements](https://v3.vuejs.org/style-guide/#multi-attribute-elements-strongly-recommended)
+- [Style guide - Multi attribute elements](https://vuejs.org/style-guide/rules-strongly-recommended.html#multi-attribute-elements)
 
 ## :rocket: Version
 

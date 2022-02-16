@@ -94,7 +94,7 @@ Object option:
 
 ## :books: Further Reading
 
-- [Style guide - Quoted attribute values](https://v3.vuejs.org/style-guide/#Quoted-attribute-values-strongly-recommended)
+- [Style guide - Quoted attribute values](https://vuejs.org/style-guide/rules-strongly-recommended.html#quoted-attribute-values)
 
 ## :rocket: Version
 

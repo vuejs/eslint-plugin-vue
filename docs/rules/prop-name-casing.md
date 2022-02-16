@@ -68,7 +68,7 @@ export default {
 
 ## :books: Further Reading
 
-- [Style guide - Prop name casing](https://v3.vuejs.org/style-guide/#prop-name-casing-strongly-recommended)
+- [Style guide - Prop name casing](https://vuejs.org/style-guide/rules-strongly-recommended.html#prop-name-casing)
 
 ## :couple: Related Rules
 

@@ -143,7 +143,7 @@ export default {
 
 ## :books: Further Reading
 
-- [Style guide - Component name casing in templates](https://v3.vuejs.org/style-guide/#component-name-casing-in-templates-strongly-recommended)
+- [Style guide - Component name casing in templates](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-templates)
 
 ## :rocket: Version
 

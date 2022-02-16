@@ -83,7 +83,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ## :books: Further Reading
 
-- [Style guide - Component name casing in JS/JSX](https://v3.vuejs.org/style-guide/#component-name-casing-in-js-jsx-strongly-recommended)
+- [Style guide - Component name casing in JS/JSX](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-js-jsx)
 
 ## :rocket: Version
 

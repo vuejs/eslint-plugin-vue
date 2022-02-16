@@ -89,7 +89,7 @@ export default {
 
 ## :books: Further Reading
 
-- [Style guide - Empty lines in component/instance options](https://v3.vuejs.org/style-guide/#empty-lines-in-component-instance-options-recommended)
+- [Style guide - Empty lines in component/instance options](https://vuejs.org/style-guide/rules-recommended.html#empty-lines-in-component-instance-options)
 
 ## :rocket: Version
 
