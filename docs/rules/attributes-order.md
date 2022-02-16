@@ -14,7 +14,7 @@ since: v4.3.0
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue.js Style Guide](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended) and is:
+This rule aims to enforce ordering of component attributes. The default order is specified in the [Vue.js Style Guide](https://vuejs.org/style-guide/rules-recommended.html#element-attribute-order) and is:
 
 - `DEFINITION`
   e.g. 'is', 'v-is'
@@ -247,8 +247,8 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 ## :books: Further Reading
 
-- [Style guide - Element attribute order](https://v3.vuejs.org/style-guide/#element-attribute-order-recommended)
-- [Style guide (for v2) - Element attribute order](https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
+- [Style guide - Element attribute order](https://vuejs.org/style-guide/rules-recommended.html#element-attribute-order)
+- [Style guide (for v2) - Element attribute order](https://v2.vuejs.org/v2/style-guide/#Element-attribute-order-recommended)
 
 ## :rocket: Version
 

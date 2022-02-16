@@ -89,7 +89,7 @@ There are two common cases where this can be tempting:
 
 ## :books: Further Reading
 
-- [Style guide - Avoid v-if with v-for](https://v3.vuejs.org/style-guide/#avoid-v-if-with-v-for-essential)
+- [Style guide - Avoid v-if with v-for](https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for)
 - [Guide - Conditional Rendering / v-if with v-for](https://v3.vuejs.org/guide/conditional.html#v-if-with-v-for)
 - [Guide - List Rendering / v-for with v-if](https://v3.vuejs.org/guide/list.html#v-for-with-v-if)
 

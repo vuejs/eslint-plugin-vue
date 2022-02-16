@@ -39,7 +39,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 ## :books: Further Reading
 
-- [API - slot](https://vuejs.org/v2/api/#slot-deprecated)
+- [API - slot](https://v2.vuejs.org/v2/api/#slot-deprecated)
 
 ## :rocket: Version
 

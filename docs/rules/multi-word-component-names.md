@@ -118,7 +118,7 @@ export default {
 
 ## :books: Further Reading
 
-- [Style guide - Multi-word component names](https://v3.vuejs.org/style-guide/#multi-word-component-names-essential)
+- [Style guide - Multi-word component names](https://vuejs.org/style-guide/rules-essential.html#use-multi-word-component-names)
 
 ## :rocket: Version
 

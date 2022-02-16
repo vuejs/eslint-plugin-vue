@@ -79,8 +79,8 @@ export default {
 ```
 
 - Array options ... Defines the API styles you want to allow. Default is `["script-setup", "composition"]`. You can use the following values.
-  - `"script-setup"` ... If set, allows [`<script setup>`](https://v3.vuejs.org/api/sfc-script-setup.html).
-  - `"composition"` ... If set, allows [Composition API](https://v3.vuejs.org/api/composition-api.html) (not `<script setup>`).
+  - `"script-setup"` ... If set, allows [`<script setup>`](https://vuejs.org/api/sfc-script-setup.html).
+  - `"composition"` ... If set, allows [Composition API](https://vuejs.org/api/#composition-api) (not `<script setup>`).
   - `"composition-vue2"` ... If set, allows [Composition API for Vue 2](https://github.com/vuejs/composition-api) (not `<script setup>`). In particular, it allows `render`, `renderTracked` and `renderTriggered` alongside `setup`.
   - `"options"` ... If set, allows Options API.
 

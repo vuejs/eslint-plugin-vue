@@ -95,7 +95,7 @@ Every option can be set to one of the following values:
 
 ## :books: Further Reading
 
-- [Style guide - Self closing components](https://v3.vuejs.org/style-guide/#Self-closing-components-strongly-recommended)
+- [Style guide - Self closing components](https://vuejs.org/style-guide/rules-strongly-recommended.html#self-closing-components)
 
 ## :rocket: Version
 

@@ -114,7 +114,7 @@ This rule warns about the order of the `<script>`, `<template>` & `<style>` tags
 
 ## :books: Further Reading
 
-- [Style guide - Single-file component top-level element order](https://v3.vuejs.org/style-guide/#single-file-component-top-level-element-order-recommended)
+- [Style guide - Single-file component top-level element order](https://vuejs.org/style-guide/rules-recommended.html#single-file-component-top-level-element-order)
 
 ## :rocket: Version
 

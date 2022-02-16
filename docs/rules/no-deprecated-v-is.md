@@ -16,7 +16,7 @@ since: v7.11.0
 
 This rule reports deprecated `v-is` directive in Vue.js v3.1.0+.
 
-Use [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is) instead.
+Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-attributes.html#is) instead.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-v-is': ['error']}">
 
@@ -41,7 +41,8 @@ Use [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attribu
 
 ## :books: Further Reading
 
-- [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [Migration Guide - Custom Elements Interop](https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html#vue-prefix-for-in-dom-template-parsing-workarounds)
+- [API - v-is](https://vuejs.org/api/built-in-special-attributes.html#is)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 
 ## :rocket: Version

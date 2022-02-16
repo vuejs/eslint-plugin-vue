@@ -15,7 +15,7 @@ since: v7.0.0
 
 This rule reports deprecated `filters` syntax (removed in Vue.js v3.0.0+).
 
-See [Migration Guide - Filters](https://v3.vuejs.org/guide/migration/filters.html) for more details.
+See [Migration Guide - Filters](https://v3-migration.vuejs.org/breaking-changes/filters.html) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-filter': ['error']}">
 
@@ -63,7 +63,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Migration Guide - Filters](https://v3.vuejs.org/guide/migration/filters.html)
+- [Migration Guide - Filters](https://v3-migration.vuejs.org/breaking-changes/filters.html)
 - [Vue RFCs - 0015-remove-filters](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0015-remove-filters.md)
 
 ## :rocket: Version

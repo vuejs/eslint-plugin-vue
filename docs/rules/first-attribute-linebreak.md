@@ -156,7 +156,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 ## :books: Further Reading
 
-- [Style guide - Multi attribute elements](https://v3.vuejs.org/style-guide/#multi-attribute-elements-strongly-recommended)
+- [Style guide - Multi attribute elements](https://vuejs.org/style-guide/rules-strongly-recommended.html#multi-attribute-elements)
 
 ## :rocket: Version
 

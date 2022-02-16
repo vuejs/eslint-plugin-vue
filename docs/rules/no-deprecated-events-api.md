@@ -15,7 +15,7 @@ since: v7.0.0
 
 This rule reports use of deprecated `$on`, `$off` `$once` api. (in Vue.js 3.0.0+).
 
-See [Migration Guide - Events API](https://v3.vuejs.org/guide/migration/events-api.html) for more details.
+See [Migration Guide - Events API](https://v3-migration.vuejs.org/breaking-changes/events-api.html) for more details.
 
 <eslint-code-block :rules="{'vue/no-deprecated-events-api': ['error']}">
 
@@ -61,7 +61,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Migration Guide - Events API](https://v3.vuejs.org/guide/migration/events-api.html)
+- [Migration Guide - Events API](https://v3-migration.vuejs.org/breaking-changes/events-api.html)
 - [Vue RFCs - 0020-events-api-change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0020-events-api-change.md)
 
 ## :rocket: Version

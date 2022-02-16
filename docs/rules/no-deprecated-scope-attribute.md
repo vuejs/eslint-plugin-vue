@@ -42,7 +42,7 @@ This rule reports deprecated `scope` attribute in Vue.js v2.5.0+.
 
 ## :books: Further Reading
 
-- [API - scope](https://vuejs.org/v2/api/#scope-removed)
+- [API - scope](https://v2.vuejs.org/v2/api/#scope-removed)
 
 ## :rocket: Version
 

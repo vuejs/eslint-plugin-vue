@@ -65,7 +65,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Style guide - Prop definitions](https://v3.vuejs.org/style-guide/#prop-definitions-essential)
+- [Style guide - Prop definitions](https://vuejs.org/style-guide/rules-essential.html#use-detailed-prop-definitions)
 
 ## :rocket: Version
 

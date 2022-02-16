@@ -78,9 +78,9 @@ Nothing.
 
 ## :books: Further Reading
 
-- [`Vue.nextTick` API in Vue 2](https://vuejs.org/v2/api/#Vue-nextTick)
-- [`vm.$nextTick` API in Vue 2](https://vuejs.org/v2/api/#vm-nextTick)
-- [Global API Treeshaking](https://v3.vuejs.org/guide/migration/global-api-treeshaking.html)
+- [`Vue.nextTick` API in Vue 2](https://v2.vuejs.org/v2/api/#Vue-nextTick)
+- [`vm.$nextTick` API in Vue 2](https://v2.vuejs.org/v2/api/#vm-nextTick)
+- [Global API Treeshaking](https://v3-migration.vuejs.org/breaking-changes/global-api-treeshaking.html)
 - [Global `nextTick` API in Vue 3](https://v3.vuejs.org/api/global-api.html#nexttick)
 - [Instance `$nextTick` API in Vue 3](https://v3.vuejs.org/api/instance-methods.html#nexttick)
 

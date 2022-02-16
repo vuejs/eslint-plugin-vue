@@ -15,7 +15,7 @@ since: v7.0.0
 
 This rule reports use of deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+).
 
-See [Migration Guide - KeyCode Modifiers](https://v3.vuejs.org/guide/migration/keycode-modifiers.html) for more details.
+See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html) for more details.
 
 <eslint-code-block filename="a.js" language="javascript" :rules="{'vue/no-deprecated-vue-config-keycodes': ['error']}">
 
@@ -44,9 +44,9 @@ Nothing.
 - [Vue RFCs - 0014-drop-keycode-support]
 - [API - Global Config - keyCodes]
 
-[Migration Guide - KeyCode Modifiers]: https://v3.vuejs.org/guide/migration/keycode-modifiers.html
+[Migration Guide - KeyCode Modifiers]: https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html
 [Vue RFCs - 0014-drop-keycode-support]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md
-[API - Global Config - keyCodes]: https://vuejs.org/v2/api/#keyCodes
+[API - Global Config - keyCodes]: https://v2.vuejs.org/v2/api/#keyCodes
 
 ## :rocket: Version
 

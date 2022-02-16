@@ -92,8 +92,8 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Style guide - Implicit parent-child communication](https://v3.vuejs.org/style-guide/#implicit-parent-child-communication-use-with-caution)
-- [Vue - Prop Mutation - deprecated](https://vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
+- [Style guide - Implicit parent-child communication](https://vuejs.org/style-guide/rules-use-with-caution.html#implicit-parent-child-communication)
+- [Vue - Prop Mutation - deprecated](https://v2.vuejs.org/v2/guide/migration.html#Prop-Mutation-deprecated)
 
 ## :rocket: Version
 

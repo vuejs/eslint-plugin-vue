@@ -16,7 +16,7 @@ since: v7.0.0
 
 This rule reports use of deprecated `KeyboardEvent.keyCode` modifier on `v-on` directive (in Vue.js 3.0.0+).
 
-See [Migration Guide - KeyCode Modifiers](https://v3.vuejs.org/guide/migration/keycode-modifiers.html) for more details.
+See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html) for more details.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-v-on-number-modifiers': ['error']}">
 
@@ -48,7 +48,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Migration Guide - KeyCode Modifiers](https://v3.vuejs.org/guide/migration/keycode-modifiers.html)
+- [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html)
 - [Vue RFCs - 0014-drop-keycode-support](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
 
 ## :rocket: Version

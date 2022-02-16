@@ -3,7 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
 [![NPM downloads](https://img.shields.io/npm/dm/eslint-plugin-vue.svg?style=flat)](https://npmjs.org/package/eslint-plugin-vue)
 [![CircleCI](https://img.shields.io/circleci/project/github/vuejs/eslint-plugin-vue/master.svg?style=flat)](https://circleci.com/gh/vuejs/eslint-plugin-vue)
-[![License](https://img.shields.io/github/license/vuejs/eslint-plugin-vue.svg?style=flat)](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE.md)
+[![License](https://img.shields.io/github/license/vuejs/eslint-plugin-vue.svg?style=flat)](https://github.com/vuejs/eslint-plugin-vue/blob/master/LICENSE)
 
 > Official ESLint plugin for Vue.js
 
@@ -29,7 +29,7 @@ Be sure to read the [official ESLint guide](https://eslint.org/docs/developer-gu
 
 To see what an abstract syntax tree (AST) of your code looks like, you may use [AST Explorer](https://astexplorer.net). After opening [AST Explorer](https://astexplorer.net), select `Vue` as the syntax and `vue-eslint-parser` as the parser.
 
-The default JavaScript parser must be replaced because [Vue.js single file components](https://v3.vuejs.org/guide/single-file-component.html#single-file-components) are not plain JavaScript, but a custom file format. [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) is a replacement parser that generates an enhanced AST with nodes that represent specific parts of the template syntax, as well as the contents of the `<script>` tag.
+The default JavaScript parser must be replaced because [Vue.js single file components](https://vuejs.org/guide/scaling-up/sfc.html) are not plain JavaScript, but a custom file format. [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) is a replacement parser that generates an enhanced AST with nodes that represent specific parts of the template syntax, as well as the contents of the `<script>` tag.
 
 To learn more about certain nodes in a produced AST, see the [ESTree project page](https://github.com/estree/estree) and the [vue-eslint-parser AST documentation](https://github.com/vuejs/vue-eslint-parser/blob/master/docs/ast.md).
 

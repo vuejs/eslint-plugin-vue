@@ -70,7 +70,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide (for v2) - `.sync` Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
+- [Guide (for v2) - `.sync` Modifier](https://v2.vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 
 ## :rocket: Version
 

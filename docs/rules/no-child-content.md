@@ -44,8 +44,8 @@ This rule reports child content of elements that have a directive which overwrit
 
 ## :books: Further Reading
 
-- [`v-html` directive](https://v3.vuejs.org/api/directives.html#v-html)
-- [`v-text` directive](https://v3.vuejs.org/api/directives.html#v-text)
+- [`v-html` directive](https://vuejs.org/api/built-in-directives.html#v-html)
+- [`v-text` directive](https://vuejs.org/api/built-in-directives.html#v-text)
 
 ## :rocket: Version
 

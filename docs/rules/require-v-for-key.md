@@ -48,8 +48,8 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Style guide - Keyed v-for](https://v3.vuejs.org/style-guide/#keyed-v-for-essential)
-- [Guide (for v2) - v-for with a Component](https://vuejs.org/v2/guide/list.html#v-for-with-a-Component)
+- [Style guide - Keyed v-for](https://vuejs.org/style-guide/rules-essential.html#use-keyed-v-for)
+- [Guide (for v2) - v-for with a Component](https://v2.vuejs.org/v2/guide/list.html#v-for-with-a-Component)
 
 ## :rocket: Version
 

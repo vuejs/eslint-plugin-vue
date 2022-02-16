@@ -50,7 +50,7 @@ In that case, the `v-if` should be written on the wrapper element.
 ::: warning Note
 When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately.
 
-[https://v3.vuejs.org/guide/list.html#v-for-with-v-if](https://v3.vuejs.org/guide/list.html#v-for-with-v-if)
+[https://vuejs.org/guide/essentials/list.html#v-for-with-v-if](https://vuejs.org/guide/essentials/list.html#v-for-with-v-if)
 :::
 
 ## :wrench: Options
@@ -59,9 +59,9 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Style guide - Avoid v-if with v-for](https://v3.vuejs.org/style-guide/#avoid-v-if-with-v-for-essential)
-- [Guide - Conditional Rendering / v-if with v-for](https://v3.vuejs.org/guide/conditional.html#v-if-with-v-for)
-- [Guide - List Rendering / v-for with v-if](https://v3.vuejs.org/guide/list.html#v-for-with-v-if)
+- [Style guide - Avoid v-if with v-for](https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for)
+- [Guide - Conditional Rendering / v-if with v-for](https://vuejs.org/guide/essentials/conditional.html#v-if-with-v-for)
+- [Guide - List Rendering / v-for with v-if](https://vuejs.org/guide/essentials/list.html#v-for-with-v-if)
 
 ## :rocket: Version
 
