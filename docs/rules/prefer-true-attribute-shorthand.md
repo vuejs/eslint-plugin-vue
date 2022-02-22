@@ -104,6 +104,10 @@ Default options is `"always"`.
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-boolean-default](./no-boolean-default.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v8.5.0
