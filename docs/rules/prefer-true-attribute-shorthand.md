@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-true-attribute-shorthand
 description: require shorthand form attribute when `v-bind` value is `true`
+since: v8.5.0
 ---
 # vue/prefer-true-attribute-shorthand
 
 > require shorthand form attribute when `v-bind` value is `true`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -103,6 +103,10 @@ Default options is `"always"`.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.5.0
 
 ## :mag: Implementation
 

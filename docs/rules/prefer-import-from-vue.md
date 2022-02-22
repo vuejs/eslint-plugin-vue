@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-import-from-vue
 description: enforce import from 'vue' instead of import from '@vue/*'
+since: v8.5.0
 ---
 # vue/prefer-import-from-vue
 
 > enforce import from 'vue' instead of import from '@vue/*'
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -45,6 +45,10 @@ import { ref } from '@vue/reactivity'
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.5.0
 
 ## :mag: Implementation
 
