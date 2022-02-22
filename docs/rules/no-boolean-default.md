@@ -45,6 +45,11 @@ export default {
   "vue/no-boolean-default": ["error", "no-default|default-false"]
 ```
 
+## :couple: Related Rules
+
+- [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md)
+- [vue/require-default-prop](./require-default-prop.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v7.0.0
