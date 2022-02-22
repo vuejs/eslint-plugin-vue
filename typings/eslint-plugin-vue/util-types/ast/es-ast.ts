@@ -267,7 +267,7 @@ export interface ImportDeclaration extends HasParentNode {
     | ImportDefaultSpecifier
     | ImportNamespaceSpecifier
   )[]
-  source: Literal
+  source: Literal & { value: string }
 }
 export interface ImportSpecifier extends HasParentNode {
   type: 'ImportSpecifier'
@@ -286,10 +286,11 @@ export interface ExportNamedDeclaration extends HasParentNode {
   type: 'ExportNamedDeclaration'
   declaration?: Declaration | null
   specifiers: ExportSpecifier[]
-  source?: Literal | null
+  source?: (Literal & { value: string }) | null
 }
 export interface ExportSpecifier extends HasParentNode {
   type: 'ExportSpecifier'
+  local: Identifier
   exported: Identifier
 }
 export interface ExportDefaultDeclaration extends HasParentNode {
@@ -298,7 +299,7 @@ export interface ExportDefaultDeclaration extends HasParentNode {
 }
 export interface ExportAllDeclaration extends HasParentNode {
   type: 'ExportAllDeclaration'
-  source: Literal
+  source: Literal & { value: string }
   exported: Identifier | null
 }
 export interface ImportExpression extends HasParentNode {
