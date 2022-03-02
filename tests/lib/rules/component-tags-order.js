@@ -9,6 +9,25 @@
 
 const rule = require('../../../lib/rules/component-tags-order')
 const RuleTester = require('eslint').RuleTester
+const assert = require('assert')
+const { ESLint } = require('../../eslint-compat')
+
+// Initialize linter.
+const eslint = new ESLint({
+  overrideConfig: {
+    parser: require.resolve('vue-eslint-parser'),
+    parserOptions: {
+      ecmaVersion: 2015
+    },
+    plugins: ['vue'],
+    rules: {
+      'vue/comment-directive': 'error',
+      'vue/component-tags-order': 'error'
+    }
+  },
+  useEslintrc: false,
+  plugins: { vue: require('../../../lib/index') }
+})
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -108,7 +127,8 @@ tester.run('component-tags-order', rule, {
           line: 1,
           column: 37
         }
-      ]
+      ],
+      output: '<template></template><style></style><script></script>'
     },
     {
       code: '<template></template><script></script><style></style>',
@@ -119,7 +139,8 @@ tester.run('component-tags-order', rule, {
           line: 1,
           column: 22
         }
-      ]
+      ],
+      output: '<script></script><template></template><style></style>'
     },
     {
       code: `
@@ -133,7 +154,14 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <style> on line 4.',
           line: 6
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '\n' +
+        '        <script></script>\n' +
+        '\n' +
+        '        <style></style>'
     },
     {
       code: `
@@ -147,7 +175,13 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <template> on line 2.',
           line: 3
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <script></script>\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '      '
     },
     {
       code: `
@@ -161,7 +195,13 @@ tester.run('component-tags-order', rule, {
           message: 'The <template> should be above the <script> on line 2.',
           line: 3
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <script></script>\n' +
+        '        <style></style>\n' +
+        '      '
     },
     {
       code: `
@@ -176,7 +216,14 @@ tester.run('component-tags-order', rule, {
           message: 'The <docs> should be above the <template> on line 2.',
           line: 3
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <docs></docs>\n' +
+        '        <template></template>\n' +
+        '        <script></script>\n' +
+        '        <style></style>\n' +
+        '      '
     },
     {
       code: `
@@ -191,7 +238,14 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <template> on line 2.',
           line: 4
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <script></script>\n' +
+        '        <template></template>\n' +
+        '        <docs></docs>\n' +
+        '        <style></style>\n' +
+        '      '
     },
     {
       code: `
@@ -207,7 +261,15 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <template> on line 2.',
           line: 5
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <script></script>\n' +
+        '        <template></template>\n' +
+        '        <docs>\n' +
+        '        </docs>\n' +
+        '        <style></style>\n' +
+        '      '
     },
     {
       code: `
@@ -220,7 +282,9 @@ tester.run('component-tags-order', rule, {
           message: 'The <template> should be above the <script> on line 2.',
           line: 3
         }
-      ]
+      ],
+      output:
+        '\n        <template></template>\n        <script></script>\n      '
     },
     {
       code: `
@@ -237,7 +301,13 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <style> on line 2.',
           line: 4
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '        <script></script>\n' +
+        '      '
     },
     {
       code: `
@@ -255,7 +325,14 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <style> on line 2.',
           line: 5
         }
-      ]
+      ],
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '        <docs></docs>\n' +
+        '        <script></script>\n' +
+        '      '
     },
     // no <template>
     {
@@ -268,7 +345,23 @@ tester.run('component-tags-order', rule, {
           message: 'The <script> should be above the <style> on line 2.',
           line: 3
         }
-      ]
+      ],
+      output: '\n        <script></script>\n        <style></style>\n      '
     }
   ]
+})
+
+describe('suppress reporting with eslint-disable-next-line', () => {
+  it('do not report if <!-- eslint-disable-next-line -->', async () => {
+    const code = `<style></style><template></template>
+    <!-- eslint-disable-next-line vue/component-tags-order -->
+    <script></script>`
+    const [{ messages }] = await eslint.lintText(code, { filePath: 'test.vue' })
+    assert.strictEqual(messages.length, 1)
+    // should not fix <script>
+    assert.strictEqual(
+      messages[0].fix.text,
+      '<template></template><style></style>'
+    )
+  })
 })
