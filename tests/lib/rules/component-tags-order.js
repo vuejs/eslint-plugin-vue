@@ -357,7 +357,9 @@ describe('suppress reporting with eslint-disable-next-line', () => {
     const code = `<style></style><template></template>
     <!-- eslint-disable-next-line vue/component-tags-order -->
     <script></script>`
-    const [{ messages, output }] = await eslint.lintText(code, { filePath: 'test.vue' })
+    const [{ messages, output }] = await eslint.lintText(code, {
+      filePath: 'test.vue'
+    })
     assert.strictEqual(messages.length, 0)
     // should not fix <script>
     assert.strictEqual(
