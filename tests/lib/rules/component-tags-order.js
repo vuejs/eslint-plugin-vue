@@ -26,7 +26,8 @@ const eslint = new ESLint({
     }
   },
   useEslintrc: false,
-  plugins: { vue: require('../../../lib/index') }
+  plugins: { vue: require('../../../lib/index') },
+  fix: true
 })
 
 // ------------------------------------------------------------------------------
@@ -356,12 +357,14 @@ describe('suppress reporting with eslint-disable-next-line', () => {
     const code = `<style></style><template></template>
     <!-- eslint-disable-next-line vue/component-tags-order -->
     <script></script>`
-    const [{ messages }] = await eslint.lintText(code, { filePath: 'test.vue' })
-    assert.strictEqual(messages.length, 1)
+    const [{ messages, output }] = await eslint.lintText(code, { filePath: 'test.vue' })
+    assert.strictEqual(messages.length, 0)
     // should not fix <script>
     assert.strictEqual(
-      messages[0].fix.text,
-      '<template></template><style></style>'
+      output,
+      `<template></template><style></style>
+    <!-- eslint-disable-next-line vue/component-tags-order -->
+    <script></script>`
     )
   })
 })
