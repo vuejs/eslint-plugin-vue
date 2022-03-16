@@ -100,26 +100,96 @@ tester.run('empty-line-between-options', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line between Vue component options.',
+          message: rule.meta.messages.always,
           line: 12,
           column: 9
         },
         {
-          message: 'Expected blank line between Vue component options.',
+          message: rule.meta.messages.always,
           line: 15,
           column: 19
         },
         {
-          message: 'Expected blank line between Vue component options.',
+          message: rule.meta.messages.always,
           line: 16,
           column: 9
         },
         {
-          message: 'Expected blank line between Vue component options.',
+          message: rule.meta.messages.always,
           line: 19,
           column: 9
         }
       ]
+    },
+    {
+      filename: 'test-never.vue',
+      code: `
+      <template></template>
+
+      <script>
+      export default {
+        name: 'AComponentOfSorts',
+        
+        /**
+         * @return {Object}
+         */
+        data(){
+          return {}
+        },
+        
+        /* red */ i18n: {},
+        
+        config: {} /* green */,
+        
+        /* who */ /* writes */
+        /* comments like this */
+        computed: {}
+      }
+      </script>
+      `,
+      output: `
+      <template></template>
+
+      <script>
+      export default {
+        name: 'AComponentOfSorts',
+        /**
+         * @return {Object}
+         */
+        data(){
+          return {}
+        },
+        /* red */ i18n: {},
+        config: {} /* green */,
+        /* who */ /* writes */
+        /* comments like this */
+        computed: {}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: rule.meta.messages.never,
+          line: 11,
+          column: 9
+        },
+        {
+          message: rule.meta.messages.never,
+          line: 15,
+          column: 19
+        },
+        {
+          message: rule.meta.messages.never,
+          line: 17,
+          column: 9
+        },
+        {
+          message: rule.meta.messages.never,
+          line: 21,
+          column: 9
+        }
+      ],
+      options: ['never']
     }
   ]
 })
