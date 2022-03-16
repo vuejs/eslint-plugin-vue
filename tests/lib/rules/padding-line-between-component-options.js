@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/empty-line-between-options')
+const rule = require('../../../lib/rules/padding-line-between-component-options')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('empty-line-between-options', rule, {
+tester.run('padding-line-between-component-options', rule, {
   valid: [
     {
       filename: 'test.vue',

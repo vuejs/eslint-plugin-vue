@@ -313,7 +313,6 @@ For example:
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: |
 | [vue/component-options-name-casing](./component-options-name-casing.md) | enforce the casing of component name in `components` options | :wrench::bulb: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  |
-| [vue/empty-line-between-options](./empty-line-between-options.md) | enforce empty lines between top-level options | :wrench: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: |
@@ -353,6 +352,7 @@ For example:
 | [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
+| [vue/padding-line-between-component-options](./padding-line-between-component-options.md) | require or disallow padding lines between top-level component options | :wrench: |
 | [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: |

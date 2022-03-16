@@ -1,12 +1,12 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/empty-line-between-options
-description: enforce empty lines between top-level options
+title: vue/padding-line-between-component-options
+description: require or disallow padding lines between top-level component options
 ---
-# vue/empty-line-between-options
+# vue/padding-line-between-component-options
 
-> enforce empty lines between top-level options
+> require or disallow padding lines between top-level component options
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
@@ -15,7 +15,7 @@ description: enforce empty lines between top-level options
 
 This rule enforces consistent format of empty lines between Vue component options by either adding or removing them.
 
-<eslint-code-block fix :rules="{'vue/empty-line-between-options': ['error', 'always']}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error', 'always']}">
 
 ```vue
 <script>
@@ -59,7 +59,7 @@ This rule enforces consistent format of empty lines between Vue component option
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/empty-line-between-options': ['error', 'never']}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error', 'never']}">
 
 ```vue
 <script>
@@ -103,19 +103,22 @@ This rule enforces consistent format of empty lines between Vue component option
 
 </eslint-code-block>
 
-
 ## :wrench: Options
 
 ```json
 {
-  "vue/empty-line-between-options": ["error", "always" | "never"]
+  "vue/padding-line-between-component-options": ["error", "always" | "never"]
 }
 ```
 
 - `"always"` (default) ... add an empty line between options.
 - `"never"` ... remove empty lines between options.
 
+## :couple: Related Rules
+
+- [vue/padding-line-between-blocks](./padding-line-between-blocks.md)
+
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/empty-line-between-options.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/empty-line-between-options.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/padding-line-between-component-options.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-line-between-component-options.js)
