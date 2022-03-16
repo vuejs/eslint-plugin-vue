@@ -13,21 +13,107 @@ description: enforce empty lines between top-level options
 
 ## :book: Rule Details
 
-This rule ....
+This rule enforces consistent format of empty lines between Vue component options by either adding or removing them.
 
-<eslint-code-block fix :rules="{'vue/empty-line-between-options': ['error']}">
+<eslint-code-block fix :rules="{'vue/empty-line-between-options': ['error', 'always']}">
 
 ```vue
-<template>
+<script>
+  <!-- ✓ GOOD -->
+  export default {
+    name: 'a-button',
 
-</template>
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+    
+    computed: {
+      // ...
+    }
+  }
+
+  <!-- ✗ BAD -->
+  export default {
+    name: 'a-button',
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+    computed: {
+      // ...
+    }
+  }
+</script>
 ```
 
 </eslint-code-block>
 
+<eslint-code-block fix :rules="{'vue/empty-line-between-options': ['error', 'never']}">
+
+```vue
+<script>
+  <!-- ✓ GOOD -->
+  export default {
+    name: 'a-button',
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+    computed: {
+      // ...
+    }
+  }
+  
+  <!-- ✗ BAD -->
+  export default {
+    name: 'a-button',
+    
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+
+    computed: {
+      // ...
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/empty-line-between-options": ["error", "always" | "never"]
+}
+```
+
+- `"always"` (default) ... add an empty line between options.
+- `"never"` ... remove empty lines between options.
 
 ## :mag: Implementation
 
