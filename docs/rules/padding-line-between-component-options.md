@@ -105,6 +105,10 @@ This rule requires or disallows blank lines between Vue component.
 </script>
 ```
 
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error']}">
+
 ```vue
 <script>
   /* ✗ BAD */
@@ -152,6 +156,10 @@ This rule requires or disallows blank lines between Vue component.
   }
 </script>
 ```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error', 'never']}">
 
 ```vue
 <script>
