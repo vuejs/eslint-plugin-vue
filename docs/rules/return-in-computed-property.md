@@ -90,6 +90,7 @@ export default {
 ```
 
 This rule has an object option:
+
 - `"treatUndefinedAsUnspecified"`: `true` (default) disallows implicitly returning undefined with a `return` statement.
 
 ### `treatUndefinedAsUnspecified: false`
