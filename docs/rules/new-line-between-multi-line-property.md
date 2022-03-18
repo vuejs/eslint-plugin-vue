@@ -75,7 +75,7 @@ export default {
 
 </eslint-code-block>
 
-## :wrench: Option
+## :wrench: Options
 
 ```json
 {
