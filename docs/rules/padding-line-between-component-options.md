@@ -19,7 +19,7 @@ This rule enforces consistent format of empty lines between Vue component option
 
 ```vue
 <script>
-  <!-- ✓ GOOD -->
+  /* ✓ GOOD */
   export default {
     name: 'a-button',
 
@@ -37,8 +37,12 @@ This rule enforces consistent format of empty lines between Vue component option
       // ...
     }
   }
+</script>
+```
 
-  <!-- ✗ BAD -->
+```vue
+<script>
+  /* ✗ BAD */
   export default {
     name: 'a-button',
     /**
@@ -63,7 +67,7 @@ This rule enforces consistent format of empty lines between Vue component option
 
 ```vue
 <script>
-  <!-- ✓ GOOD -->
+  /* ✓ GOOD */
   export default {
     name: 'a-button',
     /**
@@ -79,8 +83,12 @@ This rule enforces consistent format of empty lines between Vue component option
       // ...
     }
   }
-  
-  <!-- ✗ BAD -->
+</script>
+```
+
+```vue
+<script>
+  /* ✗ BAD */
   export default {
     name: 'a-button',
     
