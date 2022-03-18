@@ -87,6 +87,8 @@ class DocFile {
 
   write() {
     fs.writeFileSync(this.filePath, this.content)
+
+    return this
   }
 
   updateFileIntro() {
@@ -225,6 +227,42 @@ ${
 
     return this
   }
+
+  checkHeadings() {
+    const headingPattern = /^## .*$/gm
+
+    const knownHeadings = [
+      '## :book: Rule Details',
+      '## :wrench: Options',
+      '## :rocket: Suggestion',
+      '## :mute: When Not To Use It',
+      '## :couple: Related Rules',
+      '## :books: Further Reading',
+      '## :rocket: Version',
+      '## :mag: Implementation'
+    ]
+
+    const foundHeadings = [...this.content.matchAll(headingPattern)]
+
+    let previousHeadingIndex = -1
+    for (const [heading] of foundHeadings) {
+      const headingIndex = knownHeadings.indexOf(heading)
+
+      if (headingIndex === -1) {
+        throw new Error(`Unknown heading '${heading}' in '${this.filePath}'`)
+      }
+
+      if (headingIndex < previousHeadingIndex) {
+        throw new Error(
+          `Heading '${heading}' should be above '${knownHeadings[previousHeadingIndex]}' in '${this.filePath}'`
+        )
+      }
+
+      previousHeadingIndex = headingIndex
+    }
+
+    return this
+  }
 }
 
 for (const rule of rules) {
@@ -235,4 +273,5 @@ for (const rule of rules) {
     .updateFileIntro()
     .adjustCodeBlocks()
     .write()
+    .checkHeadings()
 }
