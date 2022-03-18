@@ -16,8 +16,8 @@ since: v7.0.0
 This rule reports components that haven't been registered and are being used in the template.
 
 ::: warning Note
-This rule cannot check globally registered components and components registered in mixins 
-unless you add them as part of the ignored patterns. `component`, `suspense` and `teleport` 
+This rule cannot check globally registered components and components registered in mixins
+unless you add them as part of the ignored patterns. `component`, `suspense` and `teleport`
 are ignored by default.
 :::
 
