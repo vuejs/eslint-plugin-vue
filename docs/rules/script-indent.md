@@ -84,6 +84,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 ```
 
 ### `2, "baseIndent": 1`
+
 <eslint-code-block fix :rules="{'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]}">
 
 ```vue

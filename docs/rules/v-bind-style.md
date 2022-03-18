@@ -31,6 +31,7 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 </eslint-code-block>
 
 ## :wrench: Options
+
 Default is set to `shorthand`.
 
 ```json

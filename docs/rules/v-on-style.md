@@ -31,6 +31,7 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 </eslint-code-block>
 
 ## :wrench: Options
+
 Default is set to `shorthand`.
 
 ```json

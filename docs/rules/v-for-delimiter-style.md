@@ -30,6 +30,7 @@ This rule enforces which delimiter (`in` or `of`) should be used in `v-for` dire
 </eslint-code-block>
 
 ## :wrench: Options
+
 Default is set to `in`.
 
 ```json
