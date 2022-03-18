@@ -66,14 +66,14 @@ export default {
 
 </eslint-code-block>
 
-## :books: Further Reading
-
-- [Style guide - Prop name casing](https://vuejs.org/style-guide/rules-strongly-recommended.html#prop-name-casing)
-
 ## :couple: Related Rules
 
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
 - [vue/custom-event-name-casing](./custom-event-name-casing.md)
+
+## :books: Further Reading
+
+- [Style guide - Prop name casing](https://vuejs.org/style-guide/rules-strongly-recommended.html#prop-name-casing)
 
 ## :rocket: Version
 

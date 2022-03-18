@@ -163,6 +163,11 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+- [vue/prop-name-casing](./prop-name-casing.md)
+
 ## :books: Further Reading
 
 - [Guide - Custom Events]
@@ -170,11 +175,6 @@ export default {
 
 [Guide - Custom Events]: https://vuejs.org/guide/components/events.html
 [Guide (for v2) - Custom Events]: https://v2.vuejs.org/v2/guide/components-custom-events.html
-
-## :couple: Related Rules
-
-- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
-- [vue/prop-name-casing](./prop-name-casing.md)
 
 ## :rocket: Version
 
