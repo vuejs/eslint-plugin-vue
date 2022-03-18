@@ -13,7 +13,7 @@ description: require or disallow padding lines between top-level component optio
 
 ## :book: Rule Details
 
-This rule requires or disallows blank lines between Vue component.
+This rule requires or disallows blank lines between Vue component options.
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error']}">
 
