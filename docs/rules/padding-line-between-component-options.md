@@ -13,9 +13,9 @@ description: require or disallow padding lines between top-level component optio
 
 ## :book: Rule Details
 
-This rule enforces consistent format of empty lines between Vue component options by either adding or removing them.
+This rule requires or disallows blank lines between Vue component.
 
-<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error', 'always']}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error']}">
 
 ```vue
 <script>
@@ -33,6 +33,71 @@ This rule enforces consistent format of empty lines between Vue component option
       }
     },
     
+    computed: {
+      // ...
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error']}">
+
+```vue
+<script>
+  /* ✗ BAD */
+  export default {
+    name: 'a-button',
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+    computed: {
+      // ...
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/padding-line-between-component-options": ["error", "always" | "never"]
+}
+```
+
+- `"always"` (default) ... add an empty line between options.
+- `"never"` ... remove empty lines between options.
+
+### `"always"` (default)
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error']}">
+
+```vue
+<script>
+  /* ✓ GOOD */
+  export default {
+    name: 'a-button',
+
+    /**
+     * Ceci n'est pas un commentaire
+     * @return {{}}
+     */
+    data() {
+      return {
+        // ...
+      }
+    },
+
     computed: {
       // ...
     }
@@ -62,6 +127,8 @@ This rule enforces consistent format of empty lines between Vue component option
 ```
 
 </eslint-code-block>
+
+### `"never"`
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-component-options': ['error', 'never']}">
 
@@ -110,17 +177,6 @@ This rule enforces consistent format of empty lines between Vue component option
 ```
 
 </eslint-code-block>
-
-## :wrench: Options
-
-```json
-{
-  "vue/padding-line-between-component-options": ["error", "always" | "never"]
-}
-```
-
-- `"always"` (default) ... add an empty line between options.
-- `"never"` ... remove empty lines between options.
 
 ## :couple: Related Rules
 
