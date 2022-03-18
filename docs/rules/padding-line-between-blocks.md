@@ -139,6 +139,10 @@ export default {}
 
 This rule was introduced in eslint-plugin-vue v6.2.0
 
+## :couple: Related Rules
+
+- [vue/padding-line-between-component-options](./padding-line-between-component-options.md)
+ 
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/padding-line-between-blocks.js)
