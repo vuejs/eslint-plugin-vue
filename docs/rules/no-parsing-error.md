@@ -16,10 +16,10 @@ This rule reports syntax errors in `<template>`. For example:
 - Syntax errors of scripts in directives.
 - Syntax errors of scripts in mustaches.
 - Syntax errors of HTML.
-    - Invalid end tags.
-    - Attributes in end tags.
-    - ...
-    - See also: [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)
+  - Invalid end tags.
+  - Attributes in end tags.
+  - ...
+  - See also: [WHATWG HTML spec](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors)
 
 ## :book: Rule Details
 
