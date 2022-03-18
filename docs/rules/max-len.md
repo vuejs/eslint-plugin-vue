@@ -112,7 +112,6 @@ var foo = ['line', 'length', 'is', '50', '......']
 
 </eslint-code-block>
 
-
 ### `"template": 120`
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {template: 120}]}">

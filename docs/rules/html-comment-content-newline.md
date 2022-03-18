@@ -162,7 +162,6 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 </eslint-code-block>
 
-
 ### `{"singleline": "ignore", "multiline": "always"}`
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', { 'singleline': 'ignore', 'multiline': 'always' }]}">

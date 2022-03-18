@@ -53,7 +53,6 @@ export default {
 
 </eslint-code-block>
 
-
 Alternatively, the rule also accepts objects.
 
 ```json
