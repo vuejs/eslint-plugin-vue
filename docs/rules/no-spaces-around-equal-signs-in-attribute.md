@@ -43,7 +43,7 @@ HTML5 allows spaces around equal signs. But space-less is easier to read, and gr
 
 ## :books: Further Reading
 
-* [HTML5 Style Guide - W3Schools *Spaces and Equal Signs*](https://www.w3schools.com/html/html5_syntax.asp)
+- [HTML5 Style Guide - W3Schools *Spaces and Equal Signs*](https://www.w3schools.com/html/html5_syntax.asp)
 
 ## :rocket: Version
 
