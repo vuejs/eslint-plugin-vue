@@ -41,6 +41,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   "vue/this-in-template": ["error", "always" | "never"]
 }
 ```
+
 - `"always"` ... Always use `this` while accessing properties from Vue.
 - `"never"` (default) ... Never use `this` keyword in expressions.
 
