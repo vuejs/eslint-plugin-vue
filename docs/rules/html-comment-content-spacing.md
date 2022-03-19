@@ -48,17 +48,16 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 ```
 
 - The first is a string which be either `"always"` or `"never"`. The default is `"always"`.
-    - `"always"` (default) ... there must be at least one whitespace at after the `<!--` and before the `-->`.
-    - `"never"` ... there should be no whitespace at after the `<!--` and before the `-->`.
-
+  - `"always"` (default) ... there must be at least one whitespace at after the `<!--` and before the `-->`.
+  - `"never"` ... there should be no whitespace at after the `<!--` and before the `-->`.
 
 - This rule can also take a 2nd option, an object with the following key: `"exceptions"`.
-    - The `"exceptions"` value is an array of string patterns which are considered exceptions to the rule.
-    Please note that exceptions are ignored if the first argument is `"never"`.
+  - The `"exceptions"` value is an array of string patterns which are considered exceptions to the rule.
+  Please note that exceptions are ignored if the first argument is `"never"`.
 
-    ```json
-    "vue/html-comment-content-spacing": ["error", "always", { "exceptions": ["*"] }]
-    ```
+  ```json
+  "vue/html-comment-content-spacing": ["error", "always", { "exceptions": ["*"] }]
+  ```
 
 ### `"always"`
 

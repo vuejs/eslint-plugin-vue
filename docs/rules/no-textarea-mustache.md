@@ -29,6 +29,7 @@ This rule reports mustaches in `<textarea>`.
 
 </eslint-code-block>
 
+<!-- markdownlint-disable-next-line no-inline-html -->
 <div v-pre>
 
 ::: warning Note

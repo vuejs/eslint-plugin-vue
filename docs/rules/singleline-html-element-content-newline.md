@@ -16,7 +16,6 @@ since: v5.0.0
 
 This rule enforces a line break before and after the contents of a singleline element.
 
-
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error']}">
 
 ```vue
@@ -69,11 +68,9 @@ This rule enforces a line break before and after the contents of a singleline el
 - `ignores` ... the configuration for element names to ignore line breaks style.
     default `["pre", "textarea", ...INLINE_ELEMENTS]`.
 
-
 ::: info
   All inline non void elements can be found [here](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/utils/inline-non-void-elements.json).
 :::
-
 
 ### `"ignoreWhenNoAttributes": true`
 

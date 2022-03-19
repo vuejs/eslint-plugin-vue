@@ -54,7 +54,7 @@ export default {
 <MyComponent bool bool-or-string string-or-bool />
 ```
 
-```
+```plain
 bool: true (boolean)
 boolOrString: true (boolean)
 stringOrBool: "" (string)
@@ -66,7 +66,7 @@ stringOrBool: "" (string)
 <MyComponent :bool="true" :bool-or-string="true" :string-or-bool="true" />
 ```
 
-```
+```plain
 bool: true (boolean)
 boolOrString: true (boolean)
 stringOrBool: true (boolean)

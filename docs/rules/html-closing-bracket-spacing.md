@@ -55,14 +55,14 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 ```
 
 - `startTag` (`"always" | "never"`) ... Setting for the `>` of start tags (e.g. `<div>`). Default is `"never"`.
-    - `"always"` ... requires one or more spaces.
-    - `"never"` ... disallows spaces.
+  - `"always"` ... requires one or more spaces.
+  - `"never"` ... disallows spaces.
 - `endTag` (`"always" | "never"`) ... Setting for the `>` of end tags (e.g. `</div>`). Default is `"never"`.
-    - `"always"` ... requires one or more spaces.
-    - `"never"` ... disallows spaces.
+  - `"always"` ... requires one or more spaces.
+  - `"never"` ... disallows spaces.
 - `selfClosingTag` (`"always" | "never"`) ... Setting for the `/>` of self-closing tags (e.g. `<div/>`). Default is `"always"`.
-    - `"always"` ... requires one or more spaces.
-    - `"never"` ... disallows spaces.
+  - `"always"` ... requires one or more spaces.
+  - `"never"` ... disallows spaces.
 
 ### `"startTag": "always", "endTag": "always", "selfClosingTag": "always"`
 

@@ -70,6 +70,7 @@ export default {
 }
 </script>
 ```
+
 :::
 
 ## :rocket: Version

@@ -1,0 +1,23 @@
+line-length: false
+single-title: false
+no-inline-html:
+  allowed_elements:
+    - badge
+    - eslint-code-block
+    - sup
+
+# enforce consistency
+code-block-style:
+  style: fenced
+code-fence-style:
+  style: backtick
+emphasis-style:
+  style: asterisk
+heading-style:
+  style: atx
+hr-style:
+  style: ---
+strong-style:
+  style: asterisk
+ul-style:
+  style: dash

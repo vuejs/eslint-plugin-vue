@@ -110,7 +110,6 @@ export default {
 
   If an element is an array of strings, it means any of those can be placed there unordered. Default is above.
 
-
 ## :books: Further Reading
 
 - [Style guide - Component/instance options order](https://vuejs.org/style-guide/rules-recommended.html#component-instance-options-order)

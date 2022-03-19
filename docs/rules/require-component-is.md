@@ -15,7 +15,6 @@ since: v3.0.0
 
 This rule reports the `<component>` elements which do not have `v-bind:is` attributes.
 
-
 <eslint-code-block :rules="{'vue/require-component-is': ['error']}">
 
 ```vue
@@ -35,7 +34,6 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 ::: warning Note
 You can use the same mount point and dynamically switch between multiple components using the reserved `<component>` element and dynamically bind to its `is` attribute.
 :::
-
 
 ## :wrench: Options
 

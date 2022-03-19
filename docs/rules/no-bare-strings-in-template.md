@@ -16,7 +16,6 @@ In order to be able to internationalize your application, you will need to avoid
 
 This rule was inspired by [no-bare-strings rule in ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-bare-strings.md).
 
-
 <eslint-code-block :rules="{'vue/no-bare-strings-in-template': ['error']}">
 
 ```vue

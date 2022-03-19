@@ -11,7 +11,7 @@ since: v7.11.0
 
 ## :book: Rule Details
 
-Because lack of `this` in the `beforeRouteEnter` [(docs)](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards). This behavior isn't obvious, so it's pretty easy to make a `TypeError`. Especially during some refactor. 
+Because lack of `this` in the `beforeRouteEnter` [(docs)](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards). This behavior isn't obvious, so it's pretty easy to make a `TypeError`. Especially during some refactor.
 
 <eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
 

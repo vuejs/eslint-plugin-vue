@@ -11,7 +11,6 @@ since: v5.2.0
 
 This rule is the same rule as core [no-restricted-syntax] rule but it applies to the expressions in `<template>`.
 
-
 ## :wrench: Options
 
 Please see [no-restricted-syntax] for detailed options.

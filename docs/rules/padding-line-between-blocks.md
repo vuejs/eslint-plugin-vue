@@ -134,7 +134,6 @@ export default {}
 [padding-line-between-statements]: https://eslint.org/docs/rules/padding-line-between-statements
 [lines-between-class-members]: https://eslint.org/docs/rules/lines-between-class-members
 
-
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v6.2.0

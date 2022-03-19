@@ -61,13 +61,13 @@ export default {
 
 Nothing.
 
-## :books: Further Reading
-
-- [Style guide - Prop definitions](https://vuejs.org/style-guide/rules-essential.html#use-detailed-prop-definitions)
-
 ## :couple: Related Rules
 
 - [vue/no-boolean-default](./no-boolean-default.md)
+
+## :books: Further Reading
+
+- [Style guide - Prop definitions](https://vuejs.org/style-guide/rules-essential.html#use-detailed-prop-definitions)
 
 ## :rocket: Version
 

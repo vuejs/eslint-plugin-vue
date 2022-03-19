@@ -46,6 +46,7 @@ export default {
 </eslint-code-block>
 
 ## :wrench: Options
+
 Default is set to `promise`.
 
 ```json

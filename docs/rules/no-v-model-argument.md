@@ -34,7 +34,6 @@ This rule reports `v-model` directives in the following cases:
 
 </eslint-code-block>
 
-
 ## :wrench: Options
 
 Nothing.
