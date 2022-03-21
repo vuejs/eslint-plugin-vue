@@ -30,7 +30,7 @@ See [this demo](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltc
 <script>
 export default {
   props: {
-    <!-- ✓ GOOD -->
+    // ✓ GOOD
     a: Boolean,
     b: String,
     c: [Boolean, String],
@@ -38,7 +38,7 @@ export default {
       type: [Boolean, String]
     },
 
-    <!-- ✗ BAD -->
+    // ✗ BAD
     e: [String, Boolean],
     f: {
       type: [String, Boolean]
