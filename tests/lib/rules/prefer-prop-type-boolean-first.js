@@ -254,6 +254,64 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           ]
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({
+            foo: { type: [String, Boolean, Number] }
+          })
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'shouldBeFirst',
+          line: 4,
+          column: 35,
+          suggestions: [
+            {
+              messageId: 'moveToFirst',
+              output: `
+        <script setup>
+          defineProps({
+            foo: { type: [Boolean, String, Number] }
+          })
+        </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({
+            foo: { type: [String, Number, Boolean] }
+          })
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'shouldBeFirst',
+          line: 4,
+          column: 43,
+          suggestions: [
+            {
+              messageId: 'moveToFirst',
+              output: `
+        <script setup>
+          defineProps({
+            foo: { type: [Boolean, String, Number] }
+          })
+        </script>
+      `
+            }
+          ]
+        }
+      ]
     }
   ]
 })
