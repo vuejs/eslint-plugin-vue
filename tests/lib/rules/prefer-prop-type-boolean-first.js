@@ -23,115 +23,17 @@ tester.run('prefer-prop-type-boolean-first', rule, {
         <script>
           export default {
             props: {
-              foo: Boolean
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: String
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: [Boolean]
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: [String]
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: [Boolean, String]
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: { type: Boolean }
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: { type: String }
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: { type: [Boolean] }
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: { type: [String] }
-            }
-          }
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: {
-              foo: { type: [Boolean, String] }
+              a: Boolean,
+              b: String,
+              c: [Boolean],
+              d: [String],
+              e: [Boolean, String],
+              f: { type: Boolean },
+              g: { type: String },
+              h: { type: [Boolean] },
+              i: { type: [String] },
+              j: { type: [Boolean, String] },
+              k: {},
             }
           }
         </script>
@@ -143,19 +45,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
         <script>
           export default Vue.extend({
             props: {
-              foo: [Boolean, String]
-            }
-          })
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default Vue.extend({
-            props: {
-              foo: { type: [Boolean, String] }
+              a: [Boolean, String],
+              b: { type: [Boolean, String] },
             }
           })
         </script>
@@ -166,17 +57,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
       code: `
         <script setup>
           defineProps({
-            foo: [Boolean, String]
-          })
-        </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script setup>
-          defineProps({
-            foo: { type: [Boolean, String] }
+            a: [Boolean, String],
+            b: { type: [Boolean, String] },
           })
         </script>
       `
