@@ -1,12 +1,20 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-restricted-html-elements
+description: disallow specific HTML elements
+---
 # vue/no-restricted-html-elements
 
-> Disallow specific html elements
+> disallow specific HTML elements
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
 This rule allows you to specify HTML elements that you don't want to use in your application.
 
-<eslint-code-block fix :rules="{'vue/no-restricted-html-elements': ['error', 'marquee', 'button'] }">
+<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'marquee', 'button'] }">
 
 ```vue
 <!-- ✓ GOOD -->
