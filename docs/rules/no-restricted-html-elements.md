@@ -39,7 +39,7 @@ This rule takes a list of strings, where each string is an HTML element name to 
 }
 ```
 
-<eslint-code-block :rules="{'vue/no-restricted-block': ['error', 'button', 'marquee']}">
+<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'button', 'marquee']}">
 
 ```vue
 <!-- ✗ BAD -->
