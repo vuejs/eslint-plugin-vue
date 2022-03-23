@@ -26,7 +26,7 @@ tester.run('no-restricted-html-elements', rule, {
     {
       filename: 'test.vue',
       code: '<template><button type="button"></button></template>',
-      options: ['error', 'div']
+      options: ['div']
     },
     {
       filename: 'test.vue',
