@@ -6,7 +6,7 @@
 
 This rule allows you to specify html elements that you don't want to use in your application.
 
-<eslint-code-block fix :rules="{'vue/no-restricted-html-elements': ['marquee', 'button'] }">
+<eslint-code-block fix :rules="{'vue/no-restricted-html-elements': ['error', 'marquee', 'button'] }">
 
 ```vue
 <!-- ✓ GOOD -->
