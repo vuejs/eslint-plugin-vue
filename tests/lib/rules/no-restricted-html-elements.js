@@ -45,7 +45,7 @@ tester.run('no-restricted-html-elements', rule, {
           column: 16
         }
       ],
-      options: ['error', 'button']
+      options: ['button']
     },
     {
       filename: 'test.vue',
