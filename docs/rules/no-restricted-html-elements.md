@@ -23,7 +23,7 @@ This rule allows you to specify html elements that you don't want to use in your
 
 ## :wrench: Options
 
-This rule takes a list of strings, where each string is an html element name to be restricted:
+This rule takes a list of strings, where each string is an HTML element name to be restricted:
 
 ```json
 {
