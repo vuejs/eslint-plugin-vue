@@ -74,7 +74,7 @@ The following properties can be specified for the object.
 
 ### `{ "element": "marquee" }, { "element": "button" }`
 
-<eslint-code-block :rules="{'vue/no-restricted-block': ['error', { element: 'marquee' }, { element: 'button' }]}">
+<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', { element: 'marquee' }, { element: 'button' }]}">
 
 ```vue
 <!-- ✗ BAD -->
