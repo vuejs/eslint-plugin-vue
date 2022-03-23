@@ -53,7 +53,7 @@ Alternatively, the rule also accepts objects.
     },
     {
       "element": "marquee",
-      "message": "Do not use deprecate html tags"
+      "message": "Do not use deprecated HTML tags"
     }
   ]
 }
