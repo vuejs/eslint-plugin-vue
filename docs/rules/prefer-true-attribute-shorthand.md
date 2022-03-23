@@ -107,6 +107,7 @@ Default options is `"always"`.
 ## :couple: Related Rules
 
 - [vue/no-boolean-default](./no-boolean-default.md)
+- [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md)
 
 ## :rocket: Version
 
