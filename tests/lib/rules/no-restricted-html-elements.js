@@ -69,7 +69,7 @@ tester.run('no-restricted-html-elements', rule, {
           column: 11
         }
       ],
-      options: ['error', { element: 'marquee', message: 'Custom error' }]
+      options: [{ element: 'marquee', message: 'Custom error' }]
     }
   ]
 })
