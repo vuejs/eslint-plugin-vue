@@ -334,6 +334,7 @@ For example:
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  |
 | [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event | :bulb: |
+| [vue/no-restricted-html-elements](./no-restricted-html-elements.md) | disallow specific HTML elements |  |
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props | :bulb: |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  |
