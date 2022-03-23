@@ -49,7 +49,7 @@ Alternatively, the rule also accepts objects.
     "error",
     {
       "element": "button",
-      "message": "Prefer use of our custom <Button /> component"
+      "message": "Prefer use of our custom <AppButton /> component"
     },
     {
       "element": "marquee",
