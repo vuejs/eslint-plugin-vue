@@ -50,6 +50,8 @@ tester.run('component-tags-order', rule, {
     '<template></template><script></script><docs></docs><style></style>',
     '<script></script><template></template>',
     '<template></template><script></script>',
+    '<script setup></script><script></script>',
+    '<docs></docs><template></template><script></script><script setup></script><style></style>',
     `
       <template>
       </template>
@@ -101,6 +103,16 @@ tester.run('component-tags-order', rule, {
       code: '<docs><div id="id">text <!--comment--> </div><br></docs><script></script><template></template><style></style>',
       output: null,
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
+    },
+    {
+      code: '<script setup></script><script></script><template></template><style></style>',
+      output: null,
+      options: [{ order: ['script/setup', 'script', 'template', 'style'] }]
+    },
+    {
+      code: '<template></template><script setup></script><script></script><style></style>',
+      output: null,
+      options: [{ order: [['script/setup', 'script', 'template'], 'style'] }]
     },
     {
       code: '<template></template><docs></docs><script></script><style></style>',
