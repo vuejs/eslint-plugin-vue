@@ -35,7 +35,8 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 ```json
 {
   "vue/attribute-hyphenation": ["error", "always" | "never", {
-    "ignore": []
+    "ignore": [],
+    "includeSlots": false,
   }]
 }
 ```
@@ -46,6 +47,7 @@ and all the [SVG attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/At
 - `"always"` (default) ... Use hyphenated name.
 - `"never"` ... Don't use hyphenated name except the ones that are ignored.
 - `"ignore"` ... Array of ignored names
+- `"includeSlots"` ... Will lint attributes on slot elements when set to true
 
 ### `"always"`
 
@@ -103,6 +105,24 @@ Don't use hyphenated name but allow custom attributes
 
   <!-- ✗ BAD -->
   <MyComponent my-prop="prop" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"always", { "includeSlots": true }`
+
+Use hyphenated names on slot elements
+
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always', { includeSlots: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyComponent><slot my-prop="prop"></slot></MyComponent>
+
+  <!-- ✗ BAD -->
+  <MyComponent><slot myProp="prop"></slot></MyComponent>
 </template>
 ```
 
