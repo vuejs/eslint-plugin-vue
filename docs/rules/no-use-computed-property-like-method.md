@@ -320,7 +320,7 @@ export default {
       this.computedReturnPropsFunction
       this.computedReturnPropsFunction()
       /* ✗ BAD */
-      /* Nope. everything is GOOD!! */
+      /* Nope. everything is good!! */
     }
   }
 }

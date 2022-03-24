@@ -223,6 +223,25 @@ ${
 
     return this
   }
+
+  checkGoodBadSymbols() {
+    const lines = this.content.split('\n')
+    for (const [lineNumber, line] of lines.entries()) {
+      const lineNumberFilePath = `${this.filePath}:${lineNumber + 1}`
+
+      if (line.includes('GOOD') && !line.includes('✓ GOOD')) {
+        throw new Error(
+          `Expected '✓ GOOD' instead of '${line}' in '${lineNumberFilePath}'`
+        )
+      }
+
+      if (line.includes('BAD') && !line.includes('✗ BAD')) {
+        throw new Error(
+          `Expected '✗ BAD' instead of '${line}' in '${lineNumberFilePath}'`
+        )
+      }
+    }
+  }
 }
 
 for (const rule of rules) {
@@ -234,4 +253,5 @@ for (const rule of rules) {
     .adjustCodeBlocks()
     .write()
     .checkHeadings()
+    .checkGoodBadSymbols()
 }

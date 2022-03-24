@@ -35,7 +35,7 @@ in the rule configuration.
   <div :class="'forbidden'" />
   <div :class="'forbidden ' + someString" />
   <div :class="[someString, 'forbidden']" />
-  <!-- ✗ GOOD -->
+  <!-- ✓ GOOD -->
   <div class="allowed-class" />
 </template>
 
