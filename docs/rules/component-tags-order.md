@@ -5,7 +5,6 @@ title: vue/component-tags-order
 description: enforce order of component top-level elements
 since: v6.1.0
 ---
-
 # vue/component-tags-order
 
 > enforce order of component top-level elements
@@ -24,24 +23,21 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
   "vue/component-tags-order": [
     "error",
     {
-      "order": [["script", "script[setup]", "template"], "style"]
+      "order": [["script", "template"], "style"]
     }
   ]
 }
 ```
 
-- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "script[setup]", "template" ], "style" ]`.
+- `order` (`(string|string[])[]`) ... The order of top-level element selectors. default `[ [ "script", "template" ], "style" ]`.
 
-### `{ "order": [ [ "script", "script[setup]", "template" ], "style" ] }` (default)
+### `{ "order": [ [ "script", "template" ], "style" ] }` (default)
 
 <eslint-code-block fix :rules="{'vue/component-tags-order': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script>
-/* ... */
-</script>
-<script setup>
 /* ... */
 </script>
 <template>...</template>
@@ -58,9 +54,6 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 <!-- ✓ GOOD -->
 <template>...</template>
 <script>
-/* ... */
-</script>
-<script setup>
 /* ... */
 </script>
 <style>
@@ -77,9 +70,6 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 <style>
 /* ... */
 </style>
-<script setup>
-/* ... */
-</script>
 <script>
 /* ... */
 </script>
