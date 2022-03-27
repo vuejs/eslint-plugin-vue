@@ -60,12 +60,12 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><slot my-prop></slot></div></template>',
-      options: ['always', { includeSlots: true }]
+      options: ['always']
     },
     {
       filename: 'test.vue',
       code: '<template><div><slot myProp></slot></div></template>',
-      options: ['never', { includeSlots: true }]
+      options: ['never']
     }
   ],
 
@@ -267,7 +267,7 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><slot my-prop="foo"></slot></div></template>',
       output: '<template><div><slot myProp="foo"></slot></div></template>',
-      options: ['never', { includeSlots: true }],
+      options: ['never'],
       errors: [
         {
           message: "Attribute 'my-prop' can't be hyphenated.",
@@ -280,7 +280,7 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><slot MyProp="Bar"></slot></div></template>',
       output: '<template><div><slot my-prop="Bar"></slot></div></template>',
-      options: ['always', { includeSlots: true }],
+      options: ['always'],
       errors: [
         {
           message: "Attribute 'MyProp' must be hyphenated.",
