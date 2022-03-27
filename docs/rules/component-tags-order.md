@@ -5,6 +5,7 @@ title: vue/component-tags-order
 description: enforce order of component top-level elements
 since: v6.1.0
 ---
+
 # vue/component-tags-order
 
 > enforce order of component top-level elements
@@ -20,24 +21,33 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 
 ```json
 {
-  "vue/component-tags-order": ["error", {
-    "order": [ [ "script", "script/setup", "template" ], "style" ]
-  }]
+  "vue/component-tags-order": [
+    "error",
+    {
+      "order": [["script", "script[setup]", "template"], "style"]
+    }
+  ]
 }
 ```
 
-- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "script/setup", "template" ], "style" ]`.
+- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "script[setup]", "template" ], "style" ]`.
 
-### `{ "order": [ [ "script", "script/setup", "template" ], "style" ] }` (default)
+### `{ "order": [ [ "script", "script[setup]", "template" ], "style" ] }` (default)
 
 <eslint-code-block fix :rules="{'vue/component-tags-order': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
-<script>/* ... */</script>
-<script setup>/* ... */</script>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
 <template>...</template>
-<style>/* ... */</style>
+<style>
+/* ... */
+</style>
 ```
 
 </eslint-code-block>
@@ -47,9 +57,15 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
-<script>/* ... */</script>
-<script setup>/* ... */</script>
-<style>/* ... */</style>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
+<style>
+/* ... */
+</style>
 ```
 
 </eslint-code-block>
@@ -58,9 +74,15 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 
 ```vue
 <!-- ✗ BAD -->
-<style>/* ... */</style>
-<script setup>/* ... */</script>
-<script>/* ... */</script>
+<style>
+/* ... */
+</style>
+<script setup>
+/* ... */
+</script>
+<script>
+/* ... */
+</script>
 <template>...</template>
 ```
 
@@ -68,54 +90,132 @@ This rule warns about the order of the `<script>`, `<script setup>`, `<template>
 
 ### `{ "order": ["template", "script", "style"] }`
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'script/setup', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'script[setup]', 'style'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
-<script setup>/* ... */</script>
-<script>/* ... */</script>
-<style>/* ... */</style>
+<script setup>
+/* ... */
+</script>
+<script>
+/* ... */
+</script>
+<style>
+/* ... */
+</style>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'script/setup', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script', 'script[setup]', 'style'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
-<script setup>/* ... */</script>
-<script>/* ... */</script>
+<script setup>
+/* ... */
+</script>
+<script>
+/* ... */
+</script>
 <template>...</template>
-<style>/* ... */</style>
+<style>
+/* ... */
+</style>
 ```
 
 </eslint-code-block>
 
-### `{ "order": ["docs", "template", "script", "script/setup", "style"] }`
+### `{ "order": ["docs", "template", "script", "script[setup]", "style"] }`
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'script/setup', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'script[setup]', 'style'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <docs> documentation </docs>
 <template>...</template>
-<script>/* ... */</script>
-<script setup>/* ... */</script>
-<style>/* ... */</style>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
+<style>
+/* ... */
+</style>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'script/setup', 'style'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['docs', 'template', 'script', 'script[setup]', 'style'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>
-<script>/* ... */</script>
-<script setup>/* ... */</script>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
 <docs> documentation </docs>
-<style>/* ... */</style>
+<style>
+/* ... */
+</style>
+```
+
+</eslint-code-block>
+
+### `{ "order": ["docs", "template", "script", "script[setup]", "style"] }`
+
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['[locale=en]', 'i18n[local=ja]', 'script', 'script[setup]', 'style:not([scoped])', 'style'] }]}">
+
+```vue
+<!-- ✓ GOOD -->
+<i18n locale="en">
+/* ... */
+</i18n>
+<i18n locale="ja">
+/* ... */
+</i18n>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
+<style>
+/* ... */
+</style>
+<style scoped>
+/* ... */
+</style>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['[locale=en]', 'i18n[local=ja]', 'script', 'script[setup]', 'style:not([scoped])', 'style'] }]}">
+
+```vue
+<!-- ✗ BAD -->
+<style>
+/* ... */
+</style>
+<style scoped>
+/* ... */
+</style>
+<i18n locale="en">
+/* ... */
+</i18n>
+<i18n locale="ja">
+/* ... */
+</i18n>
+<script>
+/* ... */
+</script>
+<script setup>
+/* ... */
+</script>
 ```
 
 </eslint-code-block>

@@ -107,17 +107,27 @@ tester.run('component-tags-order', rule, {
     {
       code: '<script setup></script><script></script><template></template><style></style>',
       output: null,
-      options: [{ order: ['script/setup', 'script', 'template', 'style'] }]
+      options: [{ order: ['script[setup]', 'script', 'template', 'style'] }]
     },
     {
       code: '<template></template><script setup></script><script></script><style></style>',
       output: null,
-      options: [{ order: [['script/setup', 'script', 'template'], 'style'] }]
+      options: [{ order: [['script[setup]', 'script', 'template'], 'style'] }]
     },
     {
       code: '<template></template><docs></docs><script></script><style></style>',
       output: null,
       options: [{ order: [['docs', 'script', 'template'], 'style'] }]
+    },
+    {
+      code: '<i18n locale="en"></i18n><i18n locale="ja"></i18n>',
+      output: null,
+      options: [{ order: ['i18n[locale=en]', 'i18n[locale=ja]'] }]
+    },
+    {
+      code: '<style></style><style scoped></style>',
+      output: null,
+      options: [{ order: ['style:not([scoped])', 'style[scoped]'] }]
     },
 
     `<script></script><style></style>`,
@@ -360,6 +370,29 @@ tester.run('component-tags-order', rule, {
         }
       ],
       output: '\n        <script></script>\n        <style></style>\n      '
+    },
+    {
+      code: '<i18n locale="ja"></i18n><i18n locale="en"></i18n>',
+      output: '<i18n locale="en"></i18n><i18n locale="ja"></i18n>',
+      options: [{ order: ['i18n[locale=en]', 'i18n[locale=ja]'] }],
+      errors: [
+        {
+          message:
+            'The <i18n locale=en> should be above the <i18n locale=ja> on line 1.',
+          line: 1
+        }
+      ]
+    },
+    {
+      code: '<style scoped></style><style></style>',
+      output: '<style></style><style scoped></style>',
+      options: [{ order: ['style:not([scoped])', 'style[scoped]'] }],
+      errors: [
+        {
+          message: 'The <style> should be above the <style scoped> on line 1.',
+          line: 1
+        }
+      ]
     }
   ]
 })
