@@ -4,27 +4,92 @@ sidebarDepth: 0
 title: vue/match-component-import-name
 description: xxx
 ---
+
 # vue/match-component-import-name
 
-> xxx
+> require the registered component name to match the imported component name
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+This rule reports if a the name of a registered component does not match its imported name.
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
-This rule ....
+This rule has some options.
 
-<eslint-code-block :rules="{'vue/match-component-import-name': ['error']}">
+```json
+{
+  "vue/match-component-import-name": [
+    "error",
+    {
+      "prefix": "prefix-",
+      "case": "kebab"
+    }
+  ]
+}
+```
 
-```vue
-<template>
+By default, this rule will validate that the imported name is the same casing.
 
-</template>
+Case can be one of: `"kebab"` (`casing-like-this`) or `"pascal"` (`CasingLikeThis`)
+
+An optional prefix can be provided that must be prepended to all imports.
+
+If you are not registering components, this rule will be ignored.
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { 'app-button': AppButton } }
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab' }]}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { 'app-button': AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { AppButton } }
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { prefix: 'Prefix' }]}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { PrefixAppButton: AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { 'app-button': AppButton } }
+export default { components: { 'prefix-app-button': PrefixAppButton } }
 ```
 
 </eslint-code-block>
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/match-component-import-name": [
+    "error",
+    {
+      "prefix": "prefix-",
+      "case": "kebab"
+    }
+  ]
+}
+```
 
+- `"prefix": ""` ... array of file extensions to be verified. Default is set to the empty string.
+- `"case": "pascal"` ... one of "kebab" or "pascal", indicating the casing of the registered name. Default is set to `pascal`.
