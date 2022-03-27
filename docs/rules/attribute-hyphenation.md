@@ -5,7 +5,6 @@ title: vue/attribute-hyphenation
 description: enforce attribute naming style on custom components in template
 since: v3.9.0
 ---
-
 # vue/attribute-hyphenation
 
 > enforce attribute naming style on custom components in template
@@ -36,7 +35,7 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 ```json
 {
   "vue/attribute-hyphenation": ["error", "always" | "never", {
-    "ignore": [],
+    "ignore": []
   }]
 }
 ```
