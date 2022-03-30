@@ -35,7 +35,7 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'valid-import': ValidImport } } </script>
       `,
-      options: [{ casing: 'kebab' }]
+      options: [{ casing: 'kebab-case' }]
     },
     {
       filename: 'test.vue',
@@ -49,7 +49,7 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'valid-import': ValidImport, ...SpreadImport } } </script>
       `,
-      options: [{ casing: 'kebab' }]
+      options: [{ casing: 'kebab-case' }]
     },
     {
       filename: 'test.vue',
@@ -63,7 +63,7 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'prefix-valid-import': ValidImport } } </script>
       `,
-      options: [{ casing: 'kebab', prefix: 'prefix-' }]
+      options: [{ casing: 'kebab-case', prefix: 'prefix-' }]
     },
     {
       filename: 'test.vue',
@@ -111,7 +111,7 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { InvalidImport } } </script>
       `,
-      options: [{ casing: 'kebab' }],
+      options: [{ casing: 'kebab-case' }],
       errors: [
         {
           message: 'component alias InvalidImport should match invalid-import',
@@ -125,7 +125,7 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'invalid-import': InvalidImport } }
       `,
-      options: [{ casing: 'kebab', prefix: 'prefix-' }],
+      options: [{ casing: 'kebab-case', prefix: 'prefix-' }],
       errors: [
         {
           message:
