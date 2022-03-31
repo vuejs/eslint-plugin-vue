@@ -1,7 +1,6 @@
 [
     {
         "text": "<li class=\"d\">",
-        "selector": "li:only-child",
-        "elementText": null
+        "selector": "li:only-child"
     }
 ]

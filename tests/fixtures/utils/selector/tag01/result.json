@@ -1,17 +1,14 @@
 [
     {
         "text": "<div id=\"1\">",
-        "selector": "div",
-        "elementText": "<div>"
+        "selector": "div"
     },
     {
         "text": "<div id=\"2\">",
-        "selector": "div",
-        "elementText": "<div>"
+        "selector": "div"
     },
     {
         "text": "<div class=\"block\">",
-        "selector": "div",
-        "elementText": "<div>"
+        "selector": "div"
     }
 ]

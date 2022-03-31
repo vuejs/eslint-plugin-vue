@@ -1,17 +1,14 @@
 [
     {
         "text": "<a href=\"http://example.com\">",
-        "selector": "a[href*=\"example\"]",
-        "elementText": null
+        "selector": "a[href*=\"example\"]"
     },
     {
         "text": "<a href=\"http://example.org\">",
-        "selector": "a[href*=\"example\"]",
-        "elementText": null
+        "selector": "a[href*=\"example\"]"
     },
     {
         "text": "<a href=\"https://example.org\">",
-        "selector": "a[href*=\"example\"]",
-        "elementText": null
+        "selector": "a[href*=\"example\"]"
     }
 ]

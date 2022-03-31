@@ -1,7 +1,6 @@
 [
     {
         "text": "<p class=\"b\">",
-        "selector": "p:first-of-type",
-        "elementText": null
+        "selector": "p:first-of-type"
     }
 ]

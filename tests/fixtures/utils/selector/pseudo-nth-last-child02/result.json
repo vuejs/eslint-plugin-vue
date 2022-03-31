@@ -1,22 +1,18 @@
 [
     {
         "text": "<tr class=\"tr1\">",
-        "selector": "tr:nth-last-child(n+2)",
-        "elementText": null
+        "selector": "tr:nth-last-child(n+2)"
     },
     {
         "text": "<tr class=\"tr2\">",
-        "selector": "tr:nth-last-child(n+2)",
-        "elementText": null
+        "selector": "tr:nth-last-child(n+2)"
     },
     {
         "text": "<tr class=\"tr3\">",
-        "selector": "tr:nth-last-child(n+2)",
-        "elementText": null
+        "selector": "tr:nth-last-child(n+2)"
     },
     {
         "text": "<tr class=\"tr4\">",
-        "selector": "tr:nth-last-child(n+2)",
-        "elementText": null
+        "selector": "tr:nth-last-child(n+2)"
     }
 ]

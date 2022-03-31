@@ -1,22 +1,18 @@
 [
     {
         "text": "<div class=\"bar 2\">",
-        "selector": ".foo .bar",
-        "elementText": null
+        "selector": ".foo .bar"
     },
     {
         "text": "<div class=\"bar 3\">",
-        "selector": ".foo .bar",
-        "elementText": null
+        "selector": ".foo .bar"
     },
     {
         "text": "<div class=\"bar 4\">",
-        "selector": ".foo .bar",
-        "elementText": null
+        "selector": ".foo .bar"
     },
     {
         "text": "<div class=\"bar\" exact>",
-        "selector": ".foo .bar",
-        "elementText": null
+        "selector": ".foo .bar"
     }
 ]

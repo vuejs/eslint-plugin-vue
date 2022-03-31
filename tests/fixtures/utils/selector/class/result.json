@@ -1,12 +1,10 @@
 [
     {
         "text": "<div class=\"foo\">",
-        "selector": ".foo",
-        "elementText": "<* class=\"foo\">"
+        "selector": ".foo"
     },
     {
         "text": "<input class=\"foo bar\">",
-        "selector": ".foo",
-        "elementText": "<* class=\"foo\">"
+        "selector": ".foo"
     }
 ]

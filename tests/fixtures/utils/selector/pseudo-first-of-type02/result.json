@@ -1,12 +1,10 @@
 [
     {
         "text": "<h2 class=\"a\">",
-        "selector": ".root > :first-of-type",
-        "elementText": null
+        "selector": ".root > :first-of-type"
     },
     {
         "text": "<p class=\"b\">",
-        "selector": ".root > :first-of-type",
-        "elementText": null
+        "selector": ".root > :first-of-type"
     }
 ]

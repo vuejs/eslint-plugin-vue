@@ -1,12 +1,10 @@
 [
     {
         "text": "<li class=\"b\">",
-        "selector": "ul li:first-child",
-        "elementText": null
+        "selector": "ul li:first-child"
     },
     {
         "text": "<li class=\"f\">",
-        "selector": "ul li:first-child",
-        "elementText": null
+        "selector": "ul li:first-child"
     }
 ]

@@ -1,7 +1,6 @@
 [
     {
         "text": "<p id=\"3\">",
-        "selector": "p",
-        "elementText": "<p>"
+        "selector": "p"
     }
 ]

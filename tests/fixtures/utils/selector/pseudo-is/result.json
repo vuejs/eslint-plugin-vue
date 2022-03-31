@@ -1,32 +1,26 @@
 [
     {
         "text": "<p class=\"b\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     },
     {
         "text": "<p class=\"f\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     },
     {
         "text": "<p class=\"g\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     },
     {
         "text": "<p class=\"i\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     },
     {
         "text": "<p class=\"j\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     },
     {
         "text": "<p class=\"l\">",
-        "selector": ":where(header, main, footer) p",
-        "elementText": null
+        "selector": ":where(header, main, footer) p"
     }
 ]

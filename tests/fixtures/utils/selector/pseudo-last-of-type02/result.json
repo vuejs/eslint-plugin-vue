@@ -1,12 +1,10 @@
 [
     {
         "text": "<h2 class=\"a\">",
-        "selector": ".root > :last-of-type",
-        "elementText": null
+        "selector": ".root > :last-of-type"
     },
     {
         "text": "<p class=\"c\">",
-        "selector": ".root > :last-of-type",
-        "elementText": null
+        "selector": ".root > :last-of-type"
     }
 ]

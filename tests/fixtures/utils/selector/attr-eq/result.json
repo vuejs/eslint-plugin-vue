@@ -1,12 +1,10 @@
 [
     {
         "text": "<div foo=\"foo\">",
-        "selector": "[foo=foo]",
-        "elementText": "<* foo=\"foo\">"
+        "selector": "[foo=foo]"
     },
     {
         "text": "<input foo=\"foo\">",
-        "selector": "[foo=foo]",
-        "elementText": "<* foo=\"foo\">"
+        "selector": "[foo=foo]"
     }
 ]

@@ -1,32 +1,26 @@
 [
     {
         "text": "<template>",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     },
     {
         "text": "<div id=\"1\">",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     },
     {
         "text": "<div id=\"foo\">",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     },
     {
         "text": "<p id=\"3\">",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     },
     {
         "text": "<input id=\"4\">",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     },
     {
         "text": "<div class=\"block\">",
-        "selector": "*",
-        "elementText": "<*>"
+        "selector": "*"
     }
 ]

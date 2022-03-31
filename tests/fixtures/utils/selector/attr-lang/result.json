@@ -1,17 +1,14 @@
 [
     {
         "text": "<div lang=\"zh\">",
-        "selector": "div[lang|=\"zh\"]",
-        "elementText": null
+        "selector": "div[lang|=\"zh\"]"
     },
     {
         "text": "<div lang=\"zh-CN\">",
-        "selector": "div[lang|=\"zh\"]",
-        "elementText": null
+        "selector": "div[lang|=\"zh\"]"
     },
     {
         "text": "<div lang=\"zh-TW\">",
-        "selector": "div[lang|=\"zh\"]",
-        "elementText": null
+        "selector": "div[lang|=\"zh\"]"
     }
 ]

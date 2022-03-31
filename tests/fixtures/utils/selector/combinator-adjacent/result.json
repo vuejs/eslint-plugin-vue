@@ -1,12 +1,10 @@
 [
     {
         "text": "<div class=\"bar 3\">",
-        "selector": ".foo+.bar",
-        "elementText": null
+        "selector": ".foo+.bar"
     },
     {
         "text": "<div class=\"bar 4\">",
-        "selector": ".foo+.bar",
-        "elementText": null
+        "selector": ".foo+.bar"
     }
 ]

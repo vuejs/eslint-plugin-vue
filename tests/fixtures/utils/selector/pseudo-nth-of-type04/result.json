@@ -1,17 +1,14 @@
 [
     {
         "text": "<p class=\"fancy d\">",
-        "selector": ":nth-of-type(2n)",
-        "elementText": null
+        "selector": ":nth-of-type(2n)"
     },
     {
         "text": "<div class=\"e\">",
-        "selector": ":nth-of-type(2n)",
-        "elementText": null
+        "selector": ":nth-of-type(2n)"
     },
     {
         "text": "<p class=\"g\">",
-        "selector": ":nth-of-type(2n)",
-        "elementText": null
+        "selector": ":nth-of-type(2n)"
     }
 ]

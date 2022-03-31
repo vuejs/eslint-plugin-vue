@@ -1,12 +1,10 @@
 [
     {
         "text": "<div class=\"box a\">",
-        "selector": ".box:empty",
-        "elementText": null
+        "selector": ".box:empty"
     },
     {
         "text": "<div class=\"box c\">",
-        "selector": ".box:empty",
-        "elementText": null
+        "selector": ".box:empty"
     }
 ]

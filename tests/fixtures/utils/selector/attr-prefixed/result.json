@@ -1,12 +1,10 @@
 [
     {
         "text": "<a href=\"#internal\">",
-        "selector": "a[href^=\"#\"]",
-        "elementText": null
+        "selector": "a[href^=\"#\"]"
     },
     {
         "text": "<a href=\"#InSensitive\">",
-        "selector": "a[href^=\"#\"]",
-        "elementText": null
+        "selector": "a[href^=\"#\"]"
     }
 ]

@@ -1,12 +1,10 @@
 [
     {
         "text": "<div lang=\"en-us en-gb en-au en-nz\">",
-        "selector": "div[lang~=\"en-us\"]",
-        "elementText": null
+        "selector": "div[lang~=\"en-us\"]"
     },
     {
         "text": "<div lang=\"en-us\">",
-        "selector": "div[lang~=\"en-us\"]",
-        "elementText": null
+        "selector": "div[lang~=\"en-us\"]"
     }
 ]

@@ -1,42 +1,34 @@
 [
     {
         "text": "<div class=\"c a-a-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c a-b-a-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c a-b-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c a-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c a-b-c-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c a-c-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c b-a-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     },
     {
         "text": "<div class=\"c c-a-b-c\">",
-        "selector": ".a .b .c",
-        "elementText": null
+        "selector": ".a .b .c"
     }
 ]

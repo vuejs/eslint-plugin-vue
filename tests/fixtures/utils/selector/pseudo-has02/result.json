@@ -1,12 +1,10 @@
 [
     {
         "text": "<div class=\"foo\" id=\"root-1\">",
-        "selector": "div:has(>.foo)",
-        "elementText": null
+        "selector": "div:has(>.foo)"
     },
     {
         "text": "<div class=\"foo\" id=\"root-3\">",
-        "selector": "div:has(>.foo)",
-        "elementText": null
+        "selector": "div:has(>.foo)"
     }
 ]

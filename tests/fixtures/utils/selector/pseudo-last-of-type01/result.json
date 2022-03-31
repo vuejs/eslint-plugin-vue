@@ -1,7 +1,6 @@
 [
     {
         "text": "<p class=\"c\">",
-        "selector": "p:last-of-type",
-        "elementText": null
+        "selector": "p:last-of-type"
     }
 ]

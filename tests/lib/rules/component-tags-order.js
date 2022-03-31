@@ -147,7 +147,7 @@ tester.run('component-tags-order', rule, {
       ]
     },
     {
-      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n lang="ja"></i18n><i18n lang="en"></i18n>',
+      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n locale="ja"></i18n><i18n locale="en"></i18n>',
       output: null,
       options: [
         {
@@ -155,14 +155,14 @@ tester.run('component-tags-order', rule, {
             ['script:not([setup])', 'script[setup]', 'template'],
             'style[scoped]',
             'style:not([scoped])',
-            'i18n:not([lang=en])',
-            'i18n:not([lang=ja])'
+            'i18n:not([locale=en])',
+            'i18n:not([locale=ja])'
           ]
         }
       ]
     },
     {
-      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n lang="en"></i18n><i18n lang="ja"></i18n>',
+      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n locale="en"></i18n><i18n locale="ja"></i18n>',
       output: null,
       options: [
         {
@@ -172,8 +172,8 @@ tester.run('component-tags-order', rule, {
             'script[setup]',
             'style[scoped]',
             'style:not([scoped])',
-            'i18n[lang=en]',
-            'i18n[lang=ja]'
+            'i18n[locale=en]',
+            'i18n[locale=ja]'
           ]
         }
       ]

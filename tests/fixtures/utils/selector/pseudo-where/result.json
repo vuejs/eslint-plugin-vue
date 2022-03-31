@@ -1,32 +1,26 @@
 [
     {
         "text": "<p class=\"b\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     },
     {
         "text": "<p class=\"f\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     },
     {
         "text": "<p class=\"g\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     },
     {
         "text": "<p class=\"i\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     },
     {
         "text": "<p class=\"j\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     },
     {
         "text": "<p class=\"l\">",
-        "selector": ":is(header, main, footer) p",
-        "elementText": null
+        "selector": ":is(header, main, footer) p"
     }
 ]

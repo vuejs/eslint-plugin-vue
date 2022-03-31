@@ -26,7 +26,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 }
 ```
 
-- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "template" ], "style" ]`. May also be CSS selectors, such as `script[setup]` and `i18n:not([lang=en])`.
+- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "template" ], "style" ]`. May also be CSS selectors, such as `script[setup]` and `i18n:not([locale=en])`.
 
 ### `{ "order": [ [ "script", "template" ], "style" ] }` (default)
 
@@ -161,26 +161,26 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 </eslint-code-block>
 
-### `{ 'order': ['template', 'i18n:not([lang=en])', 'i18n[lang=en]'] }`
+### `{ 'order': ['template', 'i18n:not([locale=en])', 'i18n[locale=en]'] }`
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'i18n:not([lang=en])', 'i18n[lang=en]'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'i18n:not([locale=en])', 'i18n[locale=en]'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
-<i18n lang="ja">/* ... */</i18n>
-<i18n lang="en">/* ... */</i18n>
+<i18n locale="ja">/* ... */</i18n>
+<i18n locale="en">/* ... */</i18n>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'i18n:not([lang=en])', 'i18n[lang=en]'] }]}">
+<eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'i18n:not([locale=en])', 'i18n[locale=en]'] }]}">
 
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>
-<i18n lang="en">/* ... */</i18n>
-<i18n lang="ja">/* ... */</i18n>
+<i18n locale="en">/* ... */</i18n>
+<i18n locale="ja">/* ... */</i18n>
 ```
 
 </eslint-code-block>

@@ -1,7 +1,6 @@
 [
     {
         "text": "<span class=\"e\">",
-        "selector": "span:nth-last-of-type(2)",
-        "elementText": null
+        "selector": "span:nth-last-of-type(2)"
     }
 ]
