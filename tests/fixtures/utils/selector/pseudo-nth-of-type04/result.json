@@ -1,0 +1,17 @@
+[
+    {
+        "text": "<p class=\"fancy d\">",
+        "selector": ":nth-of-type(2n)",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"e\">",
+        "selector": ":nth-of-type(2n)",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"g\">",
+        "selector": ":nth-of-type(2n)",
+        "elementText": null
+    }
+]

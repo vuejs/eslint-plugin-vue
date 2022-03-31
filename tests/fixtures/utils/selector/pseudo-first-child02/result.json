@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<li class=\"b\">",
+        "selector": "ul li:first-child",
+        "elementText": null
+    },
+    {
+        "text": "<li class=\"f\">",
+        "selector": "ul li:first-child",
+        "elementText": null
+    }
+]

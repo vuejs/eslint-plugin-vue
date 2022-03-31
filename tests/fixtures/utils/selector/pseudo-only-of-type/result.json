@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<p class=\"b\">",
+        "selector": "main :only-of-type",
+        "elementText": null
+    },
+    {
+        "text": "<i class=\"e\">",
+        "selector": "main :only-of-type",
+        "elementText": null
+    }
+]

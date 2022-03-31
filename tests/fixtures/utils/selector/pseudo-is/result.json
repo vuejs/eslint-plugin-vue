@@ -1,0 +1,32 @@
+[
+    {
+        "text": "<p class=\"b\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"f\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"g\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"i\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"j\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"l\">",
+        "selector": ":where(header, main, footer) p",
+        "elementText": null
+    }
+]

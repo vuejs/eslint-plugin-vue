@@ -1,0 +1,7 @@
+[
+    {
+        "text": "<div class=\"foo b\">",
+        "selector": ".foo:nth-child(even)",
+        "elementText": null
+    }
+]

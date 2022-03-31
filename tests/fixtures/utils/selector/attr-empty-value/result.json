@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<p foo>",
+        "selector": "[foo=]",
+        "elementText": "<* foo=\"\">"
+    },
+    {
+        "text": "<div foo=\"\">",
+        "selector": "[foo=]",
+        "elementText": "<* foo=\"\">"
+    }
+]

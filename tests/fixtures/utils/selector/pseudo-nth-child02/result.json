@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<div class=\"foo a\">",
+        "selector": ".foo:nth-child(odd)",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"foo c\">",
+        "selector": ".foo:nth-child(odd)",
+        "elementText": null
+    }
+]

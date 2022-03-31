@@ -1,0 +1,7 @@
+[
+    {
+        "text": "<div id=\"foo\">",
+        "selector": "#foo",
+        "elementText": "<* id=\"foo\">"
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "text": "<div class=\"bar\">",
+        "selector": ".foo /* comment */ :is(.bar /* comment */)",
+        "elementText": null
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<div class=\"bar\" id=\"root-2\">",
+        "selector": "div:has(+.foo)",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"foo\" id=\"root-3\">",
+        "selector": "div:has(+.foo)",
+        "elementText": null
+    }
+]

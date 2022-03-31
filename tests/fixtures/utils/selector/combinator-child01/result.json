@@ -1,0 +1,17 @@
+[
+    {
+        "text": "<div class=\"bar 2\">",
+        "selector": ".foo > .bar",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"bar 3\">",
+        "selector": ".foo > .bar",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"bar\" exact>",
+        "selector": ".foo > .bar",
+        "elementText": null
+    }
+]

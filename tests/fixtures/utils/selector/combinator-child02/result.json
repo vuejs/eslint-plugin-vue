@@ -1,0 +1,22 @@
+[
+    {
+        "text": "<div class=\"c a-a-b-c\">",
+        "selector": ".a > .b > .c",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"c a-b-c\">",
+        "selector": ".a > .b > .c",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"c b-a-b-c\">",
+        "selector": ".a > .b > .c",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"c c-a-b-c\">",
+        "selector": ".a > .b > .c",
+        "elementText": null
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "text": "<template>",
+        "selector": ":not(.foo)",
+        "elementText": null
+    },
+    {
+        "text": "<div class=\"f\">",
+        "selector": ":not(.foo)",
+        "elementText": null
+    },
+    {
+        "text": "<p class=\"bar\">",
+        "selector": ":not(.foo)",
+        "elementText": null
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "text": "<a href=\"#InSensitive\">",
+        "selector": "a[href*=\"insensitive\" i]",
+        "elementText": null
+    }
+]

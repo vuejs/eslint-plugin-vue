@@ -1,0 +1,12 @@
+[
+    {
+        "text": "<li class=\"d\">",
+        "selector": "ul li:last-child",
+        "elementText": null
+    },
+    {
+        "text": "<li class=\"h\">",
+        "selector": "ul li:last-child",
+        "elementText": null
+    }
+]

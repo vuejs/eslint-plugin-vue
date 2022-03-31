@@ -1,0 +1,7 @@
+[
+    {
+        "text": "<div class=\"bar b\">",
+        "selector": ".foo /* comment */ > /* comment */ /* comment */ .bar /* comment */",
+        "elementText": null
+    }
+]

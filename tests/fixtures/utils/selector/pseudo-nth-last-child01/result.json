@@ -1,0 +1,17 @@
+[
+    {
+        "text": "<tr class=\"tr3\">",
+        "selector": "tr:nth-last-child(-n+3)",
+        "elementText": null
+    },
+    {
+        "text": "<tr class=\"tr4\">",
+        "selector": "tr:nth-last-child(-n+3)",
+        "elementText": null
+    },
+    {
+        "text": "<tr class=\"tr5\">",
+        "selector": "tr:nth-last-child(-n+3)",
+        "elementText": null
+    }
+]
