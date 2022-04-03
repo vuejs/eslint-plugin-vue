@@ -113,6 +113,8 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 </eslint-code-block>
 
+### `{ 'order': ['template', 'script:not([setup])', 'script[setup]'] }`
+
 <eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'script:not([setup])', 'script[setup]'] }]}">
 
 ```vue
@@ -124,6 +126,8 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 </eslint-code-block>
 
+### `{ 'order': ['template', 'style:not([scoped])', 'style[scoped]'] }`
+
 <eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'style:not([scoped])', 'style[scoped]'] }]}">
 
 ```vue
@@ -134,6 +138,8 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 ```
 
 </eslint-code-block>
+
+### `{ 'order': ['template', 'i18n:not([lang=en])', 'i18n[lang=en]'] }`
 
 <eslint-code-block fix :rules="{'vue/component-tags-order': ['error', { 'order': ['template', 'i18n:not([lang=en])', 'i18n[lang=en]'] }]}">
 
