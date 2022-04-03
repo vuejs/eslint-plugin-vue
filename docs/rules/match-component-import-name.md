@@ -17,20 +17,6 @@ This rule reports if the name of a registered component does not match its impor
 
 ## :book: Rule Details
 
-This rule has some options.
-
-```json
-{
-  "vue/match-component-import-name": [
-    "error",
-    {
-      "prefix": "prefix-",
-      "case": "kebab-case"
-    }
-  ]
-}
-```
-
 By default, this rule will validate that the imported name is the same casing.
 
 Case can be one of: `"kebab-case"` or `"PascalCase"`
@@ -38,46 +24,6 @@ Case can be one of: `"kebab-case"` or `"PascalCase"`
 An optional prefix can be provided that must be prepended to all imports.
 
 If you are not registering components, this rule will be ignored.
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
-
-```javascript
-/* ✓ GOOD */
-export default { components: { AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { 'app-button': AppButton } }
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case' }]}">
-
-```javascript
-/* ✓ GOOD */
-export default { components: { 'app-button': AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { AppButton } }
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { prefix: 'Prefix' }]}">
-
-```javascript
-/* ✓ GOOD */
-export default { components: { PrefixAppButton: AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { 'app-button': AppButton } }
-export default { components: { 'prefix-app-button': PrefixAppButton } }
-```
-
-</eslint-code-block>
 
 ## :wrench: Options
 
@@ -95,6 +41,67 @@ export default { components: { 'prefix-app-button': PrefixAppButton } }
 
 - `"prefix": ""` ... array of file extensions to be verified. Default is set to the empty string.
 - `"case": "PascalCase"` ... one of "kebab-case" or "PascalCase", indicating the casing of the registered name. Default is set to `PascalCase`.
+
+### `{}`
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { 'app-button': AppButton } }
+```
+
+</eslint-code-block>
+
+### `{ case: 'kebab-case' }`
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case' }]}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { 'app-button': AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { AppButton } }
+```
+
+</eslint-code-block>
+
+### `{ prefix: 'Prefix' }`
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { prefix: 'Prefix' }]}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { PrefixAppButton: AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { 'app-button': AppButton } }
+export default { components: { 'prefix-app-button': PrefixAppButton } }
+```
+
+</eslint-code-block>
+
+### `{ case: 'kebab-case', prefix: 'prefix-' }`
+
+<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case', prefix: 'prefix-' }]}">
+
+```javascript
+/* ✓ GOOD */
+export default { components: { 'prefix-app-button': AppButton } }
+
+/* ✗ BAD */
+export default { components: { SomeOtherName: AppButton } }
+export default { components: { AppButton } }
+```
+
+</eslint-code-block>
 
 ## :mag: Implementation
 
