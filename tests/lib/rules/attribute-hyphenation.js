@@ -56,6 +56,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><my-component :[foo-bar]></my-component></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><slot my-prop></slot></div></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><slot myProp></slot></div></template>',
+      options: ['never']
     }
   ],
 
@@ -250,6 +260,32 @@ ruleTester.run('attribute-hyphenation', rule, {
           message: "Attribute 'second-custom' can't be hyphenated.",
           type: 'VIdentifier',
           line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><slot my-prop="foo"></slot></div></template>',
+      output: '<template><div><slot myProp="foo"></slot></div></template>',
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute 'my-prop' can't be hyphenated.",
+          type: 'VIdentifier',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><slot MyProp="Bar"></slot></div></template>',
+      output: '<template><div><slot my-prop="Bar"></slot></div></template>',
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute 'MyProp' must be hyphenated.",
+          type: 'VIdentifier',
+          line: 1
         }
       ]
     }
