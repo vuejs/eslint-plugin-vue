@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-prop-type-boolean-first
 description: enforce `Boolean` comes first in component prop types
+since: v8.6.0
 ---
 # vue/prefer-prop-type-boolean-first
 
 > enforce `Boolean` comes first in component prop types
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -53,6 +53,10 @@ export default {
 ## :couple: Related Rules
 
 - [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.6.0
 
 ## :mag: Implementation
 

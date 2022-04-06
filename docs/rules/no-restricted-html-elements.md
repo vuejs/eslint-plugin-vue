@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-html-elements
 description: disallow specific HTML elements
+since: v8.6.0
 ---
 # vue/no-restricted-html-elements
 
 > disallow specific HTML elements
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -89,6 +88,10 @@ The following properties can be specified for the object.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.6.0
 
 ## :mag: Implementation
 
