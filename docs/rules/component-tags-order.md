@@ -26,7 +26,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 }
 ```
 
-- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "template" ], "style" ]`. May also be CSS selectors, such as `script[setup]` and `i18n:not(lang=en)`.
+- `order` (`(string|string[])[]`) ... The order of top-level element names. default `[ [ "script", "template" ], "style" ]`. May also be CSS selectors, such as `script[setup]` and `i18n:not([lang=en])`.
 
 ### `{ "order": [ [ "script", "template" ], "style" ] }` (default)
 
