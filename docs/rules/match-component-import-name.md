@@ -4,22 +4,15 @@ sidebarDepth: 0
 title: vue/match-component-import-name
 description: require the registered component name to match the imported component name
 ---
-
 # vue/match-component-import-name
 
 > require the registered component name to match the imported component name
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
-
-This rule reports if the name of a registered component does not match its imported name.
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
-By default, this rule will validate that the imported name is the same casing, but it can be configured to enforce kebab-case or PascalCase. An optional prefix can be provided that must be prepended to all imports.
-
-If you are not registering components, this rule will be ignored.
+By default, this rule will validate that the imported name matches the name of the components object property identifer. Note that "matches" means that the imported name matches either the PascalCase or kebab-case version of the components object property identifer. If you would like to enforce that it must match only one of PascalCase or kebab-case, use this rule in conjunction with the rule `component-definition-name-casing`.
 
 <eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
 
@@ -29,6 +22,7 @@ export default {
   components: {
     /* ✓ GOOD */
     AppButton,
+    AppButton: AppButton,
 
     /* ✗ BAD */
     SomeOtherName: AppButton,
@@ -47,34 +41,13 @@ export default {
   "vue/match-component-import-name": [
     "error",
     {
-      "prefix": "prefix-",
-      "case": "kebab-case"
+      "prefix": "prefix-"
     }
   ]
 }
 ```
 
 - `"prefix": ""` ... required prefix for registered component names. Default is set to an empty string (no prefix).
-- `"case": "PascalCase"` ... one of "kebab-case" or "PascalCase", indicating the casing of the registered name. Default is set to `PascalCase`.
-
-### `{ case: 'kebab-case' }`
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case' }]}">
-
-```vue
-<script>
-export default {
-  components: {
-    /* ✓ GOOD */
-    'app-button': AppButton,
-    
-    /* ✗ BAD */
-    SomeOtherName: AppButton,
-    AppButton
-  }
-}
-</script>
-```
 
 </eslint-code-block>
 
@@ -88,32 +61,12 @@ export default {
   components: {
     /* ✓ GOOD */
     PrefixAppButton: AppButton,
+    'Prefix-app-button': AppButton,
     
     /* ✗ BAD */
+    AppButton,
     SomeOtherName: AppButton,
     'app-button': AppButton,
-    'prefix-app-button': PrefixAppButton
-  }
-}
-</script>
-```
-
-</eslint-code-block>
-
-### `{ case: 'kebab-case', prefix: 'prefix-' }`
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case', prefix: 'prefix-' }]}">
-
-```vue
-<script>
-export default {
-  components: {
-    /* ✓ GOOD */
-    'prefix-app-button': AppButton,
-    
-    /* ✗ BAD */
-    SomeOtherName: AppButton,
-    AppButton
   }
 }
 </script>

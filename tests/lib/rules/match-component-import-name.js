@@ -26,44 +26,20 @@ tester.run('match-component-import-name', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script> export default { components: { ValidImport } } </script>
-      `,
-      options: [{ casing: 'camel' }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
       <script> export default { components: { 'valid-import': ValidImport } } </script>
-      `,
-      options: [{ casing: 'kebab-case' }]
+      `
     },
     {
       filename: 'test.vue',
       code: `
       <script> export default { components: { ValidImport, ...SpreadImport } } </script>
-      `,
-      options: [{ casing: 'camel' }]
+      `
     },
     {
       filename: 'test.vue',
       code: `
       <script> export default { components: { 'valid-import': ValidImport, ...SpreadImport } } </script>
-      `,
-      options: [{ casing: 'kebab-case' }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script> export default { components: { PrefixValidImport: ValidImport } } </script>
-      `,
-      options: [{ casing: 'camel', prefix: 'Prefix' }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script> export default { components: { 'prefix-valid-import': ValidImport } } </script>
-      `,
-      options: [{ casing: 'kebab-case', prefix: 'prefix-' }]
+      `
     },
     {
       filename: 'test.vue',
@@ -75,8 +51,9 @@ tester.run('match-component-import-name', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script> export default { name: "test" } </script>
-      `
+      <script> export default { components: { 'prefix-valid-import': ValidImport } } </script>
+      `,
+      options: [{ prefix: 'prefix-' }]
     }
   ],
   invalid: [
@@ -87,34 +64,8 @@ tester.run('match-component-import-name', rule, {
       `,
       errors: [
         {
-          message: 'component alias InvalidExport should match SomeRandomName',
-          line: 2,
-          column: 47
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script> export default { components: { 'invalid-export': InvalidExport } } </script>
-      `,
-      errors: [
-        {
-          message: 'component alias invalid-export should match InvalidExport',
-          line: 2,
-          column: 47
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script> export default { components: { InvalidImport } } </script>
-      `,
-      options: [{ casing: 'kebab-case' }],
-      errors: [
-        {
-          message: 'component alias InvalidImport should match invalid-import',
+          message:
+            'Component alias InvalidExport should be one of: SomeRandomName, some-random-name.',
           line: 2,
           column: 47
         }
@@ -125,17 +76,17 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'invalid-import': InvalidImport } }
       `,
-      options: [{ casing: 'kebab-case', prefix: 'prefix-' }],
+      options: [{ prefix: 'prefix-' }],
       errors: [
         {
           message:
-            'component alias invalid-import should have the prefix prefix-',
+            'Component alias invalid-import should have the prefix prefix-.',
           line: 2,
           column: 47
         },
         {
           message:
-            'component alias invalid-import should match prefix-invalid-import',
+            'Component alias invalid-import should be one of: prefix-InvalidImport, prefix-invalid-import.',
           line: 2,
           column: 47
         }
@@ -146,17 +97,17 @@ tester.run('match-component-import-name', rule, {
       code: `
       <script> export default { components: { 'invalid-import': InvalidImport } } </script>
       `,
-      options: [{ casing: 'camel', prefix: 'Prefix' }],
+      options: [{ prefix: 'Prefix' }],
       errors: [
         {
           message:
-            'component alias invalid-import should have the prefix Prefix',
+            'Component alias invalid-import should have the prefix Prefix.',
           line: 2,
           column: 47
         },
         {
           message:
-            'component alias invalid-import should match PrefixInvalidImport',
+            'Component alias invalid-import should be one of: PrefixInvalidImport, Prefixinvalid-import.',
           line: 2,
           column: 47
         }
