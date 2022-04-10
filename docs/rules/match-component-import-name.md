@@ -76,14 +76,20 @@ export default { components: { AppButton } }
 
 <eslint-code-block :rules="{'vue/match-component-file-name': ['error', { prefix: 'Prefix' }]}">
 
-```javascript
-/* ✓ GOOD */
-export default { components: { PrefixAppButton: AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { 'app-button': AppButton } }
-export default { components: { 'prefix-app-button': PrefixAppButton } }
+```vue
+<script>
+export default {
+  components: {
+    /* ✓ GOOD */
+    PrefixAppButton: AppButton,
+    
+    /* ✗ BAD */
+    SomeOtherName: AppButton,
+    'app-button': AppButton,
+    'prefix-app-button': PrefixAppButton
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
