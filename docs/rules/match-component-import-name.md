@@ -61,13 +61,19 @@ export default { components: { 'app-button': AppButton } }
 
 <eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case' }]}">
 
-```javascript
-/* ✓ GOOD */
-export default { components: { 'app-button': AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { AppButton } }
+```vue
+<script>
+export default {
+  components: {
+    /* ✓ GOOD */
+    'app-button': AppButton,
+    
+    /* ✗ BAD */
+    SomeOtherName: AppButton,
+    AppButton
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
