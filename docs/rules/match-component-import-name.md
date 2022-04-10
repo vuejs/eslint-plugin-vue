@@ -92,13 +92,19 @@ export default { components: { 'prefix-app-button': PrefixAppButton } }
 
 <eslint-code-block :rules="{'vue/match-component-file-name': ['error', { case: 'kebab-case', prefix: 'prefix-' }]}">
 
-```javascript
-/* ✓ GOOD */
-export default { components: { 'prefix-app-button': AppButton } }
-
-/* ✗ BAD */
-export default { components: { SomeOtherName: AppButton } }
-export default { components: { AppButton } }
+```vue
+<script>
+export default {
+  components: {
+    /* ✓ GOOD */
+    'prefix-app-button': AppButton,
+    
+    /* ✗ BAD */
+    SomeOtherName: AppButton,
+    AppButton
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
