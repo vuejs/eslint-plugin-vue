@@ -117,7 +117,7 @@ tester.run('component-tags-order', rule, {
     {
       code: '<script></script><script setup></script><template></template><style></style>',
       output: null,
-      options: [{ order: ['script', 'script[setup]', 'template', 'style'] }]
+      options: [{ order: ['script', 'template', 'style'] }]
     },
     {
       code: '<template></template><script></script><script setup></script><style></style>',
