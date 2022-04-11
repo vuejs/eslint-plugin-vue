@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install Packages
+      run: npm install --legacy-peer-deps
+    - name: Lint
+      run: npm run lint
+
+  test:
+    name: Test
+    strategy:
+      matrix:
+        node: [16, 17]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Install Node.js v${{ matrix.node }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Install Packages
+      run: npm install --legacy-peer-deps
+    - name: Test
+      run: npm test
