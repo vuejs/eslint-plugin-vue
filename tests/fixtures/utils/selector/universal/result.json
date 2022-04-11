@@ -1,24 +1,12 @@
 {
     "selector": "*",
     "matches": [
-        {
-            "text": "<template>"
-        },
-        {
-            "text": "<div id=\"1\">"
-        },
-        {
-            "text": "<div id=\"foo\">"
-        },
-        {
-            "text": "<p id=\"3\">"
-        },
-        {
-            "text": "<input id=\"4\">"
-        },
-        {
-            "text": "<div class=\"block\">"
-        }
+        "<template>",
+        "<div id=\"1\">",
+        "<div id=\"foo\">",
+        "<p id=\"3\">",
+        "<input id=\"4\">",
+        "<div class=\"block\">"
     ],
     "errors": []
 }

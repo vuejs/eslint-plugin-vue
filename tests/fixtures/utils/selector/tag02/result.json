@@ -1,9 +1,7 @@
 {
     "selector": "p",
     "matches": [
-        {
-            "text": "<p id=\"3\">"
-        }
+        "<p id=\"3\">"
     ],
     "errors": []
 }

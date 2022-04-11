@@ -1,12 +1,8 @@
 {
     "selector": "ul li:first-child",
     "matches": [
-        {
-            "text": "<li class=\"b\">"
-        },
-        {
-            "text": "<li class=\"f\">"
-        }
+        "<li class=\"b\">",
+        "<li class=\"f\">"
     ],
     "errors": []
 }

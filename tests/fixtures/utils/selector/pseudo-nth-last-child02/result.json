@@ -1,18 +1,10 @@
 {
     "selector": "tr:nth-last-child(n+2)",
     "matches": [
-        {
-            "text": "<tr class=\"tr1\">"
-        },
-        {
-            "text": "<tr class=\"tr2\">"
-        },
-        {
-            "text": "<tr class=\"tr3\">"
-        },
-        {
-            "text": "<tr class=\"tr4\">"
-        }
+        "<tr class=\"tr1\">",
+        "<tr class=\"tr2\">",
+        "<tr class=\"tr3\">",
+        "<tr class=\"tr4\">"
     ],
     "errors": []
 }

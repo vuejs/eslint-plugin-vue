@@ -1,15 +1,9 @@
 {
     "selector": "a[href*=\"example\"]",
     "matches": [
-        {
-            "text": "<a href=\"http://example.com\">"
-        },
-        {
-            "text": "<a href=\"http://example.org\">"
-        },
-        {
-            "text": "<a href=\"https://example.org\">"
-        }
+        "<a href=\"http://example.com\">",
+        "<a href=\"http://example.org\">",
+        "<a href=\"https://example.org\">"
     ],
     "errors": []
 }

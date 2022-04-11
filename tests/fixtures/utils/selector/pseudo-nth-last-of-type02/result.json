@@ -1,9 +1,7 @@
 {
     "selector": ":nth-last-of-type(2)",
     "matches": [
-        {
-            "text": "<span class=\"e\">"
-        }
+        "<span class=\"e\">"
     ],
     "errors": []
 }

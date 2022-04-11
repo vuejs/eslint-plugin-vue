@@ -1,9 +1,7 @@
 {
     "selector": "tr:nth-last-child(2)",
     "matches": [
-        {
-            "text": "<tr class=\"tr4\">"
-        }
+        "<tr class=\"tr4\">"
     ],
     "errors": []
 }

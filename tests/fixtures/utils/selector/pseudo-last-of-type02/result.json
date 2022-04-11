@@ -1,12 +1,8 @@
 {
     "selector": ".root > :last-of-type",
     "matches": [
-        {
-            "text": "<h2 class=\"a\">"
-        },
-        {
-            "text": "<p class=\"c\">"
-        }
+        "<h2 class=\"a\">",
+        "<p class=\"c\">"
     ],
     "errors": []
 }

@@ -1,12 +1,8 @@
 {
     "selector": ".foo+.bar",
     "matches": [
-        {
-            "text": "<div class=\"bar 3\">"
-        },
-        {
-            "text": "<div class=\"bar 4\">"
-        }
+        "<div class=\"bar 3\">",
+        "<div class=\"bar 4\">"
     ],
     "errors": []
 }

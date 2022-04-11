@@ -1,9 +1,7 @@
 {
     "selector": "#foo",
     "matches": [
-        {
-            "text": "<div id=\"foo\">"
-        }
+        "<div id=\"foo\">"
     ],
     "errors": []
 }

@@ -1,15 +1,9 @@
 {
     "selector": ":nth-of-type(2n)",
     "matches": [
-        {
-            "text": "<p class=\"fancy d\">"
-        },
-        {
-            "text": "<div class=\"e\">"
-        },
-        {
-            "text": "<p class=\"g\">"
-        }
+        "<p class=\"fancy d\">",
+        "<div class=\"e\">",
+        "<p class=\"g\">"
     ],
     "errors": []
 }

@@ -1,9 +1,7 @@
 {
     "selector": ".foo /* comment */ > /* comment */ /* comment */ .bar /* comment */",
     "matches": [
-        {
-            "text": "<div class=\"bar b\">"
-        }
+        "<div class=\"bar b\">"
     ],
     "errors": []
 }

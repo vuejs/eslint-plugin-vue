@@ -1,9 +1,7 @@
 {
     "selector": "a[href*=\"insensitive\" i]",
     "matches": [
-        {
-            "text": "<a href=\"#InSensitive\">"
-        }
+        "<a href=\"#InSensitive\">"
     ],
     "errors": []
 }

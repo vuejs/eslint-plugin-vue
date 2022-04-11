@@ -1,15 +1,9 @@
 {
     "selector": "div:has(>.foo .foo)",
     "matches": [
-        {
-            "text": "<div class=\"foo\" id=\"root-1\">"
-        },
-        {
-            "text": "<div class=\"foo nest-1\">"
-        },
-        {
-            "text": "<div class=\"foo\" id=\"root-3\">"
-        }
+        "<div class=\"foo\" id=\"root-1\">",
+        "<div class=\"foo nest-1\">",
+        "<div class=\"foo\" id=\"root-3\">"
     ],
     "errors": []
 }

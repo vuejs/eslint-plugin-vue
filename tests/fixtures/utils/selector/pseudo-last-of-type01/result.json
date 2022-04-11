@@ -1,9 +1,7 @@
 {
     "selector": "p:last-of-type",
     "matches": [
-        {
-            "text": "<p class=\"c\">"
-        }
+        "<p class=\"c\">"
     ],
     "errors": []
 }

@@ -1,15 +1,9 @@
 {
     "selector": "div",
     "matches": [
-        {
-            "text": "<div id=\"1\">"
-        },
-        {
-            "text": "<div id=\"2\">"
-        },
-        {
-            "text": "<div class=\"block\">"
-        }
+        "<div id=\"1\">",
+        "<div id=\"2\">",
+        "<div class=\"block\">"
     ],
     "errors": []
 }
