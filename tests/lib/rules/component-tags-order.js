@@ -50,6 +50,8 @@ tester.run('component-tags-order', rule, {
     '<template></template><script></script><docs></docs><style></style>',
     '<script></script><template></template>',
     '<template></template><script></script>',
+    '<script setup></script><script></script>',
+    '<docs></docs><template></template><script></script><script setup></script><style></style>',
     `
       <template>
       </template>
@@ -103,9 +105,88 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
     },
     {
+      code: '<script setup></script><script></script><template></template><style></style>',
+      output: null,
+      options: [{ order: ['script[setup]', 'script:not([setup])', 'template', 'style'] }]
+    },
+    {
+      code: '<template></template><script setup></script><script></script><style></style>',
+      output: null,
+      options: [{ order: [['script[setup]', 'script:not([setup])', 'template'], 'style'] }]
+    },
+    {
+      code: '<script></script><script setup></script><template></template><style></style>',
+      output: null,
+      options: [{ order: ['script', 'template', 'style'] }]
+    },
+    {
+      code: '<template></template><script></script><script setup></script><style></style>',
+      output: null,
+      options: [{ order: [['script, 'template'], 'style'] }]
+    },
+    {
+      code: '<script></script><script setup></script><template></template><style></style>',
+      output: null,
+      options: [
+        { order: ['script:not([setup])', 'script[setup]', 'template', 'style'] }
+      ]
+    },
+    {
+      code: '<template></template><script></script><script setup></script><style></style>',
+      output: null,
+      options: [
+        {
+          order: [['script:not([setup])', 'script[setup]', 'template'], 'style']
+        }
+      ]
+    },
+    {
+      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n lang="ja"></i18n><i18n lang="en"></i18n>',
+      output: null,
+      options: [
+        {
+          order: [
+            ['script:not([setup])', 'script[setup]', 'template'],
+            'style[scoped]',
+            'style:not([scoped])',
+            'i18n:not([lang=en])',
+            'i18n:not([lang=ja])'
+          ]
+        }
+      ]
+    },
+    ,
+    {
+      code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n lang="en"></i18n><i18n lang="ja"></i18n>',
+      output: null,
+      options: [
+        {
+          order: [
+            'template',
+            'script:not([setup])',
+            'script[setup]',
+            'style[scoped]',
+            'style:not([scoped])',
+            'i18n[lang=en]',
+            'i18n[lang=ja]'
+          ]
+        }
+      ]
+    },
+    {
       code: '<template></template><docs></docs><script></script><style></style>',
       output: null,
       options: [{ order: [['docs', 'script', 'template'], 'style'] }]
+    },
+    {
+      code: '<i18n locale="en"></i18n><i18n locale="ja"></i18n>',
+      output: null,
+      options: [{ order: ['i18n[locale=en]', 'i18n[locale=ja]'] }]
+    },
+    {
+      code: '<style></style><style scoped></style>',
+      output: null,
+      options: [{ order: ['style:not([scoped])', 'style[scoped]'] }]
     },
 
     `<script></script><style></style>`,
@@ -119,12 +200,12 @@ tester.run('component-tags-order', rule, {
       code: '<style></style><template></template><script></script>',
       errors: [
         {
-          message: 'The <template> should be above the <style> on line 1.',
+          message: '<template> should be above <style> on line 1.',
           line: 1,
           column: 16
         },
         {
-          message: 'The <script> should be above the <style> on line 1.',
+          message: '<script> should be above <style> on line 1.',
           line: 1,
           column: 37
         }
@@ -136,7 +217,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
-          message: 'The <script> should be above the <template> on line 1.',
+          message: '<script> should be above <template> on line 1.',
           line: 1,
           column: 22
         }
@@ -152,7 +233,7 @@ tester.run('component-tags-order', rule, {
         <script></script>`,
       errors: [
         {
-          message: 'The <script> should be above the <style> on line 4.',
+          message: '<script> should be above <style> on line 4.',
           line: 6
         }
       ],
@@ -173,7 +254,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
-          message: 'The <script> should be above the <template> on line 2.',
+          message: '<script> should be above <template> on line 2.',
           line: 3
         }
       ],
@@ -193,7 +274,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['template', 'script', 'style'] }],
       errors: [
         {
-          message: 'The <template> should be above the <script> on line 2.',
+          message: '<template> should be above <script> on line 2.',
           line: 3
         }
       ],
@@ -214,7 +295,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['docs', 'template', 'script', 'style'] }],
       errors: [
         {
-          message: 'The <docs> should be above the <template> on line 2.',
+          message: '<docs> should be above <template> on line 2.',
           line: 3
         }
       ],
@@ -236,7 +317,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
-          message: 'The <script> should be above the <template> on line 2.',
+          message: '<script> should be above <template> on line 2.',
           line: 4
         }
       ],
@@ -259,7 +340,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
-          message: 'The <script> should be above the <template> on line 2.',
+          message: '<script> should be above <template> on line 2.',
           line: 5
         }
       ],
@@ -280,7 +361,7 @@ tester.run('component-tags-order', rule, {
       options: [{ order: ['template', 'script'] }],
       errors: [
         {
-          message: 'The <template> should be above the <script> on line 2.',
+          message: '<template> should be above <script> on line 2.',
           line: 3
         }
       ],
@@ -295,11 +376,11 @@ tester.run('component-tags-order', rule, {
       `,
       errors: [
         {
-          message: 'The <template> should be above the <style> on line 2.',
+          message: '<template> should be above <style> on line 2.',
           line: 3
         },
         {
-          message: 'The <script> should be above the <style> on line 2.',
+          message: '<script> should be above <style> on line 2.',
           line: 4
         }
       ],
@@ -319,11 +400,11 @@ tester.run('component-tags-order', rule, {
       `,
       errors: [
         {
-          message: 'The <template> should be above the <style> on line 2.',
+          message: '<template> should be above <style> on line 2.',
           line: 4
         },
         {
-          message: 'The <script> should be above the <style> on line 2.',
+          message: '<script> should be above <style> on line 2.',
           line: 5
         }
       ],
@@ -343,11 +424,56 @@ tester.run('component-tags-order', rule, {
       `,
       errors: [
         {
-          message: 'The <script> should be above the <style> on line 2.',
+          message: '<script> should be above <style> on line 2.',
           line: 3
         }
       ],
       output: '\n        <script></script>\n        <style></style>\n      '
+    },
+    {
+      code: '<i18n locale="ja"></i18n><i18n locale="en"></i18n>',
+      output: '<i18n locale="en"></i18n><i18n locale="ja"></i18n>',
+      options: [{ order: ['i18n[locale=en]', 'i18n[locale=ja]'] }],
+      errors: [
+        {
+          message:
+            '<i18n locale=en> should be above <i18n locale=ja> on line 1.',
+          line: 1
+        }
+      ]
+    },
+    {
+      code: '<style scoped></style><style></style>',
+      output: '<style></style><style scoped></style>',
+      options: [{ order: ['style:not([scoped])', 'style[scoped]'] }],
+      errors: [
+        {
+          message: '<style> should be above <style scoped> on line 1.',
+          line: 1
+        }
+      ]
+    },
+    {
+      code: '<style></style><style scoped></style>',
+      output: '<style scoped></style><style></style>',
+      options: [{ order: ['style[scoped]', 'style:not([scoped])'] }],
+      errors: [
+        {
+          message: '<style scoped> should be above <style> on line 1.',
+          line: 1
+        }
+      ]
+    },
+    {
+      code: '<style></style><script></script>',
+      output: '<script></script><style></style>',
+      options: [{ order: ['script:not([scoped])', 'style:not([scoped])'] }],
+      errors: [
+        {
+          message: '<script> should be above <style> on line 1.',
+          line: 1
+        }
+      ]
     }
   ]
 })
