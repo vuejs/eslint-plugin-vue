@@ -37,10 +37,7 @@ function extractElements(code, inputSelector) {
     return utils.defineDocumentVisitor(context, {
       VElement(node) {
         if (parsed.test(node)) {
-          result.push({
-            text: context.getSourceCode().text.slice(...node.startTag.range),
-            elementText: parsed.elementText
-          })
+          result.push(context.getSourceCode().text.slice(...node.startTag.range))
         }
       }
     })
