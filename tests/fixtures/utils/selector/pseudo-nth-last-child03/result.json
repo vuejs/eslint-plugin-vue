@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<tr class=\"tr4\">",
-        "selector": "tr:nth-last-child(2)"
-    }
-]
+{
+    "selector": "tr:nth-last-child(2)",
+    "matches": [
+        {
+            "text": "<tr class=\"tr4\">"
+        }
+    ],
+    "errors": []
+}

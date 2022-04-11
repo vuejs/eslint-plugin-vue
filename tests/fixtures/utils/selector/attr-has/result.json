@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<div foo=\"foo\">",
-        "selector": "[foo]"
-    },
-    {
-        "text": "<p foo>",
-        "selector": "[foo]"
-    }
-]
+{
+    "selector": "[foo]",
+    "matches": [
+        {
+            "text": "<div foo=\"foo\">"
+        },
+        {
+            "text": "<p foo>"
+        }
+    ],
+    "errors": []
+}

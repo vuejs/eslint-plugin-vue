@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<p class=\"c\">",
-        "selector": "p:last-of-type"
-    }
-]
+{
+    "selector": "p:last-of-type",
+    "matches": [
+        {
+            "text": "<p class=\"c\">"
+        }
+    ],
+    "errors": []
+}

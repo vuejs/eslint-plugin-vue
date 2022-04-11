@@ -1,5 +1,7 @@
-[
-    {
-        "error": "Unknown selector: \".bar\"."
-    }
-]
+{
+    "selector": ".foo > \".bar\"",
+    "matches": [],
+    "errors": [
+        "Unknown selector: \".bar\"."
+    ]
+}

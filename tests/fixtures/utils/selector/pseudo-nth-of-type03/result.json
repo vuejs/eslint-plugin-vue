@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<p class=\"fancy f\">",
-        "selector": "p.fancy:nth-of-type(2n+1)"
-    }
-]
+{
+    "selector": "p.fancy:nth-of-type(2n+1)",
+    "matches": [
+        {
+            "text": "<p class=\"fancy f\">"
+        }
+    ],
+    "errors": []
+}

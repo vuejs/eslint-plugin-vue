@@ -1,5 +1,7 @@
-[
-    {
-        "error": "Unknown combinator: /unknown/."
-    }
-]
+{
+    "selector": ".foo /unknown/ .bar",
+    "matches": [],
+    "errors": [
+        "Unknown combinator: /unknown/."
+    ]
+}

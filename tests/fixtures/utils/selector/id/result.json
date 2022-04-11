@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<div id=\"foo\">",
-        "selector": "#foo"
-    }
-]
+{
+    "selector": "#foo",
+    "matches": [
+        {
+            "text": "<div id=\"foo\">"
+        }
+    ],
+    "errors": []
+}

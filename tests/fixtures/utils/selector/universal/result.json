@@ -1,26 +1,24 @@
-[
-    {
-        "text": "<template>",
-        "selector": "*"
-    },
-    {
-        "text": "<div id=\"1\">",
-        "selector": "*"
-    },
-    {
-        "text": "<div id=\"foo\">",
-        "selector": "*"
-    },
-    {
-        "text": "<p id=\"3\">",
-        "selector": "*"
-    },
-    {
-        "text": "<input id=\"4\">",
-        "selector": "*"
-    },
-    {
-        "text": "<div class=\"block\">",
-        "selector": "*"
-    }
-]
+{
+    "selector": "*",
+    "matches": [
+        {
+            "text": "<template>"
+        },
+        {
+            "text": "<div id=\"1\">"
+        },
+        {
+            "text": "<div id=\"foo\">"
+        },
+        {
+            "text": "<p id=\"3\">"
+        },
+        {
+            "text": "<input id=\"4\">"
+        },
+        {
+            "text": "<div class=\"block\">"
+        }
+    ],
+    "errors": []
+}

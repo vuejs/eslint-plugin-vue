@@ -1,26 +1,24 @@
-[
-    {
-        "text": "<p class=\"b\">",
-        "selector": ":is(header, main, footer) p"
-    },
-    {
-        "text": "<p class=\"f\">",
-        "selector": ":is(header, main, footer) p"
-    },
-    {
-        "text": "<p class=\"g\">",
-        "selector": ":is(header, main, footer) p"
-    },
-    {
-        "text": "<p class=\"i\">",
-        "selector": ":is(header, main, footer) p"
-    },
-    {
-        "text": "<p class=\"j\">",
-        "selector": ":is(header, main, footer) p"
-    },
-    {
-        "text": "<p class=\"l\">",
-        "selector": ":is(header, main, footer) p"
-    }
-]
+{
+    "selector": ":is(header, main, footer) p",
+    "matches": [
+        {
+            "text": "<p class=\"b\">"
+        },
+        {
+            "text": "<p class=\"f\">"
+        },
+        {
+            "text": "<p class=\"g\">"
+        },
+        {
+            "text": "<p class=\"i\">"
+        },
+        {
+            "text": "<p class=\"j\">"
+        },
+        {
+            "text": "<p class=\"l\">"
+        }
+    ],
+    "errors": []
+}

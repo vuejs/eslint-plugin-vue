@@ -1,22 +1,21 @@
-[
-    {
-        "text": "<span class=\"x1\">",
-        "selector": "span:nth-child(2n+1)"
-    },
-    {
-        "text": "<span class=\"x3\">",
-        "selector": "span:nth-child(2n+1)"
-    },
-    {
-        "text": "<span class=\"x5\">",
-        "selector": "span:nth-child(2n+1)"
-    },
-    {
-        "text": "<span class=\"x7\">",
-        "selector": "span:nth-child(2n+1)"
-    },
-    {
-        "text": "<span class=\"x9\">",
-        "selector": "span:nth-child(2n+1)"
-    }
-]
+{
+    "selector": "span:nth-child(2n+1)",
+    "matches": [
+        {
+            "text": "<span class=\"x1\">"
+        },
+        {
+            "text": "<span class=\"x3\">"
+        },
+        {
+            "text": "<span class=\"x5\">"
+        },
+        {
+            "text": "<span class=\"x7\">"
+        },
+        {
+            "text": "<span class=\"x9\">"
+        }
+    ],
+    "errors": []
+}

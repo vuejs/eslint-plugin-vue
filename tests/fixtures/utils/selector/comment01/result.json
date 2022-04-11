@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<div class=\"bar\">",
-        "selector": ".foo /* comment */ :is(.bar /* comment */)"
-    }
-]
+{
+    "selector": ".foo /* comment */ :is(.bar /* comment */)",
+    "matches": [
+        {
+            "text": "<div class=\"bar\">"
+        }
+    ],
+    "errors": []
+}

@@ -1,5 +1,7 @@
-[
-    {
-        "error": "Unsupported nesting selector."
-    }
-]
+{
+    "selector": "& .foo > .bar",
+    "matches": [],
+    "errors": [
+        "Unsupported nesting selector."
+    ]
+}

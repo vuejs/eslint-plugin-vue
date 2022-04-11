@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<a href=\"#internal\">",
-        "selector": "a[href^=\"#\"]"
-    },
-    {
-        "text": "<a href=\"#InSensitive\">",
-        "selector": "a[href^=\"#\"]"
-    }
-]
+{
+    "selector": "a[href^=\"#\"]",
+    "matches": [
+        {
+            "text": "<a href=\"#internal\">"
+        },
+        {
+            "text": "<a href=\"#InSensitive\">"
+        }
+    ],
+    "errors": []
+}

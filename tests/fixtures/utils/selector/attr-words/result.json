@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<div lang=\"en-us en-gb en-au en-nz\">",
-        "selector": "div[lang~=\"en-us\"]"
-    },
-    {
-        "text": "<div lang=\"en-us\">",
-        "selector": "div[lang~=\"en-us\"]"
-    }
-]
+{
+    "selector": "div[lang~=\"en-us\"]",
+    "matches": [
+        {
+            "text": "<div lang=\"en-us en-gb en-au en-nz\">"
+        },
+        {
+            "text": "<div lang=\"en-us\">"
+        }
+    ],
+    "errors": []
+}

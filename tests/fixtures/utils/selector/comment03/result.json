@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<div class=\"bar b\">",
-        "selector": ".foo /* comment */ /* comment */ > /* comment */ .bar /* comment */"
-    }
-]
+{
+    "selector": ".foo /* comment */ /* comment */ > /* comment */ .bar /* comment */",
+    "matches": [
+        {
+            "text": "<div class=\"bar b\">"
+        }
+    ],
+    "errors": []
+}

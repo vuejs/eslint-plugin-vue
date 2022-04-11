@@ -1,14 +1,15 @@
-[
-    {
-        "text": "<div id=\"1\">",
-        "selector": "div"
-    },
-    {
-        "text": "<div id=\"2\">",
-        "selector": "div"
-    },
-    {
-        "text": "<div class=\"block\">",
-        "selector": "div"
-    }
-]
+{
+    "selector": "div",
+    "matches": [
+        {
+            "text": "<div id=\"1\">"
+        },
+        {
+            "text": "<div id=\"2\">"
+        },
+        {
+            "text": "<div class=\"block\">"
+        }
+    ],
+    "errors": []
+}

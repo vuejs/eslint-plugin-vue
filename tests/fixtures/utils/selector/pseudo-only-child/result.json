@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<li class=\"d\">",
-        "selector": "li:only-child"
-    }
-]
+{
+    "selector": "li:only-child",
+    "matches": [
+        {
+            "text": "<li class=\"d\">"
+        }
+    ],
+    "errors": []
+}

@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<p class=\"b\">",
-        "selector": "main :only-of-type"
-    },
-    {
-        "text": "<i class=\"e\">",
-        "selector": "main :only-of-type"
-    }
-]
+{
+    "selector": "main :only-of-type",
+    "matches": [
+        {
+            "text": "<p class=\"b\">"
+        },
+        {
+            "text": "<i class=\"e\">"
+        }
+    ],
+    "errors": []
+}

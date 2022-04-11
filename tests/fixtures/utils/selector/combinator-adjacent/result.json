@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<div class=\"bar 3\">",
-        "selector": ".foo+.bar"
-    },
-    {
-        "text": "<div class=\"bar 4\">",
-        "selector": ".foo+.bar"
-    }
-]
+{
+    "selector": ".foo+.bar",
+    "matches": [
+        {
+            "text": "<div class=\"bar 3\">"
+        },
+        {
+            "text": "<div class=\"bar 4\">"
+        }
+    ],
+    "errors": []
+}

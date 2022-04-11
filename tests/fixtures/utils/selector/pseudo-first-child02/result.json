@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<li class=\"b\">",
-        "selector": "ul li:first-child"
-    },
-    {
-        "text": "<li class=\"f\">",
-        "selector": "ul li:first-child"
-    }
-]
+{
+    "selector": "ul li:first-child",
+    "matches": [
+        {
+            "text": "<li class=\"b\">"
+        },
+        {
+            "text": "<li class=\"f\">"
+        }
+    ],
+    "errors": []
+}

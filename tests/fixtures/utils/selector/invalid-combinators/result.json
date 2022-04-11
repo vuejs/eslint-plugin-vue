@@ -1,5 +1,7 @@
-[
-    {
-        "error": "Unexpected combinator '>'."
-    }
-]
+{
+    "selector": ".foo > > .bar",
+    "matches": [],
+    "errors": [
+        "Unexpected combinator '>'."
+    ]
+}

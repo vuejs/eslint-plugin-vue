@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<li class=\"d\">",
-        "selector": "ul li:last-child"
-    },
-    {
-        "text": "<li class=\"h\">",
-        "selector": "ul li:last-child"
-    }
-]
+{
+    "selector": "ul li:last-child",
+    "matches": [
+        {
+            "text": "<li class=\"d\">"
+        },
+        {
+            "text": "<li class=\"h\">"
+        }
+    ],
+    "errors": []
+}

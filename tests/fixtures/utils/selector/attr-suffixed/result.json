@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<a href=\"http://example.org\">",
-        "selector": "a[href$=\".org\"]"
-    },
-    {
-        "text": "<a href=\"https://example.org\">",
-        "selector": "a[href$=\".org\"]"
-    }
-]
+{
+    "selector": "a[href$=\".org\"]",
+    "matches": [
+        {
+            "text": "<a href=\"http://example.org\">"
+        },
+        {
+            "text": "<a href=\"https://example.org\">"
+        }
+    ],
+    "errors": []
+}

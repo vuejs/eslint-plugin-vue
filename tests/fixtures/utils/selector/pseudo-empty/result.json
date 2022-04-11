@@ -1,10 +1,12 @@
-[
-    {
-        "text": "<div class=\"box a\">",
-        "selector": ".box:empty"
-    },
-    {
-        "text": "<div class=\"box c\">",
-        "selector": ".box:empty"
-    }
-]
+{
+    "selector": ".box:empty",
+    "matches": [
+        {
+            "text": "<div class=\"box a\">"
+        },
+        {
+            "text": "<div class=\"box c\">"
+        }
+    ],
+    "errors": []
+}

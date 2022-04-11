@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<p id=\"3\">",
-        "selector": "p"
-    }
-]
+{
+    "selector": "p",
+    "matches": [
+        {
+            "text": "<p id=\"3\">"
+        }
+    ],
+    "errors": []
+}

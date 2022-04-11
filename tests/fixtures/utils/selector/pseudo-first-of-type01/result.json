@@ -1,6 +1,9 @@
-[
-    {
-        "text": "<p class=\"b\">",
-        "selector": "p:first-of-type"
-    }
-]
+{
+    "selector": "p:first-of-type",
+    "matches": [
+        {
+            "text": "<p class=\"b\">"
+        }
+    ],
+    "errors": []
+}

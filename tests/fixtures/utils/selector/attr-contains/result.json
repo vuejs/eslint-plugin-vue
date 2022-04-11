@@ -1,14 +1,15 @@
-[
-    {
-        "text": "<a href=\"http://example.com\">",
-        "selector": "a[href*=\"example\"]"
-    },
-    {
-        "text": "<a href=\"http://example.org\">",
-        "selector": "a[href*=\"example\"]"
-    },
-    {
-        "text": "<a href=\"https://example.org\">",
-        "selector": "a[href*=\"example\"]"
-    }
-]
+{
+    "selector": "a[href*=\"example\"]",
+    "matches": [
+        {
+            "text": "<a href=\"http://example.com\">"
+        },
+        {
+            "text": "<a href=\"http://example.org\">"
+        },
+        {
+            "text": "<a href=\"https://example.org\">"
+        }
+    ],
+    "errors": []
+}

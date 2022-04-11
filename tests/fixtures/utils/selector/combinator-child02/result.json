@@ -1,18 +1,18 @@
-[
-    {
-        "text": "<div class=\"c a-a-b-c\">",
-        "selector": ".a > .b > .c"
-    },
-    {
-        "text": "<div class=\"c a-b-c\">",
-        "selector": ".a > .b > .c"
-    },
-    {
-        "text": "<div class=\"c b-a-b-c\">",
-        "selector": ".a > .b > .c"
-    },
-    {
-        "text": "<div class=\"c c-a-b-c\">",
-        "selector": ".a > .b > .c"
-    }
-]
+{
+    "selector": ".a > .b > .c",
+    "matches": [
+        {
+            "text": "<div class=\"c a-a-b-c\">"
+        },
+        {
+            "text": "<div class=\"c a-b-c\">"
+        },
+        {
+            "text": "<div class=\"c b-a-b-c\">"
+        },
+        {
+            "text": "<div class=\"c c-a-b-c\">"
+        }
+    ],
+    "errors": []
+}

@@ -1,14 +1,15 @@
-[
-    {
-        "text": "<tr class=\"tr3\">",
-        "selector": "tr:nth-last-child(-n+3)"
-    },
-    {
-        "text": "<tr class=\"tr4\">",
-        "selector": "tr:nth-last-child(-n+3)"
-    },
-    {
-        "text": "<tr class=\"tr5\">",
-        "selector": "tr:nth-last-child(-n+3)"
-    }
-]
+{
+    "selector": "tr:nth-last-child(-n+3)",
+    "matches": [
+        {
+            "text": "<tr class=\"tr3\">"
+        },
+        {
+            "text": "<tr class=\"tr4\">"
+        },
+        {
+            "text": "<tr class=\"tr5\">"
+        }
+    ],
+    "errors": []
+}

@@ -1,14 +1,15 @@
-[
-    {
-        "text": "<template>",
-        "selector": ":not(.foo)"
-    },
-    {
-        "text": "<div class=\"f\">",
-        "selector": ":not(.foo)"
-    },
-    {
-        "text": "<p class=\"bar\">",
-        "selector": ":not(.foo)"
-    }
-]
+{
+    "selector": ":not(.foo)",
+    "matches": [
+        {
+            "text": "<template>"
+        },
+        {
+            "text": "<div class=\"f\">"
+        },
+        {
+            "text": "<p class=\"bar\">"
+        }
+    ],
+    "errors": []
+}
