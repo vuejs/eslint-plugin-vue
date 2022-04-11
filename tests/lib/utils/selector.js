@@ -39,7 +39,6 @@ function extractElements(code, inputSelector) {
         if (parsed.test(node)) {
           result.push({
             text: context.getSourceCode().text.slice(...node.startTag.range),
-            selector: inputSelector,
             elementText: parsed.elementText
           })
         }
@@ -58,7 +57,11 @@ function extractElements(code, inputSelector) {
     true
   )
 
-  return result.concat(messages.map((message) => ({ error: message.message })))
+  return {
+    selector: inputSelector,
+    matches: result,
+    errors: messages.map((message) => message.message)
+  }
 }
 
 describe('parseSelector()', () => {
