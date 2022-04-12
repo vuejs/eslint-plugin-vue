@@ -1,0 +1,8 @@
+{
+    "selector": "div[lang~=\"en-us\"]",
+    "matches": [
+        "<div lang=\"en-us en-gb en-au en-nz\">",
+        "<div lang=\"en-us\">"
+    ],
+    "errors": []
+}

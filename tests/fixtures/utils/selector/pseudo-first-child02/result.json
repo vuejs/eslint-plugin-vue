@@ -1,0 +1,8 @@
+{
+    "selector": "ul li:first-child",
+    "matches": [
+        "<li class=\"b\">",
+        "<li class=\"f\">"
+    ],
+    "errors": []
+}

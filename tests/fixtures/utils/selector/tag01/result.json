@@ -1,0 +1,9 @@
+{
+    "selector": "div",
+    "matches": [
+        "<div id=\"1\">",
+        "<div id=\"2\">",
+        "<div class=\"block\">"
+    ],
+    "errors": []
+}

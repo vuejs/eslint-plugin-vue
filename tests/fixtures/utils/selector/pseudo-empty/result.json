@@ -1,0 +1,8 @@
+{
+    "selector": ".box:empty",
+    "matches": [
+        "<div class=\"box a\">",
+        "<div class=\"box c\">"
+    ],
+    "errors": []
+}

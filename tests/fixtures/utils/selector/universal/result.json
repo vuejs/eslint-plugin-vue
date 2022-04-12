@@ -1,0 +1,12 @@
+{
+    "selector": "*",
+    "matches": [
+        "<template>",
+        "<div id=\"1\">",
+        "<div id=\"foo\">",
+        "<p id=\"3\">",
+        "<input id=\"4\">",
+        "<div class=\"block\">"
+    ],
+    "errors": []
+}

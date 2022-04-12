@@ -1,0 +1,7 @@
+{
+    "selector": ".foo:nth-child(even)",
+    "matches": [
+        "<div class=\"foo b\">"
+    ],
+    "errors": []
+}

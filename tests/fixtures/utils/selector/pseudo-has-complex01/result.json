@@ -1,0 +1,8 @@
+{
+    "selector": "div:has(>.foo > .foo)",
+    "matches": [
+        "<div class=\"foo\" id=\"root-1\">",
+        "<div class=\"foo nest-1\">"
+    ],
+    "errors": []
+}

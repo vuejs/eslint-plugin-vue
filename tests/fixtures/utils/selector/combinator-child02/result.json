@@ -1,0 +1,10 @@
+{
+    "selector": ".a > .b > .c",
+    "matches": [
+        "<div class=\"c a-a-b-c\">",
+        "<div class=\"c a-b-c\">",
+        "<div class=\"c b-a-b-c\">",
+        "<div class=\"c c-a-b-c\">"
+    ],
+    "errors": []
+}

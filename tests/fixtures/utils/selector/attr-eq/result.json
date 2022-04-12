@@ -1,0 +1,8 @@
+{
+    "selector": "[foo=foo]",
+    "matches": [
+        "<div foo=\"foo\">",
+        "<input foo=\"foo\">"
+    ],
+    "errors": []
+}

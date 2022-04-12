@@ -1,0 +1,7 @@
+{
+    "selector": ".foo /* comment */ /* comment */ > /* comment */ .bar /* comment */",
+    "matches": [
+        "<div class=\"bar b\">"
+    ],
+    "errors": []
+}

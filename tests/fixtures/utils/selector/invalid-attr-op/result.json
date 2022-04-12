@@ -1,0 +1,7 @@
+{
+    "selector": "a[href==\"example\"]",
+    "matches": [],
+    "errors": [
+        "Unsupported operator: ==."
+    ]
+}

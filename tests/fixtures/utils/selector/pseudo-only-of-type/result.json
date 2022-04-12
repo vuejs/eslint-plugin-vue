@@ -1,0 +1,8 @@
+{
+    "selector": "main :only-of-type",
+    "matches": [
+        "<p class=\"b\">",
+        "<i class=\"e\">"
+    ],
+    "errors": []
+}

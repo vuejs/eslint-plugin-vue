@@ -1,0 +1,10 @@
+{
+    "selector": "tr:nth-last-child(n+2)",
+    "matches": [
+        "<tr class=\"tr1\">",
+        "<tr class=\"tr2\">",
+        "<tr class=\"tr3\">",
+        "<tr class=\"tr4\">"
+    ],
+    "errors": []
+}

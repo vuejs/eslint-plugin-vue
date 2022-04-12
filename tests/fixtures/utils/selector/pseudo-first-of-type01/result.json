@@ -1,0 +1,7 @@
+{
+    "selector": "p:first-of-type",
+    "matches": [
+        "<p class=\"b\">"
+    ],
+    "errors": []
+}

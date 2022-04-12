@@ -1,0 +1,11 @@
+{
+    "selector": "span:nth-child(2n+1)",
+    "matches": [
+        "<span class=\"x1\">",
+        "<span class=\"x3\">",
+        "<span class=\"x5\">",
+        "<span class=\"x7\">",
+        "<span class=\"x9\">"
+    ],
+    "errors": []
+}

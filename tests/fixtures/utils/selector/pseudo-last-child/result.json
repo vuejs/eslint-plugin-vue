@@ -1,0 +1,8 @@
+{
+    "selector": "ul li:last-child",
+    "matches": [
+        "<li class=\"d\">",
+        "<li class=\"h\">"
+    ],
+    "errors": []
+}

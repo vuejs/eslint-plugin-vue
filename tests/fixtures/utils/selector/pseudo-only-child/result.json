@@ -1,0 +1,7 @@
+{
+    "selector": "li:only-child",
+    "matches": [
+        "<li class=\"d\">"
+    ],
+    "errors": []
+}

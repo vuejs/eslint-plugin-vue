@@ -1,0 +1,7 @@
+{
+    "selector": ".foo > \".bar\"",
+    "matches": [],
+    "errors": [
+        "Unknown selector: \".bar\"."
+    ]
+}

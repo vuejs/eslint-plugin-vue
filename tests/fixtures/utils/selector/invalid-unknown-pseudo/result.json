@@ -1,0 +1,7 @@
+{
+    "selector": ".foo :unknown(.bar)",
+    "matches": [],
+    "errors": [
+        "Unsupported pseudo selector: :unknown."
+    ]
+}

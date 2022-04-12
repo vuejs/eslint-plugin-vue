@@ -1,0 +1,7 @@
+{
+    "selector": ":nth-child()",
+    "matches": [],
+    "errors": [
+        "Cannot parse An+B micro syntax (:nth-xxx() argument): ''."
+    ]
+}

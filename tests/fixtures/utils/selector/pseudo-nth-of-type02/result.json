@@ -1,0 +1,8 @@
+{
+    "selector": "p:nth-of-type(2n)",
+    "matches": [
+        "<p class=\"fancy d\">",
+        "<p class=\"g\">"
+    ],
+    "errors": []
+}

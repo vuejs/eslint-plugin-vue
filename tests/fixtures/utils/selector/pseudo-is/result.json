@@ -1,0 +1,12 @@
+{
+    "selector": ":where(header, main, footer) p",
+    "matches": [
+        "<p class=\"b\">",
+        "<p class=\"f\">",
+        "<p class=\"g\">",
+        "<p class=\"i\">",
+        "<p class=\"j\">",
+        "<p class=\"l\">"
+    ],
+    "errors": []
+}

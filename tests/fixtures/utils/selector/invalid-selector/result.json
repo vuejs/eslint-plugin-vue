@@ -1,0 +1,7 @@
+{
+    "selector": ":not(",
+    "matches": [],
+    "errors": [
+        "Cannot parse selector: :not(."
+    ]
+}

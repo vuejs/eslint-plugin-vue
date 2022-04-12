@@ -1,0 +1,7 @@
+{
+    "selector": ".foo >",
+    "matches": [],
+    "errors": [
+        "Expected selector after '>'."
+    ]
+}
