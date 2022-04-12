@@ -202,6 +202,17 @@ tester.run('multi-word-component-names', rule, {
           },
       }).$mount('#app')
       `
+    },
+    {
+      filename: 'MultiWord.vue',
+      code: `
+      <template>
+        <AppButton />
+      </template>
+      
+      <script setup lang="ts">
+      import AppButton from "@/components/AppButton.vue";
+      </script>`
     }
   ],
   invalid: [
@@ -307,6 +318,19 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "Item" should always be multi-word.',
           line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import Item from "@/components/Item.vue";
+      </script>`,
+      errors: [
+        {
+          message: 'Component name "test" should always be multi-word.',
+          line: 1
         }
       ]
     }
