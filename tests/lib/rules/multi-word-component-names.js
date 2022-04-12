@@ -204,7 +204,7 @@ tester.run('multi-word-component-names', rule, {
       `
     },
     {
-      filename: 'test.vue',
+      filename: 'MultiWord.vue',
       code: `
       <template>
         <AppButton />
@@ -329,8 +329,8 @@ tester.run('multi-word-component-names', rule, {
       </script>`,
       errors: [
         {
-          message: 'Component name "Item" should always be multi-word.',
-          line: 3
+          message: 'Component name "test" should always be multi-word.',
+          line: 1
         }
       ]
     }
