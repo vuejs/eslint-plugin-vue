@@ -30,14 +30,14 @@ function loadPatterns() {
 
 function extractElements(code, inputSelector) {
   const linter = new Linter()
-  const result = []
+  const matches = []
 
   linter.defineRule('vue/selector-test', (context) => {
     const parsed = selector.parseSelector(inputSelector, context)
     return utils.defineDocumentVisitor(context, {
       VElement(node) {
         if (parsed.test(node)) {
-          result.push(
+          matches.push(
             context.getSourceCode().text.slice(...node.startTag.range)
           )
         }
@@ -58,7 +58,7 @@ function extractElements(code, inputSelector) {
 
   return {
     selector: inputSelector,
-    matches: result,
+    matches,
     errors: messages.map((message) => message.message)
   }
 }
