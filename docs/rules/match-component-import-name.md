@@ -12,7 +12,7 @@ description: require the registered component name to match the imported compone
 
 ## :book: Rule Details
 
-By default, this rule will validate that the imported name matches the name of the components object property identifer. Note that "matches" means that the imported name matches either the PascalCase or kebab-case version of the components object property identifer. If you would like to enforce that it must match only one of PascalCase or kebab-case, use this rule in conjunction with the rule `component-definition-name-casing`.
+By default, this rule will validate that the imported name matches the name of the components object property identifer. Note that "matches" means that the imported name matches either the PascalCase or kebab-case version of the components object property identifer. If you would like to enforce that it must match only one of PascalCase or kebab-case, use this rule in conjunction with the rule [vue/component-definition-name-casing](./component-definition-name-casing.md).
 
 <eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
 
@@ -23,56 +23,21 @@ export default {
     /* ✓ GOOD */
     AppButton,
     AppButton: AppButton,
-
-    /* ✗ BAD */
-    SomeOtherName: AppButton,
-    'app-button': AppButton
-  }
-}
-</script>
-```
-
-</eslint-code-block>
-
-## :wrench: Options
-
-```json
-{
-  "vue/match-component-import-name": [
-    "error",
-    {
-      "prefix": "prefix-"
-    }
-  ]
-}
-```
-
-- `"prefix": ""` ... required prefix for registered component names. Default is set to an empty string (no prefix).
-
-</eslint-code-block>
-
-### `{ prefix: 'Prefix' }`
-
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error', { prefix: 'Prefix' }]}">
-
-```vue
-<script>
-export default {
-  components: {
-    /* ✓ GOOD */
-    PrefixAppButton: AppButton,
-    'Prefix-app-button': AppButton,
-    
-    /* ✗ BAD */
-    AppButton,
-    SomeOtherName: AppButton,
     'app-button': AppButton,
+
+    /* ✗ BAD */
+    SomeOtherName: AppButton,
+    'some-other-name': AppButton
   }
 }
 </script>
 ```
 
 </eslint-code-block>
+
+## :couple: Related Rules
+
+- [vue/component-definition-name-casing](./component-definition-name-casing.md)
 
 ## :mag: Implementation
 
