@@ -12,6 +12,7 @@ sidebarDepth: 0
   :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
+
 ## Base Rules (Enabling Correct ESLint Parsing)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
@@ -361,6 +362,7 @@ For example:
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  |
+| [vue/require-v-if-else-key](./require-v-if-else-key.md) | require `key` with `v-if/v-else-if/v-else` directives |  |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
