@@ -22,7 +22,7 @@ const ruleTester = new RuleTester({
 // Tests
 // ------------------------------------------------------------------------------
 
-describe('vue-eslint-parser should to properly mark the variables used in the template', () => {
+describe('vue-eslint-parser should properly mark the variables used in the template', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
       {
