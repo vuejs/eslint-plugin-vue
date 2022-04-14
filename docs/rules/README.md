@@ -43,6 +43,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
+| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: |
 | [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: |
 | [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: |
@@ -72,6 +73,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
 | [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: |
+| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
 | [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  |
 | [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  |
@@ -81,6 +83,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: |
+| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  |
@@ -191,6 +194,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  |
+| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: |
 | [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  |
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
@@ -199,6 +203,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
+| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
 | [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
@@ -207,6 +212,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: |
+| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  |
@@ -219,6 +225,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
+| [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  |
 | [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
 | [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  |
@@ -326,12 +333,10 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: |
-| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: |
-| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  |
@@ -349,7 +354,6 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  |
-| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
@@ -366,7 +370,6 @@ For example:
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: |
 | [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: |
-| [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  |
 
 ### Extension Rules
 
