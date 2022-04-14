@@ -18,11 +18,9 @@
  */
 function getPropertyFromObject(property, node) {
   if (node && node.type === 'ObjectExpression') {
-    const properties = node.properties
-
-    for (let i = 0; i < properties.length; i++) {
-      if (properties[i].key.name === property) {
-        return properties[i]
+    for (const prop of node.properties) {
+      if (prop.type === 'Property' && prop.key.name === property) {
+        return prop
       }
     }
   }
