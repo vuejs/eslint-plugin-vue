@@ -13,7 +13,7 @@ Define a style for custom event name casing for consistency purposes.
 
 ## :book: Rule Details
 
-This rule aims to warn the custom event names other than the configured casing.
+This rule aims to warn the custom event names other than the configured casing. (Default is **camelCase**.)
 
 Vue 2 recommends using kebab-case for custom event names.
 
@@ -27,28 +27,28 @@ In Vue 3, using either camelCase or kebab-case for your custom event name does n
 
 See [Guide - Custom Events] for more details.
 
-This rule enforces kebab-case by default.
+This rule enforces camelCase by default.
 
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button @click="$emit('my-event')" />
+  <button @click="$emit('myEvent')" />
 
   <!-- ✗ BAD -->
-  <button @click="$emit('myEvent')" />
+  <button @click="$emit('my-event')" />
 </template>
 <script>
 export default {
   methods: {
     onClick () {
       /* ✓ GOOD */
-      this.$emit('my-event')
+      this.$emit('myEvent')
       this.$emit('update:myProp', myProp)
 
       /* ✗ BAD */
-      this.$emit('myEvent')
+      this.$emit('my-event')
     }
   }
 }
@@ -62,7 +62,7 @@ export default {
 ```json
 {
   "vue/custom-event-name-casing": ["error",
-    "kebab-case" | "camelCase",
+    "camelCase" | "kebab-case",
     {
       "ignores": []
     }
@@ -70,8 +70,8 @@ export default {
 }
 ```
 
-- `"kebab-case"` (default) ... Enforce custom event names to kebab-case.
-- `"camelCase"` ... Enforce custom event names to camelCase.
+- `"camelCase"` (default) ... Enforce custom event names to camelCase.
+- `"kebab-case"` ... Enforce custom event names to kebab-case.
 - `ignores` (`string[]`) ... The event names to ignore. Sets the event name to allow. For example, custom event names, Vue components event with special name, or Vue library component event name. You can set the regexp by writing it like `"/^name/"` or `click:row` or `fooBar`.
 
 ### `"kebab-case"`
@@ -132,18 +132,18 @@ export default {
 
 </eslint-code-block>
 
-### `"ignores": ["fooBar", "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"]`
+### `"ignores": ["foo-bar", "/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u"]`
 
-<eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', { ignores: ['fooBar', '/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }]}">
+<eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', 'camelCase', { ignores: ['foo-bar', '/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <button @click="$emit('click:row')" />
-  <button @click="$emit('fooBar')" />
+  <button @click="$emit('foo-bar')" />
 
   <!-- ✗ BAD -->
-  <button @click="$emit('myEvent')" />
+  <button @click="$emit('my-event')" />
 </template>
 <script>
 export default {
@@ -151,10 +151,10 @@ export default {
     onClick () {
       /* ✓ GOOD */
       this.$emit('click:row')
-      this.$emit('fooBar')
+      this.$emit('foo-bar')
 
       /* ✗ BAD */
-      this.$emit('myEvent')
+      this.$emit('my-event')
     }
   }
 }
