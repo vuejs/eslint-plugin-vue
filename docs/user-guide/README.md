@@ -350,7 +350,7 @@ Previously you had to use the [vue/script-setup-uses-vars](../rules/script-setup
 
 You need to use [vue-eslint-parser] v9.0.0 or later.
 
-Previously you had to use the `vue/setup-compiler-macros` environment, but now you don't.
+Previously you had to use the `vue/setup-compiler-macros` environment, this is no longer needed.
 
 #### Parsing error with Top Level `await`
 
