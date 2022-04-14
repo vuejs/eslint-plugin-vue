@@ -336,11 +336,11 @@ describe('getRegisteredComponents', () => {
   })
 })
 
-describe('getComponentProps', () => {
+describe('getComponentPropsFromOptions', () => {
   const parse = function (code) {
     const data = espree.parse(code, { ecmaVersion: 2020 }).body[0]
       .declarations[0].init
-    return utils.getComponentProps(data)
+    return utils.getComponentPropsFromOptions(data)
   }
 
   it('should return empty array when there is no component props', () => {
