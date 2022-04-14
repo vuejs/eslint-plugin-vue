@@ -344,7 +344,7 @@ See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Lint
 
 You need to use [vue-eslint-parser] v9.0.0 or later.
 
-Previously you had to use the [vue/script-setup-uses-vars](../rules/script-setup-uses-vars.md) rule, but now you don't.
+Previously you had to use the [vue/script-setup-uses-vars](../rules/script-setup-uses-vars.md) rule, this is no longer needed.
 
 #### Compiler macros such as `defineProps` and `defineEmits` generate `no-undef` warnings
 
