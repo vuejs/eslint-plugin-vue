@@ -12,6 +12,7 @@ sidebarDepth: 0
   :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
+
 ## Base Rules (Enabling Correct ESLint Parsing)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
@@ -67,6 +68,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-dupe-v-else-if](./no-dupe-v-else-if.md) | disallow duplicate conditions in `v-if` / `v-else-if` chains |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
 | [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  |
+| [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
@@ -83,7 +85,9 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  |
+| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  |
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  |
+| [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  |
@@ -208,6 +212,7 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  |
 | [vue/no-v-model-argument](./no-v-model-argument.md) | disallow adding an argument to `v-model` used in custom component |  |
+| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  |
@@ -325,7 +330,6 @@ For example:
 | [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
-| [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: |
@@ -350,10 +354,8 @@ For example:
 | [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: |
-| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: |
-| [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: |
