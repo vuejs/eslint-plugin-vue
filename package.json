@@ -48,7 +48,7 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+    "node": "^14.17.0 || >=16.0.0"
   },
   "peerDependencies": {
     "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
@@ -59,7 +59,7 @@
     "nth-check": "^2.0.1",
     "postcss-selector-parser": "^6.0.9",
     "semver": "^7.3.5",
-    "vue-eslint-parser": "^8.0.1"
+    "vue-eslint-parser": "^9.0.0-0"
   },
   "devDependencies": {
     "@types/eslint": "^7.28.1",
