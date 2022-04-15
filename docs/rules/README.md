@@ -200,12 +200,15 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  |
 | [vue/no-dupe-v-else-if](./no-dupe-v-else-if.md) | disallow duplicate conditions in `v-if` / `v-else-if` chains |  |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  |
+| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  |
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  |
+| [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: |
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  |
 | [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  |
+| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: |
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  |
@@ -224,7 +227,10 @@ Enforce all the rules in this category, as well as all higher priority rules, wi
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  |
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  |
+| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  |
+| [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  |
+| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  |
 | [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  |
 | [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  |
