@@ -12,6 +12,7 @@ sidebarDepth: 0
   :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
+
 ## Base Rules (Enabling Correct ESLint Parsing)
 
 Enforce all the rules in this category, as well as all higher priority rules, with:
@@ -326,6 +327,7 @@ For example:
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  |
 | [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  |
+| [vue/no-invalid-attribute-name](./no-invalid-attribute-name.md) | require the attributes to match the imported component name |  |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: |
