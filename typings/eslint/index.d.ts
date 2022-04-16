@@ -337,7 +337,7 @@ export namespace Rule {
      * This was added in eslint@7.28.0
      * @since 7.28.0
      */
-    getPhysicalFilename: () => string
+    getPhysicalFilename?: () => string
   }
 
   type ReportDescriptor =
