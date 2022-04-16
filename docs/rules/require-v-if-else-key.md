@@ -12,7 +12,7 @@ description: require `key` with `v-if/v-else-if/v-else` directives
 
 ## :book: Rule Details
 
-This rule reports the elements which have `v-if`, `v-else-if`, and/or `v-else` and do not have a `v-bind:key` or `key`.
+This rule reports consecutive elements with the same tag name which all have `v-if`, `v-else-if`, or `v-else` and do not have a `v-bind:key` or `key`.
 
 <eslint-code-block :rules="{'vue/require-v-if-else-key': ['error']}">
 
@@ -44,7 +44,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide (for v2) - v-if without key](https://v2.vuejs.org/v2/style-guide/?redirect=true#v-if-v-else-if-v-else-without-key-use-with-caution)
+- [Guide (for v2) - v-if without key](https://v2.vuejs.org/v2/style-guide/#v-if-v-else-if-v-else-without-key-use-with-caution)
 
 ## :mag: Implementation
 
