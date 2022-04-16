@@ -19,15 +19,7 @@ tester.run('no-invalid-attribute-name', rule, {
   valid: [
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p foo>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: '<template><p foo /></template>'
     },
     {
       filename: 'test.vue',

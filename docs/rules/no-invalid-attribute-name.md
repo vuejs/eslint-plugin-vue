@@ -12,7 +12,7 @@ description: require the attributes to match the imported component name
 
 ## :book: Rule Details
 
-This rule detects invalid html attributes.
+This rule detects invalid HTML attributes.
 
 <eslint-code-block :rules="{'vue/no-invalid-attribute-name': ['error']}">
 
