@@ -329,6 +329,15 @@ export namespace Rule {
 
     // eslint@6 does not have this method.
     getCwd?: () => string
+
+    /**
+     * When linting a file, it returns the full path of the file on disk without any code block information.
+     * When linting text, it returns the value passed to `—stdin-filename` or `<text>` if not specified.
+     * If not set, it will fallback to `getFilename()`
+     * This was added in eslint@7.28.0
+     * @since 7.28.0
+     */
+    getPhysicalFilename: () => string
   }
 
   type ReportDescriptor =
