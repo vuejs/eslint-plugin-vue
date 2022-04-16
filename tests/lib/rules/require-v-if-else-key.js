@@ -81,6 +81,65 @@ tester.run('require-v-if-else-key', rule, {
         </div>
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="conditional" key="one">foo</div>
+          <div v-else-if="conditional" key="two">bar</span>
+          <div v-else key="three">else</div>
+          <div v-if="otherConditional" key="four">baz</div>
+          <div v-else-if="otherConditional" key="five">quux</span>
+          <div v-else key="six">otherElse</div>
+        </div>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <template v-if="conditional">
+            <div>foo</div>
+            <div>bar</span>
+          </template>
+        </div>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div v-if="conditional">foo</div>
+          <template v-else>
+            <div>bar</div>
+            <div>baz</span>
+          </template>
+        </div>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <template v-if="conditional">
+            <div>foo</div>
+            <div>bar</span>
+          </template>
+          <template v-else>
+            <div>baz</div>
+            <div>quux</span>
+          </template>
+        </div>
+      </template>
+      `
     }
   ],
   invalid: [
@@ -93,31 +152,7 @@ tester.run('require-v-if-else-key', rule, {
       </template>
       `,
       errors: [
-        'Elements in v-if/v-else-if/v-else expect to have distinct keys if they are of the same type.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <div v-if="conditional" key="foo">foo</div>
-        <div v-else key="foo">bar</div>
-      </template>
-      `,
-      errors: [
-        'Elements in v-if/v-else-if/v-else expect to have distinct keys if they are of the same type.'
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <div v-if="conditional" key="foo">foo</div>
-        <div v-else-if key="foo">bar</div>
-      </template>
-      `,
-      errors: [
-        'Elements in v-if/v-else-if/v-else expect to have distinct keys if they are of the same type.'
+        'Elements in v-if/v-else-if/v-else should have distinct keys if they have the same tag name.'
       ]
     }
   ]

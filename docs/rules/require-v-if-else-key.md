@@ -14,6 +14,8 @@ description: require `key` with `v-if/v-else-if/v-else` directives
 
 This rule reports consecutive elements with the same tag name which all have `v-if`, `v-else-if`, or `v-else` and do not have a `v-bind:key` or `key`.
 
+This rule is not required in Vue 3, as the key is automatically assigned to the elements.
+
 <eslint-code-block :rules="{'vue/require-v-if-else-key': ['error']}">
 
 ```vue
