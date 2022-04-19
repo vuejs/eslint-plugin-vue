@@ -44,24 +44,6 @@ ruleTester.run('require-valid-default-prop', rule, {
   valid: [
     {
       filename: 'test.vue',
-      code: `<script setup lang="ts">
-      export interface SomePropInterface  {
-        someProp?: false | string;
-      }
-
-      withDefaults(defineProps<SomePropInterface>(), {
-        someProp: false,
-      });
-      </script>`,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser')
-    },
-    {
-      filename: 'test.vue',
       code: `export default {
         ...foo,
         props: { ...foo }
