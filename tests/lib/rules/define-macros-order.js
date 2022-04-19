@@ -1,0 +1,275 @@
+/**
+ * @author *****your name*****
+ * See LICENSE file in root directory for full license.
+ */
+'use strict'
+
+const RuleTester = require('eslint').RuleTester
+const rule = require('../../../lib/rules/define-macros-order')
+
+const tester = new RuleTester({
+  parser: require.resolve('vue-eslint-parser'),
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
+})
+
+const optionsEmitsFirst = [
+  {
+    order: ['defineEmits', 'defineProps']
+  }
+]
+
+const optionsPropsFirst = [
+  {
+    order: ['defineProps', 'defineEmits']
+  }
+]
+
+tester.run('define-macros-order', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps({
+            test: Boolean
+          })
+          defineEmits(['update:test'])
+          console.log('test')
+        </script>
+      `,
+      options: optionsPropsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          const emit = defineEmits<{(e: 'update:test'): void}>()
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello',
+            labels: () => ['one', 'two']
+          })
+          console.log('test')
+        </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineEmits(['update:test'])
+          console.log('test')
+        </script>
+      `,
+      options: optionsPropsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          defineProps({
+            test: Boolean
+          })
+          console.log('test')
+        </script>
+      `,
+      options: optionsPropsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          console.log('test')
+        </script>
+      `,
+      options: optionsPropsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import { bar } from 'foo'
+          defineEmits(['update:test'])
+          defineProps({
+            test: Boolean
+          })
+          console.log('test')
+        </script>
+      `,
+      options: optionsEmitsFirst
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { bar } from 'foo'
+          console.log('test1')
+          defineEmits(['update:test'])
+        </script>
+      `,
+      output: `
+        <script setup>
+          import { bar } from 'foo'
+          defineEmits(['update:test'])
+          console.log('test1')
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: 'defineEmits must be on top.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { bar } from 'foo'
+
+          console.log('test1')
+          defineEmits(['update:test'])
+          console.log('test2')
+          defineProps({
+            test: Boolean
+          })
+          console.log('test3')
+        </script>
+      `,
+      output: `
+        <script setup>
+          import { bar } from 'foo'
+
+          defineProps({
+            test: Boolean
+          })
+          defineEmits(['update:test'])
+          console.log('test1')
+          console.log('test2')
+          console.log('test3')
+        </script>
+      `,
+      options: optionsPropsFirst,
+      errors: [
+        {
+          message: 'defineProps must be on top.',
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import { bar } from 'foo'
+
+          defineEmits(['update:test'])
+          defineProps({
+            test: Boolean
+          })
+
+          console.log('test1')
+        </script>
+      `,
+      output: `
+        <script setup>
+          import { bar } from 'foo'
+
+          defineProps({
+            test: Boolean
+          })
+          defineEmits(['update:test'])
+
+          console.log('test1')
+        </script>
+      `,
+      options: optionsPropsFirst,
+      errors: [
+        {
+          message: 'defineEmits must be on top.',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          console.log('test1')
+          const props = defineProps({
+            test: Boolean
+          })
+          console.log('test2')
+          const emit = defineEmits(['update:test'])
+          console.log('test3')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const emit = defineEmits(['update:test'])
+          const props = defineProps({
+            test: Boolean
+          })
+          console.log('test1')
+          console.log('test2')
+          console.log('test3')
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: 'defineEmits must be on top.',
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts" setup>
+          interface Props {
+            msg?: string
+            labels?: string[]
+          }
+
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello',
+            labels: () => ['one', 'two']
+          })
+          const emit = defineEmits<{(e: 'update:test'): void}>()
+        </script>
+      `,
+      output: `
+        <script lang="ts" setup>
+          const emit = defineEmits<{(e: 'update:test'): void}>()
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello',
+            labels: () => ['one', 'two']
+          })
+          interface Props {
+            msg?: string
+            labels?: string[]
+          }
+        </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: 'defineEmits must be on top.',
+          line: 12
+        }
+      ]
+    }
+  ]
+})
