@@ -198,7 +198,7 @@ tester.run('define-macros-order', rule, {
       options: optionsPropsFirst,
       errors: [
         {
-          message: message('defineEmits'),
+          message: message('defineProps'),
           line: 6
         }
       ]
@@ -253,15 +253,16 @@ tester.run('define-macros-order', rule, {
       `,
       output: `
         <script lang="ts" setup>
+          interface Props {
+            msg?: string
+            labels?: string[]
+          }
+
           const emit = defineEmits<{(e: 'update:test'): void}>()
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello',
             labels: () => ['one', 'two']
           })
-          interface Props {
-            msg?: string
-            labels?: string[]
-          }
         </script>
       `,
       parserOptions: {
@@ -272,6 +273,42 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineEmits'),
           line: 12
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts" setup>
+          import bla from 'bla';
+          interface Foo {};
+          type Bar = {};
+          // <--- auto-fix should move \`defineProps\` here
+          const someOtherCode = '';
+          import foo from 'bar'; // not idiomatic, but allowed
+          interface SomeOtherInterface {};
+          defineProps({ test: Boolean });
+        </script>
+      `,
+      output: `
+        <script lang="ts" setup>
+          import bla from 'bla';
+          interface Foo {};
+          type Bar = {};
+          // <--- auto-fix should move \`defineProps\` here
+          defineProps({ test: Boolean });
+          const someOtherCode = '';
+          import foo from 'bar'; // not idiomatic, but allowed
+          interface SomeOtherInterface {};
+        </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      errors: [
+        {
+          message: message('defineProps'),
+          line: 10
         }
       ]
     }
