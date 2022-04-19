@@ -13,21 +13,20 @@ description: enforce order of `defineEmits` and `defineProps` compiler macros
 
 ## :book: Rule Details
 
-This rule reports the situation when `defineProps` or `defineEmits` not on the top or have wrong order
-
+This rule reports the `defineProps` and `defineEmits` compiler macros when they are not the first statements in `<script setup>` (after any potential import statements or type definitions) or when they are not in the correct order.
 ## :wrench: Options
 
 ```json
 {
   "vue/define-macros-order": ["error", {
-    "order": [ "defineEmits", "defineProps" ]
+    "order": ["defineEmits", "defineProps"]
   }]
 }
 ```
 
 - `order` (`string[]`) ... The order of defineEmits and defineProps macros
 
-### `{ "order": [ "defineEmits", "defineProps" ] }` (default)
+### `{ "order": ["defineEmits", "defineProps"] }` (default)
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
 

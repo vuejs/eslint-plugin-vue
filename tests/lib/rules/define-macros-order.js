@@ -27,6 +27,10 @@ const optionsPropsFirst = [
   }
 ]
 
+function message(macro) {
+  return `${macro} should be the first statement in \`<script setup>\` (after any potential import statements or type definitions).`
+}
+
 tester.run('define-macros-order', rule, {
   valid: [
     {
@@ -124,7 +128,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: 'defineEmits must be on top.',
+          message: message('defineEmits'),
           line: 5
         }
       ]
@@ -160,7 +164,7 @@ tester.run('define-macros-order', rule, {
       options: optionsPropsFirst,
       errors: [
         {
-          message: 'defineProps must be on top.',
+          message: message('defineProps'),
           line: 8
         }
       ]
@@ -194,7 +198,7 @@ tester.run('define-macros-order', rule, {
       options: optionsPropsFirst,
       errors: [
         {
-          message: 'defineEmits must be on top.',
+          message: message('defineEmits'),
           line: 6
         }
       ]
@@ -226,7 +230,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: 'defineEmits must be on top.',
+          message: message('defineEmits'),
           line: 8
         }
       ]
@@ -266,7 +270,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: 'defineEmits must be on top.',
+          message: message('defineEmits'),
           line: 12
         }
       ]
