@@ -254,6 +254,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: errorMessage('function')
     },
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1853
       filename: 'test.vue',
       code: `<script setup lang="ts">
       export interface SomePropInterface {
