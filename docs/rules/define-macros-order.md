@@ -14,6 +14,7 @@ description: enforce order of `defineEmits` and `defineProps` compiler macros
 ## :book: Rule Details
 
 This rule reports the `defineProps` and `defineEmits` compiler macros when they are not the first statements in `<script setup>` (after any potential import statements or type definitions) or when they are not in the correct order.
+
 ## :wrench: Options
 
 ```json
