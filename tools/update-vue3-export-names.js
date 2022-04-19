@@ -33,39 +33,51 @@ async function* extractExportNames(m) {
     range: true
   })
   for (const node of rootNode.body) {
-    if (node.type === 'ExportAllDeclaration') {
-      if (node.exported) {
-        yield node.exported.name
-      } else {
-        for await (const name of extractExportNames(node.source.value)) {
-          yield name
-        }
-      }
-    } else if (node.type === 'ExportNamedDeclaration') {
-      if (node.declaration) {
-        if (
-          node.declaration.type === 'ClassDeclaration' ||
-          node.declaration.type === 'ClassExpression' ||
-          node.declaration.type === 'FunctionDeclaration' ||
-          node.declaration.type === 'TSDeclareFunction' ||
-          node.declaration.type === 'TSEnumDeclaration' ||
-          node.declaration.type === 'TSInterfaceDeclaration' ||
-          node.declaration.type === 'TSTypeAliasDeclaration'
-        ) {
-          yield node.declaration.id.name
-        } else if (node.declaration.type === 'VariableDeclaration') {
-          for (const decl of node.declaration.declarations) {
-            yield* extractNamesFromPattern(decl.id)
+    switch (node.type) {
+      case 'ExportAllDeclaration': {
+        if (node.exported) {
+          yield node.exported.name
+        } else {
+          for await (const name of extractExportNames(node.source.value)) {
+            yield name
           }
-        } else if (node.declaration.type === 'TSModuleDeclaration') {
-          //?
         }
+        break
       }
-      for (const spec of node.specifiers) {
-        yield spec.exported.name
+      case 'ExportNamedDeclaration': {
+        if (node.declaration) {
+          switch (node.declaration.type) {
+            case 'ClassDeclaration':
+            case 'ClassExpression':
+            case 'FunctionDeclaration':
+            case 'TSDeclareFunction':
+            case 'TSEnumDeclaration':
+            case 'TSInterfaceDeclaration':
+            case 'TSTypeAliasDeclaration': {
+              yield node.declaration.id.name
+              break
+            }
+            case 'VariableDeclaration': {
+              for (const decl of node.declaration.declarations) {
+                yield* extractNamesFromPattern(decl.id)
+              }
+              break
+            }
+            case 'TSModuleDeclaration': {
+              //?
+              break
+            }
+          }
+        }
+        for (const spec of node.specifiers) {
+          yield spec.exported.name
+        }
+        break
       }
-    } else if (node.type === 'ExportDefaultDeclaration') {
-      yield 'default'
+      case 'ExportDefaultDeclaration': {
+        yield 'default'
+        break
+      }
     }
   }
 }
@@ -83,26 +95,39 @@ async function* extractExportNames(m) {
  * @param {Identifier|ArrayPattern|ObjectPattern|AssignmentPattern|MemberExpression|RestElement} node
  */
 function* extractNamesFromPattern(node) {
-  if (node.type === 'Identifier') {
-    yield node.name
-  } else if (node.type === 'ArrayPattern') {
-    for (const element of node.elements) {
-      yield* extractNamesFromPattern(element)
+  switch (node.type) {
+    case 'Identifier': {
+      yield node.name
+      break
     }
-  } else if (node.type === 'ObjectPattern') {
-    for (const prop of node.properties) {
-      if (prop.type === 'Property') {
-        yield prop.key.name
-      } else if (prop.type === 'RestElement') {
-        yield* extractNamesFromPattern(prop)
+    case 'ArrayPattern': {
+      for (const element of node.elements) {
+        yield* extractNamesFromPattern(element)
       }
+      break
     }
-  } else if (node.type === 'AssignmentPattern') {
-    yield* extractNamesFromPattern(node.left)
-  } else if (node.type === 'RestElement') {
-    yield* extractNamesFromPattern(node.argument)
-  } else if (node.type === 'MemberExpression') {
-    // ?
+    case 'ObjectPattern': {
+      for (const prop of node.properties) {
+        if (prop.type === 'Property') {
+          yield prop.key.name
+        } else if (prop.type === 'RestElement') {
+          yield* extractNamesFromPattern(prop)
+        }
+      }
+      break
+    }
+    case 'AssignmentPattern': {
+      yield* extractNamesFromPattern(node.left)
+      break
+    }
+    case 'RestElement': {
+      yield* extractNamesFromPattern(node.argument)
+      break
+    }
+    case 'MemberExpression': {
+      // ?
+      break
+    }
   }
 }
 async function resolveTypeContents(m) {

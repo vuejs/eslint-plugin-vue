@@ -58,10 +58,10 @@ function loadPatterns(additionalValid, additionalInvalid) {
       const lines = output.split('\n').map((text, number) => ({
         number,
         text,
-        indentSize: (/^[ \t]+/.exec(text) || [''])[0].length
+        indentSize: (/^[\t ]+/.exec(text) || [''])[0].length
       }))
       const code = lines
-        .map((line) => line.text.replace(/^[ \t]+/, ''))
+        .map((line) => line.text.replace(/^[\t ]+/, ''))
         .join('\n')
       const errors = lines
         .map((line) =>
@@ -82,8 +82,8 @@ function loadPatterns(additionalValid, additionalInvalid) {
     .filter(Boolean)
 
   return {
-    valid: valid.concat(additionalValid),
-    invalid: invalid.concat(additionalInvalid)
+    valid: [...valid, ...additionalValid],
+    invalid: [...invalid, ...additionalInvalid]
   }
 }
 
