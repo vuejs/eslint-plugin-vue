@@ -36,7 +36,7 @@ tester.run('define-macros-order', rule, {
     {
       filename: 'test.vue',
       code: `
-        <script setup lang="ts">
+        <script setup>
           defineProps({
             test: Boolean
           })
@@ -50,11 +50,11 @@ tester.run('define-macros-order', rule, {
       filename: 'test.vue',
       code: `
         <script setup lang="ts">
-          const emit = defineEmits<{(e: 'update:test'): void}>()
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello',
             labels: () => ['one', 'two']
           })
+          const emit = defineEmits<{(e: 'update:test'): void}>()
           console.log('test')
         </script>
       `,
@@ -309,6 +309,79 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineProps'),
           line: 10
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts" setup>
+          debugger
+
+          console.log('test1')
+
+          /** Description for props */
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello'
+          })
+
+          console.log('test2')
+
+          // Description for emit
+          // Description for emit line 2
+          const emit = defineEmits<{(e: 'test'): void}>()
+
+          console.log('test3')
+        </script>
+      `,
+      output: `
+        <script lang="ts" setup>
+          debugger
+
+          // Description for emit
+          // Description for emit line 2
+          const emit = defineEmits<{(e: 'test'): void}>()
+          /** Description for props */
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello'
+          })
+          console.log('test1')
+
+
+          console.log('test2')
+
+
+          console.log('test3')
+        </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: message('defineEmits'),
+          line: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({ test: Boolean });defineEmits(['update:test'])
+        </script>
+      `,
+      output: `
+        <script setup>
+defineEmits(['update:test'])
+          const props = defineProps({ test: Boolean });        </script>
+      `,
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: message('defineEmits'),
+          line: 3
         }
       ]
     }
