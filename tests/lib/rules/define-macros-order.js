@@ -323,13 +323,13 @@ tester.run('define-macros-order', rule, {
           /** Description for props */
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello'
-          })
+          });
 
           console.log('test2')
 
           // Description for emit
           // Description for emit line 2
-          const emit = defineEmits<{(e: 'test'): void}>()
+          const emit = defineEmits<{(e: 'test'): void}>();
 
           console.log('test3')
         </script>
@@ -340,11 +340,11 @@ tester.run('define-macros-order', rule, {
 
           // Description for emit
           // Description for emit line 2
-          const emit = defineEmits<{(e: 'test'): void}>()
+          const emit = defineEmits<{(e: 'test'): void}>();
           /** Description for props */
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello'
-          })
+          });
           console.log('test1')
 
 
