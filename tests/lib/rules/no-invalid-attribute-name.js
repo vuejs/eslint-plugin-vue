@@ -23,89 +23,33 @@ tester.run('no-invalid-attribute-name', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p foo="bar">
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p foo="bar" /></template>`
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p foo-bar>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p foo-bar /></template>`
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p _foo-bar>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p _foo-bar /></template>`
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p :foo-bar>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p :foo-bar /></template>`
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p foo.bar>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p foo.bar /></template>`
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p quux-.9>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `
+      code: `<template><p quux-.9 /></template>`
     }
   ],
   invalid: [
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p 0abc>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `,
+      code: `<template><p 0abc /></template>`,
       errors: [
         {
           message: 'Attribute name 0abc is not valid.'
@@ -114,15 +58,7 @@ tester.run('no-invalid-attribute-name', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p -def>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `,
+      code: `<template><p -def></template>`,
       errors: [
         {
           message: 'Attribute name -def is not valid.'
@@ -131,15 +67,7 @@ tester.run('no-invalid-attribute-name', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
-      <template>
-        <div>
-          <p !ghi>
-            {{ content }}
-          </p>
-        </div>
-      </template>
-      `,
+      code: `<template><p !ghi /></template>`,
       errors: [
         {
           message: 'Attribute name !ghi is not valid.'
