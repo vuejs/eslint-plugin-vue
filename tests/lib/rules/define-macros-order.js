@@ -155,7 +155,9 @@ tester.run('define-macros-order', rule, {
           defineProps({
             test: Boolean
           })
+
           defineEmits(['update:test'])
+
           console.log('test1')
           console.log('test2')
           console.log('test3')
@@ -190,8 +192,8 @@ tester.run('define-macros-order', rule, {
           defineProps({
             test: Boolean
           })
-          defineEmits(['update:test'])
 
+          defineEmits(['update:test'])
           console.log('test1')
         </script>
       `,
@@ -259,6 +261,7 @@ tester.run('define-macros-order', rule, {
           }
 
           const emit = defineEmits<{(e: 'update:test'): void}>()
+
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello',
             labels: () => ['one', 'two']
@@ -295,8 +298,8 @@ tester.run('define-macros-order', rule, {
           import bla from 'bla';
           interface Foo {};
           type Bar = {};
-          // <--- auto-fix should move \`defineProps\` here
           defineProps({ test: Boolean });
+          // <--- auto-fix should move \`defineProps\` here
           const someOtherCode = '';
           import foo from 'bar'; // not idiomatic, but allowed
           interface SomeOtherInterface {};
@@ -341,15 +344,15 @@ tester.run('define-macros-order', rule, {
           // Description for emit
           // Description for emit line 2
           const emit = defineEmits<{(e: 'test'): void}>();
+
           /** Description for props */
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello'
           });
+
           console.log('test1')
 
-
           console.log('test2')
-
 
           console.log('test3')
         </script>
@@ -374,7 +377,7 @@ tester.run('define-macros-order', rule, {
       `,
       output: `
         <script setup>
-defineEmits(['update:test'])
+          defineEmits(['update:test'])
           const props = defineProps({ test: Boolean });        </script>
       `,
       options: optionsEmitsFirst,

@@ -20,22 +20,22 @@ This rule reports the `defineProps` and `defineEmits` compiler macros when they 
 ```json
 {
   "vue/define-macros-order": ["error", {
-    "order": ["defineEmits", "defineProps"]
+    "order": ["defineProps", "defineEmits"]
   }]
 }
 ```
 
 - `order` (`string[]`) ... The order of defineEmits and defineProps macros
 
-### `{ "order": ["defineEmits", "defineProps"] }` (default)
+### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
-defineEmits(/* ... */)
 defineProps(/* ... */)
+defineEmits(/* ... */)
 </script>
 ```
 
@@ -46,8 +46,8 @@ defineProps(/* ... */)
 ```vue
 <!-- ✗ BAD -->
 <script setup>
-defineProps(/* ... */)
 defineEmits(/* ... */)
+defineProps(/* ... */)
 </script>
 ```
 
@@ -59,8 +59,8 @@ defineEmits(/* ... */)
 <!-- ✗ BAD -->
 <script setup>
 const bar = ref()
-defineEmits(/* ... */)
 defineProps(/* ... */)
+defineEmits(/* ... */)
 </script>
 ```
 
