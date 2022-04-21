@@ -116,7 +116,7 @@ tester.run('no-invalid-attribute-name', rule, {
       `,
       errors: [
         {
-          message: '0abc is not a valid attribute name'
+          message: 'Attribute name 0abc is not valid.'
         }
       ]
     },
@@ -133,7 +133,7 @@ tester.run('no-invalid-attribute-name', rule, {
       `,
       errors: [
         {
-          message: '-def is not a valid attribute name'
+          message: 'Attribute name -def is not valid.'
         }
       ]
     },
@@ -150,7 +150,7 @@ tester.run('no-invalid-attribute-name', rule, {
       `,
       errors: [
         {
-          message: '!ghi is not a valid attribute name'
+          message: 'Attribute name !ghi is not valid.'
         }
       ]
     }
