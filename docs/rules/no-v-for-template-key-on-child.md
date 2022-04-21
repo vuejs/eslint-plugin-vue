@@ -20,7 +20,7 @@ In Vue.js 3.x, with the support for fragments, the `<template v-for>` key can be
 See [Migration Guide - `key` attribute > With `<template v-for>`](https://v3-migration.vuejs.org/breaking-changes/key-attribute.html#with-template-v-for) for more details.
 
 ::: warning Note
-Do not use with the [vue/no-v-for-template-key] rule for Vue.js 2.x.  
+Do not use with the [vue/no-v-for-template-key-on-child] rule for Vue.js 2.x.  
 This rule conflicts with the [vue/no-v-for-template-key] rule.
 :::
 
