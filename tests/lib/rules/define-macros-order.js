@@ -408,7 +408,6 @@ tester.run('define-macros-order', rule, {
           import 'test'
 
           const props = defineProps({ test: Boolean });
-
           defineEmits(['update:test'])
         </script>
       `,
