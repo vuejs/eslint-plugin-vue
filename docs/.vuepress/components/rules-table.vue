@@ -74,4 +74,8 @@ export default {
 .table-root ::v-deep .highlighting .highlight {
   opacity: 1;
 }
+.filter-tool label {
+  display: inline-flex;
+  margin-right: 0.5ex;
+}
 </style>
