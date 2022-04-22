@@ -387,6 +387,42 @@ tester.run('define-macros-order', rule, {
           line: 3
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          import 'test2'
+          export default { inheritAttrs: false };
+        </script>
+
+        <script setup>
+          import 'test'
+
+          defineEmits(['update:test'])
+          const props = defineProps({ test: Boolean });
+        </script>
+      `,
+      output: `
+        <script>
+          import 'test2'
+          export default { inheritAttrs: false };
+        </script>
+
+        <script setup>
+          import 'test'
+
+          const props = defineProps({ test: Boolean });
+
+          defineEmits(['update:test'])
+        </script>
+      `,
+      errors: [
+        {
+          message: message('defineProps'),
+          line: 11
+        }
+      ]
     }
   ]
 })
