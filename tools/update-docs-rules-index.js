@@ -39,7 +39,7 @@ function toRuleRow(rule, kindMarks = []) {
   const kindMark = [
     ...kindMarks,
     rule.meta.type === 'problem'
-      ? ':white_check_mark:'
+      ? ':warning:'
       : rule.meta.type === 'suggestion'
       ? ':hammer:'
       : rule.meta.type === 'layout'
