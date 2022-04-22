@@ -66,7 +66,7 @@ const categoryGroups = [
   {
     title: 'Base Rules (Enabling Correct ESLint Parsing)',
     description:
-      'Rules in this category are enable for all presets provided by eslint-plugin-vue.',
+      'Rules in this category are enabled for all presets provided by eslint-plugin-vue.',
     categoryIdForVue3: 'base',
     categoryIdForVue2: 'base',
     useMark: false
