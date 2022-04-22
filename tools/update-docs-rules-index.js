@@ -7,9 +7,18 @@
 const fs = require('fs')
 const path = require('path')
 const rules = require('./lib/rules')
-const categories = require('./lib/categories')
+const { getPresetIds, formatItems } = require('./lib/utils')
+
+const VUE3_EMOJI = ':three:'
+const VUE2_EMOJI = ':two:'
 
 // -----------------------------------------------------------------------------
+const categorizedRules = rules.filter(
+  (rule) =>
+    rule.meta.docs.categories &&
+    !rule.meta.docs.extensionRule &&
+    !rule.meta.deprecated
+)
 const uncategorizedRules = rules.filter(
   (rule) =>
     !rule.meta.docs.categories &&
@@ -24,16 +33,23 @@ const uncategorizedExtensionRule = rules.filter(
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
-function toRuleRow(rule) {
+const TYPE_MARK = {
+  problem: ':warning:',
+  suggestion: ':hammer:',
+  layout: ':lipstick:'
+}
+
+function toRuleRow(rule, kindMarks = []) {
   const mark = [
     rule.meta.fixable ? ':wrench:' : '',
     rule.meta.hasSuggestions ? ':bulb:' : '',
     rule.meta.deprecated ? ':warning:' : ''
   ].join('')
+  const kindMark = [...kindMarks, TYPE_MARK[rule.meta.type]].join('')
   const link = `[${rule.ruleId}](./${rule.name}.md)`
   const description = rule.meta.docs.description || '(no description)'
 
-  return `| ${link} | ${description} | ${mark} |`
+  return `| ${link} | ${description} | ${mark} | ${kindMark} |`
 }
 
 function toDeprecatedRuleRow(rule) {
@@ -46,25 +62,97 @@ function toDeprecatedRuleRow(rule) {
   return `| ${link} | ${replacedBy || '(no replacement)'} |`
 }
 
+const categoryGroups = [
+  {
+    title: 'Base Rules (Enabling Correct ESLint Parsing)',
+    description:
+      'Rules in this category are enabled for all presets provided by eslint-plugin-vue.',
+    categoryIdForVue3: 'base',
+    categoryIdForVue2: 'base',
+    useMark: false
+  },
+  {
+    title: 'Priority A: Essential (Error Prevention)',
+    categoryIdForVue3: 'vue3-essential',
+    categoryIdForVue2: 'essential',
+    useMark: true
+  },
+  {
+    title: 'Priority B: Strongly Recommended (Improving Readability)',
+    categoryIdForVue3: 'vue3-strongly-recommended',
+    categoryIdForVue2: 'strongly-recommended',
+    useMark: true
+  },
+  {
+    title: 'Priority C: Recommended (Potentially Dangerous Patterns)',
+    categoryIdForVue3: 'vue3-recommended',
+    categoryIdForVue2: 'recommended',
+    useMark: true
+  }
+]
+
 // -----------------------------------------------------------------------------
-let rulesTableContent = categories
-  .map(
-    (category) => `
-## ${category.title.vuepress}
-
-Enforce all the rules in this category, as well as all higher priority rules, with:
-
-\`\`\`json
-{
-  "extends": "plugin:vue/${category.categoryId}"
-}
-\`\`\`
-
-| Rule ID | Description |    |
-|:--------|:------------|:---|
-${category.rules.map(toRuleRow).join('\n')}
+let rulesTableContent = categoryGroups
+  .map((group) => {
+    const rules = categorizedRules.filter(
+      (rule) =>
+        rule.meta.docs.categories.includes(group.categoryIdForVue3) ||
+        rule.meta.docs.categories.includes(group.categoryIdForVue2)
+    )
+    let content = `
+## ${group.title}
 `
-  )
+
+    if (group.description) {
+      content += `
+${group.description}
+`
+    }
+    if (group.useMark) {
+      const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).map(
+        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      )
+      const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).map(
+        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      )
+      content += `
+- ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(
+        presetsForVue3,
+        ['preset', 'presets']
+      )}.
+- ${VUE2_EMOJI} Indicates that the rule is for Vue 2 and is included in ${formatItems(
+        presetsForVue2,
+        ['preset', 'presets']
+      )}.
+`
+    }
+
+    content += `
+<rules-table>
+
+| Rule ID | Description |    |    |
+|:--------|:------------|:--:|:--:|
+${rules
+  .map((rule) => {
+    const mark = group.useMark
+      ? [
+          rule.meta.docs.categories.includes(group.categoryIdForVue3)
+            ? [VUE3_EMOJI]
+            : [],
+          rule.meta.docs.categories.includes(group.categoryIdForVue2)
+            ? [VUE2_EMOJI]
+            : []
+        ].flat()
+      : []
+    return toRuleRow(rule, mark)
+  })
+  .join('\n')}
+
+</rules-table>
+`
+
+    return content
+  })
   .join('')
 
 // -----------------------------------------------------------------------------
@@ -90,9 +178,13 @@ For example:
 }
 if (uncategorizedRules.length > 0) {
   rulesTableContent += `
-| Rule ID | Description |    |
-|:--------|:------------|:---|
-${uncategorizedRules.map(toRuleRow).join('\n')}
+<rules-table>
+
+| Rule ID | Description |    |    |
+|:--------|:------------|:--:|:--:|
+${uncategorizedRules.map((rule) => toRuleRow(rule)).join('\n')}
+
+</rules-table>
 `
 }
 if (uncategorizedExtensionRule.length > 0) {
@@ -101,9 +193,13 @@ if (uncategorizedExtensionRule.length > 0) {
 
 The following rules extend the rules provided by ESLint itself and apply them to the expressions in the \`<template>\`.
 
-| Rule ID | Description |    |
-|:--------|:------------|:---|
-${uncategorizedExtensionRule.map(toRuleRow).join('\n')}
+<rules-table>
+
+| Rule ID | Description |    |    |
+|:--------|:------------|:--:|:--:|
+${uncategorizedExtensionRule.map((rule) => toRuleRow(rule)).join('\n')}
+
+</rules-table>
 `
 }
 
@@ -127,6 +223,7 @@ fs.writeFileSync(
   readmeFilePath,
   `---
 sidebarDepth: 0
+pageClass: rule-list
 ---
 
 # Available rules
@@ -139,5 +236,12 @@ sidebarDepth: 0
   :bulb: Indicates that some problems reported by the rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 :::
 
-${rulesTableContent}`
+Mark indicating rule type:
+
+- <span class="emoji">:warning:</span> Possible Problems: These rules relate to possible logic errors in code.
+- :hammer: Suggestions: These rules suggest alternate ways of doing things.
+- :lipstick: Layout & Formatting: These rules care about how the code looks rather than how it executes.
+
+${rulesTableContent.trim()}
+`
 )
