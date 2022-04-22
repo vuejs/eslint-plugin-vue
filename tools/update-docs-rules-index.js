@@ -140,7 +140,7 @@ ${rules
           rule.meta.docs.categories.includes(group.categoryIdForVue2)
             ? [':yellow_heart:']
             : []
-        ].flatMap((e) => e)
+        ].flat()
       : []
     return toRuleRow(rule, mark)
   })
