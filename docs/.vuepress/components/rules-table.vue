@@ -3,8 +3,8 @@
     <div v-if="kindMarks.length > 1" class="filter-tool">
       Highlight:
       <label v-for="kindMark in kindMarks" :key="kindMark">
-        {{ kindMark
-        }}<input type="checkbox" :value="kindMark" v-model="checkedKindMarks" />
+        <input type="checkbox" :value="kindMark" v-model="checkedKindMarks" />
+        {{ kindMark }}
       </label>
     </div>
     <div class="table-root" ref="tableRoot">
