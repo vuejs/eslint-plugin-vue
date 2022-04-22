@@ -4,7 +4,7 @@
       Highlight:
       <label v-for="kindMark in kindMarks" :key="kindMark">
         <input type="checkbox" :value="kindMark" v-model="checkedKindMarks" />
-        {{ kindMark }}
+        <span class="emoji">{{ kindMark }}</span>
       </label>
     </div>
     <div class="table-root" ref="tableRoot">
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+const emojis = ['3️⃣', '2️⃣', '⚠️']
+
 export default {
   data() {
     return {
@@ -35,7 +37,14 @@ export default {
       const kindMarks = new Set()
       const table = this.getTable()
       for (const row of table.rows) {
-        for (const mark of row.cells[3].textContent.trim()) {
+        row.cells[3].classList.add('emoji')
+        const trimmed = row.cells[3].textContent.trim()
+        if (!trimmed) {
+          continue
+        }
+        const chars =
+          trimmed.match(new RegExp(`${emojis.join('|')}|.`, 'ug')) || []
+        for (const mark of chars) {
           kindMarks.add(mark)
         }
       }
@@ -46,7 +55,7 @@ export default {
     },
     filterTable() {
       const table = this.getTable()
-      if (!this.checkedKindMarks.length) {
+      if (this.checkedKindMarks.length === 0) {
         table.classList.remove('highlighting')
         return
       }

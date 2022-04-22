@@ -1,5 +1,3 @@
-const last = require('lodash/last')
-
 module.exports = { getPresetIds, formatItems }
 
 const presetCategories = {
@@ -14,20 +12,24 @@ const presetCategories = {
   // 'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatPresets(presets) {
-  if (presets.length === 1) {
-    return `${presets[0]} preset`
+function formatItems(items, suffix) {
+  if (items.length === 1) {
+    return `${items[0]}${suffix ? ` ${suffix[0]}` : ''}`
   }
-  if (presets.length === 2) {
-    return `${presets.join(' and ')} presets`
+  if (items.length === 2) {
+    return `${items.join(' and ')}${suffix ? ` ${suffix[1]}` : ''}`
   }
-  return `all of ${presets.slice(0, -1).join(', ')} and ${last(presets)} presets`
+  return `all of ${items.slice(0, -1).join(', ')} and ${[...items].pop()}${
+    suffix ? ` ${suffix[1]}` : ''
+  }`
 }
 
 function getPresetIds(categoryIds) {
   const subsetCategoryIds = []
   for (const categoryId of categoryIds) {
-    for (const [subsetCategoryId, supersetCategoryId] of Object.entries(presetCategories)) {
+    for (const [subsetCategoryId, supersetCategoryId] of Object.entries(
+      presetCategories
+    )) {
       if (supersetCategoryId === categoryId) {
         subsetCategoryIds.push(subsetCategoryId)
       }

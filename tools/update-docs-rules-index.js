@@ -9,6 +9,9 @@ const path = require('path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
 
+const VUE3_EMOJI = ':three:'
+const VUE2_EMOJI = ':two:'
+
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
   (rule) =>
@@ -30,22 +33,19 @@ const uncategorizedExtensionRule = rules.filter(
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
 
+const TYPE_MARK = {
+  problem: ':warning:',
+  suggestion: ':hammer:',
+  layout: ':lipstick:'
+}
+
 function toRuleRow(rule, kindMarks = []) {
   const mark = [
     rule.meta.fixable ? ':wrench:' : '',
     rule.meta.hasSuggestions ? ':bulb:' : '',
     rule.meta.deprecated ? ':warning:' : ''
   ].join('')
-  const kindMark = [
-    ...kindMarks,
-    rule.meta.type === 'problem'
-      ? ':warning:'
-      : rule.meta.type === 'suggestion'
-      ? ':hammer:'
-      : rule.meta.type === 'layout'
-      ? ':lipstick:'
-      : ''
-  ].join('')
+  const kindMark = [...kindMarks, TYPE_MARK[rule.meta.type]].join('')
   const link = `[${rule.ruleId}](./${rule.name}.md)`
   const description = rule.meta.docs.description || '(no description)'
 
@@ -116,11 +116,13 @@ ${group.description}
         (categoryId) => `\`"plugin:vue/${categoryId}"\``
       )
       content += `
-- :green_heart: Indicates that the rule is for Vue 3 and is included in ${formatItems(
-        presetsForVue3
+- ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(
+        presetsForVue3,
+        ['preset', 'presets']
       )}.
-- :yellow_heart: Indicates that the rule is for Vue 2 and is included in ${formatItems(
-        presetsForVue2
+- ${VUE2_EMOJI} Indicates that the rule is for Vue 2 and is included in ${formatItems(
+        presetsForVue2,
+        ['preset', 'presets']
       )}.
 `
     }
@@ -135,10 +137,10 @@ ${rules
     const mark = group.useMark
       ? [
           rule.meta.docs.categories.includes(group.categoryIdForVue3)
-            ? [':green_heart:']
+            ? [VUE3_EMOJI]
             : [],
           rule.meta.docs.categories.includes(group.categoryIdForVue2)
-            ? [':yellow_heart:']
+            ? [VUE2_EMOJI]
             : []
         ].flat()
       : []
@@ -221,6 +223,7 @@ fs.writeFileSync(
   readmeFilePath,
   `---
 sidebarDepth: 0
+pageClass: rule-list
 ---
 
 # Available rules
@@ -235,7 +238,7 @@ sidebarDepth: 0
 
 Mark indicating rule type:
 
-- :white_check_mark: Possible Problems: These rules relate to possible logic errors in code.
+- <span class="emoji">:warning:</span> Possible Problems: These rules relate to possible logic errors in code.
 - :hammer: Suggestions: These rules suggest alternate ways of doing things.
 - :lipstick: Layout & Formatting: These rules care about how the code looks rather than how it executes.
 

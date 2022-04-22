@@ -81,7 +81,6 @@
     "eslint-plugin-unicorn": "^40.1.0",
     "eslint-plugin-vue": "file:.",
     "espree": "^9.0.0",
-    "lodash": "^4.17.21",
     "markdownlint-cli": "^0.31.1",
     "mocha": "^7.1.2",
     "nyc": "^15.1.0",
