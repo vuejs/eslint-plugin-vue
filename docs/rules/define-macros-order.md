@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/define-macros-order
 description: enforce order of `defineEmits` and `defineProps` compiler macros
+since: v8.7.0
 ---
 # vue/define-macros-order
 
 > enforce order of `defineEmits` and `defineProps` compiler macros
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -65,6 +65,10 @@ defineEmits(/* ... */)
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.7.0
 
 ## :mag: Implementation
 

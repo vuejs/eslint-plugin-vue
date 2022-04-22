@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/match-component-import-name
 description: require the registered component name to match the imported component name
+since: v8.7.0
 ---
 # vue/match-component-import-name
 
 > require the registered component name to match the imported component name
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -38,6 +37,10 @@ export default {
 ## :couple: Related Rules
 
 - [vue/component-definition-name-casing](./component-definition-name-casing.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v8.7.0
 
 ## :mag: Implementation
 
