@@ -155,7 +155,9 @@ tester.run('define-macros-order', rule, {
           defineProps({
             test: Boolean
           })
+
           defineEmits(['update:test'])
+
           console.log('test1')
           console.log('test2')
           console.log('test3')
@@ -190,6 +192,7 @@ tester.run('define-macros-order', rule, {
           defineProps({
             test: Boolean
           })
+
           defineEmits(['update:test'])
           console.log('test1')
         </script>
@@ -258,6 +261,7 @@ tester.run('define-macros-order', rule, {
           }
 
           const emit = defineEmits<{(e: 'update:test'): void}>()
+
           const props = withDefaults(defineProps<Props>(), {
             msg: 'hello',
             labels: () => ['one', 'two']
@@ -373,7 +377,8 @@ tester.run('define-macros-order', rule, {
       `,
       output: `
         <script setup>
-          defineEmits(['update:test']);const props = defineProps({ test: Boolean });        </script>
+          defineEmits(['update:test'])
+          const props = defineProps({ test: Boolean });        </script>
       `,
       options: optionsEmitsFirst,
       errors: [
@@ -408,6 +413,7 @@ tester.run('define-macros-order', rule, {
           import 'test'
 
           const props = defineProps({ test: Boolean });
+
           defineEmits(['update:test'])
         </script>
       `,
