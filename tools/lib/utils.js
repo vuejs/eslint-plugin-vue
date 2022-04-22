@@ -27,8 +27,8 @@ function formatPresets(presets) {
 function getPresetIds(categoryIds) {
   const subsetCategoryIds = []
   for (const categoryId of categoryIds) {
-    for (const subsetCategoryId in presetCategories) {
-      if (presetCategories[subsetCategoryId] === categoryId) {
+    for (const [subsetCategoryId, supersetCategoryId] of Object.entries(presetCategories)) {
+      if (supersetCategoryId === categoryId) {
         subsetCategoryIds.push(subsetCategoryId)
       }
     }
