@@ -255,7 +255,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       parserOptions,
-      errors: (ext === 'js' ? [] : [makeError(2)]).concat([makeError(4)])
+      errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(4)]
     },
     {
       filename: `test.${ext}`,
@@ -293,7 +293,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       parserOptions,
-      errors: (ext === 'js' ? [] : [makeError(3)]).concat([makeError(6)])
+      errors: [...(ext === 'js' ? [] : [makeError(3)]), makeError(6)]
     },
     {
       filename: `test.${ext}`,
@@ -310,7 +310,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       parserOptions,
-      errors: (ext === 'js' ? [] : [makeError(2)]).concat([makeError(8)])
+      errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(8)]
     },
     {
       filename: `test.${ext}`,
@@ -332,11 +332,11 @@ ruleTester.run('vue-component', rule, {
       filename: 'test.js',
       code: `export default { }`,
       parserOptions
-    }
-  ]
-    .concat(validTests('js'))
-    .concat(validTests('jsx'))
-    .concat(validTests('vue')),
+    },
+    ...validTests('js'),
+    ...validTests('jsx'),
+    ...validTests('vue')
+  ],
   invalid: [
     {
       filename: 'test.vue',
@@ -349,9 +349,9 @@ ruleTester.run('vue-component', rule, {
       code: `export default { }`,
       parserOptions,
       errors: [makeError(1)]
-    }
+    },
+    ...invalidTests('js'),
+    ...invalidTests('jsx'),
+    ...invalidTests('vue')
   ]
-    .concat(invalidTests('js'))
-    .concat(invalidTests('jsx'))
-    .concat(invalidTests('vue'))
 })

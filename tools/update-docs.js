@@ -107,11 +107,9 @@ class DocFile {
 
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
-    if (fileIntroPattern.test(this.content)) {
-      this.content = this.content.replace(fileIntroPattern, computed)
-    } else {
-      this.content = `${computed}${this.content.trim()}\n`
-    }
+    this.content = fileIntroPattern.test(this.content)
+      ? this.content.replace(fileIntroPattern, computed)
+      : `${computed}${this.content.trim()}\n`
 
     return this
   }
@@ -159,17 +157,15 @@ class DocFile {
     }
 
     // Add an empty line after notes.
-    if (notes.length >= 1) {
+    if (notes.length > 0) {
       notes.push('', '')
     }
 
-    const headerPattern = /#.+\n\n*[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
-    if (headerPattern.test(this.content)) {
-      this.content = this.content.replace(headerPattern, header)
-    } else {
-      this.content = `${header}${this.content.trim()}\n`
-    }
+    this.content = headerPattern.test(this.content)
+      ? this.content.replace(headerPattern, header)
+      : `${header}${this.content.trim()}\n`
 
     return this
   }
@@ -178,7 +174,7 @@ class DocFile {
     const { meta } = this.rule
 
     this.content = this.content.replace(
-      /<eslint-code-block\s(:?fix[^\s]*)?\s*/g,
+      /<eslint-code-block\s(:?fix\S*)?\s*/g,
       `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
     )
     return this
@@ -187,7 +183,7 @@ class DocFile {
   adjustCodeBlocks() {
     // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
     this.content = this.content.replace(
-      /(<eslint-code-block([\s\S]*?)>)\n+```/gm,
+      /(<eslint-code-block([\S\s]*?)>)\n+```/gm,
       '$1\n\n```'
     )
     this.content = this.content.replace(
@@ -219,11 +215,9 @@ ${
 `
     : ''
 }`
-    if (footerPattern.test(this.content)) {
-      this.content = this.content.replace(footerPattern, footer)
-    } else {
-      this.content = `${this.content.trim()}\n\n${footer}`
-    }
+    this.content = footerPattern.test(this.content)
+      ? this.content.replace(footerPattern, footer)
+      : `${this.content.trim()}\n\n${footer}`
 
     return this
   }

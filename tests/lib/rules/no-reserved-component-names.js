@@ -14,9 +14,7 @@ const RuleTester = require('eslint').RuleTester
 const htmlElements = require('../../../lib/utils/html-elements.json')
 const RESERVED_NAMES_IN_HTML = new Set([
   ...htmlElements,
-  ...htmlElements.map(
-    (word) => word[0].toUpperCase() + word.substring(1, word.length)
-  )
+  ...htmlElements.map((word) => word[0].toUpperCase() + word.slice(1))
 ])
 
 // ------------------------------------------------------------------------------

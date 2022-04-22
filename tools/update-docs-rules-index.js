@@ -68,7 +68,7 @@ ${category.rules.map(toRuleRow).join('\n')}
   .join('')
 
 // -----------------------------------------------------------------------------
-if (uncategorizedRules.length || uncategorizedExtensionRule.length) {
+if (uncategorizedRules.length > 0 || uncategorizedExtensionRule.length > 0) {
   rulesTableContent += `
 ## Uncategorized
 
@@ -88,14 +88,14 @@ For example:
 \`\`\`
 `
 }
-if (uncategorizedRules.length) {
+if (uncategorizedRules.length > 0) {
   rulesTableContent += `
 | Rule ID | Description |    |
 |:--------|:------------|:---|
 ${uncategorizedRules.map(toRuleRow).join('\n')}
 `
 }
-if (uncategorizedExtensionRule.length) {
+if (uncategorizedExtensionRule.length > 0) {
   rulesTableContent += `
 ### Extension Rules
 
@@ -108,7 +108,7 @@ ${uncategorizedExtensionRule.map(toRuleRow).join('\n')}
 }
 
 // -----------------------------------------------------------------------------
-if (deprecatedRules.length >= 1) {
+if (deprecatedRules.length > 0) {
   rulesTableContent += `
 ## Deprecated
 

@@ -14,9 +14,10 @@ module.exports = {
     'plugin:eslint-plugin/recommended',
     'prettier',
     'plugin:node-dependencies/recommended',
-    'plugin:jsonc/recommended-with-jsonc'
+    'plugin:jsonc/recommended-with-jsonc',
+    'plugin:unicorn/recommended'
   ],
-  plugins: ['eslint-plugin', 'prettier'],
+  plugins: ['eslint-plugin', 'prettier', 'unicorn'],
   rules: {
     'accessor-pairs': 2,
     camelcase: [2, { properties: 'never' }],
@@ -117,7 +118,19 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'prefer-spread': 'error',
 
-    'dot-notation': 'error'
+    'dot-notation': 'error',
+
+    'unicorn/consistent-function-scoping': [
+      'error',
+      { checkArrowFunctions: false }
+    ],
+    'unicorn/filename-case': 'off',
+    'unicorn/no-null': 'off',
+    'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+    'unicorn/no-useless-undefined': 'off',
+    'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
+    'unicorn/prefer-module': 'off',
+    'unicorn/prevent-abbreviations': 'off'
   },
   overrides: [
     {
