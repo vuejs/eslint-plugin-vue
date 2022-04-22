@@ -116,10 +116,10 @@ ${group.description}
         (categoryId) => `\`"plugin:vue/${categoryId}"\``
       )
       content += `
-- :green_heart: Indicates that the rule is for Vue3 and is included in ${formatItems(
+- :green_heart: Indicates that the rule is for Vue 3 and is included in ${formatItems(
         presetsForVue3
       )}.
-- :yellow_heart: Indicates that the rule is for Vue2 and is included in ${formatItems(
+- :yellow_heart: Indicates that the rule is for Vue 2 and is included in ${formatItems(
         presetsForVue2
       )}.
 `
