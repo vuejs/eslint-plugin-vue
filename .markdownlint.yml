@@ -6,6 +6,7 @@ no-inline-html:
     - eslint-code-block
     - sup
     - rules-table
+    - span
 
 # enforce consistency
 code-block-style:
