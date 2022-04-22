@@ -13,7 +13,7 @@ since: v8.7.0
 
 By default, this rule will validate that the imported name matches the name of the components object property identifer. Note that "matches" means that the imported name matches either the PascalCase or kebab-case version of the components object property identifer. If you would like to enforce that it must match only one of PascalCase or kebab-case, use this rule in conjunction with the rule [vue/component-definition-name-casing](./component-definition-name-casing.md).
 
-<eslint-code-block :rules="{'vue/match-component-file-name': ['error']}">
+<eslint-code-block :rules="{'vue/match-component-import-name': ['error']}">
 
 ```vue
 <script>
