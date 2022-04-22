@@ -35,6 +35,11 @@ const eslint = new ESLint({
   plugins: { vue: require('../../../lib/index') }
 })
 
+async function lintMessages(code) {
+  const result = await eslint.lintText(code, { filePath: 'test.vue' })
+  return result[0].messages
+}
+
 describe('comment-directive', () => {
   describe('eslint-disable/eslint-enable', () => {
     it('disable all rules if <!-- eslint-disable -->', async () => {
@@ -44,9 +49,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -58,9 +61,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -75,9 +76,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -95,9 +94,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
@@ -114,9 +111,7 @@ describe('comment-directive', () => {
           var a
         </script>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.strictEqual(messages.length, 1)
       assert.strictEqual(messages[0].ruleId, 'no-unused-vars')
@@ -129,9 +124,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -144,9 +137,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -157,9 +148,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -173,9 +162,7 @@ describe('comment-directive', () => {
           <!-- eslint-disable-line -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -191,9 +178,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -205,9 +190,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -222,9 +205,7 @@ describe('comment-directive', () => {
           <!-- eslint-disable-next-line -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -240,9 +221,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -260,9 +239,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -276,9 +253,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -296,9 +271,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-duplicate-attributes')
@@ -311,9 +284,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line -- description -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -324,9 +295,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div> <!-- eslint-disable-line vue/no-duplicate-attributes -- description -->
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -339,9 +308,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -353,9 +320,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -370,9 +335,7 @@ describe('comment-directive', () => {
           <div id id="a">Hello</div>
         </template>
       `
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -387,9 +350,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
       assert.deepEqual(messages[0].ruleId, 'vue/no-parsing-error')
@@ -417,6 +378,12 @@ describe('comment-directive', () => {
       },
       useEslintrc: false
     })
+
+    async function lintMessages(code) {
+      const result = await eslint.lintText(code, { filePath: 'test.vue' })
+      return result[0].messages
+    }
+
     it('report unused <!-- eslint-disable -->', async () => {
       const code = `
         <template>
@@ -425,9 +392,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/comment-directive')
@@ -447,9 +412,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -464,9 +427,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 1)
       assert.deepEqual(messages[0].ruleId, 'vue/comment-directive')
@@ -486,9 +447,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 2)
 
@@ -518,9 +477,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 4)
 
@@ -554,9 +511,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })
@@ -570,9 +525,7 @@ describe('comment-directive', () => {
         </template>
       `
 
-      const messages = (
-        await eslint.lintText(code, { filePath: 'test.vue' })
-      )[0].messages
+      const messages = await lintMessages(code)
 
       assert.deepEqual(messages.length, 0)
     })

@@ -154,7 +154,7 @@ ${rules
   .join('')
 
 // -----------------------------------------------------------------------------
-if (uncategorizedRules.length || uncategorizedExtensionRule.length) {
+if (uncategorizedRules.length > 0 || uncategorizedExtensionRule.length > 0) {
   rulesTableContent += `
 ## Uncategorized
 
@@ -174,7 +174,7 @@ For example:
 \`\`\`
 `
 }
-if (uncategorizedRules.length) {
+if (uncategorizedRules.length > 0) {
   rulesTableContent += `
 <rules-table>
 
@@ -185,7 +185,7 @@ ${uncategorizedRules.map((rule) => toRuleRow(rule)).join('\n')}
 </rules-table>
 `
 }
-if (uncategorizedExtensionRule.length) {
+if (uncategorizedExtensionRule.length > 0) {
   rulesTableContent += `
 ### Extension Rules
 
@@ -202,7 +202,7 @@ ${uncategorizedExtensionRule.map((rule) => toRuleRow(rule)).join('\n')}
 }
 
 // -----------------------------------------------------------------------------
-if (deprecatedRules.length >= 1) {
+if (deprecatedRules.length > 0) {
   rulesTableContent += `
 ## Deprecated
 

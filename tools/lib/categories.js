@@ -77,4 +77,4 @@ module.exports = categoryIds
       (rule) => !rule.meta.deprecated
     )
   }))
-  .filter((category) => category.rules.length >= 1)
+  .filter((category) => category.rules.length > 0)
