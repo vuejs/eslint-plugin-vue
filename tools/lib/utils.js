@@ -14,12 +14,16 @@ const presetCategories = {
   // 'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatItems(items) {
-  if (items.length <= 2) {
-    return items.join(' and ')
+function formatPresets(presets) {
+  if (presets.length === 1) {
+    return `${presets[0]} preset`
   }
-  return `all of ${items.slice(0, -1).join(', ')} and ${last(items)}`
+  if (presets.length === 2) {
+    return `${presets.join(' and ')} presets`
+  }
+  return `all of ${presets.slice(0, -1).join(', ')} and ${last(presets)} presets`
 }
+
 function getPresetIds(categoryIds) {
   const subsetCategoryIds = []
   for (const categoryId of categoryIds) {
