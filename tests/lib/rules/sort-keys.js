@@ -506,6 +506,50 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {a:1, _:2, b:3}',
       options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }]
+    },
+
+    // runOutsideVue (false) should ignore unsorted keys outside of vue
+    {
+      code: 'var obj = { c:3, a:1, b:2}',
+      options: ['asc', { runOutsideVue: false }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          data () {
+            return {
+              c: 3,
+              a: 1,
+              b: 2
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      options: ['asc', { runOutsideVue: false }]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          computed: {
+            test () {
+              return {
+                c: 3,
+                a: 1,
+                b: 2
+              }
+            }
+          }
+        })
+      `,
+      parserOptions: { ecmaVersion: 6 },
+      options: ['asc', { runOutsideVue: false }]
     }
   ],
 
@@ -1493,6 +1537,58 @@ ruleTester.run('sort-keys', rule, {
           message:
             "Expected object keys to be in ascending order. 'a' should be before 'b'.",
           line: 7
+        }
+      ]
+    },
+
+    // runOutsideVue (false)
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          computed: {
+            b () {
+              return true
+            },
+            a () {
+              return true
+            }
+          }
+        })
+      `,
+      parserOptions,
+      options: ['asc', { runOutsideVue: false }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          props: {
+            a: {
+              type: Boolean,
+              default: true
+            },
+          }
+        })
+      `,
+      parserOptions,
+      options: ['asc', { ignoreGrandchildrenOf: [], runOutsideVue: false }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'default' should be before 'type'.",
+          line: 8
         }
       ]
     }
