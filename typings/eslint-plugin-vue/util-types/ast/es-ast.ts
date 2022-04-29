@@ -347,6 +347,7 @@ export interface PrivateIdentifier extends HasParentNode {
 export interface Literal extends HasParentNode {
   type: 'Literal'
   value: string | boolean | null | number | RegExp | BigInt
+  raw: string
   regex?: {
     pattern: string
     flags: string
