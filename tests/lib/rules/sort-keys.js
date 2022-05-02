@@ -510,7 +510,7 @@ ruleTester.run('sort-keys', rule, {
 
     // runOutsideVue (false) should ignore unsorted keys outside of vue
     {
-      code: 'var obj = { c:3, a:1, b:2}',
+      code: 'var obj = {c:3, a:1, b:2}',
       options: ['asc', { runOutsideVue: false }]
     },
     {
