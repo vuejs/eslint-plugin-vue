@@ -519,11 +519,13 @@ ruleTester.run('sort-keys', rule, {
         const { component } = Vue;
         component('test', {
           name: 'app',
-          data () {
-            return {
-              c: 3,
-              a: 1,
-              b: 2
+          computed: {
+            test () {
+              return {
+                c: 3,
+                a: 1,
+                b: 2
+              }
             }
           }
         })
@@ -531,6 +533,7 @@ ruleTester.run('sort-keys', rule, {
       parserOptions: { ecmaVersion: 6 },
       options: ['asc', { runOutsideVue: false }]
     },
+    // runOutsideVue (false) should ignore unsorted keys of data methods that are not the vue data method.
     {
       filename: 'test.js',
       code: `
@@ -538,7 +541,7 @@ ruleTester.run('sort-keys', rule, {
         component('test', {
           name: 'app',
           computed: {
-            test () {
+            data () {
               return {
                 c: 3,
                 a: 1,
@@ -1589,6 +1592,57 @@ ruleTester.run('sort-keys', rule, {
           message:
             "Expected object keys to be in ascending order. 'default' should be before 'type'.",
           line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          data () {
+            return {
+              c: null,
+              a: null,
+              b: null,
+            }
+          }
+        })
+      `,
+      parserOptions,
+      options: ['asc', { runOutsideVue: false }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'c'.",
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { component } = Vue;
+        component('test', {
+          name: 'app',
+          data () {
+            return {
+              a: {
+                c: null,
+                b: null,
+              },
+            }
+          }
+        })
+      `,
+      parserOptions,
+      options: ['asc', { runOutsideVue: false }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'b' should be before 'c'.",
+          line: 9
         }
       ]
     }
