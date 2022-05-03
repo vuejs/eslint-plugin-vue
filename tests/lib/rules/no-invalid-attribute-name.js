@@ -44,6 +44,38 @@ tester.run('no-invalid-attribute-name', rule, {
     {
       filename: 'test.vue',
       code: `<template><p quux-.9 /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><MyComponent 0abc="foo" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><MyComponent :0abc="foo" /></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><a :href="url"> ... </a></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div v-bind:class="{ active: isActive }"></div></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><p v-if="seen">Now you see me</p></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<a v-on:[eventName]="doSomething"> ... </a>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<form v-on:submit.prevent="onSubmit"> ... </form>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<a @[event]="doSomething"> ... </a>`
     }
   ],
   invalid: [
@@ -52,7 +84,9 @@ tester.run('no-invalid-attribute-name', rule, {
       code: `<template><p 0abc /></template>`,
       errors: [
         {
-          message: 'Attribute name 0abc is not valid.'
+          message: 'Attribute name 0abc is not valid.',
+          line: 1,
+          column: 14
         }
       ]
     },
@@ -61,7 +95,9 @@ tester.run('no-invalid-attribute-name', rule, {
       code: `<template><p -def></template>`,
       errors: [
         {
-          message: 'Attribute name -def is not valid.'
+          message: 'Attribute name -def is not valid.',
+          line: 1,
+          column: 14
         }
       ]
     },
@@ -70,7 +106,9 @@ tester.run('no-invalid-attribute-name', rule, {
       code: `<template><p !ghi /></template>`,
       errors: [
         {
-          message: 'Attribute name !ghi is not valid.'
+          message: 'Attribute name !ghi is not valid.',
+          line: 1,
+          column: 14
         }
       ]
     }
