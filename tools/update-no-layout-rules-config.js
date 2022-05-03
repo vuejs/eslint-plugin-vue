@@ -17,10 +17,7 @@ const rules = require('./lib/rules')
 const rulesToDisable = rules.filter(({ meta }) => meta.type === 'layout')
 
 function formatRules(rules) {
-  const obj = rules.reduce((setting, rule) => {
-    setting[rule.ruleId] = 'off'
-    return setting
-  }, {})
+  const obj = Object.fromEntries(rules.map((rule) => [rule.ruleId, 'off']))
   return JSON.stringify(obj, null, 2)
 }
 

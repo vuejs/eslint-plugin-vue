@@ -18,8 +18,8 @@ This rule reports the `<template v-for>` elements which have `key` attribute.
 In Vue.js 2.x, disallows `key` attribute on `<template>` elements.
 
 ::: warning Note
-Do not use with the [vue/no-v-for-template-key-on-child] rule for Vue.js 3.x.  
-This rule conflicts with the [vue/no-v-for-template-key-on-child] rule.
+This rule is targeted at Vue.js 2.x.
+If you are using Vue.js 3.x, enable the [vue/no-v-for-template-key-on-child] rule instead. Don't enable both rules together; they are conflicting.
 :::
 
 <eslint-code-block :rules="{'vue/no-v-for-template-key': ['error']}">

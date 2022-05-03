@@ -4,12 +4,11 @@ const espree = require('espree')
 const utils = require('../../../lib/utils/index')
 const assert = require('assert')
 
-describe('getComputedProperties', () => {
-  const parse = function (code) {
-    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
-      .init
-  }
+function parse(code) {
+  return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0].init
+}
 
+describe('getComputedProperties', () => {
   it('should return empty array when there is no computed property', () => {
     const node = parse(`const test = {
       name: 'test',
@@ -111,11 +110,6 @@ describe('getComputedProperties', () => {
 })
 
 describe('getStaticPropertyName', () => {
-  const parse = function (code) {
-    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
-      .init
-  }
-
   it('should parse property expression with identifier', () => {
     const node = parse(`const test = { computed: { } }`)
 
@@ -137,11 +131,6 @@ describe('getStaticPropertyName', () => {
 })
 
 describe('getStringLiteralValue', () => {
-  const parse = function (code) {
-    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
-      .init
-  }
-
   it('should parse literal', () => {
     const node = parse(`const test = { ['computed'] () {} }`)
 
@@ -157,11 +146,6 @@ describe('getStringLiteralValue', () => {
 })
 
 describe('getMemberChaining', () => {
-  const parse = function (code) {
-    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
-      .init
-  }
-
   const jsonIgnoreKeys = ['expression', 'object']
 
   it('should parse MemberExpression', () => {
@@ -276,11 +260,6 @@ describe('getMemberChaining', () => {
 })
 
 describe('getRegisteredComponents', () => {
-  const parse = function (code) {
-    return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0]
-      .init
-  }
-
   it('should return empty array when there are no components registered', () => {
     const node = parse(`const test = {
       name: 'test',
@@ -336,15 +315,13 @@ describe('getRegisteredComponents', () => {
   })
 })
 
-describe('getComponentProps', () => {
-  const parse = function (code) {
-    const data = espree.parse(code, { ecmaVersion: 2020 }).body[0]
-      .declarations[0].init
-    return utils.getComponentProps(data)
-  }
+function parseProps(code) {
+  return utils.getComponentPropsFromOptions(parse(code))
+}
 
+describe('getComponentProps', () => {
   it('should return empty array when there is no component props', () => {
-    const props = parse(`const test = {
+    const props = parseProps(`const test = {
       name: 'test',
       data() {
         return {}
@@ -355,7 +332,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return empty array when component props is empty array', () => {
-    const props = parse(`const test = {
+    const props = parseProps(`const test = {
       name: 'test',
       props: []
     }`)
@@ -364,7 +341,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return empty array when component props is empty object', () => {
-    const props = parse(`const test = {
+    const props = parseProps(`const test = {
       name: 'test',
       props: {}
     }`)
@@ -373,7 +350,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return computed props', () => {
-    const props = parse(`const test = {
+    const props = parseProps(`const test = {
       name: 'test',
       ...test,
       data() {
@@ -412,7 +389,7 @@ describe('getComponentProps', () => {
   })
 
   it('should return computed from array props', () => {
-    const props = parse(`const test = {
+    const props = parseProps(`const test = {
       name: 'test',
       data() {
         return {}

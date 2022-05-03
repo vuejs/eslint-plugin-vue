@@ -252,6 +252,29 @@ ruleTester.run('require-valid-default-prop', rule, {
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
       errors: errorMessage('function')
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/1853
+      filename: 'test.vue',
+      code: `<script setup lang="ts">
+      export interface SomePropInterface {
+        someProp?: false | string;
+        str?: 'foo' | 'bar';
+        num?: 1 | 2;
+      }
+
+      withDefaults(defineProps<SomePropInterface>(), {
+        someProp: false,
+        str: 'foo',
+        num: 1
+      });
+      </script>`,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
     }
   ],
 

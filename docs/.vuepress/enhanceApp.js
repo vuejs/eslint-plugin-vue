@@ -8,21 +8,19 @@ export default (
     //     siteData, // site metadata
   }
 ) => {
-  if (typeof window !== 'undefined') {
-    if (typeof window.process === 'undefined') {
-      window.process = new Proxy(
-        {
-          env: {},
-          cwd: () => undefined
-        },
-        {
-          get(target, name) {
-            // For debug
-            // console.log(name)
-            return target[name]
-          }
+  if (typeof window !== 'undefined' && typeof window.process === 'undefined') {
+    window.process = new Proxy(
+      {
+        env: {},
+        cwd: () => undefined
+      },
+      {
+        get(target, name) {
+          // For debug
+          // console.log(name)
+          return target[name]
         }
-      )
-    }
+      }
+    )
   }
 }
