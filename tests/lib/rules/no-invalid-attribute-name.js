@@ -76,6 +76,14 @@ tester.run('no-invalid-attribute-name', rule, {
     {
       filename: 'test.vue',
       code: `<a @[event]="doSomething"> ... </a>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div v-bind:href="..."></div></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div :href="..."></div></template>`
     }
   ],
   invalid: [
@@ -107,6 +115,28 @@ tester.run('no-invalid-attribute-name', rule, {
       errors: [
         {
           message: 'Attribute name !ghi is not valid.',
+          line: 1,
+          column: 14
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><p v-bind:0abc=""></template>`,
+      errors: [
+        {
+          message: 'Directive name 0abc is not valid.',
+          line: 1,
+          column: 14
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><p :0abc="..." /></template>`,
+      errors: [
+        {
+          message: 'Directive name 0abc is not valid.',
           line: 1,
           column: 14
         }
