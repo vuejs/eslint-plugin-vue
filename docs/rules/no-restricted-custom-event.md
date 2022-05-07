@@ -31,7 +31,7 @@ This rule takes a list of strings, where each string is a custom event name or p
 <template>
   <!-- ✗ BAD -->
   <input @input="$emit('input', $event.target.value)">
-  <!-- ✗ GOOD -->
+  <!-- ✓ GOOD -->
   <input @input="$emit('update:value', $event.target.value)">
 </template>
 <script>
