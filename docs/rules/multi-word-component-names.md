@@ -76,6 +76,47 @@ export default {
 
 </eslint-code-block>
 
+<eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<!-- filename: Todo.vue -->
+<!-- ✗ BAD -->
+<script setup>
+  // ...
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<!-- filename: TodoItem.vue -->
+<!-- ✓ GOOD -->
+<script setup>
+  // ...
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
+
+```vue
+<!-- filename: Todo.vue -->
+<!-- ✓ GOOD -->
+<script setup>
+  // ...
+</script>
+<script>
+export default {
+  name: 'TodoItem'
+}
+</script>
+```
+
+</eslint-code-block>
+
 ## :wrench: Options
 
 ```json
@@ -111,6 +152,18 @@ export default {
   /* ✗ BAD */
   name: 'Item'
 }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
+
+```vue
+<!-- filename: Todo.vue -->
+<!-- ✓ GOOD -->
+<script setup>
+  // ...
 </script>
 ```
 

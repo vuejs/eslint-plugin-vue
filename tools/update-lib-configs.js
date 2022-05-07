@@ -14,7 +14,7 @@ const path = require('path')
 const eslint = require('eslint')
 const categories = require('./lib/categories')
 
-const errorCategories = ['base', 'essential', 'vue3-essential']
+const errorCategories = new Set(['base', 'essential', 'vue3-essential'])
 
 const extendsCategories = {
   base: null,
@@ -29,20 +29,21 @@ const extendsCategories = {
 }
 
 function formatRules(rules, categoryId) {
-  const obj = rules.reduce((setting, rule) => {
-    let options = errorCategories.includes(categoryId) ? 'error' : 'warn'
-    const defaultOptions =
-      rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
-    if (defaultOptions) {
-      const v = categoryId.startsWith('vue3') ? 3 : 2
-      const defaultOption = defaultOptions[`vue${v}`]
-      if (defaultOption) {
-        options = [options, ...defaultOption]
+  const obj = Object.fromEntries(
+    rules.map((rule) => {
+      let options = errorCategories.has(categoryId) ? 'error' : 'warn'
+      const defaultOptions =
+        rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
+      if (defaultOptions) {
+        const v = categoryId.startsWith('vue3') ? 3 : 2
+        const defaultOption = defaultOptions[`vue${v}`]
+        if (defaultOption) {
+          options = [options, ...defaultOption]
+        }
       }
-    }
-    setting[rule.ruleId] = options
-    return setting
-  }, {})
+      return [rule.ruleId, options]
+    })
+  )
   return JSON.stringify(obj, null, 2)
 }
 
@@ -85,12 +86,12 @@ module.exports = {
 
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/')
-categories.forEach((category) => {
+for (const category of categories) {
   const filePath = path.join(ROOT, `${category.categoryId}.js`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
-})
+}
 
 // Format files.
 async function format() {

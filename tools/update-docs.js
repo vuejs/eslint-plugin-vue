@@ -20,44 +20,10 @@ For example:
 
 const fs = require('fs')
 const path = require('path')
-const last = require('lodash/last')
 const rules = require('./lib/rules')
+const { getPresetIds, formatItems } = require('./lib/utils')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
-
-const presetCategories = {
-  base: null,
-  essential: 'base',
-  'vue3-essential': 'base',
-  'strongly-recommended': 'essential',
-  'vue3-strongly-recommended': 'vue3-essential',
-  recommended: 'strongly-recommended',
-  'vue3-recommended': 'vue3-strongly-recommended'
-  // 'use-with-caution': 'recommended',
-  // 'vue3-use-with-caution': 'vue3-recommended'
-}
-
-function formatItems(items) {
-  if (items.length <= 2) {
-    return items.join(' and ')
-  }
-  return `all of ${items.slice(0, -1).join(', ')} and ${last(items)}`
-}
-
-function getPresetIds(categoryIds) {
-  const subsetCategoryIds = []
-  for (const categoryId of categoryIds) {
-    for (const subsetCategoryId in presetCategories) {
-      if (presetCategories[subsetCategoryId] === categoryId) {
-        subsetCategoryIds.push(subsetCategoryId)
-      }
-    }
-  }
-  if (subsetCategoryIds.length === 0) {
-    return categoryIds
-  }
-  return [...new Set([...categoryIds, ...getPresetIds(subsetCategoryIds)])]
-}
 
 function pickSince(content) {
   const fileIntro = /^---\n(.*\n)+---\n*/g.exec(content)
@@ -107,11 +73,9 @@ class DocFile {
 
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
-    if (fileIntroPattern.test(this.content)) {
-      this.content = this.content.replace(fileIntroPattern, computed)
-    } else {
-      this.content = `${computed}${this.content.trim()}\n`
-    }
+    this.content = fileIntroPattern.test(this.content)
+      ? this.content.replace(fileIntroPattern, computed)
+      : `${computed}${this.content.trim()}\n`
 
     return this
   }
@@ -159,17 +123,15 @@ class DocFile {
     }
 
     // Add an empty line after notes.
-    if (notes.length >= 1) {
+    if (notes.length > 0) {
       notes.push('', '')
     }
 
-    const headerPattern = /#.+\n\n*[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
-    if (headerPattern.test(this.content)) {
-      this.content = this.content.replace(headerPattern, header)
-    } else {
-      this.content = `${header}${this.content.trim()}\n`
-    }
+    this.content = headerPattern.test(this.content)
+      ? this.content.replace(headerPattern, header)
+      : `${header}${this.content.trim()}\n`
 
     return this
   }
@@ -178,7 +140,7 @@ class DocFile {
     const { meta } = this.rule
 
     this.content = this.content.replace(
-      /<eslint-code-block\s(:?fix[^\s]*)?\s*/g,
+      /<eslint-code-block\s(:?fix\S*)?\s*/g,
       `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
     )
     return this
@@ -187,7 +149,7 @@ class DocFile {
   adjustCodeBlocks() {
     // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
     this.content = this.content.replace(
-      /(<eslint-code-block([\s\S]*?)>)\n+```/gm,
+      /(<eslint-code-block([\S\s]*?)>)\n+```/gm,
       '$1\n\n```'
     )
     this.content = this.content.replace(
@@ -219,11 +181,9 @@ ${
 `
     : ''
 }`
-    if (footerPattern.test(this.content)) {
-      this.content = this.content.replace(footerPattern, footer)
-    } else {
-      this.content = `${this.content.trim()}\n\n${footer}`
-    }
+    this.content = footerPattern.test(this.content)
+      ? this.content.replace(footerPattern, footer)
+      : `${this.content.trim()}\n\n${footer}`
 
     return this
   }

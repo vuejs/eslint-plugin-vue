@@ -39,12 +39,11 @@ function getESLintClassForV6() {
           : undefined,
         plugins: plugins || [],
         rules: rules
-          ? Object.entries(rules).reduce((o, [ruleId, opt]) => {
-              if (opt) {
-                o[ruleId] = opt
-              }
-              return o
-            }, /** @type {NonNullable<eslint.CLIEngine.Options["rules"]>}*/ ({}))
+          ? Object.fromEntries(
+              Object.entries(rules).flatMap(([ruleId, opt]) =>
+                opt ? [[ruleId, opt]] : []
+              )
+            )
           : undefined,
         ...overrideConfig
       }

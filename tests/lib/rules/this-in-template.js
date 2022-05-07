@@ -190,7 +190,7 @@ function createInvalidTests(prefix, options, message, type) {
       )}bar"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
-    }
+    },
 
     // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
     // {
@@ -198,8 +198,7 @@ function createInvalidTests(prefix, options, message, type) {
     //   errors: [{ message, type }],
     //   options
     // }
-  ].concat(
-    options[0] === 'always'
+    ...(options[0] === 'always'
       ? []
       : [
           {
@@ -214,68 +213,63 @@ function createInvalidTests(prefix, options, message, type) {
             errors: [{ message, type }],
             options
           }
-        ]
-  )
+        ])
+  ]
 }
 
 ruleTester.run('this-in-template', rule, {
-  valid: ['', '<template></template>', '<template><div></div></template>']
-    .concat(createValidTests('', []))
-    .concat(createValidTests('', ['never']))
-    .concat(createValidTests('this.', ['always']))
-    .concat(createValidTests('this?.', ['always'])),
-  invalid: []
-    .concat(
-      createInvalidTests(
-        'this.',
-        [],
-        "Unexpected usage of 'this'.",
-        'ThisExpression'
-      ),
-      createInvalidTests(
-        'this?.',
-        [],
-        "Unexpected usage of 'this'.",
-        'ThisExpression'
-      )
-    )
-    .concat(
-      createInvalidTests(
-        'this.',
-        ['never'],
-        "Unexpected usage of 'this'.",
-        'ThisExpression'
-      ),
-      createInvalidTests(
-        'this?.',
-        ['never'],
-        "Unexpected usage of 'this'.",
-        'ThisExpression'
-      )
-    )
-    .concat(
-      createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier')
-    )
-    .concat([
-      {
-        code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
-        output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,
-        errors: ["Unexpected usage of 'this'."],
-        options: ['never']
-      },
-      {
-        code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
-        output: `<template><div :class="{ foo: $foo }"></div></template><!-- never -->`,
-        errors: ["Unexpected usage of 'this'."],
-        options: ['never']
-      }
-    ])
+  valid: [
+    '',
+    '<template></template>',
+    '<template><div></div></template>',
+    ...createValidTests('', []),
+    ...createValidTests('', ['never']),
+    ...createValidTests('this.', ['always']),
+    ...createValidTests('this?.', ['always'])
+  ],
+  invalid: [
+    ...createInvalidTests(
+      'this.',
+      [],
+      "Unexpected usage of 'this'.",
+      'ThisExpression'
+    ),
+    ...createInvalidTests(
+      'this?.',
+      [],
+      "Unexpected usage of 'this'.",
+      'ThisExpression'
+    ),
+    ...createInvalidTests(
+      'this.',
+      ['never'],
+      "Unexpected usage of 'this'.",
+      'ThisExpression'
+    ),
+    ...createInvalidTests(
+      'this?.',
+      ['never'],
+      "Unexpected usage of 'this'.",
+      'ThisExpression'
+    ),
+    ...createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'),
+    {
+      code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
+      output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,
+      errors: ["Unexpected usage of 'this'."],
+      options: ['never']
+    },
+    {
+      code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
+      output: `<template><div :class="{ foo: $foo }"></div></template><!-- never -->`,
+      errors: ["Unexpected usage of 'this'."],
+      options: ['never']
+    }
+  ]
 })
 
 function suggestionPrefix(prefix, options) {
-  if (options[0] === 'always' && !['this.', 'this?.'].includes(prefix)) {
-    return 'this.'
-  } else {
-    return ''
-  }
+  return options[0] === 'always' && !['this.', 'this?.'].includes(prefix)
+    ? 'this.'
+    : ''
 }

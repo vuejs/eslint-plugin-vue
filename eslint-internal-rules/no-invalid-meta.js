@@ -12,15 +12,15 @@
 /**
  * Gets the property of the Object node passed in that has the name specified.
  *
- * @param {string} property Name of the property to return.
+ * @param {string} propertyName Name of the property to return.
  * @param {ASTNode} node The ObjectExpression node.
  * @returns {ASTNode} The Property node or null if not found.
  */
-function getPropertyFromObject(property, node) {
+function getPropertyFromObject(propertyName, node) {
   if (node && node.type === 'ObjectExpression') {
-    for (const prop of node.properties) {
-      if (prop.type === 'Property' && prop.key.name === property) {
-        return prop
+    for (const property of node.properties) {
+      if (property.type === 'Property' && property.key.name === propertyName) {
+        return property
       }
     }
   }
