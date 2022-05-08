@@ -79,11 +79,11 @@ tester.run('no-invalid-attribute-name', rule, {
     },
     {
       filename: 'test.vue',
-      code: `<template><div v-bind:href="..."></div></template>`
+      code: `<template><div v-bind="..."></div></template>`
     },
     {
       filename: 'test.vue',
-      code: `<template><div :href="..."></div></template>`
+      code: `<template><div v-0abc="..."></div></template>`
     }
   ],
   invalid: [
