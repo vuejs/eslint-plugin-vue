@@ -41,7 +41,8 @@ tester.run('custom-event-name-casing', rule, {
         }
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -67,7 +68,8 @@ tester.run('custom-event-name-casing', rule, {
         }
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -92,7 +94,8 @@ tester.run('custom-event-name-casing', rule, {
         }
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -117,7 +120,8 @@ tester.run('custom-event-name-casing', rule, {
         }
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -149,7 +153,8 @@ tester.run('custom-event-name-casing', rule, {
         },
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -165,7 +170,8 @@ tester.run('custom-event-name-casing', rule, {
         },
       }
       </script>
-      `
+      `,
+      options: ['kebab-case']
     },
     {
       filename: 'test.vue',
@@ -269,6 +275,60 @@ tester.run('custom-event-name-casing', rule, {
       </script>
       `,
       options: ['camelCase']
+    },
+    // Default
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('fooBar')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('barBaz')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('bazQux')
+          }
+        }
+      }
+      </script>
+      `
+    },
+
+    // kebab-case
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('foo-bar')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('bar-baz')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('baz-qux')
+          }
+        }
+      }
+      </script>
+      `,
+      options: ['kebab-case']
     }
   ],
   invalid: [
@@ -296,6 +356,7 @@ tester.run('custom-event-name-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: [
         {
           message: "Custom event name 'fooBar' must be kebab-case.",
@@ -344,6 +405,7 @@ tester.run('custom-event-name-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: [
         "Custom event name 'fooBar' must be kebab-case.",
         "Custom event name 'barBaz' must be kebab-case.",
@@ -374,6 +436,7 @@ tester.run('custom-event-name-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: [
         "Custom event name 'fooBar' must be kebab-case.",
         "Custom event name 'barBaz' must be kebab-case.",
@@ -448,6 +511,7 @@ tester.run('custom-event-name-casing', rule, {
         "Custom event name 'click/row' must be kebab-case."
       ]
     },
+    // camelCase
     {
       filename: 'test.vue',
       code: `
@@ -479,6 +543,69 @@ tester.run('custom-event-name-casing', rule, {
         "Custom event name 'baz-qux' must be camelCase."
       ]
     },
+    // Default
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('foo-bar')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('bar-baz')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('baz-qux')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        "Custom event name 'foo-bar' must be camelCase.",
+        "Custom event name 'bar-baz' must be camelCase.",
+        "Custom event name 'baz-qux' must be camelCase."
+      ]
+    },
+    // kebab-case
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('fooBar')">
+      </template>
+      <script>
+      export default {
+        setup(props, context) {
+          return {
+            onInput(value) {
+              context.emit('barBaz')
+            }
+          }
+        },
+        methods: {
+          onClick() {
+            this.$emit('bazQux')
+          }
+        }
+      }
+      </script>
+      `,
+      options: ['kebab-case'],
+      errors: [
+        "Custom event name 'fooBar' must be kebab-case.",
+        "Custom event name 'barBaz' must be kebab-case.",
+        "Custom event name 'bazQux' must be kebab-case."
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
@@ -490,8 +617,8 @@ tester.run('custom-event-name-casing', rule, {
       `,
       errors: [
         {
-          message: "Custom event name 'fooBar' must be kebab-case.",
-          line: 4
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 5
         }
       ]
     }
