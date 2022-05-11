@@ -45,6 +45,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  | :three::two::hammer: |
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  | :three::two::warning: |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  | :three::two::warning: |
+| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: | :three::two::warning: |
 | [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  | :three::two::warning: |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  | :two::warning: |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
@@ -69,27 +70,32 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  | :three::two::warning: |
 | [vue/no-dupe-v-else-if](./no-dupe-v-else-if.md) | disallow duplicate conditions in `v-if` / `v-else-if` chains |  | :three::two::warning: |
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  | :three::two::warning: |
-| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::warning: |
+| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::two::warning: |
+| [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  | :three::warning: |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  | :three::hammer: |
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  | :two::warning: |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  | :three::two::hammer: |
 | [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  | :three::two::warning: |
-| [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: | :three::hammer: |
+| [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: | :three::two::hammer: |
+| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  | :three::two::hammer: |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  | :three::two::hammer: |
 | [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  | :three::two::warning: |
-| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  | :three::hammer: |
+| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  | :three::two::hammer: |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: | :three::two::warning: |
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  | :three::two::warning: |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  | :three::two::warning: |
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  | :three::two::hammer: |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: | :three::two::hammer: |
+| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :three::two::warning: |
 | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
 | [vue/no-v-model-argument](./no-v-model-argument.md) | disallow adding an argument to `v-model` used in custom component |  | :two::warning: |
+| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  | :three::two::warning: |
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  | :three::hammer: |
+| [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  | :three::two::warning: |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: | :three::two::hammer: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  | :three::two::warning: |
@@ -98,10 +104,11 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  | :three::two::warning: |
 | [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  | :three::two::hammer: |
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  | :three::two::warning: |
-| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::warning: |
+| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::two::warning: |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
-| [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::warning: |
-| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::warning: |
+| [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
+| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
+| [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  | :two::warning: |
 | [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
 | [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  | :three::two::warning: |
 | [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  | :two::warning: |
@@ -216,14 +223,10 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: | :hammer: |
-| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
-| [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  | :warning: |
-| [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | require valid keys in model option |  | :warning: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
-| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  | :hammer: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  | :warning: |
@@ -241,13 +244,10 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  | :hammer: |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  | :hammer: |
-| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :warning: |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: | :hammer: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: | :hammer: |
-| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  | :warning: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
-| [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
@@ -319,4 +319,5 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/experimental-script-setup-vars](./experimental-script-setup-vars.md) | (no replacement) |
 | [vue/name-property-casing](./name-property-casing.md) | [vue/component-definition-name-casing](./component-definition-name-casing.md) |
 | [vue/no-confusing-v-for-v-if](./no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) |
+| [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
 | [vue/no-unregistered-components](./no-unregistered-components.md) | [vue/no-undef-components](./no-undef-components.md) |
