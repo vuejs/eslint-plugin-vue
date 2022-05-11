@@ -119,6 +119,7 @@ module.exports = {
     'prefer-spread': 'error',
 
     'dot-notation': 'error',
+    'arrow-body-style': 'error',
 
     'unicorn/consistent-function-scoping': [
       'error',
