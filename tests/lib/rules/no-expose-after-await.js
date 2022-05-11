@@ -134,7 +134,7 @@ tester.run('no-expose-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The `expose` after `await` expression are forbidden.',
+          message: '`expose` is forbidden after an `await` expression.',
           line: 6,
           column: 11
         }
@@ -154,7 +154,7 @@ tester.run('no-expose-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The `expose` after `await` expression are forbidden.',
+          message: '`expose` is forbidden after an `await` expression.',
           line: 6,
           column: 11
         }
@@ -171,7 +171,7 @@ tester.run('no-expose-after-await', rule, {
       parserOptions: { ecmaVersion: 2022 },
       errors: [
         {
-          message: 'The `defineExpose` after `await` expression are forbidden.',
+          message: '`defineExpose` is forbidden after an `await` expression.',
           line: 4,
           column: 7
         }
