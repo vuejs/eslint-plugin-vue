@@ -170,7 +170,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+            '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
           line: 7,
           column: 25,
           endLine: 7,
@@ -195,7 +195,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("foo").bar.baz` after `await` expression are forbidden.',
+            '`import("foo").bar.baz` is forbidden after an `await` expression.',
           line: 7
         }
       ]
@@ -222,12 +222,12 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+            '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
           line: 8
         },
         {
           message:
-            'The `import("foo").bar.baz` after `await` expression are forbidden.',
+            '`import("foo").bar.baz` is forbidden after an `await` expression.',
           line: 9
         }
       ]
@@ -249,7 +249,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("foo").default` after `await` expression are forbidden.',
+            '`import("foo").default` is forbidden after an `await` expression.',
           line: 7
         }
       ]
@@ -271,7 +271,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("foo").default` after `await` expression are forbidden.',
+            '`import("foo").default` is forbidden after an `await` expression.',
           line: 7
         }
       ]
@@ -293,7 +293,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+            '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
           line: 7
         }
       ]
@@ -324,17 +324,17 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("./foo").bar` after `await` expression are forbidden.',
+            '`import("./foo").bar` is forbidden after an `await` expression.',
           line: 10
         },
         {
           message:
-            'The `import("./baz").qux` after `await` expression are forbidden.',
+            '`import("./baz").qux` is forbidden after an `await` expression.',
           line: 11
         },
         {
           message:
-            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+            '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
           line: 12
         }
       ]
@@ -365,17 +365,17 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("./foo").bar` after `await` expression are forbidden.',
+            '`import("./foo").bar` is forbidden after an `await` expression.',
           line: 10
         },
         {
           message:
-            'The `import("./baz").qux` after `await` expression are forbidden.',
+            '`import("./baz").qux` is forbidden after an `await` expression.',
           line: 11
         },
         {
           message:
-            'The `import("vue-i18n").useI18n` after `await` expression are forbidden.',
+            '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
           line: 12
         }
       ]
@@ -397,7 +397,7 @@ tester.run('no-restricted-call-after-await', rule, {
       errors: [
         {
           message:
-            'The `import("..").foo` after `await` expression are forbidden.',
+            '`import("..").foo` is forbidden after an `await` expression.',
           line: 7
         }
       ]
