@@ -48,7 +48,7 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
+    "node": "^14.17.0 || >=16.0.0"
   },
   "peerDependencies": {
     "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
