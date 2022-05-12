@@ -29,7 +29,6 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 |:--------|:------------|:--:|:--:|
 | [vue/comment-directive](./comment-directive.md) | support comment-directives in `<template>` |  | :warning: |
 | [vue/jsx-uses-vars](./jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |  | :warning: |
-| [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | prevent `<script setup>` variables used in `<template>` to be marked as unused |  | :warning: |
 
 </rules-table>
 
@@ -317,6 +316,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | Rule ID | Replaced by |
 |:--------|:------------|
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
+| [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
 
 ## Removed
 
