@@ -9,6 +9,8 @@ since: v6.1.0
 
 > disallow the use of reserved names in component definitions
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+
 ## :book: Rule Details
 
 This rule prevents name collisions between Vue components and standard HTML elements and built-in components.

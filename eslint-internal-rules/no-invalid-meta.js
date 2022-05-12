@@ -18,10 +18,8 @@
  */
 function getPropertyFromObject(propertyName, node) {
   if (node && node.type === 'ObjectExpression') {
-    const properties = node.properties
-
-    for (const property of properties) {
-      if (property.key.name === propertyName) {
+    for (const property of node.properties) {
+      if (property.type === 'Property' && property.key.name === propertyName) {
         return property
       }
     }

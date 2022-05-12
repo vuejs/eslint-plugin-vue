@@ -1,21 +1,21 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/no-invalid-model-keys
+title: vue/valid-model-definition
 description: require valid keys in model option
-since: v7.9.0
 ---
-# vue/no-invalid-model-keys
+# vue/valid-model-definition
 
 > require valid keys in model option
 
-- :warning: This rule was **deprecated** and replaced by [vue/valid-model-definition](valid-model-definition.md) rule.
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
 This rule is aimed at preventing invalid keys in model option.
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -30,7 +30,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -45,7 +45,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -61,7 +61,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -77,7 +77,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -93,7 +93,7 @@ export default {
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-invalid-model-keys': ['error']}">
+<eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
 ```vue
 <script>
@@ -110,11 +110,7 @@ export default {
 
 </eslint-code-block>
 
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v7.9.0
-
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-invalid-model-keys.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-invalid-model-keys.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-model-definition.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-model-definition.js)
