@@ -536,212 +536,188 @@ ruleTester.run('no-reserved-component-names', rule, {
       code: `fn1(component.data)`,
       parserOptions
     },
-    ...vue2BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+    ...vue2BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions
-      }
-    }),
-    ...vue3BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+      parserOptions
+    })),
+    ...vue3BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions
-      }
-    }),
-    ...vue3BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+      parserOptions
+    })),
+    ...vue3BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions,
-        options: [{ disallowVueBuiltInComponents: true }]
-      }
-    })
+      parserOptions,
+      options: [{ disallowVueBuiltInComponents: true }]
+    }))
   ],
 
   invalid: [
-    ...invalidElements.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+    ...invalidElements.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'Literal',
-            line: 3
-          }
-        ]
-      }
-    }),
-    ...invalidElements.map((name) => {
-      return {
-        filename: 'test.vue',
-        code: `Vue.component('${name}', component)`,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'Literal',
-            line: 1
-          }
-        ]
-      }
-    }),
-    ...invalidElements.map((name) => {
-      return {
-        filename: 'test.vue',
-        code: `app.component('${name}', component)`,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'Literal',
-            line: 1
-          }
-        ]
-      }
-    }),
-    ...invalidElements.map((name) => {
-      return {
-        filename: 'test.vue',
-        code: `Vue.component(\`${name}\`, {})`,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'TemplateLiteral',
-            line: 1
-          }
-        ]
-      }
-    }),
-    ...invalidElements.map((name) => {
-      return {
-        filename: 'test.vue',
-        code: `app.component(\`${name}\`, {})`,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'TemplateLiteral',
-            line: 1
-          }
-        ]
-      }
-    }),
-    ...invalidElements.map((name) => {
-      return {
-        filename: 'test.vue',
-        code: `export default {
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: 'test.vue',
+      code: `Vue.component('${name}', component)`,
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'Literal',
+          line: 1
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: 'test.vue',
+      code: `app.component('${name}', component)`,
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'Literal',
+          line: 1
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: 'test.vue',
+      code: `Vue.component(\`${name}\`, {})`,
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'TemplateLiteral',
+          line: 1
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: 'test.vue',
+      code: `app.component(\`${name}\`, {})`,
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'TemplateLiteral',
+          line: 1
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: 'test.vue',
+      code: `export default {
           components: {
             '${name}': {},
           }
         }`,
-        parserOptions,
-        errors: [
-          {
-            messageId: RESERVED_NAMES_IN_HTML.has(name)
-              ? 'reservedInHtml'
-              : 'reserved',
-            data: { name },
-            type: 'Property',
-            line: 3
-          }
-        ]
-      }
-    }),
-    ...vue2BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          type: 'Property',
+          line: 3
+        }
+      ]
+    })),
+    ...vue2BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions,
-        options: [{ disallowVueBuiltInComponents: true }],
-        errors: [
-          {
-            messageId: 'reservedInVue',
-            data: { name },
-            type: 'Literal',
-            line: 3
-          }
-        ]
-      }
-    }),
-    ...vue2BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+      parserOptions,
+      options: [{ disallowVueBuiltInComponents: true }],
+      errors: [
+        {
+          messageId: 'reservedInVue',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }
+      ]
+    })),
+    ...vue2BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions,
-        options: [{ disallowVue3BuiltInComponents: true }],
-        errors: [
-          {
-            messageId: 'reservedInVue',
-            data: { name },
-            type: 'Literal',
-            line: 3
-          }
-        ]
-      }
-    }),
-    ...vue3BuiltInComponents.map((name) => {
-      return {
-        filename: `${name}.vue`,
-        code: `
+      parserOptions,
+      options: [{ disallowVue3BuiltInComponents: true }],
+      errors: [
+        {
+          messageId: 'reservedInVue',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }
+      ]
+    })),
+    ...vue3BuiltInComponents.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
           export default {
             name: '${name}'
           }
         `,
-        parserOptions,
-        options: [{ disallowVue3BuiltInComponents: true }],
-        errors: [
-          {
-            messageId: 'reservedInVue3',
-            data: { name },
-            type: 'Literal',
-            line: 3
-          }
-        ]
-      }
-    })
+      parserOptions,
+      options: [{ disallowVue3BuiltInComponents: true }],
+      errors: [
+        {
+          messageId: 'reservedInVue3',
+          data: { name },
+          type: 'Literal',
+          line: 3
+        }
+      ]
+    }))
   ]
 })

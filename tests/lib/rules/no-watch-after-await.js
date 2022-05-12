@@ -188,7 +188,7 @@ tester.run('no-watch-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The `watch` after `await` expression are forbidden.',
+          message: '`watch` is forbidden after an `await` expression.',
           line: 8,
           column: 11,
           endLine: 8,
