@@ -342,36 +342,15 @@ See also: "[Visual Studio Code](#editor-integrations)" section and [Vetur - Lint
 
 #### The variables used in the `<template>` are warned by `no-unused-vars` rule
 
-You must use [vue/script-setup-uses-vars](../rules/script-setup-uses-vars.md) rule.  
-In your configuration, use the rule set provided by `eslint-plugin-vue` or enable it rule.
+You need to use [vue-eslint-parser] v9.0.0 or later.
 
-Example **.eslintrc.js**:
-
-```js
-module.exports = {
-  // Use the rule set.
-  extends: ['plugin:vue/base'],
-  rules: {
-    // Enable vue/script-setup-uses-vars rule
-    'vue/script-setup-uses-vars': 'error',
-  }
-}
-```
+Previously you had to use the [vue/script-setup-uses-vars](../rules/script-setup-uses-vars.md) rule, this is no longer needed.
 
 #### Compiler macros such as `defineProps` and `defineEmits` generate `no-undef` warnings
 
-You need to enable the compiler macros environment in your ESLint configuration file.
-If you don't want to expose these variables globally, you can use `/* global defineProps, defineEmits */` instead.
+You need to use [vue-eslint-parser] v9.0.0 or later.
 
-Example **.eslintrc.js**:
-
-```js
-module.exports = {
-  env: {
-    'vue/setup-compiler-macros': true
-  }
-}
-```
+Previously you had to use the `vue/setup-compiler-macros` environment, this is no longer needed.
 
 #### Parsing error with Top Level `await`
 
@@ -411,3 +390,5 @@ module.exports = {
 
 Try searching for existing issues.
 If it does not exist, you should open a new issue and share your repository to reproduce the issue.
+
+[vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser
