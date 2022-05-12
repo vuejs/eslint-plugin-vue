@@ -315,9 +315,16 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/experimental-script-setup-vars](./experimental-script-setup-vars.md) | (no replacement) |
-| [vue/name-property-casing](./name-property-casing.md) | [vue/component-definition-name-casing](./component-definition-name-casing.md) |
-| [vue/no-confusing-v-for-v-if](./no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
-| [vue/no-unregistered-components](./no-unregistered-components.md) | [vue/no-undef-components](./no-undef-components.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
+
+## Removed
+
+- :no_entry_sign: These rules have been removed in a previous major release, after they have been deprecated for a while.
+
+| Rule ID | Replaced by | Deprecated in version  | Removed in version |
+|:--------|:------------|:-----------------------|:-------------------|
+| [vue/experimental-script-setup-vars](./experimental-script-setup-vars.md) | (no replacement) | [v7.13.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.13.0) | [v9.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0) |
+| [vue/name-property-casing](./name-property-casing.md) | [vue/component-definition-name-casing](./component-definition-name-casing.md) | [v7.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.0.0) | [v9.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0) |
+| [vue/no-confusing-v-for-v-if](./no-confusing-v-for-v-if.md) | [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | [v5.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v5.0.0) | [v9.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0) |
+| [vue/no-unregistered-components](./no-unregistered-components.md) | [vue/no-undef-components](./no-undef-components.md) | [v8.4.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v8.4.0) | [v9.0.0](https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0) |

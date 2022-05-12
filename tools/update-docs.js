@@ -21,6 +21,7 @@ For example:
 const fs = require('fs')
 const path = require('path')
 const rules = require('./lib/rules')
+const removedRules = require('../lib/removed-rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
@@ -82,10 +83,28 @@ class DocFile {
 
   updateHeader() {
     const { ruleId, meta } = this.rule
-    const title = `# ${ruleId}\n\n> ${meta.docs.description}`
+    const description = meta.docs
+      ? meta.docs.description
+      : this.content.match(/^description: (.*)$/m)[1]
+    const title = `# ${ruleId}\n\n> ${description}`
     const notes = []
 
-    if (meta.deprecated) {
+    if (meta.removedInVersion) {
+      if (meta.replacedBy.length > 0) {
+        const replacedRules = meta.replacedBy.map(
+          (name) => `[vue/${name}](${name}.md) rule`
+        )
+        notes.push(
+          `- :no_entry_sign: This rule was **removed** in eslint-plugin-vue ${
+            meta.removedInVersion
+          } and replaced by ${formatItems(replacedRules)}.`
+        )
+      } else {
+        notes.push(
+          `- :no_entry_sign: This rule was **removed** in eslint-plugin-vue ${meta.removedInVersion}.`
+        )
+      }
+    } else if (meta.deprecated) {
       if (meta.replacedBy) {
         const replacedRules = meta.replacedBy.map(
           (name) => `[vue/${name}](${name}.md) rule`
@@ -254,4 +273,16 @@ for (const rule of rules) {
     .write()
     .checkHeadings()
     .checkGoodBadSymbols()
+}
+
+for (const { ruleName, replacedBy, removedInVersion } of removedRules) {
+  const rule = {
+    name: ruleName,
+    ruleId: `vue/${ruleName}`,
+    meta: {
+      replacedBy,
+      removedInVersion
+    }
+  }
+  DocFile.read(rule).updateHeader().write()
 }

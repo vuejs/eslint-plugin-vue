@@ -9,11 +9,7 @@ since: v7.0.0
 
 > prevent variables defined in `<script setup>` to be marked as undefined
 
-- :warning: This rule was **deprecated**.
-
-:::warning
-This rule is an experimental rule. It may be removed without notice.
-:::
+- :no_entry_sign: This rule was **removed** in eslint-plugin-vue v9.0.0.
 
 This rule will find variables defined in `<script setup="args">` and mark them as defined variables.
 
