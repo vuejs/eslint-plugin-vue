@@ -9,7 +9,7 @@ since: v3.8.0
 
 > enforce specific casing for the name property in Vue components
 
-- :warning: This rule was **removed** in eslint-plugin-vue v9.0.0 and replaced by [vue/component-definition-name-casing](component-definition-name-casing.md) rule.
+- :no_entry_sign: This rule was **removed** in eslint-plugin-vue v9.0.0 and replaced by [vue/component-definition-name-casing](component-definition-name-casing.md) rule.
 
 ## :book: Rule Details
 

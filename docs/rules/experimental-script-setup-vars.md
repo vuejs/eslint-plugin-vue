@@ -9,7 +9,7 @@ since: v7.0.0
 
 > prevent variables defined in `<script setup>` to be marked as undefined
 
-- :warning: This rule was **removed** in eslint-plugin-vue v9.0.0.
+- :no_entry_sign: This rule was **removed** in eslint-plugin-vue v9.0.0.
 
 :::warning
 This rule is an experimental rule. It may be removed without notice.

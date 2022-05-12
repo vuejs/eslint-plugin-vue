@@ -95,13 +95,13 @@ class DocFile {
           (name) => `[vue/${name}](${name}.md) rule`
         )
         notes.push(
-          `- :warning: This rule was **removed** in eslint-plugin-vue ${
+          `- :no_entry_sign: This rule was **removed** in eslint-plugin-vue ${
             meta.removedInVersion
           } and replaced by ${formatItems(replacedRules)}.`
         )
       } else {
         notes.push(
-          `- :warning: This rule was **removed** in eslint-plugin-vue ${meta.removedInVersion}.`
+          `- :no_entry_sign: This rule was **removed** in eslint-plugin-vue ${meta.removedInVersion}.`
         )
       }
     } else if (meta.deprecated) {

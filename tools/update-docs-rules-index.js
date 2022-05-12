@@ -238,7 +238,7 @@ ${deprecatedRules.map(toDeprecatedRuleRow).join('\n')}
 rulesTableContent += `
 ## Removed
 
-- :warning: These rules have been removed in a previous major release, after they have been deprecated for a while.
+- :no_entry_sign: These rules have been removed in a previous major release, after they have been deprecated for a while.
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|
