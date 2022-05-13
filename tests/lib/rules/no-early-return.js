@@ -94,10 +94,10 @@ tester.run('no-early-return', rule, {
       }
       </script>
       `
-    },
+    }
   ],
   invalid: [
-     {
+    {
       filename: 'test.vue',
       code: `
       <script>
@@ -132,10 +132,10 @@ tester.run('no-early-return', rule, {
         {
           message: 'Extra return statement in setup function.',
           line: 18
-        },
+        }
       ]
     },
-     {
+    {
       filename: 'test.vue',
       code: `
       <script>
@@ -154,7 +154,7 @@ tester.run('no-early-return', rule, {
         {
           message: 'Extra return statement in setup function.',
           line: 8
-        },
+        }
       ]
     },
     {
@@ -175,7 +175,7 @@ tester.run('no-early-return', rule, {
         {
           message: 'Extra return statement in data function.',
           line: 3
-        },
+        }
       ]
     },
     {
@@ -196,7 +196,7 @@ tester.run('no-early-return', rule, {
         {
           message: 'Extra return statement in data function.',
           line: 3
-        },
+        }
       ]
     }
   ]
