@@ -2,19 +2,17 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-early-return
-description: disallow early returns in setup and data functions
+description: disallow early `returns` in `setup` and `data` functions
 ---
 # vue/no-early-return
 
-> disallow early returns in setup and data functions
+> disallow early `returns` in `setup` and `data` functions
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
-This rule helps to identify accidental `return` statements in the `setup` block of a Vue component, these are `return` statements that would exit the `setup` block skipping part of the block itself (not allowing to each the end of the block).
-
-On the other hand, the rule checks the `data` block too, applying the same logic.
+The `setup` and `data` functions of Vue components should only have a single (unconditional) return statement at the end. This rule reports early `return` statements, i.e. those that would exit the function early without allowing to reach the end of the function body.
 
 <eslint-code-block :rules="{'vue/no-early-return': ['error']}">
 

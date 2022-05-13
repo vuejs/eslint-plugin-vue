@@ -126,11 +126,13 @@ tester.run('no-early-return', rule, {
       `,
       errors: [
         {
-          message: 'Extra return statement in setup function.',
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'setup' },
           line: 13
         },
         {
-          message: 'Extra return statement in setup function.',
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'setup' },
           line: 18
         }
       ]
@@ -152,7 +154,8 @@ tester.run('no-early-return', rule, {
       `,
       errors: [
         {
-          message: 'Extra return statement in setup function.',
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'setup' },
           line: 8
         }
       ]
@@ -173,7 +176,8 @@ tester.run('no-early-return', rule, {
       `,
       errors: [
         {
-          message: 'Extra return statement in data function.',
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'data' },
           line: 3
         }
       ]
@@ -194,7 +198,8 @@ tester.run('no-early-return', rule, {
       `,
       errors: [
         {
-          message: 'Extra return statement in data function.',
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'data' },
           line: 3
         }
       ]
