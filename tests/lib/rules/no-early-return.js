@@ -128,6 +128,22 @@ tester.run('no-early-return', rule, {
       }
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup () {
+          const foo = computed(() => {
+            if (s) {
+              return
+            }
+          })
+        }
+      }
+      </script>
+      `
     }
   ],
   invalid: [
