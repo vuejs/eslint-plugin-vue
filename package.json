@@ -66,7 +66,7 @@
     "@types/eslint-visitor-keys": "^1.0.0",
     "@types/natural-compare": "^1.4.1",
     "@types/node": "^13.13.5",
-    "@types/semver": "^7.2.0",
+    "@types/semver": "^7.3.9",
     "@typescript-eslint/parser": "^5.23.0",
     "@vuepress/plugin-pwa": "^1.4.1",
     "acorn": "^8.5.0",
