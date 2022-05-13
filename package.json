@@ -69,7 +69,7 @@
     "@types/semver": "^7.3.9",
     "@typescript-eslint/parser": "^5.23.0",
     "@vuepress/plugin-pwa": "^1.9.7",
-    "acorn": "^8.5.0",
+    "acorn": "^8.7.1",
     "env-cmd": "^10.1.0",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
