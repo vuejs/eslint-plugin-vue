@@ -12,7 +12,7 @@ description: disallow early `returns` in `setup` and `data` functions
 
 ## :book: Rule Details
 
-The `setup` and `data` functions of Vue components should only have a single (unconditional) return statement at the end. This rule reports early `return` statements, i.e. those that would exit the function early without allowing to reach the end of the function body.
+The `setup` and `data` functions of Vue components (and [`asyncData`](https://nuxtjs.org/docs/directory-structure/pages/#asyncdata) of Nuxt.js page components) should only have a single (unconditional) return statement at the end. This rule reports early `return` statements, i.e. those that would exit the function early without allowing to reach the end of the function body.
 
 <eslint-code-block :rules="{'vue/no-early-return': ['error']}">
 

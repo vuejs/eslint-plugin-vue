@@ -90,7 +90,41 @@ tester.run('no-early-return', rule, {
       code: `
       <script>
       export default {
+        asyncData () {
+          return { foo: true }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        asyncData (payload) {
+          return { foo: true }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
         data: () => ({ foo: true })
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        asyncData: () => ({ foo: true })
       }
       </script>
       `
@@ -187,7 +221,51 @@ tester.run('no-early-return', rule, {
       code: `
       <script>
       export default {
+        asyncData () {
+          if (this.bar) {
+            return { foo: false }
+          }
+          return { foo: true }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'data' },
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
         data: () => {
+          if (maybe) {
+            return { foo: false }
+          }
+          return { foo: true }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'extraReturnStatement',
+          data: { functionType: 'data' },
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        asyncData: () => {
           if (maybe) {
             return { foo: false }
           }
