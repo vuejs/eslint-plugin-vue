@@ -417,6 +417,21 @@ tester.run('define-macros-order', rule, {
           line: 11
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>defineEmits(['update:test']);defineProps({ test: Boolean })</script>
+      `,
+      output: `
+        <script setup>defineProps({ test: Boolean });defineEmits(['update:test']);</script>
+      `,
+      errors: [
+        {
+          message: message('defineProps'),
+          line: 2
+        }
+      ]
     }
   ]
 })
