@@ -9,7 +9,7 @@ since: v7.0.0
 
 > disallow using components that are not registered inside templates
 
-- :warning: This rule was **deprecated** and replaced by [vue/no-undef-components](no-undef-components.md) rule.
+- :no_entry_sign: This rule was **removed** in eslint-plugin-vue v9.0.0 and replaced by [vue/no-undef-components](no-undef-components.md) rule.
 
 ## :book: Rule Details
 

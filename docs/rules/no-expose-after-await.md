@@ -9,16 +9,18 @@ since: v8.1.0
 
 > disallow asynchronously registered `expose`
 
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+
 ## :book: Rule Details
 
-This rule reports usages of `expose()` after an `await` expression.  
-In the `setup()` function, `expose()` should be registered synchronously.
+This rule reports usages of `expose()` and `defineExpose()` after an `await` expression.  
+In the `setup()` function, `expose()` should be registered synchronously.  
+In the `<script setup>`, `defineExpose()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-expose-after-await': ['error']}">
 
 ```vue
 <script>
-import { watch } from 'vue'
 export default {
   async setup(props, { expose }) {
     /* ✓ GOOD */
@@ -30,6 +32,22 @@ export default {
     expose({/* ... */})
   }
 }
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-expose-after-await': ['error']}">
+
+```vue
+<script setup>
+/* ✓ GOOD */
+defineExpose({/* ... */})
+
+await doSomething()
+
+/* ✗ BAD */
+defineExpose({/* ... */})
 </script>
 ```
 

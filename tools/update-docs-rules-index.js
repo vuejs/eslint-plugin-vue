@@ -8,6 +8,7 @@ const fs = require('fs')
 const path = require('path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
+const removedRules = require('../lib/removed-rules')
 
 const VUE3_EMOJI = ':three:'
 const VUE2_EMOJI = ':two:'
@@ -60,6 +61,22 @@ function toDeprecatedRuleRow(rule) {
     .join(', ')
 
   return `| ${link} | ${replacedBy || '(no replacement)'} |`
+}
+
+function toRemovedRuleRow({
+  ruleName,
+  replacedBy,
+  deprecatedInVersion,
+  removedInVersion
+}) {
+  const link = `[vue/${ruleName}](./${ruleName}.md)`
+  const replacement =
+    replacedBy.map((name) => `[vue/${name}](./${name}.md)`).join(', ') ||
+    '(no replacement)'
+  const deprecatedVersionLink = `[${deprecatedInVersion}](https://github.com/vuejs/eslint-plugin-vue/releases/tag/${deprecatedInVersion})`
+  const removedVersionLink = `[${removedInVersion}](https://github.com/vuejs/eslint-plugin-vue/releases/tag/${removedInVersion})`
+
+  return `| ${link} | ${replacement} | ${deprecatedVersionLink} | ${removedVersionLink} |`
 }
 
 const categoryGroups = [
@@ -216,6 +233,17 @@ if (deprecatedRules.length > 0) {
 ${deprecatedRules.map(toDeprecatedRuleRow).join('\n')}
 `
 }
+
+// -----------------------------------------------------------------------------
+rulesTableContent += `
+## Removed
+
+- :no_entry_sign: These rules have been removed in a previous major release, after they have been deprecated for a while.
+
+| Rule ID | Replaced by | Deprecated in version  | Removed in version |
+|:--------|:------------|:-----------------------|:-------------------|
+${removedRules.map(toRemovedRuleRow).join('\n')}
+`
 
 // -----------------------------------------------------------------------------
 const readmeFilePath = path.resolve(__dirname, '../docs/rules/README.md')

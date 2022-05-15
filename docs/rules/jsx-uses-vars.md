@@ -40,7 +40,6 @@ If you are not using JSX or if you do not use the `no-unused-vars` rule then you
 
 ## :couple: Related Rules
 
-- [vue/script-setup-uses-vars](./script-setup-uses-vars.md)
 - [no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)
 
 ## :rocket: Version

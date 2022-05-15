@@ -5,7 +5,6 @@ workflows:
       - eslint-v6
       - eslint-v7
       - ts-eslint-v4
-      - node-v12
       - node-v14
       - node-v16
       - lint
@@ -36,7 +35,7 @@ jobs:
 
   eslint-v6:
     docker:
-      - image: node:12
+      - image: node:14
     steps:
       - run:
           name: Versions
@@ -88,10 +87,6 @@ jobs:
       - run:
           name: Test
           command: npm test
-  node-v12:
-    <<: *node-base
-    docker:
-      - image: node:12
   node-v14:
     <<: *node-base
     docker:

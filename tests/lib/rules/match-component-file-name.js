@@ -564,7 +564,18 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -581,7 +592,46 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.jsx',
+      code: `
+        export default {
+          name: "MComponent",
+          render() { return <div /> }
+        }
+      `,
+      options: [{ extensions: ['jsx'] }],
+      parserOptions: jsxParserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: "MyComponent",
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -598,7 +648,18 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: \`MyComponent\`,
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -620,7 +681,53 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        <script>
+          export default {
+            name: 'MyComponent',
+            template: '<div />'
+          }
+        </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `
+        <script>
+          export default {
+            name: "MComponent",
+            template: '<div />'
+          }
+        </script>
+      `,
+      options: [{ extensions: ['vue'] }],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        <script>
+          export default {
+            name: "MyComponent",
+            template: '<div />'
+          }
+        </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -640,7 +747,20 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        <script>
+          export default {
+            name: \`MyComponent\`,
+            template: '<div />'
+          }
+        </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -659,7 +779,46 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        new Vue({
+          name: 'MyComponent',
+          template: '<div />'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        new Vue({
+          name: "MComponent",
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        new Vue({
+          name: "MyComponent",
+          template: '<div />'
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -676,7 +835,18 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        new Vue({
+          name: \`MyComponent\`,
+          template: '<div />'
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -692,7 +862,43 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.mixin({
+          name: 'MyComponent',
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        Vue.mixin({
+          name: "MComponent",
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.mixin({
+          name: "MyComponent",
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -708,7 +914,17 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.mixin({
+          name: \`MyComponent\`,
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -724,7 +940,43 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.component('MyComponent', {
+          template: '<div />'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.js',
+      code: `
+        Vue.component("MComponent", {
+          template: '<div />'
+        })
+      `,
+      options: [{ extensions: ['js'] }],
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.component("MyComponent", {
+          template: '<div />'
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -740,7 +992,17 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        Vue.component(\`MyComponent\`, {
+          template: '<div />'
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -756,7 +1018,17 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MComponent` should match file name `MyComponent`.'
+            'Component name `MComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        app.component(\`MyComponent\`, {
+          template: '<div />'
+        })
+      `
+            }
+          ]
         }
       ]
     },
@@ -775,7 +1047,18 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `my-component` should match file name `MyComponent`.'
+            'Component name `my-component` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: 'MyComponent',
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -792,7 +1075,18 @@ ruleTester.run('match-component-file-name', rule, {
       errors: [
         {
           message:
-            'Component name `MyComponent` should match file name `my-component`.'
+            'Component name `MyComponent` should match file name `my-component`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `
+        export default {
+          name: 'my-component',
+          render() { return <div /> }
+        }
+      `
+            }
+          ]
         }
       ]
     }

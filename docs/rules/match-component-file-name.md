@@ -9,6 +9,8 @@ since: v5.2.0
 
 > require component name property to match its file name
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 This rule reports if a component `name` property does not match its file name.
 
 You can define an array of file extensions this rule should verify for the component's name.

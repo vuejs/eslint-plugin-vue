@@ -39,6 +39,8 @@ module.exports = {
     '.vue': require('./processor')
   },
   environments: {
+    // TODO Remove in the next major version
+    /** @deprecated */
     'setup-compiler-macros': {
       globals: {
         defineProps: 'readonly',

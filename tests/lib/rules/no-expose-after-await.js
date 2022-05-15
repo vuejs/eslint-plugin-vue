@@ -101,7 +101,19 @@ tester.run('no-expose-after-await', rule, {
       <script setup>
       defineExpose({ /* ... */ })
       await doSomething()
-      defineExpose({ /* ... */ })
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      await doSomething()
+      {
+        defineExpose({ /* ... */ })
+      }
+      function defineExpose() {}
       </script>
       `,
       parserOptions: { ecmaVersion: 2022 }
@@ -122,7 +134,7 @@ tester.run('no-expose-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The `expose` after `await` expression are forbidden.',
+          message: '`expose` is forbidden after an `await` expression.',
           line: 6,
           column: 11
         }
@@ -142,9 +154,26 @@ tester.run('no-expose-after-await', rule, {
       `,
       errors: [
         {
-          message: 'The `expose` after `await` expression are forbidden.',
+          message: '`expose` is forbidden after an `await` expression.',
           line: 6,
           column: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      await doSomething()
+      defineExpose({ /* ... */ })
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 },
+      errors: [
+        {
+          message: '`defineExpose` is forbidden after an `await` expression.',
+          line: 4,
+          column: 7
         }
       ]
     }

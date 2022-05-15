@@ -9,7 +9,7 @@ since: v3.0.0
 
 > disallow confusing `v-for` and `v-if` on the same element
 
-- :warning: This rule was **deprecated** and replaced by [vue/no-use-v-if-with-v-for](no-use-v-if-with-v-for.md) rule.
+- :no_entry_sign: This rule was **removed** in eslint-plugin-vue v9.0.0 and replaced by [vue/no-use-v-if-with-v-for](no-use-v-if-with-v-for.md) rule.
 
 ## :book: Rule Details
 

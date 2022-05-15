@@ -115,6 +115,56 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
       ]
     },
     {
+      code: `
+        <template ></template >
+        <script ></script >
+        <style ></style >
+      `,
+      output: `
+        <template></template>
+        <script></script>
+        <style></style>
+      `,
+      errors: [
+        {
+          message: "Expected no space before '>', but found.",
+          line: 2,
+          column: 18,
+          endColumn: 20
+        },
+        {
+          message: "Expected no space before '>', but found.",
+          line: 2,
+          column: 30,
+          endColumn: 32
+        },
+        {
+          message: "Expected no space before '>', but found.",
+          line: 3,
+          column: 16,
+          endColumn: 18
+        },
+        {
+          message: "Expected no space before '>', but found.",
+          line: 3,
+          column: 26,
+          endColumn: 28
+        },
+        {
+          message: "Expected no space before '>', but found.",
+          line: 4,
+          column: 15,
+          endColumn: 17
+        },
+        {
+          message: "Expected no space before '>', but found.",
+          line: 4,
+          column: 24,
+          endColumn: 26
+        }
+      ]
+    },
+    {
       code: '<template >\n  <div>\n  </div>\n  <div />\n</template >',
       output: '<template >\n  <div >\n  </div >\n  <div/>\n</template >',
       options: [
@@ -142,6 +192,63 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           line: 4,
           column: 7,
           endColumn: 10
+        }
+      ]
+    },
+    {
+      code: `
+        <template></template>
+        <script></script>
+        <style></style>
+      `,
+      output: `
+        <template ></template >
+        <script ></script >
+        <style ></style >
+      `,
+      options: [
+        {
+          startTag: 'always',
+          endTag: 'always',
+          selfClosingTag: 'never'
+        }
+      ],
+      errors: [
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 2,
+          column: 18,
+          endColumn: 19
+        },
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 2,
+          column: 29,
+          endColumn: 30
+        },
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 3,
+          column: 16,
+          endColumn: 17
+        },
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 3,
+          column: 25,
+          endColumn: 26
+        },
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 4,
+          column: 15,
+          endColumn: 16
+        },
+        {
+          message: "Expected a space before '>', but not found.",
+          line: 4,
+          column: 23,
+          endColumn: 24
         }
       ]
     }
