@@ -71,6 +71,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  | :three::two::warning: |
 | [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::two::warning: |
 | [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  | :three::warning: |
+| [vue/no-invalid-attribute-name](./no-invalid-attribute-name.md) | require valid attribute names |  | :three::two::warning: |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  | :three::hammer: |
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  | :two::warning: |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  | :three::two::hammer: |
@@ -224,7 +225,6 @@ For example:
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: | :hammer: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
-| [vue/no-invalid-attribute-name](./no-invalid-attribute-name.md) | require valid attribute names |  | :warning: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
