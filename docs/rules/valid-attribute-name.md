@@ -1,20 +1,21 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/no-invalid-attribute-name
+title: vue/valid-attribute-name
 description: require valid attribute names
 ---
-# vue/no-invalid-attribute-name
+# vue/valid-attribute-name
 
 > require valid attribute names
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 
 This rule detects invalid HTML attributes.
 
-<eslint-code-block :rules="{'vue/no-invalid-attribute-name': ['error']}">
+<eslint-code-block :rules="{'vue/valid-attribute-name': ['error']}">
 
 ```vue
 <template>
@@ -39,5 +40,5 @@ Nothing.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-invalid-attribute-name.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-invalid-attribute-name.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-attribute-name.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-attribute-name.js)

@@ -105,6 +105,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  | :three::two::warning: |
 | [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::two::warning: |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
+| [vue/valid-attribute-name](./valid-attribute-name.md) | require valid attribute names |  | :three::two::warning: |
 | [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
 | [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
 | [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  | :two::warning: |
@@ -224,7 +225,6 @@ For example:
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: | :hammer: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
-| [vue/no-invalid-attribute-name](./no-invalid-attribute-name.md) | require valid attribute names |  | :warning: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
