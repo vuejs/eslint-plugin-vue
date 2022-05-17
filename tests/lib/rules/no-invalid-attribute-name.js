@@ -125,7 +125,7 @@ tester.run('no-invalid-attribute-name', rule, {
       code: `<template><p v-bind:0abc=""></template>`,
       errors: [
         {
-          message: 'Directive name 0abc is not valid.',
+          message: 'Attribute name 0abc is not valid.',
           line: 1,
           column: 14
         }
