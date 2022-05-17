@@ -59,7 +59,8 @@
     "nth-check": "^2.0.1",
     "postcss-selector-parser": "^6.0.9",
     "semver": "^7.3.5",
-    "vue-eslint-parser": "^9.0.1"
+    "vue-eslint-parser": "^9.0.1",
+    "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
     "@types/eslint": "^8.4.2",
@@ -67,6 +68,7 @@
     "@types/natural-compare": "^1.4.1",
     "@types/node": "^13.13.5",
     "@types/semver": "^7.3.9",
+    "@types/xml-name-validator": "^4.0.0",
     "@typescript-eslint/parser": "^5.23.0",
     "@vuepress/plugin-pwa": "^1.9.7",
     "acorn": "^8.7.1",
