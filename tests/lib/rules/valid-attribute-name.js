@@ -1,11 +1,11 @@
 /**
- * @author *****your name*****
+ * @author Doug Wade <douglas.b.wade@gmail.com>
  * See LICENSE file in root directory for full license.
  */
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/no-invalid-attribute-name')
+const rule = require('../../../lib/rules/valid-attribute-name')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-invalid-attribute-name', rule, {
+tester.run('valid-attribute-name', rule, {
   valid: [
     {
       filename: 'test.vue',

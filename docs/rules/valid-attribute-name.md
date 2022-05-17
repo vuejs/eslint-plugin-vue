@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/no-invalid-attribute-name
+title: vue/valid-attribute-name
 description: require valid attribute names
 ---
-# vue/no-invalid-attribute-name
+# vue/valid-attribute-name
 
 > require valid attribute names
 
@@ -15,7 +15,7 @@ description: require valid attribute names
 
 This rule detects invalid HTML attributes.
 
-<eslint-code-block :rules="{'vue/no-invalid-attribute-name': ['error']}">
+<eslint-code-block :rules="{'vue/valid-attribute-name': ['error']}">
 
 ```vue
 <template>
@@ -40,5 +40,5 @@ Nothing.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-invalid-attribute-name.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-invalid-attribute-name.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-attribute-name.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-attribute-name.js)

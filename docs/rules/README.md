@@ -71,7 +71,6 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  | :three::two::warning: |
 | [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::two::warning: |
 | [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  | :three::warning: |
-| [vue/no-invalid-attribute-name](./no-invalid-attribute-name.md) | require valid attribute names |  | :three::two::warning: |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  | :three::hammer: |
 | [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  | :two::warning: |
 | [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  | :three::two::hammer: |
@@ -106,6 +105,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  | :three::two::warning: |
 | [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::two::warning: |
 | [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
+| [vue/valid-attribute-name](./valid-attribute-name.md) | require valid attribute names |  | :three::two::warning: |
 | [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
 | [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
 | [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  | :two::warning: |
