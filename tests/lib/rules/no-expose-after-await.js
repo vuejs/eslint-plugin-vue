@@ -117,6 +117,17 @@ tester.run('no-expose-after-await', rule, {
       </script>
       `,
       parserOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { onMounted } from 'vue';
+      await doSomething()
+      onMounted(() => {})
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
