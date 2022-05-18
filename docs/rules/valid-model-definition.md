@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-model-definition
 description: require valid keys in model option
+since: v9.0.0
 ---
 # vue/valid-model-definition
 
 > require valid keys in model option
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
@@ -109,6 +109,10 @@ export default {
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.0.0
 
 ## :mag: Implementation
 
