@@ -22,7 +22,8 @@ tester.run('prefer-import-from-vue', rule, {
     `export * from 'vue'`,
     `import Foo from 'foo'`,
     `import { createApp } from 'vue'
-    export { createApp }`
+    export { createApp }`,
+    `import '@vue/runtime-dom'`
   ],
   invalid: [
     {
