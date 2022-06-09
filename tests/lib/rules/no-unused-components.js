@@ -695,6 +695,36 @@ tester.run('no-unused-components', rule, {
           line: 13
         }
       ]
+    },
+
+    // Many components and one in middle is no present
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <Foo />
+            <fio.fio />
+            <baz />
+          </div>
+        </template>
+        <script>
+          export default {
+            components: {
+              Foo,
+              'fio.fio': FioFio,
+              Bar,
+              Baz
+            },
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'The "Bar" component has been registered but not used.',
+          line: 14
+        }
+      ]
     }
   ]
 })
