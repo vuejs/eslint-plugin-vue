@@ -66,6 +66,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><slot myProp></slot></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><custom :onUpdate:modelValue></custom></template>',
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><custom :on-update:model-value></custom></template>',
+      options: ['always']
     }
   ],
 
@@ -285,6 +295,32 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'MyProp' must be hyphenated.",
           type: 'VIdentifier',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><custom :onUpdate:modelValue></custom></template>',
+      output: '<template><custom :on-update:model-value></custom></template>',
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':onUpdate:modelValue' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><custom :on-update:model-value></custom></template>',
+      output: '<template><custom :onUpdate:modelValue></custom></template>',
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute ':on-update:model-value' can't be hyphenated.",
+          type: 'VDirectiveKey',
           line: 1
         }
       ]

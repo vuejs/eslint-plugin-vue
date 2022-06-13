@@ -28,6 +28,26 @@ ruleTester.run('prop-name-casing', rule, {
       filename: 'test.vue',
       code: `
         export default {
+          props: ['onUpdate:modelValue']
+        }
+      `,
+      options: ['camelCase'],
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['on_update:model_value']
+        }
+      `,
+      options: ['snake_case'],
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
           props: ['greetingText']
         }
       `,
