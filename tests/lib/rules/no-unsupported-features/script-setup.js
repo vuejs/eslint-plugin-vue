@@ -26,6 +26,12 @@ tester.run('no-unsupported-features/script-setup', rule, {
     },
     {
       code: `
+      <script setup>
+      </script>`,
+      options: buildOptions({ version: '^2.7.0' })
+    },
+    {
+      code: `
       <script>
       </script>`,
       options: buildOptions({ version: '^2.6.0' })
@@ -39,7 +45,7 @@ tester.run('no-unsupported-features/script-setup', rule, {
       options: buildOptions({ version: '^2.6.0' }),
       errors: [
         {
-          message: '`<script setup>` are not supported until Vue.js "3.0.0".',
+          message: '`<script setup>` is not supported until Vue.js "2.7.0".',
           line: 2
         }
       ]
