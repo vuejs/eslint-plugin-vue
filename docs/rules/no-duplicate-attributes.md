@@ -45,27 +45,37 @@ This rule reports duplicate attributes.
 {
   "vue/no-duplicate-attributes": ["error", {
     "allowCoexistClass": true,
-    "allowCoexistStyle": true
+    "allowCoexistStyle": true,
+    "allowedDOMProps": ["name"]
   }]
 }
 ```
 
 - `allowCoexistClass` (`boolean`) ... Enables [`v-bind:class`] directive can coexist with the plain `class` attribute. Default is `true`.
 - `allowCoexistStyle` (`boolean`) ... Enables [`v-bind:style`] directive can coexist with the plain `style` attribute. Default is `true`.
+- `allowedDOMProps` (`Array<string>`) ... Enables [`v-bind:attribute-name.prop`] directive to coexist with  [`v-bind:attribute-name`] or [`attribute-name`] attribute. Default is `[]`
 
 [`v-bind:class`]: https://v3.vuejs.org/guide/class-and-style.html
 [`v-bind:style`]: https://v3.vuejs.org/guide/class-and-style.html
+[`v-bind:prop`]: https://vuejs.org/api/built-in-directives.html#v-bind
 
 ### `"allowCoexistClass": false, "allowCoexistStyle": false`
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error', {allowCoexistClass: false, allowCoexistStyle: false}]}">
 
+### `allowedDOMProps: ['name', 'id']`
+
 ```vue
 <template>
+  <!-- ✓ GOOD -->
+  <MyComponent :name="'test'" :name.prop="def" />
+  <MyComponent :id="'test'" :id.prop="def" />
   <!-- ✗ BAD -->
   <MyComponent class="abc" :class="def" />
   <MyComponent style="abc" :style="def" />
+  <MyComponent :disabled="true" :disabled.prop="true" />
 </template>
+
 ```
 
 </eslint-code-block>

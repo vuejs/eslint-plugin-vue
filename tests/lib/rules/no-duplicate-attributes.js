@@ -60,14 +60,19 @@ tester.run('no-duplicate-attributes', rule, {
     {
       filename: 'test.vue',
       code: '<template><my-component :foo :[foo]></my-component></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><my-component :id="a" :id.prop="b"></my-component></template>',
+      options: [{ allowedDOMProps: ['name', 'id'] }]
     }
   ],
   invalid: [
-    // {
-    //   filename: 'test.vue',
-    //   code: '<template><div><div foo foo></div></div></template>',
-    //   errors: ["Duplicate attribute 'foo'."]
-    // },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div foo foo></div></div></template>',
+      errors: ["Duplicate attribute 'foo'."]
+    },
     {
       filename: 'test.vue',
       code: '<template><div><div foo v-bind:foo></div></div></template>',
@@ -101,6 +106,12 @@ tester.run('no-duplicate-attributes', rule, {
       code: '<template><div><div :class class></div></div></template>',
       errors: ["Duplicate attribute 'class'."],
       options: [{ allowCoexistClass: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><my-component :id="a" :id.prop="b"></my-component></template>',
+      errors: ["Duplicate attribute 'id'."],
+      options: [{ allowedDOMProps: ['name'] }]
     }
   ]
 })
