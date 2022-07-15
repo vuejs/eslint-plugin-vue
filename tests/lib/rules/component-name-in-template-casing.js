@@ -814,6 +814,46 @@ tester.run('component-name-in-template-casing', rule, {
         'Component name "client-only" is not PascalCase.',
         'Component name "keep-alive" is not PascalCase.'
       ]
+    },
+    {
+      code: `
+        <template>
+          <the-component />
+        </template>
+        <script setup>
+          import TheComponent from '@/components/theComponent.vue'
+        </script>
+      `,
+      options: ['PascalCase'],
+      output: `
+        <template>
+          <TheComponent />
+        </template>
+        <script setup>
+          import TheComponent from '@/components/theComponent.vue'
+        </script>
+      `,
+      errors: ['Component name "the-component" is not PascalCase.']
+    },
+    {
+      code: `
+        <template>
+          <TheComponent />
+        </template>
+        <script setup>
+          import TheComponent from '@/components/theComponent.vue'
+        </script>
+      `,
+      options: ['kebab-case'],
+      output: `
+        <template>
+          <the-component />
+        </template>
+        <script setup>
+          import TheComponent from '@/components/theComponent.vue'
+        </script>
+      `,
+      errors: ['Component name "TheComponent" is not kebab-case.']
     }
   ]
 })
