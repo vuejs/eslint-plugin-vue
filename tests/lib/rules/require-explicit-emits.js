@@ -1857,6 +1857,35 @@ emits: {'foo': null}
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits([\`foo\`])
+      emit(\`foo\`);
+      emit(\`bar\`)
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <script setup>
+      const emit = defineEmits([\`foo\`, 'bar'])
+      emit(\`foo\`);
+      emit(\`bar\`)
+      </script>
+      `
+            }
+          ]
+        }
+      ]
     }
   ]
 })
