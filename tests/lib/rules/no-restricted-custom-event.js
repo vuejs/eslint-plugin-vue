@@ -291,6 +291,25 @@ tester.run('no-restricted-custom-event', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(props, ctx) {
+          ctx.emit(\`foo\`)
+        }
+      }
+      </script>
+      `,
+      options: ['foo'],
+      errors: [
+        {
+          message: 'Using `foo` event is not allowed.',
+          line: 5
+        }
+      ]
     }
   ]
 })

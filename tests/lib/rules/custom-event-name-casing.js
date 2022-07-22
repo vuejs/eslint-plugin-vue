@@ -621,6 +621,21 @@ tester.run('custom-event-name-casing', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits({})
+      emit(\`foo-bar\`) // template literal
+      </script>
+      `,
+      errors: [
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 4
+        }
+      ]
     }
   ]
 })
