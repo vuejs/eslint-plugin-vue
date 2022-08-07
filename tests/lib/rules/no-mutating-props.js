@@ -370,11 +370,12 @@ ruleTester.run('no-mutating-props', rule, {
             <div v-if="this.prop6++ && this.someProp < 10"></div>
             <div v-text="this.prop7.shift()"></div>
             <div v-text="this.prop8.slice(0).shift()"></div>
+            <div v-if="delete prop9.a"></div>
           </div>
         </template>
         <script>
           export default {
-            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6', 'prop7', 'prop8']
+            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6', 'prop7', 'prop8', 'prop9']
           }
         </script>
       `,
@@ -402,6 +403,10 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "prop7" prop.',
           line: 10
+        },
+        {
+          message: 'Unexpected mutation of "prop9" prop.',
+          line: 12
         }
       ]
     },
@@ -507,6 +512,7 @@ ruleTester.run('no-mutating-props', rule, {
                 ++this.items
                 this.todo.type = 'completed'
                 this.items.push('something')
+                delete this.todo.type
               }
             }
           }
@@ -524,6 +530,10 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "items" prop.',
           line: 18
+        },
+        {
+          message: 'Unexpected mutation of "todo" prop.',
+          line: 19
         }
       ]
     },
@@ -651,6 +661,7 @@ ruleTester.run('no-mutating-props', rule, {
               props.a ++
               props.b = 1
               props.c.push(1)
+              delete props.d
             }
           }
         </script>
@@ -667,6 +678,10 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "c" prop.',
           line: 7
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 8
         }
       ]
     },
@@ -681,6 +696,7 @@ ruleTester.run('no-mutating-props', rule, {
               c.push(1)
 
               c.x.push(1)
+              delete c.y
               e.foo++
               f.foo++
             }
@@ -705,12 +721,16 @@ ruleTester.run('no-mutating-props', rule, {
           line: 9
         },
         {
-          message: 'Unexpected mutation of "d" prop.',
+          message: 'Unexpected mutation of "c" prop.',
           line: 10
         },
         {
           message: 'Unexpected mutation of "d" prop.',
           line: 11
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 12
         }
       ]
     },
@@ -722,6 +742,7 @@ ruleTester.run('no-mutating-props', rule, {
           export default {
             setup({a: foo, b: [...bar], c: baz = 1}) {
               foo.x ++
+              delete foo.y
               bar.x = 1
               baz.push(1)
             }
@@ -734,12 +755,16 @@ ruleTester.run('no-mutating-props', rule, {
           line: 5
         },
         {
-          message: 'Unexpected mutation of "b" prop.',
+          message: 'Unexpected mutation of "a" prop.',
           line: 6
         },
         {
-          message: 'Unexpected mutation of "c" prop.',
+          message: 'Unexpected mutation of "b" prop.',
           line: 7
+        },
+        {
+          message: 'Unexpected mutation of "c" prop.',
+          line: 8
         }
       ]
     },
@@ -752,6 +777,7 @@ ruleTester.run('no-mutating-props', rule, {
               props.a ++
               props.b = 1
               props.c.push(1)
+              delete props.d
             }
           }
         </script>
@@ -768,6 +794,10 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "c" prop.',
           line: 7
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 8
         }
       ]
     },
