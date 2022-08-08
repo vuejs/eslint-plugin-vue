@@ -249,6 +249,7 @@ For example:
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: | :hammer: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
+| [vue/prefer-optional-props-using-with-defaults](./prefer-optional-props-using-with-defaults.md) | enforce props with default values ​​to be optional | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
