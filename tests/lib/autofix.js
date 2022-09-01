@@ -172,3 +172,46 @@ describe('Complex autofix test cases', () => {
     })
   })
 })
+
+describe('Autofix test cases with Typescript', () => {
+  const tsLinter = new Linter()
+  tsLinter.defineParser('vue-eslint-parser', parser)
+  for (const key of Object.keys(rules)) {
+    const ruleId = `vue/${key}`
+    tsLinter.defineRule(ruleId, rules[key])
+  }
+
+  describe('Autofix of `vue/order-in-components` with type assertions in "props".', () => {
+    const config = Object.assign({}, baseConfig, {
+      rules: {
+        'vue/order-in-components': ['error', { order: ['props', 'setup'] }]
+      },
+    })
+
+    config.parserOptions.parser = { 'ts': require.resolve('@typescript-eslint/parser') }
+
+    it('Should fix fields order', () => {
+      const code = `
+      <script lang="ts">
+        export default {
+          setup () {},
+          props: {
+            foo: { type: Array as PropType<number[]> },
+          }
+        };
+      </script>`
+
+      const output = `
+      <script lang="ts">
+        export default {
+          props: {
+            foo: { type: Array as PropType<number[]> },
+          },
+          setup () {}
+        };
+      </script>`
+
+      assert.equal(tsLinter.verifyAndFix(code, config, 'test.vue').output, output)
+    })
+  })
+})
