@@ -943,6 +943,6 @@ ruleTester.run('order-in-components', rule, {
           line: 5
         }
       ]
-    },
+    }
   ]
 })
