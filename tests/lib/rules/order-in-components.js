@@ -908,6 +908,41 @@ ruleTester.run('order-in-components', rule, {
           line: 15
         }
       ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        <script lang="ts">
+          export default {
+            setup () {},
+            props: {
+              foo: { type: Array as PropType<number[]> },
+            },
+          };
+        </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: { ts: require.resolve('@typescript-eslint/parser') }
+      },
+      output: `
+        <script lang="ts">
+          export default {
+            props: {
+              foo: { type: Array as PropType<number[]> },
+            },
+            setup () {},
+          };
+        </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "setup" property on line 4.',
+          line: 5
+        }
+      ]
     }
   ]
 })
