@@ -83,9 +83,9 @@ tester.run('no-ref-object-destructure', rule, {
     // Reactivity Transform
     `
     const count = $ref(0)
-    const value1 = computed(() => count /* ✓ GOOD */)
-    const value2 = fn($$(count)) /* ✓ GOOD */
-    const value3 = computed(() => fn(count) /* ✓ GOOD */)
+    const value1 = computed(() => count)
+    const value2 = fn($$(count))
+    const value3 = computed(() => fn(count))
     `,
     `
     const count = $(foo)
@@ -142,12 +142,12 @@ tester.run('no-ref-object-destructure', rule, {
       code: `
       import { ref } from 'vue'
       const count = ref(0)
-      const value1 = count.value /* ✗ BAD */
-      const { value: value2 } = count /* ✗ BAD */
-      const value3 = fn(count.value) /* ✗ BAD */
-      const { value: value4 = 42 } = count /* ✗ BAD */
+      const value1 = count.value
+      const { value: value2 } = count
+      const value3 = fn(count.value)
+      const { value: value4 = 42 } = count
       if (foo) {
-        const value1 = count.value /* ✗ BAD */
+        const value1 = count.value
       }
       `,
       errors: [
@@ -312,8 +312,8 @@ tester.run('no-ref-object-destructure', rule, {
     {
       code: `
       const count = $ref(0)
-      const value1 = count /* ✗ BAD */
-      const value2 = fn(count) /* ✗ BAD */
+      const value1 = count
+      const value2 = fn(count)
       `,
       errors: [
         {
