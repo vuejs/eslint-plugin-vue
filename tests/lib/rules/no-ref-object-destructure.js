@@ -19,9 +19,9 @@ tester.run('no-ref-object-destructure', rule, {
     `
     import { ref } from 'vue'
     const count = ref(0)
-    const value1 = computed(() => count.value /* ✓ GOOD */)
-    const value2 = fn(count) /* ✓ GOOD */
-    const value3 = computed(() => fn(count.value) /* ✓ GOOD */)
+    const value1 = computed(() => count.value)
+    const value2 = fn(count)
+    const value3 = computed(() => fn(count.value))
     `,
     `
     import { toRefs } from 'vue'
