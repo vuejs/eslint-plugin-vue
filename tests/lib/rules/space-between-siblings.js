@@ -39,6 +39,30 @@ tester.run('space-between-siblings', rule, {
         <p>Foo <b>bar</b> baz.</p>
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div></div>
+          <div>
+          </div>
+          <div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div></div>
+          <div>
+          </div>
+          <div />
+        </div>
+      </template>
+      `,
+      options: ["never"]
     }
   ],
   invalid: [
@@ -262,9 +286,9 @@ tester.run('space-between-siblings', rule, {
           message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
-        },
+        }
       ],
-      options: [{ ignoreNewlinesAfter: ['br'] }]
+      options: ["always", { ignoreNewlinesAfter: ['br'] }]
     },
     {
       filename: 'test.vue',
@@ -307,7 +331,7 @@ tester.run('space-between-siblings', rule, {
           column: 13
         }
       ],
-      options: [{ ignoreNewlinesBefore: ['br'] }]
+      options: ["always", { ignoreNewlinesBefore: ['br'] }]
     },
     {
       filename: 'test.vue',
@@ -342,9 +366,92 @@ tester.run('space-between-siblings', rule, {
           message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
-        },
+        }
       ],
-      options: [{ ignoreNewlinesBefore: ['br'], ignoreNewlinesAfter: ['br'] }]
+      options: ["always", { ignoreNewlinesBefore: ['br'], ignoreNewlinesAfter: ['br'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <ul>
+            <li>
+            </li>
+
+
+            <br />
+
+            <li>
+            </li>
+          </ul>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <ul>
+            <li>
+            </li>
+            <br />
+            <li>
+            </li>
+          </ul>
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line after this tag.',
+          line: 9,
+          column: 13
+        },
+        {
+          message: 'Unexpected blank line after this tag.',
+          line: 11,
+          column: 13
+        }
+      ],
+      options: ["never"]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div></div>
+
+          <div>
+          </div>
+
+          <div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div></div>
+          <div>
+          </div>
+          <div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line after this tag.',
+          line: 6,
+          column: 11
+        },
+        {
+          message: 'Unexpected blank line after this tag.',
+          line: 9,
+          column: 11
+        }
+      ],
+      options: ["never"]
     }
   ]
 })
