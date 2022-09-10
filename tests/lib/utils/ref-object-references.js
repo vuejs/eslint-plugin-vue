@@ -37,8 +37,15 @@ function extractRefs(code, extract) {
 
   linter.defineRule('vue/extract-test', (context) => {
     const refs = extract(context)
+
+    const processed = new Set()
     return {
       '*'(node) {
+        if (processed.has(node)) {
+          // Old ESLint may be called twice on the same node.
+          return
+        }
+        processed.add(node)
         const data = refs.get(node)
         if (data) {
           references.push(data)
