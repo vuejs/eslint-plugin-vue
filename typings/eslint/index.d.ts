@@ -54,6 +54,9 @@ export namespace Scope {
     eslintExplicitGlobal?: boolean | undefined
     eslintExplicitGlobalComments?: Comment[] | undefined
     eslintImplicitGlobalSetting?: 'readonly' | 'writable' | undefined
+
+    isTypeVariable?: boolean
+    isValueVariable?: boolean
   }
   interface Reference {
     identifier: VAST.Identifier
