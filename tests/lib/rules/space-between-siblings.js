@@ -22,16 +22,12 @@ tester.run('space-between-siblings', rule, {
       code: `
       <template>
         <div>
-          <ul>
-            <li>
-            </li>
+          <div></div>
 
-            <li>
-            </li>
+          <div>
+          </div>
 
-            <li>
-            </li>
-          </ul>
+          <div />
         </div>
       </template>
       `
