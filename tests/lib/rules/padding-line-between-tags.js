@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/space-between-siblings')
+const rule = require('../../../lib/rules/padding-line-between-tags')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('space-between-siblings', rule, {
+tester.run('padding-line-between-tags', rule, {
   valid: [
     {
       filename: 'test.vue',

@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/space-between-siblings
+title: vue/padding-line-between-tags
 description: Require or disallow newlines between sibling tags in template
 ---
-# vue/space-between-siblings
+# vue/padding-line-between-tags
 
 > Require or disallow newlines between sibling tags in template
 
@@ -15,7 +15,7 @@ description: Require or disallow newlines between sibling tags in template
 
 This rule requires or disallows newlines between sibling HTML tags
 
-<eslint-code-block fix :rules="{'vue/space-between-siblings': ['error']}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -49,7 +49,7 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ```json
 {
-  "vue/space-between-siblings": ["error", "always" | "never" , {
+  "vue/padding-line-between-tags": ["error", "always" | "never" , {
       "ignoreNewlinesBefore": [],
       "ignoreNewlinesAfter": []
   }]
@@ -65,7 +65,7 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ### `"never"`
 
-<eslint-code-block fix :rules="{'vue/space-between-siblings': ['error', "never"]}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', "never"]}">
 
 ```vue
 <template>
@@ -82,7 +82,7 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ### `"ignoreNewlinesBefore": ["br"]`
 
-<eslint-code-block fix :rules="{'vue/space-between-siblings': ['error', { ignoreNewlinesBefore: ['br'] }]}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', { ignoreNewlinesBefore: ['br'] }]}">
 
 ```vue
 <template>
@@ -103,7 +103,7 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ### `"ignoreNewlinesAfter": ["br"]`
 
-<eslint-code-block fix :rules="{'vue/space-between-siblings': ['error', { ignoreNewlinesAfter: ['br'] }]}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', { ignoreNewlinesAfter: ['br'] }]}">
 
 ```vue
 <template>
@@ -124,5 +124,5 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/space-between-siblings.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/space-between-siblings.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/padding-line-between-tags.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-line-between-tags.js)
