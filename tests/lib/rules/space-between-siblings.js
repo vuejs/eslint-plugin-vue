@@ -31,6 +31,14 @@ tester.run('space-between-siblings', rule, {
         </div>
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <p>Foo <b>bar</b> baz.</p>
+      </template>
+      `
     }
   ],
   invalid: [
