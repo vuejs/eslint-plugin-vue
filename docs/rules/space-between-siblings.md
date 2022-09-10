@@ -21,16 +21,12 @@ This rule requires newlines between sibling HTML tags
 <!-- ✓ GOOD -->
 <template>
   <div>
-    <ul>
-      <li>
-      </li>
+    <div></div>
 
-      <li>
-      </li>
+    <div>
+    </div>
 
-      <li>
-      </li>
-    </ul>
+    <div />
   </div>
 </template>
 ```
@@ -39,14 +35,10 @@ This rule requires newlines between sibling HTML tags
 <!-- ✗ BAD -->
 <template>
   <div>
-    <ul>
-      <li>
-      </li>
-      <li>
-      </li>
-      <li>
-      </li>
-    </ul>
+    <div></div>
+    <div>
+    </div>
+    <div />
   </div>
 </template>
 ```
@@ -79,9 +71,6 @@ This rule requires newlines between sibling HTML tags
     <ul>
       <li>
       </li>
-
-      <li>
-      </li>
       <br />
 
       <li>
@@ -101,9 +90,6 @@ This rule requires newlines between sibling HTML tags
 <template>
   <div>
     <ul>
-      <li>
-      </li>
-
       <li>
       </li>
       

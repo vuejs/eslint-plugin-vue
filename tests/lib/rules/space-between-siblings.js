@@ -39,43 +39,35 @@ tester.run('space-between-siblings', rule, {
       code: `
       <template>
         <div>
-          <ul>
-            <li>
-            </li>
-            <li>
-            </li>
-            <li>
-            </li>
-          </ul>
+          <div></div>
+          <div>
+          </div>
+          <div />
         </div>
       </template>
       `,
       output: `
       <template>
         <div>
-          <ul>
-            <li>
-            </li>
+          <div></div>
 
-            <li>
-            </li>
+          <div>
+          </div>
 
-            <li>
-            </li>
-          </ul>
+          <div />
         </div>
       </template>
       `,
       errors: [
         {
           message: 'Expected blank line after this block.',
-          line: 7,
-          column: 13
+          line: 5,
+          column: 11
         },
         {
           message: 'Expected blank line after this block.',
-          line: 9,
-          column: 13
+          line: 7,
+          column: 11
         }
       ]
     },
@@ -236,8 +228,6 @@ tester.run('space-between-siblings', rule, {
           <ul>
             <li>
             </li>
-            <li>
-            </li>
             <br />
             <li>
             </li>
@@ -249,9 +239,6 @@ tester.run('space-between-siblings', rule, {
       <template>
         <div>
           <ul>
-            <li>
-            </li>
-
             <li>
             </li>
 
@@ -268,11 +255,6 @@ tester.run('space-between-siblings', rule, {
           line: 7,
           column: 13
         },
-        {
-          message: 'Expected blank line after this block.',
-          line: 9,
-          column: 13
-        }
       ],
       options: [{ ignoreNewlinesAfter: ['br'] }]
     },
@@ -284,8 +266,6 @@ tester.run('space-between-siblings', rule, {
           <ul>
             <li>
             </li>
-            <li>
-            </li>
             <br />
             <li>
             </li>
@@ -297,9 +277,6 @@ tester.run('space-between-siblings', rule, {
       <template>
         <div>
           <ul>
-            <li>
-            </li>
-
             <li>
             </li>
             <br />
@@ -318,12 +295,7 @@ tester.run('space-between-siblings', rule, {
         },
         {
           message: 'Expected blank line after this block.',
-          line: 9,
-          column: 13
-        },
-        {
-          message: 'Expected blank line after this block.',
-          line: 10,
+          line: 8,
           column: 13
         }
       ],
@@ -337,8 +309,6 @@ tester.run('space-between-siblings', rule, {
           <ul>
             <li>
             </li>
-            <li>
-            </li>
             <br />
             <li>
             </li>
@@ -350,9 +320,6 @@ tester.run('space-between-siblings', rule, {
       <template>
         <div>
           <ul>
-            <li>
-            </li>
-
             <li>
             </li>
             <br />
@@ -368,11 +335,6 @@ tester.run('space-between-siblings', rule, {
           line: 7,
           column: 13
         },
-        {
-          message: 'Expected blank line after this block.',
-          line: 9,
-          column: 13
-        }
       ],
       options: [{ ignoreNewlinesBefore: ['br'], ignoreNewlinesAfter: ['br'] }]
     }
