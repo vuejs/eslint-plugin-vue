@@ -62,7 +62,7 @@ tester.run('space-between-siblings', rule, {
         </div>
       </template>
       `,
-      options: ["never"]
+      options: ['never']
     }
   ],
   invalid: [
@@ -288,7 +288,7 @@ tester.run('space-between-siblings', rule, {
           column: 13
         }
       ],
-      options: ["always", { ignoreNewlinesAfter: ['br'] }]
+      options: ['always', { ignoreNewlinesAfter: ['br'] }]
     },
     {
       filename: 'test.vue',
@@ -331,7 +331,7 @@ tester.run('space-between-siblings', rule, {
           column: 13
         }
       ],
-      options: ["always", { ignoreNewlinesBefore: ['br'] }]
+      options: ['always', { ignoreNewlinesBefore: ['br'] }]
     },
     {
       filename: 'test.vue',
@@ -368,7 +368,10 @@ tester.run('space-between-siblings', rule, {
           column: 13
         }
       ],
-      options: ["always", { ignoreNewlinesBefore: ['br'], ignoreNewlinesAfter: ['br'] }]
+      options: [
+        'always',
+        { ignoreNewlinesBefore: ['br'], ignoreNewlinesAfter: ['br'] }
+      ]
     },
     {
       filename: 'test.vue',
@@ -413,7 +416,7 @@ tester.run('space-between-siblings', rule, {
           column: 13
         }
       ],
-      options: ["never"]
+      options: ['never']
     },
     {
       filename: 'test.vue',
@@ -451,7 +454,7 @@ tester.run('space-between-siblings', rule, {
           column: 11
         }
       ],
-      options: ["never"]
+      options: ['never']
     }
   ]
 })
