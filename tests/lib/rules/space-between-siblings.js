@@ -60,12 +60,12 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 5,
           column: 11
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 7,
           column: 11
         }
@@ -108,17 +108,17 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 9,
           column: 13
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 10,
           column: 13
         }
@@ -155,7 +155,7 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 6,
           column: 11
         }
@@ -204,17 +204,17 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 6,
           column: 11
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 10,
           column: 15
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 15,
           column: 9
         }
@@ -251,7 +251,7 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
         },
@@ -289,12 +289,12 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
         },
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 8,
           column: 13
         }
@@ -331,7 +331,7 @@ tester.run('space-between-siblings', rule, {
       `,
       errors: [
         {
-          message: 'Expected blank line after this block.',
+          message: 'Expected blank line after this tag.',
           line: 7,
           column: 13
         },
