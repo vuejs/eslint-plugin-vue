@@ -13,7 +13,7 @@ description: Require or disallow newlines between sibling tags in template
 
 ## :book: Rule Details
 
-This rule requires or disallows newlines between sibling HTML tags
+This rule requires or disallows newlines between sibling HTML tags.
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error']}">
 
