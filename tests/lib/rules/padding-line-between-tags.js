@@ -229,11 +229,7 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
-      options: [
-        [
-          { blankLine: 'always', prev: 'br', next: 'img' }
-        ]
-      ]
+      options: [[{ blankLine: 'always', prev: 'br', next: 'img' }]]
     }
   ],
   invalid: [
