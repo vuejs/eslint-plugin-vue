@@ -30,18 +30,6 @@ tester.run('padding-line-between-tags', rule, {
           <div />
         </div>
       </template>
-      `,
-      output: `
-      <template>
-        <div>
-          <div></div>
-
-          <div>
-          </div>
-
-          <div />
-        </div>
-      </template>
       `
     },
     {
@@ -50,26 +38,11 @@ tester.run('padding-line-between-tags', rule, {
       <template>
         <p>Foo <b>bar</b> baz.</p>
       </template>
-      `,
-      output: `
-      <template>
-        <p>Foo <b>bar</b> baz.</p>
-      </template>
       `
     },
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <div>
-          <div></div>
-          <div>
-          </div>
-          <div />
-        </div>
-      </template>
-      `,
-      output: `
       <template>
         <div>
           <div></div>
@@ -96,19 +69,6 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
-      output: `
-      <template>
-        <div>
-          <ul>
-            <li>
-            </li>
-            <br />
-            <li>
-            </li>
-          </ul>
-        </div>
-      </template>
-      `,
       options: [
         [
           { blankLine: 'always', prev: '*', next: '*' },
@@ -120,22 +80,6 @@ tester.run('padding-line-between-tags', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <div>
-          <ul>
-            <li>
-            </li>
-
-            <br />
-            <div></div>
-
-            <li>
-            </li>
-          </ul>
-        </div>
-      </template>
-      `,
-      output: `
       <template>
         <div>
           <ul>
@@ -175,21 +119,6 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
-      output: `
-      <template>
-        <div>
-          <ul>
-            <li>
-            </li>
-            <br />
-
-            <div></div>
-            <li>
-            </li>
-          </ul>
-        </div>
-      </template>
-      `,
       options: [
         [
           { blankLine: 'never', prev: '*', next: '*' },
@@ -200,21 +129,6 @@ tester.run('padding-line-between-tags', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <div>
-          <ul>
-            <li>
-            </li>
-            <br />
-
-            <img />
-            <li>
-            </li>
-          </ul>
-        </div>
-      </template>
-      `,
-      output: `
       <template>
         <div>
           <ul>
