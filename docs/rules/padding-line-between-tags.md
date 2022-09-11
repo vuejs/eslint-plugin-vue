@@ -49,23 +49,30 @@ This rule requires or disallows newlines between sibling HTML tags
 
 ```json
 {
-  "vue/padding-line-between-tags": ["error", "always" | "never" , {
-      "ignoreNewlinesBefore": [],
-      "ignoreNewlinesAfter": []
-  }]
+  "vue/padding-line-between-tags": ["error", [
+    { blankLine: 'always', prev: '*', next: '*' }
+  ]]
 }
 ```
 
-- `always` (default) Requires one or more blank lines.
-- `never` Disallows blank lines between tags
-- `ignoreNewlinesBefore` ignores newlines before specified elements. Only applies when using `always`.
-    default `[]`
-- `ignoreNewlinesAfter` ignores newlines after specified elements. Only applies when using `always`.
-    default `[]`
+This rule requires blank lines between each sibling HTML tag by default.
 
-### `"never"`
 
-<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', "never"]}">
+A configuration is an object which has 3 properties; blankLine, prev and next. For example, { blankLine: "always", prev: "br", next: "div" } means “one or more blank lines are required between a br tag and a div tag.” You can supply any number of configurations.
+
+- `blankLine` is one of the following: 
+  - `always` requires one or more blank lines.
+  - `never` disallows blank lines.
+- `prev` any tag name without without brackets.
+- `next` any tag name without without brackets.
+
+### `Disallow Blank Lines Between All Tags`
+
+`{ blankLine: 'never', prev: '*', next: '*' }`
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'never', prev: '*', next: '*' }
+]]}">
 
 ```vue
 <template>
@@ -80,9 +87,11 @@ This rule requires or disallows newlines between sibling HTML tags
 
 </eslint-code-block>
 
-### `"ignoreNewlinesBefore": ["br"]`
+### `Require newlines after <br />`
 
-<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', { ignoreNewlinesBefore: ['br'] }]}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prev: 'br', next: '*' }
+]]}">
 
 ```vue
 <template>
@@ -101,9 +110,11 @@ This rule requires or disallows newlines between sibling HTML tags
 
 </eslint-code-block>
 
-### `"ignoreNewlinesAfter": ["br"]`
+### `Require newlines before <br />`
 
-<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', { ignoreNewlinesAfter: ['br'] }]}">
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prev: '*', next: 'br' }
+]]}">
 
 ```vue
 <template>
@@ -113,6 +124,30 @@ This rule requires or disallows newlines between sibling HTML tags
       </li>
       
       <br />
+      <li>
+      </li>
+    </ul>
+  </div>
+</template>
+```
+
+</eslint-code-block>
+
+### `Require newlines between <br /> and <img />`
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prev: 'br', next: 'img' }
+]]}">
+
+```vue
+<template>
+  <div>
+    <ul>
+      <li>
+      </li>
+      <br />
+
+      <img />
       <li>
       </li>
     </ul>
