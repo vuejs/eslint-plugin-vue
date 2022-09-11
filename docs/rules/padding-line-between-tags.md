@@ -18,23 +18,16 @@ This rule requires or disallows newlines between sibling HTML tags
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error']}">
 
 ```vue
-<!-- ✓ GOOD -->
 <template>
   <div>
+    <!-- ✓ GOOD: -->
     <div></div>
 
     <div>
     </div>
-
+    
     <div />
-  </div>
-</template>
-```
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
+    <!-- ✗ BAD: -->
     <div></div>
     <div>
     </div>
