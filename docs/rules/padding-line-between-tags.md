@@ -50,7 +50,7 @@ This rule requires or disallows newlines between sibling HTML tags
 ```json
 {
   "vue/padding-line-between-tags": ["error", [
-    { blankLine: 'always', prev: '*', next: '*' }
+    { "blankLine": "always", "prev": "*", "next": "*" }
   ]]
 }
 ```
@@ -62,10 +62,10 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 - `blankLine` is one of the following:
   - `always` requires one or more blank lines.
   - `never` disallows blank lines.
-- `prev` any tag name without without brackets.
-- `next` any tag name without without brackets.
+- `prev` any tag name without brackets.
+- `next` any tag name without brackets.
 
-### `Disallow Blank Lines Between All Tags`
+### Disallow blank lines between all tags
 
 `{ blankLine: 'never', prev: '*', next: '*' }`
 
@@ -86,7 +86,9 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 
 </eslint-code-block>
 
-### `Require newlines after <br />`
+### Require newlines after `<br>`
+
+`{ blankLine: 'always', prev: 'br', next: '*' }`
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: '*' }
@@ -109,7 +111,9 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 
 </eslint-code-block>
 
-### `Require newlines before <br />`
+### Require newlines before `<br>`
+
+`{ blankLine: 'always', prev: '*', next: 'br' }`
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: '*', next: 'br' }
@@ -132,7 +136,9 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 
 </eslint-code-block>
 
-### `Require newlines between <br /> and <img />`
+### Require newlines between `<br>` and `<img>`
+
+`{ blankLine: 'always', prev: 'br', next: 'img' }`
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
   { blankLine: 'always', prev: 'br', next: 'img' }
