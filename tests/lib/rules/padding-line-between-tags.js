@@ -152,7 +152,31 @@ tester.run('padding-line-between-tags', rule, {
       </template>
       <script>
       </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <ul>
+            <li>
+            </li>
+            <br />
+
+            <img />
+            <li>
+            </li>
+          </ul>
+        </div>
+      </template>
       `,
+      options: [
+        [
+          { blankLine: 'never', prev: 'br', next: 'img' },
+          { blankLine: 'always', prev: 'br', next: 'img' }
+        ]
+      ]
     }
   ],
   invalid: [
