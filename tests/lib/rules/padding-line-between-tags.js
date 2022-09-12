@@ -144,6 +144,15 @@ tester.run('padding-line-between-tags', rule, {
       </template>
       `,
       options: [[{ blankLine: 'always', prev: 'br', next: 'img' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      </script>
+      `,
     }
   ],
   invalid: [
