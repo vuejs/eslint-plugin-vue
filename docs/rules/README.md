@@ -252,7 +252,8 @@ For example:
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
-| [vue/prefer-type-props-decl](./prefer-type-props-decl.md) | enforce type-only `defineProps` |  | :lipstick: |
+| [vue/prefer-type-emits-decl](./prefer-type-emits-decl.md) | enforce type-based `defineEmits` |  | :lipstick: |
+| [vue/prefer-type-props-decl](./prefer-type-props-decl.md) | enforce type-based `defineProps` |  | :lipstick: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
