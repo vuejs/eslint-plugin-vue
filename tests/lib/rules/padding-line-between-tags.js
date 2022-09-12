@@ -865,7 +865,7 @@ tester.run('padding-line-between-tags', rule, {
           line: 4,
           column: 18
         }
-      ],
-    },
+      ]
+    }
   ]
 })
