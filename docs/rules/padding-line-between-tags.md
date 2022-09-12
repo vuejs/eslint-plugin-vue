@@ -27,11 +27,13 @@ This rule requires or disallows newlines between sibling HTML tags
     </div>
     
     <div />
+
+    <div />
     <!-- ✗ BAD: -->
     <div></div>
     <div>
     </div>
-    <div />
+    <div /><div />
   </div>
 </template>
 ```
