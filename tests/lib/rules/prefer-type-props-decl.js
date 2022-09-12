@@ -56,9 +56,6 @@ tester.run('prefer-type-props-decl', rule, {
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <CustomComponent />
-        </template>
         <script lang="ts">
         import { PropType } from 'vue'
 

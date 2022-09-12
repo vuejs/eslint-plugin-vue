@@ -16,7 +16,7 @@ This rule forces developers to use the type-based declaration of `defineEmits` i
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/prefer-type-props-decl': ['error']}">
+<eslint-code-block :rules="{'vue/prefer-type-emits-decl': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -30,7 +30,7 @@ const emit = defineEmits<{
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/prefer-type-props-decl': ['error']}">
+<eslint-code-block :rules="{'vue/prefer-type-emits-decl': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -44,6 +44,11 @@ const emit = defineEmits(['change', 'update'])
 ## :wrench: Options
 
 Nothing.
+
+## :couple: Related Rules
+
+- [vue/prefer-type-props-decl](./prefer-type-props-decl.md)
+- [vue/valid-define-props](./valid-define-props.md)
 
 ## :mag: Implementation
 

@@ -46,6 +46,11 @@ const props = defineProps({
 
 Nothing.
 
+## :couple: Related Rules
+
+- [vue/prefer-type-emits-decl](./prefer-type-emits-decl.md)
+- [vue/valid-define-props](./valid-define-props.md)
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-type-props-decl.js)
