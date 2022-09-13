@@ -268,6 +268,7 @@ export interface ImportDeclaration extends HasParentNode {
     | ImportNamespaceSpecifier
   )[]
   source: Literal & { value: string }
+  importKind?: 'type' | 'value'
 }
 export interface ImportSpecifier extends HasParentNode {
   type: 'ImportSpecifier'
