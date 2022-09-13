@@ -866,6 +866,32 @@ tester.run('padding-line-between-tags', rule, {
           column: 18
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          Foo  <div /><div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          Foo  <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 4,
+          column: 23
+        }
+      ]
     }
   ]
 })
