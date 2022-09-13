@@ -131,7 +131,7 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/prefer-type-props-decl](./prefer-type-props-decl.md)
-- [vue/prefer-type-emits-decl](./prefer-type-emits-decl.md)
+- [vue/valid-define-emits](./valid-define-emits.md)
 
 ## :rocket: Version
 

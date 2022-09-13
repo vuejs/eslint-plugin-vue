@@ -16,8 +16,6 @@ This rule forces developers to use the type-based declaration of `defineProps` i
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/prefer-type-props-decl': ['error']}">
-
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -26,8 +24,6 @@ const props = defineProps<{
 }>()
 </script>
 ```
-
-</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/prefer-type-props-decl': ['error']}">
 
