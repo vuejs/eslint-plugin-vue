@@ -52,7 +52,7 @@ This rule requires or disallows newlines between sibling HTML tags.
 
 This rule requires blank lines between each sibling HTML tag by default.
 
-A configuration is an object which has 3 properties; blankLine, prev and next. For example, { blankLine: "always", prev: "br", next: "div" } means “one or more blank lines are required between a br tag and a div tag.” You can supply any number of configurations. If a statement pair matches multiple configurations, the last matched configuration will be used.
+A configuration is an object which has 3 properties; blankLine, prev and next. For example, { blankLine: "always", prev: "br", next: "div" } means “one or more blank lines are required between a br tag and a div tag.” You can supply any number of configurations. If a tag pair matches multiple configurations, the last matched configuration will be used.
 
 - `blankLine` is one of the following:
   - `always` requires one or more blank lines.
