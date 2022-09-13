@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/prefer-optional-props-using-with-defaults
+title: vue/no-required-prop-with-default
 description: enforce props with default values ​​to be optional
 ---
-# vue/prefer-optional-props-using-with-defaults
+# vue/no-required-prop-with-default
 
 > enforce props with default values ​​to be optional
 
@@ -17,7 +17,7 @@ If a prop is declared with a default value, whether it is required or not, we ca
 So, a required prop with a default value is essentially the same as an optional prop.
 This rule enforces all props with default values to be optional.
 
-<eslint-code-block fix :rules="{'vue/prefer-optional-props-using-with-defaults': ['error', { autoFix: true }]}">
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
 
 ```vue
 <script setup lang="ts">
@@ -47,7 +47,7 @@ This rule enforces all props with default values to be optional.
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/prefer-optional-props-using-with-defaults': ['error', { autoFix: true }]}">
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
 
 ```vue
 <script setup lang="ts">
@@ -77,7 +77,7 @@ This rule enforces all props with default values to be optional.
 
 ```json
 {
-  "vue/prefer-optional-props-using-with-defaults": ["error", {
+  "vue/no-required-prop-with-default": ["error", {
     "autofix": false,
   }]
 }
@@ -91,5 +91,5 @@ This rule enforces all props with default values to be optional.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-optional-props-using-with-defaults.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-optional-props-using-with-defaults.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-required-prop-with-default.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-required-prop-with-default.js)

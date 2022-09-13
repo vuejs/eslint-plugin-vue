@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/prefer-optional-props-using-with-defaults')
+const rule = require('../../../lib/rules/no-required-prop-with-default')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('prefer-optional-props-using-with-defaults', rule, {
+tester.run('no-required-prop-with-default', rule, {
   valid: [
     {
       filename: 'test.vue',
