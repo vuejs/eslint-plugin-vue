@@ -189,7 +189,7 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
-      options: [[{ "blankLine": "never", "prev": "*", "next": "*" }]]
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
     }
   ],
   invalid: [
@@ -932,7 +932,7 @@ tester.run('padding-line-between-tags', rule, {
           column: 12
         }
       ],
-      options: [[{ "blankLine": "never", "prev": "*", "next": "*" }]]
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
     },
     {
       filename: 'test.vue',
@@ -962,7 +962,7 @@ tester.run('padding-line-between-tags', rule, {
           column: 12
         }
       ],
-      options: [[{ "blankLine": "never", "prev": "*", "next": "*" }]]
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
     }
   ]
 })
