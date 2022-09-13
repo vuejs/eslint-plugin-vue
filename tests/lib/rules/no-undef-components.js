@@ -667,10 +667,10 @@ tester.run('no-undef-components', rule, {
       <script setup lang="ts">
         import type Foo from './Foo.vue'
         import type {HelloWorld1} from './components/HelloWorld'
-        import  { type HelloWorld2 } from './components/HelloWorld2'
+        import { type HelloWorld2 } from './components/HelloWorld2'
         import type {HelloWorld as HelloWorld3} from './components/HelloWorld3'
-        import  { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
-        import  { type default as HelloWorld5 } from './components/HelloWorld5';
+        import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+        import { type default as HelloWorld5 } from './components/HelloWorld5';
       </script>
 
       <template>
