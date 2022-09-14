@@ -1,14 +1,15 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/prefer-type-props-decl
+title: vue/define-props-declaration
 description: enforce type-based `defineProps`
 ---
-# vue/prefer-type-props-decl
+
+# vue/define-props-declaration
 
 > enforce type-based `defineProps`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
@@ -25,7 +26,7 @@ const props = defineProps<{
 </script>
 ```
 
-<eslint-code-block :rules="{'vue/prefer-type-props-decl': ['error']}">
+<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -44,10 +45,10 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/prefer-type-emits-decl](./prefer-type-emits-decl.md)
+- [vue/define-emits-declaration](./define-emits-declaration.md)
 - [vue/valid-define-props](./valid-define-props.md)
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-type-props-decl.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-type-props-decl.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/define-props-declaration.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/define-props-declaration.js)

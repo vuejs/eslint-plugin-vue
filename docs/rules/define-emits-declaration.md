@@ -1,14 +1,15 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/prefer-type-emits-decl
+title: vue/define-emits-declaration
 description: enforce type-based `defineEmits`
 ---
-# vue/prefer-type-emits-decl
+
+# vue/define-emits-declaration
 
 > enforce type-based `defineEmits`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
@@ -26,7 +27,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-<eslint-code-block :rules="{'vue/prefer-type-emits-decl': ['error']}">
+<eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -43,10 +44,10 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/prefer-type-props-decl](./prefer-type-props-decl.md)
+- [vue/define-props-declaration](./define-props-declaration.md)
 - [vue/valid-define-emits](./valid-define-emits.md)
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-type-emits-decl.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-type-emits-decl.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/define-emits-declaration.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/define-emits-declaration.js)

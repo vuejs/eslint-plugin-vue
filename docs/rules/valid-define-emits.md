@@ -5,6 +5,7 @@ title: vue/valid-define-emits
 description: enforce valid `defineEmits` compiler macro
 since: v7.13.0
 ---
+
 # vue/valid-define-emits
 
 > enforce valid `defineEmits` compiler macro
@@ -130,7 +131,7 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/prefer-type-emits-decl](./prefer-type-emits-decl.md)
+- [vue/define-emits-declaration](./define-emits-declaration.md)
 - [vue/valid-define-props](./valid-define-props.md)
 
 ## :rocket: Version

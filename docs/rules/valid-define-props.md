@@ -5,6 +5,7 @@ title: vue/valid-define-props
 description: enforce valid `defineProps` compiler macro
 since: v7.13.0
 ---
+
 # vue/valid-define-props
 
 > enforce valid `defineProps` compiler macro
@@ -130,7 +131,7 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/prefer-type-props-decl](./prefer-type-props-decl.md)
+- [vue/define-props-declaration](./define-props-declaration.md)
 - [vue/valid-define-emits](./valid-define-emits.md)
 
 ## :rocket: Version

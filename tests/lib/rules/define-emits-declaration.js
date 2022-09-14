@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/prefer-type-props-decl')
+const rule = require('../../../lib/rules/define-emits-declaration')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,58 +15,57 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('prefer-type-props-decl', rule, {
+tester.run('define-emits-declaration', rule, {
   valid: [
     {
       filename: 'test.vue',
       code: `
-      <script setup>
-      const props = defineProps({
-        kind: { type: String },
-      })
-      </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      const props = defineProps<{
-        kind: string;
-      }>()
-      </script>
-      `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      const emit = defineEmits({
-        click: (event: PointerEvent) => !!event
-      })
-      </script>
-      `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script lang="ts">
-        import { PropType } from 'vue'
-
-        export default {
-          props: {
-            kind: { type: String as PropType<'primary' | 'secondary'> },
-          },
-          emits: ['check']
-        }
+        <script setup>
+          const emit = defineEmits(['change', 'update'])
         </script>
-      `,
+       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const emit = defineEmits<{
+          (e: 'change', id: number): void
+          (e: 'update', value: string): void
+        }>()
+        </script>
+       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: { type: String },
+        })
+        </script>
+       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+         <script lang="ts">
+         import { PropType } from 'vue'
+ 
+         export default {
+           props: {
+             kind: { type: String as PropType<'primary' | 'secondary'> },
+           },
+           emits: ['check']
+         }
+         </script>
+       `,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
@@ -76,12 +75,10 @@ tester.run('prefer-type-props-decl', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script setup lang="ts">
-      const props = defineProps({
-        kind: { type: String },
-      })
-      </script>
-      `,
+       <script setup lang="ts">
+       const emit = defineEmits(['change', 'update'])
+       </script>
+       `,
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
