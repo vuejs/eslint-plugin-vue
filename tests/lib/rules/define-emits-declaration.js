@@ -43,6 +43,31 @@ tester.run('define-emits-declaration', rule, {
       filename: 'test.vue',
       code: `
         <script setup lang="ts">
+        const emit = defineEmits<{
+          (e: 'change', id: number): void
+          (e: 'update', value: string): void
+        }>()
+        </script>
+       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      options: ['type-based']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+       <script setup lang="ts">
+       const emit = defineEmits(['change', 'update'])
+       </script>
+       `,
+      options: ['runtime']
+    },
+    {
+      filename: 'test.vue',
+      // ignore code without defineEmits
+      code: `
+        <script setup lang="ts">
         const props = defineProps({
           kind: { type: String },
         })
@@ -85,6 +110,42 @@ tester.run('define-emits-declaration', rule, {
           line: 3
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+       <script setup lang="ts">
+       const emit = defineEmits(['change', 'update'])
+       </script>
+       `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ],
+      options: ['type-based']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const emit = defineEmits<{
+          (e: 'change', id: number): void
+          (e: 'update', value: string): void
+        }>()
+        </script>
+       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      errors: [
+        {
+          message: 'Use runtime declaration instead of type-based declaration.',
+          line: 3
+        }
+      ],
+      options: ['runtime']
     }
   ]
 })
