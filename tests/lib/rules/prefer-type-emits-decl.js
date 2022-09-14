@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('prefer-type-props-decl', rule, {
+tester.run('prefer-type-emits-decl', rule, {
   valid: [
     {
       filename: 'test.vue',
