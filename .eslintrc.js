@@ -132,7 +132,6 @@ module.exports = {
     'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
     'unicorn/prefer-module': 'off',
     'unicorn/prevent-abbreviations': 'off',
-    'unicorn/no-nested-ternary': 'off' // conflicts with Prettier
   },
   overrides: [
     {

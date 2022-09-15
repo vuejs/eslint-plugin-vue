@@ -44,6 +44,10 @@ export default {
       type: String,
       default: 'html'
     },
+    /**
+     * If enabled, `@typescript-eslint/parser` will be used.
+     * This must be enabled when used for `ts` code blocks.
+     */
     typescript: {
       type: Boolean,
       default: false
@@ -51,8 +55,14 @@ export default {
   },
 
   data() {
+    const code = this.computeCodeFromSlot()
+    // The height is determined in the initial processing.
+    // This is because later code changes do not change the height.
+    const lines = code.split('\n').length
+    const height = `${Math.max(120, 19 * lines)}px`
     return {
-      code: this.computeCodeFromSlot(),
+      code,
+      height,
       linter: null,
       preprocess: processors['.vue'].preprocess,
       postprocess: processors['.vue'].postprocess,
@@ -66,6 +76,17 @@ export default {
 
   computed: {
     config() {
+      let parser = null // Use default parser (`espree`)
+      if (this.typescript) {
+        // Use `@typescript-eslint/parser`.
+        parser = this.tsEslintParser
+      } else if (this.langTs) {
+        // Use `@typescript-eslint/parser` only when `<script lang="ts">` or `<script lang="typescript">`.
+        parser = {
+          ts: this.tsEslintParser,
+          typescript: this.tsEslintParser
+        }
+      }
       return {
         globals: {
           console: false,
@@ -96,14 +117,7 @@ export default {
         rules: this.rules,
         parser: 'vue-eslint-parser',
         parserOptions: {
-          parser: this.typescript
-            ? this.tsEslintParser
-            : this.langTs
-            ? {
-                ts: this.tsEslintParser,
-                typescript: this.tsEslintParser
-              }
-            : null,
+          parser,
           ecmaVersion: 'latest',
           sourceType: 'module',
           ecmaFeatures: {
@@ -113,15 +127,14 @@ export default {
       }
     },
 
+    /**
+     * Checks whether code may be using lang="ts" or lang="typescript".
+     * @returns {boolean} If `true`, may be using lang="ts" or lang="typescript".
+     */
     langTs() {
       return /lang\s*=\s*(?:"ts"|ts|'ts'|"typescript"|typescript|'typescript')/u.test(
         this.code
       )
-    },
-
-    height() {
-      const lines = this.code.split('\n').length
-      return `${Math.max(120, 19 * lines)}px`
     }
   },
 
