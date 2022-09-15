@@ -44,8 +44,8 @@ const props = defineProps({
 
 ## :wrench: Options
 
-- `type-based` (default) enforces `type-based declaration`
-- `runtime` enforces `runtime declaration`
+- `type-based` (default) enforces type-based declaration
+- `runtime` enforces runtime declaration
 
 ```json
   "vue/define-props-declaration": ["error", "type-based" | "runtime"]
