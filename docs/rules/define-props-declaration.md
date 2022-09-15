@@ -4,12 +4,11 @@ sidebarDepth: 0
 title: vue/define-props-declaration
 description: enforce declaration style of `defineProps`
 ---
-
 # vue/define-props-declaration
 
 > enforce declaration style of `defineProps`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
