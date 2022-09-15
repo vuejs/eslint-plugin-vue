@@ -12,7 +12,7 @@ export default (
     window.process = new Proxy(
       {
         env: {},
-        cwd: () => undefined
+        cwd: () => ''
       },
       {
         get(target, name) {

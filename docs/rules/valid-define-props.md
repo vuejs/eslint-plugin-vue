@@ -45,12 +45,16 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 </eslint-code-block>
 
+<eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
+
 ```vue
 <script setup lang="ts">
   /* ✓ GOOD */
   defineProps<{ msg?:string }>()
 </script>
 ```
+
+</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
@@ -78,12 +82,16 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 </eslint-code-block>
 
+<eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
+
 ```vue
 <script setup lang="ts">
   /* ✗ BAD */
   defineProps<{ msg?:string }>({ msg: String })
 </script>
 ```
+
+</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
