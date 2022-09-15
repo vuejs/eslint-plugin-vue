@@ -963,6 +963,37 @@ tester.run('padding-line-between-tags', rule, {
         }
       ],
       options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          </div>A
+
+
+          B
+          C<div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          </div>A
+          B
+          C<div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 8,
+          column: 12
+        }
+      ],
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
     }
   ]
 })
