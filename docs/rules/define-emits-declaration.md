@@ -16,7 +16,7 @@ This rule enforces `defineEmits` typing style which you should use `type-based` 
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+<eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
