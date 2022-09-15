@@ -4,17 +4,20 @@ sidebarDepth: 0
 title: vue/define-emits-declaration
 description: enforce declaration style of `defineEmits`
 ---
+
 # vue/define-emits-declaration
 
 > enforce declaration style of `defineEmits`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
 This rule enforces `defineEmits` typing style which you should use `type-based` or `runtime` declaration.
 
 This rule only works in setup script and `lang="ts"`.
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -25,6 +28,8 @@ const emit = defineEmits<{
 }>()
 </script>
 ```
+
+</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
 
