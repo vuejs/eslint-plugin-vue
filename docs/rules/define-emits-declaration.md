@@ -25,15 +25,7 @@ const emit = defineEmits<{
   (e: 'change', id: number): void
   (e: 'update', value: string): void
 }>()
-</script>
-```
 
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
-
-```vue
-<script setup lang="ts">
 /* ✗ BAD */
 const emit = defineEmits(['change', 'update'])
 </script>
@@ -49,6 +41,25 @@ const emit = defineEmits(['change', 'update'])
 ```json
   "vue/define-emits-declaration": ["error", "type-based" | "runtime"]
 ```
+
+### `runtime`
+
+<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+
+```vue
+<script setup lang="ts">
+/* ✗ BAD */
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
+
+/* ✓ GOOD */
+const emit = defineEmits(['change', 'update'])
+</script>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 

@@ -24,15 +24,7 @@ This rule only works in setup script and `lang="ts"`.
 const props = defineProps<{
   kind: string
 }>()
-</script>
-```
 
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
-
-```vue
-<script setup lang="ts">
 /* ✗ BAD */
 const props = defineProps({
   kind: { type: String }
@@ -46,6 +38,25 @@ const props = defineProps({
 
 - `type-based` (default) enforces type-based declaration
 - `runtime` enforces runtime declaration
+
+### `"runtime"`
+
+<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+
+```vue
+<script setup lang="ts">
+/* ✗ BAD */
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
+
+/* ✓ GOOD */
+const emit = defineEmits(['change', 'update'])
+</script>
+```
+
+</eslint-code-block>
 
 ```json
   "vue/define-props-declaration": ["error", "type-based" | "runtime"]
