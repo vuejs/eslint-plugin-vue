@@ -50,7 +50,7 @@ This rule enforces all props with default values to be optional.
 <eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
 
 ```vue
-<script setup lang="ts">
+<script>
   export default {
     /* ✓ GOOD */
     props: {
@@ -83,7 +83,7 @@ This rule enforces all props with default values to be optional.
 }
 ```
 
-- `"autofix"` ... If `true`, enable autofix.
+- `"autofix"` ... If `true`, enable autofix. (Default: `false`)
 
 ## :couple: Related Rules
 
