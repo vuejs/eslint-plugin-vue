@@ -45,12 +45,16 @@ defineEmits(['notify'])
 
 </eslint-code-block>
 
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
 defineEmits<(e: 'notify') => void>()
 </script>
 ```
+
+</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
@@ -78,12 +82,16 @@ defineEmits(def)
 
 </eslint-code-block>
 
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */
 defineEmits<(e: 'notify') => void>({ submit: null })
 </script>
 ```
+
+</eslint-code-block>
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
