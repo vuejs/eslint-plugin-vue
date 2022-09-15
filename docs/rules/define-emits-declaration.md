@@ -35,12 +35,12 @@ const emit = defineEmits(['change', 'update'])
 
 ## :wrench: Options
 
-- `type-based` (default) enforces type-based declaration
-- `runtime` enforces runtime declaration
-
 ```json
   "vue/define-emits-declaration": ["error", "type-based" | "runtime"]
 ```
+
+- `type-based` (default) enforces type-based declaration
+- `runtime` enforces runtime declaration
 
 ### `runtime`
 

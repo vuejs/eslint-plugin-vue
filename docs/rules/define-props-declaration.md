@@ -36,6 +36,10 @@ const props = defineProps({
 
 ## :wrench: Options
 
+```json
+  "vue/define-props-declaration": ["error", "type-based" | "runtime"]
+```
+
 - `type-based` (default) enforces type-based declaration
 - `runtime` enforces runtime declaration
 
@@ -57,10 +61,6 @@ const emit = defineEmits(['change', 'update'])
 ```
 
 </eslint-code-block>
-
-```json
-  "vue/define-props-declaration": ["error", "type-based" | "runtime"]
-```
 
 ## :couple: Related Rules
 
