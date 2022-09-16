@@ -132,7 +132,8 @@ module.exports = {
           '@eslint/eslintrc/universal': path.resolve(
             __dirname,
             '../../node_modules/@eslint/eslintrc/dist/eslintrc-universal.cjs'
-          )
+          ),
+          globby: require.resolve('./shim/globby')
         }
       }
     }

@@ -27,8 +27,8 @@ This rule reports `defineEmits` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✓ GOOD */
-  defineEmits({ notify: null })
+/* ✓ GOOD */
+defineEmits({ notify: null })
 </script>
 ```
 
@@ -38,60 +38,19 @@ This rule reports `defineEmits` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✓ GOOD */
-  defineEmits(['notify'])
+/* ✓ GOOD */
+defineEmits(['notify'])
 </script>
 ```
 
 </eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
 ```vue
 <script setup lang="ts">
-  /* ✓ GOOD */
-  defineEmits<(e: 'notify')=>void>()
-</script>
-```
-
-<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
-
-```vue
-<script>
-  const def = { notify: null }
-</script>
-<script setup>
-  /* ✓ GOOD */
-  defineEmits(def)
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
-
-```vue
-<script setup>
-  /* ✗ BAD */
-  const def = { notify: null }
-  defineEmits(def)
-</script>
-```
-
-</eslint-code-block>
-
-```vue
-<script setup lang="ts">
-  /* ✗ BAD */
-  defineEmits<(e: 'notify')=>void>({ submit: null })
-</script>
-```
-
-<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
-
-```vue
-<script setup>
-  /* ✗ BAD */
-  defineEmits({ notify: null })
-  defineEmits({ submit: null })
+/* ✓ GOOD */
+defineEmits<(e: 'notify') => void>()
 </script>
 ```
 
@@ -101,13 +60,11 @@ This rule reports `defineEmits` compiler macros in the following cases:
 
 ```vue
 <script>
-  export default {
-    emits: { notify: null }
-  }
+const def = { notify: null }
 </script>
 <script setup>
-  /* ✗ BAD */
-  defineEmits({ submit: null })
+/* ✓ GOOD */
+defineEmits(def)
 </script>
 ```
 
@@ -117,8 +74,59 @@ This rule reports `defineEmits` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✗ BAD */
-  defineEmits()
+/* ✗ BAD */
+const def = { notify: null }
+defineEmits(def)
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
+```vue
+<script setup lang="ts">
+/* ✗ BAD */
+defineEmits<(e: 'notify') => void>({ submit: null })
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
+```vue
+<script setup>
+/* ✗ BAD */
+defineEmits({ notify: null })
+defineEmits({ submit: null })
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
+```vue
+<script>
+export default {
+  emits: { notify: null }
+}
+</script>
+<script setup>
+/* ✗ BAD */
+defineEmits({ submit: null })
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
+
+```vue
+<script setup>
+/* ✗ BAD */
+defineEmits()
 </script>
 ```
 
@@ -127,6 +135,11 @@ This rule reports `defineEmits` compiler macros in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :couple: Related Rules
+
+- [vue/define-emits-declaration](./define-emits-declaration.md)
+- [vue/valid-define-props](./valid-define-props.md)
 
 ## :rocket: Version
 
