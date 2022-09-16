@@ -197,7 +197,7 @@ For example:
 ```json
 {
   "rules": {
-    "vue/block-lang": "error"
+    "vue/block-attributes-order": "error"
   }
 }
 ```
@@ -206,6 +206,7 @@ For example:
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
+| [vue/block-attributes-order](./block-attributes-order.md) | enforce order of block attributes | :wrench: | :hammer: |
 | [vue/block-lang](./block-lang.md) | disallow use other than available `lang` |  | :hammer: |
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style](./component-api-style.md) | enforce component API style |  | :hammer: |
