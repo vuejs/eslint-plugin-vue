@@ -229,6 +229,46 @@ tester.run('block-attributes-order', rule, {
         }
       ],
       output: `<style scoped module src="./style.css" lang="less"><style>`
+    },
+    {
+      filename: 'test-custom-block-with-invalid-order.vue',
+      code: `<foobarbaz baz="baz" bar foo><foobarbaz>`,
+      options: [
+        {
+          order: {
+            foobarbaz: ['foo', 'bar', 'baz']
+          }
+        }
+      ],
+      errors: [
+        {
+          type: 'VAttribute',
+          message: `Attribute "bar" should go before "baz".`
+        },
+        {
+          type: 'VAttribute',
+          message: `Attribute "foo" should go before "baz".`
+        }
+      ],
+      output: `<foobarbaz bar baz="baz" foo><foobarbaz>`
+    },
+    {
+      filename: 'test-style-attributes-with-batch-order-and-invalid-order.vue',
+      code: `<style scoped src="./style.css" lang="less"><style>`,
+      options: [
+        {
+          order: {
+            style: ['lang', ['src', 'scoped']]
+          }
+        }
+      ],
+      errors: [
+        {
+          type: 'VAttribute',
+          message: `Attribute "lang" should go before "src".`
+        }
+      ],
+      output: `<style scoped lang="less" src="./style.css"><style>`
     }
   ]
 })
