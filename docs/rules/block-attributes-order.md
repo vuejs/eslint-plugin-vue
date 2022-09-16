@@ -13,9 +13,9 @@ since: v4.3.0
 
 ## :book: Rule Details
 
-This rule aims to enforce ordering of block attributes. 
+This rule aims to enforce ordering of block attributes.
 
-### the default order
+### The default order
 
 <eslint-code-block fix :rules="{'vue/block-attributes-order': ['error']}">
 
@@ -36,7 +36,6 @@ This rule aims to enforce ordering of block attributes.
 ```
 
 </eslint-code-block>
-
 
 ### Custom orders
 
