@@ -598,6 +598,26 @@ tester.run('no-undef-components', rule, {
       <script setup>
       import TheModal from 'foo'
       </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+        import Foo from './Foo.vue'
+        import {HelloWorld1} from './components/HelloWorld'
+      </script>
+
+      <template>
+        <Foo />
+        <HelloWorld1 />
+      </template>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
     }
   ],
   invalid: [
@@ -718,6 +738,31 @@ tester.run('no-undef-components', rule, {
           message:
             "The '<HelloWorld5>' component has been used, but 'HelloWorld5' only refers to a type.",
           line: 17
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+        type Foo = {}
+      </script>
+
+      <template>
+        <Foo />
+      </template>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message:
+            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
+          line: 7
         }
       ]
     },

@@ -274,6 +274,7 @@ export interface ImportSpecifier extends HasParentNode {
   type: 'ImportSpecifier'
   imported: Identifier
   local: Identifier
+  importKind?: 'type' | 'value'
 }
 export interface ImportDefaultSpecifier extends HasParentNode {
   type: 'ImportDefaultSpecifier'
