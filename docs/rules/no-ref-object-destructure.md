@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-ref-object-destructure
 description: disallow destructuring of ref objects that can lead to loss of reactivity
+since: v9.5.0
 ---
 # vue/no-ref-object-destructure
 
 > disallow destructuring of ref objects that can lead to loss of reactivity
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -48,6 +47,10 @@ const v5 = $computed(() => fn(count) /* ✓ GOOD */)
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.5.0
 
 ## :mag: Implementation
 

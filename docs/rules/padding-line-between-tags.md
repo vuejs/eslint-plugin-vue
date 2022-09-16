@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/padding-line-between-tags
-description: Require or disallow newlines between sibling tags in template
+description: require or disallow newlines between sibling tags in template
+since: v9.5.0
 ---
 # vue/padding-line-between-tags
 
-> Require or disallow newlines between sibling tags in template
+> require or disallow newlines between sibling tags in template
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -156,6 +156,10 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.5.0
 
 ## :mag: Implementation
 

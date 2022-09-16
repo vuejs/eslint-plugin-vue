@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/define-emits-declaration
 description: enforce declaration style of `defineEmits`
+since: v9.5.0
 ---
 # vue/define-emits-declaration
 
 > enforce declaration style of `defineEmits`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -71,6 +70,10 @@ const emit = defineEmits(['change', 'update'])
 - [`defineEmits`](https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits)
 - [Typescript-only-features of `defineEmits`](https://vuejs.org/api/sfc-script-setup.html#typescript-only-features)
 - [Guide - Typing-component-emits](https://vuejs.org/guide/typescript/composition-api.html#typing-component-emits)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.5.0
 
 ## :mag: Implementation
 
