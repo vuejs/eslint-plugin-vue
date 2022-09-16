@@ -27,8 +27,8 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✓ GOOD */
-  defineProps({ msg: String })
+/* ✓ GOOD */
+defineProps({ msg: String })
 </script>
 ```
 
@@ -38,8 +38,8 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✓ GOOD */
-  defineProps(['msg'])
+/* ✓ GOOD */
+defineProps(['msg'])
 </script>
 ```
 
@@ -49,8 +49,8 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup lang="ts">
-  /* ✓ GOOD */
-  defineProps<{ msg?:string }>()
+/* ✓ GOOD */
+defineProps<{ msg?: string }>()
 </script>
 ```
 
@@ -60,11 +60,11 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script>
-  const def = { msg: String }
+const def = { msg: String }
 </script>
 <script setup>
-  /* ✓ GOOD */
-  defineProps(def)
+/* ✓ GOOD */
+defineProps(def)
 </script>
 ```
 
@@ -74,9 +74,9 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✗ BAD */
-  const def = { msg: String }
-  defineProps(def)
+/* ✗ BAD */
+const def = { msg: String }
+defineProps(def)
 </script>
 ```
 
@@ -86,8 +86,8 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup lang="ts">
-  /* ✗ BAD */
-  defineProps<{ msg?:string }>({ msg: String })
+/* ✗ BAD */
+defineProps<{ msg?: string }>({ msg: String })
 </script>
 ```
 
@@ -97,9 +97,9 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✗ BAD */
-  defineProps({ msg: String })
-  defineProps({ count: Number })
+/* ✗ BAD */
+defineProps({ msg: String })
+defineProps({ count: Number })
 </script>
 ```
 
@@ -109,13 +109,13 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script>
-  export default {
-    props: { msg: String }
-  }
+export default {
+  props: { msg: String }
+}
 </script>
 <script setup>
-  /* ✗ BAD */
-  defineProps({ count: Number })
+/* ✗ BAD */
+defineProps({ count: Number })
 </script>
 ```
 
@@ -125,8 +125,8 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 ```vue
 <script setup>
-  /* ✗ BAD */
-  defineProps()
+/* ✗ BAD */
+defineProps()
 </script>
 ```
 
@@ -135,6 +135,11 @@ This rule reports `defineProps` compiler macros in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :couple: Related Rules
+
+- [vue/define-props-declaration](./define-props-declaration.md)
+- [vue/valid-define-emits](./valid-define-emits.md)
 
 ## :rocket: Version
 

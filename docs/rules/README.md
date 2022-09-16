@@ -212,7 +212,9 @@ For example:
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: | :hammer: |
 | [vue/component-options-name-casing](./component-options-name-casing.md) | enforce the casing of component name in `components` options | :wrench::bulb: | :hammer: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  | :hammer: |
+| [vue/define-emits-declaration](./define-emits-declaration.md) | enforce declaration style of `defineEmits` |  | :hammer: |
 | [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench: | :lipstick: |
+| [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` |  | :hammer: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  | :hammer: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: | :lipstick: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: | :lipstick: |
