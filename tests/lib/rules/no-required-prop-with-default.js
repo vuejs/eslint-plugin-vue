@@ -164,6 +164,19 @@ tester.run('no-required-prop-with-default', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({
+            name: {
+              required: false,
+              default: 'Hello'
+            }
+          })
+        </script>
+      `
     }
   ],
   invalid: [
@@ -872,6 +885,36 @@ tester.run('no-required-prop-with-default', rule, {
         {
           message: 'Prop "name" should be optional.',
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({
+            name: {
+              required: true,
+              default: 'Hello'
+            }
+          })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const props = defineProps({
+            name: {
+              required: false,
+              default: 'Hello'
+            }
+          })
+        </script>
+      `,
+      options: [{ autofix: true }],
+      errors: [
+        {
+          message: 'Prop "name" should be optional.',
+          line: 4
         }
       ]
     }
