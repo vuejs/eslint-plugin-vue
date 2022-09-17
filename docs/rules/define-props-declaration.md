@@ -48,14 +48,15 @@ const props = defineProps({
 
 ```vue
 <script setup lang="ts">
-/* ✗ BAD */
-const emit = defineEmits<{
-  (e: 'change', id: number): void
-  (e: 'update', value: string): void
-}>()
-
 /* ✓ GOOD */
-const emit = defineEmits(['change', 'update'])
+const props = defineProps({
+  kind: { type: String }
+})
+
+/* ✗ BAD */
+const props = defineProps<{
+  kind: string
+}>()
 </script>
 ```
 
