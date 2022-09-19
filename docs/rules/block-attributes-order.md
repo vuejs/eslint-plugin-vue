@@ -23,18 +23,18 @@ This rule aims to enforce ordering of block attributes.
 
 #### Script
 
-`['lang', 'setup', 'src']`
+`['setup', 'lang', 'src']`
 
 #### Style
 
-`['lang', 'module', 'scoped', 'src']`
+`['module', 'scoped', 'lang', 'src']`
 
 <eslint-code-block fix :rules="{'vue/block-attributes-order': ['error']}">
 
 ```vue
 <template functional lang="pug" src="./template.pug"></template>
-<script lang="ts" setup src="./script.ts"></script>
-<style lang="css" module scoped src="./style.css"></style>
+<script setup lang="ts" src="./script.ts"></script>
+<style module scoped lang="css" src="./style.css"></style>
 ```
 
 </eslint-code-block>
@@ -43,8 +43,8 @@ This rule aims to enforce ordering of block attributes.
 
 ```vue
 <template src="./template.pug" functional lang="pug"></template>
-<script src="./script.ts" setup lang="ts"></script>
-<style src="./style.css" scoped module lang="css"></style>
+<script src="./script.ts" lang="ts" setup></script>
+<style src="./style.css" lang="css" scoped module></style>
 ```
 
 </eslint-code-block>
@@ -54,15 +54,15 @@ This rule aims to enforce ordering of block attributes.
 <eslint-code-block fix :rules="{'vue/block-attributes-order': ['error', {
   order: {
     template: ['src', 'lang', 'functional'],
-    script: ['src', 'setup', 'lang'],
+    script: ['src', 'lang', 'setup'],
     style: [['src', 'scoped'], 'module', 'lang']
   }
 }]}">
 
 ```vue
 <template functional lang="pug" src="./template.pug"></template>
-<script lang="ts" setup src="./script.ts"></script>
-<style lang="css" module scoped src="./style.css"></style>
+<script src="./script.ts" lang="ts" setup></script>
+<style src="./style.css" scoped module lang="css"></style>
 ```
 
 </eslint-code-block>

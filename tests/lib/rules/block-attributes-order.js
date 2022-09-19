@@ -43,7 +43,7 @@ tester.run('block-attributes-order', rule, {
     },
     {
       filename: 'test-script-attributes.vue',
-      code: `<script lang="ts" setup src="./script.js"></script>`
+      code: `<script setup lang="ts" src="./script.js"></script>`
     },
     {
       filename: 'test-style-without-attributes.vue',
@@ -55,7 +55,7 @@ tester.run('block-attributes-order', rule, {
     },
     {
       filename: 'test-style-attributes.vue',
-      code: `<style lang="less" module scoped src="./style.css"><style>`
+      code: `<style module scoped lang="less" src="./style.css"><style>`
     },
     {
       filename: 'test-custom-block-without-attributes.vue',
@@ -75,11 +75,11 @@ tester.run('block-attributes-order', rule, {
     },
     {
       filename: 'test-attributes-options.vue',
-      code: `<style module scoped src="./style.css" lang="less"><style>`,
+      code: `<style module lang="less" scoped src="./style.css"><style>`,
       options: [
         {
           order: {
-            style: ['module', 'scoped', 'src', 'lang']
+            style: ['module', 'lang', 'scoped', 'src']
           }
         }
       ]
