@@ -81,7 +81,7 @@ Nothing.
 
 ## When Not To Use It
 
-When you're not using TypeScript in the project.
+When you're not using TypeScript in the project****.
 
 ## Further Reading
 
