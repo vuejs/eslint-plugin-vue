@@ -17,6 +17,18 @@ This rule aims to enforce ordering of block attributes.
 
 ### The default order
 
+#### Template
+
+`['functional', 'lang', 'src']`
+
+#### Script
+
+`['lang', 'setup', 'src']`
+
+#### Style
+
+`['lang', 'module', 'scoped', 'src']`
+
 <eslint-code-block fix :rules="{'vue/block-attributes-order': ['error']}">
 
 ```vue
