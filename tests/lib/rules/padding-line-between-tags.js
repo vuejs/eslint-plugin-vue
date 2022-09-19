@@ -21,6 +21,43 @@ tester.run('padding-line-between-tags', rule, {
       filename: 'test.vue',
       code: `
       <template>
+        <header>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+          <div></div>
+          <div></div>
+        </header>
+
+        <div></div>
+
+        <div />
+
+        <footer></footer>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
         <div>
           <div></div>
 
@@ -1027,6 +1064,84 @@ tester.run('padding-line-between-tags', rule, {
         }
       ],
       options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      output: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      output: `
+      <template>
+        <header>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 6,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
     }
   ]
 })
