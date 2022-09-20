@@ -21,12 +21,14 @@ This rule only works in setup script and `lang="ts"`.
 <script setup lang="ts">
 /* ✓ GOOD */
 const props = defineProps<{
-  kind: string
+  kind: string,
+  options: { title: string }
 }>()
 
 /* ✗ BAD */
 const props = defineProps({
-  kind: { type: String }
+  kind: { type: String },
+  options: { type: Object as PropType<{ title: string }> }
 })
 </script>
 ```
@@ -50,12 +52,14 @@ const props = defineProps({
 <script setup lang="ts">
 /* ✓ GOOD */
 const props = defineProps({
-  kind: { type: String }
+  kind: { type: String },
+  options: { type: Object as PropType<{ title: string }> }
 })
 
 /* ✗ BAD */
 const props = defineProps<{
-  kind: string
+  kind: string,
+  options: { title: string }
 }>()
 </script>
 ```
