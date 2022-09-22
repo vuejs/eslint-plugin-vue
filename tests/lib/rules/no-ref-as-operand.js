@@ -724,7 +724,7 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          column: 3
+          column: 7
         }
       ]
     }
