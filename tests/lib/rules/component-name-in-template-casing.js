@@ -168,6 +168,24 @@ tester.run('component-name-in-template-casing', rule, {
           <keep-alive />
         </template>
       `
+    },
+
+    // globals
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView'] }]
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['router-view'] }]
     }
   ],
   invalid: [
@@ -854,6 +872,39 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
       `,
       errors: ['Component name "TheComponent" is not kebab-case.']
+    },
+    {
+      code: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView'] }],
+      output:
+        '\n        <template>\n          <RouterView />\n        </template>\n      ',
+      errors: ['Component name "router-view" is not PascalCase.']
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['RouterView'] }],
+      output:
+        '\n        <template>\n          <router-view />\n        </template>\n      ',
+      errors: ['Component name "RouterView" is not kebab-case.']
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['router-view'] }],
+      output:
+        '\n        <template>\n          <router-view />\n        </template>\n      ',
+      errors: ['Component name "RouterView" is not kebab-case.']
     }
   ]
 })
