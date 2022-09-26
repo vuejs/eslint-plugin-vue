@@ -174,34 +174,24 @@ tester.run('component-name-in-template-casing', rule, {
     {
       code: `
         <template>
-          <RouterView />
+          <div>
+            <RouterView />
+            <RouterLink />
+          </div>
         </template>
       `,
-      options: ['PascalCase', { globals: ['RouterView'] }]
+      options: ['PascalCase', { globals: ['RouterView', 'router-link'] }]
     },
     {
       code: `
         <template>
-          <RouterView />
+          <div>
+            <router-view />
+            <router-link />
+          </div>
         </template>
       `,
-      options: ['PascalCase', { globals: ['router-view'] }]
-    },
-    {
-      code: `
-        <template>
-          <router-view />
-        </template>
-      `,
-      options: ['kebab-case', { globals: ['RouterView'] }]
-    },
-    {
-      code: `
-        <template>
-          <router-view />
-        </template>
-      `,
-      options: ['kebab-case', { globals: ['router-view'] }]
+      options: ['kebab-case', { globals: ['RouterView', 'router-link'] }]
     }
   ],
   invalid: [
