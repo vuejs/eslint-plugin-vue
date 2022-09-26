@@ -901,7 +901,13 @@ tester.run('component-name-in-template-casing', rule, {
           <RouterView />
         </template>
       `,
-      errors: ['Component name "router-view" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "router-view" is not PascalCase.',
+          line: 3,
+          column: 11
+        }
+      ]
     },
     {
       code: `
@@ -915,7 +921,13 @@ tester.run('component-name-in-template-casing', rule, {
           <router-view />
         </template>
       `,
-      errors: ['Component name "RouterView" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
     },
     {
       code: `
@@ -929,7 +941,13 @@ tester.run('component-name-in-template-casing', rule, {
           <router-view />
         </template>
       `,
-      errors: ['Component name "RouterView" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
     }
   ]
 })
