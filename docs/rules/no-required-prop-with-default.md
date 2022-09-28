@@ -60,7 +60,16 @@ This rule enforces all props with default values to be optional.
         default: 'Hello'
       }
     }
+</script>
+```
 
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
+
+```vue
+<script>
+  export default {
     /* ✗ BAD */
     props: {
       name: {
