@@ -39,10 +39,36 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
-      options: [[
-        { "blankLine": "consistent", "prev": "*", "next": "*" },
-        { "blankLine": "never", "prev": "br", "next": "br" }
-      ]]
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+        </div>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
     },
     {
       filename: 'test.vue',
@@ -1151,9 +1177,13 @@ tester.run('padding-line-between-tags', rule, {
       <template>
         <header>
           <div></div>
+
           <div></div>
+
           <div></div>
+
           <div></div>
+
           <div></div>
         </header>
         <div></div>
@@ -1163,8 +1193,18 @@ tester.run('padding-line-between-tags', rule, {
       `,
       errors: [
         {
-          message: 'Unexpected blank line before this tag.',
-          line: 6,
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 8,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 9,
           column: 11
         }
       ],
@@ -1176,7 +1216,6 @@ tester.run('padding-line-between-tags', rule, {
       <template>
         <div>
           <div />
-
           <div />
 
           <br/>
@@ -1184,6 +1223,7 @@ tester.run('padding-line-between-tags', rule, {
 
           <div />
           <div />
+
           <div />
           <div />
         </div>
@@ -1206,24 +1246,56 @@ tester.run('padding-line-between-tags', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
-          line: 6,
+          line: 7,
           column: 11
         },
         {
           message: 'Unexpected blank line before this tag.',
-          line: 8,
+          line: 10,
           column: 11
         },
         {
           message: 'Unexpected blank line before this tag.',
-          line: 11,
+          line: 13,
           column: 11
         }
       ],
-      options: [[
-        { "blankLine": "consistent", "prev": "*", "next": "*" },
-        { "blankLine": "never", "prev": "br", "next": "br" }
-      ]]
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+          <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div />
+          <div />
+          <div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 7,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
     }
   ]
 })
