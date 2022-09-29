@@ -1,5 +1,5 @@
 /**
- * @author *****your name*****
+ * @author dev1437
  * See LICENSE file in root directory for full license.
  */
 'use strict'
@@ -40,7 +40,7 @@ tester.run('multiline-ternary', rule, {
         </div>
       </template>
       `,
-      options: ["never"]
+      options: ['never']
     }
   ],
   invalid: [
@@ -67,12 +67,13 @@ tester.run('multiline-ternary', rule, {
       `,
       errors: [
         {
-          message: 'Expected newline between consequent and alternate of ternary expression.',
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
           line: 5,
           column: 13
-        },
+        }
       ],
-      options: ["always-multiline"]
+      options: ['always-multiline']
     },
     {
       filename: 'test.vue',
@@ -95,12 +96,13 @@ tester.run('multiline-ternary', rule, {
       `,
       errors: [
         {
-          message: 'Unexpected newline between test and consequent of ternary expression.',
+          message:
+            'Unexpected newline between test and consequent of ternary expression.',
           line: 4,
           column: 19
-        },
+        }
       ],
-      options: ["never"]
+      options: ['never']
     },
     {
       filename: 'test.vue',
@@ -124,12 +126,14 @@ tester.run('multiline-ternary', rule, {
       `,
       errors: [
         {
-          message: 'Expected newline between test and consequent of ternary expression.',
+          message:
+            'Expected newline between test and consequent of ternary expression.',
           line: 4,
           column: 19
         },
         {
-          message: 'Expected newline between consequent and alternate of ternary expression.',
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
           line: 4,
           column: 45
         }

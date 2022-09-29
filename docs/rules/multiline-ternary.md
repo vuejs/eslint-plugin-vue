@@ -11,6 +11,7 @@ description: Enforce newlines between operands of ternary expressions in `<templ
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule is the same rule as core [multiline-ternary] rule but it applies to the expressions in `<template>`.
+
 ## :books: Further Reading
 
 - [multiline-ternary]
