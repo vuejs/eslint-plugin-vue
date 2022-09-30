@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('eslint')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/multiline-ternary')
 const semver = require('semver')
 
