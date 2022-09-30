@@ -242,7 +242,7 @@ tester.run('multiline-ternary', rule, {
                 message:
                   'Expected newline between consequent and alternate of ternary expression.',
                 line: 4,
-                column: 45
+                column: 47
               }
             ]
           },
@@ -267,7 +267,7 @@ tester.run('multiline-ternary', rule, {
                 message:
                   'Expected newline between consequent and alternate of ternary expression.',
                 line: 4,
-                column: 45
+                column: 47
               }
             ]
           }
