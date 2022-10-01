@@ -60,9 +60,9 @@ tester.run('multiline-ternary', rule, {
     }
   ],
   invalid: [
-      {
-        filename: 'test.vue',
-        code: `
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?
@@ -71,7 +71,8 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-        output: (semver.gte(ESLint.version, '7.1.0') ? `
+      output: semver.gte(ESLint.version, '7.1.0')
+        ? `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?
@@ -80,20 +81,21 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        ` : null),
-        errors: [
-          {
-            message:
-              'Expected newline between consequent and alternate of ternary expression.',
-            line: 5,
-            column: 15
-          }
-        ],
-        options: ['always-multiline']
-      },
-      {
-        filename: 'test.vue',
-        code: `
+        `
+        : null,
+      errors: [
+        {
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
+          line: 5,
+          column: 15
+        }
+      ],
+      options: ['always-multiline']
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?
@@ -102,27 +104,29 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-        output: (semver.gte(ESLint.version, '7.1.0') ? `
+      output: semver.gte(ESLint.version, '7.1.0')
+        ? `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?aVeryLongOutput : thisCantFitOnASingleLine
           }">
           </div>
         </template>
-        ` : null),
-        errors: [
-          {
-            message:
-              'Unexpected newline between test and consequent of ternary expression.',
-            line: 4,
-            column: 21
-          }
-        ],
-        options: ['never']
-      },
-      {
-        filename: 'test.vue',
-        code: `
+        `
+        : null,
+      errors: [
+        {
+          message:
+            'Unexpected newline between test and consequent of ternary expression.',
+          line: 4,
+          column: 21
+        }
+      ],
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <div :class="{
             'test': someReallyLongCondition ? aVeryLongOutput : thisCantFitOnASingleLine
@@ -130,7 +134,8 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-        output: (semver.gte(ESLint.version, '7.1.0') ? `
+      output: semver.gte(ESLint.version, '7.1.0')
+        ? `
         <template>
           <div :class="{
             'test': someReallyLongCondition
@@ -139,25 +144,26 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        ` : null),
-        errors: [
-          {
-            message:
-              'Expected newline between test and consequent of ternary expression.',
-            line: 4,
-            column: 21
-          },
-          {
-            message:
-              'Expected newline between consequent and alternate of ternary expression.',
-            line: 4,
-            column: 47
-          }
-        ]
-      },
-      {
-        filename: 'test.vue',
-        code: `
+        `
+        : null,
+      errors: [
+        {
+          message:
+            'Expected newline between test and consequent of ternary expression.',
+          line: 4,
+          column: 21
+        },
+        {
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
+          line: 4,
+          column: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <div :style="{
             'test': someReallyLongCondition ? aVeryLongOutput : thisCantFitOnASingleLine
@@ -165,7 +171,8 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-        output: (semver.gte(ESLint.version, '7.1.0') ? `
+      output: semver.gte(ESLint.version, '7.1.0')
+        ? `
         <template>
           <div :style="{
             'test': someReallyLongCondition
@@ -174,25 +181,26 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        ` : null),
-        errors: [
-          {
-            message:
-              'Expected newline between test and consequent of ternary expression.',
-            line: 4,
-            column: 21
-          },
-          {
-            message:
-              'Expected newline between consequent and alternate of ternary expression.',
-            line: 4,
-            column: 47
-          }
-        ]
-      },
-      {
-        filename: 'test.vue',
-        code: `
+        `
+        : null,
+      errors: [
+        {
+          message:
+            'Expected newline between test and consequent of ternary expression.',
+          line: 4,
+          column: 21
+        },
+        {
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
+          line: 4,
+          column: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <div class="test">
           </div>
@@ -203,7 +211,8 @@ tester.run('multiline-ternary', rule, {
           }
         </style>
         `,
-        output: (semver.gte(ESLint.version, '7.1.0') ? `
+      output: semver.gte(ESLint.version, '7.1.0')
+        ? `
         <template>
           <div class="test">
           </div>
@@ -215,21 +224,22 @@ tester.run('multiline-ternary', rule, {
 : thisCantFitOnASingleLine')
           }
         </style>
-        ` : null),
-        errors: [
-          {
-            message:
-              'Expected newline between test and consequent of ternary expression.',
-            line: 8,
-            column: 30
-          },
-          {
-            message:
-              'Expected newline between consequent and alternate of ternary expression.',
-            line: 8,
-            column: 56
-          }
-        ]
-      }
+        `
+        : null,
+      errors: [
+        {
+          message:
+            'Expected newline between test and consequent of ternary expression.',
+          line: 8,
+          column: 30
+        },
+        {
+          message:
+            'Expected newline between consequent and alternate of ternary expression.',
+          line: 8,
+          column: 56
+        }
+      ]
+    }
   ]
 })
