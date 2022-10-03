@@ -8,16 +8,25 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/force-types-on-object-props')
 
 const template = (prop) => `
-<template></template>
-<script>
+<script lang="ts">
+import { Prop } from 'vue/types/options';
 export default {
+	props: {
+		prop: {
+			${prop}
+		}
+	}
 }
 </script>  
 `
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015,   sourceType: 'module' }
+  parserOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module',
+    parser: '@typescript-eslint/parser'
+  }
 })
 
 ruleTester.run('force-types-on-object-props', rule, {
@@ -54,8 +63,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as any'),
       errors: [
         {
-          message:
-            'Object props should be typed like this: "type: Object as Prop<T>"'
+          message: 'Object props has to contains type.'
         }
       ]
     },
@@ -63,8 +71,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as {}'),
       errors: [
         {
-          message:
-            'Object props should be typed like this: "type: Object as Prop<T>"'
+          message: 'Object props has to contains type.'
         }
       ]
     },
@@ -72,8 +79,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as unknown'),
       errors: [
         {
-          message:
-            'Object props should be typed like this: "type: Object as Prop<T>"'
+          message: 'Object props has to contains type.'
         }
       ]
     },
@@ -81,8 +87,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as string'),
       errors: [
         {
-          message:
-            'Object props should be typed like this: "type: Object as Prop<T>"'
+          message: 'Object props has to contains type.'
         }
       ]
     }
