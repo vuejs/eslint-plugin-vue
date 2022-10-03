@@ -17,7 +17,7 @@ export default {
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  parserOptions: { ecmaVersion: 2015,   sourceType: 'module' }
 })
 
 ruleTester.run('force-types-on-object-props', rule, {
@@ -46,7 +46,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object'),
       errors: [
         {
-          message: 'Object props has to be typed'
+          message: 'Object props has to contains type.'
         }
       ]
     },
