@@ -148,6 +148,30 @@ tester.run('no-ref-as-operand', rule, {
         const isComp = foo.effect
       </script>
       `
+    },
+    {
+      code: `
+      <script>
+      import { ref } from 'vue'
+      let foo;
+
+      if (!foo) {
+        foo = ref(5);
+      }
+      </script>
+      `
+    },
+    {
+      code: `
+      <script>
+      import { ref } from 'vue'
+      let foo = undefined;
+
+      if (!foo) {
+        foo = ref(5);
+      }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -667,6 +691,40 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue'
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+      import { ref } from 'vue'
+      let foo = undefined;
+
+      if (!foo) {
+        foo = ref(5);
+      }
+      let bar = foo;
+      bar = 4;
+      </script>
+      `,
+      output: `
+      <script>
+      import { ref } from 'vue'
+      let foo = undefined;
+
+      if (!foo) {
+        foo = ref(5);
+      }
+      let bar = foo;
+      bar.value = 4;
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 10,
+          column: 7
         }
       ]
     }
