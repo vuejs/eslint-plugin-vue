@@ -18,7 +18,7 @@ If a prop is declared with a default value, whether it is required or not, we ca
 So, a required prop with a default value is essentially the same as an optional prop.
 This rule enforces all props with default values to be optional.
 
-<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
 
 ```vue
 <script setup lang="ts">
@@ -48,7 +48,7 @@ This rule enforces all props with default values to be optional.
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
 
 ```vue
 <script>
@@ -60,12 +60,13 @@ This rule enforces all props with default values to be optional.
         default: 'Hello'
       }
     }
+  }
 </script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autoFix: true }]}">
+<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
 
 ```vue
 <script>
