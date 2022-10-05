@@ -53,31 +53,21 @@ This rule enforces all props with default values to be optional.
 ```vue
 <script>
   export default {
-    /* ✓ GOOD */
     props: {
-      name: {
+      /* ✓ GOOD */
+      foo: {
+        required: false,
+        default: 'Hello'
+      },
+      bar: {
+        required: true
+      },
+      /* ✗ BAD */
+      baz: {
         required: true,
         default: 'Hello'
-      }
-    }
-  }
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
-
-```vue
-<script>
-  export default {
-    /* ✗ BAD */
-    props: {
-      name: {
-        required: true,
-        default: 'Hello'
-      }
-    }
+      },
+    },
   }
 </script>
 ```
