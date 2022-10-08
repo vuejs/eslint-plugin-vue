@@ -52,11 +52,12 @@ This rule requires or disallows newlines between sibling HTML tags.
 
 This rule requires blank lines between each sibling HTML tag by default.
 
-A configuration is an object which has 3 properties; blankLine, prev and next. For example, { blankLine: "always", prev: "br", next: "div" } means “one or more blank lines are required between a br tag and a div tag.” You can supply any number of configurations. If a tag pair matches multiple configurations, the last matched configuration will be used.
+A configuration is an object which has 3 properties; `blankLine`, `prev` and `next`. For example, `{ blankLine: "always", prev: "br", next: "div" }` means “one or more blank lines are required between a `br` tag and a `div` tag.” You can supply any number of configurations. If a tag pair matches multiple configurations, the last matched configuration will be used.
 
 - `blankLine` is one of the following:
   - `always` requires one or more blank lines.
   - `never` disallows blank lines.
+  - `consistent` requires or disallows a blank line based on the first sibling element.
 - `prev` any tag name without brackets.
 - `next` any tag name without brackets.
 
@@ -106,31 +107,6 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
 
 </eslint-code-block>
 
-### Require newlines before `<br>`
-
-`{ blankLine: 'always', prev: '*', next: 'br' }`
-
-<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
-  { blankLine: 'always', prev: '*', next: 'br' }
-]]}">
-
-```vue
-<template>
-  <div>
-    <ul>
-      <li>
-      </li>
-      
-      <br />
-      <li>
-      </li>
-    </ul>
-  </div>
-</template>
-```
-
-</eslint-code-block>
-
 ### Require newlines between `<br>` and `<img>`
 
 `{ blankLine: 'always', prev: 'br', next: 'img' }`
@@ -151,6 +127,32 @@ A configuration is an object which has 3 properties; blankLine, prev and next. F
       <li>
       </li>
     </ul>
+  </div>
+</template>
+```
+
+</eslint-code-block>
+
+### Require consistent newlines
+
+`{ blankLine: 'consistent', prev: '*', next: '*' }`
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'consistent', prev: '*', next: '*' }
+]]}">
+
+```vue
+<template>
+  <div>
+    <ul>
+      <li />
+      <li />
+      <li />
+    </ul>
+    
+    <div />
+    
+    <div />
   </div>
 </template>
 ```
