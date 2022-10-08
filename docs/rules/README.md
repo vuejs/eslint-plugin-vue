@@ -264,7 +264,7 @@ For example:
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
-| [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: | :hammer: |
+| [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
 
 </rules-table>
 
@@ -324,6 +324,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
+| [vue/v-on-function-call](./v-on-function-call.md) | [vue/v-on-handler-style](./v-on-handler-style.md) |
 
 ## Removed
 
