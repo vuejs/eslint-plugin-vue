@@ -32,6 +32,7 @@ tester.run('multiline-ternary', rule, {
       `
     },
     {
+      // doesn't check ternary statements in <script> block
       filename: 'test.vue',
       code: `
       <script>
