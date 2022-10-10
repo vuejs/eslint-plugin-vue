@@ -2,16 +2,48 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/multiline-ternary
-description: Enforce newlines between operands of ternary expressions in `<template>` and `<style>`
+description: Enforce newlines between operands of ternary expressions in `<template>`
 ---
 # vue/multiline-ternary
 
-> Enforce newlines between operands of ternary expressions in `<template>` and `<style>`
+> Enforce newlines between operands of ternary expressions in `<template>`
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as core [multiline-ternary] rule but it applies to the expressions in `<template>` and `<style>`.
+
+## :book: Rule Details
+
+<eslint-code-block fix :rules="{'vue/multiline-ternary': ['error']}">
+
+```vue
+<template>
+  <div>
+    <!-- ✓ GOOD -->
+    <div :class="isEnabled
+      ? 'check'
+      : 'stop'" />
+
+    <!-- ✗ BAD -->
+    <div :class="isEnabled ? 'check' : 'stop'" />
+  </div>
+</template>
+
+<style>
+div {
+  /* ✓ GOOD */
+  color: v-bind('myFlag
+    ? foo
+    : bar');
+
+  /* ✗ BAD */
+  color: v-bind('myFlag ? foo : bar');
+}
+</style>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
