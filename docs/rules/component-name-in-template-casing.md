@@ -142,6 +142,22 @@ export default {
 
 </eslint-code-block>
 
+### `"PascalCase", { globals: ["RouterView"] }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {globals: ['RouterView']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <RouterView></RouterView>
+  
+  <!-- ✗ BAD -->
+  <router-view></router-view>
+</template>
+```
+
+</eslint-code-block>
+
 ## :books: Further Reading
 
 - [Style guide - Component name casing in templates](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-name-casing-in-templates)
