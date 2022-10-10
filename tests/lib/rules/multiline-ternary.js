@@ -292,6 +292,6 @@ tester.run('multiline-ternary', rule, {
           column: 45
         }
       ]
-    },
+    }
   ]
 })
