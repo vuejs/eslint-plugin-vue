@@ -5,10 +5,6 @@
 
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Helpers
-// ------------------------------------------------------------------------------
-
 /**
  * Gets the property of the Object node passed in that has the name specified.
  *
@@ -105,10 +101,6 @@ function checkMetaValidity(context, exportsNode) {
     context.report(categories.value, 'meta.docs.categories must be an array.')
   }
 }
-
-// ------------------------------------------------------------------------------
-// Rule Definition
-// ------------------------------------------------------------------------------
 
 module.exports = {
   meta: {

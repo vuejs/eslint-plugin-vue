@@ -4,16 +4,8 @@
 
 'use strict'
 
-// -----------------------------------------------------------------------------
-// Requirements
-// -----------------------------------------------------------------------------
-
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/html-closing-bracket-spacing')
-
-// -----------------------------------------------------------------------------
-// Tests
-// -----------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

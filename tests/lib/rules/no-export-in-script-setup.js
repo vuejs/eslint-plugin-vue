@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const semver = require('semver')
 const eslint = require('eslint')
 const rule = require('../../../lib/rules/no-export-in-script-setup')
@@ -20,10 +16,6 @@ const ruleTester = new RuleTester({
     sourceType: 'module'
   }
 })
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 ruleTester.run('no-export-in-script-setup', rule, {
   valid: [

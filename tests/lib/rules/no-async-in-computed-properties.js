@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-async-in-computed-properties')
 const RuleTester = require('eslint').RuleTester
 
@@ -16,10 +12,6 @@ const parserOptions = {
   sourceType: 'module'
 }
 const parser = require.resolve('vue-eslint-parser')
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 

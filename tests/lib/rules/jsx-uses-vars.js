@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const eslint = require('eslint')
 const rule = require('../../../lib/rules/jsx-uses-vars')
 const ruleNoUnusedVars = new (require('eslint').Linter)()
@@ -27,10 +23,6 @@ const ruleTester = new RuleTester({
 
 const linter = ruleTester.linter || eslint.linter
 linter.defineRule('jsx-uses-vars', rule)
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 describe('jsx-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {

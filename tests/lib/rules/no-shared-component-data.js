@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-shared-component-data')
 
 const RuleTester = require('eslint').RuleTester
@@ -16,10 +12,6 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('no-shared-component-data', rule, {

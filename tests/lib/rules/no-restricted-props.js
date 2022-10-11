@@ -3,17 +3,9 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const semver = require('semver')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-restricted-props')
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

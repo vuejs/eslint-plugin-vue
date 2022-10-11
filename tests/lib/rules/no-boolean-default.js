@@ -4,18 +4,10 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const semver = require('semver')
 const rule = require('../../../lib/rules/no-boolean-default')
 
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parserOptions: {

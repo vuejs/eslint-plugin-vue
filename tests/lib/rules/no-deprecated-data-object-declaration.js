@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-deprecated-data-object-declaration')
 
 const RuleTester = require('eslint').RuleTester
@@ -16,10 +12,6 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('no-deprecated-data-object-declaration', rule, {

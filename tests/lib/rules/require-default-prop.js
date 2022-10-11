@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const semver = require('semver')
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('eslint').RuleTester
@@ -15,10 +11,6 @@ const parserOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({ parserOptions })
 ruleTester.run('require-default-prop', rule, {
