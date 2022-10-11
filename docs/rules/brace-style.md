@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/brace-style
-description: Enforce consistent brace style for blocks in `<template>`
+description: enforce consistent brace style for blocks in `<template>`
 since: v5.2.0
 ---
 # vue/brace-style
 
-> Enforce consistent brace style for blocks in `<template>`
+> enforce consistent brace style for blocks in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

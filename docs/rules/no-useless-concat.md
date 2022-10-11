@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-useless-concat
-description: Disallow unnecessary concatenation of literals or template literals in `<template>`
+description: disallow unnecessary concatenation of literals or template literals in `<template>`
 since: v7.0.0
 ---
 # vue/no-useless-concat
 
-> Disallow unnecessary concatenation of literals or template literals in `<template>`
+> disallow unnecessary concatenation of literals or template literals in `<template>`
 
 This rule is the same rule as core [no-useless-concat] rule but it applies to the expressions in `<template>`.
 
