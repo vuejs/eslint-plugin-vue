@@ -168,6 +168,30 @@ tester.run('component-name-in-template-casing', rule, {
           <keep-alive />
         </template>
       `
+    },
+
+    // globals
+    {
+      code: `
+        <template>
+          <div>
+            <RouterView />
+            <RouterLink />
+          </div>
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView', 'router-link'] }]
+    },
+    {
+      code: `
+        <template>
+          <div>
+            <router-view />
+            <router-link />
+          </div>
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['RouterView', 'router-link'] }]
     }
   ],
   invalid: [
@@ -854,6 +878,66 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
       `,
       errors: ['Component name "TheComponent" is not kebab-case.']
+    },
+    {
+      code: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView'] }],
+      output: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "router-view" is not PascalCase.',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['RouterView'] }],
+      output: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['router-view'] }],
+      output: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
     }
   ]
 })
