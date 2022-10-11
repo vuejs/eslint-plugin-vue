@@ -4,26 +4,26 @@ const cp = require('child_process')
 const logger = console
 
 // main
-;((ruleId) => {
-  if (ruleId == null) {
-    logger.error('Usage: npm run new <RuleID>')
+;((ruleName, authorName) => {
+  if (!ruleName || !authorName) {
+    logger.error('Usage: npm run new <rule name> <author name>')
     process.exitCode = 1
     return
   }
-  if (!/^[\w-]+$/u.test(ruleId)) {
-    logger.error("Invalid RuleID '%s'.", ruleId)
+  if (!/^[\w-]+$/u.test(ruleName)) {
+    logger.error("Invalid rule name '%s'.", ruleName)
     process.exitCode = 1
     return
   }
 
-  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleId}.js`)
-  const testFile = path.resolve(__dirname, `../tests/lib/rules/${ruleId}.js`)
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleId}.md`)
+  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.js`)
+  const testFile = path.resolve(__dirname, `../tests/lib/rules/${ruleName}.js`)
+  const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
 
   fs.writeFileSync(
     ruleFile,
     `/**
- * @author *****your name*****
+ * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
 'use strict'
@@ -72,13 +72,13 @@ module.exports = {
   fs.writeFileSync(
     testFile,
     `/**
- * @author *****your name*****
+ * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/${ruleId}')
+const rule = require('../../../lib/rules/${ruleName}')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -88,7 +88,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('${ruleId}', rule, {
+tester.run('${ruleName}', rule, {
   valid: [
     {
       filename: 'test.vue',
@@ -124,10 +124,10 @@ tester.run('${ruleId}', rule, {
     `---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/${ruleId}
+title: vue/${ruleName}
 description: xxx
 ---
-# vue/${ruleId}
+# vue/${ruleName}
 
 > xxx
 
@@ -137,7 +137,7 @@ description: xxx
 
 This rule ....
 
-<eslint-code-block :rules="{'vue/${ruleId}': ['error']}">
+<eslint-code-block :rules="{'vue/${ruleName}': ['error']}">
 
 \`\`\`vue
 <template>
@@ -157,4 +157,4 @@ Nothing.
   cp.execSync(`code "${ruleFile}"`)
   cp.execSync(`code "${testFile}"`)
   cp.execSync(`code "${docFile}"`)
-})(process.argv[2])
+})(process.argv[2], process.argv[3])

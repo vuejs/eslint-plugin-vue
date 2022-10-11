@@ -13,7 +13,7 @@ Please include as much detail as possible to help us properly address your issue
 In order to add a new rule or a rule change, you should:
 
 - Create issue on GitHub with description of proposed rule
-- Generate a new rule using the `npm run new -- [rule-name]` command
+- Generate a new rule using the `npm run new <rule name> <author name>` command
 - Write test scenarios & implement logic
 - Describe the rule in the generated `docs` file
 - Make sure all tests are passing
