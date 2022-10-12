@@ -61,8 +61,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   - `"method"` ... Allow handlers by method binding. e.g. `v-on:click="handler"`
   - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`  
                   Even if this is not specified, writing styles that cannot be converted to other allowed styles are allowed.
-  - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`  
-                            Even if this is not specified, writing styles that cannot be converted to other allowed styles are allowed.
+  - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`
 - Second option
   - `ignoreIncludesComment` ... If `true`, do not report expressions containing comments. This option takes effect if `"method"` is allowed. Default is `false`.
 
