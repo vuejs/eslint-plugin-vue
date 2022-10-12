@@ -13,7 +13,7 @@ description: enforce writing style for handlers in `v-on` directives
 
 ## :book: Rule Details
 
-This rule aims to enforce using method handlers on `v-on`, using inline handlers on `v-on`, or binding inline functions to `v-on`.
+This rule aims to enforce a consistent style in `v-on` event handlers:
 
 ```vue
 <!-- Method handlers -->
