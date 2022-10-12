@@ -52,70 +52,20 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: `<template>
-        <button @click="foo(123)" />
-        <button @click="foo.bar()" />
-        <button @click="foo?.()" />
-        <button @click="foo();foo();" />
-        <button @click="{}" />
-      </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
         <button @click="foo() /* comment */" />
       </template>`,
       options: [['method'], { ignoreIncludesComment: true }]
     },
     {
       filename: 'test.vue',
-      code: `
-      <template><button @click="foo()" /></template>
-      <script>
-      export default {
-        methods: {
-          foo(a) {}
-        }
-      }
-      </script>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <button @click="foo()" />
-        <button @click="bar()" />
-        <button @click="baz()" />
-      </template>
-      <script>
-      export default {
-        methods: {
-          foo(a, b) {},
-          bar(...a) {},
-          baz(a = 42) {},
-        }
-      }
-      </script>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <button @click="foo()" />
-        <button @click="bar()" />
-        <button @click="baz()" />
-      </template>
-      <script>
-      export default {
-        methods: {
-          foo: (a, b) => {},
-          bar: (...a) => {},
-          baz: (a = 42) => {},
-        }
-      }
-      </script>`,
+      code: `<template>
+        <template v-for="e in list">
+          <button @click="handler(e)" />
+          <button @click="handlers[e]()" />
+          <button @click="handler(a(b), c(d), e + f)" />
+          <button @click="e.foo()" />
+        </template>
+      </template>`,
       options: [['method']]
     },
     // inline-function -> method
@@ -129,76 +79,13 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: `<template>
-        <button @click="() => handler(foo)" />
+        <template v-for="e in list">
+          <button @click="() => handler(e)" />
+          <button @click="() => handlers[e]()" />
+          <button @click="() => handler(a(b), c(d), e + f)" />
+          <button @click="() => e.foo()" />
+        </template>
       </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
-        <button @click="() => foo?.()" />
-      </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
-        <button @click="() => count++" />
-      </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
-        <button @click="() => { count++ }" />
-      </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template>
-        <button @click="(a, b) => foo(b, a)" />
-        <button @click="(a, b) => foo(...a, b)" />
-        <button @click="(...a) => foo(a)" />
-      </template>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <button @click="(a) => foo(a)" />
-        <button @click="(a) => bar(a)" />
-        <button @click="(a, b) => baz(a, b)" />
-      </template>
-      <script>
-      export default {
-        methods: {
-          foo(a, b) {},
-          bar(...a) {},
-          baz(a = 42) {},
-        }
-      }
-      </script>`,
-      options: [['method']]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <button @click="(a) => foo(a)" />
-        <button @click="(a) => bar(a)" />
-        <button @click="(a, b) => baz(a, b)" />
-      </template>
-      <script>
-      export default {
-        methods: {
-          foo: (a, b) => {},
-          bar: (...a) => {},
-          baz: (a = 42) => {},
-        }
-      }
-      </script>`,
       options: [['method']]
     },
     // inline-function -> inline
@@ -595,6 +482,174 @@ tester.run('v-on-handler-style', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="foo(123)" />
+        <button @click="foo.bar()" />
+        <button @click="foo?.()" />
+        <button @click="foo();foo();" />
+        <button @click="{}" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 5,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 6,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template><button @click="foo()" /></template>
+      <script>
+      export default {
+        methods: {
+          foo(a) {}
+        }
+      }
+      </script>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 2,
+          column: 33,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar()" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 5,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="foo()" />
+        <button @click="bar()" />
+        <button @click="baz()" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 5,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <template v-for="e in list">
+          <button @click="e()" />
+        </template>
+      </template>`,
+      options: [['method']],
+      output: `<template>
+        <template v-for="e in list">
+          <button @click="e" />
+        </template>
+      </template>`,
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 3,
+          column: 27,
+          suggestions: []
+        }
+      ]
+    },
     // inline -> inline-function
     {
       filename: 'test.vue',
@@ -820,6 +875,218 @@ tester.run('v-on-handler-style', rule, {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
           column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => handler(foo)" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => foo?.()" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => count++" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => { count++ }" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="(a, b) => foo(b, a)" />
+        <button @click="(a, b) => foo(...a, b)" />
+        <button @click="(...a) => foo(a)" />
+      </template>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="(a) => bar(a)" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo(a, b) {},
+          bar(...a) {},
+          baz(a = 42) {},
+        }
+      }
+      </script>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 5,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="(a) => foo(a)" />
+        <button @click="(a) => bar(a)" />
+        <button @click="(a, b) => baz(a, b)" />
+      </template>
+      <script>
+      export default {
+        methods: {
+          foo: (a, b) => {},
+          bar: (...a) => {},
+          baz: (a = 42) => {},
+        }
+      }
+      </script>`,
+      options: [['method']],
+      output: null,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 25,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 5,
+          column: 25,
+          suggestions: []
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <template v-for="e in list">
+          <button @click="() => e()" />
+          <button @click="(a) => e(a)" />
+          <button @click="(a, b) => e(a, b)" />
+        </template>
+      </template>`,
+      options: [['method']],
+      output: `<template>
+        <template v-for="e in list">
+          <button @click="e" />
+          <button @click="e" />
+          <button @click="e" />
+        </template>
+      </template>`,
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 27,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 4,
+          column: 27,
+          suggestions: []
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 5,
+          column: 27,
           suggestions: []
         }
       ]
