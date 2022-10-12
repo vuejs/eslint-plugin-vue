@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-empty-pattern
-description: Disallow empty destructuring patterns in `<template>`
+description: disallow empty destructuring patterns in `<template>`
 since: v6.0.0
 ---
 # vue/no-empty-pattern
 
-> Disallow empty destructuring patterns in `<template>`
+> disallow empty destructuring patterns in `<template>`
 
 This rule is the same rule as core [no-empty-pattern] rule but it applies to the expressions in `<template>`.
 

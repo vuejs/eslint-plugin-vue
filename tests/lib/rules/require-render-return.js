@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/require-render-return')
 const RuleTester = require('eslint').RuleTester
 
@@ -16,10 +12,6 @@ const parserOptions = {
   sourceType: 'module',
   ecmaFeatures: { jsx: true }
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-render-return', rule, {

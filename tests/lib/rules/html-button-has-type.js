@@ -4,17 +4,9 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/html-button-has-type')
 
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

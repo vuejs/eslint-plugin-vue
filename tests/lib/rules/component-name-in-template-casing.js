@@ -3,16 +3,8 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/component-name-in-template-casing')
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

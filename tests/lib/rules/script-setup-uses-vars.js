@@ -5,10 +5,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const eslint = require('eslint')
 const rule = require('../../../lib/rules/script-setup-uses-vars')
 const ruleNoUnusedVars = new (require('eslint').Linter)()
@@ -26,10 +22,6 @@ const ruleTester = new RuleTester({
 
 const linter = ruleTester.linter || eslint.linter
 linter.defineRule('script-setup-uses-vars', rule)
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 describe('script-setup-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
