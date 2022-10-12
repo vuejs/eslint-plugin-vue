@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/eqeqeq
-description: Require the use of `===` and `!==` in `<template>`
+description: require the use of `===` and `!==` in `<template>`
 since: v5.2.0
 ---
 # vue/eqeqeq
 
-> Require the use of `===` and `!==` in `<template>`
+> require the use of `===` and `!==` in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

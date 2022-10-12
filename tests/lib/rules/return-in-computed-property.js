@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/return-in-computed-property')
 
 const RuleTester = require('eslint').RuleTester
@@ -16,10 +12,6 @@ const parserOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('return-in-computed-property', rule, {

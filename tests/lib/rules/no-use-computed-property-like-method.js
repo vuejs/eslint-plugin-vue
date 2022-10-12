@@ -3,16 +3,8 @@
  * See LICENSE file in root directory for full license.
  */
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-use-computed-property-like-method')
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

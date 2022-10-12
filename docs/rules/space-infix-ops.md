@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/space-infix-ops
-description: Require spacing around infix operators in `<template>`
+description: require spacing around infix operators in `<template>`
 since: v5.2.0
 ---
 # vue/space-infix-ops
 
-> Require spacing around infix operators in `<template>`
+> require spacing around infix operators in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

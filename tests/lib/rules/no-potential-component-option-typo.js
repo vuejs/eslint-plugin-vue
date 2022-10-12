@@ -4,17 +4,9 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-potential-component-option-typo')
 
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -166,7 +158,7 @@ tester.run('no-potential-component-option-typo', rule, {
         delimiters: {},
         comments: {},
         inheritAttrs: {},
-      }; 
+      };
       </script>
       `,
       options: [{ presets: ['all'] }]

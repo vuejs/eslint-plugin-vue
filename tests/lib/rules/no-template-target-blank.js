@@ -4,17 +4,9 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-template-target-blank')
 
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),

@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/dot-notation
-description: Enforce dot notation whenever possible in `<template>`
+description: enforce dot notation whenever possible in `<template>`
 since: v7.0.0
 ---
 # vue/dot-notation
 
-> Enforce dot notation whenever possible in `<template>`
+> enforce dot notation whenever possible in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

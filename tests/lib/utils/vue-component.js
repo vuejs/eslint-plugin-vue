@@ -5,10 +5,6 @@
 
 const utils = require('../../../lib/utils/index')
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = {
   create(context) {
     return utils.executeOnVueComponent(context, (obj) => {
@@ -320,10 +316,6 @@ function invalidTests(ext) {
     }
   ]
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('vue-component', rule, {

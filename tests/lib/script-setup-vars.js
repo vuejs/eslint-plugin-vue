@@ -1,9 +1,5 @@
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const eslint = require('eslint')
 const rules = new eslint.Linter().getRules()
 const ruleNoUnusedVars = rules.get('no-unused-vars')
@@ -17,10 +13,6 @@ const ruleTester = new RuleTester({
     sourceType: 'module'
   }
 })
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 describe('vue-eslint-parser should properly mark the variables used in the template', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {

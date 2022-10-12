@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const semver = require('semver')
 const rule = require('../../../lib/rules/no-reserved-keys')
 const RuleTester = require('eslint').RuleTester
@@ -16,10 +12,6 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('no-reserved-keys', rule, {

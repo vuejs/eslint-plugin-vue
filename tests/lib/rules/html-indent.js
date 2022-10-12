@@ -5,18 +5,10 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const fs = require('fs')
 const path = require('path')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/html-indent')
-
-// ------------------------------------------------------------------------------
-// Helpers
-// ------------------------------------------------------------------------------
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
 
@@ -105,10 +97,6 @@ function unIndent(strings) {
 
   return lines.map((line) => line.slice(minLineIndent)).join('\n')
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
