@@ -31,11 +31,11 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="handler">...</button>
-  <button v-on:click="() => handler()">...</button>
+  <button v-on:click="handler" />
+  <button v-on:click="() => handler()" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler()">...</button>
+  <button v-on:click="handler()" />
 </template>
 ```
 
@@ -73,15 +73,15 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="handler">...</button>
+  <button v-on:click="handler" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler()">...</button>
-  <button v-on:click="() => handler()">...</button>
+  <button v-on:click="handler()" />
+  <button v-on:click="() => handler()" />
 
   <!-- Ignore -->
-  <button v-on:click="handler(foo)">...</button>
-  <button v-on:click="() => handler(foo)">...</button>
+  <button v-on:click="handler(foo)" />
+  <button v-on:click="() => handler(foo)" />
 </template>
 ```
 
@@ -94,12 +94,12 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="handler()">...</button>
+  <button v-on:click="handler()" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler">...</button>
-  <button v-on:click="() => handler()">...</button>
-  <button v-on:click="(foo) => handler(foo)">...</button>
+  <button v-on:click="handler" />
+  <button v-on:click="() => handler()" />
+  <button v-on:click="(foo) => handler(foo)" />
 </template>
 ```
 
@@ -112,11 +112,11 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="() => handler()">...</button>
+  <button v-on:click="() => handler()" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler">...</button>
-  <button v-on:click="handler()">...</button>
+  <button v-on:click="handler" />
+  <button v-on:click="handler()" />
 </template>
 ```
 
@@ -129,13 +129,13 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="handler">...</button>
-  <button v-on:click="handler() /* comment */">...</button>
-  <button v-on:click="() => handler() /* comment */">...</button>
+  <button v-on:click="handler" />
+  <button v-on:click="handler() /* comment */" />
+  <button v-on:click="() => handler() /* comment */" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler()">...</button>
-  <button v-on:click="() => handler()">...</button>
+  <button v-on:click="handler()" />
+  <button v-on:click="() => handler()" />
 </template>
 ```
 
