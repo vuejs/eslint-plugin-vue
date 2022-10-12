@@ -141,6 +141,11 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/v-on-style](./v-on-style.md)
+- [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
+
 ## :books: Further Reading
 
 - [Guide - Inline Handlers]
