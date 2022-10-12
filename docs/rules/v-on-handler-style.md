@@ -78,11 +78,25 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <!-- ✗ BAD -->
   <button v-on:click="handler()" />
   <button v-on:click="() => handler()" />
+  <button v-on:click="(a, b) => handlerWithTwoParams(a, b)" />
 
   <!-- Ignore -->
   <button v-on:click="handler(foo)" />
   <button v-on:click="() => handler(foo)" />
+  <button v-on:click="count++" />
+  <button v-on:click="() => count++" />
+  <button v-on:click="handlerWithParam()" />
+  <button v-on:click="(a) => handlerWithTwoParams(a)" />
+  <button v-on:click="(a, b) => handlerWithTwoParams(b, a)" />
 </template>
+<script>
+export default {
+  methods: {
+    handlerWithParam(arg) { /* ... */ },
+    handlerWithTwoParams(a, b) { /* ... */ }
+  }
+}
+</script>
 ```
 
 </eslint-code-block>
@@ -100,6 +114,9 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <button v-on:click="handler" />
   <button v-on:click="() => handler()" />
   <button v-on:click="(foo) => handler(foo)" />
+
+  <!-- Ignore -->
+  <button v-on:click="(foo, bar) => handler(foo, bar)" />
 </template>
 ```
 
