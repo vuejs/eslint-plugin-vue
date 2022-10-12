@@ -16,12 +16,14 @@ description: enforce writing style for handlers in `v-on` directives
 This rule aims to enforce a consistent style in `v-on` event handlers:
 
 ```vue
-<!-- Method handlers -->
-<button v-on:click="handler">...</button>
-<!-- Inline handlers -->
-<button v-on:click="handler()">...</button>
-<!-- Inline functions -->
-<button v-on:click="() => handler()">...</button>
+<!-- Method handler: -->
+<button v-on:click="handler" />
+
+<!-- Inline handler: -->
+<button v-on:click="handler()" />
+
+<!-- Inline function: -->
+<button v-on:click="() => handler()" />
 ```
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error']}">
