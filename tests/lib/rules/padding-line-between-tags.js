@@ -22,6 +22,96 @@ tester.run('padding-line-between-tags', rule, {
       code: `
       <template>
         <div>
+          <div />
+
+          <div />
+
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+
+          <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+        </div>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+          <div></div>
+          <div></div>
+        </header>
+
+        <div></div>
+
+        <div />
+
+        <footer></footer>
+      </template>
+      `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
           <div></div>
 
           <div>
@@ -1027,6 +1117,185 @@ tester.run('padding-line-between-tags', rule, {
         }
       ],
       options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      output: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      output: `
+      <template>
+        <header>
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+
+          <div></div>
+        </header>
+        <div></div>
+        <div />
+        <footer></footer>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 8,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 9,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+          <div />
+
+          <br/>
+          <br/>
+
+          <div />
+          <div />
+
+          <div />
+          <div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div />
+          <div />
+          <br/>
+          <br/>
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 7,
+          column: 11
+        },
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 10,
+          column: 11
+        },
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 13,
+          column: 11
+        }
+      ],
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div />
+          <div />
+
+          <div />
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div />
+          <div />
+          <div />
+        </div>
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 7,
+          column: 11
+        }
+      ],
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
     }
   ]
 })

@@ -26,6 +26,12 @@ const emit = defineEmits<{
 }>()
 
 /* ✗ BAD */
+const emit = defineEmits({
+  change: (id) => typeof id == 'number',
+  update: (value) => typeof value == 'string'
+})
+
+/* ✗ BAD */
 const emit = defineEmits(['change', 'update'])
 </script>
 ```
@@ -52,6 +58,12 @@ const emit = defineEmits<{
   (e: 'change', id: number): void
   (e: 'update', value: string): void
 }>()
+
+/* ✓ GOOD */
+const emit = defineEmits({
+  change: (id) => typeof id == 'number',
+  update: (value) => typeof value == 'string'
+})
 
 /* ✓ GOOD */
 const emit = defineEmits(['change', 'update'])

@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/no-reserved-component-names')
 const RuleTester = require('eslint').RuleTester
 
@@ -16,10 +12,6 @@ const RESERVED_NAMES_IN_HTML = new Set([
   ...htmlElements,
   ...htmlElements.map((word) => word[0].toUpperCase() + word.slice(1))
 ])
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const invalidElements = [
   'annotation-xml',

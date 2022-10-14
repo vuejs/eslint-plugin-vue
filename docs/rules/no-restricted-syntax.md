@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-syntax
-description: Disallow specified syntax in `<template>`
+description: disallow specified syntax in `<template>`
 since: v5.2.0
 ---
 # vue/no-restricted-syntax
 
-> Disallow specified syntax in `<template>`
+> disallow specified syntax in `<template>`
 
 This rule is the same rule as core [no-restricted-syntax] rule but it applies to the expressions in `<template>`.
 

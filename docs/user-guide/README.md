@@ -2,12 +2,6 @@
 
 ## :cd: Installation
 
-Via `vue-cli` (**Recommended**):
-
-```bash
-vue add @vue/cli-plugin-eslint
-```
-
 Via [npm](https://www.npmjs.com/):
 
 ```bash

@@ -5,16 +5,9 @@
 
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-v-text')
 
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }

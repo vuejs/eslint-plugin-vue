@@ -3,10 +3,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/component-tags-order')
 const RuleTester = require('eslint').RuleTester
 const assert = require('assert')
@@ -29,10 +25,6 @@ const eslint = new ESLint({
   plugins: { vue: require('../../../lib/index') },
   fix: true
 })
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser')

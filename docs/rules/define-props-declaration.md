@@ -21,12 +21,14 @@ This rule only works in setup script and `lang="ts"`.
 <script setup lang="ts">
 /* ✓ GOOD */
 const props = defineProps<{
-  kind: string
+  kind: string,
+  options: { title: string }
 }>()
 
 /* ✗ BAD */
 const props = defineProps({
-  kind: { type: String }
+  kind: { type: String },
+  options: { type: Object as PropType<{ title: string }> }
 })
 </script>
 ```
@@ -48,14 +50,17 @@ const props = defineProps({
 
 ```vue
 <script setup lang="ts">
-/* ✗ BAD */
-const emit = defineEmits<{
-  (e: 'change', id: number): void
-  (e: 'update', value: string): void
-}>()
-
 /* ✓ GOOD */
-const emit = defineEmits(['change', 'update'])
+const props = defineProps({
+  kind: { type: String },
+  options: { type: Object as PropType<{ title: string }> }
+})
+
+/* ✗ BAD */
+const props = defineProps<{
+  kind: string,
+  options: { title: string }
+}>()
 </script>
 ```
 
