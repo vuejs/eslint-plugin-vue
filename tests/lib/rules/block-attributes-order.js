@@ -224,7 +224,8 @@ tester.run('block-attributes-order', rule, {
           message: 'Attribute "functional" should go before "src".'
         }
       ],
-      output: '<template lang="pug" src="./template.html" functional></template>'
+      output:
+        '<template lang="pug" src="./template.html" functional></template>'
     },
     {
       filename: 'test-script-attributes-with-invalid-order.vue',
