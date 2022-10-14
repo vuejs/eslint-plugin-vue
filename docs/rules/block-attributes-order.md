@@ -17,17 +17,35 @@ This rule aims to enforce ordering of block attributes.
 
 ### The default order
 
-#### Template
-
-`['functional', 'lang', 'src']`
-
-#### Script
-
-`['setup', 'lang', 'src']`
-
-#### Style
-
-`['module', 'scoped', 'lang', 'src']`
+```json
+[
+  {
+    "element": "style",
+    "order": [
+      "module",
+      "scoped",
+      "lang",
+      "src"
+    ]
+  },
+  {
+    "element": "script",
+    "order": [
+      "setup",
+      "lang",
+      "src"
+    ]
+  },
+  {
+    "element": "template",
+    "order": [
+      "functional",
+      "lang",
+      "src"
+    ]
+  }
+]
+```
 
 <eslint-code-block fix :rules="{'vue/block-attributes-order': ['error']}">
 
@@ -51,17 +69,32 @@ This rule aims to enforce ordering of block attributes.
 
 ### Custom orders
 
-<eslint-code-block fix :rules="{'vue/block-attributes-order': ['error', {
-  order: {
-    template: ['src', 'lang', 'functional'],
-    script: ['src', 'lang', 'setup'],
-    style: [['src', 'scoped'], 'module', 'lang']
-  }
-}]}">
+<eslint-code-block fix :rules="{'vue/block-attributes-order': [
+  'error',
+  [
+    {
+      element: 'template',
+      order: ['src', 'lang', 'functional']
+    },
+    {
+      element: 'script[setup]',
+      order: ['setup', 'src|foo', 'lang']
+    },
+    {
+      element: 'script',
+      order: ['src', 'lang', 'setup']
+    },
+    {
+      element: 'style',
+      order: [['src', 'scoped'], 'module', 'lang']
+    }
+  ]
+]}">
 
 ```vue
 <template functional lang="pug" src="./template.pug"></template>
-<script src="./script.ts" lang="ts" setup></script>
+<script src="./script.ts" lang="ts"></script>
+<script src="./script.ts" lang="ts" setup foo></script>
 <style src="./style.css" scoped module lang="css"></style>
 ```
 
@@ -69,11 +102,15 @@ This rule aims to enforce ordering of block attributes.
 
 ### Custom blocks
 
-<eslint-code-block fix :rules="{'vue/block-attributes-order': ['error', {
-  order: {
-    foobarbaz: ['foo', 'bar', 'baz']
-  }
-}]}">
+<eslint-code-block fix :rules="{'vue/block-attributes-order': [
+  'error',
+  [
+    {
+      element: 'foobarbaz',
+      order: ['foo', 'bar', 'baz']
+    }
+  ]
+]}">
 
 ```vue
 <foobarbaz foo bar baz></foobarbaz>
