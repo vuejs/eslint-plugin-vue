@@ -32,10 +32,10 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 <template>
   <!-- ✓ GOOD -->
   <button v-on:click="handler" />
-  <button v-on:click="() => handler()" />
 
   <!-- ✗ BAD -->
   <button v-on:click="handler()" />
+  <button v-on:click="() => handler()" />
 </template>
 ```
 
@@ -46,10 +46,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```json
 {
   "vue/v-on-handler-style": ["error",
-    [
-      "method",
-      "inline-function"
-    ],
+    ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | "inline-function" | "inline"
     {
       "ignoreIncludesComment": false
     }
@@ -57,41 +54,87 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 }
 ```
 
-- First option ... An array of names of allowed styles. Default is `["method", "inline-function"]`.
-  - `"method"` ... Allow handlers by method binding. e.g. `v-on:click="handler"`
-  - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`  
-                  Even if this is not specified, writing styles that cannot be converted to other allowed styles are allowed.
+- First option ... Specifies the name of an allowed style. Default is `["method", "inline-function"]`.
+  - `["method", "inline-function"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline functions where method handlers cannot be used. e.g. `v-on:click="() => handler(listItem)"`.
+  - `["method", "inline"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline handlers where method handlers cannot be used. e.g. `v-on:click="handler(listItem)"`.
   - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`
+  - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`
 - Second option
-  - `ignoreIncludesComment` ... If `true`, do not report expressions containing comments. This option takes effect if `"method"` is allowed. Default is `false`.
+  - `ignoreIncludesComment` ... If `true`, do not report expressions containing comments to be converted to method handlers. However, it will be reported if the second style is not used. This option takes effect if `"method"` is allowed. Default is `false`.
 
-### `["method"]`
+### `["method", "inline-function"]` (Default)
 
-<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method']]}">
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline-function']]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <button v-on:click="handler" />
   <template v-for="e in list">
-    <button @click="e" />
-    <button @click="e" />
+    <button v-on:click="e" />
+    <button v-on:click="() => handler(e)" />
   </template>
 
   <!-- ✗ BAD -->
   <button v-on:click="handler()" />
+  <button v-on:click="count++" />
   <button v-on:click="() => handler()" />
+  <button v-on:click="() => count++" />
   <button v-on:click="(a, b) => handler(a, b)" />
   <template v-for="e in list">
-    <button @click="e()" />
-    <button @click="() => e()" />
+    <button v-on:click="e()" />
+    <button v-on:click="() => e()" />
+    <button v-on:click="handler(e)" /> <!-- Can use inline function -->
+  </template>
+</template>
+```
+
+</eslint-code-block>
+
+### `["method", "inline"]`
+
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline']]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="handler" />
+  <template v-for="e in list">
+    <button v-on:click="e" />
+    <button v-on:click="handler(e)" />
   </template>
 
-  <!-- Ignore -->
+  <!-- ✗ BAD -->
+  <button v-on:click="handler()" />
+  <button v-on:click="count++" />
+  <button v-on:click="() => handler()" />
+  <button v-on:click="() => count++" />
+  <button v-on:click="(a, b) => handler(a, b)" />
   <template v-for="e in list">
-    <button @click="handler(e)" />
-    <button @click="() => handler(e)" />
+    <button v-on:click="e()" />
+    <button v-on:click="() => e()" />
+    <button v-on:click="() => handler(e)" /> <!-- Can use inline handler -->
   </template>
+</template>
+```
+
+</eslint-code-block>
+
+### `["inline-function"]`
+
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline-function']]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="() => handler()" />
+  <button v-on:click="() => count++" />
+
+  <!-- ✗ BAD -->
+  <button v-on:click="handler" />
+  <button v-on:click="handler()" />
+  <button v-on:click="handler($event)" />
+  <button v-on:click="count++" />
 </template>
 ```
 
@@ -106,50 +149,52 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <!-- ✓ GOOD -->
   <button v-on:click="handler()" />
   <button v-on:click="handler($event)" />
+  <button v-on:click="count++" />
 
   <!-- ✗ BAD -->
   <button v-on:click="handler" />
   <button v-on:click="() => handler()" />
   <button v-on:click="(foo) => handler(foo)" />
-
-  <!-- Ignore -->
   <button v-on:click="(foo, bar) => handler(foo, bar)" />
+  <button v-on:click="() => count++" />
 </template>
 ```
 
 </eslint-code-block>
 
-### `["inline-function"]`
+### `["method", "inline-function"], { "ignoreIncludesComment": true }`
 
-<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline-function']]}">
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline-function'], {ignoreIncludesComment: true}]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="() => handler()" />
+  <button v-on:click="handler" />
+  <button v-on:click="() => handler() /* comment */" />
 
   <!-- ✗ BAD -->
-  <button v-on:click="handler" />
   <button v-on:click="handler()" />
+  <button v-on:click="() => handler()" />
+  <button v-on:click="handler() /* comment */" />
 </template>
 ```
 
 </eslint-code-block>
 
-### `["method"], { "ignoreIncludesComment": true }`
+### `["method", "inline"], { "ignoreIncludesComment": true }`
 
-<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method'], {ignoreIncludesComment: true}]}">
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline'], {ignoreIncludesComment: true}]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <button v-on:click="handler" />
   <button v-on:click="handler() /* comment */" />
-  <button v-on:click="() => handler() /* comment */" />
 
   <!-- ✗ BAD -->
   <button v-on:click="handler()" />
   <button v-on:click="() => handler()" />
+  <button v-on:click="() => handler() /* comment */" />
 </template>
 ```
 
