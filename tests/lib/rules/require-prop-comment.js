@@ -31,11 +31,6 @@ tester.run('require-prop-comment', rule, {
            * a comment
            */
           a: Number,
-          // b comment
-          b: Number,
-          // c
-          // comment
-          c: Number
         }
       })
       </script>
@@ -54,7 +49,24 @@ tester.run('require-prop-comment', rule, {
         a: Number
       })
       </script>
-      `
+      `,
+      options: [{ type: 'block' }]
+    },
+    {
+      code: `
+      import { defineComponent } from '@vue/composition-api'
+      export const ComponentName = defineComponent({
+        props: {
+          // a comment
+          // a other comment
+          a: Number
+        },
+        render() {
+          return <div>1</div>
+        }
+      })
+      `,
+      options: [{ type: 'line' }]
     },
     {
       code: `
@@ -64,13 +76,16 @@ tester.run('require-prop-comment', rule, {
           /**
            * a comment
            */
-          a: Number
+          a: Number,
+          // a comment
+          b: Number
         },
         render() {
           return <div>1</div>
         }
       })
-      `
+      `,
+      options: [{ type: 'unlimited' }]
     }
   ],
   invalid: [
@@ -85,18 +100,25 @@ tester.run('require-prop-comment', rule, {
       export default defineComponent({
         props: {
           a: Number,
-          // b comment
+          /**
+           * b comment
+           */
+          /**
+           * b other comment
+           */
           b: Number,
-          // c
-          // comment
-          c: Number
         }
       })
       </script>
       `,
       errors: [
         {
-          line: 10
+          line: 10,
+          message: 'The "a" property should have one block comment.'
+        },
+        {
+          line: 17,
+          message: 'The "b" property should have one block comment.'
         }
       ]
     },
@@ -115,17 +137,20 @@ tester.run('require-prop-comment', rule, {
            */
           a: Number,
           b: Number,
-          // c
-          // comment
-          c: Number
         },
         setup() {}
       })
       </script>
       `,
+      options: [{ type: 'line' }],
       errors: [
         {
-          line: 14
+          line: 12,
+          message: 'The "a" property should have a line comment.'
+        },
+        {
+          line: 13,
+          message: 'The "b" property should have a line comment.'
         }
       ]
     },
@@ -136,13 +161,21 @@ tester.run('require-prop-comment', rule, {
       </template>
       <script setup>
       const props = defineProps({
-        a: Number
+        a: Number,
+        /**
+         * b comment
+         */
+        b: Number,
+        // c comment
+        c: Number
       })
       </script>
       `,
+      options: [{ type: 'unlimited' }],
       errors: [
         {
-          line: 7
+          line: 7,
+          message: `The "a" property should have a comment.`
         }
       ]
     },
@@ -159,25 +192,8 @@ tester.run('require-prop-comment', rule, {
       `,
       errors: [
         {
-          line: 7
-        }
-      ]
-    },
-    {
-      code: `
-      import { defineComponent } from '@vue/composition-api'
-      export const ComponentName = defineComponent({
-        props: {
-          a: Number
-        },
-        render() {
-          return <div>1</div>
-        }
-      })
-      `,
-      errors: [
-        {
-          line: 5
+          line: 7,
+          message: 'The "a" property should have one block comment.'
         }
       ]
     },
@@ -192,7 +208,8 @@ tester.run('require-prop-comment', rule, {
       `,
       errors: [
         {
-          line: 5
+          line: 5,
+          message: 'The "a" property should have one block comment.'
         }
       ]
     }

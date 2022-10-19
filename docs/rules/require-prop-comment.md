@@ -2,17 +2,17 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-comment
-description: require prop should have a comment
+description: require that props have a comment
 ---
 # vue/require-prop-comment
 
-> require prop should have a comment
+> require that props have a comment
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
-This rule requires that the prop should have a comment
+This rule enforces that every prop has a comment that documents it.
 
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error']}">
 
@@ -51,7 +51,7 @@ export default defineComponent({
 </template>
 <script setup>
 const props = defineProps({
-  a: Number
+  a: Number,
 })
 </script>
 ```
@@ -60,7 +60,118 @@ const props = defineProps({
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-prop-comment": ["error", {
+    "type": "block"
+  }]
+}
+```
+- `type` ... Type of comment.Default is `"block"`
+  - `"line"` ... Only line comment are allowed,one or more.
+  - `"block"` ... Only block comment are allowed,one is allowed.
+  - `"unlimited"` ... There is no limit to the number and type.
+
+### `"type":"block"`
+<eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'block'}]}">
+
+<!-- ✓ GOOD -->
+<script setup>
+const props = defineProps({
+  /**
+   * a comment
+   */
+  a: Number,
+})
+</script>
+
+<!-- ✗ BAD -->
+<script setup>
+const props = defineProps({
+  /**
+   * a comment
+   */
+  /**
+   * a other comment
+   */
+  a: Number,
+})
+</script>
+
+<!-- ✗ BAD -->
+<script setup>
+const props = defineProps({
+  // a comment
+  a: Number,
+})
+</script>
+
+</eslint-code-block>
+
+### `"type":"line"`
+<eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'line'}]}">
+
+<!-- ✓ GOOD -->
+<script setup>
+const props = defineProps({
+  // a comment
+  a: Number,
+})
+</script>
+
+<!-- ✓ GOOD -->
+<script setup>
+const props = defineProps({
+  // a first comment
+  // a second comment
+  // a other comment
+  a: Number,
+})
+</script>
+
+<!-- ✗ BAD -->
+<script setup>
+const props = defineProps({
+  /**
+   * a comment
+   */
+  a: Number,
+})
+</script>
+
+</eslint-code-block>
+
+### `"type":"unlimited"`
+<eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'unlimited'}]}">
+
+<!-- ✓ GOOD -->
+<script setup>
+const props = defineProps({
+  /**
+   * a comment
+   */
+  a: Number,
+})
+</script>
+
+<!-- ✓ GOOD -->
+<script setup>
+const props = defineProps({
+  // a first comment
+  // a second comment
+  // a other comment
+  a: Number,
+})
+</script>
+
+<!-- ✗ BAD -->
+<script setup>
+const props = defineProps({
+  a: Number,
+})
+</script>
+
+</eslint-code-block>
 
 ## :mag: Implementation
 
