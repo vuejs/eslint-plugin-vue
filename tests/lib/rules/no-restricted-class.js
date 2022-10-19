@@ -32,7 +32,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden']
     },
     {
-      code: `<template><div class="allowed"">Content</div></template>`,
+      code: `<template><div class="allowed">Content</div></template>`,
       options: ['/^for(bidden|gotten)/']
     }
   ],
