@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/key-spacing
-description: Enforce consistent spacing between keys and values in object literal properties in `<template>`
+description: enforce consistent spacing between keys and values in object literal properties in `<template>`
 since: v5.2.0
 ---
 # vue/key-spacing
 
-> Enforce consistent spacing between keys and values in object literal properties in `<template>`
+> enforce consistent spacing between keys and values in object literal properties in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

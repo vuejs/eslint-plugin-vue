@@ -33,6 +33,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 - `registeredComponentsOnly` ... If `true`, only registered components (in PascalCase) are checked. If `false`, check all.
     default `true`
 - `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, custom elements or Vue components with special name. You can set the regexp by writing it like `"/^name/"`.
+- `globals` (`string[]`) ... Globally registered component names to check. For example, `RouterView` and `RouterLink` are globally registered by `vue-router` and can't be detected as registered in a SFC file.
 
 ### `"PascalCase", { registeredComponentsOnly: true }` (default)
 
@@ -136,6 +137,22 @@ export default {
   
   <!-- ✗ BAD -->
   <magic-element></magic-element>
+</template>
+```
+
+</eslint-code-block>
+
+### `"PascalCase", { globals: ["RouterView"] }`
+
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {globals: ['RouterView']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <RouterView></RouterView>
+  
+  <!-- ✗ BAD -->
+  <router-view></router-view>
 </template>
 ```
 

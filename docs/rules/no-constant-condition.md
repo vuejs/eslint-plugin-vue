@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-constant-condition
-description: Disallow constant expressions in conditions in `<template>`
+description: disallow constant expressions in conditions in `<template>`
 since: v7.5.0
 ---
 # vue/no-constant-condition
 
-> Disallow constant expressions in conditions in `<template>`
+> disallow constant expressions in conditions in `<template>`
 
 This rule is the same rule as core [no-constant-condition] rule but it applies to the expressions in `<template>`.
 
