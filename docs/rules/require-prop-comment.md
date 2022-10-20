@@ -67,7 +67,8 @@ const props = defineProps({
   }]
 }
 ```
-- `type` ... Type of comment.Default is `"block"`
+- `type` ... Type of comment.Default is `"JSDoc"`
+  - `"JSDoc"` ... Only JSDoc comment are allowed,one is allowed.
   - `"line"` ... Only line comment are allowed,one or more.
   - `"block"` ... Only block comment are allowed,one is allowed.
   - `"unlimited"` ... There is no limit to the number and type.
@@ -78,7 +79,7 @@ const props = defineProps({
 <!-- ✓ GOOD -->
 <script setup>
 const props = defineProps({
-  /**
+  /*
    * a comment
    */
   a: Number,
@@ -88,10 +89,10 @@ const props = defineProps({
 <!-- ✗ BAD -->
 <script setup>
 const props = defineProps({
-  /**
+  /*
    * a comment
    */
-  /**
+  /*
    * a other comment
    */
   a: Number,
