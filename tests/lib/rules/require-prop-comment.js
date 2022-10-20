@@ -191,11 +191,11 @@ tester.run('require-prop-comment', rule, {
       options: [{ type: 'line' }],
       errors: [
         {
-          line: 12,
+          line: 13,
           message: 'The "a" property should have a line comment.'
         },
         {
-          line: 13,
+          line: 14,
           message: 'The "b" property should have a line comment.'
         }
       ]
