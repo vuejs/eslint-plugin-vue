@@ -112,7 +112,7 @@ Don't use hyphenated name but allow custom event names
 
 - [Guide - Custom Events]
 
-[Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
+[Guide - Custom Events]: https://vuejs.org/guide/components/events.html
 
 ## :rocket: Version
 
