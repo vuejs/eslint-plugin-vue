@@ -105,7 +105,7 @@ export default {
 
 - `order` (`(string | string[])[]`) ... The order of properties. Elements are the property names or one of the following groups:
 
-  - `LIFECYCLE_HOOKS`: [Vue Lifecycle Events](https://v3.vuejs.org/guide/instance.html#lifecycle-diagram), in the order they are called
+  - `LIFECYCLE_HOOKS`: [Vue Lifecycle Events](https://vuejs.org/guide/essentials/lifecycle.html#lifecycle-diagram), in the order they are called
   - `ROUTER_GUARDS`: [Vue Router Navigation Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards), in the order they are called
 
   If an element is an array of strings, it means any of those can be placed there unordered. Default is above.
