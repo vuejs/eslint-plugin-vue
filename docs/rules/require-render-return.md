@@ -53,7 +53,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Render Functions](https://v3.vuejs.org/guide/render-function.html)
+- [Guide - Render Functions](https://vuejs.org/guide/extras/render-function.html)
 
 ## :rocket: Version
 

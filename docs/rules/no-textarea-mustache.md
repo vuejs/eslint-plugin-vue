@@ -34,7 +34,7 @@ This rule reports mustaches in `<textarea>`.
 
 ::: warning Note
 Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
-[https://v3.vuejs.org/guide/forms.html#multiline-text](https://v3.vuejs.org/guide/forms.html#multiline-text)
+[https://vuejs.org/guide/essentials/forms.html#multiline-text](https://vuejs.org/guide/essentials/forms.html#multiline-text)
 :::
 
 </div>
@@ -45,7 +45,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Form Input Bindings / Multiline text](https://v3.vuejs.org/guide/forms.html#multiline-text)
+- [Guide - Form Input Bindings / Multiline text](https://vuejs.org/guide/essentials/forms.html#multiline-text)
 
 ## :rocket: Version
 
