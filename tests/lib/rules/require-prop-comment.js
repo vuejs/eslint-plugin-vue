@@ -89,51 +89,6 @@ tester.run('require-prop-comment', rule, {
       export default defineComponent({
         props: {
           a: Number,
-          /**
-           * b comment
-           */
-          /**
-           * b other comment
-           */
-          b: Number,
-          /*
-           * c comment
-           */
-          c: Number
-        }
-      })
-      </script>
-      `,
-      errors: [
-        {
-          line: 7,
-          message: 'The "a" property should have one JSDoc comment.'
-        },
-        {
-          line: 14,
-          message: 'The "b" property should have one JSDoc comment.'
-        },
-        {
-          line: 18,
-          message: 'The "c" property should have one JSDoc comment.'
-        }
-      ]
-    },
-    {
-      code: `
-      <script>
-      import { defineComponent } from '@vue/composition-api'
-
-      export default defineComponent({
-        props: {
-          a: Number,
-          /*
-           * b comment
-           */
-          /*
-           * b other comment
-           */
-          b: Number,
           // c comment
           c: Number
         }
@@ -144,15 +99,11 @@ tester.run('require-prop-comment', rule, {
       errors: [
         {
           line: 7,
-          message: 'The "a" property should have one block comment.'
+          message: 'The "a" property should have a block comment.'
         },
         {
-          line: 14,
-          message: 'The "b" property should have one block comment.'
-        },
-        {
-          line: 16,
-          message: 'The "c" property should have one block comment.'
+          line: 9,
+          message: 'The "c" property should have a block comment.'
         }
       ]
     },
@@ -218,7 +169,7 @@ tester.run('require-prop-comment', rule, {
       errors: [
         {
           line: 4,
-          message: 'The "a" property should have one JSDoc comment.'
+          message: 'The "a" property should have a JSDoc comment.'
         }
       ]
     },
@@ -234,7 +185,7 @@ tester.run('require-prop-comment', rule, {
       errors: [
         {
           line: 5,
-          message: 'The "a" property should have one JSDoc comment.'
+          message: 'The "a" property should have a JSDoc comment.'
         }
       ]
     }
