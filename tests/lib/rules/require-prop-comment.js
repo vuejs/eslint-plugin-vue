@@ -106,15 +106,15 @@ tester.run('require-prop-comment', rule, {
       `,
       errors: [
         {
-          line: 10,
+          line: 7,
           message: 'The "a" property should have one JSDoc comment.'
         },
         {
-          line: 17,
+          line: 14,
           message: 'The "b" property should have one JSDoc comment.'
         },
         {
-          line: 21,
+          line: 18,
           message: 'The "c" property should have one JSDoc comment.'
         }
       ]
@@ -143,15 +143,15 @@ tester.run('require-prop-comment', rule, {
       options: [{ type: 'block' }],
       errors: [
         {
-          line: 10,
+          line: 7,
           message: 'The "a" property should have one block comment.'
         },
         {
-          line: 17,
+          line: 14,
           message: 'The "b" property should have one block comment.'
         },
         {
-          line: 19,
+          line: 16,
           message: 'The "c" property should have one block comment.'
         }
       ]
@@ -176,11 +176,11 @@ tester.run('require-prop-comment', rule, {
       options: [{ type: 'line' }],
       errors: [
         {
-          line: 13,
+          line: 10,
           message: 'The "a" property should have a line comment.'
         },
         {
-          line: 14,
+          line: 11,
           message: 'The "b" property should have a line comment.'
         }
       ]
@@ -202,7 +202,7 @@ tester.run('require-prop-comment', rule, {
       options: [{ type: 'unlimited' }],
       errors: [
         {
-          line: 7,
+          line: 4,
           message: `The "a" property should have a comment.`
         }
       ]
@@ -217,7 +217,7 @@ tester.run('require-prop-comment', rule, {
       `,
       errors: [
         {
-          line: 7,
+          line: 4,
           message: 'The "a" property should have one JSDoc comment.'
         }
       ]
