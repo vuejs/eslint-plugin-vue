@@ -30,11 +30,11 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.2.0+
-    - `"v-memo"` ... [v-memo](https://v3.vuejs.org/api/directives.html#v-memo) directive.
+    - `"v-memo"` ... [v-memo](https://vuejs.org/api/built-in-directives.html#v-memo) directive.
     - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
     - `"v-bind-attr-modifier"` ... `.attr` modifier on `v-bind` directive.
   - Vue.js 3.1.0+
-    - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://v3.vuejs.org/api/special-attributes.html#is)
+    - `"is-attribute-with-vue-prefix"` ... [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-attributes.html#is)
   - Vue.js 3.0.0+
     - `"v-model-argument"` ... [argument on `v-model`][Vue RFCs - 0005-replace-v-bind-sync-with-v-model-argument]
     - `"v-model-custom-modifiers"` ... [custom modifiers on `v-model`][Vue RFCs - 0011-v-model-api-change]
@@ -43,8 +43,8 @@ The `"ignores"` option accepts an array of the following strings.
     - `"style-css-vars-injection"` ... [SFC CSS variable injection][Vue RFCs - 0043-sfc-style-variables]
     - `"script-setup"` ... [`<script setup>`][Vue RFCs - 0040-script-setup]
   - Vue.js 2.6.0+
-    - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments).
-    - `"v-slot"` ... [v-slot](https://v3.vuejs.org/api/directives.html#v-slot) directive.
+    - `"dynamic-directive-arguments"` ... [dynamic directive arguments](https://vuejs.org/guide/essentials/template-syntax.html#dynamic-arguments).
+    - `"v-slot"` ... [v-slot](https://vuejs.org/api/built-in-directives.html#v-slot) directive.
   - Vue.js 2.5.0+
     - `"slot-scope-attribute"` ... [slot-scope](https://v2.vuejs.org/v2/api/#slot-scope-deprecated) attributes.
 
@@ -100,11 +100,11 @@ The `"ignores"` option accepts an array of the following strings.
 
 ## :books: Further Reading
 
-- [API - v-memo](https://v3.vuejs.org/api/directives.html#v-memo)
+- [API - v-memo](https://vuejs.org/api/built-in-directives.html#v-memo)
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
-- [Guide - Dynamic Arguments](https://v3.vuejs.org/guide/template-syntax.html#dynamic-arguments)
-- [API - v-slot](https://v3.vuejs.org/api/directives.html#v-slot)
+- [Guide - Dynamic Arguments](https://vuejs.org/guide/essentials/template-syntax.html#dynamic-arguments)
+- [API - v-slot](https://vuejs.org/api/built-in-directives.html#v-slot)
 - [API (for v2) - slot-scope](https://v2.vuejs.org/v2/api/#slot-scope-deprecated)
 - [Vue RFCs - 0001-new-slot-syntax]
 - [Vue RFCs - 0002-slot-syntax-shorthand]

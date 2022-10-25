@@ -50,7 +50,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API - inheritAttrs](https://v3.vuejs.org/api/options-misc.html#inheritattrs)
+- [API - inheritAttrs](https://vuejs.org/api/options-misc.html#inheritattrs)
 
 ## :rocket: Version
 

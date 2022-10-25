@@ -60,7 +60,7 @@ Default is set to `in`.
 
 ## :books: Further Reading
 
-- [Guide - List Rendering](https://v3.vuejs.org/guide/list.html)
+- [Guide - List Rendering](https://vuejs.org/guide/essentials/list.html)
 
 ## :rocket: Version
 

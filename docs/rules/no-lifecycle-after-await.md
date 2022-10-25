@@ -43,7 +43,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Composition API - Lifecycle Hooks](https://v3.vuejs.org/guide/composition-api-lifecycle-hooks.html)
+- [Guide - Composition API - Lifecycle Hooks](https://vuejs.org/api/composition-api-lifecycle.html)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
 
 ## :rocket: Version

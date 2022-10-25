@@ -109,7 +109,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Computed Caching vs Methods](https://v3.vuejs.org/guide/computed.html#computed-caching-vs-methods)
+- [Guide - Computed Caching vs Methods](https://vuejs.org/guide/essentials/computed.html#computed-caching-vs-methods)
 
 ## :rocket: Version
 

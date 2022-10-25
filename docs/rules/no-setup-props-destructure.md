@@ -94,7 +94,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Composition API - Setup](https://v3.vuejs.org/guide/composition-api-setup.html)
+- [Guide - Composition API - Setup](https://vuejs.org/api/composition-api-setup.html)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
 
 ## :rocket: Version
