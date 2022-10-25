@@ -19,9 +19,6 @@ tester.run('require-prop-comment', rule, {
   valid: [
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script>
       import { defineComponent } from '@vue/composition-api'
 
@@ -38,9 +35,6 @@ tester.run('require-prop-comment', rule, {
     },
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script setup>
       const props = defineProps({
         /*
@@ -89,9 +83,6 @@ tester.run('require-prop-comment', rule, {
   invalid: [
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script>
       import { defineComponent } from '@vue/composition-api'
 
@@ -130,9 +121,6 @@ tester.run('require-prop-comment', rule, {
     },
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script>
       import { defineComponent } from '@vue/composition-api'
 
@@ -170,9 +158,6 @@ tester.run('require-prop-comment', rule, {
     },
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script>
       import { defineComponent } from '@vue/composition-api'
 
@@ -202,9 +187,6 @@ tester.run('require-prop-comment', rule, {
     },
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script setup>
       const props = defineProps({
         a: Number,
@@ -227,9 +209,6 @@ tester.run('require-prop-comment', rule, {
     },
     {
       code: `
-      <template>
-        <div>1</div>
-      </template>
       <script setup>
       const props = defineProps([
         'a'
