@@ -18,9 +18,6 @@ This rule enforces that every prop has a comment that documents it.
 
 ```vue
 <!-- ✓ GOOD -->
-<template>
-  <div>1</div>
-</template>
 <script>
 import { defineComponent } from '@vue/composition-api'
 
@@ -46,9 +43,6 @@ export default defineComponent({
 
 ```vue
 <!-- ✗ BAD -->
-<template>
-  <div>1</div>
-</template>
 <script setup>
 const props = defineProps({
   a: Number,
