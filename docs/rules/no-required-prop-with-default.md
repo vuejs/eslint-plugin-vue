@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-required-prop-with-default
-description: enforce props with default values ​​to be optional
+description: enforce props with default values to be optional
 since: v9.6.0
 ---
 # vue/no-required-prop-with-default
 
-> enforce props with default values ​​to be optional
+> enforce props with default values to be optional
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
