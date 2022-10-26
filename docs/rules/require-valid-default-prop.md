@@ -78,7 +78,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Prop Validation](https://v3.vuejs.org/guide/component-props.html#prop-validation)
+- [Guide - Prop Validation](https://vuejs.org/guide/components/props.html#prop-validation)
 
 ## :rocket: Version
 

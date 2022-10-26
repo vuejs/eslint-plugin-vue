@@ -63,7 +63,7 @@ The styles reported in this rule mean that we recommend separating them into `<s
 
 ## :books: Further Reading
 
-- [Guide - Class and Style Bindings / Binding Inline Styles](https://v3.vuejs.org/guide/class-and-style.html#binding-inline-styles)
+- [Guide - Class and Style Bindings / Binding Inline Styles](https://vuejs.org/guide/essentials/class-and-style.html#binding-inline-styles)
 
 ## :rocket: Version
 

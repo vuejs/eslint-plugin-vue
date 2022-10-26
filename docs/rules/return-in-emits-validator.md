@@ -57,7 +57,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Custom Events / Validate Emitted Events](https://v3.vuejs.org/guide/component-custom-events.html#validate-emitted-events)
+- [Guide - Custom Events / Validate Emitted Events](https://vuejs.org/guide/components/events.html#events-validation)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
 
 ## :rocket: Version

@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/object-shorthand
-description: require or disallow method and property shorthand syntax for object literals in `<template>`
+description: Require or disallow method and property shorthand syntax for object literals in `<template>`
 since: v8.4.0
 ---
 # vue/object-shorthand
 
-> require or disallow method and property shorthand syntax for object literals in `<template>`
+> Require or disallow method and property shorthand syntax for object literals in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
