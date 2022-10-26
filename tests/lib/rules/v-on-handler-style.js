@@ -416,25 +416,25 @@ tester.run('v-on-handler-style', rule, {
         },
         {
           message:
-            'Prefer method handler over inline handler in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 3,
           column: 25
         },
         {
           message:
-            'Prefer method handler over inline handler in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 4,
           column: 25
         },
         {
           message:
-            'Prefer method handler over inline handler in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 5,
           column: 25
         },
         {
           message:
-            'Prefer method handler over inline handler in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 6,
           column: 25
         }
@@ -855,7 +855,7 @@ tester.run('v-on-handler-style', rule, {
       errors: [
         {
           message:
-            'Prefer method handler over inline function in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
           column: 25
         }
@@ -871,7 +871,7 @@ tester.run('v-on-handler-style', rule, {
       errors: [
         {
           message:
-            'Prefer method handler over inline function in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
           column: 25
         }
@@ -887,7 +887,7 @@ tester.run('v-on-handler-style', rule, {
       errors: [
         {
           message:
-            'Prefer method handler over inline function in v-on. Prepare for it, need to create a method.',
+            'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
           column: 25
         }
@@ -1128,7 +1128,7 @@ tester.run('v-on-handler-style', rule, {
       errors: [
         {
           message:
-            'Prefer inline handler over inline function in v-on. Prepare for it, the custom event should be changed to a single payload.',
+            'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
           line: 2,
           column: 25
         }
