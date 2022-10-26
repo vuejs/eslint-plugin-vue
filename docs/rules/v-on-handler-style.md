@@ -84,7 +84,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <template v-for="e in list">
     <button v-on:click="e()" />
     <button v-on:click="() => e()" />
-    <button v-on:click="handler(e)" /> <!-- Can use inline function -->
+    <button v-on:click="handler(e)" />
   </template>
 </template>
 ```
@@ -113,7 +113,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <template v-for="e in list">
     <button v-on:click="e()" />
     <button v-on:click="() => e()" />
-    <button v-on:click="() => handler(e)" /> <!-- Can use inline handler -->
+    <button v-on:click="() => handler(e)" />
   </template>
 </template>
 ```

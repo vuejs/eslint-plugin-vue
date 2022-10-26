@@ -107,6 +107,7 @@ Don't use hyphenated name but allow custom event names
 
 - [vue/custom-event-name-casing](./custom-event-name-casing.md)
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
+- [vue/v-on-handler-style](./v-on-handler-style.md)
 
 ## :books: Further Reading
 
