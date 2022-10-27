@@ -43,6 +43,11 @@ Alternatively, the rule also accepts objects.
     {
       "key": "stlye",
       "message": "Using \"stlye\" is not allowed. Use \"style\" instead."
+    },
+    {
+      "key": "style",
+      "element": "/^([A-Z][a-zA-Z_-]*)$/",
+      "message": "Using \"style\" is not allowed in custom component. Use \"class\" instead."
     }
   ]
 }
