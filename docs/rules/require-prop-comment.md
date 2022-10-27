@@ -30,7 +30,7 @@ export default defineComponent({
     // line comment
     b: Number,
 
-    /* c comment */
+    /* block comment */
     c: Number,
 
     d: Number,
@@ -62,7 +62,7 @@ export default defineComponent({
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'block'}]}">
 
 ```vue
-<script>
+<script setup>
 // ✓ GOOD
 const goodProps = defineProps({
   /* block comment */
@@ -89,7 +89,7 @@ const badProps = defineProps({
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'line'}]}">
 
 ```vue
-<script>
+<script setup>
 // ✓ GOOD
 const goodProps = defineProps({
   // line comment
@@ -116,7 +116,7 @@ const badProps = defineProps({
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'any'}]}">
 
 ```vue
-<script>
+<script setup>
 // ✓ GOOD
 const goodProps = defineProps({
   /** JSDoc comment */
