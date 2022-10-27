@@ -46,7 +46,7 @@ Alternatively, the rule also accepts objects.
     },
     {
       "key": "style",
-      "element": /^([A-Z$][a-zA-Z_$]*)$/,
+      "element": "/^([A-Z][a-zA-Z_-]*)$/",
       "message": "Using \"style\" is not allowed in custom component. Use \"class\" instead."
     }
   ]
