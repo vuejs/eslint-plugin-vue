@@ -77,7 +77,7 @@ tester.run('require-prop-comment', rule, {
         }
       })
       `,
-      options: [{ type: 'unlimited' }]
+      options: [{ type: 'any' }]
     }
   ],
   invalid: [
@@ -150,7 +150,7 @@ tester.run('require-prop-comment', rule, {
       })
       </script>
       `,
-      options: [{ type: 'unlimited' }],
+      options: [{ type: 'any' }],
       errors: [
         {
           line: 4,

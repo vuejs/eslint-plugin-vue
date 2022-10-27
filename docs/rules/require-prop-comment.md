@@ -55,7 +55,7 @@ export default defineComponent({
   - `"JSDoc"` ... Only JSDoc comment are allowed.
   - `"line"` ... Only line comment are allowed.
   - `"block"` ... Only block comment are allowed.
-  - `"unlimited"` ... All comment types are allowed.
+  - `"any"` ... All comment types are allowed.
 
 ### `"type": "block"`
 
@@ -111,9 +111,9 @@ const badProps = defineProps({
 
 </eslint-code-block>
 
-### `"type": "unlimited"`
+### `"type": "any"`
 
-<eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'unlimited'}]}">
+<eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'any'}]}">
 
 ```vue
 <script>
