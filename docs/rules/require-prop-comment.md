@@ -61,6 +61,7 @@ const props = defineProps({
   }]
 }
 ```
+
 - `type` ... Type of comment.Default is `"JSDoc"`
   - `"JSDoc"` ... Only JSDoc comment are allowed.
   - `"line"` ... Only line comment are allowed.
@@ -68,6 +69,7 @@ const props = defineProps({
   - `"unlimited"` ... There is no limit to the type.
 
 ### `"type":"block"`
+
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'block'}]}">
 
 <!-- ✓ GOOD -->
@@ -87,7 +89,7 @@ const props = defineProps({
    * a comment
    */
   /*
-   * a other comment
+   *a other comment
    */
   a: Number,
 })
@@ -104,6 +106,7 @@ const props = defineProps({
 </eslint-code-block>
 
 ### `"type":"line"`
+
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'line'}]}">
 
 <!-- ✓ GOOD -->
@@ -137,6 +140,7 @@ const props = defineProps({
 </eslint-code-block>
 
 ### `"type":"unlimited"`
+
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'unlimited'}]}">
 
 <!-- ✓ GOOD -->
