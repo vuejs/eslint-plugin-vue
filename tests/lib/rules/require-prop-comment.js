@@ -19,62 +19,44 @@ tester.run('require-prop-comment', rule, {
   valid: [
     {
       code: `
-      <script>
-      import { defineComponent } from '@vue/composition-api'
-
       export default defineComponent({
         props: {
-          /**
-           * a comment
-           */
+          /** JSDoc comment */
           a: Number,
         }
       })
-      </script>
       `
     },
     {
       code: `
-      <script setup>
-      const props = defineProps({
-        /*
-         * a comment
-         */
+      const goodProps = defineProps({
+        /* block comment */
         a: Number,
-        /**
-         * b comment
-         */
-        b: Number
       })
-      </script>
       `,
       options: [{ type: 'block' }]
     },
     {
       code: `
-      import { defineComponent } from '@vue/composition-api'
-      export const ComponentName = defineComponent({
-        props: {
-          // a comment
-          // a other comment
-          a: Number
-        }
+      const goodProps = defineProps({
+        // line comment
+        a: Number,
       })
       `,
       options: [{ type: 'line' }]
     },
+
     {
       code: `
-      import { defineComponent } from '@vue/composition-api'
-      export const ComponentName = defineComponent({
-        props: {
-          /**
-           * a comment
-           */
-          a: Number,
-          // a comment
-          b: Number
-        }
+      const goodProps = defineProps({
+        /** JSDoc comment */
+        a: Number,
+      
+        /* block comment */
+        b: Number,
+      
+        // line comment
+        c: Number,
       })
       `,
       options: [{ type: 'any' }]
@@ -83,70 +65,107 @@ tester.run('require-prop-comment', rule, {
   invalid: [
     {
       code: `
-      <script>
-      import { defineComponent } from '@vue/composition-api'
-
       export default defineComponent({
         props: {
-          a: Number,
-          // c comment
-          c: Number
-        }
-      })
-      </script>
-      `,
-      options: [{ type: 'block' }],
-      errors: [
-        {
-          line: 7,
-          message: 'The "a" property should have a block comment.'
-        },
-        {
-          line: 9,
-          message: 'The "c" property should have a block comment.'
-        }
-      ]
-    },
-    {
-      code: `
-      <script>
-      import { defineComponent } from '@vue/composition-api'
-
-      export default defineComponent({
-        props: {
-          /**
-           * a comment
-           */
-          a: Number,
+          // line comment
           b: Number,
-        },
-        setup() {}
+      
+          /* block comment */
+          c: Number,
+      
+          d: Number,
+        }
       })
-      </script>
       `,
-      options: [{ type: 'line' }],
       errors: [
+        {
+          line: 5,
+          column: 11,
+          message: `The "b" property should have a JSDoc comment.`
+        },
+        {
+          line: 8,
+          column: 11,
+          message: `The "c" property should have a JSDoc comment.`
+        },
         {
           line: 10,
-          message: 'The "a" property should have a line comment.'
-        },
-        {
-          line: 11,
-          message: 'The "b" property should have a line comment.'
+          column: 11,
+          message: `The "d" property should have a JSDoc comment.`
         }
       ]
     },
     {
       code: `
       <script setup>
-      const props = defineProps({
-        a: Number,
-        /**
-         * b comment
-         */
+      const badProps = defineProps({
+        /** JSDoc comment */
         b: Number,
-        // c comment
-        c: Number
+      
+        // line comment
+        c: Number,
+      
+        d: Number,
+      })
+      </script>
+      `,
+      options: [{ type: 'block' }],
+      errors: [
+        {
+          line: 5,
+          column: 9,
+          message: 'The "b" property should have a block comment.'
+        },
+        {
+          line: 8,
+          column: 9,
+          message: 'The "c" property should have a block comment.'
+        },
+        {
+          line: 10,
+          column: 9,
+          message: 'The "d" property should have a block comment.'
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      const badProps = defineProps({
+        /** JSDoc comment */
+        b: Number,
+      
+        /* block comment */
+        c: Number,
+      
+        d: Number,
+      })
+      </script>
+      `,
+      options: [{ type: 'line' }],
+      errors: [
+        {
+          line: 5,
+          column: 9,
+          message: 'The "b" property should have a line comment.'
+        },
+        {
+          line: 8,
+          column: 9,
+          message: 'The "c" property should have a line comment.'
+        },
+        {
+          line: 10,
+          column: 9,
+          message: 'The "d" property should have a line comment.'
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      const badProps = defineProps({
+        d: Number,
       })
       </script>
       `,
@@ -154,28 +173,13 @@ tester.run('require-prop-comment', rule, {
       errors: [
         {
           line: 4,
-          message: `The "a" property should have a comment.`
+          column: 9,
+          message: `The "d" property should have a comment.`
         }
       ]
     },
     {
       code: `
-      <script setup>
-      const props = defineProps([
-        'a'
-      ])
-      </script>
-      `,
-      errors: [
-        {
-          line: 4,
-          message: 'The "a" property should have a JSDoc comment.'
-        }
-      ]
-    },
-    {
-      code: `
-      import Vue from 'vue'
       new Vue({
         props: {
           a: Number
@@ -184,7 +188,8 @@ tester.run('require-prop-comment', rule, {
       `,
       errors: [
         {
-          line: 5,
+          line: 4,
+          column: 11,
           message: 'The "a" property should have a JSDoc comment.'
         }
       ]
