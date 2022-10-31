@@ -79,6 +79,20 @@ tester.run('require-prop-comment', rule, {
       })
       </script>
       `
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      type PropType = {
+        /** JSDoc comment */
+        a: number
+      }
+      const props = defineProps<PropType>()
+      </script>
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
   invalid: [
@@ -230,6 +244,26 @@ tester.run('require-prop-comment', rule, {
           message: 'The "a" property should have a JSDoc comment.'
         }
       ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      type PropType = {
+        a: number
+      }
+      const props = defineProps<PropType>()
+      </script>
+      `,
+      errors: [
+        {
+          line: 4,
+          column: 9,
+          message: 'The "a" property should have a JSDoc comment.'
+        }
+      ],
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ]
 })
