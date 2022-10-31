@@ -59,6 +59,10 @@ Default is set to `shorthand`.
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/v-on-handler-style](./v-on-handler-style.md)
+
 ## :books: Further Reading
 
 - [Style guide - Directive shorthands](https://vuejs.org/style-guide/rules-strongly-recommended.html#directive-shorthands)
