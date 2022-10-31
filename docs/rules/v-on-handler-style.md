@@ -120,9 +120,9 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 </eslint-code-block>
 
-### `["inline-function"]`
+### `"inline-function"`
 
-<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline-function']]}">
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', 'inline-function']}">
 
 ```vue
 <template>
@@ -140,9 +140,9 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 </eslint-code-block>
 
-### `["inline"]`
+### `"inline"`
 
-<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline']]}">
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', 'inline']}">
 
 ```vue
 <template>
