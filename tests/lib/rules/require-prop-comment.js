@@ -19,35 +19,41 @@ tester.run('require-prop-comment', rule, {
   valid: [
     {
       code: `
+      <script setup>
       export default defineComponent({
         props: {
           /** JSDoc comment */
           a: Number,
         }
       })
+      </script>
       `
     },
     {
       code: `
+      <script setup>
       const goodProps = defineProps({
         /* block comment */
         a: Number,
       })
+      </script>
       `,
       options: [{ type: 'block' }]
     },
     {
       code: `
+      <script setup>
       const goodProps = defineProps({
         // line comment
         a: Number,
       })
+      </script>
       `,
       options: [{ type: 'line' }]
     },
-
     {
       code: `
+      <script setup>
       const goodProps = defineProps({
         /** JSDoc comment */
         a: Number,
@@ -58,8 +64,21 @@ tester.run('require-prop-comment', rule, {
         // line comment
         c: Number,
       })
+      </script>
       `,
       options: [{ type: 'any' }]
+    },
+    {
+      code: `
+      <script lang="ts">
+      export default defineComponent({
+        props: {
+          /** JSDoc comment */
+          a: Number
+        }
+      })
+      </script>
+      `
     }
   ],
   invalid: [
@@ -175,6 +194,24 @@ tester.run('require-prop-comment', rule, {
           line: 4,
           column: 9,
           message: `The "d" property should have a comment.`
+        }
+      ]
+    },
+    {
+      code: `
+      <script lang="ts">
+      export default defineComponent({
+        props: {
+          a: Number
+        }
+      })
+      </script>
+      `,
+      errors: [
+        {
+          line: 5,
+          column: 11,
+          message: 'The "a" property should have a JSDoc comment.'
         }
       ]
     },
