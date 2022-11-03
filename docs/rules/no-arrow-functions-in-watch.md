@@ -13,7 +13,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rules disallows using arrow functions to defined watcher.The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect.([see here for more details](https://vuejs.org/api/options-state.html#watch))
+This rule disallows using arrow functions when defining a watcher. Arrow functions bind to their parent context, which means they will not have access to the Vue component instance via `this`. [See here for more details](https://vuejs.org/api/options-state.html#watch).
 
 <eslint-code-block :rules="{'vue/no-arrow-functions-in-watch': ['error']}">
 
