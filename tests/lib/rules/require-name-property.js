@@ -78,7 +78,87 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression'
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent'
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({
+        })
+      `,
+      parserOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({ })
+      `,
+      parserOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default { }
+      `,
+      parserOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent'
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -93,10 +173,48 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression'
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+        name: 'InvalidComponent',
+        nameNot: 'IssaNameNot'
+        }
+      `
+            }
+          ]
         }
       ]
     },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({
+          nameNot: 'IssaNameNot'
+        })
+      `,
+      parserOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent',
+          nameNot: 'IssaNameNot'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+
     {
       filename: 'InvalidComponent.vue',
       code: `
@@ -110,7 +228,20 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression'
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent',
+          computed: {
+            name() { return 'name' }
+          }
+        }
+      `
+            }
+          ]
         }
       ]
     },
@@ -125,7 +256,18 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression'
+          type: 'ObjectExpression',
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent',
+          [name]: 'IssaName'
+        }
+      `
+            }
+          ]
         }
       ]
     }
