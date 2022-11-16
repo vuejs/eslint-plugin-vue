@@ -142,6 +142,12 @@ function invalidTests(ext) {
     },
     {
       filename: `test.${ext}`,
+      code: `mixins({})`,
+      parserOptions,
+      errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
       code: `Vue.extend({})`,
       parserOptions,
       errors: [makeError(1)]
