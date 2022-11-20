@@ -69,7 +69,7 @@ export default {
   setup(props) {
     /* ✗ BAD */
     const { count } = props
-  
+
     watch(() => props.count, () => {
       /* ✓ GOOD */
       const { count } = props
