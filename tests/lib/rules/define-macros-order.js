@@ -106,6 +106,28 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import { bar } from 'foo'
+          export interface Props {
+            msg?: string
+            labels?: string[]
+          }
+          defineEmits(['update:test'])
+          const props = withDefaults(defineProps<Props>(), {
+            msg: 'hello',
+            labels: () => ['one', 'two']
+          })
+          console.log('test')
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
   invalid: [

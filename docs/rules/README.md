@@ -259,7 +259,7 @@ For example:
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
-| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  | :hammer: |
+| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
