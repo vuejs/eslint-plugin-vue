@@ -71,7 +71,7 @@
     "@types/node": "^13.13.5",
     "@types/semver": "^7.3.9",
     "@types/xml-name-validator": "^4.0.0",
-    "@typescript-eslint/parser": "^5.23.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "assert": "^2.0.0",
     "env-cmd": "^10.1.0",
     "esbuild": "^0.15.15",
