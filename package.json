@@ -83,6 +83,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unicorn": "^42.0.0",
     "eslint-plugin-vue": "file:.",
+    "espree": "^9.3.2",
     "events": "^3.3.0",
     "markdownlint-cli": "^0.31.1",
     "mocha": "^10.0.0",
