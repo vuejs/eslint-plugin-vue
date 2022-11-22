@@ -77,10 +77,10 @@ export default {
 </script>
 
 <style scoped>
-.table-root ::v-deep .highlighting tr {
+.table-root :deep(.highlighting tr) {
   opacity: 0.3;
 }
-.table-root ::v-deep .highlighting .highlight {
+.table-root :deep(.highlighting .highlight) {
   opacity: 1;
 }
 .filter-tool label {
