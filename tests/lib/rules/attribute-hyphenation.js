@@ -359,8 +359,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :my-custom_prop="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :myCustomProp="prop"></custom></div></template>',
+      output: null,
       options: ['never'],
       errors: [
         {
