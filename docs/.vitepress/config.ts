@@ -154,6 +154,7 @@ export default defineConfig({
         path: path.join(dirname, './build-system/shim/path.mjs'),
 
         tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
+        esquery: path.join(dirname, './build-system/shim/esquery.mjs'),
         globby: path.join(dirname, './build-system/shim/globby.mjs')
       }
     },
