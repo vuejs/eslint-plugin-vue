@@ -46,7 +46,6 @@ function bundle(entryPoint: string, externals: string[]) {
   return `${result.outputFiles[0].text}`
 }
 
-/** transform code */
 function transform(code: string, injects: string[]) {
   const newCode = code.replace(/"[a-z]+" = "[a-z]+";/u, '')
   return `
