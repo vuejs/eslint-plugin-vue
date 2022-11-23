@@ -18,7 +18,9 @@ const dirname = path.dirname(
 
 // Include `json5` as alias for jsonc
 const jsonc = BUNDLED_LANGUAGES.find((lang) => lang.id === 'jsonc')
-if (jsonc) jsonc.aliases = [...(jsonc?.aliases ?? []), 'json5']
+if (jsonc) {
+  jsonc.aliases = [...(jsonc.aliases ?? []), 'json5']
+}
 
 const uncategorizedRules = rules.filter(
   (rule) =>
