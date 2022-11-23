@@ -58,6 +58,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><slot myProp></slot></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :attr_ff="prop"></custom></div></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :attr_ff="prop"></custom></div></template>',
+      options: ['never']
     }
   ],
 
@@ -277,6 +287,84 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'MyProp' must be hyphenated.",
           type: 'VIdentifier',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :attr_Gg="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':attr_Gg' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :Attr_Hh="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':Attr_Hh' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :_attr_Jj="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':_attr_Jj' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :_attrKk="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':_attrKk' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :_AttrLl="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':_AttrLl' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :my-custom_prop="prop"></custom></div></template>',
+      output: null,
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute ':my-custom_prop' can't be hyphenated.",
+          type: 'VDirectiveKey',
           line: 1
         }
       ]
