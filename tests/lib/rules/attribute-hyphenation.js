@@ -308,8 +308,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :attr_Gg="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :attr_Gg="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -322,8 +321,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :Attr_Hh="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :Attr_Hh="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -336,8 +334,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :_attr_Jj="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :_attr_Jj="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -350,8 +347,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :_attrKk="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :_attrKk="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -364,8 +360,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :_AttrLl="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :_AttrLl="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
