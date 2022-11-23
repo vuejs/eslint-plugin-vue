@@ -162,6 +162,15 @@ tester.run('component-name-in-template-casing', rule, {
       `
     },
 
+    {
+      code: `
+        <template><div/></template>
+        <script setup>const Div = 0</script>
+      `,
+      options: ['PascalCase'],
+      filename: 'test.vue'
+    },
+
     // globals
     {
       code: `
