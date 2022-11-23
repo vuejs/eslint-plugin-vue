@@ -33,7 +33,6 @@ function build(input: string, out: string, injects: string[] = []) {
   fs.writeFileSync(out, code, 'utf8')
 }
 
-/** bundle */
 function bundle(entryPoint: string, externals: string[]) {
   const result = esbuild.buildSync({
     entryPoints: [entryPoint],
