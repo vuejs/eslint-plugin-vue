@@ -63,11 +63,6 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><custom :attr_ff="prop"></custom></div></template>',
       options: ['always']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div><custom :_attr_ii="prop"></custom></div></template>',
-      options: ['always']
     }
   ],
 
