@@ -18,9 +18,9 @@
     "preversion": "npm test && git add .",
     "version": "env-cmd -e version npm run update && npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
-    "docs:watch": "vuepress dev docs",
+    "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vitepress build docs"
   },
   "files": [
     "lib"
@@ -63,6 +63,8 @@
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@ota-meshi/site-kit-eslint-editor-vue": "^0.1.0",
     "@types/eslint": "^8.4.2",
     "@types/eslint-visitor-keys": "^1.0.0",
     "@types/natural-compare": "^1.4.1",
@@ -70,9 +72,9 @@
     "@types/semver": "^7.3.9",
     "@types/xml-name-validator": "^4.0.0",
     "@typescript-eslint/parser": "^5.23.0",
-    "@vuepress/plugin-pwa": "^1.9.7",
-    "acorn": "^8.7.1",
+    "assert": "^2.0.0",
     "env-cmd": "^10.1.0",
+    "esbuild": "^0.15.15",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-eslint-plugin": "^3.5.3",
@@ -83,12 +85,12 @@
     "eslint-plugin-unicorn": "^42.0.0",
     "eslint-plugin-vue": "file:.",
     "espree": "^9.3.2",
+    "events": "^3.3.0",
     "markdownlint-cli": "^0.31.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4",
-    "vue-eslint-editor": "^1.1.0",
-    "vuepress": "^1.9.7"
+    "vitepress": "^1.0.0-alpha.29"
   }
 }

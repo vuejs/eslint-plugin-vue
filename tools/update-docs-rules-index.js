@@ -246,7 +246,7 @@ ${removedRules.map(toRemovedRuleRow).join('\n')}
 `
 
 // -----------------------------------------------------------------------------
-const readmeFilePath = path.resolve(__dirname, '../docs/rules/README.md')
+const readmeFilePath = path.resolve(__dirname, '../docs/rules/index.md')
 fs.writeFileSync(
   readmeFilePath,
   `---
