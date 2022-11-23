@@ -4,5 +4,8 @@
 /tests/fixtures
 /tests/integrations/eslint-plugin-import
 
-!.vuepress
-/docs/.vuepress/dist
+!.vitepress
+/docs/.vitepress/dist
+/docs/.vitepress/build-system/shim/eslint.mjs
+/docs/.vitepress/build-system/shim/assert.mjs
+/docs/.vitepress/.temp

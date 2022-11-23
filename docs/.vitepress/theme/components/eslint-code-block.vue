@@ -3,7 +3,7 @@
     <eslint-editor
       :linter="linter"
       :config="config"
-      v-model="code"
+      v-model:code="code"
       :style="{ height }"
       class="eslint-code-block"
       :filename="filename"
@@ -18,8 +18,10 @@
 </template>
 
 <script>
-import EslintEditor from 'vue-eslint-editor'
-import { rules, processors } from '../../../'
+import EslintEditor from '@ota-meshi/site-kit-eslint-editor-vue'
+import { markRaw } from 'vue'
+import * as plugin from '../../../..'
+const { rules, processors } = plugin.default || plugin
 
 export default {
   name: 'ESLintCodeBlock',
@@ -55,14 +57,9 @@ export default {
   },
 
   data() {
-    const code = this.computeCodeFromSlot()
-    // The height is determined in the initial processing.
-    // This is because later code changes do not change the height.
-    const lines = code.split('\n').length
-    const height = `${Math.max(120, 19 * lines)}px`
     return {
-      code,
-      height,
+      code: '',
+      height: '100px',
       linter: null,
       preprocess: processors['.vue'].preprocess,
       postprocess: processors['.vue'].postprocess,
@@ -152,26 +149,27 @@ export default {
   },
 
   methods: {
-    computeCodeFromSlot() {
-      return `${computeCodeFromSlot(this.$slots.default).trim()}\n`
-    },
-
     async loadTypescriptESLint() {
       this.tsEslintParser = await import('@typescript-eslint/parser')
     }
   },
 
   async mounted() {
+    this.code = `${computeCodeFromSlot(
+      findCode(this.$slots.default?.())
+    ).trim()}\n`
+    const lines = this.code.split('\n').length
+    this.height = `${Math.max(120, 20 * (1 + lines))}px`
     // Load linter.
     const [{ Linter }, { parseForESLint }] = await Promise.all([
-      import('eslint/lib/linter'),
+      import('eslint'),
       import('espree').then(() => import('vue-eslint-parser'))
     ])
     if (this.langTs || this.typescript) {
       await this.loadTypescriptESLint()
     }
 
-    const linter = (this.linter = new Linter())
+    const linter = (this.linter = markRaw(new Linter()))
 
     for (const ruleId of Object.keys(rules)) {
       linter.defineRule(`vue/${ruleId}`, rules[ruleId])
@@ -181,12 +179,39 @@ export default {
   }
 }
 
-function computeCodeFromSlot(nodes) {
-  if (!Array.isArray(nodes)) {
+/**
+ * Find VNode of <code> tag
+ */
+function findCode(n) {
+  const nodes = Array.isArray(n) ? n : [n]
+  for (const node of nodes) {
+    if (!node) {
+      continue
+    }
+    if (node.type === 'code') {
+      return node
+    }
+    const c = findCode(node.children)
+    if (c) {
+      return c
+    }
+  }
+  return null
+}
+
+/**
+ * Extract text
+ */
+function computeCodeFromSlot(n) {
+  if (!n) {
     return ''
   }
+  const nodes = Array.isArray(n) ? n : [n]
+  // debugger
   return nodes
-    .map((node) => node.text || computeCodeFromSlot(node.children))
+    .map((node) =>
+      typeof node === 'string' ? node : computeCodeFromSlot(node.children)
+    )
     .join('')
 }
 </script>

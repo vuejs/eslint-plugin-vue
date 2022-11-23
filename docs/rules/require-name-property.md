@@ -9,6 +9,8 @@ since: v6.1.0
 
 > require a name property in Vue components
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule requires a `name` property to be set on components.

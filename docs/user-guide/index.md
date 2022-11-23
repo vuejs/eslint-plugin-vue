@@ -44,7 +44,7 @@ module.exports = {
 }
 ```
 
-See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
+See [the rule list](../rules/index.md) to get the `extends` &amp; `rules` that this plugin provides.
 
 #### Bundle Configurations
 

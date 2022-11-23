@@ -22,7 +22,7 @@ This rule reports the destructuring of `props` passed to `setup` causing the val
 export default {
   /* ✓ GOOD */
   setup(props) {
-    watch(() => {
+    watch(() => props.count, () => {
       console.log(props.count)
     })
 
@@ -45,8 +45,8 @@ Destructuring the `props` passed to `setup` will cause the value to lose reactiv
 export default {
   /* ✗ BAD */
   setup({ count }) {
-    watch(() => {
-      console.log(count) // not going to detect changes
+    watch(() => count, () => { // not going to detect changes
+      console.log(count)
     })
 
     return () => {
@@ -70,7 +70,7 @@ export default {
     /* ✗ BAD */
     const { count } = props
 
-    watch(() => {
+    watch(() => props.count, () => {
       /* ✓ GOOD */
       const { count } = props
       console.log(count)
