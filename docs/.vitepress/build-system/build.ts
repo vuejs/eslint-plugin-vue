@@ -16,7 +16,7 @@ const dirname = path.dirname(
 build(
   path.join(dirname, './src/eslint.mjs'),
   path.join(dirname, './shim/eslint.mjs'),
-  ['path', 'assert', 'util']
+  ['path', 'assert', 'util', 'esquery']
 )
 build(
   path.join(dirname, '../../../node_modules/assert'),
