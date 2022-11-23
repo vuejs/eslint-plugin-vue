@@ -288,20 +288,6 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><custom :AttrEe="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :attr-ee="prop"></custom></div></template>',
-      options: ['always'],
-      errors: [
-        {
-          message: "Attribute ':AttrEe' must be hyphenated.",
-          type: 'VDirectiveKey',
-          line: 1
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
       code: '<template><div><custom :attr_Gg="prop"></custom></div></template>',
       output: null,
       options: ['always'],
