@@ -24,7 +24,6 @@ build(
   ['path']
 )
 
-/** build */
 function build(input: string, out: string, injects: string[] = []) {
   // eslint-disable-next-line no-console -- ignore
   console.log(`build@ ${input}`)
