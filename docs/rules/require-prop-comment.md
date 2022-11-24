@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-prop-comment
 description: require props to have a comment
+since: v9.8.0
 ---
 # vue/require-prop-comment
 
 > require props to have a comment
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -137,6 +136,10 @@ const badProps = defineProps({
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.8.0
 
 ## :mag: Implementation
 
