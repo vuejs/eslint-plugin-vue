@@ -253,6 +253,7 @@ For example:
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
 | [vue/padding-line-between-tags](./padding-line-between-tags.md) | require or disallow newlines between sibling tags in template | :wrench: | :lipstick: |
+| [vue/padding-lines-in-component-definition](./padding-lines-in-component-definition.md) | require or disallow padding lines in component definition | :wrench: | :lipstick: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
