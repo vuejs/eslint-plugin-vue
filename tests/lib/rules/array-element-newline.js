@@ -19,14 +19,39 @@ tester.run('array-element-newline', rule, {
   valid: [
     '<template><div :attr="[]" /></template>',
     '<template><div :attr="[a]" /></template>',
-    '<template><div :attr="[a,\nb,\nc]" /></template>',
-    '<template><div :attr="[a,\nb,\nc\n]" /></template>',
-    '<template><div :attr="[\na,\nb,\nc\n]" /></template>',
+    `
+      <template>
+        <div :attr="[a,
+                     b,
+                     c]" />
+      </template>`,
+    `<template>
+      <div :attr="[a,
+                   b,
+                   c
+                  ]" />
+    </template>`,
     '<template><div :[attr]="a" /></template>',
     '<template><div :[[attr]]="a" /></template>',
-    '<template><div :attr="[a\nb]" /></template>',
+    `<template>
+      <div :attr="[
+                   a,
+                   b,
+                   c
+                  ]" />
+    </template>`,
+    `
+      <template>
+        <div :attr="[a
+                     b]" />
+      </template>`,
     {
-      code: '<template><div :attr="[a,\nb,\nc]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,
+                       b,
+                       c]" />
+        </template>`,
       options: ['always']
     },
     {
@@ -42,7 +67,13 @@ tester.run('array-element-newline', rule, {
       options: [{ multiline: true }]
     },
     {
-      code: '<template><div :attr="[a, \n{\nb:c\n}]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a, 
+                      {
+                        b:c
+                      }]" />
+        </template>`,
       options: [{ multiline: true }]
     },
     {
@@ -50,7 +81,13 @@ tester.run('array-element-newline', rule, {
       options: ['consistent']
     },
     {
-      code: '<template><div :attr="[a,\n b,\n c\n]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,
+                       b,
+                       c
+                      ]" />
+        </template>`,
       options: ['consistent']
     },
     {
@@ -60,50 +97,173 @@ tester.run('array-element-newline', rule, {
   ],
   invalid: [
     {
-      code: '<template><div :attr="[a, b]" /></template>',
-      output: '<template><div :attr="[a,\nb]" /></template>',
-      errors: ['There should be a linebreak after this element.']
-    },
-    {
-      code: '<template><div :attr="[a,b,c]" /></template>',
-      output: '<template><div :attr="[a,\nb,\nc]" /></template>',
-      options: ['always'],
+      code: `
+        <template>
+          <div :attr="[a, b]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+b]" />
+        </template>`,
       errors: [
-        'There should be a linebreak after this element.',
-        'There should be a linebreak after this element.'
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 27
+        }
       ]
     },
     {
-      code: '<template><div :attr="[a,\nb,c]" /></template>',
-      output: '<template><div :attr="[a,\nb,\nc]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,b,c]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+b,
+c]" />
+        </template>`,
       options: ['always'],
-      errors: ['There should be a linebreak after this element.']
+      errors: [
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 26
+        },
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 28
+        }
+      ]
     },
     {
-      code: '<template><div :attr="[a,\nb,c]" /></template>',
-      output: '<template><div :attr="[a,\nb,\nc]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,
+                      b,c]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+                      b,
+c]" />
+        </template>`,
+      options: ['always'],
+      errors: [
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div :attr="[a,
+                       b,c]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+                       b,
+c]" />
+        </template>`,
       options: ['consistent'],
-      errors: ['There should be a linebreak after this element.']
+      errors: [
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
     },
     {
-      code: '<template><div :attr="[a,\nb, c]" /></template>',
-      output: '<template><div :attr="[a, b, c]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,
+                       b, c]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a, b, c]" />
+        </template>`,
       options: [{ multiline: true }],
-      errors: ['There should be no linebreak here.']
+      errors: [
+        {
+          message: 'There should be no linebreak here.',
+          line: 3,
+          column: 26,
+          endLine: 4,
+          endColumn: 24
+        }
+      ]
     },
     {
-      code: '<template><div :attr="[a,{\nb:c}]" /></template>',
-      output: '<template><div :attr="[a,\n{\nb:c}]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a, {
+                            b:c
+                          }]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+{
+                            b:c
+                          }]" />
+        </template>`,
       options: [{ multiline: true }],
-      errors: ['There should be a linebreak after this element.']
+      errors: [
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 27
+        }
+      ]
     },
     {
-      code: '<template><div :attr="[a,b,c]" /></template>',
-      output: '<template><div :attr="[a,\nb,\nc]" /></template>',
+      code: `
+        <template>
+          <div :attr="[a,b,c]" />
+        </template>`,
+      output: `
+        <template>
+          <div :attr="[a,
+b,
+c]" />
+        </template>`,
       options: [{ minItems: 2 }],
       errors: [
-        'There should be a linebreak after this element.',
-        'There should be a linebreak after this element.'
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 26
+        },
+        {
+          message: 'There should be a linebreak after this element.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 28
+        }
       ]
     }
   ]
