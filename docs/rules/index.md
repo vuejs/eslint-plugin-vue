@@ -279,6 +279,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|:--:|:--:|
 | [vue/array-bracket-newline](./array-bracket-newline.md) | Enforce linebreaks after opening and before closing array brackets in `<template>` | :wrench: | :lipstick: |
 | [vue/array-bracket-spacing](./array-bracket-spacing.md) | Enforce consistent spacing inside array brackets in `<template>` | :wrench: | :lipstick: |
+| [vue/array-element-newline](./array-element-newline.md) | Enforce line breaks after each array element in `<template>` | :wrench: | :lipstick: |
 | [vue/arrow-spacing](./arrow-spacing.md) | Enforce consistent spacing before and after the arrow in arrow functions in `<template>` | :wrench: | :lipstick: |
 | [vue/block-spacing](./block-spacing.md) | Disallow or enforce spaces inside of blocks after opening block and before closing block in `<template>` | :wrench: | :lipstick: |
 | [vue/brace-style](./brace-style.md) | Enforce consistent brace style for blocks in `<template>` | :wrench: | :lipstick: |
