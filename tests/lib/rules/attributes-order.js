@@ -483,6 +483,104 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }]
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1728
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          :prop-bind="prop"
+          prop-one="prop"
+          prop-two="prop">
+        </div>
+      </template>`,
+      options: [
+        {
+          order: ['OTHER_ATTR_DYNAMIC', 'OTHER_ATTR_STATIC'],
+          alphabetical: false
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-model="a
+          :class="b"
+          :is="c"
+          prop-one="d"
+          class="e"
+          prop-two="f">
+        </div>
+      </template>`,
+      options: [
+        {
+          order: ['TWO_WAY_BINDING', 'OTHER_ATTR_DYNAMIC', 'OTHER_ATTR_STATIC'],
+          alphabetical: false
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          prop-one="a"
+          prop-three="b"
+          :prop-two="c">
+        </div>
+      </template>`,
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR_STATIC',
+            'OTHER_ATTR_DYNAMIC',
+            'EVENTS',
+            'CONTENT'
+          ],
+          alphabetical: false
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          prop-one="a"
+          :prop-two="b"
+          prop-three="c">
+        </div>
+      </template>`,
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'],
+            'EVENTS',
+            'CONTENT'
+          ],
+          alphabetical: false
+        }
+      ]
     }
   ],
 
@@ -1528,6 +1626,105 @@ tester.run('attributes-order', rule, {
           attr="foo"/>
       </template>`,
       errors: ['Attribute "@click" should go before "v-bind".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-bind:prop-one="a"
+          prop-two="b"
+          :prop-three="c"/>
+      </template>`,
+      options: [{ order: ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'] }],
+      output: `
+      <template>
+        <div
+          prop-two="b"
+          v-bind:prop-one="a"
+          :prop-three="c"/>
+      </template>`,
+      errors: ['Attribute "prop-two" should go before "v-bind:prop-one".']
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          :prop-one="a"
+          v-model="value"
+          prop-two="b"
+          :prop-three="c"
+          class="class"/>
+      </template>`,
+      options: [
+        {
+          order: [
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR_DYNAMIC',
+            'OTHER_ATTR_STATIC',
+            'EVENTS'
+          ]
+        }
+      ],
+      output: `
+      <template>
+        <div
+          v-model="value"
+          :prop-one="a"
+          :prop-three="c"
+          prop-two="b"
+          class="class"/>
+      </template>`,
+      errors: [
+        'Attribute "v-model" should go before ":prop-one".',
+        'Attribute ":prop-three" should go before "prop-two".'
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          :prop-one="a"
+          v-model="value"
+          prop-two="b"
+          :prop-three="c"/>
+      </template>`,
+      options: [
+        {
+          order: [
+            'UNIQUE',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'],
+            'EVENTS',
+            'CONTENT',
+            'DEFINITION',
+            'SLOT'
+          ]
+        }
+      ],
+      output: `
+      <template>
+        <div
+          v-model="value"
+          :prop-one="a"
+          prop-two="b"
+          :prop-three="c"/>
+      </template>`,
+      errors: ['Attribute "v-model" should go before ":prop-one".']
     }
   ]
 })
