@@ -498,7 +498,7 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [
         {
-          order: ['OTHER_ATTR_DYNAMIC', 'OTHER_ATTR_STATIC'],
+          order: ['ATTR_DYNAMIC', 'ATTR_STATIC'],
           alphabetical: false
         }
       ]
@@ -518,7 +518,7 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [
         {
-          order: ['TWO_WAY_BINDING', 'OTHER_ATTR_DYNAMIC', 'OTHER_ATTR_STATIC'],
+          order: ['TWO_WAY_BINDING', 'ATTR_DYNAMIC', 'ATTR_STATIC'],
           alphabetical: false
         }
       ]
@@ -544,8 +544,8 @@ tester.run('attributes-order', rule, {
             ['UNIQUE', 'SLOT'],
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
-            'OTHER_ATTR_STATIC',
-            'OTHER_ATTR_DYNAMIC',
+            'ATTR_STATIC',
+            'ATTR_DYNAMIC',
             'EVENTS',
             'CONTENT'
           ],
@@ -574,7 +574,7 @@ tester.run('attributes-order', rule, {
             ['UNIQUE', 'SLOT'],
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
-            ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'],
+            ['ATTR_STATIC', 'ATTR_DYNAMIC'],
             'EVENTS',
             'CONTENT'
           ],
@@ -1637,7 +1637,7 @@ tester.run('attributes-order', rule, {
           prop-two="b"
           :prop-three="c"/>
       </template>`,
-      options: [{ order: ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'] }],
+      options: [{ order: ['ATTR_STATIC', 'ATTR_DYNAMIC'] }],
       output: `
       <template>
         <div
@@ -1667,8 +1667,8 @@ tester.run('attributes-order', rule, {
             'RENDER_MODIFIERS',
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
-            'OTHER_ATTR_DYNAMIC',
-            'OTHER_ATTR_STATIC',
+            'ATTR_DYNAMIC',
+            'ATTR_STATIC',
             'EVENTS'
           ]
         }
@@ -1708,7 +1708,7 @@ tester.run('attributes-order', rule, {
             'GLOBAL',
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
-            ['OTHER_ATTR_STATIC', 'OTHER_ATTR_DYNAMIC'],
+            ['ATTR_STATIC', 'ATTR_DYNAMIC'],
             'EVENTS',
             'CONTENT',
             'DEFINITION',
