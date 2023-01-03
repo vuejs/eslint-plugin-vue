@@ -581,6 +581,40 @@ tester.run('attributes-order', rule, {
           alphabetical: false
         }
       ]
+    },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/1870
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          boolean-prop
+          prop-one="a"
+          prop-two="b"
+          :prop-three="c">
+        </div>
+      </template>`,
+      options: [
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'ATTR_SHORTHAND_BOOL',
+            'ATTR_STATIC',
+            'ATTR_DYNAMIC',
+            'EVENTS',
+            'CONTENT'
+          ],
+          alphabetical: false
+        }
+      ]
     }
   ],
 
@@ -1657,7 +1691,8 @@ tester.run('attributes-order', rule, {
           v-model="value"
           prop-two="b"
           :prop-three="c"
-          class="class"/>
+          class="class"
+          boolean-prop/>
       </template>`,
       options: [
         {
@@ -1669,6 +1704,7 @@ tester.run('attributes-order', rule, {
             'OTHER_DIRECTIVES',
             'ATTR_DYNAMIC',
             'ATTR_STATIC',
+            'ATTR_SHORTHAND_BOOL',
             'EVENTS'
           ]
         }
@@ -1680,7 +1716,8 @@ tester.run('attributes-order', rule, {
           :prop-one="a"
           :prop-three="c"
           prop-two="b"
-          class="class"/>
+          class="class"
+          boolean-prop/>
       </template>`,
       errors: [
         'Attribute "v-model" should go before ":prop-one".',
@@ -1695,6 +1732,7 @@ tester.run('attributes-order', rule, {
         <div
           :prop-one="a"
           v-model="value"
+          boolean-prop
           prop-two="b"
           :prop-three="c"/>
       </template>`,
@@ -1708,7 +1746,7 @@ tester.run('attributes-order', rule, {
             'GLOBAL',
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
-            ['ATTR_STATIC', 'ATTR_DYNAMIC'],
+            ['ATTR_STATIC', 'ATTR_DYNAMIC', 'ATTR_SHORTHAND_BOOL'],
             'EVENTS',
             'CONTENT',
             'DEFINITION',
@@ -1721,6 +1759,7 @@ tester.run('attributes-order', rule, {
         <div
           v-model="value"
           :prop-one="a"
+          boolean-prop
           prop-two="b"
           :prop-three="c"/>
       </template>`,
