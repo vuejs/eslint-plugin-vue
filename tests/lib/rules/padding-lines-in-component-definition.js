@@ -164,7 +164,7 @@ tester.run('padding-lines-in-component-definition', rule, {
       code: `
         <script>
         export default {
-            name: 'WithinOption',
+            name: 'CustomOptions',
 
             props: {
                 foo: {
@@ -237,7 +237,7 @@ tester.run('padding-lines-in-component-definition', rule, {
       filename: 'Mixin.js',
       code: `
         Vue.mixin({
-          name: 'NewVue',
+          name: 'Mixin',
           inheritAttrs: false,
           props: {
               foo: {
@@ -306,6 +306,85 @@ tester.run('padding-lines-in-component-definition', rule, {
           groupSingleLineProperties: false
         }
       ]
+    },
+    {
+      filename: 'Comment.vue',
+      code: `
+        <script>
+        export default {
+            name: 'Comment',
+
+            props: {
+                a: {
+                    type: String,
+                },
+
+                /** JSDoc */
+                b: {
+                    type: String,
+                },
+
+                // single
+                c: {
+                    type: String,
+                },
+
+                /* block */
+                d: String,
+                /* block */
+                f: String
+            }
+        }
+        </script>
+      `,
+      options: ['always']
+    },
+    {
+      filename: 'Spread.vue',
+      code: `
+        <script>
+        export default {
+            name: 'Spread',
+            ...spread,
+            props: {
+                a: {
+                    type: String,
+                },
+                ...lost,
+                b: {
+                    type: String,
+                }
+            }
+        }
+        </script>
+      `,
+      options: ['never']
+    },
+    {
+      filename: 'SpreadWithComment.vue',
+      code: `
+        <script>
+        export default {
+            name: 'Spread',
+            // comment
+            ...spread,
+
+            props: {
+                a: {
+                    type: String,
+                },
+
+                // comment
+                ...lost,
+
+                b: {
+                    type: String,
+                }
+            }
+        }
+        </script>
+      `,
+      options: ['always']
     }
   ],
   invalid: [
@@ -949,6 +1028,211 @@ tester.run('padding-lines-in-component-definition', rule, {
         {
           message: 'Expected blank line before this definition.',
           line: 9
+        }
+      ]
+    },
+    {
+      filename: 'Comment.vue',
+      code: `
+        <script>
+        export default {
+            name: 'Comment',
+            props: {
+                a: {
+                    type: String,
+                },
+                /** JSDoc */
+                b: {
+                    type: String,
+                },
+                // eslint-disable-next-line padding-lines-in-component-definition
+                c: {
+                    type: String,
+                },
+
+                /* block */
+                d: String,
+
+                /* block */
+                f: String,
+            }
+        }
+        </script>
+      `,
+      output: `
+        <script>
+        export default {
+            name: 'Comment',
+
+            props: {
+                a: {
+                    type: String,
+                },
+
+                /** JSDoc */
+                b: {
+                    type: String,
+                },
+
+                // eslint-disable-next-line padding-lines-in-component-definition
+                c: {
+                    type: String,
+                },
+
+                /* block */
+                d: String,
+                /* block */
+                f: String,
+            }
+        }
+        </script>
+      `,
+      options: ['always'],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 5
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 9
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 13
+        },
+        {
+          message: 'Unexpected blank line between single line properties.',
+          line: 21
+        }
+      ]
+    },
+    {
+      filename: 'Spread.vue',
+      code: `
+        <script>
+        export default {
+            name: 'Spread',
+            ...spread,
+            props: {
+                a: {
+                    type: String,
+                },
+                ...lost,
+                b: {
+                    type: String,
+                }
+            }
+        }
+        </script>
+      `,
+      output: `
+        <script>
+        export default {
+            name: 'Spread',
+            ...spread,
+
+            props: {
+                a: {
+                    type: String,
+                },
+
+                ...lost,
+
+                b: {
+                    type: String,
+                }
+            }
+        }
+        </script>
+      `,
+      options: ['always'],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 6
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 10
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 11
+        }
+      ]
+    },
+    {
+      filename: 'DefineWithSpreadAndComment.vue',
+      code: `
+        import { defineEmits, defineProps } from 'vue'
+        <script setup>
+        const emits = defineEmits(['foo', 'bar']);
+        const emitsObject = defineEmits({
+          change: (id) => typeof id == 'number',
+          ...spread,
+          update: (value) => typeof value == 'string'
+        })
+        const props = defineProps({
+            foo: {
+                type: String,
+                required: true,
+            },
+
+            // comment
+            bar: {
+                type: String,
+                required: true,
+            },
+        })
+        </script>
+      `,
+      output: `
+        import { defineEmits, defineProps } from 'vue'
+        <script setup>
+        const emits = defineEmits(['foo', 'bar']);
+        const emitsObject = defineEmits({
+          change: (id) => typeof id == 'number',
+
+          ...spread,
+
+          update: (value) => typeof value == 'string'
+        })
+        const props = defineProps({
+            foo: {
+                type: String,
+                required: true,
+            },
+            // comment
+            bar: {
+                type: String,
+                required: true,
+            },
+        })
+        </script>
+      `,
+      options: [
+        {
+          betweenOptions: 'always',
+          withinOption: {
+            emits: 'always',
+            props: 'never'
+          },
+          groupSingleLineProperties: false
+        }
+      ],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 7
+        },
+        {
+          message: 'Expected blank line before this definition.',
+          line: 8
+        },
+        {
+          message: 'Unexpected blank line before this definition.',
+          line: 16
         }
       ]
     }
