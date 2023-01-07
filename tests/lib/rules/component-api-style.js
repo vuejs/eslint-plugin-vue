@@ -817,6 +817,31 @@ tester.run('component-api-style', rule, {
           column: 9
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data () {
+          return {
+            msg: 'Hello World!',
+            // ...
+          }
+        },
+        // ...
+      }
+      </script>
+      `,
+      options: [['script-setup', 'composition', 'composition-vue2']],
+      errors: [
+        {
+          message:
+            'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>`, Composition API or Composition API (Vue 2) instead.',
+          line: 4,
+          column: 9
+        }
+      ]
     }
   ]
 })
