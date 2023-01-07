@@ -124,6 +124,27 @@ age="30"
           line: 2
         }
       ]
+    },
+    {
+      code: `<template><component
+        name="John Doe" age="30"
+        job="Vet">
+        </component>
+      </template>`,
+      options: [{ multiline: { max: 1 } }],
+      output: `<template><component
+        name="John Doe"
+age="30"
+        job="Vet">
+        </component>
+      </template>`,
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          type: 'VAttribute',
+          line: 2
+        }
+      ]
     }
   ]
 })
