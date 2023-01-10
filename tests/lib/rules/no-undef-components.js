@@ -23,6 +23,17 @@ tester.run('no-undef-components', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      </script>
+
+      <template>
+        <test />
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
         import Foo from './Foo.vue'
       </script>
 
