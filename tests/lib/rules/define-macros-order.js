@@ -128,6 +128,26 @@ tester.run('define-macros-order', rule, {
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          'use strict';
+          defineProps({
+            test: Boolean
+          })
+          defineEmits(['update:test'])
+        </script>
+      `,
+      options: optionsPropsFirst
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        </script>
+      `
     }
   ],
   invalid: [
@@ -452,6 +472,52 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineProps'),
           line: 2
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          console.log('test1')
+          defineProps({ test: Boolean })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineProps({ test: Boolean })
+          console.log('test1')
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: message('defineProps'),
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineEmits(['update:test'])
+          console.log('test1')
+          defineProps({ test: Boolean })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineEmits(['update:test'])
+          defineProps({ test: Boolean })
+          console.log('test1')
+        </script>
+      `,
+      options: optionsEmitsFirst,
+      errors: [
+        {
+          message: message('defineProps'),
+          line: 5
         }
       ]
     }
