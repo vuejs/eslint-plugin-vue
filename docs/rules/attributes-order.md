@@ -35,7 +35,13 @@ This rule aims to enforce ordering of component attributes. The default order is
 - `OTHER_DIRECTIVES`
   e.g. 'v-custom-directive'
 - `OTHER_ATTR`
-  e.g. 'custom-prop="foo"', 'v-bind:prop="foo"', ':prop="foo"'
+  alias for `[ATTR_DYNAMIC, ATTR_STATIC, ATTR_SHORTHAND_BOOL]`:
+  - `ATTR_DYNAMIC`
+    e.g. 'v-bind:prop="foo"', ':prop="foo"'
+  - `ATTR_STATIC`
+    e.g. 'prop="foo"', 'custom-prop="foo"'
+  - `ATTR_SHORTHAND_BOOL`
+    e.g. 'boolean-prop'
 - `EVENTS`
   e.g. '@click="functionCall"', 'v-on="event"'
 - `CONTENT`
