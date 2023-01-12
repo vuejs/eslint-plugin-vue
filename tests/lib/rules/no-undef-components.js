@@ -108,6 +108,49 @@ tester.run('no-undef-components', rule, {
         }
       ]
     },
+    // circular references
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      </script>
+
+      <template>
+        <test />
+      </template>
+      `
+    },
+    {
+      filename: 'FooBar.vue',
+      code: `
+      <script setup>
+      </script>
+
+      <template>
+        <FooBar />
+        <foo-bar />
+      </template>
+      `
+    },
+    {
+      filename: 'FooBar.vue',
+      code: `
+      <script>
+      export default {
+        name: 'BarFoo'
+      }
+      </script>
+      <script setup>
+      </script>
+
+      <template>
+        <FooBar />
+        <foo-bar />
+        <BarFoo />
+        <bar-foo />
+      </template>
+      `
+    },
 
     // options API
     {
