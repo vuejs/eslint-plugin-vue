@@ -16,15 +16,11 @@ This rule is the same rule as core [array-element-newline] rule but it applies t
 ## :books: Further Reading
 
 - [array-bracket-spacing]
-
-[array-bracket-spacing]: https://eslint.org/docs/rules/array-bracket-spacing
-
 - [array-bracket-newline]
-
-[array-bracket-newline]: https://eslint.org/docs/rules/array-bracket-newline
-
 - [array-element-newline]
 
+[array-bracket-spacing]: https://eslint.org/docs/rules/array-bracket-spacing
+[array-bracket-newline]: https://eslint.org/docs/rules/array-bracket-newline
 [array-element-newline]: https://eslint.org/docs/rules/array-element-newline
 
 ## :rocket: Version
