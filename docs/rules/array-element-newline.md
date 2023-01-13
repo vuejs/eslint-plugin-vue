@@ -23,6 +23,10 @@ This rule is the same rule as core [array-element-newline] rule but it applies t
 
 [array-bracket-newline]: https://eslint.org/docs/rules/array-bracket-newline
 
+- [array-element-newline]
+
+[array-element-newline]: https://eslint.org/docs/rules/array-element-newline
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v9.9.0
