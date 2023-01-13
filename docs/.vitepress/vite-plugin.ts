@@ -50,8 +50,6 @@ export function viteCommonjs(): Plugin {
 
 /**
  * Transform `require()` to `import`
- * Inspired by `@originjs/vite-plugin-commonjs`.
- * https://github.com/originjs/vite-plugins/tree/main/packages/vite-plugin-commonjs
  */
 function transformRequire(code: string) {
   if (!code.includes('require')) {
@@ -66,9 +64,11 @@ function transformRequire(code: string) {
       }
 
       let id =
-        '__' + moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') + randomString()
+        '__' +
+        moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') +
+        Math.random().toString(32).substring(2)
       while (code.includes(id) || modules.has(id)) {
-        id += randomString()
+        id += Math.random().toString(32).substring(2)
       }
       modules.set(id, moduleString)
       return id
@@ -86,13 +86,4 @@ const ${id} = __temp_${id}.default || __temp_${id};
     ';\n' +
     replaced
   )
-}
-
-function randomString() {
-  const code = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-  let result = ''
-  for (let index = 0; index < 6; index++) {
-    result += code[Math.floor(Math.random() * code.length)]
-  }
-  return result
 }
