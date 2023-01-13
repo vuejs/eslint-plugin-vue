@@ -63,7 +63,6 @@
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
-    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.1.0",
     "@types/eslint": "^8.4.2",
     "@types/eslint-visitor-keys": "^1.0.0",
