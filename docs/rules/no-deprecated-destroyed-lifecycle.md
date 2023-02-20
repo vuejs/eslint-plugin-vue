@@ -40,6 +40,10 @@ export default {
 
 Nothing.
 
+## :books: Further Reading
+
+- [Migration Guide - VNode Lifecycle Events](https://v3-migration.vuejs.org/breaking-changes/vnode-lifecycle-events.html#migration-strategy)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v7.0.0
