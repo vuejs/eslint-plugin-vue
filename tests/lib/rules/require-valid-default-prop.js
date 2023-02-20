@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/require-valid-default-prop')
 const RuleTester = require('eslint').RuleTester
 
@@ -34,10 +30,6 @@ function errorMessageForFunction(type) {
     }
   ]
 }
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-valid-default-prop', rule, {

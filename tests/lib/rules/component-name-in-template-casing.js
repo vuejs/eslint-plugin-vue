@@ -3,16 +3,9 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/component-name-in-template-casing')
+const semver = require('semver')
 const RuleTester = require('eslint').RuleTester
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -168,7 +161,76 @@ tester.run('component-name-in-template-casing', rule, {
           <keep-alive />
         </template>
       `
-    }
+    },
+
+    {
+      code: `
+        <template><div/></template>
+        <script setup>const Div = 0</script>
+      `,
+      options: ['PascalCase'],
+      filename: 'test.vue'
+    },
+
+    // globals
+    {
+      code: `
+        <template>
+          <div>
+            <RouterView />
+            <RouterLink />
+          </div>
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView', 'router-link'] }]
+    },
+    {
+      code: `
+        <template>
+          <div>
+            <router-view />
+            <router-link />
+          </div>
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['RouterView', 'router-link'] }]
+    },
+
+    // type-only imports
+    ...(semver.gte(
+      require('@typescript-eslint/parser/package.json').version,
+      '5.0.0'
+    )
+      ? [
+          {
+            code: `
+              <script setup lang="ts">
+                import type Foo from './Foo.vue'
+                import type { HelloWorld1 } from './components/HelloWorld'
+                import { type HelloWorld2 } from './components/HelloWorld2'
+                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+                import { type default as HelloWorld5 } from './components/HelloWorld5';
+                import { type Component } from 'vue';
+              </script>
+
+              <template>
+                <foo />
+                <hello-world1 />
+                <hello-world2 />
+                <hello-world3 />
+                <hello-world4 />
+                <hello-world5 />
+                <component />
+              </template>
+            `,
+            options: ['PascalCase', { registeredComponentsOnly: true }],
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            }
+          }
+        ]
+      : [])
   ],
   invalid: [
     {
@@ -854,6 +916,159 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
       `,
       errors: ['Component name "TheComponent" is not kebab-case.']
-    }
+    },
+    {
+      code: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['RouterView'] }],
+      output: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "router-view" is not PascalCase.',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['RouterView'] }],
+      output: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <RouterView />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['router-view'] }],
+      output: `
+        <template>
+          <router-view />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Component name "RouterView" is not kebab-case.',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    // type-only imports
+    ...(semver.gte(
+      require('@typescript-eslint/parser/package.json').version,
+      '5.0.0'
+    )
+      ? [
+          {
+            code: `
+              <script setup lang="ts">
+                import type Foo from './Foo.vue'
+                import type { HelloWorld1 } from './components/HelloWorld'
+                import { type HelloWorld2 } from './components/HelloWorld2'
+                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+                import { type default as HelloWorld5 } from './components/HelloWorld5';
+                import { type Component } from 'vue';
+              </script>
+
+              <template>
+                <foo />
+                <hello-world1 />
+                <hello-world2 />
+                <hello-world3 />
+                <hello-world4 />
+                <hello-world5 />
+                <component />
+              </template>
+            `,
+            options: ['PascalCase', { registeredComponentsOnly: false }],
+            parserOptions: {
+              parser: require.resolve('@typescript-eslint/parser')
+            },
+            output: `
+              <script setup lang="ts">
+                import type Foo from './Foo.vue'
+                import type { HelloWorld1 } from './components/HelloWorld'
+                import { type HelloWorld2 } from './components/HelloWorld2'
+                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+                import { type default as HelloWorld5 } from './components/HelloWorld5';
+                import { type Component } from 'vue';
+              </script>
+
+              <template>
+                <Foo />
+                <HelloWorld1 />
+                <HelloWorld2 />
+                <HelloWorld3 />
+                <HelloWorld4 />
+                <HelloWorld5 />
+                <Component />
+              </template>
+            `,
+            errors: [
+              {
+                message: 'Component name "foo" is not PascalCase.',
+                line: 13,
+                column: 17
+              },
+              {
+                message: 'Component name "hello-world1" is not PascalCase.',
+                line: 14,
+                column: 17
+              },
+              {
+                message: 'Component name "hello-world2" is not PascalCase.',
+                line: 15,
+                column: 17
+              },
+              {
+                message: 'Component name "hello-world3" is not PascalCase.',
+                line: 16,
+                column: 17
+              },
+              {
+                message: 'Component name "hello-world4" is not PascalCase.',
+                line: 17,
+                column: 17
+              },
+              {
+                message: 'Component name "hello-world5" is not PascalCase.',
+                line: 18,
+                column: 17
+              },
+              {
+                message: 'Component name "component" is not PascalCase.',
+                line: 19,
+                column: 17
+              }
+            ]
+          }
+        ]
+      : [])
   ]
 })

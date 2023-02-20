@@ -41,7 +41,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Guide - Components Basics / Dynamic Components](https://v3.vuejs.org/guide/component-basics.html#dynamic-components)
+- [Guide - Components Basics / Dynamic Components](https://vuejs.org/guide/essentials/component-basics.html#dynamic-components)
 
 ## :rocket: Version
 

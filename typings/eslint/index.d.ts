@@ -370,16 +370,14 @@ export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
 }
-
+export type ReportDescriptorFix = (
+  fixer: Rule.RuleFixer
+) => null | Rule.Fix | IterableIterator<Rule.Fix> | Rule.Fix[]
 interface ReportDescriptorOptionsBase {
   data?: {
     [key: string]: string | number
   }
-  fix?:
-    | null
-    | ((
-        fixer: Rule.RuleFixer
-      ) => null | Rule.Fix | IterableIterator<Rule.Fix> | Rule.Fix[])
+  fix?: null | ReportDescriptorFix
 }
 
 interface SuggestionReportDescriptor1 extends ReportDescriptorOptionsBase {

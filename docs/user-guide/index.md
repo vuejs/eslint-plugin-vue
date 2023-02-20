@@ -2,12 +2,6 @@
 
 ## :cd: Installation
 
-Via `vue-cli` (**Recommended**):
-
-```bash
-vue add @vue/cli-plugin-eslint
-```
-
 Via [npm](https://www.npmjs.com/):
 
 ```bash
@@ -50,7 +44,7 @@ module.exports = {
 }
 ```
 
-See [the rule list](../rules/README.md) to get the `extends` &amp; `rules` that this plugin provides.
+See [the rule list](../rules/index.md) to get the `extends` &amp; `rules` that this plugin provides.
 
 #### Bundle Configurations
 

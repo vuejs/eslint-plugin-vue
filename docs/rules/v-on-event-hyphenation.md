@@ -107,12 +107,13 @@ Don't use hyphenated name but allow custom event names
 
 - [vue/custom-event-name-casing](./custom-event-name-casing.md)
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
+- [vue/v-on-handler-style](./v-on-handler-style.md)
 
 ## :books: Further Reading
 
 - [Guide - Custom Events]
 
-[Guide - Custom Events]: https://v3.vuejs.org/guide/component-custom-events.html
+[Guide - Custom Events]: https://vuejs.org/guide/components/events.html
 
 ## :rocket: Version
 

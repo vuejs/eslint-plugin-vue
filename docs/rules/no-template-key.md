@@ -53,7 +53,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API - Special Attributes - key](https://v3.vuejs.org/api/special-attributes.html#key)
+- [API - Special Attributes - key](https://vuejs.org/api/built-in-special-attributes.html#key)
 
 ## :rocket: Version
 

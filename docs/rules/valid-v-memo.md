@@ -59,7 +59,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API - v-memo](https://v3.vuejs.org/api/directives.html#v-memo)
+- [API - v-memo](https://vuejs.org/api/built-in-directives.html#v-memo)
 
 ## :rocket: Version
 

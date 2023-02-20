@@ -46,6 +46,7 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue RFCs - 0031-attr-fallthrough](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
+- [Migration Guide - `$listeners` removed](https://v3-migration.vuejs.org/breaking-changes/listeners-removed.html)
 
 ## :rocket: Version
 

@@ -53,8 +53,8 @@ This rule reports duplicate attributes.
 - `allowCoexistClass` (`boolean`) ... Enables [`v-bind:class`] directive can coexist with the plain `class` attribute. Default is `true`.
 - `allowCoexistStyle` (`boolean`) ... Enables [`v-bind:style`] directive can coexist with the plain `style` attribute. Default is `true`.
 
-[`v-bind:class`]: https://v3.vuejs.org/guide/class-and-style.html
-[`v-bind:style`]: https://v3.vuejs.org/guide/class-and-style.html
+[`v-bind:class`]: https://vuejs.org/guide/essentials/class-and-style.html
+[`v-bind:style`]: https://vuejs.org/guide/essentials/class-and-style.html
 
 ### `"allowCoexistClass": false, "allowCoexistStyle": false`
 

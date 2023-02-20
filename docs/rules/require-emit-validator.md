@@ -53,7 +53,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API Reference](https://v3.vuejs.org/api/options-data.html#emits)
+- [API Reference](https://vuejs.org/api/options-state.html#emits)
 
 ## :rocket: Version
 

@@ -230,7 +230,7 @@ For example:
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-destructure](./no-ref-object-destructure.md) | disallow destructuring of ref objects that can lead to loss of reactivity |  | :warning: |
-| [vue/no-required-prop-with-default](./no-required-prop-with-default.md) | enforce props with default values ​​to be optional | :wrench::bulb: | :warning: |
+| [vue/no-required-prop-with-default](./no-required-prop-with-default.md) | enforce props with default values to be optional | :wrench::bulb: | :warning: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  | :warning: |
@@ -253,18 +253,20 @@ For example:
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
 | [vue/padding-line-between-tags](./padding-line-between-tags.md) | require or disallow newlines between sibling tags in template | :wrench: | :lipstick: |
+| [vue/padding-lines-in-component-definition](./padding-lines-in-component-definition.md) | require or disallow padding lines in component definition | :wrench: | :lipstick: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
-| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components |  | :hammer: |
+| [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
+| [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
-| [vue/v-on-function-call](./v-on-function-call.md) | enforce or forbid parentheses after method calls without arguments in `v-on` directives | :wrench: | :hammer: |
+| [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
 
 </rules-table>
 
@@ -278,6 +280,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|:--:|:--:|
 | [vue/array-bracket-newline](./array-bracket-newline.md) | Enforce linebreaks after opening and before closing array brackets in `<template>` | :wrench: | :lipstick: |
 | [vue/array-bracket-spacing](./array-bracket-spacing.md) | Enforce consistent spacing inside array brackets in `<template>` | :wrench: | :lipstick: |
+| [vue/array-element-newline](./array-element-newline.md) | Enforce line breaks after each array element in `<template>` | :wrench: | :lipstick: |
 | [vue/arrow-spacing](./arrow-spacing.md) | Enforce consistent spacing before and after the arrow in arrow functions in `<template>` | :wrench: | :lipstick: |
 | [vue/block-spacing](./block-spacing.md) | Disallow or enforce spaces inside of blocks after opening block and before closing block in `<template>` | :wrench: | :lipstick: |
 | [vue/brace-style](./brace-style.md) | Enforce consistent brace style for blocks in `<template>` | :wrench: | :lipstick: |
@@ -292,6 +295,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between keys and values in object literal properties in `<template>` | :wrench: | :lipstick: |
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
+| [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
 | [vue/no-constant-condition](./no-constant-condition.md) | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens](./no-extra-parens.md) | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |
@@ -323,6 +327,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
+| [vue/v-on-function-call](./v-on-function-call.md) | [vue/v-on-handler-style](./v-on-handler-style.md) |
 
 ## Removed
 

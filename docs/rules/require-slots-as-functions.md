@@ -42,7 +42,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API - $slots](https://v3.vuejs.org/api/instance-properties.html#slots)
+- [API - $slots](https://vuejs.org/api/component-instance.html#slots)
 - [Vue RFCs - 0006-slots-unification](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0006-slots-unification.md)
 
 ## :rocket: Version

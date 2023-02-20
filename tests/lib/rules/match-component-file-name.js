@@ -4,10 +4,6 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const rule = require('../../../lib/rules/match-component-file-name')
 const RuleTester = require('eslint').RuleTester
 
@@ -23,10 +19,6 @@ const parserOptions = {
 }
 
 const ruleTester = new RuleTester()
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 ruleTester.run('match-component-file-name', rule, {
   valid: [

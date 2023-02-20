@@ -525,6 +525,7 @@ export interface NewExpression extends HasParentNode {
   type: 'NewExpression'
   callee: Expression
   arguments: (Expression | SpreadElement)[]
+  typeParameters?: TSTypeParameterInstantiation
 }
 interface BaseMemberExpression extends HasParentNode {
   type: 'MemberExpression'

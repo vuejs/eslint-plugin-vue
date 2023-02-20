@@ -30,6 +30,10 @@ ruleTester.run('no-restricted-class', rule, {
     {
       code: `<template><div :class="'' + {forbidden: true}">Content</div></template>`,
       options: ['forbidden']
+    },
+    {
+      code: `<template><div class="allowed">Content</div></template>`,
+      options: ['/^for(bidden|gotten)/']
     }
   ],
 
@@ -113,6 +117,16 @@ ruleTester.run('no-restricted-class', rule, {
         }
       ],
       options: ['forbidden']
+    },
+    {
+      code: `<template><div class="forbidden allowed" /></template>`,
+      errors: [
+        {
+          message: "'forbidden' class is not allowed.",
+          type: 'VAttribute'
+        }
+      ],
+      options: ['/^for(bidden|gotten)/']
     }
   ]
 })

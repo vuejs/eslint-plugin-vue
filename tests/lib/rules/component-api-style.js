@@ -4,16 +4,8 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/component-api-style')
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -822,6 +814,31 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `expose` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 31,
+          column: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data () {
+          return {
+            msg: 'Hello World!',
+            // ...
+          }
+        },
+        // ...
+      }
+      </script>
+      `,
+      options: [['script-setup', 'composition', 'composition-vue2']],
+      errors: [
+        {
+          message:
+            'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>`, Composition API or Composition API (Vue 2) instead.',
+          line: 4,
           column: 9
         }
       ]

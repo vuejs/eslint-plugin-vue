@@ -44,6 +44,7 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue RFCs - 0031-attr-fallthrough](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
+- [Migration Guide - `v-on.native` modifier removed](https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html)
 
 ## :rocket: Version
 

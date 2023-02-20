@@ -4,16 +4,8 @@
  */
 'use strict'
 
-// ------------------------------------------------------------------------------
-// Requirements
-// ------------------------------------------------------------------------------
-
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/max-attributes-per-line')
-
-// ------------------------------------------------------------------------------
-// Tests
-// ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -119,6 +111,27 @@ job="Vet"></component></template>`,
         </component>
       </template>`,
       options: [{ singleline: 3, multiline: 1 }],
+      output: `<template><component
+        name="John Doe"
+age="30"
+        job="Vet">
+        </component>
+      </template>`,
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          type: 'VAttribute',
+          line: 2
+        }
+      ]
+    },
+    {
+      code: `<template><component
+        name="John Doe" age="30"
+        job="Vet">
+        </component>
+      </template>`,
+      options: [{ multiline: { max: 1 } }],
       output: `<template><component
         name="John Doe"
 age="30"
