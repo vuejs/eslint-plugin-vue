@@ -74,7 +74,6 @@ export default {
 
 </eslint-code-block>
 
-
 ### Options
 
 Nothing.
