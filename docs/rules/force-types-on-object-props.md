@@ -13,60 +13,20 @@ description: enforce user to add type declaration to object props
 
 ## :book: Rule Details
 
-Prevent missing type declaration of not primitive objects in a TypeScript projects.
-
-Bad:
+Prevent missing type declarations for non-primitive object props in TypeScript projects.
 
 <eslint-code-block :rules="{'vue/force-types-on-object-props': ['error']}">
 
-```js
+```ts
 export default {
   props: {
     prop: {
+      // ✗ BAD
       type: Object,
-    },
-  },
-}
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/force-types-on-object-props': ['error']}">
-
-```ts
-export default {
-  props: {
-    prop: {
-      type: Array
-    }
-  }
-}
-```
-
-</eslint-code-block>
-
-Good:
-
-<eslint-code-block :rules="{'vue/force-types-on-object-props': ['error']}">
-
-```ts
-export default {
-  props: {
-    prop: {
+      type: Array,
+      
+      // ✓ GOOD
       type: Object as Props<Anything>,
-    }
-  }
-}
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/force-types-on-object-props': ['error']}">
-
-```ts
-export default {
-  props: {
-    prop: {
       type: String, // or any other primitive type
     }
   }
@@ -81,7 +41,7 @@ Nothing.
 
 ## :mute: When Not To Use It
 
-When you're not using TypeScript in the project****.
+When you're not using TypeScript in the project.
 
 ## :books: Further Reading
 
