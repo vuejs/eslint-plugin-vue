@@ -1,5 +1,5 @@
 /**
- * @author *****your name*****
+ * @author Przemysław Jan Beigert
  * See LICENSE file in root directory for full license.
  */
 'use strict'
@@ -18,7 +18,8 @@ export default {
 	}
 }
 </script>  
-`
+`;
+
 
 const ruleTester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -27,7 +28,11 @@ const ruleTester = new RuleTester({
     sourceType: 'module',
     parser: '@typescript-eslint/parser'
   }
-})
+});
+
+const expectedError = {
+  message: 'Expected type annotation on object prop.'
+};
 
 ruleTester.run('force-types-on-object-props', rule, {
   valid: [
@@ -44,6 +49,18 @@ ruleTester.run('force-types-on-object-props', rule, {
   }
   </script>  	
 `,
+`
+<script setup>
+const props = defineProps(['foo']);
+</script>
+`,
+`
+<script setup>
+const props = defineProps({
+  foo: String
+});
+</script>
+`,
     template('type: String'),
     template('foo: String,'),
     template('type: Number'),
@@ -58,42 +75,69 @@ ruleTester.run('force-types-on-object-props', rule, {
     {
       code: template('type: Object'),
       errors: [
-        {
-          message: 'Expected type annotation on object prop.'
-        }
+        expectedError
+      ]
+    },
+    {
+      code: template('type: Object,'),
+      errors: [
+        expectedError
       ]
     },
     {
       code: template('type: Object as any'),
       errors: [
-        {
-          message: 'Expected type annotation on object prop.'
-        }
+        expectedError
       ]
     },
     {
+      code: template('type: Object as any,'),
+      errors: [
+        expectedError
+      ]
+    },
+
+    {
       code: template('type: Object as {}'),
       errors: [
-        {
-          message: 'Expected type annotation on object prop.'
-        }
+        expectedError
+      ]
+    },
+    {
+      code: template('type: Object as {},'),
+      errors: [
+        expectedError
       ]
     },
     {
       code: template('type: Object as unknown'),
       errors: [
-        {
-          message: 'Expected type annotation on object prop.'
-        }
+        expectedError
       ]
     },
     {
-      code: template('type: Object as string'),
+      code: template('type: Object as () => any'),
       errors: [
-        {
-          message: 'Expected type annotation on object prop.'
-        }
+        expectedError
       ]
-    }
+    },
+    {
+      code: template('type: Object as () => any,'),
+      errors: [
+        expectedError
+      ]
+    },
+    {
+      code: template('type: Object as () => unknown'),
+      errors: [
+        expectedError
+      ]
+    },
+    {
+      code: template('type: Object as () => unknown,'),
+      errors: [
+        expectedError
+      ]
+    },
   ]
 })
