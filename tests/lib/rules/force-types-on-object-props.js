@@ -44,18 +44,22 @@ ruleTester.run('force-types-on-object-props', rule, {
   }
   </script>  	
 `,
-    template('type: Object as Prop<{}>'),
     template('type: String'),
+    template('foo: String,'),
     template('type: Number'),
     template('type: Boolean'),
-    template('type: [String, Number, Boolean]')
+    template('type: [String, Number, Boolean]'),
+    template('foo: someFunction(),'),
+    template('foo: { type: Object as () => User }'),
+    template('type: Object as Prop<{}>'),
+    template('foo: { type: Object as PropType<User> },'),
   ],
   invalid: [
     {
       code: template('type: Object'),
       errors: [
         {
-          message: 'Object props has to contains type.'
+          message: 'Expected type annotation on object prop.'
         }
       ]
     },
@@ -63,7 +67,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as any'),
       errors: [
         {
-          message: 'Object props has to contains type.'
+          message: 'Expected type annotation on object prop.'
         }
       ]
     },
@@ -71,7 +75,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as {}'),
       errors: [
         {
-          message: 'Object props has to contains type.'
+          message: 'Expected type annotation on object prop.'
         }
       ]
     },
@@ -79,7 +83,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as unknown'),
       errors: [
         {
-          message: 'Object props has to contains type.'
+          message: 'Expected type annotation on object prop.'
         }
       ]
     },
@@ -87,7 +91,7 @@ ruleTester.run('force-types-on-object-props', rule, {
       code: template('type: Object as string'),
       errors: [
         {
-          message: 'Object props has to contains type.'
+          message: 'Expected type annotation on object prop.'
         }
       ]
     }
