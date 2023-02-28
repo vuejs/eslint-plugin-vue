@@ -28,7 +28,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/comment-directive](./comment-directive.md) | support comment-directives in `<template>` |  | :warning: |
-| [vue/force-types-on-object-props](./force-types-on-object-props.md) | enforce user to add type declaration to object props |  | :hammer: |
+| [vue/force-types-on-object-props](./force-types-on-object-props.md) | enforce adding type declarations to object props |  | :hammer: |
 | [vue/jsx-uses-vars](./jsx-uses-vars.md) | prevent variables used in JSX to be marked as unused |  | :warning: |
 
 </rules-table>
