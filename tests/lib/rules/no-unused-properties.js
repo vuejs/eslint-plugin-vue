@@ -21,6 +21,30 @@ const allOptions = [
 ]
 const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
+const stopReportingOptions = {
+  // Stop reporting errors when accessing via unknown property, e.g. this[varName]
+  unknownPropertyAccess: [
+    {
+      groups: ['computed'],
+      stopReporting: ['unknownPropertyAccess']
+    }
+  ],
+  // Stop reporting errors when returning this
+  returnInstance: [
+    {
+      groups: ['computed'],
+      stopReporting: ['returnInstance']
+    }
+  ],
+  // Don't stop reporting any errors
+  none: [
+    {
+      groups: ['computed'],
+      stopReporting: []
+    }
+  ]
+}
+
 tester.run('no-unused-properties', rule, {
   valid: [
     // a property used in a script expression
@@ -1697,9 +1721,58 @@ tester.run('no-unused-properties', rule, {
         },
       };
       </script>`
+    },
+
+    // stopReportingOptions: unknownPropertyAccess
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            },
+          },
+          methods: {
+            handler () {
+              const i = 'two'
+              const b = this[i]
+            },
+          }
+        }
+      </script>
+      `,
+      options: stopReportingOptions.unknownPropertyAccess
+    },
+    // stopReportingOptions: returnInstance
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            },
+          },
+          methods: {
+            handler () {
+              return this
+            },
+          }
+        }
+      </script>
+      `,
+      options: stopReportingOptions.returnInstance
     }
   ],
-
   invalid: [
     // unused property
     {
@@ -2801,6 +2874,103 @@ tester.run('no-unused-properties', rule, {
         {
           message: "'b' of property found, but never used.",
           line: 10
+        }
+      ]
+    },
+
+    // stopReportingOptions: unknownPropertyAccess
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              return this
+            },
+          }
+        }
+      </script>
+      `,
+      options: stopReportingOptions.unknownPropertyAccess,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
+        }
+      ]
+    },
+    // stopReportingOptions: returnInstance
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              const i = 'two'
+              return this[i]
+            },
+          }
+        }
+      </script>
+      `,
+      options: stopReportingOptions.returnInstance,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
+        }
+      ]
+    },
+    // stopReportingOptions: []
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              const i = 'two'
+              const b = this[i]
+              return this
+            },
+          }
+        }
+      </script>
+      `,
+      options: stopReportingOptions.none,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
         }
       ]
     }
