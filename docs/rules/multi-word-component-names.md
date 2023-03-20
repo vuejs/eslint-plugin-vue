@@ -16,7 +16,7 @@ since: v7.20.0
 This rule require component names to be always multi-word, except for root `App`
 components, and built-in components provided by Vue, such as `<transition>` or
 `<component>`. This prevents conflicts with existing and future HTML elements,
-since all HTML elements are a single word.
+since all HTML elements are single words.
 
 <eslint-code-block filename="src/TodoItem.js" language="javascript" :rules="{'vue/multi-word-component-names': ['error']}">
 
