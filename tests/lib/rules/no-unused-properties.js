@@ -2973,6 +2973,42 @@ tester.run('no-unused-properties', rule, {
           line: 8
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          data () {
+            return {
+              foo: {
+                bar: 1
+              },
+              baz: 2
+            }
+          },
+          methods: {
+            handler () {
+              console.log(this.baz)
+              return this.foo
+            },
+          }
+        }
+      </script>
+      `,
+      options: [
+        {
+          groups: ['data'],
+          deepData: true,
+          stopReporting: []
+        }
+      ],
+      errors: [
+        {
+          message: "'foo.bar' of data found, but never used.",
+          line: 7
+        }
+      ]
     }
   ]
 })
