@@ -7,35 +7,7 @@
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/force-types-on-object-props')
 
-const templateExport = (prop) => `
-export default {
-  props: ${prop}
-}
-`
-
-const templateSetup = (prop) => `
-<script setup lang="ts">
-defineProps(
-  ${prop}
-)
-</script>
-`
-
-const templateExtend = (prop) => `
-export default Vue.extend({
-  props: 
-    ${prop}
-});
-`
-
-const ruleTester = new RuleTester(/*{
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module',
-    parser: '@typescript-eslint/parser'
-  }
-}*/)
+const ruleTester = new RuleTester()
 
 const expectedError = {
   message: 'Expected type annotation on object prop.'
@@ -47,81 +19,137 @@ ruleTester.run('force-types-on-object-props', rule, {
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExport('{}')
+      code: `
+      export default {
+        props: {}
+      }
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExtend('{}')
+      code: `
+      export default Vue.extend({
+        props: {}
+      });
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateSetup('{}'),
+      code: `
+      <script setup lang="ts">
+      defineProps({});
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     },
     // primitive props
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExport('{ foo: String }')
+      code: `
+      export default {
+        props: { foo: String }
+      }
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExtend('{ foo: String }')
+      code: `
+      export default Vue.extend({
+        props: { foo: String }
+      });
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateSetup('{ foo: String }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: String });
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     },
     // union
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExport('{ foo: [Number, String, Boolean] }')
+      code: `
+      export default {
+        props: { foo: [Number, String, Boolean] }
+      }
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExtend('{ foo: [Number, String, Boolean] }')
+      code: `
+      export default Vue.extend({
+        props: { foo: [Number, String, Boolean] }
+      });
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateSetup('{ foo: [Number, String, Boolean] }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: [Number, String, Boolean] });
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     },
     // function
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExport('{ foo: someFunction() }')
+      code: `
+      export default {
+        props: { foo: someFunction() }
+      }
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExtend('{ foo: someFunction() }')
+      code: `
+      export default Vue.extend({
+        props: { foo: someFunction() }
+      });
+      `
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateSetup('{ foo: someFunction() }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: someFunction() });
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     },
     // typed object
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExport('{ foo: Object as PropType<User> }'),
+      code: `
+      export default {
+        props: { foo: Object as PropType<User> }
+      }
+      `,
       parser: require.resolve('@typescript-eslint/parser')
     },
     {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      code: templateExtend('{ foo: Object as PropType<User> }'),
+      code: `
+      export default Vue.extend({
+        props: { foo: Object as PropType<User> }
+      });
+      `,
       parser: require.resolve('@typescript-eslint/parser')
     },
     {
@@ -131,7 +159,11 @@ ruleTester.run('force-types-on-object-props', rule, {
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
       },
-      code: templateSetup('{ foo: Object as PropType<User> }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: Object as PropType<User> });
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     },
 
@@ -142,7 +174,11 @@ ruleTester.run('force-types-on-object-props', rule, {
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
       },
-      code: templateExport('{ foo: Object as () => User }'),
+      code: `
+      export default {
+        props: { foo: Object as () => User }
+      }
+      `,
       parser: require.resolve('@typescript-eslint/parser')
     },
     {
@@ -152,7 +188,11 @@ ruleTester.run('force-types-on-object-props', rule, {
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
       },
-      code: templateExtend('{ foo: Object as () => User }'),
+      code: `
+      export default Vue.extend({
+        props: { foo: Object as () => User }
+      });
+      `,
       parser: require.resolve('@typescript-eslint/parser')
     },
     {
@@ -162,56 +202,73 @@ ruleTester.run('force-types-on-object-props', rule, {
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
       },
-      code: templateSetup('{ foo: Object as () => User }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: Object as () => User });
+      </script>
+      `,
       parser: require.resolve('vue-eslint-parser')
     }
-
-    // // `,
-    //     // template('type: String'),
-    //     // template('foo: String,'),
-    //     // template('type: Number'),
-    //     // template('type: Boolean'),
-    //     // template('type: [String, Number, Boolean]'),
-    //     // template('foo: someFunction(),'),
-    //     // template('foo: { type: Object as () => User }'),
-    //     // template('type: Object as Prop<{}>'),
-    //     // template('foo: { type: Object as PropType<User> },'),
   ],
   invalid: [
     {
       filename: 'test.vue',
-      code: templateSetup('{ foo: Object }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: Object });
+      </script>
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
       errors: [expectedError]
     },
     {
       filename: 'test.vue',
-      code: templateExport('{ foo: Object }'),
+      code: `
+      export default {
+        props: { foo: Object }
+      }
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [expectedError]
     },
     {
       filename: 'test.vue',
-      code: templateExtend('{ foo: Object }'),
+      code: `
+      export default Vue.extend({
+        props: { foo: Object }
+      });
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [expectedError]
     },
     {
       filename: 'test.vue',
-      code: templateExtend('{ foo: { type: Object } }'),
+      code: `
+      export default Vue.extend({
+        props: { foo: { type: Object } }
+      });
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [expectedError]
     },
     {
       filename: 'test.vue',
-      code: templateExport('{ foo: { type: Object } }'),
+      code: `
+      export default {
+        props: { foo: { type: Object } }
+      }
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [expectedError]
     },
     {
       filename: 'test.vue',
-      code: templateSetup('{ foo: { type: Object } }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object } });
+      </script>
+      `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
       errors: [expectedError]
@@ -219,7 +276,11 @@ ruleTester.run('force-types-on-object-props', rule, {
     // any
     {
       filename: 'test.vue',
-      code: templateSetup('{ foo: { type: Object as any} }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as any } });
+      </script>
+      `,
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -269,7 +330,11 @@ ruleTester.run('force-types-on-object-props', rule, {
     // unknown
     {
       filename: 'test.vue',
-      code: templateSetup('{ foo: { type: Object as unknown} }'),
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as unknown } });
+      </script>
+      `,
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',

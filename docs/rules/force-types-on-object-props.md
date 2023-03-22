@@ -9,7 +9,6 @@ description: enforce adding type declarations to object props
 > enforce adding type declarations to object props
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :gear: This rule is included in all of `"plugin:vue/base"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
 
 ## :book: Rule Details
 
@@ -26,7 +25,7 @@ export default {
       type: Array,
       
       // ✓ GOOD
-      type: Object as Props<Anything>,
+      type: Object as PropType<Anything>,
       type: String, // or any other primitive type
     }
   }
