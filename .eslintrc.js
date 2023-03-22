@@ -131,7 +131,9 @@ module.exports = {
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
     'unicorn/prefer-module': 'off',
-    'unicorn/prevent-abbreviations': 'off'
+    'unicorn/prevent-abbreviations': 'off',
+
+    'require-eslint-community': ['error']
   },
   overrides: [
     {
