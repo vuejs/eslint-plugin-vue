@@ -21,26 +21,26 @@ const allOptions = [
 ]
 const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
-const stopReportingOptions = {
-  // Stop reporting errors when accessing via unknown property, e.g. this[varName]
-  unknownPropertyAccess: [
+const reportingOptions = {
+  // Report errors when accessing via unknown property, e.g. this[varName]
+  reportDynamicThis: [
     {
       groups: ['computed'],
-      stopReporting: ['unknownPropertyAccess']
+      reportingOptions: ['reportDynamicThis']
     }
   ],
-  // Stop reporting errors when returning this
-  returnInstance: [
+  // Report errors when returning this
+  reportReturnedThis: [
     {
       groups: ['computed'],
-      stopReporting: ['returnInstance']
+      reportingOptions: ['reportReturnedThis']
     }
   ],
-  // Don't stop reporting any errors
-  none: [
+  // Report all
+  all: [
     {
       groups: ['computed'],
-      stopReporting: []
+      reportingOptions: ['reportDynamicThis', 'reportReturnedThis']
     }
   ]
 }
@@ -1721,56 +1721,6 @@ tester.run('no-unused-properties', rule, {
         },
       };
       </script>`
-    },
-
-    // stopReportingOptions: unknownPropertyAccess
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          computed: {
-            one () {
-              return 1
-            },
-            two () {
-              return 2
-            },
-          },
-          methods: {
-            handler () {
-              const i = 'two'
-              const b = this[i]
-            },
-          }
-        }
-      </script>
-      `,
-      options: stopReportingOptions.unknownPropertyAccess
-    },
-    // stopReportingOptions: returnInstance
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          computed: {
-            one () {
-              return 1
-            },
-            two () {
-              return 2
-            },
-          },
-          methods: {
-            handler () {
-              return this
-            },
-          }
-        }
-      </script>
-      `,
-      options: stopReportingOptions.returnInstance
     }
   ],
   invalid: [
@@ -2878,38 +2828,7 @@ tester.run('no-unused-properties', rule, {
       ]
     },
 
-    // stopReportingOptions: unknownPropertyAccess
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          computed: {
-            one () {
-              return 1
-            },
-            two () {
-              return 2
-            }
-          },
-          methods: {
-            handler () {
-              const a = this.one
-              return this
-            },
-          }
-        }
-      </script>
-      `,
-      options: stopReportingOptions.unknownPropertyAccess,
-      errors: [
-        {
-          message: "'two' of computed property found, but never used.",
-          line: 8
-        }
-      ]
-    },
-    // stopReportingOptions: returnInstance
+    // reportingOptions: reportDynamicThis
     {
       filename: 'test.vue',
       code: `
@@ -2931,9 +2850,8 @@ tester.run('no-unused-properties', rule, {
             },
           }
         }
-      </script>
-      `,
-      options: stopReportingOptions.returnInstance,
+      </script>`,
+      options: reportingOptions.reportDynamicThis,
       errors: [
         {
           message: "'two' of computed property found, but never used.",
@@ -2941,7 +2859,37 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
-    // stopReportingOptions: []
+    // stopReportingOptions: reportReturnedThis
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              return this
+            },
+          }
+        }
+      </script>`,
+      options: reportingOptions.reportReturnedThis,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
+        }
+      ]
+    },
+    // reportingOptions: all
     {
       filename: 'test.vue',
       code: `
@@ -2964,49 +2912,12 @@ tester.run('no-unused-properties', rule, {
             },
           }
         }
-      </script>
-      `,
-      options: stopReportingOptions.none,
+      </script>`,
+      options: reportingOptions.all,
       errors: [
         {
           message: "'two' of computed property found, but never used.",
           line: 8
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script>
-        export default {
-          data () {
-            return {
-              foo: {
-                bar: 1
-              },
-              baz: 2
-            }
-          },
-          methods: {
-            handler () {
-              console.log(this.baz)
-              return this.foo
-            },
-          }
-        }
-      </script>
-      `,
-      options: [
-        {
-          groups: ['data'],
-          deepData: true,
-          stopReporting: []
-        }
-      ],
-      errors: [
-        {
-          message: "'foo.bar' of data found, but never used.",
-          line: 7
         }
       ]
     }
