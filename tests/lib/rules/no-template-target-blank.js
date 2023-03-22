@@ -49,31 +49,81 @@ ruleTester.run('no-template-target-blank', rule, {
     {
       code: '<template><a href="https://eslint.vuejs.org" target="_blank">link</a></template>',
       errors: [
-        'Using target="_blank" without rel="noopener noreferrer" is a security risk.'
+        {
+          message:
+            'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          suggestions: [
+            {
+              desc: 'Add `rel="noopener noreferrer"`.',
+              output:
+                '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener noreferrer">link</a></template>'
+            }
+          ]
+        }
       ]
     },
     {
       code: '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopenernoreferrer">link</a></template>',
       errors: [
-        'Using target="_blank" without rel="noopener noreferrer" is a security risk.'
+        {
+          message:
+            'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          suggestions: [
+            {
+              desc: 'Change `rel` attribute value to `noopener noreferrer`.',
+              output:
+                '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener noreferrer">link</a></template>'
+            }
+          ]
+        }
       ]
     },
     {
       code: '<template><a :href="link" target="_blank" rel=3>link</a></template>',
       errors: [
-        'Using target="_blank" without rel="noopener noreferrer" is a security risk.'
+        {
+          message:
+            'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          suggestions: [
+            {
+              desc: 'Change `rel` attribute value to `noopener noreferrer`.',
+              output:
+                '<template><a :href="link" target="_blank" rel="noopener noreferrer">link</a></template>'
+            }
+          ]
+        }
       ]
     },
     {
       code: '<template><a :href="link" target="_blank">link</a></template>',
       errors: [
-        'Using target="_blank" without rel="noopener noreferrer" is a security risk.'
+        {
+          message:
+            'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          suggestions: [
+            {
+              desc: 'Add `rel="noopener noreferrer"`.',
+              output:
+                '<template><a :href="link" target="_blank" rel="noopener noreferrer">link</a></template>'
+            }
+          ]
+        }
       ]
     },
     {
       code: '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener">link</a></template>',
       errors: [
-        'Using target="_blank" without rel="noopener noreferrer" is a security risk.'
+        {
+          message:
+            'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          suggestions: [
+            {
+              desc: 'Change `rel` attribute value to `noopener noreferrer`.',
+              output:
+                '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener noreferrer">link</a></template>'
+            }
+          ]
+        }
       ]
     }
   ]
