@@ -21,26 +21,29 @@ const allOptions = [
 ]
 const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
-const reportingOptions = {
+const unreferencedOptions = {
   // Report errors when accessing via unknown property, e.g. this[varName]
-  reportDynamicThis: [
+  unknownMemberAsUnreferenced: [
     {
       groups: ['computed'],
-      reportingOptions: ['reportDynamicThis']
+      unreferencedOptions: ['unknownMemberAsUnreferenced']
     }
   ],
   // Report errors when returning this
-  reportReturnedThis: [
+  returnAsUnreferenced: [
     {
       groups: ['computed'],
-      reportingOptions: ['reportReturnedThis']
+      unreferencedOptions: ['returnAsUnreferenced']
     }
   ],
   // Report all
   all: [
     {
       groups: ['computed'],
-      reportingOptions: ['reportDynamicThis', 'reportReturnedThis']
+      unreferencedOptions: [
+        'unknownMemberAsUnreferenced',
+        'returnAsUnreferenced'
+      ]
     }
   ]
 }
@@ -2828,7 +2831,7 @@ tester.run('no-unused-properties', rule, {
       ]
     },
 
-    // reportingOptions: reportDynamicThis
+    // unreferencedOptions: unknownMemberAsUnreferenced
     {
       filename: 'test.vue',
       code: `
@@ -2851,7 +2854,7 @@ tester.run('no-unused-properties', rule, {
           }
         }
       </script>`,
-      options: reportingOptions.reportDynamicThis,
+      options: unreferencedOptions.unknownMemberAsUnreferenced,
       errors: [
         {
           message: "'two' of computed property found, but never used.",
@@ -2859,7 +2862,7 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
-    // stopReportingOptions: reportReturnedThis
+    // unreferencedOptions: returnAsUnreferenced
     {
       filename: 'test.vue',
       code: `
@@ -2881,7 +2884,7 @@ tester.run('no-unused-properties', rule, {
           }
         }
       </script>`,
-      options: reportingOptions.reportReturnedThis,
+      options: unreferencedOptions.returnAsUnreferenced,
       errors: [
         {
           message: "'two' of computed property found, but never used.",
@@ -2889,7 +2892,7 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
-    // reportingOptions: all
+    // unreferencedOptions: all
     {
       filename: 'test.vue',
       code: `
@@ -2913,7 +2916,7 @@ tester.run('no-unused-properties', rule, {
           }
         }
       </script>`,
-      options: reportingOptions.all,
+      options: unreferencedOptions.all,
       errors: [
         {
           message: "'two' of computed property found, but never used.",
