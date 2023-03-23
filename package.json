@@ -54,7 +54,7 @@
     "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
-    "eslint-utils": "^3.0.0",
+    "@eslint-community/eslint-utils": "^4.3.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.0.1",
     "postcss-selector-parser": "^6.0.9",
