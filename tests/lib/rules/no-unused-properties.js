@@ -2892,6 +2892,44 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
+    // unreferencedOptions: returnAsUnreferenced via variable with deepData
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          data () {
+            return {
+              foo: {
+                bar: 1
+              },
+              baz: 2
+            }
+          },
+          methods: {
+            handler () {
+              const vm = this
+              console.log(vm.baz)
+              return vm.foo
+            },
+          }
+        }
+      </script>
+      `,
+      options: [
+        {
+          groups: ['data'],
+          unreferencedOptions: ['returnAsUnreferenced'],
+          deepData: true
+        }
+      ],
+      errors: [
+        {
+          message: "'foo.bar' of data found, but never used.",
+          line: 7
+        }
+      ]
+    },
     // unreferencedOptions: all
     {
       filename: 'test.vue',
