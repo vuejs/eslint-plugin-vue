@@ -14,7 +14,7 @@ since: v7.0.0
 This rule is aimed at eliminating unused properties.
 
 ::: warning Note
-This rule cannot be checked for use in other components (e.g. `mixins`, Property access via `$refs`) and use in places where the scope cannot be determined.
+This rule cannot check for use of properties by other components (e.g. `mixins`, property access via `$refs`) and use in places where the scope cannot be determined. Some access to properties might be implied, for example accessing data or computed via a variable such as `this[varName]`. In this case, the default is to assume all properties, methods, etc. are 'used'. See the `unreferencedOptions` for a more strict interpretation of 'use' in these cases.
 :::
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error']}">
@@ -56,7 +56,8 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
   "vue/no-unused-properties": ["error", {
     "groups": ["props"],
     "deepData": false,
-    "ignorePublicMembers": false
+    "ignorePublicMembers": false,
+    "unreferencedOptions": []
   }]
 }
 ```
@@ -69,6 +70,7 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
   - `"setup"`
 - `deepData` (`boolean`) If `true`, the object of the property defined in `data` will be searched deeply. Default is `false`. Include `"data"` in `groups` to use this option.
 - `ignorePublicMembers` (`boolean`) If `true`, members marked with a [JSDoc `/** @public */` tag](https://jsdoc.app/tags-public.html) will be ignored. Default is `false`.
+- `unreferencedOptions` (`string[]`) Array of access methods that should be interpreted as leaving properties unreferenced. Currently, two such methods are available: `unknownMemberAsUnreferenced`, and `returnAsUnreferenced`. See examples below.
 
 ### `"groups": ["props", "data"]`
 
@@ -211,6 +213,71 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Property
       
       /* ✗ BAD */
       unusedMethod() {}
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "groups": ["computed"], "unreferencedOptions": ["unknownMemberAsUnreferenced"] }`
+
+<eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['unknownMemberAsUnreferenced']}]}">
+
+```vue
+<template>
+  
+</template>
+<script>
+  export default {
+    computed: {
+      one () {
+        return 1
+      },
+      two () {
+        return 2
+      }
+    },
+    methods: {
+      handler () {
+        /* ✓ GOOD - explicit access to computed */
+        const a = this.one
+        const i = 'two'
+        /* ✗ BAD - unknown access via a variable, two will be reported as unreferenced */
+        return this[i]
+      },
+    }
+  }
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "groups": ["computed"], "unreferencedOptions": ["returnAsUnreferenced"] }`
+
+<eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['returnAsUnreferenced']}]}">
+
+```vue
+<template>
+  
+</template>
+<script>
+  export default {
+    computed: {
+      one () {
+        return 1
+      },
+      two () {
+        return 2
+      }
+    },
+    methods: {
+      handler () {
+        /* ✓ GOOD - explicit access to computed */
+        const a = this.one
+        /* ✗ BAD - any property could be accessed by returning `this`, but two will still be reported as unreferenced */
+        return this
+      },
     }
   }
 </script>

@@ -21,6 +21,33 @@ const allOptions = [
 ]
 const deepDataOptions = [{ groups: ['data'], deepData: true }]
 
+const unreferencedOptions = {
+  // Report errors when accessing via unknown property, e.g. this[varName]
+  unknownMemberAsUnreferenced: [
+    {
+      groups: ['computed'],
+      unreferencedOptions: ['unknownMemberAsUnreferenced']
+    }
+  ],
+  // Report errors when returning this
+  returnAsUnreferenced: [
+    {
+      groups: ['computed'],
+      unreferencedOptions: ['returnAsUnreferenced']
+    }
+  ],
+  // Report all
+  all: [
+    {
+      groups: ['computed'],
+      unreferencedOptions: [
+        'unknownMemberAsUnreferenced',
+        'returnAsUnreferenced'
+      ]
+    }
+  ]
+}
+
 tester.run('no-unused-properties', rule, {
   valid: [
     // a property used in a script expression
@@ -1699,7 +1726,6 @@ tester.run('no-unused-properties', rule, {
       </script>`
     }
   ],
-
   invalid: [
     // unused property
     {
@@ -2801,6 +2827,138 @@ tester.run('no-unused-properties', rule, {
         {
           message: "'b' of property found, but never used.",
           line: 10
+        }
+      ]
+    },
+
+    // unreferencedOptions: unknownMemberAsUnreferenced
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              const i = 'two'
+              return this[i]
+            },
+          }
+        }
+      </script>`,
+      options: unreferencedOptions.unknownMemberAsUnreferenced,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
+        }
+      ]
+    },
+    // unreferencedOptions: returnAsUnreferenced
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              return this
+            },
+          }
+        }
+      </script>`,
+      options: unreferencedOptions.returnAsUnreferenced,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
+        }
+      ]
+    },
+    // unreferencedOptions: returnAsUnreferenced via variable with deepData
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          data () {
+            return {
+              foo: {
+                bar: 1
+              },
+              baz: 2
+            }
+          },
+          methods: {
+            handler () {
+              const vm = this
+              console.log(vm.baz)
+              return vm.foo
+            },
+          }
+        }
+      </script>
+      `,
+      options: [
+        {
+          groups: ['data'],
+          unreferencedOptions: ['returnAsUnreferenced'],
+          deepData: true
+        }
+      ],
+      errors: [
+        {
+          message: "'foo.bar' of data found, but never used.",
+          line: 7
+        }
+      ]
+    },
+    // unreferencedOptions: all
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          computed: {
+            one () {
+              return 1
+            },
+            two () {
+              return 2
+            }
+          },
+          methods: {
+            handler () {
+              const a = this.one
+              const i = 'two'
+              const b = this[i]
+              return this
+            },
+          }
+        }
+      </script>`,
+      options: unreferencedOptions.all,
+      errors: [
+        {
+          message: "'two' of computed property found, but never used.",
+          line: 8
         }
       ]
     }
