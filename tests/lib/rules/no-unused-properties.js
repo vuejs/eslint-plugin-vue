@@ -7,6 +7,9 @@
 const { RuleTester, Linter } = require('eslint')
 const assert = require('assert')
 const rule = require('../../../lib/rules/no-unused-properties')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -2959,6 +2962,24 @@ tester.run('no-unused-properties', rule, {
         {
           message: "'two' of computed property found, but never used.",
           line: 8
+        }
+      ]
+    },
+    // script setup with typescript
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>
+      <template>
+      {{ foo }}{{ bar }}
+      </template>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: "'baz' of property found, but never used.",
+          line: 4
         }
       ]
     }

@@ -6,6 +6,9 @@
 const semver = require('semver')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-restricted-props')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -575,6 +578,23 @@ tester.run('no-restricted-props', rule, {
       `
                   }
                 ]
+              }
+            ]
+          },
+          {
+            code: `
+            <script setup lang="ts">
+            import {Props1 as Props} from './test01'
+            defineProps<Props>()
+            </script>
+            `,
+            ...getTypeScriptFixtureTestOptions(),
+            options: [{ name: 'foo', suggest: 'Foo' }],
+            errors: [
+              {
+                message: 'Using `foo` props is not allowed.',
+                line: 4,
+                suggestions: null
               }
             ]
           }

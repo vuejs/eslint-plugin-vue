@@ -73,7 +73,7 @@ const sidebarCategories = [
   }
 ]
 
-const categorizedRules: DefaultTheme.SidebarGroup[] = []
+const categorizedRules: DefaultTheme.SidebarItem[] = []
 for (const { title, categoryIds } of sidebarCategories) {
   const categoryRules = rules
     .filter((rule) => rule.meta.docs.categories && !rule.meta.deprecated)
@@ -84,8 +84,10 @@ for (const { title, categoryIds } of sidebarCategories) {
     )
   const children: DefaultTheme.SidebarItem[] = categoryRules
     .filter(({ ruleId }) => {
-      const exists = categorizedRules.some(({ items }) =>
-        items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
+      const exists = categorizedRules.some(
+        ({ items }) =>
+          items &&
+          items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
       )
       return !exists
     })
@@ -101,16 +103,16 @@ for (const { title, categoryIds } of sidebarCategories) {
   }
   categorizedRules.push({
     text: title,
-    collapsible: false,
+    collapsed: false,
     items: children
   })
 }
 
-const extraCategories: DefaultTheme.SidebarGroup[] = []
+const extraCategories: DefaultTheme.SidebarItem[] = []
 if (uncategorizedRules.length > 0) {
   extraCategories.push({
     text: 'Uncategorized',
-    collapsible: false,
+    collapsed: false,
     items: uncategorizedRules.map(({ ruleId, name }) => ({
       text: ruleId,
       link: `/rules/${name}`
@@ -120,7 +122,7 @@ if (uncategorizedRules.length > 0) {
 if (uncategorizedExtensionRule.length > 0) {
   extraCategories.push({
     text: 'Extension Rules',
-    collapsible: false,
+    collapsed: false,
     items: uncategorizedExtensionRule.map(({ ruleId, name }) => ({
       text: ruleId,
       link: `/rules/${name}`
@@ -130,7 +132,7 @@ if (uncategorizedExtensionRule.length > 0) {
 if (deprecatedRules.length > 0) {
   extraCategories.push({
     text: 'Deprecated',
-    collapsible: false,
+    collapsed: false,
     items: deprecatedRules.map(({ ruleId, name }) => ({
       text: ruleId,
       link: `/rules/${name}`

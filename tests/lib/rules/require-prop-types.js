@@ -5,6 +5,9 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-prop-types')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const RuleTester = require('eslint').RuleTester
 
@@ -176,6 +179,14 @@ ruleTester.run('require-prop-types', rule, {
         parser: require.resolve('@typescript-eslint/parser')
       },
       parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
