@@ -92,12 +92,11 @@ export interface TSFunctionType extends TSFunctionSignatureBase {
   type: 'TSFunctionType'
 }
 
+type TypeNodeTypes = `${TSESTree.TypeNode['type']}`
+
 export type TypeNode =
   | (HasParentNode & {
-      type: Exclude<
-        TSESTree.TypeNode['type'],
-        'TSFunctionType' | 'TSLiteralType'
-      >
+      type: Exclude<TypeNodeTypes, 'TSFunctionType' | 'TSLiteralType'>
     })
   | TSFunctionType
   | TSLiteralType
