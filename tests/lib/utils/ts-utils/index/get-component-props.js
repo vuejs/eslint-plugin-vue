@@ -75,6 +75,19 @@ describe('getComponentPropsFromTypeDefineTypes', () => {
       ]
     },
     {
+      scriptCode: `defineProps<{foo:string,bar?:number} & {baz?:string|number}>()`,
+      props: [
+        { type: 'type', name: 'foo', required: true, types: ['String'] },
+        { type: 'type', name: 'bar', required: false, types: ['Number'] },
+        {
+          type: 'type',
+          name: 'baz',
+          required: false,
+          types: ['String', 'Number']
+        }
+      ]
+    },
+    {
       tsFileCode: `export type Props = {foo:string,bar?:number}`,
       scriptCode: `import { Props } from './test'
       defineProps<Props>()`,
@@ -136,6 +149,53 @@ describe('getComponentPropsFromTypeDefineTypes', () => {
         { type: 'infer-type', name: 'g', required: false, types: ['Object'] },
         { type: 'infer-type', name: 'h', required: false, types: ['Array'] },
         { type: 'infer-type', name: 'i', required: false, types: ['Array'] }
+      ]
+    },
+    {
+      tsFileCode: `
+      export interface Props {
+        a?: number;
+        b?: string;
+      }`,
+      scriptCode: `import { Props } from './test'
+defineProps<Props & {foo?:string}>()`,
+      props: [
+        { type: 'infer-type', name: 'a', required: false, types: ['Number'] },
+        { type: 'infer-type', name: 'b', required: false, types: ['String'] },
+        { type: 'type', name: 'foo', required: false, types: ['String'] }
+      ]
+    },
+    {
+      tsFileCode: `
+      export type A = string | number`,
+      scriptCode: `import { A } from './test'
+defineProps<{foo?:A}>()`,
+      props: [
+        {
+          type: 'type',
+          name: 'foo',
+          required: false,
+          types: ['String', 'Number']
+        }
+      ]
+    },
+    {
+      scriptCode: `enum A {a = 'a', b = 'b'}
+defineProps<{foo?:A}>()`,
+      props: [{ type: 'type', name: 'foo', required: false, types: ['String'] }]
+    },
+    {
+      scriptCode: `
+const foo = 42
+enum A {a = foo, b = 'b'}
+defineProps<{foo?:A}>()`,
+      props: [
+        {
+          type: 'type',
+          name: 'foo',
+          required: false,
+          types: ['Number', 'String']
+        }
       ]
     }
   ]) {
