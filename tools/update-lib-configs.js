@@ -100,4 +100,4 @@ async function format() {
   eslint.ESLint.outputFixes(report)
 }
 
-format()
+await format()
