@@ -1,7 +1,7 @@
 'use strict'
 
 const { escape, toRegExp } = require('../../../lib/utils/regexp')
-const assert = require('assert')
+const assert = require('node:assert')
 
 const ESCAPED = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\'
 const UNESCAPED = '^$.*+?()[]{}|\\'

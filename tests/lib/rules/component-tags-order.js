@@ -5,7 +5,7 @@
 
 const rule = require('../../../lib/rules/component-tags-order')
 const RuleTester = require('eslint').RuleTester
-const assert = require('assert')
+const assert = require('node:assert')
 const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.

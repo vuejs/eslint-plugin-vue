@@ -4,8 +4,8 @@
  */
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
 const removedRules = require('../lib/removed-rules')

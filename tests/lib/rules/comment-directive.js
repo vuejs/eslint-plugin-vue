@@ -5,7 +5,7 @@
 
 'use strict'
 
-const assert = require('assert')
+const assert = require('node:assert')
 const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.

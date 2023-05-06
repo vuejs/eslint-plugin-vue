@@ -9,8 +9,8 @@
 This script updates `lib/index.js` file from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const eslint = require('eslint')
 const rules = require('./lib/rules')
 const configs = require('./lib/configs')
