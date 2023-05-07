@@ -4,10 +4,10 @@
  This script updates `lib/utils/vue3-export-names.json` file from vue type.
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const https = require('node:https')
-const { URL } = require('node:url')
+const fs = require('fs')
+const path = require('path')
+const https = require('https')
+const { URL } = require('url')
 const tsParser = require('@typescript-eslint/parser')
 
 main()

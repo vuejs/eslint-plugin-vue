@@ -5,7 +5,7 @@
 'use strict'
 
 const { RuleTester, Linter } = require('eslint')
-const assert = require('node:assert')
+const assert = require('assert')
 const rule = require('../../../lib/rules/no-unused-properties')
 
 const tester = new RuleTester({

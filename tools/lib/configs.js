@@ -5,8 +5,8 @@
 
 'use strict'
 
-const fs = require('node:fs')
-const path = require('node:path')
+const fs = require('fs')
+const path = require('path')
 const ROOT = path.resolve(__dirname, '../../lib/configs')
 
 module.exports = fs

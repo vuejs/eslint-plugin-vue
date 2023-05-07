@@ -2,7 +2,7 @@
 
 const espree = require('espree')
 const utils = require('../../../lib/utils/index')
-const assert = require('node:assert')
+const assert = require('assert')
 
 function parse(code) {
   return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0].init

@@ -5,8 +5,8 @@
  */
 'use strict'
 
-const cp = require('node:child_process')
-const path = require('node:path')
+const cp = require('child_process')
+const path = require('path')
 const semver = require('semver')
 
 const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`

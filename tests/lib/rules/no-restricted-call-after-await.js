@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const path = require('node:path')
+const path = require('path')
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-restricted-call-after-await')
 
