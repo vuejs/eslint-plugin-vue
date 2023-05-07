@@ -140,11 +140,7 @@ module.exports = {
     'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
     'unicorn/switch-case-braces': 'off', //        turn off to prevent make breaking changes (ref: #2146)
 
-    'require-eslint-community': ['error'],
-
-    // FIXME: The version we are currently using is not compatible.
-    // May be removed in #2146. https://github.com/vuejs/eslint-plugin-vue/pull/2146
-    'unicorn/expiring-todo-comments': 'off'
+    'require-eslint-community': ['error']
   },
   overrides: [
     {
