@@ -28,4 +28,4 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/dot-location.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/dot-location.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/dot-location)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/dot-location)</sup>
