@@ -133,7 +133,11 @@ module.exports = {
     'unicorn/prefer-module': 'off',
     'unicorn/prevent-abbreviations': 'off',
 
-    'require-eslint-community': ['error']
+    'require-eslint-community': ['error'],
+
+    // FIXME: The version we are currently using is not compatible.
+    // May be removed in #2146. https://github.com/vuejs/eslint-plugin-vue/pull/2146
+    'unicorn/expiring-todo-comments': 'off'
   },
   overrides: [
     {
