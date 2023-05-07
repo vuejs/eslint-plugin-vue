@@ -10,7 +10,7 @@ const https = require('node:https')
 const { URL } = require('node:url')
 const tsParser = require('@typescript-eslint/parser')
 
-await main()
+main()
 
 async function main() {
   const names = new Set()
