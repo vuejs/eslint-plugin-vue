@@ -26,4 +26,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-sparse-arrays.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-sparse-arrays.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/no-sparse-arrays)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/no-sparse-arrays)</sup>
