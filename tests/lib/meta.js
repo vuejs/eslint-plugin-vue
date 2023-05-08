@@ -13,7 +13,7 @@ describe('Test for meta object', () => {
   })
 
   for (const [name, processor] of Object.entries(plugin.processors)) {
-    it(`"${name}" processor  should have a meta object.`, () => {
+    it(`"${name}" processor should have a meta object.`, () => {
       assert.deepStrictEqual(processor.meta, expectedMeta)
     })
   }
