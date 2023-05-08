@@ -210,7 +210,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      options: [{ propProps: false }]
+      options: [{ shallowOnly: true }]
     },
 
     // setup
@@ -370,7 +370,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      options: [{ propProps: false }]
+      options: [{ shallowOnly: true }]
     },
     {
       filename: 'test.vue',
@@ -390,7 +390,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      options: [{ propProps: false }]
+      options: [{ shallowOnly: true }]
     },
 
     {
@@ -732,7 +732,7 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      options: [{ propProps: false }],
+      options: [{ shallowOnly: true }],
       errors: [
         {
           message: 'Unexpected mutation of "prop1" prop.',
@@ -1027,7 +1027,7 @@ ruleTester.run('no-mutating-props', rule, {
         </script>
 
       `,
-      options: [{ propProps: false }],
+      options: [{ shallowOnly: true }],
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
@@ -1105,7 +1105,7 @@ ruleTester.run('no-mutating-props', rule, {
           props.a ++
         </script>
       `,
-      options: [{ propProps: false }],
+      options: [{ shallowOnly: true }],
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',

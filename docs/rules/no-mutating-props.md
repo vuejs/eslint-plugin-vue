@@ -123,16 +123,16 @@ This rule reports mutation of component props.
 ```json
 {
   "vue/no-mutating-props": ["error", {
-    "propProps": true
+    "shallowOnly": false
   }]
 }
 ```
 
-- "propProps" (`boolean`) Avoid mutating the value of a prop but leaving the reference the same. Default is `true`.
+- "shallowOnly" (`boolean`) Enables mutating the value of a prop but leaving the reference the same. Default is `true`.
 
-### "propProps": false
+### "shallowOnly": true
 
-<eslint-code-block :rules="{'vue/no-mutating-props': ['error', {propProps: false}]}">
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error', {shallowOnly: true}]}">
 
 ```vue
 <!-- ✓ GOOD -->
