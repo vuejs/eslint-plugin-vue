@@ -26,4 +26,4 @@ This rule was introduced in eslint-plugin-vue v7.5.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-constant-condition.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-constant-condition.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/no-constant-condition)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/no-constant-condition)</sup>
