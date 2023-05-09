@@ -6,14 +6,14 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/valid-v-if-template-root')
+const rule = require('../../../lib/rules/no-root-v-if')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: { ecmaVersion: 2015 }
 })
 
-tester.run('valid-v-if-template-root', rule, {
+tester.run('no-root-v-if', rule, {
   valid: [
     {
       filename: 'test.vue',
@@ -105,6 +105,11 @@ tester.run('valid-v-if-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-if="foo"></div></template>',
+      errors: ['`v-if` should not be used on root element without `v-else`.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div /><div v-if="foo" /></template>',
       errors: ['`v-if` should not be used on root element without `v-else`.']
     }
   ]

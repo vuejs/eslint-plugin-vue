@@ -118,7 +118,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/valid-v-else](./valid-v-else.md) | enforce valid `v-else` directives |  | :three::two::warning: |
 | [vue/valid-v-for](./valid-v-for.md) | enforce valid `v-for` directives |  | :three::two::warning: |
 | [vue/valid-v-html](./valid-v-html.md) | enforce valid `v-html` directives |  | :three::two::warning: |
-| [vue/valid-v-if-template-root](./valid-v-if-template-root.md) | enforce valid `v-if` directives on root element |  | :three::two::warning: |
+| [vue/no-root-v-if](./no-root-v-if.md) | enforce valid `v-if` directives on root element |  | :three::two::warning: |
 | [vue/valid-v-if](./valid-v-if.md) | enforce valid `v-if` directives |  | :three::two::warning: |
 | [vue/valid-v-is](./valid-v-is.md) | enforce valid `v-is` directives |  | :three::warning: |
 | [vue/valid-v-memo](./valid-v-memo.md) | enforce valid `v-memo` directives |  | :three::warning: |
