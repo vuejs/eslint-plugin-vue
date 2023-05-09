@@ -128,10 +128,17 @@ module.exports = {
     'unicorn/filename-case': 'off',
     'unicorn/no-null': 'off',
     'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+    'unicorn/no-negated-condition': 'off', // remove when there are few pull requests (ref: #2146)
     'unicorn/no-useless-undefined': 'off',
     'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
     'unicorn/prefer-module': 'off',
     'unicorn/prevent-abbreviations': 'off',
+    'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
+    'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
+    'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
+    'unicorn/prefer-ternary': 'off', //            remove when there are few pull requests (ref: #2146)
+    'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+    'unicorn/switch-case-braces': 'off', //        remove when there are few pull requests (ref: #2146)
 
     'require-eslint-community': ['error']
   },

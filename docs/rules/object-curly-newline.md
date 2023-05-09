@@ -28,4 +28,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/object-curly-newline.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/object-curly-newline.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/object-curly-newline)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/object-curly-newline)</sup>
