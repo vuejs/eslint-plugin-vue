@@ -724,11 +724,18 @@ ruleTester.run('no-mutating-props', rule, {
             <div v-text="this.prop7.shift()"></div>
             <div v-text="this.prop8.slice(0).shift()"></div>
             <div v-if="delete prop9.a"></div>
+            <div v-if="delete this.prop10"></div>
           </div>
         </template>
         <script>
           export default {
-            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6', 'prop7', 'prop8', 'prop9']
+            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6', 'prop7', 'prop8', 'prop9', 'prop10'],
+            method: {
+              deleteProp() {
+                delete this.prop9.a
+                delete this.prop10
+              }
+            }
           }
         </script>
       `,
@@ -749,6 +756,14 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "prop6" prop.',
           line: 9
+        },
+        {
+          message: 'Unexpected mutation of "prop10" prop.',
+          line: 13
+        },
+        {
+          message: 'Unexpected mutation of "prop10" prop.',
+          line: 22
         }
       ]
     },
@@ -1036,6 +1051,10 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "b" prop.',
           line: 6
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 8
         },
         {
           message: 'Unexpected mutation of "a" prop.',

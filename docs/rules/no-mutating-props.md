@@ -128,7 +128,7 @@ This rule reports mutation of component props.
 }
 ```
 
-- "shallowOnly" (`boolean`) Enables mutating the value of a prop but leaving the reference the same. Default is `true`.
+- "shallowOnly" (`boolean`) Enables mutating the value of a prop but leaving the reference the same. Default is `false`.
 
 ### "shallowOnly": true
 
