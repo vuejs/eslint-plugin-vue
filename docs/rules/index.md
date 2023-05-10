@@ -240,6 +240,7 @@ For example:
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props | :bulb: | :hammer: |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  | :hammer: |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  | :hammer: |
+| [vue/no-root-v-if](./no-root-v-if.md) | disallow `v-if` directives on root element |  | :hammer: |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  | :hammer: |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
