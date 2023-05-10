@@ -9,9 +9,9 @@ description: disallow `v-if` directives on root element
 
 > disallow `v-if` directives on root element
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
-This rule checks whether every template root is valid.
+This rule reports template roots with `v-if`. Rendering of the whole component could be made conditional in the parent component (with a `v-if` there) instead.
 
 ## :book: Rule Details
 
