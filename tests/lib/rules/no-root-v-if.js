@@ -94,6 +94,10 @@ tester.run('no-root-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template> <div v-if="mode === \'a\'"></div><div v-if="mode === \'b\'"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div /><div v-if="foo" /></template>'
     }
   ],
   invalid: [
@@ -105,11 +109,6 @@ tester.run('no-root-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-if="foo"></div></template>',
-      errors: ['`v-if` should not be used on root element without `v-else`.']
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div /><div v-if="foo" /></template>',
       errors: ['`v-if` should not be used on root element without `v-else`.']
     }
   ]

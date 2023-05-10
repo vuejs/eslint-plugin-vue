@@ -2,13 +2,14 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-root-v-if
-description: enforce valid `v-if` directives on root element
+description: disallow `v-if` directives on root element
 ---
+
 # vue/no-root-v-if
 
-> enforce valid `v-if` directives on root element
+> disallow `v-if` directives on root element
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 This rule checks whether every template root is valid.
 
@@ -19,12 +20,9 @@ This rule reports the template root in the following cases:
 <eslint-code-block :rules="{'vue/no-root-v-if': ['error']}">
 
 ```vue
-<!--  `v-if` should not be used on root element without `v-else` -->
 <template>
   <div v-if="foo"></div>
 </template>
-
-<template><custom-component v-if="shouldShow" /></template>
 ```
 
 </eslint-code-block>
