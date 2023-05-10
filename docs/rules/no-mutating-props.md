@@ -22,6 +22,8 @@ This rule reports mutation of component props.
 <template>
   <div>
     <input v-model="value" @click="openModal">
+    <button @click="pushItem">Push Item</button>
+    <button @click="changeId">Change ID</button>
   </div>
 </template>
 <script>
@@ -30,11 +32,25 @@ This rule reports mutation of component props.
       value: {
         type: String,
         required: true
+      },
+      list: {
+        type: Array,
+        required: true
+      },
+      user: {
+        type: Object,
+        required: true
       }
     },
     methods: {
       openModal() {
         this.value = 'test'
+      },
+      pushItem() {
+        this.list.push(0)
+      },
+      changeId() {
+        this.user.id = 1
       }
     }
   }
@@ -50,6 +66,8 @@ This rule reports mutation of component props.
 <template>
   <div>
     <input :value="value" @input="$emit('input', $event.target.value)" @click="openModal">
+    <button @click="pushItem">Push Item</button>
+    <button @click="changeId">Change ID</button>
   </div>
 </template>
 <script>
@@ -58,11 +76,25 @@ This rule reports mutation of component props.
       value: {
         type: String,
         required: true
+      },
+      list: {
+        type: Array,
+        required: true
+      },
+      user: {
+        type: Object,
+        required: true
       }
     },
     methods: {
       openModal() {
         this.$emit('input', 'test')
+      },
+      pushItem() {
+        this.$emit('push', 0)
+      },
+      changeId() {
+        this.$emit('change-id', 1)
       }
     }
   }
@@ -88,7 +120,45 @@ This rule reports mutation of component props.
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-mutating-props": ["error", {
+    "shallowOnly": false
+  }]
+}
+```
+
+- "shallowOnly" (`boolean`) Enables mutating the value of a prop but leaving the reference the same. Default is `false`.
+
+### "shallowOnly": true
+
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error', {shallowOnly: true}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<template>
+  <div>
+    <input v-model="value.id" @click="openModal">
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    openModal() {
+      this.value.visible = true
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
