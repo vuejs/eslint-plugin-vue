@@ -948,6 +948,24 @@ ruleTester.run('no-mutating-props', rule, {
     {
       filename: 'test.vue',
       code: `
+        <script setup>
+          const props = defineProps()
+        </script>
+
+        <template>
+          <input v-model="props[foo]" >
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "[foo]" prop.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <input v-model="value">
           <input v-model="props.value">
@@ -1115,6 +1133,7 @@ ruleTester.run('no-mutating-props', rule, {
           <button @click="props.b.push(1)"/>
           <button @click="b.push(1)"/>
           <input v-model="props.a"/>
+          <input v-model="props.a.b"/>
         </template>
         <script setup>
           const props = defineProps({
@@ -1140,7 +1159,7 @@ ruleTester.run('no-mutating-props', rule, {
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 14
+          line: 15
         }
       ]
     }
