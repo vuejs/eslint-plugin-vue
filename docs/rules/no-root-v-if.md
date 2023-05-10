@@ -3,13 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-root-v-if
 description: disallow `v-if` directives on root element
+since: v9.12.0
 ---
-
 # vue/no-root-v-if
 
 > disallow `v-if` directives on root element
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule reports template roots with `v-if`. Rendering of the whole component could be made conditional in the parent component (with a `v-if` there) instead.
 
@@ -30,6 +28,10 @@ This rule reports the template root in the following cases:
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.12.0
 
 ## :mag: Implementation
 
