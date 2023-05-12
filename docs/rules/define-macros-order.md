@@ -25,7 +25,7 @@ This rule reports the `defineProps` and `defineEmits` compiler macros when they 
 }
 ```
 
-- `order` (`string[]`) ... The order of defineEmits and defineProps macros
+- `order` (`string[]`) ... The order of defineEmits and defineProps macros. You can also add `"defineOptions"` and `"defineSlots"`.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
@@ -61,6 +61,51 @@ defineProps(/* ... */)
 const bar = ref()
 defineProps(/* ... */)
 defineEmits(/* ... */)
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "order": ["defineOptions", "defineProps", "defineEmits", "defineSlots"] }` (default)
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script setup>
+defineOptions({/* ... */})
+defineProps(/* ... */)
+defineEmits(/* ... */)
+const slots = defineSlots()
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup>
+defineEmits(/* ... */)
+const slots = defineSlots()
+defineProps(/* ... */)
+defineOptions({/* ... */})
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup>
+const bar = ref()
+defineOptions({/* ... */})
+defineProps(/* ... */)
+defineEmits(/* ... */)
+const slots = defineSlots()
 </script>
 ```
 
