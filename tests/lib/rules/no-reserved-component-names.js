@@ -555,7 +555,25 @@ ruleTester.run('no-reserved-component-names', rule, {
         `,
       parserOptions,
       options: [{ disallowVueBuiltInComponents: true }]
-    }))
+    })),
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({}) </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({ ...name }) </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({ name: 'Foo' }) </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    }
   ],
 
   invalid: [
@@ -654,6 +672,21 @@ ruleTester.run('no-reserved-component-names', rule, {
           data: { name },
           type: 'Property',
           line: 3
+        }
+      ]
+    })),
+    ...invalidElements.map((name) => ({
+      filename: `${name}.vue`,
+      code: `<script setup> defineOptions({name: '${name}'}) </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          line: 1
         }
       ]
     })),
