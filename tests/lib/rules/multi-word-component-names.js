@@ -209,10 +209,18 @@ tester.run('multi-word-component-names', rule, {
       <template>
         <AppButton />
       </template>
-      
+
       <script setup lang="ts">
       import AppButton from "@/components/AppButton.vue";
       </script>`
+    },
+    {
+      filename: 'Single.vue',
+      code: `
+      <script setup>
+      defineOptions({name: 'MultiWord'})
+      </script>
+      `
     }
   ],
   invalid: [
@@ -331,6 +339,20 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "test" should always be multi-word.',
           line: 1
+        }
+      ]
+    },
+    {
+      filename: 'MultiWord.vue',
+      code: `
+      <script setup>
+      defineOptions({name: 'Single'})
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Component name "Single" should always be multi-word.',
+          line: 3
         }
       ]
     }
