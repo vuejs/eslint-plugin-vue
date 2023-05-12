@@ -584,6 +584,44 @@ tester.run('define-macros-order', rule, {
           line: 12
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** slots */
+          const slots = defineSlots()
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineOptions'),
+          line: 6
+        }
+      ]
     }
   ]
 })
