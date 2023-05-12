@@ -82,7 +82,7 @@ const slots = defineSlots()
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✗ BAD -->
@@ -96,7 +96,7 @@ defineOptions({/* ... */})
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✗ BAD -->
