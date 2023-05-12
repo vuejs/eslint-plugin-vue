@@ -156,13 +156,23 @@ export type ComponentUnknownEmit = {
   node: Expression | SpreadElement | null
 }
 
-export type ComponentTypeEmit = {
+export type ComponentTypeEmitCallSignature = {
   type: 'type'
   key: TSLiteralType
   emitName: string
   value: null
   node: TSCallSignatureDeclaration | TSFunctionType
 }
+export type ComponentTypeEmitPropertySignature = {
+  type: 'type'
+  key: Identifier | Literal
+  emitName: string
+  value: null
+  node: TSPropertySignature | TSMethodSignature
+}
+export type ComponentTypeEmit =
+  | ComponentTypeEmitCallSignature
+  | ComponentTypeEmitPropertySignature
 
 export type ComponentEmit =
   | ComponentArrayEmit
