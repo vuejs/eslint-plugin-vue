@@ -40,10 +40,6 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefinePropsExit?(node: CallExpression, props: ComponentProp[]): void
   onDefineEmitsEnter?(node: CallExpression, emits: ComponentEmit[]): void
   onDefineEmitsExit?(node: CallExpression, emits: ComponentEmit[]): void
-  onDefineOptionsEnter?(node: CallExpression): void
-  onDefineOptionsExit?(node: CallExpression): void
-  onDefineSlotsEnter?(node: CallExpression): void
-  onDefineSlotsExit?(node: CallExpression): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
@@ -167,7 +163,6 @@ export type ComponentTypeEmitPropertySignature = {
   type: 'type'
   key: Identifier | Literal
   emitName: string
-  value: null
   node: TSPropertySignature | TSMethodSignature
 }
 export type ComponentTypeEmit =
