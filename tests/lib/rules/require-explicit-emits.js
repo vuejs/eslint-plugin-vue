@@ -1927,8 +1927,7 @@ emits: {'foo': null}
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 5,
-          suggestions: []
+          line: 5
         }
       ]
     },
@@ -1948,8 +1947,7 @@ emits: {'foo': null}
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 6,
-          suggestions: []
+          line: 6
         }
       ]
     }
