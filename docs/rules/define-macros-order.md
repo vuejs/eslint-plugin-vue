@@ -68,7 +68,7 @@ defineEmits(/* ... */)
 
 ### `{ "order": ["defineOptions", "defineProps", "defineEmits", "defineSlots"] }` (default)
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
