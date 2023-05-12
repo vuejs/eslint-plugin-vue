@@ -86,6 +86,8 @@ export default {
       "model",
       ["props", "propsData"],
       "emits",
+      "slots",
+      "expose",
       "setup",
       "asyncData",
       "data",
