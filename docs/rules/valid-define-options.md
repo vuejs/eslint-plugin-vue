@@ -16,7 +16,7 @@ This rule checks whether `defineOptions` compiler macro is valid.
 
 This rule reports `defineOptions` compiler macros in the following cases:
 
-- `defineOptions` are referencing locally declared variables.
+- `defineOptions` is referencing locally declared variables.
 - `defineOptions` has been called multiple times.
 - Options are not defined in `defineOptions`.
 - `defineOptions` has type arguments.

@@ -17,7 +17,7 @@ This rule checks whether `defineProps` compiler macro is valid.
 
 This rule reports `defineProps` compiler macros in the following cases:
 
-- `defineProps` are referencing locally declared variables.
+- `defineProps` is referencing locally declared variables.
 - `defineProps` has both a literal type and an argument. e.g. `defineProps<{/*props*/}>({/*props*/})`
 - `defineProps` has been called multiple times.
 - Props are defined in both `defineProps` and `export default {}`.
