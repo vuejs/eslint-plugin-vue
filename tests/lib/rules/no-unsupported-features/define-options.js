@@ -12,7 +12,8 @@ const buildOptions = utils.optionsBuilder('define-options', '^3.2.0')
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2019
+    ecmaVersion: 2019,
+    sourceType: 'module'
   }
 })
 
@@ -44,9 +45,37 @@ tester.run('no-unsupported-features/define-options', rule, {
     {
       code: `
       <script setup>
-        defineOptions({})
+        defineOptions({ name: 'Foo' })
       </script>`,
       options: buildOptions(),
+      output: `
+      <script>
+export default { name: 'Foo' }
+</script>
+<script setup>
+
+      </script>`,
+      errors: [
+        {
+          message:
+            '`defineOptions()` macros are not supported until Vue.js "3.3.0".',
+          line: 3
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+        defineOptions({});
+      </script>`,
+      options: buildOptions(),
+      output: `
+      <script>
+export default {}
+</script>
+<script setup>
+
+      </script>`,
       errors: [
         {
           message:
