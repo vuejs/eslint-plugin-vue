@@ -29,6 +29,9 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.3.0+
+    - `"define-slots"` ... `defineSlots()` macro.
+    - `"define-options"` ... `defineOptions()` macro.
   - Vue.js 3.2.0+
     - `"v-memo"` ... [v-memo](https://vuejs.org/api/built-in-directives.html#v-memo) directive.
     - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
@@ -100,6 +103,8 @@ The `"ignores"` option accepts an array of the following strings.
 
 ## :books: Further Reading
 
+- [API - defineOptions()](https://vuejs.org/api/sfc-script-setup.html#defineoptions)
+- [API - defineSlots()](https://vuejs.org/api/sfc-script-setup.html#defineslots)
 - [API - v-memo](https://vuejs.org/api/built-in-directives.html#v-memo)
 - [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
