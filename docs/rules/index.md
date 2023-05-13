@@ -269,6 +269,7 @@ For example:
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
+| [vue/valid-define-options](./valid-define-options.md) | enforce valid `defineOptions` compiler macro |  | :warning: |
 
 </rules-table>
 

@@ -133,7 +133,7 @@ tester.run('valid-define-emits', rule, {
       `,
       errors: [
         {
-          message: '`defineEmits` are referencing locally declared variables.',
+          message: '`defineEmits` is referencing locally declared variables.',
           line: 5
         }
       ]
