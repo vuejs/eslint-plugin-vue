@@ -80,8 +80,7 @@ tester.run('valid-define-options', rule, {
       `,
       errors: [
         {
-          message:
-            '`defineOptions` is referencing locally declared variables.',
+          message: '`defineOptions` is referencing locally declared variables.',
           line: 4
         }
       ]
