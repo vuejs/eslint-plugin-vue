@@ -15,6 +15,8 @@ description: enforce use of `defineOptions` instead of default export.
 
 This rule aims to enforce use of `defineOptions` instead of default export in `<script setup>`.
 
+The [`defineOptions()`](https://vuejs.org/api/sfc-script-setup.html#defineoptions) macro was officially introduced in Vue 3.3.
+
 <eslint-code-block fix :rules="{'vue/prefer-define-options': ['error']}">
 
 ```vue
@@ -43,6 +45,10 @@ export default { name: 'Foo' }
 ## :wrench: Options
 
 Nothing.
+
+## :books: Further Reading
+
+- [API - defineOptions()](https://vuejs.org/api/sfc-script-setup.html#defineoptions)
 
 ## :mag: Implementation
 
