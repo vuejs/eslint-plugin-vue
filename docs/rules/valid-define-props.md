@@ -140,6 +140,7 @@ Nothing.
 
 - [vue/define-props-declaration](./define-props-declaration.md)
 - [vue/valid-define-emits](./valid-define-emits.md)
+- [vue/valid-define-options](./valid-define-options.md)
 
 ## :rocket: Version
 

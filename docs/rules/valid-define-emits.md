@@ -139,6 +139,7 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/define-emits-declaration](./define-emits-declaration.md)
+- [vue/valid-define-options](./valid-define-options.md)
 - [vue/valid-define-props](./valid-define-props.md)
 
 ## :rocket: Version
