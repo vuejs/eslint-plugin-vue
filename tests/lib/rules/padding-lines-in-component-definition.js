@@ -385,6 +385,19 @@ tester.run('padding-lines-in-component-definition', rule, {
         </script>
       `,
       options: ['always']
+    },
+    {
+      filename: 'MyComment.vue',
+      code: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: false }]
     }
   ],
   invalid: [
@@ -1233,6 +1246,33 @@ tester.run('padding-lines-in-component-definition', rule, {
         {
           message: 'Unexpected blank line before this definition.',
           line: 16
+        }
+      ]
+    },
+    {
+      filename: 'MyComment.vue',
+      code: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      output: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: false }],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 5
         }
       ]
     }
