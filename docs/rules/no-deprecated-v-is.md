@@ -42,7 +42,7 @@ Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-a
 ## :books: Further Reading
 
 - [Migration Guide - Custom Elements Interop](https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html#vue-prefix-for-in-dom-template-parsing-workarounds)
-- [API - v-is](https://vuejs.org/api/built-in-special-attributes.html#is)
+- [API - v-is (Recent)](https://github.com/vuejs/docs/blob/8b4f11a4e94d01c7f1c91a60ceaa5b89d6b6de9f/src/api/built-in-directives.md#v-is-)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 
 ## :rocket: Version

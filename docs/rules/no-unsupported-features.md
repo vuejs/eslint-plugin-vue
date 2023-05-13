@@ -29,6 +29,8 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
+  - Vue.js 3.3.0+
+    - `"generic-attribute"` ... [the `generic` attribute on the `<script>` tag](https://vuejs.org/api/sfc-script-setup.html#generics).
   - Vue.js 3.2.0+
     - `"v-memo"` ... [v-memo](https://vuejs.org/api/built-in-directives.html#v-memo) directive.
     - `"v-bind-prop-modifier-shorthand"` ... `v-bind` with `.prop` modifier shorthand.
@@ -100,8 +102,9 @@ The `"ignores"` option accepts an array of the following strings.
 
 ## :books: Further Reading
 
+- [API - Generics](https://vuejs.org/api/sfc-script-setup.html#generics)
 - [API - v-memo](https://vuejs.org/api/built-in-directives.html#v-memo)
-- [API - v-is](https://v3.vuejs.org/api/directives.html#v-is)
+- [API - v-is (Recent)](https://github.com/vuejs/docs/blob/8b4f11a4e94d01c7f1c91a60ceaa5b89d6b6de9f/src/api/built-in-directives.md#v-is-)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 - [Guide - Dynamic Arguments](https://vuejs.org/guide/essentials/template-syntax.html#dynamic-arguments)
 - [API - v-slot](https://vuejs.org/api/built-in-directives.html#v-slot)
