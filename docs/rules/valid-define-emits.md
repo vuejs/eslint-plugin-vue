@@ -17,7 +17,7 @@ This rule checks whether `defineEmits` compiler macro is valid.
 
 This rule reports `defineEmits` compiler macros in the following cases:
 
-- `defineEmits` are referencing locally declared variables.
+- `defineEmits` is referencing locally declared variables.
 - `defineEmits` has both a literal type and an argument. e.g. `defineEmits<(e: 'foo')=>void>(['bar'])`
 - `defineEmits` has been called multiple times.
 - Custom events are defined in both `defineEmits` and `export default {}`.
@@ -139,6 +139,7 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/define-emits-declaration](./define-emits-declaration.md)
+- [vue/valid-define-options](./valid-define-options.md)
 - [vue/valid-define-props](./valid-define-props.md)
 
 ## :rocket: Version
