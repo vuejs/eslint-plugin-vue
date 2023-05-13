@@ -101,6 +101,11 @@ tester.run('no-restricted-component-options', rule, {
       </script>
       `,
       options: [['foo', 'bar']]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({ name: 'Foo' }) </script>`,
+      options: ['Foo']
     }
   ],
   invalid: [
@@ -302,6 +307,17 @@ tester.run('no-restricted-component-options', rule, {
         {
           message: 'Using `foo.*` is not allowed.',
           line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({ Foo: 'Foo' }) </script>`,
+      options: ['Foo'],
+      errors: [
+        {
+          message: 'Using `Foo` is not allowed.',
+          line: 1
         }
       ]
     }
