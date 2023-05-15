@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-define-options
 description: enforce use of `defineOptions` instead of default export.
+since: v9.13.0
 ---
 # vue/prefer-define-options
 
 > enforce use of `defineOptions` instead of default export.
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -49,6 +49,10 @@ Nothing.
 ## :books: Further Reading
 
 - [API - defineOptions()](https://vuejs.org/api/sfc-script-setup.html#defineoptions)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.13.0
 
 ## :mag: Implementation
 

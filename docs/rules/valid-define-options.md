@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/valid-define-options
 description: enforce valid `defineOptions` compiler macro
+since: v9.13.0
 ---
 # vue/valid-define-options
 
 > enforce valid `defineOptions` compiler macro
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 This rule checks whether `defineOptions` compiler macro is valid.
 
@@ -112,6 +111,10 @@ Nothing.
 
 - [vue/valid-define-emits](./valid-define-emits.md)
 - [vue/valid-define-props](./valid-define-props.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.13.0
 
 ## :mag: Implementation
 
