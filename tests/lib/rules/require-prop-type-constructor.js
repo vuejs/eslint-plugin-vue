@@ -5,6 +5,9 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-prop-type-constructor')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
@@ -85,6 +88,14 @@ ruleTester.run('require-prop-type-constructor', rule, {
           props: ['name',,,]
         }
       `
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 

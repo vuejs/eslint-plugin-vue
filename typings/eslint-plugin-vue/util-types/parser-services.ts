@@ -1,6 +1,7 @@
 import * as VNODE from './node'
 import * as VAST from './ast'
 import * as eslint from 'eslint'
+import { ESNode, TSNode } from './ast'
 
 type TemplateListenerBase = {
   [T in keyof VAST.VNodeListenerMap]?: (node: VAST.VNodeListenerMap[T]) => void
@@ -27,6 +28,13 @@ export interface ParserServices {
     }
   ) => eslint.Rule.RuleListener
   getDocumentFragment?: () => VAST.VDocumentFragment | null
+  // for typescript-eslint/parser
+  esTreeNodeToTSNodeMap?: Map<
+    ESNode | TSNode | import('@typescript-eslint/types').TSESTree.Node,
+    import('typescript').Node
+  >
+  program?: import('typescript').Program
+  hasFullTypeInformation?: boolean
 }
 export namespace ParserServices {
   export interface TokenStore {

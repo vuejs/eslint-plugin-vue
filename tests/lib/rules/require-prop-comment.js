@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/require-prop-comment')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -57,10 +60,10 @@ tester.run('require-prop-comment', rule, {
       const goodProps = defineProps({
         /** JSDoc comment */
         a: Number,
-      
+
         /* block comment */
         b: Number,
-      
+
         // line comment
         c: Number,
       })
@@ -93,6 +96,14 @@ tester.run('require-prop-comment', rule, {
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -102,10 +113,10 @@ tester.run('require-prop-comment', rule, {
         props: {
           // line comment
           b: Number,
-      
+
           /* block comment */
           c: Number,
-      
+
           d: Number,
         }
       })
@@ -134,10 +145,10 @@ tester.run('require-prop-comment', rule, {
       const badProps = defineProps({
         /** JSDoc comment */
         b: Number,
-      
+
         // line comment
         c: Number,
-      
+
         d: Number,
       })
       </script>
@@ -167,10 +178,10 @@ tester.run('require-prop-comment', rule, {
       const badProps = defineProps({
         /** JSDoc comment */
         b: Number,
-      
+
         /* block comment */
         c: Number,
-      
+
         d: Number,
       })
       </script>
