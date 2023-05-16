@@ -119,6 +119,38 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         </script>
       `,
       errors: ['Set "inheritAttrs" to false.']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default { inheritAttrs: true }
+      </script>
+      <script setup>
+      </script>
+      <template><div v-bind="$attrs" /></template>
+      `,
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions({ inheritAttrs: true })
+      </script>
+      <template><div v-bind="$attrs" /></template>
+      `,
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 5
+        }
+      ]
     }
   ]
 })
