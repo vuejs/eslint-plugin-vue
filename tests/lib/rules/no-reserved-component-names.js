@@ -272,6 +272,8 @@ const invalidElements = [
   'Defs',
   'desc',
   'Desc',
+  'discard',
+  'Discard',
   'ellipse',
   'Ellipse',
   'feBlend',
