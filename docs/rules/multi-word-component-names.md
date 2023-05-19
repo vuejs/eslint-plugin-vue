@@ -169,6 +169,10 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-reserved-component-names](./no-reserved-component-names.md)
+
 ## :books: Further Reading
 
 - [Style guide - Multi-word component names](https://vuejs.org/style-guide/rules-essential.html#use-multi-word-component-names)
