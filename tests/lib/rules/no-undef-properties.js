@@ -1155,7 +1155,7 @@ tester.run('no-undef-properties', rule, {
     },
 
     {
-      // unknown type
+      // known type
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
