@@ -390,6 +390,32 @@ ruleTester.run('no-dupe-keys', rule, {
           },
         }
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineProps({
+          foo: String,
+        })
+        const bar = 0
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+        defineProps<{
+          foo: string;
+        }>();
+
+        const bar = 0
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     }
   ],
 
@@ -859,6 +885,85 @@ ruleTester.run('no-dupe-keys', rule, {
         {
           message: "Duplicated key 'foo'.",
           line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineProps({
+          foo: String,
+        })
+        const foo = 0
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        import { Foo } from './Foo.vue';
+        import baz from './baz';
+        
+        defineProps({
+          foo: String,
+          bar: String,
+          baz: String,
+        });
+
+        function foo() {
+          const baz = 'baz';
+        }
+        const bar = () => 'bar';
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: "Duplicated key 'baz'.",
+          line: 4
+        },
+        {
+          message: "Duplicated key 'foo'.",
+          line: 12
+        },
+        {
+          message: "Duplicated key 'bar'.",
+          line: 15
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{
+        foo: string;
+        bar: string;
+      }>();
+
+      const foo = 'foo';
+      const bar = 'bar';
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message: "Duplicated key 'foo'.",
+          line: 8
+        },
+        {
+          message: "Duplicated key 'bar'.",
+          line: 9
         }
       ]
     }
