@@ -535,6 +535,26 @@ tester.run('no-undef-properties', rule, {
         },
       };
       </script>`
+    },
+
+    {
+      // unknown type
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { defineProps } from 'vue';
+      import type { Props } from './types';
+
+      defineProps<Props>();
+
+      </script>
+
+      <template>
+        <div>{{ foo }}</div>
+      </template>`,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
 
