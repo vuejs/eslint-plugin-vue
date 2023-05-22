@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-undef-properties')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -542,15 +545,15 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
-      import { defineProps } from 'vue';
-      import type { Props } from './types';
+      import type { Props1 } from './test01';
 
-      defineProps<Props>();
+      defineProps<Props1>();
 
       </script>
 
       <template>
-        <div>{{ foo }}</div>
+      <div>{{ foo }}</div>
+      <div>{{ unknown }}</div>
       </template>`,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
@@ -1147,6 +1150,30 @@ tester.run('no-undef-properties', rule, {
           message: "'c' is not defined.",
           line: 3,
           column: 46
+        }
+      ]
+    },
+
+    {
+      // unknown type
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Props1 } from './test01';
+
+      defineProps<Props1>();
+
+      </script>
+
+      <template>
+      <div>{{ foo }}</div>
+      <div>{{ unknown }}</div>
+      </template>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: "'unknown' is not defined.",
+          line: 11
         }
       ]
     }
