@@ -20,6 +20,7 @@
     "preversion": "npm test && git add .",
     "version": "env-cmd -e version npm run update && npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
+    "update-resources": "node ./tools/update-resources.js",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs"
