@@ -1046,6 +1046,23 @@ ruleTester.run('no-dupe-keys', rule, {
           line: 9
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const { foo } = props
+      const bar = 42
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: "Duplicated key 'bar'.",
+          line: 5
+        }
+      ]
     }
   ]
 })
