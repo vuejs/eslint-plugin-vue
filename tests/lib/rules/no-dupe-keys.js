@@ -478,6 +478,24 @@ ruleTester.run('no-dupe-keys', rule, {
       </script>
       `,
       parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = withDefaults(
+        defineProps<{
+          foo?: string | number
+        }>(),
+        {
+          foo: "Foo",
+        }
+      );
+      const foo = props.foo
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     }
   ],
 
