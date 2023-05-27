@@ -416,6 +416,86 @@ ruleTester.run('no-dupe-keys', rule, {
       `,
       parser: require.resolve('vue-eslint-parser'),
       parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const { foo, bar } = props
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const foo = props.foo
+      const bar = props.bar
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRefs} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const { foo, bar } = toRefs(props)
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {toRef} from 'vue'
+      const props = defineProps(['foo', 'bar'])
+      const foo = toRef(props, 'foo')
+      const bar = toRef(props, 'bar')
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup></script>
+      const {foo,bar} = defineProps(['foo', 'bar'])
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup></script>
+      const {foo=42,bar='abc'} = defineProps(['foo', 'bar'])
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = withDefaults(
+        defineProps<{
+          foo?: string | number
+        }>(),
+        {
+          foo: "Foo",
+        }
+      );
+      const foo = props.foo
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     }
   ],
 
@@ -912,7 +992,7 @@ ruleTester.run('no-dupe-keys', rule, {
       <script setup>
         import { Foo } from './Foo.vue';
         import baz from './baz';
-        
+
         defineProps({
           foo: String,
           bar: String,
@@ -964,6 +1044,23 @@ ruleTester.run('no-dupe-keys', rule, {
         {
           message: "Duplicated key 'bar'.",
           line: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps(['foo', 'bar'])
+      const { foo } = props
+      const bar = 42
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: "Duplicated key 'bar'.",
+          line: 5
         }
       ]
     }
