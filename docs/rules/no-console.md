@@ -14,8 +14,6 @@ description: Disallow the use of `console` in `<template>`
 
 This rule is the same rule as core [no-console] rule but it applies to the expressions in `<template>`.
 
-</eslint-code-block>
-
 ## :books: Further Reading
 
 - [no-console]
