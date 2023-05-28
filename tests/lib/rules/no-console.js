@@ -23,7 +23,7 @@ tester.run('no-console', rule, {
       <template>
         <button @click="Console.log">button</button>
       </template>
-      `,
+      `
     },
     {
       filename: 'test.vue',
