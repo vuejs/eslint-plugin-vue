@@ -24,7 +24,6 @@ tester.run('no-console', rule, {
         <button @click="Console.log">button</button>
       </template>
       `,
-      options: [{ allow: ['log'] }]
     },
     {
       filename: 'test.vue',
