@@ -1,7 +1,7 @@
 name: Check for utils resources update
 on:
   schedule:
-    - cron: 0 0 * * 0
+    - cron: 0 0 * * 0 # At 00:00 on Sunday, see https://crontab.guru/#0_0_*_*_0
 
 jobs:
   check-for-resources-update:
