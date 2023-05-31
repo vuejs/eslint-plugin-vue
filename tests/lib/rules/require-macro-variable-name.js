@@ -291,6 +291,34 @@ tester.run('require-macro-variable-name', rule, {
         }
       ],
       options: [customOptions]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const slotsCustom = defineSlots({})
+        const attrsCustom = useAttrs({})
+      </script>
+      `,
+      errors: [
+        {
+          message: `The variable name of "useAttrs" must be "attrs".`,
+          line: 4,
+          column: 15,
+          suggestions: [
+            {
+              desc: `Change the variable name to "attrs".`,
+              output: `
+      <script setup>
+        const slotsCustom = defineSlots({})
+        const attrs = useAttrs({})
+      </script>
+      `
+            }
+          ]
+        }
+      ],
+      options: [{ defineSlots: 'slotsCustom' }]
     }
   ]
 })
