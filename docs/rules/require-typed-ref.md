@@ -2,7 +2,7 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-typed-ref
-description: xxx
+description: require `ref` and `shallowRef` functions to be strongly typed
 ---
 # vue/require-typed-ref
 
@@ -28,7 +28,7 @@ count.value = '50' // Should be a type error, but it is not
 
 const count = shallowRef()
 
-/* ✗ GOOD */
+/* ✓ GOOD */
 const count = ref<number>()
 const count = ref(0)
 const count: Ref<number | undefined> = ref()
@@ -41,3 +41,7 @@ const count: Ref<number | undefined> = ref()
 
 Nothing.
 
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-typed-ref.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-typed-ref.js)
