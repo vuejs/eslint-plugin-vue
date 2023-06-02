@@ -100,6 +100,38 @@ tester.run('require-typed-ref', rule, {
       filename: 'test.ts',
       code: `
         import { ref } from 'vue'
+        const count = ref(null)
+      `,
+      errors: [
+        {
+          messageId: 'noType',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 32
+        }
+      ]
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        const count = ref(undefined)
+      `,
+      errors: [
+        {
+          messageId: 'noType',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
         const count = ref(0)
       `,
       options: [{ requireExplicitType: true }],
