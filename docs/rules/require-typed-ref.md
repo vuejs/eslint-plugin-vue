@@ -47,6 +47,9 @@ const count: Ref<number | undefined> = ref()
 }
 ```
 
+- `requireExplicitType` ... If `true`, requires `ref` and `shallowRef` functions to have type specified, even if there is a argument. Requires to write `const count = ref<number>(0)`.
+    default `false`
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-typed-ref.js)
