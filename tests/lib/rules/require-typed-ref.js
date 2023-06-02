@@ -62,6 +62,22 @@ tester.run('require-typed-ref', rule, {
       `
     },
     {
+      filename: 'test.ts',
+      code: `
+      import { ref, defineComponent } from 'vue'
+      defineComponent({
+        setup() {
+          const count = ref<number>()
+          // ...
+          return {
+            count,
+            // ...
+          }
+        }
+      })
+      `
+    },
+    {
       filename: 'test.vue',
       parser: require.resolve('vue-eslint-parser'),
       code: `
@@ -216,6 +232,31 @@ tester.run('require-typed-ref', rule, {
           column: 25,
           endLine: 4,
           endColumn: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref, defineComponent } from 'vue'
+        defineComponent({
+          setup() {
+            const count = ref()
+            // ...
+            return {
+              count,
+              // ...
+            }
+          }
+        })
+      `,
+      errors: [
+        {
+          messageId: 'noType',
+          line: 5,
+          column: 27,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     }
