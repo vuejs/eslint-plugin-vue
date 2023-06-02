@@ -68,11 +68,7 @@ tester.run('require-typed-ref', rule, {
       defineComponent({
         setup() {
           const count = ref<number>()
-          // ...
-          return {
-            count,
-            // ...
-          }
+          return { count }
         }
       })
       `
@@ -242,11 +238,7 @@ tester.run('require-typed-ref', rule, {
         defineComponent({
           setup() {
             const count = ref()
-            // ...
-            return {
-              count,
-              // ...
-            }
+            return { count }
           }
         })
       `,
