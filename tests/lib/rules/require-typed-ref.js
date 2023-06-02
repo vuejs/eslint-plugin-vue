@@ -11,45 +11,75 @@ const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
 })
 
+// Note: Need to specify filename for each test,
+// as only TypeScript files are being checked
 tester.run('require-typed-ref', rule, {
-  valid: [
-    `
-      import { ref } from 'vue'
-      const count = ref(0)
-    `,
-    `
+  valid: [{
+    filename: 'test.ts',
+    code: `
       import { shallowRef } from 'vue'
       const count = shallowRef(0)
-    `,
     `
+  },
+  {
+    filename: 'test.ts',
+    code: `
       import { ref } from 'vue'
       const count = ref<number>()
-    `,
     `
+  },
+  {
+    filename: 'test.ts',
+    code: `
       import { ref } from 'vue'
       const count = ref<number>(0)
-    `,
     `
+  },
+  {
+    filename: 'test.ts',
+    code: `
       import { ref } from 'vue'
       const counter: Ref<number | undefined> = ref()
-    `,
     `
+  },
+  {
+    filename: 'test.ts',
+    code: `
       import { ref } from 'vue'
       const count = ref(0)
+    `
+  },
+  {
+    filename: 'test.ts',
+    code: `
+      import { ref } from 'vue'
+      function useCount() {
+        return {
+          count: ref<number>()
+        }
+      }
+    `
+  },
+  {
+    filename: 'test.vue',
+    parser: require.resolve('vue-eslint-parser'),
+    code: `
+      <script setup>
+        import { ref } from 'vue'
+        const count = ref()
+      </script>
+    `
+  },
+  {
+    filename: 'test.js',
+    code: `
+      import { ref } from 'vue'
+      const count = ref()
     `,
-    {
-      parser: require.resolve('vue-eslint-parser'),
-      filename: 'test.vue',
-      code: `
-        <script setup>
-          import { ref } from 'vue'
-          const count = ref()
-        </script>
-      `
-    }
-  ],
+  }],
   invalid: [
     {
+      filename: 'test.ts',
       code: `
         import { ref } from 'vue'
         const count = ref()
@@ -65,6 +95,7 @@ tester.run('require-typed-ref', rule, {
       ]
     },
     {
+      filename: 'test.ts',
       code: `
         import { shallowRef } from 'vue'
         const count = shallowRef()
@@ -80,6 +111,7 @@ tester.run('require-typed-ref', rule, {
       ]
     },
     {
+      filename: 'test.ts',
       code: `
         import { ref } from 'vue'
         function useCount() {
@@ -98,8 +130,28 @@ tester.run('require-typed-ref', rule, {
       ]
     },
     {
-      parser: require.resolve('vue-eslint-parser'),
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        function useCount() {
+          return {
+            count: ref()
+          }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'noType',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 25
+        }
+      ]
+    },
+    {
       filename: 'test.vue',
+      parser: require.resolve('vue-eslint-parser'),
       code: `
         <script setup lang="ts">
           import { ref } from 'vue'
