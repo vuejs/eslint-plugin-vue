@@ -14,69 +14,71 @@ const tester = new RuleTester({
 // Note: Need to specify filename for each test,
 // as only TypeScript files are being checked
 tester.run('require-typed-ref', rule, {
-  valid: [{
-    filename: 'test.ts',
-    code: `
-      import { shallowRef } from 'vue'
-      const count = shallowRef(0)
-    `
-  },
-  {
-    filename: 'test.ts',
-    code: `
-      import { ref } from 'vue'
-      const count = ref<number>()
-    `
-  },
-  {
-    filename: 'test.ts',
-    code: `
-      import { ref } from 'vue'
-      const count = ref<number>(0)
-    `
-  },
-  {
-    filename: 'test.ts',
-    code: `
-      import { ref } from 'vue'
-      const counter: Ref<number | undefined> = ref()
-    `
-  },
-  {
-    filename: 'test.ts',
-    code: `
-      import { ref } from 'vue'
-      const count = ref(0)
-    `
-  },
-  {
-    filename: 'test.ts',
-    code: `
-      import { ref } from 'vue'
-      function useCount() {
-        return {
-          count: ref<number>()
+  valid: [
+    {
+      filename: 'test.ts',
+      code: `
+        import { shallowRef } from 'vue'
+        const count = shallowRef(0)
+      `
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        const count = ref<number>()
+      `
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        const count = ref<number>(0)
+      `
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        const counter: Ref<number | undefined> = ref()
+      `
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        const count = ref(0)
+      `
+    },
+    {
+      filename: 'test.ts',
+      code: `
+        import { ref } from 'vue'
+        function useCount() {
+          return {
+            count: ref<number>()
+          }
         }
-      }
-    `
-  },
-  {
-    filename: 'test.vue',
-    parser: require.resolve('vue-eslint-parser'),
-    code: `
-      <script setup>
+      `
+    },
+    {
+      filename: 'test.vue',
+      parser: require.resolve('vue-eslint-parser'),
+      code: `
+        <script setup>
+          import { ref } from 'vue'
+          const count = ref()
+        </script>
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
         import { ref } from 'vue'
         const count = ref()
-      </script>
-    `
-  },
-  {
-    filename: 'test.js',
-    code: `
-      import { ref } from 'vue'
-      const count = ref()
-    `,
-  }],
+      `
+    }
+  ],
   invalid: [
     {
       filename: 'test.ts',
