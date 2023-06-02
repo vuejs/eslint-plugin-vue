@@ -39,7 +39,13 @@ const count: Ref<number | undefined> = ref()
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-typed-ref": ["error", {
+    "requireExplicitType": true
+  }]
+}
+```
 
 ## :mag: Implementation
 
