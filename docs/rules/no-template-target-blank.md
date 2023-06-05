@@ -9,6 +9,8 @@ since: v7.0.0
 
 > disallow target="_blank" attribute without rel="noopener noreferrer"
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule disallows using `target="_blank"` attribute without `rel="noopener noreferrer"` to avoid a security vulnerability([see here for more details](https://mathiasbynens.github.io/rel-noopener/)).

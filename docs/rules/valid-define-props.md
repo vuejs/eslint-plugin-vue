@@ -17,7 +17,7 @@ This rule checks whether `defineProps` compiler macro is valid.
 
 This rule reports `defineProps` compiler macros in the following cases:
 
-- `defineProps` are referencing locally declared variables.
+- `defineProps` is referencing locally declared variables.
 - `defineProps` has both a literal type and an argument. e.g. `defineProps<{/*props*/}>({/*props*/})`
 - `defineProps` has been called multiple times.
 - Props are defined in both `defineProps` and `export default {}`.
@@ -140,6 +140,7 @@ Nothing.
 
 - [vue/define-props-declaration](./define-props-declaration.md)
 - [vue/valid-define-emits](./valid-define-emits.md)
+- [vue/valid-define-options](./valid-define-options.md)
 
 ## :rocket: Version
 

@@ -28,4 +28,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/operator-linebreak.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/operator-linebreak.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/operator-linebreak)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/operator-linebreak)</sup>

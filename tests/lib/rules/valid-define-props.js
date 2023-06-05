@@ -136,7 +136,7 @@ tester.run('valid-define-props', rule, {
       `,
       errors: [
         {
-          message: '`defineProps` are referencing locally declared variables.',
+          message: '`defineProps` is referencing locally declared variables.',
           line: 5
         }
       ]

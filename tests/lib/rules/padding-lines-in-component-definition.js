@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/padding-lines-in-component-definition')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -385,6 +388,27 @@ tester.run('padding-lines-in-component-definition', rule, {
         </script>
       `,
       options: ['always']
+    },
+    {
+      filename: 'MyComment.vue',
+      code: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: false }]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -1233,6 +1257,33 @@ tester.run('padding-lines-in-component-definition', rule, {
         {
           message: 'Unexpected blank line before this definition.',
           line: 16
+        }
+      ]
+    },
+    {
+      filename: 'MyComment.vue',
+      code: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      output: `
+        <script setup>
+        defineOptions({
+            name: 'MyComment',
+
+            inheritAttrs: false,
+        })
+        </script>
+      `,
+      options: [{ betweenOptions: 'always', groupSingleLineProperties: false }],
+      errors: [
+        {
+          message: 'Expected blank line before this definition.',
+          line: 5
         }
       ]
     }

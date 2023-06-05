@@ -165,6 +165,19 @@ ruleTester.run('order-in-components', rule, {
         new Vue()
       `,
       parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      filename: 'example.vue',
+      code: `
+      <script setup>
+        defineOptions({
+          name: 'Foo',
+          inheritAttrs: true,
+        })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
     }
   ],
 
@@ -940,6 +953,34 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "props" property should be above the "setup" property on line 4.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+      <script setup>
+        defineOptions({
+          inheritAttrs: true,
+          name: 'Foo',
+        })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      output: `
+      <script setup>
+        defineOptions({
+          name: 'Foo',
+          inheritAttrs: true,
+        })
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "inheritAttrs" property on line 4.',
           line: 5
         }
       ]

@@ -241,8 +241,9 @@ For example:
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props | :bulb: | :hammer: |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  | :hammer: |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  | :hammer: |
+| [vue/no-root-v-if](./no-root-v-if.md) | disallow `v-if` directives on root element |  | :hammer: |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  | :hammer: |
-| [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" |  | :warning: |
+| [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
 | [vue/no-undef-components](./no-undef-components.md) | disallow use of undefined components in `<template>` |  | :hammer: |
 | [vue/no-undef-properties](./no-undef-properties.md) | disallow undefined properties |  | :hammer: |
@@ -255,12 +256,14 @@ For example:
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
 | [vue/padding-line-between-tags](./padding-line-between-tags.md) | require or disallow newlines between sibling tags in template | :wrench: | :lipstick: |
 | [vue/padding-lines-in-component-definition](./padding-lines-in-component-definition.md) | require or disallow padding lines in component definition | :wrench: | :lipstick: |
+| [vue/prefer-define-options](./prefer-define-options.md) | enforce use of `defineOptions` instead of default export. | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
+| [vue/require-macro-variable-name](./require-macro-variable-name.md) | require a certain macro variable name | :bulb: | :hammer: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
@@ -268,6 +271,7 @@ For example:
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
+| [vue/valid-define-options](./valid-define-options.md) | enforce valid `defineOptions` compiler macro |  | :warning: |
 
 </rules-table>
 
@@ -297,6 +301,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
 | [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
+| [vue/no-console](./no-console.md) | Disallow the use of `console` in `<template>` |  | :hammer: |
 | [vue/no-constant-condition](./no-constant-condition.md) | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens](./no-extra-parens.md) | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |

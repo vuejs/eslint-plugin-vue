@@ -367,9 +367,9 @@ describe('getComponentProps', () => {
 
     assert.equal(props.length, 5, 'it detects all props')
 
-    assert.strictEqual(props[0].key, null)
+    assert.strictEqual(props[0].key, undefined)
     assert.strictEqual(props[0].node.type, 'SpreadElement')
-    assert.strictEqual(props[0].value, null)
+    assert.strictEqual(props[0].value, undefined)
 
     assert.strictEqual(props[1].key.type, 'Identifier')
     assert.strictEqual(props[1].node.type, 'Property')

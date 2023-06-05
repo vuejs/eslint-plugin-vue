@@ -25,6 +25,7 @@ const content = `/*
 'use strict'
 
 module.exports = {
+  meta: require('./meta'),
   rules: {
     ${rules
       .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
