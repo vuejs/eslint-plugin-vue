@@ -234,6 +234,7 @@ For example:
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  | :warning: |
+| [vue/no-restricted-component-names](./no-restricted-component-names.md) | disallow specific component names | :bulb: | :hammer: |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  | :hammer: |
 | [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event | :bulb: | :hammer: |
 | [vue/no-restricted-html-elements](./no-restricted-html-elements.md) | disallow specific HTML elements |  | :hammer: |
