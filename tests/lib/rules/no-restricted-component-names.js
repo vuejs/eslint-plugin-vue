@@ -58,7 +58,7 @@ tester.run('no-restricted-component-names', rule, {
       options: ['Disallow', 'Disallow2'],
       errors: [
         {
-          message: "Using component name 'Disallow' is not allowed.",
+          message: 'Using component name `Disallow` is not allowed.',
           line: 4,
           column: 15
         }
@@ -76,7 +76,7 @@ tester.run('no-restricted-component-names', rule, {
       options: ['Disallow'],
       errors: [
         {
-          message: "Using component name 'Disallow' is not allowed.",
+          message: 'Using component name `Disallow` is not allowed.',
           line: 4,
           column: 15
         }
@@ -94,7 +94,7 @@ tester.run('no-restricted-component-names', rule, {
       options: ['Disallow'],
       errors: [
         {
-          message: "Using component name 'Disallow' is not allowed.",
+          message: 'Using component name `Disallow` is not allowed.',
           line: 4,
           column: 15
         }
@@ -112,7 +112,7 @@ tester.run('no-restricted-component-names', rule, {
       options: ['/^Foo(Bar|Baz)/'],
       errors: [
         {
-          message: "Using component name 'FooBar' is not allowed.",
+          message: 'Using component name `FooBar` is not allowed.',
           line: 4,
           column: 15
         }
@@ -138,7 +138,7 @@ tester.run('no-restricted-component-names', rule, {
           column: 15,
           suggestions: [
             {
-              desc: "Instead, change to 'Allow'",
+              desc: 'Instead, change to `Allow`',
               output: `
       <script setup>
       defineOptions({
@@ -165,12 +165,12 @@ tester.run('no-restricted-component-names', rule, {
       options: [{ name: 'Disallow', suggest: 'Allow' }],
       errors: [
         {
-          message: "Using component name 'Disallow' is not allowed.",
+          message: 'Using component name `Disallow` is not allowed.',
           line: 4,
           column: 15,
           suggestions: [
             {
-              desc: "Instead, change to 'Allow'",
+              desc: 'Instead, change to `Allow`',
               output: `
       <script setup>
       defineOptions({
@@ -215,7 +215,7 @@ tester.run('no-restricted-component-names', rule, {
       options: ['1'],
       errors: [
         {
-          message: "Using component name '1' is not allowed.",
+          message: 'Using component name `1` is not allowed.',
           line: 4,
           column: 15
         }

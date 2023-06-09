@@ -70,13 +70,7 @@ Alternatively, you can specify an object with a `name` property and an optional 
   }
   ```
 
-<eslint-code-block :rules="{'vue/no-restricted-component-names': ['error',
-{
-  "name": "Disallow",
-  "message": "Please don't use `Disallow` as a component name",
-  "suggest": "allow"
-}
-]}">
+<eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', { "name": "Disallow", "message": "Please don't use `Disallow` as a component name", "suggest": "allow"}]}">
 
 ```vue
 <!-- ✗ BAD -->
