@@ -59,18 +59,18 @@ Alternatively, you can specify an object with a `name` property and an optional 
       "error",
       {
         "name": "Disallow",
-        "message": "Please don't use `Disallow` as a component name",
+        "message": "Please do not use `Disallow` as a component name",
         "suggest": "allow"
       },
       {
         "name": "/^custom/",
-        "message": "Please don't use component names starting with 'custom'",
+        "message": "Please do not use component names starting with 'custom'"
       }
     ]
   }
   ```
 
-<eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', { "name": "Disallow", "message": "Please don't use `Disallow` as a component name", "suggest": "allow"}]}">
+<eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', { name: 'Disallow', message: 'Please do not use \'Disallow\' as a component name', suggest: 'allow'}]}">
 
 ```vue
 <!-- ✗ BAD -->
