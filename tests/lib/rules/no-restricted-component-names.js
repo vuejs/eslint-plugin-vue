@@ -138,7 +138,7 @@ tester.run('no-restricted-component-names', rule, {
           column: 15,
           suggestions: [
             {
-              desc: 'Instead, change to `Allow`',
+              desc: 'Instead, change to `Allow`.',
               output: `
       <script setup>
       defineOptions({
@@ -170,7 +170,7 @@ tester.run('no-restricted-component-names', rule, {
           column: 15,
           suggestions: [
             {
-              desc: 'Instead, change to `Allow`',
+              desc: 'Instead, change to `Allow`.',
               output: `
       <script setup>
       defineOptions({
