@@ -220,6 +220,43 @@ tester.run('no-restricted-component-names', rule, {
           column: 15
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions({
+        name: 'disallowed-component',
+      })
+      </script>
+      `,
+      options: ['DisallowedComponent'],
+      errors: [
+        {
+          message:
+            'Using component name `disallowed-component` is not allowed.',
+          line: 4,
+          column: 15
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions({
+        name: 'DisallowedComponent',
+      })
+      </script>
+      `,
+      options: ['disallowed-component'],
+      errors: [
+        {
+          message: 'Using component name `DisallowedComponent` is not allowed.',
+          line: 4,
+          column: 15
+        }
+      ]
     }
   ]
 })
