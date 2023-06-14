@@ -19,9 +19,9 @@ This rule enforces a maximum number of lines per block, in order to aid in maint
 This rule takes an object, where you can specify the maximum number of lines in each type of SFC block and customize the line counting behavior.
 The following properties can be specified for the object.
 
-- `script` ... Specify the maximum number of lines in &lt;script&gt; block. Won't enforce limitation if not specified.
-- `template` ... Specify the maximum number of lines in &lt;template&gt; block. Won't enforce limitation if not specified.
-- `style` ... Specify the maximum number of lines in &lt;style&gt; block. Won't enforce limitation if not specified.
+- `script` ... Specify the maximum number of lines in `<script>` block. Won't enforce limitation if not specified.
+- `template` ... Specify the maximum number of lines in `<template>` block. Won't enforce limitation if not specified.
+- `style` ... Specify the maximum number of lines in `<style>` block. Won't enforce limitation if not specified.
 - `skipBlankLines` ... Ignore lines made up purely of whitespaces.
 
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 2 }]}">
