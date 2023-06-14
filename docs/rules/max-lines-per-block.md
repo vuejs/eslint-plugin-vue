@@ -37,11 +37,12 @@ The following properties can be specified for the object.
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 1 }]}">
+<eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { script: 1, skipBlankLines: true }]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script>
+
   console.log(1)
 </script>
 ```
