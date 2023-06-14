@@ -27,7 +27,7 @@ The following properties can be specified for the object.
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 2 }]}">
 
 ```vue
-<!-- BAD -->
+<!-- ✗ BAD -->
 <template>
   <div>
     hi
@@ -40,7 +40,7 @@ The following properties can be specified for the object.
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 1 }]}">
 
 ```vue
-<!-- GOOD -->
+<!-- ✓ GOOD -->
 <script>
   console.log(1)
 </script>
