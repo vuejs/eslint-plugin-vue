@@ -2,11 +2,11 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/max-lines-per-block
-description: checking the maximum number of lines in Vue SFC blocks
+description: enforce maximum number of lines in Vue SFC blocks
 ---
 # vue/max-lines-per-block
 
-> checking the maximum number of lines in Vue SFC blocks
+> enforce maximum number of lines in Vue SFC blocks
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
@@ -45,7 +45,3 @@ The following properties can be specified for the object.
   console.log(1)
 </script>
 ```
-
-</eslint-code-block>
-
-
