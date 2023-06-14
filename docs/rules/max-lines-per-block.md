@@ -24,6 +24,8 @@ The following properties can be specified for the object.
 - `style` ... Specify the maximum number of lines in `<style>` block. Won't enforce limitation if not specified.
 - `skipBlankLines` ... Ignore lines made up purely of whitespaces.
 
+### `{ template: 2 }`
+
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 2 }]}">
 
 ```vue
@@ -37,6 +39,8 @@ The following properties can be specified for the object.
 
 </eslint-code-block>
 
+### `{ script: 1, skipBlankLines: true }`
+
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { script: 1, skipBlankLines: true }]}">
 
 ```vue
@@ -46,3 +50,5 @@ The following properties can be specified for the object.
   console.log(1)
 </script>
 ```
+
+</eslint-code-block>
