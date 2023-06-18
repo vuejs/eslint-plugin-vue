@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-typed-ref
 description: require `ref` and `shallowRef` functions to be strongly typed
+since: v9.15.0
 ---
 # vue/require-typed-ref
 
 > require `ref` and `shallowRef` functions to be strongly typed
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -40,6 +39,10 @@ const count: Ref<number | undefined> = ref()
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.15.0
 
 ## :mag: Implementation
 
