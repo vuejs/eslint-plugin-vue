@@ -53,6 +53,18 @@ tester.run('no-console', rule, {
       </template>
       `,
       options: [{ allow: ['log', 'warn', 'info'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button :foo="console.error">button</button>
+      </template>
+      <script setup>
+        console.log('test')
+      </script>
+      `,
+      options: [{ allow: ['error'] }]
     }
   ],
   invalid: [
