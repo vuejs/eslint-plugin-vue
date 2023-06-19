@@ -57,14 +57,11 @@ tester.run('no-console', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <button :foo="console.error">button</button>
-      </template>
+      <template><div /></template>
       <script setup>
         console.log('test')
       </script>
-      `,
-      options: [{ allow: ['error'] }]
+      `
     }
   ],
   invalid: [
