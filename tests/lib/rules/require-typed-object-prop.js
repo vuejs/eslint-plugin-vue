@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/require-type-on-object-prop')
+const rule = require('../../../lib/rules/require-typed-object-prop')
 
 const ruleTester = new RuleTester()
 
@@ -13,7 +13,7 @@ const expectedError = {
   message: 'Expected type annotation on object prop.'
 }
 
-ruleTester.run('require-type-on-object-prop', rule, {
+ruleTester.run('require-typed-object-prop', rule, {
   valid: [
     // empty
     {

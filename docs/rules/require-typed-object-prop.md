@@ -1,10 +1,10 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/require-type-on-object-prop
+title: vue/require-typed-object-prop
 description: enforce adding type declarations to object props
 ---
-# vue/require-type-on-object-prop
+# vue/require-typed-object-prop
 
 > enforce adding type declarations to object props
 
@@ -14,7 +14,7 @@ description: enforce adding type declarations to object props
 
 Prevent missing type declarations for non-primitive object props in TypeScript projects.
 
-<eslint-code-block :rules="{'vue/require-type-on-object-prop': ['error']}">
+<eslint-code-block :rules="{'vue/require-typed-object-prop': ['error']}">
 
 ```vue
 <script lang="ts">
@@ -50,5 +50,5 @@ Nothing
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-type-on-object-prop.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-type-on-object-prop.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-typed-object-prop.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-typed-object-prop.js)
