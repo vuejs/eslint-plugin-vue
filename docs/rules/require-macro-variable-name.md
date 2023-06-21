@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-macro-variable-name
 description: require a certain macro variable name
+since: v9.15.0
 ---
 # vue/require-macro-variable-name
 
 > require a certain macro variable name
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -77,6 +77,10 @@ const attrsCustom = useAttrs()
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.15.0
 
 ## :mag: Implementation
 
