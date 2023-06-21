@@ -36,17 +36,13 @@ export default {
 
 </eslint-code-block>
 
-### Options
+## :wrench: Options
 
 Nothing.
 
 ## :mute: When Not To Use It
 
 When you're not using TypeScript in the project.
-
-## :books: Further Reading
-
-Nothing
 
 ## :mag: Implementation
 
