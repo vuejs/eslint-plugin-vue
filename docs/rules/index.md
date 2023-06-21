@@ -221,6 +221,7 @@ For example:
 | [vue/html-comment-indent](./html-comment-indent.md) | enforce consistent indentation in HTML comments | :wrench: | :lipstick: |
 | [vue/match-component-file-name](./match-component-file-name.md) | require component name property to match its file name | :bulb: | :hammer: |
 | [vue/match-component-import-name](./match-component-import-name.md) | require the registered component name to match the imported component name |  | :warning: |
+| [vue/max-lines-per-block](./max-lines-per-block.md) | enforce maximum number of lines in Vue SFC blocks |  | :warning: |
 | [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: | :lipstick: |
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
@@ -234,6 +235,7 @@ For example:
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  | :warning: |
+| [vue/no-restricted-component-names](./no-restricted-component-names.md) | disallow specific component names | :bulb: | :hammer: |
 | [vue/no-restricted-component-options](./no-restricted-component-options.md) | disallow specific component option |  | :hammer: |
 | [vue/no-restricted-custom-event](./no-restricted-custom-event.md) | disallow specific custom event | :bulb: | :hammer: |
 | [vue/no-restricted-html-elements](./no-restricted-html-elements.md) | disallow specific HTML elements |  | :hammer: |
@@ -265,6 +267,7 @@ For example:
 | [vue/require-macro-variable-name](./require-macro-variable-name.md) | require a certain macro variable name | :bulb: | :hammer: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
+| [vue/require-typed-ref](./require-typed-ref.md) | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
