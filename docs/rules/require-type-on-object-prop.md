@@ -16,7 +16,8 @@ Prevent missing type declarations for non-primitive object props in TypeScript p
 
 <eslint-code-block :rules="{'vue/require-type-on-object-prop': ['error']}">
 
-```ts
+```vue
+<script lang="ts">
 export default {
   props: {
     prop: {
@@ -31,7 +32,7 @@ export default {
     }
   }
 }
-```
+</script>
 
 </eslint-code-block>
 
