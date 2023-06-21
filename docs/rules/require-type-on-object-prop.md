@@ -26,6 +26,7 @@ export default {
       
       // ✓ GOOD
       type: Object as PropType<Anything>,
+      type: Array as PropType<Anything[]>,
       type: String, // or any other primitive type
     }
   }

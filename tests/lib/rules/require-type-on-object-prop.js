@@ -146,6 +146,16 @@ ruleTester.run('require-type-on-object-prop', rule, {
       filename: 'test.vue',
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       code: `
+      export default {
+        props: { foo: Array as PropType<User[]> }
+      }
+      `,
+      parser: require.resolve('@typescript-eslint/parser')
+    },
+    {
+      filename: 'test.vue',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      code: `
       export default Vue.extend({
         props: { foo: Object as PropType<User> }
       });
@@ -216,6 +226,17 @@ ruleTester.run('require-type-on-object-prop', rule, {
       code: `
       <script setup lang="ts">
       defineProps({ foo: Object });
+      </script>
+      `,
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [expectedError]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: Array });
       </script>
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
