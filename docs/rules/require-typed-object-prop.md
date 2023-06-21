@@ -20,16 +20,14 @@ Prevent missing type declarations for non-primitive object props in TypeScript p
 <script lang="ts">
 export default {
   props: {
-    prop: {
-      // ✗ BAD
-      type: Object,
-      type: Array,
+    // ✗ BAD
+    bad1: Object,
+    bad2: { type: Array },
       
-      // ✓ GOOD
-      type: Object as PropType<Anything>,
-      type: Array as PropType<Anything[]>,
-      type: String, // or any other primitive type
-    }
+    // ✓ GOOD
+    good1: Object as PropType<Anything>,
+    good2: { type: Array as PropType<Anything[]> },
+    good3: [String, Boolean], // or any other primitive type
   }
 }
 </script>
