@@ -44,6 +44,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       `,
       parser: require.resolve('vue-eslint-parser')
     },
+    // array props
+    {
+      filename: 'test.vue',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      code: `
+      export default {
+        props: ['foo']
+      }
+      `
+    },
+    {
+      filename: 'test.vue',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      code: `
+      export default Vue.extend({
+        props: ['foo']
+      });
+      `
+    },
+    {
+      filename: 'test.vue',
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
+      code: `
+      <script setup lang="ts">
+      defineProps(['foo']);
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
     // primitive props
     {
       filename: 'test.vue',
@@ -218,6 +247,108 @@ ruleTester.run('require-typed-object-prop', rule, {
       </script>
       `,
       parser: require.resolve('vue-eslint-parser')
+    },
+    // any
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as any } });
+      </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+        export default {
+          props: {
+            foo: { type: Object as any }
+          }
+        };
+        </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+        export default Vue.extend({
+          props: {
+            foo: { type: Object as any }
+          }
+        });
+        </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    // unknown
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as unknown } });
+      </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+        export default {
+          props: {
+            foo: { type: Object as unknown }
+          }
+        };
+        </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script lang="ts">
+        export default Vue.extend({
+          props: {
+            foo: { type: Object as unknown }
+          }
+        });
+        </script>
+      `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      parser: require.resolve('vue-eslint-parser')
     }
   ],
   invalid: [
@@ -291,114 +422,6 @@ ruleTester.run('require-typed-object-prop', rule, {
       </script>
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    // any
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineProps({ foo: { type: Object as any } });
-      </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script lang="ts">
-        export default {
-          props: {
-            foo: { type: Object as any }
-          }
-        };
-        </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script lang="ts">
-        export default Vue.extend({
-          props: {
-            foo: { type: Object as any }
-          }
-        });
-        </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    // unknown
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineProps({ foo: { type: Object as unknown } });
-      </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script lang="ts">
-        export default {
-          props: {
-            foo: { type: Object as unknown }
-          }
-        };
-        </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script lang="ts">
-        export default Vue.extend({
-          props: {
-            foo: { type: Object as unknown }
-          }
-        });
-        </script>
-      `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       parser: require.resolve('vue-eslint-parser'),
       errors: [expectedError]
     }
