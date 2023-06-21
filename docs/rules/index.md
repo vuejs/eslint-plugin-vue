@@ -215,7 +215,6 @@ For example:
 | [vue/define-emits-declaration](./define-emits-declaration.md) | enforce declaration style of `defineEmits` |  | :hammer: |
 | [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench: | :lipstick: |
 | [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` |  | :hammer: |
-| [vue/require-type-on-object-prop](./require-type-on-object-prop.md) | enforce adding type declarations to object props |  | :hammer: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  | :hammer: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: | :lipstick: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: | :lipstick: |
@@ -268,6 +267,7 @@ For example:
 | [vue/require-macro-variable-name](./require-macro-variable-name.md) | require a certain macro variable name | :bulb: | :hammer: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
+| [vue/require-type-on-object-prop](./require-type-on-object-prop.md) | enforce adding type declarations to object props |  | :hammer: |
 | [vue/require-typed-ref](./require-typed-ref.md) | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
