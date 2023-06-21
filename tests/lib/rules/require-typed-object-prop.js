@@ -9,10 +9,6 @@ const rule = require('../../../lib/rules/require-typed-object-prop')
 
 const ruleTester = new RuleTester()
 
-const expectedError = {
-  message: 'Expected type annotation on object prop.'
-}
-
 ruleTester.run('require-typed-object-prop', rule, {
   valid: [
     // empty
@@ -361,7 +357,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 32,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: Object as PropType<any> });
+      </script>
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: Object as PropType<unknown> });
+      </script>
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -372,7 +396,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 31,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any[]' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: Array as PropType<any[]> });
+      </script>
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown[]' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: Array as PropType<unknown[]> });
+      </script>
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -382,7 +434,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 29,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      export default {
+        props: { foo: Object as PropType<any> }
+      }
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      export default {
+        props: { foo: Object as PropType<unknown> }
+      }
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -392,7 +472,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 29,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      export default Vue.extend({
+        props: { foo: Object as PropType<any> }
+      });
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      export default Vue.extend({
+        props: { foo: Object as PropType<unknown> }
+      });
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -402,7 +510,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       });
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 37,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      export default Vue.extend({
+        props: { foo: { type: Object as PropType<any> } }
+      });
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      export default Vue.extend({
+        props: { foo: { type: Object as PropType<unknown> } }
+      });
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -412,7 +548,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       }
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 37,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      export default {
+        props: { foo: { type: Object as PropType<any> } }
+      }
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      export default {
+        props: { foo: { type: Object as PropType<unknown> } }
+      }
+      `
+            }
+          ]
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -423,7 +587,35 @@ ruleTester.run('require-typed-object-prop', rule, {
       `,
       parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
-      errors: [expectedError]
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 40,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as PropType<any> } });
+      </script>
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      <script setup lang="ts">
+      defineProps({ foo: { type: Object as PropType<unknown> } });
+      </script>
+      `
+            }
+          ]
+        }
+      ]
     }
   ]
 })
