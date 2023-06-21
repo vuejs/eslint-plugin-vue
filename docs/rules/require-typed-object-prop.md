@@ -33,6 +33,7 @@ export default {
   }
 }
 </script>
+```
 
 </eslint-code-block>
 
