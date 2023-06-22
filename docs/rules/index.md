@@ -87,7 +87,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  | :three::two::hammer: |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: | :three::two::hammer: |
 | [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :three::two::warning: |
-| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  | :three::two::hammer: |
+| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
