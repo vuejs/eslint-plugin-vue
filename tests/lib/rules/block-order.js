@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const rule = require('../../../lib/rules/component-tags-order')
+const rule = require('../../../lib/rules/block-order')
 const RuleTester = require('eslint').RuleTester
 const assert = require('assert')
 const { ESLint } = require('../../eslint-compat')
@@ -18,7 +18,7 @@ const eslint = new ESLint({
     plugins: ['vue'],
     rules: {
       'vue/comment-directive': 'error',
-      'vue/component-tags-order': 'error'
+      'vue/block-order': 'error'
     }
   },
   useEslintrc: false,
@@ -30,7 +30,7 @@ const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser')
 })
 
-tester.run('component-tags-order', rule, {
+tester.run('block-order', rule, {
   valid: [
     // default
     '<script></script><template></template><style></style>',
@@ -478,7 +478,7 @@ tester.run('component-tags-order', rule, {
 describe('suppress reporting with eslint-disable-next-line', () => {
   it('do not report if <!-- eslint-disable-next-line -->', async () => {
     const code = `<style></style><template></template>
-    <!-- eslint-disable-next-line vue/component-tags-order -->
+    <!-- eslint-disable-next-line vue/block-order -->
     <script></script>`
     const [{ messages, output }] = await eslint.lintText(code, {
       filePath: 'test.vue'
@@ -488,7 +488,7 @@ describe('suppress reporting with eslint-disable-next-line', () => {
     assert.strictEqual(
       output,
       `<template></template><style></style>
-    <!-- eslint-disable-next-line vue/component-tags-order -->
+    <!-- eslint-disable-next-line vue/block-order -->
     <script></script>`
     )
   })
