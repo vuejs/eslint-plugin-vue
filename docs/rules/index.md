@@ -251,6 +251,7 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  | :hammer: |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  | :hammer: |
+| [vue/no-use-v-else-with-v-for](./no-use-v-else-with-v-for.md) | disallow using `v-else-if`/`v-else` on the same element as `v-for` |  | :hammer: |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: | :hammer: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: | :hammer: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |

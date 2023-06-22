@@ -88,6 +88,10 @@ There are two common cases where this can be tempting:
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-use-v-else-with-v-for](./no-use-v-else-with-v-for.md)
+
 ## :books: Further Reading
 
 - [Style guide - Avoid v-if with v-for](https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for)
