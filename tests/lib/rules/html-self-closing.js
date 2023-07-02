@@ -64,6 +64,9 @@ tester.run('html-self-closing', rule, {
     '<template><div a=">test</div></template>',
     '<template><div><!--test</div></template>',
 
+    // Empty top-level tags
+    '<template></template><script></script><docs></docs>',
+
     // https://github.com/vuejs/eslint-plugin-vue/issues/1403
     {
       code: `
