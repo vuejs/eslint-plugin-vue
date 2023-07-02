@@ -87,7 +87,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  | :three::two::hammer: |
 | [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: | :three::two::hammer: |
 | [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :three::two::warning: |
-| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow use v-if on the same element as v-for |  | :three::two::hammer: |
+| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
 | [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
@@ -251,6 +251,7 @@ For example:
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  | :hammer: |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  | :hammer: |
+| [vue/no-use-v-else-with-v-for](./no-use-v-else-with-v-for.md) | disallow using `v-else-if`/`v-else` on the same element as `v-for` |  | :hammer: |
 | [vue/no-useless-mustaches](./no-useless-mustaches.md) | disallow unnecessary mustache interpolations | :wrench: | :hammer: |
 | [vue/no-useless-v-bind](./no-useless-v-bind.md) | disallow unnecessary `v-bind` directives | :wrench: | :hammer: |
 | [vue/no-v-text](./no-v-text.md) | disallow use of v-text |  | :hammer: |
