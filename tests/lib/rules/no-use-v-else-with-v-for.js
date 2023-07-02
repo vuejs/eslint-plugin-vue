@@ -1,6 +1,3 @@
-/**
- * @author Yosuke Ota
- */
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
