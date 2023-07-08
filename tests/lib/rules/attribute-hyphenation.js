@@ -88,7 +88,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom MyProp="Bar"></custom></div></template>',
-      output: '<template><div><custom my-prop="Bar"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -115,8 +115,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom :MyProp="prop"></custom></div></template>',
-      output:
-        '<template><div><custom :my-prop="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -143,8 +142,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
-      output:
-        '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
@@ -157,8 +155,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><custom v-bind:MyProp="prop"></custom></div></template>',
-      output:
-        '<template><div><custom v-bind:my-prop="prop"></custom></div></template>',
+      output: null,
       options: ['always', { ignore: [] }],
       errors: [
         {
@@ -281,7 +278,7 @@ ruleTester.run('attribute-hyphenation', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><slot MyProp="Bar"></slot></div></template>',
-      output: '<template><div><slot my-prop="Bar"></slot></div></template>',
+      output: null,
       options: ['always'],
       errors: [
         {
