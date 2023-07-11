@@ -15,10 +15,7 @@ const VUE2_EMOJI = ':two:'
 
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
-  (rule) =>
-    rule.meta.docs.categories &&
-    !rule.meta.docs.extensionRule &&
-    !rule.meta.deprecated
+  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionRule
 )
 const uncategorizedRules = rules.filter(
   (rule) =>
