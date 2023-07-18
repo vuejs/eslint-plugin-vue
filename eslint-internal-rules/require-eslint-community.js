@@ -8,11 +8,11 @@ module.exports = {
       categories: ['Internal']
     },
     fixable: 'code',
+    schema: [],
     messages: {
       useCommunityPackageInstead:
         'Please use `@eslint-community/{{name}}` instead.'
-    },
-    schema: []
+    }
   },
 
   /** @param {import('eslint').Rule.RuleContext} context */
