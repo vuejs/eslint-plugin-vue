@@ -56,6 +56,9 @@ module.exports = [
         ...globals.mocha
       }
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: true
+    },
     rules: {
       'accessor-pairs': 2,
       camelcase: [2, { properties: 'never' }],
