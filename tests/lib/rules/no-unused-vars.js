@@ -94,7 +94,7 @@ tester.run('no-unused-vars', rule, {
           message: "'x' is defined but never used.",
           suggestions: [
             {
-              desc: 'Replace the x with _x',
+              desc: 'Replace `x` with `_x` to ignore the unused variable.',
               output:
                 '<template><div v-for="_x in items">{{value | x}}</div></template>'
             }
