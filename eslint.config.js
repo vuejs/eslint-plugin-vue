@@ -144,6 +144,7 @@ module.exports = [
       'prettier/prettier': 'error',
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
       'eslint-plugin/prefer-placeholders': 'error',
+      'eslint-plugin/test-case-property-ordering': 'error',
 
       'no-debugger': 'error',
       'no-console': 'error',
