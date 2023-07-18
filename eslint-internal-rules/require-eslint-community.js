@@ -2,6 +2,7 @@
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description: 'enforce use of the `@eslint-community/*` package',
       categories: ['Internal']

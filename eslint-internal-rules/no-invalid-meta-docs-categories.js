@@ -104,6 +104,7 @@ function checkMetaValidity(context, exportsNode) {
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description: 'enforce correct use of `meta` property in core rules',
       categories: ['Internal']
