@@ -49,6 +49,7 @@ module.exports = [
     files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
+      sourceType: 'commonjs',
       globals: {
         ...globals.es6,
         ...globals.node,
