@@ -16,23 +16,21 @@ const tester = new RuleTester({
 })
 tester.run('html-comment-indent', rule, {
   valid: [
-    {
-      code: `
-        <template>
-          <!-- comment
-            comment
-          -->
+    `
+      <template>
+        <!-- comment
+          comment
+        -->
+        <!--
+          comment
+          comment
+        -->
           <!--
             comment
             comment
           -->
-            <!--
-              comment
-              comment
-            -->
-        </template>
-        `
-    },
+      </template>
+    `,
     {
       code: `
         <template>
@@ -87,44 +85,38 @@ tester.run('html-comment-indent', rule, {
         `,
       options: [0]
     },
-    {
-      code: `
-        <template>
-          <!-- comment
-        \t
-            comment
-            \t
-            comment
+    `
+      <template>
+        <!-- comment
+      \t
+          comment
           \t
-          -->
-          <!--
+          comment
         \t
-          -->
-          <!--
-          -->
-        </template>
-        `
-    },
+        -->
+        <!--
+      \t
+        -->
+        <!--
+        -->
+      </template>
+    `,
 
     // IE conditional comments
-    {
-      code: `
-        <template>
-          <!--[if IE 8]>
-          <div>IE8 only</div>
-          <![endif]-->
-        </template>
-        `
-    },
-    {
-      code: `
-        <template>
-          <!--[if !IE]><!-->
-          <div>not IE only</div>
-          <!--<![endif]-->
-        </template>
-        `
-    }
+    `
+      <template>
+        <!--[if IE 8]>
+        <div>IE8 only</div>
+        <![endif]-->
+      </template>
+    `,
+    `
+      <template>
+        <!--[if !IE]><!-->
+        <div>not IE only</div>
+        <!--<![endif]-->
+      </template>
+    `
   ],
 
   invalid: [

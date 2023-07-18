@@ -41,14 +41,13 @@ tester.run('template-curly-spacing', rule, {
     },
 
     // CSS vars injection
-    {
-      code: `
+    `
       <style>
       .text {
         padding: v-bind(\`\${a}px\`)
       }
-      </style>`
-    }
+      </style>
+    `
   ],
   invalid: [
     {

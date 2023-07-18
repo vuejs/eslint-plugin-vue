@@ -151,17 +151,15 @@ tester.run('component-name-in-template-casing', rule, {
     },
 
     // built-in components (behave the same way as other components)
-    {
-      code: `
-        <template>
-          <component />
-          <suspense />
-          <teleport />
-          <client-only />
-          <keep-alive />
-        </template>
-      `
-    },
+    `
+      <template>
+        <component />
+        <suspense />
+        <teleport />
+        <client-only />
+        <keep-alive />
+      </template>
+    `,
 
     {
       filename: 'test.vue',

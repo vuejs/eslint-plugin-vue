@@ -15,36 +15,16 @@ const tester = new RuleTester({
 
 tester.run('no-unused-vars', rule, {
   valid: [
-    {
-      code: '<template><ol v-for="i in 5"><li>{{i}}</li></ol></template>'
-    },
-    {
-      code: '<template><ol v-for="i in 5"><li :prop="i"></li></ol></template>'
-    },
-    {
-      code: '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{j}}</comp></template>'
-    },
-    {
-      code: '<template><ol v-for="i in data"><li v-for="f in i">{{ f.bar.baz }}</li></ol></template>'
-    },
-    {
-      code: '<template><template scope="props">{{props}}</template></template>'
-    },
-    {
-      code: '<template><template scope="props"><span v-if="props"></span></template></template>'
-    },
-    {
-      code: '<template><div v-for="(item, key) in items" :key="key">{{item.name}}</div></template>'
-    },
-    {
-      code: '<template><div v-for="(v, i, c) in foo">{{c}}</div></template>'
-    },
-    {
-      code: '<template><div v-for="x in foo">{{value | f(x)}}</div></template>'
-    },
-    {
-      code: '<template><div v-for="x in foo" :[x]></div></template>'
-    },
+    '<template><ol v-for="i in 5"><li>{{i}}</li></ol></template>',
+    '<template><ol v-for="i in 5"><li :prop="i"></li></ol></template>',
+    '<template v-for="i in 5"><comp v-for="j in 10">{{i}}{{j}}</comp></template>',
+    '<template><ol v-for="i in data"><li v-for="f in i">{{ f.bar.baz }}</li></ol></template>',
+    '<template><template scope="props">{{props}}</template></template>',
+    '<template><template scope="props"><span v-if="props"></span></template></template>',
+    '<template><div v-for="(item, key) in items" :key="key">{{item.name}}</div></template>',
+    '<template><div v-for="(v, i, c) in foo">{{c}}</div></template>',
+    '<template><div v-for="x in foo">{{value | f(x)}}</div></template>',
+    '<template><div v-for="x in foo" :[x]></div></template>',
     {
       code: '<template><div v-for="_ in foo" ></div></template>',
       options: [{ ignorePattern: '^_' }]

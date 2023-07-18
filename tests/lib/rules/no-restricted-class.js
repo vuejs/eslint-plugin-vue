@@ -14,7 +14,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-restricted-class', rule, {
   valid: [
-    { code: `<template><div class="allowed">Content</div></template>` },
+    `<template><div class="allowed">Content</div></template>`,
     {
       code: `<template><div class="allowed"">Content</div></template>`,
       options: ['forbidden']

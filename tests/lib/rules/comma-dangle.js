@@ -38,12 +38,11 @@ tester.run('comma-dangle', rule, {
         }
       ]
     },
-    {
-      code: `
+    `
       <template>
         <button :[[a,b][1]]="a" ></button>
-      </template>`
-    },
+      </template>
+    `,
     {
       code: `
       <template>

@@ -14,23 +14,17 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('max-attributes-per-line', rule, {
   valid: [
-    {
-      code: `<template><component></component></template>`
-    },
-    {
-      code: `<template><component
+    `<template><component></component></template>`,
+    `<template><component
         name="John Doe"
         age="30"
         job="Vet"
-      ></component></template>`
-    },
-    {
-      code: `<template><component
+      ></component></template>`,
+    `<template><component
         name="John Doe"
         age="30"
       >
-      </component></template>`
-    },
+      </component></template>`,
     {
       code: `<template><component
         name="John Doe"
@@ -39,13 +33,11 @@ ruleTester.run('max-attributes-per-line', rule, {
       </template>`,
       options: [{ singleline: 1 }]
     },
-    {
-      code: `<template><component job="Vet"
+    `<template><component job="Vet"
         name="John Doe"
         age="30">
         </component>
       </template>`
-    }
   ],
 
   invalid: [

@@ -35,14 +35,13 @@ tester.run('comma-style', rule, {
         </template>`,
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }]
     },
-    {
-      code: `
-        <template>
-          <CustomButton v-slot="a,
-            b
-            ,c" />
-        </template>`
-    },
+    `
+      <template>
+        <CustomButton v-slot="a,
+          b
+          ,c" />
+      </template>
+    `,
     {
       code: `
         <template>

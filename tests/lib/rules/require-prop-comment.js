@@ -20,8 +20,7 @@ const tester = new RuleTester({
 
 tester.run('require-prop-comment', rule, {
   valid: [
-    {
-      code: `
+    `
       <script setup>
       export default defineComponent({
         props: {
@@ -30,8 +29,7 @@ tester.run('require-prop-comment', rule, {
         }
       })
       </script>
-      `
-    },
+    `,
     {
       code: `
       <script setup>
@@ -71,8 +69,7 @@ tester.run('require-prop-comment', rule, {
       `,
       options: [{ type: 'any' }]
     },
-    {
-      code: `
+    `
       <script lang="ts">
       export default defineComponent({
         props: {
@@ -81,8 +78,7 @@ tester.run('require-prop-comment', rule, {
         }
       })
       </script>
-      `
-    },
+    `,
     {
       code: `
       <script setup lang="ts">

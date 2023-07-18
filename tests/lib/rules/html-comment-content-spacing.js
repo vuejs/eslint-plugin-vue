@@ -16,13 +16,11 @@ const tester = new RuleTester({
 })
 tester.run('html-comment-content-spacing', rule, {
   valid: [
-    {
-      code: `
-        <template>
-          <!-- comment -->
-        </template>
-        `
-    },
+    `
+      <template>
+        <!-- comment -->
+      </template>
+    `,
     {
       code: `
         <template>
@@ -178,24 +176,20 @@ tester.run('html-comment-content-spacing', rule, {
     },
 
     // IE conditional comments
-    {
-      code: `
-        <template>
-          <!--[if IE 8]>
-          <div>IE8 only</div>
-          <![endif]-->
-        </template>
-        `
-    },
-    {
-      code: `
-        <template>
-          <!--[if !IE]><!-->
-          <div>not IE only</div>
-          <!--<![endif]-->
-        </template>
-        `
-    }
+    `
+      <template>
+        <!--[if IE 8]>
+        <div>IE8 only</div>
+        <![endif]-->
+      </template>
+    `,
+    `
+      <template>
+        <!--[if !IE]><!-->
+        <div>not IE only</div>
+        <!--<![endif]-->
+      </template>
+    `
   ],
 
   invalid: [

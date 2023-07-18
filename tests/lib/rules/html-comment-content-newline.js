@@ -16,17 +16,15 @@ const tester = new RuleTester({
 })
 tester.run('html-comment-content-newline', rule, {
   valid: [
-    {
-      code: `
-        <template>
-          <!-- comment -->
-          <!--
-            multiline
-            comment
-          -->
-        </template>
-        `
-    },
+    `
+      <template>
+        <!-- comment -->
+        <!--
+          multiline
+          comment
+        -->
+      </template>
+    `,
     {
       code: `
         <template>
@@ -216,24 +214,20 @@ tester.run('html-comment-content-newline', rule, {
     },
 
     // IE conditional comments
-    {
-      code: `
-        <template>
-          <!--[if IE 8]>
-          <div>IE8 only</div>
-          <![endif]-->
-        </template>
-        `
-    },
-    {
-      code: `
-        <template>
-          <!--[if !IE]><!-->
-          <div>not IE only</div>
-          <!--<![endif]-->
-        </template>
-        `
-    }
+    `
+      <template>
+        <!--[if IE 8]>
+        <div>IE8 only</div>
+        <![endif]-->
+      </template>
+    `,
+    `
+      <template>
+        <!--[if !IE]><!-->
+        <div>not IE only</div>
+        <!--<![endif]-->
+      </template>
+    `
   ],
 
   invalid: [
