@@ -79,12 +79,12 @@ tester.run('template-curly-spacing', rule, {
         <div :class="[\`foo-\${bar}\`]" />
       </template>
       `,
-      options: ['always'],
       output: `
       <template>
         <div :class="[\`foo-\${ bar }\`]" />
       </template>
       `,
+      options: ['always'],
       errors: [
         {
           message: "Expected space(s) after '${'.",

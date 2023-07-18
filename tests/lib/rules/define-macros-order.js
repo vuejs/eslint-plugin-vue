@@ -328,10 +328,10 @@ tester.run('define-macros-order', rule, {
           })
         </script>
       `,
+      options: optionsEmitsFirst,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: optionsEmitsFirst,
       errors: [
         {
           message: message('defineEmits'),
@@ -417,10 +417,10 @@ tester.run('define-macros-order', rule, {
           console.log('test3')
         </script>
       `,
+      options: optionsEmitsFirst,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: optionsEmitsFirst,
       errors: [
         {
           message: message('defineEmits'),

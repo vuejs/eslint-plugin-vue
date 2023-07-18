@@ -1975,14 +1975,14 @@ emits: {'foo': null}
       emit('baz')
       emit('qux')
       </script>`,
-      ...getTypeScriptFixtureTestOptions(),
       errors: [
         {
           message:
             'The "qux" event has been triggered but not declared on `defineEmits`.',
           line: 8
         }
-      ]
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })

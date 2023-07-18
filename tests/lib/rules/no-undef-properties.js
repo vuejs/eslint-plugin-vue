@@ -1169,13 +1169,13 @@ tester.run('no-undef-properties', rule, {
       <div>{{ foo }}</div>
       <div>{{ unknown }}</div>
       </template>`,
-      ...getTypeScriptFixtureTestOptions(),
       errors: [
         {
           message: "'unknown' is not defined.",
           line: 11
         }
-      ]
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })

@@ -372,7 +372,6 @@ content
           <div>singleline content</div>
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -380,6 +379,7 @@ singleline content
 </div>
         </template>
       `,
+      options: [{ ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
@@ -391,7 +391,6 @@ singleline content
           <tr><td>singleline</td><td>children</td></tr>
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <tr>
@@ -403,6 +402,7 @@ children
 </tr>
         </template>
       `,
+      options: [{ ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<tr>`), but no line breaks found.',
         'Expected 1 line break after opening tag (`<td>`), but no line breaks found.',
@@ -418,7 +418,6 @@ children
           <div><!-- singleline comment --></div>
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
@@ -426,6 +425,7 @@ children
 </div>
         </template>
       `,
+      options: [{ ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
@@ -437,7 +437,6 @@ children
           <div   >   singleline element   </div   >
         </template>
       `,
-      options: [{ ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div   >
@@ -445,6 +444,7 @@ singleline element
 </div   >
         </template>
       `,
+      options: [{ ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
@@ -456,13 +456,13 @@ singleline element
           <div></div>
         </template>
       `,
-      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
@@ -473,13 +473,13 @@ singleline element
           <div>    </div>
         </template>
       `,
-      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       output: `
         <template>
           <div>
 </div>
         </template>
       `,
+      options: [{ ignoreWhenEmpty: false, ignoreWhenNoAttributes: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]

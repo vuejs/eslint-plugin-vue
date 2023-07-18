@@ -49,10 +49,10 @@ tester.run('define-emits-declaration', rule, {
         }>()
         </script>
        `,
+      options: ['type-based'],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
-      },
-      options: ['type-based']
+      }
     },
     {
       filename: 'test.vue',
@@ -118,13 +118,13 @@ tester.run('define-emits-declaration', rule, {
        const emit = defineEmits(['change', 'update'])
        </script>
        `,
+      options: ['type-based'],
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
           line: 3
         }
-      ],
-      options: ['type-based']
+      ]
     },
     {
       filename: 'test.vue',
@@ -136,6 +136,7 @@ tester.run('define-emits-declaration', rule, {
         }>()
         </script>
        `,
+      options: ['runtime'],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
@@ -144,8 +145,7 @@ tester.run('define-emits-declaration', rule, {
           message: 'Use runtime declaration instead of type-based declaration.',
           line: 3
         }
-      ],
-      options: ['runtime']
+      ]
     }
   ]
 })

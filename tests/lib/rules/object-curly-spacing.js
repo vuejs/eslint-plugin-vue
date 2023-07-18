@@ -63,20 +63,20 @@ tester.run('object-curly-spacing', rule, {
     },
     {
       code: '<template><div :attr="{ a: 1}" /></template>',
-      options: ['never'],
       output: '<template><div :attr="{a: 1}" /></template>',
+      options: ['never'],
       errors: ["There should be no space after '{'."]
     },
     {
       code: '<template><div :attr="{a: 1 }" /></template>',
-      options: ['never'],
       output: '<template><div :attr="{a: 1}" /></template>',
+      options: ['never'],
       errors: ["There should be no space before '}'."]
     },
     {
       code: '<template><div :attr="{ a: 1 }" /></template>',
-      options: ['never'],
       output: '<template><div :attr="{a: 1}" /></template>',
+      options: ['never'],
       errors: [
         "There should be no space after '{'.",
         "There should be no space before '}'."
@@ -84,20 +84,20 @@ tester.run('object-curly-spacing', rule, {
     },
     {
       code: '<template><div :attr="{ a: 1}" /></template>',
-      options: ['always'],
       output: '<template><div :attr="{ a: 1 }" /></template>',
+      options: ['always'],
       errors: ["A space is required before '}'."]
     },
     {
       code: '<template><div :attr="{a: 1 }" /></template>',
-      options: ['always'],
       output: '<template><div :attr="{ a: 1 }" /></template>',
+      options: ['always'],
       errors: ["A space is required after '{'."]
     },
     {
       code: '<template><div :attr="{a: 1}" /></template>',
-      options: ['always'],
       output: '<template><div :attr="{ a: 1 }" /></template>',
+      options: ['always'],
       errors: [
         "A space is required after '{'.",
         "A space is required before '}'."
@@ -105,8 +105,8 @@ tester.run('object-curly-spacing', rule, {
     },
     {
       code: '<template><div :[{a:1}]="{a:1}" /></template>',
-      options: ['always'],
       output: '<template><div :[{a:1}]="{ a:1 }" /></template>',
+      options: ['always'],
       errors: [
         "A space is required after '{'.",
         "A space is required before '}'."
@@ -119,18 +119,18 @@ tester.run('object-curly-spacing', rule, {
           Hello World
         </div>
       </template>`,
-      options: [
-        'never',
-        {
-          objectsInObjects: true
-        }
-      ],
       output: `
       <template>
         <div v-bind="{foo: {bar: 'baz'} }">
           Hello World
         </div>
       </template>`,
+      options: [
+        'never',
+        {
+          objectsInObjects: true
+        }
+      ],
       errors: [
         "There should be no space after '{'.",
         "There should be no space after '{'.",
@@ -145,13 +145,13 @@ tester.run('object-curly-spacing', rule, {
           Hello World
         </div>
       </template>`,
-      options: ['never'],
       output: `
       <template>
         <div v-bind="{foo: {bar: 'baz'}}">
           Hello World
         </div>
       </template>`,
+      options: ['never'],
       errors: [
         "There should be no space after '{'.",
         "There should be no space after '{'.",

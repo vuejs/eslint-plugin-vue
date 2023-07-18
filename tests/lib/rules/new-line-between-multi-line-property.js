@@ -280,7 +280,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
     // test set insertLine and minLineOfMultilineProperty to 5
     {
       filename: 'test.vue',
-      options: [{ minLineOfMultilineProperty: 5 }],
       code: `
       <script>
       export default {
@@ -320,6 +319,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       }
       </script>
       `,
+      options: [{ minLineOfMultilineProperty: 5 }],
       errors: [
         {
           message:
@@ -331,7 +331,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
     // test js comments
     {
       filename: 'test.vue',
-      options: [{ minLineOfMultilineProperty: 5 }],
       code: `
       <script>
       export default {
@@ -373,6 +372,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       }
       </script>
       `,
+      options: [{ minLineOfMultilineProperty: 5 }],
       errors: [
         {
           message:
@@ -384,7 +384,6 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
     // test js doc
     {
       filename: 'test.vue',
-      options: [],
       code: `
       <script>
       export default {
@@ -436,6 +435,7 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
       }
       </script>
       `,
+      options: [],
       errors: [
         {
           message:

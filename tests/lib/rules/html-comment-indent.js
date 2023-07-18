@@ -232,7 +232,6 @@ tester.run('html-comment-indent', rule, {
            -->
         </template>
         `,
-      options: ['tab'],
       output: `
         <template>
           <!-- comment
@@ -248,6 +247,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: ['tab'],
       errors: [
         {
           message: 'Expected relative indentation of 1 tab but found 0 tabs.',
@@ -318,7 +318,6 @@ tester.run('html-comment-indent', rule, {
           -->
         </template>
         `,
-      options: [4],
       output: `
         <template>
           <!-- comment
@@ -334,6 +333,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: [4],
       errors: [
         {
           message:
@@ -407,7 +407,6 @@ tester.run('html-comment-indent', rule, {
           -->
         </template>
         `,
-      options: [0],
       output: `
         <template>
           <!--
@@ -423,6 +422,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: [0],
       errors: [
         {
           message:

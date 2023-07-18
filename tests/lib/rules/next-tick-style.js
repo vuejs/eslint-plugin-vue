@@ -40,7 +40,6 @@ tester.run('next-tick-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['promise'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -52,11 +51,11 @@ tester.run('next-tick-style', rule, {
           await Vue.nextTick(); callback();
           await nt(); callback();
         }
-      }</script>`
+      }</script>`,
+      options: ['promise']
     },
     {
       filename: 'test.vue',
-      options: ['callback'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         mounted() {
@@ -68,13 +67,13 @@ tester.run('next-tick-style', rule, {
           Vue.nextTick(callback);
           nt(callback);
         }
-      }</script>`
+      }</script>`,
+      options: ['callback']
     },
 
     // https://github.com/vuejs/eslint-plugin-vue/pull/1400#discussion_r550937977
     {
       filename: 'test.vue',
-      options: ['promise'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         mounted() {
@@ -86,11 +85,11 @@ tester.run('next-tick-style', rule, {
           foo.then(Vue.nextTick, catchHandler);
           foo.then(this.$nextTick, catchHandler);
         }
-      }</script>`
+      }</script>`,
+      options: ['promise']
     },
     {
       filename: 'test.vue',
-      options: ['callback'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         mounted() {
@@ -102,7 +101,8 @@ tester.run('next-tick-style', rule, {
           foo.then(Vue.nextTick, catchHandler);
           foo.then(this.$nextTick, catchHandler);
         }
-      }</script>`
+      }</script>`,
+      options: ['callback']
     }
   ],
   invalid: [
@@ -173,7 +173,6 @@ tester.run('next-tick-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['promise'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         mounted() {
@@ -198,6 +197,7 @@ tester.run('next-tick-style', rule, {
           nt().then(callback);
         }
       }</script>`,
+      options: ['promise'],
       errors: [
         {
           message:
@@ -239,7 +239,6 @@ tester.run('next-tick-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['callback'],
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -253,6 +252,7 @@ tester.run('next-tick-style', rule, {
         }
       }</script>`,
       output: null,
+      options: ['callback'],
       errors: [
         {
           message:

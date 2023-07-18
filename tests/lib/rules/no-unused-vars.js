@@ -108,6 +108,7 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><div v-for="x in items">{{value | x}}</div></template>',
+      options: [{ ignorePattern: '^_' }],
       errors: [
         {
           message: "'x' is defined but never used.",
@@ -119,8 +120,7 @@ tester.run('no-unused-vars', rule, {
             }
           ]
         }
-      ],
-      options: [{ ignorePattern: '^_' }]
+      ]
     },
     {
       code: '<template><div v-for="x in items">{{value}}</div></template>',
@@ -129,13 +129,13 @@ tester.run('no-unused-vars', rule, {
     },
     {
       code: '<template><span slot-scope="props"></span></template>',
-      errors: ["'props' is defined but never used."],
-      options: [{ ignorePattern: '^ignore' }]
+      options: [{ ignorePattern: '^ignore' }],
+      errors: ["'props' is defined but never used."]
     },
     {
       code: '<template><span><template scope="props"></template></span></template>',
-      errors: ["'props' is defined but never used."],
-      options: [{ ignorePattern: '^ignore' }]
+      options: [{ ignorePattern: '^ignore' }],
+      errors: ["'props' is defined but never used."]
     },
     {
       code: '<template><div v-for="_i in foo" ></div></template>',

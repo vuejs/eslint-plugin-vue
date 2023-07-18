@@ -69,9 +69,6 @@ tester.run('valid-define-emits', rule, {
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1656
       filename: 'test.vue',
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       code: `
       <script setup lang="ts">
       import type { PropType } from 'vue';
@@ -86,13 +83,13 @@ tester.run('valid-define-emits', rule, {
         myProp: (x: X) => true,
       });
       </script>
-      `
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       code: `
       <script setup lang="ts">
       import type { PropType } from 'vue';
@@ -108,7 +105,10 @@ tester.run('valid-define-emits', rule, {
         myProp: (x: typeof str) => true,
       });
       </script>
-      `
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',

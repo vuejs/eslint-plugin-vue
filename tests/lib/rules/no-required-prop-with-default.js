@@ -196,7 +196,6 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      options: [{ autofix: true }],
       output: `
         <script setup lang="ts">
           interface TestPropType {
@@ -211,6 +210,7 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
+      options: [{ autofix: true }],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
@@ -237,7 +237,6 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      options: [{ autofix: true }],
       output: `
         <script setup lang="ts">
           interface TestPropType {
@@ -252,6 +251,7 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
+      options: [{ autofix: true }],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
@@ -647,7 +647,6 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      options: [{ autofix: true }],
       output: `
         <script setup lang="ts">
           interface TestPropType {
@@ -662,6 +661,7 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
+      options: [{ autofix: true }],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },

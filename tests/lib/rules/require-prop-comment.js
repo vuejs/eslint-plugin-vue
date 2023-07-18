@@ -265,16 +265,16 @@ tester.run('require-prop-comment', rule, {
       const props = defineProps<PropType>()
       </script>
       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
       errors: [
         {
           line: 4,
           column: 9,
           message: 'The "a" property should have a JSDoc comment.'
         }
-      ],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      }
+      ]
     }
   ]
 })

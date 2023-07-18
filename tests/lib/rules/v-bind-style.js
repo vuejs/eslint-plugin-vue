@@ -67,44 +67,44 @@ tester.run('v-bind-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['shorthand'],
       code: '<template><div v-bind:foo="foo"></div></template>',
       output: '<template><div :foo="foo"></div></template>',
+      options: ['shorthand'],
       errors: ["Unexpected 'v-bind' before ':'."]
     },
     {
       filename: 'test.vue',
-      options: ['longform'],
       code: '<template><div :foo="foo"></div></template>',
       output: '<template><div v-bind:foo="foo"></div></template>',
+      options: ['longform'],
       errors: ["Expected 'v-bind' before ':'."]
     },
     {
       filename: 'test.vue',
-      options: ['longform'],
       code: '<template><div .foo="foo"></div></template>',
       output: '<template><div v-bind:foo.prop="foo"></div></template>',
+      options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
     },
     {
       filename: 'test.vue',
-      options: ['longform'],
       code: '<template><div .foo.sync="foo"></div></template>',
       output: '<template><div v-bind:foo.prop.sync="foo"></div></template>',
+      options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
     },
     {
       filename: 'test.vue',
-      options: ['longform'],
       code: '<template><div .foo.prop="foo"></div></template>',
       output: '<template><div v-bind:foo.prop="foo"></div></template>',
+      options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
     },
     {
       filename: 'test.vue',
-      options: ['longform'],
       code: '<template><div .foo.sync.prop="foo"></div></template>',
       output: '<template><div v-bind:foo.sync.prop="foo"></div></template>',
+      options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
     }
   ]
