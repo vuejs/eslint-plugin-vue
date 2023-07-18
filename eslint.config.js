@@ -49,11 +49,15 @@ module.exports = [
     files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
+      sourceType: 'commonjs',
       globals: {
         ...globals.es6,
         ...globals.node,
         ...globals.mocha
       }
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: true
     },
     rules: {
       'accessor-pairs': 2,
