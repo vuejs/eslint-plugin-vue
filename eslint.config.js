@@ -145,6 +145,7 @@ module.exports = [
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
       'eslint-plugin/prefer-placeholders': 'error',
       'eslint-plugin/test-case-property-ordering': 'error',
+      'eslint-plugin/test-case-shorthand-strings': 'error',
 
       'no-debugger': 'error',
       'no-console': 'error',
