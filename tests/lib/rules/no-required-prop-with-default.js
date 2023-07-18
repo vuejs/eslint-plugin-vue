@@ -868,19 +868,7 @@ tester.run('no-required-prop-with-default', rule, {
         })
         </script>
       `,
-      output: `
-        <script>
-        import { defineComponent } from 'vue'
-        export default defineComponent({
-          props: {
-            name: {
-              required: true,
-              default: 'Hello'
-            }
-          }
-        })
-        </script>
-      `,
+      output: null,
       errors: [
         {
           message: 'Prop "name" should be optional.',
