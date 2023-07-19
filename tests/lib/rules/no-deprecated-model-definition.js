@@ -27,7 +27,6 @@ tester.run('no-deprecated-model-definition', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ allowVue3Compat: true }],
       code: `
         <script>
         export default {
@@ -37,11 +36,11 @@ tester.run('no-deprecated-model-definition', rule, {
           }
         }
         </script>
-      `
+      `,
+      options: [{ allowVue3Compat: true }]
     },
     {
       filename: 'test.vue',
-      options: [{ allowVue3Compat: true }],
       code: `
         <script>
         export default defineComponent({
@@ -51,7 +50,8 @@ tester.run('no-deprecated-model-definition', rule, {
           }
         })
         </script>
-      `
+      `,
+      options: [{ allowVue3Compat: true }]
     }
   ],
   invalid: [
@@ -121,7 +121,6 @@ tester.run('no-deprecated-model-definition', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ allowVue3Compat: true }],
       code: `
         <script>
         export default {
@@ -131,6 +130,7 @@ tester.run('no-deprecated-model-definition', rule, {
         }
         </script>
       `,
+      options: [{ allowVue3Compat: true }],
       errors: [
         {
           message: '`model` definition is deprecated.',
@@ -143,7 +143,6 @@ tester.run('no-deprecated-model-definition', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ allowVue3Compat: true }],
       code: `
         <script>
         export default Vue.extend({
@@ -153,6 +152,7 @@ tester.run('no-deprecated-model-definition', rule, {
         })
         </script>
       `,
+      options: [{ allowVue3Compat: true }],
       errors: [
         {
           message: '`model` definition is deprecated.',
@@ -165,7 +165,6 @@ tester.run('no-deprecated-model-definition', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ allowVue3Compat: true }],
       code: `
         <script>
         export default defineComponent({
@@ -176,6 +175,7 @@ tester.run('no-deprecated-model-definition', rule, {
         })
         </script>
       `,
+      options: [{ allowVue3Compat: true }],
       errors: [
         {
           message: '`model` definition is deprecated.',
