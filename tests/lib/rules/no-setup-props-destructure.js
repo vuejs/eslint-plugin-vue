@@ -600,6 +600,66 @@ tester.run('no-setup-props-destructure', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const newProps = ref({ count: props.count })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counts = [props.count]
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counter = { count: props.count }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counters = [{ count: [props.count] }]
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
     }
   ]
 })
