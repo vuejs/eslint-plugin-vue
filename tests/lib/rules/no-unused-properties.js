@@ -1651,9 +1651,6 @@ tester.run('no-unused-properties', rule, {
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1643
       filename: 'test.vue',
-      parserOptions: {
-        parser: '@typescript-eslint/parser'
-      },
       code: `
       <template>
         <span v-for="(item, index) of pages" :key="index" @click="changePage(item)">
@@ -1708,7 +1705,10 @@ tester.run('no-unused-properties', rule, {
 
       <style lang="scss" scoped>
       //
-      </style>`
+      </style>`,
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      }
     },
 
     // Vue2 functional component
@@ -2975,13 +2975,13 @@ tester.run('no-unused-properties', rule, {
       <template>
       {{ foo }}{{ bar }}
       </template>`,
-      ...getTypeScriptFixtureTestOptions(),
       errors: [
         {
           message: "'baz' of property found, but never used.",
           line: 4
         }
-      ]
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })

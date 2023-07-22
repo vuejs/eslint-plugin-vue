@@ -27,11 +27,11 @@ tester.run('block-lang', rule, {
       code: '<i18n></i18n><i18n lang="json"></i18n>',
       options: [{ i18n: { lang: 'json', allowNoLang: true } }]
     },
-    {
-      code: `<template></template>
+    `
+      <template></template>
       <script></script>
-      <style></style>`
-    }
+      <style></style>
+    `
   ],
   invalid: [
     {

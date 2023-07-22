@@ -68,7 +68,7 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
     {
       filename: 'test.vue',
       code: "<template><MyComponent v-bind.sync='bar'/></template>",
-      output: "<template><MyComponent v-bind.sync='bar'/></template>",
+      output: null,
       errors: [
         "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
       ]
@@ -76,7 +76,7 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync.unknown="foo" /></template>',
-      output: '<template><MyComponent :foo.sync.unknown="foo" /></template>',
+      output: null,
       errors: [
         "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
       ]
@@ -84,8 +84,7 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent :[dynamicArg].sync.unknown="foo" /></template>',
-      output:
-        '<template><MyComponent :[dynamicArg].sync.unknown="foo" /></template>',
+      output: null,
       errors: [
         "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
       ]

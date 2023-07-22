@@ -62,6 +62,7 @@ tester.run('html-end-tags', rule, {
 
     // https://github.com/vuejs/eslint-plugin-vue/issues/1403
     {
+      filename: 'test.vue',
       code: `
       <template>
         <div>
@@ -72,8 +73,7 @@ tester.run('html-end-tags', rule, {
           </p>
         </div>
       </template>
-      `,
-      filename: 'test.vue'
+      `
     }
   ],
   invalid: [

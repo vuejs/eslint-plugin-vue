@@ -27,7 +27,7 @@ module.exports = [
   },
   ...eslintrc.plugins('eslint-plugin', 'prettier', 'unicorn'),
   ...eslintrc.extends(
-    'plugin:eslint-plugin/recommended',
+    'plugin:eslint-plugin/all',
     'prettier',
     'plugin:node-dependencies/recommended',
     'plugin:jsonc/recommended-with-jsonc',
@@ -143,8 +143,6 @@ module.exports = [
 
       'prettier/prettier': 'error',
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
-      'eslint-plugin/prefer-placeholders': 'error',
-      'eslint-plugin/consistent-output': 'error',
 
       'no-debugger': 'error',
       'no-console': 'error',
@@ -199,21 +197,18 @@ module.exports = [
   {
     files: ['lib/rules/*.js'],
     rules: {
-      'eslint-plugin/no-deprecated-context-methods': 'error',
-      'eslint-plugin/no-only-tests': 'error',
-      'eslint-plugin/prefer-object-rule': 'error',
-      'eslint-plugin/require-meta-docs-description': 'error',
       'eslint-plugin/require-meta-docs-url': [
         'error',
-        {
-          pattern: `https://eslint.vuejs.org/rules/{{name}}.html`
-        }
+        { pattern: 'https://eslint.vuejs.org/rules/{{name}}.html' }
       ],
-      'eslint-plugin/require-meta-has-suggestions': 'error',
-      'eslint-plugin/require-meta-schema': 'error',
-      'eslint-plugin/require-meta-type': 'error',
       'internal/no-invalid-meta': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
+    }
+  },
+  {
+    files: ['eslint-internal-rules/*.js'],
+    rules: {
+      'eslint-plugin/require-meta-docs-url': 'off'
     }
   },
   {

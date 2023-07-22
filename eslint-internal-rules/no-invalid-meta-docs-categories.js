@@ -56,7 +56,7 @@ function checkMetaValidity(context, exportsNode) {
   if (!categories) {
     context.report({
       node: metaDocs,
-      message: 'Rule is missing a meta.docs.categories property.',
+      messageId: 'missingCategories',
       fix(fixer) {
         const category = getPropertyFromObject('category', metaDocs.value)
         if (!category) {
@@ -98,18 +98,27 @@ function checkMetaValidity(context, exportsNode) {
       categories.value.name === 'undefined'
     )
   ) {
-    context.report(categories.value, 'meta.docs.categories must be an array.')
+    context.report({
+      node: categories.value,
+      messageId: 'categoriesMustBeArray'
+    })
   }
 }
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description: 'enforce correct use of `meta` property in core rules',
       categories: ['Internal']
     },
     fixable: 'code',
-    schema: []
+    schema: [],
+    messages: {
+      missingCategories: 'Rule is missing a meta.docs.categories property.',
+      // eslint-disable-next-line eslint-plugin/report-message-format
+      categoriesMustBeArray: 'meta.docs.categories must be an array.'
+    }
   },
 
   create(context) {

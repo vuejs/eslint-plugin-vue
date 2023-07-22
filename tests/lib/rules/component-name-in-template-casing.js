@@ -19,6 +19,7 @@ tester.run('component-name-in-template-casing', rule, {
   valid: [
     // default
     {
+      filename: 'test.vue',
       code: `
         <template>
           <!-- ✓ GOOD -->
@@ -33,8 +34,7 @@ tester.run('component-name-in-template-casing', rule, {
           }
         }
         </script>
-      `,
-      filename: 'test.vue'
+      `
     },
 
     // element types test
@@ -126,6 +126,7 @@ tester.run('component-name-in-template-casing', rule, {
     },
     // regexp ignores
     {
+      filename: 'test.vue',
       code: `
         <template>
           <global-button />
@@ -133,7 +134,6 @@ tester.run('component-name-in-template-casing', rule, {
           <global-grid />
         </template>
       `,
-      filename: 'test.vue',
       options: [
         'PascalCase',
         { registeredComponentsOnly: false, ignores: ['/^global/'] }
@@ -151,25 +151,23 @@ tester.run('component-name-in-template-casing', rule, {
     },
 
     // built-in components (behave the same way as other components)
-    {
-      code: `
-        <template>
-          <component />
-          <suspense />
-          <teleport />
-          <client-only />
-          <keep-alive />
-        </template>
-      `
-    },
+    `
+      <template>
+        <component />
+        <suspense />
+        <teleport />
+        <client-only />
+        <keep-alive />
+      </template>
+    `,
 
     {
+      filename: 'test.vue',
       code: `
         <template><div/></template>
         <script setup>const Div = 0</script>
       `,
-      options: ['PascalCase'],
-      filename: 'test.vue'
+      options: ['PascalCase']
     },
 
     // globals
@@ -234,6 +232,7 @@ tester.run('component-name-in-template-casing', rule, {
   ],
   invalid: [
     {
+      filename: 'test.vue',
       code: `
         <template>
           <!-- ✗ BAD -->
@@ -249,7 +248,6 @@ tester.run('component-name-in-template-casing', rule, {
         }
         </script>
       `,
-      filename: 'test.vue',
       output: `
         <template>
           <!-- ✗ BAD -->
@@ -290,6 +288,7 @@ tester.run('component-name-in-template-casing', rule, {
       ]
     },
     {
+      filename: 'test.vue',
       code: `
         <template>
           <!-- ✗ BAD -->
@@ -305,8 +304,6 @@ tester.run('component-name-in-template-casing', rule, {
         }
         </script>
       `,
-      filename: 'test.vue',
-      options: ['kebab-case'],
       output: `
         <template>
           <!-- ✗ BAD -->
@@ -322,6 +319,7 @@ tester.run('component-name-in-template-casing', rule, {
         }
         </script>
       `,
+      options: ['kebab-case'],
       errors: [
         {
           message: 'Component name "CoolComponent" is not kebab-case.',
@@ -338,6 +336,7 @@ tester.run('component-name-in-template-casing', rule, {
       ]
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <svg>
@@ -350,8 +349,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <svg>
@@ -364,9 +361,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component id="id">
@@ -379,8 +378,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent id="id">
@@ -393,9 +390,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component :is="componentName">
@@ -408,8 +407,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent :is="componentName">
@@ -422,9 +419,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component id="id"/>
@@ -435,8 +434,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent id="id"/>
@@ -447,9 +444,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <TheComponent id="id">
@@ -462,8 +461,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['kebab-case'],
       output: `
       <template>
         <the-component id="id">
@@ -476,6 +473,7 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
@@ -484,15 +482,16 @@ tester.run('component-name-in-template-casing', rule, {
         <TheComponent id="id"/>
       </template>
       `,
-      options: ['kebab-case', { registeredComponentsOnly: false }],
       output: `
       <template>
         <the-component id="id"/>
       </template>
       `,
+      options: ['kebab-case', { registeredComponentsOnly: false }],
       errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component
@@ -504,8 +503,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent
@@ -517,9 +514,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component/>
@@ -530,8 +529,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
@@ -542,9 +539,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component></the-component>
@@ -555,8 +554,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent>
@@ -567,9 +564,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <theComponent/>
@@ -580,8 +579,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
@@ -592,9 +589,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "theComponent" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <theComponent/>
@@ -605,8 +604,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['kebab-case'],
       output: `
       <template>
         <the-component/>
@@ -617,9 +614,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: ['Component name "theComponent" is not kebab-case.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <The-component/>
@@ -630,8 +629,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent/>
@@ -642,9 +639,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "The-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <The-component/>
@@ -655,8 +654,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['kebab-case'],
       output: `
       <template>
         <the-component/>
@@ -667,6 +664,7 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['kebab-case'],
       errors: ['Component name "The-component" is not kebab-case.']
     },
     {
@@ -675,15 +673,16 @@ tester.run('component-name-in-template-casing', rule, {
         <Thecomponent/>
       </template>
       `,
-      options: ['kebab-case', { registeredComponentsOnly: false }],
       output: `
       <template>
         <thecomponent/>
       </template>
       `,
+      options: ['kebab-case', { registeredComponentsOnly: false }],
       errors: ['Component name "Thecomponent" is not kebab-case.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component></the-component  >
@@ -694,8 +693,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent  >
@@ -706,9 +703,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component></the-component
@@ -720,8 +719,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent
@@ -733,9 +730,11 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
+      filename: 'test.vue',
       code: `
       <template>
         <the-component></the-component end-tag-attr="attr" >
@@ -746,8 +745,6 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
-      filename: 'test.vue',
-      options: ['PascalCase'],
       output: `
       <template>
         <TheComponent></TheComponent end-tag-attr="attr" >
@@ -758,6 +755,7 @@ tester.run('component-name-in-template-casing', rule, {
       }
       </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
 
@@ -886,7 +884,6 @@ tester.run('component-name-in-template-casing', rule, {
           import TheComponent from '@/components/theComponent.vue'
         </script>
       `,
-      options: ['PascalCase'],
       output: `
         <template>
           <TheComponent />
@@ -895,6 +892,7 @@ tester.run('component-name-in-template-casing', rule, {
           import TheComponent from '@/components/theComponent.vue'
         </script>
       `,
+      options: ['PascalCase'],
       errors: ['Component name "the-component" is not PascalCase.']
     },
     {
@@ -906,7 +904,6 @@ tester.run('component-name-in-template-casing', rule, {
           import TheComponent from '@/components/theComponent.vue'
         </script>
       `,
-      options: ['kebab-case'],
       output: `
         <template>
           <the-component />
@@ -915,6 +912,7 @@ tester.run('component-name-in-template-casing', rule, {
           import TheComponent from '@/components/theComponent.vue'
         </script>
       `,
+      options: ['kebab-case'],
       errors: ['Component name "TheComponent" is not kebab-case.']
     },
     {
@@ -923,12 +921,12 @@ tester.run('component-name-in-template-casing', rule, {
           <router-view />
         </template>
       `,
-      options: ['PascalCase', { globals: ['RouterView'] }],
       output: `
         <template>
           <RouterView />
         </template>
       `,
+      options: ['PascalCase', { globals: ['RouterView'] }],
       errors: [
         {
           message: 'Component name "router-view" is not PascalCase.',
@@ -943,12 +941,12 @@ tester.run('component-name-in-template-casing', rule, {
           <RouterView />
         </template>
       `,
-      options: ['kebab-case', { globals: ['RouterView'] }],
       output: `
         <template>
           <router-view />
         </template>
       `,
+      options: ['kebab-case', { globals: ['RouterView'] }],
       errors: [
         {
           message: 'Component name "RouterView" is not kebab-case.',
@@ -963,12 +961,12 @@ tester.run('component-name-in-template-casing', rule, {
           <RouterView />
         </template>
       `,
-      options: ['kebab-case', { globals: ['router-view'] }],
       output: `
         <template>
           <router-view />
         </template>
       `,
+      options: ['kebab-case', { globals: ['router-view'] }],
       errors: [
         {
           message: 'Component name "RouterView" is not kebab-case.',

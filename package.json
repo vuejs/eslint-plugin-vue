@@ -76,7 +76,7 @@
     "esbuild": "^0.15.15",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-eslint-plugin": "^3.5.3",
+    "eslint-plugin-eslint-plugin": "~5.1.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsonc": "^2.2.1",
     "eslint-plugin-node-dependencies": ">=0.5.0 <1.0.0",

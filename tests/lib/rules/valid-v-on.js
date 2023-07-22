@@ -140,14 +140,14 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @keydown.bar.aaa="foo"></div></template>',
-      errors: ["'v-on' directives don't support the modifier 'aaa'."],
-      options: [{ modifiers: ['bar'] }]
+      options: [{ modifiers: ['bar'] }],
+      errors: ["'v-on' directives don't support the modifier 'aaa'."]
     },
     {
       filename: 'test.vue',
       code: '<template><div @keydown.bar.aaa="foo"></div></template>',
-      errors: ["'v-on' directives don't support the modifier 'bar'."],
-      options: [{ modifiers: ['aaa'] }]
+      options: [{ modifiers: ['aaa'] }],
+      errors: ["'v-on' directives don't support the modifier 'bar'."]
     },
     {
       filename: 'test.vue',

@@ -1075,33 +1075,33 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
     {
       filename: 'test.vue',
       code: `<template><div> 41 cols </div></template>`,
-      errors: ['This line has a length of 41. Maximum allowed is 40.'],
-      options: [40]
+      options: [40],
+      errors: ['This line has a length of 41. Maximum allowed is 40.']
     },
     {
       filename: 'test.vue',
       code: `<template><div> 41 cols </div></template>`,
-      errors: ['This line has a length of 41. Maximum allowed is 40.'],
-      options: [{ code: 40 }]
+      options: [{ code: 40 }],
+      errors: ['This line has a length of 41. Maximum allowed is 40.']
     },
     // tabWidth
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
-      errors: ['This line has a length of 45. Maximum allowed is 40.'],
-      options: [40, 4]
+      options: [40, 4],
+      errors: ['This line has a length of 45. Maximum allowed is 40.']
     },
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
-      errors: ['This line has a length of 45. Maximum allowed is 40.'],
-      options: [{ code: 40, tabWidth: 4 }]
+      options: [{ code: 40, tabWidth: 4 }],
+      errors: ['This line has a length of 45. Maximum allowed is 40.']
     },
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
-      errors: ['This line has a length of 44. Maximum allowed is 40.'],
-      options: [{ code: 40, tabWidth: 3 }]
+      options: [{ code: 40, tabWidth: 3 }],
+      errors: ['This line has a length of 44. Maximum allowed is 40.']
     },
     // comments
     {
@@ -1122,6 +1122,7 @@ var a;  // 41 cols comment                      *
 */
 </script>
 `,
+      options: [{ comments: 40 }],
       errors: [
         {
           message:
@@ -1148,8 +1149,7 @@ var a;  // 41 cols comment                      *
             'This line has a comment length of 41. Maximum allowed is 40.',
           line: 13
         }
-      ],
-      options: [{ comments: 40 }]
+      ]
     },
     // .js
     {
@@ -1159,6 +1159,7 @@ var a = '81 columns                                                            '
 var b = \`81 columns                                                            \`;
 /* 81 columns                                                                  */
       `,
+      options: [],
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
@@ -1172,8 +1173,7 @@ var b = \`81 columns                                                            
           message: 'This line has a length of 81. Maximum allowed is 80.',
           line: 4
         }
-      ],
-      options: []
+      ]
     },
     {
       filename: 'test.js',
@@ -1182,6 +1182,7 @@ var a = '81 columns          ignoreStrings                                     '
 var b = \`81 columns                                                            \`;
 /* 81 columns                                                                  */
       `,
+      options: [{ ignoreStrings: true }],
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
@@ -1191,8 +1192,7 @@ var b = \`81 columns                                                            
           message: 'This line has a length of 81. Maximum allowed is 80.',
           line: 4
         }
-      ],
-      options: [{ ignoreStrings: true }]
+      ]
     },
     {
       filename: 'test.js',
@@ -1201,6 +1201,7 @@ var a = '81 columns                                                            '
 var b = \`81 columns                                                            \`;
 /* 81 columns                                                                  */
       `,
+      options: [{ ignoreComments: true }],
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
@@ -1210,8 +1211,7 @@ var b = \`81 columns                                                            
           message: 'This line has a length of 81. Maximum allowed is 80.',
           line: 3
         }
-      ],
-      options: [{ ignoreComments: true }]
+      ]
     },
     // only script comment
     {
@@ -1222,6 +1222,7 @@ var b = \`81 columns                                                            
 41 cols                                 *
 */
 `,
+      options: [{ comments: 40 }],
       errors: [
         {
           message:
@@ -1238,8 +1239,7 @@ var b = \`81 columns                                                            
             'This line has a comment length of 41. Maximum allowed is 40.',
           line: 4
         }
-      ],
-      options: [{ comments: 40 }]
+      ]
     }
   ]
 })

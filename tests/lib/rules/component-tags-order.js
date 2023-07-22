@@ -195,6 +195,7 @@ tester.run('component-tags-order', rule, {
   invalid: [
     {
       code: '<style></style><template></template><script></script>',
+      output: '<template></template><style></style><script></script>',
       errors: [
         {
           message: "'<template>' should be above '<style>' on line 1.",
@@ -206,11 +207,11 @@ tester.run('component-tags-order', rule, {
           line: 1,
           column: 37
         }
-      ],
-      output: '<template></template><style></style><script></script>'
+      ]
     },
     {
       code: '<template></template><script></script><style></style>',
+      output: '<script></script><template></template><style></style>',
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
@@ -218,8 +219,7 @@ tester.run('component-tags-order', rule, {
           line: 1,
           column: 22
         }
-      ],
-      output: '<script></script><template></template><style></style>'
+      ]
     },
     {
       code: `
@@ -228,19 +228,19 @@ tester.run('component-tags-order', rule, {
         <style></style>
 
         <script></script>`,
-      errors: [
-        {
-          message: "'<script>' should be above '<style>' on line 4.",
-          line: 6
-        }
-      ],
       output:
         '\n' +
         '        <template></template>\n' +
         '\n' +
         '        <script></script>\n' +
         '\n' +
-        '        <style></style>'
+        '        <style></style>',
+      errors: [
+        {
+          message: "'<script>' should be above '<style>' on line 4.",
+          line: 6
+        }
+      ]
     },
     {
       code: `
@@ -248,19 +248,19 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
+      output:
+        '\n' +
+        '        <script></script>\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '      ',
       options: [{ order: ['script', 'template', 'style'] }],
       errors: [
         {
           message: "'<script>' should be above '<template>' on line 2.",
           line: 3
         }
-      ],
-      output:
-        '\n' +
-        '        <script></script>\n' +
-        '        <template></template>\n' +
-        '        <style></style>\n' +
-        '      '
+      ]
     },
     {
       code: `
@@ -268,19 +268,19 @@ tester.run('component-tags-order', rule, {
         <template></template>
         <style></style>
       `,
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <script></script>\n' +
+        '        <style></style>\n' +
+        '      ',
       options: [{ order: ['template', 'script', 'style'] }],
       errors: [
         {
           message: "'<template>' should be above '<script>' on line 2.",
           line: 3
         }
-      ],
-      output:
-        '\n' +
-        '        <template></template>\n' +
-        '        <script></script>\n' +
-        '        <style></style>\n' +
-        '      '
+      ]
     },
     {
       code: `
@@ -289,20 +289,20 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
+      output:
+        '\n' +
+        '        <docs></docs>\n' +
+        '        <template></template>\n' +
+        '        <script></script>\n' +
+        '        <style></style>\n' +
+        '      ',
       options: [{ order: ['docs', 'template', 'script', 'style'] }],
       errors: [
         {
           message: "'<docs>' should be above '<template>' on line 2.",
           line: 3
         }
-      ],
-      output:
-        '\n' +
-        '        <docs></docs>\n' +
-        '        <template></template>\n' +
-        '        <script></script>\n' +
-        '        <style></style>\n' +
-        '      '
+      ]
     },
     {
       code: `
@@ -311,20 +311,20 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
-      options: [{ order: ['script', 'template', 'style'] }],
-      errors: [
-        {
-          message: "'<script>' should be above '<template>' on line 2.",
-          line: 4
-        }
-      ],
       output:
         '\n' +
         '        <script></script>\n' +
         '        <template></template>\n' +
         '        <docs></docs>\n' +
         '        <style></style>\n' +
-        '      '
+        '      ',
+      options: [{ order: ['script', 'template', 'style'] }],
+      errors: [
+        {
+          message: "'<script>' should be above '<template>' on line 2.",
+          line: 4
+        }
+      ]
     },
     {
       code: `
@@ -334,13 +334,6 @@ tester.run('component-tags-order', rule, {
         <script></script>
         <style></style>
       `,
-      options: [{ order: ['script', 'template', 'style'] }],
-      errors: [
-        {
-          message: "'<script>' should be above '<template>' on line 2.",
-          line: 5
-        }
-      ],
       output:
         '\n' +
         '        <script></script>\n' +
@@ -348,22 +341,29 @@ tester.run('component-tags-order', rule, {
         '        <docs>\n' +
         '        </docs>\n' +
         '        <style></style>\n' +
-        '      '
+        '      ',
+      options: [{ order: ['script', 'template', 'style'] }],
+      errors: [
+        {
+          message: "'<script>' should be above '<template>' on line 2.",
+          line: 5
+        }
+      ]
     },
     {
       code: `
         <script></script>
         <template></template>
       `,
+      output:
+        '\n        <template></template>\n        <script></script>\n      ',
       options: [{ order: ['template', 'script'] }],
       errors: [
         {
           message: "'<template>' should be above '<script>' on line 2.",
           line: 3
         }
-      ],
-      output:
-        '\n        <template></template>\n        <script></script>\n      '
+      ]
     },
     {
       code: `
@@ -371,6 +371,12 @@ tester.run('component-tags-order', rule, {
         <template></template>
         <script></script>
       `,
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '        <script></script>\n' +
+        '      ',
       errors: [
         {
           message: "'<template>' should be above '<style>' on line 2.",
@@ -380,13 +386,7 @@ tester.run('component-tags-order', rule, {
           message: "'<script>' should be above '<style>' on line 2.",
           line: 4
         }
-      ],
-      output:
-        '\n' +
-        '        <template></template>\n' +
-        '        <style></style>\n' +
-        '        <script></script>\n' +
-        '      '
+      ]
     },
     {
       code: `
@@ -395,6 +395,13 @@ tester.run('component-tags-order', rule, {
         <template></template>
         <script></script>
       `,
+      output:
+        '\n' +
+        '        <template></template>\n' +
+        '        <style></style>\n' +
+        '        <docs></docs>\n' +
+        '        <script></script>\n' +
+        '      ',
       errors: [
         {
           message: "'<template>' should be above '<style>' on line 2.",
@@ -404,14 +411,7 @@ tester.run('component-tags-order', rule, {
           message: "'<script>' should be above '<style>' on line 2.",
           line: 5
         }
-      ],
-      output:
-        '\n' +
-        '        <template></template>\n' +
-        '        <style></style>\n' +
-        '        <docs></docs>\n' +
-        '        <script></script>\n' +
-        '      '
+      ]
     },
     // no <template>
     {
@@ -419,13 +419,13 @@ tester.run('component-tags-order', rule, {
         <style></style>
         <script></script>
       `,
+      output: '\n        <script></script>\n        <style></style>\n      ',
       errors: [
         {
           message: "'<script>' should be above '<style>' on line 2.",
           line: 3
         }
-      ],
-      output: '\n        <script></script>\n        <style></style>\n      '
+      ]
     },
     {
       code: '<i18n locale="ja"></i18n><i18n locale="en"></i18n>',

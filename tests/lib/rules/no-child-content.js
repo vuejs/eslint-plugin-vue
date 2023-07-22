@@ -57,8 +57,8 @@ ruleTester.run('no-child-content', rule, {
     {
       // self-closing element with v-t directive
       filename: 'test.vue',
-      options: [{ additionalDirectives: ['t'] }],
-      code: '<template><div v-t="foo" /></template>'
+      code: '<template><div v-t="foo" /></template>',
+      options: [{ additionalDirectives: ['t'] }]
     },
     {
       // self-closing element with v-html directive and sibling comment element
@@ -182,8 +182,8 @@ ruleTester.run('no-child-content', rule, {
     {
       // v-t directive and text content
       filename: 'test.vue',
-      options: [{ additionalDirectives: ['t'] }],
       code: '<template><div v-t="foo">bar</div></template>',
+      options: [{ additionalDirectives: ['t'] }],
       errors: [
         {
           message:
@@ -199,8 +199,8 @@ ruleTester.run('no-child-content', rule, {
     {
       // v-html directive and text content while v-t directive is configured
       filename: 'test.vue',
-      options: [{ additionalDirectives: ['t'] }],
       code: '<template><div v-html="foo">baz</div></template>',
+      options: [{ additionalDirectives: ['t'] }],
       errors: [
         {
           message:

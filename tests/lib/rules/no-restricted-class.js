@@ -14,7 +14,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-restricted-class', rule, {
   valid: [
-    { code: `<template><div class="allowed">Content</div></template>` },
+    `<template><div class="allowed">Content</div></template>`,
     {
       code: `<template><div class="allowed"">Content</div></template>`,
       options: ['forbidden']
@@ -40,93 +40,93 @@ ruleTester.run('no-restricted-class', rule, {
   invalid: [
     {
       code: `<template><div class="forbidden allowed" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'VAttribute'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="'forbidden' + ' ' + 'allowed' + someVar" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Literal'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="{'forbidden': someBool, someVar: true}" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Literal'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="{forbidden: someBool}" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Identifier'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: '<template><div :class="`forbidden ${someVar}`" /></template>',
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'TemplateElement'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="'forbidden'" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Literal'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="['forbidden', 'allowed']" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Literal'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div :class="['allowed forbidden', someString]" /></template>`,
+      options: ['forbidden'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'Literal'
         }
-      ],
-      options: ['forbidden']
+      ]
     },
     {
       code: `<template><div class="forbidden allowed" /></template>`,
+      options: ['/^for(bidden|gotten)/'],
       errors: [
         {
           message: "'forbidden' class is not allowed.",
           type: 'VAttribute'
         }
-      ],
-      options: ['/^for(bidden|gotten)/']
+      ]
     }
   ]
 })

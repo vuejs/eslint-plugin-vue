@@ -160,12 +160,11 @@ tester.run('no-setup-props-destructure', rule, {
       </script>
       `
     },
-    {
-      code: `
+    `
       Vue.component('test', {
         el: a = b
-      })`
-    },
+      })
+    `,
     {
       filename: 'test.vue',
       code: `
