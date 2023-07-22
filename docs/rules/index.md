@@ -330,7 +330,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 ## Deprecated
 
-- :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
 - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
 
 | Rule ID | Replaced by |
@@ -341,7 +341,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 ## Removed
 
-- :no_entry_sign: These rules have been removed in a previous major release, after they have been deprecated for a while.
+- :no_entry: These rules have been removed in a previous major release, after they have been deprecated for a while.
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|
