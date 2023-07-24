@@ -94,11 +94,12 @@ export default {
 ```vue
 <script>
 export default {
-  props: ['onGood', 'bad'],
+  props: ['onGood', 'onCustomEvent', 'bad'],
   methods: {
     foo () {
       // ✓ GOOD
       this.$emit('good')
+      this.$emit('custom-event')
       // ✗ BAD
       this.$emit('bad')
     }

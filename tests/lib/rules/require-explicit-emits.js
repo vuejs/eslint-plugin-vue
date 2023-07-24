@@ -398,6 +398,26 @@ tester.run('require-explicit-emits', rule, {
       `,
       options: [{ allowProps: true }]
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo-bar')"/>
+      </template>
+      <script>
+      export default {
+        props: ['onFooBar'],
+        methods: {
+          fn() { this.$emit('foo-bar') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo-bar')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
 
     // <script setup>
     {
