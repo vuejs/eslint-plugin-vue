@@ -178,7 +178,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::warning: | :three::two::hammer: |
+| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
 | [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
