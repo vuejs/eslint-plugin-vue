@@ -117,7 +117,8 @@ class DocFile {
       } else {
         notes.push(`- :no_entry_sign: This rule was **deprecated**.`)
       }
-    } else if (meta.docs.categories) {
+    }
+    if (meta.docs?.categories) {
       const presets = getPresetIds(meta.docs.categories).map(
         (categoryId) => `\`"plugin:vue/${categoryId}"\``
       )
