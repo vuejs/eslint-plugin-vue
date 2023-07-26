@@ -15,92 +15,48 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('use-v-on-exact', rule, {
   valid: [
-    {
-      code: `<template><button @click="foo"/></template>`
-    },
-    {
-      code: `<template><button @click="foo" :click="foo"/></template>`
-    },
-    {
-      code: `<template><button @click.ctrl="foo"/></template>`
-    },
-    {
-      code: `<template><button @click.exact="foo"/></template>`
-    },
-    {
-      code: `<template><button v-on:click="foo"/></template>`
-    },
-    {
-      code: `<template><button v-on:click.ctrl="foo"/></template>`
-    },
-    {
-      code: `<template><button v-on:click.exact="foo"/></template>`
-    },
-    {
-      code: `<template><button @click="foo" @click.stop="bar"/></template>`
-    },
-    {
-      code: `<template><button @click="foo" @click.prevent="bar" @click.stop="baz"/></template>`
-    },
-    {
-      code: `<template><button @click.prevent="foo" @click.stop="bar"/></template>`
-    },
-    {
-      code: `<template><button @click.exact="foo" @click.ctrl="bar"/></template>`
-    },
-    {
-      code: `<template><button @click.exact="foo" @click.ctrl.exact="bar" @click.ctrl.shift="baz"/></template>`
-    },
-    {
-      code: `<template><button @click.ctrl.exact="foo" @click.ctrl.shift="bar"/></template>`
-    },
-    {
-      code: `<template><button @click.exact="foo" @click.ctrl="foo"/></template>`
-    },
-    {
-      code: `<template><button @click="foo" @focus="foo"/></template>`
-    },
-    {
-      code: `<template><button @click="foo" @click="foo"/></template>`
-    },
-    {
-      code: `<template><button @click="foo"/><button @click.ctrl="foo"/></template>`
-    },
-    {
-      code: `<template><button v-on:click.exact="foo" v-on:click.ctrl="foo"/></template>`
-    },
-    {
-      code: `<template><a @mouseenter="showTooltip" @mouseenter.once="attachTooltip"/></template>`
-    },
-    {
-      code: `<template><input @keypress.exact="foo" @keypress.esc.exact="bar" @keypress.ctrl="baz"></template>`
-    },
-    {
-      code: `<template><input @keypress.a="foo" @keypress.b="bar" @keypress.a.b="baz"></template>`
-    },
-    {
-      code: `<template><input @keypress.shift="foo" @keypress.ctrl="bar"></template>`
-    },
-    {
-      code: `<template>
+    `<template><button @click="foo"/></template>`,
+    `<template><button @click="foo" :click="foo"/></template>`,
+    `<template><button @click.ctrl="foo"/></template>`,
+    `<template><button @click.exact="foo"/></template>`,
+    `<template><button v-on:click="foo"/></template>`,
+    `<template><button v-on:click.ctrl="foo"/></template>`,
+    `<template><button v-on:click.exact="foo"/></template>`,
+    `<template><button @click="foo" @click.stop="bar"/></template>`,
+    `<template><button @click="foo" @click.prevent="bar" @click.stop="baz"/></template>`,
+    `<template><button @click.prevent="foo" @click.stop="bar"/></template>`,
+    `<template><button @click.exact="foo" @click.ctrl="bar"/></template>`,
+    `<template><button @click.exact="foo" @click.ctrl.exact="bar" @click.ctrl.shift="baz"/></template>`,
+    `<template><button @click.ctrl.exact="foo" @click.ctrl.shift="bar"/></template>`,
+    `<template><button @click.exact="foo" @click.ctrl="foo"/></template>`,
+    `<template><button @click="foo" @focus="foo"/></template>`,
+    `<template><button @click="foo" @click="foo"/></template>`,
+    `<template><button @click="foo"/><button @click.ctrl="foo"/></template>`,
+    `<template><button v-on:click.exact="foo" v-on:click.ctrl="foo"/></template>`,
+    `<template><a @mouseenter="showTooltip" @mouseenter.once="attachTooltip"/></template>`,
+    `<template><input @keypress.exact="foo" @keypress.esc.exact="bar" @keypress.ctrl="baz"></template>`,
+    `<template><input @keypress.a="foo" @keypress.b="bar" @keypress.a.b="baz"></template>`,
+    `<template><input @keypress.shift="foo" @keypress.ctrl="bar"></template>`,
+    `
+      <template>
         <input
           @keypress.27="foo"
           @keypress.27.middle="bar"
         >
-      </template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `
+      <template>
         <input
           @keydown.a.b.c="abc"
           @keydown.a="a"
           @keydown.b="b"
           @keydown.c="c"
         >
-      </template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `
+      <template>
         <input
           @keydown.a.b="ab"
           @keydown.a="a"
@@ -108,69 +64,49 @@ ruleTester.run('use-v-on-exact', rule, {
           @keydown.c="c"
           @keydown.a.c="ac"
         >
-      </template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `
+      <template>
         <input
           @keydown.a.b="ab"
           @keydown.a="a"
           @keydown.b="b"
           @keydown.c="c"
         >
-      </template>`
-    },
-    {
-      code: `<template><UiButton @click="foo" /></template>`
-    },
-    {
-      code: `<template><UiButton @click="foo" @click.native="bar" /></template>`
-    },
-    {
-      code: `<template><UiButton @click="foo" @click.native.ctrl="bar" /></template>`
-    },
-    {
-      code: `<template><UiButton @click="foo" @click.native.exact="bar" @click.native.ctrl="baz" /></template>`
-    },
-    {
-      code: `<template><UiButton @click.native.exact="bar" @click.ctrl.native="baz" /></template>`
-    },
-    {
-      code: `<template><UiButton @click.native.ctrl.exact="foo" @click.native.ctrl.shift="bar" /></template>`
-    },
-    {
-      code: `<template><UiButton @click.native="foo" @click.native.stop="bar" /></template>`
-    },
-    {
-      code: `<template><UiButton @click.native.stop="foo" @click.native.prevent="bar" /></template>`
-    },
-    {
-      code: `<template><button @[click]="foo"/></template>`
-    },
-    {
-      code: `<template><button @[foo]="foo" @[bar].ctrl="bar"/></template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `<template><UiButton @click="foo" /></template>`,
+    `<template><UiButton @click="foo" @click.native="bar" /></template>`,
+    `<template><UiButton @click="foo" @click.native.ctrl="bar" /></template>`,
+    `<template><UiButton @click="foo" @click.native.exact="bar" @click.native.ctrl="baz" /></template>`,
+    `<template><UiButton @click.native.exact="bar" @click.ctrl.native="baz" /></template>`,
+    `<template><UiButton @click.native.ctrl.exact="foo" @click.native.ctrl.shift="bar" /></template>`,
+    `<template><UiButton @click.native="foo" @click.native.stop="bar" /></template>`,
+    `<template><UiButton @click.native.stop="foo" @click.native.prevent="bar" /></template>`,
+    `<template><button @[click]="foo"/></template>`,
+    `<template><button @[foo]="foo" @[bar].ctrl="bar"/></template>`,
+    `
+      <template>
         <input
           @keydown.enter="foo"
           @keydown.shift.tab="bar"/>
-      </template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `
+      <template>
         <input
           @keydown.enter="foo"
           @keydown.shift.tab.prevent="bar"/>
-      </template>`
-    },
-    {
-      code: `<template>
+      </template>
+    `,
+    `
+      <template>
         <input-component
           @keydown.enter.native="foo"
           @keydown.shift.tab.native="bar"/>
-      </template>`
-    }
+      </template>
+    `
   ],
 
   invalid: [

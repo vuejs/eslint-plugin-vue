@@ -66,8 +66,8 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
           <a slot-scope />
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: null,
+      options: buildOptions(),
       errors: [
         {
           message:
@@ -83,8 +83,8 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
           <a slot-scope="{a}" />
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: null,
+      options: buildOptions(),
       errors: [
         {
           message:
@@ -100,8 +100,8 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
           <a slot-scope />
         </LinkList>
       </template>`,
-      options: buildOptions({ version: '^3.0.0' }),
       output: null,
+      options: buildOptions({ version: '^3.0.0' }),
       errors: [
         {
           message:

@@ -716,6 +716,8 @@ tester.run('attributes-order', rule, {
     {
       filename: 'test.vue',
       code: '<template><div ref="header" propone="prop" is="header" ></div></template>',
+      output:
+        '<template><div ref="header" is="header" propone="prop" ></div></template>',
       options: [
         {
           order: [
@@ -733,8 +735,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      output:
-        '<template><div ref="header" is="header" propone="prop" ></div></template>',
       errors: [
         {
           message: 'Attribute "is" should go before "propone".',
@@ -837,6 +837,21 @@ tester.run('attributes-order', rule, {
               >
             </div>
           </template>`,
+      output: `<template>
+            <div
+              v-if="!visible"
+              v-for="item in items"
+              is="header"
+              v-once
+              v-on:click="functionCall"
+              ref="header"
+              :prop="headerData"
+              id="uniqueID"
+              v-text="textContent"
+              myProp="prop"
+              >
+            </div>
+          </template>`,
       options: [
         {
           order: [
@@ -854,21 +869,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      output: `<template>
-            <div
-              v-if="!visible"
-              v-for="item in items"
-              is="header"
-              v-once
-              v-on:click="functionCall"
-              ref="header"
-              :prop="headerData"
-              id="uniqueID"
-              v-text="textContent"
-              myProp="prop"
-              >
-            </div>
-          </template>`,
       errors: [
         {
           message: 'Attribute "is" should go before "v-once".',
@@ -902,6 +902,15 @@ tester.run('attributes-order', rule, {
               >
             </div>
           </template>`,
+      output: `<template>
+            <div
+              v-if="!visible"
+              class="content"
+              v-model="foo"
+              v-text="textContent"
+              >
+            </div>
+          </template>`,
       options: [
         {
           order: [
@@ -917,15 +926,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      output: `<template>
-            <div
-              v-if="!visible"
-              class="content"
-              v-model="foo"
-              v-text="textContent"
-              >
-            </div>
-          </template>`,
       errors: [
         {
           message: 'Attribute "v-if" should go before "class".',
@@ -965,13 +965,13 @@ tester.run('attributes-order', rule, {
             a-prop="A">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             a-prop="A"
             z-prop="Z">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "a-prop" should go before "z-prop".',
@@ -987,13 +987,13 @@ tester.run('attributes-order', rule, {
             :a-prop="A">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             :a-prop="A"
             :z-prop="Z">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute ":a-prop" should go before ":z-prop".',
@@ -1009,13 +1009,13 @@ tester.run('attributes-order', rule, {
             @change="foo">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             @change="foo"
             @input="bar">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "@change" should go before "@input".',
@@ -1031,13 +1031,13 @@ tester.run('attributes-order', rule, {
             boolean-prop>
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             boolean-prop
             z-prop="value">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "boolean-prop" should go before "z-prop".',
@@ -1053,13 +1053,13 @@ tester.run('attributes-order', rule, {
             v-on:[c]="functionCall">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             v-on:[c]="functionCall"
             v-on:click="functionCall">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "v-on:[c]" should go before "v-on:click".',
@@ -1075,13 +1075,13 @@ tester.run('attributes-order', rule, {
             v-on:click="functionCall">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             v-on:click="functionCall"
             v-text="textContent">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "v-on:click" should go before "v-text".',
@@ -1097,13 +1097,13 @@ tester.run('attributes-order', rule, {
             class="bar">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             class="bar"
             :class="foo">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "class" should go before ":class".'
@@ -1118,13 +1118,13 @@ tester.run('attributes-order', rule, {
             v-if="bar">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             v-if="bar"
             v-show="foo">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "v-if" should go before "v-show".'
@@ -1139,13 +1139,13 @@ tester.run('attributes-order', rule, {
             v-bar="bar">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             v-bar="bar"
             v-foo="foo">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "v-bar" should go before "v-foo".'
@@ -1160,13 +1160,13 @@ tester.run('attributes-order', rule, {
             v-foo.a="a">
           </div>
         </template>`,
-      options: [{ alphabetical: true }],
       output: `<template>
           <div
             v-foo.a="a"
             v-foo.b="b">
           </div>
         </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         {
           message: 'Attribute "v-foo.a" should go before "v-foo.b".'
@@ -1256,7 +1256,6 @@ tester.run('attributes-order', rule, {
           v-bind="b">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1265,6 +1264,7 @@ tester.run('attributes-order', rule, {
           v-bind="b">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: ['Attribute "v-bind:id" should go before "v-on:click".']
     },
     {
@@ -1277,7 +1277,6 @@ tester.run('attributes-order', rule, {
           v-bind="b">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1286,6 +1285,7 @@ tester.run('attributes-order', rule, {
           v-on:click="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: ['Attribute "v-bind" should go before "v-on:click".']
     },
     {
@@ -1298,7 +1298,6 @@ tester.run('attributes-order', rule, {
           v-bind:id="a">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1307,6 +1306,7 @@ tester.run('attributes-order', rule, {
           v-on:click="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: ['Attribute "v-bind:id" should go before "v-on:click".']
     },
     {
@@ -1320,7 +1320,6 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1330,6 +1329,7 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         'Attribute "v-bind:a" should go before "v-on:click".',
         'Attribute "v-if" should go before "v-on:click".'
@@ -1346,7 +1346,6 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1356,6 +1355,7 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         'Attribute "v-bind" should go before "v-on:click".',
         'Attribute "v-if" should go before "v-on:click".'
@@ -1371,7 +1371,6 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1380,6 +1379,7 @@ tester.run('attributes-order', rule, {
           v-bind="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: ['Attribute "v-if" should go before "a".']
     },
     {
@@ -1392,7 +1392,6 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
-      options: [{ alphabetical: true }],
       output: `
       <template>
         <div
@@ -1401,6 +1400,7 @@ tester.run('attributes-order', rule, {
           v-if="x">
         </div>
       </template>`,
+      options: [{ alphabetical: true }],
       errors: [
         'Attribute "v-bind" should go before "v-on:click".',
         'Attribute "v-if" should go before "v-on:click".'
@@ -1462,7 +1462,6 @@ tester.run('attributes-order', rule, {
           v-for="a in items">
         </div>
       </template>`,
-      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
       output: `
       <template>
         <div
@@ -1471,6 +1470,7 @@ tester.run('attributes-order', rule, {
           attr="a">
         </div>
       </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
       errors: ['Attribute "v-for" should go before "v-if".']
     },
     {
@@ -1483,7 +1483,6 @@ tester.run('attributes-order', rule, {
           v-for="a in items">
         </div>
       </template>`,
-      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
       output: `
       <template>
         <div
@@ -1492,12 +1491,16 @@ tester.run('attributes-order', rule, {
           v-if="a">
         </div>
       </template>`,
+      options: [{ order: ['LIST_RENDERING', 'CONDITIONALS'] }],
       errors: ['Attribute "v-for" should go before "v-if".']
     },
 
     // slot
     {
       filename: 'test.vue',
+      code: '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       options: [
         {
           order: [
@@ -1516,9 +1519,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code: '<template><div ref="foo" v-slot="{ qux }" bar="baz"></div></template>',
-      output:
-        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [
         {
           message: 'Attribute "bar" should go before "v-slot".'
@@ -1528,6 +1528,9 @@ tester.run('attributes-order', rule, {
 
     {
       filename: 'test.vue',
+      code: '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
+      output:
+        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       options: [
         {
           order: [
@@ -1546,9 +1549,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      code: '<template><div bar="baz" ref="foo" v-slot="{ qux }"></div></template>',
-      output:
-        '<template><div ref="foo" bar="baz" v-slot="{ qux }"></div></template>',
       errors: [
         {
           message: 'Attribute "ref" should go before "bar".'
@@ -1630,7 +1630,6 @@ tester.run('attributes-order', rule, {
           v-bind="object"
           @input="handleInput"/>
       </template>`,
-      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
       output: `
       <template>
         <div
@@ -1639,6 +1638,7 @@ tester.run('attributes-order', rule, {
           @input="handleInput"
           v-bind="object"/>
       </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
       errors: ['Attribute "@input" should go before "v-bind".']
     },
 
@@ -1651,7 +1651,6 @@ tester.run('attributes-order', rule, {
           @click="handleClick"
           attr="foo"/>
       </template>`,
-      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
       output: `
       <template>
         <div
@@ -1659,6 +1658,7 @@ tester.run('attributes-order', rule, {
           v-bind="object"
           attr="foo"/>
       </template>`,
+      options: [{ order: ['UNIQUE', 'EVENTS', 'OTHER_ATTR'] }],
       errors: ['Attribute "@click" should go before "v-bind".']
     },
 
@@ -1671,7 +1671,6 @@ tester.run('attributes-order', rule, {
           prop-two="b"
           :prop-three="c"/>
       </template>`,
-      options: [{ order: ['ATTR_STATIC', 'ATTR_DYNAMIC'] }],
       output: `
       <template>
         <div
@@ -1679,6 +1678,7 @@ tester.run('attributes-order', rule, {
           v-bind:prop-one="a"
           :prop-three="c"/>
       </template>`,
+      options: [{ order: ['ATTR_STATIC', 'ATTR_DYNAMIC'] }],
       errors: ['Attribute "prop-two" should go before "v-bind:prop-one".']
     },
 
@@ -1691,6 +1691,16 @@ tester.run('attributes-order', rule, {
           v-model="value"
           prop-two="b"
           :prop-three="c"
+          class="class"
+          boolean-prop/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-model="value"
+          :prop-one="a"
+          :prop-three="c"
+          prop-two="b"
           class="class"
           boolean-prop/>
       </template>`,
@@ -1709,16 +1719,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      output: `
-      <template>
-        <div
-          v-model="value"
-          :prop-one="a"
-          :prop-three="c"
-          prop-two="b"
-          class="class"
-          boolean-prop/>
-      </template>`,
       errors: [
         'Attribute "v-model" should go before ":prop-one".',
         'Attribute ":prop-three" should go before "prop-two".'
@@ -1732,6 +1732,15 @@ tester.run('attributes-order', rule, {
         <div
           :prop-one="a"
           v-model="value"
+          boolean-prop
+          prop-two="b"
+          :prop-three="c"/>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-model="value"
+          :prop-one="a"
           boolean-prop
           prop-two="b"
           :prop-three="c"/>
@@ -1754,15 +1763,6 @@ tester.run('attributes-order', rule, {
           ]
         }
       ],
-      output: `
-      <template>
-        <div
-          v-model="value"
-          :prop-one="a"
-          boolean-prop
-          prop-two="b"
-          :prop-three="c"/>
-      </template>`,
       errors: ['Attribute "v-model" should go before ":prop-one".']
     }
   ]

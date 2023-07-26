@@ -39,10 +39,10 @@ tester.run('define-props-declaration', rule, {
       }>()
       </script>
       `,
+      options: ['type-based'],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
-      },
-      options: ['type-based']
+      }
     },
     {
       filename: 'test.vue',
@@ -125,13 +125,13 @@ tester.run('define-props-declaration', rule, {
       })
       </script>
       `,
+      options: ['type-based'],
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
           line: 3
         }
-      ],
-      options: ['type-based']
+      ]
     },
     {
       filename: 'test.vue',
@@ -142,10 +142,10 @@ tester.run('define-props-declaration', rule, {
       }>()
       </script>
       `,
+      options: ['runtime'],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: ['runtime'],
       errors: [
         {
           message: 'Use runtime declaration instead of type-based declaration.',

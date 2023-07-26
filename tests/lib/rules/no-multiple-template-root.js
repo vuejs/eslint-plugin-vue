@@ -49,6 +49,7 @@ ruleTester.run('no-multiple-template-root', rule, {
 
     // https://github.com/vuejs/eslint-plugin-vue/issues/1439
     {
+      filename: 'test.vue',
       code: `
       <template>
         <Link :to="to" class="flex items-center">
@@ -61,8 +62,7 @@ ruleTester.run('no-multiple-template-root', rule, {
           <slot />
         </Link>
       </template>
-      `,
-      filename: 'test.vue'
+      `
     }
   ],
   invalid: [

@@ -248,8 +248,8 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      options: ['default-false']
+      options: ['default-false'],
+      parser: require.resolve('vue-eslint-parser')
     },
     {
       filename: 'test.vue',
@@ -279,11 +279,11 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
+      options: ['default-false'],
       parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
-      },
-      options: ['default-false']
+      }
     },
     {
       filename: 'test.vue',
@@ -437,8 +437,8 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       options: ['default-false'],
+      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',

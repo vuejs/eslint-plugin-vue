@@ -2,16 +2,17 @@
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description: 'enforce use of the `@eslint-community/*` package',
       categories: ['Internal']
     },
     fixable: 'code',
+    schema: [],
     messages: {
       useCommunityPackageInstead:
         'Please use `@eslint-community/{{name}}` instead.'
-    },
-    schema: []
+    }
   },
 
   /** @param {import('eslint').Rule.RuleContext} context */

@@ -75,12 +75,12 @@ tester.run('func-call-spacing', rule, {
         <div :foo="foo()" />
       </template>
       `,
-      options: ['always'],
       output: `
       <template>
         <div :foo="foo ()" />
       </template>
       `,
+      options: ['always'],
       errors: [
         {
           message: 'Missing space between function name and paren.',

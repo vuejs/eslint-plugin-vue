@@ -47,7 +47,6 @@ tester.run('no-unsupported-features/define-options', rule, {
       <script setup>
         defineOptions({ name: 'Foo' })
       </script>`,
-      options: buildOptions(),
       output: `
       <script>
 export default { name: 'Foo' }
@@ -55,6 +54,7 @@ export default { name: 'Foo' }
 <script setup>
 
       </script>`,
+      options: buildOptions(),
       errors: [
         {
           message:
@@ -68,7 +68,6 @@ export default { name: 'Foo' }
       <script setup>
         defineOptions({});
       </script>`,
-      options: buildOptions(),
       output: `
       <script>
 export default {}
@@ -76,6 +75,7 @@ export default {}
 <script setup>
 
       </script>`,
+      options: buildOptions(),
       errors: [
         {
           message:

@@ -303,11 +303,6 @@ ruleTester.run('no-async-in-computed-properties', rule, {
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1690
       filename: 'test.vue',
-      parser,
-      parserOptions: {
-        sourceType: 'module',
-        ecmaVersion: 2020
-      },
       code: `
       <template>
         <div class="f-c" style="height: 100%;">
@@ -323,7 +318,12 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         components: {
         },
       }
-      </script>`
+      </script>`,
+      parser,
+      parserOptions: {
+        sourceType: 'module',
+        ecmaVersion: 2020
+      }
     }
   ],
 

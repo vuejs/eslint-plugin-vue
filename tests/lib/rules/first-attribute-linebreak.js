@@ -14,14 +14,12 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('first-attribute-linebreak', rule, {
   valid: [
-    {
-      code: `
+    `
       <template>
         <component></component>
-      </template>`
-    },
-    {
-      code: `
+      </template>
+    `,
+    `
       <template>
         <component
           name="John Doe"
@@ -33,8 +31,8 @@ ruleTester.run('first-attribute-linebreak', rule, {
         ></component>
         <component name="John Doe"
         ></component>
-      </template>`
-    },
+      </template>
+    `,
     {
       code: `
       <template>

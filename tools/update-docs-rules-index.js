@@ -15,10 +15,7 @@ const VUE2_EMOJI = ':two:'
 
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
-  (rule) =>
-    rule.meta.docs.categories &&
-    !rule.meta.docs.extensionRule &&
-    !rule.meta.deprecated
+  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionRule
 )
 const uncategorizedRules = rules.filter(
   (rule) =>
@@ -44,7 +41,7 @@ function toRuleRow(rule, kindMarks = []) {
   const mark = [
     rule.meta.fixable ? ':wrench:' : '',
     rule.meta.hasSuggestions ? ':bulb:' : '',
-    rule.meta.deprecated ? ':warning:' : ''
+    rule.meta.deprecated ? ':no_entry_sign:' : ''
   ].join('')
   const kindMark = [...kindMarks, TYPE_MARK[rule.meta.type]].join('')
   const link = `[${rule.ruleId}](./${rule.name}.md)`
@@ -225,7 +222,7 @@ if (deprecatedRules.length > 0) {
   rulesTableContent += `
 ## Deprecated
 
-- :warning: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
 - :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
 
 | Rule ID | Replaced by |
@@ -238,7 +235,7 @@ ${deprecatedRules.map(toDeprecatedRuleRow).join('\n')}
 rulesTableContent += `
 ## Removed
 
-- :no_entry_sign: These rules have been removed in a previous major release, after they have been deprecated for a while.
+- :no_entry: These rules have been removed in a previous major release, after they have been deprecated for a while.
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|

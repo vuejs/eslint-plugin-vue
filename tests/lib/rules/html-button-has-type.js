@@ -95,8 +95,8 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ button: false }],
       code: '<template><button type="button">Hello World</button></template>',
+      options: [{ button: false }],
       errors: [
         {
           message: 'button is a forbidden value for button type attribute.',
@@ -106,8 +106,8 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ submit: false }],
       code: '<template><button type="submit">Hello World</button></template>',
+      options: [{ submit: false }],
       errors: [
         {
           message: 'submit is a forbidden value for button type attribute.',
@@ -117,8 +117,8 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ reset: false }],
       code: '<template><button type="reset">Hello World</button></template>',
+      options: [{ reset: false }],
       errors: [
         {
           message: 'reset is a forbidden value for button type attribute.',
@@ -128,12 +128,12 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ button: false, submit: false, reset: false }],
       code: `<template>
                 <button type="button">Hello World</button>
                 <button type="submit">Hello World</button>
                 <button type="reset">Hello World</button>
              </template>`,
+      options: [{ button: false, submit: false, reset: false }],
       errors: [
         {
           message: 'button is a forbidden value for button type attribute.',
@@ -154,7 +154,6 @@ ruleTester.run('html-button-has-type', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ button: true, submit: true, reset: false }],
       code: `<template>
                 <button type="button">Hello World</button>
                 <button type="submit">Hello World</button>
@@ -162,6 +161,7 @@ ruleTester.run('html-button-has-type', rule, {
                 <button type="">Hello World</button>
                 <button type="foo">Hello World</button>
              </template>`,
+      options: [{ button: true, submit: true, reset: false }],
       errors: [
         {
           message: 'reset is a forbidden value for button type attribute.',

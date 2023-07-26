@@ -122,8 +122,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: require.resolve('@typescript-eslint/parser')
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -214,8 +214,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -229,8 +229,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -244,8 +244,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -264,12 +264,12 @@ ruleTester.run('require-valid-default-prop', rule, {
         num: 1
       });
       </script>`,
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
-      },
-      parser: require.resolve('vue-eslint-parser')
+      }
     },
     {
       code: `
@@ -614,8 +614,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           } as PropOptions<object>
         }
       });`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function or number')
     },
 
@@ -874,8 +874,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -889,8 +889,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -904,8 +904,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: errorMessage('function')
     },
     {
@@ -920,8 +920,8 @@ ruleTester.run('require-valid-default-prop', rule, {
         })
       </script>
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
@@ -938,12 +938,12 @@ ruleTester.run('require-valid-default-prop', rule, {
         })
       </script>
       `,
+      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
       },
-      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
@@ -967,7 +967,6 @@ ruleTester.run('require-valid-default-prop', rule, {
         i: ['foo', 'bar'],
       })
       </script>`,
-      ...getTypeScriptFixtureTestOptions(),
       errors: [
         {
           message: "Type of the default value for 'a' prop must be a string.",
@@ -1006,7 +1005,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           message: "Type of the default value for 'i' prop must be a function.",
           line: 13
         }
-      ]
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })

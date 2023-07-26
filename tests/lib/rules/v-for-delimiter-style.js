@@ -94,9 +94,9 @@ tester.run('v-for-delimiter-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['in'],
       code: '<template><div v-for="x of xs"></div></template>',
       output: '<template><div v-for="x in xs"></div></template>',
+      options: ['in'],
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
@@ -106,9 +106,9 @@ tester.run('v-for-delimiter-style', rule, {
     },
     {
       filename: 'test.vue',
-      options: ['of'],
       code: '<template><div v-for="x in xs"></div></template>',
       output: '<template><div v-for="x of xs"></div></template>',
+      options: ['of'],
       errors: [
         {
           message: "Expected 'of' instead of 'in' in 'v-for'.",

@@ -75,13 +75,13 @@ tester.run('require-typed-ref', rule, {
     },
     {
       filename: 'test.vue',
-      parser: require.resolve('vue-eslint-parser'),
       code: `
         <script setup>
           import { ref } from 'vue'
           const count = ref()
         </script>
-      `
+      `,
+      parser: require.resolve('vue-eslint-parser')
     },
     {
       filename: 'test.js',
@@ -197,13 +197,13 @@ tester.run('require-typed-ref', rule, {
     },
     {
       filename: 'test.vue',
-      parser: require.resolve('vue-eslint-parser'),
       code: `
         <script setup lang="ts">
           import { ref } from 'vue'
           const count = ref()
         </script>
       `,
+      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           messageId: 'noType',

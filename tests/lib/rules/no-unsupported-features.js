@@ -45,7 +45,6 @@ tester.run('no-unsupported-features', rule, {
           </template>
         </VList>
       </template>`,
-      options: [{ version: '^2.5.0' }],
       output: `
       <template>
         <VList>
@@ -56,6 +55,7 @@ tester.run('no-unsupported-features', rule, {
           </template>
         </VList>
       </template>`,
+      options: [{ version: '^2.5.0' }],
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
