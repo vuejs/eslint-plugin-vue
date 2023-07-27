@@ -273,9 +273,6 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
-      ],
       code: `
         <template>
           <template v-for="x in xs">
@@ -286,13 +283,13 @@ tester.run('valid-v-for', rule, {
             </template>
           </template>
         </template>
-      `
+      `,
+      errors: [
+        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+      ]
     },
     {
       filename: 'test.vue',
-      errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
-      ],
       code: `
         <template>
           <template v-for="x in xs">
@@ -303,13 +300,13 @@ tester.run('valid-v-for', rule, {
             </template>
           </template>
         </template>
-      `
+      `,
+      errors: [
+        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+      ]
     },
     {
       filename: 'test.vue',
-      errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
-      ],
       code: `
         <template>
           <template v-for="x in xs">
@@ -320,7 +317,10 @@ tester.run('valid-v-for', rule, {
             </template>
           </template>
         </template>
-      `
+      `,
+      errors: [
+        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+      ]
     },
     // empty value
     {

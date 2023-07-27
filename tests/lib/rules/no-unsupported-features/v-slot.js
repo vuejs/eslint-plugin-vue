@@ -81,13 +81,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -102,13 +102,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template #default ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="default" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -123,13 +123,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:name ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="name" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -144,13 +144,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template #name ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="name" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -165,13 +165,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -186,13 +186,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template #default="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="default" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -207,13 +207,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:name="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="name" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -228,13 +228,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template #name="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="name" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -249,13 +249,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:[name]="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template :slot="name" slot-scope="{a}" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -271,13 +271,13 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:name="{" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: `
       <template>
         <LinkList>
           <template slot="name" slot-scope="{" ><a /></template>
         </LinkList>
       </template>`,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -292,8 +292,8 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot:[.]="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: null,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -310,8 +310,8 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <template v-slot.mod="{a}" ><a /></template>
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: null,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
@@ -328,8 +328,8 @@ tester.run('no-unsupported-features/v-slot', rule, {
           <a />
         </LinkList>
       </template>`,
-      options: buildOptions(),
       output: null,
+      options: buildOptions(),
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',

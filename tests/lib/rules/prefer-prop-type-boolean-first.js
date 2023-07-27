@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/prefer-prop-type-boolean-first')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -62,6 +65,14 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           })
         </script>
       `
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [

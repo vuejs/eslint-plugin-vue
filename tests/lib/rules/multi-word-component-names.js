@@ -165,14 +165,14 @@ tester.run('multi-word-component-names', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ ignores: ['Todo'] }],
       code: `
       <script>
       export default {
         name: 'Todo'
       }
       </script>
-      `
+      `,
+      options: [{ ignores: ['Todo'] }]
     },
     {
       filename: 'test.js',
@@ -209,10 +209,18 @@ tester.run('multi-word-component-names', rule, {
       <template>
         <AppButton />
       </template>
-      
+
       <script setup lang="ts">
       import AppButton from "@/components/AppButton.vue";
       </script>`
+    },
+    {
+      filename: 'Single.vue',
+      code: `
+      <script setup>
+      defineOptions({name: 'MultiWord'})
+      </script>
+      `
     }
   ],
   invalid: [
@@ -306,7 +314,6 @@ tester.run('multi-word-component-names', rule, {
     },
     {
       filename: 'test.vue',
-      options: [{ ignores: ['Todo'] }],
       code: `
       <script>
       export default {
@@ -314,6 +321,7 @@ tester.run('multi-word-component-names', rule, {
       }
       </script>
       `,
+      options: [{ ignores: ['Todo'] }],
       errors: [
         {
           message: 'Component name "Item" should always be multi-word.',
@@ -331,6 +339,20 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "test" should always be multi-word.',
           line: 1
+        }
+      ]
+    },
+    {
+      filename: 'MultiWord.vue',
+      code: `
+      <script setup>
+      defineOptions({name: 'Single'})
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Component name "Single" should always be multi-word.',
+          line: 3
         }
       ]
     }

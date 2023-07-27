@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-use-v-if-with-v-for
-description: disallow use v-if on the same element as v-for
+description: disallow using `v-if` on the same element as `v-for`
 since: v4.6.0
 ---
 # vue/no-use-v-if-with-v-for
 
-> disallow use v-if on the same element as v-for
+> disallow using `v-if` on the same element as `v-for`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
@@ -87,6 +87,10 @@ There are two common cases where this can be tempting:
 ```
 
 </eslint-code-block>
+
+## :couple: Related Rules
+
+- [vue/no-use-v-else-with-v-for](./no-use-v-else-with-v-for.md)
 
 ## :books: Further Reading
 

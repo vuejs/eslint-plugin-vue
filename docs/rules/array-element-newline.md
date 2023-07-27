@@ -32,4 +32,4 @@ This rule was introduced in eslint-plugin-vue v9.9.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/array-element-newline.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-element-newline.js)
 
-<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/rules/array-element-newline)</sup>
+<sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/array-element-newline)</sup>

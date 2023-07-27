@@ -73,12 +73,12 @@ tester.run('v-on-event-hyphenation', rule, {
           <VueComponent @customEvent="onEvent"/>
       </template>
       `,
-      options: ['always', { autofix: true }],
       output: `
       <template>
           <VueComponent @custom-event="onEvent"/>
       </template>
       `,
+      options: ['always', { autofix: true }],
       errors: [
         {
           message: "v-on event '@customEvent' must be hyphenated.",
@@ -95,12 +95,12 @@ tester.run('v-on-event-hyphenation', rule, {
           <VueComponent v-on:custom-event="events"/>
       </template>
       `,
-      options: ['never', { autofix: true }],
       output: `
       <template>
           <VueComponent v-on:customEvent="events"/>
       </template>
       `,
+      options: ['never', { autofix: true }],
       errors: ["v-on event 'v-on:custom-event' can't be hyphenated."]
     },
     {
@@ -110,13 +110,13 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @update:model-value="foo"/>
       </template>
       `,
-      options: ['always', { autofix: true }],
       output: `
       <template>
         <VueComponent @update:model-value="foo"/>
         <VueComponent @update:model-value="foo"/>
       </template>
       `,
+      options: ['always', { autofix: true }],
       errors: ["v-on event '@update:modelValue' must be hyphenated."]
     },
     {
@@ -126,13 +126,13 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @update:model-value="foo"/>
       </template>
       `,
-      options: ['never', { autofix: true }],
       output: `
       <template>
         <VueComponent @update:modelValue="foo"/>
         <VueComponent @update:modelValue="foo"/>
       </template>
       `,
+      options: ['never', { autofix: true }],
       errors: ["v-on event '@update:model-value' can't be hyphenated."]
     },
     {
@@ -144,7 +144,6 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @up-date:model-value="foo"/>
       </template>
       `,
-      options: ['always', { autofix: true }],
       output: `
       <template>
         <VueComponent @up-date:model-value="foo"/>
@@ -153,6 +152,7 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @up-date:model-value="foo"/>
       </template>
       `,
+      options: ['always', { autofix: true }],
       errors: [
         "v-on event '@upDate:modelValue' must be hyphenated.",
         "v-on event '@up-date:modelValue' must be hyphenated.",
@@ -168,7 +168,6 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @up-date:model-value="foo"/>
       </template>
       `,
-      options: ['never', { autofix: true }],
       output: `
       <template>
         <VueComponent @upDate:modelValue="foo"/>
@@ -177,6 +176,7 @@ tester.run('v-on-event-hyphenation', rule, {
         <VueComponent @upDate:modelValue="foo"/>
       </template>
       `,
+      options: ['never', { autofix: true }],
       errors: [
         "v-on event '@up-date:modelValue' can't be hyphenated.",
         "v-on event '@upDate:model-value' can't be hyphenated.",

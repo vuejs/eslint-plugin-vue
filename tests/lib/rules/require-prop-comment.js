@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/require-prop-comment')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -17,8 +20,7 @@ const tester = new RuleTester({
 
 tester.run('require-prop-comment', rule, {
   valid: [
-    {
-      code: `
+    `
       <script setup>
       export default defineComponent({
         props: {
@@ -27,8 +29,7 @@ tester.run('require-prop-comment', rule, {
         }
       })
       </script>
-      `
-    },
+    `,
     {
       code: `
       <script setup>
@@ -57,10 +58,10 @@ tester.run('require-prop-comment', rule, {
       const goodProps = defineProps({
         /** JSDoc comment */
         a: Number,
-      
+
         /* block comment */
         b: Number,
-      
+
         // line comment
         c: Number,
       })
@@ -68,8 +69,7 @@ tester.run('require-prop-comment', rule, {
       `,
       options: [{ type: 'any' }]
     },
-    {
-      code: `
+    `
       <script lang="ts">
       export default defineComponent({
         props: {
@@ -78,8 +78,7 @@ tester.run('require-prop-comment', rule, {
         }
       })
       </script>
-      `
-    },
+    `,
     {
       code: `
       <script setup lang="ts">
@@ -93,6 +92,14 @@ tester.run('require-prop-comment', rule, {
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -102,10 +109,10 @@ tester.run('require-prop-comment', rule, {
         props: {
           // line comment
           b: Number,
-      
+
           /* block comment */
           c: Number,
-      
+
           d: Number,
         }
       })
@@ -134,10 +141,10 @@ tester.run('require-prop-comment', rule, {
       const badProps = defineProps({
         /** JSDoc comment */
         b: Number,
-      
+
         // line comment
         c: Number,
-      
+
         d: Number,
       })
       </script>
@@ -167,10 +174,10 @@ tester.run('require-prop-comment', rule, {
       const badProps = defineProps({
         /** JSDoc comment */
         b: Number,
-      
+
         /* block comment */
         c: Number,
-      
+
         d: Number,
       })
       </script>
@@ -254,16 +261,16 @@ tester.run('require-prop-comment', rule, {
       const props = defineProps<PropType>()
       </script>
       `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
       errors: [
         {
           line: 4,
           column: 9,
           message: 'The "a" property should have a JSDoc comment.'
         }
-      ],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      }
+      ]
     }
   ]
 })

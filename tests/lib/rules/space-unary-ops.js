@@ -50,8 +50,8 @@ tester.run('space-unary-ops', rule, {
     },
     {
       code: '<template><div :[!a]="!a" /></template>',
-      options: [{ nonwords: true }],
       output: '<template><div :[!a]="! a" /></template>',
+      options: [{ nonwords: true }],
       errors: ["Unary operator '!' must be followed by whitespace."]
     },
 

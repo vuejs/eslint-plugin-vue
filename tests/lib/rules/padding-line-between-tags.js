@@ -498,18 +498,18 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: '*' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 7,
           column: 13
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: '*', next: '*' },
-          { blankLine: 'never', prev: 'br', next: '*' }
-        ]
       ]
     },
     {
@@ -541,18 +541,18 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          { blankLine: 'never', prev: '*', next: 'br' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 8,
           column: 13
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: '*', next: '*' },
-          { blankLine: 'never', prev: '*', next: 'br' }
-        ]
       ]
     },
     {
@@ -586,6 +586,7 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
@@ -597,8 +598,7 @@ tester.run('padding-line-between-tags', rule, {
           line: 11,
           column: 13
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -624,6 +624,7 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
@@ -635,8 +636,7 @@ tester.run('padding-line-between-tags', rule, {
           line: 9,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -669,18 +669,18 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'never', prev: '*', next: '*' },
+          { blankLine: 'always', prev: 'br', next: 'div' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 8,
           column: 13
         }
-      ],
-      options: [
-        [
-          { blankLine: 'never', prev: '*', next: '*' },
-          { blankLine: 'always', prev: 'br', next: 'div' }
-        ]
       ]
     },
     {
@@ -712,6 +712,13 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'div' },
+          { blankLine: 'never', prev: 'br', next: 'img' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
@@ -728,13 +735,6 @@ tester.run('padding-line-between-tags', rule, {
           line: 9,
           column: 11
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: '*', next: '*' },
-          { blankLine: 'never', prev: 'br', next: 'div' },
-          { blankLine: 'never', prev: 'br', next: 'img' }
-        ]
       ]
     },
     {
@@ -764,18 +764,18 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: 'br', next: 'div' },
+          { blankLine: 'always', prev: 'div', next: 'br' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 8,
           column: 11
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: 'br', next: 'div' },
-          { blankLine: 'always', prev: 'div', next: 'br' }
-        ]
       ]
     },
     {
@@ -805,18 +805,18 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: 'br', next: 'div' },
+          { blankLine: 'always', prev: 'br', next: 'br' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 9,
           column: 11
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: 'br', next: 'div' },
-          { blankLine: 'always', prev: 'br', next: 'br' }
-        ]
       ]
     },
     {
@@ -848,6 +848,12 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ],
       errors: [
         {
           message: 'Expected blank line before this tag.',
@@ -864,12 +870,6 @@ tester.run('padding-line-between-tags', rule, {
           line: 10,
           column: 11
         }
-      ],
-      options: [
-        [
-          { blankLine: 'always', prev: '*', next: '*' },
-          { blankLine: 'never', prev: 'br', next: 'br' }
-        ]
       ]
     },
     {
@@ -901,14 +901,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: 'br', next: 'br' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 11,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'never', prev: 'br', next: 'br' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -935,14 +935,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'always', prev: '*', next: 'br' }]],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 7,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'always', prev: '*', next: 'br' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1015,14 +1015,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 6,
           column: 12
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1045,14 +1045,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
           column: 12
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1076,14 +1076,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 8,
           column: 12
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1109,14 +1109,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'never', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 10,
           column: 12
         }
-      ],
-      options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1147,14 +1147,14 @@ tester.run('padding-line-between-tags', rule, {
         <footer></footer>
       </template>
       `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Expected blank line before this tag.',
           line: 7,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1191,6 +1191,7 @@ tester.run('padding-line-between-tags', rule, {
         <footer></footer>
       </template>
       `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Expected blank line before this tag.',
@@ -1207,8 +1208,7 @@ tester.run('padding-line-between-tags', rule, {
           line: 9,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+      ]
     },
     {
       filename: 'test.vue',
@@ -1243,6 +1243,12 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [
+        [
+          { blankLine: 'consistent', prev: '*', next: '*' },
+          { blankLine: 'never', prev: 'br', next: 'br' }
+        ]
+      ],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
@@ -1259,12 +1265,6 @@ tester.run('padding-line-between-tags', rule, {
           line: 13,
           column: 11
         }
-      ],
-      options: [
-        [
-          { blankLine: 'consistent', prev: '*', next: '*' },
-          { blankLine: 'never', prev: 'br', next: 'br' }
-        ]
       ]
     },
     {
@@ -1288,14 +1288,14 @@ tester.run('padding-line-between-tags', rule, {
         </div>
       </template>
       `,
+      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]],
       errors: [
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
           column: 11
         }
-      ],
-      options: [[{ blankLine: 'consistent', prev: '*', next: '*' }]]
+      ]
     }
   ]
 })

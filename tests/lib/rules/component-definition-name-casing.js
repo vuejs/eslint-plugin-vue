@@ -145,6 +145,26 @@ ruleTester.run('component-definition-name-casing', rule, {
       filename: 'test.js',
       code: `fn1(component.data)`,
       parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({}) </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
+      options: ['PascalCase'],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
+      options: ['kebab-case'],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
     }
   ],
 
@@ -316,8 +336,8 @@ ruleTester.run('component-definition-name-casing', rule, {
       filename: 'test.vue',
       code: `(Vue as VueConstructor<Vue>).component('foo-bar', component)`,
       output: `(Vue as VueConstructor<Vue>).component('FooBar', component)`,
-      parserOptions,
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
@@ -390,6 +410,34 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'TemplateLiteral',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
+      output: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
+      options: ['PascalCase'],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message: 'Property name "foo-bar" is not PascalCase.',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
+      output: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
+      options: ['kebab-case'],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message: 'Property name "FooBar" is not kebab-case.',
           line: 1
         }
       ]

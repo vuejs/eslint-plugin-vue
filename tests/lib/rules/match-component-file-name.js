@@ -539,6 +539,13 @@ ruleTester.run('match-component-file-name', rule, {
       filename: 'test.jsx',
       code: `fn1(component.data)`,
       parserOptions
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `<script setup> defineOptions({name: 'MyComponent'}) </script>`,
+      options: [{ extensions: ['vue'] }],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
     }
   ],
 
@@ -1077,6 +1084,25 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'MyComponent.vue',
+      code: `<script setup> defineOptions({name: 'CoolComponent'}) </script>`,
+      options: [{ extensions: ['vue'] }],
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message:
+            'Component name `CoolComponent` should match file name `MyComponent`.',
+          suggestions: [
+            {
+              desc: 'Rename component to match file name.',
+              output: `<script setup> defineOptions({name: 'MyComponent'}) </script>`
             }
           ]
         }

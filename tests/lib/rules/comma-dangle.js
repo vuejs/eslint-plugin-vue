@@ -38,12 +38,11 @@ tester.run('comma-dangle', rule, {
         }
       ]
     },
-    {
-      code: `
+    `
       <template>
         <button :[[a,b][1]]="a" ></button>
-      </template>`
-    },
+      </template>
+    `,
     {
       code: `
       <template>
@@ -74,15 +73,15 @@ tester.run('comma-dangle', rule, {
         <template>
           <CustomButton @click="($event, ) => fn()" />
         </template>`,
+      output: `
+        <template>
+          <CustomButton @click="($event ) => fn()" />
+        </template>`,
       options: [
         {
           functions: 'never'
         }
       ],
-      output: `
-        <template>
-          <CustomButton @click="($event ) => fn()" />
-        </template>`,
       errors: [
         {
           message: 'Unexpected trailing comma.',
@@ -101,7 +100,6 @@ tester.run('comma-dangle', rule, {
             ])
           }"></button>
         </template>`,
-      options: ['always-multiline'],
       output: `
         <template>
           <button @click="() => {
@@ -112,6 +110,7 @@ tester.run('comma-dangle', rule, {
             ])
           }"></button>
         </template>`,
+      options: ['always-multiline'],
       errors: [
         {
           message: 'Unexpected trailing comma.',

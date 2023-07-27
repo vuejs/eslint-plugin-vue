@@ -56,8 +56,6 @@ module.exports = categoryIds
   .map((categoryId) => ({
     categoryId,
     title: categoryTitles[categoryId],
-    rules: (categoryRules[categoryId] || []).filter(
-      (rule) => !rule.meta.deprecated
-    )
+    rules: categoryRules[categoryId] || []
   }))
   .filter((category) => category.rules.length > 0)

@@ -16,23 +16,21 @@ const tester = new RuleTester({
 })
 tester.run('html-comment-indent', rule, {
   valid: [
-    {
-      code: `
-        <template>
-          <!-- comment
-            comment
-          -->
+    `
+      <template>
+        <!-- comment
+          comment
+        -->
+        <!--
+          comment
+          comment
+        -->
           <!--
             comment
             comment
           -->
-            <!--
-              comment
-              comment
-            -->
-        </template>
-        `
-    },
+      </template>
+    `,
     {
       code: `
         <template>
@@ -87,44 +85,38 @@ tester.run('html-comment-indent', rule, {
         `,
       options: [0]
     },
-    {
-      code: `
-        <template>
-          <!-- comment
-        \t
-            comment
-            \t
-            comment
+    `
+      <template>
+        <!-- comment
+      \t
+          comment
           \t
-          -->
-          <!--
+          comment
         \t
-          -->
-          <!--
-          -->
-        </template>
-        `
-    },
+        -->
+        <!--
+      \t
+        -->
+        <!--
+        -->
+      </template>
+    `,
 
     // IE conditional comments
-    {
-      code: `
-        <template>
-          <!--[if IE 8]>
-          <div>IE8 only</div>
-          <![endif]-->
-        </template>
-        `
-    },
-    {
-      code: `
-        <template>
-          <!--[if !IE]><!-->
-          <div>not IE only</div>
-          <!--<![endif]-->
-        </template>
-        `
-    }
+    `
+      <template>
+        <!--[if IE 8]>
+        <div>IE8 only</div>
+        <![endif]-->
+      </template>
+    `,
+    `
+      <template>
+        <!--[if !IE]><!-->
+        <div>not IE only</div>
+        <!--<![endif]-->
+      </template>
+    `
   ],
 
   invalid: [
@@ -232,7 +224,6 @@ tester.run('html-comment-indent', rule, {
            -->
         </template>
         `,
-      options: ['tab'],
       output: `
         <template>
           <!-- comment
@@ -248,6 +239,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: ['tab'],
       errors: [
         {
           message: 'Expected relative indentation of 1 tab but found 0 tabs.',
@@ -318,7 +310,6 @@ tester.run('html-comment-indent', rule, {
           -->
         </template>
         `,
-      options: [4],
       output: `
         <template>
           <!-- comment
@@ -334,6 +325,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: [4],
       errors: [
         {
           message:
@@ -407,7 +399,6 @@ tester.run('html-comment-indent', rule, {
           -->
         </template>
         `,
-      options: [0],
       output: `
         <template>
           <!--
@@ -423,6 +414,7 @@ tester.run('html-comment-indent', rule, {
             -->
         </template>
         `,
+      options: [0],
       errors: [
         {
           message:

@@ -159,6 +159,7 @@ declare global {
   type TSLiteralType = VAST.TSLiteralType
   type TSCallSignatureDeclaration = VAST.TSCallSignatureDeclaration
   type TSFunctionType = VAST.TSFunctionType
+  type TypeNode = VAST.TypeNode
 
   // ---- JSX Nodes ----
 

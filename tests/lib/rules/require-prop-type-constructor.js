@@ -5,6 +5,9 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-prop-type-constructor')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
@@ -85,6 +88,14 @@ ruleTester.run('require-prop-type-constructor', rule, {
           props: ['name',,,]
         }
       `
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+      defineProps<Props>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -213,13 +224,13 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: 'The "a" property should be a constructor.',
           line: 5
         }
-      ],
-      parser: require.resolve('@typescript-eslint/parser')
+      ]
     },
     {
       filename: 'ExtraCommas.vue',
@@ -237,13 +248,13 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: 'The "name" property should be a constructor.',
           line: 4
         }
-      ],
-      parser: require.resolve('@typescript-eslint/parser')
+      ]
     },
     {
       filename: 'LiteralsComponent.vue',

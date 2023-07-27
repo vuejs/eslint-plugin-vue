@@ -101,7 +101,6 @@ tester.run('keyword-spacing', rule, {
           }
         " />
       </template>`,
-      options: [{ before: false, after: false }],
       output: `<template>
         <div @event="
           if(foo) {
@@ -113,6 +112,7 @@ tester.run('keyword-spacing', rule, {
           }
         " />
       </template>`,
+      options: [{ before: false, after: false }],
       errors: [
         {
           message: 'Unexpected space(s) after "if".',

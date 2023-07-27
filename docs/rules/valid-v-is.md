@@ -59,7 +59,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [API - v-is](https://vuejs.org/api/built-in-directives.html#v-is)
+- [API - v-is (Recent)](https://github.com/vuejs/docs/blob/8b4f11a4e94d01c7f1c91a60ceaa5b89d6b6de9f/src/api/built-in-directives.md#v-is-)
 - [API - v-is (Old)](https://github.com/vuejs/docs-next/blob/008613756c3d781128d96b64a2d27f7598f8f548/src/api/directives.md#v-is)
 
 ## :rocket: Version

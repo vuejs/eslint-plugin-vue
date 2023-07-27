@@ -72,6 +72,10 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/multi-word-component-names](./multi-word-component-names.md)
+
 ## :books: Further Reading
 
 - [List of html elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)

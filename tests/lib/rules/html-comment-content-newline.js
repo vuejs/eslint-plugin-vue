@@ -16,17 +16,15 @@ const tester = new RuleTester({
 })
 tester.run('html-comment-content-newline', rule, {
   valid: [
-    {
-      code: `
-        <template>
-          <!-- comment -->
-          <!--
-            multiline
-            comment
-          -->
-        </template>
-        `
-    },
+    `
+      <template>
+        <!-- comment -->
+        <!--
+          multiline
+          comment
+        -->
+      </template>
+    `,
     {
       code: `
         <template>
@@ -216,24 +214,20 @@ tester.run('html-comment-content-newline', rule, {
     },
 
     // IE conditional comments
-    {
-      code: `
-        <template>
-          <!--[if IE 8]>
-          <div>IE8 only</div>
-          <![endif]-->
-        </template>
-        `
-    },
-    {
-      code: `
-        <template>
-          <!--[if !IE]><!-->
-          <div>not IE only</div>
-          <!--<![endif]-->
-        </template>
-        `
-    }
+    `
+      <template>
+        <!--[if IE 8]>
+        <div>IE8 only</div>
+        <![endif]-->
+      </template>
+    `,
+    `
+      <template>
+        <!--[if !IE]><!-->
+        <div>not IE only</div>
+        <!--<![endif]-->
+      </template>
+    `
   ],
 
   invalid: [
@@ -290,13 +284,13 @@ tester.run('html-comment-content-newline', rule, {
           <!--  comment  -->
         </template>
         `,
-      options: ['always'],
       output: `
         <template>
           <!--\ncomment\n-->
           <!--\n  comment  \n-->
         </template>
         `,
+      options: ['always'],
       errors: [
         {
           message: "Expected line break after '<!--'.",
@@ -332,12 +326,12 @@ comment
 -->
         </template>
         `,
-      options: ['never'],
       output: `
         <template>
           <!-- comment -->
         </template>
         `,
+      options: ['never'],
       errors: [
         {
           message: "Unexpected line breaks after '<!--'.",
@@ -361,12 +355,12 @@ comment
           <!-- \t \t  \t\tcomment \t \t  \t\t-->
         </template>
         `,
-      options: ['always'],
       output: `
         <template>
           <!--\n \t \t  \t\tcomment \t \t  \t\t\n-->
         </template>
         `,
+      options: ['always'],
       errors: [
         {
           message: "Expected line break after '<!--'.",
@@ -389,8 +383,8 @@ comment
           <!--++++++++++++++++comment++++++++++++++++-->
         </template>
         `,
-      options: ['always', { exceptions: ['+'] }],
       output: null,
+      options: ['always', { exceptions: ['+'] }],
       errors: [
         'Expected line break after exception block.',
         'Expected line break before exception block.'
@@ -402,8 +396,8 @@ comment
           <!--*****comment**-->
         </template>
         `,
-      options: ['always', { exceptions: ['*'] }],
       output: null,
+      options: ['always', { exceptions: ['*'] }],
       errors: [
         'Expected line break after exception block.',
         'Expected line break before exception block.'
@@ -415,12 +409,12 @@ comment
           <!--#+#-#+#-#+#-comment #+#-->
         </template>
         `,
-      options: ['always', { exceptions: ['#+#-'] }],
       output: `
         <template>
           <!--#+#-#+#-#+#-comment #+#\n-->
         </template>
         `,
+      options: ['always', { exceptions: ['#+#-'] }],
       errors: [
         'Expected line break after exception block.',
         "Expected line break before '-->'."
@@ -432,8 +426,8 @@ comment
           <!--*****comment++++-->
         </template>
         `,
-      options: ['always', { exceptions: ['*', '++'] }],
       output: null,
+      options: ['always', { exceptions: ['*', '++'] }],
       errors: [
         'Expected line break after exception block.',
         {
@@ -449,8 +443,8 @@ comment
           <!--*****comment+++++-->
         </template>
         `,
-      options: ['always', { exceptions: ['*', '++'] }],
       output: null,
+      options: ['always', { exceptions: ['*', '++'] }],
       errors: [
         'Expected line break after exception block.',
         {

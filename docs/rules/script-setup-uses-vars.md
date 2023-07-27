@@ -9,7 +9,7 @@ since: v7.13.0
 
 > prevent `<script setup>` variables used in `<template>` to be marked as unused
 
-- :warning: This rule was **deprecated**.
+- :no_entry_sign: This rule was **deprecated**.
 
 ::: tip
 

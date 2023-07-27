@@ -11,7 +11,7 @@ This script updates `lib/index.js` file from rule's meta data.
 
 const fs = require('fs')
 const path = require('path')
-const eslint = require('eslint')
+const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
 const configs = require('./lib/configs')
 
@@ -25,6 +25,7 @@ const content = `/*
 'use strict'
 
 module.exports = {
+  meta: require('./meta'),
   rules: {
     ${rules
       .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
@@ -56,9 +57,9 @@ fs.writeFileSync(filePath, content)
 
 // Format files.
 async function format() {
-  const linter = new eslint.ESLint({ fix: true })
+  const linter = new FlatESLint({ fix: true })
   const report = await linter.lintFiles([filePath])
-  eslint.ESLint.outputFixes(report)
+  FlatESLint.outputFixes(report)
 }
 
 format()

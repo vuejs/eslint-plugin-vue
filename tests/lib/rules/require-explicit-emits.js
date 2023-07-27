@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/require-explicit-emits')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -593,6 +596,42 @@ tester.run('require-explicit-emits', rule, {
       </script>
       `,
       options: [{ allowProps: true }]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<{foo: [], bar:[number]}>()
+      emit('foo')
+      emit('bar', 42)
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type Emits = {foo: [], bar:[number]}
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar', 42)
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as Emits} from './test01'
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      emit('baz')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -1886,6 +1925,64 @@ emits: {'foo': null}
           ]
         }
       ]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<{foo: []}>()
+      emit('foo')
+      emit('bar')
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5
+        }
+      ]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type Emits = {foo: []}
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 6
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as Emits} from './test01'
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      emit('baz')
+      emit('qux')
+      </script>`,
+      errors: [
+        {
+          message:
+            'The "qux" event has been triggered but not declared on `defineEmits`.',
+          line: 8
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })

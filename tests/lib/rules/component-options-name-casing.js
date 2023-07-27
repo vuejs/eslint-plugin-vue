@@ -117,32 +117,10 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
-      errors: [
-        {
-          messageId: 'caseNotMatched',
-          data: {
-            component: 'fooBar',
-            caseType: 'PascalCase'
-          },
-          line: 4,
-          column: 13,
-          endColumn: 19
-        }
-      ],
       output: `
         export default {
           components: {
             FooBar: fooBar
-          }
-        }
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        export default {
-          components: {
-            fooBar: FooBar
           }
         }
       `,
@@ -157,14 +135,36 @@ tester.run('component-options-name-casing', rule, {
           column: 13,
           endColumn: 19
         }
-      ],
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
+            fooBar: FooBar
+          }
+        }
+      `,
       output: `
         export default {
           components: {
             FooBar: FooBar
           }
         }
-      `
+      `,
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'fooBar',
+            caseType: 'PascalCase'
+          },
+          line: 4,
+          column: 13,
+          endColumn: 19
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -175,33 +175,10 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
-      options: ['PascalCase'],
-      errors: [
-        {
-          messageId: 'caseNotMatched',
-          data: {
-            component: 'fooBar',
-            caseType: 'PascalCase'
-          },
-          line: 4,
-          column: 13,
-          endColumn: 19
-        }
-      ],
       output: `
         export default {
           components: {
             FooBar: fooBar
-          }
-        }
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        export default {
-          components: {
-            fooBar: FooBar
           }
         }
       `,
@@ -217,14 +194,37 @@ tester.run('component-options-name-casing', rule, {
           column: 13,
           endColumn: 19
         }
-      ],
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          components: {
+            fooBar: FooBar
+          }
+        }
+      `,
       output: `
         export default {
           components: {
             FooBar: FooBar
           }
         }
-      `
+      `,
+      options: ['PascalCase'],
+      errors: [
+        {
+          messageId: 'caseNotMatched',
+          data: {
+            component: 'fooBar',
+            caseType: 'PascalCase'
+          },
+          line: 4,
+          column: 13,
+          endColumn: 19
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -232,6 +232,13 @@ tester.run('component-options-name-casing', rule, {
         export default {
           components: {
             'foo-bar': FooBar
+          }
+        }
+      `,
+      output: `
+        export default {
+          components: {
+            FooBar: FooBar
           }
         }
       `,
@@ -247,14 +254,7 @@ tester.run('component-options-name-casing', rule, {
           column: 13,
           endColumn: 22
         }
-      ],
-      output: `
-        export default {
-          components: {
-            FooBar: FooBar
-          }
-        }
-      `
+      ]
     },
     {
       filename: 'test.vue',
@@ -265,6 +265,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['camelCase'],
       errors: [
         {
@@ -290,8 +291,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -302,6 +302,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['camelCase'],
       errors: [
         {
@@ -327,8 +328,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -339,6 +339,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['camelCase'],
       errors: [
         {
@@ -364,8 +365,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -376,6 +376,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['kebab-case'],
       errors: [
         {
@@ -401,8 +402,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -413,6 +413,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['kebab-case'],
       errors: [
         {
@@ -438,8 +439,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -450,6 +450,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['kebab-case'],
       errors: [
         {
@@ -475,8 +476,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -487,6 +487,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['kebab-case'],
       errors: [
         {
@@ -512,8 +513,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     },
     {
       filename: 'test.vue',
@@ -525,6 +525,7 @@ tester.run('component-options-name-casing', rule, {
           }
         }
       `,
+      output: null,
       options: ['kebab-case'],
       errors: [
         {
@@ -551,8 +552,7 @@ tester.run('component-options-name-casing', rule, {
             }
           ]
         }
-      ],
-      output: null
+      ]
     }
   ]
 })

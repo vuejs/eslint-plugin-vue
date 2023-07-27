@@ -5,6 +5,9 @@
 'use strict'
 
 const rule = require('../../../lib/rules/return-in-emits-validator')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const RuleTester = require('eslint').RuleTester
 
@@ -123,6 +126,14 @@ ruleTester.run('return-in-emits-validator', rule, {
         })
         </script>
       `
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as Emits} from './test01'
+      const emit = defineEmits<Emits>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 

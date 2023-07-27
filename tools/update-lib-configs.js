@@ -11,7 +11,7 @@ This script updates `lib/configs/*.js` files from rule's meta data.
 
 const fs = require('fs')
 const path = require('path')
-const eslint = require('eslint')
+const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const categories = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'essential', 'vue3-essential'])
@@ -95,9 +95,9 @@ for (const category of categories) {
 
 // Format files.
 async function format() {
-  const linter = new eslint.ESLint({ fix: true })
+  const linter = new FlatESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  eslint.ESLint.outputFixes(report)
+  FlatESLint.outputFixes(report)
 }
 
 format()

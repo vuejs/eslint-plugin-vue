@@ -124,16 +124,15 @@ tester.run('valid-v-slot', rule, {
       options: [{ allowModifiers: true }]
     },
     // svg
-    {
-      code: `
+    `
       <template>
         <svg>
           <MyComponent v-slot="slotProps">
             <MyChildComponent :thing="slotProps.thing" />
           </MyComponent>
         </svg>
-      </template>`
-    },
+      </template>
+    `,
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -407,8 +406,8 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowAnyModifier' }],
-      options: [{ allowModifiers: true }]
+      options: [{ allowModifiers: true }],
+      errors: [{ messageId: 'disallowAnyModifier' }]
     },
     {
       code: `
@@ -418,8 +417,8 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowAnyModifier' }],
-      options: [{ allowModifiers: false }]
+      options: [{ allowModifiers: false }],
+      errors: [{ messageId: 'disallowAnyModifier' }]
     },
     {
       code: `

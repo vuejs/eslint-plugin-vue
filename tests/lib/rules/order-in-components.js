@@ -165,6 +165,19 @@ ruleTester.run('order-in-components', rule, {
         new Vue()
       `,
       parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      filename: 'example.vue',
+      code: `
+      <script setup>
+        defineOptions({
+          name: 'Foo',
+          inheritAttrs: true,
+        })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions
     }
   ],
 
@@ -184,7 +197,6 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions,
       output: `
         export default {
           name: 'app',
@@ -198,6 +210,7 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -226,11 +239,6 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: { jsx: true }
-      },
       output: `
         export default {
           name: 'app',
@@ -249,6 +257,11 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true }
+      },
       errors: [
         {
           message:
@@ -281,7 +294,6 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       output: `
         Vue.component('smart-list', {
           name: 'app',
@@ -294,6 +306,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
+      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -316,7 +329,6 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       output: `
         app.component('smart-list', {
           name: 'app',
@@ -329,6 +341,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
+      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -352,7 +365,6 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       output: `
         const { component } = Vue;
         component('smart-list', {
@@ -366,6 +378,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
+      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -389,7 +402,6 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       output: `
         new Vue({
           el: '#app',
@@ -403,6 +415,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
+      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -436,7 +449,6 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: `
         export default {
           name: 'burger',
@@ -455,6 +467,7 @@ ruleTester.run('order-in-components', rule, {
           },
         };
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -473,7 +486,6 @@ ruleTester.run('order-in-components', rule, {
           test: 'ok'
         };
       `,
-      parserOptions,
       output: `
         export default {
           data() {
@@ -483,6 +495,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       options: [{ order: ['data', 'test', 'name'] }],
+      parserOptions,
       errors: [
         {
           message:
@@ -502,7 +515,6 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger'
         };
       `,
-      parserOptions,
       output: `
         export default {
           /** name of vue component */
@@ -512,6 +524,7 @@ ruleTester.run('order-in-components', rule, {
           }
         };
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -531,7 +544,6 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger'
         };
       `,
-      parserOptions,
       output: `
         export default {
           /** name of vue component */
@@ -541,6 +553,7 @@ ruleTester.run('order-in-components', rule, {
           }/*test*/
         };
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -552,8 +565,8 @@ ruleTester.run('order-in-components', rule, {
     {
       filename: 'example.vue',
       code: `export default {data(){},name:'burger'};`,
-      parserOptions,
       output: `export default {name:'burger',data(){}};`,
+      parserOptions,
       errors: [
         {
           message:
@@ -573,8 +586,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -594,8 +607,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -615,8 +628,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -636,8 +649,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -657,8 +670,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -678,8 +691,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -699,8 +712,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -720,8 +733,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -741,8 +754,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -762,8 +775,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -783,8 +796,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -804,8 +817,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -825,8 +838,8 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: null,
+      parserOptions,
       errors: [
         {
           message:
@@ -846,7 +859,6 @@ ruleTester.run('order-in-components', rule, {
           test: fn(),
         };
       `,
-      parserOptions,
       output: `
         export default {
           name: 'burger',
@@ -855,6 +867,7 @@ ruleTester.run('order-in-components', rule, {
           test: fn(),
         };
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -883,7 +896,6 @@ ruleTester.run('order-in-components', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
       output: `
         export default {
           name: 'burger',
@@ -901,6 +913,7 @@ ruleTester.run('order-in-components', rule, {
           testOptionalChaining: a?.b?.c,
         };
       `,
+      parserOptions,
       errors: [
         {
           message:
@@ -921,11 +934,6 @@ ruleTester.run('order-in-components', rule, {
           };
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: { ts: require.resolve('@typescript-eslint/parser') }
-      },
       output: `
         <script lang="ts">
           export default {
@@ -936,10 +944,43 @@ ruleTester.run('order-in-components', rule, {
           };
         </script>
       `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ...parserOptions,
+        parser: { ts: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
             'The "props" property should be above the "setup" property on line 4.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+      <script setup>
+        defineOptions({
+          inheritAttrs: true,
+          name: 'Foo',
+        })
+      </script>
+      `,
+      output: `
+      <script setup>
+        defineOptions({
+          name: 'Foo',
+          inheritAttrs: true,
+        })
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions,
+      errors: [
+        {
+          message:
+            'The "name" property should be above the "inheritAttrs" property on line 4.',
           line: 5
         }
       ]

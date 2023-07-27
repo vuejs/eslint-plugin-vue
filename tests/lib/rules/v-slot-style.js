@@ -217,13 +217,13 @@ tester.run('v-slot-style', rule, {
           <my-component #default="data"></my-component>
         </template>
       `,
+      options: [{ atComponent: 'shorthand' }],
       errors: [
         {
           messageId: 'expectedShorthand',
           data: { actual: 'v-slot:default', argument: 'default' }
         }
-      ],
-      options: [{ atComponent: 'shorthand' }]
+      ]
     },
     {
       code: `
@@ -236,13 +236,13 @@ tester.run('v-slot-style', rule, {
           <my-component #default="data"></my-component>
         </template>
       `,
+      options: [{ atComponent: 'shorthand' }],
       errors: [
         {
           messageId: 'expectedShorthand',
           data: { actual: 'v-slot', argument: 'default' }
         }
-      ],
-      options: [{ atComponent: 'shorthand' }]
+      ]
     },
     {
       code: `
@@ -255,13 +255,13 @@ tester.run('v-slot-style', rule, {
           <my-component v-slot:default="data"></my-component>
         </template>
       `,
+      options: [{ atComponent: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: '#default', argument: 'default' }
         }
-      ],
-      options: [{ atComponent: 'longform' }]
+      ]
     },
     {
       code: `
@@ -274,13 +274,13 @@ tester.run('v-slot-style', rule, {
           <my-component v-slot:default="data"></my-component>
         </template>
       `,
+      options: [{ atComponent: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: 'v-slot', argument: 'default' }
         }
-      ],
-      options: [{ atComponent: 'longform' }]
+      ]
     },
 
     {
@@ -342,13 +342,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ default: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: '#default', argument: 'default' }
         }
-      ],
-      options: [{ default: 'longform' }]
+      ]
     },
     {
       code: `
@@ -365,13 +365,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ default: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: 'v-slot', argument: 'default' }
         }
-      ],
-      options: [{ default: 'longform' }]
+      ]
     },
     {
       code: `
@@ -388,13 +388,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ default: 'v-slot' }],
       errors: [
         {
           messageId: 'expectedVSlot',
           data: { actual: '#default', argument: 'default' }
         }
-      ],
-      options: [{ default: 'v-slot' }]
+      ]
     },
     {
       code: `
@@ -411,13 +411,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ default: 'v-slot' }],
       errors: [
         {
           messageId: 'expectedVSlot',
           data: { actual: 'v-slot:default', argument: 'default' }
         }
-      ],
-      options: [{ default: 'v-slot' }]
+      ]
     },
 
     {
@@ -457,13 +457,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ named: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: '#foo', argument: 'foo' }
         }
-      ],
-      options: [{ named: 'longform' }]
+      ]
     },
 
     {
@@ -503,13 +503,13 @@ tester.run('v-slot-style', rule, {
           </my-component>
         </template>
       `,
+      options: [{ named: 'longform' }],
       errors: [
         {
           messageId: 'expectedLongform',
           data: { actual: '#[foo]', argument: '[foo]' }
         }
-      ],
-      options: [{ named: 'longform' }]
+      ]
     }
   ]
 })

@@ -12,6 +12,7 @@ export type TSNode =
   | TSLiteralType
   | TSCallSignatureDeclaration
   | TSFunctionType
+  | TypeNode
 
 export interface TSAsExpression extends HasParentNode {
   type: 'TSAsExpression'
@@ -21,7 +22,7 @@ export interface TSAsExpression extends HasParentNode {
 
 export interface TSTypeParameterInstantiation extends HasParentNode {
   type: 'TSTypeParameterInstantiation'
-  params: TSESTree.TypeNode[]
+  params: TypeNode[]
 }
 
 export type TSPropertySignature =
@@ -90,3 +91,12 @@ export interface TSCallSignatureDeclaration extends TSFunctionSignatureBase {
 export interface TSFunctionType extends TSFunctionSignatureBase {
   type: 'TSFunctionType'
 }
+
+type TypeNodeTypes = `${TSESTree.TypeNode['type']}`
+
+export type TypeNode =
+  | (HasParentNode & {
+      type: Exclude<TypeNodeTypes, 'TSFunctionType' | 'TSLiteralType'>
+    })
+  | TSFunctionType
+  | TSLiteralType

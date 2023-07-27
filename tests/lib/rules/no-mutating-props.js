@@ -181,6 +181,37 @@ ruleTester.run('no-mutating-props', rule, {
         </template>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <input v-model="prop1.text">
+            <input v-model="this.prop2.text">
+            <button @click="prop3.text = '1'"></button>
+            <button @click="prop3.count++"></button>
+            <button @click="prop3.list.push(1)"></button>
+            <button @click="prop3.parent.text = '2'"></button>
+            <button @click="delete prop3.parent.text"></button>
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop1', 'prop2', 'prop3'],
+            methods: {
+                onKeydown() {
+                  this.prop3.text = '2'
+                  this.prop3.count ++
+                  this.prop3.list.push(1)
+                  this.prop3.parent.text = '2'
+                  delete this.prop3.parent.text
+                }
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }]
+    },
 
     // setup
     {
@@ -323,6 +354,43 @@ ruleTester.run('no-mutating-props', rule, {
           }
         }
       </script>`
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+                props.prop1.text = '2'
+                props.prop1.count ++
+                props.prop1.list.push(1)
+                props.prop1.parent.text = '2'
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup({a,b,c, d: [e, , f]}) {
+              a.foo ++
+              b.foo = 1
+              c.push(1)
+
+              c.x.push(1)
+              delete c.y
+              e.foo++
+              f.foo++
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }]
     },
 
     {
@@ -642,6 +710,63 @@ ruleTester.run('no-mutating-props', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div v-if="prop1 = [1, 2]"></div>
+            <div v-if="prop2++"></div>
+            <div v-text="prop3.shift()"></div>
+            <div v-text="prop4.slice(0).shift()"></div>
+            <div v-if="this.prop5 = [1, 2] && this.someProp"></div>
+            <div v-if="this.prop6++ && this.someProp < 10"></div>
+            <div v-text="this.prop7.shift()"></div>
+            <div v-text="this.prop8.slice(0).shift()"></div>
+            <div v-if="delete prop9.a"></div>
+            <div v-if="delete this.prop10"></div>
+          </div>
+        </template>
+        <script>
+          export default {
+            props: ['prop1', 'prop2', 'prop3', 'prop4', 'prop5', 'prop6', 'prop7', 'prop8', 'prop9', 'prop10'],
+            method: {
+              deleteProp() {
+                delete this.prop9.a
+                delete this.prop10
+              }
+            }
+          }
+        </script>
+      `,
+      options: [{ shallowOnly: true }],
+      errors: [
+        {
+          message: 'Unexpected mutation of "prop1" prop.',
+          line: 4
+        },
+        {
+          message: 'Unexpected mutation of "prop2" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "prop5" prop.',
+          line: 8
+        },
+        {
+          message: 'Unexpected mutation of "prop6" prop.',
+          line: 9
+        },
+        {
+          message: 'Unexpected mutation of "prop10" prop.',
+          line: 13
+        },
+        {
+          message: 'Unexpected mutation of "prop10" prop.',
+          line: 22
+        }
+      ]
+    },
 
     // setup
     {
@@ -823,6 +948,24 @@ ruleTester.run('no-mutating-props', rule, {
     {
       filename: 'test.vue',
       code: `
+        <script setup>
+          const props = defineProps()
+        </script>
+
+        <template>
+          <input v-model="props[foo]" >
+        </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "[foo]" prop.',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template>
           <input v-model="value">
           <input v-model="props.value">
@@ -839,7 +982,7 @@ ruleTester.run('no-mutating-props', rule, {
           line: 3
         },
         {
-          message: 'Unexpected mutation of "props" prop.',
+          message: 'Unexpected mutation of "value" prop.',
           line: 4
         }
       ]
@@ -898,6 +1041,45 @@ ruleTester.run('no-mutating-props', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            setup(props) {
+              props.a ++
+              props.b = 1
+              props.c.push(1)
+              delete props.d
+
+              function foo() {
+                props.a ++
+              }
+            }
+          }
+        </script>
+
+      `,
+      options: [{ shallowOnly: true }],
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 5
+        },
+        {
+          message: 'Unexpected mutation of "b" prop.',
+          line: 6
+        },
+        {
+          message: 'Unexpected mutation of "d" prop.',
+          line: 8
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 11
+        }
+      ]
+    },
 
     {
       // script setup with shadow
@@ -911,13 +1093,15 @@ ruleTester.run('no-mutating-props', rule, {
         </template>
         <script setup>
         import { ref } from 'vue'
-        const { Infinity } = defineProps({
+        const { Infinity, obj } = defineProps({
           foo: String,
           bar: String,
           Infinity: String,
           window: String,
+          obj: Object
         })
         const foo = ref('')
+        obj.id = 2
         </script>
       `,
       errors: [
@@ -932,6 +1116,50 @@ ruleTester.run('no-mutating-props', rule, {
         {
           message: 'Unexpected mutation of "Infinity" prop.',
           line: 6
+        },
+        {
+          message: 'Unexpected mutation of "obj" prop.',
+          line: 18
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <button @click="props.a ++"/>
+          <button @click="a ++"/>
+          <button @click="props.b.push(1)"/>
+          <button @click="b.push(1)"/>
+          <input v-model="props.a"/>
+          <input v-model="props.a.b"/>
+        </template>
+        <script setup>
+          const props = defineProps({
+            a: Number,
+            b: Array,
+          })
+          props.a ++
+        </script>
+      `,
+      options: [{ shallowOnly: true }],
+      errors: [
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 3
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 4
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 7
+        },
+        {
+          message: 'Unexpected mutation of "a" prop.',
+          line: 15
         }
       ]
     }

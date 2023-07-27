@@ -148,6 +148,28 @@ tester.run('define-macros-order', rule, {
         <script setup>
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          console.log('test1')
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+        }
+      ]
     }
   ],
   invalid: [
@@ -306,10 +328,10 @@ tester.run('define-macros-order', rule, {
           })
         </script>
       `,
+      options: optionsEmitsFirst,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: optionsEmitsFirst,
       errors: [
         {
           message: message('defineEmits'),
@@ -395,10 +417,10 @@ tester.run('define-macros-order', rule, {
           console.log('test3')
         </script>
       `,
+      options: optionsEmitsFirst,
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: optionsEmitsFirst,
       errors: [
         {
           message: message('defineEmits'),
@@ -518,6 +540,86 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineProps'),
           line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          console.log('test1')
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** options */
+          defineOptions({})
+        </script>
+      `,
+      output: `
+        <script setup>
+          import Foo from 'foo'
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          console.log('test1')
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineOptions'),
+          line: 12
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** slots */
+          const slots = defineSlots()
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineOptions'),
+          line: 6
         }
       ]
     }

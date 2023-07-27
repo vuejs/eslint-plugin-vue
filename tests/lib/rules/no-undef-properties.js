@@ -6,6 +6,9 @@
 
 const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-undef-properties')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -535,6 +538,26 @@ tester.run('no-undef-properties', rule, {
         },
       };
       </script>`
+    },
+
+    {
+      // unknown type
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Props1 } from './test01';
+
+      defineProps<Props1>();
+
+      </script>
+
+      <template>
+      <div>{{ foo }}</div>
+      <div>{{ unknown }}</div>
+      </template>`,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
 
@@ -1129,6 +1152,30 @@ tester.run('no-undef-properties', rule, {
           column: 46
         }
       ]
+    },
+
+    {
+      // known type
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Props1 } from './test01';
+
+      defineProps<Props1>();
+
+      </script>
+
+      <template>
+      <div>{{ foo }}</div>
+      <div>{{ unknown }}</div>
+      </template>`,
+      errors: [
+        {
+          message: "'unknown' is not defined.",
+          line: 11
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
