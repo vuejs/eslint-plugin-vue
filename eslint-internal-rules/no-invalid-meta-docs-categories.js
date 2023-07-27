@@ -70,16 +70,16 @@ function checkMetaValidity(context, exportsNode) {
         ) {
           // fixes.push(fixer.insertTextBefore(category.value, '['), fixer.insertTextAfter(category.value, ']'))
 
-          // for vue3 migration
-          if (category.value.value !== 'base') {
+          if (category.value.value === 'base') {
+            fixes.push(fixer.insertTextBefore(category.value, '['))
+          } else {
+            // for vue3 migration
             fixes.push(
               fixer.insertTextBefore(
                 category.value,
                 `['vue3-${category.value.value}', `
               )
             )
-          } else {
-            fixes.push(fixer.insertTextBefore(category.value, '['))
           }
           fixes.push(fixer.insertTextAfter(category.value, ']'))
         }
