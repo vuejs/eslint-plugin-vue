@@ -55,20 +55,20 @@ tester.run('array-bracket-newline', rule, {
     },
     {
       code: '<template><div :attr="[\na]" /></template>',
-      options: ['never'],
       output: '<template><div :attr="[a]" /></template>',
+      options: ['never'],
       errors: ["There should be no linebreak after '['."]
     },
     {
       code: '<template><div :attr="[a\n]" /></template>',
-      options: ['never'],
       output: '<template><div :attr="[a]" /></template>',
+      options: ['never'],
       errors: ["There should be no linebreak before ']'."]
     },
     {
       code: '<template><div :attr="[\na\n]" /></template>',
-      options: ['never'],
       output: '<template><div :attr="[a]" /></template>',
+      options: ['never'],
       errors: [
         "There should be no linebreak after '['.",
         "There should be no linebreak before ']'."
@@ -76,20 +76,20 @@ tester.run('array-bracket-newline', rule, {
     },
     {
       code: '<template><div :attr="[\na]" /></template>',
-      options: ['always'],
       output: '<template><div :attr="[\na\n]" /></template>',
+      options: ['always'],
       errors: ["A linebreak is required before ']'."]
     },
     {
       code: '<template><div :attr="[a\n]" /></template>',
-      options: ['always'],
       output: '<template><div :attr="[\na\n]" /></template>',
+      options: ['always'],
       errors: ["A linebreak is required after '['."]
     },
     {
       code: '<template><div :attr="[a]" /></template>',
-      options: ['always'],
       output: '<template><div :attr="[\na\n]" /></template>',
+      options: ['always'],
       errors: [
         "A linebreak is required after '['.",
         "A linebreak is required before ']'."
@@ -97,8 +97,8 @@ tester.run('array-bracket-newline', rule, {
     },
     {
       code: '<template><div :[[attr]]="[a]" /></template>',
-      options: ['always'],
       output: '<template><div :[[attr]]="[\na\n]" /></template>',
+      options: ['always'],
       errors: [
         "A linebreak is required after '['.",
         "A linebreak is required before ']'."

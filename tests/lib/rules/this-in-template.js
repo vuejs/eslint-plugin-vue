@@ -248,14 +248,14 @@ ruleTester.run('this-in-template', rule, {
     {
       code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
       output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,
-      errors: ["Unexpected usage of 'this'."],
-      options: ['never']
+      options: ['never'],
+      errors: ["Unexpected usage of 'this'."]
     },
     {
       code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
       output: `<template><div :class="{ foo: $foo }"></div></template><!-- never -->`,
-      errors: ["Unexpected usage of 'this'."],
-      options: ['never']
+      options: ['never'],
+      errors: ["Unexpected usage of 'this'."]
     }
   ]
 })

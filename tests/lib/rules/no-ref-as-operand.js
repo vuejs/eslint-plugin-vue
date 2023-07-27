@@ -131,26 +131,21 @@ tester.run('no-ref-as-operand', rule, {
     const count = ref(0)
     const foo = count
     `,
-    {
-      code: `
+    `
       <script>
         import { ref, computed, toRef, customRef, shallowRef } from 'vue'
         const foo = shallowRef({})
         foo[bar] = 123
       </script>
-      `
-    },
-    {
-      code: `
+    `,
+    `
       <script>
         import { ref, computed, toRef, customRef, shallowRef } from 'vue'
         const foo = shallowRef({})
         const isComp = foo.effect
       </script>
-      `
-    },
-    {
-      code: `
+    `,
+    `
       <script>
       import { ref } from 'vue'
       let foo;
@@ -159,10 +154,8 @@ tester.run('no-ref-as-operand', rule, {
         foo = ref(5);
       }
       </script>
-      `
-    },
-    {
-      code: `
+    `,
+    `
       <script>
       import { ref } from 'vue'
       let foo = undefined;
@@ -171,8 +164,7 @@ tester.run('no-ref-as-operand', rule, {
         foo = ref(5);
       }
       </script>
-      `
-    }
+    `
   ],
   invalid: [
     {

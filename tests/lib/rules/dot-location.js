@@ -61,7 +61,6 @@ tester.run('dot-location', rule, {
             bar"
         />
       </template>`,
-      options: ['property'],
       output: `
       <template>
         <div
@@ -69,6 +68,7 @@ tester.run('dot-location', rule, {
             .bar"
         />
       </template>`,
+      options: ['property'],
       errors: [
         {
           message: 'Expected dot to be on same line as property.',

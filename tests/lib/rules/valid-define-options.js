@@ -35,29 +35,29 @@ tester.run('valid-define-options', rule, {
     },
     {
       filename: 'test.vue',
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       code: `
       <script setup lang="ts">
       type X = string;
 
       defineOptions({ name: 'foo' as X })
       </script>
-      `
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       code: `
       <script setup lang="ts">
       const str = 'abc'
 
       defineOptions({ name: 'foo' as (typeof str) })
       </script>
-      `
+      `,
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',

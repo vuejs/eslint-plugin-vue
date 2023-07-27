@@ -386,10 +386,10 @@ tester.run('no-restricted-props', rule, {
       }>()
       </script>
       `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
-      options: [{ name: 'foo', suggest: 'Foo' }],
       errors: [
         {
           message: 'Using `foo` props is not allowed.',

@@ -92,12 +92,11 @@ tester.run('no-watch-after-await', rule, {
       </script>
       `
     },
-    {
-      code: `
+    `
       Vue.component('test', {
         el: foo()
-      })`
-    },
+      })
+    `,
     {
       filename: 'test.vue',
       code: `

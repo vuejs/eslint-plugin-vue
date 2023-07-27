@@ -224,13 +224,13 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: 'The "a" property should be a constructor.',
           line: 5
         }
-      ],
-      parser: require.resolve('@typescript-eslint/parser')
+      ]
     },
     {
       filename: 'ExtraCommas.vue',
@@ -248,13 +248,13 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: 'The "name" property should be a constructor.',
           line: 4
         }
-      ],
-      parser: require.resolve('@typescript-eslint/parser')
+      ]
     },
     {
       filename: 'LiteralsComponent.vue',

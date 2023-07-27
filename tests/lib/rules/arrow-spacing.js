@@ -105,11 +105,11 @@ tester.run('arrow-spacing', rule, {
         <template>
           <div :attr="() => a" />
         </template>`,
-      options: [{ before: false, after: false }],
       output: `
         <template>
           <div :attr="()=>a" />
         </template>`,
+      options: [{ before: false, after: false }],
       errors: [
         {
           message: 'Unexpected space before =>.',

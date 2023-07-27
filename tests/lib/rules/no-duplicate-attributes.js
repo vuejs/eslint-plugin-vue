@@ -73,26 +73,26 @@ tester.run('no-duplicate-attributes', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div style :style></div></div></template>',
-      errors: ["Duplicate attribute 'style'."],
-      options: [{ allowCoexistStyle: false }]
+      options: [{ allowCoexistStyle: false }],
+      errors: ["Duplicate attribute 'style'."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div class :class></div></div></template>',
-      errors: ["Duplicate attribute 'class'."],
-      options: [{ allowCoexistClass: false }]
+      options: [{ allowCoexistClass: false }],
+      errors: ["Duplicate attribute 'class'."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div :style style></div></div></template>',
-      errors: ["Duplicate attribute 'style'."],
-      options: [{ allowCoexistStyle: false }]
+      options: [{ allowCoexistStyle: false }],
+      errors: ["Duplicate attribute 'style'."]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div :class class></div></div></template>',
-      errors: ["Duplicate attribute 'class'."],
-      options: [{ allowCoexistClass: false }]
+      options: [{ allowCoexistClass: false }],
+      errors: ["Duplicate attribute 'class'."]
     }
   ]
 })

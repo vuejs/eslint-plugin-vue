@@ -15,31 +15,21 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-template-target-blank', rule, {
   valid: [
-    { code: '<template><a>link</a></template>' },
-    { code: '<template><a attr>link</a></template>' },
-    { code: '<template><a target>link</a></template>' },
-    {
-      code: '<template><a href="https://eslint.vuejs.org">link</a></template>'
-    },
-    { code: '<template><a :href="link">link</a></template>' },
-    {
-      code: '<template><a :href="link" target="_blank" rel="noopener noreferrer">link</a></template>'
-    },
-    {
-      code: '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener noreferrer">link</a></template>'
-    },
+    '<template><a>link</a></template>',
+    '<template><a attr>link</a></template>',
+    '<template><a target>link</a></template>',
+    '<template><a href="https://eslint.vuejs.org">link</a></template>',
+    '<template><a :href="link">link</a></template>',
+    '<template><a :href="link" target="_blank" rel="noopener noreferrer">link</a></template>',
+    '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener noreferrer">link</a></template>',
     {
       code: '<template><a href="https://eslint.vuejs.org" target="_blank" rel="noopener">link</a></template>',
       options: [{ allowReferrer: true }]
     },
-    { code: '<template><a href="/foo" target="_blank">link</a></template>' },
-    {
-      code: '<template><a href="/foo" target="_blank" rel="noopener noreferrer">link</a></template>'
-    },
-    { code: '<template><a href="foo/bar" target="_blank">link</a></template>' },
-    {
-      code: '<template><a href="foo/bar" target="_blank" rel="noopener noreferrer">link</a></template>'
-    },
+    '<template><a href="/foo" target="_blank">link</a></template>',
+    '<template><a href="/foo" target="_blank" rel="noopener noreferrer">link</a></template>',
+    '<template><a href="foo/bar" target="_blank">link</a></template>',
+    '<template><a href="foo/bar" target="_blank" rel="noopener noreferrer">link</a></template>',
     {
       code: '<template><a :href="link" target="_blank">link</a></template>',
       options: [{ enforceDynamicLinks: 'never' }]

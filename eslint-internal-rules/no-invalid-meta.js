@@ -67,32 +67,44 @@ function checkMetaValidity(context, exportsNode) {
   const metaProperty = getMetaPropertyFromExportsNode(exportsNode)
 
   if (!metaProperty) {
-    context.report(exportsNode, 'Rule is missing a meta property.')
+    context.report({
+      node: exportsNode,
+      messageId: 'missingMeta'
+    })
     return
   }
 
   if (!hasMetaDocs(metaProperty)) {
-    context.report(metaProperty, 'Rule is missing a meta.docs property.')
+    context.report({
+      node: 'metaDocs',
+      messageId: 'missingMetaDocs'
+    })
     return
   }
 
   if (!hasMetaDocsCategories(metaProperty)) {
-    context.report(
-      metaProperty,
-      'Rule is missing a meta.docs.categories property.'
-    )
+    context.report({
+      node: metaProperty,
+      messageId: 'missingMetaDocsCategories'
+    })
     return
   }
 }
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description: 'enforce correct use of `meta` property in core rules',
       categories: ['Internal']
     },
-
-    schema: []
+    schema: [],
+    messages: {
+      missingMeta: 'Rule is missing a meta property.',
+      missingMetaDocs: 'Rule is missing a meta.docs property.',
+      missingMetaDocsCategories:
+        'Rule is missing a meta.docs.categories property.'
+    }
   },
 
   create(context) {

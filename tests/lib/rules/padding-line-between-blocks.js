@@ -125,12 +125,12 @@ tester.run('padding-line-between-blocks', rule, {
 
       <style></style>
       `,
-      options: ['never'],
       output: `
       <template></template>
       <script></script>
       <style></style>
       `,
+      options: ['never'],
       errors: [
         {
           message: 'Unexpected blank line before this block.',
@@ -214,7 +214,6 @@ tester.run('padding-line-between-blocks', rule, {
       <!-- comment -->
       <i18n></i18n>
       `,
-      options: ['never'],
       output: `
       <template></template>
       <!-- comment -->
@@ -225,6 +224,7 @@ tester.run('padding-line-between-blocks', rule, {
       <!-- comment -->
       <i18n></i18n>
       `,
+      options: ['never'],
       errors: [
         {
           message: 'Unexpected blank line before this block.',
@@ -290,7 +290,6 @@ tester.run('padding-line-between-blocks', rule, {
 
       <style></style>
       `,
-      options: ['never'],
       output: `
       <script></script>
       <!-- comment -->
@@ -304,6 +303,7 @@ tester.run('padding-line-between-blocks', rule, {
       TEXT
       <style></style>
       `,
+      options: ['never'],
       errors: [
         {
           message: 'Unexpected blank line before this block.',

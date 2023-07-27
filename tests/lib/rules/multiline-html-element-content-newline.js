@@ -566,7 +566,6 @@ content
           <div
             class="panel"></div>
         </template>`,
-      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }],
       output: `
         <template>
           <div
@@ -577,6 +576,7 @@ content
             class="panel">
 </div>
         </template>`,
+      options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
@@ -594,7 +594,6 @@ content
             content</div>
         </template>
       `,
-      options: [{ allowEmptyLines: true }],
       output: `
         <template>
           <div>
@@ -609,6 +608,7 @@ content
 </div>
         </template>
       `,
+      options: [{ allowEmptyLines: true }],
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'

@@ -118,8 +118,8 @@ ruleTester.run('require-emit-validator', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: require.resolve('@typescript-eslint/parser')
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -132,8 +132,8 @@ ruleTester.run('require-emit-validator', rule, {
           },
         })
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
-      parser: require.resolve('@typescript-eslint/parser')
+      parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -333,8 +333,8 @@ ruleTester.run('require-emit-validator', rule, {
           }
         });
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       parser: require.resolve('@typescript-eslint/parser'),
+      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'missing',

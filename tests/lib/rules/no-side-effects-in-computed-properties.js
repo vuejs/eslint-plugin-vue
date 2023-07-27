@@ -19,8 +19,8 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('no-side-effects-in-computed-properties', rule, {
   valid: [
-    {
-      code: `Vue.component('test', {
+    `
+      Vue.component('test', {
         ...foo,
         computed: {
           ...test0({}),
@@ -97,10 +97,10 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             this.someArray.forEach(arr => console.log(arr))
           }
         }
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         computed: {
           ...mapGetters(['example']),
           test1() {
@@ -115,18 +115,18 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return something.b
           }
         }
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         name: 'something',
         data() {
           return {}
         }
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         computed: {
           test () {
             let a;
@@ -134,10 +134,10 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             return a
           },
         }
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         computed: {
           test () {
             return {
@@ -153,32 +153,32 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
             }
           },
         }
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         computed: {
           test () {
             return this.something['a']().reverse()
           },
         }
-      })`
-    },
-    {
-      code: `const test = { el: '#app' }
+      })
+    `,
+    `
+      const test = { el: '#app' }
         Vue.component('test', {
         el: test.el
-      })`
-    },
-    {
-      code: `Vue.component('test', {
+      })
+    `,
+    `
+      Vue.component('test', {
         computed: {
           test () {
             return [...this.items].reverse()
           },
         }
-      })`
-    },
+      })
+    `,
     {
       filename: 'test.vue',
       code: `
@@ -392,13 +392,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           }
         });
       `,
+      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           line: 5,
           message: 'Unexpected side effect in "test1" computed property.'
         }
-      ],
-      parser: require.resolve('@typescript-eslint/parser')
+      ]
     },
 
     {

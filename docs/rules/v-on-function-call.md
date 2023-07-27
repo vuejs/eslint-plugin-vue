@@ -9,7 +9,7 @@ since: v5.2.0
 
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives
 
-- :warning: This rule was **deprecated** and replaced by [vue/v-on-handler-style](v-on-handler-style.md) rule.
+- :no_entry_sign: This rule was **deprecated** and replaced by [vue/v-on-handler-style](v-on-handler-style.md) rule.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details

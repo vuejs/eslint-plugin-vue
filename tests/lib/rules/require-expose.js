@@ -95,15 +95,13 @@ tester.run('require-expose', rule, {
       </script>
       `
     },
-    {
-      code: `
+    `
       Vue.mixin({
         methods: {
           foo () {}
         }
       })
-      `
-    },
+    `,
     {
       filename: 'test.vue',
       code: `

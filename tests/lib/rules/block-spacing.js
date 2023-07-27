@@ -86,11 +86,11 @@ tester.run('block-spacing', rule, {
         <template>
           <div :attr="function foo() { return true; }" />
         </template>`,
-      options: ['never'],
       output: `
         <template>
           <div :attr="function foo() {return true;}" />
         </template>`,
+      options: ['never'],
       errors: [
         {
           messageId: 'extra',

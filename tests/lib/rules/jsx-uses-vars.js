@@ -27,8 +27,7 @@ linter.defineRule('jsx-uses-vars', rule)
 describe('jsx-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
-      {
-        code: `
+      `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         export default {
@@ -38,10 +37,8 @@ describe('jsx-uses-vars', () => {
             )
           },
         };
+      `,
       `
-      },
-      {
-        code: `
         /* eslint jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.vue';
         import OtherComponent from './OtherComponent.vue';
@@ -63,10 +60,8 @@ describe('jsx-uses-vars', () => {
             )
           }
         }
+      `,
       `
-      },
-      {
-        code: `
         /* eslint jsx-uses-vars: 1 */
         export default {
           render () {
@@ -76,7 +71,6 @@ describe('jsx-uses-vars', () => {
           }
         }
       `
-      }
     ],
 
     invalid: [

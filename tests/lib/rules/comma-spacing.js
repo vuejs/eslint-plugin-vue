@@ -268,13 +268,13 @@ tester.run('comma-spacing', rule, {
             fn(a, b)
           "/>
         </template>`,
-      options: [{ before: true, after: false }],
       output: `
         <template>
           <button @click="
             fn(a ,b)
           "/>
         </template>`,
+      options: [{ before: true, after: false }],
       errors: [
         {
           message: "A space is required before ','.",
