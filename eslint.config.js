@@ -167,7 +167,6 @@ module.exports = [
       'unicorn/filename-case': 'off',
       'unicorn/no-null': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
-      'unicorn/no-negated-condition': 'off', // remove when there are few pull requests (ref: #2146)
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
       'unicorn/prefer-module': 'off',
