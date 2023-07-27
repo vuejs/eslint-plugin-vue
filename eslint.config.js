@@ -175,7 +175,6 @@ module.exports = [
       'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/switch-case-braces': 'off', //        remove when there are few pull requests (ref: #2146)
 
       'internal/require-eslint-community': ['error']
     }
