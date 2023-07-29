@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-typed-object-prop
 description: enforce adding type declarations to object props
+since: v9.16.0
 ---
 # vue/require-typed-object-prop
 
 > enforce adding type declarations to object props
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -43,6 +43,10 @@ Nothing.
 ## :mute: When Not To Use It
 
 When you're not using TypeScript in the project.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 

@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/block-order
 description: enforce order of component top-level elements
+since: v9.16.0
 ---
 # vue/block-order
 
 > enforce order of component top-level elements
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -187,6 +187,10 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 ## :books: Further Reading
 
 - [Style guide - Single-file component top-level element order](https://vuejs.org/style-guide/rules-recommended.html#single-file-component-top-level-element-order)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 

@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-use-v-else-with-v-for
 description: disallow using `v-else-if`/`v-else` on the same element as `v-for`
+since: v9.16.0
 ---
 # vue/no-use-v-else-with-v-for
 
 > disallow using `v-else-if`/`v-else` on the same element as `v-for`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -47,6 +46,10 @@ If you don't find using `v-else-if`/`v-else` together with `v-for` confusing to 
 ## :couple: Related Rules
 
 - [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 

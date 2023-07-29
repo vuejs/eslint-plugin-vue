@@ -3,12 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-model-definition
 description: disallow deprecated `model` definition (in Vue.js 3.0.0+)
+since: v9.16.0
 ---
 # vue/no-deprecated-model-definition
 
 > disallow deprecated `model` definition (in Vue.js 3.0.0+)
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -69,6 +69,10 @@ export default defineComponent({
 ## :books: Further Reading
 
 - [Migration Guide – `v-model`](https://v3-migration.vuejs.org/breaking-changes/v-model.html)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 
