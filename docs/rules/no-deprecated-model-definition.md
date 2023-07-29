@@ -44,7 +44,7 @@ export default defineComponent({
 
 ### `"allowVue3Compat": true`
 
-Allow `model` definitions with prop/event names that match the Vue.js 3.0.0+ `v-model` syntax, e.g. `fooBar`/`update:fooBar`.
+Allow `model` definitions with prop/event names that match the Vue.js 3.0.0+ `v-model` syntax, i.e. `modelValue`/`update:modelValue` or `model-value`/`update:model-value`.
 
 <eslint-code-block :rules="{'vue/no-deprecated-model-definition': ['error', { allowVue3Compat: true }]}">
 
@@ -52,8 +52,8 @@ Allow `model` definitions with prop/event names that match the Vue.js 3.0.0+ `v-
 <script>
 export default defineComponent({
   model: {
-    prop: 'fooBar',
-    event: 'update:fooBar'
+    prop: 'modelValue',
+    event: 'update:modelValue'
   }
 })
 </script>
