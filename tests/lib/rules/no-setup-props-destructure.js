@@ -204,6 +204,27 @@ tester.run('no-setup-props-destructure', rule, {
           line: 4
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup: (props) => {
+          const count = computed(() => props.count)
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const count = computed(() => props.count)
+      </script>
+      `
     }
   ],
   invalid: [
@@ -410,6 +431,18 @@ tester.run('no-setup-props-destructure', rule, {
         {
           messageId: 'getProperty',
           line: 7
+        },
+        {
+          messageId: 'getProperty',
+          line: 9
+        },
+        {
+          messageId: 'getProperty',
+          line: 10
+        },
+        {
+          messageId: 'getProperty',
+          line: 11
         }
       ]
     },
@@ -522,6 +555,126 @@ tester.run('no-setup-props-destructure', rule, {
         {
           messageId: 'getProperty',
           line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup: (props) => {
+          const count = ref(props.count)
+          count = fn(props.count)
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        },
+        {
+          messageId: 'getProperty',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const count = ref(props.count)
+      count = fn(props.count)
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        },
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const newProps = ref({ count: props.count })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counts = [props.count]
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counter = { count: props.count }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const counters = [{ count: [props.count] }]
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const buildCounter = (count) => ({ count })
+
+      buildCounter(props.count)
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 6
         }
       ]
     }
