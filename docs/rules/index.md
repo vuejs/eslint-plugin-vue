@@ -178,7 +178,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
+| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
 | [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
@@ -207,6 +207,7 @@ For example:
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/block-lang](./block-lang.md) | disallow use other than available `lang` |  | :hammer: |
+| [vue/block-order](./block-order.md) | enforce order of component top-level elements | :wrench: | :hammer: |
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style](./component-api-style.md) | enforce component API style |  | :hammer: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: | :hammer: |
@@ -336,6 +337,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
+| [vue/component-tags-order](./component-tags-order.md) | [vue/block-order](./block-order.md) |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
 | [vue/v-on-function-call](./v-on-function-call.md) | [vue/v-on-handler-style](./v-on-handler-style.md) |
