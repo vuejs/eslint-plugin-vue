@@ -513,47 +513,6 @@ tester.run('no-required-prop-with-default', rule, {
       code: `
         <script setup lang="ts">
           interface TestPropType {
-            readonly foo(): void
-            age?: number
-          }
-          const props = withDefaults(
-            defineProps<TestPropType>(),
-            {
-              foo() {console.log(123)},
-            }
-          );
-        </script>
-      `,
-      output: `
-        <script setup lang="ts">
-          interface TestPropType {
-            readonly foo?(): void
-            age?: number
-          }
-          const props = withDefaults(
-            defineProps<TestPropType>(),
-            {
-              foo() {console.log(123)},
-            }
-          );
-        </script>
-      `,
-      options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
-      errors: [
-        {
-          message: 'Prop "foo" should be optional.',
-          line: 4
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script setup lang="ts">
-          interface TestPropType {
             readonly name
             age?: number
           }

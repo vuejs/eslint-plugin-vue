@@ -1,4 +1,6 @@
+// @ts-expect-error -- Cannot change `module` option
 import type { DefaultTheme } from 'vitepress'
+// @ts-expect-error -- Cannot change `module` option
 import { defineConfig } from 'vitepress'
 import { BUNDLED_LANGUAGES } from 'shiki'
 import path from 'path'
