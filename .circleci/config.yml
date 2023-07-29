@@ -104,7 +104,7 @@ jobs:
           command: npm install
       - run:
           name: Test
-          command: npm tests
+          command: npm test
   node-v16:
     <<: *node-base
     docker:
