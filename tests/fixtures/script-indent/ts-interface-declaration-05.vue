@@ -4,10 +4,10 @@ interface Foo
   <
     T
   >
-implements // visitor key is not provided
-Bar
-<
-T
->
+// implements // parsing error
+// Bar
+// <
+// T
+// >
 { }
 </script>

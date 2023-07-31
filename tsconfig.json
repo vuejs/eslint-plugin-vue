@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2019",
     "module": "commonjs",
+    "moduleResolution": "Node16",
     "lib": ["es2020"],
     "allowJs": true,
     "checkJs": true,

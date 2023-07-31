@@ -341,6 +341,9 @@ export type Expression =
 export interface Identifier extends HasParentNode {
   type: 'Identifier'
   name: string
+
+  // for typescript-eslint
+  typeAnnotation?: any
 }
 export interface PrivateIdentifier extends HasParentNode {
   type: 'PrivateIdentifier'

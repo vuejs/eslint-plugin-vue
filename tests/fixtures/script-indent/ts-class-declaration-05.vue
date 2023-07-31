@@ -2,12 +2,12 @@
 <script lang="ts">
 class
   Foo
+  extends
+    Bar
   implements
     Baz1
     ,
     Baz2
-  extends
-    Bar
 {
   prop:string
 }

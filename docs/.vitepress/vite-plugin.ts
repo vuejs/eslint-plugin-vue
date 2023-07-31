@@ -1,3 +1,4 @@
+// @ts-expect-error -- Cannot change `module` option
 import type { UserConfig } from 'vitepress'
 import path from 'path'
 import { fileURLToPath } from 'url'
