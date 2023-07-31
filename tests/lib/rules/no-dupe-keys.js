@@ -2,21 +2,21 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-"use strict";
+'use strict'
 
-const rule = require("../../../lib/rules/no-dupe-keys");
-const RuleTester = require("eslint").RuleTester;
+const rule = require('../../../lib/rules/no-dupe-keys')
+const RuleTester = require('eslint').RuleTester
 
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: "module",
-  },
-});
-ruleTester.run("no-dupe-keys", rule, {
+    sourceType: 'module'
+  }
+})
+ruleTester.run('no-dupe-keys', rule, {
   valid: [
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -38,10 +38,10 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -68,11 +68,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -94,11 +94,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -118,11 +118,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           ...foo(),
@@ -154,11 +154,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           },
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           ...foo(),
@@ -198,11 +198,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           ...foo(),
@@ -234,11 +234,11 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           },
         }
-      `,
+      `
     },
 
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           ...foo(),
@@ -268,11 +268,11 @@ ruleTester.run("no-dupe-keys", rule, {
             ...dat
           }),
         }
-      `,
+      `
     },
 
     {
-      filename: "test.js",
+      filename: 'test.js',
       code: `
         // @vue/component
         export const compA = {
@@ -287,10 +287,10 @@ ruleTester.run("no-dupe-keys", rule, {
             propA: String
           }
         }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         // @vue/component
         export const compA = {
@@ -319,10 +319,10 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           }
         }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         data () {
@@ -336,10 +336,10 @@ ruleTester.run("no-dupe-keys", rule, {
           }
         }
       }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         data () {
@@ -353,10 +353,10 @@ ruleTester.run("no-dupe-keys", rule, {
           }
         }
       }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         data () {
@@ -371,11 +371,11 @@ ruleTester.run("no-dupe-keys", rule, {
           }
         }
       }
-      `,
+      `
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1687
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           asyncData() {
@@ -389,10 +389,10 @@ ruleTester.run("no-dupe-keys", rule, {
             }
           },
         }
-      `,
+      `
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
         defineProps({
@@ -401,10 +401,10 @@ ruleTester.run("no-dupe-keys", rule, {
         const bar = 0
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup lang="ts">
         defineProps<{
@@ -414,21 +414,21 @@ ruleTester.run("no-dupe-keys", rule, {
         const bar = 0
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
-      parserOptions: { parser: require.resolve("@typescript-eslint/parser") },
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
       const props = defineProps(['foo', 'bar'])
       const { foo, bar } = props
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
       const props = defineProps(['foo', 'bar'])
@@ -436,10 +436,10 @@ ruleTester.run("no-dupe-keys", rule, {
       const bar = props.bar
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
       import {toRefs} from 'vue'
@@ -447,10 +447,10 @@ ruleTester.run("no-dupe-keys", rule, {
       const { foo, bar } = toRefs(props)
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
       import {toRef} from 'vue'
@@ -459,28 +459,28 @@ ruleTester.run("no-dupe-keys", rule, {
       const bar = toRef(props, 'bar')
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup></script>
       const {foo,bar} = defineProps(['foo', 'bar'])
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup></script>
       const {foo=42,bar='abc'} = defineProps(['foo', 'bar'])
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser')
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       const props = withDefaults(
@@ -494,14 +494,14 @@ ruleTester.run("no-dupe-keys", rule, {
       const foo = props.foo
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
-      parserOptions: { parser: require.resolve("@typescript-eslint/parser") },
-    },
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    }
   ],
 
   invalid: [
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -529,29 +529,25 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 5,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 10,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 10
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 14,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 14
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 21,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 21
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -579,29 +575,25 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 5,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 10,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 10
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 14,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 14
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 21,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 21
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: ['foo'],
@@ -620,24 +612,21 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 5,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 5
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 9,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 9
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 12,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 12
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           props: {
@@ -667,29 +656,25 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 7,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 7
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 13,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 13
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 16,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 16
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 23,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 23
+        }
+      ]
     },
     {
-      filename: "test.js",
+      filename: 'test.js',
       code: `
         new Vue({
           foo: {
@@ -700,16 +685,16 @@ ruleTester.run("no-dupe-keys", rule, {
           },
         })
       `,
-      options: [{ groups: ["foo"] }],
+      options: [{ groups: ['foo'] }],
       errors: [
         {
-          message: "Duplicate key 'bar'.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           methods: {
@@ -728,14 +713,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 12,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 12
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           methods: {
@@ -752,14 +736,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 10,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 10
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           methods: {
@@ -774,14 +757,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 9,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 9
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           computed: {
@@ -796,14 +778,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 9,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 9
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           data() {
@@ -818,14 +799,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 9,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 9
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
         export default {
           data() {
@@ -840,14 +820,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 9,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 9
+        }
+      ]
     },
     {
-      filename: "test.js",
+      filename: 'test.js',
       code: `
         defineComponent({
           foo: {
@@ -858,16 +837,16 @@ ruleTester.run("no-dupe-keys", rule, {
           },
         })
       `,
-      options: [{ groups: ["foo"] }],
+      options: [{ groups: ['foo'] }],
       errors: [
         {
-          message: "Duplicate key 'bar'.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.js",
+      filename: 'test.js',
       code: `
         export default defineComponent({
           foo: {
@@ -878,16 +857,16 @@ ruleTester.run("no-dupe-keys", rule, {
           },
         })
       `,
-      options: [{ groups: ["foo"] }],
+      options: [{ groups: ['foo'] }],
       errors: [
         {
-          message: "Duplicate key 'bar'.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         props: ['foo'],
@@ -905,14 +884,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 6,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 6
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         props: ['foo'],
@@ -926,14 +904,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         props: ['foo'],
@@ -946,14 +923,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 6,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 6
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         data () {
@@ -967,14 +943,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       export default {
         data () {
@@ -988,14 +963,13 @@ ruleTester.run("no-dupe-keys", rule, {
       `,
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 7,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 7
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
         defineProps({
@@ -1004,17 +978,16 @@ ruleTester.run("no-dupe-keys", rule, {
         const foo = 0
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 6,
-        },
-      ],
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 6
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
         import { Foo } from './Foo.vue';
@@ -1032,25 +1005,24 @@ ruleTester.run("no-dupe-keys", rule, {
         const bar = () => 'bar';
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
-          message: "Duplicate key 'baz'.",
-          line: 4,
+          message: "Duplicate key 'baz'. May cause name collision in script or template tag.",
+          line: 4
         },
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 12,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 12
         },
         {
-          message: "Duplicate key 'bar'.",
-          line: 15,
-        },
-      ],
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 15
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       defineProps<{
@@ -1062,22 +1034,21 @@ ruleTester.run("no-dupe-keys", rule, {
       const bar = 'bar';
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
-      parserOptions: { parser: require.resolve("@typescript-eslint/parser") },
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
-          message:
-            "Duplicate key 'foo'. May cause name collision in script or template tag.",
-          line: 8,
+          message: "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 8
         },
         {
-          message: "Duplicate key 'bar'.",
-          line: 9,
-        },
-      ],
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 9
+        }
+      ]
     },
     {
-      filename: "test.vue",
+      filename: 'test.vue',
       code: `
       <script setup>
       const props = defineProps(['foo', 'bar'])
@@ -1085,13 +1056,13 @@ ruleTester.run("no-dupe-keys", rule, {
       const bar = 42
       </script>
       `,
-      parser: require.resolve("vue-eslint-parser"),
+      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
-          message: "Duplicate key 'bar'.",
-          line: 5,
-        },
-      ],
-    },
-  ],
-});
+          message: "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 5
+        }
+      ]
+    }
+  ]
+})
