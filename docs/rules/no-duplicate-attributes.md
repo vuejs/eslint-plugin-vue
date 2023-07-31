@@ -11,13 +11,12 @@ since: v3.0.0
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
-When duplicate arguments exist, only the last one is valid.
-It's possibly mistakes.
+When there are multiple attributes with the same name on a component, only the last one is used and the rest are ignored, so this is usually a mistake.
 
 ## :book: Rule Details
 
 This rule reports duplicate attributes.
-`v-bind:foo` directives are handled as the attributes `foo`.
+`v-bind:foo` directives are handled as the attribute `foo`.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error']}">
 
