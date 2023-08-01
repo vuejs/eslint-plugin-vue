@@ -11,7 +11,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule aims to prevent duplicated attribute inheritance.  
+This rule aims to prevent duplicate attribute inheritance.  
 This rule to warn to apply `inheritAttrs: false` when it detects `v-bind="$attrs"` being used.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error']}">
