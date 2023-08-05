@@ -12,7 +12,7 @@ description: disallow usages of ref objects that can lead to loss of reactivity
 
 ## :book: Rule Details
 
-This rule reports the destructuring of ref objects causing the value to lose reactivity.
+This rule reports the usages of ref objects causing the value to lose reactivity.
 
 <eslint-code-block :rules="{'vue/no-ref-object-reactivity-loss': ['error']}" language="javascript" filename="example.js" >
 
