@@ -79,7 +79,6 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  | :three::two::hammer: |
 | [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  | :three::two::hammer: |
 | [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  | :three::two::warning: |
-| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | disallow destructuring of `props` passed to `setup` |  | :three::two::hammer: |
 | [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: | :three::two::warning: |
 | [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  | :three::two::warning: |
 | [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  | :three::two::warning: |
@@ -245,6 +244,7 @@ For example:
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  | :hammer: |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  | :hammer: |
 | [vue/no-root-v-if](./no-root-v-if.md) | disallow `v-if` directives on root element |  | :hammer: |
+| [vue/no-setup-props-reactivity-loss](./no-setup-props-reactivity-loss.md) | disallow usages that lose the reactivity of `props` passed to `setup` |  | :hammer: |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  | :hammer: |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
@@ -339,6 +339,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|
 | [vue/component-tags-order](./component-tags-order.md) | [vue/block-order](./block-order.md) |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
+| [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | [vue/no-setup-props-reactivity-loss](./no-setup-props-reactivity-loss.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
 | [vue/v-on-function-call](./v-on-function-call.md) | [vue/v-on-handler-style](./v-on-handler-style.md) |
 
