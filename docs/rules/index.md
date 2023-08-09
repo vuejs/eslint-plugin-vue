@@ -231,7 +231,7 @@ For example:
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
-| [vue/no-ref-object-destructure](./no-ref-object-destructure.md) | disallow destructuring of ref objects that can lead to loss of reactivity |  | :warning: |
+| [vue/no-ref-object-reactivity-loss](./no-ref-object-reactivity-loss.md) | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
 | [vue/no-required-prop-with-default](./no-required-prop-with-default.md) | enforce props with default values to be optional | :wrench::bulb: | :warning: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
@@ -339,6 +339,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|
 | [vue/component-tags-order](./component-tags-order.md) | [vue/block-order](./block-order.md) |
 | [vue/no-invalid-model-keys](./no-invalid-model-keys.md) | [vue/valid-model-definition](./valid-model-definition.md) |
+| [vue/no-ref-object-destructure](./no-ref-object-destructure.md) | [vue/no-ref-object-reactivity-loss](./no-ref-object-reactivity-loss.md) |
 | [vue/no-setup-props-destructure](./no-setup-props-destructure.md) | [vue/no-setup-props-reactivity-loss](./no-setup-props-reactivity-loss.md) |
 | [vue/script-setup-uses-vars](./script-setup-uses-vars.md) | (no replacement) |
 | [vue/v-on-function-call](./v-on-function-call.md) | [vue/v-on-handler-style](./v-on-handler-style.md) |
