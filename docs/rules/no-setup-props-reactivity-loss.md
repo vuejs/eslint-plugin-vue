@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-setup-props-reactivity-loss
 description: disallow usages that lose the reactivity of `props` passed to `setup`
+since: v9.17.0
 ---
 # vue/no-setup-props-reactivity-loss
 
 > disallow usages that lose the reactivity of `props` passed to `setup`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -95,6 +94,10 @@ Nothing.
 
 - [Guide - Composition API - Setup](https://vuejs.org/api/composition-api-setup.html)
 - [Vue RFCs - 0013-composition-api](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0013-composition-api.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.17.0
 
 ## :mag: Implementation
 
