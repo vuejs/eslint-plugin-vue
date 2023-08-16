@@ -58,6 +58,27 @@ tester.run('no-unused-properties', rule, {
       code: `
         <script>
           export default {
+            computed: {
+              ...mapGetters(["bar"]),
+            },
+            methods: {
+              baz() {
+                return this.bar
+              }
+            }
+          }
+        </script>
+        <template>
+          {{ baz() }}
+        </template>
+      `,
+      options: allOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
             methods: mapMutations({
               add: 'increment'
             })
