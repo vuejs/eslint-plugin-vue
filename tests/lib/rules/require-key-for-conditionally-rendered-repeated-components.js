@@ -21,10 +21,10 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
-    <div>
-      <CustomComponent v-if='some-condition' key='key1' />
-      <CustomComponent v-else key='key2' />
-    </div>
+          <div>
+            <CustomComponent v-if='some-condition' key='key1' />
+            <CustomComponent v-else key='key2' />
+          </div>
         </template>
         <script>
         export default {
@@ -57,12 +57,30 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
       filename: 'test.vue',
       code: `
         <template>
-    <div>
-      <div v-if='some-condition' >
-        <CustomComponent />
-      </div>
-        <CustomComponent v-else />
-    </div>
+          <div>
+            <div v-if='some-condition' >
+              <CustomComponent />
+            </div>
+            <CustomComponent v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <slot v-if='some-condition' />
+            <slot v-else />
+          </div>
         </template>
         <script>
         export default {
