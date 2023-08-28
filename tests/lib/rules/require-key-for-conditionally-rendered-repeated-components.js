@@ -22,8 +22,8 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
       code: `
         <template>
     <div>
-              <CustomComponent v-if='some-condition' key='key1' />
-              <CustomComponent v-else key='key2' />
+      <CustomComponent v-if='some-condition' key='key1' />
+      <CustomComponent v-else key='key2' />
     </div>
         </template>
         <script>
@@ -40,8 +40,8 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
       code: `
         <template>
     <div>
-              <CustomComponent v-if='some-condition' />
-              <CustomComponent />
+      <CustomComponent v-if='some-condition' />
+      <CustomComponent />
     </div>
         </template>
         <script>
@@ -58,10 +58,10 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
       code: `
         <template>
     <div>
-                <div v-if='some-condition' >
-                  <CustomComponent />
-                </div>
-              <CustomComponent v-else />
+      <div v-if='some-condition' >
+        <CustomComponent />
+      </div>
+        <CustomComponent v-else />
     </div>
         </template>
         <script>
@@ -78,49 +78,49 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
     {
       filename: 'test.vue',
       code: `
-          <template>
-              <div>
-                  <OuterComponent v-if='showOuterComponent'>
-                      <InnerComponent v-if='showInnerComponent1' />
-                      <InnerComponent v-else />
-                  </OuterComponent>
-                  <OuterComponent v-else>
-                      <InnerComponent :key='key1' />
-                      <InnerComponent :key='key2' />
-                  </OuterComponent>
-              </div>
-          </template>
-          <script>
-          export default {
-              components: {
-                  OuterComponent,
-                  InnerComponent
-              }
+        <template>
+          <div>
+            <OuterComponent v-if='showOuterComponent'>
+              <InnerComponent v-if='showInnerComponent1' />
+              <InnerComponent v-else />
+            </OuterComponent>
+            <OuterComponent v-else>
+              <InnerComponent :key='key1' />
+              <InnerComponent :key='key2' />
+            </OuterComponent>
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
           }
-          </script>
-          `,
+        }
+        </script>
+        `,
       output: `
-          <template>
-              <div>
-                  <OuterComponent key='outer-component-1' v-if='showOuterComponent'>
-                      <InnerComponent key='inner-component-1' v-if='showInnerComponent1' />
-                      <InnerComponent key='inner-component-2' v-else />
-                  </OuterComponent>
-                  <OuterComponent key='outer-component-2' v-else>
-                      <InnerComponent :key='key1' />
-                      <InnerComponent :key='key2' />
-                  </OuterComponent>
-              </div>
-          </template>
-          <script>
-          export default {
-              components: {
-                  OuterComponent,
-                  InnerComponent
-              }
+        <template>
+          <div>
+            <OuterComponent key='outer-component-1' v-if='showOuterComponent'>
+              <InnerComponent key='inner-component-1' v-if='showInnerComponent1' />
+              <InnerComponent key='inner-component-2' v-else />
+            </OuterComponent>
+            <OuterComponent key='outer-component-2' v-else>
+              <InnerComponent :key='key1' />
+              <InnerComponent :key='key2' />
+            </OuterComponent>
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
           }
-          </script>
-          `,
+        }
+        </script>
+        `,
       errors: [
         {
           message:
@@ -147,55 +147,55 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
     {
       filename: 'test.vue',
       code: `
-              <template>
-                  <div>
-                      <OuterComponent v-if='showOuterComponent'>
-                          <InnerComponent v-if='showInnerComponent1'>
-                              <DifferentScopeComponent />
-                          </InnerComponent>
-                          <InnerComponent v-else />
-                      </OuterComponent>
-                      <OuterComponent v-else>
-                          <InnerComponent />
-                          <InnerComponent />
-                      </OuterComponent>
-                      <DifferentScopeComponent />
-                  </div>
-              </template>
-              <script>
-              export default {
-                  components: {
-                      OuterComponent,
-                      InnerComponent
-                  }
-              }
-              </script>
-              `,
+        <template>
+          <div>
+            <OuterComponent v-if='showOuterComponent'>
+              <InnerComponent v-if='showInnerComponent1'>
+                <DifferentScopeComponent />
+              </InnerComponent>
+              <InnerComponent v-else />
+            </OuterComponent>
+            <OuterComponent v-else>
+              <InnerComponent />
+              <InnerComponent />
+            </OuterComponent>
+            <DifferentScopeComponent />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
+          }
+        }
+        </script>
+        `,
       output: `
-              <template>
-                  <div>
-                      <OuterComponent key='outer-component-1' v-if='showOuterComponent'>
-                          <InnerComponent key='inner-component-1' v-if='showInnerComponent1'>
-                              <DifferentScopeComponent />
-                          </InnerComponent>
-                          <InnerComponent key='inner-component-2' v-else />
-                      </OuterComponent>
-                      <OuterComponent key='outer-component-2' v-else>
-                          <InnerComponent />
-                          <InnerComponent />
-                      </OuterComponent>
-                      <DifferentScopeComponent />
-                  </div>
-              </template>
-              <script>
-              export default {
-                  components: {
-                      OuterComponent,
-                      InnerComponent
-                  }
-              }
-              </script>
-              `,
+        <template>
+          <div>
+            <OuterComponent key='outer-component-1' v-if='showOuterComponent'>
+              <InnerComponent key='inner-component-1' v-if='showInnerComponent1'>
+                <DifferentScopeComponent />
+              </InnerComponent>
+              <InnerComponent key='inner-component-2' v-else />
+            </OuterComponent>
+            <OuterComponent key='outer-component-2' v-else>
+              <InnerComponent />
+              <InnerComponent />
+            </OuterComponent>
+            <DifferentScopeComponent />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
+          }
+        }
+        </script>
+        `,
       errors: [
         {
           message:
@@ -222,23 +222,23 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
     {
       filename: 'test.vue',
       code: `
-              <template>
-            <div>
-                      <div v-if='someCondition' />
-                      <div v-else-if='otherCondition' />
-                      <div v-else />
-            </div>
-              </template>
-              `,
+        <template>
+          <div>
+            <div v-if='someCondition' />
+            <div v-else-if='otherCondition' />
+            <div v-else />
+          </div>
+        </template>
+        `,
       output: `
-              <template>
-            <div>
-                      <div key='div-1' v-if='someCondition' />
-                      <div key='div-2' v-else-if='otherCondition' />
-                      <div key='div-3' v-else />
-            </div>
-              </template>
-              `,
+        <template>
+          <div>
+            <div key='div-1' v-if='someCondition' />
+            <div key='div-2' v-else-if='otherCondition' />
+            <div key='div-3' v-else />
+          </div>
+        </template>
+        `,
       errors: [
         {
           message:
