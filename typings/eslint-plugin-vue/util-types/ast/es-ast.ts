@@ -519,7 +519,10 @@ export interface CallExpression extends HasParentNode {
   callee: Expression | Super
   arguments: (Expression | SpreadElement)[]
   optional: boolean
-  typeParameters?: TS.TSTypeParameterInstantiation
+  typeArguments?: TS.TSTypeParameterInstantiation
+
+  /* @deprecated */
+  typeParameters: never
 }
 export interface Super extends HasParentNode {
   type: 'Super'
@@ -528,7 +531,10 @@ export interface NewExpression extends HasParentNode {
   type: 'NewExpression'
   callee: Expression
   arguments: (Expression | SpreadElement)[]
-  typeParameters?: TSTypeParameterInstantiation
+  typeArguments?: TSTypeParameterInstantiation
+
+  /* @deprecated */
+  typeParameters: never
 }
 interface BaseMemberExpression extends HasParentNode {
   type: 'MemberExpression'
