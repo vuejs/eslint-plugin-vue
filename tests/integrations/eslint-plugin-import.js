@@ -30,10 +30,12 @@ describe('Integration with eslint-plugin-import', () => {
     if (
       !semver.satisfies(
         process.version,
-        require(path.join(
-          __dirname,
-          'eslint-plugin-import/node_modules/eslint/package.json'
-        )).engines.node
+        require(
+          path.join(
+            __dirname,
+            'eslint-plugin-import/node_modules/eslint/package.json'
+          )
+        ).engines.node
       )
     ) {
       return
