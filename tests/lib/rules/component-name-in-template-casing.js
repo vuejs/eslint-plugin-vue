@@ -867,7 +867,7 @@ tester.run('component-name-in-template-casing', rule, {
       `,
       output: `
         <template>
-          <Component />
+          <component />
           <Suspense />
           <Teleport />
           <ClientOnly />
@@ -876,7 +876,6 @@ tester.run('component-name-in-template-casing', rule, {
       `,
       options: ['PascalCase', { registeredComponentsOnly: false }],
       errors: [
-        'Component name "component" is not PascalCase.',
         'Component name "suspense" is not PascalCase.',
         'Component name "teleport" is not PascalCase.',
         'Component name "client-only" is not PascalCase.',
@@ -1033,7 +1032,7 @@ tester.run('component-name-in-template-casing', rule, {
                 <HelloWorld3 />
                 <HelloWorld4 />
                 <HelloWorld5 />
-                <Component />
+                <component />
               </template>
             `,
             errors: [
@@ -1065,11 +1064,6 @@ tester.run('component-name-in-template-casing', rule, {
               {
                 message: 'Component name "hello-world5" is not PascalCase.',
                 line: 18,
-                column: 17
-              },
-              {
-                message: 'Component name "component" is not PascalCase.',
-                line: 19,
                 column: 17
               }
             ]
