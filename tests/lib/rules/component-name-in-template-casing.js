@@ -86,6 +86,10 @@ tester.run('component-name-in-template-casing', rule, {
       code: '<template><circle cx="0" cy="0" :d="radius"></template>',
       options: ['PascalCase', { registeredComponentsOnly: false }]
     },
+    {
+      code: '<template><component is="div" /></template>',
+      options: ['PascalCase', { registeredComponentsOnly: false }]
+    },
 
     // kebab-case
     {
@@ -106,6 +110,10 @@ tester.run('component-name-in-template-casing', rule, {
     },
     {
       code: '<template><math><mspace/></math></template>',
+      options: ['kebab-case', { registeredComponentsOnly: false }]
+    },
+    {
+      code: '<template><component is="div" /></template>',
       options: ['kebab-case', { registeredComponentsOnly: false }]
     },
 
