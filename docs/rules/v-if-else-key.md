@@ -1,14 +1,15 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/require-key-for-conditionally-rendered-repeated-components
+title: vue/v-if-else-key
 description: require key attribute for conditionally rendered repeated components
 ---
-# vue/require-key-for-conditionally-rendered-repeated-components
+
+# vue/v-if-else-key
 
 > require key attribute for conditionally rendered repeated components
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -17,19 +18,19 @@ This rule checks for components that are both repeated and conditionally rendere
 
 This rule is not required in Vue 3, as the key is automatically assigned to the elements.
 
-<eslint-code-block fix :rules="{'vue/require-key-for-conditionally-rendered-repeated-components': ['error']}">
+<eslint-code-block fix :rules="{'vue/v-if-else-key': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <my-component v-if="condition1" :key="one"/>
-  <my-component v-else-if="condition2" :key="two"/>
-  <my-component v-else :key="three"/>
+  <my-component v-if="condition1" :key="one" />
+  <my-component v-else-if="condition2" :key="two" />
+  <my-component v-else :key="three" />
 
   <!-- ✗ BAD -->
-  <my-component v-if="condition1"/>
-  <my-component v-else-if="condition2"/>
-  <my-component v-else/>
+  <my-component v-if="condition1" />
+  <my-component v-else-if="condition2" />
+  <my-component v-else />
 </template>
 ```
 
@@ -45,5 +46,5 @@ Nothing.
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-key-for-conditionally-rendered-repeated-components.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-key-for-conditionally-rendered-repeated-components.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-if-else-key.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-if-else-key.js)

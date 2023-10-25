@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('eslint').RuleTester
-const rule = require('../../../lib/rules/require-key-for-conditionally-rendered-repeated-components')
+const rule = require('../../../lib/rules/v-if-else-key')
 
 const tester = new RuleTester({
   parser: require.resolve('vue-eslint-parser'),
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
+tester.run('v-if-else-key', rule, {
   valid: [
     {
       filename: 'test.vue',
