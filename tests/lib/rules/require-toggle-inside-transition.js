@@ -97,6 +97,11 @@ tester.run('require-toggle-inside-transition', rule, {
       filename: 'test.vue',
       code: '<template><transition><template v-for="e in list"><div /></template></transition></template>',
       errors: [{ messageId: 'expected' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><Transition>  <div /></Transition></template>',
+      errors: [{ messageId: 'expected' }]
     }
   ]
 })

@@ -276,6 +276,7 @@
   "IframeHTMLAttributes",
   "ImgHTMLAttributes",
   "InsHTMLAttributes",
+  "InputTypeHTMLAttribute",
   "InputHTMLAttributes",
   "KeygenHTMLAttributes",
   "LabelHTMLAttributes",
