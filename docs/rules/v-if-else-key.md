@@ -4,12 +4,11 @@ sidebarDepth: 0
 title: vue/v-if-else-key
 description: require key attribute for conditionally rendered repeated components
 ---
-
 # vue/v-if-else-key
 
 > require key attribute for conditionally rendered repeated components
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details

@@ -267,7 +267,6 @@ For example:
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
-| [vue/require-key-for-conditionally-rendered-repeated-components](./require-key-for-conditionally-rendered-repeated-components.md) | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/require-macro-variable-name](./require-macro-variable-name.md) | require a certain macro variable name | :bulb: | :hammer: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
@@ -277,6 +276,7 @@ For example:
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
+| [vue/v-if-else-key](./v-if-else-key.md) | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
 | [vue/valid-define-options](./valid-define-options.md) | enforce valid `defineOptions` compiler macro |  | :warning: |
 
