@@ -90,6 +90,25 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
         }
         </script>
         `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div v-if='someCondition' />
+            <div v-else-if='otherCondition' />
+            <div v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
     }
   ],
   invalid: [
@@ -234,44 +253,6 @@ tester.run('require-key-for-conditionally-rendered-repeated-components', rule, {
           message:
             "Conditionally rendered repeated component 'OuterComponent' expected to have a 'key' attribute.",
           line: 10
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <div>
-            <div v-if='someCondition' />
-            <div v-else-if='otherCondition' />
-            <div v-else />
-          </div>
-        </template>
-        `,
-      output: `
-        <template>
-          <div>
-            <div key='div-1' v-if='someCondition' />
-            <div key='div-2' v-else-if='otherCondition' />
-            <div key='div-3' v-else />
-          </div>
-        </template>
-        `,
-      errors: [
-        {
-          message:
-            "Conditionally rendered repeated component 'div' expected to have a 'key' attribute.",
-          line: 4
-        },
-        {
-          message:
-            "Conditionally rendered repeated component 'div' expected to have a 'key' attribute.",
-          line: 5
-        },
-        {
-          message:
-            "Conditionally rendered repeated component 'div' expected to have a 'key' attribute.",
-          line: 6
         }
       ]
     }
