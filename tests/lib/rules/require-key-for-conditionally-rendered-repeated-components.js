@@ -109,6 +109,24 @@ tester.run('v-if-else-key', rule, {
         }
         </script>
         `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div v-if='foo' />
+            <span v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
     }
   ],
   invalid: [
