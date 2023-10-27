@@ -42,7 +42,7 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/require-v-for-key.md]
+- [vue/require-v-for-key]
 
 [vue/require-v-for-key]: ./require-v-for-key.md
 
