@@ -57,7 +57,15 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><transition><template v-if="show"><div /></template></transition></template>'
-    }
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><slot /></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><div :key="k" /></transition></template>'
+    },
   ],
   invalid: [
     {
@@ -81,7 +89,7 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><transition><div /><div /></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [{ messageId: 'expected' }, { messageId: 'expected' }]
     },
     {
       filename: 'test.vue',
