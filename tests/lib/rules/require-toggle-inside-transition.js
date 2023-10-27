@@ -57,6 +57,18 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><transition><template v-if="show"><div /></template></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><slot /></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><div :key="k" /></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition appear><div /></transition></template>'
     }
   ],
   invalid: [
