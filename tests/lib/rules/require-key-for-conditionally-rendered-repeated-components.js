@@ -255,6 +255,59 @@ tester.run('v-if-else-key', rule, {
           line: 10
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <OuterComponent v-if='showOuterComponent'>
+              <InnerComponent v-if='showInnerComponent1' />
+              <InnerComponent v-else />
+            </OuterComponent>
+            <InnerComponent v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
+          }
+        }
+        </script>
+        `,
+      output: `
+        <template>
+          <div>
+            <OuterComponent v-if='showOuterComponent'>
+              <InnerComponent key='inner-component-1' v-if='showInnerComponent1' />
+              <InnerComponent key='inner-component-2' v-else />
+            </OuterComponent>
+            <InnerComponent v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            OuterComponent,
+            InnerComponent
+          }
+        }
+        </script>
+        `,
+      errors: [
+        {
+          message:
+            "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
+          line: 5
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
+          line: 6
+        }
+      ]
     }
   ]
 })
