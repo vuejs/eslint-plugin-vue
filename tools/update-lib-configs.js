@@ -47,32 +47,67 @@ function formatRules(rules, categoryId) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category) {
+function formatCategory(category, flat = false) {
   const extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
-    return `/*
+    return flat
+      ? `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+const globals = require('globals')
+const vueEslintParser = require('vue-eslint-parser')
 module.exports = {
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module'
+  languageOptions: {
+    parser: vueEslintParser,
+    globals: {
+      ...globals.browser,
+      ...globals.es2015
+    },
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module'
+    }
   },
-  env: {
-    browser: true,
-    es6: true
-  },
-  plugins: [
-    'vue'
-  ],
   rules: ${formatRules(category.rules, category.categoryId)}
 }
 `
+      : `/*
+* IMPORTANT!
+* This file has been automatically generated,
+* in order to update its content execute "npm run update"
+*/
+module.exports = {
+ parser: require.resolve('vue-eslint-parser'),
+ parserOptions: {
+   ecmaVersion: 2020,
+   sourceType: 'module'
+ },
+ env: {
+   browser: true,
+   es6: true
+ },
+ plugins: [
+   'vue'
+ ],
+ rules: ${formatRules(category.rules, category.categoryId)}
+}
+`
   }
-  return `/*
+  return flat
+    ? `/*
+* IMPORTANT!
+* This file has been automatically generated,
+* in order to update its content execute "npm run update"
+*/
+const extendedConfig = require('./${extendsCategoryId}')
+module.exports = {
+  extendedConfig,
+  rules: ${formatRules(category.rules, category.categoryId)}
+}
+`
+    : `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
@@ -91,6 +126,11 @@ for (const category of categories) {
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
+
+  const flatFilePath = path.join(ROOT, 'flat', `${category.categoryId}.js`)
+  const flatContent = formatCategory(category, true)
+
+  fs.writeFileSync(flatFilePath, flatContent)
 }
 
 // Format files.

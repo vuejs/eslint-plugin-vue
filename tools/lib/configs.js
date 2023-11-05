@@ -8,8 +8,19 @@
 const fs = require('fs')
 const path = require('path')
 const ROOT = path.resolve(__dirname, '../../lib/configs')
+const FLAT = path.resolve(ROOT, 'flat')
 
-module.exports = fs
-  .readdirSync(ROOT)
-  .filter((file) => path.extname(file) === '.js')
-  .map((file) => path.basename(file, '.js'))
+function listConfigs(configDir, flat) {
+  return fs
+    .readdirSync(configDir)
+    .filter((file) => path.extname(file) === '.js')
+    .map((file) => {
+      const prefix = flat ? 'flat/' : ''
+      return prefix + path.basename(file, '.js')
+    })
+}
+
+module.exports = {
+  root: listConfigs(ROOT, false),
+  flat: listConfigs(FLAT, true)
+}

@@ -32,8 +32,14 @@ module.exports = {
       .join(',\n')}
   },
   configs: {
-    ${configs
+    ${configs.root
       .map((config) => `'${config}': require('./configs/${config}')`)
+      .join(',\n')},
+    ${configs.flat
+      .map(
+        (config) =>
+          `'${config}': { plugins: { vue: module }, ...require('./configs/${config}') }`
+      )
       .join(',\n')}
   },
   processors: {
