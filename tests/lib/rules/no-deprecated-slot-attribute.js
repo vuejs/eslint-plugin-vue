@@ -46,7 +46,17 @@ tester.run('no-deprecated-slot-attribute', rule, {
       <LinkList>
         <a />
       </LinkList>
-    </template>`
+    </template>`,
+    {
+      code: `<template>
+      <LinkList>
+        <one slot="one" />
+        <two slot="two" />
+        <my-component slot="my-component-slot" />
+      </LinkList>
+    </template>`,
+      options: [{ ignore: ['one', 'two', 'my-component'] }]
+    }
   ],
   invalid: [
     {
@@ -594,6 +604,26 @@ tester.run('no-deprecated-slot-attribute', rule, {
         '`slot` attributes are deprecated.',
         '`slot` attributes are deprecated.'
       ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+          <two slot="two">
+            B
+          </two>
+        </my-component>
+      </template>`,
+      output: null,
+      options: [
+        {
+          ignore: ['one']
+        }
+      ],
+      errors: ['`slot` attributes are deprecated.']
     }
   ]
 })
