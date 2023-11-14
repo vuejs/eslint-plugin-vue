@@ -261,33 +261,33 @@ ruleTester.run('order-in-components', rule, {
     {
       filename: 'test.vue',
       code: `
-            import { defineNuxtComponent } from '#app'
-            export default defineNuxtComponent({
-              name: 'app',
-              data () {
-                return {
-                  msg: 'Welcome to Your Vue.js App'
-                }
-              },
-              props: {
-                propA: Number,
-              },
-            })
-          `,
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        })
+      `,
       output: `
-            import { defineNuxtComponent } from '#app'
-            export default defineNuxtComponent({
-              name: 'app',
-              props: {
-                propA: Number,
-              },
-              data () {
-                return {
-                  msg: 'Welcome to Your Vue.js App'
-                }
-              },
-            })
-          `,
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        })
+      `,
       parserOptions,
       errors: [
         {
