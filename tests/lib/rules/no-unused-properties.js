@@ -320,21 +320,6 @@ tester.run('no-unused-properties', rule, {
         </template>
       `
     },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            computed: {
-              ...mapState(['count'])
-            }
-          }
-        </script>
-        <template>
-          {{ count }}
-        </template>
-      `
-    },
     // a property used in a script expression
     {
       filename: 'test.vue',
@@ -2203,7 +2188,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count2' of property found, but never used.",
+          message: "'count2' of computed property found, but never used.",
           line: 5
         }
       ]
@@ -2227,7 +2212,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count2' of property found, but never used.",
+          message: "'count2' of computed property found, but never used.",
           line: 6
         }
       ]
@@ -2254,7 +2239,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count2' of property found, but never used.",
+          message: "'count2' of computed property found, but never used.",
           line: 5
         }
       ]
@@ -2275,7 +2260,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count2' of property found, but never used.",
+          message: "'count2' of computed property found, but never used.",
           line: 5
         }
       ]
@@ -2294,7 +2279,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count' of property found, but never used.",
+          message: "'count' of computed property found, but never used.",
           line: 4
         }
       ]
@@ -2316,7 +2301,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count2' of property found, but never used.",
+          message: "'count2' of computed property found, but never used.",
           line: 5
         }
       ]
@@ -2340,7 +2325,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count3' of property found, but never used.",
+          message: "'count3' of computed property found, but never used.",
           line: 7
         }
       ]
@@ -2363,8 +2348,32 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'count' of property found, but never used.",
+          message: "'count' of computed property found, but never used.",
           line: 5
+        }
+      ]
+    },
+
+    // vuex unused state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count: 'todosCount',
+              count2: 'someCount'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
         }
       ]
     },
@@ -2386,7 +2395,7 @@ tester.run('no-unused-properties', rule, {
       `,
       errors: [
         {
-          message: "'additional' of property found, but never used.",
+          message: "'additional' of computed property found, but never used.",
           line: 5
         }
       ]
