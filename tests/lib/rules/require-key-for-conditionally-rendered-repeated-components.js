@@ -375,6 +375,55 @@ tester.run('v-if-else-key', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <ComponentA v-if="foo" />
+            <ComponentB v-else-if="bar" />
+            <ComponentA v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA,
+            ComponentB
+          }
+        }
+        </script>
+        `,
+      output: `
+        <template>
+          <div>
+            <ComponentA key="component-a-1" v-if="foo" />
+            <ComponentB v-else-if="bar" />
+            <ComponentA key="component-a-2" v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA,
+            ComponentB
+          }
+        }
+        </script>
+        `,
+      errors: [
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 4
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 6
+        }
+      ]
     }
   ]
 })
