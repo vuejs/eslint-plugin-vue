@@ -155,6 +155,21 @@ ruleTester.run('no-template-shadow', rule, {
       defineProps({k:Number})
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="i in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      defineProps({i:Number})
+      </script>
+      `,
+      options: [{ allow: ['i']}]
     }
   ],
 
