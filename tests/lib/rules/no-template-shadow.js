@@ -169,7 +169,7 @@ ruleTester.run('no-template-shadow', rule, {
       defineProps({i:Number})
       </script>
       `,
-      options: [{ allow: ['i']}]
+      options: [{ allow: ['i'] }]
     }
   ],
 
