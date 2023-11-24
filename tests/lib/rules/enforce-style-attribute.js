@@ -64,7 +64,7 @@ tester.run('enforce-style-attribute', rule, {
       errors: [
         {
           message:
-            '<style> tags without attributes are not allowed. Allowed: scoped'
+            'A <style> tag without attributes is not allowed. Allowed: scoped.'
         }
       ]
     },
@@ -72,80 +72,80 @@ tester.run('enforce-style-attribute', rule, {
       code: `<template></template><script></script><style module></style>`,
       errors: [
         {
-          message: 'The module attribute is not allowed. Allowed: scoped'
+          message: 'The module attribute is not allowed. Allowed: scoped.'
         }
       ]
     },
     // With scoped option
     {
       code: `<template></template><script></script><style></style>`,
+      options: [{ allows: ['scoped'] }],
       errors: [
         {
           message:
-            '<style> tags without attributes are not allowed. Allowed: scoped'
+            'A <style> tag without attributes is not allowed. Allowed: scoped.'
         }
-      ],
-      options: [{ allows: ['scoped'] }]
+      ]
     },
     {
       code: `<template></template><script></script><style module></style>`,
+      options: [{ allows: ['scoped'] }],
       errors: [
         {
-          message: 'The module attribute is not allowed. Allowed: scoped'
+          message: 'The module attribute is not allowed. Allowed: scoped.'
         }
-      ],
-      options: [{ allows: ['scoped'] }]
+      ]
     },
     // With module option
     {
       code: `<template></template><script></script><style></style>`,
+      options: [{ allows: ['module'] }],
       errors: [
         {
           message:
-            '<style> tags without attributes are not allowed. Allowed: module'
+            'A <style> tag without attributes is not allowed. Allowed: module.'
         }
-      ],
-      options: [{ allows: ['module'] }]
+      ]
     },
     {
       code: `<template></template><script></script><style scoped></style>`,
+      options: [{ allows: ['module'] }],
       errors: [
         {
-          message: 'The scoped attribute is not allowed. Allowed: module'
+          message: 'The scoped attribute is not allowed. Allowed: module.'
         }
-      ],
-      options: [{ allows: ['module'] }]
+      ]
     },
     // With different combinations of two options
     {
       code: `<template></template><script></script><style></style>`,
+      options: [{ allows: ['module', 'scoped'] }],
       errors: [
         {
           message:
-            '<style> tags without attributes are not allowed. Allowed: module, scoped'
+            'A <style> tag without attributes is not allowed. Allowed: module, scoped.'
         }
-      ],
-      options: [{ allows: ['module', 'scoped'] }]
+      ]
     },
     {
       code: `<template></template><script></script><style module></style>`,
+      options: [{ allows: ['scoped', 'no-attributes'] }],
       errors: [
         {
           message:
-            'The module attribute is not allowed. Allowed: no-attributes, scoped'
+            'The module attribute is not allowed. Allowed: no-attributes, scoped.'
         }
-      ],
-      options: [{ allows: ['scoped', 'no-attributes'] }]
+      ]
     },
     {
       code: `<template></template><script></script><style scoped></style>`,
+      options: [{ allows: ['module', 'no-attributes'] }],
       errors: [
         {
           message:
-            'The scoped attribute is not allowed. Allowed: module, no-attributes'
+            'The scoped attribute is not allowed. Allowed: module, no-attributes.'
         }
-      ],
-      options: [{ allows: ['module', 'no-attributes'] }]
+      ]
     }
   ]
 })

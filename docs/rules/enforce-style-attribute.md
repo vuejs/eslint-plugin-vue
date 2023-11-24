@@ -9,7 +9,7 @@ description: enforce either the `scoped` or `module`  attribute in SFC top level
 
 > enfore either the `scoped` or `module` attribute in SFC top level style tags
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :wrench: Options
 
