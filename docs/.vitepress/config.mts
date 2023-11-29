@@ -145,6 +145,10 @@ export default async () => {
       plugins: [vitePluginRequireResolve(), viteCommonjs()],
       resolve: {
         alias: {
+          'eslint/use-at-your-own-risk': path.join(
+            dirname,
+            './build-system/shim/eslint/use-at-your-own-risk.mjs'
+          ),
           eslint: path.join(dirname, './build-system/shim/eslint.mjs'),
           assert: path.join(dirname, './build-system/shim/assert.mjs'),
           path: path.join(dirname, './build-system/shim/path.mjs'),
