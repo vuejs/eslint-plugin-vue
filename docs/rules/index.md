@@ -304,7 +304,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/dot-notation](./dot-notation.md) | Enforce dot notation whenever possible in `<template>` | :wrench: | :hammer: |
 | [vue/eqeqeq](./eqeqeq.md) | Require the use of `===` and `!==` in `<template>` | :wrench: | :hammer: |
 | [vue/func-call-spacing](./func-call-spacing.md) | Require or disallow spacing between function identifiers and their invocations in `<template>` | :wrench: | :lipstick: |
-| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between property names and type annotations in types and interfaces in `<template>` | :wrench: | :lipstick: |
+| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between keys and values in object literal properties in `<template>` | :wrench: | :lipstick: |
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
 | [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
