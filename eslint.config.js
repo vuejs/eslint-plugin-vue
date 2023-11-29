@@ -160,6 +160,20 @@ module.exports = [
       'dot-notation': 'error',
       'arrow-body-style': 'error',
 
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'context',
+          property: 'parserServices',
+          message: 'Use sourceCode.parserServices'
+        },
+        {
+          object: 'context',
+          property: 'getScope',
+          message: 'Use utils.getScope'
+        }
+      ],
+
       'unicorn/consistent-function-scoping': [
         'error',
         { checkArrowFunctions: false }
