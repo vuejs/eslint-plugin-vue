@@ -17,13 +17,13 @@ export default async () => {
   const uncategorizedRules = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
-      !rule.meta.docs.extensionRule &&
+      !rule.meta.docs.extensionSource &&
       !rule.meta.deprecated
   )
   const uncategorizedExtensionRule = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
-      rule.meta.docs.extensionRule &&
+      rule.meta.docs.extensionSource &&
       !rule.meta.deprecated
   )
   const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)

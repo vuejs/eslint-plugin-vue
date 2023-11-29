@@ -308,7 +308,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
 | [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
-| [vue/no-console](./no-console.md) | Disallow the use of `console` in `<template>` |  | :hammer: |
+| [vue/no-console](./no-console.md) | Disallow the use of `console` in `<template>` | :bulb: | :hammer: |
 | [vue/no-constant-condition](./no-constant-condition.md) | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens](./no-extra-parens.md) | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |
@@ -323,7 +323,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/object-shorthand](./object-shorthand.md) | Require or disallow method and property shorthand syntax for object literals in `<template>` | :wrench: | :hammer: |
 | [vue/operator-linebreak](./operator-linebreak.md) | Enforce consistent linebreak style for operators in `<template>` | :wrench: | :lipstick: |
 | [vue/prefer-template](./prefer-template.md) | Require template literals instead of string concatenation in `<template>` | :wrench: | :hammer: |
-| [vue/quote-props](./quote-props.md) | Require quotes around object literal property names in `<template>` | :wrench: | :hammer: |
+| [vue/quote-props](./quote-props.md) | Require quotes around object literal property names in `<template>` | :wrench: | :lipstick: |
 | [vue/space-in-parens](./space-in-parens.md) | Enforce consistent spacing inside parentheses in `<template>` | :wrench: | :lipstick: |
 | [vue/space-infix-ops](./space-infix-ops.md) | Require spacing around infix operators in `<template>` | :wrench: | :lipstick: |
 | [vue/space-unary-ops](./space-unary-ops.md) | Enforce consistent spacing before or after unary operators in `<template>` | :wrench: | :lipstick: |

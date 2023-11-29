@@ -51,7 +51,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 ### `"ignore": ["my-component"]`
 
-<eslint-code-block :rules="{'vue/no-dupe-keys': ['error', {ignore: ['my-component']}]}">
+<eslint-code-block fix :rules="{'vue/no-dupe-keys': ['error', {ignore: ['my-component']}]}">
 
 ```vue
 <template>

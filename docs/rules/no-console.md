@@ -9,6 +9,8 @@ since: v9.15.0
 
 > Disallow the use of `console` in `<template>`
 
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
+
 ## :book: Rule Details
 
 This rule is the same rule as core [no-console] rule but it applies to the expressions in `<template>`.

@@ -5,7 +5,6 @@ title: vue/define-emits-declaration
 description: enforce declaration style of `defineEmits`
 since: v9.5.0
 ---
-
 # vue/define-emits-declaration
 
 > enforce declaration style of `defineEmits`
