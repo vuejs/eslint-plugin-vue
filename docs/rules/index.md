@@ -251,6 +251,7 @@ For example:
 | [vue/no-undef-components](./no-undef-components.md) | disallow use of undefined components in `<template>` |  | :hammer: |
 | [vue/no-undef-properties](./no-undef-properties.md) | disallow undefined properties |  | :hammer: |
 | [vue/no-unsupported-features](./no-unsupported-features.md) | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
+| [vue/no-unused-emit-declarations](./no-unused-emit-declarations.md) | disallow unused emit declarations |  | :hammer: |
 | [vue/no-unused-properties](./no-unused-properties.md) | disallow unused properties |  | :hammer: |
 | [vue/no-unused-refs](./no-unused-refs.md) | disallow unused refs |  | :hammer: |
 | [vue/no-use-v-else-with-v-for](./no-use-v-else-with-v-for.md) | disallow using `v-else-if`/`v-else` on the same element as `v-for` |  | :hammer: |
