@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-unused-emit-declarations
 description: disallow unused emit declarations
+since: v9.19.0
 ---
 # vue/no-unused-emit-declarations
 
 > disallow unused emit declarations
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -52,6 +51,10 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/require-explicit-emits](./require-explicit-emits.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.19.0
 
 ## :mag: Implementation
 

@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/v-if-else-key
 description: require key attribute for conditionally rendered repeated components
+since: v9.19.0
 ---
-
 # vue/v-if-else-key
 
 > require key attribute for conditionally rendered repeated components
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -49,6 +48,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Guide (for v2) - v-if without key](https://v2.vuejs.org/v2/style-guide/#v-if-v-else-if-v-else-without-key-use-with-caution)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.19.0
 
 ## :mag: Implementation
 
