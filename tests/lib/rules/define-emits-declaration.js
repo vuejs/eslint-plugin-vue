@@ -243,6 +243,25 @@ tester.run('define-emits-declaration', rule, {
           line: 5
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const emit = defineEmits<(e: 'change', id: number) => void>()
+        </script>
+        `,
+      options: ['type-literal'],
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      },
+      errors: [
+        {
+          message:
+            'Use new type literal declaration instead of the old call signature declaration.',
+          line: 3
+        }
+      ]
     }
   ]
 })
