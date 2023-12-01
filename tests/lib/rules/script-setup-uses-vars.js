@@ -23,6 +23,21 @@ const ruleTester = new RuleTester({
 const linter = ruleTester.linter || eslint.linter
 linter.defineRule('script-setup-uses-vars', rule)
 
+ruleTester.run('script-setup-uses-vars', rule, {
+  // Visually check that there are no warnings in the console.
+  valid: [
+    `
+    <script setup>
+      import Foo from './Foo.vue'
+    </script>
+
+    <template>
+      <Foo />
+    </template>
+    `
+  ],
+  invalid: []
+})
 describe('script-setup-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
