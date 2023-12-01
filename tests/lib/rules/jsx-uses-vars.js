@@ -24,6 +24,23 @@ const ruleTester = new RuleTester({
 const linter = ruleTester.linter || eslint.linter
 linter.defineRule('jsx-uses-vars', rule)
 
+ruleTester.run('jsx-uses-vars', rule, {
+  // Visually check that there are no warnings in the console.
+  valid: [
+    `
+      import SomeComponent from './SomeComponent.jsx';
+      export default {
+        render () {
+          return (
+            <SomeComponent msg="Hello world"></SomeComponent>
+          )
+        },
+      };
+    `
+  ],
+  invalid: []
+})
+
 describe('jsx-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
