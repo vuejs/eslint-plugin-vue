@@ -101,6 +101,16 @@ tester.run('no-unused-emit-declarations', rule, {
     {
       filename: 'test.vue',
       code: `
+      <template>
+        <button @click="emits('bar')">Bar</button>
+      </template>
+      <script setup>
+        const emits = defineEmits(['bar'])
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script>
         export default {
           emits: ['foo'],
@@ -237,7 +247,7 @@ tester.run('no-unused-emit-declarations', rule, {
         export default {
           emits: ['foo'],
           setup(_, context) {
-            useCustomComposable({ emit: context.emit }) 
+            useCustomComposable({ emit: context.emit })
           }
         }
       </script>
@@ -282,7 +292,7 @@ tester.run('no-unused-emit-declarations', rule, {
         export default {
           emits: ['foo'],
           setup(_, { emit }) {
-            useCustomComposable({ emit: emit }) 
+            useCustomComposable({ emit: emit })
           }
         }
       </script>
@@ -440,6 +450,24 @@ tester.run('no-unused-emit-declarations', rule, {
       code: `
       <template>
         <button @click="$emit('bar')">Bar</button>
+      </template>
+      <script setup>
+        const emit = defineEmits(['foo', 'bar'])
+      `,
+      errors: [
+        {
+          messageId: 'unused',
+          line: 6,
+          column: 35,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="emit('bar')">Bar</button>
       </template>
       <script setup>
         const emit = defineEmits(['foo', 'bar'])
