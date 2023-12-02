@@ -40,6 +40,16 @@ tester.run('no-v-text-v-html-on-component', rule, {
         <MyComponent v-if="content" />
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-html="content" />
+        <nuxt-link v-html="content" />
+      </template>
+      `,
+      options: [{ allow: ['router-link', 'nuxt-link'] }]
     }
   ],
   invalid: [
@@ -130,6 +140,22 @@ tester.run('no-v-text-v-html-on-component', rule, {
           message: "Using v-html on component may break component's content.",
           line: 3,
           column: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-html="content" />
+      </template>
+      `,
+      options: [{ allow: ['nuxt-link'] }],
+      errors: [
+        {
+          message: "Using v-html on component may break component's content.",
+          line: 3,
+          column: 22
         }
       ]
     }
