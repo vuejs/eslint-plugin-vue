@@ -204,7 +204,35 @@ tester.run('singleline-html-element-content-newline', rule, {
         <div
           id=
           ""
-    `
+    `,
+    {
+      code: `
+        <template>
+          <pre>content</pre>
+          <IgnoreTag>content</IgnoreTag>
+          <IgnoreTag attr>content</IgnoreTag>
+          <IgnoreTag><span attr>content</span></IgnoreTag>
+        </template>`,
+      options: [
+        {
+          externalIgnores: ['IgnoreTag']
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+        <pre>content</pre>
+          <ignore-tag>content</ignore-tag>
+          <ignore-tag attr>content</ignore-tag>
+          <ignore-tag><span attr>content</span></ignore-tag>
+        </template>`,
+      options: [
+        {
+          externalIgnores: ['IgnoreTag']
+        }
+      ]
+    }
   ],
   invalid: [
     {

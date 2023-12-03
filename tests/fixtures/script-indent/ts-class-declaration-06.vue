@@ -23,6 +23,6 @@ class
       boolean
       =
       false
-  )
+  ) {}
 }
 </script>

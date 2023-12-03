@@ -9,6 +9,7 @@ since: v6.1.0
 
 > enforce order of component top-level elements
 
+- :no_entry_sign: This rule was **deprecated** and replaced by [vue/block-order](block-order.md) rule.
 - :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

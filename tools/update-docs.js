@@ -117,7 +117,8 @@ class DocFile {
       } else {
         notes.push(`- :no_entry_sign: This rule was **deprecated**.`)
       }
-    } else if (meta.docs.categories) {
+    }
+    if (meta.docs?.categories) {
       const presets = getPresetIds(meta.docs.categories).map(
         (categoryId) => `\`"plugin:vue/${categoryId}"\``
       )
@@ -194,9 +195,9 @@ This rule was introduced in eslint-plugin-vue ${this.since}
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.js)
 ${
-  meta.docs.extensionRule
+  meta.docs.extensionSource
     ? `
-<sup>Taken with ❤️ [from ESLint core](${meta.docs.coreRuleUrl})</sup>
+<sup>Taken with ❤️ [from ${meta.docs.extensionSource.name}](${meta.docs.extensionSource.url})</sup>
 `
     : ''
 }`

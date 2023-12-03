@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "commonjs",
+    "module": "node16",
+    "moduleResolution": "Node16",
     "lib": ["es2020"],
     "allowJs": true,
     "checkJs": true,
@@ -22,5 +23,5 @@
     },
     "skipLibCheck": true
   },
-  "include": ["lib/**/*", "typings/eslint-plugin-vue/global.d.ts", "docs/.vitepress/**/*.ts"]
+  "include": ["lib/**/*", "typings/eslint-plugin-vue/global.d.ts", "docs/.vitepress/**/*.ts", "docs/.vitepress/**/*.mts"]
 }

@@ -104,6 +104,32 @@ defineOptions({ name: 'Foo' })
           line: 4
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { ref } from 'vue'
+      const props = defineProps(['foo'])
+      </script>
+      <script>
+      export default { name: 'Foo' }
+      </script>
+      `,
+      output: `
+      <script setup>
+      import { ref } from 'vue'
+defineOptions({ name: 'Foo' })
+
+      const props = defineProps(['foo'])
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use `defineOptions` instead of default export.',
+          line: 7
+        }
+      ]
     }
   ]
 })

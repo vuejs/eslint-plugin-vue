@@ -7,13 +7,7 @@ type Plugin = Extract<
   { name: string }
 >
 
-const libRoot = path.join(
-  fileURLToPath(
-    // @ts-expect-error -- Cannot change `module` option
-    import.meta.url
-  ),
-  '../../../lib'
-)
+const libRoot = path.join(fileURLToPath(import.meta.url), '../../../lib')
 export function vitePluginRequireResolve(): Plugin {
   return {
     name: 'vite-plugin-require.resolve',

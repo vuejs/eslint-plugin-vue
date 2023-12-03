@@ -11,11 +11,12 @@ since: v3.9.0
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
 
-This rule prevents to use duplicated names.
+This rule prevents using duplicate key names.
 
 ## :book: Rule Details
 
-This rule is aimed at preventing duplicated property names.
+This rule prevents duplicate `props`/`data`/`methods`/etc. key names defined on a component.
+Even if a key name does not conflict in the `<script>` tag itself, it still may lead to a conflict in the `<template>` since Vue allows directly accessing these keys from there.
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error']}">
 

@@ -42,9 +42,12 @@ jobs:
           command: npm version
       - checkout
       - run:
+          name: Uninstall @stylistic/eslint-plugin
+          command: npm uninstall -D @stylistic/eslint-plugin
+      - run:
           name: Install eslint@6
           command: |
-            npm install --save-exact eslint@6.8.0
+            npm install --save-exact eslint@6.8.0 @typescript-eslint/parser@5
       - run:
           name: Install dependencies
           command: npm install
@@ -60,9 +63,12 @@ jobs:
           command: npm version
       - checkout
       - run:
+          name: Uninstall @stylistic/eslint-plugin
+          command: npm uninstall -D @stylistic/eslint-plugin
+      - run:
           name: Install eslint@7
           command: |
-            npm install eslint@7
+            npm install eslint@7 @typescript-eslint/parser@5
       - run:
           name: Install dependencies
           command: npm install
@@ -78,6 +84,9 @@ jobs:
           command: npm version
       - checkout
       - run:
+          name: Uninstall @stylistic/eslint-plugin
+          command: npm uninstall -D @stylistic/eslint-plugin
+      - run:
           name: Install @typescript-eslint/parser@4 eslint@7 typescript@4.7
           command: |
             npm install @typescript-eslint/parser@4 eslint@7 typescript@4.7 --save-exact
@@ -88,9 +97,23 @@ jobs:
           name: Test
           command: npm test
   node-v14:
-    <<: *node-base
     docker:
       - image: node:14
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - run:
+          name: Install @typescript-eslint/parser@5
+          command: |
+            npm install @typescript-eslint/parser@5 --save-exact
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Test
+          command: npm test
   node-v16:
     <<: *node-base
     docker:

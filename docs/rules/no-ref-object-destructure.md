@@ -2,12 +2,14 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-ref-object-destructure
-description: disallow destructuring of ref objects that can lead to loss of reactivity
+description: disallow usages of ref objects that can lead to loss of reactivity
 since: v9.5.0
 ---
 # vue/no-ref-object-destructure
 
-> disallow destructuring of ref objects that can lead to loss of reactivity
+> disallow usages of ref objects that can lead to loss of reactivity
+
+- :no_entry_sign: This rule was **deprecated** and replaced by [vue/no-ref-object-reactivity-loss](no-ref-object-reactivity-loss.md) rule.
 
 ## :book: Rule Details
 

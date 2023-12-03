@@ -5,6 +5,11 @@ class
     <
       T
     >
+  extends
+    Bar
+      <
+        T
+      >
   implements
     Baz1
       <
@@ -12,11 +17,6 @@ class
       >
     ,
     Baz2
-      <
-        T
-      >
-  extends
-    Bar
       <
         T
       >
