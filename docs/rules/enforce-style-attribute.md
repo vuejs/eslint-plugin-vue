@@ -11,19 +11,6 @@ description: enforce or forbid the use of the `scoped` and `module` attributes o
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
-## :wrench: Options
-
-```json
-{
-  "vue/enforce-style-attribute": [
-    "error",
-    { "allows": ["scoped", "module", "no-attributes"] }
-  ]
-}
-```
-
-- `"allows"` (["scoped" | "module" | "no-attributes"]) Array of attributes to allow on a top level style tag. Default: `["scoped"]`
-
 ## :book: Rule Details
 
 This rule allows you to selectively allow attributes on your top level style tags and warns when using an attribute that is not allowed.
@@ -79,6 +66,19 @@ This rule allows you to selectively allow attributes on your top level style tag
 ```
 
 </eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/enforce-style-attribute": [
+    "error",
+    { "allows": ["scoped", "module", "no-attributes"] }
+  ]
+}
+```
+
+- `"allows"` (["scoped" | "module" | "no-attributes"]) Array of attributes to allow on a top level style tag. Default: `["scoped"]`
 
 ## :mag: Implementation
 
