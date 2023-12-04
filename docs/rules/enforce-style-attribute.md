@@ -9,7 +9,6 @@ description: enforce or forbid the use of the `scoped` and `module` attributes i
 > enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -17,7 +16,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"scoped"`
 
-<eslint-code-block fix :rules="{'vue/enforce-style-attribute': ['error', { allows: ['scoped'] }]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['scoped'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -35,7 +34,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"module"`
 
-<eslint-code-block fix :rules="{'vue/enforce-style-attribute': ['error', { allows: ['module'] }]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['module'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -52,7 +51,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"no-attributes"`
 
-<eslint-code-block fix :rules="{'vue/enforce-style-attribute': ['error', { allows: ['no-attributes']}]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['no-attributes']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
