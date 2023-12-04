@@ -16,7 +16,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"scoped"`
 
-<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['scoped'] }]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['scoped'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -34,7 +34,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"module"`
 
-<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['module'] }]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['module'] }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -51,7 +51,7 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 ### `"no-attributes"`
 
-<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allows: ['no-attributes']}]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['no-attributes']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -72,12 +72,12 @@ This rule allows you to selectively allow attributes on your top level style tag
 {
   "vue/enforce-style-attribute": [
     "error",
-    { "allows": ["scoped", "module", "no-attributes"] }
+    { "allow": ["scoped", "module", "no-attributes"] }
   ]
 }
 ```
 
-- `"allows"` (`["scoped" | "module" | "no-attributes"]`) Array of attributes to allow on a top level style tag. Default: `["scoped"]`
+- `"allow"` (`["scoped" | "module" | "no-attributes"]`) Array of attributes to allow on a top level style tag. Default: `["scoped"]`
 
 ## :mag: Implementation
 
