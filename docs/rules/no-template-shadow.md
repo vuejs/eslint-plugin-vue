@@ -5,6 +5,7 @@ title: vue/no-template-shadow
 description: disallow variable declarations from shadowing variables declared in the outer scope
 since: v5.0.0
 ---
+
 # vue/no-template-shadow
 
 > disallow variable declarations from shadowing variables declared in the outer scope
@@ -36,13 +37,13 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        l: false
-      }
+export default {
+  data() {
+    return {
+      l: false
     }
   }
+}
 </script>
 ```
 
@@ -50,7 +51,37 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
 
 ## :wrench: Options
 
-Nothing.
+This rule takes one option, an object, with the property `"allow"`.
+
+```json
+{
+  "no-shadow": ["error", { "allow": [] }]
+}
+```
+
+- `"allow"` (`[string]`) Array of identifier names for which shadowing is allowed.
+
+Examples of correct code for the { "allow": ["i"] } option:
+
+<eslint-code-block :rules="{'vue/no-template-shadow': ['error', { allow: ['i'] }]}">
+
+```vue
+<template>
+  <div v-for="i in 5"></div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      i: 'some value'
+    }
+  }
+}
+</script>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 
