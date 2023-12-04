@@ -11,7 +11,8 @@ since: v9.5.0
 
 ## :book: Rule Details
 
-This rule enforces `defineEmits` typing style which you should use `type-based` or `runtime` declaration.
+This rule enforces `defineEmits` typing style which you should use `type-based`, strict `type-literal`
+(introduced in Vue 3.3), or `runtime` declaration.
 
 This rule only works in setup script and `lang="ts"`.
 
@@ -23,6 +24,12 @@ This rule only works in setup script and `lang="ts"`.
 const emit = defineEmits<{
   (e: 'change', id: number): void
   (e: 'update', value: string): void
+}>()
+
+/* ✓ GOOD */
+const emit = defineEmits<{
+  change: [id: number]
+  update: [value: string]
 }>()
 
 /* ✗ BAD */
@@ -41,10 +48,11 @@ const emit = defineEmits(['change', 'update'])
 ## :wrench: Options
 
 ```json
-  "vue/define-emits-declaration": ["error", "type-based" | "runtime"]
+  "vue/define-emits-declaration": ["error", "type-based" | "type-literal" | "runtime"]
 ```
 
-- `type-based` (default) enforces type-based declaration
+- `type-based` (default) enforces type based declaration
+- `type-literal` enforces strict "type literal" type based declaration
 - `runtime` enforces runtime declaration
 
 ### `runtime`
@@ -67,6 +75,37 @@ const emit = defineEmits({
 
 /* ✓ GOOD */
 const emit = defineEmits(['change', 'update'])
+</script>
+```
+
+</eslint-code-block>
+
+### `type-literal`
+
+<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'type-literal']}">
+
+```vue
+<script setup lang="ts">
+/* ✗ BAD */
+const emit = defineEmits(['change', 'update'])
+
+/* ✗ BAD */
+const emit = defineEmits({
+  change: (id) => typeof id == 'number',
+  update: (value) => typeof value == 'string'
+})
+
+/* ✗ BAD */
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
+
+/* ✓ GOOD */
+const emit = defineEmits<{
+  change: [id: number]
+  update: [value: string]
+}>()
 </script>
 ```
 
