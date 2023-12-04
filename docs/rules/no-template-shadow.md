@@ -50,7 +50,7 @@ export default {
 
 ## :wrench: Options
 
-This rule takes one option, an object, with the property `"allow"`.
+This rule takes one optional object option, with the property `"allow"`.
 
 ```json
 {
