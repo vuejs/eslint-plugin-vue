@@ -10,7 +10,13 @@ const path = require('path')
 const ROOT = path.resolve(__dirname, '../../lib/configs')
 const FLAT = path.resolve(ROOT, 'flat')
 
-function listConfigs(configDir, flat) {
+/**
+ * @param {boolean} flat
+ * @returns {string[]}
+ */
+function listConfigs(flat) {
+  const configDir = flat ? FLAT : ROOT
+
   return fs
     .readdirSync(configDir)
     .filter((file) => path.extname(file) === '.js')
@@ -21,6 +27,6 @@ function listConfigs(configDir, flat) {
 }
 
 module.exports = {
-  root: listConfigs(ROOT, false),
-  flat: listConfigs(FLAT, true)
+  root: listConfigs(false),
+  flat: listConfigs(true)
 }
