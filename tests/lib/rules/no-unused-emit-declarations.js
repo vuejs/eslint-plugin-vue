@@ -106,6 +106,7 @@ tester.run('no-unused-emit-declarations', rule, {
       </template>
       <script setup>
         const emits = defineEmits(['bar'])
+      </script>
       `
     },
     {
@@ -471,6 +472,7 @@ tester.run('no-unused-emit-declarations', rule, {
       </template>
       <script setup>
         const emit = defineEmits(['foo', 'bar'])
+      </script>
       `,
       errors: [
         {
