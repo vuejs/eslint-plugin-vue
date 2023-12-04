@@ -26,35 +26,35 @@ tester.run('enforce-style-attribute', rule, {
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style scoped></style>',
-      options: [{ allows: ['scoped'] }]
+      options: [{ allow: ['scoped'] }]
     },
     // With module option
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style module></style>',
-      options: [{ allows: ['module'] }]
+      options: [{ allow: ['module'] }]
     },
     // With plain option
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style></style>',
-      options: [{ allows: ['no-attributes'] }]
+      options: [{ allow: ['no-attributes'] }]
     },
     // With all options
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style scoped></style>',
-      options: [{ allows: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
     },
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style module></style>',
-      options: [{ allows: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
     },
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style></style>',
-      options: [{ allows: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
     }
   ],
   invalid: [
@@ -79,7 +79,7 @@ tester.run('enforce-style-attribute', rule, {
     // With scoped option
     {
       code: `<template></template><script></script><style></style>`,
-      options: [{ allows: ['scoped'] }],
+      options: [{ allow: ['scoped'] }],
       errors: [
         {
           message:
@@ -89,7 +89,7 @@ tester.run('enforce-style-attribute', rule, {
     },
     {
       code: `<template></template><script></script><style module></style>`,
-      options: [{ allows: ['scoped'] }],
+      options: [{ allow: ['scoped'] }],
       errors: [
         {
           message: 'The module attribute is not allowed. Allowed: scoped.'
@@ -99,7 +99,7 @@ tester.run('enforce-style-attribute', rule, {
     // With module option
     {
       code: `<template></template><script></script><style></style>`,
-      options: [{ allows: ['module'] }],
+      options: [{ allow: ['module'] }],
       errors: [
         {
           message:
@@ -109,7 +109,7 @@ tester.run('enforce-style-attribute', rule, {
     },
     {
       code: `<template></template><script></script><style scoped></style>`,
-      options: [{ allows: ['module'] }],
+      options: [{ allow: ['module'] }],
       errors: [
         {
           message: 'The scoped attribute is not allowed. Allowed: module.'
@@ -119,7 +119,7 @@ tester.run('enforce-style-attribute', rule, {
     // With different combinations of two options
     {
       code: `<template></template><script></script><style></style>`,
-      options: [{ allows: ['module', 'scoped'] }],
+      options: [{ allow: ['module', 'scoped'] }],
       errors: [
         {
           message:
@@ -129,7 +129,7 @@ tester.run('enforce-style-attribute', rule, {
     },
     {
       code: `<template></template><script></script><style module></style>`,
-      options: [{ allows: ['scoped', 'no-attributes'] }],
+      options: [{ allow: ['scoped', 'no-attributes'] }],
       errors: [
         {
           message:
@@ -139,7 +139,7 @@ tester.run('enforce-style-attribute', rule, {
     },
     {
       code: `<template></template><script></script><style scoped></style>`,
-      options: [{ allows: ['module', 'no-attributes'] }],
+      options: [{ allow: ['module', 'no-attributes'] }],
       errors: [
         {
           message:
