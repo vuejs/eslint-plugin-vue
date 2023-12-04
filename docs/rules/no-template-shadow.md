@@ -5,7 +5,6 @@ title: vue/no-template-shadow
 description: disallow variable declarations from shadowing variables declared in the outer scope
 since: v5.0.0
 ---
-
 # vue/no-template-shadow
 
 > disallow variable declarations from shadowing variables declared in the outer scope
@@ -55,13 +54,13 @@ This rule takes one option, an object, with the property `"allow"`.
 
 ```json
 {
-  "no-shadow": ["error", { "allow": [] }]
+  "no-template-shadow": ["error", { "allow": [] }]
 }
 ```
 
 - `"allow"` (`[string]`) Array of identifier names for which shadowing is allowed.
 
-Examples of correct code for the { "allow": ["i"] } option:
+Examples of correct code for the `{ "allow": ["i"] }` option:
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error', { allow: ['i'] }]}">
 
