@@ -20,12 +20,9 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div
-    v-for="todo in todos"
-    :key="todo.id"
-  />
+  <div v-for="todo in todos" :key="todo.id" />
   <!-- ✗ BAD -->
-  <div v-for="todo in todos"/>
+  <div v-for="todo in todos" />
 </template>
 ```
 
@@ -43,8 +40,10 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/valid-v-for]
+- [vue/v-if-else-key]
 
 [vue/valid-v-for]: ./valid-v-for.md
+[vue/v-if-else-key]: ./v-if-else-key.md
 
 ## :books: Further Reading
 

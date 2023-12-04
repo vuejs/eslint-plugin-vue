@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "9.17.0",
+  "version": "9.19.2",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.1.2",
+    "@stylistic/eslint-plugin": "^1.4.1",
     "@types/eslint": "^8.44.1",
     "@types/eslint-visitor-keys": "^3.3.0",
     "@types/natural-compare": "^1.4.1",
@@ -90,7 +91,7 @@
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "prettier": "^3.0.0",
-    "typescript": "^5.1.6",
-    "vitepress": "^1.0.0-beta.6"
+    "typescript": "^5.3.2",
+    "vitepress": "^1.0.0-rc.31"
   }
 }
