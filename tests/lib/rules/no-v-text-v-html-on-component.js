@@ -45,11 +45,20 @@ tester.run('no-v-text-v-html-on-component', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <router-link v-html="content" />
-        <nuxt-link v-html="content" />
+        <router-link v-text="content" />
       </template>
       `,
-      options: [{ allow: ['router-link', 'nuxt-link'] }]
+      options: [{ allow: ['router-link'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-html="content" />
+        <NuxtLink v-html="content" />
+      </template>
+      `,
+      options: [{ allow: ['RouterLink', 'nuxt-link'] }]
     }
   ],
   invalid: [
