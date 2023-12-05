@@ -52,21 +52,13 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 <eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { allow: ['router-link', 'nuxt-link'] }]}">
 
 ```vue
-<!-- ✓ GOOD -->
 <template>
+  <!-- ✓ GOOD -->
   <router-link v-html="content" />
-  <nuxt-link v-html="content" />
-</template>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { allow: ['router-link', 'nuxt-link'] }]}">
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <MyComponent v-html="content"></MyComponent>
+  <NuxtLink v-html="content" />
+  
+  <!-- ✗ BAD -->
+  <MyComponent v-html="content" />
 </template>
 ```
 
