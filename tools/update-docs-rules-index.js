@@ -15,18 +15,18 @@ const VUE2_EMOJI = ':two:'
 
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
-  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionRule
+  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionSource
 )
 const uncategorizedRules = rules.filter(
   (rule) =>
     !rule.meta.docs.categories &&
-    !rule.meta.docs.extensionRule &&
+    !rule.meta.docs.extensionSource &&
     !rule.meta.deprecated
 )
 const uncategorizedExtensionRule = rules.filter(
   (rule) =>
     !rule.meta.docs.categories &&
-    rule.meta.docs.extensionRule &&
+    rule.meta.docs.extensionSource &&
     !rule.meta.deprecated
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
