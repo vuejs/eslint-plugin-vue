@@ -83,6 +83,8 @@ Every option can be set to one of the following values:
 - `"always"` ... require one line break before the closing bracket.
 - `"never"` ... disallow line breaks before the closing bracket.
 
+If `selfClosingTag` is not specified, the `singleline` and `multiline` options are inherited for self-closing tags.
+
 Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-level of the closing brackets.
 
 ### `"multiline": "never"`
@@ -106,7 +108,7 @@ Plus, you can use [`vue/html-indent`](./html-indent.md) rule to enforce indent-l
 
 </eslint-code-block>
 
-### `"selfClosingTag": { "multiline": "always"}`
+### `"selfClosingTag": { "multiline": "always" }`
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-newline': ['error', { 'selfClosingTag': {'multiline': 'always'} }]}">
 
