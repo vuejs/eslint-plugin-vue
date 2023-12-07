@@ -122,6 +122,7 @@ tester.run('html-closing-bracket-newline', rule, {
           <MyComp
             :foo="foo"
           />
+          <MyComp :foo="foo" />
         </template>
       `,
       options: [
@@ -138,6 +139,8 @@ tester.run('html-closing-bracket-newline', rule, {
         <template>
           <MyComp :foo="foo"
           />
+          <MyComp
+            :foo="foo" />
         </template>
       `,
       options: [
