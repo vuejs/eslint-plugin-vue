@@ -166,6 +166,51 @@ tester.run('v-if-else-key', rule, {
         }
         </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div>
+              <CustomComponent v-if="foo" />
+              <div v-else />
+            </div>
+      
+            <CustomComponent v-if="bar" />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <tile>
+            <template v-if="state === 'foo'">
+                <ComponentA>…</ComponentA>
+                <ComponentB>…</ComponentB>
+            </template>
+            <ComponentA v-else-if="state === 'bar'" key="a">…</ComponentA>
+            <ComponentA v-else-if="state === 'bar'" key="b">…</ComponentA>
+          </tile>
+        </template>
+        <script>
+        export default {
+            components: {
+                ComponentA,
+                ComponentB
+            }
+        }
+        </script>
+        `
     }
   ],
   invalid: [
