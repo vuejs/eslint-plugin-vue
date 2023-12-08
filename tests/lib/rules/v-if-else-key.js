@@ -532,11 +532,11 @@ tester.run('v-if-else-key', rule, {
       output: `
         <template>
           <div>
-            <ComponentA key="component-a-1" v-if="foo" />
+            <ComponentA v-if="foo" />
 
-            <ComponentA v-if="bar" />
-            <ComponentA key="component-a-3" v-else-if="baz" />
-            <ComponentA key="component-a-4" v-else />
+            <ComponentA key="component-a-1" v-if="bar" />
+            <ComponentA key="component-a-2" v-else-if="baz" />
+            <ComponentA key="component-a-3" v-else />
           </div>
         </template>
         <script>
@@ -551,7 +551,7 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 4
+          line: 6
         },
         {
           message:
