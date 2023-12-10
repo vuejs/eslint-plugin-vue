@@ -1983,6 +1983,25 @@ emits: {'foo': null}
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emits('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emits = defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
     }
   ]
 })
