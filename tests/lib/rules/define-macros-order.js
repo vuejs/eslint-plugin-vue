@@ -27,9 +27,18 @@ const optionsPropsFirst = [
   }
 ]
 
+const optionsExposeLast = [
+  {
+    defineExposeLast: true
+  }
+]
+
 function message(macro) {
   return `${macro} should be the first statement in \`<script setup>\` (after any potential import statements or type definitions).`
 }
+
+const defineExposeNotTheLast =
+  '`defineExpose` should be the last statement in `<script setup>`.'
 
 tester.run('define-macros-order', rule, {
   valid: [
@@ -170,6 +179,21 @@ tester.run('define-macros-order', rule, {
           order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineProps({
+            test: Boolean
+          })
+          console.log('test')
+          defineExpose({
+            a: 1
+          })
+        </script>
+      `,
+      options: optionsExposeLast
     }
   ],
   invalid: [
@@ -620,6 +644,48 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineOptions'),
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        defineProps({
+          test: Boolean
+        })
+
+        // expose
+        defineExpose({
+          a: 1
+        })
+
+        // console start
+        console.log('test')
+        // console end
+        </script>
+      `,
+      output: `
+        <script setup>
+        defineProps({
+          test: Boolean
+        })
+
+        // console start
+        console.log('test')
+        // console end
+
+        // expose
+        defineExpose({
+          a: 1
+        })
+        </script>
+      `,
+      options: optionsExposeLast,
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 8
         }
       ]
     }

@@ -44,6 +44,8 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefineOptionsExit?(node: CallExpression): void
   onDefineSlotsEnter?(node: CallExpression): void
   onDefineSlotsExit?(node: CallExpression): void
+  onDefineExposeEnter?(node: CallExpression): void
+  onDefineExposeExit?(node: CallExpression): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
