@@ -1988,10 +1988,10 @@ emits: {'foo': null}
       filename: 'test.vue',
       code: `
       <template>
-        <div @click="emits('bar')"/>
+        <div @click="emit('bar')"/>
       </template>
       <script setup lang="ts">
-      const emits = defineEmits<(e: 'foo') => void>()
+      const emit = defineEmits<(e: 'foo') => void>()
       </script>
       `,
       parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
