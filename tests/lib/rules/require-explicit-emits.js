@@ -461,6 +461,19 @@ tester.run('require-explicit-emits', rule, {
       `,
       parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('foo')"/>
+        <div @click="emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo' | 'bar') => void>()
+      </script>
+      `,
+      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+    },
 
     // unknown emits definition
     {
