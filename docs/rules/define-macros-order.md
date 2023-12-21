@@ -21,7 +21,7 @@ This rule reports the `defineProps` and `defineEmits` compiler macros when they 
 {
   "vue/define-macros-order": ["error", {
     "order": ["defineProps", "defineEmits"],
-    "defineExposeLast": false,
+    "defineExposeLast": false
   }]
 }
 ```
