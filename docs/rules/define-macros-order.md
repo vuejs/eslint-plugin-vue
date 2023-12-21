@@ -114,6 +114,7 @@ const slots = defineSlots()
 </eslint-code-block>
 
 ### `{ "defineExposeLast": true }`
+
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {defineExposeLast: true}]}">
 
 ```vue
