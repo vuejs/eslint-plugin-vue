@@ -184,16 +184,43 @@ tester.run('define-macros-order', rule, {
       filename: 'test.vue',
       code: `
         <script setup>
-          defineProps({
-            test: Boolean
-          })
-          console.log('test')
-          defineExpose({
-            a: 1
-          })
+          import Foo from 'foo'
+          /** props */
+          defineProps(['foo'])
+          /** options */
+          defineOptions({})
+          /** expose */
+          defineExpose({})
         </script>
       `,
       options: optionsExposeLast
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import Foo from 'foo'
+          /** props */
+          const props = defineProps({
+            test: Boolean
+          })
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineProps', 'defineEmits'],
+          defineExposeLast: true
+        }
+      ],
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
   invalid: [
@@ -655,14 +682,14 @@ tester.run('define-macros-order', rule, {
           test: Boolean
         })
 
-        // expose
+        /** expose */
         defineExpose({
-          a: 1
+          foo: 'bar'
         })
 
-        // console start
+        /** console start */
         console.log('test')
-        // console end
+        /** console end */
         </script>
       `,
       output: `
@@ -671,13 +698,13 @@ tester.run('define-macros-order', rule, {
           test: Boolean
         })
 
-        // console start
+        /** console start */
         console.log('test')
-        // console end
+        /** console end */
 
-        // expose
+        /** expose */
         defineExpose({
-          a: 1
+          foo: 'bar'
         })
         </script>
       `,
@@ -686,6 +713,53 @@ tester.run('define-macros-order', rule, {
         {
           message: defineExposeNotTheLast,
           line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** slots */
+          const slots = defineSlots()
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** props */
+          const props = defineProps(['foo'])
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: message('defineOptions'),
+          line: 6
+        },
+        {
+          message: defineExposeNotTheLast,
+          line: 10
         }
       ]
     }
