@@ -67,6 +67,19 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            created() {
+              alert(this.$props.count + 1)
+            }
+          };
+        </script>
+      `
+    },
     // default options
     {
       filename: 'test.vue',
@@ -1303,6 +1316,21 @@ tester.run('no-unused-properties', rule, {
       </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              get: () => this.$props.x * 2
+            }
+          }
+        };
+      </script>
+      `
+    },
 
     // deep data
     {
@@ -1690,6 +1718,29 @@ tester.run('no-unused-properties', rule, {
       options: [
         {
           groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          a: String,
+        },
+        computed: {
+          /** @public */
+          b () { return this.$props.a },
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'computed'],
           ignorePublicMembers: true
         }
       ]
