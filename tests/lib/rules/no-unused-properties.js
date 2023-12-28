@@ -67,6 +67,19 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            created() {
+              alert(this.$props.count + 1)
+            }
+          };
+        </script>
+      `
+    },
     // default options
     {
       filename: 'test.vue',
@@ -139,6 +152,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property used as a template $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.count }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          }
+        </script>
+      `
+    },
 
     // properties used in a template expression
     {
@@ -154,6 +181,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // properties used in a template expression as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.count1 + $props.count2 }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count1', 'count2']
+          };
+        </script>
+      `
+    },
 
     // a property used in v-if
     {
@@ -161,6 +202,24 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <div v-if="count > 0"></div>
+        </template>
+        <script>
+          export default {
+            props: {
+              count: {
+                type: Number
+              }
+            }
+          };
+        </script>
+      `
+    },
+    // a property used in v-if as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="$props.count > 0"></div>
         </template>
         <script>
           export default {
@@ -193,6 +252,25 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property used in v-for as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-for="color in $props.colors">{{ color }}</div>
+        </template>
+        <script>
+          export default {
+            props: {
+              colors: {
+                type: Array,
+                default: () => []
+              }
+            }
+          };
+        </script>
+      `
+    },
 
     // a property used in v-html
     {
@@ -200,6 +278,20 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <div v-html="message" />
+        </template>
+        <script>
+          export default {
+            props: ['message']
+          };
+        </script>
+      `
+    },
+    // a property used in v-html as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-html="$props.message" />
         </template>
         <script>
           export default {
@@ -223,6 +315,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property passed in a component as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <counter :count="$props.count" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
 
     // a property used in v-on
     {
@@ -230,6 +336,20 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <button @click="alert(count)" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
+    // a property used in v-on as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <button @click="alert($props.count)" />
         </template>
         <script>
           export default {
@@ -1196,6 +1316,21 @@ tester.run('no-unused-properties', rule, {
       </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              get: () => this.$props.x * 2
+            }
+          }
+        };
+      </script>
+      `
+    },
 
     // deep data
     {
@@ -1583,6 +1718,29 @@ tester.run('no-unused-properties', rule, {
       options: [
         {
           groups: ['props', 'data', 'computed', 'methods', 'setup'],
+          ignorePublicMembers: true
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          a: String,
+        },
+        computed: {
+          /** @public */
+          b () { return this.$props.a },
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'computed'],
           ignorePublicMembers: true
         }
       ]
