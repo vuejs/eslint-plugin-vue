@@ -40,6 +40,9 @@ function message(macro) {
 const defineExposeNotTheLast =
   '`defineExpose` should be the last statement in `<script setup>`.'
 
+const putExposeAtBottom =
+  'Put `defineExpose` as the last statement in `<script setup>`.'
+
 tester.run('define-macros-order', rule, {
   valid: [
     {
@@ -678,41 +681,35 @@ tester.run('define-macros-order', rule, {
       filename: 'test.vue',
       code: `
         <script setup>
-        defineProps({
-          test: Boolean
-        })
-
-        /** expose */
-        defineExpose({
-          foo: 'bar'
-        })
-
-        /** console start */
-        console.log('test')
-        /** console end */
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** slots */
+          const slots = defineSlots()
         </script>
       `,
-      output: `
-        <script setup>
-        defineProps({
-          test: Boolean
-        })
-
-        /** console start */
-        console.log('test')
-        /** console end */
-
-        /** expose */
-        defineExpose({
-          foo: 'bar'
-        })
-        </script>
-      `,
+      output: null,
       options: optionsExposeLast,
       errors: [
         {
           message: defineExposeNotTheLast,
-          line: 8
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -720,16 +717,16 @@ tester.run('define-macros-order', rule, {
       filename: 'test.vue',
       code: `
         <script setup>
-          /** slots */
-          const slots = defineSlots()
-          /** options */
-          defineOptions({})
           /** emits */
           defineEmits(['update:foo'])
           /** expose */
           defineExpose({})
+          /** options */
+          defineOptions({})
           /** props */
           const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
         </script>
       `,
       output: `
@@ -738,6 +735,33 @@ tester.run('define-macros-order', rule, {
           defineOptions({})
           /** emits */
           defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** options */
+          defineOptions({})
           /** props */
           const props = defineProps(['foo'])
           /** slots */
@@ -745,21 +769,13 @@ tester.run('define-macros-order', rule, {
           /** expose */
           defineExpose({})
         </script>
-      `,
-      options: [
-        {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots'],
-          defineExposeLast: true
-        }
-      ],
-      errors: [
-        {
-          message: message('defineOptions'),
-          line: 6
+      `
+            }
+          ]
         },
         {
-          message: defineExposeNotTheLast,
-          line: 10
+          message: message('defineOptions'),
+          line: 8
         }
       ]
     }
