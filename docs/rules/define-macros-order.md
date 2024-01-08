@@ -20,12 +20,14 @@ This rule reports the `defineProps` and `defineEmits` compiler macros when they 
 ```json
 {
   "vue/define-macros-order": ["error", {
-    "order": ["defineProps", "defineEmits"]
+    "order": ["defineProps", "defineEmits"],
+    "defineExposeLast": false
   }]
 }
 ```
 
 - `order` (`string[]`) ... The order of defineEmits and defineProps macros. You can also add `"defineOptions"` and `"defineSlots"`.
+- `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
 
@@ -105,6 +107,36 @@ const bar = ref()
 defineOptions({/* ... */})
 defineProps(/* ... */)
 defineEmits(/* ... */)
+const slots = defineSlots()
+</script>
+```
+
+</eslint-code-block>
+
+### `{ "defineExposeLast": true }`
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {defineExposeLast: true}]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script setup>
+defineProps(/* ... */)
+defineEmits(/* ... */)
+const slots = defineSlots()
+defineExpose({/* ... */})
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {defineExposeLast: true}]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup>
+defineProps(/* ... */)
+defineEmits(/* ... */)
+defineExpose({/* ... */})
 const slots = defineSlots()
 </script>
 ```

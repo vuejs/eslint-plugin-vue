@@ -27,9 +27,21 @@ const optionsPropsFirst = [
   }
 ]
 
+const optionsExposeLast = [
+  {
+    defineExposeLast: true
+  }
+]
+
 function message(macro) {
   return `${macro} should be the first statement in \`<script setup>\` (after any potential import statements or type definitions).`
 }
+
+const defineExposeNotTheLast =
+  '`defineExpose` should be the last statement in `<script setup>`.'
+
+const putExposeAtBottom =
+  'Put `defineExpose` as the last statement in `<script setup>`.'
 
 tester.run('define-macros-order', rule, {
   valid: [
@@ -170,6 +182,48 @@ tester.run('define-macros-order', rule, {
           order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** props */
+          defineProps(['foo'])
+          /** options */
+          defineOptions({})
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: optionsExposeLast
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import Foo from 'foo'
+          /** props */
+          const props = defineProps({
+            test: Boolean
+          })
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineProps', 'defineEmits'],
+          defineExposeLast: true
+        }
+      ],
+      parserOptions: {
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
   invalid: [
@@ -620,6 +674,108 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineOptions'),
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      output: null,
+      options: optionsExposeLast,
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** options */
+          defineOptions({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** options */
+          defineOptions({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
+        },
+        {
+          message: message('defineOptions'),
+          line: 8
         }
       ]
     }
