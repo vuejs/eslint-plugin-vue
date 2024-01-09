@@ -71,7 +71,7 @@ tester.run('valid-v-bind', rule, {
       filename: 'test.vue',
       code: "<template><input v-bind='$attrs' /></template>"
     },
-    // v-bind same-name shorthand (in Vue 3.4)
+    // v-bind same-name shorthand (Vue 3.4+)
     {
       filename: 'test.vue',
       code: '<template><div :foo /></template>'

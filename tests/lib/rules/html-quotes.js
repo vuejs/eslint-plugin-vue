@@ -58,7 +58,7 @@ tester.run('html-quotes', rule, {
       code: '<template><div attr="foo\'bar"></div></template>',
       options: ['single', { avoidEscape: true }]
     },
-    // v-bind same-name shorthand (in Vue 3.4)
+    // v-bind same-name shorthand (Vue 3.4+)
     {
       code: '<template><div :foo /></template>',
       options: ['double']

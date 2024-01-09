@@ -107,7 +107,7 @@ tester.run('v-bind-style', rule, {
       options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
     },
-    // v-bind same-name shorthand (in Vue 3.4)
+    // v-bind same-name shorthand (Vue 3.4+)
     {
       filename: 'test.vue',
       code: '<template><div v-bind:foo /></template>',
