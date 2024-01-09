@@ -4,12 +4,11 @@ sidebarDepth: 0
 title: vue/enforce-style-attribute
 description: enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 ---
-
 # vue/enforce-style-attribute
 
 > enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
