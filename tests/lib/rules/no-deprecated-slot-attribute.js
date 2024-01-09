@@ -321,7 +321,7 @@ tester.run('no-deprecated-slot-attribute', rule, {
       output: `
       <template>
         <LinkList>
-          <template v-slot><a /></template>
+          <template v-slot:[slot]><a /></template>
         </LinkList>
       </template>`,
       errors: [

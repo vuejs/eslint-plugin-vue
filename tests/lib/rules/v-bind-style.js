@@ -106,6 +106,21 @@ tester.run('v-bind-style', rule, {
       output: '<template><div v-bind:foo.sync.prop="foo"></div></template>',
       options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
+    },
+    // v-bind same-name shorthand (Vue 3.4+)
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:foo /></template>',
+      output: '<template><div :foo /></template>',
+      options: ['shorthand'],
+      errors: ["Unexpected 'v-bind' before ':'."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo /></template>',
+      output: '<template><div v-bind:foo /></template>',
+      options: ['longform'],
+      errors: ["Expected 'v-bind' before ':'."]
     }
   ]
 })

@@ -203,16 +203,6 @@ ruleTester.run('html-button-has-type', rule, {
           column: 25
         }
       ]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template><button v-bind:type>Hello World</button></template>`,
-      errors: [
-        {
-          message: 'A value must be set for button type attribute.',
-          column: 19
-        }
-      ]
     }
   ]
 })
