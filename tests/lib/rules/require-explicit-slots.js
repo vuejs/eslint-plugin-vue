@@ -59,6 +59,76 @@ tester.run('require-explicit-slots', rule, {
         foo(props: { msg: string }): any
       }>()
       </script>`
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot />
+        </div>
+      </template>
+      <script lang="ts">
+      import { SlotsType } from 'vue'
+
+      defineComponent({
+        slots: Object as SlotsType<{
+          default: { msg: string }
+        }>,
+      })
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+        </div>
+      </template>
+      <script lang="ts">
+      import { SlotsType } from 'vue'
+
+      defineComponent({
+        slots: Object as SlotsType<{
+          default: { msg: string }
+        }>,
+      })
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo"></slot>
+        </div>
+      </template>
+      <script lang="ts">
+      import { SlotsType } from 'vue'
+
+      defineComponent({
+        slots: Object as SlotsType<{
+          foo(props: { msg: string }): any
+        }>,
+      })
+      </script>`
+    },
+    // does not report any error if the script is not TS
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo"></slot>
+        </div>
+      </template>
+      <script setup>
+      </script>`,
+      parserOptions: {
+        parser: null
+      }
     }
   ],
   invalid: [
@@ -74,8 +144,7 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message:
-            'Slots must be explicitly defined with the defineSlots macro.'
+          message: 'Slots must be explicitly defined.'
         }
       ]
     },
@@ -91,8 +160,7 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message:
-            'Slots must be explicitly defined with the defineSlots macro.'
+          message: 'Slots must be explicitly defined.'
         }
       ]
     },
@@ -108,8 +176,7 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message:
-            'Slots must be explicitly defined with the defineSlots macro.'
+          message: 'Slots must be explicitly defined.'
         }
       ]
     },
@@ -128,8 +195,30 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message:
-            'Slots must be explicitly defined with the defineSlots macro.'
+          message: 'Slots must be explicitly defined.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo" />
+        </div>
+      </template>
+      <script lang="ts">
+      import { SlotsType } from 'vue'
+
+      defineComponent({
+        slots: Object as SlotsType<{
+          default: { msg: string }
+        }>,
+      })
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.'
         }
       ]
     },
