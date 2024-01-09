@@ -4,15 +4,16 @@ sidebarDepth: 0
 title: vue/enforce-style-attribute
 description: enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 ---
+
 # vue/enforce-style-attribute
 
 > enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> **_This rule has not been released yet._** </badge>
 
 ## :book: Rule Details
 
-This rule allows you to selectively allow attributes on your top level style tags and warns when using an attribute that is not allowed.
+This rule allows you to explicitly allow the use of the `scoped` and `module` attributes on your top level style tags.
 
 ### `"scoped"`
 
@@ -49,9 +50,9 @@ This rule allows you to selectively allow attributes on your top level style tag
 
 </eslint-code-block>
 
-### `"no-attributes"`
+### `"plain"`
 
-<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['no-attributes']}]}">
+<eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['plain']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -72,12 +73,12 @@ This rule allows you to selectively allow attributes on your top level style tag
 {
   "vue/enforce-style-attribute": [
     "error",
-    { "allow": ["scoped", "module", "no-attributes"] }
+    { "allow": ["scoped", "module", "plain"] }
   ]
 }
 ```
 
-- `"allow"` (`["scoped" | "module" | "no-attributes"]`) Array of attributes to allow on a top level style tag. Default: `["scoped"]`
+- `"allow"` (`["scoped" | "module" | "plain"]`) Array of attributes to allow on a top level style tag. The option `plain` is used to allow style tags that have neither the `scoped` nor `module` attributes. Default: `["scoped"]`
 
 ## :mag: Implementation
 

@@ -38,23 +38,23 @@ tester.run('enforce-style-attribute', rule, {
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style></style>',
-      options: [{ allow: ['no-attributes'] }]
+      options: [{ allow: ['plain'] }]
     },
     // With all options
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style scoped></style>',
-      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'plain'] }]
     },
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style module></style>',
-      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'plain'] }]
     },
     {
       filename: 'test.vue',
       code: '<template></template><script></script><style></style>',
-      options: [{ allow: ['scoped', 'module', 'no-attributes'] }]
+      options: [{ allow: ['scoped', 'module', 'plain'] }]
     }
   ],
   invalid: [
@@ -63,8 +63,7 @@ tester.run('enforce-style-attribute', rule, {
       code: `<template></template><script></script><style></style>`,
       errors: [
         {
-          message:
-            'A <style> tag without attributes is not allowed. Allowed: scoped.'
+          message: 'Plain <style> tags are not allowed. Allowed: scoped.'
         }
       ]
     },
@@ -82,8 +81,7 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['scoped'] }],
       errors: [
         {
-          message:
-            'A <style> tag without attributes is not allowed. Allowed: scoped.'
+          message: 'Plain <style> tags are not allowed. Allowed: scoped.'
         }
       ]
     },
@@ -102,8 +100,7 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['module'] }],
       errors: [
         {
-          message:
-            'A <style> tag without attributes is not allowed. Allowed: module.'
+          message: 'Plain <style> tags are not allowed. Allowed: module.'
         }
       ]
     },
@@ -123,27 +120,27 @@ tester.run('enforce-style-attribute', rule, {
       errors: [
         {
           message:
-            'A <style> tag without attributes is not allowed. Allowed: module, scoped.'
+            'Plain <style> tags are not allowed. Allowed: module, scoped.'
         }
       ]
     },
     {
       code: `<template></template><script></script><style module></style>`,
-      options: [{ allow: ['scoped', 'no-attributes'] }],
+      options: [{ allow: ['scoped', 'plain'] }],
       errors: [
         {
           message:
-            'The module attribute is not allowed. Allowed: no-attributes, scoped.'
+            'The module attribute is not allowed. Allowed: plain, scoped.'
         }
       ]
     },
     {
       code: `<template></template><script></script><style scoped></style>`,
-      options: [{ allow: ['module', 'no-attributes'] }],
+      options: [{ allow: ['module', 'plain'] }],
       errors: [
         {
           message:
-            'The scoped attribute is not allowed. Allowed: module, no-attributes.'
+            'The scoped attribute is not allowed. Allowed: module, plain.'
         }
       ]
     }
