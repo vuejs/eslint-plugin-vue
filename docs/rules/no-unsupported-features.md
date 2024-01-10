@@ -30,6 +30,7 @@ This rule reports unsupported Vue.js syntax on the specified version.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
 The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.4.0+
+    - `"define-model"` ... `defineModel()` macro.
     - `"v-bind-same-name-shorthand"` ... `v-bind` same-name shorthand.
   - Vue.js 3.3.0+
     - `"define-slots"` ... `defineSlots()` macro.

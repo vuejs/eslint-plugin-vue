@@ -1176,6 +1176,33 @@ tester.run('no-undef-properties', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const m = defineModel()
+      const a = defineModel('A')
+      const [withModifiers, modifiers] = defineModel('withModifiers')
+      </script>
+      <template>
+        <div>
+          {{ m }} {{ modelValue }}
+          {{ a }} {{ A }}
+          {{withModifiers}} {{modifiers}}
+        </div>
+
+        <div>{{ undef }}</div>
+      </template>
+      `,
+      errors: [
+        {
+          message: "'undef' is not defined.",
+          line: 14
+        }
+      ]
     }
   ]
 })

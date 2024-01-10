@@ -187,6 +187,40 @@ ruleTester.run('require-prop-types', rule, {
       defineProps<Props>()
       </script>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // defineModel
+      code: `
+      <script setup>
+      const m = defineModel({type:String})
+      const foo = defineModel('foo', {type:String})
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      // defineModel
+      code: `
+      <script setup>
+      const m = defineModel(String)
+      const foo = defineModel('foo', String)
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser')
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      const m = defineModel<string>()
+      const foo = defineModel<string>('foo')
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parser: require.resolve('@typescript-eslint/parser')
+      }
     }
   ],
 
@@ -366,6 +400,46 @@ ruleTester.run('require-prop-types', rule, {
         {
           message: 'Prop "foo" should define at least its type.',
           line: 3
+        }
+      ]
+    },
+    {
+      // defineModel
+      code: `
+      <script setup>
+      const m = defineModel()
+      const foo = defineModel('foo')
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: 'Prop "modelValue" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
+        }
+      ]
+    },
+    {
+      // defineModel
+      code: `
+      <script setup>
+      const m = defineModel({})
+      const foo = defineModel('foo',{})
+      </script>
+      `,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message: 'Prop "modelValue" should define at least its type.',
+          line: 3
+        },
+        {
+          message: 'Prop "foo" should define at least its type.',
+          line: 4
         }
       ]
     }

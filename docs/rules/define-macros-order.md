@@ -27,7 +27,7 @@ This rule reports the `defineProps` and `defineEmits` compiler macros when they 
 }
 ```
 
-- `order` (`string[]`) ... The order of defineEmits and defineProps macros. You can also add `"defineOptions"` and `"defineSlots"`.
+- `order` (`string[]`) ... The order of defineEmits and defineProps macros. You can also add `"defineOptions"`, `"defineSlots"`, and `"defineModel"`.
 - `defineExposeLast` (`boolean`) ... Force `defineExpose` at the end.
 
 ### `{ "order": ["defineProps", "defineEmits"] }` (default)
@@ -69,14 +69,15 @@ defineEmits(/* ... */)
 
 </eslint-code-block>
 
-### `{ "order": ["defineOptions", "defineProps", "defineEmits", "defineSlots"] }`
+### `{ "order": ["defineOptions", "defineModel", "defineProps", "defineEmits", "defineSlots"] }`
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
 defineOptions({/* ... */})
+const model = defineModel()
 defineProps(/* ... */)
 defineEmits(/* ... */)
 const slots = defineSlots()
@@ -85,7 +86,7 @@ const slots = defineSlots()
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✗ BAD -->
@@ -94,18 +95,20 @@ defineEmits(/* ... */)
 const slots = defineSlots()
 defineProps(/* ... */)
 defineOptions({/* ... */})
+const model = defineModel()
 </script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots']}]}">
+<eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
 ```vue
 <!-- ✗ BAD -->
 <script setup>
 const bar = ref()
 defineOptions({/* ... */})
+const model = defineModel()
 defineProps(/* ... */)
 defineEmits(/* ... */)
 const slots = defineSlots()

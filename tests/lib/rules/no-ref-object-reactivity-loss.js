@@ -308,6 +308,31 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         }
       ]
     },
+    {
+      code: `
+      <script setup>
+      const model1 = defineModel();
+      const [model2, mod] = defineModel();
+      console.log(
+        model1.value,
+        model2.value,
+        mod.value // OK
+      )
+      </script>`,
+      parser: require.resolve('vue-eslint-parser'),
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 6
+        },
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 7
+        }
+      ]
+    },
     // Reactivity Transform
     {
       code: `

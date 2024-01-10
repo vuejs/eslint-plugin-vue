@@ -357,6 +357,16 @@ tester.run('no-unused-emit-declarations', rule, {
       const change = () => emit('foo');
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineEmits({'update:foo'() {}})
+      const m = defineModel('foo')
+      </script>
+      `
     }
   ],
   invalid: [
@@ -718,6 +728,22 @@ tester.run('no-unused-emit-declarations', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineEmits({'update:foo'() {}})
+      defineModel('foo')
+      </script>
+      `,
+      errors: [
+        {
+          message: '`update:foo` is defined as emit but never used.',
+          line: 3
+        }
+      ]
     }
   ]
 })
