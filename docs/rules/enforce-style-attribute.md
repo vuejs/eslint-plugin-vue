@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/enforce-style-attribute
 description: enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
+since: v9.20.0
 ---
 # vue/enforce-style-attribute
 
 > enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -78,6 +77,10 @@ This rule allows you to explicitly allow the use of the `scoped` and `module` at
 ```
 
 - `"allow"` (`["scoped" | "module" | "plain"]`) Array of attributes to allow on a top level style tag. The option `plain` is used to allow style tags that have neither the `scoped` nor `module` attributes. Default: `["scoped"]`
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.20.0
 
 ## :mag: Implementation
 
