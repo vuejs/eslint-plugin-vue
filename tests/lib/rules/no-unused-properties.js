@@ -2152,6 +2152,19 @@ tester.run('no-unused-properties', rule, {
         },
       };
       </script>`
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['a'])
+      const foo = defineModel('a')
+      </script>
+      <template>
+        {{ foo }}
+      </template>
+      `
     }
   ],
   invalid: [
@@ -3811,6 +3824,28 @@ tester.run('no-unused-properties', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const m = defineModel()
+      console.log(m.value)
+      defineModel('a')
+      defineModel('unused')
+      </script>
+      <template>
+        {{ a }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'unused' of property found, but never used.",
+          line: 6
+        }
+      ]
     }
   ]
 })

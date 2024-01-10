@@ -168,6 +168,8 @@ tester.run('define-macros-order', rule, {
           import Foo from 'foo'
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -179,7 +181,13 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
         }
       ]
     },
@@ -611,6 +619,8 @@ tester.run('define-macros-order', rule, {
           const slots = defineSlots()
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
         </script>
       `,
       output: `
@@ -618,6 +628,8 @@ tester.run('define-macros-order', rule, {
           import Foo from 'foo'
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -629,7 +641,13 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
         }
       ],
       errors: [
@@ -651,12 +669,16 @@ tester.run('define-macros-order', rule, {
           defineEmits(['update:foo'])
           /** props */
           const props = defineProps(['foo'])
+          /** model */
+          const model = defineModel()
         </script>
       `,
       output: `
         <script setup>
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -667,7 +689,13 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
         }
       ],
       errors: [
