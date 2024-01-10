@@ -2501,6 +2501,53 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters({
+                a: { b :'c' }, // This is an invalid definition, but it does not use "a".
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters([
+                "a",
+                a['foo'] // cannot be inferred.
+              ])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
 
     // vuex unused state
     {
