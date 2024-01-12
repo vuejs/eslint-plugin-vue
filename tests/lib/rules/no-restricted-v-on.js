@@ -62,23 +62,11 @@ tester.run('no-restricted-v-on', rule, {
   invalid: [
     {
       filename: 'test.vue',
-      code: '<template><div @v-model="foo"></div></template>',
+      code: '<template><div @test="foo"></div></template>',
+      options: ['test'],
       errors: [
         {
-          message:
-            'Using `@v-xxx` is not allowed. Instead, remove `@` and use it as directive.',
-          line: 1,
-          column: 16
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-on:v-model="foo"></div></template>',
-      errors: [
-        {
-          message:
-            'Using `@v-xxx` is not allowed. Instead, remove `@` and use it as directive.',
+          message: 'Using `@test` is not allowed on this element.',
           line: 1,
           column: 16
         }
@@ -116,12 +104,11 @@ tester.run('no-restricted-v-on', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div @v-on="foo" @foo.prevent="bar" /><div @foo="foo" v-on="listener" /></template>',
-      options: ['/^v-/', { argument: 'foo', modifiers: ['prevent'] }, null],
+      code: '<template><div @v-on="foo" @foo.prevent="bar" /><div @foo="foo" /></template>',
+      options: ['/^v-/', { argument: 'foo', modifiers: ['prevent'] }],
       errors: [
         'Using `@v-on` is not allowed on this element.',
-        'Using `@foo.prevent` is not allowed on this element.',
-        'Using `v-on` is not allowed on this element.'
+        'Using `@foo.prevent` is not allowed on this element.'
       ]
     },
     {
