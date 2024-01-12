@@ -244,6 +244,7 @@ For example:
 | [vue/no-restricted-props](./no-restricted-props.md) | disallow specific props | :bulb: | :hammer: |
 | [vue/no-restricted-static-attribute](./no-restricted-static-attribute.md) | disallow specific attribute |  | :hammer: |
 | [vue/no-restricted-v-bind](./no-restricted-v-bind.md) | disallow specific argument in `v-bind` |  | :hammer: |
+| [vue/no-restricted-v-on](./no-restricted-v-on.md) | disallow specific argument in `v-on` |  | :hammer: |
 | [vue/no-root-v-if](./no-root-v-if.md) | disallow `v-if` directives on root element |  | :hammer: |
 | [vue/no-setup-props-reactivity-loss](./no-setup-props-reactivity-loss.md) | disallow usages that lose the reactivity of `props` passed to `setup` |  | :hammer: |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  | :hammer: |

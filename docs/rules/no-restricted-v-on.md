@@ -54,7 +54,8 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-v-on": ["error",
+  "vue/no-restricted-v-on": [
+    "error",
     {
       "argument": "/^v-/",
       "message": "Using `@v-xxx` is not allowed. Instead, remove `@` and use it as directive."
@@ -91,6 +92,7 @@ The following properties can be specified for the object.
   <div @foo.prevent="x" />
 </template>
 ```
+
 </eslint-code-block>
 
 ### `{ "argument": "foo", "element": "MyButton"  }`
