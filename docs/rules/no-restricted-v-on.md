@@ -12,7 +12,7 @@ description: disallow specific argument in `v-on`
 
 ## :book: Rule Details
 
-This rule allows you to specify `v-on` argument names that you don't wantt to use in your application.
+This rule allows you to specify `v-on` argument names that you don't want to use in your application.
 
 ## :wrench: Options
 
