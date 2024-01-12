@@ -56,7 +56,7 @@ Alternatively, the rule also accepts objects.
 
 The following properties can be specified for the object.
 
-- `argument` ... Specify the argument name or pattern.
+- `argument` ... Specify the argument name or pattern or `null`. If `null` is specified, it matches `v-on=`.
 - `modifiers` ... Specifies an array of the modifier names. If specified, it will only be reported if the specified modifier is used.
 - `element` ... Specify the element name or pattern. If specified, it will only be reported if used on the specified element.
 - `message` ... Specify an optional custom message.

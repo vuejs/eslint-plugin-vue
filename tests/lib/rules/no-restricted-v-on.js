@@ -104,12 +104,19 @@ tester.run('no-restricted-v-on', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div @v-on="foo" @foo.prevent="bar" /><div @foo="foo" /></template>',
-      options: ['/^v-/', { argument: 'foo', modifiers: ['prevent'] }],
+      code: '<template><div @v-on="foo" @foo.prevent="bar" /><div @foo="foo" v-on="listener" /></template>',
+      options: ['/^v-/', { argument: 'foo', modifiers: ['prevent'] }, null],
       errors: [
         'Using `@v-on` is not allowed on this element.',
-        'Using `@foo.prevent` is not allowed on this element.'
+        'Using `@foo.prevent` is not allowed on this element.',
+        'Using `v-on` is not allowed on this element.'
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on="foo" /></template>',
+      options: [null],
+      errors: ['Using `v-on` is not allowed on this element.']
     },
     {
       filename: 'test.vue',
