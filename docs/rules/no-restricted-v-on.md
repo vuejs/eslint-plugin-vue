@@ -20,11 +20,11 @@ This rule takes a list of strings, where each string is a argument name or patte
 
 ```json
 {
-  "vue/no-restricted-v-on": ["error", "foo", "bar"]
+  "vue/no-restricted-v-on": ["error", "foo", "/^bar/"]
 }
 ```
 
-<eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', 'foo', 'bar', '/^bar/']}">
+<eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', 'foo', '/^bar/']}">
 
 ```vue
 <template>
@@ -34,7 +34,7 @@ This rule takes a list of strings, where each string is a argument name or patte
 
   <!-- ✗ BAD -->
   <div v-on:foo="x" />
-  <div @bar="x" />
+  <div @bar-baz="x" />
 </template>
 ```
 
