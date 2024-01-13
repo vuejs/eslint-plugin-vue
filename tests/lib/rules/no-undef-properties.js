@@ -558,7 +558,16 @@ tester.run('no-undef-properties', rule, {
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
-    }
+    },
+
+    `
+    <script setup>
+    const model = defineModel();
+    const woof = computed(() => model.value);
+    </script>
+    <template>
+      <div id="app">Woof: {{ woof }}</div>
+    </template>`
   ],
 
   invalid: [
