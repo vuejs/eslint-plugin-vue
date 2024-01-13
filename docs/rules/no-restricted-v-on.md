@@ -100,11 +100,9 @@ The following properties can be specified for the object.
 ## :couple: Related Rules
 
 - [vue/no-restricted-static-attribute]
-
-[vue/no-restricted-static-attribute]: ./no-restricted-static-attribute.md
-
 - [vue/no-restricted-v-bind]
 
+[vue/no-restricted-static-attribute]: ./no-restricted-static-attribute.md
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
 
 ## :mag: Implementation
