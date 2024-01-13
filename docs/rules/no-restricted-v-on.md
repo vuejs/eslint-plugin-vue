@@ -24,10 +24,14 @@ This rule takes a list of strings, where each string is a argument name or patte
 }
 ```
 
-<eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', 'foo', 'bar']}">
+<eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', 'foo', 'bar', '/^bar/']}">
 
 ```vue
 <template>
+  <!-- ✓ GOOD -->
+  <div v-on:click="x" />
+  <div @tap="x" />
+
   <!-- ✗ BAD -->
   <div v-on:foo="x" />
   <div @bar="x" />
