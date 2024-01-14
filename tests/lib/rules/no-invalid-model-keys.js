@@ -8,7 +8,7 @@ const rule = require('../../../lib/rules/no-invalid-model-keys')
 const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   }

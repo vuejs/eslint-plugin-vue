@@ -1069,7 +1069,7 @@ tester.run('padding-lines-in-component-definition', rule, {
                 b: {
                     type: String,
                 },
-                // eslint-disable-next-line padding-lines-in-component-definition
+                // foo
                 c: {
                     type: String,
                 },
@@ -1098,7 +1098,7 @@ tester.run('padding-lines-in-component-definition', rule, {
                     type: String,
                 },
 
-                // eslint-disable-next-line padding-lines-in-component-definition
+                // foo
                 c: {
                     type: String,
                 },

@@ -481,7 +481,7 @@ describe('suppress reporting with eslint-disable-next-line', () => {
     const [{ messages, output }] = await eslint.lintText(code, {
       filePath: 'test.vue'
     })
-    assert.strictEqual(messages.length, 0)
+    assert.deepStrictEqual(messages, [])
     // should not fix <script>
     assert.strictEqual(
       output,

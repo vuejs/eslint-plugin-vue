@@ -8,7 +8,7 @@ const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/prefer-import-from-vue')
 
 const tester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   }

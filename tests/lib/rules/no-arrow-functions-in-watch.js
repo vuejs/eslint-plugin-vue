@@ -6,7 +6,7 @@ const rule = require('../../../lib/rules/no-arrow-functions-in-watch')
 const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   }

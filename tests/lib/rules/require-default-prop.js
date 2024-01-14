@@ -54,8 +54,6 @@ ruleTester.run('require-default-prop', rule, {
             },
             i: Boolean,
             j: [Boolean],
-            // eslint-disable-next-line require-default-prop
-            k: Number
           }
         }
       `
@@ -118,7 +116,10 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser')
+
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -132,7 +133,9 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -389,13 +392,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -408,13 +413,13 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ]
+      ],
+      languageOptions: { parser: require('@typescript-eslint/parser') }
     },
 
     // computed properties

@@ -139,7 +139,7 @@ tester.run('no-restricted-call-after-await', rule, {
       </script>
       `,
       options: [{ module: 'vue-i18n', path: 'useI18n' }],
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -151,7 +151,7 @@ tester.run('no-restricted-call-after-await', rule, {
       </script>
       `,
       options: [{ module: 'vue-i18n', path: 'useI18n' }],
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [

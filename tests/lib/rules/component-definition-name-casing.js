@@ -342,7 +342,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       filename: 'test.vue',
       code: `(Vue as VueConstructor<Vue>).component('foo-bar', component)`,
       output: `(Vue as VueConstructor<Vue>).component('FooBar', component)`,
-      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
@@ -350,7 +349,10 @@ ruleTester.run('component-definition-name-casing', rule, {
           line: 1
         }
       ],
-      languageOptions
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ...languageOptions
+      }
     },
     {
       filename: 'test.vue',

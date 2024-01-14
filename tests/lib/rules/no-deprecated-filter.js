@@ -24,8 +24,10 @@ ruleTester.run('no-deprecated-filter', rule, {
     {
       filename: 'test.vue',
       code: '<template>{{ msg | filter }}</template>',
-      parserOptions: {
-        vueFeatures: { filter: false }
+      languageOptions: {
+        parserOptions: {
+          vueFeatures: { filter: false }
+        }
       }
     }
   ],

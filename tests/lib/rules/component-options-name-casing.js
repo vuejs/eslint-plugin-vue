@@ -8,7 +8,7 @@ const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/component-options-name-casing')
 
 const tester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   }

@@ -35,8 +35,10 @@ tester.run('define-emits-declaration', rule, {
         }>()
         </script>
        `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -50,8 +52,10 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['type-based'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -74,8 +78,10 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['type-based'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -89,8 +95,10 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['type-literal'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -103,8 +111,10 @@ tester.run('define-emits-declaration', rule, {
         })
         </script>
        `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -121,8 +131,10 @@ tester.run('define-emits-declaration', rule, {
          }
          </script>
        `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     }
   ],
@@ -164,15 +176,17 @@ tester.run('define-emits-declaration', rule, {
        </script>
        `,
       options: ['type-literal'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: 'Use type based declaration instead of runtime declaration.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     {
       filename: 'test.vue',
@@ -185,15 +199,17 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['runtime'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: 'Use runtime declaration instead of type based declaration.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     {
       filename: 'test.vue',
@@ -206,9 +222,6 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['type-literal'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message:
@@ -220,7 +233,12 @@ tester.run('define-emits-declaration', rule, {
             'Use new type literal declaration instead of the old call signature declaration.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     {
       filename: 'test.vue',
@@ -233,16 +251,18 @@ tester.run('define-emits-declaration', rule, {
         </script>
        `,
       options: ['type-literal'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     {
       filename: 'test.vue',
@@ -252,16 +272,18 @@ tester.run('define-emits-declaration', rule, {
         </script>
         `,
       options: ['type-literal'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ]
 })

@@ -137,8 +137,11 @@ ruleTester.run('require-prop-types', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',
@@ -151,8 +154,11 @@ ruleTester.run('require-prop-types', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',

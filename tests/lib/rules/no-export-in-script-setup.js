@@ -57,9 +57,11 @@ ruleTester.run('no-export-in-script-setup', rule, {
             export interface Bar {}
             </script>
             `,
-            languageOptions: { parser: require('vue-eslint-parser') },
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             }
           }
         ]
@@ -72,9 +74,11 @@ ruleTester.run('no-export-in-script-setup', rule, {
             export interface Bar {}
             </script>
             `,
-            languageOptions: { parser: require('vue-eslint-parser') },
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             }
           }
         ])
@@ -141,9 +145,6 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export {}
       </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: '`<script setup>` cannot contain ES module exports.',
@@ -158,7 +159,12 @@ ruleTester.run('no-export-in-script-setup', rule, {
           line: 5
         }
       ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ]
 })

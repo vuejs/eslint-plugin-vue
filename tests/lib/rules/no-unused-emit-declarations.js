@@ -345,7 +345,9 @@ tester.run('no-unused-emit-declarations', rule, {
       }>()
       const change = () => emit('foo');
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -665,7 +667,6 @@ tester.run('no-unused-emit-declarations', rule, {
         }>()
         const change = () => emit('foo');
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           messageId: 'unused',
@@ -673,7 +674,10 @@ tester.run('no-unused-emit-declarations', rule, {
           column: 11,
           endColumn: 36
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -699,7 +703,6 @@ tester.run('no-unused-emit-declarations', rule, {
         defineEmits<{(e: 'foo'): void}>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           messageId: 'unused',
@@ -707,7 +710,10 @@ tester.run('no-unused-emit-declarations', rule, {
           column: 22,
           endColumn: 38
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',

@@ -119,7 +119,7 @@ tester.run('no-lifecycle-after-await', rule, {
       await doSomething()
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -132,7 +132,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -145,7 +145,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -157,7 +157,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [

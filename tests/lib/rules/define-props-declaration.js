@@ -26,8 +26,10 @@ tester.run('define-props-declaration', rule, {
       }>()
       </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -40,8 +42,10 @@ tester.run('define-props-declaration', rule, {
       </script>
       `,
       options: ['type-based'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -75,8 +79,10 @@ tester.run('define-props-declaration', rule, {
       })
       </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -94,8 +100,10 @@ tester.run('define-props-declaration', rule, {
         }
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     }
   ],
@@ -143,15 +151,17 @@ tester.run('define-props-declaration', rule, {
       </script>
       `,
       options: ['runtime'],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: 'Use runtime declaration instead of type-based declaration.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ]
 })

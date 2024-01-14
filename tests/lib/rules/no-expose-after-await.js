@@ -103,7 +103,7 @@ tester.run('no-expose-after-await', rule, {
       await doSomething()
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -116,7 +116,7 @@ tester.run('no-expose-after-await', rule, {
       function defineExpose() {}
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -127,7 +127,7 @@ tester.run('no-expose-after-await', rule, {
       onMounted(() => {})
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
@@ -179,14 +179,14 @@ tester.run('no-expose-after-await', rule, {
       defineExpose({ /* ... */ })
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 },
       errors: [
         {
           message: '`defineExpose` is forbidden after an `await` expression.',
           line: 4,
           column: 7
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 2022 }
     }
   ]
 })

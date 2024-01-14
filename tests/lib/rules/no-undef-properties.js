@@ -555,8 +555,10 @@ tester.run('no-undef-properties', rule, {
       <div>{{ foo }}</div>
       <div>{{ unknown }}</div>
       </template>`,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
 

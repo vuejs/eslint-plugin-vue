@@ -102,8 +102,10 @@ const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
-    ecmaFeatures: {
-      globalReturn: true
+    parserOptions: {
+      ecmaFeatures: {
+        globalReturn: true
+      }
     }
   }
 })

@@ -130,7 +130,7 @@ tester.run('no-watch-after-await', rule, {
       await doSomething()
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -143,7 +143,7 @@ tester.run('no-watch-after-await', rule, {
       watchEffect(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -156,7 +156,7 @@ tester.run('no-watch-after-await', rule, {
       watchEffect(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -170,7 +170,7 @@ tester.run('no-watch-after-await', rule, {
       watch(foo, () => { /* ... */ })
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [

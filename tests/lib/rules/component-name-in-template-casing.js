@@ -231,8 +231,10 @@ tester.run('component-name-in-template-casing', rule, {
               </template>
             `,
             options: ['PascalCase', { registeredComponentsOnly: true }],
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             }
           }
         ]
@@ -1011,8 +1013,10 @@ tester.run('component-name-in-template-casing', rule, {
               </template>
             `,
             options: ['PascalCase', { registeredComponentsOnly: false }],
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             output: `
               <script setup lang="ts">

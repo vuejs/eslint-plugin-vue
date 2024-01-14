@@ -2131,8 +2131,10 @@ tester.run('no-unused-properties', rule, {
       <style lang="scss" scoped>
       //
       </style>`,
-      parserOptions: {
-        parser: '@typescript-eslint/parser'
+      languageOptions: {
+        parserOptions: {
+          parser: '@typescript-eslint/parser'
+        }
       }
     },
 
@@ -3901,7 +3903,7 @@ tester.run('no-unused-properties', rule, {
 describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
   const linter = new Linter()
   const config = {
-    parser: require('vue-eslint-parser'),
+    files: ['**/*.vue'],
     plugins: {
       vue: {
         rules: {
@@ -3910,7 +3912,8 @@ describe('`vue/no-unused-properties` and `vue/no-unused-components` should not c
         }
       }
     },
-    parserOptions: {
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
       ecmaVersion: 2020,
       sourceType: 'module'
     },
