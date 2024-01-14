@@ -60,6 +60,7 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
 function getESLintClassForV6() {
   class ESLintForV6 {
     static get version() {
+      // @ts-expect-error
       return eslint.CLIEngine.version
     }
 
@@ -76,7 +77,7 @@ function getESLintClassForV6() {
         plugins: pluginsMap,
         ...otherOptions
       } = options || {}
-      /** @type {eslint.CLIEngine.Options} */
+
       const newOptions = {
         fix: Boolean(fix),
         reportUnusedDisableDirectives: reportUnusedDisableDirectives
@@ -97,6 +98,8 @@ function getESLintClassForV6() {
           : undefined,
         ...overrideConfig
       }
+
+      // @ts-expect-error
       this.engine = new eslint.CLIEngine(newOptions)
 
       for (const [name, plugin] of Object.entries(pluginsMap || {})) {
@@ -109,7 +112,7 @@ function getESLintClassForV6() {
      * @returns {ReturnType<eslint.ESLint['lintText']>}
      */
     async lintText(...params) {
-      const result = this.engine.executeOnText(params[0], params[1].filePath)
+      const result = this.engine.executeOnText(params[0], params[1]?.filePath)
       return result.results
     }
   }
@@ -143,6 +146,7 @@ function getRuleTesterClassForV8() {
         })
       )
       for (const args of defineRules) {
+        // @ts-expect-error
         this.linter.defineRule(...args)
       }
     }
@@ -202,6 +206,11 @@ function getParserName(parser) {
   const name = parser.meta?.name || parser.name
   if (name === 'typescript-eslint/parser') {
     return require.resolve('@typescript-eslint/parser')
-  }
+  } else if (
+    name == null &&
+    // @ts-expect-error
+    parser === require('@typescript-eslint/parser')
+  )
+    return require.resolve('@typescript-eslint/parser')
   return require.resolve(name)
 }
