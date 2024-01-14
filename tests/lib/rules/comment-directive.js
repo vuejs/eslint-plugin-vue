@@ -11,6 +11,7 @@ const { ESLint } = require('../../eslint-compat')
 // Initialize linter.
 const eslint = new ESLint({
   overrideConfig: {
+    files: ['*'],
     languageOptions: {
       parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
@@ -21,7 +22,8 @@ const eslint = new ESLint({
       'vue/comment-directive': 'error',
       'vue/no-parsing-error': 'error',
       'vue/no-duplicate-attributes': 'error'
-    }
+    },
+    processor: require('../../../lib/processor')
   }
 })
 
@@ -41,7 +43,7 @@ describe('comment-directive', () => {
       `
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages.length, 0)
+      assert.deepEqual(messages, [])
     })
 
     it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes -->', async () => {
@@ -351,6 +353,7 @@ describe('comment-directive', () => {
   describe('reportUnusedDisableDirectives', () => {
     const eslint = new ESLint({
       overrideConfig: {
+        files: ['**/*.vue'],
         languageOptions: {
           parser: require('vue-eslint-parser'),
           ecmaVersion: 2015
@@ -364,7 +367,8 @@ describe('comment-directive', () => {
           ],
           'vue/no-parsing-error': 'error',
           'vue/no-duplicate-attributes': 'error'
-        }
+        },
+        processor: require('../../../lib/processor')
       }
     })
 
@@ -403,7 +407,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages.length, 0)
+      assert.deepEqual(messages, [])
     })
     it('disable and report unused <!-- eslint-disable -->', async () => {
       const code = `
@@ -502,7 +506,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages.length, 0)
+      assert.deepEqual(messages, [])
     })
 
     it('dont report used, with duplicate eslint-disable', async () => {
@@ -516,7 +520,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages.length, 0)
+      assert.deepEqual(messages, [])
     })
   })
 })

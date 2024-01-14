@@ -11,6 +11,7 @@ const { ESLint } = require('../../eslint-compat')
 // Initialize linter.
 const eslint = new ESLint({
   overrideConfig: {
+    files: ['**/*.vue'],
     languageOptions: {
       parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
@@ -19,7 +20,8 @@ const eslint = new ESLint({
     rules: {
       'vue/comment-directive': 'error',
       'vue/block-order': 'error'
-    }
+    },
+    processor: require('../../../lib/processor')
   },
   fix: true
 })
