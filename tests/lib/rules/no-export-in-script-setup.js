@@ -5,7 +5,7 @@
 'use strict'
 
 const semver = require('semver')
-const eslint = require('eslint')
+const eslint = require('../../eslint-compat')
 const rule = require('../../../lib/rules/no-export-in-script-setup')
 
 const RuleTester = eslint.RuleTester

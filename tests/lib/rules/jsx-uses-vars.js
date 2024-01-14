@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const eslint = require('eslint')
+const eslint = require('../../eslint-compat')
 const rule = require('../../../lib/rules/jsx-uses-vars')
 const { getCoreRule } = require('../../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')

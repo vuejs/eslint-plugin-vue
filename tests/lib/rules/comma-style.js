@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const { RuleTester } = require('eslint')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/comma-style')
 
 const tester = new RuleTester({
