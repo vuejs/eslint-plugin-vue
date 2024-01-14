@@ -7,8 +7,7 @@ const { RuleTester } = require('eslint')
 const rule = require('../../../lib/rules/no-extra-parens')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('no-extra-parens', rule, {

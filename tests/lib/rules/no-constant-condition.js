@@ -7,8 +7,7 @@ const { RuleTester } = require('eslint')
 const rule = require('../../../lib/rules/no-constant-condition.js')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 6 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 }
 })
 
 tester.run('no-constant-condition', rule, {

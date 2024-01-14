@@ -12,8 +12,8 @@ const {
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -3900,15 +3900,16 @@ tester.run('no-unused-properties', rule, {
 // https://github.com/vuejs/eslint-plugin-vue/issues/1789
 describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
   const linter = new Linter()
-  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
-  linter.defineRule(
-    'vue/no-unused-components',
-    require('../../../lib/rules/no-unused-components')
-  )
-  linter.defineRule('vue/no-unused-properties', rule)
-
   const config = {
-    parser: 'vue-eslint-parser',
+    parser: require('vue-eslint-parser'),
+    plugins: {
+      vue: {
+        rules: {
+          'no-unused-components': require('../../../lib/rules/no-unused-components'),
+          'no-unused-properties': rule
+        }
+      }
+    },
     parserOptions: {
       ecmaVersion: 2020,
       sourceType: 'module'

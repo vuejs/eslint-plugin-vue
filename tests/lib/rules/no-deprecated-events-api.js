@@ -6,7 +6,7 @@
 
 const rule = require('../../../lib/rules/no-deprecated-events-api')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const parserOptions = {
   ecmaVersion: 2020,

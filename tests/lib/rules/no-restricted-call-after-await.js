@@ -4,12 +4,15 @@
 'use strict'
 
 const path = require('path')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-restricted-call-after-await')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-restricted-call-after-await', rule, {

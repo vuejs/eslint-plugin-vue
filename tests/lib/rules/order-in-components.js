@@ -5,7 +5,7 @@
 'use strict'
 
 const rule = require('../../../lib/rules/order-in-components')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester()
 
@@ -176,8 +176,8 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -944,7 +944,6 @@ ruleTester.run('order-in-components', rule, {
           };
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ...parserOptions,
         parser: { ts: require.resolve('@typescript-eslint/parser') }
@@ -955,7 +954,8 @@ ruleTester.run('order-in-components', rule, {
             'The "props" property should be above the "setup" property on line 4.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'example.vue',
@@ -975,7 +975,6 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions,
       errors: [
         {
@@ -983,7 +982,8 @@ ruleTester.run('order-in-components', rule, {
             'The "name" property should be above the "inheritAttrs" property on line 4.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ]
 })

@@ -6,7 +6,7 @@
 
 const semver = require('semver')
 const rule = require('../../../lib/rules/prop-name-casing')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const parserOptions = {
   ecmaVersion: 2018,
@@ -325,8 +325,8 @@ ruleTester.run('prop-name-casing', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -335,8 +335,8 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps(['greetingText'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -348,11 +348,11 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps<Props>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ...parserOptions,
         parser: require.resolve('@typescript-eslint/parser')
-      }
+      },
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -621,14 +621,14 @@ ruleTester.run('prop-name-casing', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           line: 4
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -637,14 +637,14 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps(['greeting_text'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,
@@ -662,7 +662,7 @@ ruleTester.run('prop-name-casing', rule, {
             defineProps<Props>()
             </script>
             `,
-            parser: require.resolve('vue-eslint-parser'),
+            languageOptions: { parser: require('vue-eslint-parser') },
             parserOptions: {
               ...parserOptions,
               parser: require.resolve('@typescript-eslint/parser')

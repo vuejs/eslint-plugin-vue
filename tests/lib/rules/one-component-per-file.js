@@ -5,7 +5,7 @@
 'use strict'
 
 const rule = require('../../../lib/rules/one-component-per-file')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
   parserOptions: {

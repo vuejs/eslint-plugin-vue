@@ -5,7 +5,7 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-reserved-component-names')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const htmlElements = require('../../../lib/utils/html-elements.json')
 const RESERVED_NAMES_IN_HTML = new Set([
@@ -507,8 +507,8 @@ ruleTester.run('no-reserved-component-names', rule, {
           }
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -519,8 +519,8 @@ ruleTester.run('no-reserved-component-names', rule, {
           }
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     // https://github.com/vuejs/eslint-plugin-vue/issues/1018
     {
@@ -559,20 +559,20 @@ ruleTester.run('no-reserved-component-names', rule, {
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({}) </script>`,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({ ...name }) </script>`,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({ name: 'Foo' }) </script>`,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -678,7 +678,7 @@ ruleTester.run('no-reserved-component-names', rule, {
     ...invalidElements.map((name) => ({
       filename: `${name}.vue`,
       code: `<script setup> defineOptions({name: '${name}'}) </script>`,
-      parser: require.resolve('vue-eslint-parser'),
+      languageOptions: { parser: require('vue-eslint-parser') },
       parserOptions,
       errors: [
         {

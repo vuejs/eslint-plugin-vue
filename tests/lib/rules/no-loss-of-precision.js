@@ -9,8 +9,8 @@ const semver = require('semver')
 const rule = require('../../../lib/rules/no-loss-of-precision')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }

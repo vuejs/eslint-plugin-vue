@@ -1,4 +1,4 @@
-<!--{"parserOptions": {"parser":"@typescript-eslint/parser"}}-->
+<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}}-->
 <script lang="ts">
 abstract class A {
   abstract a ();

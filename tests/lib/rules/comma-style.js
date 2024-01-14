@@ -7,8 +7,7 @@ const { RuleTester } = require('eslint')
 const rule = require('../../../lib/rules/comma-style')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
 })
 
 tester.run('comma-style', rule, {

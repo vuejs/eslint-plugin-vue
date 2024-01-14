@@ -3,12 +3,15 @@
  * See LICENSE file in root directory for full license.
  */
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-use-computed-property-like-method')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-use-computed-property-like-method', rule, {

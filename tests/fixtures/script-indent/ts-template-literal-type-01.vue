@@ -1,4 +1,4 @@
-<!--{"parserOptions": {"parser":"@typescript-eslint/parser"}, "requirements": { "@typescript-eslint/parser": ">=4.1.0" } }-->
+<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}, "requirements": { "@typescript-eslint/parser": ">=4.1.0" } }-->
 <script lang="ts">
 type T =
   `foo`

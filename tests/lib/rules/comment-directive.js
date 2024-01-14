@@ -11,20 +11,18 @@ const { ESLint } = require('../../eslint-compat')
 // Initialize linter.
 const eslint = new ESLint({
   overrideConfig: {
-    parser: require.resolve('vue-eslint-parser'),
-    parserOptions: {
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
     },
-    plugins: ['vue'],
+    plugins: { vue: require('../../../lib/index') },
     rules: {
       'no-unused-vars': 'error',
       'vue/comment-directive': 'error',
       'vue/no-parsing-error': 'error',
       'vue/no-duplicate-attributes': 'error'
     }
-  },
-  useEslintrc: false,
-  plugins: { vue: require('../../../lib/index') }
+  }
 })
 
 async function lintMessages(code) {
@@ -353,11 +351,11 @@ describe('comment-directive', () => {
   describe('reportUnusedDisableDirectives', () => {
     const eslint = new ESLint({
       overrideConfig: {
-        parser: require.resolve('vue-eslint-parser'),
-        parserOptions: {
+        languageOptions: {
+          parser: require('vue-eslint-parser'),
           ecmaVersion: 2015
         },
-        plugins: ['vue'],
+        plugins: { vue: require('../../../lib/index') },
         rules: {
           'no-unused-vars': 'error',
           'vue/comment-directive': [
@@ -367,8 +365,7 @@ describe('comment-directive', () => {
           'vue/no-parsing-error': 'error',
           'vue/no-duplicate-attributes': 'error'
         }
-      },
-      useEslintrc: false
+      }
     })
 
     async function lintMessages(code) {

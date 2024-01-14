@@ -5,7 +5,7 @@ const path = require('path')
 const assert = require('assert')
 const vueESLintParser = require('vue-eslint-parser')
 
-const Linter = require('eslint').Linter
+const Linter = require('../../eslint-compat').Linter
 
 const {
   extractRefObjectReferences,
@@ -37,7 +37,11 @@ function loadPatterns(rootDir) {
   return fs.readdirSync(rootDir).map((name) => {
     for (const [sourceFile, resultFile, options] of [
       ['source.js', 'result.js'],
-      ['source.vue', 'result.vue', { parser: 'vue-eslint-parser' }]
+      [
+        'source.vue',
+        'result.vue',
+        { languageOptions: { parser: 'vue-eslint-parser' } }
+      ]
     ]) {
       const sourceFilePath = path.join(rootDir, name, sourceFile)
       if (fs.existsSync(sourceFilePath)) {
@@ -57,40 +61,54 @@ function extractRefs(code, extract, options) {
   const linter = new Linter()
   const references = []
 
-  linter.defineParser('vue-eslint-parser', vueESLintParser)
-  linter.defineRule('vue/extract-test', (context) => {
-    const refs = extract(context)
-
-    const processed = new Set()
-    return {
-      '*'(node) {
-        if (processed.has(node)) {
-          // Old ESLint may be called twice on the same node.
-          return
-        }
-        processed.add(node)
-        const data = refs.get(node)
-        if (data) {
-          references.push(data)
-        }
-      }
-    }
-  })
   const messages = linter.verify(
     code,
     {
       ...options,
-      parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
-      rules: { 'vue/extract-test': 'error' },
-      globals: {
-        $ref: 'readonly',
-        $computed: 'readonly',
-        $shallowRef: 'readonly',
-        $customRef: 'readonly',
-        $toRef: 'readonly',
-        $: 'readonly',
-        $$: 'readonly'
-      }
+      plugins: {
+        vue: {
+          rules: {
+            'extract-test': {
+              create: (context) => {
+                const refs = extract(context)
+
+                const processed = new Set()
+                return {
+                  '*'(node) {
+                    if (processed.has(node)) {
+                      // Old ESLint may be called twice on the same node.
+                      return
+                    }
+                    processed.add(node)
+                    const data = refs.get(node)
+                    if (data) {
+                      references.push(data)
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      languageOptions: {
+        ...options?.languageOptions,
+        ...(options?.languageOptions?.parser === 'vue-eslint-parser'
+          ? { parser: vueESLintParser }
+          : {}),
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        globals: {
+          $ref: 'readonly',
+          $computed: 'readonly',
+          $shallowRef: 'readonly',
+          $customRef: 'readonly',
+          $toRef: 'readonly',
+          $: 'readonly',
+          $$: 'readonly'
+        }
+      },
+      rules: { 'vue/extract-test': 'error' }
     },
     undefined,
     true

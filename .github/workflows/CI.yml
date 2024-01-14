@@ -28,6 +28,12 @@ jobs:
       matrix:
         node: [17, 18, 20]
         os: [ubuntu-latest]
+        eslint: [8]
+        include:
+            # On next ESLint version
+            - eslint: ^9.0.0-0
+              node: 20
+              os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -39,6 +45,8 @@ jobs:
         node-version: ${{ matrix.node }}
     - name: Install Packages
       run: npm install --legacy-peer-deps
+    - name: Install ESLint v${{ matrix.eslint }}
+      run: npm install --save-dev eslint@${{ matrix.eslint }} --legacy-peer-deps
     - name: Test
       run: npm test
 

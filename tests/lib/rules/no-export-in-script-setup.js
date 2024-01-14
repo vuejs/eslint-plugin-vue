@@ -10,8 +10,8 @@ const rule = require('../../../lib/rules/no-export-in-script-setup')
 
 const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 6,
     sourceType: 'module'
   }
@@ -57,7 +57,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
             export interface Bar {}
             </script>
             `,
-            parser: require.resolve('vue-eslint-parser'),
+            languageOptions: { parser: require('vue-eslint-parser') },
             parserOptions: {
               parser: require.resolve('@typescript-eslint/parser')
             }
@@ -72,7 +72,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
             export interface Bar {}
             </script>
             `,
-            parser: require.resolve('vue-eslint-parser'),
+            languageOptions: { parser: require('vue-eslint-parser') },
             parserOptions: {
               parser: require.resolve('@typescript-eslint/parser')
             }
@@ -141,7 +141,6 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export {}
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       },
@@ -158,7 +157,8 @@ ruleTester.run('no-export-in-script-setup', rule, {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ]
 })

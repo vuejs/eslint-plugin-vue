@@ -9,7 +9,7 @@ const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-emit-validator', rule, {
@@ -166,12 +166,12 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits<(e: 'foo')=>void>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
         parser: require.resolve('@typescript-eslint/parser')
-      }
+      },
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       code: `
@@ -350,7 +350,6 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits(['foo'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module'
@@ -361,7 +360,8 @@ ruleTester.run('require-emit-validator', rule, {
           data: { name: 'foo' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -370,7 +370,6 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits({foo:null})
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       parserOptions: {
         ecmaVersion: 6,
         sourceType: 'module'
@@ -381,7 +380,8 @@ ruleTester.run('require-emit-validator', rule, {
           data: { name: 'foo' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ]
 })

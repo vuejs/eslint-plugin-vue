@@ -4,13 +4,13 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-undef-components')
 const semver = require('semver')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -656,11 +656,13 @@ tester.run('no-undef-components', rule, {
         <HelloWorld1 />
       </template>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     }
   ],
@@ -751,12 +753,14 @@ tester.run('no-undef-components', rule, {
         <HelloWorld5 />
       </template>
       `,
-            parserOptions: {
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
               ecmaVersion: 6,
               sourceType: 'module',
-              parser: require.resolve('@typescript-eslint/parser')
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
-            parser: require.resolve('vue-eslint-parser'),
             errors: [
               {
                 message:
@@ -803,19 +807,21 @@ tester.run('no-undef-components', rule, {
         <Foo />
       </template>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message:
             "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
           line: 7
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
 
     // options API

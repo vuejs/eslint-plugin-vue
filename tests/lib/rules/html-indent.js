@@ -7,7 +7,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/html-indent')
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
@@ -99,8 +99,8 @@ function unIndent(strings) {
 }
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     ecmaFeatures: {
       globalReturn: true

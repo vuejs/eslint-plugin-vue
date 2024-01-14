@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const Linter = require('eslint').Linter
+const Linter = require('../eslint-compat').Linter
 const rules = require('../..').rules
 const assert = require('assert')
 
@@ -17,12 +17,22 @@ describe("Don't crash even if without vue-eslint-parser.", () => {
     it(ruleId, () => {
       const linter = new Linter()
       const config = {
-        parserOptions: { ecmaVersion: 2015, ecmaFeatures: { jsx: true } },
+        files: ['*.vue', '*.js'],
+        languageOptions: {
+          ecmaVersion: 2015,
+          parserOptions: { ecmaFeatures: { jsx: true } }
+        },
+        plugins: {
+          vue: {
+            rules: {
+              [key]: rules[key]
+            }
+          }
+        },
         rules: {
           [ruleId]: 'error'
         }
       }
-      linter.defineRule(ruleId, rules[key])
       const resultVue = linter.verifyAndFix(code, config, 'test.vue')
       for (const { message } of resultVue.messages) {
         assert.strictEqual(

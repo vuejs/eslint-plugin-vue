@@ -6,7 +6,7 @@
 
 const rule = require('../../../lib/rules/no-deprecated-data-object-declaration')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const parserOptions = {
   ecmaVersion: 2018,

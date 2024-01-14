@@ -1,11 +1,56 @@
 // @ts-check
 const eslint = require('eslint')
+const semver = require('semver')
 
-module.exports = {
-  ESLint: eslint.ESLint || getESLintClassForV6(),
-  RuleTester: eslint.RuleTester
+let ESLint = eslint.ESLint
+let Linter = eslint.Linter
+let RuleTester = eslint.RuleTester
+if (semver.lt(eslint.Linter.version, '9.0.0-0')) {
+  ESLint = eslint.ESLint ? getESLintClassForV8() : getESLintClassForV6()
+  Linter = getLinterClassForV8()
+  RuleTester = getRuleTesterClassForV8()
 }
 
+module.exports = {
+  ESLint,
+  RuleTester,
+  Linter
+}
+
+/** @returns {typeof eslint.ESLint} */
+function getESLintClassForV8() {
+  return class ESLintForV8 extends eslint.ESLint {
+    static get version() {
+      return eslint.ESLint.version
+    }
+    constructor(options) {
+      super(adjustOptions(options))
+    }
+  }
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  function adjustOptions(options) {
+    const newOptions = {
+      ...options,
+      useEslintrc: false
+    }
+    if (newOptions.overrideConfig) {
+      newOptions.overrideConfig = { ...newOptions.overrideConfig }
+      let plugins
+      if (newOptions.overrideConfig.plugins) {
+        plugins = newOptions.overrideConfig.plugins
+      }
+      newOptions.overrideConfig = processCompatibleConfig(
+        newOptions.overrideConfig
+      )
+      if (plugins) {
+        newOptions.overrideConfig.plugins = Object.keys(plugins)
+        newOptions.plugins = plugins
+      }
+    }
+    return newOptions
+  }
+}
 /** @returns {typeof eslint.ESLint} */
 function getESLintClassForV6() {
   class ESLintForV6 {
@@ -67,4 +112,89 @@ function getESLintClassForV6() {
   /** @type {typeof eslint.ESLint} */
   const eslintClass = /** @type {any} */ (ESLintForV6)
   return eslintClass
+}
+
+/** @returns {typeof eslint.Linter} */
+function getLinterClassForV8() {
+  return class LinterForV8 extends eslint.Linter {
+    static get version() {
+      return eslint.Linter.version
+    }
+    verify(code, config, option) {
+      return super.verify(code, processCompatibleConfig(config, this), option)
+    }
+  }
+}
+
+function getRuleTesterClassForV8() {
+  return class RuleTesterForV8 extends eslint.RuleTester {
+    constructor(options) {
+      const defineRules = []
+      super(
+        processCompatibleConfig(options, {
+          defineRule(...args) {
+            defineRules.push(args)
+          }
+        })
+      )
+      for (const args of defineRules) {
+        this.linter.defineRule(...args)
+      }
+    }
+    run(name, rule, tests) {
+      super.run(name, rule, {
+        valid: (tests.valid || []).map((test) => adjustOptions(test)),
+        invalid: (tests.invalid || []).map((test) => adjustOptions(test))
+      })
+    }
+  }
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  function adjustOptions(test) {
+    return processCompatibleConfig(test)
+  }
+}
+
+function processCompatibleConfig(config, linter) {
+  const newConfig = { ...config }
+  if (newConfig.languageOptions) {
+    const languageOptions = newConfig.languageOptions
+    delete newConfig.languageOptions
+    newConfig.parserOptions = {
+      ...newConfig.parserOptions,
+      ...languageOptions,
+      ...languageOptions.parserOptions
+    }
+    if (languageOptions.globals) {
+      newConfig.globals = {
+        ...newConfig.globals,
+        ...languageOptions.globals
+      }
+    }
+    if (languageOptions.parser) {
+      newConfig.parser = getParserName(languageOptions.parser)
+      if (!languageOptions.parserOptions?.parser) {
+        delete newConfig.parserOptions.parser
+      }
+      linter?.defineParser?.(newConfig.parser, require(newConfig.parser))
+    }
+  }
+  if (newConfig.plugins) {
+    const plugins = newConfig.plugins
+    delete newConfig.plugins
+    for (const [pluginName, plugin] of Object.entries(plugins)) {
+      for (const [ruleName, rule] of Object.entries(plugin.rules || {})) {
+        linter.defineRule(`${pluginName}/${ruleName}`, rule)
+      }
+    }
+  }
+  newConfig.env = { ...newConfig.env, es6: true }
+  return newConfig
+}
+
+function getParserName(parser) {
+  const name = parser.meta?.name || parser.name
+  if (name === 'typescript-eslint/parser') {
+    return require.resolve('@typescript-eslint/parser')
+  }
+  return require.resolve(name)
 }

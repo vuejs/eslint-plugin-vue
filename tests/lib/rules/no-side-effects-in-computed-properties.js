@@ -5,16 +5,15 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-side-effects-in-computed-properties')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions
+  languageOptions: { parser: require('vue-eslint-parser'), ...languageOptions }
 })
 
 ruleTester.run('no-side-effects-in-computed-properties', rule, {

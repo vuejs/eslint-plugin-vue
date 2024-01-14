@@ -4,15 +4,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/require-explicit-emits')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -434,7 +434,9 @@ tester.run('require-explicit-emits', rule, {
       }>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -446,7 +448,9 @@ tester.run('require-explicit-emits', rule, {
       defineEmits<(e: 'foo') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -459,7 +463,9 @@ tester.run('require-explicit-emits', rule, {
       defineEmits<(e: 'foo' | 'bar') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -472,7 +478,9 @@ tester.run('require-explicit-emits', rule, {
       const emit = defineEmits<(e: 'foo' | 'bar') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
 
     // unknown emits definition
@@ -620,7 +628,9 @@ tester.run('require-explicit-emits', rule, {
       emit('bar', 42)
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       // new syntax in Vue 3.3
@@ -633,7 +643,9 @@ tester.run('require-explicit-emits', rule, {
       emit('bar', 42)
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       code: `
@@ -1847,14 +1859,16 @@ emits: {'foo': null}
       }>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -1866,14 +1880,16 @@ emits: {'foo': null}
       defineEmits<(e: 'foo') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -1901,14 +1917,16 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -1949,14 +1967,16 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 5
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       // new syntax in Vue 3.3
@@ -1969,14 +1989,16 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 6
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       code: `
@@ -2007,14 +2029,16 @@ emits: {'foo': null}
       const emit = defineEmits<(e: 'foo') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ]
 })
