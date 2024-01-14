@@ -558,7 +558,16 @@ tester.run('no-undef-properties', rule, {
       parserOptions: {
         parser: require.resolve('@typescript-eslint/parser')
       }
-    }
+    },
+
+    `
+    <script setup>
+    const model = defineModel();
+    const woof = computed(() => model.value);
+    </script>
+    <template>
+      <div id="app">Woof: {{ woof }}</div>
+    </template>`
   ],
 
   invalid: [
@@ -1176,6 +1185,33 @@ tester.run('no-undef-properties', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const m = defineModel()
+      const a = defineModel('A')
+      const [withModifiers, modifiers] = defineModel('withModifiers')
+      </script>
+      <template>
+        <div>
+          {{ m }} {{ modelValue }}
+          {{ a }} {{ A }}
+          {{withModifiers}} {{modifiers}}
+        </div>
+
+        <div>{{ undef }}</div>
+      </template>
+      `,
+      errors: [
+        {
+          message: "'undef' is not defined.",
+          line: 14
+        }
+      ]
     }
   ]
 })

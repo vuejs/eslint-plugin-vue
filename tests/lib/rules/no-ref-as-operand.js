@@ -164,6 +164,30 @@ tester.run('no-ref-as-operand', rule, {
         foo = ref(5);
       }
       </script>
+    `,
+    `
+    <script setup>
+    const model = defineModel();
+    console.log(model.value);
+    function process() {
+      if (model.value) console.log('foo')
+    }
+    function update(value) {
+      model.value = value;
+    }
+    </script>
+    `,
+    `
+    <script setup>
+    const [model, mod] = defineModel();
+    console.log(model.value);
+    function process() {
+      if (model.value) console.log('foo')
+    }
+    function update(value) {
+      model.value = value;
+    }
+    </script>
     `
   ],
   invalid: [
@@ -717,6 +741,82 @@ tester.run('no-ref-as-operand', rule, {
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
           column: 7
+        }
+      ]
+    },
+    {
+      code: `
+      <script>
+      let model = defineModel();
+      console.log(model);
+      function process() {
+        if (model) console.log('foo')
+      }
+      function update(value) {
+        model = value;
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      let model = defineModel();
+      console.log(model);
+      function process() {
+        if (model.value) console.log('foo')
+      }
+      function update(value) {
+        model.value = value;
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `defineModel()`.',
+          line: 6
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `defineModel()`.',
+          line: 9
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      let [model, mod] = defineModel();
+      console.log(model);
+      function process() {
+        if (model) console.log('foo')
+      }
+      function update(value) {
+        model = value;
+      }
+      </script>
+      `,
+      output: `
+      <script setup>
+      let [model, mod] = defineModel();
+      console.log(model);
+      function process() {
+        if (model.value) console.log('foo')
+      }
+      function update(value) {
+        model.value = value;
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `defineModel()`.',
+          line: 6
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `defineModel()`.',
+          line: 9
         }
       ]
     }

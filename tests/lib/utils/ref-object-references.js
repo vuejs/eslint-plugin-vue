@@ -3,6 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const assert = require('assert')
+const vueESLintParser = require('vue-eslint-parser')
 
 const Linter = require('eslint').Linter
 
@@ -19,22 +20,44 @@ const REF_OBJECTS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'ref-objects')
 const REACTIVE_VARS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'reactive-vars')
 
 /**
+ * @typedef {object} LoadedPattern
+ * @property {string} code The code to test.
+ * @property {string} name The name of the pattern.
+ * @property {string} sourceFilePath
+ * @property {string} resultFilePath
+ * @property {object} [options]
+ * @property {string} [options.parser]
+ */
+/**
  * Load test patterns from fixtures.
  *
- * @returns {object} The loaded patterns.
+ * @returns {LoadedPattern[]} The loaded patterns.
  */
 function loadPatterns(rootDir) {
   return fs.readdirSync(rootDir).map((name) => {
-    const code0 = fs.readFileSync(path.join(rootDir, name, 'source.js'), 'utf8')
-    const code = code0.replace(/^<!--(.+?)-->/, `<!--${name}-->`)
-    return { code, name }
+    for (const [sourceFile, resultFile, options] of [
+      ['source.js', 'result.js'],
+      ['source.vue', 'result.vue', { parser: 'vue-eslint-parser' }]
+    ]) {
+      const sourceFilePath = path.join(rootDir, name, sourceFile)
+      if (fs.existsSync(sourceFilePath)) {
+        return {
+          code: fs.readFileSync(sourceFilePath, 'utf8'),
+          name,
+          sourceFilePath,
+          resultFilePath: path.join(rootDir, name, resultFile),
+          options
+        }
+      }
+    }
   })
 }
 
-function extractRefs(code, extract) {
+function extractRefs(code, extract, options) {
   const linter = new Linter()
   const references = []
 
+  linter.defineParser('vue-eslint-parser', vueESLintParser)
   linter.defineRule('vue/extract-test', (context) => {
     const refs = extract(context)
 
@@ -56,6 +79,7 @@ function extractRefs(code, extract) {
   const messages = linter.verify(
     code,
     {
+      ...options,
       parserOptions: { ecmaVersion: 2020, sourceType: 'module' },
       rules: { 'vue/extract-test': 'error' },
       globals: {
@@ -81,11 +105,15 @@ function extractRefs(code, extract) {
 }
 
 describe('extractRefObjectReferences()', () => {
-  for (const { name, code } of loadPatterns(REF_OBJECTS_FIXTURE_ROOT)) {
-    describe(`'test/fixtures/utils/ref-object-references/ref-objects/${name}/source.vue'`, () => {
+  for (const { code, sourceFilePath, resultFilePath, options } of loadPatterns(
+    REF_OBJECTS_FIXTURE_ROOT
+  )) {
+    describe(sourceFilePath, () => {
       it('should to extract the references to match the expected references.', () => {
         /** @type {import('../../../lib/utils/ref-object-references').RefObjectReference[]} */
-        const references = [...extractRefs(code, extractRefObjectReferences)]
+        const references = [
+          ...extractRefs(code, extractRefObjectReferences, options)
+        ]
 
         let result = ''
         let start = 0
@@ -104,29 +132,26 @@ describe('extractRefObjectReferences()', () => {
 
         const actual = result
 
-        // update fixture
-        // fs.writeFileSync(
-        //   path.join(REF_OBJECTS_FIXTURE_ROOT, name, 'result.js'),
-        //   actual,
-        //   'utf8'
-        // )
+        if (!fs.existsSync(resultFilePath)) {
+          // update fixture
+          fs.writeFileSync(resultFilePath, actual, 'utf8')
+        }
 
-        const expected = fs.readFileSync(
-          path.join(REF_OBJECTS_FIXTURE_ROOT, name, 'result.js'),
-          'utf8'
-        )
+        const expected = fs.readFileSync(resultFilePath, 'utf8')
         assert.strictEqual(actual, expected)
       })
     })
   }
 })
 describe('extractReactiveVariableReferences()', () => {
-  for (const { name, code } of loadPatterns(REACTIVE_VARS_FIXTURE_ROOT)) {
-    describe(`'test/fixtures/utils/ref-object-references/reactive-vars/${name}/source.vue'`, () => {
+  for (const { code, sourceFilePath, resultFilePath, options } of loadPatterns(
+    REACTIVE_VARS_FIXTURE_ROOT
+  )) {
+    describe(sourceFilePath, () => {
       it('should to extract the references to match the expected references.', () => {
         /** @type {import('../../../lib/utils/ref-object-references').ReactiveVariableReference[]} */
         const references = [
-          ...extractRefs(code, extractReactiveVariableReferences)
+          ...extractRefs(code, extractReactiveVariableReferences, options)
         ]
 
         let result = ''
@@ -146,17 +171,12 @@ describe('extractReactiveVariableReferences()', () => {
 
         const actual = result
 
-        // update fixture
-        // fs.writeFileSync(
-        //   path.join(REACTIVE_VARS_FIXTURE_ROOT, name, 'result.js'),
-        //   actual,
-        //   'utf8'
-        // )
+        if (!fs.existsSync(resultFilePath)) {
+          // update fixture
+          fs.writeFileSync(resultFilePath, actual, 'utf8')
+        }
 
-        const expected = fs.readFileSync(
-          path.join(REACTIVE_VARS_FIXTURE_ROOT, name, 'result.js'),
-          'utf8'
-        )
+        const expected = fs.readFileSync(resultFilePath, 'utf8')
         assert.strictEqual(actual, expected)
       })
     })

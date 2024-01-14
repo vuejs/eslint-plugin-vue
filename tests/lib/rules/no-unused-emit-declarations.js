@@ -101,6 +101,17 @@ tester.run('no-unused-emit-declarations', rule, {
     {
       filename: 'test.vue',
       code: `
+      <template>
+        <button @click="emits('bar')">Bar</button>
+      </template>
+      <script setup>
+        const emits = defineEmits(['bar'])
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script>
         export default {
           emits: ['foo'],
@@ -237,7 +248,7 @@ tester.run('no-unused-emit-declarations', rule, {
         export default {
           emits: ['foo'],
           setup(_, context) {
-            useCustomComposable({ emit: context.emit }) 
+            useCustomComposable({ emit: context.emit })
           }
         }
       </script>
@@ -282,7 +293,7 @@ tester.run('no-unused-emit-declarations', rule, {
         export default {
           emits: ['foo'],
           setup(_, { emit }) {
-            useCustomComposable({ emit: emit }) 
+            useCustomComposable({ emit: emit })
           }
         }
       </script>
@@ -346,6 +357,16 @@ tester.run('no-unused-emit-declarations', rule, {
       const change = () => emit('foo');
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineEmits({'update:foo'() {}})
+      const m = defineModel('foo')
+      </script>
+      `
     }
   ],
   invalid: [
@@ -443,6 +464,25 @@ tester.run('no-unused-emit-declarations', rule, {
       </template>
       <script setup>
         const emit = defineEmits(['foo', 'bar'])
+      `,
+      errors: [
+        {
+          messageId: 'unused',
+          line: 6,
+          column: 35,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="emit('bar')">Bar</button>
+      </template>
+      <script setup>
+        const emit = defineEmits(['foo', 'bar'])
+      </script>
       `,
       errors: [
         {
@@ -688,6 +728,22 @@ tester.run('no-unused-emit-declarations', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineEmits({'update:foo'() {}})
+      defineModel('foo')
+      </script>
+      `,
+      errors: [
+        {
+          message: '`update:foo` is defined as emit but never used.',
+          line: 3
+        }
+      ]
     }
   ]
 })

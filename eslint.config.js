@@ -142,6 +142,10 @@ module.exports = [
       'prefer-const': 2,
 
       'prettier/prettier': 'error',
+      'eslint-plugin/require-meta-fixable': [
+        'error',
+        { catchNoFixerButFixableProperty: true }
+      ],
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
 
       'no-debugger': 'error',

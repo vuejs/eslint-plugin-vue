@@ -14,11 +14,6 @@ This plugin allows us to check the `<template>` and `<script>` of `.vue` files w
 
 ESLint editor integrations are useful to check your code in real-time.
 
-:::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.  
-If you have issues with these, please also refer to the [FAQ](./user-guide/index.md#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
-:::
-
 ## :traffic_light: Versioning policy
 
 This plugin is following [Semantic Versioning](https://semver.org/) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).

@@ -71,6 +71,15 @@ tester.run('valid-v-bind', rule, {
       filename: 'test.vue',
       code: "<template><input v-bind='$attrs' /></template>"
     },
+    // v-bind same-name shorthand (Vue 3.4+)
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:foo /></template>'
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -86,11 +95,6 @@ tester.run('valid-v-bind', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-bind></div></template>',
-      errors: ["'v-bind' directives require an attribute value."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-bind:aaa></div></template>',
       errors: ["'v-bind' directives require an attribute value."]
     },
     {

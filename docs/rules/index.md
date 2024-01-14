@@ -62,7 +62,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-slot-attribute](./no-deprecated-slot-attribute.md) | disallow deprecated `slot` attribute (in Vue.js 2.6.0+) | :wrench: | :three::hammer: |
 | [vue/no-deprecated-slot-scope-attribute](./no-deprecated-slot-scope-attribute.md) | disallow deprecated `slot-scope` attribute (in Vue.js 2.6.0+) | :wrench: | :three::hammer: |
 | [vue/no-deprecated-v-bind-sync](./no-deprecated-v-bind-sync.md) | disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
-| [vue/no-deprecated-v-is](./no-deprecated-v-is.md) | disallow deprecated `v-is` directive (in Vue.js 3.1.0+) | :wrench: | :three::hammer: |
+| [vue/no-deprecated-v-is](./no-deprecated-v-is.md) | disallow deprecated `v-is` directive (in Vue.js 3.1.0+) |  | :three::hammer: |
 | [vue/no-deprecated-v-on-native-modifier](./no-deprecated-v-on-native-modifier.md) | disallow using deprecated `.native` modifiers (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-v-on-number-modifiers](./no-deprecated-v-on-number-modifiers.md) | disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-vue-config-keycodes](./no-deprecated-vue-config-keycodes.md) | disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+) |  | :three::warning: |
@@ -213,8 +213,9 @@ For example:
 | [vue/component-options-name-casing](./component-options-name-casing.md) | enforce the casing of component name in `components` options | :wrench::bulb: | :hammer: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  | :hammer: |
 | [vue/define-emits-declaration](./define-emits-declaration.md) | enforce declaration style of `defineEmits` |  | :hammer: |
-| [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench: | :lipstick: |
+| [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench::bulb: | :lipstick: |
 | [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` |  | :hammer: |
+| [vue/enforce-style-attribute](./enforce-style-attribute.md) | enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags |  | :hammer: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  | :hammer: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: | :lipstick: |
 | [vue/html-comment-content-spacing](./html-comment-content-spacing.md) | enforce unified spacing in HTML comments | :wrench: | :lipstick: |
@@ -225,7 +226,7 @@ For example:
 | [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: | :lipstick: |
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
-| [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults | :wrench: | :hammer: |
+| [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults |  | :hammer: |
 | [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
