@@ -18,10 +18,10 @@ module.exports = {
 }
 
 /** @returns {typeof eslint.ESLint} */
-function getESLintClassForV8() {
-  return class ESLintForV8 extends eslint.ESLint {
+function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
+  return class ESLintForV8 extends BaseESLintClass {
     static get version() {
-      return eslint.ESLint.version
+      return BaseESLintClass.version
     }
     constructor(options) {
       super(adjustOptions(options))
@@ -39,6 +39,7 @@ function getESLintClassForV8() {
       let plugins
       if (newOptions.overrideConfig.plugins) {
         plugins = newOptions.overrideConfig.plugins
+        delete newOptions.overrideConfig.plugins
       }
       newOptions.overrideConfig = processCompatibleConfig(
         newOptions.overrideConfig
@@ -47,6 +48,10 @@ function getESLintClassForV8() {
         newOptions.overrideConfig.plugins = Object.keys(plugins)
         newOptions.plugins = plugins
       }
+
+      // adjust
+      delete newOptions.overrideConfig.files
+      delete newOptions.overrideConfig.processor
     }
     return newOptions
   }
@@ -111,7 +116,7 @@ function getESLintClassForV6() {
 
   /** @type {typeof eslint.ESLint} */
   const eslintClass = /** @type {any} */ (ESLintForV6)
-  return eslintClass
+  return getESLintClassForV8(eslintClass)
 }
 
 /** @returns {typeof eslint.Linter} */
@@ -143,7 +148,9 @@ function getRuleTesterClassForV8() {
     }
     run(name, rule, tests) {
       super.run(name, rule, {
-        valid: (tests.valid || []).map((test) => adjustOptions(test)),
+        valid: (tests.valid || []).map((test) =>
+          typeof test === 'string' ? test : adjustOptions(test)
+        ),
         invalid: (tests.invalid || []).map((test) => adjustOptions(test))
       })
     }
