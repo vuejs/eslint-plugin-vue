@@ -128,8 +128,10 @@ tester.run('require-explicit-slots', rule, {
       </template>
       <script setup>
       </script>`,
-      parserOptions: {
-        parser: null
+      languageOptions: {
+        parserOptions: {
+          parser: null
+        }
       }
     }
   ],
