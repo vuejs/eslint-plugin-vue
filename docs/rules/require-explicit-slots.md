@@ -18,32 +18,18 @@ This rule enforces all slots used in the template to be defined once either in t
 <eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
 
 ```vue
-<!-- ✓ GOOD -->
 <template>
   <div>
+    <!-- ✓ GOOD -->
     <slot />
+    <slot name="foo" />
+    <!-- ✗ BAD -->
+    <slot name="bar" />
   </div>
 </template>
 <script setup lang="ts">
 defineSlots<{
   default(props: { msg: string }): any
-}>()
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
-
-```vue
-<!-- ✓ GOOD -->
-<template>
-  <div>
-    <slot name="foo" />
-  </div>
-</template>
-<script setup lang="ts">
-defineSlots<{
   foo(props: { msg: string }): any
 }>()
 </script>
@@ -54,51 +40,24 @@ defineSlots<{
 <eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
 
 ```vue
-<!-- ✓ GOOD -->
 <template>
   <div>
+    <!-- ✓ GOOD -->
+    <slot />
     <slot name="foo" />
+    <!-- ✗ BAD -->
+    <slot name="bar" />
   </div>
 </template>
 <script lang="ts">
 import { SlotsType } from 'vue'
+
 defineComponent({
   slots: Object as SlotsType<{
+    default: { msg: string }
     foo: { msg: string }
   }>
 })
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
-    <slot />
-  </div>
-</template>
-<script setup lang="ts"></script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
-
-```vue
-<!-- ✗ BAD -->
-<template>
-  <div>
-    <slot name="foo" />
-  </div>
-</template>
-<script setup lang="ts">
-defineSlots<{
-  bar(props: { msg: string }): any
-}>()
 </script>
 ```
 
