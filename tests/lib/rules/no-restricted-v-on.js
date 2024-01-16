@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-restricted-v-on')
 
 const tester = new RuleTester({
