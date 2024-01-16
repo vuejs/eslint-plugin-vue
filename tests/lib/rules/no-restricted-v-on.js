@@ -158,6 +158,16 @@ tester.run('no-restricted-v-on', rule, {
           message: 'Using `@foo` is not allowed on this <div>.'
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-on:foo="foo"></div></template>',
+      options: ['foo'],
+      errors: [
+        {
+          message: 'Using `v-on:foo` is not allowed on this element.'
+        }
+      ]
     }
   ]
 })
