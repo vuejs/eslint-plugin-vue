@@ -43,7 +43,7 @@ describe('comment-directive', () => {
       `
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages, [])
+      assert.deepStrictEqual(messages, [])
     })
 
     it('disable specific rules if <!-- eslint-disable vue/no-duplicate-attributes -->', async () => {
@@ -407,7 +407,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages, [])
+      assert.deepStrictEqual(messages, [])
     })
     it('disable and report unused <!-- eslint-disable -->', async () => {
       const code = `
@@ -506,7 +506,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages, [])
+      assert.deepStrictEqual(messages, [])
     })
 
     it('dont report used, with duplicate eslint-disable', async () => {
@@ -520,7 +520,7 @@ describe('comment-directive', () => {
 
       const messages = await lintMessages(code)
 
-      assert.deepEqual(messages, [])
+      assert.deepStrictEqual(messages, [])
     })
   })
 })

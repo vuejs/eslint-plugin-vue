@@ -61,10 +61,6 @@ function extractComponentProps(code, tsFileCode) {
   fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
   // clean './src/test.ts' cache
   tsParser.clearCaches()
-  // tsParser.parseForESLint(tsFileCode || '', {
-  //   ...config.languageOptions,
-  //   filePath: SRC_TS_TEST_PATH
-  // })
   assert.deepStrictEqual(
     linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
     []
