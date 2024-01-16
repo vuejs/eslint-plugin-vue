@@ -4,15 +4,17 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/require-explicit-slots')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    parser: require.resolve('@typescript-eslint/parser'),
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
-    sourceType: 'module'
+    sourceType: 'module',
+    parserOptions: {
+      parser: require.resolve('@typescript-eslint/parser')
+    }
   }
 })
 
@@ -126,8 +128,10 @@ tester.run('require-explicit-slots', rule, {
       </template>
       <script setup>
       </script>`,
-      parserOptions: {
-        parser: null
+      languageOptions: {
+        parserOptions: {
+          parser: null
+        }
       }
     }
   ],

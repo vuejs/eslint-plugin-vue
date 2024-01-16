@@ -8,8 +8,7 @@ const semver = require('semver')
 const rule = require('../../../lib/rules/space-infix-ops')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 const message = semver.lt(ESLint.version, '5.10.0')

@@ -6,11 +6,11 @@
 
 const rule = require('../../../lib/rules/no-duplicate-attr-inheritance')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2018,
     sourceType: 'module'
   }

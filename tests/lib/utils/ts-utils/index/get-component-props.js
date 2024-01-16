@@ -5,7 +5,7 @@
 
 const path = require('path')
 const fs = require('fs')
-const Linter = require('eslint').Linter
+const Linter = require('../../../../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
 const tsParser = require('@typescript-eslint/parser')
 const utils = require('../../../../../lib/utils/index')
@@ -20,42 +20,47 @@ const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
 
 function extractComponentProps(code, tsFileCode) {
   const linter = new Linter()
+  const result = []
   const config = {
-    parser: 'vue-eslint-parser',
-    parserOptions: {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser,
       ecmaVersion: 2020,
-      parser: tsParser,
-      project: [TSCONFIG_PATH],
-      extraFileExtensions: ['.vue']
+      parserOptions: {
+        parser: tsParser,
+        project: [TSCONFIG_PATH],
+        extraFileExtensions: ['.vue']
+      }
+    },
+    plugins: {
+      test: {
+        rules: {
+          test: {
+            create(context) {
+              return utils.defineScriptSetupVisitor(context, {
+                onDefinePropsEnter(_node, props) {
+                  result.push(
+                    ...props.map((prop) => ({
+                      type: prop.type,
+                      name: prop.propName,
+                      required: prop.required ?? null,
+                      types: prop.types ?? null
+                    }))
+                  )
+                }
+              })
+            }
+          }
+        }
+      }
     },
     rules: {
-      test: 'error'
+      'test/test': 'error'
     }
   }
-  linter.defineParser('vue-eslint-parser', parser)
-  const result = []
-  linter.defineRule('test', {
-    create(context) {
-      return utils.defineScriptSetupVisitor(context, {
-        onDefinePropsEnter(_node, props) {
-          result.push(
-            ...props.map((prop) => ({
-              type: prop.type,
-              name: prop.propName,
-              required: prop.required ?? null,
-              types: prop.types ?? null
-            }))
-          )
-        }
-      })
-    }
-  })
   fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
   // clean './src/test.ts' cache
-  tsParser.parseForESLint(tsFileCode || '', {
-    ...config.parserOptions,
-    filePath: SRC_TS_TEST_PATH
-  })
+  tsParser.clearCaches()
   assert.deepStrictEqual(
     linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
     []

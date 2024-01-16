@@ -6,13 +6,13 @@
 
 const semver = require('semver')
 const rule = require('../../../lib/rules/require-default-prop')
-const RuleTester = require('eslint').RuleTester
-const parserOptions = {
+const RuleTester = require('../../eslint-compat').RuleTester
+const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
 
-const ruleTester = new RuleTester({ parserOptions })
+const ruleTester = new RuleTester({ languageOptions })
 ruleTester.run('require-default-prop', rule, {
   valid: [
     {
@@ -54,8 +54,6 @@ ruleTester.run('require-default-prop', rule, {
             },
             i: Boolean,
             j: [Boolean],
-            // eslint-disable-next-line require-default-prop
-            k: Number
           }
         }
       `
@@ -118,7 +116,10 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser')
+
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -132,7 +133,9 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -180,7 +183,7 @@ ruleTester.run('require-default-prop', rule, {
       export default {
         props: ['foo']
       }`,
-      parserOptions
+      languageOptions
     },
 
     // sparse array
@@ -209,8 +212,10 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     },
     {
       filename: 'test.vue',
@@ -219,8 +224,10 @@ ruleTester.run('require-default-prop', rule, {
       defineProps(['foo'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     },
     {
       filename: 'test.vue',
@@ -232,10 +239,12 @@ ruleTester.run('require-default-prop', rule, {
       defineProps<Props>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -248,10 +257,10 @@ ruleTester.run('require-default-prop', rule, {
       withDefaults(defineProps<Props>(), {foo:42})
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     {
@@ -268,10 +277,10 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     {
@@ -298,10 +307,10 @@ ruleTester.run('require-default-prop', rule, {
       });
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     {
@@ -315,10 +324,10 @@ ruleTester.run('require-default-prop', rule, {
       const props = defineProps<Props>();
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     }
   ],
@@ -383,13 +392,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: 'test.vue',
@@ -402,13 +413,13 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ]
+      ],
+      languageOptions: { parser: require('@typescript-eslint/parser') }
     },
 
     // computed properties
@@ -522,14 +533,16 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions,
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,
@@ -547,10 +560,12 @@ ruleTester.run('require-default-prop', rule, {
             withDefaults(defineProps<Props>(), {bar:42})
             </script>
             `,
-            parser: require.resolve('vue-eslint-parser'),
-            parserOptions: {
-              ...parserOptions,
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
+              ...languageOptions,
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             errors: [
               {

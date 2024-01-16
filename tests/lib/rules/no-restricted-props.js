@@ -4,15 +4,18 @@
 'use strict'
 
 const semver = require('semver')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-restricted-props')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-restricted-props', rule, {
@@ -387,9 +390,6 @@ tester.run('no-restricted-props', rule, {
       </script>
       `,
       options: [{ name: 'foo', suggest: 'Foo' }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: 'Using `foo` props is not allowed.',
@@ -407,7 +407,12 @@ tester.run('no-restricted-props', rule, {
             }
           ]
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,
@@ -425,8 +430,10 @@ tester.run('no-restricted-props', rule, {
       defineProps<Props>()
       </script>
       `,
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             options: [{ name: 'foo', suggest: 'Foo' }],
             errors: [
@@ -463,8 +470,10 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `,
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             options: [{ name: 'foo', suggest: 'Foo' }],
             errors: [
@@ -508,8 +517,10 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `,
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             options: [{ name: 'foo', suggest: 'Foo' }],
             errors: [
@@ -553,8 +564,10 @@ tester.run('no-restricted-props', rule, {
       }
       </script>
       `,
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             options: [{ name: 'foo', suggest: 'Foo' }],
             errors: [

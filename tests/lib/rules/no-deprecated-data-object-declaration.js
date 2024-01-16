@@ -6,9 +6,9 @@
 
 const rule = require('../../../lib/rules/no-deprecated-data-object-declaration')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -27,7 +27,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }).mount('#app')
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -41,7 +41,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }).mount('#app')
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -55,7 +55,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -68,7 +68,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -77,7 +77,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           ...foo
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -86,7 +86,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           data
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -97,7 +97,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -111,7 +111,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -125,7 +125,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -150,14 +150,14 @@ return {
 }
         })
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 4
         }
-      ]
+      ],
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -177,14 +177,14 @@ return {
 }
         })
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ]
+      ],
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -204,14 +204,14 @@ return {
 }
         }
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ]
+      ],
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -231,14 +231,14 @@ return (/*b*/{
 }
         }
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ]
+      ],
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -258,14 +258,14 @@ return {
 }
         })
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ]
+      ],
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -285,14 +285,14 @@ return {
 }
         }).mount('#app')
       `,
-      parserOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ]
+      ],
+      languageOptions
     }
   ]
 })

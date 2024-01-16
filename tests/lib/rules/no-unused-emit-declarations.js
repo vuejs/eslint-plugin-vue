@@ -4,15 +4,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-unused-emit-declarations')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -345,7 +345,9 @@ tester.run('no-unused-emit-declarations', rule, {
       }>()
       const change = () => emit('foo');
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -665,7 +667,6 @@ tester.run('no-unused-emit-declarations', rule, {
         }>()
         const change = () => emit('foo');
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           messageId: 'unused',
@@ -673,7 +674,10 @@ tester.run('no-unused-emit-declarations', rule, {
           column: 11,
           endColumn: 36
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -699,7 +703,6 @@ tester.run('no-unused-emit-declarations', rule, {
         defineEmits<{(e: 'foo'): void}>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           messageId: 'unused',
@@ -707,7 +710,10 @@ tester.run('no-unused-emit-declarations', rule, {
           column: 22,
           endColumn: 38
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',

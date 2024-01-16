@@ -6,11 +6,14 @@
 
 const rule = require('../../../lib/rules/no-potential-component-option-typo')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-potential-component-option-typo', rule, {

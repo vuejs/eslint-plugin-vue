@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require('../../../lib/rules/no-this-in-before-route-enter')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 //------------------------------------------------------------------------------
 // Tests
@@ -59,8 +59,11 @@ export default {
 </script>`
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 ruleTester.run('no-this-in-before-route-enter', rule, {
   valid: [

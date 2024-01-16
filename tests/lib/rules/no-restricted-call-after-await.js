@@ -4,12 +4,15 @@
 'use strict'
 
 const path = require('path')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-restricted-call-after-await')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-restricted-call-after-await', rule, {
@@ -136,7 +139,7 @@ tester.run('no-restricted-call-after-await', rule, {
       </script>
       `,
       options: [{ module: 'vue-i18n', path: 'useI18n' }],
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -148,7 +151,7 @@ tester.run('no-restricted-call-after-await', rule, {
       </script>
       `,
       options: [{ module: 'vue-i18n', path: 'useI18n' }],
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [

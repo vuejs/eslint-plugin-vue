@@ -1,14 +1,13 @@
 'use strict'
 
-const eslint = require('eslint')
-const rules = new eslint.Linter().getRules()
-const ruleNoUnusedVars = rules.get('no-unused-vars')
-const ruleNoUndef = rules.get('no-undef')
+const { RuleTester } = require('../eslint-compat')
+const { getCoreRule } = require('../../lib/utils')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')
+const ruleNoUndef = getCoreRule('no-undef')
 
-const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 6,
     sourceType: 'module'
   }
@@ -136,7 +135,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {{post}}
         </template>
         `,
-        parserOptions: {
+        languageOptions: {
           ecmaVersion: 2022,
           sourceType: 'module'
         }

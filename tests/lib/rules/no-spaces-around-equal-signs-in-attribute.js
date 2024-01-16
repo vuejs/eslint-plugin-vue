@@ -4,10 +4,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-spaces-around-equal-signs-in-attribute')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser')
+  languageOptions: { parser: require('vue-eslint-parser') }
 })
 
 tester.run('no-spaces-around-equal-signs-in-attribute', rule, {
