@@ -8,8 +8,8 @@ const RuleTester = require('eslint').RuleTester
 const rule = require('../../../lib/rules/no-restricted-v-on')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
