@@ -269,6 +269,7 @@ For example:
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
+| [vue/require-explicit-slots](./require-explicit-slots.md) | require slots to be explicitly defined |  | :warning: |
 | [vue/require-expose](./require-expose.md) | require declare public properties using `expose` | :bulb: | :hammer: |
 | [vue/require-macro-variable-name](./require-macro-variable-name.md) | require a certain macro variable name | :bulb: | :hammer: |
 | [vue/require-name-property](./require-name-property.md) | require a name property in Vue components | :bulb: | :hammer: |
@@ -278,6 +279,7 @@ For example:
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
+| [vue/v-bind-same-name-style](./v-bind-same-name-style.md) | enforce `v-bind` same name directive style | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key](./v-if-else-key.md) | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
