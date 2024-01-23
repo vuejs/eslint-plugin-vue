@@ -117,6 +117,14 @@ tester.run('v-bind-same-name-style', rule, {
       options: ['never'],
       errors: [unexpectedShorthand]
     },
+    {
+      // camel case
+      filename: 'test.vue',
+      code: '<template><div :src-url /></template>',
+      output: '<template><div :src-url="srcUrl" /></template>',
+      options: ['never'],
+      errors: [unexpectedShorthand]
+    },
     // always
     {
       filename: 'test.vue',
@@ -144,6 +152,14 @@ tester.run('v-bind-same-name-style', rule, {
       filename: 'test.vue',
       code: '<template><div .foo="foo" /></template>',
       output: '<template><div .foo /></template>',
+      options: ['always'],
+      errors: [expectedShorthand]
+    },
+    {
+      // camel case
+      filename: 'test.vue',
+      code: '<template><div :src-url="srcUrl" /></template>',
+      output: '<template><div :src-url /></template>',
       options: ['always'],
       errors: [expectedShorthand]
     }
