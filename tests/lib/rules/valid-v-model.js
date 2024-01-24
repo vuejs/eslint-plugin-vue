@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/valid-v-model')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 tester.run('valid-v-model', rule, {

@@ -112,6 +112,7 @@ export default {
 ## :couple: Related Rules
 
 - [vue/no-unused-emit-declarations](./no-unused-emit-declarations.md)
+- [vue/require-explicit-slots](./require-explicit-slots.md)
 
 ## :books: Further Reading
 

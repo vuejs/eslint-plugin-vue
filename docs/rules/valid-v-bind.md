@@ -34,7 +34,6 @@ This rule does not report `v-bind` directives which do not have their argument (
 
   <!-- ✗ BAD -->
   <div v-bind/>
-  <div :aaa/>
   <div v-bind:aaa.bbb="foo"/>
 </template>
 ```

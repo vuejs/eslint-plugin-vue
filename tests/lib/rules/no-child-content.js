@@ -4,12 +4,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-child-content')
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 ruleTester.run('no-child-content', rule, {

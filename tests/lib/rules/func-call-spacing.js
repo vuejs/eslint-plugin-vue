@@ -8,8 +8,7 @@ const semver = require('semver')
 const rule = require('../../../lib/rules/func-call-spacing')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 tester.run('func-call-spacing', rule, {

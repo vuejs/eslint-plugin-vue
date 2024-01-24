@@ -53,7 +53,8 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-v-bind": ["error",
+  "vue/no-restricted-v-bind": [
+    "error",
     {
       "argument": "/^v-/",
       "message": "Using `:v-xxx` is not allowed. Instead, remove `:` and use it as directive."
@@ -112,8 +113,10 @@ The following properties can be specified for the object.
 ## :couple: Related Rules
 
 - [vue/no-restricted-static-attribute]
+- [vue/no-restricted-v-on]
 
 [vue/no-restricted-static-attribute]: ./no-restricted-static-attribute.md
+[vue/no-restricted-v-on]: ./no-restricted-v-on.md
 
 ## :rocket: Version
 

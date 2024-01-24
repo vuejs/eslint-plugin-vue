@@ -3,12 +3,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/object-curly-newline')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 tester.run('object-curly-newline', rule, {

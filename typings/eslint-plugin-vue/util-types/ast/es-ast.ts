@@ -641,7 +641,7 @@ export type AssignmentProperty =
   | AssignmentPropertyComputedName
 export interface ArrayPattern extends HasParentNode {
   type: 'ArrayPattern'
-  elements: Pattern[]
+  elements: (Pattern | null)[]
 }
 export interface RestElement extends HasParentNode {
   type: 'RestElement'

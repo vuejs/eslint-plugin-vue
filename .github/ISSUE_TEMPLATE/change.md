@@ -13,6 +13,7 @@ about: Request a change that is not a bug fix, rule change, or new rule
 
 - **ESLint version:** 
 - **eslint-plugin-vue version:** 
+- **Vue version:** 
 - **Node version:** 
 
 **The problem you want to solve.**

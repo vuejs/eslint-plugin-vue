@@ -5,11 +5,11 @@
 
 const rule = require('../../../lib/rules/component-name-in-template-casing')
 const semver = require('semver')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2018,
     sourceType: 'module'
   }
@@ -231,8 +231,10 @@ tester.run('component-name-in-template-casing', rule, {
               </template>
             `,
             options: ['PascalCase', { registeredComponentsOnly: true }],
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             }
           }
         ]
@@ -1011,8 +1013,10 @@ tester.run('component-name-in-template-casing', rule, {
               </template>
             `,
             options: ['PascalCase', { registeredComponentsOnly: false }],
-            parserOptions: {
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             output: `
               <script setup lang="ts">

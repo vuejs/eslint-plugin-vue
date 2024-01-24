@@ -6,9 +6,9 @@
 
 const semver = require('semver')
 const rule = require('../../../lib/rules/no-reserved-keys')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -37,7 +37,7 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -60,7 +60,7 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -81,7 +81,7 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -107,7 +107,7 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -121,13 +121,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -140,13 +140,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 5
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -159,13 +159,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 5
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -176,13 +176,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -195,13 +195,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 5
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -212,13 +212,13 @@ ruleTester.run('no-reserved-keys', rule, {
           })
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -229,13 +229,13 @@ ruleTester.run('no-reserved-keys', rule, {
           })
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -247,13 +247,13 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       `,
       options: [{ reserved: ['bar'], groups: ['foo'] }],
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key 'bar' is reserved.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.vue',
@@ -264,14 +264,13 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 4
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 }
     },
     {
       filename: 'test.vue',
@@ -280,17 +279,19 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<{$el: string}>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ecmaVersion: 6,
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,
@@ -308,10 +309,12 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<Props>()
       </script>
       `,
-            parser: require.resolve('vue-eslint-parser'),
-            parserOptions: {
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
               ecmaVersion: 6,
-              parser: require.resolve('@typescript-eslint/parser')
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             errors: [
               {
@@ -330,10 +333,12 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<A>()
       </script>
       `,
-            parser: require.resolve('vue-eslint-parser'),
-            parserOptions: {
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
               ecmaVersion: 6,
-              parser: require.resolve('@typescript-eslint/parser')
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             errors: [
               {

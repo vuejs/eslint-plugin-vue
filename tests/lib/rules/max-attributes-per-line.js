@@ -4,12 +4,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/max-attributes-per-line')
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 ruleTester.run('max-attributes-per-line', rule, {

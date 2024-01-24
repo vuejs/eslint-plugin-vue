@@ -14,7 +14,6 @@ describe('configs', () => {
       overrideConfig: {
         extends: [configName]
       },
-      useEslintrc: false,
       plugins: { vue: plugin },
       fix: true
     })

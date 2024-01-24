@@ -39,7 +39,8 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-static-attribute": ["error",
+  "vue/no-restricted-static-attribute": [
+    "error",
     {
       "key": "stlye",
       "message": "Using \"stlye\" is not allowed. Use \"style\" instead."
@@ -95,8 +96,10 @@ The following properties can be specified for the object.
 ## :couple: Related Rules
 
 - [vue/no-restricted-v-bind]
+- [vue/no-restricted-v-on]
 
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
+[vue/no-restricted-v-on]: ./no-restricted-v-on.md
 
 ## :rocket: Version
 

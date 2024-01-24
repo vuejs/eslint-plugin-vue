@@ -5,10 +5,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-dupe-keys')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   }
@@ -401,7 +401,7 @@ ruleTester.run('no-dupe-keys', rule, {
         const bar = 0
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -414,8 +414,10 @@ ruleTester.run('no-dupe-keys', rule, {
         const bar = 0
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -425,7 +427,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const { foo, bar } = props
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -436,7 +438,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = props.bar
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -447,7 +449,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const { foo, bar } = toRefs(props)
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -459,7 +461,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = toRef(props, 'bar')
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -468,7 +470,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const {foo,bar} = defineProps(['foo', 'bar'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -477,7 +479,7 @@ ruleTester.run('no-dupe-keys', rule, {
       const {foo=42,bar='abc'} = defineProps(['foo', 'bar'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -494,8 +496,10 @@ ruleTester.run('no-dupe-keys', rule, {
       const foo = props.foo
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -1007,14 +1011,14 @@ ruleTester.run('no-dupe-keys', rule, {
         const foo = 0
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           message:
             "Duplicate key 'foo'. May cause name collision in script or template tag.",
           line: 6
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -1035,7 +1039,6 @@ ruleTester.run('no-dupe-keys', rule, {
         const bar = () => 'bar';
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           message:
@@ -1052,7 +1055,8 @@ ruleTester.run('no-dupe-keys', rule, {
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 15
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.vue',
@@ -1067,8 +1071,6 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = 'bar';
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
       errors: [
         {
           message:
@@ -1080,7 +1082,11 @@ ruleTester.run('no-dupe-keys', rule, {
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 9
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -1091,14 +1097,14 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = 42
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           message:
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 5
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ]
 })

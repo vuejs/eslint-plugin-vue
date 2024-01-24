@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "9.19.2",
+  "version": "9.20.1",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -59,7 +59,7 @@
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.13",
     "semver": "^7.5.4",
-    "vue-eslint-parser": "^9.3.1",
+    "vue-eslint-parser": "^9.4.0",
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {

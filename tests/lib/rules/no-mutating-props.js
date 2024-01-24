@@ -5,11 +5,11 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-mutating-props')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -1031,15 +1031,17 @@ ruleTester.run('no-mutating-props', rule, {
         props.value++
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
-      },
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
           line: 6
         }
-      ]
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     },
     {
       filename: 'test.vue',

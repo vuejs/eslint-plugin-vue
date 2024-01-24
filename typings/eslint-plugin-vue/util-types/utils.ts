@@ -44,10 +44,15 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefineOptionsExit?(node: CallExpression): void
   onDefineSlotsEnter?(node: CallExpression): void
   onDefineSlotsExit?(node: CallExpression): void
+  onDefineExposeEnter?(node: CallExpression): void
+  onDefineExposeExit?(node: CallExpression): void
+  onDefineModelEnter?(node: CallExpression, model: ComponentModel): void
+  onDefineModelExit?(node: CallExpression, model: ComponentModel): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
     | ((node: CallExpression, emits: ComponentEmit[]) => void)
+    | ((node: CallExpression, model: ComponentModel) => void)
     | undefined
 }
 
@@ -185,3 +190,13 @@ export type ComponentEmit =
   | ComponentTypeEmit
   | ComponentInferTypeEmit
   | ComponentUnknownEmit
+
+export type ComponentModelName = {
+  modelName: string
+  node: Literal | null
+}
+export type ComponentModel = {
+  name: ComponentModelName
+  options: Expression | null
+  typeNode: TypeNode | null
+}

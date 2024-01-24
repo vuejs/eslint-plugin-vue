@@ -19,8 +19,7 @@ const errorMessage = semver.lt(ESLint.version, '6.4.0')
   : (obj) => obj
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('space-in-parens', rule, {

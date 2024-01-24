@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/array-element-newline')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -69,7 +69,7 @@ tester.run('array-element-newline', rule, {
     {
       code: `
         <template>
-          <div :attr="[a, 
+          <div :attr="[a,
                       {
                         b:c
                       }]" />

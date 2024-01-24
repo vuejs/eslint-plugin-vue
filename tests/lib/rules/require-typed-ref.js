@@ -3,12 +3,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/require-typed-ref')
 
 const tester = new RuleTester({
-  parser: require.resolve('@typescript-eslint/parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('@typescript-eslint/parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 // Note: Need to specify filename for each test,
@@ -81,7 +84,7 @@ tester.run('require-typed-ref', rule, {
           const count = ref()
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser')
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.js',
@@ -203,7 +206,6 @@ tester.run('require-typed-ref', rule, {
           const count = ref()
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
       errors: [
         {
           messageId: 'noType',
@@ -212,7 +214,8 @@ tester.run('require-typed-ref', rule, {
           endLine: 4,
           endColumn: 30
         }
-      ]
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
       filename: 'test.ts',

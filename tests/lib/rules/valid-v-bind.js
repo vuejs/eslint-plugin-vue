@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/valid-v-bind')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('valid-v-bind', rule, {
@@ -71,6 +70,15 @@ tester.run('valid-v-bind', rule, {
       filename: 'test.vue',
       code: "<template><input v-bind='$attrs' /></template>"
     },
+    // v-bind same-name shorthand (Vue 3.4+)
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:foo /></template>'
+    },
     // parsing error
     {
       filename: 'parsing-error.vue',
@@ -86,11 +94,6 @@ tester.run('valid-v-bind', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-bind></div></template>',
-      errors: ["'v-bind' directives require an attribute value."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-bind:aaa></div></template>',
       errors: ["'v-bind' directives require an attribute value."]
     },
     {

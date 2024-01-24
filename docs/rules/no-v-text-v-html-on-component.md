@@ -36,7 +36,33 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-v-text-v-html-on-component": [
+    "error",
+    { "allow": ["router-link", "nuxt-link"] }
+  ]
+}
+```
+
+- `allow` (`string[]`) ... Specify a list of custom components for which the rule should not apply.
+
+### `{ "allow": ["router-link", "nuxt-link"] }`
+
+<eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { allow: ['router-link', 'nuxt-link'] }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <router-link v-html="content" />
+  <NuxtLink v-html="content" />
+  
+  <!-- ✗ BAD -->
+  <MyComponent v-html="content" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 

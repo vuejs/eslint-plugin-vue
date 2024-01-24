@@ -6,10 +6,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/html-self-closing')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser')
+  languageOptions: { parser: require('vue-eslint-parser') }
 })
 
 const ALL_CODE = `<template>

@@ -3,12 +3,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-lifecycle-after-await')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-lifecycle-after-await', rule, {
@@ -116,7 +119,7 @@ tester.run('no-lifecycle-after-await', rule, {
       await doSomething()
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -129,7 +132,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -142,7 +145,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -154,7 +157,7 @@ tester.run('no-lifecycle-after-await', rule, {
       onMounted(() => { /* ... */ }) // not error
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [

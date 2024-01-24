@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/v-bind-style')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('v-bind-style', rule, {
@@ -106,6 +105,21 @@ tester.run('v-bind-style', rule, {
       output: '<template><div v-bind:foo.sync.prop="foo"></div></template>',
       options: ['longform'],
       errors: ["Expected 'v-bind:' instead of '.'."]
+    },
+    // v-bind same-name shorthand (Vue 3.4+)
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:foo /></template>',
+      output: '<template><div :foo /></template>',
+      options: ['shorthand'],
+      errors: ["Unexpected 'v-bind' before ':'."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :foo /></template>',
+      output: '<template><div v-bind:foo /></template>',
+      options: ['longform'],
+      errors: ["Expected 'v-bind' before ':'."]
     }
   ]
 })

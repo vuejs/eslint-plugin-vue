@@ -9,7 +9,7 @@ const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-emit-validator', rule, {
@@ -25,7 +25,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 2018, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 2018, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -36,7 +36,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -49,7 +49,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -60,7 +60,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -71,7 +71,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -80,7 +80,7 @@ ruleTester.run('require-emit-validator', rule, {
           emits
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -89,7 +89,7 @@ ruleTester.run('require-emit-validator', rule, {
           emits: externalEmits
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -98,7 +98,7 @@ ruleTester.run('require-emit-validator', rule, {
           emits: []
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -107,7 +107,7 @@ ruleTester.run('require-emit-validator', rule, {
           emits: {}
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -118,8 +118,11 @@ ruleTester.run('require-emit-validator', rule, {
           }
         })
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',
@@ -132,8 +135,11 @@ ruleTester.run('require-emit-validator', rule, {
           },
         })
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',
@@ -145,7 +151,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -157,7 +163,7 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' }
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -166,11 +172,11 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits<(e: 'foo')=>void>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     {
@@ -191,7 +197,6 @@ ruleTester.run('require-emit-validator', rule, {
           emits: ['foo', bar, \`baz\`, foo()]
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'missing',
@@ -213,7 +218,8 @@ ruleTester.run('require-emit-validator', rule, {
           data: { name: 'Unknown emit' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.js',
@@ -222,7 +228,6 @@ ruleTester.run('require-emit-validator', rule, {
           emits: ['foo', bar, \`baz\`, foo()]
         })
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'missing',
@@ -244,7 +249,8 @@ ruleTester.run('require-emit-validator', rule, {
           data: { name: 'Unknown emit' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -254,7 +260,6 @@ ruleTester.run('require-emit-validator', rule, {
             foo: null
           }
         }`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'skipped',
@@ -272,7 +277,8 @@ ruleTester.run('require-emit-validator', rule, {
             }
           ]
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -283,7 +289,6 @@ ruleTester.run('require-emit-validator', rule, {
             bar: (payload) => {}
           }
         }`,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'skipped',
@@ -302,7 +307,8 @@ ruleTester.run('require-emit-validator', rule, {
             }
           ]
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -315,14 +321,14 @@ ruleTester.run('require-emit-validator', rule, {
           }
         }
       `,
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'missing',
           data: { name: 'foo' },
           line: 4
         }
-      ]
+      ],
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
     },
     {
       filename: 'test.vue',
@@ -333,15 +339,18 @@ ruleTester.run('require-emit-validator', rule, {
           }
         });
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'missing',
           data: { name: 'foo' },
           line: 4
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',
@@ -350,18 +359,18 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits(['foo'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module'
-      },
       errors: [
         {
           messageId: 'missing',
           data: { name: 'foo' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     },
     {
       filename: 'test.vue',
@@ -370,18 +379,18 @@ ruleTester.run('require-emit-validator', rule, {
       const emit = defineEmits({foo:null})
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module'
-      },
       errors: [
         {
           messageId: 'skipped',
           data: { name: 'foo' },
           line: 3
         }
-      ]
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      }
     }
   ]
 })

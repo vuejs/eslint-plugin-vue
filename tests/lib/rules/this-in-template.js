@@ -6,11 +6,10 @@
 
 const rule = require('../../../lib/rules/this-in-template')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 function createValidTests(prefix, options) {

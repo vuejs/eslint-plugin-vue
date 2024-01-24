@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-unused-components')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2018,
     sourceType: 'module'
   }
@@ -413,13 +413,6 @@ tester.run('no-unused-components', rule, {
         <component :is=""></component>
       </template>`
     },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <component :is></component>
-      </template>`
-    },
 
     // computed properties
     {
@@ -614,26 +607,6 @@ tester.run('no-unused-components', rule, {
       code: `
       <template>
         <component :is=""></component>
-      </template>
-      <script>
-        export default {
-          components: {
-            Foo,
-          },
-        }
-      </script>`,
-      errors: [
-        {
-          message: 'The "Foo" component has been registered but not used.',
-          line: 8
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <component :is></component>
       </template>
       <script>
         export default {

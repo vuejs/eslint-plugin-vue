@@ -1,13 +1,13 @@
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../../eslint-compat').RuleTester
 const utils = require('../../../../lib/utils/index')
 
 const rule = utils.wrapCoreRule('foo')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
