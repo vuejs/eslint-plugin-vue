@@ -2,9 +2,8 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-explicit-slots
-description: require slots to be explicitly defined with defineSlots
+description: require slots to be explicitly defined
 ---
-
 # vue/require-explicit-slots
 
 > require slots to be explicitly defined
@@ -66,3 +65,8 @@ defineComponent({
 ## :wrench: Options
 
 Nothing.
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-explicit-slots.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-explicit-slots.js)
