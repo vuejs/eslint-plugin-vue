@@ -245,7 +245,6 @@ const invalidElements = [
   'menu',
   'Menu',
   'menuitem',
-  'menuitem',
   'summary',
   'Summary',
   'content',
