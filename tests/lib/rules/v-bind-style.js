@@ -12,8 +12,8 @@ const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
-const expectedShorthand = 'Expected shorthand same name.'
-const unexpectedShorthand = 'Unexpected shorthand same name.'
+const expectedShorthand = 'Expected same-name shorthand.'
+const unexpectedShorthand = 'Unexpected same-name shorthand.'
 
 tester.run('v-bind-style', rule, {
   valid: [
