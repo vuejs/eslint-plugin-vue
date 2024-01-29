@@ -32,8 +32,6 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 ## :wrench: Options
 
-Default style is set to `shorthand`. And default same-name shorthand is `ignore`.
-
 ```json
 {
   "vue/v-bind-style": ["error", "shorthand" | "longform", {
