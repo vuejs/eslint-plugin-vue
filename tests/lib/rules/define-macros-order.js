@@ -238,6 +238,22 @@ tester.run('define-macros-order', rule, {
           parser: require.resolve('@typescript-eslint/parser')
         }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const first = defineModel('first')
+          const second = defineModel('second')
+
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineSlots']
+        }
+      ]
     }
   ],
   invalid: [
