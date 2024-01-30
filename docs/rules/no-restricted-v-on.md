@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-v-on
 description: disallow specific argument in `v-on`
+since: v9.21.0
 ---
 # vue/no-restricted-v-on
 
 > disallow specific argument in `v-on`
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -104,6 +103,10 @@ The following properties can be specified for the object.
 
 [vue/no-restricted-static-attribute]: ./no-restricted-static-attribute.md
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.21.0
 
 ## :mag: Implementation
 

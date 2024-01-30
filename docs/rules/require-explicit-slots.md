@@ -3,12 +3,11 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-explicit-slots
 description: require slots to be explicitly defined
+since: v9.21.0
 ---
 # vue/require-explicit-slots
 
 > require slots to be explicitly defined
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
 
 ## :book: Rule Details
 
@@ -65,6 +64,10 @@ defineComponent({
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.21.0
 
 ## :mag: Implementation
 
