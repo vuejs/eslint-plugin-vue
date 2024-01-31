@@ -369,6 +369,19 @@ tester.run('no-unused-emit-declarations', rule, {
       const m = defineModel('foo')
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          emits: ['foo'],
+          setup(_, ctx) {
+            return () => h('button', { onClick: () => ctx.emit('foo') })
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -748,6 +761,27 @@ tester.run('no-unused-emit-declarations', rule, {
         {
           message: '`update:foo` is defined as emit but never used.',
           line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          emits: ['foo'],
+          setup(_, ctx) {
+            return () => h('button')
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'unused',
+          line: 4,
+          column: 19,
+          endColumn: 24
         }
       ]
     }
