@@ -238,6 +238,22 @@ tester.run('define-macros-order', rule, {
           parser: require.resolve('@typescript-eslint/parser')
         }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const first = defineModel('first')
+          const second = defineModel('second')
+
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineSlots']
+        }
+      ]
     }
   ],
   invalid: [
@@ -816,6 +832,103 @@ tester.run('define-macros-order', rule, {
         {
           message: message('defineOptions'),
           line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** model */
+          const first = defineModel('first')
+          const second = defineModel('second')
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** model */
+          const first = defineModel('first')
+          const second = defineModel('second')
+          /** options */
+          defineOptions({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const first = defineModel('first')
+          defineOptions({})
+          const second = defineModel('second')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const first = defineModel('first')
+          const second = defineModel('second')
+          defineOptions({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const a = defineModel('a')
+          defineOptions({})
+          const c = defineModel('c')
+          defineExpose({})
+          const b = defineModel('b')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const a = defineModel('a')
+          const c = defineModel('c')
+          const b = defineModel('b')
+          defineOptions({})
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 5
+        },
+        {
+          message: defineExposeNotTheLast,
+          line: 6
         }
       ]
     }
