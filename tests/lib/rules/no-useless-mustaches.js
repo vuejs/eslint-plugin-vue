@@ -189,6 +189,54 @@ tester.run('no-useless-mustaches', rule, {
     {
       code: `
       <template>
+        {{ '&lt;' }}
+        {{ '&gt;' }}
+        {{ '&amp;' }}
+        {{ '&#8212;' }}
+      </template>
+      `,
+      output: `
+      <template>
+        &lt;
+        &gt;
+        &amp;
+        &#8212;
+      </template>
+      `,
+      errors: [
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+      ]
+    },
+    {
+      code: `
+      <template>
+        {{ '<' }}
+        {{ '<<' }}
+        {{ 'can be < anywhere' }}
+        {{ '<tag>' }}
+      </template>
+      `,
+      output: `
+      <template>
+        &lt;
+        &lt;&lt;
+        can be &lt; anywhere
+        &lt;tag>
+      </template>
+      `,
+      errors: [
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+      ]
+    },
+    {
+      code: `
+      <template>
         {{ \`foo
 bar\` }}
       </template>
