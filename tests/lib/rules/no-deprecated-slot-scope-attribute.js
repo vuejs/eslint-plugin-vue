@@ -90,7 +90,6 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
         }
       ]
     },
-    // cannot fix
     {
       code: `
       <template>
@@ -101,7 +100,7 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       output: `
       <template>
         <LinkList>
-          <template v-slot="{a}">\n<a  />\n</template>
+          <template v-slot="{a}">\n<a />\n</template>
         </LinkList>
       </template>`,
       errors: [
