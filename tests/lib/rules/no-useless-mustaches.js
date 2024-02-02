@@ -207,7 +207,7 @@ tester.run('no-useless-mustaches', rule, {
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.'
       ]
     },
     {
@@ -231,7 +231,7 @@ tester.run('no-useless-mustaches', rule, {
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.'
       ]
     },
     {
