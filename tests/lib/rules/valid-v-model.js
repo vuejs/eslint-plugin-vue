@@ -143,6 +143,24 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'comment-value.vue',
       code: '<template><MyComponent v-model="/**/" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model="a as string"></MyComponent></template>',
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-model="a!"></MyComponent></template>',
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
