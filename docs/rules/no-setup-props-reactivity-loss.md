@@ -5,14 +5,13 @@ title: vue/no-setup-props-reactivity-loss
 description: disallow usages that lose the reactivity of `props` passed to `setup`
 since: v9.17.0
 ---
-
 # vue/no-setup-props-reactivity-loss
 
 > disallow usages that lose the reactivity of `props` passed to `setup`
 
 ## :book: Rule Details
 
-This rule reports the destructuring, member expression or conditional expression of `props` passed to `setup` causing the value to lose reactivity.
+This rule reports the destructuring or member expression of `props` passed to `setup` causing the value to lose reactivity.
 
 <eslint-code-block :rules="{'vue/no-setup-props-reactivity-loss': ['error']}">
 
@@ -21,12 +20,9 @@ This rule reports the destructuring, member expression or conditional expression
 export default {
   /* ✓ GOOD */
   setup(props) {
-    watch(
-      () => props.count,
-      () => {
-        console.log(props.count)
-      }
-    )
+    watch(() => props.count, () => {
+      console.log(props.count)
+    })
 
     return () => {
       return h('div', props.count)
@@ -47,13 +43,9 @@ Destructuring the `props` passed to `setup` will cause the value to lose reactiv
 export default {
   /* ✗ BAD */
   setup({ count }) {
-    watch(
-      () => count,
-      () => {
-        // not going to detect changes
-        console.log(count)
-      }
-    )
+    watch(() => count, () => { // not going to detect changes
+      console.log(count)
+    })
 
     return () => {
       return h('div', count) // not going to update
@@ -76,51 +68,16 @@ export default {
     /* ✗ BAD */
     const { count } = props
 
-    watch(
-      () => props.count,
-      () => {
-        /* ✓ GOOD */
-        const { count } = props
-        console.log(count)
-      }
-    )
+    watch(() => props.count, () => {
+      /* ✓ GOOD */
+      const { count } = props
+      console.log(count)
+    })
 
     return () => {
       /* ✓ GOOD */
       const { count } = props
       return h('div', count)
-    }
-  }
-}
-</script>
-```
-
-</eslint-code-block>
-
-Also, using a conditonal expression in root scope of `setup()` should error, but ok inside callbacks or returned render functions:
-
-<eslint-code-block :rules="{'vue/no-setup-props-reactivity-loss': ['error']}">
-
-```vue
-<script>
-export default {
-  setup(props) {
-    /* ✗ BAD */
-    const test = props.foo ? true : false
-
-    watch(
-      () => props.foo,
-      () => {
-        /* ✓ GOOD */
-        const test = props.foo ? true : false
-        console.log(test)
-      }
-    )
-
-    return () => {
-      /* ✓ GOOD */
-      const test = props.foo ? true : false
-      return h('div', test)
     }
   }
 }
