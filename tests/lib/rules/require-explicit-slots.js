@@ -238,6 +238,44 @@ tester.run('require-explicit-slots', rule, {
           <slot name="foo" />
         </div>
       </template>
+      <script setup lang="ts">
+      defineSlots<{
+        default: (props: { msg: string }) => any
+      }>()
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name />
+        </div>
+      </template>
+      <script setup lang="ts">
+      defineSlots<{
+        'foo-bar'(props: { msg: string }): any
+      }>()
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo" />
+        </div>
+      </template>
       <script lang="ts">
       import { SlotsType } from 'vue'
 
