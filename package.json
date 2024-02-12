@@ -57,7 +57,7 @@
     "@eslint-community/eslint-utils": "^4.4.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
-    "postcss-selector-parser": "^6.0.13",
+    "postcss-selector-parser": "^6.0.15",
     "semver": "^7.5.4",
     "vue-eslint-parser": "^9.4.2",
     "xml-name-validator": "^4.0.0"
