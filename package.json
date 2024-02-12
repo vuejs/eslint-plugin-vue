@@ -67,7 +67,7 @@
     "@stylistic/eslint-plugin": "^1.6.1",
     "@types/eslint": "^8.56.2",
     "@types/eslint-visitor-keys": "^3.3.0",
-    "@types/natural-compare": "^1.4.1",
+    "@types/natural-compare": "^1.4.3",
     "@types/node": "^14.18.54",
     "@types/semver": "^7.5.0",
     "@types/xml-name-validator": "^4.0.1",
