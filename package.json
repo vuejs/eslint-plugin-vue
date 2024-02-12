@@ -73,7 +73,7 @@
     "@types/xml-name-validator": "^4.0.3",
     "@typescript-eslint/parser": "^7.0.1",
     "@typescript-eslint/types": "^7.0.1",
-    "assert": "^2.0.0",
+    "assert": "^2.1.0",
     "env-cmd": "^10.1.0",
     "esbuild": "^0.18.17",
     "eslint": "^8.45.0",
