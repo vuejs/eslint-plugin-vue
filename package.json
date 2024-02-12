@@ -82,7 +82,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsonc": "^2.13.0",
     "eslint-plugin-node-dependencies": "^0.11.2",
-    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-unicorn": "^48.0.1",
     "eslint-plugin-vue": "file:.",
     "espree": "^9.6.1",
