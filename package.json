@@ -65,7 +65,7 @@
   "devDependencies": {
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.1.2",
     "@stylistic/eslint-plugin": "^1.6.1",
-    "@types/eslint": "^8.44.1",
+    "@types/eslint": "^8.56.2",
     "@types/eslint-visitor-keys": "^3.3.0",
     "@types/natural-compare": "^1.4.1",
     "@types/node": "^14.18.54",
