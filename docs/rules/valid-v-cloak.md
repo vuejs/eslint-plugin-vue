@@ -27,12 +27,12 @@ This rule reports `v-cloak` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-cloak/>
+  <div v-cloak />
 
   <!-- ✗ BAD -->
-  <div v-cloak:aaa/>
-  <div v-cloak.bbb/>
-  <div v-cloak="ccc"/>
+  <div v-cloak:aaa />
+  <div v-cloak.bbb />
+  <div v-cloak="ccc" />
 </template>
 ```
 

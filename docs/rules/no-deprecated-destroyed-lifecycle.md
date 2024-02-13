@@ -23,14 +23,14 @@ This rule reports use of deprecated `destroyed` and `beforeDestroy` lifecycle ho
 <script>
 export default {
   /* ✓ GOOD */
-  beforeMount () {},
-  mounted () {},
-  beforeUnmount () {},
-  unmounted () {},
+  beforeMount() {},
+  mounted() {},
+  beforeUnmount() {},
+  unmounted() {},
 
   /* ✗ BAD */
-  beforeDestroy () {},
-  destroyed () {}
+  beforeDestroy() {},
+  destroyed() {}
 }
 </script>
 ```

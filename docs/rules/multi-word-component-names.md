@@ -83,7 +83,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✗ BAD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -95,7 +95,7 @@ export default {
 <!-- filename: TodoItem.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -107,7 +107,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 <script>
 export default {
@@ -164,7 +164,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 

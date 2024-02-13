@@ -27,7 +27,7 @@ export default {
   props: {
     a: String,
     b: {
-      default () {
+      default() {
         /* ✗ BAD */
         return this.a
       }
@@ -47,7 +47,7 @@ export default {
   props: {
     a: String,
     b: {
-      default (props) {
+      default(props) {
         /* ✓ GOOD */
         return props.a
       }

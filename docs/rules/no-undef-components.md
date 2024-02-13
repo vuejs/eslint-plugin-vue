@@ -84,9 +84,7 @@ export default {
 
 <script>
 export default {
-  components: {
-
-  }
+  components: {}
 }
 </script>
 ```
@@ -136,11 +134,9 @@ export default {
 </template>
 
 <script>
-  export default {
-    components: {
-
-    },
-  }
+export default {
+  components: {}
+}
 </script>
 ```
 
@@ -158,11 +154,9 @@ export default {
 </template>
 
 <script>
-  export default {
-    components: {
-
-    },
-  }
+export default {
+  components: {}
+}
 </script>
 ```
 

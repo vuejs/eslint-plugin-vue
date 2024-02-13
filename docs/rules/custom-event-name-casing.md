@@ -43,7 +43,7 @@ This rule enforces camelCase by default.
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('myEvent')
       this.$emit('update:myProp', myProp)
@@ -90,7 +90,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('my-event')
 
@@ -119,7 +119,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('myEvent')
 
@@ -149,7 +149,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('click:row')
       this.$emit('foo-bar')

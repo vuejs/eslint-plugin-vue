@@ -28,7 +28,7 @@ export default {
   props: {
     propA: Number
   },
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
@@ -46,7 +46,7 @@ export default {
 /* ✗ BAD */
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }

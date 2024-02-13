@@ -53,23 +53,23 @@ watch(() => prop.undef, () => console.log('Updated!'))
   <div>{{ label }}: {{ cnt }}</div>
 </template>
 <script>
-  export default {
-    props: ['name'],
-    data () {
-      return {
-        count: 0
-      }
-    },
-    methods: {
-      click() {
-        /* ✓ GOOD */
-        this.count++
+export default {
+  props: ['name'],
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    click() {
+      /* ✓ GOOD */
+      this.count++
 
-        /* ✗ BAD */
-        this.cnt++
-      }
+      /* ✗ BAD */
+      this.cnt++
     }
   }
+}
 </script>
 ```
 
@@ -97,12 +97,12 @@ watch(() => prop.undef, () => console.log('Updated!'))
   <div>{{ $t('foo') }}</div>
 </template>
 <script>
-  export default {
-    mounted() {
-      /* ✓ GOOD */
-      const hash = this.$route.hash
-    }
+export default {
+  mounted() {
+    /* ✓ GOOD */
+    const hash = this.$route.hash
   }
+}
 </script>
 ```
 

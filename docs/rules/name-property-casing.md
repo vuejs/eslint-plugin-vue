@@ -5,6 +5,7 @@ title: vue/name-property-casing
 description: enforce specific casing for the name property in Vue components
 since: v3.8.0
 ---
+
 # vue/name-property-casing
 
 > enforce specific casing for the name property in Vue components
@@ -19,10 +20,10 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ```vue
 <script>
-  /* ✓ GOOD */
-  export default {
-    name: 'MyComponent'
-  }
+/* ✓ GOOD */
+export default {
+  name: 'MyComponent'
+}
 </script>
 ```
 
@@ -32,10 +33,10 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ```vue
 <script>
-  /* ✗ BAD */
-  export default {
-    name: 'my-component'
-  }
+/* ✗ BAD */
+export default {
+  name: 'my-component'
+}
 </script>
 ```
 
@@ -58,10 +59,10 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ```vue
 <script>
-  /* ✓ GOOD */
-  export default {
-    name: 'my-component'
-  }
+/* ✓ GOOD */
+export default {
+  name: 'my-component'
+}
 </script>
 ```
 
@@ -71,10 +72,10 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 ```vue
 <script>
-  /* ✗ BAD */
-  export default {
-    name: 'MyComponent'
-  }
+/* ✗ BAD */
+export default {
+  name: 'MyComponent'
+}
 </script>
 ```
 

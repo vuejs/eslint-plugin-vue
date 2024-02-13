@@ -34,8 +34,7 @@ export default {
 ```vue
 <script>
 /* ✗ BAD */
-export default {
-}
+export default {}
 </script>
 ```
 

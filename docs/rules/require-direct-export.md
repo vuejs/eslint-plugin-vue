@@ -71,7 +71,7 @@ export default ComponentA
 ```vue
 <script>
 /* ✓ GOOD */
-export default props => h('div', props.msg)
+export default (props) => h('div', props.msg)
 </script>
 ```
 
@@ -84,7 +84,7 @@ export default props => h('div', props.msg)
 ```vue
 <script>
 /* ✗ BAD */
-export default props => h('div', props.msg)
+export default (props) => h('div', props.msg)
 </script>
 ```
 

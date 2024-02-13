@@ -26,13 +26,13 @@ See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.htm
 </template>
 
 <script>
-  console.log('foo')
+console.log('foo')
 </script>
 
 <style>
-  p {
-    display: inline;
-  }
+p {
+  display: inline;
+}
 </style>
 
 <template src="./template.html"></template>
@@ -43,7 +43,6 @@ See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.htm
 
 <style src="./style.css"></style>
 <style src="./style.css" />
-
 
 <!-- ✗ BAD -->
 <template></template>

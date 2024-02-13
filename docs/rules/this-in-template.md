@@ -25,7 +25,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="url">
     {{ text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="this.url">
     {{ this.text }}
@@ -56,7 +56,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="this.url">
     {{ this.text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="url">
     {{ text }}

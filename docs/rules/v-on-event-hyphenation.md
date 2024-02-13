@@ -22,12 +22,12 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent @custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent @custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
-  <MyComponent @customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
+  <MyComponent @customEvent="handleEvent" />
 </template>
 ```
 
@@ -58,10 +58,10 @@ It errors on upper case letters.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 </template>
 ```
 
@@ -76,10 +76,10 @@ It errors on hyphens.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 </template>
 ```
 
@@ -94,11 +94,11 @@ Don't use hyphenated name but allow custom event names
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent v-on:myEvent="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent v-on:myEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:my-event="handleEvent"/>
+  <MyComponent v-on:my-event="handleEvent" />
 </template>
 ```
 

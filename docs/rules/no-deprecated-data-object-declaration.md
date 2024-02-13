@@ -32,7 +32,7 @@ createApp({
 
 createApp({
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }
@@ -63,7 +63,7 @@ export default {
 <script>
 export default {
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }

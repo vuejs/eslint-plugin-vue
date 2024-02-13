@@ -30,11 +30,9 @@ This rule reports `v-model` directives in the following cases:
   <MyComponent v-model.lazy="foo" />
   <MyComponent v-model.number="foo" />
 
-
   <!-- ✗ BAD -->
   <MyComponent v-model.aaa="foo" />
   <MyComponent v-model.aaa.bbb="foo" />
-
 </template>
 ```
 

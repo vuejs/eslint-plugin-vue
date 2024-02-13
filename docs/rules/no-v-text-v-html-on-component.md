@@ -25,7 +25,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <div v-text="content"></div>
   <div v-html="html"></div>
-  <MyComponent>{{content}}</MyComponent>
+  <MyComponent>{{ content }}</MyComponent>
 
   <!-- ✗ BAD -->
   <MyComponent v-text="content"></MyComponent>
@@ -57,7 +57,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <router-link v-html="content" />
   <NuxtLink v-html="content" />
-  
+
   <!-- ✗ BAD -->
   <MyComponent v-html="content" />
 </template>

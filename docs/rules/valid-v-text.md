@@ -27,12 +27,12 @@ This rule reports `v-text` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-text="foo"/>
+  <div v-text="foo" />
 
   <!-- ✗ BAD -->
-  <div v-text/>
-  <div v-text:aaa="foo"/>
-  <div v-text.bbb="foo"/>
+  <div v-text />
+  <div v-text:aaa="foo" />
+  <div v-text.bbb="foo" />
 </template>
 ```
 

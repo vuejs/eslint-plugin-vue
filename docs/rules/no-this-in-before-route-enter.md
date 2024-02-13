@@ -26,7 +26,7 @@ export default {
     if (this.value === 42) {
     }
     this.attribute = this.method();
-  }   
+  }
 }
 </script>
 ```
@@ -41,7 +41,7 @@ export default {
   beforeRouteEnter() {
     /* ✓ GOOD */
     // anything without this
-  }   
+  }
 }
 </script>
 ```

@@ -21,12 +21,12 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <component :is="type"/>
-  <component v-bind:is="type"/>
+  <component :is="type" />
+  <component v-bind:is="type" />
 
   <!-- ✗ BAD -->
-  <component/>
-  <component is="type"/>
+  <component />
+  <component is="type" />
 </template>
 ```
 

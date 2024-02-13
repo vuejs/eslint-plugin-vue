@@ -42,7 +42,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 ```vue
 <!-- The root element has `v-for` directives -->
 <template>
-  <div v-for="item in items"/>
+  <div v-for="item in items" />
 </template>
 ```
 

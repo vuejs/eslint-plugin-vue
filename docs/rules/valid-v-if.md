@@ -28,14 +28,14 @@ This rule reports `v-if` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-if="foo"/>
-  <div v-else-if="bar"/>
-  <div v-else/>
+  <div v-if="foo" />
+  <div v-else-if="bar" />
+  <div v-else />
 
   <!-- ✗ BAD -->
-  <div v-if/>
-  <div v-if:aaa="foo"/>
-  <div v-if.bbb="foo"/>
+  <div v-if />
+  <div v-if:aaa="foo" />
+  <div v-if.bbb="foo" />
   <div
     v-if="foo"
     v-else

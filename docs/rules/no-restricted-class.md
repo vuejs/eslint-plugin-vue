@@ -31,7 +31,7 @@ in the rule configuration.
 <template>
   <!-- ✗ BAD -->
   <div class="forbidden" />
-  <div :class="{forbidden: someBoolean}" />
+  <div :class="{ forbidden: someBoolean }" />
   <div :class="`forbidden ${someString}`" />
   <div :class="'forbidden'" />
   <div :class="'forbidden ' + someString" />
@@ -65,7 +65,7 @@ variables, like below, will not be detected by this rule.
 export default {
   data() {
     return {
-      classes: "forbidden"
+      classes: 'forbidden'
     }
   }
 }

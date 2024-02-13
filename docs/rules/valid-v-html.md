@@ -27,12 +27,12 @@ This rule reports `v-html` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-html="foo"/>
+  <div v-html="foo" />
 
   <!-- ✗ BAD -->
-  <div v-html/>
-  <div v-html:aaa="foo"/>
-  <div v-html.bbb="foo"/>
+  <div v-html />
+  <div v-html:aaa="foo" />
+  <div v-html.bbb="foo" />
 </template>
 ```
 

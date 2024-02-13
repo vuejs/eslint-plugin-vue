@@ -22,7 +22,7 @@ This rule only works in setup script and `lang="ts"`.
 <script setup lang="ts">
 /* ✓ GOOD */
 const props = defineProps<{
-  kind: string,
+  kind: string
   options: { title: string }
 }>()
 
@@ -59,7 +59,7 @@ const props = defineProps({
 
 /* ✗ BAD */
 const props = defineProps<{
-  kind: string,
+  kind: string
   options: { title: string }
 }>()
 </script>

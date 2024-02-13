@@ -64,14 +64,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 
 /* ✗ BAD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 ```
 
 </eslint-code-block>
@@ -108,14 +104,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 
 /* ✗ BAD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 ```
 
 </eslint-code-block>

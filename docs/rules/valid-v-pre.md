@@ -27,12 +27,12 @@ This rule reports `v-pre` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-pre/>
+  <div v-pre />
 
   <!-- ✗ BAD -->
-  <div v-pre:aaa/>
-  <div v-pre.bbb/>
-  <div v-pre="ccc"/>
+  <div v-pre:aaa />
+  <div v-pre.bbb />
+  <div v-pre="ccc" />
 </template>
 ```
 

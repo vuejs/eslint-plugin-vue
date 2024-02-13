@@ -27,7 +27,6 @@ This rule reports `v-model` directives in the following cases:
   <!-- ✓ GOOD -->
   <MyComponent v-model="foo" />
 
-
   <!-- ✗ BAD -->
   <MyComponent v-model:aaa="foo" />
 </template>

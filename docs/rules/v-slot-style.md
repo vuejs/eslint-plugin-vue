@@ -23,7 +23,7 @@ This rule enforces `v-slot` directive style which you should use shorthand or lo
 <template>
   <!-- ✓ GOOD -->
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template #default>content</template>
@@ -33,7 +33,7 @@ This rule enforces `v-slot` directive style which you should use shorthand or lo
 
   <!-- ✗ BAD -->
   <my-component #default="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template v-slot>content</template>
@@ -82,7 +82,7 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 <template>
   <!-- ✓ GOOD -->
   <my-component v-slot:default="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template v-slot:default>content</template>
@@ -92,7 +92,7 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 
   <!-- ✗ BAD -->
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template #default>content</template>

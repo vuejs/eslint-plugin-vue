@@ -27,12 +27,12 @@ This rule reports `v-once` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-once/>
+  <div v-once />
 
   <!-- ✗ BAD -->
-  <div v-once:aaa/>
-  <div v-once.bbb/>
-  <div v-once="ccc"/>
+  <div v-once:aaa />
+  <div v-once.bbb />
+  <div v-once="ccc" />
 </template>
 ```
 

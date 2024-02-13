@@ -30,14 +30,14 @@ export default {
   },
   computed: {
     foo: {
-      get () {}
+      get() {}
     }
   },
   data: {
     foo: null
   },
   methods: {
-    foo () {}
+    foo() {}
   }
 }
 </script>
@@ -66,10 +66,10 @@ export default {
 /* ✗ BAD */
 export default {
   computed: {
-    foo () {}
+    foo() {}
   },
   firebase: {
-    foo () {}
+    foo() {}
   }
 }
 </script>

@@ -22,7 +22,7 @@ This rule aims to enforce render function to always return value
 <script>
 export default {
   /* ✓ GOOD */
-  render (h) {
+  render(h) {
     return h('div', 'hello')
   }
 }
@@ -37,7 +37,7 @@ export default {
 <script>
 export default {
   /* ✗ BAD */
-  render (h) {
+  render(h) {
     if (foo) {
       return h('div', 'hello')
     }

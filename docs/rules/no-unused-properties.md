@@ -26,9 +26,9 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
   <div>{{ count }}</div>
 </template>
 <script>
-  export default {
-    props: ['count']
-  }
+export default {
+  props: ['count']
+}
 </script>
 ```
 
@@ -42,9 +42,9 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
   <div>{{ cnt }}</div>
 </template>
 <script>
-  export default {
-    props: ['count']
-  }
+export default {
+  props: ['count']
+}
 </script>
 ```
 
@@ -80,16 +80,16 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
 ```vue
 <!-- ✓ GOOD -->
 <script>
-  export default {
-    data() {
-      return {
-        count: null
-      }
-    },
-    created() {
-      this.count = 2
+export default {
+  data() {
+    return {
+      count: null
     }
+  },
+  created() {
+    this.count = 2
   }
+}
 </script>
 ```
 
@@ -100,16 +100,16 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
 ```vue
 <!-- ✗ BAD (`count` data not used) -->
 <script>
-  export default {
-    data() {
-      return {
-        count: null
-      }
-    },
-    created() {
-      this.cnt = 2
+export default {
+  data() {
+    return {
+      count: null
     }
+  },
+  created() {
+    this.cnt = 2
   }
+}
 </script>
 ```
 
@@ -151,18 +151,18 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
   <p>{{ reversedMessage }}</p>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        message: 'Hello'
-      }
-    },
-    computed: {
-      reversedMessage() {
-        return this.message.split('').reverse().join('')
-      }
+export default {
+  data() {
+    return {
+      message: 'Hello'
+    }
+  },
+  computed: {
+    reversedMessage() {
+      return this.message.split('').reverse().join('')
     }
   }
+}
 </script>
 ```
 
@@ -176,18 +176,18 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
   <p>{{ message }}</p>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        message: 'Hello'
-      }
-    },
-    computed: {
-      reversedMessage() {
-        return this.message.split('').reverse().join('')
-      }
+export default {
+  data() {
+    return {
+      message: 'Hello'
+    }
+  },
+  computed: {
+    reversedMessage() {
+      return this.message.split('').reverse().join('')
     }
   }
+}
 </script>
 ```
 
@@ -203,19 +203,19 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
   <button @click="usedInTemplate()" />
 </template>
 <script>
-  export default {
-    methods: {
-      /* ✓ GOOD */
-      usedInTemplate() {},
-      
-      /* ✓ GOOD */
-      /** @public */
-      publicMethod() {},
-      
-      /* ✗ BAD */
-      unusedMethod() {}
-    }
+export default {
+  methods: {
+    /* ✓ GOOD */
+    usedInTemplate() {},
+
+    /* ✓ GOOD */
+    /** @public */
+    publicMethod() {},
+
+    /* ✗ BAD */
+    unusedMethod() {}
   }
+}
 </script>
 ```
 
@@ -226,29 +226,27 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['unknownMemberAsUnreferenced']}]}">
 
 ```vue
-<template>
-  
-</template>
+<template></template>
 <script>
-  export default {
-    computed: {
-      one () {
-        return 1
-      },
-      two () {
-        return 2
-      }
+export default {
+  computed: {
+    one() {
+      return 1
     },
-    methods: {
-      handler () {
-        /* ✓ GOOD - explicit access to computed */
-        const a = this.one
-        const i = 'two'
-        /* ✗ BAD - unknown access via a variable, two will be reported as unreferenced */
-        return this[i]
-      },
+    two() {
+      return 2
     }
+  },
+  methods: {
+    handler() {
+      /* ✓ GOOD - explicit access to computed */
+      const a = this.one
+      const i = 'two'
+      /* ✗ BAD - unknown access via a variable, two will be reported as unreferenced */
+      return this[i]
+    },
   }
+}
 </script>
 ```
 
@@ -259,28 +257,26 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['returnAsUnreferenced']}]}">
 
 ```vue
-<template>
-  
-</template>
+<template></template>
 <script>
-  export default {
-    computed: {
-      one () {
-        return 1
-      },
-      two () {
-        return 2
-      }
+export default {
+  computed: {
+    one() {
+      return 1
     },
-    methods: {
-      handler () {
-        /* ✓ GOOD - explicit access to computed */
-        const a = this.one
-        /* ✗ BAD - any property could be accessed by returning `this`, but two will still be reported as unreferenced */
-        return this
-      },
+    two() {
+      return 2
     }
+  },
+  methods: {
+    handler() {
+      /* ✓ GOOD - explicit access to computed */
+      const a = this.one
+      /* ✗ BAD - any property could be accessed by returning `this`, but two will still be reported as unreferenced */
+      return this
+    },
   }
+}
 </script>
 ```
 

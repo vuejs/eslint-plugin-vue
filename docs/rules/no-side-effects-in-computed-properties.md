@@ -25,10 +25,10 @@ It is considered a very bad practice to introduce side effects inside computed p
 /* ✓ GOOD */
 export default {
   computed: {
-    fullName () {
+    fullName() {
       return `${this.firstName} ${this.lastName}`
     },
-    reversedArray () {
+    reversedArray() {
       return this.array.slice(0).reverse() // .slice makes a copy of the array, instead of mutating the orginal
     }
   }
@@ -45,11 +45,11 @@ export default {
 /* ✗ BAD */
 export default {
   computed: {
-    fullName () {
+    fullName() {
       this.firstName = 'lorem' // <- side effect
       return `${this.firstName} ${this.lastName}`
     },
-    reversedArray () {
+    reversedArray() {
       return this.array.reverse() // <- side effect - orginal array is being mutated
     }
   }
@@ -63,7 +63,7 @@ export default {
 
 ```vue
 <script>
-import {computed} from 'vue'
+import { computed } from 'vue'
 /* ✓ GOOD */
 export default {
   setup() {
@@ -84,12 +84,12 @@ export default {
 
 ```vue
 <script>
-import {computed} from 'vue'
+import { computed } from 'vue'
 /* ✗ BAD */
 export default {
   setup() {
     const foo = useFoo()
-    
+
     const fullName = computed(() => {
       foo.firstName = 'lorem' // <- side effect
       return `${foo.firstName} ${foo.lastName}`

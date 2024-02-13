@@ -25,7 +25,7 @@ You must use `.value` to access the `Ref` value.
 import { ref } from 'vue'
 
 export default {
-  setup () {
+  setup() {
     const count = ref(0)
     const ok = ref(true)
 

@@ -22,12 +22,12 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div foo="bar"/>
-  <div :foo="bar"/>
+  <div foo="bar" />
+  <div :foo="bar" />
 
   <!-- ✗ BAD -->
-  <div v-bind:foo="'bar'"/>
-  <div :foo="'bar'"/>
+  <div v-bind:foo="'bar'" />
+  <div :foo="'bar'" />
 </template>
 ```
 
@@ -54,10 +54,10 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind:foo="'bar'/* comment */"/>
+  <div v-bind:foo="'bar' /* comment */" />
 
   <!-- ✗ BAD -->
-  <div v-bind:foo="'bar'"/>
+  <div v-bind:foo="'bar'" />
 </template>
 ```
 
@@ -70,7 +70,7 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind:foo="'bar\nbaz'"/>
+  <div v-bind:foo="'bar\nbaz'" />
 </template>
 ```
 

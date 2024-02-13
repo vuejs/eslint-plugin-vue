@@ -56,7 +56,7 @@ export default {
 <script>
 export default {
   /* ✗ BAD */
-  data () {
+  data() {
     return {
       msg: 'Hello World!',
       // ...
@@ -93,7 +93,7 @@ export default {
 <script>
 export default {
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       msg: 'Hello World!',
       // ...

@@ -23,13 +23,13 @@ The computed property cannot be accessed in `data()` because is before initializ
 <script>
 export default {
   data() {
-    return  {
+    return {
       /* ✗ BAD */
       bar: this.foo
     }
   },
   computed: {
-    foo () {}
+    foo() {}
   }
 }
 </script>

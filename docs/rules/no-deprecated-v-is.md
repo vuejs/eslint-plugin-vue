@@ -25,7 +25,7 @@ Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-a
   <!-- ✓ GOOD -->
   <div is="vue:MyComponent" />
   <component is="MyComponent" />
-  
+
   <!-- ✗ BAD -->
   <div v-is="'MyComponent'" />
 </template>

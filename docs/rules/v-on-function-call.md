@@ -22,14 +22,10 @@ This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` wh
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 
@@ -61,14 +57,10 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
 </template>
 ```
 
@@ -81,17 +73,11 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
-  <button v-on:click="closeModal(arg)">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
+  <button v-on:click="closeModal(arg)">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 
@@ -104,17 +90,11 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
-  <button v-on:click="closeModal() /* comment */">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
+  <button v-on:click="closeModal() /* comment */">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 

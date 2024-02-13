@@ -33,7 +33,7 @@ This rule reports `v-slot` directives in the following cases:
 <template>
   <!-- ✓ GOOD -->
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template v-slot:default>
@@ -49,7 +49,7 @@ This rule reports `v-slot` directives in the following cases:
 
   <!-- ✗ BAD -->
   <div v-slot="data">
-    {{data}}
+    {{ data }}
   </div>
   <div>
     <template v-slot:one>
@@ -58,10 +58,10 @@ This rule reports `v-slot` directives in the following cases:
   </div>
 
   <my-component v-slot:one="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
     <template v-slot:one>
       one
     </template>
@@ -86,7 +86,7 @@ This rule reports `v-slot` directives in the following cases:
   </my-component>
 
   <my-component v-slot.mod="data">
-    {{data}}
+    {{ data }}
   </my-component>
 
   <my-component v-slot>
@@ -128,7 +128,7 @@ This rule does not check syntax errors in directives because it's checked by [vu
   </MyComponent>
 
   <!--  ✗ BAD */ -->
-  <MyComponent v-slot.foo="{data}">
+  <MyComponent v-slot.foo="{ data }">
     {{ data }}
   </MyComponent>
   <MyComponent>

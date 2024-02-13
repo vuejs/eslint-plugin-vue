@@ -70,7 +70,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
     </my-component>
   </ListComponent>
 
-    <ListComponent>
+  <ListComponent>
     <!-- ✗ BAD -->
     <other-component slot="name">
       {{ props.title }}
