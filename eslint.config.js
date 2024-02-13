@@ -2,6 +2,9 @@
 
 const globals = require('globals')
 const { FlatCompat } = require('@eslint/eslintrc')
+const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
+const eslintPluginUnicorn = require('eslint-plugin-unicorn')
 
 const eslintrc = new FlatCompat({
   baseDirectory: __dirname
@@ -25,14 +28,13 @@ module.exports = [
       'docs/.vitepress/cache'
     ]
   },
-  ...eslintrc.plugins('eslint-plugin', 'prettier', 'unicorn'),
+  eslintPluginEslintPlugin,
+  eslintPluginUnicorn.configs['flat/recommended'],
   ...eslintrc.extends(
-    'plugin:eslint-plugin/all',
-    'prettier',
     'plugin:node-dependencies/recommended',
-    'plugin:jsonc/recommended-with-jsonc',
-    'plugin:unicorn/recommended'
+    'plugin:jsonc/recommended-with-jsonc'
   ),
+  eslintPluginPrettierRecommended,
   {
     plugins: {
       internal: {
@@ -203,10 +205,6 @@ module.exports = [
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: require('vue-eslint-parser')
-      // parserOptions: {
-      //   ecmaVersion: 'latest',
-      //   sourceType: 'module'
-      // }
     }
   },
   {
