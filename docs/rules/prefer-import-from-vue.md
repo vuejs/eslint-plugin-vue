@@ -8,7 +8,7 @@ since: v8.5.0
 
 # vue/prefer-import-from-vue
 
-> enforce import from 'vue' instead of import from '@vue/*'
+> enforce import from 'vue' instead of import from '@vue/\*'
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.

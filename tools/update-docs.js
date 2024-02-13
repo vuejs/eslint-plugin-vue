@@ -86,7 +86,10 @@ class DocFile {
     const description = meta.docs
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
-    const title = `# ${ruleId}\n\n> ${description}`
+    const escapedDescription = description
+      .replace(/\*/g, '\\*')
+      .replace(/_/g, '\\_')
+    const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
     if (meta.removedInVersion) {
