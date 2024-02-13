@@ -928,7 +928,21 @@ tester.run('define-macros-order', rule, {
         },
         {
           message: defineExposeNotTheLast,
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              messageId: 'putExposeAtTheLast',
+              output: `
+        <script setup>
+          const a = defineModel('a')
+          defineOptions({})
+          const c = defineModel('c')
+          const b = defineModel('b')
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
         }
       ]
     }

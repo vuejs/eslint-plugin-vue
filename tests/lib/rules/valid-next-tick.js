@@ -156,6 +156,7 @@ tester.run('valid-next-tick', rule, {
           column: 11,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -174,6 +175,7 @@ tester.run('valid-next-tick', rule, {
           column: 15,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -192,6 +194,7 @@ tester.run('valid-next-tick', rule, {
           column: 16,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {

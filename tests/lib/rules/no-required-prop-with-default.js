@@ -867,7 +867,25 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              messageId: 'fixRequiredProp',
+              output: `
+        <script>
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          props: {
+            name: {
+              required: false,
+              default: 'Hello'
+            }
+          }
+        })
+        </script>
+      `
+            }
+          ]
         }
       ]
     },
