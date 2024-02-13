@@ -5,6 +5,7 @@ title: vue/no-spaces-around-equal-signs-in-attribute
 description: disallow spaces around equal signs in attribute
 since: v5.0.0
 ---
+
 # vue/no-spaces-around-equal-signs-in-attribute
 
 > disallow spaces around equal signs in attribute

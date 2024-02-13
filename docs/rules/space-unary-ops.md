@@ -5,6 +5,7 @@ title: vue/space-unary-ops
 description: Enforce consistent spacing before or after unary operators in `<template>`
 since: v5.2.0
 ---
+
 # vue/space-unary-ops
 
 > Enforce consistent spacing before or after unary operators in `<template>`

@@ -5,6 +5,7 @@ title: vue/no-dupe-keys
 description: disallow duplication of field names
 since: v3.9.0
 ---
+
 # vue/no-dupe-keys
 
 > disallow duplication of field names

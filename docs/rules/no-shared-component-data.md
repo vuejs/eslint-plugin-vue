@@ -5,6 +5,7 @@ title: vue/no-shared-component-data
 description: enforce component's data property to be a function
 since: v3.8.0
 ---
+
 # vue/no-shared-component-data
 
 > enforce component's data property to be a function

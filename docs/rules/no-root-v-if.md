@@ -5,6 +5,7 @@ title: vue/no-root-v-if
 description: disallow `v-if` directives on root element
 since: v9.12.0
 ---
+
 # vue/no-root-v-if
 
 > disallow `v-if` directives on root element

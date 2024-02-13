@@ -5,6 +5,7 @@ title: vue/space-in-parens
 description: Enforce consistent spacing inside parentheses in `<template>`
 since: v7.0.0
 ---
+
 # vue/space-in-parens
 
 > Enforce consistent spacing inside parentheses in `<template>`

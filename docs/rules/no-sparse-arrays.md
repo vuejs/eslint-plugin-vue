@@ -5,6 +5,7 @@ title: vue/no-sparse-arrays
 description: Disallow sparse arrays in `<template>`
 since: v7.0.0
 ---
+
 # vue/no-sparse-arrays
 
 > Disallow sparse arrays in `<template>`

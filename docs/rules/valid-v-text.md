@@ -5,6 +5,7 @@ title: vue/valid-v-text
 description: enforce valid `v-text` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-text
 
 > enforce valid `v-text` directives

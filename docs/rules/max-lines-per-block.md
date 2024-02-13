@@ -5,6 +5,7 @@ title: vue/max-lines-per-block
 description: enforce maximum number of lines in Vue SFC blocks
 since: v9.15.0
 ---
+
 # vue/max-lines-per-block
 
 > enforce maximum number of lines in Vue SFC blocks

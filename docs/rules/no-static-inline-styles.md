@@ -5,6 +5,7 @@ title: vue/no-static-inline-styles
 description: disallow static inline `style` attributes
 since: v7.0.0
 ---
+
 # vue/no-static-inline-styles
 
 > disallow static inline `style` attributes

@@ -5,6 +5,7 @@ title: vue/define-props-declaration
 description: enforce declaration style of `defineProps`
 since: v9.5.0
 ---
+
 # vue/define-props-declaration
 
 > enforce declaration style of `defineProps`

@@ -5,6 +5,7 @@ title: vue/enforce-style-attribute
 description: enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags
 since: v9.20.0
 ---
+
 # vue/enforce-style-attribute
 
 > enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags

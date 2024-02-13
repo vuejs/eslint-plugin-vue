@@ -5,6 +5,7 @@ title: vue/no-unused-emit-declarations
 description: disallow unused emit declarations
 since: v9.19.0
 ---
+
 # vue/no-unused-emit-declarations
 
 > disallow unused emit declarations

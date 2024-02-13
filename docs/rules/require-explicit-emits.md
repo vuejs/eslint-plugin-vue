@@ -5,6 +5,7 @@ title: vue/require-explicit-emits
 description: require `emits` option with name triggered by `$emit()`
 since: v7.0.0
 ---
+
 # vue/require-explicit-emits
 
 > require `emits` option with name triggered by `$emit()`

@@ -5,6 +5,7 @@ title: vue/v-bind-style
 description: enforce `v-bind` directive style
 since: v3.0.0
 ---
+
 # vue/v-bind-style
 
 > enforce `v-bind` directive style

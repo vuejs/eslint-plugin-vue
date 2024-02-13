@@ -5,6 +5,7 @@ title: vue/no-multiple-objects-in-class
 description: disallow to pass multiple objects into array to class
 since: v7.0.0
 ---
+
 # vue/no-multiple-objects-in-class
 
 > disallow to pass multiple objects into array to class

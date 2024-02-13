@@ -5,6 +5,7 @@ title: vue/no-required-prop-with-default
 description: enforce props with default values to be optional
 since: v9.6.0
 ---
+
 # vue/no-required-prop-with-default
 
 > enforce props with default values to be optional

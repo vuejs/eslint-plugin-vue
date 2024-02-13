@@ -5,6 +5,7 @@ title: vue/multi-word-component-names
 description: require component names to be always multi-word
 since: v7.20.0
 ---
+
 # vue/multi-word-component-names
 
 > require component names to be always multi-word

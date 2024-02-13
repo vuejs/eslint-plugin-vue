@@ -5,6 +5,7 @@ title: vue/require-prop-comment
 description: require props to have a comment
 since: v9.8.0
 ---
+
 # vue/require-prop-comment
 
 > require props to have a comment

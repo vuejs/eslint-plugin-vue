@@ -5,6 +5,7 @@ title: vue/valid-next-tick
 description: enforce valid `nextTick` function calls
 since: v7.5.0
 ---
+
 # vue/valid-next-tick
 
 > enforce valid `nextTick` function calls

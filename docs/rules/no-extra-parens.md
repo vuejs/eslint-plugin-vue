@@ -5,6 +5,7 @@ title: vue/no-extra-parens
 description: Disallow unnecessary parentheses in `<template>`
 since: v7.0.0
 ---
+
 # vue/no-extra-parens
 
 > Disallow unnecessary parentheses in `<template>`

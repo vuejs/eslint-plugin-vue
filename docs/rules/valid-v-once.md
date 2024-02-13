@@ -5,6 +5,7 @@ title: vue/valid-v-once
 description: enforce valid `v-once` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-once
 
 > enforce valid `v-once` directives

@@ -5,6 +5,7 @@ title: vue/no-console
 description: Disallow the use of `console` in `<template>`
 since: v9.15.0
 ---
+
 # vue/no-console
 
 > Disallow the use of `console` in `<template>`

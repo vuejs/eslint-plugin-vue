@@ -5,6 +5,7 @@ title: vue/no-empty-pattern
 description: Disallow empty destructuring patterns in `<template>`
 since: v6.0.0
 ---
+
 # vue/no-empty-pattern
 
 > Disallow empty destructuring patterns in `<template>`

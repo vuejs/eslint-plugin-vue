@@ -5,6 +5,7 @@ title: vue/require-render-return
 description: enforce render function to always return value
 since: v3.10.0
 ---
+
 # vue/require-render-return
 
 > enforce render function to always return value

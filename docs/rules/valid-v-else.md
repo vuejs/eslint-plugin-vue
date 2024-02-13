@@ -5,6 +5,7 @@ title: vue/valid-v-else
 description: enforce valid `v-else` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-else
 
 > enforce valid `v-else` directives

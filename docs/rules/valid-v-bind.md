@@ -5,6 +5,7 @@ title: vue/valid-v-bind
 description: enforce valid `v-bind` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-bind
 
 > enforce valid `v-bind` directives

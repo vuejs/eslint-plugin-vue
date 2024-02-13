@@ -5,6 +5,7 @@ title: vue/v-for-delimiter-style
 description: enforce `v-for` directive's delimiter style
 since: v7.0.0
 ---
+
 # vue/v-for-delimiter-style
 
 > enforce `v-for` directive's delimiter style

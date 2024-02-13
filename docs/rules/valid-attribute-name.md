@@ -5,6 +5,7 @@ title: vue/valid-attribute-name
 description: require valid attribute names
 since: v9.0.0
 ---
+
 # vue/valid-attribute-name
 
 > require valid attribute names

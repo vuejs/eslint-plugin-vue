@@ -5,6 +5,7 @@ title: vue/prefer-separate-static-class
 description: require static class names in template to be in a separate `class` attribute
 since: v8.2.0
 ---
+
 # vue/prefer-separate-static-class
 
 > require static class names in template to be in a separate `class` attribute

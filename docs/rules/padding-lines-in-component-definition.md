@@ -5,6 +5,7 @@ title: vue/padding-lines-in-component-definition
 description: require or disallow padding lines in component definition
 since: v9.9.0
 ---
+
 # vue/padding-lines-in-component-definition
 
 > require or disallow padding lines in component definition

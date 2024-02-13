@@ -5,6 +5,7 @@ title: vue/html-quotes
 description: enforce quotes style of HTML attributes
 since: v3.0.0
 ---
+
 # vue/html-quotes
 
 > enforce quotes style of HTML attributes

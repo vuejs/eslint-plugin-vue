@@ -5,6 +5,7 @@ title: vue/no-restricted-class
 description: disallow specific classes in Vue components
 since: v7.19.0
 ---
+
 # vue/no-restricted-class
 
 > disallow specific classes in Vue components

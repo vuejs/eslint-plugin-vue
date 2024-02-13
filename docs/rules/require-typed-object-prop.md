@@ -5,6 +5,7 @@ title: vue/require-typed-object-prop
 description: enforce adding type declarations to object props
 since: v9.16.0
 ---
+
 # vue/require-typed-object-prop
 
 > enforce adding type declarations to object props

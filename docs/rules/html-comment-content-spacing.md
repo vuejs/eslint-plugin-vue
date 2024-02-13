@@ -5,6 +5,7 @@ title: vue/html-comment-content-spacing
 description: enforce unified spacing in HTML comments
 since: v7.0.0
 ---
+
 # vue/html-comment-content-spacing
 
 > enforce unified spacing in HTML comments

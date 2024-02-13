@@ -5,6 +5,7 @@ title: vue/v-on-function-call
 description: enforce or forbid parentheses after method calls without arguments in `v-on` directives
 since: v5.2.0
 ---
+
 # vue/v-on-function-call
 
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives

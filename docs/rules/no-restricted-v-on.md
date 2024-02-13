@@ -5,6 +5,7 @@ title: vue/no-restricted-v-on
 description: disallow specific argument in `v-on`
 since: v9.21.0
 ---
+
 # vue/no-restricted-v-on
 
 > disallow specific argument in `v-on`

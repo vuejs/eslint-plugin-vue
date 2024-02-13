@@ -5,6 +5,7 @@ title: vue/no-empty-component-block
 description: disallow the `<template>` `<script>` `<style>` block to be empty
 since: v7.0.0
 ---
+
 # vue/no-empty-component-block
 
 > disallow the `<template>` `<script>` `<style>` block to be empty

@@ -5,6 +5,7 @@ title: vue/no-restricted-custom-event
 description: disallow specific custom event
 since: v7.3.0
 ---
+
 # vue/no-restricted-custom-event
 
 > disallow specific custom event

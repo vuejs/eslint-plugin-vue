@@ -5,6 +5,7 @@ title: vue/valid-v-html
 description: enforce valid `v-html` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-html
 
 > enforce valid `v-html` directives

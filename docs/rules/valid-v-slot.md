@@ -5,6 +5,7 @@ title: vue/valid-v-slot
 description: enforce valid `v-slot` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-slot
 
 > enforce valid `v-slot` directives

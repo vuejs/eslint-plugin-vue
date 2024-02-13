@@ -5,6 +5,7 @@ title: vue/no-deprecated-destroyed-lifecycle
 description: disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-destroyed-lifecycle
 
 > disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+)

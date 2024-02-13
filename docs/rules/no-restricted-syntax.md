@@ -5,6 +5,7 @@ title: vue/no-restricted-syntax
 description: Disallow specified syntax in `<template>`
 since: v5.2.0
 ---
+
 # vue/no-restricted-syntax
 
 > Disallow specified syntax in `<template>`

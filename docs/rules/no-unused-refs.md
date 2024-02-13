@@ -5,6 +5,7 @@ title: vue/no-unused-refs
 description: disallow unused refs
 since: v7.9.0
 ---
+
 # vue/no-unused-refs
 
 > disallow unused refs

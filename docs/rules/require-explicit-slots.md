@@ -5,6 +5,7 @@ title: vue/require-explicit-slots
 description: require slots to be explicitly defined
 since: v9.21.0
 ---
+
 # vue/require-explicit-slots
 
 > require slots to be explicitly defined

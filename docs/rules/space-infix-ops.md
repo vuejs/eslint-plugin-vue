@@ -5,6 +5,7 @@ title: vue/space-infix-ops
 description: Require spacing around infix operators in `<template>`
 since: v5.2.0
 ---
+
 # vue/space-infix-ops
 
 > Require spacing around infix operators in `<template>`

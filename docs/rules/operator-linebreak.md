@@ -5,6 +5,7 @@ title: vue/operator-linebreak
 description: Enforce consistent linebreak style for operators in `<template>`
 since: v7.0.0
 ---
+
 # vue/operator-linebreak
 
 > Enforce consistent linebreak style for operators in `<template>`

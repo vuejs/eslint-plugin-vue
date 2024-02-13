@@ -5,6 +5,7 @@ title: vue/no-deprecated-events-api
 description: disallow using deprecated events api (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-events-api
 
 > disallow using deprecated events api (in Vue.js 3.0.0+)

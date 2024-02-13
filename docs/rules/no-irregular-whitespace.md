@@ -5,6 +5,7 @@ title: vue/no-irregular-whitespace
 description: disallow irregular whitespace in `.vue` files
 since: v6.1.0
 ---
+
 # vue/no-irregular-whitespace
 
 > disallow irregular whitespace in `.vue` files

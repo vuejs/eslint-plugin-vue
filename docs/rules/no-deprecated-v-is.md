@@ -5,6 +5,7 @@ title: vue/no-deprecated-v-is
 description: disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
 since: v7.11.0
 ---
+
 # vue/no-deprecated-v-is
 
 > disallow deprecated `v-is` directive (in Vue.js 3.1.0+)

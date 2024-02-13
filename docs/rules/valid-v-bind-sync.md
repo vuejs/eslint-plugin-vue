@@ -5,6 +5,7 @@ title: vue/valid-v-bind-sync
 description: enforce valid `.sync` modifier on `v-bind` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-bind-sync
 
 > enforce valid `.sync` modifier on `v-bind` directives

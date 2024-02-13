@@ -5,6 +5,7 @@ title: vue/prefer-import-from-vue
 description: enforce import from 'vue' instead of import from '@vue/*'
 since: v8.5.0
 ---
+
 # vue/prefer-import-from-vue
 
 > enforce import from 'vue' instead of import from '@vue/*'

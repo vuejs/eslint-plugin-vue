@@ -5,6 +5,7 @@ title: vue/no-child-content
 description: disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`
 since: v8.1.0
 ---
+
 # vue/no-child-content
 
 > disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text`

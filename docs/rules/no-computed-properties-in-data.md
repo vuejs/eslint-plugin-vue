@@ -5,6 +5,7 @@ title: vue/no-computed-properties-in-data
 description: disallow accessing computed properties in `data`.
 since: v7.20.0
 ---
+
 # vue/no-computed-properties-in-data
 
 > disallow accessing computed properties in `data`.

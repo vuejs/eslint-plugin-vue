@@ -5,6 +5,7 @@ title: vue/valid-v-show
 description: enforce valid `v-show` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-show
 
 > enforce valid `v-show` directives

@@ -5,6 +5,7 @@ title: vue/require-macro-variable-name
 description: require a certain macro variable name
 since: v9.15.0
 ---
+
 # vue/require-macro-variable-name
 
 > require a certain macro variable name

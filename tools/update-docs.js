@@ -70,7 +70,7 @@ class DocFile {
     }
     const computed = `---\n${Object.entries(fileIntro)
       .map((item) => `${item[0]}: ${item[1]}`)
-      .join('\n')}\n---\n`
+      .join('\n')}\n---\n\n`
 
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 

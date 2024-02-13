@@ -5,6 +5,7 @@ title: vue/no-deprecated-props-default-this
 description: disallow deprecated `this` access in props default function (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-props-default-this
 
 > disallow deprecated `this` access in props default function (in Vue.js 3.0.0+)

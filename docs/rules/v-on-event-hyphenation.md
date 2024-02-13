@@ -5,6 +5,7 @@ title: vue/v-on-event-hyphenation
 description: enforce v-on event naming style on custom components in template
 since: v7.4.0
 ---
+
 # vue/v-on-event-hyphenation
 
 > enforce v-on event naming style on custom components in template

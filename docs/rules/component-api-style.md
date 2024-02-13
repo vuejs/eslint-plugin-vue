@@ -5,6 +5,7 @@ title: vue/component-api-style
 description: enforce component API style
 since: v7.18.0
 ---
+
 # vue/component-api-style
 
 > enforce component API style

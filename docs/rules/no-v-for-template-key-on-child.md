@@ -5,6 +5,7 @@ title: vue/no-v-for-template-key-on-child
 description: disallow key of `<template v-for>` placed on child elements
 since: v7.0.0
 ---
+
 # vue/no-v-for-template-key-on-child
 
 > disallow key of `<template v-for>` placed on child elements

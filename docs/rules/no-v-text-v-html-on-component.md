@@ -5,6 +5,7 @@ title: vue/no-v-text-v-html-on-component
 description: disallow v-text / v-html on component
 since: v8.4.0
 ---
+
 # vue/no-v-text-v-html-on-component
 
 > disallow v-text / v-html on component

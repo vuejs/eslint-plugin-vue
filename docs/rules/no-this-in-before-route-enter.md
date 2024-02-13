@@ -5,6 +5,7 @@ title: vue/no-this-in-before-route-enter
 description: disallow `this` usage in a `beforeRouteEnter` method
 since: v7.11.0
 ---
+
 # vue/no-this-in-before-route-enter
 
 > disallow `this` usage in a `beforeRouteEnter` method

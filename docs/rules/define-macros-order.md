@@ -5,6 +5,7 @@ title: vue/define-macros-order
 description: enforce order of `defineEmits` and `defineProps` compiler macros
 since: v8.7.0
 ---
+
 # vue/define-macros-order
 
 > enforce order of `defineEmits` and `defineProps` compiler macros

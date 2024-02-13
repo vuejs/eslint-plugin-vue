@@ -5,6 +5,7 @@ title: vue/no-restricted-component-names
 description: disallow specific component names
 since: v9.15.0
 ---
+
 # vue/no-restricted-component-names
 
 > disallow specific component names

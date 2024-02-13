@@ -5,6 +5,7 @@ title: vue/require-prop-type-constructor
 description: require prop type to be a constructor
 since: v5.0.0
 ---
+
 # vue/require-prop-type-constructor
 
 > require prop type to be a constructor

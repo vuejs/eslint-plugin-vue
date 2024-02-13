@@ -5,6 +5,7 @@ title: vue/comma-style
 description: Enforce consistent comma style in `<template>`
 since: v7.0.0
 ---
+
 # vue/comma-style
 
 > Enforce consistent comma style in `<template>`

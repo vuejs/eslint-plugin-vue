@@ -5,6 +5,7 @@ title: vue/v-slot-style
 description: enforce `v-slot` directive style
 since: v6.0.0
 ---
+
 # vue/v-slot-style
 
 > enforce `v-slot` directive style

@@ -5,6 +5,7 @@ title: vue/no-undef-components
 description: disallow use of undefined components in `<template>`
 since: v8.4.0
 ---
+
 # vue/no-undef-components
 
 > disallow use of undefined components in `<template>`

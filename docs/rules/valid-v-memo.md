@@ -5,6 +5,7 @@ title: vue/valid-v-memo
 description: enforce valid `v-memo` directives
 since: v7.16.0
 ---
+
 # vue/valid-v-memo
 
 > enforce valid `v-memo` directives

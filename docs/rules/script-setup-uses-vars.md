@@ -5,6 +5,7 @@ title: vue/script-setup-uses-vars
 description: prevent `<script setup>` variables used in `<template>` to be marked as unused
 since: v7.13.0
 ---
+
 # vue/script-setup-uses-vars
 
 > prevent `<script setup>` variables used in `<template>` to be marked as unused

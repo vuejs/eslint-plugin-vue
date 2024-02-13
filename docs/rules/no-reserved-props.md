@@ -5,6 +5,7 @@ title: vue/no-reserved-props
 description: disallow reserved names in props
 since: v8.0.0
 ---
+
 # vue/no-reserved-props
 
 > disallow reserved names in props

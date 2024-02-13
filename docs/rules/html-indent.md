@@ -5,6 +5,7 @@ title: vue/html-indent
 description: enforce consistent indentation in `<template>`
 since: v3.14.0
 ---
+
 # vue/html-indent
 
 > enforce consistent indentation in `<template>`

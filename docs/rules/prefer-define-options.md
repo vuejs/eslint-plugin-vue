@@ -5,6 +5,7 @@ title: vue/prefer-define-options
 description: enforce use of `defineOptions` instead of default export.
 since: v9.13.0
 ---
+
 # vue/prefer-define-options
 
 > enforce use of `defineOptions` instead of default export.

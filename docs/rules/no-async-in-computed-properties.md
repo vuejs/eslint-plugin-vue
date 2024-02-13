@@ -5,6 +5,7 @@ title: vue/no-async-in-computed-properties
 description: disallow asynchronous actions in computed properties
 since: v3.8.0
 ---
+
 # vue/no-async-in-computed-properties
 
 > disallow asynchronous actions in computed properties
