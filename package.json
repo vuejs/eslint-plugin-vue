@@ -90,7 +90,7 @@
     "markdownlint-cli": "^0.39.0",
     "mocha": "^10.3.0",
     "nyc": "^15.1.0",
-    "prettier": "^3.0.0",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.2",
     "vitepress": "^1.0.0-rc.31"
   }
