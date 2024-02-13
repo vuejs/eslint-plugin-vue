@@ -1,10 +1,10 @@
 <template>
-    <b></b>
+  <b></b>
 </template>
 
 <script>
-import B from "./b.vue"
+import B from './b.vue'
 export default {
-    components: {B}
+  components: { B }
 }
 </script>
