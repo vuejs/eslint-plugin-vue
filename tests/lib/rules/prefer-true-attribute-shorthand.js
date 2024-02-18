@@ -264,12 +264,14 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           column: 17,
           suggestions: [
             {
+              messageId: 'rewriteIntoLongVueProp',
               output: `
       <template>
         <MyComp :show="true" />
       </template>`
             },
             {
+              messageId: 'rewriteIntoLongHtmlAttr',
               output: `
       <template>
         <MyComp show="show" />

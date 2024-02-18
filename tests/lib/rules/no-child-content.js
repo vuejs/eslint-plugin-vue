@@ -77,7 +77,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 32,
           suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-html="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -93,7 +96,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 38,
           suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-html="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -109,7 +115,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 37,
           suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-html="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -125,7 +134,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 41,
           suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-html="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -152,6 +164,7 @@ ruleTester.run('no-child-content', rule, {
           endColumn: 11,
           suggestions: [
             {
+              messageId: 'removeChildContent',
               output: `
         <template>
           <div v-html="foo"></div>
@@ -173,7 +186,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 32,
           suggestions: [
-            { output: '<template><div v-text="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-text="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -190,7 +206,10 @@ ruleTester.run('no-child-content', rule, {
           column: 26,
           endColumn: 29,
           suggestions: [
-            { output: '<template><div v-t="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-t="foo"></div></template>'
+            }
           ]
         }
       ]
@@ -207,7 +226,10 @@ ruleTester.run('no-child-content', rule, {
           column: 29,
           endColumn: 32,
           suggestions: [
-            { output: '<template><div v-html="foo"></div></template>' }
+            {
+              messageId: 'removeChildContent',
+              output: '<template><div v-html="foo"></div></template>'
+            }
           ]
         }
       ]
