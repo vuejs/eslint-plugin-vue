@@ -335,7 +335,12 @@ tester.run('no-deprecated-slot-attribute', rule, {
           <a slot="name" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot:name>\n<a  />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot` attributes are deprecated.',
@@ -350,7 +355,12 @@ tester.run('no-deprecated-slot-attribute', rule, {
           <a :slot="name" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot:[name]>\n<a  />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot` attributes are deprecated.',
@@ -616,7 +626,17 @@ tester.run('no-deprecated-slot-attribute', rule, {
           </two>
         </my-component>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+          <template v-slot:two>\n<two >
+            B
+          </two>\n</template>
+        </my-component>
+      </template>`,
       options: [
         {
           ignore: ['one']

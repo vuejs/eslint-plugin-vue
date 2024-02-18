@@ -90,7 +90,6 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
         }
       ]
     },
-    // cannot fix
     {
       code: `
       <template>
@@ -98,7 +97,12 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
           <a slot-scope="{a}" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot="{a}">\n<a />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot-scope` are deprecated.',
