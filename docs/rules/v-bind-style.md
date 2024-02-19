@@ -5,6 +5,7 @@ title: vue/v-bind-style
 description: enforce `v-bind` directive style
 since: v3.0.0
 ---
+
 # vue/v-bind-style
 
 > enforce `v-bind` directive style
@@ -21,10 +22,10 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div :foo="bar"/>
+  <div :foo="bar" />
 
   <!-- ✗ BAD -->
-  <div v-bind:foo="bar"/>
+  <div v-bind:foo="bar" />
 </template>
 ```
 
@@ -54,10 +55,10 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind:foo="bar"/>
+  <div v-bind:foo="bar" />
 
   <!-- ✗ BAD -->
-  <div :foo="bar"/>
+  <div :foo="bar" />
 </template>
 ```
 

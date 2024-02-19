@@ -5,6 +5,7 @@ title: vue/no-restricted-component-names
 description: disallow specific component names
 since: v9.15.0
 ---
+
 # vue/no-restricted-component-names
 
 > disallow specific component names
@@ -52,23 +53,23 @@ This rule takes a list of strings, where each string is a component name or patt
 ```
 
 Alternatively, you can specify an object with a `name` property and an optional `message` and `suggest` property:
-  
+
 ```json
-  {
-    "vue/no-restricted-component-names": [
-      "error",
-      {
-        "name": "Disallow",
-        "message": "Please do not use `Disallow` as a component name",
-        "suggest": "allow"
-      },
-      {
-        "name": "/^custom/",
-        "message": "Please do not use component names starting with 'custom'"
-      }
-    ]
-  }
-  ```
+{
+  "vue/no-restricted-component-names": [
+    "error",
+    {
+      "name": "Disallow",
+      "message": "Please do not use `Disallow` as a component name",
+      "suggest": "allow"
+    },
+    {
+      "name": "/^custom/",
+      "message": "Please do not use component names starting with 'custom'"
+    }
+  ]
+}
+```
 
 <eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', { name: 'Disallow', message: 'Please do not use \'Disallow\' as a component name', suggest: 'allow'}]}">
 

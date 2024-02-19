@@ -383,7 +383,17 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'skipped',
           data: { name: 'foo' },
-          line: 3
+          line: 3,
+          suggestions: [
+            {
+              messageId: 'emptyValidation',
+              output: `
+      <script setup>
+      const emit = defineEmits({foo:() => true})
+      </script>
+      `
+            }
+          ]
         }
       ],
       languageOptions: {

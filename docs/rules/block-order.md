@@ -5,6 +5,7 @@ title: vue/block-order
 description: enforce order of component top-level elements
 since: v9.16.0
 ---
+
 # vue/block-order
 
 > enforce order of component top-level elements

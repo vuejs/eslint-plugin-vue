@@ -5,6 +5,7 @@ title: vue/custom-event-name-casing
 description: enforce specific casing for custom event name
 since: v7.0.0
 ---
+
 # vue/custom-event-name-casing
 
 > enforce specific casing for custom event name
@@ -42,7 +43,7 @@ This rule enforces camelCase by default.
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('myEvent')
       this.$emit('update:myProp', myProp)
@@ -89,7 +90,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('my-event')
 
@@ -118,7 +119,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('myEvent')
 
@@ -148,7 +149,7 @@ export default {
 <script>
 export default {
   methods: {
-    onClick () {
+    onClick() {
       /* ✓ GOOD */
       this.$emit('click:row')
       this.$emit('foo-bar')

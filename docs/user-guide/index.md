@@ -215,7 +215,7 @@ Go into `Settings -> Packages -> linter-eslint`, under the option "List of scope
 ### IntelliJ IDEA / JetBrains WebStorm
 
 In the **Settings/Preferences** dialog (`Cmd+,`/`Ctrl+Alt+S`), choose JavaScript under **Languages and Frameworks** and then choose **ESLint** under **Code Quality Tools**.
-On the **ESLint page** that opens, select the *Enable* checkbox.
+On the **ESLint page** that opens, select the _Enable_ checkbox.
 
 If your ESLint configuration is updated (manually or from your version control), open it in the editor and choose **Apply ESLint Code Style Rules** in the context menu.
 
@@ -277,7 +277,7 @@ module.exports = {
     // ...
     'plugin:vue/vue3-recommended',
     // ...
-    "prettier"
+    'prettier'
     // Make sure "prettier" is the last element in this list.
   ],
   // ...

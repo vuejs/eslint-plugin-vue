@@ -5,6 +5,7 @@ title: vue/require-typed-object-prop
 description: enforce adding type declarations to object props
 since: v9.16.0
 ---
+
 # vue/require-typed-object-prop
 
 > enforce adding type declarations to object props
@@ -24,7 +25,7 @@ export default {
     // ✗ BAD
     bad1: Object,
     bad2: { type: Array },
-      
+
     // ✓ GOOD
     good1: Object as PropType<Anything>,
     good2: { type: Array as PropType<Anything[]> },

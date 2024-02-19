@@ -5,6 +5,7 @@ title: vue/no-deprecated-dollar-scopedslots-api
 description: disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-dollar-scopedslots-api
 
 > disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+)

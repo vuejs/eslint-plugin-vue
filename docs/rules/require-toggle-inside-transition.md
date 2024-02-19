@@ -5,6 +5,7 @@ title: vue/require-toggle-inside-transition
 description: require control the display of the content inside `<transition>`
 since: v7.0.0
 ---
+
 # vue/require-toggle-inside-transition
 
 > require control the display of the content inside `<transition>`

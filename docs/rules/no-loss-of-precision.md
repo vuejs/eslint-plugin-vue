@@ -5,6 +5,7 @@ title: vue/no-loss-of-precision
 description: Disallow literal numbers that lose precision in `<template>`
 since: v8.0.0
 ---
+
 # vue/no-loss-of-precision
 
 > Disallow literal numbers that lose precision in `<template>`

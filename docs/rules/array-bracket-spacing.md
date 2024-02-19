@@ -5,6 +5,7 @@ title: vue/array-bracket-spacing
 description: Enforce consistent spacing inside array brackets in `<template>`
 since: v5.2.0
 ---
+
 # vue/array-bracket-spacing
 
 > Enforce consistent spacing inside array brackets in `<template>`

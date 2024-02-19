@@ -5,6 +5,7 @@ title: vue/no-restricted-component-options
 description: disallow specific component option
 since: v7.0.0
 ---
+
 # vue/no-restricted-component-options
 
 > disallow specific component option

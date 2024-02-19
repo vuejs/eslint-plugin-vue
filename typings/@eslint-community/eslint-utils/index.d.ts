@@ -44,25 +44,19 @@ export class ReferenceTracker {
     }
   )
 
-  iterateGlobalReferences(
-    traceMap: TYPES.TraceMap
-  ): IterableIterator<{
+  iterateGlobalReferences(traceMap: TYPES.TraceMap): IterableIterator<{
     node: VAST.ESNode
     path: string[]
     type: symbol
     info: any
   }>
-  iterateCjsReferences(
-    traceMap: TYPES.TraceMap
-  ): IterableIterator<{
+  iterateCjsReferences(traceMap: TYPES.TraceMap): IterableIterator<{
     node: VAST.ESNode
     path: string[]
     type: symbol
     info: any
   }>
-  iterateEsmReferences(
-    traceMap: TYPES.TraceMap
-  ): IterableIterator<{
+  iterateEsmReferences(traceMap: TYPES.TraceMap): IterableIterator<{
     node: VAST.ESNode
     path: string[]
     type: symbol

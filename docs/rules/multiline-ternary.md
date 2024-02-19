@@ -5,6 +5,7 @@ title: vue/multiline-ternary
 description: Enforce newlines between operands of ternary expressions in `<template>`
 since: v9.7.0
 ---
+
 # vue/multiline-ternary
 
 > Enforce newlines between operands of ternary expressions in `<template>`

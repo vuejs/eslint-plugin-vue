@@ -5,6 +5,7 @@ title: vue/no-constant-condition
 description: Disallow constant expressions in conditions in `<template>`
 since: v7.5.0
 ---
+
 # vue/no-constant-condition
 
 > Disallow constant expressions in conditions in `<template>`

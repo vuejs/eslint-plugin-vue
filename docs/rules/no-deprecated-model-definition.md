@@ -5,6 +5,7 @@ title: vue/no-deprecated-model-definition
 description: disallow deprecated `model` definition (in Vue.js 3.0.0+)
 since: v9.16.0
 ---
+
 # vue/no-deprecated-model-definition
 
 > disallow deprecated `model` definition (in Vue.js 3.0.0+)

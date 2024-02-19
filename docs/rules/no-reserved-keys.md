@@ -5,6 +5,7 @@ title: vue/no-reserved-keys
 description: disallow overwriting reserved keys
 since: v3.9.0
 ---
+
 # vue/no-reserved-keys
 
 > disallow overwriting reserved keys
@@ -26,14 +27,14 @@ export default {
   },
   computed: {
     $on: {
-      get () {}
+      get() {}
     }
   },
   data: {
     _foo: null
   },
   methods: {
-    $nextTick () {}
+    $nextTick() {}
   }
 }
 </script>
@@ -64,10 +65,10 @@ export default {
 /* ✗ BAD */
 export default {
   computed: {
-    foo () {}
+    foo() {}
   },
   firebase: {
-    foo2 () {}
+    foo2() {}
   }
 }
 </script>

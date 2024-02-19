@@ -5,6 +5,7 @@ title: vue/array-bracket-newline
 description: Enforce linebreaks after opening and before closing array brackets in `<template>`
 since: v7.1.0
 ---
+
 # vue/array-bracket-newline
 
 > Enforce linebreaks after opening and before closing array brackets in `<template>`

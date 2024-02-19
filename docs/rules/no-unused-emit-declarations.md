@@ -5,6 +5,7 @@ title: vue/no-unused-emit-declarations
 description: disallow unused emit declarations
 since: v9.19.0
 ---
+
 # vue/no-unused-emit-declarations
 
 > disallow unused emit declarations
@@ -18,9 +19,9 @@ This rule is aimed at eliminating unused emit declarations.
 ```vue
 <!-- ✗ BAD -->
 <script>
-  export default {
-    emits: ['foo'],
-  }
+export default {
+  emits: ['foo'],
+}
 </script>
 ```
 
@@ -31,14 +32,14 @@ This rule is aimed at eliminating unused emit declarations.
 ```vue
 <!-- ✓ GOOD -->
 <script>
-  export default {
-    emits: ['foo'],
-    methods: {
-      foo() {
-        this.$emit('foo')
-      },
+export default {
+  emits: ['foo'],
+  methods: {
+    foo() {
+      this.$emit('foo')
     },
-  }
+  },
+}
 </script>
 ```
 

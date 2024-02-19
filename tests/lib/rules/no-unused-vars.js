@@ -123,7 +123,18 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="(a, _i) in foo" ></div></template>',
       options: [{ ignorePattern: '^_' }],
-      errors: ["'a' is defined but never used."]
+      errors: [
+        {
+          message: "'a' is defined but never used.",
+          suggestions: [
+            {
+              messageId: 'replaceWithUnderscore',
+              output:
+                '<template><div v-for="(_a, _i) in foo" ></div></template>'
+            }
+          ]
+        }
+      ]
     },
     {
       code: '<template><my-component v-slot="a" >{{d}}</my-component></template>',

@@ -5,6 +5,7 @@ title: vue/valid-v-show
 description: enforce valid `v-show` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-show
 
 > enforce valid `v-show` directives
@@ -27,12 +28,12 @@ This rule reports `v-show` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-show="foo"/>
+  <div v-show="foo" />
 
   <!-- ✗ BAD -->
-  <div v-show/>
-  <div v-show:aaa="foo"/>
-  <div v-show.bbb="foo"/>
+  <div v-show />
+  <div v-show:aaa="foo" />
+  <div v-show.bbb="foo" />
   <template v-show="condition" />
 </template>
 ```

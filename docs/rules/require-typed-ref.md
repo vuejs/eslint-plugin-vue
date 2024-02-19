@@ -5,6 +5,7 @@ title: vue/require-typed-ref
 description: require `ref` and `shallowRef` functions to be strongly typed
 since: v9.15.0
 ---
+
 # vue/require-typed-ref
 
 > require `ref` and `shallowRef` functions to be strongly typed

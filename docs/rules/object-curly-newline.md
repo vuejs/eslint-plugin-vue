@@ -5,6 +5,7 @@ title: vue/object-curly-newline
 description: Enforce consistent line breaks after opening and before closing braces in `<template>`
 since: v7.0.0
 ---
+
 # vue/object-curly-newline
 
 > Enforce consistent line breaks after opening and before closing braces in `<template>`

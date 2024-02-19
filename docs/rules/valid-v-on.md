@@ -5,6 +5,7 @@ title: vue/valid-v-on
 description: enforce valid `v-on` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-on
 
 > enforce valid `v-on` directives
@@ -26,18 +27,18 @@ This rule reports `v-on` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-on="foo"/>
-  <div v-on:click="foo"/>
-  <div @click="foo"/>
-  <div @click.left="foo"/>
-  <div @click.prevent/>
-  <div @click.stop/>
+  <div v-on="foo" />
+  <div v-on:click="foo" />
+  <div @click="foo" />
+  <div @click.left="foo" />
+  <div @click.prevent />
+  <div @click.stop />
 
   <!-- ✗ BAD -->
-  <div v-on/>
-  <div v-on:click/>
-  <div v-on:click.aaa="foo"/>
-  <div @click/>
+  <div v-on />
+  <div v-on:click />
+  <div v-on:click.aaa="foo" />
+  <div @click />
 </template>
 ```
 
@@ -67,8 +68,8 @@ This rule has an object option:
 
 ```vue
 <template>
-  <div @click.foo="foo"/>
-  <div v-on:click.foo="foo"/>
+  <div @click.foo="foo" />
+  <div v-on:click.foo="foo" />
 </template>
 ```
 

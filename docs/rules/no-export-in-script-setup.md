@@ -5,6 +5,7 @@ title: vue/no-export-in-script-setup
 description: disallow `export` in `<script setup>`
 since: v7.13.0
 ---
+
 # vue/no-export-in-script-setup
 
 > disallow `export` in `<script setup>`

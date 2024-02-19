@@ -5,6 +5,7 @@ title: vue/sort-keys
 description: enforce sort-keys in a manner that is compatible with order-in-components
 since: v6.2.0
 ---
+
 # vue/sort-keys
 
 > enforce sort-keys in a manner that is compatible with order-in-components

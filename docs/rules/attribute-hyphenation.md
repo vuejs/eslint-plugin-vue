@@ -5,6 +5,7 @@ title: vue/attribute-hyphenation
 description: enforce attribute naming style on custom components in template
 since: v3.9.0
 ---
+
 # vue/attribute-hyphenation
 
 > enforce attribute naming style on custom components in template

@@ -284,6 +284,7 @@ expose: ["foo", "bar"],
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -329,6 +330,7 @@ expose: ["x", "foo", "bar"],
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -353,6 +355,7 @@ expose: []
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',

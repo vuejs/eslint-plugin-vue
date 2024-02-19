@@ -5,9 +5,10 @@ title: vue/no-template-target-blank
 description: disallow target="_blank" attribute without rel="noopener noreferrer"
 since: v7.0.0
 ---
+
 # vue/no-template-target-blank
 
-> disallow target="_blank" attribute without rel="noopener noreferrer"
+> disallow target="\_blank" attribute without rel="noopener noreferrer"
 
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 

@@ -5,6 +5,7 @@ title: vue/no-useless-template-attributes
 description: disallow useless attribute on `<template>`
 since: v7.19.0
 ---
+
 # vue/no-useless-template-attributes
 
 > disallow useless attribute on `<template>`

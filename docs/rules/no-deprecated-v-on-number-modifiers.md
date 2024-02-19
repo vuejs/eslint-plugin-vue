@@ -5,6 +5,7 @@ title: vue/no-deprecated-v-on-number-modifiers
 description: disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-v-on-number-modifiers
 
 > disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+)

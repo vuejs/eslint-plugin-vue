@@ -5,6 +5,7 @@ title: vue/eqeqeq
 description: Require the use of `===` and `!==` in `<template>`
 since: v5.2.0
 ---
+
 # vue/eqeqeq
 
 > Require the use of `===` and `!==` in `<template>`

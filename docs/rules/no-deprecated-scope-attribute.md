@@ -5,6 +5,7 @@ title: vue/no-deprecated-scope-attribute
 description: disallow deprecated `scope` attribute (in Vue.js 2.5.0+)
 since: v6.0.0
 ---
+
 # vue/no-deprecated-scope-attribute
 
 > disallow deprecated `scope` attribute (in Vue.js 2.5.0+)

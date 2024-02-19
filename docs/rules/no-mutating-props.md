@@ -5,6 +5,7 @@ title: vue/no-mutating-props
 description: disallow mutation of component props
 since: v7.0.0
 ---
+
 # vue/no-mutating-props
 
 > disallow mutation of component props
@@ -27,33 +28,33 @@ This rule reports mutation of component props.
   </div>
 </template>
 <script>
-  export default {
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-      list: {
-        type: Array,
-        required: true
-      },
-      user: {
-        type: Object,
-        required: true
-      }
+export default {
+  props: {
+    value: {
+      type: String,
+      required: true
     },
-    methods: {
-      openModal() {
-        this.value = 'test'
-      },
-      pushItem() {
-        this.list.push(0)
-      },
-      changeId() {
-        this.user.id = 1
-      }
+    list: {
+      type: Array,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    openModal() {
+      this.value = 'test'
+    },
+    pushItem() {
+      this.list.push(0)
+    },
+    changeId() {
+      this.user.id = 1
     }
   }
+}
 </script>
 ```
 
@@ -71,33 +72,33 @@ This rule reports mutation of component props.
   </div>
 </template>
 <script>
-  export default {
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-      list: {
-        type: Array,
-        required: true
-      },
-      user: {
-        type: Object,
-        required: true
-      }
+export default {
+  props: {
+    value: {
+      type: String,
+      required: true
     },
-    methods: {
-      openModal() {
-        this.$emit('input', 'test')
-      },
-      pushItem() {
-        this.$emit('push', 0)
-      },
-      changeId() {
-        this.$emit('change-id', 1)
-      }
+    list: {
+      type: Array,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    openModal() {
+      this.$emit('input', 'test')
+    },
+    pushItem() {
+      this.$emit('push', 0)
+    },
+    changeId() {
+      this.$emit('change-id', 1)
     }
   }
+}
 </script>
 ```
 
@@ -107,12 +108,12 @@ This rule reports mutation of component props.
 
 ```vue
 <script>
-  export default {
-    setup (props) {
-      // ✗ BAD
-      props.value = 'test'
-    }
+export default {
+  setup(props) {
+    // ✗ BAD
+    props.value = 'test'
   }
+}
 </script>
 ```
 

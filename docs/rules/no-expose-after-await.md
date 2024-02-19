@@ -5,6 +5,7 @@ title: vue/no-expose-after-await
 description: disallow asynchronously registered `expose`
 since: v8.1.0
 ---
+
 # vue/no-expose-after-await
 
 > disallow asynchronously registered `expose`

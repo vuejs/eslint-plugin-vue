@@ -5,6 +5,7 @@ title: vue/next-tick-style
 description: enforce Promise or callback style in `nextTick`
 since: v7.5.0
 ---
+
 # vue/next-tick-style
 
 > enforce Promise or callback style in `nextTick`

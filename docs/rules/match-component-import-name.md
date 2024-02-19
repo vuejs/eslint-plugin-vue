@@ -5,6 +5,7 @@ title: vue/match-component-import-name
 description: require the registered component name to match the imported component name
 since: v8.7.0
 ---
+
 # vue/match-component-import-name
 
 > require the registered component name to match the imported component name

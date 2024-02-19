@@ -5,6 +5,7 @@ title: vue/no-setup-props-destructure
 description: disallow usages that lose the reactivity of `props` passed to `setup`
 since: v7.0.0
 ---
+
 # vue/no-setup-props-destructure
 
 > disallow usages that lose the reactivity of `props` passed to `setup`

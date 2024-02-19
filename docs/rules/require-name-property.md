@@ -5,6 +5,7 @@ title: vue/require-name-property
 description: require a name property in Vue components
 since: v6.1.0
 ---
+
 # vue/require-name-property
 
 > require a name property in Vue components
@@ -33,8 +34,7 @@ export default {
 ```vue
 <script>
 /* ✗ BAD */
-export default {
-}
+export default {}
 </script>
 ```
 

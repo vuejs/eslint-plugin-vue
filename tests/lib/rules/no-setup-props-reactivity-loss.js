@@ -119,6 +119,28 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       <script>
       export default {
         setup(props) {
+          watch(
+            () => props.count,
+            () => {
+              const test = props.count ? true : false
+              console.log(test)
+            }
+          )
+
+          return () => {
+            return h('div', props.count ? true : false)
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(props) {
           const {x} = noProps
           ({y} = noProps)
           const z = noProps.z
@@ -678,6 +700,21 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         {
           messageId: 'getProperty',
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const buildCounter = props.count ? 1 : undefined
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
         }
       ]
     }

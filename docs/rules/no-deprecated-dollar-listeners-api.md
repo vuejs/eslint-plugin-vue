@@ -5,6 +5,7 @@ title: vue/no-deprecated-dollar-listeners-api
 description: disallow using deprecated `$listeners` (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-dollar-listeners-api
 
 > disallow using deprecated `$listeners` (in Vue.js 3.0.0+)

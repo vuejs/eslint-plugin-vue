@@ -5,6 +5,7 @@ title: vue/valid-v-else
 description: enforce valid `v-else` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-else
 
 > enforce valid `v-else` directives
@@ -28,14 +29,14 @@ This rule reports `v-else` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-if="foo"/>
-  <div v-else/>
+  <div v-if="foo" />
+  <div v-else />
 
   <!-- ✗ BAD -->
-  <div v-else/>
-  <div v-if="x"/><div v-else="foo"/>
-  <div v-if="x"/><div v-else:aaa/>
-  <div v-if="x"/><div v-else.bbb/>
+  <div v-else />
+  <div v-if="x" /><div v-else="foo" />
+  <div v-if="x" /><div v-else:aaa />
+  <div v-if="x" /><div v-else.bbb />
 </template>
 ```
 

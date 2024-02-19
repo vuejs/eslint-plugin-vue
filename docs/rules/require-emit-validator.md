@@ -5,6 +5,7 @@ title: vue/require-emit-validator
 description: require type definitions in emits
 since: v7.10.0
 ---
+
 # vue/require-emit-validator
 
 > require type definitions in emits

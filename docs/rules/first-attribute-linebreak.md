@@ -5,6 +5,7 @@ title: vue/first-attribute-linebreak
 description: enforce the location of first attribute
 since: v8.0.0
 ---
+
 # vue/first-attribute-linebreak
 
 > enforce the location of first attribute

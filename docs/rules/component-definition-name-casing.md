@@ -5,6 +5,7 @@ title: vue/component-definition-name-casing
 description: enforce specific casing for component definition name
 since: v7.0.0
 ---
+
 # vue/component-definition-name-casing
 
 > enforce specific casing for component definition name
@@ -63,14 +64,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 
 /* ✗ BAD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 ```
 
 </eslint-code-block>
@@ -107,14 +104,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 
 /* ✗ BAD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 ```
 
 </eslint-code-block>

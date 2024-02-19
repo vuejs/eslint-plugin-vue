@@ -1727,8 +1727,86 @@ emits: {'foo': null}
       </script>
       `,
       errors: [
-        'The "foo" event has been triggered but not declared on `emits` option.',
-        'The "bar" event has been triggered but not declared on `emits` option.'
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
       ]
     },
     {
@@ -1744,8 +1822,74 @@ emits: {'foo': null}
       </script>
       `,
       errors: [
-        'The "foo" event has been triggered but not declared on `emits` option.',
-        'The "bar" event has been triggered but not declared on `emits` option.'
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
       ]
     },
     // allowProps
@@ -1771,15 +1915,141 @@ emits: {'foo': null}
       errors: [
         {
           line: 3,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         },
         {
           line: 9,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         },
         {
           line: 12,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         }
       ]
     },

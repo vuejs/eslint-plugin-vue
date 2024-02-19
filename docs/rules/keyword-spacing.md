@@ -5,6 +5,7 @@ title: vue/keyword-spacing
 description: Enforce consistent spacing before and after keywords in `<template>`
 since: v6.0.0
 ---
+
 # vue/keyword-spacing
 
 > Enforce consistent spacing before and after keywords in `<template>`

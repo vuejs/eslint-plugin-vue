@@ -5,6 +5,7 @@ title: vue/prefer-true-attribute-shorthand
 description: require shorthand form attribute when `v-bind` value is `true`
 since: v8.5.0
 ---
+
 # vue/prefer-true-attribute-shorthand
 
 > require shorthand form attribute when `v-bind` value is `true`

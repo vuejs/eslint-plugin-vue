@@ -5,6 +5,7 @@ title: vue/valid-v-bind-sync
 description: enforce valid `.sync` modifier on `v-bind` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-bind-sync
 
 > enforce valid `.sync` modifier on `v-bind` directives
@@ -27,12 +28,12 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-bind:aaa.sync="foo"/>
-  <MyComponent :aaa.sync="foo"/>
+  <MyComponent v-bind:aaa.sync="foo" />
+  <MyComponent :aaa.sync="foo" />
 
   <div v-for="todo in todos">
-    <MyComponent v-bind:aaa.sync="todo.name"/>
-    <MyComponent :aaa.sync="todo.name"/>
+    <MyComponent v-bind:aaa.sync="todo.name" />
+    <MyComponent :aaa.sync="todo.name" />
   </div>
 
   <!-- ✗ BAD -->
@@ -42,8 +43,8 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
   <MyComponent :aaa.sync="a?.b.c" />
   <MyComponent :aaa.sync="(a?.b).c" />
 
-  <input v-bind:aaa.sync="foo">
-  <input :aaa.sync="foo">
+  <input v-bind:aaa.sync="foo" />
+  <input :aaa.sync="foo" />
 
   <div v-for="todo in todos">
     <MyComponent v-bind:aaa.sync="todo" />

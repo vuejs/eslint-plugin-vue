@@ -5,6 +5,7 @@ title: vue/func-call-spacing
 description: Require or disallow spacing between function identifiers and their invocations in `<template>`
 since: v7.0.0
 ---
+
 # vue/func-call-spacing
 
 > Require or disallow spacing between function identifiers and their invocations in `<template>`

@@ -5,6 +5,7 @@ title: vue/script-setup-uses-vars
 description: prevent `<script setup>` variables used in `<template>` to be marked as unused
 since: v7.13.0
 ---
+
 # vue/script-setup-uses-vars
 
 > prevent `<script setup>` variables used in `<template>` to be marked as unused
@@ -30,16 +31,16 @@ Without this rule this code triggers warning:
 
 ```vue
 <script setup>
-  // imported components are also directly usable in template
-  import Foo from './Foo.vue'
-  import { ref } from 'vue'
+// imported components are also directly usable in template
+import Foo from './Foo.vue'
+import { ref } from 'vue'
 
-  // write Composition API code just like in a normal setup()
-  // but no need to manually return everything
-  const count = ref(0)
-  const inc = () => {
-    count.value++
-  }
+// write Composition API code just like in a normal setup()
+// but no need to manually return everything
+const count = ref(0)
+const inc = () => {
+  count.value++
+}
 </script>
 
 <template>

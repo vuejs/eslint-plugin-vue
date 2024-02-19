@@ -5,6 +5,7 @@ title: vue/no-deprecated-v-bind-sync
 description: disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-v-bind-sync
 
 > disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
@@ -23,15 +24,14 @@ See [Migration Guide - `v-model`](https://v3-migration.vuejs.org/breaking-change
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-bind:propName="foo"/>
-  <MyComponent :propName="foo"/>
-
+  <MyComponent v-bind:propName="foo" />
+  <MyComponent :propName="foo" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-bind:propName.sync="foo"/>
-  <MyComponent v-bind:[dynamiArg].sync="foo"/>
-  <MyComponent v-bind.sync="foo"/>
-  <MyComponent :propName.sync="foo"/>
+  <MyComponent v-bind:propName.sync="foo" />
+  <MyComponent v-bind:[dynamiArg].sync="foo" />
+  <MyComponent v-bind.sync="foo" />
+  <MyComponent :propName.sync="foo" />
 </template>
 ```
 

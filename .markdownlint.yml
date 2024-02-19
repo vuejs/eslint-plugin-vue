@@ -15,7 +15,7 @@ code-block-style:
 code-fence-style:
   style: backtick
 emphasis-style:
-  style: asterisk
+  style: underscore
 heading-style:
   style: atx
 hr-style:

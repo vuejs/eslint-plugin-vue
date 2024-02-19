@@ -5,6 +5,7 @@ title: vue/multi-word-component-names
 description: require component names to be always multi-word
 since: v7.20.0
 ---
+
 # vue/multi-word-component-names
 
 > require component names to be always multi-word
@@ -82,7 +83,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✗ BAD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -94,7 +95,7 @@ export default {
 <!-- filename: TodoItem.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -106,7 +107,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 <script>
 export default {
@@ -163,7 +164,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
