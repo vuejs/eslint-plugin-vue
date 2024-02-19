@@ -5,6 +5,7 @@ title: vue/require-valid-default-prop
 description: enforce props default values to be valid
 since: v3.13.0
 ---
+
 # vue/require-valid-default-prop
 
 > enforce props default values to be valid

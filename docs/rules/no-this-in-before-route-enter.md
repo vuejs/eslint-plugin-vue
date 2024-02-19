@@ -5,6 +5,7 @@ title: vue/no-this-in-before-route-enter
 description: disallow `this` usage in a `beforeRouteEnter` method
 since: v7.11.0
 ---
+
 # vue/no-this-in-before-route-enter
 
 > disallow `this` usage in a `beforeRouteEnter` method
@@ -25,7 +26,7 @@ export default {
     if (this.value === 42) {
     }
     this.attribute = this.method();
-  }   
+  }
 }
 </script>
 ```
@@ -40,7 +41,7 @@ export default {
   beforeRouteEnter() {
     /* ✓ GOOD */
     // anything without this
-  }   
+  }
 }
 </script>
 ```

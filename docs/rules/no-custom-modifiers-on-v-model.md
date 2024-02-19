@@ -5,6 +5,7 @@ title: vue/no-custom-modifiers-on-v-model
 description: disallow custom modifiers on v-model used on the component
 since: v7.0.0
 ---
+
 # vue/no-custom-modifiers-on-v-model
 
 > disallow custom modifiers on v-model used on the component
@@ -29,11 +30,9 @@ This rule reports `v-model` directives in the following cases:
   <MyComponent v-model.lazy="foo" />
   <MyComponent v-model.number="foo" />
 
-
   <!-- ✗ BAD -->
   <MyComponent v-model.aaa="foo" />
   <MyComponent v-model.aaa.bbb="foo" />
-
 </template>
 ```
 

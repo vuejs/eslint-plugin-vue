@@ -5,6 +5,7 @@ title: vue/require-explicit-emits
 description: require `emits` option with name triggered by `$emit()`
 since: v7.0.0
 ---
+
 # vue/require-explicit-emits
 
 > require `emits` option with name triggered by `$emit()`
@@ -17,16 +18,16 @@ since: v7.0.0
 This rule reports event triggers not declared with the `emits` option. (The `emits` option is a new in Vue.js 3.0.0+)
 
 Explicit `emits` declaration serves as self-documenting code. This can be useful for other developers to instantly understand what events the component is supposed to emit.
-Also,  with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on components will fallthrough as native listeners by default. Declare it as a component-only event in `emits` to avoid unnecessary registration of native listeners.
+Also, with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on components will fallthrough as native listeners by default. Declare it as a component-only event in `emits` to avoid unnecessary registration of native listeners.
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div @click="$emit('good')"/>
+  <div @click="$emit('good')" />
   <!-- ✗ BAD -->
-  <div @click="$emit('bad')"/>
+  <div @click="$emit('bad')" />
 </template>
 <script>
 export default {
@@ -44,7 +45,7 @@ export default {
 export default {
   emits: ['good'],
   methods: {
-    foo () {
+    foo() {
       // ✓ GOOD
       this.$emit('good')
       // ✗ BAD
@@ -63,7 +64,7 @@ export default {
 <script>
 export default {
   emits: ['good'],
-  setup (props, context) {
+  setup(props, context) {
     // ✓ GOOD
     context.emit('good')
     // ✗ BAD
@@ -96,7 +97,7 @@ export default {
 export default {
   props: ['onGood', 'bad'],
   methods: {
-    foo () {
+    foo() {
       // ✓ GOOD
       this.$emit('good')
       // ✗ BAD

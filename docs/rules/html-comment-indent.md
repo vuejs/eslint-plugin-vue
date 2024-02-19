@@ -5,6 +5,7 @@ title: vue/html-comment-indent
 description: enforce consistent indentation in HTML comments
 since: v7.0.0
 ---
+
 # vue/html-comment-indent
 
 > enforce consistent indentation in HTML comments

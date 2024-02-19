@@ -5,6 +5,7 @@ title: vue/valid-v-is
 description: enforce valid `v-is` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-is
 
 > enforce valid `v-is` directives

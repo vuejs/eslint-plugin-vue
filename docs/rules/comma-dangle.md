@@ -5,6 +5,7 @@ title: vue/comma-dangle
 description: Require or disallow trailing commas in `<template>`
 since: v5.2.0
 ---
+
 # vue/comma-dangle
 
 > Require or disallow trailing commas in `<template>`

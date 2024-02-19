@@ -5,6 +5,7 @@ title: vue/object-curly-spacing
 description: Enforce consistent spacing inside braces in `<template>`
 since: v5.2.0
 ---
+
 # vue/object-curly-spacing
 
 > Enforce consistent spacing inside braces in `<template>`

@@ -5,6 +5,7 @@ title: vue/this-in-template
 description: disallow usage of `this` in template
 since: v3.13.0
 ---
+
 # vue/this-in-template
 
 > disallow usage of `this` in template
@@ -24,7 +25,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="url">
     {{ text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="this.url">
     {{ this.text }}
@@ -55,7 +56,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="this.url">
     {{ this.text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="url">
     {{ text }}

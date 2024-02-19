@@ -5,6 +5,7 @@ title: vue/no-deprecated-events-api
 description: disallow using deprecated events api (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-events-api
 
 > disallow using deprecated events api (in Vue.js 3.0.0+)
@@ -23,8 +24,8 @@ See [Migration Guide - Events API](https://v3-migration.vuejs.org/breaking-chang
 <script>
 /* ✗ BAD */
 export default {
-  mounted () {
-    this.$on('start', function(args) {
+  mounted() {
+    this.$on('start', function (args) {
       console.log('start')
     })
     this.$emit('start')
@@ -43,8 +44,8 @@ export default {
 import mitt from 'mitt'
 const emitter = mitt()
 export default {
-  mounted () {
-    emitter.on('start', function(args) {
+  mounted() {
+    emitter.on('start', function (args) {
       console.log('start')
     })
     emitter.emit('start')

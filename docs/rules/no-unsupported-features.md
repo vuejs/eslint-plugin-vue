@@ -5,6 +5,7 @@ title: vue/no-unsupported-features
 description: disallow unsupported Vue.js syntax on the specified version
 since: v6.1.0
 ---
+
 # vue/no-unsupported-features
 
 > disallow unsupported Vue.js syntax on the specified version
@@ -28,7 +29,7 @@ This rule reports unsupported Vue.js syntax on the specified version.
 
 - `version` ... The `version` option accepts [the valid version range of `node-semver`](https://github.com/npm/node-semver#range-grammar). Set the version of Vue.js you are using. This option is required.
 - `ignores` ... You can use this `ignores` option to ignore the given features.
-The `"ignores"` option accepts an array of the following strings.
+  The `"ignores"` option accepts an array of the following strings.
   - Vue.js 3.4.0+
     - `"define-model"` ... `defineModel()` macro.
     - `"v-bind-same-name-shorthand"` ... `v-bind` same-name shorthand.

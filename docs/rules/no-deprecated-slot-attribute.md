@@ -5,6 +5,7 @@ title: vue/no-deprecated-slot-attribute
 description: disallow deprecated `slot` attribute (in Vue.js 2.6.0+)
 since: v6.1.0
 ---
+
 # vue/no-deprecated-slot-attribute
 
 > disallow deprecated `slot` attribute (in Vue.js 2.6.0+)
@@ -69,7 +70,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
     </my-component>
   </ListComponent>
 
-    <ListComponent>
+  <ListComponent>
     <!-- ✗ BAD -->
     <other-component slot="name">
       {{ props.title }}

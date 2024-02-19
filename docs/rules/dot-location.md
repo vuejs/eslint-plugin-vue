@@ -5,6 +5,7 @@ title: vue/dot-location
 description: Enforce consistent newlines before and after dots in `<template>`
 since: v6.0.0
 ---
+
 # vue/dot-location
 
 > Enforce consistent newlines before and after dots in `<template>`

@@ -5,6 +5,7 @@ title: vue/no-v-text-v-html-on-component
 description: disallow v-text / v-html on component
 since: v8.4.0
 ---
+
 # vue/no-v-text-v-html-on-component
 
 > disallow v-text / v-html on component
@@ -24,7 +25,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <div v-text="content"></div>
   <div v-html="html"></div>
-  <MyComponent>{{content}}</MyComponent>
+  <MyComponent>{{ content }}</MyComponent>
 
   <!-- ✗ BAD -->
   <MyComponent v-text="content"></MyComponent>
@@ -56,7 +57,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <router-link v-html="content" />
   <NuxtLink v-html="content" />
-  
+
   <!-- ✗ BAD -->
   <MyComponent v-html="content" />
 </template>

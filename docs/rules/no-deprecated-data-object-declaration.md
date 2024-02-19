@@ -5,6 +5,7 @@ title: vue/no-deprecated-data-object-declaration
 description: disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-data-object-declaration
 
 > disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
@@ -31,7 +32,7 @@ createApp({
 
 createApp({
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }
@@ -62,7 +63,7 @@ export default {
 <script>
 export default {
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }

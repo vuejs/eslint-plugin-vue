@@ -5,6 +5,7 @@ title: vue/no-async-in-computed-properties
 description: disallow asynchronous actions in computed properties
 since: v3.8.0
 ---
+
 # vue/no-async-in-computed-properties
 
 > disallow asynchronous actions in computed properties
@@ -25,7 +26,7 @@ This rule is aimed at preventing asynchronous methods from being called in compu
 export default {
   computed: {
     /* ✓ GOOD */
-    foo () {
+    foo() {
       var bar = 0
       try {
         bar = bar / this.a
@@ -37,22 +38,22 @@ export default {
     },
 
     /* ✗ BAD */
-    pro () {
+    pro() {
       return Promise.all([new Promise((resolve, reject) => {})])
     },
     foo1: async function () {
       return await someFunc()
     },
-    bar () {
-      return fetch(url).then(response => {})
+    bar() {
+      return fetch(url).then((response) => {})
     },
-    tim () {
-      setTimeout(() => { }, 0)
+    tim() {
+      setTimeout(() => {}, 0)
     },
-    inter () {
-      setInterval(() => { }, 0)
+    inter() {
+      setInterval(() => {}, 0)
     },
-    anim () {
+    anim() {
       requestAnimationFrame(() => {})
     }
   }
@@ -66,7 +67,7 @@ export default {
 
 ```vue
 <script>
-import {computed} from 'vue'
+import { computed } from 'vue'
 export default {
   setup() {
     /* ✓ GOOD */
@@ -82,16 +83,18 @@ export default {
     })
 
     /* ✗ BAD */
-    const pro = computed(() => Promise.all([new Promise((resolve, reject) => {})]))
+    const pro = computed(() =>
+      Promise.all([new Promise((resolve, reject) => {})])
+    )
     const foo1 = computed(async () => await someFunc())
     const bar = computed(() => {
-      return fetch(url).then(response => {})
+      return fetch(url).then((response) => {})
     })
     const tim = computed(() => {
-      setTimeout(() => { }, 0)
+      setTimeout(() => {}, 0)
     })
     const inter = computed(() => {
-      setInterval(() => { }, 0)
+      setInterval(() => {}, 0)
     })
     const anim = computed(() => {
       requestAnimationFrame(() => {})

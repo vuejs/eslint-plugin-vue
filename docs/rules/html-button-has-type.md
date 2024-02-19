@@ -5,6 +5,7 @@ title: vue/html-button-has-type
 description: disallow usage of button without an explicit type attribute
 since: v7.6.0
 ---
+
 # vue/html-button-has-type
 
 > disallow usage of button without an explicit type attribute

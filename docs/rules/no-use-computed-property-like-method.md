@@ -5,6 +5,7 @@ title: vue/no-use-computed-property-like-method
 description: disallow use computed property like method
 since: v7.15.0
 ---
+
 # vue/no-use-computed-property-like-method
 
 > disallow use computed property like method

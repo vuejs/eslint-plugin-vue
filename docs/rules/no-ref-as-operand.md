@@ -5,6 +5,7 @@ title: vue/no-ref-as-operand
 description: disallow use of value wrapped by `ref()` (Composition API) as an operand
 since: v7.0.0
 ---
+
 # vue/no-ref-as-operand
 
 > disallow use of value wrapped by `ref()` (Composition API) as an operand
@@ -24,7 +25,7 @@ You must use `.value` to access the `Ref` value.
 import { ref } from 'vue'
 
 export default {
-  setup () {
+  setup() {
     const count = ref(0)
     const ok = ref(true)
 

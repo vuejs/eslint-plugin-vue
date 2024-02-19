@@ -5,6 +5,7 @@ title: vue/no-deprecated-router-link-tag-prop
 description: disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+)
 since: v7.20.0
 ---
+
 # vue/no-deprecated-router-link-tag-prop
 
 > disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+)

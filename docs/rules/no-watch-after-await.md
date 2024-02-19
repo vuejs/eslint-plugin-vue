@@ -5,6 +5,7 @@ title: vue/no-watch-after-await
 description: disallow asynchronously registered `watch`
 since: v7.0.0
 ---
+
 # vue/no-watch-after-await
 
 > disallow asynchronously registered `watch`

@@ -5,6 +5,7 @@ title: vue/object-property-newline
 description: Enforce placing object properties on separate lines in `<template>`
 since: v7.0.0
 ---
+
 # vue/object-property-newline
 
 > Enforce placing object properties on separate lines in `<template>`

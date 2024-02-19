@@ -5,6 +5,7 @@ title: vue/require-prop-type-constructor
 description: require prop type to be a constructor
 since: v5.0.0
 ---
+
 # vue/require-prop-type-constructor
 
 > require prop type to be a constructor
@@ -38,7 +39,7 @@ export default {
     anotherProp: [Number, String],
     myFieldWithBadType: {
       type: Object,
-      default: function() {
+      default: function () {
         return {}
       },
     },
@@ -47,16 +48,16 @@ export default {
       default: 1,
     },
     /* ✗ BAD */
-    myProp: "Number",
-    anotherProp: ["Number", "String"],
+    myProp: 'Number',
+    anotherProp: ['Number', 'String'],
     myFieldWithBadType: {
-      type: "Object",
-      default: function() {
+      type: 'Object',
+      default: function () {
         return {}
       },
     },
     myOtherFieldWithBadType: {
-      type: "Number",
+      type: 'Number',
       default: 1,
     },
   }

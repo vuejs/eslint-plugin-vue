@@ -5,6 +5,7 @@ title: vue/no-ref-object-reactivity-loss
 description: disallow usages of ref objects that can lead to loss of reactivity
 since: v9.17.0
 ---
+
 # vue/no-ref-object-reactivity-loss
 
 > disallow usages of ref objects that can lead to loss of reactivity

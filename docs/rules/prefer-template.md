@@ -5,6 +5,7 @@ title: vue/prefer-template
 description: Require template literals instead of string concatenation in `<template>`
 since: v7.0.0
 ---
+
 # vue/prefer-template
 
 > Require template literals instead of string concatenation in `<template>`

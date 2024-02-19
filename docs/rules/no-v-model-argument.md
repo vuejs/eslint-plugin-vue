@@ -5,6 +5,7 @@ title: vue/no-v-model-argument
 description: disallow adding an argument to `v-model` used in custom component
 since: v7.0.0
 ---
+
 # vue/no-v-model-argument
 
 > disallow adding an argument to `v-model` used in custom component
@@ -25,7 +26,6 @@ This rule reports `v-model` directives in the following cases:
 <template>
   <!-- ✓ GOOD -->
   <MyComponent v-model="foo" />
-
 
   <!-- ✗ BAD -->
   <MyComponent v-model:aaa="foo" />

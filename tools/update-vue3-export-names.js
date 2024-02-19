@@ -24,7 +24,7 @@ async function main() {
     '../lib/utils/vue3-export-names.json'
   )
 
-  fs.writeFileSync(filePath, JSON.stringify([...names], null, 2))
+  fs.writeFileSync(filePath, `${JSON.stringify([...names], null, 2)}\n`)
 }
 
 async function* extractExportNames(m) {

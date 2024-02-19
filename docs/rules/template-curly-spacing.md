@@ -5,6 +5,7 @@ title: vue/template-curly-spacing
 description: Require or disallow spacing around embedded expressions of template strings in `<template>`
 since: v7.0.0
 ---
+
 # vue/template-curly-spacing
 
 > Require or disallow spacing around embedded expressions of template strings in `<template>`

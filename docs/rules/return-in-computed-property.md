@@ -5,6 +5,7 @@ title: vue/return-in-computed-property
 description: enforce that a return statement is present in computed property
 since: v3.7.0
 ---
+
 # vue/return-in-computed-property
 
 > enforce that a return statement is present in computed property
@@ -22,7 +23,7 @@ This rule enforces that a `return` statement is present in `computed` properties
 export default {
   computed: {
     /* ✓ GOOD */
-    foo () {
+    foo() {
       if (this.bar) {
         return this.baz
       } else {
@@ -33,7 +34,7 @@ export default {
       return false
     },
     /* ✗ BAD */
-    baz () {
+    baz() {
       if (this.baf) {
         return this.baf
       }
@@ -50,7 +51,7 @@ export default {
 
 ```vue
 <script>
-import {computed} from 'vue'
+import { computed } from 'vue'
 export default {
   setup() {
     const foobar = useFoobar()
@@ -102,7 +103,7 @@ This rule has an object option:
 export default {
   computed: {
     /* ✓ GOOD */
-    foo () {
+    foo() {
       if (this.bar) {
         return undefined
       } else {
@@ -113,7 +114,7 @@ export default {
       return
     },
     /* ✗ BAD */
-    baz () {
+    baz() {
       if (this.baf) {
         return this.baf
       }

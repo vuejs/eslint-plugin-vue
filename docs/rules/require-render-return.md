@@ -5,6 +5,7 @@ title: vue/require-render-return
 description: enforce render function to always return value
 since: v3.10.0
 ---
+
 # vue/require-render-return
 
 > enforce render function to always return value
@@ -21,7 +22,7 @@ This rule aims to enforce render function to always return value
 <script>
 export default {
   /* ✓ GOOD */
-  render (h) {
+  render(h) {
     return h('div', 'hello')
   }
 }
@@ -36,7 +37,7 @@ export default {
 <script>
 export default {
   /* ✗ BAD */
-  render (h) {
+  render(h) {
     if (foo) {
       return h('div', 'hello')
     }

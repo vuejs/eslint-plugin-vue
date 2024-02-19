@@ -5,6 +5,7 @@ title: vue/no-multiple-template-root
 description: disallow adding multiple root nodes to the template
 since: v7.0.0
 ---
+
 # vue/no-multiple-template-root
 
 > disallow adding multiple root nodes to the template
@@ -41,7 +42,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 ```vue
 <!-- The root element has `v-for` directives -->
 <template>
-  <div v-for="item in items"/>
+  <div v-for="item in items" />
 </template>
 ```
 

@@ -5,6 +5,7 @@ title: vue/use-v-on-exact
 description: enforce usage of `exact` modifier on `v-on`
 since: v5.0.0
 ---
+
 # vue/use-v-on-exact
 
 > enforce usage of `exact` modifier on `v-on`

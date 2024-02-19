@@ -5,6 +5,7 @@ title: vue/valid-model-definition
 description: require valid keys in model option
 since: v9.0.0
 ---
+
 # vue/valid-model-definition
 
 > require valid keys in model option

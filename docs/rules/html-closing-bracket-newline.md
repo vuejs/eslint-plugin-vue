@@ -5,6 +5,7 @@ title: vue/html-closing-bracket-newline
 description: require or disallow a line break before tag's closing brackets
 since: v4.1.0
 ---
+
 # vue/html-closing-bracket-newline
 
 > require or disallow a line break before tag's closing brackets

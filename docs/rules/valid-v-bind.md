@@ -5,6 +5,7 @@ title: vue/valid-v-bind
 description: enforce valid `v-bind` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-bind
 
 > enforce valid `v-bind` directives
@@ -27,14 +28,14 @@ This rule does not report `v-bind` directives which do not have their argument (
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind="foo"/>
-  <div v-bind:aaa="foo"/>
-  <div :aaa="foo"/>
-  <div :aaa.prop="foo"/>
+  <div v-bind="foo" />
+  <div v-bind:aaa="foo" />
+  <div :aaa="foo" />
+  <div :aaa.prop="foo" />
 
   <!-- ✗ BAD -->
-  <div v-bind/>
-  <div v-bind:aaa.bbb="foo"/>
+  <div v-bind />
+  <div v-bind:aaa.bbb="foo" />
 </template>
 ```
 

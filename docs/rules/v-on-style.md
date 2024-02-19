@@ -5,6 +5,7 @@ title: vue/v-on-style
 description: enforce `v-on` directive style
 since: v3.0.0
 ---
+
 # vue/v-on-style
 
 > enforce `v-on` directive style
@@ -21,10 +22,10 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div @click="foo"/>
+  <div @click="foo" />
 
   <!-- ✗ BAD -->
-  <div v-on:click="foo"/>
+  <div v-on:click="foo" />
 </template>
 ```
 
@@ -50,10 +51,10 @@ Default is set to `shorthand`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-on:click="foo"/>
+  <div v-on:click="foo" />
 
   <!-- ✗ BAD -->
-  <div @click="foo"/>
+  <div @click="foo" />
 </template>
 ```
 

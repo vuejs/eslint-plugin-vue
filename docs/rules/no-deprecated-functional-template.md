@@ -5,6 +5,7 @@ title: vue/no-deprecated-functional-template
 description: disallow using deprecated the `functional` template (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-functional-template
 
 > disallow using deprecated the `functional` template (in Vue.js 3.0.0+)

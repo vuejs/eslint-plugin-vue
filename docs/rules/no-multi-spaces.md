@@ -5,6 +5,7 @@ title: vue/no-multi-spaces
 description: disallow multiple spaces
 since: v3.12.0
 ---
+
 # vue/no-multi-spaces
 
 > disallow multiple spaces

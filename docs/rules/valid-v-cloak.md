@@ -5,6 +5,7 @@ title: vue/valid-v-cloak
 description: enforce valid `v-cloak` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-cloak
 
 > enforce valid `v-cloak` directives
@@ -26,12 +27,12 @@ This rule reports `v-cloak` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-cloak/>
+  <div v-cloak />
 
   <!-- ✗ BAD -->
-  <div v-cloak:aaa/>
-  <div v-cloak.bbb/>
-  <div v-cloak="ccc"/>
+  <div v-cloak:aaa />
+  <div v-cloak.bbb />
+  <div v-cloak="ccc" />
 </template>
 ```
 

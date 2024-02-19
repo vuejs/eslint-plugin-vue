@@ -1,22 +1,16 @@
 {
-    "root": true,
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 2015
-    },
-    "parser": "vue-eslint-parser",
-    "plugins": [
-        "import",
-        "vue"
-    ],
-    "rules": {
-        "import/default": "warn",
-        "import/namespace": "warn"
-    },
-    "settings": {
-        "import/extensions": [
-            ".js",
-            ".vue"
-        ]
-    }
+  "root": true,
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2015
+  },
+  "parser": "vue-eslint-parser",
+  "plugins": ["import", "vue"],
+  "rules": {
+    "import/default": "warn",
+    "import/namespace": "warn"
+  },
+  "settings": {
+    "import/extensions": [".js", ".vue"]
+  }
 }

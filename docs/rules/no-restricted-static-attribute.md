@@ -5,6 +5,7 @@ title: vue/no-restricted-static-attribute
 description: disallow specific attribute
 since: v7.0.0
 ---
+
 # vue/no-restricted-static-attribute
 
 > disallow specific attribute

@@ -5,6 +5,7 @@ title: vue/return-in-emits-validator
 description: enforce that a return statement is present in emits validator
 since: v7.0.0
 ---
+
 # vue/return-in-emits-validator
 
 > enforce that a return statement is present in emits validator
@@ -22,7 +23,7 @@ This rule enforces that a `return` statement is present in `emits` validators.
 export default {
   emits: {
     /* ✓ GOOD */
-    foo (evt) {
+    foo(evt) {
       if (evt) {
         return true
       } else {
@@ -32,14 +33,14 @@ export default {
     bar: function () {
       return true
     },
-    baz (evt) {
+    baz(evt) {
       if (evt) {
         return true
       }
     },
     /* ✗ BAD */
     qux: function () {},
-    quux (evt) {
+    quux(evt) {
       if (!evt) {
         return false
       }

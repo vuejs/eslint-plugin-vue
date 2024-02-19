@@ -5,6 +5,7 @@ title: vue/key-spacing
 description: Enforce consistent spacing between keys and values in object literal properties in `<template>`
 since: v5.2.0
 ---
+
 # vue/key-spacing
 
 > Enforce consistent spacing between keys and values in object literal properties in `<template>`

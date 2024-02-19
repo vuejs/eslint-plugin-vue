@@ -23,5 +23,10 @@
     },
     "skipLibCheck": true
   },
-  "include": ["lib/**/*", "typings/eslint-plugin-vue/global.d.ts", "docs/.vitepress/**/*.ts", "docs/.vitepress/**/*.mts"]
+  "include": [
+    "lib/**/*",
+    "typings/eslint-plugin-vue/global.d.ts",
+    "docs/.vitepress/**/*.ts",
+    "docs/.vitepress/**/*.mts"
+  ]
 }

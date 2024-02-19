@@ -5,6 +5,7 @@ title: vue/component-name-in-template-casing
 description: enforce specific casing for the component naming style in template
 since: v5.0.0
 ---
+
 # vue/component-name-in-template-casing
 
 > enforce specific casing for the component naming style in template
@@ -43,7 +44,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 <template>
   <!-- ✓ GOOD -->
   <CoolComponent />
-  
+
   <!-- ✗ BAD -->
   <cool-component />
   <coolComponent />
@@ -61,7 +62,7 @@ export default {
   components: {
     CoolComponent,
     'registered-in-kebab-case': VueComponent1,
-    'registeredInCamelCase': VueComponent2
+    registeredInCamelCase: VueComponent2
   }
 }
 </script>
@@ -107,7 +108,7 @@ export default {
   <!-- ✓ GOOD -->
   <CoolComponent />
   <UnregisteredComponent />
-  
+
   <!-- ✗ BAD -->
   <cool-component />
   <unregistered-component />
@@ -130,11 +131,11 @@ export default {
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <CoolComponent/>
+  <CoolComponent />
   <custom-element></custom-element>
   <custom-button></custom-button>
   <custom-input />
-  
+
   <!-- ✗ BAD -->
   <magic-element></magic-element>
 </template>
@@ -150,7 +151,7 @@ export default {
 <template>
   <!-- ✓ GOOD -->
   <RouterView></RouterView>
-  
+
   <!-- ✗ BAD -->
   <router-view></router-view>
 </template>
