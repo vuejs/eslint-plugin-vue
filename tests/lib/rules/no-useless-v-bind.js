@@ -140,15 +140,35 @@ tester.run('no-useless-v-bind', rule, {
     {
       code: `
       <template>
-        <div :id="  'foo'  " />
-        <div :id='  "foo"  ' />
+        <div :id="    'foo'    " />
+        <div :id='    "foo"    ' />
+        <div :id="   \`foo\`   " />
+        <div :id='   \`foo\`   ' />
+        <div :id="' \\'foo\\' '" />
+        <div :id='" \\"foo\\" "' />
+        <div :id="   \"foo\"   " />
+        <div :id='   \'foo\'   ' />
+        <div :id="  \\"foo\\"  " />
+        <div :id='  \\'foo\\'  ' />
       </template>`,
       output: `
       <template>
         <div id="foo" />
         <div id='foo' />
+        <div id="foo" />
+        <div id='foo' />
+        <div id=" 'foo' " />
+        <div id=' "foo" ' />
+        <div :id="   \"foo\"   " />
+        <div :id='   \'foo\'   ' />
+        <div :id="  \\"foo\\"  " />
+        <div :id='  \\'foo\\'  ' />
       </template>`,
       errors: [
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
         'Unexpected `v-bind` with a string literal value.',
         'Unexpected `v-bind` with a string literal value.'
       ]
