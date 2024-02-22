@@ -6,6 +6,7 @@ import * as ES from './es-ast'
 import { TSESTree } from '@typescript-eslint/types'
 export type TSNode =
   | TSAsExpression
+  | TSNonNullExpression
   | TSTypeParameterInstantiation
   | TSPropertySignature
   | TSMethodSignatureBase
@@ -18,6 +19,11 @@ export interface TSAsExpression extends HasParentNode {
   type: 'TSAsExpression'
   expression: ES.Expression
   typeAnnotation: any
+}
+
+export interface TSNonNullExpression extends HasParentNode {
+  type: 'TSNonNullExpression'
+  expression: ES.Expression
 }
 
 export interface TSTypeParameterInstantiation extends HasParentNode {
