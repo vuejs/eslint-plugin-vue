@@ -10,6 +10,7 @@ const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.
 const eslint = new ESLint({
+  overrideConfigFile: true,
   overrideConfig: {
     files: ['*'],
     languageOptions: {
@@ -352,6 +353,7 @@ describe('comment-directive', () => {
 
   describe('reportUnusedDisableDirectives', () => {
     const eslint = new ESLint({
+      overrideConfigFile: true,
       overrideConfig: {
         files: ['**/*.vue'],
         languageOptions: {

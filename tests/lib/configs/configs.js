@@ -7,6 +7,7 @@ describe('configs', () => {
   for (const name of Object.keys(plugin.configs)) {
     const configName = `plugin:vue/${name}`
     const eslint = new ESLint({
+      overrideConfigFile: true,
       overrideConfig: {
         extends: [configName]
       },

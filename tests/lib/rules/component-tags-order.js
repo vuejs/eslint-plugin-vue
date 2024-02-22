@@ -10,6 +10,7 @@ const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.
 const eslint = new ESLint({
+  overrideConfigFile: true,
   overrideConfig: {
     files: ['**/*.vue'],
     languageOptions: {
