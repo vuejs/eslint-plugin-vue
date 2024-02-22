@@ -31,8 +31,13 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
   // eslint-disable-next-line unicorn/consistent-function-scoping
   function adjustOptions(options) {
     const newOptions = {
-      ...options,
-      useEslintrc: false
+      ...options
+    }
+    if (newOptions.overrideConfigFile) {
+      if (newOptions.overrideConfigFile === true) {
+        newOptions.useEslintrc = false
+        delete newOptions.overrideConfigFile
+      }
     }
     if (newOptions.overrideConfig) {
       newOptions.overrideConfig = { ...newOptions.overrideConfig }
