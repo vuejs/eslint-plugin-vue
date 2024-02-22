@@ -33,11 +33,9 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
     const newOptions = {
       ...options
     }
-    if (newOptions.overrideConfigFile) {
-      if (newOptions.overrideConfigFile === true) {
-        newOptions.useEslintrc = false
-        delete newOptions.overrideConfigFile
-      }
+    if (newOptions.overrideConfigFile === true) {
+      newOptions.useEslintrc = false
+      delete newOptions.overrideConfigFile
     }
     if (newOptions.overrideConfig) {
       newOptions.overrideConfig = { ...newOptions.overrideConfig }
