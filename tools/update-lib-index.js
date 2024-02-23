@@ -24,7 +24,7 @@ const content = `/*
  */
 'use strict'
 
-module.exports = {
+const mod = {
   meta: require('./meta'),
   rules: {
     ${rules
@@ -52,6 +52,21 @@ module.exports = {
     }
   }
 }
+
+Object.assign(mod.configs, {
+  'flat/base': require('./configs/flat/base.js'),
+
+  'flat/vue2-essential': require('./configs/flat/vue2-essential.js'),
+  'flat/vue2-recommended': require('./configs/flat/vue2-recommended.js'),
+  'flat/vue2-strongly-recommended': require('./configs/flat/vue2-strongly-recommended.js'),
+
+  // in flat configs, non-prefixed config is for Vue 3 (unlike eslintrc configs)
+  'flat/essential': require('./configs/flat/vue3-essential.js'),
+  'flat/recommended': require('./configs/flat/vue3-recommended.js'),
+  'flat/strongly-recommended': require('./configs/flat/vue3-strongly-recommended.js'),
+})
+
+module.exports = mod
 `
 fs.writeFileSync(filePath, content)
 
