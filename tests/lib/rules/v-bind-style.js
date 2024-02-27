@@ -124,6 +124,12 @@ tester.run('v-bind-style', rule, {
       filename: 'test.vue',
       code: '<template><div :foo-bar/></template>',
       options: ['shorthand', { sameNameShorthand: 'always' }]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2409
+      filename: 'test.vue',
+      code: '<template><div :foo-bar="foo_bar" /></template>',
+      options: ['shorthand', { sameNameShorthand: 'always' }]
     }
   ],
   invalid: [
@@ -232,6 +238,14 @@ tester.run('v-bind-style', rule, {
       filename: 'test.vue',
       code: '<template><div :foo-bar /></template>',
       output: '<template><div :foo-bar="fooBar" /></template>',
+      options: ['shorthand', { sameNameShorthand: 'never' }],
+      errors: [unexpectedShorthand]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2409
+      filename: 'test.vue',
+      code: '<template><div :foo_bar /></template>',
+      output: '<template><div :foo_bar="foo_bar" /></template>',
       options: ['shorthand', { sameNameShorthand: 'never' }],
       errors: [unexpectedShorthand]
     },
