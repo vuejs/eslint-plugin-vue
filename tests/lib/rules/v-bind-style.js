@@ -259,6 +259,13 @@ tester.run('v-bind-style', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div :foo_bar="foo_bar" /></template>',
+      output: '<template><div :foo_bar /></template>',
+      options: ['shorthand', { sameNameShorthand: 'always' }],
+      errors: [expectedShorthand]
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div v-bind:foo="foo" /></template>',
       output: '<template><div v-bind:foo /></template>',
       options: ['longform', { sameNameShorthand: 'always' }],
