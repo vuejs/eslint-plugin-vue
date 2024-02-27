@@ -38,10 +38,6 @@ Nothing.
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
 
-## :books: Further Reading
-
-- [XSS in Vue.js](https://blog.sqreen.io/xss-in-vue-js/)
-
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v4.7.0
