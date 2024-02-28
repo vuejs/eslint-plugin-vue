@@ -318,7 +318,7 @@ If you are using JSX, you need to enable JSX in your ESLint configuration.
 See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide/configuring#specifying-parser-options).
 
 The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.  
-See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
+See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
 Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`) when using `jsx: true`.
 
 ### Trouble with Visual Studio Code
