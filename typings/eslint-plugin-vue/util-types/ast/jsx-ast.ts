@@ -1,6 +1,6 @@
 /**
- * @see https://github.com/facebook/jsx/blob/master/AST.md
- * @see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/typescript-estree/src/ts-estree/ts-estree.ts
+ * @see https://github.com/facebook/jsx/blob/main/AST.md
+ * @see https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/typescript-estree/src/ts-estree/ts-estree.ts
  */
 import { HasParentNode } from '../node'
 import * as ES from './es-ast'
