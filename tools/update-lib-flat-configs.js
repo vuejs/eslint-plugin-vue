@@ -74,11 +74,11 @@ module.exports = {
  */
 'use strict'
 const config = require('./base.js')
-const { extendsRules } = require('../../utils/config-helpers.js')
+const { extendRules } = require('../../utils/config-helpers.js')
 
 const rules = ${formatRules(category.rules, category.categoryId)}
 
-module.exports = extendsRules(config, rules)
+module.exports = extendRules(config, rules)
 `
 }
 
