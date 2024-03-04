@@ -73,7 +73,7 @@ module.exports = {
  * in order to update its content execute "npm run update"
  */
 'use strict'
-const config = require('./base.js')
+const config = require('./${extendsCategoryId}.js')
 const { extendRules } = require('../../utils/config-helpers.js')
 
 const rules = ${formatRules(category.rules, category.categoryId)}
