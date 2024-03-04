@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow adding multiple root nodes to the template
 
-- :gear: This rule is included in `"plugin:vue/essential"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 

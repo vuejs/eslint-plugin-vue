@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow adding an argument to `v-model` used in custom component
 
-- :gear: This rule is included in `"plugin:vue/essential"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether `v-model` used on custom component do not have an argument.
 
