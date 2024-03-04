@@ -123,7 +123,9 @@ class DocFile {
     }
     if (meta.docs?.categories) {
       const presets = getPresetIds(meta.docs.categories).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+        // non-prefixed configs are for vue2
+        // e.g. 'recommended' -> 'vue2-recommended'
+        (categoryId) => `\`"plugin:vue/${categoryId.replace(/^vue2-/, '')}"\``
       )
 
       notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)

@@ -41,12 +41,11 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-| [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  | :three::two::hammer: |
-| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  | :three::two::warning: |
-| [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  | :three::two::warning: |
-| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: | :three::two::warning: |
-| [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  | :three::two::warning: |
-| [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  | :two::warning: |
+| [vue/multi-word-component-names](./multi-word-component-names.md) | require component names to be always multi-word |  | :three::hammer: |
+| [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  | :three::warning: |
+| [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  | :three::warning: |
+| [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: | :three::warning: |
+| [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  | :three::warning: |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-dollar-listeners-api](./no-deprecated-dollar-listeners-api.md) | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  | :three::warning: |
@@ -66,67 +65,62 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-v-on-native-modifier](./no-deprecated-v-on-native-modifier.md) | disallow using deprecated `.native` modifiers (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-v-on-number-modifiers](./no-deprecated-v-on-number-modifiers.md) | disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-vue-config-keycodes](./no-deprecated-vue-config-keycodes.md) | disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+) |  | :three::warning: |
-| [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  | :three::two::warning: |
-| [vue/no-dupe-v-else-if](./no-dupe-v-else-if.md) | disallow duplicate conditions in `v-if` / `v-else-if` chains |  | :three::two::warning: |
-| [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  | :three::two::warning: |
-| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::two::warning: |
+| [vue/no-dupe-keys](./no-dupe-keys.md) | disallow duplication of field names |  | :three::warning: |
+| [vue/no-dupe-v-else-if](./no-dupe-v-else-if.md) | disallow duplicate conditions in `v-if` / `v-else-if` chains |  | :three::warning: |
+| [vue/no-duplicate-attributes](./no-duplicate-attributes.md) | disallow duplication of attributes |  | :three::warning: |
+| [vue/no-export-in-script-setup](./no-export-in-script-setup.md) | disallow `export` in `<script setup>` |  | :three::warning: |
 | [vue/no-expose-after-await](./no-expose-after-await.md) | disallow asynchronously registered `expose` |  | :three::warning: |
 | [vue/no-lifecycle-after-await](./no-lifecycle-after-await.md) | disallow asynchronously registered lifecycle hooks |  | :three::hammer: |
-| [vue/no-multiple-template-root](./no-multiple-template-root.md) | disallow adding multiple root nodes to the template |  | :two::warning: |
-| [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  | :three::two::hammer: |
-| [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  | :three::two::warning: |
-| [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: | :three::two::hammer: |
-| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  | :three::two::hammer: |
-| [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  | :three::two::hammer: |
-| [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  | :three::two::warning: |
-| [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: | :three::two::warning: |
-| [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  | :three::two::warning: |
-| [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  | :three::two::warning: |
-| [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  | :three::two::warning: |
-| [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  | :three::two::hammer: |
-| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: | :three::two::hammer: |
-| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :three::two::warning: |
-| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
-| [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  | :three::two::warning: |
+| [vue/no-mutating-props](./no-mutating-props.md) | disallow mutation of component props |  | :three::hammer: |
+| [vue/no-parsing-error](./no-parsing-error.md) | disallow parsing errors in `<template>` |  | :three::warning: |
+| [vue/no-ref-as-operand](./no-ref-as-operand.md) | disallow use of value wrapped by `ref()` (Composition API) as an operand | :wrench: | :three::hammer: |
+| [vue/no-reserved-component-names](./no-reserved-component-names.md) | disallow the use of reserved names in component definitions |  | :three::hammer: |
+| [vue/no-reserved-keys](./no-reserved-keys.md) | disallow overwriting reserved keys |  | :three::hammer: |
+| [vue/no-reserved-props](./no-reserved-props.md) | disallow reserved names in props |  | :three::warning: |
+| [vue/no-shared-component-data](./no-shared-component-data.md) | enforce component's data property to be a function | :wrench: | :three::warning: |
+| [vue/no-side-effects-in-computed-properties](./no-side-effects-in-computed-properties.md) | disallow side effects in computed properties |  | :three::warning: |
+| [vue/no-template-key](./no-template-key.md) | disallow `key` attribute on `<template>` |  | :three::warning: |
+| [vue/no-textarea-mustache](./no-textarea-mustache.md) | disallow mustaches in `<textarea>` |  | :three::warning: |
+| [vue/no-unused-components](./no-unused-components.md) | disallow registering components that are not used inside templates |  | :three::hammer: |
+| [vue/no-unused-vars](./no-unused-vars.md) | disallow unused variable definitions of v-for directives or scope attributes | :bulb: | :three::hammer: |
+| [vue/no-use-computed-property-like-method](./no-use-computed-property-like-method.md) | disallow use computed property like method |  | :three::warning: |
+| [vue/no-use-v-if-with-v-for](./no-use-v-if-with-v-for.md) | disallow using `v-if` on the same element as `v-for` |  | :three::hammer: |
+| [vue/no-useless-template-attributes](./no-useless-template-attributes.md) | disallow useless attribute on `<template>` |  | :three::warning: |
 | [vue/no-v-for-template-key-on-child](./no-v-for-template-key-on-child.md) | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
-| [vue/no-v-for-template-key](./no-v-for-template-key.md) | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
-| [vue/no-v-model-argument](./no-v-model-argument.md) | disallow adding an argument to `v-model` used in custom component |  | :two::warning: |
-| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  | :three::two::warning: |
+| [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md) | disallow v-text / v-html on component |  | :three::warning: |
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
-| [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  | :three::two::warning: |
-| [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: | :three::two::hammer: |
-| [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  | :three::two::warning: |
+| [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  | :three::warning: |
+| [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: | :three::hammer: |
+| [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  | :three::warning: |
 | [vue/require-slots-as-functions](./require-slots-as-functions.md) | enforce properties of `$slots` to be used as a function |  | :three::warning: |
 | [vue/require-toggle-inside-transition](./require-toggle-inside-transition.md) | require control the display of the content inside `<transition>` |  | :three::warning: |
-| [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  | :three::two::warning: |
-| [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  | :three::two::hammer: |
-| [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  | :three::two::warning: |
-| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::two::warning: |
-| [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
-| [vue/valid-attribute-name](./valid-attribute-name.md) | require valid attribute names |  | :three::two::warning: |
-| [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
-| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
-| [vue/valid-model-definition](./valid-model-definition.md) | require valid keys in model option |  | :two::warning: |
-| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
-| [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  | :three::two::warning: |
-| [vue/valid-v-bind-sync](./valid-v-bind-sync.md) | enforce valid `.sync` modifier on `v-bind` directives |  | :two::warning: |
-| [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  | :three::two::warning: |
-| [vue/valid-v-cloak](./valid-v-cloak.md) | enforce valid `v-cloak` directives |  | :three::two::warning: |
-| [vue/valid-v-else-if](./valid-v-else-if.md) | enforce valid `v-else-if` directives |  | :three::two::warning: |
-| [vue/valid-v-else](./valid-v-else.md) | enforce valid `v-else` directives |  | :three::two::warning: |
-| [vue/valid-v-for](./valid-v-for.md) | enforce valid `v-for` directives |  | :three::two::warning: |
-| [vue/valid-v-html](./valid-v-html.md) | enforce valid `v-html` directives |  | :three::two::warning: |
-| [vue/valid-v-if](./valid-v-if.md) | enforce valid `v-if` directives |  | :three::two::warning: |
+| [vue/require-v-for-key](./require-v-for-key.md) | require `v-bind:key` with `v-for` directives |  | :three::warning: |
+| [vue/require-valid-default-prop](./require-valid-default-prop.md) | enforce props default values to be valid |  | :three::hammer: |
+| [vue/return-in-computed-property](./return-in-computed-property.md) | enforce that a return statement is present in computed property |  | :three::warning: |
+| [vue/return-in-emits-validator](./return-in-emits-validator.md) | enforce that a return statement is present in emits validator |  | :three::warning: |
+| [vue/use-v-on-exact](./use-v-on-exact.md) | enforce usage of `exact` modifier on `v-on` |  | :three::hammer: |
+| [vue/valid-attribute-name](./valid-attribute-name.md) | require valid attribute names |  | :three::warning: |
+| [vue/valid-define-emits](./valid-define-emits.md) | enforce valid `defineEmits` compiler macro |  | :three::warning: |
+| [vue/valid-define-props](./valid-define-props.md) | enforce valid `defineProps` compiler macro |  | :three::warning: |
+| [vue/valid-next-tick](./valid-next-tick.md) | enforce valid `nextTick` function calls | :wrench::bulb: | :three::warning: |
+| [vue/valid-template-root](./valid-template-root.md) | enforce valid template root |  | :three::warning: |
+| [vue/valid-v-bind](./valid-v-bind.md) | enforce valid `v-bind` directives |  | :three::warning: |
+| [vue/valid-v-cloak](./valid-v-cloak.md) | enforce valid `v-cloak` directives |  | :three::warning: |
+| [vue/valid-v-else-if](./valid-v-else-if.md) | enforce valid `v-else-if` directives |  | :three::warning: |
+| [vue/valid-v-else](./valid-v-else.md) | enforce valid `v-else` directives |  | :three::warning: |
+| [vue/valid-v-for](./valid-v-for.md) | enforce valid `v-for` directives |  | :three::warning: |
+| [vue/valid-v-html](./valid-v-html.md) | enforce valid `v-html` directives |  | :three::warning: |
+| [vue/valid-v-if](./valid-v-if.md) | enforce valid `v-if` directives |  | :three::warning: |
 | [vue/valid-v-is](./valid-v-is.md) | enforce valid `v-is` directives |  | :three::warning: |
 | [vue/valid-v-memo](./valid-v-memo.md) | enforce valid `v-memo` directives |  | :three::warning: |
-| [vue/valid-v-model](./valid-v-model.md) | enforce valid `v-model` directives |  | :three::two::warning: |
-| [vue/valid-v-on](./valid-v-on.md) | enforce valid `v-on` directives |  | :three::two::warning: |
-| [vue/valid-v-once](./valid-v-once.md) | enforce valid `v-once` directives |  | :three::two::warning: |
-| [vue/valid-v-pre](./valid-v-pre.md) | enforce valid `v-pre` directives |  | :three::two::warning: |
-| [vue/valid-v-show](./valid-v-show.md) | enforce valid `v-show` directives |  | :three::two::warning: |
-| [vue/valid-v-slot](./valid-v-slot.md) | enforce valid `v-slot` directives |  | :three::two::warning: |
-| [vue/valid-v-text](./valid-v-text.md) | enforce valid `v-text` directives |  | :three::two::warning: |
+| [vue/valid-v-model](./valid-v-model.md) | enforce valid `v-model` directives |  | :three::warning: |
+| [vue/valid-v-on](./valid-v-on.md) | enforce valid `v-on` directives |  | :three::warning: |
+| [vue/valid-v-once](./valid-v-once.md) | enforce valid `v-once` directives |  | :three::warning: |
+| [vue/valid-v-pre](./valid-v-pre.md) | enforce valid `v-pre` directives |  | :three::warning: |
+| [vue/valid-v-show](./valid-v-show.md) | enforce valid `v-show` directives |  | :three::warning: |
+| [vue/valid-v-slot](./valid-v-slot.md) | enforce valid `v-slot` directives |  | :three::warning: |
+| [vue/valid-v-text](./valid-v-text.md) | enforce valid `v-text` directives |  | :three::warning: |
 
 </rules-table>
 
@@ -139,31 +133,31 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-| [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: | :three::two::hammer: |
-| [vue/component-definition-name-casing](./component-definition-name-casing.md) | enforce specific casing for component definition name | :wrench: | :three::two::hammer: |
-| [vue/first-attribute-linebreak](./first-attribute-linebreak.md) | enforce the location of first attribute | :wrench: | :three::two::lipstick: |
-| [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: | :three::two::lipstick: |
-| [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: | :three::two::lipstick: |
-| [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: | :three::two::hammer: |
-| [vue/html-indent](./html-indent.md) | enforce consistent indentation in `<template>` | :wrench: | :three::two::lipstick: |
-| [vue/html-quotes](./html-quotes.md) | enforce quotes style of HTML attributes | :wrench: | :three::two::lipstick: |
-| [vue/html-self-closing](./html-self-closing.md) | enforce self-closing style | :wrench: | :three::two::lipstick: |
-| [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: | :three::two::lipstick: |
-| [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: | :three::two::lipstick: |
-| [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: | :three::two::lipstick: |
-| [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: | :three::two::lipstick: |
-| [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: | :three::two::lipstick: |
-| [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  | :three::two::hammer: |
-| [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  | :three::two::hammer: |
-| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  | :three::two::hammer: |
-| [vue/require-default-prop](./require-default-prop.md) | require default value for props |  | :three::two::hammer: |
+| [vue/attribute-hyphenation](./attribute-hyphenation.md) | enforce attribute naming style on custom components in template | :wrench: | :three::hammer: |
+| [vue/component-definition-name-casing](./component-definition-name-casing.md) | enforce specific casing for component definition name | :wrench: | :three::hammer: |
+| [vue/first-attribute-linebreak](./first-attribute-linebreak.md) | enforce the location of first attribute | :wrench: | :three::lipstick: |
+| [vue/html-closing-bracket-newline](./html-closing-bracket-newline.md) | require or disallow a line break before tag's closing brackets | :wrench: | :three::lipstick: |
+| [vue/html-closing-bracket-spacing](./html-closing-bracket-spacing.md) | require or disallow a space before tag's closing brackets | :wrench: | :three::lipstick: |
+| [vue/html-end-tags](./html-end-tags.md) | enforce end tag style | :wrench: | :three::hammer: |
+| [vue/html-indent](./html-indent.md) | enforce consistent indentation in `<template>` | :wrench: | :three::lipstick: |
+| [vue/html-quotes](./html-quotes.md) | enforce quotes style of HTML attributes | :wrench: | :three::lipstick: |
+| [vue/html-self-closing](./html-self-closing.md) | enforce self-closing style | :wrench: | :three::lipstick: |
+| [vue/max-attributes-per-line](./max-attributes-per-line.md) | enforce the maximum number of attributes per line | :wrench: | :three::lipstick: |
+| [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md) | require a line break before and after the contents of a multiline element | :wrench: | :three::lipstick: |
+| [vue/mustache-interpolation-spacing](./mustache-interpolation-spacing.md) | enforce unified spacing in mustache interpolations | :wrench: | :three::lipstick: |
+| [vue/no-multi-spaces](./no-multi-spaces.md) | disallow multiple spaces | :wrench: | :three::lipstick: |
+| [vue/no-spaces-around-equal-signs-in-attribute](./no-spaces-around-equal-signs-in-attribute.md) | disallow spaces around equal signs in attribute | :wrench: | :three::lipstick: |
+| [vue/no-template-shadow](./no-template-shadow.md) | disallow variable declarations from shadowing variables declared in the outer scope |  | :three::hammer: |
+| [vue/one-component-per-file](./one-component-per-file.md) | enforce that each component should be in its own file |  | :three::hammer: |
+| [vue/prop-name-casing](./prop-name-casing.md) | enforce specific casing for the Prop name in Vue components |  | :three::hammer: |
+| [vue/require-default-prop](./require-default-prop.md) | require default value for props |  | :three::hammer: |
 | [vue/require-explicit-emits](./require-explicit-emits.md) | require `emits` option with name triggered by `$emit()` | :bulb: | :three::hammer: |
-| [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  | :three::two::hammer: |
-| [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: | :three::two::lipstick: |
-| [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: | :three::two::hammer: |
+| [vue/require-prop-types](./require-prop-types.md) | require type definitions in props |  | :three::hammer: |
+| [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: | :three::lipstick: |
+| [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: | :three::hammer: |
 | [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md) | enforce v-on event naming style on custom components in template | :wrench: | :three::hammer: |
-| [vue/v-on-style](./v-on-style.md) | enforce `v-on` directive style | :wrench: | :three::two::hammer: |
-| [vue/v-slot-style](./v-slot-style.md) | enforce `v-slot` directive style | :wrench: | :three::two::hammer: |
+| [vue/v-on-style](./v-on-style.md) | enforce `v-on` directive style | :wrench: | :three::hammer: |
+| [vue/v-slot-style](./v-slot-style.md) | enforce `v-slot` directive style | :wrench: | :three::hammer: |
 
 </rules-table>
 
@@ -176,13 +170,13 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
-| [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
-| [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::two::warning: |
-| [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
-| [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
-| [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: | :three::two::hammer: |
-| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: | :three::two::hammer: |
+| [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: | :three::hammer: |
+| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::hammer: |
+| [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::warning: |
+| [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::warning: |
+| [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::hammer: |
+| [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench: | :three::hammer: |
+| [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: | :three::hammer: |
 
 </rules-table>
 

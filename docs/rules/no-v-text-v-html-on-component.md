@@ -10,7 +10,7 @@ since: v8.4.0
 
 > disallow v-text / v-html on component
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 
 ## :book: Rule Details
 

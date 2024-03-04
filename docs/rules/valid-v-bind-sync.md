@@ -10,7 +10,7 @@ since: v7.0.0
 
 > enforce valid `.sync` modifier on `v-bind` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in `"plugin:vue/essential"`.
 
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 

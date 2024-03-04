@@ -10,7 +10,7 @@ since: v5.0.0
 
 > disallow variable declarations from shadowing variables declared in the outer scope
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 
 `no-template-shadow` should report variable definitions of v-for directives or scope attributes if they shadow the variables in parent scopes.
 

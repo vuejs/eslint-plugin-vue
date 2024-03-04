@@ -13,7 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
-const configs = require('./lib/configs')
+// const configs = require('./lib/configs')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/index.js')
@@ -29,11 +29,6 @@ const mod = {
   rules: {
     ${rules
       .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
-      .join(',\n')}
-  },
-  configs: {
-    ${configs
-      .map((config) => `'${config}': require('./configs/${config}')`)
       .join(',\n')}
   },
   processors: {
@@ -55,9 +50,19 @@ const mod = {
 
 const baseConfig = {plugins: {vue: mod}}
 
-Object.assign(mod.configs, {
-  'flat/base': Object.assign(baseConfig, require('./configs/flat/base.js')),
+mod.configs = {
+  // eslintrc configs
+  base: require('./configs/base'),
+  essential: require('./configs/vue2-essential'),
+  'no-layout-rules': require('./configs/no-layout-rules'),
+  recommended: require('./configs/vue2-recommended'),
+  'strongly-recommended': require('./configs/vue2-strongly-recommended'),
+  'vue3-essential': require('./configs/vue3-essential'),
+  'vue3-recommended': require('./configs/vue3-recommended'),
+  'vue3-strongly-recommended': require('./configs/vue3-strongly-recommended'),
 
+  // flat configs
+  'flat/base': Object.assign(baseConfig, require('./configs/flat/base.js')),
   'flat/vue2-essential': Object.assign(baseConfig, require('./configs/flat/vue2-essential.js')),
   'flat/vue2-recommended': Object.assign(baseConfig, require('./configs/flat/vue2-recommended.js')),
   'flat/vue2-strongly-recommended': Object.assign(baseConfig, require('./configs/flat/vue2-strongly-recommended.js')),
@@ -66,7 +71,7 @@ Object.assign(mod.configs, {
   'flat/essential': Object.assign(baseConfig, require('./configs/flat/vue3-essential.js')),
   'flat/recommended': Object.assign(baseConfig, require('./configs/flat/vue3-recommended.js')),
   'flat/strongly-recommended': Object.assign(baseConfig, require('./configs/flat/vue3-strongly-recommended.js')),
-})
+}
 
 module.exports = mod
 `

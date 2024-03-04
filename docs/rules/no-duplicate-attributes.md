@@ -10,7 +10,7 @@ since: v3.0.0
 
 > disallow duplication of attributes
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
 
 When there are multiple attributes with the same name on a component, only the last one is used and the rest are ignored, so this is usually a mistake.
 
