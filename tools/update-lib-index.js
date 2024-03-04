@@ -13,7 +13,6 @@ const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
-// const configs = require('./lib/configs')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/index.js')
