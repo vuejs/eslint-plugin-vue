@@ -124,7 +124,7 @@ class DocFile {
     if (meta.docs?.categories) {
       const presets = getPresetIds(meta.docs.categories).map(
         // non-prefixed configs are for vue2
-        // e.g. 'recommended' -> 'vue2-recommended'
+        // e.g. 'vue2-recommended' ->  'recommended'
         (categoryId) => `\`"plugin:vue/${categoryId.replace(/^vue2-/, '')}"\``
       )
 
