@@ -37,6 +37,10 @@ tester.run('v-for-delimiter-style', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div v-for="(x,) in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div v-for="x in xs"></div></template>',
       options: ['in']
     },
