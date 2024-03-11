@@ -611,7 +611,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -645,7 +645,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -679,7 +679,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -713,7 +713,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -747,7 +747,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -781,7 +781,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -815,7 +815,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -849,7 +849,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -883,7 +883,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -917,7 +917,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -951,7 +951,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -985,7 +985,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -1019,7 +1019,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "name" property should be manually moved above the "data" property on line 3.',
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
               output: `
         export default {
           name: 'burger',
@@ -1054,7 +1054,7 @@ ruleTester.run('order-in-components', rule, {
           line: 6,
           suggestions: [
             {
-              desc: 'There may be some side effects, the "data" property should be manually moved above the "computed" property on line 3.',
+              desc: 'Manually move "data" property above "computed" property on line 3 (might break side effects).',
               output: `
         export default {
           data() {
