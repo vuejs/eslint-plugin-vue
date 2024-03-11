@@ -839,8 +839,8 @@ tester.run('no-ref-as-operand', rule, {
       console.log(count.value + 1) // error
       console.log(1 + count.value) // error
       `,
-      options: {
-        detectAutoImport: true
+      globals: {
+        ref: 'readonly'
       },
       errors: [
         {
