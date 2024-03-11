@@ -393,7 +393,7 @@ If it does not exist, you should open a new issue and share your repository to r
 
 ### Auto Imports Support
 
-In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.com/unplugin/unplugin-auto-import), Vue APIs can be auto imported. To make rules like [`no-ref-as-operand`](/rules/no-ref-as-operand.html) or [`no-watch-after-await`](/rules/no-watch-after-await.html) work correctly with them, you can specify them in ESLint's [`globals`](https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables) options:
+In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.com/unplugin/unplugin-auto-import), Vue APIs can be auto imported. To make rules like [`vue/no-ref-as-operand`](/rules/no-ref-as-operand.html) or [`vue/no-watch-after-await`](/rules/no-watch-after-await.html) work correctly with them, you can specify them in ESLint's [`globals`](https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables) options:
 
 ::: code-group
 
