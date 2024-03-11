@@ -140,6 +140,7 @@
   "hasInjectionContext",
   "PublicProps",
   "DefineComponent",
+  "DefineSetupFnComponent",
   "defineComponent",
   "App",
   "OptionMergeFunction",
