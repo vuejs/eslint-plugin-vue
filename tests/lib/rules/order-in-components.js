@@ -105,6 +105,23 @@ ruleTester.run('order-in-components', rule, {
       languageOptions
     },
     {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          computed: {
+            ...mapStates(['foo'])
+          },
+        }
+      `,
+      languageOptions
+    },
+    {
       filename: 'test.js',
       code: `
         Vue.component('smart-list', {
@@ -591,7 +608,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: obj.fn(),
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -612,7 +642,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: new MyClass(),
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -633,7 +676,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: i++,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -654,7 +710,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: i = 0,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -675,7 +744,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: template\`\${foo}\`,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -696,7 +778,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          [obj.fn()]: 'test',
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -717,7 +812,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: {test: obj.fn()},
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -738,7 +846,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: [obj.fn(), 1],
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -759,7 +880,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: obj.fn().prop,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -780,7 +914,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: delete obj.prop,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -801,7 +948,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: fn() + a + b,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -822,7 +982,20 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: a ? fn() : null,
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
@@ -843,7 +1016,56 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: \`test \${fn()} \${a}\`,
+        };
+      `
+            }
+          ]
+        }
+      ],
+      languageOptions
+    },
+    {
+      // side-effects https://github.com/vuejs/eslint-plugin-vue/issues/2418
+      filename: 'example.vue',
+      code: `
+        export default {
+          computed: {
+            ...mapStates(['foo'])
+          },
+          data() {
+          },
+        };
+      `,
+      output: null,
+      errors: [
+        {
+          message:
+            'The "data" property should be above the "computed" property on line 3.',
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "data" property above "computed" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          data() {
+          },
+          computed: {
+            ...mapStates(['foo'])
+          },
+        };
+      `
+            }
+          ]
         }
       ],
       languageOptions
