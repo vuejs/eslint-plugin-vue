@@ -822,6 +822,54 @@ tester.run('no-ref-as-operand', rule, {
           line: 9
         }
       ]
+    },
+    // Auto-import
+    {
+      code: `
+      let count = ref(0)
+
+      count++ // error
+      console.log(count + 1) // error
+      console.log(1 + count) // error
+      `,
+      output: `
+      let count = ref(0)
+
+      count.value++ // error
+      console.log(count.value + 1) // error
+      console.log(1 + count.value) // error
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 12
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 6,
+          column: 23,
+          endLine: 6,
+          endColumn: 28
+        }
+      ],
+      languageOptions: {
+        globals: {
+          ref: 'readonly'
+        }
+      }
     }
   ]
 })
