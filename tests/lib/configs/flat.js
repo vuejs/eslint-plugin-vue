@@ -6,7 +6,7 @@
 'use strict'
 
 const plugin = require('../../../lib/index')
-const assert = require('assert/strict')
+const { strict: assert } = require('assert') // node v14 does not support 'assert/strict'
 
 describe('flat configs', () => {
   it('should export base config', () => {
