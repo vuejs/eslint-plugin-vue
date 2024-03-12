@@ -3,7 +3,6 @@
 const { ESLint } = require('../../eslint-compat')
 const plugin = require('../../../lib/index')
 
-// TODO: test flat configs
 describe('eslintrc configs', () => {
   for (const name of Object.keys(plugin.configs)) {
     if (name.startsWith('flat/')) {
