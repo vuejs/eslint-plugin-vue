@@ -61,15 +61,15 @@ mod.configs = {
   'vue3-strongly-recommended': require('./configs/vue3-strongly-recommended'),
 
   // flat configs
-  'flat/base': Object.assign(baseConfig, require('./configs/flat/base.js')),
-  'flat/vue2-essential': Object.assign(baseConfig, require('./configs/flat/vue2-essential.js')),
-  'flat/vue2-recommended': Object.assign(baseConfig, require('./configs/flat/vue2-recommended.js')),
-  'flat/vue2-strongly-recommended': Object.assign(baseConfig, require('./configs/flat/vue2-strongly-recommended.js')),
+  'flat/base': Object.assign({}, baseConfig, require('./configs/flat/base.js')),
+  'flat/vue2-essential': Object.assign({}, baseConfig, require('./configs/flat/vue2-essential.js')),
+  'flat/vue2-recommended': Object.assign({}, baseConfig, require('./configs/flat/vue2-recommended.js')),
+  'flat/vue2-strongly-recommended': Object.assign({}, baseConfig, require('./configs/flat/vue2-strongly-recommended.js')),
 
   // in flat configs, non-prefixed config is for Vue 3 (unlike eslintrc configs)
-  'flat/essential': Object.assign(baseConfig, require('./configs/flat/vue3-essential.js')),
-  'flat/recommended': Object.assign(baseConfig, require('./configs/flat/vue3-recommended.js')),
-  'flat/strongly-recommended': Object.assign(baseConfig, require('./configs/flat/vue3-strongly-recommended.js')),
+  'flat/essential': Object.assign({}, baseConfig, require('./configs/flat/vue3-essential.js')),
+  'flat/recommended': Object.assign({}, baseConfig, require('./configs/flat/vue3-recommended.js')),
+  'flat/strongly-recommended': Object.assign({}, baseConfig, require('./configs/flat/vue3-strongly-recommended.js')),
 }
 
 module.exports = mod
