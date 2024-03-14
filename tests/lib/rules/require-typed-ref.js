@@ -87,6 +87,20 @@ tester.run('require-typed-ref', rule, {
       languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
+      filename: 'test.vue',
+      code: `
+        <script>
+          import { ref } from 'vue'
+          export default {
+            setup() {
+              const count = ref()
+            }
+          }
+        </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
       filename: 'test.js',
       code: `
         import { ref } from 'vue'
