@@ -232,6 +232,30 @@ tester.run('require-typed-ref', rule, {
       languageOptions: { parser: require('vue-eslint-parser') }
     },
     {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts">
+          import { ref } from 'vue'
+          export default {
+            setup() {
+              const count = ref()
+            }
+          }
+        </script>
+      }
+      `,
+      errors: [
+        {
+          messageId: 'noType',
+          line: 6,
+          column: 29,
+          endLine: 6,
+          endColumn: 34
+        }
+      ],
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
       filename: 'test.ts',
       code: `
         import { ref, defineComponent } from 'vue'
