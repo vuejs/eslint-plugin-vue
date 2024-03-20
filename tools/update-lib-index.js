@@ -23,7 +23,7 @@ const content = `/*
  */
 'use strict'
 
-const mod = {
+const plugin = {
   meta: require('./meta'),
   rules: {
     ${rules
@@ -47,9 +47,9 @@ const mod = {
   }
 }
 
-const baseConfig = {plugins: {vue: mod}}
+const baseConfig = {plugins: {vue: plugin}}
 
-mod.configs = {
+plugin.configs = {
   // eslintrc configs
   base: require('./configs/base'),
   essential: require('./configs/vue2-essential'),
@@ -72,7 +72,7 @@ mod.configs = {
   'flat/strongly-recommended': Object.assign({}, baseConfig, require('./configs/flat/vue3-strongly-recommended.js')),
 }
 
-module.exports = mod
+module.exports = plugin
 `
 fs.writeFileSync(filePath, content)
 
