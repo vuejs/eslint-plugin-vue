@@ -16,6 +16,7 @@ describe('flat configs', () => {
     assert.strictEqual(base.plugins.vue, plugin)
     assert.strictEqual(base.rules['vue/comment-directive'], 'error')
   })
+
   it('should export essential config', () => {
     const essential = plugin.configs['flat/essential']
     assert.ok(essential)
