@@ -51,23 +51,6 @@ const unreferencedOptions = {
   ]
 }
 
-// tester.run('no-unused-properties', rule, {
-//   valid: [
-//     {
-//       filename: 'test.vue',
-//       code: `
-//       <template>
-//         <button v-bind="$props">test</button>
-//       </template>
-//       <script setup>
-//       defineProps(['a'])
-//       </script>`
-//     }
-//   ],
-//   invalid: []
-// })
-// return
-
 tester.run('no-unused-properties', rule, {
   valid: [
     {
