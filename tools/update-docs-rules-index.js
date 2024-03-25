@@ -9,6 +9,7 @@ const path = require('path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
 const removedRules = require('../lib/removed-rules')
+const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
 
 const VUE3_EMOJI = ':three:'
 const VUE2_EMOJI = ':two:'
@@ -123,11 +124,11 @@ ${group.description}
 `
     }
     if (group.useMark) {
-      const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).flatMap(
+        (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
       const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).map(
-        (categoryId) => `\`"plugin:vue/${categoryId.replace(/^vue2-/, '')}"\`` // 'vue2-recommended' ->  'recommended'
+        (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
       content += `
 - ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(
