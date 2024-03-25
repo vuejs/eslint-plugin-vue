@@ -3,16 +3,25 @@ const eslint = require('eslint')
 const semver = require('semver')
 
 let ESLint = eslint.ESLint
+/** @type {typeof eslint.ESLint | null} */
+let FlatESLint = eslint.ESLint
 let Linter = eslint.Linter
 let RuleTester = eslint.RuleTester
 if (semver.lt(eslint.Linter.version, '9.0.0-0')) {
   ESLint = eslint.ESLint ? getESLintClassForV8() : getESLintClassForV6()
   Linter = getLinterClassForV8()
   RuleTester = getRuleTesterClassForV8()
+  try {
+    // @ts-ignore
+    FlatESLint = require('eslint/use-at-your-own-risk').FlatESLint
+  } catch {
+    FlatESLint = null
+  }
 }
 
 module.exports = {
   ESLint,
+  FlatESLint,
   RuleTester,
   Linter
 }
@@ -28,57 +37,35 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
     }
   }
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   function adjustOptions(options) {
-    const {
-      overrideConfig: originalOverrideConfig,
-      overrideConfigFile,
-      ...newOptions
-    } = options || {}
-
-    if (overrideConfigFile) {
-      if (overrideConfigFile === true) {
-        newOptions.useEslintrc = false
-      } else {
-        newOptions.overrideConfigFile = overrideConfigFile
-      }
+    const newOptions = {
+      ...options
     }
-
-    if (originalOverrideConfig) {
-      const [overrideConfig, plugins] = convertFlatConfigToV8OverridesConfig(
-        originalOverrideConfig
+    if (newOptions.overrideConfigFile === true) {
+      newOptions.useEslintrc = false
+      delete newOptions.overrideConfigFile
+    }
+    if (newOptions.overrideConfig) {
+      newOptions.overrideConfig = { ...newOptions.overrideConfig }
+      let plugins
+      if (newOptions.overrideConfig.plugins) {
+        plugins = newOptions.overrideConfig.plugins
+        delete newOptions.overrideConfig.plugins
+      }
+      newOptions.overrideConfig = processCompatibleConfig(
+        newOptions.overrideConfig
       )
-      newOptions.overrideConfig = overrideConfig
-      newOptions.plugins = plugins
+      if (plugins) {
+        newOptions.overrideConfig.plugins = Object.keys(plugins)
+        newOptions.plugins = plugins
+      }
+
+      // adjust
+      delete newOptions.overrideConfig.files
+      delete newOptions.overrideConfig.processor
     }
     return newOptions
-  }
-
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  function convertFlatConfigToV8OverridesConfig(config) {
-    const pluginDefs = {}
-    const newConfigs = []
-    for (const configItem of Array.isArray(config) ? config : [config]) {
-      const { plugins, ...otherConfig } = configItem
-
-      if (typeof otherConfig.processor !== 'string') {
-        // Remove unsupported object processor option
-        // (I don't know how to successfully convert the processors at now.)
-        delete otherConfig.processor
-      }
-
-      const newConfig = {
-        files: ['*'],
-        ...processCompatibleConfig(otherConfig)
-      }
-
-      if (plugins) {
-        newConfig.plugins = Object.keys(plugins)
-      }
-      Object.assign(pluginDefs, plugins)
-      newConfigs.push(newConfig)
-    }
-
-    return [{ overrides: newConfigs }, pluginDefs]
   }
 }
 /** @returns {typeof eslint.ESLint} */

@@ -7,7 +7,7 @@
 
 const plugin = require('../../../lib/index')
 const { strict: assert } = require('assert') // node v14 does not support 'assert/strict'
-const { ESLint } = require('../../eslint-compat')
+const { FlatESLint } = require('../../eslint-compat')
 
 function mergeConfig(configs) {
   let config = { rules: {}, plugins: {} }
@@ -224,8 +224,9 @@ describe('flat configs', () => {
   })
 
   it('should work the suppress comments with base config', async () => {
+    if (!FlatESLint) return
     const base = plugin.configs['flat/base']
-    const eslint = new ESLint({
+    const eslint = new FlatESLint({
       overrideConfigFile: true,
       overrideConfig: [
         ...base,
@@ -247,8 +248,9 @@ describe('flat configs', () => {
     assert.deepStrictEqual(result[0].messages, [])
   })
   it('should work the suppress comments with recommended config', async () => {
+    if (!FlatESLint) return
     const recommended = plugin.configs['flat/recommended']
-    const eslint = new ESLint({
+    const eslint = new FlatESLint({
       overrideConfigFile: true,
       overrideConfig: recommended
     })
