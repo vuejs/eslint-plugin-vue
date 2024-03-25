@@ -28,35 +28,57 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
     }
   }
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   function adjustOptions(options) {
-    const newOptions = {
-      ...options
-    }
-    if (newOptions.overrideConfigFile === true) {
-      newOptions.useEslintrc = false
-      delete newOptions.overrideConfigFile
-    }
-    if (newOptions.overrideConfig) {
-      newOptions.overrideConfig = { ...newOptions.overrideConfig }
-      let plugins
-      if (newOptions.overrideConfig.plugins) {
-        plugins = newOptions.overrideConfig.plugins
-        delete newOptions.overrideConfig.plugins
-      }
-      newOptions.overrideConfig = processCompatibleConfig(
-        newOptions.overrideConfig
-      )
-      if (plugins) {
-        newOptions.overrideConfig.plugins = Object.keys(plugins)
-        newOptions.plugins = plugins
-      }
+    const {
+      overrideConfig: originalOverrideConfig,
+      overrideConfigFile,
+      ...newOptions
+    } = options || {}
 
-      // adjust
-      delete newOptions.overrideConfig.files
-      delete newOptions.overrideConfig.processor
+    if (overrideConfigFile) {
+      if (overrideConfigFile === true) {
+        newOptions.useEslintrc = false
+      } else {
+        newOptions.overrideConfigFile = overrideConfigFile
+      }
+    }
+
+    if (originalOverrideConfig) {
+      const [overrideConfig, plugins] = convertFlatConfigToV8OverridesConfig(
+        originalOverrideConfig
+      )
+      newOptions.overrideConfig = overrideConfig
+      newOptions.plugins = plugins
     }
     return newOptions
+  }
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  function convertFlatConfigToV8OverridesConfig(config) {
+    const pluginDefs = {}
+    const newConfigs = []
+    for (const configItem of Array.isArray(config) ? config : [config]) {
+      const { plugins, ...otherConfig } = configItem
+
+      if (typeof otherConfig.processor !== 'string') {
+        // Remove unsupported object processor option
+        // (I don't know how to successfully convert the processors at now.)
+        delete otherConfig.processor
+      }
+
+      const newConfig = {
+        files: ['*'],
+        ...processCompatibleConfig(otherConfig)
+      }
+
+      if (plugins) {
+        newConfig.plugins = Object.keys(plugins)
+      }
+      Object.assign(pluginDefs, plugins)
+      newConfigs.push(newConfig)
+    }
+
+    return [{ overrides: newConfigs }, pluginDefs]
   }
 }
 /** @returns {typeof eslint.ESLint} */
@@ -167,7 +189,6 @@ function getRuleTesterClassForV8() {
     return processCompatibleConfig(test)
   }
 }
-
 function processCompatibleConfig(config, linter) {
   const newConfig = { ...config }
   if (newConfig.languageOptions) {

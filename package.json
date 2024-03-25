@@ -8,6 +8,7 @@
     "start": "npm run test:base -- --watch --growl",
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
+    "test:integrations": "mocha \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
     "cover": "npm run cover:test && npm run cover:report",
     "cover:test": "nyc npm run test:base -- --timeout 60000",

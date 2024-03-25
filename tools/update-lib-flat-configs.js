@@ -49,22 +49,41 @@ function formatRules(rules, categoryId) {
 
 function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
-  if (extendsCategoryId == null) {
+  if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
 const globals = require('globals')
-module.exports = {
-  languageOptions: {
-    parser: require('vue-eslint-parser'),
-    sourceType: 'module',
-    globals: globals.browser
+module.exports = [
+  {
+    plugins: {
+      get vue() {
+        return require('../../index')
+      }
+    },
+    languageOptions: {
+      sourceType: 'module',
+      globals: globals.browser
+    }
   },
-  rules: ${formatRules(category.rules, category.categoryId)}
-}
-
+  {
+    files: ['*.vue', '**/*.vue'],
+    plugins: {
+      get vue() {
+        return require('../../index')
+      }
+    },
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
+      sourceType: 'module',
+      globals: globals.browser
+    },
+    rules: ${formatRules(category.rules, category.categoryId)},
+    processor: 'vue/vue'
+  }
+]
 `
   }
   return `/*
@@ -74,11 +93,13 @@ module.exports = {
  */
 'use strict'
 const config = require('./${extendsCategoryId}.js')
-const { extendRules } = require('../../utils/config-helpers.js')
 
-const rules = ${formatRules(category.rules, category.categoryId)}
-
-module.exports = extendRules(config, rules)
+module.exports = [
+  ...config,
+  {
+    rules: ${formatRules(category.rules, category.categoryId)},
+  }
+]
 `
 }
 
