@@ -34,8 +34,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority A: Essential (Error Prevention)
 
-- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/essential"`,`*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -132,8 +132,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority B: Strongly Recommended (Improving Readability)
 
-- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -169,8 +169,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority C: Recommended (Potentially Dangerous Patterns)
 
-- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/vue3-recommended"` preset.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/recommended"` preset.
+- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` preset.
 
 <rules-table>
 
@@ -308,7 +308,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/dot-notation](./dot-notation.md) | Enforce dot notation whenever possible in `<template>` | :wrench: | :hammer: |
 | [vue/eqeqeq](./eqeqeq.md) | Require the use of `===` and `!==` in `<template>` | :wrench: | :hammer: |
 | [vue/func-call-spacing](./func-call-spacing.md) | Require or disallow spacing between function identifiers and their invocations in `<template>` | :wrench: | :lipstick: |
-| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between keys and values in object literal properties in `<template>` | :wrench: | :lipstick: |
+| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between property names and type annotations in types and interfaces in `<template>` | :wrench: | :lipstick: |
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
 | [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
@@ -327,7 +327,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/object-shorthand](./object-shorthand.md) | Require or disallow method and property shorthand syntax for object literals in `<template>` | :wrench: | :hammer: |
 | [vue/operator-linebreak](./operator-linebreak.md) | Enforce consistent linebreak style for operators in `<template>` | :wrench: | :lipstick: |
 | [vue/prefer-template](./prefer-template.md) | Require template literals instead of string concatenation in `<template>` | :wrench: | :hammer: |
-| [vue/quote-props](./quote-props.md) | Require quotes around object literal property names in `<template>` | :wrench: | :lipstick: |
+| [vue/quote-props](./quote-props.md) | Require quotes around object literal, type literal, interfaces and enums property names in `<template>` | :wrench: | :lipstick: |
 | [vue/space-in-parens](./space-in-parens.md) | Enforce consistent spacing inside parentheses in `<template>` | :wrench: | :lipstick: |
 | [vue/space-infix-ops](./space-infix-ops.md) | Require spacing around infix operators in `<template>` | :wrench: | :lipstick: |
 | [vue/space-unary-ops](./space-unary-ops.md) | Enforce consistent spacing before or after unary operators in `<template>` | :wrench: | :lipstick: |

@@ -36,7 +36,6 @@ describe('Integration with flat config', () => {
         encoding: 'utf8'
       })
     )
-    // console.log(JSON.stringify(result, null, 2))
     assert.strictEqual(result.length, 1)
     assert.deepStrictEqual(result[0].messages, [])
   })

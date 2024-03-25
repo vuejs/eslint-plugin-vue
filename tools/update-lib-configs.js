@@ -12,7 +12,7 @@ This script updates `lib/configs/*.js` files from rule's meta data.
 const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
-const categories = require('./lib/categories')
+const { categories } = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 

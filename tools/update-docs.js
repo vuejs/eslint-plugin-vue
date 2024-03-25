@@ -23,6 +23,7 @@ const path = require('path')
 const rules = require('./lib/rules')
 const removedRules = require('../lib/removed-rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
+const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
@@ -122,10 +123,8 @@ class DocFile {
       }
     }
     if (meta.docs?.categories) {
-      const presets = getPresetIds(meta.docs.categories).map(
-        // non-prefixed configs are for vue2
-        // e.g. 'vue2-recommended' ->  'recommended'
-        (categoryId) => `\`"plugin:vue/${categoryId.replace(/^vue2-/, '')}"\``
+      const presets = getPresetIds(meta.docs.categories).flatMap((categoryId) =>
+        CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
 
       notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
