@@ -88,19 +88,19 @@ const categoryGroups = [
   {
     title: 'Priority A: Essential (Error Prevention)',
     categoryIdForVue3: 'vue3-essential',
-    categoryIdForVue2: 'essential',
+    categoryIdForVue2: 'vue2-essential',
     useMark: true
   },
   {
     title: 'Priority B: Strongly Recommended (Improving Readability)',
     categoryIdForVue3: 'vue3-strongly-recommended',
-    categoryIdForVue2: 'strongly-recommended',
+    categoryIdForVue2: 'vue2-strongly-recommended',
     useMark: true
   },
   {
     title: 'Priority C: Recommended (Potentially Dangerous Patterns)',
     categoryIdForVue3: 'vue3-recommended',
-    categoryIdForVue2: 'recommended',
+    categoryIdForVue2: 'vue2-recommended',
     useMark: true
   }
 ]
@@ -127,7 +127,7 @@ ${group.description}
         (categoryId) => `\`"plugin:vue/${categoryId}"\``
       )
       const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+        (categoryId) => `\`"plugin:vue/${categoryId.replace(/^vue2-/, '')}"\`` // 'vue2-recommended' ->  'recommended'
       )
       content += `
 - ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(

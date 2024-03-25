@@ -23,16 +23,16 @@ const categoryTitles = {
   'vue3-use-with-caution': {
     text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 3.x'
   },
-  essential: {
+  'vue2-essential': {
     text: 'Priority A: Essential (Error Prevention) for Vue.js 2.x'
   },
-  'strongly-recommended': {
+  'vue2-strongly-recommended': {
     text: 'Priority B: Strongly Recommended (Improving Readability) for Vue.js 2.x'
   },
-  recommended: {
+  'vue2-recommended': {
     text: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 2.x'
   },
-  'use-with-caution': {
+  'vue2-use-with-caution': {
     text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 2.x'
   }
 }

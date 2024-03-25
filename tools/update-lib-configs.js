@@ -14,17 +14,17 @@ const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const categories = require('./lib/categories')
 
-const errorCategories = new Set(['base', 'essential', 'vue3-essential'])
+const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
 const extendsCategories = {
   base: null,
-  essential: 'base',
+  'vue2-essential': 'base',
   'vue3-essential': 'base',
-  'strongly-recommended': 'essential',
+  'vue2-strongly-recommended': 'vue2-essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  recommended: 'strongly-recommended',
+  'vue2-recommended': 'vue2-strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended',
-  'use-with-caution': 'recommended',
+  'vue2-use-with-caution': 'vue2-recommended',
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
