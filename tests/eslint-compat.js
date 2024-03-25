@@ -176,6 +176,7 @@ function getRuleTesterClassForV8() {
     return processCompatibleConfig(test)
   }
 }
+
 function processCompatibleConfig(config, linter) {
   const newConfig = { ...config }
   if (newConfig.languageOptions) {

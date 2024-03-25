@@ -247,6 +247,7 @@ describe('flat configs', () => {
 
     assert.deepStrictEqual(result[0].messages, [])
   })
+
   it('should work the suppress comments with recommended config', async () => {
     if (!FlatESLint) return
     const recommended = plugin.configs['flat/recommended']
@@ -264,6 +265,7 @@ describe('flat configs', () => {
 
     assert.deepStrictEqual(result[0].messages, [])
   })
+
   it('should error with recommended config', async () => {
     if (!FlatESLint) return
     const recommended = plugin.configs['flat/recommended']
