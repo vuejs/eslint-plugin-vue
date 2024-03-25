@@ -27,9 +27,9 @@ yarn add -D eslint eslint-plugin-vue
 
 ## :book: Usage
 
-### Configuration (ESLint>=v9)
+### Configuration (`eslint.config.js`)
 
-Use `eslint.config.js` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
+Use `eslint.config.js` file to configure rules. This is the default in ESLint v9, but can be used starting from ESLint v8.57.0. See also: <https://eslint.org/docs/latest/use/configure/configuration-files-new>.
 
 Example **eslint.config.js**:
 
@@ -49,31 +49,31 @@ export default [
 ]
 ```
 
-See [the rule list](../rules/index.md) to get the `configs` &amp; `rules` that this plugin provides.
+See [the rule list](../rules/index.md) to get the `configs` & `rules` that this plugin provides.
 
-#### Bundle Configurations (ESLint>=v9)
+#### Bundle Configurations (`eslint.config.js`)
 
 This plugin provides some predefined configs.
 You can use the following configs by adding them to `eslint.config.js`.
-(All flat configs in this plugin are provided as arrays, so a spread syntax is required when combining them with other configs.)
+(All flat configs in this plugin are provided as arrays, so spread syntax is required when combining them with other configs.)
 
 - `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x.
+- Configurations for using Vue.js 3.x:
   - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
   - `*.configs["flat/strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
   - `*.configs["flat/recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-- Configurations for using Vue.js 2.x.
+- Configurations for using Vue.js 2.x:
   - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
   - `*.configs["flat/vue2-strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
   - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency
 
 :::warning Reporting rules
-By default all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
 :::
 
-### Configuration
+### Configuration (`.eslintrc`)
 
-Use `.eslintrc.*` file to configure rules. See also: <https://eslint.org/docs/latest/use/configure/>.
+Use `.eslintrc.*` file to configure rules in ESLint < v9. See also: <https://eslint.org/docs/latest/use/configure/>.
 
 Example **.eslintrc.js**:
 
@@ -92,25 +92,25 @@ module.exports = {
 }
 ```
 
-See [the rule list](../rules/index.md) to get the `extends` &amp; `rules` that this plugin provides.
+See [the rule list](../rules/index.md) to get the `extends` & `rules` that this plugin provides.
 
-#### Bundle Configurations
+#### Bundle Configurations (`.eslintrc`)
 
 This plugin provides some predefined configs.
 You can use the following configs by adding them to `extends`.
 
 - `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x.
+- Configurations for using Vue.js 3.x:
   - `"plugin:vue/vue3-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/vue3-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
   - `"plugin:vue/vue3-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-- Configurations for using Vue.js 2.x.
+- Configurations for using Vue.js 2.x:
   - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
   - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency
 
 :::warning Reporting rules
-By default all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
 :::
 
 :::warning Status of Vue.js 3.x supports
