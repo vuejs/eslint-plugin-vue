@@ -264,4 +264,29 @@ describe('flat configs', () => {
 
     assert.deepStrictEqual(result[0].messages, [])
   })
+  it('should error with recommended config', async () => {
+    if (!FlatESLint) return
+    const recommended = plugin.configs['flat/recommended']
+    const eslint = new FlatESLint({
+      overrideConfigFile: true,
+      overrideConfig: recommended
+    })
+    const code = `
+<template>
+  <div id id="a">Hello</div>
+</template>
+`
+    const result = await eslint.lintText(code, { filePath: 'MyComponent.vue' })
+
+    assert.deepStrictEqual(
+      result[0].messages.map((message) => message.ruleId),
+      [
+        'vue/no-parsing-error',
+        'vue/max-attributes-per-line',
+        'vue/no-duplicate-attributes',
+        'vue/singleline-html-element-content-newline',
+        'vue/singleline-html-element-content-newline'
+      ]
+    )
+  })
 })
