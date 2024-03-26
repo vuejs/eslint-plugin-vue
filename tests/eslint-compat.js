@@ -3,16 +3,25 @@ const eslint = require('eslint')
 const semver = require('semver')
 
 let ESLint = eslint.ESLint
+/** @type {typeof eslint.ESLint | null} */
+let FlatESLint = eslint.ESLint
 let Linter = eslint.Linter
 let RuleTester = eslint.RuleTester
 if (semver.lt(eslint.Linter.version, '9.0.0-0')) {
   ESLint = eslint.ESLint ? getESLintClassForV8() : getESLintClassForV6()
   Linter = getLinterClassForV8()
   RuleTester = getRuleTesterClassForV8()
+  try {
+    // @ts-ignore
+    FlatESLint = require('eslint/use-at-your-own-risk').FlatESLint
+  } catch {
+    FlatESLint = null
+  }
 }
 
 module.exports = {
   ESLint,
+  FlatESLint,
   RuleTester,
   Linter
 }

@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "integration-test-for-flat-config",
+  "version": "1.0.0",
+  "description": "Integration test for flat config",
+  "scripts": {},
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^9.0.0-0",
+    "eslint-plugin-vue": "file:../../.."
+  }
+}

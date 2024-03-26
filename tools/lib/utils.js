@@ -2,11 +2,11 @@ module.exports = { getPresetIds, formatItems }
 
 const presetCategories = {
   base: null,
-  essential: 'base',
+  'vue2-essential': 'base',
   'vue3-essential': 'base',
-  'strongly-recommended': 'essential',
+  'vue2-strongly-recommended': 'vue2-essential',
   'vue3-strongly-recommended': 'vue3-essential',
-  recommended: 'strongly-recommended',
+  'vue2-recommended': 'vue2-strongly-recommended',
   'vue3-recommended': 'vue3-strongly-recommended'
   // 'use-with-caution': 'recommended',
   // 'vue3-use-with-caution': 'vue3-recommended'
