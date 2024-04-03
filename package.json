@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "9.23.0",
+  "version": "9.24.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "start": "npm run test:base -- --watch --growl",
     "test:base": "mocha \"tests/lib/**/*.js\" --reporter dot",
     "test": "nyc npm run test:base -- \"tests/integrations/*.js\" --timeout 60000",
+    "test:integrations": "mocha \"tests/integrations/*.js\" --timeout 60000",
     "debug": "mocha --inspect \"tests/lib/**/*.js\" --reporter dot --timeout 60000",
     "cover": "npm run cover:test && npm run cover:report",
     "cover:test": "nyc npm run test:base -- --timeout 60000",
@@ -55,6 +56,7 @@
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
+    "globals": "^13.24.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.15",
