@@ -2202,6 +2202,16 @@ tester.run('no-unused-properties', rule, {
       filename: 'test.vue',
       code: `
       <template>
+        {{props}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b', 'c'])
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
         {{props.a}}
       </template>
       <script setup>
@@ -3955,6 +3965,22 @@ tester.run('no-unused-properties', rule, {
           line: 6
         }
       ]
+    },
+
+    // a property used as a template $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.foo }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['foo', 'bar']
+          }
+        </script>
+      `,
+      errors: ["'bar' of property found, but never used."]
     },
 
     // props.prop in template
