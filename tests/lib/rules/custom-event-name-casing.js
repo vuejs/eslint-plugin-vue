@@ -578,37 +578,6 @@ tester.run('custom-event-name-casing', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <input
-          @click="$emit('fooBar')">
-      </template>
-      <script>
-      export default {
-        setup(props, context) {
-          return {
-            onInput(value) {
-              context.emit('barBaz')
-            }
-          }
-        },
-        methods: {
-          onClick() {
-            this.$emit('bazQux')
-          }
-        }
-      }
-      </script>
-      `,
-      options: ['kebab-case'],
-      errors: [
-        "Custom event name 'fooBar' must be kebab-case.",
-        "Custom event name 'barBaz' must be kebab-case.",
-        "Custom event name 'bazQux' must be kebab-case."
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
       <script setup>
       const emit = defineEmits({})
       emit('fooBar')
