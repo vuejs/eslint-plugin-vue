@@ -28,12 +28,8 @@ jobs:
       matrix:
         node: [18, 20]
         os: [ubuntu-latest]
-        eslint: [8]
+        eslint: [8, 9]
         include:
-          # On next ESLint version
-          - eslint: ^9.0.0-0
-            node: 20
-            os: ubuntu-latest
           # On old Node version
           - eslint: 8
             node: 17
