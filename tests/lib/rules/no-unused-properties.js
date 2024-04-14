@@ -718,6 +718,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property used as a template $props expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          }
+        </script>
+      `
+    },
 
     // properties used in a template expression
     {
@@ -902,6 +916,20 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <button @click="alert($props.count)" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
+    // a property used in v-on as $props expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <button @click="alert($props)" />
         </template>
         <script>
           export default {
@@ -2452,6 +2480,48 @@ tester.run('no-unused-properties', rule, {
         {{ foo }}
       </template>
       `
+    },
+
+    // props.prop in template
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b', 'c'])
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props.a}}
+      </template>
+      <script setup>
+      const props = defineProps(['a'])
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{foo.a}}
+      </template>
+      <script setup>
+      const foo = defineProps(['a'])
+      </script>`
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      const props = defineProps<{ foo: string, bar: string }>()
+      </script>
+      <template>
+      {{ props.foo }}{{ bar }}
+      </template>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
@@ -4619,6 +4689,57 @@ tester.run('no-unused-properties', rule, {
           line: 6
         }
       ]
+    },
+
+    // a property used as a template $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.foo }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['foo', 'bar']
+          }
+        </script>
+      `,
+      errors: ["'bar' of property found, but never used."]
+    },
+
+    // props.prop in template
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props.a}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b'])
+      </script>`,
+      errors: ["'b' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{foo.a}}
+      </template>
+      <script setup>
+      const foo = defineProps(['a', 'b'])
+      </script>`,
+      errors: ["'b' of property found, but never used."]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      const props = defineProps<{ foo: string, bar: string, baz: string }>()
+      </script>
+      <template>
+      {{ props.foo }}{{ bar }}
+      </template>`,
+      errors: ["'baz' of property found, but never used."],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
