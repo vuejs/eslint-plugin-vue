@@ -158,6 +158,7 @@ function httpGet(url) {
             baseUrl.pathname = redirectUrl
             redirectUrl = String(baseUrl)
           }
+          res.destroy()
           resolve(httpGet(redirectUrl))
           return
         }
