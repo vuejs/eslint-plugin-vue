@@ -329,6 +329,28 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaultProps = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo: string;
+        bar?: number;
+      }>(), {
+        ...defaultProps,
+        bar: 42,
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -542,6 +564,33 @@ ruleTester.run('require-default-prop', rule, {
       languageOptions: {
         parser: require('vue-eslint-parser'),
         ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaultProps = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo: string;
+        bar?: number;
+      }>(), {
+        ...defaultProps,
+      })
+      </script>
+      `,
+      errors: [
+        {
+          message: "Prop 'bar' requires default value to be set.",
+          line: 8
+        }
+      ],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
     },
     ...(semver.lt(
