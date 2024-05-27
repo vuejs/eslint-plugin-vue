@@ -485,6 +485,30 @@ tester.run('define-props-declaration', rule, {
           line: 3
         }
       ]
+    },
+    // runtime
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps<{
+          kind: string;
+        }>()
+        </script>
+      `,
+      output: null,
+      options: ['runtime'],
+      errors: [
+        {
+          message: 'Use runtime declaration instead of type-based declaration.',
+          line: 3
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ]
 })
