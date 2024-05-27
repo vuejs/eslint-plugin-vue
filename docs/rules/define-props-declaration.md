@@ -18,7 +18,7 @@ This rule enforces `defineProps` typing style which you should use `type-based` 
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -49,7 +49,7 @@ const props = defineProps({
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+<eslint-code-block fix :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
