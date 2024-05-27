@@ -10,7 +10,7 @@ const rule = require('../../../lib/rules/define-props-declaration')
 const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
-    ecmaVersion: 'latest',
+    ecmaVersion: '2020',
     sourceType: 'module',
     parserOptions: {
       parser: require.resolve('@typescript-eslint/parser')
@@ -289,6 +289,28 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    // Custom type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: User
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: User }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
     // Native Type with PropType
     {
       filename: 'test.vue',
@@ -334,6 +356,62 @@ tester.run('define-props-declaration', rule, {
         {
           message: 'Use type-based declaration instead of runtime declaration.',
           line: 3
+        }
+      ]
+    },
+    // Object with PropType with separate type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Kind { id: number; name: string }
+      
+      const props = defineProps({
+        kind: {
+          type: Object as PropType<Kind>,
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      interface Kind { id: number; name: string }
+      
+      const props = defineProps<{ kind: Kind }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 5
+        }
+      ]
+    },
+    // Object with PropType with separate imported type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import Kind from 'test'
+      
+      const props = defineProps({
+        kind: {
+          type: Object as PropType<Kind>,
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import Kind from 'test'
+      
+      const props = defineProps<{ kind: Kind }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 5
         }
       ]
     },
