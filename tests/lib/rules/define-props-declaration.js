@@ -460,6 +460,31 @@ tester.run('define-props-declaration', rule, {
           line: 3
         }
       ]
+    },
+    // separate interface
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: {
+            type: Object as PropType<{ id: number; name: string }>
+          }
+        })
+        </script>
+        `,
+      output: `
+        <script setup lang="ts">
+        interface Props { kind: { id: number, name: string } }; const props = defineProps<Props>()
+        </script>
+        `,
+      options: ['type-based', { separateInterface: true }],
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
     }
   ]
 })
