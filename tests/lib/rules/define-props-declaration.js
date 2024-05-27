@@ -10,8 +10,11 @@ const rule = require('../../../lib/rules/define-props-declaration')
 const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
-    ecmaVersion: 2020,
-    sourceType: 'module'
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    parserOptions: {
+      parser: require.resolve('@typescript-eslint/parser')
+    }
   }
 })
 
@@ -108,6 +111,7 @@ tester.run('define-props-declaration', rule, {
     }
   ],
   invalid: [
+    // default
     {
       filename: 'test.vue',
       code: `
@@ -117,6 +121,11 @@ tester.run('define-props-declaration', rule, {
       })
       </script>
       `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: string }>()
+      </script>
+      `,
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
@@ -124,6 +133,30 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    /* TYPE-BASED */
+    // shorthand syntax
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: String
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: string }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // String
     {
       filename: 'test.vue',
       code: `
@@ -131,6 +164,11 @@ tester.run('define-props-declaration', rule, {
       const props = defineProps({
         kind: { type: String },
       })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: string }>()
       </script>
       `,
       options: ['type-based'],
@@ -141,27 +179,115 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    // Number
     {
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
-      const props = defineProps<{
-        kind: string;
-      }>()
+      const props = defineProps({
+        kind: { type: Number}
+      })
       </script>
       `,
-      options: ['runtime'],
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: number }>()
+      </script>
+      `,
       errors: [
         {
-          message: 'Use runtime declaration instead of type-based declaration.',
+          message: 'Use type-based declaration instead of runtime declaration.',
           line: 3
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
+      ]
+    },
+    // Boolean
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: { type:Boolean}
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: boolean }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
         }
-      }
+      ]
+    },
+    // Object
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: { type:Object}
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: Record<string, any> }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // Array
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: { type:Array}
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: any[] }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // Function
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: { type: Function}
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: () => void }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
     }
   ]
 })
