@@ -344,8 +344,7 @@ tester.run('define-props-declaration', rule, {
       <script setup lang="ts">
       const props = defineProps({
         kind: {
-          type: Array as PropType<string[]>,
-          default: () => []
+          type: Array as PropType<string[]>
         }
       })
       </script>
@@ -428,6 +427,31 @@ tester.run('define-props-declaration', rule, {
       output: `
         <script setup lang="ts">
         const props = defineProps<{ kind?: string }>()
+        </script>
+        `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // default value
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: {
+            type: String,
+            default: 'foo'
+          }
+        })
+        </script>
+        `,
+      output: `
+        <script setup lang="ts">
+        const props = withDefaults(defineProps<{ kind?: string }>(), { kind: 'foo' })
         </script>
         `,
       errors: [
