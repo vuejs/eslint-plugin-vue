@@ -288,6 +288,104 @@ tester.run('define-props-declaration', rule, {
           line: 3
         }
       ]
+    },
+    // Native Type with PropType
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: {
+          type: String as PropType<'a' | 'b'>,
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: 'a' | 'b' }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // Object with PropType
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: {
+          type: Object as PropType<{ id: number; name: string }>,
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: { id: number; name: string } }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // Array with PropType
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: {
+          type: Array as PropType<string[]>,
+          default: () => []
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: string[] }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
+    // Function with PropType
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps({
+        kind: {
+          type: Function as PropType<(a: number, b: string) => boolean>,
+          required: true
+        }
+      })
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind: (a: number, b: string) => boolean }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
     }
   ]
 })
