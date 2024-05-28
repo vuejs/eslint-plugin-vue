@@ -588,6 +588,30 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    // Some unhandled expression type
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: {
+            type: typeof Test
+          }
+        })
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+        const props = defineProps<{ kind: typeof Test }>()
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
     // runtime
     {
       filename: 'test.vue',
