@@ -566,7 +566,6 @@ tester.run('define-props-declaration', rule, {
     },
     // Array of types
     {
-      only: true,
       filename: 'test.vue',
       code: `
         <script setup lang="ts">
