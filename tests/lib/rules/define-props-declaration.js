@@ -564,6 +564,31 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    // Array of types
+    {
+      only: true,
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: {
+            type: [String, Number]
+          }
+        })
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+        const props = defineProps<{ kind: string | number }>()
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
     // runtime
     {
       filename: 'test.vue',
