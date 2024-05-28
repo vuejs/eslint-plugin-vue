@@ -588,6 +588,30 @@ tester.run('define-props-declaration', rule, {
         }
       ]
     },
+    // Union type (Number || String)
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+        const props = defineProps({
+          kind: {
+            type: Number || String
+          }
+        })
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+        const props = defineProps<{ kind: number | string }>()
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
+          line: 3
+        }
+      ]
+    },
     // Some unhandled expression type
     {
       filename: 'test.vue',
