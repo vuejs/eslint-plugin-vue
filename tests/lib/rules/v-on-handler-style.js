@@ -71,6 +71,23 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><button :click="foo()" /></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="value++" />
+        <button @click="foo()" />
+        <button @click="foo($event)" />
+        <button @click="(evt) => foo(evt)" />
+        <button @click="(a, b) => foo(a, b)" />
+        <template v-for="e in list">
+          <button @click="foo(e)" />
+          <button @click="foo($event, e)" />
+          <button @click="(evt) => foo(evt, e)" />
+          <button @click="(a, b) => foo(a, b, e)" />
+        </template>
+      </template>`,
+      options: [['inline', 'inline-function']]
     }
   ],
   invalid: [
@@ -1134,6 +1151,56 @@ tester.run('v-on-handler-style', rule, {
             'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
           line: 2,
           column: 25
+        }
+      ]
+    },
+    // ['inline', 'inline-function']
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => value++" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+        <button @click="() => foo($event)" />
+        <template v-for="e in list">
+          <button @click="() => foo(e)" />
+        </template>
+      </template>`,
+      output: `<template>
+        <button @click="value++" />
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo($event)" />
+        <template v-for="e in list">
+          <button @click="foo(e)" />
+        </template>
+      </template>`,
+      options: [['inline', 'inline-function']],
+      errors: [
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 2,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over method handler in v-on.',
+          line: 3,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 4,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 5,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 7,
+          column: 27
         }
       ]
     }
