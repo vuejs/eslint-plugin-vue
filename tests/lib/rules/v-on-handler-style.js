@@ -78,6 +78,21 @@ tester.run('v-on-handler-style', rule, {
         <button @click="value++" />
         <button @click="foo()" />
         <button @click="foo($event)" />
+        <button @click="(a, b) => foo(a, b)" />
+        <template v-for="e in list">
+          <button @click="foo(e)" />
+          <button @click="foo($event, e)" />
+          <button @click="(a, b) => foo(a, b, e)" />
+        </template>
+      </template>`,
+      options: [['inline', 'inline-function']]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="value++" />
+        <button @click="foo()" />
+        <button @click="foo($event)" />
         <button @click="(evt) => foo(evt)" />
         <button @click="(a, b) => foo(a, b)" />
         <template v-for="e in list">
@@ -87,7 +102,10 @@ tester.run('v-on-handler-style', rule, {
           <button @click="(a, b) => foo(a, b, e)" />
         </template>
       </template>`,
-      options: [['inline', 'inline-function']]
+      options: [
+        ['inline', 'inline-function'],
+        { allowInlineFuncSingleArg: true }
+      ]
     }
   ],
   invalid: [
@@ -205,6 +223,30 @@ tester.run('v-on-handler-style', rule, {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 1,
           column: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div @click="() => foo()" />
+        <div @click="(event) => foo(event)" />
+      </template>`,
+      output: `<template>
+        <div @click="foo" />
+        <div @click="foo" />
+      </template>`,
+      options: [['method', 'inline-function']],
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 22
+        },
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 3,
+          column: 22
         }
       ]
     },
@@ -1162,8 +1204,9 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo" />
         <button @click="() => foo()" />
         <button @click="() => foo($event)" />
+        <button @click="(event) => foo(event)" />
         <template v-for="e in list">
-          <button @click="() => foo(e)" />
+          <button @click="(event) => foo(event, e)" />
         </template>
       </template>`,
       output: `<template>
@@ -1171,8 +1214,9 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo" />
         <button @click="foo()" />
         <button @click="foo($event)" />
+        <button @click="(event) => foo(event)" />
         <template v-for="e in list">
-          <button @click="foo(e)" />
+          <button @click="(event) => foo(event, e)" />
         </template>
       </template>`,
       options: [['inline', 'inline-function']],
@@ -1199,8 +1243,93 @@ tester.run('v-on-handler-style', rule, {
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
-          line: 7,
+          line: 6,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 8,
           column: 27
+        }
+      ]
+    },
+    // ['inline', 'inline-function'] + allowInlineFuncSingleArg
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <button @click="() => value++" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+        <button @click="() => foo($event)" />
+        <button @click="(event) => foo(event)" />
+        <template v-for="e in list">
+          <button @click="() => foo(e)" />
+          <button @click="(event) => foo(event, e)" />
+        </template>
+      </template>`,
+      output: `<template>
+        <button @click="value++" />
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo($event)" />
+        <button @click="(event) => foo(event)" />
+        <template v-for="e in list">
+          <button @click="foo(e)" />
+          <button @click="(event) => foo(event, e)" />
+        </template>
+      </template>`,
+      options: [
+        ['inline', 'inline-function'],
+        { allowInlineFuncSingleArg: true }
+      ],
+      errors: [
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 2,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over method handler in v-on.',
+          line: 3,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 4,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 5,
+          column: 25
+        },
+        {
+          message: 'Prefer inline handler over inline function in v-on.',
+          line: 8,
+          column: 27
+        }
+      ]
+    },
+    // ['method', 'inline-function'] + allowInlineFuncSingleArg
+    {
+      filename: 'test.vue',
+      code: `<template>
+        <div @click="() => foo()" />
+        <div @click="(event) => foo(event)" />
+      </template>`,
+      output: `<template>
+        <div @click="foo" />
+        <div @click="(event) => foo(event)" />
+      </template>`,
+      options: [
+        ['method', 'inline-function'],
+        { allowInlineFuncSingleArg: true }
+      ],
+      errors: [
+        {
+          message: 'Prefer method handler over inline function in v-on.',
+          line: 2,
+          column: 22
         }
       ]
     }
