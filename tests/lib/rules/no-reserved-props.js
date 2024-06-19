@@ -261,6 +261,12 @@ tester.run('no-reserved-props', rule, {
       defineProps<Props>()
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
@@ -272,13 +278,7 @@ tester.run('no-reserved-props', rule, {
           line: 5,
           column: 9
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',

@@ -807,13 +807,6 @@ tester.run('no-undef-components', rule, {
         <Foo />
       </template>
       `,
-      errors: [
-        {
-          message:
-            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
-          line: 7
-        }
-      ],
       languageOptions: {
         parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
@@ -821,7 +814,14 @@ tester.run('no-undef-components', rule, {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        {
+          message:
+            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
+          line: 7
+        }
+      ]
     },
 
     // options API

@@ -372,14 +372,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -391,14 +391,14 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -408,14 +408,14 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -427,14 +427,14 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
+      languageOptions,
       errors: [
         {
           message: 'Prop "greetingText" is not in snake_case.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -446,14 +446,14 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -465,14 +465,14 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in snake_case.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -483,14 +483,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       // computed property name
@@ -502,14 +502,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       // shorthand
@@ -521,14 +521,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -539,14 +539,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "abc-123-def" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       // Parentheses computed property name
@@ -558,14 +558,14 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
           type: 'Property',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -576,8 +576,8 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      errors: ['Prop "_item" is not in camelCase.'],
-      languageOptions
+      languageOptions,
+      errors: ['Prop "_item" is not in camelCase.']
     },
     {
       filename: 'test.vue',
@@ -589,8 +589,8 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      errors: ['Prop "_itemName" is not in snake_case.'],
-      languageOptions
+      languageOptions,
+      errors: ['Prop "_itemName" is not in snake_case.']
     },
     {
       // TemplateLiteral computed property
@@ -602,8 +602,8 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      errors: ['Prop "greeting-text" is not in camelCase.'],
-      languageOptions
+      languageOptions,
+      errors: ['Prop "greeting-text" is not in camelCase.']
     },
     {
       // RegExp Literal computed property name
@@ -615,8 +615,8 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      errors: ['Prop "/greeting-text/" is not in camelCase.'],
-      languageOptions
+      languageOptions,
+      errors: ['Prop "/greeting-text/" is not in camelCase.']
     },
     {
       filename: 'test.vue',
@@ -627,16 +627,16 @@ ruleTester.run('prop-name-casing', rule, {
       })
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -645,16 +645,16 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps(['greeting_text'])
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
           line: 3
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,

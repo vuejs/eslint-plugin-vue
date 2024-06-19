@@ -414,15 +414,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      },
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ],
-      languageOptions: {
-        parser: require('@typescript-eslint/parser')
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -435,13 +435,13 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
+      languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ],
-      languageOptions: { parser: require('@typescript-eslint/parser') }
+      ]
     },
 
     // computed properties
@@ -555,16 +555,16 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
           line: 4
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -581,17 +581,17 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message: "Prop 'bar' requires default value to be set.",
           line: 8
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions,
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,

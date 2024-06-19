@@ -223,17 +223,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -266,17 +266,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -309,17 +309,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "na::me" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -354,17 +354,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 5
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -395,17 +395,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -438,17 +438,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -481,17 +481,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "na"me2" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -524,17 +524,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "foo" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -567,17 +567,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -610,17 +610,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "name" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -653,17 +653,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "a" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -696,17 +696,17 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Prop "a" should be optional.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',

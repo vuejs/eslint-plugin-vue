@@ -1031,17 +1031,17 @@ ruleTester.run('no-mutating-props', rule, {
         props.value++
         </script>
       `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
           line: 6
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',

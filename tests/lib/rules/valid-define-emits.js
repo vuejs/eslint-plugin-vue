@@ -155,15 +155,15 @@ tester.run('valid-define-emits', rule, {
         defineEmits<(e: 'notify')=>void>({ submit: null })
       </script>
       `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message: '`defineEmits` has both a type-only emit and an argument.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
+      ]
     },
     {
       filename: 'test.vue',

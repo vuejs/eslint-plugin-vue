@@ -187,14 +187,14 @@ ruleTester.run('component-definition-name-casing', rule, {
           name: 'FooBar'
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -204,14 +204,14 @@ ruleTester.run('component-definition-name-casing', rule, {
         }
       `,
       output: null,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo  bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -221,14 +221,14 @@ ruleTester.run('component-definition-name-casing', rule, {
         }
       `,
       output: null,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo!bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -238,14 +238,14 @@ ruleTester.run('component-definition-name-casing', rule, {
         })
       `,
       output: null,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: 'Property name "foo!bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.vue',
@@ -259,14 +259,14 @@ ruleTester.run('component-definition-name-casing', rule, {
           name: 'FooBar'
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -281,14 +281,14 @@ ruleTester.run('component-definition-name-casing', rule, {
         }
       `,
       options: ['PascalCase'],
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -303,156 +303,156 @@ ruleTester.run('component-definition-name-casing', rule, {
         }
       `,
       options: ['kebab-case'],
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'Literal',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `Vue.component('foo-bar', component)`,
       output: `Vue.component('FooBar', component)`,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `app.component('foo-bar', component)`,
       output: `app.component('FooBar', component)`,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `(Vue as VueConstructor<Vue>).component('foo-bar', component)`,
       output: `(Vue as VueConstructor<Vue>).component('FooBar', component)`,
+      languageOptions: {
+        parser: require('@typescript-eslint/parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions: {
-        parser: require('@typescript-eslint/parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'test.vue',
       code: `Vue.component('foo-bar', {})`,
       output: `Vue.component('FooBar', {})`,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `app.component('foo-bar', {})`,
       output: `app.component('FooBar', {})`,
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
       code: `Vue.component('foo_bar', {})`,
       output: `Vue.component('FooBar', {})`,
       options: ['PascalCase'],
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `Vue.component('foo_bar', {})`,
       output: `Vue.component('foo-bar', {})`,
       options: ['kebab-case'],
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'Literal',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `Vue.component(\`foo_bar\`, {})`,
       output: `Vue.component(\`foo-bar\`, {})`,
       options: ['kebab-case'],
+      languageOptions,
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'TemplateLiteral',
           line: 1
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
       output: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
       options: ['PascalCase'],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           line: 1
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
       output: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
       options: ['kebab-case'],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Property name "FooBar" is not kebab-case.',
           line: 1
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     }
   ]
 })

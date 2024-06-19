@@ -145,6 +145,12 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export {}
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: '`<script setup>` cannot contain ES module exports.',
@@ -158,13 +164,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     }
   ]
 })
