@@ -144,6 +144,7 @@ module.exports = [
       'prefer-const': 2,
 
       'prettier/prettier': 'error',
+      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-fixable': [
         'error',
         { catchNoFixerButFixableProperty: true }
