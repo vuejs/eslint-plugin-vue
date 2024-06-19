@@ -142,7 +142,7 @@ class DocFile {
 
     if (!this.since) {
       notes.unshift(
-        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`
+        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>`
       )
     }
 
