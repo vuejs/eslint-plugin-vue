@@ -88,8 +88,8 @@ class DocFile {
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
     const escapedDescription = description
-      .replace(/\*/g, '\\*')
-      .replace(/_/g, '\\_')
+      .replace(/\*/g, String.raw`\*`)
+      .replace(/_/g, String.raw`\_`)
     const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
