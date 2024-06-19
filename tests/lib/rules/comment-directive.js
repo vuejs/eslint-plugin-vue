@@ -12,7 +12,7 @@ const { ESLint } = require('../../eslint-compat')
 const eslint = new ESLint({
   overrideConfigFile: true,
   overrideConfig: {
-    files: ['*'],
+    files: ['*.*'],
     languageOptions: {
       parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
