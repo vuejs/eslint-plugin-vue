@@ -9,7 +9,7 @@ description: Enforce the consistent use of either backticks, double, or single q
 
 > Enforce the consistent use of either backticks, double, or single quotes in `<template>`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as stylistic [quotes] rule but it applies to the expressions in `<template>`.
