@@ -88,8 +88,8 @@ class DocFile {
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
     const escapedDescription = description
-      .replace(/\*/g, '\\*')
-      .replace(/_/g, '\\_')
+      .replace(/\*/g, String.raw`\*`)
+      .replace(/_/g, String.raw`\_`)
     const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
@@ -142,7 +142,7 @@ class DocFile {
 
     if (!this.since) {
       notes.unshift(
-        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`
+        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>`
       )
     }
 

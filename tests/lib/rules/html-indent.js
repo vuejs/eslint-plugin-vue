@@ -471,7 +471,7 @@ tester.run(
       `,
         errors: [
           {
-            message: 'Expected " " character, but found "\\t" character.',
+            message: String.raw`Expected " " character, but found "\t" character.`,
             line: 3
           }
         ]
@@ -495,7 +495,7 @@ tester.run(
         options: ['tab'],
         errors: [
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 3
           }
         ]
@@ -931,7 +931,7 @@ tester.run(
         options: ['tab', { ignores: ['VAttribute'] }],
         errors: [
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 2
           }
         ]

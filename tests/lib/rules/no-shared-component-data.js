@@ -129,13 +129,13 @@ return {
 }
         })
       `,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -155,13 +155,13 @@ return {
 }
         })
       `,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -181,13 +181,13 @@ return {
 }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -207,13 +207,13 @@ return (/*b*/{
 }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
           line: 3
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })

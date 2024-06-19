@@ -76,6 +76,7 @@ ruleTester.run('require-name-property', rule, {
         export default {
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -91,8 +92,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -100,6 +100,7 @@ ruleTester.run('require-name-property', rule, {
         export default defineComponent({
         })
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -115,14 +116,14 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
       code: `
         export default defineComponent({ })
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -138,14 +139,14 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
       code: `
         export default { }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -161,8 +162,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -171,6 +171,7 @@ ruleTester.run('require-name-property', rule, {
         nameNot: 'IssaNameNot'
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -187,8 +188,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -197,6 +197,7 @@ ruleTester.run('require-name-property', rule, {
           nameNot: 'IssaNameNot'
         })
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -213,8 +214,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
 
     {
@@ -226,6 +226,7 @@ ruleTester.run('require-name-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -244,8 +245,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'InvalidComponent.vue',
@@ -254,6 +254,7 @@ ruleTester.run('require-name-property', rule, {
           [name]: 'IssaName'
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -270,8 +271,7 @@ ruleTester.run('require-name-property', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })

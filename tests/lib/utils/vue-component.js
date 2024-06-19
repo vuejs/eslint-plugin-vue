@@ -345,14 +345,14 @@ ruleTester.run('vue-component', rule, {
     {
       filename: 'test.vue',
       code: `export default { }`,
-      errors: [makeError(1)],
-      languageOptions
+      languageOptions,
+      errors: [makeError(1)]
     },
     {
       filename: 'test.jsx',
       code: `export default { }`,
-      errors: [makeError(1)],
-      languageOptions
+      languageOptions,
+      errors: [makeError(1)]
     },
     ...invalidTests('js'),
     ...invalidTests('jsx'),

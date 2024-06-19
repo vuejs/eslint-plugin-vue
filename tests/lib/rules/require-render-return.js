@@ -136,14 +136,14 @@ ruleTester.run('require-render-return', rule, {
         render() {
         }
       }`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -154,14 +154,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       }`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     },
     {
       code: `Vue.component('test', {
@@ -171,14 +171,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     },
     {
       code: `app.component('test', {
@@ -188,14 +188,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     },
     {
       code: `Vue.component('test2', {
@@ -205,14 +205,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     },
     {
       code: `Vue.component('test2', {
@@ -224,14 +224,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
           type: 'Identifier',
           line: 2
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })

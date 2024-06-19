@@ -179,14 +179,14 @@ tester.run('no-expose-after-await', rule, {
       defineExpose({ /* ... */ })
       </script>
       `,
+      languageOptions: { ecmaVersion: 2022 },
       errors: [
         {
           message: '`defineExpose` is forbidden after an `await` expression.',
           line: 4,
           column: 7
         }
-      ],
-      languageOptions: { ecmaVersion: 2022 }
+      ]
     }
   ]
 })

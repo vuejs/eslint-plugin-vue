@@ -1,14 +1,11 @@
 'use strict'
 
 const globals = require('globals')
-const { FlatCompat } = require('@eslint/eslintrc')
 const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
+const eslintPluginJsonc = require('eslint-plugin-jsonc')
+const eslintPluginNodeDependencies = require('eslint-plugin-node-dependencies')
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
 const eslintPluginUnicorn = require('eslint-plugin-unicorn')
-
-const eslintrc = new FlatCompat({
-  baseDirectory: __dirname
-})
 
 module.exports = [
   {
@@ -30,10 +27,8 @@ module.exports = [
   },
   eslintPluginEslintPlugin,
   eslintPluginUnicorn.configs['flat/recommended'],
-  ...eslintrc.extends(
-    'plugin:node-dependencies/recommended',
-    'plugin:jsonc/recommended-with-jsonc'
-  ),
+  ...eslintPluginNodeDependencies.configs['flat/recommended'],
+  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
   eslintPluginPrettierRecommended,
   {
     plugins: {
@@ -144,6 +139,7 @@ module.exports = [
       'prefer-const': 2,
 
       'prettier/prettier': 'error',
+      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-fixable': [
         'error',
         { catchNoFixerButFixableProperty: true }

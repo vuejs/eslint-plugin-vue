@@ -220,6 +220,7 @@ tester.run('require-typed-ref', rule, {
           const count = ref()
         </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           messageId: 'noType',
@@ -228,8 +229,7 @@ tester.run('require-typed-ref', rule, {
           endLine: 4,
           endColumn: 30
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     {
       filename: 'test.vue',
@@ -244,6 +244,7 @@ tester.run('require-typed-ref', rule, {
         </script>
       }
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           messageId: 'noType',
@@ -252,8 +253,7 @@ tester.run('require-typed-ref', rule, {
           endLine: 6,
           endColumn: 34
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     {
       filename: 'test.ts',

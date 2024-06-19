@@ -150,14 +150,14 @@ return {
 }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -177,14 +177,14 @@ return {
 }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -204,14 +204,14 @@ return {
 }
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -231,14 +231,14 @@ return (/*b*/{
 }
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -258,14 +258,14 @@ return {
 }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -285,14 +285,14 @@ return {
 }
         }).mount('#app')
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
           line: 3
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })
