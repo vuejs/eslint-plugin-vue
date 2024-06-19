@@ -65,7 +65,7 @@
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
-    "@ota-meshi/site-kit-eslint-editor-vue": "^0.1.2",
+    "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.0",
     "@stylistic/eslint-plugin": "^2.2.2",
     "@types/eslint": "^8.56.2",
     "@types/eslint-visitor-keys": "^3.3.0",
