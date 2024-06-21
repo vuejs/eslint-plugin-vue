@@ -279,7 +279,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: () => void }>()
+      const props = defineProps<{ kind: (...args: any[]) => any }>()
       </script>
       `,
       errors: [
