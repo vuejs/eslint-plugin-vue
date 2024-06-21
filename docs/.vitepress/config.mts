@@ -214,6 +214,10 @@ export default async () => {
         ]
       },
 
+      outline: {
+        level: 'deep'
+      },
+
       algolia: {
         appId: '2L4MGZSULB',
         apiKey: 'fdf57932b27a6c230d01a890492ab76d',
