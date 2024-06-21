@@ -123,7 +123,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: string }>()
+      const props = defineProps<{ kind?: string }>()
       </script>
       `,
       errors: [
@@ -146,7 +146,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: string }>()
+      const props = defineProps<{ kind?: string }>()
       </script>
       `,
       errors: [
@@ -168,7 +168,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: string }>()
+      const props = defineProps<{ kind?: string }>()
       </script>
       `,
       options: ['type-based'],
@@ -191,7 +191,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: number }>()
+      const props = defineProps<{ kind?: number }>()
       </script>
       `,
       errors: [
@@ -207,13 +207,13 @@ tester.run('define-props-declaration', rule, {
       code: `
       <script setup lang="ts">
       const props = defineProps({
-        kind: { type:Boolean}
+        kind: { type: Boolean}
       })
       </script>
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: boolean }>()
+      const props = defineProps<{ kind?: boolean }>()
       </script>
       `,
       errors: [
@@ -235,7 +235,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: Record<string, any> }>()
+      const props = defineProps<{ kind?: Record<string, any> }>()
       </script>
       `,
       errors: [
@@ -257,7 +257,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: any[] }>()
+      const props = defineProps<{ kind?: any[] }>()
       </script>
       `,
       errors: [
@@ -279,7 +279,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: (...args: any[]) => any }>()
+      const props = defineProps<{ kind?: (...args: any[]) => any }>()
       </script>
       `,
       errors: [
@@ -301,7 +301,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: User }>()
+      const props = defineProps<{ kind?: User }>()
       </script>
       `,
       errors: [
@@ -325,7 +325,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: 'a' | 'b' }>()
+      const props = defineProps<{ kind?: 'a' | 'b' }>()
       </script>
       `,
       errors: [
@@ -349,7 +349,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: { id: number; name: string } }>()
+      const props = defineProps<{ kind?: { id: number; name: string } }>()
       </script>
       `,
       errors: [
@@ -377,7 +377,7 @@ tester.run('define-props-declaration', rule, {
       <script setup lang="ts">
       interface Kind { id: number; name: string }
       
-      const props = defineProps<{ kind: Kind }>()
+      const props = defineProps<{ kind?: Kind }>()
       </script>
       `,
       errors: [
@@ -405,7 +405,7 @@ tester.run('define-props-declaration', rule, {
       <script setup lang="ts">
       import Kind from 'test'
       
-      const props = defineProps<{ kind: Kind }>()
+      const props = defineProps<{ kind?: Kind }>()
       </script>
       `,
       errors: [
@@ -429,7 +429,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: string[] }>()
+      const props = defineProps<{ kind?: string[] }>()
       </script>
       `,
       errors: [
@@ -447,14 +447,13 @@ tester.run('define-props-declaration', rule, {
       const props = defineProps({
         kind: {
           type: Function as PropType<(a: number, b: string) => boolean>,
-          required: true
         }
       })
       </script>
       `,
       output: `
       <script setup lang="ts">
-      const props = defineProps<{ kind: (a: number, b: string) => boolean }>()
+      const props = defineProps<{ kind?: (a: number, b: string) => boolean }>()
       </script>
       `,
       errors: [
@@ -553,7 +552,7 @@ tester.run('define-props-declaration', rule, {
         `,
       output: `
         <script setup lang="ts">
-        interface Props { kind: { id: number, name: string } }; const props = defineProps<Props>()
+        interface Props { kind?: { id: number, name: string } }; const props = defineProps<Props>()
         </script>
         `,
       options: ['type-based', { separateInterface: true }],
@@ -578,7 +577,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
         <script setup lang="ts">
-        const props = defineProps<{ kind: string | number }>()
+        const props = defineProps<{ kind?: string | number }>()
         </script>
       `,
       errors: [
@@ -602,7 +601,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
         <script setup lang="ts">
-        const props = defineProps<{ kind: number | string }>()
+        const props = defineProps<{ kind?: number | string }>()
         </script>
       `,
       errors: [
@@ -626,7 +625,7 @@ tester.run('define-props-declaration', rule, {
       `,
       output: `
         <script setup lang="ts">
-        const props = defineProps<{ kind: typeof Test }>()
+        const props = defineProps<{ kind?: typeof Test }>()
         </script>
       `,
       errors: [
