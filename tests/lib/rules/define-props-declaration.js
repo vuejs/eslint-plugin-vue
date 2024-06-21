@@ -555,7 +555,7 @@ tester.run('define-props-declaration', rule, {
         interface Props { kind?: { id: number, name: string } }; const props = defineProps<Props>()
         </script>
         `,
-      options: ['type-based', { separateInterface: true }],
+      options: ['type-based', { autoFixToSeparateInterface: true }],
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',

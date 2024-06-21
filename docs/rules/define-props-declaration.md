@@ -41,11 +41,19 @@ const props = defineProps({
 ## :wrench: Options
 
 ```json
-  "vue/define-props-declaration": ["error", "type-based" | "runtime"]
+{
+  "vue/define-props-declaration": ["error",
+    "type-based" | "runtime",
+    {
+      "autoFixToSeparateInterface": false
+    }
+  ]
+}
 ```
 
 - `type-based` (default) enforces type-based declaration
 - `runtime` enforces runtime declaration
+- `autoFixToSeparateInterface` (`boolean`) define `interface Props` used for type-based declaration instead of providing types inline
 
 ### `"runtime"`
 
