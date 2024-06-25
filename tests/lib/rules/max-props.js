@@ -102,6 +102,24 @@ tester.run('max-props', rule, {
       </script>
       `,
       options: [{ maxProps: 5 }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+
+      </template>
+      <script setup lang="ts">
+      defineProps<{ prop1: string, prop2: string }>();
+      </script>
+      `,
+      options: [{ maxProps: 5 }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
   invalid: [
@@ -141,6 +159,29 @@ tester.run('max-props', rule, {
         {
           message: 'Component has too many props (2). Maximum allowed is 1.',
           line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script setup lang="ts">
+      defineProps<{ prop1: string, prop2: string, prop3: string }>();
+      </script>
+      `,
+      options: [{ maxProps: 2 }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Component has too many props (3). Maximum allowed is 2.',
+          line: 5
         }
       ]
     }

@@ -9,15 +9,15 @@ description: enforce maximum number of props in Vue component
 
 > enforce maximum number of props in Vue component
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
 This rule enforces a maximum number of props in a Vue SFC, in order to aid in maintainability and reduce complexity.
 
-
 ## :wrench: Options
-This rule takes an object, where you can specify the maximum number of props allowed in a Vue SFC. 
+
+This rule takes an object, where you can specify the maximum number of props allowed in a Vue SFC.
 There is one property that can be specified for the object.
 
 - `maxProps` ... Specify the maximum number of props in the `script` block.
@@ -41,7 +41,6 @@ defineProps({
 
 </eslint-code-block>
 
-
 ### `{ maxProps: 5 }`
 
 <eslint-code-block :rules="{'vue/max-props': ['error', { maxProps: 5 }]}">
@@ -56,7 +55,6 @@ defineProps({
 ```
 
 </eslint-code-block>
-
 
 Nothing.
 
