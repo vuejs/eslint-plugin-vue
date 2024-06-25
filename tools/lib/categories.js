@@ -23,16 +23,16 @@ const categoryTitles = {
   'vue3-use-with-caution': {
     text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 3.x'
   },
-  essential: {
+  'vue2-essential': {
     text: 'Priority A: Essential (Error Prevention) for Vue.js 2.x'
   },
-  'strongly-recommended': {
+  'vue2-strongly-recommended': {
     text: 'Priority B: Strongly Recommended (Improving Readability) for Vue.js 2.x'
   },
-  recommended: {
+  'vue2-recommended': {
     text: 'Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead) for Vue.js 2.x'
   },
-  'use-with-caution': {
+  'vue2-use-with-caution': {
     text: 'Priority D: Use with Caution (Potentially Dangerous Patterns) for Vue.js 2.x'
   }
 }
@@ -52,10 +52,41 @@ for (const rule of rules) {
   }
 }
 
-module.exports = categoryIds
-  .map((categoryId) => ({
-    categoryId,
-    title: categoryTitles[categoryId],
-    rules: categoryRules[categoryId] || []
-  }))
-  .filter((category) => category.rules.length > 0)
+const CONFIG_NAME_CAPTIONS = {
+  base: ['"plugin:vue/base"', '*.configs["flat/base"]'],
+  'vue3-essential': [
+    '"plugin:vue/vue3-essential"',
+    '*.configs["flat/essential"]'
+  ],
+  'vue2-essential': [
+    '"plugin:vue/essential"',
+    '*.configs["flat/vue2-essential"]'
+  ],
+  'vue3-strongly-recommended': [
+    '"plugin:vue/vue3-strongly-recommended"',
+    '*.configs["flat/strongly-recommended"]'
+  ],
+  'vue2-strongly-recommended': [
+    '"plugin:vue/strongly-recommended"',
+    '*.configs["flat/vue2-strongly-recommended"]'
+  ],
+  'vue3-recommended': [
+    '"plugin:vue/vue3-recommended"',
+    '*.configs["flat/recommended"]'
+  ],
+  'vue2-recommended': [
+    '"plugin:vue/recommended"',
+    '*.configs["flat/vue2-recommended"]'
+  ]
+}
+
+module.exports = {
+  CONFIG_NAME_CAPTIONS,
+  categories: categoryIds
+    .map((categoryId) => ({
+      categoryId,
+      title: categoryTitles[categoryId],
+      rules: categoryRules[categoryId] || []
+    }))
+    .filter((category) => category.rules.length > 0)
+}

@@ -158,15 +158,15 @@ tester.run('valid-define-props', rule, {
         defineProps<{ msg?:string }>({ msg: String })
       </script>
       `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message: '`defineProps` has both a type-only props and an argument.',
           line: 4
         }
-      ],
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
+      ]
     },
     {
       filename: 'test.vue',

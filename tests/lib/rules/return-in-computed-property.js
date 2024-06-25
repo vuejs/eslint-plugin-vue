@@ -160,13 +160,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -178,13 +178,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -199,13 +199,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -221,13 +221,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 7
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -243,13 +243,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -265,13 +265,13 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       options: [{ treatUndefinedAsUnspecified: false }],
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -285,13 +285,13 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       options: [{ treatUndefinedAsUnspecified: true }],
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -306,14 +306,14 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
             'Expected to return a value in "my_FALSE_test" computed property.',
           line: 5
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -341,6 +341,7 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in computed function.',
@@ -362,8 +363,7 @@ ruleTester.run('return-in-computed-property', rule, {
           message: 'Expected to return a value in computed function.',
           line: 16
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -379,13 +379,13 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       `,
       options: [{ treatUndefinedAsUnspecified: false }],
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in computed function.',
           line: 5
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -396,13 +396,13 @@ ruleTester.run('return-in-computed-property', rule, {
           }
         }
       }`,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })

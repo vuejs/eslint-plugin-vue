@@ -134,14 +134,14 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -152,14 +152,14 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -172,14 +172,14 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
           line: 4
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -193,14 +193,14 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
+      languageOptions,
       errors: [
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
           line: 5
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -213,12 +213,12 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
+      languageOptions,
       errors: [
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -231,12 +231,12 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
+      languageOptions,
       errors: [
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
-      ],
-      languageOptions
+      ]
     }
   ]
 })

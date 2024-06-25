@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow `key` attribute on `<template v-for>`
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 

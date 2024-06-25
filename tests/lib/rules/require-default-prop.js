@@ -329,6 +329,28 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaultProps = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo: string;
+        bar?: number;
+      }>(), {
+        ...defaultProps,
+        bar: 42,
+      })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -392,15 +414,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
+      languageOptions: {
+        parser: require('@typescript-eslint/parser')
+      },
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ],
-      languageOptions: {
-        parser: require('@typescript-eslint/parser')
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -413,13 +435,13 @@ ruleTester.run('require-default-prop', rule, {
           }
         });
       `,
+      languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
           line: 4
         }
-      ],
-      languageOptions: { parser: require('@typescript-eslint/parser') }
+      ]
     },
 
     // computed properties
@@ -533,16 +555,43 @@ ruleTester.run('require-default-prop', rule, {
       })
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
           line: 4
         }
-      ],
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const defaultProps = {
+        foo: 'foo',
+      }
+      withDefaults(defineProps<{
+        foo: string;
+        bar?: number;
+      }>(), {
+        ...defaultProps,
+      })
+      </script>
+      `,
       languageOptions: {
         parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message: "Prop 'bar' requires default value to be set.",
+          line: 8
+        }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,

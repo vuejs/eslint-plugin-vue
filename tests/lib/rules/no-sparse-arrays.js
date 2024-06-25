@@ -3,7 +3,8 @@
  */
 'use strict'
 
-const RuleTester = require('../../eslint-compat').RuleTester
+const { RuleTester, ESLint } = require('../../eslint-compat')
+const semver = require('semver')
 const rule = require('../../../lib/rules/no-sparse-arrays')
 
 const tester = new RuleTester({
@@ -29,9 +30,10 @@ tester.run('no-sparse-arrays', rule, {
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
-          column: 22,
           endLine: 3,
-          endColumn: 38
+          ...(semver.gte(ESLint.version, '9.5.0')
+            ? { column: 23, endColumn: 24 }
+            : { column: 22, endColumn: 38 })
         }
       ]
     },
@@ -44,9 +46,10 @@ tester.run('no-sparse-arrays', rule, {
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
-          column: 22,
           endLine: 3,
-          endColumn: 30
+          ...(semver.gte(ESLint.version, '9.5.0')
+            ? { column: 23, endColumn: 24 }
+            : { column: 22, endColumn: 30 })
         }
       ]
     }

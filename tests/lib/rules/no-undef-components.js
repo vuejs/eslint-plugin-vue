@@ -104,7 +104,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -170,7 +170,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -185,7 +185,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -200,7 +200,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -215,7 +215,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -230,7 +230,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -245,7 +245,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -261,7 +261,11 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+', 'Warm(\\w+)+', 'InfoBtn(\\w+)+']
+          ignorePatterns: [
+            String.raw`Custom(\w+)+`,
+            String.raw`Warm(\w+)+`,
+            String.raw`InfoBtn(\w+)+`
+          ]
         }
       ]
     },
@@ -807,13 +811,6 @@ tester.run('no-undef-components', rule, {
         <Foo />
       </template>
       `,
-      errors: [
-        {
-          message:
-            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
-          line: 7
-        }
-      ],
       languageOptions: {
         parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
@@ -821,7 +818,14 @@ tester.run('no-undef-components', rule, {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        {
+          message:
+            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
+          line: 7
+        }
+      ]
     },
 
     // options API
@@ -849,7 +853,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ],
       errors: [
@@ -888,7 +892,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ],
       errors: [

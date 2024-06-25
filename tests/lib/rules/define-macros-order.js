@@ -413,17 +413,17 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: message('defineEmits'),
           line: 12
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -451,17 +451,17 @@ tester.run('define-macros-order', rule, {
           interface SomeOtherInterface {};
         </script>
       `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: message('defineProps'),
           line: 10
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -506,17 +506,17 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: message('defineEmits'),
           line: 16
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',

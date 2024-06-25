@@ -581,6 +581,7 @@ ruleTester.run('match-component-file-name', rule, {
           render() { return <div /> }
         }
       `,
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -597,8 +598,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
     {
       filename: 'MyComponent.jsx',
@@ -609,6 +609,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [{ extensions: ['jsx'] }],
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -625,8 +626,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
     {
       filename: 'MyComponent.jsx',
@@ -637,6 +637,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [{ extensions: ['jsx'] }],
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -653,8 +654,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
     {
       filename: 'MyComponent.jsx',
@@ -665,6 +665,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [{ extensions: ['jsx'] }],
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -681,8 +682,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
 
     // .vue
@@ -697,6 +697,10 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -715,11 +719,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'MyComponent.vue',
@@ -732,6 +732,10 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -750,11 +754,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
     {
       filename: 'MyComponent.vue',
@@ -767,6 +767,10 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       options: [{ extensions: ['vue'] }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -785,11 +789,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     },
 
     // .js
@@ -802,6 +802,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -818,8 +819,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -830,6 +830,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -846,8 +847,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -858,6 +858,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -874,8 +875,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -885,6 +885,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -900,8 +901,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -911,6 +911,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -926,8 +927,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -937,6 +937,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -952,8 +953,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -963,6 +963,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -978,8 +979,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -989,6 +989,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -1004,8 +1005,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -1015,6 +1015,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -1030,8 +1031,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'MyComponent.js',
@@ -1041,6 +1041,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `,
       options: [{ extensions: ['js'] }],
+      languageOptions,
       errors: [
         {
           message:
@@ -1056,8 +1057,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions
+      ]
     },
 
     // casing
@@ -1070,6 +1070,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [{ shouldMatchCase: true }],
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -1086,8 +1087,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
     {
       filename: 'my-component.jsx',
@@ -1098,6 +1098,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `,
       options: [{ shouldMatchCase: true }],
+      languageOptions: jsxLanguageOptions,
       errors: [
         {
           message:
@@ -1114,13 +1115,16 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: jsxLanguageOptions
+      ]
     },
     {
       filename: 'MyComponent.vue',
       code: `<script setup> defineOptions({name: 'CoolComponent'}) </script>`,
       options: [{ extensions: ['vue'] }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -1132,11 +1136,7 @@ ruleTester.run('match-component-file-name', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ...languageOptions
-      }
+      ]
     }
   ]
 })

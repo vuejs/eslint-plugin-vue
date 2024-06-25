@@ -377,6 +377,14 @@ ruleTester.run('require-typed-object-prop', rule, {
       defineProps({ foo: Object });
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -405,15 +413,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -422,6 +422,14 @@ ruleTester.run('require-typed-object-prop', rule, {
       defineProps({ foo: Array });
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -450,15 +458,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -467,6 +467,7 @@ ruleTester.run('require-typed-object-prop', rule, {
         props: { foo: Object }
       }
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -495,8 +496,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -505,6 +505,7 @@ ruleTester.run('require-typed-object-prop', rule, {
         props: { foo: Object }
       });
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -533,8 +534,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -543,6 +543,7 @@ ruleTester.run('require-typed-object-prop', rule, {
         props: { foo: { type: Object } }
       });
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -571,8 +572,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -581,6 +581,7 @@ ruleTester.run('require-typed-object-prop', rule, {
         props: { foo: { type: Object } }
       }
       `,
+      languageOptions: { ecmaVersion: 6, sourceType: 'module' },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -609,8 +610,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: { ecmaVersion: 6, sourceType: 'module' }
+      ]
     },
     {
       filename: 'test.vue',
@@ -619,6 +619,14 @@ ruleTester.run('require-typed-object-prop', rule, {
       defineProps({ foo: { type: Object } });
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           messageId: 'expectedTypeAnnotation',
@@ -647,15 +655,7 @@ ruleTester.run('require-typed-object-prop', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ecmaVersion: 6,
-        sourceType: 'module',
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     }
   ]
 })

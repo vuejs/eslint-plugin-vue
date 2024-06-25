@@ -390,6 +390,11 @@ tester.run('no-restricted-props', rule, {
       </script>
       `,
       options: [{ name: 'foo', suggest: 'Foo' }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Using `foo` props is not allowed.',
@@ -407,12 +412,7 @@ tester.run('no-restricted-props', rule, {
             }
           ]
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,

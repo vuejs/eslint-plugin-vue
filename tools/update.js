@@ -7,6 +7,7 @@
 
 require('./update-no-layout-rules-config')
 require('./update-lib-configs')
+require('./update-lib-flat-configs')
 require('./update-lib-index')
 require('./update-docs')
 require('./update-docs-rules-index')
