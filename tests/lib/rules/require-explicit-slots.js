@@ -160,6 +160,36 @@ tester.run('require-explicit-slots', rule, {
           parser: null
         }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+        </div>
+      </template>
+      <script lang="ts" setup>
+      interface Slots {
+        default: () => string;
+      }
+      defineSlots<Slots>()
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      interface MySlots {
+        foo: (msg: string) => any
+      }
+      defineSlots<MySlots>()
+      </script>`
     }
   ],
   invalid: [
@@ -329,6 +359,55 @@ tester.run('require-explicit-slots', rule, {
       }>()
       </script>`,
       errors: [
+        {
+          message: 'Slot foo is already defined.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo" />
+        </div>
+      </template>
+      <script setup lang="ts">
+      interface MySlots {
+        default: any;
+        foo: (message: string) => any;
+      }
+      defineSlots<MySlots>()
+      defineSlots<{
+        default(props: { msg: string }): any,
+      }>()
+      </script>`,
+      errors: [
+        {
+          message: 'Slot default is already defined.'
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo" />
+        </div>
+      </template>
+      <script setup lang="ts">
+      interface MySlots {
+        default: any;
+        foo: (message: string) => any;
+      }
+      defineSlots<MySlots>()
+      defineSlots<MySlots>()
+      </script>`,
+      errors: [
+        {
+          message: 'Slot default is already defined.'
+        },
         {
           message: 'Slot foo is already defined.'
         }
