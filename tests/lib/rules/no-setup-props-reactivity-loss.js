@@ -144,6 +144,7 @@ tester.run('no-setup-props-reactivity-loss', rule, {
           const {x} = noProps
           ({y} = noProps)
           const z = noProps.z
+          const foo = \`\${noProp.foo}\`
         }
       }
       </script>
