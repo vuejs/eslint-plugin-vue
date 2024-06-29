@@ -72,7 +72,11 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/2467
       filename: 'test.vue',
-      code: '<template><transition :appear="isLoaded"><div /></transition></template>'
+      code: '<template><transition :appear="foo"><div /></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition :appear="true"><div /></transition></template>'
     }
   ],
   invalid: [
@@ -117,6 +121,11 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><Transition>  <div /></Transition></template>',
+      errors: [{ messageId: 'expected' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition :appear="false"><div /></transition></template>',
       errors: [{ messageId: 'expected' }]
     },
     {
