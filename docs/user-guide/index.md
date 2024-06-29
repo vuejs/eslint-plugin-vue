@@ -146,6 +146,48 @@ If you want to use custom parsers such as [@babel/eslint-parser](https://www.npm
   }
 ```
 
+Full example:
+
+::: code-group
+
+```json [Legacy Config]
+// .eslintrc
+{
+  "root": true,
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  }
+}
+```
+
+```js [Flat Config]
+// eslint.config.js
+import js from '@eslint/js'
+import eslintPluginVue from 'eslint-plugin-vue'
+import ts from 'typescript-eslint'
+
+export default ts.config(
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  ...eslintPluginVue.configs['flat/recommended'],
+  {
+    files: ['*.vue', '**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: '@typescript-eslint/parser'
+      }
+    }
+  }
+)
+```
+
 The `parserOptions.parser` option can also specify an object to specify multiple parsers. See [vue-eslint-parser README](https://github.com/vuejs/vue-eslint-parser#readme) for more details.
 
 ### How does ESLint detect components?
