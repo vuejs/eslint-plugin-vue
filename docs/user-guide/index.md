@@ -150,8 +150,7 @@ Full example:
 
 ::: code-group
 
-```json [Legacy Config]
-// .eslintrc
+```json [.eslintrc]
 {
   "root": true,
   "plugins": ["@typescript-eslint"],
@@ -167,8 +166,7 @@ Full example:
 }
 ```
 
-```js [Flat Config]
-// eslint.config.js
+```js [eslint.config.js]
 import js from '@eslint/js'
 import eslintPluginVue from 'eslint-plugin-vue'
 import ts from 'typescript-eslint'
@@ -483,8 +481,7 @@ In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.c
 
 ::: code-group
 
-```json [Legacy Config]
-// .eslintrc
+```json [.eslintrc] 
 {
   "globals": {
     "ref": "readonly",
@@ -496,8 +493,7 @@ In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.c
 }
 ```
 
-```js [Flat Config]
-// eslint.config.js
+```js [eslint.config.js] 
 export default [
   {
     languageOptions: {
