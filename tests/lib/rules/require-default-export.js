@@ -20,6 +20,12 @@ tester.run('require-default-export', rule, {
     {
       filename: 'test.vue',
       code: `
+      <template>Without script</template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script>
         import { ref } from 'vue';
         
