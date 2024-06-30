@@ -61,7 +61,7 @@
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.15",
     "semver": "^7.6.0",
-    "vue-eslint-parser": "^9.4.2",
+    "vue-eslint-parser": "^9.4.3",
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
