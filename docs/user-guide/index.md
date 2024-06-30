@@ -186,6 +186,8 @@ export default ts.config(
 )
 ```
 
+:::
+
 The `parserOptions.parser` option can also specify an object to specify multiple parsers. See [vue-eslint-parser README](https://github.com/vuejs/vue-eslint-parser#readme) for more details.
 
 ### How does ESLint detect components?
