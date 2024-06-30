@@ -483,7 +483,7 @@ In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.c
 
 ::: code-group
 
-```json [.eslintrc] 
+```json [.eslintrc]
 {
   "globals": {
     "ref": "readonly",
@@ -495,7 +495,7 @@ In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.c
 }
 ```
 
-```js [eslint.config.js] 
+```js [eslint.config.js]
 export default [
   {
     languageOptions: {
