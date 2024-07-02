@@ -10,13 +10,15 @@ since: v9.5.0
 
 > enforce declaration style of `defineProps`
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule enforces `defineProps` typing style which you should use `type-based` or `runtime` declaration.
 
 This rule only works in setup script and `lang="ts"`.
 
-<eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
+<eslint-code-block fix :rules="{'vue/define-props-declaration': ['error']}">
 
 ```vue
 <script setup lang="ts">
@@ -39,15 +41,23 @@ const props = defineProps({
 ## :wrench: Options
 
 ```json
-  "vue/define-props-declaration": ["error", "type-based" | "runtime"]
+{
+  "vue/define-props-declaration": ["error",
+    "type-based" | "runtime",
+    {
+      "autoFixToSeparateInterface": false
+    }
+  ]
+}
 ```
 
 - `type-based` (default) enforces type-based declaration
 - `runtime` enforces runtime declaration
+- `autoFixToSeparateInterface` (`boolean`) define `interface Props` used for type-based declaration instead of providing types inline
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+<eslint-code-block fix :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
