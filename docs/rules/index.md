@@ -328,6 +328,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/operator-linebreak](./operator-linebreak.md) | Enforce consistent linebreak style for operators in `<template>` | :wrench: | :lipstick: |
 | [vue/prefer-template](./prefer-template.md) | Require template literals instead of string concatenation in `<template>` | :wrench: | :hammer: |
 | [vue/quote-props](./quote-props.md) | Require quotes around object literal property names in `<template>` | :wrench: | :lipstick: |
+| [vue/quotes](./quotes.md) | Enforce the consistent use of either backticks, double, or single quotes in `<template>` | :wrench: | :lipstick: |
 | [vue/space-in-parens](./space-in-parens.md) | Enforce consistent spacing inside parentheses in `<template>` | :wrench: | :lipstick: |
 | [vue/space-infix-ops](./space-infix-ops.md) | Require spacing around infix operators in `<template>` | :wrench: | :lipstick: |
 | [vue/space-unary-ops](./space-unary-ops.md) | Enforce consistent spacing before or after unary operators in `<template>` | :wrench: | :lipstick: |
