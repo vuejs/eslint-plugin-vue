@@ -10,7 +10,7 @@ const rule = require('../../../lib/rules/define-props-declaration')
 const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
-    ecmaVersion: '2020',
+    ecmaVersion: 2020,
     sourceType: 'module',
     parserOptions: {
       parser: require.resolve('@typescript-eslint/parser')
