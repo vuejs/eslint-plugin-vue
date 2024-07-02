@@ -391,13 +391,13 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           }
         });
       `,
+      languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
           line: 5,
           message: 'Unexpected side effect in "test1" computed property.'
         }
-      ],
-      languageOptions: { parser: require('@typescript-eslint/parser') }
+      ]
     },
 
     {

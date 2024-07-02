@@ -1011,14 +1011,14 @@ ruleTester.run('no-dupe-keys', rule, {
         const foo = 0
       </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:
             "Duplicate key 'foo'. May cause name collision in script or template tag.",
           line: 6
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1039,6 +1039,7 @@ ruleTester.run('no-dupe-keys', rule, {
         const bar = () => 'bar';
       </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:
@@ -1055,8 +1056,7 @@ ruleTester.run('no-dupe-keys', rule, {
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 15
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1071,6 +1071,10 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = 'bar';
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1082,11 +1086,7 @@ ruleTester.run('no-dupe-keys', rule, {
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 9
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1097,14 +1097,14 @@ ruleTester.run('no-dupe-keys', rule, {
       const bar = 42
       </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:
             "Duplicate key 'bar'. May cause name collision in script or template tag.",
           line: 5
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     }
   ]
 })

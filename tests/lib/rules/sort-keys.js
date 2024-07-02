@@ -523,10 +523,10 @@ ruleTester.run('sort-keys', rule, {
     },
     {
       code: 'var obj = {a:1, [``]:2} // default',
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. '' should be before 'a'."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       code: 'var obj = {a:1, _:2, b:3} // default',
@@ -575,101 +575,101 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, c:1, b:1}',
       options: [],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {...z, ...c, d:4, b:1, ...y, ...f, e:2, a:1}',
       options: [],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'd'.",
         "Expected object keys to be in ascending order. 'a' should be before 'e'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {c:1, b:1, ...a}',
       options: [],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {...z, ...a, c:1, b:1}',
       options: [],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {...z, b:1, a:1, ...d, ...c}',
       options: [],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'a' should be before 'b'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {...z, a:2, b:0, ...x, ...c}',
       options: ['desc'],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'b' should be before 'a'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: 'var obj = {...z, a:2, b:0, ...x}',
       options: ['desc'],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'b' should be before 'a'."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
     {
       code: "var obj = {...z, '':1, a:2}",
       options: ['desc'],
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
-      ],
-      languageOptions: { ecmaVersion: 2018 }
+      ]
     },
 
     // ignore non-simple computed properties, but their position shouldn't affect other comparisons.
     {
       code: "var obj = {a:1, [b+c]:2, '':3}",
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. '' should be before 'a'."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       code: "var obj = {'':1, [b+c]:2, a:3}",
       options: ['desc'],
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       code: "var obj = {b:1, [f()]:2, '':3, a:4}",
       options: ['desc'],
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
 
     // not ignore simple computed properties.
     {
       code: 'var obj = {a:1, b:3, [a]: -1, c:2}',
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. 'a' should be before 'b'."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
 
     // nested
@@ -918,10 +918,10 @@ ruleTester.run('sort-keys', rule, {
     {
       code: "var obj = {[``]:1, a:'2'} // desc",
       options: ['desc'],
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       code: 'var obj = {a:1, _:2, b:3} // desc',
@@ -1193,6 +1193,8 @@ ruleTester.run('sort-keys', rule, {
           },
         }
       `,
+      languageOptions,
+
       errors: [
         {
           message:
@@ -1204,9 +1206,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'msg' should be before 'zd'.",
           line: 12
         }
-      ],
-
-      languageOptions
+      ]
     },
     {
       filename: 'example.vue',
@@ -1228,14 +1228,14 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Expected object keys to be in ascending order. 'closeMenu' should be before 'toggleMenu'.",
           line: 12
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'example.vue',
@@ -1261,6 +1261,7 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
+      languageOptions,
       errors: [
         {
           message:
@@ -1272,8 +1273,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'a' should be before 'z'.",
           line: 14
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'example.vue',
@@ -1290,6 +1290,7 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
+      languageOptions,
       errors: [
         {
           message:
@@ -1301,8 +1302,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'isActive' should be before 'z'.",
           line: 8
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'example.vue',
@@ -1319,6 +1319,7 @@ ruleTester.run('sort-keys', rule, {
 
         const dict = { zd: 1, a: 2 };
       `,
+      languageOptions,
       errors: [
         {
           message:
@@ -1330,8 +1331,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'a' should be before 'zd'.",
           line: 12
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.js',
@@ -1350,6 +1350,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1361,8 +1362,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'msg' should be before 'z'.",
           line: 9
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -1381,6 +1381,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1392,8 +1393,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'msg' should be before 'z'.",
           line: 9
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -1412,6 +1412,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1423,8 +1424,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'msg' should be before 'z'.",
           line: 9
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'propsOrder.vue',
@@ -1440,14 +1440,14 @@ ruleTester.run('sort-keys', rule, {
         }
       `,
       options: ['asc', { ignoreGrandchildrenOf: [] }],
+      languageOptions,
       errors: [
         {
           message:
             "Expected object keys to be in ascending order. 'default' should be before 'type'.",
           line: 7
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'propsOrder.vue',
@@ -1463,6 +1463,7 @@ ruleTester.run('sort-keys', rule, {
           a: 2
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
@@ -1474,8 +1475,7 @@ ruleTester.run('sort-keys', rule, {
             "Expected object keys to be in ascending order. 'a' should be before 'foo'.",
           line: 10
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'propsOrder.vue',
@@ -1491,14 +1491,14 @@ ruleTester.run('sort-keys', rule, {
           }
         }
       `,
+      languageOptions,
       errors: [
         {
           message:
             "Expected object keys to be in ascending order. 'a' should be before 'b'.",
           line: 7
         }
-      ],
-      languageOptions
+      ]
     }
   ]
 })

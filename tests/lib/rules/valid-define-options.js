@@ -132,6 +132,9 @@ tester.run('valid-define-options', rule, {
       defineOptions<{ name: 'Foo' }>()
       </script>
       `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message: 'Options are not defined.',
@@ -141,10 +144,7 @@ tester.run('valid-define-options', rule, {
           message: '`defineOptions()` cannot accept type arguments.',
           line: 3
         }
-      ],
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
+      ]
     },
     {
       filename: 'test.vue',

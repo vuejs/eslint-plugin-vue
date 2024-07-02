@@ -1,6 +1,6 @@
 <!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}}-->
 <script lang="ts">
-declare async function
+declare function
   foo
   (
     arg1: string,
@@ -9,4 +9,6 @@ declare async function
   :
   arg1 is
     string;
+async function
+  bar() {}
 </script>

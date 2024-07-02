@@ -1,5 +1,5 @@
 import type { UserConfig } from 'vitepress'
-import path from 'path'
+import path from 'pathe'
 import { fileURLToPath } from 'url'
 import esbuild from 'esbuild'
 type Plugin = Extract<

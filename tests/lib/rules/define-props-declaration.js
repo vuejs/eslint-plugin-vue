@@ -622,17 +622,17 @@ tester.run('define-props-declaration', rule, {
       `,
       output: null,
       options: ['runtime'],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           message: 'Use runtime declaration instead of type-based declaration.',
           line: 3
         }
-      ],
-      languageOptions: {
-        parserOptions: {
-          parser: require.resolve('@typescript-eslint/parser')
-        }
-      }
+      ]
     }
   ]
 })

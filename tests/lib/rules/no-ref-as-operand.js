@@ -839,6 +839,11 @@ tester.run('no-ref-as-operand', rule, {
       console.log(count.value + 1) // error
       console.log(1 + count.value) // error
       `,
+      languageOptions: {
+        globals: {
+          ref: 'readonly'
+        }
+      },
       errors: [
         {
           message:
@@ -864,12 +869,7 @@ tester.run('no-ref-as-operand', rule, {
           endLine: 6,
           endColumn: 28
         }
-      ],
-      languageOptions: {
-        globals: {
-          ref: 'readonly'
-        }
-      }
+      ]
     }
   ]
 })

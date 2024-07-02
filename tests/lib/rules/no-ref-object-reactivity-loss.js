@@ -319,6 +319,7 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         mod.value // OK
       )
       </script>`,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:
@@ -330,8 +331,7 @@ tester.run('no-ref-object-reactivity-loss', rule, {
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
           line: 7
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     // Reactivity Transform
     {

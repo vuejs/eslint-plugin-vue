@@ -219,12 +219,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -237,12 +237,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -255,12 +255,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1853
@@ -318,8 +318,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number or string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number or string')
     },
     {
       filename: 'test.vue',
@@ -331,8 +331,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number or function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number or function')
     },
     {
       filename: 'test.vue',
@@ -344,8 +344,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number')
     },
     {
       filename: 'test.vue',
@@ -357,8 +357,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number')
     },
     {
       filename: 'test.vue',
@@ -370,8 +370,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number')
     },
     {
       filename: 'test.vue',
@@ -383,8 +383,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number')
     },
     {
       filename: 'test.vue',
@@ -396,8 +396,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -409,8 +409,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -422,8 +422,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -435,8 +435,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('boolean'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('boolean')
     },
     {
       filename: 'test.vue',
@@ -448,8 +448,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('boolean'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('boolean')
     },
     {
       filename: 'test.vue',
@@ -461,8 +461,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('boolean'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('boolean')
     },
     {
       filename: 'test.vue',
@@ -474,8 +474,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('boolean'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('boolean')
     },
     {
       filename: 'test.vue',
@@ -487,8 +487,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -500,8 +500,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -513,8 +513,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -526,8 +526,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -539,8 +539,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -552,8 +552,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -565,8 +565,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -578,8 +578,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -591,8 +591,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -604,8 +604,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -617,8 +617,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function or number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function or number')
     },
     {
       filename: 'test.vue',
@@ -631,12 +631,12 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       });`,
 
-      errors: errorMessage('function or number'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function or number')
     },
 
     {
@@ -657,6 +657,7 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
+      languageOptions,
       errors: [
         {
           message: `Type of the default value for 'foo' prop must be a function.`,
@@ -670,8 +671,7 @@ ruleTester.run('require-valid-default-prop', rule, {
           message: `Type of the default value for '[baz]' prop must be a function.`,
           line: 13
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -683,8 +683,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -698,8 +698,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('number')
     },
     {
       filename: 'test.vue',
@@ -713,8 +713,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('object'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('object')
     },
     {
       filename: 'test.vue',
@@ -728,8 +728,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('string')
     },
     {
       filename: 'test.vue',
@@ -743,8 +743,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('number')
     },
     {
       filename: 'test.vue',
@@ -758,8 +758,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('object'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('object')
     },
     {
       filename: 'test.vue',
@@ -773,8 +773,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessageForFunction('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessageForFunction('string')
     },
     {
       filename: 'test.vue',
@@ -786,8 +786,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('number'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('number')
     },
     {
       filename: 'test.vue',
@@ -799,8 +799,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('object'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('object')
     },
     {
       filename: 'test.vue',
@@ -812,8 +812,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -825,8 +825,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('function'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -851,6 +851,7 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
+      languageOptions,
       errors: [
         {
           message:
@@ -867,8 +868,7 @@ ruleTester.run('require-valid-default-prop', rule, {
             "Type of the default value for 'foo' prop must be a string or boolean.",
           line: 11
         }
-      ],
-      languageOptions
+      ]
     },
     {
       filename: 'test.vue',
@@ -880,8 +880,8 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         }
       }`,
-      errors: errorMessage('string'),
-      languageOptions
+      languageOptions,
+      errors: errorMessage('string')
     },
     {
       filename: 'test.vue',
@@ -894,12 +894,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -912,12 +912,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -930,12 +930,12 @@ ruleTester.run('require-valid-default-prop', rule, {
           }
         });
       `,
-      errors: errorMessage('function'),
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      }
+      },
+      errors: errorMessage('function')
     },
     {
       filename: 'test.vue',
@@ -949,17 +949,17 @@ ruleTester.run('require-valid-default-prop', rule, {
         })
       </script>
       `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module'
+      },
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
           line: 6
         }
-      ],
-      languageOptions: {
-        parser: require('vue-eslint-parser'),
-        ecmaVersion: 6,
-        sourceType: 'module'
-      }
+      ]
     },
     {
       filename: 'test.vue',
@@ -970,12 +970,6 @@ ruleTester.run('require-valid-default-prop', rule, {
         })
       </script>
       `,
-      errors: [
-        {
-          message: "Type of the default value for 'foo' prop must be a string.",
-          line: 4
-        }
-      ],
       languageOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
@@ -983,7 +977,13 @@ ruleTester.run('require-valid-default-prop', rule, {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 4
+        }
+      ]
     },
     {
       code: `

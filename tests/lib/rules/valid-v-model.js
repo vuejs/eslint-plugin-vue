@@ -290,62 +290,62 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model="a() as string"></MyComponent></template>',
-      errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
-      ],
       languageOptions: {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model="a()!"></MyComponent></template>',
-      errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
-      ],
       languageOptions: {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model="a() as unknown as string"></MyComponent></template>',
-      errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
-      ],
       languageOptions: {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model="a()!!!!"></MyComponent></template>',
-      errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
-      ],
       languageOptions: {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model="(((a()!) as unknown)! as string)!"></MyComponent></template>',
-      errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
-      ],
       languageOptions: {
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        "'v-model' directives require the attribute value which is valid as LHS."
+      ]
     }
   ]
 })

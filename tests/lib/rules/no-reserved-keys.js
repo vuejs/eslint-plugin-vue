@@ -121,13 +121,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -140,13 +140,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 5
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -159,13 +159,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 5
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -176,13 +176,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -195,13 +195,13 @@ ruleTester.run('no-reserved-keys', rule, {
           }
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 5
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -212,13 +212,13 @@ ruleTester.run('no-reserved-keys', rule, {
           })
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -229,13 +229,13 @@ ruleTester.run('no-reserved-keys', rule, {
           })
         })
       `,
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.js',
@@ -247,13 +247,13 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       `,
       options: [{ reserved: ['bar'], groups: ['foo'] }],
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: "Key 'bar' is reserved.",
           line: 4
         }
-      ],
-      languageOptions: { ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.vue',
@@ -264,13 +264,13 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
           line: 4
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 }
+      ]
     },
     {
       filename: 'test.vue',
@@ -279,19 +279,19 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<{$el: string}>()
       </script>
       `,
-      errors: [
-        {
-          message: "Key '$el' is reserved.",
-          line: 3
-        }
-      ],
       languageOptions: {
         parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
-      }
+      },
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 3
+        }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,

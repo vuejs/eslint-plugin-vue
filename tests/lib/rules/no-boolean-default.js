@@ -424,14 +424,14 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:
             'Boolean prop should not set a default (Vue defaults it to false).',
           line: 6
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     {
       filename: 'test.vue',
@@ -446,13 +446,13 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       options: ['default-false'],
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
           line: 6
         }
-      ],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      ]
     },
     ...(semver.lt(
       require('@typescript-eslint/parser/package.json').version,
