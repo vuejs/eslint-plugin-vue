@@ -95,6 +95,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  | :three::two::warning: |
+| [vue/require-default-export](./require-default-export.md) | require default export |  | :three::two::warning: |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: | :three::two::hammer: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  | :three::two::warning: |
 | [vue/require-slots-as-functions](./require-slots-as-functions.md) | enforce properties of `$slots` to be used as a function |  | :three::warning: |
