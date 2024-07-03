@@ -20,9 +20,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script setup>
       defineProps({ prop1: '', prop2: '' })
       </script>
@@ -32,9 +29,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script>
       export default {
         props: {
@@ -49,9 +43,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script>
       export default {
         props: {
@@ -69,9 +60,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script>
       export default {
         props: {}
@@ -83,9 +71,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script setup>
       defineProps({})
       </script>
@@ -95,9 +80,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script>
       </script>
       `,
@@ -106,9 +88,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-
-      </template>
       <script setup lang="ts">
       defineProps<{ prop1: string, prop2: string }>();
       </script>
@@ -126,8 +105,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-      </template>
       <script setup>
       defineProps({ prop1: '', prop2: '' })
       </script>
@@ -143,8 +120,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-      </template>
       <script>
       export default {
         props: {
@@ -165,8 +140,6 @@ tester.run('max-props', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-      </template>
       <script setup lang="ts">
       defineProps<{ prop1: string, prop2: string, prop3: string }>();
       </script>
