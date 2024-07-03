@@ -56,8 +56,6 @@ defineProps({
 
 </eslint-code-block>
 
-Nothing.
-
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/max-props.js)
