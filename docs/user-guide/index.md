@@ -1,7 +1,3 @@
----
-outline: deep
----
-
 # User Guide
 
 ## :cd: Installation
