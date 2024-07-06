@@ -58,7 +58,7 @@ function formatCategory(category) {
 const globals = require('globals')
 module.exports = [
   {
-    name: 'vue:base:setup',
+    name: 'vue/base/setup',
     plugins: {
       get vue() {
         return require('../../index')
@@ -70,7 +70,7 @@ module.exports = [
     }
   },
   {
-    name: 'vue:base:setup-for-vue',
+    name: 'vue/base/setup-for-vue',
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
@@ -99,7 +99,7 @@ const config = require('./${extendsCategoryId}.js')
 module.exports = [
   ...config,
   {
-    name: 'vue:${category.categoryId.replace(/^vue3-/u, '')}:rules',
+    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}/rules',
     rules: ${formatRules(category.rules, category.categoryId)},
   }
 ]
