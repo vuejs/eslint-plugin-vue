@@ -12,6 +12,7 @@
   "MaybeRef",
   "MaybeRefOrGetter",
   "Raw",
+  "Reactive",
   "ReactiveEffect",
   "ReactiveEffectOptions",
   "ReactiveEffectRunner",

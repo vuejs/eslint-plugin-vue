@@ -144,6 +144,7 @@ tester.run('no-setup-props-reactivity-loss', rule, {
           const {x} = noProps
           ({y} = noProps)
           const z = noProps.z
+          const foo = \`\${noProp.foo}\`
         }
       }
       </script>
@@ -715,6 +716,43 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         {
           messageId: 'getProperty',
           line: 4
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2470
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const foo = \`\${p.x}\`
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const foo = \`bar\${p.x}bar\${p.y}\`
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
         }
       ]
     }
