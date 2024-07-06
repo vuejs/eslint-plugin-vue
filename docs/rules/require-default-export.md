@@ -2,15 +2,14 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-default-export
-description: require default export
+description: require components to be the default export
 ---
 
 # vue/require-default-export
 
-> require default export
+> require components to be the default export
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -47,6 +46,10 @@ export default {
 ## :wrench: Options
 
 Nothing.
+
+## :couple: Related Rules
+
+- [vue/one-component-per-file](./one-component-per-file.md)
 
 ## :mag: Implementation
 
