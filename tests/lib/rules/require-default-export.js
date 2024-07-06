@@ -86,7 +86,7 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'mustDefaultExport',
           line: 1
         }
       ]
@@ -100,7 +100,7 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'mustDefaultExport',
           line: 1
         }
       ]
@@ -116,7 +116,7 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'mustDefaultExport',
           line: 1
         }
       ]
@@ -131,7 +131,7 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'mustDefaultExport',
           line: 1
         }
       ]
@@ -147,7 +147,7 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'missing',
+          messageId: 'mustDefaultExport',
           line: 1
         }
       ]
