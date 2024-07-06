@@ -95,7 +95,6 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-watch-after-await](./no-watch-after-await.md) | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue](./prefer-import-from-vue.md) | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
 | [vue/require-component-is](./require-component-is.md) | require `v-bind:is` of `<component>` elements |  | :three::two::warning: |
-| [vue/require-default-export](./require-default-export.md) | require default export |  | :three::two::warning: |
 | [vue/require-prop-type-constructor](./require-prop-type-constructor.md) | require prop type to be a constructor | :wrench: | :three::two::hammer: |
 | [vue/require-render-return](./require-render-return.md) | enforce render function to always return value |  | :three::two::warning: |
 | [vue/require-slots-as-functions](./require-slots-as-functions.md) | enforce properties of `$slots` to be used as a function |  | :three::warning: |
@@ -268,6 +267,7 @@ For example:
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
+| [vue/require-default-export](./require-default-export.md) | require components to be the default export |  | :warning: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
 | [vue/require-explicit-slots](./require-explicit-slots.md) | require slots to be explicitly defined |  | :warning: |
