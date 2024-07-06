@@ -60,6 +60,20 @@ tester.run('require-default-export', rule, {
       export default defineComponent({});
       </script>
       `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      const foo = 'foo';
+      export const bar = 'bar';
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      import {defineComponent} from 'vue';
+      defineComponent({});
+      `
     }
   ],
   invalid: [
