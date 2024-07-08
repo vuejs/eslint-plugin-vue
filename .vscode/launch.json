@@ -6,10 +6,7 @@
       "request": "launch",
       "name": "Start testing",
       "program": "${workspaceFolder}/node_modules/.bin/mocha",
-      "args": [
-        "${file}",
-        "--watch"
-      ],
+      "args": ["${file}", "--watch"],
       "console": "integratedTerminal"
     }
   ]

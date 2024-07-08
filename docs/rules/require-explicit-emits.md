@@ -5,11 +5,12 @@ title: vue/require-explicit-emits
 description: require `emits` option with name triggered by `$emit()`
 since: v7.0.0
 ---
+
 # vue/require-explicit-emits
 
 > require `emits` option with name triggered by `$emit()`
 
-- :gear: This rule is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -17,16 +18,16 @@ since: v7.0.0
 This rule reports event triggers not declared with the `emits` option. (The `emits` option is a new in Vue.js 3.0.0+)
 
 Explicit `emits` declaration serves as self-documenting code. This can be useful for other developers to instantly understand what events the component is supposed to emit.
-Also,  with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on components will fallthrough as native listeners by default. Declare it as a component-only event in `emits` to avoid unnecessary registration of native listeners.
+Also, with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on components will fallthrough as native listeners by default. Declare it as a component-only event in `emits` to avoid unnecessary registration of native listeners.
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div @click="$emit('good')"/>
+  <div @click="$emit('good')" />
   <!-- ✗ BAD -->
-  <div @click="$emit('bad')"/>
+  <div @click="$emit('bad')" />
 </template>
 <script>
 export default {
@@ -44,7 +45,7 @@ export default {
 export default {
   emits: ['good'],
   methods: {
-    foo () {
+    foo() {
       // ✓ GOOD
       this.$emit('good')
       // ✗ BAD
@@ -63,7 +64,7 @@ export default {
 <script>
 export default {
   emits: ['good'],
-  setup (props, context) {
+  setup(props, context) {
     // ✓ GOOD
     context.emit('good')
     // ✗ BAD
@@ -96,7 +97,7 @@ export default {
 export default {
   props: ['onGood', 'bad'],
   methods: {
-    foo () {
+    foo() {
       // ✓ GOOD
       this.$emit('good')
       // ✗ BAD
@@ -112,6 +113,7 @@ export default {
 ## :couple: Related Rules
 
 - [vue/no-unused-emit-declarations](./no-unused-emit-declarations.md)
+- [vue/require-explicit-slots](./require-explicit-slots.md)
 
 ## :books: Further Reading
 

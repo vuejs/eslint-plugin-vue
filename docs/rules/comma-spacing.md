@@ -5,6 +5,7 @@ title: vue/comma-spacing
 description: Enforce consistent spacing before and after commas in `<template>`
 since: v7.0.0
 ---
+
 # vue/comma-spacing
 
 > Enforce consistent spacing before and after commas in `<template>`

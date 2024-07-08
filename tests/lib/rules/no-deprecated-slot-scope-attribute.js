@@ -1,13 +1,10 @@
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-deprecated-slot-scope-attribute')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2015
-  }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('no-deprecated-slot-scope-attribute', rule, {
@@ -93,7 +90,6 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
         }
       ]
     },
-    // cannot fix
     {
       code: `
       <template>
@@ -101,7 +97,12 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
           <a slot-scope="{a}" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot="{a}">\n<a />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot-scope` are deprecated.',

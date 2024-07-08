@@ -5,6 +5,7 @@ title: vue/no-useless-mustaches
 description: disallow unnecessary mustache interpolations
 since: v7.0.0
 ---
+
 # vue/no-useless-mustaches
 
 > disallow unnecessary mustache interpolations

@@ -5,11 +5,12 @@ title: vue/v-on-event-hyphenation
 description: enforce v-on event naming style on custom components in template
 since: v7.4.0
 ---
+
 # vue/v-on-event-hyphenation
 
 > enforce v-on event naming style on custom components in template
 
-- :gear: This rule is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -21,12 +22,12 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent @custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent @custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
-  <MyComponent @customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
+  <MyComponent @customEvent="handleEvent" />
 </template>
 ```
 
@@ -57,10 +58,10 @@ It errors on upper case letters.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 </template>
 ```
 
@@ -75,10 +76,10 @@ It errors on hyphens.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 </template>
 ```
 
@@ -93,11 +94,11 @@ Don't use hyphenated name but allow custom event names
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent v-on:myEvent="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent v-on:myEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:my-event="handleEvent"/>
+  <MyComponent v-on:my-event="handleEvent" />
 </template>
 ```
 

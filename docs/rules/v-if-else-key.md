@@ -5,6 +5,7 @@ title: vue/v-if-else-key
 description: require key attribute for conditionally rendered repeated components
 since: v9.19.0
 ---
+
 # vue/v-if-else-key
 
 > require key attribute for conditionally rendered repeated components

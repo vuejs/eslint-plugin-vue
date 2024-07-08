@@ -6,12 +6,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/valid-next-tick')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2017,
     sourceType: 'module'
   }
@@ -156,6 +156,7 @@ tester.run('valid-next-tick', rule, {
           column: 11,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -174,6 +175,7 @@ tester.run('valid-next-tick', rule, {
           column: 15,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {
@@ -192,6 +194,7 @@ tester.run('valid-next-tick', rule, {
           column: 16,
           suggestions: [
             {
+              messageId: 'addAwait',
               output: `<script>import { nextTick as nt } from 'vue';
       export default {
         async mounted() {

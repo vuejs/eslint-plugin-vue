@@ -6,9 +6,9 @@
 
 const rule = require('../../../lib/rules/no-deprecated-events-api')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
@@ -25,7 +25,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -38,7 +38,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -55,7 +55,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -66,7 +66,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -77,7 +77,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -93,7 +93,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -104,7 +104,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -118,7 +118,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -134,7 +134,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -152,7 +152,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -172,7 +172,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -193,7 +193,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -213,7 +213,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
@@ -231,7 +231,7 @@ ruleTester.run('no-deprecated-events-api', rule, {
           }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
         'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',

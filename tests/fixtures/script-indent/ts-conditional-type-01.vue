@@ -1,4 +1,4 @@
-<!--{"parserOptions": {"parser":"@typescript-eslint/parser"}}-->
+<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}}-->
 <script lang="ts">
 type X = A extends B
   ? C

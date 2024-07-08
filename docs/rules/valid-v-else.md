@@ -5,11 +5,12 @@ title: vue/valid-v-else
 description: enforce valid `v-else` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-else
 
 > enforce valid `v-else` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-else` directive is valid.
 
@@ -28,14 +29,14 @@ This rule reports `v-else` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-if="foo"/>
-  <div v-else/>
+  <div v-if="foo" />
+  <div v-else />
 
   <!-- ✗ BAD -->
-  <div v-else/>
-  <div v-if="x"/><div v-else="foo"/>
-  <div v-if="x"/><div v-else:aaa/>
-  <div v-if="x"/><div v-else.bbb/>
+  <div v-else />
+  <div v-if="x" /><div v-else="foo" />
+  <div v-if="x" /><div v-else:aaa />
+  <div v-if="x" /><div v-else.bbb />
 </template>
 ```
 

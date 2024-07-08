@@ -2,7 +2,7 @@
  * Pre-build cjs packages that cannot be bundled well.
  */
 import esbuild from 'esbuild'
-import path from 'path'
+import path from 'pathe'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 

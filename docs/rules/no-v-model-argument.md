@@ -5,11 +5,12 @@ title: vue/no-v-model-argument
 description: disallow adding an argument to `v-model` used in custom component
 since: v7.0.0
 ---
+
 # vue/no-v-model-argument
 
 > disallow adding an argument to `v-model` used in custom component
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether `v-model` used on custom component do not have an argument.
 
@@ -25,7 +26,6 @@ This rule reports `v-model` directives in the following cases:
 <template>
   <!-- ✓ GOOD -->
   <MyComponent v-model="foo" />
-
 
   <!-- ✗ BAD -->
   <MyComponent v-model:aaa="foo" />

@@ -5,6 +5,7 @@ title: vue/array-element-newline
 description: Enforce line breaks after each array element in `<template>`
 since: v9.9.0
 ---
+
 # vue/array-element-newline
 
 > Enforce line breaks after each array element in `<template>`

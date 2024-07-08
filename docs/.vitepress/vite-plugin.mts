@@ -1,5 +1,5 @@
 import type { UserConfig } from 'vitepress'
-import path from 'path'
+import path from 'pathe'
 import { fileURLToPath } from 'url'
 import esbuild from 'esbuild'
 type Plugin = Extract<
@@ -65,7 +65,7 @@ function transformRequire(code: string) {
         id += Math.random().toString(32).substring(2)
       }
       modules.set(id, moduleString)
-      return id
+      return id + '()'
     }
   )
 
@@ -73,7 +73,7 @@ function transformRequire(code: string) {
     [...modules]
       .map(([id, moduleString]) => {
         return `import * as __temp_${id} from ${moduleString};
-const ${id} = __temp_${id}.default || __temp_${id};
+const ${id} = () => __temp_${id}.default || __temp_${id};
 `
       })
       .join('') +

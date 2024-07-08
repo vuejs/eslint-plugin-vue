@@ -5,12 +5,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-unused-vars')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('no-unused-vars', rule, {
@@ -124,7 +123,18 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="(a, _i) in foo" ></div></template>',
       options: [{ ignorePattern: '^_' }],
-      errors: ["'a' is defined but never used."]
+      errors: [
+        {
+          message: "'a' is defined but never used.",
+          suggestions: [
+            {
+              messageId: 'replaceWithUnderscore',
+              output:
+                '<template><div v-for="(_a, _i) in foo" ></div></template>'
+            }
+          ]
+        }
+      ]
     },
     {
       code: '<template><my-component v-slot="a" >{{d}}</my-component></template>',

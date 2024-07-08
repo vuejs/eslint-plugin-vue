@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const Linter = require('eslint').Linter
+const { Linter } = require('../eslint-compat')
 const parser = require('vue-eslint-parser')
 const rules = require('../..').rules
 
@@ -17,14 +17,21 @@ describe("Don't crash even if without vue SFC.", () => {
     it(ruleId, () => {
       const linter = new Linter()
       const config = {
-        parser: 'vue-eslint-parser',
-        parserOptions: { ecmaVersion: 2015 },
+        languageOptions: {
+          parser,
+          ecmaVersion: 2015
+        },
+        plugins: {
+          vue: {
+            rules: {
+              [key]: rules[key]
+            }
+          }
+        },
         rules: {
           [ruleId]: 'error'
         }
       }
-      linter.defineParser('vue-eslint-parser', parser)
-      linter.defineRule(ruleId, rules[key])
       linter.verifyAndFix(code, config, 'test.js')
     })
   }

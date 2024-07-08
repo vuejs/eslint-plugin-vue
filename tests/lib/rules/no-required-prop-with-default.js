@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-required-prop-with-default')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -33,8 +33,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -53,8 +55,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -72,8 +76,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -93,8 +99,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -113,8 +121,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -135,8 +145,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -211,8 +223,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -252,8 +266,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -293,8 +309,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -336,8 +354,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -375,8 +395,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -416,8 +438,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -457,8 +481,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -498,8 +524,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -539,8 +567,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -580,8 +610,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -621,8 +653,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -662,8 +696,10 @@ tester.run('no-required-prop-with-default', rule, {
         </script>
       `,
       options: [{ autofix: true }],
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -831,7 +867,25 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              messageId: 'fixRequiredProp',
+              output: `
+        <script>
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          props: {
+            name: {
+              required: false,
+              default: 'Hello'
+            }
+          }
+        })
+        </script>
+      `
+            }
+          ]
         }
       ]
     },

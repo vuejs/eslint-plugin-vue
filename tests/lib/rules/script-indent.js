@@ -8,7 +8,7 @@
 const fs = require('fs')
 const path = require('path')
 const semver = require('semver')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/script-indent')
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
@@ -39,10 +39,8 @@ function loadPatterns(additionalValid, additionalInvalid) {
       if ('parser' in baseObj) {
         baseObj.parser = require.resolve(baseObj.parser)
       }
-      if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
-        baseObj.parserOptions.parser = require.resolve(
-          baseObj.parserOptions.parser
-        )
+      if ('languageOptions' in baseObj && 'parser' in baseObj.languageOptions) {
+        baseObj.languageOptions.parser = require(baseObj.languageOptions.parser)
       }
       return Object.assign(baseObj, { code, filename })
     })
@@ -117,11 +115,13 @@ function unIndent(strings) {
 }
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2022,
     sourceType: 'module',
-    parser: require.resolve('espree') // espree v8.0.0-beta.x
+    parserOptions: {
+      parser: require.resolve('espree') // espree v8.0.0-beta.x
+    }
   }
 })
 
@@ -263,7 +263,7 @@ tester.run(
       `,
         errors: [
           {
-            message: 'Expected " " character, but found "\\t" character.',
+            message: String.raw`Expected " " character, but found "\t" character.`,
             line: 3
           }
         ]
@@ -289,11 +289,11 @@ tester.run(
         options: ['tab'],
         errors: [
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 3
           },
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 4
           }
         ]

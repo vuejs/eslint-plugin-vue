@@ -112,6 +112,7 @@ module.exports = {
       description: 'enforce correct use of `meta` property in core rules',
       categories: ['Internal']
     },
+    // eslint-disable-next-line eslint-plugin/require-meta-fixable -- fixer is not recognized
     fixable: 'code',
     schema: [],
     messages: {

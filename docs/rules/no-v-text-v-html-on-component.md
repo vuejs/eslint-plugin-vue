@@ -5,11 +5,12 @@ title: vue/no-v-text-v-html-on-component
 description: disallow v-text / v-html on component
 since: v8.4.0
 ---
+
 # vue/no-v-text-v-html-on-component
 
 > disallow v-text / v-html on component
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/vue3-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 ## :book: Rule Details
 
@@ -24,7 +25,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <div v-text="content"></div>
   <div v-html="html"></div>
-  <MyComponent>{{content}}</MyComponent>
+  <MyComponent>{{ content }}</MyComponent>
 
   <!-- ✗ BAD -->
   <MyComponent v-text="content"></MyComponent>
@@ -36,7 +37,33 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-v-text-v-html-on-component": [
+    "error",
+    { "allow": ["router-link", "nuxt-link"] }
+  ]
+}
+```
+
+- `allow` (`string[]`) ... Specify a list of custom components for which the rule should not apply.
+
+### `{ "allow": ["router-link", "nuxt-link"] }`
+
+<eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { allow: ['router-link', 'nuxt-link'] }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <router-link v-html="content" />
+  <NuxtLink v-html="content" />
+
+  <!-- ✗ BAD -->
+  <MyComponent v-html="content" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 

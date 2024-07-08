@@ -5,11 +5,12 @@ title: vue/no-ref-as-operand
 description: disallow use of value wrapped by `ref()` (Composition API) as an operand
 since: v7.0.0
 ---
+
 # vue/no-ref-as-operand
 
 > disallow use of value wrapped by `ref()` (Composition API) as an operand
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -24,7 +25,7 @@ You must use `.value` to access the `Ref` value.
 import { ref } from 'vue'
 
 export default {
-  setup () {
+  setup() {
     const count = ref(0)
     const ok = ref(true)
 

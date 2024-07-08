@@ -5,6 +5,7 @@ title: vue/no-restricted-html-elements
 description: disallow specific HTML elements
 since: v8.6.0
 ---
+
 # vue/no-restricted-html-elements
 
 > disallow specific HTML elements

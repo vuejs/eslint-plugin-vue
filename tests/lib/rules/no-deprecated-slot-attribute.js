@@ -1,13 +1,10 @@
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-deprecated-slot-attribute.js')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2015
-  }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('no-deprecated-slot-attribute', rule, {
@@ -321,7 +318,7 @@ tester.run('no-deprecated-slot-attribute', rule, {
       output: `
       <template>
         <LinkList>
-          <template v-slot><a /></template>
+          <template v-slot:[slot]><a /></template>
         </LinkList>
       </template>`,
       errors: [
@@ -338,7 +335,12 @@ tester.run('no-deprecated-slot-attribute', rule, {
           <a slot="name" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot:name>\n<a  />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot` attributes are deprecated.',
@@ -353,7 +355,12 @@ tester.run('no-deprecated-slot-attribute', rule, {
           <a :slot="name" />
         </LinkList>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <LinkList>
+          <template v-slot:[name]>\n<a  />\n</template>
+        </LinkList>
+      </template>`,
       errors: [
         {
           message: '`slot` attributes are deprecated.',
@@ -619,7 +626,17 @@ tester.run('no-deprecated-slot-attribute', rule, {
           </two>
         </my-component>
       </template>`,
-      output: null,
+      output: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+          <template v-slot:two>\n<two >
+            B
+          </two>\n</template>
+        </my-component>
+      </template>`,
       options: [
         {
           ignore: ['one']

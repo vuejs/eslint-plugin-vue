@@ -5,11 +5,12 @@ title: vue/no-custom-modifiers-on-v-model
 description: disallow custom modifiers on v-model used on the component
 since: v7.0.0
 ---
+
 # vue/no-custom-modifiers-on-v-model
 
 > disallow custom modifiers on v-model used on the component
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether `v-model` used on the component do not have custom modifiers.
 
@@ -29,11 +30,9 @@ This rule reports `v-model` directives in the following cases:
   <MyComponent v-model.lazy="foo" />
   <MyComponent v-model.number="foo" />
 
-
   <!-- ✗ BAD -->
   <MyComponent v-model.aaa="foo" />
   <MyComponent v-model.aaa.bbb="foo" />
-
 </template>
 ```
 

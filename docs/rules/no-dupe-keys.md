@@ -5,11 +5,12 @@ title: vue/no-dupe-keys
 description: disallow duplication of field names
 since: v3.9.0
 ---
+
 # vue/no-dupe-keys
 
 > disallow duplication of field names
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule prevents using duplicate key names.
 
@@ -29,14 +30,14 @@ export default {
   },
   computed: {
     foo: {
-      get () {}
+      get() {}
     }
   },
   data: {
     foo: null
   },
   methods: {
-    foo () {}
+    foo() {}
   }
 }
 </script>
@@ -65,10 +66,10 @@ export default {
 /* ✗ BAD */
 export default {
   computed: {
-    foo () {}
+    foo() {}
   },
   firebase: {
-    foo () {}
+    foo() {}
   }
 }
 </script>

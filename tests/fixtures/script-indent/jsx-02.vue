@@ -1,4 +1,4 @@
-<!--{ "parserOptions": { "ecmaFeatures": { "jsx": true } } }-->
+<!--{ "languageOptions": { "parserOptions": {"ecmaFeatures": { "jsx": true }} } }-->
 <script>
 // Not yet supported.
 const jsx = <

@@ -5,6 +5,7 @@ title: vue/arrow-spacing
 description: Enforce consistent spacing before and after the arrow in arrow functions in `<template>`
 since: v5.2.0
 ---
+
 # vue/arrow-spacing
 
 > Enforce consistent spacing before and after the arrow in arrow functions in `<template>`

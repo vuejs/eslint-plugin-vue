@@ -5,11 +5,12 @@ title: vue/valid-v-slot
 description: enforce valid `v-slot` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-slot
 
 > enforce valid `v-slot` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-slot` directive is valid.
 
@@ -32,7 +33,7 @@ This rule reports `v-slot` directives in the following cases:
 <template>
   <!-- ✓ GOOD -->
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component>
     <template v-slot:default>
@@ -48,7 +49,7 @@ This rule reports `v-slot` directives in the following cases:
 
   <!-- ✗ BAD -->
   <div v-slot="data">
-    {{data}}
+    {{ data }}
   </div>
   <div>
     <template v-slot:one>
@@ -57,10 +58,10 @@ This rule reports `v-slot` directives in the following cases:
   </div>
 
   <my-component v-slot:one="data">
-    {{data}}
+    {{ data }}
   </my-component>
   <my-component v-slot="data">
-    {{data}}
+    {{ data }}
     <template v-slot:one>
       one
     </template>
@@ -85,7 +86,7 @@ This rule reports `v-slot` directives in the following cases:
   </my-component>
 
   <my-component v-slot.mod="data">
-    {{data}}
+    {{ data }}
   </my-component>
 
   <my-component v-slot>
@@ -127,7 +128,7 @@ This rule does not check syntax errors in directives because it's checked by [vu
   </MyComponent>
 
   <!--  ✗ BAD */ -->
-  <MyComponent v-slot.foo="{data}">
+  <MyComponent v-slot.foo="{ data }">
     {{ data }}
   </MyComponent>
   <MyComponent>

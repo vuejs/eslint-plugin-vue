@@ -5,6 +5,7 @@ title: vue/require-direct-export
 description: require the component to be directly exported
 since: v5.2.0
 ---
+
 # vue/require-direct-export
 
 > require the component to be directly exported
@@ -70,7 +71,7 @@ export default ComponentA
 ```vue
 <script>
 /* ✓ GOOD */
-export default props => h('div', props.msg)
+export default (props) => h('div', props.msg)
 </script>
 ```
 
@@ -83,7 +84,7 @@ export default props => h('div', props.msg)
 ```vue
 <script>
 /* ✗ BAD */
-export default props => h('div', props.msg)
+export default (props) => h('div', props.msg)
 </script>
 ```
 

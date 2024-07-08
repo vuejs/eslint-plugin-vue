@@ -20,8 +20,8 @@ const rule = {
   }
 }
 
-const RuleTester = require('eslint').RuleTester
-const parserOptions = {
+const RuleTester = require('../../eslint-compat').RuleTester
+const languageOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
 }
@@ -39,77 +39,83 @@ function validTests(ext) {
     {
       filename: `test.${ext}`,
       code: `export const foo = {}`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `export var foo = {}`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `const foo = {}`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `var foo = {}`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `let foo = {}`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `foo({ })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `foo(() => { return {} })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `Vue.component('async-example', function (resolve, reject) { })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `Vue.component('async-example', function (resolve, reject) { resolve({}) })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `new Vue({ })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `{
         foo: {}
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: `test.${ext}`,
       code: `export default (Foo as FooConstructor<Foo>).extend({})`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: `test.${ext}`,
       code: `export default Foo.extend({})`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      }
     },
     {
       filename: `test.${ext}`,
       code: `export default Foo.extend({} as ComponentOptions)`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      }
     }
   ]
 }
@@ -125,64 +131,70 @@ function invalidTests(ext) {
         })
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(4)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.component({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.mixin({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.extend({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `app.component('name', {})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `app.mixin({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `export default (Vue as VueConstructor<Vue>).extend({})`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions,
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      },
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `export default Vue.extend({})`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions,
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      },
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `export default Vue.extend({} as ComponentOptions)`,
-      parser: require.resolve('@typescript-eslint/parser'),
-      parserOptions,
+      languageOptions: {
+        ...languageOptions,
+        parser: require('@typescript-eslint/parser')
+      },
       errors: [makeError(1)]
     },
     {
       filename: `test.${ext}`,
       code: `createApp({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
@@ -192,7 +204,7 @@ function invalidTests(ext) {
         export default { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(3)]
     },
     {
@@ -202,7 +214,7 @@ function invalidTests(ext) {
         export default { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(3)]
     },
     {
@@ -215,7 +227,7 @@ function invalidTests(ext) {
         export default { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(6)]
     },
     {
@@ -227,7 +239,7 @@ function invalidTests(ext) {
         export var a = { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(3), makeError(5)]
     },
     {
@@ -239,7 +251,7 @@ function invalidTests(ext) {
         export default { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(3), makeError(5)]
     },
     {
@@ -250,7 +262,7 @@ function invalidTests(ext) {
         export let foo = { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(4)]
     },
     {
@@ -261,7 +273,7 @@ function invalidTests(ext) {
         export let bar = { }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(4)]
     },
     {
@@ -273,7 +285,7 @@ function invalidTests(ext) {
         bar({ })
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [makeError(4)]
     },
     {
@@ -288,7 +300,7 @@ function invalidTests(ext) {
         bar({ })
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [...(ext === 'js' ? [] : [makeError(3)]), makeError(6)]
     },
     {
@@ -305,13 +317,13 @@ function invalidTests(ext) {
         }
         // ${ext}
       `,
-      parserOptions,
+      languageOptions,
       errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(8)]
     },
     {
       filename: `test.${ext}`,
       code: `export default defineComponent({})`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     }
   ]
@@ -323,7 +335,7 @@ ruleTester.run('vue-component', rule, {
     {
       filename: 'test.js',
       code: `export default { }`,
-      parserOptions
+      languageOptions
     },
     ...validTests('js'),
     ...validTests('jsx'),
@@ -333,13 +345,13 @@ ruleTester.run('vue-component', rule, {
     {
       filename: 'test.vue',
       code: `export default { }`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     {
       filename: 'test.jsx',
       code: `export default { }`,
-      parserOptions,
+      languageOptions,
       errors: [makeError(1)]
     },
     ...invalidTests('js'),

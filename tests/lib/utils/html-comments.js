@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const assert = require('assert')
 
-const Linter = require('eslint').Linter
+const Linter = require('../../eslint-compat').Linter
 
 const htmlComments = require('../../../lib/utils/html-comments')
 
@@ -37,17 +37,25 @@ function tokenize(code, option) {
   const linter = new Linter()
   const result = []
 
-  linter.defineRule('vue/html-comments-test', (content) =>
-    htmlComments.defineVisitor(content, option, (commentTokens) => {
-      result.push(commentTokens)
-    })
-  )
-  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
   linter.verify(
     code,
     {
-      parser: 'vue-eslint-parser',
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 2018
+      },
+      plugins: {
+        vue: {
+          rules: {
+            'html-comments-test': {
+              create: (content) =>
+                htmlComments.defineVisitor(content, option, (commentTokens) => {
+                  result.push(commentTokens)
+                })
+            }
+          }
+        }
+      },
       rules: { 'vue/html-comments-test': 'error' }
     },
     undefined,

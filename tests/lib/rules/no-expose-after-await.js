@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-expose-after-await')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -103,7 +103,7 @@ tester.run('no-expose-after-await', rule, {
       await doSomething()
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -116,7 +116,7 @@ tester.run('no-expose-after-await', rule, {
       function defineExpose() {}
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     },
     {
       filename: 'test.vue',
@@ -127,7 +127,7 @@ tester.run('no-expose-after-await', rule, {
       onMounted(() => {})
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 }
+      languageOptions: { ecmaVersion: 2022 }
     }
   ],
   invalid: [
@@ -179,7 +179,7 @@ tester.run('no-expose-after-await', rule, {
       defineExpose({ /* ... */ })
       </script>
       `,
-      parserOptions: { ecmaVersion: 2022 },
+      languageOptions: { ecmaVersion: 2022 },
       errors: [
         {
           message: '`defineExpose` is forbidden after an `await` expression.',

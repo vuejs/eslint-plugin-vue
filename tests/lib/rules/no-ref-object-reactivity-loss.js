@@ -4,11 +4,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-ref-object-reactivity-loss')
 
 const tester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -305,6 +305,31 @@ tester.run('no-ref-object-reactivity-loss', rule, {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
           line: 19
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      const model1 = defineModel();
+      const [model2, mod] = defineModel();
+      console.log(
+        model1.value,
+        model2.value,
+        mod.value // OK
+      )
+      </script>`,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 6
+        },
+        {
+          message:
+            'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
+          line: 7
         }
       ]
     },

@@ -5,11 +5,12 @@ title: vue/no-v-html
 description: disallow use of v-html to prevent XSS attack
 since: v4.7.0
 ---
+
 # vue/no-v-html
 
 > disallow use of v-html to prevent XSS attack
 
-- :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -36,10 +37,6 @@ Nothing.
 ## :mute: When Not To Use It
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
-
-## :books: Further Reading
-
-- [XSS in Vue.js](https://blog.sqreen.io/xss-in-vue-js/)
 
 ## :rocket: Version
 

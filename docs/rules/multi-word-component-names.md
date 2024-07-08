@@ -5,11 +5,12 @@ title: vue/multi-word-component-names
 description: require component names to be always multi-word
 since: v7.20.0
 ---
+
 # vue/multi-word-component-names
 
 > require component names to be always multi-word
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -82,7 +83,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✗ BAD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -94,7 +95,7 @@ export default {
 <!-- filename: TodoItem.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 
@@ -106,7 +107,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 <script>
 export default {
@@ -163,7 +164,7 @@ export default {
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
 <script setup>
-  // ...
+// ...
 </script>
 ```
 

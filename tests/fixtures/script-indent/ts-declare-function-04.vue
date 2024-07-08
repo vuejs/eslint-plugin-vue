@@ -1,7 +1,6 @@
-<!--{"parserOptions": {"parser":"@typescript-eslint/parser"}}-->
+<!--{"languageOptions": {"parserOptions": {"parser":"@typescript-eslint/parser"}}}-->
 <script lang="ts">
 declare function
-  *
   foo
   (
     arg1: string,

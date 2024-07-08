@@ -4,30 +4,33 @@
 'use strict'
 
 const rule = require('../../../lib/rules/block-order')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const assert = require('assert')
 const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.
 const eslint = new ESLint({
+  overrideConfigFile: true,
   overrideConfig: {
-    parser: require.resolve('vue-eslint-parser'),
-    parserOptions: {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
     },
-    plugins: ['vue'],
+    plugins: { vue: require('../../../lib/index') },
     rules: {
       'vue/comment-directive': 'error',
       'vue/block-order': 'error'
-    }
+    },
+    processor: require('../../../lib/processor')
   },
-  useEslintrc: false,
-  plugins: { vue: require('../../../lib/index') },
   fix: true
 })
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser')
+  languageOptions: {
+    parser: require('vue-eslint-parser')
+  }
 })
 
 tester.run('block-order', rule, {

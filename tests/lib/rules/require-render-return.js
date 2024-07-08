@@ -5,12 +5,14 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-render-return')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
-  ecmaFeatures: { jsx: true }
+  parserOptions: {
+    ecmaFeatures: { jsx: true }
+  }
 }
 
 const ruleTester = new RuleTester()
@@ -23,7 +25,7 @@ ruleTester.run('require-render-return', rule, {
           return {}
         }
       })`,
-      parserOptions
+      languageOptions
     },
     {
       code: `Vue.component('test', {
@@ -31,19 +33,19 @@ ruleTester.run('require-render-return', rule, {
           return {}
         }
       })`,
-      parserOptions
+      languageOptions
     },
     {
       code: `Vue.component('test', {
         foo: {}
       })`,
-      parserOptions
+      languageOptions
     },
     {
       code: `Vue.component('test', {
         render: foo
       })`,
-      parserOptions
+      languageOptions
     },
     {
       code: `Vue.component('test', {
@@ -51,7 +53,7 @@ ruleTester.run('require-render-return', rule, {
           return <div></div>
         }
       })`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -60,7 +62,7 @@ ruleTester.run('require-render-return', rule, {
           return {}
         }
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -70,7 +72,7 @@ ruleTester.run('require-render-return', rule, {
           return foo
         }
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -90,14 +92,14 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
       code: `export default {
         render: () => null
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -110,7 +112,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       }`,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -123,7 +125,7 @@ ruleTester.run('require-render-return', rule, {
           return h('div', options)
         }
       }`,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -134,7 +136,7 @@ ruleTester.run('require-render-return', rule, {
         render() {
         }
       }`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
@@ -152,7 +154,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       }`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
@@ -169,7 +171,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
@@ -186,7 +188,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
@@ -203,7 +205,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',
@@ -222,7 +224,7 @@ ruleTester.run('require-render-return', rule, {
           }
         }
       })`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Expected to return a value in render function.',

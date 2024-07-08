@@ -4,12 +4,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/valid-v-memo')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2021 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2021 }
 })
 
 tester.run('valid-v-memo', rule, {

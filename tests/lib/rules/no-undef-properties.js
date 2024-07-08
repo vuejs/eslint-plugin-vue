@@ -4,15 +4,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-undef-properties')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -555,10 +555,21 @@ tester.run('no-undef-properties', rule, {
       <div>{{ foo }}</div>
       <div>{{ unknown }}</div>
       </template>`,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
-    }
+    },
+
+    `
+    <script setup>
+    const model = defineModel();
+    const woof = computed(() => model.value);
+    </script>
+    <template>
+      <div id="app">Woof: {{ woof }}</div>
+    </template>`
   ],
 
   invalid: [
@@ -1176,6 +1187,33 @@ tester.run('no-undef-properties', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const m = defineModel()
+      const a = defineModel('A')
+      const [withModifiers, modifiers] = defineModel('withModifiers')
+      </script>
+      <template>
+        <div>
+          {{ m }} {{ modelValue }}
+          {{ a }} {{ A }}
+          {{withModifiers}} {{modifiers}}
+        </div>
+
+        <div>{{ undef }}</div>
+      </template>
+      `,
+      errors: [
+        {
+          message: "'undef' is not defined.",
+          line: 14
+        }
+      ]
     }
   ]
 })

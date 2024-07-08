@@ -4,30 +4,29 @@
  */
 'use strict'
 
-const Linter = require('eslint').Linter
+const Linter = require('../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
 const assert = require('assert')
 
 const rules = require('../..').rules
 
 const baseConfig = {
-  parser: 'vue-eslint-parser',
-  parserOptions: {
+  files: ['*.vue'],
+  plugins: { vue: { rules } },
+  languageOptions: {
+    parser,
     ecmaVersion: 2018,
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true
+      }
     }
   }
 }
 
 describe('Complex autofix test cases', () => {
   const linter = new Linter()
-  linter.defineParser('vue-eslint-parser', parser)
-  for (const key of Object.keys(rules)) {
-    const ruleId = `vue/${key}`
-    linter.defineRule(ruleId, rules[key])
-  }
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/566
   describe('Autofix of `vue/order-in-components` and `comma-dangle` should not conflict.', () => {

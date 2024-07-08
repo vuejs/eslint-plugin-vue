@@ -5,11 +5,12 @@ title: vue/valid-v-bind
 description: enforce valid `v-bind` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-bind
 
 > enforce valid `v-bind` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-bind` directive is valid.
 
@@ -27,15 +28,14 @@ This rule does not report `v-bind` directives which do not have their argument (
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind="foo"/>
-  <div v-bind:aaa="foo"/>
-  <div :aaa="foo"/>
-  <div :aaa.prop="foo"/>
+  <div v-bind="foo" />
+  <div v-bind:aaa="foo" />
+  <div :aaa="foo" />
+  <div :aaa.prop="foo" />
 
   <!-- ✗ BAD -->
-  <div v-bind/>
-  <div :aaa/>
-  <div v-bind:aaa.bbb="foo"/>
+  <div v-bind />
+  <div v-bind:aaa.bbb="foo" />
 </template>
 ```
 

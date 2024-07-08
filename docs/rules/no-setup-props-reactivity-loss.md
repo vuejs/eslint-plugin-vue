@@ -5,6 +5,7 @@ title: vue/no-setup-props-reactivity-loss
 description: disallow usages that lose the reactivity of `props` passed to `setup`
 since: v9.17.0
 ---
+
 # vue/no-setup-props-reactivity-loss
 
 > disallow usages that lose the reactivity of `props` passed to `setup`

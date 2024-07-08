@@ -5,6 +5,7 @@ title: vue/match-component-file-name
 description: require component name property to match its file name
 since: v5.2.0
 ---
+
 # vue/match-component-file-name
 
 > require component name property to match its file name
@@ -98,11 +99,11 @@ export default {
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
-  export default {
-    /* The default does not verify to `.vue`. */
-    name: 'MComponent',
-    template: '<div />'
-  }
+export default {
+  /* The default does not verify to `.vue`. */
+  name: 'MComponent',
+  template: '<div />'
+}
 </script>
 ```
 
@@ -130,11 +131,11 @@ export default {
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
-  export default {
-    /* ✓ GOOD */
-    name: 'MyComponent',
-    template: '<div />'
-  }
+export default {
+  /* ✓ GOOD */
+  name: 'MyComponent',
+  template: '<div />'
+}
 </script>
 ```
 
@@ -145,11 +146,11 @@ export default {
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
-  export default {
-    /* ✗ BAD */
-    name: 'MComponent',
-    template: '<div />'
-  }
+export default {
+  /* ✗ BAD */
+  name: 'MComponent',
+  template: '<div />'
+}
 </script>
 ```
 
@@ -160,10 +161,10 @@ export default {
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
-  /* no name property defined */
-  export default {
-    template: '<div />'
-  }
+/* no name property defined */
+export default {
+  template: '<div />'
+}
 </script>
 ```
 

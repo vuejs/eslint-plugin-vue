@@ -4,13 +4,13 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-undef-components')
 const semver = require('semver')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -104,7 +104,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -170,7 +170,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -185,7 +185,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -200,7 +200,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ]
     },
@@ -215,7 +215,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -230,7 +230,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -245,7 +245,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+']
+          ignorePatterns: [String.raw`Custom(\w+)+`]
         }
       ]
     },
@@ -261,7 +261,11 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['Custom(\\w+)+', 'Warm(\\w+)+', 'InfoBtn(\\w+)+']
+          ignorePatterns: [
+            String.raw`Custom(\w+)+`,
+            String.raw`Warm(\w+)+`,
+            String.raw`InfoBtn(\w+)+`
+          ]
         }
       ]
     },
@@ -656,11 +660,13 @@ tester.run('no-undef-components', rule, {
         <HelloWorld1 />
       </template>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     }
   ],
@@ -751,12 +757,14 @@ tester.run('no-undef-components', rule, {
         <HelloWorld5 />
       </template>
       `,
-            parserOptions: {
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
               ecmaVersion: 6,
               sourceType: 'module',
-              parser: require.resolve('@typescript-eslint/parser')
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
-            parser: require.resolve('vue-eslint-parser'),
             errors: [
               {
                 message:
@@ -803,11 +811,13 @@ tester.run('no-undef-components', rule, {
         <Foo />
       </template>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require.resolve('@typescript-eslint/parser')
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -843,7 +853,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ],
       errors: [
@@ -882,7 +892,7 @@ tester.run('no-undef-components', rule, {
       `,
       options: [
         {
-          ignorePatterns: ['custom(\\-\\w+)+']
+          ignorePatterns: [String.raw`custom(\-\w+)+`]
         }
       ],
       errors: [

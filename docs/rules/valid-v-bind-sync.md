@@ -5,11 +5,12 @@ title: vue/valid-v-bind-sync
 description: enforce valid `.sync` modifier on `v-bind` directives
 since: v7.0.0
 ---
+
 # vue/valid-v-bind-sync
 
 > enforce valid `.sync` modifier on `v-bind` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
@@ -27,12 +28,12 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-bind:aaa.sync="foo"/>
-  <MyComponent :aaa.sync="foo"/>
+  <MyComponent v-bind:aaa.sync="foo" />
+  <MyComponent :aaa.sync="foo" />
 
   <div v-for="todo in todos">
-    <MyComponent v-bind:aaa.sync="todo.name"/>
-    <MyComponent :aaa.sync="todo.name"/>
+    <MyComponent v-bind:aaa.sync="todo.name" />
+    <MyComponent :aaa.sync="todo.name" />
   </div>
 
   <!-- ✗ BAD -->
@@ -42,8 +43,8 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
   <MyComponent :aaa.sync="a?.b.c" />
   <MyComponent :aaa.sync="(a?.b).c" />
 
-  <input v-bind:aaa.sync="foo">
-  <input :aaa.sync="foo">
+  <input v-bind:aaa.sync="foo" />
+  <input :aaa.sync="foo" />
 
   <div v-for="todo in todos">
     <MyComponent v-bind:aaa.sync="todo" />

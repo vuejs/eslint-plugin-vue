@@ -5,6 +5,7 @@ title: vue/no-empty-component-block
 description: disallow the `<template>` `<script>` `<style>` block to be empty
 since: v7.0.0
 ---
+
 # vue/no-empty-component-block
 
 > disallow the `<template>` `<script>` `<style>` block to be empty
@@ -25,13 +26,13 @@ See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.htm
 </template>
 
 <script>
-  console.log('foo')
+console.log('foo')
 </script>
 
 <style>
-  p {
-    display: inline;
-  }
+p {
+  display: inline;
+}
 </style>
 
 <template src="./template.html"></template>
@@ -42,7 +43,6 @@ See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.htm
 
 <style src="./style.css"></style>
 <style src="./style.css" />
-
 
 <!-- ✗ BAD -->
 <template></template>

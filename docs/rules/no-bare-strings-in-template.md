@@ -5,6 +5,7 @@ title: vue/no-bare-strings-in-template
 description: disallow the use of bare strings in `<template>`
 since: v7.0.0
 ---
+
 # vue/no-bare-strings-in-template
 
 > disallow the use of bare strings in `<template>`
@@ -12,7 +13,7 @@ since: v7.0.0
 ## :book: Rule Details
 
 This rule disallows the use of bare strings in `<template>`.  
-In order to be able to internationalize your application, you will need to avoid using plain strings in your templates. Instead, you would need to use a template helper specializing in translation.  
+In order to be able to internationalize your application, you will need to avoid using plain strings in your templates. Instead, you would need to use a template helper specializing in translation.
 
 This rule was inspired by [no-bare-strings rule in ember-template-lint](https://github.com/ember-template-lint/ember-template-lint/blob/master/docs/rule/no-bare-strings.md).
 

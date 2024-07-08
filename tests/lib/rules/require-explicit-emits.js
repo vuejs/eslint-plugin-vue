@@ -4,15 +4,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/require-explicit-emits')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -434,7 +434,9 @@ tester.run('require-explicit-emits', rule, {
       }>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -446,7 +448,9 @@ tester.run('require-explicit-emits', rule, {
       defineEmits<(e: 'foo') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       filename: 'test.vue',
@@ -459,7 +463,24 @@ tester.run('require-explicit-emits', rule, {
       defineEmits<(e: 'foo' | 'bar') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('foo')"/>
+        <div @click="emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo' | 'bar') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
 
     // unknown emits definition
@@ -607,7 +628,9 @@ tester.run('require-explicit-emits', rule, {
       emit('bar', 42)
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       // new syntax in Vue 3.3
@@ -620,7 +643,9 @@ tester.run('require-explicit-emits', rule, {
       emit('bar', 42)
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     },
     {
       code: `
@@ -1702,8 +1727,86 @@ emits: {'foo': null}
       </script>
       `,
       errors: [
-        'The "foo" event has been triggered but not declared on `emits` option.',
-        'The "bar" event has been triggered but not declared on `emits` option.'
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
       ]
     },
     {
@@ -1719,8 +1822,74 @@ emits: {'foo': null}
       </script>
       `,
       errors: [
-        'The "foo" event has been triggered but not declared on `emits` option.',
-        'The "bar" event has been triggered but not declared on `emits` option.'
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
       ]
     },
     // allowProps
@@ -1746,15 +1915,141 @@ emits: {'foo': null}
       errors: [
         {
           line: 3,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         },
         {
           line: 9,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         },
         {
           line: 12,
-          messageId: 'missing'
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
         }
       ]
     },
@@ -1834,7 +2129,9 @@ emits: {'foo': null}
       }>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1853,7 +2150,9 @@ emits: {'foo': null}
       defineEmits<(e: 'foo') => void>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1888,7 +2187,9 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1936,7 +2237,9 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1956,7 +2259,9 @@ emits: {'foo': null}
       emit('bar')
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message:
@@ -1983,6 +2288,27 @@ emits: {'foo': null}
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
     }
   ]
 })

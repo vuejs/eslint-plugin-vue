@@ -5,6 +5,7 @@ title: vue/component-options-name-casing
 description: enforce the casing of component name in `components` options
 since: v8.2.0
 ---
+
 # vue/component-options-name-casing
 
 > enforce the casing of component name in `components` options

@@ -23,6 +23,7 @@ const path = require('path')
 const rules = require('./lib/rules')
 const removedRules = require('../lib/removed-rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
+const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
@@ -70,7 +71,7 @@ class DocFile {
     }
     const computed = `---\n${Object.entries(fileIntro)
       .map((item) => `${item[0]}: ${item[1]}`)
-      .join('\n')}\n---\n`
+      .join('\n')}\n---\n\n`
 
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
@@ -86,7 +87,10 @@ class DocFile {
     const description = meta.docs
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
-    const title = `# ${ruleId}\n\n> ${description}`
+    const escapedDescription = description
+      .replace(/\*/g, String.raw`\*`)
+      .replace(/_/g, String.raw`\_`)
+    const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
     if (meta.removedInVersion) {
@@ -119,8 +123,8 @@ class DocFile {
       }
     }
     if (meta.docs?.categories) {
-      const presets = getPresetIds(meta.docs.categories).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      const presets = getPresetIds(meta.docs.categories).flatMap((categoryId) =>
+        CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
 
       notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
@@ -138,7 +142,7 @@ class DocFile {
 
     if (!this.since) {
       notes.unshift(
-        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> ***This rule has not been released yet.*** </badge>`
+        `- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>`
       )
     }
 

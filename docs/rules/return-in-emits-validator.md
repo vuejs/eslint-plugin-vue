@@ -5,11 +5,12 @@ title: vue/return-in-emits-validator
 description: enforce that a return statement is present in emits validator
 since: v7.0.0
 ---
+
 # vue/return-in-emits-validator
 
 > enforce that a return statement is present in emits validator
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -22,7 +23,7 @@ This rule enforces that a `return` statement is present in `emits` validators.
 export default {
   emits: {
     /* ✓ GOOD */
-    foo (evt) {
+    foo(evt) {
       if (evt) {
         return true
       } else {
@@ -32,14 +33,14 @@ export default {
     bar: function () {
       return true
     },
-    baz (evt) {
+    baz(evt) {
       if (evt) {
         return true
       }
     },
     /* ✗ BAD */
     qux: function () {},
-    quux (evt) {
+    quux(evt) {
       if (!evt) {
         return false
       }

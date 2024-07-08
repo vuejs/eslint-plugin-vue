@@ -5,6 +5,7 @@ title: vue/block-spacing
 description: Disallow or enforce spaces inside of blocks after opening block and before closing block in `<template>`
 since: v5.2.0
 ---
+
 # vue/block-spacing
 
 > Disallow or enforce spaces inside of blocks after opening block and before closing block in `<template>`

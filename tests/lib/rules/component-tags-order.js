@@ -4,30 +4,31 @@
 'use strict'
 
 const rule = require('../../../lib/rules/component-tags-order')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const assert = require('assert')
 const { ESLint } = require('../../eslint-compat')
 
 // Initialize linter.
 const eslint = new ESLint({
+  overrideConfigFile: true,
   overrideConfig: {
-    parser: require.resolve('vue-eslint-parser'),
-    parserOptions: {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
     },
-    plugins: ['vue'],
+    plugins: { vue: require('../../../lib/index') },
     rules: {
       'vue/comment-directive': 'error',
       'vue/component-tags-order': 'error'
-    }
+    },
+    processor: require('../../../lib/processor')
   },
-  useEslintrc: false,
-  plugins: { vue: require('../../../lib/index') },
   fix: true
 })
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser')
+  languageOptions: { parser: require('vue-eslint-parser') }
 })
 
 tester.run('component-tags-order', rule, {
@@ -483,7 +484,7 @@ describe('suppress reporting with eslint-disable-next-line', () => {
     const [{ messages, output }] = await eslint.lintText(code, {
       filePath: 'test.vue'
     })
-    assert.strictEqual(messages.length, 0)
+    assert.deepStrictEqual(messages, [])
     // should not fix <script>
     assert.strictEqual(
       output,

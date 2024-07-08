@@ -1,11 +1,11 @@
 'use strict'
 
 const globals = require('globals')
-const { FlatCompat } = require('@eslint/eslintrc')
-
-const eslintrc = new FlatCompat({
-  baseDirectory: __dirname
-})
+const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
+const eslintPluginJsonc = require('eslint-plugin-jsonc')
+const eslintPluginNodeDependencies = require('eslint-plugin-node-dependencies')
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
+const eslintPluginUnicorn = require('eslint-plugin-unicorn')
 
 module.exports = [
   {
@@ -25,14 +25,11 @@ module.exports = [
       'docs/.vitepress/cache'
     ]
   },
-  ...eslintrc.plugins('eslint-plugin', 'prettier', 'unicorn'),
-  ...eslintrc.extends(
-    'plugin:eslint-plugin/all',
-    'prettier',
-    'plugin:node-dependencies/recommended',
-    'plugin:jsonc/recommended-with-jsonc',
-    'plugin:unicorn/recommended'
-  ),
+  eslintPluginEslintPlugin,
+  eslintPluginUnicorn.configs['flat/recommended'],
+  ...eslintPluginNodeDependencies.configs['flat/recommended'],
+  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
+  eslintPluginPrettierRecommended,
   {
     plugins: {
       internal: {
@@ -142,6 +139,11 @@ module.exports = [
       'prefer-const': 2,
 
       'prettier/prettier': 'error',
+      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
+      'eslint-plugin/require-meta-fixable': [
+        'error',
+        { catchNoFixerButFixableProperty: true }
+      ],
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
 
       'no-debugger': 'error',
@@ -199,10 +201,6 @@ module.exports = [
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: require('vue-eslint-parser')
-      // parserOptions: {
-      //   ecmaVersion: 'latest',
-      //   sourceType: 'module'
-      // }
     }
   },
   {

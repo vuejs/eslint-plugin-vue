@@ -5,6 +5,7 @@ title: vue/dot-notation
 description: Enforce dot notation whenever possible in `<template>`
 since: v7.0.0
 ---
+
 # vue/dot-notation
 
 > Enforce dot notation whenever possible in `<template>`

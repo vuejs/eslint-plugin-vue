@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const { RuleTester, Linter } = require('eslint')
+const { RuleTester, Linter } = require('../../eslint-compat')
 const assert = require('assert')
 const rule = require('../../../lib/rules/no-unused-properties')
 const {
@@ -12,8 +12,8 @@ const {
 } = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -53,6 +53,558 @@ const unreferencedOptions = {
 
 tester.run('no-unused-properties', rule, {
   valid: [
+    // vuex getters
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(["bar"]),
+            },
+            methods: {
+              baz() {
+                return this.bar
+              }
+            }
+          }
+        </script>
+        <template>
+          {{ baz() }}
+        </template>
+      `,
+      options: allOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(['count']),
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(['count1', 'count2'])
+          }
+        </script>
+        <template>
+          {{ count1 }} {{ count2 }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters({
+              count: 'count'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters({
+                count: 'count'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+
+    // vuex mutations
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapMutations({
+              add: 'increment'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapMutations({
+                add: 'increment'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapMutations(['add'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              methods: {
+                ...mapMutations(['add'])
+              }
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+
+    // vuex actions
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions({
+                add: 'increment'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions({
+              add: 'increment'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(['add'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(['add'])
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+
+    // vuex state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState({
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(['count'])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+
+    // pinia getters
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, ["bar"]),
+            },
+            methods: {
+              baz() {
+                return this.bar
+              }
+            }
+          }
+        </script>
+        <template>
+          {{ baz() }}
+        </template>
+      `,
+      options: allOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, ['count']),
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(useStore, ['count1', 'count2'])
+          }
+        </script>
+        <template>
+          {{ count1 }} {{ count2 }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(useStore, {
+              count: 'count'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, {
+                count: 'count'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+
+    // pinia actions
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(useStore, {
+                add: 'increment'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(useStore, {
+              add: 'increment'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(useStore, ['add'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(useStore, ['add'])
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `
+    },
+
+    // pinia state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState(useStore, {
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(useStore, {
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState(useStore, {
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(useStore, ['count'])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+
+    // pinia writable state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapWritableState(useStore, {
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapWritableState(useStore, {
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapWritableState(useStore, {
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapWritableState(useStore, ['count'])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `
+    },
+
     // a property used in a script expression
     {
       filename: 'test.vue',
@@ -62,6 +614,19 @@ tester.run('no-unused-properties', rule, {
             props: ['count'],
             created() {
               alert(this.count + 1)
+            }
+          };
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['count'],
+            created() {
+              alert(this.$props.count + 1)
             }
           };
         </script>
@@ -139,6 +704,34 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property used as a template $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.count }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          }
+        </script>
+      `
+    },
+    // a property used as a template $props expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          }
+        </script>
+      `
+    },
 
     // properties used in a template expression
     {
@@ -154,6 +747,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // properties used in a template expression as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.count1 + $props.count2 }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['count1', 'count2']
+          };
+        </script>
+      `
+    },
 
     // a property used in v-if
     {
@@ -161,6 +768,24 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <div v-if="count > 0"></div>
+        </template>
+        <script>
+          export default {
+            props: {
+              count: {
+                type: Number
+              }
+            }
+          };
+        </script>
+      `
+    },
+    // a property used in v-if as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="$props.count > 0"></div>
         </template>
         <script>
           export default {
@@ -193,6 +818,25 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property used in v-for as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-for="color in $props.colors">{{ color }}</div>
+        </template>
+        <script>
+          export default {
+            props: {
+              colors: {
+                type: Array,
+                default: () => []
+              }
+            }
+          };
+        </script>
+      `
+    },
 
     // a property used in v-html
     {
@@ -200,6 +844,20 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <div v-html="message" />
+        </template>
+        <script>
+          export default {
+            props: ['message']
+          };
+        </script>
+      `
+    },
+    // a property used in v-html as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-html="$props.message" />
         </template>
         <script>
           export default {
@@ -223,6 +881,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // a property passed in a component as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <counter :count="$props.count" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
 
     // a property used in v-on
     {
@@ -230,6 +902,34 @@ tester.run('no-unused-properties', rule, {
       code: `
         <template>
           <button @click="alert(count)" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
+    // a property used in v-on as $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <button @click="alert($props.count)" />
+        </template>
+        <script>
+          export default {
+            props: ['count']
+          };
+        </script>
+      `
+    },
+    // a property used in v-on as $props expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <button @click="alert($props)" />
         </template>
         <script>
           export default {
@@ -1196,6 +1896,21 @@ tester.run('no-unused-properties', rule, {
       </script>
       `
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: ['x'],
+          computed: {
+            y: {
+              get: () => this.$props.x * 2
+            }
+          }
+        };
+      </script>
+      `
+    },
 
     // deep data
     {
@@ -1587,6 +2302,29 @@ tester.run('no-unused-properties', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+      </template>
+      <script>
+      export default {
+        props: {
+          a: String,
+        },
+        computed: {
+          /** @public */
+          b () { return this.$props.a },
+        },
+      }
+      </script>`,
+      options: [
+        {
+          groups: ['props', 'computed'],
+          ignorePublicMembers: true
+        }
+      ]
+    },
 
     // expose
     {
@@ -1706,8 +2444,10 @@ tester.run('no-unused-properties', rule, {
       <style lang="scss" scoped>
       //
       </style>`,
-      parserOptions: {
-        parser: '@typescript-eslint/parser'
+      languageOptions: {
+        parserOptions: {
+          parser: '@typescript-eslint/parser'
+        }
       }
     },
 
@@ -1727,9 +2467,954 @@ tester.run('no-unused-properties', rule, {
         },
       };
       </script>`
+    },
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['a'])
+      const foo = defineModel('a')
+      </script>
+      <template>
+        {{ foo }}
+      </template>
+      `
+    },
+
+    // props.prop in template
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b', 'c'])
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props.a}}
+      </template>
+      <script setup>
+      const props = defineProps(['a'])
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{foo.a}}
+      </template>
+      <script setup>
+      const foo = defineProps(['a'])
+      </script>`
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      const props = defineProps<{ foo: string, bar: string }>()
+      </script>
+      <template>
+      {{ props.foo }}{{ bar }}
+      </template>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
   invalid: [
+    // vuex unused mutations
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapMutations({
+              add2: 'increment',
+              add: 'iqwnei'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapMutations({
+                add2: 'increment',
+                add: 'inrement'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapMutations(['add', 'add2'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              methods: {
+                ...mapMutations(['add', 'add2'])
+              }
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // vuex unused actions
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions({
+                add2: 'increment',
+                add: 'qweqwqewqwe'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions({
+              add2: 'increment',
+              add: 'inasdasda'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(['add', 'add2'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(['add', 'add2'])
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 5
+        }
+      ]
+    },
+
+    // vuex unused state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count2: state => state.todosCount,
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState({
+                count2: state => state.todosCount,
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count2 (state) {
+                return state.todosCount
+              },
+
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(['count', 'count2', 'count3'])
+            }
+          }
+        </script>
+        <template>
+          {{ count2 }} {{ count3 }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState({
+              count: 'todosCount',
+              count2: 'someCount'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // vuex unused getters
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(['count', 'count2']),
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(['count1', 'count2', 'count'])
+          }
+        </script>
+        <template>
+          {{ count1 }} {{ count2 }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count' of computed property found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters({
+              count2: 'count',
+              count: 'count'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters({
+                count: 'count',
+                count3: 'count2'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count3' of computed property found, but never used.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters({
+                a: { b :'c' }, // This is an invalid definition, but it does not use "a".
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters([
+                "a",
+                a['foo'] // cannot be inferred.
+              ])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // pinia unused actions
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(useStore, {
+                add2: 'increment',
+                add: 'qweqwqewqwe'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(useStore, {
+              add2: 'increment',
+              add: 'inasdasda'
+            })
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: mapActions(useStore, ['add', 'add2'])
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            methods: {
+              ...mapActions(useStore, ['add', 'add2'])
+            }
+          }
+        </script>
+        <template>
+          {{ add() }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'add2' of method found, but never used.",
+          line: 5
+        }
+      ]
+    },
+
+    // pinia unused state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState(useStore, {
+              count2: state => state.todosCount,
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(useStore, {
+                count2: state => state.todosCount,
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState(useStore, {
+              count2 (state) {
+                return state.todosCount
+              },
+
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapState(useStore, ['count', 'count2', 'count3'])
+            }
+          }
+        </script>
+        <template>
+          {{ count2 }} {{ count3 }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapState(useStore, {
+              count: 'todosCount',
+              count2: 'someCount'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // pinia unused writable state
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapWritableState(useStore, {
+              count2: state => state.todosCount,
+              count: state => state.todosCount
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapWritableState(useStore, {
+                count2: state => state.todosCount,
+                count: state => state.todosCount
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapWritableState(useStore, {
+              count2 (state) {
+                return state.todosCount
+              },
+
+              count (state) {
+                return state.todosCount
+              }
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapWritableState(useStore, ['count', 'count2', 'count3'])
+            }
+          }
+        </script>
+        <template>
+          {{ count2 }} {{ count3 }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapWritableState(useStore, {
+              count: 'todosCount',
+              count2: 'someCount'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // pinia unused getters
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, ['count', 'count2']),
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(useStore, ['count1', 'count2', 'count'])
+          }
+        </script>
+        <template>
+          {{ count1 }} {{ count2 }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count' of computed property found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: mapGetters(useStore, {
+              count2: 'count',
+              count: 'count'
+            })
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count2' of computed property found, but never used.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, {
+                count: 'count',
+                count3: 'count2'
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'count3' of computed property found, but never used.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, {
+                a: { b :'c' }, // This is an invalid definition, but it does not use "a".
+              })
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            computed: {
+              ...mapGetters(useStore, [
+                "a",
+                a['foo'] // cannot be inferred.
+              ])
+            }
+          }
+        </script>
+        <template>
+          {{ count }}
+        </template>
+      `,
+      errors: [
+        {
+          message: "'a' of computed property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
     // unused property
     {
       filename: 'test.vue',
@@ -2982,6 +4667,79 @@ tester.run('no-unused-properties', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+
+    {
+      // defineModel
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const m = defineModel()
+      console.log(m.value)
+      defineModel('a')
+      defineModel('unused')
+      </script>
+      <template>
+        {{ a }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'unused' of property found, but never used.",
+          line: 6
+        }
+      ]
+    },
+
+    // a property used as a template $props member expression
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>{{ $props.foo }}</div>
+        </template>
+        <script>
+          export default {
+            props: ['foo', 'bar']
+          }
+        </script>
+      `,
+      errors: ["'bar' of property found, but never used."]
+    },
+
+    // props.prop in template
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{props.a}}
+      </template>
+      <script setup>
+      const props = defineProps(['a', 'b'])
+      </script>`,
+      errors: ["'b' of property found, but never used."]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{foo.a}}
+      </template>
+      <script setup>
+      const foo = defineProps(['a', 'b'])
+      </script>`,
+      errors: ["'b' of property found, but never used."]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      const props = defineProps<{ foo: string, bar: string, baz: string }>()
+      </script>
+      <template>
+      {{ props.foo }}{{ bar }}
+      </template>`,
+      errors: ["'baz' of property found, but never used."],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
@@ -2989,16 +4747,18 @@ tester.run('no-unused-properties', rule, {
 // https://github.com/vuejs/eslint-plugin-vue/issues/1789
 describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
   const linter = new Linter()
-  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
-  linter.defineRule(
-    'vue/no-unused-components',
-    require('../../../lib/rules/no-unused-components')
-  )
-  linter.defineRule('vue/no-unused-properties', rule)
-
   const config = {
-    parser: 'vue-eslint-parser',
-    parserOptions: {
+    files: ['**/*.vue'],
+    plugins: {
+      vue: {
+        rules: {
+          'no-unused-components': require('../../../lib/rules/no-unused-components'),
+          'no-unused-properties': rule
+        }
+      }
+    },
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
       ecmaVersion: 2020,
       sourceType: 'module'
     },

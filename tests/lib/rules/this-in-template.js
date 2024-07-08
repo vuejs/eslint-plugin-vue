@@ -6,11 +6,10 @@
 
 const rule = require('../../../lib/rules/this-in-template')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 function createValidTests(prefix, options) {
@@ -45,10 +44,6 @@ function createValidTests(prefix, options) {
       options
     },
     {
-      code: `<template><div :parent="this"></div></template><!-- ${comment} -->`,
-      options
-    },
-    {
       code: `<template><div v-for="x of ${prefix}xs">{{this.x}}</div></template><!-- ${comment} -->`,
       options
     },
@@ -69,26 +64,6 @@ function createValidTests(prefix, options) {
       options
     },
     {
-      code: `<template><div>{{ this.class }}</div></template><!-- ${comment} -->`,
-      options
-    },
-    {
-      code: `<template><div>{{ this['0'] }}</div></template><!-- ${comment} -->`,
-      options
-    },
-    {
-      code: `<template><div>{{ this['this'] }}</div></template><!-- ${comment} -->`,
-      options
-    },
-    {
-      code: `<template><div>{{ this['foo bar'] }}</div></template><!-- ${comment} -->`,
-      options
-    },
-    {
-      code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
-      options
-    },
-    {
       code: `<template>
         <div>
           <div v-for="bar in ${prefix}foo" v-if="bar">{{ bar }}</div>
@@ -97,12 +72,6 @@ function createValidTests(prefix, options) {
           </div>
         </div>
       </template><!-- ${comment} -->`,
-      options
-    },
-
-    // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
-    {
-      code: `<template><div v-on:[x]="1"></div></template><!-- ${comment} -->`,
       options
     }
   ]
@@ -182,7 +151,7 @@ function createInvalidTests(prefix, options, message, type) {
       )}bar"></div></template><!-- ${comment} -->`,
       errors: [{ message, type }],
       options
-    },
+    }
 
     // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
     // {
@@ -190,22 +159,6 @@ function createInvalidTests(prefix, options, message, type) {
     //   errors: [{ message, type }],
     //   options
     // }
-    ...(options[0] === 'always'
-      ? []
-      : [
-          {
-            code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
-            output: `<template><div>{{ xs }}</div></template><!-- ${comment} -->`,
-            errors: [{ message, type }],
-            options
-          },
-          {
-            code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
-            output: `<template><div>{{ xs0AZ_foo }}</div></template><!-- ${comment} -->`,
-            errors: [{ message, type }],
-            options
-          }
-        ])
   ]
 }
 
@@ -217,7 +170,41 @@ ruleTester.run('this-in-template', rule, {
     ...createValidTests('', []),
     ...createValidTests('', ['never']),
     ...createValidTests('this.', ['always']),
-    ...createValidTests('this?.', ['always'])
+    ...createValidTests('this?.', ['always']),
+    ...[[], ['never'], ['always']].flatMap((options) => {
+      const comment = options.join('')
+      return [
+        {
+          code: `<template><div :parent="this"></div></template><!-- ${comment} -->`,
+          options
+        },
+        {
+          code: `<template><div>{{ this.class }}</div></template><!-- ${comment} -->`,
+          options
+        },
+        {
+          code: `<template><div>{{ this['0'] }}</div></template><!-- ${comment} -->`,
+          options
+        },
+        {
+          code: `<template><div>{{ this['this'] }}</div></template><!-- ${comment} -->`,
+          options
+        },
+        {
+          code: `<template><div>{{ this['foo bar'] }}</div></template><!-- ${comment} -->`,
+          options
+        },
+        {
+          code: `<template><div>{{ }}</div></template><!-- ${comment} -->`,
+          options
+        },
+        // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
+        {
+          code: `<template><div v-on:[x]="1"></div></template><!-- ${comment} -->`,
+          options
+        }
+      ]
+    })
   ],
   invalid: [
     ...createInvalidTests(
@@ -245,6 +232,25 @@ ruleTester.run('this-in-template', rule, {
       'ThisExpression'
     ),
     ...createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'),
+    ...[[], ['never']].flatMap((options) => {
+      const comment = options.join('')
+      const message = "Unexpected usage of 'this'."
+      const type = 'ThisExpression'
+      return [
+        {
+          code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
+          output: `<template><div>{{ xs }}</div></template><!-- ${comment} -->`,
+          errors: [{ message, type }],
+          options
+        },
+        {
+          code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
+          output: `<template><div>{{ xs0AZ_foo }}</div></template><!-- ${comment} -->`,
+          errors: [{ message, type }],
+          options
+        }
+      ]
+    }),
     {
       code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
       output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,

@@ -5,11 +5,12 @@ title: vue/valid-v-model
 description: enforce valid `v-model` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-model
 
 > enforce valid `v-model` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-model` directive is valid.
 
@@ -31,27 +32,27 @@ This rule reports `v-model` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <input v-model="foo">
-  <input v-model.lazy="foo">
-  <textarea v-model="foo"/>
-  <MyComponent v-model="foo"/>
-  <MyComponent v-model:propName="foo"/>
-  <MyComponent v-model.modifier="foo"/>
-  <MyComponent v-model:propName.modifier="foo"/>
+  <input v-model="foo" />
+  <input v-model.lazy="foo" />
+  <textarea v-model="foo" />
+  <MyComponent v-model="foo" />
+  <MyComponent v-model:propName="foo" />
+  <MyComponent v-model.modifier="foo" />
+  <MyComponent v-model:propName.modifier="foo" />
   <div v-for="todo in todos">
-    <input v-model="todo.name">
+    <input v-model="todo.name" />
   </div>
 
   <!-- ✗ BAD -->
-  <input v-model>
-  <input v-model:aaa="foo">
-  <input v-model.bbb="foo">
-  <input v-model="foo + bar">
-  <input v-model="a?.b.c">
-  <input v-model="(a?.b).c">
-  <div v-model="foo"/>
+  <input v-model />
+  <input v-model:aaa="foo" />
+  <input v-model.bbb="foo" />
+  <input v-model="foo + bar" />
+  <input v-model="a?.b.c" />
+  <input v-model="(a?.b).c" />
+  <div v-model="foo" />
   <div v-for="todo in todos">
-    <input v-model="todo">
+    <input v-model="todo" />
   </div>
 </template>
 ```

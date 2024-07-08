@@ -5,11 +5,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/static-class-names-order')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 tester.run('static-class-names-order', rule, {
   valid: [

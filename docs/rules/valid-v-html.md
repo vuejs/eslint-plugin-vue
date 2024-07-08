@@ -5,11 +5,12 @@ title: vue/valid-v-html
 description: enforce valid `v-html` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-html
 
 > enforce valid `v-html` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-html` directive is valid.
 
@@ -26,12 +27,12 @@ This rule reports `v-html` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-html="foo"/>
+  <div v-html="foo" />
 
   <!-- ✗ BAD -->
-  <div v-html/>
-  <div v-html:aaa="foo"/>
-  <div v-html.bbb="foo"/>
+  <div v-html />
+  <div v-html:aaa="foo" />
+  <div v-html.bbb="foo" />
 </template>
 ```
 

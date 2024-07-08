@@ -5,11 +5,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-deprecated-filter')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 ruleTester.run('no-deprecated-filter', rule, {
@@ -25,8 +24,10 @@ ruleTester.run('no-deprecated-filter', rule, {
     {
       filename: 'test.vue',
       code: '<template>{{ msg | filter }}</template>',
-      parserOptions: {
-        vueFeatures: { filter: false }
+      languageOptions: {
+        parserOptions: {
+          vueFeatures: { filter: false }
+        }
       }
     }
   ],

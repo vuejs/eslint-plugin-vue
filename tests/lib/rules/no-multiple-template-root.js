@@ -6,11 +6,10 @@
 
 const rule = require('../../../lib/rules/no-multiple-template-root')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 ruleTester.run('no-multiple-template-root', rule, {
   valid: [

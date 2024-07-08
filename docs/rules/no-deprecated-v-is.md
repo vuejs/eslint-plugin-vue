@@ -5,12 +5,12 @@ title: vue/no-deprecated-v-is
 description: disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
 since: v7.11.0
 ---
+
 # vue/no-deprecated-v-is
 
 > disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 ## :book: Rule Details
 
@@ -18,14 +18,14 @@ This rule reports deprecated `v-is` directive in Vue.js v3.1.0+.
 
 Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-attributes.html#is) instead.
 
-<eslint-code-block fix :rules="{'vue/no-deprecated-v-is': ['error']}">
+<eslint-code-block :rules="{'vue/no-deprecated-v-is': ['error']}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <div is="vue:MyComponent" />
   <component is="MyComponent" />
-  
+
   <!-- ✗ BAD -->
   <div v-is="'MyComponent'" />
 </template>

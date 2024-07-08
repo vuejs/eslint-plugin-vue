@@ -1,10 +1,18 @@
 {
-  "nuxt": ["asyncData", "fetch", "head", "key", "layout", "loading", "middleware", "scrollToTop", "transition", "validate", "watchQuery"],
-  "vue-router": [
-    "beforeRouteEnter",
-    "beforeRouteUpdate",
-    "beforeRouteLeave"
+  "nuxt": [
+    "asyncData",
+    "fetch",
+    "head",
+    "key",
+    "layout",
+    "loading",
+    "middleware",
+    "scrollToTop",
+    "transition",
+    "validate",
+    "watchQuery"
   ],
+  "vue-router": ["beforeRouteEnter", "beforeRouteUpdate", "beforeRouteLeave"],
   "vue": [
     "data",
     "props",

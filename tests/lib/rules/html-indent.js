@@ -7,7 +7,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/html-indent')
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
@@ -99,11 +99,13 @@ function unIndent(strings) {
 }
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
-    ecmaFeatures: {
-      globalReturn: true
+    parserOptions: {
+      ecmaFeatures: {
+        globalReturn: true
+      }
     }
   }
 })
@@ -469,7 +471,7 @@ tester.run(
       `,
         errors: [
           {
-            message: 'Expected " " character, but found "\\t" character.',
+            message: String.raw`Expected " " character, but found "\t" character.`,
             line: 3
           }
         ]
@@ -493,7 +495,7 @@ tester.run(
         options: ['tab'],
         errors: [
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 3
           }
         ]
@@ -929,7 +931,7 @@ tester.run(
         options: ['tab', { ignores: ['VAttribute'] }],
         errors: [
           {
-            message: 'Expected "\\t" character, but found " " character.',
+            message: String.raw`Expected "\t" character, but found " " character.`,
             line: 2
           }
         ]

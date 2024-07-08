@@ -5,6 +5,7 @@ title: vue/no-restricted-block
 description: disallow specific block
 since: v7.4.0
 ---
+
 # vue/no-restricted-block
 
 > disallow specific block

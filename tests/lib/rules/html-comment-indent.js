@@ -6,13 +6,10 @@
 
 const rule = require('../../../lib/rules/html-comment-indent')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2015
-  }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 tester.run('html-comment-indent', rule, {
   valid: [
@@ -249,8 +246,7 @@ tester.run('html-comment-indent', rule, {
           endColumn: 11
         },
         {
-          message:
-            'Expected base point indentation of 10 spaces, but found "        \\t".',
+          message: String.raw`Expected base point indentation of 10 spaces, but found "        \t".`,
           line: 7,
           column: 1,
           endLine: 7,
@@ -455,8 +451,7 @@ tester.run('html-comment-indent', rule, {
           endColumn: 14
         },
         {
-          message:
-            'Expected base point indentation of 12 spaces, but found "          \\t".',
+          message: String.raw`Expected base point indentation of 12 spaces, but found "          \t".`,
           line: 12,
           column: 1,
           endLine: 12,
@@ -674,13 +669,11 @@ comment -->
         `,
       errors: [
         {
-          message:
-            'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
+          message: String.raw`Expected base point indentation of " \t \t \t ", but found 7 spaces.`,
           line: 4
         },
         {
-          message:
-            'Expected base point indentation of " \\t \\t \\t ", but found 7 spaces.',
+          message: String.raw`Expected base point indentation of " \t \t \t ", but found 7 spaces.`,
           line: 5
         }
       ]

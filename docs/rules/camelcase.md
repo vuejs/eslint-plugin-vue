@@ -5,6 +5,7 @@ title: vue/camelcase
 description: Enforce camelcase naming convention in `<template>`
 since: v5.2.0
 ---
+
 # vue/camelcase
 
 > Enforce camelcase naming convention in `<template>`

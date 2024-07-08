@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/custom-event-name-casing')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -575,37 +575,6 @@ tester.run('custom-event-name-casing', rule, {
       ]
     },
     // kebab-case
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <input
-          @click="$emit('fooBar')">
-      </template>
-      <script>
-      export default {
-        setup(props, context) {
-          return {
-            onInput(value) {
-              context.emit('barBaz')
-            }
-          }
-        },
-        methods: {
-          onClick() {
-            this.$emit('bazQux')
-          }
-        }
-      }
-      </script>
-      `,
-      options: ['kebab-case'],
-      errors: [
-        "Custom event name 'fooBar' must be kebab-case.",
-        "Custom event name 'barBaz' must be kebab-case.",
-        "Custom event name 'bazQux' must be kebab-case."
-      ]
-    },
     {
       filename: 'test.vue',
       code: `

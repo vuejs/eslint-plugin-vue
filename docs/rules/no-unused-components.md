@@ -5,11 +5,12 @@ title: vue/no-unused-components
 description: disallow registering components that are not used inside templates
 since: v7.0.0
 ---
+
 # vue/no-unused-components
 
 > disallow registering components that are not used inside templates
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -31,19 +32,19 @@ This rule reports components that haven't been used in the template.
 </template>
 
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
-  import TheInput from 'components/TheInput.vue'
-  import TheDropdown from 'components/TheDropdown.vue'
+import TheButton from 'components/TheButton.vue'
+import TheModal from 'components/TheModal.vue'
+import TheInput from 'components/TheInput.vue'
+import TheDropdown from 'components/TheDropdown.vue'
 
-  export default {
-    components: {
-      TheButton,
-      TheModal,
-      TheInput,
-      TheDropdown,
-    }
+export default {
+  components: {
+    TheButton,
+    TheModal,
+    TheInput,
+    TheDropdown,
   }
+}
 </script>
 ```
 
@@ -61,15 +62,15 @@ This rule reports components that haven't been used in the template.
 </template>
 
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
+import TheButton from 'components/TheButton.vue'
+import TheModal from 'components/TheModal.vue'
 
-  export default {
-    components: {
-      TheButton, // Unused component
-      'the-modal': TheModal // Unused component
-    }
+export default {
+  components: {
+    TheButton, // Unused component
+    'the-modal': TheModal // Unused component
   }
+}
 </script>
 ```
 
@@ -108,17 +109,17 @@ Components registered under `PascalCase` or `camelCase` names have may be called
 </template>
 
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheSelect from 'components/TheSelect.vue'
-  import TheInput from 'components/TheInput.vue'
+import TheButton from 'components/TheButton.vue'
+import TheSelect from 'components/TheSelect.vue'
+import TheInput from 'components/TheInput.vue'
 
-  export default {
-    components: {
-      TheButton,
-      TheSelect,
-      TheInput,
-    },
-  }
+export default {
+  components: {
+    TheButton,
+    TheSelect,
+    TheInput,
+  },
+}
 </script>
 ```
 
@@ -136,21 +137,20 @@ Components registered under `PascalCase` or `camelCase` names have may be called
 </template>
 
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheSelect from 'components/TheSelect.vue'
-  import TheInput from 'components/TheInput.vue'
+import TheButton from 'components/TheButton.vue'
+import TheSelect from 'components/TheSelect.vue'
+import TheInput from 'components/TheInput.vue'
 
-  export default {
-    components: {
-      TheButton, // <- not used
-      TheSelect, // <- not used
-      TheInput, // <- not used
-    },
-    computed: {
-      computedComponent() {
-      }
-    }
+export default {
+  components: {
+    TheButton, // <- not used
+    TheSelect, // <- not used
+    TheInput, // <- not used
+  },
+  computed: {
+    computedComponent() {}
   }
+}
 </script>
 ```
 

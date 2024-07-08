@@ -1,6 +1,6 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import path from 'path'
+import path from 'pathe'
 import { fileURLToPath } from 'url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
 
@@ -212,6 +212,10 @@ export default async () => {
             ]
           }
         ]
+      },
+
+      outline: {
+        level: 'deep'
       },
 
       algolia: {

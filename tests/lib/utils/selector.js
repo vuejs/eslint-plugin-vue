@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const assert = require('assert')
 
-const Linter = require('eslint').Linter
+const Linter = require('../../eslint-compat').Linter
 
 const selector = require('../../../lib/utils/selector')
 const utils = require('../../../lib/utils')
@@ -32,24 +32,35 @@ function extractElements(code, inputSelector) {
   const linter = new Linter()
   const matches = []
 
-  linter.defineRule('vue/selector-test', (context) => {
-    const parsed = selector.parseSelector(inputSelector, context)
-    return utils.defineDocumentVisitor(context, {
-      VElement(node) {
-        if (parsed.test(node)) {
-          matches.push(
-            context.getSourceCode().text.slice(...node.startTag.range)
-          )
-        }
-      }
-    })
-  })
-  linter.defineParser('vue-eslint-parser', require('vue-eslint-parser'))
   const messages = linter.verify(
     code,
     {
-      parser: 'vue-eslint-parser',
-      parserOptions: { ecmaVersion: 2018 },
+      plugins: {
+        vue: {
+          rules: {
+            'selector-test': {
+              create: (context) => {
+                const parsed = selector.parseSelector(inputSelector, context)
+                return utils.defineDocumentVisitor(context, {
+                  VElement(node) {
+                    if (parsed.test(node)) {
+                      matches.push(
+                        context
+                          .getSourceCode()
+                          .text.slice(...node.startTag.range)
+                      )
+                    }
+                  }
+                })
+              }
+            }
+          }
+        }
+      },
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 2018
+      },
       rules: { 'vue/selector-test': 'error' }
     },
     undefined,

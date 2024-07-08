@@ -5,6 +5,7 @@ title: vue/brace-style
 description: Enforce consistent brace style for blocks in `<template>`
 since: v5.2.0
 ---
+
 # vue/brace-style
 
 > Enforce consistent brace style for blocks in `<template>`
