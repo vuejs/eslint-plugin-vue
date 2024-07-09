@@ -281,7 +281,7 @@ tester.run('define-macros-order', rule, {
         const page = definePage()
 
         const first = defineModel('first')
-          const second = defineModel('second')
+        const second = defineModel('second')
         </script>
       `,
       options: [
