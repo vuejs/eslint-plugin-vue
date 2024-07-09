@@ -583,6 +583,44 @@ ruleTester.run('require-typed-object-prop', rule, {
           ]
         }
       ]
+    },
+    {
+      // `.ts` file
+      filename: 'test.ts',
+      code: `
+      export default Vue.extend({
+        props: { foo: Object }
+      });
+      `,
+      errors: [
+        {
+          messageId: 'expectedTypeAnnotation',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 29,
+          suggestions: [
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'any' },
+              output: `
+      export default Vue.extend({
+        props: { foo: Object as PropType<any> }
+      });
+      `
+            },
+            {
+              messageId: 'addTypeAnnotation',
+              data: { type: 'unknown' },
+              output: `
+      export default Vue.extend({
+        props: { foo: Object as PropType<unknown> }
+      });
+      `
+            }
+          ]
+        }
+      ]
     }
   ]
 })
