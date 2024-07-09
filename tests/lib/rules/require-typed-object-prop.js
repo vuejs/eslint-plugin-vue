@@ -298,6 +298,33 @@ ruleTester.run('require-typed-object-prop', rule, {
         });
         </script>
       `
+    },
+    // JavaScript components
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps({ foo: Object });
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default Vue.extend({
+        props: { foo: { type: Object } }
+      });
+      </script>
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+      export default Vue.extend({
+        props: { foo: Object }
+      });
+      `
     }
   ],
   invalid: [
