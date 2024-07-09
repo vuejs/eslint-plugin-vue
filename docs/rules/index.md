@@ -45,7 +45,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-arrow-functions-in-watch](./no-arrow-functions-in-watch.md) | disallow using arrow functions to define watcher |  | :three::two::warning: |
 | [vue/no-async-in-computed-properties](./no-async-in-computed-properties.md) | disallow asynchronous actions in computed properties |  | :three::two::warning: |
 | [vue/no-child-content](./no-child-content.md) | disallow element's child contents which would be overwritten by a directive like `v-html` or `v-text` | :bulb: | :three::two::warning: |
-| [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data`. |  | :three::two::warning: |
+| [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data` |  | :three::two::warning: |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  | :two::warning: |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
@@ -263,7 +263,7 @@ For example:
 | [vue/padding-line-between-blocks](./padding-line-between-blocks.md) | require or disallow padding lines between blocks | :wrench: | :lipstick: |
 | [vue/padding-line-between-tags](./padding-line-between-tags.md) | require or disallow newlines between sibling tags in template | :wrench: | :lipstick: |
 | [vue/padding-lines-in-component-definition](./padding-lines-in-component-definition.md) | require or disallow padding lines in component definition | :wrench: | :lipstick: |
-| [vue/prefer-define-options](./prefer-define-options.md) | enforce use of `defineOptions` instead of default export. | :wrench: | :hammer: |
+| [vue/prefer-define-options](./prefer-define-options.md) | enforce use of `defineOptions` instead of default export | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
