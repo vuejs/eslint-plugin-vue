@@ -86,8 +86,11 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'mustDefaultExport',
-          line: 1
+          messageId: 'missing',
+          line: 4,
+          endLine: 4,
+          column: 7,
+          endColumn: 16
         }
       ]
     },
@@ -100,8 +103,11 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'mustDefaultExport',
-          line: 1
+          messageId: 'missing',
+          line: 4,
+          endLine: 4,
+          column: 7,
+          endColumn: 16
         }
       ]
     },
@@ -116,8 +122,11 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'mustDefaultExport',
-          line: 1
+          messageId: 'missing',
+          line: 6,
+          endLine: 6,
+          column: 7,
+          endColumn: 16
         }
       ]
     },
@@ -131,8 +140,11 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'mustDefaultExport',
-          line: 1
+          messageId: 'missing',
+          line: 5,
+          endLine: 5,
+          column: 7,
+          endColumn: 16
         }
       ]
     },
@@ -147,8 +159,30 @@ tester.run('require-default-export', rule, {
       `,
       errors: [
         {
-          messageId: 'mustDefaultExport',
-          line: 1
+          messageId: 'mustBeDefaultExport',
+          line: 6,
+          endLine: 6,
+          column: 7,
+          endColumn: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import Vue from 'vue';
+
+      const component = Vue.component('foo', {});
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'mustBeDefaultExport',
+          line: 6,
+          endLine: 6,
+          column: 7,
+          endColumn: 16
         }
       ]
     }
