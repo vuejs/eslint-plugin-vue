@@ -49,7 +49,6 @@ export default {
 
 Nothing.
 
-
 ## :couple: Related Rules
 
 - [vue/require-default-export](./require-default-export.md)
