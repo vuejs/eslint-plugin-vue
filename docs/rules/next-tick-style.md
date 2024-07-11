@@ -2,7 +2,7 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/next-tick-style
-description: enforce Await, Promise or callback style in `nextTick`
+description: enforce Promise, Await or callback style in `nextTick`
 since: v7.5.0
 ---
 
