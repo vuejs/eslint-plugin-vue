@@ -49,6 +49,10 @@ export default {
 
 Nothing.
 
+## :couple: Related Rules
+
+- [vue/require-default-export](./require-default-export.md)
+
 ## :books: Further Reading
 
 - [Style guide - Component files](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-files)
