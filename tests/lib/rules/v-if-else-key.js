@@ -127,6 +127,90 @@ tester.run('v-if-else-key', rule, {
         }
         </script>
         `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div>
+              <ComponentA v-if="foo" /> 
+              <ComponentB v-else-if="bar" /> 
+            </div>
+            <div>
+              <div>
+                <ComponentA v-if="foo" />
+                <ComponentB v-else-if="baz" /> 
+              </div>
+              <div>
+                <ComponentA v-if="foo" />
+                <ComponentB v-else-if="baz" />
+              </div>
+            </div>
+            <div>
+              <ComponentA v-if="foo" />
+              <ComponentB v-else /> 
+            </div>
+            <div>
+              <div v-if="foo" />
+              <ComponentB v-else />
+            </div>
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA,
+            ComponentB
+          }
+        }
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <div>
+              <CustomComponent v-if="foo" />
+              <div v-else />
+            </div>
+      
+            <CustomComponent v-if="bar" />
+          </div>
+        </template>
+        <script>
+        export default {
+            components: {
+                CustomComponent
+            }
+        }
+        </script>
+        `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <tile>
+            <template v-if="state === 'foo'">
+                <ComponentA>…</ComponentA>
+                <ComponentB>…</ComponentB>
+            </template>
+            <ComponentA v-else-if="state === 'bar'" key="a">…</ComponentA>
+            <ComponentA v-else-if="state === 'bar'" key="b">…</ComponentA>
+          </tile>
+        </template>
+        <script>
+        export default {
+            components: {
+                ComponentA,
+                ComponentB
+            }
+        }
+        </script>
+        `
     }
   ],
   invalid: [
@@ -422,6 +506,74 @@ tester.run('v-if-else-key', rule, {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div>
+            <ComponentA v-if="foo" />
+            <ComponentA v-else />
+
+            <ComponentA v-if="bar" />
+            <ComponentA v-else-if="baz" />
+            <ComponentA v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA
+          }
+        }
+        </script>
+        `,
+      output: `
+        <template>
+          <div>
+            <ComponentA key="component-a-1" v-if="foo" />
+            <ComponentA key="component-a-2" v-else />
+
+            <ComponentA key="component-a-3" v-if="bar" />
+            <ComponentA key="component-a-4" v-else-if="baz" />
+            <ComponentA key="component-a-5" v-else />
+          </div>
+        </template>
+        <script>
+        export default {
+          components: {
+            ComponentA
+          }
+        }
+        </script>
+        `,
+      errors: [
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 4
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 5
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 7
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 8
+        },
+        {
+          message:
+            "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
+          line: 9
         }
       ]
     }
