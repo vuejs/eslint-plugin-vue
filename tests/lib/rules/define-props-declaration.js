@@ -365,7 +365,7 @@ tester.run('define-props-declaration', rule, {
       code: `
       <script setup lang="ts">
       interface Kind { id: number; name: string }
-      
+
       const props = defineProps({
         kind: {
           type: Object as PropType<Kind>,
@@ -376,7 +376,7 @@ tester.run('define-props-declaration', rule, {
       output: `
       <script setup lang="ts">
       interface Kind { id: number; name: string }
-      
+
       const props = defineProps<{ kind?: Kind }>()
       </script>
       `,
@@ -393,7 +393,7 @@ tester.run('define-props-declaration', rule, {
       code: `
       <script setup lang="ts">
       import Kind from 'test'
-      
+
       const props = defineProps({
         kind: {
           type: Object as PropType<Kind>,
@@ -404,7 +404,7 @@ tester.run('define-props-declaration', rule, {
       output: `
       <script setup lang="ts">
       import Kind from 'test'
-      
+
       const props = defineProps<{ kind?: Kind }>()
       </script>
       `,
@@ -630,6 +630,26 @@ tester.run('define-props-declaration', rule, {
       errors: [
         {
           message: 'Use runtime declaration instead of type-based declaration.',
+          line: 3
+        }
+      ]
+    },
+    // array
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const props = defineProps([kind])
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      const props = defineProps<{ kind?: string }>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Use type-based declaration instead of runtime declaration.',
           line: 3
         }
       ]
