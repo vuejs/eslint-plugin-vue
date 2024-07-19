@@ -219,6 +219,46 @@ tester.run('define-macros-order', rule, {
       code: `
         <script setup>
           import Foo from 'foo'
+          /** model */
+          const model = defineModel()
+          /** emits */
+          defineEmits(['update:foo'])
+
+          function fn() {
+            definePage()
+          }
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel', 'defineEmits']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** model */
+          const model = defineModel()
+          /** emits */
+          defineEmits(['update:foo'])
+
+          const val = () => definePage()
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel', 'defineEmits']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
           /** props */
           defineProps(['foo'])
           /** options */
@@ -788,6 +828,30 @@ tester.run('define-macros-order', rule, {
       output: `
         <script setup>
           defineCustom({ test: Boolean })
+          definePage({name: 'hello'})
+          console.log('test1')
+        </script>
+      `,
+      options: [{ order: ['defineCustom', 'definePage'] }],
+      errors: [
+        {
+          message: message('defineCustom'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          definePage({name: 'hello'})
+          console.log('test1')
+          const custom = defineCustom({ test: Boolean })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const custom = defineCustom({ test: Boolean })
           definePage({name: 'hello'})
           console.log('test1')
         </script>
