@@ -561,7 +561,258 @@ tester.run('no-undef-properties', rule, {
         }
       }
     },
+    {
+      // Vuex
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'Vuex';
 
+      export default {
+        computed: {
+          ...mapState({
+            a: (vm) => vm.a,
+            b: (vm) => vm.b,
+          })
+        },
+        methods: {
+          c() {return this.a * this.b}
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'Vuex';
+
+      export default {
+        computed: {
+          ...mapActions({
+            a: 'a',
+            b: 'b',
+          })
+        },
+        methods: {
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'Vuex';
+
+      export default {
+        computed: {
+          ...mapMutations({
+            a: 'a',
+            b: 'b',
+          })
+        },
+        methods: {
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'Vuex';
+
+      export default {
+        computed: {
+          ...mapActions(['a', 'b'])
+        },
+        methods: {
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'Vuex';
+
+      export default {
+        computed: {
+          ...mapMutations(['a', 'b'])
+        },
+        methods: {
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'Vuex';
+
+      export default {
+        computed: {
+          ...mapGetters(['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      // Pinia
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapGetters(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapState(useStore, {
+            a: 'a',
+            b: store => store.b,
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, {
+            a: 'a',
+            b: 'b',
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapActions(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a() }} {{ b() }}
+      </template>
+      `
+    },
     `
     <script setup>
     const model = defineModel();
