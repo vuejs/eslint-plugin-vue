@@ -592,13 +592,11 @@ tester.run('no-undef-properties', rule, {
       import { mapActions } from 'Vuex';
 
       export default {
-        computed: {
+          methods: {
           ...mapActions({
             a: 'a',
             b: 'b',
-          })
-        },
-        methods: {
+          }),
           c() {return this.a()},
           d() {return this.b()},
         }
@@ -616,13 +614,11 @@ tester.run('no-undef-properties', rule, {
       import { mapMutations } from 'Vuex';
 
       export default {
-        computed: {
+          methods: {
           ...mapMutations({
             a: 'a',
             b: 'b',
-          })
-        },
-        methods: {
+          }),
           c() {return this.a()},
           d() {return this.b()},
         }
@@ -640,10 +636,8 @@ tester.run('no-undef-properties', rule, {
       import { mapActions } from 'Vuex';
 
       export default {
-        computed: {
-          ...mapActions(['a', 'b'])
-        },
-        methods: {
+          methods: {
+          ...mapActions(['a', 'b']),
           c() {return this.a()},
           d() {return this.b()},
         }
@@ -661,10 +655,8 @@ tester.run('no-undef-properties', rule, {
       import { mapMutations } from 'Vuex';
 
       export default {
-        computed: {
-          ...mapMutations(['a', 'b'])
-        },
         methods: {
+          ...mapMutations(['a', 'b']),
           c() {return this.a()},
           d() {return this.b()},
         }
@@ -799,10 +791,8 @@ tester.run('no-undef-properties', rule, {
       import { useStore } from '../store'
 
       export default {
-        computed: {
-          ...mapActions(useStore, ['a', 'b'])
-        },
-        methods: {
+          methods: {
+          ...mapActions(useStore, ['a', 'b']),
           c() {return this.a()},
           d() {return this.b()},
         }
