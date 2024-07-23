@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-computed-properties-in-data
-description: disallow accessing computed properties in `data`.
+description: disallow accessing computed properties in `data`
 since: v7.20.0
 ---
 
 # vue/no-computed-properties-in-data
 
-> disallow accessing computed properties in `data`.
+> disallow accessing computed properties in `data`
 
 - :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
