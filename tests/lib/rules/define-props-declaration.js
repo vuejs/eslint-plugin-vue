@@ -642,11 +642,6 @@ tester.run('define-props-declaration', rule, {
       const props = defineProps([kind])
       </script>
       `,
-      output: `
-      <script setup lang="ts">
-      const props = defineProps<{ kind?: string }>()
-      </script>
-      `,
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
