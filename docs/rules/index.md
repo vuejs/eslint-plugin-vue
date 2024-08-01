@@ -214,7 +214,7 @@ For example:
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  | :hammer: |
 | [vue/define-emits-declaration](./define-emits-declaration.md) | enforce declaration style of `defineEmits` |  | :hammer: |
 | [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench::bulb: | :lipstick: |
-| [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` |  | :hammer: |
+| [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` | :wrench: | :hammer: |
 | [vue/enforce-style-attribute](./enforce-style-attribute.md) | enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags |  | :hammer: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  | :hammer: |
 | [vue/html-comment-content-newline](./html-comment-content-newline.md) | enforce unified line brake in HTML comments | :wrench: | :lipstick: |
