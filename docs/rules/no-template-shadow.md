@@ -55,7 +55,7 @@ This rule takes one optional object option, with the property `"allow"`.
 
 ```json
 {
-  "no-template-shadow": ["error", { "allow": [] }]
+  "vue/no-template-shadow": ["error", { "allow": [] }]
 }
 ```
 
