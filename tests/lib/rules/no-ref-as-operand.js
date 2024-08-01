@@ -71,6 +71,8 @@ tester.run('no-ref-as-operand', rule, {
     1 - count.value
     count.value || other
     count.value && other
+    other && count.value
+    other || count.value
     var foo = count.value ? x : y
     `,
     `
@@ -81,8 +83,6 @@ tester.run('no-ref-as-operand', rule, {
     `
     import { ref } from 'vue'
     const foo = ref(true)
-    var a = other || foo // ignore
-    var b = other && foo // ignore
 
     let bar = ref(true)
     var a = bar || other
@@ -478,12 +478,16 @@ tester.run('no-ref-as-operand', rule, {
       const foo = ref(true)
       var a = foo || other
       var b = foo && other
+      var c = other || foo
+      var d = other && foo
       `,
       output: `
       import { ref } from 'vue'
       const foo = ref(true)
       var a = foo.value || other
       var b = foo.value && other
+      var c = other || foo.value
+      var d = other && foo.value
       `,
       errors: [
         {
@@ -493,6 +497,14 @@ tester.run('no-ref-as-operand', rule, {
         {
           messageId: 'requireDotValue',
           line: 5
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 6
+        },
+        {
+          messageId: 'requireDotValue',
+          line: 7
         }
       ]
     },
