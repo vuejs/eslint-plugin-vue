@@ -28,6 +28,11 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div><custom :my-prop="prop" v-model:foo-bar="fooBar"></custom></div></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" myProp="prop"></custom></div></template>',
       options: ['never']
     },
@@ -204,6 +209,48 @@ ruleTester.run('attribute-hyphenation', rule, {
       errors: [
         {
           message: "Attribute 'v-bind:propID' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2510
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:my-prop="prop"></custom></div></template>',
+      output:
+        '<template><div><custom v-model:myProp="prop"></custom></div></template>',
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute 'v-model:my-prop' can't be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:myProp="prop"></custom></div></template>',
+      output:
+        '<template><div><custom v-model:my-prop="prop"></custom></div></template>',
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute 'v-model:myProp' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:MyProp="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute 'v-model:MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
           line: 1
         }
