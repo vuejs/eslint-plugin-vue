@@ -47,6 +47,49 @@ export default [
 
 See [the rule list](../rules/index.md) to get the `configs` & `rules` that this plugin provides.
 
+#### Configurations with `typescript-esLint` & Prettier (`eslint.config.js`)
+
+```bash
+npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals typescript-eslint
+```
+ 
+```ts
+import eslint from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals';
+import pluginVue from 'eslint-plugin-vue';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  {
+    ignores: ['*.d.ts', '**/coverage', '**/dist'],
+  },
+  {
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...pluginVue.configs['flat/recommended'],
+    ],
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
+    files: ['**/*.{ts,vue}'],
+    languageOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+      globals: globals.browser,
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
+    rules: {
+      // your rules
+    },
+  },
+  eslintConfigPrettier
+);
+```
+
 #### Bundle Configurations (`eslint.config.js`)
 
 This plugin provides some predefined configs.
