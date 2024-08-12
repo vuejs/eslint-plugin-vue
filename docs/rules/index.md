@@ -224,6 +224,7 @@ For example:
 | [vue/match-component-import-name](./match-component-import-name.md) | require the registered component name to match the imported component name |  | :warning: |
 | [vue/max-lines-per-block](./max-lines-per-block.md) | enforce maximum number of lines in Vue SFC blocks |  | :warning: |
 | [vue/max-props](./max-props.md) | enforce maximum number of props in Vue component |  | :warning: |
+| [vue/max-template-depth](./max-template-depth.md) | enforce maximum depth of template |  | :warning: |
 | [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: | :lipstick: |
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
