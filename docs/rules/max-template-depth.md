@@ -46,8 +46,6 @@ There is one property that can be specified for the object.
 
 </eslint-code-block>
 
-### `{ maxDepth: 3}`
-
 <eslint-code-block :rules="{'vue/max-template-depth': ['error', { maxDepth: 3 }]}">
 
 ```vue
