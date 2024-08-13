@@ -93,7 +93,8 @@ tester.run('max-template-depth', rule, {
       options: [{ maxDepth: 3 }],
       errors: [
         {
-          message: 'Template is too deep (depth of 4). Maximum allowed is 3.',
+          message:
+            'Element is nested too deeply (depth of 4, maximum allowed is 3).',
           line: 6
         }
       ]
@@ -117,7 +118,8 @@ tester.run('max-template-depth', rule, {
       options: [{ maxDepth: 3 }],
       errors: [
         {
-          message: 'Template is too deep (depth of 4). Maximum allowed is 3.',
+          message:
+            'Element is nested too deeply (depth of 4, maximum allowed is 3).',
           line: 9
         }
       ]
@@ -143,17 +145,20 @@ tester.run('max-template-depth', rule, {
       options: [{ maxDepth: 3 }],
       errors: [
         {
-          message: 'Template is too deep (depth of 4). Maximum allowed is 3.',
+          message:
+            'Element is nested too deeply (depth of 4, maximum allowed is 3).',
           line: 9,
           endLine: 12
         },
         {
-          message: 'Template is too deep (depth of 5). Maximum allowed is 3.',
+          message:
+            'Element is nested too deeply (depth of 5, maximum allowed is 3).',
           line: 10,
           endLine: 10
         },
         {
-          message: 'Template is too deep (depth of 5). Maximum allowed is 3.',
+          message:
+            'Element is nested too deeply (depth of 5, maximum allowed is 3).',
           line: 11,
           endLine: 12
         }

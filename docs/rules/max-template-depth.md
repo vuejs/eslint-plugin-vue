@@ -22,7 +22,7 @@ There is one property that can be specified for the object.
 
 - `maxDepth` ... Specify the maximum template depth `template` block.
 
-## `{ maxDepth: 3 }`
+### `{ maxDepth: 3 }`
 
 <eslint-code-block :rules="{'vue/max-template-depth': ['error', { maxDepth: 3 }]}">
 
@@ -46,7 +46,7 @@ There is one property that can be specified for the object.
 
 </eslint-code-block>
 
-### `{ maxDepth: 5 }`
+### `{ maxDepth: 3}`
 
 <eslint-code-block :rules="{'vue/max-template-depth': ['error', { maxDepth: 3 }]}">
 
