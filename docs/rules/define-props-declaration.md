@@ -47,7 +47,7 @@ const props = defineProps({
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+<eslint-code-block :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
