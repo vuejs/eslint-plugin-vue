@@ -668,6 +668,19 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </my-component>
       </template>`,
       errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <component :is="toggle ? 'my-component' : 'div'">
+          <div slot="named">
+            Passing in a named slot to a div worked with old syntax
+            But not with new syntax
+          </div>
+        </component>
+      </template>`,
+      output: null,
+      errors: ['`slot` attributes are deprecated.']
     }
   ]
 })
