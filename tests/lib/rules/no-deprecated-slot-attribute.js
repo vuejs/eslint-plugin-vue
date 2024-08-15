@@ -643,6 +643,31 @@ tester.run('no-deprecated-slot-attribute', rule, {
         }
       ],
       errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <slot
+            v-for="slot in Object.keys($slots)"
+            :slot="slot"
+            :name="slot"
+          ></slot>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-for="slot in Object.keys($slots)" v-slot:[slot]>
+<slot
+            
+            
+            :name="slot"
+          ></slot>
+</template>
+        </my-component>
+      </template>`,
+      errors: ['`slot` attributes are deprecated.']
     }
   ]
 })
