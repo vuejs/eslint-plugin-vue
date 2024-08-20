@@ -113,7 +113,8 @@ tester.run('max-props', rule, {
       errors: [
         {
           message: 'Component has too many props (2). Maximum allowed is 1.',
-          line: 3
+          line: 3,
+          endLine: 3
         }
       ]
     },
@@ -133,7 +134,8 @@ tester.run('max-props', rule, {
       errors: [
         {
           message: 'Component has too many props (2). Maximum allowed is 1.',
-          line: 5
+          line: 4,
+          endLine: 7
         }
       ]
     },
@@ -154,7 +156,8 @@ tester.run('max-props', rule, {
       errors: [
         {
           message: 'Component has too many props (3). Maximum allowed is 2.',
-          line: 3
+          line: 3,
+          endLine: 3
         }
       ]
     }
