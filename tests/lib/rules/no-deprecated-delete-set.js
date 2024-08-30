@@ -20,6 +20,11 @@ tester.run('no-deprecated-delete-set', rule, {
     {
       filename: 'test.js',
       code: `
+        const another = function () {
+          this.$set(obj, key, value)
+          this.$delete(obj, key)
+        }
+
         createApp({
           mounted () {
             this.$emit('start')
@@ -33,18 +38,15 @@ tester.run('no-deprecated-delete-set', rule, {
       `
     },
     {
-      filename: 'test.js',
+      filename: 'test.vue',
       code: `
-        const another = function () {
-          this.$set(obj, key, value)
-          this.$delete(obj, key)
-        }
-
-        createApp({
-          mounted () {
-            this.$emit('start')
+        <script>
+          export default {
+            mounted () {
+              this.$nextTick()
+            }
           }
-        })
+        </script>
       `
     },
     {
@@ -104,10 +106,10 @@ tester.run('no-deprecated-delete-set', rule, {
       filename: 'test.vue',
       code: `
         <script>
-          const { nextTick: nt, provide: del } = require('vue')
+          const { nextTick: set, provide: del } = require('vue')
           export default {
             mounted () {
-              nt()
+              set()
               del(key, value)
             }
           }
@@ -218,7 +220,7 @@ tester.run('no-deprecated-delete-set', rule, {
       filename: 'test.vue',
       code: `
         <script>
-          import { set, delete as del } from 'vue'
+          import { set, del } from 'vue'
           export default {
             mounted () {
               set(obj, key, value)
@@ -242,7 +244,7 @@ tester.run('no-deprecated-delete-set', rule, {
       filename: 'test.vue',
       code: `
         <script setup>
-          import { set, delete as del } from 'vue'
+          import { set, del } from 'vue'
 
           set(obj, key, value)
           del(obj, key)
@@ -262,8 +264,29 @@ tester.run('no-deprecated-delete-set', rule, {
     {
       filename: 'test.vue',
       code: `
+        <script setup>
+          import { set as s, del as d } from 'vue'
+
+          s(obj, key, value)
+          d(obj, key)
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'deprecated',
+          line: 5
+        },
+        {
+          messageId: 'deprecated',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <script>
-          const { set, delete: del } = require('vue')
+          const { set, del } = require('vue')
           export default {
             mounted () {
               set(obj, key, value)
@@ -286,8 +309,32 @@ tester.run('no-deprecated-delete-set', rule, {
     {
       filename: 'test.vue',
       code: `
+        <script>
+          const { set: s, del: d } = require('vue')
+          export default {
+            mounted () {
+              s(obj, key, value)
+              d(obj, key)
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'deprecated',
+          line: 6
+        },
+        {
+          messageId: 'deprecated',
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <script setup>
-          const { set, delete: del } = require('vue')
+          const { set, del } = require('vue')
 
           set(obj, key, value)
           del(obj, key)

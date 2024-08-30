@@ -10,7 +10,6 @@ description: disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
 > disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 ## :book: Rule Details
 
@@ -20,7 +19,7 @@ This rule reports use of deprecated `$delete` and `$set`. (in Vue.js 3.0.0+).
 
 ```vue
 <script>
-  import { set as st, delete as del } from 'vue'
+  import { set, del } from 'vue'
   export default {
     mounted () {
       /* ✗ BAD */
@@ -30,7 +29,7 @@ This rule reports use of deprecated `$delete` and `$set`. (in Vue.js 3.0.0+).
       Vue.set(obj, key, value)
       Vue.delete(obj, key)
 
-      st(obj, key, value)
+      set(obj, key, value)
       del(obj, key)
     }
   }
@@ -42,6 +41,10 @@ This rule reports use of deprecated `$delete` and `$set`. (in Vue.js 3.0.0+).
 ## :wrench: Options
 
 Nothing.
+
+## :books: Further Reading
+
+- [Migration Guide - Removed APIs](https://v3-migration.vuejs.org/breaking-changes/#removed-apis)
 
 ## :mag: Implementation
 
