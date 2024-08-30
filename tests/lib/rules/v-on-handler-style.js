@@ -81,11 +81,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -107,11 +103,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
@@ -181,7 +173,7 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo( )" /></template>',
-      output: `<template><div @click="foo" /></template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -266,13 +258,7 @@ tester.run('v-on-handler-style', rule, {
         <button @click="{ fn(); }" />
         <button @click="{(fn());;;}" />
       </template>`,
-      output: `
-      <template>
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -304,11 +290,7 @@ tester.run('v-on-handler-style', rule, {
         <div @click=" beforeSpace()" />
         <div @click='afterSpace() ' />
       </template>`,
-      output: `
-      <template>
-        <div @click="beforeSpace" />
-        <div @click='afterSpace' />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -329,10 +311,7 @@ tester.run('v-on-handler-style', rule, {
       <template>
         <button @click=" &#x66;oo ( ) " />
       </template>`,
-      output: `
-      <template>
-        <button @click="&#x66;oo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -353,15 +332,7 @@ tester.run('v-on-handler-style', rule, {
         }
       }
       </script>`,
-      output: `
-      <template><button @click="foo" /></template>
-      <script>
-      export default {
-        methods: {
-          foo() {}
-        }
-      }
-      </script>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -382,15 +353,7 @@ tester.run('v-on-handler-style', rule, {
         }
       }
       </script>`,
-      output: `
-      <template><button @click="foo" /></template>
-      <script>
-      export default {
-        methods: {
-          foo: () => {}
-        }
-      }
-      </script>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -545,11 +508,7 @@ tester.run('v-on-handler-style', rule, {
           <button @click="e()" />
         </template>
       </template>`,
-      output: `<template>
-        <template v-for="e in list">
-          <button @click="e" />
-        </template>
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
@@ -716,9 +675,9 @@ tester.run('v-on-handler-style', rule, {
         <button @click="() => { foo() }" />
       </template>`,
       output: `<template>
+        <button @click="() => foo()" />
         <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
+        <button @click="() => { foo() }" />
       </template>`,
       options: [['method', 'inline']],
       errors: [
@@ -1008,7 +967,7 @@ tester.run('v-on-handler-style', rule, {
       </template>`,
       output: `<template>
         <template v-for="e in list">
-          <button @click="e" />
+          <button @click="() => e()" />
           <button @click="e" />
           <button @click="e" />
         </template>
