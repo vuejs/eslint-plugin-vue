@@ -326,7 +326,7 @@ tester.run('no-unused-refs', rule, {
       <script setup>
       import {useTemplateRef} from 'vue'
       const inputX = useTemplateRef('x')
-      const inputY = templateRef(\`y\`)
+      const inputY = useTemplateRef(\`y\`)
       </script>
       `
     }
