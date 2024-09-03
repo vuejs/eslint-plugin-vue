@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/max-template-depth
 description: enforce maximum depth of template
+since: v9.28.0
 ---
 
 # vue/max-template-depth
 
 > enforce maximum depth of template
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -60,6 +59,10 @@ There is one property that can be specified for the object.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.28.0
 
 ## :mag: Implementation
 
