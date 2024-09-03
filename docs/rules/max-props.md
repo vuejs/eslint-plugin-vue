@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/max-props
 description: enforce maximum number of props in Vue component
+since: v9.28.0
 ---
 
 # vue/max-props
 
 > enforce maximum number of props in Vue component
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -55,6 +54,10 @@ defineProps({
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.28.0
 
 ## :mag: Implementation
 
