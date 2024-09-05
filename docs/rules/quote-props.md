@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/quote-props
-description: Require quotes around object literal property names in `<template>`
+description: Require quotes around object literal, type literal, interfaces and enums property names in `<template>`
 since: v8.4.0
 ---
 
 # vue/quote-props
 
-> Require quotes around object literal property names in `<template>`
+> Require quotes around object literal, type literal, interfaces and enums property names in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

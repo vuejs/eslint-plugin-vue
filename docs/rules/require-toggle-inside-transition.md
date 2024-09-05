@@ -33,7 +33,34 @@ This rule reports elements inside `<transition>` that do not control the display
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/require-toggle-inside-transition": ["error", {
+    "additionalDirectives": []
+  }]
+}
+```
+
+- `additionalDirectives` (`string[]`) ... Custom directives which will satisfy this rule in addition to `v-show` and `v-if`. Should be added without the `v-` prefix.
+
+### `additionalDirectives: ["dialog"]`
+
+<eslint-code-block :rules="{'vue/require-toggle-inside-transition': ['error', {additionalDirectives: ['dialog']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <transition><div v-if="show" /></transition>
+  <transition><div v-show="show" /></transition>
+  <transition><dialog v-dialog="show" /></transition>
+
+  <!-- ✗ BAD -->
+  <transition><div /></transition>
+  <transition><div v-custom="show" /></transition>
+<template>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 

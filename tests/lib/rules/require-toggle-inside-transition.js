@@ -77,6 +77,15 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><transition :appear="true"><div /></transition></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><dialog v-dialog="show" /></transition></template>',
+      options: [
+        {
+          additionalDirectives: ['dialog']
+        }
+      ]
     }
   ],
   invalid: [
@@ -132,6 +141,36 @@ tester.run('require-toggle-inside-transition', rule, {
       filename: 'test.vue',
       code: '<template><transition @appear="isLoaded"><div /></transition></template>',
       errors: [{ messageId: 'expected' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><dialog v-dialog="show" /></transition></template>',
+      options: [
+        {
+          additionalDirectives: []
+        }
+      ],
+      errors: [
+        {
+          messageId: 'expected',
+          data: { allowedDirectives: '`v-if` or `v-show`' }
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><transition><div v-custom="show" /></transition></template>',
+      options: [
+        {
+          additionalDirectives: ['dialog']
+        }
+      ],
+      errors: [
+        {
+          messageId: 'expected',
+          data: { allowedDirectives: '`v-if`, `v-show` or `v-dialog`' }
+        }
+      ]
     }
   ]
 })
