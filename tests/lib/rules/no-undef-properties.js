@@ -566,7 +566,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapState } from 'Vuex';
+      import { mapState } from 'vuex';
 
       export default {
         computed: {
@@ -589,7 +589,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapActions } from 'Vuex';
+      import { mapActions } from 'vuex';
 
       export default {
           methods: {
@@ -611,7 +611,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapMutations } from 'Vuex';
+      import { mapMutations } from 'vuex';
 
       export default {
           methods: {
@@ -633,7 +633,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapActions } from 'Vuex';
+      import { mapActions } from 'vuex';
 
       export default {
           methods: {
@@ -652,7 +652,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapMutations } from 'Vuex';
+      import { mapMutations } from 'vuex';
 
       export default {
         methods: {
@@ -671,7 +671,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapGetters } from 'Vuex';
+      import { mapGetters } from 'vuex';
 
       export default {
         computed: {
@@ -1461,7 +1461,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapState } from 'Vuex';
+      import { mapState } from 'vuex';
 
       export default {
         computed: {
@@ -1490,7 +1490,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapActions } from 'Vuex';
+      import { mapActions } from 'vuex';
 
       export default {
           methods: {
@@ -1518,7 +1518,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapMutations } from 'Vuex';
+      import { mapMutations } from 'vuex';
 
       export default {
           methods: {
@@ -1547,7 +1547,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapActions } from 'Vuex';
+      import { mapActions } from 'vuex';
 
       export default {
           methods: {
@@ -1573,7 +1573,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapMutations } from 'Vuex';
+      import { mapMutations } from 'vuex';
 
       export default {
         methods: {
@@ -1598,7 +1598,7 @@ tester.run('no-undef-properties', rule, {
       filename: 'test.vue',
       code: `
       <script>
-      import { mapGetters } from 'Vuex';
+      import { mapGetters } from 'vuex';
 
       export default {
         computed: {
