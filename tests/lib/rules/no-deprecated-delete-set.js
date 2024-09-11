@@ -11,7 +11,10 @@ const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
-    sourceType: 'module'
+    sourceType: 'module',
+    globals: {
+      require: 'readonly'
+    }
   }
 })
 
@@ -338,6 +341,27 @@ tester.run('no-deprecated-delete-set', rule, {
 
           set(obj, key, value)
           del(obj, key)
+        </script>
+      `,
+      errors: [
+        {
+          messageId: 'deprecated',
+          line: 5
+        },
+        {
+          messageId: 'deprecated',
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const v = require('vue')
+
+          v.set(obj, key, value)
+          v.del(obj, key)
         </script>
       `,
       errors: [
