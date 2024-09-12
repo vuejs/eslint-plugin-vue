@@ -3,6 +3,7 @@
   "version": "9.28.0",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch --growl",
