@@ -251,6 +251,14 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       const count = computed(() => props.count)
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const { foo = 1, bar = 'ok' } = defineProps({ foo: Number, bar: String })
+      </script>
+      `
     }
   ],
   invalid: [
@@ -532,13 +540,14 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       code: `
       <script setup>
       const {count} = defineProps({count:Number})
+      const foo = count
       </script>
       `,
       errors: [
         {
           message:
-            'Destructuring the `props` will cause the value to lose reactivity.',
-          line: 3
+            'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
+          line: 4
         }
       ]
     },
