@@ -395,8 +395,7 @@ tester.run('no-shadow-native-events', rule, {
         }
       }
       </script>
-      `,
-      options: [{ allowProps: true }]
+      `
     },
 
     // <script setup>
@@ -575,8 +574,7 @@ tester.run('no-shadow-native-events', rule, {
         }
       }
       </script>
-      `,
-      options: [{ allowProps: true }]
+      `
     },
     {
       filename: 'test.vue',
@@ -587,8 +585,7 @@ tester.run('no-shadow-native-events', rule, {
       <script setup>
       defineProps(unknown)
       </script>
-      `,
-      options: [{ allowProps: true }]
+      `
     },
     {
       filename: 'test.vue',
@@ -601,8 +598,7 @@ tester.run('no-shadow-native-events', rule, {
         props: [foo],
       }
       </script>
-      `,
-      options: [{ allowProps: true }]
+      `
     },
     {
       filename: 'test.vue',
@@ -615,8 +611,7 @@ tester.run('no-shadow-native-events', rule, {
         props: [...foo],
       }
       </script>
-      `,
-      options: [{ allowProps: true }]
+      `
     },
     {
       // new syntax in Vue 3.3
