@@ -15,6 +15,7 @@ description: disallow `emits` which would shadow native html events
 This rule reports emits that shadow native HTML events. (The `emits` option is a new in Vue.js 3.0.0+)
 
 Using native event names for emits can lead to incorrect assumptions about an emit and cause confusion. This is caused by Vue emits behaving differently from native events. E.g. :
+
 - The payload of an emit can be chosen arbitrarily
 - Vue emits do not bubble, while most native events do
 - [Event modifiers](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers) only work on HTML events or when the original event is re-emitted as emit payload.
@@ -46,5 +47,5 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Components In-Depth - Events  / Component Events ](https://vuejs.org/guide/components/events.html#event-arguments)
+- [Components In-Depth - Events  / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
