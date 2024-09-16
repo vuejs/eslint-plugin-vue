@@ -114,10 +114,11 @@ export default {
 
 - [vue/no-unused-emit-declarations](./no-unused-emit-declarations.md)
 - [vue/require-explicit-slots](./require-explicit-slots.md)
+- [vue/no-shadow-native](./no-shadow-native.md)
 
 ## :books: Further Reading
 
-- [Guide - Custom Events / Defining Custom Events](https://v3.vuejs.org/guide/component-custom-events.html#defining-custom-events)
+- [Components In-Depth - Events  / Component Events ](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
 
 ## :rocket: Version
