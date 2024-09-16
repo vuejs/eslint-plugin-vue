@@ -114,7 +114,7 @@ export default {
 
 - [vue/no-unused-emit-declarations](./no-unused-emit-declarations.md)
 - [vue/require-explicit-slots](./require-explicit-slots.md)
-- [vue/no-shadow-native](./no-shadow-native.md)
+- [vue/no-shadow-native-events](./no-shadow-native-events.md)
 
 ## :books: Further Reading
 
