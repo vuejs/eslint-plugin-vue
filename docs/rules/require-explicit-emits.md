@@ -118,7 +118,7 @@ export default {
 
 ## :books: Further Reading
 
-- [Components In-Depth - Events  / Component Events ](https://vuejs.org/guide/components/events.html#event-arguments)
+- [Components In-Depth - Events  / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
 
 ## :rocket: Version
