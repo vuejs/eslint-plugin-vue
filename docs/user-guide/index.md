@@ -223,14 +223,12 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 
 You can do this for [Vue class component](https://class-component.vuejs.org/) too:
 
-```vue
-<script lang="ts">
+```ts
 // @vue/component
 @Component({
   components: { Foo }
 })
 export default class Bar extends Vue {}
-</script>
 ```
 
 ### Disabling rules via `<!-- eslint-disable -->`
