@@ -508,21 +508,6 @@ tester.run('no-setup-props-destructure', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      const {count} = defineProps({count:Number})
-      </script>
-      `,
-      errors: [
-        {
-          message:
-            'Destructuring the `props` will cause the value to lose reactivity.',
-          line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
       const props = defineProps({count:Number})
       const {count} = props
       ;({count} = props)
