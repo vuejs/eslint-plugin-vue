@@ -256,6 +256,14 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      const {count} = defineProps({count:Number})
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
       const { foo = 1, bar = 'ok' } = defineProps({ foo: Number, bar: String })
       </script>
       `
