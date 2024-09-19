@@ -13,7 +13,7 @@ description: disallow the use of event names that collide with native web event 
 
 ## :book: Rule Details
 
-This rule reports emits that shadow native HTML events. (The `emits` option is a new in Vue.js 3.0.0+)
+This rule reports emits that shadow native HTML events.
 
 Using native event names for emits can lead to incorrect assumptions about an emit and cause confusion. This is caused by Vue emits behaving differently from native events. E.g. :
 
