@@ -2,11 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-shadow-native-events
-description: disallow `emits` which would shadow native html events
+description: disallow the use of event names that collide with native web event names
 ---
+
 # vue/no-shadow-native-events
 
-> disallow `emits` which would shadow native HTML events
+> disallow the use of event names that collide with native web event names
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
@@ -49,3 +50,8 @@ Nothing.
 
 - [Components In-Depth - Events  / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-shadow-native-events.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-shadow-native-events.js)
