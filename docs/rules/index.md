@@ -162,7 +162,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md) | require a line break before and after the contents of a singleline element | :wrench: | :three::two::lipstick: |
 | [vue/v-bind-style](./v-bind-style.md) | enforce `v-bind` directive style | :wrench: | :three::two::hammer: |
 | [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md) | enforce v-on event naming style on custom components in template | :wrench: | :three::hammer: |
-| [vue/v-on-style](./v-on-style.md) | enforce `v-on` directive style | :wrench: | :three::two::hammer: |
+| [vue/v-on-style](./v-on-style.md) | enforce `v-on` directive style | :wrench::bulb: | :three::two::hammer: |
 | [vue/v-slot-style](./v-slot-style.md) | enforce `v-slot` directive style | :wrench: | :three::two::hammer: |
 
 </rules-table>

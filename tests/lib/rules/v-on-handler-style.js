@@ -81,22 +81,38 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInlineFunction',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -107,21 +123,37 @@ tester.run('v-on-handler-style', rule, {
         <button @click="foo()" />
         <button @click="() => foo()" />
       </template>`,
-      output: `<template>
-        <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
-      </template>`,
+      output: null,
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo" />
+        <button @click="() => foo()" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInlineFunction',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="foo()" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -181,13 +213,19 @@ tester.run('v-on-handler-style', rule, {
     {
       filename: 'test.vue',
       code: '<template><div @click="foo( )" /></template>',
-      output: `<template><div @click="foo" /></template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 1,
-          column: 24
+          column: 24,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `<template><div @click="foo" /></template>`
+            }
+          ]
         }
       ]
     },
@@ -266,34 +304,76 @@ tester.run('v-on-handler-style', rule, {
         <button @click="{ fn(); }" />
         <button @click="{(fn());;;}" />
       </template>`,
-      output: `
-      <template>
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-        <button @click="fn" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <button @click="fn" />
+        <button @click="fn();;" />
+        <button @click="{ fn(); }" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn" />
+        <button @click="{ fn(); }" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn();;" />
+        <button @click="fn" />
+        <button @click="{(fn());;;}" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 6,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <button @click="fn();" />
+        <button @click="fn();;" />
+        <button @click="{ fn(); }" />
+        <button @click="fn" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -304,22 +384,38 @@ tester.run('v-on-handler-style', rule, {
         <div @click=" beforeSpace()" />
         <div @click='afterSpace() ' />
       </template>`,
-      output: `
-      <template>
-        <div @click="beforeSpace" />
-        <div @click='afterSpace' />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 23
+          column: 23,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <div @click="beforeSpace" />
+        <div @click='afterSpace() ' />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 22
+          column: 22,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <div @click=" beforeSpace()" />
+        <div @click='afterSpace' />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -329,16 +425,22 @@ tester.run('v-on-handler-style', rule, {
       <template>
         <button @click=" &#x66;oo ( ) " />
       </template>`,
-      output: `
-      <template>
-        <button @click="&#x66;oo" />
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 26
+          column: 26,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
+      <template>
+        <button @click="&#x66;oo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -353,7 +455,17 @@ tester.run('v-on-handler-style', rule, {
         }
       }
       </script>`,
-      output: `
+      output: null,
+      options: [['method', 'inline-function']],
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 2,
+          column: 33,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
       <template><button @click="foo" /></template>
       <script>
       export default {
@@ -361,13 +473,9 @@ tester.run('v-on-handler-style', rule, {
           foo() {}
         }
       }
-      </script>`,
-      options: [['method', 'inline-function']],
-      errors: [
-        {
-          message: 'Prefer method handler over inline handler in v-on.',
-          line: 2,
-          column: 33
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -382,7 +490,17 @@ tester.run('v-on-handler-style', rule, {
         }
       }
       </script>`,
-      output: `
+      output: null,
+      options: [['method', 'inline-function']],
+      errors: [
+        {
+          message: 'Prefer method handler over inline handler in v-on.',
+          line: 2,
+          column: 33,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `
       <template><button @click="foo" /></template>
       <script>
       export default {
@@ -390,13 +508,9 @@ tester.run('v-on-handler-style', rule, {
           foo: () => {}
         }
       }
-      </script>`,
-      options: [['method', 'inline-function']],
-      errors: [
-        {
-          message: 'Prefer method handler over inline handler in v-on.',
-          line: 2,
-          column: 33
+      </script>`
+            }
+          ]
         }
       ]
     },
@@ -545,17 +659,23 @@ tester.run('v-on-handler-style', rule, {
           <button @click="e()" />
         </template>
       </template>`,
-      output: `<template>
-        <template v-for="e in list">
-          <button @click="e" />
-        </template>
-      </template>`,
+      output: null,
       options: [['method', 'inline-function']],
       errors: [
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 27
+          column: 27,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInline',
+              output: `<template>
+        <template v-for="e in list">
+          <button @click="e" />
+        </template>
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -716,16 +836,26 @@ tester.run('v-on-handler-style', rule, {
         <button @click="() => { foo() }" />
       </template>`,
       output: `<template>
+        <button @click="() => foo()" />
         <button @click="foo" />
-        <button @click="foo" />
-        <button @click="foo" />
+        <button @click="() => { foo() }" />
       </template>`,
       options: [['method', 'inline']],
       errors: [
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInlineFunction',
+              output: `<template>
+        <button @click="foo" />
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="() => { foo() }" />
+      </template>`
+            }
+          ]
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
@@ -735,7 +865,17 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          suggestions: [
+            {
+              messageId: 'removeParenthesesOverInlineFunction',
+              output: `<template>
+        <button @click="() => foo()" />
+        <button @click="(a, b) => foo(a, b)" />
+        <button @click="foo" />
+      </template>`
+            }
+          ]
         }
       ]
     },
@@ -1008,7 +1148,7 @@ tester.run('v-on-handler-style', rule, {
       </template>`,
       output: `<template>
         <template v-for="e in list">
-          <button @click="e" />
+          <button @click="() => e()" />
           <button @click="e" />
           <button @click="e" />
         </template>
