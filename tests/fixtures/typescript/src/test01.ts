@@ -7,6 +7,10 @@ export type Emits1 = {
   (e: 'foo' | 'bar', payload: string): void
   (e: 'baz', payload: number): void
 }
+export type Emits2 = {
+  (e: 'click' | 'bar', payload: string): void
+  (e: 'keydown', payload: number): void
+}
 export type Props2 = {
   a: string
   b?: number
