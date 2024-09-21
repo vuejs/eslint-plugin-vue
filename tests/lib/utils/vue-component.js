@@ -325,6 +325,12 @@ function invalidTests(ext) {
       code: `export default defineComponent({})`,
       languageOptions,
       errors: [makeError(1)]
+    },
+    {
+      filename: `test.${ext}`,
+      code: `export default defineNuxtComponent({})`,
+      parserOptions,
+      errors: [makeError(1)]
     }
   ]
 }
