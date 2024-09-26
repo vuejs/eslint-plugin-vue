@@ -1,24 +1,21 @@
-type ConfigName =
-  | "base"
-  | "essential"
-  | "no-layout-rules"
-  | "recommended"
-  | "strongly-recommended"
-  | "vue3-essential"
-  | "vue3-recommended"
-  | "vue3-strongly-recommended"
-  | "flat/base"
-  | "flat/vue2-essential"
-  | "flat/vue2-recommended"
-  | "flat/vue2-strongly-recommended"
-  | "flat/essential"
-  | "flat/recommended"
-  | "flat/strongly-recommended"
-
 declare const vue: {
   meta: any
   configs: {
-    [name in keyof ConfigName]: any
+    base: Linter.LegacyConfig
+    essential: Linter.LegacyConfig
+    'no-layout-rules': Linter.LegacyConfig
+    recommended: Linter.LegacyConfig
+    'strongly-recommended': Linter.LegacyConfig
+    'vue3-essential': Linter.LegacyConfig
+    'vue3-recommended': Linter.LegacyConfig
+    'vue3-strongly-recommended': Linter.LegacyConfig
+    'flat/base': Linter.FlatConfig[]
+    'flat/vue2-essential': Linter.FlatConfig[]
+    'flat/vue2-recommended': Linter.FlatConfig[]
+    'flat/vue2-strongly-recommended': Linter.FlatConfig[]
+    'flat/essential': Linter.FlatConfig[]
+    'flat/recommended': Linter.FlatConfig[]
+    'flat/strongly-recommended': Linter.FlatConfig[]
   }
   rules: Record<string, any>
   processors: {
