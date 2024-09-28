@@ -339,6 +339,7 @@ ruleTester.run('vue-component', rule, {
     },
     ...validTests('js'),
     ...validTests('jsx'),
+    ...validTests('tsx'),
     ...validTests('vue')
   ],
   invalid: [
@@ -356,6 +357,7 @@ ruleTester.run('vue-component', rule, {
     },
     ...invalidTests('js'),
     ...invalidTests('jsx'),
+    ...invalidTests('tsx'),
     ...invalidTests('vue')
   ]
 })
