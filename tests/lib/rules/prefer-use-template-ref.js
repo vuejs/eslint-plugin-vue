@@ -23,7 +23,7 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root" />
       </template>
-      <script>
+      <script setup>
         import { useTemplateRef } from 'vue';
         const root = useTemplateRef('root');
       </script>
@@ -36,7 +36,7 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-      <script>
+      <script setup>
         import { useTemplateRef } from 'vue';
         const buttonRef = useTemplateRef('button');
         const link = useTemplateRef('link');
@@ -55,7 +55,7 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-      <script>
+      <script setup>
         import { useTemplateRef } from 'vue';
         function getFirstListItemElement() {
           const firstListItem = useTemplateRef('firstListItem');
@@ -71,7 +71,7 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root"/>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const root = ref();
       </script>
@@ -80,7 +80,7 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root"/>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const root = useTemplateRef('root');
       </script>
@@ -100,7 +100,7 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const buttonRef = ref();
         const link = ref();
@@ -111,7 +111,7 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const buttonRef = ref();
         const link = useTemplateRef('link');
@@ -132,7 +132,7 @@ tester.run('prefer-use-template-ref', rule, {
           <h1 ref="heading">Heading</h1>
           <a href="" ref="link">Link</a>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const heading = ref();
         const link = ref();
@@ -143,7 +143,7 @@ tester.run('prefer-use-template-ref', rule, {
           <h1 ref="heading">Heading</h1>
           <a href="" ref="link">Link</a>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         const heading = useTemplateRef('heading');
         const link = useTemplateRef('link');
@@ -174,7 +174,7 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         function getFirstListItemElement() {
           const firstListItem = ref();
@@ -191,7 +191,7 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-      <script>
+      <script setup>
         import { ref } from 'vue';
         function getFirstListItemElement() {
           const firstListItem = useTemplateRef('firstListItem');
