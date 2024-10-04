@@ -23,10 +23,8 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root" />
       </template>
-
       <script>
         import { useTemplateRef } from 'vue';
-
         const root = useTemplateRef('root');
       </script>
       `
@@ -38,10 +36,8 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-
       <script>
         import { useTemplateRef } from 'vue';
-
         const buttonRef = useTemplateRef('button');
         const link = useTemplateRef('link');
       </script>
@@ -59,10 +55,8 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-
       <script>
         import { useTemplateRef } from 'vue';
-
         function getFirstListItemElement() {
           const firstListItem = useTemplateRef('firstListItem');
         }
@@ -77,10 +71,8 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root"/>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const root = ref();
       </script>
       `,
@@ -88,17 +80,15 @@ tester.run('prefer-use-template-ref', rule, {
       <template>
           <div ref="root"/>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const root = useTemplateRef('root');
       </script>
       `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
-          line: 9,
+          line: 7,
           column: 22
         }
       ]
@@ -110,10 +100,8 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const buttonRef = ref();
         const link = ref();
       </script>
@@ -123,10 +111,8 @@ tester.run('prefer-use-template-ref', rule, {
           <button ref="button">Content</button>
           <a href="" ref="link">Link</a>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const buttonRef = ref();
         const link = useTemplateRef('link');
       </script>
@@ -134,7 +120,7 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
-          line: 11,
+          line: 9,
           column: 22
         }
       ]
@@ -146,10 +132,8 @@ tester.run('prefer-use-template-ref', rule, {
           <h1 ref="heading">Heading</h1>
           <a href="" ref="link">Link</a>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const heading = ref();
         const link = ref();
       </script>
@@ -159,10 +143,8 @@ tester.run('prefer-use-template-ref', rule, {
           <h1 ref="heading">Heading</h1>
           <a href="" ref="link">Link</a>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         const heading = useTemplateRef('heading');
         const link = useTemplateRef('link');
       </script>
@@ -170,12 +152,12 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
-          line: 10,
+          line: 8,
           column: 25
         },
         {
           messageId: 'preferUseTemplateRef',
-          line: 11,
+          line: 9,
           column: 22
         }
       ]
@@ -192,10 +174,8 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         function getFirstListItemElement() {
           const firstListItem = ref();
         }
@@ -211,10 +191,8 @@ tester.run('prefer-use-template-ref', rule, {
             </ul>
           </div>
       </template>
-
       <script>
         import { ref } from 'vue';
-
         function getFirstListItemElement() {
           const firstListItem = useTemplateRef('firstListItem');
         }
@@ -223,7 +201,7 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
-          line: 16,
+          line: 14,
           column: 33
         }
       ]
