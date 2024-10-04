@@ -611,6 +611,56 @@ tester.run('no-restricted-props', rule, {
               }
             ]
           }
-        ])
+        ]),
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo=false} = defineProps({foo:Boolean})
+      </script>
+      `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
+      <script setup>
+      const {Foo:foo=false} = defineProps({Foo:Boolean})
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo:bar=false} = defineProps({foo:Boolean})
+      </script>
+      `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
+      <script setup>
+      const {Foo:bar=false} = defineProps({Foo:Boolean})
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    }
   ]
 })

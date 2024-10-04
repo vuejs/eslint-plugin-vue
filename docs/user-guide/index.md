@@ -221,6 +221,16 @@ Vue.component('AsyncComponent', (resolve, reject) => {
 })
 ```
 
+You can do this for [Vue class component](https://class-component.vuejs.org/) too:
+
+```ts
+// @vue/component
+@Component({
+  components: { Foo }
+})
+export default class Bar extends Vue {}
+```
+
 ### Disabling rules via `<!-- eslint-disable -->`
 
 You can use `<!-- eslint-disable -->`-like HTML comments in the `<template>` and in the block level of `.vue` files to disable a certain rule temporarily.
