@@ -17,7 +17,7 @@ description: require using `useTemplateRef` over `ref` for template refs
 Vue 3.5 introduced a new way of obtaining template refs via
 the [`useTemplateRef()`](https://vuejs.org/guide/essentials/template-refs.html#accessing-the-refs) API.
 
-This rule enforces using the new `useTemplateRef` function over `ref` for template refs.
+This rule enforces using the new `useTemplateRef` function instead of `ref` for template refs.
 
 <eslint-code-block fix :rules="{'vue/prefer-use-template-ref': ['error']}">
 
