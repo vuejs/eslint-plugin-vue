@@ -22,23 +22,21 @@ This rule enforces using the new `useTemplateRef` function instead of `ref` for 
 <eslint-code-block fix :rules="{'vue/prefer-use-template-ref': ['error']}">
 
 ```vue
-
 <template>
-  <div ref="divRef"></div>
-  <button ref="submitter">Submit</button>
+  <button ref="submitRef">Submit</button>
+  <button ref="closeRef">Close</button>
 </template>
 
 <script>
   import { ref, useTemplateRef } from 'vue';
 
   /* ✓ GOOD */
-  const divRef = useTemplateRef('divRef');
-  const div = useTemplateRef('divRef');
-  const loremIpsum = useTemplateRef('divRef');
-  const submitButton = useTemplateRef('submitter');
+  const submitRef = useTemplateRef('submitRef');
+  const submitButton = useTemplateRef('submitRef');
+  const closeButton = useTemplateRef('closeRef');
+
   /* ✗ BAD */
-  const divRef = ref();
-  const submitter = ref();
+  const closeRef = ref();
 </script>
 ```
 
