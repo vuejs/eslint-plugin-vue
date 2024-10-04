@@ -81,7 +81,7 @@ tester.run('prefer-use-template-ref', rule, {
           <div ref="root"/>
       </template>
       <script setup>
-        import { ref } from 'vue';
+        import { useTemplateRef } from 'vue';
         const root = useTemplateRef('root');
       </script>
       `,
@@ -144,7 +144,7 @@ tester.run('prefer-use-template-ref', rule, {
           <a href="" ref="link">Link</a>
       </template>
       <script setup>
-        import { ref } from 'vue';
+        import { useTemplateRef } from 'vue';
         const heading = useTemplateRef('heading');
         const link = useTemplateRef('link');
       </script>
@@ -192,7 +192,7 @@ tester.run('prefer-use-template-ref', rule, {
           </div>
       </template>
       <script setup>
-        import { ref } from 'vue';
+        import { useTemplateRef } from 'vue';
         function getFirstListItemElement() {
           const firstListItem = useTemplateRef('firstListItem');
         }
