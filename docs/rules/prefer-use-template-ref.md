@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-use-template-ref
-description: require using `useTemplateRef` over `ref` for template refs
+description: require using `useTemplateRef` instead of `ref` for template refs
 ---
 
 # vue/prefer-use-template-ref
 
-> require using `useTemplateRef` over `ref` for template refs
+> require using `useTemplateRef` instead of `ref` for template refs
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
