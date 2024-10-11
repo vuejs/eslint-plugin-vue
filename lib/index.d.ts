@@ -1,3 +1,5 @@
+import type { Linter } from 'eslint'
+
 declare const vue: {
   meta: any
   configs: {
@@ -19,19 +21,19 @@ declare const vue: {
   }
   rules: Record<string, any>
   processors: {
-    ".vue": any
+    '.vue': any
     vue: any
   }
   environments: {
     /**
      * @deprecated
      */
-    "setup-compiler-macros": {
+    'setup-compiler-macros': {
       globals: {
-        defineProps: "readonly"
-        defineEmits: "readonly"
-        defineExpose: "readonly"
-        withDefaults: "readonly"
+        defineProps: 'readonly'
+        defineEmits: 'readonly'
+        defineExpose: 'readonly'
+        withDefaults: 'readonly'
       }
     }
   }
