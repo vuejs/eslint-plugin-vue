@@ -1,3 +1,5 @@
+import type {Linter} from 'eslint'
+
 declare const vue: {
   meta: any
   configs: {
