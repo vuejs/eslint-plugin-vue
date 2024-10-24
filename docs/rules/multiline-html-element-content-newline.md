@@ -161,8 +161,6 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 </eslint-code-block>
 
-
-
 ## :books: Further Reading
 
 - [no-multiple-empty-lines]
