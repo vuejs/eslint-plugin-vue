@@ -169,7 +169,6 @@ tester.run('multiline-html-element-content-newline', rule, {
         </template>`,
       options: [{ allowEmptyLines: true }]
     },
-
     {
       code: `
         <template>
