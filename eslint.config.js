@@ -188,13 +188,14 @@ module.exports = [
       'unicorn/no-null': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
       'unicorn/no-useless-undefined': 'off',
-      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
+      'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
-      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
       'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prevent-abbreviations': 'off',
 
       'internal/require-eslint-community': ['error']
     }
