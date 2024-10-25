@@ -148,6 +148,7 @@ module.exports = [
         'error',
         { catchNoFixerButFixableProperty: true }
       ],
+      'eslint-plugin/require-meta-schema-description': 'off',
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
 
       'no-debugger': 'error',
