@@ -42,6 +42,27 @@ module.exports = [
     }
   },
 
+  // turn off some rules from shared configs in all files
+  {
+    rules: {
+      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
+      'eslint-plugin/require-meta-schema-description': 'off',
+
+      'unicorn/filename-case': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+      'unicorn/no-useless-undefined': 'off',
+      'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-module': 'off',
+      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
+      'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prevent-abbreviations': 'off'
+    }
+  },
+
   {
     files: ['**/*.js'],
     languageOptions: {
@@ -143,12 +164,10 @@ module.exports = [
         'error',
         { pattern: '^(enforce|require|disallow).*[^.]$' }
       ],
-      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-fixable': [
         'error',
         { catchNoFixerButFixableProperty: true }
       ],
-      'eslint-plugin/require-meta-schema-description': 'off',
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
 
       'no-debugger': 'error',
@@ -185,18 +204,6 @@ module.exports = [
         'error',
         { checkArrowFunctions: false }
       ],
-      'unicorn/filename-case': 'off',
-      'unicorn/no-null': 'off',
-      'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
-      'unicorn/no-useless-undefined': 'off',
-      'unicorn/prefer-global-this': 'off',
-      'unicorn/prefer-module': 'off',
-      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
-      'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prevent-abbreviations': 'off',
 
       'internal/require-eslint-community': ['error']
     }
