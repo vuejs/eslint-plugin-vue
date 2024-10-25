@@ -35,6 +35,7 @@ module.exports = [
       internal: {
         rules: {
           'no-invalid-meta': require('./eslint-internal-rules/no-invalid-meta'),
+          'no-invalid-meta-default-options': require('./eslint-internal-rules/no-invalid-meta-default-options'),
           'no-invalid-meta-docs-categories': require('./eslint-internal-rules/no-invalid-meta-docs-categories'),
           'require-eslint-community': require('./eslint-internal-rules/require-eslint-community')
         }
@@ -224,6 +225,7 @@ module.exports = [
         { pattern: 'https://eslint.vuejs.org/rules/{{name}}.html' }
       ],
       'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-default-options': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
@@ -232,6 +234,7 @@ module.exports = [
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-default-options': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
