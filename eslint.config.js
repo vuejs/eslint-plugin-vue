@@ -59,6 +59,7 @@ module.exports = [
       'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-structured-clone': 'off', //   turn off to prevent make breaking changes
       'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prevent-abbreviations': 'off'
     }
