@@ -316,6 +316,21 @@ ruleTester.run('require-valid-default-prop', rule, {
       languageOptions: {
         parser: require('vue-eslint-parser')
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      }
     }
   ],
 
@@ -1096,6 +1111,72 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message: "Type of the default value for 'foo' prop must be a string.",
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Number,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a number.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Array,
+            default: () => {
+              return 42
+            }
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = (()=>[]) } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 3
         }
       ]
     }
