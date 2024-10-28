@@ -1139,6 +1139,27 @@ ruleTester.run('require-valid-default-prop', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+        const { foo = 42 } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
         const { foo = [] } = defineProps({
           foo: {
             type: Array,
