@@ -160,6 +160,19 @@ tester.run('require-explicit-slots', rule, {
           parser: null
         }
       }
+    },
+    // ignore attribute binding
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot :name="'foo'"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      defineSlots<{}>()
+      </script>`
     }
   ],
   invalid: [
