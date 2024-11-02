@@ -42,7 +42,7 @@ This rule enforces using the new `useTemplateRef` function instead of `ref` for 
 </eslint-code-block>
 
 This rule skips `ref` template function refs as these should be used to allow custom implementation of storing `ref`. If you prefer
-`useTemplateRef`, you have to change the value of the template `ref` to a string. 
+`useTemplateRef`, you have to change the value of the template `ref` to a string.
 
 <eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 
