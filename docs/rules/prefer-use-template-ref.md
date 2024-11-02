@@ -41,7 +41,8 @@ This rule enforces using the new `useTemplateRef` function instead of `ref` for 
 
 </eslint-code-block>
 
-This rule skips `ref` functions in template as their assignment is determined at runtime and `useTemplateRef` cannot be used there.
+This rule skips `ref` template function refs as these should be used to allow custom implementation of storing `ref`. If you prefer
+`useTemplateRef`, you have to change the value of the template `ref` to a string. 
 
 <eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 
@@ -52,6 +53,8 @@ This rule skips `ref` functions in template as their assignment is determined at
 
 <script setup>
   import { ref } from 'vue';
+  
+  /* ✓ GOOD */
   const button = ref();
 </script>
 ```
