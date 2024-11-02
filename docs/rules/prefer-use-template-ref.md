@@ -10,7 +10,6 @@ description: require using `useTemplateRef` instead of `ref` for template refs
 > require using `useTemplateRef` instead of `ref` for template refs
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -19,7 +18,7 @@ the [`useTemplateRef()`](https://vuejs.org/guide/essentials/template-refs.html#a
 
 This rule enforces using the new `useTemplateRef` function instead of `ref` for template refs.
 
-<eslint-code-block fix :rules="{'vue/prefer-use-template-ref': ['error']}">
+<eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 
 ```vue
 <template>
