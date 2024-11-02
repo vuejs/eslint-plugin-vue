@@ -36,7 +36,7 @@ export default {
   "vue/no-reserved-component-names": ["error", {
     "disallowVueBuiltInComponents": false,
     "disallowVue3BuiltInComponents": false,
-    "caseSensitive": false,
+    "htmlElementCaseSensitive": false,
   }]
 }
 ```
