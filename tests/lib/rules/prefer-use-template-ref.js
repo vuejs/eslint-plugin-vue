@@ -62,6 +62,81 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `
+    },
+    {
+      filename: 'non-template-ref.vue',
+      code: `
+      <template>
+          <div>
+            <ul>
+              <li v-for="food in foods" :key="food">{{food}}</li>
+            </ul>
+          </div>
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const foods = ref(['Spaghetti', 'Pizza', 'Cake']);
+      </script>
+      `
+    },
+    {
+      filename: 'counter.js',
+      code: `
+      import { ref } from 'vue';
+      const counter = ref(0);
+      const names = ref(new Set());
+      function incrementCounter() {
+        counter.value++;
+        return counter.value;
+      }
+      function storeName(name) {
+        names.value.add(name)
+      }
+      `
+    },
+    {
+      filename: 'setup-function.vue',
+      code: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button" @click="counter++">Click</button>
+      </template>
+      <script>
+        import { ref, useTemplateRef } from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'options-api.vue',
+      code: `
+      <template>
+        <label ref="label">
+          Name:
+          <input v-model="name" />
+        </label>
+        <p ref="textRef">Text</p>
+        <button
+      </template>
+      <script>
+        import { useTemplateRef } from 'vue';
+        export default {
+          name: 'NameRow',
+          data() {
+            return {
+              label: useTemplateRef('label'),
+              name: ref('')
+            }
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -74,15 +149,6 @@ tester.run('prefer-use-template-ref', rule, {
       <script setup>
         import { ref } from 'vue';
         const root = ref();
-      </script>
-      `,
-      output: `
-      <template>
-          <div ref="root"/>
-      </template>
-      <script setup>
-        import { useTemplateRef } from 'vue';
-        const root = useTemplateRef('root');
       </script>
       `,
       errors: [
@@ -106,17 +172,6 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
-      output: `
-      <template>
-          <button ref="button">Content</button>
-          <a href="" ref="link">Link</a>
-      </template>
-      <script setup>
-        import { ref } from 'vue';
-        const buttonRef = ref();
-        const link = useTemplateRef('link');
-      </script>
-      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -136,17 +191,6 @@ tester.run('prefer-use-template-ref', rule, {
         import { ref } from 'vue';
         const heading = ref();
         const link = ref();
-      </script>
-      `,
-      output: `
-      <template>
-          <h1 ref="heading">Heading</h1>
-          <a href="" ref="link">Link</a>
-      </template>
-      <script setup>
-        import { useTemplateRef } from 'vue';
-        const heading = useTemplateRef('heading');
-        const link = useTemplateRef('link');
       </script>
       `,
       errors: [
@@ -181,20 +225,60 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
-      output: `
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          line: 14,
+          column: 33
+        }
+      ]
+    },
+    {
+      filename: 'setup-function-only-refs.vue',
+      code: `
       <template>
-          <div>
-            <ul>
-              <li ref="firstListItem">Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </div>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
       </template>
-      <script setup>
-        import { useTemplateRef } from 'vue';
-        function getFirstListItemElement() {
-          const firstListItem = useTemplateRef('firstListItem');
+      <script>
+        import { ref } from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = ref();
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          line: 12,
+          column: 28
+        }
+      ]
+    },
+    {
+      filename: 'options-api-only-refs.vue',
+      code: `
+      <template>
+        <label ref="label">
+          Name:
+          <input v-model="name" />
+        </label>
+        <button
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          name: 'NameRow',
+          data() {
+            return {
+              label: ref(),
+              name: ref('')
+            }
+          }
         }
       </script>
       `,
