@@ -35,13 +35,15 @@ export default {
 {
   "vue/no-reserved-component-names": ["error", {
     "disallowVueBuiltInComponents": false,
-    "disallowVue3BuiltInComponents": false
+    "disallowVue3BuiltInComponents": false,
+    "caseSensitive": false,
   }]
 }
 ```
 
 - `disallowVueBuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 2.x built-in component names. Default is `false`.
 - `disallowVue3BuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 3.x built-in component names. Default is `false`.
+- `htmlElementCaseSensitive` (`boolean`) ... If `true`, become case-sensitive when comparing component names with HTML reserved elements. Default is `false`. This means that a component name must exactly match the case of an HTML element to be considered conflicting.
 
 ### `"disallowVueBuiltInComponents": true`
 
@@ -67,6 +69,34 @@ export default {
 /* ✗ BAD */
 export default {
   name: 'teleport'
+}
+</script>
+```
+
+</eslint-code-block>
+
+### `"htmlElementCaseSensitive": true`
+
+<eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
+
+```vue
+<script>
+/* ✗ GOOD */
+export default {
+  name: 'Button'
+}
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
+
+```vue
+<script>
+/* ✗ BAD */
+export default {
+  name: 'button'
 }
 </script>
 ```
