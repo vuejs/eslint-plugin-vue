@@ -26,7 +26,7 @@ This rule enforces using the new `useTemplateRef` function instead of `ref` for 
   <button ref="closeRef">Close</button>
 </template>
 
-<script>
+<script setup>
   import { ref, useTemplateRef } from 'vue';
 
   /* ✓ GOOD */
@@ -36,6 +36,23 @@ This rule enforces using the new `useTemplateRef` function instead of `ref` for 
 
   /* ✗ BAD */
   const closeRef = ref();
+</script>
+```
+
+</eslint-code-block>
+
+This rule skips `ref` functions in template as their assignment is determined at runtime and `useTemplateRef` cannot be used there.
+
+<eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
+
+```vue
+<template>
+  <button :ref="ref => button = ref">Content</button>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+  const button = ref();
 </script>
 ```
 
