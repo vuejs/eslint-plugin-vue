@@ -58,7 +58,8 @@ tester.run('prefer-use-template-ref', rule, {
       <script setup>
         import { useTemplateRef } from 'vue';
         function getFirstListItemElement() {
-          const firstListItem = useTemplateRef('firstListItem');
+          const firstListItem = useTemplateRef('firstListItem')
+          console.log(firstListItem)
         }
       </script>
       `
@@ -121,17 +122,29 @@ tester.run('prefer-use-template-ref', rule, {
           Name:
           <input v-model="name" />
         </label>
-        <p ref="textRef">Text</p>
+        <p ref="textRef">{{niceName}}</p>
         <button
       </template>
       <script>
         import { useTemplateRef } from 'vue';
         export default {
           name: 'NameRow',
+          methods: {
+            someFunction() {
+              return {
+                label: ref(5),
+              }
+            }
+          }
           data() {
             return {
               label: useTemplateRef('label'),
               name: ref('')
+            }
+          },
+          computed: {
+            niceName() {
+              return 'Nice ' + this.name;
             }
           }
         }
@@ -263,20 +276,31 @@ tester.run('prefer-use-template-ref', rule, {
       filename: 'options-api-only-refs.vue',
       code: `
       <template>
-        <label ref="label">
+        <label ref="labelElem">
           Name:
           <input v-model="name" />
         </label>
-        <button
+        {{ loremIpsum }}
       </template>
       <script>
         import { ref } from 'vue';
         export default {
           name: 'NameRow',
+          props: {
+            defaultLabel: {
+              type: String,
+            },
+          },
           data() {
             return {
-              label: ref(),
+              label: ref(this.defaultLabel),
+              labelElem: ref(),
               name: ref('')
+            }
+          },
+          computed: {
+            loremIpsum() {
+              return this.name + ' lorem ipsum'
             }
           }
         }
@@ -285,8 +309,8 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
-          line: 14,
-          column: 33
+          line: 21,
+          column: 22
         }
       ]
     }
