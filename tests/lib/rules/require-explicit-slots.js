@@ -171,7 +171,9 @@ tester.run('require-explicit-slots', rule, {
         </div>
       </template>
       <script setup lang="ts">
-      defineSlots<{}>()
+      defineSlots<{
+        default(props: { msg: string }): any
+      }>()
       </script>`
     }
   ],
