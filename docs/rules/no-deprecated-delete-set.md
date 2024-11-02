@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-delete-set
 description: disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
+since: v9.29.0
 ---
 
 # vue/no-deprecated-delete-set
 
 > disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -45,6 +44,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Migration Guide - Removed APIs](https://v3-migration.vuejs.org/breaking-changes/#removed-apis)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.29.0
 
 ## :mag: Implementation
 
