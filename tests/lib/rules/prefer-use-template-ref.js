@@ -115,7 +115,7 @@ tester.run('prefer-use-template-ref', rule, {
       `
     },
     {
-      filename: 'options-api.vue',
+      filename: 'options-api-no-refs.vue',
       code: `
       <template>
         <label ref="label">
@@ -126,7 +126,7 @@ tester.run('prefer-use-template-ref', rule, {
         <button
       </template>
       <script>
-        import { useTemplateRef } from 'vue';
+        import { ref } from 'vue';
         export default {
           name: 'NameRow',
           methods: {
@@ -138,8 +138,8 @@ tester.run('prefer-use-template-ref', rule, {
           }
           data() {
             return {
-              label: useTemplateRef('label'),
-              name: ref('')
+              label: 'label',
+              name: ''
             }
           },
           computed: {
@@ -149,6 +149,53 @@ tester.run('prefer-use-template-ref', rule, {
           }
         }
       </script>
+      `
+    },
+    {
+      filename: 'options-api-mixed.vue',
+      code: `
+      <template>
+        <label ref="labelElem">
+          Name:
+          <input v-model="name" />
+        </label>
+        {{ loremIpsum }}
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          name: 'NameRow',
+          props: {
+            defaultLabel: {
+              type: String,
+            },
+          },
+          data() {
+            return {
+              label: ref(this.defaultLabel),
+              labelElem: ref(),
+              name: ''
+            }
+          },
+          computed: {
+            loremIpsum() {
+              return this.name + ' lorem ipsum'
+            }
+          }
+        }
+      </script>
+      `
+    },
+    {
+      filename: 'template-ref-function.vue',
+      code: `
+      <template>
+        <button :ref="ref => button = ref">Content</button>
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const button = ref();
+        </script>
       `
     }
   ],
@@ -269,48 +316,6 @@ tester.run('prefer-use-template-ref', rule, {
           messageId: 'preferUseTemplateRef',
           line: 12,
           column: 28
-        }
-      ]
-    },
-    {
-      filename: 'options-api-only-refs.vue',
-      code: `
-      <template>
-        <label ref="labelElem">
-          Name:
-          <input v-model="name" />
-        </label>
-        {{ loremIpsum }}
-      </template>
-      <script>
-        import { ref } from 'vue';
-        export default {
-          name: 'NameRow',
-          props: {
-            defaultLabel: {
-              type: String,
-            },
-          },
-          data() {
-            return {
-              label: ref(this.defaultLabel),
-              labelElem: ref(),
-              name: ref('')
-            }
-          },
-          computed: {
-            loremIpsum() {
-              return this.name + ' lorem ipsum'
-            }
-          }
-        }
-      </script>
-      `,
-      errors: [
-        {
-          messageId: 'preferUseTemplateRef',
-          line: 21,
-          column: 26
         }
       ]
     }
