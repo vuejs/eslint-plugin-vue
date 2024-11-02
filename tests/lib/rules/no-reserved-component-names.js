@@ -410,6 +410,12 @@ const invalidElements = [
   'xmp',
   'Xmp'
 ]
+const invalidLowerCaseElements = invalidElements.filter(
+  (element) => element === element.toLowerCase()
+)
+const invalidUpperCaseElements = invalidElements.filter(
+  (element) => element === element.toUpperCase()
+)
 
 const vue2BuiltInComponents = [
   'component',
@@ -559,6 +565,16 @@ ruleTester.run('no-reserved-component-names', rule, {
       languageOptions,
       options: [{ disallowVueBuiltInComponents: true }]
     })),
+    ...invalidUpperCaseElements.map((name) => ({
+      filename: `${name}.vue`,
+      code: `
+          export default {
+            name: '${name}'
+          }
+        `,
+      languageOptions,
+      options: [{ htmlElementCaseSensitive: true }]
+    })),
     {
       filename: 'test.vue',
       code: `<script setup> defineOptions({}) </script>`,
@@ -691,6 +707,24 @@ ruleTester.run('no-reserved-component-names', rule, {
         parser: require('vue-eslint-parser'),
         ...languageOptions
       },
+      errors: [
+        {
+          messageId: RESERVED_NAMES_IN_HTML.has(name)
+            ? 'reservedInHtml'
+            : 'reserved',
+          data: { name },
+          line: 1
+        }
+      ]
+    })),
+    ...invalidLowerCaseElements.map((name) => ({
+      filename: `${name}.vue`,
+      code: `<script setup> defineOptions({name: '${name}'}) </script>`,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      options: [{ htmlElementCaseSensitive: true }],
       errors: [
         {
           messageId: RESERVED_NAMES_IN_HTML.has(name)
