@@ -81,7 +81,7 @@ export default {
 
 ```vue
 <script>
-/* ✗ GOOD */
+/* ✓ GOOD */
 export default {
   name: 'Button'
 }
