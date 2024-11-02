@@ -310,7 +310,7 @@ tester.run('prefer-use-template-ref', rule, {
         {
           messageId: 'preferUseTemplateRef',
           line: 21,
-          column: 22
+          column: 26
         }
       ]
     }
