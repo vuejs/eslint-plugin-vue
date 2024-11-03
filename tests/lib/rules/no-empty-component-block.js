@@ -197,6 +197,16 @@ tester.run('no-empty-component-block', rule, {
           message: '`<template>` is empty. Empty block is not allowed.'
         }
       ]
+    },
+    {
+      code: '<template><p></p></template><script src="" /><style src="" />',
+      output: '<template><p></p></template>',
+      options: [{ autofix: true }],
+      errors: [
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        }
+      ]
     }
   ]
 })
