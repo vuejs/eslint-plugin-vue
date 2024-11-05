@@ -43,7 +43,7 @@ export default {
 
 - `disallowVueBuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 2.x built-in component names. Default is `false`.
 - `disallowVue3BuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 3.x built-in component names. Default is `false`.
-- `htmlElementCaseSensitive` (`boolean`) ... If `true`, become case-sensitive when comparing component names with HTML reserved elements. Default is `false`. This means that a component name must exactly match the case of an HTML element to be considered conflicting.
+- `htmlElementCaseSensitive` (`boolean`) ... If `true`, component names must exactly match the case of an HTML element to be considered conflicting. Default is `false` (i.e. case-insensitve comparison).
 
 ### `"disallowVueBuiltInComponents": true`
 
