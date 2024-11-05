@@ -410,12 +410,16 @@ const invalidElements = [
   'xmp',
   'Xmp'
 ]
-const invalidLowerCaseElements = invalidElements.filter(
-  (element) => element === element.toLowerCase()
-)
-const invalidUpperCaseElements = invalidElements.filter(
-  (element) => element === element.toUpperCase()
-)
+const invalidLowerCaseElements = []
+const invalidUpperCaseElements = []
+
+for (const element of invalidElements) {
+  if (element[0] === element[0].toLowerCase()) {
+    invalidLowerCaseElements.push(element)
+  } else {
+    invalidUpperCaseElements.push(element)
+  }
+}
 
 const vue2BuiltInComponents = [
   'component',
