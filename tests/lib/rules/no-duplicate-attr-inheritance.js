@@ -46,6 +46,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script setup>
+      defineOptions({ inheritAttrs: true })
+      </script>
+      <template><div v-bind="$attrs"/><div/></template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <template><div><div></div></div></template>
         <script>
         const inheritAttrs = false;
