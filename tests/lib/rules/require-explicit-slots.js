@@ -161,13 +161,29 @@ tester.run('require-explicit-slots', rule, {
         }
       }
     },
-    // ignore attribute binding
+    // attribute binding
     {
       filename: 'test.vue',
       code: `
       <template>
         <div>
           <slot :name="'foo'"></slot>
+          <slot :name="\`bar\`"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      defineSlots<{
+        foo(props: { msg: string }): any
+        bar(props: { msg: string }): any
+      }>()
+      </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot :name="bar"></slot>
         </div>
       </template>
       <script setup lang="ts">
@@ -299,6 +315,26 @@ tester.run('require-explicit-slots', rule, {
           default: { msg: string }
         }>,
       })
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.'
+        }
+      ]
+    },
+    {
+      // ignore attribute binding except string literal
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot :name="'foo'"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      defineSlots<{
+        default(props: { msg: string }): any
+      }>()
       </script>`,
       errors: [
         {
