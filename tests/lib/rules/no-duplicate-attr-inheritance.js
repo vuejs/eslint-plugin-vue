@@ -52,6 +52,47 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       <template><div v-bind="$attrs"/><div/></template>
       `
     },
+    // ignore multi root
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1"></div>
+          <div v-if="condition2" v-bind="$attrs"></div>
+          <div v-else></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1"></div>
+          <div v-else-if="condition2"></div>
+          <div v-bind="$attrs"></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-bind="$attrs"></div>
+          <div v-if="condition1"></div>
+          <div v-else></div>
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1"></div>
+          <div v-else-if="condition2"></div>
+          <div v-if="condition3" v-bind="$attrs"></div>
+        </template>
+      `
+    },
     {
       filename: 'test.vue',
       code: `
@@ -160,6 +201,49 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           line: 5
         }
       ]
+    },
+    // single root with a condition group
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1" v-bind="$attrs"></div>
+          <div v-else-if="condition2"></div>
+          <div v-else></div>
+        </template>
+      `,
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1" v-bind="$attrs"></div>
+          <div v-else-if="condition2"></div>
+          <div v-else-if="condition3"></div>
+          <div v-else></div>
+        </template>
+      `,
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1" v-bind="$attrs"></div>
+          <div v-else></div>
+        </template>
+      `,
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <div v-if="condition1" v-bind="$attrs"></div>
+        </template>
+      `,
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
     }
   ]
 })
