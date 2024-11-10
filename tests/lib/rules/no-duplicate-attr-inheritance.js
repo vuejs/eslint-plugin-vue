@@ -50,7 +50,8 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       defineOptions({ inheritAttrs: true })
       </script>
       <template><div v-bind="$attrs"/><div/></template>
-      `
+      `,
+      options: [{ checkMultiRootNodes: true }]
     },
     // ignore multi root
     {
@@ -61,7 +62,8 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-if="condition2" v-bind="$attrs"></div>
           <div v-else></div>
         </template>
-      `
+      `,
+      options: [{ checkMultiRootNodes: true }]
     },
     {
       filename: 'test.vue',
@@ -71,7 +73,8 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-else-if="condition2"></div>
           <div v-bind="$attrs"></div>
         </template>
-      `
+      `,
+      options: [{ checkMultiRootNodes: true }]
     },
     {
       filename: 'test.vue',
@@ -81,7 +84,8 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-if="condition1"></div>
           <div v-else></div>
         </template>
-      `
+      `,
+      options: [{ checkMultiRootNodes: true }]
     },
     {
       filename: 'test.vue',
@@ -91,7 +95,8 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-else-if="condition2"></div>
           <div v-if="condition3" v-bind="$attrs"></div>
         </template>
-      `
+      `,
+      options: [{ checkMultiRootNodes: true }]
     },
     {
       filename: 'test.vue',
@@ -202,6 +207,17 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         }
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineOptions({ inheritAttrs: true })
+      </script>
+      <template><div v-bind="$attrs"/><div/></template>
+      `,
+      options: [{ checkMultiRootNodes: false }],
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
     // single root with a condition group
     {
       filename: 'test.vue',
@@ -212,6 +228,7 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-else></div>
         </template>
       `,
+      options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
@@ -224,6 +241,7 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-else></div>
         </template>
       `,
+      options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
@@ -234,6 +252,7 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-else></div>
         </template>
       `,
+      options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
@@ -243,6 +262,7 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
           <div v-if="condition1" v-bind="$attrs"></div>
         </template>
       `,
+      options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     }
   ]
