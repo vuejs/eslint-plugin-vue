@@ -170,7 +170,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template></template><script></script><style></style>',
-      output: '',
+      output: '<script></script>',
       options: [{ autofix: true }],
       errors: [
         {
@@ -185,8 +185,8 @@ tester.run('no-empty-component-block', rule, {
       ]
     },
     {
-      code: '<template /><script /><style />',
-      output: '',
+      code: '<template></template> <script></script> <style></style>',
+      output: '  ',
       options: [{ autofix: true }],
       errors: [
         {
@@ -201,8 +201,8 @@ tester.run('no-empty-component-block', rule, {
       ]
     },
     {
-      code: '<template src="" /><script src="" /><style src="" />',
-      output: '',
+      code: '<template /> <script /> <style />',
+      output: '  ',
       options: [{ autofix: true }],
       errors: [
         {
@@ -217,8 +217,24 @@ tester.run('no-empty-component-block', rule, {
       ]
     },
     {
-      code: '<template><p></p></template><script src="" /><style src="" />',
-      output: '<template><p></p></template>',
+      code: '<template src="" /> <script src="" /> <style src="" />',
+      output: '  ',
+      options: [{ autofix: true }],
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<style>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: '<template><p></p></template> <script src="" /> <style src="" />',
+      output: '<template><p></p></template>  ',
       options: [{ autofix: true }],
       errors: [
         {
