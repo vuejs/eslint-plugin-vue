@@ -19,7 +19,7 @@ This rule disallows the `<template>` `<script>` `<style>` block to be empty.
 This rule also checks block what has attribute `src`.
 See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.html#src-imports).
 
-<eslint-code-block fix :rules="{'vue/no-empty-component-block': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-empty-component-block': ['error', { autofix: true }]}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -64,7 +64,15 @@ p {
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-duplicate-attributes": ["error", {
+    "autofix": false,
+  }]
+}
+```
+
+- `"autofix"` ... If `true`, enable autofix. (Default: `false`)
 
 ## :rocket: Version
 
