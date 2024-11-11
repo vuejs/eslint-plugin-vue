@@ -66,7 +66,7 @@ p {
 
 ```json
 {
-  "vue/no-duplicate-attributes": ["error", {
+  "vue/no-empty-component-block": ["error", {
     "autofix": false,
   }]
 }
