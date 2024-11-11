@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-use-template-ref
 description: require using `useTemplateRef` instead of `ref` for template refs
+since: v9.31.0
 ---
 
 # vue/prefer-use-template-ref
 
 > require using `useTemplateRef` instead of `ref` for template refs
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -64,6 +63,10 @@ This rule skips `ref` template function refs as these should be used to allow cu
 ## :wrench: Options
 
 Nothing.
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.31.0
 
 ## :mag: Implementation
 
