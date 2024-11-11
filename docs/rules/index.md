@@ -232,7 +232,7 @@ For example:
 | [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
 | [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
-| [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
+| [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-reactivity-loss](./no-ref-object-reactivity-loss.md) | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
