@@ -126,6 +126,8 @@ tester.run('define-macros-order', rule, {
       code: `
         <script setup lang="ts">
           import { bar } from 'foo'
+          declare global {}
+          declare namespace Namespace {}
           export interface Props {
             msg?: string
             labels?: string[]
