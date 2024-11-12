@@ -43,6 +43,7 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         </script>
       `
     },
+    // ignore multi root by default
     {
       filename: 'test.vue',
       code: `
@@ -50,53 +51,48 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       defineOptions({ inheritAttrs: true })
       </script>
       <template><div v-bind="$attrs"/><div/></template>
-      `,
-      options: [{ checkMultiRootNodes: true }]
-    },
-    // ignore multi root
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <div v-if="condition1"></div>
-          <div v-if="condition2" v-bind="$attrs"></div>
-          <div v-else></div>
-        </template>
-      `,
-      options: [{ checkMultiRootNodes: true }]
+      `
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="condition1"></div>
-          <div v-else-if="condition2"></div>
-          <div v-bind="$attrs"></div>
-        </template>
-      `,
-      options: [{ checkMultiRootNodes: true }]
+      <template>
+        <div v-if="condition1"></div>
+        <div v-if="condition2" v-bind="$attrs"></div>
+        <div v-else></div>
+      </template>
+      `
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-bind="$attrs"></div>
-          <div v-if="condition1"></div>
-          <div v-else></div>
-        </template>
-      `,
-      options: [{ checkMultiRootNodes: true }]
+      <template>
+        <div v-if="condition1"></div>
+        <div v-else-if="condition2"></div>
+        <div v-bind="$attrs"></div>
+      </template>
+      `
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="condition1"></div>
-          <div v-else-if="condition2"></div>
-          <div v-if="condition3" v-bind="$attrs"></div>
-        </template>
+      <template>
+        <div v-bind="$attrs"></div>
+        <div v-if="condition1"></div>
+        <div v-else></div>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-if="condition1"></div>
+        <div v-else-if="condition2"></div>
+        <div v-if="condition3" v-bind="$attrs"></div>
+      </template>
       `,
-      options: [{ checkMultiRootNodes: true }]
+      options: [{ checkMultiRootNodes: false }]
     },
     {
       filename: 'test.vue',
@@ -209,60 +205,63 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
-      <script setup>
-      defineOptions({ inheritAttrs: true })
-      </script>
-      <template><div v-bind="$attrs"/><div/></template>
-      `,
-      options: [{ checkMultiRootNodes: false }],
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
-    },
-    // single root with a condition group
-    {
-      filename: 'test.vue',
-      code: `
-        <template>
-          <div v-if="condition1" v-bind="$attrs"></div>
-          <div v-else-if="condition2"></div>
-          <div v-else></div>
-        </template>
-      `,
+      code: `<template><div v-bind="$attrs"></div><div></div></template>`,
       options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="condition1" v-bind="$attrs"></div>
-          <div v-else-if="condition2"></div>
-          <div v-else-if="condition3"></div>
-          <div v-else></div>
-        </template>
+      <template>
+        <div v-if="condition1" v-bind="$attrs"></div>
+        <div v-else></div>
+        <div v-if="condition2"></div>
+      </template>
       `,
       options: [{ checkMultiRootNodes: true }],
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
+    // condition group as a single root node
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-if="condition1" v-bind="$attrs"></div>
+        <div v-else-if="condition2"></div>
+        <div v-else></div>
+      </template>
+      `,
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="condition1" v-bind="$attrs"></div>
-          <div v-else></div>
-        </template>
+      <template>
+        <div v-if="condition1" v-bind="$attrs"></div>
+        <div v-else-if="condition2"></div>
+        <div v-else-if="condition3"></div>
+        <div v-else></div>
+      </template>
       `,
-      options: [{ checkMultiRootNodes: true }],
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     },
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="condition1" v-bind="$attrs"></div>
-        </template>
+      <template>
+        <div v-if="condition1" v-bind="$attrs"></div>
+        <div v-else></div>
+      </template>
       `,
-      options: [{ checkMultiRootNodes: true }],
+      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-if="condition1" v-bind="$attrs"></div>
+      </template>
+      `,
       errors: [{ message: 'Set "inheritAttrs" to false.' }]
     }
   ]

@@ -15,7 +15,7 @@ since: v7.0.0
 This rule aims to prevent duplicate attribute inheritance.  
 This rule to warn to apply `inheritAttrs: false` when it detects `v-bind="$attrs"` being used.
 
-<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error']}">
+<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: false }]}">
 
 ```vue
 <template>
@@ -26,11 +26,12 @@ export default {
   /* ✓ GOOD */
   inheritAttrs: false
 }
+</script>
 ```
 
 </eslint-code-block>
 
-<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error']}">
+<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: false }]}">
 
 ```vue
 <template>
@@ -41,13 +42,41 @@ export default {
   /* ✗ BAD */
   // inheritAttrs: true (default)
 }
+</script>
+```
+
+</eslint-code-block>
+
+### `"checkMultiRootNodes": true`
+
+<eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: true }]}">
+
+```vue
+<template>
+  <div v-bind="$attrs" />
+  <div />
+</template>
+<script>
+export default {
+  /* ✗ BAD */
+  // inheritAttrs: true (default)
+}
+</script>
 ```
 
 </eslint-code-block>
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-duplicate-attr-inheritance": ["error", {
+    "checkMultiRootNodes": false,
+  }]
+}
+```
+
+- `"checkMultiRootNodes"` ... If `true`, check and warn when there are multiple root nodes. (Default: `false`)
 
 ## :books: Further Reading
 
