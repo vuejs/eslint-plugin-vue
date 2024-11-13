@@ -12,8 +12,8 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule aims to prevent duplicate attribute inheritance.
-This rule to warn to apply `inheritAttrs: false` when it detects `v-bind="$attrs"` being used.
+This rule aims to prevent duplicate attribute inheritance.  
+This rule suggests applying `inheritAttrs: false` when it detects `v-bind="$attrs"` being used.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: false }]}">
 
@@ -57,7 +57,7 @@ export default {
 }
 ```
 
-- `"checkMultiRootNodes"`: If set to `true`, check and warn to apply `inheritAttrs: false` whenever it detects `v-bind="$attrs"` being used. Default is `false`, will ignore the components with multiple root nodes, because Vue encourages adding `v-bind="$attrs"` in this case to prevent runtime warnings. See [attribute inheritance on multiple root nodes](https://vuejs.org/guide/components/attrs.html#attribute-inheritance-on-multiple-root-nodes) for more.
+- `"checkMultiRootNodes"`: If set to `true`, also suggest applying `inheritAttrs: false` to components with multiple root nodes (where `inheritAttrs: false` is the implicit default, see [attribute inheritance on multiple root nodes](https://vuejs.org/guide/components/attrs.html#attribute-inheritance-on-multiple-root-nodes)), whenever it detects `v-bind="$attrs"` being used. Default is `false`, which will ignore components with multiple root nodes.
 
 ### `"checkMultiRootNodes": true`
 
