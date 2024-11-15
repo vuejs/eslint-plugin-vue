@@ -318,6 +318,25 @@ tester.run('prefer-use-template-ref', rule, {
           column: 28
         }
       ]
+    },
+    {
+      filename: 'single-shallowRef.vue',
+      code: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { shallowRef } from 'vue';
+        const root = shallowRef();
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          line: 7,
+          column: 22
+        }
+      ]
     }
   ]
 })
