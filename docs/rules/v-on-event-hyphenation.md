@@ -39,14 +39,16 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 {
   "vue/v-on-event-hyphenation": ["error", "always" | "never", {
     "autofix": false,
-    "ignore": []
+    "ignore": [],
+    "exclude": []
   }]
 }
 ```
 
 - `"always"` (default) ... Use hyphenated name.
 - `"never"` ... Don't use hyphenated name.
-- `"ignore"` ... Array of ignored names
+- `"ignore"` ... Array of ignored names.
+- `"exclude"` ... Array of exclude tag names.
 - `"autofix"` ... If `true`, enable autofix. If you are using Vue 2, we recommend that you do not use it due to its side effects.
 
 ### `"always"`
@@ -99,6 +101,24 @@ Don't use hyphenated name but allow custom event names
 
   <!-- ✗ BAD -->
   <MyComponent v-on:my-event="handleEvent" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"never", { "exclude": ["/^custom-/"] }`
+
+Exclude tags from applying this rule.
+
+<eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { exclude: ['/^custom-/'], autofix: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <custom-component v-on:custom-event="handleEvent" />
+
+  <!-- ✗ BAD -->
+  <my-component v-on:custom-event="handleEvent" />
 </template>
 ```
 
