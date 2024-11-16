@@ -13,13 +13,18 @@ description: enforce consistency in component names
 
 ## :book: Rule Details
 
-This rule ....
+This rule enforces consistency in component names.
 
-<eslint-code-block :rules="{'vue/valid-component-name': ['error']}">
+<eslint-code-block :rules="{ 'vue/valid-component-name': ['error'] }">
 
 ```vue
 <template>
+  <!-- ✓ GOOD -->
+  <button/>
+  <keep-alive></keep-alive>
 
+  <!-- ✗ BAD -->
+  <custom-component />
 </template>
 ```
 
@@ -27,7 +32,29 @@ This rule ....
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/valid-component-name": ["error", { 
+    "allow": []
+  }]
+}
+```
+
+### `"allow"`
+
+<eslint-code-block :rules="{'vue/valid-component-name': ['error', { 'allow': ['/^custom-/'] }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <custom-component />
+
+  <!-- ✗ BAD -->
+  <my-component />
+</template>
+```
+
+</eslint-code-block>
 
 ## :mag: Implementation
 
