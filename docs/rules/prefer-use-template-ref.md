@@ -2,20 +2,20 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-use-template-ref
-description: require using `useTemplateRef` instead of `ref/shallowRef` for template refs
+description: require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs
 since: v9.31.0
 ---
 
 # vue/prefer-use-template-ref
 
-> require using `useTemplateRef` instead of `ref/shallowRef` for template refs
+> require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs
 
 ## :book: Rule Details
 
 Vue 3.5 introduced a new way of obtaining template refs via
 the [`useTemplateRef()`](https://vuejs.org/guide/essentials/template-refs.html#accessing-the-refs) API.
 
-This rule enforces using the new `useTemplateRef` function instead of `ref/shallowRef` for template refs.
+This rule enforces using the new `useTemplateRef` function instead of `ref`/`shallowRef` for template refs.
 
 <eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 

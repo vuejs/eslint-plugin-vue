@@ -270,7 +270,7 @@ For example:
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
-| [vue/prefer-use-template-ref](./prefer-use-template-ref.md) | require using `useTemplateRef` instead of `ref` for template refs |  | :hammer: |
+| [vue/prefer-use-template-ref](./prefer-use-template-ref.md) | require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs |  | :hammer: |
 | [vue/require-default-export](./require-default-export.md) | require components to be the default export |  | :warning: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
