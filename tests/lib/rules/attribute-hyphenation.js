@@ -85,6 +85,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><custom :myName.sync="prop"></custom></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <VueComponent my-prop></VueComponent>
+        <custom-component my-prop></custom-component>
+      </template>
+      `,
+      options: ['never', { exclude: ['VueComponent', '/^custom-/'] }]
     }
   ],
 
@@ -448,6 +458,28 @@ ruleTester.run('attribute-hyphenation', rule, {
           message: "Attribute ':my-age.sync' can't be hyphenated.",
           type: 'VDirectiveKey',
           line: 1
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <custom my-prop/>
+        <CustomComponent my-prop/>
+      </template>
+      `,
+      output: `
+      <template>
+        <custom myProp/>
+        <CustomComponent my-prop/>
+      </template>
+      `,
+      options: ['never', { exclude: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "Attribute 'my-prop' can't be hyphenated.",
+          type: 'VIdentifier',
+          line: 3
         }
       ]
     }

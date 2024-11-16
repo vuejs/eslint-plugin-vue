@@ -44,6 +44,23 @@ tester.run('v-on-event-hyphenation', rule, {
       </template>
       `,
       options: ['never', { ignore: ['custom'] }]
+    },
+    {
+      code: `
+      <template>
+          <VueComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { ignore: ['custom-event'] }]
+    },
+    {
+      code: `
+      <template>
+          <VueComponent v-on:custom-event="events"/>
+          <custom-component v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { exclude: ['/^Vue/', 'custom-component'] }]
     }
   ],
   invalid: [
@@ -179,6 +196,22 @@ tester.run('v-on-event-hyphenation', rule, {
         "v-on event '@upDate:model-value' can't be hyphenated.",
         "v-on event '@up-date:model-value' can't be hyphenated."
       ]
+    },
+    {
+      code: `
+      <template>
+        <VueComponent v-on:custom-event="events"/>
+        <CustomComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      output: `
+      <template>
+        <VueComponent v-on:customEvent="events"/>
+        <CustomComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { autofix: true, exclude: ['CustomComponent'] }],
+      errors: ["v-on event 'v-on:custom-event' can't be hyphenated."]
     }
   ]
 })
