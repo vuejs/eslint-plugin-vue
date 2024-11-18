@@ -214,6 +214,9 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 7,
           column: 22
         }
@@ -235,6 +238,9 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 9,
           column: 22
         }
@@ -256,11 +262,17 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 8,
           column: 25
         },
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 9,
           column: 22
         }
@@ -288,6 +300,9 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 14,
           column: 33
         }
@@ -314,8 +329,33 @@ tester.run('prefer-use-template-ref', rule, {
       errors: [
         {
           messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
           line: 12,
           column: 28
+        }
+      ]
+    },
+    {
+      filename: 'single-shallowRef.vue',
+      code: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { shallowRef } from 'vue';
+        const root = shallowRef();
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'shallowRef'
+          },
+          line: 7,
+          column: 22
         }
       ]
     }
