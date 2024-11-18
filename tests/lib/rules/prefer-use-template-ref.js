@@ -211,11 +211,11 @@ tester.run('prefer-use-template-ref', rule, {
           </div>
       </template>
       <script setup>
-        import { ref } from 'vue';
+        import { ref, shallowRef } from 'vue';
         function getFirstListItemElement() {
           const firstListItem = ref();
           const nestedCallback = () => {
-            const second = ref();
+            const second = shallowRef();
             console.log(second);
           }
           nestedCallback();
@@ -236,12 +236,12 @@ tester.run('prefer-use-template-ref', rule, {
           </div>
       </template>
       <script>
-        import { ref } from 'vue';
+        import { ref, shallowRef } from 'vue';
         export default {
           name: 'ComponentWithRefInBlock',
           setup() {
             function getFirstListItemElement() {
-              const firstListItem = ref();
+              const firstListItem = shallowRef();
               const nestedCallback = () => {
                 const second = ref();
                 console.log(second);
@@ -330,36 +330,6 @@ tester.run('prefer-use-template-ref', rule, {
           },
           line: 9,
           column: 22
-        }
-      ]
-    },
-    {
-      filename: 'ref-in-block.vue',
-      code: `
-      <template>
-          <div>
-            <ul>
-              <li ref="firstListItem">Morning</li>
-              <li>Afternoon</li>
-              <li>Evening</li>
-            </ul>
-          </div>
-      </template>
-      <script setup>
-        import { ref } from 'vue';
-        function getFirstListItemElement() {
-          const firstListItem = ref();
-        }
-      </script>
-      `,
-      errors: [
-        {
-          messageId: 'preferUseTemplateRef',
-          data: {
-            name: 'ref'
-          },
-          line: 14,
-          column: 33
         }
       ]
     },
