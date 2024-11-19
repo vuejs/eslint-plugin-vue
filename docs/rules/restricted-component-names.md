@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/restricted-component-names
-description: enforce consistency in component names
+description: enforce using only specific in component names
 ---
 
 # vue/restricted-component-names
 
-> enforce consistency in component names
+> enforce using only specific in component names
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
