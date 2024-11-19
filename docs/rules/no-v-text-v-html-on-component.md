@@ -51,7 +51,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 ```
 
 - `allow` (`string[]`) ... Specify a list of custom components for which the rule should not apply.
-- `ignoreElementNamespaces` (`boolean`) ... Specify whether to ignore the namespace restrictions for SVG and MathML elements, so that the rule should not apply. Default is `false`.
+- `ignoreElementNamespaces` (`boolean`) ... If `true`, always treat SVG and MathML tag names as HTML elements, even if they are not used inside a SVG/MathML root element. Default is `false`.
 
 ### `{ "allow": ["router-link", "nuxt-link"] }`
 
