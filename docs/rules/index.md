@@ -281,13 +281,13 @@ For example:
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
 | [vue/require-typed-object-prop](./require-typed-object-prop.md) | enforce adding type declarations to object props | :bulb: | :hammer: |
 | [vue/require-typed-ref](./require-typed-ref.md) | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
+| [vue/restricted-component-names](./restricted-component-names.md) | enforce consistency in component names |  | :warning: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key](./v-if-else-key.md) | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style](./v-on-handler-style.md) | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
-| [vue/valid-component-name](./valid-component-name.md) | enforce consistency in component names |  | :warning: |
 | [vue/valid-define-options](./valid-define-options.md) | enforce valid `defineOptions` compiler macro |  | :warning: |
 
 </rules-table>

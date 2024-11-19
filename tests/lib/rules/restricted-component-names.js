@@ -5,7 +5,7 @@
 'use strict'
 
 const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/valid-component-name')
+const rule = require('../../../lib/rules/restricted-component-names')
 
 const tester = new RuleTester({
   languageOptions: {
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('valid-component-name', rule, {
+tester.run('restricted-component-names', rule, {
   valid: [
     '<template><keep-alive></keep-alive></template>',
     '<template><button/></template>',

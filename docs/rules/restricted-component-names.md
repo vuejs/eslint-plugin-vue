@@ -1,11 +1,11 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/valid-component-name
+title: vue/restricted-component-names
 description: enforce consistency in component names
 ---
 
-# vue/valid-component-name
+# vue/restricted-component-names
 
 > enforce consistency in component names
 
@@ -15,7 +15,7 @@ description: enforce consistency in component names
 
 This rule enforces consistency in component names.
 
-<eslint-code-block :rules="{ 'vue/valid-component-name': ['error'] }">
+<eslint-code-block :rules="{ 'vue/restricted-component-names': ['error'] }">
 
 ```vue
 <template>
@@ -34,7 +34,7 @@ This rule enforces consistency in component names.
 
 ```json
 {
-  "vue/valid-component-name": ["error", { 
+  "vue/restricted-component-names": ["error", { 
     "allow": []
   }]
 }
@@ -42,7 +42,7 @@ This rule enforces consistency in component names.
 
 ### `"allow"`
 
-<eslint-code-block :rules="{'vue/valid-component-name': ['error', { 'allow': ['/^custom-/'] }]}">
+<eslint-code-block :rules="{'vue/restricted-component-names': ['error', { 'allow': ['/^custom-/'] }]}">
 
 ```vue
 <template>
@@ -56,7 +56,11 @@ This rule enforces consistency in component names.
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-restricted-component-names](./no-restricted-component-names.md)
+
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-component-name.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-component-name.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/restricted-component-names.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/restricted-component-names.js)
