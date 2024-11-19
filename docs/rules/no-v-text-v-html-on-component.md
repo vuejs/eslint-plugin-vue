@@ -77,8 +77,8 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <g v-text="content" /> <!-- <svg> -->
-  <mi v-text="content" /> <!-- <math> -->
+  <g v-text="content" /> <!-- SVG element not inside of <svg> -->
+  <mi v-text="content" /> <!-- MathML element not inside of <math> -->
 </template>
 ```
 
