@@ -60,7 +60,7 @@ tester.run('v-on-event-hyphenation', rule, {
           <custom-component v-on:custom-event="events"/>
       </template>
       `,
-      options: ['never', { exclude: ['/^Vue/', 'custom-component'] }]
+      options: ['never', { ignoreTags: ['/^Vue/', 'custom-component'] }]
     }
   ],
   invalid: [
@@ -210,8 +210,14 @@ tester.run('v-on-event-hyphenation', rule, {
         <CustomComponent v-on:custom-event="events"/>
       </template>
       `,
-      options: ['never', { autofix: true, exclude: ['CustomComponent'] }],
-      errors: ["v-on event 'v-on:custom-event' can't be hyphenated."]
+      options: ['never', { autofix: true, ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "v-on event 'v-on:custom-event' can't be hyphenated.",
+          line: 3,
+          column: 23
+        }
+      ]
     }
   ]
 })

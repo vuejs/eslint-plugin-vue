@@ -94,7 +94,7 @@ ruleTester.run('attribute-hyphenation', rule, {
         <custom-component my-prop></custom-component>
       </template>
       `,
-      options: ['never', { exclude: ['VueComponent', '/^custom-/'] }]
+      options: ['never', { ignoreTags: ['VueComponent', '/^custom-/'] }]
     }
   ],
 
@@ -474,12 +474,13 @@ ruleTester.run('attribute-hyphenation', rule, {
         <CustomComponent my-prop/>
       </template>
       `,
-      options: ['never', { exclude: ['CustomComponent'] }],
+      options: ['never', { ignoreTags: ['CustomComponent'] }],
       errors: [
         {
           message: "Attribute 'my-prop' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 3
+          line: 3,
+          column: 17
         }
       ]
     }

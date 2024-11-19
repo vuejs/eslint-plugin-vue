@@ -37,7 +37,7 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 {
   "vue/attribute-hyphenation": ["error", "always" | "never", {
     "ignore": [],
-    "exclude": []
+    "ignoreTags": []
   }]
 }
 ```
@@ -48,7 +48,7 @@ and all the [SVG attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/At
 - `"always"` (default) ... Use hyphenated name.
 - `"never"` ... Don't use hyphenated name except the ones that are ignored.
 - `"ignore"` ... Array of ignored names.
-- `"exclude"` ... Array of exclude tag names.
+- `"ignoreTags"` ... Array of exclude tag names.
 
 ### `"always"`
 
@@ -111,11 +111,11 @@ Don't use hyphenated name but allow custom attributes
 
 </eslint-code-block>
 
-### `"never", { "exclude": ["/^custom-/"] }`
+### `"never", { "ignoreTags": ["/^custom-/"] }`
 
-Exclude tags from applying this rule.
+Ignore tags from applying this rule.
 
-<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { exclude: ['/^custom-/'] }]}">
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'] }]}">
 
 ```vue
 <template>
