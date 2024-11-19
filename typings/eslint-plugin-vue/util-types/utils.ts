@@ -42,8 +42,8 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefineEmitsExit?(node: CallExpression, emits: ComponentEmit[]): void
   onDefineOptionsEnter?(node: CallExpression): void
   onDefineOptionsExit?(node: CallExpression): void
-  onDefineSlotsEnter?(node: CallExpression): void
-  onDefineSlotsExit?(node: CallExpression): void
+  onDefineSlotsEnter?(node: CallExpression, slots: ComponentSlot[]): void
+  onDefineSlotsExit?(node: CallExpression, slots: ComponentSlot[]): void
   onDefineExposeEnter?(node: CallExpression): void
   onDefineExposeExit?(node: CallExpression): void
   onDefineModelEnter?(node: CallExpression, model: ComponentModel): void
@@ -52,6 +52,7 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
     | ((node: CallExpression, emits: ComponentEmit[]) => void)
+    | ((node: CallExpression, slots: ComponentSlot[]) => void)
     | ((node: CallExpression, model: ComponentModel) => void)
     | undefined
 }
@@ -190,6 +191,66 @@ export type ComponentEmit =
   | ComponentTypeEmit
   | ComponentInferTypeEmit
   | ComponentUnknownEmit
+
+type ComponentArraySlotDetectName = {
+  type: 'array'
+  key: Literal | TemplateLiteral
+  slotName: string
+  node: Expression | SpreadElement
+}
+type ComponentArraySlotUnknownName = {
+  type: 'array'
+  key: null
+  slotName: null
+  node: Expression | SpreadElement
+}
+export type ComponentArraySlot =
+  | ComponentArraySlotDetectName
+  | ComponentArraySlotUnknownName
+
+type ComponentObjectSlotDetectName = {
+  type: 'object'
+  key: Expression
+  slotName: string
+  value: Expression
+  node: Property
+}
+type ComponentObjectSlotUnknownName = {
+  type: 'object'
+  key: null
+  slotName: null
+  value: Expression
+  node: Property
+}
+export type ComponentObjectSlot =
+  | ComponentObjectSlotDetectName
+  | ComponentObjectSlotUnknownName
+
+export type ComponentUnknownSlot = {
+  type: 'unknown'
+  slotName: null
+  node: Expression | SpreadElement | TypeNode | null
+}
+
+export type ComponentTypeSlot = {
+  type: 'type'
+  key: Identifier | Literal
+  slotName: string
+  node: TSPropertySignature | TSMethodSignature
+}
+
+export type ComponentInferTypeSlot = {
+  type: 'infer-type'
+  slotName: string
+  node: TypeNode
+}
+
+export type ComponentSlot =
+  | ComponentArraySlot
+  | ComponentObjectSlot
+  | ComponentTypeSlot
+  | ComponentInferTypeSlot
+  | ComponentUnknownSlot
 
 export type ComponentModelName = {
   modelName: string
