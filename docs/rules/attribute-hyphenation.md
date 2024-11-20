@@ -113,8 +113,6 @@ Don't use hyphenated name but allow custom attributes
 
 ### `"never", { "ignoreTags": ["/^custom-/"] }`
 
-Ignore tags from applying this rule.
-
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'] }]}">
 
 ```vue
