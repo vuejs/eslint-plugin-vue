@@ -45,8 +45,8 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 }
 ```
 
-- `"always"` (default) ... Use hyphenated name.
-- `"never"` ... Don't use hyphenated name.
+- `"always"` (default) ... Use hyphenated event name.
+- `"never"` ... Don't use hyphenated event name.
 - `"ignore"` ... Array of ignored names.
 - `"ignoreTags"` ... Array of exclude tag names.
 - `"autofix"` ... If `true`, enable autofix. If you are using Vue 2, we recommend that you do not use it due to its side effects.
