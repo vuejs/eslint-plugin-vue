@@ -47,8 +47,8 @@ and all the [SVG attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/At
 
 - `"always"` (default) ... Use hyphenated attribute name.
 - `"never"` ... Don't use hyphenated attribute name.
-- `"ignore"` ... Array of ignored names.
-- `"ignoreTags"` ... Array of exclude tag names.
+- `"ignore"` ... Array of attribute names that don't need to follow the specified casing.
+- `"ignoreTags"` ... Array of tag names whose attributes don't need to follow the specified casing.
 
 ### `"always"`
 
