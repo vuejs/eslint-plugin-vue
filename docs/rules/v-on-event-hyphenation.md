@@ -108,17 +108,15 @@ Don't use hyphenated name but allow custom event names
 
 ### `"never", { "ignoreTags": ["/^custom-/"] }`
 
-Ignore tags from applying this rule.
-
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'], autofix: true }]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <custom-component v-on:custom-event="handleEvent" />
+  <custom-component v-on:my-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <my-component v-on:custom-event="handleEvent" />
+  <my-component v-on:my-event="handleEvent" />
 </template>
 ```
 
