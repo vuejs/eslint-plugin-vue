@@ -45,8 +45,8 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 Default casing is set to `always`. By default the following attributes are ignored: `data-`, `aria-`, `slot-scope`,
 and all the [SVG attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) with either an upper case letter or an hyphen.
 
-- `"always"` (default) ... Use hyphenated name.
-- `"never"` ... Don't use hyphenated name except the ones that are ignored.
+- `"always"` (default) ... Use hyphenated attribute name.
+- `"never"` ... Don't use hyphenated attribute name.
 - `"ignore"` ... Array of ignored names.
 - `"ignoreTags"` ... Array of exclude tag names.
 
