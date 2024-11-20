@@ -95,6 +95,16 @@ ruleTester.run('attribute-hyphenation', rule, {
       </template>
       `,
       options: ['never', { ignoreTags: ['VueComponent', '/^custom-/'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <VueComponent myProp="prop"></VueComponent>
+        <custom-component myProp="prop"></custom-component>
+      </template>
+      `,
+      options: ['always', { ignoreTags: ['VueComponent', '/^custom-/'] }]
     }
   ],
 
@@ -478,6 +488,29 @@ ruleTester.run('attribute-hyphenation', rule, {
       errors: [
         {
           message: "Attribute 'my-prop' can't be hyphenated.",
+          type: 'VIdentifier',
+          line: 3,
+          column: 17
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <custom myProp/>
+        <CustomComponent myProp/>
+      </template>
+      `,
+      output: `
+      <template>
+        <custom my-prop/>
+        <CustomComponent myProp/>
+      </template>
+      `,
+      options: ['always', { ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "Attribute 'myProp' must be hyphenated.",
           type: 'VIdentifier',
           line: 3,
           column: 17
