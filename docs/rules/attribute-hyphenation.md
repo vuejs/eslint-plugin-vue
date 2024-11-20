@@ -120,10 +120,10 @@ Ignore tags from applying this rule.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <custom-component custom-prop="prop" />
+  <custom-component my-prop="prop" />
 
   <!-- ✗ BAD -->
-  <my-component custom-prop="prop" />
+  <my-component my-prop="prop" />
 </template>
 ```
 
