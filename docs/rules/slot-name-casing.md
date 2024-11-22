@@ -40,9 +40,9 @@ This rule enforce proper casing of slot names in vue components.
 }
 ```
 
-- `"camelCase"` (default) ... Enforce slot name to be camel case.
-- `"kebab-case"` ... Enforce slot name to be kebab case.
-- `"singleword"` ... Enforce slot name to be single word.
+- `"camelCase"` (default) ... Enforce slot name to be in camel case.
+- `"kebab-case"` ... Enforce slot name to be in kebab case.
+- `"singleword"` ... Enforce slot name to be a single word.
 
 ### `"kebab-case"`
 
