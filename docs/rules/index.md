@@ -283,6 +283,7 @@ For example:
 | [vue/require-typed-ref](./require-typed-ref.md) | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
 | [vue/restricted-component-names](./restricted-component-names.md) | enforce using only specific in component names |  | :warning: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
+| [vue/slot-name-casing](./slot-name-casing.md) | enforce specific casing for the slot name |  | :hammer: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |

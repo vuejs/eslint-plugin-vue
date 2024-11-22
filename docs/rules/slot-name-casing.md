@@ -1,0 +1,88 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/slot-name-casing
+description: enforce specific casing for the slot name
+---
+
+# vue/slot-name-casing
+
+> enforce specific casing for the slot name
+
+- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
+
+## :book: Rule Details
+
+This rule enforce proper casing of slot names in vue components.
+
+<eslint-code-block :rules="{'vue/slot-name-casing': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <slot name="foo" />
+  <slot name="fooBar" />
+
+  <!-- ✗ BAD -->
+  <slot name="foo-bar" />
+  <slot name="foo_bar" />
+  <slot name="foo:bar" />
+</template>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/slot-name-casing": ["error", "camelCase" | "kebab-case" | "singleword"]
+}
+```
+
+- `"camelCase"` (default) ... Enforce slot name to be camel case.
+- `"kebab-case"` ... Enforce slot name to be kebab case.
+- `"singleword"` ... Enforce slot name to be single word.
+
+### `"kebab-case"`
+
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'kebab-case']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <slot name="foo" />
+  <slot name="foo-bar" />
+
+  <!-- ✗ BAD -->
+  <slot name="fooBar" />
+  <slot name="foo_bar" />
+  <slot name="foo:bar" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"singleword"`
+
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'singleword']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <slot name="foo" />
+
+  <!-- ✗ BAD -->
+  <slot name="foo-bar" />
+  <slot name="fooBar" />
+  <slot name="foo_bar" />
+  <slot name="foo:bar" />
+</template>
+```
+
+</eslint-code-block>
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/slot-name-casing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/slot-name-casing.js)
