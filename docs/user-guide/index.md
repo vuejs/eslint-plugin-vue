@@ -67,6 +67,44 @@ You can use the following configs by adding them to `eslint.config.js`.
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
 :::
 
+#### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
+
+```bash
+npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals typescript-eslint
+```
+
+```ts
+import eslint from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
+import typescriptEslint from 'typescript-eslint';
+
+export default tseslint.config(
+  { ignores: ['*.d.ts', '**/coverage', '**/dist'] },
+  {
+    extends: [
+      eslint.configs.recommended,
+      ...typescriptEslint.configs.recommended,
+      ...eslintPluginVue.configs['flat/recommended'],
+    ],
+    files: ['**/*.{ts,vue}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.browser,
+      parserOptions: {
+        parser: typescriptEslint.parser,
+      },
+    },
+    rules: {
+      // your rules
+    },
+  },
+  eslintConfigPrettier
+);
+```
+
 ### Configuration (`.eslintrc`)
 
 Use `.eslintrc.*` file to configure rules in ESLint < v9. See also: <https://eslint.org/docs/latest/use/configure/>.
