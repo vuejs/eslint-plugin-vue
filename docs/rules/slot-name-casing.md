@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/slot-name-casing
-description: enforce specific casing for the slot name
+description: enforce specific casing for slot names
 ---
 
 # vue/slot-name-casing
 
-> enforce specific casing for the slot name
+> enforce specific casing for slot names
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
