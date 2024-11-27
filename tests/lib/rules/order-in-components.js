@@ -235,6 +235,84 @@ ruleTester.run('order-in-components', rule, {
       ]
     },
     {
+      filename: 'test.vue',
+      code: `
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        })
+      `,
+      output: `
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "data" property on line 5.',
+          line: 10
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        })
+      `,
+      output: `
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "data" property on line 5.',
+          line: 10
+        }
+      ]
+    },
+    {
       filename: 'test.jsx',
       code: `
         export default {
