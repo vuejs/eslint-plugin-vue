@@ -5,11 +5,11 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-template-shadow')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2018,
     sourceType: 'module'
   }
@@ -155,6 +155,21 @@ ruleTester.run('no-template-shadow', rule, {
       defineProps({k:Number})
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-for="i in 5">
+          <div v-for="i in 5">
+          </div>
+        </div>
+      </template>
+      <script setup>
+      defineProps({i:Number})
+      </script>
+      `,
+      options: [{ allow: ['i'] }]
     }
   ],
 

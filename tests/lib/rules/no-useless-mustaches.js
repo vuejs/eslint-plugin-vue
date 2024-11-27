@@ -3,12 +3,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-useless-mustaches.js')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -179,6 +179,54 @@ tester.run('no-useless-mustaches', rule, {
         backtick \` and dollar $
         \\
       </template>`,
+      errors: [
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        {{ '&lt;' }}
+        {{ '&gt;' }}
+        {{ '&amp;' }}
+        {{ '&#8212;' }}
+      </template>
+      `,
+      output: `
+      <template>
+        &lt;
+        &gt;
+        &amp;
+        &#8212;
+      </template>
+      `,
+      errors: [
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.',
+        'Unexpected mustache interpolation with a string literal value.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        {{ '<' }}
+        {{ '<<' }}
+        {{ 'can be < anywhere' }}
+        {{ '<tag>' }}
+      </template>
+      `,
+      output: `
+      <template>
+        &lt;
+        &lt;&lt;
+        can be &lt; anywhere
+        &lt;tag>
+      </template>
+      `,
       errors: [
         'Unexpected mustache interpolation with a string literal value.',
         'Unexpected mustache interpolation with a string literal value.',

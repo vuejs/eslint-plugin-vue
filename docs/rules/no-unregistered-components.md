@@ -5,6 +5,7 @@ title: vue/no-unregistered-components
 description: disallow using components that are not registered inside templates
 since: v7.0.0
 ---
+
 # vue/no-unregistered-components
 
 > disallow using components that are not registered inside templates
@@ -37,19 +38,19 @@ are ignored by default.
 </template>
 
 <script>
-  import TheButton from 'components/TheButton.vue'
-  import TheModal from 'components/TheModal.vue'
-  import TheInput from 'components/TheInput.vue'
-  import TheDropdown from 'components/TheDropdown.vue'
+import TheButton from 'components/TheButton.vue'
+import TheModal from 'components/TheModal.vue'
+import TheInput from 'components/TheInput.vue'
+import TheDropdown from 'components/TheDropdown.vue'
 
-  export default {
-    components: {
-      TheButton,
-      TheModal,
-      TheInput,
-      TheDropdown,
-    }
+export default {
+  components: {
+    TheButton,
+    TheModal,
+    TheInput,
+    TheDropdown,
   }
+}
 </script>
 ```
 
@@ -67,11 +68,9 @@ are ignored by default.
 </template>
 
 <script>
-  export default {
-    components: {
-
-    }
-  }
+export default {
+  components: {}
+}
 </script>
 ```
 
@@ -103,11 +102,9 @@ are ignored by default.
 </template>
 
 <script>
-  export default {
-    components: {
-
-    },
-  }
+export default {
+  components: {}
+}
 </script>
 ```
 
@@ -125,11 +122,9 @@ are ignored by default.
 </template>
 
 <script>
-  export default {
-    components: {
-
-    },
-  }
+export default {
+  components: {}
+}
 </script>
 ```
 

@@ -5,6 +5,7 @@ title: vue/padding-line-between-tags
 description: require or disallow newlines between sibling tags in template
 since: v9.5.0
 ---
+
 # vue/padding-line-between-tags
 
 > require or disallow newlines between sibling tags in template

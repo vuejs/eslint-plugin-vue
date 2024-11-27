@@ -5,6 +5,7 @@ title: vue/define-props-declaration
 description: enforce declaration style of `defineProps`
 since: v9.5.0
 ---
+
 # vue/define-props-declaration
 
 > enforce declaration style of `defineProps`
@@ -21,7 +22,7 @@ This rule only works in setup script and `lang="ts"`.
 <script setup lang="ts">
 /* ✓ GOOD */
 const props = defineProps<{
-  kind: string,
+  kind: string
   options: { title: string }
 }>()
 
@@ -46,7 +47,7 @@ const props = defineProps({
 
 ### `"runtime"`
 
-<eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
+<eslint-code-block :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
 
 ```vue
 <script setup lang="ts">
@@ -58,7 +59,7 @@ const props = defineProps({
 
 /* ✗ BAD */
 const props = defineProps<{
-  kind: string,
+  kind: string
   options: { title: string }
 }>()
 </script>

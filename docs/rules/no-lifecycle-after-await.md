@@ -5,11 +5,12 @@ title: vue/no-lifecycle-after-await
 description: disallow asynchronously registered lifecycle hooks
 since: v7.0.0
 ---
+
 # vue/no-lifecycle-after-await
 
 > disallow asynchronously registered lifecycle hooks
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 ## :book: Rule Details
 

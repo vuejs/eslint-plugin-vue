@@ -5,6 +5,7 @@ title: vue/require-expose
 description: require declare public properties using `expose`
 since: v7.14.0
 ---
+
 # vue/require-expose
 
 > require declare public properties using `expose`

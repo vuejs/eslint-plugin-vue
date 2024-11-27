@@ -5,11 +5,12 @@ title: vue/require-v-for-key
 description: require `v-bind:key` with `v-for` directives
 since: v3.0.0
 ---
+
 # vue/require-v-for-key
 
 > require `v-bind:key` with `v-for` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 ## :book: Rule Details
 
@@ -20,12 +21,9 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div
-    v-for="todo in todos"
-    :key="todo.id"
-  />
+  <div v-for="todo in todos" :key="todo.id" />
   <!-- ✗ BAD -->
-  <div v-for="todo in todos"/>
+  <div v-for="todo in todos" />
 </template>
 ```
 
@@ -43,8 +41,10 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/valid-v-for]
+- [vue/v-if-else-key]
 
 [vue/valid-v-for]: ./valid-v-for.md
+[vue/v-if-else-key]: ./v-if-else-key.md
 
 ## :books: Further Reading
 

@@ -5,11 +5,12 @@ title: vue/no-expose-after-await
 description: disallow asynchronously registered `expose`
 since: v8.1.0
 ---
+
 # vue/no-expose-after-await
 
 > disallow asynchronously registered `expose`
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 ## :book: Rule Details
 

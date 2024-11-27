@@ -3,12 +3,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-empty-component-block')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
 })
 
 tester.run('no-empty-component-block', rule, {
@@ -28,6 +27,7 @@ tester.run('no-empty-component-block', rule, {
   invalid: [
     {
       code: `<template></template>`,
+      output: '',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -36,6 +36,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: `<template> </template>`,
+      output: '',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -45,6 +46,7 @@ tester.run('no-empty-component-block', rule, {
     {
       code: `<template>
 </template>`,
+      output: '',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -53,6 +55,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template />',
+      output: '',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -61,6 +64,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template src="" />',
+      output: '',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -69,6 +73,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template></template><script></script>',
+      output: '<script></script>',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -80,6 +85,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template /><script />',
+      output: '<script />',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -91,6 +97,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template src="" /><script src="" />',
+      output: '<script src="" />',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -102,6 +109,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template></template><script></script><style></style>',
+      output: '<script></script>',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -116,6 +124,7 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template /><script /><style />',
+      output: '<script />',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
@@ -130,10 +139,69 @@ tester.run('no-empty-component-block', rule, {
     },
     {
       code: '<template src="" /><script src="" /><style src="" />',
+      output: '<script src="" />',
       errors: [
         {
           message: '`<template>` is empty. Empty block is not allowed.'
         },
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<style>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    // auto fix with whitespace
+    {
+      code: '<template></template> <script></script> <style></style>',
+      output: '  ',
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<style>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: '<template /> <script /> <style />',
+      output: '  ',
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<style>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: '<template src="" /> <script src="" /> <style src="" />',
+      output: '  ',
+      errors: [
+        {
+          message: '`<template>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<script>` is empty. Empty block is not allowed.'
+        },
+        {
+          message: '`<style>` is empty. Empty block is not allowed.'
+        }
+      ]
+    },
+    {
+      code: '<template><p></p></template> <script src="" /> <style src="" />',
+      output: '<template><p></p></template>  ',
+      errors: [
         {
           message: '`<script>` is empty. Empty block is not allowed.'
         },

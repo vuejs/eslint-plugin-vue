@@ -5,14 +5,13 @@
 'use strict'
 
 const rule = require('../../../lib/rules/order-in-components')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const ruleTester = new RuleTester()
-
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
+const ruleTester = new RuleTester({ languageOptions })
 
 ruleTester.run('order-in-components', rule, {
   valid: [
@@ -32,7 +31,7 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'example.vue',
@@ -75,21 +74,21 @@ ruleTester.run('order-in-components', rule, {
           renderError,
         };
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default {}
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default 'example-text'
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.jsx',
@@ -103,7 +102,24 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions
+      languageOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          computed: {
+            ...mapStates(['foo'])
+          },
+        }
+      `,
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -118,14 +134,14 @@ ruleTester.run('order-in-components', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
       code: `
         Vue.component('example')
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -141,7 +157,7 @@ ruleTester.run('order-in-components', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -157,14 +173,14 @@ ruleTester.run('order-in-components', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
       code: `
         new Vue()
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'example.vue',
@@ -176,8 +192,7 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -210,7 +225,7 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -335,10 +350,12 @@ ruleTester.run('order-in-components', rule, {
           },
         }
       `,
-      parserOptions: {
+      languageOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
-        ecmaFeatures: { jsx: true }
+        parserOptions: {
+          ecmaFeatures: { jsx: true }
+        }
       },
       errors: [
         {
@@ -384,7 +401,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -419,7 +436,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -456,7 +473,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -493,7 +510,7 @@ ruleTester.run('order-in-components', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -545,7 +562,7 @@ ruleTester.run('order-in-components', rule, {
           },
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -573,7 +590,7 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       options: [{ order: ['data', 'test', 'name'] }],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -602,7 +619,7 @@ ruleTester.run('order-in-components', rule, {
           }
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -631,7 +648,7 @@ ruleTester.run('order-in-components', rule, {
           }/*test*/
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -644,7 +661,7 @@ ruleTester.run('order-in-components', rule, {
       filename: 'example.vue',
       code: `export default {data(){},name:'burger'};`,
       output: `export default {name:'burger',data(){}};`,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -665,12 +682,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: obj.fn(),
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -686,12 +716,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: new MyClass(),
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -707,12 +750,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: i++,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -728,12 +784,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: i = 0,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -749,12 +818,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: template\`\${foo}\`,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -770,12 +852,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          [obj.fn()]: 'test',
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -791,12 +886,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: {test: obj.fn()},
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -812,12 +920,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: [obj.fn(), 1],
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -833,12 +954,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: obj.fn().prop,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -854,12 +988,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: delete obj.prop,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -875,12 +1022,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: fn() + a + b,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -896,12 +1056,25 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: a ? fn() : null,
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -917,12 +1090,61 @@ ruleTester.run('order-in-components', rule, {
         };
       `,
       output: null,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 6
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          name: 'burger',
+          data() {
+          },
+          test: \`test \${fn()} \${a}\`,
+        };
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // side-effects https://github.com/vuejs/eslint-plugin-vue/issues/2418
+      filename: 'example.vue',
+      code: `
+        export default {
+          computed: {
+            ...mapStates(['foo'])
+          },
+          data() {
+          },
+        };
+      `,
+      output: null,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "data" property should be above the "computed" property on line 3.',
+          line: 6,
+          suggestions: [
+            {
+              desc: 'Manually move "data" property above "computed" property on line 3 (might break side effects).',
+              output: `
+        export default {
+          data() {
+          },
+          computed: {
+            ...mapStates(['foo'])
+          },
+        };
+      `
+            }
+          ]
         }
       ]
     },
@@ -945,7 +1167,7 @@ ruleTester.run('order-in-components', rule, {
           test: fn(),
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -991,7 +1213,7 @@ ruleTester.run('order-in-components', rule, {
           testOptionalChaining: a?.b?.c,
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1022,10 +1244,12 @@ ruleTester.run('order-in-components', rule, {
           };
         </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: { ts: require.resolve('@typescript-eslint/parser') }
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: {
+          parser: { ts: require.resolve('@typescript-eslint/parser') }
+        }
       },
       errors: [
         {
@@ -1053,8 +1277,7 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions,
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message:

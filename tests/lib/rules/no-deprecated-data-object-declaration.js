@@ -6,9 +6,9 @@
 
 const rule = require('../../../lib/rules/no-deprecated-data-object-declaration')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -27,7 +27,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }).mount('#app')
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -41,7 +41,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }).mount('#app')
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -55,7 +55,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -68,7 +68,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -77,7 +77,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           ...foo
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -86,7 +86,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           data
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -97,7 +97,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -111,7 +111,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -125,7 +125,7 @@ ruleTester.run('no-deprecated-data-object-declaration', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -150,7 +150,7 @@ return {
 }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -177,7 +177,7 @@ return {
 }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -204,7 +204,7 @@ return {
 }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -231,7 +231,7 @@ return (/*b*/{
 }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -258,7 +258,7 @@ return {
 }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -285,7 +285,7 @@ return {
 }
         }).mount('#app')
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:

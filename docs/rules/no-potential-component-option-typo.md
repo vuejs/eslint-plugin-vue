@@ -5,6 +5,7 @@ title: vue/no-potential-component-option-typo
 description: disallow a potential typo in your component property
 since: v7.0.0
 ---
+
 # vue/no-potential-component-option-typo
 
 > disallow a potential typo in your component property

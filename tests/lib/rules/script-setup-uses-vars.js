@@ -5,24 +5,42 @@
  */
 'use strict'
 
-const eslint = require('eslint')
+const eslint = require('../../eslint-compat')
 const rule = require('../../../lib/rules/script-setup-uses-vars')
-const ruleNoUnusedVars = new (require('eslint').Linter)()
-  .getRules()
-  .get('no-unused-vars')
+const { getCoreRule } = require('../../../lib/utils')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 
 const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 6,
     sourceType: 'module'
+  },
+  plugins: {
+    vue: {
+      rules: {
+        'script-setup-uses-vars': rule
+      }
+    }
   }
 })
 
-const linter = ruleTester.linter || eslint.linter
-linter.defineRule('script-setup-uses-vars', rule)
+ruleTester.run('script-setup-uses-vars', rule, {
+  // Visually check that there are no warnings in the console.
+  valid: [
+    `
+    <script setup>
+      import Foo from './Foo.vue'
+    </script>
 
+    <template>
+      <Foo />
+    </template>
+    `
+  ],
+  invalid: []
+})
 describe('script-setup-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
@@ -30,7 +48,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           // imported components are also directly usable in template
           import Foo from './Foo.vue'
           import { ref } from 'vue'
@@ -52,7 +70,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const msg = 'Hello!'
         </script>
 
@@ -65,7 +83,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import Foo from './Foo.vue'
           import MyComponent from './MyComponent.vue'
         </script>
@@ -81,7 +99,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import Foo from './Foo.vue'
           import Bar from './Bar.vue'
         </script>
@@ -96,7 +114,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import { directive as vClickOutside } from 'v-click-outside'
         </script>
 
@@ -111,7 +129,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import FooPascalCase from './component.vue'
           import BarPascalCase from './component.vue'
           import BazPascalCase from './component.vue'
@@ -128,7 +146,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import fooCamelCase from './component.vue'
           import barCamelCase from './component.vue'
         </script>
@@ -145,7 +163,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const post = await fetch(\`/api/post/1\`).then((r) => r.json())
         </script>
 
@@ -153,7 +171,7 @@ describe('script-setup-uses-vars', () => {
           {{post}}
         </template>
         `,
-        parserOptions: {
+        languageOptions: {
           ecmaVersion: 2022,
           sourceType: 'module'
         }
@@ -164,7 +182,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import {ref} from 'vue'
           const v = ref(null)
         </script>
@@ -180,7 +198,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const color = 'red'
           const font = { size: '2em' }
         </script>
@@ -198,7 +216,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-        /* eslint script-setup-uses-vars: 1 */
+        /* eslint vue/script-setup-uses-vars: 1 */
         import * as Form from './form-components'
         </script>
 
@@ -216,7 +234,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           // imported components are also directly usable in template
           import Foo from './Foo.vue'
           import Bar from './Bar.vue'
@@ -256,7 +274,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           import camelCase from './component.vue'
         </script>
 
@@ -277,7 +295,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           if (a) {
             const msg = 'Hello!'
           }
@@ -298,7 +316,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const i = 42
           const list = [1,2,3]
         </script>
@@ -320,7 +338,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const msg = 'Hello!'
         </script>
 
@@ -341,7 +359,7 @@ describe('script-setup-uses-vars', () => {
         filename: 'test.vue',
         code: `
         <script setup>
-          /* eslint script-setup-uses-vars: 1 */
+          /* eslint vue/script-setup-uses-vars: 1 */
           const color = 'red'
         </script>
 

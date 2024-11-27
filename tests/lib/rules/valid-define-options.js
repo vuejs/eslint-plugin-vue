@@ -4,12 +4,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/valid-define-options')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2015,
+    sourceType: 'module'
+  }
 })
 
 tester.run('valid-define-options', rule, {
@@ -42,8 +45,10 @@ tester.run('valid-define-options', rule, {
       defineOptions({ name: 'foo' as X })
       </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -55,8 +60,10 @@ tester.run('valid-define-options', rule, {
       defineOptions({ name: 'foo' as (typeof str) })
       </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -125,7 +132,9 @@ tester.run('valid-define-options', rule, {
       defineOptions<{ name: 'Foo' }>()
       </script>
       `,
-      parserOptions: { parser: require.resolve('@typescript-eslint/parser') },
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
       errors: [
         {
           message: 'Options are not defined.',

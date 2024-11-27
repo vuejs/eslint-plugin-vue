@@ -5,6 +5,7 @@ title: vue/valid-define-options
 description: enforce valid `defineOptions` compiler macro
 since: v9.13.0
 ---
+
 # vue/valid-define-options
 
 > enforce valid `defineOptions` compiler macro

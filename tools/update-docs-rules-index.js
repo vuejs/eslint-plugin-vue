@@ -9,24 +9,25 @@ const path = require('path')
 const rules = require('./lib/rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
 const removedRules = require('../lib/removed-rules')
+const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
 
 const VUE3_EMOJI = ':three:'
 const VUE2_EMOJI = ':two:'
 
 // -----------------------------------------------------------------------------
 const categorizedRules = rules.filter(
-  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionRule
+  (rule) => rule.meta.docs.categories && !rule.meta.docs.extensionSource
 )
 const uncategorizedRules = rules.filter(
   (rule) =>
     !rule.meta.docs.categories &&
-    !rule.meta.docs.extensionRule &&
+    !rule.meta.docs.extensionSource &&
     !rule.meta.deprecated
 )
 const uncategorizedExtensionRule = rules.filter(
   (rule) =>
     !rule.meta.docs.categories &&
-    rule.meta.docs.extensionRule &&
+    rule.meta.docs.extensionSource &&
     !rule.meta.deprecated
 )
 const deprecatedRules = rules.filter((rule) => rule.meta.deprecated)
@@ -88,19 +89,19 @@ const categoryGroups = [
   {
     title: 'Priority A: Essential (Error Prevention)',
     categoryIdForVue3: 'vue3-essential',
-    categoryIdForVue2: 'essential',
+    categoryIdForVue2: 'vue2-essential',
     useMark: true
   },
   {
     title: 'Priority B: Strongly Recommended (Improving Readability)',
     categoryIdForVue3: 'vue3-strongly-recommended',
-    categoryIdForVue2: 'strongly-recommended',
+    categoryIdForVue2: 'vue2-strongly-recommended',
     useMark: true
   },
   {
     title: 'Priority C: Recommended (Potentially Dangerous Patterns)',
     categoryIdForVue3: 'vue3-recommended',
-    categoryIdForVue2: 'recommended',
+    categoryIdForVue2: 'vue2-recommended',
     useMark: true
   }
 ]
@@ -123,11 +124,11 @@ ${group.description}
 `
     }
     if (group.useMark) {
-      const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+      const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).flatMap(
+        (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
       const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).map(
-        (categoryId) => `\`"plugin:vue/${categoryId}"\``
+        (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
       content += `
 - ${VUE3_EMOJI} Indicates that the rule is for Vue 3 and is included in ${formatItems(

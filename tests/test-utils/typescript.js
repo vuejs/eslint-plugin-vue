@@ -10,17 +10,19 @@ module.exports = {
 }
 
 function getTypeScriptFixtureTestOptions() {
-  const parser = require.resolve('vue-eslint-parser')
-  const parserOptions = {
-    parser: { ts: tsParser },
+  const parser = require('vue-eslint-parser')
+  const languageOptions = {
+    parser,
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: [TSCONFIG_PATH],
-    extraFileExtensions: ['.vue']
+    parserOptions: {
+      parser: { ts: tsParser },
+      project: [TSCONFIG_PATH],
+      extraFileExtensions: ['.vue']
+    }
   }
   return {
-    parser,
-    parserOptions,
+    languageOptions,
     filename: SRC_VUE_TEST_PATH
   }
 }

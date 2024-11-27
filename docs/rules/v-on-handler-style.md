@@ -5,6 +5,7 @@ title: vue/v-on-handler-style
 description: enforce writing style for handlers in `v-on` directives
 since: v9.7.0
 ---
+
 # vue/v-on-handler-style
 
 > enforce writing style for handlers in `v-on` directives

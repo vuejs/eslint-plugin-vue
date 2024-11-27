@@ -5,11 +5,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-deprecated-vue-config-keycodes')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
 
 ruleTester.run('no-deprecated-vue-config-keycodes', rule, {

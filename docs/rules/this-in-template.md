@@ -5,11 +5,12 @@ title: vue/this-in-template
 description: disallow usage of `this` in template
 since: v3.13.0
 ---
+
 # vue/this-in-template
 
 > disallow usage of `this` in template
 
-- :gear: This rule is included in `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -24,7 +25,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="url">
     {{ text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="this.url">
     {{ this.text }}
@@ -55,7 +56,7 @@ This rule aims at preventing usage of `this` in Vue templates.
   <a :href="this.url">
     {{ this.text }}
   </a>
-  
+
   <!-- ✗ BAD -->
   <a :href="url">
     {{ text }}

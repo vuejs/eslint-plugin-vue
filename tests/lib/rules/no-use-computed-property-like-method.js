@@ -3,12 +3,15 @@
  * See LICENSE file in root directory for full license.
  */
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-use-computed-property-like-method')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-use-computed-property-like-method', rule, {
@@ -561,6 +564,78 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `
+    },
+    {
+      // expression may be a function: https://github.com/vuejs/eslint-plugin-vue/issues/2037
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            propsFunction: {
+              type: Function,
+              default: undefined
+            },
+            propsNumber: {
+              type: Number,
+            }
+          },
+          computed: {
+            computedReturnPropsFunction() {
+              return this.propsFunction ? this.propsFunction : this.propsFunctionDefault
+            },
+            computedReturnMaybeFunction() {
+              return this.propsFunction ? this.propsFunction : this.propsNumber
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnPropsFunction
+              this.computedReturnPropsFunction()
+              this.computedReturnMaybeFunction
+              this.computedReturnMaybeFunction()
+            },
+            propsFunctionDefault() {}
+          }
+        }
+      </script>
+      `
+    },
+    {
+      // expression may be a function: https://github.com/vuejs/eslint-plugin-vue/issues/2037
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            propsFunction: {
+              type: Function,
+              default: undefined
+            },
+            propsNumber: {
+              type: Number,
+            }
+          },
+          computed: {
+            computedReturnPropsFunction() {
+              return this.propsFunction || this.propsFunctionDefault
+            },
+            computedReturnMaybeFunction() {
+              return this.propsFunction || this.propsNumber
+            }
+          },
+          methods: {
+            fn() {
+              this.computedReturnPropsFunction
+              this.computedReturnPropsFunction()
+              this.computedReturnMaybeFunction
+              this.computedReturnMaybeFunction()
+            },
+            propsFunctionDefault() {}
+          }
+        }
+      </script>
+      `
     }
   ],
   invalid: [
@@ -1093,6 +1168,42 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: ['Use x instead of x().']
+    },
+    {
+      // expression may be a function: https://github.com/vuejs/eslint-plugin-vue/issues/2037
+      filename: 'test.vue',
+      code: `
+      <script>
+        export default {
+          props: {
+            propsNumber: {
+              type: Number
+            },
+            propsString: {
+              type: String
+            },
+          },
+          computed: {
+            computedReturnNotFunction1() {
+              return this.propsString ? this.propsString : this.propsNumber
+            },
+            computedReturnNotFunction2() {
+              return this.propsString || this.propsNumber
+            },
+          },
+          methods: {
+            fn() {
+              this.computedReturnNotFunction1()
+              this.computedReturnNotFunction2()
+            }
+          }
+        }
+      </script>
+      `,
+      errors: [
+        'Use this.computedReturnNotFunction1 instead of this.computedReturnNotFunction1().',
+        'Use this.computedReturnNotFunction2 instead of this.computedReturnNotFunction2().'
+      ]
     }
   ]
 })

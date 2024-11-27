@@ -5,11 +5,12 @@ title: vue/component-definition-name-casing
 description: enforce specific casing for component definition name
 since: v7.0.0
 ---
+
 # vue/component-definition-name-casing
 
 > enforce specific casing for component definition name
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 Define a style for component definition name casing for consistency purposes.
@@ -63,14 +64,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 
 /* ✗ BAD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 ```
 
 </eslint-code-block>
@@ -107,14 +104,10 @@ export default {
 
 ```js
 /* ✓ GOOD */
-Vue.component('my-component', {
-
-})
+Vue.component('my-component', {})
 
 /* ✗ BAD */
-Vue.component('MyComponent', {
-
-})
+Vue.component('MyComponent', {})
 ```
 
 </eslint-code-block>

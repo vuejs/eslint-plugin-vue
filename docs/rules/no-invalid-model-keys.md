@@ -5,6 +5,7 @@ title: vue/no-invalid-model-keys
 description: require valid keys in model option
 since: v7.9.0
 ---
+
 # vue/no-invalid-model-keys
 
 > require valid keys in model option

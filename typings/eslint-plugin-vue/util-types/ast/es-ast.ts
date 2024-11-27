@@ -522,7 +522,7 @@ export interface CallExpression extends HasParentNode {
   typeArguments?: TS.TSTypeParameterInstantiation
 
   /* @deprecated */
-  typeParameters: never
+  typeParameters?: never
 }
 export interface Super extends HasParentNode {
   type: 'Super'
@@ -534,7 +534,7 @@ export interface NewExpression extends HasParentNode {
   typeArguments?: TSTypeParameterInstantiation
 
   /* @deprecated */
-  typeParameters: never
+  typeParameters?: never
 }
 interface BaseMemberExpression extends HasParentNode {
   type: 'MemberExpression'
@@ -641,7 +641,7 @@ export type AssignmentProperty =
   | AssignmentPropertyComputedName
 export interface ArrayPattern extends HasParentNode {
   type: 'ArrayPattern'
-  elements: Pattern[]
+  elements: (Pattern | null)[]
 }
 export interface RestElement extends HasParentNode {
   type: 'RestElement'

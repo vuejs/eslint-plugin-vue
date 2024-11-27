@@ -5,11 +5,11 @@
 'use strict'
 
 const rule = require('../../../lib/rules/sort-keys')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester()
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -28,7 +28,7 @@ ruleTester.run('sort-keys', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -46,7 +46,7 @@ ruleTester.run('sort-keys', rule, {
           },
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'propsOrder.vue',
@@ -69,21 +69,21 @@ ruleTester.run('sort-keys', rule, {
           },
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default {}
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
       code: `
         export default 'example-text'
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.jsx',
@@ -97,14 +97,14 @@ ruleTester.run('sort-keys', rule, {
           },
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
       code: `
         Vue.component('example')
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -120,7 +120,7 @@ ruleTester.run('sort-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
@@ -136,31 +136,31 @@ ruleTester.run('sort-keys', rule, {
           }
         })
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       filename: 'test.js',
       code: `
         new Vue()
       `,
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     // default (asc)
     {
       code: "var obj = {'':1, [``]:2}",
       options: [],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       code: "var obj = {[``]:1, '':2}",
       options: [],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     { code: "var obj = {'':1, a:2}", options: [] },
     {
       code: 'var obj = {[``]:1, a:2}',
       options: [],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     { code: 'var obj = {_:2, a:1, b:3} // default', options: [] },
     { code: 'var obj = {a:1, b:3, c:2}', options: [] },
@@ -174,92 +174,96 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {a:1, b:3, [a + b]: -1, c:2}',
       options: [],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       code: "var obj = {'':1, [f()]:2, a:3}",
       options: [],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
     {
       code: "var obj = {a:1, [b++]:2, '':3}",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 6 }
+      languageOptions: { ecmaVersion: 6 }
     },
 
     // ignore properties separated by spread properties
     {
       code: 'var obj = {a:1, ...z, b:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {b:1, ...z, a:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {...a, b:1, ...c, d:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {...a, b:1, ...d, ...c, e:2, z:5}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {b:1, ...c, ...d, e:2}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: "var obj = {a:1, ...z, '':2}",
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: "var obj = {'':1, ...z, 'a':2}",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
 
     // not ignore properties not separated by spread properties
     {
       code: 'var obj = {...z, a:1, b:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {...z, ...c, a:1, b:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {a:1, b:1, ...z}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'var obj = {...z, ...x, a:1, ...c, ...d, f:5, e:4}',
       options: ['desc'],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
 
     // works when spread occurs somewhere other than an object literal
     {
       code: 'function fn(...args) { return [...args].length; }',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
     {
       code: 'function g() {}; function f(...args) { return g(...args); }',
       options: [],
-      parserOptions: { ecmaVersion: 2018 }
+      languageOptions: { ecmaVersion: 2018 }
     },
 
     // ignore destructuring patterns.
-    { code: 'let {a, b} = {}', options: [], parserOptions: { ecmaVersion: 6 } },
+    {
+      code: 'let {a, b} = {}',
+      options: [],
+      languageOptions: { ecmaVersion: 6 }
+    },
 
     // nested
     { code: 'var obj = {a:1, b:{x:1, y:1}, c:1}', options: [] },
@@ -519,7 +523,7 @@ ruleTester.run('sort-keys', rule, {
     },
     {
       code: 'var obj = {a:1, [``]:2} // default',
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. '' should be before 'a'."
       ]
@@ -571,7 +575,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, c:1, b:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
       ]
@@ -579,7 +583,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, ...c, d:4, b:1, ...y, ...f, e:2, a:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'd'.",
         "Expected object keys to be in ascending order. 'a' should be before 'e'."
@@ -588,7 +592,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {c:1, b:1, ...a}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
       ]
@@ -596,7 +600,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, ...a, c:1, b:1}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'b' should be before 'c'."
       ]
@@ -604,7 +608,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, b:1, a:1, ...d, ...c}',
       options: [],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in ascending order. 'a' should be before 'b'."
       ]
@@ -612,7 +616,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, a:2, b:0, ...x, ...c}',
       options: ['desc'],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'b' should be before 'a'."
       ]
@@ -620,7 +624,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {...z, a:2, b:0, ...x}',
       options: ['desc'],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'b' should be before 'a'."
       ]
@@ -628,7 +632,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: "var obj = {...z, '':1, a:2}",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 2018 },
+      languageOptions: { ecmaVersion: 2018 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
       ]
@@ -637,7 +641,7 @@ ruleTester.run('sort-keys', rule, {
     // ignore non-simple computed properties, but their position shouldn't affect other comparisons.
     {
       code: "var obj = {a:1, [b+c]:2, '':3}",
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. '' should be before 'a'."
       ]
@@ -645,7 +649,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: "var obj = {'':1, [b+c]:2, a:3}",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
       ]
@@ -653,7 +657,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: "var obj = {b:1, [f()]:2, '':3, a:4}",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
       ]
@@ -662,7 +666,7 @@ ruleTester.run('sort-keys', rule, {
     // not ignore simple computed properties.
     {
       code: 'var obj = {a:1, b:3, [a]: -1, c:2}',
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in ascending order. 'a' should be before 'b'."
       ]
@@ -914,7 +918,7 @@ ruleTester.run('sort-keys', rule, {
     {
       code: "var obj = {[``]:1, a:'2'} // desc",
       options: ['desc'],
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         "Expected object keys to be in descending order. 'a' should be before ''."
       ]
@@ -1189,7 +1193,7 @@ ruleTester.run('sort-keys', rule, {
           },
         }
       `,
-      parserOptions,
+      languageOptions,
 
       errors: [
         {
@@ -1224,7 +1228,7 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1257,7 +1261,7 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1286,7 +1290,7 @@ ruleTester.run('sort-keys', rule, {
           name: 'burger',
         };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1315,7 +1319,7 @@ ruleTester.run('sort-keys', rule, {
 
         const dict = { zd: 1, a: 2 };
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1346,7 +1350,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1377,7 +1381,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1408,7 +1412,7 @@ ruleTester.run('sort-keys', rule, {
           template: '<div></div>'
         })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message:
@@ -1436,7 +1440,7 @@ ruleTester.run('sort-keys', rule, {
         }
       `,
       options: ['asc', { ignoreGrandchildrenOf: [] }],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1459,7 +1463,7 @@ ruleTester.run('sort-keys', rule, {
           a: 2
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1487,7 +1491,7 @@ ruleTester.run('sort-keys', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:

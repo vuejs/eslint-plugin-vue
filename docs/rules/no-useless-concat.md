@@ -5,6 +5,7 @@ title: vue/no-useless-concat
 description: Disallow unnecessary concatenation of literals or template literals in `<template>`
 since: v7.0.0
 ---
+
 # vue/no-useless-concat
 
 > Disallow unnecessary concatenation of literals or template literals in `<template>`

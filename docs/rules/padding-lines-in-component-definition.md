@@ -5,6 +5,7 @@ title: vue/padding-lines-in-component-definition
 description: require or disallow padding lines in component definition
 since: v9.9.0
 ---
+
 # vue/padding-lines-in-component-definition
 
 > require or disallow padding lines in component definition
@@ -68,21 +69,21 @@ export default {
 {
   "vue/padding-lines-in-component-definition": ["error", {
     "betweenOptions": "always" | "never",
-    
-    "withinOption": { 
+
+    "withinOption": {
       "props": {
         "betweenItems": "always" | "never" | "ignore",
         "withinEach": "always" | "never" | "ignore",
       } | "always" | "never" | "ignore", // shortcut to set both
-      
+
       "data": {
         "betweenItems": "always" | "never" | "ignore",
         "withinEach": "always" | "never" | "ignore",
       } | "always" | "never" | "ignore" // shortcut to set both
-        
+
       // ... all options
     } | "always" | "never" | "ignore",
-    
+
     "groupSingleLineProperties": true | false
   }]
 }
@@ -104,14 +105,14 @@ export default {
 export default {
   name: 'GroupSingleLineProperties',
   inheritAttrs: false,
-  
+
   props: {
     modelValue: {
       type: String,
       default: '',
     },
   },
-  
+
   data() {
     return {
       count: 0,
@@ -135,18 +136,18 @@ export default {
       type: String,
       default: '',
     },
-    
+
     isActive: {
       type: Boolean,
       default: false,
     },
   },
-  
+
   customOption: {
     foo: () => {
       return 'foo'
     },
-    
+
     bar: () => {
       return 'bar'
     }

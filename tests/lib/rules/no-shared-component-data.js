@@ -6,9 +6,9 @@
 
 const rule = require('../../../lib/rules/no-shared-component-data')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -27,7 +27,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -41,7 +41,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.js',
@@ -64,7 +64,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -77,7 +77,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -86,7 +86,7 @@ ruleTester.run('no-shared-component-data', rule, {
           ...foo
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -95,7 +95,7 @@ ruleTester.run('no-shared-component-data', rule, {
           data
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -106,7 +106,7 @@ ruleTester.run('no-shared-component-data', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     }
   ],
 
@@ -129,7 +129,7 @@ return {
 }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
@@ -155,7 +155,7 @@ return {
 }
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
@@ -181,7 +181,7 @@ return {
 }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',
@@ -207,7 +207,7 @@ return (/*b*/{
 }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: '`data` property in component must be a function.',

@@ -6,13 +6,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/html-closing-bracket-newline')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    ecmaVersion: 2015
-  }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
 tester.run('html-closing-bracket-newline', rule, {
@@ -113,6 +110,42 @@ tester.run('html-closing-bracket-newline', rule, {
         {
           singleline: 'always',
           multiline: 'never'
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp
+            :foo="foo"
+          />
+          <MyComp :foo="foo" />
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'never',
+            multiline: 'always'
+          }
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp :foo="foo"
+          />
+          <MyComp
+            :foo="foo" />
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'always',
+            multiline: 'never'
+          }
         }
       ]
     },
@@ -478,6 +511,106 @@ tester.run('html-closing-bracket-newline', rule, {
           column: 23,
           endColumn: 23
         }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp
+          />
+        </template>
+      `,
+      output: `
+        <template>
+          <MyComp/>
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'never',
+            multiline: 'always'
+          }
+        }
+      ],
+      errors: [
+        'Expected no line breaks before closing bracket, but 1 line break found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp
+            :foo="foo"/>
+        </template>
+      `,
+      output: `
+        <template>
+          <MyComp
+            :foo="foo"
+/>
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'never',
+            multiline: 'always'
+          }
+        }
+      ],
+      errors: [
+        'Expected 1 line break before closing bracket, but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp :foo="foo"/>
+        </template>
+      `,
+      output: `
+        <template>
+          <MyComp :foo="foo"
+/>
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'always',
+            multiline: 'never'
+          }
+        }
+      ],
+      errors: [
+        'Expected 1 line break before closing bracket, but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <MyComp
+            :foo="foo"
+          />
+        </template>
+      `,
+      output: `
+        <template>
+          <MyComp
+            :foo="foo"/>
+        </template>
+      `,
+      options: [
+        {
+          selfClosingTag: {
+            singleline: 'always',
+            multiline: 'never'
+          }
+        }
+      ],
+      errors: [
+        'Expected no line breaks before closing bracket, but 1 line break found.'
       ]
     }
   ]

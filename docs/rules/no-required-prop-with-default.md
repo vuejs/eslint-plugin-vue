@@ -5,6 +5,7 @@ title: vue/no-required-prop-with-default
 description: enforce props with default values to be optional
 since: v9.6.0
 ---
+
 # vue/no-required-prop-with-default
 
 > enforce props with default values to be optional
@@ -22,27 +23,27 @@ This rule enforces all props with default values to be optional.
 
 ```vue
 <script setup lang="ts">
-  /* ✓ GOOD */
-  const props = withDefaults(
-    defineProps<{
-      name?: string | number
-      age?: number
-    }>(),
-    {
-      name: "Foo",
-    }
-  );
+/* ✓ GOOD */
+const props = withDefaults(
+  defineProps<{
+    name?: string | number
+    age?: number
+  }>(),
+  {
+    name: 'Foo',
+  }
+);
 
-  /* ✗ BAD */
-  const props = withDefaults(
-    defineProps<{
-      name: string | number
-      age?: number
-    }>(),
-    {
-      name: "Foo",
-    }
-  );
+/* ✗ BAD */
+const props = withDefaults(
+  defineProps<{
+    name: string | number
+    age?: number
+  }>(),
+  {
+    name: 'Foo',
+  }
+);
 </script>
 ```
 
@@ -52,23 +53,23 @@ This rule enforces all props with default values to be optional.
 
 ```vue
 <script>
-  export default {
-    props: {
-      /* ✓ GOOD */
-      foo: {
-        required: false,
-        default: 'Hello'
-      },
-      bar: {
-        required: true
-      },
-      /* ✗ BAD */
-      baz: {
-        required: true,
-        default: 'Hello'
-      },
+export default {
+  props: {
+    /* ✓ GOOD */
+    foo: {
+      required: false,
+      default: 'Hello'
     },
-  }
+    bar: {
+      required: true
+    },
+    /* ✗ BAD */
+    baz: {
+      required: true,
+      default: 'Hello'
+    },
+  },
+}
 </script>
 ```
 

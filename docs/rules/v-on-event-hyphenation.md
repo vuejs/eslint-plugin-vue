@@ -5,11 +5,12 @@ title: vue/v-on-event-hyphenation
 description: enforce v-on event naming style on custom components in template
 since: v7.4.0
 ---
+
 # vue/v-on-event-hyphenation
 
 > enforce v-on event naming style on custom components in template
 
-- :gear: This rule is included in `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -21,12 +22,12 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent @custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent @custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
-  <MyComponent @customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
+  <MyComponent @customEvent="handleEvent" />
 </template>
 ```
 
@@ -38,14 +39,16 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 {
   "vue/v-on-event-hyphenation": ["error", "always" | "never", {
     "autofix": false,
-    "ignore": []
+    "ignore": [],
+    "ignoreTags": []
   }]
 }
 ```
 
-- `"always"` (default) ... Use hyphenated name.
-- `"never"` ... Don't use hyphenated name.
-- `"ignore"` ... Array of ignored names
+- `"always"` (default) ... Use hyphenated event name.
+- `"never"` ... Don't use hyphenated event name.
+- `"ignore"` ... Array of event names that don't need to follow the specified casing.
+- `"ignoreTags"` ... Array of tag names whose events don't need to follow the specified casing.
 - `"autofix"` ... If `true`, enable autofix. If you are using Vue 2, we recommend that you do not use it due to its side effects.
 
 ### `"always"`
@@ -57,10 +60,10 @@ It errors on upper case letters.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 </template>
 ```
 
@@ -75,10 +78,10 @@ It errors on hyphens.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:customEvent="handleEvent"/>
+  <MyComponent v-on:customEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
 </template>
 ```
 
@@ -93,11 +96,27 @@ Don't use hyphenated name but allow custom event names
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <MyComponent v-on:custom-event="handleEvent"/>
-  <MyComponent v-on:myEvent="handleEvent"/>
+  <MyComponent v-on:custom-event="handleEvent" />
+  <MyComponent v-on:myEvent="handleEvent" />
 
   <!-- ✗ BAD -->
-  <MyComponent v-on:my-event="handleEvent"/>
+  <MyComponent v-on:my-event="handleEvent" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"never", { "ignoreTags": ["/^custom-/"] }`
+
+<eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'], autofix: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <custom-component v-on:my-event="handleEvent" />
+
+  <!-- ✗ BAD -->
+  <my-component v-on:my-event="handleEvent" />
 </template>
 ```
 

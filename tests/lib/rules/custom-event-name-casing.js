@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/custom-event-name-casing')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -329,6 +329,22 @@ tester.run('custom-event-name-casing', rule, {
       </script>
       `,
       options: ['kebab-case']
+    },
+    // setup defineEmits
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits({})
+      emit('foo-bar')
+      </script>
+
+      <template>
+      <button @click="emit('foo-bar')">Foo</button>
+      <button @click="$emit('foo-bar')">Foo</button>
+      </template>
+      `,
+      options: ['kebab-case']
     }
   ],
   invalid: [
@@ -578,37 +594,6 @@ tester.run('custom-event-name-casing', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-        <input
-          @click="$emit('fooBar')">
-      </template>
-      <script>
-      export default {
-        setup(props, context) {
-          return {
-            onInput(value) {
-              context.emit('barBaz')
-            }
-          }
-        },
-        methods: {
-          onClick() {
-            this.$emit('bazQux')
-          }
-        }
-      }
-      </script>
-      `,
-      options: ['kebab-case'],
-      errors: [
-        "Custom event name 'fooBar' must be kebab-case.",
-        "Custom event name 'barBaz' must be kebab-case.",
-        "Custom event name 'bazQux' must be kebab-case."
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
       <script setup>
       const emit = defineEmits({})
       emit('fooBar')
@@ -634,6 +619,35 @@ tester.run('custom-event-name-casing', rule, {
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
           line: 4
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2577
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits({})
+      emit('foo-bar')
+      </script>
+
+      <template>
+      <button @click="emit('foo-bar')">Foo</button>
+      <button @click="$emit('foo-bar')">Foo</button>
+      </template>
+      `,
+      errors: [
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 4
+        },
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 8
+        },
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 9
         }
       ]
     }

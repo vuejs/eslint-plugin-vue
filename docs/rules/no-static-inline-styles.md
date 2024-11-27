@@ -5,6 +5,7 @@ title: vue/no-static-inline-styles
 description: disallow static inline `style` attributes
 since: v7.0.0
 ---
+
 # vue/no-static-inline-styles
 
 > disallow static inline `style` attributes
@@ -20,12 +21,12 @@ The styles reported in this rule mean that we recommend separating them into `<s
 <template>
   <!-- ✓ GOOD -->
   <div :style="styleObject"></div>
-  <div :style="{ backgroundImage: 'url('+img+')' }"></div>
+  <div :style="{ backgroundImage: 'url(' + img + ')' }"></div>
 
   <!-- ✗ BAD -->
   <div style="color: pink;"></div>
   <div :style="{ color: 'pink' }"></div>
-  <div :style="[ { color: 'pink' }, { 'font-size': '85%' } ]"></div>
+  <div :style="[{ color: 'pink' }, { 'font-size': '85%' }]"></div>
   <div :style="{ backgroundImage, color: 'pink' }"></div>
 </template>
 ```
@@ -52,7 +53,7 @@ The styles reported in this rule mean that we recommend separating them into `<s
 <template>
   <!-- ✓ GOOD -->
   <div :style="{ transform: 'scale(0.5)' }"></div>
-  <div :style="[ { transform: 'scale(0.5)' }, { 'user-select': 'none' } ]"></div>
+  <div :style="[{ transform: 'scale(0.5)' }, { 'user-select': 'none' }]"></div>
 
   <!-- ✗ BAD -->
   <div style="transform: scale(0.5);"></div>

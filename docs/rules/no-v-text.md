@@ -5,6 +5,7 @@ title: vue/no-v-text
 description: disallow use of v-text
 since: v7.17.0
 ---
+
 # vue/no-v-text
 
 > disallow use of v-text

@@ -4,31 +4,53 @@
  */
 'use strict'
 
-const eslint = require('eslint')
+const eslint = require('../../eslint-compat')
 const rule = require('../../../lib/rules/jsx-uses-vars')
-const ruleNoUnusedVars = new (require('eslint').Linter)()
-  .getRules()
-  .get('no-unused-vars')
+const { getCoreRule } = require('../../../lib/utils')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 
 const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true
+      }
+    }
+  },
+  plugins: {
+    vue: {
+      rules: {
+        'jsx-uses-vars': rule
+      }
     }
   }
 })
 
-const linter = ruleTester.linter || eslint.linter
-linter.defineRule('jsx-uses-vars', rule)
+ruleTester.run('jsx-uses-vars', rule, {
+  // Visually check that there are no warnings in the console.
+  valid: [
+    `
+      import SomeComponent from './SomeComponent.jsx';
+      export default {
+        render () {
+          return (
+            <SomeComponent msg="Hello world"></SomeComponent>
+          )
+        },
+      };
+    `
+  ],
+  invalid: []
+})
 
 describe('jsx-uses-vars', () => {
   ruleTester.run('no-unused-vars', ruleNoUnusedVars, {
     valid: [
       `
-        /* eslint jsx-uses-vars: 1 */
+        /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         export default {
           render () {
@@ -39,7 +61,7 @@ describe('jsx-uses-vars', () => {
         };
       `,
       `
-        /* eslint jsx-uses-vars: 1 */
+        /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.vue';
         import OtherComponent from './OtherComponent.vue';
 
@@ -62,7 +84,7 @@ describe('jsx-uses-vars', () => {
         }
       `,
       `
-        /* eslint jsx-uses-vars: 1 */
+        /* eslint vue/jsx-uses-vars: 1 */
         export default {
           render () {
             return (
@@ -76,7 +98,7 @@ describe('jsx-uses-vars', () => {
     invalid: [
       {
         code: `
-        /* eslint jsx-uses-vars: 1 */
+        /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         export default {
           render () {
@@ -92,7 +114,7 @@ describe('jsx-uses-vars', () => {
       },
       {
         code: `
-        /* eslint jsx-uses-vars: 1 */
+        /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         const wrapper = {
           something: SomeComponent,

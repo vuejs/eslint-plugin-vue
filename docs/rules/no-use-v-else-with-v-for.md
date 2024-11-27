@@ -5,6 +5,7 @@ title: vue/no-use-v-else-with-v-for
 description: disallow using `v-else-if`/`v-else` on the same element as `v-for`
 since: v9.16.0
 ---
+
 # vue/no-use-v-else-with-v-for
 
 > disallow using `v-else-if`/`v-else` on the same element as `v-for`

@@ -5,6 +5,7 @@ title: vue/prefer-prop-type-boolean-first
 description: enforce `Boolean` comes first in component prop types
 since: v8.6.0
 ---
+
 # vue/prefer-prop-type-boolean-first
 
 > enforce `Boolean` comes first in component prop types

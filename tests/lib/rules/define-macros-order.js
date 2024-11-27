@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/define-macros-order')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -27,9 +27,21 @@ const optionsPropsFirst = [
   }
 ]
 
+const optionsExposeLast = [
+  {
+    defineExposeLast: true
+  }
+]
+
 function message(macro) {
   return `${macro} should be the first statement in \`<script setup>\` (after any potential import statements or type definitions).`
 }
+
+const defineExposeNotTheLast =
+  '`defineExpose` should be the last statement in `<script setup>`.'
+
+const putExposeAtBottom =
+  'Put `defineExpose` as the last statement in `<script setup>`.'
 
 tester.run('define-macros-order', rule, {
   valid: [
@@ -58,8 +70,10 @@ tester.run('define-macros-order', rule, {
           console.log('test')
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -112,6 +126,8 @@ tester.run('define-macros-order', rule, {
       code: `
         <script setup lang="ts">
           import { bar } from 'foo'
+          declare global {}
+          declare namespace Namespace {}
           export interface Props {
             msg?: string
             labels?: string[]
@@ -125,8 +141,10 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     },
     {
@@ -156,6 +174,8 @@ tester.run('define-macros-order', rule, {
           import Foo from 'foo'
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -167,7 +187,148 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** Page */
+          definePage()
+          /** model */
+          const model = defineModel()
+          /** emits */
+          defineEmits(['update:foo'])
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel', 'defineEmits']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** model */
+          const model = defineModel()
+          /** emits */
+          defineEmits(['update:foo'])
+
+          function fn() {
+            definePage()
+          }
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel', 'defineEmits']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** model */
+          const model = defineModel()
+          /** emits */
+          defineEmits(['update:foo'])
+
+          const val = () => definePage()
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel', 'defineEmits']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          import Foo from 'foo'
+          /** props */
+          defineProps(['foo'])
+          /** options */
+          defineOptions({})
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: optionsExposeLast
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          import Foo from 'foo'
+          /** props */
+          const props = defineProps({
+            test: Boolean
+          })
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineProps', 'defineEmits'],
+          defineExposeLast: true
+        }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const first = defineModel('first')
+          const second = defineModel('second')
+
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineSlots']
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        const page = definePage()
+
+        const first = defineModel('first')
+        const second = defineModel('second')
+        </script>
+      `,
+      options: [
+        {
+          order: ['definePage', 'defineModel']
         }
       ]
     }
@@ -301,6 +462,40 @@ tester.run('define-macros-order', rule, {
     {
       filename: 'test.vue',
       code: `
+        <script setup>
+          console.log('test1')
+          const props = defineProps({
+            test: Boolean
+          })
+          console.log('test2')
+          const page = definePage({
+            name: 'hello'
+          })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const page = definePage({
+            name: 'hello'
+          })
+          const props = defineProps({
+            test: Boolean
+          })
+          console.log('test1')
+          console.log('test2')
+        </script>
+      `,
+      options: [{ order: ['definePage', 'defineProps'] }],
+      errors: [
+        {
+          message: message('definePage'),
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
         <script lang="ts" setup>
           interface Props {
             msg?: string
@@ -329,13 +524,70 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
           message: message('defineEmits'),
           line: 12
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script lang="ts" setup>
+          interface Props {
+            msg?: string
+            labels?: string[]
+          }
+
+          const props = defineProps<{
+            msg?: string
+            labels?: string[]
+          }>()
+          defineCustom()
+          const emit = defineEmits<{(e: 'update:test'): void}>()
+
+          const page = definePage({
+            name: 'hello'
+          })
+        </script>
+      `,
+      output: `
+        <script lang="ts" setup>
+          interface Props {
+            msg?: string
+            labels?: string[]
+          }
+
+          const page = definePage({
+            name: 'hello'
+          })
+          defineCustom()
+          const props = defineProps<{
+            msg?: string
+            labels?: string[]
+          }>()
+          const emit = defineEmits<{(e: 'update:test'): void}>()
+
+        </script>
+      `,
+      options: [
+        { order: ['definePage', 'defineCustom', 'defineProps', 'defineEmits'] }
+      ],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: message('definePage'),
+          line: 15
         }
       ]
     },
@@ -365,8 +617,10 @@ tester.run('define-macros-order', rule, {
           interface SomeOtherInterface {};
         </script>
       `,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -418,8 +672,10 @@ tester.run('define-macros-order', rule, {
         </script>
       `,
       options: optionsEmitsFirst,
-      parserOptions: {
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       },
       errors: [
         {
@@ -443,6 +699,25 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const props = defineProps({ test: Boolean });definePage({name: 'hello'})
+        </script>
+      `,
+      output: `
+        <script setup>
+          definePage({name: 'hello'});const props = defineProps({ test: Boolean });        </script>
+      `,
+      options: [{ order: ['definePage', 'defineProps'] }],
+      errors: [
+        {
+          message: message('definePage'),
           line: 3
         }
       ]
@@ -547,6 +822,54 @@ tester.run('define-macros-order', rule, {
       filename: 'test.vue',
       code: `
         <script setup>
+          definePage({name: 'hello'})
+          console.log('test1')
+          defineCustom({ test: Boolean })
+        </script>
+      `,
+      output: `
+        <script setup>
+          defineCustom({ test: Boolean })
+          definePage({name: 'hello'})
+          console.log('test1')
+        </script>
+      `,
+      options: [{ order: ['defineCustom', 'definePage'] }],
+      errors: [
+        {
+          message: message('defineCustom'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          definePage({name: 'hello'})
+          console.log('test1')
+          const custom = defineCustom({ test: Boolean })
+        </script>
+      `,
+      output: `
+        <script setup>
+          const custom = defineCustom({ test: Boolean })
+          definePage({name: 'hello'})
+          console.log('test1')
+        </script>
+      `,
+      options: [{ order: ['defineCustom', 'definePage'] }],
+      errors: [
+        {
+          message: message('defineCustom'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
           import Foo from 'foo'
           console.log('test1')
           /** emits */
@@ -557,6 +880,8 @@ tester.run('define-macros-order', rule, {
           const slots = defineSlots()
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
         </script>
       `,
       output: `
@@ -564,6 +889,8 @@ tester.run('define-macros-order', rule, {
           import Foo from 'foo'
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -575,7 +902,13 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
         }
       ],
       errors: [
@@ -597,12 +930,16 @@ tester.run('define-macros-order', rule, {
           defineEmits(['update:foo'])
           /** props */
           const props = defineProps(['foo'])
+          /** model */
+          const model = defineModel()
         </script>
       `,
       output: `
         <script setup>
           /** options */
           defineOptions({})
+          /** model */
+          const model = defineModel()
           /** emits */
           defineEmits(['update:foo'])
           /** props */
@@ -613,13 +950,270 @@ tester.run('define-macros-order', rule, {
       `,
       options: [
         {
-          order: ['defineOptions', 'defineEmits', 'defineProps', 'defineSlots']
+          order: [
+            'defineOptions',
+            'defineModel',
+            'defineEmits',
+            'defineProps',
+            'defineSlots'
+          ]
         }
       ],
       errors: [
         {
           message: message('defineOptions'),
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      output: null,
+      options: optionsExposeLast,
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** options */
+          defineOptions({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** emits */
+          defineEmits(['update:foo'])
+          /** expose */
+          defineExpose({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineOptions', 'defineEmits', 'defineProps'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              desc: putExposeAtBottom,
+              output: `
+        <script setup>
+          /** emits */
+          defineEmits(['update:foo'])
+          /** options */
+          defineOptions({})
+          /** props */
+          const props = defineProps(['foo'])
+          /** slots */
+          const slots = defineSlots()
+          /** expose */
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
+        },
+        {
+          message: message('defineOptions'),
+          line: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          /** options */
+          defineOptions({})
+          /** model */
+          const first = defineModel('first')
+          const second = defineModel('second')
+        </script>
+      `,
+      output: `
+        <script setup>
+          /** model */
+          const first = defineModel('first')
+          const second = defineModel('second')
+          /** options */
+          defineOptions({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const first = defineModel('first')
+          defineOptions({})
+          const second = defineModel('second')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const first = defineModel('first')
+          const second = defineModel('second')
+          defineOptions({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions']
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          defineOptions({})
+          defineCustom('second')
+          const something = defineSomething('first')
+          definePage()
+          const model = defineModel('second')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const something = defineSomething('first')
+          defineCustom('second')
+          const model = defineModel('second')
+          defineOptions({})
+          definePage()
+        </script>
+      `,
+      options: [
+        {
+          order: [
+            'defineSomething',
+            'defineCustom',
+            'defineModel',
+            'defineOptions',
+            'definePage'
+          ]
+        }
+      ],
+      errors: [
+        {
+          message: message('defineSomething'),
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+          const a = defineModel('a')
+          defineOptions({})
+          const c = defineModel('c')
+          defineExpose({})
+          const b = defineModel('b')
+        </script>
+      `,
+      output: `
+        <script setup>
+          const a = defineModel('a')
+          const c = defineModel('c')
+          const b = defineModel('b')
+          defineOptions({})
+          defineExpose({})
+        </script>
+      `,
+      options: [
+        {
+          order: ['defineModel', 'defineOptions'],
+          defineExposeLast: true
+        }
+      ],
+      errors: [
+        {
+          message: message('defineModel'),
+          line: 5
+        },
+        {
+          message: defineExposeNotTheLast,
+          line: 6,
+          suggestions: [
+            {
+              messageId: 'putExposeAtTheLast',
+              output: `
+        <script setup>
+          const a = defineModel('a')
+          defineOptions({})
+          const c = defineModel('c')
+          const b = defineModel('b')
+          defineExpose({})
+        </script>
+      `
+            }
+          ]
         }
       ]
     }

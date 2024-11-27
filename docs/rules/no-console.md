@@ -5,9 +5,12 @@ title: vue/no-console
 description: Disallow the use of `console` in `<template>`
 since: v9.15.0
 ---
+
 # vue/no-console
 
 > Disallow the use of `console` in `<template>`
+
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 

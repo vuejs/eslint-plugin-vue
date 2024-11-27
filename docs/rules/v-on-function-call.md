@@ -5,6 +5,7 @@ title: vue/v-on-function-call
 description: enforce or forbid parentheses after method calls without arguments in `v-on` directives
 since: v5.2.0
 ---
+
 # vue/v-on-function-call
 
 > enforce or forbid parentheses after method calls without arguments in `v-on` directives
@@ -21,14 +22,10 @@ This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` wh
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 
@@ -60,14 +57,10 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
 </template>
 ```
 
@@ -80,17 +73,11 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
-  <button v-on:click="closeModal(arg)">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
+  <button v-on:click="closeModal(arg)">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 
@@ -103,17 +90,11 @@ Default is set to `never`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button v-on:click="closeModal">
-    Close
-  </button>
-  <button v-on:click="closeModal() /* comment */">
-    Close
-  </button>
+  <button v-on:click="closeModal">Close</button>
+  <button v-on:click="closeModal() /* comment */">Close</button>
 
   <!-- ✗ BAD -->
-  <button v-on:click="closeModal()">
-    Close
-  </button>
+  <button v-on:click="closeModal()">Close</button>
 </template>
 ```
 

@@ -5,13 +5,13 @@
 'use strict'
 
 const rule = require('../../../lib/rules/no-async-in-computed-properties')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const parser = require('vue-eslint-parser')
+const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
-const parser = require.resolve('vue-eslint-parser')
 
 const ruleTester = new RuleTester()
 
@@ -28,7 +28,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -61,7 +61,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -75,7 +75,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }));
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -93,7 +93,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -114,7 +114,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -129,7 +129,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -142,7 +142,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -155,7 +155,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -172,7 +172,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -189,7 +189,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -202,7 +202,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -215,7 +215,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       code: `
@@ -223,7 +223,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           data1: new Promise(),
           data2: Promise.resolve(),
         })`,
-      parserOptions
+      languageOptions
     },
     {
       code: `
@@ -298,7 +298,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
         `,
-      parserOptions
+      languageOptions
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1690
@@ -319,8 +319,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         },
       }
       </script>`,
-      parser,
-      parserOptions: {
+      languageOptions: {
+        parser,
         sourceType: 'module',
         ecmaVersion: 2020
       }
@@ -339,7 +339,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -363,7 +363,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -387,7 +387,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -406,7 +406,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: ['Unexpected asynchronous action in "foo" computed property.']
     },
     {
@@ -420,7 +420,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: ['Unexpected asynchronous action in "foo" computed property.']
     },
     {
@@ -434,7 +434,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -453,7 +453,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -472,7 +472,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -491,7 +491,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -510,7 +510,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -529,7 +529,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -548,7 +548,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -569,7 +569,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -590,7 +590,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -611,7 +611,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       })
       `,
-      parserOptions: { ecmaVersion: 6 },
+      languageOptions: { ecmaVersion: 6 },
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -632,7 +632,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
@@ -657,7 +657,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -700,7 +700,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected timed function in "foo" computed property.',
@@ -754,7 +754,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         'Unexpected timed function in "foo" computed property.',
         'Unexpected timed function in "foo" computed property.',
@@ -784,7 +784,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         'Unexpected timed function in "foo" computed property.',
         'Unexpected timed function in "foo" computed property.',
@@ -812,7 +812,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -855,7 +855,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -883,7 +883,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
@@ -914,7 +914,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
@@ -945,7 +945,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Unexpected timed function in computed function.',
@@ -993,7 +993,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -1017,8 +1017,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -1059,8 +1061,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message:
@@ -1086,8 +1090,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
@@ -1116,8 +1122,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
@@ -1146,8 +1154,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Unexpected timed function in computed function.',
@@ -1193,8 +1203,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       })
       </script>
       `,
-      parser,
-      parserOptions,
+      languageOptions: {
+        parser,
+        ...languageOptions
+      },
       errors: [
         {
           message:

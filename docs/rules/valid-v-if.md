@@ -5,11 +5,12 @@ title: vue/valid-v-if
 description: enforce valid `v-if` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-if
 
 > enforce valid `v-if` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-if` directive is valid.
 
@@ -27,14 +28,14 @@ This rule reports `v-if` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-if="foo"/>
-  <div v-else-if="bar"/>
-  <div v-else/>
+  <div v-if="foo" />
+  <div v-else-if="bar" />
+  <div v-else />
 
   <!-- ✗ BAD -->
-  <div v-if/>
-  <div v-if:aaa="foo"/>
-  <div v-if.bbb="foo"/>
+  <div v-if />
+  <div v-if:aaa="foo" />
+  <div v-if.bbb="foo" />
   <div
     v-if="foo"
     v-else

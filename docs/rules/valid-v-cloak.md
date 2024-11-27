@@ -5,11 +5,12 @@ title: vue/valid-v-cloak
 description: enforce valid `v-cloak` directives
 since: v3.11.0
 ---
+
 # vue/valid-v-cloak
 
 > enforce valid `v-cloak` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/essential"`, `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 
 This rule checks whether every `v-cloak` directive is valid.
 
@@ -26,12 +27,12 @@ This rule reports `v-cloak` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-cloak/>
+  <div v-cloak />
 
   <!-- ✗ BAD -->
-  <div v-cloak:aaa/>
-  <div v-cloak.bbb/>
-  <div v-cloak="ccc"/>
+  <div v-cloak:aaa />
+  <div v-cloak.bbb />
+  <div v-cloak="ccc" />
 </template>
 ```
 

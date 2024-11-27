@@ -5,11 +5,12 @@ title: vue/v-on-style
 description: enforce `v-on` directive style
 since: v3.0.0
 ---
+
 # vue/v-on-style
 
 > enforce `v-on` directive style
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -21,10 +22,10 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div @click="foo"/>
+  <div @click="foo" />
 
   <!-- ✗ BAD -->
-  <div v-on:click="foo"/>
+  <div v-on:click="foo" />
 </template>
 ```
 
@@ -50,10 +51,10 @@ Default is set to `shorthand`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-on:click="foo"/>
+  <div v-on:click="foo" />
 
   <!-- ✗ BAD -->
-  <div @click="foo"/>
+  <div @click="foo" />
 </template>
 ```
 

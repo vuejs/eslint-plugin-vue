@@ -5,6 +5,7 @@ title: vue/no-undef-properties
 description: disallow undefined properties
 since: v7.20.0
 ---
+
 # vue/no-undef-properties
 
 > disallow undefined properties
@@ -52,23 +53,23 @@ watch(() => prop.undef, () => console.log('Updated!'))
   <div>{{ label }}: {{ cnt }}</div>
 </template>
 <script>
-  export default {
-    props: ['name'],
-    data () {
-      return {
-        count: 0
-      }
-    },
-    methods: {
-      click() {
-        /* ✓ GOOD */
-        this.count++
+export default {
+  props: ['name'],
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    click() {
+      /* ✓ GOOD */
+      this.count++
 
-        /* ✗ BAD */
-        this.cnt++
-      }
+      /* ✗ BAD */
+      this.cnt++
     }
   }
+}
 </script>
 ```
 
@@ -96,12 +97,12 @@ watch(() => prop.undef, () => console.log('Updated!'))
   <div>{{ $t('foo') }}</div>
 </template>
 <script>
-  export default {
-    mounted() {
-      /* ✓ GOOD */
-      const hash = this.$route.hash
-    }
+export default {
+  mounted() {
+    /* ✓ GOOD */
+    const hash = this.$route.hash
   }
+}
 </script>
 ```
 

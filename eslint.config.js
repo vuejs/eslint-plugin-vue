@@ -1,11 +1,11 @@
 'use strict'
 
 const globals = require('globals')
-const { FlatCompat } = require('@eslint/eslintrc')
-
-const eslintrc = new FlatCompat({
-  baseDirectory: __dirname
-})
+const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
+const eslintPluginJsonc = require('eslint-plugin-jsonc')
+const eslintPluginNodeDependencies = require('eslint-plugin-node-dependencies')
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
+const eslintPluginUnicorn = require('eslint-plugin-unicorn')
 
 module.exports = [
   {
@@ -25,14 +25,11 @@ module.exports = [
       'docs/.vitepress/cache'
     ]
   },
-  ...eslintrc.plugins('eslint-plugin', 'prettier', 'unicorn'),
-  ...eslintrc.extends(
-    'plugin:eslint-plugin/all',
-    'prettier',
-    'plugin:node-dependencies/recommended',
-    'plugin:jsonc/recommended-with-jsonc',
-    'plugin:unicorn/recommended'
-  ),
+  eslintPluginEslintPlugin,
+  eslintPluginUnicorn.configs['flat/recommended'],
+  ...eslintPluginNodeDependencies.configs['flat/recommended'],
+  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
+  eslintPluginPrettierRecommended,
   {
     plugins: {
       internal: {
@@ -42,6 +39,27 @@ module.exports = [
           'require-eslint-community': require('./eslint-internal-rules/require-eslint-community')
         }
       }
+    }
+  },
+
+  // turn off some rules from shared configs in all files
+  {
+    rules: {
+      'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
+      'eslint-plugin/require-meta-schema-description': 'off',
+
+      'unicorn/filename-case': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+      'unicorn/no-useless-undefined': 'off',
+      'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-module': 'off',
+      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
+      'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prevent-abbreviations': 'off'
     }
   },
 
@@ -142,6 +160,14 @@ module.exports = [
       'prefer-const': 2,
 
       'prettier/prettier': 'error',
+      'eslint-plugin/require-meta-docs-description': [
+        'error',
+        { pattern: '^(enforce|require|disallow).*[^.]$' }
+      ],
+      'eslint-plugin/require-meta-fixable': [
+        'error',
+        { catchNoFixerButFixableProperty: true }
+      ],
       'eslint-plugin/report-message-format': ['error', "^[A-Z`'{].*\\.$"],
 
       'no-debugger': 'error',
@@ -160,21 +186,24 @@ module.exports = [
       'dot-notation': 'error',
       'arrow-body-style': 'error',
 
+      'no-restricted-properties': [
+        'error',
+        {
+          object: 'context',
+          property: 'parserServices',
+          message: 'Use sourceCode.parserServices'
+        },
+        {
+          object: 'context',
+          property: 'getScope',
+          message: 'Use utils.getScope'
+        }
+      ],
+
       'unicorn/consistent-function-scoping': [
         'error',
         { checkArrowFunctions: false }
       ],
-      'unicorn/filename-case': 'off',
-      'unicorn/no-null': 'off',
-      'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
-      'unicorn/no-useless-undefined': 'off',
-      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
-      'unicorn/prefer-module': 'off',
-      'unicorn/prevent-abbreviations': 'off',
-      'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
 
       'internal/require-eslint-community': ['error']
     }
@@ -185,10 +214,6 @@ module.exports = [
       ecmaVersion: 'latest',
       sourceType: 'module',
       parser: require('vue-eslint-parser')
-      // parserOptions: {
-      //   ecmaVersion: 'latest',
-      //   sourceType: 'module'
-      // }
     }
   },
   {

@@ -5,9 +5,9 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-name-property')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -22,7 +22,7 @@ ruleTester.run('require-name-property', rule, {
           name: 'IssaName'
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'ValidComponent.vue',
@@ -31,7 +31,7 @@ ruleTester.run('require-name-property', rule, {
           name: undefined
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'ValidComponent.vue',
@@ -40,7 +40,7 @@ ruleTester.run('require-name-property', rule, {
           name: ''
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       code: `
@@ -50,7 +50,7 @@ ruleTester.run('require-name-property', rule, {
           }
         })
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -62,8 +62,10 @@ ruleTester.run('require-name-property', rule, {
       <script setup>
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     }
   ],
 
@@ -74,7 +76,7 @@ ruleTester.run('require-name-property', rule, {
         export default {
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -98,7 +100,7 @@ ruleTester.run('require-name-property', rule, {
         export default defineComponent({
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -121,7 +123,7 @@ ruleTester.run('require-name-property', rule, {
       code: `
         export default defineComponent({ })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -144,7 +146,7 @@ ruleTester.run('require-name-property', rule, {
       code: `
         export default { }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -169,7 +171,7 @@ ruleTester.run('require-name-property', rule, {
         nameNot: 'IssaNameNot'
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -195,7 +197,7 @@ ruleTester.run('require-name-property', rule, {
           nameNot: 'IssaNameNot'
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -224,7 +226,7 @@ ruleTester.run('require-name-property', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',
@@ -252,7 +254,7 @@ ruleTester.run('require-name-property', rule, {
           [name]: 'IssaName'
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Required name property is not set.',

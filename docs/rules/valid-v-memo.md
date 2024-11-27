@@ -5,11 +5,12 @@ title: vue/valid-v-memo
 description: enforce valid `v-memo` directives
 since: v7.16.0
 ---
+
 # vue/valid-v-memo
 
 > enforce valid `v-memo` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 
 This rule checks whether every `v-memo` directive is valid.
 
@@ -28,13 +29,13 @@ This rule reports `v-memo` directives in the following cases:
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-memo="[x]"/>
+  <div v-memo="[x]" />
 
   <!-- ✗ BAD -->
-  <div v-memo/>
-  <div v-memo:aaa="[x]"/>
-  <div v-memo.bbb="[x]"/>
-  <div v-memo="{x}"/>
+  <div v-memo />
+  <div v-memo:aaa="[x]" />
+  <div v-memo.bbb="[x]" />
+  <div v-memo="{ x }" />
   <div v-for="i in items">
     <div v-memo="[i]" />
   </div>

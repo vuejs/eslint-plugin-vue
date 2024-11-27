@@ -5,6 +5,7 @@ title: vue/no-confusing-v-for-v-if
 description: disallow confusing `v-for` and `v-if` on the same element
 since: v3.0.0
 ---
+
 # vue/no-confusing-v-for-v-if
 
 > disallow confusing `v-for` and `v-if` on the same element

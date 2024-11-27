@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-unused-refs')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -313,6 +313,20 @@ tester.run('no-unused-refs', rule, {
       <script setup>
       import {ref} from 'vue'
       const x = ref(null)
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input ref="x" />
+        <input ref="y" />
+      </template>
+      <script setup>
+      import {useTemplateRef} from 'vue'
+      const inputX = useTemplateRef('x')
+      const inputY = useTemplateRef(\`y\`)
       </script>
       `
     }

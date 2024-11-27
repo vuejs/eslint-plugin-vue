@@ -5,6 +5,7 @@ title: vue/block-lang
 description: disallow use other than available `lang`
 since: v7.15.0
 ---
+
 # vue/block-lang
 
 > disallow use other than available `lang`

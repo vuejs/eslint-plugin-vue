@@ -3,12 +3,15 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-setup-props-reactivity-loss')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2020, sourceType: 'module' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 tester.run('no-setup-props-reactivity-loss', rule, {
@@ -116,9 +119,32 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       <script>
       export default {
         setup(props) {
+          watch(
+            () => props.count,
+            () => {
+              const test = props.count ? true : false
+              console.log(test)
+            }
+          )
+
+          return () => {
+            return h('div', props.count ? true : false)
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(props) {
           const {x} = noProps
           ({y} = noProps)
           const z = noProps.z
+          const foo = \`\${noProp.foo}\`
         }
       }
       </script>
@@ -223,6 +249,22 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       <script setup>
       const props = defineProps({ count: Number })
       const count = computed(() => props.count)
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {count} = defineProps({count:Number})
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const { foo = 1, bar = 'ok' } = defineProps({ foo: Number, bar: String })
       </script>
       `
     }
@@ -506,13 +548,14 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       code: `
       <script setup>
       const {count} = defineProps({count:Number})
+      const foo = count
       </script>
       `,
       errors: [
         {
           message:
-            'Destructuring the `props` will cause the value to lose reactivity.',
-          line: 3
+            'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
+          line: 4
         }
       ]
     },
@@ -675,6 +718,58 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         {
           messageId: 'getProperty',
           line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const props = defineProps({ count: Number })
+      const buildCounter = props.count ? 1 : undefined
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 4
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2470
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const foo = \`\${p.x}\`
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p) {
+          const foo = \`bar\${p.x}bar\${p.y}\`
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'getProperty',
+          line: 5
         }
       ]
     }

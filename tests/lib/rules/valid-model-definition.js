@@ -5,10 +5,10 @@
 'use strict'
 
 const rule = require('../../../lib/rules/valid-model-definition')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   }

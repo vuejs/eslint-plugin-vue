@@ -42,12 +42,18 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefineEmitsExit?(node: CallExpression, emits: ComponentEmit[]): void
   onDefineOptionsEnter?(node: CallExpression): void
   onDefineOptionsExit?(node: CallExpression): void
-  onDefineSlotsEnter?(node: CallExpression): void
-  onDefineSlotsExit?(node: CallExpression): void
+  onDefineSlotsEnter?(node: CallExpression, slots: ComponentSlot[]): void
+  onDefineSlotsExit?(node: CallExpression, slots: ComponentSlot[]): void
+  onDefineExposeEnter?(node: CallExpression): void
+  onDefineExposeExit?(node: CallExpression): void
+  onDefineModelEnter?(node: CallExpression, model: ComponentModel): void
+  onDefineModelExit?(node: CallExpression, model: ComponentModel): void
   [query: string]:
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
     | ((node: CallExpression, emits: ComponentEmit[]) => void)
+    | ((node: CallExpression, slots: ComponentSlot[]) => void)
+    | ((node: CallExpression, model: ComponentModel) => void)
     | undefined
 }
 
@@ -185,3 +191,37 @@ export type ComponentEmit =
   | ComponentTypeEmit
   | ComponentInferTypeEmit
   | ComponentUnknownEmit
+
+export type ComponentUnknownSlot = {
+  type: 'unknown'
+  slotName: null
+  node: Expression | SpreadElement | TypeNode | null
+}
+
+export type ComponentTypeSlot = {
+  type: 'type'
+  key: Identifier | Literal
+  slotName: string
+  node: TSPropertySignature | TSMethodSignature
+}
+
+export type ComponentInferTypeSlot = {
+  type: 'infer-type'
+  slotName: string
+  node: TypeNode
+}
+
+export type ComponentSlot =
+  | ComponentTypeSlot
+  | ComponentInferTypeSlot
+  | ComponentUnknownSlot
+
+export type ComponentModelName = {
+  modelName: string
+  node: Literal | null
+}
+export type ComponentModel = {
+  name: ComponentModelName
+  options: Expression | null
+  typeNode: TypeNode | null
+}

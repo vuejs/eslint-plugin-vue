@@ -5,11 +5,11 @@
 'use strict'
 
 const rule = require('../../../lib/rules/require-expose')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -284,6 +284,7 @@ expose: ["foo", "bar"],
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -329,6 +330,7 @@ expose: ["x", "foo", "bar"],
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -353,6 +355,7 @@ expose: []
       `,
       errors: [
         {
+          messageId: 'requireExpose',
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',

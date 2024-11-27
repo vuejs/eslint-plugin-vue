@@ -6,11 +6,10 @@
 
 const rule = require('../../../lib/rules/html-button-has-type')
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2015 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 ruleTester.run('html-button-has-type', rule, {
   valid: [
@@ -201,16 +200,6 @@ ruleTester.run('html-button-has-type', rule, {
         {
           message: 'A value must be set for button type attribute.',
           column: 25
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `<template><button v-bind:type>Hello World</button></template>`,
-      errors: [
-        {
-          message: 'A value must be set for button type attribute.',
-          column: 19
         }
       ]
     }

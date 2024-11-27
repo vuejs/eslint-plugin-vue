@@ -8,10 +8,10 @@ const rule = require('../../../lib/rules/require-prop-type-constructor')
 const {
   getTypeScriptFixtureTestOptions
 } = require('../../test-utils/typescript')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
 const ruleTester = new RuleTester({
-  parserOptions: {
+  languageOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -224,7 +224,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
+      languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
           message: 'The "a" property should be a constructor.',
@@ -248,7 +248,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      parser: require.resolve('@typescript-eslint/parser'),
+      languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
           message: 'The "name" property should be a constructor.',
@@ -381,7 +381,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
+      languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
         {
           message: 'The "a" property should be a constructor.',

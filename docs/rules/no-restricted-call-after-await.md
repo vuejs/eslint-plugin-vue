@@ -5,6 +5,7 @@ title: vue/no-restricted-call-after-await
 description: disallow asynchronously called restricted methods
 since: v7.4.0
 ---
+
 # vue/no-restricted-call-after-await
 
 > disallow asynchronously called restricted methods

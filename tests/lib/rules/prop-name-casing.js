@@ -6,9 +6,9 @@
 
 const semver = require('semver')
 const rule = require('../../../lib/rules/prop-name-casing')
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 
-const parserOptions = {
+const languageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }
@@ -23,7 +23,7 @@ ruleTester.run('prop-name-casing', rule, {
           props: ['greetingText']
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -32,7 +32,7 @@ ruleTester.run('prop-name-casing', rule, {
           props: some_props
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -43,7 +43,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -53,7 +53,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -63,7 +63,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -74,7 +74,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -86,7 +86,7 @@ ruleTester.run('prop-name-casing', rule, {
       }
       `,
       options: ['camelCase'],
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -98,7 +98,7 @@ ruleTester.run('prop-name-casing', rule, {
       }
       `,
       options: ['snake_case'],
-      parserOptions
+      languageOptions
     },
     {
       // computed property name
@@ -110,7 +110,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // computed property name
@@ -122,7 +122,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // TemplateLiteral computed property does not warn
@@ -134,7 +134,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // shorthand
@@ -146,7 +146,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // valiable computed property name does not warn
@@ -158,7 +158,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // valiable computed property name does not warn
@@ -170,7 +170,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // BinaryExpression computed property name does not warn
@@ -182,7 +182,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // CallExpression computed property name does not warn
@@ -194,7 +194,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // ThisExpression computed property name does not warn
@@ -206,7 +206,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // ArrayExpression computed property name does not warn
@@ -218,7 +218,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // number Literal computed property name
@@ -230,7 +230,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // boolean Literal computed property name
@@ -242,7 +242,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // null Literal computed property name
@@ -254,7 +254,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // Japanese characters
@@ -266,7 +266,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // emoji
@@ -278,7 +278,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // #862
@@ -290,7 +290,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       // #932
@@ -302,7 +302,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -314,7 +314,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      parserOptions
+      languageOptions
     },
     {
       filename: 'test.vue',
@@ -325,8 +325,10 @@ ruleTester.run('prop-name-casing', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     },
     {
       filename: 'test.vue',
@@ -335,8 +337,10 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps(['greetingText'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     },
     {
       filename: 'test.vue',
@@ -348,10 +352,12 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps<Props>()
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions: {
-        ...parserOptions,
-        parser: require.resolve('@typescript-eslint/parser')
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
       }
     }
   ],
@@ -366,7 +372,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -385,7 +391,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -402,7 +408,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -421,7 +427,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greetingText" is not in snake_case.',
@@ -440,7 +446,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['camelCase'],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
@@ -459,7 +465,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in snake_case.',
@@ -477,7 +483,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -496,7 +502,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
@@ -515,7 +521,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -533,7 +539,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "abc-123-def" is not in camelCase.',
@@ -552,7 +558,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
@@ -570,7 +576,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: ['Prop "_item" is not in camelCase.']
     },
     {
@@ -583,7 +589,7 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       options: ['snake_case'],
-      parserOptions,
+      languageOptions,
       errors: ['Prop "_itemName" is not in snake_case.']
     },
     {
@@ -596,7 +602,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: ['Prop "greeting-text" is not in camelCase.']
     },
     {
@@ -609,7 +615,7 @@ ruleTester.run('prop-name-casing', rule, {
           }
         }
       `,
-      parserOptions,
+      languageOptions,
       errors: ['Prop "/greeting-text/" is not in camelCase.']
     },
     {
@@ -621,8 +627,10 @@ ruleTester.run('prop-name-casing', rule, {
       })
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -637,8 +645,10 @@ ruleTester.run('prop-name-casing', rule, {
       defineProps(['greeting_text'])
       </script>
       `,
-      parser: require.resolve('vue-eslint-parser'),
-      parserOptions,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
@@ -662,10 +672,12 @@ ruleTester.run('prop-name-casing', rule, {
             defineProps<Props>()
             </script>
             `,
-            parser: require.resolve('vue-eslint-parser'),
-            parserOptions: {
-              ...parserOptions,
-              parser: require.resolve('@typescript-eslint/parser')
+            languageOptions: {
+              parser: require('vue-eslint-parser'),
+              ...languageOptions,
+              parserOptions: {
+                parser: require.resolve('@typescript-eslint/parser')
+              }
             },
             errors: [
               {

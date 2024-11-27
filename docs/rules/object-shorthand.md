@@ -5,6 +5,7 @@ title: vue/object-shorthand
 description: Require or disallow method and property shorthand syntax for object literals in `<template>`
 since: v8.4.0
 ---
+
 # vue/object-shorthand
 
 > Require or disallow method and property shorthand syntax for object literals in `<template>`

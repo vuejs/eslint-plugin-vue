@@ -2,16 +2,11 @@
  * Pre-build cjs packages that cannot be bundled well.
  */
 import esbuild from 'esbuild'
-import path from 'path'
+import path from 'pathe'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-const dirname = path.dirname(
-  fileURLToPath(
-    // @ts-expect-error -- Cannot change `module` option
-    import.meta.url
-  )
-)
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 build(
   path.join(dirname, './src/eslint.mjs'),

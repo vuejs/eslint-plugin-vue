@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-v-text-v-html-on-component')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -40,6 +40,45 @@ tester.run('no-v-text-v-html-on-component', rule, {
         <MyComponent v-if="content" />
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-text="content" />
+      </template>
+      `,
+      options: [{ allow: ['router-link'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-html="content" />
+        <NuxtLink v-html="content" />
+      </template>
+      `,
+      options: [{ allow: ['RouterLink', 'nuxt-link'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <svg><g v-text="content" /></svg>
+        <math><mspace v-text="content" /></math>
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <h1 v-html="content" />
+        <g v-text="content" />
+        <mi v-text="content" />
+      </template>
+      `,
+      options: [{ ignoreElementNamespaces: true }]
     }
   ],
   invalid: [
@@ -130,6 +169,44 @@ tester.run('no-v-text-v-html-on-component', rule, {
           message: "Using v-html on component may break component's content.",
           line: 3,
           column: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <router-link v-html="content" />
+      </template>
+      `,
+      options: [{ allow: ['nuxt-link'] }],
+      errors: [
+        {
+          message: "Using v-html on component may break component's content.",
+          line: 3,
+          column: 22
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <g v-text="content" />
+        <mi v-text="content" />
+      </template>
+      `,
+      options: [{ ignoreElementNamespaces: false }],
+      errors: [
+        {
+          message: "Using v-text on component may break component's content.",
+          line: 3,
+          column: 12
+        },
+        {
+          message: "Using v-text on component may break component's content.",
+          line: 4,
+          column: 13
         }
       ]
     }

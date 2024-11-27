@@ -5,11 +5,12 @@ title: vue/v-bind-style
 description: enforce `v-bind` directive style
 since: v3.0.0
 ---
+
 # vue/v-bind-style
 
 > enforce `v-bind` directive style
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue3-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -21,10 +22,10 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div :foo="bar"/>
+  <div :foo="bar" />
 
   <!-- ✗ BAD -->
-  <div v-bind:foo="bar"/>
+  <div v-bind:foo="bar" />
 </template>
 ```
 
@@ -32,16 +33,20 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 ## :wrench: Options
 
-Default is set to `shorthand`.
-
 ```json
 {
-  "vue/v-bind-style": ["error", "shorthand" | "longform"]
+  "vue/v-bind-style": ["error", "shorthand" | "longform", {
+    "sameNameShorthand": "ignore" | "always" | "never"
+  }]
 }
 ```
 
 - `"shorthand"` (default) ... requires using shorthand.
 - `"longform"` ... requires using long form.
+- `sameNameShorthand` ... enforce the `v-bind` same-name shorthand style (Vue 3.4+).
+  - `"ignore"` (default) ... ignores the same-name shorthand style.
+  - `"always"` ... always enforces same-name shorthand where possible.
+  - `"never"` ... always disallow same-name shorthand where possible.
 
 ### `"longform"`
 
@@ -50,10 +55,42 @@ Default is set to `shorthand`.
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-bind:foo="bar"/>
+  <div v-bind:foo="bar" />
 
   <!-- ✗ BAD -->
-  <div :foo="bar"/>
+  <div :foo="bar" />
+</template>
+```
+
+</eslint-code-block>
+
+### `{ "sameNameShorthand": "always" }`
+
+<eslint-code-block fix :rules="{'vue/v-bind-style': ['error', 'shorthand', { 'sameNameShorthand': 'always' }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div :foo />
+
+  <!-- ✗ BAD -->
+  <div :foo="foo" />
+</template>
+```
+
+</eslint-code-block>
+
+### `{ "sameNameShorthand": "never" }`
+
+<eslint-code-block fix :rules="{'vue/v-bind-style': ['error', 'shorthand', { 'sameNameShorthand': 'never' }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div :foo="foo" />
+
+  <!-- ✗ BAD -->
+  <div :foo />
 </template>
 ```
 

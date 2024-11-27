@@ -5,6 +5,7 @@ title: vue/html-comment-content-newline
 description: enforce unified line brake in HTML comments
 since: v7.0.0
 ---
+
 # vue/html-comment-content-newline
 
 > enforce unified line brake in HTML comments
@@ -56,6 +57,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 ```
 
 - The first option is either an object with `"singleline"` and `"multiline"` keys.
+
   - `singleline` ... the configuration for single-line comments.
     - `"never"` (default) ... disallow line breaks after the `<!--` and before the `-->`.
     - `"always"` ... require one line break after the `<!--` and before the `-->`.
@@ -66,6 +68,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
   You can also set the same value for both `singleline` and `multiline` by specifies a string.
 
 - This rule can also take a 2nd option, an object with the following key: `"exceptions"`.
+
   - The `"exceptions"` value is an array of string patterns which are considered exceptions to the rule.
 
   ```json

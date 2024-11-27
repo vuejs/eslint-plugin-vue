@@ -5,6 +5,7 @@ title: vue/no-ref-object-destructure
 description: disallow usages of ref objects that can lead to loss of reactivity
 since: v9.5.0
 ---
+
 # vue/no-ref-object-destructure
 
 > disallow usages of ref objects that can lead to loss of reactivity

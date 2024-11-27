@@ -3,12 +3,11 @@
  */
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-empty-pattern')
 
 const tester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 2018 }
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
 })
 
 tester.run('no-empty-pattern', rule, {

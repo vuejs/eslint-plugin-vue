@@ -5,11 +5,12 @@ title: vue/no-deprecated-data-object-declaration
 description: disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
 since: v7.0.0
 ---
+
 # vue/no-deprecated-data-object-declaration
 
 > disallow using deprecated object declaration on data (in Vue.js 3.0.0+)
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `"plugin:vue/vue3-strongly-recommended"` and `"plugin:vue/vue3-recommended"`.
+- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
@@ -31,7 +32,7 @@ createApp({
 
 createApp({
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }
@@ -62,7 +63,7 @@ export default {
 <script>
 export default {
   /* ✓ GOOD */
-  data () {
+  data() {
     return {
       foo: null
     }
