@@ -25,11 +25,15 @@ If you use v-text / v-html on a component, it will overwrite the component's con
   <!-- ✓ GOOD -->
   <div v-text="content"></div>
   <div v-html="html"></div>
+  <svg><g v-text="content" /></svg>
+  <math><mi v-text="content" /></math>
   <MyComponent>{{ content }}</MyComponent>
 
   <!-- ✗ BAD -->
   <MyComponent v-text="content"></MyComponent>
   <MyComponent v-html="html"></MyComponent>
+  <g v-text="content" />
+  <mi v-text="content" />
 </template>
 ```
 
@@ -39,14 +43,15 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 ```json
 {
-  "vue/no-v-text-v-html-on-component": [
-    "error",
-    { "allow": ["router-link", "nuxt-link"] }
-  ]
+  "vue/no-v-text-v-html-on-component": ["error", {
+    "allow": ["router-link", "nuxt-link"],
+    "ignoreElementNamespaces": false
+  }]
 }
 ```
 
 - `allow` (`string[]`) ... Specify a list of custom components for which the rule should not apply.
+- `ignoreElementNamespaces` (`boolean`) ... If `true`, always treat SVG and MathML tag names as HTML elements, even if they are not used inside a SVG/MathML root element. Default is `false`.
 
 ### `{ "allow": ["router-link", "nuxt-link"] }`
 
@@ -60,6 +65,20 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
   <!-- ✗ BAD -->
   <MyComponent v-html="content" />
+</template>
+```
+
+</eslint-code-block>
+
+### `{ "ignoreElementNamespaces": true }`
+
+<eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { ignoreElementNamespaces: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <g v-text="content" /> <!-- SVG element not inside of <svg> -->
+  <mi v-text="content" /> <!-- MathML element not inside of <math> -->
 </template>
 ```
 
