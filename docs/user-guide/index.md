@@ -56,30 +56,25 @@ npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals t
 ```ts
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginVue from 'eslint-plugin-vue';
 import globals from 'globals';
-import pluginVue from 'eslint-plugin-vue';
-import tseslint from 'typescript-eslint';
+import typescriptEslint from 'typescript-eslint';
 
 export default tseslint.config(
-  {
-    ignores: ['*.d.ts', '**/coverage', '**/dist'],
-  },
+  { ignores: ['*.d.ts', '**/coverage', '**/dist'] },
   {
     extends: [
       eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...pluginVue.configs['flat/recommended'],
+      ...typescriptEslint.configs.recommended,
+      ...eslintPluginVue.configs['flat/recommended'],
     ],
-    plugins: {
-      '@typescript-eslint': tseslint.plugin,
-    },
     files: ['**/*.{ts,vue}'],
     languageOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: 'latest',
       sourceType: 'module',
       globals: globals.browser,
       parserOptions: {
-        parser: tseslint.parser,
+        parser: typescriptEslint.parser,
       },
     },
     rules: {
