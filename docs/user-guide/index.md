@@ -47,6 +47,26 @@ export default [
 
 See [the rule list](../rules/index.md) to get the `configs` & `rules` that this plugin provides.
 
+#### Bundle Configurations (`eslint.config.js`)
+
+This plugin provides some predefined configs.
+You can use the following configs by adding them to `eslint.config.js`.
+(All flat configs in this plugin are provided as arrays, so spread syntax is required when combining them with other configs.)
+
+- `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
+- Configurations for using Vue.js 3.x:
+  - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `*.configs["flat/strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `*.configs["flat/recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+- Configurations for using Vue.js 2.x:
+  - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `*.configs["flat/vue2-strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency
+
+:::warning Reporting rules
+By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+:::
+
 #### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
 
 ```bash
@@ -84,26 +104,6 @@ export default tseslint.config(
   eslintConfigPrettier
 );
 ```
-
-#### Bundle Configurations (`eslint.config.js`)
-
-This plugin provides some predefined configs.
-You can use the following configs by adding them to `eslint.config.js`.
-(All flat configs in this plugin are provided as arrays, so spread syntax is required when combining them with other configs.)
-
-- `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
-- Configurations for using Vue.js 3.x:
-  - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-- Configurations for using Vue.js 2.x:
-  - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/vue2-strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency
-
-:::warning Reporting rules
-By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
-:::
 
 ### Configuration (`.eslintrc`)
 
