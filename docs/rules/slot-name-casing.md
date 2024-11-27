@@ -13,7 +13,7 @@ description: enforce specific casing for the slot name
 
 ## :book: Rule Details
 
-This rule enforce proper casing of slot names in vue components.
+This rule enforces proper casing of slot names in Vue components.
 
 <eslint-code-block :rules="{'vue/slot-name-casing': ['error']}">
 

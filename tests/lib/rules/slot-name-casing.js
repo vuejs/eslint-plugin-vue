@@ -25,20 +25,22 @@ tester.run('slot-name-casing', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-      <slot name="foo" />
-      <slot name="foo-bar" />
-      <slot :name="fooBar" />
-      </template>`,
+        <template>
+          <slot name="foo" />
+          <slot name="foo-bar" />
+          <slot :name="fooBar" />
+        </template>
+      `,
       options: ['kebab-case']
     },
     {
       filename: 'test.vue',
       code: `
-      <template>
-      <slot name="foo" />
-      <slot :name="fooBar" />
-      </template>`,
+        <template>
+          <slot name="foo" />
+          <slot :name="fooBar" />
+        </template>
+      `,
       options: ['singleword']
     }
   ],
@@ -46,10 +48,11 @@ tester.run('slot-name-casing', rule, {
     {
       filename: 'test.vue',
       code: `
-      <template>
-      <slot name="foo-bar" />
-      <slot name="foo-Bar_baz" />
-      </template>`,
+        <template>
+          <slot name="foo-bar" />
+          <slot name="foo-Bar_baz" />
+        </template>
+      `,
       errors: [
         {
           messageId: 'invalidCase',
@@ -58,7 +61,7 @@ tester.run('slot-name-casing', rule, {
             caseType: 'camelCase'
           },
           line: 3,
-          column: 13
+          column: 17
         },
         {
           messageId: 'invalidCase',
@@ -67,17 +70,18 @@ tester.run('slot-name-casing', rule, {
             caseType: 'camelCase'
           },
           line: 4,
-          column: 13
+          column: 17
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `
-      <template>
-      <slot name="fooBar" />
-      <slot name="foo-Bar_baz" />
-      </template>`,
+        <template>
+          <slot name="fooBar" />
+          <slot name="foo-Bar_baz" />
+        </template>
+      `,
       options: ['kebab-case'],
       errors: [
         {
@@ -87,7 +91,7 @@ tester.run('slot-name-casing', rule, {
             caseType: 'kebab-case'
           },
           line: 3,
-          column: 13
+          column: 17
         },
         {
           messageId: 'invalidCase',
@@ -96,18 +100,19 @@ tester.run('slot-name-casing', rule, {
             caseType: 'kebab-case'
           },
           line: 4,
-          column: 13
+          column: 17
         }
       ]
     },
     {
       filename: 'test.vue',
       code: `
-      <template>
-      <slot name="foo-bar" />
-      <slot name="fooBar" />
-      <slot name="foo-Bar_baz" />
-      </template>`,
+        <template>
+          <slot name="foo-bar" />
+          <slot name="fooBar" />
+          <slot name="foo-Bar_baz" />
+        </template>
+      `,
       options: ['singleword'],
       errors: [
         {
@@ -117,7 +122,7 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 3,
-          column: 13
+          column: 17
         },
         {
           messageId: 'invalidCase',
@@ -126,7 +131,7 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 4,
-          column: 13
+          column: 17
         },
         {
           messageId: 'invalidCase',
@@ -135,7 +140,7 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 5,
-          column: 13
+          column: 17
         }
       ]
     }
