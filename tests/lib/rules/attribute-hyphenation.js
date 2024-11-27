@@ -28,6 +28,11 @@ ruleTester.run('attribute-hyphenation', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div><custom :my-prop="prop" v-model:foo-bar="fooBar"></custom></div></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div><custom data-id="foo" aria-test="bar" slot-scope="{ data }" myProp="prop"></custom></div></template>',
       options: ['never']
     },
@@ -70,6 +75,36 @@ ruleTester.run('attribute-hyphenation', rule, {
       filename: 'test.vue',
       code: '<template><div><custom :attr_ff="prop"></custom></div></template>',
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :my-name.sync="prop"></custom></div></template>',
+      options: ['always']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :myName.sync="prop"></custom></div></template>',
+      options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <VueComponent my-prop></VueComponent>
+        <custom-component my-prop></custom-component>
+      </template>
+      `,
+      options: ['never', { ignoreTags: ['VueComponent', '/^custom-/'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <VueComponent myProp="prop"></VueComponent>
+        <custom-component myProp="prop"></custom-component>
+      </template>
+      `,
+      options: ['always', { ignoreTags: ['VueComponent', '/^custom-/'] }]
     }
   ],
 
@@ -204,6 +239,48 @@ ruleTester.run('attribute-hyphenation', rule, {
       errors: [
         {
           message: "Attribute 'v-bind:propID' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2510
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:my-prop="prop"></custom></div></template>',
+      output:
+        '<template><div><custom v-model:myProp="prop"></custom></div></template>',
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute 'v-model:my-prop' can't be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:myProp="prop"></custom></div></template>',
+      output:
+        '<template><div><custom v-model:my-prop="prop"></custom></div></template>',
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute 'v-model:myProp' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom v-model:MyProp="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute 'v-model:MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
           line: 1
         }
@@ -365,6 +442,78 @@ ruleTester.run('attribute-hyphenation', rule, {
           message: "Attribute ':my-custom_prop' can't be hyphenated.",
           type: 'VDirectiveKey',
           line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :myAge.sync="prop"></custom></div></template>',
+      output: null,
+      options: ['always'],
+      errors: [
+        {
+          message: "Attribute ':myAge.sync' must be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><custom :my-age.sync="prop"></custom></div></template>',
+      output: null,
+      options: ['never'],
+      errors: [
+        {
+          message: "Attribute ':my-age.sync' can't be hyphenated.",
+          type: 'VDirectiveKey',
+          line: 1
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <custom my-prop/>
+        <CustomComponent my-prop/>
+      </template>
+      `,
+      output: `
+      <template>
+        <custom myProp/>
+        <CustomComponent my-prop/>
+      </template>
+      `,
+      options: ['never', { ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "Attribute 'my-prop' can't be hyphenated.",
+          type: 'VIdentifier',
+          line: 3,
+          column: 17
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <custom myProp/>
+        <CustomComponent myProp/>
+      </template>
+      `,
+      output: `
+      <template>
+        <custom my-prop/>
+        <CustomComponent myProp/>
+      </template>
+      `,
+      options: ['always', { ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "Attribute 'myProp' must be hyphenated.",
+          type: 'VIdentifier',
+          line: 3,
+          column: 17
         }
       ]
     }

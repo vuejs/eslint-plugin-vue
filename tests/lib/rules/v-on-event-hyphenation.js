@@ -44,6 +44,32 @@ tester.run('v-on-event-hyphenation', rule, {
       </template>
       `,
       options: ['never', { ignore: ['custom'] }]
+    },
+    {
+      code: `
+      <template>
+          <VueComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { ignore: ['custom-event'] }]
+    },
+    {
+      code: `
+      <template>
+          <VueComponent v-on:custom-event="events"/>
+          <custom-component v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { ignoreTags: ['/^Vue/', 'custom-component'] }]
+    },
+    {
+      code: `
+      <template>
+          <VueComponent v-on:customEvent="events"/>
+          <custom-component v-on:customEvent="events"/>
+      </template>
+      `,
+      options: ['always', { ignoreTags: ['/^Vue/', 'custom-component'] }]
     }
   ],
   invalid: [
@@ -178,6 +204,50 @@ tester.run('v-on-event-hyphenation', rule, {
         "v-on event '@up-date:modelValue' can't be hyphenated.",
         "v-on event '@upDate:model-value' can't be hyphenated.",
         "v-on event '@up-date:model-value' can't be hyphenated."
+      ]
+    },
+    {
+      code: `
+      <template>
+        <VueComponent v-on:custom-event="events"/>
+        <CustomComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      output: `
+      <template>
+        <VueComponent v-on:customEvent="events"/>
+        <CustomComponent v-on:custom-event="events"/>
+      </template>
+      `,
+      options: ['never', { autofix: true, ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "v-on event 'v-on:custom-event' can't be hyphenated.",
+          line: 3,
+          column: 23
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <VueComponent v-on:customEvent="events"/>
+        <CustomComponent v-on:customEvent="events"/>
+      </template>
+      `,
+      output: `
+      <template>
+        <VueComponent v-on:custom-event="events"/>
+        <CustomComponent v-on:customEvent="events"/>
+      </template>
+      `,
+      options: ['always', { autofix: true, ignoreTags: ['CustomComponent'] }],
+      errors: [
+        {
+          message: "v-on event 'v-on:customEvent' must be hyphenated.",
+          line: 3,
+          column: 23
+        }
       ]
     }
   ]

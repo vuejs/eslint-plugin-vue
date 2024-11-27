@@ -315,6 +315,20 @@ tester.run('no-unused-refs', rule, {
       const x = ref(null)
       </script>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input ref="x" />
+        <input ref="y" />
+      </template>
+      <script setup>
+      import {useTemplateRef} from 'vue'
+      const inputX = useTemplateRef('x')
+      const inputY = useTemplateRef(\`y\`)
+      </script>
+      `
     }
   ],
 

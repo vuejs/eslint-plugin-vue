@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/require-default-export
 description: require components to be the default export
+since: v9.28.0
 ---
 
 # vue/require-default-export
 
 > require components to be the default export
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -50,6 +49,10 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/one-component-per-file](./one-component-per-file.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.28.0
 
 ## :mag: Implementation
 

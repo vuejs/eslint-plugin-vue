@@ -213,7 +213,7 @@ For example:
 | [vue/component-options-name-casing](./component-options-name-casing.md) | enforce the casing of component name in `components` options | :wrench::bulb: | :hammer: |
 | [vue/custom-event-name-casing](./custom-event-name-casing.md) | enforce specific casing for custom event name |  | :hammer: |
 | [vue/define-emits-declaration](./define-emits-declaration.md) | enforce declaration style of `defineEmits` |  | :hammer: |
-| [vue/define-macros-order](./define-macros-order.md) | enforce order of `defineEmits` and `defineProps` compiler macros | :wrench::bulb: | :lipstick: |
+| [vue/define-macros-order](./define-macros-order.md) | enforce order of compiler macros (`defineProps`, `defineEmits`, etc.) | :wrench::bulb: | :lipstick: |
 | [vue/define-props-declaration](./define-props-declaration.md) | enforce declaration style of `defineProps` |  | :hammer: |
 | [vue/enforce-style-attribute](./enforce-style-attribute.md) | enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags |  | :hammer: |
 | [vue/html-button-has-type](./html-button-has-type.md) | disallow usage of button without an explicit type attribute |  | :hammer: |
@@ -224,13 +224,15 @@ For example:
 | [vue/match-component-import-name](./match-component-import-name.md) | require the registered component name to match the imported component name |  | :warning: |
 | [vue/max-lines-per-block](./max-lines-per-block.md) | enforce maximum number of lines in Vue SFC blocks |  | :warning: |
 | [vue/max-props](./max-props.md) | enforce maximum number of props in Vue component |  | :warning: |
+| [vue/max-template-depth](./max-template-depth.md) | enforce maximum depth of template |  | :warning: |
 | [vue/new-line-between-multi-line-property](./new-line-between-multi-line-property.md) | enforce new lines between multi-line properties in Vue components | :wrench: | :lipstick: |
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults |  | :hammer: |
+| [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
 | [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
-| [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty |  | :hammer: |
+| [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-reactivity-loss](./no-ref-object-reactivity-loss.md) | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
@@ -268,6 +270,7 @@ For example:
 | [vue/prefer-prop-type-boolean-first](./prefer-prop-type-boolean-first.md) | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class](./prefer-separate-static-class.md) | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand](./prefer-true-attribute-shorthand.md) | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
+| [vue/prefer-use-template-ref](./prefer-use-template-ref.md) | require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs |  | :hammer: |
 | [vue/require-default-export](./require-default-export.md) | require components to be the default export |  | :warning: |
 | [vue/require-direct-export](./require-direct-export.md) | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator](./require-emit-validator.md) | require type definitions in emits | :bulb: | :hammer: |
@@ -278,7 +281,9 @@ For example:
 | [vue/require-prop-comment](./require-prop-comment.md) | require props to have a comment |  | :hammer: |
 | [vue/require-typed-object-prop](./require-typed-object-prop.md) | enforce adding type declarations to object props | :bulb: | :hammer: |
 | [vue/require-typed-ref](./require-typed-ref.md) | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
+| [vue/restricted-component-names](./restricted-component-names.md) | enforce using only specific component names |  | :warning: |
 | [vue/script-indent](./script-indent.md) | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
+| [vue/slot-name-casing](./slot-name-casing.md) | enforce specific casing for slot names |  | :hammer: |
 | [vue/sort-keys](./sort-keys.md) | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order](./static-class-names-order.md) | enforce static class names order | :wrench: | :hammer: |
 | [vue/v-for-delimiter-style](./v-for-delimiter-style.md) | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
@@ -310,7 +315,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/dot-notation](./dot-notation.md) | Enforce dot notation whenever possible in `<template>` | :wrench: | :hammer: |
 | [vue/eqeqeq](./eqeqeq.md) | Require the use of `===` and `!==` in `<template>` | :wrench: | :hammer: |
 | [vue/func-call-spacing](./func-call-spacing.md) | Require or disallow spacing between function identifiers and their invocations in `<template>` | :wrench: | :lipstick: |
-| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between keys and values in object literal properties in `<template>` | :wrench: | :lipstick: |
+| [vue/key-spacing](./key-spacing.md) | Enforce consistent spacing between property names and type annotations in types and interfaces in `<template>` | :wrench: | :lipstick: |
 | [vue/keyword-spacing](./keyword-spacing.md) | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
 | [vue/max-len](./max-len.md) | enforce a maximum line length in `.vue` files |  | :lipstick: |
 | [vue/multiline-ternary](./multiline-ternary.md) | Enforce newlines between operands of ternary expressions in `<template>` | :wrench: | :lipstick: |
@@ -329,7 +334,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/object-shorthand](./object-shorthand.md) | Require or disallow method and property shorthand syntax for object literals in `<template>` | :wrench: | :hammer: |
 | [vue/operator-linebreak](./operator-linebreak.md) | Enforce consistent linebreak style for operators in `<template>` | :wrench: | :lipstick: |
 | [vue/prefer-template](./prefer-template.md) | Require template literals instead of string concatenation in `<template>` | :wrench: | :hammer: |
-| [vue/quote-props](./quote-props.md) | Require quotes around object literal property names in `<template>` | :wrench: | :lipstick: |
+| [vue/quote-props](./quote-props.md) | Require quotes around object literal, type literal, interfaces and enums property names in `<template>` | :wrench: | :lipstick: |
 | [vue/space-in-parens](./space-in-parens.md) | Enforce consistent spacing inside parentheses in `<template>` | :wrench: | :lipstick: |
 | [vue/space-infix-ops](./space-infix-ops.md) | Require spacing around infix operators in `<template>` | :wrench: | :lipstick: |
 | [vue/space-unary-ops](./space-unary-ops.md) | Enforce consistent spacing before or after unary operators in `<template>` | :wrench: | :lipstick: |

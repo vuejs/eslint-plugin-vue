@@ -643,6 +643,44 @@ tester.run('no-deprecated-slot-attribute', rule, {
         }
       ],
       errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <slot
+            v-for="slot in Object.keys($slots)"
+            :slot="slot"
+            :name="slot"
+          ></slot>
+        </my-component>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <template v-for="slot in Object.keys($slots)" v-slot:[slot]>
+<slot
+            
+            
+            :name="slot"
+          ></slot>
+</template>
+        </my-component>
+      </template>`,
+      errors: ['`slot` attributes are deprecated.']
+    },
+    {
+      code: `
+      <template>
+        <component :is="toggle ? 'my-component' : 'div'">
+          <div slot="named">
+            Passing in a named slot to a div worked with old syntax
+            But not with new syntax
+          </div>
+        </component>
+      </template>`,
+      output: null,
+      errors: ['`slot` attributes are deprecated.']
     }
   ]
 })

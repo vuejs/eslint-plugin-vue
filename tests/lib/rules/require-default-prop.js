@@ -351,6 +351,43 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo=42,bar=42} = defineProps({foo: Number, bar: {type: Number}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo,bar} = defineProps({foo: Boolean, bar: {type: Boolean}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      // ignore
+      const {bar = 42, foo = 42} = defineProps({[x]: Number, bar: {type: Number}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     }
   ],
 
@@ -623,6 +660,46 @@ ruleTester.run('require-default-prop', rule, {
               }
             ]
           }
-        ])
+        ]),
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo,bar} = defineProps({foo: Boolean, bar: {type: String}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      errors: [
+        {
+          message: "Prop 'bar' requires default value to be set.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo,bar} = defineProps({foo: Number, bar: {type: Number}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 3
+        },
+        {
+          message: "Prop 'bar' requires default value to be set.",
+          line: 3
+        }
+      ]
+    }
   ]
 })

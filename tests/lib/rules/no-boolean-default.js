@@ -326,6 +326,18 @@ ruleTester.run('no-boolean-default', rule, {
           parser: require.resolve('@typescript-eslint/parser')
         }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo = false} = defineProps({foo: Boolean})
+      </script>
+      `,
+      options: ['default-false'],
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      }
     }
   ],
 
@@ -512,6 +524,42 @@ ruleTester.run('no-boolean-default', rule, {
               }
             ]
           }
-        ])
+        ]),
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo = false} = defineProps({foo: Boolean})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {foo = true} = defineProps({foo: Boolean})
+      </script>
+      `,
+      options: ['default-false'],
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 3
+        }
+      ]
+    }
   ]
 })

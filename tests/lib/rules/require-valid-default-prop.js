@@ -223,8 +223,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      },
-      errors: errorMessage('function')
+      }
     },
     {
       filename: 'test.vue',
@@ -241,8 +240,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      },
-      errors: errorMessage('function')
+      }
     },
     {
       filename: 'test.vue',
@@ -259,8 +257,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         parser: require('@typescript-eslint/parser'),
         ecmaVersion: 6,
         sourceType: 'module'
-      },
-      errors: errorMessage('function')
+      }
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1853
@@ -304,6 +301,36 @@ ruleTester.run('require-valid-default-prop', rule, {
       })
       </script>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = 'abc' } = defineProps({
+          foo: {
+            type: String,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      }
     }
   ],
 
@@ -1041,6 +1068,138 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = 123 } = defineProps({
+          foo: String
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = 123 } = defineProps({
+          foo: {
+            type: String,
+            default: 123
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 3
+        },
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 6
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Number,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a number.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = 42 } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = [] } = defineProps({
+          foo: {
+            type: Array,
+            default: () => {
+              return 42
+            }
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 7
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        const { foo = (()=>[]) } = defineProps({
+          foo: {
+            type: Array,
+          }
+        })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser')
+      },
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a array.",
+          line: 3
+        }
+      ]
     }
   ]
 })

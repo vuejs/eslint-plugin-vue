@@ -561,7 +561,248 @@ tester.run('no-undef-properties', rule, {
         }
       }
     },
+    {
+      // Vuex
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'vuex';
 
+      export default {
+        computed: {
+          ...mapState({
+            a: (vm) => vm.a,
+            b: (vm) => vm.b,
+          })
+        },
+        methods: {
+          c() {return this.a * this.b}
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapActions({
+            a: 'a',
+            b: 'b',
+          }),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapMutations({
+            a: 'a',
+            b: 'b',
+          }),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapActions(['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'vuex';
+
+      export default {
+        methods: {
+          ...mapMutations(['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'vuex';
+
+      export default {
+        computed: {
+          ...mapGetters(['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      // Pinia
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapGetters(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapState(useStore, {
+            a: 'a',
+            b: store => store.b,
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, {
+            a: 'a',
+            b: 'b',
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+          methods: {
+          ...mapActions(useStore, ['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a() }} {{ b() }}
+      </template>
+      `
+    },
     `
     <script setup>
     const model = defineModel();
@@ -1212,6 +1453,321 @@ tester.run('no-undef-properties', rule, {
         {
           message: "'undef' is not defined.",
           line: 14
+        }
+      ]
+    },
+    {
+      // Vuex
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'vuex';
+
+      export default {
+        computed: {
+          ...mapState({
+            a: (vm) => vm.a,
+            b: (vm) => vm.b,
+          })
+        },
+        methods: {
+          c() {return this.a * this.g}
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }} {{ c }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'g' is not defined.",
+          line: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapActions({
+            a: 'a',
+            b: 'b',
+          }),
+          c() {return this.a()},
+          d() {return this.f()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'f' is not defined.",
+          line: 12
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapMutations({
+            a: 'a',
+            b: 'b',
+          }),
+          c() {return this.a()},
+          d() {return this.b()},
+          d() {return this.x()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'x' is not defined.",
+          line: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'vuex';
+
+      export default {
+          methods: {
+          ...mapActions(['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+          d() {return this.f()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'f' is not defined.",
+          line: 10
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapMutations } from 'vuex';
+
+      export default {
+        methods: {
+          ...mapMutations(['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }} {{ q }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'q' is not defined.",
+          line: 14
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'vuex';
+
+      export default {
+        computed: {
+          ...mapGetters(['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+          d() {return this.z},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'z' is not defined.",
+          line: 12
+        }
+      ]
+    },
+    {
+      // Pinia
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapGetters } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapGetters(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+          d() {return this.z},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'z' is not defined.",
+          line: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapState(useStore, {
+            a: 'a',
+            b: store => store.b,
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }} {{ q }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'q' is not defined.",
+          line: 20
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, {
+            a: 'a',
+            b: 'b',
+          })
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+          d() {return this.z},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'z' is not defined.",
+          line: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapWritableState } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+        computed: {
+          ...mapWritableState(useStore, ['a', 'b'])
+        },
+        methods: {
+          c() {return this.a},
+          d() {return this.b},
+          d() {return this.z},
+        }
+      }
+      </script>
+      <template>
+      {{ a }} {{ b }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'z' is not defined.",
+          line: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import { mapActions } from 'pinia'
+      import { useStore } from '../store'
+
+      export default {
+          methods: {
+          ...mapActions(useStore, ['a', 'b']),
+          c() {return this.a()},
+          d() {return this.b()},
+          d() {return this.x()},
+        }
+      }
+      </script>
+      <template>
+      {{ a() }} {{ b() }}
+      </template>
+      `,
+      errors: [
+        {
+          message: "'x' is not defined.",
+          line: 11
         }
       ]
     }
