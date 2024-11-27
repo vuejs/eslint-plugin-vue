@@ -47,7 +47,7 @@ export default [
 
 See [the rule list](../rules/index.md) to get the `configs` & `rules` that this plugin provides.
 
-#### Configurations with `typescript-esLint` & Prettier (`eslint.config.js`)
+#### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
 
 ```bash
 npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals typescript-eslint
