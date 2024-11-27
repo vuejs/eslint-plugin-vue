@@ -192,40 +192,6 @@ export type ComponentEmit =
   | ComponentInferTypeEmit
   | ComponentUnknownEmit
 
-type ComponentArraySlotDetectName = {
-  type: 'array'
-  key: Literal | TemplateLiteral
-  slotName: string
-  node: Expression | SpreadElement
-}
-type ComponentArraySlotUnknownName = {
-  type: 'array'
-  key: null
-  slotName: null
-  node: Expression | SpreadElement
-}
-export type ComponentArraySlot =
-  | ComponentArraySlotDetectName
-  | ComponentArraySlotUnknownName
-
-type ComponentObjectSlotDetectName = {
-  type: 'object'
-  key: Expression
-  slotName: string
-  value: Expression
-  node: Property
-}
-type ComponentObjectSlotUnknownName = {
-  type: 'object'
-  key: null
-  slotName: null
-  value: Expression
-  node: Property
-}
-export type ComponentObjectSlot =
-  | ComponentObjectSlotDetectName
-  | ComponentObjectSlotUnknownName
-
 export type ComponentUnknownSlot = {
   type: 'unknown'
   slotName: null
@@ -246,8 +212,6 @@ export type ComponentInferTypeSlot = {
 }
 
 export type ComponentSlot =
-  | ComponentArraySlot
-  | ComponentObjectSlot
   | ComponentTypeSlot
   | ComponentInferTypeSlot
   | ComponentUnknownSlot
