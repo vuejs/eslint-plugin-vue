@@ -276,6 +276,21 @@ tester.run('no-undef-components', rule, {
           <CustomComponent />
         </template>
         <script>
+        export default defineNuxtComponent({
+          components: {
+            CustomComponent
+          }
+        })
+        </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <CustomComponent />
+        </template>
+        <script>
         export default {
           components: {
             CustomComponent
