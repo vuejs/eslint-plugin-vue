@@ -264,7 +264,7 @@ ruleTester.run('order-in-components', rule, {
           },
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
@@ -303,7 +303,7 @@ ruleTester.run('order-in-components', rule, {
           },
         })
       `,
-      parserOptions,
+      languageOptions,
       errors: [
         {
           message:
