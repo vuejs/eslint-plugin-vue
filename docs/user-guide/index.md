@@ -52,7 +52,7 @@ See [the rule list](../rules/index.md) to get the `configs` & `rules` that this 
 ```bash
 npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals typescript-eslint
 ```
- 
+
 ```ts
 import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
