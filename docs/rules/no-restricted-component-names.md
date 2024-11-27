@@ -84,6 +84,10 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/restricted-component-names](./restricted-component-names.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v9.15.0
