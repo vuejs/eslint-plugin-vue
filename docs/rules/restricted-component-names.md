@@ -39,7 +39,7 @@ This rule enforces consistency in component names.
 }
 ```
 
-### `"allow"`
+### `"allow: ['/^custom-/']"`
 
 <eslint-code-block :rules="{'vue/restricted-component-names': ['error', { 'allow': ['/^custom-/'] }]}">
 
