@@ -78,14 +78,14 @@ import eslint from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginVue from 'eslint-plugin-vue';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import typescriptEslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default typescriptEslint.config(
   { ignores: ['*.d.ts', '**/coverage', '**/dist'] },
   {
     extends: [
       eslint.configs.recommended,
-      ...tseslint.configs.recommended,
+      ...typescriptEslint.configs.recommended,
       ...eslintPluginVue.configs['flat/recommended'],
     ],
     files: ['**/*.{ts,vue}'],
@@ -94,7 +94,7 @@ export default tseslint.config(
       sourceType: 'module',
       globals: globals.browser,
       parserOptions: {
-        parser: tseslint.parser,
+        parser: typescriptEslint.parser,
       },
     },
     rules: {
