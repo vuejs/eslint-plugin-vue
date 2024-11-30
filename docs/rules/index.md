@@ -57,6 +57,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-functional-template] | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-html-element-is] | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-inline-template] | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  | :three::warning: |
+| [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :three::warning: |
 | [vue/no-deprecated-props-default-this] | disallow deprecated `this` access in props default function (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-router-link-tag-prop] | disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-scope-attribute] | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: | :three::hammer: |
@@ -229,7 +230,6 @@ For example:
 | [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
-| [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-import-compiler-macros] | disallow importing Vue compiler macros | :wrench: | :warning: |
