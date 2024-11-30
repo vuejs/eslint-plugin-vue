@@ -230,8 +230,6 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults |  | :hammer: |
-| [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
-| [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
