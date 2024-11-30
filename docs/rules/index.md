@@ -48,6 +48,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-computed-properties-in-data](./no-computed-properties-in-data.md) | disallow accessing computed properties in `data` |  | :three::two::warning: |
 | [vue/no-custom-modifiers-on-v-model](./no-custom-modifiers-on-v-model.md) | disallow custom modifiers on v-model used on the component |  | :two::warning: |
 | [vue/no-deprecated-data-object-declaration](./no-deprecated-data-object-declaration.md) | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
+| [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-destroyed-lifecycle](./no-deprecated-destroyed-lifecycle.md) | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-dollar-listeners-api](./no-deprecated-dollar-listeners-api.md) | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-dollar-scopedslots-api](./no-deprecated-dollar-scopedslots-api.md) | disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
@@ -178,7 +179,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/attributes-order](./attributes-order.md) | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order](./component-tags-order.md) | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
+| [vue/block-order](./block-order.md) | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
@@ -207,7 +208,6 @@ For example:
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/block-lang](./block-lang.md) | disallow use other than available `lang` |  | :hammer: |
-| [vue/block-order](./block-order.md) | enforce order of component top-level elements | :wrench: | :hammer: |
 | [vue/block-tag-newline](./block-tag-newline.md) | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style](./component-api-style.md) | enforce component API style |  | :hammer: |
 | [vue/component-name-in-template-casing](./component-name-in-template-casing.md) | enforce specific casing for the component naming style in template | :wrench: | :hammer: |
@@ -231,6 +231,7 @@ For example:
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults |  | :hammer: |
 | [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
+| [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
