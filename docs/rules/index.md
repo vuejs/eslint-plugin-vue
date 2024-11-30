@@ -57,6 +57,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-functional-template](./no-deprecated-functional-template.md) | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-html-element-is](./no-deprecated-html-element-is.md) | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-inline-template](./no-deprecated-inline-template.md) | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  | :three::warning: |
+| [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :three::warning: |
 | [vue/no-deprecated-props-default-this](./no-deprecated-props-default-this.md) | disallow deprecated `this` access in props default function (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-router-link-tag-prop](./no-deprecated-router-link-tag-prop.md) | disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-scope-attribute](./no-deprecated-scope-attribute.md) | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: | :three::hammer: |
@@ -229,6 +230,7 @@ For example:
 | [vue/next-tick-style](./next-tick-style.md) | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template](./no-bare-strings-in-template.md) | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default](./no-boolean-default.md) | disallow boolean defaults |  | :hammer: |
+| [vue/no-deprecated-delete-set](./no-deprecated-delete-set.md) | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
 | [vue/no-deprecated-model-definition](./no-deprecated-model-definition.md) | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance](./no-duplicate-attr-inheritance.md) | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block](./no-empty-component-block.md) | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
