@@ -48,6 +48,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-computed-properties-in-data] | disallow accessing computed properties in `data` |  | :three::two::warning: |
 | [vue/no-custom-modifiers-on-v-model] | disallow custom modifiers on v-model used on the component |  | :two::warning: |
 | [vue/no-deprecated-data-object-declaration] | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
+| [vue/no-deprecated-delete-set] | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-destroyed-lifecycle] | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-dollar-listeners-api] | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-dollar-scopedslots-api] | disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
@@ -228,7 +229,6 @@ For example:
 | [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
-| [vue/no-deprecated-delete-set] | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
 | [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
