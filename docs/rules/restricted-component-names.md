@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/restricted-component-names
 description: enforce using only specific component names
+since: v9.32.0
 ---
 
 # vue/restricted-component-names
 
 > enforce using only specific component names
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -59,6 +58,10 @@ This rule enforces consistency in component names.
 ## :couple: Related Rules
 
 - [vue/no-restricted-component-names](./no-restricted-component-names.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.32.0
 
 ## :mag: Implementation
 
