@@ -266,6 +266,15 @@ tester.run('prefer-use-template-ref', rule, {
         const root = ref();
       </script>
       `,
+      output: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { ref,useTemplateRef } from 'vue';
+        const root = useTemplateRef('root');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -290,6 +299,17 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
+      output: `
+      <template>
+          <button ref="button">Content</button>
+          <a href="" ref="link">Link</a>
+      </template>
+      <script setup>
+        import { ref,useTemplateRef } from 'vue';
+        const buttonRef = ref();
+        const link = useTemplateRef('link');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -312,6 +332,17 @@ tester.run('prefer-use-template-ref', rule, {
         import { ref } from 'vue';
         const heading = ref();
         const link = ref();
+      </script>
+      `,
+      output: `
+      <template>
+          <h1 ref="heading">Heading</h1>
+          <a href="" ref="link">Link</a>
+      </template>
+      <script setup>
+        import { ref,useTemplateRef } from 'vue';
+        const heading = useTemplateRef('heading');
+        const link = useTemplateRef('link');
       </script>
       `,
       errors: [
@@ -351,6 +382,22 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
+      output: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref,useTemplateRef } from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -373,6 +420,15 @@ tester.run('prefer-use-template-ref', rule, {
         const root = shallowRef();
       </script>
       `,
+      output: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { shallowRef,useTemplateRef } from 'vue';
+        const root = useTemplateRef('root');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -381,6 +437,102 @@ tester.run('prefer-use-template-ref', rule, {
           },
           line: 7,
           column: 22
+        }
+      ]
+    },
+    {
+      filename: 'missing-import.vue',
+      code: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { isEqual } from 'lodash';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            if (isEqual(counter.value, 0)) {
+              console.log('Counter is reset');
+            }
+            const button = ref();
+          }
+        }
+      </script>
+      `,
+      output: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { isEqual } from 'lodash';
+        import {useTemplateRef} from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            if (isEqual(counter.value, 0)) {
+              console.log('Counter is reset');
+            }
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 15,
+          column: 28
+        }
+      ]
+    },
+    {
+      filename: 'no-imports.vue',
+      code: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = ref();
+          }
+        }
+      </script>
+      `,
+      output: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import {useTemplateRef} from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 11,
+          column: 28
         }
       ]
     }
