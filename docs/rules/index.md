@@ -177,7 +177,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/attributes-order] | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order] | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
+| [vue/block-order] | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template] | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args] | disallow passing multiple arguments to scoped slots |  | :three::two::warning: |
 | [vue/no-v-html] | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
@@ -206,7 +206,6 @@ For example:
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/block-lang] | disallow use other than available `lang` |  | :hammer: |
-| [vue/block-order] | enforce order of component top-level elements | :wrench: | :hammer: |
 | [vue/block-tag-newline] | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style] | enforce component API style |  | :hammer: |
 | [vue/component-name-in-template-casing] | enforce specific casing for the component naming style in template | :wrench: | :hammer: |
