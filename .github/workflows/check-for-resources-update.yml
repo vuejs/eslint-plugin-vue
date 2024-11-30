@@ -1,7 +1,12 @@
 name: Check for utils resources update
 on:
+  workflow_dispatch: null
   schedule:
     - cron: 0 0 * * 0 # At 00:00 on Sunday, see https://crontab.guru/#0_0_*_*_0
+
+permissions:
+    contents: write
+    pull-requests: write
 
 jobs:
   check-for-resources-update:
@@ -17,7 +22,9 @@ jobs:
         run: npm install
       - name: Update
         run: npm run update-resources
-      - name: Check changes
-        run: |
-            git add --all && \
-            git diff-index --cached HEAD --stat --exit-code
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Updates resources with latest
+          branch: update-unicode-alias
+          branch-suffix: timestamp
+          title: Updates resources with latest
