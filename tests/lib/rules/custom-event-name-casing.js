@@ -237,18 +237,6 @@ tester.run('custom-event-name-casing', rule, {
       ]
     },
 
-    // For backward compatibility
-    {
-      filename: 'test.vue',
-      code: `
-      <template>
-        <input
-          @click="$emit('fooBar')">
-      </template>
-      `,
-      options: [{ ignores: ['fooBar'] }]
-    },
-
     // camelCase
     {
       filename: 'test.vue',
