@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/slot-name-casing
 description: enforce specific casing for slot names
+since: v9.32.0
 ---
 
 # vue/slot-name-casing
 
 > enforce specific casing for slot names
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -81,6 +80,10 @@ This rule enforces proper casing of slot names in Vue components.
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.32.0
 
 ## :mag: Implementation
 
