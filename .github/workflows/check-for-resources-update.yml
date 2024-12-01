@@ -24,7 +24,7 @@ jobs:
         run: npm run update-resources
       - uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: Updates resources with latest
-          branch: update-unicode-alias
+          commit-message: Updates resources
+          branch: update-resources
           branch-suffix: timestamp
-          title: Updates resources with latest
+          title: Updates resources
