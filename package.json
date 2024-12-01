@@ -20,6 +20,7 @@
     "preversion": "npm test && git add .",
     "version": "env-cmd -e version npm run update && npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
+    "update-resources": "node ./tools/update-resources.js",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs"
@@ -90,6 +91,7 @@
     "eslint-plugin-vue": "file:.",
     "espree": "^9.6.1",
     "events": "^3.3.0",
+    "jsdom": "^22.0.0",
     "markdownlint-cli": "^0.42.0",
     "mocha": "^10.7.3",
     "nyc": "^17.1.0",
