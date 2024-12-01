@@ -13,7 +13,14 @@ Please refer to the [official website](https://eslint.vuejs.org).
 
 ## :anchor: Versioning Policy
 
-This plugin follows [Semantic Versioning](https://semver.org) and [ESLint's Semantic Versioning Policy](https://github.com/eslint/eslint#semantic-versioning-policy).
+This plugin follows [Semantic Versioning].
+However, please note that we do not follow [ESLint's Semantic Versioning Policy].
+In minor version releases, this plugin may change the sharable configs provided by the plugin or the default behavior of the plugin's rules in order to add features to the plugin. Because we want to add many features to the plugin soon, so that users can easily take advantage of new features in Vue and Nuxt.
+
+According to our policy, any minor update may report more linting errors than the previous release. As such, we recommend using the [tilde (`~`)](https://semver.npmjs.com/#syntax-examples) in `package.json` to guarantee the results of your builds.
+
+[Semantic Versioning]: https://semver.org/
+[ESLint's Semantic Versioning Policy]: https://github.com/eslint/eslint#semantic-versioning-policy
 
 ## :newspaper: Releases
 
