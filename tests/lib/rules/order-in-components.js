@@ -50,6 +50,8 @@ ruleTester.run('order-in-components', rule, {
           model,
           props, propsData,
           emits,
+          slots,
+          expose,
           setup,
           data,
           computed,
@@ -1282,6 +1284,61 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "inheritAttrs" property on line 4.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          setup,
+          slots,
+          expose,
+        };
+      `,
+      output: `
+        export default {
+          slots,
+          setup,
+          expose,
+        };
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "slots" property should be above the "setup" property on line 3.',
+          line: 4
+        },
+        {
+          message:
+            'The "expose" property should be above the "setup" property on line 3.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          slots,
+          setup,
+          expose,
+        };
+      `,
+      output: `
+        export default {
+          slots,
+          expose,
+          setup,
+        };
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "expose" property should be above the "setup" property on line 4.',
           line: 5
         }
       ]
