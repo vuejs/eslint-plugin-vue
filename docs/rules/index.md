@@ -323,6 +323,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-constant-condition](./no-constant-condition.md) | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern](./no-empty-pattern.md) | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens](./no-extra-parens.md) | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |
+| [vue/no-implicit-coercion](./no-implicit-coercion.md) | Disallow shorthand type conversions in `<template>` | :wrench: | :hammer: |
 | [vue/no-irregular-whitespace](./no-irregular-whitespace.md) | disallow irregular whitespace in `.vue` files |  | :warning: |
 | [vue/no-loss-of-precision](./no-loss-of-precision.md) | Disallow literal numbers that lose precision in `<template>` |  | :warning: |
 | [vue/no-restricted-syntax](./no-restricted-syntax.md) | Disallow specified syntax in `<template>` |  | :hammer: |
