@@ -8,6 +8,16 @@ const { RuleTester, ESLint } = require('../../eslint-compat')
 const semver = require('semver')
 const rule = require('../../../lib/rules/no-implicit-coercion')
 
+/**
+ * @param {string} suggestedCode
+ * @returns {string}
+ */
+function getExpectedErrorMessage(suggestedCode) {
+  return semver.gte(ESLint.version, '9.0.0')
+    ? `Unexpected implicit coercion encountered. Use \`${suggestedCode}\` instead.`
+    : `use \`${suggestedCode}\` instead.`
+}
+
 const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
@@ -106,9 +116,7 @@ tester.run('no-implicit-coercion', rule, {
       output: `<template><div :data-foo="Boolean(foo)" /></template>`,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? 'Unexpected implicit coercion encountered. Use `Boolean(foo)` instead.'
-            : 'use `Boolean(foo)` instead.',
+          message: getExpectedErrorMessage('Boolean(foo)'),
           line: 1,
           column: 27
         }
@@ -120,9 +128,7 @@ tester.run('no-implicit-coercion', rule, {
       output: null,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? "Unexpected implicit coercion encountered. Use `foo.indexOf('.') !== -1` instead."
-            : "use `foo.indexOf('.') !== -1` instead.",
+          message: getExpectedErrorMessage("foo.indexOf('.') !== -1"),
           line: 1,
           column: 27
         }
@@ -136,9 +142,7 @@ tester.run('no-implicit-coercion', rule, {
         : `<template><div :data-foo="Number(foo)" /></template>`,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? 'Unexpected implicit coercion encountered. Use `Number(foo)` instead.'
-            : 'use `Number(foo)` instead.',
+          message: getExpectedErrorMessage('Number(foo)'),
           line: 1,
           column: 27,
           suggestions: semver.gte(ESLint.version, '9.0.0')
@@ -161,9 +165,7 @@ tester.run('no-implicit-coercion', rule, {
         : `<template><div :data-foo="Number(foo)" /></template>`,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? 'Unexpected implicit coercion encountered. Use `Number(foo)` instead.'
-            : 'use `Number(foo)` instead.',
+          message: getExpectedErrorMessage('Number(foo)'),
           line: 1,
           column: 27,
           suggestions: semver.gte(ESLint.version, '9.0.0')
@@ -186,9 +188,7 @@ tester.run('no-implicit-coercion', rule, {
         : `<template><div :data-foo="String(foo)" /></template>`,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? 'Unexpected implicit coercion encountered. Use `String(foo)` instead.'
-            : 'use `String(foo)` instead.',
+          message: getExpectedErrorMessage('String(foo)'),
           line: 1,
           column: 27,
           suggestions: semver.gte(ESLint.version, '9.0.0')
@@ -211,9 +211,7 @@ tester.run('no-implicit-coercion', rule, {
         : `<template><div :data-foo="String(foo)" /></template>`,
       errors: [
         {
-          message: semver.gte(ESLint.version, '9.0.0')
-            ? 'Unexpected implicit coercion encountered. Use `String(foo)` instead.'
-            : 'use `String(foo)` instead.',
+          message: getExpectedErrorMessage('String(foo)'),
           line: 1,
           column: 27,
           suggestions: semver.gte(ESLint.version, '9.0.0')
@@ -243,9 +241,7 @@ tester.run('no-implicit-coercion', rule, {
             ],
             errors: [
               {
-                message: semver.gte(ESLint.version, '9.0.0')
-                  ? 'Unexpected implicit coercion encountered. Use `String(foo)` instead.'
-                  : 'use `String(foo)` instead.',
+                message: getExpectedErrorMessage('String(foo)'),
                 line: 1,
                 column: 27,
                 suggestions: semver.gte(ESLint.version, '9.0.0')
