@@ -21,6 +21,7 @@ See [Migration Guide - Slots Unification](https://v3-migration.vuejs.org/breakin
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-dollar-scopedslots-api': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

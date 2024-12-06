@@ -18,6 +18,7 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -62,6 +63,7 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error', 2]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--
@@ -80,6 +82,7 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error', 4]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--
@@ -98,6 +101,7 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error', 0]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--
@@ -116,6 +120,7 @@ This rule enforces a consistent indentation style in HTML comment (`<!-- ... -->
 
 <eslint-code-block fix :rules="{'vue/html-comment-indent': ['error', 'tab']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--

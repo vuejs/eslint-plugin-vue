@@ -27,6 +27,7 @@ in the rule configuration.
 
 <eslint-code-block :rules="{'vue/no-restricted-class': ['error', 'forbidden']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

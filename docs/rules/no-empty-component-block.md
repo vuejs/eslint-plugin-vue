@@ -21,6 +21,7 @@ See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.htm
 
 <eslint-code-block fix :rules="{'vue/no-empty-component-block': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>

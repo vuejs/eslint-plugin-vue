@@ -26,6 +26,7 @@ This rule takes a list of strings, where each string is a attribute name or patt
 
 <eslint-code-block :rules="{'vue/no-restricted-static-attribute': ['error', 'foo', 'bar']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -66,6 +67,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-static-attribute': ['error', { key: 'foo', value: 'bar' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -82,6 +84,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-static-attribute': ['error', { key: 'foo', element: 'MyButton' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

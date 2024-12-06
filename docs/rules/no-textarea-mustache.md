@@ -18,6 +18,7 @@ This rule reports mustaches in `<textarea>`.
 
 <eslint-code-block :rules="{'vue/no-textarea-mustache': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -26,6 +26,7 @@ Self-closing is simple and shorter, but it's not supported in the HTML spec.
 
 <eslint-code-block fix :rules="{'vue/html-self-closing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -76,6 +77,7 @@ Every option can be set to one of the following values:
 
 <eslint-code-block fix :rules="{'vue/html-self-closing': ['error', {html: {normal: 'never', void: 'always'}}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -28,6 +28,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { template: 2 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -43,6 +44,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/max-lines-per-block': ['error', { script: 1, skipBlankLines: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>

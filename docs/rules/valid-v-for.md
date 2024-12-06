@@ -28,6 +28,7 @@ If the element which has the directive is a reserved element, this rule does not
 
 <eslint-code-block :rules="{'vue/valid-v-for': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

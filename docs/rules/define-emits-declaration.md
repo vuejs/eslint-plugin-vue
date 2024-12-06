@@ -19,6 +19,7 @@ This rule only works in setup script and `lang="ts"`.
 
 <eslint-code-block :rules="{'vue/define-emits-declaration': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -60,6 +61,7 @@ const emit = defineEmits(['change', 'update'])
 
 <eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'runtime']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */
@@ -85,6 +87,7 @@ const emit = defineEmits(['change', 'update'])
 
 <eslint-code-block :rules="{'vue/define-emits-declaration': ['error', 'type-literal']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */

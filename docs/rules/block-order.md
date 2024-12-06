@@ -20,9 +20,12 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 ```json
 {
-  "vue/block-order": ["error", {
-    "order": [ [ "script", "template" ], "style" ]
-  }]
+  "vue/block-order": [
+    "error",
+    {
+      "order": [["script", "template"], "style"]
+    }
+  ]
 }
 ```
 
@@ -32,6 +35,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>/* ... */</script>
@@ -43,6 +47,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
@@ -54,6 +59,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <style>/* ... */</style>
@@ -67,6 +73,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
@@ -78,6 +85,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'script', 'style'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script>/* ... */</script>
@@ -91,6 +99,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <docs> documentation </docs>
@@ -103,6 +112,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['docs', 'template', 'script', 'style'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>
@@ -117,6 +127,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'script:not([setup])', 'script[setup]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
@@ -128,6 +139,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'script:not([setup])', 'script[setup]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>
@@ -141,6 +153,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'style:not([scoped])', 'style[scoped]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
@@ -152,6 +165,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'style:not([scoped])', 'style[scoped]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>
@@ -165,6 +179,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'i18n:not([locale=en])', 'i18n[locale=en]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>...</template>
@@ -176,6 +191,7 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 <eslint-code-block fix :rules="{'vue/block-order': ['error', { 'order': ['template', 'i18n:not([locale=en])', 'i18n[locale=en]'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>...</template>

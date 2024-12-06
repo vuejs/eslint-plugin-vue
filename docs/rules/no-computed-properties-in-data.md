@@ -19,6 +19,7 @@ The computed property cannot be accessed in `data()` because is before initializ
 
 <eslint-code-block :rules="{'vue/no-computed-properties-in-data': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

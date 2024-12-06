@@ -18,6 +18,7 @@ This rule reports use of deprecated `.native` modifier on `v-on` directive (in V
 
 <eslint-code-block :rules="{'vue/no-deprecated-v-on-native-modifier': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

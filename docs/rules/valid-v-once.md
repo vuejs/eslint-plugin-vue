@@ -24,6 +24,7 @@ This rule reports `v-once` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-once': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

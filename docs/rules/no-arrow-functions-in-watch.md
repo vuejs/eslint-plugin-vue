@@ -18,6 +18,7 @@ This rule disallows using arrow functions when defining a watcher. Arrow functio
 
 <eslint-code-block :rules="{'vue/no-arrow-functions-in-watch': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

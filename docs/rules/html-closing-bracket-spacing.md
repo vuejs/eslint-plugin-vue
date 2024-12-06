@@ -19,6 +19,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-spacing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -69,6 +70,7 @@ This rule aims to enforce consistent spacing style before closing brackets `>` o
 
 <eslint-code-block fix :rules="{'vue/html-closing-bracket-spacing': ['error', {startTag: 'always', endTag: 'always', selfClosingTag: 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

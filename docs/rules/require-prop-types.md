@@ -20,6 +20,7 @@ In committed code, prop definitions should always be as detailed as possible, sp
 
 <eslint-code-block :rules="{'vue/require-prop-types': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */

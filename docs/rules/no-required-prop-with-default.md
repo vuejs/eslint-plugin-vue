@@ -21,6 +21,7 @@ This rule enforces all props with default values to be optional.
 
 <eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -51,6 +52,7 @@ const props = withDefaults(
 
 <eslint-code-block fix :rules="{'vue/no-required-prop-with-default': ['error', { autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -19,6 +19,7 @@ and other similar fields not to be in alphabetical order.
 
 <eslint-code-block :rules="{'vue/sort-keys': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -46,6 +47,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/sort-keys': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

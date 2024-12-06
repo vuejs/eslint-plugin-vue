@@ -20,6 +20,7 @@ You must use `.value` to access the `Ref` value.
 
 <eslint-code-block fix :rules="{'vue/no-ref-as-operand': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { ref } from 'vue'

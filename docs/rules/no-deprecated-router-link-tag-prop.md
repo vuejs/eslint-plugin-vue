@@ -18,6 +18,7 @@ This rule reports deprecated the `tag` attribute on `RouterLink` elements (remov
 
 <eslint-code-block :rules="{'vue/no-deprecated-router-link-tag-prop': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -64,6 +65,7 @@ given component names.
 
 <eslint-code-block :rules="{'vue/no-deprecated-router-link-tag-prop': ['error', {'components': ['RouterLink', 'NuxtLink']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

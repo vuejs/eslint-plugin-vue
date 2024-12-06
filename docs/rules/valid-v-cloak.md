@@ -24,6 +24,7 @@ This rule reports `v-cloak` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-cloak': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

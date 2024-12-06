@@ -26,6 +26,7 @@ This rule takes a list of strings, where each string is a block name or pattern 
 
 <eslint-code-block :rules="{'vue/no-restricted-block': ['error', 'style', 'foo', 'bar']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <foo>
@@ -71,6 +72,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-block': ['error', { element: 'foo' }, { element: '/forbidden/' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <foo>

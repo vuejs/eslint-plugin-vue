@@ -18,6 +18,7 @@ This rule reports the `<component>` elements which do not have `v-bind:is` attri
 
 <eslint-code-block :rules="{'vue/require-component-is': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

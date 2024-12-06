@@ -18,6 +18,7 @@ This rule disallow reserved names to be used in props.
 
 <eslint-code-block :rules="{'vue/no-reserved-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

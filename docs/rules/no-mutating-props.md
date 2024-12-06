@@ -18,6 +18,7 @@ This rule reports mutation of component props.
 
 <eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -62,6 +63,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -106,6 +108,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -135,6 +138,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-mutating-props': ['error', {shallowOnly: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>

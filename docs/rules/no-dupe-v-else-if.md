@@ -18,6 +18,7 @@ This rule disallows duplicate conditions in the same `v-if` / `v-else-if` chain.
 
 <eslint-code-block :rules="{'vue/no-dupe-v-else-if': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -58,6 +59,7 @@ This rule can also detect some cases where the conditions are not identical, but
 
 <eslint-code-block :rules="{'vue/no-dupe-v-else-if': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

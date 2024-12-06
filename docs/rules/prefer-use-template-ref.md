@@ -19,6 +19,7 @@ This rule enforces using the new `useTemplateRef` function instead of `ref`/`sha
 
 <eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <button ref="submitRef">Submit</button>
@@ -47,6 +48,7 @@ This rule skips `ref` template function refs as these should be used to allow cu
 
 <eslint-code-block :rules="{'vue/prefer-use-template-ref': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <button :ref="ref => submitRef = ref">Submit</button>

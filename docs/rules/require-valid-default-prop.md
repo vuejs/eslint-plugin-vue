@@ -18,6 +18,7 @@ This rule checks whether the default value of each prop is valid for the given t
 
 <eslint-code-block :rules="{'vue/require-valid-default-prop': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -18,6 +18,7 @@ This rule reports components that haven't been used in the template.
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -52,6 +53,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -97,6 +99,7 @@ Components registered under `PascalCase` or `camelCase` names have may be called
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -127,6 +130,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-components': ['error', { 'ignoreWhenBindingPresent': false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>

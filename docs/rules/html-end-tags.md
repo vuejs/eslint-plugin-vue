@@ -19,6 +19,7 @@ This rule aims to disallow lacking end tags.
 
 <eslint-code-block fix :rules="{'vue/html-end-tags': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

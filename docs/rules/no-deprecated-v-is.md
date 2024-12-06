@@ -20,6 +20,7 @@ Use [`is` attribute with `vue:` prefix](https://vuejs.org/api/built-in-special-a
 
 <eslint-code-block :rules="{'vue/no-deprecated-v-is': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

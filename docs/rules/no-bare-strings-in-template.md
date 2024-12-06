@@ -19,6 +19,7 @@ This rule was inspired by [no-bare-strings rule in ember-template-lint](https://
 
 <eslint-code-block :rules="{'vue/no-bare-strings-in-template': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

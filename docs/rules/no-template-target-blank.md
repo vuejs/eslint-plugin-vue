@@ -18,6 +18,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ Good -->
@@ -48,6 +49,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { allowReferrer: false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ Good -->
@@ -64,6 +66,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { allowReferrer: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ Good -->
@@ -80,6 +83,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { enforceDynamicLinks: 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ Good -->
@@ -96,6 +100,7 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 <eslint-code-block :rules="{'vue/no-template-target-blank': ['error', { enforceDynamicLinks: 'never' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ Good -->

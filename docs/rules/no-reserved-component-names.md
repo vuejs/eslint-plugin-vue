@@ -18,6 +18,7 @@ This rule prevents name collisions between Vue components and standard HTML elem
 
 <eslint-code-block :rules="{'vue/no-reserved-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -49,6 +50,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {disallowVueBuiltInComponents: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -64,6 +66,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {disallowVue3BuiltInComponents: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -79,6 +82,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -92,6 +96,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

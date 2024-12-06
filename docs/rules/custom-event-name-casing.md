@@ -32,6 +32,7 @@ This rule enforces camelCase by default.
 
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -79,6 +80,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -108,6 +110,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', 'camelCase']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -137,6 +140,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error', 'camelCase', { ignores: ['foo-bar', '/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

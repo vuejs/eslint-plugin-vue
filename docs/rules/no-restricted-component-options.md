@@ -26,6 +26,7 @@ This rule takes a list of strings, where each string is a component option name 
 
 <eslint-code-block :rules="{'vue/no-restricted-component-options': ['error', 'init', 'beforeCompile', 'compiled', 'activate', 'ready', '/^(?:at|de)tached$/']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -54,6 +55,7 @@ e.g. `[ "error", ["props", "/.*/", "twoWay"] ]`
 
 <eslint-code-block :rules="{'vue/no-restricted-component-options': ['error' , ['props', '/.*/', 'twoWay'] ]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -78,6 +80,7 @@ e.g. `[ "error", ["props", "*", "twoWay"] ]`
 
 <eslint-code-block :rules="{'vue/no-restricted-component-options': ['error' , ['props', '*', 'twoWay'] ]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

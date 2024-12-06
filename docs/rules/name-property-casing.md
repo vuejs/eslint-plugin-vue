@@ -18,6 +18,7 @@ This rule aims at enforcing the style for the `name` property casing for consist
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -31,6 +32,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -57,6 +59,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -70,6 +73,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/name-property-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

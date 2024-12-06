@@ -19,6 +19,7 @@ This rule reports child content of elements that have a directive which overwrit
 
 <eslint-code-block :rules="{'vue/no-child-content': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

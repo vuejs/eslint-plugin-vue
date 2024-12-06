@@ -20,6 +20,7 @@ See [Migration Guide - Inline Template Attribute](https://v3-migration.vuejs.org
 
 <eslint-code-block :rules="{'vue/no-deprecated-inline-template': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

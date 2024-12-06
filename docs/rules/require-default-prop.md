@@ -18,6 +18,7 @@ This rule requires default value to be set for each props that are not marked as
 
 <eslint-code-block :rules="{'vue/require-default-prop': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -18,6 +18,7 @@ This rule enforce usage of `exact` modifier on `v-on` when there is another `v-o
 
 <eslint-code-block :rules="{'vue/use-v-on-exact': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -25,6 +25,7 @@ Forbids call expressions inside mustache interpolation.
 
 <eslint-code-block :rules="{'vue/no-restricted-syntax': ['error', 'VElement > VExpressionContainer CallExpression']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

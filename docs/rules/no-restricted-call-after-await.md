@@ -30,6 +30,7 @@ This rule takes a list of objects, where each object specifies a restricted modu
 
 <eslint-code-block :rules="{'vue/no-restricted-call-after-await': ['error', { module: 'vue-i18n', path: ['useI18n'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { useI18n } from 'vue-i18n'
@@ -70,6 +71,7 @@ For examples:
 
 <eslint-code-block :rules="{'vue/no-restricted-call-after-await': ['error', { module: 'a', path: 'foo' }, { module: 'b', path: ['bar', 'baz'] }, { module: 'c' }, { module: 'd', path: 'default' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { foo as fooOfA } from 'a'

@@ -19,6 +19,7 @@ This rule enforces a line break before and after the contents of a singleline el
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -80,6 +81,7 @@ This rule enforces a line break before and after the contents of a singleline el
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -97,6 +99,7 @@ This rule enforces a line break before and after the contents of a singleline el
 
 <eslint-code-block fix :rules="{'vue/singleline-html-element-content-newline': ['error', {'ignoreWhenNoAttributes': false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

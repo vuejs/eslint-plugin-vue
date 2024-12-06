@@ -22,6 +22,7 @@ Also, with attribute fallthrough changes in Vue.js 3.0.0+, `v-on` listeners on c
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -40,6 +41,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -60,6 +62,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -92,6 +95,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-explicit-emits': ['error', {allowProps: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

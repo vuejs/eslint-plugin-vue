@@ -19,6 +19,7 @@ This rule reports deprecated `scope` attribute in Vue.js v2.5.0+.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-scope-attribute': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <ListComponent>

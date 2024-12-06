@@ -52,6 +52,7 @@ This rule aims to enforce ordering of component attributes. The default order is
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -104,6 +105,7 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD (`v-bind="object"` is considered GLOBAL category) -->
@@ -129,22 +131,25 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 ```json
 {
-  "vue/attributes-order": ["error", {
-    "order": [
-      "DEFINITION",
-      "LIST_RENDERING",
-      "CONDITIONALS",
-      "RENDER_MODIFIERS",
-      "GLOBAL",
-      ["UNIQUE", "SLOT"],
-      "TWO_WAY_BINDING",
-      "OTHER_DIRECTIVES",
-      "OTHER_ATTR",
-      "EVENTS",
-      "CONTENT"
-    ],
-    "alphabetical": false
-  }]
+  "vue/attributes-order": [
+    "error",
+    {
+      "order": [
+        "DEFINITION",
+        "LIST_RENDERING",
+        "CONDITIONALS",
+        "RENDER_MODIFIERS",
+        "GLOBAL",
+        ["UNIQUE", "SLOT"],
+        "TWO_WAY_BINDING",
+        "OTHER_DIRECTIVES",
+        "OTHER_ATTR",
+        "EVENTS",
+        "CONTENT"
+      ],
+      "alphabetical": false
+    }
+  ]
 }
 ```
 
@@ -152,6 +157,7 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -207,6 +213,7 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: ['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS', 'GLOBAL', 'UNIQUE', 'TWO_WAY_BINDING', 'DEFINITION', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -232,6 +239,7 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
 
 <eslint-code-block fix :rules="{'vue/attributes-order': ['error', {order: [['LIST_RENDERING', 'CONDITIONALS', 'RENDER_MODIFIERS'], ['DEFINITION', 'GLOBAL', 'UNIQUE'], 'TWO_WAY_BINDING', 'OTHER_DIRECTIVES', 'OTHER_ATTR', 'EVENTS', 'CONTENT']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -18,6 +18,7 @@ This rule only works in setup script and `lang="ts"`.
 
 <eslint-code-block :rules="{'vue/define-props-declaration': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -49,6 +50,7 @@ const props = defineProps({
 
 <eslint-code-block :rules="{'vue/define-props-declaration': ['error', 'runtime']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */

@@ -18,6 +18,7 @@ This rule enforce proper casing of props in vue components(camelCase).
 
 <eslint-code-block :rules="{'vue/prop-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -50,6 +51,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'snake_case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

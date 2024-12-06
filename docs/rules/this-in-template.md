@@ -19,6 +19,7 @@ This rule aims at preventing usage of `this` in Vue templates.
 
 <eslint-code-block fix :rules="{'vue/this-in-template': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -50,6 +51,7 @@ This rule aims at preventing usage of `this` in Vue templates.
 
 <eslint-code-block fix :rules="{'vue/this-in-template': ['error', 'always']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

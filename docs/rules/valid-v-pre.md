@@ -24,6 +24,7 @@ This rule reports `v-pre` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-pre': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

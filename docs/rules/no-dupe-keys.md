@@ -21,6 +21,7 @@ Even if a key name does not conflict in the `<script>` tag itself, it still may 
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -61,6 +62,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-dupe-keys': ['error', {groups: ['firebase']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

@@ -18,6 +18,7 @@ This rule prevents to use [reserved names](https://github.com/vuejs/eslint-plugi
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -60,6 +61,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-reserved-keys': ['error', {reserved: ['foo', 'foo2'], groups: ['firebase']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

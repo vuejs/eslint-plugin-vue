@@ -19,6 +19,7 @@ This rule aims to enforce to bind methods to `v-on` or call methods on `v-on` wh
 
 <eslint-code-block fix :rules="{'vue/v-on-function-call': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -54,6 +55,7 @@ Default is set to `never`.
 
 <eslint-code-block fix :rules="{'vue/v-on-function-call': ['error', 'always']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -70,6 +72,7 @@ Default is set to `never`.
 
 <eslint-code-block fix :rules="{'vue/v-on-function-call': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -87,6 +90,7 @@ Default is set to `never`.
 
 <eslint-code-block fix :rules="{'vue/v-on-function-call': ['error', 'never', {ignoreIncludesComment: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

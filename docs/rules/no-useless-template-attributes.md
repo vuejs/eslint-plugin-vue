@@ -18,6 +18,7 @@ This rule to prevent any useless attribute on `<template>` tags.
 
 <eslint-code-block :rules="{'vue/no-useless-template-attributes': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

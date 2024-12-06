@@ -23,6 +23,7 @@ However, if neither is found, the rule cannot be used.
 
 <eslint-code-block fix :rules="{'vue/multiline-ternary': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>

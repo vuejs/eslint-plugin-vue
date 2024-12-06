@@ -19,6 +19,7 @@ In `setup()` function, `watch()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { watch } from 'vue'
@@ -42,6 +43,7 @@ This rule is not reported when using the stop handle.
 
 <eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { watch } from 'vue'

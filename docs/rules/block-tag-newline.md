@@ -18,6 +18,7 @@ This rule enforces a line break (or no line break) after opening and before clos
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template><input></template>
@@ -31,6 +32,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -86,6 +88,7 @@ export default {}</script>
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error', { 'singleline': 'never', 'multiline': 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template><input></template>
@@ -100,6 +103,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error', { 'singleline': 'never', 'multiline': 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -116,6 +120,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error', { 'singleline': 'always', 'multiline': 'always', 'maxEmptyLines': 1 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -136,6 +141,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/block-tag-newline': ['error', { 'singleline': 'always', 'multiline': 'always', 'maxEmptyLines': 1 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>

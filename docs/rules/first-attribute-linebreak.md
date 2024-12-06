@@ -19,6 +19,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -61,6 +62,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error', {singleline: 'beside'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -82,6 +84,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error', {singleline: 'below'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -103,6 +106,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error', {multiline: 'beside'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -129,6 +133,7 @@ This rule aims to enforce a consistent location for the first attribute.
 
 <eslint-code-block fix :rules="{'vue/first-attribute-linebreak': ['error', {multiline: 'below'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -20,6 +20,7 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-spacing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -66,6 +67,7 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-spacing': ['error', 'always']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -80,6 +82,7 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-spacing': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--✓ GOOD-->
@@ -95,6 +98,7 @@ Whitespace after the `<!--` and before the `-->` makes it easier to read text in
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-spacing': ['error', 'always', { 'exceptions': ['*'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

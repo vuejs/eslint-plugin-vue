@@ -16,6 +16,7 @@ This rule reports all uses of `v-text` directive.
 
 <eslint-code-block :rules="{'vue/no-v-text': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

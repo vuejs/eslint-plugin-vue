@@ -19,6 +19,7 @@ For example, if you want to allow only `<script setup>` and Composition API.
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -31,6 +32,7 @@ const msg = ref('Hello World!')
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { ref } from 'vue'
@@ -52,6 +54,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -73,7 +76,8 @@ export default {
 
 ```json
 {
-  "vue/component-api-style": ["error",
+  "vue/component-api-style": [
+    "error",
     ["script-setup", "composition"] // "script-setup", "composition", "composition-vue2", or "options"
   ]
 }
@@ -89,6 +93,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error', ['options']]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -108,6 +113,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error', ['options']]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -120,6 +126,7 @@ const msg = ref('Hello World!')
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error', ['options']]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { ref } from 'vue'

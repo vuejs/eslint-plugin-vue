@@ -19,6 +19,7 @@ This rule aims to warn if no type or an invalid type is used on a button type at
 
 <eslint-code-block :rules="{'vue/html-button-has-type': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

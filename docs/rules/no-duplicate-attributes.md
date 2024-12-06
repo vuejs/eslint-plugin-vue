@@ -21,6 +21,7 @@ This rule reports duplicate attributes.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -60,6 +61,7 @@ This rule reports duplicate attributes.
 
 <eslint-code-block :rules="{'vue/no-duplicate-attributes': ['error', {allowCoexistClass: false, allowCoexistStyle: false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

@@ -18,6 +18,7 @@ This rule reports macro variables not corresponding to the specified name.
 
 <eslint-code-block :rules="{'vue/require-macro-variable-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -30,6 +31,7 @@ const emit = defineEmits(['update:msg'])
 
 <eslint-code-block :rules="{'vue/require-macro-variable-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD  -->
 <script setup>

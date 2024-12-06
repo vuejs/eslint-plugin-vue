@@ -21,6 +21,7 @@ See [Migration Guide - Props Default Function `this` Access](https://v3-migratio
 
 <eslint-code-block :rules="{'vue/no-deprecated-props-default-this': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -41,6 +42,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-deprecated-props-default-this': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

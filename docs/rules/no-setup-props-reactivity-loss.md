@@ -16,6 +16,7 @@ This rule reports the destructuring or member expression of `props` passed to `s
 
 <eslint-code-block :rules="{'vue/no-setup-props-reactivity-loss': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -39,6 +40,7 @@ Destructuring the `props` passed to `setup` will cause the value to lose reactiv
 
 <eslint-code-block :rules="{'vue/no-setup-props-reactivity-loss': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -62,6 +64,7 @@ Also, destructuring in root scope of `setup()` should error, but ok inside neste
 
 <eslint-code-block :rules="{'vue/no-setup-props-reactivity-loss': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

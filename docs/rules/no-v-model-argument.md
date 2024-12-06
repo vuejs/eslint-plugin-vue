@@ -22,6 +22,7 @@ This rule reports `v-model` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/no-v-model-argument': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

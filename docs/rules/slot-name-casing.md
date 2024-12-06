@@ -16,6 +16,7 @@ This rule enforces proper casing of slot names in Vue components.
 
 <eslint-code-block :rules="{'vue/slot-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -47,6 +48,7 @@ This rule enforces proper casing of slot names in Vue components.
 
 <eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -66,6 +68,7 @@ This rule enforces proper casing of slot names in Vue components.
 
 <eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'singleword']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

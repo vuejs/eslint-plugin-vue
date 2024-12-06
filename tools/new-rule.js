@@ -125,6 +125,7 @@ This rule ....
 
 <eslint-code-block :rules="{'vue/${ruleName}': ['error']}">
 
+<!-- prettier-ignore -->
 \`\`\`vue
 <template>
 

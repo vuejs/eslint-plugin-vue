@@ -19,6 +19,7 @@ This rule reports deprecated `slot-scope` attribute in Vue.js v2.6.0+.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-slot-scope-attribute': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <ListComponent>

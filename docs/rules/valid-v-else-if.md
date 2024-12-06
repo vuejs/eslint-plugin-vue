@@ -26,6 +26,7 @@ This rule reports `v-else-if` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-else-if': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

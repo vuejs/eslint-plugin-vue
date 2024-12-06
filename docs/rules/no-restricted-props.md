@@ -28,6 +28,7 @@ This rule takes a list of strings, where each string is a prop name or pattern t
 
 <eslint-code-block :rules="{'vue/no-restricted-props': ['error', 'value', '/^forbidden/']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -49,6 +50,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-restricted-props': ['error', 'value', '/^forbidden/']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -90,6 +92,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-props': ['error', { name: 'value', message: 'If you intend a prop for v-model, it should be \'modelValue\' in Vue 3.', suggest: 'modelValue'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

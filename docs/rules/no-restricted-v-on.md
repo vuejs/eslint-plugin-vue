@@ -26,6 +26,7 @@ This rule takes a list of strings, where each string is a argument name or patte
 
 <eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', 'foo', '/^bar/']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -69,6 +70,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', { argument: 'foo', modifiers: ['prevent'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -85,6 +87,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-v-on': ['error', { argument: 'foo', element: 'MyButton' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

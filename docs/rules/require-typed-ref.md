@@ -18,6 +18,7 @@ With TypeScript it is easy to prevent usage of `any` by using [`noImplicitAny`](
 
 <eslint-code-block :rules="{'vue/require-typed-ref': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 import { ref, shallowRef, type Ref } from 'vue'

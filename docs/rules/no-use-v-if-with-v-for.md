@@ -23,6 +23,7 @@ There are two common cases where this can be tempting:
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -69,6 +70,7 @@ There are two common cases where this can be tempting:
 
 <eslint-code-block :rules="{'vue/no-use-v-if-with-v-for': ['error', {allowUsingIterationVar: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

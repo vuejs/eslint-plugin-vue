@@ -19,6 +19,7 @@ In `setup()` function, `onXXX` lifecycle hooks should be registered synchronousl
 
 <eslint-code-block :rules="{'vue/no-lifecycle-after-await': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { onMounted } from 'vue'

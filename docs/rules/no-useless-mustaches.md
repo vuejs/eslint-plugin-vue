@@ -19,6 +19,7 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -52,6 +53,7 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error', {ignoreIncludesComment: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -68,6 +70,7 @@ The mustache interpolation with a string literal value can be changed to a stati
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error', {ignoreStringEscape: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

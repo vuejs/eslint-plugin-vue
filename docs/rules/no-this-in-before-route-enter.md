@@ -16,6 +16,7 @@ Because lack of `this` in the `beforeRouteEnter` [(docs)](https://router.vuejs.o
 
 <eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -35,6 +36,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-this-in-before-route-enter': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

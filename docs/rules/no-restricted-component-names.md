@@ -18,6 +18,7 @@ This rule allows you to specify component names that you don't want to use in yo
 
 <eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', 'Disallow']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script>
@@ -31,6 +32,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', 'Disallow']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>
@@ -73,6 +75,7 @@ Alternatively, you can specify an object with a `name` property and an optional 
 
 <eslint-code-block :rules="{'vue/no-restricted-component-names': ['error', { name: 'Disallow', message: 'Please do not use \'Disallow\' as a component name', suggest: 'allow'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script>

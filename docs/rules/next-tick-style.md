@@ -18,6 +18,7 @@ This rule enforces whether the callback version or Promise version (which was in
 
 <eslint-code-block fix :rules="{'vue/next-tick-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { nextTick as nt } from 'vue';
@@ -63,6 +64,7 @@ Default is set to `promise`.
 
 <eslint-code-block fix :rules="{'vue/next-tick-style': ['error', 'callback']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { nextTick as nt } from 'vue';

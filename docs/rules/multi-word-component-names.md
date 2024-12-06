@@ -21,6 +21,7 @@ since all HTML elements are single words.
 
 <eslint-code-block filename="src/TodoItem.js" language="javascript" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```js
 /* ✓ GOOD */
 Vue.component('todo-item', {
@@ -37,6 +38,7 @@ Vue.component('Todo', {
 
 <eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -51,6 +53,7 @@ export default {
 
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -65,6 +68,7 @@ export default {
 
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- filename: Todo.vue -->
 <script>
@@ -79,6 +83,7 @@ export default {
 
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- filename: Todo.vue -->
 <!-- ✗ BAD -->
@@ -91,6 +96,7 @@ export default {
 
 <eslint-code-block filename="src/TodoItem.js" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- filename: TodoItem.vue -->
 <!-- ✓ GOOD -->
@@ -103,6 +109,7 @@ export default {
 
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->
@@ -134,6 +141,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -147,6 +155,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -160,6 +169,7 @@ export default {
 
 <eslint-code-block filename="src/Todo.vue" :rules="{'vue/multi-word-component-names': ['error', {ignores: ['Todo']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- filename: Todo.vue -->
 <!-- ✓ GOOD -->

@@ -19,6 +19,7 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 <eslint-code-block fix :rules="{'vue/v-bind-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -52,6 +53,7 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 <eslint-code-block fix :rules="{'vue/v-bind-style': ['error', 'longform']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -68,6 +70,7 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 <eslint-code-block fix :rules="{'vue/v-bind-style': ['error', 'shorthand', { 'sameNameShorthand': 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -84,6 +87,7 @@ This rule enforces `v-bind` directive style which you should use shorthand or lo
 
 <eslint-code-block fix :rules="{'vue/v-bind-style': ['error', 'shorthand', { 'sameNameShorthand': 'never' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -25,6 +25,7 @@ There is one property that can be specified for the object.
 
 <eslint-code-block :rules="{'vue/max-template-depth': ['error', { maxDepth: 3 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -47,6 +48,7 @@ There is one property that can be specified for the object.
 
 <eslint-code-block :rules="{'vue/max-template-depth': ['error', { maxDepth: 3 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>

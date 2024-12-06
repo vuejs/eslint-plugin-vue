@@ -20,6 +20,7 @@ See [Migration Guide - Custom Elements Interop](https://v3-migration.vuejs.org/b
 
 <eslint-code-block :rules="{'vue/no-deprecated-html-element-is': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

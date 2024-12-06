@@ -28,6 +28,7 @@ This rule takes a list of strings, where each string is a custom event name or p
 
 <eslint-code-block :rules="{'vue/no-restricted-custom-event': ['error', 'input', '/^forbidden/']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -76,6 +77,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-custom-event': ['error', { event: 'input', message: 'If you intend a prop for v-model, it should be \'update:modelValue\' in Vue 3.', suggest: 'update:modelValue'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

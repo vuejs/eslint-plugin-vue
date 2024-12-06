@@ -19,6 +19,7 @@ In details, it reports call expressions if a call of `this.$scopedSlots` members
 
 <eslint-code-block :rules="{'vue/no-multiple-slot-args': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

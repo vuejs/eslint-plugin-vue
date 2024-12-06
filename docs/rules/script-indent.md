@@ -18,6 +18,7 @@ This rule enforces a consistent indentation style in `<script>`. The default sty
 
 <eslint-code-block fix :rules="{'vue/script-indent': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 let a = {
@@ -88,6 +89,7 @@ This rule only checks `.vue` files and does not interfere with other `.js` files
 
 <eslint-code-block fix :rules="{'vue/script-indent': ['error', 2, { 'baseIndent': 1 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
   let a = {

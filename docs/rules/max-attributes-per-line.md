@@ -25,6 +25,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 <eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -75,6 +76,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 <eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {singleline: 3}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -91,6 +93,7 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 <eslint-code-block fix :rules="{'vue/max-attributes-per-line': ['error', {multiline: 2}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -26,6 +26,7 @@ This rule reports `defineEmits` compiler macros in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -37,6 +38,7 @@ defineEmits({ notify: null })
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -48,6 +50,7 @@ defineEmits(['notify'])
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -59,6 +62,7 @@ defineEmits<(e: 'notify') => void>()
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 const def = { notify: null }
@@ -73,6 +77,7 @@ defineEmits(def)
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -85,6 +90,7 @@ defineEmits(def)
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */
@@ -96,6 +102,7 @@ defineEmits<(e: 'notify') => void>({ submit: null })
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -108,6 +115,7 @@ defineEmits({ submit: null })
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -124,6 +132,7 @@ defineEmits({ submit: null })
 
 <eslint-code-block :rules="{'vue/valid-define-emits': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */

@@ -16,6 +16,7 @@ By default, this rule will validate that the imported name matches the name of t
 
 <eslint-code-block :rules="{'vue/match-component-import-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

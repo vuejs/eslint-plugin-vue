@@ -18,6 +18,7 @@ since: v8.5.0
 
 <eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -92,6 +93,7 @@ Default options is `"always"`.
 
 <eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

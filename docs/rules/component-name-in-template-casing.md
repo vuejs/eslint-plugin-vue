@@ -40,6 +40,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -74,6 +75,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -103,6 +105,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -128,6 +131,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {ignores: ['/^custom-/'], registeredComponentsOnly: false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -147,6 +151,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {globals: ['RouterView']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

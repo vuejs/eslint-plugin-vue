@@ -18,6 +18,7 @@ This rule reports elements inside `<transition>` that do not control the display
 
 <eslint-code-block :rules="{'vue/require-toggle-inside-transition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -47,6 +48,7 @@ This rule reports elements inside `<transition>` that do not control the display
 
 <eslint-code-block :rules="{'vue/require-toggle-inside-transition': ['error', {additionalDirectives: ['dialog']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

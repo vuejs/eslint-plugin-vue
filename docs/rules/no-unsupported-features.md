@@ -59,6 +59,7 @@ This rule reports unsupported Vue.js syntax on the specified version.
 
 <eslint-code-block fix :rules="{'vue/no-unsupported-features': ['error', {'version': '^2.6.0'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -78,6 +79,7 @@ This rule reports unsupported Vue.js syntax on the specified version.
 
 <eslint-code-block fix :rules="{'vue/no-unsupported-features': ['error', {'version': '^2.5.0'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

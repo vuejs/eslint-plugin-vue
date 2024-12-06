@@ -21,6 +21,7 @@ Recommended order of properties can be [found here](https://vuejs.org/style-guid
 
 <eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -42,6 +43,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/order-in-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

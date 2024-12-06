@@ -21,6 +21,7 @@ This rule cannot be checked for use in other components (e.g. `mixins`, Access v
 
 <eslint-code-block :rules="{'vue/no-unused-refs': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

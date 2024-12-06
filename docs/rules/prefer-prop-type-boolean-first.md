@@ -27,6 +27,7 @@ See [this demo](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbmltc
 
 <eslint-code-block :rules="{'vue/prefer-prop-type-boolean-first': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

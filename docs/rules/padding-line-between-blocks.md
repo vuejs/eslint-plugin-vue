@@ -18,6 +18,7 @@ This rule requires or disallows blank lines between the given 2 blocks. Properly
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -35,6 +36,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -63,6 +65,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -80,6 +83,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -97,6 +101,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -112,6 +117,7 @@ export default {}
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-blocks': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>

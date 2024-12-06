@@ -25,6 +25,7 @@ There is one property that can be specified for the object.
 
 <eslint-code-block :rules="{'vue/max-props': ['error', { maxProps: 1 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -44,6 +45,7 @@ defineProps({
 
 <eslint-code-block :rules="{'vue/max-props': ['error', { maxProps: 5 }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>

@@ -22,6 +22,7 @@ Note that there are many false positives if you are using mixins.
 
 <eslint-code-block :rules="{'vue/no-undef-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -45,6 +46,7 @@ watch(() => prop.undef, () => console.log('Updated!'))
 
 <eslint-code-block :rules="{'vue/no-undef-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -91,6 +93,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-undef-properties': ['error', {ignores: ['/^\\$/']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

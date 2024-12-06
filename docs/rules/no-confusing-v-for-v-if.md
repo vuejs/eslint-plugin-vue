@@ -22,6 +22,7 @@ In that case, the `v-if` should be written on the wrapper element.
 
 <eslint-code-block :rules="{'vue/no-confusing-v-for-v-if': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

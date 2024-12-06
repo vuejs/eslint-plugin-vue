@@ -21,6 +21,7 @@ See [Migration Guide - `v-model`](https://v3-migration.vuejs.org/breaking-change
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-v-bind-sync': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

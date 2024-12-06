@@ -19,6 +19,7 @@ This rule report variable definitions of v-for directives or scope attributes if
 
 <eslint-code-block :rules="{'vue/no-unused-vars': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -19,6 +19,7 @@ This rule reports use of deprecated `destroyed` and `beforeDestroy` lifecycle ho
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-destroyed-lifecycle': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

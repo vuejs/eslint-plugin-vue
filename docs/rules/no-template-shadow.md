@@ -20,6 +20,7 @@ This rule aims to eliminate shadowed variable declarations of v-for directives o
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -65,6 +66,7 @@ Examples of correct code for the `{ "allow": ["i"] }` option:
 
 <eslint-code-block :rules="{'vue/no-template-shadow': ['error', { allow: ['i'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div v-for="i in 5"></div>

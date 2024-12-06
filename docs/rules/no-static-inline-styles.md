@@ -17,6 +17,7 @@ The styles reported in this rule mean that we recommend separating them into `<s
 
 <eslint-code-block :rules="{'vue/no-static-inline-styles': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -49,6 +50,7 @@ The styles reported in this rule mean that we recommend separating them into `<s
 
 <eslint-code-block :rules="{'vue/no-static-inline-styles': ['error', {'allowBinding': true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

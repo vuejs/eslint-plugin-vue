@@ -18,6 +18,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -79,6 +80,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', { 'singleline': 'always', 'multiline': 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--
@@ -105,6 +107,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', { 'singleline': 'never', 'multiline': 'never' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -131,6 +134,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', { 'singleline': 'always', 'multiline': 'ignore' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--
@@ -169,6 +173,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', { 'singleline': 'ignore', 'multiline': 'always' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -204,6 +209,7 @@ This rule will enforce consistency of line break after the `<!--` and before the
 
 <eslint-code-block fix :rules="{'vue/html-comment-content-newline': ['error', 'always', { 'exceptions': ['*'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!--*******

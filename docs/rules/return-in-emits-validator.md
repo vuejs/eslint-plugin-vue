@@ -18,6 +18,7 @@ This rule enforces that a `return` statement is present in `emits` validators.
 
 <eslint-code-block :rules="{'vue/return-in-emits-validator': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

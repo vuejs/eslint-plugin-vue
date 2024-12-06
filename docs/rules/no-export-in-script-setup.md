@@ -21,6 +21,7 @@ See [Vue RFCs - 0040-script-setup] for more details.
 
 <eslint-code-block :rules="{'vue/no-export-in-script-setup': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -32,6 +33,7 @@ let msg = 'Hello!'
 
 <eslint-code-block :rules="{'vue/no-export-in-script-setup': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */

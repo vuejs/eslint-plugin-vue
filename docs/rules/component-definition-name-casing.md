@@ -36,6 +36,7 @@ Default casing is set to `PascalCase`.
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -49,6 +50,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -62,6 +64,7 @@ export default {
 
 <eslint-code-block fix language="javascript" filename="src/MyComponent.js" :rules="{'vue/component-definition-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```js
 /* ✓ GOOD */
 Vue.component('MyComponent', {})
@@ -76,6 +79,7 @@ Vue.component('my-component', {})
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -89,6 +93,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -102,6 +107,7 @@ export default {
 
 <eslint-code-block fix language="javascript" filename="src/MyComponent.js" :rules="{'vue/component-definition-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```js
 /* ✓ GOOD */
 Vue.component('my-component', {})

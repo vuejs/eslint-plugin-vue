@@ -32,6 +32,7 @@ This rule sends all `eslint-disable`-like comments as errors to the post-process
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
@@ -45,6 +46,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
@@ -62,6 +64,7 @@ The `eslint-disable` comments has no effect after one block.
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
 
+<!-- prettier-ignore -->
 ```vue
 <style>
 </style>
@@ -81,6 +84,7 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -- Here's a description about why this disabling is necessary. -->
@@ -94,9 +98,12 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 
 ```json
 {
-  "vue/comment-directive": ["error", {
-    "reportUnusedDisableDirectives": false
-  }]
+  "vue/comment-directive": [
+    "error",
+    {
+      "reportUnusedDisableDirectives": false
+    }
+  ]
 }
 ```
 
@@ -106,6 +113,7 @@ The `eslint-disable`-like comments can include descriptions to explain why the c
 
 <eslint-code-block :rules="{'vue/comment-directive': ['error', {reportUnusedDisableDirectives: true} ], 'vue/max-attributes-per-line': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -19,6 +19,7 @@ This rule enforces `v-on` directive style which you should use shorthand or long
 
 <eslint-code-block fix :rules="{'vue/v-on-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -48,6 +49,7 @@ Default is set to `shorthand`.
 
 <eslint-code-block fix :rules="{'vue/v-on-style': ['error', 'longform']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -19,6 +19,7 @@ This rule enforces using hyphenated v-on event names on custom components in Vue
 
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'always', { autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -57,6 +58,7 @@ It errors on upper case letters.
 
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'always', { autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -75,6 +77,7 @@ It errors on hyphens.
 
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -93,6 +96,7 @@ Don't use hyphenated name but allow custom event names
 
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { ignore: ['custom-event'], autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -110,6 +114,7 @@ Don't use hyphenated name but allow custom event names
 
 <eslint-code-block fix :rules="{'vue/v-on-event-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'], autofix: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

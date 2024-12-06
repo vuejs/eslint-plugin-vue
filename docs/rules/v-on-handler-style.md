@@ -29,6 +29,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -67,6 +68,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline-function']]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -96,6 +98,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline']]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -125,6 +128,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', 'inline-function']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -145,6 +149,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', 'inline']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -167,6 +172,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline-function'], {ignoreIncludesComment: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -186,6 +192,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 <eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['method', 'inline'], {ignoreIncludesComment: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

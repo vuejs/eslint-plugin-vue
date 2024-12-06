@@ -20,6 +20,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 <eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -57,6 +58,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 <eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { allow: ['router-link', 'nuxt-link'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -74,6 +76,7 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 <eslint-code-block :rules="{'vue/no-v-text-v-html-on-component': ['error', { ignoreElementNamespaces: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

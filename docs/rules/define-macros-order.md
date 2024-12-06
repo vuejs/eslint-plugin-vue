@@ -35,6 +35,7 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -47,6 +48,7 @@ defineEmits(/* ... */)
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -59,6 +61,7 @@ defineProps(/* ... */)
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -74,6 +77,7 @@ defineEmits(/* ... */)
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -89,6 +93,7 @@ const slots = defineSlots()
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -104,6 +109,7 @@ const model = defineModel()
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -122,6 +128,7 @@ const slots = defineSlots()
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['definePage', 'defineModel', 'defineCustom', 'defineEmits', 'defineSlots']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -137,6 +144,7 @@ const slots = defineSlots()
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {order: ['definePage', 'defineModel', 'defineCustom', 'defineEmits', 'defineSlots']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>
@@ -155,6 +163,7 @@ definePage()
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {defineExposeLast: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script setup>
@@ -169,6 +178,7 @@ defineExpose({/* ... */})
 
 <eslint-code-block fix :rules="{'vue/define-macros-order': ['error', {defineExposeLast: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script setup>

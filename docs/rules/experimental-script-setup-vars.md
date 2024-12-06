@@ -26,6 +26,7 @@ Without this rule this code triggers warning:
 
 <eslint-code-block :rules="{'no-undef': ['error'], 'vue/experimental-script-setup-vars': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup="props, { emit }">
 import { watchEffect } from 'vue'

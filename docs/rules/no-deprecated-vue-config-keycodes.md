@@ -20,6 +20,7 @@ See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breakin
 
 <eslint-code-block filename="a.js" language="javascript" :rules="{'vue/no-deprecated-vue-config-keycodes': ['error']}">
 
+<!-- prettier-ignore -->
 ```js
 /* ✗ BAD */
 Vue.config.keyCodes = {

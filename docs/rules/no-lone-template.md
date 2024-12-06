@@ -20,6 +20,7 @@ In Vue.js 3.x, the `<template>` elements that have no specific directives render
 
 <eslint-code-block :rules="{'vue/no-lone-template': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -54,6 +55,7 @@ In Vue.js 3.x, the `<template>` elements that have no specific directives render
 
 <eslint-code-block :rules="{'vue/no-lone-template': ['error', { 'ignoreAccessible': true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

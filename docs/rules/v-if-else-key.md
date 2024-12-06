@@ -20,6 +20,7 @@ This rule is not required in Vue 3, as the key is automatically assigned to the 
 
 <eslint-code-block fix :rules="{'vue/v-if-else-key': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

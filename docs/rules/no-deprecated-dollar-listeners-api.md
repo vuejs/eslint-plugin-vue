@@ -18,6 +18,7 @@ This rule reports use of deprecated `$listeners`. (in Vue.js 3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-dollar-listeners-api': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

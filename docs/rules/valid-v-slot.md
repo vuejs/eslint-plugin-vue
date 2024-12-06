@@ -29,6 +29,7 @@ This rule reports `v-slot` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-slot': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -117,6 +118,7 @@ This rule does not check syntax errors in directives because it's checked by [vu
 
 <eslint-code-block :rules="{'vue/valid-v-slot': ['error', {allowModifiers: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ignore -->

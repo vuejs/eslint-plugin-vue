@@ -20,6 +20,7 @@ This rule reports the `<template>` elements which have `key` attribute.
 
 <eslint-code-block :rules="{'vue/no-template-key': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

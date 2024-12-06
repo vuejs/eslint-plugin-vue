@@ -26,6 +26,7 @@ This rule extends the [@stylistic/no-extra-parens] rule and applies it to the `<
 
 <eslint-code-block fix :rules="{'vue/no-extra-parens': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

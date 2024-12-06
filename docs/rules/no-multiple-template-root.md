@@ -18,6 +18,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- The root is text -->
 <template>Lorem ipsum</template>
@@ -27,6 +28,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- There are multiple root elements -->
 <template>
@@ -39,6 +41,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- The root element has `v-for` directives -->
 <template>
@@ -50,6 +53,7 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 <eslint-code-block :rules="{'vue/no-multiple-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- The root element is `<template>` or `<slot>` -->
 <template>

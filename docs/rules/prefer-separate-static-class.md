@@ -18,6 +18,7 @@ This rule reports static class names in dynamic class attributes.
 
 <eslint-code-block fix :rules="{'vue/prefer-separate-static-class': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

@@ -24,6 +24,7 @@ This rule reports `v-on` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -66,6 +67,7 @@ This rule has an object option:
 
 <eslint-code-block :rules="{'vue/valid-v-on': ['error', { modifiers: ['foo']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div @click.foo="foo" />

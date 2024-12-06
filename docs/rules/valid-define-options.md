@@ -24,6 +24,7 @@ This rule reports `defineOptions` compiler macros in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -35,6 +36,7 @@ defineOptions({ name: 'foo' })
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 const def = { name: 'foo' }
@@ -49,6 +51,7 @@ defineOptions(def)
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -61,6 +64,7 @@ defineOptions(def)
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -73,6 +77,7 @@ defineOptions({ inheritAttrs: false })
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -84,6 +89,7 @@ defineOptions()
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */
@@ -95,6 +101,7 @@ defineOptions<{ name: 'Foo' }>()
 
 <eslint-code-block :rules="{'vue/valid-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */

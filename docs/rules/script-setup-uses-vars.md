@@ -29,6 +29,7 @@ Without this rule this code triggers warning:
 
 <eslint-code-block :rules="{'vue/script-setup-uses-vars': ['error'], 'no-unused-vars': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 // imported components are also directly usable in template

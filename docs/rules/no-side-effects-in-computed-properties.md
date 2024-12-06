@@ -20,6 +20,7 @@ It is considered a very bad practice to introduce side effects inside computed p
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -40,6 +41,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -61,6 +63,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { computed } from 'vue'
@@ -82,6 +85,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-side-effects-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { computed } from 'vue'

@@ -18,6 +18,7 @@ This rule reports the template root in the following cases:
 
 <eslint-code-block :rules="{'vue/no-root-v-if': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div v-if="foo"></div>

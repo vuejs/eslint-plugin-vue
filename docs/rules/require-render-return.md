@@ -18,6 +18,7 @@ This rule aims to enforce render function to always return value
 
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -33,6 +34,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-render-return': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -20,6 +20,7 @@ This rule reports the template root in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- There is no root element -->
 <template></template>
@@ -29,6 +30,7 @@ This rule reports the template root in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-template-root': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- The root with src attribute is not empty -->
 <template src="foo.html"><div></div></template>

@@ -19,6 +19,7 @@ This rule enforces `v-slot` directive style which you should use shorthand or lo
 
 <eslint-code-block fix :rules="{'vue/v-slot-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -78,6 +79,7 @@ And a string option is supported to be consistent to similar `vue/v-bind-style` 
 
 <eslint-code-block fix :rules="{'vue/v-slot-style': ['error', 'longform']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

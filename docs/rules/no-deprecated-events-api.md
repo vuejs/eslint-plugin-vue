@@ -20,6 +20,7 @@ See [Migration Guide - Events API](https://v3-migration.vuejs.org/breaking-chang
 
 <eslint-code-block :rules="{'vue/no-deprecated-events-api': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -38,6 +39,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-deprecated-events-api': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */

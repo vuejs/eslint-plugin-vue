@@ -22,6 +22,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -91,6 +92,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 1, closeBracket: 1}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -113,6 +115,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {attribute: 2, closeBracket: 1}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -135,6 +138,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {ignores: ['VAttribute']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -151,6 +155,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {alignAttributesVertically: false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -173,6 +178,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 
 <eslint-code-block fix :rules="{'vue/html-indent': ['error', 2, {baseIndent: 0}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
 <!-- ✓ GOOD -->

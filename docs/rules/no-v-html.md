@@ -18,6 +18,7 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 <eslint-code-block :rules="{'vue/no-v-html': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

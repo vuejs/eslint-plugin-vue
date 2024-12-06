@@ -24,6 +24,7 @@ are ignored by default.
 
 <eslint-code-block :rules="{'vue/no-unregistered-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -58,6 +59,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unregistered-components': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>
@@ -92,6 +94,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -112,6 +115,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unregistered-components': ['error', { 'ignorePatterns': ['custom(\\-\\w+)+'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template>

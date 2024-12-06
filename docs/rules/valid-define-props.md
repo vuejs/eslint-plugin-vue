@@ -26,6 +26,7 @@ This rule reports `defineProps` compiler macros in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -37,6 +38,7 @@ defineProps({ msg: String })
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -48,6 +50,7 @@ defineProps(['msg'])
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✓ GOOD */
@@ -59,6 +62,7 @@ defineProps<{ msg?: string }>()
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 const def = { msg: String }
@@ -73,6 +77,7 @@ defineProps(def)
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -85,6 +90,7 @@ defineProps(def)
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup lang="ts">
 /* ✗ BAD */
@@ -96,6 +102,7 @@ defineProps<{ msg?: string }>({ msg: String })
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */
@@ -108,6 +115,7 @@ defineProps({ count: Number })
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -124,6 +132,7 @@ defineProps({ count: Number })
 
 <eslint-code-block :rules="{'vue/valid-define-props': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✗ BAD */

@@ -21,6 +21,7 @@ This rule only has an effect when the `no-unused-vars` rule is enabled.
 
 Without this rule this code triggers warning:
 
+<!-- prettier-ignore -->
 ```jsx
 import HelloWorld from './HelloWorld';
 

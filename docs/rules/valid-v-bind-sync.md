@@ -25,6 +25,7 @@ This rule reports `.sync` modifier on `v-bind` directives in the following cases
 
 <eslint-code-block :rules="{'vue/valid-v-bind-sync': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

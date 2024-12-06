@@ -19,6 +19,7 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 
 <eslint-code-block fix :rules="{'vue/no-useless-v-bind': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -51,6 +52,7 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 
 <eslint-code-block fix :rules="{'vue/no-useless-v-bind': ['error', {ignoreIncludesComment: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -67,6 +69,7 @@ The `v-bind` with a string literal value can be changed to a static attribute de
 
 <eslint-code-block fix :rules="{'vue/no-useless-v-bind': ['error', {ignoreStringEscape: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

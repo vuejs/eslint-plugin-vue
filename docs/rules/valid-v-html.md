@@ -24,6 +24,7 @@ This rule reports `v-html` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-html': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

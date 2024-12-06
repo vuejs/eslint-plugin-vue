@@ -18,6 +18,7 @@ This rule requires a `name` property to be set on components.
 
 <eslint-code-block :rules="{'vue/require-name-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -31,6 +32,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-name-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -42,6 +44,7 @@ export default {}
 
 <eslint-code-block :rules="{'vue/require-name-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

@@ -19,6 +19,7 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -56,6 +57,7 @@ It errors on upper case letters.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'always']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -74,6 +76,7 @@ It errors on hyphens except on the attributes in the ignored attributes list.
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -95,6 +98,7 @@ Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignore: ['custom-prop']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -115,6 +119,7 @@ Don't use hyphenated name but allow custom attributes
 
 <eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

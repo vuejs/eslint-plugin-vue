@@ -26,6 +26,7 @@ This rule reports `v-memo` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-memo': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

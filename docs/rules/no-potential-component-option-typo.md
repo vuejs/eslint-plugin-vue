@@ -29,6 +29,7 @@ This rule disallow a potential typo in your component options
 
 <eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['all'], custom: ['test']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -73,6 +74,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-potential-component-option-typo': ['error', {presets: ['vue', 'nuxt'], threshold: 5}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

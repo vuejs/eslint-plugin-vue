@@ -25,6 +25,7 @@ This rule reports `v-show` directives in the following cases:
 
 <eslint-code-block :rules="{'vue/valid-v-show': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

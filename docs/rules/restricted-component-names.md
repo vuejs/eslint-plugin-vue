@@ -16,6 +16,7 @@ This rule enforces consistency in component names.
 
 <eslint-code-block :rules="{ 'vue/restricted-component-names': ['error'] }">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -43,6 +44,7 @@ This rule enforces consistency in component names.
 
 <eslint-code-block :rules="{'vue/restricted-component-names': ['error', { 'allow': ['/^custom-/'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

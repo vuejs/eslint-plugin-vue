@@ -27,6 +27,7 @@ If you are using Vue.js 2.x, enable the [vue/no-v-for-template-key] rule instead
 
 <eslint-code-block :rules="{'vue/no-v-for-template-key-on-child': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

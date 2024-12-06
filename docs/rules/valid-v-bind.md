@@ -25,6 +25,7 @@ This rule does not report `v-bind` directives which do not have their argument (
 
 <eslint-code-block :rules="{'vue/valid-v-bind': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -16,6 +16,7 @@ This rule enforces that every prop has a comment that documents it.
 
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default defineComponent({
@@ -61,6 +62,7 @@ export default defineComponent({
 
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'block'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 // ✓ GOOD
@@ -88,6 +90,7 @@ const badProps = defineProps({
 
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'line'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 // ✓ GOOD
@@ -115,6 +118,7 @@ const badProps = defineProps({
 
 <eslint-code-block :rules="{'vue/require-prop-comment': ['error', {type: 'any'}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 // ✓ GOOD

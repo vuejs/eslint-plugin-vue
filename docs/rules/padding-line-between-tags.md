@@ -18,6 +18,7 @@ This rule requires or disallows newlines between sibling HTML tags.
 
 <eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>
@@ -70,6 +71,7 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   { blankLine: 'never', prev: '*', next: '*' }
 ]]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>
@@ -91,6 +93,7 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   { blankLine: 'always', prev: 'br', next: '*' }
 ]]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>
@@ -116,6 +119,7 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   { blankLine: 'always', prev: 'br', next: 'img' }
 ]]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>
@@ -142,6 +146,7 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   { blankLine: 'consistent', prev: '*', next: '*' }
 ]]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>

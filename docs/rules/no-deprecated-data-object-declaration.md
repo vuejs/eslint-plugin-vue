@@ -22,6 +22,7 @@ See [Migration Guide - Data Option](https://v3-migration.vuejs.org/breaking-chan
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}" language="javascript" filename="example.js">
 
+<!-- prettier-ignore -->
 ```js
 createApp({
   /* ✗ BAD */
@@ -44,6 +45,7 @@ createApp({
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -59,6 +61,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-data-object-declaration': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

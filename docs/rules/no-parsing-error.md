@@ -29,6 +29,7 @@ Then reports syntax errors if exist.
 
 <eslint-code-block :rules="{'vue/no-parsing-error': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

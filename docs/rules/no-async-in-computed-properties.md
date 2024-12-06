@@ -21,6 +21,7 @@ This rule is aimed at preventing asynchronous methods from being called in compu
 
 <eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -65,6 +66,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { computed } from 'vue'

@@ -17,6 +17,7 @@ since: v6.1.0
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -62,6 +63,7 @@ var foo =bar;
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipStrings: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -76,6 +78,7 @@ var foo = ''
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipStrings: false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -90,6 +93,7 @@ var foo = ''
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipComments: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -108,6 +112,7 @@ var foo = ''
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipRegExps: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -122,6 +127,7 @@ var foo = //
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipTemplates: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -136,6 +142,7 @@ var foo = ``
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipHTMLAttributeValues: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -150,6 +157,7 @@ var foo = ``
 
 <eslint-code-block :rules="{'vue/no-irregular-whitespace': ['error', {skipHTMLTextContents: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

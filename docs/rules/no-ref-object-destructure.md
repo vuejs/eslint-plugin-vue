@@ -18,6 +18,7 @@ This rule reports the destructuring of ref objects causing the value to lose rea
 
 <eslint-code-block :rules="{'vue/no-ref-object-destructure': ['error']}" language="javascript" filename="example.js" >
 
+<!-- prettier-ignore -->
 ```js
 import { ref } from 'vue'
 const count = ref(0)
@@ -36,6 +37,7 @@ See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Re
 
 <eslint-code-block :rules="{'vue/no-ref-object-destructure': ['error']}" language="javascript" filename="example.js" >
 
+<!-- prettier-ignore -->
 ```js
 const count = $ref(0)
 const v1 = count /* ✗ BAD */

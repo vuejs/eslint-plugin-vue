@@ -19,6 +19,7 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 <eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -62,6 +63,7 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 <eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error', { 'ignoreProperties': true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

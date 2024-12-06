@@ -18,6 +18,7 @@ This rule checks if there is only one component per file.
 
 <eslint-code-block filename="a.js" language="javascript" :rules="{'vue/one-component-per-file': ['error']}">
 
+<!-- prettier-ignore -->
 ```js
 /* ✗ BAD */
 
@@ -34,6 +35,7 @@ Vue.component('TodoItem', {
 
 <eslint-code-block :rules="{'vue/one-component-per-file': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */

@@ -16,6 +16,7 @@ This rule allows you to specify HTML elements that you don't want to use in your
 
 <eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'marquee', 'button'] }">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -43,6 +44,7 @@ This rule takes a list of strings, where each string is an HTML element name to 
 
 <eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'button', 'marquee']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->
@@ -80,6 +82,7 @@ The following properties can be specified for the object.
 
 <eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', { element: 'marquee' }, { element: 'button' }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✗ BAD -->

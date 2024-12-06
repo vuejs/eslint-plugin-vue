@@ -16,6 +16,7 @@ This rule reports use of deprecated `$delete` and `$set`. (in Vue.js 3.0.0+).
 
 <eslint-code-block :rules="{'vue/no-deprecated-delete-set': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
   import { set, del } from 'vue'

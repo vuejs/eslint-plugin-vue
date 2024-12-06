@@ -18,6 +18,7 @@ This rule is aimed at preventing invalid keys in model option.
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -33,6 +34,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -48,6 +50,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -64,6 +67,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -80,6 +84,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -96,6 +101,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/valid-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

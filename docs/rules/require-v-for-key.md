@@ -18,6 +18,7 @@ This rule reports the elements which have `v-for` and do not have `v-bind:key` w
 
 <eslint-code-block :rules="{'vue/require-v-for-key': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

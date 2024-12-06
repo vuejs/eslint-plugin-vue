@@ -18,6 +18,7 @@ This rule enforces which delimiter (`in` or `of`) should be used in `v-for` dire
 
 <eslint-code-block fix :rules="{'vue/v-for-delimiter-style': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -47,6 +48,7 @@ Default is set to `in`.
 
 <eslint-code-block fix :rules="{'vue/v-for-delimiter-style': ['error', 'of']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

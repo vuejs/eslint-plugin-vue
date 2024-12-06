@@ -16,6 +16,7 @@ This rule disallows to pass multiple objects into array to class.
 
 <eslint-code-block :rules="{'vue/no-multiple-objects-in-class': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>

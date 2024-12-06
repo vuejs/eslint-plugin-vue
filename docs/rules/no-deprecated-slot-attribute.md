@@ -19,6 +19,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-slot-attribute': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <ListComponent>
@@ -54,6 +55,7 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 <eslint-code-block fix :rules="{'vue/no-dupe-keys': ['error', {ignore: ['my-component']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <ListComponent>

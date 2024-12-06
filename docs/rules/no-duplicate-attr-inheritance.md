@@ -17,6 +17,7 @@ This rule suggests applying `inheritAttrs: false` when it detects `v-bind="$attr
 
 <eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <MyInput v-bind="$attrs" />
@@ -33,6 +34,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <MyInput v-bind="$attrs" />
@@ -63,6 +65,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-duplicate-attr-inheritance': ['error', { checkMultiRootNodes: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div v-bind="$attrs" />

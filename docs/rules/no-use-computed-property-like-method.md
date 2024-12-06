@@ -18,6 +18,7 @@ This rule disallows to use computed property like method.
 
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -275,6 +276,7 @@ This rule can't check if props is used as array:
 
 <eslint-code-block :rules="{'vue/no-use-computed-property-like-method': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -16,6 +16,7 @@ This rule reports when a Vue component does not have a default export, if the co
 
 <eslint-code-block :rules="{'vue/require-default-export': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script>
@@ -27,6 +28,7 @@ const foo = 'foo';
 
 <eslint-code-block :rules="{'vue/require-default-export': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>

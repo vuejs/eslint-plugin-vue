@@ -30,6 +30,7 @@ It will catch most commonly made mistakes which are using strings instead of con
 
 <eslint-code-block fix :rules="{'vue/require-prop-type-constructor': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

@@ -20,6 +20,7 @@ Calling `Vue.nextTick` or `vm.$nextTick` without passing a callback and without 
 
 <eslint-code-block fix :rules="{'vue/valid-next-tick': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { nextTick as nt } from 'vue';

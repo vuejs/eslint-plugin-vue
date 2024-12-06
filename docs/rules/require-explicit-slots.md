@@ -16,6 +16,7 @@ This rule enforces all slots used in the template to be defined once either in t
 
 <eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>
@@ -38,6 +39,7 @@ defineSlots<{
 
 <eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <div>

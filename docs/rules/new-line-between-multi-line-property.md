@@ -18,6 +18,7 @@ This rule aims at enforcing new lines between multi-line properties in Vue compo
 
 <eslint-code-block fix :rules="{'vue/new-line-between-multi-line-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -47,6 +48,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/new-line-between-multi-line-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */

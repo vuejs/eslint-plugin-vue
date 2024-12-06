@@ -17,6 +17,7 @@ This rule is the similar rule as core [max-len] rule but it applies to the sourc
 
 <eslint-code-block :rules="{'vue/max-len': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -93,6 +94,7 @@ var foo = { "bar": "This is a bar.", "baz": { "qux": "This is a qux" }, "difficu
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {code: 40}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -117,6 +119,7 @@ var foo = ['line', 'length', 'is', '50', '......']
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {template: 120}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -138,6 +141,7 @@ var foo = ['line', 'length', 'is', '81', '......', '......', '......', '......']
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {comments: 65}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
 <!-- ✓ GOOD -->
@@ -172,6 +176,7 @@ var foo = ['line', 'length', 'is', '81', '......', '......', '......', '......']
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreComments: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -192,6 +197,7 @@ var foo = ['line', 'length', 'is', '81', '......', '......', '......', '......']
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreTrailingComments: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -216,6 +222,7 @@ var foo = 'bar'; // This is a really really really really really really really r
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreUrls: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -234,6 +241,7 @@ var url = 'https://www.example.com/really/really/really/really/really/really/rea
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreStrings: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -256,6 +264,7 @@ var longString = 'this is a really really really really really really long strin
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreTemplateLiterals: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -274,6 +283,7 @@ var longTemplateLiteral = `this is a really really really really really long tem
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreRegExpLiterals: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -294,6 +304,7 @@ var longRegExpLiteral = /this is a really really really really really long regul
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreHTMLAttributeValues: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -310,6 +321,7 @@ var longRegExpLiteral = /this is a really really really really really long regul
 
 <eslint-code-block :rules="{'vue/max-len': ['error', {ignoreHTMLTextContents: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

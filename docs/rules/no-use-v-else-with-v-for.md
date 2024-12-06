@@ -16,6 +16,7 @@ This rule reports elements that have both `v-else-if`/`v-else` and `v-for` direc
 
 <eslint-code-block :rules="{'vue/no-use-v-else-with-v-for': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

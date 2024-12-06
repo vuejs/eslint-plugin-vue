@@ -20,6 +20,7 @@ See [Migration Guide - Filters](https://v3-migration.vuejs.org/breaking-changes/
 
 <eslint-code-block :rules="{'vue/no-deprecated-filter': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

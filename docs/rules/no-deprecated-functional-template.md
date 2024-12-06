@@ -20,6 +20,7 @@ See [Migration Guide - Functional Components](https://v3-migration.vuejs.org/bre
 
 <eslint-code-block :rules="{'vue/no-deprecated-functional-template': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <template functional>

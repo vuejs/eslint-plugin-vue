@@ -18,6 +18,7 @@ The rule is to enforce the HTML standard of always defaulting boolean attributes
 
 <eslint-code-block :rules="{'vue/no-boolean-default': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

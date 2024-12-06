@@ -18,6 +18,7 @@ This rule detects invalid HTML attributes.
 
 <eslint-code-block :rules="{'vue/valid-attribute-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

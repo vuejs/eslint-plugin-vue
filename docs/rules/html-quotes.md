@@ -27,6 +27,7 @@ This rule reports the quotes of attributes if it is different to configured quot
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -63,6 +64,7 @@ Object option:
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'single']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -80,6 +82,7 @@ Object option:
 
 <eslint-code-block fix :rules="{'vue/html-quotes': ['error', 'double', { avoidEscape: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

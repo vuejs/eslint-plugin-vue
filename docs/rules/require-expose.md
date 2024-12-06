@@ -20,6 +20,7 @@ The `expose` API was officially introduced in Vue 3.2.
 
 <eslint-code-block :rules="{'vue/require-expose': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -41,6 +42,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-expose': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -61,6 +63,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-expose': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -88,6 +91,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-expose': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

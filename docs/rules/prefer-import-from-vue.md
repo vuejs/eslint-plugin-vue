@@ -26,6 +26,7 @@ Imports from the following modules are almost always wrong. You should import fr
 
 <eslint-code-block fix :rules="{'vue/prefer-import-from-vue': ['error']}" filename="example.js" language="javascript">
 
+<!-- prettier-ignore -->
 ```js
 /* ✓ GOOD */
 import { createApp, ref, Component } from 'vue'
@@ -35,6 +36,7 @@ import { createApp, ref, Component } from 'vue'
 
 <eslint-code-block fix :rules="{'vue/prefer-import-from-vue': ['error']}" filename="example.js" language="javascript">
 
+<!-- prettier-ignore -->
 ```js
 /* ✗ BAD */
 import { createApp } from '@vue/runtime-dom'

@@ -18,6 +18,7 @@ Prevent missing type declarations for non-primitive object props in TypeScript p
 
 <eslint-code-block :rules="{'vue/require-typed-object-prop': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script lang="ts">
 export default {

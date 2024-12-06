@@ -18,6 +18,7 @@ This rule requires or disallows blank lines in the component definition. Properl
 
 <eslint-code-block fix :rules="{'vue/padding-lines-in-component-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
@@ -41,6 +42,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/padding-lines-in-component-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -100,6 +102,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/padding-lines-in-component-definition': ['error', { betweenOptions: 'always', withinOption: 'always', groupSingleLineProperties: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -128,6 +131,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/padding-lines-in-component-definition': ['error', { betweenOptions: 'always', withinOption: { props: { betweenItems: 'always', withinEach: 'never' }, customOption: { betweenItems: 'always', withinEach: 'ignore' } }, groupSingleLineProperties: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

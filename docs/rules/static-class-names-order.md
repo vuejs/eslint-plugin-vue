@@ -18,6 +18,7 @@ This rule aims to enforce the order of static class names.
 
 <eslint-code-block fix :rules="{'vue/static-class-names-order': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

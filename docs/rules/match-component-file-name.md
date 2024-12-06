@@ -39,6 +39,7 @@ If you are defining multiple components within the same file, this rule will be 
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
@@ -54,6 +55,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
@@ -67,6 +69,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
@@ -82,6 +85,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 /* no name property defined */
@@ -96,6 +100,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
@@ -128,6 +133,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
@@ -143,6 +149,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
@@ -158,6 +165,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.vue" :rules="{'vue/match-component-file-name': ['error', {extensions: ['vue']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- file name: src/MyComponent.vue -->
 <script>
@@ -174,6 +182,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/MyComponent.js
 new Vue({
@@ -187,6 +196,7 @@ new Vue({
 
 <eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/MyComponent.js
 /* ✓ GOOD */
@@ -199,6 +209,7 @@ Vue.component('MyComponent', {
 
 <eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/MyComponent.js
 new Vue({
@@ -212,6 +223,7 @@ new Vue({
 
 <eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/MyComponent.js
 /* ✗ BAD */
@@ -224,6 +236,7 @@ Vue.component('MComponent', {
 
 <eslint-code-block filename="src/components.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/components.js
 /* defines multiple components, so this rule is ignored */
@@ -245,6 +258,7 @@ new Vue({
 
 <eslint-code-block filename="src/MyComponent.js" language="javascript" :rules="{'vue/match-component-file-name': ['error', {extensions: ['js']}]}">
 
+<!-- prettier-ignore -->
 ```js
 // file name: src/MyComponent.js
 /* no name property defined */
@@ -259,6 +273,7 @@ new Vue({
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error',  {shouldMatchCase: true}]}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
@@ -272,6 +287,7 @@ export default {
 
 <eslint-code-block filename="src/my-component.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error',  {shouldMatchCase: true}]}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/my-component.jsx
 export default {
@@ -285,6 +301,7 @@ export default {
 
 <eslint-code-block filename="src/MyComponent.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error', {shouldMatchCase: true}]}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/MyComponent.jsx
 export default {
@@ -298,6 +315,7 @@ export default {
 
 <eslint-code-block filename="src/my-component.jsx" language="javascript" :rules="{'vue/match-component-file-name': ['error', {shouldMatchCase: true}]}">
 
+<!-- prettier-ignore -->
 ```jsx
 // file name: src/my-component.jsx
 export default {

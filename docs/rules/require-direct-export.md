@@ -16,6 +16,7 @@ This rule aims to require that the component object be directly exported.
 
 <eslint-code-block :rules="{'vue/require-direct-export': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -34,6 +35,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/require-direct-export': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 const ComponentA = {
@@ -68,6 +70,7 @@ export default ComponentA
 
 <eslint-code-block :rules="{'vue/require-direct-export': ['error', {disallowFunctionalComponentFunction: false}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -81,6 +84,7 @@ export default (props) => h('div', props.msg)
 
 <eslint-code-block :rules="{'vue/require-direct-export': ['error', {disallowFunctionalComponentFunction: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

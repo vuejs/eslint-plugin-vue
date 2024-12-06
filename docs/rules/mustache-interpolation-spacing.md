@@ -19,6 +19,7 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 
 <eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -47,6 +48,7 @@ This rule aims at enforcing unified spacing in mustache interpolations.
 
 <eslint-code-block fix :rules="{'vue/mustache-interpolation-spacing': ['error', 'never']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

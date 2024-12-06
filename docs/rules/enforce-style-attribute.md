@@ -18,6 +18,7 @@ This rule allows you to explicitly allow the use of the `scoped` and `module` at
 
 <eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['scoped'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <style scoped></style>
@@ -36,6 +37,7 @@ This rule allows you to explicitly allow the use of the `scoped` and `module` at
 
 <eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['module'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <style module></style>
@@ -53,6 +55,7 @@ This rule allows you to explicitly allow the use of the `scoped` and `module` at
 
 <eslint-code-block :rules="{'vue/enforce-style-attribute': ['error', { allow: ['plain']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <style></style>

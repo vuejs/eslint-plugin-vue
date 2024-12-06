@@ -18,6 +18,7 @@ This rule enforces that a `return` statement is present in `computed` properties
 
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -49,6 +50,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 import { computed } from 'vue'
@@ -98,6 +100,7 @@ This rule has an object option:
 
 <eslint-code-block :rules="{'vue/return-in-computed-property': ['error', { treatUndefinedAsUnspecified: false }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

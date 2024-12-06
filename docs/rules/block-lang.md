@@ -18,7 +18,8 @@ This rule disallows the use of languages other than those available in the your 
 
 ```json
 {
-  "vue/block-lang": ["error",
+  "vue/block-lang": [
+    "error",
     {
       "script": {
         "lang": "ts"
@@ -30,6 +31,7 @@ This rule disallows the use of languages other than those available in the your 
 
 <eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'ts' } }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script lang="ts">
@@ -40,6 +42,7 @@ This rule disallows the use of languages other than those available in the your 
 
 <eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'ts' } }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script>
@@ -67,6 +70,7 @@ Same as `{ script: { allowNoLang: true } }`.
 
 <eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'js' } }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>
@@ -77,6 +81,7 @@ Same as `{ script: { allowNoLang: true } }`.
 
 <eslint-code-block :rules="{'vue/block-lang': ['error', { script: { lang: 'js' } }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD -->
 <script lang="js">

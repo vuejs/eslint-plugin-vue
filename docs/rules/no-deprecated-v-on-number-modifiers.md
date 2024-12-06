@@ -21,6 +21,7 @@ See [Migration Guide - KeyCode Modifiers](https://v3-migration.vuejs.org/breakin
 
 <eslint-code-block fix :rules="{'vue/no-deprecated-v-on-number-modifiers': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

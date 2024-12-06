@@ -19,6 +19,7 @@ This rule enforces the properties of `$slots` to be used as a function.
 
 <eslint-code-block :rules="{'vue/require-slots-as-functions': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

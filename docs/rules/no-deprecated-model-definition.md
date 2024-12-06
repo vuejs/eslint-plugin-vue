@@ -20,6 +20,7 @@ See [Migration Guide – `v-model`](https://v3-migration.vuejs.org/breaking-chan
 
 <eslint-code-block :rules="{'vue/no-deprecated-model-definition': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default defineComponent({
@@ -49,6 +50,7 @@ Allow `model` definitions with prop/event names that match the Vue.js 3.0.0+ `v-
 
 <eslint-code-block :rules="{'vue/no-deprecated-model-definition': ['error', { allowVue3Compat: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default defineComponent({

@@ -19,6 +19,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 <eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -102,6 +103,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 <eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { ignores: ['VueComponent', 'pre', 'textarea'] }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->
@@ -123,6 +125,7 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 <eslint-code-block fix :rules="{'vue/multiline-html-element-content-newline': ['error', { allowEmptyLines: true }]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <!-- ✓ GOOD -->

@@ -20,6 +20,7 @@ In the `<script setup>`, `defineExpose()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-expose-after-await': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -40,6 +41,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-expose-after-await': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */

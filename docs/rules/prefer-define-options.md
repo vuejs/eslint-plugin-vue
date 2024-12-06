@@ -20,6 +20,7 @@ The [`defineOptions()`](https://vuejs.org/api/sfc-script-setup.html#defineoption
 
 <eslint-code-block fix :rules="{'vue/prefer-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script setup>
 /* ✓ GOOD */
@@ -31,6 +32,7 @@ defineOptions({ name: 'Foo' })
 
 <eslint-code-block fix :rules="{'vue/prefer-define-options': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */

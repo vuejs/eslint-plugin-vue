@@ -21,6 +21,7 @@ Even if using with TypeScript, this can provide better type inference when annot
 
 <eslint-code-block :rules="{'vue/require-emit-validator': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */

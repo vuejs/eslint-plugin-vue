@@ -20,6 +20,7 @@ This rule cannot check for use of properties by other components (e.g. `mixins`,
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -36,6 +37,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD (`count` property not used) -->
 <template>
@@ -77,6 +79,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'data']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <script>
@@ -97,6 +100,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'data']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD (`count` data not used) -->
 <script>
@@ -119,6 +123,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'data'], deepData: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template>
   <Foo :param="state.used">
@@ -145,6 +150,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'computed']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -170,6 +176,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'computed']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✗ BAD (`reversedMessage` computed property not used) -->
 <template>
@@ -197,6 +204,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['props', 'methods'], ignorePublicMembers: true}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <!-- ✓ GOOD -->
 <template>
@@ -225,6 +233,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['unknownMemberAsUnreferenced']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template></template>
 <script>
@@ -256,6 +265,7 @@ export default {
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error', {groups: ['computed'], unreferencedOptions: ['returnAsUnreferenced']}]}">
 
+<!-- prettier-ignore -->
 ```vue
 <template></template>
 <script>

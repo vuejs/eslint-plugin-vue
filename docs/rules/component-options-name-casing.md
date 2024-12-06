@@ -62,6 +62,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -78,6 +79,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -96,6 +98,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -112,6 +115,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'kebab-case']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -130,6 +134,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'camelCase']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {
@@ -146,6 +151,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/component-options-name-casing': ['error', 'camelCase']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 export default {

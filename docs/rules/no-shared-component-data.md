@@ -21,6 +21,7 @@ When the value of `data` is an object, it’s shared across all instances of a c
 
 <eslint-code-block fix :rules="{'vue/no-shared-component-data': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✓ GOOD */
@@ -46,6 +47,7 @@ export default {
 
 <eslint-code-block fix :rules="{'vue/no-shared-component-data': ['error']}">
 
+<!-- prettier-ignore -->
 ```vue
 <script>
 /* ✗ BAD */
