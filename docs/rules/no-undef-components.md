@@ -98,9 +98,12 @@ export default {
 
 ```json
 {
-  "vue/no-undef-components": ["error", {
-    "ignorePatterns": []
-  }]
+  "vue/no-undef-components": [
+    "error",
+    {
+      "ignorePatterns": []
+    }
+  ]
 }
 ```
 

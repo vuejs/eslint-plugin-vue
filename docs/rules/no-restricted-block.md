@@ -46,7 +46,8 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-block": ["error",
+  "vue/no-restricted-block": [
+    "error",
     {
       "element": "style",
       "message": "Do not use <style> block in this project."

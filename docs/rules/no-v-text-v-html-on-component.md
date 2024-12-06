@@ -44,10 +44,13 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 ```json
 {
-  "vue/no-v-text-v-html-on-component": ["error", {
-    "allow": ["router-link", "nuxt-link"],
-    "ignoreElementNamespaces": false
-  }]
+  "vue/no-v-text-v-html-on-component": [
+    "error",
+    {
+      "allow": ["router-link", "nuxt-link"],
+      "ignoreElementNamespaces": false
+    }
+  ]
 }
 ```
 

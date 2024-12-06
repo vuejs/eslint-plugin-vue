@@ -21,10 +21,13 @@ This rule reports compiler macros (like `defineProps` or `defineEmits` but also 
 
 ```json
 {
-  "vue/define-macros-order": ["error", {
-    "order": ["defineProps", "defineEmits"],
-    "defineExposeLast": false
-  }]
+  "vue/define-macros-order": [
+    "error",
+    {
+      "order": ["defineProps", "defineEmits"],
+      "defineExposeLast": false
+    }
+  ]
 }
 ```
 

@@ -46,9 +46,10 @@ This rule requires or disallows newlines between sibling HTML tags.
 
 ```json
 {
-  "vue/padding-line-between-tags": ["error", [
-    { "blankLine": "always", "prev": "*", "next": "*" }
-  ]]
+  "vue/padding-line-between-tags": [
+    "error",
+    [{ "blankLine": "always", "prev": "*", "next": "*" }]
+  ]
 }
 ```
 

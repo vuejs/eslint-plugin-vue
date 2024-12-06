@@ -40,11 +40,14 @@ This rule aims to warn if no type or an invalid type is used on a button type at
 
 ```json
 {
-  "vue/html-button-has-type": ["error", {
-    "button": true,
-    "submit": true,
-    "reset": true
-  }]
+  "vue/html-button-has-type": [
+    "error",
+    {
+      "button": true,
+      "submit": true,
+      "reset": true
+    }
+  ]
 }
 ```
 

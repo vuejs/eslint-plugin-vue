@@ -50,19 +50,22 @@ This rule enforces `v-slot` directive style which you should use shorthand or lo
 
 ```json
 {
-  "vue/v-slot-style": ["error", {
-    "atComponent": "shorthand" | "longform" | "v-slot",
-    "default": "shorthand" | "longform" | "v-slot",
-    "named": "shorthand" | "longform",
-  }]
+  "vue/v-slot-style": [
+    "error",
+    {
+      "atComponent": "shorthand" | "longform" | "v-slot",
+      "default": "shorthand" | "longform" | "v-slot",
+      "named": "shorthand" | "longform"
+    }
+  ]
 }
 ```
 
-| Name | Type | Default Value | Description
-|:-----|:-----|:--------------|:------------
-| `atComponent` | `"shorthand"` \| `"longform"` \| `"v-slot"` | `"v-slot"` | The style for the default slot at custom components directly (E.g. `<my-component v-slot="">`).
-| `default` | `"shorthand"` \| `"longform"` \| `"v-slot"` | `"shorthand"` | The style for the default slot at template wrappers (E.g. `<template #default="">`).
-| `named` | `"shorthand"` \| `"longform"` | `"shorthand"` | The style for named slots (E.g. `<template #named="">`).
+| Name          | Type                                        | Default Value | Description                                                                                     |
+| :------------ | :------------------------------------------ | :------------ | :---------------------------------------------------------------------------------------------- |
+| `atComponent` | `"shorthand"` \| `"longform"` \| `"v-slot"` | `"v-slot"`    | The style for the default slot at custom components directly (E.g. `<my-component v-slot="">`). |
+| `default`     | `"shorthand"` \| `"longform"` \| `"v-slot"` | `"shorthand"` | The style for the default slot at template wrappers (E.g. `<template #default="">`).            |
+| `named`       | `"shorthand"` \| `"longform"`               | `"shorthand"` | The style for named slots (E.g. `<template #named="">`).                                        |
 
 Each value means:
 

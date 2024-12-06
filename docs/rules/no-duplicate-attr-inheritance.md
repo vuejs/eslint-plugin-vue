@@ -53,9 +53,12 @@ export default {
 
 ```json
 {
-  "vue/no-duplicate-attr-inheritance": ["error", {
-    "checkMultiRootNodes": false,
-  }]
+  "vue/no-duplicate-attr-inheritance": [
+    "error",
+    {
+      "checkMultiRootNodes": false
+    }
+  ]
 }
 ```
 

@@ -40,9 +40,12 @@ export default {
 
 ```json
 {
-  "vue/no-reserved-props": ["error", {
-    "vueVersion": 3, // or 2
-  }]
+  "vue/no-reserved-props": [
+    "error",
+    {
+      "vueVersion": 3 // or 2
+    }
+  ]
 }
 ```
 

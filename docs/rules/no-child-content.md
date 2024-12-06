@@ -37,9 +37,12 @@ This rule reports child content of elements that have a directive which overwrit
 
 ```json
 {
-  "vue/no-child-content": ["error", {
-    "additionalDirectives": ["foo"] // checks v-foo directive
-  }]
+  "vue/no-child-content": [
+    "error",
+    {
+      "additionalDirectives": ["foo"] // checks v-foo directive
+    }
+  ]
 }
 ```
 

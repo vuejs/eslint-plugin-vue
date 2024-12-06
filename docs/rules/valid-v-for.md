@@ -62,11 +62,13 @@ If the element which has the directive is a reserved element, this rule does not
 </eslint-code-block>
 
 ::: warning Note
+
 This rule does not check syntax errors in directives. [vue/no-parsing-error] rule reports it.
 The following cases are syntax errors:
 
 - The directive's value isn't `alias in expr`. E.g. `<div v-for="foo"></div>`
 - The alias isn't LHS. E.g. `<div v-for="foo() in list"></div>`
+
 :::
 
 ## :wrench: Options

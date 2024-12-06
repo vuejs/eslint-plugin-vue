@@ -82,9 +82,12 @@ export default {
 
 ```json
 {
-  "vue/no-unregistered-components": ["error", {
-    "ignorePatterns": []
-  }]
+  "vue/no-unregistered-components": [
+    "error",
+    {
+      "ignorePatterns": []
+    }
+  ]
 }
 ```
 

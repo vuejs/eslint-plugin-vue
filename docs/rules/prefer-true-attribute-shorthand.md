@@ -44,7 +44,7 @@ export default {
   props: {
     bool: Boolean,
     boolOrString: [Boolean, String],
-    stringOrBool: [String, Boolean],
+    stringOrBool: [String, Boolean]
   }
 }
 </script>

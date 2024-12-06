@@ -83,9 +83,12 @@ export default {
 
 ```json
 {
-  "vue/require-explicit-emits": ["error", {
-    "allowProps": false
-  }]
+  "vue/require-explicit-emits": [
+    "error",
+    {
+      "allowProps": false
+    }
+  ]
 }
 ```
 

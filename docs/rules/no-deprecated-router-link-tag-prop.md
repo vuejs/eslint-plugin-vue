@@ -50,9 +50,12 @@ This rule reports deprecated the `tag` attribute on `RouterLink` elements (remov
 
 ```json
 {
-  "vue/no-deprecated-router-link-tag-prop": ["error", {
-    "components": ['RouterLink']
-  }]
+  "vue/no-deprecated-router-link-tag-prop": [
+    "error",
+    {
+      "components": ["RouterLink"]
+    }
+  ]
 }
 ```
 

@@ -20,10 +20,13 @@ This rule reports unsupported Vue.js syntax on the specified version.
 
 ```json
 {
-  "vue/no-unsupported-features": ["error", {
-    "version": "^2.6.0",
-    "ignores": []
-  }]
+  "vue/no-unsupported-features": [
+    "error",
+    {
+      "version": "^2.6.0",
+      "ignores": []
+    }
+  ]
 }
 ```
 
@@ -133,7 +136,6 @@ This rule reports unsupported Vue.js syntax on the specified version.
 [Vue RFCs - 0011-v-model-api-change]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md
 [Vue RFCs - 0040-script-setup]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
 [Vue RFCs - 0043-sfc-style-variables]: https://github.com/vuejs/rfcs/blob/master/active-rfcs/0043-sfc-style-variables.md
-
 [Vue RFCs - v-bind .prop shorthand proposal]: https://github.com/vuejs/rfcs/pull/18
 
 ## :rocket: Version

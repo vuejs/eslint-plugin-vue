@@ -86,9 +86,12 @@ export default {
 
 ```json
 {
-  "vue/return-in-computed-property": ["error", {
-    "treatUndefinedAsUnspecified": true
-  }]
+  "vue/return-in-computed-property": [
+    "error",
+    {
+      "treatUndefinedAsUnspecified": true
+    }
+  ]
 }
 ```
 

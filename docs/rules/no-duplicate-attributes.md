@@ -44,10 +44,13 @@ This rule reports duplicate attributes.
 
 ```json
 {
-  "vue/no-duplicate-attributes": ["error", {
-    "allowCoexistClass": true,
-    "allowCoexistStyle": true
-  }]
+  "vue/no-duplicate-attributes": [
+    "error",
+    {
+      "allowCoexistClass": true,
+      "allowCoexistStyle": true
+    }
+  ]
 }
 ```
 

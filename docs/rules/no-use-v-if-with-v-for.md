@@ -58,9 +58,12 @@ There are two common cases where this can be tempting:
 
 ```json
 {
-  "vue/no-use-v-if-with-v-for": ["error", {
-    "allowUsingIterationVar": false
-  }]
+  "vue/no-use-v-if-with-v-for": [
+    "error",
+    {
+      "allowUsingIterationVar": false
+    }
+  ]
 }
 ```
 

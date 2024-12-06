@@ -129,9 +129,12 @@ export default {
 
 ```json
 {
-  "vue/multi-word-component-names": ["error", {
-    "ignores": []
-  }]
+  "vue/multi-word-component-names": [
+    "error",
+    {
+      "ignores": []
+    }
+  ]
 }
 ```
 

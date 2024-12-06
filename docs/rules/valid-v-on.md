@@ -53,9 +53,12 @@ This rule does not check syntax errors in directives because it's checked by [vu
 
 ```json
 {
-  "vue/valid-v-on": ["error", {
-    "modifiers": []
-  }]
+  "vue/valid-v-on": [
+    "error",
+    {
+      "modifiers": []
+    }
+  ]
 }
 ```
 

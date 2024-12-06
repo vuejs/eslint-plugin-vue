@@ -46,13 +46,16 @@ const emitsDefined = defineEmits(['update:msg'])
 
 ```json
 {
-  "vue/require-macro-variable-name": ["error", {
-    "defineProps": "props",
-    "defineEmits": "emit",
-    "defineSlots": "slots",
-    "useSlots": "slots",
-    "useAttrs": "attrs"
-  }]
+  "vue/require-macro-variable-name": [
+    "error",
+    {
+      "defineProps": "props",
+      "defineEmits": "emit",
+      "defineSlots": "slots",
+      "useSlots": "slots",
+      "useAttrs": "attrs"
+    }
+  ]
 }
 ```
 

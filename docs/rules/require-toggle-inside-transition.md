@@ -36,9 +36,12 @@ This rule reports elements inside `<transition>` that do not control the display
 
 ```json
 {
-  "vue/require-toggle-inside-transition": ["error", {
-    "additionalDirectives": []
-  }]
+  "vue/require-toggle-inside-transition": [
+    "error",
+    {
+      "additionalDirectives": []
+    }
+  ]
 }
 ```
 

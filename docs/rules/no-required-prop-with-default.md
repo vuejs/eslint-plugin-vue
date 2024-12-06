@@ -81,9 +81,12 @@ export default {
 
 ```json
 {
-  "vue/no-required-prop-with-default": ["error", {
-    "autofix": false,
-  }]
+  "vue/no-required-prop-with-default": [
+    "error",
+    {
+      "autofix": false
+    }
+  ]
 }
 ```
 

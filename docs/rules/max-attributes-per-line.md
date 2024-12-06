@@ -58,14 +58,17 @@ There is a configurable number of attributes that are acceptable in one-line cas
 
 ```json
 {
-  "vue/max-attributes-per-line": ["error", {
-    "singleline": {
-      "max": 1
-    },      
-    "multiline": {
-      "max": 1
+  "vue/max-attributes-per-line": [
+    "error",
+    {
+      "singleline": {
+        "max": 1
+      },
+      "multiline": {
+        "max": 1
+      }
     }
-  }]
+  ]
 }
 ```
 

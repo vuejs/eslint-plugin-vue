@@ -40,9 +40,12 @@ This rule report variable definitions of v-for directives or scope attributes if
 
 ```json
 {
-    "vue/no-unused-vars": ["error", {
-        "ignorePattern": "^_"
-    }]
+  "vue/no-unused-vars": [
+    "error",
+    {
+      "ignorePattern": "^_"
+    }
+  ]
 }
 ```
 

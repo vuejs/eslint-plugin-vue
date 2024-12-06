@@ -20,7 +20,15 @@ This rule takes a list of strings, where each string is a component option name 
 
 ```json
 {
-  "vue/no-restricted-component-options": ["error", "init", "beforeCompile", "compiled", "activate", "ready", "/^(?:at|de)tached$/"]
+  "vue/no-restricted-component-options": [
+    "error",
+    "init",
+    "beforeCompile",
+    "compiled",
+    "activate",
+    "ready",
+    "/^(?:at|de)tached$/"
+  ]
 }
 ```
 
@@ -102,7 +110,8 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-component-options": ["error",
+  "vue/no-restricted-component-options": [
+    "error",
     {
       "name": "init",
       "message": "Use \"beforeCreate\" instead."

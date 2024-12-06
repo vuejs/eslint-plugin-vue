@@ -126,9 +126,12 @@ export default {
 
 ```json
 {
-  "vue/no-mutating-props": ["error", {
-    "shallowOnly": false
-  }]
+  "vue/no-mutating-props": [
+    "error",
+    {
+      "shallowOnly": false
+    }
+  ]
 }
 ```
 

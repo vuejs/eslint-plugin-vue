@@ -47,10 +47,13 @@ export default {
 
 ```json
 {
-  "vue/no-reserved-keys": ["error", {
-    "reserved": [],
-    "groups": []
-  }]
+  "vue/no-reserved-keys": [
+    "error",
+    {
+      "reserved": [],
+      "groups": []
+    }
+  ]
 }
 ```
 

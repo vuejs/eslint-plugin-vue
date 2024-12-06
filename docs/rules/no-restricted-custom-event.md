@@ -59,12 +59,13 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-custom-event": ["error",
+  "vue/no-restricted-custom-event": [
+    "error",
     {
       "event": "input",
       "message": "If you intend a prop for v-model, it should be 'update:modelValue' in Vue 3.",
       "suggest": "update:modelValue"
-    },
+    }
   ]
 }
 ```

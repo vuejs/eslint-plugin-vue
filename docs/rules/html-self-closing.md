@@ -49,15 +49,18 @@ Self-closing is simple and shorter, but it's not supported in the HTML spec.
 
 ```json
 {
-  "vue/html-self-closing": ["error", {
-    "html": {
-      "void": "never",
-      "normal": "always",
-      "component": "always"
-    },
-    "svg": "always",
-    "math": "always"
-  }]
+  "vue/html-self-closing": [
+    "error",
+    {
+      "html": {
+        "void": "never",
+        "normal": "always",
+        "component": "always"
+      },
+      "svg": "always",
+      "math": "always"
+    }
+  ]
 }
 ```
 

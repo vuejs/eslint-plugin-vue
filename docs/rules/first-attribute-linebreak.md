@@ -42,10 +42,13 @@ This rule aims to enforce a consistent location for the first attribute.
 
 ```json
 {
-  "vue/first-attribute-linebreak": ["error", {
-    "singleline": "ignore",
-    "multiline": "below"
-  }]
+  "vue/first-attribute-linebreak": [
+    "error",
+    {
+      "singleline": "ignore",
+      "multiline": "below"
+    }
+  ]
 }
 ```
 

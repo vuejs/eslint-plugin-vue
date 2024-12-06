@@ -38,9 +38,12 @@ export default defineComponent({
 
 ```json
 {
-  "vue/no-deprecated-model-definition": ["error", {
-    "allowVue3Compat": true
-  }]
+  "vue/no-deprecated-model-definition": [
+    "error",
+    {
+      "allowVue3Compat": true
+    }
+  ]
 }
 ```
 

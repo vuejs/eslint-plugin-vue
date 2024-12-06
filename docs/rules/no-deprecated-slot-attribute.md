@@ -43,9 +43,12 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 ```json
 {
-  "vue/no-deprecated-slot-attribute": ["error", {
-    "ignore": ["my-component"]
-  }]
+  "vue/no-deprecated-slot-attribute": [
+    "error",
+    {
+      "ignore": ["my-component"]
+    }
+  ]
 }
 ```
 

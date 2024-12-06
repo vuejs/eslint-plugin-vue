@@ -106,9 +106,12 @@ This rule does not check syntax errors in directives because it's checked by [vu
 
 ```json
 {
-  "vue/valid-v-slot": ["error", {
-    "allowModifiers": false
-  }]
+  "vue/valid-v-slot": [
+    "error",
+    {
+      "allowModifiers": false
+    }
+  ]
 }
 ```
 

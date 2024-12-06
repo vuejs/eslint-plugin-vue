@@ -35,10 +35,13 @@ This rule disallows using `target="_blank"` attribute without `rel="noopener nor
 
 ```json
 {
-  "vue/no-template-target-blank": ["error", {
-    "allowReferrer": true,
-    "enforceDynamicLinks": "always"
-  }]
+  "vue/no-template-target-blank": [
+    "error",
+    {
+      "allowReferrer": true,
+      "enforceDynamicLinks": "always"
+    }
+  ]
 }
 ```
 

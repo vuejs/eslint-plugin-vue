@@ -56,12 +56,15 @@ export default {
 
 ```json
 {
-  "vue/no-unused-properties": ["error", {
-    "groups": ["props"],
-    "deepData": false,
-    "ignorePublicMembers": false,
-    "unreferencedOptions": []
-  }]
+  "vue/no-unused-properties": [
+    "error",
+    {
+      "groups": ["props"],
+      "deepData": false,
+      "ignorePublicMembers": false,
+      "unreferencedOptions": []
+    }
+  ]
 }
 ```
 

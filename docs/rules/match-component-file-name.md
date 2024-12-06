@@ -22,10 +22,13 @@ This rule has some options.
 
 ```json
 {
-  "vue/match-component-file-name": ["error", {
-    "extensions": ["jsx"],
-    "shouldMatchCase": false
-  }]
+  "vue/match-component-file-name": [
+    "error",
+    {
+      "extensions": ["jsx"],
+      "shouldMatchCase": false
+    }
+  ]
 }
 ```
 
@@ -118,10 +121,13 @@ export default {
 
 ```json
 {
-  "vue/match-component-file-name": ["error", {
-    "extensions": ["jsx"],
-    "shouldMatchCase": false
-  }]
+  "vue/match-component-file-name": [
+    "error",
+    {
+      "extensions": ["jsx"],
+      "shouldMatchCase": false
+    }
+  ]
 }
 ```
 

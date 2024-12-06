@@ -20,10 +20,13 @@ This rule disallow a potential typo in your component options
 
 ```json
 {
-  "vue/no-potential-component-option-typo": ["error", {
-    "presets": ["all"],
-    "custom": ["test"]
-  }]
+  "vue/no-potential-component-option-typo": [
+    "error",
+    {
+      "presets": ["all"],
+      "custom": ["test"]
+    }
+  ]
 }
 ```
 
@@ -65,10 +68,13 @@ export default {
 
 ```json
 {
-  "vue/no-potential-component-option-typo": ["error", {
-    "presets": ["vue", "nuxt"],
-    "threshold": 5
-  }]
+  "vue/no-potential-component-option-typo": [
+    "error",
+    {
+      "presets": ["vue", "nuxt"],
+      "threshold": 5
+    }
+  ]
 }
 ```
 
@@ -104,11 +110,14 @@ export default {
 
 ```json
 {
-  "vue/no-potential-component-option-typo": ["error", {
-    "presets": ["vue"],
-    "custom": [],
-    "threshold": 1
-  }]
+  "vue/no-potential-component-option-typo": [
+    "error",
+    {
+      "presets": ["vue"],
+      "custom": [],
+      "threshold": 1
+    }
+  ]
 }
 ```
 

@@ -58,9 +58,12 @@ export default ComponentA
 
 ```json
 {
-  "vue/require-direct-export": ["error", {
-    "disallowFunctionalComponentFunction": false
-  }]
+  "vue/require-direct-export": [
+    "error",
+    {
+      "disallowFunctionalComponentFunction": false
+    }
+  ]
 }
 ```
 

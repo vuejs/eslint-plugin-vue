@@ -38,9 +38,12 @@ The styles reported in this rule mean that we recommend separating them into `<s
 
 ```json
 {
-  "vue/no-static-inline-styles": ["error", {
-    "allowBinding": false
-  }]
+  "vue/no-static-inline-styles": [
+    "error",
+    {
+      "allowBinding": false
+    }
+  ]
 }
 ```
 

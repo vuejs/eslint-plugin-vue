@@ -22,9 +22,12 @@ This rule warns about the order of the top-level tags, such as `<script>`, `<tem
 
 ```json
 {
-  "vue/component-tags-order": ["error", {
-    "order": [ [ "script", "template" ], "style" ]
-  }]
+  "vue/component-tags-order": [
+    "error",
+    {
+      "order": [["script", "template"], "style"]
+    }
+  ]
 }
 ```
 

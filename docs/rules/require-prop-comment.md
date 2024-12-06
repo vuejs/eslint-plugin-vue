@@ -46,9 +46,12 @@ export default defineComponent({
 
 ```json
 {
-  "vue/require-prop-comment": ["error", {
-    "type": "JSDoc"
-  }]
+  "vue/require-prop-comment": [
+    "error",
+    {
+      "type": "JSDoc"
+    }
+  ]
 }
 ```
 

@@ -34,11 +34,14 @@ export default {
 
 ```json
 {
-  "vue/no-reserved-component-names": ["error", {
-    "disallowVueBuiltInComponents": false,
-    "disallowVue3BuiltInComponents": false,
-    "htmlElementCaseSensitive": false,
-  }]
+  "vue/no-reserved-component-names": [
+    "error",
+    {
+      "disallowVueBuiltInComponents": false,
+      "disallowVue3BuiltInComponents": false,
+      "htmlElementCaseSensitive": false
+    }
+  ]
 }
 ```
 

@@ -47,7 +47,8 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 ```json
 {
-  "vue/v-on-handler-style": ["error",
+  "vue/v-on-handler-style": [
+    "error",
     ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | "inline-function" | "inline"
     {
       "ignoreIncludesComment": false

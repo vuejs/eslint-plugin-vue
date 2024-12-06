@@ -74,12 +74,13 @@ Alternatively, the rule also accepts objects.
 
 ```json
 {
-  "vue/no-restricted-props": ["error",
+  "vue/no-restricted-props": [
+    "error",
     {
       "name": "value",
       "message": "If you intend a prop for v-model, it should be 'modelValue' in Vue 3.",
       "suggest": "modelValue"
-    },
+    }
   ]
 }
 ```

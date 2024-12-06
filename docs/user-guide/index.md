@@ -74,11 +74,11 @@ npm install --save-dev eslint eslint-config-prettier eslint-plugin-vue globals t
 ```
 
 ```ts
-import eslint from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintPluginVue from 'eslint-plugin-vue';
-import globals from 'globals';
-import typescriptEslint from 'typescript-eslint';
+import eslint from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginVue from 'eslint-plugin-vue'
+import globals from 'globals'
+import typescriptEslint from 'typescript-eslint'
 
 export default typescriptEslint.config(
   { ignores: ['*.d.ts', '**/coverage', '**/dist'] },
@@ -86,7 +86,7 @@ export default typescriptEslint.config(
     extends: [
       eslint.configs.recommended,
       ...typescriptEslint.configs.recommended,
-      ...eslintPluginVue.configs['flat/recommended'],
+      ...eslintPluginVue.configs['flat/recommended']
     ],
     files: ['**/*.{ts,vue}'],
     languageOptions: {
@@ -94,15 +94,15 @@ export default typescriptEslint.config(
       sourceType: 'module',
       globals: globals.browser,
       parserOptions: {
-        parser: typescriptEslint.parser,
-      },
+        parser: typescriptEslint.parser
+      }
     },
     rules: {
       // your rules
-    },
+    }
   },
   eslintConfigPrettier
-);
+)
 ```
 
 ### Configuration (`.eslintrc`)
@@ -116,7 +116,7 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/vue3-recommended'
     // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
   ],
   rules: {
@@ -278,8 +278,7 @@ For example:
 ```vue
 <template>
   <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-  <div a="1" b="2" c="3" d="4">
-  </div>
+  <div a="1" b="2" c="3" d="4"></div>
 </template>
 ```
 
@@ -296,7 +295,7 @@ For `parserOptions`, you can use the `vueFeatures` options of `vue-eslint-parser
   "parserOptions": {
     "vueFeatures": {
       "filter": true,
-      "interpolationAsNonHTML": false,
+      "interpolationAsNonHTML": false
     }
   }
 }
@@ -316,11 +315,7 @@ Example **.vscode/settings.json**:
 
 ```json
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "vue"
-  ]
+  "eslint.validate": ["javascript", "javascriptreact", "vue"]
 }
 ```
 
@@ -384,17 +379,17 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 1. Make sure you don't have `eslint-plugin-html` in your config. The `eslint-plugin-html` extracts the content from `<script>` tags, but `eslint-plugin-vue` requires `<script>` tags and `<template>` tags in order to distinguish template and script in single file components.
 
-  ```diff
-    "plugins": [
-      "vue",
-  -   "html"
-    ]
-  ```
+   ```diff
+     "plugins": [
+       "vue",
+   -   "html"
+     ]
+   ```
 
-1. Make sure your tool is set to lint `.vue` files.
+2. Make sure your tool is set to lint `.vue` files.
 
-    - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
-    - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
+   - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
+   - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
 
 ### Conflict with [Prettier]
 
@@ -413,7 +408,7 @@ module.exports = {
     // ...
     'prettier'
     // Make sure "prettier" is the last element in this list.
-  ],
+  ]
   // ...
 }
 ```
@@ -495,7 +490,7 @@ module.exports = {
     parser: 'espree', // <-
     ecmaVersion: 2022, // <-
     sourceType: 'module'
-  },
+  }
 }
 ```
 
@@ -510,7 +505,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
-  },
+  }
 }
 ```
 
@@ -533,7 +528,7 @@ In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.c
     "ref": "readonly",
     "computed": "readonly",
     "watch": "readonly",
-    "watchEffect": "readonly",
+    "watchEffect": "readonly"
     // ...more APIs
   }
 }
@@ -547,7 +542,7 @@ export default [
         ref: 'readonly',
         computed: 'readonly',
         watch: 'readonly',
-        watchEffect: 'readonly',
+        watchEffect: 'readonly'
         // ...more APIs
       }
     }

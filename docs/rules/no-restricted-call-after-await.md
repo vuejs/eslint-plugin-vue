@@ -60,11 +60,12 @@ For examples:
 
 ```jsonc
 {
-  "vue/no-restricted-call-after-await": ["error",
+  "vue/no-restricted-call-after-await": [
+    "error",
     { "module": "a", "path": "foo" },
     { "module": "b", "path": ["bar", "baz"] },
     { "module": "c" }, // Checks the default import.
-    { "module": "d", "path": "default" }, // Checks the default import.
+    { "module": "d", "path": "default" } // Checks the default import.
   ]
 }
 ```

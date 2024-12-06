@@ -50,9 +50,12 @@ export default {
 
 ```json
 {
-  "vue/no-dupe-keys": ["error", {
-    "groups": []
-  }]
+  "vue/no-dupe-keys": [
+    "error",
+    {
+      "groups": []
+    }
+  ]
 }
 ```
 

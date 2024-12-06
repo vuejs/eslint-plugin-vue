@@ -86,14 +86,17 @@ Components registered under `PascalCase` or `camelCase` names have may be called
 
 ```json
 {
-  "vue/no-unused-components": ["error", {
-    "ignoreWhenBindingPresent": true
-  }]
+  "vue/no-unused-components": [
+    "error",
+    {
+      "ignoreWhenBindingPresent": true
+    }
+  ]
 }
 ```
 
 - `ignoreWhenBindingPresent` ... suppresses all errors if binding has been detected in the template
-    default `true`
+  default `true`
 
 ### `ignoreWhenBindingPresent: false`
 

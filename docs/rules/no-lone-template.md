@@ -42,9 +42,12 @@ In Vue.js 3.x, the `<template>` elements that have no specific directives render
 
 ```json
 {
-  "vue/no-lone-template": ["error", {
-    "ignoreAccessible": false
-  }]
+  "vue/no-lone-template": [
+    "error",
+    {
+      "ignoreAccessible": false
+    }
+  ]
 }
 ```
 

@@ -34,9 +34,12 @@ This rule enforces consistency in component names.
 
 ```json
 {
-  "vue/restricted-component-names": ["error", { 
-    "allow": []
-  }]
+  "vue/restricted-component-names": [
+    "error",
+    {
+      "allow": []
+    }
+  ]
 }
 ```
 

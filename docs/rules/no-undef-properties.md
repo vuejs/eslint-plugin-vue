@@ -81,9 +81,12 @@ export default {
 
 ```json
 {
-  "vue/no-undef-properties": ["error", {
-    "ignores": ["/^\\$/"]
-  }]
+  "vue/no-undef-properties": [
+    "error",
+    {
+      "ignores": ["/^\\$/"]
+    }
+  ]
 }
 ```
 
