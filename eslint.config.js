@@ -4,7 +4,6 @@ const globals = require('globals')
 const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
 const eslintPluginJsonc = require('eslint-plugin-jsonc')
 const eslintPluginNodeDependencies = require('eslint-plugin-node-dependencies')
-const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
 const eslintPluginUnicorn = require('eslint-plugin-unicorn')
 
 module.exports = [
@@ -29,7 +28,6 @@ module.exports = [
   eslintPluginUnicorn.configs['flat/recommended'],
   ...eslintPluginNodeDependencies.configs['flat/recommended'],
   ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
-  eslintPluginPrettierRecommended,
   {
     plugins: {
       internal: {
@@ -160,7 +158,6 @@ module.exports = [
       yoda: [2, 'never'],
       'prefer-const': 2,
 
-      'prettier/prettier': 'error',
       'eslint-plugin/require-meta-docs-description': [
         'error',
         { pattern: '^(enforce|require|disallow).*[^.]$' }
@@ -232,12 +229,6 @@ module.exports = [
     files: ['eslint-internal-rules/*.js'],
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off'
-    }
-  },
-  {
-    files: ['**/*.json'],
-    rules: {
-      'prettier/prettier': 'off'
     }
   }
 ]
