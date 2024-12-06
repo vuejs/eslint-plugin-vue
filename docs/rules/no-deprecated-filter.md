@@ -46,7 +46,7 @@ See [Migration Guide - Filters](https://v3-migration.vuejs.org/breaking-changes/
 :::warning
 Do not disable [`"parserOptions.vueFeatures.filter"`](https://github.com/vuejs/vue-eslint-parser#parseroptionsvuefeaturesfilter) to use this rule.
 
-```json5
+```jsonc
 {
   "parser": "vue-eslint-parser",
   "parserOptions": {

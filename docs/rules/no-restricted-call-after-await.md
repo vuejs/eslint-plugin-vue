@@ -58,7 +58,7 @@ The following properties can be specified for the object.
 
 For examples:
 
-```json5
+```jsonc
 {
   "vue/no-restricted-call-after-await": ["error",
     { "module": "a", "path": "foo" },
