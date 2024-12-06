@@ -45,18 +45,16 @@ function toRuleRow(rule, kindMarks = []) {
     rule.meta.deprecated ? ':no_entry_sign:' : ''
   ].join('')
   const kindMark = [...kindMarks, TYPE_MARK[rule.meta.type]].join('')
-  const link = `[${rule.ruleId}](./${rule.name}.md)`
+  const link = `[${rule.ruleId}]`
   const description = rule.meta.docs.description || '(no description)'
 
   return `| ${link} | ${description} | ${mark} | ${kindMark} |`
 }
 
 function toDeprecatedRuleRow(rule) {
-  const link = `[${rule.ruleId}](./${rule.name}.md)`
+  const link = `[${rule.ruleId}]`
   const replacedRules = rule.meta.replacedBy || []
-  const replacedBy = replacedRules
-    .map((name) => `[vue/${name}](./${name}.md)`)
-    .join(', ')
+  const replacedBy = replacedRules.map((name) => `[vue/${name}]`).join(', ')
 
   return `| ${link} | ${replacedBy || '(no replacement)'} |`
 }
@@ -67,12 +65,11 @@ function toRemovedRuleRow({
   deprecatedInVersion,
   removedInVersion
 }) {
-  const link = `[vue/${ruleName}](./${ruleName}.md)`
+  const link = `[vue/${ruleName}]`
   const replacement =
-    replacedBy.map((name) => `[vue/${name}](./${name}.md)`).join(', ') ||
-    '(no replacement)'
-  const deprecatedVersionLink = `[${deprecatedInVersion}](https://github.com/vuejs/eslint-plugin-vue/releases/tag/${deprecatedInVersion})`
-  const removedVersionLink = `[${removedInVersion}](https://github.com/vuejs/eslint-plugin-vue/releases/tag/${removedInVersion})`
+    replacedBy.map((name) => `[vue/${name}]`).join(', ') || '(no replacement)'
+  const deprecatedVersionLink = `[${deprecatedInVersion}]`
+  const removedVersionLink = `[${removedInVersion}]`
 
   return `| ${link} | ${replacement} | ${deprecatedVersionLink} | ${removedVersionLink} |`
 }
@@ -244,6 +241,34 @@ ${removedRules.map(toRemovedRuleRow).join('\n')}
 `
 
 // -----------------------------------------------------------------------------
+const releases = [
+  ...new Set(
+    removedRules.flatMap((rule) => [
+      rule.deprecatedInVersion,
+      rule.removedInVersion
+    ])
+  )
+].sort()
+const linkDefinitionLines = [
+  '<!-- link definitions for rules -->',
+  '',
+  ...rules.map((rule) => `[${rule.ruleId}]: ./${rule.name}.md`),
+  '',
+  '<!-- link definitions for removed rules -->',
+  '',
+  ...removedRules.map(
+    (rule) => `[vue/${rule.ruleName}]: ./${rule.ruleName}.md`
+  ),
+  '',
+  '<!-- link definitions for releases -->',
+  '',
+  ...releases.map(
+    (release) =>
+      `[${release}]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/${release}`
+  )
+]
+
+// -----------------------------------------------------------------------------
 const readmeFilePath = path.resolve(__dirname, '../docs/rules/index.md')
 fs.writeFileSync(
   readmeFilePath,
@@ -269,5 +294,7 @@ Mark indicating rule type:
 - :lipstick: Layout & Formatting: These rules care about how the code looks rather than how it executes.
 
 ${rulesTableContent.trim()}
+
+${linkDefinitionLines.join('\n')}
 `
 )
