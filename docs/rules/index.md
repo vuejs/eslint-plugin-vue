@@ -182,6 +182,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/block-order](./block-order.md) | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template](./no-lone-template.md) | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args](./no-multiple-slot-args.md) | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
+| [vue/no-required-prop-with-default](./no-required-prop-with-default.md) | enforce props with default values to be optional | :wrench::bulb: | :three::two::warning: |
 | [vue/no-v-html](./no-v-html.md) | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
 | [vue/order-in-components](./order-in-components.md) | enforce order of properties in components | :wrench::bulb: | :three::two::hammer: |
 | [vue/this-in-template](./this-in-template.md) | disallow usage of `this` in template | :wrench: | :three::two::hammer: |
@@ -235,7 +236,6 @@ For example:
 | [vue/no-multiple-objects-in-class](./no-multiple-objects-in-class.md) | disallow to pass multiple objects into array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo](./no-potential-component-option-typo.md) | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-reactivity-loss](./no-ref-object-reactivity-loss.md) | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
-| [vue/no-required-prop-with-default](./no-required-prop-with-default.md) | enforce props with default values to be optional | :wrench::bulb: | :warning: |
 | [vue/no-restricted-block](./no-restricted-block.md) | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await](./no-restricted-call-after-await.md) | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class](./no-restricted-class.md) | disallow specific classes in Vue components |  | :warning: |
