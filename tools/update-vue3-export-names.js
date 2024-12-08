@@ -6,9 +6,8 @@
 
 const fs = require('fs')
 const path = require('path')
-const https = require('https')
-const { URL } = require('url')
 const tsParser = require('@typescript-eslint/parser')
+const { httpGet } = require('./lib/http')
 
 main()
 
@@ -143,34 +142,4 @@ async function resolveTypeContents(m) {
     typesPath = typesPath.slice(2)
   }
   return await httpGet(`https://unpkg.com/${m}/${typesPath}`)
-}
-
-function httpGet(url) {
-  return new Promise((resolve, reject) => {
-    let result = ''
-    https
-      .get(url, (res) => {
-        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400) {
-          // redirect
-          let redirectUrl = res.headers.location
-          if (!redirectUrl.startsWith('http')) {
-            const baseUrl = new URL(url)
-            baseUrl.pathname = redirectUrl
-            redirectUrl = String(baseUrl)
-          }
-          res.destroy()
-          resolve(httpGet(redirectUrl))
-          return
-        }
-        res.setEncoding('utf8')
-        res.on('data', (chunk) => {
-          result += String(chunk)
-        })
-        res.on('end', () => {
-          resolve(result)
-        })
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
 }
