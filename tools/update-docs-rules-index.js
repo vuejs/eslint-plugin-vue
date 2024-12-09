@@ -249,24 +249,16 @@ const releases = [
     ])
   )
 ].sort()
-const linkDefinitionLines = [
-  '<!-- link definitions for rules -->',
-  '',
-  ...rules.map((rule) => `[${rule.ruleId}]: ./${rule.name}.md`),
-  '',
-  '<!-- link definitions for removed rules -->',
-  '',
-  ...removedRules.map(
-    (rule) => `[vue/${rule.ruleName}]: ./${rule.ruleName}.md`
-  ),
-  '',
-  '<!-- link definitions for releases -->',
-  '',
-  ...releases.map(
-    (release) =>
-      `[${release}]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/${release}`
-  )
-]
+const ruleLinkDefinitions = rules.map(
+  (rule) => `[${rule.ruleId}]: ./${rule.name}.md`
+)
+const removedRuleLinkDefinitions = removedRules.map(
+  (rule) => `[vue/${rule.ruleName}]: ./${rule.ruleName}.md`
+)
+const releaseLinkDefinitions = releases.map(
+  (release) =>
+    `[${release}]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/${release}`
+)
 
 // -----------------------------------------------------------------------------
 const readmeFilePath = path.resolve(__dirname, '../docs/rules/index.md')
@@ -295,6 +287,16 @@ Mark indicating rule type:
 
 ${rulesTableContent.trim()}
 
-${linkDefinitionLines.join('\n')}
+<!-- link definitions for rules -->
+
+${ruleLinkDefinitions.join('\n')}
+
+<!-- link definitions for removed rules -->
+
+${removedRuleLinkDefinitions.join('\n')}
+
+<!-- link definitions for releases -->
+
+${releaseLinkDefinitions.join('\n')}
 `
 )
