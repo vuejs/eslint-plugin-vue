@@ -250,6 +250,7 @@ For example:
 | [vue/no-restricted-v-on](./no-restricted-v-on.md) | disallow specific argument in `v-on` |  | :hammer: |
 | [vue/no-root-v-if](./no-root-v-if.md) | disallow `v-if` directives on root element |  | :hammer: |
 | [vue/no-setup-props-reactivity-loss](./no-setup-props-reactivity-loss.md) | disallow usages that lose the reactivity of `props` passed to `setup` |  | :hammer: |
+| [vue/no-shadow-native-events](./no-shadow-native-events.md) | disallow the use of event names that collide with native web event names |  | :warning: |
 | [vue/no-static-inline-styles](./no-static-inline-styles.md) | disallow static inline `style` attributes |  | :hammer: |
 | [vue/no-template-target-blank](./no-template-target-blank.md) | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter](./no-this-in-before-route-enter.md) | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
