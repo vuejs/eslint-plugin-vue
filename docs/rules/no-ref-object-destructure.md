@@ -10,7 +10,7 @@ since: v9.5.0
 
 > disallow usages of ref objects that can lead to loss of reactivity
 
-- :no_entry_sign: This rule was **deprecated** and replaced by [vue/no-ref-object-reactivity-loss](no-ref-object-reactivity-loss.md) rule.
+- :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0 and replaced by [vue/no-ref-object-reactivity-loss](no-ref-object-reactivity-loss.md) rule.
 
 ## :book: Rule Details
 
