@@ -29,9 +29,9 @@ const plugin = {
     // eslintrc configs
     base: require('./configs/base'),
 
-    essential: require('./configs/vue2-essential'),
-    'strongly-recommended': require('./configs/vue2-strongly-recommended'),
-    recommended: require('./configs/vue2-recommended'),
+    'vue2-essential': require('./configs/vue2-essential'),
+    'vue2-strongly-recommended': require('./configs/vue2-strongly-recommended'),
+    'vue2-recommended': require('./configs/vue2-recommended'),
 
     'vue3-essential': require('./configs/vue3-essential'),
     'vue3-strongly-recommended': require('./configs/vue3-strongly-recommended'),

@@ -59,7 +59,7 @@ const CONFIG_NAME_CAPTIONS = {
     '*.configs["flat/essential"]'
   ],
   'vue2-essential': [
-    '"plugin:vue/essential"',
+    '"plugin:vue/vue2-essential"',
     '*.configs["flat/vue2-essential"]'
   ],
   'vue3-strongly-recommended': [
@@ -67,7 +67,7 @@ const CONFIG_NAME_CAPTIONS = {
     '*.configs["flat/strongly-recommended"]'
   ],
   'vue2-strongly-recommended': [
-    '"plugin:vue/strongly-recommended"',
+    '"plugin:vue/vue2-strongly-recommended"',
     '*.configs["flat/vue2-strongly-recommended"]'
   ],
   'vue3-recommended': [
@@ -75,7 +75,7 @@ const CONFIG_NAME_CAPTIONS = {
     '*.configs["flat/recommended"]'
   ],
   'vue2-recommended': [
-    '"plugin:vue/recommended"',
+    '"plugin:vue/vue2-recommended"',
     '*.configs["flat/vue2-recommended"]'
   ]
 }
