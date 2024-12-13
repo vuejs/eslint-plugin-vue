@@ -135,9 +135,9 @@ You can use the following configs by adding them to `extends`.
 
 - `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
 - Configurations for using Vue.js 3.x:
-  - `"plugin:vue/vue3-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/vue3-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/vue3-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+  - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
 - Configurations for using Vue.js 2.x:
   - `"plugin:vue/vue2-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/vue2-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.

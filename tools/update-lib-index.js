@@ -33,9 +33,9 @@ const plugin = {
     'vue2-strongly-recommended': require('./configs/vue2-strongly-recommended'),
     'vue2-recommended': require('./configs/vue2-recommended'),
 
-    'vue3-essential': require('./configs/vue3-essential'),
-    'vue3-strongly-recommended': require('./configs/vue3-strongly-recommended'),
-    'vue3-recommended': require('./configs/vue3-recommended'),
+    essential: require('./configs/vue3-essential'),
+    'strongly-recommended': require('./configs/vue3-strongly-recommended'),
+    recommended: require('./configs/vue3-recommended'),
 
     // flat configs
     'flat/base': require('./configs/flat/base.js'),
@@ -44,7 +44,6 @@ const plugin = {
     'flat/vue2-strongly-recommended': require('./configs/flat/vue2-strongly-recommended.js'),
     'flat/vue2-recommended': require('./configs/flat/vue2-recommended.js'),
 
-    // in flat configs, non-prefixed config is for Vue 3 (unlike eslintrc configs)
     'flat/essential': require('./configs/flat/vue3-essential.js'),
     'flat/strongly-recommended': require('./configs/flat/vue3-strongly-recommended.js'),
     'flat/recommended': require('./configs/flat/vue3-recommended.js'),

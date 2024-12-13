@@ -54,16 +54,13 @@ for (const rule of rules) {
 
 const CONFIG_NAME_CAPTIONS = {
   base: ['"plugin:vue/base"', '*.configs["flat/base"]'],
-  'vue3-essential': [
-    '"plugin:vue/vue3-essential"',
-    '*.configs["flat/essential"]'
-  ],
+  'vue3-essential': ['"plugin:vue/essential"', '*.configs["flat/essential"]'],
   'vue2-essential': [
     '"plugin:vue/vue2-essential"',
     '*.configs["flat/vue2-essential"]'
   ],
   'vue3-strongly-recommended': [
-    '"plugin:vue/vue3-strongly-recommended"',
+    '"plugin:vue/strongly-recommended"',
     '*.configs["flat/strongly-recommended"]'
   ],
   'vue2-strongly-recommended': [
@@ -71,7 +68,7 @@ const CONFIG_NAME_CAPTIONS = {
     '*.configs["flat/vue2-strongly-recommended"]'
   ],
   'vue3-recommended': [
-    '"plugin:vue/vue3-recommended"',
+    '"plugin:vue/recommended"',
     '*.configs["flat/recommended"]'
   ],
   'vue2-recommended': [
