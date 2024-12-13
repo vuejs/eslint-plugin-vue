@@ -58,6 +58,18 @@ function checkMetaValidity(context, exportsNode) {
     })
     return
   }
+
+  const metaDocsRecommended = getPropertyFromObject(
+    'recommended',
+    metaDocs.value
+  )
+  if (metaDocsRecommended) {
+    context.report({
+      node: metaDocsRecommended,
+      messageId: 'invalidMetaDocsRecommended'
+    })
+    return
+  }
 }
 
 module.exports = {
@@ -72,7 +84,9 @@ module.exports = {
       missingMeta: 'Rule is missing a meta property.',
       missingMetaDocs: 'Rule is missing a meta.docs property.',
       missingMetaDocsCategories:
-        'Rule is missing a meta.docs.categories property.'
+        'Rule is missing a meta.docs.categories property.',
+      invalidMetaDocsRecommended:
+        'Rule should not have a meta.docs.recommended property.'
     }
   },
 
