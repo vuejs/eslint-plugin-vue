@@ -348,7 +348,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/no-invalid-model-keys] | [vue/valid-model-definition] |
 | [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] |
 | [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] |
 | [vue/script-setup-uses-vars] | (no replacement) |
@@ -364,6 +363,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/experimental-script-setup-vars] | (no replacement) | [v7.13.0] | [v9.0.0] |
 | [vue/name-property-casing] | [vue/component-definition-name-casing] | [v7.0.0] | [v9.0.0] |
 | [vue/no-confusing-v-for-v-if] | [vue/no-use-v-if-with-v-for] | [v5.0.0] | [v9.0.0] |
+| [vue/no-invalid-model-keys] | [vue/valid-model-definition] | [v9.0.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
 
 <!-- link definitions for rules -->
@@ -463,7 +463,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-export-in-script-setup]: ./no-export-in-script-setup.md
 [vue/no-expose-after-await]: ./no-expose-after-await.md
 [vue/no-extra-parens]: ./no-extra-parens.md
-[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
 [vue/no-lone-template]: ./no-lone-template.md
@@ -622,6 +621,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/experimental-script-setup-vars]: ./experimental-script-setup-vars.md
 [vue/name-property-casing]: ./name-property-casing.md
 [vue/no-confusing-v-for-v-if]: ./no-confusing-v-for-v-if.md
+[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
 
 <!-- link definitions for releases -->
