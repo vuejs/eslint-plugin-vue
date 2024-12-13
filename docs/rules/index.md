@@ -348,7 +348,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] |
 | [vue/script-setup-uses-vars] | (no replacement) |
 | [vue/v-on-function-call] | [vue/v-on-handler-style] |
 
@@ -364,6 +363,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-confusing-v-for-v-if] | [vue/no-use-v-if-with-v-for] | [v5.0.0] | [v9.0.0] |
 | [vue/no-invalid-model-keys] | [vue/valid-model-definition] | [v9.0.0] | [v10.0.0] |
 | [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] | [v9.17.0] | [v10.0.0] |
+| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
 
 <!-- link definitions for rules -->
@@ -493,7 +493,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
 [vue/no-restricted-v-on]: ./no-restricted-v-on.md
 [vue/no-root-v-if]: ./no-root-v-if.md
-[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-setup-props-reactivity-loss]: ./no-setup-props-reactivity-loss.md
 [vue/no-shared-component-data]: ./no-shared-component-data.md
 [vue/no-side-effects-in-computed-properties]: ./no-side-effects-in-computed-properties.md
@@ -622,6 +621,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-confusing-v-for-v-if]: ./no-confusing-v-for-v-if.md
 [vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
+[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
 
 <!-- link definitions for releases -->
