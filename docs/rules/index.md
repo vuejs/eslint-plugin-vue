@@ -348,7 +348,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/component-tags-order] | [vue/block-order] |
 | [vue/no-invalid-model-keys] | [vue/valid-model-definition] |
 | [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] |
 | [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] |
@@ -361,6 +360,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|
+| [vue/component-tags-order] | [vue/block-order] | [v9.16.0] | [v10.0.0] |
 | [vue/experimental-script-setup-vars] | (no replacement) | [v7.13.0] | [v9.0.0] |
 | [vue/name-property-casing] | [vue/component-definition-name-casing] | [v7.0.0] | [v9.0.0] |
 | [vue/no-confusing-v-for-v-if] | [vue/no-use-v-if-with-v-for] | [v5.0.0] | [v9.0.0] |
@@ -388,7 +388,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/component-definition-name-casing]: ./component-definition-name-casing.md
 [vue/component-name-in-template-casing]: ./component-name-in-template-casing.md
 [vue/component-options-name-casing]: ./component-options-name-casing.md
-[vue/component-tags-order]: ./component-tags-order.md
 [vue/custom-event-name-casing]: ./custom-event-name-casing.md
 [vue/define-emits-declaration]: ./define-emits-declaration.md
 [vue/define-macros-order]: ./define-macros-order.md
@@ -619,6 +618,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 <!-- link definitions for removed rules -->
 
+[vue/component-tags-order]: ./component-tags-order.md
 [vue/experimental-script-setup-vars]: ./experimental-script-setup-vars.md
 [vue/name-property-casing]: ./name-property-casing.md
 [vue/no-confusing-v-for-v-if]: ./no-confusing-v-for-v-if.md
@@ -626,8 +626,10 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 <!-- link definitions for releases -->
 
+[v10.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v10.0.0
 [v5.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v5.0.0
 [v7.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.0.0
 [v7.13.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.13.0
 [v8.4.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v8.4.0
 [v9.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0
+[v9.16.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.16.0
