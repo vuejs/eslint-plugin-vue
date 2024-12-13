@@ -341,15 +341,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 </rules-table>
 
-## Deprecated
-
-- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-- :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-| [vue/v-on-function-call] | [vue/v-on-handler-style] |
-
 ## Removed
 
 - :no_entry: These rules have been removed in a previous major release, after they have been deprecated for a while.
@@ -365,6 +356,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
 | [vue/script-setup-uses-vars] | (no replacement) | [v9.0.0] | [v10.0.0] |
+| [vue/v-on-function-call] | [vue/v-on-handler-style] | [v9.7.0] | [v10.0.0] |
 
 <!-- link definitions for rules -->
 
@@ -583,7 +575,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/v-for-delimiter-style]: ./v-for-delimiter-style.md
 [vue/v-if-else-key]: ./v-if-else-key.md
 [vue/v-on-event-hyphenation]: ./v-on-event-hyphenation.md
-[vue/v-on-function-call]: ./v-on-function-call.md
 [vue/v-on-handler-style]: ./v-on-handler-style.md
 [vue/v-on-style]: ./v-on-style.md
 [vue/v-slot-style]: ./v-slot-style.md
@@ -623,6 +614,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
 [vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
+[vue/v-on-function-call]: ./v-on-function-call.md
 
 <!-- link definitions for releases -->
 
@@ -634,3 +626,4 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [v9.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0
 [v9.16.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.16.0
 [v9.17.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.17.0
+[v9.7.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.7.0
