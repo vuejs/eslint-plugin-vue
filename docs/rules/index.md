@@ -343,30 +343,22 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 </rules-table>
 
-## Deprecated
-
-- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
-- :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
-
-| Rule ID | Replaced by |
-|:--------|:------------|
-| [vue/component-tags-order] | [vue/block-order] |
-| [vue/no-invalid-model-keys] | [vue/valid-model-definition] |
-| [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] |
-| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] |
-| [vue/script-setup-uses-vars] | (no replacement) |
-| [vue/v-on-function-call] | [vue/v-on-handler-style] |
-
 ## Removed
 
 - :no_entry: These rules have been removed in a previous major release, after they have been deprecated for a while.
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|
+| [vue/component-tags-order] | [vue/block-order] | [v9.16.0] | [v10.0.0] |
 | [vue/experimental-script-setup-vars] | (no replacement) | [v7.13.0] | [v9.0.0] |
 | [vue/name-property-casing] | [vue/component-definition-name-casing] | [v7.0.0] | [v9.0.0] |
 | [vue/no-confusing-v-for-v-if] | [vue/no-use-v-if-with-v-for] | [v5.0.0] | [v9.0.0] |
+| [vue/no-invalid-model-keys] | [vue/valid-model-definition] | [v9.0.0] | [v10.0.0] |
+| [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] | [v9.17.0] | [v10.0.0] |
+| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
+| [vue/script-setup-uses-vars] | (no replacement) | [v9.0.0] | [v10.0.0] |
+| [vue/v-on-function-call] | [vue/v-on-handler-style] | [v9.7.0] | [v10.0.0] |
 
 <!-- link definitions for rules -->
 
@@ -390,7 +382,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/component-definition-name-casing]: ./component-definition-name-casing.md
 [vue/component-name-in-template-casing]: ./component-name-in-template-casing.md
 [vue/component-options-name-casing]: ./component-options-name-casing.md
-[vue/component-tags-order]: ./component-tags-order.md
 [vue/custom-event-name-casing]: ./custom-event-name-casing.md
 [vue/define-emits-declaration]: ./define-emits-declaration.md
 [vue/define-macros-order]: ./define-macros-order.md
@@ -468,7 +459,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-extra-parens]: ./no-extra-parens.md
 [vue/no-implicit-coercion]: ./no-implicit-coercion.md
 [vue/no-import-compiler-macros]: ./no-import-compiler-macros.md
-[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
 [vue/no-lone-template]: ./no-lone-template.md
@@ -481,7 +471,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
 [vue/no-ref-as-operand]: ./no-ref-as-operand.md
-[vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
 [vue/no-ref-object-reactivity-loss]: ./no-ref-object-reactivity-loss.md
 [vue/no-required-prop-with-default]: ./no-required-prop-with-default.md
 [vue/no-reserved-component-names]: ./no-reserved-component-names.md
@@ -500,7 +489,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
 [vue/no-restricted-v-on]: ./no-restricted-v-on.md
 [vue/no-root-v-if]: ./no-root-v-if.md
-[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-setup-props-reactivity-loss]: ./no-setup-props-reactivity-loss.md
 [vue/no-shared-component-data]: ./no-shared-component-data.md
 [vue/no-side-effects-in-computed-properties]: ./no-side-effects-in-computed-properties.md
@@ -577,7 +565,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
 [vue/script-indent]: ./script-indent.md
-[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
 [vue/sort-keys]: ./sort-keys.md
@@ -592,7 +579,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/v-for-delimiter-style]: ./v-for-delimiter-style.md
 [vue/v-if-else-key]: ./v-if-else-key.md
 [vue/v-on-event-hyphenation]: ./v-on-event-hyphenation.md
-[vue/v-on-function-call]: ./v-on-function-call.md
 [vue/v-on-handler-style]: ./v-on-handler-style.md
 [vue/v-on-style]: ./v-on-style.md
 [vue/v-slot-style]: ./v-slot-style.md
@@ -623,15 +609,25 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 <!-- link definitions for removed rules -->
 
+[vue/component-tags-order]: ./component-tags-order.md
 [vue/experimental-script-setup-vars]: ./experimental-script-setup-vars.md
 [vue/name-property-casing]: ./name-property-casing.md
 [vue/no-confusing-v-for-v-if]: ./no-confusing-v-for-v-if.md
+[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
+[vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
+[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
+[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
+[vue/v-on-function-call]: ./v-on-function-call.md
 
 <!-- link definitions for releases -->
 
+[v10.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v10.0.0
 [v5.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v5.0.0
 [v7.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.0.0
 [v7.13.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.13.0
 [v8.4.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v8.4.0
 [v9.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0
+[v9.16.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.16.0
+[v9.17.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.17.0
+[v9.7.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.7.0
