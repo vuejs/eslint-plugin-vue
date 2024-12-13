@@ -53,7 +53,7 @@ function checkMetaValidity(context, exportsNode) {
   const metaDocsCategories = getPropertyFromObject('categories', metaDocs.value)
   if (!metaDocsCategories) {
     context.report({
-      node: metaProperty,
+      node: metaDocs,
       messageId: 'missingMetaDocsCategories'
     })
     return
