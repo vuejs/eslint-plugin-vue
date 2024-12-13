@@ -348,7 +348,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/script-setup-uses-vars] | (no replacement) |
 | [vue/v-on-function-call] | [vue/v-on-handler-style] |
 
 ## Removed
@@ -365,6 +364,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
+| [vue/script-setup-uses-vars] | (no replacement) | [v9.0.0] | [v10.0.0] |
 
 <!-- link definitions for rules -->
 
@@ -569,7 +569,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
 [vue/script-indent]: ./script-indent.md
-[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
 [vue/sort-keys]: ./sort-keys.md
@@ -623,6 +622,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
 [vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
+[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
 
 <!-- link definitions for releases -->
 
