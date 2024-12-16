@@ -4,12 +4,12 @@
  */
 'use strict'
 
-const eslint = require('../../eslint-compat')
+const semver = require('semver')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/jsx-uses-vars')
 const { getCoreRule } = require('../../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 
-const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
   languageOptions: {
     ecmaVersion: 6,
@@ -109,10 +109,11 @@ describe('jsx-uses-vars', () => {
         errors: [
           {
             message: "'SomeComponent' is defined but never used.",
-            suggestions: [
-              {
-                desc: "Remove unused variable 'SomeComponent'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'SomeComponent'.",
+                    output: `
         /* eslint vue/jsx-uses-vars: 1 */
         import './SomeComponent.jsx';
         export default {
@@ -121,8 +122,9 @@ describe('jsx-uses-vars', () => {
           },
         };
       `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       },
@@ -143,10 +145,11 @@ describe('jsx-uses-vars', () => {
         errors: [
           {
             message: "'wrapper' is assigned a value but never used.",
-            suggestions: [
-              {
-                desc: "Remove unused variable 'wrapper'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'wrapper'.",
+                    output: `
         /* eslint vue/jsx-uses-vars: 1 */
         import SomeComponent from './SomeComponent.jsx';
         
@@ -157,8 +160,9 @@ describe('jsx-uses-vars', () => {
           },
         };
       `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       }

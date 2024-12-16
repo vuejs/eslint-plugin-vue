@@ -5,12 +5,12 @@
  */
 'use strict'
 
-const eslint = require('../../eslint-compat')
+const semver = require('semver')
+const { RuleTester, ESLint } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/script-setup-uses-vars')
 const { getCoreRule } = require('../../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 
-const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),
@@ -261,10 +261,11 @@ describe('script-setup-uses-vars', () => {
           {
             message: "'Bar' is defined but never used.",
             line: 6,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'Bar'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'Bar'.",
+                    output: `
         <script setup>
           /* eslint vue/script-setup-uses-vars: 1 */
           // imported components are also directly usable in template
@@ -289,8 +290,9 @@ describe('script-setup-uses-vars', () => {
           <Foo :count="count" @click="inc" />
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           },
           {
             message: "'baz' is assigned a value but never used.",
@@ -316,10 +318,11 @@ describe('script-setup-uses-vars', () => {
           {
             message: "'camelCase' is defined but never used.",
             line: 4,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'camelCase'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'camelCase'.",
+                    output: `
         <script setup>
           /* eslint vue/script-setup-uses-vars: 1 */
           import './component.vue'
@@ -329,8 +332,9 @@ describe('script-setup-uses-vars', () => {
           <CamelCase />
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       },
@@ -354,10 +358,11 @@ describe('script-setup-uses-vars', () => {
           {
             message: "'msg' is assigned a value but never used.",
             line: 5,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'msg'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'msg'.",
+                    output: `
         <script setup>
           /* eslint vue/script-setup-uses-vars: 1 */
           if (a) {
@@ -369,8 +374,9 @@ describe('script-setup-uses-vars', () => {
           <div>{{ msg }}</div>
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       },

@@ -1,6 +1,7 @@
 'use strict'
 
-const { RuleTester } = require('../eslint-compat')
+const semver = require('semver')
+const { RuleTester, ESLint } = require('../eslint-compat')
 const { getCoreRule } = require('../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 const ruleNoUndef = getCoreRule('no-undef')
@@ -221,10 +222,11 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'Bar' is defined but never used.",
             line: 5,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'Bar'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'Bar'.",
+                    output: `
         <script setup>
           // imported components are also directly usable in template
           import Foo from './Foo.vue'
@@ -248,8 +250,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <Foo :count="count" @click="inc" />
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           },
           {
             message: "'baz' is assigned a value but never used.",
@@ -274,10 +277,11 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'camelCase' is defined but never used.",
             line: 3,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'camelCase'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'camelCase'.",
+                    output: `
         <script setup>
           import './component.vue'
         </script>
@@ -286,8 +290,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <CamelCase />
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       },
@@ -310,10 +315,11 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'msg' is assigned a value but never used.",
             line: 4,
-            suggestions: [
-              {
-                desc: "Remove unused variable 'msg'.",
-                output: `
+            suggestions: semver.gte(ESLint.version, '9.17.0')
+              ? [
+                  {
+                    desc: "Remove unused variable 'msg'.",
+                    output: `
         <script setup>
           if (a) {
             
@@ -324,8 +330,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           <div>{{ msg }}</div>
         </template>
         `
-              }
-            ]
+                  }
+                ]
+              : null
           }
         ]
       },
