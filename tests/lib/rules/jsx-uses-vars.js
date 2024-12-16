@@ -108,7 +108,21 @@ describe('jsx-uses-vars', () => {
       `,
         errors: [
           {
-            message: "'SomeComponent' is defined but never used."
+            message: "'SomeComponent' is defined but never used.",
+            suggestions: [
+              {
+                desc: "Remove unused variable 'SomeComponent'.",
+                output: `
+        /* eslint vue/jsx-uses-vars: 1 */
+        import './SomeComponent.jsx';
+        export default {
+          render () {
+            return <div></div>;
+          },
+        };
+      `
+              }
+            ]
           }
         ]
       },
@@ -128,7 +142,23 @@ describe('jsx-uses-vars', () => {
       `,
         errors: [
           {
-            message: "'wrapper' is assigned a value but never used."
+            message: "'wrapper' is assigned a value but never used.",
+            suggestions: [
+              {
+                desc: "Remove unused variable 'wrapper'.",
+                output: `
+        /* eslint vue/jsx-uses-vars: 1 */
+        import SomeComponent from './SomeComponent.jsx';
+        
+
+        export default {
+          render () {
+            return <div></div>;
+          },
+        };
+      `
+              }
+            ]
           }
         ]
       }
