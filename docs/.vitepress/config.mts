@@ -32,7 +32,7 @@ export default async () => {
     { title: 'Base Rules', categoryIds: ['base'] },
     {
       title: 'Priority A: Essential',
-      categoryIds: ['vue3-essential', 'essential']
+      categoryIds: ['vue3-essential', 'vue2-essential']
     },
     {
       title: 'Priority A: Essential for Vue.js 3.x',
@@ -40,11 +40,11 @@ export default async () => {
     },
     {
       title: 'Priority A: Essential for Vue.js 2.x',
-      categoryIds: ['essential']
+      categoryIds: ['vue2-essential']
     },
     {
       title: 'Priority B: Strongly Recommended',
-      categoryIds: ['vue3-strongly-recommended', 'strongly-recommended']
+      categoryIds: ['vue3-strongly-recommended', 'vue2-strongly-recommended']
     },
     {
       title: 'Priority B: Strongly Recommended for Vue.js 3.x',
@@ -52,11 +52,11 @@ export default async () => {
     },
     {
       title: 'Priority B: Strongly Recommended for Vue.js 2.x',
-      categoryIds: ['strongly-recommended']
+      categoryIds: ['vue2-strongly-recommended']
     },
     {
       title: 'Priority C: Recommended',
-      categoryIds: ['vue3-recommended', 'recommended']
+      categoryIds: ['vue3-recommended', 'vue2-recommended']
     },
     {
       title: 'Priority C: Recommended for Vue.js 3.x',
@@ -64,7 +64,7 @@ export default async () => {
     },
     {
       title: 'Priority C: Recommended for Vue.js 2.x',
-      categoryIds: ['recommended']
+      categoryIds: ['vue2-recommended']
     }
   ]
 
