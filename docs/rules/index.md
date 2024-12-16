@@ -34,8 +34,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority A: Essential (Error Prevention)
 
-- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/essential"`,`*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/vue2-essential"`,`*.configs["flat/vue2-essential"]`, `"plugin:vue/vue2-strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -134,8 +134,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority B: Strongly Recommended (Improving Readability)
 
-- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/vue2-strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -171,8 +171,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority C: Recommended (Potentially Dangerous Patterns)
 
-- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` preset.
+- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` preset.
 
 <rules-table>
 
