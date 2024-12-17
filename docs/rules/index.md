@@ -108,6 +108,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/use-v-on-exact] | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
 | [vue/valid-attribute-name] | require valid attribute names |  | :three::two::warning: |
 | [vue/valid-define-emits] | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
+| [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :three::warning: |
 | [vue/valid-define-props] | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
 | [vue/valid-model-definition] | require valid keys in model option |  | :two::warning: |
 | [vue/valid-next-tick] | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
@@ -289,7 +290,6 @@ For example:
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
-| [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :warning: |
 
 </rules-table>
 
