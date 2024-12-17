@@ -30,19 +30,6 @@ declare const vue: {
     '.vue': any
     vue: any
   }
-  environments: {
-    /**
-     * @deprecated
-     */
-    'setup-compiler-macros': {
-      globals: {
-        defineProps: 'readonly'
-        defineEmits: 'readonly'
-        defineExpose: 'readonly'
-        withDefaults: 'readonly'
-      }
-    }
-  }
 }
 
 export = vue
