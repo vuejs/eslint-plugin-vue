@@ -28,24 +28,28 @@ const plugin = {
   configs: {
     // eslintrc configs
     base: require('./configs/base'),
-    essential: require('./configs/vue2-essential'),
-    'no-layout-rules': require('./configs/no-layout-rules'),
-    recommended: require('./configs/vue2-recommended'),
-    'strongly-recommended': require('./configs/vue2-strongly-recommended'),
-    'vue3-essential': require('./configs/vue3-essential'),
-    'vue3-recommended': require('./configs/vue3-recommended'),
-    'vue3-strongly-recommended': require('./configs/vue3-strongly-recommended'),
-  
+
+    'vue2-essential': require('./configs/vue2-essential'),
+    'vue2-strongly-recommended': require('./configs/vue2-strongly-recommended'),
+    'vue2-recommended': require('./configs/vue2-recommended'),
+
+    essential: require('./configs/vue3-essential'),
+    'strongly-recommended': require('./configs/vue3-strongly-recommended'),
+    recommended: require('./configs/vue3-recommended'),
+
     // flat configs
     'flat/base': require('./configs/flat/base.js'),
+
     'flat/vue2-essential': require('./configs/flat/vue2-essential.js'),
-    'flat/vue2-recommended': require('./configs/flat/vue2-recommended.js'),
     'flat/vue2-strongly-recommended': require('./configs/flat/vue2-strongly-recommended.js'),
-  
-    // in flat configs, non-prefixed config is for Vue 3 (unlike eslintrc configs)
+    'flat/vue2-recommended': require('./configs/flat/vue2-recommended.js'),
+
     'flat/essential': require('./configs/flat/vue3-essential.js'),
-    'flat/recommended': require('./configs/flat/vue3-recommended.js'),
     'flat/strongly-recommended': require('./configs/flat/vue3-strongly-recommended.js'),
+    'flat/recommended': require('./configs/flat/vue3-recommended.js'),
+
+    // config-format-agnostic configs
+    'no-layout-rules': require('./configs/no-layout-rules'),
   },
   rules: {
     ${rules
@@ -55,18 +59,6 @@ const plugin = {
   processors: {
     '.vue': require('./processor'),
     'vue': require('./processor')
-  },
-  environments: {
-    // TODO Remove in the next major version
-    /** @deprecated */
-    'setup-compiler-macros': {
-      globals: {
-        defineProps: 'readonly',
-        defineEmits: 'readonly',
-        defineExpose: 'readonly',
-        withDefaults: 'readonly'
-      }
-    }
   }
 }
 

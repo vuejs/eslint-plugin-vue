@@ -50,6 +50,8 @@ ruleTester.run('order-in-components', rule, {
           model,
           props, propsData,
           emits,
+          slots,
+          expose,
           setup,
           data,
           computed,
@@ -231,6 +233,84 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "props" property should be above the "data" property on line 4.',
           line: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        })
+      `,
+      output: `
+        import { defineComponent } from 'vue'
+        export default defineComponent({
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "data" property on line 5.',
+          line: 10
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+          props: {
+            propA: Number,
+          },
+        })
+      `,
+      output: `
+        import { defineNuxtComponent } from '#app'
+        export default defineNuxtComponent({
+          name: 'app',
+          props: {
+            propA: Number,
+          },
+          data () {
+            return {
+              msg: 'Welcome to Your Vue.js App'
+            }
+          },
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "props" property should be above the "data" property on line 5.',
+          line: 10
         }
       ]
     },
@@ -1204,6 +1284,61 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "inheritAttrs" property on line 4.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          setup,
+          slots,
+          expose,
+        };
+      `,
+      output: `
+        export default {
+          slots,
+          setup,
+          expose,
+        };
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "slots" property should be above the "setup" property on line 3.',
+          line: 4
+        },
+        {
+          message:
+            'The "expose" property should be above the "setup" property on line 3.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'example.vue',
+      code: `
+        export default {
+          slots,
+          setup,
+          expose,
+        };
+      `,
+      output: `
+        export default {
+          slots,
+          expose,
+          setup,
+        };
+      `,
+      languageOptions,
+      errors: [
+        {
+          message:
+            'The "expose" property should be above the "setup" property on line 4.',
           line: 5
         }
       ]
