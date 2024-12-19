@@ -81,7 +81,7 @@
     "esbuild": "^0.24.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-eslint-plugin": "~6.3.1",
+    "eslint-plugin-eslint-plugin": "~6.4.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsonc": "^2.16.0",
     "eslint-plugin-node-dependencies": "^0.12.0",
