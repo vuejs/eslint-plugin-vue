@@ -95,7 +95,7 @@
     "nyc": "^17.1.0",
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
-    "typescript": "^5.6.3",
+    "typescript": "^5.7.2",
     "vitepress": "^1.4.1"
   }
 }
