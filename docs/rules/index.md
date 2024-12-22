@@ -179,7 +179,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/attributes-order] | enforce order of attributes | :wrench: | :three::two::hammer: |
 | [vue/component-tags-order] | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
 | [vue/no-lone-template] | disallow unnecessary `<template>` |  | :three::two::warning: |
-| [vue/no-multiple-slot-args] | disallow to pass multiple arguments to scoped slots |  | :three::two::warning: |
+| [vue/no-multiple-slot-args] | disallow passing multiple arguments to scoped slots |  | :three::two::warning: |
 | [vue/no-v-html] | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
 | [vue/order-in-components] | enforce order of properties in components | :wrench::bulb: | :three::two::hammer: |
 | [vue/this-in-template] | disallow usage of `this` in template | :wrench: | :three::two::hammer: |
