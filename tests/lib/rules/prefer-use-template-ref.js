@@ -252,6 +252,17 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `
+    },
+    {
+      filename: 'non-block-arrow-setup-function.vue',
+      code: `
+        <script>
+          import { defineComponent } from 'vue';
+          export default defineComponent({
+            setup: () => ({})
+          })
+        </script>
+      `
     }
   ],
   invalid: [
@@ -381,6 +392,32 @@ tester.run('prefer-use-template-ref', rule, {
           },
           line: 7,
           column: 22
+        }
+      ]
+    },
+    {
+      filename: 'block-arrow-setup-function.vue',
+      code: `
+      <template>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          setup: () => {
+            const button = ref();
+          }
+        }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 9,
+          column: 28
         }
       ]
     }
