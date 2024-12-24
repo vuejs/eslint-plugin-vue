@@ -108,6 +108,7 @@ ruleTester.run('require-valid-default-prop', rule, {
           foo: { type: String, default () { return Foo } },
           foo: { type: Number, default () { return Foo } },
           foo: { type: Object, default () { return Foo } },
+          foo: { type: Object, default: null },
         }
       })`,
       languageOptions
