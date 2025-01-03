@@ -231,7 +231,9 @@ module.exports = [
   {
     files: ['eslint-internal-rules/*.js'],
     rules: {
-      'eslint-plugin/require-meta-docs-url': 'off'
+      'eslint-plugin/require-meta-docs-url': 'off',
+      'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
   {
