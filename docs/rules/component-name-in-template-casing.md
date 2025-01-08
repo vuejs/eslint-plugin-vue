@@ -10,7 +10,7 @@ since: v5.0.0
 
 > enforce specific casing for the component naming style in template
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 Define a style for the component name in template casing for consistency purposes.
 
