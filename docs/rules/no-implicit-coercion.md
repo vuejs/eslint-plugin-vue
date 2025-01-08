@@ -3,7 +3,6 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-implicit-coercion
 description: Disallow shorthand type conversions in `<template>`
-since: v9.33.0
 ---
 
 # vue/no-implicit-coercion
