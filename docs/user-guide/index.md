@@ -479,13 +479,6 @@ You need to use [vue-eslint-parser] v9.0.0 or later.
 
 Previously you had to use the `vue/setup-compiler-macros` environment, this is no longer needed.
 
-#### Other Problems
-
-Try searching for existing issues.
-If it does not exist, you should open a new issue and share your repository to reproduce the issue.
-
-[vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser
-
 ### Auto Imports Support
 
 In [Nuxt 3](https://nuxt.com/) or with [`unplugin-auto-import`](https://github.com/unplugin/unplugin-auto-import), Vue APIs can be auto imported. To make rules like [`vue/no-ref-as-operand`](/rules/no-ref-as-operand.html) or [`vue/no-watch-after-await`](/rules/no-watch-after-await.html) work correctly with them, you can specify them in ESLint's [`globals`](https://eslint.org/docs/latest/use/configure/configuration-files-new#configuring-global-variables) options:
