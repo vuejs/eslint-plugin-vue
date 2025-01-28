@@ -54,7 +54,8 @@
     "node": "^14.17.0 || >=16.0.0"
   },
   "peerDependencies": {
-    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0"
+    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
+    "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
@@ -63,7 +64,6 @@
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.15",
     "semver": "^7.6.3",
-    "vue-eslint-parser": "^9.4.3",
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
@@ -98,6 +98,7 @@
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
     "typescript": "^5.7.2",
-    "vitepress": "^1.4.1"
+    "vitepress": "^1.4.1",
+    "vue-eslint-parser": "^9.4.3"
   }
 }
