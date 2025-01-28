@@ -16,8 +16,8 @@ yarn add -D eslint eslint-plugin-vue
 
 ::: tip Requirements
 
-- ESLint v6.2.0 and above
-- Node.js v14.17.x, v16.x and above
+- ESLint: `^8.57.0 || ^9.0.0`
+- Node.js: `^18.18.0 || ^20.9.0 || >=21.1.0`
 
 :::
 

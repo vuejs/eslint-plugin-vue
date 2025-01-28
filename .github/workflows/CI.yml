@@ -30,11 +30,11 @@ jobs:
     name: Test
     strategy:
       matrix:
-        node: [18, 20]
-        eslint: [8, 9]
+        node: [18, 20, 21]
+        eslint: [9]
         include:
-          # On old Node version
-          - node: 17
+          # On old ESLint version
+          - node: 18
             eslint: 8
 
     runs-on: ubuntu-latest
@@ -46,31 +46,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install Packages
-        run: npm install --legacy-peer-deps
+        run: npm install -f
       - name: Install ESLint v${{ matrix.eslint }}
-        run: npm install --save-dev eslint@${{ matrix.eslint }} --legacy-peer-deps
+        run: npm install --save-dev eslint@${{ matrix.eslint }} -f
       - name: Test
         run: npm test
 
-  test-for-ts-eslint-v5:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install Packages
-        run: npm install --legacy-peer-deps
-      - name: Install typescript-eslint v5
-        run: npm install -D @typescript-eslint/parser
-      - name: Test
-        run: npm test
-
-  test-for-eslint-v8-without-eslint-stylistic:
-    name: Test
+  test-without-eslint-stylistic:
+    name: Test without ESLint Stylistic
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -78,10 +61,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
       - name: Install Packages
-        run: npm install --legacy-peer-deps
+        run: npm install -f
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall -D @stylistic/eslint-plugin
-      - name: Install eslint v8
-        run: npm install -D eslint@8
       - name: Test
         run: npm test
