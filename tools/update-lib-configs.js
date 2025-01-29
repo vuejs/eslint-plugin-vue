@@ -58,7 +58,7 @@ function formatCategory(category) {
 module.exports = {
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: "latest",
     sourceType: 'module'
   },
   env: {
