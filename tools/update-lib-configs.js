@@ -55,16 +55,14 @@ function formatCategory(category) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+const globals = require('globals')
 module.exports = {
   parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  env: {
-    browser: true,
-    es6: true
-  },
+  globals: globals.browser,
   plugins: [
     'vue'
   ],
