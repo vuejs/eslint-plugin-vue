@@ -323,6 +323,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-constant-condition] | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern] | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens] | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |
+| [vue/no-implicit-coercion] | Disallow shorthand type conversions in `<template>` | :wrench: | :hammer: |
 | [vue/no-irregular-whitespace] | disallow irregular whitespace in `.vue` files |  | :warning: |
 | [vue/no-loss-of-precision] | Disallow literal numbers that lose precision in `<template>` |  | :warning: |
 | [vue/no-restricted-syntax] | Disallow specified syntax in `<template>` |  | :hammer: |
@@ -465,6 +466,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-export-in-script-setup]: ./no-export-in-script-setup.md
 [vue/no-expose-after-await]: ./no-expose-after-await.md
 [vue/no-extra-parens]: ./no-extra-parens.md
+[vue/no-implicit-coercion]: ./no-implicit-coercion.md
 [vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
