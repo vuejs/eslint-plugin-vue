@@ -154,13 +154,12 @@ If you have issues with these, please also refer to the [FAQ](#does-not-work-wel
 
 ### Running ESLint from the command line
 
-If you want to run `eslint` from the command line, make sure you include the `.vue` extension using [the `--ext` option](https://eslint.org/docs/user-guide/configuring#specifying-target-files-to-lint) or a glob pattern, because ESLint targets only `.js` files by default.
+If you want to run `eslint` from the command line, ESLint will automatically check for the `.vue` extension if you use the config provided by the plugin.
 
 Examples:
 
 ```bash
-eslint --ext .js,.vue src
-eslint "src/**/*.{js,vue}"
+eslint src
 ```
 
 ::: tip
@@ -393,7 +392,7 @@ See also: "[How to use a custom parser?](#how-to-use-a-custom-parser)" section.
 
 1. Make sure your tool is set to lint `.vue` files.
 
-    - CLI targets only `.js` files by default. You have to specify additional extensions with the `--ext` option or glob patterns. E.g. `eslint "src/**/*.{js,vue}"` or `eslint src --ext .vue`. If you use `@vue/cli-plugin-eslint` and the `vue-cli-service lint` command - you don't have to worry about it.
+    - Make sure you are using the shareable config provided by `eslint-plugin-vue`.
     - If you are having issues with configuring editor, please read [editor integrations](#editor-integrations)
 
 ### Conflict with [Prettier]
