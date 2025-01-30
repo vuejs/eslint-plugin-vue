@@ -55,13 +55,11 @@ function formatCategory(category) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const globals = require('globals')
 module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  globals: globals.browser,
   plugins: [
     'vue'
   ],
