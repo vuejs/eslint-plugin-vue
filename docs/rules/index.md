@@ -92,7 +92,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-useless-template-attributes] | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child] | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
 | [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` | :no_entry_sign: | :two::warning: |
-| [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component |  | :two::warning: |
+| [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component | :no_entry_sign: | :two::warning: |
 | [vue/no-v-text-v-html-on-component] | disallow v-text / v-html on component |  | :three::two::warning: |
 | [vue/no-watch-after-await] | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue] | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
@@ -350,6 +350,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | Rule ID | Replaced by |
 |:--------|:------------|
 | [vue/no-v-for-template-key] | (no replacement) |
+| [vue/no-v-model-argument] | (no replacement) |
 
 ## Removed
 
