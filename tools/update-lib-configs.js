@@ -57,7 +57,6 @@ function formatCategory(category) {
  */
 const globals = require('globals')
 module.exports = {
-  parser: require.resolve('vue-eslint-parser'),
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
@@ -66,7 +65,13 @@ module.exports = {
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules, category.categoryId)}
+  rules: ${formatRules(category.rules, category.categoryId)},
+  overrides: [
+    {
+      files: '*.vue',
+      parser: require.resolve('vue-eslint-parser')
+    }
+  ]
 }
 `
   }
