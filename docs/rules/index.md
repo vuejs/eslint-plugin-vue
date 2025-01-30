@@ -110,7 +110,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/valid-define-emits] | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
 | [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :three::warning: |
 | [vue/valid-define-props] | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
-| [vue/valid-model-definition] | require valid keys in model option |  | :two::warning: |
+| [vue/valid-model-definition] | require valid keys in model option | :no_entry_sign: | :two::warning: |
 | [vue/valid-next-tick] | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
 | [vue/valid-template-root] | enforce valid template root |  | :three::two::warning: |
 | [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives |  | :two::warning: |
@@ -351,6 +351,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 |:--------|:------------|
 | [vue/no-v-for-template-key] | (no replacement) |
 | [vue/no-v-model-argument] | (no replacement) |
+| [vue/valid-model-definition] | (no replacement) |
 
 ## Removed
 
