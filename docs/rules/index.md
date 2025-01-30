@@ -91,7 +91,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-use-v-if-with-v-for] | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes] | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child] | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
-| [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
+| [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` | :no_entry_sign: | :two::warning: |
 | [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component |  | :two::warning: |
 | [vue/no-v-text-v-html-on-component] | disallow v-text / v-html on component |  | :three::two::warning: |
 | [vue/no-watch-after-await] | disallow asynchronously registered `watch` |  | :three::hammer: |
@@ -341,6 +341,15 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/template-curly-spacing] | Require or disallow spacing around embedded expressions of template strings in `<template>` | :wrench: | :lipstick: |
 
 </rules-table>
+
+## Deprecated
+
+- :no_entry_sign: We're going to remove deprecated rules in the next major release. Please migrate to successor/new rules.
+- :innocent: We don't fix bugs which are in deprecated rules since we don't have enough resources.
+
+| Rule ID | Replaced by |
+|:--------|:------------|
+| [vue/no-v-for-template-key] | (no replacement) |
 
 ## Removed
 
