@@ -113,7 +113,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/valid-model-definition] | require valid keys in model option | :no_entry_sign: | :two::warning: |
 | [vue/valid-next-tick] | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
 | [vue/valid-template-root] | enforce valid template root |  | :three::two::warning: |
-| [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives |  | :two::warning: |
+| [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives | :no_entry_sign: | :two::warning: |
 | [vue/valid-v-bind] | enforce valid `v-bind` directives |  | :three::two::warning: |
 | [vue/valid-v-cloak] | enforce valid `v-cloak` directives |  | :three::two::warning: |
 | [vue/valid-v-else-if] | enforce valid `v-else-if` directives |  | :three::two::warning: |
@@ -352,6 +352,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-v-for-template-key] | (no replacement) |
 | [vue/no-v-model-argument] | (no replacement) |
 | [vue/valid-model-definition] | (no replacement) |
+| [vue/valid-v-bind-sync] | (no replacement) |
 
 ## Removed
 
