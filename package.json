@@ -51,15 +51,15 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": "^14.17.0 || >=16.0.0"
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
   "peerDependencies": {
-    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
+    "eslint": "^8.57.0 || ^9.0.0",
     "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
-    "globals": "^13.24.0",
+    "globals": "^15.14.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.15",
