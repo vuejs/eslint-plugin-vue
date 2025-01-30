@@ -11,7 +11,7 @@ npm install --save-dev eslint eslint-plugin-vue
 Via [yarn](https://yarnpkg.com/):
 
 ```bash
-yarn add -D eslint eslint-plugin-vue globals
+yarn add -D eslint eslint-plugin-vue
 ```
 
 ::: tip Requirements
@@ -31,8 +31,6 @@ Example **eslint.config.js**:
 
 ```js
 import pluginVue from 'eslint-plugin-vue'
-import globals from 'globals'
-
 export default [
   // add more generic rulesets here, such as:
   // js.configs.recommended,
@@ -42,12 +40,6 @@ export default [
     rules: {
       // override/add rules settings here, such as:
       // 'vue/no-unused-vars': 'error'
-    },
-    languageOptions: {
-      sourceType: 'module',
-      globals: {
-        ...globals.browser
-      }
     }
   }
 ]
@@ -74,48 +66,6 @@ You can use the following configs by adding them to `eslint.config.js`.
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
 :::
-
-#### Specifying Globals (`eslint.config.js`)
-
-Specify global objects depending on how you use Vue.js. More information on how to set globals can be found [here](https://eslint.org/docs/latest/use/configure/language-options#predefined-global-variables).
-
-If you're writing an app that will only render on the browser, use `globals.browser`.
-
-```js
-// ...
-import globals from 'globals'
-
-export default [
-  // ...
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser
-      }
-    }
-  }
-  // ...
-]
-```
-
-If you're writing an app that is rendered both server-side and on the browser, use `globals.shared-node-browser`.
-
-```js
-// ...
-import globals from 'globals'
-
-export default [
-  // ...
-  {
-    languageOptions: {
-      globals: {
-        ...globals['shared-node-browser']
-      }
-    }
-  }
-  // ...
-]
-```
 
 #### Example configuration with [typescript-eslint](https://typescript-eslint.io/) and [Prettier](https://prettier.io/)
 
@@ -201,30 +151,6 @@ By default, all rules from **base** and **essential** categories report ESLint e
 This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.  
 If you have issues with these, please also refer to the [FAQ](#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
-
-#### Specifying Environments (`.eslintrc`)
-
-Specify environments depending on how you use Vue.js. More information on how to set environments can be found [here](https://eslint.org/docs/latest/use/configure/language-options-deprecated#specifying-environments).
-
-If you're writing an app that will only render on the browser, use `env.browser`.
-
-```json
-{
-  "env": {
-    "browser": true
-  }
-}
-```
-
-If you're writing an app that is rendered both server-side and on the browser, use `env.shared-node-browser`.
-
-```json
-{
-  "env": {
-    "shared-node-browser": true
-  }
-}
-```
 
 ### Running ESLint from the command line
 
