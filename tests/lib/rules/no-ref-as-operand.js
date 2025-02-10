@@ -191,7 +191,53 @@ tester.run('no-ref-as-operand', rule, {
       model.value = value;
     }
     </script>
+    `,
     `
+    <script setup>
+    const emit = defineEmits(['test'])
+    const [model, mod] = defineModel();
+    
+    function update() {
+      emit('test', model.value)
+    }
+    </script>
+    `,
+    `
+    <script>
+    import { ref, defineComponent } from 'vue'
+
+    export default defineComponent({
+      emits: ['incremented'],
+      setup(_, ctx) {
+        const counter = ref(0)
+
+        ctx.emit('incremented', counter.value)
+
+        return {
+          counter
+        }
+      }
+    })
+    </script>
+    `,
+    `
+    <script>
+    import { ref, defineComponent } from 'vue'
+
+    export default defineComponent({
+      emits: ['incremented'],
+      setup(_, { emit }) {
+        const counter = ref(0)
+
+        emit('incremented', counter.value)
+
+        return {
+          counter
+        }
+      }
+    })
+    </script>
+    `,
   ],
   invalid: [
     {
@@ -821,6 +867,130 @@ tester.run('no-ref-as-operand', rule, {
             'Must use `.value` to read or write the value wrapped by `defineModel()`.',
           line: 9
         }
+      ]
+    },
+    {
+      code: `
+      <script setup>
+      import { ref } from 'vue'
+      const emits = defineEmits(['test'])
+      const count = ref(0)
+
+      function update() {
+        emits('test', count)
+      }
+      </script>
+      `,
+      output: `
+      <script setup>
+      import { ref } from 'vue'
+      const emits = defineEmits(['test'])
+      const count = ref(0)
+
+      function update() {
+        emits('test', count.value)
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 8,
+          endLine: 8,
+        },
+      ]
+    },
+    {
+      code: `
+      <script>
+      import { ref, defineComponent } from 'vue'
+
+      export default defineComponent({
+        emits: ['incremented'],
+        setup(_, ctx) {
+          const counter = ref(0)
+
+          ctx.emit('incremented', counter)
+
+          return {
+            counter
+          }
+        }
+      })
+      </script>
+      `,
+      output:`
+      <script>
+      import { ref, defineComponent } from 'vue'
+
+      export default defineComponent({
+        emits: ['incremented'],
+        setup(_, ctx) {
+          const counter = ref(0)
+
+          ctx.emit('incremented', counter.value)
+
+          return {
+            counter
+          }
+        }
+      })
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 10,
+          endLine: 10,
+        },
+      ]
+    },
+    {
+      code: `
+      <script>
+      import { ref, defineComponent } from 'vue'
+
+      export default defineComponent({
+        emits: ['incremented'],
+        setup(_, { emit }) {
+          const counter = ref(0)
+
+          emit('incremented', counter)
+
+          return {
+            counter
+          }
+        }
+      })
+      </script>
+      `,
+      output:`
+      <script>
+      import { ref, defineComponent } from 'vue'
+
+      export default defineComponent({
+        emits: ['incremented'],
+        setup(_, { emit }) {
+          const counter = ref(0)
+
+          emit('incremented', counter.value)
+
+          return {
+            counter
+          }
+        }
+      })
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 10,
+          endLine: 10,
+        },
       ]
     },
     // Auto-import
