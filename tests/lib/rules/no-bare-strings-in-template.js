@@ -114,7 +114,25 @@ tester.run('no-bare-strings-in-template', rule, {
         title="( ) , . & + - = * / # % ! ? : [ ] { } < > • —   | &lpar; &rpar; &comma; &period; &amp; &AMP; &plus; &minus; &equals; &ast; &midast; &sol; &num; &percnt; &excl; &quest; &colon; &lsqb; &lbrack; &rsqb; &rbrack; &lcub; &lbrace; &rcub; &rbrace; &lt; &LT; &gt; &GT; &bull; &bullet; &mdash; &ndash; &nbsp; &Tab; &NewLine; &verbar; &vert; &VerticalLine;"
       />
     </template>
-    `
+    `,
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2681
+      code: `
+      <template>
+        <h1> foo </h1>
+        <h1> foo_bar </h1>
+      </template>
+      `,
+      options: [{ allowlist: ['foo', 'foo_bar'] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>@@</h1>
+      </template>
+      `,
+      options: [{ allowlist: ['@@'] }]
+    }
   ],
   invalid: [
     {
@@ -224,6 +242,24 @@ tester.run('no-bare-strings-in-template', rule, {
           messageId: 'unexpected',
           endLine: 5,
           endColumn: 18
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <h1>foo</h1>
+        <h1>foo_bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: ['foo'] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 20
         }
       ]
     },
