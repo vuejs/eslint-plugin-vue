@@ -169,6 +169,15 @@ tester.run('multiline-html-element-content-newline', rule, {
         </template>`,
       options: [{ allowEmptyLines: true }]
     },
+    {
+      code: `
+        <template>
+          <div>  <!-- comment -->
+            contents
+          </div>
+        </template>`,
+      options: [{ allowEmptyLines: true, ignoreComments: true }]
+    },
 
     // self closing
     `
@@ -609,6 +618,25 @@ content
       errors: [
         'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
         'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+      ]
+    },
+    {
+      code: `
+        <template>
+          <div>  <!-- comment -->
+            contents
+          </div>
+        </template>`,
+      output: `
+        <template>
+          <div>
+<!-- comment -->
+            contents
+          </div>
+        </template>`,
+      options: [{ allowEmptyLines: true, ignoreComments: false }],
+      errors: [
+        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
       ]
     },
     // mustache
