@@ -291,7 +291,7 @@ tester.run('no-ref-as-operand', rule, {
       }
     })
     </script>
-    `,
+    `
   ],
   invalid: [
     {
@@ -951,8 +951,8 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 8,
-          endLine: 8,
-        },
+          endLine: 8
+        }
       ]
     },
     {
@@ -974,7 +974,7 @@ tester.run('no-ref-as-operand', rule, {
       })
       </script>
       `,
-      output:`
+      output: `
       <script>
       import { ref, defineComponent } from 'vue'
 
@@ -997,8 +997,8 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10,
-        },
+          endLine: 10
+        }
       ]
     },
     {
@@ -1020,7 +1020,7 @@ tester.run('no-ref-as-operand', rule, {
       })
       </script>
       `,
-      output:`
+      output: `
       <script>
       import { ref, defineComponent } from 'vue'
 
@@ -1043,8 +1043,8 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10,
-        },
+          endLine: 10
+        }
       ]
     },
     {
@@ -1066,7 +1066,7 @@ tester.run('no-ref-as-operand', rule, {
       })
       </script>
       `,
-      output:`
+      output: `
       <script>
       import { ref, defineComponent } from 'vue'
 
@@ -1089,8 +1089,8 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10,
-        },
+          endLine: 10
+        }
       ]
     },
     // Auto-import
