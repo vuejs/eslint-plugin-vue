@@ -233,6 +233,7 @@ For example:
 | [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
+| [vue/no-import-compiler-macros] | disallow importing vue compiler macros | :wrench: | :warning: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-reactivity-loss] | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
@@ -467,6 +468,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-expose-after-await]: ./no-expose-after-await.md
 [vue/no-extra-parens]: ./no-extra-parens.md
 [vue/no-implicit-coercion]: ./no-implicit-coercion.md
+[vue/no-import-compiler-macros]: ./no-import-compiler-macros.md
 [vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
