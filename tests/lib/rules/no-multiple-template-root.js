@@ -62,6 +62,30 @@ ruleTester.run('no-multiple-template-root', rule, {
         </Link>
       </template>
       `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <!-- comments -->
+        <div>12333</div>
+        <!-- comments -->
+      </template>
+      `,
+      options: [{ disallowComments: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <!-- comments -->
+        <div>
+          <!-- comments -->
+          12333
+        </div>
+      </template>
+      `,
+      options: [{ disallowComments: false }]
     }
   ],
   invalid: [
@@ -104,6 +128,58 @@ ruleTester.run('no-multiple-template-root', rule, {
       filename: 'test.vue',
       code: '<template><template></template></template>',
       errors: ["The template root disallows '<template>' elements."]
+    },
+    {
+      code: `
+      <template>
+        <!-- comments -->
+        <div>12333</div>
+        <!-- comments -->
+      </template>
+      `,
+      options: [{ disallowComments: true }],
+      errors: [
+        {
+          message: 'The template root disallows comments.',
+          line: 3
+        },
+        {
+          message: 'The template root disallows comments.',
+          line: 5
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <!-- comments -->
+        <div>
+          12333
+          <!-- comments -->
+        </div>
+      </template>
+      `,
+      options: [{ disallowComments: true }],
+      errors: [
+        {
+          message: 'The template root disallows comments.',
+          line: 3
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <!-- When you have a comment in the root of your template in vue 3, 
+        using $el will point to the first text comment instead of the actual DOM element.   -->
+        <div>
+          12333
+          <!-- comments -->
+        </div>
+      </template>
+      `,
+      options: [{ disallowComments: true }],
+      errors: ['The template root disallows comments.']
     }
   ]
 })
