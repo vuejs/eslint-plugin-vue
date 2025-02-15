@@ -86,6 +86,42 @@ ruleTester.run('no-multiple-template-root', rule, {
       </template>
       `,
       options: [{ disallowComments: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <!-- comments -->
+          12333
+          <span>
+            <!-- comments -->
+            12333
+          </span>
+        </div>
+      </template>
+      `,
+      options: [{ disallowComments: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-if="for">
+          <!-- comments -->
+          12333
+          <span>
+            <!-- comments -->
+            12333
+          </span>
+        </div>
+        <div v-else>
+          <!-- comments -->
+          12333
+        </div>
+      </template>
+      `,
+      options: [{ disallowComments: true }]
     }
   ],
   invalid: [
