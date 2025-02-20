@@ -25,7 +25,7 @@ You must use `.value` to access the `Ref` value.
 import { ref } from 'vue'
 
 export default {
-  setup() {
+  setup(_props, { emit }) {
     const count = ref(0)
     const ok = ref(true)
 
@@ -34,12 +34,14 @@ export default {
     count.value + 1
     1 + count.value
     var msg = ok.value ? 'yes' : 'no'
+    emit('increment', count.value)
 
     /* ✗ BAD */
     count++
     count + 1
     1 + count
     var msg = ok ? 'yes' : 'no'
+    emit('increment', count)
 
     return {
       count
