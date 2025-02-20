@@ -40,16 +40,12 @@ tester.run('no-import-compiler-macros', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      import { computed, defineProps } from 'vue'
-      import { defineEmits, ref, withDefaults } from '@vue/runtime-core'
-      import { defineExpose, watch } from '@vue/runtime-dom'
+      import { defineProps } from 'vue'
       </script>
       `,
       output: `
       <script setup>
-      import { computed } from 'vue'
-      import { ref } from '@vue/runtime-core'
-      import { watch } from '@vue/runtime-dom'
+      
       </script>
       `,
       errors: [
@@ -59,7 +55,34 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineProps'
           },
           line: 3,
-          column: 26
+          column: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { ref, defineProps } from 'vue'
+      import { defineEmits, computed } from '@vue/runtime-core'
+      import { defineExpose, watch, withDefaults } from '@vue/runtime-dom'
+      </script>
+      `,
+      output: `
+      <script setup>
+      import { ref } from 'vue'
+      import {  computed } from '@vue/runtime-core'
+      import {  watch } from '@vue/runtime-dom'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'noImportCompilerMacros',
+          data: {
+            name: 'defineProps'
+          },
+          line: 3,
+          column: 21
         },
         {
           messageId: 'noImportCompilerMacros',
@@ -72,18 +95,18 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'withDefaults'
-          },
-          line: 4,
-          column: 34
-        },
-        {
-          messageId: 'noImportCompilerMacros',
-          data: {
             name: 'defineExpose'
           },
           line: 5,
           column: 16
+        },
+        {
+          messageId: 'noImportCompilerMacros',
+          data: {
+            name: 'withDefaults'
+          },
+          line: 5,
+          column: 37
         }
       ]
     },
@@ -91,19 +114,19 @@ tester.run('no-import-compiler-macros', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      import { defineProps, withDefaults, ref } from 'vue'
+      import { defineModel, defineOptions } from 'vue'
       </script>
       `,
       output: `
       <script setup>
-      import { withDefaults, ref } from 'vue'
+      import {  defineOptions } from 'vue'
       </script>
       `,
       errors: [
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineProps'
+            name: 'defineModel'
           },
           line: 3,
           column: 16
@@ -111,7 +134,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'withDefaults'
+            name: 'defineOptions'
           },
           line: 3,
           column: 29
@@ -122,12 +145,12 @@ tester.run('no-import-compiler-macros', rule, {
       filename: 'test.vue',
       code: `
       <script setup lang="ts">
-      import { ref as refFoo, defineProps as definePropsFoo, type computed } from '@vue/runtime-core'
+      import { ref as refFoo, defineSlots as defineSlotsFoo, type computed } from '@vue/runtime-core'
       </script>
       `,
       output: `
       <script setup lang="ts">
-      import { ref as refFoo, type computed } from '@vue/runtime-core'
+      import { ref as refFoo,  type computed } from '@vue/runtime-core'
       </script>
       `,
       languageOptions: {
@@ -139,7 +162,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineProps'
+            name: 'defineSlots'
           },
           line: 3,
           column: 31
