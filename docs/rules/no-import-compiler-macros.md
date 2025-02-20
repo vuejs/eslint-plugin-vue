@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-import-compiler-macros
-description: disallow importing vue compiler macros
+description: disallow importing Vue compiler macros
 ---
 
 # vue/no-import-compiler-macros
 
-> disallow importing vue compiler macros
+> disallow importing Vue compiler macros
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.

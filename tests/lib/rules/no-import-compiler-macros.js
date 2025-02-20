@@ -21,7 +21,7 @@ tester.run('no-import-compiler-macros', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
-      import { ref } from 'vue'
+      import { ref, computed } from 'vue'
       import { someFunction } from '@vue/runtime-core'
       </script>
       `
@@ -56,6 +56,34 @@ tester.run('no-import-compiler-macros', rule, {
           },
           line: 3,
           column: 16
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {
+        ref,
+        defineProps
+      } from 'vue'
+      </script>
+      `,
+      output: `
+      <script setup>
+      import {
+        ref
+      } from 'vue'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'noImportCompilerMacros',
+          data: {
+            name: 'defineProps'
+          },
+          line: 5,
+          column: 9
         }
       ]
     },
