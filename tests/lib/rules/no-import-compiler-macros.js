@@ -56,8 +56,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineProps',
-            source: 'vue'
+            name: 'defineProps'
           },
           line: 3,
           column: 26
@@ -65,8 +64,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineEmits',
-            source: '@vue/runtime-core'
+            name: 'defineEmits'
           },
           line: 4,
           column: 16
@@ -74,8 +72,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'withDefaults',
-            source: '@vue/runtime-core'
+            name: 'withDefaults'
           },
           line: 4,
           column: 34
@@ -83,8 +80,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineExpose',
-            source: '@vue/runtime-dom'
+            name: 'defineExpose'
           },
           line: 5,
           column: 16
@@ -107,8 +103,7 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'defineProps',
-            source: 'vue'
+            name: 'defineProps'
           },
           line: 3,
           column: 16
@@ -116,11 +111,38 @@ tester.run('no-import-compiler-macros', rule, {
         {
           messageId: 'noImportCompilerMacros',
           data: {
-            name: 'withDefaults',
-            source: 'vue'
+            name: 'withDefaults'
           },
           line: 3,
           column: 29
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { ref as refFoo, defineProps as definePropsFoo, type computed } from '@vue/runtime-core'
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { ref as refFoo, type computed } from '@vue/runtime-core'
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          messageId: 'noImportCompilerMacros',
+          data: {
+            name: 'defineProps'
+          },
+          line: 3,
+          column: 31
         }
       ]
     }
