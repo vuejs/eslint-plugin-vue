@@ -42,6 +42,12 @@ import { ref } from 'vue'
 
 Nothing.
 
+## :books: Further Reading
+
+- [defineProps() & defineEmits()]
+
+[defineProps() & defineEmits()]: https://vuejs.org/api/sfc-script-setup.html#defineprops-defineemits
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-import-compiler-macros.js)
