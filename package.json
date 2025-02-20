@@ -20,6 +20,7 @@
     "preversion": "npm test && git add .",
     "version": "env-cmd -e version npm run update && npm run lint -- --fix && git add .",
     "update": "node ./tools/update.js",
+    "update-resources": "node ./tools/update-resources.js",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs"
@@ -50,19 +51,18 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": "^14.17.0 || >=16.0.0"
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
   "peerDependencies": {
-    "eslint": "^6.2.0 || ^7.0.0 || ^8.0.0 || ^9.0.0"
+    "eslint": "^8.57.0 || ^9.0.0",
+    "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
-    "globals": "^13.24.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
     "postcss-selector-parser": "^6.0.15",
     "semver": "^7.6.3",
-    "vue-eslint-parser": "^9.4.3",
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
@@ -90,12 +90,15 @@
     "eslint-plugin-vue": "file:.",
     "espree": "^9.6.1",
     "events": "^3.3.0",
+    "globals": "^15.14.0",
+    "jsdom": "^22.0.0",
     "markdownlint-cli": "^0.42.0",
     "mocha": "^10.7.3",
     "nyc": "^17.1.0",
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
     "typescript": "^5.7.2",
-    "vitepress": "^1.4.1"
+    "vitepress": "^1.4.1",
+    "vue-eslint-parser": "^9.4.3"
   }
 }

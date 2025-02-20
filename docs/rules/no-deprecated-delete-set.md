@@ -10,6 +10,8 @@ since: v9.29.0
 
 > disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
 
+- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+
 ## :book: Rule Details
 
 This rule reports use of deprecated `$delete` and `$set`. (in Vue.js 3.0.0+).

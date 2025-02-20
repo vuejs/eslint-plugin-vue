@@ -34,8 +34,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority A: Essential (Error Prevention)
 
-- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/essential"`,`*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in all of `"plugin:vue/vue2-essential"`,`*.configs["flat/vue2-essential"]`, `"plugin:vue/vue2-strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -48,6 +48,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-computed-properties-in-data] | disallow accessing computed properties in `data` |  | :three::two::warning: |
 | [vue/no-custom-modifiers-on-v-model] | disallow custom modifiers on v-model used on the component |  | :two::warning: |
 | [vue/no-deprecated-data-object-declaration] | disallow using deprecated object declaration on data (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
+| [vue/no-deprecated-delete-set] | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-destroyed-lifecycle] | disallow using deprecated `destroyed` and `beforeDestroy` lifecycle hooks (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-dollar-listeners-api] | disallow using deprecated `$listeners` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-dollar-scopedslots-api] | disallow using deprecated `$scopedSlots` (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
@@ -56,6 +57,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-functional-template] | disallow using deprecated the `functional` template (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-html-element-is] | disallow using deprecated the `is` attribute on HTML elements (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-inline-template] | disallow using deprecated `inline-template` attribute (in Vue.js 3.0.0+) |  | :three::warning: |
+| [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :three::warning: |
 | [vue/no-deprecated-props-default-this] | disallow deprecated `this` access in props default function (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-router-link-tag-prop] | disallow using deprecated `tag` property on `RouterLink` (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-scope-attribute] | disallow deprecated `scope` attribute (in Vue.js 2.5.0+) | :wrench: | :three::hammer: |
@@ -89,8 +91,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-use-v-if-with-v-for] | disallow using `v-if` on the same element as `v-for` |  | :three::two::hammer: |
 | [vue/no-useless-template-attributes] | disallow useless attribute on `<template>` |  | :three::two::warning: |
 | [vue/no-v-for-template-key-on-child] | disallow key of `<template v-for>` placed on child elements |  | :three::warning: |
-| [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` |  | :two::warning: |
-| [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component |  | :two::warning: |
+| [vue/no-v-for-template-key] | disallow `key` attribute on `<template v-for>` | :no_entry_sign: | :two::warning: |
+| [vue/no-v-model-argument] | disallow adding an argument to `v-model` used in custom component | :no_entry_sign: | :two::warning: |
 | [vue/no-v-text-v-html-on-component] | disallow v-text / v-html on component |  | :three::two::warning: |
 | [vue/no-watch-after-await] | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue] | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
@@ -106,11 +108,12 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/use-v-on-exact] | enforce usage of `exact` modifier on `v-on` |  | :three::two::hammer: |
 | [vue/valid-attribute-name] | require valid attribute names |  | :three::two::warning: |
 | [vue/valid-define-emits] | enforce valid `defineEmits` compiler macro |  | :three::two::warning: |
+| [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :three::warning: |
 | [vue/valid-define-props] | enforce valid `defineProps` compiler macro |  | :three::two::warning: |
-| [vue/valid-model-definition] | require valid keys in model option |  | :two::warning: |
+| [vue/valid-model-definition] | require valid keys in model option | :no_entry_sign: | :two::warning: |
 | [vue/valid-next-tick] | enforce valid `nextTick` function calls | :wrench::bulb: | :three::two::warning: |
 | [vue/valid-template-root] | enforce valid template root |  | :three::two::warning: |
-| [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives |  | :two::warning: |
+| [vue/valid-v-bind-sync] | enforce valid `.sync` modifier on `v-bind` directives | :no_entry_sign: | :two::warning: |
 | [vue/valid-v-bind] | enforce valid `v-bind` directives |  | :three::two::warning: |
 | [vue/valid-v-cloak] | enforce valid `v-cloak` directives |  | :three::two::warning: |
 | [vue/valid-v-else-if] | enforce valid `v-else-if` directives |  | :three::two::warning: |
@@ -132,8 +135,8 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority B: Strongly Recommended (Improving Readability)
 
-- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` presets.
+- :three: Indicates that the rule is for Vue 3 and is included in all of `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/vue2-strongly-recommended"`,`*.configs["flat/vue2-strongly-recommended"]` and `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` presets.
 
 <rules-table>
 
@@ -169,17 +172,18 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 
 ## Priority C: Recommended (Potentially Dangerous Patterns)
 
-- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]` presets.
-- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/recommended"`,`*.configs["flat/vue2-recommended"]` preset.
+- :three: Indicates that the rule is for Vue 3 and is included in `"plugin:vue/recommended"` and `*.configs["flat/recommended"]` presets.
+- :two: Indicates that the rule is for Vue 2 and is included in `"plugin:vue/vue2-recommended"`,`*.configs["flat/vue2-recommended"]` preset.
 
 <rules-table>
 
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/attributes-order] | enforce order of attributes | :wrench: | :three::two::hammer: |
-| [vue/component-tags-order] | enforce order of component top-level elements | :wrench::no_entry_sign: | :three::two::hammer: |
+| [vue/block-order] | enforce order of component top-level elements | :wrench: | :three::two::hammer: |
 | [vue/no-lone-template] | disallow unnecessary `<template>` |  | :three::two::warning: |
 | [vue/no-multiple-slot-args] | disallow passing multiple arguments to scoped slots |  | :three::two::warning: |
+| [vue/no-required-prop-with-default] | enforce props with default values to be optional | :wrench::bulb: | :three::two::warning: |
 | [vue/no-v-html] | disallow use of v-html to prevent XSS attack |  | :three::two::hammer: |
 | [vue/order-in-components] | enforce order of properties in components | :wrench::bulb: | :three::two::hammer: |
 | [vue/this-in-template] | disallow usage of `this` in template | :wrench: | :three::two::hammer: |
@@ -206,7 +210,6 @@ For example:
 | Rule ID | Description |    |    |
 |:--------|:------------|:--:|:--:|
 | [vue/block-lang] | disallow use other than available `lang` |  | :hammer: |
-| [vue/block-order] | enforce order of component top-level elements | :wrench: | :hammer: |
 | [vue/block-tag-newline] | enforce line breaks after opening and before closing block-level tags | :wrench: | :lipstick: |
 | [vue/component-api-style] | enforce component API style |  | :hammer: |
 | [vue/component-name-in-template-casing] | enforce specific casing for the component naming style in template | :wrench: | :hammer: |
@@ -229,14 +232,11 @@ For example:
 | [vue/next-tick-style] | enforce Promise or callback style in `nextTick` | :wrench: | :hammer: |
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
-| [vue/no-deprecated-delete-set] | disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+) |  | :warning: |
-| [vue/no-deprecated-model-definition] | disallow deprecated `model` definition (in Vue.js 3.0.0+) | :bulb: | :warning: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
 | [vue/no-ref-object-reactivity-loss] | disallow usages of ref objects that can lead to loss of reactivity |  | :warning: |
-| [vue/no-required-prop-with-default] | enforce props with default values to be optional | :wrench::bulb: | :warning: |
 | [vue/no-restricted-block] | disallow specific block |  | :hammer: |
 | [vue/no-restricted-call-after-await] | disallow asynchronously called restricted methods |  | :hammer: |
 | [vue/no-restricted-class] | disallow specific classes in Vue components |  | :warning: |
@@ -289,7 +289,6 @@ For example:
 | [vue/v-for-delimiter-style] | enforce `v-for` directive's delimiter style | :wrench: | :lipstick: |
 | [vue/v-if-else-key] | require key attribute for conditionally rendered repeated components | :wrench: | :warning: |
 | [vue/v-on-handler-style] | enforce writing style for handlers in `v-on` directives | :wrench: | :hammer: |
-| [vue/valid-define-options] | enforce valid `defineOptions` compiler macro |  | :warning: |
 
 </rules-table>
 
@@ -350,12 +349,10 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by |
 |:--------|:------------|
-| [vue/component-tags-order] | [vue/block-order] |
-| [vue/no-invalid-model-keys] | [vue/valid-model-definition] |
-| [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] |
-| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] |
-| [vue/script-setup-uses-vars] | (no replacement) |
-| [vue/v-on-function-call] | [vue/v-on-handler-style] |
+| [vue/no-v-for-template-key] | (no replacement) |
+| [vue/no-v-model-argument] | (no replacement) |
+| [vue/valid-model-definition] | (no replacement) |
+| [vue/valid-v-bind-sync] | (no replacement) |
 
 ## Removed
 
@@ -363,10 +360,16 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 | Rule ID | Replaced by | Deprecated in version  | Removed in version |
 |:--------|:------------|:-----------------------|:-------------------|
+| [vue/component-tags-order] | [vue/block-order] | [v9.16.0] | [v10.0.0] |
 | [vue/experimental-script-setup-vars] | (no replacement) | [v7.13.0] | [v9.0.0] |
 | [vue/name-property-casing] | [vue/component-definition-name-casing] | [v7.0.0] | [v9.0.0] |
 | [vue/no-confusing-v-for-v-if] | [vue/no-use-v-if-with-v-for] | [v5.0.0] | [v9.0.0] |
+| [vue/no-invalid-model-keys] | [vue/valid-model-definition] | [v9.0.0] | [v10.0.0] |
+| [vue/no-ref-object-destructure] | [vue/no-ref-object-reactivity-loss] | [v9.17.0] | [v10.0.0] |
+| [vue/no-setup-props-destructure] | [vue/no-setup-props-reactivity-loss] | [v9.17.0] | [v10.0.0] |
 | [vue/no-unregistered-components] | [vue/no-undef-components] | [v8.4.0] | [v9.0.0] |
+| [vue/script-setup-uses-vars] | (no replacement) | [v9.0.0] | [v10.0.0] |
+| [vue/v-on-function-call] | [vue/v-on-handler-style] | [v9.7.0] | [v10.0.0] |
 
 <!-- link definitions for rules -->
 
@@ -390,7 +393,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/component-definition-name-casing]: ./component-definition-name-casing.md
 [vue/component-name-in-template-casing]: ./component-name-in-template-casing.md
 [vue/component-options-name-casing]: ./component-options-name-casing.md
-[vue/component-tags-order]: ./component-tags-order.md
 [vue/custom-event-name-casing]: ./custom-event-name-casing.md
 [vue/define-emits-declaration]: ./define-emits-declaration.md
 [vue/define-macros-order]: ./define-macros-order.md
@@ -467,7 +469,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-expose-after-await]: ./no-expose-after-await.md
 [vue/no-extra-parens]: ./no-extra-parens.md
 [vue/no-implicit-coercion]: ./no-implicit-coercion.md
-[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
 [vue/no-lone-template]: ./no-lone-template.md
@@ -480,7 +481,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
 [vue/no-ref-as-operand]: ./no-ref-as-operand.md
-[vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
 [vue/no-ref-object-reactivity-loss]: ./no-ref-object-reactivity-loss.md
 [vue/no-required-prop-with-default]: ./no-required-prop-with-default.md
 [vue/no-reserved-component-names]: ./no-reserved-component-names.md
@@ -499,7 +499,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-restricted-v-bind]: ./no-restricted-v-bind.md
 [vue/no-restricted-v-on]: ./no-restricted-v-on.md
 [vue/no-root-v-if]: ./no-root-v-if.md
-[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-setup-props-reactivity-loss]: ./no-setup-props-reactivity-loss.md
 [vue/no-shared-component-data]: ./no-shared-component-data.md
 [vue/no-side-effects-in-computed-properties]: ./no-side-effects-in-computed-properties.md
@@ -576,7 +575,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
 [vue/script-indent]: ./script-indent.md
-[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
 [vue/sort-keys]: ./sort-keys.md
@@ -591,7 +589,6 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/v-for-delimiter-style]: ./v-for-delimiter-style.md
 [vue/v-if-else-key]: ./v-if-else-key.md
 [vue/v-on-event-hyphenation]: ./v-on-event-hyphenation.md
-[vue/v-on-function-call]: ./v-on-function-call.md
 [vue/v-on-handler-style]: ./v-on-handler-style.md
 [vue/v-on-style]: ./v-on-style.md
 [vue/v-slot-style]: ./v-slot-style.md
@@ -622,15 +619,25 @@ The following rules extend the rules provided by ESLint itself and apply them to
 
 <!-- link definitions for removed rules -->
 
+[vue/component-tags-order]: ./component-tags-order.md
 [vue/experimental-script-setup-vars]: ./experimental-script-setup-vars.md
 [vue/name-property-casing]: ./name-property-casing.md
 [vue/no-confusing-v-for-v-if]: ./no-confusing-v-for-v-if.md
+[vue/no-invalid-model-keys]: ./no-invalid-model-keys.md
+[vue/no-ref-object-destructure]: ./no-ref-object-destructure.md
+[vue/no-setup-props-destructure]: ./no-setup-props-destructure.md
 [vue/no-unregistered-components]: ./no-unregistered-components.md
+[vue/script-setup-uses-vars]: ./script-setup-uses-vars.md
+[vue/v-on-function-call]: ./v-on-function-call.md
 
 <!-- link definitions for releases -->
 
+[v10.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v10.0.0
 [v5.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v5.0.0
 [v7.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.0.0
 [v7.13.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v7.13.0
 [v8.4.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v8.4.0
 [v9.0.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.0.0
+[v9.16.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.16.0
+[v9.17.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.17.0
+[v9.7.0]: https://github.com/vuejs/eslint-plugin-vue/releases/tag/v9.7.0
