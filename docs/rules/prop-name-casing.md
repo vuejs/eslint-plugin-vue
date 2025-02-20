@@ -50,7 +50,7 @@ export default {
 
 - `"camelCase"` (default) ... Enforce property names in `props` to camel case.
 - `"snake_case"` ... Enforce property names in `props` to snake case.
-- `ignoreProps` (`string[]`) ... An array of prop names (or patterns) that should be exempt from the case rule check. Use this option for prop names that are intentionally non-compliant, have special naming requirements for Vue components, or are defined by Vue libraries. You can define these entries as literal strings or as regular expressions (written as strings, e.g., `"/^name/"`).
+- `ignoreProps` (`string[]`) ... An array of prop names (or patterns) that don't need to follow the specified casing.
 
 ### `"snake_case"`
 
