@@ -84,7 +84,7 @@ export default {
   props: {
     /* ✓ GOOD */
     greetingText: String,
-    foo-bar: String,
+    'foo-bar': String,
     _uid: String,
 
     /* ✗ BAD */
