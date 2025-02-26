@@ -35,6 +35,7 @@ module.exports = [
       internal: {
         rules: {
           'no-invalid-meta': require('./eslint-internal-rules/no-invalid-meta'),
+          'no-invalid-meta-default-options': require('./eslint-internal-rules/no-invalid-meta-default-options'),
           'no-invalid-meta-docs-categories': require('./eslint-internal-rules/no-invalid-meta-docs-categories'),
           'require-eslint-community': require('./eslint-internal-rules/require-eslint-community')
         }
@@ -45,7 +46,6 @@ module.exports = [
   // turn off some rules from shared configs in all files
   {
     rules: {
-      'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-schema-description': 'off',
 
@@ -225,6 +225,7 @@ module.exports = [
         { pattern: 'https://eslint.vuejs.org/rules/{{name}}.html' }
       ],
       'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-default-options': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
@@ -233,6 +234,7 @@ module.exports = [
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-default-options': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
