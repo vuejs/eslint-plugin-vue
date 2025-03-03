@@ -222,8 +222,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       `,
       languageOptions: {
         parser: require('@typescript-eslint/parser'),
-        ecmaVersion: 6,
-        sourceType: 'module'
+        ...languageOptions
       }
     },
     {
@@ -332,6 +331,17 @@ ruleTester.run('require-valid-default-prop', rule, {
       languageOptions: {
         parser: require('vue-eslint-parser')
       }
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2692
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type MaybeString<T extends number> = T | \`\${T}\`
+      const { foo = 1 } = defineProps<{ foo: MaybeString<1, 2>}>()
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -1201,6 +1211,22 @@ ruleTester.run('require-valid-default-prop', rule, {
           line: 3
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type MaybeString<T extends string | number> = \`\${T}\`
+      const { foo = 1 } = defineProps<{ foo: MaybeString<1, 2>}>()
+      </script>
+      `,
+      errors: [
+        {
+          message: "Type of the default value for 'foo' prop must be a string.",
+          line: 4
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
