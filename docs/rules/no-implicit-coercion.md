@@ -3,13 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-implicit-coercion
 description: Disallow shorthand type conversions in `<template>`
+since: v9.33.0
 ---
 
 # vue/no-implicit-coercion
 
 > Disallow shorthand type conversions in `<template>`
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as core [no-implicit-coercion] rule but it applies to the expressions in `<template>`.
@@ -19,6 +19,10 @@ This rule is the same rule as core [no-implicit-coercion] rule but it applies to
 - [no-implicit-coercion]
 
 [no-implicit-coercion]: https://eslint.org/docs/rules/no-implicit-coercion
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.33.0
 
 ## :mag: Implementation
 
