@@ -61,7 +61,32 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-multiple-template-root": ["error", {
+    "disallowComments": false
+  }]
+}
+```
+
+- "disallowComments" (`boolean`) Enables there should not be any comments in the template root. Default is `false`.
+
+### "disallowComments": true
+
+<eslint-code-block :rules="{'vue/no-multiple-template-root': ['error', {disallowComments: true}]}">
+
+```vue
+/* ✗ BAD */
+<template>
+  <!-- root comment -->
+  <div>
+    vue eslint plugin
+  </div>
+  <!-- root comment -->
+</template>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 
