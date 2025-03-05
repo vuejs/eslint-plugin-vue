@@ -11,7 +11,7 @@ npm install --save-dev eslint eslint-plugin-vue
 Via [yarn](https://yarnpkg.com/):
 
 ```bash
-yarn add -D eslint eslint-plugin-vue globals
+yarn add -D eslint eslint-plugin-vue vue-eslint-parser globals
 ```
 
 ::: tip Requirements
