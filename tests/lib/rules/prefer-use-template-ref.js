@@ -263,6 +263,40 @@ tester.run('prefer-use-template-ref', rule, {
           })
         </script>
       `
+    },
+    {
+      filename: 'multiple-scripts-setup-first.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script setup>
+      import { useTemplateRef } from 'vue'
+      const root = useTemplateRef('root')
+      </script>
+
+      <script>
+      const A = 'foo'
+      </script>
+      `
+    },
+    {
+      filename: 'multiple-scripts-setup-last.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script>
+      const A = 'foo'
+      </script>
+
+      <script setup>
+      import { useTemplateRef } from 'vue'
+      const root = useTemplateRef('root')
+      </script>
+      `
     }
   ],
   invalid: [
@@ -418,6 +452,60 @@ tester.run('prefer-use-template-ref', rule, {
           },
           line: 9,
           column: 28
+        }
+      ]
+    },
+    {
+      filename: 'multiple-scripts-setup-first.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script setup>
+      import { ref } from 'vue'
+      const root = ref()
+      </script>
+
+      <script>
+      const A = 'foo'
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 8,
+          column: 20
+        }
+      ]
+    },
+    {
+      filename: 'multiple-scripts-setup-last.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script>
+      const A = 'foo'
+      </script>
+
+      <script setup>
+      import { ref } from 'vue'
+      const root = ref()
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 12,
+          column: 20
         }
       ]
     }
