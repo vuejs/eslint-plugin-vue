@@ -263,6 +263,23 @@ tester.run('prefer-use-template-ref', rule, {
           })
         </script>
       `
+    },
+    {
+      filename: 'multiple-scripts.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script>
+      const A = 'foo'
+      </script>
+
+      <script setup>
+      import { useTemplateRef } from 'vue'
+      const root = useTemplateRef('root')
+      </script>
+      `
     }
   ],
   invalid: [
@@ -418,6 +435,33 @@ tester.run('prefer-use-template-ref', rule, {
           },
           line: 9,
           column: 28
+        }
+      ]
+    },
+    {
+      filename: 'multiple-scripts.vue',
+      code: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script>
+      const A = 'foo'
+      </script>
+
+      <script setup>
+      import { ref } from 'vue'
+      const root = ref()
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'preferUseTemplateRef',
+          data: {
+            name: 'ref'
+          },
+          line: 12,
+          column: 20
         }
       ]
     }
