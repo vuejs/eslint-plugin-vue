@@ -94,6 +94,13 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export class A {}
       </script>
       `,
+      output: `
+      <script setup>
+      
+      
+      
+      </script>
+      `,
       errors: [
         {
           message: '`<script setup>` cannot contain ES module exports.',
@@ -121,6 +128,16 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export class A {}
       </script>
       `,
+      output: `
+      <script>
+      let foo;
+      </script>
+      <script setup>
+      
+      
+      
+      </script>
+      `,
       errors: [
         {
           message: '`<script setup>` cannot contain ES module exports.',
@@ -143,6 +160,13 @@ ruleTester.run('no-export-in-script-setup', rule, {
       export const Foo = {}
       export enum Bar {}
       export {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      
+      
+      
       </script>
       `,
       languageOptions: {
