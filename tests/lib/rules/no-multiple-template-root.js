@@ -260,6 +260,26 @@ ruleTester.run('no-multiple-template-root', rule, {
     {
       code: `
       <template>
+        <div />
+        <!-- comments -->
+        <div />
+      </template>
+      `,
+      options: [{ disallowComments: true }],
+      errors: [
+        {
+          message: 'The template root disallows comments.',
+          line: 4
+        },
+        {
+          message: 'The template root requires exactly one element.',
+          line: 5
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
         <!-- When you have a comment in the root of your template in vue 3, 
         using $el will point to the first text comment instead of the actual DOM element.   -->
         <div>
