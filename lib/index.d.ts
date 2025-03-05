@@ -9,9 +9,9 @@ declare const vue: {
     'vue2-strongly-recommended': Linter.LegacyConfig
     'vue2-recommended': Linter.LegacyConfig
 
-    'vue3-essential': Linter.LegacyConfig
-    'vue3-strongly-recommended': Linter.LegacyConfig
-    'vue3-recommended': Linter.LegacyConfig
+    essential: Linter.LegacyConfig
+    'strongly-recommended': Linter.LegacyConfig
+    recommended: Linter.LegacyConfig
 
     'flat/base': Linter.FlatConfig[]
 
