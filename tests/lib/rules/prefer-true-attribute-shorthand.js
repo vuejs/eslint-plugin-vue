@@ -148,6 +148,24 @@ tester.run('prefer-true-attribute-shorthand', rule, {
       </template>
       `,
       options: ['never']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input :value="true" :foo-bar="true" />
+      </template>
+      `,
+      options: ['always', { except: ['value', '/^foo-/'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input value foo-bar />
+      </template>
+      `,
+      options: ['never', { except: ['value', '/^foo-/'] }]
     }
   ],
   invalid: [
@@ -275,6 +293,98 @@ tester.run('prefer-true-attribute-shorthand', rule, {
               output: `
       <template>
         <MyComp show="show" />
+      </template>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp value foo-bar />
+      </template>`,
+      output: null,
+      options: ['always', { except: ['value', '/^foo-/'] }],
+      errors: [
+        {
+          messageId: 'expectLong',
+          line: 3,
+          column: 17,
+          suggestions: [
+            {
+              messageId: 'rewriteIntoLongVueProp',
+              output: `
+      <template>
+        <MyComp :value="true" foo-bar />
+      </template>`
+            },
+            {
+              messageId: 'rewriteIntoLongHtmlAttr',
+              output: `
+      <template>
+        <MyComp value="value" foo-bar />
+      </template>`
+            }
+          ]
+        },
+        {
+          messageId: 'expectLong',
+          line: 3,
+          column: 23,
+          suggestions: [
+            {
+              messageId: 'rewriteIntoLongVueProp',
+              output: `
+      <template>
+        <MyComp value :foo-bar="true" />
+      </template>`
+            },
+            {
+              messageId: 'rewriteIntoLongHtmlAttr',
+              output: `
+      <template>
+        <MyComp value foo-bar="foo-bar" />
+      </template>`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <MyComp :value="true" :foo-bar="true" />
+      </template>`,
+      output: null,
+      options: ['never', { except: ['value', '/^foo-/'] }],
+      errors: [
+        {
+          messageId: 'expectShort',
+          line: 3,
+          column: 17,
+          suggestions: [
+            {
+              messageId: 'rewriteIntoShort',
+              output: `
+      <template>
+        <MyComp value :foo-bar="true" />
+      </template>`
+            }
+          ]
+        },
+        {
+          messageId: 'expectShort',
+          line: 3,
+          column: 31,
+          suggestions: [
+            {
+              messageId: 'rewriteIntoShort',
+              output: `
+      <template>
+        <MyComp :value="true" foo-bar />
       </template>`
             }
           ]
