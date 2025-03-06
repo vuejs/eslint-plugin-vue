@@ -166,8 +166,8 @@ module.exports = {
   extends: [
     // add more generic rulesets here, such as:
     // 'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
+    'plugin:vue/recommended',
+    // 'plugin:vue/vue2-recommended' // Use this if you are using Vue.js 2.x.
   ],
   rules: {
     // override/add rules settings here, such as:
@@ -185,13 +185,13 @@ You can use the following configs by adding them to `extends`.
 
 - `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
 - Configurations for using Vue.js 3.x:
-  - `"plugin:vue/vue3-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/vue3-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/vue3-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-- Configurations for using Vue.js 2.x:
   - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency
+  - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+- Configurations for using Vue.js 2.x:
+  - `"plugin:vue/vue2-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
+  - `"plugin:vue/vue2-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/vue2-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
@@ -264,7 +264,7 @@ Full example:
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-recommended"
+    "plugin:vue/recommended"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -436,7 +436,7 @@ Most `eslint-plugin-vue` rules require `vue-eslint-parser` to check `<template>`
 
 Make sure you have one of the following settings in your **.eslintrc**:
 
-- `"extends": ["plugin:vue/vue3-recommended"]`
+- `"extends": ["plugin:vue/recommended"]`
 - `"extends": ["plugin:vue/base"]`
 
 If you already use another parser (e.g. `"parser": "@typescript-eslint/parser"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:
@@ -482,7 +482,7 @@ module.exports = {
     // ...
     // 'eslint:recommended',
     // ...
-    'plugin:vue/vue3-recommended',
+    'plugin:vue/recommended',
     // ...
     'prettier'
     // Make sure "prettier" is the last element in this list.
