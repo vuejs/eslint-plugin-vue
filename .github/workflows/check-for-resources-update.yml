@@ -5,12 +5,13 @@ on:
     - cron: 0 0 * * 0 # At 00:00 on Sunday, see https://crontab.guru/#0_0_*_*_0
 
 permissions:
-    contents: write
-    pull-requests: write
+  contents: write
+  pull-requests: write
 
 jobs:
   check-for-resources-update:
     runs-on: ubuntu-latest
+    if: ${{ github.repository == 'vuejs/eslint-plugin-vue' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
