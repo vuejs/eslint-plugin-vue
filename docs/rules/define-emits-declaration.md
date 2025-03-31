@@ -35,8 +35,8 @@ const emit = defineEmits<{
 
 /* ✗ BAD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✗ BAD */
@@ -70,8 +70,8 @@ const emit = defineEmits<{
 
 /* ✓ GOOD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✓ GOOD */
@@ -92,8 +92,8 @@ const emit = defineEmits(['change', 'update'])
 
 /* ✗ BAD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✗ BAD */
