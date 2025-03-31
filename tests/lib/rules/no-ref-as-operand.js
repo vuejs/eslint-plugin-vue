@@ -169,6 +169,22 @@ tester.run('no-ref-as-operand', rule, {
       </script>
     `,
     `
+      <script>
+      import { ref } from 'vue'
+      const foo = ref(0)
+      func(foo)
+      function func(foo) {}
+      </script>
+    `,
+    `
+      <script>
+      import { ref } from 'vue'
+      const foo = ref(0)
+      tag\`\${foo}\`
+      function tag(arr, ...args) {}
+      </script>
+    `,
+    `
     <script setup>
     const model = defineModel();
     console.log(model.value);
@@ -196,7 +212,7 @@ tester.run('no-ref-as-operand', rule, {
     <script setup>
     const emit = defineEmits(['test'])
     const [model, mod] = defineModel();
-    
+
     function update() {
       emit('test', model.value)
     }
