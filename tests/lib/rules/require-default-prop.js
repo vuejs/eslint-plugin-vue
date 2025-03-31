@@ -388,6 +388,31 @@ ruleTester.run('require-default-prop', rule, {
         parser: require('vue-eslint-parser'),
         ...languageOptions
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const {bar=42} = defineProps({foo: {type: Number, required: true}, bar: {type: Number, required: false}})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const {foo = 42, bar} = defineProps<{foo?: number; bar: number}>()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -697,6 +722,26 @@ ruleTester.run('require-default-prop', rule, {
         },
         {
           message: "Prop 'bar' requires default value to be set.",
+          line: 3
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2725
+      filename: 'type-with-props-destructure.vue',
+      code: `
+      <script setup lang="ts">
+      const {foo, bar} = defineProps<{foo?: number; bar: number}>()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
           line: 3
         }
       ]
