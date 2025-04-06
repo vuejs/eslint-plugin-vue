@@ -132,6 +132,32 @@ tester.run('no-bare-strings-in-template', rule, {
       </template>
       `,
       options: [{ allowlist: ['@@'] }]
+    },
+    // regex
+    {
+      code: `
+      <template>
+        <h1>123 321</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/g`] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>$foo</h1>
+        <h1>$bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\$\w+/`] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>foo123foo</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/`, 'foo'] }]
     }
   ],
   invalid: [
@@ -314,6 +340,40 @@ tester.run('no-bare-strings-in-template', rule, {
           column: 19,
           endLine: 3,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <h1>123, foo is invalid, 321</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/^\d+$/g`] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <h1>foo123bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/`, 'foo'] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     }
