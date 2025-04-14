@@ -21,6 +21,14 @@ tester.run('define-props-destructuring', rule, {
       filename: 'test.vue',
       code: `
       <script setup>
+      const props = defineProps()
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
       const { foo = 'default' } = defineProps(['foo'])
       </script>
       `
