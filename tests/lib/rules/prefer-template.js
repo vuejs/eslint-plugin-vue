@@ -28,7 +28,15 @@ tester.run('prefer-template', rule, {
     .text {
       color: v-bind('\`#\${hex}\`')
     }
-    </style>`
+    </style>`,
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2712
+    `
+    <style>
+    .text {
+      color: v-bind('"#"+hex')
+    }
+    </style>
+    `
   ],
   invalid: [
     {
@@ -62,27 +70,6 @@ tester.run('prefer-template', rule, {
         {
           message: 'Unexpected string concatenation.',
           line: 3
-        }
-      ]
-    },
-    // CSS vars injection
-    {
-      code: `
-      <style>
-      .text {
-        color: v-bind('"#"+hex')
-      }
-      </style>`,
-      output: `
-      <style>
-      .text {
-        color: v-bind('\`#\${hex}\`')
-      }
-      </style>`,
-      errors: [
-        {
-          message: 'Unexpected string concatenation.',
-          line: 4
         }
       ]
     }
