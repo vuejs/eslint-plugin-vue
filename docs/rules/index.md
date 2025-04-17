@@ -218,7 +218,7 @@ For example:
 | [vue/define-emits-declaration] | enforce declaration style of `defineEmits` |  | :hammer: |
 | [vue/define-macros-order] | enforce order of compiler macros (`defineProps`, `defineEmits`, etc.) | :wrench::bulb: | :lipstick: |
 | [vue/define-props-declaration] | enforce declaration style of `defineProps` |  | :hammer: |
-| [vue/define-props-destructuring] | enforce consistent style for prop destructuring |  | :hammer: |
+| [vue/define-props-destructuring] | enforce consistent style for props destructuring |  | :hammer: |
 | [vue/enforce-style-attribute] | enforce or forbid the use of the `scoped` and `module` attributes in SFC top level style tags |  | :hammer: |
 | [vue/html-button-has-type] | disallow usage of button without an explicit type attribute |  | :hammer: |
 | [vue/html-comment-content-newline] | enforce unified line break in HTML comments | :wrench: | :lipstick: |

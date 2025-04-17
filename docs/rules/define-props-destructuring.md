@@ -2,12 +2,12 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/define-props-destructuring
-description: enforce consistent style for prop destructuring
+description: enforce consistent style for props destructuring
 ---
 
 # vue/define-props-destructuring
 
-> enforce consistent style for prop destructuring
+> enforce consistent style for props destructuring
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
