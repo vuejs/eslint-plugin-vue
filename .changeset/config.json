@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config/schema.json",
+  "changelog": [
+    "@svitejs/changesets-changelog-github-compact",
+    {
+      "repo": "vuejs/eslint-plugin-vue"
+    }
+  ],
+  "commit": false,
+  "linked": [],
+  "access": "public",
+  "baseBranch": "master",
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
+  "ignore": []
+}
