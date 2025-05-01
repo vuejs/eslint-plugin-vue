@@ -18,12 +18,15 @@
     "lint:fix": "eslint . --fix && markdownlint \"**/*.md\" --fix",
     "tsc": "tsc",
     "preversion": "npm test && git add .",
-    "version": "env-cmd -e version npm run update && npm run lint -- --fix && git add .",
+    "version": "npm run generate:version && git add .",
     "update": "node ./tools/update.js",
     "update-resources": "node ./tools/update-resources.js",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
-    "docs:build": "vitepress build docs"
+    "docs:build": "vitepress build docs",
+    "generate:version": "env-cmd -e version npm run update && npm run lint -- --fix",
+    "changeset:version": "changeset version && npm run generate:version && git add --all",
+    "changeset:publish": "changeset publish"
   },
   "files": [
     "lib"
@@ -66,8 +69,10 @@
     "xml-name-validator": "^4.0.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.2",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
     "@stylistic/eslint-plugin": "^2.12.1",
+    "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^8.56.2",
     "@types/natural-compare": "^1.4.3",
     "@types/node": "^14.18.63",
