@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/define-props-destructuring
 description: enforce consistent style for props destructuring
+since: v10.1.0
 ---
 
 # vue/define-props-destructuring
 
 > enforce consistent style for props destructuring
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -88,6 +87,10 @@ The rule applies to both JavaScript and TypeScript props:
 ## :books: Further Reading
 
 - [Reactive Props Destructure](https://vuejs.org/guide/components/props.html#reactive-props-destructure)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.1.0
 
 ## :mag: Implementation
 
