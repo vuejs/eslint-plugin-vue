@@ -229,6 +229,19 @@ tester.run('singleline-html-element-content-newline', rule, {
           externalIgnores: ['IgnoreTag']
         }
       ]
+    },
+    // Ignore comments
+    {
+      code: `
+        <template>
+          <div><!-- comment --></div>
+          <div attr><!-- comment --></div>
+        </template>`,
+      options: [
+        {
+          ignoreComments: true
+        }
+      ]
     }
   ],
   invalid: [
