@@ -37,16 +37,16 @@ This rule takes a list of strings, where each string is an HTML element name to 
 
 ```json
 {
-  "vue/no-restricted-html-elements": ["error", "button", "marquee"]
+  "vue/no-restricted-html-elements": ["error", "a", "marquee"]
 }
 ```
 
-<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'button', 'marquee']}">
+<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'a', 'marquee']}">
 
 ```vue
 <template>
   <!-- ✗ BAD -->
-  <button></button>
+  <a></a>
   <marquee></marquee>
 </template>
 ```
@@ -60,8 +60,8 @@ Alternatively, the rule also accepts objects.
   "vue/no-restricted-html-elements": [
     "error",
     {
-      "element": "button",
-      "message": "Prefer use of our custom <AppButton /> component"
+      "element": ["a", "RouterLink"],
+      "message": "Prefer the use of <NuxtLink> component"
     },
     {
       "element": "marquee",
@@ -73,18 +73,18 @@ Alternatively, the rule also accepts objects.
 
 The following properties can be specified for the object.
 
-- `element` ... Specify the html element.
+- `element` ... Specify the HTML element or an array of HTML elements.
 - `message` ... Specify an optional custom message.
 
-### `{ "element": "marquee" }, { "element": "button" }`
+### `{ "element": "marquee" }, { "element": "a" }`
 
-<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', { element: 'marquee' }, { element: 'button' }]}">
+<eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', { element: 'marquee' }, { element: 'a' }]}">
 
 ```vue
 <template>
   <!-- ✗ BAD -->
   <marquee></marquee>
-  <button></button>
+  <a></a>
 </template>
 ```
 
