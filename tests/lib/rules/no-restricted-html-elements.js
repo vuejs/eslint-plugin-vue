@@ -31,6 +31,11 @@ tester.run('no-restricted-html-elements', rule, {
       filename: 'test.vue',
       code: '<template><div class="foo"><Button type="button"></Button></div></template>',
       options: ['button']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><main><article></article></main></template>',
+      options: [{ element: ['div', 'span'] }]
     }
   ],
   invalid: [
@@ -67,6 +72,28 @@ tester.run('no-restricted-html-elements', rule, {
           message: 'Custom error',
           line: 1,
           column: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><a></a><RouterLink></RouterLink></template>',
+      options: [
+        {
+          element: ['a', 'RouterLink'],
+          message: 'Prefer the use of <NuxtLink> component'
+        }
+      ],
+      errors: [
+        {
+          message: 'Prefer the use of <NuxtLink> component',
+          line: 1,
+          column: 11
+        },
+        {
+          message: 'Prefer the use of <NuxtLink> component',
+          line: 1,
+          column: 18
         }
       ]
     }
