@@ -45,6 +45,7 @@ module.exports = [
   // turn off some rules from shared configs in all files
   {
     rules: {
+      'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-schema-description': 'off',
 
@@ -230,7 +231,9 @@ module.exports = [
   {
     files: ['eslint-internal-rules/*.js'],
     rules: {
-      'eslint-plugin/require-meta-docs-url': 'off'
+      'eslint-plugin/require-meta-docs-url': 'off',
+      'internal/no-invalid-meta': 'error',
+      'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
   {

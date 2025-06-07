@@ -55,7 +55,6 @@ function formatCategory(category) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const globals = require('globals')
 module.exports = [
   {
     name: 'vue/base/setup',
@@ -66,7 +65,6 @@ module.exports = [
     },
     languageOptions: {
       sourceType: 'module',
-      globals: globals.browser
     }
   },
   {
@@ -80,7 +78,6 @@ module.exports = [
     languageOptions: {
       parser: require('vue-eslint-parser'),
       sourceType: 'module',
-      globals: globals.browser
     },
     rules: ${formatRules(category.rules, category.categoryId)},
     processor: 'vue/vue'

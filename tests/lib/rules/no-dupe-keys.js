@@ -466,7 +466,7 @@ ruleTester.run('no-dupe-keys', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script setup></script>
+      <script setup>
       const {foo,bar} = defineProps(['foo', 'bar'])
       </script>
       `,
@@ -475,7 +475,7 @@ ruleTester.run('no-dupe-keys', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script setup></script>
+      <script setup>
       const {foo=42,bar='abc'} = defineProps(['foo', 'bar'])
       </script>
       `,
@@ -500,6 +500,17 @@ ruleTester.run('no-dupe-keys', rule, {
         parser: require('vue-eslint-parser'),
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const { foo: renamedFoo, bar: renamedBar } = defineProps(['foo', 'bar'])
+      const foo = 42
+      const bar = 'hello'
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -1095,6 +1106,24 @@ ruleTester.run('no-dupe-keys', rule, {
       const props = defineProps(['foo', 'bar'])
       const { foo } = props
       const bar = 42
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Duplicate key 'bar'. May cause name collision in script or template tag.",
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const { foo: renamedFoo } = defineProps(['foo', 'bar'])
+      const foo = 'foo'
+      const bar = 'bar'
       </script>
       `,
       languageOptions: { parser: require('vue-eslint-parser') },

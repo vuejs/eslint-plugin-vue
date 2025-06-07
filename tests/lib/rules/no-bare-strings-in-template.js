@@ -114,7 +114,51 @@ tester.run('no-bare-strings-in-template', rule, {
         title="( ) , . & + - = * / # % ! ? : [ ] { } < > • —   | &lpar; &rpar; &comma; &period; &amp; &AMP; &plus; &minus; &equals; &ast; &midast; &sol; &num; &percnt; &excl; &quest; &colon; &lsqb; &lbrack; &rsqb; &rbrack; &lcub; &lbrace; &rcub; &rbrace; &lt; &LT; &gt; &GT; &bull; &bullet; &mdash; &ndash; &nbsp; &Tab; &NewLine; &verbar; &vert; &VerticalLine;"
       />
     </template>
-    `
+    `,
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2681
+      code: `
+      <template>
+        <h1> foo </h1>
+        <h1> foo_bar </h1>
+      </template>
+      `,
+      options: [{ allowlist: ['foo', 'foo_bar'] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>@@</h1>
+      </template>
+      `,
+      options: [{ allowlist: ['@@'] }]
+    },
+    // regex
+    {
+      code: `
+      <template>
+        <h1>123 321</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/g`] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>$foo</h1>
+        <h1>$bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\$\w+/`] }]
+    },
+    {
+      code: `
+      <template>
+        <h1>foo123foo</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/`, 'foo'] }]
+    }
   ],
   invalid: [
     {
@@ -230,6 +274,24 @@ tester.run('no-bare-strings-in-template', rule, {
     {
       code: `
       <template>
+        <h1>foo</h1>
+        <h1>foo_bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: ['foo'] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 20
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
         <h1 foo="Lorem ipsum" />
         <h1 bar="Lorem ipsum" />
         <h2 foo="Lorem ipsum" />
@@ -278,6 +340,40 @@ tester.run('no-bare-strings-in-template', rule, {
           column: 19,
           endLine: 3,
           endColumn: 34
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <h1>123, foo is invalid, 321</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/^\d+$/g`] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <h1>foo123bar</h1>
+      </template>
+      `,
+      options: [{ allowlist: [String.raw`/\d+/`, 'foo'] }],
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     }

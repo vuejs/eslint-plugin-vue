@@ -3,8 +3,6 @@
   "animate",
   "animateMotion",
   "animateTransform",
-  "audio",
-  "canvas",
   "circle",
   "clipPath",
   "defs",
@@ -39,7 +37,6 @@
   "filter",
   "foreignObject",
   "g",
-  "iframe",
   "image",
   "line",
   "linearGradient",
@@ -64,8 +61,6 @@
   "textPath",
   "title",
   "tspan",
-  "unknown",
   "use",
-  "video",
   "view"
 ]

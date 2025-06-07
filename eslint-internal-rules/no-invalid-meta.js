@@ -24,38 +24,6 @@ function getPropertyFromObject(propertyName, node) {
 }
 
 /**
- * Extracts the `meta` property from the ObjectExpression that all rules export.
- *
- * @param {ASTNode} exportsNode ObjectExpression node that the rule exports.
- * @returns {ASTNode} The `meta` Property node or null if not found.
- */
-function getMetaPropertyFromExportsNode(exportsNode) {
-  return getPropertyFromObject('meta', exportsNode)
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `docs` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs` property exists.
- */
-function hasMetaDocs(metaPropertyNode) {
-  return Boolean(getPropertyFromObject('docs', metaPropertyNode.value))
-}
-
-/**
- * Whether this `meta` ObjectExpression has a `docs.category` property defined or not.
- *
- * @param {ASTNode} metaPropertyNode The `meta` ObjectExpression for this rule.
- * @returns {boolean} `true` if a `docs.category` property exists.
- */
-function hasMetaDocsCategories(metaPropertyNode) {
-  const metaDocs = getPropertyFromObject('docs', metaPropertyNode.value)
-
-  return metaDocs && getPropertyFromObject('categories', metaDocs.value)
-}
-
-/**
  * Checks the validity of the meta definition of this rule and reports any errors found.
  *
  * @param {RuleContext} context The ESLint rule context.
@@ -64,8 +32,7 @@ function hasMetaDocsCategories(metaPropertyNode) {
  * @returns {void}
  */
 function checkMetaValidity(context, exportsNode) {
-  const metaProperty = getMetaPropertyFromExportsNode(exportsNode)
-
+  const metaProperty = getPropertyFromObject('meta', exportsNode)
   if (!metaProperty) {
     context.report({
       node: exportsNode,
@@ -74,18 +41,32 @@ function checkMetaValidity(context, exportsNode) {
     return
   }
 
-  if (!hasMetaDocs(metaProperty)) {
+  const metaDocs = getPropertyFromObject('docs', metaProperty.value)
+  if (!metaDocs) {
     context.report({
-      node: 'metaDocs',
+      node: metaProperty,
       messageId: 'missingMetaDocs'
     })
     return
   }
 
-  if (!hasMetaDocsCategories(metaProperty)) {
+  const metaDocsCategories = getPropertyFromObject('categories', metaDocs.value)
+  if (!metaDocsCategories) {
     context.report({
-      node: metaProperty,
+      node: metaDocs,
       messageId: 'missingMetaDocsCategories'
+    })
+    return
+  }
+
+  const metaDocsRecommended = getPropertyFromObject(
+    'recommended',
+    metaDocs.value
+  )
+  if (metaDocsRecommended) {
+    context.report({
+      node: metaDocsRecommended,
+      messageId: 'invalidMetaDocsRecommended'
     })
     return
   }
@@ -103,7 +84,9 @@ module.exports = {
       missingMeta: 'Rule is missing a meta property.',
       missingMetaDocs: 'Rule is missing a meta.docs property.',
       missingMetaDocsCategories:
-        'Rule is missing a meta.docs.categories property.'
+        'Rule is missing a meta.docs.categories property.',
+      invalidMetaDocsRecommended:
+        'Rule should not have a meta.docs.recommended property.'
     }
   },
 

@@ -81,12 +81,18 @@ Default options is `"always"`.
 
 ```json
 {
-  "vue/prefer-true-attribute-shorthand": ["error", "always" | "never"]
+  "vue/prefer-true-attribute-shorthand": ["error",
+    "always" | "never",
+    {
+      except: []
+    }
+  ]
 }
 ```
 
 - `"always"` (default) ... requires shorthand form.
 - `"never"` ... requires long form.
+- `except` (`string[]`) ... specifies a list of attribute names that should be treated differently.
 
 ### `"never"`
 
@@ -100,6 +106,26 @@ Default options is `"always"`.
   <!-- ✓ GOOD -->
   <MyComponent :show="true" />
   <MyComponent v-bind:show="true" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"never", { 'except': ['value', '/^foo-/'] }`
+
+<eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error', 'never', { 'except': ['value', '/^foo-/'] }]}">
+
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <MyComponent show />
+  <MyComponent :value="true" />
+  <MyComponent :foo-bar="true" />
+
+  <!-- ✓ GOOD -->
+  <MyComponent :show="true" />
+  <MyComponent value />
+  <MyComponent foo-bar />
 </template>
 ```
 

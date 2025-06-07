@@ -149,7 +149,7 @@ ruleTester.run('prop-name-casing', rule, {
       languageOptions
     },
     {
-      // valiable computed property name does not warn
+      // variable computed property name does not warn
       filename: 'test.vue',
       code: `
         export default {
@@ -161,7 +161,7 @@ ruleTester.run('prop-name-casing', rule, {
       languageOptions
     },
     {
-      // valiable computed property name does not warn
+      // variable computed property name does not warn
       filename: 'test.vue',
       code: `
         export default {
@@ -359,6 +359,23 @@ ruleTester.run('prop-name-casing', rule, {
           parser: require.resolve('@typescript-eslint/parser')
         }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            'ignored-pattern-test': String,
+            ignored_prop: Number,
+            validProp: Boolean
+          }
+        }
+      `,
+      options: [
+        'camelCase',
+        { ignoreProps: ['ignored_prop', '/^ignored-pattern-/'] }
+      ],
+      languageOptions
     }
   ],
 
@@ -686,6 +703,54 @@ ruleTester.run('prop-name-casing', rule, {
               }
             ]
           }
-        ])
+        ]),
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: {
+            notIgnored_prop: String,
+            'other-pattern': Number,
+            'pattern-valid': String
+          }
+        }
+      `,
+      options: ['camelCase', { ignoreProps: ['ignored_prop', '/^pattern-/'] }],
+      languageOptions,
+      errors: [
+        {
+          message: 'Prop "notIgnored_prop" is not in camelCase.',
+          type: 'Property',
+          line: 4
+        },
+        {
+          message: 'Prop "other-pattern" is not in camelCase.',
+          type: 'Property',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          props: ['notIgnored_prop', 'pattern_invalid', 'validProp', 'pattern-valid']
+        }
+      `,
+      options: ['camelCase', { ignoreProps: ['ignored_prop', '/^pattern-/'] }],
+      languageOptions,
+      errors: [
+        {
+          message: 'Prop "notIgnored_prop" is not in camelCase.',
+          type: 'Literal',
+          line: 3
+        },
+        {
+          message: 'Prop "pattern_invalid" is not in camelCase.',
+          type: 'Literal',
+          line: 3
+        }
+      ]
+    }
   ]
 })

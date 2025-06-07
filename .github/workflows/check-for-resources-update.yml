@@ -1,0 +1,31 @@
+name: Check for utils resources update
+on:
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * 0 # At 00:00 on Sunday, see https://crontab.guru/#0_0_*_*_0
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-for-resources-update:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'vuejs/eslint-plugin-vue' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Packages
+        run: npm install
+      - name: Update
+        run: npm run update-resources
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Updates resources
+          branch: update-resources
+          branch-suffix: timestamp
+          title: Updates resources
