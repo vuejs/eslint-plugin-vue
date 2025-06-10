@@ -245,7 +245,7 @@ For example:
 | [vue/no-restricted-component-names] | disallow specific component names | :bulb: | :hammer: |
 | [vue/no-restricted-component-options] | disallow specific component option |  | :hammer: |
 | [vue/no-restricted-custom-event] | disallow specific custom event | :bulb: | :hammer: |
-| [vue/no-restricted-html-elements] | disallow specific HTML elements |  | :hammer: |
+| [vue/no-restricted-html-elements] | disallow specific elements |  | :hammer: |
 | [vue/no-restricted-props] | disallow specific props | :bulb: | :hammer: |
 | [vue/no-restricted-static-attribute] | disallow specific attribute |  | :hammer: |
 | [vue/no-restricted-v-bind] | disallow specific argument in `v-bind` |  | :hammer: |

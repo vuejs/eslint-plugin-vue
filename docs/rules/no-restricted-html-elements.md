@@ -2,17 +2,17 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-restricted-html-elements
-description: disallow specific HTML elements
+description: disallow specific elements
 since: v8.6.0
 ---
 
 # vue/no-restricted-html-elements
 
-> disallow specific HTML elements
+> disallow specific elements
 
 ## :book: Rule Details
 
-This rule allows you to specify HTML elements that you don't want to use in your application.
+This rule allows you to specify HTML, SVG, and MathML elements that you don't want to use in your application.
 
 <eslint-code-block :rules="{'vue/no-restricted-html-elements': ['error', 'marquee', 'button'] }">
 
@@ -33,7 +33,7 @@ This rule allows you to specify HTML elements that you don't want to use in your
 
 ## :wrench: Options
 
-This rule takes a list of strings, where each string is an HTML element name to be restricted:
+This rule takes a list of strings, where each string is an element name to be restricted:
 
 ```json
 {
@@ -73,7 +73,7 @@ Alternatively, the rule also accepts objects.
 
 The following properties can be specified for the object.
 
-- `element` ... Specify the HTML element or an array of HTML elements.
+- `element` ... Specify the element name or an array of element names.
 - `message` ... Specify an optional custom message.
 
 ### `{ "element": "marquee" }, { "element": "a" }`
