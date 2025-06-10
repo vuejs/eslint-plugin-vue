@@ -730,7 +730,7 @@ tester.run('prefer-use-template-ref', rule, {
           name: 'Counter',
           setup() {
             const counter = ref(0);
-            const button = useTemplateRef('button');
+            const button = useTemplateRef<HTMLDivElement>('button');
           }
         }
       </script>
