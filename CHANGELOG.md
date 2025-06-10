@@ -1,5 +1,13 @@
 # eslint-plugin-vue
 
+## 10.2.1
+
+### Patch Changes
+
+- Updates resources ([#2752](https://github.com/vuejs/eslint-plugin-vue/pull/2752))
+
+- [vue/no-restricted-html-elements](https://eslint.vuejs.org/rules/no-restricted-html-elements.html) now also checks SVG and MathML elements. ([#2755](https://github.com/vuejs/eslint-plugin-vue/pull/2755))
+
 ## 10.2.0
 
 ### Minor Changes
