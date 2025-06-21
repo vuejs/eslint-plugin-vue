@@ -201,6 +201,37 @@ tester.run('component-name-in-template-casing', rule, {
       `,
       options: ['kebab-case', { globals: ['RouterView', 'router-link'] }]
     },
+    // globals auto import
+    {
+      code: `
+          <template>
+            <div>
+              <RouterView />
+              <RouterLink />
+              <TheAutoImportComponent/>
+            </div>
+          </template>
+        `,
+      options: [
+        'PascalCase',
+        { globals: ['RouterView', 'router-link', 'tests/lib/components.d.ts'] }
+      ]
+    },
+    {
+      code: `
+          <template>
+            <div>
+              <router-view />
+              <router-link />
+               <the-auto-import-component/>
+            </div>
+          </template>
+        `,
+      options: [
+        'kebab-case',
+        { globals: ['RouterView', 'router-link', 'tests/lib/components.d.ts'] }
+      ]
+    },
 
     // type-only imports
     ...(semver.gte(
@@ -941,6 +972,43 @@ tester.run('component-name-in-template-casing', rule, {
           message: 'Component name "router-view" is not PascalCase.',
           line: 3,
           column: 11
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <the-auto-import-component />
+        </template>
+      `,
+      output: `
+        <template>
+          <TheAutoImportComponent />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['tests/lib/components.d.ts'] }],
+      errors: [
+        {
+          message:
+            'Component name "the-auto-import-component" is not PascalCase.'
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <TheAutoImportComponent />
+        </template>
+      `,
+      output: `
+        <template>
+          <the-auto-import-component />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['tests/lib/components.d.ts'] }],
+      errors: [
+        {
+          message: 'Component name "TheAutoImportComponent" is not kebab-case.'
         }
       ]
     },
