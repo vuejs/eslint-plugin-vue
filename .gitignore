@@ -13,3 +13,4 @@ yarn-error.log
 /docs/.vitepress/.temp
 /docs/.vitepress/cache
 typings/eslint/lib/rules
+eslint-typegen.d.ts
