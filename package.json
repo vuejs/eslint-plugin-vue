@@ -21,6 +21,7 @@
     "version": "npm run generate:version && git add .",
     "update": "node ./tools/update.js",
     "update-resources": "node ./tools/update-resources.js",
+    "typegen": "node ./tools/generate-typegen.mjs",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs",
