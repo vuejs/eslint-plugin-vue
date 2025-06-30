@@ -27,7 +27,7 @@
     "docs:build": "vitepress build docs",
     "generate:version": "env-cmd -e version npm run update && npm run lint -- --fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
-    "changeset:publish": "changeset publish"
+    "changeset:publish": "npm run typegen && changeset publish"
   },
   "files": [
     "lib"
