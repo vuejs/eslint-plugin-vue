@@ -1,5 +1,5 @@
 ---
-"eslint-plugin-vue": patch
+'eslint-plugin-vue': patch
 ---
 
-Updates resources
+Update resources
