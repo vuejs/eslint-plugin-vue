@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
       - name: Install Dependencies
-        run: npm install -f
+        run: npm install
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets

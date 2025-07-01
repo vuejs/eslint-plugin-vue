@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install Packages
-        run: npm install -f
+        run: npm install
       - name: Install ESLint v${{ matrix.eslint }}
         run: npm install --save-dev eslint@${{ matrix.eslint }} -f
       - name: Test
@@ -61,7 +61,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       - name: Install Packages
-        run: npm install -f
+        run: npm install
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall -D @stylistic/eslint-plugin
       - name: Test
@@ -76,7 +76,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       - name: Install Packages
-        run: npm install -f
+        run: npm install
       - name: Install @typescript-eslint/parser@7
         run: npm install -D @typescript-eslint/parser@7 -f
       - name: Test
