@@ -1,6 +1,10 @@
 'use strict'
 
-const { escape, toRegExp } = require('../../../lib/utils/regexp')
+const {
+  escape,
+  toRegExp,
+  toRegExpGroupMatcher
+} = require('../../../lib/utils/regexp')
 const assert = require('assert')
 
 const ESCAPED = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\'
@@ -34,5 +38,59 @@ describe('toRegExp()', () => {
     assert.deepEqual(toRegExp('/.*/iu'), /.*/iu)
     assert.deepEqual(toRegExp(`${/^bar/i}`), /^bar/i)
     assert.deepEqual(toRegExp(`${/[\sA-Z]+/u}`), /[\sA-Z]+/u)
+  })
+})
+
+describe('toRegExpCheckGroup()', () => {
+  it('should return a function missing inout', () => {
+    const groupMatcher = toRegExpGroupMatcher()
+    assert.strictEqual(groupMatcher(''), false)
+    assert.strictEqual(groupMatcher('foo'), false)
+    assert.strictEqual(groupMatcher('bar'), false)
+  })
+
+  it('should return a function for empty array', () => {
+    const groupMatcher = toRegExpGroupMatcher([])
+    assert.strictEqual(groupMatcher(''), false)
+    assert.strictEqual(groupMatcher('foo'), false)
+    assert.strictEqual(groupMatcher('bar'), false)
+  })
+
+  it('should return a function for single simple pattern', () => {
+    const groupMatcher = toRegExpGroupMatcher(['foo'])
+    assert.strictEqual(groupMatcher(''), false)
+    assert.strictEqual(groupMatcher('foo'), true)
+    assert.strictEqual(groupMatcher('foo', 'early'), true)
+    assert.strictEqual(groupMatcher('late', 'matches', 'foo'), true)
+    assert.strictEqual(groupMatcher('foobar'), false)
+    assert.strictEqual(groupMatcher('afoo', 'fooa', 'afooa', 'bar'), false)
+  })
+
+  it('should return a function for multiple simple patterns', () => {
+    const groupMatcher = toRegExpGroupMatcher(['foo', 'bar'])
+    assert.strictEqual(groupMatcher('foo'), true)
+    assert.strictEqual(groupMatcher('bar', 'early'), true)
+    assert.strictEqual(groupMatcher('late', 'matches', 'foo'), true)
+    assert.strictEqual(groupMatcher('foobar'), false)
+    assert.strictEqual(groupMatcher('afoo', 'fooa', 'afooa'), false)
+  })
+
+  it('should return a function for single regexp pattern', () => {
+    const groupMatcher = toRegExpGroupMatcher(['/^foo/'])
+    assert.strictEqual(groupMatcher(''), false)
+    assert.strictEqual(groupMatcher('foo'), true)
+    assert.strictEqual(groupMatcher('fooa', 'early'), true)
+    assert.strictEqual(groupMatcher('late', 'matches', 'fooa'), true)
+    assert.strictEqual(groupMatcher('barfoo'), false)
+    assert.strictEqual(groupMatcher('afoo', 'afooa', 'bar'), false)
+  })
+
+  it('should return a function for multiple regexp patterns', () => {
+    const groupMatcher = toRegExpGroupMatcher(['/^foo/', '/bar$/'])
+    assert.strictEqual(groupMatcher('foo'), true)
+    assert.strictEqual(groupMatcher('bar', 'early'), true)
+    assert.strictEqual(groupMatcher('late', 'matches', 'foo'), true)
+    assert.strictEqual(groupMatcher('barfoo'), false)
+    assert.strictEqual(groupMatcher('afoo', 'afooa', 'bara'), false)
   })
 })
