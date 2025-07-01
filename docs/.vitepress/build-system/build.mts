@@ -15,10 +15,6 @@ build(
   ),
   path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
   [
-    'stream',
-    'node:stream',
-    'os',
-    'node:os',
     'util',
     'node:util',
     'path',
@@ -70,16 +66,22 @@ function bundle(entryPoint: string, externals: string[]) {
 }
 
 function transform(code: string, injects: string[]) {
+  const normalizeInjects = [
+    ...new Set(injects.map((inject) => inject.replace(/^node:/u, '')))
+  ]
   const newCode = code.replace(/"[a-z]+" = "[a-z]+";/u, '')
   return `
-${injects
+${normalizeInjects
   .map(
     (inject) =>
       `import $inject_${inject.replace(/[\-:]/gu, '_')}$ from '${inject}';`
   )
   .join('\n')}
 const $_injects_$ = {${injects
-    .map((inject) => `"${inject}":$inject_${inject.replace(/[\-:]/gu, '_')}$`)
+    .map(
+      (inject) =>
+        `"${inject}":$inject_${inject.replace(/^node:/u, '').replace(/[\-:]/gu, '_')}$`
+    )
     .join(',\n')}};
 function require(module, ...args) {
   return $_injects_$[module] || {}

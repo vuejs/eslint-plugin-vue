@@ -162,14 +162,16 @@ export default async () => {
 
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
           globby: path.join(dirname, './build-system/shim/empty.mjs'),
-          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
-          'node:fs': 'fs',
-          'node:path': 'path',
-          'node:util': 'util'
+          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs')
         }
       },
       define: {
         'require.cache': '{}'
+      },
+      build: {
+        rollupOptions: {
+          external: ['module']
+        }
       }
     },
 
