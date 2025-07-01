@@ -11,6 +11,7 @@ since: v9.33.0
 > Disallow shorthand type conversions in `<template>`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 This rule is the same rule as core [no-implicit-coercion] rule but it applies to the expressions in `<template>`.
 

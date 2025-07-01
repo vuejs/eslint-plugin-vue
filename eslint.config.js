@@ -18,9 +18,8 @@ module.exports = [
 
       '!.vitepress',
       'docs/.vitepress/dist',
-      'docs/.vitepress/build-system/shim/eslint.mjs',
-      'docs/.vitepress/build-system/shim/assert.mjs',
-      'docs/.vitepress/build-system/shim/path.mjs',
+      'docs/.vitepress/build-system/shim/vue-eslint-parser.mjs',
+      'docs/.vitepress/build-system/shim/@typescript-eslint/parser.mjs',
       'docs/.vitepress/.temp',
       'docs/.vitepress/cache'
     ]

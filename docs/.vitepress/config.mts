@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import path from 'pathe'
 import { fileURLToPath } from 'url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
+import eslint4b, { requireESLintUseAtYourOwnRisk4b } from 'vite-plugin-eslint4b'
 
 // Pre-build cjs packages that cannot be bundled well.
 import './build-system/build.mjs'
@@ -142,24 +143,32 @@ export default async () => {
 
     vite: {
       publicDir: path.resolve(dirname, './public'),
-      plugins: [vitePluginRequireResolve(), viteCommonjs()],
+      plugins: [
+        vitePluginRequireResolve(),
+        viteCommonjs(),
+        eslint4b() as any,
+        requireESLintUseAtYourOwnRisk4b()
+      ],
       resolve: {
         alias: {
-          'eslint/use-at-your-own-risk': path.join(
+          'vue-eslint-parser': path.join(
             dirname,
-            './build-system/shim/eslint/use-at-your-own-risk.mjs'
+            './build-system/shim/vue-eslint-parser.mjs'
           ),
-          eslint: path.join(dirname, './build-system/shim/eslint.mjs'),
-          assert: path.join(dirname, './build-system/shim/assert.mjs'),
-          path: path.join(dirname, './build-system/shim/path.mjs'),
+          '@typescript-eslint/parser': path.join(
+            dirname,
+            './build-system/shim/@typescript-eslint/parser.mjs'
+          ),
 
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
-          esquery: path.join(dirname, './build-system/shim/esquery.mjs'),
-          globby: path.join(dirname, './build-system/shim/globby.mjs')
+          globby: path.join(dirname, './build-system/shim/empty.mjs'),
+          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
+          'node:fs': 'fs',
+          'node:path': 'path',
+          'node:util': 'util'
         }
       },
       define: {
-        'process.env.NODE_DEBUG': 'false',
         'require.cache': '{}'
       }
     },
