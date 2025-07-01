@@ -684,7 +684,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           ignore: ['/one/']
         }
       ],
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          endLine: 7,
+          column: 16,
+          endColumn: 20
+        }
+      ]
     },
     {
       code: `
@@ -714,7 +722,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           ignore: ['/^one$/']
         }
       ],
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          endLine: 7,
+          column: 16,
+          endColumn: 20
+        }
+      ]
     },
     {
       code: `
