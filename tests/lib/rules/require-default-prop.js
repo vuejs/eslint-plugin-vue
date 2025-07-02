@@ -413,6 +413,40 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    // Optional props that are not destructured should not require default values
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const { bar } = defineProps<{
+        foo?: string;
+        bar: string;
+      }>()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const { bar } = defineProps<{
+        foo?: string;
+        bar: string;
+        baz?: number;
+      }>()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -728,6 +762,7 @@ ruleTester.run('require-default-prop', rule, {
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/2725
+      // Optional props that ARE destructured should still require default values
       filename: 'type-with-props-destructure.vue',
       code: `
       <script setup lang="ts">
@@ -742,6 +777,30 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
+          line: 3
+        }
+      ]
+    },
+    {
+      // Optional props that are NOT destructured should still cause errors if they are used in destructuring without defaults
+      filename: 'mixed-optional-destructure.vue',
+      code: `
+      <script setup lang="ts">
+      const {foo, bar, baz} = defineProps<{foo?: number; bar: number; baz?: string}>()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 3
+        },
+        {
+          message: "Prop 'baz' requires default value to be set.",
           line: 3
         }
       ]
