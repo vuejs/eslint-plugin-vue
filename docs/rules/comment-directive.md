@@ -43,7 +43,7 @@ This rule sends all `eslint-disable`-like comments as errors to the post-process
 
 The `eslint-disable`-like comments can be used in the `<template>` and in the block level.
 
-<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
+<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 
 ```vue
 <template>
@@ -51,7 +51,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
   <div a="1" b="2" c="3" d="4" />
 </template>
 
-<!-- eslint-disable-next-line vue/component-tags-order -->
+<!-- eslint-disable-next-line vue/block-order -->
 <style>
 </style>
 ```
@@ -60,7 +60,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
 
 The `eslint-disable` comments has no effect after one block.
 
-<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
+<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 
 ```vue
 <style>

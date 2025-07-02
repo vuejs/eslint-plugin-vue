@@ -1,3 +1,4 @@
+/// <reference path="./eslint-typegen.d.ts" />
 import type { Linter } from 'eslint'
 
 declare const vue: {

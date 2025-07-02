@@ -9,14 +9,38 @@ import { fileURLToPath } from 'url'
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 build(
-  path.join(dirname, './src/eslint.mjs'),
-  path.join(dirname, './shim/eslint.mjs'),
-  ['path', 'assert', 'util', 'esquery']
+  path.join(
+    dirname,
+    '../../../node_modules/@typescript-eslint/parser/dist/index.js'
+  ),
+  path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
+  [
+    'util',
+    'node:util',
+    'path',
+    'node:path',
+    'fs',
+    'node:fs',
+    'semver',
+    'fast-glob',
+    'debug'
+  ]
 )
+
 build(
-  path.join(dirname, '../../../node_modules/assert'),
-  path.join(dirname, './shim/assert.mjs'),
-  ['path']
+  path.join(dirname, '../../../node_modules/vue-eslint-parser/index.js'),
+  path.join(dirname, './shim/vue-eslint-parser.mjs'),
+  [
+    'path',
+    'debug',
+    'semver',
+    'assert',
+    'module',
+    'events',
+    'esquery',
+    'fs',
+    'eslint'
+  ]
 )
 
 function build(input: string, out: string, injects: string[] = []) {
@@ -42,16 +66,22 @@ function bundle(entryPoint: string, externals: string[]) {
 }
 
 function transform(code: string, injects: string[]) {
+  const normalizeInjects = [
+    ...new Set(injects.map((inject) => inject.replace(/^node:/u, '')))
+  ]
   const newCode = code.replace(/"[a-z]+" = "[a-z]+";/u, '')
   return `
-${injects
+${normalizeInjects
   .map(
     (inject) =>
-      `import $inject_${inject.replace(/-/gu, '_')}$ from '${inject}';`
+      `import $inject_${inject.replace(/[\-:]/gu, '_')}$ from '${inject}';`
   )
   .join('\n')}
 const $_injects_$ = {${injects
-    .map((inject) => `${inject.replace(/-/gu, '_')}:$inject_${inject}$`)
+    .map(
+      (inject) =>
+        `"${inject}":$inject_${inject.replace(/^node:/u, '').replace(/[\-:]/gu, '_')}$`
+    )
     .join(',\n')}};
 function require(module, ...args) {
   return $_injects_$[module] || {}

@@ -314,7 +314,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/comma-style] | Enforce consistent comma style in `<template>` | :wrench: | :lipstick: |
 | [vue/dot-location] | Enforce consistent newlines before and after dots in `<template>` | :wrench: | :lipstick: |
 | [vue/dot-notation] | Enforce dot notation whenever possible in `<template>` | :wrench: | :hammer: |
-| [vue/eqeqeq] | Require the use of `===` and `!==` in `<template>` | :wrench: | :hammer: |
+| [vue/eqeqeq] | Require the use of `===` and `!==` in `<template>` | :wrench::bulb: | :hammer: |
 | [vue/func-call-spacing] | Require or disallow spacing between function identifiers and their invocations in `<template>` | :wrench: | :lipstick: |
 | [vue/key-spacing] | Enforce consistent spacing between property names and type annotations in types and interfaces in `<template>` | :wrench: | :lipstick: |
 | [vue/keyword-spacing] | Enforce consistent spacing before and after keywords in `<template>` | :wrench: | :lipstick: |
@@ -324,7 +324,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 | [vue/no-constant-condition] | Disallow constant expressions in conditions in `<template>` |  | :warning: |
 | [vue/no-empty-pattern] | Disallow empty destructuring patterns in `<template>` |  | :warning: |
 | [vue/no-extra-parens] | Disallow unnecessary parentheses in `<template>` | :wrench: | :lipstick: |
-| [vue/no-implicit-coercion] | Disallow shorthand type conversions in `<template>` | :wrench: | :hammer: |
+| [vue/no-implicit-coercion] | Disallow shorthand type conversions in `<template>` | :wrench::bulb: | :hammer: |
 | [vue/no-irregular-whitespace] | disallow irregular whitespace in `.vue` files |  | :warning: |
 | [vue/no-loss-of-precision] | Disallow literal numbers that lose precision in `<template>` |  | :warning: |
 | [vue/no-restricted-syntax] | Disallow specified syntax in `<template>` |  | :hammer: |

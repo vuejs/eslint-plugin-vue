@@ -1,13 +1,19 @@
-'use strict'
+import globals from 'globals'
+import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
+import eslintPluginJsonc from 'eslint-plugin-jsonc'
+import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import vueEslintParser from 'vue-eslint-parser'
+import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
+import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
+import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
 
-const globals = require('globals')
-const eslintPluginEslintPlugin = require('eslint-plugin-eslint-plugin/configs/all')
-const eslintPluginJsonc = require('eslint-plugin-jsonc')
-const eslintPluginNodeDependencies = require('eslint-plugin-node-dependencies')
-const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended')
-const eslintPluginUnicorn = require('eslint-plugin-unicorn')
+// @ts-check
+/// <reference path="./eslint-typegen.d.ts" />
+import typegen from 'eslint-typegen'
 
-module.exports = [
+export default typegen([
   {
     ignores: [
       '.nyc_output',
@@ -18,9 +24,8 @@ module.exports = [
 
       '!.vitepress',
       'docs/.vitepress/dist',
-      'docs/.vitepress/build-system/shim/eslint.mjs',
-      'docs/.vitepress/build-system/shim/assert.mjs',
-      'docs/.vitepress/build-system/shim/path.mjs',
+      'docs/.vitepress/build-system/shim/vue-eslint-parser.mjs',
+      'docs/.vitepress/build-system/shim/@typescript-eslint/parser.mjs',
       'docs/.vitepress/.temp',
       'docs/.vitepress/cache'
     ]
@@ -34,9 +39,9 @@ module.exports = [
     plugins: {
       internal: {
         rules: {
-          'no-invalid-meta': require('./eslint-internal-rules/no-invalid-meta'),
-          'no-invalid-meta-docs-categories': require('./eslint-internal-rules/no-invalid-meta-docs-categories'),
-          'require-eslint-community': require('./eslint-internal-rules/require-eslint-community')
+          'no-invalid-meta': noInvalidMeta,
+          'no-invalid-meta-docs-categories': noInvalidMetaDocsCategories,
+          'require-eslint-community': requireEslintCommunity
         }
       }
     }
@@ -214,7 +219,7 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      parser: require('vue-eslint-parser')
+      parser: vueEslintParser
     }
   },
   {
@@ -242,4 +247,4 @@ module.exports = [
       'prettier/prettier': 'off'
     }
   }
-]
+])
