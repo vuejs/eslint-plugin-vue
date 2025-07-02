@@ -143,7 +143,8 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       "EVENTS",
       "CONTENT"
     ],
-    "alphabetical": false
+    "alphabetical": false,
+    "sortLineLength": false
   }]
 }
 ```
@@ -196,6 +197,79 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       class="bar">
     </div>
 
+</template>
+```
+
+</eslint-code-block>
+
+### `"sortLineLength": true`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {sortLineLength: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+    <div
+      a="short"
+      abc="value"
+      a-prop="longer"
+      boolean-prop
+      :my-prop="value"
+      very-long-prop="value"
+      @blur="functionCall"
+      @change="functionCall"
+      @input="handleInput">
+    </div>
+
+  <!-- ✗ BAD -->
+    <div
+      very-long-prop="value"
+      a="short"
+      a-prop="longer">
+    </div>
+
+    <div
+      @input="handleInput"
+      @blur="short">
+    </div>
+
+    <div
+      :my-prop="value"
+      :a="short">
+    </div>
+
+</template>
+```
+
+</eslint-code-block>
+
+### `"alphabetical": true` with `"sortLineLength": true`
+
+When `alphabetical` and `sortLineLength` are both set to `true`, attributes within the same group are sorted primarily by their line length, and then alphabetically as a tie-breaker for attributes with the same length. This provides a clean, predictable attribute order that enhances readability.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true, sortLineLength: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    a="1"
+    b="2"
+    cc="3"
+    dd="4"
+    @keyup="fn"
+    @submit="fn"
+  ></div>
+
+  <!-- ✗ BAD -->
+  <div
+    b="2"
+    a="1"
+    @submit="fn"
+    @keyup="fn"
+    dd="4"
+    cc="3"
+  ></div>
 </template>
 ```
 
