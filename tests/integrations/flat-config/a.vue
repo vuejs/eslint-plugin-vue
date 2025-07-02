@@ -1,4 +1,3 @@
-
 <template>
   <!-- eslint-disable -->
   <div id id="a">Hello</div>
