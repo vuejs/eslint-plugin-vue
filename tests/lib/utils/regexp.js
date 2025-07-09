@@ -103,7 +103,7 @@ describe('toRegExp()', () => {
   })
 })
 
-describe('toRegExpCheckGroup()', () => {
+describe('toRegExpGroupMatcher()', () => {
   it('should return a function missing input', () => {
     const groupMatcher = toRegExpGroupMatcher()
     assert.strictEqual(groupMatcher(''), false)
