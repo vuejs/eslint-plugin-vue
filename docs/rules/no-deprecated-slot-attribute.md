@@ -89,19 +89,19 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 
 ```vue
 <template>
-  <my-web-component'>
+  <my-web-component>
     <!-- ✓ GOOD -->
     <template v-slot:name>
       {{ props.title }}
     </template>
-  </my-web-component'>
+  </my-web-component>
 
-  <my-web-component'>
+  <my-web-component>
     <!-- ✓ GOOD -->
     <my-component slot="name">
       {{ props.title }}
     </my-component>
-  </my-web-component'>
+  </my-web-component>
 
   <other-component>
     <!-- ✗ BAD -->
