@@ -9,7 +9,6 @@ To develop locally, fork the eslint-plugin-vue repository and clone it in your l
 To develop and test the `eslint-plugin-vue` package:
 
 1. Run `npm install` in the project's root folder.
-
 2. Run `npm test` to make sure everything is set up correctly.
 
 ## :bug: Bug reporting
