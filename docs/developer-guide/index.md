@@ -4,7 +4,7 @@ Contributing is welcome.
 
 ## Project Setup
 
-To develop locally, fork the eslint-plugin-vue repository and clone it in your local machine. The package manager used to install and link dependencies must be [npm](https://www.npmjs.com/). You need to use the LTS version of [Node.js](https://nodejs.org/).
+To develop locally, fork the eslint-plugin-vue repository and clone it in your local machine. Use the [npm](https://www.npmjs.com/) package manager to install and link dependencies and the LTS version of [Node.js](https://nodejs.org/).
 
 To develop and test the `eslint-plugin-vue` package:
 
