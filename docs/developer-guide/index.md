@@ -2,7 +2,13 @@
 
 Contributing is welcome.
 
-## Project Setup
+## :bug: Bug reporting
+
+If you think you’ve found a bug in ESLint, please [create a new issue](https://github.com/vuejs/eslint-plugin-vue/issues/new?labels=&template=bug_report.md) or a pull request on GitHub.
+
+Please include as much detail as possible to help us properly address your issue. If we need to triage issues and constantly ask people for more detail, that’s time taken away from actually fixing issues. Help us be as efficient as possible by including a lot of detail in your issues.
+
+## :seedling: Project Setup
 
 To develop locally, fork the eslint-plugin-vue repository and clone it in your local machine. Use the [npm](https://www.npmjs.com/) package manager to install and link dependencies and the LTS version of [Node.js](https://nodejs.org/).
 
@@ -10,12 +16,6 @@ To develop and test the `eslint-plugin-vue` package:
 
 1. Run `npm install` in the project's root folder.
 2. Run `npm test` to make sure everything is set up correctly.
-
-## :bug: Bug reporting
-
-If you think you’ve found a bug in ESLint, please [create a new issue](https://github.com/vuejs/eslint-plugin-vue/issues/new?labels=&template=bug_report.md) or a pull request on GitHub.
-
-Please include as much detail as possible to help us properly address your issue. If we need to triage issues and constantly ask people for more detail, that’s time taken away from actually fixing issues. Help us be as efficient as possible by including a lot of detail in your issues.
 
 ## :sparkles: Proposing a new rule or a rule change
 
