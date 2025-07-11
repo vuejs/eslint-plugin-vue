@@ -6,6 +6,9 @@
 
 const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/require-explicit-slots')
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const tester = new RuleTester({
   languageOptions: {
@@ -275,6 +278,21 @@ tester.run('require-explicit-slots', rule, {
         }>,
       })
       </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot></slot>
+          <slot name="foo"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      import type {Slots1 as Slots} from './test01'
+      defineSlots<Slots>()
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
     },
     {
       filename: 'test.vue',
@@ -655,6 +673,28 @@ tester.run('require-explicit-slots', rule, {
           message: 'Slots must be explicitly defined.'
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <slot name="foo"></slot>
+          <slot name="bar"></slot>
+        </div>
+      </template>
+      <script setup lang="ts">
+      import type {Slots1 as Slots} from './test01'
+      defineSlots<Slots>()
+      </script>`,
+      errors: [
+        {
+          message: 'Slots must be explicitly defined.',
+          line: 5,
+          column: 11
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     },
     {
       // ignore attribute binding except string literal
