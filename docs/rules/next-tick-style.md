@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/next-tick-style
-description: enforce Promise or callback style in `nextTick`
+description: enforce Promise, Await or callback style in `nextTick`
 since: v7.5.0
 ---
 
 # vue/next-tick-style
 
-> enforce Promise or callback style in `nextTick`
+> enforce Promise, Await or callback style in `nextTick`
 
 - :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
@@ -52,13 +52,45 @@ Default is set to `promise`.
 
 ```json
 {
-  "vue/next-tick-style": ["error", "promise" | "callback"]
+  "vue/next-tick-style": ["error",  "promise" | "await" | "callback"]
 }
 ```
 
 - `"promise"` (default) ... requires using the promise version.
+- `"await"` ... requires using the await syntax version.
 - `"callback"` ... requires using the callback version. Use this if you use a Vue version below v2.1.0.
 
+### `"await"`
+
+<eslint-code-block fix :rules="{'vue/next-tick-style': ['error', 'await']}">
+
+```vue
+<script>
+import { nextTick as nt } from 'vue';
+
+export default {
+  async mounted() {
+    /* ✓ GOOD */
+    await nt(); callback();
+    await Vue.nextTick(); this.callback();
+    await this.$nextTick(); this.callback();
+
+    /* ✗ BAD */
+    nt().then(() => callback());
+    Vue.nextTick().then(() => callback());
+    this.$nextTick().then(() => callback());
+    nt(() => callback());
+    nt(callback);
+    Vue.nextTick(() => callback());
+    Vue.nextTick(callback);
+    this.$nextTick(() => callback());
+    this.$nextTick(callback);
+  }
+}
+</script>
+```
+
+</eslint-code-block>
 ### `"callback"`
 
 <eslint-code-block fix :rules="{'vue/next-tick-style': ['error', 'callback']}">
