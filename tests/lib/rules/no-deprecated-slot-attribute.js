@@ -67,6 +67,30 @@ tester.run('no-deprecated-slot-attribute', rule, {
       </LinkList>
     </template>`,
       options: [{ ignore: ['/one/', '/^Two$/i', '/^my-.*/i'] }]
+    },
+    {
+      code: `<template>
+      <LinkList>
+        <one slot="one" />
+        <two slot="two" />
+        <my-component slot="my-component-slot" />
+        <myComponent slot="myComponent-slot" />
+        <MyComponent slot="MyComponent-slot" />
+      </LinkList>
+    </template>`,
+      options: [{ ignoreParents: ['LinkList'] }]
+    },
+    {
+      code: `<template>
+      <LinkList>
+        <one slot="one" />
+        <two slot="two" />
+        <my-component slot="my-component-slot" />
+        <myComponent slot="myComponent-slot" />
+        <MyComponent slot="MyComponent-slot" />
+      </LinkList>
+    </template>`,
+      options: [{ ignoreParents: ['/^Link/'] }]
     }
   ],
   invalid: [
@@ -728,6 +752,90 @@ tester.run('no-deprecated-slot-attribute', rule, {
           line: 7,
           endLine: 7,
           column: 16,
+          endColumn: 20
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+        </my-component>
+        <my-component2>
+          <two slot="two">
+            B
+          </two>
+        </my-component2>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+        </my-component>
+        <my-component2>
+          <template v-slot:two>\n<two >
+            B
+          </two>\n</template>
+        </my-component2>
+      </template>`,
+      options: [
+        {
+          ignoreParents: ['my-component']
+        }
+      ],
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 9,
+          column: 16,
+          endLine: 9,
+          endColumn: 20
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+        </my-component>
+        <my-component2>
+          <two slot="two">
+            B
+          </two>
+        </my-component2>
+      </template>`,
+      output: `
+      <template>
+        <my-component>
+          <one slot="one">
+            A
+          </one>
+        </my-component>
+        <my-component2>
+          <template v-slot:two>\n<two >
+            B
+          </two>\n</template>
+        </my-component2>
+      </template>`,
+      options: [
+        {
+          ignoreParents: ['/component$/']
+        }
+      ],
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 9,
+          column: 16,
+          endLine: 9,
           endColumn: 20
         }
       ]
