@@ -3,9 +3,7 @@
     "target": "ES2019",
     "module": "node16",
     "moduleResolution": "Node16",
-    "lib": [
-      "es2020"
-    ],
+    "lib": ["es2020"],
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
@@ -21,9 +19,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "typings/*"
-      ]
+      "*": ["typings/*"]
     },
     "skipLibCheck": true
   },

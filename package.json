@@ -7,10 +7,13 @@
   "scripts": {
     "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch --growl",
+    "test:base": "vitest run --reporter=dot tests/lib",
     "test": "vitest run",
+    "test:integrations": "vitest run tests/integrations",
+    "debug": "vitest run --inspect --no-file-parallelism --reporter=dot tests/lib",
     "cover": "npm run cover:test && npm run cover:report",
-    "cover:test": "nyc npm run test:base -- --timeout 60000",
-    "cover:report": "nyc report --reporter=html",
+    "cover:test": "vitest run --coverage --reporter=dot tests/lib",
+    "cover:report": "echo 'HTML coverage report available at ./coverage/index.html'",
     "lint": "eslint . && markdownlint \"**/*.md\"",
     "lint:fix": "eslint . --fix && markdownlint \"**/*.md\" --fix",
     "tsc": "tsc",
@@ -24,9 +27,7 @@
     "docs:build": "vitepress build docs",
     "generate:version": "env-cmd -e version npm run update && npm run lint -- --fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
-    "changeset:publish": "npm run typegen && changeset publish",
-    "test:watch": "vitest watch",
-    "coverage": "vitest run --coverage"
+    "changeset:publish": "npm run typegen && changeset publish"
   },
   "files": [
     "lib"
@@ -105,14 +106,13 @@
     "globals": "^15.14.0",
     "jsdom": "^22.0.0",
     "markdownlint-cli": "^0.42.0",
-    "nyc": "^17.1.0",
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
     "vue-eslint-parser": "^10.0.0",
-    "vitest": "^1.0.1",
-    "@vitest/coverage-v8": "^1.0.1"
+    "vitest": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4"
   }
 }
