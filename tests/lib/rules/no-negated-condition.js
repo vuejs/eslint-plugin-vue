@@ -21,7 +21,7 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
+        <div v-if="!foo">Content</div>
       </template>
       `
     },
@@ -29,8 +29,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
-        <div v-if="bar" />
+        <div v-if="!foo">First</div>
+        <div v-if="bar">Second</div>
       </template>
       `
     },
@@ -38,8 +38,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
-        <div v-else-if="bar" />
+        <div v-if="!foo">Content</div>
+        <div v-else-if="bar">Alternative</div>
       </template>
       `
     },
@@ -47,8 +47,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
-        <div v-else-if="!bar" />
+        <div v-if="!foo">First</div>
+        <div v-else-if="!bar">Second</div>
       </template>
       `
     },
@@ -56,7 +56,7 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a != b" />
+        <div v-if="a != b">Not equal</div>
       </template>
       `
     },
@@ -64,7 +64,7 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a !== b" />
+        <div v-if="a !== b">Strictly not equal</div>
       </template>
       `
     },
@@ -72,8 +72,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a != b" />
-        <div v-else-if="c" />
+        <div v-if="a != b">Not equal</div>
+        <div v-else-if="c">Alternative</div>
       </template>
       `
     },
@@ -81,8 +81,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a !== b" />
-        <div v-else-if="c" />
+        <div v-if="a !== b">Strictly not equal</div>
+        <div v-else-if="c">Alternative</div>
       </template>
       `
     },
@@ -90,9 +90,9 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
-        <div v-else-if="!bar" />
-        <div v-else-if="baz" />
+        <div v-if="!foo">First</div>
+        <div v-else-if="!bar">Second</div>
+        <div v-else-if="baz">Third</div>
       </template>
       `
     },
@@ -100,9 +100,9 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!a" />
-        <div v-else-if="b" />
-        <div v-else />
+        <div v-if="!a">First</div>
+        <div v-else-if="b">Second</div>
+        <div v-else>Default</div>
       </template>
       `
     },
@@ -110,8 +110,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="foo" />
-        <div v-else />
+        <div v-if="foo">Positive</div>
+        <div v-else>Negative</div>
       </template>
       `
     },
@@ -119,8 +119,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="foo" />
-        <div v-else-if="bar" />
+        <div v-if="foo">First</div>
+        <div v-else-if="bar">Second</div>
       </template>
       `
     },
@@ -128,8 +128,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="foo && bar" />
-        <div v-else />
+        <div v-if="foo && bar">Both true</div>
+        <div v-else>Otherwise</div>
       </template>
       `
     },
@@ -138,7 +138,7 @@ tester.run('no-negated-condition', rule, {
       code: `
       <template>
         <div v-if="foo">
-          <span v-if="!bar" />
+          <span v-if="!bar">Nested content</span>
         </div>
       </template>
       `
@@ -149,8 +149,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!foo" />
-        <div v-else />
+        <div v-if="!foo">Content</div>
+        <div v-else>Alternative</div>
       </template>
       `,
       errors: [
@@ -165,8 +165,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!(foo && bar)" />
-        <div v-else />
+        <div v-if="!(foo && bar)">Negated condition</div>
+        <div v-else>Otherwise</div>
       </template>
       `,
       errors: [
@@ -181,8 +181,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a != b" />
-        <div v-else />
+        <div v-if="a != b">Not equal</div>
+        <div v-else>Equal</div>
       </template>
       `,
       errors: [
@@ -197,8 +197,8 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="a !== b" />
-        <div v-else />
+        <div v-if="a !== b">Strictly not equal</div>
+        <div v-else>Strictly equal</div>
       </template>
       `,
       errors: [
@@ -213,9 +213,9 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="foo" />
-        <div v-else-if="!bar" />
-        <div v-else />
+        <div v-if="foo">First</div>
+        <div v-else-if="!bar">Second</div>
+        <div v-else>Default</div>
       </template>
       `,
       errors: [
@@ -230,9 +230,9 @@ tester.run('no-negated-condition', rule, {
       filename: 'test.vue',
       code: `
       <template>
-        <div v-if="!a" />
-        <div v-else-if="!b" />
-        <div v-else />
+        <div v-if="!a">First</div>
+        <div v-else-if="!b">Second</div>
+        <div v-else>Default</div>
       </template>
       `,
       errors: [
