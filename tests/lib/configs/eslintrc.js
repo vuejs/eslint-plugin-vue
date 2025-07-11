@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 'use strict'
 
 const { ESLint } = require('../../eslint-compat')

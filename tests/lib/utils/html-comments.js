@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 'use strict'
 
 const fs = require('fs')

@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 /**
  * @fileoverview flat configs test
  * @author 唯然<weiran.zsd@outlook.com>

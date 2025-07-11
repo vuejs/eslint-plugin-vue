@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 /**
  * @author Toru Nagashima <https://github.com/mysticatea>
  * @copyright 2017 Toru Nagashima. All rights reserved.

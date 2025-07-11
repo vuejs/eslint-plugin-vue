@@ -1,3 +1,4 @@
+import { describe } from "vitest";
 'use strict'
 
 const semver = require('semver')

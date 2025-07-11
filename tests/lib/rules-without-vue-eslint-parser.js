@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 /**
  * @author Toru Nagashima <https://github.com/mysticatea>
  * See LICENSE file in root directory for full license.
