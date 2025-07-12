@@ -77,7 +77,7 @@ export default typegen([
       globals: {
         ...globals.es6,
         ...globals.node,
-        ...globals.mocha
+        ...globals.vitest
       }
     },
     linterOptions: {

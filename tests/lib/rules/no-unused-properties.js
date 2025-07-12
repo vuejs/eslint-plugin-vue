@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 /**
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality

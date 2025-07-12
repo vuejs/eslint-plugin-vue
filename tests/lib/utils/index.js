@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 'use strict'
 
 const espree = require('espree')

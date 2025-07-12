@@ -1,4 +1,3 @@
-import { describe } from "vitest";
 /**
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Michał Sajnóg

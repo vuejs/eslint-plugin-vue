@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 /**
  * Test for getComponentEmitsFromTypeDefineTypes
  */

@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 /**
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.

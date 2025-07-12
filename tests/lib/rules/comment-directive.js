@@ -1,4 +1,3 @@
-import { describe, it } from "vitest";
 /**
  * @fileoverview Tests for comment-directive rule.
  * @author Toru Nagashima
