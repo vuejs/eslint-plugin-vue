@@ -1,11 +1,11 @@
 ---
 pageClass: rule-details
 sidebarDepth: 0
-title: vue/no-negated-condition
+title: vue/no-negated-v-if-condition
 description: disallow negated conditions in v-if/v-else
 ---
 
-# vue/no-negated-condition
+# vue/no-negated-v-if-condition
 
 > disallow negated conditions in v-if/v-else
 
@@ -17,7 +17,7 @@ This rule disallows negated conditions in `v-if` and `v-else-if` directives whic
 
 Negated conditions make the code less readable. When there's an `else` clause, it's better to use a positive condition and switch the branches.
 
-<eslint-code-block :rules="{'vue/no-negated-condition': ['error']}">
+<eslint-code-block :rules="{'vue/no-negated-v-if-condition': ['error']}">
 
 ```vue
 <template>
@@ -53,9 +53,9 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [no-negated-condition](https://eslint.org/docs/rules/no-negated-condition)
+- [no-negated-v-if-condition](https://eslint.org/docs/rules/no-negated-v-if-condition)
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-negated-condition.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-negated-condition.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-negated-v-if-condition.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-negated-v-if-condition.js)

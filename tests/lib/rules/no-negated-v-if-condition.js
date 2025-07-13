@@ -1,11 +1,11 @@
 /**
- * @author Wayne
+ * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
 'use strict'
 
 const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/no-negated-condition')
+const rule = require('../../../lib/rules/no-negated-v-if-condition')
 
 const tester = new RuleTester({
   languageOptions: {
@@ -15,7 +15,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-negated-condition', rule, {
+tester.run('no-negated-v-if-condition', rule, {
   valid: [
     {
       filename: 'test.vue',
