@@ -15,6 +15,10 @@ description: Disallow negated conditions in `<template>`
 
 This rule is the same rule as core [no-negated-condition] rule but it applies to the expressions in `<template>`.
 
+## :couple: Related Rules
+
+- [unicorn/no-negated-condition](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-negated-condition.md)
+
 ## :books: Further Reading
 
 - [no-negated-condition]
