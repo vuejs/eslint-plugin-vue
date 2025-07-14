@@ -54,7 +54,8 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [no-negated-v-if-condition](https://eslint.org/docs/rules/no-negated-v-if-condition)
+- [no-negated-condition](https://eslint.org/docs/latest/rules/no-negated-condition)
+- [unicorn/no-negated-condition](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-negated-condition.md)
 
 ## :mag: Implementation
 
