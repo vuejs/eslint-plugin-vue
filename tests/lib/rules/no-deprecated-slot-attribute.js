@@ -110,7 +110,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -130,7 +133,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -150,7 +156,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -170,7 +179,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -190,7 +202,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -209,23 +224,38 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message: '`slot` attributes are deprecated.',
-          line: 5
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 25
         },
         {
           message: '`slot` attributes are deprecated.',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 25
         },
         {
           message: '`slot` attributes are deprecated.',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 25
         },
         {
           message: '`slot` attributes are deprecated.',
-          line: 8
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 25
         }
       ]
     },
@@ -245,7 +275,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     },
@@ -260,7 +293,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -280,7 +316,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -295,7 +334,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -310,7 +352,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -325,7 +370,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -340,7 +388,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -360,7 +411,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -380,7 +434,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 18
         }
       ]
     },
@@ -400,7 +457,10 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 19
         }
       ]
     },
@@ -421,7 +481,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           </template>
         </MyComponent>
       </template>`,
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: `
@@ -440,7 +508,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           </template>
         </MyComponent>
       </template>`,
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: `
@@ -459,7 +535,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           </template>
         </MyComponent>
       </template>`,
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/1499
@@ -494,11 +578,17 @@ tester.run('no-deprecated-slot-attribute', rule, {
       errors: [
         {
           message: '`slot` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message: '`slot` attributes are deprecated.',
-          line: 9
+          line: 9,
+          column: 23,
+          endLine: 9,
+          endColumn: 27
         }
       ]
     },
@@ -526,8 +616,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </my-component>
       </template>`,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 41
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 37,
+          endLine: 7,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -544,8 +646,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
       </template>`,
       output: null,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -590,8 +704,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
       </template>`,
       output: null,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 42
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 37,
+          endLine: 7,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -618,8 +744,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </my-component>
       </template>`,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 42
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 37,
+          endLine: 7,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -646,8 +784,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </my-component>
       </template>`,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 41,
+          endLine: 4,
+          endColumn: 46
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 37,
+          endLine: 7,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -678,7 +828,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
           ignore: ['one']
         }
       ],
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 16,
+          endLine: 7,
+          endColumn: 20
+        }
+      ]
     },
     {
       code: `
@@ -863,7 +1021,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
 </template>
         </my-component>
       </template>`,
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 18
+        }
+      ]
     },
     {
       code: `
@@ -876,7 +1042,15 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </component>
       </template>`,
       output: null,
-      errors: ['`slot` attributes are deprecated.']
+      errors: [
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 20
+        }
+      ]
     }
   ]
 })
