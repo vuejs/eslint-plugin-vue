@@ -10,6 +10,7 @@ description: disallow negated conditions in v-if/v-else
 > disallow negated conditions in v-if/v-else
 
 - :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
+- :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
 
@@ -22,26 +23,26 @@ Negated conditions make the code less readable. When there's an `else` clause, i
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-if="foo" />
-  <div v-else />
+  <div v-if="foo">First</div>
+  <div v-else>Second</div>
 
-  <div v-if="!foo" />
-  <div v-else-if="bar" />
+  <div v-if="!foo">First</div>
+  <div v-else-if="bar">Second</div>
 
-  <div v-if="!foo" />
+  <div v-if="!foo">Content</div>
 
-  <div v-if="a !== b" />
+  <div v-if="a !== b">Not equal</div>
 
   <!-- ✗ BAD -->
-  <div v-if="!foo" />
-  <div v-else />
+  <div v-if="!foo">First</div>
+  <div v-else>Second</div>
 
-  <div v-if="a !== b" />
-  <div v-else />
+  <div v-if="a !== b">First</div>
+  <div v-else>Second</div>
 
-  <div v-if="foo" />
-  <div v-else-if="!bar" />
-  <div v-else />
+  <div v-if="foo">First</div>
+  <div v-else-if="!bar">Second</div>
+  <div v-else>Third</div>
 </template>
 ```
 

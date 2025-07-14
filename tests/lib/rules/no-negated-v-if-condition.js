@@ -157,7 +157,20 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 3,
-          column: 20
+          column: 20,
+          endLine: 3,
+          endColumn: 24,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="foo">Alternative</div>
+        <div v-else>Content</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     },
@@ -173,7 +186,20 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 3,
-          column: 20
+          column: 20,
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="(foo && bar)">Otherwise</div>
+        <div v-else>Negated condition</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     },
@@ -189,7 +215,20 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 3,
-          column: 20
+          column: 20,
+          endLine: 3,
+          endColumn: 26,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="a == b">Equal</div>
+        <div v-else>Not equal</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     },
@@ -205,7 +244,20 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 3,
-          column: 20
+          column: 20,
+          endLine: 3,
+          endColumn: 27,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="a === b">Strictly equal</div>
+        <div v-else>Strictly not equal</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     },
@@ -222,7 +274,21 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 29,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="foo">First</div>
+        <div v-else-if="bar">Default</div>
+        <div v-else>Second</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     },
@@ -239,7 +305,21 @@ tester.run('no-negated-v-if-condition', rule, {
         {
           messageId: 'negatedCondition',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 27,
+          suggestions: [
+            {
+              messageId: 'fixNegatedCondition',
+              output: `
+      <template>
+        <div v-if="!a">First</div>
+        <div v-else-if="b">Default</div>
+        <div v-else>Second</div>
+      </template>
+      `
+            }
+          ]
         }
       ]
     }
