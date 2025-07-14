@@ -2,4 +2,4 @@
 'eslint-plugin-vue': minor
 ---
 
-Add new `vue/no-negated-condition` rule
+Added new [`vue/no-negated-condition`](https://eslint.vuejs.org/rules/no-negated-condition.html) rule
