@@ -484,8 +484,8 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-multiple-slot-args]: ./no-multiple-slot-args.md
 [vue/no-multiple-template-root]: ./no-multiple-template-root.md
 [vue/no-mutating-props]: ./no-mutating-props.md
-[vue/no-negated-v-if-condition]: ./no-negated-v-if-condition.md
 [vue/no-negated-condition]: ./no-negated-condition.md
+[vue/no-negated-v-if-condition]: ./no-negated-v-if-condition.md
 [vue/no-parsing-error]: ./no-parsing-error.md
 [vue/no-potential-component-option-typo]: ./no-potential-component-option-typo.md
 [vue/no-ref-as-operand]: ./no-ref-as-operand.md
