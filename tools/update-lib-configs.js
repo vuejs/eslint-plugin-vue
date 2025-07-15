@@ -51,13 +51,18 @@ function formatRules(rules, categoryId) {
 
 function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
+  const formattedRules = formatRules(category.rules, category.categoryId)
+  const ruleLevelVariable = formattedRules.includes('ruleLevel')
+    ? "const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'"
+    : ''
+
   if (extendsCategoryId == null) {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
+${ruleLevelVariable}
 
 module.exports = {
   parserOptions: {
@@ -67,7 +72,7 @@ module.exports = {
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules, category.categoryId)},
+  rules: ${formattedRules},
   overrides: [
     {
       files: '*.vue',
@@ -82,11 +87,11 @@ module.exports = {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
+${ruleLevelVariable}
 
 module.exports = {
   extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formatRules(category.rules, category.categoryId)}
+  rules: ${formattedRules}
 }
 `
 }

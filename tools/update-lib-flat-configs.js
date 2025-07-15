@@ -51,13 +51,18 @@ function formatRules(rules, categoryId) {
 
 function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
+  const formattedRules = formatRules(category.rules, category.categoryId)
+  const ruleLevelVariable = formattedRules.includes('ruleLevel')
+    ? "const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'"
+    : ''
+
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
+${ruleLevelVariable}
 
 module.exports = [
   {
@@ -83,7 +88,7 @@ module.exports = [
       parser: require('vue-eslint-parser'),
       sourceType: 'module',
     },
-    rules: ${formatRules(category.rules, category.categoryId)},
+    rules: ${formattedRules},
     processor: 'vue/vue'
   }
 ]
@@ -97,13 +102,13 @@ module.exports = [
 'use strict'
 const config = require('./${extendsCategoryId}.js')
 
-const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
+${ruleLevelVariable}
 
 module.exports = [
   ...config,
   {
     name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}/rules',
-    rules: ${formatRules(category.rules, category.categoryId)},
+    rules: ${formattedRules},
   }
 ]
 `
