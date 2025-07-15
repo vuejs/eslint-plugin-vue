@@ -44,7 +44,9 @@ function formatRules(rules, categoryId) {
       return [rule.ruleId, options]
     })
   )
-  return JSON.stringify(obj, null, 2)
+  // use the ruleLevel variable for rules set to warn so that they can
+  // be made to error with an env variable if desired
+  return JSON.stringify(obj, null, 2).replaceAll('"warn"', 'ruleLevel')
 }
 
 function formatCategory(category) {
@@ -55,6 +57,8 @@ function formatCategory(category) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
+
 module.exports = [
   {
     name: 'vue/base/setup',
@@ -92,6 +96,8 @@ module.exports = [
  */
 'use strict'
 const config = require('./${extendsCategoryId}.js')
+
+const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'
 
 module.exports = [
   ...config,
