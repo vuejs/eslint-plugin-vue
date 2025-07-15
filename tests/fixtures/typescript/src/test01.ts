@@ -18,3 +18,8 @@ export type Props2 = {
   h?: string[]
   i?: readonly string[]
 }
+
+export type Slots1 = {
+  default(props: { msg: string }): any
+  foo(props: { msg: string }): any
+}
