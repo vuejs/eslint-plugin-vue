@@ -1,9 +1,16 @@
 
-import { configDefaults, defineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
-    include: [...configDefaults.include, 'tests/lib/**/*.js', 'tests/integrations/**/*.js'],
-    exclude: [...configDefaults.exclude, 'tests/fixtures/**'],
+    include: [
+      'tests/lib/**/*.js',
+      'tests/integrations/**/*.js'
+    ],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      'tests/fixtures/**'
+    ],
     passWithNoTests: true,
     testTimeout: 60_000,
     globals: true,
