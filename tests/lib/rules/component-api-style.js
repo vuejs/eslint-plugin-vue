@@ -124,6 +124,16 @@ tester.run('component-api-style', rule, {
       options: [['script-setup', 'script-setup-vapor']]
     },
     {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { ref } from 'vue'
+      const msg = ref('Hello World!')
+      </script>
+      `,
+      options: [['script-setup', 'script-setup-vapor']]
+    },
+    {
       filename: 'test.js',
       code: `
       import { ref, defineComponent } from 'vue'
