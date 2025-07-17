@@ -9,9 +9,10 @@ export default defineConfig({
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
-      'tests/fixtures/**'
+      'tests/fixtures/**',
+      'tests/integrations/flat-config/eslint.config.js',
+      'tests/lib/rules/no-unsupported-features/utils.js'
     ],
-    passWithNoTests: true,
     testTimeout: 60_000,
     globals: true,
     coverage: {
