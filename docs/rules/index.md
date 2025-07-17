@@ -97,6 +97,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-watch-after-await] | disallow asynchronously registered `watch` |  | :three::hammer: |
 | [vue/prefer-import-from-vue] | enforce import from 'vue' instead of import from '@vue/*' | :wrench: | :three::hammer: |
 | [vue/require-component-is] | require `v-bind:is` of `<component>` elements |  | :three::two::warning: |
+| [vue/require-mayberef-unwrap] | require unwrapping `MaybeRef` values with `unref()` in conditions | :wrench: | :three::warning: |
 | [vue/require-prop-type-constructor] | require prop type to be a constructor | :wrench: | :three::two::hammer: |
 | [vue/require-render-return] | enforce render function to always return value |  | :three::two::warning: |
 | [vue/require-slots-as-functions] | enforce properties of `$slots` to be used as a function |  | :three::warning: |
@@ -564,6 +565,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/require-explicit-slots]: ./require-explicit-slots.md
 [vue/require-expose]: ./require-expose.md
 [vue/require-macro-variable-name]: ./require-macro-variable-name.md
+[vue/require-mayberef-unwrap]: ./require-mayberef-unwrap.md
 [vue/require-name-property]: ./require-name-property.md
 [vue/require-prop-comment]: ./require-prop-comment.md
 [vue/require-prop-type-constructor]: ./require-prop-type-constructor.md
