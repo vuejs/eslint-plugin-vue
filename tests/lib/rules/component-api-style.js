@@ -104,6 +104,26 @@ tester.run('component-api-style', rule, {
       options: [['script-setup']]
     },
     {
+      filename: 'test.vue',
+      code: `
+      <script setup vapor>
+      import { ref } from 'vue'
+      const msg = ref('Hello World!')
+      </script>
+      `,
+      options: [['script-setup-vapor']]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup vapor>
+      import { ref } from 'vue'
+      const msg = ref('Hello World!')
+      </script>
+      `,
+      options: [['script-setup', 'script-setup-vapor']]
+    },
+    {
       filename: 'test.js',
       code: `
       import { ref, defineComponent } from 'vue'
@@ -843,6 +863,96 @@ tester.run('component-api-style', rule, {
             'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>`, Composition API or Composition API (Vue 2) instead.',
           line: 4,
           column: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { ref } from 'vue'
+      const msg = ref('Hello World!')
+      </script>
+      `,
+      options: [['script-setup-vapor']],
+      errors: [
+        {
+          message:
+            '`<script setup>` is not allowed in your project. Use `<script setup vapor>` instead.',
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 21
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup vapor>
+      import { ref } from 'vue'
+      const msg = ref('Hello World!')
+      </script>
+      `,
+      options: [['script-setup']],
+      errors: [
+        {
+          message:
+            '`<script setup vapor>` is not allowed in your project. Use `<script setup>` instead.',
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data () {
+          return {
+            msg: 'Hello World!'
+          }
+        }
+      }
+      </script>
+      `,
+      options: [['script-setup-vapor']],
+      errors: [
+        {
+          message:
+            'Options API is not allowed in your project. Use `<script setup vapor>` instead.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data () {
+          return {
+            msg: 'Hello World!'
+          }
+        }
+      }
+      </script>
+      `,
+      options: [['script-setup-vapor', 'script-setup']],
+      errors: [
+        {
+          message:
+            'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>` or `<script setup vapor>` instead.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     }
