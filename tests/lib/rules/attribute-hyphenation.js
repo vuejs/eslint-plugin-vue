@@ -118,7 +118,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'my-prop' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
         }
       ]
     },
@@ -131,7 +134,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'MyProp' must be hyphenated.",
           type: 'VIdentifier',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -145,7 +151,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':my-prop' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -158,7 +167,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -172,7 +184,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-bind:my-prop' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
@@ -185,7 +200,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-bind:MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -198,7 +216,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-bind:MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -212,7 +233,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':second-prop' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 46,
+          endLine: 1,
+          endColumn: 65
         }
       ]
     },
@@ -226,7 +250,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-bind:myProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -240,7 +267,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-bind:propID' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -255,7 +285,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-model:my-prop' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 46
         }
       ]
     },
@@ -269,7 +302,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-model:myProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
@@ -282,7 +318,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'v-model:MyProp' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
@@ -307,7 +346,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'third-custom' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 3
+          line: 3,
+          column: 111,
+          endLine: 3,
+          endColumn: 129
         }
       ]
     },
@@ -332,12 +374,18 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'custom-hyphen' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 3
+          line: 3,
+          column: 71,
+          endLine: 3,
+          endColumn: 90
         },
         {
           message: "Attribute 'second-custom' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 3
+          line: 3,
+          column: 91,
+          endLine: 3,
+          endColumn: 110
         }
       ]
     },
@@ -350,7 +398,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'my-prop' can't be hyphenated.",
           type: 'VIdentifier',
-          line: 1
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -363,7 +414,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute 'MyProp' must be hyphenated.",
           type: 'VIdentifier',
-          line: 1
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 34
         }
       ]
     },
@@ -376,7 +430,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':attr_Gg' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -389,7 +446,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':Attr_Hh' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -402,7 +462,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':_attr_Jj' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 40
         }
       ]
     },
@@ -415,7 +478,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':_attrKk' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -428,7 +494,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':_AttrLl' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -441,7 +510,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':my-custom_prop' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 46
         }
       ]
     },
@@ -454,7 +526,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':myAge.sync' must be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 42
         }
       ]
     },
@@ -467,7 +542,10 @@ ruleTester.run('attribute-hyphenation', rule, {
         {
           message: "Attribute ':my-age.sync' can't be hyphenated.",
           type: 'VDirectiveKey',
-          line: 1
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 43
         }
       ]
     },
@@ -490,7 +568,9 @@ ruleTester.run('attribute-hyphenation', rule, {
           message: "Attribute 'my-prop' can't be hyphenated.",
           type: 'VIdentifier',
           line: 3,
-          column: 17
+          column: 17,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     },
@@ -513,7 +593,9 @@ ruleTester.run('attribute-hyphenation', rule, {
           message: "Attribute 'myProp' must be hyphenated.",
           type: 'VIdentifier',
           line: 3,
-          column: 17
+          column: 17,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     }
