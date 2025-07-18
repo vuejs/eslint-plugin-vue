@@ -17,6 +17,7 @@ This rule is the same rule as core [no-negated-condition] rule but it applies to
 
 ## :couple: Related Rules
 
+- [`vue/no-negated-v-if-condition`](https://eslint.vuejs.org/rules/no-negated-v-if-condition.html)
 - [unicorn/no-negated-condition](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-negated-condition.md)
 
 ## :books: Further Reading
