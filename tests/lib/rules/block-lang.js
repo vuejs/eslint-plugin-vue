@@ -44,7 +44,9 @@ tester.run('block-lang', rule, {
         {
           message: `Only "ts" can be used for the 'lang' attribute of '<script>'.`,
           line: 2,
-          column: 15
+          column: 15,
+          endLine: 2,
+          endColumn: 24
         }
       ]
     },
@@ -56,7 +58,9 @@ tester.run('block-lang', rule, {
         {
           message: `Only "ts" can be used for the 'lang' attribute of '<script>'.`,
           line: 2,
-          column: 15
+          column: 15,
+          endLine: 2,
+          endColumn: 24
         }
       ]
     },
@@ -68,7 +72,9 @@ tester.run('block-lang', rule, {
         {
           message: "The 'lang' attribute of '<script>' is missing.",
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -80,7 +86,9 @@ tester.run('block-lang', rule, {
         {
           message: `Only "ts" can be used for the 'lang' attribute of '<script>'.`,
           line: 2,
-          column: 15
+          column: 15,
+          endLine: 2,
+          endColumn: 22
         }
       ]
     },
@@ -91,7 +99,9 @@ tester.run('block-lang', rule, {
         {
           message: "Do not specify the 'lang' attribute of '<script>'.",
           line: 1,
-          column: 30
+          column: 30,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -103,7 +113,9 @@ tester.run('block-lang', rule, {
           message:
             "Do not explicitly specify the default language for the 'lang' attribute of '<script>'.",
           line: 1,
-          column: 30
+          column: 30,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -114,7 +126,9 @@ tester.run('block-lang', rule, {
         {
           message: "Do not specify the 'lang' attribute of '<script>'.",
           line: 1,
-          column: 30
+          column: 30,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -126,7 +140,9 @@ tester.run('block-lang', rule, {
         {
           message: "The 'lang' attribute of '<i18n>' is missing.",
           line: 1,
-          column: 1
+          column: 1,
+          endLine: 1,
+          endColumn: 7
         }
       ]
     },
@@ -139,7 +155,9 @@ tester.run('block-lang', rule, {
           message:
             "Only \"json\" can be used for the 'lang' attribute of '<i18n>'. Or, not specifying the `lang` attribute is allowed.",
           line: 2,
-          column: 13
+          column: 13,
+          endLine: 2,
+          endColumn: 24
         }
       ]
     },
@@ -152,7 +170,9 @@ tester.run('block-lang', rule, {
           message:
             'Only "json", and "yaml" can be used for the \'lang\' attribute of \'<i18n>\'. Or, not specifying the `lang` attribute is allowed.',
           line: 2,
-          column: 13
+          column: 13,
+          endLine: 2,
+          endColumn: 24
         }
       ]
     },
@@ -165,17 +185,23 @@ tester.run('block-lang', rule, {
         {
           message: "Do not specify the 'lang' attribute of '<template>'.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 21
         },
         {
           message: "Do not specify the 'lang' attribute of '<script>'.",
           line: 2,
-          column: 15
+          column: 15,
+          endLine: 2,
+          endColumn: 24
         },
         {
           message: "Do not specify the 'lang' attribute of '<style>'.",
           line: 3,
-          column: 14
+          column: 14,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     }
