@@ -156,7 +156,7 @@ tester.run('block-lang', rule, {
       errors: [
         {
           message:
-            "Only 'json' can be used for the 'lang' attribute of '<i18n>'. Or, not specifying the `lang` attribute is allowed.",
+            "Only 'json' can be used for the 'lang' attribute of '<i18n>'. Or, not specifying the 'lang' attribute is allowed.",
           line: 2,
           column: 13,
           endLine: 2,
@@ -171,7 +171,7 @@ tester.run('block-lang', rule, {
       errors: [
         {
           message:
-            "Only 'json', and 'yaml' can be used for the 'lang' attribute of '<i18n>'. Or, not specifying the `lang` attribute is allowed.",
+            "Only 'json', and 'yaml' can be used for the 'lang' attribute of '<i18n>'. Or, not specifying the 'lang' attribute is allowed.",
           line: 2,
           column: 13,
           endLine: 2,
