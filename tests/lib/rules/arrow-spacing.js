@@ -48,11 +48,17 @@ tester.run('arrow-spacing', rule, {
       errors: [
         {
           message: 'Missing space before =>.',
-          line: 3
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 25
         },
         {
           message: 'Missing space after =>.',
-          line: 3
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     },
@@ -68,11 +74,17 @@ tester.run('arrow-spacing', rule, {
       errors: [
         {
           message: 'Missing space before =>.',
-          line: 3
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 26
         },
         {
           message: 'Missing space after =>.',
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 29
         }
       ]
     },
@@ -94,11 +106,17 @@ tester.run('arrow-spacing', rule, {
       errors: [
         {
           message: 'Missing space before =>.',
-          line: 4
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: 'Missing space after =>.',
-          line: 4
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -115,11 +133,17 @@ tester.run('arrow-spacing', rule, {
       errors: [
         {
           message: 'Unexpected space before =>.',
-          line: 3
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 25
         },
         {
           message: 'Unexpected space after =>.',
-          line: 3
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     }

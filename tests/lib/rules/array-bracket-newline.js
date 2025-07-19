@@ -40,61 +40,145 @@ tester.run('array-bracket-newline', rule, {
     {
       code: '<template><div :attr="[\na]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
-      errors: ["There should be no linebreak after '['."]
+      errors: [
+        {
+          message: "There should be no linebreak after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><div :attr="[a\n]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
-      errors: ["There should be no linebreak before ']'."]
+      errors: [
+        {
+          message: "There should be no linebreak before ']'.",
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2
+        }
+      ]
     },
     {
       code: '<template><div :attr="[\na\n]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
       errors: [
-        "There should be no linebreak after '['.",
-        "There should be no linebreak before ']'."
+        {
+          message: "There should be no linebreak after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        },
+        {
+          message: "There should be no linebreak before ']'.",
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2
+        }
       ]
     },
     {
       code: '<template><div :attr="[\na]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
       options: ['never'],
-      errors: ["There should be no linebreak after '['."]
+      errors: [
+        {
+          message: "There should be no linebreak after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><div :attr="[a\n]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
       options: ['never'],
-      errors: ["There should be no linebreak before ']'."]
+      errors: [
+        {
+          message: "There should be no linebreak before ']'.",
+          line: 2,
+          column: 1,
+          endLine: 2,
+          endColumn: 2
+        }
+      ]
     },
     {
       code: '<template><div :attr="[\na\n]" /></template>',
       output: '<template><div :attr="[a]" /></template>',
       options: ['never'],
       errors: [
-        "There should be no linebreak after '['.",
-        "There should be no linebreak before ']'."
+        {
+          message: "There should be no linebreak after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        },
+        {
+          message: "There should be no linebreak before ']'.",
+          line: 3,
+          column: 1,
+          endLine: 3,
+          endColumn: 2
+        }
       ]
     },
     {
       code: '<template><div :attr="[\na]" /></template>',
       output: '<template><div :attr="[\na\n]" /></template>',
       options: ['always'],
-      errors: ["A linebreak is required before ']'."]
+      errors: [
+        {
+          message: "A linebreak is required before ']'.",
+          line: 2,
+          column: 2,
+          endLine: 2,
+          endColumn: 3
+        }
+      ]
     },
     {
       code: '<template><div :attr="[a\n]" /></template>',
       output: '<template><div :attr="[\na\n]" /></template>',
       options: ['always'],
-      errors: ["A linebreak is required after '['."]
+      errors: [
+        {
+          message: "A linebreak is required after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><div :attr="[a]" /></template>',
       output: '<template><div :attr="[\na\n]" /></template>',
       options: ['always'],
       errors: [
-        "A linebreak is required after '['.",
-        "A linebreak is required before ']'."
+        {
+          message: "A linebreak is required after '['.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        },
+        {
+          message: "A linebreak is required before ']'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 26
+        }
       ]
     },
     {
@@ -102,8 +186,20 @@ tester.run('array-bracket-newline', rule, {
       output: '<template><div :[[attr]]="[\na\n]" /></template>',
       options: ['always'],
       errors: [
-        "A linebreak is required after '['.",
-        "A linebreak is required before ']'."
+        {
+          message: "A linebreak is required after '['.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 28
+        },
+        {
+          message: "A linebreak is required before ']'.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 30
+        }
       ]
     }
   ]
