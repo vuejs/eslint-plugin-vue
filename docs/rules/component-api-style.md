@@ -14,7 +14,7 @@ since: v7.18.0
 
 This rule aims to make the API style you use to define Vue components consistent in your project.
 
-For example, if you want to allow only `<script setup>` and Composition API.  
+For example, if you want to allow only `<script setup>` and Composition API.
 (This is the default for this rule.)
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error']}">
@@ -74,16 +74,43 @@ export default {
 ```json
 {
   "vue/component-api-style": ["error",
-    ["script-setup", "composition"] // "script-setup", "composition", "composition-vue2", or "options"
+    ["script-setup", "composition"] // "script-setup", "script-setup-vapor", "composition", "composition-vue2", or "options"
   ]
 }
 ```
 
 - Array options ... Defines the API styles you want to allow. Default is `["script-setup", "composition"]`. You can use the following values.
   - `"script-setup"` ... If set, allows [`<script setup>`](https://vuejs.org/api/sfc-script-setup.html).
+  - `"script-setup-vapor"` ... If set, allows [`<script setup vapor>`](https://vuejs.org/api/sfc-script-setup.html) (Vue 3.6+).
   - `"composition"` ... If set, allows [Composition API](https://vuejs.org/api/#composition-api) (not `<script setup>`).
   - `"composition-vue2"` ... If set, allows [Composition API for Vue 2](https://github.com/vuejs/composition-api) (not `<script setup>`). In particular, it allows `render`, `renderTracked` and `renderTriggered` alongside `setup`.
   - `"options"` ... If set, allows Options API.
+
+### `["script-setup-vapor"]`
+
+<eslint-code-block :rules="{'vue/component-api-style': ['error', ['script-setup-vapor']]}">
+
+```vue
+<!-- ✓ GOOD -->
+<script setup vapor>
+import { ref } from 'vue'
+const msg = ref('Hello World!')
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/component-api-style': ['error', ['script-setup-vapor']]}">
+
+```vue
+<!-- ✗ BAD -->
+<script setup>
+import { ref } from 'vue'
+const msg = ref('Hello World!')
+</script>
+```
+
+</eslint-code-block>
 
 ### `["options"]`
 
