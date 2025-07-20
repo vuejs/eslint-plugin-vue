@@ -63,7 +63,10 @@ tester.run('comma-dangle', rule, {
       errors: [
         {
           message: 'Unexpected trailing comma.',
-          line: 3
+          line: 3,
+          column: 41,
+          endLine: 3,
+          endColumn: 42
         }
       ]
     },
@@ -84,7 +87,10 @@ tester.run('comma-dangle', rule, {
       errors: [
         {
           message: 'Unexpected trailing comma.',
-          line: 3
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     },
@@ -113,11 +119,17 @@ tester.run('comma-dangle', rule, {
       errors: [
         {
           message: 'Unexpected trailing comma.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message: 'Missing trailing comma.',
-          line: 7
+          line: 7,
+          column: 16,
+          endLine: 8,
+          endColumn: 1
         }
       ]
     },
@@ -132,7 +144,11 @@ tester.run('comma-dangle', rule, {
       </template>`,
       errors: [
         {
-          message: 'Unexpected trailing comma.'
+          message: 'Unexpected trailing comma.',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     },
@@ -148,7 +164,11 @@ tester.run('comma-dangle', rule, {
       options: ['always'],
       errors: [
         {
-          message: 'Missing trailing comma.'
+          message: 'Missing trailing comma.',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     }
