@@ -149,7 +149,10 @@ tester.run('define-emits-declaration', rule, {
       errors: [
         {
           message: 'Use type based declaration instead of runtime declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     },
@@ -164,7 +167,10 @@ tester.run('define-emits-declaration', rule, {
       errors: [
         {
           message: 'Use type based declaration instead of runtime declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     },
@@ -184,7 +190,10 @@ tester.run('define-emits-declaration', rule, {
       errors: [
         {
           message: 'Use type based declaration instead of runtime declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     },
@@ -207,7 +216,10 @@ tester.run('define-emits-declaration', rule, {
       errors: [
         {
           message: 'Use runtime declaration instead of type based declaration.',
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 6,
+          endColumn: 13
         }
       ]
     },
@@ -231,12 +243,18 @@ tester.run('define-emits-declaration', rule, {
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 42
         },
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 45
         }
       ]
     },
@@ -260,7 +278,10 @@ tester.run('define-emits-declaration', rule, {
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 45
         }
       ]
     },
@@ -281,7 +302,10 @@ tester.run('define-emits-declaration', rule, {
         {
           message:
             'Use new type literal declaration instead of the old call signature declaration.',
-          line: 3
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 67
         }
       ]
     }
