@@ -87,7 +87,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'preferDestructuring',
           line: 3,
-          column: 21
+          column: 21,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     },
@@ -102,7 +104,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'preferDestructuring',
           line: 3,
-          column: 34
+          column: 34,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     },
@@ -117,7 +121,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'avoidWithDefaults',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 35
         }
       ]
     },
@@ -135,7 +141,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'preferDestructuring',
           line: 3,
-          column: 34
+          column: 34,
+          endLine: 3,
+          endColumn: 65
         }
       ]
     },
@@ -153,7 +161,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'avoidWithDefaults',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 35
         }
       ]
     },
@@ -169,7 +179,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'avoidDestructuring',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -185,7 +197,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'avoidDestructuring',
           line: 3,
-          column: 36
+          column: 36,
+          endLine: 3,
+          endColumn: 56
         }
       ]
     },
@@ -204,7 +218,9 @@ tester.run('define-props-destructuring', rule, {
         {
           messageId: 'avoidDestructuring',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     }
