@@ -53,12 +53,16 @@ tester.run('block-tag-newline', rule, {
         {
           message: "A line break is required after '<template>'.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 11
         },
         {
           message: "A line break is required after '<script>'.",
           line: 3,
-          column: 9
+          column: 9,
+          endLine: 3,
+          endColumn: 9
         }
       ]
     },
@@ -69,12 +73,16 @@ tester.run('block-tag-newline', rule, {
         {
           message: "A line break is required before '</template>'.",
           line: 2,
-          column: 8
+          column: 8,
+          endLine: 2,
+          endColumn: 8
         },
         {
           message: "A line break is required before '</script>'.",
           line: 4,
-          column: 6
+          column: 6,
+          endLine: 4,
+          endColumn: 6
         }
       ]
     },
@@ -86,22 +94,30 @@ tester.run('block-tag-newline', rule, {
         {
           message: "A line break is required after '<template>'.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 11
         },
         {
           message: "A line break is required before '</template>'.",
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 7
         },
         {
           message: "A line break is required after '<script>'.",
           line: 3,
-          column: 9
+          column: 9,
+          endLine: 3,
+          endColumn: 9
         },
         {
           message: "A line break is required before '</script>'.",
           line: 4,
-          column: 6
+          column: 6,
+          endLine: 4,
+          endColumn: 6
         }
       ]
     },
@@ -113,22 +129,30 @@ tester.run('block-tag-newline', rule, {
         {
           message: "There should be no line break after '<template>'.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 2,
+          endColumn: 1
         },
         {
           message: "There should be no line break after '<template>'.",
           line: 3,
-          column: 7
+          column: 7,
+          endLine: 4,
+          endColumn: 1
         },
         {
           message: "There should be no line break after '<script>'.",
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 6,
+          endColumn: 1
         },
         {
           message: "There should be no line break after '<script>'.",
           line: 6,
-          column: 6
+          column: 6,
+          endLine: 7,
+          endColumn: 1
         }
       ]
     },
@@ -141,22 +165,30 @@ tester.run('block-tag-newline', rule, {
         {
           message: "A line break is required after '<template>'.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 11
         },
         {
           message: "A line break is required before '</template>'.",
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 7
         },
         {
           message: "A line break is required after '<script>'.",
           line: 3,
-          column: 9
+          column: 9,
+          endLine: 3,
+          endColumn: 9
         },
         {
           message: "A line break is required before '</script>'.",
           line: 3,
-          column: 14
+          column: 14,
+          endLine: 3,
+          endColumn: 14
         }
       ]
     },
@@ -170,25 +202,33 @@ tester.run('block-tag-newline', rule, {
           message:
             "Expected 1 line break after '<template>', but 2 line breaks found.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 3,
+          endColumn: 1
         },
         {
           message:
             "Expected 1 line break  before '</template>', but 2 line breaks found.",
           line: 3,
-          column: 8
+          column: 8,
+          endLine: 5,
+          endColumn: 1
         },
         {
           message:
             "Expected 1 line break after '<script>', but 2 line breaks found.",
           line: 6,
-          column: 9
+          column: 9,
+          endLine: 8,
+          endColumn: 1
         },
         {
           message:
             "Expected 1 line break  before '</script>', but 2 line breaks found.",
           line: 9,
-          column: 6
+          column: 6,
+          endLine: 11,
+          endColumn: 1
         }
       ]
     },
@@ -204,13 +244,17 @@ tester.run('block-tag-newline', rule, {
           message:
             "Expected 2 line breaks after '<template>', but 3 line breaks found.",
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 4,
+          endColumn: 1
         },
         {
           message:
             "Expected 2 line breaks  before '</script>', but 3 line breaks found.",
           line: 10,
-          column: 6
+          column: 6,
+          endLine: 13,
+          endColumn: 1
         }
       ]
     },
@@ -231,8 +275,20 @@ tester.run('block-tag-newline', rule, {
         }
       ],
       errors: [
-        "There should be no line break after '<script>'.",
-        "A line break is required before '</docs>'."
+        {
+          message: "There should be no line break after '<script>'.",
+          line: 5,
+          column: 6,
+          endLine: 8,
+          endColumn: 1
+        },
+        {
+          message: "A line break is required before '</docs>'.",
+          line: 9,
+          column: 2,
+          endLine: 9,
+          endColumn: 2
+        }
       ]
     }
   ]
