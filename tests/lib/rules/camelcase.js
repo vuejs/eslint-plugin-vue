@@ -34,7 +34,10 @@ tester.run('camelcase', rule, {
       errors: [
         {
           message: "Identifier 'my_pref' is not in camel case.",
-          line: 3
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 32
         }
       ]
     },
@@ -48,7 +51,10 @@ tester.run('camelcase', rule, {
       errors: [
         {
           message: "Identifier 'my_pref' is not in camel case.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -62,7 +68,10 @@ tester.run('camelcase', rule, {
       errors: [
         {
           message: "Identifier 'my_pref' is not in camel case.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     }
