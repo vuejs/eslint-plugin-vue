@@ -133,6 +133,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19
         }
       ]
@@ -162,6 +163,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19
         }
       ]
@@ -192,6 +194,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19
         }
       ]
@@ -222,6 +225,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19
         }
       ]
@@ -252,6 +256,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 22
         }
       ]
@@ -276,6 +281,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -313,6 +319,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -350,6 +357,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 22,
           suggestions: [
             {
@@ -387,6 +395,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -424,6 +433,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -461,6 +471,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -498,6 +509,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
@@ -536,6 +548,7 @@ tester.run('component-options-name-casing', rule, {
           },
           line: 4,
           column: 13,
+          endLine: 4,
           endColumn: 19,
           suggestions: [
             {
