@@ -29,12 +29,28 @@ tester.run('dot-notation', rule, {
     {
       code: `<template><div :attr="foo['bar']" /></template>`,
       output: `<template><div :attr="foo.bar" /></template>`,
-      errors: ['["bar"] is better written in dot notation.']
+      errors: [
+        {
+          message: '["bar"] is better written in dot notation.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     },
     {
       code: `<template><div :[foo[\`bar\`]]="a" /></template>`,
       output: `<template><div :[foo.bar]="a" /></template>`,
-      errors: ['[`bar`] is better written in dot notation.']
+      errors: [
+        {
+          message: '[`bar`] is better written in dot notation.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 27
+        }
+      ]
     },
     // CSS vars injection
     {
@@ -50,7 +66,15 @@ tester.run('dot-notation', rule, {
         color: v-bind(foo.bar)
       }
       </style>`,
-      errors: ['[`bar`] is better written in dot notation.']
+      errors: [
+        {
+          message: '[`bar`] is better written in dot notation.',
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
+      ]
     },
     {
       code: `
@@ -65,7 +89,15 @@ tester.run('dot-notation', rule, {
         color: v-bind("foo.bar")
       }
       </style>`,
-      errors: ['[`bar`] is better written in dot notation.']
+      errors: [
+        {
+          message: '[`bar`] is better written in dot notation.',
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
     }
   ]
 })
