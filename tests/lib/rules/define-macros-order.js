@@ -354,7 +354,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 39
         }
       ]
     },
@@ -390,7 +393,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 10,
+          endColumn: 13
         }
       ]
     },
@@ -423,7 +429,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 8,
+          endColumn: 13
         }
       ]
     },
@@ -455,7 +464,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 52
         }
       ]
     },
@@ -489,7 +501,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('definePage'),
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 10,
+          endColumn: 13
         }
       ]
     },
@@ -532,7 +547,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 65
         }
       ]
     },
@@ -587,7 +605,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('definePage'),
-          line: 15
+          line: 15,
+          column: 11,
+          endLine: 17,
+          endColumn: 13
         }
       ]
     },
@@ -625,7 +646,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 42
         }
       ]
     },
@@ -680,7 +704,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
-          line: 16
+          line: 16,
+          column: 11,
+          endLine: 16,
+          endColumn: 59
         }
       ]
     },
@@ -699,7 +726,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineEmits'),
-          line: 3
+          line: 3,
+          column: 56,
+          endLine: 3,
+          endColumn: 84
         }
       ]
     },
@@ -718,7 +748,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('definePage'),
-          line: 3
+          line: 3,
+          column: 56,
+          endLine: 3,
+          endColumn: 83
         }
       ]
     },
@@ -753,7 +786,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 11
+          line: 11,
+          column: 11,
+          endLine: 11,
+          endColumn: 56
         }
       ]
     },
@@ -768,7 +804,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 2
+          line: 2,
+          column: 52,
+          endLine: 2,
+          endColumn: 82
         }
       ]
     },
@@ -790,7 +829,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 41
         }
       ]
     },
@@ -814,7 +856,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineProps'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 41
         }
       ]
     },
@@ -838,7 +883,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineCustom'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 42
         }
       ]
     },
@@ -862,7 +910,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineCustom'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 57
         }
       ]
     },
@@ -914,7 +965,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineOptions'),
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 28
         }
       ]
     },
@@ -962,7 +1016,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineOptions'),
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 28
         }
       ]
     },
@@ -984,6 +1041,9 @@ tester.run('define-macros-order', rule, {
         {
           message: defineExposeNotTheLast,
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 27,
           suggestions: [
             {
               desc: putExposeAtBottom,
@@ -1042,6 +1102,9 @@ tester.run('define-macros-order', rule, {
         {
           message: defineExposeNotTheLast,
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 27,
           suggestions: [
             {
               desc: putExposeAtBottom,
@@ -1064,7 +1127,10 @@ tester.run('define-macros-order', rule, {
         },
         {
           message: message('defineOptions'),
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 28
         }
       ]
     },
@@ -1096,7 +1162,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineModel'),
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 45
         }
       ]
     },
@@ -1124,7 +1193,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineModel'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 47
         }
       ]
     },
@@ -1162,7 +1234,10 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineSomething'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 53
         }
       ]
     },
@@ -1195,11 +1270,17 @@ tester.run('define-macros-order', rule, {
       errors: [
         {
           message: message('defineModel'),
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 37
         },
         {
           message: defineExposeNotTheLast,
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 27,
           suggestions: [
             {
               messageId: 'putExposeAtTheLast',

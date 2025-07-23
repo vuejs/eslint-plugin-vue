@@ -70,7 +70,10 @@ tester.run('comma-style', rule, {
       errors: [
         {
           message: "',' should be placed last.",
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -89,7 +92,10 @@ tester.run('comma-style', rule, {
       errors: [
         {
           message: "',' should be placed last.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 14
         }
       ]
     },
@@ -107,8 +113,11 @@ tester.run('comma-style', rule, {
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed first."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed first.",
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     },
@@ -130,8 +139,11 @@ tester.run('comma-style', rule, {
       options: ['first', { exceptions: { FunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed first."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed first.",
+          line: 3,
+          column: 36,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -151,8 +163,11 @@ tester.run('comma-style', rule, {
       options: ['last', { exceptions: { FunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed last."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed last.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     }

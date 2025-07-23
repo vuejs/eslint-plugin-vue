@@ -120,7 +120,10 @@ tester.run('define-props-declaration', rule, {
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 5,
+          endColumn: 9
         }
       ]
     },
@@ -137,7 +140,10 @@ tester.run('define-props-declaration', rule, {
       errors: [
         {
           message: 'Use type-based declaration instead of runtime declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 5,
+          endColumn: 9
         }
       ]
     },
@@ -159,7 +165,10 @@ tester.run('define-props-declaration', rule, {
       errors: [
         {
           message: 'Use runtime declaration instead of type-based declaration.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     }
