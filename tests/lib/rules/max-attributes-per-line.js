@@ -44,43 +44,99 @@ ruleTester.run('max-attributes-per-line', rule, {
       code: `<template><component name="John Doe" age="30"></component></template>`,
       output: `<template><component name="John Doe"
 age="30"></component></template>`,
-      errors: ["'age' should be on a new line."]
+      errors: [
+        {
+          message: "'age' should be on a new line.",
+          line: 1,
+          column: 38,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
     },
     {
       code: `<template><component :name="user.name" :age="user.age"></component></template>`,
       output: `<template><component :name="user.name"
 :age="user.age"></component></template>`,
-      errors: ["':age' should be on a new line."]
+      errors: [
+        {
+          message: "':age' should be on a new line.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 55
+        }
+      ]
     },
     {
       code: `<template><component :is="test" v-bind="user"></component></template>`,
       output: `<template><component :is="test"
 v-bind="user"></component></template>`,
-      errors: ["'v-bind' should be on a new line."]
+      errors: [
+        {
+          message: "'v-bind' should be on a new line.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
     },
     {
       code: `<template><component :name="user.name" @buy="buyProduct"></component></template>`,
       output: `<template><component :name="user.name"
 @buy="buyProduct"></component></template>`,
-      errors: ["'@buy' should be on a new line."]
+      errors: [
+        {
+          message: "'@buy' should be on a new line.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 57
+        }
+      ]
     },
     {
       code: `<template><component :name="user.name" @click.stop></component></template>`,
       output: `<template><component :name="user.name"
 @click.stop></component></template>`,
-      errors: ["'@click.stop' should be on a new line."]
+      errors: [
+        {
+          message: "'@click.stop' should be on a new line.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 51
+        }
+      ]
     },
     {
       code: `<template><component :name="user.name" v-if="something"></component></template>`,
       output: `<template><component :name="user.name"
 v-if="something"></component></template>`,
-      errors: ["'v-if' should be on a new line."]
+      errors: [
+        {
+          message: "'v-if' should be on a new line.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 56
+        }
+      ]
     },
     {
       code: `<template><component name="John Doe"    v-bind:age="user.age"></component></template>`,
       output: `<template><component name="John Doe"
 v-bind:age="user.age"></component></template>`,
-      errors: ["'v-bind:age' should be on a new line."]
+      errors: [
+        {
+          message: "'v-bind:age' should be on a new line.",
+          line: 1,
+          column: 41,
+          endLine: 1,
+          endColumn: 62
+        }
+      ]
     },
     {
       code: `<template><component name="John Doe" age="30" job="Vet"></component></template>`,
@@ -91,7 +147,10 @@ job="Vet"></component></template>`,
         {
           message: "'job' should be on a new line.",
           type: 'VAttribute',
-          line: 1
+          line: 1,
+          column: 47,
+          endLine: 1,
+          endColumn: 56
         }
       ]
     },
@@ -112,7 +171,10 @@ age="30"
         {
           message: "'age' should be on a new line.",
           type: 'VAttribute',
-          line: 2
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 33
         }
       ]
     },
@@ -133,7 +195,10 @@ age="30"
         {
           message: "'age' should be on a new line.",
           type: 'VAttribute',
-          line: 2
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 33
         }
       ]
     }
