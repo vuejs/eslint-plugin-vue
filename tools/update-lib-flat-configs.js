@@ -44,17 +44,26 @@ function formatRules(rules, categoryId) {
       return [rule.ruleId, options]
     })
   )
-  return JSON.stringify(obj, null, 2)
+  // use the ruleLevel variable for rules set to warn so that they can
+  // be made to error with an env variable if desired
+  return JSON.stringify(obj, null, 2).replaceAll('"warn"', 'ruleLevel')
 }
 
 function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
+  const formattedRules = formatRules(category.rules, category.categoryId)
+  const ruleLevelVariable = formattedRules.includes('ruleLevel')
+    ? "const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'"
+    : ''
+
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+${ruleLevelVariable}
+
 module.exports = [
   {
     name: 'vue/base/setup',
@@ -79,7 +88,7 @@ module.exports = [
       parser: require('vue-eslint-parser'),
       sourceType: 'module',
     },
-    rules: ${formatRules(category.rules, category.categoryId)},
+    rules: ${formattedRules},
     processor: 'vue/vue'
   }
 ]
@@ -93,11 +102,13 @@ module.exports = [
 'use strict'
 const config = require('./${extendsCategoryId}.js')
 
+${ruleLevelVariable}
+
 module.exports = [
   ...config,
   {
     name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}/rules',
-    rules: ${formatRules(category.rules, category.categoryId)},
+    rules: ${formattedRules},
   }
 ]
 `
