@@ -68,23 +68,38 @@ tester.run('keyword-spacing', rule, {
       errors: [
         {
           message: 'Expected space(s) after "if".',
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 13
         },
         {
           message: 'Expected space(s) before "else".',
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 16
         },
         {
           message: 'Expected space(s) after "if".',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 19
         },
         {
           message: 'Expected space(s) before "else".',
-          line: 7
+          line: 7,
+          column: 12,
+          endLine: 7,
+          endColumn: 16
         },
         {
           message: 'Expected space(s) after "else".',
-          line: 7
+          line: 7,
+          column: 12,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -115,23 +130,38 @@ tester.run('keyword-spacing', rule, {
       errors: [
         {
           message: 'Unexpected space(s) after "if".',
-          line: 3
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 14
         },
         {
           message: 'Unexpected space(s) before "else".',
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 13
         },
         {
           message: 'Unexpected space(s) after "if".',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 21
         },
         {
           message: 'Unexpected space(s) before "else".',
-          line: 7
+          line: 7,
+          column: 12,
+          endLine: 7,
+          endColumn: 13
         },
         {
           message: 'Unexpected space(s) after "else".',
-          line: 7
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -145,7 +175,10 @@ tester.run('keyword-spacing', rule, {
       errors: [
         {
           message: 'Expected space(s) after "return".',
-          line: 2
+          line: 2,
+          column: 56,
+          endLine: 2,
+          endColumn: 62
         }
       ]
     }
