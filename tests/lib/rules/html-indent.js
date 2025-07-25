@@ -63,7 +63,10 @@ function loadPatterns(additionalValid, additionalInvalid) {
                 message: `Expected indentation of ${line.indentSize} ${kind}${
                   line.indentSize === 1 ? '' : 's'
                 } but found 0 ${kind}s.`,
-                line: line.number + 1
+                line: line.number + 1,
+                column: 1,
+                endLine: line.number + 1,
+                endColumn: 1
               }
         )
         .filter(Boolean)
@@ -447,7 +450,10 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 12 spaces but found 10 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 11
           }
         ]
       },
@@ -472,7 +478,10 @@ tester.run(
         errors: [
           {
             message: String.raw`Expected " " character, but found "\t" character.`,
-            line: 3
+            line: 3,
+            column: 3,
+            endLine: 3,
+            endColumn: 4
           }
         ]
       },
@@ -496,7 +505,10 @@ tester.run(
         errors: [
           {
             message: String.raw`Expected "\t" character, but found " " character.`,
-            line: 3
+            line: 3,
+            column: 2,
+            endLine: 3,
+            endColumn: 3
           }
         ]
       },
@@ -527,27 +539,45 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 5
+            line: 5,
+            column: 1,
+            endLine: 5,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 7
+            line: 7,
+            column: 1,
+            endLine: 7,
+            endColumn: 1
           }
         ]
       },
@@ -576,11 +606,17 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 4 spaces but found 2 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 3
           },
           {
             message: 'Expected indentation of 4 spaces but found 2 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 3
           }
         ]
       },
@@ -609,23 +645,38 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 5
+            line: 5,
+            column: 1,
+            endLine: 5,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 1
           }
         ]
       },
@@ -654,19 +705,31 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 7
+            line: 7,
+            column: 1,
+            endLine: 7,
+            endColumn: 1
           }
         ]
       },
@@ -699,7 +762,10 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 4 spaces but found 8 spaces.',
-            line: 5
+            line: 5,
+            column: 1,
+            endLine: 5,
+            endColumn: 9
           }
         ]
       },
@@ -735,15 +801,24 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 8 spaces but found 6 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 7
           },
           {
             message: 'Expected indentation of 12 spaces but found 8 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 9
           },
           {
             message: 'Expected indentation of 12 spaces but found 8 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 9
           }
         ]
       },
@@ -776,15 +851,24 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           }
         ]
       },
@@ -823,31 +907,52 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 5
+            line: 5,
+            column: 1,
+            endLine: 5,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 7
+            line: 7,
+            column: 1,
+            endLine: 7,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 8
+            line: 8,
+            column: 1,
+            endLine: 8,
+            endColumn: 1
           }
         ]
       },
@@ -886,31 +991,52 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 5
+            line: 5,
+            column: 1,
+            endLine: 5,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 6 spaces but found 0 spaces.',
-            line: 6
+            line: 6,
+            column: 1,
+            endLine: 6,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 4 spaces but found 0 spaces.',
-            line: 7
+            line: 7,
+            column: 1,
+            endLine: 7,
+            endColumn: 1
           },
           {
             message: 'Expected indentation of 2 spaces but found 0 spaces.',
-            line: 8
+            line: 8,
+            column: 1,
+            endLine: 8,
+            endColumn: 1
           }
         ]
       },
@@ -932,7 +1058,10 @@ tester.run(
         errors: [
           {
             message: String.raw`Expected "\t" character, but found " " character.`,
-            line: 2
+            line: 2,
+            column: 2,
+            endLine: 2,
+            endColumn: 3
           }
         ]
       },
@@ -951,7 +1080,10 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 2 spaces but found 4 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 5
           }
         ]
       }
