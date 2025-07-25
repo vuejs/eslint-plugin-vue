@@ -124,7 +124,11 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : null
+              : null,
+            line: 3,
+            column: 16,
+            endLine: 3,
+            endColumn: 29
           }
         ]
       },
@@ -162,7 +166,11 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : null
+              : null,
+            line: 4,
+            column: 15,
+            endLine: 4,
+            endColumn: 22
           }
         ]
       }
