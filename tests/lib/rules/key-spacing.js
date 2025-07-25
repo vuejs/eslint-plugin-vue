@@ -24,8 +24,20 @@ tester.run('key-spacing', rule, {
       code: '<template><div :attr="{a :1}" /></template>',
       output: '<template><div :attr="{a: 1}" /></template>',
       errors: [
-        "Extra space after key 'a'.",
-        "Missing space before value for key 'a'."
+        {
+          message: "Extra space after key 'a'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 26
+        },
+        {
+          message: "Missing space before value for key 'a'.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 28
+        }
       ]
     },
     {
@@ -33,8 +45,20 @@ tester.run('key-spacing', rule, {
       output: '<template><div :[{a:1}[`a`]]="{a : 1}[`a`]" /></template>',
       options: [{ beforeColon: true }],
       errors: [
-        "Missing space after key 'a'.",
-        "Missing space before value for key 'a'."
+        {
+          message: "Missing space after key 'a'.",
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 33
+        },
+        {
+          message: "Missing space before value for key 'a'.",
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 35
+        }
       ]
     }
   ]
