@@ -161,7 +161,9 @@ name="John Doe"
         {
           message: 'Expected a linebreak before this attribute.',
           line: 8,
-          column: 20
+          column: 20,
+          endLine: 8,
+          endColumn: 35
         }
       ]
     },
@@ -203,12 +205,16 @@ name="John Doe"
         {
           message: 'Expected no linebreak before this attribute.',
           line: 4,
-          column: 11
+          column: 11,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: 'Expected no linebreak before this attribute.',
           line: 13,
-          column: 11
+          column: 11,
+          endLine: 13,
+          endColumn: 26
         }
       ]
     },
@@ -254,12 +260,16 @@ name="John Doe"
         {
           message: 'Expected a linebreak before this attribute.',
           line: 8,
-          column: 20
+          column: 20,
+          endLine: 8,
+          endColumn: 35
         },
         {
           message: 'Expected a linebreak before this attribute.',
           line: 15,
-          column: 20
+          column: 20,
+          endLine: 15,
+          endColumn: 35
         }
       ]
     }
