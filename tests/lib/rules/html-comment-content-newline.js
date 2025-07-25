@@ -264,13 +264,15 @@ tester.run('html-comment-content-newline', rule, {
           message: "Expected line break after '<!--'.",
           line: 6,
           column: 15,
-          endColumn: 16
+          endColumn: 16,
+          endLine: 6
         },
         {
           message: "Expected line break before '-->'.",
           line: 7,
           column: 20,
-          endColumn: 21
+          endColumn: 21,
+          endLine: 7
         }
       ]
     },
@@ -293,25 +295,29 @@ tester.run('html-comment-content-newline', rule, {
           message: "Expected line break after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 15
+          endColumn: 15,
+          endLine: 3
         },
         {
           message: "Expected line break before '-->'.",
           line: 3,
           column: 22,
-          endColumn: 22
+          endColumn: 22,
+          endLine: 3
         },
         {
           message: "Expected line break after '<!--'.",
           line: 4,
           column: 15,
-          endColumn: 17
+          endColumn: 17,
+          endLine: 4
         },
         {
           message: "Expected line break before '-->'.",
           line: 4,
           column: 24,
-          endColumn: 26
+          endColumn: 26,
+          endLine: 4
         }
       ]
     },
@@ -363,13 +369,15 @@ comment
           message: "Expected line break after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 23
+          endColumn: 23,
+          endLine: 3
         },
         {
           message: "Expected line break before '-->'.",
           line: 3,
           column: 30,
-          endColumn: 38
+          endColumn: 38,
+          endLine: 3
         }
       ]
     },
@@ -383,8 +391,20 @@ comment
       output: null,
       options: ['always', { exceptions: ['+'] }],
       errors: [
-        'Expected line break after exception block.',
-        'Expected line break before exception block.'
+        {
+          message: 'Expected line break after exception block.',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 31
+        },
+        {
+          message: 'Expected line break before exception block.',
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -396,8 +416,20 @@ comment
       output: null,
       options: ['always', { exceptions: ['*'] }],
       errors: [
-        'Expected line break after exception block.',
-        'Expected line break before exception block.'
+        {
+          message: 'Expected line break after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
+        {
+          message: 'Expected line break before exception block.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -413,8 +445,20 @@ comment
         `,
       options: ['always', { exceptions: ['#+#-'] }],
       errors: [
-        'Expected line break after exception block.',
-        "Expected line break before '-->'."
+        {
+          message: 'Expected line break after exception block.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message: "Expected line break before '-->'.",
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -426,11 +470,19 @@ comment
       output: null,
       options: ['always', { exceptions: ['*', '++'] }],
       errors: [
-        'Expected line break after exception block.',
+        {
+          message: 'Expected line break after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
         {
           message: 'Expected line break before exception block.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -443,11 +495,19 @@ comment
       output: null,
       options: ['always', { exceptions: ['*', '++'] }],
       errors: [
-        'Expected line break after exception block.',
+        {
+          message: 'Expected line break after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
         {
           message: 'Expected line break before exception block.',
           line: 3,
-          column: 28
+          column: 28,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     }
