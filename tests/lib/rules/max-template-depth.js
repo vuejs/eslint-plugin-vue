@@ -95,7 +95,10 @@ tester.run('max-template-depth', rule, {
         {
           message:
             'Element is nested too deeply (depth of 4, maximum allowed is 3).',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 20
         }
       ]
     },
@@ -120,7 +123,10 @@ tester.run('max-template-depth', rule, {
         {
           message:
             'Element is nested too deeply (depth of 4, maximum allowed is 3).',
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 19
         }
       ]
     },
@@ -148,19 +154,25 @@ tester.run('max-template-depth', rule, {
           message:
             'Element is nested too deeply (depth of 4, maximum allowed is 3).',
           line: 9,
-          endLine: 12
+          endLine: 12,
+          column: 13,
+          endColumn: 11
         },
         {
           message:
             'Element is nested too deeply (depth of 5, maximum allowed is 3).',
           line: 10,
-          endLine: 10
+          endLine: 10,
+          column: 15,
+          endColumn: 22
         },
         {
           message:
             'Element is nested too deeply (depth of 5, maximum allowed is 3).',
           line: 11,
-          endLine: 12
+          endLine: 12,
+          column: 13,
+          endColumn: 11
         }
       ]
     }
