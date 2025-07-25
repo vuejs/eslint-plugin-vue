@@ -63,7 +63,11 @@ tester.run('enforce-style-attribute', rule, {
       code: `<template></template><script></script><style></style>`,
       errors: [
         {
-          message: 'Plain <style> tags are not allowed. Allowed: scoped.'
+          message: 'Plain <style> tags are not allowed. Allowed: scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -71,7 +75,11 @@ tester.run('enforce-style-attribute', rule, {
       code: `<template></template><script></script><style module></style>`,
       errors: [
         {
-          message: 'The module attribute is not allowed. Allowed: scoped.'
+          message: 'The module attribute is not allowed. Allowed: scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 61
         }
       ]
     },
@@ -81,7 +89,11 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['scoped'] }],
       errors: [
         {
-          message: 'Plain <style> tags are not allowed. Allowed: scoped.'
+          message: 'Plain <style> tags are not allowed. Allowed: scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -90,7 +102,11 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['scoped'] }],
       errors: [
         {
-          message: 'The module attribute is not allowed. Allowed: scoped.'
+          message: 'The module attribute is not allowed. Allowed: scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 61
         }
       ]
     },
@@ -100,7 +116,11 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['module'] }],
       errors: [
         {
-          message: 'Plain <style> tags are not allowed. Allowed: module.'
+          message: 'Plain <style> tags are not allowed. Allowed: module.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -109,7 +129,11 @@ tester.run('enforce-style-attribute', rule, {
       options: [{ allow: ['module'] }],
       errors: [
         {
-          message: 'The scoped attribute is not allowed. Allowed: module.'
+          message: 'The scoped attribute is not allowed. Allowed: module.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 61
         }
       ]
     },
@@ -120,7 +144,11 @@ tester.run('enforce-style-attribute', rule, {
       errors: [
         {
           message:
-            'Plain <style> tags are not allowed. Allowed: module, scoped.'
+            'Plain <style> tags are not allowed. Allowed: module, scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -130,7 +158,11 @@ tester.run('enforce-style-attribute', rule, {
       errors: [
         {
           message:
-            'The module attribute is not allowed. Allowed: plain, scoped.'
+            'The module attribute is not allowed. Allowed: plain, scoped.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 61
         }
       ]
     },
@@ -140,7 +172,11 @@ tester.run('enforce-style-attribute', rule, {
       errors: [
         {
           message:
-            'The scoped attribute is not allowed. Allowed: module, plain.'
+            'The scoped attribute is not allowed. Allowed: module, plain.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 61
         }
       ]
     }
