@@ -504,22 +504,34 @@ tester.run('html-comment-indent', rule, {
         {
           message:
             'Expected relative indentation of 2 spaces but found 0 spaces.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 11
         },
         {
           message:
             'Expected relative indentation of 2 spaces but found 4 spaces.',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 15
         },
         {
           message:
             'Expected relative indentation of 0 spaces but found 2 spaces.',
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 13
         },
         {
           message:
             'Expected base point indentation of 10 spaces, but found 8 spaces.',
-          line: 14
+          line: 14,
+          column: 1,
+          endLine: 14,
+          endColumn: 9
         }
       ]
     },
@@ -544,12 +556,18 @@ tester.run('html-comment-indent', rule, {
         {
           message:
             'Expected relative indentation of 2 spaces but found 0 spaces.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 11
         },
         {
           message:
             'Expected relative indentation of 2 spaces but found 4 spaces.',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 15
         }
       ]
     },
@@ -575,15 +593,24 @@ comment -->
       errors: [
         {
           message: 'Expected indentation of 2 spaces but found 0 spaces.',
-          line: 4
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 1
         },
         {
           message: 'Expected indentation of 2 spaces but found 0 spaces.',
-          line: 5
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 1
         },
         {
           message: 'Expected indentation of 0 spaces but found 2 spaces.',
-          line: 7
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 3
         }
       ]
     },
@@ -610,17 +637,26 @@ comment -->
         {
           message:
             'Expected base point indentation of 2 spaces, but not found.',
-          line: 4
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 1
         },
         {
           message:
             'Expected base point indentation of 2 spaces, but not found.',
-          line: 5
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 1
         },
         {
           message:
             'Expected base point indentation of 2 spaces, but not found.',
-          line: 7
+          line: 7,
+          column: 1,
+          endLine: 7,
+          endColumn: 1
         }
       ]
     },
@@ -643,12 +679,18 @@ comment -->
         {
           message:
             'Expected relative indentation of 2 spaces but found 1 space.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 12
         },
         {
           message:
             'Expected relative indentation of 0 spaces but found 1 space.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -670,11 +712,17 @@ comment -->
       errors: [
         {
           message: String.raw`Expected base point indentation of " \t \t \t ", but found 7 spaces.`,
-          line: 4
+          line: 4,
+          column: 1,
+          endLine: 4,
+          endColumn: 13
         },
         {
           message: String.raw`Expected base point indentation of " \t \t \t ", but found 7 spaces.`,
-          line: 5
+          line: 5,
+          column: 1,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     }
