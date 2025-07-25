@@ -311,11 +311,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -328,11 +330,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -346,11 +350,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 121. Maximum allowed is 120.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 121. Maximum allowed is 120.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -364,11 +370,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 121. Maximum allowed is 120.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -381,7 +389,8 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 121. Maximum allowed is 120.',
-          line: 2
+          line: 2,
+          column: 1
         }
       ]
     },
@@ -394,7 +403,8 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 121. Maximum allowed is 120.',
-          line: 2
+          line: 2,
+          column: 1
         }
       ]
     },
@@ -417,15 +427,18 @@ export default { name: 'fooooooooooooooooooooooooooooooooooooooooooooooooooooooo
       errors: [
         {
           message: 'This line has a length of 82. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 84. Maximum allowed is 80.',
-          line: 5
+          line: 5,
+          column: 1
         },
         {
           message: 'This line has a length of 94. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         }
       ]
     },
@@ -453,43 +466,53 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 6
+          line: 6,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 7
+          line: 7,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 9
+          line: 9,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 11
+          line: 11,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 14
+          line: 14,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 15
+          line: 15,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 16
+          line: 16,
+          column: 1
         }
       ]
     },
@@ -516,43 +539,53 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 5
+          line: 5,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 11
+          line: 11,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 12
+          line: 12,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 13
+          line: 13,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 14
+          line: 14,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 15
+          line: 15,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 16
+          line: 16,
+          column: 1
         }
       ]
     },
@@ -581,7 +614,8 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         }
       ]
     },
@@ -609,7 +643,8 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 15
+          line: 15,
+          column: 1
         }
       ]
     },
@@ -638,19 +673,23 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 16
+          line: 16,
+          column: 1
         }
       ]
     },
@@ -678,19 +717,23 @@ var b /* comment */ // trailing comments .......................................
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 5
+          line: 5,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 13
+          line: 13,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 15
+          line: 15,
+          column: 1
         }
       ]
     },
@@ -709,11 +752,13 @@ var a = 'https://www.example.com/long/long/long/long/long/long/long/long/long/lo
       errors: [
         {
           message: 'This line has a length of 89. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 83. Maximum allowed is 80.',
-          line: 7
+          line: 7,
+          column: 1
         }
       ]
     },
@@ -731,11 +776,13 @@ var a = 'https://www.example.com/long/long/long/long/long/long/long/long/long/lo
       errors: [
         {
           message: 'This line has a length of 83. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 89. Maximum allowed is 80.',
-          line: 6
+          line: 6,
+          column: 1
         }
       ]
     },
@@ -760,19 +807,23 @@ var a = 'str-loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 6
+          line: 6,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 13
+          line: 13,
+          column: 1
         }
       ]
     },
@@ -796,19 +847,23 @@ var a = 'str-loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 6
+          line: 6,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 9
+          line: 9,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 11
+          line: 11,
+          column: 1
         }
       ]
     },
@@ -834,7 +889,8 @@ var a = 'str-loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -859,7 +915,8 @@ var a = 'str-loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 6
+          line: 6,
+          column: 1
         }
       ]
     },
@@ -882,19 +939,23 @@ var b = \`template-looooooooooooooooooooooooooooooooooooooooooooooooooooooooooon
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 5
+          line: 5,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 11
+          line: 11,
+          column: 1
         }
       ]
     },
@@ -916,19 +977,23 @@ var b = \`template-looooooooooooooooooooooooooooooooooooooooooooooooooooooooooon
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 9
+          line: 9,
+          column: 1
         }
       ]
     },
@@ -952,11 +1017,13 @@ var b = \`template-looooooooooooooooooooooooooooooooooooooooooooooooooooooooooon
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 10
+          line: 10,
+          column: 1
         }
       ]
     },
@@ -979,11 +1046,13 @@ var b = \`template-looooooooooooooooooooooooooooooooooooooooooooooooooooooooooon
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 8
+          line: 8,
+          column: 1
         }
       ]
     },
@@ -1004,11 +1073,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 9
+          line: 9,
+          column: 1
         }
       ]
     },
@@ -1028,11 +1099,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 7
+          line: 7,
+          column: 1
         }
       ]
     },
@@ -1048,7 +1121,8 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -1066,11 +1140,13 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message: 'This line has a length of 88. Maximum allowed is 80.',
-          line: 5
+          line: 5,
+          column: 1
         }
       ]
     },
@@ -1079,32 +1155,62 @@ var a = /regexploooooooooooooooooooooooooooooooooooooooooooooooooooooong/.test(b
       filename: 'test.vue',
       code: `<template><div> 41 cols </div></template>`,
       options: [40],
-      errors: ['This line has a length of 41. Maximum allowed is 40.']
+      errors: [
+        {
+          message: 'This line has a length of 41. Maximum allowed is 40.',
+          line: 1,
+          column: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `<template><div> 41 cols </div></template>`,
       options: [{ code: 40 }],
-      errors: ['This line has a length of 41. Maximum allowed is 40.']
+      errors: [
+        {
+          message: 'This line has a length of 41. Maximum allowed is 40.',
+          line: 1,
+          column: 1
+        }
+      ]
     },
     // tabWidth
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
       options: [40, 4],
-      errors: ['This line has a length of 45. Maximum allowed is 40.']
+      errors: [
+        {
+          message: 'This line has a length of 45. Maximum allowed is 40.',
+          line: 1,
+          column: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
       options: [{ code: 40, tabWidth: 4 }],
-      errors: ['This line has a length of 45. Maximum allowed is 40.']
+      errors: [
+        {
+          message: 'This line has a length of 45. Maximum allowed is 40.',
+          line: 1,
+          column: 1
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: `<template><div>\t41\tcols\t</div></template>`,
       options: [{ code: 40, tabWidth: 3 }],
-      errors: ['This line has a length of 44. Maximum allowed is 40.']
+      errors: [
+        {
+          message: 'This line has a length of 44. Maximum allowed is 40.',
+          line: 1,
+          column: 1
+        }
+      ]
     },
     // comments
     {
@@ -1130,27 +1236,32 @@ var a;  // 41 cols comment                      *
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 4
+          line: 4,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 9
+          line: 9,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 12
+          line: 12,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 13
+          line: 13,
+          column: 1
         }
       ]
     },
@@ -1166,15 +1277,18 @@ var b = \`81 columns                                                            
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         }
       ]
     },
@@ -1189,11 +1303,13 @@ var b = \`81 columns                                                            
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 4
+          line: 4,
+          column: 1
         }
       ]
     },
@@ -1208,11 +1324,13 @@ var b = \`81 columns                                                            
       errors: [
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message: 'This line has a length of 81. Maximum allowed is 80.',
-          line: 3
+          line: 3,
+          column: 1
         }
       ]
     },
@@ -1230,17 +1348,20 @@ var b = \`81 columns                                                            
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 2
+          line: 2,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 3
+          line: 3,
+          column: 1
         },
         {
           message:
             'This line has a comment length of 41. Maximum allowed is 40.',
-          line: 4
+          line: 4,
+          column: 1
         }
       ]
     }
