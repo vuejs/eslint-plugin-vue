@@ -384,8 +384,22 @@ multiline
 </div>
         </template>`,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 20
+        }
       ]
     },
     {
@@ -401,7 +415,14 @@ multiline content
           </div>
         </template>`,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        }
       ]
     },
     {
@@ -417,7 +438,14 @@ multiline content
 </div>
         </template>`,
       errors: [
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 30
+        }
       ]
     },
     // comments
@@ -437,8 +465,22 @@ multiline content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -457,8 +499,22 @@ multiline content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 23
+        }
       ]
     },
     // one error
@@ -479,7 +535,14 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        }
       ]
     },
     {
@@ -499,7 +562,14 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 5,
+          column: 18,
+          endLine: 5,
+          endColumn: 18
+        }
       ]
     },
     // multi
@@ -519,12 +589,54 @@ content
 </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<template>`), but no line breaks found.',
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</template>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<template>`), but no line breaks found.',
+          line: 2,
+          column: 19,
+          endLine: 2,
+          endColumn: 19
+        },
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 2,
+          column: 24,
+          endLine: 2,
+          endColumn: 24
+        },
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 2,
+          column: 36,
+          endLine: 2,
+          endColumn: 36
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 29
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</template>`), but no line breaks found.',
+          line: 3,
+          column: 35,
+          endLine: 3,
+          endColumn: 35
+        }
       ]
     },
     // multi line breaks
@@ -548,8 +660,22 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but 2 line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but 2 line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but 2 line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 5,
+          endColumn: 13
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but 2 line breaks found.',
+          line: 6,
+          column: 20,
+          endLine: 8,
+          endColumn: 11
+        }
       ]
     },
     // allowEmptyLines
@@ -575,7 +701,14 @@ content
         </template>`,
       options: [{ allowEmptyLines: true, ignoreWhenEmpty: false }],
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 8,
+          column: 27,
+          endLine: 8,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -607,8 +740,22 @@ content
       `,
       options: [{ allowEmptyLines: true }],
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 9,
+          column: 16,
+          endLine: 9,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 10,
+          column: 20,
+          endLine: 10,
+          endColumn: 20
+        }
       ]
     },
     // mustache
@@ -628,8 +775,22 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 23
+        }
       ]
     },
     // mix
@@ -651,8 +812,22 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 16
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 5,
+          column: 27,
+          endLine: 5,
+          endColumn: 27
+        }
       ]
     },
     // start tag
@@ -672,8 +847,22 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 14
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -692,8 +881,22 @@ content
         </template>
       `,
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
-        'Expected 1 line break before closing tag (`</div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 18
+        },
+        {
+          message:
+            'Expected 1 line break before closing tag (`</div>`), but no line breaks found.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -712,7 +915,14 @@ content
       `,
       options: [{ ignoreWhenEmpty: false }],
       errors: [
-        'Expected 1 line break after opening tag (`<div>`), but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break after opening tag (`<div>`), but no line breaks found.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 14
+        }
       ]
     }
   ]
