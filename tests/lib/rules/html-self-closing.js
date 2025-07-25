@@ -90,27 +90,68 @@ tester.run('html-self-closing', rule, {
     {
       code: '<template><div></div></template>',
       output: '<template><div/></template>',
-      errors: ['Require self-closing on HTML elements (<div>).']
+      errors: [
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     {
       code: '<template><img/></template>',
       output: '<template><img></template>',
-      errors: ['Disallow self-closing on HTML void elements (<img/>).']
+      errors: [
+        {
+          message: 'Disallow self-closing on HTML void elements (<img/>).',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 17
+        }
+      ]
     },
     {
       code: '<template><x-test></x-test></template>',
       output: '<template><x-test/></template>',
-      errors: ['Require self-closing on Vue.js custom components (<x-test>).']
+      errors: [
+        {
+          message:
+            'Require self-closing on Vue.js custom components (<x-test>).',
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     {
       code: '<template><svg><path></path></svg></template>',
       output: '<template><svg><path/></svg></template>',
-      errors: ['Require self-closing on SVG elements (<path>).']
+      errors: [
+        {
+          message: 'Require self-closing on SVG elements (<path>).',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: '<template><math><mspace></mspace></math></template>',
       output: '<template><math><mspace/></math></template>',
-      errors: ['Require self-closing on MathML elements (<mspace>).']
+      errors: [
+        {
+          message: 'Require self-closing on MathML elements (<mspace>).',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
     },
 
     // others
@@ -130,7 +171,13 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ html: { normal: 'always' } })],
       errors: [
-        { message: 'Require self-closing on HTML elements (<div>).', line: 2 }
+        {
+          message: 'Require self-closing on HTML elements (<div>).',
+          line: 2,
+          column: 8,
+          endLine: 2,
+          endColumn: 14
+        }
       ]
     },
     {
@@ -149,7 +196,13 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ html: { normal: 'never' } })],
       errors: [
-        { message: 'Disallow self-closing on HTML elements (<div/>).', line: 3 }
+        {
+          message: 'Disallow self-closing on HTML elements (<div/>).',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 9
+        }
       ]
     },
     {
@@ -170,7 +223,10 @@ tester.run('html-self-closing', rule, {
       errors: [
         {
           message: 'Require self-closing on HTML void elements (<img>).',
-          line: 4
+          line: 4,
+          column: 3,
+          endLine: 4,
+          endColumn: 8
         }
       ]
     },
@@ -192,7 +248,10 @@ tester.run('html-self-closing', rule, {
       errors: [
         {
           message: 'Disallow self-closing on HTML void elements (<img/>).',
-          line: 5
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 9
         }
       ]
     },
@@ -215,7 +274,10 @@ tester.run('html-self-closing', rule, {
         {
           message:
             'Require self-closing on Vue.js custom components (<x-test>).',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 20
         }
       ]
     },
@@ -238,7 +300,10 @@ tester.run('html-self-closing', rule, {
         {
           message:
             'Disallow self-closing on Vue.js custom components (<x-test/>).',
-          line: 7
+          line: 7,
+          column: 10,
+          endLine: 7,
+          endColumn: 12
         }
       ]
     },
@@ -258,7 +323,13 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ svg: 'always' })],
       errors: [
-        { message: 'Require self-closing on SVG elements (<path>).', line: 8 }
+        {
+          message: 'Require self-closing on SVG elements (<path>).',
+          line: 8,
+          column: 14,
+          endLine: 8,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -277,7 +348,13 @@ tester.run('html-self-closing', rule, {
 </template>`,
       options: [anyWith({ svg: 'never' })],
       errors: [
-        { message: 'Disallow self-closing on SVG elements (<path/>).', line: 9 }
+        {
+          message: 'Disallow self-closing on SVG elements (<path/>).',
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 15
+        }
       ]
     },
     {
@@ -298,7 +375,10 @@ tester.run('html-self-closing', rule, {
       errors: [
         {
           message: 'Require self-closing on MathML elements (<mspace>).',
-          line: 10
+          line: 10,
+          column: 17,
+          endLine: 10,
+          endColumn: 26
         }
       ]
     },
@@ -320,7 +400,10 @@ tester.run('html-self-closing', rule, {
       errors: [
         {
           message: 'Disallow self-closing on MathML elements (<mspace/>).',
-          line: 11
+          line: 11,
+          column: 16,
+          endLine: 11,
+          endColumn: 18
         }
       ]
     }
