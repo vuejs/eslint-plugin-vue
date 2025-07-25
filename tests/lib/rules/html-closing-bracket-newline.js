@@ -174,8 +174,22 @@ tester.run('html-closing-bracket-newline', rule, {
         </template>
       `,
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.',
-        'Expected no line breaks before closing bracket, but 2 line breaks found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 3,
+          column: 15,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 2 line breaks found.',
+          line: 4,
+          column: 17,
+          endLine: 6,
+          endColumn: 11
+        }
       ]
     },
     {
@@ -195,7 +209,14 @@ tester.run('html-closing-bracket-newline', rule, {
         </template>
       `,
       errors: [
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 18
+        }
       ]
     },
     {
@@ -219,8 +240,22 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.',
-        'Expected no line breaks before closing bracket, but 2 line breaks found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 3,
+          column: 15,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 2 line breaks found.',
+          line: 4,
+          column: 17,
+          endLine: 6,
+          endColumn: 11
+        }
       ]
     },
     {
@@ -246,7 +281,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 4,
+          column: 18,
+          endLine: 5,
+          endColumn: 13
+        }
       ]
     },
     {
@@ -272,7 +314,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 18
+        }
       ]
     },
     {
@@ -297,8 +346,22 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.',
-        'Expected no line breaks before closing bracket, but 1 line break found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 3,
+          column: 21,
+          endLine: 4,
+          endColumn: 11
+        },
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 5,
+          column: 16,
+          endLine: 6,
+          endColumn: 11
+        }
       ]
     },
     {
@@ -329,8 +392,22 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.',
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 5,
+          column: 18,
+          endLine: 6,
+          endColumn: 13
+        },
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 7,
+          column: 16,
+          endLine: 7,
+          endColumn: 16
+        }
       ]
     },
     {
@@ -359,8 +436,22 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected 1 line break before closing bracket, but no line breaks found.',
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 21
+        },
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 16
+        }
       ]
     },
     {
@@ -474,42 +565,48 @@ tester.run('html-closing-bracket-newline', rule, {
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 2,
           column: 18,
-          endColumn: 18
+          endColumn: 18,
+          endLine: 2
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 3,
           column: 19,
-          endColumn: 19
+          endColumn: 19,
+          endLine: 3
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 4,
           column: 16,
-          endColumn: 16
+          endColumn: 16,
+          endLine: 4
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 5,
           column: 17,
-          endColumn: 17
+          endColumn: 17,
+          endLine: 5
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 6,
           column: 15,
-          endColumn: 15
+          endColumn: 15,
+          endLine: 6
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 6,
           column: 23,
-          endColumn: 23
+          endColumn: 23,
+          endLine: 6
         }
       ]
     },
@@ -534,7 +631,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 3,
+          column: 18,
+          endLine: 4,
+          endColumn: 11
+        }
       ]
     },
     {
@@ -560,7 +664,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -584,7 +695,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected 1 line break before closing bracket, but no line breaks found.'
+        {
+          message:
+            'Expected 1 line break before closing bracket, but no line breaks found.',
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 29
+        }
       ]
     },
     {
@@ -610,7 +728,14 @@ tester.run('html-closing-bracket-newline', rule, {
         }
       ],
       errors: [
-        'Expected no line breaks before closing bracket, but 1 line break found.'
+        {
+          message:
+            'Expected no line breaks before closing bracket, but 1 line break found.',
+          line: 4,
+          column: 23,
+          endLine: 5,
+          endColumn: 11
+        }
       ]
     }
   ]
