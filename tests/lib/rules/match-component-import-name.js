@@ -65,7 +65,9 @@ tester.run('match-component-import-name', rule, {
           message:
             'Component alias InvalidExport should be one of: SomeRandomName, some-random-name.',
           line: 2,
-          column: 47
+          column: 47,
+          endLine: 2,
+          endColumn: 76
         }
       ]
     }
