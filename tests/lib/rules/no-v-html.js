@@ -28,6 +28,11 @@ ruleTester.run('no-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-if="foo" v-bind="bar"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-html="knownHtml"></div></template>',
+      options: [{ignorePattern: '/^(?:html|.+Html)$/'}]
     }
   ],
   invalid: [
@@ -44,6 +49,12 @@ ruleTester.run('no-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><section v-html/></template>',
+      errors: ["'v-html' directive can lead to XSS attack."]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-html="unsafeString"></div></template>',
+      options: [{ignorePattern: '^(?:html|.+Html)$'}],
       errors: ["'v-html' directive can lead to XSS attack."]
     }
   ]
