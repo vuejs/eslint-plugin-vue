@@ -59,7 +59,9 @@ tester.run('max-lines-per-block', rule, {
         {
           message: 'Block has too many lines (2). Maximum allowed is 1.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -76,7 +78,9 @@ tester.run('max-lines-per-block', rule, {
         {
           message: 'Block has too many lines (2). Maximum allowed is 1.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 6,
+          endColumn: 16
         }
       ]
     }
