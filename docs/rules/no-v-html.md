@@ -32,7 +32,15 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-v-html": ["error", {
+        "ignorePattern": "/Html$"
+    }]
+}
+```
+
+- `ignorePattern` ... disables reporting when the v-html directive references a variable matching this pattern. By default, all v-html uses are forbidden.
 
 ## :mute: When Not To Use It
 
