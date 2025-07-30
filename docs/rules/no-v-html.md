@@ -35,7 +35,7 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 ```json
 {
     "vue/no-v-html": ["error", {
-        "ignorePattern": "/Html$"
+        "ignorePattern": ".Html$"
     }]
 }
 ```
