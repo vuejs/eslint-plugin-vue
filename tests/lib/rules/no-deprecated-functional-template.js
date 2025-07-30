@@ -48,7 +48,9 @@ ruleTester.run('no-deprecated-functional-template', rule, {
         {
           line: 1,
           column: 11,
-          messageId: 'unexpected'
+          messageId: 'unexpected',
+          endLine: 1,
+          endColumn: 21
         }
       ]
     }
