@@ -4,9 +4,8 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('../../eslint-compat')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/multiline-ternary')
-const semver = require('semver')
 
 const tester = new RuleTester({
   languageOptions: {
@@ -80,8 +79,7 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?
@@ -90,15 +88,16 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        `
-        : null,
+        `,
       options: ['always-multiline'],
       errors: [
         {
           message:
             'Expected newline between consequent and alternate of ternary expression.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -113,23 +112,23 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
         <template>
           <div :class="{
             'test': someReallyLongCondition ?aVeryLongOutput : thisCantFitOnASingleLine
           }">
           </div>
         </template>
-        `
-        : null,
+        `,
       options: ['never'],
       errors: [
         {
           message:
             'Unexpected newline between test and consequent of ternary expression.',
           line: 4,
-          column: 21
+          column: 21,
+          endLine: 4,
+          endColumn: 44
         }
       ]
     },
@@ -143,8 +142,7 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
         <template>
           <div :class="{
             'test': someReallyLongCondition
@@ -153,20 +151,23 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        `
-        : null,
+        `,
       errors: [
         {
           message:
             'Expected newline between test and consequent of ternary expression.',
           line: 4,
-          column: 21
+          column: 21,
+          endLine: 4,
+          endColumn: 44
         },
         {
           message:
             'Expected newline between consequent and alternate of ternary expression.',
           line: 4,
-          column: 47
+          column: 47,
+          endLine: 4,
+          endColumn: 62
         }
       ]
     },
@@ -180,8 +181,7 @@ tester.run('multiline-ternary', rule, {
           </div>
         </template>
         `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
         <template>
           <div :style="{
             'test': someReallyLongCondition
@@ -190,20 +190,23 @@ tester.run('multiline-ternary', rule, {
           }">
           </div>
         </template>
-        `
-        : null,
+        `,
       errors: [
         {
           message:
             'Expected newline between test and consequent of ternary expression.',
           line: 4,
-          column: 21
+          column: 21,
+          endLine: 4,
+          endColumn: 44
         },
         {
           message:
             'Expected newline between consequent and alternate of ternary expression.',
           line: 4,
-          column: 47
+          column: 47,
+          endLine: 4,
+          endColumn: 62
         }
       ]
     },
@@ -220,8 +223,7 @@ tester.run('multiline-ternary', rule, {
           }
         </style>
         `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
         <template>
           <div class="test">
           </div>
@@ -233,20 +235,23 @@ tester.run('multiline-ternary', rule, {
 : thisCantFitOnASingleLine')
           }
         </style>
-        `
-        : null,
+        `,
       errors: [
         {
           message:
             'Expected newline between test and consequent of ternary expression.',
           line: 8,
-          column: 30
+          column: 30,
+          endLine: 8,
+          endColumn: 53
         },
         {
           message:
             'Expected newline between consequent and alternate of ternary expression.',
           line: 8,
-          column: 56
+          column: 56,
+          endLine: 8,
+          endColumn: 71
         }
       ]
     },
@@ -263,8 +268,7 @@ tester.run('multiline-ternary', rule, {
         let test = someReallyLongCondition ? aVeryLongOutput : thisCantFitOnASingleLine
       </script>
       `,
-      output: semver.gte(ESLint.version, '7.1.0')
-        ? `
+      output: `
       <template>
         <div :class="{
           'test': someReallyLongCondition
@@ -276,20 +280,23 @@ tester.run('multiline-ternary', rule, {
       <script>
         let test = someReallyLongCondition ? aVeryLongOutput : thisCantFitOnASingleLine
       </script>
-      `
-        : null,
+      `,
       errors: [
         {
           message:
             'Expected newline between test and consequent of ternary expression.',
           line: 4,
-          column: 19
+          column: 19,
+          endLine: 4,
+          endColumn: 42
         },
         {
           message:
             'Expected newline between consequent and alternate of ternary expression.',
           line: 4,
-          column: 45
+          column: 45,
+          endLine: 4,
+          endColumn: 60
         }
       ]
     }
