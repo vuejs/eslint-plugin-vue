@@ -58,7 +58,9 @@ ruleTester.run('no-deprecated-html-element-is', rule, {
         {
           line: 1,
           column: 16,
-          messageId: 'unexpected'
+          messageId: 'unexpected',
+          endLine: 1,
+          endColumn: 25
         }
       ]
     }
