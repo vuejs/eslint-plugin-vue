@@ -24,7 +24,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'UnaryExpression',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 33
         }
       ]
@@ -35,7 +37,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'Literal',
+          line: 1,
           column: 36,
+          endLine: 1,
           endColumn: 40
         }
       ]
@@ -46,7 +50,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'Literal',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 32
         }
       ]
@@ -57,7 +63,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'ObjectExpression',
+          line: 1,
           column: 33,
+          endLine: 1,
           endColumn: 35
         }
       ]
@@ -68,7 +76,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'BinaryExpression',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 36
         }
       ]
@@ -79,7 +89,9 @@ tester.run('no-constant-condition', rule, {
         {
           messageId: 'unexpected',
           type: 'LogicalExpression',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 37
         }
       ]
