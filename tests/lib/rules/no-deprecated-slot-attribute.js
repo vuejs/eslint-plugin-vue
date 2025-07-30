@@ -686,8 +686,20 @@ tester.run('no-deprecated-slot-attribute', rule, {
         </my-component>
       </template>`,
       errors: [
-        '`slot` attributes are deprecated.',
-        '`slot` attributes are deprecated.'
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 34
+        },
+        {
+          message: '`slot` attributes are deprecated.',
+          line: 7,
+          column: 28,
+          endLine: 7,
+          endColumn: 32
+        }
       ]
     },
     {
