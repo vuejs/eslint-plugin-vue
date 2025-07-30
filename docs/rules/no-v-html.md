@@ -42,6 +42,23 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 - `ignorePattern` ... disables reporting when the `v-html` directive references a variable matching this pattern. By default, all `v-html` uses are forbidden.
 
+### `{ "ignorePattern": ".Html$" }`
+
+<eslint-code-block :rules="{'vue/no-v-html': ['error', { 'ignorePattern': '.Html$' }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <h2>{{ userName }}</h2>
+  <span v-html="userLinkHtml" />
+
+  <!-- ✗ BAD -->
+  <span v-html="userName" />
+</template>
+```
+
+</eslint-code-block>
+
 ## :mute: When Not To Use It
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
