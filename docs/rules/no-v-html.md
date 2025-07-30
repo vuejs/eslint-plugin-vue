@@ -46,6 +46,11 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
 
+## :couple: Related Rules
+
+- [vue/no-v-text](./no-v-text.md)
+- [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v4.7.0

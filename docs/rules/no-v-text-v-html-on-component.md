@@ -84,6 +84,11 @@ If you use v-text / v-html on a component, it will overwrite the component's con
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/no-v-text](./no-v-text.md)
+- [vue/no-v-html](./no-v-html.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v8.4.0

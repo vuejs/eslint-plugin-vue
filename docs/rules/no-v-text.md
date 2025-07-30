@@ -32,6 +32,11 @@ This rule reports all uses of `v-text` directive.
 
 Nothing.
 
+## :couple: Related Rules
+
+- [vue/no-v-html](./no-v-html.md)
+- [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v7.17.0
