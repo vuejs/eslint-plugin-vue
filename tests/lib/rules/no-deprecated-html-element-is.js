@@ -43,9 +43,9 @@ ruleTester.run('no-deprecated-html-element-is', rule, {
       code: '<template><div is="foo" /></template>',
       errors: [
         {
+          messageId: 'unexpected',
           line: 1,
           column: 16,
-          messageId: 'unexpected',
           endLine: 1,
           endColumn: 24
         }
@@ -56,9 +56,9 @@ ruleTester.run('no-deprecated-html-element-is', rule, {
       code: '<template><div :is="foo" /></template>',
       errors: [
         {
+          messageId: 'unexpected',
           line: 1,
           column: 16,
-          messageId: 'unexpected',
           endLine: 1,
           endColumn: 25
         }
