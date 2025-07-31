@@ -37,7 +37,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><MyComponent v-bind:foo.sync='bar'/></template>",
       output: "<template><MyComponent v-model:foo='bar'/></template>",
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 45
+        }
       ]
     },
     {
@@ -45,7 +52,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><MyComponent :foo.sync='bar'/></template>",
       output: "<template><MyComponent v-model:foo='bar'/></template>",
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
+        }
       ]
     },
     {
@@ -53,7 +67,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><MyComponent v-bind:[dynamicArg].sync='bar'/></template>",
       output: "<template><MyComponent v-model:[dynamicArg]='bar'/></template>",
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 54
+        }
       ]
     },
     {
@@ -61,7 +82,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><MyComponent :[dynamicArg].sync='bar'/></template>",
       output: "<template><MyComponent v-model:[dynamicArg]='bar'/></template>",
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -69,7 +97,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: "<template><MyComponent v-bind.sync='bar'/></template>",
       output: null,
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 41
+        }
       ]
     },
     {
@@ -77,7 +112,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: '<template><MyComponent :foo.sync.unknown="foo" /></template>',
       output: null,
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 47
+        }
       ]
     },
     {
@@ -85,7 +127,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       code: '<template><MyComponent :[dynamicArg].sync.unknown="foo" /></template>',
       output: null,
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 56
+        }
       ]
     },
     {
@@ -94,7 +143,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="x.foo" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 69
+        }
       ]
     },
     {
@@ -103,7 +159,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[x]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 70
+        }
       ]
     },
     {
@@ -112,7 +175,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[x - 1]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 74
+        }
       ]
     },
     {
@@ -121,7 +191,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[`${x}`]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 75
+        }
       ]
     },
     {
@@ -130,7 +207,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[`prefix_${x}`]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 82
+        }
       ]
     },
     {
@@ -139,7 +223,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[x ? x : \'_\']" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 80
+        }
       ]
     },
     {
@@ -148,7 +239,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[x || \'_\']" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 77
+        }
       ]
     },
     {
@@ -157,7 +255,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[x()]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 72
+        }
       ]
     },
     {
@@ -166,7 +271,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[/r/.match(x) ? 0 : 1]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 89
+        }
       ]
     },
     {
@@ -175,7 +287,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[typeof x]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 77
+        }
       ]
     },
     {
@@ -184,7 +303,14 @@ ruleTester.run('no-deprecated-v-bind-sync', rule, {
       output:
         '<template><div><div v-for="x in list"><MyComponent v-model:foo="foo[tag`${x}`]" /></div></div></template>',
       errors: [
-        "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead."
+        {
+          message:
+            "'.sync' modifier on 'v-bind' directive is deprecated. Use 'v-model:propName' instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 78
+        }
       ]
     }
   ]
