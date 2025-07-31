@@ -3,12 +3,19 @@
  */
 'use strict'
 
+const semver = require('semver')
 const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/comma-style')
+const { eslintStylisticVersion } = require('../../test-utils/eslint-stylistic')
 
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
 })
+
+const isOldStylistic =
+  eslintStylisticVersion === undefined ||
+  semver.lt(eslintStylisticVersion, '3.0.0') ||
+  semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
 
 tester.run('comma-style', rule, {
   valid: [
@@ -34,13 +41,17 @@ tester.run('comma-style', rule, {
         </template>`,
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }]
     },
-    `
+    ...(isOldStylistic
+      ? [
+          `
       <template>
         <CustomButton v-slot="a,
           b
           ,c" />
       </template>
-    `,
+    `
+        ]
+      : []),
     {
       code: `
         <template>
@@ -52,6 +63,35 @@ tester.run('comma-style', rule, {
     }
   ],
   invalid: [
+    ...(isOldStylistic
+      ? []
+      : [
+          {
+            code: `
+        <template>
+          <CustomButton v-slot="a,
+            b
+            ,c" />
+        </template>
+      `,
+            output: `
+        <template>
+          <CustomButton v-slot="a,
+            b,
+            c" />
+        </template>
+      `,
+            errors: [
+              {
+                message: "',' should be placed last.",
+                line: 5,
+                column: 13,
+                endLine: 5,
+                endColumn: 14
+              }
+            ]
+          }
+        ]),
     {
       code: `
         <template>
