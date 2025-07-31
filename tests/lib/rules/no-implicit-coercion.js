@@ -118,7 +118,9 @@ tester.run('no-implicit-coercion', rule, {
         {
           message: getExpectedErrorMessage('Boolean(foo)'),
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 32
         }
       ]
     },
@@ -130,7 +132,9 @@ tester.run('no-implicit-coercion', rule, {
         {
           message: getExpectedErrorMessage("foo.indexOf('.') !== -1"),
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -145,6 +149,8 @@ tester.run('no-implicit-coercion', rule, {
           message: getExpectedErrorMessage('Number(foo)'),
           line: 1,
           column: 27,
+          endLine: 1,
+          endColumn: 31,
           suggestions: semver.gte(ESLint.version, '9.0.0')
             ? [
                 {
@@ -168,6 +174,8 @@ tester.run('no-implicit-coercion', rule, {
           message: getExpectedErrorMessage('Number(foo)'),
           line: 1,
           column: 27,
+          endLine: 1,
+          endColumn: 34,
           suggestions: semver.gte(ESLint.version, '9.0.0')
             ? [
                 {
@@ -191,6 +199,8 @@ tester.run('no-implicit-coercion', rule, {
           message: getExpectedErrorMessage('String(foo)'),
           line: 1,
           column: 27,
+          endLine: 1,
+          endColumn: 35,
           suggestions: semver.gte(ESLint.version, '9.0.0')
             ? [
                 {
@@ -214,6 +224,8 @@ tester.run('no-implicit-coercion', rule, {
           message: getExpectedErrorMessage('String(foo)'),
           line: 1,
           column: 27,
+          endLine: 1,
+          endColumn: 35,
           suggestions: semver.gte(ESLint.version, '9.0.0')
             ? [
                 {
@@ -244,6 +256,8 @@ tester.run('no-implicit-coercion', rule, {
                 message: getExpectedErrorMessage('String(foo)'),
                 line: 1,
                 column: 27,
+                endLine: 1,
+                endColumn: 35,
                 suggestions: semver.gte(ESLint.version, '9.0.0')
                   ? [
                       {
