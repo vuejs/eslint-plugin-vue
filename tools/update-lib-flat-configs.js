@@ -53,7 +53,7 @@ function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
   const formattedRules = formatRules(category.rules, category.categoryId)
   const ruleLevelVariable = formattedRules.includes('ruleLevel')
-    ? "const ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'"
+    ? "\nconst ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'\n"
     : ''
 
   if (category.categoryId === 'base') {
@@ -61,9 +61,7 @@ function formatCategory(category) {
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
- */
-${ruleLevelVariable}
-
+ */${ruleLevelVariable}
 module.exports = [
   {
     name: 'vue/base/setup',
