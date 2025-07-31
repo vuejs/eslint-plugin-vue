@@ -36,37 +36,93 @@ ruleTester.run('no-deprecated-filter', rule, {
     {
       filename: 'test.vue',
       code: '<template>{{ msg | filter }}</template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template>{{ msg | filter(x) }}</template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template>{{ msg | filterA | filterB }}</template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="msg in messages">{{ msg | filter }}</div></template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 55
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-bind:id="msg | filter"></div></template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-bind:id="msg | filter(aaa)"></div></template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-bind:id="msg | filterA | filterB"></div></template>',
-      errors: ['Filters are deprecated.']
+      errors: [
+        {
+          message: 'Filters are deprecated.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
     }
   ]
 })
