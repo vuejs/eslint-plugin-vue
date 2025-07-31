@@ -35,22 +35,22 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 ```json
 {
     "vue/no-v-html": ["error", {
-        "ignorePattern": ".Html$"
+        "ignorePattern": "^html"
     }]
 }
 ```
 
 - `ignorePattern` ... disables reporting when the `v-html` directive references a variable matching this pattern. By default, all `v-html` uses are forbidden.
 
-### `{ "ignorePattern": ".Html$" }`
+### `{ "ignorePattern": "^html" }`
 
-<eslint-code-block :rules="{'vue/no-v-html': ['error', { 'ignorePattern': '.Html$' }]}">
+<eslint-code-block :rules="{'vue/no-v-html': ['error', { 'ignorePattern': '^html' }]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <h2>{{ userName }}</h2>
-  <span v-html="userLinkHtml" />
+  <span v-html="htmlUserLink" />
 
   <!-- ✗ BAD -->
   <span v-html="userName" />

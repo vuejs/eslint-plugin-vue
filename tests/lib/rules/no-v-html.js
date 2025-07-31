@@ -31,8 +31,8 @@ ruleTester.run('no-v-html', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div v-html="knownHtml"></div></template>',
-      options: [{ ignorePattern: '.Html$' }]
+      code: '<template><div v-html="htmlKnownToBeSafe"></div></template>',
+      options: [{ ignorePattern: '^html' }]
     }
   ],
   invalid: [
@@ -78,7 +78,7 @@ ruleTester.run('no-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-html="unsafeString"></div></template>',
-      options: [{ ignorePattern: '.Html$' }],
+      options: [{ ignorePattern: '^html' }],
       errors: [
         {
           message: "'v-html' directive can lead to XSS attack.",
