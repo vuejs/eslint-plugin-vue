@@ -212,47 +212,80 @@ tester.run('no-lifecycle-after-await', rule, {
       errors: [
         {
           messageId: 'forbidden',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 45
         },
         {
           messageId: 'forbidden',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 47
         },
         {
           messageId: 'forbidden',
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 46
         },
         {
           messageId: 'forbidden',
-          line: 11
+          line: 11,
+          column: 11,
+          endLine: 11,
+          endColumn: 47
         },
         {
           messageId: 'forbidden',
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 41
         },
         {
           messageId: 'forbidden',
-          line: 13
+          line: 13,
+          column: 11,
+          endLine: 13,
+          endColumn: 47
         },
         {
           messageId: 'forbidden',
-          line: 14
+          line: 14,
+          column: 11,
+          endLine: 14,
+          endColumn: 49
         },
         {
           messageId: 'forbidden',
-          line: 15
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 43
         },
         {
           messageId: 'forbidden',
-          line: 16
+          line: 16,
+          column: 11,
+          endLine: 16,
+          endColumn: 41
         },
         {
           messageId: 'forbidden',
-          line: 17
+          line: 17,
+          column: 11,
+          endLine: 17,
+          endColumn: 43
         },
         {
           messageId: 'forbidden',
-          line: 18
+          line: 18,
+          column: 11,
+          endLine: 18,
+          endColumn: 45
         }
       ]
     },
@@ -272,7 +305,11 @@ tester.run('no-lifecycle-after-await', rule, {
       `,
       errors: [
         {
-          messageId: 'forbidden'
+          messageId: 'forbidden',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 43
         }
       ]
     }
