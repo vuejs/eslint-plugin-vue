@@ -5,18 +5,12 @@ const cp = require('child_process')
 const path = require('path')
 const semver = require('semver')
 
+const TARGET_DIR = path.join(__dirname, 'flat-config')
 const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`
 
 describe('Integration with flat config', () => {
-  let originalCwd
-
-  before(() => {
-    originalCwd = process.cwd()
-    process.chdir(path.join(__dirname, 'flat-config'))
-    cp.execSync('npm i -f', { stdio: 'inherit' })
-  })
-  after(() => {
-    process.chdir(originalCwd)
+  beforeAll(() => {
+    cp.execSync('npm i -f', { cwd: TARGET_DIR, stdio: 'inherit' })
   })
 
   it('should lint without errors', () => {
@@ -33,6 +27,7 @@ describe('Integration with flat config', () => {
 
     const result = JSON.parse(
       cp.execSync(`${ESLINT} a.vue --format=json`, {
+        cwd: TARGET_DIR,
         encoding: 'utf8'
       })
     )
