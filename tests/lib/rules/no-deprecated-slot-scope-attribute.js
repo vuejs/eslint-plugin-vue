@@ -66,7 +66,10 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       errors: [
         {
           message: '`slot-scope` are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -86,7 +89,10 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       errors: [
         {
           message: '`slot-scope` are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -106,7 +112,10 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       errors: [
         {
           message: '`slot-scope` are deprecated.',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -121,7 +130,10 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       errors: [
         {
           message: '`slot-scope` are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -136,7 +148,10 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
       errors: [
         {
           message: '`slot-scope` are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -150,7 +165,15 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
         </my-component>
       </template>`,
       output: null,
-      errors: ['`slot-scope` are deprecated.']
+      errors: [
+        {
+          message: '`slot-scope` are deprecated.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 47
+        }
+      ]
     },
     {
       code: `
@@ -163,7 +186,15 @@ tester.run('no-deprecated-slot-scope-attribute', rule, {
         </my-component>
       </template>`,
       output: null,
-      errors: ['`slot-scope` are deprecated.']
+      errors: [
+        {
+          message: '`slot-scope` are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
+        }
+      ]
     }
   ]
 })

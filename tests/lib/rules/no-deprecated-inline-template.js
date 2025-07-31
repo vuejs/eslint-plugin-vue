@@ -48,12 +48,28 @@ ruleTester.run('no-deprecated-inline-template', rule, {
     {
       filename: 'test.vue',
       code: '<template><my-component inline-template=""><div /></my-component></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 40
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><my-component inline-template="foo"><div /></my-component></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 40
+        }
+      ]
     }
   ]
 })

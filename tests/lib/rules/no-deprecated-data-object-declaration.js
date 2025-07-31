@@ -155,7 +155,10 @@ return {
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 6,
+          endColumn: 12
         }
       ]
     },
@@ -182,7 +185,10 @@ return {
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -209,7 +215,10 @@ return {
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -236,7 +245,10 @@ return (/*b*/{
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 13
         }
       ]
     },
@@ -263,7 +275,10 @@ return {
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -290,7 +305,10 @@ return {
         {
           message:
             "Object declaration on 'data' property is deprecated. Using function declaration instead.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     }

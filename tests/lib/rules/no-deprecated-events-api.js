@@ -139,7 +139,10 @@ ruleTester.run('no-deprecated-events-api', rule, {
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 21
         }
       ]
     },
@@ -157,7 +160,10 @@ ruleTester.run('no-deprecated-events-api', rule, {
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     },
@@ -177,7 +183,10 @@ ruleTester.run('no-deprecated-events-api', rule, {
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 23
         }
       ]
     },
@@ -198,7 +207,10 @@ ruleTester.run('no-deprecated-events-api', rule, {
         {
           message:
             'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 19
         }
       ]
     },
@@ -215,9 +227,30 @@ ruleTester.run('no-deprecated-events-api', rule, {
       `,
       languageOptions,
       errors: [
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 22
+        },
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 23
+        },
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 6,
+          column: 19,
+          endLine: 6,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -233,9 +266,30 @@ ruleTester.run('no-deprecated-events-api', rule, {
       `,
       languageOptions,
       errors: [
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
-        'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.'
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 24
+        },
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 25
+        },
+        {
+          message:
+            'The Events api `$on`, `$off` `$once` is deprecated. Using external library instead, for example mitt.',
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 26
+        }
       ]
     }
   ]

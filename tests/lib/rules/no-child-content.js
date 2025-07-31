@@ -74,7 +74,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 32,
           suggestions: [
             {
@@ -93,7 +95,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 38,
           suggestions: [
             {
@@ -112,7 +116,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 37,
           suggestions: [
             {
@@ -131,7 +137,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 41,
           suggestions: [
             {
@@ -183,7 +191,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-text directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 32,
           suggestions: [
             {
@@ -203,7 +213,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-t directive.',
+          line: 1,
           column: 26,
+          endLine: 1,
           endColumn: 29,
           suggestions: [
             {
@@ -223,7 +235,9 @@ ruleTester.run('no-child-content', rule, {
         {
           message:
             'Child content is disallowed because it will be overwritten by the v-html directive.',
+          line: 1,
           column: 29,
+          endLine: 1,
           endColumn: 32,
           suggestions: [
             {

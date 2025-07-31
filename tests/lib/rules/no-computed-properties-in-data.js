@@ -97,7 +97,9 @@ tester.run('no-computed-properties-in-data', rule, {
           message:
             'The computed property cannot be used in `data()` because it is before initialization.',
           line: 5,
-          column: 23
+          column: 23,
+          endLine: 5,
+          endColumn: 31
         }
       ]
     },
@@ -122,7 +124,9 @@ tester.run('no-computed-properties-in-data', rule, {
           message:
             'The computed property cannot be used in `data()` because it is before initialization.',
           line: 6,
-          column: 23
+          column: 23,
+          endLine: 6,
+          endColumn: 29
         }
       ]
     }

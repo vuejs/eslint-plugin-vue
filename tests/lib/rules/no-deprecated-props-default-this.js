@@ -199,8 +199,22 @@ ruleTester.run('no-deprecated-props-default-this', rule, {
         </script>
       `,
       errors: [
-        'Props default value factory functions no longer have access to `this`.',
-        'Props default value factory functions no longer have access to `this`.'
+        {
+          message:
+            'Props default value factory functions no longer have access to `this`.',
+          line: 9,
+          column: 24,
+          endLine: 9,
+          endColumn: 28
+        },
+        {
+          message:
+            'Props default value factory functions no longer have access to `this`.',
+          line: 14,
+          column: 24,
+          endLine: 14,
+          endColumn: 28
+        }
       ]
     }
   ]

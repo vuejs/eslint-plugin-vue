@@ -118,12 +118,18 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -149,12 +155,18 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -198,12 +210,18 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 12
+          line: 12,
+          column: 9,
+          endLine: 12,
+          endColumn: 22
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 13
+          line: 13,
+          column: 9,
+          endLine: 13,
+          endColumn: 18
         }
       ]
     },
@@ -229,12 +247,18 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4
+          line: 4,
+          column: 10,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     },
@@ -260,12 +284,18 @@ ruleTester.run('no-deprecated-destroyed-lifecycle', rule, {
         {
           message:
             'The `beforeDestroy` lifecycle hook is deprecated. Use `beforeUnmount` instead.',
-          line: 4
+          line: 4,
+          column: 10,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message:
             'The `destroyed` lifecycle hook is deprecated. Use `unmounted` instead.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     }
