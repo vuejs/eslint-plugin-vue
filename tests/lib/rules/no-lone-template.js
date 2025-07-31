@@ -135,7 +135,15 @@ tester.run('no-lone-template', rule, {
         <template/>
       </template>
       `,
-      errors: ['`<template>` require directive.']
+      errors: [
+        {
+          message: '`<template>` require directive.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -145,7 +153,15 @@ tester.run('no-lone-template', rule, {
       </template>
       `,
       options: [{ ignoreAccessible: true }],
-      errors: ['`<template>` require directive.']
+      errors: [
+        {
+          message: '`<template>` require directive.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -155,7 +171,15 @@ tester.run('no-lone-template', rule, {
       </template>
       `,
       options: [{ ignoreAccessible: true }],
-      errors: ['`<template>` require directive.']
+      errors: [
+        {
+          message: '`<template>` require directive.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -165,7 +189,15 @@ tester.run('no-lone-template', rule, {
       </template>
       `,
       options: [{ ignoreAccessible: true }],
-      errors: ['`<template>` require directive.']
+      errors: [
+        {
+          message: '`<template>` require directive.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 37
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -175,7 +207,15 @@ tester.run('no-lone-template', rule, {
       </template>
       `,
       options: [{ ignoreAccessible: true }],
-      errors: ['`<template>` require directive.']
+      errors: [
+        {
+          message: '`<template>` require directive.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 29
+        }
+      ]
     }
   ]
 })
