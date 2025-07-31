@@ -82,7 +82,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 20
         }
       ]
     },
@@ -92,11 +96,19 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before 'class'.",
-          type: 'HTMLIdentifier'
+          type: 'HTMLIdentifier',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 18
         },
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 31
         }
       ]
     },
@@ -106,11 +118,19 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before 'class'.",
-          type: 'HTMLIdentifier'
+          type: 'HTMLIdentifier',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 17
         },
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -120,11 +140,19 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before ':'.",
-          type: 'Punctuator'
+          type: 'Punctuator',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 18
         },
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 32
         }
       ]
     },
@@ -134,7 +162,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 37
         }
       ]
     },
@@ -144,7 +176,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 34,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -154,7 +190,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -164,7 +204,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '/>'.",
-          type: 'HTMLSelfClosingTagClose'
+          type: 'HTMLSelfClosingTagClose',
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 25
         }
       ]
     },
@@ -174,11 +218,19 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before 'test'.",
-          type: 'Identifier'
+          type: 'Identifier',
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 20
         },
         {
           message: "Multiple spaces found before '}}'.",
-          type: 'VExpressionEnd'
+          type: 'VExpressionEnd',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 26
         }
       ]
     },
@@ -188,7 +240,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before '>'.",
-          type: 'HTMLTagClose'
+          type: 'HTMLTagClose',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -198,19 +254,35 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before 'i'.",
-          type: 'Identifier'
+          type: 'Identifier',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 29
         },
         {
           message: "Multiple spaces found before 'in'.",
-          type: 'Keyword'
+          type: 'Keyword',
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 34
         },
         {
           message: "Multiple spaces found before 'b'.",
-          type: 'Identifier'
+          type: 'Identifier',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 40
         },
         {
           message: "Multiple spaces found before '\"'.",
-          type: 'Punctuator'
+          type: 'Punctuator',
+          line: 1,
+          column: 41,
+          endLine: 1,
+          endColumn: 48
         }
       ]
     },
@@ -238,7 +310,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before ':'.",
-          type: 'Punctuator'
+          type: 'Punctuator',
+          line: 5,
+          column: 26,
+          endLine: 5,
+          endColumn: 29
         }
       ]
     },
@@ -266,7 +342,11 @@ ruleTester.run('no-multi-spaces', rule, {
       errors: [
         {
           message: "Multiple spaces found before 'isExpanded'.",
-          type: 'Identifier'
+          type: 'Identifier',
+          line: 5,
+          column: 27,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     }
