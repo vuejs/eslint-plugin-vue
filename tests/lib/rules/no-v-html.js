@@ -39,23 +39,55 @@ ruleTester.run('no-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-html="foo"></div></template>',
-      errors: ["'v-html' directive can lead to XSS attack."]
+      errors: [
+        {
+          message: "'v-html' directive can lead to XSS attack.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><ul v-html:aaa="userHTML"></ul></template>',
-      errors: ["'v-html' directive can lead to XSS attack."]
+      errors: [
+        {
+          message: "'v-html' directive can lead to XSS attack.",
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><section v-html/></template>',
-      errors: ["'v-html' directive can lead to XSS attack."]
+      errors: [
+        {
+          message: "'v-html' directive can lead to XSS attack.",
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-html="unsafeString"></div></template>',
       options: [{ ignorePattern: '.Html$' }],
-      errors: ["'v-html' directive can lead to XSS attack."]
+      errors: [
+        {
+          message: "'v-html' directive can lead to XSS attack.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     }
   ]
 })
