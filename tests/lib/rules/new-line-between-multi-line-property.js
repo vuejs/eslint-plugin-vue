@@ -160,7 +160,10 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 13
+          line: 13,
+          column: 12,
+          endLine: 14,
+          endColumn: 11
         }
       ]
     },
@@ -271,12 +274,18 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 18
+          line: 18,
+          column: 10,
+          endLine: 19,
+          endColumn: 9
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 33
+          line: 33,
+          column: 10,
+          endLine: 34,
+          endColumn: 9
         }
       ]
     },
@@ -327,7 +336,10 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 13
+          line: 13,
+          column: 12,
+          endLine: 14,
+          endColumn: 11
         }
       ]
     },
@@ -380,7 +392,10 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 13
+          line: 13,
+          column: 12,
+          endLine: 15,
+          endColumn: 11
         }
       ]
     },
@@ -443,7 +458,10 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 14
+          line: 14,
+          column: 12,
+          endLine: 19,
+          endColumn: 11
         }
       ]
     },
@@ -522,17 +540,26 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 8
+          line: 8,
+          column: 12,
+          endLine: 9,
+          endColumn: 11
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 12
+          line: 12,
+          column: 12,
+          endLine: 13,
+          endColumn: 11
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 15
+          line: 15,
+          column: 10,
+          endLine: 16,
+          endColumn: 9
         }
       ]
     },
@@ -614,17 +641,26 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 8
+          line: 8,
+          column: 12,
+          endLine: 10,
+          endColumn: 11
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 13
+          line: 13,
+          column: 12,
+          endLine: 14,
+          endColumn: 11
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 16
+          line: 16,
+          column: 10,
+          endLine: 17,
+          endColumn: 9
         }
       ]
     },
@@ -652,7 +688,10 @@ emits: {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     },
@@ -681,7 +720,10 @@ emits: {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 6,
+          endColumn: 10
         }
       ]
     },
@@ -731,17 +773,26 @@ emits: {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 6,
+          endColumn: 15
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 10
+          line: 10,
+          column: 10,
+          endLine: 10,
+          endColumn: 21
         },
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 14
+          line: 14,
+          column: 10,
+          endLine: 15,
+          endColumn: 14
         }
       ]
     },
@@ -772,7 +823,10 @@ emits: {
         {
           message:
             'Enforce new lines between multi-line properties in Vue components.',
-          line: 5
+          line: 5,
+          column: 10,
+          endLine: 7,
+          endColumn: 9
         }
       ]
     }
