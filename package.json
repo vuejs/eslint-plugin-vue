@@ -82,7 +82,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.2",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
-    "@stylistic/eslint-plugin": "^2.12.1",
+    "@stylistic/eslint-plugin": "^5.2.2",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^8.56.2",
     "@types/natural-compare": "^1.4.3",
