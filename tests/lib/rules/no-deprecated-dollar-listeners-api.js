@@ -132,16 +132,16 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
       `,
       errors: [
         {
+          messageId: 'deprecated',
           line: 3,
           column: 22,
-          messageId: 'deprecated',
           endLine: 3,
           endColumn: 32
         },
         {
+          messageId: 'deprecated',
           line: 9,
           column: 27,
-          messageId: 'deprecated',
           endLine: 9,
           endColumn: 37
         }
@@ -167,23 +167,23 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
       `,
       errors: [
         {
+          messageId: 'deprecated',
           line: 3,
           column: 35,
-          messageId: 'deprecated',
           endLine: 3,
           endColumn: 45
         },
         {
+          messageId: 'deprecated',
           line: 4,
           column: 22,
-          messageId: 'deprecated',
           endLine: 4,
           endColumn: 32
         },
         {
+          messageId: 'deprecated',
           line: 10,
           column: 23,
-          messageId: 'deprecated',
           endLine: 10,
           endColumn: 33
         }
@@ -205,9 +205,9 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
       `,
       errors: [
         {
+          messageId: 'deprecated',
           line: 7,
           column: 25,
-          messageId: 'deprecated',
           endLine: 7,
           endColumn: 35
         }
@@ -232,9 +232,9 @@ ruleTester.run('no-deprecated-dollar-listeners-api', rule, {
       `,
       errors: [
         {
+          messageId: 'deprecated',
           line: 8,
           column: 27,
-          messageId: 'deprecated',
           endLine: 8,
           endColumn: 37
         }
