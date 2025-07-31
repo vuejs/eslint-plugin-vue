@@ -3,13 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-negated-v-if-condition
 description: disallow negated conditions in v-if/v-else
+since: v10.4.0
 ---
 
 # vue/no-negated-v-if-condition
 
 > disallow negated conditions in v-if/v-else
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -57,6 +57,10 @@ Nothing.
 - [no-negated-condition](https://eslint.org/docs/latest/rules/no-negated-condition)
 - [vue/no-negated-condition](https://eslint.vuejs.org/rules/no-negated-condition.html)
 - [unicorn/no-negated-condition](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-negated-condition.md)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.4.0
 
 ## :mag: Implementation
 
