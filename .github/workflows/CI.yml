@@ -31,12 +31,6 @@ jobs:
     strategy:
       matrix:
         node: [18, 20, 21, 'lts/*']
-        eslint: [9]
-        include:
-          # On old ESLint version
-          - node: 18
-            eslint: 8
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,8 +41,23 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install Packages
         run: npm install
-      - name: Install ESLint v${{ matrix.eslint }}
-        run: npm install --save-dev eslint@${{ matrix.eslint }} -f
+      - name: Test
+        run: npm test
+
+  test-with-eslint-v8:
+    name: Test with ESLint v8
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js v18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install Packages
+        run: npm install
+      - name: Install ESLint v8
+        run: npm install --save-dev eslint@8 --force
       - name: Test
         run: npm test
 
