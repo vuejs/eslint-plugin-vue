@@ -183,6 +183,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: "'dat' may be a typo, which is similar to option [data].",
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -200,6 +202,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'method' may be a typo, which is similar to option [methods].`,
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 15,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -235,6 +239,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: "'dat' may be a typo, which is similar to option [data].",
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -253,6 +259,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'method' may be a typo, which is similar to option [methods].`,
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 15,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -271,6 +279,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'custo' may be a typo, which is similar to option [custom].`,
           line: 6,
           column: 9,
+          endLine: 6,
+          endColumn: 14,
           suggestions: [
             {
               desc: `Replace property 'custo' to 'custom'`,
@@ -303,6 +313,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: "'dat' may be a typo, which is similar to option [data].",
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -320,6 +332,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'method' may be a typo, which is similar to option [methods].`,
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 15,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -352,6 +366,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: "'dat' may be a typo, which is similar to option [data].",
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: `Replace property 'dat' to 'data'`,
@@ -371,6 +387,8 @@ tester.run('no-potential-component-option-typo', rule, {
             "'beforeRouteEntr' may be a typo, which is similar to option [beforeRouteEnter].",
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 24,
           suggestions: [
             {
               desc: `Replace property 'beforeRouteEntr' to 'beforeRouteEnter'`,
@@ -389,6 +407,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'method' may be a typo, which is similar to option [methods].`,
           line: 6,
           column: 9,
+          endLine: 6,
+          endColumn: 15,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
@@ -420,6 +440,8 @@ tester.run('no-potential-component-option-typo', rule, {
           message: `'method' may be a typo, which is similar to option [methods,data].`,
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 15,
           suggestions: [
             {
               desc: `Replace property 'method' to 'methods'`,
