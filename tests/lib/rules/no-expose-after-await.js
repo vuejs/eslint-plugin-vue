@@ -147,7 +147,9 @@ tester.run('no-expose-after-await', rule, {
         {
           message: '`expose` is forbidden after an `await` expression.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 32
         }
       ]
     },
@@ -167,7 +169,9 @@ tester.run('no-expose-after-await', rule, {
         {
           message: '`expose` is forbidden after an `await` expression.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 36
         }
       ]
     },
@@ -184,7 +188,9 @@ tester.run('no-expose-after-await', rule, {
         {
           message: '`defineExpose` is forbidden after an `await` expression.',
           line: 4,
-          column: 7
+          column: 7,
+          endLine: 4,
+          endColumn: 34
         }
       ]
     }
