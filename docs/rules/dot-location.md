@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/dot-location]
 - [dot-location]
 
-[@stylistic/dot-location]: https://eslint.style/rules/default/dot-location
+[@stylistic/dot-location]: https://eslint.style/rules/dot-location
 [dot-location]: https://eslint.org/docs/rules/dot-location
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/dot-location.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/dot-location.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/dot-location)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/dot-location)</sup>

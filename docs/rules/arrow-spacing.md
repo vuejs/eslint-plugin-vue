@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/arrow-spacing]
 - [arrow-spacing]
 
-[@stylistic/arrow-spacing]: https://eslint.style/rules/default/arrow-spacing
+[@stylistic/arrow-spacing]: https://eslint.style/rules/arrow-spacing
 [arrow-spacing]: https://eslint.org/docs/rules/arrow-spacing
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/arrow-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/arrow-spacing.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/arrow-spacing)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/arrow-spacing)</sup>

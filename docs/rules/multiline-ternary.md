@@ -56,7 +56,7 @@ div {
 - [@stylistic/multiline-ternary]
 - [multiline-ternary]
 
-[@stylistic/multiline-ternary]: https://eslint.style/rules/default/multiline-ternary
+[@stylistic/multiline-ternary]: https://eslint.style/rules/multiline-ternary
 [multiline-ternary]: https://eslint.org/docs/rules/multiline-ternary
 
 ## :rocket: Version
@@ -68,4 +68,4 @@ This rule was introduced in eslint-plugin-vue v9.7.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multiline-ternary.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-ternary.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/multiline-ternary)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/multiline-ternary)</sup>

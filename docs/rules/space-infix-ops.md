@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/space-infix-ops]
 - [space-infix-ops]
 
-[@stylistic/space-infix-ops]: https://eslint.style/rules/default/space-infix-ops
+[@stylistic/space-infix-ops]: https://eslint.style/rules/space-infix-ops
 [space-infix-ops]: https://eslint.org/docs/rules/space-infix-ops
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/space-infix-ops.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/space-infix-ops.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/space-infix-ops)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/space-infix-ops)</sup>
