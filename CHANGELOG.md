@@ -1,5 +1,13 @@
 # eslint-plugin-vue
 
+## 10.5.0
+
+### Minor Changes
+
+- Added [`@stylistic/eslint-plugin`](https://eslint.style/) as optional peer dependency ([#2884](https://github.com/vuejs/eslint-plugin-vue/pull/2884))
+
+- Added `ignorePattern` option to [`vue/no-v-html`](https://eslint.vuejs.org/rules/no-v-html.html) ([#2857](https://github.com/vuejs/eslint-plugin-vue/pull/2857))
+
 ## 10.4.0
 
 ### Minor Changes
