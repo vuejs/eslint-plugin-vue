@@ -296,32 +296,53 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       })`,
       errors: [
         {
+          message: 'Unexpected side effect in "test1" computed property.',
           line: 4,
-          message: 'Unexpected side effect in "test1" computed property.'
+          column: 13,
+          endLine: 4,
+          endColumn: 37
         },
         {
+          message: 'Unexpected side effect in "test2" computed property.',
           line: 9,
-          message: 'Unexpected side effect in "test2" computed property.'
+          column: 13,
+          endLine: 9,
+          endColumn: 28
         },
         {
+          message: 'Unexpected side effect in "test2" computed property.',
           line: 10,
-          message: 'Unexpected side effect in "test2" computed property.'
+          column: 13,
+          endLine: 10,
+          endColumn: 25
         },
         {
+          message: 'Unexpected side effect in "test3" computed property.',
           line: 14,
-          message: 'Unexpected side effect in "test3" computed property.'
+          column: 20,
+          endLine: 14,
+          endColumn: 44
         },
         {
+          message: 'Unexpected side effect in "test4" computed property.',
           line: 17,
-          message: 'Unexpected side effect in "test4" computed property.'
+          column: 26,
+          endLine: 17,
+          endColumn: 64
         },
         {
+          message: 'Unexpected side effect in "test5" computed property.',
           line: 21,
-          message: 'Unexpected side effect in "test5" computed property.'
+          column: 13,
+          endLine: 21,
+          endColumn: 49
         },
         {
+          message: 'Unexpected side effect in "test6" computed property.',
           line: 25,
-          message: 'Unexpected side effect in "test6" computed property.'
+          column: 20,
+          endLine: 25,
+          endColumn: 46
         }
       ]
     },
@@ -359,24 +380,39 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       })`,
       errors: [
         {
+          message: 'Unexpected side effect in "test1" computed property.',
           line: 5,
-          message: 'Unexpected side effect in "test1" computed property.'
+          column: 15,
+          endLine: 5,
+          endColumn: 39
         },
         {
+          message: 'Unexpected side effect in "test2" computed property.',
           line: 11,
-          message: 'Unexpected side effect in "test2" computed property.'
+          column: 15,
+          endLine: 11,
+          endColumn: 30
         },
         {
+          message: 'Unexpected side effect in "test2" computed property.',
           line: 12,
-          message: 'Unexpected side effect in "test2" computed property.'
+          column: 15,
+          endLine: 12,
+          endColumn: 27
         },
         {
+          message: 'Unexpected side effect in "test3" computed property.',
           line: 18,
-          message: 'Unexpected side effect in "test3" computed property.'
+          column: 22,
+          endLine: 18,
+          endColumn: 46
         },
         {
+          message: 'Unexpected side effect in "test4" computed property.',
           line: 23,
-          message: 'Unexpected side effect in "test4" computed property.'
+          column: 28,
+          endLine: 23,
+          endColumn: 66
         }
       ]
     },
@@ -394,8 +430,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       languageOptions: { parser: require('@typescript-eslint/parser') },
       errors: [
         {
+          message: 'Unexpected side effect in "test1" computed property.',
           line: 5,
-          message: 'Unexpected side effect in "test1" computed property.'
+          column: 22,
+          endLine: 5,
+          endColumn: 46
         }
       ]
     },
@@ -412,8 +451,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       })`,
       errors: [
         {
+          message: 'Unexpected side effect in "test1" computed property.',
           line: 4,
-          message: 'Unexpected side effect in "test1" computed property.'
+          column: 13,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -432,9 +474,27 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
         }
       })`,
       errors: [
-        'Unexpected side effect in "test1" computed property.',
-        'Unexpected side effect in "test2" computed property.',
-        'Unexpected side effect in "test3" computed property.'
+        {
+          message: 'Unexpected side effect in "test1" computed property.',
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 48
+        },
+        {
+          message: 'Unexpected side effect in "test2" computed property.',
+          line: 7,
+          column: 20,
+          endLine: 7,
+          endColumn: 50
+        },
+        {
+          message: 'Unexpected side effect in "test3" computed property.',
+          line: 10,
+          column: 20,
+          endLine: 10,
+          endColumn: 50
+        }
       ]
     },
     {
@@ -450,12 +510,18 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       })`,
       errors: [
         {
+          message: 'Unexpected side effect in "fooBar" computed property.',
           line: 4,
-          message: 'Unexpected side effect in "fooBar" computed property.'
+          column: 18,
+          endLine: 4,
+          endColumn: 22
         },
         {
+          message: 'Unexpected side effect in "fooBar" computed property.',
           line: 5,
-          message: 'Unexpected side effect in "fooBar" computed property.'
+          column: 17,
+          endLine: 5,
+          endColumn: 20
         }
       ]
     },
@@ -514,52 +580,88 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 12,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 12,
+          endColumn: 36
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 13,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 13,
+          endColumn: 34
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 17,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 17,
+          endColumn: 27
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 18,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 18,
+          endColumn: 24
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 21,
-          message: 'Unexpected side effect in computed function.'
+          column: 40,
+          endLine: 21,
+          endColumn: 63
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 23,
-          message: 'Unexpected side effect in computed function.'
+          column: 26,
+          endLine: 23,
+          endColumn: 63
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 27,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 27,
+          endColumn: 52
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 30,
-          message: 'Unexpected side effect in computed function.'
+          column: 40,
+          endLine: 30,
+          endColumn: 65
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 33,
-          message: 'Unexpected side effect in computed function.'
+          column: 22,
+          endLine: 33,
+          endColumn: 45
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 37,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 37,
+          endColumn: 24
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 40,
-          message: 'Unexpected side effect in computed function.'
+          column: 13,
+          endLine: 40,
+          endColumn: 24
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 42,
-          message: 'Unexpected side effect in computed function.'
+          column: 42,
+          endLine: 42,
+          endColumn: 52
         }
       ]
     },
@@ -579,8 +681,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 8,
-          message: 'Unexpected side effect in computed function.'
+          column: 40,
+          endLine: 8,
+          endColumn: 53
         }
       ]
     },
@@ -600,8 +705,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 8,
-          message: 'Unexpected side effect in computed function.'
+          column: 40,
+          endLine: 8,
+          endColumn: 63
         }
       ]
     },
@@ -657,52 +765,88 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 10,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 10,
+          endColumn: 32
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 11,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 11,
+          endColumn: 30
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 15,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 15,
+          endColumn: 23
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 16,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 16,
+          endColumn: 20
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 19,
-          message: 'Unexpected side effect in computed function.'
+          column: 36,
+          endLine: 19,
+          endColumn: 59
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 21,
-          message: 'Unexpected side effect in computed function.'
+          column: 22,
+          endLine: 21,
+          endColumn: 59
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 25,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 25,
+          endColumn: 48
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 28,
-          message: 'Unexpected side effect in computed function.'
+          column: 36,
+          endLine: 28,
+          endColumn: 61
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 31,
-          message: 'Unexpected side effect in computed function.'
+          column: 18,
+          endLine: 31,
+          endColumn: 41
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 35,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 35,
+          endColumn: 20
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 38,
-          message: 'Unexpected side effect in computed function.'
+          column: 9,
+          endLine: 38,
+          endColumn: 20
         },
         {
+          message: 'Unexpected side effect in computed function.',
           line: 40,
-          message: 'Unexpected side effect in computed function.'
+          column: 38,
+          endLine: 40,
+          endColumn: 48
         }
       ]
     },
@@ -718,8 +862,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 6,
-          message: 'Unexpected side effect in computed function.'
+          column: 36,
+          endLine: 6,
+          endColumn: 49
         }
       ]
     },
@@ -735,8 +882,11 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
       `,
       errors: [
         {
+          message: 'Unexpected side effect in computed function.',
           line: 6,
-          message: 'Unexpected side effect in computed function.'
+          column: 36,
+          endLine: 6,
+          endColumn: 59
         }
       ]
     }
