@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/keyword-spacing]
 - [keyword-spacing]
 
-[@stylistic/keyword-spacing]: https://eslint.style/rules/default/keyword-spacing
+[@stylistic/keyword-spacing]: https://eslint.style/rules/keyword-spacing
 [keyword-spacing]: https://eslint.org/docs/rules/keyword-spacing
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/keyword-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/keyword-spacing.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/keyword-spacing)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/keyword-spacing)</sup>

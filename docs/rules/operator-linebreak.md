@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/operator-linebreak]
 - [operator-linebreak]
 
-[@stylistic/operator-linebreak]: https://eslint.style/rules/default/operator-linebreak
+[@stylistic/operator-linebreak]: https://eslint.style/rules/operator-linebreak
 [operator-linebreak]: https://eslint.org/docs/rules/operator-linebreak
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/operator-linebreak.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/operator-linebreak.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/operator-linebreak)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/operator-linebreak)</sup>

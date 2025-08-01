@@ -143,11 +143,10 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 </eslint-code-block>
 
-## :books: Further Reading
+## :couple: Related Rules
 
-- [no-multiple-empty-lines]
-
-[no-multiple-empty-lines]: https://eslint.org/docs/rules/no-multiple-empty-lines
+- [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md)
+- [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)
 
 ## :rocket: Version
 

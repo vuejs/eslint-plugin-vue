@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/comma-style]
 - [comma-style]
 
-[@stylistic/comma-style]: https://eslint.style/rules/default/comma-style
+[@stylistic/comma-style]: https://eslint.style/rules/comma-style
 [comma-style]: https://eslint.org/docs/rules/comma-style
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comma-style.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comma-style.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/comma-style)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/comma-style)</sup>

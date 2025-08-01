@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/function-call-spacing]
 - [func-call-spacing]
 
-[@stylistic/function-call-spacing]: https://eslint.style/rules/default/function-call-spacing
+[@stylistic/function-call-spacing]: https://eslint.style/rules/function-call-spacing
 [func-call-spacing]: https://eslint.org/docs/rules/func-call-spacing
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/func-call-spacing.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/func-call-spacing.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/function-call-spacing)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/function-call-spacing)</sup>
