@@ -31,7 +31,7 @@ const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
 
 </eslint-code-block>
 
-This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.  
+This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.\
 See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Reactivity Transform.
 
 <eslint-code-block :rules="{'vue/no-ref-object-destructure': ['error']}" language="javascript" filename="example.js" >

@@ -198,7 +198,7 @@ By default, all rules from **base** and **essential** categories report ESLint e
 :::
 
 :::warning Status of Vue.js 3.x supports
-This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.  
+This plugin supports the basic syntax of Vue.js 3.2, `<script setup>`, and CSS variable injection, but the ref sugar, an experimental feature of Vue.js 3.2, is not yet supported.\
 If you have issues with these, please also refer to the [FAQ](#does-not-work-well-with-script-setup). If you can't find a solution, search for the issue and if the issue doesn't exist, open a new issue.
 :::
 
@@ -242,7 +242,7 @@ If you installed [@vue/cli-plugin-eslint](https://github.com/vuejs/vue-cli/tree/
 
 ### How to use a custom parser?
 
-If you want to use custom parsers such as [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `parserOptions.parser` option instead of the `parser` option. Because this plugin requires [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser) to parse `.vue` files, this plugin doesn't work if you overwrite the `parser` option.
+If you want to use custom parsers such as [@babel/eslint-parser](https://www.npmjs.com/package/@babel/eslint-parser) or [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser), you have to use the `parserOptions.parser` option instead of the `parser` option. Because this plugin requires [vue-eslint-parser] to parse `.vue` files, this plugin doesn't work if you overwrite the `parser` option.
 
 ```diff
 - "parser": "@typescript-eslint/parser",
@@ -360,8 +360,8 @@ If you want to disallow `eslint-disable` functionality in `<template>`, disable 
 
 ### Parser Options
 
-This plugin uses [vue-eslint-parser](https://www.npmjs.com/package/vue-eslint-parser).
-For `parserOptions`, you can use the `vueFeatures` options of `vue-eslint-parser`.
+This plugin uses [vue-eslint-parser].
+For `parserOptions`, you can use the `vueFeatures` options of [vue-eslint-parser].
 
 ```json
 {
@@ -432,14 +432,14 @@ read more: [JetBrains - ESLint](https://www.jetbrains.com/help/idea/eslint.html)
 
 ### What is the "Use the latest vue-eslint-parser" error?
 
-Most `eslint-plugin-vue` rules require `vue-eslint-parser` to check `<template>` ASTs.
+Most `eslint-plugin-vue` rules require [vue-eslint-parser] to check `<template>` ASTs.
 
 Make sure you have one of the following settings in your **.eslintrc**:
 
 - `"extends": ["plugin:vue/recommended"]`
 - `"extends": ["plugin:vue/base"]`
 
-If you already use another parser (e.g. `"parser": "@typescript-eslint/parser"`), please move it into `parserOptions`, so it doesn't collide with the `vue-eslint-parser` used by this plugin's configuration:
+If you already use another parser (e.g. `"parser": "@typescript-eslint/parser"`), please move it into `parserOptions`, so it doesn't collide with the [vue-eslint-parser] used by this plugin's configuration:
 
 ```diff
 - "parser": "@typescript-eslint/parser",
@@ -491,7 +491,7 @@ module.exports = {
 }
 ```
 
-If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters]. For example, if you have `vue/html-indent` configured as `error` in `rules`, but it conflicts with Prettier, remove that line:
+If Prettier conflicts with a rule you have set, [turn off that rule][prettier-linters]. For example, if you have [`vue/html-indent`](./../rules/html-indent.md) configured as `error` in `rules`, but it conflicts with Prettier, remove that line:
 
 ```diff
 module.exports = {
@@ -524,8 +524,8 @@ If you are using JSX, you need to enable JSX in your ESLint configuration.
 
 See also [ESLint - Specifying Parser Options](https://eslint.org/docs/user-guide/configuring#specifying-parser-options).
 
-The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.  
-See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/README.md#parseroptionsecmafeaturesjsx).  
+The same configuration is required when using JSX with TypeScript (TSX) in the `.vue` file.\
+See also [here](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/README.md#parseroptionsecmafeaturesjsx).\
 Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`) when using `jsx: true`.
 
 ### Trouble with Visual Studio Code
@@ -533,7 +533,7 @@ Note that you cannot use angle-bracket type assertion style (`var x = <foo>bar;`
 - Turning off the rule in the ESLint configuration file does not ignore the warning.
 - Using the `<!-- eslint-disable -->` comment does not suppress warnings.
 - Duplicate warnings are displayed.
-- Used `@babel/eslint-parser`, but the template still show `vue/no-parsing-error` warnings.
+- Used `@babel/eslint-parser`, but the template still show [`vue/no-parsing-error`](./../rules/no-parsing-error.md) warnings.
 
 You need to turn off Vetur's template validation by adding `vetur.validation.template: false` to your `.vscode/settings.json`.
 
@@ -588,3 +588,5 @@ export default [
 ```
 
 :::
+
+[vue-eslint-parser]: https://github.com/vuejs/vue-eslint-parser

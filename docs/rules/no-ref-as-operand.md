@@ -15,7 +15,7 @@ since: v7.0.0
 
 ## :book: Rule Details
 
-This rule reports cases where a ref is used incorrectly as an operand.  
+This rule reports cases where a ref is used incorrectly as an operand.\
 You must use `.value` to access the `Ref` value.
 
 <eslint-code-block fix :rules="{'vue/no-ref-as-operand': ['error']}">

@@ -12,7 +12,7 @@
 
 ### Patch Changes
 
-- Resolved TypeScript compatibility issues introduced by eslint-typegen ([#2790](https://github.com/vuejs/eslint-plugin-vue/pull/2790))
+- Resolved TypeScript compatibility issues introduced by [eslint-typegen](https://github.com/antfu/eslint-typegen) ([#2790](https://github.com/vuejs/eslint-plugin-vue/pull/2790))
 
 - Fixed inconsistent quotes in [`vue/block-lang`](https://eslint.vuejs.org/rules/block-lang.html) error messages ([#2805](https://github.com/vuejs/eslint-plugin-vue/pull/2805))
 
