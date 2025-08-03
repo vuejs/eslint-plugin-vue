@@ -62,6 +62,17 @@ tester.run('valid-define-emits', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script>
+        export default { emits: [] }
+      </script>
+      <script setup>
+        defineEmits();
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup>
         defineEmits({
           notify (payload) {
