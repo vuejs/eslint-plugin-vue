@@ -6,7 +6,7 @@ import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import eslintMarkdown from '@eslint/markdown'
-import markdownPreferences from 'eslint-plugin-markdown-preferences'
+import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
 import vueEslintParser from 'vue-eslint-parser'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
@@ -288,7 +288,7 @@ export default typegen([
       files: ['**/*.md'],
       extends: [
         eslintMarkdown.configs.recommended,
-        markdownPreferences.configs.recommended
+        eslintPluginMarkdownPreferences.configs.recommended
       ],
       rules: {
         'prettier/prettier': 'off',
