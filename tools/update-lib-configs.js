@@ -28,10 +28,11 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId) {
+function formatRules(rules, categoryId, alwaysError) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
-      let options = errorCategories.has(categoryId) ? 'error' : 'warn'
+      let options =
+        alwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
       if (defaultOptions) {
@@ -47,8 +48,16 @@ function formatRules(rules, categoryId) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category) {
-  const extendsCategoryId = extendsCategories[category.categoryId]
+function hasWarningRules(categoryId) {
+  return (
+    categoryId !== 'base' &&
+    categoryId !== 'vue3-essential' &&
+    categoryId !== 'vue2-essential'
+  )
+}
+
+function formatCategory(category, alwaysError = false) {
+  let extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
     return `/*
  * IMPORTANT!
@@ -63,7 +72,7 @@ module.exports = {
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules, category.categoryId)},
+  rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
   overrides: [
     {
       files: '*.vue',
@@ -73,6 +82,10 @@ module.exports = {
 }
 `
   }
+  if (alwaysError && hasWarningRules(extendsCategoryId)) {
+    extendsCategoryId += '-error'
+  }
+
   return `/*
  * IMPORTANT!
  * This file has been automatically generated,
@@ -80,7 +93,7 @@ module.exports = {
  */
 module.exports = {
   extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formatRules(category.rules, category.categoryId)}
+  rules: ${formatRules(category.rules, category.categoryId, alwaysError)}
 }
 `
 }
@@ -92,6 +105,13 @@ for (const category of categories) {
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
+
+  if (hasWarningRules(category.categoryId)) {
+    fs.writeFileSync(
+      path.join(ROOT, `${category.categoryId}-error.js`),
+      formatCategory(category, true)
+    )
+  }
 }
 
 // Format files.
