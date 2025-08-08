@@ -44,24 +44,17 @@ function formatRules(rules, categoryId) {
       return [rule.ruleId, options]
     })
   )
-  // use the ruleLevel variable for rules set to warn so that they can
-  // be made to error with an env variable if desired
-  return JSON.stringify(obj, null, 2).replaceAll('"warn"', 'ruleLevel')
+  return JSON.stringify(obj, null, 2)
 }
 
 function formatCategory(category) {
   const extendsCategoryId = extendsCategories[category.categoryId]
-  const formattedRules = formatRules(category.rules, category.categoryId)
-  const ruleLevelVariable = formattedRules.includes('ruleLevel')
-    ? "\nconst ruleLevel = process.env.VUE_ESLINT_ALWAYS_ERROR === 'true' ? 'error' : 'warn'\n"
-    : ''
-
   if (extendsCategoryId == null) {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
- */${ruleLevelVariable}
+ */
 module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
@@ -70,7 +63,7 @@ module.exports = {
   plugins: [
     'vue'
   ],
-  rules: ${formattedRules},
+  rules: ${formatRules(category.rules, category.categoryId)},
   overrides: [
     {
       files: '*.vue',
@@ -84,10 +77,10 @@ module.exports = {
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
- */${ruleLevelVariable}
+ */
 module.exports = {
   extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formattedRules}
+  rules: ${formatRules(category.rules, category.categoryId)}
 }
 `
 }
