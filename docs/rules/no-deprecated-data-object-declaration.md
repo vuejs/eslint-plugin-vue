@@ -16,7 +16,7 @@ since: v7.0.0
 ## :book: Rule Details
 
 This rule reports use of deprecated object declaration on `data` property (in Vue.js 3.0.0+).
-The different from `vue/no-shared-component-data` is the root instance being also disallowed.
+The different from [`vue/no-shared-component-data`](./no-shared-component-data.md) is the root instance being also disallowed.
 
 See [Migration Guide - Data Option](https://v3-migration.vuejs.org/breaking-changes/data-option.html) for more details.
 

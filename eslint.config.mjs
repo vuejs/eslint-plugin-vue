@@ -1,17 +1,50 @@
+import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import eslintMarkdown from '@eslint/markdown'
+import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
 import vueEslintParser from 'vue-eslint-parser'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
+import rules from './tools/lib/rules.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 // @ts-check
 /// <reference path="./eslint-typegen.d.ts" />
 import typegen from 'eslint-typegen'
+
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+const MD_BASE_LINKS = {
+  'vue-eslint-parser': 'https://github.com/vuejs/vue-eslint-parser',
+  '@typescript-eslint/parser': 'https://typescript-eslint.io/packages/parser',
+  'eslint-typegen': 'https://github.com/antfu/eslint-typegen',
+  '@stylistic/eslint-plugin': 'https://eslint.style/'
+}
+const MD_LINKS = {
+  ...Object.fromEntries(
+    rules.map((rule) => [
+      rule.ruleId,
+      `https://eslint.vuejs.org/rules/${rule.name}.html`
+    ])
+  ),
+  ...MD_BASE_LINKS
+}
+// Links to rule docs from files in docs will link to the md file.
+const MD_LINKS_FOR_DOCS = {
+  ...Object.fromEntries(
+    rules.map((rule) => [
+      rule.ruleId,
+      path.resolve(dirname, './docs/rules', `./${rule.name}.md`)
+    ])
+  ),
+  ...MD_BASE_LINKS
+}
 
 export default typegen([
   {
@@ -19,6 +52,7 @@ export default typegen([
       '.nyc_output',
       'coverage',
       'node_modules',
+      '.changeset/**/*.md',
       'tests/fixtures',
       'tests/integrations/eslint-plugin-import',
 
@@ -30,11 +64,8 @@ export default typegen([
       'docs/.vitepress/cache'
     ]
   },
-  eslintPluginEslintPlugin,
-  eslintPluginUnicorn.configs['flat/recommended'],
-  ...eslintPluginNodeDependencies.configs['flat/recommended'],
-  ...eslintPluginJsonc.configs['flat/recommended-with-jsonc'],
   eslintPluginPrettierRecommended,
+  ...eslintPluginNodeDependencies.configs['flat/recommended'],
   {
     plugins: {
       internal: {
@@ -46,9 +77,13 @@ export default typegen([
       }
     }
   },
-
-  // turn off some rules from shared configs in all files
-  {
+  ...defineConfig({
+    files: ['**/*.js'],
+    extends: [
+      eslintPluginEslintPlugin,
+      eslintPluginUnicorn.configs['flat/recommended']
+    ],
+    // turn off some rules from shared configs in all files
     rules: {
       'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
@@ -67,7 +102,7 @@ export default typegen([
       'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prevent-abbreviations': 'off'
     }
-  },
+  }),
 
   {
     files: ['**/*.js'],
@@ -241,10 +276,65 @@ export default typegen([
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
-  {
+  ...defineConfig({
     files: ['**/*.json'],
+    extends: [...eslintPluginJsonc.configs['flat/recommended-with-jsonc']],
     rules: {
       'prettier/prettier': 'off'
     }
-  }
+  }),
+  ...defineConfig([
+    {
+      files: ['**/*.md'],
+      extends: [
+        eslintMarkdown.configs.recommended,
+        eslintPluginMarkdownPreferences.configs.recommended
+      ],
+      rules: {
+        'prettier/prettier': 'off',
+        'markdown/no-missing-link-fragments': 'off',
+
+        'markdown-preferences/prefer-linked-words': [
+          'error',
+          {
+            words: MD_LINKS,
+            ignores: [
+              {
+                node: { type: 'heading' }
+              },
+              {
+                node: { type: 'footnoteDefinition' }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      files: ['docs/**/*.md'],
+      rules: {
+        'markdown-preferences/prefer-linked-words': [
+          'error',
+          {
+            words: MD_LINKS_FOR_DOCS,
+            ignores: [
+              {
+                node: { type: 'heading' }
+              },
+              {
+                node: { type: 'footnoteDefinition' }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      files: ['.github/ISSUE_TEMPLATE/*.md'],
+      rules: {
+        'prettier/prettier': 'off',
+        'markdown/no-missing-label-refs': 'off'
+      }
+    }
+  ])
 ])

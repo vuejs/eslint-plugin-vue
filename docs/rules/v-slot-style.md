@@ -69,7 +69,7 @@ Each value means:
 - `"longform"` ... use `v-slot:` directive notation. E.g. `v-slot:default`, `v-slot:named`, ...
 - `"v-slot"` ... use `v-slot` without that argument. This is shorter than `#default` shorthand.
 
-And a string option is supported to be consistent to similar `vue/v-bind-style` and `vue/v-on-style`.
+And a string option is supported to be consistent to similar [`vue/v-bind-style`](./v-bind-style.md) and [`vue/v-on-style`](./v-on-style.md).
 
 - `["error", "longform"]` is same as `["error", { atComponent: "longform", default: "longform", named: "longform" }]`.
 - `["error", "shorthand"]` is same as `["error", { atComponent: "shorthand", default: "shorthand", named: "shorthand" }]`.

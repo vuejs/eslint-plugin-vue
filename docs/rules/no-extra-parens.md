@@ -21,7 +21,7 @@ However, if neither is found, the rule cannot be used.
 
 ## :book: Rule Details
 
-This rule restricts the use of parentheses to only where they are necessary.  
+This rule restricts the use of parentheses to only where they are necessary.\
 This rule extends the [@stylistic/no-extra-parens] rule and applies it to the `<template>`. This rule also checks some Vue.js syntax.
 
 <eslint-code-block fix :rules="{'vue/no-extra-parens': ['error']}">
