@@ -2,8 +2,8 @@
   "name": "eslint-plugin-vue",
   "version": "10.4.0",
   "description": "Official ESLint plugin for Vue.js",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch --growl",
@@ -30,7 +30,7 @@
     "changeset:publish": "npm run typegen && changeset publish"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "homepage": "https://eslint.vuejs.org",
   "keywords": [
@@ -115,6 +115,7 @@
     "markdownlint-cli": "^0.42.0",
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
+    "tsdown": "^0.14.1",
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",

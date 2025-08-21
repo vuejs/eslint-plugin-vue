@@ -49,6 +49,7 @@ const MD_LINKS_FOR_DOCS = {
 export default typegen([
   {
     ignores: [
+      'dist',
       '.nyc_output',
       'coverage',
       'node_modules',
