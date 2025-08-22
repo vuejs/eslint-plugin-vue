@@ -142,7 +142,7 @@ export default {
     this.height = `${Math.max(120, 20 * (1 + lines))}px`
     // Load linter.
     const [plugin, { Linter }, vueEslintParser, globals] = await Promise.all([
-      import('../../../..'),
+      import('eslint-plugin-vue'),
       import('eslint'),
       import('vue-eslint-parser'),
       import('globals')
