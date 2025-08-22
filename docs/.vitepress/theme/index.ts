@@ -9,10 +9,15 @@ if (typeof window !== 'undefined') {
     }
   }
 }
+// @ts-expect-error -- Cannot change `module` option
 import type { Theme } from 'vitepress'
+// @ts-expect-error -- Cannot change `module` option
 import DefaultTheme from 'vitepress/theme'
+// @ts-expect-error -- ignore
 import Layout from './Layout.vue'
+// @ts-expect-error -- ignore
 import ESLintCodeBlock from './components/eslint-code-block.vue'
+// @ts-expect-error -- ignore
 import RulesTable from './components/rules-table.vue'
 
 const theme: Theme = {
