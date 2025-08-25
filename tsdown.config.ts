@@ -6,6 +6,6 @@ export default defineConfig({
   format: ['cjs'],
   copy: ['lib/index.d.ts'],
   dts: false,
-  external: ['typescriopt'],
+  external: ['typescript'],
   unbundle: true
 })

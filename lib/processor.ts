@@ -11,20 +11,20 @@ interface GroupState {
 }
 
 export default {
-  preprocess(code: string) {
+  preprocess(code: string): string[] {
     return [code]
   },
 
-  postprocess(messages: LintMessage[][]) {
+  postprocess(messages: LintMessage[][]): LintMessage[] {
     const state = {
       block: {
         disableAllKeys: new Set<string>(),
         disableRuleKeys: new Map<string, string[]>()
-      } as GroupState,
+      } satisfies GroupState,
       line: {
         disableAllKeys: new Set<string>(),
         disableRuleKeys: new Map<string, string[]>()
-      } as GroupState
+      } satisfies GroupState
     }
     const usedDisableDirectiveKeys: string[] = []
     const unusedDisableDirectiveReports = new Map<string, LintMessage>()
@@ -132,7 +132,7 @@ function addDisableRule(
   disableRuleKeys: GroupState['disableRuleKeys'],
   rule: string,
   key: string
-) {
+): void {
   let keys = disableRuleKeys.get(rule)
   if (keys) {
     keys.push(key)
@@ -142,7 +142,7 @@ function addDisableRule(
   }
 }
 
-function messageToKey(message: LintMessage) {
+function messageToKey(message: LintMessage): string {
   return `line:${message.line},column${
     // -1 because +1 by ESLint's `report-translator`.
     message.column - 1
@@ -156,6 +156,6 @@ function messageToKey(message: LintMessage) {
  * @returns A value less than 1 if itemA appears before itemB in the source file, greater than 1 if
  * itemA appears after itemB in the source file, or 0 if itemA and itemB have the same location.
  */
-function compareLocations(itemA: Position, itemB: Position) {
+function compareLocations(itemA: Position, itemB: Position): number {
   return itemA.line - itemB.line || itemA.column - itemB.column
 }
