@@ -128,6 +128,8 @@ tester.run('define-macros-order', rule, {
           import { bar } from 'foo'
           declare global {}
           declare namespace Namespace {}
+          declare const foo: string
+          declare function bar(): void
           export interface Props {
             msg?: string
             labels?: string[]
