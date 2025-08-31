@@ -110,6 +110,10 @@ This rule enforces a line break before and after the contents of a singleline el
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/multiline-html-element-content-newline](./multiline-html-element-content-newline.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v5.0.0

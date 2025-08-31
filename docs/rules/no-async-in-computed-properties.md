@@ -112,7 +112,9 @@ Nothing.
 
 ## :books: Further Reading
 
-- [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)
+- [vue-async-computed]
+
+[vue-async-computed]: https://github.com/foxbenjaminfox/vue-async-computed
 
 ## :rocket: Version
 

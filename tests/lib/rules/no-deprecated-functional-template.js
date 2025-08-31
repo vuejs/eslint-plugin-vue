@@ -33,9 +33,9 @@ ruleTester.run('no-deprecated-functional-template', rule, {
       code: '<template functional></template>',
       errors: [
         {
+          messageId: 'unexpected',
           line: 1,
           column: 11,
-          messageId: 'unexpected',
           endLine: 1,
           endColumn: 21
         }
@@ -46,9 +46,11 @@ ruleTester.run('no-deprecated-functional-template', rule, {
       code: '<template functional><div /></template>',
       errors: [
         {
+          messageId: 'unexpected',
           line: 1,
           column: 11,
-          messageId: 'unexpected'
+          endLine: 1,
+          endColumn: 21
         }
       ]
     }

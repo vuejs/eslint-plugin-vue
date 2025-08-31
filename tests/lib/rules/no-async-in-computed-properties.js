@@ -344,11 +344,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 6,
+          endColumn: 14
         },
         {
           message: 'Unexpected await operator in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 38
         }
       ]
     },
@@ -368,11 +374,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 6,
+          endColumn: 14
         },
         {
           message: 'Unexpected Promise object in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 58
         }
       ]
     },
@@ -391,7 +403,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 46
         }
       ]
     },
@@ -407,7 +422,15 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       languageOptions,
-      errors: ['Unexpected asynchronous action in "foo" computed property.']
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 49
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -421,7 +444,15 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         }
       `,
       languageOptions,
-      errors: ['Unexpected asynchronous action in "foo" computed property.']
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 51
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -438,7 +469,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 40
         }
       ]
     },
@@ -457,7 +491,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 37
         }
       ]
     },
@@ -476,7 +513,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 44
         }
       ]
     },
@@ -495,7 +535,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 36
         }
       ]
     },
@@ -514,7 +557,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 38
         }
       ]
     },
@@ -533,7 +579,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 39
         }
       ]
     },
@@ -552,7 +601,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 39
         }
       ]
     },
@@ -573,7 +625,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 41
         }
       ]
     },
@@ -594,7 +649,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 41
         }
       ]
     },
@@ -615,7 +673,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 42
         }
       ]
     },
@@ -636,11 +697,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 37
         },
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 35
         }
       ]
     },
@@ -662,23 +729,38 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 8,
+          endColumn: 12
         },
         {
           message: 'Unexpected await operator in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 35
         },
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 35
         },
         {
           message: 'Unexpected await operator in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 33
         },
         {
           message: 'Unexpected asynchronous action in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 19,
+          endLine: 6,
+          endColumn: 33
         }
       ]
     },
@@ -704,35 +786,59 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 37
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 44
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 38
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 45
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 36
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 43
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 11
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 44
         },
         {
           message: 'Unexpected timed function in "foo" computed property.',
-          line: 12
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 51
         }
       ]
     },
@@ -756,14 +862,62 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       `,
       languageOptions,
       errors: [
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.'
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 39
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 47
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 38
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 48
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 38
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 46
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 46
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 54
+        }
       ]
     },
     {
@@ -786,14 +940,62 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       `,
       languageOptions,
       errors: [
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.',
-        'Unexpected timed function in "foo" computed property.'
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 39
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 50
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 38
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 8,
+          column: 14,
+          endLine: 8,
+          endColumn: 51
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 38
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 10,
+          column: 14,
+          endLine: 10,
+          endColumn: 49
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 46
+        },
+        {
+          message: 'Unexpected timed function in "foo" computed property.',
+          line: 12,
+          column: 14,
+          endLine: 12,
+          endColumn: 57
+        }
       ]
     },
     {
@@ -817,29 +1019,47 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 5
+          line: 5,
+          column: 34,
+          endLine: 7,
+          endColumn: 12
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 6
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 36
         },
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 8
+          line: 8,
+          column: 34,
+          endLine: 8,
+          endColumn: 62
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 8
+          line: 8,
+          column: 46,
+          endLine: 8,
+          endColumn: 62
         },
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 9
+          line: 9,
+          column: 34,
+          endLine: 11,
+          endColumn: 12
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 10
+          line: 10,
+          column: 20,
+          endLine: 10,
+          endColumn: 36
         }
       ]
     },
@@ -860,11 +1080,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 5
+          line: 5,
+          column: 33,
+          endLine: 7,
+          endColumn: 12
         },
         {
           message: 'Unexpected Promise object in computed function.',
-          line: 6
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 56
         }
       ]
     },
@@ -887,11 +1113,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 6
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 44
         },
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 9
+          line: 9,
+          column: 20,
+          endLine: 9,
+          endColumn: 35
         }
       ]
     },
@@ -918,11 +1150,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 7
+          line: 7,
+          column: 22,
+          endLine: 7,
+          endColumn: 41
         },
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 12
+          line: 12,
+          column: 22,
+          endLine: 12,
+          endColumn: 41
         }
       ]
     },
@@ -949,35 +1187,59 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected timed function in computed function.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 37
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 44
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 38
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 45
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 36
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 11
+          line: 11,
+          column: 13,
+          endLine: 11,
+          endColumn: 43
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 12
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 44
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 13
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 51
         }
       ]
     },
@@ -998,7 +1260,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 5
+          line: 5,
+          column: 33,
+          endLine: 7,
+          endColumn: 12
         }
       ]
     },
@@ -1025,29 +1290,47 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 4
+          line: 4,
+          column: 30,
+          endLine: 6,
+          endColumn: 8
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 32
         },
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 7
+          line: 7,
+          column: 30,
+          endLine: 7,
+          endColumn: 58
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 7
+          line: 7,
+          column: 42,
+          endLine: 7,
+          endColumn: 58
         },
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 8
+          line: 8,
+          column: 30,
+          endLine: 10,
+          endColumn: 8
         },
         {
           message: 'Unexpected await operator in computed function.',
-          line: 9
+          line: 9,
+          column: 16,
+          endLine: 9,
+          endColumn: 32
         }
       ]
     },
@@ -1069,11 +1352,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 6,
+          endColumn: 8
         },
         {
           message: 'Unexpected Promise object in computed function.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 52
         }
       ]
     },
@@ -1097,11 +1386,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 40
         },
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 8
+          line: 8,
+          column: 16,
+          endLine: 8,
+          endColumn: 31
         }
       ]
     },
@@ -1129,11 +1424,17 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 6
+          line: 6,
+          column: 18,
+          endLine: 6,
+          endColumn: 37
         },
         {
           message: 'Unexpected asynchronous action in computed function.',
-          line: 11
+          line: 11,
+          column: 18,
+          endLine: 11,
+          endColumn: 37
         }
       ]
     },
@@ -1161,35 +1462,59 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       errors: [
         {
           message: 'Unexpected timed function in computed function.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 33
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 40
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 7
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 34
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 8
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 41
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 9
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 32
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 10
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 39
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 11
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 40
         },
         {
           message: 'Unexpected timed function in computed function.',
-          line: 12
+          line: 12,
+          column: 9,
+          endLine: 12,
+          endColumn: 47
         }
       ]
     },
@@ -1211,7 +1536,10 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         {
           message:
             'Unexpected async function declaration in computed function.',
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 6,
+          endColumn: 8
         }
       ]
     }

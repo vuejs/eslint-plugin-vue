@@ -21,7 +21,7 @@ However, if neither is found, the rule cannot be used.
 
 ## :book: Rule Details
 
-This rule restricts the use of parentheses to only where they are necessary.  
+This rule restricts the use of parentheses to only where they are necessary.\
 This rule extends the [@stylistic/no-extra-parens] rule and applies it to the `<template>`. This rule also checks some Vue.js syntax.
 
 <eslint-code-block fix :rules="{'vue/no-extra-parens': ['error']}">
@@ -46,7 +46,7 @@ This rule extends the [@stylistic/no-extra-parens] rule and applies it to the `<
 - [@stylistic/no-extra-parens]
 - [no-extra-parens]
 
-[@stylistic/no-extra-parens]: https://eslint.style/rules/default/no-extra-parens
+[@stylistic/no-extra-parens]: https://eslint.style/rules/no-extra-parens
 [no-extra-parens]: https://eslint.org/docs/rules/no-extra-parens
 
 ## :rocket: Version
@@ -58,4 +58,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-extra-parens.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-extra-parens.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/no-extra-parens)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/no-extra-parens)</sup>

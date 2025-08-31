@@ -442,31 +442,52 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop1" prop.',
-          line: 4
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: 'Unexpected mutation of "prop2" prop.',
-          line: 5
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 31
         },
         {
           message: 'Unexpected mutation of "prop3" prop.',
-          line: 6
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 39
         },
         {
           message: 'Unexpected mutation of "prop5" prop.',
-          line: 8
+          line: 8,
+          column: 24,
+          endLine: 8,
+          endColumn: 60
         },
         {
           message: 'Unexpected mutation of "prop6" prop.',
-          line: 9
+          line: 9,
+          column: 24,
+          endLine: 9,
+          endColumn: 36
         },
         {
           message: 'Unexpected mutation of "prop7" prop.',
-          line: 10
+          line: 10,
+          column: 26,
+          endLine: 10,
+          endColumn: 44
         },
         {
           message: 'Unexpected mutation of "prop9" prop.',
-          line: 12
+          line: 12,
+          column: 24,
+          endLine: 12,
+          endColumn: 38
         }
       ]
     },
@@ -490,8 +511,20 @@ ruleTester.run('no-mutating-props', rule, {
         </script>
       `,
       errors: [
-        'Unexpected mutation of "prop1" prop.',
-        'Unexpected mutation of "prop5" prop.'
+        {
+          message: 'Unexpected mutation of "prop1" prop.',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 42
+        },
+        {
+          message: 'Unexpected mutation of "prop5" prop.',
+          line: 8,
+          column: 26,
+          endLine: 8,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -511,9 +544,27 @@ ruleTester.run('no-mutating-props', rule, {
         </script>
       `,
       errors: [
-        'Unexpected mutation of "prop1" prop.',
-        'Unexpected mutation of "prop2" prop.',
-        'Unexpected mutation of "prop3" prop.'
+        {
+          message: 'Unexpected mutation of "prop1" prop.',
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 44
+        },
+        {
+          message: 'Unexpected mutation of "prop2" prop.',
+          line: 5,
+          column: 26,
+          endLine: 5,
+          endColumn: 50
+        },
+        {
+          message: 'Unexpected mutation of "prop3" prop.',
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 50
+        }
       ]
     },
     {
@@ -536,19 +587,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop1" prop.',
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 39
         },
         {
           message: 'Unexpected mutation of "prop2" prop.',
-          line: 5
+          line: 5,
+          column: 29,
+          endLine: 5,
+          endColumn: 34
         },
         {
           message: 'Unexpected mutation of "prop3" prop.',
-          line: 6
+          line: 6,
+          column: 29,
+          endLine: 6,
+          endColumn: 44
         },
         {
           message: 'Unexpected mutation of "prop4" prop.',
-          line: 7
+          line: 7,
+          column: 29,
+          endLine: 7,
+          endColumn: 39
         }
       ]
     },
@@ -581,19 +644,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "items" prop.',
-          line: 16
+          line: 16,
+          column: 17,
+          endLine: 16,
+          endColumn: 29
         },
         {
           message: 'Unexpected mutation of "todo" prop.',
-          line: 17
+          line: 17,
+          column: 17,
+          endLine: 17,
+          endColumn: 45
         },
         {
           message: 'Unexpected mutation of "items" prop.',
-          line: 18
+          line: 18,
+          column: 17,
+          endLine: 18,
+          endColumn: 45
         },
         {
           message: 'Unexpected mutation of "todo" prop.',
-          line: 19
+          line: 19,
+          column: 17,
+          endLine: 19,
+          endColumn: 38
         }
       ]
     },
@@ -614,9 +689,27 @@ ruleTester.run('no-mutating-props', rule, {
         </script>
       `,
       errors: [
-        'Unexpected mutation of "foo" prop.',
-        'Unexpected mutation of "bar" prop.',
-        'Unexpected mutation of "baz" prop.'
+        {
+          message: 'Unexpected mutation of "foo" prop.',
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 47
+        },
+        {
+          message: 'Unexpected mutation of "bar" prop.',
+          line: 8,
+          column: 18,
+          endLine: 8,
+          endColumn: 50
+        },
+        {
+          message: 'Unexpected mutation of "baz" prop.',
+          line: 9,
+          column: 18,
+          endLine: 9,
+          endColumn: 50
+        }
       ]
     },
     {
@@ -641,7 +734,10 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 8
+          line: 8,
+          column: 31,
+          endLine: 8,
+          endColumn: 35
         }
       ]
     },
@@ -666,11 +762,17 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 5
+          line: 5,
+          column: 31,
+          endLine: 5,
+          endColumn: 40
         },
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 7
+          line: 7,
+          column: 28,
+          endLine: 7,
+          endColumn: 45
         }
       ]
     },
@@ -698,15 +800,24 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 4
+          line: 4,
+          column: 38,
+          endLine: 4,
+          endColumn: 47
         },
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 5
+          line: 5,
+          column: 38,
+          endLine: 5,
+          endColumn: 42
         },
         {
           message: 'Unexpected mutation of "prop" prop.',
-          line: 10
+          line: 10,
+          column: 40,
+          endLine: 10,
+          endColumn: 49
         }
       ]
     },
@@ -743,27 +854,45 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "prop1" prop.',
-          line: 4
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: 'Unexpected mutation of "prop2" prop.',
-          line: 5
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 31
         },
         {
           message: 'Unexpected mutation of "prop5" prop.',
-          line: 8
+          line: 8,
+          column: 24,
+          endLine: 8,
+          endColumn: 60
         },
         {
           message: 'Unexpected mutation of "prop6" prop.',
-          line: 9
+          line: 9,
+          column: 24,
+          endLine: 9,
+          endColumn: 36
         },
         {
           message: 'Unexpected mutation of "prop10" prop.',
-          line: 13
+          line: 13,
+          column: 24,
+          endLine: 13,
+          endColumn: 42
         },
         {
           message: 'Unexpected mutation of "prop10" prop.',
-          line: 22
+          line: 22,
+          column: 17,
+          endLine: 22,
+          endColumn: 35
         }
       ]
     },
@@ -786,19 +915,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 25
         },
         {
           message: 'Unexpected mutation of "b" prop.',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 26
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 30
         },
         {
           message: 'Unexpected mutation of "d" prop.',
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 29
         }
       ]
     },
@@ -823,31 +964,52 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message: 'Unexpected mutation of "b" prop.',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 24
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 24
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 9
+          line: 9,
+          column: 15,
+          endLine: 9,
+          endColumn: 26
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 10
+          line: 10,
+          column: 15,
+          endLine: 10,
+          endColumn: 25
         },
         {
           message: 'Unexpected mutation of "d" prop.',
-          line: 11
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 22
         },
         {
           message: 'Unexpected mutation of "d" prop.',
-          line: 12
+          line: 12,
+          column: 15,
+          endLine: 12,
+          endColumn: 22
         }
       ]
     },
@@ -869,19 +1031,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 27
         },
         {
           message: 'Unexpected mutation of "b" prop.',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 24
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 26
         }
       ]
     },
@@ -902,19 +1076,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 25
         },
         {
           message: 'Unexpected mutation of "b" prop.',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 26
         },
         {
           message: 'Unexpected mutation of "c" prop.',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 30
         },
         {
           message: 'Unexpected mutation of "d" prop.',
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 29
         }
       ]
     },
@@ -929,7 +1115,15 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      errors: ['Unexpected mutation of "[a]" prop.']
+      errors: [
+        {
+          message: 'Unexpected mutation of "[a]" prop.',
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -942,7 +1136,15 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `,
-      errors: ['Unexpected mutation of "[a]" prop.']
+      errors: [
+        {
+          message: 'Unexpected mutation of "[a]" prop.',
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 23
+        }
+      ]
     },
 
     {
@@ -959,7 +1161,10 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "[foo]" prop.',
-          line: 7
+          line: 7,
+          column: 27,
+          endLine: 7,
+          endColumn: 37
         }
       ]
     },
@@ -979,11 +1184,17 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
-          line: 3
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 32
         },
         {
           message: 'Unexpected mutation of "value" prop.',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 38
         }
       ]
     },
@@ -1000,7 +1211,10 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -1017,7 +1231,10 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -1039,7 +1256,10 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "value" prop.',
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -1066,19 +1286,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 25
         },
         {
           message: 'Unexpected mutation of "b" prop.',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 26
         },
         {
           message: 'Unexpected mutation of "d" prop.',
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 29
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 11
+          line: 11,
+          column: 17,
+          endLine: 11,
+          endColumn: 27
         }
       ]
     },
@@ -1109,19 +1341,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "bar" prop.',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 30
         },
         {
           message: 'Unexpected mutation of "window" prop.',
-          line: 5
+          line: 5,
+          column: 27,
+          endLine: 5,
+          endColumn: 33
         },
         {
           message: 'Unexpected mutation of "Infinity" prop.',
-          line: 6
+          line: 6,
+          column: 27,
+          endLine: 6,
+          endColumn: 35
         },
         {
           message: 'Unexpected mutation of "obj" prop.',
-          line: 18
+          line: 18,
+          column: 9,
+          endLine: 18,
+          endColumn: 19
         }
       ]
     },
@@ -1149,19 +1393,31 @@ ruleTester.run('no-mutating-props', rule, {
       errors: [
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 3
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 37
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 31
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 7
+          line: 7,
+          column: 27,
+          endLine: 7,
+          endColumn: 34
         },
         {
           message: 'Unexpected mutation of "a" prop.',
-          line: 15
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 21
         }
       ]
     }

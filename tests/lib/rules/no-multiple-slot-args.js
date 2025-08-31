@@ -120,10 +120,34 @@ ruleTester.run('no-multiple-slot-args', rule, {
       </script>
       `,
       errors: [
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.'
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 5,
+          column: 46,
+          endLine: 5,
+          endColumn: 49
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 6,
+          column: 42,
+          endLine: 6,
+          endColumn: 45
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 8,
+          column: 44,
+          endLine: 8,
+          endColumn: 47
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 9,
+          column: 40,
+          endLine: 9,
+          endColumn: 43
+        }
       ]
     },
     {
@@ -142,10 +166,34 @@ ruleTester.run('no-multiple-slot-args', rule, {
       </script>
       `,
       errors: [
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.'
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 5,
+          column: 44,
+          endLine: 5,
+          endColumn: 47
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 6,
+          column: 40,
+          endLine: 6,
+          endColumn: 43
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 8,
+          column: 42,
+          endLine: 8,
+          endColumn: 45
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 9,
+          column: 38,
+          endLine: 9,
+          endColumn: 41
+        }
       ]
     },
     {
@@ -164,8 +212,20 @@ ruleTester.run('no-multiple-slot-args', rule, {
       </script>
       `,
       errors: [
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.'
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 5,
+          column: 49,
+          endLine: 5,
+          endColumn: 52
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 8,
+          column: 47,
+          endLine: 8,
+          endColumn: 50
+        }
       ]
     },
     {
@@ -184,8 +244,20 @@ ruleTester.run('no-multiple-slot-args', rule, {
       </script>
       `,
       errors: [
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.'
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 5,
+          column: 46,
+          endLine: 5,
+          endColumn: 49
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 8,
+          column: 44,
+          endLine: 8,
+          endColumn: 47
+        }
       ]
     },
     {
@@ -235,8 +307,20 @@ ruleTester.run('no-multiple-slot-args', rule, {
       </script>
       `,
       errors: [
-        'Unexpected multiple arguments.',
-        'Unexpected multiple arguments.'
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 6,
+          column: 36,
+          endLine: 6,
+          endColumn: 39
+        },
+        {
+          message: 'Unexpected multiple arguments.',
+          line: 7,
+          column: 32,
+          endLine: 7,
+          endColumn: 35
+        }
       ]
     }
   ]

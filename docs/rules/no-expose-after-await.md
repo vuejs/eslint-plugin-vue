@@ -14,8 +14,8 @@ since: v8.1.0
 
 ## :book: Rule Details
 
-This rule reports usages of `expose()` and `defineExpose()` after an `await` expression.  
-In the `setup()` function, `expose()` should be registered synchronously.  
+This rule reports usages of `expose()` and `defineExpose()` after an `await` expression.\
+In the `setup()` function, `expose()` should be registered synchronously.\
 In the `<script setup>`, `defineExpose()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-expose-after-await': ['error']}">

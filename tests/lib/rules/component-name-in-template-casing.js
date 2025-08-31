@@ -333,15 +333,24 @@ tester.run('component-name-in-template-casing', rule, {
       errors: [
         {
           message: 'Component name "CoolComponent" is not kebab-case.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message: 'Component name "coolComponent" is not kebab-case.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 25
         },
         {
           message: 'Component name "Cool-component" is not kebab-case.',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 26
         }
       ]
     },
@@ -372,7 +381,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -401,7 +418,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -430,7 +455,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -455,7 +488,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -484,7 +525,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['kebab-case'],
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "TheComponent" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
     {
       code: `
@@ -498,7 +547,15 @@ tester.run('component-name-in-template-casing', rule, {
       </template>
       `,
       options: ['kebab-case', { registeredComponentsOnly: false }],
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "TheComponent" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -525,7 +582,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -550,7 +615,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -575,7 +648,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -600,7 +681,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "theComponent" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "theComponent" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -625,7 +714,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['kebab-case'],
-      errors: ['Component name "theComponent" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "theComponent" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -650,7 +747,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "The-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "The-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -675,7 +780,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['kebab-case'],
-      errors: ['Component name "The-component" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "The-component" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: `
@@ -689,7 +802,15 @@ tester.run('component-name-in-template-casing', rule, {
       </template>
       `,
       options: ['kebab-case', { registeredComponentsOnly: false }],
-      errors: ['Component name "Thecomponent" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "Thecomponent" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -714,7 +835,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -741,7 +870,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -766,7 +903,15 @@ tester.run('component-name-in-template-casing', rule, {
       </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
 
     // ignores
@@ -795,8 +940,20 @@ tester.run('component-name-in-template-casing', rule, {
         }
       ],
       errors: [
-        'Component name "the-component" is not PascalCase.',
-        'Component name "the-component" is not PascalCase.'
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -824,8 +981,20 @@ tester.run('component-name-in-template-casing', rule, {
         }
       ],
       errors: [
-        'Component name "the-component" is not PascalCase.',
-        'Component name "the-component" is not PascalCase.'
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -850,10 +1019,34 @@ tester.run('component-name-in-template-casing', rule, {
         }
       ],
       errors: [
-        'Component name "foo--bar" is not kebab-case.',
-        'Component name "Foo--Bar" is not kebab-case.',
-        'Component name "FooBar" is not kebab-case.',
-        'Component name "FooBar_Baz-qux" is not kebab-case.'
+        {
+          message: 'Component name "foo--bar" is not kebab-case.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 18
+        },
+        {
+          message: 'Component name "Foo--Bar" is not kebab-case.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 18
+        },
+        {
+          message: 'Component name "FooBar" is not kebab-case.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 16
+        },
+        {
+          message: 'Component name "FooBar_Baz-qux" is not kebab-case.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -878,10 +1071,34 @@ tester.run('component-name-in-template-casing', rule, {
       `,
       options: ['PascalCase', { registeredComponentsOnly: false }],
       errors: [
-        'Component name "suspense" is not PascalCase.',
-        'Component name "teleport" is not PascalCase.',
-        'Component name "client-only" is not PascalCase.',
-        'Component name "keep-alive" is not PascalCase.'
+        {
+          message: 'Component name "suspense" is not PascalCase.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 20
+        },
+        {
+          message: 'Component name "teleport" is not PascalCase.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 20
+        },
+        {
+          message: 'Component name "client-only" is not PascalCase.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 23
+        },
+        {
+          message: 'Component name "keep-alive" is not PascalCase.',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -902,7 +1119,15 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
       `,
       options: ['PascalCase'],
-      errors: ['Component name "the-component" is not PascalCase.']
+      errors: [
+        {
+          message: 'Component name "the-component" is not PascalCase.',
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: `
@@ -922,7 +1147,15 @@ tester.run('component-name-in-template-casing', rule, {
         </script>
       `,
       options: ['kebab-case'],
-      errors: ['Component name "TheComponent" is not kebab-case.']
+      errors: [
+        {
+          message: 'Component name "TheComponent" is not kebab-case.',
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: `
@@ -940,7 +1173,9 @@ tester.run('component-name-in-template-casing', rule, {
         {
           message: 'Component name "router-view" is not PascalCase.',
           line: 3,
-          column: 11
+          column: 11,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     },
@@ -960,7 +1195,9 @@ tester.run('component-name-in-template-casing', rule, {
         {
           message: 'Component name "RouterView" is not kebab-case.',
           line: 3,
-          column: 11
+          column: 11,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -980,7 +1217,9 @@ tester.run('component-name-in-template-casing', rule, {
         {
           message: 'Component name "RouterView" is not kebab-case.',
           line: 3,
-          column: 11
+          column: 11,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -1043,32 +1282,44 @@ tester.run('component-name-in-template-casing', rule, {
               {
                 message: 'Component name "foo" is not PascalCase.',
                 line: 13,
-                column: 17
+                column: 17,
+                endLine: 13,
+                endColumn: 21
               },
               {
                 message: 'Component name "hello-world1" is not PascalCase.',
                 line: 14,
-                column: 17
+                column: 17,
+                endLine: 14,
+                endColumn: 30
               },
               {
                 message: 'Component name "hello-world2" is not PascalCase.',
                 line: 15,
-                column: 17
+                column: 17,
+                endLine: 15,
+                endColumn: 30
               },
               {
                 message: 'Component name "hello-world3" is not PascalCase.',
                 line: 16,
-                column: 17
+                column: 17,
+                endLine: 16,
+                endColumn: 30
               },
               {
                 message: 'Component name "hello-world4" is not PascalCase.',
                 line: 17,
-                column: 17
+                column: 17,
+                endLine: 17,
+                endColumn: 30
               },
               {
                 message: 'Component name "hello-world5" is not PascalCase.',
                 line: 18,
-                column: 17
+                column: 17,
+                endLine: 18,
+                endColumn: 30
               }
             ]
           }

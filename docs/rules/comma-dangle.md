@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/comma-dangle]
 - [comma-dangle]
 
-[@stylistic/comma-dangle]: https://eslint.style/rules/default/comma-dangle
+[@stylistic/comma-dangle]: https://eslint.style/rules/comma-dangle
 [comma-dangle]: https://eslint.org/docs/rules/comma-dangle
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comma-dangle.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comma-dangle.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/comma-dangle)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/comma-dangle)</sup>

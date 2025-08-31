@@ -131,7 +131,15 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
           foo: () => {}
         },
       }`,
-      errors: ['You should not use an arrow function to define a watcher.']
+      errors: [
+        {
+          message: 'You should not use an arrow function to define a watcher.',
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -145,7 +153,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
       errors: [
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -161,7 +172,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
       errors: [
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -207,7 +221,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
       errors: [
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 15
+          line: 15,
+          column: 14,
+          endLine: 17,
+          endColumn: 12
         }
       ]
     },
@@ -227,7 +244,10 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
       errors: [
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 8
+          line: 8,
+          column: 22,
+          endLine: 8,
+          endColumn: 30
         }
       ]
     },
@@ -248,11 +268,17 @@ ruleTester.run('no-arrow-functions-in-watch', rule, {
       errors: [
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 43
         },
         {
           message: 'You should not use an arrow function to define a watcher.',
-          line: 8
+          line: 8,
+          column: 24,
+          endLine: 8,
+          endColumn: 54
         }
       ]
     }

@@ -128,42 +128,106 @@ ruleTester.run('no-multiple-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template><div></div><div></div></template>',
-      errors: ['The template root requires exactly one element.']
+      errors: [
+        {
+          message: 'The template root requires exactly one element.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template>\n    <div></div>\n    <div></div>\n</template>',
-      errors: ['The template root requires exactly one element.']
+      errors: [
+        {
+          message: 'The template root requires exactly one element.',
+          line: 3,
+          column: 5,
+          endLine: 3,
+          endColumn: 16
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template>{{a b c}}</template>',
-      errors: ['The template root requires an element rather than texts.']
+      errors: [
+        {
+          message: 'The template root requires an element rather than texts.',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div></div>aaaaaa</template>',
-      errors: ['The template root requires an element rather than texts.']
+      errors: [
+        {
+          message: 'The template root requires an element rather than texts.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template>aaaaaa<div></div></template>',
-      errors: ['The template root requires an element rather than texts.']
+      errors: [
+        {
+          message: 'The template root requires an element rather than texts.',
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 17
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-for="x in list"></div></template>',
-      errors: ["The template root disallows 'v-for' directives."]
+      errors: [
+        {
+          message: "The template root disallows 'v-for' directives.",
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><slot></slot></template>',
-      errors: ["The template root disallows '<slot>' elements."]
+      errors: [
+        {
+          message: "The template root disallows '<slot>' elements.",
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 17
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><template></template></template>',
-      errors: ["The template root disallows '<template>' elements."]
+      errors: [
+        {
+          message: "The template root disallows '<template>' elements.",
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 21
+        }
+      ]
     },
     {
       code: `
@@ -177,11 +241,17 @@ ruleTester.run('no-multiple-template-root', rule, {
       errors: [
         {
           message: 'The template root disallows comments.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         },
         {
           message: 'The template root disallows comments.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 26
         }
       ]
     },
@@ -199,7 +269,10 @@ ruleTester.run('no-multiple-template-root', rule, {
       errors: [
         {
           message: 'The template root disallows comments.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -227,15 +300,24 @@ ruleTester.run('no-multiple-template-root', rule, {
       errors: [
         {
           message: 'The template root disallows comments.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         },
         {
           message: 'The template root disallows comments.',
-          line: 12
+          line: 12,
+          column: 9,
+          endLine: 12,
+          endColumn: 26
         },
         {
           message: 'The template root disallows comments.',
-          line: 17
+          line: 17,
+          column: 9,
+          endLine: 17,
+          endColumn: 26
         }
       ]
     },
@@ -253,7 +335,10 @@ ruleTester.run('no-multiple-template-root', rule, {
       errors: [
         {
           message: 'The template root disallows comments.',
-          line: 7
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 26
         }
       ]
     },
@@ -269,11 +354,17 @@ ruleTester.run('no-multiple-template-root', rule, {
       errors: [
         {
           message: 'The template root disallows comments.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: 'The template root requires exactly one element.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 16
         }
       ]
     },
@@ -289,7 +380,15 @@ ruleTester.run('no-multiple-template-root', rule, {
       </template>
       `,
       options: [{ disallowComments: true }],
-      errors: ['The template root disallows comments.']
+      errors: [
+        {
+          message: 'The template root disallows comments.',
+          line: 3,
+          column: 9,
+          endLine: 4,
+          endColumn: 96
+        }
+      ]
     }
   ]
 })

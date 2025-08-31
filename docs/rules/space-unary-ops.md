@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/space-unary-ops]
 - [space-unary-ops]
 
-[@stylistic/space-unary-ops]: https://eslint.style/rules/default/space-unary-ops
+[@stylistic/space-unary-ops]: https://eslint.style/rules/space-unary-ops
 [space-unary-ops]: https://eslint.org/docs/rules/space-unary-ops
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/space-unary-ops.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/space-unary-ops.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/space-unary-ops)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/space-unary-ops)</sup>

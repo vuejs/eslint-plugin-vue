@@ -9,18 +9,12 @@ const cp = require('child_process')
 const path = require('path')
 const semver = require('semver')
 
+const PLUGIN_DIR = path.join(__dirname, 'eslint-plugin-import')
 const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`
 
 describe('Integration with eslint-plugin-import', () => {
-  let originalCwd
-
-  before(() => {
-    originalCwd = process.cwd()
-    process.chdir(path.join(__dirname, 'eslint-plugin-import'))
-    cp.execSync('npm i', { stdio: 'inherit' })
-  })
-  after(() => {
-    process.chdir(originalCwd)
+  beforeAll(() => {
+    cp.execSync('npm i', { cwd: PLUGIN_DIR, stdio: 'inherit' })
   })
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/21#issuecomment-308957697
@@ -41,6 +35,6 @@ describe('Integration with eslint-plugin-import', () => {
       return
     }
 
-    cp.execSync(`${ESLINT} a.vue`, { stdio: 'inherit' })
+    cp.execSync(`${ESLINT} a.vue`, { cwd: PLUGIN_DIR, stdio: 'inherit' })
   })
 })

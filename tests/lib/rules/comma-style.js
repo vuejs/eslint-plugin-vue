@@ -3,8 +3,10 @@
  */
 'use strict'
 
+const semver = require('semver')
 const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/comma-style')
+const { eslintStylisticVersion } = require('../../test-utils/eslint-stylistic')
 
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
@@ -34,13 +36,6 @@ tester.run('comma-style', rule, {
         </template>`,
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }]
     },
-    `
-      <template>
-        <CustomButton v-slot="a,
-          b
-          ,c" />
-      </template>
-    `,
     {
       code: `
         <template>
@@ -70,7 +65,10 @@ tester.run('comma-style', rule, {
       errors: [
         {
           message: "',' should be placed last.",
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -89,7 +87,10 @@ tester.run('comma-style', rule, {
       errors: [
         {
           message: "',' should be placed last.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 14
         }
       ]
     },
@@ -107,8 +108,11 @@ tester.run('comma-style', rule, {
       options: ['first', { exceptions: { ArrowFunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed first."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed first.",
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     },
@@ -130,8 +134,11 @@ tester.run('comma-style', rule, {
       options: ['first', { exceptions: { FunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed first."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed first.",
+          line: 3,
+          column: 36,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -151,10 +158,63 @@ tester.run('comma-style', rule, {
       options: ['last', { exceptions: { FunctionExpression: false } }],
       errors: [
         {
-          message: "',' should be placed last."
-          // line: 3 // eslint v7.0
+          message: "',' should be placed last.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     }
   ]
 })
+
+if (
+  eslintStylisticVersion === undefined ||
+  semver.lt(eslintStylisticVersion, '3.0.0') ||
+  semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
+) {
+  tester.run('comma-style', rule, {
+    valid: [
+      `
+      <template>
+        <CustomButton v-slot="a,
+          b
+          ,c" />
+      </template>
+    `
+    ],
+    invalid: []
+  })
+} else {
+  tester.run('comma-style', rule, {
+    valid: [],
+    invalid: [
+      {
+        code: `
+        <template>
+          <CustomButton v-slot="a,
+            b
+            ,c" />
+        </template>
+      `,
+        output: `
+        <template>
+          <CustomButton v-slot="a,
+            b,
+            c" />
+        </template>
+      `,
+        errors: [
+          {
+            message: "',' should be placed last.",
+            line: 5,
+            column: 13,
+            endLine: 5,
+            endColumn: 14
+          }
+        ]
+      }
+    ]
+  })
+}

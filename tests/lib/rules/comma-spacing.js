@@ -91,12 +91,16 @@ tester.run('comma-spacing', rule, {
         {
           message: "There should be no space before ','.",
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: "A space is required after ','.",
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -112,19 +116,31 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 36,
+          endLine: 3,
+          endColumn: 37
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 36,
+          endLine: 3,
+          endColumn: 37
         },
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 41
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     },
@@ -140,19 +156,31 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 40
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 40
         },
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 46,
+          endLine: 3,
+          endColumn: 47
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 46,
+          endLine: 3,
+          endColumn: 47
         }
       ]
     },
@@ -168,11 +196,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
         }
       ]
     },
@@ -188,11 +222,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 30,
+          endLine: 3,
+          endColumn: 31
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 30,
+          endLine: 3,
+          endColumn: 31
         }
       ]
     },
@@ -208,11 +248,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 40
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 40
         }
       ]
     },
@@ -232,11 +278,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 4
+          line: 4,
+          column: 31,
+          endLine: 4,
+          endColumn: 32
         },
         {
           message: "A space is required after ','.",
-          line: 4
+          line: 4,
+          column: 31,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     },
@@ -252,11 +304,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "There should be no space before ','.",
-          line: 3
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: "A space is required after ','.",
-          line: 3
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -277,11 +335,17 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "A space is required before ','.",
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 4,
+          endColumn: 18
         },
         {
           message: "There should be no space after ','.",
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 4,
+          endColumn: 18
         }
       ]
     },
@@ -301,7 +365,10 @@ tester.run('comma-spacing', rule, {
       errors: [
         {
           message: "A space is required after ','.",
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     }

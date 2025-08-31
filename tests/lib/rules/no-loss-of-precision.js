@@ -53,11 +53,17 @@ tester.run('no-loss-of-precision', rule, {
             errors: [
               {
                 message: 'This number literal will lose precision at runtime.',
-                line: 3
+                line: 3,
+                column: 17,
+                endLine: 3,
+                endColumn: 37
               },
               {
                 message: 'This number literal will lose precision at runtime.',
-                line: 4
+                line: 4,
+                column: 17,
+                endLine: 4,
+                endColumn: 39
               }
             ]
           },
@@ -71,7 +77,10 @@ tester.run('no-loss-of-precision', rule, {
             errors: [
               {
                 message: 'This number literal will lose precision at runtime.',
-                line: 3
+                line: 3,
+                column: 34,
+                endLine: 3,
+                endColumn: 54
               }
             ]
           }
