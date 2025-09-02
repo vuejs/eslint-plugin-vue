@@ -74,15 +74,6 @@ tester.run('valid-define-options', rule, {
 
       defineOptions(def);
       </script>`
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-        const COMPONENT_NAME = 'TestComponent'
-        defineOptions({ name: COMPONENT_NAME })
-      </script>`,
-      options: [{ allowVariableNamePattern: '^[A-Z_]+$' }]
     }
   ],
   invalid: [
@@ -212,21 +203,6 @@ tester.run('valid-define-options', rule, {
           message:
             '`defineOptions()` cannot be used to declare `slots`. Use `defineSlots()` instead.',
           line: 3
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup>
-        const componentName = "TestComponent"
-        defineOptions({ name: componentName });
-      </script>`,
-      options: [{ allowVariableNamePattern: '^[A-Z_]+$' }],
-      errors: [
-        {
-          message: '`defineOptions` is referencing locally declared variables.',
-          line: 4
         }
       ]
     }

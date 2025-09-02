@@ -108,18 +108,7 @@ defineOptions({ props: { msg: String } })
 
 ## :wrench: Options
 
-```json
-{
-  "vue/valid-define-options": [
-    "error",
-    {
-      "allowVariableNamePattern": "^[A-Z_]+$"
-    }
-  ]
-}
-```
-
-- `allowVariableNamePattern` Allow reference to declared variables if variable name matches patterns, default `null`.
+Nothing.
 
 ## :couple: Related Rules
 
