@@ -118,6 +118,7 @@
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
+    "vitest": "^3.2.4",
     "vue-eslint-parser": "^10.0.0"
   }
 }
