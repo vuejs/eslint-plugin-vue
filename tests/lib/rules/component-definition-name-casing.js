@@ -192,7 +192,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -209,7 +212,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo  bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -226,7 +232,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo!bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -243,7 +252,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo!bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -264,7 +276,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -286,7 +301,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -308,7 +326,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'Literal',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -321,7 +342,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -334,7 +358,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -350,7 +377,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 49
         }
       ]
     },
@@ -363,7 +393,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -376,7 +409,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo-bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -390,7 +426,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not PascalCase.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -404,7 +443,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'Literal',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -418,7 +460,10 @@ ruleTester.run('component-definition-name-casing', rule, {
         {
           message: 'Property name "foo_bar" is not kebab-case.',
           type: 'TemplateLiteral',
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -434,7 +479,10 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          line: 1
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 46
         }
       ]
     },
@@ -450,7 +498,10 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "FooBar" is not kebab-case.',
-          line: 1
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     }

@@ -135,11 +135,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 22
         },
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     },
@@ -157,11 +163,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 20
         },
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 16,
+          endLine: 6,
+          endColumn: 23
         }
       ]
     },
@@ -176,8 +188,20 @@ tester.run('no-deprecated-delete-set', rule, {
         })
       `,
       errors: [
-        { messageId: 'deprecated', line: 4 },
-        { messageId: 'deprecated', line: 5 }
+        {
+          messageId: 'deprecated',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 23
+        },
+        {
+          messageId: 'deprecated',
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 26
+        }
       ]
     },
     {
@@ -193,8 +217,20 @@ tester.run('no-deprecated-delete-set', rule, {
         </script>
       `,
       errors: [
-        { messageId: 'deprecated', line: 5 },
-        { messageId: 'deprecated', line: 6 }
+        {
+          messageId: 'deprecated',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          messageId: 'deprecated',
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 27
+        }
       ]
     },
     // from vue
@@ -211,11 +247,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 4,
+          endColumn: 20
         },
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 23
         }
       ]
     },
@@ -235,11 +277,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 18
         },
         {
           messageId: 'deprecated',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -256,11 +304,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 14
         },
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -277,11 +331,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         },
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 12
         }
       ]
     },
@@ -301,11 +361,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 18
         },
         {
           messageId: 'deprecated',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -325,11 +391,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 16
         },
         {
           messageId: 'deprecated',
-          line: 7
+          line: 7,
+          column: 15,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -346,11 +418,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 14
         },
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -367,11 +445,17 @@ tester.run('no-deprecated-delete-set', rule, {
       errors: [
         {
           messageId: 'deprecated',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16
         },
         {
           messageId: 'deprecated',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         }
       ]
     }

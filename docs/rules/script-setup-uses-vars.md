@@ -14,7 +14,7 @@ since: v7.13.0
 
 ::: tip
 
-This rule is not needed when using `vue-eslint-parser` v9.0.0 or later.
+This rule is not needed when using [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) v9.0.0 or later.
 
 :::
 
@@ -56,7 +56,7 @@ After turning on, `Foo` is being marked as used and `no-unused-vars` rule doesn'
 
 You can disable this rule in any of the following cases:
 
-- You are using `vue-eslint-parser` v9.0.0 or later.
+- You are using [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) v9.0.0 or later.
 - You are not using `<script setup>`.
 - You do not use the `no-unused-vars` rule.
 

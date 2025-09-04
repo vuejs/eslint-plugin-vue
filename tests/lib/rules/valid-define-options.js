@@ -74,6 +74,14 @@ tester.run('valid-define-options', rule, {
 
       defineOptions(def);
       </script>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const def = 'foo';
+      defineOptions({ name: def });
+      </script>`
     }
   ],
   invalid: [

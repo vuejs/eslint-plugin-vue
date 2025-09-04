@@ -26,7 +26,11 @@ ruleTester.run('no-multiple-objects-in-class', rule, {
       errors: [
         {
           message: 'Unexpected multiple objects. Merge objects.',
-          type: 'VAttribute'
+          type: 'VAttribute',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 63
         }
       ]
     },
@@ -35,7 +39,11 @@ ruleTester.run('no-multiple-objects-in-class', rule, {
       errors: [
         {
           message: 'Unexpected multiple objects. Merge objects.',
-          type: 'VAttribute'
+          type: 'VAttribute',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 57
         }
       ]
     },
@@ -46,7 +54,11 @@ ruleTester.run('no-multiple-objects-in-class', rule, {
       errors: [
         {
           message: 'Unexpected multiple objects. Merge objects.',
-          type: 'VAttribute'
+          type: 'VAttribute',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 64
         }
       ]
     }

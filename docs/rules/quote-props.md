@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/quote-props]
 - [quote-props]
 
-[@stylistic/quote-props]: https://eslint.style/rules/default/quote-props
+[@stylistic/quote-props]: https://eslint.style/rules/quote-props
 [quote-props]: https://eslint.org/docs/rules/quote-props
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v8.4.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/quote-props.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/quote-props.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/quote-props)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/quote-props)</sup>

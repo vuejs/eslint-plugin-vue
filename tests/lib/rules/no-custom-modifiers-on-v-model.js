@@ -51,12 +51,28 @@ ruleTester.run('no-custom-modifiers-on-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model:propName.aaa="foo"></template>',
-      errors: ["'v-model' directives don't support the modifier 'aaa'."]
+      errors: [
+        {
+          message: "'v-model' directives don't support the modifier 'aaa'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model.aaa="foo"></template>',
-      errors: ["'v-model' directives don't support the modifier 'aaa'."]
+      errors: [
+        {
+          message: "'v-model' directives don't support the modifier 'aaa'.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
     }
   ]
 })

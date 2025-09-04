@@ -12,11 +12,11 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule warns of using undefined properties.  
+This rule warns of using undefined properties.\
 This rule can help you locate potential errors resulting from misspellings property names, and implicitly added properties.
 
 ::: warning Note
-This rule cannot detect properties defined in other files or components.  
+This rule cannot detect properties defined in other files or components.\
 Note that there are many false positives if you are using mixins.
 :::
 

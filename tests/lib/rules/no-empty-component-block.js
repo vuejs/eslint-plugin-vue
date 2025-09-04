@@ -30,7 +30,11 @@ tester.run('no-empty-component-block', rule, {
       output: '',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22
         }
       ]
     },
@@ -39,7 +43,11 @@ tester.run('no-empty-component-block', rule, {
       output: '',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 23
         }
       ]
     },
@@ -49,7 +57,11 @@ tester.run('no-empty-component-block', rule, {
       output: '',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12
         }
       ]
     },
@@ -58,7 +70,11 @@ tester.run('no-empty-component-block', rule, {
       output: '',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13
         }
       ]
     },
@@ -67,7 +83,11 @@ tester.run('no-empty-component-block', rule, {
       output: '',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 20
         }
       ]
     },
@@ -76,10 +96,18 @@ tester.run('no-empty-component-block', rule, {
       output: '<script></script>',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -88,10 +116,18 @@ tester.run('no-empty-component-block', rule, {
       output: '<script />',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 23
         }
       ]
     },
@@ -100,10 +136,18 @@ tester.run('no-empty-component-block', rule, {
       output: '<script src="" />',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 20
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 37
         }
       ]
     },
@@ -112,13 +156,25 @@ tester.run('no-empty-component-block', rule, {
       output: '<script></script>',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 39
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -127,13 +183,25 @@ tester.run('no-empty-component-block', rule, {
       output: '<script />',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 13,
+          endLine: 1,
+          endColumn: 23
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 32
         }
       ]
     },
@@ -142,13 +210,25 @@ tester.run('no-empty-component-block', rule, {
       output: '<script src="" />',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 20
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 37
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 53
         }
       ]
     },
@@ -158,13 +238,25 @@ tester.run('no-empty-component-block', rule, {
       output: '  ',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 22
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 40
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 41,
+          endLine: 1,
+          endColumn: 56
         }
       ]
     },
@@ -173,13 +265,25 @@ tester.run('no-empty-component-block', rule, {
       output: '  ',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 13
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 14,
+          endLine: 1,
+          endColumn: 24
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 34
         }
       ]
     },
@@ -188,13 +292,25 @@ tester.run('no-empty-component-block', rule, {
       output: '  ',
       errors: [
         {
-          message: '`<template>` is empty. Empty block is not allowed.'
+          message: '`<template>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 20
         },
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 38
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 55
         }
       ]
     },
@@ -203,10 +319,18 @@ tester.run('no-empty-component-block', rule, {
       output: '<template><p></p></template>  ',
       errors: [
         {
-          message: '`<script>` is empty. Empty block is not allowed.'
+          message: '`<script>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 47
         },
         {
-          message: '`<style>` is empty. Empty block is not allowed.'
+          message: '`<style>` is empty. Empty block is not allowed.',
+          line: 1,
+          column: 48,
+          endLine: 1,
+          endColumn: 64
         }
       ]
     }

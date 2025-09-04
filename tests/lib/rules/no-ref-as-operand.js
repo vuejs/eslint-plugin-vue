@@ -490,7 +490,10 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 14
         }
       ]
     },
@@ -512,7 +515,10 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 18
         }
       ]
     },
@@ -536,19 +542,31 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 19
         },
         {
           messageId: 'requireDotValue',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 19
         },
         {
           messageId: 'requireDotValue',
-          line: 6
+          line: 6,
+          column: 16,
+          endLine: 6,
+          endColumn: 19
         },
         {
           messageId: 'requireDotValue',
-          line: 7
+          line: 7,
+          column: 16,
+          endLine: 7,
+          endColumn: 19
         }
       ]
     },
@@ -572,19 +590,31 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 10
         },
         {
           messageId: 'requireDotValue',
-          line: 5
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 10
         },
         {
           messageId: 'requireDotValue',
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 17
         },
         {
           messageId: 'requireDotValue',
-          line: 7
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 17
         }
       ]
     },
@@ -604,11 +634,17 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 18
         },
         {
           messageId: 'requireDotValue',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -626,7 +662,10 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 4
+          line: 4,
+          column: 15,
+          endLine: 4,
+          endColumn: 18
         }
       ]
     },
@@ -666,15 +705,24 @@ tester.run('no-ref-as-operand', rule, {
       errors: [
         {
           messageId: 'requireDotValue',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 18
         },
         {
           messageId: 'requireDotValue',
-          line: 8
+          line: 8,
+          column: 25,
+          endLine: 8,
+          endColumn: 30
         },
         {
           messageId: 'requireDotValue',
-          line: 9
+          line: 9,
+          column: 29,
+          endLine: 9,
+          endColumn: 34
         }
       ]
     },
@@ -763,27 +811,42 @@ tester.run('no-ref-as-operand', rule, {
         {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
-          line: 33
+          line: 33,
+          column: 9,
+          endLine: 33,
+          endColumn: 14
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `computed()`.',
-          line: 34
+          line: 34,
+          column: 9,
+          endLine: 34,
+          endColumn: 15
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `toRef()`.',
-          line: 36
+          line: 36,
+          column: 22,
+          endLine: 36,
+          endColumn: 28
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `customRef()`.',
-          line: 36
+          line: 36,
+          column: 34,
+          endLine: 36,
+          endColumn: 38
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `shallowRef()`.',
-          line: 38
+          line: 38,
+          column: 19,
+          endLine: 38,
+          endColumn: 22
         }
       ]
     },
@@ -804,7 +867,11 @@ tester.run('no-ref-as-operand', rule, {
       `,
       errors: [
         {
-          messageId: 'requireDotValue'
+          messageId: 'requireDotValue',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -825,7 +892,11 @@ tester.run('no-ref-as-operand', rule, {
       `,
       errors: [
         {
-          messageId: 'requireDotValue'
+          messageId: 'requireDotValue',
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -859,7 +930,9 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          column: 7
+          column: 7,
+          endLine: 10,
+          endColumn: 10
         }
       ]
     },
@@ -892,12 +965,18 @@ tester.run('no-ref-as-operand', rule, {
         {
           message:
             'Must use `.value` to read or write the value wrapped by `defineModel()`.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 18
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `defineModel()`.',
-          line: 9
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -930,12 +1009,18 @@ tester.run('no-ref-as-operand', rule, {
         {
           message:
             'Must use `.value` to read or write the value wrapped by `defineModel()`.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 18
         },
         {
           message:
             'Must use `.value` to read or write the value wrapped by `defineModel()`.',
-          line: 9
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -967,7 +1052,9 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 8,
-          endLine: 8
+          column: 23,
+          endLine: 8,
+          endColumn: 28
         }
       ]
     },
@@ -1013,7 +1100,9 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10
+          column: 35,
+          endLine: 10,
+          endColumn: 42
         }
       ]
     },
@@ -1059,7 +1148,9 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10
+          column: 31,
+          endLine: 10,
+          endColumn: 38
         }
       ]
     },
@@ -1105,7 +1196,9 @@ tester.run('no-ref-as-operand', rule, {
           message:
             'Must use `.value` to read or write the value wrapped by `ref()`.',
           line: 10,
-          endLine: 10
+          column: 38,
+          endLine: 10,
+          endColumn: 45
         }
       ]
     },

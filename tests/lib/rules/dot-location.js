@@ -48,7 +48,10 @@ tester.run('dot-location', rule, {
       errors: [
         {
           message: 'Expected dot to be on same line as object.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -71,7 +74,10 @@ tester.run('dot-location', rule, {
       errors: [
         {
           message: 'Expected dot to be on same line as property.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     }

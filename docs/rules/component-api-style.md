@@ -14,7 +14,7 @@ since: v7.18.0
 
 This rule aims to make the API style you use to define Vue components consistent in your project.
 
-For example, if you want to allow only `<script setup>` and Composition API.  
+For example, if you want to allow only `<script setup>` and Composition API.\
 (This is the default for this rule.)
 
 <eslint-code-block :rules="{'vue/component-api-style': ['error']}">

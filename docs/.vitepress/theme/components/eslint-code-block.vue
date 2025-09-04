@@ -8,8 +8,6 @@
       class="eslint-code-block"
       :filename="filename"
       :language="language"
-      :preprocess="preprocess"
-      :postprocess="postprocess"
       dark
       :format="format"
       :fix="fix"
@@ -20,8 +18,6 @@
 <script>
 import EslintEditor from '@ota-meshi/site-kit-eslint-editor-vue'
 import { markRaw } from 'vue'
-import * as plugin from '../../../..'
-const { rules, processors } = plugin.default || plugin
 
 export default {
   name: 'ESLintCodeBlock',
@@ -61,13 +57,23 @@ export default {
       code: '',
       height: '100px',
       linter: null,
-      preprocess: processors['.vue'].preprocess,
-      postprocess: processors['.vue'].postprocess,
       format: {
         insertSpaces: true,
         tabSize: 2
       },
-      tsEslintParser: null
+      tsEslintParser: null,
+      baseConfig: {
+        files: ['**'],
+        plugins: {},
+        processor: 'vue/vue',
+        languageOptions: {
+          ecmaVersion: 'latest',
+          sourceType: 'module',
+          parserOptions: {
+            ecmaFeatures: { jsx: true }
+          }
+        }
+      }
     }
   },
 
@@ -85,40 +91,13 @@ export default {
         }
       }
       return {
-        globals: {
-          console: false,
-          // ES2015 globals
-          ArrayBuffer: false,
-          DataView: false,
-          Float32Array: false,
-          Float64Array: false,
-          Int16Array: false,
-          Int32Array: false,
-          Int8Array: false,
-          Map: false,
-          Promise: false,
-          Proxy: false,
-          Reflect: false,
-          Set: false,
-          Symbol: false,
-          Uint16Array: false,
-          Uint32Array: false,
-          Uint8Array: false,
-          Uint8ClampedArray: false,
-          WeakMap: false,
-          WeakSet: false,
-          // ES2017 globals
-          Atomics: false,
-          SharedArrayBuffer: false
-        },
+        ...this.baseConfig,
         rules: this.rules,
-        parser: 'vue-eslint-parser',
-        parserOptions: {
-          parser,
-          ecmaVersion: 'latest',
-          sourceType: 'module',
-          ecmaFeatures: {
-            jsx: true
+        languageOptions: {
+          ...this.baseConfig?.languageOptions,
+          parserOptions: {
+            ...this.baseConfig?.languageOptions?.parserOptions,
+            parser
           }
         }
       }
@@ -150,7 +129,8 @@ export default {
 
   methods: {
     async loadTypescriptESLint() {
-      this.tsEslintParser = await import('@typescript-eslint/parser')
+      const tsEslintParser = await import('@typescript-eslint/parser')
+      this.tsEslintParser = tsEslintParser.default || tsEslintParser
     }
   },
 
@@ -161,21 +141,24 @@ export default {
     const lines = this.code.split('\n').length
     this.height = `${Math.max(120, 20 * (1 + lines))}px`
     // Load linter.
-    const [{ Linter }, { parseForESLint }] = await Promise.all([
+    const [plugin, { Linter }, vueEslintParser, globals] = await Promise.all([
+      import('../../../..'),
       import('eslint'),
-      import('espree').then(() => import('vue-eslint-parser'))
+      import('vue-eslint-parser'),
+      import('globals')
     ])
     if (this.langTs || this.typescript) {
       await this.loadTypescriptESLint()
     }
 
-    const linter = (this.linter = markRaw(new Linter()))
-
-    for (const ruleId of Object.keys(rules)) {
-      linter.defineRule(`vue/${ruleId}`, rules[ruleId])
-    }
-
-    linter.defineParser('vue-eslint-parser', { parseForESLint })
+    this.linter = markRaw(new Linter())
+    this.baseConfig.plugins.vue = markRaw(plugin.default || plugin)
+    this.baseConfig.languageOptions.parser = markRaw(
+      vueEslintParser.default || vueEslintParser
+    )
+    this.baseConfig.languageOptions.globals = markRaw({
+      ...globals.browser
+    })
   }
 }
 

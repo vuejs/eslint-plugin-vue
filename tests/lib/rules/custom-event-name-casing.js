@@ -411,9 +411,27 @@ tester.run('custom-event-name-casing', rule, {
       `,
       options: ['kebab-case'],
       errors: [
-        "Custom event name 'fooBar' must be kebab-case.",
-        "Custom event name 'barBaz' must be kebab-case.",
-        "Custom event name 'bazQux' must be kebab-case."
+        {
+          message: "Custom event name 'fooBar' must be kebab-case.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 35
+        },
+        {
+          message: "Custom event name 'barBaz' must be kebab-case.",
+          line: 11,
+          column: 31,
+          endLine: 11,
+          endColumn: 39
+        },
+        {
+          message: "Custom event name 'bazQux' must be kebab-case.",
+          line: 17,
+          column: 27,
+          endLine: 17,
+          endColumn: 35
+        }
       ]
     },
     {
@@ -442,9 +460,27 @@ tester.run('custom-event-name-casing', rule, {
       `,
       options: ['kebab-case'],
       errors: [
-        "Custom event name 'fooBar' must be kebab-case.",
-        "Custom event name 'barBaz' must be kebab-case.",
-        "Custom event name 'bazQux' must be kebab-case."
+        {
+          message: "Custom event name 'fooBar' must be kebab-case.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 35
+        },
+        {
+          message: "Custom event name 'barBaz' must be kebab-case.",
+          line: 11,
+          column: 33,
+          endLine: 11,
+          endColumn: 41
+        },
+        {
+          message: "Custom event name 'bazQux' must be kebab-case.",
+          line: 17,
+          column: 29,
+          endLine: 17,
+          endColumn: 37
+        }
       ]
     },
     {
@@ -476,9 +512,27 @@ tester.run('custom-event-name-casing', rule, {
         { ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u'] }
       ],
       errors: [
-        "Custom event name 'input/update' must be kebab-case.",
-        "Custom event name 'search/update' must be kebab-case.",
-        "Custom event name 'click/row' must be kebab-case."
+        {
+          message: "Custom event name 'input/update' must be kebab-case.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 39
+        },
+        {
+          message: "Custom event name 'search/update' must be kebab-case.",
+          line: 11,
+          column: 28,
+          endLine: 11,
+          endColumn: 43
+        },
+        {
+          message: "Custom event name 'click/row' must be kebab-case.",
+          line: 17,
+          column: 24,
+          endLine: 17,
+          endColumn: 35
+        }
       ]
     },
     {
@@ -510,9 +564,27 @@ tester.run('custom-event-name-casing', rule, {
         { ignores: ['input:update', 'search:update', 'click:row'] }
       ],
       errors: [
-        "Custom event name 'input/update' must be kebab-case.",
-        "Custom event name 'search/update' must be kebab-case.",
-        "Custom event name 'click/row' must be kebab-case."
+        {
+          message: "Custom event name 'input/update' must be kebab-case.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 39
+        },
+        {
+          message: "Custom event name 'search/update' must be kebab-case.",
+          line: 11,
+          column: 28,
+          endLine: 11,
+          endColumn: 43
+        },
+        {
+          message: "Custom event name 'click/row' must be kebab-case.",
+          line: 17,
+          column: 24,
+          endLine: 17,
+          endColumn: 35
+        }
       ]
     },
     // camelCase
@@ -542,9 +614,27 @@ tester.run('custom-event-name-casing', rule, {
       `,
       options: ['camelCase'],
       errors: [
-        "Custom event name 'foo-bar' must be camelCase.",
-        "Custom event name 'bar-baz' must be camelCase.",
-        "Custom event name 'baz-qux' must be camelCase."
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 34
+        },
+        {
+          message: "Custom event name 'bar-baz' must be camelCase.",
+          line: 11,
+          column: 28,
+          endLine: 11,
+          endColumn: 37
+        },
+        {
+          message: "Custom event name 'baz-qux' must be camelCase.",
+          line: 17,
+          column: 24,
+          endLine: 17,
+          endColumn: 33
+        }
       ]
     },
     // Default
@@ -573,9 +663,27 @@ tester.run('custom-event-name-casing', rule, {
       </script>
       `,
       errors: [
-        "Custom event name 'foo-bar' must be camelCase.",
-        "Custom event name 'bar-baz' must be camelCase.",
-        "Custom event name 'baz-qux' must be camelCase."
+        {
+          message: "Custom event name 'foo-bar' must be camelCase.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 34
+        },
+        {
+          message: "Custom event name 'bar-baz' must be camelCase.",
+          line: 11,
+          column: 28,
+          endLine: 11,
+          endColumn: 37
+        },
+        {
+          message: "Custom event name 'baz-qux' must be camelCase.",
+          line: 17,
+          column: 24,
+          endLine: 17,
+          endColumn: 33
+        }
       ]
     },
     // kebab-case
@@ -591,7 +699,10 @@ tester.run('custom-event-name-casing', rule, {
       errors: [
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     },
@@ -606,7 +717,10 @@ tester.run('custom-event-name-casing', rule, {
       errors: [
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
-          line: 4
+          line: 4,
+          column: 12,
+          endLine: 4,
+          endColumn: 21
         }
       ]
     },
@@ -627,15 +741,24 @@ tester.run('custom-event-name-casing', rule, {
       errors: [
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
-          line: 4
+          line: 4,
+          column: 12,
+          endLine: 4,
+          endColumn: 21
         },
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
-          line: 8
+          line: 8,
+          column: 28,
+          endLine: 8,
+          endColumn: 37
         },
         {
           message: "Custom event name 'foo-bar' must be camelCase.",
-          line: 9
+          line: 9,
+          column: 29,
+          endLine: 9,
+          endColumn: 38
         }
       ]
     }

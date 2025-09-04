@@ -66,7 +66,10 @@ tester.run('no-deprecated-scope-attribute', rule, {
       errors: [
         {
           message: '`scope` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -90,7 +93,10 @@ tester.run('no-deprecated-scope-attribute', rule, {
       errors: [
         {
           message: '`scope` attributes are deprecated.',
-          line: 4
+          line: 4,
+          column: 33,
+          endLine: 4,
+          endColumn: 38
         }
       ]
     }

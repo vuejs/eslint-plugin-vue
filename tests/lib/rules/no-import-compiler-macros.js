@@ -55,7 +55,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineProps'
           },
           line: 3,
-          column: 16
+          column: 16,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -83,7 +85,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineProps'
           },
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 20
         }
       ]
     },
@@ -110,7 +114,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineProps'
           },
           line: 3,
-          column: 21
+          column: 21,
+          endLine: 3,
+          endColumn: 32
         },
         {
           messageId: 'noImportCompilerMacros',
@@ -118,7 +124,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineEmits'
           },
           line: 4,
-          column: 16
+          column: 16,
+          endLine: 4,
+          endColumn: 27
         },
         {
           messageId: 'noImportCompilerMacros',
@@ -126,7 +134,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineExpose'
           },
           line: 5,
-          column: 16
+          column: 16,
+          endLine: 5,
+          endColumn: 28
         },
         {
           messageId: 'noImportCompilerMacros',
@@ -134,7 +144,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'withDefaults'
           },
           line: 5,
-          column: 37
+          column: 37,
+          endLine: 5,
+          endColumn: 49
         }
       ]
     },
@@ -157,7 +169,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineModel'
           },
           line: 3,
-          column: 16
+          column: 16,
+          endLine: 3,
+          endColumn: 27
         },
         {
           messageId: 'noImportCompilerMacros',
@@ -165,7 +179,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineOptions'
           },
           line: 3,
-          column: 29
+          column: 29,
+          endLine: 3,
+          endColumn: 42
         }
       ]
     },
@@ -193,7 +209,9 @@ tester.run('no-import-compiler-macros', rule, {
             name: 'defineSlots'
           },
           line: 3,
-          column: 31
+          column: 31,
+          endLine: 3,
+          endColumn: 60
         }
       ]
     }

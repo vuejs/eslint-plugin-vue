@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/object-property-newline]
 - [object-property-newline]
 
-[@stylistic/object-property-newline]: https://eslint.style/rules/default/object-property-newline
+[@stylistic/object-property-newline]: https://eslint.style/rules/object-property-newline
 [object-property-newline]: https://eslint.org/docs/rules/object-property-newline
 
 ## :rocket: Version
@@ -36,4 +36,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/object-property-newline.js)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/object-property-newline.js)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/object-property-newline)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/object-property-newline)</sup>

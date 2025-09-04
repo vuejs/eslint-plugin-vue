@@ -32,11 +32,41 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-v-html": ["error", {
+        "ignorePattern": "^html"
+    }]
+}
+```
+
+- `ignorePattern` ... disables reporting when the `v-html` directive references a variable matching this pattern. By default, all `v-html` uses are forbidden.
+
+### `{ "ignorePattern": "^html" }`
+
+<eslint-code-block :rules="{'vue/no-v-html': ['error', { 'ignorePattern': '^html' }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <h2>{{ userName }}</h2>
+  <span v-html="htmlUserLink" />
+
+  <!-- ✗ BAD -->
+  <span v-html="userName" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :mute: When Not To Use It
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
+
+## :couple: Related Rules
+
+- [vue/no-v-text](./no-v-text.md)
+- [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md)
 
 ## :rocket: Version
 

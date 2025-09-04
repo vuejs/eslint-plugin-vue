@@ -76,7 +76,9 @@ tester.run('no-console', rule, {
         {
           message: 'Unexpected console statement.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 32
         }
       ]
     },
@@ -91,12 +93,16 @@ tester.run('no-console', rule, {
         {
           message: 'Unexpected console statement.',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Unexpected console statement.',
           line: 3,
-          column: 39
+          column: 39,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
@@ -111,7 +117,9 @@ tester.run('no-console', rule, {
         {
           message: 'Unexpected console statement.',
           line: 3,
-          column: 31
+          column: 31,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -128,7 +136,9 @@ tester.run('no-console', rule, {
         {
           message: 'Unexpected console statement.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 32
         }
       ]
     }

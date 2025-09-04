@@ -74,11 +74,17 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 28
         },
         {
           messageId: 'unexpected',
-          line: 5
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 29
         }
       ]
     },
@@ -104,7 +110,10 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 17
         }
         // valid in eslint v6.0
         // {
@@ -129,7 +138,10 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 20
         }
       ]
     },
@@ -139,19 +151,38 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          column: 27
+          column: 27,
+          line: 1,
+          endLine: 1,
+          endColumn: 28
         }
       ]
     },
     {
       code: '<template><button :class="(a+b) | filter" /></template>',
       output: '<template><button :class="a+b | filter" /></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     {
       code: '<template><button :class="((a+b | bitwise))" /></template>',
       output: '<template><button :class="(a+b | bitwise)" /></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: '<template><button>{{ (foo + bar) }}</button></template>',
@@ -159,51 +190,118 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          column: 22
+          column: 22,
+          line: 1,
+          endLine: 1,
+          endColumn: 23
         }
       ]
     },
     {
       code: '<template><button>{{ (foo + bar) | filter }}</button></template>',
       output: '<template><button>{{ foo + bar | filter }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: '<template><button>{{ ((foo + bar | bitwise)) }}</button></template>',
       output:
         '<template><button>{{ (foo + bar | bitwise) }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><button>{{ ((foo | bitwise)) | filter }}</button></template>',
       output:
         '<template><button>{{ (foo | bitwise) | filter }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><button>{{ (foo(bar|bitwise)) }}</button></template>',
       output: '<template><button>{{ foo(bar|bitwise) }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: '<template><button>{{ ([foo|bitwise]) }}</button></template>',
       output: '<template><button>{{ [foo|bitwise] }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: '<template><button>{{ ({foo:bar|bitwise}) }}</button></template>',
       output: '<template><button>{{ {foo:bar|bitwise} }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: '<template><button>{{ ((function () {} ())) }}</button></template>',
       output: '<template><button>{{ (function () {} ()) }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: '<template><button>{{ ((function () {})()) }}</button></template>',
       output: '<template><button>{{ (function () {})() }}</button></template>',
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
     },
     // CSS vars injection
     {
@@ -219,7 +317,15 @@ tester.run('no-extra-parens', rule, {
         color: v-bind('a')
       }
       </style>`,
-      errors: [{ messageId: 'unexpected' }]
+      errors: [
+        {
+          messageId: 'unexpected',
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
     }
   ]
 })

@@ -137,37 +137,49 @@ tester.run('next-tick-style', rule, {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 4,
-          column: 16
+          column: 16,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 13
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 8,
-          column: 16
+          column: 16,
+          endLine: 8,
+          endColumn: 25
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 9,
-          column: 15
+          column: 15,
+          endLine: 9,
+          endColumn: 23
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 13
         }
       ]
     },
@@ -203,37 +215,49 @@ tester.run('next-tick-style', rule, {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 4,
-          column: 16
+          column: 16,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 13
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 8,
-          column: 16
+          column: 16,
+          endLine: 8,
+          endColumn: 25
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 9,
-          column: 15
+          column: 15,
+          endLine: 9,
+          endColumn: 23
         },
         {
           message:
             'Use the Promise returned by `nextTick` instead of passing a callback function.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 13
         }
       ]
     },
@@ -258,37 +282,49 @@ tester.run('next-tick-style', rule, {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 4,
-          column: 16
+          column: 16,
+          endLine: 4,
+          endColumn: 25
         },
         {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 13
         },
         {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 8,
-          column: 22
+          column: 22,
+          endLine: 8,
+          endColumn: 31
         },
         {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 9,
-          column: 21
+          column: 21,
+          endLine: 9,
+          endColumn: 29
         },
         {
           message:
             'Pass a callback function to `nextTick` instead of using the returned Promise.',
           line: 10,
-          column: 17
+          column: 17,
+          endLine: 10,
+          endColumn: 19
         }
       ]
     }

@@ -3,13 +3,53 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('../../eslint-compat')
 const semver = require('semver')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/func-call-spacing')
+const { eslintStylisticVersion } = require('../../test-utils/eslint-stylistic')
 
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
 })
+
+/**
+ * @param {number} line
+ * @param {number} column
+ * @param {'unexpected' | 'missing'} errorType
+ * @returns {{line: number, column: number, endLine: number, endColumn: number}}
+ */
+function getErrorPosition(line, column, errorType) {
+  if (
+    eslintStylisticVersion !== undefined &&
+    semver.lt(eslintStylisticVersion, '3.0.0')
+  ) {
+    return {
+      line,
+      column: column - 3,
+      endLine: undefined,
+      endColumn: undefined
+    }
+  }
+
+  if (
+    eslintStylisticVersion === undefined ||
+    semver.satisfies(process.version, '<19.0.0 || ^21.0.0')
+  ) {
+    return {
+      line,
+      column: errorType === 'unexpected' ? column : column - 1,
+      endLine: line,
+      endColumn: column
+    }
+  }
+
+  return {
+    line,
+    column,
+    endLine: line,
+    endColumn: errorType === 'unexpected' ? column + 1 : column
+  }
+}
 
 tester.run('func-call-spacing', rule, {
   valid: [
@@ -61,10 +101,8 @@ tester.run('func-call-spacing', rule, {
       `,
       errors: [
         {
-          message: semver.lt(ESLint.version, '7.0.0')
-            ? 'Unexpected newline between function name and paren.'
-            : 'Unexpected whitespace between function name and paren.',
-          line: 3
+          message: 'Unexpected whitespace between function name and paren.',
+          ...getErrorPosition(3, 23, 'unexpected')
         }
       ]
     },
@@ -83,7 +121,7 @@ tester.run('func-call-spacing', rule, {
       errors: [
         {
           message: 'Missing space between function name and paren.',
-          line: 3
+          ...getErrorPosition(3, 23, 'missing')
         }
       ]
     },
@@ -104,10 +142,8 @@ tester.run('func-call-spacing', rule, {
       </style>`,
       errors: [
         {
-          message: semver.lt(ESLint.version, '7.0.0')
-            ? 'Unexpected newline between function name and paren.'
-            : 'Unexpected whitespace between function name and paren.',
-          line: 4
+          message: 'Unexpected whitespace between function name and paren.',
+          ...getErrorPosition(4, 27, 'unexpected')
         }
       ]
     }

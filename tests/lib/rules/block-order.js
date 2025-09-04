@@ -203,12 +203,16 @@ tester.run('block-order', rule, {
         {
           message: "'<template>' should be above '<style>' on line 1.",
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 37
         },
         {
           message: "'<script>' should be above '<style>' on line 1.",
           line: 1,
-          column: 37
+          column: 37,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
@@ -220,7 +224,9 @@ tester.run('block-order', rule, {
         {
           message: "'<script>' should be above '<template>' on line 1.",
           line: 1,
-          column: 22
+          column: 22,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -241,7 +247,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<style>' on line 4.",
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 26
         }
       ]
     },
@@ -261,7 +270,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<template>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -281,7 +293,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<template>' should be above '<script>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -303,7 +318,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<docs>' should be above '<template>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -325,7 +343,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<template>' on line 2.",
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -349,7 +370,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<template>' on line 2.",
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 26
         }
       ]
     },
@@ -364,7 +388,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<template>' should be above '<script>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -383,11 +410,17 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<template>' should be above '<style>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: "'<script>' should be above '<style>' on line 2.",
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -408,11 +441,17 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<template>' should be above '<style>' on line 2.",
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 30
         },
         {
           message: "'<script>' should be above '<style>' on line 2.",
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 26
         }
       ]
     },
@@ -426,7 +465,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<style>' on line 2.",
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -438,7 +480,10 @@ tester.run('block-order', rule, {
         {
           message:
             "'<i18n locale=en>' should be above '<i18n locale=ja>' on line 1.",
-          line: 1
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 51
         }
       ]
     },
@@ -449,7 +494,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<style>' should be above '<style scoped>' on line 1.",
-          line: 1
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -460,7 +508,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<style scoped>' should be above '<style>' on line 1.",
-          line: 1
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -471,7 +522,10 @@ tester.run('block-order', rule, {
       errors: [
         {
           message: "'<script>' should be above '<style>' on line 1.",
-          line: 1
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 33
         }
       ]
     }

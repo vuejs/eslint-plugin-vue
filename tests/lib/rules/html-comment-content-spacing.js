@@ -207,13 +207,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Expected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 15
+          endColumn: 15,
+          endLine: 3
         },
         {
           message: "Expected space before '-->'.",
           line: 3,
           column: 22,
-          endColumn: 22
+          endColumn: 22,
+          endLine: 3
         }
       ]
     },
@@ -234,13 +236,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Unexpected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 16
+          endColumn: 16,
+          endLine: 3
         },
         {
           message: "Unexpected space before '-->'.",
           line: 3,
           column: 23,
-          endColumn: 24
+          endColumn: 24,
+          endLine: 3
         }
       ]
     },
@@ -261,13 +265,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Unexpected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 23
+          endColumn: 23,
+          endLine: 3
         },
         {
           message: "Unexpected space before '-->'.",
           line: 3,
           column: 30,
-          endColumn: 38
+          endColumn: 38,
+          endLine: 3
         }
       ]
     },
@@ -281,8 +287,20 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       options: ['always', { exceptions: ['+'] }],
       errors: [
-        'Expected space after exception block.',
-        'Expected space before exception block.'
+        {
+          message: 'Expected space after exception block.',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 31
+        },
+        {
+          message: 'Expected space before exception block.',
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -294,8 +312,20 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       options: ['always', { exceptions: ['*'] }],
       errors: [
-        'Expected space after exception block.',
-        'Expected space before exception block.'
+        {
+          message: 'Expected space after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
+        {
+          message: 'Expected space before exception block.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -311,8 +341,20 @@ tester.run('html-comment-content-spacing', rule, {
         `,
       options: ['always', { exceptions: ['#+#-'] }],
       errors: [
-        'Expected space after exception block.',
-        "Expected space before '-->'."
+        {
+          message: 'Expected space after exception block.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message: "Expected space before '-->'.",
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -324,11 +366,19 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       options: ['always', { exceptions: ['*', '++'] }],
       errors: [
-        'Expected space after exception block.',
+        {
+          message: 'Expected space after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
         {
           message: 'Expected space before exception block.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -341,11 +391,19 @@ tester.run('html-comment-content-spacing', rule, {
       output: null,
       options: ['always', { exceptions: ['*', '++'] }],
       errors: [
-        'Expected space after exception block.',
+        {
+          message: 'Expected space after exception block.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 20
+        },
         {
           message: 'Expected space before exception block.',
           line: 3,
-          column: 28
+          column: 28,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     }

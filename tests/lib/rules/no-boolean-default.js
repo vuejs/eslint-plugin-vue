@@ -358,7 +358,10 @@ ruleTester.run('no-boolean-default', rule, {
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 28
         }
       ]
     },
@@ -378,7 +381,10 @@ ruleTester.run('no-boolean-default', rule, {
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 28
         }
       ]
     },
@@ -399,7 +405,10 @@ ruleTester.run('no-boolean-default', rule, {
         {
           message:
             'Boolean prop should not set a default (Vue defaults it to false).',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 29
         }
       ]
     },
@@ -420,7 +429,10 @@ ruleTester.run('no-boolean-default', rule, {
         {
           message:
             'Boolean prop should not set a default (Vue defaults it to false).',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 28
         }
       ]
     },
@@ -441,7 +453,10 @@ ruleTester.run('no-boolean-default', rule, {
         {
           message:
             'Boolean prop should not set a default (Vue defaults it to false).',
-          line: 6
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 25
         }
       ]
     },
@@ -462,7 +477,10 @@ ruleTester.run('no-boolean-default', rule, {
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
-          line: 6
+          line: 6,
+          column: 20,
+          endLine: 6,
+          endColumn: 24
         }
       ]
     },
@@ -494,7 +512,10 @@ ruleTester.run('no-boolean-default', rule, {
               {
                 message:
                   'Boolean prop should not set a default (Vue defaults it to false).',
-                line: 7
+                line: 7,
+                column: 14,
+                endLine: 7,
+                endColumn: 19
               }
             ]
           },
@@ -520,7 +541,10 @@ ruleTester.run('no-boolean-default', rule, {
             errors: [
               {
                 message: 'Boolean prop should only be defaulted to false.',
-                line: 7
+                line: 7,
+                column: 14,
+                endLine: 7,
+                endColumn: 18
               }
             ]
           }
@@ -539,7 +563,10 @@ ruleTester.run('no-boolean-default', rule, {
         {
           message:
             'Boolean prop should not set a default (Vue defaults it to false).',
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -557,7 +584,10 @@ ruleTester.run('no-boolean-default', rule, {
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     }

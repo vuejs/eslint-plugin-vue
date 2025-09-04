@@ -157,7 +157,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-bind="$attrs"></div></div></template>',
-      errors: ['Set "inheritAttrs" to false.']
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -169,7 +177,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         }
         </script>
       `,
-      errors: ['Set "inheritAttrs" to false.']
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 2,
+          column: 37,
+          endLine: 2,
+          endColumn: 43
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -184,7 +200,10 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       errors: [
         {
           message: 'Set "inheritAttrs" to false.',
-          line: 7
+          line: 7,
+          column: 30,
+          endLine: 7,
+          endColumn: 36
         }
       ]
     },
@@ -199,7 +218,10 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       errors: [
         {
           message: 'Set "inheritAttrs" to false.',
-          line: 5
+          line: 5,
+          column: 30,
+          endLine: 5,
+          endColumn: 36
         }
       ]
     },
@@ -207,7 +229,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       filename: 'test.vue',
       code: `<template><div v-bind="$attrs"></div><div></div></template>`,
       options: [{ checkMultiRootNodes: true }],
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -219,7 +249,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
       </template>
       `,
       options: [{ checkMultiRootNodes: true }],
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
     },
     // condition group as a single root node
     {
@@ -231,7 +269,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         <div v-else></div>
       </template>
       `,
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -243,7 +289,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         <div v-else></div>
       </template>
       `,
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -253,7 +307,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         <div v-else></div>
       </template>
       `,
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -262,7 +324,15 @@ ruleTester.run('no-duplicate-attr-inheritance', rule, {
         <div v-if="condition1" v-bind="$attrs"></div>
       </template>
       `,
-      errors: [{ message: 'Set "inheritAttrs" to false.' }]
+      errors: [
+        {
+          message: 'Set "inheritAttrs" to false.',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 46
+        }
+      ]
     }
   ]
 })

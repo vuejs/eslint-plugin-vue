@@ -228,7 +228,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>` or Composition API instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     },
@@ -246,7 +248,9 @@ tester.run('component-api-style', rule, {
           message:
             '`<script setup>` is not allowed in your project. Use Options API instead.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 21
         }
       ]
     },
@@ -273,7 +277,9 @@ tester.run('component-api-style', rule, {
           message:
             'Composition API is not allowed in your project. `setup` function is part of the Composition API. Use Options API instead.',
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -296,7 +302,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use Composition API instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     },
@@ -321,7 +329,9 @@ tester.run('component-api-style', rule, {
           message:
             'Composition API is not allowed in your project. `setup` function is part of the Composition API. Use Options API instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 14
         }
       ]
     },
@@ -348,7 +358,9 @@ tester.run('component-api-style', rule, {
           message:
             'Composition API is not allowed in your project. Use `<script setup>` instead.',
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -373,7 +385,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. Use `<script setup>` instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     },
@@ -389,7 +403,9 @@ tester.run('component-api-style', rule, {
           message:
             '`<script setup>` is not allowed in your project. Use Composition API instead.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 21
         }
       ]
     },
@@ -414,7 +430,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use Composition API instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     },
@@ -460,151 +478,201 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `mixins` option is part of the Options API. Use Composition API instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 15
         },
         {
           message:
             'Options API is not allowed in your project. `extends` option is part of the Options API. Use Composition API instead.',
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use Composition API instead.',
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 13
         },
         {
           message:
             'Options API is not allowed in your project. `computed` option is part of the Options API. Use Composition API instead.',
           line: 8,
-          column: 9
+          column: 9,
+          endLine: 8,
+          endColumn: 17
         },
         {
           message:
             'Options API is not allowed in your project. `methods` option is part of the Options API. Use Composition API instead.',
           line: 9,
-          column: 9
+          column: 9,
+          endLine: 9,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `watch` option is part of the Options API. Use Composition API instead.',
           line: 10,
-          column: 9
+          column: 9,
+          endLine: 10,
+          endColumn: 14
         },
         {
           message:
             'Options API is not allowed in your project. `provide` option is part of the Options API. Use Composition API instead.',
           line: 11,
-          column: 9
+          column: 9,
+          endLine: 11,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `inject` option is part of the Options API. Use Composition API instead.',
           line: 12,
-          column: 9
+          column: 9,
+          endLine: 12,
+          endColumn: 15
         },
         {
           message:
             'Options API is not allowed in your project. `beforeCreate` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 14,
-          column: 9
+          column: 9,
+          endLine: 14,
+          endColumn: 21
         },
         {
           message:
             'Options API is not allowed in your project. `created` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 15,
-          column: 9
+          column: 9,
+          endLine: 15,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `beforeMount` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 16,
-          column: 9
+          column: 9,
+          endLine: 16,
+          endColumn: 20
         },
         {
           message:
             'Options API is not allowed in your project. `mounted` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 17,
-          column: 9
+          column: 9,
+          endLine: 17,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `beforeUpdate` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 18,
-          column: 9
+          column: 9,
+          endLine: 18,
+          endColumn: 21
         },
         {
           message:
             'Options API is not allowed in your project. `updated` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 19,
-          column: 9
+          column: 9,
+          endLine: 19,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `activated` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 20,
-          column: 9
+          column: 9,
+          endLine: 20,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `deactivated` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 21,
-          column: 9
+          column: 9,
+          endLine: 21,
+          endColumn: 20
         },
         {
           message:
             'Options API is not allowed in your project. `beforeDestroy` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 22,
-          column: 9
+          column: 9,
+          endLine: 22,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `beforeUnmount` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 23,
-          column: 9
+          column: 9,
+          endLine: 23,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `destroyed` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 24,
-          column: 9
+          column: 9,
+          endLine: 24,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `unmounted` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 25,
-          column: 9
+          column: 9,
+          endLine: 25,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `render` function is part of the Options API. Use Composition API instead.',
           line: 26,
-          column: 9
+          column: 9,
+          endLine: 26,
+          endColumn: 15
         },
         {
           message:
             'Options API is not allowed in your project. `renderTracked` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 27,
-          column: 9
+          column: 9,
+          endLine: 27,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `renderTriggered` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 28,
-          column: 9
+          column: 9,
+          endLine: 28,
+          endColumn: 24
         },
         {
           message:
             'Options API is not allowed in your project. `errorCaptured` lifecycle hook is part of the Options API. Use Composition API instead.',
           line: 29,
-          column: 9
+          column: 9,
+          endLine: 29,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `expose` option is part of the Options API. Use Composition API instead.',
           line: 31,
-          column: 9
+          column: 9,
+          endLine: 31,
+          endColumn: 15
         }
       ]
     },
@@ -620,7 +688,9 @@ tester.run('component-api-style', rule, {
           message:
             '`<script setup>` is not allowed in your project. Use Composition API (Vue 2) instead.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 21
         }
       ]
     },
@@ -645,7 +715,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     },
@@ -691,133 +763,177 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `mixins` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 15
         },
         {
           message:
             'Options API is not allowed in your project. `extends` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 13
         },
         {
           message:
             'Options API is not allowed in your project. `computed` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 8,
-          column: 9
+          column: 9,
+          endLine: 8,
+          endColumn: 17
         },
         {
           message:
             'Options API is not allowed in your project. `methods` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 9,
-          column: 9
+          column: 9,
+          endLine: 9,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `watch` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 10,
-          column: 9
+          column: 9,
+          endLine: 10,
+          endColumn: 14
         },
         {
           message:
             'Options API is not allowed in your project. `provide` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 11,
-          column: 9
+          column: 9,
+          endLine: 11,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `inject` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 12,
-          column: 9
+          column: 9,
+          endLine: 12,
+          endColumn: 15
         },
         {
           message:
             'Options API is not allowed in your project. `beforeCreate` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 14,
-          column: 9
+          column: 9,
+          endLine: 14,
+          endColumn: 21
         },
         {
           message:
             'Options API is not allowed in your project. `created` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 15,
-          column: 9
+          column: 9,
+          endLine: 15,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `beforeMount` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 16,
-          column: 9
+          column: 9,
+          endLine: 16,
+          endColumn: 20
         },
         {
           message:
             'Options API is not allowed in your project. `mounted` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 17,
-          column: 9
+          column: 9,
+          endLine: 17,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `beforeUpdate` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 18,
-          column: 9
+          column: 9,
+          endLine: 18,
+          endColumn: 21
         },
         {
           message:
             'Options API is not allowed in your project. `updated` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 19,
-          column: 9
+          column: 9,
+          endLine: 19,
+          endColumn: 16
         },
         {
           message:
             'Options API is not allowed in your project. `activated` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 20,
-          column: 9
+          column: 9,
+          endLine: 20,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `deactivated` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 21,
-          column: 9
+          column: 9,
+          endLine: 21,
+          endColumn: 20
         },
         {
           message:
             'Options API is not allowed in your project. `beforeDestroy` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 22,
-          column: 9
+          column: 9,
+          endLine: 22,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `beforeUnmount` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 23,
-          column: 9
+          column: 9,
+          endLine: 23,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `destroyed` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 24,
-          column: 9
+          column: 9,
+          endLine: 24,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `unmounted` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 25,
-          column: 9
+          column: 9,
+          endLine: 25,
+          endColumn: 18
         },
         {
           message:
             'Options API is not allowed in your project. `errorCaptured` lifecycle hook is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 29,
-          column: 9
+          column: 9,
+          endLine: 29,
+          endColumn: 22
         },
         {
           message:
             'Options API is not allowed in your project. `expose` option is part of the Options API. Use Composition API (Vue 2) instead.',
           line: 31,
-          column: 9
+          column: 9,
+          endLine: 31,
+          endColumn: 15
         }
       ]
     },
@@ -842,7 +958,9 @@ tester.run('component-api-style', rule, {
           message:
             'Options API is not allowed in your project. `data` option is part of the Options API. Use `<script setup>`, Composition API or Composition API (Vue 2) instead.',
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 13
         }
       ]
     }

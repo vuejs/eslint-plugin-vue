@@ -69,7 +69,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input v-on:keyup.34='onArrowUp'></template>",
       output: "<template><input v-on:keyup.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
@@ -78,7 +85,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input v-on:keyup.page-down.native='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
@@ -87,7 +101,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input v-on:keyup.unknown.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 39
+        }
       ]
     },
     {
@@ -96,7 +117,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input v-on:[dynamicArg].page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -105,7 +133,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input v-on:[dynamicArg].unknown.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 44,
+          endLine: 1,
+          endColumn: 46
+        }
       ]
     },
     {
@@ -114,7 +149,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input v-on:[dynamicArg].page-down.unknown='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 38
+        }
       ]
     },
     {
@@ -122,7 +164,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input @keyup.34='onArrowUp'></template>",
       output: "<template><input @keyup.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -131,7 +180,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input @keyup.page-down.native='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -140,7 +196,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input @keyup.unknown.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 35
+        }
       ]
     },
     {
@@ -149,7 +212,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input @[dynamicArg].page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 34
+        }
       ]
     },
     {
@@ -158,7 +228,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input @[dynamicArg].unknown.page-down='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -167,7 +244,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       output:
         "<template><input @[dynamicArg].page-down.unknown='onArrowUp'></template>",
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 34
+        }
       ]
     },
     {
@@ -175,7 +259,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input @keyup.10='onArrowUp'></template>",
       output: null,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -183,7 +274,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input @keyup.10.native='onArrowUp'></template>",
       output: null,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -191,7 +289,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input @keyup.unknown.10='onArrowUp'></template>",
       output: null,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 35
+        }
       ]
     },
     {
@@ -199,7 +304,14 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       code: "<template><input @[dynamicArg].unknown.10='onArrowUp'></template>",
       output: null,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -216,13 +328,62 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
       </template>`,
       output: null,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 7,
+          column: 25,
+          endLine: 7,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 8,
+          column: 25,
+          endLine: 8,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 9,
+          column: 25,
+          endLine: 9,
+          endColumn: 28
+        }
       ]
     },
     {
@@ -244,11 +405,46 @@ ruleTester.run('no-deprecated-v-on-number-modifiers', rule, {
         <input @keydown.arrow-down='onKeydown'>
       </template>`,
       errors: [
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
-        "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 27
+        },
+        {
+          message:
+            "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead.",
+          line: 7,
+          column: 25,
+          endLine: 7,
+          endColumn: 27
+        }
       ]
     }
   ]

@@ -37,7 +37,10 @@ tester.run('block-spacing', rule, {
             token: '{'
           },
           // message: 'Requires a space after \'{\'',
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 39
         },
         {
           messageId: 'missing',
@@ -46,7 +49,10 @@ tester.run('block-spacing', rule, {
             token: '}'
           },
           // message: 'Requires a space before \'}\'',
-          line: 3
+          line: 3,
+          column: 51,
+          endLine: 3,
+          endColumn: 52
         }
       ]
     },
@@ -67,7 +73,10 @@ tester.run('block-spacing', rule, {
             token: '{'
           },
           // message: 'Requires a space after \'{\'',
-          line: 3
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
         },
         {
           messageId: 'missing',
@@ -76,7 +85,10 @@ tester.run('block-spacing', rule, {
             token: '}'
           },
           // message: 'Requires a space before \'}\'',
-          line: 3
+          line: 3,
+          column: 46,
+          endLine: 3,
+          endColumn: 47
         }
       ]
     },
@@ -98,7 +110,10 @@ tester.run('block-spacing', rule, {
             token: '{'
           },
           // message: 'Unexpected space(s) after \'{\'',
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 40
         },
         {
           messageId: 'extra',
@@ -107,7 +122,10 @@ tester.run('block-spacing', rule, {
             token: '}'
           },
           // message: 'Unexpected space(s) before \'}\'',
-          line: 3
+          line: 3,
+          column: 52,
+          endLine: 3,
+          endColumn: 53
         }
       ]
     },
@@ -121,16 +139,24 @@ tester.run('block-spacing', rule, {
           data: {
             location: 'after',
             token: '{'
-          }
+          },
           // message: 'Requires a space after \'{\'',
+          line: 1,
+          column: 57,
+          endLine: 1,
+          endColumn: 58
         },
         {
           messageId: 'missing',
           data: {
             location: 'before',
             token: '}'
-          }
+          },
           // message: 'Requires a space before \'}\'',
+          line: 1,
+          column: 67,
+          endLine: 1,
+          endColumn: 68
         }
       ]
     }
