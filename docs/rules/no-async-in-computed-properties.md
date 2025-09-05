@@ -116,7 +116,7 @@ export default {
 }
 ```
 
-- `ignoredObjectNames`: An array of object names that should be ignored when used with promise-like methods (`.then()`, `.catch()`, `.finally()`). This is useful for validation libraries like Zod that use these method names for non-promise purposes.
+- `ignoredObjectNames`: An array of object names that should be ignored when used with promise-like methods (`.then()`, `.catch()`, `.finally()`). This is useful for validation libraries like Zod that use these method names for non-promise purposes (e.g. [`z.catch()`](https://zod.dev/api#catch)).
 
 ### `"ignoredObjectNames": ["z"]`
 
