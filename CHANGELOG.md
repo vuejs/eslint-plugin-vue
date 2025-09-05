@@ -1,5 +1,23 @@
 # eslint-plugin-vue
 
+## 10.5.0
+
+### Minor Changes
+
+- Changed [`vue/valid-define-options`](https://eslint.vuejs.org/rules/valid-define-options.html) to allow local literal constant references ([#2920](https://github.com/vuejs/eslint-plugin-vue/pull/2920))
+
+- Added [`@stylistic/eslint-plugin`](https://eslint.style/) as optional peer dependency ([#2884](https://github.com/vuejs/eslint-plugin-vue/pull/2884))
+
+- Added `ignorePattern` option to [`vue/no-v-html`](https://eslint.vuejs.org/rules/no-v-html.html) ([#2857](https://github.com/vuejs/eslint-plugin-vue/pull/2857))
+
+- Changed [`vue/component-name-in-template-casing`](https://eslint.vuejs.org/rules/component-name-in-template-casing.html) `globals` option to support regex patterns ([#2928](https://github.com/vuejs/eslint-plugin-vue/pull/2928))
+
+- Added `sortLineLength` option to [`vue/attributes-order`](https://eslint.vuejs.org/rules/attributes-order.html) ([#2759](https://github.com/vuejs/eslint-plugin-vue/pull/2759))
+
+### Patch Changes
+
+- Changed [`vue/define-macros-order`](https://eslint.vuejs.org/rules/define-macros-order.html) to ignore enum declarations and `declare` statements ([#2918](https://github.com/vuejs/eslint-plugin-vue/pull/2918))
+
 ## 10.4.0
 
 ### Minor Changes
