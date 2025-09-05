@@ -617,6 +617,71 @@ tester.run('attributes-order', rule, {
           alphabetical: false
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          short="val"
+          medium-attr="value"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          v-if="condition"
+          v-show="show"
+          short="val"
+          medium-attr="value"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: false }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @click="fn"
+          @input="handleInput"
+          @mouseover="handleMouseover">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          :a="value"
+          :ab="value"
+          :abc="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          bb="v"
+          zz="v"
+          aaa="v"
+          @click="fn"
+          @keyup="fn"
+          @submit="fn"
+        ></div>
+      </template>`,
+      options: [{ sortLineLength: true, alphabetical: true }]
     }
   ],
 
@@ -2101,6 +2166,183 @@ tester.run('attributes-order', rule, {
           endLine: 5,
           endColumn: 26
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          medium-attr="value"
+          short="val"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          short="val"
+          medium-attr="value"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: ['Attribute "short" should go before "medium-attr".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          very-long-attribute-name="value"
+          short="val">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          short="val"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: ['Attribute "short" should go before "very-long-attribute-name".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          id="id"
+          v-model="foo"
+          very-long-attribute-name="value"
+          short="val">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          id="id"
+          v-model="foo"
+          short="val"
+          very-long-attribute-name="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: ['Attribute "short" should go before "very-long-attribute-name".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @mouseover="handleMouseover"
+          @click="fn"
+          @input="handleInput">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          @click="fn"
+          @mouseover="handleMouseover"
+          @input="handleInput">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: [
+        'Attribute "@click" should go before "@mouseover".',
+        'Attribute "@input" should go before "@mouseover".'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          :abc="value"
+          :a="value"
+          :ab="value">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          :a="value"
+          :abc="value"
+          :ab="value">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: [
+        'Attribute ":a" should go before ":abc".',
+        'Attribute ":ab" should go before ":abc".'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          very-long-binding="longerValue"
+          short="obj"
+          @click="fn">
+        </div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          short="obj"
+          very-long-binding="longerValue"
+          @click="fn">
+        </div>
+      </template>`,
+      options: [{ sortLineLength: true }],
+      errors: ['Attribute "short" should go before "very-long-binding".']
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          aa="v"
+          z="v"
+        ></div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          z="v"
+          aa="v"
+        ></div>
+      </template>`,
+      options: [{ sortLineLength: true, alphabetical: true }],
+      errors: [{ message: 'Attribute "z" should go before "aa".' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          zz="v"
+          bb="v"
+          @keyup="fn"
+          @click="fn"
+        ></div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          bb="v"
+          zz="v"
+          @click="fn"
+          @keyup="fn"
+        ></div>
+      </template>`,
+      options: [{ sortLineLength: true, alphabetical: true }],
+      errors: [
+        { message: 'Attribute "bb" should go before "zz".' },
+        { message: 'Attribute "@click" should go before "@keyup".' }
       ]
     }
   ]
