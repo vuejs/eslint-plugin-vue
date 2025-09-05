@@ -34,7 +34,7 @@ This rule aims to warn the tag names other than the configured casing in Vue.js 
 - `registeredComponentsOnly` ... If `true`, only registered components (in PascalCase) are checked. If `false`, check all.
     default `true`
 - `ignores` (`string[]`) ... The element names to ignore. Sets the element name to allow. For example, custom elements or Vue components with special name. You can set the regexp by writing it like `"/^name/"`.
-- `globals` (`string[]`) ... Globally registered component names to check. For example, `RouterView` and `RouterLink` are globally registered by `vue-router` and can't be detected as registered in a SFC file.
+- `globals` (`string[]`) ... Globally registered component names to check. For example, `RouterView` and `RouterLink` are globally registered by `vue-router` and can't be detected as registered in a SFC file. You can set the regexp by writing it like `"/^c-/"` to match component names with patterns.
 
 ### `"PascalCase", { registeredComponentsOnly: true }` (default)
 
@@ -143,17 +143,23 @@ export default {
 
 </eslint-code-block>
 
-### `"PascalCase", { globals: ["RouterView"] }`
+### `"PascalCase", { globals: ["RouterView", "/^c-/"] }`
 
-<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {globals: ['RouterView']}]}">
+<eslint-code-block fix :rules="{'vue/component-name-in-template-casing': ['error', 'PascalCase', {globals: ['RouterView', '/^c-/']}]}">
 
 ```vue
 <template>
   <!-- ✓ GOOD -->
   <RouterView></RouterView>
+  <CButton />
+  <CCard />
+  <CInput />
 
   <!-- ✗ BAD -->
   <router-view></router-view>
+  <c-button />
+  <c-card />
+  <c-input />
 </template>
 ```
 

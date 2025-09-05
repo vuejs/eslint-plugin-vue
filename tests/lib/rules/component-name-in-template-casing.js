@@ -202,6 +202,21 @@ tester.run('component-name-in-template-casing', rule, {
       options: ['kebab-case', { globals: ['RouterView', 'router-link'] }]
     },
 
+    // globals with regex patterns
+    {
+      code: `
+        <template>
+          <div>
+            <c-button />
+            <c-card />
+            <c-input />
+            <other-component />
+          </div>
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['/^c-/', 'other-component'] }]
+    },
+
     // type-only imports
     ...(semver.gte(
       require('@typescript-eslint/parser/package.json').version,
@@ -1220,6 +1235,86 @@ tester.run('component-name-in-template-casing', rule, {
           column: 11,
           endLine: 3,
           endColumn: 22
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <c-button />
+          <c-card />
+          <c-input />
+        </template>
+      `,
+      output: `
+        <template>
+          <CButton />
+          <CCard />
+          <CInput />
+        </template>
+      `,
+      options: ['PascalCase', { globals: ['/^c-/'] }],
+      errors: [
+        {
+          message: 'Component name "c-button" is not PascalCase.',
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 20
+        },
+        {
+          message: 'Component name "c-card" is not PascalCase.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 18
+        },
+        {
+          message: 'Component name "c-input" is not PascalCase.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      code: `
+        <template>
+          <CButton />
+          <CCard />
+          <CInput />
+        </template>
+      `,
+      output: `
+        <template>
+          <c-button />
+          <c-card />
+          <c-input />
+        </template>
+      `,
+      options: ['kebab-case', { globals: ['/^C[A-Z]/', '/^c-/'] }],
+      errors: [
+        {
+          message: 'Component name "CButton" is not kebab-case.',
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 19
+        },
+        {
+          message: 'Component name "CCard" is not kebab-case.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 17
+        },
+        {
+          message: 'Component name "CInput" is not kebab-case.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
