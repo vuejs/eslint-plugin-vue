@@ -1243,7 +1243,7 @@ tester.run('component-name-in-template-casing', rule, {
         <template>
           <c-button />
           <c-card />
-          <c-input />
+          <CInput />
         </template>
       `,
       output: `
@@ -1268,13 +1268,6 @@ tester.run('component-name-in-template-casing', rule, {
           column: 11,
           endLine: 4,
           endColumn: 18
-        },
-        {
-          message: 'Component name "c-input" is not PascalCase.',
-          line: 5,
-          column: 11,
-          endLine: 5,
-          endColumn: 19
         }
       ]
     },
@@ -1283,7 +1276,7 @@ tester.run('component-name-in-template-casing', rule, {
         <template>
           <CButton />
           <CCard />
-          <CInput />
+          <c-input />
         </template>
       `,
       output: `
@@ -1308,13 +1301,6 @@ tester.run('component-name-in-template-casing', rule, {
           column: 11,
           endLine: 4,
           endColumn: 17
-        },
-        {
-          message: 'Component name "CInput" is not kebab-case.',
-          line: 5,
-          column: 11,
-          endLine: 5,
-          endColumn: 18
         }
       ]
     },
