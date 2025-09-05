@@ -108,7 +108,42 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+```js
+{
+  "vue/no-async-in-computed-properties": ["error", {
+    "ignoredObjectNames": []
+  }]
+}
+```
+
+- `ignoredObjectNames`: An array of object names that should be ignored when used with promise-like methods (`.then()`, `.catch()`, `.finally()`). This is useful for validation libraries like Zod that use these method names for non-promise purposes.
+
+### `"ignoredObjectNames": ["z"]`
+
+<eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error', {ignoredObjectNames: ['z']}]}">
+
+```vue
+<script setup>
+import { computed } from 'vue'
+import { z } from 'zod'
+
+/* ✓ GOOD */
+const schema1 = computed(() => {
+  return z.string().catch('default')
+})
+
+const schema2 = computed(() => {
+  return z.catch(z.string().min(2), 'fallback')
+})
+
+/* ✗ BAD */
+const fetchData = computed(() => {
+  return myFunc().then(res => res.json())
+})
+</script>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
