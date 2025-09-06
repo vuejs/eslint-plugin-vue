@@ -324,6 +324,73 @@ ruleTester.run('no-async-in-computed-properties', rule, {
         sourceType: 'module',
         ecmaVersion: 2020
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return z.catch(
+                z.string().check(z.minLength(2)),
+                'default'
+              ).then(val => val).finally(() => {})
+            }
+          }
+        }
+      `,
+      options: [{ ignoredObjectNames: ['z'] }],
+      languageOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import { computed } from 'vue'
+
+      const numberWithCatch = computed(() => z.number().catch(42))
+      </script>`,
+      options: [{ ignoredObjectNames: ['z'] }],
+      languageOptions: {
+        parser,
+        sourceType: 'module',
+        ecmaVersion: 2020
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return z.a?.['b'].[c].d.method().catch(err => err).finally(() => {})
+            }
+          }
+        }
+      `,
+      options: [{ ignoredObjectNames: ['z'] }],
+      languageOptions: {
+        parser,
+        sourceType: 'module',
+        ecmaVersion: 2020
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { computed } from 'vue'
+      import { z } from 'zod'
+
+      const foo = computed(() => z.a?.['b'].c!.d.method().catch(err => err).finally(() => {}))
+      </script>`,
+      options: [{ ignoredObjectNames: ['z'] }],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
     }
   ],
 
@@ -1540,6 +1607,98 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           column: 29,
           endLine: 6,
           endColumn: 8
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return myFunc().catch('default')
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return z.number().catch(42)
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return someLib.string().catch(42)
+            }
+          }
+        }
+      `,
+      options: [{ ignoredObjectNames: ['z'] }],
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 48
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup>
+        import {computed} from 'vue'
+
+        const deepCall = computed(() => z.a.b.c.d().e().f().catch())
+        </script>
+      `,
+      options: [{ ignoredObjectNames: ['a'] }],
+      languageOptions: {
+        parser,
+        sourceType: 'module',
+        ecmaVersion: 2020
+      },
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in computed function.',
+          line: 5,
+          column: 41,
+          endLine: 5,
+          endColumn: 68
         }
       ]
     }
