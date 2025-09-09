@@ -52,6 +52,10 @@ tester.run('no-duplicate-class-names', rule, {
     {
       filename: 'duplicate-class-in-different-directive-mixed.vue',
       code: `<template><div :class="['foo', { 'foo bar': true }]"></div></template>`
+    },
+    {
+      filename: 'class-conditional-expression.vue',
+      code: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`
     }
   ],
   invalid: [
@@ -152,6 +156,17 @@ tester.run('no-duplicate-class-names', rule, {
         {
           message: "Duplicate class name 'bar'.",
           type: 'Literal'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-conditional-expression.vue',
+      code: `<template><div :class="isActive ? 'foo foo' : 'bar'"></div></template>`,
+      output: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VAttribute'
         }
       ]
     }
