@@ -14,13 +14,26 @@ description: disallow duplication of class names in class attributes
 
 ## :book: Rule Details
 
-This rule ....
+This rule prevents the same class name from appearing multiple times within the same class attribute or directive.
 
 <eslint-code-block fix :rules="{'vue/no-duplicate-class-names': ['error']}">
 
 ```vue
 <template>
-
+  <!-- ✓ GOOD -->
+  <div class="foo bar"></div>
+  <div :class="'foo bar'"></div>
+  <div :class="{ 'foo bar': true }"></div>
+  <div :class="['foo', 'bar']"></div>
+  
+  <!-- ✗ BAD -->
+  <div class="foo foo"></div>
+  <div class="foo bar foo baz bar"></div>
+  <div :class="'foo foo'"></div>
+  <div :class="{ 'foo foo': true }"></div>
+  <div :class="['foo foo']"></div>
+  <div :class="['foo foo', 'bar bar baz']"></div>
+  <div :class="['foo foo', { 'bar bar baz': true }]"></div>
 </template>
 ```
 
