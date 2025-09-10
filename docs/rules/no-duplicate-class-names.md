@@ -31,6 +31,7 @@ This rule prevents the same class name from appearing multiple times within the 
   <div class="foo foo"></div>
   <div class="foo bar foo baz bar"></div>
   <div :class="'foo foo'"></div>
+  <div :class="`foo foo`"></div>
   <div :class="{ 'foo foo': true }"></div>
   <div :class="['foo foo']"></div>
   <div :class="['foo foo', { 'bar bar baz': true }]"></div>

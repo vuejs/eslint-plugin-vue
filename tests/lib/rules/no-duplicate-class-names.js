@@ -34,6 +34,10 @@ tester.run('no-duplicate-class-names', rule, {
       code: `<template><div :class="'foo bar baz'"></div></template>`
     },
     {
+      filename: 'no-duplicate-class-in-directive-literal.vue',
+      code: '<template><div :class="`foo bar baz`"></div></template>'
+    },
+    {
       filename: 'no-duplicate-class-in-directive-object.vue',
       code: `<template><div :class="{ 'foo bar baz': true }"></div></template>`
     },
@@ -66,7 +70,7 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'VLiteral'
         }
       ]
     },
@@ -77,18 +81,29 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo, bar'.",
-          type: 'VAttribute'
+          type: 'VLiteral'
         }
       ]
     },
     {
-      filename: 'duplicate-class-in-directive-string-literal.vue',
+      filename: 'duplicate-class-in-directive-string.vue',
       code: `<template><div :class="'foo foo'"></div></template>`,
       output: `<template><div :class="'foo'"></div></template>`,
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'Literal'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-in-directive-literal.vue',
+      code: '<template><div :class="`foo foo`"></div></template>',
+      output: '<template><div :class="`foo`"></div></template>',
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'TemplateElement'
         }
       ]
     },
@@ -125,7 +140,7 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ]
     },
@@ -136,11 +151,11 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'Literal'
         },
         {
           message: "Duplicate class name 'bar'.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ]
     },
@@ -151,7 +166,7 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'Literal'
         },
         {
           message: "Duplicate class name 'bar'.",
@@ -166,7 +181,7 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'VAttribute'
+          type: 'Literal'
         }
       ]
     }
