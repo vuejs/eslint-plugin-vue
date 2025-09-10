@@ -184,6 +184,50 @@ tester.run('no-duplicate-class-names', rule, {
           type: 'Literal'
         }
       ]
+    },
+    {
+      filename: 'duplicate-class-binary-expression.vue',
+      code: `<template><div :class="'foo foo ' + ' bar'"></div></template>`,
+      output: `<template><div :class="'foo ' + ' bar'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-preserved-spaces-1.vue',
+      code: `<template><div class="foo foo     bar"></div></template>`,
+      output: `<template><div class="foo     bar"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VLiteral'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-preserved-spaces-2.vue',
+      code: `<template><div class="foo bar    baz foo"></div></template>`,
+      output: `<template><div class="foo bar    baz"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VLiteral'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-preserved-spaces-3.vue',
+      code: `<template><div class="foo bar foo     baz"></div></template>`,
+      output: `<template><div class="foo bar     baz"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VLiteral'
+        }
+      ]
     }
   ]
 })
