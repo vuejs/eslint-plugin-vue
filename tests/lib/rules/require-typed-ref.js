@@ -242,7 +242,6 @@ tester.run('require-typed-ref', rule, {
             }
           }
         </script>
-      }
       `,
       languageOptions: { parser: require('vue-eslint-parser') },
       errors: [
