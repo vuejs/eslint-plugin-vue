@@ -42,20 +42,8 @@ tester.run('no-duplicate-class-names', rule, {
       code: `<template><div :class="{ 'foo bar baz': true }"></div></template>`
     },
     {
-      filename: 'duplicate-class-and-directive.vue',
-      code: `<template><div class="foo" :class="'foo'"></div></template>`
-    },
-    {
       filename: 'duplicate-class-in-different-directive-object-keys.vue',
       code: `<template><div :class="{ 'foo': true, 'foo bar': true }"></div></template>`
-    },
-    {
-      filename: 'duplicate-class-in-different-directive-array-items.vue',
-      code: `<template><div :class="['foo', 'foo bar']"></div></template>`
-    },
-    {
-      filename: 'duplicate-class-in-different-directive-mixed.vue',
-      code: `<template><div :class="['foo', { 'foo bar': true }]"></div></template>`
     },
     {
       filename: 'class-conditional-expression.vue',
@@ -226,6 +214,61 @@ tester.run('no-duplicate-class-names', rule, {
         {
           message: "Duplicate class name 'foo'.",
           type: 'VLiteral'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-in-different-attributes.vue',
+      code: `<template><div class="foo" :class="'foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes.vue',
+      code: `<template><div class="foo" :class="'foo bar'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-multiple-duplicates.vue',
+      code: `<template><div class="foo bar" :class="'foo bar'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo, bar'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-array.vue',
+      code: `<template><div class="foo" :class="['foo', 'bar']"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-object.vue',
+      code: `<template><div class="foo" :class="{ 'foo': true }"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
         }
       ]
     }

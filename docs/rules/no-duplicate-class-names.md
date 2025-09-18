@@ -38,6 +38,7 @@ This rule prevents the same class name from appearing multiple times within the 
   <div :class="['foo foo', { 'bar bar baz': true }]"></div>
   <div :class="isActive ? 'foo foo' : 'bar'"></div>
   <div :class="'foo foo ' + 'bar'"></div>
+  <div class="foo" :class="'foo'"></div>
 </template>
 ```
 
