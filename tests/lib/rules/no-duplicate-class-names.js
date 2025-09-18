@@ -218,7 +218,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-in-different-attributes.vue',
+      filename: 'duplicate-class-cross-attribute-string.vue',
       code: `<template><div class="foo" :class="'foo'"></div></template>`,
       output: null,
       errors: [
@@ -229,7 +229,18 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes.vue',
+      filename: 'duplicate-class-cross-attribute-literal.vue',
+      code: '<template><div class="foo" :class="`foo`"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-cross-attribute.vue',
       code: `<template><div class="foo" :class="'foo bar'"></div></template>`,
       output: null,
       errors: [
@@ -240,7 +251,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-multiple-duplicates.vue',
+      filename: 'duplicate-class-cross-attribute-multiple-duplicates.vue',
       code: `<template><div class="foo bar" :class="'foo bar'"></div></template>`,
       output: null,
       errors: [
@@ -251,7 +262,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-array.vue',
+      filename: 'duplicate-class-cross-attribute-array.vue',
       code: `<template><div class="foo" :class="['foo', 'bar']"></div></template>`,
       output: null,
       errors: [
@@ -262,7 +273,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-object.vue',
+      filename: 'duplicate-class-cross-attribute-object.vue',
       code: `<template><div class="foo" :class="{ 'foo': true }"></div></template>`,
       output: null,
       errors: [
@@ -273,7 +284,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-mixed.vue',
+      filename: 'duplicate-class-cross-attribute-mixed.vue',
       code: `<template><div class="foo" :class="['foo', { 'bar': true }]"></div></template>`,
       output: null,
       errors: [
@@ -284,7 +295,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-binary.vue',
+      filename: 'duplicate-class-cross-attribute-binary.vue',
       code: `<template><div class="foo" :class="'foo ' + 'bar'"></div></template>`,
       output: null,
       errors: [
@@ -295,7 +306,7 @@ tester.run('no-duplicate-class-names', rule, {
       ]
     },
     {
-      filename: 'duplicate-class-different-attributes-conditional.vue',
+      filename: 'duplicate-class-cross-attribute-conditional.vue',
       code: `<template><div class="foo" :class="isActive ? 'foo' : 'bar'"></div></template>`,
       output: null,
       errors: [
