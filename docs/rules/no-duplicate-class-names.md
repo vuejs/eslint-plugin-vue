@@ -23,7 +23,7 @@ This rule prevents the same class name from appearing multiple times within the 
   <!-- ✓ GOOD -->
   <div class="foo bar"></div>
   <div :class="'foo bar'"></div>
-  <div :class="{ 'foo bar': true }"></div>
+  <div :class="{ 'foo bar': isActive }"></div>
   <div :class="['foo', 'bar']"></div>
   <div :class="isActive ? 'foo' : 'bar'"></div>
   <div :class="'foo ' + 'bar'"></div>
@@ -33,14 +33,15 @@ This rule prevents the same class name from appearing multiple times within the 
   <div class="foo bar foo baz bar"></div>
   <div :class="'foo foo'"></div>
   <div :class="`foo foo`"></div>
-  <div :class="{ 'foo foo': true }"></div>
+  <div :class="{ 'foo foo': isActive }"></div>
   <div :class="['foo foo']"></div>
-  <div :class="['foo foo', { 'bar bar baz': true }]"></div>
+  <div :class="['foo foo', { 'bar bar baz': isActive }]"></div>
   <div :class="isActive ? 'foo foo' : 'bar'"></div>
   <div :class="'foo foo ' + 'bar'"></div>
   <div class="foo" :class="'foo'"></div>
   <div :class="['foo', 'foo']"></div>
   <div :class="'foo ' + 'foo'"></div>
+  <div :class="['foo', { 'foo': isActive }]"></div>
 </template>
 ```
 
