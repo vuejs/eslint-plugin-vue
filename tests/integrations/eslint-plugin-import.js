@@ -35,6 +35,9 @@ describe('Integration with eslint-plugin-import', () => {
       return
     }
 
-    cp.execSync(`${ESLINT} a.vue`, { cwd: PLUGIN_DIR, stdio: 'inherit' })
+    cp.execSync(`${ESLINT} --config eslint.config.mjs a.vue`, {
+      cwd: PLUGIN_DIR,
+      stdio: 'inherit'
+    })
   })
 })
