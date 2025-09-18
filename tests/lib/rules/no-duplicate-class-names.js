@@ -345,6 +345,17 @@ tester.run('no-duplicate-class-names', rule, {
           type: 'BinaryExpression'
         }
       ]
+    },
+    {
+      filename: 'duplicate-class-cross-node-mixed.vue',
+      code: `<template><div :class="['foo', { 'foo': true }]"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'ArrayExpression'
+        }
+      ]
     }
   ]
 })
