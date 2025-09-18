@@ -271,6 +271,39 @@ tester.run('no-duplicate-class-names', rule, {
           type: 'VStartTag'
         }
       ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-mixed.vue',
+      code: `<template><div class="foo" :class="['foo', { 'bar': true }]"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-binary.vue',
+      code: `<template><div class="foo" :class="'foo ' + 'bar'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-different-attributes-conditional.vue',
+      code: `<template><div class="foo" :class="isActive ? 'foo' : 'bar'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'VStartTag'
+        }
+      ]
     }
   ]
 })
