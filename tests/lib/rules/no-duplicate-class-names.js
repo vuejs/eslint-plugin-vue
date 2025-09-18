@@ -48,6 +48,14 @@ tester.run('no-duplicate-class-names', rule, {
     {
       filename: 'class-conditional-expression.vue',
       code: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`
+    },
+    {
+      filename: 'class-conditional-duplicate-expression-value.vue',
+      code: `<template><div :class="isActive ? 'foo' : 'foo'"></div></template>`
+    },
+    {
+      filename: 'class-object-duplicate-value.vue',
+      code: `<div :class="{ 'foo bar': isActive, 'foo': isAnotherActive }"></div>`
     }
   ],
   invalid: [
@@ -313,6 +321,28 @@ tester.run('no-duplicate-class-names', rule, {
         {
           message: "Duplicate class name 'foo'.",
           type: 'VStartTag'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-cross-node-array.vue',
+      code: `<template><div :class="['foo', 'foo']"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'ArrayExpression'
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-cross-node-binary.vue',
+      code: `<template><div :class="'foo ' + 'foo'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'BinaryExpression'
         }
       ]
     }
