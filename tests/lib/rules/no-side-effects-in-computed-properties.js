@@ -259,6 +259,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           })
           const test18 = computed(() => (console.log('a'), true))
           const test19 = computed(() => utils.reverse(foo.array))
+          const test20 = computed(() => Object.assign({}, foo.data, { extra: 'value' }))
         }
       }
       </script>`
@@ -887,6 +888,54 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           column: 36,
           endLine: 6,
           endColumn: 59
+        }
+      ]
+    },
+    {
+      // Object.assign mutating the prop as first argument in computed properties
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {ref, computed} from 'vue'
+      export default {
+        setup() {
+          const foo = useFoo()
+
+          const test1 = computed(() => Object.assign(foo.data, { extra: 'value' }))
+          const test2 = computed(() => {
+            return Object.assign(foo.user, foo.updates)
+          })
+          const test3 = computed({
+            get() {
+              Object.assign(foo.settings, { theme: 'dark' })
+              return foo.settings
+            }
+          })
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 8,
+          column: 40,
+          endLine: 8,
+          endColumn: 83
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 10,
+          column: 20,
+          endLine: 10,
+          endColumn: 56
+        },
+        {
+          message: 'Unexpected side effect in computed function.',
+          line: 14,
+          column: 15,
+          endLine: 14,
+          endColumn: 61
         }
       ]
     }

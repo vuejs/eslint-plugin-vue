@@ -413,6 +413,22 @@ ruleTester.run('no-mutating-props', rule, {
         const foo = ref('')
         </script>
       `
+    },
+    {
+      // Object.assign not mutating the prop
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['data'],
+            methods: {
+              update() {
+                return Object.assign({}, this.data, { extra: 'value' })
+              }
+            }
+          }
+        </script>
+      `
     }
   ],
 
@@ -1418,6 +1434,31 @@ ruleTester.run('no-mutating-props', rule, {
           column: 11,
           endLine: 15,
           endColumn: 21
+        }
+      ]
+    },
+    {
+      // Object.assign mutating the prop as first argument
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['data'],
+            methods: {
+              update() {
+                return Object.assign(this.data, { extra: 'value' })
+              }
+            }
+          }
+        </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "data" prop.',
+          line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 68
         }
       ]
     }
