@@ -47,7 +47,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 ```json
 {
   "vue/v-on-handler-style": ["error",
-    ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | "inline-function" | "inline"
+    ["method", "inline-function"], // ["method", "inline-function"] | ["method", "inline"] | ["inline", "inline-function"] | "inline-function" | "inline"
     {
       "ignoreIncludesComment": false
     }
@@ -58,10 +58,12 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 - First option ... Specifies the name of an allowed style. Default is `["method", "inline-function"]`.
   - `["method", "inline-function"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline functions where method handlers cannot be used. e.g. `v-on:click="() => handler(listItem)"`.
   - `["method", "inline"]` ... Allow handlers by method binding. e.g. `v-on:click="handler"`. Allow inline handlers where method handlers cannot be used. e.g. `v-on:click="handler(listItem)"`.
+  - `["inline", "inline-function"]` ... Allow inline handlers. e.g. `v-on:click="handler()"`. Allow inline functions if they have at least 1 argument. e.g. `v-on:click="(arg1, arg2) => handler(arg1, arg2)"`.
   - `"inline-function"` ... Allow inline functions. e.g. `v-on:click="() => handler()"`
   - `"inline"` ... Allow inline handlers. e.g. `v-on:click="handler()"`
 - Second option
   - `ignoreIncludesComment` ... If `true`, do not report inline handlers or inline functions containing comments, even if the preferred style is `"method"`. Default is `false`.
+  - `allowInlineFuncSingleArg` ... Used in conjunction with `["method", "inline-function"]` or `["inline", "inline-function"]`. If `true`, allow inline functions with a single argument. Default is `false`.
 
 ### `["method", "inline-function"]` (Default)
 
@@ -114,6 +116,68 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
   <template v-for="e in list">
     <button v-on:click="e()" />
     <button v-on:click="() => e()" />
+    <button v-on:click="() => handler(e)" />
+  </template>
+</template>
+```
+
+</eslint-code-block>
+
+### `["inline", "inline-function"]`
+
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline', 'inline-function']]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="count++" />
+  <button v-on:click="handler()" />
+  <button v-on:click="handler($event)" />
+  <button v-on:click="(arg1, arg2) => handler(arg1, arg2)" />
+  <template v-for="e in list">
+    <button v-on:click="handler(e)" />
+    <button v-on:click="handler($event, e)" />
+    <button v-on:click="(arg1, arg2) => handler(arg1, arg2, e)" />
+  </template>
+
+  <!-- ✗ BAD -->
+  <button v-on:click="() => count++" />
+  <button v-on:click="handler" />
+  <button v-on:click="() => handler()" />
+  <button v-on:click="(arg) => handler(arg)" />
+  <template v-for="e in list">
+    <button v-on:click="() => handler(e)" />
+    <button v-on:click="(arg) => handler(arg, e)" />
+  </template>
+</template>
+```
+
+</eslint-code-block>
+
+### `["inline", "inline-function"]` with `allowInlineFuncSingleArg: true`
+
+<eslint-code-block fix :rules="{'vue/v-on-handler-style': ['error', ['inline', 'inline-function'], { allowInlineFuncSingleArg: true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <button v-on:click="count++" />
+  <button v-on:click="handler()" />
+  <button v-on:click="handler($event)" />
+  <button v-on:click="(arg) => handler(arg)" />
+  <button v-on:click="(arg1, arg2) => handler(arg1, arg2)" />
+  <template v-for="e in list">
+    <button v-on:click="handler(e)" />
+    <button v-on:click="handler($event, e)" />
+    <button v-on:click="(arg) => handler(arg, e)" />
+    <button v-on:click="(arg1, arg2) => handler(arg1, arg2, e)" />
+  </template>
+
+  <!-- ✗ BAD -->
+  <button v-on:click="() => count++" />
+  <button v-on:click="handler" />
+  <button v-on:click="() => handler()" />
+  <template v-for="e in list">
     <button v-on:click="() => handler(e)" />
   </template>
 </template>
