@@ -6,6 +6,9 @@
 
 const rule = require('../../../lib/rules/no-dupe-keys')
 const RuleTester = require('../../eslint-compat').RuleTester
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -511,6 +514,20 @@ ruleTester.run('no-dupe-keys', rule, {
       </script>
       `,
       languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props2 as Props} from './test01'
+
+      defineProps<Props>()
+
+      const bar = computed(() => {
+        return "hello";
+      });
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -1245,6 +1262,30 @@ ruleTester.run('no-dupe-keys', rule, {
           endColumn: 24
         }
       ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props1 as Props} from './test01'
+
+      defineProps<Props>()
+
+      const foo = computed(() => {
+        return "hello";
+      });
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            "Duplicate key 'foo'. May cause name collision in script or template tag.",
+          line: 7,
+          column: 13,
+          endLine: 9,
+          endColumn: 9
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
