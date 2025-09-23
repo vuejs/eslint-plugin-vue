@@ -234,6 +234,7 @@ For example:
 | [vue/no-bare-strings-in-template] | disallow the use of bare strings in `<template>` |  | :hammer: |
 | [vue/no-boolean-default] | disallow boolean defaults |  | :hammer: |
 | [vue/no-duplicate-attr-inheritance] | enforce `inheritAttrs` to be set to `false` when using `v-bind="$attrs"` |  | :hammer: |
+| [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-import-compiler-macros] | disallow importing Vue compiler macros | :wrench: | :warning: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
@@ -468,6 +469,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-dupe-v-else-if]: ./no-dupe-v-else-if.md
 [vue/no-duplicate-attr-inheritance]: ./no-duplicate-attr-inheritance.md
 [vue/no-duplicate-attributes]: ./no-duplicate-attributes.md
+[vue/no-duplicate-class-names]: ./no-duplicate-class-names.md
 [vue/no-empty-component-block]: ./no-empty-component-block.md
 [vue/no-empty-pattern]: ./no-empty-pattern.md
 [vue/no-export-in-script-setup]: ./no-export-in-script-setup.md
