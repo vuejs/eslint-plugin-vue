@@ -18,6 +18,13 @@ export type Props2 = {
   h?: string[]
   i?: readonly string[]
 }
+export type Props3 = {
+  snake_case: string
+  'kebab-case': number
+  camelCase: boolean
+  PascalCase?: string
+  foo: number
+}
 
 export type Slots1 = {
   default(props: { msg: string }): any
