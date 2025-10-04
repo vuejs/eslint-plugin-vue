@@ -46,7 +46,7 @@ tester.run('no-import-compiler-macros', rule, {
       `,
       output: `
       <script setup>
-
+      
       </script>
       `,
       errors: [
