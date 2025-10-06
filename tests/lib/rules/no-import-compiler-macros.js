@@ -29,6 +29,14 @@ tester.run('no-import-compiler-macros', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script setup>
+      import { defineProps } from 'some-other-package'
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script>
       // not in <script setup>
       import { defineProps } from 'vue'
@@ -46,7 +54,7 @@ tester.run('no-import-compiler-macros', rule, {
       `,
       output: `
       <script setup>
-      
+
       </script>
       `,
       errors: [
