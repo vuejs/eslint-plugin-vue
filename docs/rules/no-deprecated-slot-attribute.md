@@ -49,8 +49,8 @@ This rule reports deprecated `slot` attribute in Vue.js v2.6.0+.
 }
 ```
 
-- `"ignore"` (`string[]`) An array of tags or regular expression patterns (e.g. `/^custom-/`) that ignore these rules. This option will check both kebab-case and PascalCase versions of the given tag names. Default is empty.
-- `"ignoreParents"` (`string[]`) An array of tags or regular expression patterns (e.g. `/^custom-/`) for parents that ignore these rules. This option is especially useful for [Web-Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). Default is empty.
+- `"ignore"` (`string[]`) An array of tags or regular expression patterns (e.g. `"/^custom-/"`) that ignore these rules. This option will check both kebab-case and PascalCase versions of the given tag names. Default is empty.
+- `"ignoreParents"` (`string[]`) An array of tags or regular expression patterns (e.g. `"/^custom-/"`) for parents that ignore these rules. This option is especially useful for [Web-Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components). Default is empty.
 
 ### `"ignore": ["my-component"]`
 
