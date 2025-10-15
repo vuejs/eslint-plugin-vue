@@ -7,6 +7,9 @@
 const semver = require('semver')
 const rule = require('../../../lib/rules/prop-name-casing')
 const RuleTester = require('../../eslint-compat').RuleTester
+const {
+  getTypeScriptFixtureTestOptions
+} = require('../../test-utils/typescript')
 
 const languageOptions = {
   ecmaVersion: 2018,
@@ -376,6 +379,16 @@ ruleTester.run('prop-name-casing', rule, {
         { ignoreProps: ['ignored_prop', '/^ignored-pattern-/'] }
       ],
       languageOptions
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props2 as Props} from './test01'
+
+      defineProps<Props>()
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -751,6 +764,30 @@ ruleTester.run('prop-name-casing', rule, {
           line: 3
         }
       ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Props3 as Props} from './test01'
+
+      defineProps<Props>()
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Prop "snake_case" is not in camelCase.',
+          line: 5
+        },
+        {
+          message: 'Prop "kebab-case" is not in camelCase.',
+          line: 5
+        },
+        {
+          message: 'Prop "PascalCase" is not in camelCase.',
+          line: 5
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
     }
   ]
 })
