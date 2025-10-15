@@ -26,7 +26,7 @@ This rule prevents the same class name from appearing multiple times within the 
   <div :class="{ 'foo bar': isActive }"></div>
   <div :class="['foo', 'bar']"></div>
   <div :class="isActive ? 'foo' : 'bar'"></div>
-  <div :class="'foo ' + 'bar'"></div>
+  <div class="foo" :class="{ bar: isActive }"></div>
   
   <!-- ✗ BAD -->
   <div class="foo foo"></div>
