@@ -65,7 +65,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: '<template><div class="foo"></div></template>',
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VLiteral',
           line: 1,
           column: 22,
@@ -95,7 +95,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="'foo'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 24,
@@ -110,7 +110,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: '<template><div :class="`foo`"></div></template>',
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'TemplateElement',
           line: 1,
           column: 24,
@@ -125,7 +125,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="{ 'foo': true }"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 26,
@@ -140,7 +140,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="{ 'foo bar': true, 'bar baz': true }"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 26,
@@ -148,7 +148,7 @@ tester.run('no-duplicate-class-names', rule, {
           endColumn: 39
         },
         {
-          message: "Duplicate class names 'bar'.",
+          message: "Duplicate class name 'bar'.",
           type: 'Literal',
           line: 1,
           column: 47,
@@ -163,7 +163,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo']"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 25,
@@ -178,7 +178,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo', 'bar baz']"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 25,
@@ -186,7 +186,7 @@ tester.run('no-duplicate-class-names', rule, {
           endColumn: 34
         },
         {
-          message: "Duplicate class names 'bar'.",
+          message: "Duplicate class name 'bar'.",
           type: 'Literal',
           line: 1,
           column: 36,
@@ -201,7 +201,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo', { 'bar baz': true }]"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 25,
@@ -209,7 +209,7 @@ tester.run('no-duplicate-class-names', rule, {
           endColumn: 34
         },
         {
-          message: "Duplicate class names 'bar'.",
+          message: "Duplicate class name 'bar'.",
           type: 'Literal',
           line: 1,
           column: 38,
@@ -224,7 +224,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 35,
@@ -239,7 +239,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="'foo ' + ' bar'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
           column: 24,
@@ -254,7 +254,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo     bar"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VLiteral',
           line: 1,
           column: 22,
@@ -269,7 +269,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo bar    baz"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VLiteral',
           line: 1,
           column: 22,
@@ -284,7 +284,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo bar     baz"></div></template>`,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VLiteral',
           line: 1,
           column: 22,
@@ -299,7 +299,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -314,7 +314,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -329,7 +329,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -359,7 +359,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -374,7 +374,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -389,7 +389,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -404,7 +404,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -419,7 +419,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'VStartTag',
           line: 1,
           column: 11,
@@ -434,7 +434,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'ArrayExpression',
           line: 1,
           column: 24,
@@ -449,7 +449,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'BinaryExpression',
           line: 1,
           column: 24,
@@ -464,7 +464,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class names 'foo'.",
+          message: "Duplicate class name 'foo'.",
           type: 'ArrayExpression',
           line: 1,
           column: 24,
