@@ -65,7 +65,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: '<template><div class="foo"></div></template>',
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VLiteral'
         }
       ]
@@ -76,7 +76,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: '<template><div class="foo bar baz"></div></template>',
       errors: [
         {
-          message: "Duplicate class name 'foo, bar'.",
+          message: "Duplicate class names 'foo', 'bar'.",
           type: 'VLiteral'
         }
       ]
@@ -87,7 +87,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="'foo'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         }
       ]
@@ -98,7 +98,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: '<template><div :class="`foo`"></div></template>',
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'TemplateElement'
         }
       ]
@@ -109,7 +109,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="{ 'foo': true }"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         }
       ]
@@ -120,11 +120,11 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="{ 'foo bar': true, 'bar baz': true }"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         },
         {
-          message: "Duplicate class name 'bar'.",
+          message: "Duplicate class names 'bar'.",
           type: 'Literal'
         }
       ]
@@ -135,7 +135,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo']"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         }
       ]
@@ -146,11 +146,11 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo', 'bar baz']"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         },
         {
-          message: "Duplicate class name 'bar'.",
+          message: "Duplicate class names 'bar'.",
           type: 'Literal'
         }
       ]
@@ -161,11 +161,11 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="['foo', { 'bar baz': true }]"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         },
         {
-          message: "Duplicate class name 'bar'.",
+          message: "Duplicate class names 'bar'.",
           type: 'Literal'
         }
       ]
@@ -176,7 +176,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         }
       ]
@@ -187,7 +187,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div :class="'foo ' + ' bar'"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'Literal'
         }
       ]
@@ -198,7 +198,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo     bar"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VLiteral'
         }
       ]
@@ -209,7 +209,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo bar    baz"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VLiteral'
         }
       ]
@@ -220,7 +220,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: `<template><div class="foo bar     baz"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VLiteral'
         }
       ]
@@ -231,7 +231,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -242,7 +242,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -253,7 +253,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -264,7 +264,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo, bar'.",
+          message: "Duplicate class names 'foo', 'bar'.",
           type: 'VStartTag'
         }
       ]
@@ -275,7 +275,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -286,7 +286,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -297,7 +297,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -308,7 +308,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -319,7 +319,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'VStartTag'
         }
       ]
@@ -330,7 +330,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'ArrayExpression'
         }
       ]
@@ -341,7 +341,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'BinaryExpression'
         }
       ]
@@ -352,7 +352,7 @@ tester.run('no-duplicate-class-names', rule, {
       output: null,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
+          message: "Duplicate class names 'foo'.",
           type: 'ArrayExpression'
         }
       ]
