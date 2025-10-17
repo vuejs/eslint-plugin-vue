@@ -472,6 +472,96 @@ tester.run('no-duplicate-class-names', rule, {
           endColumn: 48
         }
       ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-and.vue',
+      code: `<template><div :class="isActive && 'foo foo'"></div></template>`,
+      output: `<template><div :class="isActive && 'foo'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-or.vue',
+      code: `<template><div :class="isActive || 'foo foo'"></div></template>`,
+      output: `<template><div :class="isActive || 'foo'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-nullish-coalescing.vue',
+      code: `<template><div :class="isActive ?? 'foo foo'"></div></template>`,
+      output: `<template><div :class="isActive ?? 'foo'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-nested-logical-expression.vue',
+      code: `<template><div :class="isActive ?? isAnotherActive ?? 'foo foo'"></div></template>`,
+      output: `<template><div :class="isActive ?? isAnotherActive ?? 'foo'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal',
+          line: 1,
+          column: 55,
+          endLine: 1,
+          endColumn: 64
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-in-array.vue',
+      code: `<template><div :class="['foo', isActive ?? 'foo']"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'ArrayExpression',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-logical-expression-in-conditional.vue',
+      code: `<template><div :class="isActive ? 'foo foo' : 'bar'"></div></template>`,
+      output: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'Literal',
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
     }
   ]
 })
