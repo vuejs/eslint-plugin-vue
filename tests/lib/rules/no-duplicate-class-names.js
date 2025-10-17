@@ -535,16 +535,16 @@ tester.run('no-duplicate-class-names', rule, {
     },
     {
       filename: 'duplicate-class-logical-expression-in-array.vue',
-      code: `<template><div :class="['foo', isActive ?? 'foo']"></div></template>`,
-      output: null,
+      code: `<template><div :class="['foo', isActive ?? 'bar bar']"></div></template>`,
+      output: `<template><div :class="['foo', isActive ?? 'bar']"></div></template>`,
       errors: [
         {
-          message: "Duplicate class name 'foo'.",
-          type: 'ArrayExpression',
+          message: "Duplicate class name 'bar'.",
+          type: 'Literal',
           line: 1,
-          column: 24,
+          column: 44,
           endLine: 1,
-          endColumn: 50
+          endColumn: 53
         }
       ]
     },
