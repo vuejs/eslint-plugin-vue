@@ -550,16 +550,16 @@ tester.run('no-duplicate-class-names', rule, {
     },
     {
       filename: 'duplicate-class-logical-expression-in-conditional.vue',
-      code: `<template><div :class="isActive ? 'foo foo' : 'bar'"></div></template>`,
-      output: `<template><div :class="isActive ? 'foo' : 'bar'"></div></template>`,
+      code: `<template><div :class="isAnotherActive ? isActive ?? 'foo foo' : 'bar'"></div></template>`,
+      output: `<template><div :class="isAnotherActive ? isActive ?? 'foo' : 'bar'"></div></template>`,
       errors: [
         {
           message: "Duplicate class name 'foo'.",
           type: 'Literal',
           line: 1,
-          column: 35,
+          column: 54,
           endLine: 1,
-          endColumn: 44
+          endColumn: 63
         }
       ]
     }
