@@ -1,5 +1,11 @@
 # eslint-plugin-vue
 
+## 10.6.0
+
+### Minor Changes
+
+- Added new [`vue/no-duplicate-class-names`](https://eslint.vuejs.org/rules/no-duplicate-class-names.html) rule ([#2934](https://github.com/vuejs/eslint-plugin-vue/pull/2934))
+
 ## 10.5.1
 
 ### Patch Changes
