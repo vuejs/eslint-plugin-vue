@@ -2,6 +2,7 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 import type { Linter } from 'eslint'
+import meta from './meta.ts'
 
 type LintMessage = Linter.LintMessage
 
@@ -125,7 +126,7 @@ export default {
 
   supportsAutofix: true,
 
-  meta: require('./meta')
+  meta
 }
 
 function addDisableRule(
