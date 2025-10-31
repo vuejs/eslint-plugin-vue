@@ -1,5 +1,5 @@
 ---
-'eslint-plugin-vue': patch
+'eslint-plugin-vue': minor
 ---
 
-no-import-compiler-macros: make it clear that macros are not allowed outside `<script setup>`
+Updated `vue/no-import-compiler-macros` to clarify that macros are not allowed outside `<script setup>`
