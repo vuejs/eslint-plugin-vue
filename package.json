@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "10.5.0",
+  "version": "10.5.1",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -75,7 +75,7 @@
     "@eslint-community/eslint-utils": "^4.4.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
-    "postcss-selector-parser": "^6.0.15",
+    "postcss-selector-parser": "^7.1.0",
     "semver": "^7.6.3",
     "xml-name-validator": "^4.0.0"
   },

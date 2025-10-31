@@ -1,5 +1,11 @@
 # eslint-plugin-vue
 
+## 10.5.1
+
+### Patch Changes
+
+- Fixed [`vue/no-negated-v-if-condition`](https://eslint.vuejs.org/rules/no-negated-v-if-condition.html) rule to swap entire elements ([#2941](https://github.com/vuejs/eslint-plugin-vue/pull/2941))
+
 ## 10.5.0
 
 ### Minor Changes
