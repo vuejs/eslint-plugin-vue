@@ -853,7 +853,7 @@ tester.run('no-undef-components', rule, {
         <FooBar />
       </template>
       `,
-      options: [{ ignorePatterns: ['Foo'] }],
+      options: [{ ignorePatterns: ['Foo'], strict: true }],
       errors: [
         {
           message: "The '<FooBar>' component has been used, but not defined.",
@@ -862,17 +862,18 @@ tester.run('no-undef-components', rule, {
       ]
     },
 
+    // Default to strict
     {
       filename: 'test.vue',
       code: `
       <template>
-        <Foo />
+        <FooBar />
       </template>
       `,
       options: [{ ignorePatterns: ['Foo'] }],
       errors: [
         {
-          message: "The '<Foo>' component has been used, but not defined.",
+          message: "The '<FooBar>' component has been used, but not defined.",
           line: 3
         }
       ]
