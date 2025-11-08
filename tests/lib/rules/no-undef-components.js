@@ -108,6 +108,7 @@ tester.run('no-undef-components', rule, {
         }
       ]
     },
+
     // circular references
     {
       filename: 'test.vue',
@@ -685,6 +686,7 @@ tester.run('no-undef-components', rule, {
       }
     }
   ],
+
   invalid: [
     // <script setup>
     {
@@ -839,6 +841,39 @@ tester.run('no-undef-components', rule, {
           message:
             "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
           line: 7
+        }
+      ]
+    },
+
+    // Strict ignore pattern
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <FooBar />
+      </template>
+      `,
+      options: [{ ignorePatterns: ['Foo'] }],
+      errors: [
+        {
+          message: "The '<FooBar>' component has been used, but not defined.",
+          line: 3
+        }
+      ]
+    },
+
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <Foo />
+      </template>
+      `,
+      options: [{ ignorePatterns: ['Foo'] }],
+      errors: [
+        {
+          message: "The '<Foo>' component has been used, but not defined.",
+          line: 3
         }
       ]
     },
