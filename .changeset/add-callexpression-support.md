@@ -2,4 +2,4 @@
 'eslint-plugin-vue': patch
 ---
 
-fix(no-v-html): add CallExpression support to ignorePattern option (#2949)
+Fixed `vue/no-v-html` rule to allow ignoring call expressions
