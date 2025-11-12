@@ -33,8 +33,12 @@ const optionsExposeLast = [
   }
 ]
 
-function message(macro) {
-  return `${macro} should be the first statement in \`<script setup>\` (after any potential import statements or type definitions).`
+function notAtTopMessage(macro) {
+  return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements or type definitions).`
+}
+
+function unorderedMessage(macro, before) {
+  return `${macro} should be above ${before}.`
 }
 
 const defineExposeNotTheLast =
@@ -355,7 +359,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: message('defineEmits'),
+          message: notAtTopMessage('defineEmits'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -394,7 +398,7 @@ tester.run('define-macros-order', rule, {
       options: optionsPropsFirst,
       errors: [
         {
-          message: message('defineProps'),
+          message: notAtTopMessage('defineProps'),
           line: 8,
           column: 11,
           endLine: 10,
@@ -430,7 +434,7 @@ tester.run('define-macros-order', rule, {
       options: optionsPropsFirst,
       errors: [
         {
-          message: message('defineProps'),
+          message: unorderedMessage('defineProps', 'defineEmits'),
           line: 6,
           column: 11,
           endLine: 8,
@@ -465,7 +469,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: message('defineEmits'),
+          message: notAtTopMessage('defineEmits'),
           line: 8,
           column: 11,
           endLine: 8,
@@ -502,7 +506,7 @@ tester.run('define-macros-order', rule, {
       options: [{ order: ['definePage', 'defineProps'] }],
       errors: [
         {
-          message: message('definePage'),
+          message: notAtTopMessage('definePage'),
           line: 8,
           column: 11,
           endLine: 10,
@@ -548,7 +552,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: message('defineEmits'),
+          message: unorderedMessage('defineEmits', 'defineProps'),
           line: 12,
           column: 11,
           endLine: 12,
@@ -606,7 +610,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: message('definePage'),
+          message: unorderedMessage('definePage', 'defineProps'),
           line: 15,
           column: 11,
           endLine: 17,
@@ -647,7 +651,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: message('defineProps'),
+          message: notAtTopMessage('defineProps'),
           line: 10,
           column: 11,
           endLine: 10,
@@ -705,7 +709,7 @@ tester.run('define-macros-order', rule, {
       },
       errors: [
         {
-          message: message('defineEmits'),
+          message: notAtTopMessage('defineEmits'),
           line: 16,
           column: 11,
           endLine: 16,
@@ -727,7 +731,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: message('defineEmits'),
+          message: unorderedMessage('defineEmits', 'defineProps'),
           line: 3,
           column: 56,
           endLine: 3,
@@ -749,7 +753,7 @@ tester.run('define-macros-order', rule, {
       options: [{ order: ['definePage', 'defineProps'] }],
       errors: [
         {
-          message: message('definePage'),
+          message: unorderedMessage('definePage', 'defineProps'),
           line: 3,
           column: 56,
           endLine: 3,
@@ -787,7 +791,7 @@ tester.run('define-macros-order', rule, {
       `,
       errors: [
         {
-          message: message('defineProps'),
+          message: unorderedMessage('defineProps', 'defineEmits'),
           line: 11,
           column: 11,
           endLine: 11,
@@ -805,7 +809,7 @@ tester.run('define-macros-order', rule, {
       `,
       errors: [
         {
-          message: message('defineProps'),
+          message: unorderedMessage('defineProps', 'defineEmits'),
           line: 2,
           column: 52,
           endLine: 2,
@@ -830,7 +834,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: message('defineProps'),
+          message: notAtTopMessage('defineProps'),
           line: 4,
           column: 11,
           endLine: 4,
@@ -857,7 +861,7 @@ tester.run('define-macros-order', rule, {
       options: optionsEmitsFirst,
       errors: [
         {
-          message: message('defineProps'),
+          message: notAtTopMessage('defineProps'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -884,7 +888,7 @@ tester.run('define-macros-order', rule, {
       options: [{ order: ['defineCustom', 'definePage'] }],
       errors: [
         {
-          message: message('defineCustom'),
+          message: unorderedMessage('defineCustom', 'definePage'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -911,7 +915,7 @@ tester.run('define-macros-order', rule, {
       options: [{ order: ['defineCustom', 'definePage'] }],
       errors: [
         {
-          message: message('defineCustom'),
+          message: unorderedMessage('defineCustom', 'definePage'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -966,7 +970,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineOptions'),
+          message: notAtTopMessage('defineOptions'),
           line: 12,
           column: 11,
           endLine: 12,
@@ -1017,7 +1021,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineOptions'),
+          message: unorderedMessage('defineOptions', 'defineSlots'),
           line: 6,
           column: 11,
           endLine: 6,
@@ -1128,7 +1132,7 @@ tester.run('define-macros-order', rule, {
           ]
         },
         {
-          message: message('defineOptions'),
+          message: unorderedMessage('defineOptions', 'defineEmits'),
           line: 8,
           column: 11,
           endLine: 8,
@@ -1163,7 +1167,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineModel'),
+          message: unorderedMessage('defineModel', 'defineOptions'),
           line: 6,
           column: 11,
           endLine: 6,
@@ -1194,7 +1198,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineModel'),
+          message: unorderedMessage('defineModel', 'defineOptions'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -1235,7 +1239,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineSomething'),
+          message: unorderedMessage('defineSomething', 'defineOptions'),
           line: 5,
           column: 11,
           endLine: 5,
@@ -1271,7 +1275,7 @@ tester.run('define-macros-order', rule, {
       ],
       errors: [
         {
-          message: message('defineModel'),
+          message: unorderedMessage('defineModel', 'defineOptions'),
           line: 5,
           column: 11,
           endLine: 5,
