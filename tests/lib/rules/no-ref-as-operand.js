@@ -307,6 +307,44 @@ tester.run('no-ref-as-operand', rule, {
       }
     })
     </script>
+    `,
+    `
+    import { ref } from 'vue'
+
+    function useCount() {
+      return ref(0)
+    }
+
+    const count = useCount()
+    console.log(count.value)
+    `,
+    `
+    import { ref } from 'vue'
+
+    const useList = () => ref([])
+
+    const list = useList()
+    console.log(list.value)
+    `,
+    `
+    import { ref } from 'vue'
+
+    function useMultiple() {
+      return [ref(0), ref(1)]
+    }
+
+    const [a, b] = useMultiple()
+    console.log(a.value, b.value)
+    `,
+    `
+    import { ref } from 'vue'
+
+    function useRef() {
+      return ref(0)
+    }
+
+    const count = useRef()
+    count.value++
     `
   ],
   invalid: [
@@ -1247,6 +1285,66 @@ tester.run('no-ref-as-operand', rule, {
           column: 23,
           endLine: 6,
           endColumn: 28
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+
+      function useCount() {
+        return ref(0)
+      }
+
+      const count = useCount()
+      count++ // error
+      `,
+      output: `
+      import { ref } from 'vue'
+
+      function useCount() {
+        return ref(0)
+      }
+
+      const count = useCount()
+      count.value++ // error
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `useCount()`.',
+          line: 9,
+          column: 7,
+          endLine: 9,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+      import { ref } from 'vue'
+
+      const useList = () => ref([])
+
+      const list = useList()
+      list + 1 // error
+      `,
+      output: `
+      import { ref } from 'vue'
+
+      const useList = () => ref([])
+
+      const list = useList()
+      list.value + 1 // error
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `useList()`.',
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 11
         }
       ]
     }
