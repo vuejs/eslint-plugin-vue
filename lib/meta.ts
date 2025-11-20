@@ -1,3 +1,3 @@
-import { name, version } from '../package.json' with { type: 'json' }
+import pkg from '../package.json' with { type: 'json' }
 
-export { name, version }
+export default { name: pkg.name, version: pkg.version }

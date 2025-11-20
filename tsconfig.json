@@ -23,7 +23,8 @@
     "paths": {
       "*": ["typings/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "lib/**/*",

@@ -22,7 +22,7 @@ const eslint = new ESLint({
       'vue/comment-directive': 'error',
       'vue/block-order': 'error'
     },
-    processor: require('../../../lib/processor')
+    processor: require('../../../lib/processor.ts').default
   },
   fix: true
 })

@@ -24,7 +24,7 @@ const eslint = new ESLint({
       'vue/no-parsing-error': 'error',
       'vue/no-duplicate-attributes': 'error'
     },
-    processor: require('../../../lib/processor')
+    processor: require('../../../lib/processor.ts').default
   }
 })
 
@@ -370,7 +370,7 @@ describe('comment-directive', () => {
           'vue/no-parsing-error': 'error',
           'vue/no-duplicate-attributes': 'error'
         },
-        processor: require('../../../lib/processor')
+        processor: require('../../../lib/processor.ts').default
       }
     })
 
