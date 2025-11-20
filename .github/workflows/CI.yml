@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install --legacy-peer-deps
       - name: Lint
@@ -34,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js v${{ matrix.node }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
       - name: Install Packages
@@ -49,9 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js v18
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 18
       - name: Install Packages
@@ -66,9 +66,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install
       - name: Uninstall @stylistic/eslint-plugin
@@ -84,9 +84,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
@@ -99,9 +99,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
       - name: Install Packages
         run: npm install
       - name: Install @typescript-eslint/parser v7
