@@ -94,7 +94,7 @@ tester.run('no-extra-parens', rule, {
         <button
           :class="{
             a: (b || c),
-            // [(d + e)]: f // valid in eslint v6.0
+            [(d + e)]: f
           }"
         />
       </template>`,
@@ -103,7 +103,7 @@ tester.run('no-extra-parens', rule, {
         <button
           :class="{
             a: b || c,
-            // [(d + e)]: f // valid in eslint v6.0
+            [d + e]: f
           }"
         />
       </template>`,
@@ -114,12 +114,11 @@ tester.run('no-extra-parens', rule, {
           column: 16,
           endLine: 5,
           endColumn: 17
+        },
+        {
+          messageId: 'unexpected',
+          line: 6
         }
-        // valid in eslint v6.0
-        // {
-        //   messageId: 'unexpected',
-        //   line: 6
-        // }
       ]
     },
     {
