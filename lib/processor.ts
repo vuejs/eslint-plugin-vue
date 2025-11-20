@@ -2,7 +2,7 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 import type { Linter } from 'eslint'
-import meta from './meta.ts'
+import * as meta from './meta'
 
 type LintMessage = Linter.LintMessage
 

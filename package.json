@@ -117,7 +117,7 @@
     "markdownlint-cli": "^0.42.0",
     "pathe": "^1.1.2",
     "prettier": "^3.3.3",
-    "tsdown": "^0.14.1",
+    "tsdown": "^0.16.5",
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
