@@ -58,10 +58,11 @@ function transformRequire(code: string) {
         return match
       }
 
-      let id = `__${moduleString.replace(
-        /[^a-zA-Z0-9_$]+/gu,
-        '_'
-      )}${Math.random().toString(32).slice(2)}`
+      let id =
+        // eslint-disable-next-line prefer-template
+        '__' +
+        moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') +
+        Math.random().toString(32).slice(2)
       while (code.includes(id) || modules.has(id)) {
         id += Math.random().toString(32).slice(2)
       }
@@ -70,11 +71,17 @@ function transformRequire(code: string) {
     }
   )
 
-  return `${[...modules]
-    .map(
-      ([id, moduleString]) => `import * as __temp_${id} from ${moduleString};
+  return (
+    // eslint-disable-next-line prefer-template
+    [...modules]
+      // eslint-disable-next-line arrow-body-style
+      .map(([id, moduleString]) => {
+        return `import * as __temp_${id} from ${moduleString};
 const ${id} = () => __temp_${id}.default || __temp_${id};
 `
-    )
-    .join('')};\n${replaced}`
+      })
+      .join('') +
+    ';\n' +
+    replaced
+  )
 }

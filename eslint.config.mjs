@@ -48,8 +48,6 @@ const MD_LINKS_FOR_DOCS = {
   ...MD_BASE_LINKS
 }
 
-const GLOB_TS = '**/*.?([cm])ts'
-
 export default typegen([
   {
     ignores: [
@@ -83,7 +81,7 @@ export default typegen([
     }
   },
   ...defineConfig({
-    files: ['**/*.?([cm])[jt]s'],
+    files: ['**/*.{js,mjs,ts,mts}'],
     extends: [
       eslintPluginEslintPlugin,
       eslintPluginUnicorn.configs['flat/recommended']
@@ -111,7 +109,7 @@ export default typegen([
 
   {
     name: 'typescript/setup',
-    files: [GLOB_TS],
+    files: ['**/*.{ts,mts}'],
     languageOptions: {
       parser: tsEslintParser,
       parserOptions: {
@@ -124,7 +122,7 @@ export default typegen([
   },
 
   {
-    files: ['**/*.?([cm])[jt]s'],
+    files: ['**/*.{js,mjs,ts,mts}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
@@ -277,7 +275,7 @@ export default typegen([
   },
 
   {
-    files: [GLOB_TS],
+    files: ['**/*.{ts,mts}'],
     rules: {
       ...eslintPluginTs.configs.strict.rules,
       ...eslintPluginTs.configs['flat/eslint-recommended'].rules,
