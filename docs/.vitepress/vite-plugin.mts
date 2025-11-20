@@ -74,12 +74,11 @@ function transformRequire(code: string) {
   return (
     // eslint-disable-next-line prefer-template
     [...modules]
-      // eslint-disable-next-line arrow-body-style
-      .map(([id, moduleString]) => {
-        return `import * as __temp_${id} from ${moduleString};
+      .map(
+        ([id, moduleString]) => `import * as __temp_${id} from ${moduleString};
 const ${id} = () => __temp_${id}.default || __temp_${id};
 `
-      })
+      )
       .join('') +
     ';\n' +
     replaced
