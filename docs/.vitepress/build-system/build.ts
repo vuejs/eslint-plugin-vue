@@ -13,7 +13,7 @@ build(
     dirname,
     '../../../node_modules/@typescript-eslint/parser/dist/index.js'
   ),
-  path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
+  path.join(dirname, './shim/@typescript-eslint/parser.js'),
   [
     'util',
     'node:util',
@@ -29,7 +29,7 @@ build(
 
 build(
   path.join(dirname, '../../../node_modules/vue-eslint-parser/index.js'),
-  path.join(dirname, './shim/vue-eslint-parser.mjs'),
+  path.join(dirname, './shim/vue-eslint-parser.js'),
   [
     'path',
     'debug',
@@ -59,7 +59,7 @@ function bundle(entryPoint: string, externals: string[]) {
     bundle: true,
     external: externals,
     write: false,
-    inject: [path.join(dirname, './src/process-shim.mjs')]
+    inject: [path.join(dirname, './src/process-shim.js')]
   })
 
   return `${result.outputFiles[0].text}`

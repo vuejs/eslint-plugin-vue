@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM"],
+  },
+  "include": [
+    ".vitepress/**/*.js",
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.vue"
+  ]
+}
