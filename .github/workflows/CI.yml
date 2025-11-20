@@ -26,6 +26,28 @@ jobs:
       - name: Lint
         run: npm run lint
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Install Packages
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Cache dist
+        uses: actions/upload-artifact@v5
+        with:
+          retention-days: 3
+          name: dist
+          path: dist
+
   test:
     name: Test
     strategy:
@@ -41,8 +63,10 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install Packages
         run: npm install
-      - name: Build
-        run: npm run build
+      - name: Restore dist cache
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
       - name: Test
         run: npm test
 
@@ -60,8 +84,10 @@ jobs:
         run: npm install
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 --force
-      - name: Build
-        run: npm run build
+      - name: Restore dist cache
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
       - name: Test
         run: npm test
 
@@ -77,8 +103,10 @@ jobs:
         run: npm install
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall @stylistic/eslint-plugin
-      - name: Build
-        run: npm run build
+      - name: Restore dist cache
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
       - name: Test
         run: npm test
 
@@ -97,8 +125,10 @@ jobs:
         run: npm install
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
         run: npm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
-      - name: Build
-        run: npm run build
+      - name: Restore dist cache
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
       - name: Test
         run: npm test
 
@@ -114,7 +144,9 @@ jobs:
         run: npm install
       - name: Install @typescript-eslint/parser v7
         run: npm install -D @typescript-eslint/parser@7 --force
-      - name: Build
-        run: npm run build
+      - name: Restore dist cache
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
       - name: Test
         run: npm test
