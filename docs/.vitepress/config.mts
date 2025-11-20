@@ -87,12 +87,10 @@ export default async () => {
         )
         return !exists
       })
-      .map(({ ruleId, name }) => {
-        return {
-          text: ruleId,
-          link: `/rules/${name}`
-        }
-      })
+      .map(({ ruleId, name }) => ({
+        text: ruleId,
+        link: `/rules/${name}`
+      }))
 
     if (children.length === 0) {
       continue

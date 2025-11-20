@@ -7,6 +7,8 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import eslintMarkdown from '@eslint/markdown'
 import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
+import eslintPluginTs from '@typescript-eslint/eslint-plugin'
+import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
@@ -46,10 +48,13 @@ const MD_LINKS_FOR_DOCS = {
   ...MD_BASE_LINKS
 }
 
+const GLOB_TS = '**/*.?([cm])ts'
+
 export default typegen([
   {
     ignores: [
       '.nyc_output',
+      'eslint-typegen.d.ts',
       'coverage',
       'node_modules',
       '.changeset/**/*.md',
@@ -78,7 +83,7 @@ export default typegen([
     }
   },
   ...defineConfig({
-    files: ['**/*.js'],
+    files: ['**/*.?([cm])[jt]s'],
     extends: [
       eslintPluginEslintPlugin,
       eslintPluginUnicorn.configs['flat/recommended']
@@ -105,7 +110,21 @@ export default typegen([
   }),
 
   {
-    files: ['**/*.js'],
+    name: 'typescript/setup',
+    files: [GLOB_TS],
+    languageOptions: {
+      parser: tsEslintParser,
+      parserOptions: {
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      ts: eslintPluginTs
+    }
+  },
+
+  {
+    files: ['**/*.?([cm])[jt]s'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
@@ -249,6 +268,25 @@ export default typegen([
       'internal/require-eslint-community': ['error']
     }
   },
+
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      sourceType: 'module'
+    }
+  },
+
+  {
+    files: [GLOB_TS],
+    rules: {
+      'no-undef': 'off', // https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+      'no-unused-vars': 'off',
+      'ts/no-unused-vars': 'error',
+      'no-redeclare': 'off',
+      'ts/no-redeclare': 'error'
+    }
+  },
+
   {
     files: ['./**/*.vue'],
     languageOptions: {

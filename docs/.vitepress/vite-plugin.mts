@@ -34,8 +34,8 @@ export function viteCommonjs(): Plugin {
           format: 'esm'
         })
         return transformed.code
-      } catch (e) {
-        console.error('Transform error. base code:\n' + base, e)
+      } catch (error) {
+        console.error(`Transform error. base code:\n${base}`, error)
       }
       return undefined
     }
@@ -57,27 +57,23 @@ function transformRequire(code: string) {
         return match
       }
 
-      let id =
-        '__' +
-        moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') +
-        Math.random().toString(32).substring(2)
+      let id = `__${moduleString.replace(
+        /[^a-zA-Z0-9_$]+/gu,
+        '_'
+      )}${Math.random().toString(32).slice(2)}`
       while (code.includes(id) || modules.has(id)) {
-        id += Math.random().toString(32).substring(2)
+        id += Math.random().toString(32).slice(2)
       }
       modules.set(id, moduleString)
-      return id + '()'
+      return `${id}()`
     }
   )
 
-  return (
-    [...modules]
-      .map(([id, moduleString]) => {
-        return `import * as __temp_${id} from ${moduleString};
+  return `${[...modules]
+    .map(
+      ([id, moduleString]) => `import * as __temp_${id} from ${moduleString};
 const ${id} = () => __temp_${id}.default || __temp_${id};
 `
-      })
-      .join('') +
-    ';\n' +
-    replaced
-  )
+    )
+    .join('')};\n${replaced}`
 }
