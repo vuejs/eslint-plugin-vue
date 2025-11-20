@@ -41,6 +41,8 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install Packages
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test
 
@@ -58,6 +60,8 @@ jobs:
         run: npm install
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 --force
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test
 
@@ -73,6 +77,8 @@ jobs:
         run: npm install
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall @stylistic/eslint-plugin
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test
 
@@ -91,6 +97,8 @@ jobs:
         run: npm install
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
         run: npm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test
 
@@ -106,5 +114,7 @@ jobs:
         run: npm install
       - name: Install @typescript-eslint/parser v7
         run: npm install -D @typescript-eslint/parser@7 --force
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test
