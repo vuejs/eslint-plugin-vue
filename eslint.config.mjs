@@ -285,7 +285,13 @@ export default typegen([
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-namespace': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
-      '@typescript-eslint/unified-signatures': 'off'
+      '@typescript-eslint/unified-signatures': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          minimumDescriptionLength: 3
+        }
+      ]
     }
   },
 
