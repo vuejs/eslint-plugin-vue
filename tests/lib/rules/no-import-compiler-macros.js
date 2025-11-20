@@ -214,6 +214,54 @@ tester.run('no-import-compiler-macros', rule, {
           endColumn: 60
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      // not in <script setup>
+      import { defineProps } from 'vue'
+      </script>
+      `,
+      output: `
+      <script>
+      // not in <script setup>
+      
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'onlyValidInScriptSetup',
+          data: {
+            name: 'defineProps'
+          },
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.ts',
+      code: `
+      import { defineProps } from 'vue'
+      `,
+      output: `
+      
+      `,
+      errors: [
+        {
+          messageId: 'onlyValidInScriptSetup',
+          data: {
+            name: 'defineProps'
+          },
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 27
+        }
+      ]
     }
   ]
 })

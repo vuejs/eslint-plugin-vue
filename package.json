@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "10.4.0",
+  "version": "10.5.1",
   "description": "Official ESLint plugin for Vue.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs",
-    "generate:version": "env-cmd -e version npm run update && npm run lint -- --fix",
+    "generate:version": "env-cmd -e version npm run update && npm run lint:fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
     "changeset:publish": "npm run typegen && changeset publish",
     "prepublishOnly": "npm run build"
@@ -77,7 +77,7 @@
     "@eslint-community/eslint-utils": "^4.4.0",
     "natural-compare": "^1.4.0",
     "nth-check": "^2.1.1",
-    "postcss-selector-parser": "^6.0.15",
+    "postcss-selector-parser": "^7.1.0",
     "semver": "^7.6.3",
     "xml-name-validator": "^4.0.0"
   },
@@ -121,6 +121,7 @@
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
+    "vitest": "^3.2.4",
     "vue-eslint-parser": "^10.0.0"
   }
 }

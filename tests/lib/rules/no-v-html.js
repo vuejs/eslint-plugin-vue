@@ -33,6 +33,11 @@ ruleTester.run('no-v-html', rule, {
       filename: 'test.vue',
       code: '<template><div v-html="htmlKnownToBeSafe"></div></template>',
       options: [{ ignorePattern: '^html' }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-html="$sanitize(test)"></div></template>',
+      options: [{ ignorePattern: String.raw`^\$sanitize\(` }]
     }
   ],
   invalid: [
