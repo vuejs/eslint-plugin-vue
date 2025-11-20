@@ -24,7 +24,7 @@ const content = `/*
 'use strict'
 
 const plugin = {
-  meta: require('./meta'),
+  meta: require('./meta.ts').default,
   configs: {
     // eslintrc configs
     base: require('./configs/base'),
@@ -57,8 +57,8 @@ const plugin = {
       .join(',\n')}
   },
   processors: {
-    '.vue': require('./processor'),
-    'vue': require('./processor')
+    '.vue': require('./processor.ts').default,
+    'vue': require('./processor.ts').default
   }
 }
 
