@@ -268,7 +268,7 @@ export default typegen([
   },
 
   {
-    files: ['**/*.{mjs,mts}'],
+    files: ['**/*.{mjs,ts,mts}'],
     languageOptions: {
       sourceType: 'module'
     }
