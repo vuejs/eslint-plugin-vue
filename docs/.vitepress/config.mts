@@ -10,6 +10,7 @@ import './build-system/build.mjs'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
   const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
   const rules: typeof import('../../tools/lib/rules.js') = await import(

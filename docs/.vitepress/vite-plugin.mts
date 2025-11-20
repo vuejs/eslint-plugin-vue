@@ -11,7 +11,7 @@ const libRoot = path.join(fileURLToPath(import.meta.url), '../../../lib')
 export function vitePluginRequireResolve(): Plugin {
   return {
     name: 'vite-plugin-require.resolve',
-    transform(code, id, _options) {
+    transform(code, id) {
       if (id.startsWith(libRoot)) {
         return code.replace(/require\.resolve/gu, '(function(){return 0})')
       }
@@ -35,6 +35,7 @@ export function viteCommonjs(): Plugin {
         })
         return transformed.code
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(`Transform error. base code:\n${base}`, error)
       }
       return undefined

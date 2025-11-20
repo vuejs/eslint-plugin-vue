@@ -119,7 +119,7 @@ export default typegen([
       }
     },
     plugins: {
-      ts: eslintPluginTs
+      '@typescript-eslint': eslintPluginTs
     }
   },
 
@@ -279,11 +279,15 @@ export default typegen([
   {
     files: [GLOB_TS],
     rules: {
-      'no-undef': 'off', // https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
-      'no-unused-vars': 'off',
-      'ts/no-unused-vars': 'error',
+      ...eslintPluginTs.configs.strict.rules,
+      ...eslintPluginTs.configs['flat/eslint-recommended'].rules,
       'no-redeclare': 'off',
-      'ts/no-redeclare': 'error'
+      '@typescript-eslint/no-redeclare': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/triple-slash-reference': 'off',
+      '@typescript-eslint/unified-signatures': 'off'
     }
   },
 
