@@ -8,7 +8,7 @@ let FlatESLint = eslint.ESLint
 let Linter = eslint.Linter
 let RuleTester = eslint.RuleTester
 if (semver.lt(eslint.Linter.version, '9.0.0-0')) {
-  ESLint = eslint.ESLint ? getESLintClassForV8() : getESLintClassForV6()
+  ESLint = getESLintClassForV8()
   Linter = getLinterClassForV8()
   RuleTester = getRuleTesterClassForV8()
   try {
@@ -67,71 +67,6 @@ function getESLintClassForV8(BaseESLintClass = eslint.ESLint) {
     }
     return newOptions
   }
-}
-/** @returns {typeof eslint.ESLint} */
-function getESLintClassForV6() {
-  class ESLintForV6 {
-    static get version() {
-      // @ts-expect-error
-      return eslint.CLIEngine.version
-    }
-
-    /** @param {eslint.ESLint.Options} options */
-    constructor(options) {
-      const {
-        overrideConfig: { plugins, globals, rules, ...overrideConfig } = {
-          plugins: [],
-          globals: {},
-          rules: {}
-        },
-        fix,
-        reportUnusedDisableDirectives,
-        plugins: pluginsMap,
-        ...otherOptions
-      } = options || {}
-
-      const newOptions = {
-        fix: Boolean(fix),
-        reportUnusedDisableDirectives: reportUnusedDisableDirectives
-          ? reportUnusedDisableDirectives !== 'off'
-          : undefined,
-        ...otherOptions,
-
-        globals: globals
-          ? Object.keys(globals).filter((n) => globals[n])
-          : undefined,
-        plugins: plugins || [],
-        rules: rules
-          ? Object.fromEntries(
-              Object.entries(rules).flatMap(([ruleId, opt]) =>
-                opt ? [[ruleId, opt]] : []
-              )
-            )
-          : undefined,
-        ...overrideConfig
-      }
-
-      // @ts-expect-error
-      this.engine = new eslint.CLIEngine(newOptions)
-
-      for (const [name, plugin] of Object.entries(pluginsMap || {})) {
-        this.engine.addPlugin(name, plugin)
-      }
-    }
-
-    /**
-     * @param {Parameters<eslint.ESLint['lintText']>} params
-     * @returns {ReturnType<eslint.ESLint['lintText']>}
-     */
-    async lintText(...params) {
-      const result = this.engine.executeOnText(params[0], params[1]?.filePath)
-      return result.results
-    }
-  }
-
-  /** @type {typeof eslint.ESLint} */
-  const eslintClass = /** @type {any} */ (ESLintForV6)
-  return getESLintClassForV8(eslintClass)
 }
 
 /** @returns {typeof eslint.Linter} */
