@@ -351,8 +351,7 @@ export interface PrivateIdentifier extends HasParentNode {
 }
 export interface Literal extends HasParentNode {
   type: 'Literal'
-  // eslint-disable-next-line @typescript-eslint/no-wrapper-object-types
-  value: string | boolean | null | number | RegExp | BigInt
+  value: string | boolean | null | number | RegExp | bigint
   raw: string
   regex?: {
     pattern: string
