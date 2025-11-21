@@ -30,7 +30,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        node: [18, 20, 21, 'lts/*']
+        node: [18, 20, 22, 24, 'lts/*']
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
