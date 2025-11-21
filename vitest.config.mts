@@ -1,11 +1,8 @@
+import { defineConfig } from 'vitest/config'
 
-import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
-    include: [
-      'tests/lib/**/*.js',
-      'tests/integrations/**/*.js'
-    ],
+    include: ['tests/lib/**/*.js', 'tests/integrations/**/*.js'],
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
@@ -18,15 +15,10 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['lib/**/*.js'],
-      exclude: [
-        'tests/**',
-        'dist/**',
-        'tools/**',
-        'node_modules/**'
-      ],
+      exclude: ['tests/**', 'dist/**', 'tools/**', 'node_modules/**'],
       reporter: ['text', 'lcov', 'json-summary', 'html'],
       all: true,
       reportsDirectory: './coverage'
-    },
-  },
-});
+    }
+  }
+})

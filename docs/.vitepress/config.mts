@@ -10,6 +10,7 @@ import './build-system/build.mjs'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
   const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
   const rules: typeof import('../../tools/lib/rules.js') = await import(
@@ -87,12 +88,10 @@ export default async () => {
         )
         return !exists
       })
-      .map(({ ruleId, name }) => {
-        return {
-          text: ruleId,
-          link: `/rules/${name}`
-        }
-      })
+      .map(({ ruleId, name }) => ({
+        text: ruleId,
+        link: `/rules/${name}`
+      }))
 
     if (children.length === 0) {
       continue

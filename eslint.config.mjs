@@ -7,6 +7,8 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import eslintMarkdown from '@eslint/markdown'
 import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
+import eslintPluginTs from '@typescript-eslint/eslint-plugin'
+import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
@@ -50,6 +52,7 @@ export default typegen([
   {
     ignores: [
       '.nyc_output',
+      'eslint-typegen.d.ts',
       'coverage',
       'node_modules',
       '.changeset/**/*.md',
@@ -78,7 +81,7 @@ export default typegen([
     }
   },
   ...defineConfig({
-    files: ['**/*.js'],
+    files: ['**/*.{js,mjs,ts,mts}'],
     extends: [
       eslintPluginEslintPlugin,
       eslintPluginUnicorn.configs['flat/recommended']
@@ -105,7 +108,21 @@ export default typegen([
   }),
 
   {
-    files: ['**/*.js'],
+    name: 'typescript/setup',
+    files: ['**/*.{ts,mts}'],
+    languageOptions: {
+      parser: tsEslintParser,
+      parserOptions: {
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      '@typescript-eslint': eslintPluginTs
+    }
+  },
+
+  {
+    files: ['**/*.{js,mjs,ts,mts}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
@@ -249,6 +266,35 @@ export default typegen([
       'internal/require-eslint-community': ['error']
     }
   },
+
+  {
+    files: ['**/*.{mjs,ts,mts}'],
+    languageOptions: {
+      sourceType: 'module'
+    }
+  },
+
+  {
+    files: ['**/*.{ts,mts}'],
+    rules: {
+      ...eslintPluginTs.configs.strict.rules,
+      ...eslintPluginTs.configs['flat/eslint-recommended'].rules,
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/triple-slash-reference': 'off',
+      '@typescript-eslint/unified-signatures': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          minimumDescriptionLength: 3
+        }
+      ]
+    }
+  },
+
   {
     files: ['./**/*.vue'],
     languageOptions: {
