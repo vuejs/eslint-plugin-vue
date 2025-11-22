@@ -122,6 +122,15 @@ ruleTester.run('no-multiple-template-root', rule, {
       </template>
       `,
       options: [{ disallowComments: true }]
+    },
+    {
+      code: `
+        <!-- comment -->
+        <template>
+          <div>abc</div>
+        </template>
+        `,
+      options: [{ disallowComments: true }]
     }
   ],
   invalid: [
@@ -371,7 +380,7 @@ ruleTester.run('no-multiple-template-root', rule, {
     {
       code: `
       <template>
-        <!-- When you have a comment in the root of your template in vue 3, 
+        <!-- When you have a comment in the root of your template in vue 3,
         using $el will point to the first text comment instead of the actual DOM element.   -->
         <div>
           12333
