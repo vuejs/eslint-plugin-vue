@@ -30,7 +30,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        node: [18, 20, 21, 'lts/*']
+        node: [18, 20, 22, 24, 'lts/*']
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,6 +58,23 @@ jobs:
         run: npm install
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 --force
+      - name: Test
+        run: npm test
+
+  test-with-eslint-v10-alpha:
+    name: Test with ESLint v10 alpha
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install Node.js v18
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Install Packages
+        run: npm install
+      - name: Install ESLint v10
+        run: npm install --save-dev eslint@10 --force
       - name: Test
         run: npm test
 
