@@ -7,10 +7,5 @@
 /test.*
 yarn.lock
 yarn-error.log
-/docs/.vitepress/dist
-/docs/.vitepress/build-system/shim/vue-eslint-parser.mjs
-/docs/.vitepress/build-system/shim/@typescript-eslint/parser.mjs
-/docs/.vitepress/.temp
-/docs/.vitepress/cache
 typings/eslint/lib/rules
 eslint-typegen.d.ts

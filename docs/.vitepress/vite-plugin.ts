@@ -2,6 +2,7 @@ import type { UserConfig } from 'vitepress'
 import path from 'pathe'
 import { fileURLToPath } from 'url'
 import esbuild from 'esbuild'
+
 type Plugin = Extract<
   NonNullable<NonNullable<UserConfig['vite']>['plugins']>[number],
   { name: string }
