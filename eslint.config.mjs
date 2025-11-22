@@ -1,5 +1,6 @@
 import { defineConfig } from 'eslint/config'
 import globals from 'globals'
+import ignore from 'eslint-config-flat-gitignore'
 import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
@@ -49,22 +50,12 @@ const MD_LINKS_FOR_DOCS = {
 }
 
 export default typegen([
+  ignore(),
   {
     ignores: [
-      '.nyc_output',
-      'eslint-typegen.d.ts',
-      'coverage',
-      'node_modules',
       '.changeset/**/*.md',
       'tests/fixtures',
-      'tests/integrations/eslint-plugin-import',
-
-      '!.vitepress',
-      'docs/.vitepress/dist',
-      'docs/.vitepress/build-system/shim/vue-eslint-parser.mjs',
-      'docs/.vitepress/build-system/shim/@typescript-eslint/parser.mjs',
-      'docs/.vitepress/.temp',
-      'docs/.vitepress/cache'
+      'tests/integrations/eslint-plugin-import'
     ]
   },
   eslintPluginPrettierRecommended,
