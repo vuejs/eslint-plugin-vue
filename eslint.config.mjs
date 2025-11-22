@@ -51,6 +51,7 @@ const MD_LINKS_FOR_DOCS = {
 export default typegen([
   {
     ignores: [
+      'dist',
       '.nyc_output',
       'eslint-typegen.d.ts',
       'coverage',
@@ -284,6 +285,7 @@ export default typegen([
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
       '@typescript-eslint/unified-signatures': 'off',
       '@typescript-eslint/ban-ts-comment': [
