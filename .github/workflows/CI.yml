@@ -24,7 +24,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
       - name: Install Packages
-        run: pnpm install --legacy-peer-deps
+        run: pnpm install
       - name: Lint
         run: pnpm run lint
 
