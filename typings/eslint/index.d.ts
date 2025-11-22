@@ -2,7 +2,7 @@ import {
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
   Linter as ESLintLinter
-} from '../../node_modules/@types/eslint'
+} from 'eslint'
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
