@@ -3,14 +3,13 @@
  * @author 唯然<weiran.zsd@outlook.com>
  */
 
-'use strict'
+import { Linter } from 'eslint'
+import plugin from '../../../lib'
+import { strict as assert } from 'assert'
+import { FlatESLint } from '../../eslint-compat'
 
-const plugin = require('../../../lib/index.ts').default
-const { strict: assert } = require('assert') // node v14 does not support 'assert/strict'
-const { FlatESLint } = require('../../eslint-compat')
-
-function mergeConfig(configs) {
-  let config = { rules: {}, plugins: {} }
+function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
+  let config: Linter.FlatConfig = { rules: {}, plugins: {} }
   for (const item of configs) {
     config = {
       ...config,
@@ -37,16 +36,16 @@ describe('flat configs', () => {
     const forVue = mergeConfig(
       base.filter((config) => config.files?.includes('*.vue') || !config.files)
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
+    assert.strictEqual(forVue.plugins!.vue, plugin)
     assert.strictEqual(forVue.processor, 'vue/vue')
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
 
     const forOtherThanVue = mergeConfig(
       base.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
   })
@@ -61,20 +60,20 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
 
     const forOtherThanVue = mergeConfig(
       essential.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
   })
@@ -89,20 +88,20 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
 
     const forOtherThanVue = mergeConfig(
       stronglyRecommended.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
   })
@@ -117,24 +116,24 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
-    assert.strictEqual(forVue.rules['vue/attributes-order'], 'warn')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.rules!['vue/attributes-order'], 'warn')
 
     const forOtherThanVue = mergeConfig(
       recommended.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
-    assert.strictEqual(forOtherThanVue.rules['vue/attributes-order'], 'warn')
+    assert.strictEqual(forOtherThanVue.rules!['vue/attributes-order'], 'warn')
   })
 
   it('should export vue2-essential config', () => {
@@ -147,20 +146,20 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
 
     const forOtherThanVue = mergeConfig(
       essential.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
   })
@@ -175,20 +174,20 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
 
     const forOtherThanVue = mergeConfig(
       stronglyRecommended.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
   })
@@ -203,24 +202,24 @@ describe('flat configs', () => {
         (config) => config.files?.includes('*.vue') || !config.files
       )
     )
-    assert.strictEqual(forVue.plugins.vue, plugin)
-    assert.strictEqual(forVue.rules['vue/comment-directive'], 'error')
-    assert.strictEqual(forVue.rules['vue/multi-word-component-names'], 'error')
-    assert.strictEqual(forVue.rules['vue/attributes-order'], 'warn')
+    assert.strictEqual(forVue.plugins!.vue, plugin)
+    assert.strictEqual(forVue.rules!['vue/comment-directive'], 'error')
+    assert.strictEqual(forVue.rules!['vue/multi-word-component-names'], 'error')
+    assert.strictEqual(forVue.rules!['vue/attributes-order'], 'warn')
 
     const forOtherThanVue = mergeConfig(
       recommended.filter((config) => !config.files?.includes('*.vue'))
     )
-    assert.strictEqual(forOtherThanVue.plugins.vue, plugin)
+    assert.strictEqual(forOtherThanVue.plugins!.vue, plugin)
     assert.strictEqual(
-      forOtherThanVue.rules['vue/comment-directive'],
+      forOtherThanVue.rules!['vue/comment-directive'],
       undefined
     )
     assert.strictEqual(
-      forOtherThanVue.rules['vue/multi-word-component-names'],
+      forOtherThanVue.rules!['vue/multi-word-component-names'],
       'error'
     )
-    assert.strictEqual(forOtherThanVue.rules['vue/attributes-order'], 'warn')
+    assert.strictEqual(forOtherThanVue.rules!['vue/attributes-order'], 'warn')
   })
 
   it('should work the suppress comments with base config', async () => {
@@ -281,7 +280,7 @@ describe('flat configs', () => {
     const result = await eslint.lintText(code, { filePath: 'MyComponent.vue' })
 
     assert.deepStrictEqual(
-      result[0].messages.map((message) => message.ruleId),
+      result[0].messages.map((message: Linter.LintMessage) => message.ruleId),
       [
         'vue/no-parsing-error',
         'vue/max-attributes-per-line',

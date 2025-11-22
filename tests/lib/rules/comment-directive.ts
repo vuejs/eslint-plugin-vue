@@ -3,10 +3,11 @@
  * @author Toru Nagashima
  */
 
-'use strict'
-
-const assert = require('assert')
-const { ESLint } = require('../../eslint-compat')
+import assert from 'assert'
+import parserVue from 'vue-eslint-parser'
+import { ESLint } from '../../eslint-compat'
+import pluginVue from '../../../lib'
+import processor from '../../../lib/processor'
 
 // Initialize linter.
 const eslint = new ESLint({
@@ -14,21 +15,21 @@ const eslint = new ESLint({
   overrideConfig: {
     files: ['*.*'],
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: parserVue,
       ecmaVersion: 2015
     },
-    plugins: { vue: require('../../../lib/index.ts').default },
+    plugins: { vue: pluginVue },
     rules: {
       'no-unused-vars': 'error',
       'vue/comment-directive': 'error',
       'vue/no-parsing-error': 'error',
       'vue/no-duplicate-attributes': 'error'
     },
-    processor: require('../../../lib/processor.ts').default
+    processor
   }
 })
 
-async function lintMessages(code) {
+async function lintMessages(code: string) {
   const result = await eslint.lintText(code, { filePath: 'test.vue' })
   return result[0].messages
 }
@@ -357,10 +358,10 @@ describe('comment-directive', () => {
       overrideConfig: {
         files: ['**/*.vue'],
         languageOptions: {
-          parser: require('vue-eslint-parser'),
+          parser: parserVue,
           ecmaVersion: 2015
         },
-        plugins: { vue: require('../../../lib/index.ts').default },
+        plugins: { vue: pluginVue },
         rules: {
           'no-unused-vars': 'error',
           'vue/comment-directive': [
@@ -370,11 +371,11 @@ describe('comment-directive', () => {
           'vue/no-parsing-error': 'error',
           'vue/no-duplicate-attributes': 'error'
         },
-        processor: require('../../../lib/processor.ts').default
+        processor
       }
     })
 
-    async function lintMessages(code) {
+    async function lintMessages(code: string) {
       const result = await eslint.lintText(code, { filePath: 'test.vue' })
       return result[0].messages
     }

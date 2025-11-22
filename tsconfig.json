@@ -4,6 +4,9 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "lib": ["es2020"],
+    "types": [
+      "vitest/globals"
+    ],
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
@@ -28,6 +31,7 @@
   },
   "include": [
     "lib/**/*",
+    "tests/**/*.ts",
     "typings/eslint-plugin-vue/global.d.ts",
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.mts"

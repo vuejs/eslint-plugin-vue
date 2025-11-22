@@ -1,12 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const rule = require('../../../lib/rules/block-order')
-const RuleTester = require('../../eslint-compat').RuleTester
-const assert = require('assert')
-const { ESLint } = require('../../eslint-compat')
+import assert from 'assert'
+import parserVue from 'vue-eslint-parser'
+import rule from '../../../lib/rules/block-order'
+import { ESLint, RuleTester } from '../../eslint-compat'
+import pluginVue from '../../../lib'
+import processor from '../../../lib/processor'
 
 // Initialize linter.
 const eslint = new ESLint({
@@ -14,25 +14,26 @@ const eslint = new ESLint({
   overrideConfig: {
     files: ['**/*.vue'],
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: parserVue,
       ecmaVersion: 2015
     },
-    plugins: { vue: require('../../../lib/index.ts').default },
+    plugins: { vue: pluginVue },
     rules: {
       'vue/comment-directive': 'error',
       'vue/block-order': 'error'
     },
-    processor: require('../../../lib/processor.ts').default
+    processor
   },
   fix: true
 })
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser')
+    parser: parserVue
   }
 })
 
+// @ts-expect-error
 tester.run('block-order', rule, {
   valid: [
     // default
