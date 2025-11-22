@@ -123,13 +123,15 @@ ruleTester.run('no-multiple-template-root', rule, {
       `,
       options: [{ disallowComments: true }]
     },
+
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2948
     {
       code: `
         <!-- comment -->
         <template>
           <div>abc</div>
         </template>
-        `,
+      `,
       options: [{ disallowComments: true }]
     }
   ],
