@@ -191,7 +191,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -211,7 +210,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo  bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -231,7 +229,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo!bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -251,7 +248,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo!bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -275,7 +271,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -300,7 +295,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -325,7 +319,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
-          type: 'Literal',
           line: 3,
           column: 17,
           endLine: 3,
@@ -341,7 +334,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -357,7 +349,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -376,7 +367,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 40,
           endLine: 1,
@@ -392,7 +382,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -408,7 +397,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo-bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -425,7 +413,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not PascalCase.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -442,7 +429,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
-          type: 'Literal',
           line: 1,
           column: 15,
           endLine: 1,
@@ -459,7 +445,6 @@ ruleTester.run('component-definition-name-casing', rule, {
       errors: [
         {
           message: 'Property name "foo_bar" is not kebab-case.',
-          type: 'TemplateLiteral',
           line: 1,
           column: 15,
           endLine: 1,

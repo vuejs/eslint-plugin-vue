@@ -608,7 +608,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'Literal',
           line: 3
         }
       ]
@@ -623,7 +622,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'Literal',
           line: 1
         }
       ]
@@ -638,7 +636,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'Literal',
           line: 1
         }
       ]
@@ -653,7 +650,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'TemplateLiteral',
           line: 1
         }
       ]
@@ -668,7 +664,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'TemplateLiteral',
           line: 1
         }
       ]
@@ -687,7 +682,6 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          type: 'Property',
           line: 3
         }
       ]
@@ -740,7 +734,6 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue',
           data: { name },
-          type: 'Literal',
           line: 3
         }
       ]
@@ -758,7 +751,6 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue',
           data: { name },
-          type: 'Literal',
           line: 3
         }
       ]
@@ -776,7 +768,6 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue3',
           data: { name },
-          type: 'Literal',
           line: 3
         }
       ]

@@ -48,8 +48,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -58,8 +57,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -68,8 +66,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -78,8 +75,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Identifier'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -88,8 +84,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'TemplateElement'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -98,8 +93,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -108,8 +102,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -118,8 +111,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          message: "'forbidden' class is not allowed."
         }
       ]
     },
@@ -128,8 +120,7 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['/^for(bidden|gotten)/'],
       errors: [
         {
-          message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          message: "'forbidden' class is not allowed."
         }
       ]
     }

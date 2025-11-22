@@ -29,8 +29,7 @@ const languageOptions = {
 function makeError(line) {
   return {
     message: 'Component detected.',
-    line,
-    type: 'ObjectExpression'
+    line
   }
 }
 
