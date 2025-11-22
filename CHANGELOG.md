@@ -1,5 +1,21 @@
 # eslint-plugin-vue
 
+## 10.6.0
+
+### Minor Changes
+
+- Updated [`vue/no-import-compiler-macros`](https://eslint.vuejs.org/rules/no-import-compiler-macros.html) to clarify that macros are not allowed outside `<script setup>` ([#2938](https://github.com/vuejs/eslint-plugin-vue/pull/2938))
+
+- Added new [`vue/no-duplicate-class-names`](https://eslint.vuejs.org/rules/no-duplicate-class-names.html) rule ([#2934](https://github.com/vuejs/eslint-plugin-vue/pull/2934))
+
+### Patch Changes
+
+- Fixed [`vue/no-v-html`](https://eslint.vuejs.org/rules/no-v-html.html) rule to allow ignoring call expressions ([#2950](https://github.com/vuejs/eslint-plugin-vue/pull/2950))
+
+- Improved [`vue/define-macros-order`](https://eslint.vuejs.org/rules/define-macros-order.html) error messages to distinguish between macro placement and ordering issues ([#2953](https://github.com/vuejs/eslint-plugin-vue/pull/2953))
+
+- Updated dependency [postcss-selector-parser](https://github.com/postcss/postcss-selector-parser) to v7.1.0 ([#2947](https://github.com/vuejs/eslint-plugin-vue/pull/2947))
+
 ## 10.5.1
 
 ### Patch Changes
