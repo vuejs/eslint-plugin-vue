@@ -19,7 +19,7 @@ export namespace Scope {
     globalScope: Scope | null
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
     /** @since ESLint v8.38.0 */
-    getDeclaredVariables?(node: VAST.ESNode): Variable[]
+    getDeclaredVariables(node: VAST.ESNode): Variable[]
   }
   interface Scope {
     type:
