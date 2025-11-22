@@ -233,9 +233,9 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getCommentsInside(node: VNODE.HasLocation): VNODE.Comment[]
 
   /** @since ESLint v8.39.0 */
-  markVariableAsUsed?(name: string, node?: VNODE.HasLocation): void
+  markVariableAsUsed(name: string, node?: VNODE.HasLocation): void
   /** @since ESLint v8.37.0 */
-  getScope?(node: VNODE.HasLocation): Scope.Scope
+  getScope(node: VNODE.HasLocation): Scope.Scope
 }
 export namespace SourceCode {
   interface Config {
@@ -351,7 +351,7 @@ export namespace Rule {
     /** @since ESLint v8.40.0 */
     sourceCode: SourceCode
     /** @deprecated removed in ESLint v9 */
-    markVariableAsUsed?(name: string): boolean
+    markVariableAsUsed(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
     /** @deprecated removed in ESLint v10 */
