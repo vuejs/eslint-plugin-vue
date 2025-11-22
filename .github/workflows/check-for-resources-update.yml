@@ -15,14 +15,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 18
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Update
-        run: npm run update-resources
+        run: pnpm run update-resources
       - uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Updates resources

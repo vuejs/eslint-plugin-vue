@@ -19,12 +19,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js
         uses: actions/setup-node@v6
+        with:
+          cache: pnpm
       - name: Install Packages
-        run: npm install --legacy-peer-deps
+        run: pnpm install --legacy-peer-deps
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
   test:
     name: Test
@@ -35,14 +39,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js v${{ matrix.node }}
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Test
-        run: npm test
+        run: pnpm test
 
   test-with-eslint-v8:
     name: Test with ESLint v8
@@ -50,16 +57,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js v18
         uses: actions/setup-node@v6
         with:
           node-version: 18
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Install ESLint v8
-        run: npm install --save-dev eslint@8 --force
+        run: pnpm install --save-dev eslint@8 --force
       - name: Test
-        run: npm test
+        run: pnpm test
 
   test-without-eslint-stylistic:
     name: Test without ESLint Stylistic
@@ -67,14 +77,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js
         uses: actions/setup-node@v6
+        with:
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Uninstall @stylistic/eslint-plugin
-        run: npm uninstall @stylistic/eslint-plugin
+        run: pnpm uninstall @stylistic/eslint-plugin
       - name: Test
-        run: npm test
+        run: pnpm test
 
   test-with-old-eslint-stylistic:
     name: Test with old ESLint Stylistic
@@ -85,14 +99,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js
         uses: actions/setup-node@v6
+        with:
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
-        run: npm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
+        run: pnpm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
       - name: Test
-        run: npm test
+        run: pnpm test
 
   test-with-typescript-eslint-v7:
     name: Test with typescript-eslint v7
@@ -100,11 +118,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Install Node.js
         uses: actions/setup-node@v6
+        with:
+          cache: pnpm
       - name: Install Packages
-        run: npm install
+        run: pnpm install
       - name: Install @typescript-eslint/parser v7
-        run: npm install -D @typescript-eslint/parser@7 --force
+        run: pnpm install -D @typescript-eslint/parser@7 --force
       - name: Test
-        run: npm test
+        run: pnpm test
