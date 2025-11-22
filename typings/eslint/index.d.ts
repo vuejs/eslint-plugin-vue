@@ -350,7 +350,7 @@ export namespace Rule {
     markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
-    // eslint@6 does not have this method.
+    /** @deprecated removed in ESLint v10 */
     getCwd?: () => string
     /** @since ESLint v8.40.0 */
     cwd: string
