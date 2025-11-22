@@ -61,8 +61,8 @@ export default typegen([
 
       '!.vitepress',
       'docs/.vitepress/dist',
-      'docs/.vitepress/build-system/shim/vue-eslint-parser.mjs',
-      'docs/.vitepress/build-system/shim/@typescript-eslint/parser.mjs',
+      'docs/.vitepress/build-system/shim/vue-eslint-parser.js',
+      'docs/.vitepress/build-system/shim/@typescript-eslint/parser.js',
       'docs/.vitepress/.temp',
       'docs/.vitepress/cache'
     ]
@@ -109,7 +109,7 @@ export default typegen([
 
   {
     name: 'typescript/setup',
-    files: ['**/*.{ts,mts}'],
+    files: ['docs/**/*.js', '**/*.{ts,mts}'],
     languageOptions: {
       parser: tsEslintParser,
       parserOptions: {
