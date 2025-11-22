@@ -1,7 +1,7 @@
 'use strict'
 
 const { ESLint } = require('../../eslint-compat')
-const plugin = require('../../../lib/index')
+const plugin = require('../../../lib/index.ts').default
 
 describe('eslintrc configs', () => {
   for (const name of Object.keys(plugin.configs)) {

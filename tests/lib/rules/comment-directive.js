@@ -17,7 +17,7 @@ const eslint = new ESLint({
       parser: require('vue-eslint-parser'),
       ecmaVersion: 2015
     },
-    plugins: { vue: require('../../../lib/index') },
+    plugins: { vue: require('../../../lib/index.ts').default },
     rules: {
       'no-unused-vars': 'error',
       'vue/comment-directive': 'error',
@@ -360,7 +360,7 @@ describe('comment-directive', () => {
           parser: require('vue-eslint-parser'),
           ecmaVersion: 2015
         },
-        plugins: { vue: require('../../../lib/index') },
+        plugins: { vue: require('../../../lib/index.ts').default },
         rules: {
           'no-unused-vars': 'error',
           'vue/comment-directive': [

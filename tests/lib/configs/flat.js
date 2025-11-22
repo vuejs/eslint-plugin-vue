@@ -5,7 +5,7 @@
 
 'use strict'
 
-const plugin = require('../../../lib/index')
+const plugin = require('../../../lib/index.ts').default
 const { strict: assert } = require('assert') // node v14 does not support 'assert/strict'
 const { FlatESLint } = require('../../eslint-compat')
 
