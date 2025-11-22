@@ -41,8 +41,7 @@ tester.run('static-class-names-order', rule, {
       output: '<template><div class="a b"></div></template>',
       errors: [
         {
-          message: 'Classes should be ordered alphabetically.',
-          type: 'VAttribute'
+          message: 'Classes should be ordered alphabetically.'
         }
       ]
     },
@@ -58,8 +57,7 @@ tester.run('static-class-names-order', rule, {
         </template>`,
       errors: [
         {
-          message: 'Classes should be ordered alphabetically.',
-          type: 'VAttribute'
+          message: 'Classes should be ordered alphabetically.'
         }
       ]
     }

@@ -140,7 +140,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]
@@ -158,7 +157,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]
@@ -175,7 +173,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]
@@ -192,7 +189,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]
@@ -209,7 +205,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]
@@ -228,7 +223,6 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          type: 'Identifier',
           line: 2
         }
       ]

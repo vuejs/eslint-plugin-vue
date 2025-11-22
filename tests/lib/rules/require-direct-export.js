@@ -94,7 +94,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 3
         }
       ]
@@ -109,7 +108,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 5
         }
       ]
@@ -120,7 +118,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 1
         }
       ]
@@ -131,7 +128,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 1
         }
       ]
@@ -142,7 +138,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 1
         }
       ]
@@ -157,7 +152,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 1
         }
       ]
@@ -170,7 +164,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 1
         }
       ]
@@ -186,7 +179,6 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
           line: 5
         }
       ]

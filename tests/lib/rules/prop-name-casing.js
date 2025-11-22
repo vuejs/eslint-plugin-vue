@@ -406,7 +406,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -425,7 +424,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -442,7 +440,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
-          type: 'Literal',
           line: 3
         }
       ]
@@ -461,7 +458,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greetingText" is not in snake_case.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -480,7 +476,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -499,7 +494,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting-text" is not in snake_case.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -517,7 +511,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -536,7 +529,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -555,7 +547,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting_text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -573,7 +564,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "abc-123-def" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -592,7 +582,6 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "greeting-text" is not in camelCase.',
-          type: 'Property',
           line: 4
         }
       ]
@@ -733,12 +722,10 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "notIgnored_prop" is not in camelCase.',
-          type: 'Property',
           line: 4
         },
         {
           message: 'Prop "other-pattern" is not in camelCase.',
-          type: 'Property',
           line: 5
         }
       ]
@@ -755,12 +742,10 @@ ruleTester.run('prop-name-casing', rule, {
       errors: [
         {
           message: 'Prop "notIgnored_prop" is not in camelCase.',
-          type: 'Literal',
           line: 3
         },
         {
           message: 'Prop "pattern_invalid" is not in camelCase.',
-          type: 'Literal',
           line: 3
         }
       ]
