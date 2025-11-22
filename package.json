@@ -85,6 +85,7 @@
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
     "@stylistic/eslint-plugin": "^5.2.2",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
+    "@types/eslint": "^8.56.2",
     "@types/natural-compare": "^1.4.3",
     "@types/node": "^24.0.8",
     "@types/semver": "^7.5.8",
