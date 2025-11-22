@@ -22,13 +22,13 @@
     "update": "node ./tools/update.js",
     "update-resources": "node ./tools/update-resources.js",
     "typegen": "node ./tools/generate-typegen.mjs",
-    "build": "tsdown",
+    "build": "npm run typegen && tsdown",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs",
     "generate:version": "env-cmd -e version npm run update && npm run lint:fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
-    "changeset:publish": "npm run typegen && npm run build && changeset publish"
+    "changeset:publish": "npm run build && changeset publish"
   },
   "files": [
     "dist"
