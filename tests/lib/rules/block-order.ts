@@ -33,7 +33,7 @@ const tester = new RuleTester({
   }
 })
 
-// @ts-expect-error
+// @ts-expect-error rule ts(#2345)
 tester.run('block-order', rule, {
   valid: [
     // default
