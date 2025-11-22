@@ -340,6 +340,10 @@ export namespace Rule {
     getFilename(): string
     /** @since ESLint v8.40.0 */
     filename: string
+    /** @deprecated removed in ESLint v10 */
+    getPhysicalFilename(): string
+    /** @since ESLint v8.40.0 */
+    physicalFilename: string
     /** @deprecated removed in ESLint v9 */
     getScope?(): Scope.Scope
     /** @deprecated removed in ESLint v10 */
@@ -351,7 +355,7 @@ export namespace Rule {
     report(descriptor: ReportDescriptor): void
 
     /** @deprecated removed in ESLint v10 */
-    getCwd?: () => string
+    getCwd: () => string
     /** @since ESLint v8.40.0 */
     cwd: string
   }
