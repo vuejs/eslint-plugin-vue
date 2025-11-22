@@ -187,14 +187,20 @@ You can use the following configs by adding them to `extends`.
 - Configurations for using Vue.js 3.x:
   - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/strongly-recommended-error"` ... Above, except with all rules configured to error instead of warn.
   - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+  - `"plugin:vue/recommended-error"` ... Above, except with all rules configured to error instead of warn.
 - Configurations for using Vue.js 2.x:
   - `"plugin:vue/vue2-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
   - `"plugin:vue/vue2-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/vue2-strongly-recommended-error"` ... Above, except with all rules configured to error instead of warn.
   - `"plugin:vue/vue2-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
+  - `"plugin:vue/vue2-recommended-error"` ... Above, except with all rules configured to error instead of warn.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
+
+Alternatively, there are versions of the configs with all rules set to error suffixed with `-error` that you can use.
 :::
 
 :::warning Status of Vue.js 3.x supports
