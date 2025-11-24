@@ -334,22 +334,22 @@ export namespace Rule {
     /** @deprecated removed in ESLint v9 */
     getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
     /** @deprecated removed in ESLint v10 */
-    getFilename(): string
+    getFilename?(): string
     filename: string
     /** @deprecated removed in ESLint v10 */
-    getPhysicalFilename(): string
+    getPhysicalFilename?(): string
     physicalFilename: string
     /** @deprecated removed in ESLint v9 */
     getScope?(): Scope.Scope
     /** @deprecated removed in ESLint v10 */
-    getSourceCode(): SourceCode
+    getSourceCode?(): SourceCode
     sourceCode: SourceCode
     /** @deprecated removed in ESLint v9 */
-    markVariableAsUsed(name: string): boolean
+    markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
     /** @deprecated removed in ESLint v10 */
-    getCwd: () => string
+    getCwd?: () => string
     cwd: string
   }
 
