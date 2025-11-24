@@ -18,7 +18,6 @@ export namespace Scope {
     scopes: Scope[]
     globalScope: Scope | null
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
-    /** @since ESLint v8.38.0 */
     getDeclaredVariables(node: VAST.ESNode): Variable[]
   }
   interface Scope {
@@ -232,9 +231,7 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getCommentsAfter(nodeOrToken: VNODE.HasLocation): VNODE.Comment[]
   getCommentsInside(node: VNODE.HasLocation): VNODE.Comment[]
 
-  /** @since ESLint v8.39.0 */
   markVariableAsUsed(name: string, node?: VNODE.HasLocation): void
-  /** @since ESLint v8.37.0 */
   getScope(node: VNODE.HasLocation): Scope.Scope
 }
 export namespace SourceCode {
@@ -338,17 +335,14 @@ export namespace Rule {
     getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
     /** @deprecated removed in ESLint v10 */
     getFilename(): string
-    /** @since ESLint v8.40.0 */
     filename: string
     /** @deprecated removed in ESLint v10 */
     getPhysicalFilename(): string
-    /** @since ESLint v8.40.0 */
     physicalFilename: string
     /** @deprecated removed in ESLint v9 */
     getScope?(): Scope.Scope
     /** @deprecated removed in ESLint v10 */
     getSourceCode(): SourceCode
-    /** @since ESLint v8.40.0 */
     sourceCode: SourceCode
     /** @deprecated removed in ESLint v9 */
     markVariableAsUsed(name: string): boolean
@@ -356,7 +350,6 @@ export namespace Rule {
 
     /** @deprecated removed in ESLint v10 */
     getCwd: () => string
-    /** @since ESLint v8.40.0 */
     cwd: string
   }
 
