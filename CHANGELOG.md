@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- Fixed false positives for comments outside `<template>` in [vue/no-multiple-template-root](https://eslint.vuejs.org/rules/no-multiple-template-root.html) rule ([#2964](https://github.com/vuejs/eslint-plugin-vue/pull/2964))
+- Fixed false positives for comments outside `<template>` in [`vue/no-multiple-template-root`](https://eslint.vuejs.org/rules/no-multiple-template-root.html) rule ([#2964](https://github.com/vuejs/eslint-plugin-vue/pull/2964))
 
 ## 10.6.0
 
