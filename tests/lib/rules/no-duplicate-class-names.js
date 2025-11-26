@@ -599,9 +599,9 @@ tester.run('no-duplicate-class-names', rule, {
           message: "Duplicate class name 'foo'.",
           type: 'TemplateLiteral',
           line: 1,
-          column: 37,
+          column: 36,
           endLine: 1,
-          endColumn: 53
+          endColumn: 52
         }
       ]
     }
