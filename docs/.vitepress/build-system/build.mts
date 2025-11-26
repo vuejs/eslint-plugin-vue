@@ -23,6 +23,7 @@ build(
     'node:fs',
     'semver',
     'fast-glob',
+    'tinyglobby',
     'debug'
   ]
 )
