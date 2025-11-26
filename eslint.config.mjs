@@ -1,6 +1,6 @@
 import { defineConfig } from 'eslint/config'
 import globals from 'globals'
-import ignore from 'eslint-config-flat-gitignore'
+import eslintConfigFlatGitIgnore from 'eslint-config-flat-gitignore'
 import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
@@ -50,7 +50,7 @@ const MD_LINKS_FOR_DOCS = {
 }
 
 export default typegen([
-  ignore(),
+  eslintConfigFlatGitIgnore(),
   {
     ignores: [
       '.changeset/**/*.md',
