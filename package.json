@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "new": "node tools/new-rule.js",
-    "start": "npm run test:base -- --watch --growl",
+    "start": "npm run test:base -- --watch",
     "test:base": "vitest run --reporter=dot tests/lib",
     "test": "vitest run",
     "test:integrations": "vitest run tests/integrations",
