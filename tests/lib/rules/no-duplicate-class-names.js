@@ -577,7 +577,7 @@ tester.run('no-duplicate-class-names', rule, {
     },
     {
       filename: 'duplicate-class-binary-in-logical-expression.vue',
-      code: `<template><div :class="isActive && 'bar' + 'bar'"></div></template>`,
+      code: `<template><div :class="isActive && 'bar' + ' bar'"></div></template>`,
       output: null,
       errors: [
         {
@@ -586,13 +586,13 @@ tester.run('no-duplicate-class-names', rule, {
           line: 1,
           column: 36,
           endLine: 1,
-          endColumn: 49
+          endColumn: 50
         }
       ]
     },
     {
       filename: 'duplicate-class-template-literal-in-logical-expression.vue',
-      code: '<template><div :class="condition && `foo ${bar} foo`"></div></template>',
+      code: '<template><div :class="isActive && `foo ${bar} foo`"></div></template>',
       output: null,
       errors: [
         {
