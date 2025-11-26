@@ -1,12 +1,12 @@
 {
   "name": "eslint-plugin-vue",
-  "version": "10.6.0",
+  "version": "10.6.1",
   "description": "Official ESLint plugin for Vue.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "new": "node tools/new-rule.js",
-    "start": "npm run test:base -- --watch --growl",
+    "start": "npm run test:base -- --watch",
     "test:base": "vitest run --reporter=dot tests/lib",
     "test": "vitest run",
     "test:integrations": "vitest run tests/integrations",
