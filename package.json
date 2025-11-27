@@ -118,14 +118,11 @@
     "markdownlint-cli": "^0.42.0",
     "pathe": "^1.1.2",
     "prettier": "^3.7.0",
-    "tsdown": "^0.16.5",
+    "tsdown": "^0.16.7",
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
     "vitest": "^3.2.4",
     "vue-eslint-parser": "^10.0.0"
-  },
-  "overrides": {
-    "rolldown": "https://pkg.pr.new/rolldown@main"
   }
 }
