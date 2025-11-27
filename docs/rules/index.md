@@ -274,7 +274,7 @@ For example:
 | [vue/prefer-prop-type-boolean-first] | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class] | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
 | [vue/prefer-true-attribute-shorthand] | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
-| [vue/prefer-use-template-ref] | require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs |  | :hammer: |
+| [vue/prefer-use-template-ref] | require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs | :wrench: | :hammer: |
 | [vue/require-default-export] | require components to be the default export |  | :warning: |
 | [vue/require-direct-export] | require the component to be directly exported |  | :hammer: |
 | [vue/require-emit-validator] | require type definitions in emits | :bulb: | :hammer: |
