@@ -9,3 +9,9 @@ yarn.lock
 yarn-error.log
 typings/eslint/lib/rules
 eslint-typegen.d.ts
+
+docs/.vitepress/dist
+docs/.vitepress/build-system/shim/@typescript-eslint
+docs/.vitepress/build-system/shim/vue-eslint-parser.js
+docs/.vitepress/.temp
+docs/.vitepress/cache

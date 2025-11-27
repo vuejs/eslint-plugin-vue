@@ -1,5 +1,0 @@
-.vitepress/dist
-.vitepress/build-system/shim/@typescript-eslint
-.vitepress/build-system/shim/vue-eslint-parser.js
-.vitepress/.temp
-.vitepress/cache
