@@ -80,7 +80,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 24,
+          endLine: 3,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -104,7 +107,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 40,
+          endLine: 3,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -127,7 +133,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 40,
+          endLine: 2,
+          endColumn: 43,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -150,7 +159,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 24,
+          endLine: 2,
+          endColumn: 27,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -175,7 +187,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 24,
+          endLine: 4,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -201,7 +216,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 40,
+          endLine: 4,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -230,7 +248,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 24,
+          endLine: 6,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',
@@ -258,7 +279,10 @@ ruleTester.run('require-name-property', rule, {
       errors: [
         {
           message: 'Required name property is not set.',
-          type: 'ObjectExpression',
+          line: 2,
+          column: 24,
+          endLine: 4,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add name property to component.',

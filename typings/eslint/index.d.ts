@@ -18,8 +18,7 @@ export namespace Scope {
     scopes: Scope[]
     globalScope: Scope | null
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
-    /** @since ESLint v8.38.0 */
-    getDeclaredVariables?(node: VAST.ESNode): Variable[]
+    getDeclaredVariables(node: VAST.ESNode): Variable[]
   }
   interface Scope {
     type:
@@ -232,10 +231,8 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getCommentsAfter(nodeOrToken: VNODE.HasLocation): VNODE.Comment[]
   getCommentsInside(node: VNODE.HasLocation): VNODE.Comment[]
 
-  /** @since ESLint v8.39.0 */
-  markVariableAsUsed?(name: string, node?: VNODE.HasLocation): void
-  /** @since ESLint v8.37.0 */
-  getScope?(node: VNODE.HasLocation): Scope.Scope
+  markVariableAsUsed(name: string, node?: VNODE.HasLocation): void
+  getScope(node: VNODE.HasLocation): Scope.Scope
 }
 export namespace SourceCode {
   interface Config {
@@ -323,9 +320,9 @@ export namespace Rule {
     id: string
     options: ESLintRule.RuleContext['options']
     settings: { [name: string]: any }
-    /** @deprecated removed in ESLint v10? */
+    /** @deprecated removed in ESLint v10 */
     parserPath?: string
-    /** @deprecated removed in ESLint v10? */
+    /** @deprecated removed in ESLint v10 */
     parserOptions?: ESLintLinter.ParserOptions
     /** For flat config  */
     languageOptions?: ESLintLinter.FlatConfig['languageOptions']
@@ -336,22 +333,24 @@ export namespace Rule {
     getAncestors?(): VAST.ESNode[]
     /** @deprecated removed in ESLint v9 */
     getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
-    getFilename(): string
-    /** @since ESLint v8.40.0 */
-    filename?: string
+    /** @deprecated removed in ESLint v10 */
+    getFilename?(): string
+    filename: string
+    /** @deprecated removed in ESLint v10 */
+    getPhysicalFilename?(): string
+    physicalFilename: string
     /** @deprecated removed in ESLint v9 */
     getScope?(): Scope.Scope
-    getSourceCode(): SourceCode
-    /** @since ESLint v8.40.0 */
-    sourceCode?: SourceCode
+    /** @deprecated removed in ESLint v10 */
+    getSourceCode?(): SourceCode
+    sourceCode: SourceCode
     /** @deprecated removed in ESLint v9 */
     markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
-    // eslint@6 does not have this method.
+    /** @deprecated removed in ESLint v10 */
     getCwd?: () => string
-    /** @since ESLint v8.40.0 */
-    cwd?: string
+    cwd: string
   }
 
   type ReportDescriptor =

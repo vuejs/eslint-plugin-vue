@@ -45,9 +45,7 @@ function extractElements(code, inputSelector) {
                   VElement(node) {
                     if (parsed.test(node)) {
                       matches.push(
-                        context
-                          .getSourceCode()
-                          .text.slice(...node.startTag.range)
+                        context.sourceCode.text.slice(...node.startTag.range)
                       )
                     }
                   }

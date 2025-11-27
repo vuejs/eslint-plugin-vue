@@ -49,7 +49,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 41
         }
       ]
     },
@@ -59,7 +62,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -69,7 +75,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -79,7 +88,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Identifier'
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 34
         }
       ]
     },
@@ -89,7 +101,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'TemplateElement'
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
         }
       ]
     },
@@ -99,7 +114,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -109,7 +127,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -119,7 +140,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'Literal'
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -129,7 +153,10 @@ ruleTester.run('no-restricted-class', rule, {
       errors: [
         {
           message: "'forbidden' class is not allowed.",
-          type: 'VAttribute'
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 41
         }
       ]
     }
