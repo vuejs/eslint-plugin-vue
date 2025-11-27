@@ -311,6 +311,15 @@ tester.run('prefer-use-template-ref', rule, {
         const root = ref();
       </script>
       `,
+      output: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const root = useTemplateRef('root');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -318,7 +327,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 7,
-          column: 22
+          column: 22,
+          endLine: 7,
+          endColumn: 27
         }
       ]
     },
@@ -335,6 +346,17 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
+      output: `
+      <template>
+          <button ref="button">Content</button>
+          <a href="" ref="link">Link</a>
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const buttonRef = ref();
+        const link = useTemplateRef('link');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -342,7 +364,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 22
+          column: 22,
+          endLine: 9,
+          endColumn: 27
         }
       ]
     },
@@ -359,6 +383,17 @@ tester.run('prefer-use-template-ref', rule, {
         const link = ref();
       </script>
       `,
+      output: `
+      <template>
+          <h1 ref="heading">Heading</h1>
+          <a href="" ref="link">Link</a>
+      </template>
+      <script setup>
+        import { ref } from 'vue';
+        const heading = useTemplateRef('heading');
+        const link = useTemplateRef('link');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -366,7 +401,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 8,
-          column: 25
+          column: 25,
+          endLine: 8,
+          endColumn: 30
         },
         {
           messageId: 'preferUseTemplateRef',
@@ -374,7 +411,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 22
+          column: 22,
+          endLine: 9,
+          endColumn: 27
         }
       ]
     },
@@ -396,6 +435,22 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
+      output: `
+      <template>
+        <p>Button clicked {{counter}} times.</p>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          name: 'Counter',
+          setup() {
+            const counter = ref(0);
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -403,7 +458,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 12,
-          column: 28
+          column: 28,
+          endLine: 12,
+          endColumn: 33
         }
       ]
     },
@@ -418,6 +475,15 @@ tester.run('prefer-use-template-ref', rule, {
         const root = shallowRef();
       </script>
       `,
+      output: `
+      <template>
+          <div ref="root"/>
+      </template>
+      <script setup>
+        import { shallowRef } from 'vue';
+        const root = useTemplateRef('root');
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -425,7 +491,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'shallowRef'
           },
           line: 7,
-          column: 22
+          column: 22,
+          endLine: 7,
+          endColumn: 34
         }
       ]
     },
@@ -444,6 +512,19 @@ tester.run('prefer-use-template-ref', rule, {
         }
       </script>
       `,
+      output: `
+      <template>
+        <button ref="button">Click</button>
+      </template>
+      <script>
+        import { ref } from 'vue';
+        export default {
+          setup: () => {
+            const button = useTemplateRef('button');
+          }
+        }
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -451,7 +532,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 28
+          column: 28,
+          endLine: 9,
+          endColumn: 33
         }
       ]
     },
@@ -471,6 +554,20 @@ tester.run('prefer-use-template-ref', rule, {
       const A = 'foo'
       </script>
       `,
+      output: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script setup>
+      import { ref } from 'vue'
+      const root = useTemplateRef('root')
+      </script>
+
+      <script>
+      const A = 'foo'
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -478,7 +575,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 8,
-          column: 20
+          column: 20,
+          endLine: 8,
+          endColumn: 25
         }
       ]
     },
@@ -498,6 +597,20 @@ tester.run('prefer-use-template-ref', rule, {
       const root = ref()
       </script>
       `,
+      output: `
+      <template>
+        <div ref="root" :data-a="A" />
+      </template>
+
+      <script>
+      const A = 'foo'
+      </script>
+
+      <script setup>
+      import { ref } from 'vue'
+      const root = useTemplateRef('root')
+      </script>
+      `,
       errors: [
         {
           messageId: 'preferUseTemplateRef',
@@ -505,7 +618,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 12,
-          column: 20
+          column: 20,
+          endLine: 12,
+          endColumn: 25
         }
       ]
     }
