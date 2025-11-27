@@ -1,5 +1,15 @@
 # eslint-plugin-vue
 
+## 10.6.2
+
+### Patch Changes
+
+- Fixed false positives in non-intersecting conditions in [`vue/no-duplicate-class-names`](https://eslint.vuejs.org/rules/no-duplicate-class-names.html) and correctly detect duplicates in combining expressions ([#2980](https://github.com/vuejs/eslint-plugin-vue/pull/2980))
+
+- Improved performance and type safety in [`vue/prefer-use-template-ref`](https://eslint.vuejs.org/rules/prefer-use-template-ref.html) ([#2982](https://github.com/vuejs/eslint-plugin-vue/pull/2982))
+
+- Fixed false positives for `TSImportType` in [`vue/script-indent`](https://eslint.vuejs.org/rules/script-indent.html) rule ([#2969](https://github.com/vuejs/eslint-plugin-vue/pull/2969))
+
 ## 10.6.1
 
 ### Patch Changes
