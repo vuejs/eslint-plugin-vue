@@ -162,6 +162,7 @@ export default async () => {
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
           globby: path.join(dirname, './build-system/shim/empty.js'),
           'fast-glob': path.join(dirname, './build-system/shim/empty.js'),
+          tinyglobby: path.join(dirname, './build-system/shim/empty.js'),
           module: path.join(dirname, './build-system/shim/empty.js')
         }
       },
