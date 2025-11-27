@@ -23,7 +23,6 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'UnaryExpression',
           line: 1,
           column: 31,
           endLine: 1,
@@ -36,7 +35,6 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'Literal',
           line: 1,
           column: 36,
           endLine: 1,
@@ -49,7 +47,6 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'Literal',
           line: 1,
           column: 31,
           endLine: 1,
@@ -62,7 +59,6 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'ObjectExpression',
           line: 1,
           column: 33,
           endLine: 1,
@@ -75,7 +71,6 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'BinaryExpression',
           line: 1,
           column: 31,
           endLine: 1,
@@ -88,37 +83,33 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          type: 'LogicalExpression',
           line: 1,
           column: 31,
           endLine: 1,
           endColumn: 37
         }
       ]
-    }
+    },
 
-    // failing in Node.js v8, because template literals are not supported there:
-    // {
-    //   code: '<template><CustomButton v-if="`foo`" /></template>',
-    //   errors: [
-    //     {
-    //       messageId: 'unexpected',
-    //       type: 'TemplateLiteral',
-    //       column: 31,
-    //       endColumn: 36
-    //     }
-    //   ]
-    // },
-    // {
-    //   code: '<template><CustomButton v-if="``" /></template>',
-    //   errors: [
-    //     {
-    //       messageId: 'unexpected',
-    //       type: 'TemplateLiteral',
-    //       column: 31,
-    //       endColumn: 33
-    //     }
-    //   ]
-    // }
+    {
+      code: '<template><CustomButton v-if="`foo`" /></template>',
+      errors: [
+        {
+          messageId: 'unexpected',
+          column: 31,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      code: '<template><CustomButton v-if="``" /></template>',
+      errors: [
+        {
+          messageId: 'unexpected',
+          column: 31,
+          endColumn: 33
+        }
+      ]
+    }
   ]
 })
