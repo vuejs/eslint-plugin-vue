@@ -608,7 +608,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 19 + name.length + 2
         }
       ]
     })),
@@ -622,7 +625,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 15 + name.length + 2
         }
       ]
     })),
@@ -636,7 +642,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 15 + name.length + 2
         }
       ]
     })),
@@ -650,7 +659,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 15 + name.length + 2
         }
       ]
     })),
@@ -664,7 +676,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 15 + name.length + 2
         }
       ]
     })),
@@ -682,7 +697,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 3
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 13 + name.length + 6
         }
       ]
     })),
@@ -699,7 +717,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 37 + name.length + 2
         }
       ]
     })),
@@ -717,7 +738,10 @@ ruleTester.run('no-reserved-component-names', rule, {
             ? 'reservedInHtml'
             : 'reserved',
           data: { name },
-          line: 1
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 37 + name.length + 2
         }
       ]
     })),
@@ -734,7 +758,10 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue',
           data: { name },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 19 + name.length + 2
         }
       ]
     })),
@@ -751,7 +778,10 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue',
           data: { name },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 19 + name.length + 2
         }
       ]
     })),
@@ -768,7 +798,10 @@ ruleTester.run('no-reserved-component-names', rule, {
         {
           messageId: 'reservedInVue3',
           data: { name },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 19 + name.length + 2
         }
       ]
     }))
