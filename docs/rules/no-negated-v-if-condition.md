@@ -50,7 +50,7 @@ Negated conditions make the code less readable. When there's an `else` clause, i
 
 ## :wrench: Options
 
-- Nothing.
+Nothing.
 
 ## :couple: Related Rules
 
