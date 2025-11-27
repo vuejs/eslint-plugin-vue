@@ -41,7 +41,11 @@ tester.run('static-class-names-order', rule, {
       output: '<template><div class="a b"></div></template>',
       errors: [
         {
-          message: 'Classes should be ordered alphabetically.'
+          message: 'Classes should be ordered alphabetically.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 27
         }
       ]
     },
@@ -57,7 +61,11 @@ tester.run('static-class-names-order', rule, {
         </template>`,
       errors: [
         {
-          message: 'Classes should be ordered alphabetically.'
+          message: 'Classes should be ordered alphabetically.',
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 29
         }
       ]
     }
