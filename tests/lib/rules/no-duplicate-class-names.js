@@ -56,6 +56,18 @@ tester.run('no-duplicate-class-names', rule, {
     {
       filename: 'class-object-duplicate-value.vue',
       code: `<div :class="{ 'foo bar': isActive, 'foo': isAnotherActive }"></div>`
+    },
+    {
+      filename: 'class-non-intersecting-conditions.vue',
+      code: `<template><div :class="[isActive1 && { 'foo': isActive2, 'bar': isActive3 }, isActive4 && 'bar']"></div></template>`
+    },
+    {
+      filename: 'class-multiple-logical-non-intersecting.vue',
+      code: `<template><div :class="[isActive1 && 'foo', isActive2 && 'foo']"></div></template>`
+    },
+    {
+      filename: 'class-binary-in-logical-non-intersecting.vue',
+      code: `<template><div :class="[isActive1 && ('foo' + ' bar'), isActive2 && 'foo']"></div></template>`
     }
   ],
   invalid: [
@@ -525,6 +537,36 @@ tester.run('no-duplicate-class-names', rule, {
           column: 54,
           endLine: 1,
           endColumn: 63
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-binary-in-logical-expression.vue',
+      code: `<template><div :class="isActive && 'bar' + ' bar'"></div></template>`,
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'bar'.",
+          type: 'BinaryExpression',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
+    },
+    {
+      filename: 'duplicate-class-template-literal-in-logical-expression.vue',
+      code: '<template><div :class="isActive && `foo ${bar} foo`"></div></template>',
+      output: null,
+      errors: [
+        {
+          message: "Duplicate class name 'foo'.",
+          type: 'TemplateLiteral',
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 52
         }
       ]
     }
