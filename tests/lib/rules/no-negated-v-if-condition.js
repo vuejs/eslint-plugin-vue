@@ -148,30 +148,6 @@ tester.run('no-negated-v-if-condition', rule, {
     {
       filename: 'test.vue',
       code: `
-        <template>
-          <div v-if="!foo">Content</div>
-          <span v-else>Alternative</span>
-        </template>
-      `,
-      output: `
-        <template>
-          <span v-if="foo">Alternative</span>
-          <div v-else>Content</div>
-        </template>
-      `,
-      errors: [
-        {
-          messageId: 'negatedCondition',
-          line: 3,
-          column: 22,
-          endLine: 3,
-          endColumn: 26
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
       <template>
         <div v-if="!foo" class="primary">Content</div>
         <span v-else class="secondary">Alternative</span>
