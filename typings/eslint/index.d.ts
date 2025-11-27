@@ -271,7 +271,7 @@ export namespace SourceCode {
 }
 
 export namespace Rule {
-  interface RuleModule extends ESLintRule.RuleModule {
+  interface RuleModule /*extends ESLintRule.RuleModule*/ {
     meta: RuleMetaData
     create(context: RuleContext): Rule.RuleListener
   }
