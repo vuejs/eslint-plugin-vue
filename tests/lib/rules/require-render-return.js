@@ -140,7 +140,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -157,7 +160,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -173,7 +179,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -189,7 +198,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -205,7 +217,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     },
@@ -223,7 +238,10 @@ ruleTester.run('require-render-return', rule, {
       errors: [
         {
           message: 'Expected to return a value in render function.',
-          line: 2
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15
         }
       ]
     }
