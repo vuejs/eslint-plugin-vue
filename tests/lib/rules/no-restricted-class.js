@@ -48,7 +48,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 41
         }
       ]
     },
@@ -57,7 +61,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -66,7 +74,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -75,7 +87,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 34
         }
       ]
     },
@@ -84,7 +100,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
         }
       ]
     },
@@ -93,7 +113,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -102,7 +126,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -111,7 +139,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['forbidden'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -120,7 +152,11 @@ ruleTester.run('no-restricted-class', rule, {
       options: ['/^for(bidden|gotten)/'],
       errors: [
         {
-          message: "'forbidden' class is not allowed."
+          message: "'forbidden' class is not allowed.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 41
         }
       ]
     }
