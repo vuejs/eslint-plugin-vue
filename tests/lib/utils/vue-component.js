@@ -26,10 +26,13 @@ const languageOptions = {
   sourceType: 'module'
 }
 
-function makeError(line) {
+function makeError(line, column, endLine, endColumn) {
   return {
     message: 'Component detected.',
-    line
+    line,
+    column,
+    endLine,
+    endColumn
   }
 }
 
@@ -131,37 +134,37 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(4)]
+      errors: [makeError(4, 19, 4, 21)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.component({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 15, 1, 17)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.mixin({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 11, 1, 13)]
     },
     {
       filename: `test.${ext}`,
       code: `Vue.extend({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 12, 1, 14)]
     },
     {
       filename: `test.${ext}`,
       code: `app.component('name', {})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 23, 1, 25)]
     },
     {
       filename: `test.${ext}`,
       code: `app.mixin({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 11, 1, 13)]
     },
     {
       filename: `test.${ext}`,
@@ -170,7 +173,7 @@ function invalidTests(ext) {
         ...languageOptions,
         parser: require('@typescript-eslint/parser')
       },
-      errors: [makeError(1)]
+      errors: [makeError(1, 52, 1, 54)]
     },
     {
       filename: `test.${ext}`,
@@ -179,7 +182,7 @@ function invalidTests(ext) {
         ...languageOptions,
         parser: require('@typescript-eslint/parser')
       },
-      errors: [makeError(1)]
+      errors: [makeError(1, 27, 1, 29)]
     },
     {
       filename: `test.${ext}`,
@@ -188,13 +191,13 @@ function invalidTests(ext) {
         ...languageOptions,
         parser: require('@typescript-eslint/parser')
       },
-      errors: [makeError(1)]
+      errors: [makeError(1, 27, 1, 29)]
     },
     {
       filename: `test.${ext}`,
       code: `createApp({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 11, 1, 13)]
     },
     {
       filename: `test.${ext}`,
@@ -204,7 +207,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(3)]
+      errors: [makeError(3, 24, 3, 27)]
     },
     {
       filename: `test.${ext}`,
@@ -214,7 +217,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(3)]
+      errors: [makeError(3, 24, 3, 27)]
     },
     {
       filename: `test.${ext}`,
@@ -227,7 +230,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(6)]
+      errors: [makeError(6, 24, 6, 27)]
     },
     {
       filename: `test.${ext}`,
@@ -239,7 +242,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(3), makeError(5)]
+      errors: [makeError(3, 24, 3, 27), makeError(5, 24, 5, 27)]
     },
     {
       filename: `test.${ext}`,
@@ -251,7 +254,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(3), makeError(5)]
+      errors: [makeError(3, 28, 3, 31), makeError(5, 24, 5, 27)]
     },
     {
       filename: `test.${ext}`,
@@ -262,7 +265,10 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(4)]
+      errors: [
+        ...(ext === 'js' ? [] : [makeError(2, 24, 2, 27)]),
+        makeError(4, 26, 4, 29)
+      ]
     },
     {
       filename: `test.${ext}`,
@@ -273,7 +279,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(4)]
+      errors: [makeError(4, 26, 4, 29)]
     },
     {
       filename: `test.${ext}`,
@@ -285,7 +291,7 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [makeError(4)]
+      errors: [makeError(4, 13, 4, 16)]
     },
     {
       filename: `test.${ext}`,
@@ -300,7 +306,10 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [...(ext === 'js' ? [] : [makeError(3)]), makeError(6)]
+      errors: [
+        ...(ext === 'js' ? [] : [makeError(3, 24, 7, 10)]),
+        makeError(6, 16, 6, 19)
+      ]
     },
     {
       filename: `test.${ext}`,
@@ -317,19 +326,22 @@ function invalidTests(ext) {
         // ${ext}
       `,
       languageOptions,
-      errors: [...(ext === 'js' ? [] : [makeError(2)]), makeError(8)]
+      errors: [
+        ...(ext === 'js' ? [] : [makeError(2, 24, 10, 10)]),
+        makeError(8, 20, 8, 22)
+      ]
     },
     {
       filename: `test.${ext}`,
       code: `export default defineComponent({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 32, 1, 34)]
     },
     {
       filename: `test.${ext}`,
       code: `export default defineNuxtComponent({})`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 36, 1, 38)]
     }
   ]
 }
@@ -352,13 +364,13 @@ ruleTester.run('vue-component', rule, {
       filename: 'test.vue',
       code: `export default { }`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 16, 1, 19)]
     },
     {
       filename: 'test.jsx',
       code: `export default { }`,
       languageOptions,
-      errors: [makeError(1)]
+      errors: [makeError(1, 16, 1, 19)]
     },
     ...invalidTests('js'),
     ...invalidTests('jsx'),
