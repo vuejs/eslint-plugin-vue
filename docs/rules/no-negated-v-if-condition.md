@@ -10,6 +10,7 @@ since: v10.4.0
 
 > disallow negated conditions in v-if/v-else
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -18,7 +19,7 @@ This rule disallows negated conditions in `v-if` and `v-else-if` directives whic
 
 Negated conditions make the code less readable. When there's an `else` clause, it's better to use a positive condition and switch the branches.
 
-<eslint-code-block :rules="{'vue/no-negated-v-if-condition': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-negated-v-if-condition': ['error']}">
 
 ```vue
 <template>
@@ -50,7 +51,15 @@ Negated conditions make the code less readable. When there's an `else` clause, i
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-negated-v-if-condition": ["error", {
+    "autofix": false,
+  }]
+}
+```
+
+- `"autofix"` ... If `true`, enable autofix. (Default: `false`)
 
 ## :couple: Related Rules
 

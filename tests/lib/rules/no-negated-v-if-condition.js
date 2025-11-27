@@ -148,11 +148,29 @@ tester.run('no-negated-v-if-condition', rule, {
     {
       filename: 'test.vue',
       code: `
+        <template>
+          <div v-if="!foo">Content</div>
+          <span v-else>Alternative</span>
+        </template>
+      `,
+      output: `
+        <template>
+          <span v-if="foo">Alternative</span>
+          <div v-else>Content</div>
+        </template>
+      `,
+      options: [{ autofix: true }],
+      errors: [{ messageId: 'negatedCondition', line: 3, column: 22 }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <template>
         <div v-if="!foo" class="primary">Content</div>
         <span v-else class="secondary">Alternative</span>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -182,6 +200,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <span v-else id="positive">Otherwise</span>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -211,6 +230,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <div v-else>Equal</div>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -240,6 +260,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <div v-else>Strictly equal</div>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -270,6 +291,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <p v-else class="default">Default</p>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -301,6 +323,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <p v-else data-default>Default</p>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -331,6 +354,7 @@ tester.run('no-negated-v-if-condition', rule, {
         <span v-else class="span-class" span-attr="baz" span-attr2 :span-attr-3="baz">span contents</span>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
@@ -366,6 +390,7 @@ tester.run('no-negated-v-if-condition', rule, {
         </section>
       </template>
       `,
+      output: null,
       errors: [
         {
           messageId: 'negatedCondition',
