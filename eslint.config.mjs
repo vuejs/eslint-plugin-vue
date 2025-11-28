@@ -100,7 +100,7 @@ export default typegen([
 
   {
     name: 'typescript/setup',
-    files: ['**/*.{ts,mts}'],
+    files: ['docs/**/*.js', '**/*.{ts,mts}'],
     languageOptions: {
       parser: tsEslintParser,
       parserOptions: {

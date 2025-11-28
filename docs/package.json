@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress",
+    "build": "vitepress build"
+  }
+}
