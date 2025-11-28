@@ -49,9 +49,7 @@ tester.run('no-implicit-coercion', rule, {
       ]
     },
     `<template><div :data-foo="Number(foo)" /></template>`,
-    ...(semver.gte(ESLint.version, '8.28.0')
-      ? [`<template><div :data-foo="foo * 1/4" /></template>`]
-      : []),
+    `<template><div :data-foo="foo * 1/4" /></template>`,
     {
       filename: 'test.vue',
       code: `<template><div :data-foo="+foo" /></template>`,
@@ -238,40 +236,35 @@ tester.run('no-implicit-coercion', rule, {
         }
       ]
     },
-    ...(semver.gte(ESLint.version, '7.24.0')
-      ? [
-          {
-            filename: 'test.vue',
-            code: `<template><div :data-foo="\`\${foo}\`" /></template>`,
-            output: semver.gte(ESLint.version, '9.0.0')
-              ? null
-              : `<template><div :data-foo="String(foo)" /></template>`,
-            options: [
-              {
-                disallowTemplateShorthand: true
-              }
-            ],
-            errors: [
-              {
-                message: getExpectedErrorMessage('String(foo)'),
-                line: 1,
-                column: 27,
-                endLine: 1,
-                endColumn: 35,
-                suggestions: semver.gte(ESLint.version, '9.0.0')
-                  ? [
-                      {
-                        messageId: 'useRecommendation',
-                        data: { recommendation: 'String(foo)' },
-                        output:
-                          '<template><div :data-foo="String(foo)" /></template>'
-                      }
-                    ]
-                  : []
-              }
-            ]
-          }
-        ]
-      : [])
+    {
+      filename: 'test.vue',
+      code: `<template><div :data-foo="\`\${foo}\`" /></template>`,
+      output: semver.gte(ESLint.version, '9.0.0')
+        ? null
+        : `<template><div :data-foo="String(foo)" /></template>`,
+      options: [
+        {
+          disallowTemplateShorthand: true
+        }
+      ],
+      errors: [
+        {
+          message: getExpectedErrorMessage('String(foo)'),
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 35,
+          suggestions: semver.gte(ESLint.version, '9.0.0')
+            ? [
+                {
+                  messageId: 'useRecommendation',
+                  data: { recommendation: 'String(foo)' },
+                  output: '<template><div :data-foo="String(foo)" /></template>'
+                }
+              ]
+            : []
+        }
+      ]
+    }
   ]
 })

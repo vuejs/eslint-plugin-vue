@@ -42,11 +42,10 @@ ruleTester.run('no-export-in-script-setup', rule, {
       </script>
       `
     },
-    ...(semver.gte(
-      require('@typescript-eslint/parser/package.json').version,
-      '5.4.0'
-    ) &&
-    semver.satisfies(require('typescript/package.json').version, '>=4.5.0-0')
+    ...(semver.satisfies(
+      require('typescript/package.json').version,
+      '>=4.5.0-0'
+    )
       ? [
           {
             filename: 'test.vue',

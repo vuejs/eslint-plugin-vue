@@ -6,7 +6,6 @@
 
 const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-undef-components')
-const semver = require('semver')
 
 const tester = new RuleTester({
   languageOptions: {
@@ -746,14 +745,9 @@ tester.run('no-undef-components', rule, {
         }
       ]
     },
-    ...(semver.gte(
-      require('@typescript-eslint/parser/package.json').version,
-      '5.0.0'
-    )
-      ? [
-          {
-            filename: 'test.vue',
-            code: `
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
         import type Foo from './Foo.vue'
         import type {HelloWorld1} from './components/HelloWorld'
@@ -772,49 +766,47 @@ tester.run('no-undef-components', rule, {
         <HelloWorld5 />
       </template>
       `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              ecmaVersion: 6,
-              sourceType: 'module',
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            errors: [
-              {
-                message:
-                  "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
-                line: 12
-              },
-              {
-                message:
-                  "The '<HelloWorld1>' component has been used, but 'HelloWorld1' only refers to a type.",
-                line: 13
-              },
-              {
-                message:
-                  "The '<HelloWorld2>' component has been used, but 'HelloWorld2' only refers to a type.",
-                line: 14
-              },
-              {
-                message:
-                  "The '<HelloWorld3>' component has been used, but 'HelloWorld3' only refers to a type.",
-                line: 15
-              },
-              {
-                message:
-                  "The '<HelloWorld4>' component has been used, but 'HelloWorld4' only refers to a type.",
-                line: 16
-              },
-              {
-                message:
-                  "The '<HelloWorld5>' component has been used, but 'HelloWorld5' only refers to a type.",
-                line: 17
-              }
-            ]
-          }
-        ]
-      : []),
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
+          line: 12
+        },
+        {
+          message:
+            "The '<HelloWorld1>' component has been used, but 'HelloWorld1' only refers to a type.",
+          line: 13
+        },
+        {
+          message:
+            "The '<HelloWorld2>' component has been used, but 'HelloWorld2' only refers to a type.",
+          line: 14
+        },
+        {
+          message:
+            "The '<HelloWorld3>' component has been used, but 'HelloWorld3' only refers to a type.",
+          line: 15
+        },
+        {
+          message:
+            "The '<HelloWorld4>' component has been used, but 'HelloWorld4' only refers to a type.",
+          line: 16
+        },
+        {
+          message:
+            "The '<HelloWorld5>' component has been used, but 'HelloWorld5' only refers to a type.",
+          line: 17
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `

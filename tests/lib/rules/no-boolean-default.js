@@ -4,7 +4,6 @@
  */
 'use strict'
 
-const semver = require('semver')
 const rule = require('../../../lib/rules/no-boolean-default')
 
 const RuleTester = require('../../eslint-compat').RuleTester
@@ -484,15 +483,9 @@ ruleTester.run('no-boolean-default', rule, {
         }
       ]
     },
-    ...(semver.lt(
-      require('@typescript-eslint/parser/package.json').version,
-      '4.0.0'
-    )
-      ? []
-      : [
-          {
-            filename: 'test.vue',
-            code: `
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
       interface Props {
         foo: boolean
@@ -502,26 +495,26 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            errors: [
-              {
-                message:
-                  'Boolean prop should not set a default (Vue defaults it to false).',
-                line: 7,
-                column: 14,
-                endLine: 7,
-                endColumn: 19
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message:
+            'Boolean prop should not set a default (Vue defaults it to false).',
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
       interface Props {
         foo: boolean
@@ -531,24 +524,23 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            options: ['default-false'],
-            errors: [
-              {
-                message: 'Boolean prop should only be defaulted to false.',
-                line: 7,
-                column: 14,
-                endLine: 7,
-                endColumn: 18
-              }
-            ]
-          }
-        ]),
+      options: ['default-false'],
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Boolean prop should only be defaulted to false.',
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 18
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `
