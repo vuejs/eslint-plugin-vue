@@ -626,11 +626,6 @@ tester.run('prefer-use-template-ref', rule, {
     },
     {
       filename: 'ref-with-typeArguments.vue',
-      languageOptions: {
-        parserOptions: {
-          parser: require('@typescript-eslint/parser')
-        }
-      },
       code: `
         <template>
           <div ref="root" />
@@ -647,6 +642,11 @@ tester.run('prefer-use-template-ref', rule, {
         const root = useTemplateRef<HTMLElement | null>('root')
         </script>
       `,
+      languageOptions: {
+        parserOptions: {
+          parser: require('@typescript-eslint/parser')
+        }
+      },
       errors: [
         {
           messageId: 'preferUseTemplateRef',
