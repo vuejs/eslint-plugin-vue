@@ -3,20 +3,10 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('../../eslint-compat')
-const semver = require('semver')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/space-in-parens')
 
-const errorMessage = semver.lt(ESLint.version, '6.4.0')
-  ? (obj) => {
-      const messageId = obj.messageId
-      delete obj.messageId
-      obj.message = messageId.startsWith('missing')
-        ? 'There must be a space inside this paren.'
-        : 'There should be no spaces inside this paren.'
-      return obj
-    }
-  : (obj) => obj
+const errorMessage = (obj) => obj
 
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }

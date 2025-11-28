@@ -4,7 +4,6 @@
  */
 'use strict'
 
-const semver = require('semver')
 const rule = require('../../../lib/rules/no-reserved-keys')
 const RuleTester = require('../../eslint-compat').RuleTester
 
@@ -293,15 +292,9 @@ ruleTester.run('no-reserved-keys', rule, {
         }
       ]
     },
-    ...(semver.lt(
-      require('@typescript-eslint/parser/package.json').version,
-      '4.0.0'
-    )
-      ? []
-      : [
-          {
-            filename: 'test.vue',
-            code: `
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
         interface Props {
           $el: string
@@ -309,23 +302,23 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<Props>()
       </script>
       `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              ecmaVersion: 6,
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            errors: [
-              {
-                message: "Key '$el' is reserved.",
-                line: 4
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
         type A = {
           $el: string
@@ -333,20 +326,19 @@ ruleTester.run('no-reserved-keys', rule, {
         defineProps<A>()
       </script>
       `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              ecmaVersion: 6,
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            errors: [
-              {
-                message: "Key '$el' is reserved.",
-                line: 4
-              }
-            ]
-          }
-        ])
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ecmaVersion: 6,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Key '$el' is reserved.",
+          line: 4
+        }
+      ]
+    }
   ]
 })
