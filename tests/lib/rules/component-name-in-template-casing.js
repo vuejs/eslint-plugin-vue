@@ -4,7 +4,6 @@
 'use strict'
 
 const rule = require('../../../lib/rules/component-name-in-template-casing')
-const semver = require('semver')
 const RuleTester = require('../../eslint-compat').RuleTester
 
 const tester = new RuleTester({
@@ -218,42 +217,36 @@ tester.run('component-name-in-template-casing', rule, {
     },
 
     // type-only imports
-    ...(semver.gte(
-      require('@typescript-eslint/parser/package.json').version,
-      '5.0.0'
-    )
-      ? [
-          {
-            code: `
-              <script setup lang="ts">
-                import type Foo from './Foo.vue'
-                import type { HelloWorld1 } from './components/HelloWorld'
-                import { type HelloWorld2 } from './components/HelloWorld2'
-                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
-                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
-                import { type default as HelloWorld5 } from './components/HelloWorld5';
-                import { type Component } from 'vue';
-              </script>
 
-              <template>
-                <foo />
-                <hello-world1 />
-                <hello-world2 />
-                <hello-world3 />
-                <hello-world4 />
-                <hello-world5 />
-                <component />
-              </template>
-            `,
-            options: ['PascalCase', { registeredComponentsOnly: true }],
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            }
-          }
-        ]
-      : [])
+    {
+      code: `
+        <script setup lang="ts">
+          import type Foo from './Foo.vue'
+          import type { HelloWorld1 } from './components/HelloWorld'
+          import { type HelloWorld2 } from './components/HelloWorld2'
+          import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+          import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+          import { type default as HelloWorld5 } from './components/HelloWorld5';
+          import { type Component } from 'vue';
+        </script>
+
+        <template>
+          <foo />
+          <hello-world1 />
+          <hello-world2 />
+          <hello-world3 />
+          <hello-world4 />
+          <hello-world5 />
+          <component />
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    }
   ],
   invalid: [
     {
@@ -1305,106 +1298,99 @@ tester.run('component-name-in-template-casing', rule, {
       ]
     },
     // type-only imports
-    ...(semver.gte(
-      require('@typescript-eslint/parser/package.json').version,
-      '5.0.0'
-    )
-      ? [
-          {
-            code: `
-              <script setup lang="ts">
-                import type Foo from './Foo.vue'
-                import type { HelloWorld1 } from './components/HelloWorld'
-                import { type HelloWorld2 } from './components/HelloWorld2'
-                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
-                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
-                import { type default as HelloWorld5 } from './components/HelloWorld5';
-                import { type Component } from 'vue';
-              </script>
+    {
+      code: `
+        <script setup lang="ts">
+          import type Foo from './Foo.vue'
+          import type { HelloWorld1 } from './components/HelloWorld'
+          import { type HelloWorld2 } from './components/HelloWorld2'
+          import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+          import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+          import { type default as HelloWorld5 } from './components/HelloWorld5';
+          import { type Component } from 'vue';
+        </script>
 
-              <template>
-                <foo />
-                <hello-world1 />
-                <hello-world2 />
-                <hello-world3 />
-                <hello-world4 />
-                <hello-world5 />
-                <component />
-              </template>
-            `,
-            options: ['PascalCase', { registeredComponentsOnly: false }],
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            output: `
-              <script setup lang="ts">
-                import type Foo from './Foo.vue'
-                import type { HelloWorld1 } from './components/HelloWorld'
-                import { type HelloWorld2 } from './components/HelloWorld2'
-                import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
-                import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
-                import { type default as HelloWorld5 } from './components/HelloWorld5';
-                import { type Component } from 'vue';
-              </script>
+        <template>
+          <foo />
+          <hello-world1 />
+          <hello-world2 />
+          <hello-world3 />
+          <hello-world4 />
+          <hello-world5 />
+          <component />
+        </template>
+      `,
+      output: `
+        <script setup lang="ts">
+          import type Foo from './Foo.vue'
+          import type { HelloWorld1 } from './components/HelloWorld'
+          import { type HelloWorld2 } from './components/HelloWorld2'
+          import type { HelloWorld as HelloWorld3 } from './components/HelloWorld3'
+          import { type HelloWorld as HelloWorld4 } from './components/HelloWorld4';
+          import { type default as HelloWorld5 } from './components/HelloWorld5';
+          import { type Component } from 'vue';
+        </script>
 
-              <template>
-                <Foo />
-                <HelloWorld1 />
-                <HelloWorld2 />
-                <HelloWorld3 />
-                <HelloWorld4 />
-                <HelloWorld5 />
-                <component />
-              </template>
-            `,
-            errors: [
-              {
-                message: 'Component name "foo" is not PascalCase.',
-                line: 13,
-                column: 17,
-                endLine: 13,
-                endColumn: 21
-              },
-              {
-                message: 'Component name "hello-world1" is not PascalCase.',
-                line: 14,
-                column: 17,
-                endLine: 14,
-                endColumn: 30
-              },
-              {
-                message: 'Component name "hello-world2" is not PascalCase.',
-                line: 15,
-                column: 17,
-                endLine: 15,
-                endColumn: 30
-              },
-              {
-                message: 'Component name "hello-world3" is not PascalCase.',
-                line: 16,
-                column: 17,
-                endLine: 16,
-                endColumn: 30
-              },
-              {
-                message: 'Component name "hello-world4" is not PascalCase.',
-                line: 17,
-                column: 17,
-                endLine: 17,
-                endColumn: 30
-              },
-              {
-                message: 'Component name "hello-world5" is not PascalCase.',
-                line: 18,
-                column: 17,
-                endLine: 18,
-                endColumn: 30
-              }
-            ]
-          }
-        ]
-      : [])
+        <template>
+          <Foo />
+          <HelloWorld1 />
+          <HelloWorld2 />
+          <HelloWorld3 />
+          <HelloWorld4 />
+          <HelloWorld5 />
+          <component />
+        </template>
+      `,
+      options: ['PascalCase', { registeredComponentsOnly: false }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Component name "foo" is not PascalCase.',
+          line: 13,
+          column: 11,
+          endLine: 13,
+          endColumn: 15
+        },
+        {
+          message: 'Component name "hello-world1" is not PascalCase.',
+          line: 14,
+          column: 11,
+          endLine: 14,
+          endColumn: 24
+        },
+        {
+          message: 'Component name "hello-world2" is not PascalCase.',
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 24
+        },
+        {
+          message: 'Component name "hello-world3" is not PascalCase.',
+          line: 16,
+          column: 11,
+          endLine: 16,
+          endColumn: 24
+        },
+        {
+          message: 'Component name "hello-world4" is not PascalCase.',
+          line: 17,
+          column: 11,
+          endLine: 17,
+          endColumn: 24
+        },
+        {
+          message: 'Component name "hello-world5" is not PascalCase.',
+          line: 18,
+          column: 11,
+          endLine: 18,
+          endColumn: 24
+        }
+      ]
+    }
   ]
 })
