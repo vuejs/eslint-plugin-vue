@@ -4,7 +4,6 @@
  */
 'use strict'
 
-const semver = require('semver')
 const rule = require('../../../lib/rules/require-default-prop')
 const RuleTester = require('../../eslint-compat').RuleTester
 const languageOptions = {
@@ -655,37 +654,30 @@ ruleTester.run('require-default-prop', rule, {
         }
       ]
     },
-    ...(semver.lt(
-      require('@typescript-eslint/parser/package.json').version,
-      '4.0.0'
-    )
-      ? []
-      : [
-          {
-            filename: 'test.vue',
-            code: `
-            <script setup lang="ts">
-            interface Props {
-              foo?: number
-            }
-            withDefaults(defineProps<Props>(), {bar:42})
-            </script>
-            `,
-            languageOptions: {
-              parser: require('vue-eslint-parser'),
-              ...languageOptions,
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            errors: [
-              {
-                message: "Prop 'foo' requires default value to be set.",
-                line: 4
-              }
-            ]
-          }
-        ]),
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      interface Props {
+        foo?: number
+      }
+      withDefaults(defineProps<Props>(), {bar:42})
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions,
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 4
+        }
+      ]
+    },
     {
       filename: 'test.vue',
       code: `

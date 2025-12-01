@@ -4,8 +4,7 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('../../eslint-compat')
-const semver = require('semver')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/no-loss-of-precision')
 
 const tester = new RuleTester({
@@ -17,86 +16,66 @@ const tester = new RuleTester({
 })
 tester.run('no-loss-of-precision', rule, {
   valid: [
-    ...(semver.gte(ESLint.version, '7.1.0')
-      ? [
-          {
-            filename: 'test.vue',
-            code: `
-            <template>
-              {{12345}}
-              {{123.45}}
-            </template>
-            `
-          },
-          {
-            filename: 'test.vue',
-            code: `
-            <template>
-              <MyComponent num="12345678901234567890" />
-            </template>
-            `
-          }
-        ]
-      : [])
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          {{12345}}
+          {{123.45}}
+        </template>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent num="12345678901234567890" />
+        </template>
+      `
+    }
   ],
   invalid: [
-    ...(semver.gte(ESLint.version, '7.1.0')
-      ? [
-          {
-            filename: 'test.vue',
-            code: `
-            <template>
-              {{12345678901234567890}}
-              {{0.12345678901234567890}}
-            </template>
-            `,
-            errors: [
-              {
-                message: 'This number literal will lose precision at runtime.',
-                line: 3,
-                column: 17,
-                endLine: 3,
-                endColumn: 37
-              },
-              {
-                message: 'This number literal will lose precision at runtime.',
-                line: 4,
-                column: 17,
-                endLine: 4,
-                endColumn: 39
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
-            <template>
-              <MyComponent :num="12345678901234567890" />
-            </template>
-            `,
-            errors: [
-              {
-                message: 'This number literal will lose precision at runtime.',
-                line: 3,
-                column: 34,
-                endLine: 3,
-                endColumn: 54
-              }
-            ]
-          }
-        ]
-      : [
-          {
-            filename: 'test.vue',
-            code: `
-            <template>
-              <MyComponent :num="12345678901234567890" />
-            </template>
-            `,
-            errors: [
-              'Failed to extend ESLint core rule "no-loss-of-precision". You may be able to use this rule by upgrading the version of ESLint. If you cannot upgrade it, turn off this rule.'
-            ]
-          }
-        ])
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          {{12345678901234567890}}
+          {{0.12345678901234567890}}
+        </template>
+      `,
+      errors: [
+        {
+          message: 'This number literal will lose precision at runtime.',
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 33
+        },
+        {
+          message: 'This number literal will lose precision at runtime.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 35
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <MyComponent :num="12345678901234567890" />
+        </template>
+      `,
+      errors: [
+        {
+          message: 'This number literal will lose precision at runtime.',
+          line: 3,
+          column: 30,
+          endLine: 3,
+          endColumn: 50
+        }
+      ]
+    }
   ]
 })
