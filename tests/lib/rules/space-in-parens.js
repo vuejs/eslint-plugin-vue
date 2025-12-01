@@ -6,8 +6,6 @@
 const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/space-in-parens')
 
-const errorMessage = (obj) => obj
-
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
@@ -66,14 +64,14 @@ tester.run('space-in-parens', rule, {
         />
       </template>`,
       errors: [
-        errorMessage({
+        {
           messageId: 'rejectedOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'rejectedClosingSpace',
           line: 4
-        })
+        }
       ]
     },
     {
@@ -91,14 +89,14 @@ tester.run('space-in-parens', rule, {
       </template>`,
       options: ['always'],
       errors: [
-        errorMessage({
+        {
           messageId: 'missingOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'missingClosingSpace',
           line: 4
-        })
+        }
       ]
     },
     {
@@ -115,14 +113,14 @@ tester.run('space-in-parens', rule, {
         >
       </template>`,
       errors: [
-        errorMessage({
+        {
           messageId: 'rejectedOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'rejectedClosingSpace',
           line: 4
-        })
+        }
       ]
     },
     {
@@ -140,14 +138,14 @@ tester.run('space-in-parens', rule, {
       </template>`,
       options: ['always'],
       errors: [
-        errorMessage({
+        {
           messageId: 'missingOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'missingClosingSpace',
           line: 4
-        })
+        }
       ]
     },
     {
@@ -164,14 +162,14 @@ tester.run('space-in-parens', rule, {
         >
       </template>`,
       errors: [
-        errorMessage({
+        {
           messageId: 'rejectedOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'rejectedClosingSpace',
           line: 4
-        })
+        }
       ]
     },
     {
@@ -189,14 +187,14 @@ tester.run('space-in-parens', rule, {
       </template>`,
       options: ['always'],
       errors: [
-        errorMessage({
+        {
           messageId: 'missingOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'missingClosingSpace',
           line: 4
-        })
+        }
       ]
     },
 
@@ -215,14 +213,14 @@ tester.run('space-in-parens', rule, {
       }
       </style>`,
       errors: [
-        errorMessage({
+        {
           messageId: 'rejectedOpeningSpace',
           line: 4
-        }),
-        errorMessage({
+        },
+        {
           messageId: 'rejectedClosingSpace',
           line: 4
-        })
+        }
       ]
     }
   ]
