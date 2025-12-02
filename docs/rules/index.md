@@ -552,6 +552,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/padding-line-between-blocks]: ./padding-line-between-blocks.md
 [vue/padding-line-between-tags]: ./padding-line-between-tags.md
 [vue/padding-lines-in-component-definition]: ./padding-lines-in-component-definition.md
+[vue/prefer-define-component]: ./prefer-define-component.md
 [vue/prefer-define-options]: ./prefer-define-options.md
 [vue/prefer-import-from-vue]: ./prefer-import-from-vue.md
 [vue/prefer-prop-type-boolean-first]: ./prefer-prop-type-boolean-first.md
