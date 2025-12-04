@@ -68,6 +68,7 @@ Rules in this category are enabled for all presets provided by eslint-plugin-vue
 | [vue/no-deprecated-v-on-native-modifier] | disallow using deprecated `.native` modifiers (in Vue.js 3.0.0+) |  | :three::warning: |
 | [vue/no-deprecated-v-on-number-modifiers] | disallow using deprecated number (keycode) modifiers (in Vue.js 3.0.0+) | :wrench: | :three::warning: |
 | [vue/no-deprecated-vue-config-keycodes] | disallow using deprecated `Vue.config.keyCodes` (in Vue.js 3.0.0+) |  | :three::warning: |
+| [vue/no-direct-composable-in-event-handler] | disallow direct composable usage in event handler |  | :three::hammer: |
 | [vue/no-dupe-keys] | disallow duplication of field names |  | :three::two::warning: |
 | [vue/no-dupe-v-else-if] | disallow duplicate conditions in `v-if` / `v-else-if` chains |  | :three::two::warning: |
 | [vue/no-duplicate-attributes] | disallow duplication of attributes |  | :three::two::warning: |
@@ -465,6 +466,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-deprecated-v-on-native-modifier]: ./no-deprecated-v-on-native-modifier.md
 [vue/no-deprecated-v-on-number-modifiers]: ./no-deprecated-v-on-number-modifiers.md
 [vue/no-deprecated-vue-config-keycodes]: ./no-deprecated-vue-config-keycodes.md
+[vue/no-direct-composable-in-event-handler]: ./no-direct-composable-in-event-handler.md
 [vue/no-dupe-keys]: ./no-dupe-keys.md
 [vue/no-dupe-v-else-if]: ./no-dupe-v-else-if.md
 [vue/no-duplicate-attr-inheritance]: ./no-duplicate-attr-inheritance.md
