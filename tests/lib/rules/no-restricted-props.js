@@ -3,7 +3,6 @@
  */
 'use strict'
 
-const semver = require('semver')
 const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/no-restricted-props')
 const {
@@ -414,15 +413,9 @@ tester.run('no-restricted-props', rule, {
         }
       ]
     },
-    ...(semver.lt(
-      require('@typescript-eslint/parser/package.json').version,
-      '4.0.0'
-    )
-      ? []
-      : [
-          {
-            filename: 'test.vue',
-            code: `
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
       interface Props {
         foo:boolean
@@ -430,20 +423,20 @@ tester.run('no-restricted-props', rule, {
       defineProps<Props>()
       </script>
       `,
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            options: [{ name: 'foo', suggest: 'Foo' }],
-            errors: [
-              {
-                message: 'Using `foo` props is not allowed.',
-                line: 4,
-                suggestions: [
-                  {
-                    desc: 'Instead, change to `Foo`.',
-                    output: `
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 4,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
       <script setup lang="ts">
       interface Props {
         Foo:boolean
@@ -451,14 +444,14 @@ tester.run('no-restricted-props', rule, {
       defineProps<Props>()
       </script>
       `
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
       interface Props {
         foo:boolean
@@ -470,20 +463,20 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `,
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            options: [{ name: 'foo', suggest: 'Foo' }],
-            errors: [
-              {
-                message: 'Using `foo` props is not allowed.',
-                line: 4,
-                suggestions: [
-                  {
-                    desc: 'Instead, change to `Foo`.',
-                    output: `
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 4,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
       <script setup lang="ts">
       interface Props {
         Foo:boolean
@@ -495,14 +488,14 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script>
       const foo = false
       </script>
@@ -517,20 +510,20 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `,
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            options: [{ name: 'foo', suggest: 'Foo' }],
-            errors: [
-              {
-                message: 'Using `foo` props is not allowed.',
-                line: 7,
-                suggestions: [
-                  {
-                    desc: 'Instead, change to `Foo`.',
-                    output: `
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 7,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
       <script>
       const foo = false
       </script>
@@ -545,14 +538,14 @@ tester.run('no-restricted-props', rule, {
       )
       </script>
       `
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            filename: 'test.vue',
-            code: `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup lang="ts">
       withDefaults(defineProps<Props>(),
         {
@@ -564,20 +557,20 @@ tester.run('no-restricted-props', rule, {
       }
       </script>
       `,
-            languageOptions: {
-              parserOptions: {
-                parser: require.resolve('@typescript-eslint/parser')
-              }
-            },
-            options: [{ name: 'foo', suggest: 'Foo' }],
-            errors: [
-              {
-                message: 'Using `foo` props is not allowed.',
-                line: 9,
-                suggestions: [
-                  {
-                    desc: 'Instead, change to `Foo`.',
-                    output: `
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 9,
+          suggestions: [
+            {
+              desc: 'Instead, change to `Foo`.',
+              output: `
       <script setup lang="ts">
       withDefaults(defineProps<Props>(),
         {
@@ -589,29 +582,28 @@ tester.run('no-restricted-props', rule, {
       }
       </script>
       `
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            code: `
-            <script setup lang="ts">
-            import {Props1 as Props} from './test01'
-            defineProps<Props>()
-            </script>
-            `,
-            ...getTypeScriptFixtureTestOptions(),
-            options: [{ name: 'foo', suggest: 'Foo' }],
-            errors: [
-              {
-                message: 'Using `foo` props is not allowed.',
-                line: 4,
-                suggestions: null
-              }
-            ]
-          }
-        ]),
+            }
+          ]
+        }
+      ]
+    },
+    {
+      code: `
+        <script setup lang="ts">
+        import {Props1 as Props} from './test01'
+        defineProps<Props>()
+        </script>
+      `,
+      options: [{ name: 'foo', suggest: 'Foo' }],
+      errors: [
+        {
+          message: 'Using `foo` props is not allowed.',
+          line: 4,
+          suggestions: null
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
+    },
     {
       filename: 'test.vue',
       code: `
