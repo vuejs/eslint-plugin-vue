@@ -24,15 +24,15 @@ const content = `/*
 'use strict'
 
 const plugin = {
-  meta: require('./meta'),
+  meta: require('./meta.ts').default,
   rules: {
     ${rules
       .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
       .join(',\n')}
   },
   processors: {
-    '.vue': require('./processor'),
-    'vue': require('./processor')
+    '.vue': require('./processor.ts').default,
+    'vue': require('./processor.ts').default
   }
 }
 
