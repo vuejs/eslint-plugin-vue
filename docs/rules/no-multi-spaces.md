@@ -51,12 +51,14 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 ```json
 {
   "vue/no-multi-spaces": ["error", {
-    "ignoreProperties": false
+    "ignoreProperties": false,
+    "ignoreEOLComments": false
   }]
 }
 ```
 
 - `ignoreProperties` ... whether or not objects' properties should be ignored. default `false`
+- `ignoreEOLComments` ... whether or not the spaces before EOL comments should be ignored. default `false`
 
 ### `"ignoreProperties": true`
 
@@ -69,6 +71,24 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
     :class="{
       'fa-angle-up'   : isExpanded,
       'fa-angle-down' : !isExpanded,
+    }"
+  />
+</template>
+```
+
+</eslint-code-block>
+
+### `"ignoreEOLComments": true`
+
+<eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error', { 'ignoreEOLComments': true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    :class="{
+      'fa-angle-up' : isExpanded,   // comment
+      'fa-angle-down' : !isExpanded,   /* multiline comment */
     }"
   />
 </template>
