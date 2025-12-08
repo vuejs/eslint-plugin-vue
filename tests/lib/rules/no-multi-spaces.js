@@ -381,6 +381,64 @@ ruleTester.run('no-multi-spaces', rule, {
         ></div>
       </template>
       `,
+      errors: [
+        {
+          message: "Multiple spaces found before '// comment'.",
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div
+          :class="{
+            'foo': foo  /* multiline comment */
+          }"
+        ></div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div
+          :class="{
+            'foo': foo /* multiline comment */
+          }"
+        ></div>
+      </template>
+      `,
+      errors: [
+        {
+          message: "Multiple spaces found before '/* multiline comment */'.",
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div
+          :class="{
+            'foo': foo  // comment
+          }"
+        ></div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div
+          :class="{
+            'foo': foo // comment
+          }"
+        ></div>
+      </template>
+      `,
       options: [
         {
           ignoreEOLComments: false
