@@ -258,6 +258,7 @@ For example:
 | [vue/no-template-target-blank] | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter] | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
 | [vue/no-undef-components] | disallow use of undefined components in `<template>` |  | :hammer: |
+| [vue/no-undef-directives] | disallow use of undefined custom directives |  | :warning: |
 | [vue/no-undef-properties] | disallow undefined properties |  | :hammer: |
 | [vue/no-unsupported-features] | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
 | [vue/no-unused-emit-declarations] | disallow unused emit declarations |  | :hammer: |
@@ -521,6 +522,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-textarea-mustache]: ./no-textarea-mustache.md
 [vue/no-this-in-before-route-enter]: ./no-this-in-before-route-enter.md
 [vue/no-undef-components]: ./no-undef-components.md
+[vue/no-undef-directives]: ./no-undef-directives.md
 [vue/no-undef-properties]: ./no-undef-properties.md
 [vue/no-unsupported-features]: ./no-unsupported-features.md
 [vue/no-unused-components]: ./no-unused-components.md
