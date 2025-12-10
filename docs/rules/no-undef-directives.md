@@ -13,20 +13,24 @@ description: disallow use of undefined custom directives
 
 ## :book: Rule Details
 
-This rule reports use of undefined custom directives in `<template>`.
+This rule reports directives that are used in the `<template>`, but that are not registered in the `<script setup>` or the Options API's `directives` section.
+
+Undefined directives will be resolved from globally registered directives. However, if you are not using global directives, you can use this rule to prevent run-time errors.
 
 <eslint-code-block :rules="{'vue/no-undef-directives': ['error']}">
 
 ```vue
+<script setup>
+import vFocus from './vFocus';
+</script>
+
 <template>
-  <!-- ✗ BAD -->
+  <!-- ✓ GOOD -->
   <input v-focus>
+
+  <!-- ✗ BAD -->
   <div v-foo></div>
 </template>
-
-<script setup>
-// vFocus is not imported
-</script>
 ```
 
 </eslint-code-block>
@@ -37,12 +41,19 @@ This rule reports use of undefined custom directives in `<template>`.
 <template>
   <!-- ✓ GOOD -->
   <input v-focus>
+
+  <!-- ✗ BAD -->
   <div v-foo></div>
 </template>
 
-<script setup>
+<script>
 import vFocus from './vFocus';
-const vFoo = {}
+
+export default {
+  directives: {
+    focus: vFocus
+  }
+}
 </script>
 ```
 
