@@ -228,7 +228,7 @@ tester.run('no-undef-directives', rule, {
         <div v-barfoobaz></div>
       </template>
       `,
-      options: [{ ignorePatterns: ['foo'] }]
+      options: [{ ignore: ['/foo/'] }]
     },
     {
       filename: 'test.vue',
@@ -238,7 +238,7 @@ tester.run('no-undef-directives', rule, {
         <div v-foo-bar></div>
       </template>
       `,
-      options: [{ ignorePatterns: ['foo-bar'] }]
+      options: [{ ignore: ['foo-bar'] }]
     }
   ],
   invalid: [
@@ -467,7 +467,7 @@ tester.run('no-undef-directives', rule, {
         <div v-foo-bar></div>
       </template>
       `,
-      options: [{ ignorePatterns: ['baz'] }],
+      options: [{ ignore: ['baz'] }],
       errors: [
         {
           message: "The 'v-foo-bar' directive has been used, but not defined.",
@@ -475,6 +475,44 @@ tester.run('no-undef-directives', rule, {
           column: 14,
           endLine: 3,
           endColumn: 23
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-foo-bar></div>
+      </template>
+      `,
+      options: [{ ignore: ['/^bar/'] }],
+      errors: [
+        {
+          message: "The 'v-foo-bar' directive has been used, but not defined.",
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-foo></div>
+        <div v-barfoobaz></div>
+      </template>
+      `,
+      options: [{ ignore: ['foo'] }],
+      errors: [
+        {
+          message:
+            "The 'v-barfoobaz' directive has been used, but not defined.",
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     }
