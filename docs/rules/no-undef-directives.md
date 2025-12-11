@@ -15,7 +15,7 @@ description: disallow use of undefined custom directives
 
 This rule reports directives that are used in the `<template>`, but that are not registered in the `<script setup>` or the Options API's `directives` section.
 
-Undefined directives will be resolved from globally registered directives. However, if you are not using global directives, you can use this rule to prevent run-time errors.
+Undefined directives will be resolved from globally registered directives. However, if you are not using global directives, you can use this rule to prevent runtime errors.
 
 <eslint-code-block :rules="{'vue/no-undef-directives': ['error']}">
 
