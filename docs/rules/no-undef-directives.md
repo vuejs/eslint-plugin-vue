@@ -71,7 +71,7 @@ export default {
 
 - `ignorePatterns` (`string[]`) ... An array of regex pattern strings to ignore.
 
-### "ignorePatterns": ["foo"]
+### `"ignorePatterns": ["foo"]`
 
 <eslint-code-block :rules="{'vue/no-undef-directives': ['error', {ignorePatterns: ['foo']}]}">
 
