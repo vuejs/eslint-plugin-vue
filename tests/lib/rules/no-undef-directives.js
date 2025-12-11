@@ -229,6 +229,16 @@ tester.run('no-undef-directives', rule, {
       </template>
       `,
       options: [{ ignorePatterns: ['foo'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div v-fooBar></div>
+        <div v-foo-bar></div>
+      </template>
+      `,
+      options: [{ ignorePatterns: ['foo-bar'] }]
     }
   ],
   invalid: [
