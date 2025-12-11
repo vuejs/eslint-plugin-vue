@@ -77,6 +77,7 @@ export default {
 
 ```vue
 <template>
+  <!-- ✓ GOOD -->
   <div v-foo></div>
 </template>
 ```
