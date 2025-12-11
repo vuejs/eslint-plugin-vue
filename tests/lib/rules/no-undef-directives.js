@@ -225,6 +225,7 @@ tester.run('no-undef-directives', rule, {
       code: `
       <template>
         <div v-foo></div>
+        <div v-barfoobaz></div>
       </template>
       `,
       options: [{ ignorePatterns: ['foo'] }]
