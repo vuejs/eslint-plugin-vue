@@ -241,7 +241,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-focus' directive has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 21
         }
       ]
     },
@@ -258,7 +261,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-focus' directive has been used, but not defined.",
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 21
         }
       ]
     },
@@ -275,7 +281,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo' directive has been used, but not defined.",
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 19
         }
       ]
     },
@@ -292,7 +301,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-focus' directive has been used, but not defined.",
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 21
         }
       ]
     },
@@ -310,7 +322,10 @@ tester.run('no-undef-directives', rule, {
         {
           message:
             "The 'v-clickoutside' directive has been used, but not defined.",
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 28
         }
       ]
     },
@@ -328,7 +343,10 @@ tester.run('no-undef-directives', rule, {
         {
           message:
             "The 'v-click-outside' directive has been used, but not defined.",
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 29
         }
       ]
     },
@@ -342,7 +360,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo' directive has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -356,7 +377,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo' directive has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     },
@@ -370,7 +394,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo' directive has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -391,7 +418,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-Focus' directive has been used, but not defined.",
-          line: 10
+          line: 10,
+          column: 14,
+          endLine: 10,
+          endColumn: 21
         }
       ]
     },
@@ -412,7 +442,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo-bar' directive has been used, but not defined.",
-          line: 10
+          line: 10,
+          column: 14,
+          endLine: 10,
+          endColumn: 23
         }
       ]
     },
@@ -427,7 +460,10 @@ tester.run('no-undef-directives', rule, {
       errors: [
         {
           message: "The 'v-foo-bar' directive has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     }
