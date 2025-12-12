@@ -2,4 +2,4 @@
 "eslint-plugin-vue": minor
 ---
 
-Use `error` instead of `warn` in configs when `VUE_ESLINT_ALWAYS_ERROR` env variable is `"true"`
+Add [new configs](https://eslint.vuejs.org/user-guide/#bundle-configurations-eslint-config-js) `strongly-recommended-error` and `recommended-error` with all rules' severity set to `error`
