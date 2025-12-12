@@ -71,10 +71,11 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+      - name: Change local ESLint version to v10
+        run: |
+          sed -ie 's/"eslint": "^9.32.0"/"eslint": "^10.0.0-0"/' package.json
       - name: Install Packages
         run: npm install
-      - name: Install ESLint v10
-        run: npm install --save-dev eslint@10 --force
       - name: Test
         run: npm test
 
