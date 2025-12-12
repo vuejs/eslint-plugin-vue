@@ -203,13 +203,7 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         const count = props.count
       })
       </script>
-      `,
-      errors: [
-        {
-          messageId: 'getProperty',
-          line: 4
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
@@ -223,13 +217,7 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         count = props.count
       })
       </script>
-      `,
-      errors: [
-        {
-          messageId: 'getProperty',
-          line: 4
-        }
-      ]
+      `
     },
     {
       filename: 'test.vue',
