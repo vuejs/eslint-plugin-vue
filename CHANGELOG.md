@@ -1,5 +1,17 @@
 # eslint-plugin-vue
 
+## 10.7.0
+
+### Minor Changes
+
+- Changed [`vue/no-negated-v-if-condition`](https://eslint.vuejs.org/rules/no-negated-v-if-condition.html) suggestion to autofix ([#2984](https://github.com/vuejs/eslint-plugin-vue/pull/2984))
+
+- Added new `ignoreEOLComments` option to [`vue/no-multi-spaces`](https://eslint.vuejs.org/rules/no-multi-spaces.html) rule ([#2989](https://github.com/vuejs/eslint-plugin-vue/pull/2989))
+
+### Patch Changes
+
+- Updates resources ([#2986](https://github.com/vuejs/eslint-plugin-vue/pull/2986))
+
 ## 10.6.2
 
 ### Patch Changes
