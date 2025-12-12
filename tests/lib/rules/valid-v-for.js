@@ -48,6 +48,14 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div><div v-for="(, key) in obj"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><div v-for="(, key, index) in obj"></div></div></template>'
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div><div is="your-component" v-for="x in list" :key="x.id"></div></div></template>'
     },
     {
@@ -182,11 +190,6 @@ tester.run('valid-v-for', rule, {
       filename: 'test.vue',
       code: '<template><div><div v-for></div></div></template>',
       errors: ["'v-for' directives require that attribute value."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div><div v-for="(,a,b) in list"></div></div></template>',
-      errors: ["Invalid alias ''."]
     },
     {
       filename: 'test.vue',
