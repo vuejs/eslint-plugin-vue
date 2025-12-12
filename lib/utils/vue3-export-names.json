@@ -266,6 +266,8 @@
   "DeprecationTypes",
   "createElementVNode",
   "WatchOptionsBase",
+  "nodeOps",
+  "patchProp",
   "TransitionProps",
   "Transition",
   "TransitionGroupProps",

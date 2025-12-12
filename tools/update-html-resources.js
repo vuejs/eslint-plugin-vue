@@ -21,9 +21,8 @@ async function main() {
   // Update deprecated-html-elements.json
   // ------------------------------------------------------------------------------
   function updateDeprecatedHTMLElements() {
-    const DEPRECATED_HTML_ELEMENTS_PATH = require.resolve(
-      '../lib/utils/deprecated-html-elements.json'
-    )
+    const DEPRECATED_HTML_ELEMENTS_PATH =
+      require.resolve('../lib/utils/deprecated-html-elements.json')
     const elements = new Set()
 
     const domDl = jsdom.JSDOM.fragment(obsoleteHtml).querySelector(
@@ -49,9 +48,8 @@ async function main() {
   // Update html-elements.json
   // ------------------------------------------------------------------------------
   function updateHTMLElements() {
-    const HTML_ELEMENTS_PATH = require.resolve(
-      '../lib/utils/html-elements.json'
-    )
+    const HTML_ELEMENTS_PATH =
+      require.resolve('../lib/utils/html-elements.json')
     const elements = new Set()
     const deprecatedHtmlElements = new Set(
       require('../lib/utils/deprecated-html-elements.json')

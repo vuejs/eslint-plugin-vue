@@ -146,7 +146,6 @@ job="Vet"></component></template>`,
       errors: [
         {
           message: "'job' should be on a new line.",
-          type: 'VAttribute',
           line: 1,
           column: 47,
           endLine: 1,
@@ -170,7 +169,6 @@ age="30"
       errors: [
         {
           message: "'age' should be on a new line.",
-          type: 'VAttribute',
           line: 2,
           column: 25,
           endLine: 2,
@@ -194,7 +192,6 @@ age="30"
       errors: [
         {
           message: "'age' should be on a new line.",
-          type: 'VAttribute',
           line: 2,
           column: 25,
           endLine: 2,

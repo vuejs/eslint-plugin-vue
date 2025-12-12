@@ -36,7 +36,6 @@ ruleTester.run('no-deprecated-vue-config-keycodes', rule, {
           message: '`Vue.config.keyCodes` are deprecated.',
           line: 1,
           column: 1,
-          type: 'MemberExpression',
           // messageId: 'unexpected',
           endLine: 1,
           endColumn: 20

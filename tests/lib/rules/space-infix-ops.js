@@ -3,17 +3,14 @@
  */
 'use strict'
 
-const { RuleTester, ESLint } = require('../../eslint-compat')
-const semver = require('semver')
+const { RuleTester } = require('../../eslint-compat')
 const rule = require('../../../lib/rules/space-infix-ops')
 
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
 })
 
-const message = semver.lt(ESLint.version, '5.10.0')
-  ? () => 'Infix operators must be spaced.'
-  : (operator) => `Operator '${operator}' must be spaced.`
+const message = (operator) => `Operator '${operator}' must be spaced.`
 
 tester.run('space-infix-ops', rule, {
   valid: [

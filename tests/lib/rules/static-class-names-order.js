@@ -42,7 +42,10 @@ tester.run('static-class-names-order', rule, {
       errors: [
         {
           message: 'Classes should be ordered alphabetically.',
-          type: 'VAttribute'
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 27
         }
       ]
     },
@@ -59,7 +62,10 @@ tester.run('static-class-names-order', rule, {
       errors: [
         {
           message: 'Classes should be ordered alphabetically.',
-          type: 'VAttribute'
+          line: 2,
+          column: 16,
+          endLine: 2,
+          endColumn: 29
         }
       ]
     }

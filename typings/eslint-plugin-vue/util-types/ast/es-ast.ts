@@ -227,8 +227,7 @@ interface BasePropertyDefinition extends HasParentNode {
   static: boolean
   parent: ClassBody
 }
-export interface PropertyDefinitionNonComputedName
-  extends BasePropertyDefinition {
+export interface PropertyDefinitionNonComputedName extends BasePropertyDefinition {
   computed: false
   key: Identifier | Literal
 }
@@ -627,8 +626,7 @@ interface BaseAssignmentProperty extends HasParentNode {
   value: Pattern
   parent: ObjectPattern
 }
-export interface AssignmentPropertyNonComputedName
-  extends BaseAssignmentProperty {
+export interface AssignmentPropertyNonComputedName extends BaseAssignmentProperty {
   computed: false
   key: Identifier | Literal
 }

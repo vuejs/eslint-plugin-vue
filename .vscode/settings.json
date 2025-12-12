@@ -1,6 +1,13 @@
 {
   "editor.tabSize": 2,
-  "eslint.validate": ["javascript", "javascriptreact", "vue", "json", "jsonc", "markdown"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "vue",
+    "json",
+    "jsonc",
+    "markdown"
+  ],
   "typescript.tsdk": "./node_modules/typescript/lib",
   "vetur.validation.script": false,
   "[typescript]": {

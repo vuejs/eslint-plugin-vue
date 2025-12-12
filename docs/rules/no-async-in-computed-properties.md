@@ -12,8 +12,8 @@ since: v3.8.0
 
 - :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/vue2-recommended"` and `*.configs["flat/vue2-recommended"]`.
 
-Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
-If you need async computed properties you might want to consider using additional plugin [vue-async-computed]
+Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to unexpected behaviour; that's why you should avoid them.
+If you need async computed properties, consider using the [`computedAsync`] composable from VueUse.
 
 ## :book: Rule Details
 
@@ -147,9 +147,9 @@ const fetchData = computed(() => {
 
 ## :books: Further Reading
 
-- [vue-async-computed]
+- [`computedAsync`]
 
-[vue-async-computed]: https://github.com/foxbenjaminfox/vue-async-computed
+[`computedAsync`]: https://vueuse.org/core/computedAsync
 
 ## :rocket: Version
 

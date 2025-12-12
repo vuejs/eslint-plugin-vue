@@ -180,7 +180,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier'
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     },
@@ -199,8 +202,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 2
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 22
         }
       ]
     },
@@ -220,13 +225,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 2
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 22
         },
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -247,13 +256,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 2
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 22
         },
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     },
@@ -274,8 +287,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 2
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 22
         }
       ]
     },
@@ -298,13 +313,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'i' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 2
+          line: 2,
+          column: 21,
+          endLine: 2,
+          endColumn: 22
         },
         {
           message: "Variable 'f' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -337,13 +356,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'e' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: "Variable 'f' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -376,13 +399,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'e' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: "Variable 'f' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -413,13 +440,17 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'e' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: "Variable 'f' is already declared in the upper scope.",
-          type: 'Identifier',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -445,7 +476,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'j' is already declared in the upper scope.",
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -465,7 +499,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'j' is already declared in the upper scope.",
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -485,7 +522,10 @@ ruleTester.run('no-template-shadow', rule, {
       errors: [
         {
           message: "Variable 'j' is already declared in the upper scope.",
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     }

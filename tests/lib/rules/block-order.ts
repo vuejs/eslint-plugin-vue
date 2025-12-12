@@ -1,12 +1,13 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const rule = require('../../../lib/rules/block-order')
-const RuleTester = require('../../eslint-compat').RuleTester
-const assert = require('assert')
-const { ESLint } = require('../../eslint-compat')
+import { Rule } from '../../../node_modules/@types/eslint'
+import assert from 'assert'
+import parserVue from 'vue-eslint-parser'
+import rule from '../../../lib/rules/block-order'
+import { ESLint, RuleTester } from '../../eslint-compat'
+import pluginVue from '../../../lib'
+import processor from '../../../lib/processor'
 
 // Initialize linter.
 const eslint = new ESLint({
@@ -14,26 +15,26 @@ const eslint = new ESLint({
   overrideConfig: {
     files: ['**/*.vue'],
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: parserVue,
       ecmaVersion: 2015
     },
-    plugins: { vue: require('../../../lib/index') },
+    plugins: { vue: pluginVue },
     rules: {
       'vue/comment-directive': 'error',
       'vue/block-order': 'error'
     },
-    processor: require('../../../lib/processor')
+    processor
   },
   fix: true
 })
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser')
+    parser: parserVue
   }
 })
 
-tester.run('block-order', rule, {
+tester.run('block-order', rule as unknown as Rule.RuleModule, {
   valid: [
     // default
     '<script></script><template></template><style></style>',
@@ -71,44 +72,36 @@ tester.run('block-order', rule, {
     // order
     {
       code: '<script></script><template></template><style></style>',
-      output: null,
       options: [{ order: ['script', 'template', 'style'] }]
     },
     {
       code: '<template></template><script></script><style></style>',
-      output: null,
       options: [{ order: ['template', 'script', 'style'] }]
     },
     {
       code: '<style></style><template></template><script></script>',
-      output: null,
       options: [{ order: ['style', 'template', 'script'] }]
     },
     {
       code: '<template></template><script></script><style></style>',
-      output: null,
       options: [{ order: ['template', 'docs', 'script', 'style'] }]
     },
     {
       code: '<template></template><docs></docs><script></script><style></style>',
-      output: null,
       options: [{ order: ['template', 'script', 'style'] }]
     },
     {
       code: '<docs><div id="id">text <!--comment--> </div><br></docs><script></script><template></template><style></style>',
-      output: null,
       options: [{ order: ['docs', 'script', 'template', 'style'] }]
     },
     {
       code: '<script setup></script><script></script><template></template><style></style>',
-      output: null,
       options: [
         { order: ['script[setup]', 'script:not([setup])', 'template', 'style'] }
       ]
     },
     {
       code: '<template></template><script setup></script><script></script><style></style>',
-      output: null,
       options: [
         {
           order: [['script[setup]', 'script:not([setup])', 'template'], 'style']
@@ -117,24 +110,20 @@ tester.run('block-order', rule, {
     },
     {
       code: '<script></script><script setup></script><template></template><style></style>',
-      output: null,
       options: [{ order: ['script', 'template', 'style'] }]
     },
     {
       code: '<template></template><script></script><script setup></script><style></style>',
-      output: null,
       options: [{ order: [['script', 'template'], 'style'] }]
     },
     {
       code: '<script></script><script setup></script><template></template><style></style>',
-      output: null,
       options: [
         { order: ['script:not([setup])', 'script[setup]', 'template', 'style'] }
       ]
     },
     {
       code: '<template></template><script></script><script setup></script><style></style>',
-      output: null,
       options: [
         {
           order: [['script:not([setup])', 'script[setup]', 'template'], 'style']
@@ -143,7 +132,6 @@ tester.run('block-order', rule, {
     },
     {
       code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n locale="ja"></i18n><i18n locale="en"></i18n>',
-      output: null,
       options: [
         {
           order: [
@@ -158,7 +146,6 @@ tester.run('block-order', rule, {
     },
     {
       code: '<template></template><script></script><script setup></script><style scoped></style><style></style><i18n locale="en"></i18n><i18n locale="ja"></i18n>',
-      output: null,
       options: [
         {
           order: [
@@ -175,17 +162,14 @@ tester.run('block-order', rule, {
     },
     {
       code: '<template></template><docs></docs><script></script><style></style>',
-      output: null,
       options: [{ order: [['docs', 'script', 'template'], 'style'] }]
     },
     {
       code: '<i18n locale="en"></i18n><i18n locale="ja"></i18n>',
-      output: null,
       options: [{ order: ['i18n[locale=en]', 'i18n[locale=ja]'] }]
     },
     {
       code: '<style></style><style scoped></style>',
-      output: null,
       options: [{ order: ['style:not([scoped])', 'style[scoped]'] }]
     },
 

@@ -7,8 +7,7 @@ type TemplateListenerBase = {
   [T in keyof VAST.VNodeListenerMap]?: (node: VAST.VNodeListenerMap[T]) => void
 }
 export interface TemplateListener
-  extends TemplateListenerBase,
-    eslint.Rule.NodeListener {
+  extends TemplateListenerBase, eslint.Rule.NodeListener {
   [key: string]: ((node: VAST.ParamNode) => void) | undefined
 }
 

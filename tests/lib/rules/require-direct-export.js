@@ -94,8 +94,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     },
@@ -109,8 +111,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 5
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 23
         }
       ]
     },
@@ -120,8 +124,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 1
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -131,8 +137,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 1
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -142,8 +150,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 1
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -157,8 +167,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 1
+          line: 1,
+          column: 1,
+          endLine: 5,
+          endColumn: 8
         }
       ]
     },
@@ -170,8 +182,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 1
+          line: 1,
+          column: 1,
+          endLine: 3,
+          endColumn: 8
         }
       ]
     },
@@ -186,8 +200,10 @@ ruleTester.run('require-direct-export', rule, {
       errors: [
         {
           message: 'Expected the component literal to be directly exported.',
-          type: 'ExportDefaultDeclaration',
-          line: 5
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 23
         }
       ]
     },
