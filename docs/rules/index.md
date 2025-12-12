@@ -258,7 +258,7 @@ For example:
 | [vue/no-template-target-blank] | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter] | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
 | [vue/no-undef-components] | disallow use of undefined components in `<template>` |  | :hammer: |
-| [vue/no-undef-directives] | disallow use of undefined custom directives |  | :warning: |
+| [vue/no-undef-directives] | disallow use of undefined custom directives |  | :hammer: |
 | [vue/no-undef-properties] | disallow undefined properties |  | :hammer: |
 | [vue/no-unsupported-features] | disallow unsupported Vue.js syntax on the specified version | :wrench: | :hammer: |
 | [vue/no-unused-emit-declarations] | disallow unused emit declarations |  | :hammer: |
