@@ -48,14 +48,6 @@ function formatRules(rules, categoryId, alwaysError) {
   return JSON.stringify(obj, null, 2)
 }
 
-function hasWarningRules(categoryId) {
-  return (
-    categoryId !== 'base' &&
-    categoryId !== 'vue3-essential' &&
-    categoryId !== 'vue2-essential'
-  )
-}
-
 function formatCategory(category, alwaysError = false) {
   let extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
@@ -82,7 +74,7 @@ module.exports = {
 }
 `
   }
-  if (alwaysError && hasWarningRules(extendsCategoryId)) {
+  if (alwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
   }
 
@@ -106,7 +98,7 @@ for (const category of categories) {
 
   fs.writeFileSync(filePath, content)
 
-  if (hasWarningRules(category.categoryId)) {
+  if (!errorCategories.has(category.categoryId)) {
     fs.writeFileSync(
       path.join(ROOT, `${category.categoryId}-error.js`),
       formatCategory(category, true)
