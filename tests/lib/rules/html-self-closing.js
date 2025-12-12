@@ -56,7 +56,6 @@ tester.run('html-self-closing', rule, {
     // Don't error if there are comments in their content.
     {
       code: '<template><div><!-- comment --></div></template>',
-      output: null,
       options: [{ html: { normal: 'always' } }]
     },
 

@@ -80,13 +80,11 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template><svg><![CDATA[cdata',
-      options: [{ 'eof-in-cdata': false }],
-      errors: ['Parsing error: eof-in-cdata.']
+      options: [{ 'eof-in-cdata': false }]
     },
     {
       code: '<template><!--comment',
-      options: [{ 'eof-in-comment': false }],
-      errors: ['Parsing error: eof-in-comment.']
+      options: [{ 'eof-in-comment': false }]
     },
     {
       code: '<template><div class=""',
@@ -192,8 +190,7 @@ tester.run('no-parsing-error', rule, {
     },
     {
       code: '<template></div></template>',
-      options: [{ 'x-invalid-end-tag': false }],
-      errors: ['Parsing error: x-invalid-end-tag.']
+      options: [{ 'x-invalid-end-tag': false }]
     },
     {
       code: '<template><div xmlns=""></template>',
