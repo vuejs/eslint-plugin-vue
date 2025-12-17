@@ -72,7 +72,7 @@ You can use the following configs by adding them to `eslint.config.js`.
   - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
   - `*.configs["flat/vue2-strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
   - `*.configs["flat/vue2-strongly-recommended-error"]` ... Same as vue2-strongly-recommended, except with all rules in this category configured to error instead of warn.
-  - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency
+  - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
   - `*.configs["flat/vue2-recommended-error"]` ... Same as vue2-recommended, except with all rules in this category configured to error instead of warn.
 
 :::warning Reporting rules
