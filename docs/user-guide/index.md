@@ -65,7 +65,7 @@ You can use the following configs by adding them to `eslint.config.js`.
 - Configurations for using Vue.js 3.x:
   - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
   - `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules to error instead of warn.
+  - `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
   - `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
   - `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
 - Configurations for using Vue.js 2.x:
