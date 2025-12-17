@@ -103,7 +103,7 @@ const config = require('./${extendsCategoryId}.js')
 module.exports = [
   ...config,
   {
-    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}/rules',
+    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${alwaysError ? '-error' : ''}/rules',
     rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
   }
 ]
