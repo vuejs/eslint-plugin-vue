@@ -64,16 +64,16 @@ You can use the following configs by adding them to `eslint.config.js`.
 - `*.configs["flat/base"]` ... Settings and rules to enable correct ESLint parsing.
 - Configurations for using Vue.js 3.x:
   - `*.configs["flat/essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/strongly-recommended-error"]` ... Same as strongly-recommended, except with all rules in this category configured to error instead of warn.
-  - `*.configs["flat/recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/recommended-error"]` ... Same as recommended, except with all rules in this category configured to error instead of warn.
+  - `*.configs["flat/strongly-recommended"]` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
+  - `*.configs["flat/strongly-recommended-error"]` ... Same as `strongly-recommended`, except with all rules to error instead of warn.
+  - `*.configs["flat/recommended"]` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+  - `*.configs["flat/recommended-error"]` ... Same as `recommended`, except with all rules configured to error instead of warn.
 - Configurations for using Vue.js 2.x:
   - `*.configs["flat/vue2-essential"]` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `*.configs["flat/vue2-strongly-recommended"]` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `*.configs["flat/vue2-strongly-recommended-error"]` ... Same as vue2-strongly-recommended, except with all rules in this category configured to error instead of warn.
-  - `*.configs["flat/vue2-recommended"]` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-  - `*.configs["flat/vue2-recommended-error"]` ... Same as vue2-recommended, except with all rules in this category configured to error instead of warn.
+  - `*.configs["flat/vue2-strongly-recommended"]` ... `vue2-essential`, plus rules to considerably improve code readability and/or dev experience.
+  - `*.configs["flat/vue2-strongly-recommended-error"]` ... Same as `vue2-strongly-recommended`, except with all rules configured to error instead of warn.
+  - `*.configs["flat/vue2-recommended"]` ... `vue2-strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+  - `*.configs["flat/vue2-recommended-error"]` ... Same as `vue2-recommended`, except with all rules configured to error instead of warn.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
@@ -192,16 +192,16 @@ You can use the following configs by adding them to `extends`.
 - `"plugin:vue/base"` ... Settings and rules to enable correct ESLint parsing.
 - Configurations for using Vue.js 3.x:
   - `"plugin:vue/essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/strongly-recommended-error"` ... Same as strongly-recommended, except with all rules in this category configured to error instead of warn.
-  - `"plugin:vue/recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-  - `"plugin:vue/recommended-error"` ... Same as recommended, except with all rules in this category configured to error instead of warn.
+  - `"plugin:vue/strongly-recommended"` ... `essential`, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/strongly-recommended-error"` ... Same as `strongly-recommended`, except with all rules configured to error instead of warn.
+  - `"plugin:vue/recommended"` ... `strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+  - `"plugin:vue/recommended-error"` ... Same as `recommended`, except with all rules configured to error instead of warn.
 - Configurations for using Vue.js 2.x:
   - `"plugin:vue/vue2-essential"` ... `base`, plus rules to prevent errors or unintended behavior.
-  - `"plugin:vue/vue2-strongly-recommended"` ... Above, plus rules to considerably improve code readability and/or dev experience.
-  - `"plugin:vue/vue2-strongly-recommended-error"` ... Same as vue2-strongly-recommended, except with all rules in this category configured to error instead of warn.
-  - `"plugin:vue/vue2-recommended"` ... Above, plus rules to enforce subjective community defaults to ensure consistency.
-  - `"plugin:vue/vue2-recommended-error"` ... Same as vue2-recommended, except with all rules in this category configured to error instead of warn.
+  - `"plugin:vue/vue2-strongly-recommended"` ... `vue2-essential`, plus rules to considerably improve code readability and/or dev experience.
+  - `"plugin:vue/vue2-strongly-recommended-error"` ... Same as `vue2-strongly-recommended`, except with all rules configured to error instead of warn.
+  - `"plugin:vue/vue2-recommended"` ... `vue2-strongly-recommended`, plus rules to enforce subjective community defaults to ensure consistency.
+  - `"plugin:vue/vue2-recommended-error"` ... Same as `vue2-recommended`, except with all rules configured to error instead of warn.
 
 :::warning Reporting rules
 By default, all rules from **base** and **essential** categories report ESLint errors. Other rules - because they're not covering potential bugs in the application - report warnings. What does it mean? By default - nothing, but if you want - you can set up a threshold and break the build after a certain amount of warnings, instead of any. More information [here](https://eslint.org/docs/user-guide/command-line-interface#handling-warnings).
