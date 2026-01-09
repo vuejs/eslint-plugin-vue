@@ -103,6 +103,7 @@
   "ObjectDirective",
   "FunctionDirective",
   "Directive",
+  "DirectiveModifiers",
   "DirectiveArguments",
   "withDirectives",
   "ComponentCustomProperties",

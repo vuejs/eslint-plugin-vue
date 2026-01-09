@@ -11,6 +11,7 @@
       dark
       :format="format"
       :fix="fix"
+      @keydown.stop
     />
   </div>
 </template>

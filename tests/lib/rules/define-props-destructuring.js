@@ -47,6 +47,30 @@ tester.run('define-props-destructuring', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script setup lang="ts">
+      import type { Props } from './type'
+      const { foo } = defineProps<Props>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { propsObj } from './type'
+      const { foo } = defineProps(propsObj)
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup>
       const props = defineProps(['foo'])
       </script>
@@ -67,6 +91,32 @@ tester.run('define-props-destructuring', rule, {
       code: `
       <script setup lang="ts">
       const props = defineProps<{ foo?: string }>()
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Props } from './type'
+      const props = defineProps<Props>()
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { propsObj } from './type'
+      const props = defineProps(propsObj)
       </script>
       `,
       options: [{ destructure: 'never' }],
@@ -170,6 +220,48 @@ tester.run('define-props-destructuring', rule, {
     {
       filename: 'test.vue',
       code: `
+      <script setup lang="ts">
+      import type { Props } from './type'
+      const props = defineProps<Props>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 41
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { propsObj } from './type'
+      const props = defineProps(propsObj)
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <script setup>
       const { foo } = defineProps(['foo'])
       </script>
@@ -221,6 +313,50 @@ tester.run('define-props-destructuring', rule, {
           column: 23,
           endLine: 3,
           endColumn: 54
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import type { Props } from './type'
+      const { foo } = defineProps<Props>()
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'avoidDestructuring',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      import { propsObj } from './type'
+      const { foo } = defineProps(propsObj)
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'avoidDestructuring',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 44
         }
       ]
     }

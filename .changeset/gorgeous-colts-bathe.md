@@ -2,4 +2,4 @@
 "eslint-plugin-vue": patch
 ---
 
-Updates resources
+Updated Vue 3 export names resources: added `nodeOps` and `patchProp`
