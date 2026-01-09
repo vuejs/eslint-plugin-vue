@@ -547,7 +547,6 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'bar'.",
-          type: 'BinaryExpression',
           line: 1,
           column: 36,
           endLine: 1,
@@ -562,7 +561,6 @@ tester.run('no-duplicate-class-names', rule, {
       errors: [
         {
           message: "Duplicate class name 'foo'.",
-          type: 'TemplateLiteral',
           line: 1,
           column: 36,
           endLine: 1,

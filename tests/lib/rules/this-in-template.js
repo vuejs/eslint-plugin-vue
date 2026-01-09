@@ -77,8 +77,9 @@ function createValidTests(prefix, options) {
   ]
 }
 
-function createInvalidTests(prefix, options, message, type) {
+function createInvalidTests(prefix, options, message) {
   const comment = options.join('')
+  const errorLength = options[0] === 'always' ? 3 : 4
   return [
     {
       code: `<template><div>{{ ${prefix}foo }}</div></template><!-- ${comment} -->`,
@@ -86,7 +87,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo }}</div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 19 + errorLength
+        }
+      ],
       options
     },
     {
@@ -95,7 +104,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo() }}</div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 19 + errorLength
+        }
+      ],
       options
     },
     {
@@ -104,7 +121,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo.bar() }}</div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 19,
+          endLine: 1,
+          endColumn: 19 + errorLength
+        }
+      ],
       options
     },
     {
@@ -113,7 +138,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo"></div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 24 + errorLength
+        }
+      ],
       options
     },
     {
@@ -122,7 +155,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo}"></div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 30 + errorLength
+        }
+      ],
       options
     },
     {
@@ -131,7 +172,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo()}"></div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 30 + errorLength
+        }
+      ],
       options
     },
     {
@@ -140,7 +189,15 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}foo"></div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 22 + errorLength
+        }
+      ],
       options
     },
     {
@@ -149,14 +206,22 @@ function createInvalidTests(prefix, options, message, type) {
         prefix,
         options
       )}bar"></div></template><!-- ${comment} -->`,
-      errors: [{ message, type }],
+      errors: [
+        {
+          message,
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 30 + errorLength
+        }
+      ],
       options
     }
 
     // We cannot use `.` in dynamic arguments because the right of the `.` becomes a modifier.
     // {
     //   code: `<template><div v-on:[${prefix}name]="1"></div></template><!-- ${comment} -->`,
-    //   errors: [{ message, type }],
+    //   errors: [{ message, line: 1, column: 22, endLine: 1, endColumn: 22 + errorLength }],
     //   options
     // }
   ]
@@ -207,46 +272,25 @@ ruleTester.run('this-in-template', rule, {
     })
   ],
   invalid: [
-    ...createInvalidTests(
-      'this.',
-      [],
-      "Unexpected usage of 'this'.",
-      'ThisExpression'
-    ),
-    ...createInvalidTests(
-      'this?.',
-      [],
-      "Unexpected usage of 'this'.",
-      'ThisExpression'
-    ),
-    ...createInvalidTests(
-      'this.',
-      ['never'],
-      "Unexpected usage of 'this'.",
-      'ThisExpression'
-    ),
-    ...createInvalidTests(
-      'this?.',
-      ['never'],
-      "Unexpected usage of 'this'.",
-      'ThisExpression'
-    ),
+    ...createInvalidTests('this.', [], "Unexpected usage of 'this'."),
+    ...createInvalidTests('this?.', [], "Unexpected usage of 'this'."),
+    ...createInvalidTests('this.', ['never'], "Unexpected usage of 'this'."),
+    ...createInvalidTests('this?.', ['never'], "Unexpected usage of 'this'."),
     ...createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'),
     ...[[], ['never']].flatMap((options) => {
       const comment = options.join('')
       const message = "Unexpected usage of 'this'."
-      const type = 'ThisExpression'
       return [
         {
           code: `<template><div>{{ this['xs'] }}</div></template><!-- ${comment} -->`,
           output: `<template><div>{{ xs }}</div></template><!-- ${comment} -->`,
-          errors: [{ message, type }],
+          errors: [{ message, line: 1, column: 19, endLine: 1, endColumn: 23 }],
           options
         },
         {
           code: `<template><div>{{ this['xs0AZ_foo'] }}</div></template><!-- ${comment} -->`,
           output: `<template><div>{{ xs0AZ_foo }}</div></template><!-- ${comment} -->`,
-          errors: [{ message, type }],
+          errors: [{ message, line: 1, column: 19, endLine: 1, endColumn: 23 }],
           options
         }
       ]
@@ -255,13 +299,29 @@ ruleTester.run('this-in-template', rule, {
       code: `<template><div v-if="fn(this.$foo)"></div></template><!-- never -->`,
       output: `<template><div v-if="fn($foo)"></div></template><!-- never -->`,
       options: ['never'],
-      errors: ["Unexpected usage of 'this'."]
+      errors: [
+        {
+          message: "Unexpected usage of 'this'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: `<template><div :class="{ foo: this.$foo }"></div></template><!-- never -->`,
       output: `<template><div :class="{ foo: $foo }"></div></template><!-- never -->`,
       options: ['never'],
-      errors: ["Unexpected usage of 'this'."]
+      errors: [
+        {
+          message: "Unexpected usage of 'this'.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     }
   ]
 })
