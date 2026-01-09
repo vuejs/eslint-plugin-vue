@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-undef-directives
 description: disallow use of undefined custom directives
+since: v10.7.0
 ---
 
 # vue/no-undef-directives
 
 > disallow use of undefined custom directives
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -83,6 +82,10 @@ export default {
 ```
 
 </eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.7.0
 
 ## :mag: Implementation
 
