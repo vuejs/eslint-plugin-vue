@@ -237,7 +237,7 @@ For example:
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-import-compiler-macros] | disallow importing Vue compiler macros | :wrench: | :warning: |
-| [vue/no-literals-in-template] | disallow object literals in template |  | :hammer: |
+| [vue/no-literals-in-template] | disallow object, array, and function literals in template |  | :hammer: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-negated-v-if-condition] | disallow negated conditions in v-if/v-else | :wrench: | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
