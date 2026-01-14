@@ -237,6 +237,7 @@ For example:
 | [vue/no-duplicate-class-names] | disallow duplication of class names in class attributes | :wrench: | :hammer: |
 | [vue/no-empty-component-block] | disallow the `<template>` `<script>` `<style>` block to be empty | :wrench: | :hammer: |
 | [vue/no-import-compiler-macros] | disallow importing Vue compiler macros | :wrench: | :warning: |
+| [vue/no-literals-in-template] | disallow object literals in template |  | :hammer: |
 | [vue/no-multiple-objects-in-class] | disallow passing multiple objects in an array to class |  | :hammer: |
 | [vue/no-negated-v-if-condition] | disallow negated conditions in v-if/v-else | :wrench: | :hammer: |
 | [vue/no-potential-component-option-typo] | disallow a potential typo in your component property | :bulb: | :hammer: |
@@ -480,6 +481,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-import-compiler-macros]: ./no-import-compiler-macros.md
 [vue/no-irregular-whitespace]: ./no-irregular-whitespace.md
 [vue/no-lifecycle-after-await]: ./no-lifecycle-after-await.md
+[vue/no-literals-in-template]: ./no-literals-in-template.md
 [vue/no-lone-template]: ./no-lone-template.md
 [vue/no-loss-of-precision]: ./no-loss-of-precision.md
 [vue/no-multi-spaces]: ./no-multi-spaces.md
