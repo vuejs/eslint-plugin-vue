@@ -155,6 +155,19 @@ tester.run('no-literals-in-template', rule, {
           endColumn: 35
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind="{foo: 1}"></div></template>',
+      errors: [
+        {
+          message: 'Unexpected object literal in template.',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     }
   ]
 })
