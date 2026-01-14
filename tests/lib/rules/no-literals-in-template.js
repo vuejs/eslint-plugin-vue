@@ -33,23 +33,6 @@ tester.run('no-literals-in-template', rule, {
       filename: 'test.vue',
       code: '<template><div v-bind="myProps"></div></template>'
     },
-    // Excluded attributes
-    {
-      filename: 'test.vue',
-      code: '<template><div :class="{ active: isActive }"></div></template>'
-    },
-    {
-      filename: 'test.vue',
-      code: `<template><div :style="{ color: 'red' }"></div></template>`
-    },
-    {
-      filename: 'test.vue',
-      code: `<template><div :class="['active', errorClass]"></div></template>`
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div :style="[baseStyles, overridingStyles]"></div></template>'
-    },
     {
       filename: 'test.vue',
       code: '<template><div v-bind:foo="bar"></div></template>'
@@ -69,6 +52,40 @@ tester.run('no-literals-in-template', rule, {
     {
       filename: 'test.vue',
       code: '<template><div :foo.camel></div></template>'
+    },
+    // Excluded attributes
+    {
+      filename: 'test.vue',
+      code: `<template><div :class="['active', errorClass]"></div></template>`
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :class="{ active: isActive }"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:class="[]"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:class.camel="[]"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `<template><div :style="{ color: 'red' }"></div></template>`
+    },
+
+    {
+      filename: 'test.vue',
+      code: '<template><div :style="[baseStyles, overridingStyles]"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:style="[]"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:style.camel="[]"></div></template>'
     }
   ],
   invalid: [
