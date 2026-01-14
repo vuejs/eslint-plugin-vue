@@ -74,7 +74,6 @@ tester.run('no-literals-in-template', rule, {
       filename: 'test.vue',
       code: `<template><div :style="{ color: 'red' }"></div></template>`
     },
-
     {
       filename: 'test.vue',
       code: '<template><div :style="[baseStyles, overridingStyles]"></div></template>'
