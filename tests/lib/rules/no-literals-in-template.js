@@ -57,7 +57,7 @@ tester.run('no-literals-in-template', rule, {
       code: '<template><div :arr="[]"></div></template>',
       errors: [
         {
-          message: 'Unexpected object literals in template.',
+          message: 'Unexpected array literals in template.',
           line: 1,
           column: 22,
           endLine: 1,
@@ -70,7 +70,7 @@ tester.run('no-literals-in-template', rule, {
       code: '<template><div :arr="[1,2,3]"></div></template>',
       errors: [
         {
-          message: 'Unexpected object literals in template.',
+          message: 'Unexpected array literals in template.',
           line: 1,
           column: 22,
           endLine: 1,
@@ -109,7 +109,7 @@ tester.run('no-literals-in-template', rule, {
       code: '<template><div :callback="() => someFunction(someArgs)"></div></template>',
       errors: [
         {
-          message: 'Unexpected object literals in template.',
+          message: 'Unexpected arrow function literals in template.',
           line: 1,
           column: 27,
           endLine: 1,
@@ -122,7 +122,7 @@ tester.run('no-literals-in-template', rule, {
       code: '<template><div :callback="function() { return 1 }"></div></template>',
       errors: [
         {
-          message: 'Unexpected object literals in template.',
+          message: 'Unexpected function literals in template.',
           line: 1,
           column: 27,
           endLine: 1,
@@ -135,7 +135,7 @@ tester.run('no-literals-in-template', rule, {
       code: '<template><div :arr="[...myArray]"></div></template>',
       errors: [
         {
-          message: 'Unexpected object literals in template.',
+          message: 'Unexpected array literals in template.',
           line: 1,
           column: 22,
           endLine: 1,
