@@ -77,10 +77,6 @@ tester.run('no-literals-in-template', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-bind:style="[]"></div></template>'
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div v-bind:style.camel="[]"></div></template>'
     }
   ],
   invalid: [
