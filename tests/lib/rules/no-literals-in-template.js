@@ -77,6 +77,86 @@ tester.run('no-literals-in-template', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-bind:style="[]"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :data="{ index: i }" />
+          </template>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <MyComponent :data="{ val: foo }" />
+            </template>
+          </Child>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :data="[i]" />
+          </template>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <MyComponent :data="[foo]" />
+            </template>
+          </Child>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :callback="() => someFunction(someArgs, i)" />
+          </template>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <ChildComponent :callback="() => someFunction(someArgs, foo)" />
+            </template>
+          </Child>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :callback="function() { return someFunction(someArgs, i) }" />
+          </template>
+        </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <ChildComponent :callback="function() { return someFunction(someArgs, foo) }" />
+            </template>
+          </Child>
+        </template>`
     }
   ],
   invalid: [
@@ -350,6 +430,158 @@ tester.run('no-literals-in-template', rule, {
           column: 30,
           endLine: 1,
           endColumn: 53
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :data="{ val: globalVars }" />
+          </template>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected object literal in template.',
+          line: 4,
+          column: 33,
+          endLine: 4,
+          endColumn: 52
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <MyComponent :data="{ val: globalVars }" />
+            </template>
+          </Child>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected object literal in template.',
+          line: 5,
+          column: 35,
+          endLine: 5,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :data="[globalVars]" />
+          </template>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected array literal in template.',
+          line: 4,
+          column: 33,
+          endLine: 4,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <MyComponent :data="[globalVars]" />
+            </template>
+          </Child>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected array literal in template.',
+          line: 5,
+          column: 35,
+          endLine: 5,
+          endColumn: 47
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :callback="() => someFunction(someArgs, globalVars)" />
+          </template>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected arrow function literal in template.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 77
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <MyComponent :callback="() => someFunction(someArgs, globalVars)" />
+            </template>
+          </Child>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected arrow function literal in template.',
+          line: 5,
+          column: 39,
+          endLine: 5,
+          endColumn: 79
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <template v-for="i in arr">
+            <MyComponent :callback="function() { return someFunction(someArgs, globalVars) }" />
+          </template>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected function literal in template.',
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 93
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <template>
+          <Child>
+            <template #default="{ foo }">
+              <ChildComponent :callback="function() { return someFunction(someArgs, globalVars) }" />
+            </template>
+          </Child>
+        </template>`,
+      errors: [
+        {
+          message: 'Unexpected function literal in template.',
+          line: 5,
+          column: 42,
+          endLine: 5,
+          endColumn: 98
         }
       ]
     }
