@@ -71,8 +71,7 @@ ruleTester.run('no-deprecated-props-default-this', rule, {
           }
         }
         </script>
-      `,
-      errors: [{}, {}]
+      `
     },
     {
       filename: 'test.vue',
