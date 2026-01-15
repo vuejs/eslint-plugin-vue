@@ -29,7 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
@@ -41,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Cache dist
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           retention-days: 3
           name: dist
@@ -65,7 +65,7 @@ jobs:
       - name: Install Packages
         run: npm install
       - name: Restore dist cache
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist
       - name: Test
@@ -88,7 +88,7 @@ jobs:
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 --force
       - name: Restore dist cache
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist
       - name: Test
@@ -109,7 +109,7 @@ jobs:
       - name: Uninstall @stylistic/eslint-plugin
         run: npm uninstall @stylistic/eslint-plugin
       - name: Restore dist cache
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist
       - name: Test
@@ -133,7 +133,7 @@ jobs:
       - name: Install @stylistic/eslint-plugin v${{ matrix.stylistic }}
         run: npm install -D @stylistic/eslint-plugin@${{ matrix.stylistic }} --force
       - name: Restore dist cache
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist
       - name: Test
@@ -154,7 +154,7 @@ jobs:
       - name: Install @typescript-eslint/parser v7
         run: npm install -D @typescript-eslint/parser@7 --force
       - name: Restore dist cache
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist
       - name: Test
