@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.2",
-    "@eslint/markdown": "^7.1.0",
+    "@eslint/markdown": "^7.5.1",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
     "@stylistic/eslint-plugin": "^5.2.2",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
