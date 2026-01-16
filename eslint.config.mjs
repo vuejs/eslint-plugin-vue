@@ -75,7 +75,7 @@ export default typegen([
     files: ['**/*.{js,mjs,ts,mts}'],
     extends: [
       eslintPluginEslintPlugin.configs.all,
-      eslintPluginUnicorn.configs['flat/recommended']
+      eslintPluginUnicorn.configs.recommended
     ],
     // turn off some rules from shared configs in all files
     rules: {
@@ -87,6 +87,8 @@ export default typegen([
       'unicorn/filename-case': 'off',
       'unicorn/no-null': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+      'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
+      'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
