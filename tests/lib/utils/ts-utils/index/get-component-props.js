@@ -70,7 +70,7 @@ function extractComponentProps(code, tsFileCode) {
   return result
 }
 
-describe('getComponentPropsFromTypeDefineTypes', () => {
+describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
   for (const { scriptCode, tsFileCode, props: expected } of [
     {
       scriptCode: `defineProps<{foo:string,bar?:number}>()`,
