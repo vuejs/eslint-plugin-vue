@@ -113,7 +113,7 @@
     "eslint-visitor-keys": "^4.2.0",
     "espree": "^10.4.0",
     "events": "^3.3.0",
-    "globals": "^15.14.0",
+    "globals": "^17.0.0",
     "jsdom": "^22.0.0",
     "markdownlint-cli": "^0.42.0",
     "pathe": "^1.1.2",
