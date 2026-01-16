@@ -15,8 +15,8 @@ import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
 import rules from './tools/lib/rules.js'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 // @ts-check
 /// <reference path="./eslint-typegen.d.ts" />
@@ -92,7 +92,6 @@ export default typegen([
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
-      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
       'unicorn/prevent-abbreviations': 'off'

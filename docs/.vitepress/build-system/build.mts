@@ -3,8 +3,8 @@
  */
 import esbuild from 'esbuild'
 import path from 'pathe'
-import fs from 'fs'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 

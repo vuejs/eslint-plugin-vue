@@ -1,7 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
 import eslint4b, { requireESLintUseAtYourOwnRisk4b } from 'vite-plugin-eslint4b'
 
