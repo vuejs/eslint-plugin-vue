@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-literals-in-template
 description: disallow object, array, and function literals in template
+since: v10.7.0
 ---
 
 # vue/no-literals-in-template
 
 > disallow object, array, and function literals in template
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -78,6 +77,10 @@ Nothing.
 ## :books: Further Reading
 
 - [vuejs/vue#4060](https://github.com/vuejs/vue/issues/4060)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.7.0
 
 ## :mag: Implementation
 

@@ -1,5 +1,22 @@
 # eslint-plugin-vue
 
+## 10.7.0
+
+### Minor Changes
+
+- Added [new `-error` config variants](https://eslint.vuejs.org/user-guide/#bundle-configurations-eslint-config-js), with all rules' severity set to `error`: `strongly-recommended-error`, `recommended-error`, `vue2-strongly-recommended-error`, `vue2-recommended-error` (along with their flat config equivalents) ([#2796](https://github.com/vuejs/eslint-plugin-vue/pull/2796))
+- Added new [`vue/no-literals-in-template`](https://eslint.vuejs.org/rules/no-literals-in-template.html) rule ([#3000](https://github.com/vuejs/eslint-plugin-vue/pull/3000))
+- Added new [`vue/no-undef-directives`](https://eslint.vuejs.org/rules/no-undef-directives.html) rule ([#2990](https://github.com/vuejs/eslint-plugin-vue/pull/2990))
+- Added new `ignoreEOLComments` option to [`vue/no-multi-spaces`](https://eslint.vuejs.org/rules/no-multi-spaces.html) rule ([#2989](https://github.com/vuejs/eslint-plugin-vue/pull/2989))
+- Changed [`vue/no-negated-v-if-condition`](https://eslint.vuejs.org/rules/no-negated-v-if-condition.html) suggestion to autofix ([#2984](https://github.com/vuejs/eslint-plugin-vue/pull/2984))
+- Added TypeScript support for eslint-plugin-vue development ([#2916](https://github.com/vuejs/eslint-plugin-vue/pull/2916))
+
+### Patch Changes
+
+- Fixed false positives in [`vue/define-props-destructuring`](https://eslint.vuejs.org/rules/define-props-destructuring.html) rule when imported types are passed to `defineProps` ([#2995](https://github.com/vuejs/eslint-plugin-vue/pull/2995))
+- Updated Vue 3 export names resources: added `DirectiveModifiers` ([#2996](https://github.com/vuejs/eslint-plugin-vue/pull/2996))
+- Updated Vue 3 export names resources: added `nodeOps` and `patchProp` ([#2986](https://github.com/vuejs/eslint-plugin-vue/pull/2986))
+
 ## 10.6.2
 
 ### Patch Changes
