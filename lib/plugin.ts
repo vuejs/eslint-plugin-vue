@@ -106,6 +106,7 @@ import noImplicitCoercion from './rules/no-implicit-coercion.js'
 import noImportCompilerMacros from './rules/no-import-compiler-macros.js'
 import noIrregularWhitespace from './rules/no-irregular-whitespace.js'
 import noLifecycleAfterAwait from './rules/no-lifecycle-after-await.js'
+import noLiteralsInTemplate from './rules/no-literals-in-template.js'
 import noLoneTemplate from './rules/no-lone-template.js'
 import noLossOfPrecision from './rules/no-loss-of-precision.js'
 import noMultiSpaces from './rules/no-multi-spaces.js'
@@ -360,6 +361,7 @@ export default {
     'no-import-compiler-macros': noImportCompilerMacros,
     'no-irregular-whitespace': noIrregularWhitespace,
     'no-lifecycle-after-await': noLifecycleAfterAwait,
+    'no-literals-in-template': noLiteralsInTemplate,
     'no-lone-template': noLoneTemplate,
     'no-loss-of-precision': noLossOfPrecision,
     'no-multi-spaces': noMultiSpaces,
