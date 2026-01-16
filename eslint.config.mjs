@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import eslintConfigFlatGitIgnore from 'eslint-config-flat-gitignore'
-import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
+import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
@@ -74,7 +74,7 @@ export default typegen([
   ...defineConfig({
     files: ['**/*.{js,mjs,ts,mts}'],
     extends: [
-      eslintPluginEslintPlugin,
+      eslintPluginEslintPlugin.configs.all,
       eslintPluginUnicorn.configs['flat/recommended']
     ],
     // turn off some rules from shared configs in all files
@@ -82,6 +82,7 @@ export default typegen([
       'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-schema-description': 'off',
+      'eslint-plugin/require-test-case-name': 'off',
 
       'unicorn/filename-case': 'off',
       'unicorn/no-null': 'off',

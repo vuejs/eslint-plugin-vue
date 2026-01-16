@@ -101,7 +101,7 @@
     "eslint": "^9.32.0",
     "eslint-config-flat-gitignore": "^2.1.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-eslint-plugin": "~6.4.0",
+    "eslint-plugin-eslint-plugin": "^7.3.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsonc": "^2.16.0",
     "eslint-plugin-markdown-preferences": "^0.7.0",
