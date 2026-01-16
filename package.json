@@ -2,8 +2,8 @@
   "name": "eslint-plugin-vue",
   "version": "10.6.2",
   "description": "Official ESLint plugin for Vue.js",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch",
@@ -22,15 +22,16 @@
     "update": "node ./tools/update.js",
     "update-resources": "node ./tools/update-resources.js",
     "typegen": "node ./tools/generate-typegen.mjs",
+    "build": "npm run typegen && tsdown",
     "docs:watch": "vitepress dev docs",
     "predocs:build": "npm run update",
     "docs:build": "vitepress build docs",
     "generate:version": "env-cmd -e version npm run update && npm run lint:fix",
     "changeset:version": "changeset version && npm run generate:version && git add --all",
-    "changeset:publish": "npm run typegen && changeset publish"
+    "changeset:publish": "npm run build && changeset publish"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "homepage": "https://eslint.vuejs.org",
   "keywords": [
@@ -117,6 +118,7 @@
     "markdownlint-cli": "^0.42.0",
     "pathe": "^1.1.2",
     "prettier": "^3.7.0",
+    "tsdown": "^0.19.0",
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",

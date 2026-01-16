@@ -1,44 +1,34 @@
 /**
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
-'use strict'
+import type { Linter } from 'eslint'
+import meta from './meta.ts'
 
-/**
- * @typedef {import('eslint').Linter.LintMessage} LintMessage
- */
-/**
- * @typedef {object} GroupState
- * @property {Set<string>} GroupState.disableAllKeys
- * @property {Map<string, string[]>} GroupState.disableRuleKeys
- */
+type LintMessage = Linter.LintMessage
 
-module.exports = {
-  /** @param {string} code */
-  preprocess(code) {
+interface GroupState {
+  disableAllKeys: Set<string>
+  disableRuleKeys: Map<string, string[]>
+}
+
+export default {
+  preprocess(code: string): string[] {
     return [code]
   },
 
-  /**
-   * @param {LintMessage[][]} messages
-   * @returns {LintMessage[]}
-   */
-  postprocess(messages) {
+  postprocess(messages: LintMessage[][]): LintMessage[] {
     const state = {
-      /** @type {GroupState} */
       block: {
-        disableAllKeys: new Set(),
-        disableRuleKeys: new Map()
-      },
-      /** @type {GroupState} */
+        disableAllKeys: new Set<string>(),
+        disableRuleKeys: new Map<string, string[]>()
+      } satisfies GroupState,
       line: {
-        disableAllKeys: new Set(),
-        disableRuleKeys: new Map()
-      }
+        disableAllKeys: new Set<string>(),
+        disableRuleKeys: new Map<string, string[]>()
+      } satisfies GroupState
     }
-    /** @type {string[]} */
-    const usedDisableDirectiveKeys = []
-    /** @type {Map<string,LintMessage>} */
-    const unusedDisableDirectiveReports = new Map()
+    const usedDisableDirectiveKeys: string[] = []
+    const unusedDisableDirectiveReports = new Map<string, LintMessage>()
 
     // Filter messages which are in disabled area.
     const filteredMessages = messages[0].filter((message) => {
@@ -136,15 +126,14 @@ module.exports = {
 
   supportsAutofix: true,
 
-  meta: require('./meta')
+  meta
 }
 
-/**
- * @param {Map<string, string[]>} disableRuleKeys
- * @param {string} rule
- * @param {string} key
- */
-function addDisableRule(disableRuleKeys, rule, key) {
+function addDisableRule(
+  disableRuleKeys: GroupState['disableRuleKeys'],
+  rule: string,
+  key: string
+): void {
   let keys = disableRuleKeys.get(rule)
   if (keys) {
     keys.push(key)
@@ -154,11 +143,7 @@ function addDisableRule(disableRuleKeys, rule, key) {
   }
 }
 
-/**
- * @param {LintMessage} message
- * @returns {string} message key
- */
-function messageToKey(message) {
+function messageToKey(message: LintMessage): string {
   return `line:${message.line},column${
     // -1 because +1 by ESLint's `report-translator`.
     message.column - 1
@@ -167,11 +152,11 @@ function messageToKey(message) {
 
 /**
  * Compares the locations of two objects in a source file
- * @param {Position} itemA The first object
- * @param {Position} itemB The second object
- * @returns {number} A value less than 1 if itemA appears before itemB in the source file, greater than 1 if
+ * @param itemA The first object
+ * @param itemB The second object
+ * @returns A value less than 1 if itemA appears before itemB in the source file, greater than 1 if
  * itemA appears after itemB in the source file, or 0 if itemA and itemB have the same location.
  */
-function compareLocations(itemA, itemB) {
+function compareLocations(itemA: Position, itemB: Position): number {
   return itemA.line - itemB.line || itemA.column - itemB.column
 }

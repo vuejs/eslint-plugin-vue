@@ -62,7 +62,7 @@ module.exports = [
     name: 'vue/base/setup',
     plugins: {
       get vue() {
-        return require('../../plugin')
+        return require('../../plugin.ts').default
       }
     },
     languageOptions: {
@@ -74,7 +74,7 @@ module.exports = [
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
-        return require('../../plugin')
+        return require('../../plugin.ts').default
       }
     },
     languageOptions: {
