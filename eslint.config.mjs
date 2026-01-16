@@ -92,7 +92,7 @@ export default typegen([
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
-      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-top-level-await': 'off', // only available in ESM modules
       'unicorn/prevent-abbreviations': 'off'
     }
   }),
