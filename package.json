@@ -94,7 +94,7 @@
     "@typescript-eslint/eslint-plugin": "^8.35.1",
     "@typescript-eslint/parser": "^8.35.1",
     "@typescript-eslint/types": "^8.35.1",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/coverage-v8": "^4.0.17",
     "assert": "^2.1.0",
     "env-cmd": "^10.1.0",
     "esbuild": "^0.24.0",
@@ -122,7 +122,7 @@
     "typescript": "^5.7.2",
     "vite-plugin-eslint4b": "^0.5.1",
     "vitepress": "^1.4.1",
-    "vitest": "^3.2.4",
+    "vitest": "^4.0.17",
     "vue-eslint-parser": "^10.0.0"
   }
 }
