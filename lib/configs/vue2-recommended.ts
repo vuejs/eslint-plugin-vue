@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./vue3-strongly-recommended'),
+import vue2StronglyRecommended from './vue2-strongly-recommended.ts'
+
+export default {
+  extends: vue2StronglyRecommended,
   rules: {
     'vue/attributes-order': 'warn',
     'vue/block-order': 'warn',

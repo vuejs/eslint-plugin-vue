@@ -13,6 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const { categories } = require('./lib/categories')
+const { camelCase } = require('./lib/utils')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
@@ -56,7 +57,9 @@ function formatCategory(category, alwaysError = false) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+import vueParser from 'vue-eslint-parser'
+
+export default {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
@@ -68,7 +71,7 @@ module.exports = {
   overrides: [
     {
       files: '*.vue',
-      parser: require.resolve('vue-eslint-parser')
+      parser: vueParser
     }
   ]
 }
@@ -83,8 +86,10 @@ module.exports = {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./${extendsCategoryId}'),
+import ${camelCase(extendsCategoryId)} from './${extendsCategoryId}.ts'
+
+export default {
+  extends: ${camelCase(extendsCategoryId)},
   rules: ${formatRules(category.rules, category.categoryId, alwaysError)}
 }
 `
@@ -93,14 +98,14 @@ module.exports = {
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/')
 for (const category of categories) {
-  const filePath = path.join(ROOT, `${category.categoryId}.js`)
+  const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
 
   if (!errorCategories.has(category.categoryId)) {
     fs.writeFileSync(
-      path.join(ROOT, `${category.categoryId}-error.js`),
+      path.join(ROOT, `${category.categoryId}-error.ts`),
       formatCategory(category, true)
     )
   }

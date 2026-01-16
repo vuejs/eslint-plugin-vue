@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./vue2-strongly-recommended-error'),
+import vue2StronglyRecommendedError from './vue2-strongly-recommended-error.ts'
+
+export default {
+  extends: vue2StronglyRecommendedError,
   rules: {
     'vue/attributes-order': 'error',
     'vue/block-order': 'error',

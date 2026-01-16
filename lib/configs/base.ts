@@ -3,7 +3,9 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+import vueParser from 'vue-eslint-parser'
+
+export default {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
@@ -16,7 +18,7 @@ module.exports = {
   overrides: [
     {
       files: '*.vue',
-      parser: require.resolve('vue-eslint-parser')
+      parser: vueParser
     }
   ]
 }

@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./vue3-essential'),
+import vue3Essential from './vue3-essential.ts'
+
+export default {
+  extends: vue3Essential,
   rules: {
     'vue/attribute-hyphenation': 'warn',
     'vue/component-definition-name-casing': 'warn',
