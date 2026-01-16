@@ -13,7 +13,7 @@ export function vitePluginRequireResolve(): Plugin {
     name: 'vite-plugin-require.resolve',
     transform(code, id) {
       if (id.startsWith(libRoot)) {
-        return code.replace(/require\.resolve/gu, '(function(){return 0})')
+        return code.replaceAll('require.resolve', '(function(){return 0})')
       }
       return undefined
     }
@@ -51,7 +51,7 @@ function transformRequire(code: string) {
     return code
   }
   const modules = new Map()
-  const replaced = code.replace(
+  const replaced = code.replaceAll(
     /(\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)|\brequire\s*\(\s*(["'].*?["'])\s*\)/gu,
     (match, comment, moduleString) => {
       if (comment) {
@@ -61,7 +61,7 @@ function transformRequire(code: string) {
       let id =
         // eslint-disable-next-line prefer-template
         '__' +
-        moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') +
+        moduleString.replaceAll(/[^a-zA-Z0-9_$]+/gu, '_') +
         Math.random().toString(32).slice(2)
       while (code.includes(id) || modules.has(id)) {
         id += Math.random().toString(32).slice(2)

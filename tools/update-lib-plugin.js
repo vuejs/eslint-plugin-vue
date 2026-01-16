@@ -15,7 +15,7 @@ const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
 
 function camelCase(str) {
-  return str.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+  return str.replaceAll(/-([a-z])/g, (match, letter) => letter.toUpperCase())
 }
 
 // Update files.

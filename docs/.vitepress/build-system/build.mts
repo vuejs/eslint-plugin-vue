@@ -75,13 +75,13 @@ function transform(code: string, injects: string[]) {
 ${normalizeInjects
   .map(
     (inject) =>
-      `import $inject_${inject.replace(/[\-:]/gu, '_')}$ from '${inject}';`
+      `import $inject_${inject.replaceAll(/[\-:]/gu, '_')}$ from '${inject}';`
   )
   .join('\n')}
 const $_injects_$ = {${injects
     .map(
       (inject) =>
-        `"${inject}":$inject_${inject.replace(/^node:/u, '').replace(/[\-:]/gu, '_')}$`
+        `"${inject}":$inject_${inject.replace(/^node:/u, '').replaceAll(/[\-:]/gu, '_')}$`
     )
     .join(',\n')}};
 function require(module, ...args) {

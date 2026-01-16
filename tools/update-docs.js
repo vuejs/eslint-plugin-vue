@@ -76,7 +76,7 @@ class DocFile {
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
     this.content = fileIntroPattern.test(this.content)
-      ? this.content.replace(fileIntroPattern, computed)
+      ? this.content.replaceAll(fileIntroPattern, computed)
       : `${computed}${this.content.trim()}\n`
 
     return this
@@ -88,8 +88,8 @@ class DocFile {
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
     const escapedDescription = description
-      .replace(/\*/g, String.raw`\*`)
-      .replace(/_/g, String.raw`\_`)
+      .replaceAll('*', String.raw`\*`)
+      .replaceAll('_', String.raw`\_`)
     const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
@@ -163,7 +163,7 @@ class DocFile {
   updateCodeBlocks() {
     const { meta } = this.rule
 
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /<eslint-code-block\s(:?fix\S*)?\s*/g,
       `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
     )
@@ -172,11 +172,11 @@ class DocFile {
 
   adjustCodeBlocks() {
     // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /(<eslint-code-block([\S\s]*?)>)\n+```/gm,
       '$1\n\n```'
     )
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /```\n+<\/eslint-code-block>/gm,
       '```\n\n</eslint-code-block>'
     )
