@@ -237,9 +237,9 @@ tester.run('no-restricted-custom-event', rule, {
           suggestions: [
             {
               desc: "Instead, change to `foo'`.",
-              output: `
+              output: String.raw`
       <template>
-        <button @click="$emit('foo\\'')"></button>
+        <button @click="$emit('foo\'')"></button>
       </template>
       `
             }
