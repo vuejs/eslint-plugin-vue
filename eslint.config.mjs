@@ -330,6 +330,7 @@ export default typegen([
       rules: {
         'prettier/prettier': 'off',
         'markdown/no-missing-link-fragments': 'off',
+        'markdown/no-multiple-h1': 'off',
 
         'markdown-preferences/prefer-linked-words': [
           'error',
