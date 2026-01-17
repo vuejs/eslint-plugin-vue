@@ -3,7 +3,11 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
+
+export default {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'

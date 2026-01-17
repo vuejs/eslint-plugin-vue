@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./base'),
+import base from './base.ts'
+
+export default {
+  extends: base,
   rules: {
     'vue/multi-word-component-names': 'error',
     'vue/no-arrow-functions-in-watch': 'error',

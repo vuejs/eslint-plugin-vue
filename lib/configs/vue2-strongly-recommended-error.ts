@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  extends: require.resolve('./vue3-essential'),
+import vue2Essential from './vue2-essential.ts'
+
+export default {
+  extends: vue2Essential,
   rules: {
     'vue/attribute-hyphenation': 'error',
     'vue/component-definition-name-casing': 'error',
@@ -24,17 +26,9 @@ module.exports = {
     'vue/one-component-per-file': 'error',
     'vue/prop-name-casing': 'error',
     'vue/require-default-prop': 'error',
-    'vue/require-explicit-emits': 'error',
     'vue/require-prop-types': 'error',
     'vue/singleline-html-element-content-newline': 'error',
     'vue/v-bind-style': 'error',
-    'vue/v-on-event-hyphenation': [
-      'error',
-      'always',
-      {
-        autofix: true
-      }
-    ],
     'vue/v-on-style': 'error',
     'vue/v-slot-style': 'error'
   }
