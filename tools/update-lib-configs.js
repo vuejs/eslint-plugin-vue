@@ -57,7 +57,9 @@ function formatCategory(category, alwaysError = false) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-import vueParser from 'vue-eslint-parser'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 
 export default {
   parserOptions: {
@@ -71,7 +73,7 @@ export default {
   overrides: [
     {
       files: '*.vue',
-      parser: vueParser
+      parser: require.resolve('vue-eslint-parser')
     }
   ]
 }
