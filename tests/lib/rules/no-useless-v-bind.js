@@ -39,10 +39,10 @@ tester.run('no-useless-v-bind', rule, {
       options: [{ ignoreIncludesComment: true }]
     },
     {
-      code: `
+      code: String.raw`
       <template>
-        <div :id="'\\n'" />
-        <div :id="'\\r'" />
+        <div :id="'\n'" />
+        <div :id="'\r'" />
       </template>`,
       options: [{ ignoreStringEscape: true }]
     }
@@ -91,10 +91,10 @@ tester.run('no-useless-v-bind', rule, {
       ]
     },
     {
-      code: `
+      code: String.raw`
       <template>
-        <div :id="'\\n'" />
-        <div :id="'\\r'" />
+        <div :id="'\n'" />
+        <div :id="'\r'" />
       </template>`,
       output: null,
       errors: [

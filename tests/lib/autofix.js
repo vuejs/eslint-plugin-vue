@@ -6,7 +6,7 @@
 
 const Linter = require('../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
-const assert = require('assert')
+const assert = require('node:assert')
 
 const rules = require('../..').rules
 

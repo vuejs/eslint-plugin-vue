@@ -53,4 +53,4 @@ If you're stuck, remember there are many rules available for reference. If you c
 
 ## :lock: License
 
-See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
+See the [LICENSE](./LICENSE) file for license rights and limitations (MIT).

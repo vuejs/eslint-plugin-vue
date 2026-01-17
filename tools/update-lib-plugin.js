@@ -9,13 +9,13 @@
 This script updates `lib/plugin.js` file from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
 
 function camelCase(str) {
-  return str.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+  return str.replaceAll(/-([a-z])/g, (match, letter) => letter.toUpperCase())
 }
 
 // Update files.

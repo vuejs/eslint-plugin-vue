@@ -38,10 +38,10 @@ tester.run('no-useless-mustaches', rule, {
       options: [{ ignoreIncludesComment: true }]
     },
     {
-      code: `
+      code: String.raw`
       <template>
-        {{ '\\n' }}
-        {{ '\\r' }}
+        {{ '\n' }}
+        {{ '\r' }}
       </template>`,
       options: [{ ignoreStringEscape: true }]
     }
@@ -81,10 +81,10 @@ tester.run('no-useless-mustaches', rule, {
       ]
     },
     {
-      code: `
+      code: String.raw`
       <template>
-        {{ '\\n' }}
-        {{ '\\r' }}
+        {{ '\n' }}
+        {{ '\r' }}
       </template>`,
       output: null,
       errors: [

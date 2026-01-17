@@ -9,8 +9,8 @@
 This script updates `lib/configs/*.js` files from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const { categories } = require('./lib/categories')
 

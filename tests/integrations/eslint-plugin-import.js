@@ -5,8 +5,8 @@
  */
 'use strict'
 
-const cp = require('child_process')
-const path = require('path')
+const cp = require('node:child_process')
+const path = require('node:path')
 const semver = require('semver')
 
 const PLUGIN_DIR = path.join(__dirname, 'eslint-plugin-import')

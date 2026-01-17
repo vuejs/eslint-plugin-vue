@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('node:path')
 const tsParser = require('@typescript-eslint/parser')
 
 const FIXTURES_ROOT = path.resolve(__dirname, '../fixtures/typescript')

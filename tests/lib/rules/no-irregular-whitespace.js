@@ -48,7 +48,7 @@ tester.run('no-irregular-whitespace', rule, {
     'var a = \t\r\n b',
     '<template><div attr=" \t\r\n " :dir=" \t\r\n foo  \t\r\n " > \t\r\n s \t\r\n </div></template><script>var a = \t\r\n b</script>',
     // escapes
-    ...ALL_IRREGULAR_WHITESPACE_CODES.map((s) => `/\\u${s}/+'\\u${s}'`),
+    ...ALL_IRREGULAR_WHITESPACE_CODES.map((s) => String.raw`/\u${s}/+'\u${s}'`),
     // html escapes
     ...ALL_IRREGULAR_WHITESPACE_CODES.map(
       (s) => `<template><div attr="&#x${s}">&#x${s}s&#x${s}</div></template>`

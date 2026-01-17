@@ -14,10 +14,9 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'v8',
-      include: ['lib/**/*.js'],
+      include: ['lib/**/*.{js,ts}'],
       exclude: ['tests/**', 'dist/**', 'tools/**', 'node_modules/**'],
       reporter: ['text', 'lcov', 'json-summary', 'html'],
-      all: true,
       reportsDirectory: './coverage'
     }
   }

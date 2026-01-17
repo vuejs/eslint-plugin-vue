@@ -3,10 +3,8 @@
     "target": "esnext",
     "module": "preserve",
     "moduleResolution": "bundler",
-    "lib": ["es2020"],
-    "types": [
-      "vitest/globals"
-    ],
+    "lib": ["es2022"],
+    "types": ["vitest/globals"],
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,

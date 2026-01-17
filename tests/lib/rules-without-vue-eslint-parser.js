@@ -6,7 +6,7 @@
 
 const Linter = require('../eslint-compat').Linter
 const rules = require('../..').rules
-const assert = require('assert')
+const assert = require('node:assert')
 
 describe("Don't crash even if without vue-eslint-parser.", () => {
   const code = '<template><div>TEST</div></template>'
