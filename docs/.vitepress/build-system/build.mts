@@ -15,11 +15,8 @@ build(
   ),
   path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
   [
-    'util',
     'node:util',
-    'path',
     'node:path',
-    'fs',
     'node:fs',
     'semver',
     'fast-glob',
@@ -32,14 +29,14 @@ build(
   path.join(dirname, '../../../node_modules/vue-eslint-parser/index.js'),
   path.join(dirname, './shim/vue-eslint-parser.mjs'),
   [
-    'path',
+    'node:path',
+    'node:assert',
+    'node:module',
+    'node:events',
+    'node:fs',
     'debug',
     'semver',
-    'assert',
-    'module',
-    'events',
     'esquery',
-    'fs',
     'eslint'
   ]
 )
@@ -47,8 +44,14 @@ build(
 function build(input: string, out: string, injects: string[] = []) {
   // eslint-disable-next-line no-console -- ignore
   console.log(`build@ ${input}`)
-  let code = bundle(input, injects)
-  code = transform(code, injects)
+  const normalizedInjects = [
+    ...injects,
+    ...injects.flatMap((inject) =>
+      inject.startsWith('node:') ? [inject.replace(/^node:/u, '')] : []
+    )
+  ]
+  let code = bundle(input, normalizedInjects)
+  code = transform(code, normalizedInjects)
   fs.mkdirSync(path.dirname(out), { recursive: true })
   fs.writeFileSync(out, code, 'utf8')
 }
@@ -67,12 +70,9 @@ function bundle(entryPoint: string, externals: string[]) {
 }
 
 function transform(code: string, injects: string[]) {
-  const normalizeInjects = [
-    ...new Set(injects.map((inject) => inject.replace(/^node:/u, '')))
-  ]
   const newCode = code.replace(/"[a-z]+" = "[a-z]+";/u, '')
   return `
-${normalizeInjects
+${injects
   .map(
     (inject) =>
       `import $inject_${inject.replaceAll(/[\-:]/gu, '_')}$ from '${inject}';`
@@ -80,8 +80,7 @@ ${normalizeInjects
   .join('\n')}
 const $_injects_$ = {${injects
     .map(
-      (inject) =>
-        `"${inject}":$inject_${inject.replace(/^node:/u, '').replaceAll(/[\-:]/gu, '_')}$`
+      (inject) => `"${inject}":$inject_${inject.replaceAll(/[\-:]/gu, '_')}$`
     )
     .join(',\n')}};
 function require(module, ...args) {

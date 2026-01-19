@@ -163,7 +163,8 @@ export default async () => {
           globby: path.join(dirname, './build-system/shim/empty.mjs'),
           'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
           tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/empty.mjs')
+          module: path.join(dirname, './build-system/shim/empty.mjs'),
+          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
         }
       },
       define: {
