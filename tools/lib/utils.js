@@ -1,4 +1,4 @@
-module.exports = { getPresetIds, formatItems, camelCase }
+module.exports = { getPresetIds, formatItems }
 
 const presetCategories = {
   base: null,
@@ -39,8 +39,4 @@ function getPresetIds(categoryIds) {
     return categoryIds
   }
   return [...new Set([...categoryIds, ...getPresetIds(subsetCategoryIds)])]
-}
-
-function camelCase(str) {
-  return str.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
 }

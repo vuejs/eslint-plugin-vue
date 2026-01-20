@@ -13,7 +13,7 @@ const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const { categories } = require('./lib/categories')
-const { camelCase } = require('./lib/utils')
+const { camelCase } = require('../lib/utils/casing')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
