@@ -1,16 +1,15 @@
-const { isVElement } = require('..')
+import utils from '../index.js'
 
-class StyleVariablesContext {
-  /**
-   * @param {RuleContext} context
-   * @param {VElement[]} styles
-   */
-  constructor(context, styles) {
+export class StyleVariablesContext {
+  context: RuleContext
+  styles: VElement[]
+  references: VReference[]
+  vBinds: VExpressionContainer[]
+
+  constructor(context: RuleContext, styles: VElement[]) {
     this.context = context
     this.styles = styles
-    /** @type {VReference[]} */
     this.references = []
-    /** @type {VExpressionContainer[]} */
     this.vBinds = []
     for (const style of styles) {
       for (const node of style.children) {
@@ -27,19 +26,13 @@ class StyleVariablesContext {
   }
 }
 
-module.exports = {
-  getStyleVariablesContext,
-  StyleVariablesContext
-}
-
-/** @type {WeakMap<VElement, StyleVariablesContext>} */
-const cache = new WeakMap()
+const cache: WeakMap<VElement, StyleVariablesContext> = new WeakMap()
 /**
  * Get the style vars context
- * @param {RuleContext} context
- * @returns {StyleVariablesContext | null}
  */
-function getStyleVariablesContext(context) {
+export function getStyleVariablesContext(
+  context: RuleContext
+): StyleVariablesContext | null {
   const sourceCode = context.sourceCode
   const df =
     sourceCode.parserServices.getDocumentFragment &&
@@ -48,8 +41,7 @@ function getStyleVariablesContext(context) {
     return null
   }
   const styles = df.children.filter(
-    /** @returns {e is VElement} */
-    (e) => isVElement(e) && e.name === 'style'
+    (e): e is VElement => utils.isVElement(e) && e.name === 'style'
   )
   if (styles.length === 0) {
     return null
