@@ -32,8 +32,8 @@ function hasUpper(str: string): boolean {
  */
 export function kebabCase(str: string): string {
   return str
-    .replace(/_/gu, '-')
-    .replace(/\B([A-Z])/gu, '-$1')
+    .replaceAll('_', '-')
+    .replaceAll(/\B([A-Z])/gu, '-$1')
     .toLowerCase()
 }
 
@@ -58,8 +58,8 @@ export function isKebabCase(str: string): boolean {
  */
 export function snakeCase(str: string): string {
   return str
-    .replace(/\B([A-Z])/gu, '_$1')
-    .replace(/-/gu, '_')
+    .replaceAll(/\B([A-Z])/gu, '_$1')
+    .replaceAll('-', '_')
     .toLowerCase()
 }
 
@@ -81,7 +81,7 @@ export function camelCase(str: string): string {
   if (isPascalCase(str)) {
     return str.charAt(0).toLowerCase() + str.slice(1)
   }
-  return str.replace(/[-_](\w)/gu, (_, c) => (c ? c.toUpperCase() : ''))
+  return str.replaceAll(/[-_](\w)/gu, (_, c) => (c ? c.toUpperCase() : ''))
 }
 
 /**

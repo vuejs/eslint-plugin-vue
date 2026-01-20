@@ -8,6 +8,13 @@ no-inline-html:
     - sup
     - rules-table
     - span
+descriptive-link-text:
+  prohibited_texts:
+    - click here
+    # - here
+    - link
+    - more
+table-column-style: false  
 
 # enforce consistency
 code-block-style:

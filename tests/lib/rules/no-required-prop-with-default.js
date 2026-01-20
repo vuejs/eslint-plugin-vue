@@ -495,30 +495,30 @@ tester.run('no-required-prop-with-default', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
+      code: String.raw`
         <script setup lang="ts">
           interface TestPropType {
-            'na\\"me2'
+            'na\"me2'
             age?: number
           }
           const props = withDefaults(
             defineProps<TestPropType>(),
             {
-              'na\\"me2': "World",
+              'na\"me2': "World",
             }
           );
         </script>
       `,
-      output: `
+      output: String.raw`
         <script setup lang="ts">
           interface TestPropType {
-            'na\\"me2'?
+            'na\"me2'?
             age?: number
           }
           const props = withDefaults(
             defineProps<TestPropType>(),
             {
-              'na\\"me2': "World",
+              'na\"me2': "World",
             }
           );
         </script>
@@ -667,7 +667,7 @@ tester.run('no-required-prop-with-default', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
+      code: String.raw`
         <script setup lang="ts">
           interface TestPropType {
             readonly 'a'
@@ -676,12 +676,12 @@ tester.run('no-required-prop-with-default', rule, {
           const props = withDefaults(
             defineProps<TestPropType>(),
             {
-              '\\u0061': 'World',
+              '\u0061': 'World',
             }
           );
         </script>
       `,
-      output: `
+      output: String.raw`
         <script setup lang="ts">
           interface TestPropType {
             readonly 'a'?
@@ -690,7 +690,7 @@ tester.run('no-required-prop-with-default', rule, {
           const props = withDefaults(
             defineProps<TestPropType>(),
             {
-              '\\u0061': 'World',
+              '\u0061': 'World',
             }
           );
         </script>
@@ -710,10 +710,10 @@ tester.run('no-required-prop-with-default', rule, {
     },
     {
       filename: 'test.vue',
-      code: `
+      code: String.raw`
         <script setup lang="ts">
           interface TestPropType {
-            readonly '\\u0061'
+            readonly '\u0061'
             age?: number
           }
           const props = withDefaults(
@@ -724,10 +724,10 @@ tester.run('no-required-prop-with-default', rule, {
           );
         </script>
       `,
-      output: `
+      output: String.raw`
         <script setup lang="ts">
           interface TestPropType {
-            readonly '\\u0061'?
+            readonly '\u0061'?
             age?: number
           }
           const props = withDefaults(

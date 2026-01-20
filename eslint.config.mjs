@@ -1,7 +1,7 @@
 import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import eslintConfigFlatGitIgnore from 'eslint-config-flat-gitignore'
-import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin/configs/all'
+import eslintPluginEslintPlugin from 'eslint-plugin-eslint-plugin'
 import eslintPluginJsonc from 'eslint-plugin-jsonc'
 import eslintPluginNodeDependencies from 'eslint-plugin-node-dependencies'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
@@ -15,8 +15,8 @@ import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
 import rules from './tools/lib/rules.js'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 // @ts-check
 /// <reference path="./eslint-typegen.d.ts" />
@@ -74,26 +74,25 @@ export default typegen([
   ...defineConfig({
     files: ['**/*.{js,mjs,ts,mts}'],
     extends: [
-      eslintPluginEslintPlugin,
-      eslintPluginUnicorn.configs['flat/recommended']
+      eslintPluginEslintPlugin.configs.all,
+      eslintPluginUnicorn.configs.recommended
     ],
     // turn off some rules from shared configs in all files
     rules: {
       'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
       'eslint-plugin/require-meta-schema-description': 'off',
+      'eslint-plugin/require-test-case-name': 'off',
 
       'unicorn/filename-case': 'off',
       'unicorn/no-null': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
+      'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
+      'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
-      'unicorn/prefer-optional-catch-binding': 'off', // not supported by current ESLint parser version
-      'unicorn/prefer-at': 'off', //                 turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-node-protocol': 'off', //      turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-string-replace-all': 'off', // turn off to prevent make breaking changes (ref: #2146)
-      'unicorn/prefer-top-level-await': 'off', //    turn off to prevent make breaking changes (ref: #2146)
+      'unicorn/prefer-top-level-await': 'off', // only available in ESM modules
       'unicorn/prevent-abbreviations': 'off'
     }
   }),
@@ -331,6 +330,7 @@ export default typegen([
       rules: {
         'prettier/prettier': 'off',
         'markdown/no-missing-link-fragments': 'off',
+        'markdown/no-multiple-h1': 'off',
 
         'markdown-preferences/prefer-linked-words': [
           'error',

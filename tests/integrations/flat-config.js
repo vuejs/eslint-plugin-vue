@@ -1,8 +1,8 @@
 'use strict'
 
-const { strict: assert } = require('assert')
-const cp = require('child_process')
-const path = require('path')
+const { strict: assert } = require('node:assert')
+const cp = require('node:child_process')
+const path = require('node:path')
 const semver = require('semver')
 
 const TARGET_DIR = path.join(__dirname, 'flat-config')

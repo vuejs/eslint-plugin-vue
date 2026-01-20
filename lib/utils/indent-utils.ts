@@ -100,5 +100,5 @@ export function isPipeOperator(token: Token | undefined | null): boolean {
  * @returns The last element or undefined.
  */
 export function last<T>(xs: T[]): T | undefined {
-  return xs.length === 0 ? undefined : xs[xs.length - 1]
+  return xs.length === 0 ? undefined : xs.at(-1)
 }

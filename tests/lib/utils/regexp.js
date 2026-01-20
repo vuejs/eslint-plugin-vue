@@ -5,7 +5,7 @@ const {
   toRegExp,
   toRegExpGroupMatcher
 } = require('../../../lib/utils/regexp.ts')
-const assert = require('assert')
+const assert = require('node:assert')
 
 const ESCAPED = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\'
 const UNESCAPED = '^$.*+?()[]{}|\\'

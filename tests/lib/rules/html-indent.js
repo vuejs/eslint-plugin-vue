@@ -5,8 +5,8 @@
  */
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const RuleTester = require('../../eslint-compat').RuleTester
 const rule = require('../../../lib/rules/html-indent')
 

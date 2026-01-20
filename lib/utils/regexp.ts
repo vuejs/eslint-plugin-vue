@@ -12,7 +12,7 @@ const RE_REGEXP_STR = /^\/(.+)\/(.*)$/u
  */
 export function escape(string: string): string {
   return string && RE_HAS_REGEXP_CHAR.test(string)
-    ? string.replace(RE_REGEXP_CHAR, String.raw`\$&`)
+    ? string.replaceAll(RE_REGEXP_CHAR, String.raw`\$&`)
     : string
 }
 
@@ -37,7 +37,7 @@ export function toRegExp(
   if (parts) {
     return new RegExp(
       parts[1],
-      parts[2].replace(
+      parts[2].replaceAll(
         new RegExp(`[${forceAddFlags}${forceRemoveFlags}]`, 'g'),
         ''
       ) + forceAddFlags
