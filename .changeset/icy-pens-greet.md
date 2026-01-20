@@ -2,4 +2,4 @@
 'eslint-plugin-vue': patch
 ---
 
-detect slot props used as component tags
+Fixed `vue/no-unused-vars` to detect components passed as slot props
