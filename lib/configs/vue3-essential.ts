@@ -3,12 +3,8 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-import { createRequire } from 'node:module'
-
-const require = createRequire(import.meta.url)
-
 export default {
-  extends: require.resolve('./base.js'),
+  extends: require.resolve('./base'),
   rules: {
     'vue/multi-word-component-names': 'error',
     'vue/no-arrow-functions-in-watch': 'error',
