@@ -7,10 +7,10 @@ const RE_REGEXP_STR = /^\/(.+)\/(.*)$/u
  * Escapes the `RegExp` special characters "^", "$", "\", ".", "*", "+",
  * "?", "(", ")", "[", "]", "{", "}", and "|" in `string`.
  *
- * @param {string} string The string to escape.
- * @returns {string} Returns the escaped string.
+ * @param string The string to escape.
+ * @returns Returns the escaped string.
  */
-function escape(string) {
+export function escape(string: string): string {
   return string && RE_HAS_REGEXP_CHAR.test(string)
     ? string.replace(RE_REGEXP_CHAR, String.raw`\$&`)
     : string
@@ -21,13 +21,16 @@ function escape(string) {
  * Normal strings (e.g. `"foo"`) is converted to `/^foo$/` of `RegExp`.
  * Strings like `"/^foo/i"` are converted to `/^foo/i` of `RegExp`.
  *
- * @param {string} string The string to convert.
- * @param {{add?: string, remove?: string}} [flags] The flags to add or remove.
+ * @param string The string to convert.
+ * @param flags The flags to add or remove.
  *   - `add`: Flags to add to the `RegExp` (e.g. `'i'` for case-insensitive).
  *   - `remove`: Flags to remove from the `RegExp` (e.g. `'g'` to remove global matching).
- * @returns {RegExp} Returns the `RegExp`.
+ * @returns Returns the `RegExp`.
  */
-function toRegExp(string, flags = {}) {
+export function toRegExp(
+  string: string,
+  flags: { add?: string; remove?: string } = {}
+): RegExp {
   const parts = RE_REGEXP_STR.exec(string)
   const { add: forceAddFlags = '', remove: forceRemoveFlags = '' } =
     typeof flags === 'object' ? flags : {} // Avoid issues when this is called directly from array.map
@@ -45,10 +48,8 @@ function toRegExp(string, flags = {}) {
 
 /**
  * Checks whether given string is regexp string
- * @param {string} string
- * @returns {boolean}
  */
-function isRegExp(string) {
+export function isRegExp(string: string): boolean {
   return RE_REGEXP_STR.test(string)
 }
 
@@ -56,10 +57,12 @@ function isRegExp(string) {
  * Converts an array of strings to a singular function to match any of them.
  * This function converts each string to a `RegExp` and returns a function that checks all of them.
  *
- * @param {string[]} [patterns] The strings or regular expression strings to match.
- * @returns {(...toCheck: string[]) => boolean} Returns a function that checks if any string matches any of the given patterns.
+ * @param patterns The strings or regular expression strings to match.
+ * @returns Returns a function that checks if any string matches any of the given patterns.
  */
-function toRegExpGroupMatcher(patterns = []) {
+export function toRegExpGroupMatcher(
+  patterns: string[] = []
+): (...toCheck: string[]) => boolean {
   if (patterns.length === 0) {
     return () => false
   }
@@ -73,11 +76,4 @@ function toRegExpGroupMatcher(patterns = []) {
 
   return (...toCheck) =>
     regexps.some((regexp) => toCheck.some((str) => regexp.test(str)))
-}
-
-module.exports = {
-  escape,
-  toRegExp,
-  isRegExp,
-  toRegExpGroupMatcher
 }
