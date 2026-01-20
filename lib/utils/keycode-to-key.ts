@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
-/** @type { { [key: number]: string }  } */
-module.exports = {
+export default {
   8: 'backspace',
   9: 'tab',
   13: 'enter',
@@ -96,4 +95,4 @@ module.exports = {
   123: 'f12',
   144: 'num-lock',
   145: 'scroll-lock'
-}
+} as { [key: number]: string }
