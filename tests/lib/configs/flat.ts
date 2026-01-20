@@ -5,7 +5,7 @@
 
 import { Linter } from 'eslint'
 import plugin from '../../../lib'
-import { strict as assert } from 'assert'
+import { strict as assert } from 'node:assert'
 import { FlatESLint } from '../../eslint-compat'
 
 function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
