@@ -6,7 +6,7 @@ const assert = require('assert')
 
 const Linter = require('../../eslint-compat').Linter
 
-const htmlComments = require('../../../lib/utils/html-comments')
+const { defineVisitor } = require('../../../lib/utils/html-comments.ts')
 
 const FIXTURE_ROOT = path.resolve(
   __dirname,
@@ -49,7 +49,7 @@ function tokenize(code, option) {
           rules: {
             'html-comments-test': {
               create: (content) =>
-                htmlComments.defineVisitor(content, option, (commentTokens) => {
+                defineVisitor(content, option, (commentTokens) => {
                   result.push(commentTokens)
                 })
             }
