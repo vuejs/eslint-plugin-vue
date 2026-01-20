@@ -13,7 +13,6 @@ const fs = require('fs')
 const path = require('path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const { categories } = require('./lib/categories')
-const { camelCase } = require('../lib/utils/casing')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
 
@@ -88,10 +87,12 @@ export default {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-import ${camelCase(extendsCategoryId)} from './${extendsCategoryId}.ts'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 
 export default {
-  extends: ${camelCase(extendsCategoryId)},
+  extends: require.resolve('./${extendsCategoryId}.js'),
   rules: ${formatRules(category.rules, category.categoryId, alwaysError)}
 }
 `
