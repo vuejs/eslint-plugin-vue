@@ -3,7 +3,7 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
