@@ -2,9 +2,6 @@ import type { Scope } from 'eslint'
 
 /**
  * Gets the scope for the current node
- * @param context The rule context
- * @param currentNode The node to get the scope of
- * @returns The scope information for this node
  */
 export function getScope(
   context: RuleContext,

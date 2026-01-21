@@ -1,7 +1,5 @@
 /**
  * Capitalize a string.
- * @param str - Text to be capitalized
- * @returns Capitalized string
  */
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -9,8 +7,6 @@ export function capitalize(str: string): string {
 
 /**
  * Checks whether given string has symbols.
- * @param str - Text to check
- * @returns True if string has symbols
  */
 function hasSymbols(str: string): boolean {
   return /[!"#%&'()*+,./:;<=>?@[\\\]^`{|}]/u.exec(str) != null // without " ", "$", "-" and "_"
@@ -18,8 +14,6 @@ function hasSymbols(str: string): boolean {
 
 /**
  * Checks whether given string has uppercase.
- * @param str - Text to check
- * @returns True if string has uppercase
  */
 function hasUpper(str: string): boolean {
   return /[A-Z]/u.exec(str) != null
@@ -27,8 +21,6 @@ function hasUpper(str: string): boolean {
 
 /**
  * Convert text to kebab-case
- * @param str - Text to be converted
- * @returns kebab-case string
  */
 export function kebabCase(str: string): string {
   return str
@@ -39,8 +31,6 @@ export function kebabCase(str: string): string {
 
 /**
  * Checks whether given string is kebab-case.
- * @param str - Text to check
- * @returns True if string is kebab-case
  */
 export function isKebabCase(str: string): boolean {
   return (
@@ -53,8 +43,6 @@ export function isKebabCase(str: string): boolean {
 
 /**
  * Convert text to snake_case
- * @param str - Text to be converted
- * @returns snake_case string
  */
 export function snakeCase(str: string): string {
   return str
@@ -65,8 +53,6 @@ export function snakeCase(str: string): string {
 
 /**
  * Checks whether given string is snake_case.
- * @param str - Text to check
- * @returns True if string is snake_case
  */
 export function isSnakeCase(str: string): boolean {
   return !hasUpper(str) && !hasSymbols(str) && !/-|__|\s/u.test(str)
@@ -74,8 +60,6 @@ export function isSnakeCase(str: string): boolean {
 
 /**
  * Convert text to camelCase
- * @param str - Text to be converted
- * @returns camelCase string
  */
 export function camelCase(str: string): string {
   if (isPascalCase(str)) {
@@ -86,8 +70,6 @@ export function camelCase(str: string): string {
 
 /**
  * Checks whether given string is camelCase.
- * @param str - Text to check
- * @returns True if string is camelCase
  */
 export function isCamelCase(str: string): boolean {
   return !hasSymbols(str) && !/^[A-Z]/u.test(str) && !/-|_|\s/u.test(str)
@@ -95,8 +77,6 @@ export function isCamelCase(str: string): boolean {
 
 /**
  * Convert text to PascalCase
- * @param str - Text to be converted
- * @returns PascalCase string
  */
 export function pascalCase(str: string): string {
   return capitalize(camelCase(str))
@@ -104,60 +84,48 @@ export function pascalCase(str: string): string {
 
 /**
  * Checks whether given string is PascalCase.
- * @param str - Text to check
- * @returns True if string is PascalCase
  */
 export function isPascalCase(str: string): boolean {
   return !hasSymbols(str) && !/^[a-z]/u.test(str) && !/-|_|\s/u.test(str)
 }
 
-const convertersMap = {
+type Case = 'camelCase' | 'kebab-case' | 'PascalCase' | 'snake_case'
+type CaseConverter = (str: string) => string
+type CaseChecker = (str: string) => boolean
+
+const convertersMap: Record<Case, CaseConverter> = {
   'kebab-case': kebabCase,
   snake_case: snakeCase,
   camelCase,
   PascalCase: pascalCase
 }
 
-const checkersMap = {
+const checkersMap: Record<Case, CaseChecker> = {
   'kebab-case': isKebabCase,
   snake_case: isSnakeCase,
   camelCase: isCamelCase,
   PascalCase: isPascalCase
 }
 
-type CaseType = 'camelCase' | 'kebab-case' | 'PascalCase' | 'snake_case'
-
-type CheckerReturnType = Record<CaseType, (str: string) => boolean>
-
 /**
  * Return case checker
- * @param name - Type of checker to return ('camelCase', 'kebab-case', 'PascalCase')
- * @returns Case checker function
  */
-export function getChecker(name: CaseType): CheckerReturnType[CaseType] {
+export function getChecker(name: Case): CaseChecker {
   return checkersMap[name] || isPascalCase
 }
 
-type ConverterReturnType = Record<CaseType, (str: string) => string>
-
 /**
  * Return case converter
- * @param name - Type of converter to return ('camelCase', 'kebab-case', 'PascalCase')
- * @returns Case converter function
  */
-export function getConverter(name: CaseType): ConverterReturnType[CaseType] {
+export function getConverter(name: Case): CaseConverter {
   return convertersMap[name] || pascalCase
 }
 
 /**
  * Return case exact converter.
  * If the converted result is not in correct case, the original value is returned.
- * @param name - Type of converter to return ('camelCase', 'kebab-case', 'PascalCase')
- * @returns Converter function that returns original value if case doesn't match
  */
-export function getExactConverter(
-  name: CaseType
-): ConverterReturnType[CaseType] {
+export function getExactConverter(name: Case): CaseConverter {
   const converter = getConverter(name)
   const checker = getChecker(name)
   return (str) => {
@@ -166,7 +134,7 @@ export function getExactConverter(
   }
 }
 
-export const allowedCaseOptions: CaseType[] = [
+export const allowedCaseOptions: Case[] = [
   'camelCase',
   'kebab-case',
   'PascalCase'

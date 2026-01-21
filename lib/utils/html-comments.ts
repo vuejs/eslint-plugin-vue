@@ -42,11 +42,11 @@ const COMMENT_DIRECTIVE = /^\s*eslint-(?:en|dis)able/
 const IE_CONDITIONAL_IF = /^\[if\s+/
 const IE_CONDITIONAL_ENDIF = /\[endif]$/
 
-const TYPE_HTML_COMMENT_OPEN = 'HTMLCommentOpen' as const
-const TYPE_HTML_COMMENT_OPEN_DECORATION = 'HTMLCommentOpenDecoration' as const
-const TYPE_HTML_COMMENT_VALUE = 'HTMLCommentValue' as const
-const TYPE_HTML_COMMENT_CLOSE = 'HTMLCommentClose' as const
-const TYPE_HTML_COMMENT_CLOSE_DECORATION = 'HTMLCommentCloseDecoration' as const
+const TYPE_HTML_COMMENT_OPEN = 'HTMLCommentOpen'
+const TYPE_HTML_COMMENT_OPEN_DECORATION = 'HTMLCommentOpenDecoration'
+const TYPE_HTML_COMMENT_VALUE = 'HTMLCommentValue'
+const TYPE_HTML_COMMENT_CLOSE = 'HTMLCommentClose'
+const TYPE_HTML_COMMENT_CLOSE_DECORATION = 'HTMLCommentCloseDecoration'
 
 function isCommentDirective(comment: HTMLComment): boolean {
   return COMMENT_DIRECTIVE.test(comment.value)
@@ -61,10 +61,6 @@ function isIEConditionalComment(comment: HTMLComment): boolean {
 
 /**
  * Define HTML comment parser
- *
- * @param sourceCode The source code instance.
- * @param config The config.
- * @returns HTML comment parser.
  */
 function defineParser(
   sourceCode: SourceCode,
@@ -76,8 +72,6 @@ function defineParser(
 
   /**
    * Get a open decoration string from comment contents.
-   * @param contents comment contents
-   * @returns decoration string
    */
   function getOpenDecoration(contents: string): string {
     let decoration = ''
@@ -97,8 +91,6 @@ function defineParser(
 
   /**
    * Get a close decoration string from comment contents.
-   * @param contents comment contents
-   * @returns decoration string
    */
   function getCloseDecoration(contents: string): string {
     let decoration = ''
@@ -116,11 +108,6 @@ function defineParser(
     return decoration
   }
 
-  /**
-   * Parse HTMLComment.
-   * @param node a comment token
-   * @returns the result of HTMLComment tokens.
-   */
   return function parseHTMLComment(node: Token): ParsedHTMLComment | null {
     if (node.type !== 'HTMLComment') {
       // Is not HTMLComment
@@ -213,12 +200,6 @@ function defineParser(
 
 /**
  * Define HTML comment visitor
- *
- * @param context The rule context.
- * @param config The config.
- * @param visitHTMLComment The HTML comment visitor.
- * @param visitorOption The option for visitor.
- * @returns HTML comment visitor.
  */
 export function defineVisitor(
   context: RuleContext,

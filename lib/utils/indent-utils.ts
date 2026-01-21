@@ -1,34 +1,32 @@
 /**
  * Check whether the given token is a wildcard.
- * @param token The token to check.
- * @returns `true` if the token is a wildcard.
  */
-export function isWildcard(token: Token | undefined | null): boolean {
+export function isWildcard(
+  token: Token | undefined | null
+): token is PunctuatorToken & { value: ' *' } {
   return token != null && token.type === 'Punctuator' && token.value === '*'
 }
 
 /**
  * Check whether the given token is a question.
- * @param token The token to check.
- * @returns `true` if the token is a question.
  */
-export function isQuestion(token: Token | undefined | null): boolean {
+export function isQuestion(
+  token: Token | undefined | null
+): token is PunctuatorToken & { value: '?' } {
   return token != null && token.type === 'Punctuator' && token.value === '?'
 }
 
 /**
  * Check whether the given token is an extends keyword.
- * @param token The token to check.
- * @returns `true` if the token is an extends keywordn.
  */
-export function isExtendsKeyword(token: Token | undefined | null): boolean {
+export function isExtendsKeyword(
+  token: Token | undefined | null
+): token is KeywordToken & { value: 'extends' } {
   return token != null && token.type === 'Keyword' && token.value === 'extends'
 }
 
 /**
  * Check whether the given token is a whitespace.
- * @param token The token to check.
- * @returns `true` if the token is a whitespace.
  */
 export function isNotWhitespace(token: Token | undefined | null): boolean {
   return (
@@ -40,10 +38,8 @@ export function isNotWhitespace(token: Token | undefined | null): boolean {
 
 /**
  * Check whether the given token is a comment.
- * @param token The token to check.
- * @returns `true` if the token is a comment.
  */
-export function isComment(token: Token | undefined | null): boolean {
+export function isComment(token: Token | undefined | null): token is Comment {
   return (
     token != null &&
     (token.type === 'Block' ||
@@ -57,8 +53,6 @@ export function isComment(token: Token | undefined | null): boolean {
 
 /**
  * Check whether the given token is a comment.
- * @param token The token to check.
- * @returns `false` if the token is a comment.
  */
 export function isNotComment(token: Token | undefined | null): boolean {
   return (
@@ -76,8 +70,6 @@ export function isNotComment(token: Token | undefined | null): boolean {
 
 /**
  * Check whether the given node is not an empty text node.
- * @param node The node to check.
- * @returns `false` if the token is empty text node.
  */
 export function isNotEmptyTextNode(node: ASTNode): boolean {
   return !(node.type === 'VText' && node.value.trim() === '')
@@ -85,10 +77,10 @@ export function isNotEmptyTextNode(node: ASTNode): boolean {
 
 /**
  * Check whether the given token is a pipe operator.
- * @param token The token to check.
- * @returns `true` if the token is a pipe operator.
  */
-export function isPipeOperator(token: Token | undefined | null): boolean {
+export function isPipeOperator(
+  token: Token | undefined | null
+): token is PunctuatorToken & { value: '|' } {
   return token != null && token.type === 'Punctuator' && token.value === '|'
 }
 
@@ -96,8 +88,6 @@ export function isPipeOperator(token: Token | undefined | null): boolean {
  * @deprecated TODO: use Node.js Native api
  *
  * Get the last element.
- * @param xs The array to get the last element.
- * @returns The last element or undefined.
  */
 export function last<T>(xs: T[]): T | undefined {
   return xs.length === 0 ? undefined : xs.at(-1)

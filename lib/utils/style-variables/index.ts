@@ -26,7 +26,7 @@ export class StyleVariablesContext {
   }
 }
 
-const cache: WeakMap<VElement, StyleVariablesContext> = new WeakMap()
+const cache = new WeakMap<VElement, StyleVariablesContext>()
 /**
  * Get the style vars context
  */

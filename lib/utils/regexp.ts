@@ -6,9 +6,6 @@ const RE_REGEXP_STR = /^\/(.+)\/(.*)$/u
 /**
  * Escapes the `RegExp` special characters "^", "$", "\", ".", "*", "+",
  * "?", "(", ")", "[", "]", "{", "}", and "|" in `string`.
- *
- * @param string The string to escape.
- * @returns Returns the escaped string.
  */
 export function escape(string: string): string {
   return string && RE_HAS_REGEXP_CHAR.test(string)
@@ -16,21 +13,19 @@ export function escape(string: string): string {
     : string
 }
 
+interface ToRegExpFlag {
+  /** Flags to add to the `RegExp` (e.g. `'i'` for case-insensitive) */
+  add?: string
+  /** Flags to remove from the `RegExp` (e.g. `'g'` to remove global matching) */
+  remove?: string
+}
+
 /**
  * Convert a string to the `RegExp`.
  * Normal strings (e.g. `"foo"`) is converted to `/^foo$/` of `RegExp`.
  * Strings like `"/^foo/i"` are converted to `/^foo/i` of `RegExp`.
- *
- * @param string The string to convert.
- * @param flags The flags to add or remove.
- *   - `add`: Flags to add to the `RegExp` (e.g. `'i'` for case-insensitive).
- *   - `remove`: Flags to remove from the `RegExp` (e.g. `'g'` to remove global matching).
- * @returns Returns the `RegExp`.
  */
-export function toRegExp(
-  string: string,
-  flags: { add?: string; remove?: string } = {}
-): RegExp {
+export function toRegExp(string: string, flags: ToRegExpFlag = {}): RegExp {
   const parts = RE_REGEXP_STR.exec(string)
   const { add: forceAddFlags = '', remove: forceRemoveFlags = '' } =
     typeof flags === 'object' ? flags : {} // Avoid issues when this is called directly from array.map
@@ -56,9 +51,6 @@ export function isRegExp(string: string): boolean {
 /**
  * Converts an array of strings to a singular function to match any of them.
  * This function converts each string to a `RegExp` and returns a function that checks all of them.
- *
- * @param patterns The strings or regular expression strings to match.
- * @returns Returns a function that checks if any string matches any of the given patterns.
  */
 export function toRegExpGroupMatcher(
   patterns: string[] = []
