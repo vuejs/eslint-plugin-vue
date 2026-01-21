@@ -123,6 +123,86 @@ tester.run('define-props-destructuring', rule, {
       languageOptions: {
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['foo'])
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineProps(['foo'])
+      </script>
+      `,
+      options: [{ destructure: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{ foo?: string }>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{ foo?: string }>()
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps(['foo']), { foo: 'default' })
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps(['foo']), { foo: 'default' })
+      </script>
+      `,
+      options: [{ destructure: 'never' }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
+      </script>
+      `,
+      options: [{ destructure: 'never' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
   invalid: [
