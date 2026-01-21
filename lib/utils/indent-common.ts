@@ -2,9 +2,8 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const {
+import type { HasLocation } from '../../typings/eslint-plugin-vue/util-types/node'
+import {
   isArrowToken,
   isOpeningParenToken,
   isClosingParenToken,
@@ -17,8 +16,8 @@ const {
   isClosingBracketToken,
   isSemicolonToken,
   isNotSemicolonToken
-} = require('@eslint-community/eslint-utils')
-const {
+} from '@eslint-community/eslint-utils'
+import {
   isComment,
   isNotComment,
   isWildcard,
@@ -27,13 +26,10 @@ const {
   isNotEmptyTextNode,
   isPipeOperator,
   last
-} = require('./indent-utils.ts')
-const { defineVisitor: tsDefineVisitor } = require('./indent-ts.ts')
+} from './indent-utils.ts'
+import { defineVisitor as tsDefineVisitor } from './indent-ts.ts'
 
-/**
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/node').HasLocation} HasLocation
- * @typedef { { type: string } & HasLocation } MaybeNode
- */
+type MaybeNode = { type: string } & HasLocation
 
 const LT_CHAR = /[\n\r\u2028\u2029]/
 const LINES = /[^\n\r\u2028\u2029]+(?:$|\r\n|[\n\r\u2028\u2029])/g
@@ -44,41 +40,37 @@ const ITERATION_OPTS = Object.freeze({
 })
 const PREFORMATTED_ELEMENT_NAMES = new Set(['pre', 'textarea'])
 
-/**
- * @typedef {object} IndentOptions
- * @property { " " | "\t" } IndentOptions.indentChar
- * @property {number} IndentOptions.indentSize
- * @property {number} IndentOptions.baseIndent
- * @property {number} IndentOptions.attribute
- * @property {object} IndentOptions.closeBracket
- * @property {number} IndentOptions.closeBracket.startTag
- * @property {number} IndentOptions.closeBracket.endTag
- * @property {number} IndentOptions.closeBracket.selfClosingTag
- * @property {number} IndentOptions.switchCase
- * @property {boolean} IndentOptions.alignAttributesVertically
- * @property {string[]} IndentOptions.ignores
- */
-/**
- * @typedef {object} IndentUserOptions
- * @property { " " | "\t" } [IndentUserOptions.indentChar]
- * @property {number} [IndentUserOptions.indentSize]
- * @property {number} [IndentUserOptions.baseIndent]
- * @property {number} [IndentUserOptions.attribute]
- * @property {IndentOptions['closeBracket'] | number} [IndentUserOptions.closeBracket]
- * @property {number} [IndentUserOptions.switchCase]
- * @property {boolean} [IndentUserOptions.alignAttributesVertically]
- * @property {string[]} [IndentUserOptions.ignores]
- */
-/**
- * Normalize options.
- * @param {number|"tab"|undefined} type The type of indentation.
- * @param {IndentUserOptions} options Other options.
- * @param {Partial<IndentOptions>} defaultOptions The default value of options.
- * @returns {IndentOptions} Normalized options.
- */
-function parseOptions(type, options, defaultOptions) {
-  /** @type {IndentOptions} */
-  const ret = Object.assign(
+interface IndentOptions {
+  indentChar: ' ' | '\t'
+  indentSize: number
+  baseIndent: number
+  attribute: number
+  closeBracket: {
+    startTag: number
+    endTag: number
+    selfClosingTag: number
+  }
+  switchCase: number
+  alignAttributesVertically: boolean
+  ignores: string[]
+}
+interface IndentUserOptions {
+  indentChar?: ' ' | '\t'
+  indentSize?: number
+  baseIndent?: number
+  attribute?: number
+  closeBracket?: IndentOptions['closeBracket'] | number
+  switchCase?: number
+  alignAttributesVertically?: boolean
+  ignores?: string[]
+}
+
+function parseOptions(
+  type: number | 'tab' | undefined,
+  options: IndentUserOptions,
+  defaultOptions: Partial<IndentOptions>
+): IndentOptions {
+  const ret: IndentOptions = Object.assign(
     {
       indentChar: ' ',
       indentSize: 2,
@@ -140,14 +132,11 @@ function parseOptions(type, options, defaultOptions) {
   return ret
 }
 
-/**
- * Check whether the node is at the beginning of line.
- * @param {MaybeNode|null} node The node to check.
- * @param {number} index The index of the node in the nodes.
- * @param {(MaybeNode|null)[]} nodes The array of nodes.
- * @returns {boolean} `true` if the node is at the beginning of line.
- */
-function isBeginningOfLine(node, index, nodes) {
+function isBeginningOfLine(
+  node: MaybeNode | null,
+  index: number,
+  nodes: (MaybeNode | null)[]
+) {
   if (node != null) {
     for (let i = index - 1; i >= 0; --i) {
       const prevNode = nodes[i]
@@ -163,10 +152,8 @@ function isBeginningOfLine(node, index, nodes) {
 
 /**
  * Check whether a given token is a closing token which triggers unindent.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a closing token.
  */
-function isClosingToken(token) {
+function isClosingToken(token: Token): boolean {
   return (
     token != null &&
     (token.type === 'HTMLEndTagOpen' ||
@@ -176,28 +163,20 @@ function isClosingToken(token) {
   )
 }
 
-/**
- * Checks whether  a given token is a optional token.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a optional token.
- */
-function isOptionalToken(token) {
+function isOptionalToken(
+  token: Token
+): token is PunctuatorToken & { value: '?.' } {
   return token.type === 'Punctuator' && token.value === '?.'
 }
 
 /**
  * Creates AST event handlers for html-indent.
- *
- * @param {RuleContext} context The rule context.
- * @param {ParserServices.TokenStore | SourceCode} tokenStore The token store object to get tokens.
- * @param {Partial<IndentOptions>} defaultOptions The default value of options.
- * @returns {NodeListener} AST event handlers.
  */
-module.exports.defineVisitor = function create(
-  context,
-  tokenStore,
-  defaultOptions
-) {
+export function defineVisitor(
+  context: RuleContext,
+  tokenStore: ParserServices.TokenStore | SourceCode,
+  defaultOptions: Partial<IndentOptions>
+): NodeListener {
   if (!context.filename.endsWith('.vue')) return {}
 
   const options = parseOptions(
@@ -206,21 +185,24 @@ module.exports.defineVisitor = function create(
     defaultOptions
   )
   const sourceCode = context.sourceCode
-  /**
-   * @typedef { { baseToken: Token | null, offset: number, baseline: boolean, expectedIndent: number | undefined } } OffsetData
-   */
-  /** @type {Map<Token|null, OffsetData>} */
-  const offsets = new Map()
-  const ignoreTokens = new Set()
+
+  interface OffsetData {
+    baseToken: Token | null
+    offset: number
+    baseline: boolean
+    expectedIndent: number | undefined
+  }
+  const offsets = new Map<Token | null, OffsetData>()
+  const ignoreTokens = new Set<Token>()
 
   /**
    * Set offset to the given tokens.
-   * @param {Token|Token[]|null|(Token|null)[]} token The token to set.
-   * @param {number} offset The offset of the tokens.
-   * @param {Token} baseToken The token of the base offset.
-   * @returns {void}
    */
-  function setOffset(token, offset, baseToken) {
+  function setOffset(
+    token: Token | Token[] | null | (Token | null)[],
+    offset: number,
+    baseToken: Token
+  ): void {
     if (!token || token === baseToken) {
       return
     }
@@ -246,11 +228,8 @@ module.exports.defineVisitor = function create(
 
   /**
    * Copy offset to the given tokens from srcToken.
-   * @param {Token} token The token to set.
-   * @param {Token} srcToken The token of the source offset.
-   * @returns {void}
    */
-  function copyOffset(token, srcToken) {
+  function copyOffset(token: Token, srcToken: Token): void {
     if (!token) {
       return
     }
@@ -259,24 +238,18 @@ module.exports.defineVisitor = function create(
       return
     }
 
-    setOffset(
-      token,
-      offsetData.offset,
-      /** @type {Token} */ (offsetData.baseToken)
-    )
+    setOffset(token, offsetData.offset, offsetData.baseToken!)
     if (offsetData.baseline) {
       setBaseline(token)
     }
-    const o = /** @type {OffsetData} */ (offsets.get(token))
+    const o = offsets.get(token)!
     o.expectedIndent = offsetData.expectedIndent
   }
 
   /**
    * Set baseline flag to the given token.
-   * @param {Token} token The token to set.
-   * @returns {void}
    */
-  function setBaseline(token) {
+  function setBaseline(token: Token): void {
     const offsetInfo = offsets.get(token)
     if (offsetInfo != null) {
       offsetInfo.baseline = true
@@ -285,16 +258,13 @@ module.exports.defineVisitor = function create(
 
   /**
    * Sets preformatted tokens to the given element node.
-   * @param {VElement} node The node to set.
-   * @returns {void}
    */
-  function setPreformattedTokens(node) {
+  function setPreformattedTokens(node: VElement): void {
     const endToken =
       (node.endTag && tokenStore.getFirstToken(node.endTag)) ||
       tokenStore.getTokenAfter(node)
 
-    /** @type {SourceCode.CursorWithSkipOptions} */
-    const cursorOptions = {
+    const cursorOptions: SourceCode.CursorWithSkipOptions = {
       includeComments: true,
       filter: (token) =>
         token != null &&
@@ -317,11 +287,12 @@ module.exports.defineVisitor = function create(
   /**
    * Get the first and last tokens of the given node.
    * If the node is parenthesized, this gets the outermost parentheses.
-   * @param {MaybeNode} node The node to get.
-   * @param {number} [borderOffset] The least offset of the first token. Defailt is 0. This value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
-   * @returns {{firstToken:Token,lastToken:Token}} The gotten tokens.
+   * This `borderOffset` value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
    */
-  function getFirstAndLastTokens(node, borderOffset = 0) {
+  function getFirstAndLastTokens(
+    node: MaybeNode,
+    borderOffset = 0
+  ): { firstToken: Token; lastToken: Token } {
     borderOffset = Math.trunc(borderOffset)
 
     let firstToken = tokenStore.getFirstToken(node)
@@ -347,14 +318,14 @@ module.exports.defineVisitor = function create(
    * Process the given node list.
    * The first node is offsetted from the given left token.
    * Rest nodes are adjusted to the first node.
-   * @param {(MaybeNode|null)[]} nodeList The node to process.
-   * @param {MaybeNode|Token|null} left The left parenthesis token.
-   * @param {MaybeNode|Token|null} right The right parenthesis token.
-   * @param {number} offset The offset to set.
-   * @param {boolean} [alignVertically=true] The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
-   * @returns {void}
    */
-  function processNodeList(nodeList, left, right, offset, alignVertically) {
+  function processNodeList(
+    nodeList: (MaybeNode | null)[],
+    left: MaybeNode | Token | null,
+    right: MaybeNode | Token | null,
+    offset: number,
+    alignVertically = true
+  ): void {
     let t
     const leftToken = left && tokenStore.getFirstToken(left)
     const rightToken = right && tokenStore.getFirstToken(right)
@@ -448,21 +419,16 @@ module.exports.defineVisitor = function create(
   /**
    * Process the given node as body.
    * The body node maybe a block statement or an expression node.
-   * @param {ASTNode} node The body node to process.
-   * @param {Token} baseToken The base token.
-   * @returns {void}
    */
-  function processMaybeBlock(node, baseToken) {
+  function processMaybeBlock(node: ASTNode, baseToken: Token): void {
     const firstToken = getFirstAndLastTokens(node).firstToken
     setOffset(firstToken, isOpeningBraceToken(firstToken) ? 0 : 1, baseToken)
   }
 
   /**
    * Process semicolons of the given statement node.
-   * @param {MaybeNode} node The statement node to process.
-   * @returns {void}
    */
-  function processSemicolons(node) {
+  function processSemicolons(node: MaybeNode): void {
     const firstToken = tokenStore.getFirstToken(node)
     const lastToken = tokenStore.getLastToken(node)
     if (isSemicolonToken(lastToken) && firstToken !== lastToken) {
@@ -487,10 +453,8 @@ module.exports.defineVisitor = function create(
 
   /**
    * Find the head of chaining nodes.
-   * @param {ASTNode} node The start node to find the head.
-   * @returns {Token} The head token of the chain.
    */
-  function getChainHeadToken(node) {
+  function getChainHeadToken(node: ASTNode): Token {
     const type = node.type
     while (node.parent && node.parent.type === type) {
       const prevToken = tokenStore.getTokenBefore(node)
@@ -511,12 +475,8 @@ module.exports.defineVisitor = function create(
    * - A parameter of CallExpression/NewExpression
    * - An element of ArrayExpression
    * - An expression of SequenceExpression
-   *
-   * @param {Token} token The token to check.
-   * @param {ASTNode} belongingNode The node that the token is belonging to.
-   * @returns {boolean} `true` if the token is the first token of an element.
    */
-  function isBeginningOfElement(token, belongingNode) {
+  function isBeginningOfElement(token: Token, belongingNode: ASTNode): boolean {
     let node = belongingNode
 
     while (node != null && node.parent != null) {
@@ -539,9 +499,10 @@ module.exports.defineVisitor = function create(
         return true
       }
       if (parent.type === 'CallExpression' || parent.type === 'NewExpression') {
-        const openParen = /** @type {Token} */ (
-          tokenStore.getTokenAfter(parent.callee, isNotClosingParenToken)
-        )
+        const openParen = tokenStore.getTokenAfter(
+          parent.callee,
+          isNotClosingParenToken
+        )!
         return parent.arguments.some(
           (param) =>
             getFirstAndLastTokens(param, openParen.range[1]).firstToken
@@ -571,11 +532,8 @@ module.exports.defineVisitor = function create(
 
   /**
    * Set the base indentation to a given top-level AST node.
-   * @param {ASTNode} node The node to set.
-   * @param {number} expectedIndent The number of expected indent.
-   * @returns {void}
    */
-  function processTopLevelNode(node, expectedIndent) {
+  function processTopLevelNode(node: ASTNode, expectedIndent: number): void {
     const token = tokenStore.getFirstToken(node)
     const offsetInfo = offsets.get(token)
     if (offsetInfo == null) {
@@ -592,10 +550,8 @@ module.exports.defineVisitor = function create(
 
   /**
    * Ignore all tokens of the given node.
-   * @param {ASTNode} node The node to ignore.
-   * @returns {void}
    */
-  function ignore(node) {
+  function ignore(node: ASTNode): void {
     for (const token of tokenStore.getTokens(node)) {
       offsets.delete(token)
       ignoreTokens.add(token)
@@ -604,18 +560,15 @@ module.exports.defineVisitor = function create(
 
   /**
    * Define functions to ignore nodes into the given visitor.
-   * @param {NodeListener} visitor The visitor to define functions to ignore nodes.
-   * @returns {NodeListener} The visitor.
    */
-  function processIgnores(visitor) {
+  function processIgnores(visitor: NodeListener): NodeListener {
     for (const ignorePattern of options.ignores) {
       const key = `${ignorePattern}:exit`
 
       if (visitor.hasOwnProperty(key)) {
         const handler = visitor[key]
         visitor[key] = function (node, ...args) {
-          // @ts-expect-error
-          const ret = handler.call(this, node, ...args)
+          const ret = handler!.call(this, node, ...args)
           ignore(node)
           return ret
         }
@@ -629,11 +582,11 @@ module.exports.defineVisitor = function create(
 
   /**
    * Calculate correct indentation of the line of the given tokens.
-   * @param {Token[]} tokens Tokens which are on the same line.
-   * @returns { { expectedIndent: number, expectedBaseIndent: number } |null } Correct indentation. If it failed to calculate then `null`.
    */
-  function getExpectedIndents(tokens) {
-    const expectedIndents = []
+  function getExpectedIndents(
+    tokens: Token[]
+  ): { expectedIndent: number; expectedBaseIndent: number } | null {
+    const expectedIndents: number[] = []
 
     for (const [i, token] of tokens.entries()) {
       const offsetInfo = offsets.get(token)
@@ -671,10 +624,8 @@ module.exports.defineVisitor = function create(
 
   /**
    * Get the text of the indentation part of the line which the given token is on.
-   * @param {Token} firstToken The first token on a line.
-   * @returns {string} The text of indentation part.
    */
-  function getIndentText(firstToken) {
+  function getIndentText(firstToken: Token): string {
     const text = sourceCode.text
     let i = firstToken.range[0] - 1
 
@@ -687,20 +638,19 @@ module.exports.defineVisitor = function create(
 
   /**
    * Define the function which fixes the problem.
-   * @param {Token} token The token to fix.
-   * @param {number} actualIndent The number of actual indentation.
-   * @param {number} expectedIndent The number of expected indentation.
-   * @returns { (fixer: RuleFixer) => Fix } The defined function.
    */
-  function defineFix(token, actualIndent, expectedIndent) {
+  function defineFix(
+    token: Token,
+    actualIndent: number,
+    expectedIndent: number
+  ): (fixer: RuleFixer) => Fix {
     if (token.type === 'Block' && token.loc.start.line !== token.loc.end.line) {
       // Fix indentation in multiline block comments.
       const lines = sourceCode.getText(token).match(LINES) || []
       const firstLine = lines.shift()
       if (lines.every((l) => BLOCK_COMMENT_PREFIX.test(l))) {
         return (fixer) => {
-          /** @type {Range} */
-          const range = [token.range[0] - actualIndent, token.range[1]]
+          const range: Range = [token.range[0] - actualIndent, token.range[1]]
           const indent = options.indentChar.repeat(expectedIndent)
 
           return fixer.replaceTextRange(
@@ -714,8 +664,7 @@ module.exports.defineVisitor = function create(
     }
 
     return (fixer) => {
-      /** @type {Range} */
-      const range = [token.range[0] - actualIndent, token.range[0]]
+      const range: Range = [token.range[0] - actualIndent, token.range[0]]
       const indent = options.indentChar.repeat(expectedIndent)
       return fixer.replaceTextRange(range, indent)
     }
@@ -723,12 +672,12 @@ module.exports.defineVisitor = function create(
 
   /**
    * Validate the given token with the pre-calculated expected indentation.
-   * @param {Token} token The token to validate.
-   * @param {number} expectedIndent The expected indentation.
-   * @param {[number, number?]} [optionalExpectedIndents] The optional expected indentation.
-   * @returns {void}
    */
-  function validateCore(token, expectedIndent, optionalExpectedIndents) {
+  function validateCore(
+    token: Token,
+    expectedIndent: number,
+    optionalExpectedIndents?: [number, number?]
+  ): void {
     const line = token.loc.start.line
     const indentText = getIndentText(token)
 
@@ -787,16 +736,12 @@ module.exports.defineVisitor = function create(
 
   /**
    * Get the expected indent of comments.
-   * @param {Token} nextToken The next token of comments.
-   * @param {number} nextExpectedIndent The expected indent of the next token.
-   * @param {number|undefined} lastExpectedIndent The expected indent of the last token.
-   * @returns {[number, number?]}
    */
   function getCommentExpectedIndents(
-    nextToken,
-    nextExpectedIndent,
-    lastExpectedIndent
-  ) {
+    nextToken: Token,
+    nextExpectedIndent: number,
+    lastExpectedIndent: number | undefined
+  ): [number, number?] {
     if (typeof lastExpectedIndent === 'number' && isClosingToken(nextToken)) {
       if (nextExpectedIndent === lastExpectedIndent) {
         // For solo comment. E.g.,
@@ -824,12 +769,12 @@ module.exports.defineVisitor = function create(
 
   /**
    * Validate indentation of the line that the given tokens are on.
-   * @param {Token[]} tokens The tokens on the same line to validate.
-   * @param {Token[]} comments The comments which are on the immediately previous lines of the tokens.
-   * @param {Token|null} lastToken The last validated token. Comments can adjust to the token.
-   * @returns {void}
    */
-  function validate(tokens, comments, lastToken) {
+  function validate(
+    tokens: Token[],
+    comments: Token[],
+    lastToken: Token | null
+  ): void {
     // Calculate and save expected indentation.
     const firstToken = tokens[0]
     const actualIndent = firstToken.loc.start.column
@@ -856,7 +801,7 @@ module.exports.defineVisitor = function create(
     // }
 
     // Save.
-    const baseline = new Set()
+    const baseline = new Set<Token>()
     for (const token of tokens) {
       const offsetInfo = offsets.get(token)
       if (offsetInfo != null) {
@@ -872,11 +817,11 @@ module.exports.defineVisitor = function create(
                 // But the additional offset isn't needed if it's at the beginning of the line.
                 expectedBaseIndent + (token === tokens[0] ? 0 : 1)
           baseline.add(token)
-        } else if (baseline.has(offsetInfo.baseToken)) {
+        } else if (baseline.has(offsetInfo.baseToken!)) {
           // The base token is a baseline token on this line, so inherit it.
-          offsetInfo.expectedIndent = /** @type {OffsetData} */ (
-            offsets.get(offsetInfo.baseToken)
-          ).expectedIndent
+          offsetInfo.expectedIndent = offsets.get(
+            offsetInfo.baseToken
+          )!.expectedIndent
           baseline.add(token)
         } else {
           // Otherwise, set the expected indent of this line.
@@ -920,15 +865,12 @@ module.exports.defineVisitor = function create(
   // Main
   // ------------------------------------------------------------------------------
 
-  /** @type {Set<string>} */
-  const knownNodes = new Set()
-  /** @type {TemplateListener} */
-  const visitor = {
+  const knownNodes = new Set<string>()
+  const visitor: TemplateListener = {
     // ----------------------------------------------------------------------
     // Vue NODES
     // ----------------------------------------------------------------------
-    /** @param {VAttribute | VDirective} node */
-    VAttribute(node) {
+    VAttribute(node: VAttribute | VDirective) {
       const keyToken = tokenStore.getFirstToken(node)
       const eqToken = tokenStore.getTokenAfter(node.key)
 
@@ -941,8 +883,7 @@ module.exports.defineVisitor = function create(
         }
       }
     },
-    /** @param {VElement} node */
-    VElement(node) {
+    VElement(node: VElement) {
       if (PREFORMATTED_ELEMENT_NAMES.has(node.name)) {
         const startTagToken = tokenStore.getFirstToken(node)
         const endTagToken = node.endTag && tokenStore.getFirstToken(node.endTag)
@@ -960,8 +901,7 @@ module.exports.defineVisitor = function create(
         )
       }
     },
-    /** @param {VEndTag} node */
-    VEndTag(node) {
+    VEndTag(node: VEndTag) {
       const element = node.parent
       const startTagOpenToken = tokenStore.getFirstToken(element.startTag)
       const closeToken = tokenStore.getLastToken(node)
@@ -970,8 +910,7 @@ module.exports.defineVisitor = function create(
         setOffset(closeToken, options.closeBracket.endTag, startTagOpenToken)
       }
     },
-    /** @param {VExpressionContainer} node */
-    VExpressionContainer(node) {
+    VExpressionContainer(node: VExpressionContainer) {
       if (
         node.expression != null &&
         node.range[0] !== node.expression.range[0]
@@ -984,8 +923,7 @@ module.exports.defineVisitor = function create(
         setOffset(endQuoteToken, 0, startQuoteToken)
       }
     },
-    /** @param {VFilter} node */
-    VFilter(node) {
+    VFilter(node: VFilter) {
       const idToken = tokenStore.getFirstToken(node)
       const lastToken = tokenStore.getLastToken(node)
       if (isClosingParenToken(lastToken)) {
@@ -994,15 +932,13 @@ module.exports.defineVisitor = function create(
         processNodeList(node.arguments, leftParenToken, lastToken, 1)
       }
     },
-    /** @param {VFilterSequenceExpression} node */
-    VFilterSequenceExpression(node) {
+    VFilterSequenceExpression(node: VFilterSequenceExpression) {
       if (node.filters.length === 0) {
         return
       }
 
       const firstToken = tokenStore.getFirstToken(node)
-      /** @type {(Token|null)[]} */
-      const tokens = []
+      const tokens: (Token | null)[] = []
 
       for (const filter of node.filters) {
         tokens.push(
@@ -1013,13 +949,13 @@ module.exports.defineVisitor = function create(
 
       setOffset(tokens, 1, firstToken)
     },
-    /** @param {VForExpression} node */
-    VForExpression(node) {
+    VForExpression(node: VForExpression) {
       const firstToken = tokenStore.getFirstToken(node)
       const lastOfLeft = last(node.left) || firstToken
-      const inToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(lastOfLeft, isNotClosingParenToken)
-      )
+      const inToken = tokenStore.getTokenAfter(
+        lastOfLeft,
+        isNotClosingParenToken
+      )!
       const rightToken = tokenStore.getFirstToken(node.right)
 
       if (isOpeningParenToken(firstToken)) {
@@ -1032,12 +968,10 @@ module.exports.defineVisitor = function create(
       setOffset(inToken, 1, firstToken)
       setOffset(rightToken, 1, inToken)
     },
-    /** @param {VOnExpression} node */
-    VOnExpression(node) {
+    VOnExpression(node: VOnExpression) {
       processNodeList(node.body, null, null, 0)
     },
-    /** @param {VStartTag} node */
-    VStartTag(node) {
+    VStartTag(node: VStartTag) {
       const openToken = tokenStore.getFirstToken(node)
       const closeToken = tokenStore.getLastToken(node)
 
@@ -1056,8 +990,7 @@ module.exports.defineVisitor = function create(
         setOffset(closeToken, offset, openToken)
       }
     },
-    /** @param {VText} node */
-    VText(node) {
+    VText(node: VText) {
       const tokens = tokenStore.getTokens(node, isNotWhitespace)
       const firstTokenInfo = offsets.get(tokenStore.getFirstToken(node))
 
@@ -1078,8 +1011,7 @@ module.exports.defineVisitor = function create(
     // ----------------------------------------------------------------------
     // ES NODES
     // ----------------------------------------------------------------------
-    /** @param {ArrayExpression | ArrayPattern} node */
-    'ArrayExpression, ArrayPattern'(node) {
+    'ArrayExpression, ArrayPattern'(node: ArrayExpression | ArrayPattern) {
       const firstToken = tokenStore.getFirstToken(node)
       const rightToken = tokenStore.getTokenAfter(
         node.elements.at(-1) || firstToken,
@@ -1087,8 +1019,7 @@ module.exports.defineVisitor = function create(
       )
       processNodeList(node.elements, firstToken, rightToken, 1)
     },
-    /** @param {ArrowFunctionExpression} node */
-    ArrowFunctionExpression(node) {
+    ArrowFunctionExpression(node: ArrowFunctionExpression) {
       const firstToken = tokenStore.getFirstToken(node)
       const secondToken = tokenStore.getTokenAfter(firstToken)
       const leftToken = node.async ? secondToken : firstToken
@@ -1108,14 +1039,18 @@ module.exports.defineVisitor = function create(
       setOffset(arrowToken, 1, firstToken)
       processMaybeBlock(node.body, firstToken)
     },
-    /** @param {AssignmentExpression | AssignmentPattern | BinaryExpression | LogicalExpression} node */
     'AssignmentExpression, AssignmentPattern, BinaryExpression, LogicalExpression'(
-      node
+      node:
+        | AssignmentExpression
+        | AssignmentPattern
+        | BinaryExpression
+        | LogicalExpression
     ) {
       const leftToken = getChainHeadToken(node)
-      const opToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(node.left, isNotClosingParenToken)
-      )
+      const opToken = tokenStore.getTokenAfter(
+        node.left,
+        isNotClosingParenToken
+      )!
       const rightToken = tokenStore.getTokenAfter(opToken)
       const prevToken = tokenStore.getTokenBefore(leftToken)
       const shouldIndent =
@@ -1125,15 +1060,15 @@ module.exports.defineVisitor = function create(
 
       setOffset([opToken, rightToken], shouldIndent ? 1 : 0, leftToken)
     },
-    /** @param {AwaitExpression | RestElement | SpreadElement | UnaryExpression} node */
-    'AwaitExpression, RestElement, SpreadElement, UnaryExpression'(node) {
+    'AwaitExpression, RestElement, SpreadElement, UnaryExpression'(
+      node: AwaitExpression | RestElement | SpreadElement | UnaryExpression
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       const nextToken = tokenStore.getTokenAfter(firstToken)
 
       setOffset(nextToken, 1, firstToken)
     },
-    /** @param {BlockStatement | ClassBody} node */
-    'BlockStatement, ClassBody'(node) {
+    'BlockStatement, ClassBody'(node: BlockStatement | ClassBody) {
       processNodeList(
         node.body,
         tokenStore.getFirstToken(node),
@@ -1151,8 +1086,13 @@ module.exports.defineVisitor = function create(
       setOffset(next, 0, firstToken)
       processNodeList(node.body, next, tokenStore.getLastToken(node), 1)
     },
-    /** @param {BreakStatement | ContinueStatement | ReturnStatement | ThrowStatement} node */
-    'BreakStatement, ContinueStatement, ReturnStatement, ThrowStatement'(node) {
+    'BreakStatement, ContinueStatement, ReturnStatement, ThrowStatement'(
+      node:
+        | BreakStatement
+        | ContinueStatement
+        | ReturnStatement
+        | ThrowStatement
+    ) {
       if (
         ((node.type === 'ReturnStatement' || node.type === 'ThrowStatement') &&
           node.argument != null) ||
@@ -1166,18 +1106,15 @@ module.exports.defineVisitor = function create(
         setOffset(nextToken, 1, firstToken)
       }
     },
-    /** @param {CallExpression} node */
-    CallExpression(node) {
+    CallExpression(node: CallExpression) {
       const typeArguments =
         'typeArguments' in node ? node.typeArguments : node.typeParameters
       const firstToken = tokenStore.getFirstToken(node)
       const rightToken = tokenStore.getLastToken(node)
-      const leftToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(
-          typeArguments || node.callee,
-          isOpeningParenToken
-        )
-      )
+      const leftToken = tokenStore.getTokenAfter(
+        typeArguments || node.callee,
+        isOpeningParenToken
+      )!
 
       if (typeArguments) {
         setOffset(tokenStore.getFirstToken(typeArguments), 1, firstToken)
@@ -1194,8 +1131,7 @@ module.exports.defineVisitor = function create(
       setOffset(leftToken, 1, firstToken)
       processNodeList(node.arguments, leftToken, rightToken, 1)
     },
-    /** @param {ImportExpression} node */
-    ImportExpression(node) {
+    ImportExpression(node: ImportExpression) {
       const firstToken = tokenStore.getFirstToken(node)
       const rightToken = tokenStore.getLastToken(node)
       const leftToken = tokenStore.getTokenAfter(
@@ -1206,8 +1142,7 @@ module.exports.defineVisitor = function create(
       setOffset(leftToken, 1, firstToken)
       processNodeList([node.source], leftToken, rightToken, 1)
     },
-    /** @param {CatchClause} node */
-    CatchClause(node) {
+    CatchClause(node: CatchClause) {
       const firstToken = tokenStore.getFirstToken(node)
       const bodyToken = tokenStore.getFirstToken(node.body)
 
@@ -1220,8 +1155,9 @@ module.exports.defineVisitor = function create(
       }
       setOffset(bodyToken, 0, firstToken)
     },
-    /** @param {ClassDeclaration | ClassExpression} node */
-    'ClassDeclaration, ClassExpression'(node) {
+    'ClassDeclaration, ClassExpression'(
+      node: ClassDeclaration | ClassExpression
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       const bodyToken = tokenStore.getFirstToken(node.body)
 
@@ -1229,26 +1165,28 @@ module.exports.defineVisitor = function create(
         setOffset(tokenStore.getFirstToken(node.id), 1, firstToken)
       }
       if (node.superClass != null) {
-        const extendsToken = /** @type {Token} */ (
-          tokenStore.getTokenBefore(node.superClass, isExtendsKeyword)
-        )
+        const extendsToken = tokenStore.getTokenBefore(
+          node.superClass,
+          isExtendsKeyword
+        )!
         const superClassToken = tokenStore.getTokenAfter(extendsToken)
         setOffset(extendsToken, 1, firstToken)
         setOffset(superClassToken, 1, extendsToken)
       }
       setOffset(bodyToken, 0, firstToken)
     },
-    /** @param {ConditionalExpression} node */
-    ConditionalExpression(node) {
+    ConditionalExpression(node: ConditionalExpression) {
       const prevToken = tokenStore.getTokenBefore(node)
       const firstToken = tokenStore.getFirstToken(node)
-      const questionToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(node.test, isNotClosingParenToken)
-      )
+      const questionToken = tokenStore.getTokenAfter(
+        node.test,
+        isNotClosingParenToken
+      )!
       const consequentToken = tokenStore.getTokenAfter(questionToken)
-      const colonToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(node.consequent, isNotClosingParenToken)
-      )
+      const colonToken = tokenStore.getTokenAfter(
+        node.consequent,
+        isNotClosingParenToken
+      )!
       const alternateToken = tokenStore.getTokenAfter(colonToken)
       const isFlat =
         prevToken &&
@@ -1266,12 +1204,12 @@ module.exports.defineVisitor = function create(
         setOffset([consequentToken, alternateToken], 1, questionToken)
       }
     },
-    /** @param {DoWhileStatement} node */
-    DoWhileStatement(node) {
+    DoWhileStatement(node: DoWhileStatement) {
       const doToken = tokenStore.getFirstToken(node)
-      const whileToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(node.body, isNotClosingParenToken)
-      )
+      const whileToken = tokenStore.getTokenAfter(
+        node.body,
+        isNotClosingParenToken
+      )!
       const leftToken = tokenStore.getTokenAfter(whileToken)
       const testToken = tokenStore.getTokenAfter(leftToken)
       const lastToken = tokenStore.getLastToken(node)
@@ -1285,8 +1223,7 @@ module.exports.defineVisitor = function create(
       setOffset(testToken, 1, leftToken)
       setOffset(rightToken, 0, leftToken)
     },
-    /** @param {ExportAllDeclaration} node */
-    ExportAllDeclaration(node) {
+    ExportAllDeclaration(node: ExportAllDeclaration) {
       const exportToken = tokenStore.getFirstToken(node)
       const tokens = [
         ...tokenStore.getTokensBetween(exportToken, node.source),
@@ -1294,7 +1231,7 @@ module.exports.defineVisitor = function create(
       ]
       if (node.exported) {
         // export * as foo from "mod"
-        const starToken = /** @type {Token} */ (tokens.find(isWildcard))
+        const starToken = tokens.find(isWildcard)!
         const asToken = tokenStore.getTokenAfter(starToken)
         const exportedToken = tokenStore.getTokenAfter(asToken)
         const afterTokens = tokens.slice(tokens.indexOf(exportedToken) + 1)
@@ -1308,15 +1245,13 @@ module.exports.defineVisitor = function create(
       }
 
       // assertions
-      const lastToken = /** @type {Token} */ (
-        tokenStore.getLastToken(node, isNotSemicolonToken)
-      )
+      const lastToken = tokenStore.getLastToken(node, isNotSemicolonToken)!
       const assertionTokens = tokenStore.getTokensBetween(
         node.source,
         lastToken
       )
       if (assertionTokens.length > 0) {
-        const assertToken = /** @type {Token} */ (assertionTokens.shift())
+        const assertToken = assertionTokens.shift()!
         setOffset(assertToken, 0, exportToken)
         const assertionOpen = assertionTokens.shift()
         if (assertionOpen) {
@@ -1325,8 +1260,7 @@ module.exports.defineVisitor = function create(
         }
       }
     },
-    /** @param {ExportDefaultDeclaration} node */
-    ExportDefaultDeclaration(node) {
+    ExportDefaultDeclaration(node: ExportDefaultDeclaration) {
       const exportToken = tokenStore.getFirstToken(node)
       const defaultToken = tokenStore.getFirstToken(node, 1)
       const declarationToken = getFirstAndLastTokens(
@@ -1334,8 +1268,7 @@ module.exports.defineVisitor = function create(
       ).firstToken
       setOffset([defaultToken, declarationToken], 1, exportToken)
     },
-    /** @param {ExportNamedDeclaration} node */
-    ExportNamedDeclaration(node) {
+    ExportNamedDeclaration(node: ExportNamedDeclaration) {
       const exportToken = tokenStore.getFirstToken(node)
       if (node.declaration) {
         // export var foo = 1;
@@ -1348,15 +1281,13 @@ module.exports.defineVisitor = function create(
           const leftBraceTokens = firstSpecifier
             ? tokenStore.getTokensBetween(exportToken, firstSpecifier)
             : [tokenStore.getTokenAfter(exportToken)]
-          const rightBraceToken = /** @type {Token} */ (
-            node.source
-              ? tokenStore.getTokenBefore(node.source, isClosingBraceToken)
-              : tokenStore.getLastToken(node, isClosingBraceToken)
-          )
+          const rightBraceToken = node.source
+            ? tokenStore.getTokenBefore(node.source, isClosingBraceToken)!
+            : tokenStore.getLastToken(node, isClosingBraceToken)!
           setOffset(leftBraceTokens, 0, exportToken)
           processNodeList(
             node.specifiers,
-            /** @type {Token} */ (last(leftBraceTokens)),
+            last(leftBraceTokens)!,
             rightBraceToken,
             1
           )
@@ -1373,15 +1304,16 @@ module.exports.defineVisitor = function create(
             )
 
             // assertions
-            const lastToken = /** @type {Token} */ (
-              tokenStore.getLastToken(node, isNotSemicolonToken)
-            )
+            const lastToken = tokenStore.getLastToken(
+              node,
+              isNotSemicolonToken
+            )!
             const assertionTokens = tokenStore.getTokensBetween(
               node.source,
               lastToken
             )
             if (assertionTokens.length > 0) {
-              const assertToken = /** @type {Token} */ (assertionTokens.shift())
+              const assertToken = assertionTokens.shift()!
               setOffset(assertToken, 0, exportToken)
               const assertionOpen = assertionTokens.shift()
               if (assertionOpen) {
@@ -1395,20 +1327,20 @@ module.exports.defineVisitor = function create(
         }
       }
     },
-    /** @param {ExportSpecifier | ImportSpecifier} node */
-    'ExportSpecifier, ImportSpecifier'(node) {
+    'ExportSpecifier, ImportSpecifier'(
+      node: ExportSpecifier | ImportSpecifier
+    ) {
       const tokens = tokenStore.getTokens(node)
-      let firstToken = /** @type {Token} */ (tokens.shift())
+      let firstToken = tokens.shift()!
       if (firstToken.value === 'type') {
         const typeToken = firstToken
-        firstToken = /** @type {Token} */ (tokens.shift())
+        firstToken = tokens.shift()!
         setOffset(firstToken, 0, typeToken)
       }
 
       setOffset(tokens, 1, firstToken)
     },
-    /** @param {ForInStatement | ForOfStatement} node */
-    'ForInStatement, ForOfStatement'(node) {
+    'ForInStatement, ForOfStatement'(node: ForInStatement | ForOfStatement) {
       const forToken = tokenStore.getFirstToken(node)
       const awaitToken =
         (node.type === 'ForOfStatement' &&
@@ -1417,9 +1349,10 @@ module.exports.defineVisitor = function create(
         null
       const leftParenToken = tokenStore.getTokenAfter(awaitToken || forToken)
       const leftToken = tokenStore.getTokenAfter(leftParenToken)
-      const inToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(leftToken, isNotClosingParenToken)
-      )
+      const inToken = tokenStore.getTokenAfter(
+        leftToken,
+        isNotClosingParenToken
+      )!
       const rightToken = tokenStore.getTokenAfter(inToken)
       const rightParenToken = tokenStore.getTokenBefore(
         node.body,
@@ -1436,8 +1369,7 @@ module.exports.defineVisitor = function create(
       setOffset(rightParenToken, 0, leftParenToken)
       processMaybeBlock(node.body, forToken)
     },
-    /** @param {ForStatement} node */
-    ForStatement(node) {
+    ForStatement(node: ForStatement) {
       const forToken = tokenStore.getFirstToken(node)
       const leftParenToken = tokenStore.getTokenAfter(forToken)
       const rightParenToken = tokenStore.getTokenBefore(
@@ -1454,8 +1386,9 @@ module.exports.defineVisitor = function create(
       )
       processMaybeBlock(node.body, forToken)
     },
-    /** @param {FunctionDeclaration | FunctionExpression} node */
-    'FunctionDeclaration, FunctionExpression'(node) {
+    'FunctionDeclaration, FunctionExpression'(
+      node: FunctionDeclaration | FunctionExpression
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       let leftParenToken, bodyBaseToken
       if (isOpeningParenToken(firstToken)) {
@@ -1487,11 +1420,9 @@ module.exports.defineVisitor = function create(
 
       if (
         !isOpeningParenToken(leftParenToken) &&
-        /** @type {any} */ (node).typeParameters
+        (node as any).typeParameters
       ) {
-        leftParenToken = tokenStore.getTokenAfter(
-          /** @type {any} */ (node).typeParameters
-        )
+        leftParenToken = tokenStore.getTokenAfter((node as any).typeParameters)
       }
       const rightParenToken = tokenStore.getTokenAfter(
         node.params.at(-1) || leftParenToken,
@@ -1503,8 +1434,7 @@ module.exports.defineVisitor = function create(
       const bodyToken = tokenStore.getFirstToken(node.body)
       setOffset(bodyToken, 0, bodyBaseToken)
     },
-    /** @param {IfStatement} node */
-    IfStatement(node) {
+    IfStatement(node: IfStatement) {
       const ifToken = tokenStore.getFirstToken(node)
       const ifLeftParenToken = tokenStore.getTokenAfter(ifToken)
       const ifRightParenToken = tokenStore.getTokenBefore(
@@ -1517,16 +1447,16 @@ module.exports.defineVisitor = function create(
       processMaybeBlock(node.consequent, ifToken)
 
       if (node.alternate != null) {
-        const elseToken = /** @type {Token} */ (
-          tokenStore.getTokenAfter(node.consequent, isNotClosingParenToken)
-        )
+        const elseToken = tokenStore.getTokenAfter(
+          node.consequent,
+          isNotClosingParenToken
+        )!
 
         setOffset(elseToken, 0, ifToken)
         processMaybeBlock(node.alternate, elseToken)
       }
     },
-    /** @param {ImportDeclaration} node */
-    ImportDeclaration(node) {
+    ImportDeclaration(node: ImportDeclaration) {
       const importToken = tokenStore.getFirstToken(node)
       const tokens = tokenStore.getTokensBetween(importToken, node.source)
       const fromIndex = tokens.map((t) => t.value).lastIndexOf('from')
@@ -1546,8 +1476,7 @@ module.exports.defineVisitor = function create(
               ]
             }
 
-      /** @type {ImportSpecifier[]} */
-      const namedSpecifiers = []
+      const namedSpecifiers: ImportSpecifier[] = []
       for (const specifier of node.specifiers) {
         if (specifier.type === 'ImportSpecifier') {
           namedSpecifiers.push(specifier)
@@ -1565,9 +1494,10 @@ module.exports.defineVisitor = function create(
       const lastNamedSpecifier = namedSpecifiers.at(-1)
       if (lastNamedSpecifier) {
         const leftBrace = tokenStore.getTokenBefore(namedSpecifiers[0])
-        const rightBrace = /** @type {Token} */ (
-          tokenStore.getTokenAfter(lastNamedSpecifier, isClosingBraceToken)
-        )
+        const rightBrace = tokenStore.getTokenAfter(
+          lastNamedSpecifier,
+          isClosingBraceToken
+        )!
         processNodeList(namedSpecifiers, leftBrace, rightBrace, 1)
         for (const token of [
           ...tokenStore.getTokensBetween(leftBrace, rightBrace),
@@ -1595,15 +1525,13 @@ module.exports.defineVisitor = function create(
       }
 
       // assertions
-      const lastToken = /** @type {Token} */ (
-        tokenStore.getLastToken(node, isNotSemicolonToken)
-      )
+      const lastToken = tokenStore.getLastToken(node, isNotSemicolonToken)!
       const assertionTokens = tokenStore.getTokensBetween(
         node.source,
         lastToken
       )
       if (assertionTokens.length > 0) {
-        const assertToken = /** @type {Token} */ (assertionTokens.shift())
+        const assertToken = assertionTokens.shift()!
         setOffset(assertToken, 0, importToken)
         const assertionOpen = assertionTokens.shift()
         if (assertionOpen) {
@@ -1612,27 +1540,25 @@ module.exports.defineVisitor = function create(
         }
       }
     },
-    /** @param {ImportNamespaceSpecifier} node */
-    ImportNamespaceSpecifier(node) {
+    ImportNamespaceSpecifier(node: ImportNamespaceSpecifier) {
       const tokens = tokenStore.getTokens(node)
-      const firstToken = /** @type {Token} */ (tokens.shift())
+      const firstToken = tokens.shift()!
       setOffset(tokens, 1, firstToken)
     },
-    /** @param {LabeledStatement} node */
-    LabeledStatement(node) {
+    LabeledStatement(node: LabeledStatement) {
       const labelToken = tokenStore.getFirstToken(node)
       const colonToken = tokenStore.getTokenAfter(labelToken)
       const bodyToken = tokenStore.getTokenAfter(colonToken)
 
       setOffset([colonToken, bodyToken], 1, labelToken)
     },
-    /** @param {MemberExpression | MetaProperty} node */
-    'MemberExpression, MetaProperty'(node) {
+    'MemberExpression, MetaProperty'(node: MemberExpression | MetaProperty) {
       const objectToken = tokenStore.getFirstToken(node)
       if (node.type === 'MemberExpression' && node.computed) {
-        const leftBracketToken = /** @type {Token} */ (
-          tokenStore.getTokenBefore(node.property, isOpeningBracketToken)
-        )
+        const leftBracketToken = tokenStore.getTokenBefore(
+          node.property,
+          isOpeningBracketToken
+        )!
         const propertyToken = tokenStore.getTokenAfter(leftBracketToken)
         const rightBracketToken = tokenStore.getTokenAfter(
           node.property,
@@ -1657,8 +1583,9 @@ module.exports.defineVisitor = function create(
         setOffset([dotToken, propertyToken], 1, objectToken)
       }
     },
-    /** @param {MethodDefinition | Property | PropertyDefinition} node */
-    'MethodDefinition, Property, PropertyDefinition'(node) {
+    'MethodDefinition, Property, PropertyDefinition'(
+      node: MethodDefinition | Property | PropertyDefinition
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       const keyTokens = getFirstAndLastTokens(node.key)
       const prefixTokens = tokenStore.getTokensBetween(
@@ -1692,8 +1619,7 @@ module.exports.defineVisitor = function create(
         )
       }
     },
-    /** @param {NewExpression} node */
-    NewExpression(node) {
+    NewExpression(node: NewExpression) {
       const typeArguments =
         'typeArguments' in node ? node.typeArguments : node.typeParameters
       const newToken = tokenStore.getFirstToken(node)
@@ -1717,8 +1643,7 @@ module.exports.defineVisitor = function create(
         processNodeList(node.arguments, leftToken, rightToken, 1)
       }
     },
-    /** @param {ObjectExpression | ObjectPattern} node */
-    'ObjectExpression, ObjectPattern'(node) {
+    'ObjectExpression, ObjectPattern'(node: ObjectExpression | ObjectPattern) {
       const firstToken = tokenStore.getFirstToken(node)
       const rightToken = tokenStore.getTokenAfter(
         node.properties.at(-1) || firstToken,
@@ -1726,12 +1651,10 @@ module.exports.defineVisitor = function create(
       )
       processNodeList(node.properties, firstToken, rightToken, 1)
     },
-    /** @param {SequenceExpression} node */
-    SequenceExpression(node) {
+    SequenceExpression(node: SequenceExpression) {
       processNodeList(node.expressions, null, null, 0)
     },
-    /** @param {SwitchCase} node */
-    SwitchCase(node) {
+    SwitchCase(node: SwitchCase) {
       const caseToken = tokenStore.getFirstToken(node)
 
       if (node.test == null) {
@@ -1758,14 +1681,14 @@ module.exports.defineVisitor = function create(
         processNodeList(node.consequent, null, null, 0)
       }
     },
-    /** @param {SwitchStatement} node */
-    SwitchStatement(node) {
+    SwitchStatement(node: SwitchStatement) {
       const switchToken = tokenStore.getFirstToken(node)
       const leftParenToken = tokenStore.getTokenAfter(switchToken)
       const discriminantToken = tokenStore.getTokenAfter(leftParenToken)
-      const leftBraceToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(node.discriminant, isOpeningBraceToken)
-      )
+      const leftBraceToken = tokenStore.getTokenAfter(
+        node.discriminant,
+        isOpeningBraceToken
+      )!
       const rightParenToken = tokenStore.getTokenBefore(leftBraceToken)
       const rightBraceToken = tokenStore.getLastToken(node)
 
@@ -1780,15 +1703,13 @@ module.exports.defineVisitor = function create(
         options.switchCase
       )
     },
-    /** @param {TaggedTemplateExpression} node */
-    TaggedTemplateExpression(node) {
+    TaggedTemplateExpression(node: TaggedTemplateExpression) {
       const tagTokens = getFirstAndLastTokens(node.tag, node.range[0])
       const quasiToken = tokenStore.getTokenAfter(tagTokens.lastToken)
 
       setOffset(quasiToken, 1, tagTokens.firstToken)
     },
-    /** @param {TemplateLiteral} node */
-    TemplateLiteral(node) {
+    TemplateLiteral(node: TemplateLiteral) {
       const firstToken = tokenStore.getFirstToken(node)
       const quasiTokens = node.quasis
         .slice(1)
@@ -1800,8 +1721,7 @@ module.exports.defineVisitor = function create(
       setOffset(quasiTokens, 0, firstToken)
       setOffset(expressionToken, 1, firstToken)
     },
-    /** @param {TryStatement} node */
-    TryStatement(node) {
+    TryStatement(node: TryStatement) {
       const tryToken = tokenStore.getFirstToken(node)
       const tryBlockToken = tokenStore.getFirstToken(node.block)
 
@@ -1820,15 +1740,13 @@ module.exports.defineVisitor = function create(
         setOffset([finallyToken, finallyBlockToken], 0, tryToken)
       }
     },
-    /** @param {UpdateExpression} node */
-    UpdateExpression(node) {
+    UpdateExpression(node: UpdateExpression) {
       const firstToken = tokenStore.getFirstToken(node)
       const nextToken = tokenStore.getTokenAfter(firstToken)
 
       setOffset(nextToken, 1, firstToken)
     },
-    /** @param {VariableDeclaration} node */
-    VariableDeclaration(node) {
+    VariableDeclaration(node: VariableDeclaration) {
       processNodeList(
         node.declarations,
         tokenStore.getFirstToken(node),
@@ -1836,8 +1754,7 @@ module.exports.defineVisitor = function create(
         1
       )
     },
-    /** @param {VariableDeclarator} node */
-    VariableDeclarator(node) {
+    VariableDeclarator(node: VariableDeclarator) {
       if (node.init != null) {
         const idToken = tokenStore.getFirstToken(node)
         const eqToken = tokenStore.getTokenAfter(node.id)
@@ -1846,8 +1763,7 @@ module.exports.defineVisitor = function create(
         setOffset([eqToken, initToken], 1, idToken)
       }
     },
-    /** @param {WhileStatement | WithStatement} node */
-    'WhileStatement, WithStatement'(node) {
+    'WhileStatement, WithStatement'(node: WhileStatement | WithStatement) {
       const firstToken = tokenStore.getFirstToken(node)
       const leftParenToken = tokenStore.getTokenAfter(firstToken)
       const rightParenToken = tokenStore.getTokenBefore(
@@ -1859,8 +1775,7 @@ module.exports.defineVisitor = function create(
       setOffset(rightParenToken, 0, leftParenToken)
       processMaybeBlock(node.body, firstToken)
     },
-    /** @param {YieldExpression} node */
-    YieldExpression(node) {
+    YieldExpression(node: YieldExpression) {
       if (node.argument != null) {
         const yieldToken = tokenStore.getFirstToken(node)
 
@@ -1890,15 +1805,13 @@ module.exports.defineVisitor = function create(
     // ----------------------------------------------------------------------
     // COMMONS
     // ----------------------------------------------------------------------
-    /** @param {Statement} node */
     // Process semicolons.
-    ':statement, PropertyDefinition'(node) {
+    ':statement, PropertyDefinition'(node: Statement) {
       processSemicolons(node)
     },
-    /** @param {Expression | MetaProperty | TemplateLiteral} node */
     // Process parentheses.
     // `:expression` does not match with MetaProperty and TemplateLiteral as a bug: https://github.com/estools/esquery/pull/59
-    ':expression'(node) {
+    ':expression'(node: Expression | MetaProperty | TemplateLiteral) {
       let leftToken = tokenStore.getTokenBefore(node)
       let rightToken = tokenStore.getTokenAfter(node)
       let firstToken = tokenStore.getFirstToken(node)
@@ -1918,27 +1831,23 @@ module.exports.defineVisitor = function create(
       }
     },
 
-    .../** @type {TemplateListener} */ (
-      tsDefineVisitor({
-        processNodeList,
-        tokenStore,
-        setOffset,
-        copyOffset,
-        processSemicolons,
-        getFirstAndLastTokens
-      })
-    ),
+    ...(tsDefineVisitor({
+      processNodeList,
+      tokenStore,
+      setOffset,
+      copyOffset,
+      processSemicolons,
+      getFirstAndLastTokens
+    }) as TemplateListener),
 
-    /** @param {ASTNode} node */
     // Ignore tokens of unknown nodes.
-    '*:exit'(node) {
+    '*:exit'(node: ASTNode) {
       if (!knownNodes.has(node.type)) {
         ignore(node)
       }
     },
-    /** @param {Program} node */
     // Top-level process.
-    Program(node) {
+    Program(node: Program) {
       const firstToken = node.tokens[0]
       const isScriptTag =
         firstToken != null &&
@@ -1952,16 +1861,15 @@ module.exports.defineVisitor = function create(
         processTopLevelNode(statement, baseIndent)
       }
     },
-    /** @param {VElement} node */
-    "VElement[parent.type!='VElement']"(node) {
+    "VElement[parent.type!='VElement']"(node: VElement) {
       processTopLevelNode(node, 0)
     },
-    /** @param {Program | VElement} node */
     // Do validation.
-    ":matches(Program, VElement[parent.type!='VElement']):exit"(node) {
+    ":matches(Program, VElement[parent.type!='VElement']):exit"(
+      node: Program | VElement
+    ) {
       let comments = []
-      /** @type {Token[]} */
-      let tokensOnSameLine = []
+      let tokensOnSameLine: Token[] = []
       let isBesideMultilineToken = false
       let lastValidatedToken = null
 
@@ -1979,8 +1887,7 @@ module.exports.defineVisitor = function create(
           // Comment lines are adjusted to the next code line.
           comments.push(tokensOnSameLine[0])
           isBesideMultilineToken =
-            /** @type {Token} */ (last(tokensOnSameLine)).loc.end.line ===
-            tokenStartLine
+            last(tokensOnSameLine)!.loc.end.line === tokenStartLine
           tokensOnSameLine = [token]
         } else {
           // New line is detected, so validate the tokens.
@@ -1989,8 +1896,7 @@ module.exports.defineVisitor = function create(
             lastValidatedToken = tokensOnSameLine[0]
           }
           isBesideMultilineToken =
-            /** @type {Token} */ (last(tokensOnSameLine)).loc.end.line ===
-            tokenStartLine
+            last(tokensOnSameLine)!.loc.end.line === tokenStartLine
           tokensOnSameLine = [token]
           comments = []
         }
