@@ -682,6 +682,31 @@ tester.run('attributes-order', rule, {
         ></div>
       </template>`,
       options: [{ sortLineLength: true, alphabetical: true }]
+    },
+
+    // ignoreVBindObject
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="attrs"
+        ></div>
+      </template>`,
+      options: [{ ignoreVBindObject: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="attrs"
+          @input="handleInput"/>
+      </template>`,
+      options: [{ ignoreVBindObject: true }]
     }
   ],
 
@@ -2137,6 +2162,60 @@ tester.run('attributes-order', rule, {
           column: 11,
           endLine: 5,
           endColumn: 26
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          @click="handleClick"
+          v-bind="attrs"
+        ></div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          v-bind="attrs"
+          @click="handleClick"
+        ></div>
+      </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-bind" should go before "@click".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div
+          ref="ref"
+          @click="handleClick"
+          v-bind="attrs"
+        ></div>
+      </template>`,
+      output: `
+      <template>
+        <div
+          ref="ref"
+          v-bind="attrs"
+          @click="handleClick"
+        ></div>
+      </template>`,
+      errors: [
+        {
+          message: 'Attribute "v-bind" should go before "@click".',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25
         }
       ]
     },
