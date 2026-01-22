@@ -78,7 +78,7 @@ The rule applies to both JavaScript and TypeScript props:
 
 ```vue
 <script setup>
-    // ✓ GOOD
+  // ✓ GOOD
   const { foo } = defineProps(['foo'])
   const { bar = 'default' } = defineProps(['bar'])
 
