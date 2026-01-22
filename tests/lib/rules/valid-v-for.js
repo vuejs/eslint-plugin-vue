@@ -169,6 +169,11 @@ tester.run('valid-v-for', rule, {
     // allowEmptyAlias option
     {
       filename: 'test.vue',
+      code: '<template><div><div v-for="(,a) in list"></div></div></template>',
+      options: [{ allowEmptyAlias: true }]
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div><div v-for="(,a,b) in list"></div></div></template>',
       options: [{ allowEmptyAlias: true }]
     },
@@ -211,7 +216,7 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="(a,b,) in list"></div></div></template>',
+      code: '<template><div><div v-for="(a,b,,) in list"></div></div></template>',
       errors: ["Invalid alias ''."]
     },
     {
@@ -345,19 +350,7 @@ tester.run('valid-v-for', rule, {
     },
     {
       filename: 'test.vue',
-      code: '<template><div><div v-for="(,a,b) in list"></div></div></template>',
-      options: [{ allowEmptyAlias: false }],
-      errors: ["Invalid alias ''."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div><div v-for="(a,,b) in list"></div></div></template>',
-      options: [{ allowEmptyAlias: false }],
-      errors: ["Invalid alias ''."]
-    },
-    {
-      filename: 'test.vue',
-      code: '<template><div><div v-for="(a,b,) in list"></div></div></template>',
+      code: '<template><div><div v-for="(,a) in list"></div></div></template>',
       options: [{ allowEmptyAlias: false }],
       errors: ["Invalid alias ''."]
     }
