@@ -23,10 +23,12 @@ By default, the rule requires you to use destructuring syntax when using `define
   // ✓ GOOD
   const { foo } = defineProps(['foo'])
   const { bar = 'default' } = defineProps(['bar'])
+  defineProps(['bar'])
 
   // ✗ BAD
   const props = defineProps(['foo'])
   const propsWithDefaults = withDefaults(defineProps(['foo']), { foo: 'default' })
+  withDefaults(defineProps(['foo']), { foo: 'default' })
 
   // ✗ BAD
   const { baz } = withDefaults(defineProps(['baz']), { baz: 'default' })
@@ -44,10 +46,12 @@ The rule applies to both JavaScript and TypeScript props:
   // ✓ GOOD
   const { foo } = defineProps<{ foo?: string }>()
   const { bar = 'default' } = defineProps<{ bar?: string }>()
+  defineProps<{ bar?: string }>()
 
   // ✗ BAD
   const props = defineProps<{ foo?: string }>()
   const propsWithDefaults = withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
+  withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
 </script>
 ```
 
@@ -58,14 +62,36 @@ The rule applies to both JavaScript and TypeScript props:
 ```js
 {
   "vue/define-props-destructuring": ["error", {
-    "destructure": "always" | "never"
+    "destructure": "only-when-assigned" | "always" | "never"
   }]
 }
 ```
 
 - `destructure` - Sets the destructuring preference for props
-  - `"always"` (default) - Requires destructuring when using `defineProps` and warns against using `withDefaults` with destructuring
+  - `"only-when-assigned"` (default) - Requires destructuring when `defineProps` is assigned to a variable, and warns against using `withDefaults` with destructuring
+  - `"always"` - Requires destructuring when using `defineProps` and warns against using `withDefaults` with destructuring
   - `"never"` - Requires using a variable to store props and prohibits destructuring
+
+### `"destructure": "always"`
+
+<eslint-code-block :rules="{'vue/define-props-destructuring': ['error', { destructure: 'always' }]}">
+
+```vue
+<script setup>
+    // ✓ GOOD
+  const { foo } = defineProps(['foo'])
+  const { bar = 'default' } = defineProps(['bar'])
+
+  // ✗ BAD
+  const props = defineProps(['foo'])
+  const propsWithDefaults = withDefaults(defineProps(['foo']), { foo: 'default' })
+  defineProps(['bar'])
+  withDefaults(defineProps(['foo']), { foo: 'default' })
+
+  // ✗ BAD
+  const { baz } = withDefaults(defineProps(['baz']), { baz: 'default' })
+</script>
+```
 
 ### `"destructure": "never"`
 

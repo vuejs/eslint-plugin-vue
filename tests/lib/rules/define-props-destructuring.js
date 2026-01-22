@@ -135,71 +135,10 @@ tester.run('define-props-destructuring', rule, {
     {
       filename: 'test.vue',
       code: `
-      <script setup>
-      defineProps(['foo'])
-      </script>
-      `,
-      options: [{ destructure: 'never' }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
       <script setup lang="ts">
       defineProps<{ foo?: string }>()
       </script>
       `,
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      defineProps<{ foo?: string }>()
-      </script>
-      `,
-      options: [{ destructure: 'never' }],
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      withDefaults(defineProps(['foo']), { foo: 'default' })
-      </script>
-      `
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      withDefaults(defineProps(['foo']), { foo: 'default' })
-      </script>
-      `,
-      options: [{ destructure: 'never' }]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
-      </script>
-      `,
-      languageOptions: {
-        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
-      }
-    },
-    {
-      filename: 'test.vue',
-      code: `
-      <script setup lang="ts">
-      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
-      </script>
-      `,
-      options: [{ destructure: 'never' }],
       languageOptions: {
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
@@ -437,6 +376,121 @@ tester.run('define-props-destructuring', rule, {
           column: 23,
           endLine: 4,
           endColumn: 44
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps(['foo']), { foo: 'default' })
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'avoidWithDefaults',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'avoidWithDefaults',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 19
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps(['foo']), { foo: 'default' })
+      </script>
+      `,
+      options: [{ destructure: 'always' }],
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      withDefaults(defineProps<{ foo?: string }>(), { foo: 'default' })
+      </script>
+      `,
+      options: [{ destructure: 'always' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 51
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps(['foo'])
+      </script>
+      `,
+      options: [{ destructure: 'always' }],
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 27
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineProps<{ foo?: string }>()
+      </script>
+      `,
+      options: [{ destructure: 'always' }],
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          messageId: 'preferDestructuring',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     }
