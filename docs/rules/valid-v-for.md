@@ -31,17 +31,30 @@ If the element which has the directive is a reserved element, this rule does not
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <div v-for="todo in todos" />
-  <MyComponent v-for="todo in todos" :key="todo.id" />
-  <div v-for="todo in todos" :is="MyComponent" :key="todo.id" />
+  <div v-for="todo in todos"/>
+  <MyComponent
+    v-for="todo in todos"
+    :key="todo.id"
+  />
+  <div
+    v-for="todo in todos"
+    :is="MyComponent"
+    :key="todo.id"
+  />
 
   <!-- ✗ BAD -->
-  <div v-for />
-  <div v-for:aaa="todo in todos" />
-  <div v-for.bbb="todo in todos" />
-  <div v-for="todo in todos" is="MyComponent" />
-  <MyComponent v-for="todo in todos" />
-  <MyComponent v-for="todo in todos" :key="foo" />
+  <div v-for/>
+  <div v-for:aaa="todo in todos"/>
+  <div v-for.bbb="todo in todos"/>
+  <div
+    v-for="todo in todos"
+    is="MyComponent"
+  />
+  <MyComponent v-for="todo in todos"/>
+  <MyComponent
+    v-for="todo in todos"
+    :key="foo"
+  />
 </template>
 ```
 
@@ -53,7 +66,7 @@ The following cases are syntax errors:
 
 - The directive's value isn't `alias in expr`. E.g. `<div v-for="foo"></div>`
 - The alias isn't LHS. E.g. `<div v-for="foo() in list"></div>`
-  :::
+:::
 
 ## :wrench: Options
 
@@ -79,7 +92,7 @@ The following cases are syntax errors:
   <!-- ✗ BAD -->
   <div v-for="(,a,b) in list" />
   <div v-for="(a,,b) in list" />
-  <div v-for="(a, b) in list" />
+  <div v-for="(a,b,,) in list" />
 </template>
 ```
 
@@ -94,7 +107,7 @@ The following cases are syntax errors:
   <!-- ✓ GOOD -->
   <div v-for="(,a,b) in list" />
   <div v-for="(a,,b) in list" />
-  <div v-for="(a, b) in list" />
+  <div v-for="(a,b,,) in list" />
 </template>
 ```
 
