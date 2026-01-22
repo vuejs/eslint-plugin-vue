@@ -2,4 +2,4 @@
 'eslint-plugin-vue': patch
 ---
 
-Fixed false positives in `vue/define-props-destructuring` when `defineProps` is called without assignment
+Added new `destructure: "only-when-assigned"` option to `vue/define-props-destructuring` and changed default value from `destructure: "always"` to `destructure: "only-when-assigned"`
