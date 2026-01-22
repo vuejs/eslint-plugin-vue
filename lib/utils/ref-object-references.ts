@@ -3,63 +3,70 @@
  * @copyright 2022 Yosuke Ota. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
-const { iterateReferencesTraceMap, isDef } = require('./index.ts')
-const eslintUtils = require('@eslint-community/eslint-utils')
-const { definePropertyReferenceExtractor } = require('./property-references.ts')
-const { ReferenceTracker } = eslintUtils
+import type { Scope } from 'eslint'
+import { iterateReferencesTraceMap, isDef } from './index.ts'
+import { findVariable, ReferenceTracker } from '@eslint-community/eslint-utils'
+import { definePropertyReferenceExtractor } from './property-references.ts'
 
-/**
- * @typedef {object} RefObjectReferenceForExpression
- * @property {'expression'} type
- * @property {MemberExpression | CallExpression} node
- * @property {string} method
- * @property {CallExpression} define
- * @property {(CallExpression | Identifier | MemberExpression)[]} defineChain Holds the initialization path for assignment of ref objects.
- *
- * @typedef {object} RefObjectReferenceForPattern
- * @property {'pattern'} type
- * @property {ObjectPattern} node
- * @property {string} method
- * @property {CallExpression} define
- * @property {(CallExpression | Identifier | MemberExpression)[]} defineChain Holds the initialization path for assignment of ref objects.
- *
- * @typedef {object} RefObjectReferenceForIdentifier
- * @property {'expression' | 'pattern'} type
- * @property {Identifier} node
- * @property {VariableDeclarator | null} variableDeclarator
- * @property {VariableDeclaration | null} variableDeclaration
- * @property {string} method
- * @property {CallExpression} define
- * @property {(CallExpression | Identifier | MemberExpression)[]} defineChain Holds the initialization path for assignment of ref objects.
- *
- * @typedef {RefObjectReferenceForIdentifier | RefObjectReferenceForExpression | RefObjectReferenceForPattern} RefObjectReference
- */
-/**
- * @typedef {object} ReactiveVariableReference
- * @property {Identifier} node
- * @property {boolean} escape Within escape hint (`$$()`)
- * @property {VariableDeclaration} variableDeclaration
- * @property {string} method
- * @property {CallExpression} define
- */
+export interface RefObjectReferenceForExpression {
+  type: 'expression'
+  node: MemberExpression | CallExpression
+  method: string
+  define: CallExpression
+  /** Holds the initialization path for assignment of ref objects. */
+  defineChain: (CallExpression | Identifier | MemberExpression)[]
+}
 
-/**
- * @typedef {object} RefObjectReferences
- * @property {<T extends Identifier | Expression | Pattern | Super> (node: T) =>
- *   T extends Identifier ?
- *     RefObjectReferenceForIdentifier | null :
- *   T extends Expression ?
- *     RefObjectReferenceForExpression | null :
- *   T extends Pattern ?
- *     RefObjectReferenceForPattern | null :
- *   null} get
- */
-/**
- * @typedef {object} ReactiveVariableReferences
- * @property {(node: Identifier) => ReactiveVariableReference | null} get
- */
+export interface RefObjectReferenceForPattern {
+  type: 'pattern'
+  node: ObjectPattern
+  method: string
+  define: CallExpression
+  /** Holds the initialization path for assignment of ref objects. */
+  defineChain: (CallExpression | Identifier | MemberExpression)[]
+}
+
+export interface RefObjectReferenceForIdentifier {
+  type: 'expression' | 'pattern'
+  node: Identifier
+  variableDeclarator: VariableDeclarator | null
+  variableDeclaration: VariableDeclaration | null
+  method: string
+  define: CallExpression
+  /** Holds the initialization path for assignment of ref objects. */
+  defineChain: (CallExpression | Identifier | MemberExpression)[]
+}
+
+export type RefObjectReference =
+  | RefObjectReferenceForIdentifier
+  | RefObjectReferenceForExpression
+  | RefObjectReferenceForPattern
+
+interface ReactiveVariableReference {
+  node: Identifier
+  /** Within escape hint (`$$()`) */
+  escape: boolean
+  variableDeclaration: VariableDeclaration
+  method: string
+  define: CallExpression
+}
+
+export interface RefObjectReferences {
+  get: <T extends Identifier | Expression | Pattern | Super>(
+    node: T
+  ) => T extends Identifier
+    ? RefObjectReferenceForIdentifier | null
+    : T extends Expression
+      ? RefObjectReferenceForExpression | null
+      : T extends Pattern
+        ? RefObjectReferenceForPattern | null
+        : null
+}
+
+interface ReactiveVariableReferences {
+  get: (node: Identifier) => ReactiveVariableReference | null
+}
 
 const REF_MACROS = [
   '$ref',
@@ -70,17 +77,18 @@ const REF_MACROS = [
   '$'
 ]
 
-/** @type {WeakMap<Program, RefObjectReferences>} */
-const cacheForRefObjectReferences = new WeakMap()
-/** @type {WeakMap<Program, ReactiveVariableReferences>} */
-const cacheForReactiveVariableReferences = new WeakMap()
+const cacheForRefObjectReferences = new WeakMap<Program, RefObjectReferences>()
+const cacheForReactiveVariableReferences = new WeakMap<
+  Program,
+  ReactiveVariableReferences
+>()
 
 /**
  * Iterate the call expressions that define the ref object.
- * @param {import('eslint').Scope.Scope} globalScope
- * @returns {Iterable<{ node: CallExpression, name: string }>}
  */
-function* iterateDefineRefs(globalScope) {
+export function* iterateDefineRefs(
+  globalScope: Scope.Scope
+): Iterable<{ node: CallExpression; name: string }> {
   const tracker = new ReferenceTracker(globalScope)
   for (const { node, path } of iterateReferencesTraceMap(tracker, {
     ref: {
@@ -102,20 +110,20 @@ function* iterateDefineRefs(globalScope) {
       [ReferenceTracker.CALL]: true
     }
   })) {
-    const expr = /** @type {CallExpression} */ (node)
+    const expr = node as CallExpression
     yield {
       node: expr,
-      name: /** @type {string} */ (path.at(-1))
+      name: path.at(-1)!
     }
   }
 }
 
 /**
  * Iterate the call expressions that defineModel() macro.
- * @param {import('eslint').Scope.Scope} globalScope
- * @returns {Iterable<{ node: CallExpression }>}
  */
-function* iterateDefineModels(globalScope) {
+function* iterateDefineModels(
+  globalScope: Scope.Scope
+): Iterable<{ node: CallExpression }> {
   for (const { identifier } of iterateMacroReferences()) {
     if (
       identifier.parent.type === 'CallExpression' &&
@@ -129,9 +137,8 @@ function* iterateDefineModels(globalScope) {
 
   /**
    * Iterate macro reference.
-   * @returns {Iterable<Reference>}
    */
-  function* iterateMacroReferences() {
+  function* iterateMacroReferences(): Iterable<Reference> {
     const variable = globalScope.set.get('defineModel')
     if (
       variable &&
@@ -149,10 +156,10 @@ function* iterateDefineModels(globalScope) {
 
 /**
  * Iterate the call expressions that define the reactive variables.
- * @param {import('eslint').Scope.Scope} globalScope
- * @returns {Iterable<{ node: CallExpression, name: string }>}
  */
-function* iterateDefineReactiveVariables(globalScope) {
+function* iterateDefineReactiveVariables(
+  globalScope: Scope.Scope
+): Iterable<{ node: CallExpression; name: string }> {
   for (const { identifier } of iterateRefMacroReferences()) {
     if (
       identifier.parent.type === 'CallExpression' &&
@@ -167,9 +174,8 @@ function* iterateDefineReactiveVariables(globalScope) {
 
   /**
    * Iterate ref macro reference.
-   * @returns {Iterable<Reference>}
    */
-  function* iterateRefMacroReferences() {
+  function* iterateRefMacroReferences(): Iterable<Reference> {
     yield* REF_MACROS.map((m) => globalScope.set.get(m))
       .filter(isDef)
       .flatMap((v) => v.references)
@@ -183,10 +189,10 @@ function* iterateDefineReactiveVariables(globalScope) {
 
 /**
  *  Iterate the call expressions that the escape hint values.
- * @param {import('eslint').Scope.Scope} globalScope
- * @returns {Iterable<CallExpression>}
  */
-function* iterateEscapeHintValueRefs(globalScope) {
+function* iterateEscapeHintValueRefs(
+  globalScope: Scope.Scope
+): Iterable<CallExpression> {
   for (const { identifier } of iterateEscapeHintReferences()) {
     if (
       identifier.parent.type === 'CallExpression' &&
@@ -198,9 +204,8 @@ function* iterateEscapeHintValueRefs(globalScope) {
 
   /**
    * Iterate escape hint reference.
-   * @returns {Iterable<Reference>}
    */
-  function* iterateEscapeHintReferences() {
+  function* iterateEscapeHintReferences(): Iterable<Reference> {
     const escapeHint = globalScope.set.get('$$')
     if (escapeHint) {
       yield* escapeHint.references
@@ -215,10 +220,8 @@ function* iterateEscapeHintValueRefs(globalScope) {
 
 /**
  * Extract identifier from given pattern node.
- * @param {Pattern} node
- * @returns {Iterable<Identifier>}
  */
-function* extractIdentifier(node) {
+function* extractIdentifier(node: Pattern): Iterable<Identifier> {
   switch (node.type) {
     case 'Identifier': {
       yield node
@@ -260,12 +263,12 @@ function* extractIdentifier(node) {
 
 /**
  * Iterate references of the given identifier.
- * @param {Identifier} id
- * @param {import('eslint').Scope.Scope} globalScope
- * @returns {Iterable<import('eslint').Scope.Reference>}
  */
-function* iterateIdentifierReferences(id, globalScope) {
-  const variable = eslintUtils.findVariable(globalScope, id)
+function* iterateIdentifierReferences(
+  id: Identifier,
+  globalScope: Scope.Scope
+): Iterable<Scope.Reference> {
+  const variable = findVariable(globalScope, id)
   if (!variable) {
     return
   }
@@ -275,70 +278,47 @@ function* iterateIdentifierReferences(id, globalScope) {
   }
 }
 
-/**
- * @param {RuleContext} context The rule context.
- */
-function getGlobalScope(context) {
+function getGlobalScope(context: RuleContext): Scope.Scope {
   const sourceCode = context.sourceCode
   return (
     sourceCode.scopeManager.globalScope || sourceCode.scopeManager.scopes[0]
   )
 }
 
-module.exports = {
-  iterateDefineRefs,
-  extractRefObjectReferences,
-  extractReactiveVariableReferences
+interface RefObjectReferenceContext {
+  method: string
+  define: CallExpression
+  /** Holds the initialization path for assignment of ref objects. */
+  defineChain: (CallExpression | Identifier | MemberExpression)[]
 }
 
-/**
- * @typedef {object} RefObjectReferenceContext
- * @property {string} method
- * @property {CallExpression} define
- * @property {(CallExpression | Identifier | MemberExpression)[]} defineChain Holds the initialization path for assignment of ref objects.
- */
+class RefObjectReferenceExtractor implements RefObjectReferences {
+  context: RuleContext
+  references = new Map<
+    Identifier | MemberExpression | CallExpression | ObjectPattern,
+    RefObjectReference
+  >()
+  _processedIds = new Set<Identifier>()
 
-/**
- * @implements {RefObjectReferences}
- */
-class RefObjectReferenceExtractor {
-  /**
-   * @param {RuleContext} context The rule context.
-   */
-  constructor(context) {
+  constructor(context: RuleContext) {
     this.context = context
-    /** @type {Map<Identifier | MemberExpression | CallExpression | ObjectPattern, RefObjectReference>} */
-    this.references = new Map()
-
-    /** @type {Set<Identifier>} */
-    this._processedIds = new Set()
   }
 
-  /**
-   * @template {Identifier | Expression | Pattern | Super} T
-   * @param {T} node
-   * @returns {T extends Identifier ?
-   *     RefObjectReferenceForIdentifier | null :
-   *   T extends Expression ?
-   *     RefObjectReferenceForExpression | null :
-   *   T extends Pattern ?
-   *     RefObjectReferenceForPattern | null :
-   *   null}
-   */
-  get(node) {
-    return /** @type {never} */ (
-      this.references.get(/** @type {never} */ (node)) || null
-    )
+  get<T extends Identifier | Expression | Pattern | Super>(
+    node: T
+  ): T extends Identifier
+    ? RefObjectReferenceForIdentifier | null
+    : T extends Expression
+      ? RefObjectReferenceForExpression | null
+      : T extends Pattern
+        ? RefObjectReferenceForPattern | null
+        : null {
+    return (this.references.get(node as never) || null) as never
   }
 
-  /**
-   * @param {CallExpression} node
-   * @param {string} method
-   */
-  processDefineRef(node, method) {
+  processDefineRef(node: CallExpression, method: string): void {
     const parent = node.parent
-    /** @type {Pattern | null} */
-    let pattern = null
+    let pattern: Pattern | null = null
     if (parent.type === 'VariableDeclarator') {
       pattern = parent.id
     } else if (
@@ -385,13 +365,10 @@ class RefObjectReferenceExtractor {
     }
   }
 
-  /**
-   * @param {CallExpression} node
-   */
-  processDefineModel(node) {
+  processDefineModel(node: CallExpression): void {
     const parent = node.parent
-    /** @type {Pattern | null} */
-    let pattern = null
+
+    let pattern: Pattern | null = null
     if (parent.type === 'VariableDeclarator') {
       pattern = parent.id
     } else if (
@@ -415,11 +392,10 @@ class RefObjectReferenceExtractor {
     this.processPattern(pattern, ctx)
   }
 
-  /**
-   * @param {MemberExpression | Identifier} node
-   * @param {RefObjectReferenceContext} ctx
-   */
-  processExpression(node, ctx) {
+  processExpression(
+    node: MemberExpression | Identifier,
+    ctx: RefObjectReferenceContext
+  ): boolean {
     const parent = node.parent
     if (parent.type === 'AssignmentExpression') {
       if (parent.operator === '=' && parent.right === node) {
@@ -440,11 +416,11 @@ class RefObjectReferenceExtractor {
     }
     return false
   }
-  /**
-   * @param {MemberExpression} node
-   * @param {RefObjectReferenceContext} ctx
-   */
-  processMemberExpression(node, ctx) {
+
+  processMemberExpression(
+    node: MemberExpression,
+    ctx: RefObjectReferenceContext
+  ) {
     if (this.processExpression(node, ctx)) {
       return
     }
@@ -455,11 +431,7 @@ class RefObjectReferenceExtractor {
     })
   }
 
-  /**
-   * @param {Pattern} node
-   * @param {RefObjectReferenceContext} ctx
-   */
-  processPattern(node, ctx) {
+  processPattern(node: Pattern, ctx: RefObjectReferenceContext) {
     switch (node.type) {
       case 'Identifier': {
         this.processIdentifierPattern(node, ctx)
@@ -486,11 +458,7 @@ class RefObjectReferenceExtractor {
     }
   }
 
-  /**
-   * @param {Identifier} node
-   * @param {RefObjectReferenceContext} ctx
-   */
-  processIdentifierPattern(node, ctx) {
+  processIdentifierPattern(node: Identifier, ctx: RefObjectReferenceContext) {
     if (this._processedIds.has(node)) {
       return
     }
@@ -528,10 +496,11 @@ class RefObjectReferenceExtractor {
 
 /**
  * Extracts references of all ref objects.
- * @param {RuleContext} context The rule context.
- * @returns {RefObjectReferences}
+ * @param context The rule context.
  */
-function extractRefObjectReferences(context) {
+export function extractRefObjectReferences(
+  context: RuleContext
+): RefObjectReferences {
   const sourceCode = context.sourceCode
   const cachedReferences = cacheForRefObjectReferences.get(sourceCode.ast)
   if (cachedReferences) {
@@ -552,46 +521,32 @@ function extractRefObjectReferences(context) {
   return references
 }
 
-/**
- * @implements {ReactiveVariableReferences}
- */
-class ReactiveVariableReferenceExtractor {
-  /**
-   * @param {RuleContext} context The rule context.
-   */
-  constructor(context) {
+class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
+  context: RuleContext
+  references: Map<Identifier, ReactiveVariableReference>
+  _processedIds: Set<Identifier>
+  _escapeHintValueRefs: Set<CallExpression>
+
+  constructor(context: RuleContext) {
     this.context = context
-    /** @type {Map<Identifier, ReactiveVariableReference>} */
     this.references = new Map()
-
-    /** @type {Set<Identifier>} */
     this._processedIds = new Set()
-
-    /** @type {Set<CallExpression>} */
     this._escapeHintValueRefs = new Set(
       iterateEscapeHintValueRefs(getGlobalScope(context))
     )
   }
 
-  /**
-   * @param {Identifier} node
-   * @returns {ReactiveVariableReference | null}
-   */
-  get(node) {
+  get(node: Identifier): ReactiveVariableReference | null {
     return this.references.get(node) || null
   }
 
-  /**
-   * @param {CallExpression} node
-   * @param {string} method
-   */
-  processDefineReactiveVariable(node, method) {
+  processDefineReactiveVariable(node: CallExpression, method: string): void {
     const parent = node.parent
     if (parent.type !== 'VariableDeclarator') {
       return
     }
-    /** @type {Pattern | null} */
-    const pattern = parent.id
+
+    const pattern: Pattern | null = parent.id
 
     if (method === '$') {
       for (const id of extractIdentifier(pattern)) {
@@ -604,12 +559,11 @@ class ReactiveVariableReferenceExtractor {
     }
   }
 
-  /**
-   * @param {Identifier} node
-   * @param {string} method
-   * @param {CallExpression} define
-   */
-  processIdentifierPattern(node, method, define) {
+  processIdentifierPattern(
+    node: Identifier,
+    method: string,
+    define: CallExpression
+  ) {
     if (this._processedIds.has(node)) {
       return
     }
@@ -640,17 +594,20 @@ class ReactiveVariableReferenceExtractor {
 
   /**
    * Checks whether the given identifier node within the escape hints (`$$()`) or not.
-   * @param {Identifier} node
    */
-  withinEscapeHint(node) {
-    /** @type {Identifier | ObjectExpression | ArrayExpression | SpreadElement | Property | AssignmentProperty} */
-    let target = node
-    /** @type {ASTNode | null} */
-    let parent = target.parent
+  withinEscapeHint(node: Identifier): boolean {
+    let target:
+      | Identifier
+      | ObjectExpression
+      | ArrayExpression
+      | SpreadElement
+      | Property
+      | AssignmentProperty = node
+    let parent: ASTNode | null = target.parent
     while (parent) {
       if (parent.type === 'CallExpression') {
         if (
-          parent.arguments.includes(/** @type {any} */ (target)) &&
+          parent.arguments.includes(target as any) &&
           this._escapeHintValueRefs.has(parent)
         ) {
           return true
@@ -660,7 +617,7 @@ class ReactiveVariableReferenceExtractor {
       if (
         (parent.type === 'Property' && parent.value === target) ||
         (parent.type === 'ObjectExpression' &&
-          parent.properties.includes(/** @type {any} */ (target))) ||
+          parent.properties.includes(target as any)) ||
         parent.type === 'ArrayExpression' ||
         parent.type === 'SpreadElement'
       ) {
@@ -676,10 +633,10 @@ class ReactiveVariableReferenceExtractor {
 
 /**
  * Extracts references of all reactive variables.
- * @param {RuleContext} context The rule context.
- * @returns {ReactiveVariableReferences}
  */
-function extractReactiveVariableReferences(context) {
+export function extractReactiveVariableReferences(
+  context: RuleContext
+): ReactiveVariableReferences {
   const sourceCode = context.sourceCode
   const cachedReferences = cacheForReactiveVariableReferences.get(
     sourceCode.ast

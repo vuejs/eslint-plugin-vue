@@ -1145,7 +1145,7 @@ export function defineVueVisitor(context: RuleContext, visitor: VueVisitor) {
     visitor.onSetupFunctionExit ||
     visitor.onRenderFunctionEnter
   ) {
-    const setups = new Set()
+    const setups = new Set<ASTNode>()
     vueVisitor[
       'Property[value.type=/^(Arrow)?FunctionExpression$/] > :function'
     ] = (
@@ -1153,7 +1153,7 @@ export function defineVueVisitor(context: RuleContext, visitor: VueVisitor) {
         parent: Property
       }
     ) => {
-      const prop: Property = node.parent
+      const prop = node.parent
       if (vueStack && prop.parent === vueStack.node && prop.value === node) {
         const name = getStaticPropertyName(prop)
         if (name === 'setup') {
