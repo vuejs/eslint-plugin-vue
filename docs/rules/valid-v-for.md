@@ -70,7 +70,48 @@ The following cases are syntax errors:
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/valid-v-for": [
+    "error",
+    {
+      "allowEmptyAlias": false
+    }
+  ]
+}
+```
+
+- `allowEmptyAlias` (`boolean`) ... Allows empty aliases in `v-for` expressions. Default is `false`.
+
+### `"allowEmptyAlias": false` (default)
+
+<eslint-code-block :rules="{'vue/valid-v-for': ['error', {allowEmptyAlias: false}]}">
+
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <div v-for="(,a,b) in list" />
+  <div v-for="(a,,b) in list" />
+  <div v-for="(a,b,,) in list" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"allowEmptyAlias": true`
+
+<eslint-code-block :rules="{'vue/valid-v-for': ['error', {allowEmptyAlias: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-for="(,a,b) in list" />
+  <div v-for="(a,,b) in list" />
+  <div v-for="(a,b,,) in list" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 
