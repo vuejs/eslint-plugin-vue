@@ -1,21 +1,18 @@
-module.exports = {
-  getScope
-}
+import type { Scope } from 'eslint'
 
 /**
  * Gets the scope for the current node
- * @param {RuleContext} context The rule context
- * @param {ESNode} currentNode The node to get the scope of
- * @returns { import('eslint').Scope.Scope } The scope information for this node
  */
-function getScope(context, currentNode) {
+export function getScope(
+  context: RuleContext,
+  currentNode: ESNode
+): Scope.Scope {
   // On Program node, get the outermost scope to avoid return Node.js special function scope or ES modules scope.
   const inner = currentNode.type !== 'Program'
   const scopeManager = context.sourceCode.scopeManager
 
-  /** @type {ESNode | null} */
-  let node = currentNode
-  for (; node; node = /** @type {ESNode | null} */ (node.parent)) {
+  let node: ESNode | null = currentNode
+  for (; node; node = node.parent as ESNode | null) {
     const scope = scopeManager.acquire(node, inner)
 
     if (scope) {

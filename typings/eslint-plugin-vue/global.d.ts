@@ -33,7 +33,11 @@ declare global {
   type Position = VNODE.Position
   type SourceLocation = VNODE.SourceLocation
   type Token = VNODE.Token
+  type PunctuatorToken = VNODE.PunctuatorToken
+  type KeywordToken = VNODE.KeywordToken
   type Comment = VNODE.Comment
+  type LineComment = VNODE.LineComment
+  type BlockComment = VNODE.BlockComment
   type HTMLComment = VNODE.HTMLComment
   type HTMLBogusComment = VNODE.HTMLBogusComment
 
