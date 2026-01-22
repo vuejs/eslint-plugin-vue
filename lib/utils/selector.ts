@@ -1,25 +1,18 @@
-'use strict'
+import parser from 'postcss-selector-parser'
+import nthCheck from 'nth-check'
+import { getAttribute, isVElement } from './index.ts'
 
-const parser = require('postcss-selector-parser')
-const { default: nthCheck } = require('nth-check')
-const { getAttribute, isVElement } = require('./index.ts')
-
-/**
- * @typedef {object} VElementSelector
- * @property {(element: VElement)=>boolean} test
- */
-
-module.exports = {
-  parseSelector
+export interface VElementSelector {
+  test: (element: VElement) => boolean
 }
 
 /**
  * Parses CSS selectors and returns an object with a function that tests VElement.
- * @param {string} selector CSS selector
- * @param {RuleContext} context - The rule context.
- * @returns {VElementSelector}
  */
-function parseSelector(selector, context) {
+export function parseSelector(
+  selector: string,
+  context: RuleContext
+): VElementSelector {
   let astSelector
   try {
     astSelector = parser().astSync(selector)
@@ -57,41 +50,37 @@ function parseSelector(selector, context) {
 
 class SelectorError extends Error {}
 
-/**
- * @typedef {(element: VElement, subject: VElement | null )=>boolean} VElementMatcher
- * @typedef {Exclude<parser.Selector['nodes'][number], {type:'comment'|'root'}>} ChildNode
- */
+type VElementMatcher = (element: VElement, subject: VElement | null) => boolean
+
+type ChildNode = Exclude<
+  parser.Selector['nodes'][number],
+  { type: 'comment' | 'root' }
+>
 
 /**
  * Convert nodes to VElementMatcher
- * @param {parser.Selector[]} selectorNodes
- * @returns {VElementMatcher}
  */
-function selectorsToVElementMatcher(selectorNodes) {
+function selectorsToVElementMatcher(
+  selectorNodes: parser.Selector[]
+): VElementMatcher {
   const selectors = selectorNodes.map((n) =>
     selectorToVElementMatcher(cleanSelectorChildren(n))
   )
   return (element, subject) => selectors.some((sel) => sel(element, subject))
 }
 
-/**
- * @param {parser.Node|null} node
- * @returns {node is parser.Combinator}
- */
-function isDescendantCombinator(node) {
+function isDescendantCombinator(
+  node: parser.Node | null
+): node is parser.Combinator {
   return Boolean(node && node.type === 'combinator' && !node.value.trim())
 }
 
 /**
  * Clean and get the selector child nodes.
- * @param {parser.Selector} selector
- * @returns {ChildNode[]}
  */
-function cleanSelectorChildren(selector) {
-  /** @type {ChildNode[]} */
-  const nodes = []
-  /** @type {ChildNode|null} */
-  let last = null
+function cleanSelectorChildren(selector: parser.Selector): ChildNode[] {
+  const nodes: ChildNode[] = []
+  let last: ChildNode | null = null
   for (const node of selector.nodes) {
     if (node.type === 'root') {
       throw new SelectorError('Unexpected state type=root')
@@ -120,16 +109,14 @@ function cleanSelectorChildren(selector) {
 }
 /**
  * Convert Selector child nodes to VElementMatcher
- * @param {ChildNode[]} selectorChildren
- * @returns {VElementMatcher}
  */
-function selectorToVElementMatcher(selectorChildren) {
+function selectorToVElementMatcher(
+  selectorChildren: ChildNode[]
+): VElementMatcher {
   const nodes = [...selectorChildren]
   let node = nodes.shift()
-  /**
-   * @type {VElementMatcher | null}
-   */
-  let result = null
+
+  let result: VElementMatcher | null = null
   while (node) {
     if (node.type === 'combinator') {
       const combinator = node.value
@@ -160,13 +147,11 @@ function selectorToVElementMatcher(selectorChildren) {
   return result
 }
 
-/**
- * @param {VElementMatcher} left
- * @param {string} combinator
- * @param {VElementMatcher} right
- * @returns {VElementMatcher}
- */
-function combination(left, combinator, right) {
+function combination(
+  left: VElementMatcher,
+  combinator: string,
+  right: VElementMatcher
+): VElementMatcher {
   switch (combinator.trim()) {
     case '': {
       // descendant
@@ -228,10 +213,13 @@ function combination(left, combinator, right) {
 
 /**
  * Convert node to VElementMatcher
- * @param {Exclude<parser.Node, {type:'combinator'|'comment'|'root'|'selector'}>} selector
- * @returns {VElementMatcher}
  */
-function nodeToVElementMatcher(selector) {
+function nodeToVElementMatcher(
+  selector: Exclude<
+    parser.Node,
+    { type: 'combinator' | 'comment' | 'root' | 'selector' }
+  >
+): VElementMatcher {
   switch (selector.type) {
     case 'attribute': {
       return attributeNodeToVElementMatcher(selector)
@@ -258,19 +246,17 @@ function nodeToVElementMatcher(selector) {
       throw new SelectorError(`Unknown selector: ${selector.value}.`)
     }
     default: {
-      throw new SelectorError(
-        `Unknown selector: ${/** @type {any}*/ (selector).value}.`
-      )
+      throw new SelectorError(`Unknown selector: ${(selector as any).value}.`)
     }
   }
 }
 
 /**
  * Convert Attribute node to VElementMatcher
- * @param {parser.Attribute} selector
- * @returns {VElementMatcher}
  */
-function attributeNodeToVElementMatcher(selector) {
+function attributeNodeToVElementMatcher(
+  selector: parser.Attribute
+): VElementMatcher {
   const key = selector.attribute
   if (!selector.operator) {
     return (element) => getAttributeValue(element, key) != null
@@ -311,12 +297,10 @@ function attributeNodeToVElementMatcher(selector) {
     }
   }
 
-  /**
-   * @param {string} selectorValue
-   * @param {(attrValue:string, selectorValue: string)=>boolean} test
-   * @returns {VElementMatcher}
-   */
-  function buildVElementMatcher(selectorValue, test) {
+  function buildVElementMatcher(
+    selectorValue: string,
+    test: (attrValue: string, selectorValue: string) => boolean
+  ): VElementMatcher {
     const val = selector.insensitive
       ? selectorValue.toLowerCase()
       : selectorValue
@@ -335,10 +319,10 @@ function attributeNodeToVElementMatcher(selector) {
 
 /**
  * Convert ClassName node to VElementMatcher
- * @param {parser.ClassName} selector
- * @returns {VElementMatcher}
  */
-function classNameNodeToVElementMatcher(selector) {
+function classNameNodeToVElementMatcher(
+  selector: parser.ClassName
+): VElementMatcher {
   const className = selector.value
   return (element) => {
     const attrValue = getAttributeValue(element, 'class')
@@ -351,10 +335,10 @@ function classNameNodeToVElementMatcher(selector) {
 
 /**
  * Convert Identifier node to VElementMatcher
- * @param {parser.Identifier} selector
- * @returns {VElementMatcher}
  */
-function identifierNodeToVElementMatcher(selector) {
+function identifierNodeToVElementMatcher(
+  selector: parser.Identifier
+): VElementMatcher {
   const id = selector.value
   return (element) => {
     const attrValue = getAttributeValue(element, 'id')
@@ -367,28 +351,24 @@ function identifierNodeToVElementMatcher(selector) {
 
 /**
  * Convert Tag node to VElementMatcher
- * @param {parser.Tag} selector
- * @returns {VElementMatcher}
  */
-function tagNodeToVElementMatcher(selector) {
+function tagNodeToVElementMatcher(selector: parser.Tag): VElementMatcher {
   const name = selector.value
   return (element) => element.rawName === name
 }
 
 /**
  * Convert Universal node to VElementMatcher
- * @param {parser.Universal} _selector
- * @returns {VElementMatcher}
  */
-function universalNodeToVElementMatcher(_selector) {
+function universalNodeToVElementMatcher(
+  _selector: parser.Universal
+): VElementMatcher {
   return () => true
 }
 /**
  * Convert Pseudo node to VElementMatcher
- * @param {parser.Pseudo} selector
- * @returns {VElementMatcher}
  */
-function pseudoNodeToVElementMatcher(selector) {
+function pseudoNodeToVElementMatcher(selector: parser.Pseudo): VElementMatcher {
   const pseudo = selector.value
   switch (pseudo) {
     case ':not': {
@@ -477,10 +457,10 @@ function pseudoNodeToVElementMatcher(selector) {
 
 /**
  * Convert :has() selector nodes to VElementMatcher
- * @param {parser.Selector[]} selectorNodes
- * @returns {VElementMatcher}
  */
-function pseudoHasSelectorsToVElementMatcher(selectorNodes) {
+function pseudoHasSelectorsToVElementMatcher(
+  selectorNodes: parser.Selector[]
+): VElementMatcher {
   const selectors = selectorNodes.map((n) =>
     pseudoHasSelectorToVElementMatcher(n)
   )
@@ -488,10 +468,10 @@ function pseudoHasSelectorsToVElementMatcher(selectorNodes) {
 }
 /**
  * Convert :has() selector node to VElementMatcher
- * @param {parser.Selector} selector
- * @returns {VElementMatcher}
  */
-function pseudoHasSelectorToVElementMatcher(selector) {
+function pseudoHasSelectorToVElementMatcher(
+  selector: parser.Selector
+): VElementMatcher {
   const nodes = cleanSelectorChildren(selector)
   const selectors = selectorToVElementMatcher(nodes)
   const firstNode = nodes[0]
@@ -510,16 +490,13 @@ function pseudoHasSelectorToVElementMatcher(selector) {
   )
 }
 
-/**
- * @param {VElementMatcher} selectors
- * @param {(element: VElement) => VElement[]} getStartElements
- * @returns {VElementMatcher}
- */
-function buildVElementMatcher(selectors, getStartElements) {
+function buildVElementMatcher(
+  selectors: VElementMatcher,
+  getStartElements: (element: VElement) => VElement[]
+): VElementMatcher {
   return (element) => {
     const elements = [...getStartElements(element)]
-    /** @type {VElement|undefined} */
-    let curr
+    let curr: VElement | undefined
     while ((curr = elements.shift())) {
       const el = curr
       if (selectors(el, element)) {
@@ -533,10 +510,8 @@ function buildVElementMatcher(selectors, getStartElements) {
 
 /**
  * Parse <nth>
- * @param {parser.Pseudo} pseudoNode
- * @returns {(index: number)=>boolean}
  */
-function parseNth(pseudoNode) {
+function parseNth(pseudoNode: parser.Pseudo): (index: number) => boolean {
   const argumentsText = pseudoNode
     .toString()
     .slice(pseudoNode.value.length)
@@ -563,10 +538,10 @@ function parseNth(pseudoNode) {
 
 /**
  * Build VElementMatcher for :nth-xxx()
- * @param {(index: number, length: number)=>boolean} testIndex
- * @returns {VElementMatcher}
  */
-function buildPseudoNthVElementMatcher(testIndex) {
+function buildPseudoNthVElementMatcher(
+  testIndex: (index: number, length: number) => boolean
+): VElementMatcher {
   return (element) => {
     const elements = element.parent.children.filter(isVElement)
     return testIndex(elements.indexOf(element), elements.length)
@@ -575,58 +550,42 @@ function buildPseudoNthVElementMatcher(testIndex) {
 
 /**
  * Build VElementMatcher for :nth-xxx-of-type()
- * @param {(index: number, length: number)=>boolean} testIndex
- * @returns {VElementMatcher}
  */
-function buildPseudoNthOfTypeVElementMatcher(testIndex) {
+function buildPseudoNthOfTypeVElementMatcher(
+  testIndex: (index: number, length: number) => boolean
+): VElementMatcher {
   return (element) => {
     const elements = element.parent.children.filter(
-      /** @returns {e is VElement} */
-      (e) => isVElement(e) && e.rawName === element.rawName
+      (e): e is VElement => isVElement(e) && e.rawName === element.rawName
     )
     return testIndex(elements.indexOf(element), elements.length)
   }
 }
 
-/**
- * @param {VElement} element
- */
-function getBeforeElement(element) {
+function getBeforeElement(element: VElement) {
   return getBeforeElements(element).pop() || null
 }
-/**
- * @param {VElement} element
- */
-function getBeforeElements(element) {
+
+function getBeforeElements(element: VElement) {
   const parent = element.parent
   const index = parent.children.indexOf(element)
   return parent.children.slice(0, index).filter(isVElement)
 }
 
-/**
- * @param {VElement} element
- */
-function getAfterElements(element) {
+function getAfterElements(element: VElement) {
   const parent = element.parent
   const index = parent.children.indexOf(element)
   return parent.children.slice(index + 1).filter(isVElement)
 }
 
-/**
- * @param {VElementMatcher} a
- * @param {VElementMatcher} b
- * @returns {VElementMatcher}
- */
-function compound(a, b) {
+function compound(a: VElementMatcher, b: VElementMatcher): VElementMatcher {
   return (element, subject) => a(element, subject) && b(element, subject)
 }
 
 /**
  * Get attribute value from given element.
- * @param {VElement} element The element node.
- * @param {string} attribute The attribute name.
  */
-function getAttributeValue(element, attribute) {
+function getAttributeValue(element: VElement, attribute: string) {
   const attr = getAttribute(element, attribute)
   if (attr) {
     return (attr.value && attr.value.value) || ''
