@@ -9,8 +9,8 @@
 This script updates `lib/configs/flat/*.js` files from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const { categories } = require('./lib/categories')
 
@@ -62,7 +62,7 @@ module.exports = [
     name: 'vue/base/setup',
     plugins: {
       get vue() {
-        return require('../../plugin')
+        return require('../../plugin.ts').default
       }
     },
     languageOptions: {
@@ -74,7 +74,7 @@ module.exports = [
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
-        return require('../../plugin')
+        return require('../../plugin.ts').default
       }
     },
     languageOptions: {

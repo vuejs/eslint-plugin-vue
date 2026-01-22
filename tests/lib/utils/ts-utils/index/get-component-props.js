@@ -3,13 +3,13 @@
  */
 'use strict'
 
-const path = require('path')
-const fs = require('fs')
+const path = require('node:path')
+const fs = require('node:fs')
 const Linter = require('../../../../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
 const tsParser = require('@typescript-eslint/parser')
 const utils = require('../../../../../lib/utils/index')
-const assert = require('assert')
+const assert = require('node:assert')
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,
@@ -70,7 +70,7 @@ function extractComponentProps(code, tsFileCode) {
   return result
 }
 
-describe('getComponentPropsFromTypeDefineTypes', () => {
+describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
   for (const { scriptCode, tsFileCode, props: expected } of [
     {
       scriptCode: `defineProps<{foo:string,bar?:number}>()`,

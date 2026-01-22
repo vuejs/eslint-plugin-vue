@@ -35,7 +35,19 @@ tester.run('no-unused-vars', rule, {
     {
       code: '<template><div v-for="thisisignore in foo" ></div></template>',
       options: [{ ignorePattern: 'ignore$' }]
-    }
+    },
+    // Slot prop used as component tag
+    '<template><my-component v-slot="{ Comp }"><Comp /></my-component></template>',
+    '<template><my-component v-slot="{ Comp }"><Comp>content</Comp></my-component></template>',
+    '<template><my-component v-slot="{ Iteration }"><div><Iteration v-for="i in items" :key="i" /></div></my-component></template>',
+    '<template><my-component #default="{ Comp }"><Comp /></my-component></template>',
+    '<template><my-component #wrapper="{ items, Iteration }"><Iteration v-for="(key, index) in items" :key="key" :index="index" /></my-component></template>',
+    // Slot prop used both as component tag and via :is (references)
+    '<template><my-component v-slot="{ Comp }"><component :is="Comp" /></my-component></template>',
+    // Multiple slot props, some used as tags, some via references
+    '<template><my-component v-slot="{ Comp, data }"><Comp>{{ data }}</Comp></my-component></template>',
+    // Deeply nested component tag usage
+    '<template><my-component v-slot="{ Comp }"><div><span><Comp /></span></div></my-component></template>'
   ],
   invalid: [
     {
@@ -180,6 +192,16 @@ tester.run('no-unused-vars', rule, {
         "'bar' is defined but never used.",
         "'d' is defined but never used."
       ]
+    },
+    // Slot prop used as component tag in sibling slot (different scope)
+    {
+      code: '<template><my-component><template #a="{ Comp }"></template><template #b><Comp /></template></my-component></template>',
+      errors: ["'Comp' is defined but never used."]
+    },
+    // Slot prop with same name exists as tag but in parent scope
+    {
+      code: '<template><my-component v-slot="{ Comp }"><other-component v-slot="props"><Comp /></other-component></my-component></template>',
+      errors: ["'props' is defined but never used."]
     }
   ]
 })

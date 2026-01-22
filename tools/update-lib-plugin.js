@@ -9,34 +9,40 @@
 This script updates `lib/plugin.js` file from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
 
+function camelCase(str) {
+  return str.replaceAll(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+}
+
 // Update files.
-const filePath = path.resolve(__dirname, '../lib/plugin.js')
+const filePath = path.resolve(__dirname, '../lib/plugin.ts')
 const content = `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
+import meta from './meta.ts'
+import processor from './processor.ts'
+${rules
+  .map(
+    (rule) => `import ${camelCase(rule.name)} from './rules/${rule.name}.js'`
+  )
+  .join('\n')}
 
-const plugin = {
-  meta: require('./meta'),
+export default {
+  meta,
   rules: {
-    ${rules
-      .map((rule) => `'${rule.name}': require('./rules/${rule.name}')`)
-      .join(',\n')}
+    ${rules.map((rule) => `'${rule.name}': ${camelCase(rule.name)}`).join(',\n')}
   },
   processors: {
-    '.vue': require('./processor'),
-    'vue': require('./processor')
+    '.vue': processor,
+    vue: processor
   }
 }
-
-module.exports = plugin
 `
 fs.writeFileSync(filePath, content)
 
