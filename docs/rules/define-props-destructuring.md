@@ -93,6 +93,8 @@ The rule applies to both JavaScript and TypeScript props:
 </script>
 ```
 
+</eslint-code-block>
+
 ### `"destructure": "never"`
 
 <eslint-code-block :rules="{'vue/define-props-destructuring': ['error', { destructure: 'never' }]}">
