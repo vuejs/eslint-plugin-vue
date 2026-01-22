@@ -54,6 +54,9 @@ function getTSParserServices(context: RuleContext): Services | null {
   }
 }
 
+/**
+ * Get all props by looking at all component's properties
+ */
 export function getComponentPropsFromTypeDefineTypes(
   context: RuleContext,
   propsNode: TypeNode
@@ -79,6 +82,9 @@ export function getComponentPropsFromTypeDefineTypes(
   return [...extractRuntimeProps(type, tsNode, propsNode, services)]
 }
 
+/**
+ * Get all emits by looking at all component's properties
+ */
 export function getComponentEmitsFromTypeDefineTypes(
   context: RuleContext,
   emitsNode: TypeNode
@@ -104,6 +110,9 @@ export function getComponentEmitsFromTypeDefineTypes(
   return [...extractRuntimeEmits(type, tsNode, emitsNode, services)]
 }
 
+/**
+ * Get all slots by looking at all component's properties
+ */
 export function getComponentSlotsFromTypeDefineTypes(
   context: RuleContext,
   slotsNode: TypeNode

@@ -134,6 +134,9 @@ export function definePropertyReferenceExtractor(
     return (toRefSet = { toRefNodes, toRefsNodes })
   }
 
+  /**
+   * Collects the property references for member expr.
+   */
   class PropertyReferencesForMember implements IPropertyReferences {
     node: MemberExpression
     name: string
@@ -171,6 +174,9 @@ export function definePropertyReferenceExtractor(
     }
   }
 
+  /**
+   * Collects the property references for object.
+   */
   class PropertyReferencesForObject implements IPropertyReferences {
     properties: Record<string, AssignmentProperty[]>
 
@@ -237,6 +243,9 @@ export function definePropertyReferenceExtractor(
     return ANY
   }
 
+  /**
+   * Extract the property references from Expression.
+   */
   function extractFromExpression(
     node:
       | Identifier
@@ -351,6 +360,9 @@ export function definePropertyReferenceExtractor(
     }
   }
 
+  /**
+   * Extract the property references from one parameter of the function.
+   */
   function extractFromPattern(node: Pattern): IPropertyReferences {
     const ref = cacheForPattern.get(node)
     if (ref) {
@@ -379,6 +391,9 @@ export function definePropertyReferenceExtractor(
     }
   }
 
+  /**
+   * Extract the property references from ObjectPattern.
+   */
   function extractFromObjectPattern(node: ObjectPattern): IPropertyReferences {
     const refs = new PropertyReferencesForObject()
     for (const prop of node.properties) {
@@ -399,6 +414,9 @@ export function definePropertyReferenceExtractor(
     return refs
   }
 
+  /**
+   * Extract the property references from id.
+   */
   function extractFromIdentifier(node: Identifier): IPropertyReferences {
     const variable = utils.findVariableByIdentifier(context, node)
     if (!variable) {
@@ -412,6 +430,9 @@ export function definePropertyReferenceExtractor(
     )
   }
 
+  /**
+   * Extract the property references from call.
+   */
   function extractFromCall(
     node: CallExpression,
     argIndex: number
@@ -449,6 +470,9 @@ export function definePropertyReferenceExtractor(
     return extractFromFunctionParam(fnNode, argIndex)
   }
 
+  /**
+   * Extract the property references from function param.
+   */
   function extractFromFunctionParam(
     node: FunctionExpression | ArrowFunctionExpression | FunctionDeclaration,
     argIndex: number
@@ -472,6 +496,9 @@ export function definePropertyReferenceExtractor(
     return result
   }
 
+  /**
+   * Extract the property references from path.
+   */
   function extractFromPath(
     pathString: string,
     node: Identifier | Literal | TemplateLiteral
@@ -493,6 +520,9 @@ export function definePropertyReferenceExtractor(
     }
   }
 
+  /**
+   * Extract the property references from name literal.
+   */
   function extractFromNameLiteral(node: Expression): IPropertyReferences {
     const referenceName =
       node.type === 'Literal' || node.type === 'TemplateLiteral'
@@ -508,6 +538,9 @@ export function definePropertyReferenceExtractor(
       : NEVER
   }
 
+  /**
+   * Extract the property references from name.
+   */
   function extractFromName(
     referenceName: string,
     nameNode: Expression | SpreadElement,
@@ -522,6 +555,9 @@ export function definePropertyReferenceExtractor(
     } satisfies IPropertyReferences
   }
 
+  /**
+   * Extract the property references from toRef call.
+   */
   function extractFromToRef(node: CallExpression): IPropertyReferences {
     const nameNode = node.arguments[1]
     const refName =
@@ -538,6 +574,9 @@ export function definePropertyReferenceExtractor(
     )
   }
 
+  /**
+   * Extract the property references from toRefs call.
+   */
   function extractFromToRefs(node: CallExpression): IPropertyReferences {
     const base = extractFromExpression(node, false)
     return {
@@ -548,6 +587,9 @@ export function definePropertyReferenceExtractor(
     } satisfies IPropertyReferences
   }
 
+  /**
+   * Extract the property references from VExpressionContainer.
+   */
   function extractFromVExpressionContainer(
     node: VExpressionContainer,
     options?: { ignoreGlobals?: boolean }
@@ -592,6 +634,9 @@ export function definePropertyReferenceExtractor(
     return mergePropertyReferences(references)
   }
 
+  /**
+   * Extract the property references from StyleVariablesContext.
+   */
   function extractFromStyleVariablesContext(
     ctx: StyleVariablesContext
   ): IPropertyReferences {
@@ -628,6 +673,9 @@ export function mergePropertyReferences(
   return new PropertyReferencesForMerge(references)
 }
 
+/**
+ * Collects the property references for merge.
+ */
 class PropertyReferencesForMerge implements IPropertyReferences {
   references: IPropertyReferences[]
 

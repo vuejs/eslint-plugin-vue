@@ -27,6 +27,9 @@ import {
 
 export { isTypeNode } from './ts-ast.ts'
 
+/**
+ * Get all props by looking at all component's properties
+ */
 export function getComponentPropsFromTypeDefine(
   context: RuleContext,
   propsNode: TSESTree.TypeNode
@@ -51,6 +54,9 @@ export function getComponentPropsFromTypeDefine(
   return result
 }
 
+/**
+ * Get all emits by looking at all component's properties
+ */
 export function getComponentEmitsFromTypeDefine(
   context: RuleContext,
   emitsNode: TSESTree.TypeNode
@@ -78,6 +84,9 @@ export function getComponentEmitsFromTypeDefine(
   return result
 }
 
+/**
+ * Get all slots by looking at all component's properties
+ */
 export function getComponentSlotsFromTypeDefine(
   context: RuleContext,
   slotsNode: TSESTree.TypeNode
