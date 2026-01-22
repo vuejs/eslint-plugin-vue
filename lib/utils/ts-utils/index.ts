@@ -9,7 +9,7 @@ import type {
   ComponentTypeSlot,
   ComponentInferTypeSlot,
   ComponentUnknownSlot
-} from '../index.js'
+} from '../index.ts'
 import {
   extractRuntimeProps,
   isTSTypeLiteral,

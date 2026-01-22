@@ -4,7 +4,13 @@
  * See LICENSE file in root directory for full license.
  */
 import type { StyleVariablesContext } from './style-variables/index.ts'
-import utils from './index.js'
+import {
+  findVariableByIdentifier,
+  getStaticPropertyName,
+  getStringLiteralValue,
+  hasAttribute,
+  iterateReferencesTraceMap
+} from './index.ts'
 import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
 interface IHasPropertyOption {
@@ -50,7 +56,7 @@ function findFunction(
   context: RuleContext,
   id: Identifier
 ): FunctionExpression | ArrowFunctionExpression | FunctionDeclaration | null {
-  const calleeVariable = utils.findVariableByIdentifier(context, id)
+  const calleeVariable = findVariableByIdentifier(context, id)
   if (!calleeVariable) {
     return null
   }
@@ -102,7 +108,7 @@ export function definePropertyReferenceExtractor(
   let isFunctionalTemplate = false
   const templateBody = context.sourceCode.ast.templateBody
   if (templateBody) {
-    isFunctionalTemplate = utils.hasAttribute(templateBody, 'functional')
+    isFunctionalTemplate = hasAttribute(templateBody, 'functional')
   }
 
   function getToRefSet() {
@@ -113,7 +119,7 @@ export function definePropertyReferenceExtractor(
       context.sourceCode.scopeManager.scopes[0]
     )
     const toRefNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    for (const { node } of iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRef: {
         [ReferenceTracker.CALL]: true
@@ -122,7 +128,7 @@ export function definePropertyReferenceExtractor(
       toRefNodes.add(node)
     }
     const toRefsNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    for (const { node } of iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRefs: {
         [ReferenceTracker.CALL]: true
@@ -285,14 +291,14 @@ export function definePropertyReferenceExtractor(
         case 'MemberExpression': {
           if (parent.object === node) {
             // `arg.foo`
-            const name = utils.getStaticPropertyName(parent)
+            const name = getStaticPropertyName(parent)
 
             if (
               name === '$props' &&
               parent.parent.type === 'MemberExpression'
             ) {
               // `$props.arg`
-              const propName = utils.getStaticPropertyName(parent.parent)
+              const propName = getStaticPropertyName(parent.parent)
 
               if (!propName) return unknownMemberAsUnreferenced ? NEVER : ANY
 
@@ -398,7 +404,7 @@ export function definePropertyReferenceExtractor(
     const refs = new PropertyReferencesForObject()
     for (const prop of node.properties) {
       if (prop.type === 'Property') {
-        const name = utils.getStaticPropertyName(prop)
+        const name = getStaticPropertyName(prop)
         if (name) {
           const list = refs.properties[name] || (refs.properties[name] = [])
           list.push(prop)
@@ -418,7 +424,7 @@ export function definePropertyReferenceExtractor(
    * Extract the property references from id.
    */
   function extractFromIdentifier(node: Identifier): IPropertyReferences {
-    const variable = utils.findVariableByIdentifier(context, node)
+    const variable = findVariableByIdentifier(context, node)
     if (!variable) {
       return NEVER
     }
@@ -526,7 +532,7 @@ export function definePropertyReferenceExtractor(
   function extractFromNameLiteral(node: Expression): IPropertyReferences {
     const referenceName =
       node.type === 'Literal' || node.type === 'TemplateLiteral'
-        ? utils.getStringLiteralValue(node)
+        ? getStringLiteralValue(node)
         : null
     return referenceName
       ? ({
@@ -563,7 +569,7 @@ export function definePropertyReferenceExtractor(
     const refName =
       nameNode &&
       (nameNode.type === 'Literal' || nameNode.type === 'TemplateLiteral')
-        ? utils.getStringLiteralValue(nameNode)
+        ? getStringLiteralValue(nameNode)
         : null
     if (!refName) {
       // unknown name
