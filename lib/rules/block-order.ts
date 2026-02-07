@@ -2,22 +2,12 @@
  * @author Yosuke Ota
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/140
  */
-'use strict'
-
-const utils = require('../utils')
-const { parseSelector } = require('../utils/selector')
-
-/**
- * @typedef {import('../utils/selector').VElementSelector} VElementSelector
- */
+import utils from '../utils/index.js'
+import { parseSelector, type VElementSelector } from '../utils/selector.js'
 
 const DEFAULT_ORDER = Object.freeze([['script', 'template'], 'style'])
 
-/**
- * @param {VElement} element
- * @return {string}
- */
-function getAttributeString(element) {
+function getAttributeString(element: VElement) {
   return element.startTag.attributes
     .map((attribute) => {
       if (attribute.value && attribute.value.type !== 'VLiteral') {
@@ -33,7 +23,7 @@ function getAttributeString(element) {
     .join(' ')
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -66,21 +56,14 @@ module.exports = {
         "'<{{elementName}}{{elementAttributes}}>' should be above '<{{firstUnorderedName}}{{firstUnorderedAttributes}}>' on line {{line}}."
     }
   },
-  /**
-   * @param {RuleContext} context - The rule context.
-   * @returns {RuleListener} AST event handlers.
-   */
-  create(context) {
-    /**
-     * @typedef {object} OrderElement
-     * @property {string} selectorText
-     * @property {VElementSelector} selector
-     * @property {number} index
-     */
-    /** @type {OrderElement[]} */
-    const orders = []
-    /** @type {(string|string[])[]} */
-    const orderOptions =
+  create(context: RuleContext): RuleListener {
+    interface OrderElement {
+      selectorText: string
+      selector: VElementSelector
+      index: number
+    }
+    const orders: OrderElement[] = []
+    const orderOptions: (string | string[])[] =
       (context.options[0] && context.options[0].order) || DEFAULT_ORDER
     for (const [index, selectorOrSelectors] of orderOptions.entries()) {
       if (Array.isArray(selectorOrSelectors)) {
@@ -100,10 +83,7 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {VElement} element
-     */
-    function getOrderElement(element) {
+    function getOrderElement(element: VElement) {
       return orders.find((o) => o.selector.test(element))
     }
     const sourceCode = context.sourceCode
