@@ -26,7 +26,7 @@ build(
 )
 
 build(
-  path.join(dirname, '../../../node_modules/vue-eslint-parser/index.js'),
+  path.join(dirname, '../../../node_modules/vue-eslint-parser/dist/index.cjs'),
   path.join(dirname, './shim/vue-eslint-parser.mjs'),
   [
     'node:path',
