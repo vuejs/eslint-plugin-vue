@@ -1,5 +1,5 @@
 import { ESLint } from '../../eslint-compat'
-import plugin from '../../../lib'
+import plugin from '../../../dist'
 
 describe('eslintrc configs', () => {
   for (const name of Object.keys(plugin.configs)) {
