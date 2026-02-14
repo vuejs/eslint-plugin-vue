@@ -2849,7 +2849,7 @@ export function getDefaultPropExpressionsForPropsDestructure(
 /**
  * Gets the pattern of the left operand of defineProps.
  */
-function getLeftOfDefineProps(node: CallExpression): Pattern | null {
+export function getLeftOfDefineProps(node: CallExpression): Pattern | null {
   let target = node
   if (hasWithDefaults(target)) {
     target = target.parent
