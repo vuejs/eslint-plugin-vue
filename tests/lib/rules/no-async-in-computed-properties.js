@@ -1701,6 +1701,94 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           endColumn: 68
         }
       ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return Promise.allSettled([])
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 44
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return Promise.any([])
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return Promise.try([])
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 37
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          computed: {
+            foo: function () {
+              return Promise.withResolvers([])
+            }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Unexpected asynchronous action in "foo" computed property.',
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 47
+        }
+      ]
     }
   ]
 })
