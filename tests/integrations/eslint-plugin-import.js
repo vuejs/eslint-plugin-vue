@@ -5,39 +5,33 @@
  */
 'use strict'
 
-const cp = require('node:child_process')
+const { execSync } = require('node:child_process')
 const path = require('node:path')
 const semver = require('semver')
 
 const PLUGIN_DIR = path.join(__dirname, 'eslint-plugin-import')
-const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`
+const ESLINT = path.join(PLUGIN_DIR, 'node_modules', '.bin', 'eslint')
+
+let eslintNodeVersion = ''
 
 describe('Integration with eslint-plugin-import', () => {
   beforeAll(() => {
-    cp.execSync('npm i', { cwd: PLUGIN_DIR, stdio: 'inherit' })
+    execSync('npm i', { cwd: PLUGIN_DIR, stdio: 'inherit' })
+    eslintNodeVersion = require(
+      path.join(PLUGIN_DIR, 'node_modules/eslint/package.json')
+    ).engines.node
   })
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/21#issuecomment-308957697
   // eslint-plugin-vue had been breaking eslint-plugin-import if people use both at the same time.
   // This test is in order to prevent the regression.
-  it('should lint without errors', () => {
-    if (
-      !semver.satisfies(
-        process.version,
-        require(
-          path.join(
-            __dirname,
-            'eslint-plugin-import/node_modules/eslint/package.json'
-          )
-        ).engines.node
-      )
-    ) {
-      return
+  it.skipIf(!semver.satisfies(process.version, eslintNodeVersion))(
+    'should lint without errors',
+    () => {
+      execSync(`${ESLINT} --config eslint.config.mjs a.vue`, {
+        cwd: PLUGIN_DIR,
+        stdio: 'inherit'
+      })
     }
-
-    cp.execSync(`${ESLINT} --config eslint.config.mjs a.vue`, {
-      cwd: PLUGIN_DIR,
-      stdio: 'inherit'
-    })
-  })
+  )
 })
