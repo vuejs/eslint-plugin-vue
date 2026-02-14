@@ -68,8 +68,6 @@ export type {
   ScriptSetupVisitor
 } from '../../typings/eslint-plugin-vue/util-types/utils.ts'
 
-export { getScope }
-
 export interface ComponentComputedProperty {
   key: string | null
   value: BlockStatement | null
@@ -3207,3 +3205,5 @@ function getObjectOrArray(
   }
   return null
 }
+
+export { getScope } from './scope.ts'
