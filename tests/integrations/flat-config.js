@@ -1,37 +1,34 @@
 'use strict'
 
-const { strict: assert } = require('assert')
-const cp = require('child_process')
-const path = require('path')
+const { strict: assert } = require('node:assert')
+const { execSync } = require('node:child_process')
+const path = require('node:path')
 const semver = require('semver')
 
 const TARGET_DIR = path.join(__dirname, 'flat-config')
-const ESLINT = `.${path.sep}node_modules${path.sep}.bin${path.sep}eslint`
+const ESLINT = path.join(TARGET_DIR, 'node_modules', '.bin', 'eslint')
+
+let eslintNodeVersion = ''
 
 describe('Integration with flat config', () => {
   beforeAll(() => {
-    cp.execSync('npm i -f', { cwd: TARGET_DIR, stdio: 'inherit' })
+    execSync('npm i -f', { cwd: TARGET_DIR, stdio: 'inherit' })
+    eslintNodeVersion = require(
+      path.join(TARGET_DIR, 'node_modules/eslint/package.json')
+    ).engines.node
   })
 
-  it('should lint without errors', () => {
-    if (
-      !semver.satisfies(
-        process.version,
-        require(
-          path.join(__dirname, 'flat-config/node_modules/eslint/package.json')
-        ).engines.node
+  it.skipIf(!semver.satisfies(process.version, eslintNodeVersion))(
+    'should lint without errors',
+    () => {
+      const result = JSON.parse(
+        execSync(`${ESLINT} a.vue --format=json`, {
+          cwd: TARGET_DIR,
+          encoding: 'utf8'
+        })
       )
-    ) {
-      return
+      assert.strictEqual(result.length, 1)
+      assert.deepStrictEqual(result[0].messages, [])
     }
-
-    const result = JSON.parse(
-      cp.execSync(`${ESLINT} a.vue --format=json`, {
-        cwd: TARGET_DIR,
-        encoding: 'utf8'
-      })
-    )
-    assert.strictEqual(result.length, 1)
-    assert.deepStrictEqual(result[0].messages, [])
-  })
+  )
 })

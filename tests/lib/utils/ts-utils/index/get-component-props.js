@@ -3,13 +3,13 @@
  */
 'use strict'
 
-const path = require('path')
-const fs = require('fs')
+const path = require('node:path')
+const fs = require('node:fs')
 const Linter = require('../../../../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
 const tsParser = require('@typescript-eslint/parser')
 const utils = require('../../../../../lib/utils/index')
-const assert = require('assert')
+const assert = require('node:assert')
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,
@@ -70,8 +70,8 @@ function extractComponentProps(code, tsFileCode) {
   return result
 }
 
-describe('getComponentPropsFromTypeDefineTypes', () => {
-  for (const { scriptCode, tsFileCode, props: expected } of [
+describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
+  it.each([
     {
       scriptCode: `defineProps<{foo:string,bar?:number}>()`,
       props: [
@@ -203,9 +203,10 @@ defineProps<{foo?:A}>()`,
         }
       ]
     }
-  ]) {
-    const code = `<script setup lang="ts"> ${scriptCode} </script>`
-    it(`should return expected props with :${code}`, () => {
+  ])(
+    'should return expected props with $scriptCode',
+    ({ scriptCode, tsFileCode, props: expected }) => {
+      const code = `<script setup lang="ts"> ${scriptCode} </script>`
       const props = extractComponentProps(code, tsFileCode)
 
       assert.deepStrictEqual(
@@ -213,6 +214,6 @@ defineProps<{foo?:A}>()`,
         expected,
         `\n${JSON.stringify(props)}\n === \n${JSON.stringify(expected)}`
       )
-    })
-  }
+    }
+  )
 })

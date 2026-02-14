@@ -3,7 +3,7 @@
  * @author Toru Nagashima
  */
 
-import assert from 'assert'
+import assert from 'node:assert'
 import parserVue from 'vue-eslint-parser'
 import { ESLint } from '../../eslint-compat'
 import pluginVue from '../../../lib'

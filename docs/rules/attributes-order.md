@@ -144,7 +144,8 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       "CONTENT"
     ],
     "alphabetical": false,
-    "sortLineLength": false
+    "sortLineLength": false,
+    "ignoreVBindObject": false
   }]
 }
 ```
@@ -270,6 +271,25 @@ When `alphabetical` and `sortLineLength` are both set to `true`, attributes with
     dd="4"
     cc="3"
   ></div>
+</template>
+```
+
+</eslint-code-block>
+
+### `"ignoreVBindObject": true`
+
+When set to `true`, the `v-bind="object"` directive will be excluded from the attribute order check. This is useful when the spread binding is intentionally placed in a specific position for functional reasons, such as controlling the execution order of event handlers.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {ignoreVBindObject: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyButton
+    :foo="foo"
+    @click="onClick"
+    v-bind="attrs"
+  />
 </template>
 ```
 

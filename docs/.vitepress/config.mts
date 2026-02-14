@@ -1,7 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
 import eslint4b, { requireESLintUseAtYourOwnRisk4b } from 'vite-plugin-eslint4b'
 
@@ -163,7 +163,8 @@ export default async () => {
           globby: path.join(dirname, './build-system/shim/empty.mjs'),
           'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
           tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/empty.mjs')
+          module: path.join(dirname, './build-system/shim/empty.mjs'),
+          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
         }
       },
       define: {
