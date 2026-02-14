@@ -1,5 +1,23 @@
 # eslint-plugin-vue
 
+## 10.8.0
+
+### Minor Changes
+
+- Added more `Promise` functions to [`vue/no-async-in-computed-properties`](https://eslint.vuejs.org/rules/no-async-in-computed-properties.html) ([#3020](https://github.com/vuejs/eslint-plugin-vue/pull/3020))
+
+- Added `ignoreVBindObject` option to [`vue/attributes-order`](https://eslint.vuejs.org/rules/attributes-order.html) ([#3012](https://github.com/vuejs/eslint-plugin-vue/pull/3012))
+
+- Added `allowEmptyAlias` option to [`vue/valid-v-for`](https://eslint.vuejs.org/rules/valid-v-for.html) ([#3011](https://github.com/vuejs/eslint-plugin-vue/pull/3011))
+
+- Added [ESLint v10](https://eslint.org/blog/2026/02/eslint-v10.0.0-released/) as an allowed peer dependency (needs [`eslint-parser-vue` v10.3.0](https://github.com/vuejs/vue-eslint-parser/releases/tag/v10.3.0)) ([#2962](https://github.com/vuejs/eslint-plugin-vue/pull/2962))
+
+- Added new `destructure: "only-when-assigned"` option to [`vue/define-props-destructuring`](https://eslint.vuejs.org/rules/define-props-destructuring.html) and changed default value from `destructure: "always"` to `destructure: "only-when-assigned"` ([#3009](https://github.com/vuejs/eslint-plugin-vue/pull/3009))
+
+### Patch Changes
+
+- Fixed [`vue/no-unused-vars`](https://eslint.vuejs.org/rules/no-unused-vars.html) to detect components passed as slot props ([#3008](https://github.com/vuejs/eslint-plugin-vue/pull/3008))
+
 ## 10.7.0
 
 ### Minor Changes
