@@ -4,7 +4,7 @@ const {
   escape,
   toRegExp,
   toRegExpGroupMatcher
-} = require('../../../lib/utils/regexp')
+} = require('../../../lib/utils/regexp.ts')
 const assert = require('node:assert')
 
 const ESCAPED = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\'

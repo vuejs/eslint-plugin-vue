@@ -2,154 +2,117 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const {
+import { TSESTree } from '@typescript-eslint/types'
+import type { TSNodeListener } from '../../typings/eslint-plugin-vue/util-types/indent-helper'
+import type { HasLocation } from '../../typings/eslint-plugin-vue/util-types/node'
+import {
   isClosingParenToken,
   isOpeningParenToken,
   isOpeningBraceToken,
   isNotClosingParenToken,
   isClosingBracketToken,
   isOpeningBracketToken
-} = require('@eslint-community/eslint-utils')
-const { isTypeNode } = require('./ts-utils')
+} from '@eslint-community/eslint-utils'
+import { isTypeNode } from './ts-utils/index.ts'
 
-/**
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/indent-helper').TSNodeListener} TSNodeListener
- * @typedef {import('../../typings/eslint-plugin-vue/util-types/node').HasLocation} HasLocation
- * @typedef { { type: string } & HasLocation } MaybeNode
- */
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.Node} TSESTreeNode
- * @typedef {import('@typescript-eslint/types').TSESTree.ClassExpression} ClassExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.ClassDeclaration} ClassDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeAliasDeclaration} TSTypeAliasDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSCallSignatureDeclaration} TSCallSignatureDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSConstructSignatureDeclaration} TSConstructSignatureDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSImportEqualsDeclaration} TSImportEqualsDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSAbstractMethodDefinition} TSAbstractMethodDefinition
- * @typedef {import('@typescript-eslint/types').TSESTree.TSAbstractPropertyDefinition} TSAbstractPropertyDefinition
- * @typedef {import('@typescript-eslint/types').TSESTree.TSAbstractAccessorProperty} TSAbstractAccessorProperty
- * @typedef {import('@typescript-eslint/types').TSESTree.TSEnumMember} TSEnumMember
- * @typedef {import('@typescript-eslint/types').TSESTree.TSPropertySignature} TSPropertySignature
- * @typedef {import('@typescript-eslint/types').TSESTree.TSIndexSignature} TSIndexSignature
- * @typedef {import('@typescript-eslint/types').TSESTree.TSMethodSignature} TSMethodSignature
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeParameterInstantiation} TSTypeParameterInstantiation
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeParameterDeclaration} TSTypeParameterDeclaration
- * @typedef {import('@typescript-eslint/types').TSESTree.TSConstructorType} TSConstructorType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSFunctionType} TSFunctionType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSUnionType} TSUnionType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSIntersectionType} TSIntersectionType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSInterfaceHeritage} TSInterfaceHeritage
- * @typedef {import('@typescript-eslint/types').TSESTree.TSClassImplements} TSClassImplements
- * @typedef {import('@typescript-eslint/types').TSESTree.TSInterfaceBody} TSInterfaceBody
- * @typedef {import('@typescript-eslint/types').TSESTree.TSModuleBlock} TSModuleBlock
- * @typedef {import('@typescript-eslint/types').TSESTree.TSDeclareFunction} TSDeclareFunction
- * @typedef {import('@typescript-eslint/types').TSESTree.TSEmptyBodyFunctionExpression} TSEmptyBodyFunctionExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeOperator} TSTypeOperator
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeQuery} TSTypeQuery
- * @typedef {import('@typescript-eslint/types').TSESTree.TSInferType} TSInferType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSOptionalType} TSOptionalType
- * @typedef {import('@typescript-eslint/types').TSESTree.TSNonNullExpression} TSNonNullExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.TSAsExpression} TSAsExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.TSSatisfiesExpression} TSSatisfiesExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeReference} TSTypeReference
- * @typedef {import('@typescript-eslint/types').TSESTree.TSInstantiationExpression} TSInstantiationExpression
- * @typedef {import('@typescript-eslint/types').TSESTree.JSXChild} JSXChild
- * @typedef {import('@typescript-eslint/types').TSESTree.TypeNode} TypeNode
- *
- */
-/**
- * Deprecated in @typescript-eslint/parser v5
- * @typedef {import('@typescript-eslint/types').TSESTree.PropertyDefinition} ClassProperty
- * @typedef {import('@typescript-eslint/types').TSESTree.TSAbstractPropertyDefinition} TSAbstractClassProperty
- */
+type MaybeNode = { type: string } & HasLocation
 
-module.exports = {
-  defineVisitor
+type TSESTreeNode = TSESTree.Node
+type ClassExpression = TSESTree.ClassExpression
+type ClassDeclaration = TSESTree.ClassDeclaration
+type TSTypeAliasDeclaration = TSESTree.TSTypeAliasDeclaration
+type TSCallSignatureDeclaration = TSESTree.TSCallSignatureDeclaration
+type TSConstructSignatureDeclaration = TSESTree.TSConstructSignatureDeclaration
+type TSImportEqualsDeclaration = TSESTree.TSImportEqualsDeclaration
+type TSAbstractMethodDefinition = TSESTree.TSAbstractMethodDefinition
+type TSAbstractPropertyDefinition = TSESTree.TSAbstractPropertyDefinition
+type TSAbstractAccessorProperty = TSESTree.TSAbstractAccessorProperty
+type TSEnumMember = TSESTree.TSEnumMember
+type TSPropertySignature = TSESTree.TSPropertySignature
+type TSIndexSignature = TSESTree.TSIndexSignature
+type TSMethodSignature = TSESTree.TSMethodSignature
+type TSTypeParameterInstantiation = TSESTree.TSTypeParameterInstantiation
+type TSTypeParameterDeclaration = TSESTree.TSTypeParameterDeclaration
+type TSConstructorType = TSESTree.TSConstructorType
+type TSFunctionType = TSESTree.TSFunctionType
+type TSUnionType = TSESTree.TSUnionType
+type TSIntersectionType = TSESTree.TSIntersectionType
+type TSInterfaceHeritage = TSESTree.TSInterfaceHeritage
+type TSClassImplements = TSESTree.TSClassImplements
+type TSInterfaceBody = TSESTree.TSInterfaceBody
+type TSModuleBlock = TSESTree.TSModuleBlock
+type TSDeclareFunction = TSESTree.TSDeclareFunction
+type TSEmptyBodyFunctionExpression = TSESTree.TSEmptyBodyFunctionExpression
+type TSTypeOperator = TSESTree.TSTypeOperator
+type TSTypeQuery = TSESTree.TSTypeQuery
+type TSInferType = TSESTree.TSInferType
+type TSOptionalType = TSESTree.TSOptionalType
+type TSNonNullExpression = TSESTree.TSNonNullExpression
+type TSAsExpression = TSESTree.TSAsExpression
+type TSSatisfiesExpression = TSESTree.TSSatisfiesExpression
+type TSTypeReference = TSESTree.TSTypeReference
+type TSInstantiationExpression = TSESTree.TSInstantiationExpression
+
+// #region Deprecated in @typescript-eslint/parser v5
+type ClassProperty = TSESTree.PropertyDefinition
+type TSAbstractClassProperty = TSESTree.TSAbstractPropertyDefinition
+// #endregion
+
+interface DefineVisitorParam {
+  /**
+   * Process the given node list.
+   * The first node is offsetted from the given left token.
+   * Rest nodes are adjusted to the first node.
+   */
+  processNodeList: (
+    nodeList: (MaybeNode | null)[],
+    left: MaybeNode | Token | null,
+    right: MaybeNode | Token | null,
+    offset: number,
+    alignVertically?: boolean
+  ) => void
+  tokenStore: ParserServices.TokenStore | SourceCode
+  setOffset: (
+    token: Token | Token[] | null | (Token | null)[],
+    offset: number,
+    baseToken: Token
+  ) => void
+  /** Copy offset to the given tokens from srcToken */
+  copyOffset: (token: Token, srcToken: Token) => void
+  processSemicolons: (node: MaybeNode) => void
+  /**
+   * Get the first and last tokens of the given node.
+   * If the node is parenthesized, this gets the outermost parentheses.
+   */
+  getFirstAndLastTokens: (
+    node: MaybeNode,
+    /** The least offset of the first token. Defailt is 0. This value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish. */
+    borderOffset?: number
+  ) => { firstToken: Token; lastToken: Token }
 }
 
-/**
- * Process the given node list.
- * The first node is offsetted from the given left token.
- * Rest nodes are adjusted to the first node.
- * @callback ProcessNodeList
- * @param {(MaybeNode|null)[]} nodeList The node to process.
- * @param {MaybeNode|Token|null} left The left parenthesis token.
- * @param {MaybeNode|Token|null} right The right parenthesis token.
- * @param {number} offset The offset to set.
- * @param {boolean} [alignVertically=true] The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
- * @returns {void}
- */
-/**
- * Set offset to the given tokens.
- * @callback SetOffset
- * @param {Token|Token[]|null|(Token|null)[]} token The token to set.
- * @param {number} offset The offset of the tokens.
- * @param {Token} baseToken The token of the base offset.
- * @returns {void}
- */
-/**
- *
- * Copy offset to the given tokens from srcToken.
- * @callback CopyOffset
- * @param {Token} token The token to set.
- * @param {Token} srcToken The token of the source offset.
- * @returns {void}
- */
-/**
- * Process semicolons of the given statement node.
- * @callback ProcessSemicolons
- * @param {MaybeNode} node The statement node to process.
- * @returns {void}
- */
-/**
- * Get the first and last tokens of the given node.
- * If the node is parenthesized, this gets the outermost parentheses.
- * @callback GetFirstAndLastTokens
- * @param {MaybeNode} node The node to get.
- * @param {number} [borderOffset] The least offset of the first token. Defailt is 0. This value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
- * @returns {{firstToken:Token,lastToken:Token}} The gotten tokens.
- */
-/**
- * @typedef {object} DefineVisitorParam
- * @property {ProcessNodeList} processNodeList
- * @property {ParserServices.TokenStore | SourceCode} tokenStore
- * @property {SetOffset} setOffset
- * @property {CopyOffset} copyOffset
- * @property {ProcessSemicolons} processSemicolons
- * @property {GetFirstAndLastTokens} getFirstAndLastTokens
- */
-
-/**
- * @param {DefineVisitorParam} param
- * @returns {TSNodeListener}
- */
-function defineVisitor({
+export function defineVisitor({
   processNodeList,
   tokenStore,
   setOffset,
   copyOffset,
   processSemicolons,
   getFirstAndLastTokens
-}) {
+}: DefineVisitorParam): TSNodeListener {
   /**
    * Check whether a given token is the first token of:
    *
    * - A parameter of TSTypeParameterInstantiation
    * - An element of TSTupleType
-   *
-   * @param {Token} token The token to check.
-   * @param {TSUnionType | TSIntersectionType} belongingNode The node that the token is belonging to.
-   * @returns {boolean} `true` if the token is the first token of an element.
    */
-  function isBeginningOfElement(token, belongingNode) {
-    /** @type {TSESTreeNode | null} */
-    let node = belongingNode
+  function isBeginningOfElement(
+    token: Token,
+    belongingNode: TSUnionType | TSIntersectionType
+  ): boolean {
+    let node: TSESTreeNode | null = belongingNode
 
     while (node != null && node.parent != null) {
-      /** @type {TSESTreeNode} */
-      const parent = node.parent
+      const parent: TSESTreeNode = node.parent
       if (parent.type === 'TSTypeParameterInstantiation') {
         return (
           parent.params.length >= 2 &&
@@ -177,10 +140,9 @@ function defineVisitor({
 
   return {
     // Support TypeScript
-    /** @param {ClassDeclaration | ClassExpression} node */
     ['ClassDeclaration[implements], ClassDeclaration[typeParameters], ClassDeclaration[superTypeParameters],' +
       'ClassExpression[implements], ClassExpression[typeParameters], ClassExpression[superTypeParameters]'](
-      node
+      node: ClassDeclaration | ClassExpression
     ) {
       if (node.typeParameters != null) {
         setOffset(
@@ -191,7 +153,7 @@ function defineVisitor({
       }
       const superTypeArguments =
         node.superTypeArguments ||
-        /** @type {any} for old parser */ (node).superTypeParameters
+        /** for old parser */ (node as any).superTypeParameters
       if (superTypeArguments != null && node.superClass != null) {
         setOffset(
           tokenStore.getFirstToken(superTypeArguments),
@@ -207,37 +169,34 @@ function defineVisitor({
       }
     },
     // Process semicolons.
-    /**
-     * @param {TSTypeAliasDeclaration
-     *   | TSCallSignatureDeclaration
-     *   | TSConstructSignatureDeclaration
-     *   | TSImportEqualsDeclaration
-     *   | TSAbstractMethodDefinition
-     *   | TSAbstractPropertyDefinition
-     *   | TSAbstractAccessorProperty
-     *   | TSEnumMember
-     *   | TSPropertySignature
-     *   | TSIndexSignature
-     *   | TSMethodSignature
-     *   | ClassProperty
-     *   | TSAbstractClassProperty} node
-     */
     ['TSTypeAliasDeclaration, TSCallSignatureDeclaration, TSConstructSignatureDeclaration, TSImportEqualsDeclaration,' +
       'TSAbstractMethodDefinition, TSAbstractPropertyDefinition, TSAbstractAccessorProperty, TSEnumMember,' +
       'TSPropertySignature, TSIndexSignature, TSMethodSignature,' +
       // Deprecated in @typescript-eslint/parser v5
-      'ClassProperty, TSAbstractClassProperty'](node) {
+      'ClassProperty, TSAbstractClassProperty'](
+      node:
+        | TSTypeAliasDeclaration
+        | TSCallSignatureDeclaration
+        | TSConstructSignatureDeclaration
+        | TSImportEqualsDeclaration
+        | TSAbstractMethodDefinition
+        | TSAbstractPropertyDefinition
+        | TSAbstractAccessorProperty
+        | TSEnumMember
+        | TSPropertySignature
+        | TSIndexSignature
+        | TSMethodSignature
+        | ClassProperty
+        | TSAbstractClassProperty
+    ) {
       processSemicolons(node)
     },
-    /**
-     * @param {ASTNode} node
-     */
-    '*[type=/^TS/]'(node) {
+    '*[type=/^TS/]'(node: ASTNode) {
       if (!isTypeNode(node)) {
         return
       }
       const typeNode = node
-      if (/** @type {any} */ (typeNode.parent).type === 'TSParenthesizedType') {
+      if ((typeNode.parent as any).type === 'TSParenthesizedType') {
         return
       }
       // Process parentheses.
@@ -275,9 +234,7 @@ function defineVisitor({
         count: 2,
         includeComments: false
       })
-      const baseToken = tokenStore.getFirstToken(
-        /** @type {HasLocation} */ (node.parent)
-      )
+      const baseToken = tokenStore.getFirstToken(node.parent)
       setOffset([colonOrArrowToken, secondToken], 1, baseToken)
 
       // a ?: T
@@ -300,10 +257,10 @@ function defineVisitor({
      * var foo = bar satisfies Bar
      * //        ^^^^^^^^^^^^^^^^^
      * ```
-     *
-     * @param {TSAsExpression | TSSatisfiesExpression} node
      */
-    'TSAsExpression, TSSatisfiesExpression'(node) {
+    'TSAsExpression, TSSatisfiesExpression'(
+      node: TSAsExpression | TSSatisfiesExpression
+    ) {
       const expressionTokens = getFirstAndLastTokens(node.expression)
       const asOrSatisfiesToken = tokenStore.getTokenAfter(
         expressionTokens.lastToken
@@ -331,14 +288,14 @@ function defineVisitor({
      * const ErrorMap = Map<string, Error>;
      * //               ^^^^^^^^^^^^^^^^^^
      * ```
-     *
-     * @param {TSTypeReference | TSInstantiationExpression} node
      */
-    'TSTypeReference, TSInstantiationExpression'(node) {
+    'TSTypeReference, TSInstantiationExpression'(
+      node: TSTypeReference | TSInstantiationExpression
+    ) {
       const typeArguments =
         'typeArguments' in node
           ? node.typeArguments
-          : /** @type {any} typescript-eslint v5 */ (node).typeParameters
+          : /** typescript-eslint v5 */ (node as any).typeParameters
       if (typeArguments) {
         const firstToken = tokenStore.getFirstToken(node)
         setOffset(tokenStore.getFirstToken(typeArguments), 1, firstToken)
@@ -358,9 +315,10 @@ function defineVisitor({
      * type Foo<T>
      * //      ^^^
      * ```
-     * @param {TSTypeParameterInstantiation | TSTypeParameterDeclaration} node
      */
-    'TSTypeParameterInstantiation, TSTypeParameterDeclaration'(node) {
+    'TSTypeParameterInstantiation, TSTypeParameterDeclaration'(
+      node: TSTypeParameterInstantiation | TSTypeParameterDeclaration
+    ) {
       // <T>
       processNodeList(
         node.params,
@@ -402,9 +360,10 @@ function defineVisitor({
      * type Foo = () => void
      * //         ^^^^^^^^^^
      * ```
-     * @param {TSConstructorType | TSFunctionType} node
      */
-    'TSConstructorType, TSFunctionType'(node) {
+    'TSConstructorType, TSFunctionType'(
+      node: TSConstructorType | TSFunctionType
+    ) {
       // ()=>void
       const firstToken = tokenStore.getFirstToken(node)
       // new or < or (
@@ -422,12 +381,10 @@ function defineVisitor({
         setOffset(currToken, 1, firstToken)
       }
       const leftParenToken = currToken
-      const rightParenToken = /**@type {Token} */ (
-        tokenStore.getTokenAfter(
-          node.params.at(-1) || leftParenToken,
-          isClosingParenToken
-        )
-      )
+      const rightParenToken = tokenStore.getTokenAfter(
+        node.params.at(-1) || leftParenToken,
+        isClosingParenToken
+      )!
       processNodeList(node.params, leftParenToken, rightParenToken, 1)
       const arrowToken = tokenStore.getTokenAfter(rightParenToken)
       setOffset(arrowToken, 1, leftParenToken)
@@ -497,12 +454,10 @@ function defineVisitor({
      */
     TSIndexSignature(node) {
       const leftBracketToken = tokenStore.getFirstToken(node)
-      const rightBracketToken = /**@type {Token} */ (
-        tokenStore.getTokenAfter(
-          node.parameters.at(-1) || leftBracketToken,
-          isClosingBracketToken
-        )
-      )
+      const rightBracketToken = tokenStore.getTokenAfter(
+        node.parameters.at(-1) || leftBracketToken,
+        isClosingBracketToken
+      )!
       processNodeList(node.parameters, leftBracketToken, rightBracketToken, 1)
       const keyLast = rightBracketToken
       if (node.typeAnnotation) {
@@ -566,8 +521,7 @@ function defineVisitor({
       setOffset(leftBracketToken, 1, objectToken)
       processNodeList([node.indexType], leftBracketToken, rightBracketToken, 1)
     },
-    /** @param {TSUnionType | TSIntersectionType} node */
-    'TSUnionType, TSIntersectionType'(node) {
+    'TSUnionType, TSIntersectionType'(node: TSUnionType | TSIntersectionType) {
       // A | B
       // A & B
       const firstToken = tokenStore.getFirstToken(node)
@@ -723,13 +677,15 @@ function defineVisitor({
       const extendsTypeToken = tokenStore.getFirstToken(node.extendsType)
       setOffset(extendsToken, 1, checkTypeToken)
       setOffset(extendsTypeToken, 1, extendsToken)
-      const questionToken = /**@type {Token} */ (
-        tokenStore.getTokenAfter(node.extendsType, isNotClosingParenToken)
-      )
+      const questionToken = tokenStore.getTokenAfter(
+        node.extendsType,
+        isNotClosingParenToken
+      )!
       const consequentToken = tokenStore.getTokenAfter(questionToken)
-      const colonToken = /**@type {Token} */ (
-        tokenStore.getTokenAfter(node.trueType, isNotClosingParenToken)
-      )
+      const colonToken = tokenStore.getTokenAfter(
+        node.trueType,
+        isNotClosingParenToken
+      )!
       const alternateToken = tokenStore.getTokenAfter(colonToken)
       let baseNode = node
       let parent = baseNode.parent
@@ -786,10 +742,8 @@ function defineVisitor({
      * interface Foo { }
      * //            ^^^
      * ```
-     *
-     * @param {TSInterfaceBody | TSModuleBlock} node
      */
-    'TSInterfaceBody, TSModuleBlock'(node) {
+    'TSInterfaceBody, TSModuleBlock'(node: TSInterfaceBody | TSModuleBlock) {
       processNodeList(
         node.body,
         tokenStore.getFirstToken(node),
@@ -807,12 +761,12 @@ function defineVisitor({
      * class Foo<T> implements Bar<T> { }
      * //                      ^^^^^^
      * ```
-     * @param {TSInterfaceHeritage | TSClassImplements} node
      */
-    'TSClassImplements, TSInterfaceHeritage'(node) {
+    'TSClassImplements, TSInterfaceHeritage'(
+      node: TSClassImplements | TSInterfaceHeritage
+    ) {
       const typeArguments =
-        node.typeArguments ||
-        /** @type {any} for old parser */ (node).typeParameters
+        node.typeArguments || /** for old parser */ (node as any).typeParameters
       if (typeArguments) {
         setOffset(
           tokenStore.getFirstToken(typeArguments),
@@ -882,9 +836,10 @@ function defineVisitor({
       } else {
         keyLast = keyTokens.lastToken
       }
-      const leftParenToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(keyLast, isOpeningParenToken)
-      )
+      const leftParenToken = tokenStore.getTokenAfter(
+        keyLast,
+        isOpeningParenToken
+      )!
       setOffset(
         [
           ...tokenStore.getTokensBetween(keyLast, leftParenToken),
@@ -932,9 +887,10 @@ function defineVisitor({
      * interface A { new <T> (e: E): R }
      * //            ^^^^^^^^^^^^^^^^^
      * ```
-     * @param {TSCallSignatureDeclaration | TSConstructSignatureDeclaration} node
      */
-    'TSCallSignatureDeclaration, TSConstructSignatureDeclaration'(node) {
+    'TSCallSignatureDeclaration, TSConstructSignatureDeclaration'(
+      node: TSCallSignatureDeclaration | TSConstructSignatureDeclaration
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       // new or < or (
       let currToken = firstToken
@@ -951,12 +907,10 @@ function defineVisitor({
         setOffset(currToken, 1, firstToken)
       }
       const leftParenToken = currToken
-      const rightParenToken = /** @type {Token} */ (
-        tokenStore.getTokenAfter(
-          node.params.at(-1) || leftParenToken,
-          isClosingParenToken
-        )
-      )
+      const rightParenToken = tokenStore.getTokenAfter(
+        node.params.at(-1) || leftParenToken,
+        isClosingParenToken
+      )!
       processNodeList(node.params, leftParenToken, rightParenToken, 1)
       if (node.returnType) {
         const typeAnnotationToken = tokenStore.getFirstToken(node.returnType)
@@ -988,17 +942,16 @@ function defineVisitor({
      * //           ^^^
      * }
      * ```
-     * @param {TSDeclareFunction | TSEmptyBodyFunctionExpression} node
      */
-    'TSDeclareFunction, TSEmptyBodyFunctionExpression'(node) {
+    'TSDeclareFunction, TSEmptyBodyFunctionExpression'(
+      node: TSDeclareFunction | TSEmptyBodyFunctionExpression
+    ) {
       const firstToken = tokenStore.getFirstToken(node)
       let leftParenToken, bodyBaseToken
       if (firstToken.type === 'Punctuator') {
         // method
         leftParenToken = firstToken
-        bodyBaseToken = tokenStore.getFirstToken(
-          /** @type {HasLocation} */ (node.parent)
-        )
+        bodyBaseToken = tokenStore.getFirstToken(node.parent)
       } else {
         let nextToken = tokenStore.getTokenAfter(firstToken)
         let nextTokenOffset = 0
@@ -1050,10 +1003,10 @@ function defineVisitor({
      * type Foo<T> = T extends Bar<infer U> ? U : T;
      * //                          ^^^^^^^
      * ```
-     *
-     * @param {TSTypeOperator | TSTypeQuery | TSInferType} node
      */
-    'TSTypeOperator, TSTypeQuery, TSInferType'(node) {
+    'TSTypeOperator, TSTypeQuery, TSInferType'(
+      node: TSTypeOperator | TSTypeQuery | TSInferType
+    ) {
       // keyof T
       // type T = typeof av
       // infer U
@@ -1105,13 +1058,18 @@ function defineVisitor({
      * enum Foo { Bar = x }
      * //         ^^^^^^^
      * ```
-     *
-     * @param {TSAbstractMethodDefinition | TSAbstractPropertyDefinition | TSAbstractAccessorProperty | TSEnumMember | TSAbstractClassProperty | ClassProperty} node
-     *
      */
     ['TSAbstractMethodDefinition, TSAbstractPropertyDefinition, TSAbstractAccessorProperty, TSEnumMember,' +
       // Deprecated in @typescript-eslint/parser v5
-      'ClassProperty, TSAbstractClassProperty'](node) {
+      'ClassProperty, TSAbstractClassProperty'](
+      node:
+        | TSAbstractMethodDefinition
+        | TSAbstractPropertyDefinition
+        | TSAbstractAccessorProperty
+        | TSEnumMember
+        | ClassProperty
+        | TSAbstractClassProperty
+    ) {
       const { keyNode, valueNode } =
         node.type === 'TSEnumMember'
           ? { keyNode: node.id, valueNode: node.initializer }
@@ -1161,10 +1119,10 @@ function defineVisitor({
      * type T = U!
      * //       ^^
      * ```
-     *
-     * @param {TSOptionalType | TSNonNullExpression} node
      */
-    'TSOptionalType, TSNonNullExpression, TSJSDocNonNullableType'(node) {
+    'TSOptionalType, TSNonNullExpression, TSJSDocNonNullableType'(
+      node: TSOptionalType | TSNonNullExpression
+    ) {
       setOffset(
         tokenStore.getLastToken(node),
         1,
@@ -1206,15 +1164,14 @@ function defineVisitor({
       } else {
         // For old typescript-eslint parser
         args.push(
-          node.argument ||
-            /** @type {any} typescript-eslint v5 */ (node).parameter
+          node.argument || /** typescript-eslint v5 */ (node as any).parameter
         )
       }
       if (node.options) {
         args.push(node.options)
       }
       const rightParenToken = tokenStore.getTokenAfter(
-        /** @type {any} */ (args.at(-1)),
+        args.at(-1)!,
         isClosingParenToken
       )
       processNodeList(args, leftParenToken, rightParenToken, 1)
@@ -1226,7 +1183,7 @@ function defineVisitor({
       const typeArguments =
         'typeArguments' in node
           ? node.typeArguments
-          : /** @type {any} typescript-eslint v5 */ (node).typeParameters
+          : /** typescript-eslint v5 */ (node as any).typeParameters
       if (typeArguments) {
         setOffset(tokenStore.getFirstToken(typeArguments), 1, firstToken)
       }
@@ -1347,7 +1304,7 @@ function defineVisitor({
         includeComments: false
       })
       setOffset(secondToken, 0, atToken)
-      const parent = /** @type {any} */ (node.parent)
+      const parent = node.parent as any
       const { decorators, range } = parent
       if (!decorators || decorators.length === 0) {
         return
@@ -1432,8 +1389,7 @@ function defineVisitor({
     // ----------------------------------------------------------------------
     // DEPRECATED  NODES
     // ----------------------------------------------------------------------
-    /** @param {any} node */
-    TSParenthesizedType(node) {
+    TSParenthesizedType(node: any) {
       // Deprecated in @typescript-eslint/parser v5
       // (T)
       processNodeList(

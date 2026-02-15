@@ -4,7 +4,7 @@ const assert = require('node:assert')
 const {
   isBlockComment,
   isJSDocComment
-} = require('../../../lib/utils/comments.js')
+} = require('../../../lib/utils/comments.ts')
 
 // //foo
 const lineCommentNode = {

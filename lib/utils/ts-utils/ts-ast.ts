@@ -1,42 +1,19 @@
-const { getScope } = require('../scope')
-const { findVariable } = require('@eslint-community/eslint-utils')
-const { inferRuntimeTypeFromTypeNode } = require('./ts-types')
-/**
- * @typedef {import('@typescript-eslint/types').TSESTree.TypeNode} TSESTreeTypeNode
- * @typedef {import('@typescript-eslint/types').TSESTree.TSInterfaceBody} TSESTreeTSInterfaceBody
- * @typedef {import('@typescript-eslint/types').TSESTree.TSTypeLiteral} TSESTreeTSTypeLiteral
- * @typedef {import('@typescript-eslint/types').TSESTree.TSFunctionType} TSESTreeTSFunctionType
- * @typedef {import('@typescript-eslint/types').TSESTree.Parameter} TSESTreeParameter
- * @typedef {import('@typescript-eslint/types').TSESTree.Node} TSESTreeNode
- *
- */
-/**
- * @typedef {import('../index').ComponentTypeProp} ComponentTypeProp
- * @typedef {import('../index').ComponentUnknownProp} ComponentUnknownProp
- * @typedef {import('../index').ComponentTypeEmit} ComponentTypeEmit
- * @typedef {import('../index').ComponentUnknownEmit} ComponentUnknownEmit
- * @typedef {import('../index').ComponentTypeSlot} ComponentTypeSlot
- * @typedef {import('../index').ComponentUnknownSlot} ComponentUnknownSlot
- */
+import type { TSESTree } from '@typescript-eslint/types'
+import type {
+  ComponentTypeProp,
+  ComponentUnknownProp,
+  ComponentTypeEmit,
+  ComponentUnknownEmit,
+  ComponentTypeSlot,
+  ComponentUnknownSlot
+} from '../index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import { getScope } from '../scope.ts'
+import { inferRuntimeTypeFromTypeNode } from './ts-types.ts'
 
 const noop = Function.prototype
 
-module.exports = {
-  isTypeNode,
-  flattenTypeNodes,
-  isTSInterfaceBody,
-  isTSTypeLiteral,
-  isTSTypeLiteralOrTSFunctionType,
-  extractRuntimeProps,
-  extractRuntimeEmits,
-  extractRuntimeSlots
-}
-
-/**
- * @param {ASTNode} node
- * @returns {node is TypeNode}
- */
-function isTypeNode(node) {
+export function isTypeNode(node: ASTNode): node is TypeNode {
   if (
     node.type === 'TSAbstractKeyword' ||
     node.type === 'TSAnyKeyword' ||
@@ -84,53 +61,46 @@ function isTypeNode(node) {
     node.type === 'TSUnknownKeyword' ||
     node.type === 'TSVoidKeyword'
   ) {
-    /** @type {TypeNode['type']} for type check */
     const type = node.type
     noop(type)
     return true
   }
-  /** @type {Exclude<ASTNode['type'], TypeNode['type']>} for type check */
   const type = node.type
   noop(type)
   return false
 }
 
-/**
- * @param {TSESTreeTypeNode|TSESTreeTSInterfaceBody} node
- * @returns {node is TSESTreeTSInterfaceBody}
- */
-function isTSInterfaceBody(node) {
+export function isTSInterfaceBody(
+  node: TSESTree.TypeNode | TSESTree.TSInterfaceBody
+): node is TSESTree.TSInterfaceBody {
   return node.type === 'TSInterfaceBody'
 }
-/**
- * @param {TSESTreeTypeNode} node
- * @returns {node is TSESTreeTSTypeLiteral}
- */
-function isTSTypeLiteral(node) {
+
+export function isTSTypeLiteral(
+  node: TSESTree.TypeNode
+): node is TSESTree.TSTypeLiteral {
   return node.type === 'TSTypeLiteral'
 }
-/**
- * @param {TSESTreeTypeNode} node
- * @returns {node is TSESTreeTSFunctionType}
- */
-function isTSFunctionType(node) {
+
+function isTSFunctionType(
+  node: TSESTree.TypeNode
+): node is TSESTree.TSFunctionType {
   return node.type === 'TSFunctionType'
 }
-/**
- * @param {TSESTreeTypeNode} node
- * @returns {node is TSESTreeTSTypeLiteral | TSESTreeTSFunctionType}
- */
-function isTSTypeLiteralOrTSFunctionType(node) {
+
+export function isTSTypeLiteralOrTSFunctionType(
+  node: TSESTree.TypeNode
+): node is TSESTree.TSTypeLiteral | TSESTree.TSFunctionType {
   return isTSTypeLiteral(node) || isTSFunctionType(node)
 }
 
 /**
  * @see https://github.com/vuejs/vue-next/blob/253ca2729d808fc051215876aa4af986e4caa43c/packages/compiler-sfc/src/compileScript.ts#L1512
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TSESTreeTSTypeLiteral | TSESTreeTSInterfaceBody} node
- * @returns {IterableIterator<ComponentTypeProp | ComponentUnknownProp>}
  */
-function* extractRuntimeProps(context, node) {
+export function* extractRuntimeProps(
+  context: RuleContext,
+  node: TSESTree.TSTypeLiteral | TSESTree.TSInterfaceBody
+): IterableIterator<ComponentTypeProp | ComponentUnknownProp> {
   const members = node.type === 'TSTypeLiteral' ? node.members : node.body
   for (const member of members) {
     if (
@@ -141,12 +111,12 @@ function* extractRuntimeProps(context, node) {
         yield {
           type: 'unknown',
           propName: null,
-          node: /** @type {Expression} */ (member.key)
+          node: member.key as Expression
         }
         continue
       }
-      /** @type {string[]|undefined} */
-      let types
+
+      let types: string[] | undefined
       if (member.type === 'TSMethodSignature') {
         types = ['Function']
       } else if (member.typeAnnotation) {
@@ -154,12 +124,12 @@ function* extractRuntimeProps(context, node) {
       }
       yield {
         type: 'type',
-        key: /** @type {Identifier | Literal} */ (member.key),
+        key: member.key as Identifier | Literal,
         propName:
           member.key.type === 'Identifier'
             ? member.key.name
             : `${member.key.value}`,
-        node: /** @type {TSPropertySignature | TSMethodSignature} */ (member),
+        node: member as TSPropertySignature | TSMethodSignature,
 
         required: !member.optional,
         types: types || [`null`]
@@ -168,16 +138,14 @@ function* extractRuntimeProps(context, node) {
   }
 }
 
-/**
- * @param {TSESTreeTSTypeLiteral | TSESTreeTSInterfaceBody | TSESTreeTSFunctionType} node
- * @returns {IterableIterator<ComponentTypeEmit | ComponentUnknownEmit>}
- */
-function* extractRuntimeEmits(node) {
+export function* extractRuntimeEmits(
+  node:
+    | TSESTree.TSTypeLiteral
+    | TSESTree.TSInterfaceBody
+    | TSESTree.TSFunctionType
+): IterableIterator<ComponentTypeEmit | ComponentUnknownEmit> {
   if (node.type === 'TSFunctionType') {
-    yield* extractEventNames(
-      node.params[0],
-      /** @type {TSFunctionType} */ (node)
-    )
+    yield* extractEventNames(node.params[0], node as TSFunctionType)
     return
   }
   const members = node.type === 'TSTypeLiteral' ? node.members : node.body
@@ -185,7 +153,7 @@ function* extractRuntimeEmits(node) {
     if (member.type === 'TSCallSignatureDeclaration') {
       yield* extractEventNames(
         member.params[0],
-        /** @type {TSCallSignatureDeclaration} */ (member)
+        member as TSCallSignatureDeclaration
       )
     } else if (
       member.type === 'TSPropertySignature' ||
@@ -195,28 +163,26 @@ function* extractRuntimeEmits(node) {
         yield {
           type: 'unknown',
           emitName: null,
-          node: /** @type {Expression} */ (member.key)
+          node: member.key as Expression
         }
         continue
       }
       yield {
         type: 'type',
-        key: /** @type {Identifier | Literal} */ (member.key),
+        key: member.key as Identifier | Literal,
         emitName:
           member.key.type === 'Identifier'
             ? member.key.name
             : `${member.key.value}`,
-        node: /** @type {TSPropertySignature | TSMethodSignature} */ (member)
+        node: member as TSPropertySignature | TSMethodSignature
       }
     }
   }
 }
 
-/**
- * @param {TSESTreeTSTypeLiteral | TSESTreeTSInterfaceBody} node
- * @returns {IterableIterator<ComponentTypeSlot | ComponentUnknownSlot>}
- */
-function* extractRuntimeSlots(node) {
+export function* extractRuntimeSlots(
+  node: TSESTree.TSTypeLiteral | TSESTree.TSInterfaceBody
+): IterableIterator<ComponentTypeSlot | ComponentUnknownSlot> {
   const members = node.type === 'TSTypeLiteral' ? node.members : node.body
   for (const member of members) {
     if (
@@ -227,29 +193,27 @@ function* extractRuntimeSlots(node) {
         yield {
           type: 'unknown',
           slotName: null,
-          node: /** @type {Expression} */ (member.key)
+          node: member.key as Expression
         }
         continue
       }
       yield {
         type: 'type',
-        key: /** @type {Identifier | Literal} */ (member.key),
+        key: member.key as Identifier | Literal,
         slotName:
           member.key.type === 'Identifier'
             ? member.key.name
             : `${member.key.value}`,
-        node: /** @type {TSPropertySignature | TSMethodSignature} */ (member)
+        node: member as TSPropertySignature | TSMethodSignature
       }
     }
   }
 }
 
-/**
- * @param {TSESTreeParameter} eventName
- * @param {TSCallSignatureDeclaration | TSFunctionType} member
- * @returns {IterableIterator<ComponentTypeEmit>}
- */
-function* extractEventNames(eventName, member) {
+function* extractEventNames(
+  eventName: TSESTree.Parameter,
+  member: TSCallSignatureDeclaration | TSFunctionType
+): IterableIterator<ComponentTypeEmit> {
   if (
     eventName &&
     eventName.type === 'Identifier' &&
@@ -264,7 +228,7 @@ function* extractEventNames(eventName, member) {
       const emitName = String(typeNode.literal.value)
       yield {
         type: 'type',
-        key: /** @type {TSLiteralType} */ (typeNode),
+        key: typeNode as TSLiteralType,
         emitName,
         node: member
       }
@@ -274,7 +238,7 @@ function* extractEventNames(eventName, member) {
           const emitName = String(t.literal.value)
           yield {
             type: 'type',
-            key: /** @type {TSLiteralType} */ (t),
+            key: t as TSLiteralType,
             emitName,
             node: member
           }
@@ -284,26 +248,22 @@ function* extractEventNames(eventName, member) {
   }
 }
 
-/**
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TSESTreeTypeNode} node
- * @returns {(TSESTreeTypeNode|TSESTreeTSInterfaceBody)[]}
- */
-function flattenTypeNodes(context, node) {
-  /**
-   * @typedef {object} TraversedData
-   * @property {Set<TSESTreeTypeNode|TSESTreeTSInterfaceBody>} nodes
-   * @property {boolean} finished
-   */
-  /** @type {Map<TSESTreeTypeNode,TraversedData>} */
-  const traversed = new Map()
+export function flattenTypeNodes(
+  context: RuleContext,
+  node: TSESTree.TypeNode
+): (TSESTree.TypeNode | TSESTree.TSInterfaceBody)[] {
+  interface TraversedData {
+    nodes: Set<TSESTree.TypeNode | TSESTree.TSInterfaceBody>
+    finished: boolean
+  }
+
+  const traversed = new Map<TSESTree.TypeNode, TraversedData>()
 
   return [...flattenImpl(node)]
-  /**
-   * @param {TSESTreeTypeNode} node
-   * @returns {Iterable<TSESTreeTypeNode|TSESTreeTSInterfaceBody>}
-   */
-  function* flattenImpl(node) {
+
+  function* flattenImpl(
+    node: TSESTree.TypeNode
+  ): Iterable<TSESTree.TypeNode | TSESTree.TSInterfaceBody> {
     if (node.type === 'TSUnionType' || node.type === 'TSIntersectionType') {
       for (const typeNode of node.types) {
         yield* flattenImpl(typeNode)
@@ -315,12 +275,9 @@ function flattenTypeNodes(context, node) {
       node.typeName.type === 'Identifier'
     ) {
       const refName = node.typeName.name
-      const variable = findVariable(
-        getScope(context, /** @type {any} */ (node)),
-        refName
-      )
+      const variable = findVariable(getScope(context, node as any), refName)
       if (variable && variable.defs.length === 1) {
-        const defNode = /** @type {TSESTreeNode} */ (variable.defs[0].node)
+        const defNode: TSESTree.Node = variable.defs[0].node
         if (defNode.type === 'TSInterfaceDeclaration') {
           yield defNode.body
           return
@@ -351,13 +308,11 @@ function flattenTypeNodes(context, node) {
   }
 }
 
-/**
- * @param {RuleContext} context The ESLint rule context object.
- * @param {TSESTreeTypeNode} node
- * @param {Set<TSESTreeTypeNode>} [checked]
- * @returns {string[]}
- */
-function inferRuntimeType(context, node, checked = new Set()) {
+function inferRuntimeType(
+  context: RuleContext,
+  node: TSESTree.TypeNode,
+  checked = new Set<TSESTree.TypeNode>()
+): string[] {
   switch (node.type) {
     case 'TSStringKeyword':
     case 'TSTemplateLiteralType': {
@@ -401,19 +356,16 @@ function inferRuntimeType(context, node, checked = new Set()) {
           }
         }
       }
-      return inferRuntimeTypeFromTypeNode(
-        context,
-        /** @type {TypeNode} */ (node)
-      )
+      return inferRuntimeTypeFromTypeNode(context, node as TypeNode)
     }
     case 'TSTypeReference': {
       if (node.typeName.type === 'Identifier') {
         const variable = findVariable(
-          getScope(context, /** @type {any} */ (node)),
+          getScope(context, node as any),
           node.typeName.name
         )
         if (variable && variable.defs.length === 1) {
-          const defNode = /** @type {TSESTreeNode} */ (variable.defs[0].node)
+          const defNode: TSESTree.Node = variable.defs[0].node
           if (defNode.type === 'TSInterfaceDeclaration') {
             return [`Object`]
           }
@@ -472,7 +424,8 @@ function inferRuntimeType(context, node, checked = new Set()) {
             const typeArguments =
               'typeArguments' in node
                 ? node.typeArguments
-                : /** @type {any} typescript-eslint v5 */ (node).typeParameters
+                : // typescript-eslint v5
+                  (node as any).typeParameters
             if (typeArguments && typeArguments.params[0]) {
               return inferRuntimeType(
                 context,
@@ -486,7 +439,8 @@ function inferRuntimeType(context, node, checked = new Set()) {
             const typeArguments =
               'typeArguments' in node
                 ? node.typeArguments
-                : /** @type {any} typescript-eslint v5 */ (node).typeParameters
+                : // typescript-eslint v5
+                  (node as any).typeParameters
             if (typeArguments && typeArguments.params[1]) {
               return inferRuntimeType(context, typeArguments.params[1], checked)
             }
@@ -497,7 +451,8 @@ function inferRuntimeType(context, node, checked = new Set()) {
             const typeArguments =
               'typeArguments' in node
                 ? node.typeArguments
-                : /** @type {any} typescript-eslint v5 */ (node).typeParameters
+                : // typescript-eslint v5
+                  (node as any).typeParameters
             if (typeArguments && typeArguments.params[0]) {
               return inferRuntimeType(context, typeArguments.params[0], checked)
             }
@@ -505,10 +460,7 @@ function inferRuntimeType(context, node, checked = new Set()) {
           }
         }
       }
-      return inferRuntimeTypeFromTypeNode(
-        context,
-        /** @type {TypeNode} */ (node)
-      )
+      return inferRuntimeTypeFromTypeNode(context, node as TypeNode)
     }
 
     case 'TSUnionType':
@@ -517,19 +469,14 @@ function inferRuntimeType(context, node, checked = new Set()) {
     }
 
     default: {
-      return inferRuntimeTypeFromTypeNode(
-        context,
-        /** @type {TypeNode} */ (node)
-      )
+      return inferRuntimeTypeFromTypeNode(context, node as TypeNode)
     }
   }
 
-  /**
-   * @param {import('@typescript-eslint/types').TSESTree.TSUnionType|import('@typescript-eslint/types').TSESTree.TSIntersectionType} node
-   * @returns {string[]}
-   */
-  function inferUnionType(node) {
-    const types = new Set()
+  function inferUnionType(
+    node: TSESTree.TSUnionType | TSESTree.TSIntersectionType
+  ): string[] {
+    const types = new Set<string>()
     for (const t of node.types) {
       for (const tt of inferRuntimeType(context, t, checked)) {
         types.add(tt)
@@ -539,12 +486,8 @@ function inferRuntimeType(context, node, checked = new Set()) {
   }
 }
 
-/**
- * @param {import('@typescript-eslint/types').TSESTree.TSTypeLiteral} node
- * @returns {string[]}
- */
-function inferTypeLiteralType(node) {
-  const types = new Set()
+function inferTypeLiteralType(node: TSESTree.TSTypeLiteral): string[] {
+  const types = new Set<string>()
   for (const m of node.members) {
     switch (m.type) {
       case 'TSCallSignatureDeclaration':
@@ -559,13 +502,12 @@ function inferTypeLiteralType(node) {
   }
   return types.size > 0 ? [...types] : ['Object']
 }
-/**
- * @param {RuleContext} context The ESLint rule context object.
- * @param {import('@typescript-eslint/types').TSESTree.TSEnumDeclaration} node
- * @returns {string[]}
- */
-function inferEnumType(context, node) {
-  const types = new Set()
+
+function inferEnumType(
+  context: RuleContext,
+  node: TSESTree.TSEnumDeclaration
+): string[] {
+  const types = new Set<string>()
   for (const m of node.members) {
     if (m.initializer) {
       if (m.initializer.type === 'Literal') {
@@ -589,7 +531,7 @@ function inferEnumType(context, node) {
       } else {
         for (const type of inferRuntimeTypeFromTypeNode(
           context,
-          /** @type {Expression} */ (m.initializer)
+          m.initializer as Expression
         )) {
           types.add(type)
         }

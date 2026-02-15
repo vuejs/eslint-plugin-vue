@@ -10,7 +10,7 @@ const Linter = require('../../eslint-compat').Linter
 const {
   extractRefObjectReferences,
   extractReactiveVariableReferences
-} = require('../../../lib/utils/ref-object-references')
+} = require('../../../lib/utils/ref-object-references.ts')
 
 const FIXTURE_ROOT = path.resolve(
   __dirname,
