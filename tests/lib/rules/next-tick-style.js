@@ -58,6 +58,18 @@ tester.run('next-tick-style', rule, {
       filename: 'test.vue',
       code: `<script>import { nextTick as nt } from 'vue';
       export default {
+        async mounted() {
+          await this.$nextTick(); callback();
+          await Vue.nextTick(); callback();
+          await nt(); callback();
+        }
+      }</script>`,
+      options: ['await']
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
         mounted() {
           this.$nextTick(() => callback());
           Vue.nextTick(() => callback());
@@ -87,6 +99,22 @@ tester.run('next-tick-style', rule, {
         }
       }</script>`,
       options: ['promise']
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        mounted() {
+          foo.then(this.$nextTick);
+          foo.then(Vue.nextTick);
+          foo.then(nt);
+
+          foo.then(nt, catchHandler);
+          foo.then(Vue.nextTick, catchHandler);
+          foo.then(this.$nextTick, catchHandler);
+        }
+      }</script>`,
+      options: ['await']
     },
     {
       filename: 'test.vue',
@@ -258,6 +286,98 @@ tester.run('next-tick-style', rule, {
           column: 11,
           endLine: 10,
           endColumn: 13
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          this.$nextTick(() => callback());
+          Vue.nextTick(() => callback());
+          nt(() => callback());
+
+          this.$nextTick(callback);
+          Vue.nextTick(callback);
+          nt(callback);
+
+          this.$nextTick().then(() => callback());
+          Vue.nextTick().then(() => callback());
+          nt().then(() => callback());
+        }
+      }</script>`,
+      output: `<script>import { nextTick as nt } from 'vue';
+      export default {
+        async mounted() {
+          await this.$nextTick();callback();
+          await Vue.nextTick();callback();
+          await nt();callback();
+
+          await this.$nextTick();callback();
+          await Vue.nextTick();callback();
+          await nt();callback();
+
+          await this.$nextTick();callback();
+          await Vue.nextTick();callback();
+          await nt();callback();
+        }
+      }</script>`,
+      options: ['await'],
+      errors: [
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 4,
+          column: 16
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 5,
+          column: 15
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 6,
+          column: 11
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 8,
+          column: 16
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 9,
+          column: 15
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 10,
+          column: 11
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 12,
+          column: 16
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 13,
+          column: 15
+        },
+        {
+          message:
+            'Use the await keyword with the Promise returned by `nextTick` instead of passing a callback function or using `.then()`.',
+          line: 14,
+          column: 11
         }
       ]
     },
