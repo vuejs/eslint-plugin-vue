@@ -3,7 +3,7 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   rules: {
     'vue/array-bracket-newline': 'off',
     'vue/array-bracket-spacing': 'off',

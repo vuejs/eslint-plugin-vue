@@ -3,10 +3,9 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
-const config = require('./base.js')
+import config from './base.ts'
 
-module.exports = [
+export default [
   ...config,
   {
     name: 'vue/vue2-essential/rules',

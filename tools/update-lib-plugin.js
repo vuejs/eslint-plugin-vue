@@ -13,10 +13,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
-
-function camelCase(str) {
-  return str.replaceAll(/-([a-z])/g, (match, letter) => letter.toUpperCase())
-}
+const { camelCase } = require('../lib/utils/casing')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/plugin.ts')

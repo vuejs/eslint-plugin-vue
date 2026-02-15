@@ -4,7 +4,7 @@
  */
 
 import { Linter } from 'eslint'
-import plugin from '../../../lib'
+import plugin from '../../../dist'
 import { strict as assert } from 'node:assert'
 import { FlatESLint } from '../../eslint-compat'
 

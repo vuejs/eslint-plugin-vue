@@ -6,7 +6,7 @@
 import assert from 'node:assert'
 import parserVue from 'vue-eslint-parser'
 import { ESLint } from '../../eslint-compat'
-import pluginVue from '../../../lib'
+import pluginVue from '../../../dist'
 import processor from '../../../lib/processor'
 
 // Initialize linter.

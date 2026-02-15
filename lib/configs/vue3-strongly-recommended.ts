@@ -3,7 +3,7 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   extends: require.resolve('./vue3-essential'),
   rules: {
     'vue/attribute-hyphenation': 'warn',
