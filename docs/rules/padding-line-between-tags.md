@@ -59,8 +59,12 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   - `always` requires one or more blank lines.
   - `never` disallows blank lines.
   - `consistent` requires or disallows a blank line based on the first sibling element.
-- `prev` any tag name without brackets.
-- `next` any tag name without brackets.
+- Tag selectors (use one of the following for each of `prev` and `next`):
+  - `prev` / `next` - any tag name without brackets (e.g., `"div"`, `"br"`), or `"*"` to match any tag.
+  - `prevSingle` / `nextSingle` - matches only single-line tags (tags where the opening and closing tags are on the same line).
+  - `prevMulti` / `nextMulti` - matches only multi-line tags (tags that span multiple lines).
+
+**Note:** You must use either `prev` OR `prevSingle`/`prevMulti` (but not both), and either `next` OR `nextSingle`/`nextMulti` (but not both).
 
 ### Disallow blank lines between all tags
 
@@ -154,6 +158,42 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
     <div />
     
     <div />
+  </div>
+</template>
+```
+
+</eslint-code-block>
+
+### Distinguish between single-line and multi-line tags
+
+You can use `prevSingle`, `prevMulti`, `nextSingle`, and `nextMulti` to enforce different spacing rules based on whether tags are single-line or multi-line.
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prevSingle: '*', nextMulti: '*' },
+  { blankLine: 'always', prevMulti: '*', nextSingle: '*' },
+  { blankLine: 'always', prevMulti: '*', nextMulti: '*' },
+  { blankLine: 'never', prevSingle: '*', nextSingle: '*' }
+]]}">
+
+```vue
+<template>
+  <div>
+    <!-- ✓ GOOD: No blank lines between single-line tags -->
+    <span>This is a single-line tag</span>
+    <span>This is a single-line tag</span>
+
+    <!-- ✓ GOOD: Blank line before multi-line tag -->
+    <div>
+      This is a multi-line tag
+    </div>
+
+    <!-- ✓ GOOD: Blank line before single-line tag after multi-line tag -->
+    <span>This is a single-line tag</span>
+
+    <!-- ✓ GOOD: Blank line before multi-line tag -->
+    <div>
+      This is a multi-line tag
+    </div>
   </div>
 </template>
 ```
