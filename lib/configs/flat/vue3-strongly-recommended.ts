@@ -3,10 +3,9 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
-const config = require('./vue3-essential.js')
+import config from './vue3-essential.ts'
 
-module.exports = [
+export default [
   ...config,
   {
     name: 'vue/strongly-recommended/rules',
