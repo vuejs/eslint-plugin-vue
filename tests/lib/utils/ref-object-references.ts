@@ -1,16 +1,17 @@
-'use strict'
-
-const fs = require('node:fs')
-const path = require('node:path')
-const assert = require('node:assert')
-const vueESLintParser = require('vue-eslint-parser')
-
-const Linter = require('../../eslint-compat').Linter
-
-const {
+import * as eslint from 'eslint'
+import fs from 'node:fs'
+import path from 'node:path'
+import assert from 'node:assert'
+import vueESLintParser from 'vue-eslint-parser'
+import { Linter } from '../../eslint-compat'
+import {
   extractRefObjectReferences,
-  extractReactiveVariableReferences
-} = require('../../../lib/utils/ref-object-references')
+  extractReactiveVariableReferences,
+  RefObjectReferences,
+  RefObjectReference,
+  ReactiveVariableReferences,
+  ReactiveVariableReference
+} from '../../../lib/utils/ref-object-references'
 
 const FIXTURE_ROOT = path.resolve(
   __dirname,
@@ -19,30 +20,28 @@ const FIXTURE_ROOT = path.resolve(
 const REF_OBJECTS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'ref-objects')
 const REACTIVE_VARS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'reactive-vars')
 
-/**
- * @typedef {object} LoadedPattern
- * @property {string} code The code to test.
- * @property {string} name The name of the pattern.
- * @property {string} sourceFilePath
- * @property {string} resultFilePath
- * @property {object} [options]
- * @property {string} [options.parser]
- */
+interface LoadedPattern {
+  code: string
+  name: string
+  sourceFilePath: string
+  resultFilePath: string
+  options?: eslint.Linter.FlatConfig
+}
+
 /**
  * Load test patterns from fixtures.
- *
- * @returns {LoadedPattern[]} The loaded patterns.
  */
-function loadPatterns(rootDir) {
+function loadPatterns(rootDir: string): LoadedPattern[] {
+  // @ts-expect-error must return
   return fs.readdirSync(rootDir).map((name) => {
     for (const [sourceFile, resultFile, options] of [
       ['source.js', 'result.js'],
       [
         'source.vue',
         'result.vue',
-        { languageOptions: { parser: 'vue-eslint-parser' } }
+        { languageOptions: { parser: vueESLintParser } }
       ]
-    ]) {
+    ] satisfies [string, string, eslint.Linter.FlatConfig?][]) {
       const sourceFilePath = path.join(rootDir, name, sourceFile)
       if (fs.existsSync(sourceFilePath)) {
         return {
@@ -57,62 +56,70 @@ function loadPatterns(rootDir) {
   })
 }
 
-function extractRefs(code, extract, options) {
+function extractRefs(
+  code: string,
+  extract: (context: RuleContext) => RefObjectReferences,
+  options: LoadedPattern['options']
+): RefObjectReference[]
+function extractRefs(
+  code: string,
+  extract: (context: RuleContext) => ReactiveVariableReferences,
+  options: LoadedPattern['options']
+): ReactiveVariableReference[]
+function extractRefs(
+  code: string,
+  extract: (
+    context: RuleContext
+  ) => RefObjectReferences | ReactiveVariableReferences,
+  options: LoadedPattern['options']
+) {
   const linter = new Linter()
-  const references = []
+  const references: (RefObjectReference | ReactiveVariableReference)[] = []
 
-  const messages = linter.verify(
-    code,
-    {
-      ...options,
-      plugins: {
-        vue: {
-          rules: {
-            'extract-test': {
-              create: (context) => {
-                const refs = extract(context)
+  const messages = linter.verify(code, {
+    ...options,
+    plugins: {
+      vue: {
+        rules: {
+          'extract-test': {
+            create: (context) => {
+              const refs = extract(context as unknown as RuleContext)
 
-                const processed = new Set()
-                return {
-                  '*'(node) {
-                    if (processed.has(node)) {
-                      // Old ESLint may be called twice on the same node.
-                      return
-                    }
-                    processed.add(node)
-                    const data = refs.get(node)
-                    if (data) {
-                      references.push(data)
-                    }
+              const processed = new Set()
+              return {
+                '*'(node: any) {
+                  if (processed.has(node)) {
+                    // Old ESLint may be called twice on the same node.
+                    return
+                  }
+                  processed.add(node)
+                  const data = refs.get(node)
+                  if (data) {
+                    references.push(data)
                   }
                 }
               }
             }
           }
         }
-      },
-      languageOptions: {
-        ...options?.languageOptions,
-        ...(options?.languageOptions?.parser === 'vue-eslint-parser'
-          ? { parser: vueESLintParser }
-          : {}),
-        ecmaVersion: 2020,
-        sourceType: 'module',
-        globals: {
-          $ref: 'readonly',
-          $computed: 'readonly',
-          $shallowRef: 'readonly',
-          $customRef: 'readonly',
-          $toRef: 'readonly',
-          $: 'readonly',
-          $$: 'readonly'
-        }
-      },
-      rules: { 'vue/extract-test': 'error' }
+      }
     },
-    undefined,
-    true
-  )
+    languageOptions: {
+      ...options?.languageOptions,
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: {
+        $ref: 'readonly',
+        $computed: 'readonly',
+        $shallowRef: 'readonly',
+        $customRef: 'readonly',
+        $toRef: 'readonly',
+        $: 'readonly',
+        $$: 'readonly'
+      }
+    },
+    rules: { 'vue/extract-test': 'error' }
+  })
 
   const errors = messages.map((message) => message.message)
   if (errors.length > 0) {
@@ -128,7 +135,6 @@ describe('extractRefObjectReferences()', () => {
   )) {
     describe(sourceFilePath, () => {
       it('should to extract the references to match the expected references.', () => {
-        /** @type {import('../../../lib/utils/ref-object-references').RefObjectReference[]} */
         const references = [
           ...extractRefs(code, extractRefObjectReferences, options)
         ]
@@ -148,15 +154,7 @@ describe('extractRefObjectReferences()', () => {
         }
         result += code.slice(start)
 
-        const actual = result
-
-        if (!fs.existsSync(resultFilePath)) {
-          // update fixture
-          fs.writeFileSync(resultFilePath, actual, 'utf8')
-        }
-
-        const expected = fs.readFileSync(resultFilePath, 'utf8')
-        assert.strictEqual(actual, expected)
+        expect(result).toMatchFileSnapshot(resultFilePath)
       })
     })
   }
@@ -167,7 +165,6 @@ describe('extractReactiveVariableReferences()', () => {
   )) {
     describe(sourceFilePath, () => {
       it('should to extract the references to match the expected references.', () => {
-        /** @type {import('../../../lib/utils/ref-object-references').ReactiveVariableReference[]} */
         const references = [
           ...extractRefs(code, extractReactiveVariableReferences, options)
         ]
@@ -187,15 +184,7 @@ describe('extractReactiveVariableReferences()', () => {
         }
         result += code.slice(start)
 
-        const actual = result
-
-        if (!fs.existsSync(resultFilePath)) {
-          // update fixture
-          fs.writeFileSync(resultFilePath, actual, 'utf8')
-        }
-
-        const expected = fs.readFileSync(resultFilePath, 'utf8')
-        assert.strictEqual(actual, expected)
+        expect(result).toMatchFileSnapshot(resultFilePath)
       })
     })
   }
