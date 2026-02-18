@@ -8,7 +8,7 @@ const fs = require('node:fs')
 const Linter = require('../../../../eslint-compat').Linter
 const parser = require('vue-eslint-parser')
 const tsParser = require('@typescript-eslint/parser')
-const utils = require('../../../../../lib/utils/index')
+const utils = require('../../../../../lib/utils/index.ts')
 const assert = require('node:assert')
 
 const FIXTURES_ROOT = path.resolve(

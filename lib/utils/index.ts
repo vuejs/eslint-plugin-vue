@@ -73,7 +73,7 @@ export interface ComponentComputedProperty {
   value: BlockStatement | null
 }
 
-type GroupName =
+export type GroupName =
   | 'props'
   | 'asyncData'
   | 'data'
@@ -92,7 +92,7 @@ interface ComponentArrayPropertyData {
   node: Literal | TemplateLiteral
 }
 
-interface ComponentObjectPropertyData {
+export interface ComponentObjectPropertyData {
   type: 'object'
   name: string
   groupName: GroupName

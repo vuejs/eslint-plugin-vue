@@ -7,7 +7,7 @@ const assert = require('node:assert')
 const Linter = require('../../eslint-compat').Linter
 
 const { parseSelector } = require('../../../lib/utils/selector.ts')
-const utils = require('../../../lib/utils')
+const utils = require('../../../lib/utils/index.ts')
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/utils/selector')
 

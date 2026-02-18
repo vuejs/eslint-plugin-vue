@@ -2,7 +2,7 @@
 
 const semver = require('semver')
 const { RuleTester, ESLint } = require('../eslint-compat')
-const { getCoreRule } = require('../../lib/utils')
+const { getCoreRule } = require('../../lib/utils/index.ts')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 const ruleNoUndef = getCoreRule('no-undef')
 

@@ -3,7 +3,7 @@
  */
 'use strict'
 
-const utils = require('../../../lib/utils/index')
+const utils = require('../../../lib/utils/index.ts')
 
 const rule = {
   create(context) {

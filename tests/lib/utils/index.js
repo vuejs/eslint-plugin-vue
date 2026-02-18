@@ -1,7 +1,7 @@
 'use strict'
 
 const espree = require('espree')
-const utils = require('../../../lib/utils/index')
+const utils = require('../../../lib/utils/index.ts')
 const assert = require('node:assert')
 
 function parse(code) {
