@@ -27,13 +27,13 @@ function generateConfig(rules) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   rules: ${formatRules(rules)}
 }
 `
 }
 
 // Update files.
-const filePath = path.resolve(__dirname, '../lib/configs/no-layout-rules.js')
+const filePath = path.resolve(__dirname, '../lib/configs/no-layout-rules.ts')
 const content = generateConfig(rulesToDisable)
 fs.writeFileSync(filePath, content)

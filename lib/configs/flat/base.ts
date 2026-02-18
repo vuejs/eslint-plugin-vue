@@ -3,12 +3,15 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = [
+import plugin from '../../plugin.ts'
+import vueParser from 'vue-eslint-parser'
+
+export default [
   {
     name: 'vue/base/setup',
     plugins: {
       get vue() {
-        return require('../../plugin.ts').default
+        return plugin
       }
     },
     languageOptions: {
@@ -20,11 +23,11 @@ module.exports = [
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
-        return require('../../plugin.ts').default
+        return plugin
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueParser,
       sourceType: 'module'
     },
     rules: {

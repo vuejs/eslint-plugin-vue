@@ -3,13 +3,12 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
-const config = require('./vue2-strongly-recommended-error.js')
+import config from './vue3-strongly-recommended-error.ts'
 
-module.exports = [
+export default [
   ...config,
   {
-    name: 'vue/vue2-recommended-error/rules',
+    name: 'vue/recommended-error/rules',
     rules: {
       'vue/attributes-order': 'error',
       'vue/block-order': 'error',

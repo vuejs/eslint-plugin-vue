@@ -57,12 +57,15 @@ function formatCategory(category, alwaysError = false) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = [
+import plugin from '../../plugin.ts'
+import vueParser from 'vue-eslint-parser'
+
+export default [
   {
     name: 'vue/base/setup',
     plugins: {
       get vue() {
-        return require('../../plugin.ts').default
+        return plugin
       }
     },
     languageOptions: {
@@ -74,11 +77,11 @@ module.exports = [
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
-        return require('../../plugin.ts').default
+        return plugin
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueParser,
       sourceType: 'module',
     },
     rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
@@ -97,10 +100,9 @@ module.exports = [
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
-const config = require('./${extendsCategoryId}.js')
+import config from './${extendsCategoryId}.ts'
 
-module.exports = [
+export default [
   ...config,
   {
     name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${alwaysError ? '-error' : ''}/rules',
@@ -113,14 +115,14 @@ module.exports = [
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/flat/')
 for (const category of categories) {
-  const filePath = path.join(ROOT, `${category.categoryId}.js`)
+  const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
 
   if (!errorCategories.has(category.categoryId)) {
     fs.writeFileSync(
-      path.join(ROOT, `${category.categoryId}-error.js`),
+      path.join(ROOT, `${category.categoryId}-error.ts`),
       formatCategory(category, true)
     )
   }
