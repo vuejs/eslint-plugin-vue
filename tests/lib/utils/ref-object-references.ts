@@ -28,9 +28,6 @@ interface LoadedPattern {
   options?: eslint.Linter.FlatConfig
 }
 
-/**
- * Load test patterns from fixtures.
- */
 function loadPatterns(rootDir: string): LoadedPattern[] {
   // @ts-expect-error must return
   return fs.readdirSync(rootDir).map((name) => {
