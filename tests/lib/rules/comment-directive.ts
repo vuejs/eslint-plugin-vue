@@ -5,7 +5,7 @@
 
 import assert from 'node:assert'
 import parserVue from 'vue-eslint-parser'
-import { ESLint } from '../../eslint-compat'
+import { ESLint } from '../../eslint-compat.ts'
 import pluginVue from '../../../dist'
 import processor from '../../../lib/processor'
 

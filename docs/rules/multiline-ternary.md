@@ -66,6 +66,6 @@ This rule was introduced in eslint-plugin-vue v9.7.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multiline-ternary.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-ternary.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-ternary.ts)
 
 <sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/multiline-ternary)</sup>

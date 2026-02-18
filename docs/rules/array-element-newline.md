@@ -42,6 +42,6 @@ This rule was introduced in eslint-plugin-vue v9.9.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/array-element-newline.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-element-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-element-newline.ts)
 
 <sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/array-element-newline)</sup>

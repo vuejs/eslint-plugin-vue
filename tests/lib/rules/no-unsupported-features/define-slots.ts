@@ -1,0 +1,56 @@
+/**
+ * @author Yosuke Ota
+ * See LICENSE file in root directory for full license.
+ */
+'use strict'
+
+const RuleTester = require('../../../eslint-compat.ts').RuleTester
+const rule = require('../../../../lib/rules/no-unsupported-features')
+const utils = require('./utils.ts')
+
+const buildOptions = utils.optionsBuilder('define-slots', '^3.2.0')
+const tester = new RuleTester({
+  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+})
+
+tester.run('no-unsupported-features/define-slots', rule, {
+  valid: [
+    {
+      code: `
+      <script setup>
+        const slots = defineSlots()
+      </script>`,
+      options: buildOptions({ version: '^3.3.0' })
+    },
+    {
+      code: `
+      <script setup>
+        defineProps({})
+      </script>`,
+      options: buildOptions()
+    },
+    {
+      code: `
+      <script setup>
+        const slots = defineSlots()
+      </script>`,
+      options: buildOptions({ version: '^3.0.0', ignores: ['define-slots'] })
+    }
+  ],
+  invalid: [
+    {
+      code: `
+      <script setup>
+        const slots = defineSlots()
+      </script>`,
+      options: buildOptions(),
+      errors: [
+        {
+          message:
+            '`defineSlots()` macros are not supported until Vue.js "3.3.0".',
+          line: 3
+        }
+      ]
+    }
+  ]
+})

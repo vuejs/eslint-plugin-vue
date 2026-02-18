@@ -6,7 +6,7 @@
 import { Linter } from 'eslint'
 import plugin from '../../../dist'
 import { strict as assert } from 'node:assert'
-import { FlatESLint } from '../../eslint-compat'
+import { FlatESLint } from '../../eslint-compat.ts'
 
 function mergeConfig(configs: Linter.FlatConfig[]): Linter.FlatConfig {
   let config: Linter.FlatConfig = { rules: {}, plugins: {} }

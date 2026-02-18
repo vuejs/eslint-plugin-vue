@@ -165,4 +165,4 @@ This rule was introduced in eslint-plugin-vue v9.9.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/padding-lines-in-component-definition.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-lines-in-component-definition.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-lines-in-component-definition.ts)
