@@ -383,8 +383,7 @@ export namespace Rule {
 }
 
 export class RuleTester extends ESLintRuleTester {}
-export class Linter {
-  static version: string
+export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
 }
 
