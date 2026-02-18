@@ -1,12 +1,13 @@
 import {
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
-  ESLint,
   Linter as ESLintLinter
 } from '../../node_modules/@types/eslint'
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
+
+export { ESLint } from '../../node_modules/@types/eslint'
 
 export namespace AST {
   type Token = VNODE.Token
@@ -386,8 +387,6 @@ export class Linter {
   static version: string
   getRules(): Map<string, Rule.RuleModule>
 }
-
-export { ESLint }
 
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
