@@ -1922,9 +1922,10 @@ export function* iterateReferencesTraceMap(
   tracker: ReferenceTracker,
   map: TYPES.TraceMap
 ): ReturnType<ReferenceTracker['iterateEsmReferences']> {
+  const trackerConstructor = tracker.constructor as typeof ReferenceTracker
   const esmTraceMap = createCompositionApiTraceMap({
     ...map,
-    [ReferenceTracker.ESM]: true
+    [trackerConstructor.ESM]: true
   })
 
   for (const ref of tracker.iterateEsmReferences(esmTraceMap)) {
