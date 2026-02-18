@@ -1,6 +1,7 @@
 import {
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
+  ESLint,
   Linter as ESLintLinter
 } from '../../node_modules/@types/eslint'
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
@@ -382,8 +383,11 @@ export namespace Rule {
 
 export class RuleTester extends ESLintRuleTester {}
 export class Linter {
+  static version: string
   getRules(): Map<string, Rule.RuleModule>
 }
+
+export { ESLint }
 
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
