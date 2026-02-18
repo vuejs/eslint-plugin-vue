@@ -6,9 +6,9 @@
 
 const RuleTester = require('../../../eslint-compat').RuleTester
 const rule = require('../../../../lib/rules/no-unsupported-features')
-const utils = require('./utils')
+const { optionsBuilder } = require('./utils')
 
-const buildOptions = utils.optionsBuilder('slot-scope-attribute', '^2.4.0')
+const buildOptions = optionsBuilder('slot-scope-attribute', '^2.4.0')
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
 })

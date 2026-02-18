@@ -6,9 +6,9 @@
 
 const RuleTester = require('../../../eslint-compat').RuleTester
 const rule = require('../../../../lib/rules/no-unsupported-features')
-const utils = require('./utils')
+const { optionsBuilder } = require('./utils')
 
-const buildOptions = utils.optionsBuilder('style-css-vars-injection', '^3.0.3')
+const buildOptions = optionsBuilder('style-css-vars-injection', '^3.0.3')
 const tester = new RuleTester({
   languageOptions: {
     parser: require('vue-eslint-parser'),

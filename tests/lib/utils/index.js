@@ -1,7 +1,15 @@
 'use strict'
 
 const espree = require('espree')
-const utils = require('../../../lib/utils/index.ts')
+const {
+  getComputedProperties,
+  getStaticPropertyName,
+  getStringLiteralValue,
+  getMemberChaining,
+  getRegisteredComponents,
+  getComponentPropsFromOptions,
+  editDistance
+} = require('../../../lib/utils/index.ts')
 const assert = require('node:assert')
 
 function parse(code) {
@@ -17,7 +25,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    assert.equal(utils.getComputedProperties(node).length, 0)
+    assert.equal(getComputedProperties(node).length, 0)
   })
 
   it('should return computed properties', () => {
@@ -48,7 +56,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -75,7 +83,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -97,7 +105,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -113,19 +121,19 @@ describe('getStaticPropertyName', () => {
   it('should parse property expression with identifier', () => {
     const node = parse(`const test = { computed: { } }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0])
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with literal', () => {
     const node = parse(`const test = { ['computed'] () {} }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0])
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with template literal', () => {
     const node = parse(`const test = { [\`computed\`] () {} }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0])
     assert.strictEqual(parsed, 'computed')
   })
 })
@@ -134,13 +142,13 @@ describe('getStringLiteralValue', () => {
   it('should parse literal', () => {
     const node = parse(`const test = { ['computed'] () {} }`)
 
-    const parsed = utils.getStringLiteralValue(node.properties[0].key)
+    const parsed = getStringLiteralValue(node.properties[0].key)
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse template literal', () => {
     const node = parse(`const test = { [\`computed\`] () {} }`)
 
-    const parsed = utils.getStringLiteralValue(node.properties[0].key)
+    const parsed = getStringLiteralValue(node.properties[0].key)
     assert.strictEqual(parsed, 'computed')
   })
 })
@@ -150,7 +158,7 @@ describe('getMemberChaining', () => {
 
   it('should parse MemberExpression', () => {
     const node = parse(`const test = this.lorem['ipsum'].foo.bar`)
-    const parsed = utils.getMemberChaining(node)
+    const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
       nodeToJson([
@@ -200,7 +208,7 @@ describe('getMemberChaining', () => {
 
   it('should parse optional Chaining ', () => {
     const node = parse(`const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`)
-    const parsed = utils.getMemberChaining(node)
+    const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
       nodeToJson([
@@ -265,7 +273,7 @@ describe('getRegisteredComponents', () => {
       name: 'test',
     }`)
 
-    assert.equal(utils.getRegisteredComponents(node).length, 0)
+    assert.equal(getRegisteredComponents(node).length, 0)
   })
 
   it('should return an array with all registered components', () => {
@@ -283,7 +291,7 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map((c) => c.name),
+      getRegisteredComponents(node).map((c) => c.name),
       [
         'PrimaryButton',
         'secondaryButton',
@@ -309,14 +317,14 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map((c) => c.name),
+      getRegisteredComponents(node).map((c) => c.name),
       ['Foo', 'Quux']
     )
   })
 })
 
 function parseProps(code) {
-  return utils.getComponentPropsFromOptions(parse(code))
+  return getComponentPropsFromOptions(parse(code))
 }
 
 describe('getComponentProps', () => {
@@ -418,7 +426,6 @@ describe('getComponentProps', () => {
 })
 
 describe('editdistance', () => {
-  const editDistance = utils.editDistance
   it('should return editDistance beteen two string', () => {
     assert.equal(editDistance('book', 'back'), 2)
     assert.equal(editDistance('methods', 'metho'), 2)

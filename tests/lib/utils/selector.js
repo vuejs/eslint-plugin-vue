@@ -7,7 +7,7 @@ const assert = require('node:assert')
 const Linter = require('../../eslint-compat').Linter
 
 const { parseSelector } = require('../../../lib/utils/selector.ts')
-const utils = require('../../../lib/utils/index.ts')
+const { defineDocumentVisitor } = require('../../../lib/utils/index.ts')
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/utils/selector')
 
@@ -41,7 +41,7 @@ function extractElements(code, inputSelector) {
             'selector-test': {
               create: (context) => {
                 const parsed = parseSelector(inputSelector, context)
-                return utils.defineDocumentVisitor(context, {
+                return defineDocumentVisitor(context, {
                   VElement(node) {
                     if (parsed.test(node)) {
                       matches.push(

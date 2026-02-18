@@ -3,11 +3,11 @@
  */
 'use strict'
 
-const utils = require('../../../lib/utils/index.ts')
+const { executeOnVueComponent } = require('../../../lib/utils/index.ts')
 
 const rule = {
   create(context) {
-    return utils.executeOnVueComponent(context, (obj) => {
+    return executeOnVueComponent(context, (obj) => {
       context.report({
         node: obj,
         message: 'Component detected.'
