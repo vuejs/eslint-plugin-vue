@@ -298,7 +298,10 @@ function wrapContextToOverrideTokenMethods(
       context.languageOptions?.ecmaVersion ?? parserOptions.ecmaVersion ?? 2020
     const sourceType = programNode.sourceType
     try {
-      const eslintScope = createRequire(require.resolve('eslint'))(
+      const requireFromCwd = createRequire(
+        `${process.cwd()}/__placeholder__.js`
+      )
+      const eslintScope = createRequire(requireFromCwd.resolve('eslint'))(
         'eslint-scope'
       )
       const expStmt = newProxy(exprContainer, {
