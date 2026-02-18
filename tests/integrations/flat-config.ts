@@ -1,9 +1,8 @@
-'use strict'
-
-const { strict: assert } = require('node:assert')
-const { execSync } = require('node:child_process')
-const path = require('node:path')
-const semver = require('semver')
+import { strict as assert } from 'node:assert'
+import { execSync } from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import semver from 'semver'
 
 const TARGET_DIR = path.join(__dirname, 'flat-config')
 const ESLINT = path.join(TARGET_DIR, 'node_modules', '.bin', 'eslint')
@@ -13,9 +12,12 @@ let eslintNodeVersion = ''
 describe('Integration with flat config', () => {
   beforeAll(() => {
     execSync('npm i -f', { cwd: TARGET_DIR, stdio: 'inherit' })
-    eslintNodeVersion = require(
-      path.join(TARGET_DIR, 'node_modules/eslint/package.json')
-    ).engines.node
+    const eslintPackagePath = path.join(
+      TARGET_DIR,
+      'node_modules/eslint/package.json'
+    )
+    eslintNodeVersion = JSON.parse(fs.readFileSync(eslintPackagePath, 'utf8'))
+      .engines.node
   })
 
   it.skipIf(!semver.satisfies(process.version, eslintNodeVersion))(

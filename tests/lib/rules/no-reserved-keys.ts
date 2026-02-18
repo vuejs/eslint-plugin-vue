@@ -2,10 +2,9 @@
  * @fileoverview Prevent overwrite reserved keys
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-reserved-keys')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-reserved-keys'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions = {
   ecmaVersion: 2018,
@@ -263,7 +262,7 @@ ruleTester.run('no-reserved-keys', rule, {
         })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 },
+      languageOptions: { parser: vueEslintParser, ecmaVersion: 6 },
       errors: [
         {
           message: "Key '$el' is reserved.",
@@ -279,7 +278,7 @@ ruleTester.run('no-reserved-keys', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
@@ -303,7 +302,7 @@ ruleTester.run('no-reserved-keys', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
@@ -327,7 +326,7 @@ ruleTester.run('no-reserved-keys', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')

@@ -2,14 +2,13 @@
  * @author Marton Csordas
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/multi-word-component-names')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/multi-word-component-names'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

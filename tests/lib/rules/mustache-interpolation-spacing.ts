@@ -2,13 +2,12 @@
  * @fileoverview enforce unified spacing in mustache interpolations.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/mustache-interpolation-spacing')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/mustache-interpolation-spacing'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('mustache-interpolation-spacing', rule, {

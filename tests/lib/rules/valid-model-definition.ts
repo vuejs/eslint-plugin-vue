@@ -2,10 +2,8 @@
  * @fileoverview Prevents invalid keys in model option.
  * @author Alex Sokolov
  */
-'use strict'
-
-const rule = require('../../../lib/rules/valid-model-definition')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/valid-model-definition'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester({
   languageOptions: {

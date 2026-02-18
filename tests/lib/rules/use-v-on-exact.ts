@@ -2,14 +2,12 @@
  * @fileoverview enforce usage of `exact` modifier on `v-on`.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/use-v-on-exact')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/use-v-on-exact'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('use-v-on-exact', rule, {

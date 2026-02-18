@@ -2,13 +2,12 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/html-closing-bracket-spacing')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/html-closing-bracket-spacing'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('html-closing-bracket-spacing', rule, {

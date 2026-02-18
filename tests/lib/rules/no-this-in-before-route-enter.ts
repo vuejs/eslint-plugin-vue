@@ -2,14 +2,13 @@
  * @fileoverview  Don&#39;t use &#34;this&#34; i a beforeRouteEnter method
  * @author Przemyslaw Jan Beigert
  */
-'use strict'
+import rule from '../../../lib/rules/no-this-in-before-route-enter'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
-
-const rule = require('../../../lib/rules/no-this-in-before-route-enter')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
 
 //------------------------------------------------------------------------------
 // Tests
@@ -60,7 +59,7 @@ export default {
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

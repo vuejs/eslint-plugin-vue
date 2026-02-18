@@ -2,15 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-multiple-slot-args')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-multiple-slot-args'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

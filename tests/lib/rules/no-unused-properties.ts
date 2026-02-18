@@ -2,18 +2,16 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-'use strict'
-
-const { RuleTester, Linter } = require('../../eslint-compat.ts')
-const assert = require('node:assert')
-const rule = require('../../../lib/rules/no-unused-properties')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript.ts')
+import { RuleTester, Linter } from '../../eslint-compat.ts'
+import assert from 'node:assert'
+import rule from '../../../lib/rules/no-unused-properties'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import vueEslintParser from 'vue-eslint-parser'
+import noUnusedComponents from '../../../lib/rules/no-unused-components'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -4752,13 +4750,13 @@ describe('`vue/no-unused-properties` and `vue/no-unused-components` should not c
     plugins: {
       vue: {
         rules: {
-          'no-unused-components': require('../../../lib/rules/no-unused-components'),
+          'no-unused-components': noUnusedComponents,
           'no-unused-properties': rule
         }
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       sourceType: 'module'
     },

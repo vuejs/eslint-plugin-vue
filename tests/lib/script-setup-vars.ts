@@ -1,14 +1,14 @@
-'use strict'
+import semver from 'semver'
+import { RuleTester, ESLint } from '../eslint-compat.ts'
+import { getCoreRule } from '../../lib/utils'
+import vueEslintParser from 'vue-eslint-parser'
 
-const semver = require('semver')
-const { RuleTester, ESLint } = require('../eslint-compat.ts')
-const { getCoreRule } = require('../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 const ruleNoUndef = getCoreRule('no-undef')
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 6,
     sourceType: 'module'
   }

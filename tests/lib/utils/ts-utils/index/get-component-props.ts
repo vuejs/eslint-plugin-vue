@@ -1,15 +1,13 @@
 /**
  * Test for getComponentPropsFromTypeDefineTypes
  */
-'use strict'
-
-const path = require('node:path')
-const fs = require('node:fs')
-const Linter = require('../../../../eslint-compat.ts').Linter
-const parser = require('vue-eslint-parser')
-const tsParser = require('@typescript-eslint/parser')
-const utils = require('../../../../../lib/utils/index')
-const assert = require('node:assert')
+import path from 'node:path'
+import fs from 'node:fs'
+import { Linter } from '../../../../eslint-compat.ts'
+import parser from 'vue-eslint-parser'
+import tsParser from '@typescript-eslint/parser'
+import utils from '../../../../../lib/utils/index'
+import assert from 'node:assert'
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,

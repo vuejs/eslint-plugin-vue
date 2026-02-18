@@ -2,14 +2,13 @@
  * @fileoverview Disallow variable declarations from shadowing variables declared in the outer scope.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-template-shadow')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-template-shadow'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2018,
     sourceType: 'module'
   }

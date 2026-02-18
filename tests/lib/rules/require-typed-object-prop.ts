@@ -2,14 +2,13 @@
  * @author Przemysław Jan Beigert
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/require-typed-object-prop')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/require-typed-object-prop'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 6,
     sourceType: 'module',
     parserOptions: {

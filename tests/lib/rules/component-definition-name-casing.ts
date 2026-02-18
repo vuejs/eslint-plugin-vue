@@ -2,10 +2,10 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/component-definition-name-casing')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/component-definition-name-casing'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
+import tsEslintParser from '@typescript-eslint/parser'
 
 const languageOptions = {
   ecmaVersion: 2018,
@@ -150,7 +150,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       filename: 'test.vue',
       code: `<script setup> defineOptions({}) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -159,7 +159,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       code: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
       options: ['PascalCase'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -168,7 +168,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       code: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
       options: ['kebab-case'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     }
@@ -361,7 +361,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       code: `(Vue as VueConstructor<Vue>).component('foo-bar', component)`,
       output: `(Vue as VueConstructor<Vue>).component('FooBar', component)`,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ...languageOptions
       },
       errors: [
@@ -458,7 +458,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       output: `<script setup> defineOptions({name: 'FooBar'}) </script>`,
       options: ['PascalCase'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -477,7 +477,7 @@ ruleTester.run('component-definition-name-casing', rule, {
       output: `<script setup> defineOptions({name: 'foo-bar'}) </script>`,
       options: ['kebab-case'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [

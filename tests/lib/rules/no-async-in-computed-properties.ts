@@ -2,12 +2,10 @@
  * @fileoverview Check if there are no side effects inside computed properties
  * @author 2017 Armano
  */
-'use strict'
+import rule from '../../../lib/rules/no-async-in-computed-properties'
+import { RuleTester } from '../../eslint-compat.ts'
+import parser from 'vue-eslint-parser'
 
-const rule = require('../../../lib/rules/no-async-in-computed-properties')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-
-const parser = require('vue-eslint-parser')
 const languageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
@@ -386,7 +384,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
       </script>`,
       options: [{ ignoredObjectNames: ['z'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }

@@ -1,10 +1,9 @@
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/v-on-event-hyphenation.js')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/v-on-event-hyphenation.js'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
 })
 
 tester.run('v-on-event-hyphenation', rule, {

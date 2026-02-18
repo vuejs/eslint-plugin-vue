@@ -2,14 +2,13 @@
  * @fileoverview disallow mutation of component props
  * @author 2018 Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-mutating-props')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-mutating-props'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

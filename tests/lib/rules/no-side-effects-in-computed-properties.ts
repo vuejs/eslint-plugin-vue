@@ -2,10 +2,10 @@
  * @fileoverview Don&#39;t introduce side effects in computed properties
  * @author Michał Sajnóg
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-side-effects-in-computed-properties')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-side-effects-in-computed-properties'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
+import tsEslintParser from '@typescript-eslint/parser'
 
 const languageOptions = {
   ecmaVersion: 2020,
@@ -13,7 +13,7 @@ const languageOptions = {
 }
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ...languageOptions }
+  languageOptions: { parser: vueEslintParser, ...languageOptions }
 })
 
 ruleTester.run('no-side-effects-in-computed-properties', rule, {
@@ -428,7 +428,7 @@ ruleTester.run('no-side-effects-in-computed-properties', rule, {
           }
         });
       `,
-      languageOptions: { parser: require('@typescript-eslint/parser') },
+      languageOptions: { parser: tsEslintParser },
       errors: [
         {
           message: 'Unexpected side effect in "test1" computed property.',

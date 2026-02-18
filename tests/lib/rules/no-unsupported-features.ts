@@ -5,13 +5,12 @@
 /**
  * See to testcases in `./no-unsupported-features` directory for testcases of each features.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-unsupported-features')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-unsupported-features'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
 })
 
 tester.run('no-unsupported-features', rule, {

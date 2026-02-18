@@ -2,13 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-deprecated-html-element-is')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-deprecated-html-element-is'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
 })
 
 ruleTester.run('no-deprecated-html-element-is', rule, {

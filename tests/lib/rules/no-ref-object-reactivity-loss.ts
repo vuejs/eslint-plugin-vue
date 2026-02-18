@@ -2,10 +2,9 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-ref-object-reactivity-loss')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-ref-object-reactivity-loss'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
@@ -319,7 +318,7 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         mod.value // OK
       )
       </script>`,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:

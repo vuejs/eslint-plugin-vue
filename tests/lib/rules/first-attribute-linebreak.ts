@@ -2,13 +2,12 @@
  * @fileoverview Enforce the location of first attribute
  * @author Yosuke Ota
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/first-attribute-linebreak')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/first-attribute-linebreak'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('first-attribute-linebreak', rule, {

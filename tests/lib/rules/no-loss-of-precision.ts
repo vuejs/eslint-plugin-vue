@@ -2,14 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { RuleTester } = require('../../eslint-compat.ts')
-const rule = require('../../../lib/rules/no-loss-of-precision')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-loss-of-precision'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

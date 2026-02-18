@@ -1,14 +1,13 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/arrow-spacing')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/arrow-spacing'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2015
   }
 })

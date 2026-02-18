@@ -1,14 +1,13 @@
 /**
  * @author lsdsjy
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/max-lines-per-block')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/max-lines-per-block'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

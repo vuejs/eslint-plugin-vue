@@ -2,14 +2,12 @@
  * @fileoverview Prevent usage of button without an explicit type attribute
  * @author Jonathan Santerre
  */
-'use strict'
-
-const rule = require('../../../lib/rules/html-button-has-type')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/html-button-has-type'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 ruleTester.run('html-button-has-type', rule, {
   valid: [

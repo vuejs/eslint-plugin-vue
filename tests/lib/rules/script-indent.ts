@@ -3,14 +3,15 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import semver from 'semver'
+import { createRequire } from 'node:module'
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/script-indent'
+import vueEslintParser from 'vue-eslint-parser'
 
-const fs = require('node:fs')
-const path = require('node:path')
-const semver = require('semver')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/script-indent')
-
+const nodeRequire = createRequire(import.meta.url)
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
 
 /**
@@ -37,10 +38,12 @@ function loadPatterns(additionalValid, additionalInvalid) {
       const code = code0.replace(commentPattern, `$1${filename}$3`)
       const baseObj = JSON.parse(commentPattern.exec(code0)[2])
       if ('parser' in baseObj) {
-        baseObj.parser = require.resolve(baseObj.parser)
+        baseObj.parser = nodeRequire.resolve(baseObj.parser)
       }
       if ('languageOptions' in baseObj && 'parser' in baseObj.languageOptions) {
-        baseObj.languageOptions.parser = require(baseObj.languageOptions.parser)
+        baseObj.languageOptions.parser = nodeRequire(
+          baseObj.languageOptions.parser
+        )
       }
       return Object.assign(baseObj, { code, filename })
     })
@@ -48,7 +51,7 @@ function loadPatterns(additionalValid, additionalInvalid) {
       if (obj.requirements) {
         if (
           Object.entries(obj.requirements).some(([pkgName, pkgVersion]) => {
-            const pkg = require(`${pkgName}/package.json`)
+            const pkg = nodeRequire(`${pkgName}/package.json`)
             return !semver.satisfies(pkg.version, pkgVersion)
           })
         ) {
@@ -116,11 +119,11 @@ function unIndent(strings) {
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2022,
     sourceType: 'module',
     parserOptions: {
-      parser: require.resolve('espree') // espree v8.0.0-beta.x
+      parser: nodeRequire.resolve('espree') // espree v8.0.0-beta.x
     }
   }
 })

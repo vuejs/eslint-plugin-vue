@@ -2,10 +2,8 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/prefer-import-from-vue')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/prefer-import-from-vue'
 
 const tester = new RuleTester({
   languageOptions: {

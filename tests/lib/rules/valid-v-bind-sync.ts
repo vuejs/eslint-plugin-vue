@@ -1,13 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/valid-v-bind-sync')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/valid-v-bind-sync'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
 tester.run('valid-v-bind-sync', rule, {

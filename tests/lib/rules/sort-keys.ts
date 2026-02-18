@@ -2,10 +2,8 @@
  * @fileoverview Enforces sort-keys within components after the top level details
  * @author Loren Klingman
  */
-'use strict'
-
-const rule = require('../../../lib/rules/sort-keys')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/sort-keys'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester()
 

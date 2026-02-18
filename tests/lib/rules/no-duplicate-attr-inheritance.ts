@@ -2,15 +2,13 @@
  * @fileoverview Disable inheritAttrs when using v-bind=&#34;$attrs&#34;
  * @author Hiroki Osame
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-duplicate-attr-inheritance')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-duplicate-attr-inheritance'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2018,
     sourceType: 'module'
   }

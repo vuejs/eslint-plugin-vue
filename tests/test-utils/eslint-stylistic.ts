@@ -1,5 +1,5 @@
-const { existsSync, readFileSync } = require('node:fs')
-const path = require('node:path')
+import { existsSync, readFileSync } from 'node:fs'
+import path from 'node:path'
 
 const eslintStylisticPackagePath = path.join(
   __dirname,
@@ -9,8 +9,6 @@ const eslintStylisticPackagePath = path.join(
   'eslint-plugin',
   'package.json'
 )
-const eslintStylisticVersion = existsSync(eslintStylisticPackagePath)
+export const eslintStylisticVersion = existsSync(eslintStylisticPackagePath)
   ? JSON.parse(readFileSync(eslintStylisticPackagePath, 'utf8')).version
   : undefined
-
-module.exports = { eslintStylisticVersion }

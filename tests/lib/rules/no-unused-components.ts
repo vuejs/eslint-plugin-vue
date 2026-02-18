@@ -2,14 +2,13 @@
  * @fileoverview Report used components
  * @author Michał Sajnóg
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-unused-components')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-unused-components'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2018,
     sourceType: 'module'
   }

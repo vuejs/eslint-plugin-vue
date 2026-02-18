@@ -2,10 +2,9 @@
  * @fileoverview Keep order of properties in components
  * @author Michał Sajnóg
  */
-'use strict'
-
-const rule = require('../../../lib/rules/order-in-components')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/order-in-components'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions = {
   ecmaVersion: 2020,
@@ -194,7 +193,7 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     }
   ],
 
@@ -1247,7 +1246,7 @@ ruleTester.run('order-in-components', rule, {
         </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions,
         parserOptions: {
           parser: { ts: require.resolve('@typescript-eslint/parser') }
@@ -1279,7 +1278,7 @@ ruleTester.run('order-in-components', rule, {
         })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:

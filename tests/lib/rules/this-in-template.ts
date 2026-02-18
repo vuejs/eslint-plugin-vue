@@ -2,14 +2,12 @@
  * @fileoverview disallow usage of `this` in template.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/this-in-template')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/this-in-template'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
 function createValidTests(prefix, options) {

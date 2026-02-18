@@ -1,13 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const { RuleTester } = require('../../eslint-compat.ts')
-const rule = require('../../../lib/rules/space-in-parens')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/space-in-parens'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 tester.run('space-in-parens', rule, {

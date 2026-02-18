@@ -2,12 +2,11 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
-'use strict'
+import rule from '../../../lib/rules/no-reserved-component-names'
+import { RuleTester } from '../../eslint-compat.ts'
+import htmlElements from '../../../lib/utils/html-elements.json'
+import vueEslintParser from 'vue-eslint-parser'
 
-const rule = require('../../../lib/rules/no-reserved-component-names')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-
-const htmlElements = require('../../../lib/utils/html-elements.json')
 const RESERVED_NAMES_IN_HTML = new Set([
   ...htmlElements,
   ...htmlElements.map((word) => word[0].toUpperCase() + word.slice(1))
@@ -505,7 +504,7 @@ ruleTester.run('no-reserved-component-names', rule, {
         </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -519,7 +518,7 @@ ruleTester.run('no-reserved-component-names', rule, {
         </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -571,7 +570,7 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: 'test.vue',
       code: `<script setup> defineOptions({}) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -579,7 +578,7 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: 'test.vue',
       code: `<script setup> defineOptions({ ...name }) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -587,7 +586,7 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: 'test.vue',
       code: `<script setup> defineOptions({ name: 'Foo' }) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     }
@@ -708,7 +707,7 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: `${name}.vue`,
       code: `<script setup> defineOptions({name: '${name}'}) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -728,7 +727,7 @@ ruleTester.run('no-reserved-component-names', rule, {
       filename: `${name}.vue`,
       code: `<script setup> defineOptions({name: '${name}'}) </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       options: [{ htmlElementCaseSensitive: true }],

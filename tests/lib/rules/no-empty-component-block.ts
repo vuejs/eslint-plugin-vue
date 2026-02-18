@@ -1,13 +1,12 @@
 /**
  * @author tyankatsu <https://github.com/tyankatsu0105>
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-empty-component-block')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-empty-component-block'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2018 }
 })
 
 tester.run('no-empty-component-block', rule, {

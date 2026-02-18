@@ -2,11 +2,8 @@
  * @fileoverview Enforces component's data property to be a function.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-shared-component-data')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-shared-component-data'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const languageOptions = {
   ecmaVersion: 2018,

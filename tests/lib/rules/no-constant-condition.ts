@@ -1,13 +1,12 @@
 /**
  * @author Flo Edelmann
  */
-'use strict'
-
-const { RuleTester } = require('../../eslint-compat.ts')
-const rule = require('../../../lib/rules/no-constant-condition.js')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-constant-condition.js'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 6 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 6 }
 })
 
 tester.run('no-constant-condition', rule, {

@@ -2,13 +2,10 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const Linter = require('../eslint-compat.ts').Linter
-const parser = require('vue-eslint-parser')
-const assert = require('node:assert')
-
-const rules = require('../..').rules
+import { Linter } from '../eslint-compat.ts'
+import parser from 'vue-eslint-parser'
+import assert from 'node:assert'
+import { rules } from '../..'
 
 const baseConfig = {
   files: ['*.vue'],

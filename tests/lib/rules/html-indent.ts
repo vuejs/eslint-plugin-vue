@@ -3,12 +3,11 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const fs = require('node:fs')
-const path = require('node:path')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/html-indent')
+import fs from 'node:fs'
+import path from 'node:path'
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/html-indent'
+import vueEslintParser from 'vue-eslint-parser'
 
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
 
@@ -103,7 +102,7 @@ function unIndent(strings) {
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     parserOptions: {
       ecmaFeatures: {

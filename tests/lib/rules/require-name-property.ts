@@ -2,10 +2,9 @@
  * @fileoverview Require a name property in Vue components
  * @author LukeeeeBennett
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-name-property')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/require-name-property'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions = {
   ecmaVersion: 2018,
@@ -63,7 +62,7 @@ ruleTester.run('require-name-property', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     }

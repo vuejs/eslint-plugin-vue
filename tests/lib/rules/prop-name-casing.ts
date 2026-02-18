@@ -2,13 +2,10 @@
  * @fileoverview Define a style for the name property casing for consistency purposes
  * @author Yu Kimura
  */
-'use strict'
-
-const rule = require('../../../lib/rules/prop-name-casing')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript.ts')
+import rule from '../../../lib/rules/prop-name-casing'
+import { RuleTester } from '../../eslint-compat.ts'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions = {
   ecmaVersion: 2018,
@@ -328,7 +325,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -340,7 +337,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -355,7 +352,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
@@ -679,7 +676,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -700,7 +697,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -724,7 +721,7 @@ ruleTester.run('prop-name-casing', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')

@@ -2,11 +2,8 @@
  * @fileoverview disallow using deprecated object declaration on data
  * @author yoyo930021
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-deprecated-data-object-declaration')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-deprecated-data-object-declaration'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const languageOptions = {
   ecmaVersion: 2018,

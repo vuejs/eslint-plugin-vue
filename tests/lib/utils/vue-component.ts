@@ -1,9 +1,9 @@
 /**
  * @author Armano
  */
-'use strict'
-
-const utils = require('../../../lib/utils/index')
+import utils from '../../../lib/utils/index'
+import { RuleTester } from '../../eslint-compat.ts'
+import tsEslintParser from '@typescript-eslint/parser'
 
 const rule = {
   create(context) {
@@ -20,7 +20,6 @@ const rule = {
   }
 }
 
-const RuleTester = require('../../eslint-compat.ts').RuleTester
 const languageOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
@@ -100,7 +99,7 @@ function validTests(ext) {
       code: `export default (Foo as FooConstructor<Foo>).extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     },
     {
@@ -108,7 +107,7 @@ function validTests(ext) {
       code: `export default Foo.extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     },
     {
@@ -116,7 +115,7 @@ function validTests(ext) {
       code: `export default Foo.extend({} as ComponentOptions)`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     }
   ]
@@ -171,7 +170,7 @@ function invalidTests(ext) {
       code: `export default (Vue as VueConstructor<Vue>).extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 52, 1, 54)]
     },
@@ -180,7 +179,7 @@ function invalidTests(ext) {
       code: `export default Vue.extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 27, 1, 29)]
     },
@@ -189,7 +188,7 @@ function invalidTests(ext) {
       code: `export default Vue.extend({} as ComponentOptions)`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 27, 1, 29)]
     },

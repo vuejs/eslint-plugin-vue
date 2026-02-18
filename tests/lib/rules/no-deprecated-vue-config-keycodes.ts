@@ -2,13 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-deprecated-vue-config-keycodes')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-deprecated-vue-config-keycodes'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
 ruleTester.run('no-deprecated-vue-config-keycodes', rule, {

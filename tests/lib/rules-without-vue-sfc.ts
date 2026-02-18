@@ -2,11 +2,9 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { Linter } = require('../eslint-compat.ts')
-const parser = require('vue-eslint-parser')
-const rules = require('../..').rules
+import { Linter } from '../eslint-compat.ts'
+import parser from 'vue-eslint-parser'
+import { rules } from '../..'
 
 describe("Don't crash even if without vue SFC.", () => {
   const code = 'var a = 1'

@@ -2,10 +2,8 @@
  * @fileoverview Enforces render function to always return value.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-render-return')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/require-render-return'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const languageOptions = {
   ecmaVersion: 2018,

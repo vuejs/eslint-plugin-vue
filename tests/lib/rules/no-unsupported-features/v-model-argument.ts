@@ -2,15 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { RuleTester } from '../../../eslint-compat.ts'
+import rule from '../../../../lib/rules/no-unsupported-features'
+import { optionsBuilder } from './utils.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
-const RuleTester = require('../../../eslint-compat.ts').RuleTester
-const rule = require('../../../../lib/rules/no-unsupported-features')
-const utils = require('./utils.ts')
-
-const buildOptions = utils.optionsBuilder('v-model-argument', '^2.6.0')
+const buildOptions = optionsBuilder('v-model-argument', '^2.6.0')
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
 })
 
 tester.run('no-unsupported-features/v-model-argument', rule, {

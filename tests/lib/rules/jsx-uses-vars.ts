@@ -2,12 +2,11 @@
  * @fileoverview Prevent variables used in JSX to be marked as unused
  * @author Michał Sajnóg
  */
-'use strict'
+import semver from 'semver'
+import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/jsx-uses-vars'
+import { getCoreRule } from '../../../lib/utils'
 
-const semver = require('semver')
-const { RuleTester, ESLint } = require('../../eslint-compat.ts')
-const rule = require('../../../lib/rules/jsx-uses-vars')
-const { getCoreRule } = require('../../../lib/utils')
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')
 
 const ruleTester = new RuleTester({

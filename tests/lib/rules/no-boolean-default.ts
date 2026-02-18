@@ -2,11 +2,9 @@
  * @fileoverview Prevents boolean defaults from being set
  * @author Hiroki Osame
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-boolean-default')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-boolean-default'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -233,7 +231,7 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -248,7 +246,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       options: ['default-false'],
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -262,7 +260,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -282,7 +280,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -301,7 +299,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -320,7 +318,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -335,7 +333,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       }
     }
   ],
@@ -447,7 +445,7 @@ ruleTester.run('no-boolean-default', rule, {
       })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:
@@ -472,7 +470,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       options: ['default-false'],
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message: 'Boolean prop should only be defaulted to false.',
@@ -496,7 +494,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -526,7 +524,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -549,7 +547,7 @@ ruleTester.run('no-boolean-default', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -571,7 +569,7 @@ ruleTester.run('no-boolean-default', rule, {
       `,
       options: ['default-false'],
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {

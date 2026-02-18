@@ -2,11 +2,8 @@
  * @fileoverview Enforces that a return statement is present in computed property (return-in-computed-property)
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/return-in-computed-property')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/return-in-computed-property'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const languageOptions = {
   ecmaVersion: 6,

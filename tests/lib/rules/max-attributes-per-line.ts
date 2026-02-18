@@ -2,13 +2,12 @@
  * @fileoverview Define the number of attributes allows per line
  * @author Filipa Lacerda
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/max-attributes-per-line')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/max-attributes-per-line'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('max-attributes-per-line', rule, {

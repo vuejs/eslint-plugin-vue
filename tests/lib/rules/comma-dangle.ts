@@ -1,13 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/comma-dangle')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/comma-dangle'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2018 }
 })
 
 tester.run('comma-dangle', rule, {

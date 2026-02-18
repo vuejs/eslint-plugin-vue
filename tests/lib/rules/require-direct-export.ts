@@ -2,10 +2,8 @@
  * @fileoverview require the component to be directly exported
  * @author Hiroki Osame <hiroki.osame@gmail.com>
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-direct-export')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/require-direct-export'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester({
   languageOptions: {

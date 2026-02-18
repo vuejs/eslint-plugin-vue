@@ -2,11 +2,10 @@
  * @author lozinsky <https://github.com/lozinsky>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { RuleTester, ESLint } = require('../../eslint-compat.ts')
-const semver = require('semver')
-const rule = require('../../../lib/rules/no-implicit-coercion')
+import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import semver from 'semver'
+import rule from '../../../lib/rules/no-implicit-coercion'
+import vueEslintParser from 'vue-eslint-parser'
 
 /**
  * @param {string} suggestedCode
@@ -20,7 +19,7 @@ function getExpectedErrorMessage(suggestedCode) {
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

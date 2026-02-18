@@ -2,10 +2,9 @@
  * @fileoverview Require component name property to match its file name
  * @author Rodrigo Pedra Brum <rodrigo.pedra@gmail.com>
  */
-'use strict'
-
-const rule = require('../../../lib/rules/match-component-file-name')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/match-component-file-name'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const jsxLanguageOptions = {
   ecmaVersion: 2018,
@@ -123,7 +122,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -139,7 +138,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['jsx'] }], // missing jsx in options
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -154,7 +153,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -167,7 +166,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -183,7 +182,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -199,7 +198,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -215,7 +214,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -231,7 +230,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -247,7 +246,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     },
@@ -565,7 +564,7 @@ ruleTester.run('match-component-file-name', rule, {
       code: `<script setup> defineOptions({name: 'MyComponent'}) </script>`,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       }
     }
@@ -714,7 +713,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -753,7 +752,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -792,7 +791,7 @@ ruleTester.run('match-component-file-name', rule, {
       `,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [
@@ -1198,7 +1197,7 @@ ruleTester.run('match-component-file-name', rule, {
       code: `<script setup> defineOptions({name: 'CoolComponent'}) </script>`,
       options: [{ extensions: ['vue'] }],
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ...languageOptions
       },
       errors: [

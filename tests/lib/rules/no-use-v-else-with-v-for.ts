@@ -1,10 +1,9 @@
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-use-v-else-with-v-for')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-use-v-else-with-v-for'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 tester.run('no-use-v-else-with-v-for', rule, {

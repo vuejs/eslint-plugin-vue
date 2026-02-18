@@ -1,14 +1,14 @@
 /**
  * @author Ivan Demchuk <https://github.com/Demivan>
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/require-typed-ref')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/require-typed-ref'
+import tsEslintParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('@typescript-eslint/parser'),
+    parser: tsEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -84,7 +84,7 @@ tester.run('require-typed-ref', rule, {
           const count = ref()
         </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -98,7 +98,7 @@ tester.run('require-typed-ref', rule, {
           }
         </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.js',
@@ -220,7 +220,7 @@ tester.run('require-typed-ref', rule, {
           const count = ref()
         </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           messageId: 'noType',
@@ -243,7 +243,7 @@ tester.run('require-typed-ref', rule, {
           }
         </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           messageId: 'noType',

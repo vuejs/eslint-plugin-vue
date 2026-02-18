@@ -2,13 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/require-toggle-inside-transition')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/require-toggle-inside-transition'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 tester.run('require-toggle-inside-transition', rule, {

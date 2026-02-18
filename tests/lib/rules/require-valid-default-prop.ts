@@ -2,13 +2,11 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-valid-default-prop')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript.ts')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/require-valid-default-prop'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import { RuleTester } from '../../eslint-compat.ts'
+import tsEslintParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions = {
   ecmaVersion: 2020,
@@ -126,7 +124,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -221,7 +219,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ...languageOptions
       }
     },
@@ -237,7 +235,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -254,7 +252,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -276,7 +274,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });
       </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -314,7 +312,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       }
     },
     {
@@ -329,7 +327,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       }
     },
     {
@@ -670,7 +668,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });`,
 
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -933,7 +931,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -951,7 +949,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -969,7 +967,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -988,7 +986,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -1011,7 +1009,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       languageOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -1090,7 +1088,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1112,7 +1110,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1137,7 +1135,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1158,7 +1156,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1182,7 +1180,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1203,7 +1201,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {

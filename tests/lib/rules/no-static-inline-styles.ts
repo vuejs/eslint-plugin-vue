@@ -2,13 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-static-inline-styles')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-static-inline-styles'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
 })
 
 tester.run('no-static-inline-styles', rule, {

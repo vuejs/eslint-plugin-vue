@@ -1,10 +1,5 @@
-'use strict'
-
-const assert = require('node:assert')
-const {
-  isBlockComment,
-  isJSDocComment
-} = require('../../../lib/utils/comments.js')
+import assert from 'node:assert'
+import { isBlockComment, isJSDocComment } from '../../../lib/utils/comments.js'
 
 // //foo
 const lineCommentNode = {

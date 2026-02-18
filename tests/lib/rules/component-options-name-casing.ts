@@ -2,10 +2,8 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/component-options-name-casing')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/component-options-name-casing'
 
 const tester = new RuleTester({
   languageOptions: {

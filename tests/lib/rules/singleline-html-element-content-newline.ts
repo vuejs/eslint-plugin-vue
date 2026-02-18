@@ -1,13 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const rule = require('../../../lib/rules/singleline-html-element-content-newline')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/singleline-html-element-content-newline'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 tester.run('singleline-html-element-content-newline', rule, {

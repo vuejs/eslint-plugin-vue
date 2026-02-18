@@ -2,8 +2,8 @@
  * @author Sosuke Suzuki
  */
 
-const rule = require('../../../lib/rules/no-arrow-functions-in-watch')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-arrow-functions-in-watch'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester({
   languageOptions: {

@@ -1,7 +1,5 @@
-'use strict'
-
-const casing = require('../../../lib/utils/casing')
-const assert = require('node:assert')
+import casing from '../../../lib/utils/casing'
+import assert from 'node:assert'
 
 describe('getConverter()', () => {
   it('should convert string to camelCase', () => {

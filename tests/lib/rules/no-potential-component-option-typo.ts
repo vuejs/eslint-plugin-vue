@@ -2,15 +2,13 @@
  * @fileoverview detect if there is a potential typo in your component property
  * @author IWANABETHATGUY
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-potential-component-option-typo')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-potential-component-option-typo'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2018,
     sourceType: 'module'
   }

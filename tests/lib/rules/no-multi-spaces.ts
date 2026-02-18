@@ -2,14 +2,13 @@
  * @fileoverview This rule warns about the usage of extra whitespaces between attributes
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-multi-spaces')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-multi-spaces'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2015,
     sourceType: 'module'
   }

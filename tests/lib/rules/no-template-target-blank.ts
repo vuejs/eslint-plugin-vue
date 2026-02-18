@@ -2,14 +2,12 @@
  * @fileoverview disallow target="_blank" attribute without rel="noopener noreferrer"
  * @author Sosukesuzuki
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-template-target-blank')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-template-target-blank'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('no-template-target-blank', rule, {

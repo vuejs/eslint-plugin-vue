@@ -1,14 +1,13 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const { RuleTester, ESLint } = require('../../eslint-compat.ts')
-const semver = require('semver')
-const rule = require('../../../lib/rules/no-sparse-arrays')
+import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import semver from 'semver'
+import rule from '../../../lib/rules/no-sparse-arrays'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 tester.run('no-sparse-arrays', rule, {

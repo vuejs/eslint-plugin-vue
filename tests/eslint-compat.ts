@@ -1,24 +1,19 @@
-// @ts-check
-const { getESLint } = require('eslint-compat-utils/eslint')
-const { getLinter } = require('eslint-compat-utils/linter')
-const { getRuleTester } = require('eslint-compat-utils/rule-tester')
-const { ESLint, Linter } = require('eslint')
-const semver = require('semver')
+import { getESLint } from 'eslint-compat-utils/eslint'
+import { getLinter } from 'eslint-compat-utils/linter'
+import { getRuleTester } from 'eslint-compat-utils/rule-tester'
+import { ESLint as ESLintRaw, Linter as LinterRaw } from 'eslint'
+import semver from 'semver'
 
-/** @type {typeof ESLint | null} */
-let FlatESLint = ESLint
-if (semver.lt(Linter.version, '9.0.0-0')) {
+export const ESLint = getESLint()
+export const RuleTester = getRuleTester()
+export const Linter = getLinter()
+
+export let FlatESLint: typeof ESLintRaw | null = ESLintRaw
+if (semver.lt(LinterRaw.version, '9.0.0-0')) {
   try {
     // @ts-ignore
-    FlatESLint = require('eslint/use-at-your-own-risk').FlatESLint
+    FlatESLint = nodeRequire('eslint/use-at-your-own-risk').FlatESLint
   } catch {
     FlatESLint = null
   }
-}
-
-module.exports = {
-  ESLint: getESLint(),
-  FlatESLint,
-  RuleTester: getRuleTester(),
-  Linter: getLinter()
 }

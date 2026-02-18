@@ -3,13 +3,12 @@
  * See LICENSE file in root directory for full license.
  */
 
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-v-text')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-v-text'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('no-v-text', rule, {

@@ -2,10 +2,8 @@
  * @fileoverview enforce that each component should be in its own file
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/one-component-per-file')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/one-component-per-file'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester({
   languageOptions: {

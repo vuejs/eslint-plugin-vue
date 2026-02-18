@@ -1,14 +1,13 @@
 /**
  * @author tyankatsu <https://github.com/tyankatsu0105>
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-multiple-objects-in-class')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-multiple-objects-in-class'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2015,
     sourceType: 'module'
   }

@@ -1,14 +1,13 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const rule = require('../../../lib/rules/component-name-in-template-casing')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/component-name-in-template-casing'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2018,
     sourceType: 'module'
   }

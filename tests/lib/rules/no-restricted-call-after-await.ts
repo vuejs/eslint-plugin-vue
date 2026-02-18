@@ -1,15 +1,14 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const path = require('node:path')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-restricted-call-after-await')
+import path from 'node:path'
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-restricted-call-after-await'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

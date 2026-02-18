@@ -2,11 +2,8 @@
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-deprecated-events-api')
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-deprecated-events-api'
+import { RuleTester } from '../../eslint-compat.ts'
 
 const languageOptions = {
   ecmaVersion: 2020,

@@ -3,11 +3,10 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { execSync } = require('node:child_process')
-const path = require('node:path')
-const semver = require('semver')
+import { execSync } from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import semver from 'semver'
 
 const PLUGIN_DIR = path.join(__dirname, 'eslint-plugin-import')
 const ESLINT = path.join(PLUGIN_DIR, 'node_modules', '.bin', 'eslint')
@@ -17,9 +16,12 @@ let eslintNodeVersion = ''
 describe('Integration with eslint-plugin-import', () => {
   beforeAll(() => {
     execSync('npm i', { cwd: PLUGIN_DIR, stdio: 'inherit' })
-    eslintNodeVersion = require(
-      path.join(PLUGIN_DIR, 'node_modules/eslint/package.json')
-    ).engines.node
+    const eslintPackagePath = path.join(
+      PLUGIN_DIR,
+      'node_modules/eslint/package.json'
+    )
+    eslintNodeVersion = JSON.parse(fs.readFileSync(eslintPackagePath, 'utf8'))
+      .engines.node
   })
 
   // https://github.com/vuejs/eslint-plugin-vue/issues/21#issuecomment-308957697

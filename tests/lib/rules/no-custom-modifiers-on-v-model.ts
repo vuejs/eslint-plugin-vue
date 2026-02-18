@@ -2,13 +2,12 @@
  * @author Przemyslaw Falowski (@przemkow)
  * @fileoverview This rule checks whether v-model used on the component do not have custom modifiers
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-custom-modifiers-on-v-model')
-const RuleTester = require('../../eslint-compat.ts').RuleTester
+import rule from '../../../lib/rules/no-custom-modifiers-on-v-model'
+import { RuleTester } from '../../eslint-compat.ts'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2015 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
 ruleTester.run('no-custom-modifiers-on-v-model', rule, {

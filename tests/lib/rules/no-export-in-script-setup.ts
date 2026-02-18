@@ -2,16 +2,16 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const semver = require('semver')
-const eslint = require('../../eslint-compat.ts')
-const rule = require('../../../lib/rules/no-export-in-script-setup')
+import semver from 'semver'
+import eslint from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-export-in-script-setup'
+import vueEslintParser from 'vue-eslint-parser'
+import typescriptPackageJson from 'typescript/package.json'
 
 const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 6,
     sourceType: 'module'
   }
@@ -42,10 +42,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
       </script>
       `
     },
-    ...(semver.satisfies(
-      require('typescript/package.json').version,
-      '>=4.5.0-0'
-    )
+    ...(semver.satisfies(typescriptPackageJson.version, '>=4.5.0-0')
       ? [
           {
             filename: 'test.vue',
@@ -57,7 +54,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
             </script>
             `,
             languageOptions: {
-              parser: require('vue-eslint-parser'),
+              parser: vueEslintParser,
               parserOptions: {
                 parser: require.resolve('@typescript-eslint/parser')
               }
@@ -74,7 +71,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
             </script>
             `,
             languageOptions: {
-              parser: require('vue-eslint-parser'),
+              parser: vueEslintParser,
               parserOptions: {
                 parser: require.resolve('@typescript-eslint/parser')
               }
@@ -196,7 +193,7 @@ ruleTester.run('no-export-in-script-setup', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }

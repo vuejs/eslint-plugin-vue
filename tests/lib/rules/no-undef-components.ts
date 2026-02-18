@@ -2,14 +2,13 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat.ts').RuleTester
-const rule = require('../../../lib/rules/no-undef-components')
+import { RuleTester } from '../../eslint-compat.ts'
+import rule from '../../../lib/rules/no-undef-components'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -675,7 +674,7 @@ tester.run('no-undef-components', rule, {
       </template>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -767,7 +766,7 @@ tester.run('no-undef-components', rule, {
       </template>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -819,7 +818,7 @@ tester.run('no-undef-components', rule, {
       </template>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
