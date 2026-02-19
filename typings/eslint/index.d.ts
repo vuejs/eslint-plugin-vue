@@ -7,6 +7,8 @@ import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
 
+export { ESLint } from '../../node_modules/@types/eslint'
+
 export namespace AST {
   type Token = VNODE.Token
   type Range = VNODE.Range
@@ -381,7 +383,7 @@ export namespace Rule {
 }
 
 export class RuleTester extends ESLintRuleTester {}
-export class Linter {
+export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
 }
 
