@@ -5,6 +5,7 @@ import htmlComments, {
   CommentParserConfig,
   ParsedHTMLComment
 } from '../../../lib/utils/html-comments'
+import vueEslintParser from 'vue-eslint-parser'
 
 const FIXTURE_ROOT = path.resolve(
   __dirname,
@@ -34,7 +35,7 @@ function tokenize(code: string, option: CommentParserConfig) {
 
   linter.verify(code, {
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueEslintParser,
       ecmaVersion: 2018
     },
     plugins: {
