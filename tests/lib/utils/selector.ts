@@ -41,7 +41,7 @@ function extractElements(code: string, inputSelector: string) {
                 }
               })
             }
-          } as RuleModule as any
+          } as RuleModule
         }
       }
     },

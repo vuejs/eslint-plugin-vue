@@ -43,14 +43,10 @@ function tokenize(code: string, option: CommentParserConfig) {
         rules: {
           'html-comments-test': {
             create: (content) =>
-              htmlComments.defineVisitor(
-                content as unknown as RuleContext,
-                option,
-                (commentTokens) => {
-                  result.push(commentTokens)
-                }
-              ) as any
-          }
+              htmlComments.defineVisitor(content, option, (commentTokens) => {
+                result.push(commentTokens)
+              })
+          } as RuleModule
         }
       }
     },

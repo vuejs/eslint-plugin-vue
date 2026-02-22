@@ -29,7 +29,6 @@ interface LoadedPattern {
 }
 
 function loadPatterns(rootDir: string): LoadedPattern[] {
-  // @ts-expect-error must return
   return fs.readdirSync(rootDir).map((name) => {
     for (const [sourceFile, resultFile, options] of [
       ['source.js', 'result.js'],
@@ -50,6 +49,7 @@ function loadPatterns(rootDir: string): LoadedPattern[] {
         }
       }
     }
+    throw new Error(`No source file found for pattern: ${name}`)
   })
 }
 
@@ -79,25 +79,25 @@ function extractRefs(
       vue: {
         rules: {
           'extract-test': {
-            create: (context) => {
-              const refs = extract(context as unknown as RuleContext)
+            create: (context): RuleListener => {
+              const refs = extract(context)
 
-              const processed = new Set()
+              const processed = new Set<ESNode>()
               return {
-                '*'(node: any) {
+                '*'(node: ESNode) {
                   if (processed.has(node)) {
                     // Old ESLint may be called twice on the same node.
                     return
                   }
                   processed.add(node)
-                  const data = refs.get(node)
+                  const data = refs.get(node as Identifier)
                   if (data) {
                     references.push(data)
                   }
                 }
               }
             }
-          }
+          } as RuleModule
         }
       }
     },
