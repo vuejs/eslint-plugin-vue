@@ -280,6 +280,166 @@ tester.run('padding-line-between-tags', rule, {
       </template>
       `,
       options: [[{ blankLine: 'never', prev: '*', next: '*' }]]
+    },
+    // Test cases for single-line/multi-line tag support (issue #1974)
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single line</span>
+          <span>single line</span>
+          <div>
+            multi line
+          </div>
+
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'never', prev: '*:single-line', next: '*:single-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single line</span>
+
+          <div>
+            multi line
+          </div>
+
+          <span>single line</span>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:single-line' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div>
+            multi line
+          </div>
+
+          <span>single line</span>
+
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:multi-line', next: '*:single-line' },
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single</span>
+          <span>single</span>
+
+          <div>
+            multi
+          </div>
+
+          <div>
+            multi
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' },
+          { blankLine: 'never', prev: '*:single-line', next: '*:single-line' }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single</span>
+          <span>single</span>
+          <div>
+            multi
+          </div>
+
+          <div>
+            multi
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          {
+            blankLine: 'never',
+            prev: 'span:single-line',
+            next: 'span:single-line'
+          },
+          {
+            blankLine: 'always',
+            prev: 'div:multi-line',
+            next: 'div:multi-line'
+          }
+        ]
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single</span>
+
+          <div>
+            multi
+          </div>
+
+          <span>single</span>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          {
+            blankLine: 'always',
+            prev: 'span:single-line',
+            next: 'div:multi-line'
+          },
+          {
+            blankLine: 'always',
+            prev: 'div:multi-line',
+            next: 'span:single-line'
+          }
+        ]
+      ]
     }
   ],
   invalid: [
@@ -1293,6 +1453,211 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
+          column: 11
+        }
+      ]
+    },
+    // Test cases for single-line/multi-line tag support (issue #1974)
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single line</span>
+
+          <span>single line</span>
+          <div>
+            multi line
+          </div>
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <span>single line</span>
+          <span>single line</span>
+          <div>
+            multi line
+          </div>
+
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'never', prev: '*:single-line', next: '*:single-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 6,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 10,
+          column: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single line</span>
+          <div>
+            multi line
+          </div>
+          <span>single line</span>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <span>single line</span>
+
+          <div>
+            multi line
+          </div>
+
+          <span>single line</span>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:single-line' }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 5,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 8,
+          column: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <div>
+            multi line
+          </div>
+          <span>single line</span>
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <div>
+            multi line
+          </div>
+
+          <span>single line</span>
+
+          <div>
+            multi line
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:multi-line', next: '*:single-line' },
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 8,
+          column: 11
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div>
+          <span>single</span>
+
+          <span>single</span>
+          <div>
+            multi
+          </div>
+          <div>
+            multi
+          </div>
+        </div>
+      </template>
+      `,
+      output: `
+      <template>
+        <div>
+          <span>single</span>
+          <span>single</span>
+
+          <div>
+            multi
+          </div>
+
+          <div>
+            multi
+          </div>
+        </div>
+      </template>
+      `,
+      options: [
+        [
+          { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+          { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' },
+          { blankLine: 'never', prev: '*:single-line', next: '*:single-line' }
+        ]
+      ],
+      errors: [
+        {
+          message: 'Unexpected blank line before this tag.',
+          line: 6,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 7,
+          column: 11
+        },
+        {
+          message: 'Expected blank line before this tag.',
+          line: 10,
           column: 11
         }
       ]
