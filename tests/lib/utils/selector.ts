@@ -59,17 +59,16 @@ function extractElements(code: string, inputSelector: string) {
   }
 }
 
-describe('parseSelector()', () => {
-  for (const { name, code, inputSelector } of loadPatterns()) {
-    describe(`'test/fixtures/utils/selector/${name}/source.vue'`, () => {
-      it('should to parse the selector to match the valid elements.', () => {
-        const elements = extractElements(code, inputSelector)
-        const actual = JSON.stringify(elements, null, 4)
+describe.each(loadPatterns())(
+  `parseSelector() [$name]`,
+  ({ name, code, inputSelector }) => {
+    it('should to parse the selector to match the valid elements.', () => {
+      const elements = extractElements(code, inputSelector)
+      const actual = JSON.stringify(elements, null, 4)
 
-        expect(actual).toMatchFileSnapshot(
-          path.join(FIXTURE_ROOT, name, 'result.json')
-        )
-      })
+      expect(actual).toMatchFileSnapshot(
+        path.join(FIXTURE_ROOT, name, 'result.json')
+      )
     })
   }
-})
+)

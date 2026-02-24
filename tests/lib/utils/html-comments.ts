@@ -56,18 +56,17 @@ function tokenize(code: string, option: CommentParserConfig) {
   return result
 }
 
-describe('defineVisitor()', () => {
-  for (const { name, code, option } of loadPatterns()) {
-    describe(`'test/fixtures/utils/html-comments/${name}/source.vue'`, () => {
-      it('should be parsed to valid tokens.', () => {
-        const tokens = tokenize(code, option)
+describe.each(loadPatterns())(
+  'defineVisitor() [$name]',
+  ({ name, code, option }) => {
+    it('should be parsed to valid tokens.', () => {
+      const tokens = tokenize(code, option)
 
-        const actual = JSON.stringify(tokens, null, 4)
+      const actual = JSON.stringify(tokens, null, 4)
 
-        expect(actual).toMatchFileSnapshot(
-          path.join(FIXTURE_ROOT, name, 'comment-tokens.json')
-        )
-      })
+      expect(actual).toMatchFileSnapshot(
+        path.join(FIXTURE_ROOT, name, 'comment-tokens.json')
+      )
     })
   }
-})
+)

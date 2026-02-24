@@ -23,7 +23,6 @@ const REACTIVE_VARS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'reactive-vars')
 interface LoadedPattern {
   code: string
   name: string
-  sourceFilePath: string
   resultFilePath: string
   options?: eslint.Linter.FlatConfig
 }
@@ -43,7 +42,6 @@ function loadPatterns(rootDir: string): LoadedPattern[] {
         return {
           code: fs.readFileSync(sourceFilePath, 'utf8'),
           name,
-          sourceFilePath,
           resultFilePath: path.join(rootDir, name, resultFile),
           options
         }
@@ -126,63 +124,57 @@ function extractRefs(
   return references
 }
 
-describe('extractRefObjectReferences()', () => {
-  for (const { code, sourceFilePath, resultFilePath, options } of loadPatterns(
-    REF_OBJECTS_FIXTURE_ROOT
-  )) {
-    describe(sourceFilePath, () => {
-      it('should to extract the references to match the expected references.', () => {
-        const references = [
-          ...extractRefs(code, extractRefObjectReferences, options)
-        ]
+describe.each(loadPatterns(REF_OBJECTS_FIXTURE_ROOT))(
+  'extractRefObjectReferences() [$name]',
+  ({ code, resultFilePath, options }) => {
+    it('should to extract the references to match the expected references.', () => {
+      const references = [
+        ...extractRefs(code, extractRefObjectReferences, options)
+      ]
 
-        let result = ''
-        let start = 0
-        let ref
-        while ((ref = references.shift())) {
-          result += code.slice(start, ref.node.range[0])
-          result += `/*>*/`
-          result += code.slice(...ref.node.range)
-          result += `/*<${JSON.stringify({
-            type: ref.type,
-            method: ref.method
-          })}*/`
-          start = ref.node.range[1]
-        }
-        result += code.slice(start)
+      let result = ''
+      let start = 0
+      let ref
+      while ((ref = references.shift())) {
+        result += code.slice(start, ref.node.range[0])
+        result += `/*>*/`
+        result += code.slice(...ref.node.range)
+        result += `/*<${JSON.stringify({
+          type: ref.type,
+          method: ref.method
+        })}*/`
+        start = ref.node.range[1]
+      }
+      result += code.slice(start)
 
-        expect(result).toMatchFileSnapshot(resultFilePath)
-      })
+      expect(result).toMatchFileSnapshot(resultFilePath)
     })
   }
-})
-describe('extractReactiveVariableReferences()', () => {
-  for (const { code, sourceFilePath, resultFilePath, options } of loadPatterns(
-    REACTIVE_VARS_FIXTURE_ROOT
-  )) {
-    describe(sourceFilePath, () => {
-      it('should to extract the references to match the expected references.', () => {
-        const references = [
-          ...extractRefs(code, extractReactiveVariableReferences, options)
-        ]
+)
+describe.each(loadPatterns(REACTIVE_VARS_FIXTURE_ROOT))(
+  'extractReactiveVariableReferences() [$name]',
+  ({ code, resultFilePath, options }) => {
+    it('should to extract the references to match the expected references.', () => {
+      const references = [
+        ...extractRefs(code, extractReactiveVariableReferences, options)
+      ]
 
-        let result = ''
-        let start = 0
-        let ref
-        while ((ref = references.shift())) {
-          result += code.slice(start, ref.node.range[0])
-          result += `/*>*/`
-          result += code.slice(...ref.node.range)
-          result += `/*<${JSON.stringify({
-            escape: ref.escape,
-            method: ref.method
-          })}*/`
-          start = ref.node.range[1]
-        }
-        result += code.slice(start)
+      let result = ''
+      let start = 0
+      let ref
+      while ((ref = references.shift())) {
+        result += code.slice(start, ref.node.range[0])
+        result += `/*>*/`
+        result += code.slice(...ref.node.range)
+        result += `/*<${JSON.stringify({
+          escape: ref.escape,
+          method: ref.method
+        })}*/`
+        start = ref.node.range[1]
+      }
+      result += code.slice(start)
 
-        expect(result).toMatchFileSnapshot(resultFilePath)
-      })
+      expect(result).toMatchFileSnapshot(resultFilePath)
     })
   }
-})
+)
