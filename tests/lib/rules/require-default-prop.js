@@ -412,6 +412,103 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    // defineModel — valid cases
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel()
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel(String)
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: Boolean })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: String, required: true })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: String, default: 'hello' })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel('count', { type: Number, default: 0 })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: Object, default: () => ({}) })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: Array, default: () => [] })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      }
     }
   ],
 
@@ -735,6 +832,58 @@ ruleTester.run('require-default-prop', rule, {
         {
           message: "Prop 'foo' requires default value to be set.",
           line: 3
+        }
+      ]
+    },
+    // defineModel — invalid cases
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: String })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      errors: [
+        {
+          message: "Prop 'modelValue' requires default value to be set."
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel('count', { type: Number })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      errors: [
+        {
+          message: "Prop 'count' requires default value to be set."
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel({ type: Array })
+      </script>
+      `,
+      languageOptions: {
+        parser: require('vue-eslint-parser'),
+        ...languageOptions
+      },
+      errors: [
+        {
+          message: "Prop 'modelValue' requires default value to be set."
         }
       ]
     }
