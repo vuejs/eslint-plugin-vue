@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow key of `<template v-for>` placed on child elements
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in all of `*.configs["flat/essential"]`, `*.configs["flat/strongly-recommended"]`, `*.configs["flat/recommended"]`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 ## :book: Rule Details
 

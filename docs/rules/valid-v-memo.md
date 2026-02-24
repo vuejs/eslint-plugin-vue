@@ -10,7 +10,7 @@ since: v7.16.0
 
 > enforce valid `v-memo` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in all of `*.configs["flat/essential"]`, `*.configs["flat/strongly-recommended"]`, `*.configs["flat/recommended"]`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 
 This rule checks whether every `v-memo` directive is valid.
 

@@ -11,7 +11,7 @@ since: v9.0.0
 > require valid keys in model option
 
 - :no_entry_sign: This rule was **deprecated**.
-- :gear: This rule is included in all of `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue2-recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in all of `*.configs["flat/vue2-essential"]`, `*.configs["flat/vue2-strongly-recommended"]`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/vue2-essential"`, `"plugin:vue/vue2-strongly-recommended"` and `"plugin:vue/vue2-recommended"`.
 
 ## :book: Rule Details
 
