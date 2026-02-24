@@ -10,7 +10,13 @@ since: v7.0.0
 
 > disallow using deprecated `$listeners` (in Vue.js 3.0.0+)
 
-- :gear: This rule is included in all of `*.configs["flat/essential"]`, `*.configs["flat/strongly-recommended"]`, `*.configs["flat/recommended"]`, `"plugin:vue/essential"`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 

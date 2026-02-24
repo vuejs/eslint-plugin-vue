@@ -10,7 +10,11 @@ since: v7.0.0
 
 > require `emits` option with name triggered by `$emit()`
 
-- :gear: This rule is included in all of `*.configs["flat/strongly-recommended"]`, `*.configs["flat/recommended"]`, `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details

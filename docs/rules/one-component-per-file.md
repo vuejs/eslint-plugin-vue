@@ -10,7 +10,15 @@ since: v7.0.0
 
 > enforce that each component should be in its own file
 
-- :gear: This rule is included in all of `*.configs["flat/strongly-recommended"]`, `*.configs["flat/vue2-strongly-recommended"]`, `*.configs["flat/recommended"]`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue2-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue2-recommended"`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 

@@ -10,7 +10,19 @@ since: v7.13.0
 
 > enforce valid `defineEmits` compiler macro
 
-- :gear: This rule is included in all of `*.configs["flat/essential"]`, `*.configs["flat/vue2-essential"]`, `*.configs["flat/strongly-recommended"]`, `*.configs["flat/vue2-strongly-recommended"]`, `*.configs["flat/recommended"]`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/essential"`, `"plugin:vue/vue2-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue2-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue2-recommended"`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether `defineEmits` compiler macro is valid.
 

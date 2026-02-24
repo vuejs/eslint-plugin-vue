@@ -124,8 +124,10 @@ class DocFile {
     }
     if (meta.docs?.categories) {
       const presets = getPresetNames(getPresetIds(meta.docs.categories))
-
-      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
+      notes.push(
+        `- :gear: This rule is included in the following preset configs:`,
+        ...presets.map((preset) => `  - ${preset}`)
+      )
     }
     if (meta.fixable) {
       notes.push(

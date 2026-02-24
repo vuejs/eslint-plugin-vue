@@ -10,7 +10,19 @@ since: v3.8.0
 
 > disallow asynchronous actions in computed properties
 
-- :gear: This rule is included in all of `*.configs["flat/essential"]`, `*.configs["flat/vue2-essential"]`, `*.configs["flat/strongly-recommended"]`, `*.configs["flat/vue2-strongly-recommended"]`, `*.configs["flat/recommended"]`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/essential"`, `"plugin:vue/vue2-essential"`, `"plugin:vue/strongly-recommended"`, `"plugin:vue/vue2-strongly-recommended"`, `"plugin:vue/recommended"` and `"plugin:vue/vue2-recommended"`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to unexpected behaviour; that's why you should avoid them.
 If you need async computed properties, consider using the [`computedAsync`] composable from VueUse.
