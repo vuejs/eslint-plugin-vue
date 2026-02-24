@@ -23,7 +23,7 @@ const path = require('node:path')
 const rules = require('./lib/rules')
 const removedRules = require('../lib/removed-rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
-const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
+const { getPresetNames } = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
@@ -123,11 +123,11 @@ class DocFile {
       }
     }
     if (meta.docs?.categories) {
-      const presets = getPresetIds(meta.docs.categories).flatMap((categoryId) =>
-        CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
+      const presets = getPresetNames(getPresetIds(meta.docs.categories))
+      notes.push(
+        `- :gear: This rule is included in the following preset configs:`,
+        ...presets.map((preset) => `  - ${preset}`)
       )
-
-      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
     if (meta.fixable) {
       notes.push(
@@ -151,7 +151,7 @@ class DocFile {
       notes.push('', '')
     }
 
-    const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n+[^\n]*\n+(?: {0,2}- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
     this.content = headerPattern.test(this.content)
       ? this.content.replace(headerPattern, header)

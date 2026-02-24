@@ -18,4 +18,9 @@ const pageClass = computed(() => frontmatter.value.pageClass || '')
 .rule-details :deep(.main h1 + blockquote ::first-letter) {
   text-transform: uppercase;
 }
+
+/* Reduce spacing in nested lists */
+.rule-details :deep(.vp-doc ul ul li + li) {
+  margin-top: 2px;
+}
 </style>
