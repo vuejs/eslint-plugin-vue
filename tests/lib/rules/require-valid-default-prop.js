@@ -342,6 +342,62 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    // defineModel — no default (nothing to check)
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    // defineModel — correct runtime type match
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean, default: false })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel('count', { type: Number, default: 0 })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, default: 'hello' })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Array, default: () => [] })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Object, default: () => ({}) })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') }
     }
   ],
 
@@ -1227,6 +1283,89 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    // defineModel — wrong type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean, default: 'hello' })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a boolean.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel('count', { type: Number, default: false })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'count' prop must be a number.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — Array/Object must use factory
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Array, default: [] })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a function.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Object, default: {} })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a function.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — factory returns wrong type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, default: () => 123 })
+      </script>
+      `,
+      languageOptions: { parser: require('vue-eslint-parser') },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a string.",
+          line: 3
+        }
+      ]
     }
   ]
 })
