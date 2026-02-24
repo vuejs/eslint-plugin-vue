@@ -124,7 +124,7 @@ ${group.description}
       const presetsForVue3 = getPresetIds([group.categoryIdForVue3]).flatMap(
         (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
-      const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).map(
+      const presetsForVue2 = getPresetIds([group.categoryIdForVue2]).flatMap(
         (categoryId) => CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
       )
       content += `
