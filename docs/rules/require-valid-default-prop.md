@@ -69,6 +69,13 @@ export default {
   }
 }
 </script>
+<script setup>
+/* ✓ GOOD */
+defineModel({ type: Object, default: () => ({ message: 'hello' }) })
+
+/* ✗ BAD */
+defineModel({ type: Object, default: { message: 'hello' } })
+</script>
 ```
 
 </eslint-code-block>
