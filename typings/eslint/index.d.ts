@@ -1,4 +1,5 @@
 import {
+  ESLint as RawESLint,
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
   Linter as ESLintLinter
@@ -7,7 +8,13 @@ import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
 
-export { ESLint } from '../../node_modules/@types/eslint'
+export class ESLint extends RawESLint {}
+
+export namespace ESLint {
+  interface Plugin extends Omit<RawESLint.Plugin, 'rules'> {
+    rules?: Record<string, Rule.RuleModule>
+  }
+}
 
 export namespace AST {
   type Token = VNODE.Token
@@ -385,6 +392,16 @@ export namespace Rule {
 export class RuleTester extends ESLintRuleTester {}
 export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
+  verify(
+    code: SourceCode | string,
+    config: Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.LintMessage[]
+  verify(
+    code: SourceCode | string,
+    config: Linter.Config | Linter.Config[],
+    options: Linter.LintOptions
+  ): Linter.LintMessage[]
 }
 
 export namespace Linter {
@@ -392,6 +409,9 @@ export namespace Linter {
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
   type FlatConfig = ESLintLinter.FlatConfig
+  interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
+    plugins?: Record<string, ESLint.Plugin>
+  }
 }
 export type ReportDescriptorFix = (
   fixer: Rule.RuleFixer
