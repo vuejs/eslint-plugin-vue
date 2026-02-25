@@ -1,10 +1,11 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import { Linter } from '../../eslint-compat'
-import htmlComments, {
+import type {
   CommentParserConfig,
   ParsedHTMLComment
 } from '../../../lib/utils/html-comments'
+import fs from 'node:fs'
+import path from 'node:path'
+import { Linter } from '../../eslint-compat'
+import { defineVisitor } from '../../../lib/utils/html-comments'
 import vueEslintParser from 'vue-eslint-parser'
 
 const FIXTURE_ROOT = path.resolve(
@@ -43,7 +44,7 @@ function tokenize(code: string, option: CommentParserConfig) {
         rules: {
           'html-comments-test': {
             create: (content) =>
-              htmlComments.defineVisitor(content, option, (commentTokens) => {
+              defineVisitor(content, option, (commentTokens) => {
                 result.push(commentTokens)
               })
           } as RuleModule

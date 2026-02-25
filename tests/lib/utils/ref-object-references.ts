@@ -1,4 +1,10 @@
-import * as eslint from 'eslint'
+import type {
+  RefObjectReferences,
+  RefObjectReference,
+  ReactiveVariableReferences,
+  ReactiveVariableReference
+} from '../../../lib/utils/ref-object-references'
+import type * as eslint from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
 import assert from 'node:assert'
@@ -6,11 +12,7 @@ import vueESLintParser from 'vue-eslint-parser'
 import { Linter } from '../../eslint-compat'
 import {
   extractRefObjectReferences,
-  extractReactiveVariableReferences,
-  RefObjectReferences,
-  RefObjectReference,
-  ReactiveVariableReferences,
-  ReactiveVariableReference
+  extractReactiveVariableReferences
 } from '../../../lib/utils/ref-object-references'
 
 const FIXTURE_ROOT = path.resolve(
@@ -134,7 +136,7 @@ describe.each(loadPatterns(REF_OBJECTS_FIXTURE_ROOT))(
 
       let result = ''
       let start = 0
-      let ref
+      let ref: RefObjectReference | undefined
       while ((ref = references.shift())) {
         result += code.slice(start, ref.node.range[0])
         result += `/*>*/`
@@ -161,7 +163,7 @@ describe.each(loadPatterns(REACTIVE_VARS_FIXTURE_ROOT))(
 
       let result = ''
       let start = 0
-      let ref
+      let ref: ReactiveVariableReference | undefined
       while ((ref = references.shift())) {
         result += code.slice(start, ref.node.range[0])
         result += `/*>*/`
