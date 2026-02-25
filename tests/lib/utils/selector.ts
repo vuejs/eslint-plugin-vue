@@ -1,8 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { expect } from 'vitest'
-import selector from '../../../lib/utils/selector'
-import utils from '../../../lib/utils'
+import { parseSelector } from '../../../lib/utils/selector'
+import { defineDocumentVisitor } from '../../../lib/utils'
 import { Linter } from '../../eslint-compat'
 import parser from 'vue-eslint-parser'
 
@@ -30,8 +30,8 @@ function extractElements(code: string, inputSelector: string) {
         rules: {
           'selector-test': {
             create: (context) => {
-              const parsed = selector.parseSelector(inputSelector, context)
-              return utils.defineDocumentVisitor(context, {
+              const parsed = parseSelector(inputSelector, context)
+              return defineDocumentVisitor(context, {
                 VElement(node) {
                   if (parsed.test(node)) {
                     matches.push(
