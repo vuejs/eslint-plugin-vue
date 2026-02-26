@@ -1,15 +1,11 @@
-/**
- * Test for getComponentPropsFromTypeDefineTypes
- */
-'use strict'
-
-const path = require('node:path')
-const fs = require('node:fs')
-const Linter = require('../../../../eslint-compat').Linter
-const parser = require('vue-eslint-parser')
-const tsParser = require('@typescript-eslint/parser')
-const utils = require('../../../../../lib/utils/index')
-const assert = require('node:assert')
+import type { Linter as ESLintLinter } from 'eslint'
+import assert from 'node:assert'
+import fs from 'node:fs'
+import path from 'node:path'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
+import { Linter } from '../../../../eslint-compat'
+import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,
@@ -19,13 +15,18 @@ const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-props')
 
-function extractComponentProps(code, tsFileCode) {
+function extractComponentProps(code: string, tsFileCode = '') {
   const linter = new Linter()
-  const result = []
-  const config = {
+  const result: {
+    type: string
+    name: string | null
+    required: boolean | null
+    types: string[] | null
+  }[] = []
+  const config: ESLintLinter.Config = {
     files: ['**/*.vue'],
     languageOptions: {
-      parser,
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       parserOptions: {
         parser: tsParser,
@@ -38,20 +39,20 @@ function extractComponentProps(code, tsFileCode) {
         rules: {
           test: {
             create(context) {
-              return utils.defineScriptSetupVisitor(context, {
+              return defineScriptSetupVisitor(context, {
                 onDefinePropsEnter(_node, props) {
                   result.push(
                     ...props.map((prop) => ({
                       type: prop.type,
                       name: prop.propName,
-                      required: prop.required ?? null,
-                      types: prop.types ?? null
+                      required: 'required' in prop ? prop.required : null,
+                      types: 'types' in prop ? prop.types : null
                     }))
                   )
                 }
               })
             }
-          }
+          } as RuleModule
         }
       }
     },
@@ -59,7 +60,7 @@ function extractComponentProps(code, tsFileCode) {
       'test/test': 'error'
     }
   }
-  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
+  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode, 'utf8')
   // clean './src/test.ts' cache
   tsParser.clearCaches()
   assert.deepStrictEqual(
@@ -71,7 +72,7 @@ function extractComponentProps(code, tsFileCode) {
   return result
 }
 
-describe('getComponentPropsFromTypeDefineTypes', () => {
+describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
   it.each([
     {
       name: 'inline-type',

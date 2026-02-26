@@ -1,31 +1,25 @@
-/**
- * Test for getComponentSlotsFromTypeDefineTypes
- */
-'use strict'
-
-const path = require('node:path')
-const fs = require('node:fs')
-const Linter = require('../../../../eslint-compat').Linter
-const parser = require('vue-eslint-parser')
-const tsParser = require('@typescript-eslint/parser')
-const utils = require('../../../../../lib/utils/index')
-const assert = require('node:assert')
+import type { Linter as ESLintLinter } from 'eslint'
+import assert from 'node:assert'
+import path from 'node:path'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
+import { Linter } from '../../../../eslint-compat'
+import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,
   '../../../../fixtures/utils/ts-utils'
 )
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
-const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-slots')
 
-function extractComponentSlots(code, tsFileCode) {
+function extractComponentSlots(code: string) {
   const linter = new Linter()
-  const result = []
-  const config = {
+  const result: { type: string; name: string | null }[] = []
+  const config: ESLintLinter.Config = {
     files: ['**/*.vue'],
     languageOptions: {
-      parser,
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       parserOptions: {
         parser: tsParser,
@@ -38,18 +32,18 @@ function extractComponentSlots(code, tsFileCode) {
         rules: {
           test: {
             create(context) {
-              return utils.defineScriptSetupVisitor(context, {
+              return defineScriptSetupVisitor(context, {
                 onDefineSlotsEnter(_node, slots) {
                   result.push(
-                    ...slots.map((prop) => ({
-                      type: prop.type,
-                      name: prop.slotName
+                    ...slots.map((slot) => ({
+                      type: slot.type,
+                      name: slot.slotName
                     }))
                   )
                 }
               })
             }
-          }
+          } as RuleModule
         }
       }
     },
@@ -57,15 +51,10 @@ function extractComponentSlots(code, tsFileCode) {
       'test/test': 'error'
     }
   }
-  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
-  // clean './src/test.ts' cache
-  tsParser.clearCaches()
   assert.deepStrictEqual(
     linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
     []
   )
-  // reset
-  fs.writeFileSync(SRC_TS_TEST_PATH, '', 'utf8')
   return result
 }
 
@@ -96,13 +85,13 @@ describe('getComponentSlotsFromTypeDefineTypes', () => {
     }
   ])(
     'should return expected slots with $name',
-    async ({ name, scriptCode, tsFileCode }) => {
+    async ({ name, scriptCode }) => {
       const code = `
       <script setup lang="ts">
       ${scriptCode}
       </script>
     `
-      const slots = extractComponentSlots(code, tsFileCode)
+      const slots = extractComponentSlots(code)
 
       await expect(JSON.stringify(slots, null, 4)).toMatchFileSnapshot(
         path.join(SNAPSHOT_ROOT, `${name}.json`)

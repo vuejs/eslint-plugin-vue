@@ -1,15 +1,11 @@
-/**
- * Test for getComponentEmitsFromTypeDefineTypes
- */
-'use strict'
-
-const path = require('node:path')
-const fs = require('node:fs')
-const Linter = require('../../../../eslint-compat').Linter
-const parser = require('vue-eslint-parser')
-const tsParser = require('@typescript-eslint/parser')
-const utils = require('../../../../../lib/utils/index')
-const assert = require('node:assert')
+import type { Linter as ESLintLinter } from 'eslint'
+import assert from 'node:assert'
+import fs from 'node:fs'
+import path from 'node:path'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
+import { Linter } from '../../../../eslint-compat'
+import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
 
 const FIXTURES_ROOT = path.resolve(
   __dirname,
@@ -19,13 +15,13 @@ const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-emits')
 
-function extractComponentProps(code, tsFileCode) {
+function extractComponentEmits(code: string, tsFileCode = '') {
   const linter = new Linter()
-  const result = []
-  const config = {
+  const result: { type: string; name: string | null }[] = []
+  const config: ESLintLinter.Config = {
     files: ['**/*.vue'],
     languageOptions: {
-      parser,
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       parserOptions: {
         parser: tsParser,
@@ -38,7 +34,7 @@ function extractComponentProps(code, tsFileCode) {
         rules: {
           test: {
             create(context) {
-              return utils.defineScriptSetupVisitor(context, {
+              return defineScriptSetupVisitor(context, {
                 onDefineEmitsEnter(_node, emits) {
                   result.push(
                     ...emits.map((emit) => ({
@@ -49,7 +45,7 @@ function extractComponentProps(code, tsFileCode) {
                 }
               })
             }
-          }
+          } as RuleModule
         }
       }
     },
@@ -57,7 +53,7 @@ function extractComponentProps(code, tsFileCode) {
       'test/test': 'error'
     }
   }
-  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
+  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode, 'utf8')
   // clean './src/test.ts' cache
   tsParser.clearCaches()
   assert.deepStrictEqual(
@@ -103,9 +99,9 @@ describe('getComponentEmitsFromTypeDefineTypes', () => {
     'should return expected emits with $name',
     async ({ name, scriptCode, tsFileCode }) => {
       const code = `<script setup lang="ts"> ${scriptCode} </script>`
-      const props = extractComponentProps(code, tsFileCode)
+      const emits = extractComponentEmits(code, tsFileCode)
 
-      await expect(JSON.stringify(props, null, 4)).toMatchFileSnapshot(
+      await expect(JSON.stringify(emits, null, 4)).toMatchFileSnapshot(
         path.join(SNAPSHOT_ROOT, `${name}.json`)
       )
     }
