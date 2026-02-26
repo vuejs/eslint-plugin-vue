@@ -1,18 +1,7 @@
-import type { Linter as ESLintLinter } from 'eslint'
-import assert from 'node:assert'
-import fs from 'node:fs'
 import path from 'node:path'
-import tsParser from '@typescript-eslint/parser'
-import vueEslintParser from 'vue-eslint-parser'
-import { Linter } from '../../../../eslint-compat'
-import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
+import { FIXTURES_ROOT, verifyWithTsParser } from './utils'
 
-const FIXTURES_ROOT = path.resolve(
-  __dirname,
-  '../../../../fixtures/utils/ts-utils'
-)
 const TS_TEST_FILENAME = 'test-emits'
-const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(
   FIXTURES_ROOT,
   `./src/${TS_TEST_FILENAME}.ts`
@@ -20,52 +9,22 @@ const SRC_TS_TEST_PATH = path.join(
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-emits')
 
 function extractComponentEmits(code: string, tsFileCode = '') {
-  const linter = new Linter()
   const result: { type: string; name: string | null }[] = []
-  const config: ESLintLinter.Config = {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parser: vueEslintParser,
-      ecmaVersion: 2020,
-      parserOptions: {
-        parser: tsParser,
-        project: [TSCONFIG_PATH],
-        extraFileExtensions: ['.vue']
+  verifyWithTsParser(
+    code,
+    {
+      onDefineEmitsEnter(_node, emits) {
+        result.push(
+          ...emits.map((emit) => ({
+            type: emit.type,
+            name: emit.emitName
+          }))
+        )
       }
     },
-    plugins: {
-      test: {
-        rules: {
-          test: {
-            create(context) {
-              return defineScriptSetupVisitor(context, {
-                onDefineEmitsEnter(_node, emits) {
-                  result.push(
-                    ...emits.map((emit) => ({
-                      type: emit.type,
-                      name: emit.emitName
-                    }))
-                  )
-                }
-              })
-            }
-          } as RuleModule
-        }
-      }
-    },
-    rules: {
-      'test/test': 'error'
-    }
-  }
-  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode, 'utf8')
-  // clean './src/test.ts' cache
-  tsParser.clearCaches()
-  assert.deepStrictEqual(
-    linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
-    []
+    SRC_TS_TEST_PATH,
+    tsFileCode
   )
-  // reset
-  fs.writeFileSync(SRC_TS_TEST_PATH, '', 'utf8')
   return result
 }
 

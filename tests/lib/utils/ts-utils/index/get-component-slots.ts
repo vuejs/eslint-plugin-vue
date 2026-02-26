@@ -1,60 +1,20 @@
-import type { Linter as ESLintLinter } from 'eslint'
-import assert from 'node:assert'
 import path from 'node:path'
-import tsParser from '@typescript-eslint/parser'
-import vueEslintParser from 'vue-eslint-parser'
-import { Linter } from '../../../../eslint-compat'
-import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
+import { FIXTURES_ROOT, verifyWithTsParser } from './utils'
 
-const FIXTURES_ROOT = path.resolve(
-  __dirname,
-  '../../../../fixtures/utils/ts-utils'
-)
-const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-slots')
 
 function extractComponentSlots(code: string) {
-  const linter = new Linter()
   const result: { type: string; name: string | null }[] = []
-  const config: ESLintLinter.Config = {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parser: vueEslintParser,
-      ecmaVersion: 2020,
-      parserOptions: {
-        parser: tsParser,
-        project: [TSCONFIG_PATH],
-        extraFileExtensions: ['.vue']
-      }
-    },
-    plugins: {
-      test: {
-        rules: {
-          test: {
-            create(context) {
-              return defineScriptSetupVisitor(context, {
-                onDefineSlotsEnter(_node, slots) {
-                  result.push(
-                    ...slots.map((slot) => ({
-                      type: slot.type,
-                      name: slot.slotName
-                    }))
-                  )
-                }
-              })
-            }
-          } as RuleModule
-        }
-      }
-    },
-    rules: {
-      'test/test': 'error'
+  verifyWithTsParser(code, {
+    onDefineSlotsEnter(_node, slots) {
+      result.push(
+        ...slots.map((slot) => ({
+          type: slot.type,
+          name: slot.slotName
+        }))
+      )
     }
-  }
-  assert.deepStrictEqual(
-    linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
-    []
-  )
+  })
   return result
 }
 
