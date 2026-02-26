@@ -2,10 +2,11 @@
  * @fileoverview Enforces that a return statement is present in computed property (return-in-computed-property)
  * @author Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/return-in-computed-property'
 import { RuleTester } from '../../eslint-compat.ts'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
 }

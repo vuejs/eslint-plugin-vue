@@ -3,8 +3,8 @@ import { RuleTester, ESLint } from '../eslint-compat.ts'
 import { getCoreRule } from '../../lib/utils'
 import vueEslintParser from 'vue-eslint-parser'
 
-const ruleNoUnusedVars = getCoreRule('no-unused-vars')
-const ruleNoUndef = getCoreRule('no-undef')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')!
+const ruleNoUndef = getCoreRule('no-undef')!
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -252,7 +252,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           },
           {
             message: "'baz' is assigned a value but never used.",
@@ -292,7 +292,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           }
         ]
       },
@@ -332,7 +332,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           }
         ]
       },

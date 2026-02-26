@@ -1,3 +1,4 @@
+import type { Linter } from 'eslint'
 import path from 'node:path'
 import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
@@ -7,7 +8,7 @@ const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_VUE_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.vue')
 
 export function getTypeScriptFixtureTestOptions() {
-  const languageOptions = {
+  const languageOptions: Linter.LanguageOptions = {
     parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module',
