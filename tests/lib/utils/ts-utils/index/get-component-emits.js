@@ -17,6 +17,7 @@ const FIXTURES_ROOT = path.resolve(
 )
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-emits')
 
 function extractComponentProps(code, tsFileCode) {
   const linter = new Linter()
@@ -69,59 +70,44 @@ function extractComponentProps(code, tsFileCode) {
 }
 
 describe('getComponentEmitsFromTypeDefineTypes', () => {
-  for (const { scriptCode, tsFileCode, props: expected } of [
+  it.each([
     {
-      scriptCode: `defineEmits<{(e:'foo'):void,(e:'bar'):void}>()`,
-      props: [
-        { type: 'type', name: 'foo' },
-        { type: 'type', name: 'bar' }
-      ]
+      name: 'inline-call-signatures',
+      scriptCode: `defineEmits<{(e:'foo'):void,(e:'bar'):void}>()`
     },
     {
+      name: 'imported-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo'):void,(e:'bar'):void}`,
       scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'foo' },
-        { type: 'infer-type', name: 'bar' }
-      ]
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-any',
       tsFileCode: `export type Emits = any`,
       scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [{ type: 'unknown', name: null }]
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-union-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo' | 'bar'): void, (e:'baz',payload:number): void}`,
       scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'foo' },
-        { type: 'infer-type', name: 'bar' },
-        { type: 'infer-type', name: 'baz' }
-      ]
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-record-style',
       tsFileCode: `export type Emits = { a: [], b: [number], c: [string]}`,
       scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'a' },
-        { type: 'infer-type', name: 'b' },
-        { type: 'infer-type', name: 'c' }
-      ]
+      defineEmits<Emits>()`
     }
-  ]) {
-    const code = `<script setup lang="ts"> ${scriptCode} </script>`
-    it(`should return expected props with :${code}`, () => {
+  ])(
+    'should return expected emits with $name',
+    async ({ name, scriptCode, tsFileCode }) => {
+      const code = `<script setup lang="ts"> ${scriptCode} </script>`
       const props = extractComponentProps(code, tsFileCode)
 
-      assert.deepStrictEqual(
-        props,
-        expected,
-        `\n${JSON.stringify(props)}\n === \n${JSON.stringify(expected)}`
+      await expect(JSON.stringify(props, null, 4)).toMatchFileSnapshot(
+        path.join(SNAPSHOT_ROOT, `${name}.json`)
       )
-    })
-  }
+    }
+  )
 })

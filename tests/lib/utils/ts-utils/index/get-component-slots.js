@@ -17,6 +17,7 @@ const FIXTURES_ROOT = path.resolve(
 )
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-slots')
 
 function extractComponentSlots(code, tsFileCode) {
   const linter = new Linter()
@@ -69,47 +70,43 @@ function extractComponentSlots(code, tsFileCode) {
 }
 
 describe('getComponentSlotsFromTypeDefineTypes', () => {
-  for (const { scriptCode, tsFileCode, slots: expected } of [
+  it.each([
     {
+      name: 'inline-type',
       scriptCode: `
         defineSlots<{
           default(props: { msg: string }): any
-        }>()
-      `,
-      slots: [{ type: 'type', name: 'default' }]
+        }>()`
     },
     {
+      name: 'inline-interface',
       scriptCode: `
         interface Slots {
           default(props: { msg: string }): any
         }
-        defineSlots<Slots>()
-      `,
-      slots: [{ type: 'type', name: 'default' }]
+        defineSlots<Slots>()`
     },
     {
+      name: 'inline-type-alias',
       scriptCode: `
         type Slots = {
           default(props: { msg: string }): any
         }
-        defineSlots<Slots>()
-      `,
-      slots: [{ type: 'type', name: 'default' }]
+        defineSlots<Slots>()`
     }
-  ]) {
-    const code = `
+  ])(
+    'should return expected slots with $name',
+    async ({ name, scriptCode, tsFileCode }) => {
+      const code = `
       <script setup lang="ts">
       ${scriptCode}
       </script>
     `
-    it(`should return expected slots with :${code}`, () => {
       const slots = extractComponentSlots(code, tsFileCode)
 
-      assert.deepStrictEqual(
-        slots,
-        expected,
-        `\n${JSON.stringify(slots)}\n === \n${JSON.stringify(expected)}`
+      await expect(JSON.stringify(slots, null, 4)).toMatchFileSnapshot(
+        path.join(SNAPSHOT_ROOT, `${name}.json`)
       )
-    })
-  }
+    }
+  )
 })

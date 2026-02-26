@@ -17,6 +17,7 @@ const FIXTURES_ROOT = path.resolve(
 )
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
 const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-props')
 
 function extractComponentProps(code, tsFileCode) {
   const linter = new Linter()
@@ -70,44 +71,30 @@ function extractComponentProps(code, tsFileCode) {
   return result
 }
 
-describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
+describe('getComponentPropsFromTypeDefineTypes', () => {
   it.each([
     {
-      scriptCode: `defineProps<{foo:string,bar?:number}>()`,
-      props: [
-        { type: 'type', name: 'foo', required: true, types: ['String'] },
-        { type: 'type', name: 'bar', required: false, types: ['Number'] }
-      ]
+      name: 'inline-type',
+      scriptCode: `defineProps<{foo:string,bar?:number}>()`
     },
     {
-      scriptCode: `defineProps<{foo:string,bar?:number} & {baz?:string|number}>()`,
-      props: [
-        { type: 'type', name: 'foo', required: true, types: ['String'] },
-        { type: 'type', name: 'bar', required: false, types: ['Number'] },
-        {
-          type: 'type',
-          name: 'baz',
-          required: false,
-          types: ['String', 'Number']
-        }
-      ]
+      name: 'intersection-type',
+      scriptCode: `defineProps<{foo:string,bar?:number} & {baz?:string|number}>()`
     },
     {
+      name: 'imported-type',
       tsFileCode: `export type Props = {foo:string,bar?:number}`,
       scriptCode: `import { Props } from './test'
-      defineProps<Props>()`,
-      props: [
-        { type: 'infer-type', name: 'foo', required: true, types: ['String'] },
-        { type: 'infer-type', name: 'bar', required: false, types: ['Number'] }
-      ]
+      defineProps<Props>()`
     },
     {
+      name: 'imported-any',
       tsFileCode: `export type Props = any`,
       scriptCode: `import { Props } from './test'
-      defineProps<Props>()`,
-      props: [{ type: 'unknown', name: null, required: null, types: null }]
+      defineProps<Props>()`
     },
     {
+      name: 'imported-extends-required',
       tsFileCode: `
       interface Props {
         a?: number;
@@ -117,14 +104,10 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
         c?: boolean;
       }`,
       scriptCode: `import { Props2 } from './test'
-      defineProps<Props2>()`,
-      props: [
-        { type: 'infer-type', name: 'c', required: false, types: ['Boolean'] },
-        { type: 'infer-type', name: 'a', required: true, types: ['Number'] },
-        { type: 'infer-type', name: 'b', required: true, types: ['String'] }
-      ]
+      defineProps<Props2>()`
     },
     {
+      name: 'imported-complex-types',
       tsFileCode: `
       export type Props = {
         a: string
@@ -138,81 +121,45 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
         i?: readonly string[]
       }`,
       scriptCode: `import { Props } from './test'
-      defineProps<Props>()`,
-      props: [
-        { type: 'infer-type', name: 'a', required: true, types: ['String'] },
-        { type: 'infer-type', name: 'b', required: false, types: ['Number'] },
-        { type: 'infer-type', name: 'c', required: false, types: ['Boolean'] },
-        { type: 'infer-type', name: 'd', required: false, types: ['Boolean'] },
-        {
-          type: 'infer-type',
-          name: 'e',
-          required: false,
-          types: ['String', 'Number']
-        },
-        { type: 'infer-type', name: 'f', required: false, types: ['Function'] },
-        { type: 'infer-type', name: 'g', required: false, types: ['Object'] },
-        { type: 'infer-type', name: 'h', required: false, types: ['Array'] },
-        { type: 'infer-type', name: 'i', required: false, types: ['Array'] }
-      ]
+      defineProps<Props>()`
     },
     {
+      name: 'imported-intersection',
       tsFileCode: `
       export interface Props {
         a?: number;
         b?: string;
       }`,
       scriptCode: `import { Props } from './test'
-defineProps<Props & {foo?:string}>()`,
-      props: [
-        { type: 'infer-type', name: 'a', required: false, types: ['Number'] },
-        { type: 'infer-type', name: 'b', required: false, types: ['String'] },
-        { type: 'type', name: 'foo', required: false, types: ['String'] }
-      ]
+defineProps<Props & {foo?:string}>()`
     },
     {
+      name: 'imported-type-alias',
       tsFileCode: `
       export type A = string | number`,
       scriptCode: `import { A } from './test'
-defineProps<{foo?:A}>()`,
-      props: [
-        {
-          type: 'type',
-          name: 'foo',
-          required: false,
-          types: ['String', 'Number']
-        }
-      ]
+defineProps<{foo?:A}>()`
     },
     {
+      name: 'inline-enum',
       scriptCode: `enum A {a = 'a', b = 'b'}
-defineProps<{foo?:A}>()`,
-      props: [{ type: 'type', name: 'foo', required: false, types: ['String'] }]
+defineProps<{foo?:A}>()`
     },
     {
+      name: 'inline-enum-mixed',
       scriptCode: `
 const foo = 42
 enum A {a = foo, b = 'b'}
-defineProps<{foo?:A}>()`,
-      props: [
-        {
-          type: 'type',
-          name: 'foo',
-          required: false,
-          types: ['Number', 'String']
-        }
-      ]
+defineProps<{foo?:A}>()`
     }
   ])(
-    'should return expected props with $scriptCode',
-    ({ scriptCode, tsFileCode, props: expected }) => {
+    'should return expected props with $name',
+    async ({ name, scriptCode, tsFileCode }) => {
       const code = `<script setup lang="ts"> ${scriptCode} </script>`
       const props = extractComponentProps(code, tsFileCode)
 
-      assert.deepStrictEqual(
-        props,
-        expected,
-        `\n${JSON.stringify(props)}\n === \n${JSON.stringify(expected)}`
+      await expect(JSON.stringify(props, null, 4)).toMatchFileSnapshot(
+        path.join(SNAPSHOT_ROOT, `${name}.json`)
       )
     }
   )
