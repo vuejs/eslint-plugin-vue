@@ -11,8 +11,12 @@ const FIXTURES_ROOT = path.resolve(
   __dirname,
   '../../../../fixtures/utils/ts-utils'
 )
+const TS_TEST_FILENAME = 'test-emits'
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
-const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SRC_TS_TEST_PATH = path.join(
+  FIXTURES_ROOT,
+  `./src/${TS_TEST_FILENAME}.ts`
+)
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-emits')
 
 function extractComponentEmits(code: string, tsFileCode = '') {
@@ -65,7 +69,7 @@ function extractComponentEmits(code: string, tsFileCode = '') {
   return result
 }
 
-describe('getComponentEmitsFromTypeDefineTypes', () => {
+describe.sequential('getComponentEmitsFromTypeDefineTypes', () => {
   it.each([
     {
       name: 'inline-call-signatures',
@@ -74,25 +78,25 @@ describe('getComponentEmitsFromTypeDefineTypes', () => {
     {
       name: 'imported-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo'):void,(e:'bar'):void}`,
-      scriptCode: `import { Emits } from './test'
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
       defineEmits<Emits>()`
     },
     {
       name: 'imported-any',
       tsFileCode: `export type Emits = any`,
-      scriptCode: `import { Emits } from './test'
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
       defineEmits<Emits>()`
     },
     {
       name: 'imported-union-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo' | 'bar'): void, (e:'baz',payload:number): void}`,
-      scriptCode: `import { Emits } from './test'
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
       defineEmits<Emits>()`
     },
     {
       name: 'imported-record-style',
       tsFileCode: `export type Emits = { a: [], b: [number], c: [string]}`,
-      scriptCode: `import { Emits } from './test'
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
       defineEmits<Emits>()`
     }
   ])(

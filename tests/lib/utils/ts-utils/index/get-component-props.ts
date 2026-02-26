@@ -11,8 +11,12 @@ const FIXTURES_ROOT = path.resolve(
   __dirname,
   '../../../../fixtures/utils/ts-utils'
 )
+const TS_TEST_FILENAME = 'test-props'
 const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
-const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SRC_TS_TEST_PATH = path.join(
+  FIXTURES_ROOT,
+  `./src/${TS_TEST_FILENAME}.ts`
+)
 const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-props')
 
 function extractComponentProps(code: string, tsFileCode = '') {
@@ -85,13 +89,13 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
     {
       name: 'imported-type',
       tsFileCode: `export type Props = {foo:string,bar?:number}`,
-      scriptCode: `import { Props } from './test'
+      scriptCode: `import { Props } from './${TS_TEST_FILENAME}'
       defineProps<Props>()`
     },
     {
       name: 'imported-any',
       tsFileCode: `export type Props = any`,
-      scriptCode: `import { Props } from './test'
+      scriptCode: `import { Props } from './${TS_TEST_FILENAME}'
       defineProps<Props>()`
     },
     {
@@ -104,7 +108,7 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
       export interface Props2 extends Required<Props> {
         c?: boolean;
       }`,
-      scriptCode: `import { Props2 } from './test'
+      scriptCode: `import { Props2 } from './${TS_TEST_FILENAME}'
       defineProps<Props2>()`
     },
     {
@@ -121,7 +125,7 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
         h?: string[]
         i?: readonly string[]
       }`,
-      scriptCode: `import { Props } from './test'
+      scriptCode: `import { Props } from './${TS_TEST_FILENAME}'
       defineProps<Props>()`
     },
     {
@@ -131,14 +135,14 @@ describe.sequential('getComponentPropsFromTypeDefineTypes', () => {
         a?: number;
         b?: string;
       }`,
-      scriptCode: `import { Props } from './test'
+      scriptCode: `import { Props } from './${TS_TEST_FILENAME}'
 defineProps<Props & {foo?:string}>()`
     },
     {
       name: 'imported-type-alias',
       tsFileCode: `
       export type A = string | number`,
-      scriptCode: `import { A } from './test'
+      scriptCode: `import { A } from './${TS_TEST_FILENAME}'
 defineProps<{foo?:A}>()`
     },
     {
