@@ -1,0 +1,18 @@
+[
+    {
+        "type": "infer-type",
+        "name": "foo",
+        "required": true,
+        "types": [
+            "String"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "bar",
+        "required": false,
+        "types": [
+            "Number"
+        ]
+    }
+]

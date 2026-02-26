@@ -1,0 +1,11 @@
+[
+    {
+        "type": "type",
+        "name": "foo",
+        "required": false,
+        "types": [
+            "String",
+            "Number"
+        ]
+    }
+]
