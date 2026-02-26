@@ -8,7 +8,8 @@ export default defineConfig({
       '**/dist/**',
       'tests/fixtures/**',
       'tests/integrations/flat-config/eslint.config.js',
-      'tests/lib/rules/no-unsupported-features/utils.ts'
+      'tests/lib/rules/no-unsupported-features/utils.js',
+      'tests/lib/utils/ts-utils/index/utils.ts'
     ],
     testTimeout: 60_000,
     globals: true,

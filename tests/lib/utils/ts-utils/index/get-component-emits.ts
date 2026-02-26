@@ -1,125 +1,72 @@
-/**
- * Test for getComponentEmitsFromTypeDefineTypes
- */
 import path from 'node:path'
-import fs from 'node:fs'
-import { Linter } from '../../../../eslint-compat.ts'
-import parser from 'vue-eslint-parser'
-import tsParser from '@typescript-eslint/parser'
-import utils from '../../../../../lib/utils/index'
-import assert from 'node:assert'
+import { FIXTURES_ROOT, verifyWithTsParser } from './utils'
 
-const FIXTURES_ROOT = path.resolve(
-  __dirname,
-  '../../../../fixtures/utils/ts-utils'
+const TS_TEST_FILENAME = 'test-emits'
+const SRC_TS_TEST_PATH = path.join(
+  FIXTURES_ROOT,
+  `./src/${TS_TEST_FILENAME}.ts`
 )
-const TSCONFIG_PATH = path.resolve(FIXTURES_ROOT, './tsconfig.json')
-const SRC_TS_TEST_PATH = path.join(FIXTURES_ROOT, './src/test.ts')
+const SNAPSHOT_ROOT = path.resolve(FIXTURES_ROOT, './get-component-emits')
 
-function extractComponentProps(code, tsFileCode) {
-  const linter = new Linter()
-  const result = []
-  const config = {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parser,
-      ecmaVersion: 2020,
-      parserOptions: {
-        parser: tsParser,
-        project: [TSCONFIG_PATH],
-        extraFileExtensions: ['.vue']
+function extractComponentEmits(code: string, tsFileCode = '') {
+  const result: { type: string; name: string | null }[] = []
+  verifyWithTsParser(
+    code,
+    {
+      onDefineEmitsEnter(_node, emits) {
+        result.push(
+          ...emits.map((emit) => ({
+            type: emit.type,
+            name: emit.emitName
+          }))
+        )
       }
     },
-    plugins: {
-      test: {
-        rules: {
-          test: {
-            create(context) {
-              return utils.defineScriptSetupVisitor(context, {
-                onDefineEmitsEnter(_node, emits) {
-                  result.push(
-                    ...emits.map((emit) => ({
-                      type: emit.type,
-                      name: emit.emitName
-                    }))
-                  )
-                }
-              })
-            }
-          }
-        }
-      }
-    },
-    rules: {
-      'test/test': 'error'
-    }
-  }
-  fs.writeFileSync(SRC_TS_TEST_PATH, tsFileCode || '', 'utf8')
-  // clean './src/test.ts' cache
-  tsParser.clearCaches()
-  assert.deepStrictEqual(
-    linter.verify(code, config, path.join(FIXTURES_ROOT, './src/test.vue')),
-    []
+    SRC_TS_TEST_PATH,
+    tsFileCode
   )
-  // reset
-  fs.writeFileSync(SRC_TS_TEST_PATH, '', 'utf8')
   return result
 }
 
-describe('getComponentEmitsFromTypeDefineTypes', () => {
-  for (const { scriptCode, tsFileCode, props: expected } of [
+describe.sequential('getComponentEmitsFromTypeDefineTypes', () => {
+  it.each([
     {
-      scriptCode: `defineEmits<{(e:'foo'):void,(e:'bar'):void}>()`,
-      props: [
-        { type: 'type', name: 'foo' },
-        { type: 'type', name: 'bar' }
-      ]
+      name: 'inline-call-signatures',
+      scriptCode: `defineEmits<{(e:'foo'):void,(e:'bar'):void}>()`
     },
     {
+      name: 'imported-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo'):void,(e:'bar'):void}`,
-      scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'foo' },
-        { type: 'infer-type', name: 'bar' }
-      ]
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-any',
       tsFileCode: `export type Emits = any`,
-      scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [{ type: 'unknown', name: null }]
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-union-call-signatures',
       tsFileCode: `export type Emits = {(e:'foo' | 'bar'): void, (e:'baz',payload:number): void}`,
-      scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'foo' },
-        { type: 'infer-type', name: 'bar' },
-        { type: 'infer-type', name: 'baz' }
-      ]
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
+      defineEmits<Emits>()`
     },
     {
+      name: 'imported-record-style',
       tsFileCode: `export type Emits = { a: [], b: [number], c: [string]}`,
-      scriptCode: `import { Emits } from './test'
-      defineEmits<Emits>()`,
-      props: [
-        { type: 'infer-type', name: 'a' },
-        { type: 'infer-type', name: 'b' },
-        { type: 'infer-type', name: 'c' }
-      ]
+      scriptCode: `import { Emits } from './${TS_TEST_FILENAME}'
+      defineEmits<Emits>()`
     }
-  ]) {
-    const code = `<script setup lang="ts"> ${scriptCode} </script>`
-    it(`should return expected props with :${code}`, () => {
-      const props = extractComponentProps(code, tsFileCode)
+  ])(
+    'should return expected emits with $name',
+    async ({ name, scriptCode, tsFileCode }) => {
+      const code = `<script setup lang="ts"> ${scriptCode} </script>`
+      const emits = extractComponentEmits(code, tsFileCode)
 
-      assert.deepStrictEqual(
-        props,
-        expected,
-        `\n${JSON.stringify(props)}\n === \n${JSON.stringify(expected)}`
+      await expect(JSON.stringify(emits, null, 4)).toMatchFileSnapshot(
+        path.join(SNAPSHOT_ROOT, `${name}.json`)
       )
-    })
-  }
+    }
+  )
 })
