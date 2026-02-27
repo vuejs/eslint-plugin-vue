@@ -174,4 +174,4 @@ This rule was introduced in eslint-plugin-vue v8.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/first-attribute-linebreak.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/first-attribute-linebreak.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/first-attribute-linebreak.test.ts)

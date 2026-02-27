@@ -86,4 +86,4 @@ This rule was introduced in eslint-plugin-vue v9.15.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-macro-variable-name.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-macro-variable-name.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-macro-variable-name.test.ts)

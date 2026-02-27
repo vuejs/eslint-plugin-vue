@@ -145,4 +145,4 @@ This rule was introduced in eslint-plugin-vue v7.4.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-event-hyphenation.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-event-hyphenation.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-event-hyphenation.test.ts)

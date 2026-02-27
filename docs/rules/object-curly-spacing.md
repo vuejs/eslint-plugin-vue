@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/object-curly-spacing.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/object-curly-spacing.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/object-curly-spacing.test.ts)
 
 <sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/object-curly-spacing)</sup>
