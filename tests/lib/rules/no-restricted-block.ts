@@ -9,7 +9,7 @@ const tester = new RuleTester({
   languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
-tester.run('no-restricted-block', rule, {
+tester.run('no-restricted-block', rule as RuleModule, {
   valid: [
     {
       filename: 'test.vue',

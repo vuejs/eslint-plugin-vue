@@ -14,7 +14,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-restricted-component-names', rule, {
+tester.run('no-restricted-component-names', rule as RuleModule, {
   valid: [
     {
       filename: 'test.vue',

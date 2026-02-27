@@ -428,9 +428,9 @@ describe('editdistance', () => {
     assert.equal(editDistance('computed', 'computd'), 1)
   })
 })
-function nodeToJson(nodes, ignores = []) {
+function nodeToJson(nodes: ESNode[], ignores: string[] = []) {
   return JSON.stringify(nodes, replacer, 2)
-  function replacer(key, value) {
+  function replacer(key: string, value: string) {
     if (key === 'parent' || key === 'start' || key === 'end') {
       return undefined
     }

@@ -14,7 +14,7 @@ const ruleTester = new RuleTester({
   }
 })
 
-ruleTester.run('no-restricted-class', rule, {
+ruleTester.run('no-restricted-class', rule as RuleModule, {
   valid: [
     `<template><div class="allowed">Content</div></template>`,
     `<template><div class>Content</div></template>`,

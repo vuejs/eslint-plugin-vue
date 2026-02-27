@@ -14,7 +14,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('no-restricted-props', rule, {
+tester.run('no-restricted-props', rule as RuleModule, {
   valid: [
     {
       filename: 'test.vue',

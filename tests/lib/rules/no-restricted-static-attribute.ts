@@ -9,7 +9,7 @@ const tester = new RuleTester({
   languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
-tester.run('no-restricted-static-attribute', rule, {
+tester.run('no-restricted-static-attribute', rule as RuleModule, {
   valid: [
     {
       filename: 'test.vue',

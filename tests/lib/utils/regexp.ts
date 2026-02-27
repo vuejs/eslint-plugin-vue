@@ -19,7 +19,9 @@ describe('escape()', () => {
   })
 
   it('should return an empty string for empty values', () => {
+    // @ts-expect-error escape only accept `string`
     assert.strictEqual(escape(null), null)
+    // @ts-expect-error escape only accept `string`
     assert.strictEqual(escape(undefined), undefined)
     assert.strictEqual(escape(''), '')
   })

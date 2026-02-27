@@ -11,6 +11,7 @@ describe('eslintrc configs', () => {
     const eslint = new ESLint({
       overrideConfigFile: true,
       overrideConfig: {
+        // @ts-expect-error Linter.LegacyConfig
         extends: [configName]
       },
       plugins: { vue: plugin },
