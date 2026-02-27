@@ -2,11 +2,12 @@
  * @fileoverview Require a name property in Vue components
  * @author LukeeeeBennett
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-name-property'
 import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

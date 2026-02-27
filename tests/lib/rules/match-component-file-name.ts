@@ -2,11 +2,12 @@
  * @fileoverview Require component name property to match its file name
  * @author Rodrigo Pedra Brum <rodrigo.pedra@gmail.com>
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/match-component-file-name'
 import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 
-const jsxLanguageOptions = {
+const jsxLanguageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   parserOptions: {
@@ -14,7 +15,7 @@ const jsxLanguageOptions = {
   }
 }
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

@@ -5,25 +5,25 @@ import { isBlockComment, isJSDocComment } from '../../../lib/utils/comments.js'
 const lineCommentNode = {
   type: 'Line',
   value: 'foo'
-}
+} as Comment
 
 // /*foo*/
 const blockCommentNodeWithoutAsterisks = {
   type: 'Block',
   value: 'foo'
-}
+} as Comment
 
 // //** foo */
 const blockCommentNodeWithOneAsterisk = {
   type: 'Block',
   value: '* foo'
-}
+} as Comment
 
 // /*** foo */
 const blockCommentNodeWithTwoAsterisks = {
   type: 'Block',
   value: '** foo'
-}
+} as Comment
 
 describe('isJSDocComment()', () => {
   it('returns true for JSDoc comments', () => {

@@ -2,6 +2,7 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
+import type { Linter as ESLintLinter } from 'eslint'
 import { RuleTester, Linter } from '../../eslint-compat.ts'
 import assert from 'node:assert'
 import rule from '../../../lib/rules/no-unused-properties'
@@ -4745,7 +4746,7 @@ tester.run('no-unused-properties', rule, {
 // https://github.com/vuejs/eslint-plugin-vue/issues/1789
 describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
   const linter = new Linter()
-  const config = {
+  const config: ESLintLinter.Config = {
     files: ['**/*.vue'],
     plugins: {
       vue: {

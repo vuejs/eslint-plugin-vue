@@ -14,7 +14,7 @@ import vueEslintParser from 'vue-eslint-parser'
 // Tests
 //------------------------------------------------------------------------------
 
-const template = (beforeRouteEnter) => `
+const template = (beforeRouteEnter: string): string => `
 <template>
   <p>{{ greeting }} World!</p>
 </template>
@@ -39,7 +39,7 @@ p {
 }
 </style>`
 
-const functionTemplate = (beforeRouteEnter) => `
+const functionTemplate = (beforeRouteEnter: string): string => `
 <template>
   <p>{{ greeting }} World!</p>
 </template>

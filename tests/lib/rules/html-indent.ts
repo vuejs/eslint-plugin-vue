@@ -3,6 +3,7 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
+import type { RuleTester as ESLintRuleTester } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
 import { RuleTester } from '../../eslint-compat.ts'
@@ -21,27 +22,31 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/html-indent/')
  *
  * If a test has some ignored line, we can't use the mechanism.
  * So `additionalValid` and `additionalInvalid` exist for asymmetry test cases.
- *
- * @param {object[]} additionalValid The array of additional valid patterns.
- * @param {object[]} additionalInvalid The array of additional invalid patterns.
- * @returns {object} The loaded patterns.
  */
-function loadPatterns(additionalValid, additionalInvalid) {
-  const valid = fs.readdirSync(FIXTURE_ROOT).map((filename) => {
-    const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-    const code = code0.replace(/^<!--(.+?)-->/, `<!--${filename}-->`)
-    const baseObj = JSON.parse(/^<!--(.+?)-->/.exec(code0)[1])
-    if ('parser' in baseObj) {
-      baseObj.parser = require.resolve(baseObj.parser)
-    }
-    if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
-      baseObj.parserOptions.parser = require.resolve(
-        baseObj.parserOptions.parser
-      )
-    }
-    return Object.assign(baseObj, { code, filename })
-  })
-  const invalid = valid
+function loadPatterns(
+  additionalValid: ESLintRuleTester.ValidTestCase[],
+  additionalInvalid: ESLintRuleTester.InvalidTestCase[]
+): {
+  valid: ESLintRuleTester.ValidTestCase[]
+  invalid: ESLintRuleTester.InvalidTestCase[]
+} {
+  const valid: ESLintRuleTester.ValidTestCase[] = fs
+    .readdirSync(FIXTURE_ROOT)
+    .map((filename) => {
+      const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
+      const code = code0.replace(/^<!--(.+?)-->/, `<!--${filename}-->`)
+      const baseObj = JSON.parse(/^<!--(.+?)-->/.exec(code0)![1])
+      if ('parser' in baseObj) {
+        baseObj.parser = require.resolve(baseObj.parser)
+      }
+      if ('parserOptions' in baseObj && 'parser' in baseObj.parserOptions) {
+        baseObj.parserOptions.parser = require.resolve(
+          baseObj.parserOptions.parser
+        )
+      }
+      return Object.assign(baseObj, { code, filename })
+    })
+  const invalid: ESLintRuleTester.InvalidTestCase[] = valid
     .map((pattern) => {
       const kind =
         (pattern.options && pattern.options[0]) === 'tab' ? 'tab' : 'space'
@@ -54,11 +59,11 @@ function loadPatterns(additionalValid, additionalInvalid) {
       const code = lines
         .map((line) => line.text.replace(/^[\t ]+/, ''))
         .join('\n')
-      const errors = lines
-        .map((line) =>
-          line.indentSize === 0
-            ? null
-            : {
+      const errors: ESLintRuleTester.TestCaseError[] = lines.flatMap((line) =>
+        line.indentSize === 0
+          ? []
+          : [
+              {
                 message: `Expected indentation of ${line.indentSize} ${kind}${
                   line.indentSize === 1 ? '' : 's'
                 } but found 0 ${kind}s.`,
@@ -67,8 +72,8 @@ function loadPatterns(additionalValid, additionalInvalid) {
                 endLine: line.number + 1,
                 endColumn: 1
               }
-        )
-        .filter(Boolean)
+            ]
+      )
 
       return Object.assign({}, pattern, { code, output, errors })
     })
@@ -83,10 +88,8 @@ function loadPatterns(additionalValid, additionalInvalid) {
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
- * @param {string[]} strings The strings in the template literal
- * @returns {string} The template literal, with spaces removed from all lines
  */
-function unIndent(strings) {
+function unIndent(strings: TemplateStringsArray): string {
   const templateValue = strings[0]
   const lines = templateValue
     .replace(/^\n/, '')
@@ -94,7 +97,7 @@ function unIndent(strings) {
     .split('\n')
   const lineIndents = lines
     .filter((line) => line.trim())
-    .map((line) => line.match(/ */)[0].length)
+    .map((line) => line.match(/ */)![0].length)
   const minLineIndent = Math.min.apply(null, lineIndents)
 
   return lines.map((line) => line.slice(minLineIndent)).join('\n')

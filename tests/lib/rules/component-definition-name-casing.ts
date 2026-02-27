@@ -2,12 +2,13 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/component-definition-name-casing'
 import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 import tsEslintParser from '@typescript-eslint/parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

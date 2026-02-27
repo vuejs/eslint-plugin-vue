@@ -2,11 +2,12 @@
  * @fileoverview Check if there are no side effects inside computed properties
  * @author 2017 Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-async-in-computed-properties'
 import { RuleTester } from '../../eslint-compat.ts'
 import parser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }

@@ -3,12 +3,11 @@
  * See LICENSE file in root directory for full license.
  */
 import semver from 'semver'
-import eslint from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat.ts'
 import rule from '../../../lib/rules/no-export-in-script-setup'
 import vueEslintParser from 'vue-eslint-parser'
 import typescriptPackageJson from 'typescript/package.json'
 
-const RuleTester = eslint.RuleTester
 const ruleTester = new RuleTester({
   languageOptions: {
     parser: vueEslintParser,

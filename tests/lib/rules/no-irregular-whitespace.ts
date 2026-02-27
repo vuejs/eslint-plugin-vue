@@ -39,7 +39,7 @@ const ALL_IRREGULAR_WHITESPACES = [
   ...IRREGULAR_LINE_TERMINATORS
 ]
 const ALL_IRREGULAR_WHITESPACE_CODES = ALL_IRREGULAR_WHITESPACES.map((s) =>
-  `000${s.codePointAt(0).toString(16)}`.slice(-4)
+  `000${s.codePointAt(0)!.toString(16)}`.slice(-4)
 )
 
 tester.run('no-irregular-whitespace', rule, {

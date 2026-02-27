@@ -1405,7 +1405,6 @@ tester.run('no-undef-properties', rule, {
 
     {
       // known type
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       import type { Props1 } from './test01';

@@ -2,6 +2,7 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-reserved-component-names'
 import { RuleTester } from '../../eslint-compat.ts'
 import htmlElements from '../../../lib/utils/html-elements.json'
@@ -421,7 +422,7 @@ const vue2BuiltInComponents = [
 
 const vue3BuiltInComponents = ['teleport', 'Teleport', 'suspense', 'Suspense']
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

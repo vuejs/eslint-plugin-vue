@@ -2,11 +2,12 @@
  * @fileoverview Keep order of properties in components
  * @author Michał Sajnóg
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/order-in-components'
 import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }

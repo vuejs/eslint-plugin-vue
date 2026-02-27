@@ -7,7 +7,7 @@ import { RuleTester, ESLint } from '../../eslint-compat.ts'
 import rule from '../../../lib/rules/jsx-uses-vars'
 import { getCoreRule } from '../../../lib/utils'
 
-const ruleNoUnusedVars = getCoreRule('no-unused-vars')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')!
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -123,7 +123,7 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : null,
+              : [],
             line: 3,
             column: 16,
             endLine: 3,
@@ -165,7 +165,7 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : null,
+              : [],
             line: 4,
             column: 15,
             endLine: 4,

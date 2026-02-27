@@ -2,10 +2,11 @@
  * @fileoverview disallow using deprecated events api
  * @author yoyo930021
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-deprecated-events-api'
 import { RuleTester } from '../../eslint-compat.ts'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }

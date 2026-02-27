@@ -10,7 +10,9 @@ const ruleTester = new RuleTester({
   languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
-function createValidTests(prefix, options) {
+type RuleOption = 'always' | 'never'
+
+function createValidTests(prefix: string, options: RuleOption[]) {
   const comment = options.join('')
   return [
     {
@@ -75,7 +77,11 @@ function createValidTests(prefix, options) {
   ]
 }
 
-function createInvalidTests(prefix, options, message) {
+function createInvalidTests(
+  prefix: string,
+  options: RuleOption[],
+  message: string
+) {
   const comment = options.join('')
   const errorLength = options[0] === 'always' ? 3 : 4
   return [
@@ -274,7 +280,7 @@ ruleTester.run('this-in-template', rule, {
     ...createInvalidTests('this?.', [], "Unexpected usage of 'this'."),
     ...createInvalidTests('this.', ['never'], "Unexpected usage of 'this'."),
     ...createInvalidTests('this?.', ['never'], "Unexpected usage of 'this'."),
-    ...createInvalidTests('', ['always'], "Expected 'this'.", 'Identifier'),
+    ...createInvalidTests('', ['always'], "Expected 'this'."),
     ...[[], ['never']].flatMap((options) => {
       const comment = options.join('')
       const message = "Unexpected usage of 'this'."
@@ -324,7 +330,7 @@ ruleTester.run('this-in-template', rule, {
   ]
 })
 
-function suggestionPrefix(prefix, options) {
+function suggestionPrefix(prefix: string, options: RuleOption[]) {
   return options[0] === 'always' && !['this.', 'this?.'].includes(prefix)
     ? 'this.'
     : ''

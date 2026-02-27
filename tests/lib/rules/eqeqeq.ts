@@ -34,7 +34,7 @@ tester.run('eqeqeq', rule, {
                   output: `<template><div :attr="a === 1" /></template>`
                 }
               ]
-            : null,
+            : [],
           line: 1,
           column: 25,
           endLine: 1,
@@ -65,7 +65,7 @@ tester.run('eqeqeq', rule, {
       </style>`
                 }
               ]
-            : null,
+            : [],
           line: 4,
           column: 25,
           endLine: 4,

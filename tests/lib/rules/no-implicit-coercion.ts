@@ -7,11 +7,7 @@ import semver from 'semver'
 import rule from '../../../lib/rules/no-implicit-coercion'
 import vueEslintParser from 'vue-eslint-parser'
 
-/**
- * @param {string} suggestedCode
- * @returns {string}
- */
-function getExpectedErrorMessage(suggestedCode) {
+function getExpectedErrorMessage(suggestedCode: string): string {
   return semver.gte(ESLint.version, '9.0.0')
     ? `Unexpected implicit coercion encountered. Use \`${suggestedCode}\` instead.`
     : `use \`${suggestedCode}\` instead.`

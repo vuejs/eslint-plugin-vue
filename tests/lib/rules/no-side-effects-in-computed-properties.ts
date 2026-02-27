@@ -7,13 +7,12 @@ import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 import tsEslintParser from '@typescript-eslint/parser'
 
-const languageOptions = {
-  ecmaVersion: 2020,
-  sourceType: 'module'
-}
-
 const ruleTester = new RuleTester({
-  languageOptions: { parser: vueEslintParser, ...languageOptions }
+  languageOptions: {
+    parser: vueEslintParser,
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
 })
 
 ruleTester.run('no-side-effects-in-computed-properties', rule, {

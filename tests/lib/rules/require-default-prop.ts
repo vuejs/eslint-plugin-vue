@@ -2,12 +2,13 @@
  * @fileoverview Require default value for props
  * @author Michał Sajnóg <msajnog93@gmail.com> (https://github.com/michalsnik)
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-default-prop'
 import { RuleTester } from '../../eslint-compat.ts'
 import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module'
 }
@@ -182,8 +183,7 @@ ruleTester.run('require-default-prop', rule, {
       code: `
       export default {
         props: ['foo']
-      }`,
-      languageOptions
+      }`
     },
 
     // sparse array

@@ -2,11 +2,12 @@
  * @fileoverview Prevent overwrite reserved keys
  * @author Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-reserved-keys'
 import { RuleTester } from '../../eslint-compat.ts'
 import vueEslintParser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

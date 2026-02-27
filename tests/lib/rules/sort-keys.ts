@@ -2,12 +2,13 @@
  * @fileoverview Enforces sort-keys within components after the top level details
  * @author Loren Klingman
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/sort-keys'
 import { RuleTester } from '../../eslint-compat.ts'
 
 const ruleTester = new RuleTester()
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

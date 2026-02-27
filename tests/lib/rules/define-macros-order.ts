@@ -32,11 +32,11 @@ const optionsExposeLast = [
   }
 ]
 
-function notAtTopMessage(macro) {
+function notAtTopMessage(macro: string): string {
   return `${macro} should be placed at the top of \`<script setup>\` (after any potential import statements or type definitions).`
 }
 
-function unorderedMessage(macro, before) {
+function unorderedMessage(macro: string, before: string): string {
   return `${macro} should be above ${before}.`
 }
 

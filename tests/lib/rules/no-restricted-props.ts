@@ -596,7 +596,7 @@ tester.run('no-restricted-props', rule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
-          suggestions: null
+          suggestions: []
         }
       ],
       ...getTypeScriptFixtureTestOptions()

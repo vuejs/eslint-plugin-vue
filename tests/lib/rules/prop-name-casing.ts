@@ -2,12 +2,13 @@
  * @fileoverview Define a style for the name property casing for consistency purposes
  * @author Yu Kimura
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/prop-name-casing'
 import { RuleTester } from '../../eslint-compat.ts'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
 import vueEslintParser from 'vue-eslint-parser'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

@@ -2,10 +2,11 @@
  * @fileoverview disallow using deprecated object declaration on data
  * @author yoyo930021
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-deprecated-data-object-declaration'
 import { RuleTester } from '../../eslint-compat.ts'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

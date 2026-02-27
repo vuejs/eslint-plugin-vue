@@ -277,7 +277,6 @@ tester.run('require-explicit-slots', rule, {
       </script>`
     },
     {
-      filename: 'test.vue',
       code: `
       <template>
         <div>
@@ -672,7 +671,6 @@ tester.run('require-explicit-slots', rule, {
       ]
     },
     {
-      filename: 'test.vue',
       code: `
       <template>
         <div>

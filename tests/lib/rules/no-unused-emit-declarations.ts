@@ -347,7 +347,6 @@ tester.run('no-unused-emit-declarations', rule, {
       }
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       const emit = defineEmits<{
@@ -726,7 +725,6 @@ tester.run('no-unused-emit-declarations', rule, {
       ]
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       const emit = defineEmits<{

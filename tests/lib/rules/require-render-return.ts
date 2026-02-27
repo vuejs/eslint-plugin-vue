@@ -2,10 +2,11 @@
  * @fileoverview Enforces render function to always return value.
  * @author Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-render-return'
 import { RuleTester } from '../../eslint-compat.ts'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   parserOptions: {

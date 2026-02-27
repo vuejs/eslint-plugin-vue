@@ -2,10 +2,11 @@
  * @fileoverview Enforces component's data property to be a function.
  * @author Armano
  */
+import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-shared-component-data'
 import { RuleTester } from '../../eslint-compat.ts'
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

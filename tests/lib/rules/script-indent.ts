@@ -3,6 +3,7 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
+import type { RuleTester as ESLintRuleTester } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
@@ -29,14 +30,35 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
  * @param {object[]} additionalInvalid The array of additional invalid patterns.
  * @returns {object} The loaded patterns.
  */
-function loadPatterns(additionalValid, additionalInvalid) {
-  const valid = fs
+function loadPatterns(
+  additionalValid: ESLintRuleTester.ValidTestCase[],
+  additionalInvalid: ESLintRuleTester.InvalidTestCase[]
+): {
+  valid: ESLintRuleTester.ValidTestCase[]
+  invalid: ESLintRuleTester.InvalidTestCase[]
+} {
+  const valid: ESLintRuleTester.ValidTestCase[] = fs
     .readdirSync(FIXTURE_ROOT)
-    .map((filename) => {
+    .flatMap((filename) => {
       const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
       const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
       const code = code0.replace(commentPattern, `$1${filename}$3`)
-      const baseObj = JSON.parse(commentPattern.exec(code0)[2])
+      const baseObj = JSON.parse(commentPattern.exec(code0)![2])
+
+      if (baseObj.requirements) {
+        if (
+          Object.entries(baseObj.requirements as Record<string, string>).some(
+            ([pkgName, pkgVersion]) => {
+              const pkg = nodeRequire(`${pkgName}/package.json`)
+              return !semver.satisfies(pkg.version, pkgVersion)
+            }
+          )
+        ) {
+          return []
+        }
+        delete baseObj.requirements
+      }
+
       if ('parser' in baseObj) {
         baseObj.parser = nodeRequire.resolve(baseObj.parser)
       }
@@ -47,22 +69,9 @@ function loadPatterns(additionalValid, additionalInvalid) {
       }
       return Object.assign(baseObj, { code, filename })
     })
-    .filter((obj) => {
-      if (obj.requirements) {
-        if (
-          Object.entries(obj.requirements).some(([pkgName, pkgVersion]) => {
-            const pkg = nodeRequire(`${pkgName}/package.json`)
-            return !semver.satisfies(pkg.version, pkgVersion)
-          })
-        ) {
-          return false
-        }
-        delete obj.requirements
-      }
-      return true
-    })
-  const invalid = valid
-    .map((pattern) => {
+
+  const invalid: ESLintRuleTester.InvalidTestCase[] = valid.flatMap(
+    (pattern) => {
       const kind =
         (pattern.options && pattern.options[0]) === 'tab' ? 'tab' : 'space'
       const output = pattern.code
@@ -74,23 +83,24 @@ function loadPatterns(additionalValid, additionalInvalid) {
       const code = lines
         .map((line) => line.text.replace(/^[\t ]+/, ''))
         .join('\n')
-      const errors = lines
-        .map((line) =>
-          line.indentSize === 0
-            ? null
-            : {
+      const errors = lines.flatMap((line) =>
+        line.indentSize === 0
+          ? []
+          : [
+              {
                 message: `Expected indentation of ${line.indentSize} ${kind}${
                   line.indentSize === 1 ? '' : 's'
                 } but found 0 ${kind}s.`,
                 line: line.number + 1
               }
-        )
-        .filter(Boolean)
+            ]
+      )
 
-      return Object.assign({}, pattern, { code, output, errors })
-    })
-    .filter((invalid) => invalid.errors.length > 0) // Empty errors cannot be verified with eslint 7.3.
-    .filter(Boolean)
+      return errors.length > 0
+        ? [Object.assign({}, pattern, { code, output, errors })]
+        : []
+    }
+  )
 
   return {
     valid: [...valid, ...additionalValid],
@@ -100,10 +110,8 @@ function loadPatterns(additionalValid, additionalInvalid) {
 
 /**
  * Prevents leading spaces in a multiline template literal from appearing in the resulting string
- * @param {string[]} strings The strings in the template literal
- * @returns {string} The template literal, with spaces removed from all lines
  */
-function unIndent(strings) {
+function unIndent(strings: TemplateStringsArray): string {
   const templateValue = strings[0]
   const lines = templateValue
     .replace(/^\n/, '')
@@ -111,7 +119,7 @@ function unIndent(strings) {
     .split('\n')
   const lineIndents = lines
     .filter((line) => line.trim())
-    .map((line) => line.match(/ */)[0].length)
+    .map((line) => line.match(/ */)![0].length)
   const minLineIndent = Math.min.apply(null, lineIndents)
 
   return lines.map((line) => line.slice(minLineIndent)).join('\n')

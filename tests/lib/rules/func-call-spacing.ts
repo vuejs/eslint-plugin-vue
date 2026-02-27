@@ -11,13 +11,11 @@ const tester = new RuleTester({
   languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
-/**
- * @param {number} line
- * @param {number} column
- * @param {'unexpected' | 'missing'} errorType
- * @returns {{line: number, column: number, endLine: number, endColumn: number}}
- */
-function getErrorPosition(line, column, errorType) {
+function getErrorPosition(
+  line: number,
+  column: number,
+  errorType: 'unexpected' | 'missing'
+) {
   if (
     eslintStylisticVersion !== undefined &&
     semver.lt(eslintStylisticVersion, '3.0.0')

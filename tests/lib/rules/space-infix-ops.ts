@@ -9,7 +9,7 @@ const tester = new RuleTester({
   languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
 })
 
-const message = (operator) => `Operator '${operator}' must be spaced.`
+const message = (operator: string) => `Operator '${operator}' must be spaced.`
 
 tester.run('space-infix-ops', rule, {
   valid: [

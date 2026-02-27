@@ -1,11 +1,12 @@
 /**
  * @author Armano
  */
+import { Linter } from 'eslint'
 import utils from '../../../lib/utils/index'
 import { RuleTester } from '../../eslint-compat.ts'
 import tsEslintParser from '@typescript-eslint/parser'
 
-const rule = {
+const rule: RuleModule = {
   create(context) {
     return utils.executeOnVueComponent(context, (obj) => {
       context.report({
@@ -15,17 +16,23 @@ const rule = {
     })
   },
   meta: {
+    docs: {},
     fixable: null,
     schema: []
   }
 }
 
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
 }
 
-function makeError(line, column, endLine, endColumn) {
+function makeError(
+  line: number,
+  column: number,
+  endLine: number,
+  endColumn: number
+) {
   return {
     message: 'Component detected.',
     line,
@@ -35,7 +42,7 @@ function makeError(line, column, endLine, endColumn) {
   }
 }
 
-function validTests(ext) {
+function validTests(ext: string) {
   return [
     {
       filename: `test.${ext}`,
@@ -121,7 +128,7 @@ function validTests(ext) {
   ]
 }
 
-function invalidTests(ext) {
+function invalidTests(ext: string) {
   return [
     {
       filename: `test.${ext}`,

@@ -24,7 +24,19 @@ const ALL_CODE = `<template>
   <math><mspace/></math>
 </template>`
 
-const anyWith = (opts) =>
+type OptionValue = 'always' | 'never'
+
+interface RuleOptions {
+  html?: {
+    normal?: OptionValue
+    void?: OptionValue
+    component?: OptionValue
+  }
+  svg?: OptionValue
+  math?: OptionValue
+}
+
+const anyWith = (opts: RuleOptions) =>
   Object.assign(
     {
       svg: 'any',
