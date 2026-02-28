@@ -2,15 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
+import vueESLintParser from 'vue-eslint-parser'
 import { RuleTester } from '../../../eslint-compat'
 import rule from '../../../../lib/rules/no-unsupported-features'
 import { optionsBuilder } from './utils.ts'
 
 const buildOptions = optionsBuilder('v-bind-prop-modifier-shorthand', '^2.6.0')
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
+  languageOptions: { parser: vueESLintParser, ecmaVersion: 2019 }
 })
 
 tester.run('no-unsupported-features/v-bind-prop-modifier-shorthand', rule, {
