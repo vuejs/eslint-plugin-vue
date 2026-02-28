@@ -1,7 +1,6 @@
 /**
  * @author Yosuke Ota
  */
-import { Rule } from '../../../node_modules/@types/eslint'
 import assert from 'node:assert'
 import parserVue from 'vue-eslint-parser'
 import rule from '../../../lib/rules/block-order'
