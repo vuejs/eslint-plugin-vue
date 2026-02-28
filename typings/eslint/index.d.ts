@@ -423,6 +423,7 @@ export namespace Linter {
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
   type FlatConfig = ESLintLinter.FlatConfig
+  type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>
   }

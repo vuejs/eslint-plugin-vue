@@ -1,11 +1,9 @@
-'use strict'
-
-const {
+import {
   escape,
   toRegExp,
   toRegExpGroupMatcher
-} = require('../../../lib/utils/regexp')
-const assert = require('node:assert')
+} from '../../../lib/utils/regexp'
+import assert from 'node:assert'
 
 const ESCAPED = '\\^\\$\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\'
 const UNESCAPED = '^$.*+?()[]{}|\\'
@@ -21,7 +19,9 @@ describe('escape()', () => {
   })
 
   it('should return an empty string for empty values', () => {
+    // @ts-expect-error escape only accepts `string`
     assert.strictEqual(escape(null), null)
+    // @ts-expect-error escape only accepts `string`
     assert.strictEqual(escape(undefined), undefined)
     assert.strictEqual(escape(''), '')
   })

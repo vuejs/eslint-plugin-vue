@@ -1,11 +1,9 @@
-'use strict'
-
-const casing = require('../../../lib/utils/casing')
-const assert = require('node:assert')
+import { getConverter, getChecker } from '../../../lib/utils/casing'
+import assert from 'node:assert'
 
 describe('getConverter()', () => {
   it('should convert string to camelCase', () => {
-    const converter = casing.getConverter('camelCase')
+    const converter = getConverter('camelCase')
 
     assert.equal(converter('foo'), 'foo')
     assert.equal(converter('fooBar'), 'fooBar')
@@ -25,7 +23,7 @@ describe('getConverter()', () => {
   })
 
   it('should convert string to PascalCase', () => {
-    const converter = casing.getConverter('PascalCase')
+    const converter = getConverter('PascalCase')
 
     assert.equal(converter('foo'), 'Foo')
     assert.equal(converter('fooBar'), 'FooBar')
@@ -45,7 +43,7 @@ describe('getConverter()', () => {
   })
 
   it('should convert string to kebab-case', () => {
-    const converter = casing.getConverter('kebab-case')
+    const converter = getConverter('kebab-case')
 
     assert.equal(converter('foo'), 'foo')
     assert.equal(converter('fooBar'), 'foo-bar')
@@ -65,7 +63,7 @@ describe('getConverter()', () => {
   })
 
   it('should convert string to snake_case', () => {
-    const converter = casing.getConverter('snake_case')
+    const converter = getConverter('snake_case')
 
     assert.equal(converter('a'), 'a')
     assert.equal(converter('fooBar'), 'foo_bar')
@@ -86,7 +84,7 @@ describe('getConverter()', () => {
 
 describe('getChecker()', () => {
   it('should check string to camelCase', () => {
-    const checker = casing.getChecker('camelCase')
+    const checker = getChecker('camelCase')
 
     assert.equal(checker('foo'), true)
     assert.equal(checker('fooBar'), true)
@@ -117,7 +115,7 @@ describe('getChecker()', () => {
   })
 
   it('should check string to PascalCase', () => {
-    const checker = casing.getChecker('PascalCase')
+    const checker = getChecker('PascalCase')
 
     assert.equal(checker('Foo'), true)
     assert.equal(checker('FooBar'), true)
@@ -150,7 +148,7 @@ describe('getChecker()', () => {
   })
 
   it('should convert string to kebab-case', () => {
-    const checker = casing.getChecker('kebab-case')
+    const checker = getChecker('kebab-case')
 
     assert.equal(checker('foo'), true)
     assert.equal(checker('foo-bar'), true)
@@ -185,7 +183,7 @@ describe('getChecker()', () => {
   })
 
   it('should check string to snake_case', () => {
-    const checker = casing.getChecker('snake_case')
+    const checker = getChecker('snake_case')
 
     assert.equal(checker('a'), true)
     assert.equal(checker('foo_bar'), true)
