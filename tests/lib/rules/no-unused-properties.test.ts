@@ -6,6 +6,7 @@ import type { Linter as ESLintLinter } from 'eslint'
 import { RuleTester, Linter } from '../../eslint-compat'
 import assert from 'node:assert'
 import rule from '../../../lib/rules/no-unused-properties'
+import noUnusedComponents from '../../../lib/rules/no-unused-components'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
@@ -4750,7 +4751,7 @@ describe('`vue/no-unused-properties` and `vue/no-unused-components` should not c
     plugins: {
       vue: {
         rules: {
-          'no-unused-components': require('../../../lib/rules/no-unused-components'),
+          'no-unused-components': noUnusedComponents,
           'no-unused-properties': rule
         }
       }
