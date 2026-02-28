@@ -166,7 +166,9 @@ describe('getMemberChaining', () => {
   const jsonIgnoreKeys = ['expression', 'object']
 
   it('should parse MemberExpression', () => {
-    const node = parse(`const test = this.lorem['ipsum'].foo.bar`)
+    const node = parse<ObjectExpression>(
+      `const test = this.lorem['ipsum'].foo.bar`
+    )
     const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
@@ -216,7 +218,9 @@ describe('getMemberChaining', () => {
   })
 
   it('should parse optional Chaining ', () => {
-    const node = parse(`const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`)
+    const node = parse<ObjectExpression>(
+      `const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`
+    )
     const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
@@ -333,7 +337,7 @@ describe('getRegisteredComponents', () => {
 })
 
 function parseProps(code: string) {
-  return getComponentPropsFromOptions(parse(code))
+  return getComponentPropsFromOptions(parse<ObjectExpression>(code))
 }
 
 describe('getComponentProps', () => {
@@ -463,7 +467,7 @@ describe('editdistance', () => {
 })
 function nodeToJson(nodes: ESNode[], ignores: string[] = []) {
   return JSON.stringify(nodes, replacer, 2)
-  function replacer(key: string, value: string) {
+  function replacer(key: string, value: unknown) {
     if (key === 'parent' || key === 'start' || key === 'end') {
       return undefined
     }

@@ -1,14 +1,14 @@
 /**
  * @author Armano
  */
-import { Linter } from 'eslint'
-import utils from '../../../lib/utils/index'
-import { RuleTester } from '../../eslint-compat.ts'
+import type { Linter } from 'eslint'
+import { executeOnVueComponent } from '../../../lib/utils/index'
+import { RuleTester } from '../../eslint-compat'
 import tsEslintParser from '@typescript-eslint/parser'
 
 const rule: RuleModule = {
   create(context) {
-    return utils.executeOnVueComponent(context, (obj) => {
+    return executeOnVueComponent(context, (obj) => {
       context.report({
         node: obj,
         message: 'Component detected.'

@@ -2,14 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../../eslint-compat.ts'
+import vueESLintParser from 'vue-eslint-parser'
+import { RuleTester } from '../../../eslint-compat'
 import rule from '../../../../lib/rules/no-unsupported-features'
 import { optionsBuilder } from './utils.ts'
-import vueEslintParser from 'vue-eslint-parser'
 
 const buildOptions = optionsBuilder('define-model', '^3.3.0')
 const tester = new RuleTester({
-  languageOptions: { parser: vueEslintParser, ecmaVersion: 2019 }
+  languageOptions: { parser: vueESLintParser, ecmaVersion: 2019 }
 })
 
 tester.run('no-unsupported-features/define-model', rule, {

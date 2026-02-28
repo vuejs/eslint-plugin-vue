@@ -2,15 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../../eslint-compat.ts'
+import vueESLintParser from 'vue-eslint-parser'
+import { RuleTester } from '../../../eslint-compat'
 import rule from '../../../../lib/rules/no-unsupported-features'
 import { optionsBuilder } from './utils.ts'
-import vueEslintParser from 'vue-eslint-parser'
 
 const buildOptions = optionsBuilder('style-css-vars-injection', '^3.0.3')
 const tester = new RuleTester({
   languageOptions: {
-    parser: vueEslintParser,
+    parser: vueESLintParser,
     ecmaVersion: 2019,
     sourceType: 'module'
   }
