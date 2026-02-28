@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { expect } from 'vitest'
 import { parseSelector } from '../../../lib/utils/selector'
 import { defineDocumentVisitor } from '../../../lib/utils'
 import { Linter } from '../../eslint-compat'
