@@ -6,6 +6,7 @@ import rule from '../../../lib/rules/require-prop-type-constructor'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
 import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -378,7 +379,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
       })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message: 'The "a" property should be a constructor.',

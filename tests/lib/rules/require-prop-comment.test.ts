@@ -5,10 +5,11 @@
 const RuleTester = require('../../eslint-compat').RuleTester
 import rule from '../../../lib/rules/require-prop-comment'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

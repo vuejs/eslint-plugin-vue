@@ -6,6 +6,7 @@ import rule from '../../../lib/rules/require-prop-types'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
 import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-prop-types', rule, {
@@ -166,7 +167,7 @@ ruleTester.run('require-prop-types', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -179,7 +180,7 @@ ruleTester.run('require-prop-types', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -203,7 +204,7 @@ ruleTester.run('require-prop-types', rule, {
       const foo = defineModel('foo', {type:String})
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       // defineModel
@@ -213,7 +214,7 @@ ruleTester.run('require-prop-types', rule, {
       const foo = defineModel('foo', String)
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       code: `
@@ -223,7 +224,7 @@ ruleTester.run('require-prop-types', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -394,7 +395,7 @@ ruleTester.run('require-prop-types', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -413,7 +414,7 @@ ruleTester.run('require-prop-types', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -432,7 +433,7 @@ ruleTester.run('require-prop-types', rule, {
       const foo = defineModel('foo')
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message: 'Prop "modelValue" should define at least its type.',
@@ -452,7 +453,7 @@ ruleTester.run('require-prop-types', rule, {
       const foo = defineModel('foo',{})
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message: 'Prop "modelValue" should define at least its type.',

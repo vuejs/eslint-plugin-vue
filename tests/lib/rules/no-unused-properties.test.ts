@@ -7,10 +7,11 @@ import { RuleTester, Linter } from '../../eslint-compat'
 import assert from 'node:assert'
 import rule from '../../../lib/rules/no-unused-properties'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -4755,7 +4756,7 @@ describe('`vue/no-unused-properties` and `vue/no-unused-components` should not c
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       sourceType: 'module'
     },
