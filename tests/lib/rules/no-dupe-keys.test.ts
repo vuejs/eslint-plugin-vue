@@ -2,13 +2,9 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/no-dupe-keys')
-const RuleTester = require('../../eslint-compat').RuleTester
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import rule from '../../../lib/rules/no-dupe-keys'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const ruleTester = new RuleTester({
   languageOptions: {

@@ -2,14 +2,9 @@
  * @fileoverview Prop definitions should be detailed
  * @author Armano
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-prop-types')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/require-prop-types'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-prop-types', rule, {

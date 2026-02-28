@@ -2,13 +2,9 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/padding-lines-in-component-definition')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/padding-lines-in-component-definition'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {

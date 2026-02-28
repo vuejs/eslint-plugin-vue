@@ -2,13 +2,9 @@
  * @author CZB
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
 const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/require-prop-comment')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import rule from '../../../lib/rules/require-prop-comment'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {

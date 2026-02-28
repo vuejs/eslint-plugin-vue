@@ -2,13 +2,9 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/prefer-prop-type-boolean-first')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/prefer-prop-type-boolean-first'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {

@@ -2,13 +2,9 @@
  * @fileoverview require prop type to be a constructor
  * @author Michał Sajnóg
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-prop-type-constructor')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/require-prop-type-constructor'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester({
   languageOptions: {

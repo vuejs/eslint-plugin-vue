@@ -2,15 +2,12 @@
  * @fileoverview Define a style for the name property casing for consistency purposes
  * @author Yu Kimura
  */
-'use strict'
+import type { Linter } from 'eslint'
+import rule from '../../../lib/rules/prop-name-casing'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
-const rule = require('../../../lib/rules/prop-name-casing')
-const RuleTester = require('../../eslint-compat').RuleTester
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,
   sourceType: 'module'
 }

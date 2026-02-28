@@ -1,15 +1,14 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const semver = require('semver')
-const { RuleTester } = require('../../eslint-compat')
-const rule = require('../../../lib/rules/comma-style')
-const { eslintStylisticVersion } = require('../../test-utils/eslint-stylistic')
+import semver from 'semver'
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/comma-style'
+import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2018 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2018 }
 })
 
 tester.run('comma-style', rule, {

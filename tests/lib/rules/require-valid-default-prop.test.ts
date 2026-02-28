@@ -2,15 +2,12 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
-'use strict'
+import type { Linter } from 'eslint'
+import rule from '../../../lib/rules/require-valid-default-prop'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
 
-const rule = require('../../../lib/rules/require-valid-default-prop')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-const RuleTester = require('../../eslint-compat').RuleTester
-
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module',
   parserOptions: {
@@ -18,7 +15,7 @@ const languageOptions = {
   }
 }
 
-function errorMessage(type) {
+function errorMessage(type: string) {
   return [
     {
       message: `Type of the default value for 'foo' prop must be a ${type}.`,
@@ -27,7 +24,7 @@ function errorMessage(type) {
   ]
 }
 
-function errorMessageForFunction(type) {
+function errorMessageForFunction(type: string) {
   return [
     {
       message: `Type of the default value for 'foo' prop must be a ${type}.`,
@@ -334,7 +331,6 @@ ruleTester.run('require-valid-default-prop', rule, {
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/2692
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       type MaybeString<T extends number> = T | \`\${T}\`
@@ -1213,7 +1209,6 @@ ruleTester.run('require-valid-default-prop', rule, {
       ]
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       type MaybeString<T extends string | number> = \`\${T}\`

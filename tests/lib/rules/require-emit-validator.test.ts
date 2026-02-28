@@ -2,14 +2,9 @@
  * @fileoverview Emit definitions should be detailed
  * @author Pig Fang
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-emit-validator')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/require-emit-validator'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-emit-validator', rule, {
