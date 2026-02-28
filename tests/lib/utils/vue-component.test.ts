@@ -1,7 +1,7 @@
 /**
  * @author Armano
  */
-import { Linter } from 'eslint'
+import type { Linter } from 'eslint'
 import { executeOnVueComponent } from '../../../lib/utils/index'
 import { RuleTester } from '../../eslint-compat'
 import tsEslintParser from '@typescript-eslint/parser'
