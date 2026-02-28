@@ -106,4 +106,4 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-function-call.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-function-call.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-function-call.js)
