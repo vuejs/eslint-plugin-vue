@@ -323,6 +323,10 @@ export namespace Rule {
 
   interface RuleMetaData extends ESLintRule.RuleMetaData {
     docs: Required<ESLintRule.RuleMetaData>['docs']
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    fixable?: ESLintRule.RuleMetaData['fixable'] | (string & {}) | null
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    type?: ESLintRule.RuleMetaData['type'] | (string & {}) | null
   }
 
   interface RuleContext {
@@ -389,7 +393,17 @@ export namespace Rule {
   }
 }
 
-export class RuleTester extends ESLintRuleTester {}
+export class RuleTester extends ESLintRuleTester {
+  run(
+    name: string,
+    rule: Rule.RuleModule,
+    tests: {
+      valid: Array<string | ESLintRuleTester.ValidTestCase>
+      invalid: ESLintRuleTester.InvalidTestCase[]
+    }
+  ): void
+}
+
 export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
   verify(
@@ -409,6 +423,7 @@ export namespace Linter {
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
   type FlatConfig = ESLintLinter.FlatConfig
+  type LanguageOptions = ESLintLinter.LanguageOptions
   interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
     plugins?: Record<string, ESLint.Plugin>
   }

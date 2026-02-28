@@ -1,27 +1,36 @@
-'use strict'
+import * as espree from 'espree'
+import {
+  editDistance,
+  getComponentPropsFromOptions,
+  getComputedProperties,
+  getMemberChaining,
+  getRegisteredComponents,
+  getStaticPropertyName,
+  getStringLiteralValue
+} from '../../../lib/utils'
+import assert from 'node:assert'
 
-const espree = require('espree')
-const utils = require('../../../lib/utils/index')
-const assert = require('node:assert')
-
-function parse(code) {
-  return espree.parse(code, { ecmaVersion: 2020 }).body[0].declarations[0].init
+function parse<T extends Expression>(code: string): T {
+  return (
+    espree.parse(code, { ecmaVersion: 2020 })
+      .body[0] as unknown as VariableDeclaration
+  ).declarations[0].init as T
 }
 
 describe('getComputedProperties', () => {
   it('should return empty array when there is no computed property', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       data() {
         return {}
       }
     }`)
 
-    assert.equal(utils.getComputedProperties(node).length, 0)
+    assert.equal(getComputedProperties(node).length, 0)
   })
 
   it('should return computed properties', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       data() {
         return {}
@@ -48,7 +57,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -65,7 +74,7 @@ describe('getComputedProperties', () => {
   })
 
   it('should not collide with object spread operator', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       computed: {
         ...mapGetters(['test']),
@@ -75,7 +84,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -87,7 +96,7 @@ describe('getComputedProperties', () => {
   })
 
   it('should not collide with object spread operator inside CP', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       computed: {
         foo: {
@@ -97,7 +106,7 @@ describe('getComputedProperties', () => {
       }
     }`)
 
-    const computedProperties = utils.getComputedProperties(node)
+    const computedProperties = getComputedProperties(node)
 
     assert.equal(
       computedProperties.length,
@@ -111,36 +120,44 @@ describe('getComputedProperties', () => {
 
 describe('getStaticPropertyName', () => {
   it('should parse property expression with identifier', () => {
-    const node = parse(`const test = { computed: { } }`)
+    const node = parse<ObjectExpression>(`const test = { computed: { } }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0] as Property)
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with literal', () => {
-    const node = parse(`const test = { ['computed'] () {} }`)
+    const node = parse<ObjectExpression>(`const test = { ['computed'] () {} }`)
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0] as Property)
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse property expression with template literal', () => {
-    const node = parse(`const test = { [\`computed\`] () {} }`)
+    const node = parse<ObjectExpression>(
+      `const test = { [\`computed\`] () {} }`
+    )
 
-    const parsed = utils.getStaticPropertyName(node.properties[0])
+    const parsed = getStaticPropertyName(node.properties[0] as Property)
     assert.strictEqual(parsed, 'computed')
   })
 })
 
 describe('getStringLiteralValue', () => {
   it('should parse literal', () => {
-    const node = parse(`const test = { ['computed'] () {} }`)
+    const node = parse<ObjectExpression>(`const test = { ['computed'] () {} }`)
 
-    const parsed = utils.getStringLiteralValue(node.properties[0].key)
+    const parsed = getStringLiteralValue(
+      (node.properties[0] as Property).key as Literal
+    )
     assert.strictEqual(parsed, 'computed')
   })
   it('should parse template literal', () => {
-    const node = parse(`const test = { [\`computed\`] () {} }`)
+    const node = parse<ObjectExpression>(
+      `const test = { [\`computed\`] () {} }`
+    )
 
-    const parsed = utils.getStringLiteralValue(node.properties[0].key)
+    const parsed = getStringLiteralValue(
+      (node.properties[0] as Property).key as TemplateLiteral
+    )
     assert.strictEqual(parsed, 'computed')
   })
 })
@@ -149,8 +166,10 @@ describe('getMemberChaining', () => {
   const jsonIgnoreKeys = ['expression', 'object']
 
   it('should parse MemberExpression', () => {
-    const node = parse(`const test = this.lorem['ipsum'].foo.bar`)
-    const parsed = utils.getMemberChaining(node)
+    const node = parse<ObjectExpression>(
+      `const test = this.lorem['ipsum'].foo.bar`
+    )
+    const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
       nodeToJson([
@@ -194,13 +213,15 @@ describe('getMemberChaining', () => {
           computed: false,
           optional: false
         }
-      ])
+      ] as ESNode[])
     )
   })
 
   it('should parse optional Chaining ', () => {
-    const node = parse(`const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`)
-    const parsed = utils.getMemberChaining(node)
+    const node = parse<ObjectExpression>(
+      `const test = (this?.lorem)['ipsum']?.[0]?.foo?.bar`
+    )
+    const parsed = getMemberChaining(node)
     assert.equal(
       nodeToJson(parsed, jsonIgnoreKeys),
       nodeToJson([
@@ -254,22 +275,22 @@ describe('getMemberChaining', () => {
           computed: false,
           optional: true
         }
-      ])
+      ] as ESNode[])
     )
   })
 })
 
 describe('getRegisteredComponents', () => {
   it('should return empty array when there are no components registered', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
     }`)
 
-    assert.equal(utils.getRegisteredComponents(node).length, 0)
+    assert.equal(getRegisteredComponents(node).length, 0)
   })
 
   it('should return an array with all registered components', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       components: {
         ...test,
@@ -283,7 +304,7 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map((c) => c.name),
+      getRegisteredComponents(node).map((c) => c.name),
       [
         'PrimaryButton',
         'secondaryButton',
@@ -296,7 +317,7 @@ describe('getRegisteredComponents', () => {
   })
 
   it('should return an array of only components whose names can be identified', () => {
-    const node = parse(`const test = {
+    const node = parse<ObjectExpression>(`const test = {
       name: 'test',
       components: {
         ...test,
@@ -309,14 +330,14 @@ describe('getRegisteredComponents', () => {
     }`)
 
     assert.deepEqual(
-      utils.getRegisteredComponents(node).map((c) => c.name),
+      getRegisteredComponents(node).map((c) => c.name),
       ['Foo', 'Quux']
     )
   })
 })
 
-function parseProps(code) {
-  return utils.getComponentPropsFromOptions(parse(code))
+function parseProps(code: string) {
+  return getComponentPropsFromOptions(parse<ObjectExpression>(code))
 }
 
 describe('getComponentProps', () => {
@@ -367,22 +388,29 @@ describe('getComponentProps', () => {
 
     assert.equal(props.length, 5, 'it detects all props')
 
+    assert.strictEqual(props[0].type, 'unknown')
+    // @ts-expect-error no `key` in `ComponentUnknownProp`
     assert.strictEqual(props[0].key, undefined)
-    assert.strictEqual(props[0].node.type, 'SpreadElement')
+    assert.strictEqual(props[0].node!.type, 'SpreadElement')
+    // @ts-expect-error no `value` in `ComponentUnknownProp`
     assert.strictEqual(props[0].value, undefined)
 
-    assert.strictEqual(props[1].key.type, 'Identifier')
+    assert.strictEqual(props[1].type, 'object')
+    assert.strictEqual(props[1].key!.type, 'Identifier')
     assert.strictEqual(props[1].node.type, 'Property')
     assert.strictEqual(props[1].value.type, 'Identifier')
 
-    assert.strictEqual(props[2].key.type, 'Identifier')
+    assert.strictEqual(props[2].type, 'object')
+    assert.strictEqual(props[2].key!.type, 'Identifier')
     assert.strictEqual(props[2].node.type, 'Property')
     assert.strictEqual(props[2].value.type, 'ObjectExpression')
 
-    assert.strictEqual(props[3].key.type, 'Identifier')
+    assert.strictEqual(props[3].type, 'object')
+    assert.strictEqual(props[3].key!.type, 'Identifier')
     assert.strictEqual(props[3].node.type, 'Property')
     assert.strictEqual(props[3].value.type, 'ArrayExpression')
 
+    assert.strictEqual(props[4].type, 'object')
     assert.deepEqual(props[4].key, props[4].value)
     assert.strictEqual(props[4].node.type, 'Property')
     assert.strictEqual(props[4].value.type, 'Identifier')
@@ -399,26 +427,33 @@ describe('getComponentProps', () => {
 
     assert.equal(props.length, 4, 'it detects all props')
 
+    assert.strictEqual(props[0].type, 'array')
     assert.strictEqual(props[0].node.type, 'Literal')
     assert.deepEqual(props[0].key, props[0].node)
+    // @ts-expect-error no `value` in `ComponentArrayProp`
     assert.strictEqual(props[0].value, null)
 
+    assert.strictEqual(props[1].type, 'array')
     assert.strictEqual(props[1].node.type, 'Identifier')
     assert.strictEqual(props[1].key, null)
+    // @ts-expect-error no `value` in `ComponentArrayProp`
     assert.strictEqual(props[1].value, null)
 
+    assert.strictEqual(props[2].type, 'array')
     assert.strictEqual(props[2].node.type, 'TemplateLiteral')
     assert.deepEqual(props[2].key, props[2].node)
+    // @ts-expect-error no `value` in `ComponentArrayProp`
     assert.strictEqual(props[2].value, null)
 
+    assert.strictEqual(props[3].type, 'array')
     assert.strictEqual(props[3].node.type, 'Literal')
     assert.strictEqual(props[3].key, null)
+    // @ts-expect-error no `value` in `ComponentArrayProp`
     assert.strictEqual(props[3].value, null)
   })
 })
 
 describe('editdistance', () => {
-  const editDistance = utils.editDistance
   it('should return editDistance beteen two string', () => {
     assert.equal(editDistance('book', 'back'), 2)
     assert.equal(editDistance('methods', 'metho'), 2)
@@ -430,9 +465,9 @@ describe('editdistance', () => {
     assert.equal(editDistance('computed', 'computd'), 1)
   })
 })
-function nodeToJson(nodes, ignores = []) {
+function nodeToJson(nodes: ESNode[], ignores: string[] = []) {
   return JSON.stringify(nodes, replacer, 2)
-  function replacer(key, value) {
+  function replacer(key: string, value: string) {
     if (key === 'parent' || key === 'start' || key === 'end') {
       return undefined
     }

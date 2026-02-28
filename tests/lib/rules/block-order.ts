@@ -34,7 +34,7 @@ const tester = new RuleTester({
   }
 })
 
-tester.run('block-order', rule as unknown as Rule.RuleModule, {
+tester.run('block-order', rule, {
   valid: [
     // default
     '<script></script><template></template><style></style>',

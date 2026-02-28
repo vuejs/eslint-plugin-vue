@@ -1,13 +1,14 @@
 /**
  * @author Armano
  */
-'use strict'
+import { Linter } from 'eslint'
+import { executeOnVueComponent } from '../../../lib/utils/index'
+import { RuleTester } from '../../eslint-compat'
+import tsEslintParser from '@typescript-eslint/parser'
 
-const utils = require('../../../lib/utils/index')
-
-const rule = {
+const rule: RuleModule = {
   create(context) {
-    return utils.executeOnVueComponent(context, (obj) => {
+    return executeOnVueComponent(context, (obj) => {
       context.report({
         node: obj,
         message: 'Component detected.'
@@ -15,18 +16,23 @@ const rule = {
     })
   },
   meta: {
+    docs: {},
     fixable: null,
     schema: []
   }
 }
 
-const RuleTester = require('../../eslint-compat').RuleTester
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 6,
   sourceType: 'module'
 }
 
-function makeError(line, column, endLine, endColumn) {
+function makeError(
+  line: number,
+  column: number,
+  endLine: number,
+  endColumn: number
+) {
   return {
     message: 'Component detected.',
     line,
@@ -36,7 +42,7 @@ function makeError(line, column, endLine, endColumn) {
   }
 }
 
-function validTests(ext) {
+function validTests(ext: string) {
   return [
     {
       filename: `test.${ext}`,
@@ -100,7 +106,7 @@ function validTests(ext) {
       code: `export default (Foo as FooConstructor<Foo>).extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     },
     {
@@ -108,7 +114,7 @@ function validTests(ext) {
       code: `export default Foo.extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     },
     {
@@ -116,13 +122,13 @@ function validTests(ext) {
       code: `export default Foo.extend({} as ComponentOptions)`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       }
     }
   ]
 }
 
-function invalidTests(ext) {
+function invalidTests(ext: string) {
   return [
     {
       filename: `test.${ext}`,
@@ -171,7 +177,7 @@ function invalidTests(ext) {
       code: `export default (Vue as VueConstructor<Vue>).extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 52, 1, 54)]
     },
@@ -180,7 +186,7 @@ function invalidTests(ext) {
       code: `export default Vue.extend({})`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 27, 1, 29)]
     },
@@ -189,7 +195,7 @@ function invalidTests(ext) {
       code: `export default Vue.extend({} as ComponentOptions)`,
       languageOptions: {
         ...languageOptions,
-        parser: require('@typescript-eslint/parser')
+        parser: tsEslintParser
       },
       errors: [makeError(1, 27, 1, 29)]
     },
