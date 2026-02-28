@@ -87,6 +87,7 @@
     "@stylistic/eslint-plugin": "^5.7.0",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^9.6.1",
+    "@types/espree": "^10.1.0",
     "@types/natural-compare": "^1.4.3",
     "@types/node": "^24.0.8",
     "@types/semver": "^7.7.1",
