@@ -4,50 +4,49 @@
  */
 'use strict'
 
-const RuleTester = require('../../../eslint-compat').RuleTester
-const rule = require('../../../../lib/rules/no-unsupported-features')
-const utils = require('./utils')
+import { RuleTester } from '../../../eslint-compat'
+import rule from '../../../../lib/rules/no-unsupported-features'
+import { optionsBuilder } from './utils.ts'
 
-const buildOptions = utils.optionsBuilder('v-model-argument', '^2.6.0')
+const buildOptions = optionsBuilder('v-is', '^2.6.0')
 const tester = new RuleTester({
   languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2019 }
 })
 
-tester.run('no-unsupported-features/v-model-argument', rule, {
+tester.run('no-unsupported-features/v-is', rule, {
   valid: [
     {
       code: `
       <template>
-        <MyInput v-model:foo="foo" />
+        <div v-is="foo" />
       </template>`,
       options: buildOptions({ version: '^3.0.0' })
     },
     {
       code: `
       <template>
-        <MyInput v-model="foo" />
+        <div :is="foo" />
       </template>`,
       options: buildOptions()
     },
     {
       code: `
       <template>
-        <MyInput v-bind:foo.sync="foo" />
+        <div v-is="foo" />
       </template>`,
-      options: buildOptions()
+      options: buildOptions({ version: '^2.5.0', ignores: ['v-is'] })
     }
   ],
   invalid: [
     {
       code: `
       <template>
-        <MyInput v-model:foo="foo" />
+        <div v-is="foo" />
       </template>`,
       options: buildOptions(),
       errors: [
         {
-          message:
-            'Argument on `v-model` is not supported until Vue.js "3.0.0".',
+          message: '`v-is` are not supported until Vue.js "3.0.0".',
           line: 3
         }
       ]
