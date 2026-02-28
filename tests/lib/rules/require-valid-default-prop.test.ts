@@ -6,6 +6,7 @@ import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-valid-default-prop'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
@@ -123,7 +124,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -218,7 +219,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ...languageOptions
       }
     },
@@ -234,7 +235,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -251,7 +252,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -666,7 +667,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });`,
 
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -929,7 +930,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -947,7 +948,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -965,7 +966,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },

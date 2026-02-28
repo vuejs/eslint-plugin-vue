@@ -5,6 +5,7 @@
 import rule from '../../../lib/rules/require-emit-validator'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-emit-validator', rule, {
@@ -114,7 +115,7 @@ ruleTester.run('require-emit-validator', rule, {
         })
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -131,7 +132,7 @@ ruleTester.run('require-emit-validator', rule, {
         })
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -335,7 +336,7 @@ ruleTester.run('require-emit-validator', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },

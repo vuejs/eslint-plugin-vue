@@ -5,6 +5,7 @@
 import rule from '../../../lib/rules/require-prop-types'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-prop-types', rule, {
@@ -133,7 +134,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -150,7 +151,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -351,7 +352,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -372,7 +373,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },

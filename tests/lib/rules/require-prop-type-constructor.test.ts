@@ -5,6 +5,7 @@
 import rule from '../../../lib/rules/require-prop-type-constructor'
 import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -220,7 +221,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: require('@typescript-eslint/parser') },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "a" property should be a constructor.',
@@ -244,7 +245,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: require('@typescript-eslint/parser') },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "name" property should be a constructor.',
