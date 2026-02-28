@@ -25,6 +25,6 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-empty-pattern.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-empty-pattern.test.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-empty-pattern.js)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/no-empty-pattern)</sup>

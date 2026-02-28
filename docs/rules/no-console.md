@@ -29,6 +29,6 @@ This rule was introduced in eslint-plugin-vue v9.15.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-console.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-console.test.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-console.js)
 
 <sup>Taken with ❤️ [from ESLint core](https://eslint.org/docs/latest/rules/no-console)</sup>

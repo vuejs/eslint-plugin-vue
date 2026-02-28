@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v6.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/keyword-spacing.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/keyword-spacing.test.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/keyword-spacing.js)
 
 <sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/keyword-spacing)</sup>
