@@ -2,17 +2,14 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/no-unused-emit-declarations')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-unused-emit-declarations'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -350,7 +347,6 @@ tester.run('no-unused-emit-declarations', rule, {
       }
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       const emit = defineEmits<{
@@ -729,7 +725,6 @@ tester.run('no-unused-emit-declarations', rule, {
       ]
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       const emit = defineEmits<{

@@ -2,15 +2,14 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
-'use strict'
+import type { Linter } from 'eslint'
+import rule from '../../../lib/rules/require-valid-default-prop'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
-const rule = require('../../../lib/rules/require-valid-default-prop')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-const RuleTester = require('../../eslint-compat').RuleTester
-
-const languageOptions = {
+const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2020,
   sourceType: 'module',
   parserOptions: {
@@ -18,7 +17,7 @@ const languageOptions = {
   }
 }
 
-function errorMessage(type) {
+function errorMessage(type: string) {
   return [
     {
       message: `Type of the default value for 'foo' prop must be a ${type}.`,
@@ -27,7 +26,7 @@ function errorMessage(type) {
   ]
 }
 
-function errorMessageForFunction(type) {
+function errorMessageForFunction(type: string) {
   return [
     {
       message: `Type of the default value for 'foo' prop must be a ${type}.`,
@@ -126,7 +125,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -221,7 +220,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ...languageOptions
       }
     },
@@ -237,7 +236,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -254,7 +253,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -276,7 +275,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });
       </script>`,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: {
@@ -314,7 +313,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       }
     },
     {
@@ -329,12 +328,11 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       }
     },
     {
       // https://github.com/vuejs/eslint-plugin-vue/issues/2692
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       type MaybeString<T extends number> = T | \`\${T}\`
@@ -670,7 +668,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });`,
 
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -933,7 +931,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -951,7 +949,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -969,7 +967,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -988,7 +986,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -1011,7 +1009,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       languageOptions: {
         ecmaVersion: 6,
         sourceType: 'module',
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         parserOptions: {
           parser: require.resolve('@typescript-eslint/parser')
         }
@@ -1090,7 +1088,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1112,7 +1110,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1137,7 +1135,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1158,7 +1156,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1182,7 +1180,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1203,7 +1201,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser')
+        parser: vueEslintParser
       },
       errors: [
         {
@@ -1213,7 +1211,6 @@ ruleTester.run('require-valid-default-prop', rule, {
       ]
     },
     {
-      filename: 'test.vue',
       code: `
       <script setup lang="ts">
       type MaybeString<T extends string | number> = \`\${T}\`

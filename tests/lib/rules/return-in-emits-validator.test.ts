@@ -2,18 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const rule = require('../../../lib/rules/return-in-emits-validator')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/return-in-emits-validator'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

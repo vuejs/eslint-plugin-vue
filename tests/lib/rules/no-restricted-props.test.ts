@@ -1,23 +1,20 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/no-restricted-props')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-restricted-props'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
 })
 
-tester.run('no-restricted-props', rule, {
+tester.run('no-restricted-props', rule as RuleModule, {
   valid: [
     {
       filename: 'test.vue',
@@ -599,7 +596,7 @@ tester.run('no-restricted-props', rule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
-          suggestions: null
+          suggestions: []
         }
       ],
       ...getTypeScriptFixtureTestOptions()

@@ -2,18 +2,17 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-'use strict'
-
-const { RuleTester, Linter } = require('../../eslint-compat')
-const assert = require('node:assert')
-const rule = require('../../../lib/rules/no-unused-properties')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import type { Linter as ESLintLinter } from 'eslint'
+import { RuleTester, Linter } from '../../eslint-compat'
+import assert from 'node:assert'
+import rule from '../../../lib/rules/no-unused-properties'
+import noUnusedComponents from '../../../lib/rules/no-unused-components'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }
@@ -4747,18 +4746,18 @@ tester.run('no-unused-properties', rule, {
 // https://github.com/vuejs/eslint-plugin-vue/issues/1789
 describe('`vue/no-unused-properties` and `vue/no-unused-components` should not conflict.', () => {
   const linter = new Linter()
-  const config = {
+  const config: ESLintLinter.Config = {
     files: ['**/*.vue'],
     plugins: {
       vue: {
         rules: {
-          'no-unused-components': require('../../../lib/rules/no-unused-components'),
+          'no-unused-components': noUnusedComponents,
           'no-unused-properties': rule
         }
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueEslintParser,
       ecmaVersion: 2020,
       sourceType: 'module'
     },

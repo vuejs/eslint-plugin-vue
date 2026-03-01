@@ -1,24 +1,21 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const semver = require('semver')
-const { RuleTester } = require('../../eslint-compat')
-const rule = require('../../../lib/rules/func-call-spacing')
-const { eslintStylisticVersion } = require('../../test-utils/eslint-stylistic')
+import semver from 'semver'
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/func-call-spacing'
+import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
-  languageOptions: { parser: require('vue-eslint-parser'), ecmaVersion: 2020 }
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
 })
 
-/**
- * @param {number} line
- * @param {number} column
- * @param {'unexpected' | 'missing'} errorType
- * @returns {{line: number, column: number, endLine: number, endColumn: number}}
- */
-function getErrorPosition(line, column, errorType) {
+function getErrorPosition(
+  line: number,
+  column: number,
+  errorType: 'unexpected' | 'missing'
+) {
   if (
     eslintStylisticVersion !== undefined &&
     semver.lt(eslintStylisticVersion, '3.0.0')

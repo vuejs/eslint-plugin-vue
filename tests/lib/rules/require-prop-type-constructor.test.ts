@@ -2,13 +2,11 @@
  * @fileoverview require prop type to be a constructor
  * @author Michał Sajnóg
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-prop-type-constructor')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/require-prop-type-constructor'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -224,7 +222,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: require('@typescript-eslint/parser') },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "a" property should be a constructor.',
@@ -248,7 +246,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: require('@typescript-eslint/parser') },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "name" property should be a constructor.',
@@ -381,7 +379,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
       })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message: 'The "a" property should be a constructor.',

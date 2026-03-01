@@ -2,14 +2,11 @@
  * @fileoverview Emit definitions should be detailed
  * @author Pig Fang
  */
-'use strict'
-
-const rule = require('../../../lib/rules/require-emit-validator')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
-
-const RuleTester = require('../../eslint-compat').RuleTester
+import rule from '../../../lib/rules/require-emit-validator'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
+import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester()
 ruleTester.run('require-emit-validator', rule, {
@@ -119,7 +116,7 @@ ruleTester.run('require-emit-validator', rule, {
         })
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -136,7 +133,7 @@ ruleTester.run('require-emit-validator', rule, {
         })
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -173,7 +170,7 @@ ruleTester.run('require-emit-validator', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module',
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
@@ -340,7 +337,7 @@ ruleTester.run('require-emit-validator', rule, {
         });
       `,
       languageOptions: {
-        parser: require('@typescript-eslint/parser'),
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -360,7 +357,7 @@ ruleTester.run('require-emit-validator', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -380,7 +377,7 @@ ruleTester.run('require-emit-validator', rule, {
       </script>
       `,
       languageOptions: {
-        parser: require('vue-eslint-parser'),
+        parser: vueEslintParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
