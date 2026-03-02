@@ -3,9 +3,9 @@
  * @author Armano
  */
 import rule from '../../../lib/rules/require-prop-types'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
-import { RuleTester } from '../../eslint-compat.ts'
-import tsEslintParser from '@typescript-eslint/parser'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester()
@@ -135,7 +135,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -152,7 +152,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -353,7 +353,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -374,7 +374,7 @@ ruleTester.run('require-prop-types', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },

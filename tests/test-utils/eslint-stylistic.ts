@@ -10,5 +10,6 @@ const eslintStylisticPackagePath = path.join(
   'package.json'
 )
 export const eslintStylisticVersion = existsSync(eslintStylisticPackagePath)
-  ? JSON.parse(readFileSync(eslintStylisticPackagePath, 'utf8')).version
+  ? (JSON.parse(readFileSync(eslintStylisticPackagePath, 'utf8'))
+      .version as string)
   : undefined

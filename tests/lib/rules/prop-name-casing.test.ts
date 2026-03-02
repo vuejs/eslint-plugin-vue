@@ -4,8 +4,8 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/prop-name-casing'
-import { RuleTester } from '../../eslint-compat.ts'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions: Linter.LanguageOptions = {

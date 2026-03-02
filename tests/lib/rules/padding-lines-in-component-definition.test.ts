@@ -2,9 +2,9 @@
  * @author ItMaga
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/padding-lines-in-component-definition'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

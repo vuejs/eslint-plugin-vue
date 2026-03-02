@@ -4,9 +4,9 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-valid-default-prop'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
-import { RuleTester } from '../../eslint-compat.ts'
-import tsEslintParser from '@typescript-eslint/parser'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions: Linter.LanguageOptions = {
@@ -125,7 +125,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -220,7 +220,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ...languageOptions
       }
     },
@@ -236,7 +236,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -253,7 +253,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       }
@@ -668,7 +668,7 @@ ruleTester.run('require-valid-default-prop', rule, {
       });`,
 
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -931,7 +931,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -949,7 +949,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },
@@ -967,7 +967,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         });
       `,
       languageOptions: {
-        parser: tsEslintParser,
+        parser: tsParser,
         ecmaVersion: 6,
         sourceType: 'module'
       },

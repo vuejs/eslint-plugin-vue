@@ -2,9 +2,9 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/require-explicit-emits'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

@@ -3,12 +3,12 @@
  * @author Learning Equality
  */
 import type { Linter as ESLintLinter } from 'eslint'
-import { RuleTester, Linter } from '../../eslint-compat.ts'
+import { RuleTester, Linter } from '../../eslint-compat'
 import assert from 'node:assert'
 import rule from '../../../lib/rules/no-unused-properties'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
-import vueEslintParser from 'vue-eslint-parser'
 import noUnusedComponents from '../../../lib/rules/no-unused-components'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {

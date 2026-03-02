@@ -3,8 +3,8 @@
  * See LICENSE file in root directory for full license.
  */
 import rule from '../../../lib/rules/return-in-emits-validator'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

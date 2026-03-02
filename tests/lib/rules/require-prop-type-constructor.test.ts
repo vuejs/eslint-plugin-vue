@@ -3,9 +3,9 @@
  * @author Michał Sajnóg
  */
 import rule from '../../../lib/rules/require-prop-type-constructor'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
-import { RuleTester } from '../../eslint-compat.ts'
-import tsEslintParser from '@typescript-eslint/parser'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import { RuleTester } from '../../eslint-compat'
+import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({
@@ -222,7 +222,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: tsEslintParser },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "a" property should be a constructor.',
@@ -246,7 +246,7 @@ ruleTester.run('require-prop-type-constructor', rule, {
         }
       }
       `,
-      languageOptions: { parser: tsEslintParser },
+      languageOptions: { parser: tsParser },
       errors: [
         {
           message: 'The "name" property should be a constructor.',

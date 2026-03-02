@@ -3,8 +3,8 @@
  * @author Armano
  */
 import rule from '../../../lib/rules/no-dupe-keys'
-import { RuleTester } from '../../eslint-compat.ts'
-import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript.ts'
+import { RuleTester } from '../../eslint-compat'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

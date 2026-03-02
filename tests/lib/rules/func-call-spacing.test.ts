@@ -2,9 +2,9 @@
  * @author Yosuke Ota
  */
 import semver from 'semver'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/func-call-spacing'
-import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic.ts'
+import { eslintStylisticVersion } from '../../test-utils/eslint-stylistic'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
