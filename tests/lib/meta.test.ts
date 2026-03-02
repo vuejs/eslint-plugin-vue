@@ -1,10 +1,10 @@
-'use strict'
+import assert from 'node:assert'
+import plugin from '../..'
+import packageJson from '../../package.json' with { type: 'json' }
 
-const assert = require('node:assert')
-const plugin = require('../..')
 const expectedMeta = {
   name: 'eslint-plugin-vue',
-  version: require('../../package.json').version
+  version: packageJson.version
 }
 
 describe('Test for meta object', () => {
