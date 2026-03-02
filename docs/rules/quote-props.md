@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v8.4.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/quote-props.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/quote-props.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/quote-props.test.ts)
 
 <sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/quote-props)</sup>
