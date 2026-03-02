@@ -17,10 +17,7 @@ const logger = console
   }
 
   const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.js`)
-  const testFile = path.resolve(
-    __dirname,
-    `../tests/lib/rules/${ruleName}.test.ts`
-  )
+  const testFile = path.resolve(__dirname, `../tests/lib/rules/${ruleName}.js`)
   const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
 
   fs.writeFileSync(
