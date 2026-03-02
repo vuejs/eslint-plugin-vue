@@ -1,6 +1,6 @@
 import assert from 'node:assert'
 import plugin from '../..'
-import packageJson from '../../package.json'
+import packageJson from '../../package.json' with { type: 'json' }
 
 const expectedMeta = {
   name: 'eslint-plugin-vue',

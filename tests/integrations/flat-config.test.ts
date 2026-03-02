@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert'
 import { execSync } from 'node:child_process'
-import fs from 'node:fs'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 
@@ -16,7 +16,7 @@ describe('Integration with flat config', () => {
       TARGET_DIR,
       'node_modules/eslint/package.json'
     )
-    eslintNodeVersion = JSON.parse(fs.readFileSync(eslintPackagePath, 'utf8'))
+    eslintNodeVersion = JSON.parse(readFileSync(eslintPackagePath, 'utf8'))
       .engines.node
   })
 
