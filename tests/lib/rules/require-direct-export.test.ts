@@ -3,7 +3,7 @@
  * @author Hiroki Osame <hiroki.osame@gmail.com>
  */
 import rule from '../../../lib/rules/require-direct-export'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester({
   languageOptions: {

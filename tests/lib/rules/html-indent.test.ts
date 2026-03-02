@@ -6,7 +6,7 @@
 import type { RuleTester as ESLintRuleTester } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/html-indent'
 import vueEslintParser from 'vue-eslint-parser'
 

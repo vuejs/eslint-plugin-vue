@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-name-property'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const languageOptions: Linter.LanguageOptions = {

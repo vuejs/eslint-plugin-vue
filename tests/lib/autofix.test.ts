@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { Linter as ESLintLinter } from 'eslint'
-import { Linter } from '../eslint-compat.ts'
+import { Linter } from '../eslint-compat'
 import parser from 'vue-eslint-parser'
 import assert from 'node:assert'
 import { rules } from '../..'

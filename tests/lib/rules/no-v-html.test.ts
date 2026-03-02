@@ -2,7 +2,7 @@
  * @fileoverview Restrict or warn use of v-html to prevent XSS attack
  * @author Nathan Zeplowitz
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-v-html'
 import vueEslintParser from 'vue-eslint-parser'
 

@@ -3,7 +3,7 @@
  * @author Armano
  */
 import rule from '../../../lib/rules/one-component-per-file'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester({
   languageOptions: {

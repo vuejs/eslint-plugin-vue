@@ -2,7 +2,7 @@
  * @author Toru Nagashima <https://github.com/mysticatea>
  */
 
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/html-closing-bracket-spacing'
 import vueEslintParser from 'vue-eslint-parser'
 

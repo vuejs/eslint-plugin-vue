@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import rule from '../../../lib/rules/no-spaces-around-equal-signs-in-attribute'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

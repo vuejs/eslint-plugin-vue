@@ -2,7 +2,7 @@
  * @author Przemysław Jan Beigert
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/require-typed-object-prop'
 import vueEslintParser from 'vue-eslint-parser'
 

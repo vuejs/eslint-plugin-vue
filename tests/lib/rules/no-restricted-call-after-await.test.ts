@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import path from 'node:path'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-restricted-call-after-await'
 import vueEslintParser from 'vue-eslint-parser'
 

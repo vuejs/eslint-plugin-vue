@@ -4,7 +4,7 @@
 import assert from 'node:assert'
 import parserVue from 'vue-eslint-parser'
 import rule from '../../../lib/rules/block-order'
-import { ESLint, RuleTester } from '../../eslint-compat.ts'
+import { ESLint, RuleTester } from '../../eslint-compat'
 import pluginVue from '../../../dist'
 import processor from '../../../lib/processor'
 

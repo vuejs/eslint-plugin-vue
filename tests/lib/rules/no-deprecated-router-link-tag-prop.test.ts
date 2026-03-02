@@ -2,7 +2,7 @@
  * @author Marton Csordas
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-deprecated-router-link-tag-prop'
 import vueEslintParser from 'vue-eslint-parser'
 

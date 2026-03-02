@@ -1,4 +1,4 @@
-import { ESLint } from '../../eslint-compat.ts'
+import { ESLint } from '../../eslint-compat'
 import plugin from '../../../dist'
 
 describe('eslintrc configs', () => {

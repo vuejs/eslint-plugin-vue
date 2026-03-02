@@ -3,7 +3,7 @@
  * @author Michał Sajnóg
  */
 import semver from 'semver'
-import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import { RuleTester, ESLint } from '../../eslint-compat'
 import rule from '../../../lib/rules/jsx-uses-vars'
 import { getCoreRule } from '../../../lib/utils'
 

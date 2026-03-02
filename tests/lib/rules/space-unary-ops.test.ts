@@ -1,7 +1,7 @@
 /**
  * @author Toru Nagashima
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/space-unary-ops'
 import vueEslintParser from 'vue-eslint-parser'
 

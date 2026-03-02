@@ -3,7 +3,7 @@
  * @author Przemyslaw Jan Beigert
  */
 import rule from '../../../lib/rules/no-this-in-before-route-enter'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 //------------------------------------------------------------------------------

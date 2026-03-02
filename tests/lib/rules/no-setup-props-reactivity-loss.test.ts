@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-setup-props-reactivity-loss'
 import vueEslintParser from 'vue-eslint-parser'
 

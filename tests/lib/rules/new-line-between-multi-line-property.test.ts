@@ -3,7 +3,7 @@
  * @author IWANABETHATGUY
  */
 import rule from '../../../lib/rules/new-line-between-multi-line-property'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

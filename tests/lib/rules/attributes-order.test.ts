@@ -3,7 +3,7 @@
  * @author Erin Depew
  */
 import rule from '../../../lib/rules/attributes-order'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

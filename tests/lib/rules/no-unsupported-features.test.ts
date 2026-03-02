@@ -5,7 +5,7 @@
 /**
  * See to testcases in `./no-unsupported-features` directory for testcases of each features.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-unsupported-features'
 import vueEslintParser from 'vue-eslint-parser'
 

@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import { RuleTester, ESLint } from '../../eslint-compat'
 import semver from 'semver'
 import rule from '../../../lib/rules/no-sparse-arrays'
 import vueEslintParser from 'vue-eslint-parser'

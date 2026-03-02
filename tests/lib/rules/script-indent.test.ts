@@ -8,7 +8,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 import { createRequire } from 'node:module'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/script-indent'
 import vueEslintParser from 'vue-eslint-parser'
 

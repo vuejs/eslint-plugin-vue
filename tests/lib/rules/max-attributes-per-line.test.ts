@@ -2,7 +2,7 @@
  * @fileoverview Define the number of attributes allows per line
  * @author Filipa Lacerda
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/max-attributes-per-line'
 import vueEslintParser from 'vue-eslint-parser'
 

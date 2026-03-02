@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-ref-as-operand'
 import vueEslintParser from 'vue-eslint-parser'
 

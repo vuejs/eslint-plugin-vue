@@ -1,7 +1,7 @@
 /**
  * @author tyankatsu <https://github.com/tyankatsu0105>
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-empty-component-block'
 import vueEslintParser from 'vue-eslint-parser'
 

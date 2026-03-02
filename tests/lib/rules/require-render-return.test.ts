@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/require-render-return'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: 2018,

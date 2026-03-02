@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import semver from 'semver'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-export-in-script-setup'
 import vueEslintParser from 'vue-eslint-parser'
 import typescriptPackageJson from 'typescript/package.json'

@@ -3,7 +3,7 @@
  * @copyright 2017 薛定谔的猫. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-unused-vars'
 import vueEslintParser from 'vue-eslint-parser'
 

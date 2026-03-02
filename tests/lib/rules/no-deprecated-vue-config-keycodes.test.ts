@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import rule from '../../../lib/rules/no-deprecated-vue-config-keycodes'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

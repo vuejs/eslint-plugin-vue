@@ -1,7 +1,7 @@
 /**
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-v-for-template-key-on-child'
 import vueEslintParser from 'vue-eslint-parser'
 

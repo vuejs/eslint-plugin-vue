@@ -2,7 +2,7 @@
  * @author Toru Nagashima
  */
 import semver from 'semver'
-import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import { RuleTester, ESLint } from '../../eslint-compat'
 import rule from '../../../lib/rules/eqeqeq'
 import vueEslintParser from 'vue-eslint-parser'
 

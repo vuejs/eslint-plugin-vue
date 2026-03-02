@@ -1,5 +1,5 @@
 import semver from 'semver'
-import { RuleTester, ESLint } from '../eslint-compat.ts'
+import { RuleTester, ESLint } from '../eslint-compat'
 import { getCoreRule } from '../../lib/utils'
 import vueEslintParser from 'vue-eslint-parser'
 

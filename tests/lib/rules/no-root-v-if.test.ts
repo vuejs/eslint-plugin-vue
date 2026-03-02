@@ -3,7 +3,7 @@
  * @copyright 2023 Perry Song. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-root-v-if'
 import vueEslintParser from 'vue-eslint-parser'
 

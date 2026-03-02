@@ -2,7 +2,7 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/prefer-true-attribute-shorthand'
 import vueEslintParser from 'vue-eslint-parser'
 

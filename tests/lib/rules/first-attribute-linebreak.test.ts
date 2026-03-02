@@ -2,7 +2,7 @@
  * @fileoverview Enforce the location of first attribute
  * @author Yosuke Ota
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/first-attribute-linebreak'
 import vueEslintParser from 'vue-eslint-parser'
 

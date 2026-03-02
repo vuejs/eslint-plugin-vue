@@ -3,7 +3,7 @@
  * @author Przemyslaw Falowski (@przemkow)
  */
 import rule from '../../../lib/rules/no-multiple-template-root'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

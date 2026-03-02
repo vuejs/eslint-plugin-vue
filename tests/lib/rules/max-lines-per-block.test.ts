@@ -1,7 +1,7 @@
 /**
  * @author lsdsjy
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/max-lines-per-block'
 import vueEslintParser from 'vue-eslint-parser'
 

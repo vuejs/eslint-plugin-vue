@@ -3,7 +3,7 @@
  * @author 2018 Armano
  */
 import rule from '../../../lib/rules/no-mutating-props'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

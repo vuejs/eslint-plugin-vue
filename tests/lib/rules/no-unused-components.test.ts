@@ -2,7 +2,7 @@
  * @fileoverview Report used components
  * @author Michał Sajnóg
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-unused-components'
 import vueEslintParser from 'vue-eslint-parser'
 

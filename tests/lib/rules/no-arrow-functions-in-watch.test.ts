@@ -3,7 +3,7 @@
  */
 
 import rule from '../../../lib/rules/no-arrow-functions-in-watch'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester({
   languageOptions: {

@@ -3,7 +3,7 @@
  * @author Alex Sokolov
  */
 import rule from '../../../lib/rules/valid-model-definition'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 
 const ruleTester = new RuleTester({
   languageOptions: {

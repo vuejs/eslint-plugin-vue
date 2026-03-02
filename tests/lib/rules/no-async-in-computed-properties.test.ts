@@ -4,7 +4,7 @@
  */
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-async-in-computed-properties'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import parser from 'vue-eslint-parser'
 
 const languageOptions: Linter.LanguageOptions = {

@@ -2,7 +2,7 @@
  * @author lozinsky <https://github.com/lozinsky>
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester, ESLint } from '../../eslint-compat.ts'
+import { RuleTester, ESLint } from '../../eslint-compat'
 import semver from 'semver'
 import rule from '../../../lib/rules/no-implicit-coercion'
 import vueEslintParser from 'vue-eslint-parser'

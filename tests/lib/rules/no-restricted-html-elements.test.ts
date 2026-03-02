@@ -1,7 +1,7 @@
 /**
  * @author Doug Wade
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-restricted-html-elements'
 import vueEslintParser from 'vue-eslint-parser'
 

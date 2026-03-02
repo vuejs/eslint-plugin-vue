@@ -3,7 +3,7 @@
  * @author IWANABETHATGUY
  */
 import rule from '../../../lib/rules/no-potential-component-option-typo'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

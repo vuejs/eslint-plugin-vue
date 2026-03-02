@@ -3,7 +3,7 @@
  * @fileoverview Disallow use of deprecated `.sync` modifier on `v-bind` directive (in Vue.js 3.0.0+)
  */
 import rule from '../../../lib/rules/no-deprecated-v-bind-sync'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

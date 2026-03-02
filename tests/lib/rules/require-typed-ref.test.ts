@@ -1,7 +1,7 @@
 /**
  * @author Ivan Demchuk <https://github.com/Demivan>
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/require-typed-ref'
 import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'

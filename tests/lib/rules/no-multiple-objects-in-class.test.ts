@@ -2,7 +2,7 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  */
 import rule from '../../../lib/rules/no-multiple-objects-in-class'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const ruleTester = new RuleTester({

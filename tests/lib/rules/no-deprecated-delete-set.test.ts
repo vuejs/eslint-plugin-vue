@@ -2,7 +2,7 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-deprecated-delete-set'
 import vueEslintParser from 'vue-eslint-parser'
 

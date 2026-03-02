@@ -3,7 +3,7 @@
  * @author Maciej Chmurski
  */
 import rule from '../../../lib/rules/static-class-names-order'
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

@@ -2,7 +2,7 @@
  * @author Amorites
  * See LICENSE file in root directory for full license.
  */
-import { RuleTester } from '../../eslint-compat.ts'
+import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/define-props-declaration'
 import vueEslintParser from 'vue-eslint-parser'
 
