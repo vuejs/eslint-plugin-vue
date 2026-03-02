@@ -408,14 +408,24 @@ export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
   verify(
     code: SourceCode | string,
-    config: Linter.Config | Linter.Config[],
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.LintMessage[]
   verify(
     code: SourceCode | string,
-    config: Linter.Config | Linter.Config[],
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
     options: Linter.LintOptions
   ): Linter.LintMessage[]
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.FixReport
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.FixOptions
+  ): Linter.FixReport
 }
 
 export namespace Linter {

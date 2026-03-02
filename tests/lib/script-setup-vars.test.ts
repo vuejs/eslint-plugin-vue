@@ -1,14 +1,14 @@
-'use strict'
+import semver from 'semver'
+import { RuleTester, ESLint } from '../eslint-compat'
+import { getCoreRule } from '../../lib/utils'
+import vueEslintParser from 'vue-eslint-parser'
 
-const semver = require('semver')
-const { RuleTester, ESLint } = require('../eslint-compat')
-const { getCoreRule } = require('../../lib/utils')
-const ruleNoUnusedVars = getCoreRule('no-unused-vars')
-const ruleNoUndef = getCoreRule('no-undef')
+const ruleNoUnusedVars = getCoreRule('no-unused-vars')!
+const ruleNoUndef = getCoreRule('no-undef')!
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 6,
     sourceType: 'module'
   }
@@ -252,7 +252,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           },
           {
             message: "'baz' is assigned a value but never used.",
@@ -292,7 +292,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           }
         ]
       },
@@ -332,7 +332,7 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         `
                   }
                 ]
-              : null
+              : []
           }
         ]
       },
