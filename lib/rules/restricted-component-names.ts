@@ -2,16 +2,13 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-const { toRegExpGroupMatcher } = require('../utils/regexp.ts')
-
-const htmlElements = require('../utils/html-elements.json')
-const deprecatedHtmlElements = require('../utils/deprecated-html-elements.json')
-const svgElements = require('../utils/svg-elements.json')
-const vue2builtinComponents = require('../utils/vue2-builtin-components')
-const vue3builtinComponents = require('../utils/vue3-builtin-components')
+import utils from '../utils/index.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
+import htmlElements from '../utils/html-elements.json' with { type: 'json' }
+import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
+import svgElements from '../utils/svg-elements.json' with { type: 'json' }
+import vue2builtinComponents from '../utils/vue2-builtin-components.js'
+import vue3builtinComponents from '../utils/vue3-builtin-components.js'
 
 const reservedNames = new Set([
   ...htmlElements,
@@ -21,7 +18,7 @@ const reservedNames = new Set([
   ...vue3builtinComponents
 ])
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -48,13 +45,11 @@ module.exports = {
       invalidName: 'Component name "{{name}}" is not allowed.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const isAllowed = toRegExpGroupMatcher(options.allow)
 
-    /** @param {string} name  */
-    function isAllowedTarget(name) {
+    function isAllowedTarget(name: string) {
       return reservedNames.has(name) || isAllowed(name)
     }
 
