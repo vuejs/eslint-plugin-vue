@@ -3,60 +3,60 @@
  * @copyright 2021 Yosuke Ota. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { StyleVariablesContext } from './style-variables/index.ts'
+import {
+  findVariableByIdentifier,
+  getStaticPropertyName,
+  getStringLiteralValue,
+  hasAttribute,
+  iterateReferencesTraceMap
+} from './index.ts'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
 
-const utils = require('./index')
-const eslintUtils = require('@eslint-community/eslint-utils')
+interface IHasPropertyOption {
+  unknownCallAsAny?: boolean
+}
 
-/**
- * @typedef {import('./style-variables').StyleVariablesContext} StyleVariablesContext
- */
-/**
- * @typedef {object} IHasPropertyOption
- * @property {boolean} [unknownCallAsAny]
- */
-/**
- * @typedef {object} NestPropertyNodeForExpression
- * @property {'expression'} type
- * @property {MemberExpression} node
- *
- * @typedef {object} NestPropertyNodeForPattern
- * @property {'pattern'} type
- * @property {MemberExpression | Identifier | ObjectPattern | ArrayPattern} node
- *
- * @typedef {NestPropertyNodeForExpression | NestPropertyNodeForPattern} NestPropertyNode
- */
-/**
- * @typedef {object} IPropertyReferences
- * @property { (name: string, option?: IHasPropertyOption) => boolean } hasProperty
- * @property { () => Map<string, {nodes:ASTNode[]}> } allProperties Get all properties.
- * @property { (name: string) => IPropertyReferences } getNest Get the nesting property references.
- * @property { (name: string) => Iterable<NestPropertyNode> } getNestNodes Get the nesting property nodes.
- */
+interface NestPropertyNodeForExpression {
+  type: 'expression'
+  node: MemberExpression
+}
 
-/** @type {IPropertyReferences} */
-const ANY = {
+interface NestPropertyNodeForPattern {
+  type: 'pattern'
+  node: MemberExpression | Identifier | ObjectPattern | ArrayPattern
+}
+
+type NestPropertyNode =
+  | NestPropertyNodeForExpression
+  | NestPropertyNodeForPattern
+
+export interface IPropertyReferences {
+  hasProperty: (name: string, option?: IHasPropertyOption) => boolean
+  allProperties: () => Map<string, { nodes: ASTNode[] }>
+  getNest: (name: string) => IPropertyReferences
+  getNestNodes: (name: string) => Iterable<NestPropertyNode>
+}
+
+const ANY: IPropertyReferences = {
   hasProperty: () => true,
   allProperties: () => new Map(),
   getNest: () => ANY,
   getNestNodes: () => []
 }
 
-/** @type {IPropertyReferences} */
-const NEVER = {
+const NEVER: IPropertyReferences = {
   hasProperty: () => false,
   allProperties: () => new Map(),
   getNest: () => NEVER,
   getNestNodes: () => []
 }
 
-/**
- * @param {RuleContext} context
- * @param {Identifier} id
- * @returns {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration | null}
- */
-function findFunction(context, id) {
-  const calleeVariable = utils.findVariableByIdentifier(context, id)
+function findFunction(
+  context: RuleContext,
+  id: Identifier
+): FunctionExpression | ArrowFunctionExpression | FunctionDeclaration | null {
+  const calleeVariable = findVariableByIdentifier(context, id)
   if (!calleeVariable) {
     return null
   }
@@ -84,54 +84,54 @@ function findFunction(context, id) {
   return null
 }
 
-module.exports = {
-  definePropertyReferenceExtractor,
-  mergePropertyReferences
+interface IPropertyReferenceExtractorOptions {
+  unknownMemberAsUnreferenced?: boolean
+  returnAsUnreferenced?: boolean
 }
 
-/**
- * @param {RuleContext} context The rule context.
- */
-function definePropertyReferenceExtractor(
-  context,
-  { unknownMemberAsUnreferenced = false, returnAsUnreferenced = false } = {}
+export function definePropertyReferenceExtractor(
+  context: RuleContext,
+  {
+    unknownMemberAsUnreferenced = false,
+    returnAsUnreferenced = false
+  }: IPropertyReferenceExtractorOptions = {}
 ) {
-  /** @type {Map<Expression, IPropertyReferences>} */
-  const cacheForExpression = new Map()
-  /** @type {Map<Pattern, IPropertyReferences>} */
-  const cacheForPattern = new Map()
-  /** @type {Map<FunctionExpression | ArrowFunctionExpression | FunctionDeclaration, Map<number, IPropertyReferences>>} */
-  const cacheForFunction = new Map()
-  /** @type {{ toRefNodes: Set<ESNode>, toRefsNodes: Set<ESNode>} | null} */
-  let toRefSet = null
+  const cacheForExpression = new Map<Expression, IPropertyReferences>()
+  const cacheForPattern = new Map<Pattern, IPropertyReferences>()
+  const cacheForFunction = new Map<
+    FunctionExpression | ArrowFunctionExpression | FunctionDeclaration,
+    Map<number, IPropertyReferences>
+  >()
+  let toRefSet: { toRefNodes: Set<ESNode>; toRefsNodes: Set<ESNode> } | null =
+    null
 
   let isFunctionalTemplate = false
   const templateBody = context.sourceCode.ast.templateBody
   if (templateBody) {
-    isFunctionalTemplate = utils.hasAttribute(templateBody, 'functional')
+    isFunctionalTemplate = hasAttribute(templateBody, 'functional')
   }
 
   function getToRefSet() {
     if (toRefSet) {
       return toRefSet
     }
-    const tracker = new eslintUtils.ReferenceTracker(
+    const tracker = new ReferenceTracker(
       context.sourceCode.scopeManager.scopes[0]
     )
-    const toRefNodes = new Set()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
-      [eslintUtils.ReferenceTracker.ESM]: true,
+    const toRefNodes = new Set<ESNode>()
+    for (const { node } of iterateReferencesTraceMap(tracker, {
+      [ReferenceTracker.ESM]: true,
       toRef: {
-        [eslintUtils.ReferenceTracker.CALL]: true
+        [ReferenceTracker.CALL]: true
       }
     })) {
       toRefNodes.add(node)
     }
-    const toRefsNodes = new Set()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
-      [eslintUtils.ReferenceTracker.ESM]: true,
+    const toRefsNodes = new Set<ESNode>()
+    for (const { node } of iterateReferencesTraceMap(tracker, {
+      [ReferenceTracker.ESM]: true,
       toRefs: {
-        [eslintUtils.ReferenceTracker.CALL]: true
+        [ReferenceTracker.CALL]: true
       }
     })) {
       toRefsNodes.add(node)
@@ -142,47 +142,35 @@ function definePropertyReferenceExtractor(
 
   /**
    * Collects the property references for member expr.
-   * @implements {IPropertyReferences}
    */
-  class PropertyReferencesForMember {
-    /**
-     *
-     * @param {MemberExpression} node
-     * @param {string} name
-     * @param {boolean} withInTemplate
-     */
-    constructor(node, name, withInTemplate) {
+  class PropertyReferencesForMember implements IPropertyReferences {
+    node: MemberExpression
+    name: string
+    withInTemplate: boolean
+
+    constructor(node: MemberExpression, name: string, withInTemplate: boolean) {
       this.node = node
       this.name = name
       this.withInTemplate = withInTemplate
     }
 
-    /**
-     * @param {string} name
-     */
-    hasProperty(name) {
+    hasProperty(name: string): boolean {
       return name === this.name
     }
 
     allProperties() {
-      return new Map([[this.name, { nodes: [this.node.property] }]])
+      return new Map<string, { nodes: ASTNode[] }>([
+        [this.name, { nodes: [this.node.property] }]
+      ])
     }
 
-    /**
-     * @param {string} name
-     * @returns {IPropertyReferences}
-     */
-    getNest(name) {
+    getNest(name: string): IPropertyReferences {
       return name === this.name
         ? extractFromExpression(this.node, this.withInTemplate)
         : NEVER
     }
 
-    /**
-     * @param {string} name
-     * @returns {Iterable<NestPropertyNodeForExpression>}
-     */
-    *getNestNodes(name) {
+    *getNestNodes(name: string): Iterable<NestPropertyNodeForExpression> {
       if (name === this.name) {
         yield {
           type: 'expression',
@@ -191,36 +179,30 @@ function definePropertyReferenceExtractor(
       }
     }
   }
+
   /**
    * Collects the property references for object.
-   * @implements {IPropertyReferences}
    */
-  class PropertyReferencesForObject {
+  class PropertyReferencesForObject implements IPropertyReferences {
+    properties: Record<string, AssignmentProperty[]>
+
     constructor() {
-      /** @type {Record<string, AssignmentProperty[]>} */
       this.properties = Object.create(null)
     }
 
-    /**
-     * @param {string} name
-     */
-    hasProperty(name) {
+    hasProperty(name: string): boolean {
       return Boolean(this.properties[name])
     }
 
     allProperties() {
-      const result = new Map()
+      const result = new Map<string, { nodes: ASTNode[] }>()
       for (const [name, nodes] of Object.entries(this.properties)) {
         result.set(name, { nodes: nodes.map((node) => node.key) })
       }
       return result
     }
 
-    /**
-     * @param {string} name
-     * @returns {IPropertyReferences}
-     */
-    getNest(name) {
+    getNest(name: string): IPropertyReferences {
       const properties = this.properties[name]
       return properties
         ? mergePropertyReferences(
@@ -229,11 +211,7 @@ function definePropertyReferenceExtractor(
         : NEVER
     }
 
-    /**
-     * @param {string} name
-     * @returns {Iterable<NestPropertyNodeForPattern>}
-     */
-    *getNestNodes(name) {
+    *getNestNodes(name: string): Iterable<NestPropertyNodeForPattern> {
       const properties = this.properties[name]
       if (!properties) {
         return
@@ -259,11 +237,7 @@ function definePropertyReferenceExtractor(
     }
   }
 
-  /**
-   * @param {Pattern} pattern
-   * @returns {IPropertyReferences}
-   */
-  function getNestFromPattern(pattern) {
+  function getNestFromPattern(pattern: Pattern): IPropertyReferences {
     if (pattern.type === 'ObjectPattern') {
       return extractFromObjectPattern(pattern)
     }
@@ -277,11 +251,16 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from Expression.
-   * @param {Identifier | MemberExpression | ChainExpression | ThisExpression | CallExpression} node
-   * @param {boolean} withInTemplate
-   * @returns {IPropertyReferences}
    */
-  function extractFromExpression(node, withInTemplate) {
+  function extractFromExpression(
+    node:
+      | Identifier
+      | MemberExpression
+      | ChainExpression
+      | ThisExpression
+      | CallExpression,
+    withInTemplate: boolean
+  ): IPropertyReferences {
     const ref = cacheForExpression.get(node)
     if (ref) {
       return ref
@@ -312,14 +291,14 @@ function definePropertyReferenceExtractor(
         case 'MemberExpression': {
           if (parent.object === node) {
             // `arg.foo`
-            const name = utils.getStaticPropertyName(parent)
+            const name = getStaticPropertyName(parent)
 
             if (
               name === '$props' &&
               parent.parent.type === 'MemberExpression'
             ) {
               // `$props.arg`
-              const propName = utils.getStaticPropertyName(parent.parent)
+              const propName = getStaticPropertyName(parent.parent)
 
               if (!propName) return unknownMemberAsUnreferenced ? NEVER : ANY
 
@@ -367,11 +346,7 @@ function definePropertyReferenceExtractor(
       return NEVER
     }
 
-    /**
-     * @param {ASTNode} parentTarget
-     * @returns {boolean}
-     */
-    function maybeExternalUsed(parentTarget) {
+    function maybeExternalUsed(parentTarget: ASTNode): boolean {
       if (
         parentTarget.type === 'ReturnStatement' ||
         parentTarget.type === 'VExpressionContainer'
@@ -393,10 +368,8 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from one parameter of the function.
-   * @param {Pattern} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromPattern(node) {
+  function extractFromPattern(node: Pattern): IPropertyReferences {
     const ref = cacheForPattern.get(node)
     if (ref) {
       return ref
@@ -426,14 +399,12 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from ObjectPattern.
-   * @param {ObjectPattern} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromObjectPattern(node) {
+  function extractFromObjectPattern(node: ObjectPattern): IPropertyReferences {
     const refs = new PropertyReferencesForObject()
     for (const prop of node.properties) {
       if (prop.type === 'Property') {
-        const name = utils.getStaticPropertyName(prop)
+        const name = getStaticPropertyName(prop)
         if (name) {
           const list = refs.properties[name] || (refs.properties[name] = [])
           list.push(prop)
@@ -451,11 +422,9 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from id.
-   * @param {Identifier} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromIdentifier(node) {
-    const variable = utils.findVariableByIdentifier(context, node)
+  function extractFromIdentifier(node: Identifier): IPropertyReferences {
+    const variable = findVariableByIdentifier(context, node)
     if (!variable) {
       return NEVER
     }
@@ -469,11 +438,11 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from call.
-   * @param {CallExpression} node
-   * @param {number} argIndex
-   * @returns {IPropertyReferences}
    */
-  function extractFromCall(node, argIndex) {
+  function extractFromCall(
+    node: CallExpression,
+    argIndex: number
+  ): IPropertyReferences {
     if (node.callee.type !== 'Identifier') {
       return {
         hasProperty(_name, options) {
@@ -482,7 +451,7 @@ function definePropertyReferenceExtractor(
         allProperties: () => new Map(),
         getNest: () => ANY,
         getNestNodes: () => []
-      }
+      } satisfies IPropertyReferences
     }
 
     const fnNode = findFunction(context, node.callee)
@@ -501,7 +470,7 @@ function definePropertyReferenceExtractor(
         allProperties: () => new Map(),
         getNest: () => ANY,
         getNestNodes: () => []
-      }
+      } satisfies IPropertyReferences
     }
 
     return extractFromFunctionParam(fnNode, argIndex)
@@ -509,11 +478,11 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from function param.
-   * @param {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} node
-   * @param {number} argIndex
-   * @returns {IPropertyReferences}
    */
-  function extractFromFunctionParam(node, argIndex) {
+  function extractFromFunctionParam(
+    node: FunctionExpression | ArrowFunctionExpression | FunctionDeclaration,
+    argIndex: number
+  ): IPropertyReferences {
     let cacheForIndexes = cacheForFunction.get(node)
     if (!cacheForIndexes) {
       cacheForIndexes = new Map()
@@ -535,18 +504,14 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from path.
-   * @param {string} pathString
-   * @param {Identifier | Literal | TemplateLiteral} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromPath(pathString, node) {
+  function extractFromPath(
+    pathString: string,
+    node: Identifier | Literal | TemplateLiteral
+  ): IPropertyReferences {
     return extractFromSegments(pathString.split('.'))
 
-    /**
-     * @param {string[]} segments
-     * @returns {IPropertyReferences}
-     */
-    function extractFromSegments(segments) {
+    function extractFromSegments(segments: string[]): IPropertyReferences {
       if (segments.length === 0) {
         return ANY
       }
@@ -557,58 +522,54 @@ function definePropertyReferenceExtractor(
         getNest: (name) =>
           name === segmentName ? extractFromSegments(segments.slice(1)) : NEVER,
         getNestNodes: () => []
-      }
+      } satisfies IPropertyReferences
     }
   }
 
   /**
    * Extract the property references from name literal.
-   * @param {Expression} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromNameLiteral(node) {
+  function extractFromNameLiteral(node: Expression): IPropertyReferences {
     const referenceName =
       node.type === 'Literal' || node.type === 'TemplateLiteral'
-        ? utils.getStringLiteralValue(node)
+        ? getStringLiteralValue(node)
         : null
     return referenceName
-      ? {
+      ? ({
           hasProperty: (name) => name === referenceName,
           allProperties: () => new Map([[referenceName, { nodes: [node] }]]),
           getNest: (name) => (name === referenceName ? ANY : NEVER),
           getNestNodes: () => []
-        }
+        } satisfies IPropertyReferences)
       : NEVER
   }
 
   /**
    * Extract the property references from name.
-   * @param {string} referenceName
-   * @param {Expression|SpreadElement} nameNode
-   * @param { () => IPropertyReferences } [getNest]
-   * @returns {IPropertyReferences}
    */
-  function extractFromName(referenceName, nameNode, getNest) {
+  function extractFromName(
+    referenceName: string,
+    nameNode: Expression | SpreadElement,
+    getNest?: () => IPropertyReferences
+  ): IPropertyReferences {
     return {
       hasProperty: (name) => name === referenceName,
       allProperties: () => new Map([[referenceName, { nodes: [nameNode] }]]),
       getNest: (name) =>
         name === referenceName ? (getNest ? getNest() : ANY) : NEVER,
       getNestNodes: () => []
-    }
+    } satisfies IPropertyReferences
   }
 
   /**
    * Extract the property references from toRef call.
-   * @param {CallExpression} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromToRef(node) {
+  function extractFromToRef(node: CallExpression): IPropertyReferences {
     const nameNode = node.arguments[1]
     const refName =
       nameNode &&
       (nameNode.type === 'Literal' || nameNode.type === 'TemplateLiteral')
-        ? utils.getStringLiteralValue(nameNode)
+        ? getStringLiteralValue(nameNode)
         : null
     if (!refName) {
       // unknown name
@@ -621,31 +582,27 @@ function definePropertyReferenceExtractor(
 
   /**
    * Extract the property references from toRefs call.
-   * @param {CallExpression} node
-   * @returns {IPropertyReferences}
    */
-  function extractFromToRefs(node) {
+  function extractFromToRefs(node: CallExpression): IPropertyReferences {
     const base = extractFromExpression(node, false)
     return {
       hasProperty: (name, option) => base.hasProperty(name, option),
       allProperties: () => base.allProperties(),
       getNest: (name) => base.getNest(name).getNest('value'),
       getNestNodes: (name) => base.getNest(name).getNestNodes('value')
-    }
+    } satisfies IPropertyReferences
   }
 
   /**
    * Extract the property references from VExpressionContainer.
-   * @param {VExpressionContainer} node
-   * @param {object} [options]
-   * @param {boolean} [options.ignoreGlobals]
-   * @returns {IPropertyReferences}
    */
-  function extractFromVExpressionContainer(node, options) {
+  function extractFromVExpressionContainer(
+    node: VExpressionContainer,
+    options?: { ignoreGlobals?: boolean }
+  ): IPropertyReferences {
     const ignoreGlobals = options && options.ignoreGlobals
 
-    /** @type { (name:string)=>boolean } */
-    let ignoreRef = () => false
+    let ignoreRef: (name: string) => boolean = () => false
     if (ignoreGlobals) {
       const globalScope =
         context.sourceCode.scopeManager.globalScope ||
@@ -653,8 +610,8 @@ function definePropertyReferenceExtractor(
 
       ignoreRef = (name) => globalScope.set.has(name)
     }
-    /** @type {IPropertyReferences[]} */
-    const references = []
+
+    const references: IPropertyReferences[] = []
     for (const id of node.references
       .filter((ref) => ref.variable == null)
       .map((ref) => ref.id)) {
@@ -682,13 +639,14 @@ function definePropertyReferenceExtractor(
     }
     return mergePropertyReferences(references)
   }
+
   /**
    * Extract the property references from StyleVariablesContext.
-   * @param {StyleVariablesContext} ctx
-   * @returns {IPropertyReferences}
    */
-  function extractFromStyleVariablesContext(ctx) {
-    const references = []
+  function extractFromStyleVariablesContext(
+    ctx: StyleVariablesContext
+  ): IPropertyReferences {
+    const references: IPropertyReferences[] = []
     for (const { id } of ctx.references) {
       references.push(
         extractFromName(id.name, id, () => extractFromExpression(id, true))
@@ -709,11 +667,9 @@ function definePropertyReferenceExtractor(
   }
 }
 
-/**
- * @param {IPropertyReferences[]} references
- * @returns {IPropertyReferences}
- */
-function mergePropertyReferences(references) {
+export function mergePropertyReferences(
+  references: IPropertyReferences[]
+): IPropertyReferences {
   if (references.length === 0) {
     return NEVER
   }
@@ -725,26 +681,20 @@ function mergePropertyReferences(references) {
 
 /**
  * Collects the property references for merge.
- * @implements {IPropertyReferences}
  */
-class PropertyReferencesForMerge {
-  /**
-   * @param {IPropertyReferences[]} references
-   */
-  constructor(references) {
+class PropertyReferencesForMerge implements IPropertyReferences {
+  references: IPropertyReferences[]
+
+  constructor(references: IPropertyReferences[]) {
     this.references = references
   }
 
-  /**
-   * @param {string} name
-   * @param {IHasPropertyOption} [option]
-   */
-  hasProperty(name, option) {
+  hasProperty(name: string, option?: IHasPropertyOption) {
     return this.references.some((ref) => ref.hasProperty(name, option))
   }
 
   allProperties() {
-    const result = new Map()
+    const result = new Map<string, { nodes: ASTNode[] }>()
     for (const reference of this.references) {
       for (const [name, { nodes }] of reference.allProperties()) {
         const r = result.get(name)
@@ -758,13 +708,8 @@ class PropertyReferencesForMerge {
     return result
   }
 
-  /**
-   * @param {string} name
-   * @returns {IPropertyReferences}
-   */
-  getNest(name) {
-    /** @type {IPropertyReferences[]} */
-    const nest = []
+  getNest(name: string): IPropertyReferences {
+    const nest: IPropertyReferences[] = []
     for (const ref of this.references) {
       if (ref.hasProperty(name)) {
         nest.push(ref.getNest(name))
@@ -773,11 +718,7 @@ class PropertyReferencesForMerge {
     return mergePropertyReferences(nest)
   }
 
-  /**
-   * @param {string} name
-   * @returns {Iterable<NestPropertyNode>}
-   */
-  *getNestNodes(name) {
+  *getNestNodes(name: string): Iterable<NestPropertyNode> {
     for (const ref of this.references) {
       if (ref.hasProperty(name)) {
         yield* ref.getNestNodes(name)

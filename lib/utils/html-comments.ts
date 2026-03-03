@@ -1,45 +1,58 @@
-/**
- * @typedef { { exceptions?: string[] } } CommentParserConfig
- * @typedef { (comment: ParsedHTMLComment) => void } HTMLCommentVisitor
- * @typedef { { includeDirectives?: boolean } } CommentVisitorOption
- *
- * @typedef { Token & { type: 'HTMLCommentOpen' } } HTMLCommentOpen
- * @typedef { Token & { type: 'HTMLCommentOpenDecoration' } } HTMLCommentOpenDecoration
- * @typedef { Token & { type: 'HTMLCommentValue' } } HTMLCommentValue
- * @typedef { Token & { type: 'HTMLCommentClose' } } HTMLCommentClose
- * @typedef { Token & { type: 'HTMLCommentCloseDecoration' } } HTMLCommentCloseDecoration
- * @typedef { { open: HTMLCommentOpen, openDecoration: HTMLCommentOpenDecoration | null, value: HTMLCommentValue | null, closeDecoration: HTMLCommentCloseDecoration | null, close: HTMLCommentClose } } ParsedHTMLComment
- */
-const utils = require('./')
+import { hasInvalidEOF } from './index.ts'
+
+export interface CommentParserConfig {
+  exceptions?: string[]
+}
+
+export type HTMLCommentVisitor = (comment: ParsedHTMLComment) => void
+
+export interface CommentVisitorOption {
+  includeDirectives?: boolean
+}
+
+interface HTMLCommentOpen extends Token {
+  type: 'HTMLCommentOpen'
+}
+
+interface HTMLCommentOpenDecoration extends Token {
+  type: 'HTMLCommentOpenDecoration'
+}
+
+interface HTMLCommentValue extends Token {
+  type: 'HTMLCommentValue'
+}
+
+interface HTMLCommentClose extends Token {
+  type: 'HTMLCommentClose'
+}
+
+interface HTMLCommentCloseDecoration extends Token {
+  type: 'HTMLCommentCloseDecoration'
+}
+
+export interface ParsedHTMLComment {
+  open: HTMLCommentOpen
+  openDecoration: HTMLCommentOpenDecoration | null
+  value: HTMLCommentValue | null
+  closeDecoration: HTMLCommentCloseDecoration | null
+  close: HTMLCommentClose
+}
 
 const COMMENT_DIRECTIVE = /^\s*eslint-(?:en|dis)able/
 const IE_CONDITIONAL_IF = /^\[if\s+/
 const IE_CONDITIONAL_ENDIF = /\[endif]$/
 
-/** @type { 'HTMLCommentOpen' } */
 const TYPE_HTML_COMMENT_OPEN = 'HTMLCommentOpen'
-/** @type { 'HTMLCommentOpenDecoration' } */
 const TYPE_HTML_COMMENT_OPEN_DECORATION = 'HTMLCommentOpenDecoration'
-/** @type { 'HTMLCommentValue' } */
 const TYPE_HTML_COMMENT_VALUE = 'HTMLCommentValue'
-/** @type { 'HTMLCommentClose' } */
 const TYPE_HTML_COMMENT_CLOSE = 'HTMLCommentClose'
-/** @type { 'HTMLCommentCloseDecoration' } */
 const TYPE_HTML_COMMENT_CLOSE_DECORATION = 'HTMLCommentCloseDecoration'
 
-/**
- * @param {HTMLComment} comment
- * @returns {boolean}
- */
-function isCommentDirective(comment) {
+function isCommentDirective(comment: HTMLComment): boolean {
   return COMMENT_DIRECTIVE.test(comment.value)
 }
 
-/**
- * @param {HTMLComment} comment
- * @returns {boolean}
- */
-function isIEConditionalComment(comment) {
+function isIEConditionalComment(comment: HTMLComment): boolean {
   return (
     IE_CONDITIONAL_IF.test(comment.value) ||
     IE_CONDITIONAL_ENDIF.test(comment.value)
@@ -48,22 +61,19 @@ function isIEConditionalComment(comment) {
 
 /**
  * Define HTML comment parser
- *
- * @param {SourceCode} sourceCode The source code instance.
- * @param {CommentParserConfig | null} config The config.
- * @returns { (node: Token) => (ParsedHTMLComment | null) } HTML comment parser.
  */
-function defineParser(sourceCode, config) {
+function defineParser(
+  sourceCode: SourceCode,
+  config: CommentParserConfig | null
+): (node: Token) => ParsedHTMLComment | null {
   config = config || {}
 
   const exceptions = config.exceptions || []
 
   /**
    * Get a open decoration string from comment contents.
-   * @param {string} contents comment contents
-   * @returns {string} decoration string
    */
-  function getOpenDecoration(contents) {
+  function getOpenDecoration(contents: string): string {
     let decoration = ''
     for (const exception of exceptions) {
       const length = exception.length
@@ -81,10 +91,8 @@ function defineParser(sourceCode, config) {
 
   /**
    * Get a close decoration string from comment contents.
-   * @param {string} contents comment contents
-   * @returns {string} decoration string
    */
-  function getCloseDecoration(contents) {
+  function getCloseDecoration(contents: string): string {
     let decoration = ''
     for (const exception of exceptions) {
       const length = exception.length
@@ -100,12 +108,7 @@ function defineParser(sourceCode, config) {
     return decoration
   }
 
-  /**
-   * Parse HTMLComment.
-   * @param {Token} node a comment token
-   * @returns {ParsedHTMLComment | null} the result of HTMLComment tokens.
-   */
-  return function parseHTMLComment(node) {
+  return function parseHTMLComment(node: Token): ParsedHTMLComment | null {
     if (node.type !== 'HTMLComment') {
       // Is not HTMLComment
       return null
@@ -142,17 +145,13 @@ function defineParser(sourceCode, config) {
     }
 
     let tokenIndex = node.range[0]
-    /**
-     * @param {string} type
-     * @param {string} value
-     * @returns {any}
-     */
-    const createToken = (type, value) => {
-      /** @type {Range} */
-      const range = [tokenIndex, tokenIndex + value.length]
+    const createToken = <T extends string>(
+      type: T,
+      value: string
+    ): Token & { type: T } => {
+      const range: Range = [tokenIndex, tokenIndex + value.length]
       tokenIndex = range[1]
-      /** @type {SourceLocation} */
-      let loc
+      let loc: SourceLocation | undefined
       return {
         type,
         value,
@@ -169,24 +168,20 @@ function defineParser(sourceCode, config) {
       }
     }
 
-    /** @type {HTMLCommentOpen} */
-    const open = createToken(TYPE_HTML_COMMENT_OPEN, '<!--')
-    /** @type {HTMLCommentOpenDecoration | null} */
-    const openDecoration = openDecorationText
+    const open: HTMLCommentOpen = createToken(TYPE_HTML_COMMENT_OPEN, '<!--')
+    const openDecoration: HTMLCommentOpenDecoration | null = openDecorationText
       ? createToken(TYPE_HTML_COMMENT_OPEN_DECORATION, openDecorationText)
       : null
     tokenIndex += beforeSpace.length
-    /** @type {HTMLCommentValue | null} */
-    const value = valueText
+    const value: HTMLCommentValue | null = valueText
       ? createToken(TYPE_HTML_COMMENT_VALUE, valueText)
       : null
     tokenIndex += afterSpace.length
-    /** @type {HTMLCommentCloseDecoration | null} */
-    const closeDecoration = closeDecorationText
-      ? createToken(TYPE_HTML_COMMENT_CLOSE_DECORATION, closeDecorationText)
-      : null
-    /** @type {HTMLCommentClose} */
-    const close = createToken(TYPE_HTML_COMMENT_CLOSE, '-->')
+    const closeDecoration: HTMLCommentCloseDecoration | null =
+      closeDecorationText
+        ? createToken(TYPE_HTML_COMMENT_CLOSE_DECORATION, closeDecorationText)
+        : null
+    const close: HTMLCommentClose = createToken(TYPE_HTML_COMMENT_CLOSE, '-->')
 
     return {
       /** HTML comment open (`<!--`) */
@@ -205,18 +200,17 @@ function defineParser(sourceCode, config) {
 
 /**
  * Define HTML comment visitor
- *
- * @param {RuleContext} context The rule context.
- * @param {CommentParserConfig | null} config The config.
- * @param {HTMLCommentVisitor} visitHTMLComment The HTML comment visitor.
- * @param {CommentVisitorOption} [visitorOption] The option for visitor.
- * @returns {RuleListener} HTML comment visitor.
  */
-function defineVisitor(context, config, visitHTMLComment, visitorOption) {
+export function defineVisitor(
+  context: RuleContext,
+  config: CommentParserConfig | null,
+  visitHTMLComment: HTMLCommentVisitor,
+  visitorOption?: CommentVisitorOption
+): RuleListener {
   return {
     Program(node) {
       visitorOption = visitorOption || {}
-      if (utils.hasInvalidEOF(node)) {
+      if (hasInvalidEOF(node)) {
         return
       }
       if (!node.templateBody) {
@@ -244,8 +238,4 @@ function defineVisitor(context, config, visitHTMLComment, visitorOption) {
       }
     }
   }
-}
-
-module.exports = {
-  defineVisitor
 }

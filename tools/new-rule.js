@@ -31,7 +31,7 @@ const logger = console
  */
 'use strict'
 
-const utils = require('../utils')
+const utils = require('../utils/index.ts')
 
 module.exports = {
   meta: {
