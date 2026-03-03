@@ -394,14 +394,22 @@ export namespace Rule {
 }
 
 export class RuleTester extends ESLintRuleTester {
+  constructor(config?: Linter.Config)
+
   run(
     name: string,
     rule: Rule.RuleModule,
     tests: {
-      valid: Array<string | ESLintRuleTester.ValidTestCase>
-      invalid: ESLintRuleTester.InvalidTestCase[]
+      valid: Array<string | RuleTester.ValidTestCase>
+      invalid: RuleTester.InvalidTestCase[]
     }
   ): void
+}
+
+export namespace RuleTester {
+  type ValidTestCase = ESLintRuleTester.ValidTestCase
+  type InvalidTestCase = ESLintRuleTester.InvalidTestCase
+  type TestCaseError = ESLintRuleTester.TestCaseError
 }
 
 export class Linter extends ESLintLinter {

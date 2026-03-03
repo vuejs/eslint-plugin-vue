@@ -1,0 +1,45 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-useless-concat'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
+})
+
+tester.run('no-useless-concat', rule, {
+  valid: [
+    `<template><div :attr="'foo-bar'" /></template>`,
+    '<template><div attr="foo-bar" /></template>',
+    `<template><div :[\`foo-bar\`]="a" /></template>`,
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('"red"')
+    }
+    </style>`
+  ],
+  invalid: [
+    {
+      code: `<template><div :attr="'foo'+'bar'" /></template>`,
+      errors: ['Unexpected string concatenation of literals.']
+    },
+    {
+      code: `<template><div :[\`foo\`+\`bar\`]="a" /></template>`,
+      errors: ['Unexpected string concatenation of literals.']
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('"re" + "d"')
+      }
+      </style>`,
+      errors: ['Unexpected string concatenation of literals.']
+    }
+  ]
+})

@@ -1,0 +1,256 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-watch-after-await'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: {
+    parser: vueEslintParser,
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
+})
+
+tester.run('no-watch-after-await', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch} from 'vue'
+      export default {
+        async setup() {
+          watch(foo, () => { /* ... */ }) // ok
+
+          await doSomething()
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch} from 'vue'
+      export default {
+        async setup() {
+          watch(foo, () => { /* ... */ })
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          watchEffect(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
+          await doSomething()
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {onMounted} from 'vue'
+      export default {
+        async _setup() {
+          await doSomething()
+
+          onMounted(() => { /* ... */ }) // error
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+          const a = watchEffect(() => { /* ... */ })
+          const b = watch(foo, () => { /* ... */ })
+          c = watch()
+          d(watch())
+          e = {
+            foo: watch()
+          }
+          f = [watch()]
+        }
+      }
+      </script>
+      `
+    },
+    `
+      Vue.component('test', {
+        el: foo()
+      })
+    `,
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+          const a = watchEffect?.(() => { /* ... */ })
+          const b = watch?.(foo, () => { /* ... */ })
+          c = watch?.()
+          d(watch?.())
+          e = {
+            foo: watch?.()
+          }
+          f = [watch?.()]
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {watchEffect} from 'vue'
+      watchEffect(() => { /* ... */ })
+      await doSomething()
+      </script>
+      `,
+      languageOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      await doSomething()
+      </script>
+      <script>
+      import {watchEffect} from 'vue'
+      watchEffect(() => { /* ... */ }) // not error
+      </script>
+      `,
+      languageOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      </script>
+      <script>
+      import {watchEffect} from 'vue'
+      await doSomething()
+      watchEffect(() => { /* ... */ }) // not error
+      </script>
+      `,
+      languageOptions: { ecmaVersion: 2022 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      import {watch} from 'vue'
+      watch(foo, () => { /* ... */ })
+
+      await doSomething()
+
+      watch(foo, () => { /* ... */ })
+      </script>
+      `,
+      languageOptions: { ecmaVersion: 2022 }
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          watch(foo, () => { /* ... */ }) // error
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: '`watch` is forbidden after an `await` expression.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 42
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch, watchEffect} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          watchEffect(() => { /* ... */ })
+          watch(foo, () => { /* ... */ })
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'forbidden',
+          line: 8
+        },
+        {
+          messageId: 'forbidden',
+          line: 9
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      import {watch} from 'vue'
+      export default {
+        async setup() {
+          await doSomething()
+
+          watch(foo, () => { /* ... */ })
+
+          await doSomething()
+
+          watch(foo, () => { /* ... */ })
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          messageId: 'forbidden',
+          line: 8
+        },
+        {
+          messageId: 'forbidden',
+          line: 12
+        }
+      ]
+    }
+  ]
+})
