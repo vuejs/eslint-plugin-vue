@@ -184,7 +184,7 @@ class DocFile {
   }
 
   updateFooter() {
-    const { name, meta } = this.rule
+    const { name, ext, meta } = this.rule
     const footerPattern = /## (?::mag: Implementation|:rocket: Version).+$/s
     const footer = `${
       this.since
@@ -196,7 +196,7 @@ This rule was introduced in eslint-plugin-vue ${this.since}
         : ''
     }## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}${ext})
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.test.ts)
 ${
   meta.docs.extensionSource

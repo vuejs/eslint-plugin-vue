@@ -26,7 +26,8 @@ import meta from './meta.ts'
 import processor from './processor.ts'
 ${rules
   .map(
-    (rule) => `import ${camelCase(rule.name)} from './rules/${rule.name}.js'`
+    (rule) =>
+      `import ${camelCase(rule.name)} from './rules/${rule.name}${rule.ext}'`
   )
   .join('\n')}
 
