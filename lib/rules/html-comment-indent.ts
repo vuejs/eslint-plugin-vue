@@ -2,16 +2,13 @@
  * @author Yosuke ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { defineVisitor } from '../utils/html-comments.ts'
 
-const htmlComments = require('../utils/html-comments')
-
-/**
- * Normalize options.
- * @param {number|"tab"|undefined} type The type of indentation.
- * @returns { { indentChar: string, indentSize: number, indentText: string } } Normalized options.
- */
-function parseOptions(type) {
+function parseOptions(type: number | 'tab' | undefined): {
+  indentChar: string
+  indentSize: number
+  indentText: string
+} {
   const ret = {
     indentChar: ' ',
     indentSize: 2,
@@ -29,11 +26,7 @@ function parseOptions(type) {
   return ret
 }
 
-/**
- * @param {string} s
- * @param {string} [unitChar]
- */
-function toDisplay(s, unitChar) {
+function toDisplay(s: string, unitChar?: string) {
   if (s.length === 0 && unitChar) {
     return `0 ${toUnit(unitChar)}s`
   }
@@ -45,8 +38,7 @@ function toDisplay(s, unitChar) {
   return JSON.stringify(s)
 }
 
-/** @param {string} char */
-function toUnit(char) {
+function toUnit(char: string) {
   if (char === '\t') {
     return 'tab'
   }
@@ -56,7 +48,7 @@ function toUnit(char) {
   return JSON.stringify(char)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
 
@@ -84,11 +76,10 @@ module.exports = {
         'Expected relative indentation of {{expected}} but found {{actual}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = parseOptions(context.options[0])
     const sourceCode = context.sourceCode
-    return htmlComments.defineVisitor(
+    return defineVisitor(
       context,
       null,
       (comment) => {
@@ -118,20 +109,16 @@ module.exports = {
 
     /**
      * Checks whether the given line is a blank line.
-     * @param {number} line The number of line. Begins with 1.
-     * @returns {boolean} `true` if the given line is a blank line
      */
-    function isEmptyLine(line) {
+    function isEmptyLine(line: number): boolean {
       const lineText = sourceCode.getLines()[line - 1]
       return !lineText.trim()
     }
 
     /**
      * Get the actual indentation of the given line.
-     * @param {number} line The number of line. Begins with 1.
-     * @returns {string} The actual indentation text
      */
-    function getLineIndentText(line) {
+    function getLineIndentText(line: number) {
       const lineText = sourceCode.getLines()[line - 1]
       const charIndex = lineText.search(/\S/)
       // already checked
@@ -143,12 +130,12 @@ module.exports = {
 
     /**
      * Define the function which fixes the problem.
-     * @param {number} line The number of line.
-     * @param {string} actualIndentText The actual indentation text.
-     * @param {string} expectedIndentText The expected indentation text.
-     * @returns { (fixer: RuleFixer) => Fix } The defined function.
      */
-    function defineFix(line, actualIndentText, expectedIndentText) {
+    function defineFix(
+      line: number,
+      actualIndentText: string,
+      expectedIndentText: string
+    ): (fixer: RuleFixer) => Fix {
       return (fixer) => {
         const start = sourceCode.getIndexFromLoc({
           line,
@@ -163,11 +150,12 @@ module.exports = {
 
     /**
      * Validate the indentation of a line.
-     * @param {number} line The number of line. Begins with 1.
-     * @param {string} baseIndentText The expected base indentation text.
-     * @param {number} offset The number of the indentation offset.
      */
-    function validateIndentForLine(line, baseIndentText, offset) {
+    function validateIndentForLine(
+      line: number,
+      baseIndentText: string,
+      offset: number
+    ) {
       if (isEmptyLine(line)) {
         return
       }
