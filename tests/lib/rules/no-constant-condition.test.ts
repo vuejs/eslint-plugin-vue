@@ -2,7 +2,7 @@
  * @author Flo Edelmann
  */
 import { RuleTester } from '../../eslint-compat'
-import rule from '../../../lib/rules/no-constant-condition.js'
+import rule from '../../../lib/rules/no-constant-condition'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

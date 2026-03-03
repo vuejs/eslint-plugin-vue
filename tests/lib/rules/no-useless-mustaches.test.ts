@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import { RuleTester } from '../../eslint-compat'
-import rule from '../../../lib/rules/no-useless-mustaches.js'
+import rule from '../../../lib/rules/no-useless-mustaches'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

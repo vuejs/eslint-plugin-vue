@@ -25,10 +25,6 @@ const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/script-indent/')
  *
  * If a test has some ignored line, we can't use the mechanism.
  * So `additionalValid` and `additionalInvalid` exist for asymmetry test cases.
- *
- * @param {object[]} additionalValid The array of additional valid patterns.
- * @param {object[]} additionalInvalid The array of additional invalid patterns.
- * @returns {object} The loaded patterns.
  */
 function loadPatterns(
   additionalValid: ESLintRuleTester.ValidTestCase[],

@@ -1,5 +1,5 @@
 import { RuleTester } from '../../eslint-compat'
-import rule from '../../../lib/rules/no-deprecated-slot-attribute.js'
+import rule from '../../../lib/rules/no-deprecated-slot-attribute'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({

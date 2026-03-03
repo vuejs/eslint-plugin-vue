@@ -5,7 +5,7 @@
 import type { Linter } from 'eslint'
 import rule from '../../../lib/rules/no-reserved-component-names'
 import { RuleTester } from '../../eslint-compat'
-import htmlElements from '../../../lib/utils/html-elements.json'
+import htmlElements from '../../../lib/utils/html-elements.json' with { type: 'json' }
 import vueEslintParser from 'vue-eslint-parser'
 
 const RESERVED_NAMES_IN_HTML = new Set([

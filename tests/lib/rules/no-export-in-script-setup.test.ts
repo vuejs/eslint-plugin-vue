@@ -6,7 +6,7 @@ import semver from 'semver'
 import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-export-in-script-setup'
 import vueEslintParser from 'vue-eslint-parser'
-import typescriptPackageJson from 'typescript/package.json'
+import typescriptPackageJson from 'typescript/package.json' with { type: 'json' }
 
 const ruleTester = new RuleTester({
   languageOptions: {

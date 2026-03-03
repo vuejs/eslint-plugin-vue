@@ -6,14 +6,6 @@ import rule from '../../../lib/rules/no-this-in-before-route-enter'
 import { RuleTester } from '../../eslint-compat'
 import vueEslintParser from 'vue-eslint-parser'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
 const template = (beforeRouteEnter: string): string => `
 <template>
   <p>{{ greeting }} World!</p>

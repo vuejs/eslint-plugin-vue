@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import { RuleTester } from '../../eslint-compat'
-import rule from '../../../lib/rules/no-useless-v-bind.js'
+import rule from '../../../lib/rules/no-useless-v-bind'
 import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
