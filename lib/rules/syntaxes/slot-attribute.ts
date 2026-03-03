@@ -2,23 +2,20 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import canConvertToVSlot from './utils/can-convert-to-v-slot'
+import { toRegExpGroupMatcher } from '../../utils/regexp.ts'
+import casing from '../../utils/casing'
+import { isVElement } from '../../utils'
 
-const canConvertToVSlot = require('./utils/can-convert-to-v-slot')
-const regexp = require('../../utils/regexp.ts')
-const casing = require('../../utils/casing')
-const { isVElement } = require('../../utils')
-
-module.exports = {
+export default {
   deprecated: '2.6.0',
   supported: '<3.0.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createTemplateBodyVisitor(context) {
-    /** @type {{ ignore: string[], ignoreParents: string[] }} */
-    const options = context.options[0] || {}
+  createTemplateBodyVisitor(context: RuleContext): TemplateListener {
+    const options: { ignore: string[]; ignoreParents: string[] } =
+      context.options[0] || {}
     const { ignore = [], ignoreParents = [] } = options
-    const isAnyIgnored = regexp.toRegExpGroupMatcher(ignore)
-    const isParentIgnored = regexp.toRegExpGroupMatcher(ignoreParents)
+    const isAnyIgnored = toRegExpGroupMatcher(ignore)
+    const isParentIgnored = toRegExpGroupMatcher(ignoreParents)
 
     const sourceCode = context.sourceCode
     const tokenStore =
@@ -27,10 +24,8 @@ module.exports = {
 
     /**
      * Checks whether the given node can convert to the `v-slot`.
-     * @param {VAttribute} slotAttr node of `slot`
-     * @returns {boolean} `true` if the given node can convert to the `v-slot`
      */
-    function canConvertFromSlotToVSlot(slotAttr) {
+    function canConvertFromSlotToVSlot(slotAttr: VAttribute): boolean {
       if (!canConvertToVSlot(slotAttr.parent.parent, sourceCode, tokenStore)) {
         return false
       }
@@ -44,10 +39,8 @@ module.exports = {
 
     /**
      * Checks whether the given node can convert to the `v-slot`.
-     * @param {VDirective} slotAttr node of `v-bind:slot`
-     * @returns {boolean} `true` if the given node can convert to the `v-slot`
      */
-    function canConvertFromVBindSlotToVSlot(slotAttr) {
+    function canConvertFromVBindSlotToVSlot(slotAttr: VDirective): boolean {
       if (!canConvertToVSlot(slotAttr.parent.parent, sourceCode, tokenStore)) {
         return false
       }
@@ -66,13 +59,13 @@ module.exports = {
 
     /**
      * Convert to `v-slot`.
-     * @param {RuleFixer} fixer fixer
-     * @param {VAttribute|VDirective} slotAttr node of `slot`
-     * @param {string | null} slotName name of `slot`
-     * @param {boolean} vBind `true` if `slotAttr` is `v-bind:slot`
-     * @returns {IterableIterator<Fix>} fix data
      */
-    function* fixSlotToVSlot(fixer, slotAttr, slotName, vBind) {
+    function* fixSlotToVSlot(
+      fixer: RuleFixer,
+      slotAttr: VAttribute | VDirective,
+      slotName: string | null,
+      vBind: boolean
+    ): IterableIterator<Fix> {
       const startTag = slotAttr.parent
       const scopeAttr = startTag.attributes.find(
         (attr) =>
@@ -121,10 +114,8 @@ module.exports = {
     }
     /**
      * Reports `slot` node
-     * @param {VAttribute} slotAttr node of `slot`
-     * @returns {void}
      */
-    function reportSlot(slotAttr) {
+    function reportSlot(slotAttr: VAttribute): void {
       const component = slotAttr.parent.parent
       const componentName = component.rawName
 
@@ -159,10 +150,8 @@ module.exports = {
     }
     /**
      * Reports `v-bind:slot` node
-     * @param {VDirective} slotAttr node of `v-bind:slot`
-     * @returns {void}
      */
-    function reportVBindSlot(slotAttr) {
+    function reportVBindSlot(slotAttr: VDirective): void {
       context.report({
         node: slotAttr.key,
         messageId: 'forbiddenSlotAttribute',

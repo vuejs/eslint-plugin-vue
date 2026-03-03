@@ -2,12 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import slotAttribute from './syntaxes/slot-attribute.ts'
 
-const utils = require('../utils')
-const slotAttribute = require('./syntaxes/slot-attribute')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -39,8 +37,7 @@ module.exports = {
       forbiddenSlotAttribute: '`slot` attributes are deprecated.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const templateBodyVisitor = slotAttribute.createTemplateBodyVisitor(context)
     return utils.defineTemplateBodyVisitor(context, templateBodyVisitor)
   }
