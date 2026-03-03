@@ -275,6 +275,18 @@ export default typegen([
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-namespace': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true
+        }
+      ],
       '@typescript-eslint/triple-slash-reference': 'off',
       '@typescript-eslint/unified-signatures': 'off',
       '@typescript-eslint/ban-ts-comment': [
