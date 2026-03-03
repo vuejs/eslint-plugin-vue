@@ -1,0 +1,2311 @@
+/**
+ * @author Yosuke Ota
+ * See LICENSE file in root directory for full license.
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/require-explicit-emits'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: {
+    parser: vueEslintParser,
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
+})
+
+tester.run('require-explicit-emits', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('welcome')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome']
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('welcome')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome:null}
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('welcome')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome(){}}
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            this.$emit('welcome')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            const vm = this
+            vm.$emit('welcome')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, context) {
+          context.emit('welcome')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, {emit}) {
+          emit('welcome')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(props, context) {
+          context.emit = 'foo'
+          context='foo'
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(props, {emit}) {
+          emit='foo'
+        }
+      }
+      </script>
+      `
+    },
+    // quoted
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('welcome')"/>
+      </template>
+      <script>
+      export default {
+        'emits': ['welcome']
+      }
+      </script>
+      `
+    },
+    // unknown
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome']
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            $emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            this.bar.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, ...context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, [emit]) {
+          emit('foo')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, {$emit}) {
+          $emit('foo')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit(foo)"/>
+        <div @click="$emit()"/>
+        <div @click="$emit(1)"/>
+        <div @click="$emit(true)"/>
+        <div @click="$emit(null)"/>
+        <div @click="$emit(/regex/)"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome']
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, context) {
+          context.emit(foo)
+          context.emit()
+          context.emit(1)
+          context.emit(true)
+          context.emit(null)
+          context.emit(/regex/)
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            this.$emit(foo)
+            this.$emit()
+            this.$emit(1)
+            this.$emit(true)
+            this.$emit(null)
+            this.$emit(/regex/)
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, context) {
+          context.fire('foo')
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            this.$fire('foo')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      function fn() {
+        this.$emit('foo')
+      }
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup: ((p, context) => {
+          context.emit('foo')
+        })()
+      }
+      </script>
+      `
+    },
+    // allowProps
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['onFoo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+
+    // <script setup>
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo'])
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null})
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<{
+        (e: 'foo'): void
+      }>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo' | 'bar') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('foo')"/>
+        <div @click="emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo' | 'bar') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+
+    // unknown emits definition
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: unknown,
+        setup(_, {emit}) {
+          emit('bar')
+        },
+        methods: {
+          click() {
+            this.$emit('baz')
+          }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      const emit = defineEmits(unknown)
+      emit('bar')
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {...foo}
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: [foo]
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: [...foo]
+      }
+      </script>
+      `
+    },
+
+    // unknown props definition
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: unknown,
+        methods: {
+          fn() { this.$emit('bar') }
+        },
+        setup(p, ctx) {
+          ctx.emit('baz')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      defineProps(unknown)
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: [foo],
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: [...foo],
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<{foo: [], bar:[number]}>()
+      emit('foo')
+      emit('bar', 42)
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type Emits = {foo: [], bar:[number]}
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar', 42)
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as Emits} from './test01'
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      emit('baz')
+      </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 3,
+          column: 28,
+          messageId: 'missing',
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+emits: ['foo']
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome'],
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 3,
+          column: 28,
+          messageId: 'missing',
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome:null}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 3,
+          column: 28,
+          messageId: 'missing',
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome:null, 'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome(){}}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 3,
+          column: 28,
+          messageId: 'missing',
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: {welcome(){}, 'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 7,
+          column: 24,
+          messageId: 'missing',
+          endLine: 7,
+          endColumn: 29,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        methods: {
+          onClick() {
+            const vm = this
+            vm.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 8,
+          column: 22,
+          messageId: 'missing',
+          endLine: 8,
+          endColumn: 27,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+        methods: {
+          onClick() {
+            const vm = this
+            vm.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 6,
+          column: 24,
+          messageId: 'missing',
+          endLine: 6,
+          endColumn: 29,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, {emit}) {
+          emit('foo')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 6,
+          column: 16,
+          messageId: 'missing',
+          endLine: 6,
+          endColumn: 21,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+        setup(p, {emit}) {
+          emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        emits: ['welcome'],
+        setup(p, {emit:fire}) {
+          fire('foo')
+          fire('bar')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          line: 6,
+          column: 16,
+          messageId: 'missing',
+          endLine: 6,
+          endColumn: 21,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'foo'],
+        setup(p, {emit:fire}) {
+          fire('foo')
+          fire('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          line: 7,
+          column: 16,
+          messageId: 'missing',
+          endLine: 7,
+          endColumn: 21,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `emits` option.',
+              output: `
+      <script>
+      export default {
+        emits: ['welcome', 'bar'],
+        setup(p, {emit:fire}) {
+          fire('foo')
+          fire('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {}
+      export default Foo
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {
+emits: ['foo']
+}
+      export default Foo
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {
+emits: {'foo': null}
+}
+      export default Foo
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {emits:{}}
+      export default {
+        emits: {}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {emits:{}}
+      export default {
+        emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {emits: {}}
+      export default { emits: {} }
+      // @vue/component
+      const Bar = {emits: {}}
+      </script>
+      `,
+      errors: [
+        {
+          line: 3,
+          column: 28,
+          messageId: 'missing',
+          endLine: 3,
+          endColumn: 33,
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      // @vue/component
+      const Foo = {emits: {}}
+      export default { emits: {'foo': null} }
+      // @vue/component
+      const Bar = {emits: {}}
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            setup(p, {emit}) {
+              emit('bar')
+            }
+          }
+        },
+        emits: ['bar'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            setup(p, {emit}) {
+              emit('bar')
+            }
+          }
+        },
+        emits: ['bar', 'foo'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo', 'bar'],
+            setup(p, {emit}) {
+              emit('bar')
+            }
+          }
+        },
+        emits: ['bar'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            setup(p, {emit}) {
+              emit('bar')
+            }
+          }
+        },
+        emits: ['bar', 'foo'],
+        setup(p, context) {
+          context.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            methods: {
+              onClick() {
+                this.$emit('bar')
+              }
+            }
+          }
+        },
+        emits: ['bar'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            methods: {
+              onClick() {
+                this.$emit('bar')
+              }
+            }
+          }
+        },
+        emits: ['bar', 'foo'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo', 'bar'],
+            methods: {
+              onClick() {
+                this.$emit('bar')
+              }
+            }
+          }
+        },
+        emits: ['bar'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        components: {
+          // @vue/component
+          Foo: {
+            emits: ['foo'],
+            methods: {
+              onClick() {
+                this.$emit('bar')
+              }
+            }
+          }
+        },
+        emits: ['bar', 'foo'],
+        methods: {
+          onClick() {
+            this.$emit('foo')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: []
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the "foo" to `emits` option.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        emits: ['foo']
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        props: {}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        props: {},
+emits: ['foo']
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        props: {},
+emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+        watch: {}
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: ['foo'],
+        watch: {}
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: {'foo': null},
+        watch: {}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: ['foo'],
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: {'foo': null},
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: ''
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: ['foo']
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        name: '',
+emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        ...foo
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        ...foo,
+emits: ['foo']
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        ...foo,
+emits: {'foo': null}
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        methods: {
+          click () {
+            const vm = this
+            vm?.$emit?.('foo')
+            ;(vm?.$emit)?.('bar')
+          }
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: ['foo'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <script>
+      export default {
+emits: {'foo': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `emits` option.',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: ['bar'],
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "bar" event.',
+              output: `
+      <script>
+      export default {
+emits: {'bar': null},
+        setup(p, c) {
+          c?.emit?.('foo')
+          ;(c?.emit)?.('bar')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    // allowProps
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `,
+      options: [{ allowProps: true }],
+      errors: [
+        {
+          line: 3,
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          line: 9,
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        },
+        {
+          line: 12,
+          messageId: 'missing',
+          suggestions: [
+            {
+              desc: 'Add the `emits` option with array syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: ['foo'],
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            },
+            {
+              desc: 'Add the `emits` option with object syntax and define "foo" event.',
+              output: `
+      <template>
+        <button @click="$emit('foo')"/>
+      </template>
+      <script>
+      export default {
+        props: ['foo'],
+emits: {'foo': null},
+        methods: {
+          fn() { this.$emit('foo') }
+        },
+        setup(p, ctx) {
+          ctx.emit('foo')
+        }
+      }
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+
+    // <script setup>
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo'])
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits(['foo', 'bar'])
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null})
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup>
+      defineEmits({foo:null, 'bar': null})
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<{
+        (e: 'foo'): void
+      }>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="$emit('foo')"/>
+      </template>
+      <script setup>
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "foo" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo') => void>()
+      emit('foo');
+      emit('bar')
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits([\`foo\`])
+      emit(\`foo\`);
+      emit(\`bar\`)
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5,
+          suggestions: [
+            {
+              desc: 'Add the "bar" to `defineEmits`.',
+              output: `
+      <script setup>
+      const emit = defineEmits([\`foo\`, 'bar'])
+      emit(\`foo\`);
+      emit(\`bar\`)
+      </script>
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      const emit = defineEmits<{foo: []}>()
+      emit('foo')
+      emit('bar')
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 5
+        }
+      ]
+    },
+    {
+      // new syntax in Vue 3.3
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      type Emits = {foo: []}
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 6
+        }
+      ]
+    },
+    {
+      code: `
+      <script setup lang="ts">
+      import {Emits1 as Emits} from './test01'
+      const emit = defineEmits<Emits>()
+      emit('foo')
+      emit('bar')
+      emit('baz')
+      emit('qux')
+      </script>`,
+      errors: [
+        {
+          message:
+            'The "qux" event has been triggered but not declared on `defineEmits`.',
+          line: 8
+        }
+      ],
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <div @click="emit('bar')"/>
+      </template>
+      <script setup lang="ts">
+      const emit = defineEmits<(e: 'foo') => void>()
+      </script>
+      `,
+      languageOptions: {
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      },
+      errors: [
+        {
+          message:
+            'The "bar" event has been triggered but not declared on `defineEmits`.',
+          line: 3
+        }
+      ]
+    }
+  ]
+})

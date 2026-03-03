@@ -2,14 +2,8 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    include: ['tests/lib/**/*.{js,ts}', 'tests/integrations/**/*.{js,ts}'],
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      'tests/fixtures/**',
-      'tests/integrations/flat-config/eslint.config.js',
-      'tests/lib/rules/no-unsupported-features/utils.js'
-    ],
+    include: ['tests/lib/**/*.test.ts', 'tests/integrations/**/*.test.ts'],
+    exclude: ['**/node_modules/**', '**/dist/**', 'tests/fixtures/**'],
     testTimeout: 60_000,
     globals: true,
     coverage: {

@@ -1,4 +1,5 @@
 import {
+  ESLint as RawESLint,
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
   Linter as ESLintLinter
@@ -6,6 +7,14 @@ import {
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
+
+export class ESLint extends RawESLint {}
+
+export namespace ESLint {
+  interface Plugin extends Omit<RawESLint.Plugin, 'rules'> {
+    rules?: Record<string, Rule.RuleModule>
+  }
+}
 
 export namespace AST {
   type Token = VNODE.Token
@@ -314,6 +323,10 @@ export namespace Rule {
 
   interface RuleMetaData extends ESLintRule.RuleMetaData {
     docs: Required<ESLintRule.RuleMetaData>['docs']
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    fixable?: ESLintRule.RuleMetaData['fixable'] | (string & {}) | null
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    type?: ESLintRule.RuleMetaData['type'] | (string & {}) | null
   }
 
   interface RuleContext {
@@ -380,9 +393,47 @@ export namespace Rule {
   }
 }
 
-export class RuleTester extends ESLintRuleTester {}
-export class Linter {
+export class RuleTester extends ESLintRuleTester {
+  constructor(config?: Linter.Config)
+
+  run(
+    name: string,
+    rule: Rule.RuleModule,
+    tests: {
+      valid: Array<string | RuleTester.ValidTestCase>
+      invalid: RuleTester.InvalidTestCase[]
+    }
+  ): void
+}
+
+export namespace RuleTester {
+  type ValidTestCase = ESLintRuleTester.ValidTestCase
+  type InvalidTestCase = ESLintRuleTester.InvalidTestCase
+  type TestCaseError = ESLintRuleTester.TestCaseError
+}
+
+export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
+  verify(
+    code: SourceCode | string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.LintMessage[]
+  verify(
+    code: SourceCode | string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.LintOptions
+  ): Linter.LintMessage[]
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.FixReport
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.FixOptions
+  ): Linter.FixReport
 }
 
 export namespace Linter {
@@ -390,6 +441,10 @@ export namespace Linter {
   type LintOptions = ESLintLinter.LintOptions
   type LegacyConfig = ESLintLinter.LegacyConfig
   type FlatConfig = ESLintLinter.FlatConfig
+  type LanguageOptions = ESLintLinter.LanguageOptions
+  interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
+    plugins?: Record<string, ESLint.Plugin>
+  }
 }
 export type ReportDescriptorFix = (
   fixer: Rule.RuleFixer

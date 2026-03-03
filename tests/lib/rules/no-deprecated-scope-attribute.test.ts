@@ -1,0 +1,103 @@
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-deprecated-scope-attribute'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
+})
+
+tester.run('no-deprecated-scope-attribute', rule, {
+  valid: [
+    `<template>
+      <LinkList>
+        <a v-slot:name />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a #name />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a v-slot="{a}" />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a #default="{a}" />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a slot="name" />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a slot-scope="{a}" />
+      </LinkList>
+    </template>`,
+    `<template>
+      <LinkList>
+        <a />
+      </LinkList>
+    </template>`
+  ],
+  invalid: [
+    {
+      code: `
+      <template>
+        <LinkList>
+          <template scope="{a}">
+            <a />
+          </template>
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <template slot-scope="{a}">
+            <a />
+          </template>
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`scope` attributes are deprecated.',
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <LinkList>
+          <template slot="name" scope="{a}">
+            <a />
+          </template>
+        </LinkList>
+      </template>`,
+      output: `
+      <template>
+        <LinkList>
+          <template slot="name" slot-scope="{a}">
+            <a />
+          </template>
+        </LinkList>
+      </template>`,
+      errors: [
+        {
+          message: '`scope` attributes are deprecated.',
+          line: 4,
+          column: 33,
+          endLine: 4,
+          endColumn: 38
+        }
+      ]
+    }
+  ]
+})
