@@ -2,15 +2,10 @@
  * @author Yosuke ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ParsedHTMLComment } from '../utils/html-comments.ts'
+import { defineVisitor } from '../utils/html-comments.ts'
 
-const htmlComments = require('../utils/html-comments')
-
-/**
- * @typedef { import('../utils/html-comments').ParsedHTMLComment } ParsedHTMLComment
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'layout',
 
@@ -46,11 +41,10 @@ module.exports = {
       unexpectedBeforeHTMLCommentOpen: "Unexpected space before '-->'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     // Unless the first option is never, require a space
     const requireSpace = context.options[0] !== 'never'
-    return htmlComments.defineVisitor(
+    return defineVisitor(
       context,
       context.options[1],
       (comment) => {
@@ -62,10 +56,8 @@ module.exports = {
 
     /**
      * Reports the space before the contents of a given comment if it's invalid.
-     * @param {ParsedHTMLComment} comment - comment data.
-     * @returns {void}
      */
-    function checkCommentOpen(comment) {
+    function checkCommentOpen(comment: ParsedHTMLComment): void {
       const { value, openDecoration, open } = comment
       if (!value) {
         return
@@ -116,10 +108,8 @@ module.exports = {
 
     /**
      * Reports the space after the contents of a given comment if it's invalid.
-     * @param {ParsedHTMLComment} comment - comment data.
-     * @returns {void}
      */
-    function checkCommentClose(comment) {
+    function checkCommentClose(comment: ParsedHTMLComment): void {
       const { value, closeDecoration, close } = comment
       if (!value) {
         return
