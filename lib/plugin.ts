@@ -90,7 +90,7 @@ import noDeprecatedSlotScopeAttribute from './rules/no-deprecated-slot-scope-att
 import noDeprecatedVBindSync from './rules/no-deprecated-v-bind-sync.js'
 import noDeprecatedVIs from './rules/no-deprecated-v-is.js'
 import noDeprecatedVOnNativeModifier from './rules/no-deprecated-v-on-native-modifier.js'
-import noDeprecatedVOnNumberModifiers from './rules/no-deprecated-v-on-number-modifiers.js'
+import noDeprecatedVOnNumberModifiers from './rules/no-deprecated-v-on-number-modifiers.ts'
 import noDeprecatedVueConfigKeycodes from './rules/no-deprecated-vue-config-keycodes.js'
 import noDupeKeys from './rules/no-dupe-keys.js'
 import noDupeVElseIf from './rules/no-dupe-v-else-if.js'
