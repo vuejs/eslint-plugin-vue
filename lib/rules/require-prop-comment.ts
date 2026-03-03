@@ -2,12 +2,11 @@
  * @author CZB
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
+import { isBlockComment, isJSDocComment } from '../utils/comments.ts'
 
-const utils = require('../utils')
-const { isBlockComment, isJSDocComment } = require('../utils/comments.js')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -34,33 +33,26 @@ module.exports = {
         'The "{{name}}" property should have a JSDoc comment.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {{type?: "JSDoc" | "line" | "block" | "any"}|undefined} */
-    const schema = context.options[0]
+  create(context: RuleContext) {
+    const schema: { type?: 'JSDoc' | 'line' | 'block' | 'any' } | undefined =
+      context.options[0]
     const type = (schema && schema.type) || 'JSDoc'
 
     const sourceCode = context.sourceCode
 
-    /** @param {Comment | undefined} comment */
-    const verifyBlock = (comment) =>
+    const verifyBlock = (comment: Comment | undefined) =>
       comment && isBlockComment(comment) ? undefined : 'requireBlockComment'
 
-    /** @param {Comment | undefined} comment */
-    const verifyLine = (comment) =>
+    const verifyLine = (comment: Comment | undefined) =>
       comment && comment.type === 'Line' ? undefined : 'requireLineComment'
 
-    /** @param {Comment | undefined} comment */
-    const verifyAny = (comment) => (comment ? undefined : 'requireAnyComment')
+    const verifyAny = (comment: Comment | undefined) =>
+      comment ? undefined : 'requireAnyComment'
 
-    /** @param {Comment | undefined} comment */
-    const verifyJSDoc = (comment) =>
+    const verifyJSDoc = (comment: Comment | undefined) =>
       comment && isJSDocComment(comment) ? undefined : 'requireJSDocComment'
 
-    /**
-     * @param {import('../utils').ComponentProp[]} props
-     */
-    function verifyProps(props) {
+    function verifyProps(props: ComponentProp[]) {
       for (const prop of props) {
         if (!prop.propName || prop.type === 'infer-type') {
           continue
@@ -69,8 +61,7 @@ module.exports = {
         const precedingComments = sourceCode.getCommentsBefore(prop.node)
         const lastPrecedingComment = precedingComments.at(-1)
 
-        /** @type {string|undefined} */
-        let messageId
+        let messageId: string | undefined
 
         switch (type) {
           case 'block': {

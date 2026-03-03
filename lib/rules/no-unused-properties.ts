@@ -2,49 +2,43 @@
  * @fileoverview Disallow unused properties, data and computed properties.
  * @author Learning Equality
  */
-'use strict'
-
-const utils = require('../utils')
-const eslintUtils = require('@eslint-community/eslint-utils')
-const { isJSDocComment } = require('../utils/comments.js')
-const { getStyleVariablesContext } = require('../utils/style-variables')
-const {
+import type { GroupName, VueObjectData } from '../utils/index.js'
+import type { IPropertyReferences } from '../utils/property-references.js'
+import utils from '../utils/index.js'
+import eslintUtils from '@eslint-community/eslint-utils'
+import { isJSDocComment } from '../utils/comments.ts'
+import { getStyleVariablesContext } from '../utils/style-variables/index.js'
+import {
   definePropertyReferenceExtractor,
   mergePropertyReferences
-} = require('../utils/property-references')
+} from '../utils/property-references.js'
 
-/**
- * @typedef {import('../utils').GroupName} GroupName
- * @typedef {import('../utils').VueObjectData} VueObjectData
- * @typedef {import('../utils/property-references').IPropertyReferences} IPropertyReferences
- */
+interface ComponentObjectPropertyData {
+  name: string
+  groupName: GroupName
+  type: 'object'
+  node: ASTNode
+  property: Property
+}
+interface ComponentNonObjectPropertyData {
+  name: string
+  groupName: GroupName
+  type: 'array' | 'type' | 'infer-type' | 'model'
+  node: ASTNode
+}
+type ComponentPropertyData =
+  | ComponentNonObjectPropertyData
+  | ComponentObjectPropertyData
 
-/**
- * @typedef {object} ComponentObjectPropertyData
- * @property {string} name
- * @property {GroupName} groupName
- * @property {'object'} type
- * @property {ASTNode} node
- * @property {Property} property
- *
- * @typedef {object} ComponentNonObjectPropertyData
- * @property {string} name
- * @property {GroupName} groupName
- * @property {'array' | 'type' | 'infer-type' | 'model' } type
- * @property {ASTNode} node
- *
- * @typedef { ComponentNonObjectPropertyData | ComponentObjectPropertyData } ComponentPropertyData
- */
-
-/**
- * @typedef {object} TemplatePropertiesContainer
- * @property {IPropertyReferences[]} propertyReferences
- * @property {Set<string>} refNames
- * @typedef {object} VueComponentPropertiesContainer
- * @property {ComponentPropertyData[]} properties
- * @property {IPropertyReferences[]} propertyReferences
- * @property {IPropertyReferences[]} propertyReferencesForProps
- */
+interface TemplatePropertiesContainer {
+  propertyReferences: IPropertyReferences[]
+  refNames: Set<string>
+}
+interface VueComponentPropertiesContainer {
+  properties: ComponentPropertyData[]
+  propertyReferences: IPropertyReferences[]
+  propertyReferencesForProps: IPropertyReferences[]
+}
 
 const GROUP_PROPERTY = 'props'
 const GROUP_DATA = 'data'
@@ -73,12 +67,7 @@ const PROPERTY_LABEL = {
   expose: 'expose'
 }
 
-/**
- * @param {RuleContext} context
- * @param {Identifier} id
- * @returns {Expression}
- */
-function findExpression(context, id) {
+function findExpression(context: RuleContext, id: Identifier): Expression {
   const variable = utils.findVariableByIdentifier(context, id)
   if (!variable) {
     return id
@@ -101,10 +90,11 @@ function findExpression(context, id) {
 
 /**
  * Check if the given component property is marked as `@public` in JSDoc comments.
- * @param {ComponentPropertyData} property
- * @param {SourceCode} sourceCode
  */
-function isPublicMember(property, sourceCode) {
+function isPublicMember(
+  property: ComponentPropertyData,
+  sourceCode: SourceCode
+) {
   if (
     property.type === 'object' &&
     // Props do not support @public.
@@ -117,10 +107,8 @@ function isPublicMember(property, sourceCode) {
 
 /**
  * Check if the given property node is marked as `@public` in JSDoc comments.
- * @param {Property} node
- * @param {SourceCode} sourceCode
  */
-function isPublicProperty(node, sourceCode) {
+function isPublicProperty(node: Property, sourceCode: SourceCode) {
   const jsdoc = getJSDocFromProperty(node, sourceCode)
   if (jsdoc) {
     return /(?:^|\s|\*)@public\b/u.test(jsdoc.value)
@@ -130,10 +118,8 @@ function isPublicProperty(node, sourceCode) {
 
 /**
  * Get the JSDoc comment for a given property node.
- * @param {Property} node
- * @param {SourceCode} sourceCode
  */
-function getJSDocFromProperty(node, sourceCode) {
+function getJSDocFromProperty(node: Property, sourceCode: SourceCode) {
   const jsdoc = findJSDocComment(node, sourceCode)
   if (jsdoc) {
     return jsdoc
@@ -150,13 +136,12 @@ function getJSDocFromProperty(node, sourceCode) {
 
 /**
  * Finds a JSDoc comment for the given node.
- * @param {ASTNode} node
- * @param {SourceCode} sourceCode
- * @returns {Comment | null}
  */
-function findJSDocComment(node, sourceCode) {
-  /** @type {ASTNode | Token} */
-  let currentNode = node
+function findJSDocComment(
+  node: ASTNode,
+  sourceCode: SourceCode
+): Comment | null {
+  let currentNode: ASTNode | Token = node
   let tokenBefore = null
 
   while (currentNode) {
@@ -180,7 +165,7 @@ function findJSDocComment(node, sourceCode) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -226,15 +211,13 @@ module.exports = {
       unused: "'{{name}}' of {{group}} found, but never used."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    const groups = new Set(options.groups || [GROUP_PROPERTY])
+    const groups = new Set<GroupName>(options.groups || [GROUP_PROPERTY])
     const deepData = Boolean(options.deepData)
     const ignorePublicMembers = Boolean(options.ignorePublicMembers)
     const unreferencedOptions = new Set(options.unreferencedOptions || [])
-    /** @type {null | Pattern} */
-    let propsReferencePattern = null
+    let propsReferencePattern: null | Pattern = null
 
     const propertyReferenceExtractor = definePropertyReferenceExtractor(
       context,
@@ -246,19 +229,18 @@ module.exports = {
       }
     )
 
-    /** @type {TemplatePropertiesContainer} */
-    const templatePropertiesContainer = {
+    const templatePropertiesContainer: TemplatePropertiesContainer = {
       propertyReferences: [],
       refNames: new Set()
     }
-    /** @type {Map<ASTNode, VueComponentPropertiesContainer>} */
-    const vueComponentPropertiesContainerMap = new Map()
+    const vueComponentPropertiesContainerMap = new Map<
+      ASTNode,
+      VueComponentPropertiesContainer
+    >()
 
-    /**
-     * @param {ASTNode} node
-     * @returns {VueComponentPropertiesContainer}
-     */
-    function getVueComponentPropertiesContainer(node) {
+    function getVueComponentPropertiesContainer(
+      node: ASTNode
+    ): VueComponentPropertiesContainer {
       let container = vueComponentPropertiesContainerMap.get(node)
       if (!container) {
         container = {
@@ -271,15 +253,10 @@ module.exports = {
       return container
     }
 
-    /**
-     * @param {string[]} segments
-     * @param {Expression} propertyValue
-     * @param {IPropertyReferences} propertyReferences
-     */
     function verifyDataOptionDeepProperties(
-      segments,
-      propertyValue,
-      propertyReferences
+      segments: string[],
+      propertyValue: Expression,
+      propertyReferences: IPropertyReferences
     ) {
       let targetExpr = propertyValue
       if (targetExpr.type === 'Identifier') {
@@ -385,11 +362,7 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {Expression} node
-     * @returns {Property|null}
-     */
-    function getParentProperty(node) {
+    function getParentProperty(node: Expression): Property | null {
       if (
         !node.parent ||
         node.parent.type !== 'Property' ||
@@ -490,14 +463,9 @@ module.exports = {
         }
       }),
       utils.defineVueVisitor(context, {
-        /**
-         * @param {CallExpression} node
-         * @param {VueObjectData} vueData
-         */
-        CallExpression(node, vueData) {
+        CallExpression(node: CallExpression, vueData: VueObjectData) {
           if (node.callee.type !== 'Identifier') return
-          /** @type {'methods'|'computed'|null} */
-          let groupName = null
+          let groupName: 'methods' | 'computed' | null = null
           if (/^mapMutations|mapActions$/u.test(node.callee.name)) {
             groupName = 'methods'
           } else if (
@@ -599,9 +567,10 @@ module.exports = {
           container.properties.push(...utils.iterateProperties(node, groups))
         },
 
-        /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property }} node */
         'ObjectExpression > Property > :function[params.length>0]'(
-          node,
+          node: (FunctionExpression | ArrowFunctionExpression) & {
+            parent: Property
+          },
           vueData
         ) {
           const property = getParentProperty(node)
@@ -674,11 +643,10 @@ module.exports = {
             )
           }
         },
-        /**
-         * @param {ThisExpression | Identifier} node
-         * @param {VueObjectData} vueData
-         */
-        'ThisExpression, Identifier'(node, vueData) {
+        'ThisExpression, Identifier'(
+          node: ThisExpression | Identifier,
+          vueData: VueObjectData
+        ) {
           if (!utils.isThis(node, context)) {
             return
           }
@@ -699,8 +667,7 @@ module.exports = {
             )
           }
         },
-        /** @param {Program} node */
-        'Program:exit'(node) {
+        'Program:exit'(node: Program) {
           if (!node.templateBody) {
             reportUnusedProperties()
           }
@@ -709,10 +676,7 @@ module.exports = {
     )
 
     const templateVisitor = {
-      /**
-       * @param {VExpressionContainer} node
-       */
-      VExpressionContainer(node) {
+      VExpressionContainer(node: VExpressionContainer) {
         const property =
           propertyReferenceExtractor.extractFromVExpressionContainer(node)
 
@@ -734,10 +698,7 @@ module.exports = {
           }
         }
       },
-      /**
-       * @param {VAttribute} node
-       */
-      'VAttribute[directive=false]'(node) {
+      'VAttribute[directive=false]'(node: VAttribute) {
         if (node.key.name === 'ref' && node.value != null) {
           templatePropertiesContainer.refNames.add(node.value.value)
         }
