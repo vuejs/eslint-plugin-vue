@@ -4,7 +4,7 @@
  */
 import type { IPropertyReferences } from '../utils/property-references.js'
 import utils from '../utils/index.js'
-import reserved from '../utils/vue-reserved.json'
+import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.js'
 import { definePropertyReferenceExtractor } from '../utils/property-references.js'
