@@ -2,50 +2,41 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const { toRegExp } = require('../utils/regexp.ts')
+interface ParsedOption {
+  test: Tester
+  message?: string
+}
+interface MatchResult {
+  next?: Tester
+  wildcard?: boolean
+  keyName: string
+}
+type Matcher = (name: string) => boolean
+type Tester = (node: Property | SpreadElement) => MatchResult | null
 
-/**
- * @typedef {object} ParsedOption
- * @property {Tester} test
- * @property {string|undefined} [message]
- */
-/**
- * @typedef {object} MatchResult
- * @property {Tester | undefined} [next]
- * @property {boolean} [wildcard]
- * @property {string} keyName
- */
-/**
- * @typedef { (name: string) => boolean } Matcher
- * @typedef { (node: Property | SpreadElement) => (MatchResult | null) } Tester
- */
-
-/**
- * @param {string | string[] | { name: string | string[], message?: string } } option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(
+  option: string | string[] | { name: string | string[]; message?: string }
+): ParsedOption {
   if (typeof option === 'string' || Array.isArray(option)) {
     return parseOption({
       name: option
     })
   }
 
-  /**
-   * @typedef {object} StepForTest
-   * @property {Matcher} test
-   * @property {undefined} [wildcard]
-   * @typedef {object} StepForWildcard
-   * @property {undefined} [test]
-   * @property {true} wildcard
-   * @typedef {StepForTest | StepForWildcard} Step
-   */
+  interface StepForTest {
+    test: Matcher
+    wildcard?: undefined
+  }
+  interface StepForWildcard {
+    wildcard: true
+    test?: undefined
+  }
+  type Step = StepForTest | StepForWildcard
 
-  /** @type {Step[]} */
-  const steps = []
+  const steps: Step[] = []
   for (const name of Array.isArray(option.name) ? option.name : [option.name]) {
     if (name === '*') {
       steps.push({ wildcard: true })
@@ -61,17 +52,12 @@ function parseOption(option) {
     message
   }
 
-  /**
-   * @param {number} index
-   * @returns {Tester}
-   */
-  function buildTester(index) {
+  function buildTester(index: number): Tester {
     const step = steps[index]
     const next = index + 1
     const needNext = steps.length > next
     return (node) => {
-      /** @type {string} */
-      let keyName
+      let keyName: string
       if (step.wildcard) {
         keyName = '*'
       } else {
@@ -94,14 +80,11 @@ function parseOption(option) {
   }
 }
 
-/**
- * @param {string[]} path
- */
-function defaultMessage(path) {
+function defaultMessage(path: string[]) {
   return `Using \`${path.join('.')}\` is not allowed.`
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -151,13 +134,11 @@ module.exports = {
       restrictedOption: '{{message}}'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     if (!context.options || context.options.length === 0) {
       return {}
     }
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+    const options: ParsedOption[] = context.options.map(parseOption)
 
     return utils.compositingVisitors(
       utils.defineVueVisitor(context, {
@@ -179,13 +160,12 @@ module.exports = {
       })
     )
 
-    /**
-     * @param {ObjectExpression} node
-     * @param {Tester} test
-     * @param {string | undefined} customMessage
-     * @param {string[]} path
-     */
-    function verify(node, test, customMessage, path = []) {
+    function verify(
+      node: ObjectExpression,
+      test: Tester,
+      customMessage: string | undefined,
+      path: string[] = []
+    ) {
       for (const prop of node.properties) {
         const result = test(prop)
         if (!result) {

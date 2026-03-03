@@ -2,21 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const { toRegExp } = require('../utils/regexp.ts')
-/**
- * @typedef {object} ParsedOption
- * @property { (block: VElement) => boolean } test
- * @property {string} [message]
- */
+interface ParsedOption {
+  test: (block: VElement) => boolean
+  message?: string
+}
 
-/**
- * @param {any} option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(option: any): ParsedOption {
   if (typeof option === 'string') {
     const matcher = toRegExp(option, { remove: 'g' })
     return {
@@ -30,14 +24,11 @@ function parseOption(option) {
   return parsed
 }
 
-/**
- * @param {VElement} block
- */
-function defaultMessage(block) {
+function defaultMessage(block: VElement) {
   return `Using \`<${block.rawName}>\` is not allowed.`
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -71,10 +62,8 @@ module.exports = {
       restrictedBlock: '{{message}}'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+  create(context: RuleContext) {
+    const options: ParsedOption[] = context.options.map(parseOption)
 
     const sourceCode = context.sourceCode
     const documentFragment =
@@ -89,8 +78,7 @@ module.exports = {
     }
 
     return {
-      /** @param {Program} node */
-      Program(node) {
+      Program(node: Program) {
         if (utils.hasInvalidEOF(node)) {
           return
         }

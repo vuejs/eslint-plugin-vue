@@ -2,19 +2,15 @@
  * @fileoverview Forbid certain classes from being used
  * @author Tao Bojlen
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const { toRegExpGroupMatcher } = require('../utils/regexp.ts')
-
-/**
- * Report a forbidden class
- * @param {string} className
- * @param {*} node
- * @param {RuleContext} context
- * @param {(name: string) => boolean} isForbiddenClass
- */
-const reportForbiddenClass = (className, node, context, isForbiddenClass) => {
+const reportForbiddenClass = (
+  className: string,
+  node: any,
+  context: RuleContext,
+  isForbiddenClass: (name: string) => boolean
+) => {
   if (isForbiddenClass(className)) {
     const loc = node.value ? node.value.loc : node.loc
     context.report({
@@ -28,12 +24,10 @@ const reportForbiddenClass = (className, node, context, isForbiddenClass) => {
   }
 }
 
-/**
- * @param {Expression} node
- * @param {boolean} [textOnly]
- * @returns {IterableIterator<{ className:string, reportNode: ESNode }>}
- */
-function* extractClassNames(node, textOnly) {
+function* extractClassNames(
+  node: Expression,
+  textOnly?: boolean
+): IterableIterator<{ className: string; reportNode: ESNode }> {
   if (node.type === 'Literal') {
     yield* `${node.value}`
       .split(/\s+/)
@@ -91,7 +85,7 @@ function* extractClassNames(node, textOnly) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -111,31 +105,28 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const { options = [] } = context
     const isForbiddenClass = toRegExpGroupMatcher(options)
 
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VAttribute & { value: VLiteral } } node
-       */
-      'VAttribute[directive=false][key.name="class"][value!=null]'(node) {
+      'VAttribute[directive=false][key.name="class"][value!=null]'(
+        node: VAttribute & { value: VLiteral }
+      ) {
         for (const className of node.value.value.split(/\s+/)) {
           reportForbiddenClass(className, node, context, isForbiddenClass)
         }
       },
 
-      /** @param {VExpressionContainer} node */
       "VAttribute[directive=true][key.name.name='bind'][key.argument.name='class'] > VExpressionContainer.value"(
-        node
+        node: VExpressionContainer
       ) {
         if (!node.expression) {
           return
         }
 
         for (const { className, reportNode } of extractClassNames(
-          /** @type {Expression} */ (node.expression)
+          node.expression as Expression
         )) {
           reportForbiddenClass(className, reportNode, context, isForbiddenClass)
         }
