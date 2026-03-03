@@ -571,7 +571,7 @@ export default {
           node: (FunctionExpression | ArrowFunctionExpression) & {
             parent: Property
           },
-          vueData
+          vueData: VueObjectData
         ) {
           const property = getParentProperty(node)
           if (!property) {
