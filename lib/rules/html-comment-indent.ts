@@ -109,6 +109,8 @@ export default {
 
     /**
      * Checks whether the given line is a blank line.
+     *
+     * @param line The number of line. Begins with 1.
      */
     function isEmptyLine(line: number): boolean {
       const lineText = sourceCode.getLines()[line - 1]
@@ -117,6 +119,8 @@ export default {
 
     /**
      * Get the actual indentation of the given line.
+     *
+     * @param line The number of line. Begins with 1.
      */
     function getLineIndentText(line: number) {
       const lineText = sourceCode.getLines()[line - 1]
@@ -150,6 +154,8 @@ export default {
 
     /**
      * Validate the indentation of a line.
+     *
+     * @param line The number of line. Begins with 1.
      */
     function validateIndentForLine(
       line: number,
