@@ -2,17 +2,13 @@
  * @author rzzf
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher } = require('../utils/regexp.ts')
-
-/**
- * @param {ObjectExpression} componentObject
- * @returns { { node: Property, name: string }[] } Array of ASTNodes
- */
-function getRegisteredDirectives(componentObject) {
+function getRegisteredDirectives(
+  componentObject: ObjectExpression
+): { node: Property; name: string }[] {
   const directivesNode = componentObject.properties.find(
     (p) =>
       p.type === 'Property' &&
@@ -31,25 +27,17 @@ function getRegisteredDirectives(componentObject) {
   return directivesNode.value.properties.flatMap((node) => {
     const name =
       node.type === 'Property' ? utils.getStaticPropertyName(node) : null
-    return name ? [{ node: /** @type {Property} */ (node), name }] : []
+    return name ? [{ node: node as Property, name }] : []
   })
 }
 
-/**
- * @param {string} rawName
- * @param {Set<string>} definedNames
- */
-function isDefinedInSetup(rawName, definedNames) {
+function isDefinedInSetup(rawName: string, definedNames: Set<string>) {
   const camelName = casing.camelCase(rawName)
   const variableName = `v${casing.capitalize(camelName)}`
   return definedNames.has(variableName)
 }
 
-/**
- * @param {string} rawName
- * @param {Set<string>} definedNames
- */
-function isDefinedInOptions(rawName, definedNames) {
+function isDefinedInOptions(rawName: string, definedNames: Set<string>) {
   const camelName = casing.camelCase(rawName)
 
   if (definedNames.has(rawName)) {
@@ -67,7 +55,7 @@ function isDefinedInOptions(rawName, definedNames) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -93,19 +81,15 @@ module.exports = {
       undef: "The 'v-{{name}}' directive has been used, but not defined."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const { ignore = [] } = options
     const isAnyIgnored = toRegExpGroupMatcher(ignore)
 
     /**
      * Check whether the given directive name is a verify target or not.
-     *
-     * @param {string} rawName The directive name.
-     * @returns {boolean}
      */
-    function isVerifyTargetDirective(rawName) {
+    function isVerifyTargetDirective(rawName: string): boolean {
       const kebabName = casing.kebabCase(rawName)
       if (
         utils.isBuiltInDirectiveName(rawName) ||
@@ -116,14 +100,11 @@ module.exports = {
       return true
     }
 
-    /**
-     * @param {(rawName: string) => boolean} isDefined
-     * @returns {TemplateListener}
-     */
-    function createTemplateBodyVisitor(isDefined) {
+    function createTemplateBodyVisitor(
+      isDefined: (rawName: string) => boolean
+    ): TemplateListener {
       return {
-        /** @param {VDirective} node */
-        'VAttribute[directive=true]'(node) {
+        'VAttribute[directive=true]'(node: VDirective) {
           const name = node.key.name.name
           if (utils.isBuiltInDirectiveName(name)) {
             return
@@ -142,13 +123,11 @@ module.exports = {
       }
     }
 
-    /** @type {Set<string>} */
-    const definedInOptionDirectives = new Set()
+    const definedInOptionDirectives = new Set<string>()
 
     if (utils.isScriptSetup(context)) {
       // For <script setup>
-      /** @type {Set<string>} */
-      const definedInSetupDirectives = new Set()
+      const definedInSetupDirectives = new Set<string>()
 
       const globalScope = context.sourceCode.scopeManager.globalScope
       if (globalScope) {
