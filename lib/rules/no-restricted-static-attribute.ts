@@ -2,24 +2,17 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const { toRegExp } = require('../utils/regexp.ts')
+interface ParsedOption {
+  test: (key: VAttribute) => boolean
+  useValue?: boolean
+  useElement?: boolean
+  message?: string
+}
 
-/**
- * @typedef {object} ParsedOption
- * @property { (key: VAttribute) => boolean } test
- * @property {boolean} [useValue]
- * @property {boolean} [useElement]
- * @property {string} [message]
- */
-
-/**
- * @param {any} option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(option: any): ParsedOption {
   if (typeof option === 'string') {
     const matcher = toRegExp(option, { remove: 'g' })
     return {
@@ -65,11 +58,7 @@ function parseOption(option) {
   return parsed
 }
 
-/**
- * @param {VAttribute} node
- * @param {ParsedOption} option
- */
-function defaultMessage(node, option) {
+function defaultMessage(node: VAttribute, option: ParsedOption) {
   const key = node.key.rawName
   let value = ''
   if (option.useValue) {
@@ -83,7 +72,7 @@ function defaultMessage(node, option) {
   return `Using \`${key + value}\`${on} is not allowed.`
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -119,19 +108,14 @@ module.exports = {
       restrictedAttr: '{{message}}'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     if (context.options.length === 0) {
       return {}
     }
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+    const options: ParsedOption[] = context.options.map(parseOption)
 
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VAttribute} node
-       */
-      'VAttribute[directive=false]'(node) {
+      'VAttribute[directive=false]'(node: VAttribute) {
         for (const option of options) {
           if (option.test(node)) {
             const message = option.message || defaultMessage(node, option)

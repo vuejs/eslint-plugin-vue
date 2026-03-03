@@ -2,27 +2,19 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const { toRegExp } = require('../utils/regexp.ts')
+interface ParsedOption {
+  test: (name: string) => boolean
+  message?: string
+  suggest?: string
+}
 
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
-
-/**
- * @typedef {object} ParsedOption
- * @property { (name: string) => boolean } test
- * @property {string|undefined} [message]
- * @property {string|undefined} [suggest]
- */
-
-/**
- * @param {string|{name:string, message?: string, suggest?:string}} option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(
+  option: string | { name: string; message?: string; suggest?: string }
+): ParsedOption {
   if (typeof option === 'string') {
     const matcher = toRegExp(option, { remove: 'g' })
     return {
@@ -37,7 +29,7 @@ function parseOption(option) {
   return parsed
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -74,16 +66,17 @@ module.exports = {
       instead: 'Instead, change to `{{suggest}}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+  create(context: RuleContext) {
+    const options: ParsedOption[] = context.options.map(parseOption)
 
-    /**
-     * @param {ComponentProp[]} props
-     * @param {(fixer: RuleFixer, propName: string, replaceKeyText: string) => Iterable<Fix>} [fixPropInOtherPlaces]
-     */
-    function processProps(props, fixPropInOtherPlaces) {
+    function processProps(
+      props: ComponentProp[],
+      fixPropInOtherPlaces?: (
+        fixer: RuleFixer,
+        propName: string,
+        replaceKeyText: string
+      ) => Iterable<Fix>
+    ) {
       for (const prop of props) {
         if (!prop.propName) {
           continue
@@ -124,14 +117,12 @@ module.exports = {
         onDefinePropsEnter(node, props) {
           processProps(props, fixPropInOtherPlaces)
 
-          /**
-           * @param {RuleFixer} fixer
-           * @param {string} propName
-           * @param {string} replaceKeyText
-           */
-          function fixPropInOtherPlaces(fixer, propName, replaceKeyText) {
-            /** @type {(Property|AssignmentProperty)[]} */
-            const propertyNodes = []
+          function fixPropInOtherPlaces(
+            fixer: RuleFixer,
+            propName: string,
+            replaceKeyText: string
+          ) {
+            const propertyNodes: (Property | AssignmentProperty)[] = []
             const withDefault = utils.getWithDefaultsProps(node)[propName]
             if (withDefault) {
               propertyNodes.push(withDefault)
@@ -160,19 +151,19 @@ module.exports = {
   }
 }
 
-/**
- * @param {Expression} node
- * @param {ParsedOption} option
- * @param {(fixer: RuleFixer, replaceKeyText: string) => Iterable<Fix>} [fixPropInOtherPlaces]
- * @returns {Rule.SuggestionReportDescriptor[]}
- */
-function createSuggest(node, option, fixPropInOtherPlaces) {
+function createSuggest(
+  node: Expression,
+  option: ParsedOption,
+  fixPropInOtherPlaces?: (
+    fixer: RuleFixer,
+    replaceKeyText: string
+  ) => Iterable<Fix>
+): Rule.SuggestionReportDescriptor[] {
   if (!option.suggest) {
     return []
   }
 
-  /** @type {string} */
-  let replaceText
+  let replaceText: string
   if (node.type === 'Literal' || node.type === 'TemplateLiteral') {
     replaceText = JSON.stringify(option.suggest)
   } else if (node.type === 'Identifier') {
