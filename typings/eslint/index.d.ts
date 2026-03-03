@@ -394,28 +394,46 @@ export namespace Rule {
 }
 
 export class RuleTester extends ESLintRuleTester {
+  constructor(config?: Linter.Config)
+
   run(
     name: string,
     rule: Rule.RuleModule,
     tests: {
-      valid: Array<string | ESLintRuleTester.ValidTestCase>
-      invalid: ESLintRuleTester.InvalidTestCase[]
+      valid: Array<string | RuleTester.ValidTestCase>
+      invalid: RuleTester.InvalidTestCase[]
     }
   ): void
+}
+
+export namespace RuleTester {
+  type ValidTestCase = ESLintRuleTester.ValidTestCase
+  type InvalidTestCase = ESLintRuleTester.InvalidTestCase
+  type TestCaseError = ESLintRuleTester.TestCaseError
 }
 
 export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
   verify(
     code: SourceCode | string,
-    config: Linter.Config | Linter.Config[],
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
     filename?: string
   ): Linter.LintMessage[]
   verify(
     code: SourceCode | string,
-    config: Linter.Config | Linter.Config[],
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
     options: Linter.LintOptions
   ): Linter.LintMessage[]
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.FixReport
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.FixOptions
+  ): Linter.FixReport
 }
 
 export namespace Linter {
