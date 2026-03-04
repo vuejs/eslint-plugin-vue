@@ -2,35 +2,32 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { findVariable } = require('@eslint-community/eslint-utils')
-const { extractRefObjectReferences } = require('../utils/ref-object-references')
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils/ref-object-references').RefObjectReferences} RefObjectReferences
- * @typedef {import('../utils/ref-object-references').RefObjectReferenceForIdentifier} RefObjectReferenceForIdentifier
- */
+import type { VueObjectData } from '../utils/index.js'
+import type {
+  RefObjectReferences,
+  RefObjectReferenceForIdentifier
+} from '../utils/ref-object-references.ts'
+import { findVariable } from '@eslint-community/eslint-utils'
+import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
+import utils from '../utils/index.js'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
- * @param {RefObjectReferenceForIdentifier | null} data
- * @returns {data is RefObjectReferenceForIdentifier}
  */
-function isRefInit(data) {
+function isRefInit(
+  data: RefObjectReferenceForIdentifier | null
+): data is RefObjectReferenceForIdentifier {
   const init = data && data.variableDeclarator && data.variableDeclarator.init
   if (!init) {
     return false
   }
-  return data.defineChain.includes(/** @type {any} */ (init))
+  return data.defineChain.includes(init as any)
 }
 
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression) {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
     const name = utils.getStringLiteralValue(nameLiteralNode)
@@ -45,9 +42,8 @@ function getNameParamNode(node) {
 
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
  */
-function getCalleeMemberNode(node) {
+function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
@@ -59,7 +55,7 @@ function getCalleeMemberNode(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -75,18 +71,17 @@ module.exports = {
         'Must use `.value` to read or write the value wrapped by `{{method}}()`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {RefObjectReferences} */
-    let refReferences
+  create(context: RuleContext) {
+    let refReferences: RefObjectReferences
     const setupContexts = new Map()
 
     /**
      * Collect identifier id
-     * @param {Identifier} node
-     * @param {Set<Identifier>} referenceIds
      */
-    function collectReferenceIds(node, referenceIds) {
+    function collectReferenceIds(
+      node: Identifier,
+      referenceIds: Set<Identifier>
+    ) {
       const variable = findVariable(utils.getScope(context, node), node)
       if (!variable) {
         return
@@ -96,10 +91,7 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {Identifier} node
-     */
-    function reportIfRefWrapped(node) {
+    function reportIfRefWrapped(node: Identifier) {
       const data = refReferences.get(node)
       if (!isRefInit(data)) {
         return
@@ -116,10 +108,7 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {CallExpression} node
-     */
-    function reportWrappedIdentifiers(node) {
+    function reportWrappedIdentifiers(node: CallExpression) {
       const nodes = node.arguments.filter((node) => node.type === 'Identifier')
       for (const node of nodes) {
         reportIfRefWrapped(node)
@@ -129,11 +118,7 @@ module.exports = {
     const programNode = context.sourceCode.ast
 
     const callVisitor = {
-      /**
-       * @param {CallExpression} node
-       * @param {import('../utils').VueObjectData} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData) {
         const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
@@ -174,41 +159,38 @@ module.exports = {
           refReferences = extractRefObjectReferences(context)
         },
         // if (refValue)
-        /** @param {Identifier} node */
-        'IfStatement>Identifier'(node) {
+        'IfStatement>Identifier'(node: Identifier) {
           reportIfRefWrapped(node)
         },
         // switch (refValue)
-        /** @param {Identifier} node */
-        'SwitchStatement>Identifier'(node) {
+        'SwitchStatement>Identifier'(node: Identifier) {
           reportIfRefWrapped(node)
         },
         // -refValue, +refValue, !refValue, ~refValue, typeof refValue
-        /** @param {Identifier} node */
-        'UnaryExpression>Identifier'(node) {
+        'UnaryExpression>Identifier'(node: Identifier) {
           reportIfRefWrapped(node)
         },
         // refValue++, refValue--
-        /** @param {Identifier} node */
-        'UpdateExpression>Identifier'(node) {
+        'UpdateExpression>Identifier'(node: Identifier) {
           reportIfRefWrapped(node)
         },
         // refValue+1, refValue-1
-        /** @param {Identifier} node */
-        'BinaryExpression>Identifier'(node) {
+        'BinaryExpression>Identifier'(node: Identifier) {
           reportIfRefWrapped(node)
         },
         // refValue+=1, refValue-=1, foo+=refValue, foo-=refValue
-        /** @param {Identifier & {parent: AssignmentExpression}} node */
-        'AssignmentExpression>Identifier'(node) {
+        'AssignmentExpression>Identifier'(
+          node: Identifier & { parent: AssignmentExpression }
+        ) {
           if (node.parent.operator === '=' && node.parent.left !== node) {
             return
           }
           reportIfRefWrapped(node)
         },
         // refValue || other, refValue && other. ignore: other || refValue
-        /** @param {Identifier & {parent: LogicalExpression}} node */
-        'LogicalExpression>Identifier'(node) {
+        'LogicalExpression>Identifier'(
+          node: Identifier & { parent: LogicalExpression }
+        ) {
           if (node.parent.left !== node) {
             return
           }
@@ -224,21 +206,24 @@ module.exports = {
           reportIfRefWrapped(node)
         },
         // refValue ? x : y
-        /** @param {Identifier & {parent: ConditionalExpression}} node */
-        'ConditionalExpression>Identifier'(node) {
+        'ConditionalExpression>Identifier'(
+          node: Identifier & { parent: ConditionalExpression }
+        ) {
           if (node.parent.test !== node) {
             return
           }
           reportIfRefWrapped(node)
         },
         // `${refValue}`
-        /** @param {Identifier} node */
-        ':not(TaggedTemplateExpression)>TemplateLiteral>Identifier'(node) {
+        ':not(TaggedTemplateExpression)>TemplateLiteral>Identifier'(
+          node: Identifier
+        ) {
           reportIfRefWrapped(node)
         },
         // refValue.x
-        /** @param {Identifier & {parent: MemberExpression}} node */
-        'MemberExpression>Identifier'(node) {
+        'MemberExpression>Identifier'(
+          node: Identifier & { parent: MemberExpression }
+        ) {
           if (node.parent.object !== node) {
             return
           }
@@ -270,11 +255,11 @@ module.exports = {
           }
 
           // const emit = defineEmits()
-          const emitReferenceIds = new Set()
+          const emitReferenceIds = new Set<Identifier>()
           collectReferenceIds(emitParam, emitReferenceIds)
 
           setupContexts.set(programNode, {
-            contextReferenceIds: new Set(),
+            contextReferenceIds: new Set<Identifier>(),
             emitReferenceIds
           })
         },
@@ -295,8 +280,8 @@ module.exports = {
             return
           }
 
-          const contextReferenceIds = new Set()
-          const emitReferenceIds = new Set()
+          const contextReferenceIds = new Set<Identifier>()
+          const emitReferenceIds = new Set<Identifier>()
           if (contextParam.type === 'ObjectPattern') {
             const emitProperty = utils.findAssignmentProperty(
               contextParam,
