@@ -652,9 +652,6 @@ export function definePropertyReferenceExtractor(
   }
 }
 
-/**
- * Collects the property references for merge.
- */
 export function mergePropertyReferences(
   references: IPropertyReferences[]
 ): IPropertyReferences {
@@ -667,6 +664,9 @@ export function mergePropertyReferences(
   return new PropertyReferencesForMerge(references)
 }
 
+/**
+ * Collects the property references for merge.
+ */
 class PropertyReferencesForMerge implements IPropertyReferences {
   references: IPropertyReferences[]
 
