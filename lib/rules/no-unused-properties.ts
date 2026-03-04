@@ -7,11 +7,11 @@ import type { IPropertyReferences } from '../utils/property-references.js'
 import utils from '../utils/index.js'
 import eslintUtils from '@eslint-community/eslint-utils'
 import { isJSDocComment } from '../utils/comments.ts'
-import { getStyleVariablesContext } from '../utils/style-variables/index.js'
+import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 import {
   definePropertyReferenceExtractor,
   mergePropertyReferences
-} from '../utils/property-references.js'
+} from '../utils/property-references.ts'
 
 interface ComponentObjectPropertyData {
   name: string

@@ -2,26 +2,18 @@
  * @fileoverview Disallow undefined properties.
  * @author Yosuke Ota
  */
-'use strict'
+import type { IPropertyReferences } from '../utils/property-references.ts'
+import utils from '../utils/index.js'
+import reserved from '../utils/vue-reserved.json' with { type: 'json' }
+import regexp from '../utils/regexp.js'
+import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
+import { definePropertyReferenceExtractor } from '../utils/property-references.ts'
 
-const utils = require('../utils')
-const reserved = require('../utils/vue-reserved.json')
-const { toRegExpGroupMatcher } = require('../utils/regexp')
-const { getStyleVariablesContext } = require('../utils/style-variables')
-const {
-  definePropertyReferenceExtractor
-} = require('../utils/property-references')
-
-/**
- * @typedef {import('../utils').VueObjectData} VueObjectData
- * @typedef {import('../utils/property-references').IPropertyReferences} IPropertyReferences
- */
-/**
- * @typedef {object} PropertyData
- * @property {boolean} [hasNestProperty]
- * @property { (name: string) => PropertyData | null } [get]
- * @property {boolean} [isProps]
- */
+interface PropertyData {
+  hasNestProperty?: boolean
+  get?: (name: string) => PropertyData | null
+  isProps?: boolean
+}
 
 const GROUP_PROPERTY = 'props'
 const GROUP_ASYNC_DATA = 'asyncData' // Nuxt.js
@@ -33,13 +25,10 @@ const GROUP_WATCHER = 'watch'
 const GROUP_EXPOSE = 'expose'
 const GROUP_INJECT = 'inject'
 
-/**
- * @param {ObjectExpression} object
- * @returns {Map<string, Property> | null}
- */
-function getObjectPropertyMap(object) {
-  /** @type {Map<string, Property>} */
-  const props = new Map()
+function getObjectPropertyMap(
+  object: ObjectExpression
+): Map<string, Property> | null {
+  const props = new Map<string, Property>()
   for (const p of object.properties) {
     if (p.type !== 'Property') {
       return null
@@ -53,11 +42,9 @@ function getObjectPropertyMap(object) {
   return props
 }
 
-/**
- * @param {Property | undefined} property
- * @returns {PropertyData | null}
- */
-function getPropertyDataFromObjectProperty(property) {
+function getPropertyDataFromObjectProperty(
+  property: Property | undefined
+): PropertyData | null {
   if (property == null) {
     return null
   }
@@ -76,7 +63,7 @@ function getPropertyDataFromObjectProperty(property) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -103,54 +90,45 @@ module.exports = {
       undefProps: "'{{name}}' is not defined in props."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const { ignores = [String.raw`/^\$/`] } = options
-    const isIgnored = toRegExpGroupMatcher(ignores)
+    const isIgnored = regexp.toRegExpGroupMatcher(ignores)
     const propertyReferenceExtractor = definePropertyReferenceExtractor(context)
     const programNode = context.sourceCode.ast
     /**
      * Property names identified as defined via a Vuex or Pinia helpers
-     * @type {Set<string>}
      */
-    const propertiesDefinedByStoreHelpers = new Set()
+    const propertiesDefinedByStoreHelpers = new Set<string>()
 
-    /**
-     * @param {ASTNode} node
-     */
-    function isScriptSetupProgram(node) {
+    function isScriptSetupProgram(node: ASTNode) {
       return node === programNode
     }
 
     /** Vue component context */
     class VueComponentContext {
-      constructor() {
-        /** @type { Map<string, PropertyData> } */
-        this.defineProperties = new Map()
+      defineProperties = new Map<string, PropertyData>()
+      reported = new Set<string | ASTNode>()
+      hasUnknownProperty = false
 
-        /** @type { Set<string | ASTNode> } */
-        this.reported = new Set()
-
-        this.hasUnknownProperty = false
-      }
       /**
        * Report
-       * @param {IPropertyReferences} references
-       * @param {object} [options]
-       * @param {boolean} [options.props]
        */
-      verifyReferences(references, options) {
+      verifyReferences(
+        references: IPropertyReferences,
+        options?: { props?: boolean }
+      ) {
         if (this.hasUnknownProperty) return
         const report = this.report.bind(this)
         verifyUndefProperties(this.defineProperties, references, null)
 
-        /**
-         * @param { { get?: (name: string) => PropertyData | null | undefined } } defineProperties
-         * @param {IPropertyReferences|null} references
-         * @param {string|null} pathName
-         */
-        function verifyUndefProperties(defineProperties, references, pathName) {
+        function verifyUndefProperties(
+          defineProperties: {
+            get?: (name: string) => PropertyData | null | undefined
+          },
+          references: IPropertyReferences | null,
+          pathName: string | null
+        ) {
           if (!references) {
             return
           }
@@ -182,11 +160,12 @@ module.exports = {
       }
       /**
        * Report
-       * @param {ASTNode} node
-       * @param {string} name
-       * @param {'undef' | 'undefProps'} messageId
        */
-      report(node, name, messageId = 'undef') {
+      report(
+        node: ASTNode,
+        name: string,
+        messageId: 'undef' | 'undefProps' = 'undef'
+      ) {
         if (
           reserved.includes(name) ||
           isIgnored(name) ||
@@ -220,14 +199,9 @@ module.exports = {
       }
     }
 
-    /** @type {Map<ASTNode, VueComponentContext>} */
-    const vueComponentContextMap = new Map()
+    const vueComponentContextMap = new Map<ASTNode, VueComponentContext>()
 
-    /**
-     * @param {ASTNode} node
-     * @returns {VueComponentContext}
-     */
-    function getVueComponentContext(node) {
+    function getVueComponentContext(node: ASTNode): VueComponentContext {
       let ctx = vueComponentContextMap.get(node)
       if (!ctx) {
         ctx = new VueComponentContext()
@@ -235,21 +209,16 @@ module.exports = {
       }
       return ctx
     }
-    /**
-     * @returns {VueComponentContext|void}
-     */
-    function getVueComponentContextForTemplate() {
+    function getVueComponentContextForTemplate():
+      | VueComponentContext
+      | undefined {
       const keys = [...vueComponentContextMap.keys()]
       const exported =
         keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
       return exported && vueComponentContextMap.get(exported)
     }
 
-    /**
-     * @param {Expression} node
-     * @returns {Property|null}
-     */
-    function getParentProperty(node) {
+    function getParentProperty(node: Expression): Property | null {
       if (
         !node.parent ||
         node.parent.type !== 'Property' ||
@@ -336,13 +305,9 @@ module.exports = {
         }
       }),
       utils.defineVueVisitor(context, {
-        /**
-         * @param {CallExpression} node
-         */
         CallExpression(node) {
           if (node.callee.type !== 'Identifier') return
-          /** @type {'methods'|'computed'|null} */
-          let groupName = null
+          let groupName: 'methods' | 'computed' | null = null
           if (/^mapMutations|mapActions$/u.test(node.callee.name)) {
             groupName = GROUP_METHODS
           } else if (
@@ -454,9 +419,10 @@ module.exports = {
             }
           }
         },
-        /** @param { (FunctionExpression | ArrowFunctionExpression) & { parent: Property }} node */
         'ObjectExpression > Property > :function[params.length>0]'(
-          node,
+          node: (FunctionExpression | ArrowFunctionExpression) & {
+            parent: Property
+          },
           vueData
         ) {
           let props = false
@@ -533,11 +499,10 @@ module.exports = {
             })
           }
         },
-        /**
-         * @param {ThisExpression | Identifier} node
-         * @param {VueObjectData} vueData
-         */
-        'ThisExpression, Identifier'(node, vueData) {
+        'ThisExpression, Identifier'(
+          node: ThisExpression | Identifier,
+          vueData
+        ) {
           if (!utils.isThis(node, context)) {
             return
           }
@@ -566,10 +531,7 @@ module.exports = {
     )
 
     const templateVisitor = {
-      /**
-       * @param {VExpressionContainer} node
-       */
-      VExpressionContainer(node) {
+      VExpressionContainer(node: VExpressionContainer) {
         const ctx = getVueComponentContextForTemplate()
         if (!ctx) {
           return
