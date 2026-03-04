@@ -45,7 +45,7 @@ export function isRegExp(string: string): boolean {
 }
 
 /**
- * Converts an array of strings to a singular function to match any of them.
+ * Converts an array of strings or regular expression strings to a singular function to match any of them.
  * This function converts each string to a `RegExp` and returns a function that checks all of them.
  */
 export function toRegExpGroupMatcher(

@@ -16,6 +16,9 @@ interface NameWithLoc {
   loc: SourceLocation
 }
 
+/**
+ * Get the name param node from the given CallExpression
+ */
 function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {

@@ -64,7 +64,7 @@ export default {
       fixer: RuleFixer,
       slotAttr: VAttribute | VDirective,
       slotName: string | null,
-      vBind: boolean
+      isVBind: boolean
     ): IterableIterator<Fix> {
       const startTag = slotAttr.parent
       const scopeAttr = startTag.attributes.find(
@@ -76,7 +76,7 @@ export default {
       )
       let nameArgument = ''
       if (slotName) {
-        nameArgument = vBind ? `:[${slotName}]` : `:${slotName}`
+        nameArgument = isVBind ? `:[${slotName}]` : `:${slotName}`
       }
       const scopeValue =
         scopeAttr && scopeAttr.value
