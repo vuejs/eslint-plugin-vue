@@ -2,55 +2,66 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import semver from 'semver'
+import utils from '../utils/index.js'
+import slotScopeAttribute from './syntaxes/slot-scope-attribute.js'
+import dynamicDirectiveArguments from './syntaxes/dynamic-directive-arguments.js'
+import vSlot from './syntaxes/v-slot.js'
+import scriptSetup from './syntaxes/script-setup.js'
+import styleCssVarsInjection from './syntaxes/style-css-vars-injection.ts'
+import vModelArgument from './syntaxes/v-model-argument.js'
+import vModelCustomModifiers from './syntaxes/v-model-custom-modifiers.js'
+import vIs from './syntaxes/v-is.js'
+import isAttributeWithVuePrefix from './syntaxes/is-attribute-with-vue-prefix.js'
+import vMemo from './syntaxes/v-memo.js'
+import vBindPropModifierShorthand from './syntaxes/v-bind-prop-modifier-shorthand.js'
+import vBindAttrModifier from './syntaxes/v-bind-attr-modifier.js'
+import defineOptions from './syntaxes/define-options.js'
+import defineSlots from './syntaxes/define-slots.js'
+import defineModel from './syntaxes/define-model.js'
+import vBindSameNameShorthand from './syntaxes/v-bind-same-name-shorthand.js'
 
-const semver = require('semver')
-const utils = require('../utils')
-
-/**
- * @typedef {object} SyntaxRule
- * @property {string} supported
- * @property { (context: RuleContext) => TemplateListener } [createTemplateBodyVisitor]
- * @property { (context: RuleContext) => RuleListener } [createScriptVisitor]
- */
+interface SyntaxRule {
+  supported: string
+  createTemplateBodyVisitor?: (context: RuleContext) => TemplateListener
+  createScriptVisitor?: (context: RuleContext) => RuleListener
+}
 
 const FEATURES = {
   // Vue.js 2.5.0+
-  'slot-scope-attribute': require('./syntaxes/slot-scope-attribute'),
+  'slot-scope-attribute': slotScopeAttribute,
   // Vue.js 2.6.0+
-  'dynamic-directive-arguments': require('./syntaxes/dynamic-directive-arguments'),
-  'v-slot': require('./syntaxes/v-slot'),
+  'dynamic-directive-arguments': dynamicDirectiveArguments,
+  'v-slot': vSlot,
   // Vue.js 2.7.0+
-  'script-setup': require('./syntaxes/script-setup'),
-  'style-css-vars-injection': require('./syntaxes/style-css-vars-injection.ts'),
+  'script-setup': scriptSetup,
+  'style-css-vars-injection': styleCssVarsInjection,
   // Vue.js 3.0.0+
-  'v-model-argument': require('./syntaxes/v-model-argument'),
-  'v-model-custom-modifiers': require('./syntaxes/v-model-custom-modifiers'),
-  'v-is': require('./syntaxes/v-is'),
+  'v-model-argument': vModelArgument,
+  'v-model-custom-modifiers': vModelCustomModifiers,
+  'v-is': vIs,
   // Vue.js 3.1.0+
-  'is-attribute-with-vue-prefix': require('./syntaxes/is-attribute-with-vue-prefix'),
+  'is-attribute-with-vue-prefix': isAttributeWithVuePrefix,
   // Vue.js 3.2.0+
-  'v-memo': require('./syntaxes/v-memo'),
-  'v-bind-prop-modifier-shorthand': require('./syntaxes/v-bind-prop-modifier-shorthand'),
-  'v-bind-attr-modifier': require('./syntaxes/v-bind-attr-modifier'),
+  'v-memo': vMemo,
+  'v-bind-prop-modifier-shorthand': vBindPropModifierShorthand,
+  'v-bind-attr-modifier': vBindAttrModifier,
   // Vue.js 3.3.0+
-  'define-options': require('./syntaxes/define-options'),
-  'define-slots': require('./syntaxes/define-slots'),
+  'define-options': defineOptions,
+  'define-slots': defineSlots,
   // Vue.js 3.4.0+
-  'define-model': require('./syntaxes/define-model'),
-  'v-bind-same-name-shorthand': require('./syntaxes/v-bind-same-name-shorthand')
-}
+  'define-model': defineModel,
+  'v-bind-same-name-shorthand': vBindSameNameShorthand
+} satisfies Record<string, SyntaxRule>
 
-const SYNTAX_NAMES = /** @type {(keyof FEATURES)[]} */ (Object.keys(FEATURES))
+const SYNTAX_NAMES = Object.keys(FEATURES) as (keyof typeof FEATURES)[]
 
 const cache = new Map()
 /**
  * Get the `semver.Range` object of a given range text.
- * @param {string} x The text expression for a semver range.
- * @returns {semver.Range} The range object of a given range text.
  * It's null if the `x` is not a valid range text.
  */
-function getSemverRange(x) {
+function getSemverRange(x: string): semver.Range {
   const s = String(x)
   let ret = cache.get(s) || null
 
@@ -66,7 +77,7 @@ function getSemverRange(x) {
   return ret
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -135,8 +146,7 @@ module.exports = {
         '`v-bind` same-name shorthand is not supported until Vue.js "3.4.0".'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const { version, ignores } = Object.assign(
       {
         version: null,
@@ -152,21 +162,16 @@ module.exports = {
 
     /**
      * Check whether a given case object is full-supported on the configured node version.
-     * @param {SyntaxRule} aCase The case object to check.
-     * @returns {boolean} `true` if it's supporting.
      */
-    function isNotSupportingVersion(aCase) {
+    function isNotSupportingVersion(aCase: SyntaxRule): boolean {
       return !semver.subset(versionRange, getSemverRange(aCase.supported))
     }
 
-    /** @type {TemplateListener} */
-    let templateBodyVisitor = {}
-    /** @type {RuleListener} */
-    let scriptVisitor = {}
+    let templateBodyVisitor: TemplateListener = {}
+    let scriptVisitor: RuleListener = {}
 
     for (const syntaxName of SYNTAX_NAMES) {
-      /** @type {SyntaxRule} */
-      const syntax = FEATURES[syntaxName]
+      const syntax: SyntaxRule = FEATURES[syntaxName]
       if (ignores.includes(syntaxName) || !isNotSupportingVersion(syntax)) {
         continue
       }
