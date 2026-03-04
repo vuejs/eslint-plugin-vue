@@ -2,12 +2,10 @@
  * @fileoverview disallow using deprecated number (keycode) modifiers
  * @author yoyo930021
  */
-'use strict'
+import utils from '../utils/index.js'
+import keyCodeToKey from '../utils/keycode-to-key.ts'
 
-const utils = require('../utils')
-const keyCodeToKey = require('../utils/keycode-to-key')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -23,11 +21,11 @@ module.exports = {
         "'KeyboardEvent.keyCode' modifier on 'v-on' directive is deprecated. Using 'KeyboardEvent.key' instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirectiveKey} node */
-      "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey"(node) {
+      "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey"(
+        node: VDirectiveKey
+      ) {
         const modifier = node.modifiers.find((mod) =>
           Number.isInteger(Number.parseInt(mod.name, 10))
         )

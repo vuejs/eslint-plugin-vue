@@ -2,18 +2,10 @@
  * @author Yosuke ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ParsedHTMLComment } from '../utils/html-comments.ts'
+import { defineVisitor } from '../utils/html-comments.ts'
 
-const htmlComments = require('../utils/html-comments')
-
-/**
- * @typedef { import('../utils/html-comments').ParsedHTMLComment } ParsedHTMLComment
- */
-
-/**
- * @param {any} param
- */
-function parseOption(param) {
+function parseOption(param: any) {
   if (param && typeof param === 'string') {
     return {
       singleline: param,
@@ -29,7 +21,7 @@ function parseOption(param) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
 
@@ -78,41 +70,36 @@ module.exports = {
       unexpectedBeforeHTMLCommentOpen: "Unexpected line breaks before '-->'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = parseOption(context.options[0])
-    return htmlComments.defineVisitor(
-      context,
-      context.options[1],
-      (comment) => {
-        const { value, openDecoration, closeDecoration } = comment
-        if (!value) {
-          return
-        }
-
-        const startLine = openDecoration
-          ? openDecoration.loc.end.line
-          : value.loc.start.line
-        const endLine = closeDecoration
-          ? closeDecoration.loc.start.line
-          : value.loc.end.line
-        const newlineType =
-          startLine === endLine ? option.singleline : option.multiline
-        if (newlineType === 'ignore') {
-          return
-        }
-        checkCommentOpen(comment, newlineType !== 'never')
-        checkCommentClose(comment, newlineType !== 'never')
+    return defineVisitor(context, context.options[1], (comment) => {
+      const { value, openDecoration, closeDecoration } = comment
+      if (!value) {
+        return
       }
-    )
+
+      const startLine = openDecoration
+        ? openDecoration.loc.end.line
+        : value.loc.start.line
+      const endLine = closeDecoration
+        ? closeDecoration.loc.start.line
+        : value.loc.end.line
+      const newlineType =
+        startLine === endLine ? option.singleline : option.multiline
+      if (newlineType === 'ignore') {
+        return
+      }
+      checkCommentOpen(comment, newlineType !== 'never')
+      checkCommentClose(comment, newlineType !== 'never')
+    })
 
     /**
      * Reports the newline before the contents of a given comment if it's invalid.
-     * @param {ParsedHTMLComment} comment - comment data.
-     * @param {boolean} requireNewline - `true` if line breaks are required.
-     * @returns {void}
      */
-    function checkCommentOpen(comment, requireNewline) {
+    function checkCommentOpen(
+      comment: ParsedHTMLComment,
+      requireNewline: boolean
+    ): void {
       const { value, openDecoration, open } = comment
       if (!value) {
         return
@@ -155,11 +142,11 @@ module.exports = {
 
     /**
      * Reports the space after the contents of a given comment if it's invalid.
-     * @param {ParsedHTMLComment} comment - comment data.
-     * @param {boolean} requireNewline - `true` if line breaks are required.
-     * @returns {void}
      */
-    function checkCommentClose(comment, requireNewline) {
+    function checkCommentClose(
+      comment: ParsedHTMLComment,
+      requireNewline: boolean
+    ): void {
       const { value, closeDecoration, close } = comment
       if (!value) {
         return
