@@ -64,13 +64,13 @@ export default {
 ```
 
 - `groups` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
+  - `"inject"`
   - `"props"`
   - `"data"`
   - `"asyncData"`
   - `"computed"`
   - `"methods"`
   - `"setup"`
-  - `"inject"`
 - `deepData` (`boolean`) If `true`, the object of the property defined in `data` will be searched deeply. Default is `false`. Include `"data"` in `groups` to use this option.
 - `ignorePublicMembers` (`boolean`) If `true`, members marked with a [JSDoc `/** @public */` tag](https://jsdoc.app/tags-public.html) will be ignored. Default is `false`.
 - `unreferencedOptions` (`string[]`) Array of access methods that should be interpreted as leaving properties unreferenced. Currently, two such methods are available: `unknownMemberAsUnreferenced` and `returnAsUnreferenced`. See examples below.
