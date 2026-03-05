@@ -2,26 +2,17 @@
  * @author Ivan Demchuk <https://github.com/Demivan>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { iterateDefineRefs } from '../utils/ref-object-references.ts'
+import utils from '../utils/index.js'
 
-const { iterateDefineRefs } = require('../utils/ref-object-references')
-const utils = require('../utils')
-
-/**
- * @param {Expression|SpreadElement} node
- */
-function isNullOrUndefined(node) {
+function isNullOrUndefined(node: Expression | SpreadElement) {
   return (
     (node.type === 'Literal' && node.value === null) ||
     (node.type === 'Identifier' && node.name === 'undefined')
   )
 }
 
-/**
- * @typedef {import('../utils/ref-object-references').RefObjectReferences} RefObjectReferences
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -37,8 +28,7 @@ module.exports = {
         'Specify type parameter for `{{name}}` function, otherwise created variable will not be typechecked.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const filename = context.filename
     if (!utils.isVueFile(filename) && !utils.isTypeScriptFile(filename)) {
       return {}
@@ -53,8 +43,8 @@ module.exports = {
         return {}
       }
       const scripts = documentFragment.children.filter(
-        /** @returns {element is VElement} */
-        (element) => utils.isVElement(element) && element.name === 'script'
+        (element): element is VElement =>
+          utils.isVElement(element) && element.name === 'script'
       )
       if (
         scripts.every((script) => !utils.hasAttribute(script, 'lang', 'ts'))
@@ -64,16 +54,10 @@ module.exports = {
     }
 
     const defines = iterateDefineRefs(
-      /** @type {import('eslint').Scope.Scope} */ (
-        context.sourceCode.scopeManager.globalScope
-      )
+      context.sourceCode.scopeManager.globalScope!
     )
 
-    /**
-     * @param {string} name
-     * @param {CallExpression} node
-     */
-    function report(name, node) {
+    function report(name: string, node: CallExpression) {
       context.report({
         node,
         messageId: 'noType',
