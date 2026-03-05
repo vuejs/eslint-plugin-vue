@@ -2,19 +2,14 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
-'use strict'
-const utils = require('../utils')
-const { capitalize } = require('../utils/casing')
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').ComponentObjectProp} ComponentObjectProp
- * @typedef {import('../utils').ComponentArrayProp} ComponentArrayProp
- * @typedef {import('../utils').ComponentTypeProp} ComponentTypeProp
- * @typedef {import('../utils').ComponentInferTypeProp} ComponentInferTypeProp
- * @typedef {import('../utils').ComponentUnknownProp} ComponentUnknownProp
- * @typedef {import('../utils').VueObjectData} VueObjectData
- */
+import type {
+  ComponentObjectProp,
+  ComponentTypeProp,
+  ComponentInferTypeProp,
+  VueObjectData
+} from '../utils/index.js'
+import utils from '../utils/index.js'
+import { capitalize } from '../utils/casing.ts'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -29,12 +24,7 @@ const NATIVE_TYPES = new Set([
 
 const FUNCTION_VALUE_TYPES = new Set(['Function', 'Object', 'Array'])
 
-/**
- * @param {ObjectExpression} obj
- * @param {string} name
- * @returns {Property | null}
- */
-function getPropertyNode(obj, name) {
+function getPropertyNode(obj: ObjectExpression, name: string): Property | null {
   for (const p of obj.properties) {
     if (
       p.type === 'Property' &&
@@ -48,29 +38,21 @@ function getPropertyNode(obj, name) {
   return null
 }
 
-/**
- * @param {Expression} targetNode
- * @returns {string[]}
- */
-function getTypes(targetNode) {
+function getTypes(targetNode: Expression): string[] {
   const node = utils.skipTSAsExpression(targetNode)
   if (node.type === 'Identifier') {
     return [node.name]
   } else if (node.type === 'ArrayExpression') {
     return node.elements
       .filter(
-        /**
-         * @param {Expression | SpreadElement | null} item
-         * @returns {item is Identifier}
-         */
-        (item) => item != null && item.type === 'Identifier'
+        (item): item is Identifier => item != null && item.type === 'Identifier'
       )
       .map((item) => item.name)
   }
   return []
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -85,69 +67,67 @@ module.exports = {
         "Type of the default value for '{{name}}' prop must be a {{types}}."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} StandardValueType
-     * @property {string} type
-     * @property {false} function
-     */
-    /**
-     * @typedef {object} FunctionExprValueType
-     * @property {'Function'} type
-     * @property {true} function
-     * @property {true} expression
-     * @property {Expression} functionBody
-     * @property {string | null} returnType
-     */
-    /**
-     * @typedef {object} FunctionValueType
-     * @property {'Function'} type
-     * @property {true} function
-     * @property {false} expression
-     * @property {BlockStatement} functionBody
-     * @property {ReturnType[]} returnTypes
-     */
-    /**
-     * @typedef { ComponentObjectProp & { value: ObjectExpression } } ComponentObjectDefineProp
-     * @typedef { { type: string, node: Expression } } ReturnType
-     */
-    /**
-     * @typedef {object} PropDefaultFunctionContext
-     * @property {ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp} prop
-     * @property {Set<string>} types
-     * @property {FunctionValueType} default
-     */
+  create(context: RuleContext) {
+    interface StandardValueType {
+      type: string
+      function: false
+    }
 
-    /**
-     * @type {Map<ObjectExpression, PropDefaultFunctionContext[]>}
-     */
-    const vueObjectPropsContexts = new Map()
-    /**
-     * @type { {node: CallExpression, props:PropDefaultFunctionContext[]}[] }
-     */
-    const scriptSetupPropsContexts = []
+    interface FunctionExprValueType {
+      type: 'Function'
+      function: true
+      expression: true
+      functionBody: Expression
+      returnType: string | null
+    }
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {BlockStatement | Expression} body
-     * @property {null | ReturnType[]} [returnTypes]
-     */
-    /**
-     * @type {ScopeStack | null}
-     */
-    let scopeStack = null
+    interface FunctionValueType {
+      type: 'Function'
+      function: true
+      expression: false
+      functionBody: BlockStatement
+      returnTypes: PropReturnType[]
+    }
+
+    type ComponentObjectDefineProp = ComponentObjectProp & {
+      value: ObjectExpression
+    }
+
+    interface PropReturnType {
+      type: string
+      node: Expression
+    }
+
+    interface PropDefaultFunctionContext {
+      prop: ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp
+      types: Set<string>
+      default: FunctionValueType
+    }
+
+    const vueObjectPropsContexts = new Map<
+      ObjectExpression,
+      PropDefaultFunctionContext[]
+    >()
+    const scriptSetupPropsContexts: {
+      node: CallExpression
+      props: PropDefaultFunctionContext[]
+    }[] = []
+
+    interface ScopeStack {
+      upper: ScopeStack | null
+      body: BlockStatement | Expression
+      returnTypes?: null | PropReturnType[]
+    }
+
+    let scopeStack: ScopeStack | null = null
 
     function onFunctionExit() {
       scopeStack = scopeStack && scopeStack.upper
     }
 
-    /**
-     * @param {Expression} targetNode
-     * @returns { StandardValueType | FunctionExprValueType | FunctionValueType | null }
-     */
-    function getValueType(targetNode) {
+    function getValueType(
+      targetNode: Expression
+    ): StandardValueType | FunctionExprValueType | FunctionValueType | null {
       const node = utils.skipChainExpression(targetNode)
       switch (node.type) {
         case 'CallExpression': {
@@ -229,12 +209,11 @@ module.exports = {
       return null
     }
 
-    /**
-     * @param {Expression} node
-     * @param {ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp} prop
-     * @param {Iterable<string>} expectedTypeNames
-     */
-    function report(node, prop, expectedTypeNames) {
+    function report(
+      node: Expression,
+      prop: ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp,
+      expectedTypeNames: Iterable<string>
+    ) {
       const propName =
         prop.propName == null
           ? `[${context.sourceCode.getText(prop.node.key)}]`
@@ -249,22 +228,23 @@ module.exports = {
       })
     }
 
-    /**
-     * @typedef {object} DefaultDefine
-     * @property {Expression} expression
-     * @property {'assignment'|'withDefaults'|'defaultProperty'} src
-     */
-    /**
-     * @param {(ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp)[]} props
-     * @param {(propName: string) => Iterable<DefaultDefine>} otherDefaultProvider
-     */
-    function processPropDefs(props, otherDefaultProvider) {
-      /** @type {PropDefaultFunctionContext[]} */
-      const propContexts = []
+    interface DefaultDefine {
+      expression: Expression
+      src: 'assignment' | 'withDefaults' | 'defaultProperty'
+    }
+
+    function processPropDefs(
+      props: (
+        | ComponentObjectProp
+        | ComponentTypeProp
+        | ComponentInferTypeProp
+      )[],
+      otherDefaultProvider: (propName: string) => Iterable<DefaultDefine>
+    ) {
+      const propContexts: PropDefaultFunctionContext[] = []
       for (const prop of props) {
         let typeList
-        /** @type {DefaultDefine[]} */
-        const defaultList = []
+        const defaultList: DefaultDefine[] = []
         if (prop.type === 'object') {
           if (prop.value.type === 'ObjectExpression') {
             const type = getPropertyNode(prop.value, 'type')
@@ -350,20 +330,19 @@ module.exports = {
 
     return utils.compositingVisitors(
       {
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
-        ':function'(node) {
+        ':function'(
+          node:
+            | FunctionExpression
+            | FunctionDeclaration
+            | ArrowFunctionExpression
+        ) {
           scopeStack = {
             upper: scopeStack,
             body: node.body,
             returnTypes: null
           }
         },
-        /**
-         * @param {ReturnStatement} node
-         */
-        ReturnStatement(node) {
+        ReturnStatement(node: ReturnStatement) {
           if (!scopeStack) {
             return
           }
@@ -381,25 +360,23 @@ module.exports = {
       },
       utils.defineVueVisitor(context, {
         onVueObjectEnter(obj) {
-          /** @type {ComponentObjectDefineProp[]} */
-          const props = utils.getComponentPropsFromOptions(obj).filter(
-            /**
-             * @param {ComponentObjectProp | ComponentArrayProp | ComponentUnknownProp} prop
-             * @returns {prop is ComponentObjectDefineProp}
-             */
-            (prop) =>
+          const props: ComponentObjectDefineProp[] = utils
+            .getComponentPropsFromOptions(obj)
+            .filter((prop): prop is ComponentObjectDefineProp =>
               Boolean(
                 prop.type === 'object' && prop.value.type === 'ObjectExpression'
               )
-          )
+            )
           const propContexts = processPropDefs(props, () => [])
           vueObjectPropsContexts.set(obj, propContexts)
         },
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         * @param {VueObjectData} data
-         */
-        ':function'(node, { node: vueNode }) {
+        ':function'(
+          node:
+            | FunctionExpression
+            | FunctionDeclaration
+            | ArrowFunctionExpression,
+          { node: vueNode }: VueObjectData
+        ) {
           const data = vueObjectPropsContexts.get(vueNode)
           if (!data || !scopeStack) {
             return
@@ -428,11 +405,12 @@ module.exports = {
       utils.defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, baseProps) {
           const props = baseProps.filter(
-            /**
-             * @param {ComponentProp} prop
-             * @returns {prop is ComponentObjectProp | ComponentInferTypeProp | ComponentTypeProp}
-             */
-            (prop) =>
+            (
+              prop
+            ): prop is
+              | ComponentObjectProp
+              | ComponentInferTypeProp
+              | ComponentTypeProp =>
               Boolean(
                 prop.type === 'type' ||
                 prop.type === 'infer-type' ||
@@ -443,25 +421,30 @@ module.exports = {
             utils.getWithDefaultsPropExpressions(node)
           const defaultsByAssignmentPatterns =
             utils.getDefaultPropExpressionsForPropsDestructure(node)
-          const propContexts = processPropDefs(props, function* (propName) {
-            const withDefaults = defaultsByWithDefaults[propName]
-            if (withDefaults) {
-              yield { src: 'withDefaults', expression: withDefaults }
-            }
-            const assignmentPattern = defaultsByAssignmentPatterns[propName]
-            if (assignmentPattern) {
-              yield {
-                src: 'assignment',
-                expression: assignmentPattern.expression
+          const propContexts = processPropDefs(
+            props,
+            function* (propName: string) {
+              const withDefaults = defaultsByWithDefaults[propName]
+              if (withDefaults) {
+                yield { src: 'withDefaults', expression: withDefaults }
+              }
+              const assignmentPattern = defaultsByAssignmentPatterns[propName]
+              if (assignmentPattern) {
+                yield {
+                  src: 'assignment',
+                  expression: assignmentPattern.expression
+                }
               }
             }
-          })
+          )
           scriptSetupPropsContexts.push({ node, props: propContexts })
         },
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
-        ':function'(node) {
+        ':function'(
+          node:
+            | FunctionExpression
+            | FunctionDeclaration
+            | ArrowFunctionExpression
+        ) {
           const data = scriptSetupPropsContexts.at(-1)
           if (!data || !scopeStack) {
             return

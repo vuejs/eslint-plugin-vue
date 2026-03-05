@@ -2,12 +2,15 @@
  * @fileoverview Report used components
  * @author Michał Sajnóg
  */
-'use strict'
+import utils from '../utils/index.js'
+import {
+  isPascalCase,
+  isCamelCase,
+  pascalCase,
+  camelCase
+} from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -32,24 +35,20 @@ module.exports = {
       unused: 'The "{{name}}" component has been registered but not used.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const ignoreWhenBindingPresent =
       options.ignoreWhenBindingPresent === undefined
         ? true
         : options.ignoreWhenBindingPresent
-    const usedComponents = new Set()
-    /** @type { { node: Property, name: string }[] } */
-    let registeredComponents = []
+    const usedComponents = new Set<string>()
+    let registeredComponents: { node: Property; name: string }[] = []
     let ignoreReporting = false
-    /** @type {Position} */
-    let templateLocation
+    let templateLocation: Position
 
     return utils.defineTemplateBodyVisitor(
       context,
       {
-        /** @param {VElement} node */
         VElement(node) {
           if (
             (!utils.isHtmlElementNode(node) &&
@@ -64,9 +63,8 @@ module.exports = {
 
           usedComponents.add(node.rawName)
         },
-        /** @param {VDirective} node */
         "VAttribute[directive=true][key.name.name='bind'][key.argument.name='is'], VAttribute[directive=true][key.name.name='is']"(
-          node
+          node: VDirective
         ) {
           if (
             !node.value || // `<component :is>`
@@ -76,13 +74,12 @@ module.exports = {
             return
 
           if (node.value.expression.type === 'Literal') {
-            usedComponents.add(node.value.expression.value)
+            usedComponents.add(node.value.expression.value as string)
           } else if (ignoreWhenBindingPresent) {
             ignoreReporting = true
           }
         },
-        /** @param {VAttribute} node */
-        "VAttribute[directive=false][key.name='is']"(node) {
+        "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
           if (!node.value) {
             return
           }
@@ -91,12 +88,10 @@ module.exports = {
             : node.value.value
           usedComponents.add(value)
         },
-        /** @param {VElement} node */
-        "VElement[name='template']"(node) {
+        "VElement[name='template']"(node: VElement) {
           templateLocation = templateLocation || node.loc.start
         },
-        /** @param {VElement} node */
-        "VElement[name='template']:exit"(node) {
+        "VElement[name='template']:exit"(node: VElement) {
           if (
             node.loc.start !== templateLocation ||
             ignoreReporting ||
@@ -109,13 +104,12 @@ module.exports = {
             // it can be used in various of ways inside template,
             // like "theComponent", "The-component" etc.
             // but except snake_case
-            if (casing.isPascalCase(name) || casing.isCamelCase(name)) {
+            if (isPascalCase(name) || isCamelCase(name)) {
               if (
                 [...usedComponents].some(
                   (n) =>
                     !n.includes('_') &&
-                    (name === casing.pascalCase(n) ||
-                      name === casing.camelCase(n))
+                    (name === pascalCase(n) || name === camelCase(n))
                 )
               ) {
                 continue

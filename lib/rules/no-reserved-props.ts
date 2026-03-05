@@ -2,21 +2,16 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
+import { kebabCase } from '../utils/casing.ts'
 
 const RESERVED = {
   3: ['key', 'ref'],
   2: ['key', 'ref', 'is', 'slot', 'slot-scope', 'slotScope', 'class', 'style']
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -44,25 +39,20 @@ module.exports = {
         "'{{propName}}' is a reserved attribute and cannot be used as props."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    /** @type {2|3} */
-    const vueVersion = options.vueVersion || 3
+    const vueVersion: 2 | 3 = options.vueVersion || 3
 
     const reserved = new Set(RESERVED[vueVersion])
 
-    /**
-     * @param {ComponentProp[]} props
-     */
-    function processProps(props) {
+    function processProps(props: ComponentProp[]) {
       for (const prop of props) {
         if (prop.propName != null && reserved.has(prop.propName)) {
           context.report({
             node: prop.node,
             messageId: `reserved`,
             data: {
-              propName: casing.kebabCase(prop.propName)
+              propName: kebabCase(prop.propName)
             }
           })
         }

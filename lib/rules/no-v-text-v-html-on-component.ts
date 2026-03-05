@@ -2,12 +2,10 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { pascalCase, kebabCase } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -39,33 +37,28 @@ module.exports = {
         "Using {{directiveName}} on component may break component's content."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    /** @type {Set<string>} */
-    const allow = new Set(options.allow)
-    /** @type {boolean} */
+    const allow = new Set<string>(options.allow)
     const ignoreElementNamespaces = options.ignoreElementNamespaces === true
 
     /**
      * Check whether the given node is an allowed component or not.
-     * @param {VElement} node The start tag node to check.
-     * @returns {boolean} `true` if the node is an allowed component.
+     * @param node The start tag node to check.
      */
-    function isAllowedComponent(node) {
+    function isAllowedComponent(node: VElement): boolean {
       const componentName = node.rawName
       return (
         allow.has(componentName) ||
-        allow.has(casing.pascalCase(componentName)) ||
-        allow.has(casing.kebabCase(componentName))
+        allow.has(pascalCase(componentName)) ||
+        allow.has(kebabCase(componentName))
       )
     }
 
     /**
      * Verify for v-text and v-html directive
-     * @param {VDirective} node
      */
-    function verify(node) {
+    function verify(node: VDirective) {
       const element = node.parent.parent
       if (
         utils.isCustomComponent(element, ignoreElementNamespaces) &&

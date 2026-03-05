@@ -2,23 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { pascalCase, kebabCase } from '../utils/casing.ts'
+import INLINE_ELEMENTS from '../utils/inline-non-void-elements.json' with { type: 'json' }
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const INLINE_ELEMENTS = require('../utils/inline-non-void-elements.json')
-
-/**
- * @param {VElement & { endTag: VEndTag } } element
- */
-function isSinglelineElement(element) {
+function isSinglelineElement(element: VElement & { endTag: VEndTag }) {
   return element.loc.start.line === element.endTag.loc.start.line
 }
 
-/**
- * @param {any} options
- */
-function parseOptions(options) {
+function parseOptions(options: any) {
   return Object.assign(
     {
       ignores: ['pre', 'textarea', ...INLINE_ELEMENTS],
@@ -33,17 +25,17 @@ function parseOptions(options) {
 /**
  * Check whether the given element is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
- * @param {VElement & { endTag: VEndTag } } node The element node to check.
- * @param {SourceCode} sourceCode The source code object of the current context.
- * @returns {boolean} `true` if the element is empty.
  */
-function isEmpty(node, sourceCode) {
+function isEmpty(
+  node: VElement & { endTag: VEndTag },
+  sourceCode: SourceCode
+): boolean {
   const start = node.startTag.range[1]
   const end = node.endTag.range[0]
   return sourceCode.text.slice(start, end).trim() === ''
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -86,8 +78,7 @@ module.exports = {
         'Expected 1 line break before closing tag (`</{{name}}>`), but no line breaks found.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = parseOptions(context.options[0])
     const ignores = new Set([...options.ignores, ...options.externalIgnores])
     const ignoreWhenNoAttributes = options.ignoreWhenNoAttributes
@@ -97,20 +88,17 @@ module.exports = {
       sourceCode.parserServices.getTemplateBodyTokenStore &&
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
-    /** @type {VElement | null} */
-    let inIgnoreElement = null
+    let inIgnoreElement: VElement | null = null
 
-    /** @param {VElement} node */
-    function isIgnoredElement(node) {
+    function isIgnoredElement(node: VElement) {
       return (
         ignores.has(node.name) ||
-        ignores.has(casing.pascalCase(node.rawName)) ||
-        ignores.has(casing.kebabCase(node.rawName))
+        ignores.has(pascalCase(node.rawName)) ||
+        ignores.has(kebabCase(node.rawName))
       )
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
       VElement(node) {
         if (inIgnoreElement) {
           return
@@ -125,7 +113,7 @@ module.exports = {
           return
         }
 
-        const elem = /** @type {VElement & { endTag: VEndTag } } */ (node)
+        const elem = node as VElement & { endTag: VEndTag }
 
         if (!isSinglelineElement(elem)) {
           return
@@ -134,8 +122,7 @@ module.exports = {
           return
         }
 
-        /** @type {SourceCode.CursorWithCountOptions} */
-        const getTokenOption = {
+        const getTokenOption: SourceCode.CursorWithCountOptions = {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
@@ -151,12 +138,14 @@ module.exports = {
           return
         }
 
-        const contentFirst = /** @type {Token} */ (
-          template.getTokenAfter(elem.startTag, getTokenOption)
-        )
-        const contentLast = /** @type {Token} */ (
-          template.getTokenBefore(elem.endTag, getTokenOption)
-        )
+        const contentFirst = template.getTokenAfter(
+          elem.startTag,
+          getTokenOption
+        )!
+        const contentLast = template.getTokenBefore(
+          elem.endTag,
+          getTokenOption
+        )!
 
         context.report({
           node: template.getLastToken(elem.startTag),
@@ -169,8 +158,7 @@ module.exports = {
             name: elem.rawName
           },
           fix(fixer) {
-            /** @type {Range} */
-            const range = [elem.startTag.range[1], contentFirst.range[0]]
+            const range: Range = [elem.startTag.range[1], contentFirst.range[0]]
             return fixer.replaceTextRange(range, '\n')
           }
         })
@@ -190,13 +178,11 @@ module.exports = {
             name: elem.rawName
           },
           fix(fixer) {
-            /** @type {Range} */
-            const range = [contentLast.range[1], elem.endTag.range[0]]
+            const range: Range = [contentLast.range[1], elem.endTag.range[0]]
             return fixer.replaceTextRange(range, '\n')
           }
         })
       },
-      /** @param {VElement} node */
       'VElement:exit'(node) {
         if (inIgnoreElement === node) {
           inIgnoreElement = null

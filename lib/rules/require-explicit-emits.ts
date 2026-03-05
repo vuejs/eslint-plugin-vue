@@ -2,22 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-/**
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').VueObjectData} VueObjectData
- */
-
-const {
+import type { ComponentEmit, ComponentProp, VueObjectData } from '../utils'
+import {
   findVariable,
   isOpeningBraceToken,
   isClosingBraceToken,
   isOpeningBracketToken
-} = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-const { capitalize } = require('../utils/casing')
+} from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { capitalize } from '../utils/casing.ts'
 
 const FIX_EMITS_AFTER_OPTIONS = new Set([
   'setup',
@@ -47,18 +40,16 @@ const FIX_EMITS_AFTER_OPTIONS = new Set([
   'errorCaptured'
 ])
 
-/**
- * @typedef {object} NameWithLoc
- * @property {string} name
- * @property {SourceLocation} loc
- * @property {Range} range
- */
+interface NameWithLoc {
+  name: string
+  loc: SourceLocation
+  range: Range
+}
+
 /**
  * Get the name param node from the given CallExpression
- * @param {CallExpression} node CallExpression
- * @returns { NameWithLoc | null }
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
     const name = utils.getStringLiteralValue(nameLiteralNode)
@@ -71,7 +62,7 @@ function getNameParamNode(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -102,36 +93,42 @@ module.exports = {
         'Add the {{emitsKind}} with object syntax and define "{{name}}" event.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const allowProps = !!options.allowProps
-    /** @type {Map<ObjectExpression | Program, { contextReferenceIds: Set<Identifier>, emitReferenceIds: Set<Identifier> }>} */
-    const setupContexts = new Map()
-    /** @type {Map<ObjectExpression | Program, ComponentEmit[]>} */
-    const vueEmitsDeclarations = new Map()
-    /** @type {Map<ObjectExpression | Program, ComponentProp[]>} */
-    const vuePropsDeclarations = new Map()
+    const setupContexts = new Map<
+      ObjectExpression | Program,
+      {
+        contextReferenceIds: Set<Identifier>
+        emitReferenceIds: Set<Identifier>
+      }
+    >()
+    const vueEmitsDeclarations = new Map<
+      ObjectExpression | Program,
+      ComponentEmit[]
+    >()
+    const vuePropsDeclarations = new Map<
+      ObjectExpression | Program,
+      ComponentProp[]
+    >()
     let emitParamName = ''
 
-    /**
-     * @typedef {object} VueTemplateDefineData
-     * @property {'export' | 'mark' | 'definition' | 'setup'} type
-     * @property {ObjectExpression | Program} define
-     * @property {ComponentEmit[]} emits
-     * @property {ComponentProp[]} props
-     * @property {CallExpression} [defineEmits]
-     */
-    /** @type {VueTemplateDefineData | null} */
-    let vueTemplateDefineData = null
+    interface VueTemplateDefineData {
+      type: 'export' | 'mark' | 'definition' | 'setup'
+      define: ObjectExpression | Program
+      emits: ComponentEmit[]
+      props: ComponentProp[]
+      defineEmits?: CallExpression
+    }
 
-    /**
-     * @param {ComponentEmit[]} emits
-     * @param {ComponentProp[]} props
-     * @param {NameWithLoc} nameWithLoc
-     * @param {ObjectExpression | Program} vueDefineNode
-     */
-    function verifyEmit(emits, props, nameWithLoc, vueDefineNode) {
+    let vueTemplateDefineData: VueTemplateDefineData | null = null
+
+    function verifyEmit(
+      emits: ComponentEmit[],
+      props: ComponentProp[],
+      nameWithLoc: NameWithLoc,
+      vueDefineNode: ObjectExpression | Program
+    ) {
       const name = nameWithLoc.name
       if (emits.some((e) => e.emitName === name || e.emitName == null)) {
         return
@@ -168,11 +165,7 @@ module.exports = {
     }
 
     const callVisitor = {
-      /**
-       * @param {CallExpression} node
-       * @param {VueObjectData} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData) {
         const callee = utils.skipChainExpression(node.callee)
         const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
@@ -241,7 +234,6 @@ module.exports = {
     return utils.defineTemplateBodyVisitor(
       context,
       {
-        /** @param { CallExpression } node */
         CallExpression(node) {
           const callee = utils.skipChainExpression(node.callee)
           const nameWithLoc = getNameParamNode(node)
@@ -301,8 +293,7 @@ module.exports = {
             if (!variable) {
               return
             }
-            /** @type {Set<Identifier>} */
-            const emitReferenceIds = new Set()
+            const emitReferenceIds = new Set<Identifier>()
             for (const reference of variable.references) {
               if (!reference.isRead()) {
                 continue
@@ -311,7 +302,7 @@ module.exports = {
               emitReferenceIds.add(reference.identifier)
             }
             setupContexts.set(programNode, {
-              contextReferenceIds: new Set(),
+              contextReferenceIds: new Set<Identifier>(),
               emitReferenceIds
             })
           },
@@ -356,10 +347,8 @@ module.exports = {
               // cannot check
               return
             }
-            /** @type {Set<Identifier>} */
-            const contextReferenceIds = new Set()
-            /** @type {Set<Identifier>} */
-            const emitReferenceIds = new Set()
+            const contextReferenceIds = new Set<Identifier>()
+            const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
               const emitProperty = utils.findAssignmentProperty(
                 contextParam,
@@ -433,19 +422,17 @@ module.exports = {
   }
 }
 
-/**
- * @param {ObjectExpression|Program} define
- * @param {ComponentEmit[]} emits
- * @param {NameWithLoc} nameWithLoc
- * @param {RuleContext} context
- * @returns {Rule.SuggestionReportDescriptor[]}
- */
-function buildSuggest(define, emits, nameWithLoc, context) {
+function buildSuggest(
+  define: ObjectExpression | Program,
+  emits: ComponentEmit[],
+  nameWithLoc: NameWithLoc,
+  context: RuleContext
+): Rule.SuggestionReportDescriptor[] {
   const emitsKind =
     define.type === 'ObjectExpression' ? '`emits` option' : '`defineEmits`'
   const certainEmits = emits.filter(
-    /** @returns {e is ComponentEmit & {type:'array'|'object'}} */
-    (e) => e.type === 'array' || e.type === 'object'
+    (e): e is ComponentEmit & { type: 'array' | 'object' } =>
+      e.type === 'array' || e.type === 'object'
   )
   const lastEmit = certainEmits.at(-1)
   if (lastEmit) {
@@ -495,9 +482,10 @@ function buildSuggest(define, emits, nameWithLoc, context) {
     const sourceCode = context.sourceCode
     const emitsOptionValue = emitsOption.value
     if (emitsOptionValue.type === 'ArrayExpression') {
-      const leftBracket = /** @type {Token} */ (
-        sourceCode.getFirstToken(emitsOptionValue, isOpeningBracketToken)
-      )
+      const leftBracket = sourceCode.getFirstToken(
+        emitsOptionValue,
+        isOpeningBracketToken
+      )!
       return [
         {
           messageId: 'addOneOption',
@@ -513,9 +501,10 @@ function buildSuggest(define, emits, nameWithLoc, context) {
         }
       ]
     } else if (emitsOptionValue.type === 'ObjectExpression') {
-      const leftBrace = /** @type {Token} */ (
-        sourceCode.getFirstToken(emitsOptionValue, isOpeningBraceToken)
-      )
+      const leftBrace = sourceCode.getFirstToken(
+        emitsOptionValue,
+        isOpeningBraceToken
+      )!
       return [
         {
           messageId: 'addOneOption',
@@ -557,12 +546,14 @@ function buildSuggest(define, emits, nameWithLoc, context) {
             `,\nemits: ['${nameWithLoc.name}']`
           )
         } else {
-          const objectLeftBrace = /** @type {Token} */ (
-            sourceCode.getFirstToken(object, isOpeningBraceToken)
-          )
-          const objectRightBrace = /** @type {Token} */ (
-            sourceCode.getLastToken(object, isClosingBraceToken)
-          )
+          const objectLeftBrace = sourceCode.getFirstToken(
+            object,
+            isOpeningBraceToken
+          )!
+          const objectRightBrace = sourceCode.getLastToken(
+            object,
+            isClosingBraceToken
+          )!
           return fixer.insertTextAfter(
             objectLeftBrace,
             `\nemits: ['${nameWithLoc.name}']${
@@ -593,12 +584,14 @@ function buildSuggest(define, emits, nameWithLoc, context) {
             `,\nemits: {'${nameWithLoc.name}': null}`
           )
         } else {
-          const objectLeftBrace = /** @type {Token} */ (
-            sourceCode.getFirstToken(object, isOpeningBraceToken)
-          )
-          const objectRightBrace = /** @type {Token} */ (
-            sourceCode.getLastToken(object, isClosingBraceToken)
-          )
+          const objectLeftBrace = sourceCode.getFirstToken(
+            object,
+            isOpeningBraceToken
+          )!
+          const objectRightBrace = sourceCode.getLastToken(
+            object,
+            isClosingBraceToken
+          )!
           return fixer.insertTextAfter(
             objectLeftBrace,
             `\nemits: {'${nameWithLoc.name}': null}${
