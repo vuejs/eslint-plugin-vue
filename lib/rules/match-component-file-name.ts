@@ -2,7 +2,7 @@
  * @fileoverview Require component name property to match its file name
  * @author Rodrigo Pedra Brum <rodrigo.pedra@gmail.com>
  */
-import utils from '../utils'
+import utils from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import path from 'node:path'
 

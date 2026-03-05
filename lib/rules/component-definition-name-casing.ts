@@ -2,7 +2,7 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
-import utils from '../utils'
+import utils from '../utils/index.js'
 import { getChecker, getExactConverter } from '../utils/casing.ts'
 
 const allowedCaseOptions = ['PascalCase', 'kebab-case']

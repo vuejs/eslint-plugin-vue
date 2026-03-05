@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { pascalCase } from '../utils/casing.ts'
-import utils from '../utils'
+import utils from '../utils/index.js'
 
 interface Options {
   /** The style for the default slot at a custom component directly. */

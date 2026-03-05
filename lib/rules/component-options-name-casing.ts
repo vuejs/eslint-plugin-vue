@@ -2,7 +2,7 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils'
+import utils from '../utils/index.js'
 import {
   allowedCaseOptions,
   getChecker,

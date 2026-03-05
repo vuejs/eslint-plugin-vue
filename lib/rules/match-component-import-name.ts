@@ -2,7 +2,7 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils'
+import utils from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 
 function getExpectedNames(identifier: Identifier): string[] {

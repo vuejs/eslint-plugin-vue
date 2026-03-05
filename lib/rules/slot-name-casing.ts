@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { CaseChecker } from '../utils/casing.ts'
-import utils from '../utils'
+import utils from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
 
 type OptionType = 'camelCase' | 'kebab-case' | 'singleword'
