@@ -3,29 +3,21 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils'
+import { camelCase, isKebabCase } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/**
- * @typedef { VDirectiveKey & { name: VIdentifier & { name: 'bind' }, argument: VExpressionContainer | VIdentifier } } VBindDirectiveKey
- * @typedef { VDirective & { key: VBindDirectiveKey } } VBindDirective
- */
-
-/**
- * @param {string} name
- * @returns {string}
- */
-function kebabCaseToCamelCase(name) {
-  return casing.isKebabCase(name) ? casing.camelCase(name) : name
+type VBindDirectiveKey = VDirectiveKey & {
+  name: VIdentifier & { name: 'bind' }
+  argument: VExpressionContainer | VIdentifier
 }
 
-/**
- * @param {VBindDirective} node
- * @returns {boolean}
- */
-function isSameName(node) {
+type VBindDirective = VDirective & { key: VBindDirectiveKey }
+
+function kebabCaseToCamelCase(name: string): string {
+  return isKebabCase(name) ? camelCase(name) : name
+}
+
+function isSameName(node: VBindDirective): boolean {
   const attrName =
     node.key.argument.type === 'VIdentifier' ? node.key.argument.rawName : null
   const valueName =
@@ -38,16 +30,12 @@ function isSameName(node) {
   return kebabCaseToCamelCase(attrName) === kebabCaseToCamelCase(valueName)
 }
 
-/**
- * @param {VBindDirectiveKey} key
- * @returns {number}
- */
-function getCutStart(key) {
+function getCutStart(key: VBindDirectiveKey): number {
   const lastModifier = key.modifiers.at(-1)
   return lastModifier ? lastModifier.range[1] : key.argument.range[1]
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -74,14 +62,12 @@ module.exports = {
       unexpectedShorthand: 'Unexpected same-name shorthand.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const preferShorthand = context.options[0] !== 'longform'
-    /** @type {"always" | "never" | "ignore"} */
-    const sameNameShorthand = context.options[1]?.sameNameShorthand || 'ignore'
+    const sameNameShorthand: 'always' | 'never' | 'ignore' =
+      context.options[1]?.sameNameShorthand || 'ignore'
 
-    /** @param {VBindDirective} node */
-    function checkAttributeStyle(node) {
+    function checkAttributeStyle(node: VBindDirective) {
       const shorthandProp = node.key.name.rawName === '.'
       const shorthand = node.key.name.rawName === ':' || shorthandProp
       if (shorthand === preferShorthand) {
@@ -122,8 +108,7 @@ module.exports = {
       })
     }
 
-    /** @param {VBindDirective} node */
-    function checkAttributeSameName(node) {
+    function checkAttributeSameName(node: VBindDirective) {
       if (sameNameShorthand === 'ignore' || !isSameName(node)) return
 
       const preferShorthand = sameNameShorthand === 'always'
@@ -142,8 +127,7 @@ module.exports = {
         messageId,
         *fix(fixer) {
           if (preferShorthand) {
-            /** @type {Range} */
-            const valueRange = [getCutStart(node.key), node.range[1]]
+            const valueRange: Range = [getCutStart(node.key), node.range[1]]
 
             yield fixer.removeRange(valueRange)
           } else if (node.key.argument.type === 'VIdentifier') {
@@ -157,9 +141,8 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VBindDirective} node */
       "VAttribute[directive=true][key.name.name='bind'][key.argument!=null]"(
-        node
+        node: VBindDirective
       ) {
         checkAttributeSameName(node)
         checkAttributeStyle(node)

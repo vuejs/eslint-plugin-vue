@@ -2,17 +2,14 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
-'use strict'
+import utils from '../utils'
+import { getChecker, getExactConverter } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
 const allowedCaseOptions = ['PascalCase', 'kebab-case']
 
-/**
- * @param {Expression | SpreadElement} node
- * @returns {node is (Literal | TemplateLiteral)}
- */
-function canConvert(node) {
+function canConvert(
+  node: Expression | SpreadElement
+): node is Literal | TemplateLiteral {
   return (
     node.type === 'Literal' ||
     (node.type === 'TemplateLiteral' &&
@@ -21,7 +18,7 @@ function canConvert(node) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -39,21 +36,15 @@ module.exports = {
       incorrectCase: 'Property name "{{value}}" is not {{caseType}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0]
     const caseType = allowedCaseOptions.includes(options)
       ? options
       : 'PascalCase'
 
-    /**
-     * @param {Literal | TemplateLiteral} node
-     */
-    function convertName(node) {
-      /** @type {string} */
-      let nodeValue
-      /** @type {Range} */
-      let range
+    function convertName(node: Literal | TemplateLiteral) {
+      let nodeValue: string
+      let range: Range
       if (node.type === 'TemplateLiteral') {
         const quasis = node.quasis[0]
         nodeValue = quasis.value.cooked
@@ -63,7 +54,7 @@ module.exports = {
         range = node.range
       }
 
-      if (!casing.getChecker(caseType)(nodeValue)) {
+      if (!getChecker(caseType)(nodeValue)) {
         context.report({
           node,
           messageId: 'incorrectCase',
@@ -74,7 +65,7 @@ module.exports = {
           fix: (fixer) =>
             fixer.replaceTextRange(
               [range[0] + 1, range[1] - 1],
-              casing.getExactConverter(caseType)(nodeValue)
+              getExactConverter(caseType)(nodeValue)
             )
         })
       }

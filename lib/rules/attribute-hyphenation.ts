@@ -3,7 +3,7 @@
  * @author Armano
  */
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { getExactConverter } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import svgAttributes from '../utils/svg-attributes-weird-case.json' with { type: 'json' }
 
@@ -79,7 +79,7 @@ export default {
       ignoredAttributes.push(...optionsPayload.ignore)
     }
 
-    const caseConverter = casing.getExactConverter(
+    const caseConverter = getExactConverter(
       useHyphenated ? 'kebab-case' : 'camelCase'
     )
 

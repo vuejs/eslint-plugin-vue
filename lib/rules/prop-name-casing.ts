@@ -4,7 +4,7 @@
  */
 import type { ComponentProp } from '../utils/index.js'
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const allowedCaseOptions = ['camelCase', 'snake_case']
@@ -13,7 +13,7 @@ function create(context: RuleContext) {
   const options = context.options[0]
   const isIgnoredProp = toRegExpGroupMatcher(context.options[1]?.ignoreProps)
   const caseType = allowedCaseOptions.includes(options) ? options : 'camelCase'
-  const checker = casing.getChecker(caseType)
+  const checker = getChecker(caseType)
 
   function processProps(props: ComponentProp[]) {
     for (const item of props) {

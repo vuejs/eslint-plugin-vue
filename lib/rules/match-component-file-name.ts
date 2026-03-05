@@ -2,17 +2,13 @@
  * @fileoverview Require component name property to match its file name
  * @author Rodrigo Pedra Brum <rodrigo.pedra@gmail.com>
  */
-'use strict'
+import utils from '../utils'
+import { kebabCase, pascalCase } from '../utils/casing.ts'
+import path from 'node:path'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const path = require('node:path')
-
-/**
- * @param {Expression | SpreadElement} node
- * @returns {node is (Literal | TemplateLiteral)}
- */
-function canVerify(node) {
+function canVerify(
+  node: Expression | SpreadElement
+): node is Literal | TemplateLiteral {
   return (
     node.type === 'Literal' ||
     (node.type === 'TemplateLiteral' &&
@@ -21,7 +17,7 @@ function canVerify(node) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -55,8 +51,7 @@ module.exports = {
         'Component name `{{name}}` should match file name `{{filename}}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     const options = context.options[0]
     const shouldMatchCase = (options && options.shouldMatchCase) || false
     const extensionsArray = options && options.extensions
@@ -67,33 +62,22 @@ module.exports = {
     const extension = path.extname(context.filename)
     const filename = path.basename(context.filename, extension)
 
-    /** @type {Rule.ReportDescriptor[]} */
-    const errors = []
+    const errors: Rule.ReportDescriptor[] = []
     let componentCount = 0
 
     if (!allowedExtensions.includes(extension.replace(/^\./, ''))) {
       return {}
     }
 
-    /**
-     * @param {string} name
-     * @param {string} filename
-     */
-    function compareNames(name, filename) {
+    function compareNames(name: string, filename: string) {
       if (shouldMatchCase) {
         return name === filename
       }
 
-      return (
-        casing.pascalCase(name) === filename ||
-        casing.kebabCase(name) === filename
-      )
+      return pascalCase(name) === filename || kebabCase(name) === filename
     }
 
-    /**
-     * @param {Literal | TemplateLiteral} node
-     */
-    function verifyName(node) {
+    function verifyName(node: Literal | TemplateLiteral) {
       let name
       if (node.type === 'TemplateLiteral') {
         const quasis = node.quasis[0]

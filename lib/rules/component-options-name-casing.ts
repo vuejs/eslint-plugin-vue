@@ -2,16 +2,14 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils'
+import {
+  allowedCaseOptions,
+  getChecker,
+  getConverter
+} from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/**
- * @param {import('../../typings/eslint-plugin-vue/util-types/ast').Expression} node
- * @returns {string | null}
- */
-function getOptionsComponentName(node) {
+function getOptionsComponentName(node: Expression): string | null {
   if (node.type === 'Identifier') {
     return node.name
   }
@@ -21,7 +19,7 @@ function getOptionsComponentName(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -32,19 +30,18 @@ module.exports = {
     },
     fixable: 'code',
     hasSuggestions: true,
-    schema: [{ enum: casing.allowedCaseOptions }],
+    schema: [{ enum: allowedCaseOptions }],
     messages: {
       caseNotMatched: 'Component name "{{component}}" is not {{caseType}}.',
       possibleRenaming: 'Rename component name to be in {{caseType}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const caseType = context.options[0] || 'PascalCase'
 
     const canAutoFix = caseType === 'PascalCase'
-    const checkCase = casing.getChecker(caseType)
-    const convert = casing.getConverter(caseType)
+    const checkCase = getChecker(caseType)
+    const convert = getConverter(caseType)
 
     return utils.executeOnVue(context, (obj) => {
       const node = utils.findProperty(obj, 'components')

@@ -1,5 +1,5 @@
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { getConverter } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 export default {
@@ -63,7 +63,7 @@ export default {
     const isIgnoredTag = toRegExpGroupMatcher(optionsPayload?.ignoreTags)
     const autofix = Boolean(optionsPayload && optionsPayload.autofix)
 
-    const caseConverter = casing.getConverter(
+    const caseConverter = getConverter(
       useHyphenated ? 'kebab-case' : 'camelCase'
     )
 

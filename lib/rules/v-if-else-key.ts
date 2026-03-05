@@ -2,39 +2,35 @@
  * @author Felipe Melendez
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-// =============================================================================
-// Requirements
-// =============================================================================
-
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-// =============================================================================
-// Rule Helpers
-// =============================================================================
+import utils from '../utils/index.js'
+import { kebabCase } from '../utils/casing.ts'
 
 /**
  * A conditional family is made up of a group of repeated components that are conditionally rendered
  * using v-if, v-else-if, and v-else.
- *
- * @typedef {Object} ConditionalFamily
- * @property {VElement} if - The node associated with the 'v-if' directive.
- * @property {VElement[]} elseIf - An array of nodes associated with 'v-else-if' directives.
- * @property {VElement | null} else - The node associated with the 'v-else' directive, or null if there isn't one.
  */
+interface ConditionalFamily {
+  /** The node associated with the 'v-if' directive. */
+  if: VElement
+  /** An array of nodes associated with 'v-else-if' directives. */
+  elseIf: VElement[]
+  /** The node associated with the 'v-else' directive, or null if there isn't one. */
+  else: VElement | null
+}
 
 /**
  * Checks if a given node has sibling nodes of the same type that are also conditionally rendered.
  * This is used to determine if multiple instances of the same component are being conditionally
  * rendered within the same parent scope.
  *
- * @param {VElement} node - The Vue component node to check for conditional rendering siblings.
- * @param {string} componentName - The name of the component to check for sibling instances.
- * @returns {boolean} True if there are sibling nodes of the same type and conditionally rendered, false otherwise.
+ * @param node - The Vue component node to check for conditional rendering siblings.
+ * @param componentName - The name of the component to check for sibling instances.
+ * @returns True if there are sibling nodes of the same type and conditionally rendered, false otherwise.
  */
-const hasConditionalRenderedSiblings = (node, componentName) => {
+const hasConditionalRenderedSiblings = (
+  node: VElement,
+  componentName: string
+): boolean => {
   if (!node.parent || node.parent.type !== 'VElement') {
     return false
   }
@@ -53,18 +49,18 @@ const hasConditionalRenderedSiblings = (node, componentName) => {
  * The fix proposed adds a unique key based on the component's name and count,
  * following the format '${kebabCase(componentName)}-${componentCount}', e.g., 'some-component-2'.
  *
- * @param {VElement} node - The Vue component node to check for a 'key' attribute.
- * @param {RuleContext} context - The rule's context object, used for reporting.
- * @param {string} componentName - Name of the component.
- * @param {string} uniqueKey - A unique key for the repeated component, used for the fix.
- * @param {Map<VElement, ConditionalFamily>} conditionalFamilies - Map of conditionally rendered components and their respective conditional directives.
+ * @param node - The Vue component node to check for a 'key' attribute.
+ * @param context - The rule's context object, used for reporting.
+ * @param componentName - Name of the component.
+ * @param uniqueKey - A unique key for the repeated component, used for the fix.
+ * @param conditionalFamilies - Map of conditionally rendered components and their respective conditional directives.
  */
 const checkForKey = (
-  node,
-  context,
-  componentName,
-  uniqueKey,
-  conditionalFamilies
+  node: VElement,
+  context: RuleContext,
+  componentName: string,
+  uniqueKey: string,
+  conditionalFamilies: Map<VElement, ConditionalFamily>
 ) => {
   if (
     !node.parent ||
@@ -106,21 +102,16 @@ const checkForKey = (
 /**
  * Checks for the presence of conditional directives in the given node.
  *
- * @param {VElement} node - The node to check for conditional directives.
- * @returns {boolean} Returns true if a conditional directive is found in the node or its parents,
+ * @param node - The node to check for conditional directives.
+ * @returns Returns true if a conditional directive is found in the node or its parents,
  *   false otherwise.
  */
-const hasConditionalDirective = (node) =>
+const hasConditionalDirective = (node: VElement): boolean =>
   utils.hasDirective(node, 'if') ||
   utils.hasDirective(node, 'else-if') ||
   utils.hasDirective(node, 'else')
 
-// =============================================================================
-// Rule Definition
-// =============================================================================
-
-/** @type {import('eslint').Rule.RuleModule} */
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -141,11 +132,10 @@ module.exports = {
    * Creates and returns a rule object which checks usage of repeated components. If a component
    * is used more than once, it checks for the presence of a key.
    *
-   * @param {RuleContext} context - The context object.
-   * @returns {Object} A dictionary of functions to be called on traversal of the template body by
+   * @returns A dictionary of functions to be called on traversal of the template body by
    *   the eslint parser.
    */
-  create(context) {
+  create(context: RuleContext) {
     /**
      * Map to store conditionally rendered components and their respective conditional directives.
      *
@@ -164,29 +154,25 @@ module.exports = {
     /**
      * Checks if a given node represents a custom component without any conditional directives.
      *
-     * @param {VElement} node - The AST node to check.
-     * @returns {boolean} True if the node represents a custom component without any conditional directives, false otherwise.
+     * @returns True if the node represents a custom component without any conditional directives, false otherwise.
      */
-    const isCustomComponentWithoutCondition = (node) =>
+    const isCustomComponentWithoutCondition = (node: VElement): boolean =>
       node.type === 'VElement' &&
       utils.isCustomComponent(node) &&
       !hasConditionalDirective(node)
 
     /** Set of built-in Vue components that are exempt from the rule. */
-    /** @type {Set<string>} */
-    const exemptTags = new Set(['component', 'slot', 'template'])
+    const exemptTags = new Set<string>(['component', 'slot', 'template'])
 
     /** Set to keep track of nodes we've pushed to the stack. */
-    /** @type {Set<any>} */
-    const pushedNodes = new Set()
+    const pushedNodes = new Set<any>()
 
     /**
      * Creates and returns an object representing a conditional family.
      *
-     * @param {VElement} ifNode - The VElement associated with the 'v-if' directive.
-     * @returns {ConditionalFamily}
+     * @param ifNode - The VElement associated with the 'v-if' directive.
      */
-    const createConditionalFamily = (ifNode) => ({
+    const createConditionalFamily = (ifNode: VElement): ConditionalFamily => ({
       if: ifNode,
       elseIf: [],
       else: null
@@ -264,7 +250,7 @@ module.exports = {
           }
 
           if (usageInfo.count > 0) {
-            const uniqueKey = `${casing.kebabCase(componentName)}-${
+            const uniqueKey = `${kebabCase(componentName)}-${
               usageInfo.count + 1
             }`
             checkForKey(
@@ -277,9 +263,7 @@ module.exports = {
 
             // If this is the second occurrence, also apply a fix to the first occurrence
             if (usageInfo.count === 1) {
-              const uniqueKeyForFirstInstance = `${casing.kebabCase(
-                componentName
-              )}-1`
+              const uniqueKeyForFirstInstance = `${kebabCase(componentName)}-1`
               checkForKey(
                 usageInfo.firstNode,
                 context,

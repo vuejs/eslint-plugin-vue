@@ -2,29 +2,26 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { CaseChecker } from '../utils/casing.ts'
+import utils from '../utils'
+import { getChecker } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/**
- * @typedef { 'camelCase' | 'kebab-case' | 'singleword' } OptionType
- * @typedef { (str: string) => boolean } CheckerType
- */
+type OptionType = 'camelCase' | 'kebab-case' | 'singleword'
 
 /**
  * Checks whether the given string is a single word.
- * @param {string} str
- * @return {boolean}
  */
-function isSingleWord(str) {
+function isSingleWord(str: string): boolean {
   return /^[a-z]+$/u.test(str)
 }
 
-/** @type {OptionType[]} */
-const allowedCaseOptions = ['camelCase', 'kebab-case', 'singleword']
+const allowedCaseOptions: OptionType[] = [
+  'camelCase',
+  'kebab-case',
+  'singleword'
+]
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -42,19 +39,17 @@ module.exports = {
       invalidCase: 'Slot name "{{name}}" is not {{caseType}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const option = context.options[0]
 
-    /** @type {OptionType} */
-    const caseType = allowedCaseOptions.includes(option) ? option : 'camelCase'
+    const caseType: OptionType = allowedCaseOptions.includes(option)
+      ? option
+      : 'camelCase'
 
-    /** @type {CheckerType} */
-    const checker =
-      caseType === 'singleword' ? isSingleWord : casing.getChecker(caseType)
+    const checker: CaseChecker =
+      caseType === 'singleword' ? isSingleWord : getChecker(caseType)
 
-    /** @param {VAttribute} node */
-    function processSlotNode(node) {
+    function processSlotNode(node: VAttribute) {
       const name = node.value?.value
       if (name && !checker(name)) {
         context.report({
@@ -70,8 +65,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      "VElement[name='slot']"(node) {
+      "VElement[name='slot']"(node: VElement) {
         const slotName = utils.getAttribute(node, 'name')
         if (slotName) {
           processSlotNode(slotName)

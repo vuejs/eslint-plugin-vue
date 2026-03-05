@@ -2,23 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { kebabCase, pascalCase } from '../utils/casing.ts'
+import INLINE_ELEMENTS from '../utils/inline-non-void-elements.json' with { type: 'json' }
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const INLINE_ELEMENTS = require('../utils/inline-non-void-elements.json')
-
-/**
- * @param {VElement & { endTag: VEndTag }} element
- */
-function isMultilineElement(element) {
+function isMultilineElement(element: VElement & { endTag: VEndTag }) {
   return element.loc.start.line < element.endTag.loc.start.line
 }
 
-/**
- * @param {any} options
- */
-function parseOptions(options) {
+function parseOptions(options: any) {
   return Object.assign(
     {
       ignores: ['pre', 'textarea', ...INLINE_ELEMENTS],
@@ -29,10 +21,7 @@ function parseOptions(options) {
   )
 }
 
-/**
- * @param {number} lineBreaks
- */
-function getPhrase(lineBreaks) {
+function getPhrase(lineBreaks: number) {
   switch (lineBreaks) {
     case 0: {
       return 'no'
@@ -45,17 +34,17 @@ function getPhrase(lineBreaks) {
 /**
  * Check whether the given element is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
- * @param {VElement & { endTag: VEndTag }} node The element node to check.
- * @param {SourceCode} sourceCode The source code object of the current context.
- * @returns {boolean} `true` if the element is empty.
  */
-function isEmpty(node, sourceCode) {
+function isEmpty(
+  node: VElement & { endTag: VEndTag },
+  sourceCode: SourceCode
+): boolean {
   const start = node.startTag.range[1]
   const end = node.endTag.range[0]
   return sourceCode.text.slice(start, end).trim() === ''
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -92,8 +81,7 @@ module.exports = {
         'Expected 1 line break before closing tag (`</{{name}}>`), but {{actual}} line breaks found.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = parseOptions(context.options[0])
     const ignores = options.ignores
     const ignoreWhenEmpty = options.ignoreWhenEmpty
@@ -103,24 +91,17 @@ module.exports = {
       sourceCode.parserServices.getTemplateBodyTokenStore &&
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
-    /** @type {VElement | null} */
-    let inIgnoreElement = null
+    let inIgnoreElement: VElement | null = null
 
-    /**
-     * @param {VElement} node
-     */
-    function isIgnoredElement(node) {
+    function isIgnoredElement(node: VElement) {
       return (
         ignores.includes(node.name) ||
-        ignores.includes(casing.pascalCase(node.rawName)) ||
-        ignores.includes(casing.kebabCase(node.rawName))
+        ignores.includes(pascalCase(node.rawName)) ||
+        ignores.includes(kebabCase(node.rawName))
       )
     }
 
-    /**
-     * @param {number} lineBreaks
-     */
-    function isInvalidLineBreaks(lineBreaks) {
+    function isInvalidLineBreaks(lineBreaks: number) {
       return allowEmptyLines ? lineBreaks === 0 : lineBreaks !== 1
     }
 
@@ -139,16 +120,13 @@ module.exports = {
           return
         }
 
-        const element = /** @type {VElement & { endTag: VEndTag }} */ (node)
+        const element = node as VElement & { endTag: VEndTag }
 
         if (!isMultilineElement(element)) {
           return
         }
 
-        /**
-         * @type {SourceCode.CursorWithCountOptions}
-         */
-        const getTokenOption = {
+        const getTokenOption: SourceCode.CursorWithCountOptions = {
           includeComments: true,
           filter: (token) => token.type !== 'HTMLWhitespace'
         }
@@ -164,12 +142,14 @@ module.exports = {
           return
         }
 
-        const contentFirst = /** @type {Token} */ (
-          template.getTokenAfter(element.startTag, getTokenOption)
-        )
-        const contentLast = /** @type {Token} */ (
-          template.getTokenBefore(element.endTag, getTokenOption)
-        )
+        const contentFirst = template.getTokenAfter(
+          element.startTag,
+          getTokenOption
+        )!
+        const contentLast = template.getTokenBefore(
+          element.endTag,
+          getTokenOption
+        )!
 
         const beforeLineBreaks =
           contentFirst.loc.start.line - element.startTag.loc.end.line
@@ -188,8 +168,10 @@ module.exports = {
               actual: getPhrase(beforeLineBreaks)
             },
             fix(fixer) {
-              /** @type {Range} */
-              const range = [element.startTag.range[1], contentFirst.range[0]]
+              const range: Range = [
+                element.startTag.range[1],
+                contentFirst.range[0]
+              ]
               return fixer.replaceTextRange(range, '\n')
             }
           })
@@ -212,8 +194,10 @@ module.exports = {
               actual: getPhrase(afterLineBreaks)
             },
             fix(fixer) {
-              /** @type {Range} */
-              const range = [contentLast.range[1], element.endTag.range[0]]
+              const range: Range = [
+                contentLast.range[1],
+                element.endTag.range[0]
+              ]
               return fixer.replaceTextRange(range, '\n')
             }
           })

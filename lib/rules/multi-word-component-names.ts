@@ -2,17 +2,11 @@
  * @author Marton Csordas
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import path from 'node:path'
+import { isPascalCase, kebabCase } from '../utils/casing.ts'
+import utils from '../utils/index.js'
 
-const path = require('node:path')
-const casing = require('../utils/casing')
-const utils = require('../utils')
-
-const RESERVED_NAMES_IN_VUE3 = new Set(
-  require('../utils/vue3-builtin-components')
-)
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -38,16 +32,14 @@ module.exports = {
       unexpected: 'Component name "{{value}}" should always be multi-word.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Set<string>} */
-    const ignores = new Set(['App', 'app'])
+  create(context: RuleContext) {
+    const ignores = new Set<string>(['App', 'app'])
     for (const ignore of (context.options[0] && context.options[0].ignores) ||
       []) {
       ignores.add(ignore)
-      if (casing.isPascalCase(ignore)) {
+      if (isPascalCase(ignore)) {
         // PascalCase
-        ignores.add(casing.kebabCase(ignore))
+        ignores.add(kebabCase(ignore))
       }
     }
     let hasVue = utils.isScriptSetup(context)
@@ -55,20 +47,16 @@ module.exports = {
 
     /**
      * Returns true if the given component name is valid, otherwise false.
-     * @param {string} name
      * */
-    function isValidComponentName(name) {
-      if (ignores.has(name) || RESERVED_NAMES_IN_VUE3.has(name)) {
+    function isValidComponentName(name: string) {
+      if (ignores.has(name) || utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) {
         return true
       }
-      const elements = casing.kebabCase(name).split('-')
+      const elements = kebabCase(name).split('-')
       return elements.length > 1
     }
 
-    /**
-     * @param {Expression | SpreadElement} nameNode
-     */
-    function validateName(nameNode) {
+    function validateName(nameNode: Expression | SpreadElement) {
       if (nameNode.type !== 'Literal') return
       const componentName = `${nameNode.value}`
       if (!isValidComponentName(componentName)) {
@@ -108,7 +96,6 @@ module.exports = {
         }
       }),
       {
-        /** @param {Program} node */
         'Program:exit'(node) {
           if (hasName) return
           if (!hasVue && node.body.length > 0) return

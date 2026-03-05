@@ -4,7 +4,7 @@
  */
 import canConvertToVSlot from './utils/can-convert-to-v-slot.js'
 import { toRegExpGroupMatcher } from '../../utils/regexp.ts'
-import casing from '../../utils/casing.js'
+import { pascalCase, kebabCase } from '../../utils/casing.ts'
 import utils from '../../utils/index.js'
 
 export default {
@@ -122,8 +122,8 @@ export default {
       if (
         isAnyIgnored(
           componentName,
-          casing.pascalCase(componentName),
-          casing.kebabCase(componentName)
+          pascalCase(componentName),
+          kebabCase(componentName)
         )
       ) {
         return

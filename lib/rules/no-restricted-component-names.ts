@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { kebabCase, pascalCase } from '../utils/casing.ts'
 import { isRegExp, toRegExp } from '../utils/regexp.ts'
 
 interface OptionParsed {
@@ -17,7 +17,7 @@ function buildMatcher(str: string): (str: string) => boolean {
     const regex = toRegExp(str, { remove: 'g' })
     return (s) => regex.test(s)
   }
-  return (s) => s === casing.pascalCase(str) || s === casing.kebabCase(str)
+  return (s) => s === pascalCase(str) || s === kebabCase(str)
 }
 
 function parseOption(
