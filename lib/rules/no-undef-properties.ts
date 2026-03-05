@@ -93,7 +93,7 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const { ignores = [String.raw`/^\$/`] } = options
-    const isIgnored = regexp.toRegExpGroupMatcher(ignores)
+    const isIgnored = toRegExpGroupMatcher(ignores)
     const propertyReferenceExtractor = definePropertyReferenceExtractor(context)
     const programNode = context.sourceCode.ast
     /**
