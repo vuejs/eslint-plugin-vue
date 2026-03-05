@@ -134,6 +134,9 @@ export function definePropertyReferenceExtractor(
     return (toRefSet = { toRefNodes, toRefsNodes })
   }
 
+  /**
+   * Collects the property references for member expr.
+   */
   class PropertyReferencesForMember implements IPropertyReferences {
     node: MemberExpression
     name: string
@@ -171,6 +174,9 @@ export function definePropertyReferenceExtractor(
     }
   }
 
+  /**
+   * Collects the property references for object.
+   */
   class PropertyReferencesForObject implements IPropertyReferences {
     properties: Record<string, AssignmentProperty[]>
 
@@ -237,6 +243,9 @@ export function definePropertyReferenceExtractor(
     return ANY
   }
 
+  /**
+   * Extract the property references from Expression.
+   */
   function extractFromExpression(
     node:
       | Identifier

@@ -90,26 +90,24 @@ export function* iterateDefineRefs(
   globalScope: Scope.Scope
 ): Iterable<{ node: CallExpression; name: string }> {
   const tracker = new ReferenceTracker(globalScope)
-  const trackerConstructor = tracker.constructor as typeof ReferenceTracker
-
   for (const { node, path } of utils.iterateReferencesTraceMap(tracker, {
     ref: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     },
     computed: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     },
     toRef: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     },
     customRef: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     },
     shallowRef: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     },
     toRefs: {
-      [trackerConstructor.CALL]: true
+      [ReferenceTracker.CALL]: true
     }
   })) {
     const expr = node as CallExpression
