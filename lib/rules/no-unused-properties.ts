@@ -48,6 +48,7 @@ const GROUP_METHODS = 'methods'
 const GROUP_SETUP = 'setup'
 const GROUP_WATCHER = 'watch'
 const GROUP_EXPOSE = 'expose'
+const GROUP_INJECT = 'inject'
 
 const UNREFERENCED_UNKNOWN_MEMBER = 'unknownMemberAsUnreferenced'
 const UNREFERENCED_RETURN = 'returnAsUnreferenced'
@@ -59,11 +60,11 @@ const PROPERTY_LABEL = {
   computed: 'computed property',
   methods: 'method',
   setup: 'property returned from `setup()`',
+  inject: 'inject',
 
   // not use
   watch: 'watch',
   provide: 'provide',
-  inject: 'inject',
   expose: 'expose'
 }
 
@@ -187,7 +188,8 @@ export default {
                 GROUP_ASYNC_DATA,
                 GROUP_COMPUTED_PROPERTY,
                 GROUP_METHODS,
-                GROUP_SETUP
+                GROUP_SETUP,
+                GROUP_INJECT
               ]
             },
             additionalItems: false,

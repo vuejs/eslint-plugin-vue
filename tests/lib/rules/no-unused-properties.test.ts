@@ -2521,6 +2521,86 @@ tester.run('no-unused-properties', rule, {
       {{ props.foo }}{{ bar }}
       </template>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    // used inject
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['foo'],
+            methods: {
+              bar() {
+                return this.foo
+              }
+            }
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['foo', 'bar'],
+            methods: {
+              baz() {
+                return this.foo + this.bar
+              }
+            }
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['foo'],
+          }
+        </script>
+        <template>
+          {{ foo }}
+        </template>
+      `,
+      options: [{ groups: ['inject'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: {
+              foo: {
+                from: 'foo',
+                default: 'default value'
+              }
+            },
+            methods: {
+              test() {
+                return this.foo
+              }
+            }
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }]
+    },
+    {
+      // inject: not in groups config
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['unused'],
+          }
+        </script>
+      `,
+      options: [{ groups: ['props'] }]
     }
   ],
   invalid: [
@@ -4739,6 +4819,97 @@ tester.run('no-unused-properties', rule, {
       </template>`,
       errors: ["'baz' of property found, but never used."],
       ...getTypeScriptFixtureTestOptions()
+    },
+    // unused inject
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['unused'],
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }],
+      errors: [
+        {
+          message: "'unused' of inject found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['foo', 'bar'],
+            methods: {
+              baz() {
+                return this.foo
+              }
+            }
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }],
+      errors: [
+        {
+          message: "'bar' of inject found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: ['foo', 'bar', 'baz'],
+          }
+        </script>
+        <template>
+          {{ foo }}
+        </template>
+      `,
+      options: [{ groups: ['inject'] }],
+      errors: [
+        {
+          message: "'bar' of inject found, but never used.",
+          line: 4
+        },
+        {
+          message: "'baz' of inject found, but never used.",
+          line: 4
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            inject: {
+              unused1: {
+                from: 'unused1',
+                default: 'default1'
+              },
+              unused2: 'unused2'
+            }
+          }
+        </script>
+      `,
+      options: [{ groups: ['inject'] }],
+      errors: [
+        {
+          message: "'unused1' of inject found, but never used.",
+          line: 5
+        },
+        {
+          message: "'unused2' of inject found, but never used.",
+          line: 9
+        }
+      ]
     }
   ]
 })
