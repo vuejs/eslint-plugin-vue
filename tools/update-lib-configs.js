@@ -56,7 +56,7 @@ function formatCategory(category, alwaysError = false) {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
@@ -83,7 +83,7 @@ module.exports = {
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   extends: require.resolve('./${extendsCategoryId}'),
   rules: ${formatRules(category.rules, category.categoryId, alwaysError)}
 }
@@ -93,14 +93,14 @@ module.exports = {
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/')
 for (const category of categories) {
-  const filePath = path.join(ROOT, `${category.categoryId}.js`)
+  const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
 
   if (!errorCategories.has(category.categoryId)) {
     fs.writeFileSync(
-      path.join(ROOT, `${category.categoryId}-error.js`),
+      path.join(ROOT, `${category.categoryId}-error.ts`),
       formatCategory(category, true)
     )
   }

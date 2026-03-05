@@ -1,0 +1,168 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-useless-v-bind'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: {
+    parser: vueEslintParser,
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
+})
+
+tester.run('no-useless-v-bind', rule, {
+  valid: [
+    `
+    <template>
+      <div id="foo" />
+      <div id='foo' />
+      <div id=foo />
+      <div :id="foo" />
+      <div :id="'foo' || 'bar'" />
+      <div :id="1" />
+      <div :id />
+      <div :id="{" />
+      <div :id="null" />
+    </template>`,
+    {
+      code: `
+      <template>
+        <div :id="'comment'/*comment*/" />
+        <div :id="'comment'//comment
+        " />
+      </template>
+      `,
+      options: [{ ignoreIncludesComment: true }]
+    },
+    {
+      code: String.raw`
+      <template>
+        <div :id="'\n'" />
+        <div :id="'\r'" />
+      </template>`,
+      options: [{ ignoreStringEscape: true }]
+    }
+  ],
+  invalid: [
+    {
+      code: `
+      <template>
+        <div :id="'foo'" />
+        <div v-bind:id="'foo'" />
+      </template>`,
+      output: `
+      <template>
+        <div id="foo" />
+        <div id="foo" />
+      </template>`,
+      errors: [
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 25
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div :id="'comment'/*comment*/" />
+        <div :id="'comment'//comment
+        " />
+      </template>
+      `,
+      output: null,
+      errors: [
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.'
+      ]
+    },
+    {
+      code: String.raw`
+      <template>
+        <div :id="'\n'" />
+        <div :id="'\r'" />
+      </template>`,
+      output: null,
+      errors: [
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div :id="'&quot;'" />
+        <div :id=\`&quot;&apos;\` />
+        <div :id="'\\\\'" />
+        <div :id="'\\\\r'" />
+        <div :id="'\\'" />
+        <div :id="\`foo\`" />
+        <div :id="\`foo\${bar}\`" />
+        <div :id='"&apos;"' />
+        <div :id=\`foo\` />
+      </template>`,
+      output: `
+      <template>
+        <div id="&quot;" />
+        <div id=&quot;&apos; />
+        <div id="\\" />
+        <div id="\\r" />
+        <div :id="'\\'" />
+        <div id="foo" />
+        <div :id="\`foo\${bar}\`" />
+        <div id='&apos;' />
+        <div id=foo />
+      </template>`,
+      errors: [
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.'
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div :id="    'foo'    " />
+        <div :id='    "foo"    ' />
+        <div :id="   \`foo\`   " />
+        <div :id='   \`foo\`   ' />
+        <div :id="' \\'foo\\' '" />
+        <div :id='" \\"foo\\" "' />
+      </template>`,
+      output: `
+      <template>
+        <div id="foo" />
+        <div id='foo' />
+        <div id="foo" />
+        <div id='foo' />
+        <div id=" 'foo' " />
+        <div id=' "foo" ' />
+      </template>`,
+      errors: [
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.',
+        'Unexpected `v-bind` with a string literal value.'
+      ]
+    }
+  ]
+})

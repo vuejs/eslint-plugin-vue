@@ -59,8 +59,10 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
   - `always` requires one or more blank lines.
   - `never` disallows blank lines.
   - `consistent` requires or disallows a blank line based on the first sibling element.
-- `prev` any tag name without brackets.
-- `next` any tag name without brackets.
+- `prev` and `next` accept a tag name (e.g., `"div"`, `"br"`) or `"*"` to match any tag. Pseudo-classes can be appended to filter by layout:
+  - `"*:single-line"` - matches only single-line tags (elements that are entirely on a single line, including self-closing tags).
+  - `"*:multi-line"` - matches only multi-line tags (tags that span multiple lines).
+  - Tag names work too, e.g., `"div:single-line"` or `"span:multi-line"`.
 
 ### Disallow blank lines between all tags
 
@@ -160,6 +162,53 @@ A configuration is an object which has 3 properties; `blankLine`, `prev` and `ne
 
 </eslint-code-block>
 
+### Distinguish between single-line and multi-line tags
+
+You can use the `:single-line` and `:multi-line` pseudo-classes in `prev`/`next` to enforce different spacing rules based on whether tags are single-line or multi-line.
+
+```json
+{
+  "vue/padding-line-between-tags": ["error", [
+    { "blankLine": "always", "prev": "*:single-line", "next": "*:multi-line" },
+    { "blankLine": "always", "prev": "*:multi-line", "next": "*:single-line" },
+    { "blankLine": "always", "prev": "*:multi-line", "next": "*:multi-line" },
+    { "blankLine": "never", "prev": "*:single-line", "next": "*:single-line" }
+  ]]
+}
+```
+
+<eslint-code-block fix :rules="{'vue/padding-line-between-tags': ['error', [
+  { blankLine: 'always', prev: '*:single-line', next: '*:multi-line' },
+  { blankLine: 'always', prev: '*:multi-line', next: '*:single-line' },
+  { blankLine: 'always', prev: '*:multi-line', next: '*:multi-line' },
+  { blankLine: 'never', prev: '*:single-line', next: '*:single-line' }
+]]}">
+
+```vue
+<template>
+  <div>
+    <!-- ✓ GOOD: No blank lines between single-line tags -->
+    <span>This is a single-line tag</span>
+    <span>This is a single-line tag</span>
+
+    <!-- ✓ GOOD: Blank line before multi-line tag -->
+    <div>
+      This is a multi-line tag
+    </div>
+
+    <!-- ✓ GOOD: Blank line before single-line tag after multi-line tag -->
+    <span>This is a single-line tag</span>
+
+    <!-- ✓ GOOD: Blank line before multi-line tag -->
+    <div>
+      This is a multi-line tag
+    </div>
+  </div>
+</template>
+```
+
+</eslint-code-block>
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v9.5.0
@@ -167,4 +216,4 @@ This rule was introduced in eslint-plugin-vue v9.5.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/padding-line-between-tags.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-line-between-tags.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/padding-line-between-tags.test.ts)

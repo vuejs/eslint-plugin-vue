@@ -1,0 +1,28 @@
+import { ESLint } from '../../eslint-compat'
+import plugin from '../../../dist'
+
+describe('eslintrc configs', () => {
+  for (const name of Object.keys(plugin.configs)) {
+    if (name.startsWith('flat/')) {
+      continue
+    }
+
+    const configName = `plugin:vue/${name}`
+    const eslint = new ESLint({
+      overrideConfigFile: true,
+      overrideConfig: {
+        // @ts-expect-error Linter.LegacyConfig
+        extends: [configName]
+      },
+      plugins: { vue: plugin },
+      fix: true
+    })
+    describe(`test for ${configName}`, () => {
+      it('without error', async () => {
+        await eslint.lintText('', {
+          filePath: 'test.vue'
+        })
+      })
+    })
+  }
+})

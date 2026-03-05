@@ -11,7 +11,13 @@ since: v7.0.0
 > enforce valid `.sync` modifier on `v-bind` directives
 
 - :no_entry_sign: This rule was **deprecated**.
-- :gear: This rule is included in all of `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue2-recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether every `.sync` modifier on `v-bind` directives is valid.
 
@@ -81,4 +87,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-bind-sync.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-bind-sync.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-bind-sync.test.ts)

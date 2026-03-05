@@ -1,0 +1,89 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/prefer-template'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2020 }
+})
+
+tester.run('prefer-template', rule, {
+  valid: [
+    `
+    <template>
+      <div :class="[\`foo-\${bar}\`]" />
+    </template>
+    `,
+    `
+    <template>
+      <div :[\`foo\${bar}\`]="value" />
+    </template>
+    `,
+    // CSS vars injection
+    `
+    <style>
+    .text {
+      color: v-bind('\`#\${hex}\`')
+    }
+    </style>`
+  ],
+  invalid: [
+    {
+      code: `
+      <template>
+        <div :class="['foo-' + bar]" />
+      </template>
+      `,
+      output: `
+      <template>
+        <div :class="[\`foo-\${  bar}\`]" />
+      </template>
+      `,
+      errors: [
+        {
+          message: 'Unexpected string concatenation.',
+          line: 3
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        <div :['foo'+bar]="value" />
+      </template>`,
+      output: `
+      <template>
+        <div :[\`foo\${bar}\`]="value" />
+      </template>`,
+      errors: [
+        {
+          message: 'Unexpected string concatenation.',
+          line: 3
+        }
+      ]
+    },
+    // CSS vars injection
+    {
+      code: `
+      <style>
+      .text {
+        color: v-bind('"#"+hex')
+      }
+      </style>`,
+      output: `
+      <style>
+      .text {
+        color: v-bind('\`#\${hex}\`')
+      }
+      </style>`,
+      errors: [
+        {
+          message: 'Unexpected string concatenation.',
+          line: 4
+        }
+      ]
+    }
+  ]
+})

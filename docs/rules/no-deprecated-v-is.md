@@ -10,7 +10,13 @@ since: v7.11.0
 
 > disallow deprecated `v-is` directive (in Vue.js 3.1.0+)
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 
@@ -52,4 +58,4 @@ This rule was introduced in eslint-plugin-vue v7.11.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-deprecated-v-is.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-v-is.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-v-is.test.ts)

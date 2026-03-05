@@ -10,7 +10,13 @@ since: v7.16.0
 
 > enforce valid `v-memo` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 This rule checks whether every `v-memo` directive is valid.
 
@@ -69,4 +75,4 @@ This rule was introduced in eslint-plugin-vue v7.16.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-memo.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-memo.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-memo.test.ts)

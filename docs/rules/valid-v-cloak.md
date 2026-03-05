@@ -10,7 +10,19 @@ since: v3.11.0
 
 > enforce valid `v-cloak` directives
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/vue2-recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether every `v-cloak` directive is valid.
 
@@ -49,4 +61,4 @@ This rule was introduced in eslint-plugin-vue v3.11.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-cloak.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-cloak.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-cloak.test.ts)

@@ -10,7 +10,13 @@ since: v7.0.0
 
 > disallow custom modifiers on v-model used on the component
 
-- :gear: This rule is included in all of `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue2-recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether `v-model` used on the component do not have custom modifiers.
 
@@ -55,4 +61,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-custom-modifiers-on-v-model.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-custom-modifiers-on-v-model.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-custom-modifiers-on-v-model.test.ts)

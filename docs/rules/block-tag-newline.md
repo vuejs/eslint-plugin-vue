@@ -165,4 +165,4 @@ This rule was introduced in eslint-plugin-vue v7.1.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/block-tag-newline.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/block-tag-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/block-tag-newline.test.ts)

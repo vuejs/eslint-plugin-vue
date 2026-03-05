@@ -10,7 +10,21 @@ since: v4.1.0
 
 > support comment-directives in `<template>`
 
-- :gear: This rule is included in all of `"plugin:vue/base"`, `*.configs["flat/base"]`, `"plugin:vue/vue2-essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue2-strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue2-recommended"`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/base"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/base"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
+  - `"plugin:vue/recommended"`
 
 Sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and in the block level.
 It supports usage of the following comments:
@@ -137,4 +151,4 @@ This rule was introduced in eslint-plugin-vue v4.1.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comment-directive.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comment-directive.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comment-directive.test.ts)
