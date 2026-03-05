@@ -2,15 +2,15 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { isRegExp, toRegExp, escape } from '../utils/regexp.ts'
+import casing from '../utils/casing.js'
 
-const utils = require('../utils')
-const regexp = require('../utils/regexp')
-const casing = require('../utils/casing')
-
-/**
- * @typedef { { names: { [tagName in string]: Set<string> }, regexps: { name: RegExp, attrs: Set<string> }[], cache: { [tagName in string]: Set<string> } } } TargetAttrs
- */
+interface TargetAttrs {
+  names: { [tagName in string]: Set<string> }
+  regexps: { name: RegExp; attrs: Set<string> }[]
+  cache: { [tagName in string]: Set<string> }
+}
 
 // https://dev.w3.org/html5/html-author/charref
 const DEFAULT_ALLOWLIST = [
@@ -60,18 +60,14 @@ const DEFAULT_DIRECTIVES = ['v-text']
 
 /**
  * Parse attributes option
- * @param {any} options
- * @returns {TargetAttrs}
  */
-function parseTargetAttrs(options) {
-  /** @type {TargetAttrs} */
-  const result = { names: {}, regexps: [], cache: {} }
+function parseTargetAttrs(options: any): TargetAttrs {
+  const result: TargetAttrs = { names: {}, regexps: [], cache: {} }
   for (const tagName of Object.keys(options)) {
-    /** @type { Set<string> } */
-    const attrs = new Set(options[tagName])
-    if (regexp.isRegExp(tagName)) {
+    const attrs = new Set<string>(options[tagName])
+    if (isRegExp(tagName)) {
       result.regexps.push({
-        name: regexp.toRegExp(tagName),
+        name: toRegExp(tagName),
         attrs
       })
     } else {
@@ -83,10 +79,8 @@ function parseTargetAttrs(options) {
 
 /**
  * Get a string from given expression container node
- * @param {VExpressionContainer} value
- * @returns { string | null }
  */
-function getStringValue(value) {
+function getStringValue(value: VExpressionContainer): string | null {
   const expression = value.expression
   if (!expression) {
     return null
@@ -100,7 +94,7 @@ function getStringValue(value) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -142,25 +136,24 @@ module.exports = {
       unexpectedInAttr: 'Unexpected non-translated string used in `{{attr}}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef { { upper: ElementStack | null, name: string, attrs: Set<string> } } ElementStack
-     */
+  create(context: RuleContext) {
+    interface ElementStack {
+      upper: ElementStack | null
+      name: string
+      attrs: Set<string>
+    }
+
     const opts = context.options[0] || {}
-    /** @type {string[]} */
-    const rawAllowlist = opts.allowlist || DEFAULT_ALLOWLIST
+    const rawAllowlist: string[] = opts.allowlist || DEFAULT_ALLOWLIST
     const attributes = parseTargetAttrs(opts.attributes || DEFAULT_ATTRIBUTES)
     const directives = opts.directives || DEFAULT_DIRECTIVES
 
-    /** @type {string[]} */
-    const stringAllowlist = []
-    /** @type {RegExp[]} */
-    const regexAllowlist = []
+    const stringAllowlist: string[] = []
+    const regexAllowlist: RegExp[] = []
 
     for (const item of rawAllowlist) {
-      if (regexp.isRegExp(item)) {
-        regexAllowlist.push(regexp.toRegExp(item))
+      if (isRegExp(item)) {
+        regexAllowlist.push(toRegExp(item))
       } else {
         stringAllowlist.push(item)
       }
@@ -170,20 +163,18 @@ module.exports = {
       stringAllowlist.length > 0
         ? new RegExp(
             stringAllowlist
-              .map((w) => regexp.escape(w))
+              .map((w) => escape(w))
               .sort((a, b) => b.length - a.length)
               .join('|'),
             'gu'
           )
         : null
 
-    /** @type {ElementStack | null} */
-    let elementStack = null
+    let elementStack: ElementStack | null = null
     /**
      * Gets the bare string from given string
-     * @param {string} str
      */
-    function getBareString(str) {
+    function getBareString(str: string) {
       let result = str.trim()
 
       if (allowlistRe) {
@@ -203,15 +194,12 @@ module.exports = {
 
     /**
      * Get the attribute to be verified from the element name.
-     * @param {string} tagName
-     * @returns {Set<string>}
      */
-    function getTargetAttrs(tagName) {
+    function getTargetAttrs(tagName: string): Set<string> {
       if (attributes.cache[tagName]) {
         return attributes.cache[tagName]
       }
-      /** @type {string[]} */
-      const result = []
+      const result: string[] = []
       if (attributes.names[tagName]) {
         result.push(...attributes.names[tagName])
       }
@@ -229,8 +217,7 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VText} node */
-      VText(node) {
+      VText(node: VText) {
         if (getBareString(node.value)) {
           context.report({
             node,
@@ -238,10 +225,7 @@ module.exports = {
           })
         }
       },
-      /**
-       * @param {VElement} node
-       */
-      VElement(node) {
+      VElement(node: VElement) {
         elementStack = {
           upper: elementStack,
           name: node.rawName,
@@ -251,8 +235,7 @@ module.exports = {
       'VElement:exit'() {
         elementStack = elementStack && elementStack.upper
       },
-      /** @param {VAttribute|VDirective} node */
-      VAttribute(node) {
+      VAttribute(node: VAttribute | VDirective) {
         if (!node.value || !elementStack) {
           return
         }

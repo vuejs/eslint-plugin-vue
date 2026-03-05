@@ -2,25 +2,17 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { isRegExp, toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { isRegExp, toRegExp } = require('../utils/regexp')
+interface OptionParsed {
+  test: (name: string) => boolean
+  message?: string
+  suggest?: string
+}
 
-/**
- * @typedef {object} OptionParsed
- * @property { (name: string) => boolean } test
- * @property {string|undefined} [message]
- * @property {string|undefined} [suggest]
- */
-
-/**
- * @param {string} str
- * @returns {(str: string) => boolean}
- * @private
- */
-function buildMatcher(str) {
+function buildMatcher(str: string): (str: string) => boolean {
   if (isRegExp(str)) {
     const regex = toRegExp(str, { remove: 'g' })
     return (s) => regex.test(s)
@@ -28,12 +20,9 @@ function buildMatcher(str) {
   return (s) => s === casing.pascalCase(str) || s === casing.kebabCase(str)
 }
 
-/**
- * @param {string|{name: string, message?: string, suggest?: string}} option
- * @returns {OptionParsed}
- * @private
- * */
-function parseOption(option) {
+function parseOption(
+  option: string | { name: string; message?: string; suggest?: string }
+): OptionParsed {
   if (typeof option === 'string') {
     const matcher = buildMatcher(option)
     return { test: matcher }
@@ -44,13 +33,10 @@ function parseOption(option) {
   return parsed
 }
 
-/**
- * @param {Property | AssignmentProperty} property
- * @param {string | undefined} suggest
- * @returns {Rule.SuggestionReportDescriptor[]}
- * @private
- * */
-function createSuggest(property, suggest) {
+function createSuggest(
+  property: Property | AssignmentProperty,
+  suggest?: string
+): Rule.SuggestionReportDescriptor[] {
   if (!suggest) {
     return []
   }
@@ -66,7 +52,7 @@ function createSuggest(property, suggest) {
   ]
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -102,15 +88,10 @@ module.exports = {
       suggest: 'Instead, change to `{{suggest}}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {OptionParsed[]} */
-    const options = context.options.map(parseOption)
+  create(context: RuleContext) {
+    const options: OptionParsed[] = context.options.map(parseOption)
 
-    /**
-     * @param {ObjectExpression} node
-     */
-    function verify(node) {
+    function verify(node: ObjectExpression) {
       const property = utils.findProperty(node, 'name')
       if (!property) return
 

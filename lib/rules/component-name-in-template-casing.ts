@@ -2,21 +2,17 @@
  * @author Yosuke Ota
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/250
  */
-'use strict'
-
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher, isRegExp } = require('../utils/regexp')
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher, isRegExp } from '../utils/regexp.ts'
 
 const allowedCaseOptions = ['PascalCase', 'kebab-case']
 const defaultCase = 'PascalCase'
 
 /**
  * Checks whether the given variable is the type-only import object.
- * @param {Variable} variable
- * @returns {boolean} `true` if the given variable is the type-only import.
  */
-function isTypeOnlyImport(variable) {
+function isTypeOnlyImport(variable: Variable): boolean {
   if (variable.defs.length === 0) return false
 
   return variable.defs.every((def) => {
@@ -35,7 +31,7 @@ function isTypeOnlyImport(variable) {
   })
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -74,8 +70,7 @@ module.exports = {
       incorrectCase: 'Component name "{{name}}" is not {{caseType}}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const caseOption = context.options[0]
     const options = context.options[1] || {}
     const caseType = allowedCaseOptions.includes(caseOption)
@@ -100,8 +95,9 @@ module.exports = {
       sourceCode.parserServices.getTemplateBodyTokenStore &&
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
-    /** @type { Set<string> } */
-    const registeredComponents = new Set(globalStrings.map(casing.pascalCase))
+    const registeredComponents = new Set<string>(
+      globalStrings.map(casing.pascalCase)
+    )
 
     if (utils.isScriptSetup(context)) {
       // For <script setup>
@@ -121,10 +117,8 @@ module.exports = {
 
     /**
      * Checks whether the given node is the verification target node.
-     * @param {VElement} node element node
-     * @returns {boolean} `true` if the given node is the verification target node.
      */
-    function isVerifyTarget(node) {
+    function isVerifyTarget(node: VElement): boolean {
       if (isIgnored(node.rawName)) {
         // ignore
         return false

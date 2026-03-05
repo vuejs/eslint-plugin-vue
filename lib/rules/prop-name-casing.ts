@@ -2,28 +2,20 @@
  * @fileoverview Requires specific casing for the Prop name in Vue components
  * @author Yu Kimura
  */
-'use strict'
+import type { ComponentProp } from '../utils/index.js'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher } = require('../utils/regexp')
 const allowedCaseOptions = ['camelCase', 'snake_case']
 
-/**
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
-
-/** @param {RuleContext} context */
-function create(context) {
+function create(context: RuleContext) {
   const options = context.options[0]
   const isIgnoredProp = toRegExpGroupMatcher(context.options[1]?.ignoreProps)
   const caseType = allowedCaseOptions.includes(options) ? options : 'camelCase'
   const checker = casing.getChecker(caseType)
 
-  /**
-   * @param {ComponentProp[]} props
-   */
-  function processProps(props) {
+  function processProps(props: ComponentProp[]) {
     for (const item of props) {
       const propName = item.propName
       if (propName == null) {
@@ -53,7 +45,7 @@ function create(context) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {

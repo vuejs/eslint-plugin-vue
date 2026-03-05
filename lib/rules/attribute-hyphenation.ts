@@ -2,18 +2,12 @@
  * @fileoverview Define a style for the props casing in templates.
  * @author Armano
  */
-'use strict'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
+import svgAttributes from '../utils/svg-attributes-weird-case.json' with { type: 'json' }
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher } = require('../utils/regexp')
-const svgAttributes = require('../utils/svg-attributes-weird-case.json')
-
-/**
- * @param {VDirective | VAttribute} node
- * @returns {string | null}
- */
-function getAttributeName(node) {
+function getAttributeName(node: VDirective | VAttribute): string | null {
   if (!node.directive) {
     return node.key.rawName
   }
@@ -29,7 +23,7 @@ function getAttributeName(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -73,8 +67,7 @@ module.exports = {
       cannotBeHyphenated: "Attribute '{{text}}' can't be hyphenated."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const option = context.options[0]
     const optionsPayload = context.options[1]
@@ -90,11 +83,7 @@ module.exports = {
       useHyphenated ? 'kebab-case' : 'camelCase'
     )
 
-    /**
-     * @param {VDirective | VAttribute} node
-     * @param {string} name
-     */
-    function reportIssue(node, name) {
+    function reportIssue(node: VDirective | VAttribute, name: string) {
       const text = sourceCode.getText(node.key)
 
       context.report({
@@ -125,10 +114,7 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {string} value
-     */
-    function isIgnoredAttribute(value) {
+    function isIgnoredAttribute(value: string) {
       const isIgnored = ignoredAttributes.some((attr) => value.includes(attr))
 
       if (isIgnored) {

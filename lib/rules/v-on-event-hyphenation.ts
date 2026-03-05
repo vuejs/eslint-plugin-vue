@@ -1,10 +1,8 @@
-'use strict'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher } = require('../utils/regexp')
-
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -55,14 +53,13 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const option = context.options[0]
     const optionsPayload = context.options[1]
     const useHyphenated = option !== 'never'
-    /** @type {string[]} */
-    const ignoredAttributes = (optionsPayload && optionsPayload.ignore) || []
+    const ignoredAttributes: string[] =
+      (optionsPayload && optionsPayload.ignore) || []
     const isIgnoredTag = toRegExpGroupMatcher(optionsPayload?.ignoreTags)
     const autofix = Boolean(optionsPayload && optionsPayload.autofix)
 
@@ -70,12 +67,11 @@ module.exports = {
       useHyphenated ? 'kebab-case' : 'camelCase'
     )
 
-    /**
-     * @param {VDirective} node
-     * @param {VIdentifier} argument
-     * @param {string} name
-     */
-    function reportIssue(node, argument, name) {
+    function reportIssue(
+      node: VDirective,
+      argument: VIdentifier,
+      name: string
+    ) {
       const text = sourceCode.getText(node.key)
 
       context.report({
@@ -94,10 +90,7 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {string} value
-     */
-    function isIgnoredAttribute(value) {
+    function isIgnoredAttribute(value: string) {
       const isIgnored = ignoredAttributes.some((attr) => value.includes(attr))
 
       if (isIgnored) {

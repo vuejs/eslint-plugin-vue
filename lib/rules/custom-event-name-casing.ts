@@ -2,31 +2,24 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-const casing = require('../utils/casing')
-const { toRegExpGroupMatcher } = require('../utils/regexp')
-
-/**
- * @typedef {import('../utils').VueObjectData} VueObjectData
- */
+import type { VueObjectData } from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import casing from '../utils/casing.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const ALLOWED_CASE_OPTIONS = ['kebab-case', 'camelCase']
 const DEFAULT_CASE = 'camelCase'
 
-/**
- * @typedef {object} NameWithLoc
- * @property {string} name
- * @property {SourceLocation} loc
- */
+interface NameWithLoc {
+  name: string
+  loc: SourceLocation
+}
+
 /**
  * Get the name param node from the given CallExpression
- * @param {CallExpression} node CallExpression
- * @returns { NameWithLoc | null }
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
     const name = utils.getStringLiteralValue(nameLiteralNode)
@@ -40,9 +33,8 @@ function getNameParamNode(node) {
 }
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
  */
-function getCalleeMemberNode(node) {
+function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
@@ -54,7 +46,7 @@ function getCalleeMemberNode(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -84,10 +76,14 @@ module.exports = {
       unexpected: "Custom event name '{{name}}' must be {{caseType}}."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ObjectExpression|Program, {contextReferenceIds:Set<Identifier>,emitReferenceIds:Set<Identifier>}>} */
-    const setupContexts = new Map()
+  create(context: RuleContext) {
+    const setupContexts = new Map<
+      ObjectExpression | Program,
+      {
+        contextReferenceIds: Set<Identifier>
+        emitReferenceIds: Set<Identifier>
+      }
+    >()
     let emitParamName = ''
     const caseType = context.options[0] || DEFAULT_CASE
     const objectOption = context.options[1] || {}
@@ -96,17 +92,12 @@ module.exports = {
 
     /**
      * Check whether the given event name is valid.
-     * @param {string} name The name to check.
-     * @returns {boolean} `true` if the given event name is valid.
      */
-    function isValidEventName(name) {
+    function isValidEventName(name: string): boolean {
       return caseChecker(name) || name.startsWith('update:')
     }
 
-    /**
-     * @param { NameWithLoc } nameWithLoc
-     */
-    function verify(nameWithLoc) {
+    function verify(nameWithLoc: NameWithLoc) {
       const name = nameWithLoc.name
       if (isValidEventName(name) || isIgnored(name)) {
         return
@@ -124,11 +115,7 @@ module.exports = {
     const programNode = context.sourceCode.ast
 
     const callVisitor = {
-      /**
-       * @param {CallExpression} node
-       * @param {VueObjectData} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData) {
         const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
@@ -205,12 +192,12 @@ module.exports = {
             if (!variable) {
               return
             }
-            const emitReferenceIds = new Set()
+            const emitReferenceIds = new Set<Identifier>()
             for (const reference of variable.references) {
               emitReferenceIds.add(reference.identifier)
             }
             setupContexts.set(programNode, {
-              contextReferenceIds: new Set(),
+              contextReferenceIds: new Set<Identifier>(),
               emitReferenceIds
             })
           },
@@ -230,8 +217,8 @@ module.exports = {
               // cannot check
               return
             }
-            const contextReferenceIds = new Set()
-            const emitReferenceIds = new Set()
+            const contextReferenceIds = new Set<Identifier>()
+            const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
               const emitProperty = utils.findAssignmentProperty(
                 contextParam,

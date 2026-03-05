@@ -2,26 +2,21 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-const regexp = require('../utils/regexp')
+interface ParsedOption {
+  test: (name: string) => boolean
+  message?: string
+  suggest?: string
+}
 
-/**
- * @typedef {object} ParsedOption
- * @property { (name: string) => boolean } test
- * @property {string|undefined} [message]
- * @property {string|undefined} [suggest]
- */
-
-/**
- * @param {string|{event: string, message?: string, suggest?: string}} option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(
+  option: string | { event: string; message?: string; suggest?: string }
+): ParsedOption {
   if (typeof option === 'string') {
-    const matcher = regexp.toRegExp(option, { remove: 'g' })
+    const matcher = toRegExp(option, { remove: 'g' })
     return {
       test(name) {
         return matcher.test(name)
@@ -34,18 +29,15 @@ function parseOption(option) {
   return parsed
 }
 
-/**
- * @typedef {object} NameWithLoc
- * @property {string} name
- * @property {SourceLocation} loc
- * @property {Range} range
- */
+interface NameWithLoc {
+  name: string
+  loc: SourceLocation
+  range: Range
+}
 /**
  * Get the name param node from the given CallExpression
- * @param {CallExpression} node CallExpression
- * @returns { NameWithLoc | null }
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression): NameWithLoc | null {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
     const name = utils.getStringLiteralValue(nameLiteralNode)
@@ -59,9 +51,8 @@ function getNameParamNode(node) {
 }
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
  */
-function getCalleeMemberNode(node) {
+function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
@@ -72,7 +63,8 @@ function getCalleeMemberNode(node) {
   }
   return null
 }
-module.exports = {
+
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -109,17 +101,17 @@ module.exports = {
       instead: 'Instead, change to `{{suggest}}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ObjectExpression, {contextReferenceIds:Set<Identifier>,emitReferenceIds:Set<Identifier>}>} */
-    const setupContexts = new Map()
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+  create(context: RuleContext) {
+    const setupContexts = new Map<
+      ObjectExpression,
+      {
+        contextReferenceIds: Set<Identifier>
+        emitReferenceIds: Set<Identifier>
+      }
+    >()
+    const options: ParsedOption[] = context.options.map(parseOption)
 
-    /**
-     * @param { NameWithLoc } nameWithLoc
-     */
-    function verify(nameWithLoc) {
+    function verify(nameWithLoc: NameWithLoc) {
       const name = nameWithLoc.name
 
       for (const option of options) {
@@ -187,8 +179,8 @@ module.exports = {
               // cannot check
               return
             }
-            const contextReferenceIds = new Set()
-            const emitReferenceIds = new Set()
+            const contextReferenceIds = new Set<Identifier>()
+            const emitReferenceIds = new Set<Identifier>()
             if (contextParam.type === 'ObjectPattern') {
               const emitProperty = utils.findAssignmentProperty(
                 contextParam,

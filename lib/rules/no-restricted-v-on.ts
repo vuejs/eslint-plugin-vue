@@ -2,26 +2,19 @@
  * @author Kamogelo Moalusi <github.com/thesheppard>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExp } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-const regexp = require('../utils/regexp')
+interface ParsedOption {
+  test: (key: VDirectiveKey) => boolean
+  modifiers?: string[]
+  useElement?: boolean
+  message?: string
+}
 
-/**
- * @typedef {object} ParsedOption
- * @property { (key: VDirectiveKey) => boolean } test
- * @property {string[]} [modifiers]
- * @property {boolean} [useElement]
- * @property {string} [message]
- */
-
-/**
- * @param {any} option
- * @returns {ParsedOption}
- */
-function parseOption(option) {
+function parseOption(option: any): ParsedOption {
   if (typeof option === 'string') {
-    const matcher = regexp.toRegExp(option, { remove: 'g' })
+    const matcher = toRegExp(option, { remove: 'g' })
     return {
       test(key) {
         return Boolean(
@@ -47,7 +40,7 @@ function parseOption(option) {
       if (!argTest(key)) {
         return false
       }
-      return /** @type {string[]} */ (option.modifiers).every((modName) =>
+      return (option.modifiers as string[]).every((modName) =>
         key.modifiers.some((mid) => mid.name === modName)
       )
     }
@@ -55,7 +48,7 @@ function parseOption(option) {
   }
   if (option.element) {
     const argTest = parsed.test
-    const tagMatcher = regexp.toRegExp(option.element, { remove: 'g' })
+    const tagMatcher = toRegExp(option.element, { remove: 'g' })
     parsed.test = (key) => {
       if (!argTest(key)) {
         return false
@@ -68,11 +61,7 @@ function parseOption(option) {
   return parsed
 }
 
-/**
- * @param {VDirectiveKey} key
- * @param {ParsedOption} option
- */
-function defaultMessage(key, option) {
+function defaultMessage(key: VDirectiveKey, option: ParsedOption) {
   const von = key.name.rawName === '@' ? '' : 'v-on'
   const arg =
     key.argument != null && key.argument.type === 'VIdentifier'
@@ -89,7 +78,7 @@ function defaultMessage(key, option) {
   return `Using \`${von + arg + mod}\` is not allowed on this ${element}.`
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -139,19 +128,16 @@ module.exports = {
     }
   },
 
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     if (context.options.length === 0) {
       return {}
     }
-    /** @type {ParsedOption[]} */
-    const options = context.options.map(parseOption)
+    const options: ParsedOption[] = context.options.map(parseOption)
 
     return utils.defineTemplateBodyVisitor(context, {
-      /**
-       * @param {VDirectiveKey} node
-       */
-      "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey"(node) {
+      "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey"(
+        node: VDirectiveKey
+      ) {
         for (const option of options) {
           if (option.test(node)) {
             const message = option.message || defaultMessage(node, option)

@@ -2,20 +2,12 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
+import utils from '../utils/index.js'
 
-const { toRegExpGroupMatcher } = require('../utils/regexp')
-const utils = require('../utils')
+type PreferOption = 'always' | 'never'
 
-/**
- * @typedef { 'always' | 'never' } PreferOption
- */
-
-/**
- * @param {VDirective | VAttribute} node
- * @returns {string | null}
- */
-function getAttributeName(node) {
+function getAttributeName(node: VDirective | VAttribute): string | null {
   if (!node.directive) {
     return node.key.rawName
   }
@@ -30,12 +22,12 @@ function getAttributeName(node) {
 
   return null
 }
-/**
- * @param {VAttribute | VDirective} node
- * @param {boolean} isExcepted
- * @param {PreferOption} option
- */
-function shouldConvertToLongForm(node, isExcepted, option) {
+
+function shouldConvertToLongForm(
+  node: VAttribute | VDirective,
+  isExcepted: boolean,
+  option: PreferOption
+): node is VAttribute {
   return (
     !node.directive &&
     !node.value &&
@@ -43,12 +35,11 @@ function shouldConvertToLongForm(node, isExcepted, option) {
   )
 }
 
-/**
- * @param {VAttribute | VDirective} node
- * @param {boolean} isExcepted
- * @param {PreferOption} option
- */
-function shouldConvertToShortForm(node, isExcepted, option) {
+function shouldConvertToShortForm(
+  node: VAttribute | VDirective,
+  isExcepted: boolean,
+  option: PreferOption
+): node is VDirective {
   const isLiteralTrue =
     node.directive &&
     node.value?.expression?.type === 'Literal' &&
@@ -58,7 +49,7 @@ function shouldConvertToShortForm(node, isExcepted, option) {
   return isLiteralTrue && (option === 'always' ? !isExcepted : isExcepted)
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -95,23 +86,15 @@ module.exports = {
         'Rewrite this prop into long-form HTML attribute.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {'always' | 'never'} */
-    const option = context.options[0] || 'always'
+  create(context: RuleContext) {
+    const option: PreferOption = context.options[0] || 'always'
     const exceptMatcher = toRegExpGroupMatcher(context.options[1]?.except)
 
-    /**
-     * @param {VAttribute | VDirective} node
-     * @param {string} messageId
-     * @param {string} longVuePropText
-     * @param {string} longHtmlAttrText
-     */
     function reportLongForm(
-      node,
-      messageId,
-      longVuePropText,
-      longHtmlAttrText
+      node: VAttribute | VDirective,
+      messageId: string,
+      longVuePropText: string,
+      longHtmlAttrText: string
     ) {
       context.report({
         node,
@@ -129,12 +112,11 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {VAttribute | VDirective} node
-     * @param {string} messageId
-     * @param {string} shortFormText
-     */
-    function reportShortForm(node, messageId, shortFormText) {
+    function reportShortForm(
+      node: VAttribute | VDirective,
+      messageId: string,
+      shortFormText: string
+    ) {
       context.report({
         node,
         messageId,
@@ -157,7 +139,7 @@ module.exports = {
         const isExcepted = exceptMatcher(name)
 
         if (shouldConvertToLongForm(node, isExcepted, option)) {
-          const key = /** @type {VIdentifier} */ (node.key)
+          const key = node.key
           reportLongForm(
             node,
             'expectLong',
@@ -165,7 +147,7 @@ module.exports = {
             `${key.rawName}="${key.rawName}"`
           )
         } else if (shouldConvertToShortForm(node, isExcepted, option)) {
-          const directiveKey = /** @type {VDirectiveKey} */ (node.key)
+          const directiveKey = node.key
           if (
             directiveKey.argument &&
             directiveKey.argument.type === 'VIdentifier'

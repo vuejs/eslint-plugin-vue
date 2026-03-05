@@ -5,7 +5,7 @@
 import type { IPropertyReferences } from '../utils/property-references.ts'
 import utils from '../utils/index.js'
 import reserved from '../utils/vue-reserved.json' with { type: 'json' }
-import regexp from '../utils/regexp.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 import { definePropertyReferenceExtractor } from '../utils/property-references.ts'
 
@@ -93,7 +93,7 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const { ignores = [String.raw`/^\$/`] } = options
-    const isIgnored = regexp.toRegExpGroupMatcher(ignores)
+    const isIgnored = toRegExpGroupMatcher(ignores)
     const propertyReferenceExtractor = definePropertyReferenceExtractor(context)
     const programNode = context.sourceCode.ast
     /**
