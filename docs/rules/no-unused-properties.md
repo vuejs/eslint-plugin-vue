@@ -64,6 +64,7 @@ export default {
 ```
 
 - `groups` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
+  - `"inject"`
   - `"props"`
   - `"data"`
   - `"asyncData"`
