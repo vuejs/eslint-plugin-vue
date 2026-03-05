@@ -17,7 +17,7 @@ const ELEMENT_TYPE_MESSAGES = Object.freeze({
   UNKNOWN: 'unknown elements'
 })
 
-type Options = {
+interface Options {
   NORMAL: 'always' | 'never'
   VOID: 'always' | 'never'
   COMPONENT: 'always' | 'never'
