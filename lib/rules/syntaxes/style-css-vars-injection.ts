@@ -2,14 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { getStyleVariablesContext } from '../../utils/style-variables/index.ts'
 
-const { getStyleVariablesContext } = require('../../utils/style-variables')
-
-module.exports = {
+export default {
   supported: '>=3.0.3 || >=2.7.0 <3.0.0',
-  /** @param {RuleContext} context @returns {TemplateListener} */
-  createScriptVisitor(context) {
+  createScriptVisitor(context: RuleContext): TemplateListener {
     const styleVars = getStyleVariablesContext(context)
     if (!styleVars) {
       return {}

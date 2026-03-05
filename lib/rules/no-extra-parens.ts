@@ -1,14 +1,12 @@
 /**
  * @author Yosuke Ota
  */
-'use strict'
-
-const { isParenthesized } = require('@eslint-community/eslint-utils')
-const { wrapStylisticOrCoreRule } = require('../utils')
-const { getStyleVariablesContext } = require('../utils/style-variables')
+import { isParenthesized } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 
 // eslint-disable-next-line internal/no-invalid-meta
-module.exports = wrapStylisticOrCoreRule('no-extra-parens', {
+export default utils.wrapStylisticOrCoreRule('no-extra-parens', {
   skipDynamicArguments: true,
   applyDocument: true,
   create: createForVueSyntax
@@ -16,74 +14,58 @@ module.exports = wrapStylisticOrCoreRule('no-extra-parens', {
 
 /**
  * Check whether the given token is a left parenthesis.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a left parenthesis.
  */
-function isLeftParen(token) {
+function isLeftParen(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === '('
 }
 
 /**
  * Check whether the given token is a right parenthesis.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a right parenthesis.
  */
-function isRightParen(token) {
+function isRightParen(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === ')'
 }
 
 /**
  * Check whether the given token is a left brace.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a left brace.
  */
-function isLeftBrace(token) {
+function isLeftBrace(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === '{'
 }
 
 /**
  * Check whether the given token is a right brace.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a right brace.
  */
-function isRightBrace(token) {
+function isRightBrace(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === '}'
 }
 
 /**
  * Check whether the given token is a left bracket.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a left bracket.
  */
-function isLeftBracket(token) {
+function isLeftBracket(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === '['
 }
 
 /**
  * Check whether the given token is a right bracket.
- * @param {Token} token The token to check.
- * @returns {boolean} `true` if the token is a right bracket.
  */
-function isRightBracket(token) {
+function isRightBracket(token: Token): boolean {
   return token.type === 'Punctuator' && token.value === ']'
 }
 
 /**
  * Determines if a given expression node is an IIFE
- * @param {Expression} node The node to check
- * @returns {node is CallExpression & { callee: FunctionExpression } } `true` if the given node is an IIFE
  */
-function isIIFE(node) {
+function isIIFE(
+  node: Expression
+): node is CallExpression & { callee: FunctionExpression } {
   return (
     node.type === 'CallExpression' && node.callee.type === 'FunctionExpression'
   )
 }
 
-/**
- * @param {RuleContext} context - The rule context.
- * @returns {TemplateListener} AST event handlers.
- */
-function createForVueSyntax(context) {
+function createForVueSyntax(context: RuleContext): TemplateListener {
   const sourceCode = context.sourceCode
   if (!sourceCode.parserServices.getTemplateBodyTokenStore) {
     return {}
@@ -92,10 +74,8 @@ function createForVueSyntax(context) {
 
   /**
    * Checks if the given node turns into a filter when unwraped.
-   * @param {Expression} expression node to evaluate
-   * @returns {boolean} `true` if the given node turns into a filter when unwraped.
    */
-  function isUnwrapChangeToFilter(expression) {
+  function isUnwrapChangeToFilter(expression: Expression): boolean {
     let parenStack = null
     for (const token of tokenStore.getTokens(expression)) {
       if (parenStack) {
@@ -120,10 +100,11 @@ function createForVueSyntax(context) {
   }
   /**
    * Checks if the given node is CSS v-bind() without quote.
-   * @param {VExpressionContainer} node
-   * @param {Expression} expression
    */
-  function isStyleVariableWithoutQuote(node, expression) {
+  function isStyleVariableWithoutQuote(
+    node: VExpressionContainer,
+    expression: Expression
+  ) {
     const styleVars = getStyleVariablesContext(context)
     if (!styleVars || !styleVars.vBinds.includes(node)) {
       return false
@@ -134,10 +115,12 @@ function createForVueSyntax(context) {
 
     return tokens.every(isLeftParen)
   }
-  /**
-   * @param {VExpressionContainer & { expression: Expression | VFilterSequenceExpression | null }} node
-   */
-  function verify(node) {
+
+  function verify(
+    node: VExpressionContainer & {
+      expression: Expression | VFilterSequenceExpression | null
+    }
+  ) {
     if (!node.expression) {
       return
     }
@@ -170,11 +153,8 @@ function createForVueSyntax(context) {
 
   /**
    * Report the node
-   * @param {Expression} node node to evaluate
-   * @returns {void}
-   * @private
    */
-  function report(node) {
+  function report(node: Expression) {
     const sourceCode = context.sourceCode
     const leftParenToken = tokenStore.getTokenBefore(node)
     const rightParenToken = tokenStore.getTokenAfter(node)

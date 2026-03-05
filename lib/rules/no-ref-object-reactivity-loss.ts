@@ -2,25 +2,16 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
-const {
+import utils from '../utils/index.js'
+import {
   extractRefObjectReferences,
   extractReactiveVariableReferences
-} = require('../utils/ref-object-references')
-
-/**
- * @typedef {import('../utils/ref-object-references').RefObjectReferences} RefObjectReferences
- * @typedef {import('../utils/ref-object-references').RefObjectReference} RefObjectReference
- */
+} from '../utils/ref-object-references.ts'
 
 /**
  * Checks whether writing assigns a value to the given pattern.
- * @param {Pattern | AssignmentProperty | Property} node
- * @returns {boolean}
  */
-function isUpdate(node) {
+function isUpdate(node: Pattern | AssignmentProperty | Property): boolean {
   const parent = node.parent
   if (parent.type === 'UpdateExpression' && parent.argument === node) {
     // e.g. `pattern++`
@@ -34,7 +25,7 @@ function isUpdate(node) {
     (parent.type === 'Property' && parent.value === node) ||
     parent.type === 'ArrayPattern' ||
     (parent.type === 'ObjectPattern' &&
-      parent.properties.includes(/** @type {any} */ (node))) ||
+      parent.properties.includes(node as any)) ||
     (parent.type === 'AssignmentPattern' && parent.left === node) ||
     parent.type === 'RestElement' ||
     (parent.type === 'MemberExpression' && parent.object === node)
@@ -44,7 +35,7 @@ function isUpdate(node) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -62,20 +53,18 @@ module.exports = {
         'Getting a reactive variable in the same scope will cause the value to lose reactivity.'
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   */
-  create(context) {
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {Program | FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-     */
-    /** @type {ScopeStack} */
-    let scopeStack = { upper: null, node: context.sourceCode.ast }
-    /** @type {Map<CallExpression, ScopeStack>} */
-    const scopes = new Map()
+  create(context: RuleContext): RuleListener {
+    interface ScopeStack {
+      upper: ScopeStack | null
+      node:
+        | Program
+        | FunctionExpression
+        | FunctionDeclaration
+        | ArrowFunctionExpression
+    }
+
+    let scopeStack: ScopeStack = { upper: null, node: context.sourceCode.ast }
+    const scopes = new Map<CallExpression, ScopeStack>()
 
     const refObjectReferences = extractRefObjectReferences(context)
     const reactiveVariableReferences =
@@ -83,9 +72,8 @@ module.exports = {
 
     /**
      * Verify the given ref object value. `refObj = ref(); refObj.value;`
-     * @param {Expression | Super | ObjectPattern} node
      */
-    function verifyRefObjectValue(node) {
+    function verifyRefObjectValue(node: Expression | Super | ObjectPattern) {
       const ref = refObjectReferences.get(node)
       if (!ref) {
         return
@@ -103,9 +91,8 @@ module.exports = {
 
     /**
      * Verify the given reactive variable. `refVal = $ref(); refVal;`
-     * @param {Identifier} node
      */
-    function verifyReactiveVariable(node) {
+    function verifyReactiveVariable(node: Identifier) {
       const ref = reactiveVariableReferences.get(node)
       if (!ref || ref.escape) {
         return
@@ -157,7 +144,6 @@ module.exports = {
       },
       /**
        * Check for reactive variable`.
-       * @param {Identifier} node
        */
       'Identifier:exit'(node) {
         if (isUpdate(node)) {

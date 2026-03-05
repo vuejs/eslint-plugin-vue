@@ -2,12 +2,12 @@
  * @fileoverview Disallow undefined properties.
  * @author Yosuke Ota
  */
-import type { IPropertyReferences } from '../utils/property-references.js'
+import type { IPropertyReferences } from '../utils/property-references.ts'
 import utils from '../utils/index.js'
 import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
-import { getStyleVariablesContext } from '../utils/style-variables/index.js'
-import { definePropertyReferenceExtractor } from '../utils/property-references.js'
+import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
+import { definePropertyReferenceExtractor } from '../utils/property-references.ts'
 
 interface PropertyData {
   hasNestProperty?: boolean
@@ -93,7 +93,7 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const { ignores = [String.raw`/^\$/`] } = options
-    const isIgnored = toRegExpGroupMatcher(ignores)
+    const isIgnored = regexp.toRegExpGroupMatcher(ignores)
     const propertyReferenceExtractor = definePropertyReferenceExtractor(context)
     const programNode = context.sourceCode.ast
     /**
@@ -108,11 +108,12 @@ export default {
     /** Vue component context */
     class VueComponentContext {
       defineProperties = new Map<string, PropertyData>()
-
       reported = new Set<string | ASTNode>()
-
       hasUnknownProperty = false
 
+      /**
+       * Report
+       */
       verifyReferences(
         references: IPropertyReferences,
         options?: { props?: boolean }
@@ -157,7 +158,9 @@ export default {
           }
         }
       }
-
+      /**
+       * Report
+       */
       report(
         node: ASTNode,
         name: string,
@@ -206,7 +209,6 @@ export default {
       }
       return ctx
     }
-
     function getVueComponentContextForTemplate():
       | VueComponentContext
       | undefined {
