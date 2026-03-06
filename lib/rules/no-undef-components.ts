@@ -2,35 +2,31 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const path = require('node:path')
-const utils = require('../utils')
-const casing = require('../utils/casing')
+import path from 'node:path'
+import utils from '../utils/index.js'
+import {
+  capitalize,
+  isPascalCase,
+  kebabCase,
+  pascalCase
+} from '../utils/casing.ts'
 
 /**
  * `casing.camelCase()` converts the beginning to lowercase,
  * but does not convert the case of the beginning character when converting with Vue3.
  * @see https://github.com/vuejs/core/blob/ae4b0783d78670b6e942ae2a4e3ec6efbbffa158/packages/shared/src/index.ts#L105
- * @param {string} str
  */
-function camelize(str) {
+function camelize(str: string) {
   return str.replaceAll(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''))
 }
 
 class DefinedInSetupComponents {
-  constructor() {
-    /**
-     * Component names
-     * @type {Set<string>}
-     */
-    this.names = new Set()
-  }
-
   /**
-   * @param {string[]} names
+   * Component names
    */
-  addName(...names) {
+  names = new Set<string>()
+
+  addName(...names: string[]) {
     for (const name of names) {
       this.names.add(name)
     }
@@ -38,9 +34,8 @@ class DefinedInSetupComponents {
 
   /**
    * @see https://github.com/vuejs/core/blob/ae4b0783d78670b6e942ae2a4e3ec6efbbffa158/packages/compiler-core/src/transforms/transformElement.ts#L334
-   * @param {string} rawName
    */
-  isDefinedComponent(rawName) {
+  isDefinedComponent(rawName: string): boolean {
     if (this.names.has(rawName)) {
       return true
     }
@@ -48,7 +43,7 @@ class DefinedInSetupComponents {
     if (this.names.has(camelName)) {
       return true
     }
-    const pascalName = casing.capitalize(camelName)
+    const pascalName = capitalize(camelName)
     if (this.names.has(pascalName)) {
       return true
     }
@@ -63,41 +58,28 @@ class DefinedInSetupComponents {
 }
 
 class DefinedInOptionComponents {
-  constructor() {
-    /**
-     * Component names
-     * @type {Set<string>}
-     */
-    this.names = new Set()
-    /**
-     * Component names, transformed to kebab-case
-     * @type {Set<string>}
-     */
-    this.kebabCaseNames = new Set()
-  }
-
   /**
-   * @param {string[]} names
+   * Component names
    */
-  addName(...names) {
+  names = new Set<string>()
+  /**
+   * Component names, transformed to kebab-case
+   */
+  kebabCaseNames = new Set<string>()
+
+  addName(...names: string[]) {
     for (const name of names) {
       this.names.add(name)
-      this.kebabCaseNames.add(casing.kebabCase(name))
+      this.kebabCaseNames.add(kebabCase(name))
     }
   }
 
-  /**
-   * @param {string} rawName
-   */
-  isDefinedComponent(rawName) {
+  isDefinedComponent(rawName: string): boolean {
     if (this.names.has(rawName)) {
       return true
     }
-    const kebabCaseName = casing.kebabCase(rawName)
-    if (
-      this.kebabCaseNames.has(kebabCaseName) &&
-      !casing.isPascalCase(rawName)
-    ) {
+    const kebabCaseName = kebabCase(rawName)
+    if (this.kebabCaseNames.has(kebabCaseName) && !isPascalCase(rawName)) {
       // Component registered as `foo-bar` cannot be used as `FooBar`
       return true
     }
@@ -105,7 +87,7 @@ class DefinedInOptionComponents {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -131,20 +113,15 @@ module.exports = {
         "The '<{{name}}>' component has been used, but '{{name}}' only refers to a type."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    /** @type {string[]} */
-    const ignorePatterns = options.ignorePatterns || []
+    const ignorePatterns: string[] = options.ignorePatterns || []
 
     /**
      * Check whether the given element name is a verify target or not.
-     *
-     * @param {string} rawName The element name.
-     * @returns {boolean}
      */
-    function isVerifyTargetComponent(rawName) {
-      const kebabCaseName = casing.kebabCase(rawName)
+    function isVerifyTargetComponent(rawName: string): boolean {
+      const kebabCaseName = kebabCase(rawName)
 
       if (
         utils.isHtmlWellKnownElementName(rawName) ||
@@ -154,7 +131,7 @@ module.exports = {
       ) {
         return false
       }
-      const pascalCaseName = casing.pascalCase(rawName)
+      const pascalCaseName = pascalCase(rawName)
       // Check ignored patterns
       if (
         ignorePatterns.some((pattern) => {
@@ -171,12 +148,9 @@ module.exports = {
       return true
     }
 
-    /** @type { (rawName:string, reportNode: ASTNode) => void } */
-    let verifyName
-    /** @type {RuleListener} */
-    let scriptVisitor = {}
-    /** @type {TemplateListener} */
-    const templateBodyVisitor = {
+    let verifyName: (rawName: string, reportNode: ASTNode) => void
+    let scriptVisitor: RuleListener = {}
+    const templateBodyVisitor: TemplateListener = {
       VElement(node) {
         if (
           !utils.isHtmlElementNode(node) &&
@@ -187,8 +161,7 @@ module.exports = {
         }
         verifyName(node.rawName, node.startTag)
       },
-      /** @param {VAttribute} node */
-      "VAttribute[directive=false][key.name='is']"(node) {
+      "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
         if (
           !node.value // `<component is />`
         )
@@ -205,8 +178,7 @@ module.exports = {
       const definedInSetupComponents = new DefinedInSetupComponents()
       const definedInOptionComponents = new DefinedInOptionComponents()
 
-      /** @type {Set<string>} */
-      const scriptTypeOnlyNames = new Set()
+      const scriptTypeOnlyNames = new Set<string>()
       const globalScope = context.sourceCode.scopeManager.globalScope
       if (globalScope) {
         for (const variable of globalScope.variables) {
@@ -319,10 +291,9 @@ module.exports = {
         })
       }
 
-      /** @param {VDirective} node */
       templateBodyVisitor[
         "VAttribute[directive=true][key.name.name='bind'][key.argument.name='is'], VAttribute[directive=true][key.name.name='is']"
-      ] = (node) => {
+      ] = (node: VDirective) => {
         if (
           !node.value ||
           node.value.type !== 'VExpressionContainer' ||

@@ -196,5 +196,5 @@ This rule was introduced in eslint-plugin-vue v7.20.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multi-word-component-names.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multi-word-component-names.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multi-word-component-names.test.ts)

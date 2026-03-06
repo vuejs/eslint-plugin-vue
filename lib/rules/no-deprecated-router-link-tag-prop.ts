@@ -2,13 +2,10 @@
  * @author Marton Csordas
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { kebabCase, pascalCase } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/** @param {RuleContext} context */
-function getComponentNames(context) {
+function getComponentNames(context: RuleContext) {
   let components = ['RouterLink']
 
   if (context.options[0] && context.options[0].components) {
@@ -17,13 +14,13 @@ function getComponentNames(context) {
 
   return new Set(
     components.flatMap((component) => [
-      casing.kebabCase(component),
-      casing.pascalCase(component)
+      kebabCase(component),
+      pascalCase(component)
     ])
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -54,16 +51,14 @@ module.exports = {
         "'tag' property on '{{element}}' component is deprecated. Use scoped slots instead."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const components = getComponentNames(context)
 
     return utils.defineTemplateBodyVisitor(context, {
       VElement(node) {
         if (!components.has(node.rawName)) return
 
-        /** @type VIdentifier | null */
-        let tagKey = null
+        let tagKey: VIdentifier | null = null
 
         const tagAttr = utils.getAttribute(node, 'tag')
         if (tagAttr) {

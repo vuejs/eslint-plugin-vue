@@ -3,7 +3,7 @@
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/250
  */
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { getChecker, getExactConverter, pascalCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher, isRegExp } from '../utils/regexp.ts'
 
 const allowedCaseOptions = ['PascalCase', 'kebab-case']
@@ -95,9 +95,7 @@ export default {
       sourceCode.parserServices.getTemplateBodyTokenStore &&
       sourceCode.parserServices.getTemplateBodyTokenStore()
 
-    const registeredComponents = new Set<string>(
-      globalStrings.map(casing.pascalCase)
-    )
+    const registeredComponents = new Set<string>(globalStrings.map(pascalCase))
 
     if (utils.isScriptSetup(context)) {
       // For <script setup>
@@ -142,7 +140,7 @@ export default {
       }
 
       return (
-        registeredComponents.has(casing.pascalCase(node.rawName)) ||
+        registeredComponents.has(pascalCase(node.rawName)) ||
         isGlobalPattern(node.rawName)
       )
     }
@@ -162,10 +160,10 @@ export default {
           }
 
           const name = node.rawName
-          if (!casing.getChecker(caseType)(name)) {
+          if (!getChecker(caseType)(name)) {
             const startTag = node.startTag
             const open = tokens.getFirstToken(startTag)
-            const casingName = casing.getExactConverter(caseType)(name)
+            const casingName = getExactConverter(caseType)(name)
             context.report({
               node: open,
               loc: open.loc,

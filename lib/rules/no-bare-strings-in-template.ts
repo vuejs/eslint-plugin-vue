@@ -4,7 +4,7 @@
  */
 import utils from '../utils/index.js'
 import { isRegExp, toRegExp, escape } from '../utils/regexp.ts'
-import casing from '../utils/casing.js'
+import { isKebabCase, pascalCase } from '../utils/casing.ts'
 
 interface TargetAttrs {
   names: { [tagName in string]: Set<string> }
@@ -209,8 +209,8 @@ export default {
           result.push(...attrs)
         }
       }
-      if (casing.isKebabCase(tagName)) {
-        result.push(...getTargetAttrs(casing.pascalCase(tagName)))
+      if (isKebabCase(tagName)) {
+        result.push(...getTargetAttrs(pascalCase(tagName)))
       }
 
       return (attributes.cache[tagName] = new Set(result))

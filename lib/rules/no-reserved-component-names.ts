@@ -2,21 +2,11 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
-'use strict'
-
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-const htmlElements = require('../utils/html-elements.json')
-const deprecatedHtmlElements = require('../utils/deprecated-html-elements.json')
-const svgElements = require('../utils/svg-elements.json')
-const RESERVED_NAMES_IN_VUE = new Set(
-  require('../utils/vue2-builtin-components')
-)
-
-const RESERVED_NAMES_IN_VUE3 = new Set(
-  require('../utils/vue3-builtin-components')
-)
+import utils from '../utils/index.js'
+import { capitalize, pascalCase } from '../utils/casing.ts'
+import htmlElements from '../utils/html-elements.json' with { type: 'json' }
+import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
+import svgElements from '../utils/svg-elements.json' with { type: 'json' }
 
 const kebabCaseElements = [
   'annotation-xml',
@@ -29,16 +19,13 @@ const kebabCaseElements = [
   'missing-glyph'
 ]
 
-/** @param {string} word  */
-function isLowercase(word) {
+function isLowercase(word: string) {
   return /^[a-z]*$/.test(word)
 }
 
-/**
- * @param {Expression | SpreadElement} node
- * @returns {node is (Literal | TemplateLiteral)}
- */
-function canVerify(node) {
+function canVerify(
+  node: Expression | SpreadElement
+): node is Literal | TemplateLiteral {
   return (
     node.type === 'Literal' ||
     (node.type === 'TemplateLiteral' &&
@@ -47,18 +34,13 @@ function canVerify(node) {
   )
 }
 
-/**
- * @template T
- * @param {Set<T>} set
- * @param {Iterable<T>} iterable
- */
-function addAll(set, iterable) {
+function addAll<T>(set: Set<T>, iterable: Iterable<T>) {
   for (const element of iterable) {
     set.add(element)
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -92,8 +74,7 @@ module.exports = {
       reservedInVue3: 'Name "{{name}}" is reserved in Vue.js 3.x.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const disallowVueBuiltInComponents =
       options.disallowVueBuiltInComponents === true
@@ -109,36 +90,33 @@ module.exports = {
     ])
 
     if (!htmlElementCaseSensitive) {
-      addAll(RESERVED_NAMES_IN_HTML, htmlElements.map(casing.capitalize))
+      addAll(RESERVED_NAMES_IN_HTML, htmlElements.map(capitalize))
       addAll(RESERVED_NAMES_IN_OTHERS, [
-        ...deprecatedHtmlElements.map(casing.capitalize),
-        ...kebabCaseElements.map(casing.pascalCase),
-        ...svgElements.filter(isLowercase).map(casing.capitalize)
+        ...deprecatedHtmlElements.map(capitalize),
+        ...kebabCaseElements.map(pascalCase),
+        ...svgElements.filter(isLowercase).map(capitalize)
       ])
     }
 
     const reservedNames = new Set([
       ...RESERVED_NAMES_IN_HTML,
-      ...(disallowVueBuiltInComponents ? RESERVED_NAMES_IN_VUE : []),
-      ...(disallowVue3BuiltInComponents ? RESERVED_NAMES_IN_VUE3 : []),
+      ...(disallowVueBuiltInComponents
+        ? utils.VUE2_BUILTIN_COMPONENT_NAMES
+        : []),
+      ...(disallowVue3BuiltInComponents
+        ? utils.VUE3_BUILTIN_COMPONENT_NAMES
+        : []),
       ...RESERVED_NAMES_IN_OTHERS
     ])
 
-    /**
-     * @param {string} name
-     * @returns {string}
-     */
-    function getMessageId(name) {
+    function getMessageId(name: string): string {
       if (RESERVED_NAMES_IN_HTML.has(name)) return 'reservedInHtml'
-      if (RESERVED_NAMES_IN_VUE.has(name)) return 'reservedInVue'
-      if (RESERVED_NAMES_IN_VUE3.has(name)) return 'reservedInVue3'
+      if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
+      if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
       return 'reserved'
     }
 
-    /**
-     * @param {Literal | TemplateLiteral} node
-     */
-    function reportIfInvalid(node) {
+    function reportIfInvalid(node: Literal | TemplateLiteral) {
       let name
       if (node.type === 'TemplateLiteral') {
         const quasis = node.quasis[0]
@@ -151,11 +129,7 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {ESNode} node
-     * @param {string} name
-     */
-    function report(node, name) {
+    function report(node: ESNode, name: string) {
       context.report({
         node,
         messageId: getMessageId(name),

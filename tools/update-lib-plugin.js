@@ -13,7 +13,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
-const { camelCase } = require('../lib/utils/casing')
+const { camelCase } = require('../lib/utils/casing.ts')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/plugin.ts')

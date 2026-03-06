@@ -2,20 +2,14 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { kebabCase, pascalCase } from '../utils/casing.ts'
 
-const utils = require('../utils')
-const casing = require('../utils/casing')
-
-/**
- * @param {Identifier} identifier
- * @return {Array<String>}
- */
-function getExpectedNames(identifier) {
-  return [casing.pascalCase(identifier.name), casing.kebabCase(identifier.name)]
+function getExpectedNames(identifier: Identifier): string[] {
+  return [pascalCase(identifier.name), kebabCase(identifier.name)]
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -31,11 +25,7 @@ module.exports = {
         'Component alias {{importedName}} should be one of: {{expectedName}}.'
     }
   },
-  /**
-   * @param {RuleContext} context
-   * @returns {RuleListener}
-   */
-  create(context) {
+  create(context: RuleContext): RuleListener {
     return utils.executeOnVueComponent(context, (obj) => {
       const components = utils.findProperty(obj, 'components')
       if (

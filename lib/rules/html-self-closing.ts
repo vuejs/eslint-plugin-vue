@@ -3,9 +3,7 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const utils = require('../utils')
+import utils from '../utils/index.js'
 
 /**
  * These strings wil be displayed in error messages.
@@ -19,22 +17,19 @@ const ELEMENT_TYPE_MESSAGES = Object.freeze({
   UNKNOWN: 'unknown elements'
 })
 
-/**
- * @typedef {object} Options
- * @property {'always' | 'never'} NORMAL
- * @property {'always' | 'never'} VOID
- * @property {'always' | 'never'} COMPONENT
- * @property {'always' | 'never'} SVG
- * @property {'always' | 'never'} MATH
- * @property {null} UNKNOWN
- */
+interface Options {
+  NORMAL: 'always' | 'never'
+  VOID: 'always' | 'never'
+  COMPONENT: 'always' | 'never'
+  SVG: 'always' | 'never'
+  MATH: 'always' | 'never'
+  UNKNOWN: null
+}
 
 /**
  * Normalize the given options.
- * @param {any} options The raw options object.
- * @returns {Options} Normalized options.
  */
-function parseOptions(options) {
+function parseOptions(options: any): Options {
   return {
     NORMAL: (options && options.html && options.html.normal) || 'always',
     VOID: (options && options.html && options.html.void) || 'never',
@@ -47,10 +42,8 @@ function parseOptions(options) {
 
 /**
  * Get the elementType of the given element.
- * @param {VElement} node The element node to get.
- * @returns {keyof Options} The elementType of the element.
  */
-function getElementType(node) {
+function getElementType(node: VElement): keyof Options {
   if (utils.isCustomComponent(node)) {
     return 'COMPONENT'
   }
@@ -72,18 +65,15 @@ function getElementType(node) {
 /**
  * Check whether the given element is empty or not.
  * This ignores whitespaces, doesn't ignore comments.
- * @param {VElement} node The element node to check.
- * @param {SourceCode} sourceCode The source code object of the current context.
- * @returns {boolean} `true` if the element is empty.
  */
-function isEmpty(node, sourceCode) {
+function isEmpty(node: VElement, sourceCode: SourceCode): boolean {
   const start = node.startTag.range[1]
   const end = node.endTag == null ? node.range[1] : node.endTag.range[0]
 
   return sourceCode.text.slice(start, end).trim() === ''
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'layout',
     docs: {
@@ -127,8 +117,7 @@ module.exports = {
         'Disallow self-closing on {{elementType}} (<{{name}}/>).'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const options = parseOptions(context.options[0])
     let hasInvalidEOF = false

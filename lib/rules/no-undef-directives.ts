@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { camelCase, capitalize, kebabCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 function getRegisteredDirectives(
@@ -32,13 +32,13 @@ function getRegisteredDirectives(
 }
 
 function isDefinedInSetup(rawName: string, definedNames: Set<string>) {
-  const camelName = casing.camelCase(rawName)
-  const variableName = `v${casing.capitalize(camelName)}`
+  const camelName = camelCase(rawName)
+  const variableName = `v${capitalize(camelName)}`
   return definedNames.has(variableName)
 }
 
 function isDefinedInOptions(rawName: string, definedNames: Set<string>) {
-  const camelName = casing.camelCase(rawName)
+  const camelName = camelCase(rawName)
 
   if (definedNames.has(rawName)) {
     return true
@@ -90,7 +90,7 @@ export default {
      * Check whether the given directive name is a verify target or not.
      */
     function isVerifyTargetDirective(rawName: string): boolean {
-      const kebabName = casing.kebabCase(rawName)
+      const kebabName = kebabCase(rawName)
       if (
         utils.isBuiltInDirectiveName(rawName) ||
         isAnyIgnored(rawName, kebabName)

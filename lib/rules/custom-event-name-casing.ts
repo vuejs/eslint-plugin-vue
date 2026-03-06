@@ -5,7 +5,7 @@
 import type { VueObjectData } from '../utils/index.js'
 import { findVariable } from '@eslint-community/eslint-utils'
 import utils from '../utils/index.js'
-import casing from '../utils/casing.js'
+import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const ALLOWED_CASE_OPTIONS = ['kebab-case', 'camelCase']
@@ -87,7 +87,7 @@ export default {
     let emitParamName = ''
     const caseType = context.options[0] || DEFAULT_CASE
     const objectOption = context.options[1] || {}
-    const caseChecker = casing.getChecker(caseType)
+    const caseChecker = getChecker(caseType)
     const isIgnored = toRegExpGroupMatcher(objectOption.ignores)
 
     /**

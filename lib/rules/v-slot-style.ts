@@ -2,26 +2,20 @@
  * @author Toru Nagashima
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { pascalCase } from '../utils/casing.ts'
+import utils from '../utils/index.js'
 
-const { pascalCase } = require('../utils/casing')
-const utils = require('../utils')
+interface Options {
+  /** The style for the default slot at a custom component directly. */
+  atComponent: 'shorthand' | 'longform' | 'v-slot'
+  /** The style for the default slot at a template wrapper. */
+  default: 'shorthand' | 'longform' | 'v-slot'
+  /** The style for named slots at a template wrapper. */
+  named: 'shorthand' | 'longform'
+}
 
-/**
- * @typedef {Object} Options
- * @property {"shorthand" | "longform" | "v-slot"} atComponent The style for the default slot at a custom component directly.
- * @property {"shorthand" | "longform" | "v-slot"} default The style for the default slot at a template wrapper.
- * @property {"shorthand" | "longform"} named The style for named slots at a template wrapper.
- */
-
-/**
- * Normalize options.
- * @param {any} options The raw options to normalize.
- * @returns {Options} The normalized options.
- */
-function normalizeOptions(options) {
-  /** @type {Options} */
-  const normalized = {
+function normalizeOptions(options: any): Options {
+  const normalized: Options = {
     atComponent: 'v-slot',
     default: 'shorthand',
     named: 'shorthand'
@@ -31,10 +25,9 @@ function normalizeOptions(options) {
     normalized.atComponent =
       normalized.default =
       normalized.named =
-        /** @type {"shorthand" | "longform"} */ (options)
+        options as 'shorthand' | 'longform'
   } else if (options != null) {
-    /** @type {(keyof Options)[]} */
-    const keys = ['atComponent', 'default', 'named']
+    const keys: (keyof Options)[] = ['atComponent', 'default', 'named']
     for (const key of keys) {
       if (options[key] != null) {
         normalized[key] = options[key]
@@ -47,11 +40,11 @@ function normalizeOptions(options) {
 
 /**
  * Get the expected style.
- * @param {Options} options The options that defined expected types.
- * @param {VDirective} node The `v-slot` node to check.
- * @returns {"shorthand" | "longform" | "v-slot"} The expected style.
  */
-function getExpectedStyle(options, node) {
+function getExpectedStyle(
+  options: Options,
+  node: VDirective
+): 'shorthand' | 'longform' | 'v-slot' {
   const { argument } = node.key
 
   if (
@@ -66,10 +59,8 @@ function getExpectedStyle(options, node) {
 
 /**
  * Get the expected style.
- * @param {VDirective} node The `v-slot` node to check.
- * @returns {"shorthand" | "longform" | "v-slot"} The expected style.
  */
-function getActualStyle(node) {
+function getActualStyle(node: VDirective): 'shorthand' | 'longform' | 'v-slot' {
   const { name, argument } = node.key
 
   if (name.rawName === '#') {
@@ -81,7 +72,7 @@ function getActualStyle(node) {
   return 'v-slot'
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -113,13 +104,11 @@ module.exports = {
       expectedVSlot: "Expected 'v-slot' instead of '{{actual}}'."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const options = normalizeOptions(context.options[0])
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VDirective} node */
       "VAttribute[directive=true][key.name.name='slot']"(node) {
         const expected = getExpectedStyle(options, node)
         const actual = getActualStyle(node)
@@ -128,8 +117,7 @@ module.exports = {
         }
 
         const { name, argument } = node.key
-        /** @type {Range} */
-        const range = [name.range[0], (argument || name).range[1]]
+        const range: Range = [name.range[0], (argument || name).range[1]]
         const argumentText = argument ? sourceCode.getText(argument) : 'default'
         context.report({
           node,
