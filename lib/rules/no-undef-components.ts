@@ -21,6 +21,9 @@ function camelize(str: string) {
 }
 
 class DefinedInSetupComponents {
+  /**
+   * Component names
+   */
   names = new Set<string>()
 
   addName(...names: string[]) {
@@ -55,7 +58,13 @@ class DefinedInSetupComponents {
 }
 
 class DefinedInOptionComponents {
+  /**
+   * Component names
+   */
   names = new Set<string>()
+  /**
+   * Component names, transformed to kebab-case
+   */
   kebabCaseNames = new Set<string>()
 
   addName(...names: string[]) {
