@@ -2,12 +2,11 @@
  * @author Yosuke Ota <https://github.com/ota-meshi>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -28,20 +27,16 @@ module.exports = {
         'Props are defined in both `defineProps` and `export default {}`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const scriptSetup = utils.getScriptSetupElement(context)
     if (!scriptSetup) {
       return {}
     }
 
-    /** @type {Set<Expression | SpreadElement>} */
-    const propsDefExpressions = new Set()
+    const propsDefExpressions = new Set<Expression | SpreadElement>()
     let hasDefaultExport = false
-    /** @type {CallExpression[]} */
-    const definePropsNodes = []
-    /** @type {CallExpression | null} */
-    let emptyDefineProps = null
+    const definePropsNodes: CallExpression[] = []
+    let emptyDefineProps: CallExpression | null = null
 
     return utils.compositingVisitors(
       utils.defineScriptSetupVisitor(context, {
@@ -70,7 +65,7 @@ module.exports = {
         Identifier(node) {
           for (const defineProps of propsDefExpressions) {
             if (utils.inRange(defineProps.range, node)) {
-              const variable = findVariable(utils.getScope(context, node), node)
+              const variable = findVariable(getScope(context, node), node)
               if (
                 variable &&
                 variable.references.some((ref) => ref.identifier === node) &&

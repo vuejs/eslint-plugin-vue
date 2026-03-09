@@ -2,26 +2,23 @@
  * @fileoverview Prevents duplication of field names.
  * @author Armano
  */
-'use strict'
+import type { GroupName } from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
-
-/**
- * @typedef {import('../utils').GroupName} GroupName
- * @typedef {import('eslint').Scope.Variable} Variable
- * @typedef {import('../utils').ComponentProp} ComponentProp
- */
-
-/** @type {GroupName[]} */
-const GROUP_NAMES = ['props', 'computed', 'data', 'methods', 'setup']
+const GROUP_NAMES: GroupName[] = [
+  'props',
+  'computed',
+  'data',
+  'methods',
+  'setup'
+]
 
 /**
  * Gets the props pattern node from given `defineProps()` node
- * @param {CallExpression} node
- * @returns {Pattern|null}
  */
-function getPropsPattern(node) {
+function getPropsPattern(node: CallExpression): Pattern | null {
   let target = node
   if (
     target.parent &&
@@ -45,10 +42,8 @@ function getPropsPattern(node) {
 
 /**
  * Checks whether the initialization of the given variable declarator node contains one of the references.
- * @param {VariableDeclarator} node
- * @param {ESNode[]} references
  */
-function isInsideInitializer(node, references) {
+function isInsideInitializer(node: VariableDeclarator, references: ESNode[]) {
   const init = node.init
   if (!init) {
     return false
@@ -60,11 +55,9 @@ function isInsideInitializer(node, references) {
 
 /**
  * Collects all renamed props from a pattern
- * @param {Pattern | null} pattern - The destructuring pattern
- * @returns {Set<string>} - Set of prop names that have been renamed
  */
-function collectRenamedProps(pattern) {
-  const renamedProps = new Set()
+function collectRenamedProps(pattern: Pattern | null): Set<string> {
+  const renamedProps = new Set<string>()
 
   if (!pattern || pattern.type !== 'ObjectPattern') {
     return renamedProps
@@ -85,7 +78,7 @@ function collectRenamedProps(pattern) {
   return renamedProps
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -110,16 +103,17 @@ module.exports = {
         "Duplicate key '{{name}}'. May cause name collision in script or template tag."
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
-    const groups = new Set([...GROUP_NAMES, ...(options.groups || [])])
+    const groups = new Set<GroupName>([
+      ...GROUP_NAMES,
+      ...(options.groups || [])
+    ])
 
     return utils.compositingVisitors(
       utils.executeOnVue(context, (obj) => {
         const properties = utils.iterateProperties(obj, groups)
-        /** @type {Set<string>} */
-        const usedNames = new Set()
+        const usedNames = new Set<string>()
         for (const o of properties) {
           if (usedNames.has(o.name)) {
             context.report({
@@ -152,7 +146,7 @@ module.exports = {
             }
 
             const variable = findVariable(
-              utils.getScope(context, node),
+              getScope(context, node),
               prop.propName
             )
             if (!variable || variable.defs.length === 0) continue
@@ -180,12 +174,10 @@ module.exports = {
 
     /**
      * Extracts references from the given node.
-     * @param {Pattern} node
-     * @returns {Identifier[]} References
      */
-    function extractReferences(node) {
+    function extractReferences(node: Pattern): Identifier[] {
       if (node.type === 'Identifier') {
-        const variable = findVariable(utils.getScope(context, node), node)
+        const variable = findVariable(getScope(context, node), node)
         if (!variable) {
           return []
         }
