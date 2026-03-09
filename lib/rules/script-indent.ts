@@ -2,11 +2,9 @@
  * @author Toru Nagashima
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { defineVisitor } from '../utils/indent-common.ts'
 
-const indentCommon = require('../utils/indent-common')
-
-module.exports = {
+export default {
   // eslint-disable-next-line eslint-plugin/prefer-message-ids
   meta: {
     type: 'layout',
@@ -43,8 +41,7 @@ module.exports = {
       }
     ]
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    return indentCommon.defineVisitor(context, context.sourceCode, {})
+  create(context: RuleContext) {
+    return defineVisitor(context, context.sourceCode, {})
   }
 }
