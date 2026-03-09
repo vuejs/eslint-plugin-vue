@@ -2,16 +2,14 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const { findVariable } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
 /**
  * Get the callee member node from the given CallExpression
- * @param {CallExpression} node CallExpression
  */
-function getCalleeMemberNode(node) {
+function getCalleeMemberNode(node: CallExpression) {
   const callee = utils.skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
@@ -23,7 +21,7 @@ function getCalleeMemberNode(node) {
   return null
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -37,32 +35,38 @@ module.exports = {
       forbidden: '`{{name}}` is forbidden after an `await` expression.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} SetupScopeData
-     * @property {boolean} afterAwait
-     * @property {[number,number]} range
-     * @property {(node: Identifier, callNode: CallExpression) => boolean} isExposeReferenceId
-     * @property {(node: Identifier) => boolean} isContextReferenceId
-     */
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | Program} scopeNode
-     */
-    /** @type {Map<FunctionDeclaration | FunctionExpression | ArrowFunctionExpression | Program, SetupScopeData>} */
-    const setupScopes = new Map()
+  create(context: RuleContext) {
+    interface SetupScopeData {
+      afterAwait: boolean
+      range: Range
+      isExposeReferenceId: (
+        node: Identifier,
+        callNode: CallExpression
+      ) => boolean
+      isContextReferenceId: (node: Identifier) => boolean
+    }
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        | FunctionDeclaration
+        | FunctionExpression
+        | ArrowFunctionExpression
+        | Program
+    }
 
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+    const setupScopes = new Map<
+      | FunctionDeclaration
+      | FunctionExpression
+      | ArrowFunctionExpression
+      | Program,
+      SetupScopeData
+    >()
+
+    let scopeStack: ScopeStack | null = null
 
     return utils.compositingVisitors(
       {
-        /**
-         * @param {Program} node
-         */
-        Program(node) {
+        Program(node: Program) {
           scopeStack = {
             upper: scopeStack,
             scopeNode: node
@@ -70,9 +74,6 @@ module.exports = {
         }
       },
       {
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
         ':function'(node) {
           scopeStack = {
             upper: scopeStack,
@@ -82,7 +83,6 @@ module.exports = {
         ':function:exit'() {
           scopeStack = scopeStack && scopeStack.upper
         },
-        /** @param {AwaitExpression} node */
         AwaitExpression(node) {
           if (!scopeStack) {
             return
@@ -93,7 +93,6 @@ module.exports = {
           }
           setupScope.afterAwait = true
         },
-        /** @param {CallExpression} node */
         CallExpression(node) {
           if (!scopeStack) {
             return
@@ -145,9 +144,6 @@ module.exports = {
           return {}
         }
         return {
-          /**
-           * @param {Program} node
-           */
           Program(node) {
             setupScopes.set(node, {
               afterAwait: false,
@@ -176,10 +172,8 @@ module.exports = {
             // cannot check
             return
           }
-          /** @type {Set<Identifier>} */
-          const contextReferenceIds = new Set()
-          /** @type {Set<Identifier>} */
-          const exposeReferenceIds = new Set()
+          const contextReferenceIds = new Set<Identifier>()
+          const exposeReferenceIds = new Set<Identifier>()
           if (contextParam.type === 'ObjectPattern') {
             const exposeProperty = utils.findAssignmentProperty(
               contextParam,
@@ -192,10 +186,7 @@ module.exports = {
             // `setup(props, {emit})`
             const variable =
               exposeParam.type === 'Identifier'
-                ? findVariable(
-                    utils.getScope(context, exposeParam),
-                    exposeParam
-                  )
+                ? findVariable(getScope(context, exposeParam), exposeParam)
                 : null
             if (!variable) {
               return
@@ -209,7 +200,7 @@ module.exports = {
           } else if (contextParam.type === 'Identifier') {
             // `setup(props, context)`
             const variable = findVariable(
-              utils.getScope(context, contextParam),
+              getScope(context, contextParam),
               contextParam
             )
             if (!variable) {

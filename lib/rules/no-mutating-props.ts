@@ -2,14 +2,14 @@
  * @fileoverview disallow mutation component props
  * @author 2018 Armano
  */
-'use strict'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
+import { findVariable } from '@eslint-community/eslint-utils'
 
-/**
- * @typedef {{name?: string, set: Set<string>}} PropsInfo
- */
-
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
+interface PropsInfo {
+  name?: string
+  set: Set<string>
+}
 
 // https://github.com/vuejs/vue-next/blob/7c11c58faf8840ab97b6449c98da0296a60dddd8/packages/shared/src/globalsWhitelist.ts
 const GLOBALS_WHITE_LISTED = new Set([
@@ -39,23 +39,15 @@ const GLOBALS_WHITE_LISTED = new Set([
   'BigInt'
 ])
 
-/**
- * @param {ASTNode} node
- * @returns {VExpressionContainer}
- */
-function getVExpressionContainer(node) {
+function getVExpressionContainer(node: ASTNode): VExpressionContainer {
   let n = node
   while (n.type !== 'VExpressionContainer') {
-    n = /** @type {ASTNode} */ (n.parent)
+    n = n.parent as ASTNode
   }
   return n
 }
 
-/**
- * @param {ASTNode} node
- * @returns {node is Identifier}
- */
-function isVmReference(node) {
+function isVmReference(node: ASTNode): node is Identifier {
   if (node.type !== 'Identifier') {
     return false
   }
@@ -88,11 +80,10 @@ function isVmReference(node) {
   return false
 }
 
-/**
- * @param { object } options
- * @param { boolean } options.shallowOnly Enables mutating the value of a prop but leaving the reference the same
- */
-function parseOptions(options) {
+function parseOptions(options: {
+  /** Enables mutating the value of a prop but leaving the reference the same */
+  shallowOnly: boolean
+}) {
   return Object.assign(
     {
       shallowOnly: false
@@ -101,7 +92,7 @@ function parseOptions(options) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -125,19 +116,15 @@ module.exports = {
       unexpectedMutation: 'Unexpected mutation of "{{key}}" prop.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const { shallowOnly } = parseOptions(context.options[0])
-    /** @type {Map<ObjectExpression|CallExpression, PropsInfo>} */
-    const propsMap = new Map()
-    /** @type { { type: 'export' | 'mark' | 'definition', object: ObjectExpression } | { type: 'setup', object: CallExpression } | null } */
-    let vueObjectData = null
+    const propsMap = new Map<ObjectExpression | CallExpression, PropsInfo>()
+    let vueObjectData:
+      | { type: 'export' | 'mark' | 'definition'; object: ObjectExpression }
+      | { type: 'setup'; object: CallExpression }
+      | null = null
 
-    /**
-     * @param {ASTNode} node
-     * @param {string} name
-     */
-    function report(node, name) {
+    function report(node: ASTNode, name: string) {
       context.report({
         node,
         messageId: 'unexpectedMutation',
@@ -147,11 +134,9 @@ module.exports = {
       })
     }
 
-    /**
-     * @param {MemberExpression|AssignmentProperty} node
-     * @returns {string}
-     */
-    function getPropertyNameText(node) {
+    function getPropertyNameText(
+      node: MemberExpression | AssignmentProperty
+    ): string {
       const name = utils.getStaticPropertyName(node)
       if (name) {
         return name
@@ -164,24 +149,21 @@ module.exports = {
       return '?unknown?'
     }
 
-    /**
-     * @param {MemberExpression|Identifier} props
-     * @param {string} name
-     * @param {boolean} isRootProps
-     */
-    function verifyMutating(props, name, isRootProps = false) {
+    function verifyMutating(
+      props: MemberExpression | Identifier,
+      name: string,
+      isRootProps: boolean = false
+    ) {
       const invalid = utils.findMutating(props)
       if (invalid && isShallowOnlyInvalid(invalid, isRootProps)) {
         report(invalid.node, name)
       }
     }
 
-    /**
-     * @param {Pattern} param
-     * @param {string[]} path
-     * @returns {Generator<{ node: Identifier, path: string[] }>}
-     */
-    function* iteratePatternProperties(param, path) {
+    function* iteratePatternProperties(
+      param: Pattern,
+      path: string[]
+    ): Generator<{ node: Identifier; path: string[] }> {
       if (!param) {
         return
       }
@@ -220,12 +202,8 @@ module.exports = {
       }
     }
 
-    /**
-     * @param {Identifier} prop
-     * @param {string[]} path
-     */
-    function verifyPropVariable(prop, path) {
-      const variable = findVariable(utils.getScope(context, prop), prop)
+    function verifyPropVariable(prop: Identifier, path: string[]) {
+      const variable = findVariable(getScope(context, prop), prop)
       if (!variable) {
         return
       }
@@ -282,11 +260,11 @@ module.exports = {
 
     /**
      * Is shallowOnly false or the prop reassigned
-     * @param {Exclude<ReturnType<typeof utils.findMutating>, null>} invalid
-     * @param {boolean} isRootProps
-     * @return {boolean}
      */
-    function isShallowOnlyInvalid(invalid, isRootProps) {
+    function isShallowOnlyInvalid(
+      invalid: Exclude<ReturnType<typeof utils.findMutating>, null>,
+      isRootProps: boolean
+    ): boolean {
       return (
         !shallowOnly ||
         (invalid.pathNodes.length === (isRootProps ? 1 : 0) &&
@@ -306,10 +284,7 @@ module.exports = {
               props
                 .map((p) => p.propName)
                 .filter(
-                  /**
-                   * @returns {propName is string}
-                   */
-                  (propName) =>
+                  (propName): propName is string =>
                     utils.isDef(propName) &&
                     !GLOBALS_WHITE_LISTED.has(propName) &&
                     !defineVariableNames.has(propName)
@@ -398,9 +373,8 @@ module.exports = {
             verifyPropVariable(prop, path)
           }
         },
-        /** @param {(Identifier | ThisExpression) & { parent: MemberExpression } } node */
         'MemberExpression > :matches(Identifier, ThisExpression)'(
-          node,
+          node: (Identifier | ThisExpression) & { parent: MemberExpression },
           { node: vueNode }
         ) {
           if (!utils.isThis(node, context)) {
@@ -411,17 +385,15 @@ module.exports = {
             return
           }
           const name = utils.getStaticPropertyName(mem)
-          if (
-            name &&
-            /** @type {PropsInfo} */ (propsMap.get(vueNode)).set.has(name)
-          ) {
+          if (name && propsMap.get(vueNode)!.set.has(name)) {
             verifyMutating(mem, name)
           }
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        /** @param {ThisExpression & { parent: MemberExpression } } node */
-        'VExpressionContainer MemberExpression > ThisExpression'(node) {
+        'VExpressionContainer MemberExpression > ThisExpression'(
+          node: ThisExpression & { parent: MemberExpression }
+        ) {
           if (!vueObjectData) {
             return
           }
@@ -430,26 +402,18 @@ module.exports = {
             return
           }
           const name = utils.getStaticPropertyName(mem)
-          if (
-            name &&
-            /** @type {PropsInfo} */ (
-              propsMap.get(vueObjectData.object)
-            ).set.has(name)
-          ) {
+          if (name && propsMap.get(vueObjectData.object)!.set.has(name)) {
             verifyMutating(mem, name)
           }
         },
-        /** @param {Identifier } node */
-        'VExpressionContainer Identifier'(node) {
+        'VExpressionContainer Identifier'(node: Identifier) {
           if (!vueObjectData) {
             return
           }
           if (!isVmReference(node)) {
             return
           }
-          const propsInfo = /** @type {PropsInfo} */ (
-            propsMap.get(vueObjectData.object)
-          )
+          const propsInfo = propsMap.get(vueObjectData.object)!
           const isRootProps = !!node.name && propsInfo.name === node.name
           const parent = node.parent
           const name =
@@ -461,9 +425,8 @@ module.exports = {
             verifyMutating(node, name, isRootProps)
           }
         },
-        /** @param {ESNode} node */
         "VAttribute[directive=true]:matches([key.name.name='model'], [key.name.name='bind']) VExpressionContainer > *"(
-          node
+          node: ESNode
         ) {
           if (!vueObjectData) {
             return
@@ -481,9 +444,7 @@ module.exports = {
             return
           }
 
-          const propsInfo = /** @type {PropsInfo} */ (
-            propsMap.get(vueObjectData.object)
-          )
+          const propsInfo = propsMap.get(vueObjectData.object)!
 
           const nodes = utils.getMemberChaining(node)
           const first = nodes[0]
