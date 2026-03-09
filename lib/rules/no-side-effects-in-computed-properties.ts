@@ -2,20 +2,15 @@
  * @fileoverview Don't introduce side effects in computed properties
  * @author Michał Sajnóg
  */
-'use strict'
-const {
-  ReferenceTracker,
-  findVariable
-} = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import type {
+  ComponentComputedProperty,
+  VueObjectData
+} from '../utils/index.js'
+import { ReferenceTracker, findVariable } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
-/**
- * @typedef {import('../utils').VueObjectData} VueObjectData
- * @typedef {import('../utils').VueVisitor} VueVisitor
- * @typedef {import('../utils').ComponentComputedProperty} ComponentComputedProperty
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -32,27 +27,25 @@ module.exports = {
         'Unexpected side effect in "{{key}}" computed property.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ObjectExpression, ComponentComputedProperty[]>} */
-    const computedPropertiesMap = new Map()
-    /** @type {Array<FunctionExpression | ArrowFunctionExpression>} */
-    const computedCallNodes = []
-    /** @type {[number, number][]} */
-    const setupRanges = []
+  create(context: RuleContext) {
+    const computedPropertiesMap = new Map<
+      ObjectExpression,
+      ComponentComputedProperty[]
+    >()
+    const computedCallNodes: (FunctionExpression | ArrowFunctionExpression)[] =
+      []
+    const setupRanges: Range[] = []
 
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {BlockStatement | Expression | null} body
-     */
-    /**
-     * @type {ScopeStack | null}
-     */
-    let scopeStack = null
+    interface ScopeStack {
+      upper: ScopeStack | null
+      body: BlockStatement | Expression | null
+    }
 
-    /** @param {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} node */
-    function onFunctionEnter(node) {
+    let scopeStack: ScopeStack | null = null
+
+    function onFunctionEnter(
+      node: FunctionExpression | ArrowFunctionExpression | FunctionDeclaration
+    ) {
       scopeStack = {
         upper: scopeStack,
         body: node.body
@@ -67,11 +60,10 @@ module.exports = {
       ':function': onFunctionEnter,
       ':function:exit': onFunctionExit,
 
-      /**
-       * @param {(Identifier | ThisExpression) & {parent: MemberExpression}} node
-       * @param {VueObjectData|undefined} [info]
-       */
-      'MemberExpression > :matches(Identifier, ThisExpression)'(node, info) {
+      'MemberExpression > :matches(Identifier, ThisExpression)'(
+        node: (Identifier | ThisExpression) & { parent: MemberExpression },
+        info?: VueObjectData | undefined
+      ) {
         if (!scopeStack) {
           return
         }
@@ -135,7 +127,7 @@ module.exports = {
           return
         }
 
-        const variable = findVariable(utils.getScope(context, node), node)
+        const variable = findVariable(getScope(context, node), node)
         if (!variable || variable.defs.length !== 1) {
           return
         }
@@ -180,9 +172,8 @@ module.exports = {
     }
     return utils.compositingVisitors(
       {
-        /** @param {Program} program */
-        Program(program) {
-          const tracker = new ReferenceTracker(utils.getScope(context, program))
+        Program(program: Program) {
+          const tracker = new ReferenceTracker(getScope(context, program))
 
           for (const { node } of utils.iterateReferencesTraceMap(tracker, {
             computed: {

@@ -2,15 +2,12 @@
  * @fileoverview Enforces that a return statement is present in computed property (return-in-computed-property)
  * @author Armano
  */
-'use strict'
-const { ReferenceTracker } = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+import type { ComponentComputedProperty } from '../utils/index.js'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
-/**
- * @typedef {import('../utils').ComponentComputedProperty} ComponentComputedProperty
- */
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -38,25 +35,22 @@ module.exports = {
         'Expected to return a value in "{{name}}" computed property.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     const options = context.options[0] || {}
     const treatUndefinedAsUnspecified = !(
       options.treatUndefinedAsUnspecified === false
     )
 
-    /**
-     * @type {Set<ComponentComputedProperty>}
-     */
-    const computedProperties = new Set()
-    /** @type {(FunctionExpression | ArrowFunctionExpression)[]} */
-    const computedFunctionNodes = []
+    const computedProperties = new Set<ComponentComputedProperty>()
+    const computedFunctionNodes: (
+      | FunctionExpression
+      | ArrowFunctionExpression
+    )[] = []
 
     return Object.assign(
       {
-        /** @param {Program} program */
-        Program(program) {
-          const tracker = new ReferenceTracker(utils.getScope(context, program))
+        Program(program: Program) {
+          const tracker = new ReferenceTracker(getScope(context, program))
           const map = {
             computed: {
               [ReferenceTracker.CALL]: true
