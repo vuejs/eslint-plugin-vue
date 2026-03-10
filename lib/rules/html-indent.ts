@@ -3,19 +3,16 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import { defineVisitor } from '../utils/indent-common.ts'
+import utils from '../utils/index.js'
 
-const indentCommon = require('../utils/indent-common')
-const utils = require('../utils')
-
-module.exports = {
-  /** @param {RuleContext} context */
-  create(context) {
+export default {
+  create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const tokenStore =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
       sourceCode.parserServices.getTemplateBodyTokenStore()
-    const visitor = indentCommon.defineVisitor(context, tokenStore, {
+    const visitor = defineVisitor(context, tokenStore, {
       baseIndent: 1
     })
 
