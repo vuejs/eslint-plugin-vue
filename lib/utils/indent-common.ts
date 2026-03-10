@@ -295,7 +295,7 @@ export function defineVisitor(
   /**
    * Get the first and last tokens of the given node.
    * If the node is parenthesized, this gets the outermost parentheses.
-   * This `borderOffset` value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
+   * The `borderOffset` value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
    */
   function getFirstAndLastTokens(
     node: MaybeNode,
@@ -326,6 +326,8 @@ export function defineVisitor(
    * Process the given node list.
    * The first node is offsetted from the given left token.
    * Rest nodes are adjusted to the first node.
+   *
+   * @param alignVertically The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
    */
   function processNodeList(
     nodeList: (MaybeNode | null)[],
@@ -777,6 +779,9 @@ export function defineVisitor(
 
   /**
    * Validate indentation of the line that the given tokens are on.
+   * @param tokens The tokens on the same line to validate.
+   * @param comments The comments which are on the immediately previous lines of the tokens.
+   * @param lastToken The last validated token. Comments can adjust to the token.
    */
   function validate(
     tokens: Token[],
