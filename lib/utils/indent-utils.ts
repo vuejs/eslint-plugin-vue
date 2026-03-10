@@ -41,7 +41,7 @@ export function isNotWhitespace(
 /**
  * Check whether the given token is a comment.
  */
-export function isComment(token: Token | undefined | null): token is Comment {
+export function isComment(token: Token | undefined | null): boolean {
   return (
     token != null &&
     (token.type === 'Block' ||

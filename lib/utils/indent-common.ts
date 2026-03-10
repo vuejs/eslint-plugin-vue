@@ -1819,7 +1819,7 @@ export function defineVisitor(
     // COMMONS
     // ----------------------------------------------------------------------
     // Process semicolons.
-    ':statement, PropertyDefinition'(node: Statement) {
+    ':statement, PropertyDefinition'(node: Statement | PropertyDefinition) {
       processSemicolons(node)
     },
     // Process parentheses.
@@ -1881,7 +1881,7 @@ export function defineVisitor(
     ":matches(Program, VElement[parent.type!='VElement']):exit"(
       node: Program | VElement
     ) {
-      let comments: Comment[] = []
+      let comments: Token[] = []
       let tokensOnSameLine: Token[] = []
       let isBesideMultilineToken = false
       let lastValidatedToken: Token | null = null

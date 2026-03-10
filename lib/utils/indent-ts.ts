@@ -70,7 +70,7 @@ type ProcessSemicolons = (node: MaybeNode) => void
 type GetFirstAndLastTokens = (
   node: MaybeNode,
   /**
-   * The least offset of the first token. Defailt is 0. This value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
+   * The least offset of the first token. Default is 0. This value is used to prevent false positive in the following case: `(a) => {}` The parentheses are enclosing the whole parameter part rather than the first parameter, but this offset parameter is needed to distinguish.
    */
   borderOffset?: number
 ) => { firstToken: Token; lastToken: Token }
