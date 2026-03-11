@@ -307,7 +307,7 @@ export default typegen([
     }
   },
   {
-    files: ['lib/rules/*.js'],
+    files: ['lib/rules/*.{js,ts}'],
     rules: {
       'eslint-plugin/require-meta-docs-url': [
         'error',

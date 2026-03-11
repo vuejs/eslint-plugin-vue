@@ -106,6 +106,10 @@ module.exports = {
         }
       },
 
+      ExportDefaultDeclaration(node) {
+        exportsNode = node.declaration
+      },
+
       'Program:exit'(programNode) {
         checkMetaValidity(context, exportsNode)
       }
