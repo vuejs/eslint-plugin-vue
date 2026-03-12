@@ -10,7 +10,9 @@ import type {
 } from '../utils/index.js'
 import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
-import { inferRuntimeTypeFromTypeNode } from '../utils/ts-utils/ts-types.js'
+import tsTypes from '../utils/ts-utils/ts-types.js'
+
+const { inferRuntimeTypeFromTypeNode } = tsTypes
 
 const NATIVE_TYPES = new Set([
   'String',
