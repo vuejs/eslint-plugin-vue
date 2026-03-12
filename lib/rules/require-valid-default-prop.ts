@@ -12,8 +12,6 @@ import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
 import tsTypes from '../utils/ts-utils/ts-types.js'
 
-const { inferRuntimeTypeFromTypeNode } = tsTypes
-
 const NATIVE_TYPES = new Set([
   'String',
   'Number',
@@ -491,7 +489,10 @@ export default {
           }
         },
         onDefineModelEnter(node, model) {
-          let syntheticProp: ComponentObjectProp | ComponentInferTypeProp | null = null
+          let syntheticProp:
+            | ComponentObjectProp
+            | ComponentInferTypeProp
+            | null = null
           let defaultFromOptions: Property | null = null
 
           if (model.typeNode) {
@@ -500,7 +501,10 @@ export default {
               propName: model.name.modelName,
               node: model.typeNode,
               required: false,
-              types: inferRuntimeTypeFromTypeNode(context, model.typeNode)
+              types: tsTypes.inferRuntimeTypeFromTypeNode(
+                context,
+                model.typeNode
+              )
             }
             if (model.options && model.options.type === 'ObjectExpression') {
               defaultFromOptions = getPropertyNode(model.options, 'default')
