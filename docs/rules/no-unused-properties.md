@@ -64,6 +64,7 @@ export default {
 ```
 
 - `groups` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
+  - `"inject"`
   - `"props"`
   - `"data"`
   - `"asyncData"`
@@ -289,5 +290,5 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-properties.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-properties.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-properties.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-properties.test.ts)

@@ -13,7 +13,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { FlatESLint } = require('eslint/use-at-your-own-risk')
 const rules = require('./lib/rules')
-const { camelCase } = require('../lib/utils/casing')
+const { camelCase } = require('../lib/utils/casing.ts')
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/plugin.ts')
@@ -26,7 +26,8 @@ import meta from './meta.ts'
 import processor from './processor.ts'
 ${rules
   .map(
-    (rule) => `import ${camelCase(rule.name)} from './rules/${rule.name}.js'`
+    (rule) =>
+      `import ${camelCase(rule.name)} from './rules/${rule.name}${rule.ext}'`
   )
   .join('\n')}
 

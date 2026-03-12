@@ -16,8 +16,11 @@ const logger = console
     return
   }
 
-  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.js`)
-  const testFile = path.resolve(__dirname, `../tests/lib/rules/${ruleName}.js`)
+  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.ts`)
+  const testFile = path.resolve(
+    __dirname,
+    `../tests/lib/rules/${ruleName}.test.ts`
+  )
   const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
 
   fs.writeFileSync(
@@ -26,11 +29,9 @@ const logger = console
  * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
 
-const utils = require('../utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -44,8 +45,7 @@ module.exports = {
       // ...
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     // ...
 
     return utils.defineTemplateBodyVisitor(context, {
@@ -61,14 +61,13 @@ module.exports = {
  * @author ${authorName}
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/${ruleName}')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/${ruleName}'
+import vueEslintParser from 'vue-eslint-parser'
 
 const tester = new RuleTester({
   languageOptions: {
-    parser: require('vue-eslint-parser'),
+    parser: vueEslintParser,
     ecmaVersion: 2020,
     sourceType: 'module'
   }

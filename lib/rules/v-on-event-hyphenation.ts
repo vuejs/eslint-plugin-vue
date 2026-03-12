@@ -1,0 +1,122 @@
+import utils from '../utils/index.js'
+import { getConverter } from '../utils/casing.ts'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
+
+export default {
+  meta: {
+    type: 'suggestion',
+    docs: {
+      description:
+        'enforce v-on event naming style on custom components in template',
+      categories: ['vue3-strongly-recommended'],
+      url: 'https://eslint.vuejs.org/rules/v-on-event-hyphenation.html',
+      defaultOptions: {
+        vue3: ['always', { autofix: true }]
+      }
+    },
+    fixable: 'code',
+    schema: [
+      {
+        enum: ['always', 'never']
+      },
+      {
+        type: 'object',
+        properties: {
+          autofix: { type: 'boolean' },
+          ignore: {
+            type: 'array',
+            items: {
+              allOf: [
+                { type: 'string' },
+                { not: { type: 'string', pattern: ':exit$' } },
+                { not: { type: 'string', pattern: String.raw`^\s*$` } }
+              ]
+            },
+            uniqueItems: true,
+            additionalItems: false
+          },
+          ignoreTags: {
+            type: 'array',
+            items: { type: 'string' },
+            uniqueItems: true,
+            additionalItems: false
+          }
+        },
+        additionalProperties: false
+      }
+    ],
+    messages: {
+      // eslint-disable-next-line eslint-plugin/report-message-format
+      mustBeHyphenated: "v-on event '{{text}}' must be hyphenated.",
+      // eslint-disable-next-line eslint-plugin/report-message-format
+      cannotBeHyphenated: "v-on event '{{text}}' can't be hyphenated."
+    }
+  },
+
+  create(context: RuleContext) {
+    const sourceCode = context.sourceCode
+    const option = context.options[0]
+    const optionsPayload = context.options[1]
+    const useHyphenated = option !== 'never'
+    const ignoredAttributes: string[] =
+      (optionsPayload && optionsPayload.ignore) || []
+    const isIgnoredTag = toRegExpGroupMatcher(optionsPayload?.ignoreTags)
+    const autofix = Boolean(optionsPayload && optionsPayload.autofix)
+
+    const caseConverter = getConverter(
+      useHyphenated ? 'kebab-case' : 'camelCase'
+    )
+
+    function reportIssue(
+      node: VDirective,
+      argument: VIdentifier,
+      name: string
+    ) {
+      const text = sourceCode.getText(node.key)
+
+      context.report({
+        node: node.key,
+        loc: node.loc,
+        messageId: useHyphenated ? 'mustBeHyphenated' : 'cannotBeHyphenated',
+        data: {
+          text
+        },
+        fix:
+          autofix &&
+          // It cannot be converted in snake_case.
+          !name.includes('_')
+            ? (fixer) => fixer.replaceText(argument, caseConverter(name))
+            : null
+      })
+    }
+
+    function isIgnoredAttribute(value: string) {
+      const isIgnored = ignoredAttributes.some((attr) => value.includes(attr))
+
+      if (isIgnored) {
+        return true
+      }
+
+      return useHyphenated ? value.toLowerCase() === value : !/-/.test(value)
+    }
+
+    return utils.defineTemplateBodyVisitor(context, {
+      "VAttribute[directive=true][key.name.name='on']"(node) {
+        const element = node.parent.parent
+        if (
+          !utils.isCustomComponent(element) ||
+          isIgnoredTag(element.rawName)
+        ) {
+          return
+        }
+        if (!node.key.argument || node.key.argument.type !== 'VIdentifier') {
+          return
+        }
+        const name = node.key.argument.rawName
+        if (!name || isIgnoredAttribute(name)) return
+
+        reportIssue(node, node.key.argument, name)
+      }
+    })
+  }
+}
