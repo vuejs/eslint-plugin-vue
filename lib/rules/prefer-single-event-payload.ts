@@ -3,8 +3,10 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import type { ComponentEmit } from '../utils'
 import utils from '../utils/index.js'
+import type { ComponentEmit, ComponentUnknownEmit } from '../utils'
+import type { ReportSourceLocation } from 'eslint'
+import type * as VNODE from '../../typings/eslint-plugin-vue/util-types/node'
 
 /**
  * Get the callee member node from the given CallExpression
@@ -19,6 +21,20 @@ function getCalleeMemberNode(node: CallExpression) {
     }
   }
   return null
+}
+
+function getReportLocation(
+  parameters: VNODE.HasLocation[],
+  firstReportedIndex: number
+): ReportSourceLocation | undefined {
+  if (parameters.length < firstReportedIndex + 1) {
+    return undefined
+  }
+
+  return {
+    start: parameters[firstReportedIndex].loc.start,
+    end: parameters.at(-1)!.loc.end
+  }
 }
 
 export default {
@@ -61,101 +77,61 @@ export default {
         ? utils.getStringLiteralValue(eventNameArg)
         : null
 
-      // Report the span covering the extra payload arguments (args[1..last])
-      const firstExtraArg = node.arguments[1]
-      const lastArg = node.arguments[node.arguments.length - 1]
-
       context.report({
         node,
-        loc: {
-          start: firstExtraArg.loc!.start,
-          end: lastArg.loc!.end
-        },
+        loc: getReportLocation(node.arguments, 2),
         messageId: 'preferSinglePayload',
         data: { name: name ?? 'unknown' }
       })
     }
 
+    function verifyEmitDeclarationNode(
+      emit: Exclude<ComponentEmit, ComponentUnknownEmit>,
+      parameters: VNODE.HasLocation[],
+      firstReportedIndex = 1
+    ) {
+      const reportLocation = getReportLocation(parameters, firstReportedIndex)
+      if (reportLocation) {
+        context.report({
+          node: emit.node,
+          loc: reportLocation,
+          messageId: 'preferSinglePayloadInDeclaration',
+          data: { name: emit.emitName ?? 'unknown' }
+        })
+      }
+    }
+
     function verifyEmitDeclaration(emit: ComponentEmit) {
       if (emit.type === 'object') {
         // Options API: emits: { change: (val1, val2) => true }
-        const { value } = emit
         if (
-          (value.type === 'ArrowFunctionExpression' ||
-            value.type === 'FunctionExpression') &&
-          value.params.length > 1
+          emit.value.type === 'ArrowFunctionExpression' ||
+          emit.value.type === 'FunctionExpression'
         ) {
-          // Report the extra parameters (params[1..last])
-          const firstExtraParam = value.params[1]
-          const lastParam = value.params[value.params.length - 1]
-          context.report({
-            node: emit.node,
-            loc: {
-              start: firstExtraParam.loc!.start,
-              end: lastParam.loc!.end
-            },
-            messageId: 'preferSinglePayloadInDeclaration',
-            data: { name: emit.emitName ?? 'unknown' }
-          })
+          verifyEmitDeclarationNode(emit, emit.value.params)
         }
       } else if (emit.type === 'type') {
-        const { node } = emit
-        if (
-          node.type === 'TSCallSignatureDeclaration' ||
-          node.type === 'TSFunctionType'
-        ) {
-          // (e: 'change', val1: string, val2: number): void
-          // params[0] is the event name, params[1..last] are extra payload args
-          if (node.params.length > 2) {
-            const firstExtraParam = node.params[1]
-            const lastParam = node.params[node.params.length - 1]
-            context.report({
-              node,
-              loc: {
-                start: firstExtraParam.loc!.start,
-                end: lastParam.loc!.end
-              },
-              messageId: 'preferSinglePayloadInDeclaration',
-              data: { name: emit.emitName ?? 'unknown' }
-            })
+        switch (emit.node.type) {
+          case 'TSCallSignatureDeclaration':
+          case 'TSFunctionType': {
+            // (e: 'change', val1: string, val2: number): void
+            verifyEmitDeclarationNode(emit, emit.node.params, 2)
+            break
           }
-        } else if (node.type === 'TSPropertySignature') {
-          // change: [val1: string, val2: number]
-          const typeAnno = node.typeAnnotation?.typeAnnotation
-          if (
-            typeAnno?.type === 'TSTupleType' &&
-            typeAnno.elementTypes.length > 1
-          ) {
-            // Report the extra tuple elements (elements[1..last])
-            const firstExtraElement = typeAnno.elementTypes[1]
-            const lastElement =
-              typeAnno.elementTypes[typeAnno.elementTypes.length - 1]
-            context.report({
-              node,
-              loc: {
-                start: firstExtraElement.loc!.start,
-                end: lastElement.loc!.end
-              },
-              messageId: 'preferSinglePayloadInDeclaration',
-              data: { name: emit.emitName ?? 'unknown' }
-            })
+          case 'TSPropertySignature': {
+            // change: [val1: string, val2: number]
+            const typeAnno = emit.node.typeAnnotation?.typeAnnotation
+            if (typeAnno?.type === 'TSTupleType') {
+              verifyEmitDeclarationNode(emit, typeAnno.elementTypes)
+            }
+            break
           }
-        } else if (node.type === 'TSMethodSignature') {
-          // change(val1: string, val2: number): void
-          // params[1..last] are extra payload params
-          if (node.params.length > 1) {
-            const firstExtraParam = node.params[1]
-            const lastParam = node.params[node.params.length - 1]
-            context.report({
-              node,
-              loc: {
-                start: firstExtraParam.loc!.start,
-                end: lastParam.loc!.end
-              },
-              messageId: 'preferSinglePayloadInDeclaration',
-              data: { name: emit.emitName ?? 'unknown' }
-            })
+          case 'TSMethodSignature': {
+            // change(val1: string, val2: number): void
+            verifyEmitDeclarationNode(emit, emit.node.params)
+            break
           }
+          // No default
         }
       }
     }
