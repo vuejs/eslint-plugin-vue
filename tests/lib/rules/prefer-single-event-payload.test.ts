@@ -51,6 +51,21 @@ tester.run('prefer-single-event-payload', rule, {
       </template>
       `
     },
+    // <script setup> - defineEmits used in template with single object payload
+    {
+      filename: 'test.vue',
+      code: `
+       <template>
+         <div @click="emit('change', { a: 'foo', b: 'bar' })" />
+       </template>
+       <script setup lang="ts">
+       const emit = defineEmits<{
+         (e: 'change', payload: { a: string; b: string }): void
+       }>()
+       </script>
+       `,
+      languageOptions: tsLanguageOptions
+    },
     // Options API - no payload
     {
       filename: 'test.vue',
@@ -547,6 +562,39 @@ tester.run('prefer-single-event-payload', rule, {
           column: 32,
           endLine: 4,
           endColumn: 46
+        }
+      ]
+    },
+    // <script setup> - defineEmits used in template
+    {
+      filename: 'test.vue',
+      code: `
+       <template>
+         <div @click="emit('change', 'foo', 'bar')" />
+       </template>
+       <script setup lang="ts">
+       const emit = defineEmits<{
+         (e: 'change', a: string, b: string): void
+       }>()
+       </script>
+       `,
+      languageOptions: tsLanguageOptions,
+      errors: [
+        {
+          message:
+            'Pass a single payload object instead of multiple arguments when emitting the "change" event.',
+          line: 3,
+          column: 45,
+          endLine: 3,
+          endColumn: 50
+        },
+        {
+          message:
+            'Declare a single payload parameter instead of multiple parameters for the "change" event.',
+          line: 7,
+          column: 35,
+          endLine: 7,
+          endColumn: 44
         }
       ]
     }

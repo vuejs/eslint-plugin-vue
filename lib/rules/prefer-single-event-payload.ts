@@ -140,8 +140,16 @@ export default {
       context,
       {
         CallExpression(node) {
-          const callee = node.callee
-          if (callee.type === 'Identifier' && callee.name === '$emit') {
+          const callee = utils.skipChainExpression(node.callee)
+          const setupContext = setupContexts.get(context.sourceCode.ast)
+          const isEmitCall =
+            callee.type === 'Identifier' &&
+            (callee.name === '$emit' ||
+              (setupContext &&
+                [...setupContext.emitReferenceIds].some(
+                  (id) => id.name === callee.name
+                )))
+          if (isEmitCall) {
             verifyEmitCall(node)
           }
         }
