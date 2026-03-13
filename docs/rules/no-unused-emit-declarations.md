@@ -51,7 +51,6 @@ Nothing.
 
 ## :couple: Related Rules
 
-- [vue/prefer-single-event-payload](./prefer-single-event-payload.md)
 - [vue/require-explicit-emits](./require-explicit-emits.md)
 
 ## :rocket: Version

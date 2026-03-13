@@ -87,6 +87,7 @@ Nothing.
 ## :couple: Related Rules
 
 - [vue/require-explicit-emits](./require-explicit-emits.md)
+- [vue/v-on-handler-style](./v-on-handler-style.md)
 
 ## :books: Further Reading
 
