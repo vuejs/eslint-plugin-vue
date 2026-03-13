@@ -24,13 +24,7 @@ This rule reports when a custom event is emitted with more than one payload argu
   <!-- ✗ BAD -->
   <button @click="$emit('update', value, extra)" />
 </template>
-```
 
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/prefer-single-event-payload': ['error']}">
-
-```vue
 <script>
 export default {
   methods: {
@@ -40,18 +34,7 @@ export default {
       // ✗ BAD
       this.$emit('change', value1, value2)
     }
-  }
-}
-</script>
-```
-
-</eslint-code-block>
-
-<eslint-code-block :rules="{'vue/prefer-single-event-payload': ['error']}">
-
-```vue
-<script>
-export default {
+  },
   setup(props, { emit }) {
     // ✓ GOOD
     emit('change', { value1, value2 })
