@@ -3,7 +3,6 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-single-event-payload
 description: enforce passing a single argument to custom event emissions
-since: v10.8.0
 ---
 
 # vue/prefer-single-event-payload
@@ -92,10 +91,6 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue.js - Component Events](https://vuejs.org/guide/components/events.html)
-
-## :rocket: Version
-
-This rule was introduced in eslint-plugin-vue v10.8.0
 
 ## :mag: Implementation
 

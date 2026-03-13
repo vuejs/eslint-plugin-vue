@@ -185,6 +185,7 @@ import preferDefineOptions from './rules/prefer-define-options.js'
 import preferImportFromVue from './rules/prefer-import-from-vue.js'
 import preferPropTypeBooleanFirst from './rules/prefer-prop-type-boolean-first.js'
 import preferSeparateStaticClass from './rules/prefer-separate-static-class.js'
+import preferSingleEventPayload from './rules/prefer-single-event-payload.ts'
 import preferTemplate from './rules/prefer-template.js'
 import preferTrueAttributeShorthand from './rules/prefer-true-attribute-shorthand.ts'
 import preferUseTemplateRef from './rules/prefer-use-template-ref.js'
@@ -441,6 +442,7 @@ export default {
     'prefer-import-from-vue': preferImportFromVue,
     'prefer-prop-type-boolean-first': preferPropTypeBooleanFirst,
     'prefer-separate-static-class': preferSeparateStaticClass,
+    'prefer-single-event-payload': preferSingleEventPayload,
     'prefer-template': preferTemplate,
     'prefer-true-attribute-shorthand': preferTrueAttributeShorthand,
     'prefer-use-template-ref': preferUseTemplateRef,

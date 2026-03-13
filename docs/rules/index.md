@@ -275,6 +275,7 @@ For example:
 | [vue/prefer-define-options] | enforce use of `defineOptions` instead of default export | :wrench: | :hammer: |
 | [vue/prefer-prop-type-boolean-first] | enforce `Boolean` comes first in component prop types | :bulb: | :warning: |
 | [vue/prefer-separate-static-class] | require static class names in template to be in a separate `class` attribute | :wrench: | :hammer: |
+| [vue/prefer-single-event-payload] | enforce passing a single argument to custom event emissions |  | :hammer: |
 | [vue/prefer-true-attribute-shorthand] | require shorthand form attribute when `v-bind` value is `true` | :bulb: | :hammer: |
 | [vue/prefer-use-template-ref] | require using `useTemplateRef` instead of `ref`/`shallowRef` for template refs |  | :hammer: |
 | [vue/require-default-export] | require components to be the default export |  | :warning: |
@@ -560,6 +561,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/prefer-import-from-vue]: ./prefer-import-from-vue.md
 [vue/prefer-prop-type-boolean-first]: ./prefer-prop-type-boolean-first.md
 [vue/prefer-separate-static-class]: ./prefer-separate-static-class.md
+[vue/prefer-single-event-payload]: ./prefer-single-event-payload.md
 [vue/prefer-template]: ./prefer-template.md
 [vue/prefer-true-attribute-shorthand]: ./prefer-true-attribute-shorthand.md
 [vue/prefer-use-template-ref]: ./prefer-use-template-ref.md
