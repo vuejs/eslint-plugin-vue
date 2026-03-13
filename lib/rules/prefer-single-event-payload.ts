@@ -3,6 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
+import type { ComponentEmit } from '../utils'
 import utils from '../utils/index.js'
 
 /**
@@ -34,7 +35,9 @@ export default {
     schema: [],
     messages: {
       preferSinglePayload:
-        'Pass a single payload object instead of multiple arguments when emitting the "{{name}}" event.'
+        'Pass a single payload object instead of multiple arguments when emitting the "{{name}}" event.',
+      preferSinglePayloadInDeclaration:
+        'Declare a single payload parameter instead of multiple parameters for the "{{name}}" event.'
     }
   },
   create(context: RuleContext) {
@@ -46,7 +49,7 @@ export default {
       }
     >()
 
-    function verify(node: CallExpression) {
+    function verifyEmitCall(node: CallExpression) {
       // arguments[0] is the event name; if there are more than 2 arguments
       // total there are multiple payload values
       if (node.arguments.length <= 2) {
@@ -65,19 +68,79 @@ export default {
       })
     }
 
+    function verifyEmitDeclaration(emit: ComponentEmit) {
+      if (emit.type === 'object') {
+        // Options API: emits: { change: (val1, val2) => true }
+        const { value } = emit
+        if (
+          (value.type === 'ArrowFunctionExpression' ||
+            value.type === 'FunctionExpression') &&
+          value.params.length > 1
+        ) {
+          context.report({
+            node: emit.node,
+            messageId: 'preferSinglePayloadInDeclaration',
+            data: { name: emit.emitName ?? 'unknown' }
+          })
+        }
+      } else if (emit.type === 'type') {
+        const { node } = emit
+        if (
+          node.type === 'TSCallSignatureDeclaration' ||
+          node.type === 'TSFunctionType'
+        ) {
+          // (e: 'change', val1: string, val2: number): void
+          // params[0] is the event name, rest are payload args
+          if (node.params.length > 2) {
+            context.report({
+              node,
+              messageId: 'preferSinglePayloadInDeclaration',
+              data: { name: emit.emitName ?? 'unknown' }
+            })
+          }
+        } else if (node.type === 'TSPropertySignature') {
+          // change: [val1: string, val2: number]
+          const typeAnno = node.typeAnnotation?.typeAnnotation
+          if (
+            typeAnno?.type === 'TSTupleType' &&
+            typeAnno.elementTypes.length > 1
+          ) {
+            context.report({
+              node,
+              messageId: 'preferSinglePayloadInDeclaration',
+              data: { name: emit.emitName ?? 'unknown' }
+            })
+          }
+        } else if (node.type === 'TSMethodSignature') {
+          // change(val1: string, val2: number): void
+          if (node.params.length > 1) {
+            context.report({
+              node,
+              messageId: 'preferSinglePayloadInDeclaration',
+              data: { name: emit.emitName ?? 'unknown' }
+            })
+          }
+        }
+      }
+    }
+
     return utils.defineTemplateBodyVisitor(
       context,
       {
         CallExpression(node) {
           const callee = node.callee
           if (callee.type === 'Identifier' && callee.name === '$emit') {
-            verify(node)
+            verifyEmitCall(node)
           }
         }
       },
       utils.compositingVisitors(
         utils.defineScriptSetupVisitor(context, {
-          onDefineEmitsEnter(node) {
+          onDefineEmitsEnter(node, emits) {
+            for (const emit of emits) {
+              verifyEmitDeclaration(emit)
+            }
+
             if (
               !node.parent ||
               node.parent.type !== 'VariableDeclarator' ||
@@ -118,8 +181,13 @@ export default {
               callee.type === 'Identifier' &&
               setupContext.emitReferenceIds.has(callee)
             ) {
-              verify(node)
+              verifyEmitCall(node)
             }
+          }
+        }),
+        utils.executeOnVue(context, (obj) => {
+          for (const emit of utils.getComponentEmitsFromOptions(obj)) {
+            verifyEmitDeclaration(emit)
           }
         }),
         utils.defineVueVisitor(context, {
@@ -182,7 +250,7 @@ export default {
                 emitReferenceIds.has(callee)
               ) {
                 // setup(props, {emit}) { emit() }
-                verify(node)
+                verifyEmitCall(node)
               } else {
                 const emit = getCalleeMemberNode(node)
                 if (
@@ -192,7 +260,7 @@ export default {
                   contextReferenceIds.has(emit.member.object)
                 ) {
                   // setup(props, context) { context.emit() }
-                  verify(node)
+                  verifyEmitCall(node)
                 }
               }
             }
@@ -206,7 +274,7 @@ export default {
             const emit = getCalleeMemberNode(node)
             if (emit && emit.name === '$emit') {
               // this.$emit()
-              verify(node)
+              verifyEmitCall(node)
             }
           }
         }
