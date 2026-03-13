@@ -167,6 +167,20 @@ tester.run('prefer-single-event-payload', rule, {
       </script>
       `
     },
+    // script setup - runtime defineEmits object syntax with validator
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const emit = defineEmits({
+        change: (payload) => {
+          return true
+        }
+      })
+      emit('change', { a, b })
+      </script>
+      `
+    },
     // defineEmits not assigned to variable - cannot track
     {
       filename: 'test.vue',
