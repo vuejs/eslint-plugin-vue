@@ -61,8 +61,16 @@ export default {
         ? utils.getStringLiteralValue(eventNameArg)
         : null
 
+      // Report the span covering the extra payload arguments (args[1..last])
+      const firstExtraArg = node.arguments[1]
+      const lastArg = node.arguments[node.arguments.length - 1]
+
       context.report({
         node,
+        loc: {
+          start: firstExtraArg.loc!.start,
+          end: lastArg.loc!.end
+        },
         messageId: 'preferSinglePayload',
         data: { name: name ?? 'unknown' }
       })
@@ -77,8 +85,15 @@ export default {
             value.type === 'FunctionExpression') &&
           value.params.length > 1
         ) {
+          // Report the extra parameters (params[1..last])
+          const firstExtraParam = value.params[1]
+          const lastParam = value.params[value.params.length - 1]
           context.report({
             node: emit.node,
+            loc: {
+              start: firstExtraParam.loc!.start,
+              end: lastParam.loc!.end
+            },
             messageId: 'preferSinglePayloadInDeclaration',
             data: { name: emit.emitName ?? 'unknown' }
           })
@@ -90,10 +105,16 @@ export default {
           node.type === 'TSFunctionType'
         ) {
           // (e: 'change', val1: string, val2: number): void
-          // params[0] is the event name, rest are payload args
+          // params[0] is the event name, params[1..last] are extra payload args
           if (node.params.length > 2) {
+            const firstExtraParam = node.params[1]
+            const lastParam = node.params[node.params.length - 1]
             context.report({
               node,
+              loc: {
+                start: firstExtraParam.loc!.start,
+                end: lastParam.loc!.end
+              },
               messageId: 'preferSinglePayloadInDeclaration',
               data: { name: emit.emitName ?? 'unknown' }
             })
@@ -105,17 +126,32 @@ export default {
             typeAnno?.type === 'TSTupleType' &&
             typeAnno.elementTypes.length > 1
           ) {
+            // Report the extra tuple elements (elements[1..last])
+            const firstExtraElement = typeAnno.elementTypes[1]
+            const lastElement =
+              typeAnno.elementTypes[typeAnno.elementTypes.length - 1]
             context.report({
               node,
+              loc: {
+                start: firstExtraElement.loc!.start,
+                end: lastElement.loc!.end
+              },
               messageId: 'preferSinglePayloadInDeclaration',
               data: { name: emit.emitName ?? 'unknown' }
             })
           }
         } else if (node.type === 'TSMethodSignature') {
           // change(val1: string, val2: number): void
+          // params[1..last] are extra payload params
           if (node.params.length > 1) {
+            const firstExtraParam = node.params[1]
+            const lastParam = node.params[node.params.length - 1]
             context.report({
               node,
+              loc: {
+                start: firstExtraParam.loc!.start,
+                end: lastParam.loc!.end
+              },
               messageId: 'preferSinglePayloadInDeclaration',
               data: { name: emit.emitName ?? 'unknown' }
             })
