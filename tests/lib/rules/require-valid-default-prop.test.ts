@@ -349,7 +349,16 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Boolean })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, required: true })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
     },
     // defineModel — correct runtime type match
     {
@@ -359,7 +368,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Boolean, default: false })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -368,7 +377,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel('count', { type: Number, default: 0 })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -377,7 +386,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: String, default: 'hello' })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -386,7 +395,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Array, default: () => [] })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
     },
     {
       filename: 'test.vue',
@@ -395,7 +404,32 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Object, default: () => ({}) })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') }
+      languageOptions: { parser: vueEslintParser }
+    },
+    // defineModel — TypeScript syntax (valid)
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ default: 'hello' })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<boolean>({ default: false })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ required: true })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -1289,7 +1323,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Boolean, default: 'hello' })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:
@@ -1305,7 +1339,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel('count', { type: Number, default: false })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:
@@ -1322,7 +1356,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Array, default: [] })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:
@@ -1338,7 +1372,7 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: Object, default: {} })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
       errors: [
         {
           message:
@@ -1355,7 +1389,23 @@ ruleTester.run('require-valid-default-prop', rule, {
         defineModel({ type: String, default: () => 123 })
       </script>
       `,
-      languageOptions: { parser: require('vue-eslint-parser') },
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a string.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — TypeScript syntax (invalid)
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ default: 123 })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
       errors: [
         {
           message:
