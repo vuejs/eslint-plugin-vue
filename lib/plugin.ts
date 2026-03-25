@@ -189,6 +189,7 @@ import preferSingleEventPayload from './rules/prefer-single-event-payload.ts'
 import preferTemplate from './rules/prefer-template.js'
 import preferTrueAttributeShorthand from './rules/prefer-true-attribute-shorthand.ts'
 import preferUseTemplateRef from './rules/prefer-use-template-ref.js'
+import preferVModel from './rules/prefer-v-model.ts'
 import propNameCasing from './rules/prop-name-casing.ts'
 import quoteProps from './rules/quote-props.js'
 import requireComponentIs from './rules/require-component-is.js'
@@ -446,6 +447,7 @@ export default {
     'prefer-template': preferTemplate,
     'prefer-true-attribute-shorthand': preferTrueAttributeShorthand,
     'prefer-use-template-ref': preferUseTemplateRef,
+    'prefer-v-model': preferVModel,
     'prop-name-casing': propNameCasing,
     'quote-props': quoteProps,
     'require-component-is': requireComponentIs,
