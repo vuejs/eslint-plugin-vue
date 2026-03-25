@@ -76,8 +76,8 @@ export default {
     schema: [],
     messages: {
       preferVModel:
-        'Prefer `v-model{{ vModelArgDisplay }}` over the `:{{ propName }}`/`@update:{{ eventPropName }}` pair.',
-      replaceWithVModel: 'Replace with `v-model{{ vModelArgDisplay }}`.'
+        'Prefer `{{ vModelName }}` over the `:{{ propName }}`/`@update:{{ eventName }}` pair.',
+      replaceWithVModel: 'Replace with `{{ vModelName }}`.'
     }
   },
   create(context: RuleContext) {
@@ -113,21 +113,23 @@ export default {
         }
 
         for (const bindDir of bindDirectives) {
-          const bindArgName =
+          const propName =
             bindDir.key.argument!.type === 'VIdentifier'
               ? bindDir.key.argument!.rawName
               : null
-          if (!bindArgName) {
+          if (!propName) {
             continue
           }
 
-          const normalizedBindName = camelCase(bindArgName)
+          const normalizedBindName = camelCase(propName)
 
           const matchingOnDir = onDirectives.find((onDir) => {
             const onArgName = onDir.key.argument!
-            if (onArgName.type !== 'VIdentifier') return false
-            const eventPropName = onArgName.rawName.slice('update:'.length)
-            return camelCase(eventPropName) === normalizedBindName
+            if (onArgName.type !== 'VIdentifier') {
+              return false
+            }
+            const eventName = onArgName.rawName.slice('update:'.length)
+            return camelCase(eventName) === normalizedBindName
           })
 
           if (!matchingOnDir) {
@@ -153,31 +155,29 @@ export default {
           }
 
           const isModelValue = normalizedBindName === 'modelValue'
-          const vModelArgDisplay = isModelValue ? '' : `:${bindArgName}`
-          const eventPropName =
+          const vModelName = isModelValue ? 'v-model' : `v-model:${propName}`
+          const eventName =
             matchingOnDir.key.argument!.type === 'VIdentifier'
               ? matchingOnDir.key.argument!.rawName.slice('update:'.length)
-              : bindArgName
+              : propName
 
           const bindValueText = sourceCode.getText(
             bindDir.value!.expression as ASTNode
           )
-          const vModelText = isModelValue
-            ? `v-model="${bindValueText}"`
-            : `v-model:${bindArgName}="${bindValueText}"`
+          const vModelText = `${vModelName}="${bindValueText}"`
 
           context.report({
             node: bindDir,
             messageId: 'preferVModel',
             data: {
-              vModelArgDisplay,
-              propName: bindArgName,
-              eventPropName
+              vModelName,
+              propName,
+              eventName
             },
             suggest: [
               {
                 messageId: 'replaceWithVModel',
-                data: { vModelArgDisplay },
+                data: { vModelName },
                 fix(fixer) {
                   const fixes = [fixer.replaceText(bindDir, vModelText)]
 
