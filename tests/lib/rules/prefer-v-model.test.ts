@@ -71,21 +71,33 @@ tester.run('prefer-v-model', rule, {
         }
       ]
     },
-    // <template><my-component :foo="bar" @update:foo="bar = $event" /></template>
-    //                         ^^^^^^^^^^
+    // Multiline: on directive on separate line
     {
-      code: '<template><my-component :foo="bar" @update:foo="bar = $event" /></template>',
+      code: `
+        <template>
+          <my-component
+            :foo="bar"
+            @update:foo="bar = $event"
+          />
+        </template>
+      `,
       errors: [
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
-          line: 1,
-          endLine: 1,
-          column: 25,
-          endColumn: 35,
+          line: 4,
+          endLine: 4,
+          column: 13,
+          endColumn: 23,
           suggestions: [
             {
               desc: 'Replace with `v-model:foo`.',
-              output: '<template><my-component v-model:foo="bar" /></template>'
+              output: `
+        <template>
+          <my-component
+            v-model:foo="bar"
+          />
+        </template>
+      `
             }
           ]
         }

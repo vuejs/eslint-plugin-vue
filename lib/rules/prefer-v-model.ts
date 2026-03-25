@@ -189,16 +189,13 @@ export default {
                 *fix(fixer) {
                   yield fixer.replaceText(bindDir, vModelText)
 
-                  // Remove the `on` directive including preceding whitespace
-                  const text = sourceCode.getText()
-                  let removeStart = matchingOnDir.range[0]
-                  while (
-                    removeStart > 0 &&
-                    (text[removeStart - 1] === ' ' ||
-                      text[removeStart - 1] === '\t')
-                  ) {
-                    removeStart--
-                  }
+                  // Remove the `v-on` directive including preceding whitespace
+                  const textBefore = sourceCode
+                    .getText()
+                    .slice(0, matchingOnDir.range[0])
+                  const removeStart =
+                    matchingOnDir.range[0] -
+                    (textBefore.length - textBefore.trimEnd().length)
                   yield fixer.removeRange([removeStart, matchingOnDir.range[1]])
                 }
               }
