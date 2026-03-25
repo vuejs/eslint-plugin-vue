@@ -1,0 +1,5 @@
+---
+"eslint-plugin-vue": minor
+---
+
+Added new `vue/prefer-v-model` rule (#2237)
