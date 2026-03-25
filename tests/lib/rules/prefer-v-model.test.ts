@@ -103,21 +103,20 @@ tester.run('prefer-v-model', rule, {
         }
       ]
     },
-    // <template><my-component v-bind:foo="bar" v-on:update:foo="bar = $event" /></template>
-    //                         ^^^^^^^^^^^^^^^^
+    // Longhand syntax with single-quoted values preserves quoting
     {
-      code: '<template><my-component v-bind:foo="bar" v-on:update:foo="bar = $event" /></template>',
+      code: `<template><my-component v-bind:foo='bar["baz"]' v-on:update:foo='bar["baz"] = $event' /></template>`,
       errors: [
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
           endLine: 1,
           column: 25,
-          endColumn: 41,
+          endColumn: 48,
           suggestions: [
             {
               desc: 'Replace with `v-model:foo`.',
-              output: '<template><my-component v-model:foo="bar" /></template>'
+              output: `<template><my-component v-model:foo='bar["baz"]' /></template>`
             }
           ]
         }

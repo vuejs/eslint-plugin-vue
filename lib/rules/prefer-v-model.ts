@@ -169,10 +169,8 @@ export default {
           const vModelName = isModelValue ? 'v-model' : `v-model:${propName}`
           const eventName = getUpdateEventPropName(matchingOnDir) ?? propName
 
-          const bindValueText = sourceCode.getText(
-            bindDir.value!.expression as ASTNode
-          )
-          const vModelText = `${vModelName}="${bindValueText}"`
+          const bindValueText = sourceCode.getText(bindDir.value as ASTNode)
+          const vModelText = `${vModelName}=${bindValueText}`
 
           context.report({
             node: bindDir,
