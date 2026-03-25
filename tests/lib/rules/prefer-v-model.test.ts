@@ -77,6 +77,7 @@ tester.run('prefer-v-model', rule, {
         <template>
           <my-component
             :foo="bar"
+            bar
             @update:foo="bar = $event"
           />
         </template>
@@ -95,6 +96,7 @@ tester.run('prefer-v-model', rule, {
         <template>
           <my-component
             v-model:foo="bar"
+            bar
           />
         </template>
       `
