@@ -6,6 +6,25 @@ import { camelCase } from '../utils/casing.ts'
 import utils from '../utils/index.js'
 
 /**
+ * Get the static argument name of a directive, or `null` for dynamic arguments.
+ */
+const getStaticArgName = (directive: VDirective): string | null =>
+  directive.key.argument?.type === 'VIdentifier'
+    ? directive.key.argument.rawName
+    : null
+
+/**
+ * Extract the prop name from an `update:propName` event directive argument.
+ */
+function getUpdateEventPropName(onDirective: VDirective): string | null {
+  const argName = getStaticArgName(onDirective)
+  if (!argName?.startsWith('update:')) {
+    return null
+  }
+  return argName.slice('update:'.length)
+}
+
+/**
  * Check if the event handler is a simple mirror assignment of the bind expression.
  * Matches: `bar = $event` or `(param) => bar = param`
  */
@@ -97,15 +116,14 @@ export default {
           if (!attr.directive) continue
           if (
             attr.key.name.name === 'bind' &&
-            attr.key.argument?.type === 'VIdentifier' &&
+            getStaticArgName(attr) != null &&
             attr.key.modifiers.length === 0
           ) {
             bindDirectives.push(attr)
           }
           if (
             attr.key.name.name === 'on' &&
-            attr.key.argument?.type === 'VIdentifier' &&
-            attr.key.argument.rawName.startsWith('update:') &&
+            getUpdateEventPropName(attr) != null &&
             attr.key.modifiers.length === 0
           ) {
             onDirectives.push(attr)
@@ -113,24 +131,17 @@ export default {
         }
 
         for (const bindDir of bindDirectives) {
-          const propName =
-            bindDir.key.argument!.type === 'VIdentifier'
-              ? bindDir.key.argument!.rawName
-              : null
+          const propName = getStaticArgName(bindDir)
           if (!propName) {
             continue
           }
 
           const normalizedBindName = camelCase(propName)
 
-          const matchingOnDir = onDirectives.find((onDir) => {
-            const onArgName = onDir.key.argument!
-            if (onArgName.type !== 'VIdentifier') {
-              return false
-            }
-            const eventName = onArgName.rawName.slice('update:'.length)
-            return camelCase(eventName) === normalizedBindName
-          })
+          const matchingOnDir = onDirectives.find(
+            (onDir) =>
+              camelCase(getUpdateEventPropName(onDir)!) === normalizedBindName
+          )
 
           if (!matchingOnDir) {
             continue
@@ -156,10 +167,7 @@ export default {
 
           const isModelValue = normalizedBindName === 'modelValue'
           const vModelName = isModelValue ? 'v-model' : `v-model:${propName}`
-          const eventName =
-            matchingOnDir.key.argument!.type === 'VIdentifier'
-              ? matchingOnDir.key.argument!.rawName.slice('update:'.length)
-              : propName
+          const eventName = getUpdateEventPropName(matchingOnDir) ?? propName
 
           const bindValueText = sourceCode.getText(
             bindDir.value!.expression as ASTNode
