@@ -186,10 +186,10 @@ export default {
               {
                 messageId: 'replaceWithVModel',
                 data: { vModelName },
-                fix(fixer) {
-                  const fixes = [fixer.replaceText(bindDir, vModelText)]
+                *fix(fixer) {
+                  yield fixer.replaceText(bindDir, vModelText)
 
-                  // Remove the on directive including preceding whitespace
+                  // Remove the `on` directive including preceding whitespace
                   const text = sourceCode.getText()
                   let removeStart = matchingOnDir.range[0]
                   while (
@@ -199,11 +199,7 @@ export default {
                   ) {
                     removeStart--
                   }
-                  fixes.push(
-                    fixer.removeRange([removeStart, matchingOnDir.range[1]])
-                  )
-
-                  return fixes
+                  yield fixer.removeRange([removeStart, matchingOnDir.range[1]])
                 }
               }
             ]
