@@ -91,6 +91,14 @@ ruleTester.run('one-component-per-file', rule, {
         createApp({})
         createApp({})
       `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { createApp } = require('other.js')
+        createApp({})
+        createApp({})
+      `
     }
   ],
   invalid: [
@@ -173,6 +181,18 @@ ruleTester.run('one-component-per-file', rule, {
       filename: 'test.vue',
       code: `
         import { createApp } from '@vue/composition-api'
+        createApp({})
+        createApp({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { createApp } = Vue
         createApp({})
         createApp({})
       `,
