@@ -4,6 +4,7 @@
 import { RuleTester } from '../../eslint-compat'
 import rule from '../../../lib/rules/no-ref-as-operand'
 import vueEslintParser from 'vue-eslint-parser'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {
@@ -1246,6 +1247,427 @@ tester.run('no-ref-as-operand', rule, {
           column: 23,
           endLine: 6,
           endColumn: 28
+        }
+      ]
+    }
+  ]
+})
+
+const tsOptions = getTypeScriptFixtureTestOptions()
+const typeScriptTester = new RuleTester({
+  languageOptions: tsOptions.languageOptions
+})
+
+typeScriptTester.run('no-ref-as-operand (TypeScript type-aware)', rule, {
+  valid: [
+    // Composable ref used with .value
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      console.log(count.value)
+      count.value++
+      </script>
+      `
+    },
+    // Plain value from composable
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { usePlainValue } from './ref-composables'
+      const val = usePlainValue()
+      if (val) {}
+      </script>
+      `
+    },
+    // MaybeRef pattern — should not report
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useMaybeRef } from './ref-composables'
+      const val = useMaybeRef()
+      if (val) {}
+      </script>
+      `
+    },
+    // Destructured object composable used with .value
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useObjectComposable } from './ref-composables'
+      const { count, label } = useObjectComposable()
+      console.log(count.value)
+      console.log(label.value)
+      </script>
+      `
+    },
+    // Destructured array composable used with .value
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useArrayComposable } from './ref-composables'
+      const [count, label] = useArrayComposable()
+      console.log(count.value)
+      console.log(label.value)
+      </script>
+      `
+    },
+    // Limitation: TypeScript resolves the type to `any` in update/assignment
+    // expressions where using a Ref directly is a type error, so these
+    // cannot be detected via type information alone.
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      count++
+      </script>
+      `
+    },
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      count += 1
+      </script>
+      `
+    }
+  ],
+  invalid: [
+    // Composable ref in if statement
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      if (count) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      if (count.value) {}
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16
+        }
+      ]
+    },
+    // Composable ref in unary expression
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      !count
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      !count.value
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 8,
+          endLine: 5,
+          endColumn: 13
+        }
+      ]
+    },
+    // Composable ref in binary expression
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = count + 1
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = count.value + 1
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 22
+        }
+      ]
+    },
+    // Composable ref in conditional expression
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = count ? 'yes' : 'no'
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = count.value ? 'yes' : 'no'
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 22
+        }
+      ]
+    },
+    // Composable ref in template literal
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = \`\${count}\`
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      const x = \`\${count.value}\`
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 25
+        }
+      ]
+    },
+    // Composable ref in member expression (not .value or .effect)
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      count.toString()
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useCount } from './ref-composables'
+      const count = useCount()
+      count.value.toString()
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 12
+        }
+      ]
+    },
+    // ComputedRef from composable
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useComputed } from './ref-composables'
+      const comp = useComputed()
+      if (comp) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useComputed } from './ref-composables'
+      const comp = useComputed()
+      if (comp.value) {}
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `computed()`.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 15
+        }
+      ]
+    },
+    // ShallowRef from composable
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useShallow } from './ref-composables'
+      const shallow = useShallow()
+      shallow.name
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useShallow } from './ref-composables'
+      const shallow = useShallow()
+      shallow.value.name
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `shallowRef()`.',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 14
+        }
+      ]
+    },
+    // Nullable ref (Ref<T> | undefined) — should still report
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useNullableRef } from './ref-composables'
+      const val = useNullableRef()
+      if (val) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useNullableRef } from './ref-composables'
+      const val = useNullableRef()
+      if (val.value) {}
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 14
+        }
+      ]
+    },
+    // Destructured ref from object composable
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useObjectComposable } from './ref-composables'
+      const { count, label } = useObjectComposable()
+      if (count) {}
+      if (label) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useObjectComposable } from './ref-composables'
+      const { count, label } = useObjectComposable()
+      if (count.value) {}
+      if (label.value) {}
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `computed()`.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16
+        }
+      ]
+    },
+    // Destructured ref from array composable
+    {
+      filename: tsOptions.filename,
+      code: `
+      <script setup lang="ts">
+      import { useArrayComposable } from './ref-composables'
+      const [count, label] = useArrayComposable()
+      if (count) {}
+      if (label) {}
+      </script>
+      `,
+      output: `
+      <script setup lang="ts">
+      import { useArrayComposable } from './ref-composables'
+      const [count, label] = useArrayComposable()
+      if (count.value) {}
+      if (label.value) {}
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `ref()`.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16
+        },
+        {
+          message:
+            'Must use `.value` to read or write the value wrapped by `computed()`.',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         }
       ]
     }
