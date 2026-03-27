@@ -273,7 +273,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -316,7 +319,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 34
         }
       ]
     },
@@ -359,7 +365,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "na::me" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -404,7 +413,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 27
         }
       ]
     },
@@ -445,7 +457,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 17
         }
       ]
     },
@@ -488,7 +503,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 17
         }
       ]
     },
@@ -531,7 +549,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "na"me2" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     },
@@ -574,7 +595,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "foo" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -617,7 +641,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -660,7 +687,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -703,7 +733,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "a" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -746,7 +779,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "a" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -780,7 +816,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 8,
+          endColumn: 14
         }
       ]
     },
@@ -814,7 +853,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 8,
+          endColumn: 14
         }
       ]
     },
@@ -850,7 +892,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -886,7 +931,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -910,6 +958,9 @@ tester.run('no-required-prop-with-default', rule, {
         {
           message: 'Prop "name" should be optional.',
           line: 6,
+          column: 13,
+          endLine: 9,
+          endColumn: 14,
           suggestions: [
             {
               messageId: 'fixRequiredProp',
@@ -957,7 +1008,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 7,
+          endColumn: 14
         }
       ]
     },
@@ -988,7 +1042,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1017,7 +1074,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1045,7 +1105,10 @@ tester.run('no-required-prop-with-default', rule, {
       errors: [
         {
           message: 'Prop "name" should be optional.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     }

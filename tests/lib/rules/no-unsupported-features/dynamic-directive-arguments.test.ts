@@ -60,7 +60,10 @@ tester.run('no-unsupported-features/dynamic-directive-arguments', rule, {
       errors: [
         {
           message: 'Dynamic arguments are not supported until Vue.js "2.6.0".',
-          line: 3
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 19
         }
       ]
     },
@@ -73,7 +76,10 @@ tester.run('no-unsupported-features/dynamic-directive-arguments', rule, {
       errors: [
         {
           message: 'Dynamic arguments are not supported until Vue.js "2.6.0".',
-          line: 3
+          line: 3,
+          column: 13,
+          endLine: 3,
+          endColumn: 20
         }
       ]
     }

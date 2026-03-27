@@ -131,7 +131,10 @@ return {
       errors: [
         {
           message: '`data` property in component must be a function.',
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -157,7 +160,10 @@ return {
       errors: [
         {
           message: '`data` property in component must be a function.',
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -183,7 +189,10 @@ return {
       errors: [
         {
           message: '`data` property in component must be a function.',
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     },
@@ -209,7 +218,10 @@ return (/*b*/{
       errors: [
         {
           message: '`data` property in component must be a function.',
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 5,
+          endColumn: 13
         }
       ]
     }

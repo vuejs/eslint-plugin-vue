@@ -68,7 +68,10 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
         {
           message:
             '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -85,7 +88,10 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
         {
           message:
             '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -102,7 +108,10 @@ tester.run('no-unsupported-features/slot-scope-attribute', rule, {
         {
           message:
             '`slot-scope` are not supported except Vue.js ">=2.5.0 <3.0.0".',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     }

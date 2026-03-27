@@ -102,20 +102,42 @@ tester.run('valid-template-root', rule, {
     {
       filename: 'test.vue',
       code: '<template>\n</template>',
-      errors: ['The template requires child element.']
+      errors: [
+        {
+          message: 'The template requires child element.',
+          line: 1,
+          column: 1,
+          endLine: 2,
+          endColumn: 12
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template src="foo.html">abc</template>',
       errors: [
-        "The template root with 'src' attribute is required to be empty."
+        {
+          message:
+            "The template root with 'src' attribute is required to be empty.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template src="foo.html"><div></div></template>',
       errors: [
-        "The template root with 'src' attribute is required to be empty."
+        {
+          message:
+            "The template root with 'src' attribute is required to be empty.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 37
+        }
       ]
     }
   ]

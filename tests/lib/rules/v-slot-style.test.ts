@@ -182,7 +182,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedVSlot',
-          data: { actual: '#default', argument: 'default' }
+          data: { actual: '#default', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 40
         }
       ]
     },
@@ -200,7 +204,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedVSlot',
-          data: { actual: 'v-slot:default', argument: 'default' }
+          data: { actual: 'v-slot:default', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
@@ -219,7 +227,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot:default', argument: 'default' }
+          data: { actual: 'v-slot:default', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
@@ -238,7 +250,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot', argument: 'default' }
+          data: { actual: 'v-slot', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -257,7 +273,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: '#default', argument: 'default' }
+          data: { actual: '#default', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 40
         }
       ]
     },
@@ -276,7 +296,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: 'v-slot', argument: 'default' }
+          data: { actual: 'v-slot', argument: 'default' },
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -299,7 +323,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot', argument: 'default' }
+          data: { actual: 'v-slot', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -321,7 +349,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot:default', argument: 'default' }
+          data: { actual: 'v-slot:default', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -344,7 +376,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: '#default', argument: 'default' }
+          data: { actual: '#default', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -367,7 +403,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: 'v-slot', argument: 'default' }
+          data: { actual: 'v-slot', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -390,7 +430,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedVSlot',
-          data: { actual: '#default', argument: 'default' }
+          data: { actual: '#default', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -413,7 +457,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedVSlot',
-          data: { actual: 'v-slot:default', argument: 'default' }
+          data: { actual: 'v-slot:default', argument: 'default' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -436,7 +484,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot:foo', argument: 'foo' }
+          data: { actual: 'v-slot:foo', argument: 'foo' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 33
         }
       ]
     },
@@ -459,7 +511,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: '#foo', argument: 'foo' }
+          data: { actual: '#foo', argument: 'foo' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     },
@@ -482,7 +538,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedShorthand',
-          data: { actual: 'v-slot:[foo]', argument: '[foo]' }
+          data: { actual: 'v-slot:[foo]', argument: '[foo]' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 35
         }
       ]
     },
@@ -505,7 +565,11 @@ tester.run('v-slot-style', rule, {
       errors: [
         {
           messageId: 'expectedLongform',
-          data: { actual: '#[foo]', argument: '[foo]' }
+          data: { actual: '#[foo]', argument: '[foo]' },
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     }

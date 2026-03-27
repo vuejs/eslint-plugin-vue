@@ -153,7 +153,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -173,7 +176,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -193,7 +199,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -211,7 +220,10 @@ ruleTester.run('return-in-emits-validator', rule, {
       errors: [
         {
           message: 'Expected to return a true value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 5,
+          endColumn: 29
         }
       ]
     },
@@ -235,7 +247,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -258,12 +273,18 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 6,
+          endColumn: 14
         },
         {
           message:
             'Expected to return a boolean value in "bar" emits validator.',
-          line: 7
+          line: 7,
+          column: 17,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -284,7 +305,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 7,
+          endColumn: 14
         }
       ]
     },
@@ -318,7 +342,10 @@ ruleTester.run('return-in-emits-validator', rule, {
       errors: [
         {
           message: 'Expected to return a true value in "foo" emits validator.',
-          line: 5
+          line: 5,
+          column: 18,
+          endLine: 21,
+          endColumn: 14
         }
       ]
     },
@@ -336,7 +363,10 @@ ruleTester.run('return-in-emits-validator', rule, {
         {
           message:
             'Expected to return a boolean value in "foo" emits validator.',
-          line: 4
+          line: 4,
+          column: 15,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     }

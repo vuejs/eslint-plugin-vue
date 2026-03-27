@@ -36,33 +36,81 @@ tester.run('valid-v-show', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-show:aaa="foo"></div></template>',
-      errors: ["'v-show' directives require no argument."]
+      errors: [
+        {
+          message: "'v-show' directives require no argument.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-show.aaa="foo"></div></template>',
-      errors: ["'v-show' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-show' directives require no modifier.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-show></div></template>',
-      errors: ["'v-show' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-show' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-show=""></div></template>',
-      errors: ["'v-show' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-show' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><template v-show="condition"></template></template>',
-      errors: ["'v-show' directives cannot be put on <template> tags."]
+      errors: [
+        {
+          message: "'v-show' directives cannot be put on <template> tags.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><template v-show="condition" /></template>',
-      errors: ["'v-show' directives cannot be put on <template> tags."]
+      errors: [
+        {
+          message: "'v-show' directives cannot be put on <template> tags.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     }
   ]
 })

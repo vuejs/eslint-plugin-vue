@@ -56,12 +56,16 @@ b: 4}]}" />
         {
           message: 'Object properties must go on a new line.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 28
         },
         {
           message: 'Object properties must go on a new line.',
           line: 3,
-          column: 41
+          column: 41,
+          endLine: 3,
+          endColumn: 42
         }
       ]
     },
@@ -81,7 +85,14 @@ b: 2,
       `,
       options: [{ allowAllPropertiesOnSameLine: true }],
       errors: [
-        "Object properties must go on a new line if they aren't all on the same line."
+        {
+          message:
+            "Object properties must go on a new line if they aren't all on the same line.",
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 28
+        }
       ]
     }
   ]

@@ -37,36 +37,82 @@ tester.run('valid-v-if', rule, {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo" v-else></div></div></template>',
       errors: [
-        "'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives."
+        {
+          message:
+            "'v-if' and 'v-else' directives can't exist on the same element. You may want 'v-else-if' directives.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo" v-else-if="bar"></div></div></template>',
       errors: [
-        "'v-if' and 'v-else-if' directives can't exist on the same element."
+        {
+          message:
+            "'v-if' and 'v-else-if' directives can't exist on the same element.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if:aaa="foo"></div></div></template>',
-      errors: ["'v-if' directives require no argument."]
+      errors: [
+        {
+          message: "'v-if' directives require no argument.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if.aaa="foo"></div></div></template>',
-      errors: ["'v-if' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-if' directives require no modifier.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if></div></div></template>',
-      errors: ["'v-if' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-if' directives require that attribute value.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div><div v-if=""></div></div></template>',
-      errors: ["'v-if' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-if' directives require that attribute value.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     }
   ]
 })

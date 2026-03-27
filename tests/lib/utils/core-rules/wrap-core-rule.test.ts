@@ -28,7 +28,9 @@ tester.run('wrap-core-rule-with-unknown', rule, {
           message:
             'Failed to extend ESLint core rule "foo". You may be able to use this rule by upgrading the version of ESLint. If you cannot upgrade it, turn off this rule.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: 1,
+          endColumn: 22
         }
       ]
     }

@@ -125,12 +125,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -154,12 +158,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -185,12 +193,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 16
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         }
       ]
     },
@@ -211,12 +223,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 20
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 20
         }
       ]
     },
@@ -237,12 +253,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 14
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -270,12 +290,16 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 4,
-          column: 9
+          column: 9,
+          endLine: 4,
+          endColumn: 21
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     },
@@ -299,29 +323,39 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: "'is' is a reserved attribute and cannot be used as props.",
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 21
         },
         {
           message:
             "'slot' is a reserved attribute and cannot be used as props.",
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 23
         },
         {
           message:
             "'slot-scope' is a reserved attribute and cannot be used as props.",
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 31
         }
       ]
     },
@@ -345,29 +379,39 @@ tester.run('no-reserved-props', rule, {
         {
           message: "'ref' is a reserved attribute and cannot be used as props.",
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 16
         },
         {
           message: "'key' is a reserved attribute and cannot be used as props.",
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         },
         {
           message: "'is' is a reserved attribute and cannot be used as props.",
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 15
         },
         {
           message:
             "'slot' is a reserved attribute and cannot be used as props.",
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 17
         },
         {
           message:
             "'slot-scope' is a reserved attribute and cannot be used as props.",
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 23
         }
       ]
     },
@@ -389,17 +433,26 @@ tester.run('no-reserved-props', rule, {
         {
           message:
             "'slot-scope' is a reserved attribute and cannot be used as props.",
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message:
             "'class' is a reserved attribute and cannot be used as props.",
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 18
         },
         {
           message:
             "'style' is a reserved attribute and cannot be used as props.",
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     }

@@ -116,7 +116,10 @@ tester.run('no-extra-parens', rule, {
         },
         {
           messageId: 'unexpected',
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 15
         }
       ]
     },

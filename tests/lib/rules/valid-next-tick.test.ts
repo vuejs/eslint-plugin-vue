@@ -153,6 +153,8 @@ tester.run('valid-next-tick', rule, {
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 4,
           column: 11,
+          endLine: 4,
+          endColumn: 13,
           suggestions: [
             {
               messageId: 'addAwait',
@@ -172,6 +174,8 @@ tester.run('valid-next-tick', rule, {
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 5,
           column: 15,
+          endLine: 5,
+          endColumn: 23,
           suggestions: [
             {
               messageId: 'addAwait',
@@ -191,6 +195,8 @@ tester.run('valid-next-tick', rule, {
             'Await the Promise returned by `nextTick` or pass a callback function.',
           line: 6,
           column: 16,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               messageId: 'addAwait',
@@ -237,32 +243,44 @@ tester.run('valid-next-tick', rule, {
         {
           message: '`nextTick` is a function.',
           line: 4,
-          column: 11
+          column: 11,
+          endLine: 4,
+          endColumn: 13
         },
         {
           message: '`nextTick` is a function.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message: '`nextTick` is a function.',
           line: 6,
-          column: 16
+          column: 16,
+          endLine: 6,
+          endColumn: 25
         },
         {
           message: '`nextTick` is a function.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 13
         },
         {
           message: '`nextTick` is a function.',
           line: 9,
-          column: 15
+          column: 15,
+          endLine: 9,
+          endColumn: 23
         },
         {
           message: '`nextTick` is a function.',
           line: 10,
-          column: 16
+          column: 16,
+          endLine: 10,
+          endColumn: 25
         }
       ]
     },
@@ -288,17 +306,23 @@ tester.run('valid-next-tick', rule, {
         {
           message: '`nextTick` is a function.',
           line: 4,
-          column: 17
+          column: 17,
+          endLine: 4,
+          endColumn: 19
         },
         {
           message: '`nextTick` is a function.',
           line: 5,
-          column: 21
+          column: 21,
+          endLine: 5,
+          endColumn: 29
         },
         {
           message: '`nextTick` is a function.',
           line: 6,
-          column: 23
+          column: 23,
+          endLine: 6,
+          endColumn: 32
         }
       ]
     },
@@ -326,17 +350,23 @@ tester.run('valid-next-tick', rule, {
         {
           message: '`nextTick` is a function.',
           line: 4,
-          column: 24
+          column: 24,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: '`nextTick` is a function.',
           line: 5,
-          column: 28
+          column: 28,
+          endLine: 5,
+          endColumn: 36
         },
         {
           message: '`nextTick` is a function.',
           line: 6,
-          column: 29
+          column: 29,
+          endLine: 6,
+          endColumn: 38
         }
       ]
     },
@@ -356,17 +386,23 @@ tester.run('valid-next-tick', rule, {
         {
           message: '`nextTick` expects zero or one parameters.',
           line: 4,
-          column: 11
+          column: 11,
+          endLine: 4,
+          endColumn: 13
         },
         {
           message: '`nextTick` expects zero or one parameters.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message: '`nextTick` expects zero or one parameters.',
           line: 6,
-          column: 16
+          column: 16,
+          endLine: 6,
+          endColumn: 25
         }
       ]
     },
@@ -390,37 +426,49 @@ tester.run('valid-next-tick', rule, {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 4,
-          column: 11
+          column: 11,
+          endLine: 4,
+          endColumn: 13
         },
         {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 5,
-          column: 15
+          column: 15,
+          endLine: 5,
+          endColumn: 23
         },
         {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 6,
-          column: 16
+          column: 16,
+          endLine: 6,
+          endColumn: 25
         },
         {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 8,
-          column: 17
+          column: 17,
+          endLine: 8,
+          endColumn: 19
         },
         {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 9,
-          column: 21
+          column: 21,
+          endLine: 9,
+          endColumn: 29
         },
         {
           message:
             'Either await the Promise or pass a callback function to `nextTick`.',
           line: 10,
-          column: 22
+          column: 22,
+          endLine: 10,
+          endColumn: 31
         }
       ]
     }

@@ -700,7 +700,9 @@ tester.run('no-undef-components', rule, {
         {
           message: "The '<Foo>' component has been used, but not defined.",
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -720,7 +722,9 @@ tester.run('no-undef-components', rule, {
           message:
             "The '<pascal_case>' component has been used, but not defined.",
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 24
         }
       ]
     },
@@ -740,7 +744,9 @@ tester.run('no-undef-components', rule, {
           message:
             "The '<Foo.Input>' component has been used, but not defined.",
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -777,32 +783,50 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
-          line: 12
+          line: 12,
+          column: 9,
+          endLine: 12,
+          endColumn: 16
         },
         {
           message:
             "The '<HelloWorld1>' component has been used, but 'HelloWorld1' only refers to a type.",
-          line: 13
+          line: 13,
+          column: 9,
+          endLine: 13,
+          endColumn: 24
         },
         {
           message:
             "The '<HelloWorld2>' component has been used, but 'HelloWorld2' only refers to a type.",
-          line: 14
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 24
         },
         {
           message:
             "The '<HelloWorld3>' component has been used, but 'HelloWorld3' only refers to a type.",
-          line: 15
+          line: 15,
+          column: 9,
+          endLine: 15,
+          endColumn: 24
         },
         {
           message:
             "The '<HelloWorld4>' component has been used, but 'HelloWorld4' only refers to a type.",
-          line: 16
+          line: 16,
+          column: 9,
+          endLine: 16,
+          endColumn: 24
         },
         {
           message:
             "The '<HelloWorld5>' component has been used, but 'HelloWorld5' only refers to a type.",
-          line: 17
+          line: 17,
+          column: 9,
+          endLine: 17,
+          endColumn: 24
         }
       ]
     },
@@ -829,7 +853,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<Foo>' component has been used, but 'Foo' only refers to a type.",
-          line: 7
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -846,7 +873,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -866,7 +896,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<WarmButton>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -883,7 +916,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     },
@@ -905,7 +941,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<WarmButton>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     },
@@ -927,7 +966,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -951,7 +993,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     },
@@ -973,7 +1018,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 45
         }
       ]
     },
@@ -997,7 +1045,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 45
         }
       ]
     },
@@ -1019,7 +1070,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -1039,7 +1093,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponent>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -1058,7 +1115,10 @@ tester.run('no-undef-components', rule, {
         {
           message:
             "The '<CustomComponentWithNamedSlots>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 42
         }
       ]
     },
@@ -1079,7 +1139,10 @@ tester.run('no-undef-components', rule, {
       errors: [
         {
           message: "The '<foo>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     },
@@ -1100,7 +1163,10 @@ tester.run('no-undef-components', rule, {
       errors: [
         {
           message: "The '<foo>' component has been used, but not defined.",
-          line: 3
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     }

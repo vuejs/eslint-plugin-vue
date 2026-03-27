@@ -95,7 +95,9 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 36
         }
       ]
@@ -105,7 +107,9 @@ tester.run('no-constant-condition', rule, {
       errors: [
         {
           messageId: 'unexpected',
+          line: 1,
           column: 31,
+          endLine: 1,
           endColumn: 33
         }
       ]

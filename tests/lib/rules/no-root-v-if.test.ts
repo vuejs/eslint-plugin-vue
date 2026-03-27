@@ -102,12 +102,30 @@ tester.run('no-root-v-if', rule, {
     {
       filename: 'test.vue',
       code: '<template><custom-component v-if="foo"></custom-component></template>',
-      errors: ['`v-if` should not be used on root element without `v-else`.']
+      errors: [
+        {
+          message:
+            '`v-if` should not be used on root element without `v-else`.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 70
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-if="foo"></div></template>',
-      errors: ['`v-if` should not be used on root element without `v-else`.']
+      errors: [
+        {
+          message:
+            '`v-if` should not be used on root element without `v-else`.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
     }
   ]
 })

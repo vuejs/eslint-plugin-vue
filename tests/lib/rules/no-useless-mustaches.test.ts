@@ -61,7 +61,8 @@ tester.run('no-useless-mustaches', rule, {
             'Unexpected mustache interpolation with a string literal value.',
           line: 3,
           column: 9,
-          endLine: 3
+          endLine: 3,
+          endColumn: 20
         }
       ]
     },
@@ -75,8 +76,22 @@ tester.run('no-useless-mustaches', rule, {
       `,
       output: null,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 35
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 5,
+          endColumn: 12
+        }
       ]
     },
     {
@@ -87,8 +102,22 @@ tester.run('no-useless-mustaches', rule, {
       </template>`,
       output: null,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 19
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 19
+        }
       ]
     },
     {
@@ -117,13 +146,62 @@ tester.run('no-useless-mustaches', rule, {
         foo
       </template>`,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 29
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 19
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 20
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 20
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 23
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 20
+        }
       ]
     },
     {
@@ -152,15 +230,78 @@ tester.run('no-useless-mustaches', rule, {
         {{ "no semi&#34 }}
       </template>`,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 30
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 30
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 25
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 37
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 34
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -179,10 +320,38 @@ tester.run('no-useless-mustaches', rule, {
         \\
       </template>`,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 42
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 19
+        }
       ]
     },
     {
@@ -203,10 +372,38 @@ tester.run('no-useless-mustaches', rule, {
       </template>
       `,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 21
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 22
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -227,10 +424,38 @@ tester.run('no-useless-mustaches', rule, {
       </template>
       `,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 18
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 19
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 34
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -241,7 +466,16 @@ bar\` }}
       </template>
       `,
       output: null,
-      errors: ['Unexpected mustache interpolation with a string literal value.']
+      errors: [
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 4,
+          endColumn: 8
+        }
+      ]
     },
     {
       code: `
@@ -254,10 +488,38 @@ bar\` }}
       `,
       output: null,
       errors: [
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.',
-        'Unexpected mustache interpolation with a string literal value.'
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 23
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 23
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          message:
+            'Unexpected mustache interpolation with a string literal value.',
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 19
+        }
       ]
     }
   ]

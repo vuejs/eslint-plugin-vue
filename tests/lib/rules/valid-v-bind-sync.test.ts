@@ -181,6 +181,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
           column: 35,
+          endLine: 3,
           endColumn: 40
         }
       ]
@@ -198,6 +199,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
           column: 41,
+          endLine: 3,
           endColumn: 46
         }
       ]
@@ -215,6 +217,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers aren't supported on <input> non Vue-components.",
           line: 3,
           column: 18,
+          endLine: 3,
           endColumn: 33
         }
       ]
@@ -232,6 +235,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
           column: 35,
+          endLine: 3,
           endColumn: 40
         }
       ]
@@ -249,6 +253,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers require the attribute value which is valid as LHS.",
           line: 3,
           column: 35,
+          endLine: 3,
           endColumn: 45
         }
       ]
@@ -266,6 +271,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers aren't supported on <input> non Vue-components.",
           line: 3,
           column: 18,
+          endLine: 3,
           endColumn: 39
         }
       ]
@@ -285,6 +291,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers cannot update the iteration variable 'x' itself.",
           line: 4,
           column: 37,
+          endLine: 4,
           endColumn: 38
         }
       ]
@@ -304,6 +311,7 @@ tester.run('valid-v-bind-sync', rule, {
             "'.sync' modifiers cannot update the iteration variable 'e' itself.",
           line: 4,
           column: 43,
+          endLine: 4,
           endColumn: 44
         }
       ]
@@ -325,7 +333,10 @@ tester.run('valid-v-bind-sync', rule, {
         {
           message:
             "'.sync' modifiers cannot update the iteration variable 'e1' itself.",
-          line: 6
+          line: 6,
+          column: 47,
+          endLine: 6,
+          endColumn: 49
         }
       ]
     },
@@ -342,7 +353,10 @@ tester.run('valid-v-bind-sync', rule, {
         {
           message:
             "'.sync' modifiers cannot update the iteration variable 'index' itself.",
-          line: 4
+          line: 4,
+          column: 43,
+          endLine: 4,
+          endColumn: 48
         }
       ]
     },
@@ -354,68 +368,155 @@ tester.run('valid-v-bind-sync', rule, {
         </template>
       `,
       errors: [
-        "'.sync' modifiers aren't supported on <div> non Vue-components."
+        {
+          message:
+            "'.sync' modifiers aren't supported on <div> non Vue-components.",
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 31
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-bind.sync="foo()" /></template>',
       errors: [
-        "'.sync' modifiers require the attribute value which is valid as LHS."
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 42
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><svg><MyComponent :foo.sync="foo()" /></svg></template>',
       errors: [
-        "'.sync' modifiers require the attribute value which is valid as LHS."
+        {
+          message:
+            "'.sync' modifiers require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 45
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="foo?.bar" /></template>',
       errors: [
-        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+        {
+          message:
+            "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 43
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="foo?.bar.baz" /></template>',
       errors: [
-        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+        {
+          message:
+            "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 47
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="(a?.b)?.c" /></template>',
       errors: [
-        "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers."
+        {
+          message:
+            "Optional chaining cannot appear in 'v-bind' with '.sync' modifiers.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 44
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="(a?.b).c" /></template>',
-      errors: ["'.sync' modifier has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'.sync' modifier has potential null object property access.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="(null).foo" /></template>',
-      errors: ["'.sync' modifier has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'.sync' modifier has potential null object property access.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 45
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent :foo.sync="(a?.b).c.d" /></template>',
-      errors: ["'.sync' modifier has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'.sync' modifier has potential null object property access.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 45
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><tr v-on:is="myRow" :some-prop.sync="somePropValue"></template>',
-      errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers aren't supported on <tr> non Vue-components.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 62
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><tr v-bind="myRow" :some-prop.sync="somePropValue"></template>',
-      errors: ["'.sync' modifiers aren't supported on <tr> non Vue-components."]
+      errors: [
+        {
+          message:
+            "'.sync' modifiers aren't supported on <tr> non Vue-components.",
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 61
+        }
+      ]
     }
   ]
 })

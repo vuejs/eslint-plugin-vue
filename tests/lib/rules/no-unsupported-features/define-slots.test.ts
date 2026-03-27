@@ -47,7 +47,10 @@ tester.run('no-unsupported-features/define-slots', rule, {
         {
           message:
             '`defineSlots()` macros are not supported until Vue.js "3.3.0".',
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 36
         }
       ]
     }

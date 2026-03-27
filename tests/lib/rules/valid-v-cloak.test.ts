@@ -26,35 +26,83 @@ tester.run('valid-v-cloak', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-cloak:aaa></div></template>',
-      errors: ["'v-cloak' directives require no argument."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no argument.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 27
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-cloak.aaa></div></template>',
-      errors: ["'v-cloak' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no modifier.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 27
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-cloak="aaa"></div></template>',
-      errors: ["'v-cloak' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     // parsing error
     {
       filename: 'parsing-error.vue',
       code: '<template><div v-cloak="."></div></template>',
-      errors: ["'v-cloak' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 27
+        }
+      ]
     },
     // comment value
     {
       filename: 'comment-value.vue',
       code: '<template><div v-cloak="/**/" /></template>',
-      errors: ["'v-cloak' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-cloak="" /></template>',
-      errors: ["'v-cloak' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-cloak' directives require no attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     }
   ]
 })

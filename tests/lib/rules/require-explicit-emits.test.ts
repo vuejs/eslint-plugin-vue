@@ -1053,6 +1053,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1106,6 +1110,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1195,6 +1203,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1226,6 +1238,10 @@ emits: {'foo': null}
         {
           message:
             'The "bar" event has been triggered but not declared on `emits` option.',
+          line: 12,
+          column: 20,
+          endLine: 12,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Add the "bar" to `emits` option.',
@@ -1257,6 +1273,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 18,
+          column: 24,
+          endLine: 18,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1319,6 +1339,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1354,6 +1378,10 @@ emits: {'foo': null}
         {
           message:
             'The "bar" event has been triggered but not declared on `emits` option.',
+          line: 13,
+          column: 28,
+          endLine: 13,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "bar" to `emits` option.',
@@ -1389,6 +1417,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 21,
+          column: 24,
+          endLine: 21,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1439,6 +1471,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "foo" to `emits` option.',
@@ -1474,6 +1510,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1526,6 +1566,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1577,6 +1621,10 @@ emits: {'foo': null},
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1626,6 +1674,10 @@ emits: {'foo': null},
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1675,6 +1727,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1727,6 +1783,10 @@ emits: {'foo': null}
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 7,
+          column: 25,
+          endLine: 7,
+          endColumn: 30,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1767,6 +1827,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `emits` option.',
+          line: 8,
+          column: 28,
+          endLine: 8,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "bar" event.',
@@ -1822,6 +1886,10 @@ emits: {'bar': null},
         {
           message:
             'The "foo" event has been triggered but not declared on `emits` option.',
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 26,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -1856,6 +1924,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `emits` option.',
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "bar" event.',
@@ -1912,6 +1984,9 @@ emits: {'bar': null},
       errors: [
         {
           line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36,
           messageId: 'missing',
           suggestions: [
             {
@@ -1958,6 +2033,9 @@ emits: {'foo': null},
         },
         {
           line: 9,
+          column: 29,
+          endLine: 9,
+          endColumn: 34,
           messageId: 'missing',
           suggestions: [
             {
@@ -2004,6 +2082,9 @@ emits: {'foo': null},
         },
         {
           line: 12,
+          column: 20,
+          endLine: 12,
+          endColumn: 25,
           messageId: 'missing',
           suggestions: [
             {
@@ -2067,6 +2148,9 @@ emits: {'foo': null},
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "bar" to `defineEmits`.',
@@ -2098,6 +2182,9 @@ emits: {'foo': null},
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33,
           suggestions: [
             {
               desc: 'Add the "bar" to `defineEmits`.',
@@ -2133,7 +2220,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33
         }
       ]
     },
@@ -2154,7 +2244,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33
         }
       ]
     },
@@ -2171,7 +2264,10 @@ emits: {'foo': null},
         {
           message:
             'The "foo" event has been triggered but not declared on `defineEmits`.',
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 33
         }
       ]
     },
@@ -2191,7 +2287,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 17
         }
       ]
     },
@@ -2209,6 +2308,9 @@ emits: {'foo': null},
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
           line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 17,
           suggestions: [
             {
               desc: 'Add the "bar" to `defineEmits`.',
@@ -2241,7 +2343,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 17
         }
       ]
     },
@@ -2263,7 +2368,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 6
+          line: 6,
+          column: 12,
+          endLine: 6,
+          endColumn: 17
         }
       ]
     },
@@ -2281,7 +2389,10 @@ emits: {'foo': null},
         {
           message:
             'The "qux" event has been triggered but not declared on `defineEmits`.',
-          line: 8
+          line: 8,
+          column: 12,
+          endLine: 8,
+          endColumn: 17
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -2303,7 +2414,10 @@ emits: {'foo': null},
         {
           message:
             'The "bar" event has been triggered but not declared on `defineEmits`.',
-          line: 3
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 32
         }
       ]
     }

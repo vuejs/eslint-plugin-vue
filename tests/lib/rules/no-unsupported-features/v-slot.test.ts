@@ -87,7 +87,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     },
@@ -108,7 +111,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -129,7 +135,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     },
@@ -150,7 +159,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -171,7 +183,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     },
@@ -192,7 +207,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -213,7 +231,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     },
@@ -234,7 +255,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -255,7 +279,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 34
         }
       ]
     },
@@ -277,7 +304,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 32
         }
       ]
     },
@@ -293,7 +323,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -311,7 +344,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     },
@@ -329,7 +365,10 @@ tester.run('no-unsupported-features/v-slot', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     }

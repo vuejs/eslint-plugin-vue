@@ -121,7 +121,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message: "This 'v-if' should be moved to the wrapper element.",
-          line: 1
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 51
         }
       ]
     },
@@ -131,7 +134,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message: "This 'v-if' should be moved to the wrapper element.",
-          line: 1
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 62
         }
       ]
     },
@@ -142,7 +148,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 1
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 56
         }
       ]
     },
@@ -165,7 +174,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 35
         }
       ]
     },
@@ -187,7 +199,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message: "This 'v-if' should be moved to the wrapper element.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 37
         }
       ]
     },
@@ -198,7 +213,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The 'list' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 1
+          line: 1,
+          column: 45,
+          endLine: 1,
+          endColumn: 62
         }
       ]
     },
@@ -221,7 +239,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The 'users' variable inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 35
         }
       ]
     },
@@ -243,7 +264,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
       errors: [
         {
           message: "This 'v-if' should be moved to the wrapper element.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 37
         }
       ]
     },
@@ -254,7 +278,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The 'list()' expression inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 1
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 60
         }
       ]
     },
@@ -265,7 +292,10 @@ tester.run('no-use-v-if-with-v-for', rule, {
         {
           message:
             "The '5' expression inside 'v-for' directive should be replaced with a computed property that returns filtered array instead. You should not mix 'v-for' with 'v-if'.",
-          line: 1
+          line: 1,
+          column: 36,
+          endLine: 1,
+          endColumn: 44
         }
       ]
     }

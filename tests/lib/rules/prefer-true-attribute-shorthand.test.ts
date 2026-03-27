@@ -180,6 +180,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 35,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',
@@ -204,6 +206,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',
@@ -229,6 +233,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 35,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',
@@ -254,6 +260,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',
@@ -279,6 +287,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectLong',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 21,
           suggestions: [
             {
               messageId: 'rewriteIntoLongVueProp',
@@ -311,6 +321,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectLong',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 22,
           suggestions: [
             {
               messageId: 'rewriteIntoLongVueProp',
@@ -332,6 +344,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectLong',
           line: 3,
           column: 23,
+          endLine: 3,
+          endColumn: 30,
           suggestions: [
             {
               messageId: 'rewriteIntoLongVueProp',
@@ -364,6 +378,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 17,
+          endLine: 3,
+          endColumn: 30,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',
@@ -378,6 +394,8 @@ tester.run('prefer-true-attribute-shorthand', rule, {
           messageId: 'expectShort',
           line: 3,
           column: 31,
+          endLine: 3,
+          endColumn: 46,
           suggestions: [
             {
               messageId: 'rewriteIntoShort',

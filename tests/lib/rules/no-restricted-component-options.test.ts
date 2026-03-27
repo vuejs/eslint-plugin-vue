@@ -144,37 +144,51 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
         {
           message: 'Using `init` is not allowed.',
           line: 5,
-          column: 9
+          column: 9,
+          endLine: 5,
+          endColumn: 13
         },
         {
           message: 'Using `beforeCompile` is not allowed.',
           line: 6,
-          column: 9
+          column: 9,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: 'Using `compiled` is not allowed.',
           line: 7,
-          column: 9
+          column: 9,
+          endLine: 7,
+          endColumn: 17
         },
         {
           message: 'Using `activate` is not allowed.',
           line: 8,
-          column: 9
+          column: 9,
+          endLine: 8,
+          endColumn: 17
         },
         {
           message: 'Using `ready` is not allowed.',
           line: 9,
-          column: 9
+          column: 9,
+          endLine: 9,
+          endColumn: 14
         },
         {
           message: 'Using `attached` is not allowed.',
           line: 10,
-          column: 9
+          column: 9,
+          endLine: 10,
+          endColumn: 17
         },
         {
           message: 'Using `detached` is not allowed.',
           line: 11,
-          column: 9
+          column: 9,
+          endLine: 11,
+          endColumn: 17
         }
       ]
     },
@@ -199,7 +213,10 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
       errors: [
         {
           message: 'Using `props.name.twoWay` is not allowed.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 19
         }
       ]
     },
@@ -249,22 +266,30 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
         {
           message: '"props.*.twoWay" cannot be used.',
           line: 10,
-          column: 13
+          column: 13,
+          endLine: 10,
+          endColumn: 19
         },
         {
           message: 'Use "beforeCreate" instead.',
           line: 13,
-          column: 9
+          column: 9,
+          endLine: 13,
+          endColumn: 13
         },
         {
           message: '"attached" and "detached" is deprecated.',
           line: 18,
-          column: 9
+          column: 9,
+          endLine: 18,
+          endColumn: 17
         },
         {
           message: '"attached" and "detached" is deprecated.',
           line: 19,
-          column: 9
+          column: 9,
+          endLine: 19,
+          endColumn: 17
         }
       ]
     },
@@ -289,7 +314,10 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
       errors: [
         {
           message: 'Using `props.*.twoWay` is not allowed.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 19
         }
       ]
     },
@@ -308,7 +336,10 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
       errors: [
         {
           message: 'Using `foo.*` is not allowed.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 17
         }
       ]
     },
@@ -319,7 +350,10 @@ tester.run('no-restricted-component-options', rule as RuleModule, {
       errors: [
         {
           message: 'Using `Foo` is not allowed.',
-          line: 1
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     }

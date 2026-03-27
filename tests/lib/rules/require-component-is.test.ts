@@ -30,12 +30,30 @@ tester.run('require-component-is', rule, {
     {
       filename: 'test.vue',
       code: '<template><component is="type"></component></template>',
-      errors: ["Expected '<component>' elements to have 'v-bind:is' attribute."]
+      errors: [
+        {
+          message:
+            "Expected '<component>' elements to have 'v-bind:is' attribute.",
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><component v-foo:is="type"></component></template>',
-      errors: ["Expected '<component>' elements to have 'v-bind:is' attribute."]
+      errors: [
+        {
+          message:
+            "Expected '<component>' elements to have 'v-bind:is' attribute.",
+          line: 1,
+          column: 11,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
     }
   ]
 })

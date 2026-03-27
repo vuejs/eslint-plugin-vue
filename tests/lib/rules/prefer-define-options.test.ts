@@ -54,7 +54,10 @@ defineOptions({ name: 'Foo' })
       errors: [
         {
           message: 'Use `defineOptions` instead of default export.',
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -72,7 +75,10 @@ defineOptions({ name: 'Foo' })
       errors: [
         {
           message: 'Use `defineOptions` instead of default export.',
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -100,7 +106,10 @@ defineOptions({ name: 'Foo' })
       errors: [
         {
           message: 'Use `defineOptions` instead of default export.',
-          line: 4
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -126,7 +135,10 @@ defineOptions({ name: 'Foo' })
       errors: [
         {
           message: 'Use `defineOptions` instead of default export.',
-          line: 7
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 37
         }
       ]
     }

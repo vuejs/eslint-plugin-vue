@@ -120,16 +120,22 @@ tester.run('require-prop-comment', rule, {
         {
           line: 5,
           column: 11,
+          endLine: 5,
+          endColumn: 20,
           message: `The "b" property should have a JSDoc comment.`
         },
         {
           line: 8,
           column: 11,
+          endLine: 8,
+          endColumn: 20,
           message: `The "c" property should have a JSDoc comment.`
         },
         {
           line: 10,
           column: 11,
+          endLine: 10,
+          endColumn: 20,
           message: `The "d" property should have a JSDoc comment.`
         }
       ]
@@ -153,16 +159,22 @@ tester.run('require-prop-comment', rule, {
         {
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 18,
           message: 'The "b" property should have a block comment.'
         },
         {
           line: 8,
           column: 9,
+          endLine: 8,
+          endColumn: 18,
           message: 'The "c" property should have a block comment.'
         },
         {
           line: 10,
           column: 9,
+          endLine: 10,
+          endColumn: 18,
           message: 'The "d" property should have a block comment.'
         }
       ]
@@ -186,16 +198,22 @@ tester.run('require-prop-comment', rule, {
         {
           line: 5,
           column: 9,
+          endLine: 5,
+          endColumn: 18,
           message: 'The "b" property should have a line comment.'
         },
         {
           line: 8,
           column: 9,
+          endLine: 8,
+          endColumn: 18,
           message: 'The "c" property should have a line comment.'
         },
         {
           line: 10,
           column: 9,
+          endLine: 10,
+          endColumn: 18,
           message: 'The "d" property should have a line comment.'
         }
       ]
@@ -213,6 +231,8 @@ tester.run('require-prop-comment', rule, {
         {
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 18,
           message: `The "d" property should have a comment.`
         }
       ]
@@ -231,6 +251,8 @@ tester.run('require-prop-comment', rule, {
         {
           line: 5,
           column: 11,
+          endLine: 5,
+          endColumn: 20,
           message: 'The "a" property should have a JSDoc comment.'
         }
       ]
@@ -247,6 +269,8 @@ tester.run('require-prop-comment', rule, {
         {
           line: 4,
           column: 11,
+          endLine: 4,
+          endColumn: 20,
           message: 'The "a" property should have a JSDoc comment.'
         }
       ]
@@ -269,6 +293,8 @@ tester.run('require-prop-comment', rule, {
         {
           line: 4,
           column: 9,
+          endLine: 4,
+          endColumn: 18,
           message: 'The "a" property should have a JSDoc comment.'
         }
       ]

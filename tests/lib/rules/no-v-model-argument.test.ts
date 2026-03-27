@@ -22,12 +22,28 @@ ruleTester.run('no-v-model-argument', rule, {
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model:foo="bar"></MyComponent></template>',
-      errors: ["'v-model' directives require no argument."]
+      errors: [
+        {
+          message: "'v-model' directives require no argument.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><MyComponent v-model:foo.trim="bar"></MyComponent></template>',
-      errors: ["'v-model' directives require no argument."]
+      errors: [
+        {
+          message: "'v-model' directives require no argument.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
     }
   ]
 })

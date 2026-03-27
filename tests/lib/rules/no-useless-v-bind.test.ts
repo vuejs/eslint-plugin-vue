@@ -85,8 +85,20 @@ tester.run('no-useless-v-bind', rule, {
       `,
       output: null,
       errors: [
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.'
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 40
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 4,
+          column: 14,
+          endLine: 5,
+          endColumn: 10
+        }
       ]
     },
     {
@@ -97,8 +109,20 @@ tester.run('no-useless-v-bind', rule, {
       </template>`,
       output: null,
       errors: [
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.'
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -127,13 +151,55 @@ tester.run('no-useless-v-bind', rule, {
         <div id=foo />
       </template>`,
       errors: [
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.'
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 28
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 24
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 25
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 8,
+          column: 14,
+          endLine: 8,
+          endColumn: 25
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 10,
+          column: 14,
+          endLine: 10,
+          endColumn: 28
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 11,
+          column: 14,
+          endLine: 11,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -156,12 +222,48 @@ tester.run('no-useless-v-bind', rule, {
         <div id=' "foo" ' />
       </template>`,
       errors: [
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.',
-        'Unexpected `v-bind` with a string literal value.'
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 33
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected `v-bind` with a string literal value.',
+          line: 8,
+          column: 14,
+          endLine: 8,
+          endColumn: 31
+        }
       ]
     }
   ]

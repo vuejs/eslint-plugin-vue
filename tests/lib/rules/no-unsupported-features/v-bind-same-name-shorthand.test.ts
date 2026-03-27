@@ -44,7 +44,10 @@ tester.run('no-unsupported-features/v-bind-same-name-shorthand', rule, {
         {
           message:
             '`v-bind` same-name shorthand is not supported until Vue.js "3.4.0".',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 16
         }
       ]
     },
@@ -62,7 +65,10 @@ tester.run('no-unsupported-features/v-bind-same-name-shorthand', rule, {
         {
           message:
             '`v-bind` same-name shorthand is not supported until Vue.js "3.4.0".',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 16
         }
       ]
     },
@@ -80,7 +86,10 @@ tester.run('no-unsupported-features/v-bind-same-name-shorthand', rule, {
         {
           message:
             '`v-bind` same-name shorthand is not supported until Vue.js "3.4.0".',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 21
         }
       ]
     }

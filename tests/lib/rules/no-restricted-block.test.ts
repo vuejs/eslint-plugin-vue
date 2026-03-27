@@ -30,12 +30,16 @@ tester.run('no-restricted-block', rule as RuleModule, {
         {
           message: 'Using `<style>` is not allowed.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: 1,
+          endColumn: 8
         },
         {
           message: 'Using `<foo>` is not allowed.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: 1,
+          endColumn: 28
         }
       ]
     },
@@ -45,8 +49,20 @@ tester.run('no-restricted-block', rule as RuleModule, {
       <block-forbidden></block-forbidden>`,
       options: ['/forbidden/'],
       errors: [
-        'Using `<forbidden-block>` is not allowed.',
-        'Using `<block-forbidden>` is not allowed.'
+        {
+          message: 'Using `<forbidden-block>` is not allowed.',
+          line: 1,
+          column: 1,
+          endLine: 1,
+          endColumn: 18
+        },
+        {
+          message: 'Using `<block-forbidden>` is not allowed.',
+          line: 2,
+          column: 7,
+          endLine: 2,
+          endColumn: 24
+        }
       ]
     },
     {
@@ -68,17 +84,23 @@ tester.run('no-restricted-block', rule as RuleModule, {
         {
           message: 'Do not use <style> block in this project.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: 1,
+          endColumn: 8
         },
         {
           message: 'Do not use blocks that include `forbidden` in their name.',
           line: 2,
-          column: 7
+          column: 7,
+          endLine: 2,
+          endColumn: 24
         },
         {
           message: 'Do not use blocks that include `forbidden` in their name.',
           line: 3,
-          column: 7
+          column: 7,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     }

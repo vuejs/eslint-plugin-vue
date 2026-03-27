@@ -30,19 +30,47 @@ tester.run('no-textarea-mustache', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><textarea>{{text}}</textarea></div></template>',
-      errors: ["Unexpected mustache. Use 'v-model' instead."]
+      errors: [
+        {
+          message: "Unexpected mustache. Use 'v-model' instead.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><textarea v-model="text">{{text}}</textarea></div></template>',
-      errors: ["Unexpected mustache. Use 'v-model' instead."]
+      errors: [
+        {
+          message: "Unexpected mustache. Use 'v-model' instead.",
+          line: 1,
+          column: 41,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><textarea>{{text}} and {{text}}</textarea></div></template>',
       errors: [
-        "Unexpected mustache. Use 'v-model' instead.",
-        "Unexpected mustache. Use 'v-model' instead."
+        {
+          message: "Unexpected mustache. Use 'v-model' instead.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 34
+        },
+        {
+          message: "Unexpected mustache. Use 'v-model' instead.",
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 47
+        }
       ]
     }
   ]

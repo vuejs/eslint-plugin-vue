@@ -60,7 +60,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'camelCase'
           },
           line: 3,
-          column: 17
+          column: 17,
+          endLine: 3,
+          endColumn: 31
         },
         {
           messageId: 'invalidCase',
@@ -69,7 +71,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'camelCase'
           },
           line: 4,
-          column: 17
+          column: 17,
+          endLine: 4,
+          endColumn: 35
         }
       ]
     },
@@ -90,7 +94,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'kebab-case'
           },
           line: 3,
-          column: 17
+          column: 17,
+          endLine: 3,
+          endColumn: 30
         },
         {
           messageId: 'invalidCase',
@@ -99,7 +105,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'kebab-case'
           },
           line: 4,
-          column: 17
+          column: 17,
+          endLine: 4,
+          endColumn: 35
         }
       ]
     },
@@ -121,7 +129,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 3,
-          column: 17
+          column: 17,
+          endLine: 3,
+          endColumn: 31
         },
         {
           messageId: 'invalidCase',
@@ -130,7 +140,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 4,
-          column: 17
+          column: 17,
+          endLine: 4,
+          endColumn: 30
         },
         {
           messageId: 'invalidCase',
@@ -139,7 +151,9 @@ tester.run('slot-name-casing', rule, {
             caseType: 'singleword'
           },
           line: 5,
-          column: 17
+          column: 17,
+          endLine: 5,
+          endColumn: 35
         }
       ]
     }

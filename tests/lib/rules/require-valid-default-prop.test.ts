@@ -17,24 +17,6 @@ const languageOptions: Linter.LanguageOptions = {
   }
 }
 
-function errorMessage(type: string) {
-  return [
-    {
-      message: `Type of the default value for 'foo' prop must be a ${type}.`,
-      line: 5
-    }
-  ]
-}
-
-function errorMessageForFunction(type: string) {
-  return [
-    {
-      message: `Type of the default value for 'foo' prop must be a ${type}.`,
-      line: 6
-    }
-  ]
-}
-
 const ruleTester = new RuleTester()
 ruleTester.run('require-valid-default-prop', rule, {
   valid: [
@@ -355,7 +337,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number or string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number or string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -368,7 +358,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number or function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number or function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -381,7 +379,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -394,7 +400,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 27
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -407,7 +421,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -420,7 +442,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -433,7 +463,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -446,7 +484,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -459,7 +505,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -472,7 +526,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('boolean')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a boolean.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -485,7 +547,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('boolean')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a boolean.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -498,7 +568,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('boolean')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a boolean.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -511,7 +589,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('boolean')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a boolean.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -524,7 +610,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -537,7 +631,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -550,7 +652,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 27
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -563,7 +673,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -576,7 +694,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -589,7 +715,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -602,7 +736,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -615,7 +757,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 27
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -628,7 +778,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -641,7 +799,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -654,7 +820,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function or number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function or number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -672,7 +846,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         ecmaVersion: 6,
         sourceType: 'module'
       },
-      errors: errorMessage('function or number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function or number.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
 
     {
@@ -697,15 +879,24 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: `Type of the default value for 'foo' prop must be a function.`,
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
         },
         {
           message: `Type of the default value for 'bar' prop must be a function.`,
-          line: 9
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 24
         },
         {
           message: `Type of the default value for '[baz]' prop must be a function.`,
-          line: 13
+          line: 13,
+          column: 22,
+          endLine: 13,
+          endColumn: 24
         }
       ]
     },
@@ -720,7 +911,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -735,7 +934,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -750,7 +957,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('object')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a object.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -765,7 +980,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -780,7 +1003,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -795,7 +1026,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('object')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a object.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -810,7 +1049,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessageForFunction('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -823,7 +1070,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('number')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a number.`,
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -836,7 +1091,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('object')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a object.`,
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -849,7 +1112,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -862,7 +1133,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 23
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -892,17 +1171,26 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'foo' prop must be a string or boolean.",
-          line: 7
+          line: 7,
+          column: 32,
+          endLine: 7,
+          endColumn: 33
         },
         {
           message:
             "Type of the default value for 'foo' prop must be a string or boolean.",
-          line: 9
+          line: 9,
+          column: 32,
+          endLine: 9,
+          endColumn: 34
         },
         {
           message:
             "Type of the default value for 'foo' prop must be a string or boolean.",
-          line: 11
+          line: 11,
+          column: 32,
+          endLine: 11,
+          endColumn: 40
         }
       ]
     },
@@ -917,7 +1205,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       }`,
       languageOptions,
-      errors: errorMessage('string')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a string.`,
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 32
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -935,7 +1231,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         ecmaVersion: 6,
         sourceType: 'module'
       },
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -953,7 +1257,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         ecmaVersion: 6,
         sourceType: 'module'
       },
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -971,7 +1283,15 @@ ruleTester.run('require-valid-default-prop', rule, {
         ecmaVersion: 6,
         sourceType: 'module'
       },
-      errors: errorMessage('function')
+      errors: [
+        {
+          message: `Type of the default value for 'foo' prop must be a function.`,
+          line: 5,
+          column: 24,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -993,7 +1313,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 6
+          line: 6,
+          column: 28,
+          endLine: 6,
+          endColumn: 31
         }
       ]
     },
@@ -1017,7 +1340,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1040,40 +1366,67 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'a' prop must be a string.",
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 14
         },
         {
           message: "Type of the default value for 'b' prop must be a number.",
-          line: 6
+          line: 6,
+          column: 12,
+          endLine: 6,
+          endColumn: 15
         },
         {
           message: "Type of the default value for 'c' prop must be a boolean.",
-          line: 7
+          line: 7,
+          column: 12,
+          endLine: 7,
+          endColumn: 14
         },
         {
           message: "Type of the default value for 'd' prop must be a boolean.",
-          line: 8
+          line: 8,
+          column: 12,
+          endLine: 8,
+          endColumn: 14
         },
         {
           message:
             "Type of the default value for 'e' prop must be a string or number.",
-          line: 9
+          line: 9,
+          column: 12,
+          endLine: 9,
+          endColumn: 16
         },
         {
           message: "Type of the default value for 'f' prop must be a function.",
-          line: 10
+          line: 10,
+          column: 12,
+          endLine: 10,
+          endColumn: 14
         },
         {
           message: "Type of the default value for 'g' prop must be a function.",
-          line: 11
+          line: 11,
+          column: 12,
+          endLine: 11,
+          endColumn: 26
         },
         {
           message: "Type of the default value for 'h' prop must be a function.",
-          line: 12
+          line: 12,
+          column: 12,
+          endLine: 12,
+          endColumn: 26
         },
         {
           message: "Type of the default value for 'i' prop must be a function.",
-          line: 13
+          line: 13,
+          column: 12,
+          endLine: 13,
+          endColumn: 26
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -1093,7 +1446,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     },
@@ -1115,11 +1471,17 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 26
         },
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 6
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 25
         }
       ]
     },
@@ -1140,7 +1502,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a number.",
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -1161,7 +1526,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a array.",
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -1185,7 +1553,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a array.",
-          line: 7
+          line: 7,
+          column: 22,
+          endLine: 7,
+          endColumn: 24
         }
       ]
     },
@@ -1206,7 +1577,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a array.",
-          line: 3
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -1220,7 +1594,10 @@ ruleTester.run('require-valid-default-prop', rule, {
       errors: [
         {
           message: "Type of the default value for 'foo' prop must be a string.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 22
         }
       ],
       ...getTypeScriptFixtureTestOptions()

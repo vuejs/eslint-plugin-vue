@@ -46,7 +46,10 @@ tester.run('no-unsupported-features/v-is', rule, {
       errors: [
         {
           message: '`v-is` are not supported until Vue.js "3.0.0".',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 18
         }
       ]
     }

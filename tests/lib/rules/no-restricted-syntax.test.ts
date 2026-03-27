@@ -172,8 +172,20 @@ tester.run('no-restricted-syntax', rule, {
         }
       ],
       errors: [
-        'Call expressions are not allowed.',
-        'Call expressions are not allowed.'
+        {
+          message: 'Call expressions are not allowed.',
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 24
+        },
+        {
+          message: 'Call expressions are not allowed.',
+          line: 3,
+          column: 27,
+          endLine: 3,
+          endColumn: 31
+        }
       ]
     },
 
@@ -193,7 +205,9 @@ tester.run('no-restricted-syntax', rule, {
         {
           message: 'Third argument of interpolate must be true',
           line: 3,
-          column: 48
+          column: 48,
+          endLine: 3,
+          endColumn: 53
         }
       ]
     },
@@ -215,7 +229,9 @@ tester.run('no-restricted-syntax', rule, {
         {
           message: 'Call expressions are not allowed.',
           line: 4,
-          column: 24
+          column: 24,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     }

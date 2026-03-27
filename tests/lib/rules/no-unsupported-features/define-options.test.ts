@@ -58,7 +58,10 @@ export default { name: 'Foo' }
         {
           message:
             '`defineOptions()` macros are not supported until Vue.js "3.3.0".',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 39
         }
       ]
     },
@@ -79,7 +82,10 @@ export default {}
         {
           message:
             '`defineOptions()` macros are not supported until Vue.js "3.3.0".',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 26
         }
       ]
     }
