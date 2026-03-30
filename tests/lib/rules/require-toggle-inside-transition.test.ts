@@ -93,9 +93,9 @@ tester.run('require-toggle-inside-transition', rule, {
       code: '<template><transition><div /></transition></template>',
       errors: [
         {
+          messageId: 'expected',
           line: 1,
           column: 23,
-          messageId: 'expected',
           endLine: 1,
           endColumn: 30
         }

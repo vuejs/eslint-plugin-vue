@@ -38,8 +38,8 @@ tester.run('prefer-v-model', rule, {
           message:
             'Prefer `v-model` over the `:modelValue`/`@update:modelValue` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 42,
           suggestions: [
             {
@@ -59,8 +59,8 @@ tester.run('prefer-v-model', rule, {
           message:
             'Prefer `v-model` over the `:model-value`/`@update:model-value` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 43,
           suggestions: [
             {
@@ -86,8 +86,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 4,
-          endLine: 4,
           column: 13,
+          endLine: 4,
           endColumn: 23,
           suggestions: [
             {
@@ -112,8 +112,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 48,
           suggestions: [
             {
@@ -132,8 +132,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 35,
           suggestions: [
             {
@@ -152,8 +152,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39,
           suggestions: [
             {
@@ -173,8 +173,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39,
           suggestions: [
             {
@@ -194,8 +194,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:foo` over the `:foo`/`@update:foo` pair.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 33,
           suggestions: [
             {
@@ -208,8 +208,8 @@ tester.run('prefer-v-model', rule, {
         {
           message: 'Prefer `v-model:bar` over the `:bar`/`@update:bar` pair.',
           line: 1,
-          endLine: 1,
           column: 59,
+          endLine: 1,
           endColumn: 67,
           suggestions: [
             {

@@ -255,16 +255,16 @@ tester.run('no-bare-strings-in-template', rule, {
       options: [{ allowlist: ['Lorem'] }],
       errors: [
         {
+          messageId: 'unexpected',
           line: 4,
           column: 13,
-          messageId: 'unexpected',
           endLine: 4,
           endColumn: 24
         },
         {
+          messageId: 'unexpected',
           line: 5,
           column: 13,
-          messageId: 'unexpected',
           endLine: 5,
           endColumn: 18
         }

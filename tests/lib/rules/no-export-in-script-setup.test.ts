@@ -98,50 +98,50 @@ ruleTester.run('no-export-in-script-setup', rule, {
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 3,
-          endLine: 3,
           column: 7,
+          endLine: 3,
           endColumn: 26
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 4,
-          endLine: 4,
           column: 7,
+          endLine: 4,
           endColumn: 24
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5,
-          endLine: 5,
           column: 7,
+          endLine: 5,
           endColumn: 13
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 6,
-          endLine: 6,
           column: 7,
+          endLine: 6,
           endColumn: 13
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 7,
-          endLine: 7,
           column: 7,
+          endLine: 7,
           endColumn: 13
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 9,
-          endLine: 9,
           column: 7,
+          endLine: 9,
           endColumn: 19
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 10,
-          endLine: 10,
           column: 7,
+          endLine: 10,
           endColumn: 32
         }
       ]
@@ -162,22 +162,22 @@ ruleTester.run('no-export-in-script-setup', rule, {
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 6,
-          endLine: 6,
           column: 7,
+          endLine: 6,
           endColumn: 26
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 7,
-          endLine: 7,
           column: 7,
+          endLine: 7,
           endColumn: 24
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 8,
-          endLine: 8,
           column: 7,
+          endLine: 8,
           endColumn: 13
         }
       ]
@@ -201,22 +201,22 @@ ruleTester.run('no-export-in-script-setup', rule, {
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 3,
-          endLine: 3,
           column: 7,
+          endLine: 3,
           endColumn: 13
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 4,
-          endLine: 4,
           column: 7,
+          endLine: 4,
           endColumn: 13
         },
         {
           message: '`<script setup>` cannot contain ES module exports.',
           line: 5,
-          endLine: 5,
           column: 7,
+          endLine: 5,
           endColumn: 16
         }
       ]

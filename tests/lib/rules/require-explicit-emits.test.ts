@@ -670,9 +670,9 @@ tester.run('require-explicit-emits', rule, {
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 28,
-          messageId: 'missing',
           endLine: 3,
           endColumn: 33,
           suggestions: [
@@ -720,9 +720,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 28,
-          messageId: 'missing',
           endLine: 3,
           endColumn: 33,
           suggestions: [
@@ -757,9 +757,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 28,
-          messageId: 'missing',
           endLine: 3,
           endColumn: 33,
           suggestions: [
@@ -794,9 +794,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 28,
-          messageId: 'missing',
           endLine: 3,
           endColumn: 33,
           suggestions: [
@@ -833,9 +833,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 7,
           column: 24,
-          messageId: 'missing',
           endLine: 7,
           endColumn: 29,
           suggestions: [
@@ -875,9 +875,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 8,
           column: 22,
-          messageId: 'missing',
           endLine: 8,
           endColumn: 27,
           suggestions: [
@@ -915,9 +915,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 6,
           column: 24,
-          messageId: 'missing',
           endLine: 6,
           endColumn: 29,
           suggestions: [
@@ -952,9 +952,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 6,
           column: 16,
-          messageId: 'missing',
           endLine: 6,
           endColumn: 21,
           suggestions: [
@@ -990,9 +990,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 6,
           column: 16,
-          messageId: 'missing',
           endLine: 6,
           endColumn: 21,
           suggestions: [
@@ -1013,9 +1013,9 @@ emits: {'foo': null}
           ]
         },
         {
+          messageId: 'missing',
           line: 7,
           column: 16,
-          messageId: 'missing',
           endLine: 7,
           endColumn: 21,
           suggestions: [
@@ -1150,9 +1150,9 @@ emits: {'foo': null}
       `,
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 28,
-          messageId: 'missing',
           endLine: 3,
           endColumn: 33,
           suggestions: [
@@ -1983,11 +1983,11 @@ emits: {'bar': null},
       options: [{ allowProps: true }],
       errors: [
         {
+          messageId: 'missing',
           line: 3,
           column: 31,
           endLine: 3,
           endColumn: 36,
-          messageId: 'missing',
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -2032,11 +2032,11 @@ emits: {'foo': null},
           ]
         },
         {
+          messageId: 'missing',
           line: 9,
           column: 29,
           endLine: 9,
           endColumn: 34,
-          messageId: 'missing',
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
@@ -2081,11 +2081,11 @@ emits: {'foo': null},
           ]
         },
         {
+          messageId: 'missing',
           line: 12,
           column: 20,
           endLine: 12,
           endColumn: 25,
-          messageId: 'missing',
           suggestions: [
             {
               desc: 'Add the `emits` option with array syntax and define "foo" event.',
