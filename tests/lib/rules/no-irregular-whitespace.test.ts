@@ -111,7 +111,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 9
+          column: 9,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -136,52 +138,72 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 3,
-          column: 9
+          column: 9,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 6,
-          column: 17
+          column: 17,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 7,
-          column: 17
+          column: 17,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 7,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 9,
-          column: 9
+          column: 9,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 11,
-          column: 9
+          column: 9,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 12,
-          column: 9
+          column: 9,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 15,
-          column: 15
+          column: 15,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -193,7 +215,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 2
+          column: 2,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -204,7 +228,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 3
+          column: 3,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -215,7 +241,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 15
+          column: 15,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -226,7 +254,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 3
+          column: 3,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -236,7 +266,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 3
+          column: 3,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -246,7 +278,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -256,7 +290,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -267,7 +303,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 2
+          column: 2,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -277,7 +315,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 20
+          column: 20,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -288,7 +328,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 2
+          column: 2,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -298,7 +340,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 20
+          column: 20,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -309,7 +353,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -320,7 +366,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     })),
@@ -357,7 +405,9 @@ tester.run('no-irregular-whitespace', rule, {
         {
           message: 'Irregular whitespace not allowed.',
           line: 6,
-          column: 17
+          column: 17,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     }

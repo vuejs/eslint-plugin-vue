@@ -160,11 +160,17 @@ tester.run('padding-line-between-blocks', rule, {
       errors: [
         {
           message: 'Expected blank line before this block.',
-          line: 2
+          line: 2,
+          column: 28,
+          endLine: 2,
+          endColumn: 45
         },
         {
           message: 'Expected blank line before this block.',
-          line: 2
+          line: 2,
+          column: 45,
+          endLine: 2,
+          endColumn: 60
         }
       ]
     },
@@ -190,11 +196,17 @@ tester.run('padding-line-between-blocks', rule, {
       errors: [
         {
           message: 'Expected blank line before this block.',
-          line: 4
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 24
         },
         {
           message: 'Expected blank line before this block.',
-          line: 7
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -226,15 +238,24 @@ tester.run('padding-line-between-blocks', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this block.',
-          line: 5
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 24
         },
         {
           message: 'Unexpected blank line before this block.',
-          line: 8
+          line: 8,
+          column: 7,
+          endLine: 8,
+          endColumn: 22
         },
         {
           message: 'Unexpected blank line before this block.',
-          line: 12
+          line: 12,
+          column: 7,
+          endLine: 12,
+          endColumn: 20
         }
       ]
     },
@@ -255,11 +276,17 @@ tester.run('padding-line-between-blocks', rule, {
       errors: [
         {
           message: 'Expected blank line before this block.',
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 40
         },
         {
           message: 'Expected blank line before this block.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 33
         }
       ]
     },
@@ -305,7 +332,10 @@ tester.run('padding-line-between-blocks', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this block.',
-          line: 23
+          line: 23,
+          column: 7,
+          endLine: 23,
+          endColumn: 22
         }
       ]
     }

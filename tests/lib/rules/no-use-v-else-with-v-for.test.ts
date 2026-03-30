@@ -67,8 +67,8 @@ tester.run('no-use-v-else-with-v-for', rule, {
           message:
             'Unexpected `v-else` and `v-for` on the same element. Move `v-else` to a wrapper element instead.',
           line: 4,
-          endLine: 4,
           column: 11,
+          endLine: 4,
           endColumn: 52
         }
       ]
@@ -86,8 +86,8 @@ tester.run('no-use-v-else-with-v-for', rule, {
           message:
             'Unexpected `v-else-if` and `v-for` on the same element. Move `v-else-if` to a wrapper element instead.',
           line: 4,
-          endLine: 4,
           column: 11,
+          endLine: 4,
           endColumn: 61
         }
       ]

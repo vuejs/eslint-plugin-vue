@@ -214,7 +214,15 @@ ruleTester.run('require-direct-export', rule, {
       }
       `,
       options: [{ disallowFunctionalComponentFunction: true }],
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 5,
+          endColumn: 8
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -225,7 +233,15 @@ ruleTester.run('require-direct-export', rule, {
       }
       `,
       options: [{ disallowFunctionalComponentFunction: true }],
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 5,
+          endColumn: 8
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -236,7 +252,15 @@ ruleTester.run('require-direct-export', rule, {
       }
       `,
       options: [{ disallowFunctionalComponentFunction: true }],
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 5,
+          endColumn: 8
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -245,7 +269,15 @@ ruleTester.run('require-direct-export', rule, {
       export default props => h('div', props.msg)
       `,
       options: [{ disallowFunctionalComponentFunction: true }],
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 50
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -253,7 +285,15 @@ ruleTester.run('require-direct-export', rule, {
       import Vue from 'vue'
       export default Vue.extend()
       `,
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 34
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -262,7 +302,15 @@ ruleTester.run('require-direct-export', rule, {
       const A = {}
       export default Vue.extend(A)
       `,
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 35
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -270,7 +318,15 @@ ruleTester.run('require-direct-export', rule, {
       import { defineComponent } from 'vue'
       export default defineComponent()
       `,
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -279,7 +335,15 @@ ruleTester.run('require-direct-export', rule, {
       const A = {}
       export default defineComponent(A)
       `,
-      errors: ['Expected the component literal to be directly exported.']
+      errors: [
+        {
+          message: 'Expected the component literal to be directly exported.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 40
+        }
+      ]
     }
   ]
 })

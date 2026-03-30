@@ -44,7 +44,10 @@ tester.run('prefer-template', rule, {
       errors: [
         {
           message: 'Unexpected string concatenation.',
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 35
         }
       ]
     },
@@ -60,7 +63,10 @@ tester.run('prefer-template', rule, {
       errors: [
         {
           message: 'Unexpected string concatenation.',
-          line: 3
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -81,7 +87,10 @@ tester.run('prefer-template', rule, {
       errors: [
         {
           message: 'Unexpected string concatenation.',
-          line: 4
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     }

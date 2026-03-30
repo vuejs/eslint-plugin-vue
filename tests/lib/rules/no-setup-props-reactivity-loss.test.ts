@@ -319,7 +319,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 26
         }
       ]
     },
@@ -337,7 +340,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     },
@@ -361,11 +367,17 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 26
         },
         {
           messageId: 'getProperty',
-          line: 11
+          line: 11,
+          column: 17,
+          endLine: 11,
+          endColumn: 26
         }
       ]
     },
@@ -386,7 +398,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 26
         }
       ]
     },
@@ -405,11 +420,17 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 22
         },
         {
           messageId: 'getProperty',
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     },
@@ -427,7 +448,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -451,27 +475,45 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 22
         },
         {
           messageId: 'getProperty',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 22
         },
         {
           messageId: 'getProperty',
-          line: 7
+          line: 7,
+          column: 22,
+          endLine: 7,
+          endColumn: 23
         },
         {
           messageId: 'getProperty',
-          line: 9
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 32
         },
         {
           messageId: 'getProperty',
-          line: 10
+          line: 10,
+          column: 22,
+          endLine: 10,
+          endColumn: 34
         },
         {
           messageId: 'getProperty',
-          line: 11
+          line: 11,
+          column: 22,
+          endLine: 11,
+          endColumn: 38
         }
       ]
     },
@@ -490,7 +532,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 18
         }
       ]
     },
@@ -508,7 +553,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 22
         }
       ]
     },
@@ -526,7 +574,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 22
         }
       ]
     },
@@ -542,7 +593,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -559,12 +613,18 @@ tester.run('no-setup-props-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 20
         },
         {
           message:
             'Getting a value from the `props` in root scope of `<script setup>` will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 16
         }
       ]
     },
@@ -580,11 +640,17 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
         },
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 20
         }
       ]
     },
@@ -603,11 +669,17 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 41
         },
         {
           messageId: 'getProperty',
-          line: 6
+          line: 6,
+          column: 19,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -623,11 +695,17 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 37
         },
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -642,7 +720,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 51
         }
       ]
     },
@@ -657,7 +738,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 35
         }
       ]
     },
@@ -672,7 +756,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 45
         }
       ]
     },
@@ -687,7 +774,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 24,
+          endLine: 4,
+          endColumn: 50
         }
       ]
     },
@@ -704,7 +794,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 6
+          line: 6,
+          column: 7,
+          endLine: 6,
+          endColumn: 32
         }
       ]
     },
@@ -719,7 +812,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 4
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 39
         }
       ]
     },
@@ -738,7 +834,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 26,
+          endLine: 5,
+          endColumn: 29
         }
       ]
     },
@@ -756,7 +855,10 @@ tester.run('no-setup-props-reactivity-loss', rule, {
       errors: [
         {
           messageId: 'getProperty',
-          line: 5
+          line: 5,
+          column: 29,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     }

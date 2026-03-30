@@ -36,9 +36,9 @@ ruleTester.run('no-deprecated-inline-template', rule, {
       code: '<template><my-component inline-template><div /></my-component></template>',
       errors: [
         {
+          messageId: 'unexpected',
           line: 1,
           column: 25,
-          messageId: 'unexpected',
           endLine: 1,
           endColumn: 40
         }

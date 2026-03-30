@@ -58,7 +58,9 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
         {
           message: 'Using `foo` is not allowed.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 25
         }
       ]
     },
@@ -66,31 +68,85 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
       filename: 'test.vue',
       code: '<template><div foo="bar" bar="foo"></div></template>',
       options: ['foo'],
-      errors: ['Using `foo` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div foo="foo" bar="bar"></div></template>',
       options: ['/^f/'],
-      errors: ['Using `foo` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div foo="bar" bar="foo"></div></template>',
       options: ['foo', 'bar'],
-      errors: ['Using `foo` is not allowed.', 'Using `bar` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        },
+        {
+          message: 'Using `bar` is not allowed.',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div foo="bar" bar></div></template>',
       options: [{ key: '/^(foo|bar)$/' }],
-      errors: ['Using `foo` is not allowed.', 'Using `bar` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        },
+        {
+          message: 'Using `bar` is not allowed.',
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div foo="foo" /><div foo="bar" /></template>',
       options: [{ key: 'foo', value: 'bar' }],
-      errors: ['Using `foo="bar"` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo="bar"` is not allowed.',
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -101,11 +157,41 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
         { key: 'bar', value: '/^vv/' }
       ],
       errors: [
-        'Using `foo` set to `true` is not allowed.',
-        'Using `foo="foo"` is not allowed.',
-        'Using `vv` is not allowed.',
-        'Using `vvv` is not allowed.',
-        'Using `bar="vv"` is not allowed.'
+        {
+          message: 'Using `foo` set to `true` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 19
+        },
+        {
+          message: 'Using `foo="foo"` is not allowed.',
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 42
+        },
+        {
+          message: 'Using `vv` is not allowed.',
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 51
+        },
+        {
+          message: 'Using `vvv` is not allowed.',
+          line: 1,
+          column: 70,
+          endLine: 1,
+          endColumn: 79
+        },
+        {
+          message: 'Using `bar="vv"` is not allowed.',
+          line: 1,
+          column: 80,
+          endLine: 1,
+          endColumn: 88
+        }
       ]
     },
     {
@@ -116,7 +202,15 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
         <MyButton foo bar />
       </template>`,
       options: [{ key: 'foo', element: `/^My/` }],
-      errors: ['Using `foo` on `<MyButton>` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` on `<MyButton>` is not allowed.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -125,7 +219,15 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
         <div foo="x" />
       </template>`,
       options: ['/^f/', { key: 'foo' }],
-      errors: ['Using `foo` is not allowed.']
+      errors: [
+        {
+          message: 'Using `foo` is not allowed.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -134,7 +236,15 @@ tester.run('no-restricted-static-attribute', rule as RuleModule, {
         <div foo="x" />
       </template>`,
       options: [{ key: 'foo', message: 'foo' }],
-      errors: ['foo']
+      errors: [
+        {
+          message: 'foo',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 21
+        }
+      ]
     }
   ]
 })

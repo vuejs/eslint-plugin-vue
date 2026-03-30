@@ -62,8 +62,20 @@ ruleTester.run('one-component-per-file', rule, {
         Vue.component('name', {})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 2,
+          column: 31,
+          endLine: 2,
+          endColumn: 33
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 33
+        }
       ]
     },
     {
@@ -79,8 +91,20 @@ ruleTester.run('one-component-per-file', rule, {
         export default {}
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 2,
+          column: 35,
+          endLine: 4,
+          endColumn: 10
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 6,
+          column: 35,
+          endLine: 8,
+          endColumn: 10
+        }
       ]
     },
     {
@@ -90,8 +114,20 @@ ruleTester.run('one-component-per-file', rule, {
         export default {}
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 2,
+          column: 31,
+          endLine: 2,
+          endColumn: 33
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 26
+        }
       ]
     }
   ]

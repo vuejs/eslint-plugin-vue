@@ -55,17 +55,23 @@ tester.run('quote-props', rule, {
         {
           message: "Unquoted property 'height' found.",
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 38
         },
         {
           message: "Unquoted property 'height' found.",
           line: 4,
-          column: 23
+          column: 23,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: "Unquoted property 'height' found.",
           line: 5,
-          column: 22
+          column: 22,
+          endLine: 5,
+          endColumn: 36
         }
       ]
     },
@@ -88,12 +94,16 @@ tester.run('quote-props', rule, {
         {
           message: "Unnecessarily quoted property 'height' found.",
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 40
         },
         {
           message: "Unnecessarily quoted property 'height' found.",
           line: 4,
-          column: 23
+          column: 23,
+          endLine: 4,
+          endColumn: 40
         }
       ]
     },
@@ -113,7 +123,9 @@ tester.run('quote-props', rule, {
         {
           message: "Unquoted property 'foo' found.",
           line: 3,
-          column: 14
+          column: 14,
+          endLine: 3,
+          endColumn: 20
         }
       ]
     }

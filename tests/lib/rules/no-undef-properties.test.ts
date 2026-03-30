@@ -838,15 +838,24 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 25
         },
         {
           message: "'bar2' is not defined.",
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 35
         },
         {
           message: "'baz2' is not defined.",
-          line: 14
+          line: 14,
+          column: 18,
+          endLine: 14,
+          endColumn: 22
         }
       ]
     },
@@ -878,15 +887,24 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 25
         },
         {
           message: "'bar2' is not defined.",
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 35
         },
         {
           message: "'baz2' is not defined.",
-          line: 19
+          line: 19,
+          column: 30,
+          endLine: 19,
+          endColumn: 34
         }
       ]
     },
@@ -912,7 +930,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 9
+          line: 9,
+          column: 18,
+          endLine: 9,
+          endColumn: 22
         }
       ]
     },
@@ -936,11 +957,17 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 17
         },
         {
           message: "'bar2' is not defined.",
-          line: 6
+          line: 6,
+          column: 19,
+          endLine: 6,
+          endColumn: 25
         }
       ]
     },
@@ -969,11 +996,17 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 12
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 23
         },
         {
           message: "'foo.bar2' is not defined.",
-          line: 13
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 23
         }
       ]
     },
@@ -995,7 +1028,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'foo' is not defined in props."]
+      errors: [
+        {
+          message: "'foo' is not defined in props.",
+          line: 9,
+          column: 26,
+          endLine: 9,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1013,7 +1054,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'foo' is not defined in props."]
+      errors: [
+        {
+          message: "'foo' is not defined in props.",
+          line: 9,
+          column: 26,
+          endLine: 9,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1030,7 +1079,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'foo' is not defined in props."]
+      errors: [
+        {
+          message: "'foo' is not defined in props.",
+          line: 9,
+          column: 28,
+          endLine: 9,
+          endColumn: 31
+        }
+      ]
     },
 
     // arg vm
@@ -1046,7 +1103,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'bar' is not defined."]
+      errors: [
+        {
+          message: "'bar' is not defined.",
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 28
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1058,7 +1123,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'bar' is not defined."]
+      errors: [
+        {
+          message: "'bar' is not defined.",
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 40
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1070,7 +1143,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'bar' is not defined."]
+      errors: [
+        {
+          message: "'bar' is not defined.",
+          line: 5,
+          column: 44,
+          endLine: 5,
+          endColumn: 47
+        }
+      ]
     },
 
     // deep
@@ -1090,7 +1171,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'foo.baz' is not defined."]
+      errors: [
+        {
+          message: "'foo.baz' is not defined.",
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 28
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1110,7 +1199,15 @@ tester.run('no-undef-properties', rule, {
         };
       </script>
       `,
-      errors: ["'foo.bar.baz2' is not defined."]
+      errors: [
+        {
+          message: "'foo.bar.baz2' is not defined.",
+          line: 2,
+          column: 29,
+          endLine: 2,
+          endColumn: 33
+        }
+      ]
     },
 
     // track
@@ -1137,7 +1234,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 15
+          line: 15,
+          column: 21,
+          endLine: 15,
+          endColumn: 25
         }
       ]
     },
@@ -1163,7 +1263,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1190,7 +1293,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1215,7 +1321,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 3
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     },
@@ -1238,7 +1347,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 10
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 25
         }
       ]
     },
@@ -1263,7 +1375,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo.bar2' is not defined.",
-          line: 12
+          line: 12,
+          column: 29,
+          endLine: 12,
+          endColumn: 33
         }
       ]
     },
@@ -1288,7 +1403,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo.bar2' is not defined.",
-          line: 12
+          line: 12,
+          column: 24,
+          endLine: 12,
+          endColumn: 28
         }
       ]
     },
@@ -1312,7 +1430,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo2' is not defined.",
-          line: 11
+          line: 11,
+          column: 16,
+          endLine: 11,
+          endColumn: 20
         }
       ]
     },
@@ -1338,7 +1459,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'foo.bar2' is not defined.",
-          line: 13
+          line: 13,
+          column: 25,
+          endLine: 13,
+          endColumn: 29
         }
       ]
     },
@@ -1365,15 +1489,24 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'label' is not defined.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 22
         },
         {
           message: "'cnt' is not defined.",
-          line: 6
+          line: 6,
+          column: 30,
+          endLine: 6,
+          endColumn: 33
         },
         {
           message: "'undef' is not defined.",
-          line: 16
+          line: 16,
+          column: 24,
+          endLine: 16,
+          endColumn: 29
         }
       ]
     },
@@ -1398,7 +1531,9 @@ tester.run('no-undef-properties', rule, {
         {
           message: "'c' is not defined.",
           line: 3,
-          column: 46
+          column: 46,
+          endLine: 3,
+          endColumn: 47
         }
       ]
     },
@@ -1420,7 +1555,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'unknown' is not defined.",
-          line: 11
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 22
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -1448,7 +1586,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'undef' is not defined.",
-          line: 14
+          line: 14,
+          column: 17,
+          endLine: 14,
+          endColumn: 22
         }
       ]
     },
@@ -1478,7 +1619,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'g' is not defined.",
-          line: 13
+          line: 13,
+          column: 37,
+          endLine: 13,
+          endColumn: 38
         }
       ]
     },
@@ -1506,7 +1650,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'f' is not defined.",
-          line: 12
+          line: 12,
+          column: 28,
+          endLine: 12,
+          endColumn: 29
         }
       ]
     },
@@ -1535,7 +1682,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'x' is not defined.",
-          line: 13
+          line: 13,
+          column: 28,
+          endLine: 13,
+          endColumn: 29
         }
       ]
     },
@@ -1561,7 +1711,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'f' is not defined.",
-          line: 10
+          line: 10,
+          column: 28,
+          endLine: 10,
+          endColumn: 29
         }
       ]
     },
@@ -1586,7 +1739,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'q' is not defined.",
-          line: 14
+          line: 14,
+          column: 26,
+          endLine: 14,
+          endColumn: 27
         }
       ]
     },
@@ -1614,7 +1770,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'z' is not defined.",
-          line: 12
+          line: 12,
+          column: 28,
+          endLine: 12,
+          endColumn: 29
         }
       ]
     },
@@ -1644,7 +1803,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'z' is not defined.",
-          line: 13
+          line: 13,
+          column: 28,
+          endLine: 13,
+          endColumn: 29
         }
       ]
     },
@@ -1675,7 +1837,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'q' is not defined.",
-          line: 20
+          line: 20,
+          column: 26,
+          endLine: 20,
+          endColumn: 27
         }
       ]
     },
@@ -1707,7 +1872,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'z' is not defined.",
-          line: 16
+          line: 16,
+          column: 28,
+          endLine: 16,
+          endColumn: 29
         }
       ]
     },
@@ -1736,7 +1904,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'z' is not defined.",
-          line: 13
+          line: 13,
+          column: 28,
+          endLine: 13,
+          endColumn: 29
         }
       ]
     },
@@ -1763,7 +1934,10 @@ tester.run('no-undef-properties', rule, {
       errors: [
         {
           message: "'x' is not defined.",
-          line: 11
+          line: 11,
+          column: 28,
+          endLine: 11,
+          endColumn: 29
         }
       ]
     }

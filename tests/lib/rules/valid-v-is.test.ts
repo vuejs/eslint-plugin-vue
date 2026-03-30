@@ -45,7 +45,9 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require no argument.",
+          line: 1,
           column: 21,
+          endLine: 1,
           endColumn: 22
         }
       ]
@@ -56,7 +58,9 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require no modifier.",
+          line: 1,
           column: 21,
+          endLine: 1,
           endColumn: 22
         }
       ]
@@ -67,7 +71,9 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require that attribute value.",
+          line: 1,
           column: 16,
+          endLine: 1,
           endColumn: 20
         }
       ]
@@ -78,7 +84,9 @@ tester.run('valid-v-is', rule, {
       errors: [
         {
           message: "'v-is' directives require that attribute value.",
+          line: 1,
           column: 16,
+          endLine: 1,
           endColumn: 23
         }
       ]
@@ -90,7 +98,9 @@ tester.run('valid-v-is', rule, {
         {
           message:
             "'v-is' directive must be owned by a native HTML element, but 'mycomponent' is not.",
+          line: 1,
           column: 24,
+          endLine: 1,
           endColumn: 34
         }
       ]

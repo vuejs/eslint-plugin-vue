@@ -179,6 +179,10 @@ tester.run('require-expose', rule, {
         {
           message:
             'The public properties of the component must be explicitly declared using `expose`. If the component does not have public properties, declare it empty.',
+          line: 3,
+          column: 24,
+          endLine: 8,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -230,6 +234,10 @@ expose: ["foo", "bar"],
         {
           message:
             'The public properties of the component must be explicitly declared using `expose`. If the component does not have public properties, declare it empty.',
+          line: 3,
+          column: 24,
+          endLine: 10,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -284,6 +292,10 @@ expose: ["foo", "bar"],
       errors: [
         {
           messageId: 'requireExpose',
+          line: 3,
+          column: 24,
+          endLine: 9,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -330,6 +342,10 @@ expose: ["x", "foo", "bar"],
       errors: [
         {
           messageId: 'requireExpose',
+          line: 3,
+          column: 24,
+          endLine: 4,
+          endColumn: 10,
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',
@@ -355,6 +371,10 @@ expose: []
       errors: [
         {
           messageId: 'requireExpose',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 26,
           suggestions: [
             {
               desc: 'Add the `expose` option to give an empty array.',

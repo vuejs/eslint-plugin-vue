@@ -393,7 +393,15 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           // v-bind(color)
         </style>
         `,
-        errors: ["'color' is assigned a value but never used."]
+        errors: [
+          {
+            message: "'color' is assigned a value but never used.",
+            line: 3,
+            column: 17,
+            endLine: 3,
+            endColumn: 22
+          }
+        ]
       }
     ]
   })

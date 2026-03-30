@@ -93,7 +93,9 @@ tester.run('valid-attribute-name', rule, {
         {
           message: 'Attribute name 0abc is not valid.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: 1,
+          endColumn: 18
         }
       ]
     },
@@ -104,7 +106,9 @@ tester.run('valid-attribute-name', rule, {
         {
           message: 'Attribute name -def is not valid.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: 1,
+          endColumn: 18
         }
       ]
     },
@@ -115,7 +119,9 @@ tester.run('valid-attribute-name', rule, {
         {
           message: 'Attribute name !ghi is not valid.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: 1,
+          endColumn: 18
         }
       ]
     },
@@ -126,7 +132,9 @@ tester.run('valid-attribute-name', rule, {
         {
           message: 'Attribute name 0abc is not valid.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: 1,
+          endColumn: 28
         }
       ]
     },
@@ -137,7 +145,9 @@ tester.run('valid-attribute-name', rule, {
         {
           message: 'Attribute name 0abc is not valid.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: 1,
+          endColumn: 25
         }
       ]
     }

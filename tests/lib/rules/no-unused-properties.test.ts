@@ -2623,7 +2623,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     },
@@ -2647,7 +2650,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -2666,7 +2672,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 4
+          line: 4,
+          column: 43,
+          endLine: 4,
+          endColumn: 49
         }
       ]
     },
@@ -2689,7 +2698,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 6
+          line: 6,
+          column: 41,
+          endLine: 6,
+          endColumn: 47
         }
       ]
     },
@@ -2715,7 +2727,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -2737,7 +2752,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     },
@@ -2756,7 +2774,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 4
+          line: 4,
+          column: 41,
+          endLine: 4,
+          endColumn: 47
         }
       ]
     },
@@ -2777,7 +2798,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 5
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 43
         }
       ]
     },
@@ -2801,7 +2825,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 48
         }
       ]
     },
@@ -2825,7 +2852,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 50
         }
       ]
     },
@@ -2852,7 +2882,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -2873,7 +2906,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 35
         }
       ]
     },
@@ -2895,7 +2931,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -2918,7 +2957,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 39,
+          endLine: 5,
+          endColumn: 47
         }
       ]
     },
@@ -2937,7 +2979,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 4
+          line: 4,
+          column: 55,
+          endLine: 4,
+          endColumn: 62
         }
       ]
     },
@@ -2959,7 +3004,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -2983,7 +3031,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count3' of computed property found, but never used.",
-          line: 7
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 33
         }
       ]
     },
@@ -3006,7 +3057,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 30
         }
       ]
     },
@@ -3030,7 +3084,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 20
         }
       ]
     },
@@ -3056,7 +3113,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -3078,7 +3138,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     },
@@ -3097,7 +3160,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 4
+          line: 4,
+          column: 51,
+          endLine: 4,
+          endColumn: 57
         }
       ]
     },
@@ -3118,7 +3184,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'add2' of method found, but never used.",
-          line: 5
+          line: 5,
+          column: 47,
+          endLine: 5,
+          endColumn: 53
         }
       ]
     },
@@ -3142,7 +3211,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 48
         }
       ]
     },
@@ -3166,7 +3238,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 50
         }
       ]
     },
@@ -3193,7 +3268,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -3214,7 +3292,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 38,
+          endLine: 5,
+          endColumn: 45
         }
       ]
     },
@@ -3236,7 +3317,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -3260,7 +3344,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 48
         }
       ]
     },
@@ -3284,7 +3371,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 50
         }
       ]
     },
@@ -3311,7 +3401,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -3332,7 +3425,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 46,
+          endLine: 5,
+          endColumn: 53
         }
       ]
     },
@@ -3354,7 +3450,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -3377,7 +3476,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 49,
+          endLine: 5,
+          endColumn: 57
         }
       ]
     },
@@ -3396,7 +3498,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 4
+          line: 4,
+          column: 65,
+          endLine: 4,
+          endColumn: 72
         }
       ]
     },
@@ -3418,7 +3523,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count2' of computed property found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -3442,7 +3550,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count3' of computed property found, but never used.",
-          line: 7
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 33
         }
       ]
     },
@@ -3465,7 +3576,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 30
         }
       ]
     },
@@ -3489,7 +3603,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of computed property found, but never used.",
-          line: 6
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 20
         }
       ]
     },
@@ -3510,7 +3627,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of property found, but never used.",
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 28
         }
       ]
     },
@@ -3536,7 +3656,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of data found, but never used.",
-          line: 9
+          line: 9,
+          column: 17,
+          endLine: 9,
+          endColumn: 22
         }
       ]
     },
@@ -3562,7 +3685,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of async data found, but never used.",
-          line: 9
+          line: 9,
+          column: 17,
+          endLine: 9,
+          endColumn: 22
         }
       ]
     },
@@ -3588,7 +3714,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of computed property found, but never used.",
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 20
         }
       ]
     },
@@ -3624,24 +3753,39 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of property found, but never used.",
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 24
         },
         {
           message: "'b' of data found, but never used.",
-          line: 9
+          line: 9,
+          column: 23,
+          endLine: 9,
+          endColumn: 24
         },
         {
           message: "'c' of computed property found, but never used.",
-          line: 12
+          line: 12,
+          column: 15,
+          endLine: 12,
+          endColumn: 16
         },
         {
           message: "'d' of method found, but never used.",
-          line: 17
+          line: 17,
+          column: 15,
+          endLine: 17,
+          endColumn: 16
         },
         {
           message:
             "'e' of property returned from `setup()` found, but never used.",
-          line: 20
+          line: 20,
+          column: 23,
+          endLine: 20,
+          endColumn: 24
         }
       ]
     },
@@ -3664,7 +3808,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of property found, but never used.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -3685,7 +3832,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of property found, but never used.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -3707,12 +3857,14 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'count' of property found, but never used.",
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
 
-    // setup
     {
       filename: 'test.vue',
       code: `
@@ -3725,7 +3877,15 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -3739,7 +3899,15 @@ tester.run('no-unused-properties', rule, {
           };
         </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -3754,8 +3922,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
       ]
     },
     {
@@ -3771,8 +3951,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
       ]
     },
     {
@@ -3788,8 +3980,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 25
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 32
+        }
       ]
     },
 
@@ -3815,7 +4019,15 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -3838,7 +4050,15 @@ tester.run('no-unused-properties', rule, {
           function fn3({bar}) {}
         </script>
       `,
-      errors: ["'baz' of property found, but never used."]
+      errors: [
+        {
+          message: "'baz' of property found, but never used.",
+          line: 4,
+          column: 35,
+          endLine: 4,
+          endColumn: 40
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -3868,8 +4088,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        }
       ]
     },
     {
@@ -3892,9 +4124,27 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used.",
-        "'baz' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        },
+        {
+          message: "'baz' of property found, but never used.",
+          line: 4,
+          column: 35,
+          endLine: 4,
+          endColumn: 40
+        }
       ]
     },
     {
@@ -3916,8 +4166,20 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 26
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 5,
+          column: 28,
+          endLine: 5,
+          endColumn: 33
+        }
       ]
     },
     {
@@ -3936,7 +4198,15 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `,
-      errors: ["'baz' of property found, but never used."]
+      errors: [
+        {
+          message: "'baz' of property found, but never used.",
+          line: 4,
+          column: 35,
+          endLine: 4,
+          endColumn: 40
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -3955,9 +4225,27 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used.",
-        "'baz' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        },
+        {
+          message: "'baz' of property found, but never used.",
+          line: 4,
+          column: 35,
+          endLine: 4,
+          endColumn: 40
+        }
       ]
     },
     {
@@ -3994,9 +4282,27 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       errors: [
-        "'foo' of property found, but never used.",
-        "'bar' of property found, but never used.",
-        "'baz' of property found, but never used."
+        {
+          message: "'foo' of property found, but never used.",
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 26
+        },
+        {
+          message: "'bar' of property found, but never used.",
+          line: 7,
+          column: 28,
+          endLine: 7,
+          endColumn: 33
+        },
+        {
+          message: "'baz' of property found, but never used.",
+          line: 7,
+          column: 35,
+          endLine: 7,
+          endColumn: 40
+        }
       ]
     },
 
@@ -4011,7 +4317,15 @@ tester.run('no-unused-properties', rule, {
         }
       })
       `,
-      errors: ["'foo' of property found, but never used."]
+      errors: [
+        {
+          message: "'foo' of property found, but never used.",
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 22
+        }
+      ]
     },
 
     // contexts
@@ -4027,7 +4341,15 @@ tester.run('no-unused-properties', rule, {
         };
       </script>
       `,
-      errors: ["'x' of property found, but never used."]
+      errors: [
+        {
+          message: "'x' of property found, but never used.",
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4041,7 +4363,15 @@ tester.run('no-unused-properties', rule, {
         };
       </script>
       `,
-      errors: ["'x' of property found, but never used."]
+      errors: [
+        {
+          message: "'x' of property found, but never used.",
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4058,7 +4388,15 @@ tester.run('no-unused-properties', rule, {
         };
       </script>
       `,
-      errors: ["'x' of property found, but never used."]
+      errors: [
+        {
+          message: "'x' of property found, but never used.",
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
     },
 
     // deep data
@@ -4095,7 +4433,9 @@ tester.run('no-unused-properties', rule, {
         {
           message: "'foo.baz.b' of data found, but never used.",
           line: 14,
-          column: 21
+          column: 21,
+          endLine: 14,
+          endColumn: 22
         }
       ]
     },
@@ -4127,8 +4467,20 @@ tester.run('no-unused-properties', rule, {
       `,
       options: deepDataOptions,
       errors: [
-        "'foo.bar' of data found, but never used.",
-        "'foo.baz.b' of data found, but never used."
+        {
+          message: "'foo.bar' of data found, but never used.",
+          line: 7,
+          column: 19,
+          endLine: 7,
+          endColumn: 22
+        },
+        {
+          message: "'foo.baz.b' of data found, but never used.",
+          line: 11,
+          column: 21,
+          endLine: 11,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -4158,7 +4510,15 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       options: deepDataOptions,
-      errors: ["'foo.bar.a' of data found, but never used."]
+      errors: [
+        {
+          message: "'foo.bar.a' of data found, but never used.",
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4189,8 +4549,20 @@ tester.run('no-unused-properties', rule, {
       `,
       options: deepDataOptions,
       errors: [
-        "'foo.bar.a' of data found, but never used.",
-        "'foo.baz.b' of data found, but never used."
+        {
+          message: "'foo.bar.a' of data found, but never used.",
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 22
+        },
+        {
+          message: "'foo.baz.b' of data found, but never used.",
+          line: 11,
+          column: 21,
+          endLine: 11,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -4215,7 +4587,15 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       options: deepDataOptions,
-      errors: ["'foo.bar.a' of data found, but never used."]
+      errors: [
+        {
+          message: "'foo.bar.a' of data found, but never used.",
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4240,7 +4620,15 @@ tester.run('no-unused-properties', rule, {
         </script>
       `,
       options: deepDataOptions,
-      errors: ["'foo.bar.a' of data found, but never used."]
+      errors: [
+        {
+          message: "'foo.bar.a' of data found, but never used.",
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4274,12 +4662,16 @@ tester.run('no-unused-properties', rule, {
         {
           message: "'foo.bar.a' of data found, but never used.",
           line: 6,
-          column: 17
+          column: 17,
+          endLine: 6,
+          endColumn: 18
         },
         {
           message: "'foo.baz.a' of data found, but never used.",
           line: 9,
-          column: 17
+          column: 17,
+          endLine: 9,
+          endColumn: 18
         }
       ]
     },
@@ -4343,15 +4735,70 @@ tester.run('no-unused-properties', rule, {
         }
       ],
       errors: [
-        "'_a' of property found, but never used.",
-        "'a' of property found, but never used.",
-        "'_b' of property returned from `setup()` found, but never used.",
-        "'c._c2' of data found, but never used.",
-        "'_c' of data found, but never used.",
-        "'_d' of computed property found, but never used.",
-        "'_e' of method found, but never used.",
-        "'_f' of method found, but never used.",
-        "'_g' of method found, but never used."
+        {
+          message: "'_a' of property found, but never used.",
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 13
+        },
+        {
+          message: "'a' of property found, but never used.",
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 12
+        },
+        {
+          message:
+            "'_b' of property returned from `setup()` found, but never used.",
+          line: 15,
+          column: 13,
+          endLine: 15,
+          endColumn: 15
+        },
+        {
+          message: "'c._c2' of data found, but never used.",
+          line: 24,
+          column: 15,
+          endLine: 24,
+          endColumn: 18
+        },
+        {
+          message: "'_c' of data found, but never used.",
+          line: 26,
+          column: 13,
+          endLine: 26,
+          endColumn: 15
+        },
+        {
+          message: "'_d' of computed property found, but never used.",
+          line: 34,
+          column: 11,
+          endLine: 34,
+          endColumn: 13
+        },
+        {
+          message: "'_e' of method found, but never used.",
+          line: 39,
+          column: 11,
+          endLine: 39,
+          endColumn: 13
+        },
+        {
+          message: "'_f' of method found, but never used.",
+          line: 43,
+          column: 11,
+          endLine: 43,
+          endColumn: 13
+        },
+        {
+          message: "'_g' of method found, but never used.",
+          line: 47,
+          column: 11,
+          endLine: 47,
+          endColumn: 13
+        }
       ]
     },
     {
@@ -4378,8 +4825,20 @@ tester.run('no-unused-properties', rule, {
         }
       ],
       errors: [
-        "'a' of data found, but never used.",
-        "'b' of data found, but never used."
+        {
+          message: "'a' of data found, but never used.",
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 14
+        },
+        {
+          message: "'b' of data found, but never used.",
+          line: 11,
+          column: 11,
+          endLine: 11,
+          endColumn: 14
+        }
       ]
     },
     {
@@ -4392,7 +4851,15 @@ tester.run('no-unused-properties', rule, {
       const props = defineProps(['a', 'b', 'c'])
       props.b
       </script>`,
-      errors: ["'c' of property found, but never used."]
+      errors: [
+        {
+          message: "'c' of property found, but never used.",
+          line: 6,
+          column: 44,
+          endLine: 6,
+          endColumn: 47
+        }
+      ]
     },
 
     // expose
@@ -4424,10 +4891,34 @@ tester.run('no-unused-properties', rule, {
       </script>`,
       options: allOptions,
       errors: [
-        "'b' of property found, but never used.",
-        "'d' of data found, but never used.",
-        "'f' of computed property found, but never used.",
-        "'h' of method found, but never used."
+        {
+          message: "'b' of property found, but never used.",
+          line: 8,
+          column: 22,
+          endLine: 8,
+          endColumn: 25
+        },
+        {
+          message: "'d' of data found, but never used.",
+          line: 12,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
+        },
+        {
+          message: "'f' of computed property found, but never used.",
+          line: 17,
+          column: 11,
+          endLine: 17,
+          endColumn: 12
+        },
+        {
+          message: "'h' of method found, but never used.",
+          line: 21,
+          column: 11,
+          endLine: 21,
+          endColumn: 12
+        }
       ]
     },
 
@@ -4446,7 +4937,15 @@ tester.run('no-unused-properties', rule, {
         }
       </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4462,7 +4961,15 @@ tester.run('no-unused-properties', rule, {
         }
       </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 6,
+          column: 26,
+          endLine: 6,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4493,7 +5000,15 @@ tester.run('no-unused-properties', rule, {
       </script>
       `,
       options: deepDataOptions,
-      errors: ["'foo.baz' of data found, but never used."]
+      errors: [
+        {
+          message: "'foo.baz' of data found, but never used.",
+          line: 12,
+          column: 17,
+          endLine: 12,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4528,8 +5043,20 @@ tester.run('no-unused-properties', rule, {
       `,
       options: deepDataOptions,
       errors: [
-        "'foo.bar.b' of data found, but never used.",
-        "'foo.baz.a' of data found, but never used."
+        {
+          message: "'foo.bar.b' of data found, but never used.",
+          line: 11,
+          column: 19,
+          endLine: 11,
+          endColumn: 20
+        },
+        {
+          message: "'foo.baz.a' of data found, but never used.",
+          line: 14,
+          column: 19,
+          endLine: 14,
+          endColumn: 20
+        }
       ]
     },
     {
@@ -4565,8 +5092,20 @@ tester.run('no-unused-properties', rule, {
       `,
       options: deepDataOptions,
       errors: [
-        "'foo.bar.b' of data found, but never used.",
-        "'foo.baz' of data found, but never used."
+        {
+          message: "'foo.bar.b' of data found, but never used.",
+          line: 11,
+          column: 19,
+          endLine: 11,
+          endColumn: 20
+        },
+        {
+          message: "'foo.baz' of data found, but never used.",
+          line: 13,
+          column: 17,
+          endLine: 13,
+          endColumn: 20
+        }
       ]
     },
 
@@ -4589,11 +5128,17 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'a' of property found, but never used.",
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 12
         },
         {
           message: "'b' of property found, but never used.",
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 12
         }
       ]
     },
@@ -4625,7 +5170,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'two' of computed property found, but never used.",
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -4655,7 +5203,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'two' of computed property found, but never used.",
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -4693,7 +5244,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'foo.bar' of data found, but never used.",
-          line: 7
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 20
         }
       ]
     },
@@ -4725,7 +5279,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'two' of computed property found, but never used.",
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -4742,7 +5299,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'baz' of property found, but never used.",
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 24
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -4765,7 +5325,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'unused' of property found, but never used.",
-          line: 6
+          line: 6,
+          column: 19,
+          endLine: 6,
+          endColumn: 27
         }
       ]
     },
@@ -4783,7 +5346,15 @@ tester.run('no-unused-properties', rule, {
           }
         </script>
       `,
-      errors: ["'bar' of property found, but never used."]
+      errors: [
+        {
+          message: "'bar' of property found, but never used.",
+          line: 7,
+          column: 28,
+          endLine: 7,
+          endColumn: 33
+        }
+      ]
     },
 
     // props.prop in template
@@ -4796,7 +5367,15 @@ tester.run('no-unused-properties', rule, {
       <script setup>
       const props = defineProps(['a', 'b'])
       </script>`,
-      errors: ["'b' of property found, but never used."]
+      errors: [
+        {
+          message: "'b' of property found, but never used.",
+          line: 6,
+          column: 39,
+          endLine: 6,
+          endColumn: 42
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -4807,7 +5386,15 @@ tester.run('no-unused-properties', rule, {
       <script setup>
       const foo = defineProps(['a', 'b'])
       </script>`,
-      errors: ["'b' of property found, but never used."]
+      errors: [
+        {
+          message: "'b' of property found, but never used.",
+          line: 6,
+          column: 37,
+          endLine: 6,
+          endColumn: 40
+        }
+      ]
     },
     {
       code: `
@@ -4817,7 +5404,15 @@ tester.run('no-unused-properties', rule, {
       <template>
       {{ props.foo }}{{ bar }}
       </template>`,
-      errors: ["'baz' of property found, but never used."],
+      errors: [
+        {
+          message: "'baz' of property found, but never used.",
+          line: 3,
+          column: 61,
+          endLine: 3,
+          endColumn: 64
+        }
+      ],
       ...getTypeScriptFixtureTestOptions()
     },
     // unused inject
@@ -4834,7 +5429,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'unused' of inject found, but never used.",
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -4856,7 +5454,10 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'bar' of inject found, but never used.",
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 34
         }
       ]
     },
@@ -4876,11 +5477,17 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'bar' of inject found, but never used.",
-          line: 4
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 34
         },
         {
           message: "'baz' of inject found, but never used.",
-          line: 4
+          line: 4,
+          column: 36,
+          endLine: 4,
+          endColumn: 41
         }
       ]
     },
@@ -4903,11 +5510,17 @@ tester.run('no-unused-properties', rule, {
       errors: [
         {
           message: "'unused1' of inject found, but never used.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message: "'unused2' of inject found, but never used.",
-          line: 9
+          line: 9,
+          column: 15,
+          endLine: 9,
+          endColumn: 22
         }
       ]
     }

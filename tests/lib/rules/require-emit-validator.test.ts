@@ -199,22 +199,34 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'missing',
           data: { name: 'foo' },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 24
         },
         {
           messageId: 'missing',
           data: { name: 'bar' },
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         },
         {
           messageId: 'missing',
           data: { name: 'baz' },
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36
         },
         {
           messageId: 'missing',
           data: { name: 'Unknown emit' },
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -230,22 +242,34 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'missing',
           data: { name: 'foo' },
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 24
         },
         {
           messageId: 'missing',
           data: { name: 'bar' },
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         },
         {
           messageId: 'missing',
           data: { name: 'baz' },
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36
         },
         {
           messageId: 'missing',
           data: { name: 'Unknown emit' },
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -263,6 +287,9 @@ ruleTester.run('require-emit-validator', rule, {
           messageId: 'skipped',
           data: { name: 'foo' },
           line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22,
           suggestions: [
             {
               messageId: 'emptyValidation',
@@ -292,6 +319,9 @@ ruleTester.run('require-emit-validator', rule, {
           messageId: 'skipped',
           data: { name: 'foo' },
           line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22,
           suggestions: [
             {
               messageId: 'emptyValidation',
@@ -323,7 +353,10 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'missing',
           data: { name: 'foo' },
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -345,7 +378,10 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'missing',
           data: { name: 'foo' },
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 54
         }
       ]
     },
@@ -365,7 +401,10 @@ ruleTester.run('require-emit-validator', rule, {
         {
           messageId: 'missing',
           data: { name: 'foo' },
-          line: 3
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -386,6 +425,9 @@ ruleTester.run('require-emit-validator', rule, {
           messageId: 'skipped',
           data: { name: 'foo' },
           line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 41,
           suggestions: [
             {
               messageId: 'emptyValidation',

@@ -29,22 +29,54 @@ tester.run('space-infix-ops', rule, {
     {
       code: '<template><div :attr="a+1" /></template>',
       output: '<template><div :attr="a + 1" /></template>',
-      errors: [message('+')]
+      errors: [
+        {
+          message: message('+'),
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: '<template><div :attr="a?1 : 2" /></template>',
       output: '<template><div :attr="a ? 1 : 2" /></template>',
-      errors: [message('?')]
+      errors: [
+        {
+          message: message('?'),
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: '<template><div :attr="a ? 1:2" /></template>',
       output: '<template><div :attr="a ? 1 : 2" /></template>',
-      errors: [message(':')]
+      errors: [
+        {
+          message: message(':'),
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: '<template><div :[1+2]="1+2" /></template>',
       output: '<template><div :[1+2]="1 + 2" /></template>',
-      errors: [message('+')]
+      errors: [
+        {
+          message: message('+'),
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
 
     // CSS vars injection
@@ -61,7 +93,22 @@ tester.run('space-infix-ops', rule, {
         padding: v-bind('a + b + "px"')
       }
       </style>`,
-      errors: [message('+'), message('+')]
+      errors: [
+        {
+          message: message('+'),
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 28
+        },
+        {
+          message: message('+'),
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 30
+        }
+      ]
     }
   ]
 })

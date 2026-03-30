@@ -92,7 +92,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-text on component may break component's content.",
           line: 3,
-          column: 22
+          column: 22,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -107,7 +109,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-html on component may break component's content.",
           line: 3,
-          column: 22
+          column: 22,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -122,7 +126,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-text on component may break component's content.",
           line: 3,
-          column: 36
+          column: 36,
+          endLine: 3,
+          endColumn: 52
         }
       ]
     },
@@ -137,7 +143,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-html on component may break component's content.",
           line: 3,
-          column: 36
+          column: 36,
+          endLine: 3,
+          endColumn: 52
         }
       ]
     },
@@ -152,7 +160,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-text on component may break component's content.",
           line: 3,
-          column: 30
+          column: 30,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
@@ -167,7 +177,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-html on component may break component's content.",
           line: 3,
-          column: 30
+          column: 30,
+          endLine: 3,
+          endColumn: 46
         }
       ]
     },
@@ -183,7 +195,9 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-html on component may break component's content.",
           line: 3,
-          column: 22
+          column: 22,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -200,12 +214,16 @@ tester.run('no-v-text-v-html-on-component', rule, {
         {
           message: "Using v-text on component may break component's content.",
           line: 3,
-          column: 12
+          column: 12,
+          endLine: 3,
+          endColumn: 28
         },
         {
           message: "Using v-text on component may break component's content.",
           line: 4,
-          column: 13
+          column: 13,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     }

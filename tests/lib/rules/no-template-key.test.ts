@@ -57,35 +57,70 @@ tester.run('no-template-key', rule, {
       filename: 'test.vue',
       code: '<template><div><template key="foo"></template></div></template>',
       errors: [
-        "'<template>' cannot be keyed. Place the key on real elements instead."
+        {
+          message:
+            "'<template>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 35
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><template v-bind:key="foo"></template></div></template>',
       errors: [
-        "'<template>' cannot be keyed. Place the key on real elements instead."
+        {
+          message:
+            "'<template>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 42
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><template :key="foo"></template></div></template>',
       errors: [
-        "'<template>' cannot be keyed. Place the key on real elements instead."
+        {
+          message:
+            "'<template>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 36
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><template v-slot="item" :key="item.id"><div /></template></template>',
       errors: [
-        "'<template>' cannot be keyed. Place the key on real elements instead."
+        {
+          message:
+            "'<template>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 49
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><template v-for="item in list"><template :key="item.id"><div /></template></template></template>',
       errors: [
-        "'<template>' cannot be keyed. Place the key on real elements instead."
+        {
+          message:
+            "'<template>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 66
+        }
       ]
     }
   ]

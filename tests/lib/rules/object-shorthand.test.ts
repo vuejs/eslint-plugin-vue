@@ -51,7 +51,9 @@ tester.run('object-shorthand', rule, {
         {
           message: 'Expected property shorthand.',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -72,7 +74,9 @@ tester.run('object-shorthand', rule, {
         {
           message: 'Expected longform property syntax.',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 29
         }
       ]
     }

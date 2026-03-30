@@ -191,103 +191,245 @@ tester.run('valid-v-for', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-for:aaa="x in list"></div></div></template>',
-      errors: ["'v-for' directives require no argument."]
+      errors: [
+        {
+          message: "'v-for' directives require no argument.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for.aaa="x in list"></div></div></template>',
-      errors: ["'v-for' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-for' directives require no modifier.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for></div></div></template>',
-      errors: ["'v-for' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-for' directives require that attribute value.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(,a,b) in list"></div></div></template>',
-      errors: ['Invalid empty alias.']
+      errors: [
+        {
+          message: 'Invalid empty alias.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(a,,b) in list"></div></div></template>',
-      errors: ['Invalid empty alias.']
+      errors: [
+        {
+          message: 'Invalid empty alias.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 42
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(a,b,,) in list"></div></div></template>',
-      errors: ['Invalid empty alias.']
+      errors: [
+        {
+          message: 'Invalid empty alias.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(a,{b,c}) in list"></div></div></template>',
-      errors: ["Invalid alias '{b,c}'."]
+      errors: [
+        {
+          message: "Invalid alias '{b,c}'.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(a,b,{c,d}) in list"></div></div></template>',
-      errors: ["Invalid alias '{c,d}'."]
+      errors: [
+        {
+          message: "Invalid alias '{c,d}'.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><your-component v-for="x in list"></your-component></div></template>',
-      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Custom elements in iteration require 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Custom elements in iteration require 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 59
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div :is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Custom elements in iteration require 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 60
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-bind:is="your-component" v-for="x in list"></div></div></template>',
-      errors: ["Custom elements in iteration require 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Custom elements in iteration require 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 66
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list" :key="100"></div></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 49
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><custom-component v-for="x in list" :key="100"></custom-component></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 62
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list" :key="foo"></div></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 49
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><custom-component v-for="x in list" :key="foo"></custom-component></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 52,
+          endLine: 1,
+          endColumn: 62
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(item, index) in suggestions" :key></div></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 58,
+          endLine: 1,
+          endColumn: 62
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><template v-for="x of list"><div v-for="foo of y" :key="foo"></div></template></div></template>',
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 1,
+          column: 66,
+          endLine: 1,
+          endColumn: 76
+        }
       ]
     },
     {
@@ -304,7 +446,14 @@ tester.run('valid-v-for', rule, {
         </template>
       `,
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -321,7 +470,14 @@ tester.run('valid-v-for', rule, {
         </template>
       `,
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -338,20 +494,43 @@ tester.run('valid-v-for', rule, {
         </template>
       `,
       errors: [
-        "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive."
+        {
+          message:
+            "Expected 'v-bind:key' directive to use the variables which are defined by the 'v-for' directive.",
+          line: 5,
+          column: 37,
+          endLine: 5,
+          endColumn: 48
+        }
       ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-for=""></div></template>',
-      errors: ["'v-for' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-for' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="(,a) in list"></div></div></template>',
       options: [{ allowEmptyAlias: false }],
-      errors: ['Invalid empty alias.']
+      errors: [
+        {
+          message: 'Invalid empty alias.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 40
+        }
+      ]
     }
   ]
 })

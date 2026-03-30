@@ -116,7 +116,10 @@ tester.run('no-extra-parens', rule, {
         },
         {
           messageId: 'unexpected',
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 15
         }
       ]
     },
@@ -149,8 +152,8 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          column: 27,
           line: 1,
+          column: 27,
           endLine: 1,
           endColumn: 28
         }
@@ -188,8 +191,8 @@ tester.run('no-extra-parens', rule, {
       errors: [
         {
           messageId: 'unexpected',
-          column: 22,
           line: 1,
+          column: 22,
           endLine: 1,
           endColumn: 23
         }

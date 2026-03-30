@@ -686,11 +686,46 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnDataString instead of this.computedReturnDataString().',
-        'Use this.computedReturnDataNumber instead of this.computedReturnDataNumber().',
-        'Use this.computedReturnDataObject instead of this.computedReturnDataObject().',
-        'Use this.computedReturnDataArray instead of this.computedReturnDataArray().',
-        'Use this.computedReturnDataBoolean instead of this.computedReturnDataBoolean().'
+        {
+          message:
+            'Use this.computedReturnDataString instead of this.computedReturnDataString().',
+          line: 34,
+          column: 15,
+          endLine: 34,
+          endColumn: 46
+        },
+        {
+          message:
+            'Use this.computedReturnDataNumber instead of this.computedReturnDataNumber().',
+          line: 35,
+          column: 15,
+          endLine: 35,
+          endColumn: 46
+        },
+        {
+          message:
+            'Use this.computedReturnDataObject instead of this.computedReturnDataObject().',
+          line: 36,
+          column: 15,
+          endLine: 36,
+          endColumn: 46
+        },
+        {
+          message:
+            'Use this.computedReturnDataArray instead of this.computedReturnDataArray().',
+          line: 37,
+          column: 15,
+          endLine: 37,
+          endColumn: 45
+        },
+        {
+          message:
+            'Use this.computedReturnDataBoolean instead of this.computedReturnDataBoolean().',
+          line: 38,
+          column: 15,
+          endLine: 38,
+          endColumn: 47
+        }
       ]
     },
     {
@@ -735,11 +770,46 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnPropsString instead of this.computedReturnPropsString().',
-        'Use this.computedReturnPropsNumber instead of this.computedReturnPropsNumber().',
-        'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
-        'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
-        'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().'
+        {
+          message:
+            'Use this.computedReturnPropsString instead of this.computedReturnPropsString().',
+          line: 30,
+          column: 15,
+          endLine: 30,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsNumber instead of this.computedReturnPropsNumber().',
+          line: 31,
+          column: 15,
+          endLine: 31,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
+          line: 32,
+          column: 15,
+          endLine: 32,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
+          line: 33,
+          column: 15,
+          endLine: 33,
+          endColumn: 46
+        },
+        {
+          message:
+            'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().',
+          line: 34,
+          column: 15,
+          endLine: 34,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -794,11 +864,46 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnPropsString instead of this.computedReturnPropsString().',
-        'Use this.computedReturnPropsNumber instead of this.computedReturnPropsNumber().',
-        'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
-        'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
-        'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().'
+        {
+          message:
+            'Use this.computedReturnPropsString instead of this.computedReturnPropsString().',
+          line: 40,
+          column: 15,
+          endLine: 40,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsNumber instead of this.computedReturnPropsNumber().',
+          line: 41,
+          column: 15,
+          endLine: 41,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsObject instead of this.computedReturnPropsObject().',
+          line: 42,
+          column: 15,
+          endLine: 42,
+          endColumn: 47
+        },
+        {
+          message:
+            'Use this.computedReturnPropsArray instead of this.computedReturnPropsArray().',
+          line: 43,
+          column: 15,
+          endLine: 43,
+          endColumn: 46
+        },
+        {
+          message:
+            'Use this.computedReturnPropsBoolean instead of this.computedReturnPropsBoolean().',
+          line: 44,
+          column: 15,
+          endLine: 44,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -838,11 +943,46 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnString instead of this.computedReturnString().',
-        'Use this.computedReturnNumber instead of this.computedReturnNumber().',
-        'Use this.computedReturnObject instead of this.computedReturnObject().',
-        'Use this.computedReturnArray instead of this.computedReturnArray().',
-        'Use this.computedReturnBoolean instead of this.computedReturnBoolean().'
+        {
+          message:
+            'Use this.computedReturnString instead of this.computedReturnString().',
+          line: 25,
+          column: 15,
+          endLine: 25,
+          endColumn: 42
+        },
+        {
+          message:
+            'Use this.computedReturnNumber instead of this.computedReturnNumber().',
+          line: 26,
+          column: 15,
+          endLine: 26,
+          endColumn: 42
+        },
+        {
+          message:
+            'Use this.computedReturnObject instead of this.computedReturnObject().',
+          line: 27,
+          column: 15,
+          endLine: 27,
+          endColumn: 42
+        },
+        {
+          message:
+            'Use this.computedReturnArray instead of this.computedReturnArray().',
+          line: 28,
+          column: 15,
+          endLine: 28,
+          endColumn: 41
+        },
+        {
+          message:
+            'Use this.computedReturnBoolean instead of this.computedReturnBoolean().',
+          line: 29,
+          column: 15,
+          endLine: 29,
+          endColumn: 43
+        }
       ]
     },
     {
@@ -867,7 +1007,14 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnComputedReturnString instead of this.computedReturnComputedReturnString().'
+        {
+          message:
+            'Use this.computedReturnComputedReturnString instead of this.computedReturnComputedReturnString().',
+          line: 14,
+          column: 15,
+          endLine: 14,
+          endColumn: 56
+        }
       ]
     },
     {
@@ -893,7 +1040,14 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnObject instead of this.computedReturnObject().'
+        {
+          message:
+            'Use this.computedReturnObject instead of this.computedReturnObject().',
+          line: 15,
+          column: 15,
+          endLine: 15,
+          endColumn: 42
+        }
       ]
     },
     {
@@ -915,7 +1069,14 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnNothing instead of this.computedReturnNothing().'
+        {
+          message:
+            'Use this.computedReturnNothing instead of this.computedReturnNothing().',
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 43
+        }
       ]
     },
     {
@@ -935,7 +1096,14 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnString instead of this.computedReturnString().'
+        {
+          message:
+            'Use this.computedReturnString instead of this.computedReturnString().',
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 49
+        }
       ]
     },
     {
@@ -958,8 +1126,22 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnArray instead of this.computedReturnArray().',
-        'Use this.computedReturnArray2 instead of this.computedReturnArray2().'
+        {
+          message:
+            'Use this.computedReturnArray instead of this.computedReturnArray().',
+          line: 12,
+          column: 55,
+          endLine: 12,
+          endColumn: 81
+        },
+        {
+          message:
+            'Use this.computedReturnArray2 instead of this.computedReturnArray2().',
+          line: 12,
+          column: 86,
+          endLine: 12,
+          endColumn: 113
+        }
       ]
     },
     {
@@ -988,7 +1170,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 19,
+          column: 15,
+          endLine: 19,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1014,7 +1204,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 17,
+          column: 15,
+          endLine: 17,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1039,7 +1237,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 16,
+          column: 15,
+          endLine: 16,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1060,7 +1266,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 12,
+          column: 15,
+          endLine: 12,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1084,7 +1298,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 12,
+          column: 15,
+          endLine: 12,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1108,7 +1330,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 15,
+          column: 15,
+          endLine: 15,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1145,7 +1375,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use this.x instead of this.x().']
+      errors: [
+        {
+          message: 'Use this.x instead of this.x().',
+          line: 27,
+          column: 15,
+          endLine: 27,
+          endColumn: 21
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -1168,7 +1406,15 @@ tester.run('no-use-computed-property-like-method', rule, {
         }
       </script>
       `,
-      errors: ['Use x instead of x().']
+      errors: [
+        {
+          message: 'Use x instead of x().',
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 14
+        }
+      ]
     },
     {
       // expression may be a function: https://github.com/vuejs/eslint-plugin-vue/issues/2037
@@ -1202,8 +1448,22 @@ tester.run('no-use-computed-property-like-method', rule, {
       </script>
       `,
       errors: [
-        'Use this.computedReturnNotFunction1 instead of this.computedReturnNotFunction1().',
-        'Use this.computedReturnNotFunction2 instead of this.computedReturnNotFunction2().'
+        {
+          message:
+            'Use this.computedReturnNotFunction1 instead of this.computedReturnNotFunction1().',
+          line: 22,
+          column: 15,
+          endLine: 22,
+          endColumn: 48
+        },
+        {
+          message:
+            'Use this.computedReturnNotFunction2 instead of this.computedReturnNotFunction2().',
+          line: 23,
+          column: 15,
+          endLine: 23,
+          endColumn: 48
+        }
       ]
     }
   ]

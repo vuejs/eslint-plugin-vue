@@ -41,21 +41,45 @@ tester.run('v-on-style', rule, {
       filename: 'test.vue',
       code: '<template><div v-on:foo="foo"></div></template>',
       output: '<template><div @foo="foo"></div></template>',
-      errors: ["Expected '@' instead of 'v-on:'."]
+      errors: [
+        {
+          message: "Expected '@' instead of 'v-on:'.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-on:foo="foo"></div></template>',
       output: '<template><div @foo="foo"></div></template>',
       options: ['shorthand'],
-      errors: ["Expected '@' instead of 'v-on:'."]
+      errors: [
+        {
+          message: "Expected '@' instead of 'v-on:'.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @foo="foo"></div></template>',
       output: '<template><div v-on:foo="foo"></div></template>',
       options: ['longform'],
-      errors: ["Expected 'v-on:' instead of '@'."]
+      errors: [
+        {
+          message: "Expected 'v-on:' instead of '@'.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     }
   ]
 })

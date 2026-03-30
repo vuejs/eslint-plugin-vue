@@ -114,7 +114,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.ctrl="bar"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 17
+        }
+      ]
     },
     {
       code: `<template>
@@ -123,7 +131,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.ctrl.stop="bar"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 17
+        }
+      ]
     },
     {
       code: `<template>
@@ -132,7 +148,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.ctrl="bar"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 25
+        }
+      ]
     },
     {
       code: `<template>
@@ -142,7 +166,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.ctrl.shift="baz"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 4 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 22
+        }
+      ]
     },
     {
       code: `<template>
@@ -153,8 +185,20 @@ ruleTester.run('use-v-on-exact', rule, {
         />
       </template>`,
       errors: [
-        { message: "Consider to use '.exact' modifier.", line: 3 },
-        { message: "Consider to use '.exact' modifier.", line: 4 }
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 17
+        },
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -164,7 +208,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @keypress.27.shift="bar"
         >
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     },
     {
       code: `<template>
@@ -174,7 +226,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @keypress.ctrl="baz"
         >
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 4 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: `<template>
@@ -184,7 +244,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.ctrl.native="baz"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 4 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
+        }
+      ]
     },
     {
       code: `<template>
@@ -193,7 +261,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @click.native.ctrl.shift="bar"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: `<template>
@@ -204,8 +280,20 @@ ruleTester.run('use-v-on-exact', rule, {
         />
       </template>`,
       errors: [
-        { message: "Consider to use '.exact' modifier.", line: 3 },
-        { message: "Consider to use '.exact' modifier.", line: 4 }
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 24
+        },
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 29
+        }
       ]
     },
     {
@@ -215,7 +303,15 @@ ruleTester.run('use-v-on-exact', rule, {
           @[foo].ctrl="bar"
         />
       </template>`,
-      errors: [{ message: "Consider to use '.exact' modifier.", line: 3 }]
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 17
+        }
+      ]
     }
   ]
 })

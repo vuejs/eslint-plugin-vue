@@ -162,7 +162,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -180,7 +183,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -201,7 +207,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 8,
+          endColumn: 14
         }
       ]
     },
@@ -223,7 +232,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 7
+          line: 7,
+          column: 19,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -245,7 +257,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 9,
+          endColumn: 14
         }
       ]
     },
@@ -267,7 +282,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -287,7 +305,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -309,7 +330,10 @@ ruleTester.run('return-in-computed-property', rule, {
         {
           message:
             'Expected to return a value in "my_FALSE_test" computed property.',
-          line: 5
+          line: 5,
+          column: 28,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -343,23 +367,38 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 34,
+          endLine: 5,
+          endColumn: 42
         },
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 35,
+          endLine: 6,
+          endColumn: 48
         },
         {
           message: 'Expected to return a value in computed function.',
-          line: 7
+          line: 7,
+          column: 35,
+          endLine: 11,
+          endColumn: 14
         },
         {
           message: 'Expected to return a value in computed function.',
-          line: 14
+          line: 14,
+          column: 20,
+          endLine: 14,
+          endColumn: 28
         },
         {
           message: 'Expected to return a value in computed function.',
-          line: 16
+          line: 16,
+          column: 35,
+          endLine: 21,
+          endColumn: 14
         }
       ]
     },
@@ -381,7 +420,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 34,
+          endLine: 5,
+          endColumn: 42
         }
       ]
     },
@@ -398,7 +440,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 5,
+          endColumn: 12
         }
       ]
     }

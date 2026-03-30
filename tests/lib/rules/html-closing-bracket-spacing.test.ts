@@ -49,22 +49,22 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected no space before '>', but found.",
           line: 2,
           column: 7,
-          endColumn: 9,
-          endLine: 2
+          endLine: 2,
+          endColumn: 9
         },
         {
           message: "Expected no space before '>', but found.",
           line: 3,
           column: 8,
-          endColumn: 10,
-          endLine: 3
+          endLine: 3,
+          endColumn: 10
         },
         {
           message: "Expected a space before '/>', but not found.",
           line: 4,
           column: 7,
-          endColumn: 9,
-          endLine: 4
+          endLine: 4,
+          endColumn: 9
         }
       ]
     },
@@ -76,15 +76,15 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected no space before '>', but found.",
           line: 2,
           column: 11,
-          endColumn: 13,
-          endLine: 2
+          endLine: 2,
+          endColumn: 13
         },
         {
           message: "Expected a space before '/>', but not found.",
           line: 3,
           column: 11,
-          endColumn: 13,
-          endLine: 3
+          endLine: 3,
+          endColumn: 13
         }
       ]
     },
@@ -97,15 +97,15 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected no space before '>', but found.",
           line: 2,
           column: 15,
-          endColumn: 17,
-          endLine: 2
+          endLine: 2,
+          endColumn: 17
         },
         {
           message: "Expected a space before '/>', but not found.",
           line: 3,
           column: 15,
-          endColumn: 17,
-          endLine: 3
+          endLine: 3,
+          endColumn: 17
         }
       ]
     },
@@ -125,43 +125,43 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected no space before '>', but found.",
           line: 2,
           column: 18,
-          endColumn: 20,
-          endLine: 2
+          endLine: 2,
+          endColumn: 20
         },
         {
           message: "Expected no space before '>', but found.",
           line: 2,
           column: 30,
-          endColumn: 32,
-          endLine: 2
+          endLine: 2,
+          endColumn: 32
         },
         {
           message: "Expected no space before '>', but found.",
           line: 3,
           column: 16,
-          endColumn: 18,
-          endLine: 3
+          endLine: 3,
+          endColumn: 18
         },
         {
           message: "Expected no space before '>', but found.",
           line: 3,
           column: 26,
-          endColumn: 28,
-          endLine: 3
+          endLine: 3,
+          endColumn: 28
         },
         {
           message: "Expected no space before '>', but found.",
           line: 4,
           column: 15,
-          endColumn: 17,
-          endLine: 4
+          endLine: 4,
+          endColumn: 17
         },
         {
           message: "Expected no space before '>', but found.",
           line: 4,
           column: 24,
-          endColumn: 26,
-          endLine: 4
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -180,22 +180,22 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected a space before '>', but not found.",
           line: 2,
           column: 7,
-          endColumn: 8,
-          endLine: 2
+          endLine: 2,
+          endColumn: 8
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 3,
           column: 8,
-          endColumn: 9,
-          endLine: 3
+          endLine: 3,
+          endColumn: 9
         },
         {
           message: "Expected no space before '/>', but found.",
           line: 4,
           column: 7,
-          endColumn: 10,
-          endLine: 4
+          endLine: 4,
+          endColumn: 10
         }
       ]
     },
@@ -222,43 +222,43 @@ ruleTester.run('html-closing-bracket-spacing', rule, {
           message: "Expected a space before '>', but not found.",
           line: 2,
           column: 18,
-          endColumn: 19,
-          endLine: 2
+          endLine: 2,
+          endColumn: 19
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 2,
           column: 29,
-          endColumn: 30,
-          endLine: 2
+          endLine: 2,
+          endColumn: 30
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 3,
           column: 16,
-          endColumn: 17,
-          endLine: 3
+          endLine: 3,
+          endColumn: 17
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 3,
           column: 25,
-          endColumn: 26,
-          endLine: 3
+          endLine: 3,
+          endColumn: 26
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 4,
           column: 15,
-          endColumn: 16,
-          endLine: 4
+          endLine: 4,
+          endColumn: 16
         },
         {
           message: "Expected a space before '>', but not found.",
           line: 4,
           column: 23,
-          endColumn: 24,
-          endLine: 4
+          endLine: 4,
+          endColumn: 24
         }
       ]
     }

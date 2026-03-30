@@ -88,22 +88,58 @@ tester.run('require-v-for-key', rule, {
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"></div></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Elements in iteration expect to have 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list" key="100"></div></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Elements in iteration expect to have 'v-bind:key' directives.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><template v-for="x in list"><div></div></template></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Elements in iteration expect to have 'v-bind:key' directives.",
+          line: 1,
+          column: 44,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><slot v-for="x in list" :name="x"><div></div></slot></div></template>',
-      errors: ["Elements in iteration expect to have 'v-bind:key' directives."]
+      errors: [
+        {
+          message:
+            "Elements in iteration expect to have 'v-bind:key' directives.",
+          line: 1,
+          column: 50,
+          endLine: 1,
+          endColumn: 55
+        }
+      ]
     }
   ]
 })

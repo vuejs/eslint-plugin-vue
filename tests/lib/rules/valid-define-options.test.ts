@@ -95,7 +95,10 @@ tester.run('valid-define-options', rule, {
       errors: [
         {
           message: '`defineOptions` is referencing locally declared variables.',
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -110,11 +113,17 @@ tester.run('valid-define-options', rule, {
       errors: [
         {
           message: '`defineOptions` has been called multiple times.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 39
         },
         {
           message: '`defineOptions` has been called multiple times.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 39
         }
       ]
     },
@@ -128,7 +137,10 @@ tester.run('valid-define-options', rule, {
       errors: [
         {
           message: 'Options are not defined.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 24
         }
       ]
     },
@@ -145,11 +157,17 @@ tester.run('valid-define-options', rule, {
       errors: [
         {
           message: 'Options are not defined.',
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 39
         },
         {
           message: '`defineOptions()` cannot accept type arguments.',
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -164,7 +182,10 @@ tester.run('valid-define-options', rule, {
         {
           message:
             '`defineOptions()` cannot be used to declare `props`. Use `defineProps()` instead.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 50
         }
       ]
     },
@@ -179,7 +200,10 @@ tester.run('valid-define-options', rule, {
         {
           message:
             '`defineOptions()` cannot be used to declare `emits`. Use `defineEmits()` instead.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 44
         }
       ]
     },
@@ -194,7 +218,10 @@ tester.run('valid-define-options', rule, {
         {
           message:
             '`defineOptions()` cannot be used to declare `expose`. Use `defineExpose()` instead.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -209,7 +236,10 @@ tester.run('valid-define-options', rule, {
         {
           message:
             '`defineOptions()` cannot be used to declare `slots`. Use `defineSlots()` instead.',
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 41
         }
       ]
     }

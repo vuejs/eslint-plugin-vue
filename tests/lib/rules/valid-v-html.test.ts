@@ -36,23 +36,55 @@ tester.run('valid-v-html', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-html:aaa="foo"></div></template>',
-      errors: ["'v-html' directives require no argument."]
+      errors: [
+        {
+          message: "'v-html' directives require no argument.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-html.aaa="foo"></div></template>',
-      errors: ["'v-html' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-html' directives require no modifier.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-html></div></template>',
-      errors: ["'v-html' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-html' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-html=""></div></template>',
-      errors: ["'v-html' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-html' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     }
   ]
 })

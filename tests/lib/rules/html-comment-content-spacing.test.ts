@@ -205,15 +205,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Expected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 15,
-          endLine: 3
+          endLine: 3,
+          endColumn: 15
         },
         {
           message: "Expected space before '-->'.",
           line: 3,
           column: 22,
-          endColumn: 22,
-          endLine: 3
+          endLine: 3,
+          endColumn: 22
         }
       ]
     },
@@ -234,15 +234,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Unexpected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 16,
-          endLine: 3
+          endLine: 3,
+          endColumn: 16
         },
         {
           message: "Unexpected space before '-->'.",
           line: 3,
           column: 23,
-          endColumn: 24,
-          endLine: 3
+          endLine: 3,
+          endColumn: 24
         }
       ]
     },
@@ -263,15 +263,15 @@ tester.run('html-comment-content-spacing', rule, {
           message: "Unexpected space after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 23,
-          endLine: 3
+          endLine: 3,
+          endColumn: 23
         },
         {
           message: "Unexpected space before '-->'.",
           line: 3,
           column: 30,
-          endColumn: 38,
-          endLine: 3
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },

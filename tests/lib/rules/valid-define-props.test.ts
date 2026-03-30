@@ -145,7 +145,10 @@ tester.run('valid-define-props', rule, {
       errors: [
         {
           message: '`defineProps` is referencing locally declared variables.',
-          line: 5
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -163,7 +166,10 @@ tester.run('valid-define-props', rule, {
       errors: [
         {
           message: '`defineProps` has both a type-only props and an argument.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 54
         }
       ]
     },
@@ -179,11 +185,17 @@ tester.run('valid-define-props', rule, {
       errors: [
         {
           message: '`defineProps` has been called multiple times.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 37
         },
         {
           message: '`defineProps` has been called multiple times.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 39
         }
       ]
     },
@@ -204,7 +216,10 @@ tester.run('valid-define-props', rule, {
         {
           message:
             'Props are defined in both `defineProps` and `export default {}`.',
-          line: 9
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 39
         }
       ]
     },
@@ -219,7 +234,10 @@ tester.run('valid-define-props', rule, {
       errors: [
         {
           message: 'Props are not defined.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     }

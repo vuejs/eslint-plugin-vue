@@ -223,7 +223,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Unexpected token b.',
           line: 1,
-          column: 15
+          column: 15,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -234,7 +236,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Unexpected token b.',
           line: 1,
-          column: 20
+          column: 20,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -245,7 +249,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Unexpected token b.',
           line: 1,
-          column: 26
+          column: 26,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -256,7 +262,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Unexpected token ;.',
           line: 1,
-          column: 25
+          column: 25,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -268,7 +276,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: Expected to be an expression, but got empty.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -279,7 +289,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Expected to be an alias, but got empty.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -287,7 +299,13 @@ tester.run('no-parsing-error', rule, {
       filename: 'test.vue',
       code: '<template><div v-for="foo() in list">hello</div></template>',
       errors: [
-        { message: 'Parsing error: Unexpected token (.', line: 1, column: 26 }
+        {
+          message: 'Parsing error: Unexpected token (.',
+          line: 1,
+          column: 26,
+          endLine: undefined,
+          endColumn: undefined
+        }
       ]
     },
     {
@@ -297,7 +315,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: abrupt-closing-of-empty-comment.',
           line: 1,
-          column: 15
+          column: 15,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -308,7 +328,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: abrupt-closing-of-empty-comment.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -320,7 +342,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: absence-of-digits-in-numeric-character-reference.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -331,7 +355,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: cdata-in-html-content.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -342,7 +368,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: character-reference-outside-unicode-range.',
           line: 1,
-          column: 21
+          column: 21,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -353,7 +381,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: control-character-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -364,7 +394,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: control-character-reference.',
           line: 1,
-          column: 18
+          column: 18,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -375,7 +407,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-before-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -386,7 +420,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-cdata.',
           line: 1,
-          column: 30
+          column: 30,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -397,7 +433,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-comment.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -408,7 +446,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-tag.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -419,7 +459,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: incorrectly-closed-comment.',
           line: 1,
-          column: 25
+          column: 25,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -430,7 +472,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: incorrectly-opened-comment.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -441,7 +485,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: invalid-first-character-of-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -452,7 +498,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-attribute-value.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -463,7 +511,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-end-tag-name.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -475,7 +525,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: missing-semicolon-after-character-reference.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -486,7 +538,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-whitespace-between-attributes.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -497,7 +551,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: nested-comment.',
           line: 1,
-          column: 20
+          column: 20,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -508,7 +564,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: noncharacter-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -519,7 +577,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: noncharacter-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -530,7 +590,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: null-character-reference.',
           line: 1,
-          column: 18
+          column: 18,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -541,7 +603,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: surrogate-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -552,7 +616,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: surrogate-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -563,7 +629,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-character-in-attribute-name.',
           line: 1,
-          column: 17
+          column: 17,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -575,7 +643,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-character-in-unquoted-attribute-value.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -587,7 +657,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-equals-sign-before-attribute-name.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -598,7 +670,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-null-character.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -610,7 +684,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-question-mark-instead-of-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -621,7 +697,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-solidus-in-tag.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -632,7 +710,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unknown-named-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -643,7 +723,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: end-tag-with-attributes.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -654,7 +736,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: duplicate-attribute.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -665,7 +749,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: end-tag-with-trailing-solidus.',
           line: 1,
-          column: 21
+          column: 21,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -679,7 +765,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: non-void-html-element-start-tag-with-trailing-solidus.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -690,7 +778,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: x-invalid-end-tag.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -701,7 +791,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: x-invalid-namespace.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -711,7 +803,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: abrupt-closing-of-empty-comment.',
           line: 1,
-          column: 15
+          column: 15,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -721,7 +815,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: abrupt-closing-of-empty-comment.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -732,7 +828,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: absence-of-digits-in-numeric-character-reference.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -742,7 +840,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: cdata-in-html-content.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -752,7 +852,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: character-reference-outside-unicode-range.',
           line: 1,
-          column: 21
+          column: 21,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -762,7 +864,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: control-character-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -772,7 +876,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: control-character-reference.',
           line: 1,
-          column: 18
+          column: 18,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -782,7 +888,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-before-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -792,7 +900,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-cdata.',
           line: 1,
-          column: 30
+          column: 30,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -802,7 +912,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-comment.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -812,7 +924,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: eof-in-tag.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -822,7 +936,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: incorrectly-closed-comment.',
           line: 1,
-          column: 25
+          column: 25,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -832,7 +948,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: incorrectly-opened-comment.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -842,7 +960,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: invalid-first-character-of-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -852,7 +972,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-attribute-value.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -862,7 +984,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-end-tag-name.',
           line: 1,
-          column: 13
+          column: 13,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -873,7 +997,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: missing-semicolon-after-character-reference.',
           line: 1,
-          column: 14
+          column: 14,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -883,7 +1009,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: missing-whitespace-between-attributes.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -893,7 +1021,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: nested-comment.',
           line: 1,
-          column: 20
+          column: 20,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -903,7 +1033,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: noncharacter-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -913,7 +1045,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: noncharacter-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -923,7 +1057,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: null-character-reference.',
           line: 1,
-          column: 18
+          column: 18,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -933,7 +1069,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: surrogate-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -943,7 +1081,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: surrogate-in-input-stream.',
           line: 1,
-          column: 10
+          column: 10,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -953,7 +1093,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-character-in-attribute-name.',
           line: 1,
-          column: 17
+          column: 17,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -964,7 +1106,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-character-in-unquoted-attribute-value.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -975,7 +1119,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-equals-sign-before-attribute-name.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -985,7 +1131,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-null-character.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -996,7 +1144,9 @@ tester.run('no-parsing-error', rule, {
           message:
             'Parsing error: unexpected-question-mark-instead-of-tag-name.',
           line: 1,
-          column: 12
+          column: 12,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1006,7 +1156,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unexpected-solidus-in-tag.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1016,7 +1168,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: unknown-named-character-reference.',
           line: 1,
-          column: 19
+          column: 19,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1026,7 +1180,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: end-tag-with-attributes.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1036,7 +1192,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: duplicate-attribute.',
           line: 1,
-          column: 22
+          column: 22,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1046,7 +1204,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: end-tag-with-trailing-solidus.',
           line: 1,
-          column: 21
+          column: 21,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1056,7 +1216,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: x-invalid-end-tag.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1066,7 +1228,9 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: x-invalid-namespace.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -1087,12 +1251,16 @@ tester.run('no-parsing-error', rule, {
         {
           message: 'Parsing error: Unexpected end of expression.',
           line: 5,
-          column: 33
+          column: 33,
+          endLine: undefined,
+          endColumn: undefined
         },
         {
           message: 'Parsing error: Unexpected token size.',
           line: 6,
-          column: 37
+          column: 37,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     }

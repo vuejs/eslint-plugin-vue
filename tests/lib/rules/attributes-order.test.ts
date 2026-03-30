@@ -2237,7 +2237,15 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ sortLineLength: true }],
-      errors: ['Attribute "short" should go before "medium-attr".']
+      errors: [
+        {
+          message: 'Attribute "short" should go before "medium-attr".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -2256,7 +2264,16 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ sortLineLength: true }],
-      errors: ['Attribute "short" should go before "very-long-attribute-name".']
+      errors: [
+        {
+          message:
+            'Attribute "short" should go before "very-long-attribute-name".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -2279,7 +2296,16 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ sortLineLength: true }],
-      errors: ['Attribute "short" should go before "very-long-attribute-name".']
+      errors: [
+        {
+          message:
+            'Attribute "short" should go before "very-long-attribute-name".',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -2301,8 +2327,20 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [{ sortLineLength: true }],
       errors: [
-        'Attribute "@click" should go before "@mouseover".',
-        'Attribute "@input" should go before "@mouseover".'
+        {
+          message: 'Attribute "@click" should go before "@mouseover".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
+        },
+        {
+          message: 'Attribute "@input" should go before "@mouseover".',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 31
+        }
       ]
     },
     {
@@ -2325,8 +2363,20 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [{ sortLineLength: true }],
       errors: [
-        'Attribute ":a" should go before ":abc".',
-        'Attribute ":ab" should go before ":abc".'
+        {
+          message: 'Attribute ":a" should go before ":abc".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 21
+        },
+        {
+          message: 'Attribute ":ab" should go before ":abc".',
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 22
+        }
       ]
     },
     {
@@ -2348,7 +2398,15 @@ tester.run('attributes-order', rule, {
         </div>
       </template>`,
       options: [{ sortLineLength: true }],
-      errors: ['Attribute "short" should go before "very-long-binding".']
+      errors: [
+        {
+          message: 'Attribute "short" should go before "very-long-binding".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -2367,7 +2425,15 @@ tester.run('attributes-order', rule, {
         ></div>
       </template>`,
       options: [{ sortLineLength: true, alphabetical: true }],
-      errors: [{ message: 'Attribute "z" should go before "aa".' }]
+      errors: [
+        {
+          message: 'Attribute "z" should go before "aa".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -2391,8 +2457,20 @@ tester.run('attributes-order', rule, {
       </template>`,
       options: [{ sortLineLength: true, alphabetical: true }],
       errors: [
-        { message: 'Attribute "bb" should go before "zz".' },
-        { message: 'Attribute "@click" should go before "@keyup".' }
+        {
+          message: 'Attribute "bb" should go before "zz".',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 17
+        },
+        {
+          message: 'Attribute "@click" should go before "@keyup".',
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 22
+        }
       ]
     }
   ]

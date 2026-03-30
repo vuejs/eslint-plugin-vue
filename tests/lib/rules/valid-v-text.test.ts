@@ -40,23 +40,55 @@ tester.run('valid-v-text', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-text:aaa="foo"></div></template>',
-      errors: ["'v-text' directives require no argument."]
+      errors: [
+        {
+          message: "'v-text' directives require no argument.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-text.aaa="foo"></div></template>',
-      errors: ["'v-text' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-text' directives require no modifier.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-text></div></template>',
-      errors: ["'v-text' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-text' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-text="" /></template>',
-      errors: ["'v-text' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-text' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     }
   ]
 })

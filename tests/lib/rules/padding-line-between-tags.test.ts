@@ -470,12 +470,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -518,17 +522,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 13
+          column: 13,
+          endLine: 8,
+          endColumn: 18
         },
         {
           message: 'Expected blank line before this tag.',
           line: 9,
-          column: 13
+          column: 13,
+          endLine: 9,
+          endColumn: 19
         },
         {
           message: 'Expected blank line before this tag.',
           line: 10,
-          column: 13
+          column: 13,
+          endLine: 11,
+          endColumn: 18
         }
       ]
     },
@@ -565,7 +575,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 16
         }
       ]
     },
@@ -614,17 +626,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 13,
+          endColumn: 16
         },
         {
           message: 'Expected blank line before this tag.',
           line: 10,
-          column: 15
+          column: 15,
+          endLine: 11,
+          endColumn: 19
         },
         {
           message: 'Expected blank line before this tag.',
           line: 15,
-          column: 9
+          column: 9,
+          endLine: 16,
+          endColumn: 15
         }
       ]
     },
@@ -667,7 +685,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 13
+          column: 13,
+          endLine: 7,
+          endColumn: 19
         }
       ]
     },
@@ -710,7 +730,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 13
+          column: 13,
+          endLine: 9,
+          endColumn: 18
         }
       ]
     },
@@ -750,12 +772,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 9,
-          column: 13
+          column: 13,
+          endLine: 9,
+          endColumn: 19
         },
         {
           message: 'Unexpected blank line before this tag.',
           line: 11,
-          column: 13
+          column: 13,
+          endLine: 12,
+          endColumn: 18
         }
       ]
     },
@@ -788,12 +814,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 17
         },
         {
           message: 'Unexpected blank line before this tag.',
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 18
         }
       ]
     },
@@ -838,7 +868,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 13
+          column: 13,
+          endLine: 8,
+          endColumn: 24
         }
       ]
     },
@@ -882,17 +914,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 20
         }
       ]
     },
@@ -933,7 +971,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 17
         }
       ]
     },
@@ -974,7 +1014,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 17
         }
       ]
     },
@@ -1017,17 +1059,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 17
         },
         {
           message: 'Unexpected blank line before this tag.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 17
         }
       ]
     },
@@ -1065,7 +1113,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 11,
-          column: 11
+          column: 11,
+          endLine: 11,
+          endColumn: 17
         }
       ]
     },
@@ -1099,7 +1149,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 17
         }
       ]
     },
@@ -1125,7 +1177,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 4,
-          column: 18
+          column: 18,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -1151,7 +1205,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 4,
-          column: 23
+          column: 23,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -1179,7 +1235,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 6,
-          column: 12
+          column: 12,
+          endLine: 6,
+          endColumn: 19
         }
       ]
     },
@@ -1209,7 +1267,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
-          column: 12
+          column: 12,
+          endLine: 7,
+          endColumn: 19
         }
       ]
     },
@@ -1240,7 +1300,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 8,
-          column: 12
+          column: 12,
+          endLine: 8,
+          endColumn: 19
         }
       ]
     },
@@ -1273,7 +1335,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 10,
-          column: 12
+          column: 12,
+          endLine: 10,
+          endColumn: 19
         }
       ]
     },
@@ -1311,7 +1375,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 22
         }
       ]
     },
@@ -1355,17 +1421,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 22
         },
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 22
         },
         {
           message: 'Expected blank line before this tag.',
           line: 9,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 22
         }
       ]
     },
@@ -1412,17 +1484,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 16
         },
         {
           message: 'Unexpected blank line before this tag.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 18
         },
         {
           message: 'Unexpected blank line before this tag.',
           line: 13,
-          column: 11
+          column: 11,
+          endLine: 13,
+          endColumn: 18
         }
       ]
     },
@@ -1452,7 +1530,9 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -1499,12 +1579,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 35
         },
         {
           message: 'Expected blank line before this tag.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 12,
+          endColumn: 17
         }
       ]
     },
@@ -1544,12 +1628,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 8,
+          endColumn: 35
         }
       ]
     },
@@ -1594,12 +1682,16 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 7,
+          endColumn: 35
         },
         {
           message: 'Expected blank line before this tag.',
           line: 8,
-          column: 11
+          column: 11,
+          endLine: 10,
+          endColumn: 17
         }
       ]
     },
@@ -1647,17 +1739,23 @@ tester.run('padding-line-between-tags', rule, {
         {
           message: 'Unexpected blank line before this tag.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 30
         },
         {
           message: 'Expected blank line before this tag.',
           line: 7,
-          column: 11
+          column: 11,
+          endLine: 9,
+          endColumn: 17
         },
         {
           message: 'Expected blank line before this tag.',
           line: 10,
-          column: 11
+          column: 11,
+          endLine: 12,
+          endColumn: 17
         }
       ]
     }

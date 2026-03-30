@@ -42,12 +42,18 @@ tester.run('restricted-component-names', rule, {
         {
           messageId: 'invalidName',
           data: { name: 'Button' },
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 18
         },
         {
           messageId: 'invalidName',
           data: { name: 'foo-button' },
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     },
@@ -64,12 +70,18 @@ tester.run('restricted-component-names', rule, {
         {
           messageId: 'invalidName',
           data: { name: 'bar-button' },
-          line: 3
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 22
         },
         {
           messageId: 'invalidName',
           data: { name: 'foo' },
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 15
         }
       ]
     }

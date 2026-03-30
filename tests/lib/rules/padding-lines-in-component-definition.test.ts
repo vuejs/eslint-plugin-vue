@@ -464,15 +464,24 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 14,
+          endColumn: 14
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 10
+          line: 10,
+          column: 17,
+          endLine: 13,
+          endColumn: 18
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 15
+          line: 15,
+          column: 13,
+          endLine: 20,
+          endColumn: 14
         }
       ]
     },
@@ -511,7 +520,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this definition.',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
         }
       ]
     },
@@ -563,7 +575,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 15,
+          endColumn: 14
         }
       ]
     },
@@ -608,7 +623,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line between single line properties.',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 32
         }
       ]
     },
@@ -673,15 +691,24 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 10
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 35
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 12
+          line: 12,
+          column: 17,
+          endLine: 15,
+          endColumn: 18
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 14
+          line: 14,
+          column: 21,
+          endLine: 14,
+          endColumn: 35
         }
       ]
     },
@@ -769,7 +796,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this definition.',
-          line: 23
+          line: 23,
+          column: 17,
+          endLine: 23,
+          endColumn: 35
         }
       ]
     },
@@ -829,11 +859,17 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line between single line properties.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 30
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 17
+          line: 17,
+          column: 11,
+          endLine: 20,
+          endColumn: 12
         }
       ]
     },
@@ -892,15 +928,24 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 14,
+          endColumn: 12
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 15
+          line: 15,
+          column: 11,
+          endLine: 18,
+          endColumn: 12
         }
       ]
     },
@@ -952,11 +997,17 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this definition.',
-          line: 8
+          line: 8,
+          column: 17,
+          endLine: 8,
+          endColumn: 31
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 13,
+          endColumn: 14
         }
       ]
     },
@@ -987,7 +1038,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Unexpected blank line before this definition.',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 54
         }
       ]
     },
@@ -1044,11 +1098,17 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 5
+          line: 5,
+          column: 41,
+          endLine: 13,
+          endColumn: 14
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 9
+          line: 9,
+          column: 19,
+          endLine: 12,
+          endColumn: 18
         }
       ]
     },
@@ -1112,19 +1172,31 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 23,
+          endColumn: 14
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 9
+          line: 9,
+          column: 17,
+          endLine: 9,
+          endColumn: 29
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 13
+          line: 13,
+          column: 17,
+          endLine: 13,
+          endColumn: 23
         },
         {
           message: 'Unexpected blank line between single line properties.',
-          line: 21
+          line: 21,
+          column: 17,
+          endLine: 21,
+          endColumn: 28
         }
       ]
     },
@@ -1171,15 +1243,24 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 14,
+          endColumn: 14
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 10
+          line: 10,
+          column: 17,
+          endLine: 10,
+          endColumn: 24
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 11
+          line: 11,
+          column: 17,
+          endLine: 13,
+          endColumn: 18
         }
       ]
     },
@@ -1245,15 +1326,24 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 20
         },
         {
           message: 'Expected blank line before this definition.',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 54
         },
         {
           message: 'Unexpected blank line before this definition.',
-          line: 16
+          line: 16,
+          column: 13,
+          endLine: 16,
+          endColumn: 23
         }
       ]
     },
@@ -1280,7 +1370,10 @@ tester.run('padding-lines-in-component-definition', rule, {
       errors: [
         {
           message: 'Expected blank line before this definition.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 32
         }
       ]
     }

@@ -89,6 +89,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 5,
           column: 29,
+          endLine: 5,
+          endColumn: 36,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -122,6 +124,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 5,
           column: 37,
+          endLine: 5,
+          endColumn: 44,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -155,6 +159,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 5,
           column: 29,
+          endLine: 5,
+          endColumn: 36,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -188,6 +194,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 5,
           column: 37,
+          endLine: 5,
+          endColumn: 44,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -219,6 +227,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 4,
           column: 27,
+          endLine: 4,
+          endColumn: 34,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -248,6 +258,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 4,
           column: 35,
+          endLine: 4,
+          endColumn: 42,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -277,6 +289,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 4,
           column: 35,
+          endLine: 4,
+          endColumn: 42,
           suggestions: [
             {
               messageId: 'moveToFirst',
@@ -306,6 +320,8 @@ tester.run('prefer-prop-type-boolean-first', rule, {
           messageId: 'shouldBeFirst',
           line: 4,
           column: 43,
+          endLine: 4,
+          endColumn: 50,
           suggestions: [
             {
               messageId: 'moveToFirst',
