@@ -112,8 +112,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 9,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 10
         }
       ]
     },
@@ -139,71 +139,71 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 3,
           column: 9,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 3,
+          endColumn: 10
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 5,
           column: 11,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 5,
+          endColumn: 12
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 6,
           column: 17,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 6,
+          endColumn: 18
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 7,
           column: 17,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 7,
+          endColumn: 18
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 7,
           column: 23,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 7,
+          endColumn: 24
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 8,
           column: 11,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 8,
+          endColumn: 12
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 9,
           column: 9,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 9,
+          endColumn: 10
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 11,
           column: 9,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 11,
+          endColumn: 10
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 12,
           column: 9,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 12,
+          endColumn: 10
         },
         {
           message: 'Irregular whitespace not allowed.',
           line: 15,
           column: 15,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 15,
+          endColumn: 16
         }
       ]
     },
@@ -216,8 +216,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 2,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 3
         }
       ]
     })),
@@ -229,8 +229,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 3,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
@@ -242,8 +242,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 15,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 16
         }
       ]
     })),
@@ -255,20 +255,32 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 3,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 4
         }
       ]
     })),
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `/*${s}*/`,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 3,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 4
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `/*${s}*/`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
@@ -279,20 +291,32 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 22,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 23
         }
       ]
     })),
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `<template><div>{{ i/*${s}*/ }}</div></template>`,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 22,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>{{ i/*${s}*/ }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
@@ -304,8 +328,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 2,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 3
         }
       ]
     })),
@@ -316,59 +340,107 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 20,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 21
         }
       ]
     })),
     // templates
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `\`${s}\``,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 2,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 3
         }
       ]
     })),
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `\`${s}\``,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 2,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `<template><div>{{ \`${s}\` }}</div></template>`,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 20,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 21
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>{{ \`${s}\` }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
     // attribute values
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `<template><div attr="${s}" /></template>`,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 22,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div attr="${s}" /></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
     // text contents
-    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+    ...IRREGULAR_WHITESPACES.map((s) => ({
       code: `<template><div>${s}</div></template>`,
       errors: [
         {
           message: 'Irregular whitespace not allowed.',
           line: 1,
           column: 16,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 1,
+          endColumn: 17
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>${s}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 2,
+          endColumn: 1
         }
       ]
     })),
@@ -406,8 +478,8 @@ tester.run('no-irregular-whitespace', rule, {
           message: 'Irregular whitespace not allowed.',
           line: 6,
           column: 17,
-          endLine: undefined,
-          endColumn: undefined
+          endLine: 6,
+          endColumn: 19
         }
       ]
     }
