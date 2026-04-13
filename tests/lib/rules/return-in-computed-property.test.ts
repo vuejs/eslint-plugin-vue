@@ -213,6 +213,143 @@ ruleTester.run('return-in-computed-property', rule, {
         </script>`,
       ...getTypeScriptFixtureTestOptions()
     },
+    // TS: Nested switch - covered
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.random()
+        const result = computed(() => {
+          if (x > 0.5) {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          } else {
+            return 'x <= 0.5'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: else-if chain with terminal else — all branches return
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.floor(Math.random() * 3)
+        const result = computed(() => {
+          if (x === 1) {
+            return 'one'
+          } else if (x === 2) {
+            return 'two'
+          } else if (flag.value) {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          } else {
+            return 'other'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Nested if/else/if with exhaustive switch at each leaf
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.random()
+        const result = computed(() => {
+          if (x > 0.5) {
+            if (flag.value) {
+              return 'yes-pos'
+            } else {
+              return 'no-pos'
+            }
+          } else {
+            switch (flag.value) {
+              case true: return 'yes-neg'
+              case false: return 'no-neg'
+            }
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: try/catch where both try and catch return
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const result = computed(() => {
+          try {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          } catch (e) {
+            return 'error'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: try/finally where finally returns (overrides try result)
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed } from 'vue'
+        const result = computed(() => {
+          try {
+            console.log('side effect')
+          } finally {
+            return 'always'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: try/catch/finally where finally returns
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed } from 'vue'
+        const result = computed(() => {
+          try {
+            console.log('side effect')
+          } catch (e) {
+            console.error(e)
+          } finally {
+            return 'done'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: switch case with if/else where both branches return
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.random()
+        const result = computed(() => {
+          switch (flag.value) {
+            case true: {
+              if (x > 0.5) { return 'pos' } else { return 'neg' }
+            }
+            case false: return 'no'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
     // TS: Nullable union — all cases including null covered
     {
       code: `
@@ -874,6 +1011,124 @@ ruleTester.run('return-in-computed-property', rule, {
         {
           message: 'Expected to return a value in computed function.',
           line: 6
+        }
+      ]
+    },
+    // TS: else-if chain without terminal else — must error
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed } from 'vue'
+        const x = Math.floor(Math.random() * 3)
+        const result = computed(() => {
+          if (x === 1) {
+            return 'one'
+          } else if (x === 2) {
+            return 'two'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 5
+        }
+      ]
+    },
+    // TS: if without else (switch inside if, no else branch) — must error
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.random()
+        const result = computed(() => {
+          if (x > 0.5) {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 6
+        }
+      ]
+    },
+    // TS: if/else where only one branch returns — must error
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const x = Math.random()
+        const result = computed(() => {
+          if (x > 0.5) {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          } else {
+            console.log('side effect')
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 6
+        }
+      ]
+    },
+    // TS: try/catch where catch doesn't return — must error
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const result = computed(() => {
+          try {
+            switch (flag.value) {
+              case true: return 'yes'
+              case false: return 'no'
+            }
+          } catch (e) {
+            console.error(e)
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 5
+        }
+      ]
+    },
+    // TS: try/finally where neither returns — must error
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed } from 'vue'
+        const result = computed(() => {
+          try {
+            console.log('side effect')
+          } finally {
+            console.log('cleanup')
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 4
         }
       ]
     },
