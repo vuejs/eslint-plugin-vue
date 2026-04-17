@@ -4,17 +4,14 @@
  * @copyright 2021 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
+import { findVariable } from '@eslint-community/eslint-utils'
 
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
-
-/**
- * @param {Identifier} identifier
- * @param {RuleContext} context
- * @returns {ASTNode|undefined}
- */
-function getVueNextTickNode(identifier, context) {
+function getVueNextTickNode(
+  identifier: Identifier,
+  context: RuleContext
+): ASTNode | undefined {
   // Instance API: this.$nextTick()
   if (
     identifier.name === '$nextTick' &&
@@ -35,7 +32,7 @@ function getVueNextTickNode(identifier, context) {
   }
 
   // Vue 3 Global API: import { nextTick as nt } from 'vue'; nt()
-  const variable = findVariable(utils.getScope(context, identifier), identifier)
+  const variable = findVariable(getScope(context, identifier), identifier)
 
   if (variable != null && variable.defs.length === 1) {
     const def = variable.defs[0]
@@ -54,11 +51,7 @@ function getVueNextTickNode(identifier, context) {
   return undefined
 }
 
-/**
- * @param {CallExpression} callExpression
- * @returns {boolean}
- */
-function isAwaitedPromise(callExpression) {
+function isAwaitedPromise(callExpression: CallExpression): boolean {
   if (callExpression.parent.type === 'AwaitExpression') {
     // cases like `await nextTick()`
     return true
@@ -108,7 +101,7 @@ function isAwaitedPromise(callExpression) {
   return false
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -129,10 +122,8 @@ module.exports = {
         'Either await the Promise or pass a callback function to `nextTick`.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     return utils.defineVueVisitor(context, {
-      /** @param {Identifier} node */
       Identifier(node) {
         const nextTickNode = getVueNextTickNode(node, context)
         if (!nextTickNode || !nextTickNode.parent) {

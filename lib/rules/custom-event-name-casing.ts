@@ -7,6 +7,7 @@ import { findVariable } from '@eslint-community/eslint-utils'
 import utils from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
+import { getScope } from '../utils/scope.ts'
 
 const ALLOWED_CASE_OPTIONS = ['kebab-case', 'camelCase']
 const DEFAULT_CASE = 'camelCase'
@@ -186,7 +187,7 @@ export default {
 
             // const emit = defineEmits()
             const variable = findVariable(
-              utils.getScope(context, emitParam),
+              getScope(context, emitParam),
               emitParam
             )
             if (!variable) {
@@ -230,7 +231,7 @@ export default {
               const emitParam = emitProperty.value
               // `setup(props, {emit})`
               const variable = findVariable(
-                utils.getScope(context, emitParam),
+                getScope(context, emitParam),
                 emitParam
               )
               if (!variable) {
@@ -242,7 +243,7 @@ export default {
             } else {
               // `setup(props, context)`
               const variable = findVariable(
-                utils.getScope(context, contextParam),
+                getScope(context, contextParam),
                 contextParam
               )
               if (!variable) {

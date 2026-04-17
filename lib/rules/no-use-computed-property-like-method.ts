@@ -2,25 +2,17 @@
  * @author tyankatsu <https://github.com/tyankatsu0105>
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import type { ComponentObjectPropertyData, GroupName } from '../utils/index.js'
+import eslintUtils from '@eslint-community/eslint-utils'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
 
-const eslintUtils = require('@eslint-community/eslint-utils')
-const utils = require('../utils')
+interface CallMember {
+  name: string
+  node: CallExpression
+}
 
-/**
- * @typedef {import('eslint').Scope.Scope} Scope
- * @typedef {import('../utils').ComponentObjectPropertyData} ComponentObjectPropertyData
- * @typedef {import('../utils').GroupName} GroupName
- */
-
-/**
- * @typedef {object} CallMember
- * @property {string} name
- * @property {CallExpression} node
- */
-
-/** @type {Set<GroupName>} */
-const GROUPS = new Set(['data', 'props', 'computed', 'methods'])
+const GROUPS = new Set<GroupName>(['data', 'props', 'computed', 'methods'])
 
 const NATIVE_NOT_FUNCTION_TYPES = new Set([
   'String',
@@ -32,25 +24,18 @@ const NATIVE_NOT_FUNCTION_TYPES = new Set([
   'Symbol'
 ])
 
-/**
- * @param {RuleContext} context
- * @param {Expression} node
- * @returns {Set<Expression>}
- */
-function resolvedExpressions(context, node) {
-  /** @type {Map<Expression, Set<Expression>>} */
-  const resolvedMap = new Map()
+function resolvedExpressions(
+  context: RuleContext,
+  node: Expression
+): Set<Expression> {
+  const resolvedMap = new Map<Expression, Set<Expression>>()
 
   return resolvedExpressionsInternal(node)
 
-  /**
-   * @param {Expression} node
-   * @returns {Set<Expression>}
-   */
-  function resolvedExpressionsInternal(node) {
+  function resolvedExpressionsInternal(node: Expression): Set<Expression> {
     let resolvedSet = resolvedMap.get(node)
     if (!resolvedSet) {
-      resolvedSet = new Set()
+      resolvedSet = new Set<Expression>()
       resolvedMap.set(node, resolvedSet)
       for (const e of extractResolvedExpressions(node)) {
         resolvedSet.add(e)
@@ -63,11 +48,8 @@ function resolvedExpressions(context, node) {
 
     return resolvedSet
   }
-  /**
-   * @param {Expression} node
-   * @returns {Iterable<Expression>}
-   */
-  function* extractResolvedExpressions(node) {
+
+  function* extractResolvedExpressions(node: Expression): Iterable<Expression> {
     switch (node.type) {
       case 'Identifier': {
         const variable = utils.findVariableByIdentifier(context, node)
@@ -108,9 +90,6 @@ function resolvedExpressions(context, node) {
 /**
  * Get type of props item.
  * Can't consider array props like: props: {propsA: [String, Number, Function]}
- * @param {RuleContext} context
- * @param {ComponentObjectPropertyData} prop
- * @return {string[] | null}
  *
  * @example
  * props: {
@@ -120,7 +99,10 @@ function resolvedExpressions(context, node) {
  *   },
  * }
  */
-function getComponentPropsTypes(context, prop) {
+function getComponentPropsTypes(
+  context: RuleContext,
+  prop: ComponentObjectPropertyData
+): string[] | null {
   const result = []
   for (const expr of resolvedExpressions(context, prop.property.value)) {
     const types = getComponentPropsTypesFromExpression(expr)
@@ -131,10 +113,7 @@ function getComponentPropsTypes(context, prop) {
   }
   return result
 
-  /**
-   * @param {Expression} expr
-   */
-  function getComponentPropsTypesFromExpression(expr) {
+  function getComponentPropsTypesFromExpression(expr: Expression) {
     let typeExprs
     /**
      * Check object props `props: { objectProps: {...} }`
@@ -159,10 +138,7 @@ function getComponentPropsTypes(context, prop) {
     return result
   }
 
-  /**
-   * @param {Expression} typeExpr
-   */
-  function getComponentPropsTypesFromTypeExpression(typeExpr) {
+  function getComponentPropsTypesFromTypeExpression(typeExpr: Expression) {
     if (typeExpr.type === 'Identifier') {
       return [typeExpr.name]
     }
@@ -190,11 +166,8 @@ function getComponentPropsTypes(context, prop) {
 
 /**
  * Check whether given expression may be a function.
- * @param {RuleContext} context
- * @param {Expression} node
- * @returns {boolean}
  */
-function maybeFunction(context, node) {
+function maybeFunction(context: RuleContext, node: Expression): boolean {
   for (const expr of resolvedExpressions(context, node)) {
     if (
       expr.type === 'ObjectExpression' ||
@@ -214,10 +187,7 @@ function maybeFunction(context, node) {
     ) {
       continue
     }
-    const evaluated = eslintUtils.getStaticValue(
-      expr,
-      utils.getScope(context, expr)
-    )
+    const evaluated = eslintUtils.getStaticValue(expr, getScope(context, expr))
     if (!evaluated) {
       // It could be a function because we don't know what it is.
       return true
@@ -230,34 +200,30 @@ function maybeFunction(context, node) {
 }
 
 class FunctionData {
-  /**
-   * @param {string} name
-   * @param {'methods' | 'computed'} kind
-   * @param {FunctionExpression | ArrowFunctionExpression} node
-   * @param {RuleContext} context
-   */
-  constructor(name, kind, node, context) {
+  context: RuleContext
+  name: string
+  kind: 'methods' | 'computed'
+  node: FunctionExpression | ArrowFunctionExpression
+  returnValues: (Expression | null)[] = []
+  cacheMaybeReturnFunction: boolean | null = null
+
+  constructor(
+    name: string,
+    kind: 'methods' | 'computed',
+    node: FunctionExpression | ArrowFunctionExpression,
+    context: RuleContext
+  ) {
     this.context = context
     this.name = name
     this.kind = kind
     this.node = node
-    /** @type {(Expression | null)[]} */
-    this.returnValues = []
-    /** @type {boolean | null} */
-    this.cacheMaybeReturnFunction = null
   }
 
-  /**
-   * @param {Expression | null} node
-   */
-  addReturnValue(node) {
+  addReturnValue(node: Expression | null) {
     this.returnValues.push(node)
   }
 
-  /**
-   * @param {ComponentStack} component
-   */
-  maybeReturnFunction(component) {
+  maybeReturnFunction(component: ComponentStack) {
     if (this.cacheMaybeReturnFunction != null) {
       return this.cacheMaybeReturnFunction
     }
@@ -273,21 +239,26 @@ class FunctionData {
 
 /** Component information class. */
 class ComponentStack {
-  /**
-   * @param {ObjectExpression} node
-   * @param {RuleContext} context
-   * @param {ComponentStack | null} upper
-   */
-  constructor(node, context, upper) {
+  node: ObjectExpression
+  context: RuleContext
+  /** Upper scope component */
+  upper: ComponentStack | null
+  maybeFunctions: Map<string, boolean>
+  functions: FunctionData[]
+  callMembers: CallMember[] = []
+  cacheMaybeFunctionExpressions = new Map<Expression, boolean>()
+
+  constructor(
+    node: ObjectExpression,
+    context: RuleContext,
+    upper: ComponentStack | null
+  ) {
     this.node = node
     this.context = context
-    /** Upper scope component */
     this.upper = upper
 
-    /** @type {Map<string, boolean>} */
-    const maybeFunctions = new Map()
-    /** @type {FunctionData[]} */
-    const functions = []
+    const maybeFunctions = new Map<string, boolean>()
+    const functions: FunctionData[] = []
 
     // Extract properties
     for (const property of utils.iterateProperties(node, GROUPS)) {
@@ -331,17 +302,12 @@ class ComponentStack {
     }
     this.maybeFunctions = maybeFunctions
     this.functions = functions
-    /** @type {CallMember[]} */
-    this.callMembers = []
-    /** @type {Map<Expression, boolean>} */
-    this.cacheMaybeFunctionExpressions = new Map()
 
-    /**
-     * @param {string} name
-     * @param {Expression} value
-     * @param {'methods' | 'computed'} kind
-     */
-    function processFunction(name, value, kind) {
+    function processFunction(
+      name: string,
+      value: Expression,
+      kind: 'methods' | 'computed'
+    ) {
       if (value.type === 'FunctionExpression') {
         functions.push(new FunctionData(name, kind, value, context))
       } else if (value.type === 'ArrowFunctionExpression') {
@@ -356,10 +322,14 @@ class ComponentStack {
 
   /**
    * Adds the given return statement to the return value of the function.
-   * @param {FunctionExpression | ArrowFunctionExpression | FunctionDeclaration} scopeFunction
-   * @param {ReturnStatement} returnNode
    */
-  addReturnStatement(scopeFunction, returnNode) {
+  addReturnStatement(
+    scopeFunction:
+      | FunctionExpression
+      | ArrowFunctionExpression
+      | FunctionDeclaration,
+    returnNode: ReturnStatement
+  ) {
     for (const data of this.functions) {
       if (data.node === scopeFunction) {
         data.addReturnValue(returnNode.argument)
@@ -374,10 +344,7 @@ class ComponentStack {
     }
   }
 
-  /**
-   * @param {CallMember} call
-   */
-  verifyCallMember(call) {
+  verifyCallMember(call: CallMember) {
     const fnData = this.functions.find(
       (data) => data.name === call.name && data.kind === 'computed'
     )
@@ -401,10 +368,8 @@ class ComponentStack {
 
   /**
    * Check whether given expression may be a function.
-   * @param {Expression} node
-   * @returns {boolean}
    */
-  maybeFunctionExpression(node) {
+  maybeFunctionExpression(node: Expression): boolean {
     const cache = this.cacheMaybeFunctionExpressions.get(node)
     if (cache != null) {
       return cache
@@ -416,10 +381,7 @@ class ComponentStack {
     this.cacheMaybeFunctionExpressions.set(node, result)
     return result
 
-    /**
-     * @this {ComponentStack}
-     */
-    function maybeFunctionExpressionWithoutCache() {
+    function maybeFunctionExpressionWithoutCache(this: ComponentStack) {
       for (const expr of resolvedExpressions(this.context, node)) {
         if (!maybeFunction(this.context, expr)) {
           continue
@@ -470,10 +432,8 @@ class ComponentStack {
 
   /**
    * Check whether given property name may be a function.
-   * @param {string} name
-   * @returns {boolean}
    */
-  maybeFunctionProperty(name) {
+  maybeFunctionProperty(name: string): boolean {
     const cache = this.maybeFunctions.get(name)
     if (cache != null) {
       return cache
@@ -485,10 +445,7 @@ class ComponentStack {
     this.maybeFunctions.set(name, result)
     return result
 
-    /**
-     * @this {ComponentStack}
-     */
-    function maybeFunctionPropertyWithoutCache() {
+    function maybeFunctionPropertyWithoutCache(this: ComponentStack) {
       const fnData = this.functions.find((data) => data.name === name)
       if (fnData && fnData.kind === 'computed') {
         return fnData.maybeReturnFunction(this)
@@ -499,7 +456,7 @@ class ComponentStack {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -513,20 +470,18 @@ module.exports = {
       unexpected: 'Use {{ likeProperty }} instead of {{ likeMethod }}.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /**
-     * @typedef {object} ScopeStack
-     * @property {ScopeStack | null} upper
-     * @property {FunctionDeclaration | FunctionExpression | ArrowFunctionExpression} scopeNode
-     */
-    /** @type {ScopeStack | null} */
-    let scopeStack = null
+  create(context: RuleContext) {
+    interface ScopeStack {
+      upper: ScopeStack | null
+      scopeNode:
+        | FunctionDeclaration
+        | FunctionExpression
+        | ArrowFunctionExpression
+    }
 
-    /** @type {ComponentStack | null} */
-    let componentStack = null
-    /** @type {ComponentStack | null} */
-    let templateComponent = null
+    let scopeStack: ScopeStack | null = null
+    let componentStack: ComponentStack | null = null
+    let templateComponent: ComponentStack | null = null
 
     return utils.compositingVisitors(
       {},
@@ -543,9 +498,6 @@ module.exports = {
             componentStack = componentStack.upper
           }
         },
-        /**
-         * @param {FunctionExpression | FunctionDeclaration | ArrowFunctionExpression} node
-         */
         ':function'(node) {
           scopeStack = {
             upper: scopeStack,
@@ -560,11 +512,7 @@ module.exports = {
         ':function:exit'() {
           scopeStack = scopeStack && scopeStack.upper
         },
-
-        /**
-         * @param {ThisExpression | Identifier} node
-         */
-        'ThisExpression, Identifier'(node) {
+        'ThisExpression, Identifier'(node: ThisExpression | Identifier) {
           if (
             !componentStack ||
             node.parent.type !== 'MemberExpression' ||
@@ -585,9 +533,6 @@ module.exports = {
         }
       }),
       utils.defineTemplateBodyVisitor(context, {
-        /**
-         * @param {VExpressionContainer} node
-         */
         VExpressionContainer(node) {
           if (!templateComponent) {
             return

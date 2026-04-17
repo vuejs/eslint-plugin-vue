@@ -4,17 +4,14 @@
  * @copyright 2020 Flo Edelmann. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { getScope } from '../utils/scope.ts'
+import { findVariable } from '@eslint-community/eslint-utils'
 
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
-
-/**
- * @param {Identifier} identifier
- * @param {RuleContext} context
- * @returns {CallExpression|undefined}
- */
-function getVueNextTickCallExpression(identifier, context) {
+function getVueNextTickCallExpression(
+  identifier: Identifier,
+  context: RuleContext
+): CallExpression | undefined {
   // Instance API: this.$nextTick()
   if (
     identifier.name === '$nextTick' &&
@@ -43,10 +40,7 @@ function getVueNextTickCallExpression(identifier, context) {
     identifier.parent.type === 'CallExpression' &&
     identifier.parent.callee === identifier
   ) {
-    const variable = findVariable(
-      utils.getScope(context, identifier),
-      identifier
-    )
+    const variable = findVariable(getScope(context, identifier), identifier)
 
     if (variable != null && variable.defs.length === 1) {
       const def = variable.defs[0]
@@ -66,11 +60,7 @@ function getVueNextTickCallExpression(identifier, context) {
   return undefined
 }
 
-/**
- * @param {CallExpression} callExpression
- * @returns {boolean}
- */
-function isAwaitedPromise(callExpression) {
+function isAwaitedPromise(callExpression: CallExpression): boolean {
   return (
     callExpression.parent.type === 'AwaitExpression' ||
     (callExpression.parent.type === 'MemberExpression' &&
@@ -79,7 +69,7 @@ function isAwaitedPromise(callExpression) {
   )
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -96,13 +86,10 @@ module.exports = {
         'Pass a callback function to `nextTick` instead of using the returned Promise.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    const preferredStyle =
-      /** @type {string|undefined} */ (context.options[0]) || 'promise'
+  create(context: RuleContext) {
+    const preferredStyle: string | undefined = context.options[0] || 'promise'
 
     return utils.defineVueVisitor(context, {
-      /** @param {Identifier} node */
       Identifier(node) {
         const callExpression = getVueNextTickCallExpression(node, context)
         if (!callExpression) {

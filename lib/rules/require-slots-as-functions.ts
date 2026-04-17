@@ -2,12 +2,11 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { findVariable } from '@eslint-community/eslint-utils'
+import { getScope } from '../utils/scope.ts'
 
-const utils = require('../utils')
-const { findVariable } = require('@eslint-community/eslint-utils')
-
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
@@ -21,14 +20,14 @@ module.exports = {
       unexpected: 'Property in `$slots` should be used as function.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
+  create(context: RuleContext) {
     /**
      * Verify the given node
-     * @param {MemberExpression | Identifier | ChainExpression} node The node to verify
-     * @param {Expression} reportNode The node to report
      */
-    function verify(node, reportNode) {
+    function verify(
+      node: MemberExpression | Identifier | ChainExpression,
+      reportNode: Expression
+    ) {
       const parent = node.parent
 
       if (
@@ -74,11 +73,9 @@ module.exports = {
     }
     /**
      * Verify the references of the given node.
-     * @param {Identifier} node The node to verify
-     * @param {Expression} reportNode The node to report
      */
-    function verifyReferences(node, reportNode) {
-      const variable = findVariable(utils.getScope(context, node), node)
+    function verifyReferences(node: Identifier, reportNode: Expression) {
+      const variable = findVariable(getScope(context, node), node)
       if (!variable) {
         return
       }
@@ -86,14 +83,12 @@ module.exports = {
         if (!reference.isRead()) {
           continue
         }
-        /** @type {Identifier} */
         const id = reference.identifier
         verify(id, reportNode)
       }
     }
 
     return utils.defineVueVisitor(context, {
-      /** @param {MemberExpression} node */
       MemberExpression(node) {
         const object = utils.skipChainExpression(node.object)
         if (object.type !== 'MemberExpression') {
