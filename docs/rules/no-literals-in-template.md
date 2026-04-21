@@ -80,7 +80,7 @@ If the literal references a variable from a `v-for` directive or a scoped slot, 
 }
 ```
 
-- `ignores` (`string[]`) ... The attribute names to ignore. Sets the attribute name to allow. You can set the regexp by writing it like `"/^slot-(?:class|style)$/"`.
+- `ignores` (`string[]`) ... Attribute names to skip for this rule, meaning those attributes are allowed to contain literals. Entries can be exact attribute names or regex strings written like `"/^slot-(?:class|style)$/"`.
 
 ### `ignores: ['slot-class', 'slot-style']`
 
