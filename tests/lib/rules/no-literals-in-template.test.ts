@@ -156,6 +156,26 @@ tester.run('no-literals-in-template', rule, {
             </template>
           </Child>
         </template>`
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :arr="[]"></div></template>',
+      options: [
+        {
+          ignored: ['arr']
+        }
+      ],
+      name: 'Skip ignored attributes'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :test-arr="[]"></div></template>',
+      options: [
+        {
+          ignored: [/test-.*/]
+        }
+      ],
+      name: 'Regex ignored description'
     }
   ],
   invalid: [
