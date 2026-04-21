@@ -8,7 +8,7 @@
 
 - Added new `ignores` option to [`vue/no-literals-in-template`](https://eslint.vuejs.org/rules/no-literals-in-template.html) rule ([#3072](https://github.com/vuejs/eslint-plugin-vue/pull/3072))
 
-- **REMOVE COMMIT HASH BEFORE RELEASE!** Added support for `:single-line`/`:multi-line` pseudo-classes in [`vue/padding-line-between-tags`](https://eslint.vuejs.org/rules/padding-line-between-tags.html) ([#3025](https://github.com/vuejs/eslint-plugin-vue/pull/3025)) ([`3008984`](https://github.com/vuejs/eslint-plugin-vue/commit/30089842118ef3a97c5947481eb63d26f29b7866))
+- Added support for `:single-line`/`:multi-line` pseudo-classes in [`vue/padding-line-between-tags`](https://eslint.vuejs.org/rules/padding-line-between-tags.html) ([#3025](https://github.com/vuejs/eslint-plugin-vue/pull/3025))
 
 - Added new [`vue/prefer-v-model`](https://eslint.vuejs.org/rules/prefer-v-model.html) rule ([#3062](https://github.com/vuejs/eslint-plugin-vue/pull/3062))
 
