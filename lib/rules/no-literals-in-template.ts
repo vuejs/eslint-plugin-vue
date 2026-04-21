@@ -5,12 +5,17 @@
 import utils from '../utils/index.js'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const EXPRESSION_TYPES = {
+const EXPRESSION_TYPES: Partial<
+  Record<
+    NonNullable<VExpressionContainer['expression']>['type'],
+    'object' | 'array' | 'function' | 'arrow function'
+  >
+> = {
   ObjectExpression: 'object',
   ArrayExpression: 'array',
   FunctionExpression: 'function',
   ArrowFunctionExpression: 'arrow function'
-} as const
+}
 
 export default {
   meta: {
@@ -49,12 +54,7 @@ export default {
      * Checks whether the given node refers to a variable of the element.
      */
     function hasReferenceUpperElementVariable(
-      node:
-        | Expression
-        | VForExpression
-        | VOnExpression
-        | VSlotScopeExpression
-        | VFilterSequenceExpression
+      node: NonNullable<VExpressionContainer['expression']>
     ) {
       for (const element of upperElements) {
         for (const variable of element.variables) {
@@ -91,8 +91,7 @@ export default {
           return
         }
 
-        const type =
-          EXPRESSION_TYPES[expression.type as keyof typeof EXPRESSION_TYPES]
+        const type = EXPRESSION_TYPES[expression.type]
         if (type && !hasReferenceUpperElementVariable(expression)) {
           context.report({
             node: expression,
