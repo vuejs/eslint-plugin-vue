@@ -82,7 +82,7 @@ If the literal references a variable from a `v-for` directive or a scoped slot, 
 
 - `ignores` (`string[]`) ... The attribute names to ignore. Sets the attribute name to allow. You can set the regexp by writing it like `"/^slot-(?:class|style)$/"`.
 
-### `ignores`
+### `ignores: ['slot-class', 'slot-style']`
 
 <eslint-code-block :rules="{'vue/no-literals-in-template': ['error', { ignores: ['slot-class', 'slot-style'] }]}">
 
