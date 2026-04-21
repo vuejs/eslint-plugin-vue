@@ -3,13 +3,12 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-single-event-payload
 description: enforce passing a single argument to custom event emissions
+since: v10.9.0
 ---
 
 # vue/prefer-single-event-payload
 
 > enforce passing a single argument to custom event emissions
-
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 
 ## :book: Rule Details
 
@@ -91,6 +90,10 @@ Nothing.
 ## :books: Further Reading
 
 - [Vue.js - Component Events](https://vuejs.org/guide/components/events.html)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.9.0
 
 ## :mag: Implementation
 

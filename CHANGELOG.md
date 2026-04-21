@@ -1,5 +1,33 @@
 # eslint-plugin-vue
 
+## 10.9.0
+
+### Minor Changes
+
+- Added `"inject"` to `groups` option in [`vue/no-unused-properties`](https://eslint.vuejs.org/rules/no-unused-properties.html) rule ([#3052](https://github.com/vuejs/eslint-plugin-vue/pull/3052))
+
+- Added new `ignores` option to [`vue/no-literals-in-template`](https://eslint.vuejs.org/rules/no-literals-in-template.html) rule ([#3072](https://github.com/vuejs/eslint-plugin-vue/pull/3072))
+
+- **REMOVE COMMIT HASH BEFORE RELEASE!** Added support for `:single-line`/`:multi-line` pseudo-classes in [`vue/padding-line-between-tags`](https://eslint.vuejs.org/rules/padding-line-between-tags.html) ([#3025](https://github.com/vuejs/eslint-plugin-vue/pull/3025)) ([`3008984`](https://github.com/vuejs/eslint-plugin-vue/commit/30089842118ef3a97c5947481eb63d26f29b7866))
+
+- Added new [`vue/prefer-v-model`](https://eslint.vuejs.org/rules/prefer-v-model.html) rule ([#3062](https://github.com/vuejs/eslint-plugin-vue/pull/3062))
+
+- Added new [`vue/prefer-single-event-payload`](https://eslint.vuejs.org/rules/prefer-single-event-payload.html) rule ([#3058](https://github.com/vuejs/eslint-plugin-vue/pull/3058))
+
+### Patch Changes
+
+- Added error end positions for [`vue/no-irregular-whitespace`](https://eslint.vuejs.org/rules/no-irregular-whitespace.html) ([#3065](https://github.com/vuejs/eslint-plugin-vue/pull/3065))
+
+- Updated resources: add `Attrs` and `AllowedAttrs` type definitions ([#3059](https://github.com/vuejs/eslint-plugin-vue/pull/3059))
+
+- Improved error positions in [`vue/max-len`](https://eslint.vuejs.org/rules/max-len.html) ([#3066](https://github.com/vuejs/eslint-plugin-vue/pull/3066))
+
+- Improve performance in [`vue/no-child-content`](https://eslint.vuejs.org/rules/no-child-content.html) rule ([#3068](https://github.com/vuejs/eslint-plugin-vue/pull/3068))
+
+- Migrate configs to TypeScript ([#3002](https://github.com/vuejs/eslint-plugin-vue/pull/3002))
+
+- Updated resources: `geolocation` HTML element and `ClassValue` and `InputAutoCompleteAttribute` Vue 3 export ([#3040](https://github.com/vuejs/eslint-plugin-vue/pull/3040))
+
 ## 10.8.0
 
 ### Minor Changes

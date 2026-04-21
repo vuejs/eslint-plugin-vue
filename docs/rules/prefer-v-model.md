@@ -3,13 +3,13 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/prefer-v-model
 description: enforce using `v-model` instead of `:prop`/`@update:prop` pair
+since: v10.9.0
 ---
 
 # vue/prefer-v-model
 
 > enforce using `v-model` instead of `:prop`/`@update:prop` pair
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -46,6 +46,10 @@ Nothing.
 
 - [Vue.js - Component v-model](https://vuejs.org/guide/components/v-model.html)
 - [Vue.js - v-model arguments](https://vuejs.org/guide/components/v-model.html#v-model-arguments)
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.9.0
 
 ## :mag: Implementation
 
