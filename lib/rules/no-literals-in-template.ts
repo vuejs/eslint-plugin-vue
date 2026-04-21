@@ -2,21 +2,17 @@
  * @author rzzf
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import utils from '../utils/index.js'
+import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
-const utils = require('../utils')
-
-/**
- * @type {Record<string, 'object' | 'array' | 'function' | 'arrow function' | undefined>}
- */
 const EXPRESSION_TYPES = {
   ObjectExpression: 'object',
   ArrayExpression: 'array',
   FunctionExpression: 'function',
   ArrowFunctionExpression: 'arrow function'
-}
+} as const
 
-module.exports = {
+export default {
   meta: {
     type: 'suggestion',
     docs: {
@@ -25,21 +21,41 @@ module.exports = {
       url: 'https://eslint.vuejs.org/rules/no-literals-in-template.html'
     },
     fixable: null,
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          ignores: {
+            type: 'array',
+            items: { type: 'string' },
+            uniqueItems: true,
+            additionalItems: false
+          }
+        },
+        additionalProperties: false
+      }
+    ],
     messages: {
       unexpected: 'Unexpected {{type}} literal in template.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Set<VElement>} */
-    const upperElements = new Set()
+  create(context: RuleContext) {
+    const options = context.options[0] || {}
+    const isIgnored = toRegExpGroupMatcher(options.ignores)
+
+    const upperElements = new Set<VElement>()
 
     /**
      * Checks whether the given node refers to a variable of the element.
-     * @param {Expression | VForExpression | VOnExpression | VSlotScopeExpression | VFilterSequenceExpression} node
      */
-    function hasReferenceUpperElementVariable(node) {
+    function hasReferenceUpperElementVariable(
+      node:
+        | Expression
+        | VForExpression
+        | VOnExpression
+        | VSlotScopeExpression
+        | VFilterSequenceExpression
+    ) {
       for (const element of upperElements) {
         for (const variable of element.variables) {
           for (const reference of variable.references) {
@@ -54,30 +70,29 @@ module.exports = {
     }
 
     return utils.defineTemplateBodyVisitor(context, {
-      /** @param {VElement} node */
-      VElement(node) {
+      VElement(node: VElement) {
         upperElements.add(node)
       },
-      /** @param {VElement} node */
-      'VElement:exit'(node) {
+      'VElement:exit'(node: VElement) {
         upperElements.delete(node)
       },
-      /**
-       * @param {VDirective} node
-       */
-      "VAttribute[directive=true][key.name.name='bind']"(node) {
+      "VAttribute[directive=true][key.name.name='bind']"(node: VDirective) {
         const expression = node.value?.expression
+        const argumentName =
+          node.key.argument?.type === 'VIdentifier'
+            ? node.key.argument.name
+            : null
         if (
           !expression ||
-          (node.key.argument &&
-            node.key.argument.type === 'VIdentifier' &&
-            (node.key.argument.name === 'class' ||
-              node.key.argument.name === 'style'))
+          argumentName === 'class' ||
+          argumentName === 'style' ||
+          (argumentName != null && isIgnored(argumentName))
         ) {
           return
         }
 
-        const type = EXPRESSION_TYPES[expression.type]
+        const type =
+          EXPRESSION_TYPES[expression.type as keyof typeof EXPRESSION_TYPES]
         if (type && !hasReferenceUpperElementVariable(expression)) {
           context.report({
             node: expression,
