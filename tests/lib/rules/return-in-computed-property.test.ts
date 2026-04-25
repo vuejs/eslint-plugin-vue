@@ -572,6 +572,142 @@ ruleTester.run('return-in-computed-property', rule, {
         })
         </script>`,
       ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Three-level nested exhaustive switches
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const a = ref<Status>('active')
+        const b = ref<boolean>(true)
+        const result = computed(() => {
+          switch (a.value) {
+            case 'active':
+              switch (b.value) {
+                case true: return 'a-true'
+                case false:
+                  switch (b.value) {
+                    case true: return 'never'
+                    case false: return 'a-false-false'
+                  }
+              }
+            case 'inactive': return 'i'
+            case 'pending': return 'p'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Discriminant uses optional chaining
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { AppEvent } from './test01'
+        const event = ref<AppEvent | undefined>(undefined)
+        const result = computed(() => {
+          switch (event.value?.type) {
+            case 'click': return 'clicked'
+            case 'hover': return 'hovered'
+            case 'key': return 'pressed'
+            case undefined: return 'none'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Discriminant uses type assertion
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const x = ref<unknown>('a')
+        const result = computed(() => {
+          switch (x.value as 'a' | 'b') {
+            case 'a': return 1
+            case 'b': return 2
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: All cases throw (no returns) — switch terminates via throws
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const status = ref<Status>('active')
+        const result = computed(() => {
+          switch (status.value) {
+            case 'active': throw new Error('a')
+            case 'inactive': throw new Error('i')
+            case 'pending': throw new Error('p')
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Switch inside try block, where catch returns
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const status = ref<Status>('active')
+        const result = computed(() => {
+          try {
+            switch (status.value) {
+              case 'active': return 'a'
+              case 'inactive': return 'i'
+              case 'pending': return 'p'
+            }
+          } catch (e) {
+            return 'err'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: Switch inside finally block
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const status = ref<Status>('active')
+        const result = computed(() => {
+          try {
+            doSomething()
+          } finally {
+            switch (status.value) {
+              case 'active': return 'a'
+              case 'inactive': return 'i'
+              case 'pending': return 'p'
+            }
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    // TS: async computed with await before exhaustive switch
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const status = ref<Status>('active')
+        const result = computed(async () => {
+          await Promise.resolve()
+          switch (status.value) {
+            case 'active': return 'a'
+            case 'inactive': return 'i'
+            case 'pending': return 'p'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
