@@ -632,23 +632,6 @@ ruleTester.run('return-in-computed-property', rule, {
         </script>`,
       ...getTypeScriptFixtureTestOptions()
     },
-    // TS: All cases throw (no returns) — switch terminates via throws
-    {
-      code: `
-        <script setup lang="ts">
-        import { computed, ref } from 'vue'
-        import { Status } from './test01'
-        const status = ref<Status>('active')
-        const result = computed(() => {
-          switch (status.value) {
-            case 'active': throw new Error('a')
-            case 'inactive': throw new Error('i')
-            case 'pending': throw new Error('p')
-          }
-        })
-        </script>`,
-      ...getTypeScriptFixtureTestOptions()
-    },
     // TS: Switch inside try block, where catch returns
     {
       code: `
@@ -1350,6 +1333,63 @@ ruleTester.run('return-in-computed-property', rule, {
         {
           message: 'Expected to return a value in computed function.',
           line: 6
+        }
+      ]
+    },
+    // TS: Exhaustive switch where every case throws — function never returns
+    // a value. The rule correctly flags this since the function has no
+    // ReturnStatement and `treatUndefinedAsUnspecified` is true. Add a return
+    // (e.g. `return undefined as never`) or use a `: never` typed wrapper if
+    // you want to opt out.
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        const status = ref<Status>('active')
+        const result = computed(() => {
+          switch (status.value) {
+            case 'active': throw new Error('a')
+            case 'inactive': throw new Error('i')
+            case 'pending': throw new Error('p')
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 6
+        }
+      ]
+    },
+    // KNOWN LIMITATION: ESLint has no type information, so it cannot tell
+    // that a function with return type `never` (e.g. an assertion or panic
+    // helper) never returns. Our rule treats the call as a normal statement,
+    // so a case that ends with such a call is considered to fall through to
+    // post-switch. Workaround: use `throw` directly, or add `return undefined
+    // as never` after the call. typescript-eslint's
+    // `switch-exhaustiveness-check` has the same gap.
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { Status } from './test01'
+        function panic(): never { throw new Error() }
+        const status = ref<Status>('active')
+        const result = computed(() => {
+          switch (status.value) {
+            case 'active': return 'a'
+            case 'inactive': return 'i'
+            case 'pending': panic()
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 7
         }
       ]
     },
