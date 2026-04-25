@@ -233,6 +233,25 @@ ruleTester.run('return-in-computed-property', rule, {
         </script>`,
       ...getTypeScriptFixtureTestOptions()
     },
+    // TS: Case body terminates via infinite loop with return inside
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        const flag = ref<boolean>(true)
+        const result = computed(() => {
+          switch (flag.value) {
+            case true:
+              while (true) {
+                return 'yes'
+              }
+            case false:
+              return 'no'
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions()
+    },
     // TS: else-if chain with terminal else — all branches return
     {
       code: `
