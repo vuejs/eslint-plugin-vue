@@ -79,6 +79,21 @@ tester.run('no-literals-in-template', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><MyComponent :slot-class="[{ active: isActive }]" /></template>',
+      options: [{ ignores: ['slot-class'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent v-bind:slot-style="{ color: themeColor }" /></template>',
+      options: [{ ignores: ['slot-style'] }]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :slot-class="[{ active: isActive }]" /></template>',
+      options: [{ ignores: ['/^slot-(?:class|style)$/'] }]
+    },
+    {
+      filename: 'test.vue',
       code: `
         <template>
           <template v-for="i in arr">
@@ -195,6 +210,34 @@ tester.run('no-literals-in-template', rule, {
           column: 22,
           endLine: 1,
           endColumn: 24
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :slot-class="[{ active: isActive }]" /></template>',
+      options: [{ ignores: ['slot-style'] }],
+      errors: [
+        {
+          message: 'Unexpected array literal in template.',
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 59
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><MyComponent :wrapper-class="[{ active: isActive }]" /></template>',
+      options: [{ ignores: ['/^slot-(?:class|style)$/'] }],
+      errors: [
+        {
+          message: 'Unexpected array literal in template.',
+          line: 1,
+          column: 40,
+          endLine: 1,
+          endColumn: 62
         }
       ]
     },

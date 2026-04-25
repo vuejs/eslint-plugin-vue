@@ -72,7 +72,34 @@ If the literal references a variable from a `v-for` directive or a scoped slot, 
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-literals-in-template": ["error", {
+    "ignores": []
+  }]
+}
+```
+
+- `ignores` (`string[]`) ... Attribute names to skip for this rule, meaning those attributes are allowed to contain literals. Entries can be exact attribute names or regex strings written like `"/^slot-(?:class|style)$/"`.
+
+### `ignores: ['slot-class', 'slot-style']`
+
+<eslint-code-block :rules="{'vue/no-literals-in-template': ['error', { ignores: ['slot-class', 'slot-style'] }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyComponent
+    :slot-class="[{ active: isActive }]"
+    :slot-style="{ color: themeColor }"
+  />
+
+  <!-- ✗ BAD -->
+  <MyComponent :wrapper-class="[{ active: isActive }]" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
@@ -84,5 +111,5 @@ This rule was introduced in eslint-plugin-vue v10.7.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-literals-in-template.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-literals-in-template.ts)
 - [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-literals-in-template.test.ts)
