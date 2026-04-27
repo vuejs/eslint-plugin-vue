@@ -322,6 +322,96 @@ ruleTester.run('require-valid-default-prop', rule, {
       </script>
       `,
       ...getTypeScriptFixtureTestOptions()
+    },
+    // defineModel — no default (nothing to check)
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, required: true })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    // defineModel — correct runtime type match
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean, default: false })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel('count', { type: Number, default: 0 })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, default: 'hello' })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Array, default: () => [] })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Object, default: () => ({}) })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser }
+    },
+    // defineModel — TypeScript syntax (valid)
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ default: 'hello' })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<boolean>({ default: false })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
+    },
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ required: true })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions()
     }
   ],
 
@@ -1601,6 +1691,105 @@ ruleTester.run('require-valid-default-prop', rule, {
         }
       ],
       ...getTypeScriptFixtureTestOptions()
+    },
+    // defineModel — wrong type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Boolean, default: 'hello' })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a boolean.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel('count', { type: Number, default: false })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'count' prop must be a number.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — Array/Object must use factory
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Array, default: [] })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a function.",
+          line: 3
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: Object, default: {} })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a function.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — factory returns wrong type
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup>
+        defineModel({ type: String, default: () => 123 })
+      </script>
+      `,
+      languageOptions: { parser: vueEslintParser },
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a string.",
+          line: 3
+        }
+      ]
+    },
+    // defineModel — TypeScript syntax (invalid)
+    {
+      code: `
+      <script setup lang="ts">
+        defineModel<string>({ default: 123 })
+      </script>
+      `,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message:
+            "Type of the default value for 'modelValue' prop must be a string.",
+          line: 3
+        }
+      ]
     }
   ]
 })

@@ -10,6 +10,7 @@ import type {
 } from '../utils/index.js'
 import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
+import tsTypes from '../utils/ts-utils/ts-types.js'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -109,6 +110,10 @@ export default {
       PropDefaultFunctionContext[]
     >()
     const scriptSetupPropsContexts: {
+      node: CallExpression
+      props: PropDefaultFunctionContext[]
+    }[] = []
+    const defineModelPropsContexts: {
       node: CallExpression
       props: PropDefaultFunctionContext[]
     }[] = []
@@ -445,14 +450,24 @@ export default {
             | FunctionDeclaration
             | ArrowFunctionExpression
         ) {
-          const data = scriptSetupPropsContexts.at(-1)
-          if (!data || !scopeStack) {
+          if (!scopeStack) {
             return
           }
 
-          for (const { default: defType } of data.props) {
-            if (node.body === defType.functionBody) {
-              scopeStack.returnTypes = defType.returnTypes
+          const propsData = scriptSetupPropsContexts.at(-1)
+          if (propsData) {
+            for (const { default: defType } of propsData.props) {
+              if (node.body === defType.functionBody) {
+                scopeStack.returnTypes = defType.returnTypes
+              }
+            }
+          }
+          const modelData = defineModelPropsContexts.at(-1)
+          if (modelData) {
+            for (const { default: defType } of modelData.props) {
+              if (node.body === defType.functionBody) {
+                scopeStack.returnTypes = defType.returnTypes
+              }
             }
           }
         },
@@ -469,6 +484,72 @@ export default {
             for (const returnType of defType.returnTypes) {
               if (typeNames.has(returnType.type)) continue
 
+              report(returnType.node, prop, typeNames)
+            }
+          }
+        },
+        onDefineModelEnter(node, model) {
+          let syntheticProp:
+            | ComponentObjectProp
+            | ComponentInferTypeProp
+            | null = null
+          let defaultFromOptions: Property | null = null
+
+          if (model.typeNode) {
+            syntheticProp = {
+              type: 'infer-type',
+              propName: model.name.modelName,
+              node: model.typeNode,
+              required: false,
+              types: tsTypes.inferRuntimeTypeFromTypeNode(
+                context,
+                model.typeNode
+              )
+            }
+            if (model.options && model.options.type === 'ObjectExpression') {
+              defaultFromOptions = getPropertyNode(model.options, 'default')
+            }
+          } else if (
+            model.options &&
+            model.options.type === 'ObjectExpression'
+          ) {
+            syntheticProp = {
+              type: 'object',
+              propName: model.name.modelName,
+              key: model.options,
+              value: model.options,
+              // `node` is only accessed in report() when propName is null,
+              // which never occurs here since propName is always modelName.
+              node: node as any
+            }
+          }
+
+          if (!syntheticProp) {
+            return
+          }
+
+          const propContexts = processPropDefs([syntheticProp], function* () {
+            if (defaultFromOptions) {
+              yield {
+                src: 'defaultProperty',
+                expression: defaultFromOptions.value
+              }
+            }
+          })
+          defineModelPropsContexts.push({ node, props: propContexts })
+        },
+        onDefineModelExit() {
+          const data = defineModelPropsContexts.pop()
+          if (!data) {
+            return
+          }
+          for (const {
+            prop,
+            types: typeNames,
+            default: defType
+          } of data.props) {
+            for (const returnType of defType.returnTypes) {
+              if (typeNames.has(returnType.type)) continue
               report(returnType.node, prop, typeNames)
             }
           }
