@@ -16,7 +16,7 @@ yarn add -D eslint eslint-plugin-vue vue-eslint-parser globals
 
 ::: tip Requirements
 
-- ESLint: `^8.57.0 || ^9.0.0`
+- ESLint: `^8.57.0 || ^9.0.0 || ^10.0.0`
 - Node.js: `^18.18.0 || ^20.9.0 || >=21.1.0`
 
 :::
