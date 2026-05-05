@@ -52,6 +52,53 @@ ruleTester.run('one-component-per-file', rule, {
         Vue.mixin({})
         Vue.component('name', {})
       `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        import { createApp } from 'vue'
+        createApp({})
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        import { component } from 'other.js'
+        component({})
+        component({})
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        import { createApp } from 'other.js'
+        createApp({})
+        createApp({})
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        import { defineComponent } from 'other.js'
+        defineComponent({})
+        defineComponent({})
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        function createApp() {}
+        createApp({})
+        createApp({})
+      `
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { createApp } = require('other.js')
+        createApp({})
+        createApp({})
+      `
     }
   ],
   invalid: [
@@ -128,6 +175,137 @@ ruleTester.run('one-component-per-file', rule, {
           endLine: 3,
           endColumn: 26
         }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { component } from 'vue'
+        component('', {})
+        component('', {})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const { component } = Vue
+        component('', {})
+        component('', {})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { component } from '@vue/composition-api'
+        component('', {})
+        component('', {})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { createApp } from 'vue'
+        createApp({})
+        createApp({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { createApp } from '@vue/composition-api'
+        createApp({})
+        createApp({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const { createApp } = Vue
+        createApp({})
+        createApp({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.js',
+      code: `
+        const createApp = Vue.createApp
+        createApp({})
+        createApp({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { defineComponent } from 'vue'
+        defineComponent({})
+        defineComponent({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        import { defineComponent } from '@vue/composition-api'
+        defineComponent('', {})
+        defineComponent('', {})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        defineComponent({})
+        defineComponent({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        const { defineComponent } = require('vue')
+        defineComponent({})
+        defineComponent({})
+      `,
+      errors: [
+        'There is more than one component in this file.',
+        'There is more than one component in this file.'
       ]
     }
   ]
