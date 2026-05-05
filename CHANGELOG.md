@@ -1,5 +1,11 @@
 # eslint-plugin-vue
 
+## 10.9.1
+
+### Patch Changes
+
+- Updated peer dependency version for [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) to fix parsing errors in Vue SFCs ([#3075](https://github.com/vuejs/eslint-plugin-vue/pull/3075))
+
 ## 10.9.0
 
 ### Minor Changes
