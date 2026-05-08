@@ -94,7 +94,7 @@ export default {
      * Check whether the given event name is valid.
      */
     function isValidEventName(name: string): boolean {
-      return caseChecker(name) || name.startsWith('update:')
+      return name.split(':').every(caseChecker)
     }
 
     function verify(nameWithLoc: NameWithLoc) {
