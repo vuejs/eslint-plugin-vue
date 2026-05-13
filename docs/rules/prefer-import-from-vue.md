@@ -30,7 +30,7 @@ Imports from the following modules are almost always wrong. You should import fr
 - `@vue/reactivity`
 - `@vue/shared`
 
-For `@vue/reactivity` and `@vue/shared`, only named imports/exports that `vue` actually re-exports are reported.
+Only named imports/exports of bindings that `vue` actually re-exports are reported.
 
 <eslint-code-block fix :rules="{'vue/prefer-import-from-vue': ['error']}" filename="example.js" language="javascript">
 

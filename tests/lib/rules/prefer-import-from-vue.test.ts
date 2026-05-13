@@ -28,7 +28,9 @@ tester.run('prefer-import-from-vue', rule, {
     // https://github.com/vuejs/eslint-plugin-vue/issues/2354
     `import { unknown } from '@vue/reactivity'`,
     `import { unknown } from '@vue/shared'`,
-    `export { unknown } from '@vue/reactivity'`
+    `import { unknown } from '@vue/runtime-dom'`,
+    `export { unknown } from '@vue/reactivity'`,
+    `export { unknown } from '@vue/runtime-dom'`
   ],
   invalid: [
     {
@@ -80,19 +82,6 @@ tester.run('prefer-import-from-vue', rule, {
           column: 32,
           endLine: 1,
           endColumn: 45
-        }
-      ]
-    },
-    {
-      code: `import { unknown } from '@vue/runtime-dom'`,
-      output: `import { unknown } from 'vue'`,
-      errors: [
-        {
-          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
-          line: 1,
-          column: 25,
-          endLine: 1,
-          endColumn: 43
         }
       ]
     },
@@ -171,19 +160,6 @@ tester.run('prefer-import-from-vue', rule, {
           column: 26,
           endLine: 1,
           endColumn: 44
-        }
-      ]
-    },
-    {
-      code: `export { unknown } from '@vue/runtime-dom'`,
-      output: null,
-      errors: [
-        {
-          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
-          line: 1,
-          column: 25,
-          endLine: 1,
-          endColumn: 43
         }
       ]
     },
