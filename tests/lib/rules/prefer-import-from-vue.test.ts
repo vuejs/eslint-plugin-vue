@@ -100,7 +100,7 @@ tester.run('prefer-import-from-vue', rule, {
     },
     {
       code: `import * as Foo from '@vue/runtime-dom'`,
-      output: `import * as Foo from 'vue'`,
+      output: null,
       errors: [
         {
           message: "Import from 'vue' instead of '@vue/runtime-dom'.",
@@ -178,7 +178,7 @@ tester.run('prefer-import-from-vue', rule, {
     },
     {
       code: `import unknown from '@vue/runtime-dom'`,
-      output: `import unknown from 'vue'`,
+      output: null,
       errors: [
         {
           message: "Import from 'vue' instead of '@vue/runtime-dom'.",
