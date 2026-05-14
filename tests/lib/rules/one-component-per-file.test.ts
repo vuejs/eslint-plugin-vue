@@ -185,8 +185,20 @@ ruleTester.run('one-component-per-file', rule, {
         component('', {})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 25
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -197,8 +209,20 @@ ruleTester.run('one-component-per-file', rule, {
         component('', {})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 25
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -209,8 +233,20 @@ ruleTester.run('one-component-per-file', rule, {
         component('', {})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 25
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 25
+        }
       ]
     },
     {
@@ -221,8 +257,20 @@ ruleTester.run('one-component-per-file', rule, {
         createApp({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -233,8 +281,20 @@ ruleTester.run('one-component-per-file', rule, {
         createApp({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -245,8 +305,20 @@ ruleTester.run('one-component-per-file', rule, {
         createApp({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -257,8 +329,20 @@ ruleTester.run('one-component-per-file', rule, {
         createApp({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 21
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 21
+        }
       ]
     },
     {
@@ -269,8 +353,20 @@ ruleTester.run('one-component-per-file', rule, {
         defineComponent({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -281,8 +377,20 @@ ruleTester.run('one-component-per-file', rule, {
         defineComponent('', {})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 31
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 31
+        }
       ]
     },
     {
@@ -292,8 +400,20 @@ ruleTester.run('one-component-per-file', rule, {
         defineComponent({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 27
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 27
+        }
       ]
     },
     {
@@ -304,8 +424,20 @@ ruleTester.run('one-component-per-file', rule, {
         defineComponent({})
       `,
       errors: [
-        'There is more than one component in this file.',
-        'There is more than one component in this file.'
+        {
+          message: 'There is more than one component in this file.',
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 27
+        },
+        {
+          message: 'There is more than one component in this file.',
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 27
+        }
       ]
     }
   ]
