@@ -185,6 +185,23 @@ ruleTester.run('use-v-on-exact', rule, {
     },
     {
       code: `<template>
+        <input
+          @keydown.ctrl.enter.exact="save"
+          @keydown.stop="foo"
+        />
+      </template>`,
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
+        }
+      ]
+    },
+    {
+      code: `<template>
         <button
           @click.exact="foo"
           @click.ctrl="bar"
