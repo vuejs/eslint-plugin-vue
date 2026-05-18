@@ -99,6 +99,14 @@ ruleTester.run('use-v-on-exact', rule, {
     `,
     `
       <template>
+        <input
+          @keydown.ctrl.enter.exact="save"
+          @keydown.stop
+        />
+      </template>
+    `,
+    `
+      <template>
         <input-component
           @keydown.enter.native="foo"
           @keydown.shift.tab.native="bar"/>
@@ -155,6 +163,23 @@ ruleTester.run('use-v-on-exact', rule, {
           column: 11,
           endLine: 3,
           endColumn: 25
+        }
+      ]
+    },
+    {
+      code: `<template>
+        <input
+          @keydown.prevent="foo"
+          @keydown.ctrl="bar"
+        />
+      </template>`,
+      errors: [
+        {
+          message: "Consider to use '.exact' modifier.",
+          line: 3,
+          column: 11,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
