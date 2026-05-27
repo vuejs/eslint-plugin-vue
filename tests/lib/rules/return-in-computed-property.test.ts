@@ -1336,6 +1336,29 @@ ruleTester.run('return-in-computed-property', rule, {
         }
       ]
     },
+    // TS: Union with a non-literal (object) member - not exhaustive because an
+    // object value matches no case clause and falls through.
+    {
+      code: `
+        <script setup lang="ts">
+        import { computed, ref } from 'vue'
+        import { LiteralsWithObject } from './test01'
+        const val = ref<LiteralsWithObject>('a')
+        const result = computed(() => {
+          switch (val.value) {
+            case 'a': return 1
+            case 'b': return 2
+          }
+        })
+        </script>`,
+      ...getTypeScriptFixtureTestOptions(),
+      errors: [
+        {
+          message: 'Expected to return a value in computed function.',
+          line: 6
+        }
+      ]
+    },
     // TS: Exhaustive switch where every case throws — function never returns
     // a value. The rule correctly flags this since the function has no
     // ReturnStatement and `treatUndefinedAsUnspecified` is true. Add a return

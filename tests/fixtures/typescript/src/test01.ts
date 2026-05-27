@@ -50,6 +50,7 @@ type Brand<T, B> = T & { __brand: B }
 export type BrandedStatus = Brand<'active', 'status'> | Brand<'inactive', 'status'>
 export type BigIntUnion = 1n | 2n | 3n
 export type MixedLiterals = 0 | 1 | 'two' | true
+export type LiteralsWithObject = 'a' | 'b' | { x: string }
 
 export type ClickEvent = { type: 'click'; x: number; y: number }
 export type HoverEvent = { type: 'hover'; target: string }
