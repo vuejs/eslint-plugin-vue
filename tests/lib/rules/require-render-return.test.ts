@@ -125,6 +125,20 @@ ruleTester.run('require-render-return', rule, {
         }
       }`,
       languageOptions
+    },
+    // Switch with all cases returning AND a default
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          switch (this.type) {
+            case 'a': return h('div')
+            case 'b': return h('span')
+            default: return h('p')
+          }
+        }
+      }`,
+      languageOptions
     }
   ],
 
@@ -241,6 +255,98 @@ ruleTester.run('require-render-return', rule, {
           column: 9,
           endLine: 2,
           endColumn: 15
+        }
+      ]
+    },
+    // JS: Switch with all cases returning but no default — no type info, must error
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          switch (this.type) {
+            case 'a': return h('div')
+            case 'b': return h('span')
+          }
+        }
+      }`,
+      languageOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          line: 2
+        }
+      ]
+    },
+    // JS: Vue.component switch without default — must error
+    {
+      code: `Vue.component('test', {
+        render() {
+          switch (this.type) {
+            case 'a': return h('div')
+            case 'b': return h('span')
+          }
+        }
+      })`,
+      languageOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          line: 2
+        }
+      ]
+    },
+    // Switch where one case uses break
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          switch (this.type) {
+            case 'a': return h('div')
+            case 'b': break
+          }
+        }
+      }`,
+      languageOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          line: 2
+        }
+      ]
+    },
+    // Empty switch
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          switch (this.type) {
+          }
+        }
+      }`,
+      languageOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          line: 2
+        }
+      ]
+    },
+    // Switch with only fallthrough cases
+    {
+      filename: 'test.vue',
+      code: `export default {
+        render() {
+          switch (this.type) {
+            case 'a':
+            case 'b':
+          }
+        }
+      }`,
+      languageOptions,
+      errors: [
+        {
+          message: 'Expected to return a value in render function.',
+          line: 2
         }
       ]
     }
