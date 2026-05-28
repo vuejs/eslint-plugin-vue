@@ -28,7 +28,7 @@ tester.run('custom-event-name-casing', rule, {
         setup(props, context) {
           return {
             onInput(value) {
-              context.emit('update:fooBar', value)
+              context.emit('update:foo-bar', value)
               context.emit('foo-bar')
             }
           }
@@ -48,21 +48,21 @@ tester.run('custom-event-name-casing', rule, {
       code: `
       <template>
         <input
-          @click="$emit('update:fooBar', value)">
+          @click="$emit('update:foo-bar', value)">
       </template>
       <script>
       export default {
         setup(props, {emit}) {
           return {
             onInput(value) {
-              emit('update:fooBar', value)
+              emit('update:foo-bar', value)
               emit('foo-bar')
             }
           }
         },
         methods: {
           onClick() {
-            this.$emit('update:fooBar', value)
+            this.$emit('update:foo-bar', value)
           }
         }
       }
@@ -332,6 +332,16 @@ tester.run('custom-event-name-casing', rule, {
       </template>
       `,
       options: ['kebab-case']
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2439
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <button @click="$emit('fooBar:barBaz')" />
+      </template>
+      `,
+      options: ['camelCase']
     }
   ],
   invalid: [
@@ -758,6 +768,45 @@ tester.run('custom-event-name-casing', rule, {
           column: 29,
           endLine: 9,
           endColumn: 38
+        }
+      ]
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2439
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('update:fooBar')">
+      </template>
+      `,
+      options: ['kebab-case'],
+      errors: [
+        {
+          message: "Custom event name 'update:fooBar' must be kebab-case.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 40
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        <input
+          @click="$emit('update:my-prop')">
+      </template>
+      `,
+      options: ['camelCase'],
+      errors: [
+        {
+          message: "Custom event name 'update:my-prop' must be camelCase.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 41
         }
       ]
     }

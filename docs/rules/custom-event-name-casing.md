@@ -30,6 +30,8 @@ See [Guide - Custom Events] for more details.
 
 This rule enforces camelCase by default.
 
+For namespaced event names like `update:myProp`, each segment between `:` is checked against the configured casing.
+
 <eslint-code-block :rules="{'vue/custom-event-name-casing': ['error']}">
 
 ```vue
@@ -140,7 +142,7 @@ export default {
 ```vue
 <template>
   <!-- ✓ GOOD -->
-  <button @click="$emit('click:row')" />
+  <button @click="$emit('click:my-row')" />
   <button @click="$emit('foo-bar')" />
 
   <!-- ✗ BAD -->
@@ -151,7 +153,7 @@ export default {
   methods: {
     onClick() {
       /* ✓ GOOD */
-      this.$emit('click:row')
+      this.$emit('click:my-row')
       this.$emit('foo-bar')
 
       /* ✗ BAD */
