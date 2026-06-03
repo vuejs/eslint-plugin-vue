@@ -1014,7 +1014,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1038,7 +1041,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 34,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1060,7 +1066,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1081,7 +1090,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 33,
+          endLine: 10,
+          endColumn: 10
         }
       ]
     },
@@ -1104,7 +1116,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 12,
+          endColumn: 10
         }
       ]
     },
@@ -1126,7 +1141,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1148,7 +1166,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1170,7 +1191,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1194,7 +1218,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 13,
+          endColumn: 10
         }
       ]
     },
@@ -1220,7 +1247,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 15,
+          endColumn: 10
         }
       ]
     },
@@ -1245,7 +1275,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 33,
+          endLine: 14,
+          endColumn: 10
         }
       ]
     },
@@ -1266,7 +1299,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 4
+          line: 4,
+          column: 33,
+          endLine: 10,
+          endColumn: 10
         }
       ]
     },
@@ -1288,7 +1324,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1310,7 +1349,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1332,7 +1374,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1355,7 +1400,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 11,
+          endColumn: 10
         }
       ]
     },
@@ -1382,7 +1430,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 6
+          line: 6,
+          column: 33,
+          endLine: 12,
+          endColumn: 10
         }
       ]
     },
@@ -1412,7 +1463,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 7
+          line: 7,
+          column: 33,
+          endLine: 13,
+          endColumn: 10
         }
       ]
     },
@@ -1436,7 +1490,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1460,7 +1517,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1481,7 +1541,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 7,
+          endColumn: 14
         }
       ]
     },
@@ -1505,7 +1568,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1529,7 +1595,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1553,7 +1622,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     },
@@ -1579,7 +1651,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in "foo" computed property.',
-          line: 4
+          line: 4,
+          column: 17,
+          endLine: 12,
+          endColumn: 14
         }
       ]
     },
@@ -1603,7 +1678,10 @@ ruleTester.run('return-in-computed-property', rule, {
       errors: [
         {
           message: 'Expected to return a value in computed function.',
-          line: 5
+          line: 5,
+          column: 34,
+          endLine: 10,
+          endColumn: 14
         }
       ]
     }
