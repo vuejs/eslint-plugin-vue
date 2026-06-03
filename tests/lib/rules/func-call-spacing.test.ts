@@ -97,6 +97,7 @@ tester.run('func-call-spacing', rule, {
       </template>
       `,
       errors: [
+        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via getErrorPosition
         {
           message: 'Unexpected whitespace between function name and paren.',
           ...getErrorPosition(3, 23, 'unexpected')
@@ -116,6 +117,7 @@ tester.run('func-call-spacing', rule, {
       `,
       options: ['always'],
       errors: [
+        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via getErrorPosition
         {
           message: 'Missing space between function name and paren.',
           ...getErrorPosition(3, 23, 'missing')
@@ -138,6 +140,7 @@ tester.run('func-call-spacing', rule, {
       }
       </style>`,
       errors: [
+        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via getErrorPosition
         {
           message: 'Unexpected whitespace between function name and paren.',
           ...getErrorPosition(4, 27, 'unexpected')
