@@ -26,6 +26,7 @@ tester.run('no-sparse-arrays', rule, {
         <div :class="[, 'foo', 'bar']" />
       </template>`,
       errors: [
+        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via ternary
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
@@ -42,6 +43,7 @@ tester.run('no-sparse-arrays', rule, {
         <div v-bind:[[,'foo'][1]]="bar" />
       </template>`,
       errors: [
+        // eslint-disable-next-line eslint-plugin/require-test-error-positions -- set via ternary
         {
           message: 'Unexpected comma in middle of array.',
           line: 3,
