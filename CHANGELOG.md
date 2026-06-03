@@ -1,5 +1,17 @@
 # eslint-plugin-vue
 
+## 10.9.2
+
+### Patch Changes
+
+- Fixed [`vue/prefer-import-from-vue`](https://eslint.vuejs.org/rules/prefer-import-from-vue.html) to not report imports/exports of names that are not re-exported by `vue`. ([#3081](https://github.com/vuejs/eslint-plugin-vue/pull/3081))
+
+- Fixed [`vue/custom-event-name-casing`](https://eslint.vuejs.org/rules/custom-event-name-casing.html) to check segments of colon-separated event names like `update:foo-bar` ([#3079](https://github.com/vuejs/eslint-plugin-vue/pull/3079))
+
+- Fixed false positive in [`vue/return-in-computed-property`](https://eslint.vuejs.org/rules/return-in-computed-property.html) and [`vue/require-render-return`](https://eslint.vuejs.org/rules/require-render-return.html) for exhaustive switch statements when TypeScript type information is available ([#3067](https://github.com/vuejs/eslint-plugin-vue/pull/3067))
+
+- Ignore functions not imported from Vue in [`vue/one-component-per-file`](https://eslint.vuejs.org/rules/one-component-per-file.html) ([#3063](https://github.com/vuejs/eslint-plugin-vue/pull/3063))
+
 ## 10.9.1
 
 ### Patch Changes
