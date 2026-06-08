@@ -1,5 +1,11 @@
 # eslint-plugin-vue
 
+## 10.10.0
+
+### Minor Changes
+
+- Added `allowLineSeparatedGroups` option to [`vue/sort-keys`](https://eslint.vuejs.org/rules/sort-keys.html) rule ([#3084](https://github.com/vuejs/eslint-plugin-vue/pull/3084))
+
 ## 10.9.2
 
 ### Patch Changes
