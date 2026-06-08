@@ -62,6 +62,15 @@ export default {
   }
 }
 </script>
+<script setup>
+/* ✓ GOOD */
+defineModel({ type: String, default: 'hello' })
+defineModel({ type: Boolean }) // Boolean doesn't require a default
+
+/* ✗ BAD */
+defineModel({ type: String })
+defineModel('count', { type: Number })
+</script>
 ```
 
 </eslint-code-block>
