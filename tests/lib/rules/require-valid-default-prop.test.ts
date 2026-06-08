@@ -266,6 +266,26 @@ ruleTester.run('require-valid-default-prop', rule, {
       }
     },
     {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/2279
+      filename: 'test.vue',
+      code: `<script setup lang="ts">
+      import type { Foo } from './foo'
+      withDefaults(defineProps<{
+        msg?: Foo | 'foo'
+      }>(), {
+        msg: false,
+      })
+      </script>`,
+      languageOptions: {
+        parser: vueEslintParser,
+        ecmaVersion: 6,
+        sourceType: 'module',
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      }
+    },
+    {
       code: `
       <script setup lang="ts">
       import {Props2 as Props} from './test01'

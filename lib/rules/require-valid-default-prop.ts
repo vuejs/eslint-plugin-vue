@@ -271,6 +271,12 @@ export default {
 
         if (defaultList.length === 0) continue
 
+        // When a union type contains a member the rule cannot resolve to a
+        // native type (e.g. an imported type reference), `null` is used as a
+        // placeholder. In that case the set of allowed default types is
+        // unknown, so we cannot reliably report a type mismatch.
+        if (typeList.includes('null')) continue
+
         const typeNames = new Set(
           typeList.filter((item) => NATIVE_TYPES.has(item))
         )
