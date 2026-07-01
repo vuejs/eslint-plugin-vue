@@ -400,8 +400,8 @@ export function definePropertyReferenceExtractor(
       if (prop.type === 'Property') {
         const name = utils.getStaticPropertyName(prop)
         if (name) {
-          const list = refs.properties[name] || (refs.properties[name] = [])
-          list.push(prop)
+          refs.properties[name] ||= []
+          refs.properties[name].push(prop)
         } else {
           // If cannot trace name, everything is used!
           return ANY

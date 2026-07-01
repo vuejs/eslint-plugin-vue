@@ -50,7 +50,7 @@ function defineParser(
   sourceCode: SourceCode,
   config: CommentParserConfig | null
 ): (node: Token) => ParsedHTMLComment | null {
-  config = config || {}
+  config ||= {}
 
   const exceptions = config.exceptions || []
 
@@ -193,7 +193,7 @@ export function defineVisitor(
 ): RuleListener {
   return {
     Program(node) {
-      visitorOption = visitorOption || {}
+      visitorOption ||= {}
       if (utils.hasInvalidEOF(node)) {
         return
       }

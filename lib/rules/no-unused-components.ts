@@ -89,7 +89,7 @@ export default {
           usedComponents.add(value)
         },
         "VElement[name='template']"(node: VElement) {
-          templateLocation = templateLocation || node.loc.start
+          templateLocation ||= node.loc.start
         },
         "VElement[name='template']:exit"(node: VElement) {
           if (

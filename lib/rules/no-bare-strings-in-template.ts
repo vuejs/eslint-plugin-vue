@@ -233,7 +233,7 @@ export default {
         }
       },
       'VElement:exit'() {
-        elementStack = elementStack && elementStack.upper
+        elementStack &&= elementStack.upper
       },
       VAttribute(node: VAttribute | VDirective) {
         if (!node.value || !elementStack) {

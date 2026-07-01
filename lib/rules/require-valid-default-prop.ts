@@ -123,7 +123,7 @@ export default {
     let scopeStack: ScopeStack | null = null
 
     function onFunctionExit() {
-      scopeStack = scopeStack && scopeStack.upper
+      scopeStack &&= scopeStack.upper
     }
 
     function getValueType(
