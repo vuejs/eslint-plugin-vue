@@ -34,6 +34,13 @@ type MaybeNode = { type: string } & HasLocation
 const LT_CHAR = /[\n\r\u2028\u2029]/
 const LINES = /[^\n\r\u2028\u2029]+(?:$|\r\n|[\n\r\u2028\u2029])/g
 const BLOCK_COMMENT_PREFIX = /^\s*\*/
+const HTML_CONTENT_TOKEN_TYPES = new Set([
+  'HTMLText',
+  'HTMLRCDataText',
+  'HTMLTagOpen',
+  'HTMLEndTagOpen',
+  'HTMLComment'
+])
 const ITERATION_OPTS = Object.freeze({
   includeComments: true,
   filter: isNotWhitespace
@@ -164,8 +171,7 @@ function isClosingToken(token: Token): boolean {
     token != null &&
     (token.type === 'HTMLEndTagOpen' ||
       token.type === 'VExpressionEnd' ||
-      (token.type === 'Punctuator' &&
-        (token.value === ')' || token.value === '}' || token.value === ']')))
+      (token.type === 'Punctuator' && [')', '}', ']'].includes(token.value)))
   )
 }
 
@@ -275,12 +281,7 @@ export function defineVisitor(
     const cursorOptions: SourceCode.CursorWithSkipOptions = {
       includeComments: true,
       filter: (token) =>
-        token != null &&
-        (token.type === 'HTMLText' ||
-          token.type === 'HTMLRCDataText' ||
-          token.type === 'HTMLTagOpen' ||
-          token.type === 'HTMLEndTagOpen' ||
-          token.type === 'HTMLComment')
+        token != null && HTML_CONTENT_TOKEN_TYPES.has(token.type)
     }
     const contentTokens = endToken
       ? tokenStore.getTokensBetween(node.startTag, endToken, cursorOptions)

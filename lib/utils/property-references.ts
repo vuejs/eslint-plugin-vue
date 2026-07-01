@@ -213,6 +213,7 @@ export function definePropertyReferenceExtractor(
       let node
       while ((node = values.shift())) {
         if (
+          // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `node`'s type for the `yield` below
           node.type === 'Identifier' ||
           node.type === 'MemberExpression' ||
           node.type === 'ObjectPattern' ||

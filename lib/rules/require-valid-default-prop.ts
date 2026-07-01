@@ -402,9 +402,7 @@ export default {
               | ComponentObjectProp
               | ComponentInferTypeProp
               | ComponentTypeProp =>
-              prop.type === 'type' ||
-              prop.type === 'infer-type' ||
-              prop.type === 'object'
+              ['type', 'infer-type', 'object'].includes(prop.type)
           )
           const defaultsByWithDefaults =
             utils.getWithDefaultsPropExpressions(node)
