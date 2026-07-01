@@ -88,6 +88,7 @@ export default typegen([
       'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-computed-property-existence-check': 'off', // the dynamic `obj[key]` checks here are intentional truthiness/`in` checks, not `Object.hasOwn` existence checks
       'unicorn/no-null': 'off',
+      'unicorn/no-this-outside-of-class': 'off', // `this` is used intentionally in the exported utils object-literal methods and `@this`-bound helpers
       'unicorn/no-useless-recursion': 'off', // tail recursion is often clearer than a manual loop for the AST/tree helpers here
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
