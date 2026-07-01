@@ -227,6 +227,18 @@ export default {
       })
     }
 
+    function verifyReturnTypes({
+      prop,
+      types: typeNames,
+      default: defType
+    }: PropDefaultFunctionContext) {
+      for (const returnType of defType.returnTypes) {
+        if (typeNames.has(returnType.type)) continue
+
+        report(returnType.node, prop, typeNames)
+      }
+    }
+
     interface DefaultDefine {
       expression: Expression
       src: 'assignment' | 'withDefaults' | 'defaultProperty'
@@ -239,6 +251,59 @@ export default {
       otherDefaultProvider: (propName: string) => Iterable<DefaultDefine>
     ) {
       const propContexts: PropDefaultFunctionContext[] = []
+
+      function collectDefaultContext(
+        defaultDef: DefaultDefine,
+        prop: ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp,
+        typeNames: Set<string>
+      ) {
+        const defType = getValueType(defaultDef.expression)
+
+        if (!defType) return
+
+        if (defType.function) {
+          if (typeNames.has('Function')) {
+            return
+          }
+          if (defaultDef.src === 'assignment') {
+            // Factory functions cannot be used in default definitions with initial value assignments.
+            report(defaultDef.expression, prop, typeNames)
+            return
+          }
+          if (defType.expression) {
+            if (!defType.returnType || typeNames.has(defType.returnType)) {
+              return
+            }
+            report(defType.functionBody, prop, typeNames)
+          } else {
+            propContexts.push({
+              prop,
+              types: typeNames,
+              default: defType
+            })
+          }
+        } else {
+          if (typeNames.has(defType.type)) {
+            if (defaultDef.src === 'assignment') {
+              return
+            }
+            if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
+              // For Array and Object, defaults must be defined in the factory function.
+              return
+            }
+          }
+          report(
+            defaultDef.expression,
+            prop,
+            defaultDef.src === 'assignment'
+              ? typeNames
+              : [...typeNames].map((type) =>
+                  FUNCTION_VALUE_TYPES.has(type) ? 'Function' : type
+                )
+          )
+        }
+      }
+
       for (const prop of props) {
         let typeList
         const defaultList: DefaultDefine[] = []
@@ -275,51 +340,7 @@ export default {
         if (typeNames.size === 0) continue
 
         for (const defaultDef of defaultList) {
-          const defType = getValueType(defaultDef.expression)
-
-          if (!defType) continue
-
-          if (defType.function) {
-            if (typeNames.has('Function')) {
-              continue
-            }
-            if (defaultDef.src === 'assignment') {
-              // Factory functions cannot be used in default definitions with initial value assignments.
-              report(defaultDef.expression, prop, typeNames)
-              continue
-            }
-            if (defType.expression) {
-              if (!defType.returnType || typeNames.has(defType.returnType)) {
-                continue
-              }
-              report(defType.functionBody, prop, typeNames)
-            } else {
-              propContexts.push({
-                prop,
-                types: typeNames,
-                default: defType
-              })
-            }
-          } else {
-            if (typeNames.has(defType.type)) {
-              if (defaultDef.src === 'assignment') {
-                continue
-              }
-              if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
-                // For Array and Object, defaults must be defined in the factory function.
-                continue
-              }
-            }
-            report(
-              defaultDef.expression,
-              prop,
-              defaultDef.src === 'assignment'
-                ? typeNames
-                : [...typeNames].map((type) =>
-                    FUNCTION_VALUE_TYPES.has(type) ? 'Function' : type
-                  )
-            )
-          }
+          collectDefaultContext(defaultDef, prop, typeNames)
         }
       }
       return propContexts
@@ -385,12 +406,8 @@ export default {
           if (!data) {
             return
           }
-          for (const { prop, types: typeNames, default: defType } of data) {
-            for (const returnType of defType.returnTypes) {
-              if (typeNames.has(returnType.type)) continue
-
-              report(returnType.node, prop, typeNames)
-            }
+          for (const propContext of data) {
+            verifyReturnTypes(propContext)
           }
         }
       }),
@@ -447,16 +464,8 @@ export default {
           if (!data) {
             return
           }
-          for (const {
-            prop,
-            types: typeNames,
-            default: defType
-          } of data.props) {
-            for (const returnType of defType.returnTypes) {
-              if (typeNames.has(returnType.type)) continue
-
-              report(returnType.node, prop, typeNames)
-            }
+          for (const propContext of data.props) {
+            verifyReturnTypes(propContext)
           }
         }
       })

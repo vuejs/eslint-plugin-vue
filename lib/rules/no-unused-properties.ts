@@ -297,6 +297,61 @@ export default {
     }
 
     /**
+     * Report the given property if it is unused.
+     */
+    function verifyPropertyUsage(
+      property: ComponentPropertyData,
+      propertyReferences: IPropertyReferences,
+      propertyReferencesForProps: IPropertyReferences
+    ) {
+      if (
+        (property.groupName === 'props' &&
+          propertyReferencesForProps.hasProperty(property.name)) ||
+        propertyReferences.hasProperty('$props')
+      ) {
+        // used props
+        return
+      }
+      if (
+        property.groupName === 'setup' &&
+        templatePropertiesContainer.refNames.has(property.name)
+      ) {
+        // used template refs
+        return
+      }
+      if (ignorePublicMembers && isPublicMember(property, context.sourceCode)) {
+        return
+      }
+
+      if (propertyReferences.hasProperty(property.name)) {
+        // used
+        if (
+          deepData &&
+          (property.groupName === 'data' ||
+            property.groupName === 'asyncData') &&
+          property.type === 'object'
+        ) {
+          // Check the deep properties of the data option.
+          verifyDataOptionDeepProperties(
+            [property.name],
+            property.property.value,
+            propertyReferences.getNest(property.name)
+          )
+        }
+        return
+      }
+
+      context.report({
+        node: property.node,
+        messageId: 'unused',
+        data: {
+          group: PROPERTY_LABEL[property.groupName],
+          name: property.name
+        }
+      })
+    }
+
+    /**
      * Report all unused properties.
      */
     function reportUnusedProperties() {
@@ -311,54 +366,11 @@ export default {
         )
 
         for (const property of container.properties) {
-          if (
-            (property.groupName === 'props' &&
-              propertyReferencesForProps.hasProperty(property.name)) ||
-            propertyReferences.hasProperty('$props')
-          ) {
-            // used props
-            continue
-          }
-          if (
-            property.groupName === 'setup' &&
-            templatePropertiesContainer.refNames.has(property.name)
-          ) {
-            // used template refs
-            continue
-          }
-          if (
-            ignorePublicMembers &&
-            isPublicMember(property, context.sourceCode)
-          ) {
-            continue
-          }
-
-          if (propertyReferences.hasProperty(property.name)) {
-            // used
-            if (
-              deepData &&
-              (property.groupName === 'data' ||
-                property.groupName === 'asyncData') &&
-              property.type === 'object'
-            ) {
-              // Check the deep properties of the data option.
-              verifyDataOptionDeepProperties(
-                [property.name],
-                property.property.value,
-                propertyReferences.getNest(property.name)
-              )
-            }
-            continue
-          }
-
-          context.report({
-            node: property.node,
-            messageId: 'unused',
-            data: {
-              group: PROPERTY_LABEL[property.groupName],
-              name: property.name
-            }
-          })
+          verifyPropertyUsage(
+            property,
+            propertyReferences,
+            propertyReferencesForProps
+          )
         }
       }
     }
