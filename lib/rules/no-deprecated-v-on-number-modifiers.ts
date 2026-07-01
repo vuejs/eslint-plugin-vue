@@ -27,11 +27,11 @@ export default {
         node: VDirectiveKey
       ) {
         const modifier = node.modifiers.find((mod) =>
-          Number.isSafeInteger(Number.parseInt(mod.name, 10))
+          Number.isSafeInteger(Number(mod.name))
         )
         if (!modifier) return
 
-        const keyCodes = Number.parseInt(modifier.name, 10)
+        const keyCodes = Number(modifier.name)
         if (keyCodes > 9 || keyCodes < 0) {
           context.report({
             node: modifier,
