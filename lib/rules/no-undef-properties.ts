@@ -116,7 +116,7 @@ export default {
        */
       verifyReferences(
         references: IPropertyReferences,
-        options?: { props?: boolean }
+        options?: { isProps?: boolean }
       ) {
         if (this.hasUnknownProperty) return
         const report = this.report.bind(this)
@@ -139,7 +139,7 @@ export default {
 
             const prop = defineProperties.get && defineProperties.get(refName)
             if (prop) {
-              if (options && options.props && !prop.isProps) {
+              if (options && options.isProps && !prop.isProps) {
                 report(nodes[0], referencePathName, 'undefProps')
                 continue
               }
@@ -430,13 +430,13 @@ export default {
           if (!property) {
             return
           }
-          let props = false
+          let isProps = false
           if (property.parent === vueData.node) {
             if (utils.getStaticPropertyName(property) !== 'data') {
               return
             }
             // check { data: (vm) => vm.prop }
-            props = true
+            isProps = true
           } else {
             const parentProperty = getParentProperty(property.parent)
             if (!parentProperty) {
@@ -472,15 +472,13 @@ export default {
           const propertyReferences =
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           const ctx = getVueComponentContext(vueData.node)
-          ctx.verifyReferences(propertyReferences, { props })
+          ctx.verifyReferences(propertyReferences, { isProps })
         },
         onSetupFunctionEnter(node, vueData) {
           const propertyReferences =
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           const ctx = getVueComponentContext(vueData.node)
-          ctx.verifyReferences(propertyReferences, {
-            props: true
-          })
+          ctx.verifyReferences(propertyReferences, { isProps: true })
         },
         onRenderFunctionEnter(node, vueData) {
           const ctx = getVueComponentContext(vueData.node)
@@ -496,7 +494,7 @@ export default {
               propertyReferenceExtractor.extractFromFunctionParam(node, 1)
 
             ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
-              props: true
+              isProps: true
             })
           }
         },

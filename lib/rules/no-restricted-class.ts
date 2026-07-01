@@ -28,7 +28,7 @@ const reportForbiddenClass = (
 
 function* extractClassNames(
   node: Expression,
-  textOnly?: boolean
+  isTextOnly?: boolean
 ): IterableIterator<{ className: string; reportNode: ESNode }> {
   if (node.type === 'Literal') {
     yield* String(node.value)
@@ -55,7 +55,7 @@ function* extractClassNames(
     yield* extractClassNames(node.right, true)
     return
   }
-  if (textOnly) {
+  if (isTextOnly) {
     return
   }
   if (node.type === 'ObjectExpression') {

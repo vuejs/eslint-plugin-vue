@@ -328,14 +328,14 @@ export function defineVisitor(
    * The first node is offsetted from the given left token.
    * Rest nodes are adjusted to the first node.
    *
-   * @param alignVertically The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
+   * @param shouldAlignVertically The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
    */
   function processNodeList(
     nodeList: (MaybeNode | null)[],
     left: MaybeNode | Token | null,
     right: MaybeNode | Token | null,
     offset: number,
-    alignVertically: boolean = true
+    shouldAlignVertically: boolean = true
   ): void {
     let t
     const leftToken = left && tokenStore.getFirstToken(left)
@@ -412,7 +412,7 @@ export function defineVisitor(
           setBaseline(baseToken)
         }
 
-        if (!alignVertically && leftToken != null) {
+        if (!shouldAlignVertically && leftToken != null) {
           // Align tokens relatively to the left token.
           setOffset(alignTokens, offset, leftToken)
         } else {

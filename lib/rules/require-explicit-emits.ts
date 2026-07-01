@@ -95,7 +95,7 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const allowProps = !!options.allowProps
+    const shouldAllowProps = !!options.allowProps
     const setupContexts = new Map<
       ObjectExpression | Program,
       {
@@ -133,7 +133,7 @@ export default {
       if (emits.some((e) => e.emitName === name || e.emitName == null)) {
         return
       }
-      if (allowProps) {
+      if (shouldAllowProps) {
         const key = `on${capitalize(name)}`
         if (props.some((e) => e.propName === key || e.propName == null)) {
           return
@@ -307,7 +307,7 @@ export default {
             })
           },
           onDefinePropsEnter(_node, props) {
-            if (!allowProps) {
+            if (!shouldAllowProps) {
               return
             }
 
@@ -328,7 +328,7 @@ export default {
               node,
               utils.getComponentEmitsFromOptions(node)
             )
-            if (allowProps) {
+            if (shouldAllowProps) {
               vuePropsDeclarations.set(
                 node,
                 utils.getComponentPropsFromOptions(node)

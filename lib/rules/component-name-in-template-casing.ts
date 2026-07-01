@@ -87,7 +87,8 @@ export default {
     }
 
     const isGlobalPattern = toRegExpGroupMatcher(globalPatterns)
-    const registeredComponentsOnly = options.registeredComponentsOnly !== false
+    const shouldCheckRegisteredComponentsOnly =
+      options.registeredComponentsOnly !== false
     const sourceCode = context.sourceCode
     const tokens =
       sourceCode.parserServices.getTemplateBodyTokenStore &&
@@ -133,7 +134,7 @@ export default {
         return false
       }
 
-      if (!registeredComponentsOnly) {
+      if (!shouldCheckRegisteredComponentsOnly) {
         // If the user specifies registeredComponentsOnly as false, it checks all component tags.
         return true
       }
@@ -187,7 +188,7 @@ export default {
         Program(node) {
           hasInvalidEOF = utils.hasInvalidEOF(node)
         },
-        ...(registeredComponentsOnly
+        ...(shouldCheckRegisteredComponentsOnly
           ? utils.executeOnVue(context, (obj) => {
               for (const n of utils.getRegisteredComponents(obj)) {
                 registeredComponents.add(n.name)

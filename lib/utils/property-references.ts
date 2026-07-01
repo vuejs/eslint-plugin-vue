@@ -141,12 +141,16 @@ export function definePropertyReferenceExtractor(
   class PropertyReferencesForMember implements IPropertyReferences {
     node: MemberExpression
     name: string
-    withInTemplate: boolean
+    isWithinTemplate: boolean
 
-    constructor(node: MemberExpression, name: string, withInTemplate: boolean) {
+    constructor(
+      node: MemberExpression,
+      name: string,
+      isWithinTemplate: boolean
+    ) {
       this.node = node
       this.name = name
-      this.withInTemplate = withInTemplate
+      this.isWithinTemplate = isWithinTemplate
     }
 
     hasProperty(name: string): boolean {
@@ -161,7 +165,7 @@ export function definePropertyReferenceExtractor(
 
     getNest(name: string): IPropertyReferences {
       return name === this.name
-        ? extractFromExpression(this.node, this.withInTemplate)
+        ? extractFromExpression(this.node, this.isWithinTemplate)
         : NEVER
     }
 
@@ -256,7 +260,7 @@ export function definePropertyReferenceExtractor(
       | ChainExpression
       | ThisExpression
       | CallExpression,
-    withInTemplate: boolean
+    isWithinTemplate: boolean
   ): IPropertyReferences {
     const ref = cacheForExpression.get(node)
     if (ref) {
@@ -272,7 +276,7 @@ export function definePropertyReferenceExtractor(
       switch (parent.type) {
         case 'AssignmentExpression': {
           // `({foo} = arg)`
-          return !withInTemplate &&
+          return !isWithinTemplate &&
             parent.right === node &&
             parent.operator === '='
             ? extractFromPattern(parent.left)
@@ -281,7 +285,7 @@ export function definePropertyReferenceExtractor(
         case 'VariableDeclarator': {
           // `const {foo} = arg`
           // `const foo = arg`
-          return !withInTemplate && parent.init === node
+          return !isWithinTemplate && parent.init === node
             ? extractFromPattern(parent.id)
             : NEVER
         }
@@ -302,14 +306,14 @@ export function definePropertyReferenceExtractor(
               return new PropertyReferencesForMember(
                 parent.parent,
                 propName,
-                withInTemplate
+                isWithinTemplate
               )
             }
             if (name) {
               return new PropertyReferencesForMember(
                 parent,
                 name,
-                withInTemplate
+                isWithinTemplate
               )
             }
             return unknownMemberAsUnreferenced ? NEVER : ANY
@@ -319,30 +323,30 @@ export function definePropertyReferenceExtractor(
         case 'CallExpression': {
           const argIndex = parent.arguments.indexOf(node)
           // `foo(arg)`
-          return !withInTemplate && argIndex !== -1
+          return !isWithinTemplate && argIndex !== -1
             ? extractFromCall(parent, argIndex)
             : NEVER
         }
         case 'ChainExpression': {
-          return extractFromExpression(parent, withInTemplate)
+          return extractFromExpression(parent, isWithinTemplate)
         }
         case 'ArrowFunctionExpression':
         case 'VExpressionContainer':
         case 'Property':
         case 'ArrayExpression': {
-          return maybeExternalUsed(parent) ? ANY : NEVER
+          return isMaybeExternallyUsed(parent) ? ANY : NEVER
         }
         case 'ReturnStatement': {
           if (returnAsUnreferenced) {
             return NEVER
           }
-          return maybeExternalUsed(parent) ? ANY : NEVER
+          return isMaybeExternallyUsed(parent) ? ANY : NEVER
         }
       }
       return NEVER
     }
 
-    function maybeExternalUsed(parentTarget: ASTNode): boolean {
+    function isMaybeExternallyUsed(parentTarget: ASTNode): boolean {
       if (
         parentTarget.type === 'ReturnStatement' ||
         parentTarget.type === 'VExpressionContainer'
@@ -350,10 +354,10 @@ export function definePropertyReferenceExtractor(
         return true
       }
       if (parentTarget.type === 'ArrayExpression') {
-        return maybeExternalUsed(parentTarget.parent)
+        return isMaybeExternallyUsed(parentTarget.parent)
       }
       if (parentTarget.type === 'Property') {
-        return maybeExternalUsed(parentTarget.parent.parent)
+        return isMaybeExternallyUsed(parentTarget.parent.parent)
       }
       if (parentTarget.type === 'ArrowFunctionExpression') {
         return parentTarget.body === node
@@ -599,19 +603,19 @@ export function definePropertyReferenceExtractor(
   ): IPropertyReferences {
     const ignoreGlobals = options && options.ignoreGlobals
 
-    let ignoreRef: (name: string) => boolean = () => false
+    let shouldIgnoreRef: (name: string) => boolean = () => false
     if (ignoreGlobals) {
       const globalScope =
         context.sourceCode.scopeManager.globalScope ||
         context.sourceCode.scopeManager.scopes[0]
 
-      ignoreRef = (name) => globalScope.set.has(name)
+      shouldIgnoreRef = (name) => globalScope.set.has(name)
     }
 
     const references: IPropertyReferences[] = []
     for (const ref of node.references) {
       const id = ref.id
-      if (ref.variable != null || ignoreRef(id.name)) {
+      if (ref.variable != null || shouldIgnoreRef(id.name)) {
         continue
       }
       if (isFunctionalTemplate) {

@@ -28,11 +28,11 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId, alwaysError) {
+function formatRules(rules, categoryId, shouldAlwaysError) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
       let options =
-        alwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
+        shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
       if (defaultOptions) {
@@ -48,7 +48,7 @@ function formatRules(rules, categoryId, alwaysError) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category, alwaysError = false) {
+function formatCategory(category, shouldAlwaysError = false) {
   let extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
     return `/*
@@ -64,7 +64,7 @@ export default {
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
+  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
   overrides: [
     {
       files: '*.vue',
@@ -74,7 +74,7 @@ export default {
 }
 `
   }
-  if (alwaysError && !errorCategories.has(extendsCategoryId)) {
+  if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
   }
 
@@ -85,7 +85,7 @@ export default {
  */
 export default {
   extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formatRules(category.rules, category.categoryId, alwaysError)}
+  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)}
 }
 `
 }

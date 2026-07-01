@@ -215,8 +215,8 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const groups = new Set<GroupName>(options.groups || [GROUP_PROPERTY])
-    const deepData = Boolean(options.deepData)
-    const ignorePublicMembers = Boolean(options.ignorePublicMembers)
+    const shouldCheckDeepData = Boolean(options.deepData)
+    const shouldIgnorePublicMembers = Boolean(options.ignorePublicMembers)
     const unreferencedOptions = new Set(options.unreferencedOptions || [])
     let propsReferencePattern: null | Pattern = null
 
@@ -319,14 +319,17 @@ export default {
         // used template refs
         return
       }
-      if (ignorePublicMembers && isPublicMember(property, context.sourceCode)) {
+      if (
+        shouldIgnorePublicMembers &&
+        isPublicMember(property, context.sourceCode)
+      ) {
         return
       }
 
       if (propertyReferences.hasProperty(property.name)) {
         // used
         if (
-          deepData &&
+          shouldCheckDeepData &&
           (property.groupName === 'data' ||
             property.groupName === 'asyncData') &&
           property.type === 'object'

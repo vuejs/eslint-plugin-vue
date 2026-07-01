@@ -63,21 +63,21 @@ export default {
     }
   },
   create(context: RuleContext) {
-    const preferShorthand = context.options[0] !== 'longform'
+    const shouldPreferShorthand = context.options[0] !== 'longform'
     const sameNameShorthand: 'always' | 'never' | 'ignore' =
       context.options[1]?.sameNameShorthand || 'ignore'
 
     function checkAttributeStyle(node: VBindDirective) {
-      const shorthandProp = node.key.name.rawName === '.'
-      const shorthand = node.key.name.rawName === ':' || shorthandProp
-      if (shorthand === preferShorthand) {
+      const isShorthandProp = node.key.name.rawName === '.'
+      const isShorthand = node.key.name.rawName === ':' || isShorthandProp
+      if (isShorthand === shouldPreferShorthand) {
         return
       }
 
       let messageId = 'expectedLonghand'
-      if (preferShorthand) {
+      if (shouldPreferShorthand) {
         messageId = 'unexpectedLonghand'
-      } else if (shorthandProp) {
+      } else if (isShorthandProp) {
         messageId = 'expectedLonghandForProp'
       }
 
@@ -86,12 +86,12 @@ export default {
         loc: node.loc,
         messageId,
         *fix(fixer) {
-          if (preferShorthand) {
+          if (shouldPreferShorthand) {
             yield fixer.remove(node.key.name)
           } else {
             yield fixer.insertTextBefore(node, 'v-bind')
 
-            if (shorthandProp) {
+            if (isShorthandProp) {
               // Replace `.` by `:`.
               yield fixer.replaceText(node.key.name, ':')
 
@@ -111,13 +111,13 @@ export default {
     function checkAttributeSameName(node: VBindDirective) {
       if (sameNameShorthand === 'ignore' || !isSameName(node)) return
 
-      const preferShorthand = sameNameShorthand === 'always'
+      const isPreferShorthand = sameNameShorthand === 'always'
       const isShorthand = utils.isVBindSameNameShorthand(node)
-      if (isShorthand === preferShorthand) {
+      if (isShorthand === isPreferShorthand) {
         return
       }
 
-      const messageId = preferShorthand
+      const messageId = isPreferShorthand
         ? 'expectedShorthand'
         : 'unexpectedShorthand'
 
@@ -126,7 +126,7 @@ export default {
         loc: node.loc,
         messageId,
         *fix(fixer) {
-          if (preferShorthand) {
+          if (isPreferShorthand) {
             const valueRange: Range = [getCutStart(node.key), node.range[1]]
 
             yield fixer.removeRange(valueRange)

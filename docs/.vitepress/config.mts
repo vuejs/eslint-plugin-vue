@@ -80,12 +80,12 @@ export default async () => {
       )
     const children: DefaultTheme.SidebarItem[] = categoryRules
       .filter(({ ruleId }) => {
-        const exists = categorizedRules.some(
+        const isAlreadyListed = categorizedRules.some(
           ({ items }) =>
             items &&
             items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
         )
-        return !exists
+        return !isAlreadyListed
       })
       .map(({ ruleId, name }) => ({
         text: ruleId,

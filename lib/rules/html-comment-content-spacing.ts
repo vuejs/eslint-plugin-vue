@@ -43,7 +43,7 @@ export default {
   },
   create(context: RuleContext) {
     // Unless the first option is never, require a space
-    const requireSpace = context.options[0] !== 'never'
+    const requiresSpace = context.options[0] !== 'never'
     return defineVisitor(
       context,
       context.options[1],
@@ -68,7 +68,7 @@ export default {
         return
       }
 
-      if (requireSpace) {
+      if (requiresSpace) {
         if (beforeToken.range[1] < value.range[0]) {
           // Is valid
           return
@@ -120,7 +120,7 @@ export default {
         return
       }
 
-      if (requireSpace) {
+      if (requiresSpace) {
         if (value.range[1] < afterToken.range[0]) {
           // Is valid
           return

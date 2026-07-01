@@ -26,6 +26,7 @@ export namespace Scope {
   interface ScopeManager {
     scopes: Scope[]
     globalScope: Scope | null
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- mirrors the external ESLint `ScopeManager` type
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
     getDeclaredVariables(node: VAST.ESNode): Variable[]
   }

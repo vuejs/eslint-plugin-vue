@@ -71,7 +71,7 @@ export default {
     const sourceCode = context.sourceCode
     const option = context.options[0]
     const optionsPayload = context.options[1]
-    const useHyphenated = option !== 'never'
+    const shouldUseHyphenated = option !== 'never'
     const isIgnoredTagName = toRegExpGroupMatcher(optionsPayload?.ignoreTags)
     const ignoredAttributes = ['data-', 'aria-', 'slot-scope', ...svgAttributes]
 
@@ -80,7 +80,7 @@ export default {
     }
 
     const caseConverter = getExactConverter(
-      useHyphenated ? 'kebab-case' : 'camelCase'
+      shouldUseHyphenated ? 'kebab-case' : 'camelCase'
     )
 
     function reportIssue(node: VDirective | VAttribute, name: string) {
@@ -89,7 +89,9 @@ export default {
       context.report({
         node: node.key,
         loc: node.loc,
-        messageId: useHyphenated ? 'mustBeHyphenated' : 'cannotBeHyphenated',
+        messageId: shouldUseHyphenated
+          ? 'mustBeHyphenated'
+          : 'cannotBeHyphenated',
         data: {
           text
         },
@@ -121,7 +123,9 @@ export default {
         return true
       }
 
-      return useHyphenated ? value.toLowerCase() === value : !/-/.test(value)
+      return shouldUseHyphenated
+        ? value.toLowerCase() === value
+        : !/-/.test(value)
     }
 
     return utils.defineTemplateBodyVisitor(context, {
