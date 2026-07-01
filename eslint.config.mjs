@@ -333,6 +333,13 @@ export default typegen([
       'unicorn/no-global-object-property-assignment': 'off'
     }
   },
+  {
+    files: ['tests/**'],
+    rules: {
+      // test fixtures intentionally contain `${...}` in plain strings to exercise the rules
+      'unicorn/no-incorrect-template-string-interpolation': 'off'
+    }
+  },
   ...defineConfig({
     files: ['**/*.json'],
     extends: [...eslintPluginJsonc.configs['flat/recommended-with-jsonc']],
