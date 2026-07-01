@@ -63,8 +63,8 @@ const DEFAULT_DIRECTIVES = ['v-text']
  */
 function parseTargetAttrs(options: any): TargetAttrs {
   const result: TargetAttrs = { names: {}, regexps: [], cache: {} }
-  for (const tagName of Object.keys(options)) {
-    const attrs = new Set<string>(options[tagName])
+  for (const [tagName, tagAttrs] of Object.entries(options)) {
+    const attrs = new Set<string>(tagAttrs)
     if (isRegExp(tagName)) {
       result.regexps.push({
         name: toRegExp(tagName),
