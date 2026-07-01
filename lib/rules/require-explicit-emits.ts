@@ -453,17 +453,17 @@ function buildSuggest(
               lastEmit.node,
               `, '${nameWithLoc.name}'`
             )
-          } else if (lastEmit.type === 'object') {
+          }
+          if (lastEmit.type === 'object') {
             // Object
             return fixer.insertTextAfter(
               lastEmit.node,
               `, '${nameWithLoc.name}': null`
             )
-          } else {
-            // type
-            // The argument is unknown and cannot be suggested.
-            return null
           }
+          // type
+          // The argument is unknown and cannot be suggested.
+          return null
         }
       }
     ]
@@ -503,7 +503,8 @@ function buildSuggest(
           }
         }
       ]
-    } else if (emitsOptionValue.type === 'ObjectExpression') {
+    }
+    if (emitsOptionValue.type === 'ObjectExpression') {
       const leftBrace = sourceCode.getFirstToken(
         emitsOptionValue,
         isOpeningBraceToken
@@ -548,24 +549,23 @@ function buildSuggest(
             before,
             `,\nemits: ['${nameWithLoc.name}']`
           )
-        } else {
-          const objectLeftBrace = sourceCode.getFirstToken(
-            object,
-            isOpeningBraceToken
-          )!
-          const objectRightBrace = sourceCode.getLastToken(
-            object,
-            isClosingBraceToken
-          )!
-          return fixer.insertTextAfter(
-            objectLeftBrace,
-            `\nemits: ['${nameWithLoc.name}']${
-              objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
-                ? ''
-                : '\n'
-            }`
-          )
         }
+        const objectLeftBrace = sourceCode.getFirstToken(
+          object,
+          isOpeningBraceToken
+        )!
+        const objectRightBrace = sourceCode.getLastToken(
+          object,
+          isClosingBraceToken
+        )!
+        return fixer.insertTextAfter(
+          objectLeftBrace,
+          `\nemits: ['${nameWithLoc.name}']${
+            objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
+              ? ''
+              : '\n'
+          }`
+        )
       }
     },
     {
@@ -586,24 +586,23 @@ function buildSuggest(
             before,
             `,\nemits: {'${nameWithLoc.name}': null}`
           )
-        } else {
-          const objectLeftBrace = sourceCode.getFirstToken(
-            object,
-            isOpeningBraceToken
-          )!
-          const objectRightBrace = sourceCode.getLastToken(
-            object,
-            isClosingBraceToken
-          )!
-          return fixer.insertTextAfter(
-            objectLeftBrace,
-            `\nemits: {'${nameWithLoc.name}': null}${
-              objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
-                ? ''
-                : '\n'
-            }`
-          )
         }
+        const objectLeftBrace = sourceCode.getFirstToken(
+          object,
+          isOpeningBraceToken
+        )!
+        const objectRightBrace = sourceCode.getLastToken(
+          object,
+          isClosingBraceToken
+        )!
+        return fixer.insertTextAfter(
+          objectLeftBrace,
+          `\nemits: {'${nameWithLoc.name}': null}${
+            objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
+              ? ''
+              : '\n'
+          }`
+        )
       }
     }
   ]

@@ -237,7 +237,8 @@ export function definePropertyReferenceExtractor(
     }
     if (pattern.type === 'Identifier') {
       return extractFromIdentifier(pattern)
-    } else if (pattern.type === 'AssignmentPattern') {
+    }
+    if (pattern.type === 'AssignmentPattern') {
       return getNestFromPattern(pattern.left)
     }
     return ANY
@@ -301,15 +302,15 @@ export function definePropertyReferenceExtractor(
                 propName,
                 withInTemplate
               )
-            } else if (name) {
+            }
+            if (name) {
               return new PropertyReferencesForMember(
                 parent,
                 name,
                 withInTemplate
               )
-            } else {
-              return unknownMemberAsUnreferenced ? NEVER : ANY
             }
+            return unknownMemberAsUnreferenced ? NEVER : ANY
           }
           return NEVER
         }
@@ -332,9 +333,8 @@ export function definePropertyReferenceExtractor(
         case 'ReturnStatement': {
           if (returnAsUnreferenced) {
             return NEVER
-          } else {
-            return maybeExternalUsed(parent) ? ANY : NEVER
           }
+          return maybeExternalUsed(parent) ? ANY : NEVER
         }
       }
       return NEVER
@@ -453,7 +453,8 @@ export function definePropertyReferenceExtractor(
       if (argIndex === 0) {
         if (getToRefSet().toRefNodes.has(node)) {
           return extractFromToRef(node)
-        } else if (getToRefSet().toRefsNodes.has(node)) {
+        }
+        if (getToRefSet().toRefsNodes.has(node)) {
           return extractFromToRefs(node)
         }
       }

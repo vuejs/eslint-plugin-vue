@@ -42,7 +42,8 @@ function getTypes(targetNode: Expression): string[] {
   const node = utils.skipTSAsExpression(targetNode)
   if (node.type === 'Identifier') {
     return [node.name]
-  } else if (node.type === 'ArrayExpression') {
+  }
+  if (node.type === 'ArrayExpression') {
     return node.elements
       .filter(
         (item): item is Identifier => item != null && item.type === 'Identifier'
