@@ -11,7 +11,7 @@ This script updates `lib/configs/flat/*.js` files from rule's meta data.
 
 const fs = require('node:fs')
 const path = require('node:path')
-const { FlatESLint } = require('eslint/use-at-your-own-risk')
+const { ESLint } = require('eslint')
 const { categories } = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
@@ -130,9 +130,9 @@ for (const category of categories) {
 
 // Format files.
 async function format() {
-  const linter = new FlatESLint({ fix: true })
+  const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  FlatESLint.outputFixes(report)
+  ESLint.outputFixes(report)
 }
 
 format()
