@@ -31,8 +31,8 @@ import { defineVisitor as tsDefineVisitor } from './indent-ts.ts'
 
 type MaybeNode = { type: string } & HasLocation
 
-const LT_CHAR = /[\n\r\u2028\u2029]/
-const LINES = /[^\n\r\u2028\u2029]+(?:$|\r\n|[\n\r\u2028\u2029])/g
+const LT_CHAR = /[\n\r\u{2028}\u{2029}]/u
+const LINES = /[^\n\r\u{2028}\u{2029}]+(?:$|\r\n|[\n\r\u{2028}\u{2029}])/gu
 const BLOCK_COMMENT_PREFIX = /^\s*\*/
 const HTML_CONTENT_TOKEN_TYPES = new Set([
   'HTMLText',
