@@ -34,8 +34,9 @@ export default {
   },
   create(context: RuleContext) {
     const ignores = new Set<string>(['App', 'app'])
-    for (const ignore of (context.options[0] && context.options[0].ignores) ||
-      []) {
+    const optionIgnores =
+      (context.options[0] && context.options[0].ignores) || []
+    for (const ignore of optionIgnores) {
       ignores.add(ignore)
       if (isPascalCase(ignore)) {
         // PascalCase

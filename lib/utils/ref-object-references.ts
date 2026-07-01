@@ -90,7 +90,7 @@ export function* iterateDefineRefs(
   globalScope: Scope.Scope
 ): Iterable<{ node: CallExpression; name: string }> {
   const tracker = new ReferenceTracker(globalScope)
-  for (const { node, path } of utils.iterateReferencesTraceMap(tracker, {
+  const reactiveReferences = utils.iterateReferencesTraceMap(tracker, {
     ref: {
       [ReferenceTracker.CALL]: true
     },
@@ -109,7 +109,8 @@ export function* iterateDefineRefs(
     toRefs: {
       [ReferenceTracker.CALL]: true
     }
-  })) {
+  })
+  for (const { node, path } of reactiveReferences) {
     const expr = node as CallExpression
     yield {
       node: expr,
@@ -464,10 +465,11 @@ class RefObjectReferenceExtractor implements RefObjectReferences {
     }
     this.#processedIds.add(node)
 
-    for (const reference of iterateIdentifierReferences(
+    const identifierReferences = iterateIdentifierReferences(
       node,
       getGlobalScope(this.context)
-    )) {
+    )
+    for (const reference of identifierReferences) {
       const def =
         reference.resolved &&
         reference.resolved.defs.length === 1 &&
@@ -569,10 +571,11 @@ class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
     }
     this.#processedIds.add(node)
 
-    for (const reference of iterateIdentifierReferences(
+    const identifierReferences = iterateIdentifierReferences(
       node,
       getGlobalScope(this.context)
-    )) {
+    )
+    for (const reference of identifierReferences) {
       const def =
         reference.resolved &&
         reference.resolved.defs.length === 1 &&
@@ -644,9 +647,10 @@ export function extractReactiveVariableReferences(
 
   const references = new ReactiveVariableReferenceExtractor(context)
 
-  for (const { node, name } of iterateDefineReactiveVariables(
+  const reactiveVariables = iterateDefineReactiveVariables(
     getGlobalScope(context)
-  )) {
+  )
+  for (const { node, name } of reactiveVariables) {
     references.processDefineReactiveVariable(node, name)
   }
 

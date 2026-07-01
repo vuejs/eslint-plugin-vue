@@ -77,7 +77,8 @@ export default {
 
     const globalStrings = []
     const globalPatterns = []
-    for (const global of options.globals || []) {
+    const globals = options.globals || []
+    for (const global of globals) {
       if (isRegExp(global)) {
         globalPatterns.push(global)
       } else {
@@ -102,7 +103,8 @@ export default {
         const moduleScope = globalScope.childScopes.find(
           (scope) => scope.type === 'module'
         )
-        for (const variable of (moduleScope && moduleScope.variables) || []) {
+        const moduleVariables = (moduleScope && moduleScope.variables) || []
+        for (const variable of moduleVariables) {
           if (!isTypeOnlyImport(variable)) {
             registeredComponents.add(variable.name)
           }

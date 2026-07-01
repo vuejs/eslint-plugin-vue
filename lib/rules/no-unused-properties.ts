@@ -525,10 +525,11 @@ export default {
         onVueObjectEnter(node, vueNode) {
           const container = getVueComponentPropertiesContainer(vueNode.node)
 
-          for (const watcherOrExpose of utils.iterateProperties(
+          const watchersAndExposes = utils.iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
-          )) {
+          )
+          for (const watcherOrExpose of watchersAndExposes) {
             if (watcherOrExpose.groupName === GROUP_WATCHER) {
               const watcher = watcherOrExpose
               // Process `watch: { foo /* <- this */ () {} }`

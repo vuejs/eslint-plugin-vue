@@ -112,21 +112,23 @@ export function definePropertyReferenceExtractor(
       context.sourceCode.scopeManager.scopes[0]
     )
     const toRefNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    const toRefReferences = utils.iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRef: {
         [ReferenceTracker.CALL]: true
       }
-    })) {
+    })
+    for (const { node } of toRefReferences) {
       toRefNodes.add(node)
     }
     const toRefsNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    const toRefsReferences = utils.iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRefs: {
         [ReferenceTracker.CALL]: true
       }
-    })) {
+    })
+    for (const { node } of toRefsReferences) {
       toRefsNodes.add(node)
     }
 

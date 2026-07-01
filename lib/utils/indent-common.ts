@@ -1132,11 +1132,12 @@ export function defineVisitor(
         setOffset(tokenStore.getFirstToken(typeArguments), 1, firstToken)
       }
 
-      for (const optionalToken of tokenStore.getTokensBetween(
+      const optionalTokens = tokenStore.getTokensBetween(
         tokenStore.getLastToken(typeArguments || node.callee),
         leftToken,
         isOptionalToken
-      )) {
+      )
+      for (const optionalToken of optionalTokens) {
         setOffset(optionalToken, 1, firstToken)
       }
 
@@ -1577,11 +1578,12 @@ export function defineVisitor(
           isClosingBracketToken
         )
 
-        for (const optionalToken of tokenStore.getTokensBetween(
+        const optionalTokens = tokenStore.getTokensBetween(
           tokenStore.getLastToken(node.object),
           leftBracketToken,
           isOptionalToken
-        )) {
+        )
+        for (const optionalToken of optionalTokens) {
           setOffset(optionalToken, 1, objectToken)
         }
 

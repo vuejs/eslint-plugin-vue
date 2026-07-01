@@ -176,7 +176,8 @@ export default {
         const moduleScope = globalScope.childScopes.find(
           (scope) => scope.type === 'module'
         )
-        for (const variable of (moduleScope && moduleScope.variables) || []) {
+        const moduleVariables = (moduleScope && moduleScope.variables) || []
+        for (const variable of moduleVariables) {
           if (
             // Check for type definitions. e.g. type Foo = {}
             (variable.isTypeVariable && !variable.isValueVariable) ||

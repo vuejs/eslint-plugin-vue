@@ -134,7 +134,8 @@ export default {
         const moduleScope = globalScope.childScopes.find(
           (scope) => scope.type === 'module'
         )
-        for (const variable of moduleScope?.variables ?? []) {
+        const moduleVariables = moduleScope?.variables ?? []
+        for (const variable of moduleVariables) {
           definedInSetupDirectives.add(variable.name)
         }
       }

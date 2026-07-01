@@ -37,7 +37,8 @@ function parseOption(
   type Step = StepForTest | StepForWildcard
 
   const steps: Step[] = []
-  for (const name of Array.isArray(option.name) ? option.name : [option.name]) {
+  const names = Array.isArray(option.name) ? option.name : [option.name]
+  for (const name of names) {
     if (name === '*') {
       steps.push({ wildcard: true })
     } else {

@@ -248,8 +248,8 @@ export default {
             const moduleScope = globalScope.childScopes.find(
               (scope) => scope.type === 'module'
             )
-            for (const variable of (moduleScope && moduleScope.variables) ||
-              []) {
+            const moduleVariables = (moduleScope && moduleScope.variables) || []
+            for (const variable of moduleVariables) {
               ctx.defineProperties.set(variable.name, {})
             }
           }
@@ -348,7 +348,7 @@ export default {
         onVueObjectEnter(node) {
           const ctx = getVueComponentContext(node)
 
-          for (const prop of utils.iterateProperties(
+          const properties = utils.iterateProperties(
             node,
             new Set([
               GROUP_PROPERTY,
@@ -359,7 +359,8 @@ export default {
               GROUP_METHODS,
               GROUP_INJECT
             ])
-          )) {
+          )
+          for (const prop of properties) {
             const propertyMap =
               (prop.groupName === GROUP_DATA ||
                 prop.groupName === GROUP_ASYNC_DATA) &&
@@ -379,10 +380,11 @@ export default {
             })
           }
 
-          for (const watcherOrExpose of utils.iterateProperties(
+          const watchersAndExposes = utils.iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
-          )) {
+          )
+          for (const watcherOrExpose of watchersAndExposes) {
             if (watcherOrExpose.groupName === GROUP_WATCHER) {
               const watcher = watcherOrExpose
               // Process `watch: { foo /* <- this */ () {} }`
