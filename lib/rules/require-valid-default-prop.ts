@@ -358,10 +358,9 @@ export default {
         onVueObjectEnter(obj) {
           const props: ComponentObjectDefineProp[] = utils
             .getComponentPropsFromOptions(obj)
-            .filter((prop): prop is ComponentObjectDefineProp =>
-              Boolean(
+            .filter(
+              (prop): prop is ComponentObjectDefineProp =>
                 prop.type === 'object' && prop.value.type === 'ObjectExpression'
-              )
             )
           const propContexts = processPropDefs(props, () => [])
           vueObjectPropsContexts.set(obj, propContexts)
@@ -405,11 +404,9 @@ export default {
               | ComponentObjectProp
               | ComponentInferTypeProp
               | ComponentTypeProp =>
-              Boolean(
-                prop.type === 'type' ||
-                prop.type === 'infer-type' ||
-                prop.type === 'object'
-              )
+              prop.type === 'type' ||
+              prop.type === 'infer-type' ||
+              prop.type === 'object'
           )
           const defaultsByWithDefaults =
             utils.getWithDefaultsPropExpressions(node)
