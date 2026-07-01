@@ -11,12 +11,14 @@ export class StyleVariablesContext {
     this.styles = styles
     for (const style of styles) {
       for (const node of style.children) {
-        if (node.type === 'VExpressionContainer') {
-          this.vBinds.push(node)
-          for (const ref of node.references) {
-            if (ref.variable == null) {
-              this.references.push(ref)
-            }
+        if (node.type !== 'VExpressionContainer') {
+          continue
+        }
+
+        this.vBinds.push(node)
+        for (const ref of node.references) {
+          if (ref.variable == null) {
+            this.references.push(ref)
           }
         }
       }
