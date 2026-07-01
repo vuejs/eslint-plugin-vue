@@ -319,6 +319,7 @@ export namespace Rule {
   interface CodePath extends ESLintRule.CodePath {}
   interface CodePathSegment extends ESLintRule.CodePathSegment {}
 
+  // eslint-disable-next-line unicorn/consistent-compound-words -- mirrors ESLint's `RuleMetaData` type name
   interface RuleMetaData extends ESLintRule.RuleMetaData {
     docs: Required<ESLintRule.RuleMetaData>['docs']
     // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
