@@ -121,7 +121,7 @@
     "prettier": "^3.8.0",
     "tsdown": "^0.20.3",
     "typescript": "^5.9.3",
-    "vite-plugin-eslint4b": "^0.6.0",
+    "vite-plugin-eslint4b": "^0.8.1",
     "vitepress": "^1.6.4",
     "vitest": "^4.0.17",
     "vue-eslint-parser": "^10.3.0"
