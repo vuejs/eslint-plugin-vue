@@ -210,8 +210,7 @@ export default {
       return ctx
     }
     function getVueComponentContextForTemplate():
-      | VueComponentContext
-      | undefined {
+      VueComponentContext | undefined {
       const keys = [...vueComponentContextMap.keys()]
       const exported =
         keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
