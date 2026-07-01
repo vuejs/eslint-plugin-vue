@@ -11,17 +11,19 @@ const reportForbiddenClass = (
   context: RuleContext,
   isForbiddenClass: (name: string) => boolean
 ) => {
-  if (isForbiddenClass(className)) {
-    const loc = (node.value || node).loc
-    context.report({
-      node,
-      loc,
-      messageId: 'forbiddenClass',
-      data: {
-        class: className
-      }
-    })
+  if (!isForbiddenClass(className)) {
+    return
   }
+
+  const loc = (node.value || node).loc
+  context.report({
+    node,
+    loc,
+    messageId: 'forbiddenClass',
+    data: {
+      class: className
+    }
+  })
 }
 
 function* extractClassNames(

@@ -141,12 +141,14 @@ export default {
 
     return utils.compositingVisitors(
       utils.executeOnCallVueComponent(context, (node) => {
-        if (node.arguments.length === 2) {
-          const argument = node.arguments[0]
+        if (node.arguments.length !== 2) {
+          return
+        }
 
-          if (canVerify(argument)) {
-            reportIfInvalid(argument)
-          }
+        const argument = node.arguments[0]
+
+        if (canVerify(argument)) {
+          reportIfInvalid(argument)
         }
       }),
       utils.executeOnVue(context, (obj) => {

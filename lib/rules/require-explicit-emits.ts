@@ -307,15 +307,17 @@ export default {
             })
           },
           onDefinePropsEnter(_node, props) {
-            if (allowProps) {
-              vuePropsDeclarations.set(programNode, props)
+            if (!allowProps) {
+              return
+            }
 
-              if (
-                vueTemplateDefineData &&
-                vueTemplateDefineData.type === 'setup'
-              ) {
-                vueTemplateDefineData.props = props
-              }
+            vuePropsDeclarations.set(programNode, props)
+
+            if (
+              vueTemplateDefineData &&
+              vueTemplateDefineData.type === 'setup'
+            ) {
+              vueTemplateDefineData.props = props
             }
           },
           ...callVisitor

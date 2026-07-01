@@ -925,16 +925,18 @@ export function defineVisitor(
     },
     VExpressionContainer(node) {
       if (
-        node.expression != null &&
-        node.range[0] !== node.expression.range[0]
+        node.expression == null ||
+        node.range[0] === node.expression.range[0]
       ) {
-        const startQuoteToken = tokenStore.getFirstToken(node)
-        const endQuoteToken = tokenStore.getLastToken(node)
-        const childToken = tokenStore.getTokenAfter(startQuoteToken)
-
-        setOffset(childToken, 1, startQuoteToken)
-        setOffset(endQuoteToken, 0, startQuoteToken)
+        return
       }
+
+      const startQuoteToken = tokenStore.getFirstToken(node)
+      const endQuoteToken = tokenStore.getLastToken(node)
+      const childToken = tokenStore.getTokenAfter(startQuoteToken)
+
+      setOffset(childToken, 1, startQuoteToken)
+      setOffset(endQuoteToken, 0, startQuoteToken)
     },
     VFilter(node) {
       const idToken = tokenStore.getFirstToken(node)
@@ -1104,17 +1106,19 @@ export function defineVisitor(
         BreakStatement | ContinueStatement | ReturnStatement | ThrowStatement
     ) {
       if (
-        ((node.type === 'ReturnStatement' || node.type === 'ThrowStatement') &&
-          node.argument != null) ||
-        ((node.type === 'BreakStatement' ||
-          node.type === 'ContinueStatement') &&
-          node.label != null)
+        ((node.type !== 'ReturnStatement' && node.type !== 'ThrowStatement') ||
+          node.argument == null) &&
+        ((node.type !== 'BreakStatement' &&
+          node.type !== 'ContinueStatement') ||
+          node.label == null)
       ) {
-        const firstToken = tokenStore.getFirstToken(node)
-        const nextToken = tokenStore.getTokenAfter(firstToken)
-
-        setOffset(nextToken, 1, firstToken)
+        return
       }
+
+      const firstToken = tokenStore.getFirstToken(node)
+      const nextToken = tokenStore.getTokenAfter(firstToken)
+
+      setOffset(nextToken, 1, firstToken)
     },
     CallExpression(node) {
       const typeArguments =
@@ -1765,13 +1769,15 @@ export function defineVisitor(
       )
     },
     VariableDeclarator(node) {
-      if (node.init != null) {
-        const idToken = tokenStore.getFirstToken(node)
-        const eqToken = tokenStore.getTokenAfter(node.id)
-        const initToken = tokenStore.getTokenAfter(eqToken)
-
-        setOffset([eqToken, initToken], 1, idToken)
+      if (node.init == null) {
+        return
       }
+
+      const idToken = tokenStore.getFirstToken(node)
+      const eqToken = tokenStore.getTokenAfter(node.id)
+      const initToken = tokenStore.getTokenAfter(eqToken)
+
+      setOffset([eqToken, initToken], 1, idToken)
     },
     'WhileStatement, WithStatement'(node: WhileStatement | WithStatement) {
       const firstToken = tokenStore.getFirstToken(node)
@@ -1786,13 +1792,15 @@ export function defineVisitor(
       processMaybeBlock(node.body, firstToken)
     },
     YieldExpression(node) {
-      if (node.argument != null) {
-        const yieldToken = tokenStore.getFirstToken(node)
+      if (node.argument == null) {
+        return
+      }
 
-        setOffset(tokenStore.getTokenAfter(yieldToken), 1, yieldToken)
-        if (node.delegate) {
-          setOffset(tokenStore.getTokenAfter(yieldToken, 1), 1, yieldToken)
-        }
+      const yieldToken = tokenStore.getFirstToken(node)
+
+      setOffset(tokenStore.getTokenAfter(yieldToken), 1, yieldToken)
+      if (node.delegate) {
+        setOffset(tokenStore.getTokenAfter(yieldToken, 1), 1, yieldToken)
       }
     },
     // ----------------------------------------------------------------------
