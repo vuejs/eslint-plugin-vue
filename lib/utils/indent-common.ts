@@ -1918,11 +1918,11 @@ export function defineVisitor(
   }
 
   for (const key of Object.keys(visitor)) {
-    for (const nodeName of key
-      .split(/\s*,\s*/gu)
-      .map((s) => s.trim())
-      .filter((s) => /[a-z]+/i.test(s))) {
-      knownNodes.add(nodeName)
+    for (const rawNodeName of key.split(/\s*,\s*/gu)) {
+      const nodeName = rawNodeName.trim()
+      if (/[a-z]+/i.test(nodeName)) {
+        knownNodes.add(nodeName)
+      }
     }
   }
 

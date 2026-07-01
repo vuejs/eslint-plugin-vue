@@ -605,10 +605,9 @@ export function definePropertyReferenceExtractor(
     }
 
     const references: IPropertyReferences[] = []
-    for (const id of node.references
-      .filter((ref) => ref.variable == null)
-      .map((ref) => ref.id)) {
-      if (ignoreRef(id.name)) {
+    for (const ref of node.references) {
+      const id = ref.id
+      if (ref.variable != null || ignoreRef(id.name)) {
         continue
       }
       if (isFunctionalTemplate) {
