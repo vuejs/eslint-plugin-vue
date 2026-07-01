@@ -26,9 +26,9 @@ async function main() {
     const elements = new Set()
 
     const domDl = jsdom.JSDOM.fragment(obsoleteHtml).querySelector(
-      '[id="non-conforming-features"] ~ dl'
+      ':scope [id="non-conforming-features"] ~ dl'
     )
-    for (const code of domDl.querySelectorAll('dt code')) {
+    for (const code of domDl.querySelectorAll(':scope dt code')) {
       const name = code.textContent.trim()
       if (name) elements.add(name)
     }
