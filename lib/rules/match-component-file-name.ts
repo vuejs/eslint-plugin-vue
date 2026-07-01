@@ -60,14 +60,14 @@ export default {
       : ['jsx']
 
     const extension = path.extname(context.filename)
-    const filename = path.basename(context.filename, extension)
-
-    const errors: Rule.ReportDescriptor[] = []
-    let componentCount = 0
 
     if (!allowedExtensions.includes(extension.replace(/^\./, ''))) {
       return {}
     }
+
+    const filename = path.basename(context.filename, extension)
+    const errors: Rule.ReportDescriptor[] = []
+    let componentCount = 0
 
     function compareNames(name: string, filename: string) {
       if (shouldMatchCase) {

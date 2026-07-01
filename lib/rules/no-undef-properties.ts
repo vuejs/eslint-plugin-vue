@@ -424,11 +424,11 @@ export default {
           },
           vueData
         ) {
-          let props = false
           const property = getParentProperty(node)
           if (!property) {
             return
           }
+          let props = false
           if (property.parent === vueData.node) {
             if (utils.getStaticPropertyName(property) !== 'data') {
               return

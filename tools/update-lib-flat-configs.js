@@ -49,8 +49,6 @@ function formatRules(rules, categoryId, alwaysError) {
 }
 
 function formatCategory(category, alwaysError = false) {
-  let extendsCategoryId = extendsCategories[category.categoryId]
-
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
@@ -90,6 +88,8 @@ export default [
 ]
 `
   }
+
+  let extendsCategoryId = extendsCategories[category.categoryId]
 
   if (alwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
