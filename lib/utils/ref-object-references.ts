@@ -606,13 +606,10 @@ class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
     let parent: ASTNode | null = target.parent
     while (parent) {
       if (parent.type === 'CallExpression') {
-        if (
+        return (
           parent.arguments.includes(target as any) &&
           this.#escapeHintValueRefs.has(parent)
-        ) {
-          return true
-        }
-        return false
+        )
       }
       if (
         (parent.type === 'Property' && parent.value === target) ||

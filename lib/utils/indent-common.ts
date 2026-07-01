@@ -503,11 +503,8 @@ export function defineVisitor(
           return false
         }
         const prevToken = tokenStore.getTokenBefore(belongingNode)
-        if (isOpeningParenToken(prevToken)) {
-          // It is not the first token because it is enclosed in parentheses.
-          return false
-        }
-        return true
+        // It is not the first token because it is enclosed in parentheses.
+        return !isOpeningParenToken(prevToken)
       }
       if (parent.type === 'CallExpression' || parent.type === 'NewExpression') {
         const openParen = tokenStore.getTokenAfter(

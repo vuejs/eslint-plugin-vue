@@ -91,13 +91,10 @@ export default {
      */
     function isVerifyTargetDirective(rawName: string): boolean {
       const kebabName = kebabCase(rawName)
-      if (
-        utils.isBuiltInDirectiveName(rawName) ||
-        isAnyIgnored(rawName, kebabName)
-      ) {
-        return false
-      }
-      return true
+      return (
+        !utils.isBuiltInDirectiveName(rawName) &&
+        !isAnyIgnored(rawName, kebabName)
+      )
     }
 
     function createTemplateBodyVisitor(

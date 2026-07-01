@@ -23,11 +23,8 @@ function isTypeOnlyImport(variable: Variable): boolean {
       // check for `import type Foo from './xxx'`
       return true
     }
-    if (def.node.type === 'ImportSpecifier' && def.node.importKind === 'type') {
-      // check for `import { type Foo } from './xxx'`
-      return true
-    }
-    return false
+    // check for `import { type Foo } from './xxx'`
+    return def.node.type === 'ImportSpecifier' && def.node.importKind === 'type'
   })
 }
 

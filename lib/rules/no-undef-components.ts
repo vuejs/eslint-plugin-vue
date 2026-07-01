@@ -50,10 +50,7 @@ class DefinedInSetupComponents {
     // Check namespace
     // https://github.com/vuejs/core/blob/ae4b0783d78670b6e942ae2a4e3ec6efbbffa158/packages/compiler-core/src/transforms/transformElement.ts#L305
     const dotIndex = rawName.indexOf('.')
-    if (dotIndex > 0 && this.isDefinedComponent(rawName.slice(0, dotIndex))) {
-      return true
-    }
-    return false
+    return dotIndex > 0 && this.isDefinedComponent(rawName.slice(0, dotIndex))
   }
 }
 
@@ -79,11 +76,8 @@ class DefinedInOptionComponents {
       return true
     }
     const kebabCaseName = kebabCase(rawName)
-    if (this.kebabCaseNames.has(kebabCaseName) && !isPascalCase(rawName)) {
-      // Component registered as `foo-bar` cannot be used as `FooBar`
-      return true
-    }
-    return false
+    // Component registered as `foo-bar` cannot be used as `FooBar`
+    return this.kebabCaseNames.has(kebabCaseName) && !isPascalCase(rawName)
   }
 }
 
@@ -133,19 +127,14 @@ export default {
       }
       const pascalCaseName = pascalCase(rawName)
       // Check ignored patterns
-      if (
-        ignorePatterns.some((pattern) => {
-          const regExp = new RegExp(pattern)
-          return (
-            regExp.test(rawName) ||
-            regExp.test(kebabCaseName) ||
-            regExp.test(pascalCaseName)
-          )
-        })
-      ) {
-        return false
-      }
-      return true
+      return ignorePatterns.every((pattern) => {
+        const regExp = new RegExp(pattern)
+        return (
+          !regExp.test(rawName) &&
+          !regExp.test(kebabCaseName) &&
+          !regExp.test(pascalCaseName)
+        )
+      })
     }
 
     let verifyName: (rawName: string, reportNode: ASTNode) => void
@@ -201,14 +190,11 @@ export default {
                   // check for `import type Foo from './xxx'`
                   return true
                 }
-                if (
+                // check for `import { type Foo } from './xxx'`
+                return (
                   def.node.type === 'ImportSpecifier' &&
                   def.node.importKind === 'type'
-                ) {
-                  // check for `import { type Foo } from './xxx'`
-                  return true
-                }
-                return false
+                )
               }))
           ) {
             scriptTypeOnlyNames.add(variable.name)
