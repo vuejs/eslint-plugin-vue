@@ -215,9 +215,7 @@ export default {
       expectedTypeNames: Iterable<string>
     ) {
       const propName =
-        prop.propName == null
-          ? `[${context.sourceCode.getText(prop.node.key)}]`
-          : prop.propName
+        prop.propName ?? `[${context.sourceCode.getText(prop.node.key)}]`
       context.report({
         node,
         messageId: 'invalidType',
