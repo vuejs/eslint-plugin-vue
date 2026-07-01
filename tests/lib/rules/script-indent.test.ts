@@ -38,7 +38,10 @@ function loadPatterns(
     .flatMap((filename) => {
       const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
       const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-      const code = code0.replace(commentPattern, `$1${filename}$3`)
+      const code = code0.replace(
+        commentPattern,
+        (_match, open, _content, close) => `${open}${filename}${close}`
+      )
       const baseObj = JSON.parse(commentPattern.exec(code0)![2])
 
       if (baseObj.requirements) {

@@ -666,7 +666,7 @@ export function defineVisitor(
           return fixer.replaceTextRange(
             range,
             `${indent}${firstLine}${lines
-              .map((l) => l.replace(BLOCK_COMMENT_PREFIX, `${indent} *`))
+              .map((l) => l.replace(BLOCK_COMMENT_PREFIX, () => `${indent} *`))
               .join('')}`
           )
         }

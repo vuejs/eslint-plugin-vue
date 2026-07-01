@@ -76,7 +76,7 @@ class DocFile {
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
     this.content = fileIntroPattern.test(this.content)
-      ? this.content.replaceAll(fileIntroPattern, computed)
+      ? this.content.replaceAll(fileIntroPattern, () => computed)
       : `${computed}${this.content.trim()}\n`
 
     return this
@@ -154,7 +154,7 @@ class DocFile {
     const headerPattern = /#.+\n+[^\n]*\n+(?: {0,2}- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
     this.content = headerPattern.test(this.content)
-      ? this.content.replace(headerPattern, header)
+      ? this.content.replace(headerPattern, () => header)
       : `${header}${this.content.trim()}\n`
 
     return this
@@ -165,7 +165,7 @@ class DocFile {
 
     this.content = this.content.replaceAll(
       /<eslint-code-block\s(:?fix\S*)?\s*/g,
-      `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
+      () => `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
     )
     return this
   }
@@ -206,7 +206,7 @@ ${
     : ''
 }`
     this.content = footerPattern.test(this.content)
-      ? this.content.replace(footerPattern, footer)
+      ? this.content.replace(footerPattern, () => footer)
       : `${this.content.trim()}\n\n${footer}`
 
     return this

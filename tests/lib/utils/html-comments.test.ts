@@ -21,7 +21,7 @@ function loadPatterns() {
     )
     const code = code0.replace(
       /^<!--(.+?)-->/,
-      `<test-name>${name}</test-name>`
+      () => `<test-name>${name}</test-name>`
     )
     const option: CommentParserConfig = JSON.parse(
       /^<!--(.+?)-->/.exec(code0)![1]

@@ -108,7 +108,7 @@ export default {
 
           return fixer.replaceText(
             node.key,
-            text.replace(name, caseConverter(name))
+            text.replace(name, () => caseConverter(name))
           )
         }
       })
