@@ -119,7 +119,7 @@
     "jsdom": "^27.4.0",
     "markdownlint-cli": "^0.47.0",
     "pathe": "^2.0.3",
-    "prettier": "^3.8.0",
+    "prettier": "^3.9.4",
     "tsdown": "^0.20.3",
     "typescript": "^5.9.3",
     "vite-plugin-eslint4b": "^0.6.0",

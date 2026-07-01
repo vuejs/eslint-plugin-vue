@@ -32,8 +32,7 @@ export interface TSTypeParameterInstantiation extends HasParentNode {
 }
 
 export type TSPropertySignature =
-  | TSPropertySignatureComputedName
-  | TSPropertySignatureNonComputedName
+  TSPropertySignatureComputedName | TSPropertySignatureNonComputedName
 interface TSPropertySignatureBase extends HasParentNode {
   type: 'TSPropertySignature'
   key: TSESTree.PropertyName
@@ -56,8 +55,7 @@ interface TSPropertySignatureNonComputedName extends TSPropertySignatureBase {
 }
 
 export type TSMethodSignature =
-  | TSMethodSignatureComputedName
-  | TSMethodSignatureNonComputedName
+  TSMethodSignatureComputedName | TSMethodSignatureNonComputedName
 interface TSMethodSignatureBase extends HasParentNode {
   type: 'TSMethodSignature'
   key: TSESTree.PropertyName

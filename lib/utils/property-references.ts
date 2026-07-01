@@ -22,8 +22,7 @@ interface NestPropertyNodeForPattern {
 }
 
 type NestPropertyNode =
-  | NestPropertyNodeForExpression
-  | NestPropertyNodeForPattern
+  NestPropertyNodeForExpression | NestPropertyNodeForPattern
 
 export interface IPropertyReferences {
   hasProperty: (name: string, option?: IHasPropertyOption) => boolean

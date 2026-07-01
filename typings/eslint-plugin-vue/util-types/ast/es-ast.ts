@@ -161,9 +161,7 @@ export interface DebuggerStatement extends HasParentNode {
   type: 'DebuggerStatement'
 }
 export type Declaration =
-  | FunctionDeclaration
-  | VariableDeclaration
-  | ClassDeclaration
+  FunctionDeclaration | VariableDeclaration | ClassDeclaration
 export interface FunctionDeclaration extends HasParentNode {
   type: 'FunctionDeclaration'
   async: boolean
@@ -262,9 +260,7 @@ export type ModuleSpecifier =
 export interface ImportDeclaration extends HasParentNode {
   type: 'ImportDeclaration'
   specifiers: (
-    | ImportSpecifier
-    | ImportDefaultSpecifier
-    | ImportNamespaceSpecifier
+    ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier
   )[]
   source: Literal & { value: string }
   importKind?: 'type' | 'value'
@@ -418,8 +414,7 @@ interface ArrowFunctionExpressionNoBlock extends HasParentNode {
 }
 
 export type ArrowFunctionExpression =
-  | ArrowFunctionExpressionNoBlock
-  | ArrowFunctionExpressionHasBlock
+  ArrowFunctionExpressionNoBlock | ArrowFunctionExpressionHasBlock
 
 export interface SequenceExpression extends HasParentNode {
   type: 'SequenceExpression'
@@ -468,8 +463,7 @@ interface BinaryExpressionWithIn extends HasParentNode {
   right: Expression
 }
 export type BinaryExpression =
-  | BinaryExpressionWithoutIn
-  | BinaryExpressionWithIn
+  BinaryExpressionWithoutIn | BinaryExpressionWithIn
 export type AssignmentOperator =
   | '='
   | '+='
@@ -635,8 +629,7 @@ export interface AssignmentPropertyComputedName extends BaseAssignmentProperty {
   key: Expression
 }
 export type AssignmentProperty =
-  | AssignmentPropertyNonComputedName
-  | AssignmentPropertyComputedName
+  AssignmentPropertyNonComputedName | AssignmentPropertyComputedName
 export interface ArrayPattern extends HasParentNode {
   type: 'ArrayPattern'
   elements: (Pattern | null)[]
@@ -656,9 +649,5 @@ export interface AssignmentPattern extends HasParentNode {
 }
 
 export type _FunctionParameter =
-  | AssignmentPattern
-  | RestElement
-  | ArrayPattern
-  | ObjectPattern
-  | Identifier
+  AssignmentPattern | RestElement | ArrayPattern | ObjectPattern | Identifier
 // | TSParameterProperty;

@@ -219,9 +219,7 @@ export class SourceCode /*extends ESLintSourceCode*/ {
     left: VNODE.HasLocation,
     right: VNODE.HasLocation,
     padding?:
-      | number
-      | SourceCode.FilterPredicate
-      | SourceCode.CursorWithCountOptions
+      number | SourceCode.FilterPredicate | SourceCode.CursorWithCountOptions
   ): AST.Token[]
   getTokens(
     node: VNODE.HasLocation,
@@ -373,8 +371,7 @@ export namespace Rule {
     | ReportDescriptor4
 
   type SuggestionReportDescriptor =
-    | SuggestionReportDescriptor1
-    | SuggestionReportDescriptor2
+    SuggestionReportDescriptor1 | SuggestionReportDescriptor2
 
   interface RuleFixer {
     insertTextAfter(nodeOrToken: VNODE.HasLocation, text: string): Fix

@@ -235,9 +235,7 @@ export default {
 
     function processPropDefs(
       props: (
-        | ComponentObjectProp
-        | ComponentTypeProp
-        | ComponentInferTypeProp
+        ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp
       )[],
       otherDefaultProvider: (propName: string) => Iterable<DefaultDefine>
     ) {
@@ -332,9 +330,7 @@ export default {
       {
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
         ) {
           scopeStack = {
             upper: scopeStack,
@@ -372,9 +368,7 @@ export default {
         },
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression,
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression,
           { node: vueNode }: VueObjectData
         ) {
           const data = vueObjectPropsContexts.get(vueNode)
@@ -441,9 +435,7 @@ export default {
         },
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
         ) {
           const data = scriptSetupPropsContexts.at(-1)
           if (!data || !scopeStack) {
