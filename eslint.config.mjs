@@ -80,6 +80,7 @@ export default typegen([
       'eslint-plugin/require-meta-schema-description': 'off',
       'eslint-plugin/require-test-case-name': 'off',
 
+      'unicorn/better-dom-traversing': 'off', // false positives on Vue AST nodes, whose `children` is a plain array, not a DOM `NodeList`
       'unicorn/filename-case': 'off',
       'unicorn/name-replacements': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
