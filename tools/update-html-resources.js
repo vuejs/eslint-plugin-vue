@@ -39,7 +39,11 @@ async function main() {
 
     fs.writeFileSync(
       DEPRECATED_HTML_ELEMENTS_PATH,
-      `${JSON.stringify([...elements].sort(), null, 2)}\n`,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
       'utf8'
     )
   }
@@ -71,7 +75,11 @@ async function main() {
 
     fs.writeFileSync(
       HTML_ELEMENTS_PATH,
-      `${JSON.stringify([...elements].sort(), null, 2)}\n`,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
       'utf8'
     )
   }
@@ -96,7 +104,11 @@ async function main() {
 
     fs.writeFileSync(
       SVG_ELEMENTS_PATH,
-      `${JSON.stringify([...elements].sort(), null, 2)}\n`,
+      `${JSON.stringify(
+        [...elements].sort((a, b) => a.localeCompare(b)),
+        null,
+        2
+      )}\n`,
       'utf8'
     )
   }
