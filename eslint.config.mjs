@@ -87,6 +87,7 @@ export default typegen([
       'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-null': 'off',
+      'unicorn/no-useless-recursion': 'off', // tail recursion is often clearer than a manual loop for the AST/tree helpers here
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-iterator-to-array': 'off', // `Iterator#toArray()` requires Node.js v22
