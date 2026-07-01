@@ -249,6 +249,7 @@ export default typegen([
         }
       ],
 
+      'unicorn/consistent-conditional-object-spread': ['error', 'ternary'],
       'unicorn/consistent-function-scoping': [
         'error',
         { checkArrowFunctions: false }
