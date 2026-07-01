@@ -58,7 +58,7 @@ export default {
 
     function validateName(nameNode: Expression | SpreadElement) {
       if (nameNode.type !== 'Literal') return
-      const componentName = `${nameNode.value}`
+      const componentName = String(nameNode.value)
       if (!isValidComponentName(componentName)) {
         context.report({
           node: nameNode,

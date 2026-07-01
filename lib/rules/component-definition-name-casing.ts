@@ -50,7 +50,7 @@ export default {
         nodeValue = quasis.value.cooked
         range = quasis.range
       } else {
-        nodeValue = `${node.value}`
+        nodeValue = String(node.value)
         range = node.range
       }
 

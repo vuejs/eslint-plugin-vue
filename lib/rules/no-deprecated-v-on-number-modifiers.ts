@@ -40,7 +40,7 @@ export default {
               const key = keyCodeToKey[keyCodes]
               if (!key) return null
 
-              return fixer.replaceText(modifier, `${key}`)
+              return fixer.replaceText(modifier, key)
             }
           })
         }

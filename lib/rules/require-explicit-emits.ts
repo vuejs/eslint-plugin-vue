@@ -491,7 +491,7 @@ function buildSuggest(
       return [
         {
           messageId: 'addOneOption',
-          data: { name: `${nameWithLoc.name}`, emitsKind },
+          data: { name: nameWithLoc.name, emitsKind },
           fix(fixer) {
             return fixer.insertTextAfter(
               leftBracket,
@@ -510,7 +510,7 @@ function buildSuggest(
       return [
         {
           messageId: 'addOneOption',
-          data: { name: `${nameWithLoc.name}`, emitsKind },
+          data: { name: nameWithLoc.name, emitsKind },
           fix(fixer) {
             return fixer.insertTextAfter(
               leftBrace,
@@ -532,7 +532,7 @@ function buildSuggest(
   return [
     {
       messageId: 'addArrayEmitsOption',
-      data: { name: `${nameWithLoc.name}`, emitsKind },
+      data: { name: nameWithLoc.name, emitsKind },
       fix(fixer) {
         if (afterOptionNode) {
           return fixer.insertTextAfter(
@@ -569,7 +569,7 @@ function buildSuggest(
     },
     {
       messageId: 'addObjectEmitsOption',
-      data: { name: `${nameWithLoc.name}`, emitsKind },
+      data: { name: nameWithLoc.name, emitsKind },
       fix(fixer) {
         if (afterOptionNode) {
           return fixer.insertTextAfter(

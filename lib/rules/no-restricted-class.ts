@@ -31,7 +31,7 @@ function* extractClassNames(
   textOnly?: boolean
 ): IterableIterator<{ className: string; reportNode: ESNode }> {
   if (node.type === 'Literal') {
-    yield* `${node.value}`
+    yield* String(node.value)
       .split(/\s+/)
       .map((className) => ({ className, reportNode: node }))
     return

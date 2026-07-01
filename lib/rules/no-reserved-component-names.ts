@@ -122,7 +122,7 @@ export default {
         const quasis = node.quasis[0]
         name = quasis.value.cooked
       } else {
-        name = `${node.value}`
+        name = String(node.value)
       }
       if (reservedNames.has(name)) {
         report(node, name)

@@ -66,7 +66,7 @@ function bundle(entryPoint: string, externals: string[]) {
     inject: [path.join(dirname, './src/process-shim.mjs')]
   })
 
-  return `${result.outputFiles[0].text}`
+  return result.outputFiles[0].text
 }
 
 function transform(code: string, injects: string[]) {

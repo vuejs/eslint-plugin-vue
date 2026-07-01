@@ -302,7 +302,7 @@ export default {
           return
 
         if (node.value.expression.type === 'Literal') {
-          verifyName(`${node.value.expression.value}`, node)
+          verifyName(String(node.value.expression.value), node)
         }
       }
     }

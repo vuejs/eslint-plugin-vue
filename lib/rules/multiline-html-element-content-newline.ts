@@ -27,7 +27,7 @@ function getPhrase(lineBreaks: number) {
       return 'no'
     }
     default: {
-      return `${lineBreaks}`
+      return String(lineBreaks)
     }
   }
 }
