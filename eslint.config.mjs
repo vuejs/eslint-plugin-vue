@@ -89,6 +89,7 @@ export default typegen([
       'unicorn/no-null': 'off',
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-iterator-to-array': 'off', // `Iterator#toArray()` requires Node.js v22
       'unicorn/prefer-module': 'off',
       'unicorn/prefer-top-level-await': 'off' // only available in ESM modules
     }
