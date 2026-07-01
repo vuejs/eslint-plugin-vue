@@ -32,7 +32,7 @@ function isSameName(node: VBindDirective): boolean {
 
 function getCutStart(key: VBindDirectiveKey): number {
   const lastModifier = key.modifiers.at(-1)
-  return lastModifier ? lastModifier.range[1] : key.argument.range[1]
+  return (lastModifier || key.argument).range[1]
 }
 
 export default {

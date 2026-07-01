@@ -12,7 +12,7 @@ const reportForbiddenClass = (
   isForbiddenClass: (name: string) => boolean
 ) => {
   if (isForbiddenClass(className)) {
-    const loc = node.value ? node.value.loc : node.loc
+    const loc = (node.value || node).loc
     context.report({
       node,
       loc,

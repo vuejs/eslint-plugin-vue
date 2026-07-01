@@ -78,12 +78,12 @@ export default {
         return
       }
 
-      const startLine = openDecoration
-        ? openDecoration.loc.end.line
-        : value.loc.start.line
-      const endLine = closeDecoration
-        ? closeDecoration.loc.start.line
-        : value.loc.end.line
+      const startLine = (
+        openDecoration ? openDecoration.loc.end : value.loc.start
+      ).line
+      const endLine = (
+        closeDecoration ? closeDecoration.loc.start : value.loc.end
+      ).line
       const newlineType =
         startLine === endLine ? option.singleline : option.multiline
       if (newlineType === 'ignore') {
