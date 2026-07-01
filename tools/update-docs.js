@@ -42,15 +42,15 @@ function pickSince(content) {
 }
 
 class DocFile {
+  static read(rule) {
+    return new DocFile(rule)
+  }
+
   constructor(rule) {
     this.rule = rule
     this.filePath = path.join(ROOT, `${rule.name}.md`)
     this.content = fs.readFileSync(this.filePath, 'utf8')
     this.since = pickSince(this.content)
-  }
-
-  static read(rule) {
-    return new DocFile(rule)
   }
 
   write() {

@@ -293,12 +293,12 @@ interface RefObjectReferenceContext {
 }
 
 class RefObjectReferenceExtractor implements RefObjectReferences {
+  #processedIds = new Set<Identifier>()
   context: RuleContext
   references = new Map<
     Identifier | MemberExpression | CallExpression | ObjectPattern,
     RefObjectReference
   >()
-  #processedIds = new Set<Identifier>()
 
   constructor(context: RuleContext) {
     this.context = context
@@ -522,10 +522,10 @@ export function extractRefObjectReferences(
 }
 
 class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
-  context: RuleContext
-  references: Map<Identifier, ReactiveVariableReference>
   #processedIds: Set<Identifier>
   #escapeHintValueRefs: Set<CallExpression>
+  context: RuleContext
+  references: Map<Identifier, ReactiveVariableReference>
 
   constructor(context: RuleContext) {
     this.context = context

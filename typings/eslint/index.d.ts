@@ -118,6 +118,8 @@ export namespace Scope {
 }
 
 export class SourceCode /*extends ESLintSourceCode*/ {
+  static splitLines(text: string): string[]
+
   text: string
   ast: AST.Program
   lines: string[]
@@ -125,8 +127,6 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   parserServices: SourceCode.ParserServices
   scopeManager: Scope.ScopeManager
   visitorKeys: SourceCode.VisitorKeys
-
-  static splitLines(text: string): string[]
 
   tokensAndComments: (AST.Token | VNODE.Comment)[]
 
