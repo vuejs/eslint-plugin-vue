@@ -27,8 +27,7 @@ interface ComponentNonObjectPropertyData {
   node: ASTNode
 }
 type ComponentPropertyData =
-  | ComponentNonObjectPropertyData
-  | ComponentObjectPropertyData
+  ComponentNonObjectPropertyData | ComponentObjectPropertyData
 
 interface TemplatePropertiesContainer {
   propertyReferences: IPropertyReferences[]

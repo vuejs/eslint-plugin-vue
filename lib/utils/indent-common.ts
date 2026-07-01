@@ -1101,10 +1101,7 @@ export function defineVisitor(
     },
     'BreakStatement, ContinueStatement, ReturnStatement, ThrowStatement'(
       node:
-        | BreakStatement
-        | ContinueStatement
-        | ReturnStatement
-        | ThrowStatement
+        BreakStatement | ContinueStatement | ReturnStatement | ThrowStatement
     ) {
       if (
         ((node.type === 'ReturnStatement' || node.type === 'ThrowStatement') &&
