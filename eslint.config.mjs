@@ -323,6 +323,13 @@ export default typegen([
       'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
+  {
+    files: ['docs/**'],
+    rules: {
+      // Browser shims and polyfills in the docs site intentionally assign to the global object.
+      'unicorn/no-global-object-property-assignment': 'off'
+    }
+  },
   ...defineConfig({
     files: ['**/*.json'],
     extends: [...eslintPluginJsonc.configs['flat/recommended-with-jsonc']],
