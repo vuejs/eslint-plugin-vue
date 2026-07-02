@@ -81,10 +81,10 @@ export default typegen([
       'eslint-plugin/require-test-case-name': 'off',
 
       'unicorn/filename-case': 'off',
-      'unicorn/no-null': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
       'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
+      'unicorn/no-null': 'off',
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-module': 'off',
