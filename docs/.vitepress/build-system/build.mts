@@ -46,9 +46,9 @@ function build(input: string, out: string, injects: string[] = []) {
   console.log(`build@ ${input}`)
   const normalizedInjects = [
     ...injects,
-    ...injects.flatMap((inject) =>
-      inject.startsWith('node:') ? [inject.replace(/^node:/u, '')] : []
-    )
+    ...injects
+      .filter((inject) => inject.startsWith('node:'))
+      .map((inject) => inject.replace(/^node:/u, ''))
   ]
   let code = bundle(input, normalizedInjects)
   code = transform(code, normalizedInjects)
@@ -66,7 +66,7 @@ function bundle(entryPoint: string, externals: string[]) {
     inject: [path.join(dirname, './src/process-shim.mjs')]
   })
 
-  return `${result.outputFiles[0].text}`
+  return result.outputFiles[0].text
 }
 
 function transform(code: string, injects: string[]) {

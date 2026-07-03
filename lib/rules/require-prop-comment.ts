@@ -52,6 +52,25 @@ export default {
     const verifyJSDoc = (comment: Comment | undefined) =>
       comment && isJSDocComment(comment) ? undefined : 'requireJSDocComment'
 
+    const verifyComment = (
+      comment: Comment | undefined
+    ): string | undefined => {
+      switch (type) {
+        case 'block': {
+          return verifyBlock(comment)
+        }
+        case 'line': {
+          return verifyLine(comment)
+        }
+        case 'any': {
+          return verifyAny(comment)
+        }
+        default: {
+          return verifyJSDoc(comment)
+        }
+      }
+    }
+
     function verifyProps(props: ComponentProp[]) {
       for (const prop of props) {
         if (!prop.propName || prop.type === 'infer-type') {
@@ -61,26 +80,7 @@ export default {
         const precedingComments = sourceCode.getCommentsBefore(prop.node)
         const lastPrecedingComment = precedingComments.at(-1)
 
-        let messageId: string | undefined
-
-        switch (type) {
-          case 'block': {
-            messageId = verifyBlock(lastPrecedingComment)
-            break
-          }
-          case 'line': {
-            messageId = verifyLine(lastPrecedingComment)
-            break
-          }
-          case 'any': {
-            messageId = verifyAny(lastPrecedingComment)
-            break
-          }
-          default: {
-            messageId = verifyJSDoc(lastPrecedingComment)
-            break
-          }
-        }
+        const messageId = verifyComment(lastPrecedingComment)
 
         if (!messageId) {
           continue

@@ -41,7 +41,7 @@ type ProcessNodeList = (
    *
    * @default true
    */
-  alignVertically?: boolean
+  shouldAlignVertically?: boolean
 ) => void
 
 /**

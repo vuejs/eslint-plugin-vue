@@ -82,33 +82,31 @@ export default {
           }
         }
         return false
-      } else {
-        const disableDirectiveKeys = []
-        if (state.block.disableAllKeys.size > 0) {
-          disableDirectiveKeys.push(...state.block.disableAllKeys)
+      }
+      const disableDirectiveKeys = []
+      if (state.block.disableAllKeys.size > 0) {
+        disableDirectiveKeys.push(...state.block.disableAllKeys)
+      }
+      if (state.line.disableAllKeys.size > 0) {
+        disableDirectiveKeys.push(...state.line.disableAllKeys)
+      }
+      if (message.ruleId) {
+        const block = state.block.disableRuleKeys.get(message.ruleId)
+        if (block) {
+          disableDirectiveKeys.push(...block)
         }
-        if (state.line.disableAllKeys.size > 0) {
-          disableDirectiveKeys.push(...state.line.disableAllKeys)
-        }
-        if (message.ruleId) {
-          const block = state.block.disableRuleKeys.get(message.ruleId)
-          if (block) {
-            disableDirectiveKeys.push(...block)
-          }
-          const line = state.line.disableRuleKeys.get(message.ruleId)
-          if (line) {
-            disableDirectiveKeys.push(...line)
-          }
-        }
-
-        if (disableDirectiveKeys.length > 0) {
-          // Store used eslint-disable comment key
-          usedDisableDirectiveKeys.push(...disableDirectiveKeys)
-          return false
-        } else {
-          return true
+        const line = state.line.disableRuleKeys.get(message.ruleId)
+        if (line) {
+          disableDirectiveKeys.push(...line)
         }
       }
+
+      if (disableDirectiveKeys.length > 0) {
+        // Store used eslint-disable comment key
+        usedDisableDirectiveKeys.push(...disableDirectiveKeys)
+        return false
+      }
+      return true
     })
 
     if (unusedDisableDirectiveReports.size > 0) {

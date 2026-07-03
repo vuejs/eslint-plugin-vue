@@ -13,7 +13,7 @@ function loadPatterns() {
       path.join(FIXTURE_ROOT, name, 'source.vue'),
       'utf8'
     )
-    const code = code0.replace(/^<!--(.+?)-->/, `<!--${name}-->`)
+    const code = code0.replace(/^<!--(.+?)-->/, () => `<!--${name}-->`)
     const inputSelector = /^<!--(.+?)-->/.exec(code0)![1].trim()
     return { code, name, inputSelector }
   })

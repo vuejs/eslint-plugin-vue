@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/consistent-boolean-name -- `VElementMatcher` predicate functions are clear like this */
+
 import parser from 'postcss-selector-parser'
 import nthCheck from 'nth-check'
 import utils from './index.js'

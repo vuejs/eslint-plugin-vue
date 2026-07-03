@@ -43,7 +43,7 @@ export default {
         : options.ignoreWhenBindingPresent
     const usedComponents = new Set<string>()
     let registeredComponents: { node: Property; name: string }[] = []
-    let ignoreReporting = false
+    let shouldIgnoreReporting = false
     let templateLocation: Position
 
     return utils.defineTemplateBodyVisitor(
@@ -76,7 +76,7 @@ export default {
           if (node.value.expression.type === 'Literal') {
             usedComponents.add(node.value.expression.value as string)
           } else if (ignoreWhenBindingPresent) {
-            ignoreReporting = true
+            shouldIgnoreReporting = true
           }
         },
         "VAttribute[directive=false][key.name='is']"(node: VAttribute) {
@@ -89,12 +89,12 @@ export default {
           usedComponents.add(value)
         },
         "VElement[name='template']"(node: VElement) {
-          templateLocation = templateLocation || node.loc.start
+          templateLocation ||= node.loc.start
         },
         "VElement[name='template']:exit"(node: VElement) {
           if (
             node.loc.start !== templateLocation ||
-            ignoreReporting ||
+            shouldIgnoreReporting ||
             utils.hasAttribute(node, 'src')
           )
             return

@@ -34,7 +34,7 @@ function loadPatterns(
     .readdirSync(FIXTURE_ROOT)
     .map((filename) => {
       const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-      const code = code0.replace(/^<!--(.+?)-->/, `<!--${filename}-->`)
+      const code = code0.replace(/^<!--(.+?)-->/, () => `<!--${filename}-->`)
       const baseObj = JSON.parse(/^<!--(.+?)-->/.exec(code0)![1])
       if ('parser' in baseObj) {
         baseObj.parser = require.resolve(baseObj.parser)

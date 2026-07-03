@@ -90,7 +90,7 @@ export function* iterateDefineRefs(
   globalScope: Scope.Scope
 ): Iterable<{ node: CallExpression; name: string }> {
   const tracker = new ReferenceTracker(globalScope)
-  for (const { node, path } of utils.iterateReferencesTraceMap(tracker, {
+  const reactiveReferences = utils.iterateReferencesTraceMap(tracker, {
     ref: {
       [ReferenceTracker.CALL]: true
     },
@@ -109,7 +109,8 @@ export function* iterateDefineRefs(
     toRefs: {
       [ReferenceTracker.CALL]: true
     }
-  })) {
+  })
+  for (const { node, path } of reactiveReferences) {
     const expr = node as CallExpression
     yield {
       node: expr,
@@ -293,12 +294,12 @@ interface RefObjectReferenceContext {
 }
 
 class RefObjectReferenceExtractor implements RefObjectReferences {
+  #processedIds = new Set<Identifier>()
   context: RuleContext
   references = new Map<
     Identifier | MemberExpression | CallExpression | ObjectPattern,
     RefObjectReference
   >()
-  _processedIds = new Set<Identifier>()
 
   constructor(context: RuleContext) {
     this.context = context
@@ -459,15 +460,16 @@ class RefObjectReferenceExtractor implements RefObjectReferences {
   }
 
   processIdentifierPattern(node: Identifier, ctx: RefObjectReferenceContext) {
-    if (this._processedIds.has(node)) {
+    if (this.#processedIds.has(node)) {
       return
     }
-    this._processedIds.add(node)
+    this.#processedIds.add(node)
 
-    for (const reference of iterateIdentifierReferences(
+    const identifierReferences = iterateIdentifierReferences(
       node,
       getGlobalScope(this.context)
-    )) {
+    )
+    for (const reference of identifierReferences) {
       const def =
         reference.resolved &&
         reference.resolved.defs.length === 1 &&
@@ -522,16 +524,16 @@ export function extractRefObjectReferences(
 }
 
 class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
+  #processedIds: Set<Identifier>
+  #escapeHintValueRefs: Set<CallExpression>
   context: RuleContext
   references: Map<Identifier, ReactiveVariableReference>
-  _processedIds: Set<Identifier>
-  _escapeHintValueRefs: Set<CallExpression>
 
   constructor(context: RuleContext) {
     this.context = context
     this.references = new Map()
-    this._processedIds = new Set()
-    this._escapeHintValueRefs = new Set(
+    this.#processedIds = new Set()
+    this.#escapeHintValueRefs = new Set(
       iterateEscapeHintValueRefs(getGlobalScope(context))
     )
   }
@@ -564,15 +566,16 @@ class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
     method: string,
     define: CallExpression
   ) {
-    if (this._processedIds.has(node)) {
+    if (this.#processedIds.has(node)) {
       return
     }
-    this._processedIds.add(node)
+    this.#processedIds.add(node)
 
-    for (const reference of iterateIdentifierReferences(
+    const identifierReferences = iterateIdentifierReferences(
       node,
       getGlobalScope(this.context)
-    )) {
+    )
+    for (const reference of identifierReferences) {
       const def =
         reference.resolved &&
         reference.resolved.defs.length === 1 &&
@@ -606,13 +609,10 @@ class ReactiveVariableReferenceExtractor implements ReactiveVariableReferences {
     let parent: ASTNode | null = target.parent
     while (parent) {
       if (parent.type === 'CallExpression') {
-        if (
+        return (
           parent.arguments.includes(target as any) &&
-          this._escapeHintValueRefs.has(parent)
-        ) {
-          return true
-        }
-        return false
+          this.#escapeHintValueRefs.has(parent)
+        )
       }
       if (
         (parent.type === 'Property' && parent.value === target) ||
@@ -647,9 +647,10 @@ export function extractReactiveVariableReferences(
 
   const references = new ReactiveVariableReferenceExtractor(context)
 
-  for (const { node, name } of iterateDefineReactiveVariables(
+  const reactiveVariables = iterateDefineReactiveVariables(
     getGlobalScope(context)
-  )) {
+  )
+  for (const { node, name } of reactiveVariables) {
     references.processDefineReactiveVariable(node, name)
   }
 

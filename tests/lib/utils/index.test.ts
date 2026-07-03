@@ -468,7 +468,7 @@ describe('editdistance', () => {
 function nodeToJson(nodes: ESNode[], ignores: string[] = []) {
   return JSON.stringify(nodes, replacer, 2)
   function replacer(key: string, value: unknown) {
-    if (key === 'parent' || key === 'start' || key === 'end') {
+    if (['parent', 'start', 'end'].includes(key)) {
       return undefined
     }
     if (ignores.includes(key)) {

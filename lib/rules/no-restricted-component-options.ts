@@ -37,7 +37,8 @@ function parseOption(
   type Step = StepForTest | StepForWildcard
 
   const steps: Step[] = []
-  for (const name of Array.isArray(option.name) ? option.name : [option.name]) {
+  const names = Array.isArray(option.name) ? option.name : [option.name]
+  for (const name of names) {
     if (name === '*') {
       steps.push({ wildcard: true })
     } else {
@@ -55,7 +56,7 @@ function parseOption(
   function buildTester(index: number): Tester {
     const step = steps[index]
     const next = index + 1
-    const needNext = steps.length > next
+    const hasNext = steps.length > next
     return (node) => {
       let keyName: string
       if (step.wildcard) {
@@ -72,7 +73,7 @@ function parseOption(
       }
 
       return {
-        next: needNext ? buildTester(next) : undefined,
+        next: hasNext ? buildTester(next) : undefined,
         wildcard: step.wildcard,
         keyName
       }

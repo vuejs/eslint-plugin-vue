@@ -57,14 +57,14 @@ export default {
     const sourceCode = context.sourceCode
     const option = context.options[0]
     const optionsPayload = context.options[1]
-    const useHyphenated = option !== 'never'
+    const shouldUseHyphenated = option !== 'never'
     const ignoredAttributes: string[] =
       (optionsPayload && optionsPayload.ignore) || []
     const isIgnoredTag = toRegExpGroupMatcher(optionsPayload?.ignoreTags)
-    const autofix = Boolean(optionsPayload && optionsPayload.autofix)
+    const shouldAutofix = Boolean(optionsPayload && optionsPayload.autofix)
 
     const caseConverter = getConverter(
-      useHyphenated ? 'kebab-case' : 'camelCase'
+      shouldUseHyphenated ? 'kebab-case' : 'camelCase'
     )
 
     function reportIssue(
@@ -77,12 +77,14 @@ export default {
       context.report({
         node: node.key,
         loc: node.loc,
-        messageId: useHyphenated ? 'mustBeHyphenated' : 'cannotBeHyphenated',
+        messageId: shouldUseHyphenated
+          ? 'mustBeHyphenated'
+          : 'cannotBeHyphenated',
         data: {
           text
         },
         fix:
-          autofix &&
+          shouldAutofix &&
           // It cannot be converted in snake_case.
           !name.includes('_')
             ? (fixer) => fixer.replaceText(argument, caseConverter(name))
@@ -97,7 +99,9 @@ export default {
         return true
       }
 
-      return useHyphenated ? value.toLowerCase() === value : !/-/.test(value)
+      return shouldUseHyphenated
+        ? value.toLowerCase() === value
+        : !/-/.test(value)
     }
 
     return utils.defineTemplateBodyVisitor(context, {

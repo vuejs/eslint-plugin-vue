@@ -248,7 +248,7 @@ const releases = [
       rule.removedInVersion
     ])
   )
-].sort()
+].sort((a, b) => a.localeCompare(b))
 const ruleLinkDefinitions = rules.map(
   (rule) => `[${rule.ruleId}]: ./${rule.name}.md`
 )

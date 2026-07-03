@@ -82,33 +82,30 @@ export default {
           continue
         }
 
-        for (const option of options) {
-          if (option.test(prop.propName)) {
-            const message =
-              option.message ||
-              `Using \`${prop.propName}\` props is not allowed.`
-            context.report({
-              node: prop.type === 'infer-type' ? prop.node : prop.key,
-              messageId: 'restrictedProp',
-              data: { message },
-              suggest:
-                prop.type === 'infer-type'
-                  ? null
-                  : createSuggest(
-                      prop.key,
-                      option,
-                      fixPropInOtherPlaces
-                        ? (fixer, replaceKeyText) =>
-                            fixPropInOtherPlaces(
-                              fixer,
-                              prop.propName,
-                              replaceKeyText
-                            )
-                        : undefined
-                    )
-            })
-            break
-          }
+        const option = options.find((option) => option.test(prop.propName))
+        if (option) {
+          const message =
+            option.message || `Using \`${prop.propName}\` props is not allowed.`
+          context.report({
+            node: prop.type === 'infer-type' ? prop.node : prop.key,
+            messageId: 'restrictedProp',
+            data: { message },
+            suggest:
+              prop.type === 'infer-type'
+                ? null
+                : createSuggest(
+                    prop.key,
+                    option,
+                    fixPropInOtherPlaces
+                      ? (fixer, replaceKeyText) =>
+                          fixPropInOtherPlaces(
+                            fixer,
+                            prop.propName,
+                            replaceKeyText
+                          )
+                      : undefined
+                  )
+          })
         }
       }
     }

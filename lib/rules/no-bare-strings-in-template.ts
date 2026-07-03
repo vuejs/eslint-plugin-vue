@@ -35,12 +35,12 @@ const DEFAULT_ALLOWLIST = [
   '}',
   '<',
   '>',
-  '\u00B7', // "·"
-  '\u2022', // "•"
-  '\u2010', // "‐"
-  '\u2013', // "–"
-  '\u2014', // "—"
-  '\u2212', // "−"
+  '\u{B7}', // "·"
+  '\u{2022}', // "•"
+  '\u{2010}', // "‐"
+  '\u{2013}', // "–"
+  '\u{2014}', // "—"
+  '\u{2212}', // "−"
   '|'
 ]
 
@@ -63,8 +63,8 @@ const DEFAULT_DIRECTIVES = ['v-text']
  */
 function parseTargetAttrs(options: any): TargetAttrs {
   const result: TargetAttrs = { names: {}, regexps: [], cache: {} }
-  for (const tagName of Object.keys(options)) {
-    const attrs = new Set<string>(options[tagName])
+  for (const [tagName, tagAttrs] of Object.entries(options)) {
+    const attrs = new Set<string>(tagAttrs)
     if (isRegExp(tagName)) {
       result.regexps.push({
         name: toRegExp(tagName),
@@ -233,7 +233,7 @@ export default {
         }
       },
       'VElement:exit'() {
-        elementStack = elementStack && elementStack.upper
+        elementStack &&= elementStack.upper
       },
       VAttribute(node: VAttribute | VDirective) {
         if (!node.value || !elementStack) {

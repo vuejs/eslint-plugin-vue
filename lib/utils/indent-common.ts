@@ -31,9 +31,16 @@ import { defineVisitor as tsDefineVisitor } from './indent-ts.ts'
 
 type MaybeNode = { type: string } & HasLocation
 
-const LT_CHAR = /[\n\r\u2028\u2029]/
-const LINES = /[^\n\r\u2028\u2029]+(?:$|\r\n|[\n\r\u2028\u2029])/g
+const LT_CHAR = /[\n\r\u{2028}\u{2029}]/u
+const LINES = /[^\n\r\u{2028}\u{2029}]+(?:$|\r\n|[\n\r\u{2028}\u{2029}])/gu
 const BLOCK_COMMENT_PREFIX = /^\s*\*/
+const HTML_CONTENT_TOKEN_TYPES = new Set([
+  'HTMLText',
+  'HTMLRCDataText',
+  'HTMLTagOpen',
+  'HTMLEndTagOpen',
+  'HTMLComment'
+])
 const ITERATION_OPTS = Object.freeze({
   includeComments: true,
   filter: isNotWhitespace
@@ -164,8 +171,7 @@ function isClosingToken(token: Token): boolean {
     token != null &&
     (token.type === 'HTMLEndTagOpen' ||
       token.type === 'VExpressionEnd' ||
-      (token.type === 'Punctuator' &&
-        (token.value === ')' || token.value === '}' || token.value === ']')))
+      (token.type === 'Punctuator' && [')', '}', ']'].includes(token.value)))
   )
 }
 
@@ -275,12 +281,7 @@ export function defineVisitor(
     const cursorOptions: SourceCode.CursorWithSkipOptions = {
       includeComments: true,
       filter: (token) =>
-        token != null &&
-        (token.type === 'HTMLText' ||
-          token.type === 'HTMLRCDataText' ||
-          token.type === 'HTMLTagOpen' ||
-          token.type === 'HTMLEndTagOpen' ||
-          token.type === 'HTMLComment')
+        token != null && HTML_CONTENT_TOKEN_TYPES.has(token.type)
     }
     const contentTokens = endToken
       ? tokenStore.getTokensBetween(node.startTag, endToken, cursorOptions)
@@ -327,14 +328,14 @@ export function defineVisitor(
    * The first node is offsetted from the given left token.
    * Rest nodes are adjusted to the first node.
    *
-   * @param alignVertically The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
+   * @param shouldAlignVertically The flag to align vertically. If `false`, this doesn't align vertically even if the first node is not at beginning of line.
    */
   function processNodeList(
     nodeList: (MaybeNode | null)[],
     left: MaybeNode | Token | null,
     right: MaybeNode | Token | null,
     offset: number,
-    alignVertically: boolean = true
+    shouldAlignVertically: boolean = true
   ): void {
     let t
     const leftToken = left && tokenStore.getFirstToken(left)
@@ -411,7 +412,7 @@ export function defineVisitor(
           setBaseline(baseToken)
         }
 
-        if (alignVertically === false && leftToken != null) {
+        if (!shouldAlignVertically && leftToken != null) {
           // Align tokens relatively to the left token.
           setOffset(alignTokens, offset, leftToken)
         } else {
@@ -502,11 +503,8 @@ export function defineVisitor(
           return false
         }
         const prevToken = tokenStore.getTokenBefore(belongingNode)
-        if (isOpeningParenToken(prevToken)) {
-          // It is not the first token because it is enclosed in parentheses.
-          return false
-        }
-        return true
+        // It is not the first token because it is enclosed in parentheses.
+        return !isOpeningParenToken(prevToken)
       }
       if (parent.type === 'CallExpression' || parent.type === 'NewExpression') {
         const openParen = tokenStore.getTokenAfter(
@@ -666,7 +664,7 @@ export function defineVisitor(
           return fixer.replaceTextRange(
             range,
             `${indent}${firstLine}${lines
-              .map((l) => l.replace(BLOCK_COMMENT_PREFIX, `${indent} *`))
+              .map((l) => l.replace(BLOCK_COMMENT_PREFIX, () => `${indent} *`))
               .join('')}`
           )
         }
@@ -925,16 +923,18 @@ export function defineVisitor(
     },
     VExpressionContainer(node) {
       if (
-        node.expression != null &&
-        node.range[0] !== node.expression.range[0]
+        node.expression == null ||
+        node.range[0] === node.expression.range[0]
       ) {
-        const startQuoteToken = tokenStore.getFirstToken(node)
-        const endQuoteToken = tokenStore.getLastToken(node)
-        const childToken = tokenStore.getTokenAfter(startQuoteToken)
-
-        setOffset(childToken, 1, startQuoteToken)
-        setOffset(endQuoteToken, 0, startQuoteToken)
+        return
       }
+
+      const startQuoteToken = tokenStore.getFirstToken(node)
+      const endQuoteToken = tokenStore.getLastToken(node)
+      const childToken = tokenStore.getTokenAfter(startQuoteToken)
+
+      setOffset(childToken, 1, startQuoteToken)
+      setOffset(endQuoteToken, 0, startQuoteToken)
     },
     VFilter(node) {
       const idToken = tokenStore.getFirstToken(node)
@@ -1104,17 +1104,19 @@ export function defineVisitor(
         BreakStatement | ContinueStatement | ReturnStatement | ThrowStatement
     ) {
       if (
-        ((node.type === 'ReturnStatement' || node.type === 'ThrowStatement') &&
-          node.argument != null) ||
-        ((node.type === 'BreakStatement' ||
-          node.type === 'ContinueStatement') &&
-          node.label != null)
+        ((node.type !== 'ReturnStatement' && node.type !== 'ThrowStatement') ||
+          node.argument == null) &&
+        ((node.type !== 'BreakStatement' &&
+          node.type !== 'ContinueStatement') ||
+          node.label == null)
       ) {
-        const firstToken = tokenStore.getFirstToken(node)
-        const nextToken = tokenStore.getTokenAfter(firstToken)
-
-        setOffset(nextToken, 1, firstToken)
+        return
       }
+
+      const firstToken = tokenStore.getFirstToken(node)
+      const nextToken = tokenStore.getTokenAfter(firstToken)
+
+      setOffset(nextToken, 1, firstToken)
     },
     CallExpression(node) {
       const typeArguments =
@@ -1130,11 +1132,12 @@ export function defineVisitor(
         setOffset(tokenStore.getFirstToken(typeArguments), 1, firstToken)
       }
 
-      for (const optionalToken of tokenStore.getTokensBetween(
+      const optionalTokens = tokenStore.getTokensBetween(
         tokenStore.getLastToken(typeArguments || node.callee),
         leftToken,
         isOptionalToken
-      )) {
+      )
+      for (const optionalToken of optionalTokens) {
         setOffset(optionalToken, 1, firstToken)
       }
 
@@ -1575,11 +1578,12 @@ export function defineVisitor(
           isClosingBracketToken
         )
 
-        for (const optionalToken of tokenStore.getTokensBetween(
+        const optionalTokens = tokenStore.getTokensBetween(
           tokenStore.getLastToken(node.object),
           leftBracketToken,
           isOptionalToken
-        )) {
+        )
+        for (const optionalToken of optionalTokens) {
           setOffset(optionalToken, 1, objectToken)
         }
 
@@ -1765,13 +1769,15 @@ export function defineVisitor(
       )
     },
     VariableDeclarator(node) {
-      if (node.init != null) {
-        const idToken = tokenStore.getFirstToken(node)
-        const eqToken = tokenStore.getTokenAfter(node.id)
-        const initToken = tokenStore.getTokenAfter(eqToken)
-
-        setOffset([eqToken, initToken], 1, idToken)
+      if (node.init == null) {
+        return
       }
+
+      const idToken = tokenStore.getFirstToken(node)
+      const eqToken = tokenStore.getTokenAfter(node.id)
+      const initToken = tokenStore.getTokenAfter(eqToken)
+
+      setOffset([eqToken, initToken], 1, idToken)
     },
     'WhileStatement, WithStatement'(node: WhileStatement | WithStatement) {
       const firstToken = tokenStore.getFirstToken(node)
@@ -1786,13 +1792,15 @@ export function defineVisitor(
       processMaybeBlock(node.body, firstToken)
     },
     YieldExpression(node) {
-      if (node.argument != null) {
-        const yieldToken = tokenStore.getFirstToken(node)
+      if (node.argument == null) {
+        return
+      }
 
-        setOffset(tokenStore.getTokenAfter(yieldToken), 1, yieldToken)
-        if (node.delegate) {
-          setOffset(tokenStore.getTokenAfter(yieldToken, 1), 1, yieldToken)
-        }
+      const yieldToken = tokenStore.getFirstToken(node)
+
+      setOffset(tokenStore.getTokenAfter(yieldToken), 1, yieldToken)
+      if (node.delegate) {
+        setOffset(tokenStore.getTokenAfter(yieldToken, 1), 1, yieldToken)
       }
     },
     // ----------------------------------------------------------------------
@@ -1918,11 +1926,11 @@ export function defineVisitor(
   }
 
   for (const key of Object.keys(visitor)) {
-    for (const nodeName of key
-      .split(/\s*,\s*/gu)
-      .map((s) => s.trim())
-      .filter((s) => /[a-z]+/i.test(s))) {
-      knownNodes.add(nodeName)
+    for (const rawNodeName of key.split(/\s*,\s*/gu)) {
+      const nodeName = rawNodeName.trim()
+      if (/[a-z]+/i.test(nodeName)) {
+        knownNodes.add(nodeName)
+      }
     }
   }
 

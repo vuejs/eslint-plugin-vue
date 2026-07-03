@@ -80,16 +80,21 @@ export default typegen([
       'eslint-plugin/require-meta-schema-description': 'off',
       'eslint-plugin/require-test-case-name': 'off',
 
+      'unicorn/better-dom-traversing': 'off', // false positives on Vue AST nodes, whose `children` is a plain array, not a DOM `NodeList`
       'unicorn/filename-case': 'off',
-      'unicorn/no-null': 'off',
+      'unicorn/name-replacements': 'off',
       'unicorn/no-array-callback-reference': 'off', // doesn't work well with TypeScript's custom type guards
       'unicorn/no-array-reverse': 'off', // enable when the minimum supported Node.js version is v20
       'unicorn/no-array-sort': 'off', // enable when the minimum supported Node.js version is v20
+      'unicorn/no-computed-property-existence-check': 'off', // the dynamic `obj[key]` checks here are intentional truthiness/`in` checks, not `Object.hasOwn` existence checks
+      'unicorn/no-null': 'off',
+      'unicorn/no-this-outside-of-class': 'off', // `this` is used intentionally in the exported utils object-literal methods and `@this`-bound helpers
+      'unicorn/no-useless-recursion': 'off', // tail recursion is often clearer than a manual loop for the AST/tree helpers here
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-iterator-to-array': 'off', // `Iterator#toArray()` requires Node.js v22
       'unicorn/prefer-module': 'off',
-      'unicorn/prefer-top-level-await': 'off', // only available in ESM modules
-      'unicorn/prevent-abbreviations': 'off'
+      'unicorn/prefer-top-level-await': 'off' // only available in ESM modules
     }
   }),
 
@@ -244,6 +249,7 @@ export default typegen([
         }
       ],
 
+      'unicorn/consistent-conditional-object-spread': ['error', 'ternary'],
       'unicorn/consistent-function-scoping': [
         'error',
         { checkArrowFunctions: false }
@@ -319,6 +325,20 @@ export default typegen([
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',
       'internal/no-invalid-meta-docs-categories': 'error'
+    }
+  },
+  {
+    files: ['docs/**'],
+    rules: {
+      // Browser shims and polyfills in the docs site intentionally assign to the global object.
+      'unicorn/no-global-object-property-assignment': 'off'
+    }
+  },
+  {
+    files: ['tests/**'],
+    rules: {
+      // test fixtures intentionally contain `${...}` in plain strings to exercise the rules
+      'unicorn/no-incorrect-template-string-interpolation': 'off'
     }
   },
   ...defineConfig({

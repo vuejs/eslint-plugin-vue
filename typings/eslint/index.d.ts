@@ -26,6 +26,7 @@ export namespace Scope {
   interface ScopeManager {
     scopes: Scope[]
     globalScope: Scope | null
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- mirrors the external ESLint `ScopeManager` type
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
     getDeclaredVariables(node: VAST.ESNode): Variable[]
   }
@@ -118,6 +119,8 @@ export namespace Scope {
 }
 
 export class SourceCode /*extends ESLintSourceCode*/ {
+  static splitLines(text: string): string[]
+
   text: string
   ast: AST.Program
   lines: string[]
@@ -125,8 +128,6 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   parserServices: SourceCode.ParserServices
   scopeManager: Scope.ScopeManager
   visitorKeys: SourceCode.VisitorKeys
-
-  static splitLines(text: string): string[]
 
   tokensAndComments: (AST.Token | VNODE.Comment)[]
 
@@ -319,6 +320,7 @@ export namespace Rule {
   interface CodePath extends ESLintRule.CodePath {}
   interface CodePathSegment extends ESLintRule.CodePathSegment {}
 
+  // eslint-disable-next-line unicorn/consistent-compound-words -- mirrors ESLint's `RuleMetaData` type name
   interface RuleMetaData extends ESLintRule.RuleMetaData {
     docs: Required<ESLintRule.RuleMetaData>['docs']
     // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
