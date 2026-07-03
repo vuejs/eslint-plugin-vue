@@ -115,7 +115,7 @@
     "espree": "^11.2.0",
     "events": "^3.3.0",
     "globals": "^17.7.0",
-    "jsdom": "^27.4.0",
+    "jsdom": "^29.1.1",
     "markdownlint-cli": "^0.49.0",
     "pathe": "^2.0.3",
     "prettier": "^3.9.4",
