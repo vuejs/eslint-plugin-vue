@@ -1,6 +1,6 @@
 import utils from './index.js'
 
-interface CommentParserConfig {
+export interface CommentParserConfig {
   exceptions?: string[]
 }
 type HTMLCommentVisitor = (comment: ParsedHTMLComment) => void

@@ -129,7 +129,7 @@ function extractRefs(
 describe.each(loadPatterns(REF_OBJECTS_FIXTURE_ROOT))(
   'extractRefObjectReferences() [$name]',
   ({ code, resultFilePath, options }) => {
-    it('should to extract the references to match the expected references.', () => {
+    it('should to extract the references to match the expected references.', async () => {
       const references = [
         ...extractRefs(code, extractRefObjectReferences, options)
       ]
@@ -149,14 +149,14 @@ describe.each(loadPatterns(REF_OBJECTS_FIXTURE_ROOT))(
       }
       result += code.slice(start)
 
-      expect(result).toMatchFileSnapshot(resultFilePath)
+      await expect(result).toMatchFileSnapshot(resultFilePath)
     })
   }
 )
 describe.each(loadPatterns(REACTIVE_VARS_FIXTURE_ROOT))(
   'extractReactiveVariableReferences() [$name]',
   ({ code, resultFilePath, options }) => {
-    it('should to extract the references to match the expected references.', () => {
+    it('should to extract the references to match the expected references.', async () => {
       const references = [
         ...extractRefs(code, extractReactiveVariableReferences, options)
       ]
@@ -176,7 +176,7 @@ describe.each(loadPatterns(REACTIVE_VARS_FIXTURE_ROOT))(
       }
       result += code.slice(start)
 
-      expect(result).toMatchFileSnapshot(resultFilePath)
+      await expect(result).toMatchFileSnapshot(resultFilePath)
     })
   }
 )

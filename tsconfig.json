@@ -20,9 +20,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "baseUrl": ".",
     "paths": {
-      "*": ["typings/*"]
+      "*": ["./typings/*"]
     },
     "skipLibCheck": true,
     "allowImportingTsExtensions": true

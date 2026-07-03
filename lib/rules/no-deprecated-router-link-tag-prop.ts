@@ -12,7 +12,7 @@ function getComponentNames(context: RuleContext) {
       : ['RouterLink']
 
   return new Set(
-    components.flatMap((component) => [
+    components.flatMap((component: string) => [
       kebabCase(component),
       pascalCase(component)
     ])
