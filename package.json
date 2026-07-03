@@ -120,7 +120,7 @@
     "pathe": "^2.0.3",
     "prettier": "^3.9.4",
     "tsdown": "^0.22.3",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite-plugin-eslint4b": "^0.8.1",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.9",
