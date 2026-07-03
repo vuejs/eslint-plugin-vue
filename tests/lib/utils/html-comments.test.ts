@@ -60,12 +60,12 @@ function tokenize(code: string, option: CommentParserConfig) {
 describe.each(loadPatterns())(
   'defineVisitor() [$name]',
   ({ name, code, option }) => {
-    it('should be parsed to valid tokens.', () => {
+    it('should be parsed to valid tokens.', async () => {
       const tokens = tokenize(code, option)
 
       const actual = JSON.stringify(tokens, null, 4)
 
-      expect(actual).toMatchFileSnapshot(
+      await expect(actual).toMatchFileSnapshot(
         path.join(FIXTURE_ROOT, name, 'comment-tokens.json')
       )
     })

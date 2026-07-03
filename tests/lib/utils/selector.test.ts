@@ -61,11 +61,11 @@ function extractElements(code: string, inputSelector: string) {
 describe.each(loadPatterns())(
   `parseSelector() [$name]`,
   ({ name, code, inputSelector }) => {
-    it('should to parse the selector to match the valid elements.', () => {
+    it('should to parse the selector to match the valid elements.', async () => {
       const elements = extractElements(code, inputSelector)
       const actual = JSON.stringify(elements, null, 4)
 
-      expect(actual).toMatchFileSnapshot(
+      await expect(actual).toMatchFileSnapshot(
         path.join(FIXTURE_ROOT, name, 'result.json')
       )
     })
