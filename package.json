@@ -124,6 +124,6 @@
     "vite-plugin-eslint4b": "^0.8.1",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.9",
-    "vue-eslint-parser": "^10.3.0"
+    "vue-eslint-parser": "^10.4.1"
   }
 }
