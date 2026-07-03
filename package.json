@@ -98,7 +98,7 @@
     "@vitest/coverage-v8": "^4.1.9",
     "assert": "^2.1.0",
     "env-cmd": "^11.0.0",
-    "esbuild": "^0.27.2",
+    "esbuild": "^0.28.1",
     "eslint": "^10.6.0",
     "eslint-compat-utils": "^0.6.5",
     "eslint-config-flat-gitignore": "^2.1.0",
