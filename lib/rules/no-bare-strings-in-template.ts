@@ -61,7 +61,7 @@ const DEFAULT_DIRECTIVES = ['v-text']
 /**
  * Parse attributes option
  */
-function parseTargetAttrs(options: any): TargetAttrs {
+function parseTargetAttrs(options: Record<string, string[]>): TargetAttrs {
   const result: TargetAttrs = { names: {}, regexps: [], cache: {} }
   for (const [tagName, tagAttrs] of Object.entries(options)) {
     const attrs = new Set<string>(tagAttrs)
