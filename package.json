@@ -84,7 +84,7 @@
     "@changesets/cli": "^2.31.0",
     "@eslint/markdown": "^8.0.3",
     "@ota-meshi/site-kit-eslint-editor-vue": "^0.2.4",
-    "@stylistic/eslint-plugin": "^5.7.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@svitejs/changesets-changelog-github-compact": "^1.2.0",
     "@types/eslint": "^9.6.1",
     "@types/espree": "^10.1.0",
