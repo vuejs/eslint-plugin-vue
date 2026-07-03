@@ -110,7 +110,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-unicorn": "^70.0.0",
     "eslint-plugin-vue": "file:.",
-    "eslint-typegen": "^2.3.0",
+    "eslint-typegen": "^2.3.1",
     "eslint-visitor-keys": "^5.0.1",
     "espree": "^11.2.0",
     "events": "^3.3.0",
