@@ -30,6 +30,10 @@ tester.run('prefer-separate-static-class', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div :class="`${foo}-dynamic-class`" /></template>'
+    },
+    {
+      filename: 'test.vue',
       code: `<template><div :class="'dynamic-class-' + foo" /></template>`
     },
     {
@@ -96,6 +100,36 @@ tester.run('prefer-separate-static-class', rule, {
           column: 24,
           endLine: 1,
           endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: "<template><div :class=\"`form-item input ${isDisabled ? 'disabled' : ''}`\" /></template>",
+      output: null,
+      errors: [
+        {
+          message:
+            'Static class "form-item input" should be in a static `class` attribute.',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :class="`${dynamicClass} static-class`" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
         }
       ]
     },
