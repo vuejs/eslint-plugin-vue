@@ -316,6 +316,7 @@ All component-related rules are applied to code that passes any of the following
 - `Vue.component()` expression
 - `Vue.extend()` expression
 - `Vue.mixin()` expression
+- `new Vue()` expression
 - `app.component()` expression
 - `app.mixin()` expression
 - `createApp()` expression
