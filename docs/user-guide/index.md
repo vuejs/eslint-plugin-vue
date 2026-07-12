@@ -314,6 +314,7 @@ The `parserOptions.parser` option can also specify an object to specify multiple
 All component-related rules are applied to code that passes any of the following checks:
 
 - `Vue.component()` expression
+- `component()` expression
 - `Vue.extend()` expression
 - `Vue.mixin()` expression
 - `new Vue()` expression
@@ -321,7 +322,8 @@ All component-related rules are applied to code that passes any of the following
 - `app.mixin()` expression
 - `createApp()` expression
 - `defineComponent()` expression
-- `export default {}` in `.vue` or `.jsx` file
+- `defineNuxtComponent()` expression
+- `export default {}` in `.vue`, `.jsx`, or `.tsx` file
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:
 
