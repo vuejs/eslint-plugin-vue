@@ -314,13 +314,13 @@ The `parserOptions.parser` option can also specify an object to specify multiple
 All component-related rules are applied to code that passes any of the following checks:
 
 - `Vue.component()` expression
-- `component()` expression
 - `Vue.extend()` expression
 - `Vue.mixin()` expression
-- `new Vue()` expression
 - `app.component()` expression
 - `app.mixin()` expression
+- `new Vue()` expression
 - `createApp()` expression
+- `component()` expression
 - `defineComponent()` expression
 - `defineNuxtComponent()` expression
 - `export default {}` in `.vue`, `.jsx`, or `.tsx` file
