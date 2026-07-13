@@ -1,5 +1,5 @@
 ---
-"eslint-plugin-vue": patch
+"eslint-plugin-vue": minor
 ---
 
-Fixed `vue/prefer-separate-static-class` to report static text inside template literals
+Added support for template literals to `vue/prefer-separate-static-class`
