@@ -323,7 +323,7 @@ All component-related rules are applied to code that passes any of the following
 - `component()` expression
 - `defineComponent()` expression
 - `defineNuxtComponent()` expression
-- `export default {}` in `.vue`, `.jsx`, or `.tsx` file
+- `export default {}` in `.vue`, `.jsx`, or `.tsx` files
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:
 
