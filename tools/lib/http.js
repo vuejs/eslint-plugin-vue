@@ -1,6 +1,7 @@
 module.exports = {
   httpGet
 }
-function httpGet(url) {
-  return fetch(url).then((res) => res.text())
+async function httpGet(url) {
+  const res = await fetch(url)
+  return res.text()
 }

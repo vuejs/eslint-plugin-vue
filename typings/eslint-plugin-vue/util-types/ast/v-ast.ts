@@ -15,12 +15,7 @@ export type NS = {
   XMLNS: 'http://www.w3.org/2000/xmlns/'
 }
 export type Namespace =
-  | NS['HTML']
-  | NS['MathML']
-  | NS['SVG']
-  | NS['XLink']
-  | NS['XML']
-  | NS['XMLNS']
+  NS['HTML'] | NS['MathML'] | NS['SVG'] | NS['XLink'] | NS['XML'] | NS['XMLNS']
 export interface VVariable {
   id: ES.Identifier
   kind: 'v-for' | 'scope'

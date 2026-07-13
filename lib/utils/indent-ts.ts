@@ -41,7 +41,7 @@ type ProcessNodeList = (
    *
    * @default true
    */
-  alignVertically?: boolean
+  shouldAlignVertically?: boolean
 ) => void
 
 /**
@@ -1008,9 +1008,7 @@ export function defineVisitor({
      */
     'TSTypeOperator, TSTypeQuery, TSInferType'(
       node:
-        | TSESTree.TSTypeOperator
-        | TSESTree.TSTypeQuery
-        | TSESTree.TSInferType
+        TSESTree.TSTypeOperator | TSESTree.TSTypeQuery | TSESTree.TSInferType
     ) {
       // keyof T
       // type T = typeof av

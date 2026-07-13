@@ -11,7 +11,7 @@ This script updates `lib/configs/flat/*.js` files from rule's meta data.
 
 const fs = require('node:fs')
 const path = require('node:path')
-const { FlatESLint } = require('eslint/use-at-your-own-risk')
+const { ESLint } = require('eslint')
 const { categories } = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
@@ -28,11 +28,11 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId, alwaysError) {
+function formatRules(rules, categoryId, shouldAlwaysError) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
       let options =
-        alwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
+        shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
       if (defaultOptions) {
@@ -48,9 +48,7 @@ function formatRules(rules, categoryId, alwaysError) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category, alwaysError = false) {
-  let extendsCategoryId = extendsCategories[category.categoryId]
-
+function formatCategory(category, shouldAlwaysError = false) {
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
@@ -84,14 +82,16 @@ export default [
       parser: vueParser,
       sourceType: 'module',
     },
-    rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
     processor: 'vue/vue'
   }
 ]
 `
   }
 
-  if (alwaysError && !errorCategories.has(extendsCategoryId)) {
+  let extendsCategoryId = extendsCategories[category.categoryId]
+
+  if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
     extendsCategoryId += '-error'
   }
 
@@ -105,8 +105,8 @@ import config from './${extendsCategoryId}.ts'
 export default [
   ...config,
   {
-    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${alwaysError ? '-error' : ''}/rules',
-    rules: ${formatRules(category.rules, category.categoryId, alwaysError)},
+    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${shouldAlwaysError ? '-error' : ''}/rules',
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
   }
 ]
 `
@@ -130,9 +130,9 @@ for (const category of categories) {
 
 // Format files.
 async function format() {
-  const linter = new FlatESLint({ fix: true })
+  const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  FlatESLint.outputFixes(report)
+  ESLint.outputFixes(report)
 }
 
 format()

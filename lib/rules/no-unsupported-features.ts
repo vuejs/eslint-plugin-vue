@@ -62,16 +62,15 @@ const cache = new Map()
  * It's null if the `x` is not a valid range text.
  */
 function getSemverRange(x: string): semver.Range {
-  const s = String(x)
-  let ret = cache.get(s) || null
+  let ret = cache.get(x) || null
 
   if (!ret) {
     try {
-      ret = new semver.Range(s)
+      ret = new semver.Range(x)
     } catch {
       // Ignore parsing error.
     }
-    cache.set(s, ret)
+    cache.set(x, ret)
   }
 
   return ret

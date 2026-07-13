@@ -76,11 +76,11 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const disallowVueBuiltInComponents =
+    const shouldDisallowVueBuiltInComponents =
       options.disallowVueBuiltInComponents === true
-    const disallowVue3BuiltInComponents =
+    const shouldDisallowVue3BuiltInComponents =
       options.disallowVue3BuiltInComponents === true
-    const htmlElementCaseSensitive = options.htmlElementCaseSensitive === true
+    const isHtmlElementCaseSensitive = options.htmlElementCaseSensitive === true
 
     const RESERVED_NAMES_IN_HTML = new Set(htmlElements)
     const RESERVED_NAMES_IN_OTHERS = new Set([
@@ -89,7 +89,7 @@ export default {
       ...svgElements
     ])
 
-    if (!htmlElementCaseSensitive) {
+    if (!isHtmlElementCaseSensitive) {
       addAll(RESERVED_NAMES_IN_HTML, htmlElements.map(capitalize))
       addAll(RESERVED_NAMES_IN_OTHERS, [
         ...deprecatedHtmlElements.map(capitalize),
@@ -100,10 +100,10 @@ export default {
 
     const reservedNames = new Set([
       ...RESERVED_NAMES_IN_HTML,
-      ...(disallowVueBuiltInComponents
+      ...(shouldDisallowVueBuiltInComponents
         ? utils.VUE2_BUILTIN_COMPONENT_NAMES
         : []),
-      ...(disallowVue3BuiltInComponents
+      ...(shouldDisallowVue3BuiltInComponents
         ? utils.VUE3_BUILTIN_COMPONENT_NAMES
         : []),
       ...RESERVED_NAMES_IN_OTHERS
@@ -122,7 +122,7 @@ export default {
         const quasis = node.quasis[0]
         name = quasis.value.cooked
       } else {
-        name = `${node.value}`
+        name = String(node.value)
       }
       if (reservedNames.has(name)) {
         report(node, name)
@@ -141,12 +141,14 @@ export default {
 
     return utils.compositingVisitors(
       utils.executeOnCallVueComponent(context, (node) => {
-        if (node.arguments.length === 2) {
-          const argument = node.arguments[0]
+        if (node.arguments.length !== 2) {
+          return
+        }
 
-          if (canVerify(argument)) {
-            reportIfInvalid(argument)
-          }
+        const argument = node.arguments[0]
+
+        if (canVerify(argument)) {
+          reportIfInvalid(argument)
         }
       }),
       utils.executeOnVue(context, (obj) => {

@@ -4,11 +4,8 @@ self.addEventListener('install', (e) => {
   self.skipWaiting()
 })
 
-self.addEventListener('activate', (e) => {
-  self.registration
-    .unregister()
-    .then(() => self.clients.matchAll())
-    .then((clients) => {
-      for (const client of clients) client.navigate(client.url)
-    })
+self.addEventListener('activate', async (e) => {
+  await self.registration.unregister()
+  const clients = await self.clients.matchAll()
+  for (const client of clients) client.navigate(client.url)
 })

@@ -78,12 +78,12 @@ export default {
         return
       }
 
-      const startLine = openDecoration
-        ? openDecoration.loc.end.line
-        : value.loc.start.line
-      const endLine = closeDecoration
-        ? closeDecoration.loc.start.line
-        : value.loc.end.line
+      const startLine = (
+        openDecoration ? openDecoration.loc.end : value.loc.start
+      ).line
+      const endLine = (
+        closeDecoration ? closeDecoration.loc.start : value.loc.end
+      ).line
       const newlineType =
         startLine === endLine ? option.singleline : option.multiline
       if (newlineType === 'ignore') {
@@ -98,7 +98,7 @@ export default {
      */
     function checkCommentOpen(
       comment: ParsedHTMLComment,
-      requireNewline: boolean
+      requiresNewline: boolean
     ): void {
       const { value, openDecoration, open } = comment
       if (!value) {
@@ -106,7 +106,7 @@ export default {
       }
       const beforeToken = openDecoration || open
 
-      if (requireNewline) {
+      if (requiresNewline) {
         if (beforeToken.loc.end.line < value.loc.start.line) {
           // Is valid
           return
@@ -145,7 +145,7 @@ export default {
      */
     function checkCommentClose(
       comment: ParsedHTMLComment,
-      requireNewline: boolean
+      requiresNewline: boolean
     ): void {
       const { value, closeDecoration, close } = comment
       if (!value) {
@@ -153,7 +153,7 @@ export default {
       }
       const afterToken = closeDecoration || close
 
-      if (requireNewline) {
+      if (requiresNewline) {
         if (value.loc.end.line < afterToken.loc.start.line) {
           // Is valid
           return

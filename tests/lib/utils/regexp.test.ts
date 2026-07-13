@@ -36,8 +36,8 @@ describe('toRegExp()', () => {
   it('RegExp like string should be convert to RegExp', () => {
     assert.deepEqual(toRegExp('/^foo/i'), /^foo/i)
     assert.deepEqual(toRegExp('/.*/iu'), /.*/iu)
-    assert.deepEqual(toRegExp(`${/^bar/i}`), /^bar/i)
-    assert.deepEqual(toRegExp(`${/[\sA-Z]+/u}`), /[\sA-Z]+/u)
+    assert.deepEqual(toRegExp(String(/^bar/i)), /^bar/i)
+    assert.deepEqual(toRegExp(String(/[\sA-Z]+/u)), /[\sA-Z]+/u)
   })
 
   it('should handle simple patterns', () => {

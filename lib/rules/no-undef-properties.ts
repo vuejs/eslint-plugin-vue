@@ -116,7 +116,7 @@ export default {
        */
       verifyReferences(
         references: IPropertyReferences,
-        options?: { props?: boolean }
+        options?: { isProps?: boolean }
       ) {
         if (this.hasUnknownProperty) return
         const report = this.report.bind(this)
@@ -139,7 +139,7 @@ export default {
 
             const prop = defineProperties.get && defineProperties.get(refName)
             if (prop) {
-              if (options && options.props && !prop.isProps) {
+              if (options && options.isProps && !prop.isProps) {
                 report(nodes[0], referencePathName, 'undefProps')
                 continue
               }
@@ -210,8 +210,7 @@ export default {
       return ctx
     }
     function getVueComponentContextForTemplate():
-      | VueComponentContext
-      | undefined {
+      VueComponentContext | undefined {
       const keys = [...vueComponentContextMap.keys()]
       const exported =
         keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
@@ -249,8 +248,8 @@ export default {
             const moduleScope = globalScope.childScopes.find(
               (scope) => scope.type === 'module'
             )
-            for (const variable of (moduleScope && moduleScope.variables) ||
-              []) {
+            const moduleVariables = (moduleScope && moduleScope.variables) || []
+            for (const variable of moduleVariables) {
               ctx.defineProperties.set(variable.name, {})
             }
           }
@@ -349,7 +348,7 @@ export default {
         onVueObjectEnter(node) {
           const ctx = getVueComponentContext(node)
 
-          for (const prop of utils.iterateProperties(
+          const properties = utils.iterateProperties(
             node,
             new Set([
               GROUP_PROPERTY,
@@ -360,7 +359,8 @@ export default {
               GROUP_METHODS,
               GROUP_INJECT
             ])
-          )) {
+          )
+          for (const prop of properties) {
             const propertyMap =
               (prop.groupName === GROUP_DATA ||
                 prop.groupName === GROUP_ASYNC_DATA) &&
@@ -380,10 +380,11 @@ export default {
             })
           }
 
-          for (const watcherOrExpose of utils.iterateProperties(
+          const watchersAndExposes = utils.iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
-          )) {
+          )
+          for (const watcherOrExpose of watchersAndExposes) {
             if (watcherOrExpose.groupName === GROUP_WATCHER) {
               const watcher = watcherOrExpose
               // Process `watch: { foo /* <- this */ () {} }`
@@ -425,17 +426,17 @@ export default {
           },
           vueData
         ) {
-          let props = false
           const property = getParentProperty(node)
           if (!property) {
             return
           }
+          let isProps = false
           if (property.parent === vueData.node) {
             if (utils.getStaticPropertyName(property) !== 'data') {
               return
             }
             // check { data: (vm) => vm.prop }
-            props = true
+            isProps = true
           } else {
             const parentProperty = getParentProperty(property.parent)
             if (!parentProperty) {
@@ -471,15 +472,13 @@ export default {
           const propertyReferences =
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           const ctx = getVueComponentContext(vueData.node)
-          ctx.verifyReferences(propertyReferences, { props })
+          ctx.verifyReferences(propertyReferences, { isProps })
         },
         onSetupFunctionEnter(node, vueData) {
           const propertyReferences =
             propertyReferenceExtractor.extractFromFunctionParam(node, 0)
           const ctx = getVueComponentContext(vueData.node)
-          ctx.verifyReferences(propertyReferences, {
-            props: true
-          })
+          ctx.verifyReferences(propertyReferences, { isProps: true })
         },
         onRenderFunctionEnter(node, vueData) {
           const ctx = getVueComponentContext(vueData.node)
@@ -495,7 +494,7 @@ export default {
               propertyReferenceExtractor.extractFromFunctionParam(node, 1)
 
             ctx.verifyReferences(propertyReferencesForV2.getNest('props'), {
-              props: true
+              isProps: true
             })
           }
         },

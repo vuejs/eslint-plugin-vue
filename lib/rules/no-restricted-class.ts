@@ -11,25 +11,27 @@ const reportForbiddenClass = (
   context: RuleContext,
   isForbiddenClass: (name: string) => boolean
 ) => {
-  if (isForbiddenClass(className)) {
-    const loc = node.value ? node.value.loc : node.loc
-    context.report({
-      node,
-      loc,
-      messageId: 'forbiddenClass',
-      data: {
-        class: className
-      }
-    })
+  if (!isForbiddenClass(className)) {
+    return
   }
+
+  const loc = (node.value || node).loc
+  context.report({
+    node,
+    loc,
+    messageId: 'forbiddenClass',
+    data: {
+      class: className
+    }
+  })
 }
 
 function* extractClassNames(
   node: Expression,
-  textOnly?: boolean
+  isTextOnly?: boolean
 ): IterableIterator<{ className: string; reportNode: ESNode }> {
   if (node.type === 'Literal') {
-    yield* `${node.value}`
+    yield* String(node.value)
       .split(/\s+/)
       .map((className) => ({ className, reportNode: node }))
     return
@@ -53,7 +55,7 @@ function* extractClassNames(
     yield* extractClassNames(node.right, true)
     return
   }
-  if (textOnly) {
+  if (isTextOnly) {
     return
   }
   if (node.type === 'ObjectExpression') {

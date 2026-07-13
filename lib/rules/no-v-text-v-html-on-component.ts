@@ -40,7 +40,8 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const allow = new Set<string>(options.allow)
-    const ignoreElementNamespaces = options.ignoreElementNamespaces === true
+    const shouldIgnoreElementNamespaces =
+      options.ignoreElementNamespaces === true
 
     /**
      * Check whether the given node is an allowed component or not.
@@ -61,7 +62,7 @@ export default {
     function verify(node: VDirective) {
       const element = node.parent.parent
       if (
-        utils.isCustomComponent(element, ignoreElementNamespaces) &&
+        utils.isCustomComponent(element, shouldIgnoreElementNamespaces) &&
         !isAllowedComponent(element)
       ) {
         context.report({

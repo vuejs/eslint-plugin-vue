@@ -46,9 +46,8 @@ for (const rule of rules) {
     if (categoryId !== 'uncategorized' && !categoryTitles[categoryId]) {
       throw new Error(`Category "${categoryId}" does not have a title defined.`)
     }
-    const catRules =
-      categoryRules[categoryId] || (categoryRules[categoryId] = [])
-    catRules.push(rule)
+    categoryRules[categoryId] ||= []
+    categoryRules[categoryId].push(rule)
   }
 }
 

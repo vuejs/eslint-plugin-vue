@@ -65,10 +65,7 @@ function defaultMessage(node: VAttribute, option: ParsedOption) {
     value = node.value == null ? '` set to `true' : `="${node.value.value}"`
   }
 
-  let on = ''
-  if (option.useElement) {
-    on = ` on \`<${node.parent.parent.rawName}>\``
-  }
+  const on = option.useElement ? ` on \`<${node.parent.parent.rawName}>\`` : ''
   return `Using \`${key + value}\`${on} is not allowed.`
 }
 

@@ -34,8 +34,9 @@ export default {
   },
   create(context: RuleContext) {
     const ignores = new Set<string>(['App', 'app'])
-    for (const ignore of (context.options[0] && context.options[0].ignores) ||
-      []) {
+    const optionIgnores =
+      (context.options[0] && context.options[0].ignores) || []
+    for (const ignore of optionIgnores) {
       ignores.add(ignore)
       if (isPascalCase(ignore)) {
         // PascalCase
@@ -58,7 +59,7 @@ export default {
 
     function validateName(nameNode: Expression | SpreadElement) {
       if (nameNode.type !== 'Literal') return
-      const componentName = `${nameNode.value}`
+      const componentName = String(nameNode.value)
       if (!isValidComponentName(componentName)) {
         context.report({
           node: nameNode,

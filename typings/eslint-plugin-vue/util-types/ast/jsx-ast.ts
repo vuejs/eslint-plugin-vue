@@ -23,9 +23,7 @@ export type JSXNode =
 
 export type JSXChild = JSXElement | JSXExpression | JSXFragment | JSXText
 export type JSXExpression =
-  | JSXEmptyExpression
-  | JSXSpreadChild
-  | JSXExpressionContainer
+  JSXEmptyExpression | JSXSpreadChild | JSXExpressionContainer
 export type JSXTagNameExpression = JSXIdentifier | JSXMemberExpression
 
 export interface JSXAttribute extends HasParentNode {

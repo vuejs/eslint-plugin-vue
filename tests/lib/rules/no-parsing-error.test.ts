@@ -66,7 +66,7 @@ tester.run('no-parsing-error', rule, {
       options: [{ 'character-reference-outside-unicode-range': false }]
     },
     {
-      code: '<template>\u0003</template>',
+      code: '<template>\u{3}</template>',
       options: [{ 'control-character-in-input-stream': false }]
     },
     {
@@ -126,7 +126,7 @@ tester.run('no-parsing-error', rule, {
       options: [{ 'noncharacter-character-reference': false }]
     },
     {
-      code: '<template>\uFFFE</template>',
+      code: '<template>\u{FFFE}</template>',
       options: [{ 'noncharacter-in-input-stream': false }]
     },
     {
@@ -138,7 +138,7 @@ tester.run('no-parsing-error', rule, {
       options: [{ 'surrogate-character-reference': false }]
     },
     {
-      code: '<template>\uD800</template>',
+      code: '<template>\u{D800}</template>',
       options: [{ 'surrogate-in-input-stream': false }]
     },
     {
@@ -154,7 +154,7 @@ tester.run('no-parsing-error', rule, {
       options: [{ 'unexpected-equals-sign-before-attribute-name': false }]
     },
     {
-      code: '<template>\u0000</template>',
+      code: '<template>\u{0}</template>',
       options: [{ 'unexpected-null-character': false }]
     },
     {
@@ -375,7 +375,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\u0003</template>',
+      code: '<template>\u{3}</template>',
       options: [{ 'control-character-in-input-stream': true }],
       errors: [
         {
@@ -571,7 +571,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\uFFFE</template>',
+      code: '<template>\u{FFFE}</template>',
       options: [{ 'noncharacter-in-input-stream': true }],
       errors: [
         {
@@ -610,7 +610,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\uD800</template>',
+      code: '<template>\u{D800}</template>',
       options: [{ 'surrogate-in-input-stream': true }],
       errors: [
         {
@@ -664,7 +664,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\u0000</template>',
+      code: '<template>\u{0}</template>',
       options: [{ 'unexpected-null-character': true }],
       errors: [
         {
@@ -859,7 +859,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\u0003</template>',
+      code: '<template>\u{3}</template>',
       errors: [
         {
           message: 'Parsing error: control-character-in-input-stream.',
@@ -1040,7 +1040,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\uFFFE</template>',
+      code: '<template>\u{FFFE}</template>',
       errors: [
         {
           message: 'Parsing error: noncharacter-in-input-stream.',
@@ -1076,7 +1076,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\uD800</template>',
+      code: '<template>\u{D800}</template>',
       errors: [
         {
           message: 'Parsing error: surrogate-in-input-stream.',
@@ -1126,7 +1126,7 @@ tester.run('no-parsing-error', rule, {
       ]
     },
     {
-      code: '<template>\u0000</template>',
+      code: '<template>\u{0}</template>',
       errors: [
         {
           message: 'Parsing error: unexpected-null-character.',
