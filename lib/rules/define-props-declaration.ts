@@ -8,7 +8,8 @@ export default {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'enforce declaration style of `defineProps`',
+      description:
+        'enforce declaration style of `defineProps` and `defineModel`',
       categories: undefined,
       url: 'https://eslint.vuejs.org/rules/define-props-declaration.html'
     },
@@ -47,6 +48,29 @@ export default {
             const typeArguments =
               'typeArguments' in node ? node.typeArguments : node.typeParameters
             if (typeArguments && typeArguments.params.length > 0) {
+              context.report({
+                node,
+                messageId: 'hasTypeArg'
+              })
+            }
+            break
+          }
+        }
+      },
+      onDefineModelEnter(node, model) {
+        switch (defineType) {
+          case 'type-based': {
+            if (!model.typeNode) {
+              context.report({
+                node,
+                messageId: 'hasArg'
+              })
+            }
+            break
+          }
+
+          case 'runtime': {
+            if (model.typeNode) {
               context.report({
                 node,
                 messageId: 'hasTypeArg'
