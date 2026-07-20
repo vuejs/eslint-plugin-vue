@@ -316,7 +316,8 @@ export default typegen([
         { pattern: 'https://eslint.vuejs.org/rules/{{name}}.html' }
       ],
       'internal/no-invalid-meta': 'error',
-      'internal/no-invalid-meta-docs-categories': 'error'
+      'internal/no-invalid-meta-docs-categories': 'error',
+      'eslint-plugin/require-meta-languages': 'off'
     }
   },
   {
@@ -324,7 +325,8 @@ export default typegen([
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',
-      'internal/no-invalid-meta-docs-categories': 'error'
+      'internal/no-invalid-meta-docs-categories': 'error',
+      'eslint-plugin/require-meta-languages': 'off' // We are intentionally disabling it because it is a breaking change.
     }
   },
   {
