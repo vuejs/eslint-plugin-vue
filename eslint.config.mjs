@@ -315,9 +315,9 @@ export default typegen([
         'error',
         { pattern: 'https://eslint.vuejs.org/rules/{{name}}.html' }
       ],
+      'eslint-plugin/require-meta-languages': 'off', // Enabling this would require adding `meta.languages` to every published rule, which is a breaking change, so we keep it disabled for now.
       'internal/no-invalid-meta': 'error',
-      'internal/no-invalid-meta-docs-categories': 'error',
-      'eslint-plugin/require-meta-languages': 'off'
+      'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
   {
@@ -325,8 +325,7 @@ export default typegen([
     rules: {
       'eslint-plugin/require-meta-docs-url': 'off',
       'internal/no-invalid-meta': 'error',
-      'internal/no-invalid-meta-docs-categories': 'error',
-      'eslint-plugin/require-meta-languages': 'off' // We are intentionally disabling it because it is a breaking change.
+      'internal/no-invalid-meta-docs-categories': 'error'
     }
   },
   {
