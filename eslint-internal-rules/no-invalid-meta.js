@@ -87,7 +87,8 @@ module.exports = {
         'Rule is missing a meta.docs.categories property.',
       invalidMetaDocsRecommended:
         'Rule should not have a meta.docs.recommended property.'
-    }
+    },
+    languages: ['js/js']
   },
 
   create(context) {
