@@ -1,5 +1,5 @@
 ---
-'eslint-plugin-vue': patch
+'eslint-plugin-vue': minor
 ---
 
-support `@nuxtjs/composition-api`
+Added support for SFCs using `@nuxtjs/composition-api`, which is now treated the same as `vue` or `@vue/composition-api`.
