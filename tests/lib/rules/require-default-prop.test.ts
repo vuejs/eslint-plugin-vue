@@ -428,6 +428,19 @@ ruleTester.run('require-default-prop', rule, {
       }
     },
     {
+      // Shorthand Boolean constructor is exempt, like a Boolean prop.
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      defineModel(Boolean)
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions
+      }
+    },
+    {
       filename: 'test.vue',
       code: `
       <script setup>

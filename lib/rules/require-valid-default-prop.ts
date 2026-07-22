@@ -485,9 +485,7 @@ export default {
         },
         onDefineModelEnter(node, model) {
           let syntheticProp:
-            | ComponentObjectProp
-            | ComponentInferTypeProp
-            | null = null
+            ComponentObjectProp | ComponentInferTypeProp | null = null
           let defaultFromOptions: Property | null = null
 
           if (model.typeNode) {
@@ -538,15 +536,8 @@ export default {
           if (!data) {
             return
           }
-          for (const {
-            prop,
-            types: typeNames,
-            default: defType
-          } of data.props) {
-            for (const returnType of defType.returnTypes) {
-              if (typeNames.has(returnType.type)) continue
-              report(returnType.node, prop, typeNames)
-            }
+          for (const propContext of data.props) {
+            verifyReturnTypes(propContext)
           }
         }
       })

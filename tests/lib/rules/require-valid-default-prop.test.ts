@@ -1705,7 +1705,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'modelValue' prop must be a boolean.",
-          line: 3
+          line: 3,
+          column: 47,
+          endLine: 3,
+          endColumn: 54
         }
       ]
     },
@@ -1721,7 +1724,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'count' prop must be a number.",
-          line: 3
+          line: 3,
+          column: 55,
+          endLine: 3,
+          endColumn: 60
         }
       ]
     },
@@ -1738,7 +1744,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'modelValue' prop must be a function.",
-          line: 3
+          line: 3,
+          column: 45,
+          endLine: 3,
+          endColumn: 47
         }
       ]
     },
@@ -1754,7 +1763,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'modelValue' prop must be a function.",
-          line: 3
+          line: 3,
+          column: 46,
+          endLine: 3,
+          endColumn: 48
         }
       ]
     },
@@ -1771,7 +1783,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'modelValue' prop must be a string.",
-          line: 3
+          line: 3,
+          column: 52,
+          endLine: 3,
+          endColumn: 55
         }
       ]
     },
@@ -1787,7 +1802,10 @@ ruleTester.run('require-valid-default-prop', rule, {
         {
           message:
             "Type of the default value for 'modelValue' prop must be a string.",
-          line: 3
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     }
