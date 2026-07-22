@@ -6,14 +6,13 @@ import utils from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 
 function getComponentNames(context: RuleContext) {
-  let components = ['RouterLink']
-
-  if (context.options[0] && context.options[0].components) {
-    components = context.options[0].components
-  }
+  const components =
+    context.options[0] && context.options[0].components
+      ? context.options[0].components
+      : ['RouterLink']
 
   return new Set(
-    components.flatMap((component) => [
+    components.flatMap((component: string) => [
       kebabCase(component),
       pascalCase(component)
     ])

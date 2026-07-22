@@ -7,9 +7,7 @@ if (typeof window !== 'undefined' && typeof require === 'undefined') {
     throw e
   }
 }
-// @ts-expect-error -- Cannot change `module` option
 import type { Theme } from 'vitepress'
-// @ts-expect-error -- Cannot change `module` option
 import DefaultTheme from 'vitepress/theme'
 // @ts-expect-error -- ignore
 import Layout from './Layout.vue'

@@ -509,6 +509,145 @@ ruleTester.run('sort-keys', rule, {
     {
       code: 'var obj = {a:1, _:2, b:3}',
       options: ['desc', { natural: true, caseSensitive: false, minKeys: 4 }]
+    },
+
+    // allowLineSeparatedGroups option
+    {
+      code: `
+        var obj = {
+          e: 1,
+          f: 2,
+          g: 3,
+
+          a: 4,
+          b: 5,
+          c: 6
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }]
+    },
+    {
+      code: `
+        var obj = {
+          b: 1,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }]
+    },
+    {
+      code: `
+        var obj = {
+          b: 1
+
+          ,
+
+          // comment
+          a: 2,
+          c: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }]
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+          // comment
+
+          // comment
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [a+b]: 1,
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: `
+        var obj = {
+          b: "/*",
+
+          a: "*/",
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }]
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          a,
+          ...z,
+          c
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 2018 }
+    },
+    {
+      code: `
+        var obj = {
+          b,
+
+          [foo()]: [
+
+          ],
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 2018 }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        export default {
+          data () {
+            return {
+              e: 1,
+              f: 2,
+
+              a: 3,
+              b: 4
+            }
+          }
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions
     }
   ],
 
@@ -2267,6 +2406,229 @@ ruleTester.run('sort-keys', rule, {
           column: 17,
           endLine: 7,
           endColumn: 18
+        }
+      ]
+    },
+
+    // allowLineSeparatedGroups option
+    {
+      code: `
+        var obj = {
+          b: 1,
+          c: 2,
+          a: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: false }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'c'.",
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        let obj = {
+          b
+
+          ,a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: false }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 13
+        }
+      ]
+    },
+    {
+      code: `
+        let obj = {
+          b
+
+          ,a
+        }
+      `,
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 5,
+          column: 12,
+          endLine: 5,
+          endColumn: 13
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          b: 1,
+          c () {
+
+          },
+          a: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'c'.",
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          a: 1,
+          b: 2,
+
+          z () {
+
+          },
+          y: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'y' should be before 'z'.",
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          b: 1,
+          c () {
+          },
+          // comment
+          a: 3
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'c'.",
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          b,
+          [a+b]: 1,
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          c: 1,
+          d: 2,
+          // comment
+          // comment
+          b() {
+          },
+          e: 4
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 6 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'b' should be before 'd'.",
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        var obj = {
+          b: "/*",
+          a: "*/",
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 12
+        }
+      ]
+    },
+    {
+      code: `
+        let obj = {
+          b,
+          [foo()]: [
+          // ↓ this blank is inside a property and therefore should not count
+
+          ],
+          a
+        }
+      `,
+      options: ['asc', { allowLineSeparatedGroups: true }],
+      languageOptions: { ecmaVersion: 2018 },
+      errors: [
+        {
+          message:
+            "Expected object keys to be in ascending order. 'a' should be before 'b'.",
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 12
         }
       ]
     }

@@ -13,9 +13,8 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 // eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
   const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
-  const rules: typeof import('../../tools/lib/rules.js') = await import(
-    rulesPath
-  ).then((mod) => mod.default || mod)
+  const mod = await import(rulesPath)
+  const rules: typeof import('../../tools/lib/rules.js') = mod.default || mod
   const uncategorizedRules = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
@@ -81,12 +80,12 @@ export default async () => {
       )
     const children: DefaultTheme.SidebarItem[] = categoryRules
       .filter(({ ruleId }) => {
-        const exists = categorizedRules.some(
+        const isAlreadyListed = categorizedRules.some(
           ({ items }) =>
             items &&
             items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
         )
-        return !exists
+        return !isAlreadyListed
       })
       .map(({ ruleId, name }) => ({
         text: ruleId,

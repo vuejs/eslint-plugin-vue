@@ -27,8 +27,7 @@ interface ComponentNonObjectPropertyData {
   node: ASTNode
 }
 type ComponentPropertyData =
-  | ComponentNonObjectPropertyData
-  | ComponentObjectPropertyData
+  ComponentNonObjectPropertyData | ComponentObjectPropertyData
 
 interface TemplatePropertiesContainer {
   propertyReferences: IPropertyReferences[]
@@ -216,8 +215,8 @@ export default {
   create(context: RuleContext) {
     const options = context.options[0] || {}
     const groups = new Set<GroupName>(options.groups || [GROUP_PROPERTY])
-    const deepData = Boolean(options.deepData)
-    const ignorePublicMembers = Boolean(options.ignorePublicMembers)
+    const shouldCheckDeepData = Boolean(options.deepData)
+    const shouldIgnorePublicMembers = Boolean(options.ignorePublicMembers)
     const unreferencedOptions = new Set(options.unreferencedOptions || [])
     let propsReferencePattern: null | Pattern = null
 
@@ -298,6 +297,64 @@ export default {
     }
 
     /**
+     * Report the given property if it is unused.
+     */
+    function verifyPropertyUsage(
+      property: ComponentPropertyData,
+      propertyReferences: IPropertyReferences,
+      propertyReferencesForProps: IPropertyReferences
+    ) {
+      if (
+        (property.groupName === 'props' &&
+          propertyReferencesForProps.hasProperty(property.name)) ||
+        propertyReferences.hasProperty('$props')
+      ) {
+        // used props
+        return
+      }
+      if (
+        property.groupName === 'setup' &&
+        templatePropertiesContainer.refNames.has(property.name)
+      ) {
+        // used template refs
+        return
+      }
+      if (
+        shouldIgnorePublicMembers &&
+        isPublicMember(property, context.sourceCode)
+      ) {
+        return
+      }
+
+      if (propertyReferences.hasProperty(property.name)) {
+        // used
+        if (
+          shouldCheckDeepData &&
+          (property.groupName === 'data' ||
+            property.groupName === 'asyncData') &&
+          property.type === 'object'
+        ) {
+          // Check the deep properties of the data option.
+          verifyDataOptionDeepProperties(
+            [property.name],
+            property.property.value,
+            propertyReferences.getNest(property.name)
+          )
+        }
+        return
+      }
+
+      context.report({
+        node: property.node,
+        messageId: 'unused',
+        data: {
+          group: PROPERTY_LABEL[property.groupName],
+          name: property.name
+        }
+      })
+    }
+
+    /**
      * Report all unused properties.
      */
     function reportUnusedProperties() {
@@ -312,54 +369,11 @@ export default {
         )
 
         for (const property of container.properties) {
-          if (
-            (property.groupName === 'props' &&
-              propertyReferencesForProps.hasProperty(property.name)) ||
-            propertyReferences.hasProperty('$props')
-          ) {
-            // used props
-            continue
-          }
-          if (
-            property.groupName === 'setup' &&
-            templatePropertiesContainer.refNames.has(property.name)
-          ) {
-            // used template refs
-            continue
-          }
-          if (
-            ignorePublicMembers &&
-            isPublicMember(property, context.sourceCode)
-          ) {
-            continue
-          }
-
-          if (propertyReferences.hasProperty(property.name)) {
-            // used
-            if (
-              deepData &&
-              (property.groupName === 'data' ||
-                property.groupName === 'asyncData') &&
-              property.type === 'object'
-            ) {
-              // Check the deep properties of the data option.
-              verifyDataOptionDeepProperties(
-                [property.name],
-                property.property.value,
-                propertyReferences.getNest(property.name)
-              )
-            }
-            continue
-          }
-
-          context.report({
-            node: property.node,
-            messageId: 'unused',
-            data: {
-              group: PROPERTY_LABEL[property.groupName],
-              name: property.name
-            }
-          })
+          verifyPropertyUsage(
+            property,
+            propertyReferences,
+            propertyReferencesForProps
+          )
         }
       }
     }
@@ -526,10 +540,11 @@ export default {
         onVueObjectEnter(node, vueNode) {
           const container = getVueComponentPropertiesContainer(vueNode.node)
 
-          for (const watcherOrExpose of utils.iterateProperties(
+          const watchersAndExposes = utils.iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
-          )) {
+          )
+          for (const watcherOrExpose of watchersAndExposes) {
             if (watcherOrExpose.groupName === GROUP_WATCHER) {
               const watcher = watcherOrExpose
               // Process `watch: { foo /* <- this */ () {} }`

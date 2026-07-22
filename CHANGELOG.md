@@ -1,5 +1,26 @@
 # eslint-plugin-vue
 
+## 10.10.0
+
+### Minor Changes
+
+- Added support for template literals to [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) ([#3097](https://github.com/vuejs/eslint-plugin-vue/pull/3097))
+
+- Added `allowLineSeparatedGroups` option to [`vue/sort-keys`](https://eslint.vuejs.org/rules/sort-keys.html) rule ([#3084](https://github.com/vuejs/eslint-plugin-vue/pull/3084))
+
+### Patch Changes
+
+- Updated `@eslint-community/eslint-utils`, `semver` and `xml-name-validator` dependencies ([#3094](https://github.com/vuejs/eslint-plugin-vue/pull/3094))
+
+## 10.9.2
+
+### Patch Changes
+
+- Fixed [`vue/custom-event-name-casing`](https://eslint.vuejs.org/rules/custom-event-name-casing.html) to check segments of colon-separated event names like `update:foo-bar` ([#3079](https://github.com/vuejs/eslint-plugin-vue/pull/3079))
+- Fixed [`vue/one-component-per-file`](https://eslint.vuejs.org/rules/one-component-per-file.html) to not report functions not imported from Vue ([#3063](https://github.com/vuejs/eslint-plugin-vue/pull/3063))
+- Fixed [`vue/prefer-import-from-vue`](https://eslint.vuejs.org/rules/prefer-import-from-vue.html) to not report imports/exports of names that are not re-exported by `vue` ([#3081](https://github.com/vuejs/eslint-plugin-vue/pull/3081))
+- Fixed [`vue/return-in-computed-property`](https://eslint.vuejs.org/rules/return-in-computed-property.html) and [`vue/require-render-return`](https://eslint.vuejs.org/rules/require-render-return.html) to not report exhaustive switch statements when TypeScript type information is available ([#3067](https://github.com/vuejs/eslint-plugin-vue/pull/3067))
+
 ## 10.9.1
 
 ### Patch Changes

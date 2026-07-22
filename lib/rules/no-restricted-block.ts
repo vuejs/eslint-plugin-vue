@@ -83,16 +83,14 @@ export default {
           return
         }
         for (const block of getTopLevelHTMLElements()) {
-          for (const option of options) {
-            if (option.test(block)) {
-              const message = option.message || defaultMessage(block)
-              context.report({
-                node: block.startTag,
-                messageId: 'restrictedBlock',
-                data: { message }
-              })
-              break
-            }
+          const option = options.find((option) => option.test(block))
+          if (option) {
+            const message = option.message || defaultMessage(block)
+            context.report({
+              node: block.startTag,
+              messageId: 'restrictedBlock',
+              data: { message }
+            })
           }
         }
       }

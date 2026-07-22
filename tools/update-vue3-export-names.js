@@ -32,51 +32,58 @@ async function* extractExportNames(m) {
     range: true
   })
   for (const node of rootNode.body) {
-    switch (node.type) {
-      case 'ExportAllDeclaration': {
-        if (node.exported) {
-          yield node.exported.name
-        } else {
-          for await (const name of extractExportNames(node.source.value)) {
-            yield name
+    yield* extractNamesFromNode(node)
+  }
+}
+
+/**
+ * @param {import('@typescript-eslint/types').TSESTree.ProgramStatement} node
+ */
+async function* extractNamesFromNode(node) {
+  switch (node.type) {
+    case 'ExportAllDeclaration': {
+      if (node.exported) {
+        yield node.exported.name
+      } else {
+        for await (const name of extractExportNames(node.source.value)) {
+          yield name
+        }
+      }
+      break
+    }
+    case 'ExportNamedDeclaration': {
+      if (node.declaration) {
+        switch (node.declaration.type) {
+          case 'ClassDeclaration':
+          case 'ClassExpression':
+          case 'FunctionDeclaration':
+          case 'TSDeclareFunction':
+          case 'TSEnumDeclaration':
+          case 'TSInterfaceDeclaration':
+          case 'TSTypeAliasDeclaration': {
+            yield node.declaration.id.name
+            break
+          }
+          case 'VariableDeclaration': {
+            for (const decl of node.declaration.declarations) {
+              yield* extractNamesFromPattern(decl.id)
+            }
+            break
+          }
+          case 'TSModuleDeclaration': {
+            //?
+            break
           }
         }
-        break
       }
-      case 'ExportNamedDeclaration': {
-        if (node.declaration) {
-          switch (node.declaration.type) {
-            case 'ClassDeclaration':
-            case 'ClassExpression':
-            case 'FunctionDeclaration':
-            case 'TSDeclareFunction':
-            case 'TSEnumDeclaration':
-            case 'TSInterfaceDeclaration':
-            case 'TSTypeAliasDeclaration': {
-              yield node.declaration.id.name
-              break
-            }
-            case 'VariableDeclaration': {
-              for (const decl of node.declaration.declarations) {
-                yield* extractNamesFromPattern(decl.id)
-              }
-              break
-            }
-            case 'TSModuleDeclaration': {
-              //?
-              break
-            }
-          }
-        }
-        for (const spec of node.specifiers) {
-          yield spec.exported.name
-        }
-        break
+      for (const spec of node.specifiers) {
+        yield spec.exported.name
       }
-      case 'ExportDefaultDeclaration': {
-        yield 'default'
-        break
-      }
+      break
+    }
+    case 'ExportDefaultDeclaration': {
+      yield 'default'
+      break
     }
   }
 }

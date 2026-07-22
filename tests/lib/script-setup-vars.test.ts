@@ -222,6 +222,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'Bar' is defined but never used.",
             line: 5,
+            column: 18,
+            endLine: 5,
+            endColumn: 21,
             suggestions: semver.gte(ESLint.version, '9.17.0')
               ? [
                   {
@@ -256,7 +259,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           },
           {
             message: "'baz' is assigned a value but never used.",
-            line: 18
+            line: 18,
+            column: 17,
+            endLine: 18,
+            endColumn: 20
           }
         ]
       },
@@ -277,6 +283,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'camelCase' is defined but never used.",
             line: 3,
+            column: 18,
+            endLine: 3,
+            endColumn: 27,
             suggestions: semver.gte(ESLint.version, '9.17.0')
               ? [
                   {
@@ -315,6 +324,9 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
           {
             message: "'msg' is assigned a value but never used.",
             line: 4,
+            column: 19,
+            endLine: 4,
+            endColumn: 22,
             suggestions: semver.gte(ESLint.version, '9.17.0')
               ? [
                   {
@@ -351,7 +363,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         errors: [
           {
             message: "'i' is assigned a value but never used.",
-            line: 3
+            line: 3,
+            column: 17,
+            endLine: 3,
+            endColumn: 18
           }
         ]
       },
@@ -371,7 +386,10 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         errors: [
           {
             message: "'msg' is assigned a value but never used.",
-            line: 3
+            line: 3,
+            column: 17,
+            endLine: 3,
+            endColumn: 20
           }
         ]
       },
@@ -436,11 +454,17 @@ describe('vue-eslint-parser should properly mark the variables used in the templ
         errors: [
           {
             message: "'defineUnknown' is not defined.",
-            line: 3
+            line: 3,
+            column: 23,
+            endLine: 3,
+            endColumn: 36
           },
           {
             message: "'defineUnknown' is not defined.",
-            line: 7
+            line: 7,
+            column: 22,
+            endLine: 7,
+            endColumn: 35
           }
         ]
       }

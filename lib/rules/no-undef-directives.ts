@@ -91,13 +91,10 @@ export default {
      */
     function isVerifyTargetDirective(rawName: string): boolean {
       const kebabName = kebabCase(rawName)
-      if (
-        utils.isBuiltInDirectiveName(rawName) ||
-        isAnyIgnored(rawName, kebabName)
-      ) {
-        return false
-      }
-      return true
+      return (
+        !utils.isBuiltInDirectiveName(rawName) &&
+        !isAnyIgnored(rawName, kebabName)
+      )
     }
 
     function createTemplateBodyVisitor(
@@ -137,7 +134,8 @@ export default {
         const moduleScope = globalScope.childScopes.find(
           (scope) => scope.type === 'module'
         )
-        for (const variable of moduleScope?.variables ?? []) {
+        const moduleVariables = moduleScope?.variables ?? []
+        for (const variable of moduleVariables) {
           definedInSetupDirectives.add(variable.name)
         }
       }

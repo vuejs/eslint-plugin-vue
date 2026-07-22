@@ -30,59 +30,49 @@ export type VNodeListenerMap = {
   "VAttribute[directive=true][key.name.name='cloak']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='else-if']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='else-if']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='else']": V.VDirective
   "VAttribute[directive=true][key.name.name='else']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='for']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: V.VForExpression | null })
-      | null
+      (V.VExpressionContainer & { expression: V.VForExpression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='for']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: V.VForExpression | null })
-      | null
+      (V.VExpressionContainer & { expression: V.VForExpression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='html']": V.VDirective
   "VAttribute[directive=true][key.name.name='html']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='if']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='if']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='is']": V.VDirective
   "VAttribute[directive=true][key.name.name='is']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='model']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='model']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='memo']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='memo']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='on']": V.VDirective & {
     value:
@@ -104,13 +94,11 @@ export type VNodeListenerMap = {
   "VAttribute[directive=true][key.name.name='pre']:exit": V.VDirective
   "VAttribute[directive=true][key.name.name='show']": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='show']:exit": V.VDirective & {
     value:
-      | (V.VExpressionContainer & { expression: ES.Expression | null })
-      | null
+      (V.VExpressionContainer & { expression: ES.Expression | null }) | null
   }
   "VAttribute[directive=true][key.name.name='slot']": V.VDirective & {
     value:
@@ -258,13 +246,9 @@ export type ESNodeListenerMap = {
   ObjectExpression: ES.ObjectExpression
   'ObjectExpression:exit': ES.ObjectExpression
   ':function':
-    | ES.FunctionExpression
-    | ES.ArrowFunctionExpression
-    | ES.FunctionDeclaration
+    ES.FunctionExpression | ES.ArrowFunctionExpression | ES.FunctionDeclaration
   ':function:exit':
-    | ES.FunctionExpression
-    | ES.ArrowFunctionExpression
-    | ES.FunctionDeclaration
+    ES.FunctionExpression | ES.ArrowFunctionExpression | ES.FunctionDeclaration
   FunctionExpression: ES.FunctionExpression
   'FunctionExpression:exit': ES.FunctionExpression
   ArrowFunctionExpression: ES.ArrowFunctionExpression

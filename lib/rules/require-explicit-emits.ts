@@ -95,7 +95,7 @@ export default {
   },
   create(context: RuleContext) {
     const options = context.options[0] || {}
-    const allowProps = !!options.allowProps
+    const shouldAllowProps = !!options.allowProps
     const setupContexts = new Map<
       ObjectExpression | Program,
       {
@@ -133,7 +133,7 @@ export default {
       if (emits.some((e) => e.emitName === name || e.emitName == null)) {
         return
       }
-      if (allowProps) {
+      if (shouldAllowProps) {
         const key = `on${capitalize(name)}`
         if (props.some((e) => e.propName === key || e.propName == null)) {
           return
@@ -307,15 +307,17 @@ export default {
             })
           },
           onDefinePropsEnter(_node, props) {
-            if (allowProps) {
-              vuePropsDeclarations.set(programNode, props)
+            if (!shouldAllowProps) {
+              return
+            }
 
-              if (
-                vueTemplateDefineData &&
-                vueTemplateDefineData.type === 'setup'
-              ) {
-                vueTemplateDefineData.props = props
-              }
+            vuePropsDeclarations.set(programNode, props)
+
+            if (
+              vueTemplateDefineData &&
+              vueTemplateDefineData.type === 'setup'
+            ) {
+              vueTemplateDefineData.props = props
             }
           },
           ...callVisitor
@@ -326,7 +328,7 @@ export default {
               node,
               utils.getComponentEmitsFromOptions(node)
             )
-            if (allowProps) {
+            if (shouldAllowProps) {
               vuePropsDeclarations.set(
                 node,
                 utils.getComponentPropsFromOptions(node)
@@ -403,6 +405,7 @@ export default {
                 (vueTemplateDefineData.type !== 'export' &&
                   vueTemplateDefineData.type !== 'setup')) &&
               emits &&
+              // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `type` for `vueTemplateDefineData` below
               (type === 'mark' || type === 'export' || type === 'definition')
             ) {
               vueTemplateDefineData = {
@@ -450,17 +453,17 @@ function buildSuggest(
               lastEmit.node,
               `, '${nameWithLoc.name}'`
             )
-          } else if (lastEmit.type === 'object') {
+          }
+          if (lastEmit.type === 'object') {
             // Object
             return fixer.insertTextAfter(
               lastEmit.node,
               `, '${nameWithLoc.name}': null`
             )
-          } else {
-            // type
-            // The argument is unknown and cannot be suggested.
-            return null
           }
+          // type
+          // The argument is unknown and cannot be suggested.
+          return null
         }
       }
     ]
@@ -489,7 +492,7 @@ function buildSuggest(
       return [
         {
           messageId: 'addOneOption',
-          data: { name: `${nameWithLoc.name}`, emitsKind },
+          data: { name: nameWithLoc.name, emitsKind },
           fix(fixer) {
             return fixer.insertTextAfter(
               leftBracket,
@@ -500,7 +503,8 @@ function buildSuggest(
           }
         }
       ]
-    } else if (emitsOptionValue.type === 'ObjectExpression') {
+    }
+    if (emitsOptionValue.type === 'ObjectExpression') {
       const leftBrace = sourceCode.getFirstToken(
         emitsOptionValue,
         isOpeningBraceToken
@@ -508,7 +512,7 @@ function buildSuggest(
       return [
         {
           messageId: 'addOneOption',
-          data: { name: `${nameWithLoc.name}`, emitsKind },
+          data: { name: nameWithLoc.name, emitsKind },
           fix(fixer) {
             return fixer.insertTextAfter(
               leftBrace,
@@ -530,7 +534,7 @@ function buildSuggest(
   return [
     {
       messageId: 'addArrayEmitsOption',
-      data: { name: `${nameWithLoc.name}`, emitsKind },
+      data: { name: nameWithLoc.name, emitsKind },
       fix(fixer) {
         if (afterOptionNode) {
           return fixer.insertTextAfter(
@@ -545,29 +549,28 @@ function buildSuggest(
             before,
             `,\nemits: ['${nameWithLoc.name}']`
           )
-        } else {
-          const objectLeftBrace = sourceCode.getFirstToken(
-            object,
-            isOpeningBraceToken
-          )!
-          const objectRightBrace = sourceCode.getLastToken(
-            object,
-            isClosingBraceToken
-          )!
-          return fixer.insertTextAfter(
-            objectLeftBrace,
-            `\nemits: ['${nameWithLoc.name}']${
-              objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
-                ? ''
-                : '\n'
-            }`
-          )
         }
+        const objectLeftBrace = sourceCode.getFirstToken(
+          object,
+          isOpeningBraceToken
+        )!
+        const objectRightBrace = sourceCode.getLastToken(
+          object,
+          isClosingBraceToken
+        )!
+        return fixer.insertTextAfter(
+          objectLeftBrace,
+          `\nemits: ['${nameWithLoc.name}']${
+            objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
+              ? ''
+              : '\n'
+          }`
+        )
       }
     },
     {
       messageId: 'addObjectEmitsOption',
-      data: { name: `${nameWithLoc.name}`, emitsKind },
+      data: { name: nameWithLoc.name, emitsKind },
       fix(fixer) {
         if (afterOptionNode) {
           return fixer.insertTextAfter(
@@ -583,24 +586,23 @@ function buildSuggest(
             before,
             `,\nemits: {'${nameWithLoc.name}': null}`
           )
-        } else {
-          const objectLeftBrace = sourceCode.getFirstToken(
-            object,
-            isOpeningBraceToken
-          )!
-          const objectRightBrace = sourceCode.getLastToken(
-            object,
-            isClosingBraceToken
-          )!
-          return fixer.insertTextAfter(
-            objectLeftBrace,
-            `\nemits: {'${nameWithLoc.name}': null}${
-              objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
-                ? ''
-                : '\n'
-            }`
-          )
         }
+        const objectLeftBrace = sourceCode.getFirstToken(
+          object,
+          isOpeningBraceToken
+        )!
+        const objectRightBrace = sourceCode.getLastToken(
+          object,
+          isClosingBraceToken
+        )!
+        return fixer.insertTextAfter(
+          objectLeftBrace,
+          `\nemits: {'${nameWithLoc.name}': null}${
+            objectLeftBrace.loc.end.line < objectRightBrace.loc.start.line
+              ? ''
+              : '\n'
+          }`
+        )
       }
     }
   ]
