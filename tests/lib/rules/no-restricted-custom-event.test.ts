@@ -144,7 +144,9 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
         {
           message: 'Using `bad` event is not allowed.',
           line: 7,
-          column: 24
+          column: 24,
+          endLine: 7,
+          endColumn: 29
         }
       ]
     },
@@ -169,11 +171,17 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
       errors: [
         {
           message: 'Using `foo` event is not allowed.',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 29
         },
         {
           message: 'Use Bar instead',
           line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Instead, change to `Bar`.',
@@ -213,11 +221,17 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
       errors: [
         {
           message: 'Using `regexp1` event is not allowed.',
-          line: 6
+          line: 6,
+          column: 24,
+          endLine: 6,
+          endColumn: 33
         },
         {
           message: 'Using `regexp2` event is not allowed.',
-          line: 7
+          line: 7,
+          column: 24,
+          endLine: 7,
+          endColumn: 33
         }
       ]
     },
@@ -233,6 +247,9 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
         {
           message: 'Using `bad` event is not allowed.',
           line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36,
           suggestions: [
             {
               desc: "Instead, change to `foo'`.",
@@ -262,7 +279,10 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
       errors: [
         {
           message: 'Using `foo` event is not allowed.',
-          line: 5
+          line: 5,
+          column: 16,
+          endLine: 5,
+          endColumn: 21
         }
       ]
     },
@@ -282,7 +302,10 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
       errors: [
         {
           message: 'Using `foo` event is not allowed.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     },
@@ -301,7 +324,10 @@ tester.run('no-restricted-custom-event', rule as RuleModule, {
       errors: [
         {
           message: 'Using `foo` event is not allowed.',
-          line: 5
+          line: 5,
+          column: 20,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     }

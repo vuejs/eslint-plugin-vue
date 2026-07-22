@@ -215,11 +215,17 @@ tester.run('no-watch-after-await', rule, {
       errors: [
         {
           messageId: 'forbidden',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 43
         },
         {
           messageId: 'forbidden',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 42
         }
       ]
     },
@@ -244,11 +250,17 @@ tester.run('no-watch-after-await', rule, {
       errors: [
         {
           messageId: 'forbidden',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 42
         },
         {
           messageId: 'forbidden',
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 42
         }
       ]
     }

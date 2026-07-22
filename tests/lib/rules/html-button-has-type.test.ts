@@ -56,8 +56,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'Missing an explicit type attribute for button.',
-          column: 11,
           line: 1,
+          column: 11,
           endLine: 1,
           endColumn: 19
         }
@@ -69,8 +69,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'A value must be set for button type attribute.',
-          column: 24,
           line: 1,
+          column: 24,
           endLine: 1,
           endColumn: 26
         }
@@ -82,8 +82,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'A value must be set for button type attribute.',
-          column: 19,
           line: 1,
+          column: 19,
           endLine: 1,
           endColumn: 23
         }
@@ -95,8 +95,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'foo is an invalid value for button type attribute.',
-          column: 24,
           line: 1,
+          column: 24,
           endLine: 1,
           endColumn: 29
         }
@@ -109,8 +109,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'button is a forbidden value for button type attribute.',
-          column: 24,
           line: 1,
+          column: 24,
           endLine: 1,
           endColumn: 32
         }
@@ -123,8 +123,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'submit is a forbidden value for button type attribute.',
-          column: 24,
           line: 1,
+          column: 24,
           endLine: 1,
           endColumn: 32
         }
@@ -137,8 +137,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'reset is a forbidden value for button type attribute.',
-          column: 24,
           line: 1,
+          column: 24,
           endLine: 1,
           endColumn: 31
         }
@@ -216,15 +216,15 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'Missing an explicit type attribute for button.',
-          column: 11,
           line: 1,
+          column: 11,
           endLine: 1,
           endColumn: 19
         },
         {
           message: 'Missing an explicit type attribute for button.',
-          column: 39,
           line: 1,
+          column: 39,
           endLine: 1,
           endColumn: 47
         }
@@ -236,8 +236,8 @@ ruleTester.run('html-button-has-type', rule, {
       errors: [
         {
           message: 'A value must be set for button type attribute.',
-          column: 25,
           line: 1,
+          column: 25,
           endLine: 1,
           endColumn: 27
         }

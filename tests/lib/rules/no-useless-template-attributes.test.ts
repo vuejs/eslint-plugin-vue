@@ -132,22 +132,30 @@ tester.run('no-useless-template-attributes', rule, {
         {
           message: 'Unexpected useless attribute on `<template>`.',
           line: 18,
-          column: 30
+          column: 30,
+          endLine: 18,
+          endColumn: 45
         },
         {
           message: 'Unexpected useless directive on `<template>`.',
           line: 19,
-          column: 36
+          column: 36,
+          endLine: 19,
+          endColumn: 44
         },
         {
           message: 'Unexpected useless attribute on `<template>`.',
           line: 20,
-          column: 36
+          column: 36,
+          endLine: 20,
+          endColumn: 47
         },
         {
           message: 'Unexpected useless directive on `<template>`.',
           line: 21,
-          column: 30
+          column: 30,
+          endLine: 21,
+          endColumn: 44
         }
       ]
     }

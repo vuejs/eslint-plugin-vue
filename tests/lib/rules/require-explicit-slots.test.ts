@@ -434,7 +434,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 19
         }
       ]
     },
@@ -450,7 +454,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -466,7 +474,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -485,7 +497,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -505,7 +521,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -525,7 +545,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -544,7 +568,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -564,7 +592,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -584,7 +616,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -603,7 +639,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -623,7 +663,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -643,7 +687,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 24
         }
       ]
     },
@@ -666,7 +714,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -686,7 +738,9 @@ tester.run('require-explicit-slots', rule, {
         {
           message: 'Slots must be explicitly defined.',
           line: 5,
-          column: 11
+          column: 11,
+          endLine: 5,
+          endColumn: 35
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -707,7 +761,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 38
         }
       ]
     },
@@ -728,7 +786,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 38
         }
       ]
     },
@@ -749,7 +811,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slots must be explicitly defined.'
+          message: 'Slots must be explicitly defined.',
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 38
         }
       ]
     },
@@ -769,7 +835,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 41
         }
       ]
     },
@@ -790,7 +860,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 41
         }
       ]
     },
@@ -811,7 +885,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 10,
+          column: 9,
+          endLine: 10,
+          endColumn: 41
         }
       ]
     },
@@ -834,7 +912,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 13,
+          column: 9,
+          endLine: 13,
+          endColumn: 41
         }
       ]
     },
@@ -859,7 +941,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 41
         }
       ]
     },
@@ -884,7 +970,11 @@ tester.run('require-explicit-slots', rule, {
       </script>`,
       errors: [
         {
-          message: 'Slot foo is already defined.'
+          message: 'Slot foo is already defined.',
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 41
         }
       ]
     }

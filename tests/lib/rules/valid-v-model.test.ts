@@ -193,98 +193,232 @@ tester.run('valid-v-model', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-model="foo"></div></template>',
-      errors: ["'v-model' directives aren't supported on <div> elements."]
+      errors: [
+        {
+          message: "'v-model' directives aren't supported on <div> elements.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model:aaa="foo"></template>',
-      errors: ["'v-model' directives require no argument."]
+      errors: [
+        {
+          message: "'v-model' directives require no argument.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model.aaa="foo"></template>',
-      errors: ["'v-model' directives don't support the modifier 'aaa'."]
+      errors: [
+        {
+          message: "'v-model' directives don't support the modifier 'aaa'.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model></template>',
-      errors: ["'v-model' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-model' directives require that attribute value.",
+          line: 1,
+          column: 18,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="a + b"></template>',
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 32
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><input type="file" v-model="b"></template>',
-      errors: ["'v-model' directives don't support 'file' input type."]
+      errors: [
+        {
+          message: "'v-model' directives don't support 'file' input type.",
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 41
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="x"></div></div></template>',
       errors: [
-        "'v-model' directives cannot update the iteration variable 'x' itself."
+        {
+          message:
+            "'v-model' directives cannot update the iteration variable 'x' itself.",
+          line: 1,
+          column: 55,
+          endLine: 1,
+          endColumn: 56
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="(x)"></div></div></template>',
       errors: [
-        "'v-model' directives cannot update the iteration variable 'x' itself."
+        {
+          message:
+            "'v-model' directives cannot update the iteration variable 'x' itself.",
+          line: 1,
+          column: 56,
+          endLine: 1,
+          endColumn: 57
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="x in list"><input v-model="(((x)))"></div></div></template>',
       errors: [
-        "'v-model' directives cannot update the iteration variable 'x' itself."
+        {
+          message:
+            "'v-model' directives cannot update the iteration variable 'x' itself.",
+          line: 1,
+          column: 58,
+          endLine: 1,
+          endColumn: 59
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-for="e in list"><input v-model="e"></div></div></template>',
       errors: [
-        "'v-model' directives cannot update the iteration variable 'e' itself."
+        {
+          message:
+            "'v-model' directives cannot update the iteration variable 'e' itself.",
+          line: 1,
+          column: 55,
+          endLine: 1,
+          endColumn: 56
+        }
       ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent v-model="" /></template>',
-      errors: ["'v-model' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-model' directives require that attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="foo?.bar"></template>',
-      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+      errors: [
+        {
+          message: "Optional chaining cannot appear in 'v-model' directives.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="foo?.bar.baz"></template>',
-      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+      errors: [
+        {
+          message: "Optional chaining cannot appear in 'v-model' directives.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="(a?.b)?.c"></template>',
-      errors: ["Optional chaining cannot appear in 'v-model' directives."]
+      errors: [
+        {
+          message: "Optional chaining cannot appear in 'v-model' directives.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="(a?.b).c"></template>',
-      errors: ["'v-model' directive has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'v-model' directive has potential null object property access.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="(null).foo"></template>',
-      errors: ["'v-model' directive has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'v-model' directive has potential null object property access.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><input v-model="(a?.b).c.d"></template>',
-      errors: ["'v-model' directive has potential null object property access."]
+      errors: [
+        {
+          message:
+            "'v-model' directive has potential null object property access.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -295,7 +429,14 @@ tester.run('valid-v-model', rule, {
         }
       },
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 46
+        }
       ]
     },
     {
@@ -307,7 +448,14 @@ tester.run('valid-v-model', rule, {
         }
       },
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 37
+        }
       ]
     },
     {
@@ -319,7 +467,14 @@ tester.run('valid-v-model', rule, {
         }
       },
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 57
+        }
       ]
     },
     {
@@ -331,7 +486,14 @@ tester.run('valid-v-model', rule, {
         }
       },
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 40
+        }
       ]
     },
     {
@@ -343,7 +505,14 @@ tester.run('valid-v-model', rule, {
         }
       },
       errors: [
-        "'v-model' directives require the attribute value which is valid as LHS."
+        {
+          message:
+            "'v-model' directives require the attribute value which is valid as LHS.",
+          line: 1,
+          column: 33,
+          endLine: 1,
+          endColumn: 66
+        }
       ]
     }
   ]

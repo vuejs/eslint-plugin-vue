@@ -47,7 +47,10 @@ tester.run('no-unsupported-features/v-model-custom-modifiers', rule, {
         {
           message:
             'Custom modifiers on `v-model` are not supported until Vue.js "3.0.0".',
-          line: 3
+          line: 3,
+          column: 30,
+          endLine: 3,
+          endColumn: 33
         }
       ]
     },
@@ -61,7 +64,10 @@ tester.run('no-unsupported-features/v-model-custom-modifiers', rule, {
         {
           message:
             'Custom modifiers on `v-model` are not supported until Vue.js "3.0.0".',
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         }
       ]
     }

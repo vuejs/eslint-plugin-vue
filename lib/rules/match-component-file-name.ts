@@ -60,14 +60,14 @@ export default {
       : ['jsx']
 
     const extension = path.extname(context.filename)
-    const filename = path.basename(context.filename, extension)
-
-    const errors: Rule.ReportDescriptor[] = []
-    let componentCount = 0
 
     if (!allowedExtensions.includes(extension.replace(/^\./, ''))) {
       return {}
     }
+
+    const filename = path.basename(context.filename, extension)
+    const errors: Rule.ReportDescriptor[] = []
+    let componentCount = 0
 
     function compareNames(name: string, filename: string) {
       if (shouldMatchCase) {
@@ -83,7 +83,7 @@ export default {
         const quasis = node.quasis[0]
         name = quasis.value.cooked
       } else {
-        name = `${node.value}`
+        name = String(node.value)
       }
 
       if (!compareNames(name, filename)) {
@@ -107,12 +107,14 @@ export default {
 
     return utils.compositingVisitors(
       utils.executeOnCallVueComponent(context, (node) => {
-        if (node.arguments.length === 2) {
-          const argument = node.arguments[0]
+        if (node.arguments.length !== 2) {
+          return
+        }
 
-          if (canVerify(argument)) {
-            verifyName(argument)
-          }
+        const argument = node.arguments[0]
+
+        if (canVerify(argument)) {
+          verifyName(argument)
         }
       }),
       utils.executeOnVue(context, (object) => {

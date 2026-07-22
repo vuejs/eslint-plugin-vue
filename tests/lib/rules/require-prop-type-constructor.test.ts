@@ -135,27 +135,45 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "myProp" property should be a constructor.',
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 27
         },
         {
           message: 'The "anotherType" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 25,
+          endLine: 5,
+          endColumn: 33
         },
         {
           message: 'The "anotherType" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 35,
+          endLine: 5,
+          endColumn: 43
         },
         {
           message: 'The "extraProp" property should be a constructor.',
-          line: 7
+          line: 7,
+          column: 19,
+          endLine: 7,
+          endColumn: 27
         },
         {
           message: 'The "lastProp" property should be a constructor.',
-          line: 11
+          line: 11,
+          column: 20,
+          endLine: 11,
+          endColumn: 29
         },
         {
           message: 'The "nullProp" property should be a constructor.',
-          line: 13
+          line: 13,
+          column: 21,
+          endLine: 13,
+          endColumn: 27
         }
       ]
     },
@@ -184,19 +202,31 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "a" property should be a constructor.',
-          line: 4
+          line: 4,
+          column: 14,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message: 'The "b" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 14,
+          endLine: 5,
+          endColumn: 22
         },
         {
           message: 'The "c" property should be a constructor.',
-          line: 6
+          line: 6,
+          column: 14,
+          endLine: 6,
+          endColumn: 15
         },
         {
           message: 'The "d" property should be a constructor.',
-          line: 7
+          line: 7,
+          column: 14,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     },
@@ -226,7 +256,10 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "a" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 27
         }
       ]
     },
@@ -250,7 +283,10 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "name" property should be a constructor.',
-          line: 4
+          line: 4,
+          column: 18,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -301,59 +337,101 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "str" property should be a constructor.',
-          line: 4
+          line: 4,
+          column: 16,
+          endLine: 4,
+          endColumn: 24
         },
         {
           message: 'The "str2" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 20
         },
         {
           message: 'The "emptyStr" property should be a constructor.',
-          line: 6
+          line: 6,
+          column: 21,
+          endLine: 6,
+          endColumn: 23
         },
         {
           message: 'The "number" property should be a constructor.',
-          line: 7
+          line: 7,
+          column: 19,
+          endLine: 7,
+          endColumn: 23
         },
         {
           message: 'The "binumber" property should be a constructor.',
-          line: 8
+          line: 8,
+          column: 21,
+          endLine: 8,
+          endColumn: 55
         },
         {
           message: 'The "hexnumber" property should be a constructor.',
-          line: 9
+          line: 9,
+          column: 22,
+          endLine: 9,
+          endColumn: 39
         },
         {
           message: 'The "exp1" property should be a constructor.',
-          line: 10
+          line: 10,
+          column: 17,
+          endLine: 10,
+          endColumn: 20
         },
         {
           message: 'The "exp2" property should be a constructor.',
-          line: 11
+          line: 11,
+          column: 17,
+          endLine: 11,
+          endColumn: 20
         },
         {
           message: 'The "exp3" property should be a constructor.',
-          line: 12
+          line: 12,
+          column: 17,
+          endLine: 12,
+          endColumn: 22
         },
         {
           message: 'The "bigInt" property should be a constructor.',
-          line: 13
+          line: 13,
+          column: 19,
+          endLine: 13,
+          endColumn: 36
         },
         {
           message: 'The "boolean" property should be a constructor.',
-          line: 14
+          line: 14,
+          column: 20,
+          endLine: 14,
+          endColumn: 24
         },
         {
           message: 'The "regex" property should be a constructor.',
-          line: 16
+          line: 16,
+          column: 18,
+          endLine: 16,
+          endColumn: 21
         },
         {
           message: 'The "template" property should be a constructor.',
-          line: 17
+          line: 17,
+          column: 21,
+          endLine: 17,
+          endColumn: 29
         },
         {
           message: 'The "emptyTemplate" property should be a constructor.',
-          line: 18
+          line: 18,
+          column: 26,
+          endLine: 18,
+          endColumn: 28
         }
       ]
     },
@@ -383,7 +461,10 @@ ruleTester.run('require-prop-type-constructor', rule, {
       errors: [
         {
           message: 'The "a" property should be a constructor.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     }

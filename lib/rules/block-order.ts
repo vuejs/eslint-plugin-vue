@@ -143,7 +143,8 @@ export default {
                 const fixedElements = elements.flatMap((it) => {
                   if (it === firstUnordered.element) {
                     return [element, it]
-                  } else if (it === element) {
+                  }
+                  if (it === element) {
                     return []
                   }
                   return [it]

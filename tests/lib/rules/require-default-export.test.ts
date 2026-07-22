@@ -87,8 +87,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'missing',
           line: 4,
-          endLine: 4,
           column: 7,
+          endLine: 4,
           endColumn: 16
         }
       ]
@@ -104,8 +104,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'missing',
           line: 4,
-          endLine: 4,
           column: 7,
+          endLine: 4,
           endColumn: 16
         }
       ]
@@ -123,8 +123,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'missing',
           line: 6,
-          endLine: 6,
           column: 7,
+          endLine: 6,
           endColumn: 16
         }
       ]
@@ -141,8 +141,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'missing',
           line: 5,
-          endLine: 5,
           column: 7,
+          endLine: 5,
           endColumn: 16
         }
       ]
@@ -160,8 +160,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'mustBeDefaultExport',
           line: 6,
-          endLine: 6,
           column: 7,
+          endLine: 6,
           endColumn: 16
         }
       ]
@@ -179,8 +179,8 @@ tester.run('require-default-export', rule, {
         {
           messageId: 'mustBeDefaultExport',
           line: 6,
-          endLine: 6,
           column: 7,
+          endLine: 6,
           endColumn: 16
         }
       ]

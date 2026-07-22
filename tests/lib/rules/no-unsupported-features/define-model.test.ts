@@ -47,7 +47,10 @@ tester.run('no-unsupported-features/define-model', rule, {
         {
           message:
             '`defineModel()` macros are not supported until Vue.js "3.4.0".',
-          line: 3
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 36
         }
       ]
     }

@@ -43,7 +43,8 @@ function getTypes(targetNode: Expression): string[] {
   const node = utils.skipTSAsExpression(targetNode)
   if (node.type === 'Identifier') {
     return [node.name]
-  } else if (node.type === 'ArrayExpression') {
+  }
+  if (node.type === 'ArrayExpression') {
     return node.elements
       .filter(
         (item): item is Identifier => item != null && item.type === 'Identifier'
@@ -127,7 +128,7 @@ export default {
     let scopeStack: ScopeStack | null = null
 
     function onFunctionExit() {
-      scopeStack = scopeStack && scopeStack.upper
+      scopeStack &&= scopeStack.upper
     }
 
     function getValueType(
@@ -220,9 +221,7 @@ export default {
       expectedTypeNames: Iterable<string>
     ) {
       const propName =
-        prop.propName == null
-          ? `[${context.sourceCode.getText(prop.node.key)}]`
-          : prop.propName
+        prop.propName ?? `[${context.sourceCode.getText(prop.node.key)}]`
       context.report({
         node,
         messageId: 'invalidType',
@@ -233,6 +232,18 @@ export default {
       })
     }
 
+    function verifyReturnTypes({
+      prop,
+      types: typeNames,
+      default: defType
+    }: PropDefaultFunctionContext) {
+      for (const returnType of defType.returnTypes) {
+        if (typeNames.has(returnType.type)) continue
+
+        report(returnType.node, prop, typeNames)
+      }
+    }
+
     interface DefaultDefine {
       expression: Expression
       src: 'assignment' | 'withDefaults' | 'defaultProperty'
@@ -240,13 +251,64 @@ export default {
 
     function processPropDefs(
       props: (
-        | ComponentObjectProp
-        | ComponentTypeProp
-        | ComponentInferTypeProp
+        ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp
       )[],
       otherDefaultProvider: (propName: string) => Iterable<DefaultDefine>
     ) {
       const propContexts: PropDefaultFunctionContext[] = []
+
+      function collectDefaultContext(
+        defaultDef: DefaultDefine,
+        prop: ComponentObjectProp | ComponentTypeProp | ComponentInferTypeProp,
+        typeNames: Set<string>
+      ) {
+        const defType = getValueType(defaultDef.expression)
+
+        if (!defType) return
+
+        if (defType.function) {
+          if (typeNames.has('Function')) {
+            return
+          }
+          if (defaultDef.src === 'assignment') {
+            // Factory functions cannot be used in default definitions with initial value assignments.
+            report(defaultDef.expression, prop, typeNames)
+            return
+          }
+          if (defType.expression) {
+            if (!defType.returnType || typeNames.has(defType.returnType)) {
+              return
+            }
+            report(defType.functionBody, prop, typeNames)
+          } else {
+            propContexts.push({
+              prop,
+              types: typeNames,
+              default: defType
+            })
+          }
+        } else {
+          if (typeNames.has(defType.type)) {
+            if (defaultDef.src === 'assignment') {
+              return
+            }
+            if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
+              // For Array and Object, defaults must be defined in the factory function.
+              return
+            }
+          }
+          report(
+            defaultDef.expression,
+            prop,
+            defaultDef.src === 'assignment'
+              ? typeNames
+              : [...typeNames].map((type) =>
+                  FUNCTION_VALUE_TYPES.has(type) ? 'Function' : type
+                )
+          )
+        }
+      }
+
       for (const prop of props) {
         let typeList
         const defaultList: DefaultDefine[] = []
@@ -283,51 +345,7 @@ export default {
         if (typeNames.size === 0) continue
 
         for (const defaultDef of defaultList) {
-          const defType = getValueType(defaultDef.expression)
-
-          if (!defType) continue
-
-          if (defType.function) {
-            if (typeNames.has('Function')) {
-              continue
-            }
-            if (defaultDef.src === 'assignment') {
-              // Factory functions cannot be used in default definitions with initial value assignments.
-              report(defaultDef.expression, prop, typeNames)
-              continue
-            }
-            if (defType.expression) {
-              if (!defType.returnType || typeNames.has(defType.returnType)) {
-                continue
-              }
-              report(defType.functionBody, prop, typeNames)
-            } else {
-              propContexts.push({
-                prop,
-                types: typeNames,
-                default: defType
-              })
-            }
-          } else {
-            if (typeNames.has(defType.type)) {
-              if (defaultDef.src === 'assignment') {
-                continue
-              }
-              if (!FUNCTION_VALUE_TYPES.has(defType.type)) {
-                // For Array and Object, defaults must be defined in the factory function.
-                continue
-              }
-            }
-            report(
-              defaultDef.expression,
-              prop,
-              defaultDef.src === 'assignment'
-                ? typeNames
-                : [...typeNames].map((type) =>
-                    FUNCTION_VALUE_TYPES.has(type) ? 'Function' : type
-                  )
-            )
-          }
+          collectDefaultContext(defaultDef, prop, typeNames)
         }
       }
       return propContexts
@@ -337,9 +355,7 @@ export default {
       {
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
         ) {
           scopeStack = {
             upper: scopeStack,
@@ -367,19 +383,16 @@ export default {
         onVueObjectEnter(obj) {
           const props: ComponentObjectDefineProp[] = utils
             .getComponentPropsFromOptions(obj)
-            .filter((prop): prop is ComponentObjectDefineProp =>
-              Boolean(
+            .filter(
+              (prop): prop is ComponentObjectDefineProp =>
                 prop.type === 'object' && prop.value.type === 'ObjectExpression'
-              )
             )
           const propContexts = processPropDefs(props, () => [])
           vueObjectPropsContexts.set(obj, propContexts)
         },
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression,
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression,
           { node: vueNode }: VueObjectData
         ) {
           const data = vueObjectPropsContexts.get(vueNode)
@@ -398,12 +411,8 @@ export default {
           if (!data) {
             return
           }
-          for (const { prop, types: typeNames, default: defType } of data) {
-            for (const returnType of defType.returnTypes) {
-              if (typeNames.has(returnType.type)) continue
-
-              report(returnType.node, prop, typeNames)
-            }
+          for (const propContext of data) {
+            verifyReturnTypes(propContext)
           }
         }
       }),
@@ -416,11 +425,7 @@ export default {
               | ComponentObjectProp
               | ComponentInferTypeProp
               | ComponentTypeProp =>
-              Boolean(
-                prop.type === 'type' ||
-                prop.type === 'infer-type' ||
-                prop.type === 'object'
-              )
+              ['type', 'infer-type', 'object'].includes(prop.type)
           )
           const defaultsByWithDefaults =
             utils.getWithDefaultsPropExpressions(node)
@@ -446,9 +451,7 @@ export default {
         },
         ':function'(
           node:
-            | FunctionExpression
-            | FunctionDeclaration
-            | ArrowFunctionExpression
+            FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
         ) {
           if (!scopeStack) {
             return
@@ -476,16 +479,8 @@ export default {
           if (!data) {
             return
           }
-          for (const {
-            prop,
-            types: typeNames,
-            default: defType
-          } of data.props) {
-            for (const returnType of defType.returnTypes) {
-              if (typeNames.has(returnType.type)) continue
-
-              report(returnType.node, prop, typeNames)
-            }
+          for (const propContext of data.props) {
+            verifyReturnTypes(propContext)
           }
         },
         onDefineModelEnter(node, model) {

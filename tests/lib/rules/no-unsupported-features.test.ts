@@ -55,11 +55,17 @@ tester.run('no-unsupported-features', rule, {
       errors: [
         {
           message: '`v-slot` are not supported until Vue.js "2.6.0".',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 32
         },
         {
           message: 'Dynamic arguments are not supported until Vue.js "2.6.0".',
-          line: 6
+          line: 6,
+          column: 16,
+          endLine: 6,
+          endColumn: 22
         }
       ]
     }

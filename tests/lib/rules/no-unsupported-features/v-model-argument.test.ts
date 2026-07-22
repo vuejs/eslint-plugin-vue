@@ -47,7 +47,10 @@ tester.run('no-unsupported-features/v-model-argument', rule, {
         {
           message:
             'Argument on `v-model` is not supported until Vue.js "3.0.0".',
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         }
       ]
     }

@@ -400,6 +400,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 26,
+          endLine: 4,
           endColumn: 33
         }
       ]
@@ -424,6 +425,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 24,
+          endLine: 4,
           endColumn: 29
         }
       ]
@@ -445,6 +447,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 7,
           column: 19,
+          endLine: 7,
           endColumn: 24
         }
       ]
@@ -463,6 +466,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 20,
+          endLine: 4,
           endColumn: 29
         }
       ]
@@ -481,6 +485,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 6,
           column: 35,
+          endLine: 6,
           endColumn: 40
         }
       ]
@@ -500,6 +505,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 6,
           column: 35,
+          endLine: 6,
           endColumn: 40
         }
       ]
@@ -523,6 +529,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 19,
+          endLine: 4,
           endColumn: 24
         }
       ]
@@ -546,6 +553,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 26,
+          endLine: 4,
           endColumn: 31
         }
       ]
@@ -569,6 +577,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 8,
           column: 19,
+          endLine: 8,
           endColumn: 24
         }
       ]
@@ -590,6 +599,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 26,
+          endLine: 4,
           endColumn: 31
         }
       ]
@@ -611,6 +621,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 19,
+          endLine: 4,
           endColumn: 24
         }
       ]
@@ -634,6 +645,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 26,
+          endLine: 4,
           endColumn: 31
         }
       ]
@@ -661,8 +673,8 @@ tester.run('no-unused-emit-declarations', rule, {
         {
           messageId: 'unused',
           line: 4,
-          endLine: 4,
           column: 33,
+          endLine: 4,
           endColumn: 38
         }
       ]
@@ -684,6 +696,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 11,
+          endLine: 4,
           endColumn: 36
         }
       ]
@@ -701,6 +714,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 3,
           column: 24,
+          endLine: 3,
           endColumn: 29
         }
       ]
@@ -720,6 +734,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 3,
           column: 22,
+          endLine: 3,
           endColumn: 38
         }
       ]
@@ -738,6 +753,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 5,
           column: 9,
+          endLine: 5,
           endColumn: 16
         }
       ],
@@ -755,7 +771,10 @@ tester.run('no-unused-emit-declarations', rule, {
       errors: [
         {
           message: '`update:foo` is defined as emit but never used.',
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 37
         }
       ]
     },
@@ -776,6 +795,7 @@ tester.run('no-unused-emit-declarations', rule, {
           messageId: 'unused',
           line: 4,
           column: 19,
+          endLine: 4,
           endColumn: 24
         }
       ]

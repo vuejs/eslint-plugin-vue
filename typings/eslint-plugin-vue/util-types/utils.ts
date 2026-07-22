@@ -28,8 +28,7 @@ export interface VueVisitor extends VueVisitorBase {
     obj: VueObjectData
   ): void
   [query: string]:
-    | ((node: VAST.ParamNode, obj: VueObjectData) => void)
-    | undefined
+    ((node: VAST.ParamNode, obj: VueObjectData) => void) | undefined
 }
 
 type ScriptSetupVisitorBase = {
@@ -70,8 +69,7 @@ type ComponentArrayPropUnknownName = {
   node: Expression | SpreadElement
 }
 export type ComponentArrayProp =
-  | ComponentArrayPropDetectName
-  | ComponentArrayPropUnknownName
+  ComponentArrayPropDetectName | ComponentArrayPropUnknownName
 
 type ComponentObjectPropDetectName = {
   type: 'object'
@@ -88,8 +86,7 @@ type ComponentObjectPropUnknownName = {
   node: Property
 }
 export type ComponentObjectProp =
-  | ComponentObjectPropDetectName
-  | ComponentObjectPropUnknownName
+  ComponentObjectPropDetectName | ComponentObjectPropUnknownName
 
 export type ComponentUnknownProp = {
   type: 'unknown'
@@ -136,8 +133,7 @@ type ComponentArrayEmitUnknownName = {
   node: Expression | SpreadElement
 }
 export type ComponentArrayEmit =
-  | ComponentArrayEmitDetectName
-  | ComponentArrayEmitUnknownName
+  ComponentArrayEmitDetectName | ComponentArrayEmitUnknownName
 type ComponentObjectEmitDetectName = {
   type: 'object'
   key: Expression
@@ -154,8 +150,7 @@ type ComponentObjectEmitUnknownName = {
 }
 
 export type ComponentObjectEmit =
-  | ComponentObjectEmitDetectName
-  | ComponentObjectEmitUnknownName
+  ComponentObjectEmitDetectName | ComponentObjectEmitUnknownName
 
 export type ComponentUnknownEmit = {
   type: 'unknown'
@@ -176,8 +171,7 @@ export type ComponentTypeEmitPropertySignature = {
   node: TSPropertySignature | TSMethodSignature
 }
 export type ComponentTypeEmit =
-  | ComponentTypeEmitCallSignature
-  | ComponentTypeEmitPropertySignature
+  ComponentTypeEmitCallSignature | ComponentTypeEmitPropertySignature
 
 export type ComponentInferTypeEmit = {
   type: 'infer-type'
@@ -212,9 +206,7 @@ export type ComponentInferTypeSlot = {
 }
 
 export type ComponentSlot =
-  | ComponentTypeSlot
-  | ComponentInferTypeSlot
-  | ComponentUnknownSlot
+  ComponentTypeSlot | ComponentInferTypeSlot | ComponentUnknownSlot
 
 export type ComponentModelName = {
   modelName: string

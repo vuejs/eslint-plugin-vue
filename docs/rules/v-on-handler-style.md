@@ -203,6 +203,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 ## :couple: Related Rules
 
+- [vue/prefer-single-event-payload](./prefer-single-event-payload.md)
 - [vue/v-on-style](./v-on-style.md)
 - [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
 

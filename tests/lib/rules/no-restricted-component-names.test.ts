@@ -59,7 +59,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `Disallow` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -77,7 +79,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `Disallow` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -95,7 +99,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `Disallow` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -113,7 +119,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `FooBar` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 23
         }
       ]
     },
@@ -135,6 +143,8 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
           message: 'Custom message',
           line: 4,
           column: 15,
+          endLine: 4,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Instead, change to `Allow`.',
@@ -167,6 +177,8 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
           message: 'Using component name `Disallow` is not allowed.',
           line: 4,
           column: 15,
+          endLine: 4,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Instead, change to `Allow`.',
@@ -198,7 +210,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Custom message',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 25
         }
       ]
     },
@@ -216,7 +230,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `1` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 16
         }
       ]
     },
@@ -235,7 +251,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
           message:
             'Using component name `disallowed-component` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -253,7 +271,9 @@ tester.run('no-restricted-component-names', rule as RuleModule, {
         {
           message: 'Using component name `DisallowedComponent` is not allowed.',
           line: 4,
-          column: 15
+          column: 15,
+          endLine: 4,
+          endColumn: 36
         }
       ]
     }

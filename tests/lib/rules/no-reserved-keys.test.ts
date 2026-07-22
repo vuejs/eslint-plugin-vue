@@ -124,7 +124,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 16
         }
       ]
     },
@@ -143,7 +146,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -162,7 +168,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 18
         }
       ]
     },
@@ -179,7 +188,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 17
         }
       ]
     },
@@ -198,7 +210,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 19
         }
       ]
     },
@@ -215,7 +230,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 17
         }
       ]
     },
@@ -232,7 +250,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Keys starting with '_' are reserved in '_foo' group.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 17
         }
       ]
     },
@@ -250,7 +271,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key 'bar' is reserved.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 16
         }
       ]
     },
@@ -267,7 +291,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     },
@@ -288,7 +315,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 33
         }
       ]
     },
@@ -312,7 +342,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     },
@@ -336,7 +369,10 @@ ruleTester.run('no-reserved-keys', rule, {
       errors: [
         {
           message: "Key '$el' is reserved.",
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     }

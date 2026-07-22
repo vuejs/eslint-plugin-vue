@@ -626,7 +626,15 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       languageOptions,
-      errors: ['Prop "_item" is not in camelCase.']
+      errors: [
+        {
+          message: 'Prop "_item" is not in camelCase.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -639,7 +647,15 @@ ruleTester.run('prop-name-casing', rule, {
       `,
       options: ['snake_case'],
       languageOptions,
-      errors: ['Prop "_itemName" is not in snake_case.']
+      errors: [
+        {
+          message: 'Prop "_itemName" is not in snake_case.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 30
+        }
+      ]
     },
     {
       // TemplateLiteral computed property
@@ -652,7 +668,15 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       languageOptions,
-      errors: ['Prop "greeting-text" is not in camelCase.']
+      errors: [
+        {
+          message: 'Prop "greeting-text" is not in camelCase.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 38
+        }
+      ]
     },
     {
       // RegExp Literal computed property name
@@ -665,7 +689,15 @@ ruleTester.run('prop-name-casing', rule, {
         }
       `,
       languageOptions,
-      errors: ['Prop "/greeting-text/" is not in camelCase.']
+      errors: [
+        {
+          message: 'Prop "/greeting-text/" is not in camelCase.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 38
+        }
+      ]
     },
     {
       filename: 'test.vue',

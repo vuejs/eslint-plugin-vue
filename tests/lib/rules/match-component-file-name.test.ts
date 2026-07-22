@@ -586,6 +586,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -596,11 +600,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -618,6 +618,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -628,11 +632,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -650,6 +650,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -660,11 +664,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -682,6 +682,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -692,11 +696,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -721,6 +721,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 31,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -733,11 +737,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `
             }
-          ],
-          line: 4,
-          column: 19,
-          endLine: 4,
-          endColumn: 31
+          ]
         }
       ]
     },
@@ -760,6 +760,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 31,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -772,11 +776,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `
             }
-          ],
-          line: 4,
-          column: 19,
-          endLine: 4,
-          endColumn: 31
+          ]
         }
       ]
     },
@@ -799,6 +799,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 31,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -811,11 +815,7 @@ ruleTester.run('match-component-file-name', rule, {
         </script>
       `
             }
-          ],
-          line: 4,
-          column: 19,
-          endLine: 4,
-          endColumn: 31
+          ]
         }
       ]
     },
@@ -835,6 +835,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -845,11 +849,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -867,6 +867,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -877,11 +881,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -899,6 +899,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -909,11 +913,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -930,6 +930,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -939,11 +943,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -960,6 +960,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -969,11 +973,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -990,6 +990,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 29,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -999,11 +1003,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 29
+          ]
         }
       ]
     },
@@ -1020,6 +1020,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 2,
+          column: 23,
+          endLine: 2,
+          endColumn: 35,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1029,11 +1033,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 2,
-          column: 23,
-          endLine: 2,
-          endColumn: 35
+          ]
         }
       ]
     },
@@ -1050,6 +1050,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 2,
+          column: 23,
+          endLine: 2,
+          endColumn: 35,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1059,11 +1063,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 2,
-          column: 23,
-          endLine: 2,
-          endColumn: 35
+          ]
         }
       ]
     },
@@ -1080,6 +1080,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 2,
+          column: 23,
+          endLine: 2,
+          endColumn: 35,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1089,11 +1093,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 2,
-          column: 23,
-          endLine: 2,
-          endColumn: 35
+          ]
         }
       ]
     },
@@ -1110,6 +1110,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MComponent` should match file name `MyComponent`.',
+          line: 2,
+          column: 23,
+          endLine: 2,
+          endColumn: 35,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1119,11 +1123,7 @@ ruleTester.run('match-component-file-name', rule, {
         })
       `
             }
-          ],
-          line: 2,
-          column: 23,
-          endLine: 2,
-          endColumn: 35
+          ]
         }
       ]
     },
@@ -1143,6 +1143,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `my-component` should match file name `MyComponent`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 31,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1153,11 +1157,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 31
+          ]
         }
       ]
     },
@@ -1175,6 +1175,10 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `MyComponent` should match file name `my-component`.',
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 30,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
@@ -1185,11 +1189,7 @@ ruleTester.run('match-component-file-name', rule, {
         }
       `
             }
-          ],
-          line: 3,
-          column: 17,
-          endLine: 3,
-          endColumn: 30
+          ]
         }
       ]
     },
@@ -1205,16 +1205,16 @@ ruleTester.run('match-component-file-name', rule, {
         {
           message:
             'Component name `CoolComponent` should match file name `MyComponent`.',
+          line: 1,
+          column: 37,
+          endLine: 1,
+          endColumn: 52,
           suggestions: [
             {
               desc: 'Rename component to match file name.',
               output: `<script setup> defineOptions({name: 'MyComponent'}) </script>`
             }
-          ],
-          line: 1,
-          column: 37,
-          endLine: 1,
-          endColumn: 52
+          ]
         }
       ]
     }

@@ -93,9 +93,9 @@ tester.run('require-toggle-inside-transition', rule, {
       code: '<template><transition><div /></transition></template>',
       errors: [
         {
+          messageId: 'expected',
           line: 1,
           column: 23,
-          messageId: 'expected',
           endLine: 1,
           endColumn: 30
         }
@@ -104,42 +104,106 @@ tester.run('require-toggle-inside-transition', rule, {
     {
       filename: 'test.vue',
       code: '<template><Transition><div /></Transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><transition><div /><div /></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><transition><div v-for="e in list" /></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 48
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><svg height="100" width="100"><transition><circle /></transition></svg> </template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 53,
+          endLine: 1,
+          endColumn: 63
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><transition><template v-for="e in list"><div /></template></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 51
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><Transition>  <div /></Transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><transition :appear="false"><div /></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 46
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><transition @appear="isLoaded"><div /></transition></template>',
-      errors: [{ messageId: 'expected' }]
+      errors: [
+        {
+          messageId: 'expected',
+          line: 1,
+          column: 42,
+          endLine: 1,
+          endColumn: 49
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -152,7 +216,11 @@ tester.run('require-toggle-inside-transition', rule, {
       errors: [
         {
           messageId: 'expected',
-          data: { allowedDirectives: '`v-if` or `v-show`' }
+          data: { allowedDirectives: '`v-if` or `v-show`' },
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 49
         }
       ]
     },
@@ -167,7 +235,11 @@ tester.run('require-toggle-inside-transition', rule, {
       errors: [
         {
           messageId: 'expected',
-          data: { allowedDirectives: '`v-if`, `v-show` or `v-dialog`' }
+          data: { allowedDirectives: '`v-if`, `v-show` or `v-dialog`' },
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 46
         }
       ]
     }

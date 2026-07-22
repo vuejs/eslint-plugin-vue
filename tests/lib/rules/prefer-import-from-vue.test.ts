@@ -24,7 +24,13 @@ tester.run('prefer-import-from-vue', rule, {
     {
       filename: 'test.d.ts',
       code: `import '@vue/runtime-dom'`
-    }
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2354
+    `import { unknown } from '@vue/reactivity'`,
+    `import { unknown } from '@vue/shared'`,
+    `import { unknown } from '@vue/runtime-dom'`,
+    `export { unknown } from '@vue/reactivity'`,
+    `export { unknown } from '@vue/runtime-dom'`
   ],
   invalid: [
     {
@@ -34,7 +40,9 @@ tester.run('prefer-import-from-vue', rule, {
         {
           message: "Import from 'vue' instead of '@vue/runtime-dom'.",
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
@@ -45,7 +53,9 @@ tester.run('prefer-import-from-vue', rule, {
         {
           message: "Import from 'vue' instead of '@vue/runtime-core'.",
           line: 1,
-          column: 26
+          column: 26,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
@@ -56,7 +66,9 @@ tester.run('prefer-import-from-vue', rule, {
         {
           message: "Import from 'vue' instead of '@vue/reactivity'.",
           line: 1,
-          column: 26
+          column: 26,
+          endLine: 1,
+          endColumn: 43
         }
       ]
     },
@@ -67,69 +79,129 @@ tester.run('prefer-import-from-vue', rule, {
         {
           message: "Import from 'vue' instead of '@vue/shared'.",
           line: 1,
-          column: 32
+          column: 32,
+          endLine: 1,
+          endColumn: 45
         }
       ]
     },
     {
-      code: `import { unknown } from '@vue/reactivity'`,
-      output: null,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
-    },
-    {
-      code: `import { unknown } from '@vue/runtime-dom'`,
-      output: `import { unknown } from 'vue'`,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
-    },
-    {
       code: `import * as Foo from '@vue/reactivity'`,
       output: null,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/reactivity'.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       code: `import * as Foo from '@vue/runtime-dom'`,
-      output: `import * as Foo from 'vue'`,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
+      output: null,
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 40
+        }
+      ]
     },
     {
       code: `export * from '@vue/reactivity'`,
       output: null,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/reactivity'.",
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     },
     {
       code: `export * from '@vue/runtime-dom'`,
       output: null,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `export { computed } from '@vue/reactivity'`,
       output: `export { computed } from 'vue'`,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/reactivity'.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
     },
     {
       code: `export { computed } from '@vue/runtime-dom'`,
       output: `export { computed } from 'vue'`,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
-    },
-    {
-      code: `export { unknown } from '@vue/reactivity'`,
-      output: null,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
-    },
-    {
-      code: `export { unknown } from '@vue/runtime-dom'`,
-      output: null,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 44
+        }
+      ]
     },
     {
       code: `import unknown from '@vue/reactivity'`,
       output: null,
-      errors: ["Import from 'vue' instead of '@vue/reactivity'."]
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/reactivity'.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 38
+        }
+      ]
     },
     {
       code: `import unknown from '@vue/runtime-dom'`,
-      output: `import unknown from 'vue'`,
-      errors: ["Import from 'vue' instead of '@vue/runtime-dom'."]
+      output: null,
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/runtime-dom'.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
+    },
+    // https://github.com/vuejs/eslint-plugin-vue/issues/2354
+    {
+      code: `import { computed, unknown } from '@vue/reactivity'`,
+      output: null,
+      errors: [
+        {
+          message: "Import from 'vue' instead of '@vue/reactivity'.",
+          line: 1,
+          column: 35,
+          endLine: 1,
+          endColumn: 52
+        }
+      ]
     }
   ]
 })

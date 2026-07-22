@@ -246,19 +246,31 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 24
         },
         {
           message: 'Prop "bar" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         },
         {
           message: 'Prop "baz" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36
         },
         {
           message: 'Prop "Unknown prop" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -273,19 +285,31 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 24
         },
         {
           message: 'Prop "bar" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 29
         },
         {
           message: 'Prop "baz" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 36
         },
         {
           message: 'Prop "Unknown prop" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 43
         }
       ]
     },
@@ -303,7 +327,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 5,
+          endColumn: 14
         }
       ]
     },
@@ -322,7 +349,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -339,7 +369,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 21
         }
       ]
     },
@@ -360,7 +393,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 43
         }
       ]
     },
@@ -381,7 +417,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 43
         }
       ]
     },
@@ -402,7 +441,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 16
         }
       ]
     },
@@ -421,7 +463,10 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -437,11 +482,17 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "modelValue" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 17,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 37
         }
       ]
     },
@@ -457,11 +508,17 @@ ruleTester.run('require-prop-types', rule, {
       errors: [
         {
           message: 'Prop "modelValue" should define at least its type.',
-          line: 3
+          line: 3,
+          column: 29,
+          endLine: 3,
+          endColumn: 31
         },
         {
           message: 'Prop "foo" should define at least its type.',
-          line: 4
+          line: 4,
+          column: 37,
+          endLine: 4,
+          endColumn: 39
         }
       ]
     }

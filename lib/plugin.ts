@@ -106,7 +106,7 @@ import noImplicitCoercion from './rules/no-implicit-coercion.js'
 import noImportCompilerMacros from './rules/no-import-compiler-macros.js'
 import noIrregularWhitespace from './rules/no-irregular-whitespace.js'
 import noLifecycleAfterAwait from './rules/no-lifecycle-after-await.js'
-import noLiteralsInTemplate from './rules/no-literals-in-template.js'
+import noLiteralsInTemplate from './rules/no-literals-in-template.ts'
 import noLoneTemplate from './rules/no-lone-template.js'
 import noLossOfPrecision from './rules/no-loss-of-precision.js'
 import noMultiSpaces from './rules/no-multi-spaces.js'
@@ -185,9 +185,11 @@ import preferDefineOptions from './rules/prefer-define-options.js'
 import preferImportFromVue from './rules/prefer-import-from-vue.js'
 import preferPropTypeBooleanFirst from './rules/prefer-prop-type-boolean-first.js'
 import preferSeparateStaticClass from './rules/prefer-separate-static-class.js'
+import preferSingleEventPayload from './rules/prefer-single-event-payload.ts'
 import preferTemplate from './rules/prefer-template.js'
 import preferTrueAttributeShorthand from './rules/prefer-true-attribute-shorthand.ts'
 import preferUseTemplateRef from './rules/prefer-use-template-ref.js'
+import preferVModel from './rules/prefer-v-model.ts'
 import propNameCasing from './rules/prop-name-casing.ts'
 import quoteProps from './rules/quote-props.js'
 import requireComponentIs from './rules/require-component-is.js'
@@ -441,9 +443,11 @@ export default {
     'prefer-import-from-vue': preferImportFromVue,
     'prefer-prop-type-boolean-first': preferPropTypeBooleanFirst,
     'prefer-separate-static-class': preferSeparateStaticClass,
+    'prefer-single-event-payload': preferSingleEventPayload,
     'prefer-template': preferTemplate,
     'prefer-true-attribute-shorthand': preferTrueAttributeShorthand,
     'prefer-use-template-ref': preferUseTemplateRef,
+    'prefer-v-model': preferVModel,
     'prop-name-casing': propNameCasing,
     'quote-props': quoteProps,
     'require-component-is': requireComponentIs,

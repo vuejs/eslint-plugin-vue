@@ -58,7 +58,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Unexpected use of forbidden element button.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 38
         }
       ]
     },
@@ -70,7 +72,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Unexpected use of forbidden element div.',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 28
         }
       ]
     },
@@ -82,7 +86,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Custom error',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 20
         }
       ]
     },
@@ -99,12 +105,16 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Prefer the use of <NuxtLink> component',
           line: 1,
-          column: 11
+          column: 11,
+          endLine: 1,
+          endColumn: 14
         },
         {
           message: 'Prefer the use of <NuxtLink> component',
           line: 1,
-          column: 18
+          column: 18,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -117,7 +127,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Unexpected use of forbidden element circle.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 31
         }
       ]
     },
@@ -131,12 +143,16 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Use simplified shapes instead',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 47
         },
         {
           message: 'Use simplified shapes instead',
           line: 1,
-          column: 54
+          column: 54,
+          endLine: 1,
+          endColumn: 78
         }
       ]
     },
@@ -149,7 +165,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Unexpected use of forbidden element mfrac.',
           line: 1,
-          column: 17
+          column: 17,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -161,7 +179,9 @@ tester.run('no-restricted-html-elements', rule as RuleModule, {
         {
           message: 'Avoid using operators directly',
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 31
         }
       ]
     }

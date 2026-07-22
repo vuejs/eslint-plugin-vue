@@ -22,8 +22,7 @@ interface NestPropertyNodeForPattern {
 }
 
 type NestPropertyNode =
-  | NestPropertyNodeForExpression
-  | NestPropertyNodeForPattern
+  NestPropertyNodeForExpression | NestPropertyNodeForPattern
 
 export interface IPropertyReferences {
   hasProperty: (name: string, option?: IHasPropertyOption) => boolean
@@ -113,21 +112,23 @@ export function definePropertyReferenceExtractor(
       context.sourceCode.scopeManager.scopes[0]
     )
     const toRefNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    const toRefReferences = utils.iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRef: {
         [ReferenceTracker.CALL]: true
       }
-    })) {
+    })
+    for (const { node } of toRefReferences) {
       toRefNodes.add(node)
     }
     const toRefsNodes = new Set<ESNode>()
-    for (const { node } of utils.iterateReferencesTraceMap(tracker, {
+    const toRefsReferences = utils.iterateReferencesTraceMap(tracker, {
       [ReferenceTracker.ESM]: true,
       toRefs: {
         [ReferenceTracker.CALL]: true
       }
-    })) {
+    })
+    for (const { node } of toRefsReferences) {
       toRefsNodes.add(node)
     }
 
@@ -140,12 +141,16 @@ export function definePropertyReferenceExtractor(
   class PropertyReferencesForMember implements IPropertyReferences {
     node: MemberExpression
     name: string
-    withInTemplate: boolean
+    isWithinTemplate: boolean
 
-    constructor(node: MemberExpression, name: string, withInTemplate: boolean) {
+    constructor(
+      node: MemberExpression,
+      name: string,
+      isWithinTemplate: boolean
+    ) {
       this.node = node
       this.name = name
-      this.withInTemplate = withInTemplate
+      this.isWithinTemplate = isWithinTemplate
     }
 
     hasProperty(name: string): boolean {
@@ -160,7 +165,7 @@ export function definePropertyReferenceExtractor(
 
     getNest(name: string): IPropertyReferences {
       return name === this.name
-        ? extractFromExpression(this.node, this.withInTemplate)
+        ? extractFromExpression(this.node, this.isWithinTemplate)
         : NEVER
     }
 
@@ -214,6 +219,7 @@ export function definePropertyReferenceExtractor(
       let node
       while ((node = values.shift())) {
         if (
+          // eslint-disable-next-line unicorn/prefer-includes-over-repeated-comparisons -- narrows `node`'s type for the `yield` below
           node.type === 'Identifier' ||
           node.type === 'MemberExpression' ||
           node.type === 'ObjectPattern' ||
@@ -237,7 +243,8 @@ export function definePropertyReferenceExtractor(
     }
     if (pattern.type === 'Identifier') {
       return extractFromIdentifier(pattern)
-    } else if (pattern.type === 'AssignmentPattern') {
+    }
+    if (pattern.type === 'AssignmentPattern') {
       return getNestFromPattern(pattern.left)
     }
     return ANY
@@ -253,7 +260,7 @@ export function definePropertyReferenceExtractor(
       | ChainExpression
       | ThisExpression
       | CallExpression,
-    withInTemplate: boolean
+    isWithinTemplate: boolean
   ): IPropertyReferences {
     const ref = cacheForExpression.get(node)
     if (ref) {
@@ -269,7 +276,7 @@ export function definePropertyReferenceExtractor(
       switch (parent.type) {
         case 'AssignmentExpression': {
           // `({foo} = arg)`
-          return !withInTemplate &&
+          return !isWithinTemplate &&
             parent.right === node &&
             parent.operator === '='
             ? extractFromPattern(parent.left)
@@ -278,7 +285,7 @@ export function definePropertyReferenceExtractor(
         case 'VariableDeclarator': {
           // `const {foo} = arg`
           // `const foo = arg`
-          return !withInTemplate && parent.init === node
+          return !isWithinTemplate && parent.init === node
             ? extractFromPattern(parent.id)
             : NEVER
         }
@@ -299,48 +306,47 @@ export function definePropertyReferenceExtractor(
               return new PropertyReferencesForMember(
                 parent.parent,
                 propName,
-                withInTemplate
+                isWithinTemplate
               )
-            } else if (name) {
+            }
+            if (name) {
               return new PropertyReferencesForMember(
                 parent,
                 name,
-                withInTemplate
+                isWithinTemplate
               )
-            } else {
-              return unknownMemberAsUnreferenced ? NEVER : ANY
             }
+            return unknownMemberAsUnreferenced ? NEVER : ANY
           }
           return NEVER
         }
         case 'CallExpression': {
           const argIndex = parent.arguments.indexOf(node)
           // `foo(arg)`
-          return !withInTemplate && argIndex !== -1
+          return !isWithinTemplate && argIndex !== -1
             ? extractFromCall(parent, argIndex)
             : NEVER
         }
         case 'ChainExpression': {
-          return extractFromExpression(parent, withInTemplate)
+          return extractFromExpression(parent, isWithinTemplate)
         }
         case 'ArrowFunctionExpression':
         case 'VExpressionContainer':
         case 'Property':
         case 'ArrayExpression': {
-          return maybeExternalUsed(parent) ? ANY : NEVER
+          return isMaybeExternallyUsed(parent) ? ANY : NEVER
         }
         case 'ReturnStatement': {
           if (returnAsUnreferenced) {
             return NEVER
-          } else {
-            return maybeExternalUsed(parent) ? ANY : NEVER
           }
+          return isMaybeExternallyUsed(parent) ? ANY : NEVER
         }
       }
       return NEVER
     }
 
-    function maybeExternalUsed(parentTarget: ASTNode): boolean {
+    function isMaybeExternallyUsed(parentTarget: ASTNode): boolean {
       if (
         parentTarget.type === 'ReturnStatement' ||
         parentTarget.type === 'VExpressionContainer'
@@ -348,10 +354,10 @@ export function definePropertyReferenceExtractor(
         return true
       }
       if (parentTarget.type === 'ArrayExpression') {
-        return maybeExternalUsed(parentTarget.parent)
+        return isMaybeExternallyUsed(parentTarget.parent)
       }
       if (parentTarget.type === 'Property') {
-        return maybeExternalUsed(parentTarget.parent.parent)
+        return isMaybeExternallyUsed(parentTarget.parent.parent)
       }
       if (parentTarget.type === 'ArrowFunctionExpression') {
         return parentTarget.body === node
@@ -400,8 +406,8 @@ export function definePropertyReferenceExtractor(
       if (prop.type === 'Property') {
         const name = utils.getStaticPropertyName(prop)
         if (name) {
-          const list = refs.properties[name] || (refs.properties[name] = [])
-          list.push(prop)
+          refs.properties[name] ||= []
+          refs.properties[name].push(prop)
         } else {
           // If cannot trace name, everything is used!
           return ANY
@@ -453,7 +459,8 @@ export function definePropertyReferenceExtractor(
       if (argIndex === 0) {
         if (getToRefSet().toRefNodes.has(node)) {
           return extractFromToRef(node)
-        } else if (getToRefSet().toRefsNodes.has(node)) {
+        }
+        if (getToRefSet().toRefsNodes.has(node)) {
           return extractFromToRefs(node)
         }
       }
@@ -596,20 +603,19 @@ export function definePropertyReferenceExtractor(
   ): IPropertyReferences {
     const ignoreGlobals = options && options.ignoreGlobals
 
-    let ignoreRef: (name: string) => boolean = () => false
+    let shouldIgnoreRef: (name: string) => boolean = () => false
     if (ignoreGlobals) {
       const globalScope =
         context.sourceCode.scopeManager.globalScope ||
         context.sourceCode.scopeManager.scopes[0]
 
-      ignoreRef = (name) => globalScope.set.has(name)
+      shouldIgnoreRef = (name) => globalScope.set.has(name)
     }
 
     const references: IPropertyReferences[] = []
-    for (const id of node.references
-      .filter((ref) => ref.variable == null)
-      .map((ref) => ref.id)) {
-      if (ignoreRef(id.name)) {
+    for (const ref of node.references) {
+      const id = ref.id
+      if (ref.variable != null || shouldIgnoreRef(id.name)) {
         continue
       }
       if (isFunctionalTemplate) {

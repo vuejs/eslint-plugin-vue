@@ -97,7 +97,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: '`style` attributes are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 36
         }
       ]
     },
@@ -109,7 +112,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: '`style` attributes are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 19
         }
       ]
     },
@@ -123,7 +129,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     },
@@ -138,7 +147,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     },
@@ -153,7 +165,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 5,
+          endColumn: 11
         }
       ]
     },
@@ -170,7 +185,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 47
         }
       ]
     },
@@ -186,7 +204,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 47
         }
       ]
     },
@@ -203,7 +224,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 6,
+          endColumn: 11
         }
       ]
     },
@@ -220,7 +244,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 46
         }
       ]
     },
@@ -237,15 +264,24 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 46
         },
         {
           message: 'Static inline `style` are forbidden.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 46
         },
         {
           message: 'Static inline `style` are forbidden.',
-          line: 5
+          line: 5,
+          column: 55,
+          endLine: 5,
+          endColumn: 66
         }
       ]
     },
@@ -262,7 +298,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 3
+          line: 3,
+          column: 14,
+          endLine: 7,
+          endColumn: 11
         }
       ]
     },
@@ -279,7 +318,10 @@ tester.run('no-static-inline-styles', rule, {
       errors: [
         {
           message: 'Static inline `style` are forbidden.',
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 46
         }
       ]
     }

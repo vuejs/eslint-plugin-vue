@@ -262,15 +262,15 @@ tester.run('html-comment-content-newline', rule, {
           message: "Expected line break after '<!--'.",
           line: 6,
           column: 15,
-          endColumn: 16,
-          endLine: 6
+          endLine: 6,
+          endColumn: 16
         },
         {
           message: "Expected line break before '-->'.",
           line: 7,
           column: 20,
-          endColumn: 21,
-          endLine: 7
+          endLine: 7,
+          endColumn: 21
         }
       ]
     },
@@ -293,29 +293,29 @@ tester.run('html-comment-content-newline', rule, {
           message: "Expected line break after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 15,
-          endLine: 3
+          endLine: 3,
+          endColumn: 15
         },
         {
           message: "Expected line break before '-->'.",
           line: 3,
           column: 22,
-          endColumn: 22,
-          endLine: 3
+          endLine: 3,
+          endColumn: 22
         },
         {
           message: "Expected line break after '<!--'.",
           line: 4,
           column: 15,
-          endColumn: 17,
-          endLine: 4
+          endLine: 4,
+          endColumn: 17
         },
         {
           message: "Expected line break before '-->'.",
           line: 4,
           column: 24,
-          endColumn: 26,
-          endLine: 4
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -367,15 +367,15 @@ comment
           message: "Expected line break after '<!--'.",
           line: 3,
           column: 15,
-          endColumn: 23,
-          endLine: 3
+          endLine: 3,
+          endColumn: 23
         },
         {
           message: "Expected line break before '-->'.",
           line: 3,
           column: 30,
-          endColumn: 38,
-          endLine: 3
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },

@@ -342,7 +342,10 @@ tester.run('no-unused-refs', rule, {
       errors: [
         {
           message: "'foo' is defined as ref, but never used.",
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -367,7 +370,10 @@ tester.run('no-unused-refs', rule, {
       errors: [
         {
           message: "'bar' is defined as ref, but never used.",
-          line: 7
+          line: 7,
+          column: 20,
+          endLine: 7,
+          endColumn: 25
         }
       ]
     },
@@ -382,7 +388,10 @@ tester.run('no-unused-refs', rule, {
       errors: [
         {
           message: "'x' is defined as ref, but never used.",
-          line: 3
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     },
@@ -397,7 +406,10 @@ tester.run('no-unused-refs', rule, {
       errors: [
         {
           message: "'x' is defined as ref, but never used.",
-          line: 4
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 23
         }
       ]
     },
@@ -422,7 +434,15 @@ tester.run('no-unused-refs', rule, {
       }
       </script>
       `,
-      errors: ["'x' is defined as ref, but never used."]
+      errors: [
+        {
+          message: "'x' is defined as ref, but never used.",
+          line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 23
+        }
+      ]
     }
   ]
 })

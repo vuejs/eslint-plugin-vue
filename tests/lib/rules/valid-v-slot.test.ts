@@ -145,7 +145,16 @@ tester.run('valid-v-slot', rule, {
           <div v-slot="{data}">{{data}}</div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
+      errors: [
+        {
+          messageId: 'ownerMustBeCustomElement',
+          data: { name: 'div' },
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 31
+        }
+      ]
     },
     {
       code: `
@@ -154,7 +163,14 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'ownerMustBeCustomElement', data: { name: 'template' } }
+        {
+          messageId: 'ownerMustBeCustomElement',
+          data: { name: 'template' },
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 33
+        }
       ]
     },
     {
@@ -164,8 +180,21 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'ownerMustBeCustomElement', data: { name: 'div' } },
-        { messageId: 'namedSlotMustBeOnTemplate' }
+        {
+          messageId: 'ownerMustBeCustomElement',
+          data: { name: 'div' },
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 37
+        },
+        {
+          messageId: 'namedSlotMustBeOnTemplate',
+          line: 3,
+          column: 16,
+          endLine: 3,
+          endColumn: 37
+        }
       ]
     },
     {
@@ -174,7 +203,16 @@ tester.run('valid-v-slot', rule, {
           <div><template v-slot></template></div>
         </template>
       `,
-      errors: [{ messageId: 'ownerMustBeCustomElement', data: { name: 'div' } }]
+      errors: [
+        {
+          messageId: 'ownerMustBeCustomElement',
+          data: { name: 'div' },
+          line: 3,
+          column: 26,
+          endLine: 3,
+          endColumn: 32
+        }
+      ]
     },
     {
       code: `
@@ -182,7 +220,15 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot:named="{data}">{{data}}</MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'namedSlotMustBeOnTemplate' }]
+      errors: [
+        {
+          messageId: 'namedSlotMustBeOnTemplate',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 45
+        }
+      ]
     },
     {
       code: `
@@ -193,7 +239,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'defaultSlotMustBeOnTemplate' }]
+      errors: [
+        {
+          messageId: 'defaultSlotMustBeOnTemplate',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 39
+        }
+      ]
     },
 
     // Verify duplication.
@@ -204,8 +258,20 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'namedSlotMustBeOnTemplate' },
-        { messageId: 'disallowDuplicateSlotsOnElement' }
+        {
+          messageId: 'namedSlotMustBeOnTemplate',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 50
+        },
+        {
+          messageId: 'disallowDuplicateSlotsOnElement',
+          line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 50
+        }
       ]
     },
     {
@@ -216,7 +282,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnElement' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnElement',
+          line: 4,
+          column: 34,
+          endLine: 4,
+          endColumn: 44
+        }
+      ]
     },
     {
       code: `
@@ -227,7 +301,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `
@@ -238,7 +320,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 35
+        }
+      ]
     },
     {
       code: `
@@ -249,7 +339,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: `
@@ -260,7 +358,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 37
+        }
+      ]
     },
     {
       code: `
@@ -271,7 +377,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `
@@ -283,7 +397,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 6,
+          column: 23,
+          endLine: 6,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `
@@ -293,7 +415,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 4,
+          column: 58,
+          endLine: 4,
+          endColumn: 68
+        }
+      ]
     },
     {
       code: `
@@ -303,7 +433,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 4,
+          column: 58,
+          endLine: 4,
+          endColumn: 70
+        }
+      ]
     },
     {
       code: `
@@ -315,9 +453,27 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       errors: [
-        { messageId: 'disallowDuplicateSlotsOnChildren' },
-        { messageId: 'disallowDuplicateSlotsOnChildren' },
-        { messageId: 'disallowDuplicateSlotsOnChildren' }
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 4,
+          column: 52,
+          endLine: 4,
+          endColumn: 62
+        },
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 52,
+          endLine: 5,
+          endColumn: 62
+        },
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 52,
+          endLine: 5,
+          endColumn: 62
+        }
       ]
     },
     {
@@ -329,7 +485,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 52,
+          endLine: 5,
+          endColumn: 64
+        }
+      ]
     },
     {
       code: `
@@ -340,7 +504,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 52,
+          endLine: 5,
+          endColumn: 64
+        }
+      ]
     },
     {
       code: `
@@ -352,7 +524,15 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       options: [{ allowModifiers: true }],
-      errors: [{ messageId: 'disallowDuplicateSlotsOnChildren' }]
+      errors: [
+        {
+          messageId: 'disallowDuplicateSlotsOnChildren',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 37
+        }
+      ]
     },
 
     // Verify arguments.
@@ -364,7 +544,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowArgumentUseSlotParams' }]
+      errors: [
+        {
+          messageId: 'disallowArgumentUseSlotParams',
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 45
+        }
+      ]
     },
 
     // Verify modifiers.
@@ -374,7 +562,15 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot.foo="{data}">{{data}}</MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowAnyModifier' }]
+      errors: [
+        {
+          messageId: 'disallowAnyModifier',
+          line: 3,
+          column: 31,
+          endLine: 3,
+          endColumn: 34
+        }
+      ]
     },
     {
       code: `
@@ -384,7 +580,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowAnyModifier' }]
+      errors: [
+        {
+          messageId: 'disallowAnyModifier',
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `
@@ -394,7 +598,15 @@ tester.run('valid-v-slot', rule, {
           </MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'disallowAnyModifier' }]
+      errors: [
+        {
+          messageId: 'disallowAnyModifier',
+          line: 4,
+          column: 34,
+          endLine: 4,
+          endColumn: 37
+        }
+      ]
     },
     {
       code: `
@@ -405,7 +617,15 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       options: [{ allowModifiers: true }],
-      errors: [{ messageId: 'disallowAnyModifier' }]
+      errors: [
+        {
+          messageId: 'disallowAnyModifier',
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
     },
     {
       code: `
@@ -416,7 +636,15 @@ tester.run('valid-v-slot', rule, {
         </template>
       `,
       options: [{ allowModifiers: false }],
-      errors: [{ messageId: 'disallowAnyModifier' }]
+      errors: [
+        {
+          messageId: 'disallowAnyModifier',
+          line: 4,
+          column: 34,
+          endLine: 4,
+          endColumn: 37
+        }
+      ]
     },
     {
       code: `
@@ -431,9 +659,27 @@ tester.run('valid-v-slot', rule, {
       `,
       options: [{ allowModifiers: false }],
       errors: [
-        { messageId: 'disallowAnyModifier' },
-        { messageId: 'disallowAnyModifier' },
-        { messageId: 'disallowAnyModifier' }
+        {
+          messageId: 'disallowAnyModifier',
+          line: 5,
+          column: 34,
+          endLine: 5,
+          endColumn: 37
+        },
+        {
+          messageId: 'disallowAnyModifier',
+          line: 6,
+          column: 34,
+          endLine: 6,
+          endColumn: 37
+        },
+        {
+          messageId: 'disallowAnyModifier',
+          line: 7,
+          column: 34,
+          endLine: 7,
+          endColumn: 41
+        }
       ]
     },
 
@@ -444,24 +690,56 @@ tester.run('valid-v-slot', rule, {
           <MyComponent v-slot>content</MyComponent>
         </template>
       `,
-      errors: [{ messageId: 'requireAttributeValue' }]
+      errors: [
+        {
+          messageId: 'requireAttributeValue',
+          line: 3,
+          column: 24,
+          endLine: 3,
+          endColumn: 30
+        }
+      ]
     },
     // comment value
     {
       filename: 'comment-value1.vue',
       code: '<template><MyComponent v-slot="/**/" ><div /></MyComponent></template>',
-      errors: [{ messageId: 'requireAttributeValue' }]
+      errors: [
+        {
+          messageId: 'requireAttributeValue',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     },
     {
       filename: 'comment-value2.vue',
       code: '<template><MyComponent v-slot=/**/ ><div /></MyComponent></template>',
-      errors: [{ messageId: 'requireAttributeValue' }]
+      errors: [
+        {
+          messageId: 'requireAttributeValue',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 35
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent v-slot="" ><div /></MyComponent></template>',
-      errors: [{ messageId: 'requireAttributeValue' }]
+      errors: [
+        {
+          messageId: 'requireAttributeValue',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
     }
   ]
 })

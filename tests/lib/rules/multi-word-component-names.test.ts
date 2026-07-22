@@ -230,7 +230,9 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "test" should always be multi-word.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -308,7 +310,9 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "invalid" should always be multi-word.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },
@@ -358,7 +362,9 @@ tester.run('multi-word-component-names', rule, {
         {
           message: 'Component name "test" should always be multi-word.',
           line: 1,
-          column: 1
+          column: 1,
+          endLine: undefined,
+          endColumn: undefined
         }
       ]
     },

@@ -1,5 +1,51 @@
 # eslint-plugin-vue
 
+## 10.10.0
+
+### Minor Changes
+
+- Added support for template literals to [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) ([#3097](https://github.com/vuejs/eslint-plugin-vue/pull/3097))
+
+- Added `allowLineSeparatedGroups` option to [`vue/sort-keys`](https://eslint.vuejs.org/rules/sort-keys.html) rule ([#3084](https://github.com/vuejs/eslint-plugin-vue/pull/3084))
+
+### Patch Changes
+
+- Updated `@eslint-community/eslint-utils`, `semver` and `xml-name-validator` dependencies ([#3094](https://github.com/vuejs/eslint-plugin-vue/pull/3094))
+
+## 10.9.2
+
+### Patch Changes
+
+- Fixed [`vue/custom-event-name-casing`](https://eslint.vuejs.org/rules/custom-event-name-casing.html) to check segments of colon-separated event names like `update:foo-bar` ([#3079](https://github.com/vuejs/eslint-plugin-vue/pull/3079))
+- Fixed [`vue/one-component-per-file`](https://eslint.vuejs.org/rules/one-component-per-file.html) to not report functions not imported from Vue ([#3063](https://github.com/vuejs/eslint-plugin-vue/pull/3063))
+- Fixed [`vue/prefer-import-from-vue`](https://eslint.vuejs.org/rules/prefer-import-from-vue.html) to not report imports/exports of names that are not re-exported by `vue` ([#3081](https://github.com/vuejs/eslint-plugin-vue/pull/3081))
+- Fixed [`vue/return-in-computed-property`](https://eslint.vuejs.org/rules/return-in-computed-property.html) and [`vue/require-render-return`](https://eslint.vuejs.org/rules/require-render-return.html) to not report exhaustive switch statements when TypeScript type information is available ([#3067](https://github.com/vuejs/eslint-plugin-vue/pull/3067))
+
+## 10.9.1
+
+### Patch Changes
+
+- Updated peer dependency version for [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) to fix parsing errors in Vue SFCs ([#3075](https://github.com/vuejs/eslint-plugin-vue/pull/3075))
+
+## 10.9.0
+
+### Minor Changes
+
+- Added `"inject"` to `groups` option in [`vue/no-unused-properties`](https://eslint.vuejs.org/rules/no-unused-properties.html) rule ([#3052](https://github.com/vuejs/eslint-plugin-vue/pull/3052))
+- Added new `ignores` option to [`vue/no-literals-in-template`](https://eslint.vuejs.org/rules/no-literals-in-template.html) rule ([#3072](https://github.com/vuejs/eslint-plugin-vue/pull/3072))
+- Added support for `:single-line`/`:multi-line` pseudo-classes in [`vue/padding-line-between-tags`](https://eslint.vuejs.org/rules/padding-line-between-tags.html) ([#3025](https://github.com/vuejs/eslint-plugin-vue/pull/3025))
+- Added new [`vue/prefer-v-model`](https://eslint.vuejs.org/rules/prefer-v-model.html) rule ([#3062](https://github.com/vuejs/eslint-plugin-vue/pull/3062))
+- Added new [`vue/prefer-single-event-payload`](https://eslint.vuejs.org/rules/prefer-single-event-payload.html) rule ([#3058](https://github.com/vuejs/eslint-plugin-vue/pull/3058))
+
+### Patch Changes
+
+- Added error end positions for [`vue/no-irregular-whitespace`](https://eslint.vuejs.org/rules/no-irregular-whitespace.html) ([#3065](https://github.com/vuejs/eslint-plugin-vue/pull/3065))
+- Improved error positions in [`vue/max-len`](https://eslint.vuejs.org/rules/max-len.html) ([#3066](https://github.com/vuejs/eslint-plugin-vue/pull/3066))
+- Improved performance in [`vue/no-child-content`](https://eslint.vuejs.org/rules/no-child-content.html) rule ([#3068](https://github.com/vuejs/eslint-plugin-vue/pull/3068))
+- Migrated configs to TypeScript ([#3002](https://github.com/vuejs/eslint-plugin-vue/pull/3002))
+- Updated resources: add `Attrs` and `AllowedAttrs` type definitions ([#3059](https://github.com/vuejs/eslint-plugin-vue/pull/3059))
+- Updated resources: `geolocation` HTML element and `ClassValue` and `InputAutoCompleteAttribute` Vue 3 export ([#3040](https://github.com/vuejs/eslint-plugin-vue/pull/3040))
+
 ## 10.8.0
 
 ### Minor Changes

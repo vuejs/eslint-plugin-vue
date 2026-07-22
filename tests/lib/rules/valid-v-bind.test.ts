@@ -93,18 +93,42 @@ tester.run('valid-v-bind', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-bind></div></template>',
-      errors: ["'v-bind' directives require an attribute value."]
+      errors: [
+        {
+          message: "'v-bind' directives require an attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: "<template><div :aaa.unknown='bbb'></div></template>",
-      errors: ["'v-bind' directives don't support the modifier 'unknown'."]
+      errors: [
+        {
+          message: "'v-bind' directives don't support the modifier 'unknown'.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent :foo="" /></template>',
-      errors: ["'v-bind' directives require an attribute value."]
+      errors: [
+        {
+          message: "'v-bind' directives require an attribute value.",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 31
+        }
+      ]
     }
   ]
 })

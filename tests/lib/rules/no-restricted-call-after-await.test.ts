@@ -198,7 +198,10 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("foo").bar.baz` is forbidden after an `await` expression.',
-          line: 7
+          line: 7,
+          column: 23,
+          endLine: 7,
+          endColumn: 35
         }
       ]
     },
@@ -225,12 +228,18 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
-          line: 8
+          line: 8,
+          column: 23,
+          endLine: 8,
+          endColumn: 35
         },
         {
           message:
             '`import("foo").bar.baz` is forbidden after an `await` expression.',
-          line: 9
+          line: 9,
+          column: 23,
+          endLine: 9,
+          endColumn: 35
         }
       ]
     },
@@ -252,7 +261,10 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("foo").default` is forbidden after an `await` expression.',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 29
         }
       ]
     },
@@ -274,7 +286,10 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("foo").default` is forbidden after an `await` expression.',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 29
         }
       ]
     },
@@ -296,7 +311,10 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
-          line: 7
+          line: 7,
+          column: 21,
+          endLine: 7,
+          endColumn: 38
         }
       ]
     },
@@ -327,17 +345,26 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("./foo").bar` is forbidden after an `await` expression.',
-          line: 10
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 29
         },
         {
           message:
             '`import("./baz").qux` is forbidden after an `await` expression.',
-          line: 11
+          line: 11,
+          column: 11,
+          endLine: 11,
+          endColumn: 16
         },
         {
           message:
             '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 20
         }
       ]
     },
@@ -368,17 +395,26 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("./foo").bar` is forbidden after an `await` expression.',
-          line: 10
+          line: 10,
+          column: 21,
+          endLine: 10,
+          endColumn: 29
         },
         {
           message:
             '`import("./baz").qux` is forbidden after an `await` expression.',
-          line: 11
+          line: 11,
+          column: 11,
+          endLine: 11,
+          endColumn: 16
         },
         {
           message:
             '`import("vue-i18n").useI18n` is forbidden after an `await` expression.',
-          line: 12
+          line: 12,
+          column: 11,
+          endLine: 12,
+          endColumn: 20
         }
       ]
     },
@@ -400,7 +436,10 @@ tester.run('no-restricted-call-after-await', rule as RuleModule, {
         {
           message:
             '`import("..").foo` is forbidden after an `await` expression.',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 18
         }
       ]
     }

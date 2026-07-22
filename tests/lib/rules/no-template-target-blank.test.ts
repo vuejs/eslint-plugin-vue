@@ -39,6 +39,10 @@ ruleTester.run('no-template-target-blank', rule, {
         {
           message:
             'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          line: 1,
+          column: 46,
+          endLine: 1,
+          endColumn: 61,
           suggestions: [
             {
               desc: 'Add `rel="noopener noreferrer"`.',
@@ -55,6 +59,10 @@ ruleTester.run('no-template-target-blank', rule, {
         {
           message:
             'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          line: 1,
+          column: 46,
+          endLine: 1,
+          endColumn: 61,
           suggestions: [
             {
               desc: 'Change `rel` attribute value to `noopener noreferrer`.',
@@ -71,6 +79,10 @@ ruleTester.run('no-template-target-blank', rule, {
         {
           message:
             'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 42,
           suggestions: [
             {
               desc: 'Change `rel` attribute value to `noopener noreferrer`.',
@@ -87,6 +99,10 @@ ruleTester.run('no-template-target-blank', rule, {
         {
           message:
             'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 42,
           suggestions: [
             {
               desc: 'Add `rel="noopener noreferrer"`.',
@@ -103,6 +119,10 @@ ruleTester.run('no-template-target-blank', rule, {
         {
           message:
             'Using target="_blank" without rel="noopener noreferrer" is a security risk.',
+          line: 1,
+          column: 46,
+          endLine: 1,
+          endColumn: 61,
           suggestions: [
             {
               desc: 'Change `rel` attribute value to `noopener noreferrer`.',

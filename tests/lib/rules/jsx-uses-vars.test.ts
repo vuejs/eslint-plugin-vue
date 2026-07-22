@@ -108,6 +108,10 @@ describe('jsx-uses-vars', () => {
         errors: [
           {
             message: "'SomeComponent' is defined but never used.",
+            line: 3,
+            column: 16,
+            endLine: 3,
+            endColumn: 29,
             suggestions: semver.gte(ESLint.version, '9.17.0')
               ? [
                   {
@@ -123,11 +127,7 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : [],
-            line: 3,
-            column: 16,
-            endLine: 3,
-            endColumn: 29
+              : []
           }
         ]
       },
@@ -148,6 +148,10 @@ describe('jsx-uses-vars', () => {
         errors: [
           {
             message: "'wrapper' is assigned a value but never used.",
+            line: 4,
+            column: 15,
+            endLine: 4,
+            endColumn: 22,
             suggestions: semver.gte(ESLint.version, '9.17.0')
               ? [
                   {
@@ -165,11 +169,7 @@ describe('jsx-uses-vars', () => {
       `
                   }
                 ]
-              : [],
-            line: 4,
-            column: 15,
-            endLine: 4,
-            endColumn: 22
+              : []
           }
         ]
       }

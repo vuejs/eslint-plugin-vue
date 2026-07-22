@@ -232,7 +232,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "props" property should be above the "data" property on line 4.',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 11,
+          endColumn: 12
         }
       ]
     },
@@ -271,7 +274,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "props" property should be above the "data" property on line 5.',
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 12,
+          endColumn: 12
         }
       ]
     },
@@ -310,7 +316,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "props" property should be above the "data" property on line 5.',
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 12,
+          endColumn: 12
         }
       ]
     },
@@ -363,17 +372,26 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "render" property on line 3.',
-          line: 8
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 22
         },
         {
           message:
             'The "data" property should be above the "render" property on line 3.',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 13,
+          endColumn: 12
         },
         {
           message:
             'The "props" property should be above the "data" property on line 9.',
-          line: 14
+          line: 14,
+          column: 11,
+          endLine: 16,
+          endColumn: 12
         }
       ]
     },
@@ -408,7 +426,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "components" property should be above the "data" property on line 4.',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 25
         }
       ]
     },
@@ -443,7 +464,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "components" property should be above the "data" property on line 4.',
-          line: 9
+          line: 9,
+          column: 11,
+          endLine: 9,
+          endColumn: 25
         }
       ]
     },
@@ -480,7 +504,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "components" property should be above the "data" property on line 5.',
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 25
         }
       ]
     },
@@ -517,12 +544,18 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "el" property should be above the "name" property on line 3.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 21
         },
         {
           message:
             'The "components" property should be above the "data" property on line 5.',
-          line: 10
+          line: 10,
+          column: 11,
+          endLine: 10,
+          endColumn: 25
         }
       ]
     },
@@ -569,7 +602,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 16
+          line: 16,
+          column: 11,
+          endLine: 16,
+          endColumn: 25
         }
       ]
     },
@@ -597,7 +633,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "test" property should be above the "name" property on line 5.',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 21
         }
       ]
     },
@@ -626,7 +665,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 4.',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 25
         }
       ]
     },
@@ -655,7 +697,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 4.',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 25
         }
       ]
     },
@@ -668,7 +713,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 1.',
-          line: 1
+          line: 1,
+          column: 26,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -690,6 +738,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -724,6 +775,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -758,6 +812,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -792,6 +849,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -826,6 +886,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -860,6 +923,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -894,6 +960,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -928,6 +997,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -962,6 +1034,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -996,6 +1071,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -1030,6 +1108,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -1064,6 +1145,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -1098,6 +1182,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "name" property should be above the "data" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Manually move "name" property above "data" property on line 3 (might break side effects).',
@@ -1133,6 +1220,9 @@ ruleTester.run('order-in-components', rule, {
           message:
             'The "data" property should be above the "computed" property on line 3.',
           line: 6,
+          column: 11,
+          endLine: 7,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Manually move "data" property above "computed" property on line 3 (might break side effects).',
@@ -1174,7 +1264,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 25
         }
       ]
     },
@@ -1220,7 +1313,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "data" property on line 3.',
-          line: 15
+          line: 15,
+          column: 11,
+          endLine: 15,
+          endColumn: 25
         }
       ]
     },
@@ -1257,7 +1353,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "props" property should be above the "setup" property on line 4.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 7,
+          endColumn: 14
         }
       ]
     },
@@ -1284,7 +1383,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "name" property should be above the "inheritAttrs" property on line 4.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 22
         }
       ]
     },
@@ -1309,12 +1411,18 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "slots" property should be above the "setup" property on line 3.',
-          line: 4
+          line: 4,
+          column: 11,
+          endLine: 4,
+          endColumn: 16
         },
         {
           message:
             'The "expose" property should be above the "setup" property on line 3.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 17
         }
       ]
     },
@@ -1339,7 +1447,10 @@ ruleTester.run('order-in-components', rule, {
         {
           message:
             'The "expose" property should be above the "setup" property on line 4.',
-          line: 5
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 17
         }
       ]
     }

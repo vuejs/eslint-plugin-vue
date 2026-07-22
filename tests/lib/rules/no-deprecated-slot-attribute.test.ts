@@ -881,8 +881,8 @@ tester.run('no-deprecated-slot-attribute', rule, {
         {
           message: '`slot` attributes are deprecated.',
           line: 7,
-          endLine: 7,
           column: 16,
+          endLine: 7,
           endColumn: 20
         }
       ]
@@ -919,8 +919,8 @@ tester.run('no-deprecated-slot-attribute', rule, {
         {
           message: '`slot` attributes are deprecated.',
           line: 7,
-          endLine: 7,
           column: 16,
+          endLine: 7,
           endColumn: 20
         }
       ]

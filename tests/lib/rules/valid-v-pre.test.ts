@@ -26,35 +26,83 @@ tester.run('valid-v-pre', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-pre:aaa></div></template>',
-      errors: ["'v-pre' directives require no argument."]
+      errors: [
+        {
+          message: "'v-pre' directives require no argument.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-pre.aaa></div></template>',
-      errors: ["'v-pre' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-pre' directives require no modifier.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-pre="aaa"></div></template>',
-      errors: ["'v-pre' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-pre' directives require no attribute value.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 27
+        }
+      ]
     },
     // parsing error
     {
       filename: 'parsing-error.vue',
       code: '<template><div v-pre="." /></template>',
-      errors: ["'v-pre' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-pre' directives require no attribute value.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     // comment value
     {
       filename: 'comment-value.vue',
       code: '<template><div v-pre="/**/" /></template>',
-      errors: ["'v-pre' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-pre' directives require no attribute value.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-pre="" /></template>',
-      errors: ["'v-pre' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-pre' directives require no attribute value.",
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     }
   ]
 })

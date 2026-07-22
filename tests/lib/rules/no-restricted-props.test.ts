@@ -94,7 +94,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `bad` props is not allowed.',
           line: 6,
-          column: 11
+          column: 11,
+          endLine: 6,
+          endColumn: 14
         }
       ]
     },
@@ -116,7 +118,10 @@ tester.run('no-restricted-props', rule as RuleModule, {
       errors: [
         {
           message: 'Using `bad` props is not allowed.',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         }
       ]
     },
@@ -133,7 +138,15 @@ tester.run('no-restricted-props', rule as RuleModule, {
       </script>
       `,
       options: ['/a/'],
-      errors: ['Using `bad` props is not allowed.']
+      errors: [
+        {
+          message: 'Using `bad` props is not allowed.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 14
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -152,11 +165,17 @@ tester.run('no-restricted-props', rule as RuleModule, {
       errors: [
         {
           message: 'Using `bar` props is not allowed.',
-          line: 6
+          line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16
         },
         {
           message: 'Using Baz',
-          line: 7
+          line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 16
         }
       ]
     },
@@ -182,6 +201,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 16,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -202,6 +224,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `bar` props is not allowed.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 16,
           suggestions: [
             {
               desc: 'Instead, change to `Bar`.',
@@ -222,6 +247,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `0` props is not allowed.',
           line: 7,
+          column: 11,
+          endLine: 7,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Zero`.',
@@ -263,6 +291,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 14,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -283,6 +314,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `bar` props is not allowed.',
           line: 6,
+          column: 11,
+          endLine: 6,
+          endColumn: 14,
           suggestions: [
             {
               desc: 'Instead, change to `b-a-r`.',
@@ -303,6 +337,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `baz` props is not allowed.',
           line: 7,
+          column: 12,
+          endLine: 7,
+          endColumn: 17,
           suggestions: [
             {
               desc: 'Instead, change to `Baz`.',
@@ -336,6 +373,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -363,6 +403,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 3,
+          column: 20,
+          endLine: 3,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -395,6 +438,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -430,6 +476,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -470,6 +519,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -517,6 +569,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -564,6 +619,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 12,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -596,6 +654,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 26,
           suggestions: []
         }
       ],
@@ -613,6 +674,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 3,
+          column: 40,
+          endLine: 3,
+          endColumn: 43,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',
@@ -638,6 +702,9 @@ tester.run('no-restricted-props', rule as RuleModule, {
         {
           message: 'Using `foo` props is not allowed.',
           line: 3,
+          column: 44,
+          endLine: 3,
+          endColumn: 47,
           suggestions: [
             {
               desc: 'Instead, change to `Foo`.',

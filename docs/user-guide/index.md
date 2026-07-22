@@ -16,7 +16,7 @@ yarn add -D eslint eslint-plugin-vue vue-eslint-parser globals
 
 ::: tip Requirements
 
-- ESLint: `^8.57.0 || ^9.0.0`
+- ESLint: `^8.57.0 || ^9.0.0 || ^10.0.0`
 - Node.js: `^18.18.0 || ^20.9.0 || >=21.1.0`
 
 :::
@@ -318,9 +318,12 @@ All component-related rules are applied to code that passes any of the following
 - `Vue.mixin()` expression
 - `app.component()` expression
 - `app.mixin()` expression
+- `new Vue()` expression
 - `createApp()` expression
+- `component()` expression
 - `defineComponent()` expression
-- `export default {}` in `.vue` or `.jsx` file
+- `defineNuxtComponent()` expression
+- `export default {}` in `.vue`, `.jsx`, or `.tsx` files
 
 However, if you want to take advantage of the rules in any of your custom objects that are Vue components, you might need to use the special comment `// @vue/component` that marks an object in the next line as a Vue component in any file, e.g.:
 

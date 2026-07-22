@@ -34,23 +34,57 @@ tester.run('space-unary-ops', rule, {
     {
       code: '<template><div :attr="- a" /></template>',
       output: '<template><div :attr="-a" /></template>',
-      errors: ["Unexpected space after unary operator '-'."]
+      errors: [
+        {
+          message: "Unexpected space after unary operator '-'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       code: '<template><div :attr="typeof(a)" /></template>',
       output: '<template><div :attr="typeof (a)" /></template>',
-      errors: ["Unary word operator 'typeof' must be followed by whitespace."]
+      errors: [
+        {
+          message:
+            "Unary word operator 'typeof' must be followed by whitespace.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     },
     {
       code: '<template><div :[typeof(a)]="typeof(a)" /></template>',
       output: '<template><div :[typeof(a)]="typeof (a)" /></template>',
-      errors: ["Unary word operator 'typeof' must be followed by whitespace."]
+      errors: [
+        {
+          message:
+            "Unary word operator 'typeof' must be followed by whitespace.",
+          line: 1,
+          column: 30,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
     },
     {
       code: '<template><div :[!a]="!a" /></template>',
       output: '<template><div :[!a]="! a" /></template>',
       options: [{ nonwords: true }],
-      errors: ["Unary operator '!' must be followed by whitespace."]
+      errors: [
+        {
+          message: "Unary operator '!' must be followed by whitespace.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
 
     // CSS vars injection
@@ -67,7 +101,15 @@ tester.run('space-unary-ops', rule, {
         padding: v-bind(\`\${-num}px\`)
       }
       </style>`,
-      errors: ["Unexpected space after unary operator '-'."]
+      errors: [
+        {
+          message: "Unexpected space after unary operator '-'.",
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 33
+        }
+      ]
     }
   ]
 })

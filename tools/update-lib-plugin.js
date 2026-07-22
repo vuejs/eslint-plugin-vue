@@ -11,7 +11,7 @@ This script updates `lib/plugin.js` file from rule's meta data.
 
 const fs = require('node:fs')
 const path = require('node:path')
-const { FlatESLint } = require('eslint/use-at-your-own-risk')
+const { ESLint } = require('eslint')
 const rules = require('./lib/rules')
 const { camelCase } = require('../lib/utils/casing.ts')
 
@@ -46,9 +46,9 @@ fs.writeFileSync(filePath, content)
 
 // Format files.
 async function format() {
-  const linter = new FlatESLint({ fix: true })
+  const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([filePath])
-  FlatESLint.outputFixes(report)
+  ESLint.outputFixes(report)
 }
 
 format()

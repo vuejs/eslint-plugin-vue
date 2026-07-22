@@ -119,50 +119,111 @@ tester.run('valid-v-on', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-on:click.aaa="foo"></div></template>',
-      errors: ["'v-on' directives don't support the modifier 'aaa'."]
+      errors: [
+        {
+          message: "'v-on' directives don't support the modifier 'aaa'.",
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-on:click></div></template>',
       errors: [
-        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+        {
+          message:
+            "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent').",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 26
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @click></div></template>',
       errors: [
-        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+        {
+          message:
+            "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent').",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @keydown.bar.aaa="foo"></div></template>',
       options: [{ modifiers: ['bar'] }],
-      errors: ["'v-on' directives don't support the modifier 'aaa'."]
+      errors: [
+        {
+          message: "'v-on' directives don't support the modifier 'aaa'.",
+          line: 1,
+          column: 29,
+          endLine: 1,
+          endColumn: 32
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @keydown.bar.aaa="foo"></div></template>',
       options: [{ modifiers: ['aaa'] }],
-      errors: ["'v-on' directives don't support the modifier 'bar'."]
+      errors: [
+        {
+          message: "'v-on' directives don't support the modifier 'bar'.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @click="const"></div></template>',
-      errors: ['Avoid using JavaScript keyword as "v-on" value: "const".']
+      errors: [
+        {
+          message: 'Avoid using JavaScript keyword as "v-on" value: "const".',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @click="delete"></div></template>',
-      errors: ['Avoid using JavaScript keyword as "v-on" value: "delete".']
+      errors: [
+        {
+          message: 'Avoid using JavaScript keyword as "v-on" value: "delete".',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 31
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><MyComponent v-on:keydown="" /></template>',
       errors: [
-        "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent')."
+        {
+          message:
+            "'v-on' directives require a value or verb modifier (like 'stop' or 'prevent').",
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 39
+        }
       ]
     }
   ]

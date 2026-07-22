@@ -66,7 +66,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -77,7 +80,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -88,7 +94,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 33
         }
       ]
     },
@@ -99,7 +108,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 33
         }
       ]
     },
@@ -110,7 +122,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 36
         }
       ]
     },
@@ -122,7 +137,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'in' instead of 'of' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -134,7 +152,10 @@ tester.run('v-for-delimiter-style', rule, {
       errors: [
         {
           message: "Expected 'of' instead of 'in' in 'v-for'.",
-          column: 23
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     }

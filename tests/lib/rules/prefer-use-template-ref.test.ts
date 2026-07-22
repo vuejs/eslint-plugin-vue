@@ -317,7 +317,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 7,
-          column: 22
+          column: 22,
+          endLine: 7,
+          endColumn: 27
         }
       ]
     },
@@ -341,7 +343,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 22
+          column: 22,
+          endLine: 9,
+          endColumn: 27
         }
       ]
     },
@@ -365,7 +369,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 8,
-          column: 25
+          column: 25,
+          endLine: 8,
+          endColumn: 30
         },
         {
           messageId: 'preferUseTemplateRef',
@@ -373,7 +379,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 22
+          column: 22,
+          endLine: 9,
+          endColumn: 27
         }
       ]
     },
@@ -402,7 +410,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 12,
-          column: 28
+          column: 28,
+          endLine: 12,
+          endColumn: 33
         }
       ]
     },
@@ -424,7 +434,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'shallowRef'
           },
           line: 7,
-          column: 22
+          column: 22,
+          endLine: 7,
+          endColumn: 34
         }
       ]
     },
@@ -450,7 +462,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 9,
-          column: 28
+          column: 28,
+          endLine: 9,
+          endColumn: 33
         }
       ]
     },
@@ -477,7 +491,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 8,
-          column: 20
+          column: 20,
+          endLine: 8,
+          endColumn: 25
         }
       ]
     },
@@ -504,7 +520,9 @@ tester.run('prefer-use-template-ref', rule, {
             name: 'ref'
           },
           line: 12,
-          column: 20
+          column: 20,
+          endLine: 12,
+          endColumn: 25
         }
       ]
     }

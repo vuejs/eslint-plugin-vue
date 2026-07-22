@@ -90,12 +90,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 36
         }
       ]
     },
@@ -115,12 +119,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 36
         }
       ]
     },
@@ -141,12 +149,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over method handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 28
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 36
         }
       ]
     },
@@ -167,12 +179,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over method handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 28
         },
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -186,7 +202,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: 1,
+          endColumn: 30
         }
       ]
     },
@@ -201,7 +219,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 30
         }
       ]
     },
@@ -218,7 +238,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 30
         }
       ]
     },
@@ -237,22 +259,30 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 34
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 38
+          column: 38,
+          endLine: 3,
+          endColumn: 43
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 24
+          column: 24,
+          endLine: 4,
+          endColumn: 29
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -277,22 +307,30 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 31
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 34
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 6,
-          column: 25
+          column: 25,
+          endLine: 6,
+          endColumn: 36
         }
       ]
     },
@@ -313,12 +351,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 36
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 22
+          column: 22,
+          endLine: 4,
+          endColumn: 34
         }
       ]
     },
@@ -337,7 +379,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 26
+          column: 26,
+          endLine: 3,
+          endColumn: 38
         }
       ]
     },
@@ -366,7 +410,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 33
+          column: 33,
+          endLine: 2,
+          endColumn: 38
         }
       ]
     },
@@ -395,7 +441,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 33
+          column: 33,
+          endLine: 2,
+          endColumn: 38
         }
       ]
     },
@@ -414,31 +462,41 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 33
         },
         {
           message:
             'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 34
         },
         {
           message:
             'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 32
         },
         {
           message:
             'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 37
         },
         {
           message:
             'Prefer method handler over inline handler in v-on. Note that you may need to create a new method.',
           line: 6,
-          column: 25
+          column: 25,
+          endLine: 6,
+          endColumn: 27
         }
       ]
     },
@@ -459,7 +517,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 2,
-          column: 33
+          column: 33,
+          endLine: 2,
+          endColumn: 38
         }
       ]
     },
@@ -486,17 +546,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -523,17 +589,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 30
         },
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 30
         }
       ]
     },
@@ -554,7 +626,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline handler in v-on.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 30
         }
       ]
     },
@@ -581,22 +655,30 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 37
         },
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 4,
-          column: 27
+          column: 27,
+          endLine: 4,
+          endColumn: 40
         },
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 5,
-          column: 27
+          column: 27,
+          endLine: 5,
+          endColumn: 53
         },
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 6,
-          column: 27
+          column: 27,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -616,12 +698,16 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 31
         },
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 32
         }
       ]
     },
@@ -634,7 +720,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 1,
-          column: 24
+          column: 24,
+          endLine: 1,
+          endColumn: 35
         }
       ]
     },
@@ -647,7 +735,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 1,
-          column: 23
+          column: 23,
+          endLine: 1,
+          endColumn: 28
         }
       ]
     },
@@ -660,7 +750,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 41
         }
       ]
     },
@@ -673,7 +765,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 39
         }
       ]
     },
@@ -686,7 +780,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline function over inline handler in v-on.',
           line: 1,
-          column: 27
+          column: 27,
+          endLine: 1,
+          endColumn: 33
         }
       ]
     },
@@ -702,7 +798,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over method handler in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 28
         }
       ]
     },
@@ -724,17 +822,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 36
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 44
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 40
         }
       ]
     },
@@ -749,7 +853,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 36
         }
       ]
     },
@@ -766,7 +872,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 36
         }
       ]
     },
@@ -797,7 +905,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 44
         }
       ]
     },
@@ -828,7 +938,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 44
         }
       ]
     },
@@ -843,7 +955,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 43
         }
       ]
     },
@@ -859,7 +973,9 @@ tester.run('v-on-handler-style', rule, {
           message:
             'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 38
         }
       ]
     },
@@ -875,7 +991,9 @@ tester.run('v-on-handler-style', rule, {
           message:
             'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 38
         }
       ]
     },
@@ -891,7 +1009,9 @@ tester.run('v-on-handler-style', rule, {
           message:
             'Prefer method handler over inline function in v-on. Note that you may need to create a new method.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 42
         }
       ]
     },
@@ -908,17 +1028,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 44
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 47
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 41
         }
       ]
     },
@@ -945,17 +1071,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 38
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 44
         }
       ]
     },
@@ -982,17 +1114,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 38
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
-          column: 25
+          column: 25,
+          endLine: 5,
+          endColumn: 44
         }
       ]
     },
@@ -1017,17 +1155,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 36
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 4,
-          column: 27
+          column: 27,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: 'Prefer method handler over inline function in v-on.',
           line: 5,
-          column: 27
+          column: 27,
+          endLine: 5,
+          endColumn: 44
         }
       ]
     },
@@ -1054,22 +1198,30 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 3,
-          column: 27
+          column: 27,
+          endLine: 3,
+          endColumn: 43
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 4,
-          column: 27
+          column: 27,
+          endLine: 4,
+          endColumn: 46
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 5,
-          column: 27
+          column: 27,
+          endLine: 5,
+          endColumn: 59
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 6,
-          column: 27
+          column: 27,
+          endLine: 6,
+          endColumn: 40
         }
       ]
     },
@@ -1091,17 +1243,23 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 40
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 3,
-          column: 25
+          column: 25,
+          endLine: 3,
+          endColumn: 38
         },
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 4,
-          column: 25
+          column: 25,
+          endLine: 4,
+          endColumn: 50
         }
       ]
     },
@@ -1116,7 +1274,9 @@ tester.run('v-on-handler-style', rule, {
         {
           message: 'Prefer inline handler over inline function in v-on.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 41
         }
       ]
     },
@@ -1132,7 +1292,9 @@ tester.run('v-on-handler-style', rule, {
           message:
             'Prefer inline handler over inline function in v-on. Note that the custom event must be changed to a single payload.',
           line: 2,
-          column: 25
+          column: 25,
+          endLine: 2,
+          endColumn: 44
         }
       ]
     }

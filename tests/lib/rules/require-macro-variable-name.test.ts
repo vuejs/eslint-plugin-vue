@@ -95,6 +95,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "defineProps" must be "props".',
           line: 3,
           column: 15,
+          endLine: 3,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "props".',
@@ -122,6 +124,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "defineEmits" must be "emit".',
           line: 3,
           column: 15,
+          endLine: 3,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "emit".',
@@ -139,6 +143,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "defineSlots" must be "slots".',
           line: 4,
           column: 15,
+          endLine: 4,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "slots".',
@@ -156,6 +162,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "useAttrs" must be "attrs".',
           line: 5,
           column: 15,
+          endLine: 5,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "attrs".',
@@ -183,6 +191,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "useSlots" must be "slots".',
           line: 3,
           column: 15,
+          endLine: 3,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "slots".',
@@ -211,6 +221,8 @@ tester.run('require-macro-variable-name', rule, {
           message: 'The variable name of "defineProps" must be "props".',
           line: 3,
           column: 15,
+          endLine: 3,
+          endColumn: 25,
           suggestions: [
             {
               desc: 'Change the variable name to "props".',
@@ -242,6 +254,8 @@ tester.run('require-macro-variable-name', rule, {
           message: `The variable name of "defineSlots" must be "${customOptions.defineSlots}".`,
           line: 3,
           column: 15,
+          endLine: 3,
+          endColumn: 20,
           suggestions: [
             {
               desc: `Change the variable name to "${customOptions.defineSlots}".`,
@@ -259,6 +273,8 @@ tester.run('require-macro-variable-name', rule, {
           message: `The variable name of "useSlots" must be "${customOptions.useSlots}".`,
           line: 4,
           column: 15,
+          endLine: 4,
+          endColumn: 23,
           suggestions: [
             {
               desc: `Change the variable name to "${customOptions.useSlots}".`,
@@ -276,6 +292,8 @@ tester.run('require-macro-variable-name', rule, {
           message: `The variable name of "useAttrs" must be "${customOptions.useAttrs}".`,
           line: 5,
           column: 15,
+          endLine: 5,
+          endColumn: 20,
           suggestions: [
             {
               desc: `Change the variable name to "${customOptions.useAttrs}".`,
@@ -305,6 +323,8 @@ tester.run('require-macro-variable-name', rule, {
           message: `The variable name of "useAttrs" must be "attrs".`,
           line: 4,
           column: 15,
+          endLine: 4,
+          endColumn: 26,
           suggestions: [
             {
               desc: `Change the variable name to "attrs".`,

@@ -56,7 +56,15 @@ ruleTester.run('valid-model-definition', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model option."]
+      errors: [
+        {
+          message: "Invalid key 'props' in model option.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -67,7 +75,15 @@ ruleTester.run('valid-model-definition', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'events' in model option."]
+      errors: [
+        {
+          message: "Invalid key 'events' in model option.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -79,7 +95,15 @@ ruleTester.run('valid-model-definition', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model option."]
+      errors: [
+        {
+          message: "Invalid key 'props' in model option.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -91,7 +115,15 @@ ruleTester.run('valid-model-definition', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'events' in model option."]
+      errors: [
+        {
+          message: "Invalid key 'events' in model option.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 29
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -104,8 +136,20 @@ ruleTester.run('valid-model-definition', rule, {
         }
       `,
       errors: [
-        "Invalid key 'props' in model option.",
-        "Invalid key 'events' in model option."
+        {
+          message: "Invalid key 'props' in model option.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: "Invalid key 'events' in model option.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 29
+        }
       ]
     },
     {
@@ -119,7 +163,15 @@ ruleTester.run('valid-model-definition', rule, {
           }
         }
       `,
-      errors: ["Invalid key 'props' in model option."]
+      errors: [
+        {
+          message: "Invalid key 'props' in model option.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -133,8 +185,20 @@ ruleTester.run('valid-model-definition', rule, {
         }
       `,
       errors: [
-        "Invalid key 'name' in model option.",
-        "Invalid key 'props' in model option."
+        {
+          message: "Invalid key 'name' in model option.",
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 28
+        },
+        {
+          message: "Invalid key 'props' in model option.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 26
+        }
       ]
     }
   ]

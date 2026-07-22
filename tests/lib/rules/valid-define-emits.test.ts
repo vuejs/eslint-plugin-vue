@@ -142,7 +142,10 @@ tester.run('valid-define-emits', rule, {
       errors: [
         {
           message: '`defineEmits` is referencing locally declared variables.',
-          line: 5
+          line: 5,
+          column: 21,
+          endLine: 5,
+          endColumn: 24
         }
       ]
     },
@@ -160,7 +163,10 @@ tester.run('valid-define-emits', rule, {
       errors: [
         {
           message: '`defineEmits` has both a type-only emit and an argument.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 59
         }
       ]
     },
@@ -176,11 +182,17 @@ tester.run('valid-define-emits', rule, {
       errors: [
         {
           message: '`defineEmits` has been called multiple times.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message: '`defineEmits` has been called multiple times.',
-          line: 5
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 38
         }
       ]
     },
@@ -201,7 +213,10 @@ tester.run('valid-define-emits', rule, {
         {
           message:
             'Custom events are defined in both `defineEmits` and `export default {}`.',
-          line: 9
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 38
         }
       ]
     },
@@ -216,7 +231,10 @@ tester.run('valid-define-emits', rule, {
       errors: [
         {
           message: 'Custom events are not defined.',
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 22
         }
       ]
     }

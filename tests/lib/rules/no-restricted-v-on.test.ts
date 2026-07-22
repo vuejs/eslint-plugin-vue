@@ -67,7 +67,9 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
         {
           message: 'Using `@test` is not allowed on this element.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 21
         }
       ]
     },
@@ -75,15 +77,35 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
       filename: 'test.vue',
       code: '<template><div @foo="bar" @bar="foo"></div></template>',
       options: ['foo'],
-      errors: ['Using `@foo` is not allowed on this element.']
+      errors: [
+        {
+          message: 'Using `@foo` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @foo="bar" @bar="foo"></div></template>',
       options: ['foo', 'bar'],
       errors: [
-        'Using `@foo` is not allowed on this element.',
-        'Using `@bar` is not allowed on this element.'
+        {
+          message: 'Using `@foo` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        },
+        {
+          message: 'Using `@bar` is not allowed on this element.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
@@ -91,31 +113,77 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
       code: '<template><div @foo="bar" @bar="foo"></div></template>',
       options: [{ argument: '/^(foo|bar)$/' }],
       errors: [
-        'Using `@foo` is not allowed on this element.',
-        'Using `@bar` is not allowed on this element.'
+        {
+          message: 'Using `@foo` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        },
+        {
+          message: 'Using `@bar` is not allowed on this element.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @foo.once="foo" /><div @foo="foo" /></template>',
       options: [{ argument: 'foo', modifiers: ['once'] }],
-      errors: ['Using `@foo.once` is not allowed on this element.']
+      errors: [
+        {
+          message: 'Using `@foo.once` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div @v-on="foo" @foo.prevent="bar" /><div @foo="foo" v-on="listener" /></template>',
       options: ['/^v-/', { argument: 'foo', modifiers: ['prevent'] }, null],
       errors: [
-        'Using `@v-on` is not allowed on this element.',
-        'Using `@foo.prevent` is not allowed on this element.',
-        'Using `v-on` is not allowed on this element.'
+        {
+          message: 'Using `@v-on` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 21
+        },
+        {
+          message: 'Using `@foo.prevent` is not allowed on this element.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 40
+        },
+        {
+          message: 'Using `v-on` is not allowed on this element.',
+          line: 1,
+          column: 65,
+          endLine: 1,
+          endColumn: 69
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-on="foo" /></template>',
       options: [null],
-      errors: ['Using `v-on` is not allowed on this element.']
+      errors: [
+        {
+          message: 'Using `v-on` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -126,8 +194,20 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
       </template>`,
       options: ['/^v-/', { argument: 'foo', element: `/^My/` }],
       errors: [
-        'Using `@v-on` is not allowed on this element.',
-        'Using `@foo` is not allowed on this <MyButton>.'
+        {
+          message: 'Using `@v-on` is not allowed on this element.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 19
+        },
+        {
+          message: 'Using `@foo` is not allowed on this <MyButton>.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -137,7 +217,15 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
         <div @foo="x" />
       </template>`,
       options: ['/^f/', { argument: 'foo' }],
-      errors: ['Using `@foo` is not allowed on this element.']
+      errors: [
+        {
+          message: 'Using `@foo` is not allowed on this element.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 18
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -146,7 +234,15 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
         <div @foo="x" />
       </template>`,
       options: [{ argument: 'foo', message: 'foo' }],
-      errors: ['foo']
+      errors: [
+        {
+          message: 'foo',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 18
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -154,7 +250,11 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
       options: [{ argument: 'foo', element: 'div' }],
       errors: [
         {
-          message: 'Using `@foo` is not allowed on this <div>.'
+          message: 'Using `@foo` is not allowed on this <div>.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
         }
       ]
     },
@@ -164,7 +264,11 @@ tester.run('no-restricted-v-on', rule as RuleModule, {
       options: ['foo'],
       errors: [
         {
-          message: 'Using `v-on:foo` is not allowed on this element.'
+          message: 'Using `v-on:foo` is not allowed on this element.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     }

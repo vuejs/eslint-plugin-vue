@@ -541,27 +541,45 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message: `Prop 'b' requires default value to be set.`,
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 32
         },
         {
           message: `Prop 'c' requires default value to be set.`,
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 8,
+          endColumn: 14
         },
         {
           message: `Prop 'd' requires default value to be set.`,
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 12,
+          endColumn: 14
         },
         {
           message: `Prop 'e' requires default value to be set.`,
-          line: 13
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 33
         },
         {
           message: `Prop 'f' requires default value to be set.`,
-          line: 14
+          line: 14,
+          column: 13,
+          endLine: 16,
+          endColumn: 14
         }
       ]
     },
@@ -582,7 +600,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 37
         }
       ]
     },
@@ -601,7 +622,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 37
         }
       ]
     },
@@ -622,19 +646,31 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: `Prop 'a' requires default value to be set.`,
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 22
         },
         {
           message: `Prop 'b' requires default value to be set.`,
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 24
         },
         {
           message: `Prop 'c' requires default value to be set.`,
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 26
         },
         {
           message: `Prop 'd' requires default value to be set.`,
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 26
         }
       ]
     },
@@ -653,15 +689,24 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: `Prop '[foo]' requires default value to be set.`,
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 26
         },
         {
           message: `Prop '[bar()]' requires default value to be set.`,
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 28
         },
         {
           message: `Prop '[baz.baz]' requires default value to be set.`,
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 30
         }
       ]
     },
@@ -677,7 +722,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `,
-      errors: ["Prop 'foo' requires default value to be set."]
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 14
+        }
+      ]
     },
     {
       filename: 'unknown-prop-details-test.vue',
@@ -690,7 +743,15 @@ ruleTester.run('require-default-prop', rule, {
           }
         }
       `,
-      errors: ["Prop 'foo' requires default value to be set."]
+      errors: [
+        {
+          message: "Prop 'foo' requires default value to be set.",
+          line: 4,
+          column: 13,
+          endLine: 6,
+          endColumn: 14
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -704,8 +765,20 @@ ruleTester.run('require-default-prop', rule, {
         }
       `,
       errors: [
-        "Prop 'baz' requires default value to be set.",
-        "Prop 'bar1' requires default value to be set."
+        {
+          message: "Prop 'baz' requires default value to be set.",
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 27
+        },
+        {
+          message: "Prop 'bar1' requires default value to be set.",
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 26
+        }
       ]
     },
     {
@@ -724,7 +797,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 20
         }
       ]
     },
@@ -751,7 +827,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'bar' requires default value to be set.",
-          line: 8
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 22
         }
       ]
     },
@@ -775,7 +854,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
-          line: 4
+          line: 4,
+          column: 9,
+          endLine: 4,
+          endColumn: 21
         }
       ]
     },
@@ -793,7 +875,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'bar' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 52,
+          endLine: 3,
+          endColumn: 71
         }
       ]
     },
@@ -811,11 +896,17 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 38,
+          endLine: 3,
+          endColumn: 49
         },
         {
           message: "Prop 'bar' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 51,
+          endLine: 3,
+          endColumn: 70
         }
       ]
     },
@@ -835,7 +926,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'foo' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 39,
+          endLine: 3,
+          endColumn: 52
         }
       ]
     },

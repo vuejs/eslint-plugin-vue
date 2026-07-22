@@ -71,10 +71,9 @@ function defaultMessage(key: VDirectiveKey, option: ParsedOption) {
     option.modifiers != null && option.modifiers.length > 0
       ? `.${option.modifiers.join('.')}`
       : ''
-  let element = 'element'
-  if (option.useElement) {
-    element = `<${key.parent.parent.parent.rawName}>`
-  }
+  const element = option.useElement
+    ? `<${key.parent.parent.parent.rawName}>`
+    : 'element'
   return `Using \`${von + arg + mod}\` is not allowed on this ${element}.`
 }
 

@@ -123,7 +123,15 @@ tester.run('v-on-event-hyphenation', rule, {
       </template>
       `,
       options: ['never', { autofix: true }],
-      errors: ["v-on event 'v-on:custom-event' can't be hyphenated."]
+      errors: [
+        {
+          message: "v-on event 'v-on:custom-event' can't be hyphenated.",
+          line: 3,
+          column: 25,
+          endLine: 3,
+          endColumn: 51
+        }
+      ]
     },
     {
       code: `
@@ -139,7 +147,15 @@ tester.run('v-on-event-hyphenation', rule, {
       </template>
       `,
       options: ['always', { autofix: true }],
-      errors: ["v-on event '@update:modelValue' must be hyphenated."]
+      errors: [
+        {
+          message: "v-on event '@update:modelValue' must be hyphenated.",
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 47
+        }
+      ]
     },
     {
       code: `
@@ -155,7 +171,15 @@ tester.run('v-on-event-hyphenation', rule, {
       </template>
       `,
       options: ['never', { autofix: true }],
-      errors: ["v-on event '@update:model-value' can't be hyphenated."]
+      errors: [
+        {
+          message: "v-on event '@update:model-value' can't be hyphenated.",
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 48
+        }
+      ]
     },
     {
       code: `
@@ -176,9 +200,27 @@ tester.run('v-on-event-hyphenation', rule, {
       `,
       options: ['always', { autofix: true }],
       errors: [
-        "v-on event '@upDate:modelValue' must be hyphenated.",
-        "v-on event '@up-date:modelValue' must be hyphenated.",
-        "v-on event '@upDate:model-value' must be hyphenated."
+        {
+          message: "v-on event '@upDate:modelValue' must be hyphenated.",
+          line: 3,
+          column: 23,
+          endLine: 3,
+          endColumn: 47
+        },
+        {
+          message: "v-on event '@up-date:modelValue' must be hyphenated.",
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 48
+        },
+        {
+          message: "v-on event '@upDate:model-value' must be hyphenated.",
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 48
+        }
       ]
     },
     {
@@ -200,9 +242,27 @@ tester.run('v-on-event-hyphenation', rule, {
       `,
       options: ['never', { autofix: true }],
       errors: [
-        "v-on event '@up-date:modelValue' can't be hyphenated.",
-        "v-on event '@upDate:model-value' can't be hyphenated.",
-        "v-on event '@up-date:model-value' can't be hyphenated."
+        {
+          message: "v-on event '@up-date:modelValue' can't be hyphenated.",
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 48
+        },
+        {
+          message: "v-on event '@upDate:model-value' can't be hyphenated.",
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 48
+        },
+        {
+          message: "v-on event '@up-date:model-value' can't be hyphenated.",
+          line: 6,
+          column: 23,
+          endLine: 6,
+          endColumn: 49
+        }
       ]
     },
     {
@@ -223,7 +283,9 @@ tester.run('v-on-event-hyphenation', rule, {
         {
           message: "v-on event 'v-on:custom-event' can't be hyphenated.",
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 49
         }
       ]
     },
@@ -245,7 +307,9 @@ tester.run('v-on-event-hyphenation', rule, {
         {
           message: "v-on event 'v-on:customEvent' must be hyphenated.",
           line: 3,
-          column: 23
+          column: 23,
+          endLine: 3,
+          endColumn: 48
         }
       ]
     }

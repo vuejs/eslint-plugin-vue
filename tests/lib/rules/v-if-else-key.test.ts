@@ -263,22 +263,34 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'OuterComponent' expected to have a 'key' attribute.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 55
         },
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 60
         },
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 40
         },
         {
           message:
             "Conditionally rendered repeated component 'OuterComponent' expected to have a 'key' attribute.",
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 36
         }
       ]
     },
@@ -338,22 +350,34 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'OuterComponent' expected to have a 'key' attribute.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 55
         },
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 58
         },
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 8
+          line: 8,
+          column: 15,
+          endLine: 8,
+          endColumn: 40
         },
         {
           message:
             "Conditionally rendered repeated component 'OuterComponent' expected to have a 'key' attribute.",
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 36
         }
       ]
     },
@@ -401,12 +425,18 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 5
+          line: 5,
+          column: 15,
+          endLine: 5,
+          endColumn: 60
         },
         {
           message:
             "Conditionally rendered repeated component 'InnerComponent' expected to have a 'key' attribute.",
-          line: 6
+          line: 6,
+          column: 15,
+          endLine: 6,
+          endColumn: 40
         }
       ]
     },
@@ -450,12 +480,18 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 43
         }
       ]
     },
@@ -499,12 +535,18 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 6
+          line: 6,
+          column: 13,
+          endLine: 6,
+          endColumn: 34
         }
       ]
     },
@@ -552,27 +594,42 @@ tester.run('v-if-else-key', rule, {
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 4
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 38
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 34
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 38
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 43
         },
         {
           message:
             "Conditionally rendered repeated component 'ComponentA' expected to have a 'key' attribute.",
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 34
         }
       ]
     }

@@ -97,9 +97,27 @@ ruleTester.run('require-slots-as-functions', rule, {
       </script>
       `,
       errors: [
-        { messageId: 'unexpected', line: 5 },
-        { messageId: 'unexpected', line: 7 },
-        { messageId: 'unexpected', line: 9 }
+        {
+          messageId: 'unexpected',
+          line: 5,
+          column: 33,
+          endLine: 5,
+          endColumn: 36
+        },
+        {
+          messageId: 'unexpected',
+          line: 7,
+          column: 35,
+          endLine: 7,
+          endColumn: 38
+        },
+        {
+          messageId: 'unexpected',
+          line: 9,
+          column: 37,
+          endLine: 9,
+          endColumn: 40
+        }
       ]
     }
   ]

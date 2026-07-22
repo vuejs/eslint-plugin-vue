@@ -45,78 +45,166 @@ tester.run('valid-v-else-if', rule, {
       filename: 'test.vue',
       code: '<template><template v-else-if="foo"><div></div></template></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 36
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-else-if="foo"></div></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 31
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-else-if="foo"></div></div></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 21,
+          endLine: 1,
+          endColumn: 36
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div></div><div v-else-if="foo"></div></div></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 47
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div if="foo"></div><div v-else-if="foo"></div></div></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 41,
+          endLine: 1,
+          endColumn: 56
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div></div><div v-else-if="foo"></div></div></template>',
       errors: [
-        "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive."
+        {
+          message:
+            "'v-else-if' directives require being preceded by the element which has a 'v-if' or 'v-else-if' directive.",
+          line: 1,
+          column: 54,
+          endLine: 1,
+          endColumn: 69
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if="foo" v-if="bar"></div></div></template>',
       errors: [
-        "'v-else-if' and 'v-if' directives can't exist on the same element."
+        {
+          message:
+            "'v-else-if' and 'v-if' directives can't exist on the same element.",
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 58
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if="foo" v-else></div></div></template>',
       errors: [
-        "'v-else-if' and 'v-else' directives can't exist on the same element."
+        {
+          message:
+            "'v-else-if' and 'v-else' directives can't exist on the same element.",
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 58
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if:aaa="foo"></div></div></template>',
-      errors: ["'v-else-if' directives require no argument."]
+      errors: [
+        {
+          message: "'v-else-if' directives require no argument.",
+          line: 1,
+          column: 53,
+          endLine: 1,
+          endColumn: 56
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if.aaa="foo"></div></div></template>',
-      errors: ["'v-else-if' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-else-if' directives require no modifier.",
+          line: 1,
+          column: 53,
+          endLine: 1,
+          endColumn: 56
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div><div v-if="foo"></div><div v-else-if></div></div></template>',
-      errors: ["'v-else-if' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-else-if' directives require that attribute value.",
+          line: 1,
+          column: 43,
+          endLine: 1,
+          endColumn: 52
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-if="foo"></div><div v-else-if=""></div></template>',
-      errors: ["'v-else-if' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-else-if' directives require that attribute value.",
+          line: 1,
+          column: 38,
+          endLine: 1,
+          endColumn: 50
+        }
+      ]
     }
   ]
 })

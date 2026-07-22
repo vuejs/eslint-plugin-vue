@@ -38,7 +38,10 @@ function loadPatterns(
     .flatMap((filename) => {
       const commentPattern = /^(<!--|\/\*)(.+?)(-->|\*\/)/
       const code0 = fs.readFileSync(path.join(FIXTURE_ROOT, filename), 'utf8')
-      const code = code0.replace(commentPattern, `$1${filename}$3`)
+      const code = code0.replace(
+        commentPattern,
+        (_match, open, _content, close) => `${open}${filename}${close}`
+      )
       const baseObj = JSON.parse(commentPattern.exec(code0)![2])
 
       if (baseObj.requirements) {
@@ -87,7 +90,10 @@ function loadPatterns(
                 message: `Expected indentation of ${line.indentSize} ${kind}${
                   line.indentSize === 1 ? '' : 's'
                 } but found 0 ${kind}s.`,
-                line: line.number + 1
+                line: line.number + 1,
+                column: 1,
+                endLine: line.number + 1,
+                endColumn: 1
               }
             ]
       )
@@ -248,7 +254,10 @@ tester.run(
         errors: [
           {
             message: 'Expected indentation of 0 spaces but found 2 spaces.',
-            line: 2
+            line: 2,
+            column: 1,
+            endLine: 2,
+            endColumn: 3
           }
         ]
       },
@@ -271,7 +280,10 @@ tester.run(
         errors: [
           {
             message: String.raw`Expected " " character, but found "\t" character.`,
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 2
           }
         ]
       },
@@ -297,11 +309,17 @@ tester.run(
         errors: [
           {
             message: String.raw`Expected "\t" character, but found " " character.`,
-            line: 3
+            line: 3,
+            column: 1,
+            endLine: 3,
+            endColumn: 2
           },
           {
             message: String.raw`Expected "\t" character, but found " " character.`,
-            line: 4
+            line: 4,
+            column: 1,
+            endLine: 4,
+            endColumn: 2
           }
         ]
       }

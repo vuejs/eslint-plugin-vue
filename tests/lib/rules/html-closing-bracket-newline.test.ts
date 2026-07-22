@@ -564,48 +564,48 @@ tester.run('html-closing-bracket-newline', rule, {
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 2,
           column: 18,
-          endColumn: 18,
-          endLine: 2
+          endLine: 2,
+          endColumn: 18
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 3,
           column: 19,
-          endColumn: 19,
-          endLine: 3
+          endLine: 3,
+          endColumn: 19
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 4,
           column: 16,
-          endColumn: 16,
-          endLine: 4
+          endLine: 4,
+          endColumn: 16
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 5,
           column: 17,
-          endColumn: 17,
-          endLine: 5
+          endLine: 5,
+          endColumn: 17
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 6,
           column: 15,
-          endColumn: 15,
-          endLine: 6
+          endLine: 6,
+          endColumn: 15
         },
         {
           message:
             'Expected 1 line break before closing bracket, but no line breaks found.',
           line: 6,
           column: 23,
-          endColumn: 23,
-          endLine: 6
+          endLine: 6,
+          endColumn: 23
         }
       ]
     },

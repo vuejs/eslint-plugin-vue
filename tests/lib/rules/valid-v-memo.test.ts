@@ -52,23 +52,55 @@ tester.run('valid-v-memo', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-memo:aaa="x"></div></template>',
-      errors: ["'v-memo' directives require no argument."]
+      errors: [
+        {
+          message: "'v-memo' directives require no argument.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-memo.aaa="x"></div></template>',
-      errors: ["'v-memo' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-memo' directives require no modifier.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-memo></div></template>',
-      errors: ["'v-memo' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-memo' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 22
+        }
+      ]
     },
     // empty value
     {
       filename: 'empty-value.vue',
       code: '<template><div v-memo="" /></template>',
-      errors: ["'v-memo' directives require that attribute value."]
+      errors: [
+        {
+          message: "'v-memo' directives require that attribute value.",
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -85,37 +117,49 @@ tester.run('valid-v-memo', rule, {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 3,
-          column: 22
+          column: 22,
+          endLine: 3,
+          endColumn: 25
         },
         {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 4,
-          column: 26
+          column: 26,
+          endLine: 4,
+          endColumn: 29
         },
         {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 4,
-          column: 31
+          column: 31,
+          endLine: 4,
+          endColumn: 34
         },
         {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 5,
-          column: 33
+          column: 33,
+          endLine: 5,
+          endColumn: 36
         },
         {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 6,
-          column: 22
+          column: 22,
+          endLine: 6,
+          endColumn: 28
         },
         {
           message:
             "'v-memo' directives require the attribute value to be an array.",
           line: 7,
-          column: 24
+          column: 24,
+          endLine: 7,
+          endColumn: 26
         }
       ]
     },
@@ -127,7 +171,9 @@ tester.run('valid-v-memo', rule, {
         {
           message: "'v-memo' directive does not work inside 'v-for'.",
           line: 1,
-          column: 40
+          column: 40,
+          endLine: 1,
+          endColumn: 46
         }
       ]
     }

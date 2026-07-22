@@ -62,11 +62,17 @@ tester.run('template-curly-spacing', rule, {
       errors: [
         {
           message: "Unexpected space(s) after '${'.",
-          line: 3
+          line: 3,
+          column: 30,
+          endLine: 3,
+          endColumn: 31
         },
         {
           message: "Unexpected space(s) before '}'.",
-          line: 3
+          line: 3,
+          column: 34,
+          endLine: 3,
+          endColumn: 35
         }
       ]
     },
@@ -85,11 +91,17 @@ tester.run('template-curly-spacing', rule, {
       errors: [
         {
           message: "Expected space(s) after '${'.",
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 30
         },
         {
           message: "Expected space(s) before '}'.",
-          line: 3
+          line: 3,
+          column: 33,
+          endLine: 3,
+          endColumn: 34
         }
       ]
     },
@@ -111,11 +123,17 @@ tester.run('template-curly-spacing', rule, {
       errors: [
         {
           message: "Unexpected space(s) after '${'.",
-          line: 4
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 29
         },
         {
           message: "Unexpected space(s) before '}'.",
-          line: 4
+          line: 4,
+          column: 30,
+          endLine: 4,
+          endColumn: 31
         }
       ]
     }

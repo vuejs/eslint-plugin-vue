@@ -26,35 +26,83 @@ tester.run('valid-v-once', rule, {
     {
       filename: 'test.vue',
       code: '<template><div v-once:aaa></div></template>',
-      errors: ["'v-once' directives require no argument."]
+      errors: [
+        {
+          message: "'v-once' directives require no argument.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-once.aaa></div></template>',
-      errors: ["'v-once' directives require no modifier."]
+      errors: [
+        {
+          message: "'v-once' directives require no modifier.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 26
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div v-once="aaa"></div></template>',
-      errors: ["'v-once' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-once' directives require no attribute value.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 28
+        }
+      ]
     },
     // parsing error
     {
       filename: 'parsing-error.vue',
       code: '<template><MyComponent v-once="." /></template>',
-      errors: ["'v-once' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-once' directives require no attribute value.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 34
+        }
+      ]
     },
     // comment value
     {
       filename: 'comment-value.vue',
       code: '<template><MyComponent v-once="/**/" /></template>',
-      errors: ["'v-once' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-once' directives require no attribute value.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 37
+        }
+      ]
     },
     // empty value
     {
       filename: 'comment-value.vue',
       code: '<template><MyComponent v-once="" /></template>',
-      errors: ["'v-once' directives require no attribute value."]
+      errors: [
+        {
+          message: "'v-once' directives require no attribute value.",
+          line: 1,
+          column: 31,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
     }
   ]
 })

@@ -27,6 +27,10 @@ tester.run('eqeqeq', rule, {
       errors: [
         {
           message: "Expected '===' and instead saw '=='.",
+          line: 1,
+          column: 25,
+          endLine: 1,
+          endColumn: 27,
           suggestions: semver.gte(ESLint.version, '9.26.0')
             ? [
                 {
@@ -34,11 +38,7 @@ tester.run('eqeqeq', rule, {
                   output: `<template><div :attr="a === 1" /></template>`
                 }
               ]
-            : [],
-          line: 1,
-          column: 25,
-          endLine: 1,
-          endColumn: 27
+            : []
         }
       ]
     },
@@ -53,6 +53,10 @@ tester.run('eqeqeq', rule, {
       errors: [
         {
           message: "Expected '===' and instead saw '=='.",
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 27,
           suggestions: semver.gte(ESLint.version, '9.26.0')
             ? [
                 {
@@ -65,11 +69,7 @@ tester.run('eqeqeq', rule, {
       </style>`
                 }
               ]
-            : [],
-          line: 4,
-          column: 25,
-          endLine: 4,
-          endColumn: 27
+            : []
         }
       ]
     }

@@ -65,11 +65,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'rejectedOpeningSpace',
-          line: 4
+          line: 4,
+          column: 23,
+          endLine: 4,
+          endColumn: 24
         },
         {
           messageId: 'rejectedClosingSpace',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -90,11 +96,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'missingOpeningSpace',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 23
         },
         {
           messageId: 'missingClosingSpace',
-          line: 4
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     },
@@ -114,11 +126,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'rejectedOpeningSpace',
-          line: 4
+          line: 4,
+          column: 20,
+          endLine: 4,
+          endColumn: 21
         },
         {
           messageId: 'rejectedClosingSpace',
-          line: 4
+          line: 4,
+          column: 26,
+          endLine: 4,
+          endColumn: 27
         }
       ]
     },
@@ -139,11 +157,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'missingOpeningSpace',
-          line: 4
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 20
         },
         {
           messageId: 'missingClosingSpace',
-          line: 4
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     },
@@ -163,11 +187,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'rejectedOpeningSpace',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 23
         },
         {
           messageId: 'rejectedClosingSpace',
-          line: 4
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 29
         }
       ]
     },
@@ -188,11 +218,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'missingOpeningSpace',
-          line: 4
+          line: 4,
+          column: 21,
+          endLine: 4,
+          endColumn: 22
         },
         {
           messageId: 'missingClosingSpace',
-          line: 4
+          line: 4,
+          column: 27,
+          endLine: 4,
+          endColumn: 28
         }
       ]
     },
@@ -214,11 +250,17 @@ tester.run('space-in-parens', rule, {
       errors: [
         {
           messageId: 'rejectedOpeningSpace',
-          line: 4
+          line: 4,
+          column: 28,
+          endLine: 4,
+          endColumn: 29
         },
         {
           messageId: 'rejectedClosingSpace',
-          line: 4
+          line: 4,
+          column: 32,
+          endLine: 4,
+          endColumn: 33
         }
       ]
     }

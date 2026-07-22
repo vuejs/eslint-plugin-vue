@@ -50,7 +50,10 @@ tester.run('no-unsupported-features/v-bind-attr-modifier', rule, {
         {
           message:
             '`.attr` modifiers on `v-bind` are not supported until Vue.js "3.2.0".',
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 23
         }
       ]
     }

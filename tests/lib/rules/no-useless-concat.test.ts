@@ -25,11 +25,27 @@ tester.run('no-useless-concat', rule, {
   invalid: [
     {
       code: `<template><div :attr="'foo'+'bar'" /></template>`,
-      errors: ['Unexpected string concatenation of literals.']
+      errors: [
+        {
+          message: 'Unexpected string concatenation of literals.',
+          line: 1,
+          column: 28,
+          endLine: 1,
+          endColumn: 29
+        }
+      ]
     },
     {
       code: `<template><div :[\`foo\`+\`bar\`]="a" /></template>`,
-      errors: ['Unexpected string concatenation of literals.']
+      errors: [
+        {
+          message: 'Unexpected string concatenation of literals.',
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 24
+        }
+      ]
     },
     // CSS vars injection
     {
@@ -39,7 +55,15 @@ tester.run('no-useless-concat', rule, {
         color: v-bind('"re" + "d"')
       }
       </style>`,
-      errors: ['Unexpected string concatenation of literals.']
+      errors: [
+        {
+          message: 'Unexpected string concatenation of literals.',
+          line: 4,
+          column: 29,
+          endLine: 4,
+          endColumn: 30
+        }
+      ]
     }
   ]
 })

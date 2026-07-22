@@ -40,9 +40,9 @@ ruleTester.run('no-deprecated-v-on-native-modifier', rule, {
       code: "<template><input v-on:keyup.native='fore'></template>",
       errors: [
         {
+          messageId: 'deprecated',
           line: 1,
           column: 29,
-          messageId: 'deprecated',
           endLine: 1,
           endColumn: 35
         }
@@ -53,9 +53,9 @@ ruleTester.run('no-deprecated-v-on-native-modifier', rule, {
       code: "<template><input v-on:keyup.foo.native.bar='fore'></template>",
       errors: [
         {
+          messageId: 'deprecated',
           line: 1,
           column: 33,
-          messageId: 'deprecated',
           endLine: 1,
           endColumn: 39
         }

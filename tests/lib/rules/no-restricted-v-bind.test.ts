@@ -62,7 +62,9 @@ tester.run('no-restricted-v-bind', rule as RuleModule, {
           message:
             'Using `:v-xxx` is not allowed. Instead, remove `:` and use it as directive.',
           line: 1,
-          column: 16
+          column: 16,
+          endLine: 1,
+          endColumn: 24
         }
       ]
     },
@@ -70,41 +72,112 @@ tester.run('no-restricted-v-bind', rule as RuleModule, {
       filename: 'test.vue',
       code: '<template><div v-bind:v-model="foo"></div></template>',
       errors: [
-        'Using `:v-xxx` is not allowed. Instead, remove `:` and use it as directive.'
+        {
+          message:
+            'Using `:v-xxx` is not allowed. Instead, remove `:` and use it as directive.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 30
+        }
       ]
     },
     {
       filename: 'test.vue',
       code: '<template><div :foo="bar" :bar="foo"></div></template>',
       options: ['foo'],
-      errors: ['Using `:foo` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div :foo="bar" :bar="foo"></div></template>',
       options: ['foo', 'bar'],
-      errors: ['Using `:foo` is not allowed.', 'Using `:bar` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        },
+        {
+          message: 'Using `:bar` is not allowed.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 31
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div :foo="bar" :bar.sync="foo"></div></template>',
       options: [{ argument: '/^(foo|bar)$/' }],
-      errors: ['Using `:foo` is not allowed.', 'Using `:bar` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 20
+        },
+        {
+          message: 'Using `:bar` is not allowed.',
+          line: 1,
+          column: 27,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div :foo.sync="foo" /><div :foo="foo" /></template>',
       options: [{ argument: 'foo', modifiers: ['sync'] }],
-      errors: ['Using `:foo.sync` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo.sync` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     },
     {
       filename: 'test.vue',
       code: '<template><div :v-on :foo.sync /><div :foo="foo" v-bind="listener" /></template>',
       options: ['/^v-/', { argument: 'foo', modifiers: ['sync'] }, null],
       errors: [
-        'Using `:v-on` is not allowed.',
-        'Using `:foo.sync` is not allowed.',
-        'Using `v-bind` is not allowed.'
+        {
+          message: 'Using `:v-on` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 21
+        },
+        {
+          message: 'Using `:foo.sync` is not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 31
+        },
+        {
+          message: 'Using `v-bind` is not allowed.',
+          line: 1,
+          column: 50,
+          endLine: 1,
+          endColumn: 56
+        }
       ]
     },
     {
@@ -116,8 +189,20 @@ tester.run('no-restricted-v-bind', rule as RuleModule, {
       </template>`,
       options: ['/^v-/', { argument: 'foo', element: `/^My/` }],
       errors: [
-        'Using `:v-on` is not allowed.',
-        'Using `:foo` on `<MyButton>` is not allowed.'
+        {
+          message: 'Using `:v-on` is not allowed.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 19
+        },
+        {
+          message: 'Using `:foo` on `<MyButton>` is not allowed.',
+          line: 4,
+          column: 19,
+          endLine: 4,
+          endColumn: 23
+        }
       ]
     },
     {
@@ -127,7 +212,15 @@ tester.run('no-restricted-v-bind', rule as RuleModule, {
         <div :foo="x" />
       </template>`,
       options: ['/^f/', { argument: 'foo' }],
-      errors: ['Using `:foo` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo` is not allowed.',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 18
+        }
+      ]
     },
     {
       filename: 'test.vue',
@@ -136,14 +229,30 @@ tester.run('no-restricted-v-bind', rule as RuleModule, {
         <div :foo="x" />
       </template>`,
       options: [{ argument: 'foo', message: 'foo' }],
-      errors: ['foo']
+      errors: [
+        {
+          message: 'foo',
+          line: 3,
+          column: 14,
+          endLine: 3,
+          endColumn: 18
+        }
+      ]
     },
 
     {
       filename: 'test.vue',
       code: '<template><div :foo.attr="foo" /><div :bar.attr="foo" /></template>',
       options: [{ argument: 'foo', modifiers: ['attr'] }],
-      errors: ['Using `:foo.attr` is not allowed.']
+      errors: [
+        {
+          message: 'Using `:foo.attr` is not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 25
+        }
+      ]
     }
   ]
 })

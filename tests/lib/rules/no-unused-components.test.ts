@@ -508,7 +508,10 @@ tester.run('no-unused-components', rule, {
         {
           message:
             'The "TheButton" component has been registered but not used.',
-          line: 10
+          line: 10,
+          column: 15,
+          endLine: 10,
+          endColumn: 24
         }
       ]
     },
@@ -533,7 +536,10 @@ tester.run('no-unused-components', rule, {
         {
           message:
             'The "TheButton" component has been registered but not used.',
-          line: 11
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 24
         }
       ]
     },
@@ -558,7 +564,10 @@ tester.run('no-unused-components', rule, {
         {
           message:
             'The "the-button" component has been registered but not used.',
-          line: 11
+          line: 11,
+          column: 15,
+          endLine: 11,
+          endColumn: 38
         }
       ]
     },
@@ -591,11 +600,17 @@ tester.run('no-unused-components', rule, {
       errors: [
         {
           message: 'The "Foo" component has been registered but not used.',
-          line: 13
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 16
         },
         {
           message: 'The "Bar" component has been registered but not used.',
-          line: 14
+          line: 14,
+          column: 13,
+          endLine: 14,
+          endColumn: 16
         }
       ]
     },
@@ -617,7 +632,10 @@ tester.run('no-unused-components', rule, {
       errors: [
         {
           message: 'The "Foo" component has been registered but not used.',
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 16
         }
       ]
     },
@@ -644,19 +662,31 @@ tester.run('no-unused-components', rule, {
       errors: [
         {
           message: 'The "foo" component has been registered but not used.',
-          line: 8
+          line: 8,
+          column: 13,
+          endLine: 8,
+          endColumn: 25
         },
         {
           message: 'The "bar" component has been registered but not used.',
-          line: 9
+          line: 9,
+          column: 13,
+          endLine: 9,
+          endColumn: 25
         },
         {
           message: 'The "baz" component has been registered but not used.',
-          line: 10
+          line: 10,
+          column: 13,
+          endLine: 10,
+          endColumn: 25
         },
         {
           message: 'The "quux" component has been registered but not used.',
-          line: 13
+          line: 13,
+          column: 13,
+          endLine: 13,
+          endColumn: 17
         }
       ]
     },
@@ -686,7 +716,10 @@ tester.run('no-unused-components', rule, {
       errors: [
         {
           message: 'The "Bar" component has been registered but not used.',
-          line: 14
+          line: 14,
+          column: 15,
+          endLine: 14,
+          endColumn: 18
         }
       ]
     }

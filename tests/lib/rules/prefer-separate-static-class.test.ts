@@ -30,6 +30,10 @@ tester.run('prefer-separate-static-class', rule, {
     },
     {
       filename: 'test.vue',
+      code: '<template><div :class="`${foo}-dynamic-class`" /></template>'
+    },
+    {
+      filename: 'test.vue',
       code: `<template><div :class="'dynamic-class-' + foo" /></template>`
     },
     {
@@ -63,8 +67,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 30,
+          endLine: 1,
           endColumn: 44
         }
       ]
@@ -78,8 +82,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 24,
+          endLine: 1,
           endColumn: 38
         }
       ]
@@ -93,9 +97,54 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 24,
+          endLine: 1,
           endColumn: 38
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: "<template><div :class=\"`form-item input ${isDisabled ? 'disabled' : ''}`\" /></template>",
+      output: null,
+      errors: [
+        {
+          message:
+            'Static class "form-item input" should be in a static `class` attribute.',
+          line: 1,
+          column: 24,
+          endLine: 1,
+          endColumn: 43
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :class="`${dynamicClass} static-class`" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          column: 39,
+          endLine: 1,
+          endColumn: 54
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :class="`${start} static-class ${end}`" /></template>',
+      output: null,
+      errors: [
+        {
+          message:
+            'Static class "static-class" should be in a static `class` attribute.',
+          line: 1,
+          column: 32,
+          endLine: 1,
+          endColumn: 49
         }
       ]
     },
@@ -108,8 +157,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 24,
+          endLine: 1,
           endColumn: 38
         }
       ]
@@ -123,8 +172,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39
         }
       ]
@@ -138,8 +187,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39
         }
       ]
@@ -153,8 +202,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "foo" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 28
         }
       ]
@@ -168,8 +217,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 26,
+          endLine: 1,
           endColumn: 40
         }
       ]
@@ -183,8 +232,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39
         }
       ]
@@ -198,8 +247,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 58,
+          endLine: 1,
           endColumn: 72
         }
       ]
@@ -213,8 +262,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 25,
+          endLine: 1,
           endColumn: 39
         }
       ]
@@ -228,8 +277,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 48,
+          endLine: 1,
           endColumn: 62
         }
       ]
@@ -243,8 +292,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "staticClass" should be in a static `class` attribute.',
           line: 1,
-          endLine: 1,
           column: 40,
+          endLine: 1,
           endColumn: 51
         }
       ]
@@ -278,8 +327,8 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class" should be in a static `class` attribute.',
           line: 7,
-          endLine: 7,
           column: 40,
+          endLine: 7,
           endColumn: 54
         }
       ]
@@ -314,16 +363,16 @@ tester.run('prefer-separate-static-class', rule, {
           message:
             'Static class "static-class-a" should be in a static `class` attribute.',
           line: 7,
-          endLine: 7,
           column: 15,
+          endLine: 7,
           endColumn: 31
         },
         {
           message:
             'Static class "static-class-b" should be in a static `class` attribute.',
           line: 8,
-          endLine: 8,
           column: 16,
+          endLine: 8,
           endColumn: 32
         }
       ]

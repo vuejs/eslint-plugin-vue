@@ -153,27 +153,42 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 27
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 30
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 6
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 30
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 7
+          line: 7,
+          column: 13,
+          endLine: 7,
+          endColumn: 35
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 9
+          line: 9,
+          column: 24,
+          endLine: 9,
+          endColumn: 29
         }
       ]
     },
@@ -189,17 +204,26 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 27
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 30
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 6
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 30
         }
       ]
     },
@@ -215,17 +239,26 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 32
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 13,
+          endLine: 5,
+          endColumn: 30
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 6
+          line: 6,
+          column: 25,
+          endLine: 6,
+          endColumn: 35
         }
       ]
     },
@@ -238,7 +271,10 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 3
+          line: 3,
+          column: 21,
+          endLine: 3,
+          endColumn: 27
         }
       ]
     },
@@ -253,7 +289,10 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 17,
+          endLine: 5,
+          endColumn: 20
         }
       ]
     },
@@ -283,27 +322,42 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 15
+          line: 15,
+          column: 9,
+          endLine: 15,
+          endColumn: 10
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 16
+          line: 16,
+          column: 9,
+          endLine: 16,
+          endColumn: 10
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 17
+          line: 17,
+          column: 9,
+          endLine: 17,
+          endColumn: 11
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 18
+          line: 18,
+          column: 9,
+          endLine: 18,
+          endColumn: 11
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 19
+          line: 19,
+          column: 9,
+          endLine: 19,
+          endColumn: 11
         }
       ]
     },
@@ -323,12 +377,18 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 6
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 15
         },
         {
           message:
             'Getting a value from the ref object in the same scope will cause the value to lose reactivity.',
-          line: 7
+          line: 7,
+          column: 9,
+          endLine: 7,
+          endColumn: 15
         }
       ]
     },
@@ -343,12 +403,18 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 27
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -362,12 +428,18 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 27
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -381,12 +453,18 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 27
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 25,
+          endLine: 4,
+          endColumn: 30
         }
       ]
     },
@@ -402,22 +480,34 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 3
+          line: 3,
+          column: 22,
+          endLine: 3,
+          endColumn: 24
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 4
+          line: 4,
+          column: 22,
+          endLine: 4,
+          endColumn: 24
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 5
+          line: 5,
+          column: 22,
+          endLine: 5,
+          endColumn: 24
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 6
+          line: 6,
+          column: 22,
+          endLine: 6,
+          endColumn: 24
         }
       ]
     },
@@ -445,27 +535,42 @@ tester.run('no-ref-object-reactivity-loss', rule, {
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 13
+          line: 13,
+          column: 9,
+          endLine: 13,
+          endColumn: 10
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 14
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 10
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 15
+          line: 15,
+          column: 9,
+          endLine: 15,
+          endColumn: 11
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 16
+          line: 16,
+          column: 9,
+          endLine: 16,
+          endColumn: 11
         },
         {
           message:
             'Getting a reactive variable in the same scope will cause the value to lose reactivity.',
-          line: 17
+          line: 17,
+          column: 9,
+          endLine: 17,
+          endColumn: 11
         }
       ]
     }

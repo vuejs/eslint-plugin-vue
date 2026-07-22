@@ -42,7 +42,10 @@ tester.run('no-unsupported-features/script-setup', rule, {
       errors: [
         {
           message: '`<script setup>` is not supported until Vue.js "2.7.0".',
-          line: 2
+          line: 2,
+          column: 15,
+          endLine: 2,
+          endColumn: 20
         }
       ]
     }
