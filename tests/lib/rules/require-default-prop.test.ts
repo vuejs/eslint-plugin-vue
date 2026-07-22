@@ -513,6 +513,33 @@ ruleTester.run('require-default-prop', rule, {
         ...languageOptions,
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       }
+    },
+    // Boolean models don't require a default value, just like Boolean props.
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineModel<boolean>()
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script setup lang="ts">
+      defineModel<boolean>({})
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions,
+        parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
+      }
     }
   ],
 
@@ -948,7 +975,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'modelValue' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 20
         }
       ]
     },
@@ -966,7 +996,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'modelValue' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 25
         }
       ]
     },
@@ -984,7 +1017,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'modelValue' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 35
         }
       ]
     },
@@ -1002,7 +1038,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'count' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 44
         }
       ]
     },
@@ -1020,7 +1059,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'modelValue' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 19,
+          endLine: 3,
+          endColumn: 34
         }
       ]
     },
@@ -1040,7 +1082,10 @@ ruleTester.run('require-default-prop', rule, {
       errors: [
         {
           message: "Prop 'modelValue' requires default value to be set.",
-          line: 3
+          line: 3,
+          column: 7,
+          endLine: 3,
+          endColumn: 28
         }
       ]
     }
