@@ -10,10 +10,22 @@ since: v3.8.0
 
 > disallow asynchronous actions in computed properties
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
-Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to an unexpected behaviour, that's why you should avoid them.
-If you need async computed properties you might want to consider using additional plugin [vue-async-computed]
+Computed properties and functions should be synchronous. Asynchronous actions inside them may not work as expected and can lead to unexpected behaviour; that's why you should avoid them.
+If you need async computed properties, consider using the [`computedAsync`] composable from VueUse.
 
 ## :book: Rule Details
 
@@ -108,11 +120,48 @@ export default {
 
 ## :wrench: Options
 
-Nothing.
+```js
+{
+  "vue/no-async-in-computed-properties": ["error", {
+    "ignoredObjectNames": []
+  }]
+}
+```
+
+- `ignoredObjectNames`: An array of object names that should be ignored when used with promise-like methods (`.then()`, `.catch()`, `.finally()`). This is useful for validation libraries like Zod that use these method names for non-promise purposes (e.g. [`z.catch()`](https://zod.dev/api#catch)).
+
+### `"ignoredObjectNames": ["z"]`
+
+<eslint-code-block :rules="{'vue/no-async-in-computed-properties': ['error', {ignoredObjectNames: ['z']}]}">
+
+```vue
+<script setup>
+import { computed } from 'vue'
+import { z } from 'zod'
+
+/* ✓ GOOD */
+const schema1 = computed(() => {
+  return z.string().catch('default')
+})
+
+const schema2 = computed(() => {
+  return z.catch(z.string().min(2), 'fallback')
+})
+
+/* ✗ BAD */
+const fetchData = computed(() => {
+  return myFunc().then(res => res.json())
+})
+</script>
+```
+
+</eslint-code-block>
 
 ## :books: Further Reading
 
-- [vue-async-computed](https://github.com/foxbenjaminfox/vue-async-computed)
+- [`computedAsync`]
+
+[`computedAsync`]: https://vueuse.org/core/computedAsync
 
 ## :rocket: Version
 
@@ -121,4 +170,4 @@ This rule was introduced in eslint-plugin-vue v3.8.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-async-in-computed-properties.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-async-in-computed-properties.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-async-in-computed-properties.test.ts)

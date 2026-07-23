@@ -51,7 +51,7 @@ In that case, the `v-if` should be written on the wrapper element.
 ::: warning Note
 When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately.
 
-[https://vuejs.org/guide/essentials/list.html#v-for-with-v-if](https://vuejs.org/guide/essentials/list.html#v-for-with-v-if)
+<https://vuejs.org/guide/essentials/list.html#v-for-with-v-if>
 :::
 
 ## :wrench: Options
@@ -71,4 +71,4 @@ This rule was introduced in eslint-plugin-vue v3.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-confusing-v-for-v-if.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-confusing-v-for-v-if.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-confusing-v-for-v-if.test.ts)

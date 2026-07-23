@@ -10,8 +10,12 @@ since: v3.13.0
 
 > disallow usage of `this` in template
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -73,4 +77,4 @@ This rule was introduced in eslint-plugin-vue v3.13.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/this-in-template.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/this-in-template.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/this-in-template.test.ts)

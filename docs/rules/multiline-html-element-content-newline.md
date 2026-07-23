@@ -10,8 +10,16 @@ since: v5.0.0
 
 > require a line break before and after the contents of a multiline element
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -91,7 +99,7 @@ This rule enforces a line break before and after the contents of a multiline ele
     default `true`
 - `ignores` ... the configuration for element names to ignore line breaks style.
     default `["pre", "textarea", ...INLINE_ELEMENTS]`.
-- `allowEmptyLines` ... if `true`, it allows empty lines around content. If you want to disallow multiple empty lines, use [no-multiple-empty-lines] in combination.  
+- `allowEmptyLines` ... if `true`, it allows empty lines around content. If you want to disallow multiple empty lines, use [no-multiple-empty-lines] in combination.\
     default `false`
 
 ::: info
@@ -143,8 +151,9 @@ This rule enforces a line break before and after the contents of a multiline ele
 
 </eslint-code-block>
 
-## :books: Further Reading
+## :couple: Related Rules
 
+- [vue/singleline-html-element-content-newline](./singleline-html-element-content-newline.md)
 - [no-multiple-empty-lines]
 
 [no-multiple-empty-lines]: https://eslint.org/docs/rules/no-multiple-empty-lines
@@ -155,5 +164,5 @@ This rule was introduced in eslint-plugin-vue v5.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multiline-html-element-content-newline.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-html-element-content-newline.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/multiline-html-element-content-newline.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/multiline-html-element-content-newline.test.ts)

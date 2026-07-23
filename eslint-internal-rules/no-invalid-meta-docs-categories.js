@@ -119,7 +119,8 @@ module.exports = {
       missingCategories: 'Rule is missing a meta.docs.categories property.',
       // eslint-disable-next-line eslint-plugin/report-message-format
       categoriesMustBeArray: 'meta.docs.categories must be an array.'
-    }
+    },
+    languages: ['js/js']
   },
 
   create(context) {
@@ -136,6 +137,10 @@ module.exports = {
         ) {
           exportsNode = node.right
         }
+      },
+
+      ExportDefaultDeclaration(node) {
+        exportsNode = node.declaration
       },
 
       'Program:exit'(programNode) {

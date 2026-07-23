@@ -10,7 +10,12 @@ since: v9.16.0
 
 > enforce order of component top-level elements
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -195,5 +200,5 @@ This rule was introduced in eslint-plugin-vue v9.16.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/block-order.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/block-order.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/block-order.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/block-order.test.ts)

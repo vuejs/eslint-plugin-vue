@@ -10,6 +10,8 @@ since: v7.0.0
 
 > disallow the `<template>` `<script>` `<style>` block to be empty
 
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
+
 ## :book: Rule Details
 
 This rule disallows the `<template>` `<script>` `<style>` block to be empty.
@@ -17,7 +19,7 @@ This rule disallows the `<template>` `<script>` `<style>` block to be empty.
 This rule also checks block what has attribute `src`.
 See [Vue Single-File Component (SFC) Spec](https://vue-loader.vuejs.org/spec.html#src-imports).
 
-<eslint-code-block :rules="{'vue/no-empty-component-block': ['error']}">
+<eslint-code-block fix :rules="{'vue/no-empty-component-block': ['error']}">
 
 ```vue
 <!-- ✓ GOOD -->
@@ -71,4 +73,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-empty-component-block.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-empty-component-block.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-empty-component-block.test.ts)

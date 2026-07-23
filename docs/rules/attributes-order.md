@@ -10,8 +10,12 @@ since: v4.3.0
 
 > enforce order of attributes
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -143,7 +147,9 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       "EVENTS",
       "CONTENT"
     ],
-    "alphabetical": false
+    "alphabetical": false,
+    "sortLineLength": false,
+    "ignoreVBindObject": false
   }]
 }
 ```
@@ -196,6 +202,98 @@ Note that `v-bind="object"` syntax is considered to be the same as the next or p
       class="bar">
     </div>
 
+</template>
+```
+
+</eslint-code-block>
+
+### `"sortLineLength": true`
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {sortLineLength: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+    <div
+      a="short"
+      abc="value"
+      a-prop="longer"
+      boolean-prop
+      :my-prop="value"
+      very-long-prop="value"
+      @blur="functionCall"
+      @change="functionCall"
+      @input="handleInput">
+    </div>
+
+  <!-- ✗ BAD -->
+    <div
+      very-long-prop="value"
+      a="short"
+      a-prop="longer">
+    </div>
+
+    <div
+      @input="handleInput"
+      @blur="short">
+    </div>
+
+    <div
+      :my-prop="value"
+      :a="short">
+    </div>
+
+</template>
+```
+
+</eslint-code-block>
+
+### `"alphabetical": true` with `"sortLineLength": true`
+
+When `alphabetical` and `sortLineLength` are both set to `true`, attributes within the same group are sorted primarily by their line length, and then alphabetically as a tie-breaker for attributes with the same length. This provides a clean, predictable attribute order that enhances readability.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {alphabetical: true, sortLineLength: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    a="1"
+    b="2"
+    cc="3"
+    dd="4"
+    @keyup="fn"
+    @submit="fn"
+  ></div>
+
+  <!-- ✗ BAD -->
+  <div
+    b="2"
+    a="1"
+    @submit="fn"
+    @keyup="fn"
+    dd="4"
+    cc="3"
+  ></div>
+</template>
+```
+
+</eslint-code-block>
+
+### `"ignoreVBindObject": true`
+
+When set to `true`, the `v-bind="object"` directive will be excluded from the attribute order check. This is useful when the spread binding is intentionally placed in a specific position for functional reasons, such as controlling the execution order of event handlers.
+
+<eslint-code-block fix :rules="{'vue/attributes-order': ['error', {ignoreVBindObject: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <MyButton
+    :foo="foo"
+    @click="onClick"
+    v-bind="attrs"
+  />
 </template>
 ```
 
@@ -264,4 +362,4 @@ This rule was introduced in eslint-plugin-vue v4.3.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attributes-order.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attributes-order.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attributes-order.test.ts)

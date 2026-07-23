@@ -10,8 +10,16 @@ since: v3.9.0
 
 > enforce attribute naming style on custom components in template
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -36,7 +44,8 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 ```json
 {
   "vue/attribute-hyphenation": ["error", "always" | "never", {
-    "ignore": []
+    "ignore": [],
+    "ignoreTags": []
   }]
 }
 ```
@@ -44,9 +53,10 @@ This rule enforces using hyphenated attribute names on custom components in Vue 
 Default casing is set to `always`. By default the following attributes are ignored: `data-`, `aria-`, `slot-scope`,
 and all the [SVG attributes](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) with either an upper case letter or an hyphen.
 
-- `"always"` (default) ... Use hyphenated name.
-- `"never"` ... Don't use hyphenated name except the ones that are ignored.
-- `"ignore"` ... Array of ignored names
+- `"always"` (default) ... Use hyphenated attribute name.
+- `"never"` ... Don't use hyphenated attribute name.
+- `"ignore"` ... Array of attribute names that don't need to follow the specified casing.
+- `"ignoreTags"` ... Array of tag names whose attributes don't need to follow the specified casing.
 
 ### `"always"`
 
@@ -109,6 +119,22 @@ Don't use hyphenated name but allow custom attributes
 
 </eslint-code-block>
 
+### `"never", { "ignoreTags": ["/^custom-/"] }`
+
+<eslint-code-block fix :rules="{'vue/attribute-hyphenation': ['error', 'never', { ignoreTags: ['/^custom-/'] }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <custom-component my-prop="prop" />
+
+  <!-- ✗ BAD -->
+  <my-component my-prop="prop" />
+</template>
+```
+
+</eslint-code-block>
+
 ## :couple: Related Rules
 
 - [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
@@ -120,5 +146,5 @@ This rule was introduced in eslint-plugin-vue v3.9.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attribute-hyphenation.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/attribute-hyphenation.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/attribute-hyphenation.test.ts)

@@ -10,7 +10,7 @@ since: v8.4.0
 
 > Require quotes around object literal, type literal, interfaces and enums property names in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/quote-props] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/quote-props]
 - [quote-props]
 
-[@stylistic/quote-props]: https://eslint.style/rules/default/quote-props
+[@stylistic/quote-props]: https://eslint.style/rules/quote-props
 [quote-props]: https://eslint.org/docs/rules/quote-props
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v8.4.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/quote-props.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/quote-props.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/quote-props.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/quote-props)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/quote-props)</sup>

@@ -10,7 +10,14 @@ since: v7.0.0
 
 > disallow `key` attribute on `<template v-for>`
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :no_entry_sign: This rule was **deprecated**.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -69,4 +76,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-v-for-template-key.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-for-template-key.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-for-template-key.test.ts)

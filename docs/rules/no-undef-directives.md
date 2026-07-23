@@ -1,0 +1,93 @@
+---
+pageClass: rule-details
+sidebarDepth: 0
+title: vue/no-undef-directives
+description: disallow use of undefined custom directives
+since: v10.7.0
+---
+
+# vue/no-undef-directives
+
+> disallow use of undefined custom directives
+
+## :book: Rule Details
+
+This rule reports directives that are used in the `<template>`, but that are not registered in the `<script setup>` or the Options API's `directives` section.
+
+Undefined directives will be resolved from globally registered directives. However, if you are not using global directives, you can use this rule to prevent runtime errors.
+
+<eslint-code-block :rules="{'vue/no-undef-directives': ['error']}">
+
+```vue
+<script setup>
+import vFocus from './vFocus';
+</script>
+
+<template>
+  <!-- ✓ GOOD -->
+  <input v-focus>
+
+  <!-- ✗ BAD -->
+  <div v-foo></div>
+</template>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-undef-directives': ['error']}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <input v-focus>
+
+  <!-- ✗ BAD -->
+  <div v-foo></div>
+</template>
+
+<script>
+import vFocus from './vFocus';
+
+export default {
+  directives: {
+    focus: vFocus
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
+## :wrench: Options
+
+```json
+{
+  "vue/no-undef-directives": ["error", {
+    "ignore": ["foo"]
+  }]
+}
+```
+
+- `"ignore"` (`string[]`) An array of directive names or regular expression patterns (e.g. `"/^custom-/"`) that ignore these rules. This option will check both kebab-case and PascalCase versions of the given directive names. Default is empty.
+
+### `"ignore": ["foo"]`
+
+<eslint-code-block :rules="{'vue/no-undef-directives': ['error', {ignore: ['foo']}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-foo></div>
+</template>
+```
+
+</eslint-code-block>
+
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v10.7.0
+
+## :mag: Implementation
+
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-undef-directives.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-undef-directives.test.ts)

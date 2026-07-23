@@ -46,42 +46,41 @@ for (const rule of rules) {
     if (categoryId !== 'uncategorized' && !categoryTitles[categoryId]) {
       throw new Error(`Category "${categoryId}" does not have a title defined.`)
     }
-    const catRules =
-      categoryRules[categoryId] || (categoryRules[categoryId] = [])
-    catRules.push(rule)
+    categoryRules[categoryId] ||= []
+    categoryRules[categoryId].push(rule)
   }
 }
 
-const CONFIG_NAME_CAPTIONS = {
-  base: ['"plugin:vue/base"', '*.configs["flat/base"]'],
-  'vue3-essential': [
-    '"plugin:vue/vue3-essential"',
-    '*.configs["flat/essential"]'
-  ],
-  'vue2-essential': [
-    '"plugin:vue/essential"',
-    '*.configs["flat/vue2-essential"]'
-  ],
-  'vue3-strongly-recommended': [
-    '"plugin:vue/vue3-strongly-recommended"',
-    '*.configs["flat/strongly-recommended"]'
-  ],
-  'vue2-strongly-recommended': [
-    '"plugin:vue/strongly-recommended"',
-    '*.configs["flat/vue2-strongly-recommended"]'
-  ],
-  'vue3-recommended': [
-    '"plugin:vue/vue3-recommended"',
-    '*.configs["flat/recommended"]'
-  ],
-  'vue2-recommended': [
-    '"plugin:vue/recommended"',
-    '*.configs["flat/vue2-recommended"]'
-  ]
+const presetConfigNames = {
+  base: 'flat/base',
+  'vue3-essential': 'flat/essential',
+  'vue2-essential': 'flat/vue2-essential',
+  'vue3-strongly-recommended': 'flat/strongly-recommended',
+  'vue2-strongly-recommended': 'flat/vue2-strongly-recommended',
+  'vue3-recommended': 'flat/recommended',
+  'vue2-recommended': 'flat/vue2-recommended'
+}
+const legacyPresetConfigNames = {
+  base: 'base',
+  'vue3-essential': 'essential',
+  'vue2-essential': 'vue2-essential',
+  'vue3-strongly-recommended': 'strongly-recommended',
+  'vue2-strongly-recommended': 'vue2-strongly-recommended',
+  'vue3-recommended': 'recommended',
+  'vue2-recommended': 'vue2-recommended'
 }
 
+const getPresetNames = (presetIds) => [
+  ...presetIds.map(
+    (categoryId) => `\`*.configs["${presetConfigNames[categoryId]}"]\``
+  ),
+  ...presetIds.map(
+    (categoryId) => `\`"plugin:vue/${legacyPresetConfigNames[categoryId]}"\``
+  )
+]
+
 module.exports = {
-  CONFIG_NAME_CAPTIONS,
+  getPresetNames,
   categories: categoryIds
     .map((categoryId) => ({
       categoryId,

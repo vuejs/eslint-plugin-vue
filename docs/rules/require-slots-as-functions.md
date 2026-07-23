@@ -10,11 +10,17 @@ since: v7.0.0
 
 > enforce properties of `$slots` to be used as a function
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 
-This rule enforces the properties of `$slots` to be used as a function.  
+This rule enforces the properties of `$slots` to be used as a function.\
 `this.$slots.default` was an array of VNode in Vue.js 2.x, but changed to a function that returns an array of VNode in Vue.js 3.x.
 
 <eslint-code-block :rules="{'vue/require-slots-as-functions': ['error']}">
@@ -53,4 +59,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-slots-as-functions.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-slots-as-functions.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-slots-as-functions.test.ts)

@@ -10,7 +10,7 @@ since: v7.0.0
 
 > disallow usages that lose the reactivity of `props` passed to `setup`
 
-- :no_entry_sign: This rule was **deprecated** and replaced by [vue/no-setup-props-reactivity-loss](no-setup-props-reactivity-loss.md) rule.
+- :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0 and replaced by [vue/no-setup-props-reactivity-loss](no-setup-props-reactivity-loss.md) rule.
 
 ## :book: Rule Details
 
@@ -105,4 +105,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-setup-props-destructure.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-setup-props-destructure.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-setup-props-destructure.test.ts)

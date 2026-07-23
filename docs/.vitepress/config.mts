@@ -1,19 +1,20 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
+import eslint4b, { requireESLintUseAtYourOwnRisk4b } from 'vite-plugin-eslint4b'
 
 // Pre-build cjs packages that cannot be bundled well.
 import './build-system/build.mjs'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
   const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
-  const rules: typeof import('../../tools/lib/rules.js') = await import(
-    rulesPath
-  ).then((mod) => mod.default || mod)
+  const mod = await import(rulesPath)
+  const rules: typeof import('../../tools/lib/rules.js') = mod.default || mod
   const uncategorizedRules = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
@@ -32,7 +33,7 @@ export default async () => {
     { title: 'Base Rules', categoryIds: ['base'] },
     {
       title: 'Priority A: Essential',
-      categoryIds: ['vue3-essential', 'essential']
+      categoryIds: ['vue3-essential', 'vue2-essential']
     },
     {
       title: 'Priority A: Essential for Vue.js 3.x',
@@ -40,11 +41,11 @@ export default async () => {
     },
     {
       title: 'Priority A: Essential for Vue.js 2.x',
-      categoryIds: ['essential']
+      categoryIds: ['vue2-essential']
     },
     {
       title: 'Priority B: Strongly Recommended',
-      categoryIds: ['vue3-strongly-recommended', 'strongly-recommended']
+      categoryIds: ['vue3-strongly-recommended', 'vue2-strongly-recommended']
     },
     {
       title: 'Priority B: Strongly Recommended for Vue.js 3.x',
@@ -52,11 +53,11 @@ export default async () => {
     },
     {
       title: 'Priority B: Strongly Recommended for Vue.js 2.x',
-      categoryIds: ['strongly-recommended']
+      categoryIds: ['vue2-strongly-recommended']
     },
     {
       title: 'Priority C: Recommended',
-      categoryIds: ['vue3-recommended', 'recommended']
+      categoryIds: ['vue3-recommended', 'vue2-recommended']
     },
     {
       title: 'Priority C: Recommended for Vue.js 3.x',
@@ -64,7 +65,7 @@ export default async () => {
     },
     {
       title: 'Priority C: Recommended for Vue.js 2.x',
-      categoryIds: ['recommended']
+      categoryIds: ['vue2-recommended']
     }
   ]
 
@@ -79,19 +80,17 @@ export default async () => {
       )
     const children: DefaultTheme.SidebarItem[] = categoryRules
       .filter(({ ruleId }) => {
-        const exists = categorizedRules.some(
+        const isAlreadyListed = categorizedRules.some(
           ({ items }) =>
             items &&
             items.some(({ text: alreadyRuleId }) => alreadyRuleId === ruleId)
         )
-        return !exists
+        return !isAlreadyListed
       })
-      .map(({ ruleId, name }) => {
-        return {
-          text: ruleId,
-          link: `/rules/${name}`
-        }
-      })
+      .map(({ ruleId, name }) => ({
+        text: ruleId,
+        link: `/rules/${name}`
+      }))
 
     if (children.length === 0) {
       continue
@@ -142,24 +141,32 @@ export default async () => {
 
     vite: {
       publicDir: path.resolve(dirname, './public'),
-      plugins: [vitePluginRequireResolve(), viteCommonjs()],
+      plugins: [
+        vitePluginRequireResolve(),
+        viteCommonjs(),
+        eslint4b() as any,
+        requireESLintUseAtYourOwnRisk4b()
+      ],
       resolve: {
         alias: {
-          'eslint/use-at-your-own-risk': path.join(
+          'vue-eslint-parser': path.join(
             dirname,
-            './build-system/shim/eslint/use-at-your-own-risk.mjs'
+            './build-system/shim/vue-eslint-parser.mjs'
           ),
-          eslint: path.join(dirname, './build-system/shim/eslint.mjs'),
-          assert: path.join(dirname, './build-system/shim/assert.mjs'),
-          path: path.join(dirname, './build-system/shim/path.mjs'),
+          '@typescript-eslint/parser': path.join(
+            dirname,
+            './build-system/shim/@typescript-eslint/parser.mjs'
+          ),
 
           tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
-          esquery: path.join(dirname, './build-system/shim/esquery.mjs'),
-          globby: path.join(dirname, './build-system/shim/globby.mjs')
+          globby: path.join(dirname, './build-system/shim/empty.mjs'),
+          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
+          tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
+          module: path.join(dirname, './build-system/shim/empty.mjs'),
+          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
         }
       },
       define: {
-        'process.env.NODE_DEBUG': 'false',
         'require.cache': '{}'
       }
     },

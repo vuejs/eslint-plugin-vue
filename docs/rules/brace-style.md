@@ -10,7 +10,7 @@ since: v5.2.0
 
 > Enforce consistent brace style for blocks in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/brace-style] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/brace-style]
 - [brace-style]
 
-[@stylistic/brace-style]: https://eslint.style/rules/default/brace-style
+[@stylistic/brace-style]: https://eslint.style/rules/brace-style
 [brace-style]: https://eslint.org/docs/rules/brace-style
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/brace-style.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/brace-style.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/brace-style.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/brace-style)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/brace-style)</sup>

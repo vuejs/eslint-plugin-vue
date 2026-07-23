@@ -1,0 +1,113 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-v-for-template-key'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
+})
+
+tester.run('no-v-for-template-key', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: ''
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template></template></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div key="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:key="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :key="foo"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template key="foo"></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template v-bind:key="foo"></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div><template :key="foo"></template></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-slot="item" :key="item.id"><div /></template></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="item in list"><template :key="item.id"><div /></template></template></template>'
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="item in list" :key="item.id"><div /></template></template>',
+      errors: [
+        {
+          message:
+            "'<template v-for>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 42,
+          endLine: 1,
+          endColumn: 56
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="(item, i) in list" :key="i"><div /></template></template>',
+      errors: [
+        {
+          message:
+            "'<template v-for>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 47,
+          endLine: 1,
+          endColumn: 55
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="item in list" :key="foo + item.id"><div /></template></template>',
+      errors: [
+        {
+          message:
+            "'<template v-for>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 42,
+          endLine: 1,
+          endColumn: 62
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><template v-for="item in list" key="foo"><div /></template></template>',
+      errors: [
+        {
+          message:
+            "'<template v-for>' cannot be keyed. Place the key on real elements instead.",
+          line: 1,
+          column: 42,
+          endLine: 1,
+          endColumn: 51
+        }
+      ]
+    }
+  ]
+})

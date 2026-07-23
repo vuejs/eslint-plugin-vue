@@ -1,0 +1,100 @@
+/**
+ * @author Pig Fang
+ * See LICENSE file in root directory for full license.
+ */
+import utils from '../utils/index.js'
+import {
+  allowedCaseOptions,
+  getChecker,
+  getConverter
+} from '../utils/casing.ts'
+
+function getOptionsComponentName(node: Expression): string | null {
+  if (node.type === 'Identifier') {
+    return node.name
+  }
+  if (node.type === 'Literal') {
+    return typeof node.value === 'string' ? node.value : null
+  }
+  return null
+}
+
+export default {
+  meta: {
+    type: 'suggestion',
+    docs: {
+      description:
+        'enforce the casing of component name in `components` options',
+      categories: undefined,
+      url: 'https://eslint.vuejs.org/rules/component-options-name-casing.html'
+    },
+    fixable: 'code',
+    hasSuggestions: true,
+    schema: [{ enum: allowedCaseOptions }],
+    messages: {
+      caseNotMatched: 'Component name "{{component}}" is not {{caseType}}.',
+      possibleRenaming: 'Rename component name to be in {{caseType}}.'
+    }
+  },
+  create(context: RuleContext) {
+    const caseType = context.options[0] || 'PascalCase'
+
+    const canAutoFix = caseType === 'PascalCase'
+    const checkCase = getChecker(caseType)
+    const convert = getConverter(caseType)
+
+    return utils.executeOnVue(context, (obj) => {
+      const node = utils.findProperty(obj, 'components')
+      if (!node || node.value.type !== 'ObjectExpression') {
+        return
+      }
+
+      for (const property of node.value.properties) {
+        if (property.type !== 'Property') {
+          continue
+        }
+
+        const name = getOptionsComponentName(property.key)
+        if (!name || checkCase(name)) {
+          continue
+        }
+
+        context.report({
+          node: property.key,
+          messageId: 'caseNotMatched',
+          data: {
+            component: name,
+            caseType
+          },
+          fix: canAutoFix
+            ? (fixer) => {
+                const converted = convert(name)
+                return property.shorthand
+                  ? fixer.replaceText(property, `${converted}: ${name}`)
+                  : fixer.replaceText(property.key, converted)
+              }
+            : undefined,
+          suggest: canAutoFix
+            ? undefined
+            : [
+                {
+                  messageId: 'possibleRenaming',
+                  data: { caseType },
+                  fix: (fixer) => {
+                    const converted = convert(name)
+                    if (caseType === 'kebab-case') {
+                      return property.shorthand
+                        ? fixer.replaceText(property, `'${converted}': ${name}`)
+                        : fixer.replaceText(property.key, `'${converted}'`)
+                    }
+                    return property.shorthand
+                      ? fixer.replaceText(property, `${converted}: ${name}`)
+                      : fixer.replaceText(property.key, converted)
+                  }
+                }
+              ]
+        })
+      }
+    })
+  }
+}

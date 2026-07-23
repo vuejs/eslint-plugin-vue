@@ -4,11 +4,10 @@
  This script updates `lib/utils/vue3-export-names.json` file from vue type.
  */
 
-const fs = require('fs')
-const path = require('path')
-const https = require('https')
-const { URL } = require('url')
+const fs = require('node:fs')
+const path = require('node:path')
 const tsParser = require('@typescript-eslint/parser')
+const { httpGet } = require('./lib/http')
 
 main()
 
@@ -33,51 +32,58 @@ async function* extractExportNames(m) {
     range: true
   })
   for (const node of rootNode.body) {
-    switch (node.type) {
-      case 'ExportAllDeclaration': {
-        if (node.exported) {
-          yield node.exported.name
-        } else {
-          for await (const name of extractExportNames(node.source.value)) {
-            yield name
+    yield* extractNamesFromNode(node)
+  }
+}
+
+/**
+ * @param {import('@typescript-eslint/types').TSESTree.ProgramStatement} node
+ */
+async function* extractNamesFromNode(node) {
+  switch (node.type) {
+    case 'ExportAllDeclaration': {
+      if (node.exported) {
+        yield node.exported.name
+      } else {
+        for await (const name of extractExportNames(node.source.value)) {
+          yield name
+        }
+      }
+      break
+    }
+    case 'ExportNamedDeclaration': {
+      if (node.declaration) {
+        switch (node.declaration.type) {
+          case 'ClassDeclaration':
+          case 'ClassExpression':
+          case 'FunctionDeclaration':
+          case 'TSDeclareFunction':
+          case 'TSEnumDeclaration':
+          case 'TSInterfaceDeclaration':
+          case 'TSTypeAliasDeclaration': {
+            yield node.declaration.id.name
+            break
+          }
+          case 'VariableDeclaration': {
+            for (const decl of node.declaration.declarations) {
+              yield* extractNamesFromPattern(decl.id)
+            }
+            break
+          }
+          case 'TSModuleDeclaration': {
+            //?
+            break
           }
         }
-        break
       }
-      case 'ExportNamedDeclaration': {
-        if (node.declaration) {
-          switch (node.declaration.type) {
-            case 'ClassDeclaration':
-            case 'ClassExpression':
-            case 'FunctionDeclaration':
-            case 'TSDeclareFunction':
-            case 'TSEnumDeclaration':
-            case 'TSInterfaceDeclaration':
-            case 'TSTypeAliasDeclaration': {
-              yield node.declaration.id.name
-              break
-            }
-            case 'VariableDeclaration': {
-              for (const decl of node.declaration.declarations) {
-                yield* extractNamesFromPattern(decl.id)
-              }
-              break
-            }
-            case 'TSModuleDeclaration': {
-              //?
-              break
-            }
-          }
-        }
-        for (const spec of node.specifiers) {
-          yield spec.exported.name
-        }
-        break
+      for (const spec of node.specifiers) {
+        yield spec.exported.name
       }
-      case 'ExportDefaultDeclaration': {
-        yield 'default'
-        break
-      }
+      break
+    }
+    case 'ExportDefaultDeclaration': {
+      yield 'default'
+      break
     }
   }
 }
@@ -143,34 +149,4 @@ async function resolveTypeContents(m) {
     typesPath = typesPath.slice(2)
   }
   return await httpGet(`https://unpkg.com/${m}/${typesPath}`)
-}
-
-function httpGet(url) {
-  return new Promise((resolve, reject) => {
-    let result = ''
-    https
-      .get(url, (res) => {
-        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400) {
-          // redirect
-          let redirectUrl = res.headers.location
-          if (!redirectUrl.startsWith('http')) {
-            const baseUrl = new URL(url)
-            baseUrl.pathname = redirectUrl
-            redirectUrl = String(baseUrl)
-          }
-          res.destroy()
-          resolve(httpGet(redirectUrl))
-          return
-        }
-        res.setEncoding('utf8')
-        res.on('data', (chunk) => {
-          result += String(chunk)
-        })
-        res.on('end', () => {
-          resolve(result)
-        })
-        res.on('error', reject)
-      })
-      .on('error', reject)
-  })
 }

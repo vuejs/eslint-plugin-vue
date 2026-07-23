@@ -10,11 +10,11 @@ since: v7.13.0
 
 > prevent `<script setup>` variables used in `<template>` to be marked as unused
 
-- :no_entry_sign: This rule was **deprecated**.
+- :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0.
 
 ::: tip
 
-This rule is not needed when using `vue-eslint-parser` v9.0.0 or later.
+This rule is not needed when using [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) v9.0.0 or later.
 
 :::
 
@@ -56,7 +56,7 @@ After turning on, `Foo` is being marked as used and `no-unused-vars` rule doesn'
 
 You can disable this rule in any of the following cases:
 
-- You are using `vue-eslint-parser` v9.0.0 or later.
+- You are using [`vue-eslint-parser`](https://github.com/vuejs/vue-eslint-parser) v9.0.0 or later.
 - You are not using `<script setup>`.
 - You do not use the `no-unused-vars` rule.
 
@@ -76,4 +76,4 @@ This rule was introduced in eslint-plugin-vue v7.13.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/script-setup-uses-vars.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/script-setup-uses-vars.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/script-setup-uses-vars.test.ts)

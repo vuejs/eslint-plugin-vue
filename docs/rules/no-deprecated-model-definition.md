@@ -10,6 +10,13 @@ since: v9.16.0
 
 > disallow deprecated `model` definition (in Vue.js 3.0.0+)
 
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 - :bulb: Some problems reported by this rule are manually fixable by editor [suggestions](https://eslint.org/docs/developer-guide/working-with-rules#providing-suggestions).
 
 ## :book: Rule Details
@@ -78,4 +85,4 @@ This rule was introduced in eslint-plugin-vue v9.16.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-deprecated-model-definition.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-model-definition.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-model-definition.test.ts)

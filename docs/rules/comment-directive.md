@@ -10,7 +10,21 @@ since: v4.1.0
 
 > support comment-directives in `<template>`
 
-- :gear: This rule is included in all of `"plugin:vue/base"`, `*.configs["flat/base"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/recommended"`, `*.configs["flat/vue2-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/base"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/base"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
+  - `"plugin:vue/recommended"`
 
 Sole purpose of this rule is to provide `eslint-disable` functionality in the `<template>` and in the block level.
 It supports usage of the following comments:
@@ -43,7 +57,7 @@ This rule sends all `eslint-disable`-like comments as errors to the post-process
 
 The `eslint-disable`-like comments can be used in the `<template>` and in the block level.
 
-<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
+<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 
 ```vue
 <template>
@@ -51,7 +65,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
   <div a="1" b="2" c="3" d="4" />
 </template>
 
-<!-- eslint-disable-next-line vue/component-tags-order -->
+<!-- eslint-disable-next-line vue/block-order -->
 <style>
 </style>
 ```
@@ -60,7 +74,7 @@ The `eslint-disable`-like comments can be used in the `<template>` and in the bl
 
 The `eslint-disable` comments has no effect after one block.
 
-<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/component-tags-order': ['error'] }">
+<eslint-code-block :rules="{'vue/comment-directive': ['error'], 'vue/max-attributes-per-line': ['error'], 'vue/block-order': ['error'] }">
 
 ```vue
 <style>
@@ -137,4 +151,4 @@ This rule was introduced in eslint-plugin-vue v4.1.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comment-directive.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comment-directive.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comment-directive.test.ts)

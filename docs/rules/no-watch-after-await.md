@@ -10,11 +10,17 @@ since: v7.0.0
 
 > disallow asynchronously registered `watch`
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 
-This rule reports the `watch()` after `await` expression.  
+This rule reports the `watch()` after `await` expression.\
 In `setup()` function, `watch()` should be registered synchronously.
 
 <eslint-code-block :rules="{'vue/no-watch-after-await': ['error']}">
@@ -77,4 +83,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-watch-after-await.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-watch-after-await.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-watch-after-await.test.ts)

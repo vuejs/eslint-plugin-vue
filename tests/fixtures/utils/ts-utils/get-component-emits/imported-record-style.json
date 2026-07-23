@@ -1,0 +1,14 @@
+[
+    {
+        "type": "infer-type",
+        "name": "a"
+    },
+    {
+        "type": "infer-type",
+        "name": "b"
+    },
+    {
+        "type": "infer-type",
+        "name": "c"
+    }
+]

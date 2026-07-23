@@ -10,7 +10,13 @@ since: v7.0.0
 
 > disallow adding multiple root nodes to the template
 
-- :gear: This rule is included in all of `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -61,7 +67,32 @@ This rule checks whether template contains single root element valid for Vue 2.
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/no-multiple-template-root": ["error", {
+    "disallowComments": false
+  }]
+}
+```
+
+- "disallowComments" (`boolean`) Enables there should not be any comments in the template root. Default is `false`.
+
+### "disallowComments": true
+
+<eslint-code-block :rules="{'vue/no-multiple-template-root': ['error', {disallowComments: true}]}">
+
+```vue
+/* ✗ BAD */
+<template>
+  <!-- root comment -->
+  <div>
+    vue eslint plugin
+  </div>
+  <!-- root comment -->
+</template>
+```
+
+</eslint-code-block>
 
 ## :rocket: Version
 
@@ -70,4 +101,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-multiple-template-root.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multiple-template-root.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multiple-template-root.test.ts)

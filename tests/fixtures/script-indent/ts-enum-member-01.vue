@@ -7,9 +7,10 @@ enum Direction {
   Down,
   Left
     = 2,
-  [
-    Right
-  ] =
+  // [ // Currently, computed property names are not allowed in enums.
+  Right
+    // ]
+    =
     3,
 }
 </script>

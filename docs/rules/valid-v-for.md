@@ -10,7 +10,19 @@ since: v3.11.0
 
 > enforce valid `v-for` directives
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 This rule checks whether every `v-for` directive is valid.
 
@@ -70,7 +82,48 @@ The following cases are syntax errors:
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/valid-v-for": [
+    "error",
+    {
+      "allowEmptyAlias": false
+    }
+  ]
+}
+```
+
+- `allowEmptyAlias` (`boolean`) ... Allows empty aliases in `v-for` expressions. Default is `false`.
+
+### `"allowEmptyAlias": false` (default)
+
+<eslint-code-block :rules="{'vue/valid-v-for': ['error', {allowEmptyAlias: false}]}">
+
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <div v-for="(,a,b) in list" />
+  <div v-for="(a,,b) in list" />
+  <div v-for="(a,b,,) in list" />
+</template>
+```
+
+</eslint-code-block>
+
+### `"allowEmptyAlias": true`
+
+<eslint-code-block :rules="{'vue/valid-v-for': ['error', {allowEmptyAlias: true}]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div v-for="(,a,b) in list" />
+  <div v-for="(a,,b) in list" />
+  <div v-for="(a,b,,) in list" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :couple: Related Rules
 
@@ -87,4 +140,4 @@ This rule was introduced in eslint-plugin-vue v3.11.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/valid-v-for.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-for.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/valid-v-for.test.ts)

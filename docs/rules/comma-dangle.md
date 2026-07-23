@@ -10,7 +10,7 @@ since: v5.2.0
 
 > Require or disallow trailing commas in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/comma-dangle] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/comma-dangle]
 - [comma-dangle]
 
-[@stylistic/comma-dangle]: https://eslint.style/rules/default/comma-dangle
+[@stylistic/comma-dangle]: https://eslint.style/rules/comma-dangle
 [comma-dangle]: https://eslint.org/docs/rules/comma-dangle
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/comma-dangle.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comma-dangle.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/comma-dangle.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/ts/comma-dangle)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/comma-dangle)</sup>

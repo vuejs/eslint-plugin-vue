@@ -10,7 +10,7 @@ since: v7.0.0
 
 > Enforce consistent linebreak style for operators in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/operator-linebreak] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/operator-linebreak]
 - [operator-linebreak]
 
-[@stylistic/operator-linebreak]: https://eslint.style/rules/default/operator-linebreak
+[@stylistic/operator-linebreak]: https://eslint.style/rules/operator-linebreak
 [operator-linebreak]: https://eslint.org/docs/rules/operator-linebreak
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/operator-linebreak.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/operator-linebreak.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/operator-linebreak.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/operator-linebreak)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/operator-linebreak)</sup>

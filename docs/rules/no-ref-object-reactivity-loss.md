@@ -29,7 +29,7 @@ const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
 
 </eslint-code-block>
 
-This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.  
+This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.\
 See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Reactivity Transform.
 
 <eslint-code-block :rules="{'vue/no-ref-object-reactivity-loss': ['error']}" language="javascript" filename="example.js" >
@@ -55,5 +55,5 @@ This rule was introduced in eslint-plugin-vue v9.17.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-ref-object-reactivity-loss.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-ref-object-reactivity-loss.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-ref-object-reactivity-loss.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-ref-object-reactivity-loss.test.ts)

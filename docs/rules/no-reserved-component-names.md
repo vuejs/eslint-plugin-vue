@@ -10,7 +10,19 @@ since: v6.1.0
 
 > disallow the use of reserved names in component definitions
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -35,13 +47,15 @@ export default {
 {
   "vue/no-reserved-component-names": ["error", {
     "disallowVueBuiltInComponents": false,
-    "disallowVue3BuiltInComponents": false
+    "disallowVue3BuiltInComponents": false,
+    "htmlElementCaseSensitive": false,
   }]
 }
 ```
 
 - `disallowVueBuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 2.x built-in component names. Default is `false`.
 - `disallowVue3BuiltInComponents` (`boolean`) ... If `true`, disallow Vue.js 3.x built-in component names. Default is `false`.
+- `htmlElementCaseSensitive` (`boolean`) ... If `true`, component names must exactly match the case of an HTML element to be considered conflicting. Default is `false` (i.e. case-insensitve comparison).
 
 ### `"disallowVueBuiltInComponents": true`
 
@@ -73,6 +87,34 @@ export default {
 
 </eslint-code-block>
 
+### `"htmlElementCaseSensitive": true`
+
+<eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
+
+```vue
+<script>
+/* ✓ GOOD */
+export default {
+  name: 'Button'
+}
+</script>
+```
+
+</eslint-code-block>
+
+<eslint-code-block :rules="{'vue/no-reserved-component-names': ['error', {htmlElementCaseSensitive: true}]}">
+
+```vue
+<script>
+/* ✗ BAD */
+export default {
+  name: 'button'
+}
+</script>
+```
+
+</eslint-code-block>
+
 ## :couple: Related Rules
 
 - [vue/multi-word-component-names](./multi-word-component-names.md)
@@ -92,5 +134,5 @@ This rule was introduced in eslint-plugin-vue v6.1.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-reserved-component-names.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-reserved-component-names.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-reserved-component-names.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-reserved-component-names.test.ts)

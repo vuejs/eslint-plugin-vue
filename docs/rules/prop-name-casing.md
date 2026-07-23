@@ -10,7 +10,15 @@ since: v4.3.0
 
 > enforce specific casing for the Prop name in Vue components
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -39,12 +47,18 @@ export default {
 
 ```json
 {
-  "vue/prop-name-casing": ["error", "camelCase" | "snake_case"]
+  "vue/prop-name-casing": ["error",
+    "camelCase" | "snake_case",
+    {
+      "ignoreProps": []
+    }
+  ]
 }
 ```
 
 - `"camelCase"` (default) ... Enforce property names in `props` to camel case.
 - `"snake_case"` ... Enforce property names in `props` to snake case.
+- `ignoreProps` (`string[]`) ... An array of prop names (or patterns) that don't need to follow the specified casing.
 
 ### `"snake_case"`
 
@@ -67,6 +81,31 @@ export default {
 
 </eslint-code-block>
 
+### `"ignoreProps": ["foo-bar", "/^_[a-z]+/u"]`
+
+<eslint-code-block :rules="{'vue/prop-name-casing': ['error', 'camelCase', {
+ignoreProps: ['foo-bar', '/^_[a-z]+/u'] }]}">
+
+```vue
+<script>
+export default {
+  props: {
+    /* ✓ GOOD */
+    greetingText: String,
+    'foo-bar': String,
+    _uid: String,
+
+    /* ✗ BAD */
+    'greeting-text': String,
+    greeting_text: String,
+    foo_bar: String
+  }
+}
+</script>
+```
+
+</eslint-code-block>
+
 ## :couple: Related Rules
 
 - [vue/attribute-hyphenation](./attribute-hyphenation.md)
@@ -82,5 +121,5 @@ This rule was introduced in eslint-plugin-vue v4.3.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prop-name-casing.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prop-name-casing.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prop-name-casing.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prop-name-casing.test.ts)

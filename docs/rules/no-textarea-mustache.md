@@ -10,7 +10,19 @@ since: v3.0.0
 
 > disallow mustaches in `<textarea>`
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/essential"`, `*.configs["flat/vue2-essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/vue2-essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/vue2-essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -35,7 +47,7 @@ This rule reports mustaches in `<textarea>`.
 
 ::: warning Note
 Interpolation on textareas (`<textarea>{{text}}</textarea>`) won't work. Use `v-model` instead.
-[https://vuejs.org/guide/essentials/forms.html#multiline-text](https://vuejs.org/guide/essentials/forms.html#multiline-text)
+<https://vuejs.org/guide/essentials/forms.html#multiline-text>
 :::
 
 </div>
@@ -55,4 +67,4 @@ This rule was introduced in eslint-plugin-vue v3.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-textarea-mustache.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-textarea-mustache.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-textarea-mustache.test.ts)

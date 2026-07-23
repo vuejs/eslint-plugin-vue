@@ -15,7 +15,7 @@ since: v7.0.0
 This rule is aimed at eliminating unused properties.
 
 ::: warning Note
-This rule cannot check for use of properties by other components (e.g. `mixins`, property access via `$refs`) and use in places where the scope cannot be determined. Some access to properties might be implied, for example accessing data or computed via a variable such as `this[varName]`. In this case, the default is to assume all properties, methods, etc. are 'used'. See the `unreferencedOptions` for a more strict interpretation of 'use' in these cases.
+This rule cannot check for use of properties by other components (e.g., `mixins`, property access via `$refs`) and use in places where the scope cannot be determined. Some access to properties might be implied, for example, accessing data or computed via a variable such as `this[varName]`. In this case, the default is to assume all properties, methods, etc. are 'used'. See the `unreferencedOptions` for a more strict interpretation of 'use' in these cases.
 :::
 
 <eslint-code-block :rules="{'vue/no-unused-properties': ['error']}">
@@ -64,14 +64,16 @@ export default {
 ```
 
 - `groups` (`string[]`) Array of groups to search for properties. Default is `["props"]`. The value of the array is some of the following strings:
+  - `"inject"`
   - `"props"`
   - `"data"`
+  - `"asyncData"`
   - `"computed"`
   - `"methods"`
   - `"setup"`
 - `deepData` (`boolean`) If `true`, the object of the property defined in `data` will be searched deeply. Default is `false`. Include `"data"` in `groups` to use this option.
 - `ignorePublicMembers` (`boolean`) If `true`, members marked with a [JSDoc `/** @public */` tag](https://jsdoc.app/tags-public.html) will be ignored. Default is `false`.
-- `unreferencedOptions` (`string[]`) Array of access methods that should be interpreted as leaving properties unreferenced. Currently, two such methods are available: `unknownMemberAsUnreferenced`, and `returnAsUnreferenced`. See examples below.
+- `unreferencedOptions` (`string[]`) Array of access methods that should be interpreted as leaving properties unreferenced. Currently, two such methods are available: `unknownMemberAsUnreferenced` and `returnAsUnreferenced`. See examples below.
 
 ### `"groups": ["props", "data"]`
 
@@ -288,5 +290,5 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-properties.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-properties.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-properties.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-unused-properties.test.ts)

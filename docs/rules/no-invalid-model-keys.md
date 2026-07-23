@@ -10,7 +10,7 @@ since: v7.9.0
 
 > require valid keys in model option
 
-- :no_entry_sign: This rule was **deprecated** and replaced by [vue/valid-model-definition](valid-model-definition.md) rule.
+- :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0 and replaced by [vue/valid-model-definition](valid-model-definition.md) rule.
 
 ## :book: Rule Details
 
@@ -118,4 +118,4 @@ This rule was introduced in eslint-plugin-vue v7.9.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-invalid-model-keys.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-invalid-model-keys.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-invalid-model-keys.test.ts)

@@ -2,13 +2,13 @@
 pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-multiple-objects-in-class
-description: disallow to pass multiple objects into array to class
+description: disallow passing multiple objects in an array to class
 since: v7.0.0
 ---
 
 # vue/no-multiple-objects-in-class
 
-> disallow to pass multiple objects into array to class
+> disallow passing multiple objects in an array to class
 
 ## :book: Rule Details
 
@@ -41,4 +41,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-multiple-objects-in-class.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multiple-objects-in-class.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multiple-objects-in-class.test.ts)

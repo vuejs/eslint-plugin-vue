@@ -5,8 +5,16 @@
       "type": "node",
       "request": "launch",
       "name": "Start testing",
-      "program": "${workspaceFolder}/node_modules/.bin/mocha",
-      "args": ["${file}", "--watch"],
+      "program": "${workspaceFolder}/node_modules/.bin/vitest",
+      "args": ["run", "${file}", "--reporter=verbose"],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start testing (watch)",
+      "program": "${workspaceFolder}/node_modules/.bin/vitest",
+      "args": ["${file}", "--reporter=verbose"],
       "console": "integratedTerminal"
     }
   ]

@@ -1,0 +1,10 @@
+[
+    {
+        "type": "infer-type",
+        "name": "foo"
+    },
+    {
+        "type": "infer-type",
+        "name": "bar"
+    }
+]

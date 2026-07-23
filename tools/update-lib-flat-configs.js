@@ -9,9 +9,9 @@
 This script updates `lib/configs/flat/*.js` files from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
-const { FlatESLint } = require('eslint/use-at-your-own-risk')
+const fs = require('node:fs')
+const path = require('node:path')
+const { ESLint } = require('eslint')
 const { categories } = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
@@ -28,10 +28,11 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId) {
+function formatRules(rules, categoryId, shouldAlwaysError) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
-      let options = errorCategories.has(categoryId) ? 'error' : 'warn'
+      let options =
+        shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
       if (defaultOptions) {
@@ -47,26 +48,26 @@ function formatRules(rules, categoryId) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category) {
-  const extendsCategoryId = extendsCategories[category.categoryId]
+function formatCategory(category, shouldAlwaysError = false) {
   if (category.categoryId === 'base') {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-const globals = require('globals')
-module.exports = [
+import plugin from '../../plugin.ts'
+import vueParser from 'vue-eslint-parser'
+
+export default [
   {
     name: 'vue/base/setup',
     plugins: {
       get vue() {
-        return require('../../index')
+        return plugin
       }
     },
     languageOptions: {
       sourceType: 'module',
-      globals: globals.browser
     }
   },
   {
@@ -74,33 +75,38 @@ module.exports = [
     files: ['*.vue', '**/*.vue'],
     plugins: {
       get vue() {
-        return require('../../index')
+        return plugin
       }
     },
     languageOptions: {
-      parser: require('vue-eslint-parser'),
+      parser: vueParser,
       sourceType: 'module',
-      globals: globals.browser
     },
-    rules: ${formatRules(category.rules, category.categoryId)},
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
     processor: 'vue/vue'
   }
 ]
 `
   }
+
+  let extendsCategoryId = extendsCategories[category.categoryId]
+
+  if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
+    extendsCategoryId += '-error'
+  }
+
   return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-'use strict'
-const config = require('./${extendsCategoryId}.js')
+import config from './${extendsCategoryId}.ts'
 
-module.exports = [
+export default [
   ...config,
   {
-    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}/rules',
-    rules: ${formatRules(category.rules, category.categoryId)},
+    name: 'vue/${category.categoryId.replace(/^vue3-/u, '')}${shouldAlwaysError ? '-error' : ''}/rules',
+    rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
   }
 ]
 `
@@ -109,17 +115,24 @@ module.exports = [
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/flat/')
 for (const category of categories) {
-  const filePath = path.join(ROOT, `${category.categoryId}.js`)
+  const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
+
+  if (!errorCategories.has(category.categoryId)) {
+    fs.writeFileSync(
+      path.join(ROOT, `${category.categoryId}-error.ts`),
+      formatCategory(category, true)
+    )
+  }
 }
 
 // Format files.
 async function format() {
-  const linter = new FlatESLint({ fix: true })
+  const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  FlatESLint.outputFixes(report)
+  ESLint.outputFixes(report)
 }
 
 format()

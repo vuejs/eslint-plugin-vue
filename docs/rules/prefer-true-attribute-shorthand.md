@@ -81,12 +81,18 @@ Default options is `"always"`.
 
 ```json
 {
-  "vue/prefer-true-attribute-shorthand": ["error", "always" | "never"]
+  "vue/prefer-true-attribute-shorthand": ["error",
+    "always" | "never",
+    {
+      except: []
+    }
+  ]
 }
 ```
 
 - `"always"` (default) ... requires shorthand form.
 - `"never"` ... requires long form.
+- `except` (`string[]`) ... specifies a list of attribute names that should be treated differently.
 
 ### `"never"`
 
@@ -105,6 +111,26 @@ Default options is `"always"`.
 
 </eslint-code-block>
 
+### `"never", { 'except': ['value', '/^foo-/'] }`
+
+<eslint-code-block :rules="{'vue/prefer-true-attribute-shorthand': ['error', 'never', { 'except': ['value', '/^foo-/'] }]}">
+
+```vue
+<template>
+  <!-- ✗ BAD -->
+  <MyComponent show />
+  <MyComponent :value="true" />
+  <MyComponent :foo-bar="true" />
+
+  <!-- ✓ GOOD -->
+  <MyComponent :show="true" />
+  <MyComponent value />
+  <MyComponent foo-bar />
+</template>
+```
+
+</eslint-code-block>
+
 ## :couple: Related Rules
 
 - [vue/no-boolean-default](./no-boolean-default.md)
@@ -116,5 +142,5 @@ This rule was introduced in eslint-plugin-vue v8.5.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-true-attribute-shorthand.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-true-attribute-shorthand.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-true-attribute-shorthand.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-true-attribute-shorthand.test.ts)

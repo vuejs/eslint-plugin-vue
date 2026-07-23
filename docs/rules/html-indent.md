@@ -10,8 +10,16 @@ since: v3.14.0
 
 > enforce consistent indentation in `<template>`
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -79,7 +87,7 @@ This rule enforces a consistent indentation style in `<template>`. The default s
 - `type` (`number | "tab"`) ... The type of indentation. Default is `2`. If this is a number, it's the number of spaces for one indent. If this is `"tab"`, it uses one tab for one indent.
 - `attribute` (`integer`) ... The multiplier of indentation for attributes. Default is `1`.
 - `baseIndent` (`integer`) ... The multiplier of indentation for top-level statements. Default is `1`.
-- `closeBracket` (`integer | object`) ... The multiplier of indentation for right brackets. Default is `0`.  
+- `closeBracket` (`integer | object`) ... The multiplier of indentation for right brackets. Default is `0`.\
   You can apply all of the following by setting a number value.
   - `closeBracket.startTag` (`integer`) ... The multiplier of indentation for right brackets of start tags (`<div>`). Default is `0`.
   - `closeBracket.endTag` (`integer`) ... The multiplier of indentation for right brackets of end tags (`</div>`). Default is `0`.
@@ -199,5 +207,5 @@ This rule was introduced in eslint-plugin-vue v3.14.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-indent.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-indent.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/html-indent.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/html-indent.test.ts)

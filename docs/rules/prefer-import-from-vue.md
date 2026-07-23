@@ -10,8 +10,14 @@ since: v8.5.0
 
 > enforce import from 'vue' instead of import from '@vue/\*'
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-essential"`, `*.configs["flat/essential"]`, `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/vue3-recommended"` and `*.configs["flat/recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -23,6 +29,8 @@ Imports from the following modules are almost always wrong. You should import fr
 - `@vue/runtime-core`
 - `@vue/reactivity`
 - `@vue/shared`
+
+Only named imports/exports of bindings that `vue` actually re-exports are reported.
 
 <eslint-code-block fix :rules="{'vue/prefer-import-from-vue': ['error']}" filename="example.js" language="javascript">
 
@@ -55,4 +63,4 @@ This rule was introduced in eslint-plugin-vue v8.5.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/prefer-import-from-vue.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-import-from-vue.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/prefer-import-from-vue.test.ts)

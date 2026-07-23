@@ -1,0 +1,26 @@
+[
+    {
+        "type": "infer-type",
+        "name": "c",
+        "required": false,
+        "types": [
+            "Boolean"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "a",
+        "required": true,
+        "types": [
+            "Number"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "b",
+        "required": true,
+        "types": [
+            "String"
+        ]
+    }
+]

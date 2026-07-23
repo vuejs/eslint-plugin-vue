@@ -12,7 +12,7 @@ since: v9.21.0
 
 ## :book: Rule Details
 
-This rule enforces all slots used in the template to be defined once either in the `script setup` block with the [`defineSlots`](https://vuejs.org/api/sfc-script-setup.html#defineslots) macro, or with the [`slots property`](https://vuejs.org/api/options-rendering.html#slots) in the Options API.
+This rule enforces all slots used in the template to be defined once either in the `script setup` block with the [`defineSlots` macro](https://vuejs.org/api/sfc-script-setup.html#defineslots), or with the [`slots` property](https://vuejs.org/api/options-rendering.html#slots) in the Options API.
 
 <eslint-code-block :rules="{'vue/require-explicit-slots': ['error']}">
 
@@ -73,4 +73,4 @@ This rule was introduced in eslint-plugin-vue v9.21.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/require-explicit-slots.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-explicit-slots.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/require-explicit-slots.test.ts)

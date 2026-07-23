@@ -9,9 +9,9 @@
 This script updates `lib/configs/*.js` files from rule's meta data.
 */
 
-const fs = require('fs')
-const path = require('path')
-const { FlatESLint } = require('eslint/use-at-your-own-risk')
+const fs = require('node:fs')
+const path = require('node:path')
+const { ESLint } = require('eslint')
 const { categories } = require('./lib/categories')
 
 const errorCategories = new Set(['base', 'vue2-essential', 'vue3-essential'])
@@ -28,10 +28,11 @@ const extendsCategories = {
   'vue3-use-with-caution': 'vue3-recommended'
 }
 
-function formatRules(rules, categoryId) {
+function formatRules(rules, categoryId, shouldAlwaysError) {
   const obj = Object.fromEntries(
     rules.map((rule) => {
-      let options = errorCategories.has(categoryId) ? 'error' : 'warn'
+      let options =
+        shouldAlwaysError || errorCategories.has(categoryId) ? 'error' : 'warn'
       const defaultOptions =
         rule.meta && rule.meta.docs && rule.meta.docs.defaultOptions
       if (defaultOptions) {
@@ -47,39 +48,44 @@ function formatRules(rules, categoryId) {
   return JSON.stringify(obj, null, 2)
 }
 
-function formatCategory(category) {
-  const extendsCategoryId = extendsCategories[category.categoryId]
+function formatCategory(category, shouldAlwaysError = false) {
+  let extendsCategoryId = extendsCategories[category.categoryId]
   if (extendsCategoryId == null) {
     return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
-  parser: require.resolve('vue-eslint-parser'),
+export default {
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 'latest',
     sourceType: 'module'
-  },
-  env: {
-    browser: true,
-    es6: true
   },
   plugins: [
     'vue'
   ],
-  rules: ${formatRules(category.rules, category.categoryId)}
+  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)},
+  overrides: [
+    {
+      files: '*.vue',
+      parser: require.resolve('vue-eslint-parser')
+    }
+  ]
 }
 `
   }
+  if (shouldAlwaysError && !errorCategories.has(extendsCategoryId)) {
+    extendsCategoryId += '-error'
+  }
+
   return `/*
  * IMPORTANT!
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
-module.exports = {
+export default {
   extends: require.resolve('./${extendsCategoryId}'),
-  rules: ${formatRules(category.rules, category.categoryId)}
+  rules: ${formatRules(category.rules, category.categoryId, shouldAlwaysError)}
 }
 `
 }
@@ -87,17 +93,24 @@ module.exports = {
 // Update files.
 const ROOT = path.resolve(__dirname, '../lib/configs/')
 for (const category of categories) {
-  const filePath = path.join(ROOT, `${category.categoryId}.js`)
+  const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)
 
   fs.writeFileSync(filePath, content)
+
+  if (!errorCategories.has(category.categoryId)) {
+    fs.writeFileSync(
+      path.join(ROOT, `${category.categoryId}-error.ts`),
+      formatCategory(category, true)
+    )
+  }
 }
 
 // Format files.
 async function format() {
-  const linter = new FlatESLint({ fix: true })
+  const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([ROOT])
-  FlatESLint.outputFixes(report)
+  ESLint.outputFixes(report)
 }
 
 format()

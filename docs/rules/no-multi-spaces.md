@@ -10,8 +10,16 @@ since: v3.12.0
 
 > disallow multiple spaces
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-strongly-recommended"`, `*.configs["flat/strongly-recommended"]`, `"plugin:vue/strongly-recommended"`, `*.configs["flat/vue2-strongly-recommended"]`, `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/vue2-strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/vue2-strongly-recommended"`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -51,12 +59,14 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 ```json
 {
   "vue/no-multi-spaces": ["error", {
-    "ignoreProperties": false
+    "ignoreProperties": false,
+    "ignoreEOLComments": false
   }]
 }
 ```
 
 - `ignoreProperties` ... whether or not objects' properties should be ignored. default `false`
+- `ignoreEOLComments` ... whether or not the spaces before EOL comments should be ignored. default `false`
 
 ### `"ignoreProperties": true`
 
@@ -76,6 +86,24 @@ This rule aims at removing multiple spaces in tags, which are not used for inden
 
 </eslint-code-block>
 
+### `"ignoreEOLComments": true`
+
+<eslint-code-block fix :rules="{'vue/no-multi-spaces': ['error', { 'ignoreEOLComments': true }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <div
+    :class="{
+      'fa-angle-up' : isExpanded,   // comment
+      'fa-angle-down' : !isExpanded,   /* multiline comment */
+    }"
+  />
+</template>
+```
+
+</eslint-code-block>
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v3.12.0
@@ -83,4 +111,4 @@ This rule was introduced in eslint-plugin-vue v3.12.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-multi-spaces.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multi-spaces.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-multi-spaces.test.ts)

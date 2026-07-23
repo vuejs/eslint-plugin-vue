@@ -10,7 +10,11 @@ since: v4.7.0
 
 > disallow use of v-html to prevent XSS attack
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
@@ -32,11 +36,41 @@ This rule reports all uses of `v-html` directive in order to reduce the risk of 
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+    "vue/no-v-html": ["error", {
+        "ignorePattern": "^html"
+    }]
+}
+```
+
+- `ignorePattern` ... disables reporting when the `v-html` directive references a variable matching this pattern. By default, all `v-html` uses are forbidden.
+
+### `{ "ignorePattern": "^html" }`
+
+<eslint-code-block :rules="{'vue/no-v-html': ['error', { 'ignorePattern': '^html' }]}">
+
+```vue
+<template>
+  <!-- ✓ GOOD -->
+  <h2>{{ userName }}</h2>
+  <span v-html="htmlUserLink" />
+
+  <!-- ✗ BAD -->
+  <span v-html="userName" />
+</template>
+```
+
+</eslint-code-block>
 
 ## :mute: When Not To Use It
 
 If you are certain the content passed to `v-html` is sanitized HTML you can disable this rule.
+
+## :couple: Related Rules
+
+- [vue/no-v-text](./no-v-text.md)
+- [vue/no-v-text-v-html-on-component](./no-v-text-v-html-on-component.md)
 
 ## :rocket: Version
 
@@ -45,4 +79,4 @@ This rule was introduced in eslint-plugin-vue v4.7.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-v-html.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-html.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-v-html.test.ts)

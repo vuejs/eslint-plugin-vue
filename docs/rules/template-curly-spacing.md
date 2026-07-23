@@ -10,7 +10,7 @@ since: v7.0.0
 
 > Require or disallow spacing around embedded expressions of template strings in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/template-curly-spacing] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/template-curly-spacing]
 - [template-curly-spacing]
 
-[@stylistic/template-curly-spacing]: https://eslint.style/rules/default/template-curly-spacing
+[@stylistic/template-curly-spacing]: https://eslint.style/rules/template-curly-spacing
 [template-curly-spacing]: https://eslint.org/docs/rules/template-curly-spacing
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/template-curly-spacing.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/template-curly-spacing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/template-curly-spacing.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/template-curly-spacing)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/template-curly-spacing)</sup>

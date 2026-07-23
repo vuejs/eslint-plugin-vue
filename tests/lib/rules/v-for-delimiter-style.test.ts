@@ -1,0 +1,163 @@
+/**
+ * @fileoverview enforce `v-for` directive's delimiter style
+ * @author Flo Edelmann
+ * @copyright 2020 Flo Edelmann. All rights reserved.
+ * See LICENSE file in root directory for full license.
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/v-for-delimiter-style'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2015 }
+})
+
+tester.run('v-for-delimiter-style', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: ''
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x    in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x in    xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x    in    xs"></div></template>'
+    },
+    {
+      // https://github.com/vuejs/vue-eslint-parser/issues/226
+      filename: 'test.vue',
+      code: '<template><div v-for="(x,) in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="(value, key, index) in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="{ x, y } in xs"></div></template>'
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x in xs"></div></template>',
+      options: ['in']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x of xs"></div></template>',
+      options: ['of']
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x of xs"></div></template>',
+      output: '<template><div v-for="x in xs"></div></template>',
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="(x, index) of xs"></div></template>',
+      output: '<template><div v-for="(x, index) in xs"></div></template>',
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 39
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x    of xs"></div></template>',
+      output: '<template><div v-for="x    in xs"></div></template>',
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x of    xs"></div></template>',
+      output: '<template><div v-for="x in    xs"></div></template>',
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 33
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x    of    xs"></div></template>',
+      output: '<template><div v-for="x    in    xs"></div></template>',
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 36
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x of xs"></div></template>',
+      output: '<template><div v-for="x in xs"></div></template>',
+      options: ['in'],
+      errors: [
+        {
+          message: "Expected 'in' instead of 'of' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-for="x in xs"></div></template>',
+      output: '<template><div v-for="x of xs"></div></template>',
+      options: ['of'],
+      errors: [
+        {
+          message: "Expected 'of' instead of 'in' in 'v-for'.",
+          line: 1,
+          column: 23,
+          endLine: 1,
+          endColumn: 30
+        }
+      ]
+    }
+  ]
+})

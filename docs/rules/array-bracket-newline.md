@@ -10,7 +10,7 @@ since: v7.1.0
 
 > Enforce linebreaks after opening and before closing array brackets in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/array-bracket-newline] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/array-bracket-newline]
 - [array-bracket-newline]
 
-[@stylistic/array-bracket-newline]: https://eslint.style/rules/default/array-bracket-newline
+[@stylistic/array-bracket-newline]: https://eslint.style/rules/array-bracket-newline
 [array-bracket-newline]: https://eslint.org/docs/rules/array-bracket-newline
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v7.1.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/array-bracket-newline.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-bracket-newline.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/array-bracket-newline.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/array-bracket-newline)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/array-bracket-newline)</sup>

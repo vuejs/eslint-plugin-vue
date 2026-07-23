@@ -161,9 +161,7 @@ export interface DebuggerStatement extends HasParentNode {
   type: 'DebuggerStatement'
 }
 export type Declaration =
-  | FunctionDeclaration
-  | VariableDeclaration
-  | ClassDeclaration
+  FunctionDeclaration | VariableDeclaration | ClassDeclaration
 export interface FunctionDeclaration extends HasParentNode {
   type: 'FunctionDeclaration'
   async: boolean
@@ -227,8 +225,7 @@ interface BasePropertyDefinition extends HasParentNode {
   static: boolean
   parent: ClassBody
 }
-export interface PropertyDefinitionNonComputedName
-  extends BasePropertyDefinition {
+export interface PropertyDefinitionNonComputedName extends BasePropertyDefinition {
   computed: false
   key: Identifier | Literal
 }
@@ -263,9 +260,7 @@ export type ModuleSpecifier =
 export interface ImportDeclaration extends HasParentNode {
   type: 'ImportDeclaration'
   specifiers: (
-    | ImportSpecifier
-    | ImportDefaultSpecifier
-    | ImportNamespaceSpecifier
+    ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier
   )[]
   source: Literal & { value: string }
   importKind?: 'type' | 'value'
@@ -351,7 +346,7 @@ export interface PrivateIdentifier extends HasParentNode {
 }
 export interface Literal extends HasParentNode {
   type: 'Literal'
-  value: string | boolean | null | number | RegExp | BigInt
+  value: string | boolean | null | number | RegExp | bigint
   raw: string
   regex?: {
     pattern: string
@@ -419,8 +414,7 @@ interface ArrowFunctionExpressionNoBlock extends HasParentNode {
 }
 
 export type ArrowFunctionExpression =
-  | ArrowFunctionExpressionNoBlock
-  | ArrowFunctionExpressionHasBlock
+  ArrowFunctionExpressionNoBlock | ArrowFunctionExpressionHasBlock
 
 export interface SequenceExpression extends HasParentNode {
   type: 'SequenceExpression'
@@ -469,8 +463,7 @@ interface BinaryExpressionWithIn extends HasParentNode {
   right: Expression
 }
 export type BinaryExpression =
-  | BinaryExpressionWithoutIn
-  | BinaryExpressionWithIn
+  BinaryExpressionWithoutIn | BinaryExpressionWithIn
 export type AssignmentOperator =
   | '='
   | '+='
@@ -627,8 +620,7 @@ interface BaseAssignmentProperty extends HasParentNode {
   value: Pattern
   parent: ObjectPattern
 }
-export interface AssignmentPropertyNonComputedName
-  extends BaseAssignmentProperty {
+export interface AssignmentPropertyNonComputedName extends BaseAssignmentProperty {
   computed: false
   key: Identifier | Literal
 }
@@ -637,8 +629,7 @@ export interface AssignmentPropertyComputedName extends BaseAssignmentProperty {
   key: Expression
 }
 export type AssignmentProperty =
-  | AssignmentPropertyNonComputedName
-  | AssignmentPropertyComputedName
+  AssignmentPropertyNonComputedName | AssignmentPropertyComputedName
 export interface ArrayPattern extends HasParentNode {
   type: 'ArrayPattern'
   elements: (Pattern | null)[]
@@ -658,9 +649,5 @@ export interface AssignmentPattern extends HasParentNode {
 }
 
 export type _FunctionParameter =
-  | AssignmentPattern
-  | RestElement
-  | ArrayPattern
-  | ObjectPattern
-  | Identifier
+  AssignmentPattern | RestElement | ArrayPattern | ObjectPattern | Identifier
 // | TSParameterProperty;

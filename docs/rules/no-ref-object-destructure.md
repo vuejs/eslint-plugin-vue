@@ -10,7 +10,7 @@ since: v9.5.0
 
 > disallow usages of ref objects that can lead to loss of reactivity
 
-- :no_entry_sign: This rule was **deprecated** and replaced by [vue/no-ref-object-reactivity-loss](no-ref-object-reactivity-loss.md) rule.
+- :no_entry: This rule was **removed** in eslint-plugin-vue v10.0.0 and replaced by [vue/no-ref-object-reactivity-loss](no-ref-object-reactivity-loss.md) rule.
 
 ## :book: Rule Details
 
@@ -31,7 +31,7 @@ const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
 
 </eslint-code-block>
 
-This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.  
+This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.\
 See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Reactivity Transform.
 
 <eslint-code-block :rules="{'vue/no-ref-object-destructure': ['error']}" language="javascript" filename="example.js" >
@@ -58,4 +58,4 @@ This rule was introduced in eslint-plugin-vue v9.5.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-ref-object-destructure.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-ref-object-destructure.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-ref-object-destructure.test.ts)

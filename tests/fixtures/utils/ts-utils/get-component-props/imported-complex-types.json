@@ -1,0 +1,75 @@
+[
+    {
+        "type": "infer-type",
+        "name": "a",
+        "required": true,
+        "types": [
+            "String"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "b",
+        "required": false,
+        "types": [
+            "Number"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "c",
+        "required": false,
+        "types": [
+            "Boolean"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "d",
+        "required": false,
+        "types": [
+            "Boolean"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "e",
+        "required": false,
+        "types": [
+            "String",
+            "Number"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "f",
+        "required": false,
+        "types": [
+            "Function"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "g",
+        "required": false,
+        "types": [
+            "Object"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "h",
+        "required": false,
+        "types": [
+            "Array"
+        ]
+    },
+    {
+        "type": "infer-type",
+        "name": "i",
+        "required": false,
+        "types": [
+            "Array"
+        ]
+    }
+]

@@ -10,7 +10,7 @@ since: v9.7.0
 
 > enforce writing style for handlers in `v-on` directives
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
@@ -203,6 +203,7 @@ This rule aims to enforce a consistent style in `v-on` event handlers:
 
 ## :couple: Related Rules
 
+- [vue/prefer-single-event-payload](./prefer-single-event-payload.md)
 - [vue/v-on-style](./v-on-style.md)
 - [vue/v-on-event-hyphenation](./v-on-event-hyphenation.md)
 
@@ -221,4 +222,4 @@ This rule was introduced in eslint-plugin-vue v9.7.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/v-on-handler-style.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-handler-style.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/v-on-handler-style.test.ts)

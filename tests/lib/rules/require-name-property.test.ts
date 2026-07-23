@@ -1,0 +1,301 @@
+/**
+ * @fileoverview Require a name property in Vue components
+ * @author LukeeeeBennett
+ */
+import type { Linter } from 'eslint'
+import rule from '../../../lib/rules/require-name-property'
+import { RuleTester } from '../../eslint-compat'
+import vueEslintParser from 'vue-eslint-parser'
+
+const languageOptions: Linter.LanguageOptions = {
+  ecmaVersion: 2018,
+  sourceType: 'module'
+}
+
+const ruleTester = new RuleTester()
+ruleTester.run('require-name-property', rule, {
+  valid: [
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+        export default {
+          name: 'IssaName'
+        }
+      `,
+      languageOptions
+    },
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+        export default {
+          name: undefined
+        }
+      `,
+      languageOptions
+    },
+    {
+      filename: 'ValidComponent.vue',
+      code: `
+        export default {
+          name: ''
+        }
+      `,
+      languageOptions
+    },
+    {
+      code: `
+        Vue.mixin({
+          methods: {
+            $foo () {}
+          }
+        })
+      `,
+      languageOptions
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+      }
+      </script>
+      <script setup>
+      </script>
+      `,
+      languageOptions: {
+        parser: vueEslintParser,
+        ...languageOptions
+      }
+    }
+  ],
+
+  invalid: [
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default {
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 24,
+          endLine: 3,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent'
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 40,
+          endLine: 3,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({ })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 40,
+          endLine: 2,
+          endColumn: 43,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default { }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 24,
+          endLine: 2,
+          endColumn: 27,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent'
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default {
+        nameNot: 'IssaNameNot'
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 24,
+          endLine: 4,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+        name: 'InvalidComponent',
+        nameNot: 'IssaNameNot'
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default defineComponent({
+          nameNot: 'IssaNameNot'
+        })
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 40,
+          endLine: 4,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default defineComponent({
+          name: 'InvalidComponent',
+          nameNot: 'IssaNameNot'
+        })
+      `
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default {
+          computed: {
+            name() { return 'name' }
+          }
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 24,
+          endLine: 6,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent',
+          computed: {
+            name() { return 'name' }
+          }
+        }
+      `
+            }
+          ]
+        }
+      ]
+    },
+    {
+      filename: 'InvalidComponent.vue',
+      code: `
+        export default {
+          [name]: 'IssaName'
+        }
+      `,
+      languageOptions,
+      errors: [
+        {
+          message: 'Required name property is not set.',
+          line: 2,
+          column: 24,
+          endLine: 4,
+          endColumn: 10,
+          suggestions: [
+            {
+              desc: 'Add name property to component.',
+              output: `
+        export default {
+          name: 'InvalidComponent',
+          [name]: 'IssaName'
+        }
+      `
+            }
+          ]
+        }
+      ]
+    }
+  ]
+})

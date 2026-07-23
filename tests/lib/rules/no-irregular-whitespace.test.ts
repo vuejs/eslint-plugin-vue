@@ -1,0 +1,487 @@
+/**
+ * @author Yosuke Ota
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-irregular-whitespace'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: { parser: vueEslintParser, ecmaVersion: 2018 }
+})
+
+const IRREGULAR_WHITESPACES = [
+  '\f',
+  '\v',
+  '\u{85}',
+  '\u{FEFF}',
+  '\u{A0}',
+  '\u{1680}',
+  '\u{180E}',
+  '\u{2000}',
+  '\u{2001}',
+  '\u{2002}',
+  '\u{2003}',
+  '\u{2004}',
+  '\u{2005}',
+  '\u{2006}',
+  '\u{2007}',
+  '\u{2008}',
+  '\u{2009}',
+  '\u{200A}',
+  '\u{200B}',
+  '\u{202F}',
+  '\u{205F}',
+  '\u{3000}'
+]
+const IRREGULAR_LINE_TERMINATORS = ['\u{2028}', '\u{2029}']
+const ALL_IRREGULAR_WHITESPACES = [
+  ...IRREGULAR_WHITESPACES,
+  ...IRREGULAR_LINE_TERMINATORS
+]
+const ALL_IRREGULAR_WHITESPACE_CODES = ALL_IRREGULAR_WHITESPACES.map((s) =>
+  `000${s.codePointAt(0)!.toString(16)}`.slice(-4)
+)
+
+tester.run('no-irregular-whitespace', rule, {
+  valid: [
+    'var a = \t\r\n b',
+    '<template><div attr=" \t\r\n " :dir=" \t\r\n foo  \t\r\n " > \t\r\n s \t\r\n </div></template><script>var a = \t\r\n b</script>',
+    // escapes
+    ...ALL_IRREGULAR_WHITESPACE_CODES.map((s) => String.raw`/\u${s}/+'\u${s}'`),
+    // html escapes
+    ...ALL_IRREGULAR_WHITESPACE_CODES.map(
+      (s) => `<template><div attr="&#x${s}">&#x${s}s&#x${s}</div></template>`
+    ),
+    // strings
+    ...IRREGULAR_WHITESPACES.map((s) => `'${s}'`),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => `'\\${s}'`), // multiline string
+    ...IRREGULAR_WHITESPACES.map((s) => `<template>{{ '${s}' }}</template>`),
+    // comments
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `//${s}`,
+      options: [{ skipComments: true }]
+    })),
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `/*${s}*/`,
+      options: [{ skipComments: true }]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ i//${s}\n }}</div></template>`,
+      options: [{ skipComments: true }]
+    })),
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ i/*${s}*/ }}</div></template>`,
+      options: [{ skipComments: true }]
+    })),
+    // regexps
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `/${s}/`,
+      options: [{ skipRegExps: true }]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ /${s}/ }}</div></template>`,
+      options: [{ skipRegExps: true }]
+    })),
+    // templates
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `\`${s}\``,
+      options: [{ skipTemplates: true }]
+    })),
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ \`${s}\` }}</div></template>`,
+      options: [{ skipTemplates: true }]
+    })),
+    // attribute values
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div attr="${s}" /></template>`,
+      options: [{ skipHTMLAttributeValues: true }]
+    })),
+    // text contents
+    ...ALL_IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>${s}</div></template>`,
+      options: [{ skipHTMLTextContents: true }]
+    })),
+    // outside
+    `\u{3000}<template></template>\u{3000}<script></script>\u{3000}<block>\u{3000}</block>\u{3000}<style \u{3000}>\u{3000}</style>\u{3000}`
+  ],
+  invalid: [
+    {
+      code: `var any \u{B} = 'thing';`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 9,
+          endLine: 1,
+          endColumn: 10
+        }
+      ]
+    },
+    {
+      code: `
+      <template>
+        \u{3000}
+        <div
+          \u{3000}
+          attr="\u{3000}"
+          :dir="\u{3000} foo \u{3000}"
+          \u{3000}>
+        \u{3000}
+        </div
+        \u{3000}>
+        \u{3000}
+      </template>
+      <script>
+      var any \u{B} = 'thing';
+      </script>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 3,
+          column: 9,
+          endLine: 3,
+          endColumn: 10
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 5,
+          column: 11,
+          endLine: 5,
+          endColumn: 12
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 18
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 7,
+          column: 17,
+          endLine: 7,
+          endColumn: 18
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 7,
+          column: 23,
+          endLine: 7,
+          endColumn: 24
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 8,
+          column: 11,
+          endLine: 8,
+          endColumn: 12
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 9,
+          column: 9,
+          endLine: 9,
+          endColumn: 10
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 11,
+          column: 9,
+          endLine: 11,
+          endColumn: 10
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 12,
+          column: 9,
+          endLine: 12,
+          endColumn: 10
+        },
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 15,
+          column: 15,
+          endLine: 15,
+          endColumn: 16
+        }
+      ]
+    },
+    // strings
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `'${s}'`,
+      options: [{ skipStrings: false }],
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `'\\${s}'`,
+      options: [{ skipStrings: false }],
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template>{{ '${s}' }}</template>`,
+      options: [{ skipStrings: false }],
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 15,
+          endLine: 1,
+          endColumn: 16
+        }
+      ]
+    })),
+    // comments
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `//${s}`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `/*${s}*/`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 3,
+          endLine: 1,
+          endColumn: 4
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `/*${s}*/`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 3,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ i//${s}\n }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ i/*${s}*/ }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>{{ i/*${s}*/ }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    // regexps
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `/${s}/`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ /${s}/ }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 21
+        }
+      ]
+    })),
+    // templates
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `\`${s}\``,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 2,
+          endLine: 1,
+          endColumn: 3
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `\`${s}\``,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 2,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>{{ \`${s}\` }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 1,
+          endColumn: 21
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>{{ \`${s}\` }}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 20,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    // attribute values
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div attr="${s}" /></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 1,
+          endColumn: 23
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div attr="${s}" /></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 22,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    // text contents
+    ...IRREGULAR_WHITESPACES.map((s) => ({
+      code: `<template><div>${s}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 1,
+          endColumn: 17
+        }
+      ]
+    })),
+    ...IRREGULAR_LINE_TERMINATORS.map((s) => ({
+      code: `<template><div>${s}</div></template>`,
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 1,
+          column: 16,
+          endLine: 2,
+          endColumn: 1
+        }
+      ]
+    })),
+    // options
+    {
+      code: `
+      <template>
+        <div attr="\f" attr2=" ">
+        \f<div> </div>
+        </div>
+      </template\f\v>
+      <script>
+      var a = '\f'
+      var b = '\t'
+      // \f
+      /* comment */
+      /* \f */
+      var c = /\f/
+      var d = / /
+      var e = \`\f\`
+      var f = \`\\f\`
+      </script>`,
+      options: [
+        {
+          skipComments: true,
+          skipStrings: true,
+          skipTemplates: true,
+          skipRegExps: true,
+          skipHTMLAttributeValues: true,
+          skipHTMLTextContents: true
+        }
+      ],
+      errors: [
+        {
+          message: 'Irregular whitespace not allowed.',
+          line: 6,
+          column: 17,
+          endLine: 6,
+          endColumn: 19
+        }
+      ]
+    }
+  ]
+})

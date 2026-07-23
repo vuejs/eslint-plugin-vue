@@ -3,13 +3,20 @@ pageClass: rule-details
 sidebarDepth: 0
 title: vue/no-deprecated-delete-set
 description: disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
+since: v9.29.0
 ---
 
 # vue/no-deprecated-delete-set
 
 > disallow using deprecated `$delete` and `$set` (in Vue.js 3.0.0+)
 
-- :exclamation: <badge text="This rule has not been released yet." vertical="middle" type="error"> _**This rule has not been released yet.**_ </badge>
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/essential"]`
+  - `*.configs["flat/strongly-recommended"]`
+  - `*.configs["flat/recommended"]`
+  - `"plugin:vue/essential"`
+  - `"plugin:vue/strongly-recommended"`
+  - `"plugin:vue/recommended"`
 
 ## :book: Rule Details
 
@@ -46,7 +53,11 @@ Nothing.
 
 - [Migration Guide - Removed APIs](https://v3-migration.vuejs.org/breaking-changes/#removed-apis)
 
+## :rocket: Version
+
+This rule was introduced in eslint-plugin-vue v9.29.0
+
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-deprecated-delete-set.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-delete-set.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-deprecated-delete-set.test.ts)

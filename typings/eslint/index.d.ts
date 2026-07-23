@@ -1,4 +1,5 @@
 import {
+  ESLint as RawESLint,
   Rule as ESLintRule,
   RuleTester as ESLintRuleTester,
   Linter as ESLintLinter
@@ -6,6 +7,14 @@ import {
 import * as VAST from '../eslint-plugin-vue/util-types/ast'
 import * as VNODE from '../eslint-plugin-vue/util-types/node'
 import * as parserServices from '../eslint-plugin-vue/util-types/parser-services'
+
+export class ESLint extends RawESLint {}
+
+export namespace ESLint {
+  interface Plugin extends Omit<RawESLint.Plugin, 'rules'> {
+    rules?: Record<string, Rule.RuleModule>
+  }
+}
 
 export namespace AST {
   type Token = VNODE.Token
@@ -17,9 +26,9 @@ export namespace Scope {
   interface ScopeManager {
     scopes: Scope[]
     globalScope: Scope | null
+    // eslint-disable-next-line unicorn/consistent-boolean-name -- mirrors the external ESLint `ScopeManager` type
     acquire(node: VAST.ESNode | VAST.Program, inner?: boolean): Scope | null
-    /** @since ESLint v8.38.0 */
-    getDeclaredVariables?(node: VAST.ESNode): Variable[]
+    getDeclaredVariables(node: VAST.ESNode): Variable[]
   }
   interface Scope {
     type:
@@ -110,6 +119,8 @@ export namespace Scope {
 }
 
 export class SourceCode /*extends ESLintSourceCode*/ {
+  static splitLines(text: string): string[]
+
   text: string
   ast: AST.Program
   lines: string[]
@@ -117,8 +128,6 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   parserServices: SourceCode.ParserServices
   scopeManager: Scope.ScopeManager
   visitorKeys: SourceCode.VisitorKeys
-
-  static splitLines(text: string): string[]
 
   tokensAndComments: (AST.Token | VNODE.Comment)[]
 
@@ -211,9 +220,7 @@ export class SourceCode /*extends ESLintSourceCode*/ {
     left: VNODE.HasLocation,
     right: VNODE.HasLocation,
     padding?:
-      | number
-      | SourceCode.FilterPredicate
-      | SourceCode.CursorWithCountOptions
+      number | SourceCode.FilterPredicate | SourceCode.CursorWithCountOptions
   ): AST.Token[]
   getTokens(
     node: VNODE.HasLocation,
@@ -232,10 +239,8 @@ export class SourceCode /*extends ESLintSourceCode*/ {
   getCommentsAfter(nodeOrToken: VNODE.HasLocation): VNODE.Comment[]
   getCommentsInside(node: VNODE.HasLocation): VNODE.Comment[]
 
-  /** @since ESLint v8.39.0 */
-  markVariableAsUsed?(name: string, node?: VNODE.HasLocation): void
-  /** @since ESLint v8.37.0 */
-  getScope?(node: VNODE.HasLocation): Scope.Scope
+  markVariableAsUsed(name: string, node?: VNODE.HasLocation): void
+  getScope(node: VNODE.HasLocation): Scope.Scope
 }
 export namespace SourceCode {
   interface Config {
@@ -315,17 +320,22 @@ export namespace Rule {
   interface CodePath extends ESLintRule.CodePath {}
   interface CodePathSegment extends ESLintRule.CodePathSegment {}
 
+  // eslint-disable-next-line unicorn/consistent-compound-words -- mirrors ESLint's `RuleMetaData` type name
   interface RuleMetaData extends ESLintRule.RuleMetaData {
     docs: Required<ESLintRule.RuleMetaData>['docs']
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    fixable?: ESLintRule.RuleMetaData['fixable'] | (string & {}) | null
+    // TODO: Temporary workaround, delete after we switch to a consistent rule creation method that unifies types.
+    type?: ESLintRule.RuleMetaData['type'] | (string & {}) | null
   }
 
   interface RuleContext {
     id: string
     options: ESLintRule.RuleContext['options']
     settings: { [name: string]: any }
-    /** @deprecated removed in ESLint v10? */
+    /** @deprecated removed in ESLint v10 */
     parserPath?: string
-    /** @deprecated removed in ESLint v10? */
+    /** @deprecated removed in ESLint v10 */
     parserOptions?: ESLintLinter.ParserOptions
     /** For flat config  */
     languageOptions?: ESLintLinter.FlatConfig['languageOptions']
@@ -336,22 +346,24 @@ export namespace Rule {
     getAncestors?(): VAST.ESNode[]
     /** @deprecated removed in ESLint v9 */
     getDeclaredVariables?(node: VAST.ESNode): Scope.Variable[]
-    getFilename(): string
-    /** @since ESLint v8.40.0 */
-    filename?: string
+    /** @deprecated removed in ESLint v10 */
+    getFilename?(): string
+    filename: string
+    /** @deprecated removed in ESLint v10 */
+    getPhysicalFilename?(): string
+    physicalFilename: string
     /** @deprecated removed in ESLint v9 */
     getScope?(): Scope.Scope
-    getSourceCode(): SourceCode
-    /** @since ESLint v8.40.0 */
-    sourceCode?: SourceCode
+    /** @deprecated removed in ESLint v10 */
+    getSourceCode?(): SourceCode
+    sourceCode: SourceCode
     /** @deprecated removed in ESLint v9 */
     markVariableAsUsed?(name: string): boolean
     report(descriptor: ReportDescriptor): void
 
-    // eslint@6 does not have this method.
+    /** @deprecated removed in ESLint v10 */
     getCwd?: () => string
-    /** @since ESLint v8.40.0 */
-    cwd?: string
+    cwd: string
   }
 
   type ReportDescriptor =
@@ -361,8 +373,7 @@ export namespace Rule {
     | ReportDescriptor4
 
   type SuggestionReportDescriptor =
-    | SuggestionReportDescriptor1
-    | SuggestionReportDescriptor2
+    SuggestionReportDescriptor1 | SuggestionReportDescriptor2
 
   interface RuleFixer {
     insertTextAfter(nodeOrToken: VNODE.HasLocation, text: string): Fix
@@ -381,14 +392,58 @@ export namespace Rule {
   }
 }
 
-export class RuleTester extends ESLintRuleTester {}
-export class Linter {
+export class RuleTester extends ESLintRuleTester {
+  constructor(config?: Linter.Config)
+
+  run(
+    name: string,
+    rule: Rule.RuleModule,
+    tests: {
+      valid: Array<string | RuleTester.ValidTestCase>
+      invalid: RuleTester.InvalidTestCase[]
+    }
+  ): void
+}
+
+export namespace RuleTester {
+  type ValidTestCase = ESLintRuleTester.ValidTestCase
+  type InvalidTestCase = ESLintRuleTester.InvalidTestCase
+  type TestCaseError = ESLintRuleTester.TestCaseError
+}
+
+export class Linter extends ESLintLinter {
   getRules(): Map<string, Rule.RuleModule>
+  verify(
+    code: SourceCode | string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.LintMessage[]
+  verify(
+    code: SourceCode | string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.LintOptions
+  ): Linter.LintMessage[]
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    filename?: string
+  ): Linter.FixReport
+  verifyAndFix(
+    code: string,
+    config: Linter.LegacyConfig | Linter.Config | Linter.Config[],
+    options: Linter.FixOptions
+  ): Linter.FixReport
 }
 
 export namespace Linter {
   type LintMessage = ESLintLinter.LintMessage
   type LintOptions = ESLintLinter.LintOptions
+  type LegacyConfig = ESLintLinter.LegacyConfig
+  type FlatConfig = ESLintLinter.FlatConfig
+  type LanguageOptions = ESLintLinter.LanguageOptions
+  interface Config extends Omit<ESLintLinter.Config, 'plugins'> {
+    plugins?: Record<string, ESLint.Plugin>
+  }
 }
 export type ReportDescriptorFix = (
   fixer: Rule.RuleFixer

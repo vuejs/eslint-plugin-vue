@@ -14,16 +14,16 @@ For example:
 
 - :gear: This rule is included in `"plugin:vue/strongly-recommended"` and `"plugin:vue/recommended"`.
 - :no_entry_sign: This rule was **deprecated**.
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 ```
 */
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const rules = require('./lib/rules')
 const removedRules = require('../lib/removed-rules')
 const { getPresetIds, formatItems } = require('./lib/utils')
-const { CONFIG_NAME_CAPTIONS } = require('./lib/categories')
+const { getPresetNames } = require('./lib/categories')
 
 const ROOT = path.resolve(__dirname, '../docs/rules')
 
@@ -42,15 +42,15 @@ function pickSince(content) {
 }
 
 class DocFile {
+  static read(rule) {
+    return new DocFile(rule)
+  }
+
   constructor(rule) {
     this.rule = rule
     this.filePath = path.join(ROOT, `${rule.name}.md`)
     this.content = fs.readFileSync(this.filePath, 'utf8')
     this.since = pickSince(this.content)
-  }
-
-  static read(rule) {
-    return new DocFile(rule)
   }
 
   write() {
@@ -76,7 +76,7 @@ class DocFile {
     const fileIntroPattern = /^---\n(.*\n)+---\n*/g
 
     this.content = fileIntroPattern.test(this.content)
-      ? this.content.replace(fileIntroPattern, computed)
+      ? this.content.replaceAll(fileIntroPattern, () => computed)
       : `${computed}${this.content.trim()}\n`
 
     return this
@@ -88,8 +88,8 @@ class DocFile {
       ? meta.docs.description
       : this.content.match(/^description: (.*)$/m)[1]
     const escapedDescription = description
-      .replace(/\*/g, String.raw`\*`)
-      .replace(/_/g, String.raw`\_`)
+      .replaceAll('*', String.raw`\*`)
+      .replaceAll('_', String.raw`\_`)
     const title = `# ${ruleId}\n\n> ${escapedDescription}`
     const notes = []
 
@@ -123,15 +123,15 @@ class DocFile {
       }
     }
     if (meta.docs?.categories) {
-      const presets = getPresetIds(meta.docs.categories).flatMap((categoryId) =>
-        CONFIG_NAME_CAPTIONS[categoryId]?.map((c) => `\`${c}\``)
+      const presets = getPresetNames(getPresetIds(meta.docs.categories))
+      notes.push(
+        `- :gear: This rule is included in the following preset configs:`,
+        ...presets.map((preset) => `  - ${preset}`)
       )
-
-      notes.push(`- :gear: This rule is included in ${formatItems(presets)}.`)
     }
     if (meta.fixable) {
       notes.push(
-        '- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.'
+        '- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.'
       )
     }
     if (meta.hasSuggestions) {
@@ -151,10 +151,10 @@ class DocFile {
       notes.push('', '')
     }
 
-    const headerPattern = /#.+\n+[^\n]*\n+(?:- .+\n)*\n*/
+    const headerPattern = /#.+\n+[^\n]*\n+(?: {0,2}- .+\n)*\n*/
     const header = `${title}\n\n${notes.join('\n')}`
     this.content = headerPattern.test(this.content)
-      ? this.content.replace(headerPattern, header)
+      ? this.content.replace(headerPattern, () => header)
       : `${header}${this.content.trim()}\n`
 
     return this
@@ -163,20 +163,20 @@ class DocFile {
   updateCodeBlocks() {
     const { meta } = this.rule
 
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /<eslint-code-block\s(:?fix\S*)?\s*/g,
-      `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
+      () => `<eslint-code-block ${meta.fixable ? 'fix ' : ''}`
     )
     return this
   }
 
   adjustCodeBlocks() {
     // Adjust the necessary blank lines before and after the code block so that GitHub can recognize `.md`.
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /(<eslint-code-block([\S\s]*?)>)\n+```/gm,
       '$1\n\n```'
     )
-    this.content = this.content.replace(
+    this.content = this.content.replaceAll(
       /```\n+<\/eslint-code-block>/gm,
       '```\n\n</eslint-code-block>'
     )
@@ -184,7 +184,7 @@ class DocFile {
   }
 
   updateFooter() {
-    const { name, meta } = this.rule
+    const { name, ext, meta } = this.rule
     const footerPattern = /## (?::mag: Implementation|:rocket: Version).+$/s
     const footer = `${
       this.since
@@ -196,8 +196,8 @@ This rule was introduced in eslint-plugin-vue ${this.since}
         : ''
     }## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/${name}${ext})
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/${name}.test.ts)
 ${
   meta.docs.extensionSource
     ? `
@@ -206,7 +206,7 @@ ${
     : ''
 }`
     this.content = footerPattern.test(this.content)
-      ? this.content.replace(footerPattern, footer)
+      ? this.content.replace(footerPattern, () => footer)
       : `${this.content.trim()}\n\n${footer}`
 
     return this

@@ -28,8 +28,7 @@ export interface VueVisitor extends VueVisitorBase {
     obj: VueObjectData
   ): void
   [query: string]:
-    | ((node: VAST.ParamNode, obj: VueObjectData) => void)
-    | undefined
+    ((node: VAST.ParamNode, obj: VueObjectData) => void) | undefined
 }
 
 type ScriptSetupVisitorBase = {
@@ -42,8 +41,8 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
   onDefineEmitsExit?(node: CallExpression, emits: ComponentEmit[]): void
   onDefineOptionsEnter?(node: CallExpression): void
   onDefineOptionsExit?(node: CallExpression): void
-  onDefineSlotsEnter?(node: CallExpression): void
-  onDefineSlotsExit?(node: CallExpression): void
+  onDefineSlotsEnter?(node: CallExpression, slots: ComponentSlot[]): void
+  onDefineSlotsExit?(node: CallExpression, slots: ComponentSlot[]): void
   onDefineExposeEnter?(node: CallExpression): void
   onDefineExposeExit?(node: CallExpression): void
   onDefineModelEnter?(node: CallExpression, model: ComponentModel): void
@@ -52,6 +51,7 @@ export interface ScriptSetupVisitor extends ScriptSetupVisitorBase {
     | ((node: VAST.ParamNode) => void)
     | ((node: CallExpression, props: ComponentProp[]) => void)
     | ((node: CallExpression, emits: ComponentEmit[]) => void)
+    | ((node: CallExpression, slots: ComponentSlot[]) => void)
     | ((node: CallExpression, model: ComponentModel) => void)
     | undefined
 }
@@ -69,8 +69,7 @@ type ComponentArrayPropUnknownName = {
   node: Expression | SpreadElement
 }
 export type ComponentArrayProp =
-  | ComponentArrayPropDetectName
-  | ComponentArrayPropUnknownName
+  ComponentArrayPropDetectName | ComponentArrayPropUnknownName
 
 type ComponentObjectPropDetectName = {
   type: 'object'
@@ -87,8 +86,7 @@ type ComponentObjectPropUnknownName = {
   node: Property
 }
 export type ComponentObjectProp =
-  | ComponentObjectPropDetectName
-  | ComponentObjectPropUnknownName
+  ComponentObjectPropDetectName | ComponentObjectPropUnknownName
 
 export type ComponentUnknownProp = {
   type: 'unknown'
@@ -135,8 +133,7 @@ type ComponentArrayEmitUnknownName = {
   node: Expression | SpreadElement
 }
 export type ComponentArrayEmit =
-  | ComponentArrayEmitDetectName
-  | ComponentArrayEmitUnknownName
+  ComponentArrayEmitDetectName | ComponentArrayEmitUnknownName
 type ComponentObjectEmitDetectName = {
   type: 'object'
   key: Expression
@@ -153,8 +150,7 @@ type ComponentObjectEmitUnknownName = {
 }
 
 export type ComponentObjectEmit =
-  | ComponentObjectEmitDetectName
-  | ComponentObjectEmitUnknownName
+  ComponentObjectEmitDetectName | ComponentObjectEmitUnknownName
 
 export type ComponentUnknownEmit = {
   type: 'unknown'
@@ -175,8 +171,7 @@ export type ComponentTypeEmitPropertySignature = {
   node: TSPropertySignature | TSMethodSignature
 }
 export type ComponentTypeEmit =
-  | ComponentTypeEmitCallSignature
-  | ComponentTypeEmitPropertySignature
+  ComponentTypeEmitCallSignature | ComponentTypeEmitPropertySignature
 
 export type ComponentInferTypeEmit = {
   type: 'infer-type'
@@ -190,6 +185,28 @@ export type ComponentEmit =
   | ComponentTypeEmit
   | ComponentInferTypeEmit
   | ComponentUnknownEmit
+
+export type ComponentUnknownSlot = {
+  type: 'unknown'
+  slotName: null
+  node: Expression | SpreadElement | TypeNode | null
+}
+
+export type ComponentTypeSlot = {
+  type: 'type'
+  key: Identifier | Literal
+  slotName: string
+  node: TSPropertySignature | TSMethodSignature
+}
+
+export type ComponentInferTypeSlot = {
+  type: 'infer-type'
+  slotName: string
+  node: TypeNode
+}
+
+export type ComponentSlot =
+  ComponentTypeSlot | ComponentInferTypeSlot | ComponentUnknownSlot
 
 export type ComponentModelName = {
   modelName: string

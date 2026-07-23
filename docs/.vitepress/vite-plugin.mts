@@ -1,6 +1,6 @@
 import type { UserConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import esbuild from 'esbuild'
 type Plugin = Extract<
   NonNullable<NonNullable<UserConfig['vite']>['plugins']>[number],
@@ -11,9 +11,9 @@ const libRoot = path.join(fileURLToPath(import.meta.url), '../../../lib')
 export function vitePluginRequireResolve(): Plugin {
   return {
     name: 'vite-plugin-require.resolve',
-    transform(code, id, _options) {
+    transform(code, id) {
       if (id.startsWith(libRoot)) {
-        return code.replace(/require\.resolve/gu, '(function(){return 0})')
+        return code.replaceAll('require.resolve', '(function(){return 0})')
       }
       return undefined
     }
@@ -34,8 +34,9 @@ export function viteCommonjs(): Plugin {
           format: 'esm'
         })
         return transformed.code
-      } catch (e) {
-        console.error('Transform error. base code:\n' + base, e)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(`Transform error. base code:\n${base}`, error)
       }
       return undefined
     }
@@ -50,7 +51,7 @@ function transformRequire(code: string) {
     return code
   }
   const modules = new Map()
-  const replaced = code.replace(
+  const replaced = code.replaceAll(
     /(\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)|\brequire\s*\(\s*(["'].*?["'])\s*\)/gu,
     (match, comment, moduleString) => {
       if (comment) {
@@ -58,24 +59,26 @@ function transformRequire(code: string) {
       }
 
       let id =
+        // eslint-disable-next-line prefer-template
         '__' +
-        moduleString.replace(/[^a-zA-Z0-9_$]+/gu, '_') +
-        Math.random().toString(32).substring(2)
+        moduleString.replaceAll(/[^a-zA-Z0-9_$]+/gu, '_') +
+        Math.random().toString(32).slice(2)
       while (code.includes(id) || modules.has(id)) {
-        id += Math.random().toString(32).substring(2)
+        id += Math.random().toString(32).slice(2)
       }
       modules.set(id, moduleString)
-      return id + '()'
+      return `${id}()`
     }
   )
 
   return (
+    // eslint-disable-next-line prefer-template
     [...modules]
-      .map(([id, moduleString]) => {
-        return `import * as __temp_${id} from ${moduleString};
+      .map(
+        ([id, moduleString]) => `import * as __temp_${id} from ${moduleString};
 const ${id} = () => __temp_${id}.default || __temp_${id};
 `
-      })
+      )
       .join('') +
     ';\n' +
     replaced

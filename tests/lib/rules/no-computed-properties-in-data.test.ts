@@ -1,0 +1,133 @@
+/**
+ * @author  Yosuke Ota
+ * See LICENSE file in root directory for full license.
+ */
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-computed-properties-in-data'
+import vueEslintParser from 'vue-eslint-parser'
+
+const tester = new RuleTester({
+  languageOptions: {
+    parser: vueEslintParser,
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  }
+})
+
+tester.run('no-computed-properties-in-data', rule, {
+  valid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {
+          const foo = this.foo
+          return {}
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {
+          const foo = this.foo()
+          return {}
+        },
+        methods: {
+          foo() {}
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: ['foo'],
+        data() {
+          const foo = this.foo
+          return {}
+        },
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data: {
+          foo: this.foo
+        },
+        computed: {
+          foo () {}
+        }
+      }
+      </script>
+      `
+    }
+  ],
+  invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {
+          const foo = this.foo
+          return  {}
+        },
+        computed: {
+          foo () {}
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The computed property cannot be used in `data()` because it is before initialization.',
+          line: 5,
+          column: 23,
+          endLine: 5,
+          endColumn: 31
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        data() {
+          const vm = this
+          const foo = vm.foo
+          return  {}
+        },
+        computed: {
+          foo () {}
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message:
+            'The computed property cannot be used in `data()` because it is before initialization.',
+          line: 6,
+          column: 23,
+          endLine: 6,
+          endColumn: 29
+        }
+      ]
+    }
+  ]
+})

@@ -84,11 +84,15 @@ export default {
 
 </eslint-code-block>
 
+## :couple: Related Rules
+
+- [vue/restricted-component-names](./restricted-component-names.md)
+
 ## :rocket: Version
 
 This rule was introduced in eslint-plugin-vue v9.15.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-component-names.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-restricted-component-names.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-restricted-component-names.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-restricted-component-names.test.ts)

@@ -12,11 +12,11 @@ since: v7.20.0
 
 ## :book: Rule Details
 
-This rule warns of using undefined properties.  
+This rule warns of using undefined properties.\
 This rule can help you locate potential errors resulting from misspellings property names, and implicitly added properties.
 
 ::: warning Note
-This rule cannot detect properties defined in other files or components.  
+This rule cannot detect properties defined in other files or components.\
 Note that there are many false positives if you are using mixins.
 :::
 
@@ -114,5 +114,5 @@ This rule was introduced in eslint-plugin-vue v7.20.0
 
 ## :mag: Implementation
 
-- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-undef-properties.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-undef-properties.js)
+- [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-undef-properties.ts)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-undef-properties.test.ts)

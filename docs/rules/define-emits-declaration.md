@@ -35,8 +35,8 @@ const emit = defineEmits<{
 
 /* ✗ BAD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✗ BAD */
@@ -70,8 +70,8 @@ const emit = defineEmits<{
 
 /* ✓ GOOD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✓ GOOD */
@@ -92,8 +92,8 @@ const emit = defineEmits(['change', 'update'])
 
 /* ✗ BAD */
 const emit = defineEmits({
-  change: (id) => typeof id == 'number',
-  update: (value) => typeof value == 'string'
+  change: (id) => typeof id === 'number',
+  update: (value) => typeof value === 'string'
 })
 
 /* ✗ BAD */
@@ -130,4 +130,4 @@ This rule was introduced in eslint-plugin-vue v9.5.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/define-emits-declaration.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/define-emits-declaration.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/define-emits-declaration.test.ts)

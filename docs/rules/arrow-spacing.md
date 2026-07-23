@@ -10,7 +10,7 @@ since: v5.2.0
 
 > Enforce consistent spacing before and after the arrow in arrow functions in `<template>`
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 This rule is the same rule as [@stylistic/arrow-spacing] rule but it applies to the expressions in `<template>`.
 
@@ -24,7 +24,7 @@ However, if neither is found, the rule cannot be used.
 - [@stylistic/arrow-spacing]
 - [arrow-spacing]
 
-[@stylistic/arrow-spacing]: https://eslint.style/rules/default/arrow-spacing
+[@stylistic/arrow-spacing]: https://eslint.style/rules/arrow-spacing
 [arrow-spacing]: https://eslint.org/docs/rules/arrow-spacing
 
 ## :rocket: Version
@@ -34,6 +34,6 @@ This rule was introduced in eslint-plugin-vue v5.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/arrow-spacing.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/arrow-spacing.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/arrow-spacing.test.ts)
 
-<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/js/arrow-spacing)</sup>
+<sup>Taken with ❤️ [from ESLint Stylistic](https://eslint.style/rules/arrow-spacing)</sup>

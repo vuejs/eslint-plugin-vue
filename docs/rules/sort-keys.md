@@ -80,7 +80,8 @@ export default {
         "ignoreChildrenOf": ["model"],
         "ignoreGrandchildrenOf": ["computed", "directives", "inject", "props", "watch"],
         "minKeys": 2,
-        "natural": false
+        "natural": false,
+        "allowLineSeparatedGroups": false
   }]
 }
 ```
@@ -90,13 +91,14 @@ The 1st option is `"asc"` or `"desc"`.
 - `"asc"` (default) - enforce properties to be in ascending order.
 - `"desc"` - enforce properties to be in descending order.
 
-The 2nd option is an object which has 5 properties.
+The 2nd option is an object which has 6 properties.
 
 - `caseSensitive` - if `true`, enforce properties to be in case-sensitive order. Default is `true`.
 - `ignoreChildrenOf` - an array of properties to ignore the children of.  Default is `["model"]`
 - `ignoreGrandchildrenOf` - an array of properties to ignore the grandchildren sort order. Default is `["computed", "directives", "inject", "props", "watch"]`
 - `minKeys` - Specifies the minimum number of keys that an object should have in order for the object's unsorted keys to produce an error. Default is `2`, which means by default all objects with unsorted keys will result in lint errors.
 - `natural` - if `true`, enforce properties to be in natural order. Default is `false`. Natural Order compares strings containing combination of letters and numbers in the way a human being would sort. It basically sorts numerically, instead of sorting alphabetically. So the number 10 comes after the number 3 in Natural Sorting.
+- `allowLineSeparatedGroups` - if `true`, the rule allows to group object keys through line breaks. In other words, a blank line after a property will reset the sorting of keys. Default is `false`.
 
 While using this rule, you may disable the normal `sort-keys` rule.  This rule will apply to plain js files as well as Vue component scripts.
 
@@ -113,4 +115,4 @@ This rule was introduced in eslint-plugin-vue v6.2.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/sort-keys.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/sort-keys.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/sort-keys.test.ts)

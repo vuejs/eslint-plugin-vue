@@ -2,7 +2,7 @@
 // @ts-nocheck
 export const process = {
   env: {},
-  cwd: () => '',
+  cwd: () => '/',
   stdout: {}
 }
 if (typeof window !== 'undefined') {

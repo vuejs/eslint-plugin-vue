@@ -1,0 +1,27 @@
+[
+    {
+        "type": "type",
+        "name": "foo",
+        "required": true,
+        "types": [
+            "String"
+        ]
+    },
+    {
+        "type": "type",
+        "name": "bar",
+        "required": false,
+        "types": [
+            "Number"
+        ]
+    },
+    {
+        "type": "type",
+        "name": "baz",
+        "required": false,
+        "types": [
+            "String",
+            "Number"
+        ]
+    }
+]

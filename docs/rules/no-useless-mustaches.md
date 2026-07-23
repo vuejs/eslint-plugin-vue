@@ -10,11 +10,11 @@ since: v7.0.0
 
 > disallow unnecessary mustache interpolations
 
-- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
+- :wrench: The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fix-problems) can automatically fix some of the problems reported by this rule.
 
 ## :book: Rule Details
 
-This rule reports mustache interpolation with a string literal value.  
+This rule reports mustache interpolation with a string literal value.\
 The mustache interpolation with a string literal value can be changed to a static contents.
 
 <eslint-code-block fix :rules="{'vue/no-useless-mustaches': ['error']}">
@@ -92,4 +92,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-useless-mustaches.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-useless-mustaches.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-useless-mustaches.test.ts)

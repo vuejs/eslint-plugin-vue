@@ -10,12 +10,16 @@ since: v7.0.0
 
 > disallow unnecessary `<template>`
 
-- :gear: This rule is included in all of `"plugin:vue/vue3-recommended"`, `*.configs["flat/recommended"]`, `"plugin:vue/recommended"` and `*.configs["flat/vue2-recommended"]`.
+- :gear: This rule is included in the following preset configs:
+  - `*.configs["flat/recommended"]`
+  - `*.configs["flat/vue2-recommended"]`
+  - `"plugin:vue/recommended"`
+  - `"plugin:vue/vue2-recommended"`
 
 ## :book: Rule Details
 
-This rule aims to eliminate unnecessary and potentially confusing `<template>`.  
-In Vue.js 2.x, the `<template>` elements that have no specific directives have no effect.  
+This rule aims to eliminate unnecessary and potentially confusing `<template>`.\
+In Vue.js 2.x, the `<template>` elements that have no specific directives have no effect.\
 In Vue.js 3.x, the `<template>` elements that have no specific directives render the `<template>` elements as is, but in most cases this may not be what you intended.
 
 <eslint-code-block :rules="{'vue/no-lone-template': ['error']}">
@@ -47,7 +51,7 @@ In Vue.js 3.x, the `<template>` elements that have no specific directives render
 }
 ```
 
-- `ignoreAccessible` ... If `true`, ignore accessible `<template>` elements. default `false`.  
+- `ignoreAccessible` ... If `true`, ignore accessible `<template>` elements. default `false`.\
   Note: this option is useless if you are using Vue.js 2.x.
 
 ### `"ignoreAccessible": true`
@@ -86,4 +90,4 @@ This rule was introduced in eslint-plugin-vue v7.0.0
 ## :mag: Implementation
 
 - [Rule source](https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-lone-template.js)
-- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-lone-template.js)
+- [Test source](https://github.com/vuejs/eslint-plugin-vue/blob/master/tests/lib/rules/no-lone-template.test.ts)

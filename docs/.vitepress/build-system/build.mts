@@ -3,27 +3,55 @@
  */
 import esbuild from 'esbuild'
 import path from 'pathe'
-import fs from 'fs'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 build(
-  path.join(dirname, './src/eslint.mjs'),
-  path.join(dirname, './shim/eslint.mjs'),
-  ['path', 'assert', 'util', 'esquery']
+  path.join(
+    dirname,
+    '../../../node_modules/@typescript-eslint/parser/dist/index.js'
+  ),
+  path.join(dirname, './shim/@typescript-eslint/parser.mjs'),
+  [
+    'node:util',
+    'node:path',
+    'node:fs',
+    'semver',
+    'fast-glob',
+    'tinyglobby',
+    'debug'
+  ]
 )
+
 build(
-  path.join(dirname, '../../../node_modules/assert'),
-  path.join(dirname, './shim/assert.mjs'),
-  ['path']
+  path.join(dirname, '../../../node_modules/vue-eslint-parser/dist/index.cjs'),
+  path.join(dirname, './shim/vue-eslint-parser.mjs'),
+  [
+    'node:path',
+    'node:assert',
+    'node:module',
+    'node:events',
+    'node:fs',
+    'debug',
+    'semver',
+    'esquery',
+    'eslint'
+  ]
 )
 
 function build(input: string, out: string, injects: string[] = []) {
   // eslint-disable-next-line no-console -- ignore
   console.log(`build@ ${input}`)
-  let code = bundle(input, injects)
-  code = transform(code, injects)
+  const normalizedInjects = [
+    ...injects,
+    ...injects
+      .filter((inject) => inject.startsWith('node:'))
+      .map((inject) => inject.replace(/^node:/u, ''))
+  ]
+  let code = bundle(input, normalizedInjects)
+  code = transform(code, normalizedInjects)
   fs.mkdirSync(path.dirname(out), { recursive: true })
   fs.writeFileSync(out, code, 'utf8')
 }
@@ -38,7 +66,7 @@ function bundle(entryPoint: string, externals: string[]) {
     inject: [path.join(dirname, './src/process-shim.mjs')]
   })
 
-  return `${result.outputFiles[0].text}`
+  return result.outputFiles[0].text
 }
 
 function transform(code: string, injects: string[]) {
@@ -47,11 +75,13 @@ function transform(code: string, injects: string[]) {
 ${injects
   .map(
     (inject) =>
-      `import $inject_${inject.replace(/-/gu, '_')}$ from '${inject}';`
+      `import $inject_${inject.replaceAll(/[\-:]/gu, '_')}$ from '${inject}';`
   )
   .join('\n')}
 const $_injects_$ = {${injects
-    .map((inject) => `${inject.replace(/-/gu, '_')}:$inject_${inject}$`)
+    .map(
+      (inject) => `"${inject}":$inject_${inject.replaceAll(/[\-:]/gu, '_')}$`
+    )
     .join(',\n')}};
 function require(module, ...args) {
   return $_injects_$[module] || {}
