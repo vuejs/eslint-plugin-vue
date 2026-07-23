@@ -6,13 +6,13 @@ import domEvents from '../utils/dom-events.json' with { type: 'json' }
 import { findVariable } from '@eslint-community/eslint-utils'
 import utils, {
   type ComponentEmit,
-  type VueObjectData
+  type VueObjectData,
+  type VueObjectType
 } from '../utils/index.js'
 import { type NameWithLoc } from './require-explicit-emits.ts'
-import { type Rule } from 'eslint'
 
 interface VueTemplateDefineData {
-  type: 'export' | 'mark' | 'definition' | 'setup'
+  type: VueObjectType | 'setup'
   define: ObjectExpression | Program
   defineEmits?: CallExpression
 }
@@ -55,7 +55,8 @@ export default {
     docs: {
       description:
         'disallow the use of event names that collide with native web event names',
-      url: 'https://eslint.vuejs.org/rules/no-shadow-native-events.html'
+      url: 'https://eslint.vuejs.org/rules/no-shadow-native-events.html',
+      categories: undefined
     },
     schema: [],
     messages: {
@@ -165,6 +166,129 @@ export default {
       }
     }
 
+    const scriptSetupVisitor = utils.defineScriptSetupVisitor(context, {
+      onDefineEmitsEnter: (node, emits) => {
+        verifyEmitDeclaration(emits)
+        if (vueTemplateDefineData?.type === 'setup') {
+          vueTemplateDefineData.defineEmits = node
+        }
+
+        if (
+          node.parent?.type !== 'VariableDeclarator' ||
+          node.parent.init !== node
+        ) {
+          return
+        }
+
+        const emitParam = node.parent.id
+        const variable =
+          emitParam.type === 'Identifier'
+            ? findVariable(utils.getScope(context, emitParam), emitParam)
+            : null
+        if (!variable) {
+          return
+        }
+
+        const emitReferenceIds = new Set<Identifier>()
+        for (const reference of variable.references) {
+          if (!reference.isRead()) {
+            continue
+          }
+
+          emitReferenceIds.add(reference.identifier)
+        }
+        setupContexts.set(programNode, {
+          contextReferenceIds: new Set(),
+          emitReferenceIds
+        })
+      },
+      ...callVisitor
+    })
+
+    const vueVisitor = utils.defineVueVisitor(context, {
+      onSetupFunctionEnter(node, { node: vueNode }) {
+        const contextParam = node.params[1]
+        if (!contextParam) {
+          // no arguments
+          return
+        }
+        if (contextParam.type === 'RestElement') {
+          // cannot check
+          return
+        }
+        if (contextParam.type === 'ArrayPattern') {
+          // cannot check
+          return
+        }
+        const contextReferenceIds = new Set<Identifier>()
+        const emitReferenceIds = new Set<Identifier>()
+        if (contextParam.type === 'ObjectPattern') {
+          const emitProperty = utils.findAssignmentProperty(
+            contextParam,
+            'emit'
+          )
+          if (!emitProperty) {
+            return
+          }
+          const emitParam = emitProperty.value
+          // `setup(props, {emit})`
+          const variable =
+            emitParam.type === 'Identifier'
+              ? findVariable(utils.getScope(context, emitParam), emitParam)
+              : null
+          if (!variable) {
+            return
+          }
+          for (const reference of variable.references) {
+            if (!reference.isRead()) {
+              continue
+            }
+
+            emitReferenceIds.add(reference.identifier)
+          }
+        } else if (contextParam.type === 'Identifier') {
+          // `setup(props, context)`
+          const variable = findVariable(
+            utils.getScope(context, contextParam),
+            contextParam
+          )
+          if (!variable) {
+            return
+          }
+          for (const reference of variable.references) {
+            if (!reference.isRead()) {
+              continue
+            }
+
+            contextReferenceIds.add(reference.identifier)
+          }
+        }
+        setupContexts.set(vueNode, {
+          contextReferenceIds,
+          emitReferenceIds
+        })
+      },
+      onVueObjectEnter(node) {
+        const emits = utils.getComponentEmitsFromOptions(node)
+        verifyEmitDeclaration(emits)
+      },
+      onVueObjectExit(node, { type }) {
+        if (
+          (!vueTemplateDefineData ||
+            (vueTemplateDefineData.type !== 'export' &&
+              vueTemplateDefineData.type !== 'setup')) &&
+          ['mark', 'export', 'definition'].includes(type)
+        ) {
+          vueTemplateDefineData = {
+            type,
+            define: node
+          }
+        }
+        setupContexts.delete(node)
+      },
+      ...callVisitor
+    })
+
     return utils.compositingVisitors(
       utils.defineTemplateBodyVisitor(
         context,
@@ -191,133 +315,8 @@ export default {
             }
           }
         },
-        utils.compositingVisitors(
-          utils.defineScriptSetupVisitor(context, {
-            onDefineEmitsEnter: (node, emits) => {
-              verifyEmitDeclaration(emits)
-              if (vueTemplateDefineData?.type === 'setup') {
-                vueTemplateDefineData.defineEmits = node
-              }
-
-              if (
-                node.parent?.type !== 'VariableDeclarator' ||
-                node.parent.init !== node
-              ) {
-                return
-              }
-
-              const emitParam = node.parent.id
-              const variable =
-                emitParam.type === 'Identifier'
-                  ? findVariable(utils.getScope(context, emitParam), emitParam)
-                  : null
-              if (!variable) {
-                return
-              }
-
-              const emitReferenceIds = new Set<Identifier>()
-              for (const reference of variable.references) {
-                if (!reference.isRead()) {
-                  continue
-                }
-
-                emitReferenceIds.add(reference.identifier)
-              }
-              setupContexts.set(programNode, {
-                contextReferenceIds: new Set(),
-                emitReferenceIds
-              })
-            },
-            ...callVisitor
-          }),
-          utils.defineVueVisitor(context, {
-            onSetupFunctionEnter(node, { node: vueNode }) {
-              const contextParam = node.params[1]
-              if (!contextParam) {
-                // no arguments
-                return
-              }
-              if (contextParam.type === 'RestElement') {
-                // cannot check
-                return
-              }
-              if (contextParam.type === 'ArrayPattern') {
-                // cannot check
-                return
-              }
-              const contextReferenceIds = new Set<Identifier>()
-              const emitReferenceIds = new Set<Identifier>()
-              if (contextParam.type === 'ObjectPattern') {
-                const emitProperty = utils.findAssignmentProperty(
-                  contextParam,
-                  'emit'
-                )
-                if (!emitProperty) {
-                  return
-                }
-                const emitParam = emitProperty.value
-                // `setup(props, {emit})`
-                const variable =
-                  emitParam.type === 'Identifier'
-                    ? findVariable(
-                        utils.getScope(context, emitParam),
-                        emitParam
-                      )
-                    : null
-                if (!variable) {
-                  return
-                }
-                for (const reference of variable.references) {
-                  if (!reference.isRead()) {
-                    continue
-                  }
-
-                  emitReferenceIds.add(reference.identifier)
-                }
-              } else if (contextParam.type === 'Identifier') {
-                // `setup(props, context)`
-                const variable = findVariable(
-                  utils.getScope(context, contextParam),
-                  contextParam
-                )
-                if (!variable) {
-                  return
-                }
-                for (const reference of variable.references) {
-                  if (!reference.isRead()) {
-                    continue
-                  }
-
-                  contextReferenceIds.add(reference.identifier)
-                }
-              }
-              setupContexts.set(vueNode, {
-                contextReferenceIds,
-                emitReferenceIds
-              })
-            },
-            onVueObjectEnter(node) {
-              const emits = utils.getComponentEmitsFromOptions(node)
-              verifyEmitDeclaration(emits)
-            },
-            onVueObjectExit(node, { type }) {
-              if (
-                (!vueTemplateDefineData ||
-                  (vueTemplateDefineData.type !== 'export' &&
-                    vueTemplateDefineData.type !== 'setup')) &&
-                (type === 'mark' || type === 'export' || type === 'definition')
-              ) {
-                vueTemplateDefineData = {
-                  type,
-                  define: node
-                }
-              }
-              setupContexts.delete(node)
-            },
-            ...callVisitor
-          })
-        )
+        utils.compositingVisitors(scriptSetupVisitor, vueVisitor)
       )
     )
   }
-} satisfies Rule.RuleModule
+}

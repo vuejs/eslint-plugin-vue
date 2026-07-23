@@ -255,7 +255,7 @@ For example:
 | [vue/no-restricted-v-on] | disallow specific argument in `v-on` |  | :hammer: |
 | [vue/no-root-v-if] | disallow `v-if` directives on root element |  | :hammer: |
 | [vue/no-setup-props-reactivity-loss] | disallow usages that lose the reactivity of `props` passed to `setup` |  | :hammer: |
-| [vue/no-shadow-native-events](./no-shadow-native-events.md) | disallow the use of event names that collide with native web event names |  | :warning: |
+| [vue/no-shadow-native-events] | disallow the use of event names that collide with native web event names |  | :warning: |
 | [vue/no-static-inline-styles] | disallow static inline `style` attributes |  | :hammer: |
 | [vue/no-template-target-blank] | disallow target="_blank" attribute without rel="noopener noreferrer" | :bulb: | :warning: |
 | [vue/no-this-in-before-route-enter] | disallow `this` usage in a `beforeRouteEnter` method |  | :warning: |
@@ -516,6 +516,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/no-restricted-v-on]: ./no-restricted-v-on.md
 [vue/no-root-v-if]: ./no-root-v-if.md
 [vue/no-setup-props-reactivity-loss]: ./no-setup-props-reactivity-loss.md
+[vue/no-shadow-native-events]: ./no-shadow-native-events.md
 [vue/no-shared-component-data]: ./no-shared-component-data.md
 [vue/no-side-effects-in-computed-properties]: ./no-side-effects-in-computed-properties.md
 [vue/no-spaces-around-equal-signs-in-attribute]: ./no-spaces-around-equal-signs-in-attribute.md
