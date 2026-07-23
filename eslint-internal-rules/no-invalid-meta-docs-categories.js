@@ -3,8 +3,6 @@
  * @author Vitor Balocco
  */
 
-'use strict'
-
 /**
  * Gets the property of the Object node passed in that has the name specified.
  *
@@ -105,7 +103,7 @@ function checkMetaValidity(context, exportsNode) {
   }
 }
 
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {

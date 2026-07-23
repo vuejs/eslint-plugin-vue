@@ -3,17 +3,19 @@
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
 This script updates `lib/plugin.js` file from rule's meta data.
 */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const { ESLint } = require('eslint')
-const rules = require('./lib/rules')
-const { camelCase } = require('../lib/utils/casing.ts')
+import fs from 'node:fs'
+import path from 'node:path'
+import * as ESLintModule from 'eslint'
+import rules from './lib/rules.js'
+import { camelCase } from '../lib/utils/casing.ts'
+const __dirname = import.meta.dirname
+
+const { ESLint } = ESLintModule
 
 // Update files.
 const filePath = path.resolve(__dirname, '../lib/plugin.ts')
@@ -48,7 +50,7 @@ fs.writeFileSync(filePath, content)
 async function format() {
   const linter = new ESLint({ fix: true })
   const report = await linter.lintFiles([filePath])
-  ESLint.outputFixes(report)
+  await ESLint.outputFixes(report)
 }
 
-format()
+await format()

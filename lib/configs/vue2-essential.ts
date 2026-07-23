@@ -3,8 +3,10 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+import { fileURLToPath } from 'node:url'
+
 export default {
-  extends: require.resolve('./base'),
+  extends: fileURLToPath(new URL('base.js', import.meta.url)),
   rules: {
     'vue/multi-word-component-names': 'error',
     'vue/no-arrow-functions-in-watch': 'error',
