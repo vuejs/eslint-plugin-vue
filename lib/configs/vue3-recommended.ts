@@ -3,8 +3,12 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+import { fileURLToPath } from 'node:url'
+
 export default {
-  extends: require.resolve('./vue3-strongly-recommended'),
+  extends: fileURLToPath(
+    new URL('vue3-strongly-recommended.js', import.meta.url)
+  ),
   rules: {
     'vue/attributes-order': 'warn',
     'vue/block-order': 'warn',

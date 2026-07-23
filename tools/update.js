@@ -1,13 +1,15 @@
+/* eslint-disable unicorn/no-top-level-side-effects -- CLI entry point. */
 /**
  * @author Toru Nagashima
  * @copyright 2017 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
-require('./update-no-layout-rules-config')
-require('./update-lib-configs')
-require('./update-lib-flat-configs')
-require('./update-lib-plugin')
-require('./update-docs')
-require('./update-docs-rules-index')
+await import('./update-no-layout-rules-config.js')
+await import('./update-lib-configs.js')
+await import('./update-lib-flat-configs.js')
+await import('./update-lib-plugin.js')
+await import('./update-docs.js')
+await import('./update-docs-rules-index.js')
+
+export {}

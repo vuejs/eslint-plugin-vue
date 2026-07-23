@@ -1,5 +1,6 @@
-const plugin = require('eslint-plugin-vue')
-module.exports = [
+import plugin from 'eslint-plugin-vue'
+
+export default [
   ...plugin.configs['flat/base'],
   {
     rules: {

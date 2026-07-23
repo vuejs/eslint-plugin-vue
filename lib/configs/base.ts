@@ -3,6 +3,8 @@
  * This file has been automatically generated,
  * in order to update its content execute "npm run update"
  */
+import { fileURLToPath } from 'node:url'
+
 export default {
   parserOptions: {
     ecmaVersion: 'latest',
@@ -16,7 +18,7 @@ export default {
   overrides: [
     {
       files: '*.vue',
-      parser: require.resolve('vue-eslint-parser')
+      parser: fileURLToPath(import.meta.resolve('vue-eslint-parser'))
     }
   ]
 }
