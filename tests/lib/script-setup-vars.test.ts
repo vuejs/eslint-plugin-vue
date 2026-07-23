@@ -1,8 +1,9 @@
 import semver from 'semver'
 import { RuleTester, ESLint } from '../eslint-compat'
-import { getCoreRule } from '../../lib/utils'
+import utils from '../../lib/utils'
 import vueEslintParser from 'vue-eslint-parser'
 
+const { getCoreRule } = utils
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')!
 const ruleNoUndef = getCoreRule('no-undef')!
 

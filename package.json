@@ -2,8 +2,16 @@
   "name": "eslint-plugin-vue",
   "version": "10.10.0",
   "description": "Official ESLint plugin for Vue.js",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "new": "node tools/new-rule.js",
     "start": "npm run test:base -- --watch",
@@ -56,7 +64,7 @@
     "url": "https://github.com/vuejs/eslint-plugin-vue/issues"
   },
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
   },
   "peerDependencies": {
     "@stylistic/eslint-plugin": "^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0",

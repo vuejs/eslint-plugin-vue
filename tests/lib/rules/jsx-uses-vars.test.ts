@@ -5,8 +5,9 @@
 import semver from 'semver'
 import { RuleTester, ESLint } from '../../eslint-compat'
 import rule from '../../../lib/rules/jsx-uses-vars'
-import { getCoreRule } from '../../../lib/utils'
+import utils from '../../../lib/utils'
 
+const { getCoreRule } = utils
 const ruleNoUnusedVars = getCoreRule('no-unused-vars')!
 
 const ruleTester = new RuleTester({

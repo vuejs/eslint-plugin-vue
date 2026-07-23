@@ -16,13 +16,11 @@ import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
 import rules from './tools/lib/rules.js'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 // @ts-check
 /// <reference path="./eslint-typegen.d.ts" />
 import typegen from 'eslint-typegen'
 
-const dirname = path.dirname(fileURLToPath(import.meta.url))
 const MD_BASE_LINKS = {
   'vue-eslint-parser': 'https://github.com/vuejs/vue-eslint-parser',
   '@typescript-eslint/parser': 'https://typescript-eslint.io/packages/parser',
@@ -43,7 +41,7 @@ const MD_LINKS_FOR_DOCS = {
   ...Object.fromEntries(
     rules.map((rule) => [
       rule.ruleId,
-      path.resolve(dirname, './docs/rules', `./${rule.name}.md`)
+      path.resolve(import.meta.dirname, './docs/rules', `./${rule.name}.md`)
     ])
   ),
   ...MD_BASE_LINKS
@@ -93,8 +91,7 @@ export default typegen([
       'unicorn/no-useless-undefined': 'off',
       'unicorn/prefer-global-this': 'off',
       'unicorn/prefer-iterator-to-array': 'off', // `Iterator#toArray()` requires Node.js v22
-      'unicorn/prefer-module': 'off',
-      'unicorn/prefer-top-level-await': 'off' // only available in ESM modules
+      'unicorn/prefer-module': 'off'
     }
   }),
 
@@ -116,7 +113,7 @@ export default typegen([
     files: ['**/*.{js,mjs,ts,mts}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'commonjs',
+      sourceType: 'module',
       globals: {
         ...globals.es6,
         ...globals.node,

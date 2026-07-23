@@ -4,8 +4,10 @@
  */
 import type { Linter as ESLintLinter } from 'eslint'
 import { Linter } from '../eslint-compat'
-import { rules } from '../..'
+import plugin from '../..'
 import assert from 'node:assert'
+
+const { rules } = plugin
 
 describe("Don't crash even if without vue-eslint-parser.", () => {
   const code = '<template><div>TEST</div></template>'

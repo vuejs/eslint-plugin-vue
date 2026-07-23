@@ -6,8 +6,9 @@ import path from 'node:path'
 import tsParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
 import { Linter } from '../../../../eslint-compat'
-import { defineScriptSetupVisitor } from '../../../../../lib/utils/index'
+import utils from '../../../../../lib/utils/index'
 
+const { defineScriptSetupVisitor } = utils
 export const FIXTURES_ROOT = path.resolve(
   __dirname,
   '../../../../fixtures/utils/ts-utils'
