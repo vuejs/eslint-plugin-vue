@@ -60,8 +60,7 @@ export default {
     },
     schema: [],
     messages: {
-      violation:
-        'Use a different emit name to avoid shadowing the native event with name "{{ name }}". Consider an emit name which communicates the users intent, if applicable.'
+      violation: 'Avoid shadowing the native event "{{ name }}".'
     }
   },
   create(context: RuleContext) {

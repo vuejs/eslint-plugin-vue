@@ -15,12 +15,14 @@ description: disallow the use of event names that collide with native web event 
 
 This rule reports emits that shadow native HTML events.
 
-Using native event names for emits can lead to incorrect assumptions about an emit and cause confusion. This is caused by Vue emits behaving differently from native events. E.g. :
+Using native event names for emits can lead to incorrect assumptions about an emit and cause confusion. This is caused by Vue emits behaving differently from native events, e.g.:
 
 - The payload of an emit can be chosen arbitrarily
 - Vue emits do not bubble, while most native events do
 - [Event modifiers](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers) only work on HTML events or when the original event is re-emitted as emit payload.
 - When the native event is re-emitted, the `event.target` might not match the actual event-listeners location.
+
+Thus, you should avoid using native event names for Vue emits to avoid confusion, and consider emit names which communicate the users intent, if applicable.
 
 The rule is mostly aimed at developers of component libraries.
 
@@ -48,7 +50,7 @@ Nothing.
 
 ## :books: Further Reading
 
-- [Components In-Depth - Events  / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
+- [Components In-Depth - Events / Component Events](https://vuejs.org/guide/components/events.html#event-arguments)
 - [Vue RFCs - 0030-emits-option](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
 
 ## :mag: Implementation
