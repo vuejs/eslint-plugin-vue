@@ -669,7 +669,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 28,
           messageId: 'violation',
           endLine: 3,
-          endColumn: 35
+          endColumn: 35,
+          data: { name: 'click' }
         }
       ]
     },
@@ -691,7 +692,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 17,
           messageId: 'violation',
           endLine: 7,
-          endColumn: 24
+          endColumn: 24,
+          data: { name: 'click' }
         }
       ]
     },
@@ -713,7 +715,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 17,
           messageId: 'violation',
           endLine: 7,
-          endColumn: 26
+          endColumn: 26,
+          data: { name: 'click' }
         }
       ]
     },
@@ -736,7 +739,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 24,
           messageId: 'violation',
           endLine: 6,
-          endColumn: 31
+          endColumn: 31,
+          data: { name: 'click' }
         }
       ]
     },
@@ -761,7 +765,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 22,
           messageId: 'violation',
           endLine: 8,
-          endColumn: 29
+          endColumn: 29,
+          data: { name: 'click' }
         }
       ]
     },
@@ -782,7 +787,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 24,
           messageId: 'violation',
           endLine: 5,
-          endColumn: 31
+          endColumn: 31,
+          data: { name: 'click' }
         }
       ]
     },
@@ -803,7 +809,8 @@ tester.run('no-shadow-native-events', rule, {
           column: 16,
           messageId: 'violation',
           endLine: 5,
-          endColumn: 23
+          endColumn: 23,
+          data: { name: 'click' }
         }
       ]
     },
@@ -825,14 +832,16 @@ tester.run('no-shadow-native-events', rule, {
           column: 16,
           messageId: 'violation',
           endLine: 5,
-          endColumn: 23
+          endColumn: 23,
+          data: { name: 'click' }
         },
         {
           line: 6,
           column: 16,
           messageId: 'violation',
           endLine: 6,
-          endColumn: 25
+          endColumn: 25,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -857,14 +866,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 7,
           column: 25,
           endLine: 7,
-          endColumn: 32
+          endColumn: 32,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 8,
           column: 28,
           endLine: 8,
-          endColumn: 37
+          endColumn: 37,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -886,14 +897,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 5,
           column: 21,
           endLine: 5,
-          endColumn: 28
+          endColumn: 28,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 6,
           column: 24,
           endLine: 6,
-          endColumn: 33
+          endColumn: 33,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -914,14 +927,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35
+          endColumn: 35,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 6,
           column: 20,
           endLine: 6,
-          endColumn: 27
+          endColumn: 27,
+          data: { name: 'click' }
         }
       ]
     },
@@ -946,14 +961,16 @@ tester.run('no-shadow-native-events', rule, {
           column: 28,
           messageId: 'violation',
           endLine: 3,
-          endColumn: 35
+          endColumn: 35,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 7,
           column: 9,
           endLine: 7,
-          endColumn: 27
+          endColumn: 27,
+          data: { name: 'click' }
         }
       ]
     },
@@ -976,14 +993,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35
+          endColumn: 35,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 6,
           column: 19,
           endLine: 6,
-          endColumn: 39
+          endColumn: 39,
+          data: { name: 'click' }
         }
       ]
     },
@@ -1002,7 +1021,8 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35
+          endColumn: 35,
+          data: { name: 'click' }
         }
       ]
     },
@@ -1024,21 +1044,24 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 32,
           endLine: 3,
-          endColumn: 52
+          endColumn: 52,
+          data: { name: 'click' }
         },
         {
           line: 4,
           column: 12,
           messageId: 'violation',
           endLine: 4,
-          endColumn: 19
+          endColumn: 19,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21
+          endColumn: 21,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -1057,21 +1080,24 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 33,
           endLine: 3,
-          endColumn: 40
+          endColumn: 40,
+          data: { name: 'click' }
         },
         {
           line: 4,
           column: 12,
           messageId: 'violation',
           endLine: 4,
-          endColumn: 19
+          endColumn: 19,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21
+          endColumn: 21,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -1094,14 +1120,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 33,
           endLine: 3,
-          endColumn: 42
+          endColumn: 42,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21
+          endColumn: 21,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -1125,21 +1153,24 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 21,
           endLine: 3,
-          endColumn: 30
+          endColumn: 30,
+          data: { name: 'click' }
         },
         {
           line: 5,
           column: 12,
           messageId: 'violation',
           endLine: 5,
-          endColumn: 19
+          endColumn: 19,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 6,
           column: 12,
           endLine: 6,
-          endColumn: 21
+          endColumn: 21,
+          data: { name: 'keydown' }
         }
       ]
     },
@@ -1155,14 +1186,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 4,
           column: 32,
           endLine: 4,
-          endColumn: 37
+          endColumn: 37,
+          data: { name: 'click' }
         },
         {
           messageId: 'violation',
           line: 4,
           column: 32,
           endLine: 4,
-          endColumn: 37
+          endColumn: 37,
+          data: { name: 'keydown' }
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -1186,14 +1219,16 @@ tester.run('no-shadow-native-events', rule, {
           line: 3,
           column: 27,
           endLine: 3,
-          endColumn: 36
+          endColumn: 36,
+          data: { name: 'keydown' }
         },
         {
           messageId: 'violation',
           line: 6,
           column: 32,
           endLine: 6,
-          endColumn: 52
+          endColumn: 52,
+          data: { name: 'click' }
         }
       ]
     }
