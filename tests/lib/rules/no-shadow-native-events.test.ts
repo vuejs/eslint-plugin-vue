@@ -910,6 +910,13 @@ tester.run('no-shadow-native-events', rule, {
       errors: [
         {
           messageId: 'violation',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 35
+        },
+        {
+          messageId: 'violation',
           line: 6,
           column: 20,
           endLine: 6,
@@ -934,6 +941,13 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
+          line: 3,
+          column: 28,
+          messageId: 'violation',
+          endLine: 3,
+          endColumn: 35
+        },
+        {
           messageId: 'violation',
           line: 7,
           column: 9,
@@ -956,6 +970,13 @@ tester.run('no-shadow-native-events', rule, {
         parserOptions: { parser: require.resolve('@typescript-eslint/parser') }
       },
       errors: [
+        {
+          messageId: 'violation',
+          line: 3,
+          column: 28,
+          endLine: 3,
+          endColumn: 35
+        },
         {
           messageId: 'violation',
           line: 6,
@@ -1005,6 +1026,13 @@ tester.run('no-shadow-native-events', rule, {
           endColumn: 52
         },
         {
+          line: 4,
+          column: 12,
+          messageId: 'violation',
+          endLine: 4,
+          endColumn: 19
+        },
+        {
           messageId: 'violation',
           line: 5,
           column: 12,
@@ -1029,6 +1057,13 @@ tester.run('no-shadow-native-events', rule, {
           column: 33,
           endLine: 3,
           endColumn: 40
+        },
+        {
+          line: 4,
+          column: 12,
+          messageId: 'violation',
+          endLine: 4,
+          endColumn: 19
         },
         {
           messageId: 'violation',
@@ -1090,6 +1125,13 @@ tester.run('no-shadow-native-events', rule, {
           column: 21,
           endLine: 3,
           endColumn: 30
+        },
+        {
+          line: 5,
+          column: 12,
+          messageId: 'violation',
+          endLine: 5,
+          endColumn: 19
         },
         {
           messageId: 'violation',

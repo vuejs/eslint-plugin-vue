@@ -72,11 +72,6 @@ export default {
       }
     >()
 
-    /**
-     * Tracks violating emit definitions, so that calls of this emit are not reported additionally.
-     *  */
-    const definedAndReportedEmits = new Set<string>()
-
     let vueTemplateDefineData: VueTemplateDefineData | null = null
 
     const programNode = context.sourceCode.ast
@@ -93,7 +88,7 @@ export default {
      */
     function verifyEmit(nameWithLoc: NameWithLoc) {
       const name = nameWithLoc.name.toLowerCase()
-      if (!domEvents.includes(name) || definedAndReportedEmits.has(name)) {
+      if (!domEvents.includes(name)) {
         return
       }
       context.report({
@@ -114,7 +109,6 @@ export default {
           continue
         }
 
-        definedAndReportedEmits.add(emitName)
         context.report({
           messageId: 'violation',
           data: { name: emitName },
