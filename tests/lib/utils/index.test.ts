@@ -1,5 +1,8 @@
 import * as espree from 'espree'
-import {
+import utils from '../../../lib/utils'
+import assert from 'node:assert'
+
+const {
   editDistance,
   getComponentPropsFromOptions,
   getComputedProperties,
@@ -7,8 +10,7 @@ import {
   getRegisteredComponents,
   getStaticPropertyName,
   getStringLiteralValue
-} from '../../../lib/utils'
-import assert from 'node:assert'
+} = utils
 
 function parse<T extends Expression>(code: string): T {
   return (

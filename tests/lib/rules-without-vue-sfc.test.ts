@@ -5,7 +5,9 @@
 import type { Linter as ESLintLinter } from 'eslint'
 import { Linter } from '../eslint-compat'
 import parser from 'vue-eslint-parser'
-import { rules } from '../..'
+import plugin from '../..'
+
+const { rules } = plugin
 
 describe("Don't crash even if without vue SFC.", () => {
   const code = 'var a = 1'

@@ -1,7 +1,8 @@
 import { RuleTester } from '../../../eslint-compat'
-import { wrapCoreRule } from '../../../../lib/utils/index'
+import utils from '../../../../lib/utils/index'
 import vueEslintParser from 'vue-eslint-parser'
 
+const { wrapCoreRule } = utils
 const rule = wrapCoreRule('foo')
 
 const tester = new RuleTester({

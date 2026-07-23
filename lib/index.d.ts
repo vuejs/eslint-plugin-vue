@@ -41,4 +41,4 @@ declare const vue: {
   }
 }
 
-export = vue
+export default vue

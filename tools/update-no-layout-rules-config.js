@@ -3,16 +3,16 @@
  * @copyright 2018 Michał Sajnóg. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-'use strict'
 
 /*
  * This script updates `lib/configs/prettier.js`,
  * and disables all layout rules
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const rules = require('./lib/rules')
+import fs from 'node:fs'
+import path from 'node:path'
+import rules from './lib/rules.js'
+const __dirname = import.meta.dirname
 
 const rulesToDisable = rules.filter(({ meta }) => meta.type === 'layout')
 
