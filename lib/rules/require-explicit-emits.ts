@@ -40,7 +40,7 @@ const FIX_EMITS_AFTER_OPTIONS = new Set([
   'errorCaptured'
 ])
 
-interface NameWithLoc {
+export interface NameWithLoc {
   name: string
   loc: SourceLocation
   range: Range
