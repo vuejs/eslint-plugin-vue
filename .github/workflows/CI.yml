@@ -87,7 +87,7 @@ jobs:
         with:
           node-version: 22
       - name: Install Packages
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Install ESLint v8
         run: npm install --save-dev eslint@8 espree@10 eslint-visitor-keys@4 --force
       - name: Restore dist cache
@@ -111,7 +111,7 @@ jobs:
         with:
           node-version: 22
       - name: Install Packages
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Install ESLint v9
         run: npm install --save-dev eslint@9 espree@10 eslint-visitor-keys@4 --force
       - name: Restore dist cache
