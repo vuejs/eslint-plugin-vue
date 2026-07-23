@@ -2,24 +2,25 @@
  * @author Jonathan Carle
  * See LICENSE file in root directory for full license.
  */
-'use strict'
+import domEvents from '../utils/dom-events.json' with { type: 'json' }
+import { findVariable } from '@eslint-community/eslint-utils'
+import utils, {
+  type ComponentEmit,
+  type VueObjectData
+} from '../utils/index.js'
+import { type NameWithLoc } from './require-explicit-emits.ts'
+import { type Rule } from 'eslint'
 
-const utils = require('../utils')
-const domEvents = require('../utils/dom-events.json')
-const { findVariable } = require('@eslint-community/eslint-utils')
-/**
- * @typedef {import('../utils').ComponentEmit} ComponentEmit
- * @typedef {import('../utils').ComponentProp} ComponentProp
- * @typedef {import('../utils').VueObjectData} VueObjectData
- * @typedef {import('./require-explicit-emits.js').NameWithLoc} NameWithLoc
- */
+interface VueTemplateDefineData {
+  type: 'export' | 'mark' | 'definition' | 'setup'
+  define: ObjectExpression | Program
+  defineEmits?: CallExpression
+}
 
 /**
  * Get the name param node from the given CallExpression
- * @param {CallExpression} node CallExpression
- * @returns { NameWithLoc | null }
  */
-function getNameParamNode(node) {
+function getNameParamNode(node: CallExpression) {
   const nameLiteralNode = node.arguments[0]
   if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
     const name = utils.getStringLiteralValue(nameLiteralNode)
@@ -34,11 +35,11 @@ function getNameParamNode(node) {
 
 /**
  * Check if the given name matches defineEmitsNode variable name
- * @param {string} name
- * @param {CallExpression | undefined} defineEmitsNode
- * @returns {boolean}
  */
-function isEmitVariableName(name, defineEmitsNode) {
+function isEmitVariableName(
+  name: string,
+  defineEmitsNode: CallExpression | undefined
+): boolean {
   const node = defineEmitsNode?.parent
 
   if (node?.type === 'VariableDeclarator' && node.id.type === 'Identifier') {
@@ -48,16 +49,12 @@ function isEmitVariableName(name, defineEmitsNode) {
   return false
 }
 
-/**
- * @type {import('eslint').Rule.RuleModule}
- */
-module.exports = {
+export default {
   meta: {
     type: 'problem',
     docs: {
       description:
         'disallow the use of event names that collide with native web event names',
-      categories: undefined,
       url: 'https://eslint.vuejs.org/rules/no-shadow-native-events.html'
     },
     schema: [],
@@ -66,25 +63,21 @@ module.exports = {
         'Use a different emit name to avoid shadowing the native event with name "{{ name }}". Consider an emit name which communicates the users intent, if applicable.'
     }
   },
-  /** @param {RuleContext} context */
-  create(context) {
-    /** @type {Map<ObjectExpression | Program, { contextReferenceIds: Set<Identifier>, emitReferenceIds: Set<Identifier> }>} */
-    const setupContexts = new Map()
+  create(context: RuleContext) {
+    const setupContexts = new Map<
+      ObjectExpression | Program,
+      {
+        contextReferenceIds: Set<Identifier>
+        emitReferenceIds: Set<Identifier>
+      }
+    >()
 
     /**
      * Tracks violating emit definitions, so that calls of this emit are not reported additionally.
-     * @type {Set<string>}
      *  */
-    const definedAndReportedEmits = new Set()
+    const definedAndReportedEmits = new Set<string>()
 
-    /**
-     * @typedef {object} VueTemplateDefineData
-     * @property {'export' | 'mark' | 'definition' | 'setup'} type
-     * @property {ObjectExpression | Program} define
-     * @property {CallExpression} [defineEmits]
-     */
-    /** @type {VueTemplateDefineData | null} */
-    let vueTemplateDefineData = null
+    let vueTemplateDefineData: VueTemplateDefineData | null = null
 
     const programNode = context.sourceCode.ast
     if (utils.isScriptSetup(context)) {
@@ -97,9 +90,8 @@ module.exports = {
 
     /**
      * Verify if an emit call violates the rule of not using a native dom event name.
-     * @param {NameWithLoc} nameWithLoc
      */
-    function verifyEmit(nameWithLoc) {
+    function verifyEmit(nameWithLoc: NameWithLoc) {
       const name = nameWithLoc.name.toLowerCase()
       if (!domEvents.includes(name) || definedAndReportedEmits.has(name)) {
         return
@@ -115,9 +107,8 @@ module.exports = {
 
     /**
      * Verify if an emit declaration violates the rule of not using a native dom event name.
-     * @param {ComponentEmit[]} emits
      */
-    const verifyEmitDeclaration = (emits) => {
+    const verifyEmitDeclaration = (emits: ComponentEmit[]) => {
       for (const { node, emitName } of emits) {
         if (!node || !emitName || !domEvents.includes(emitName.toLowerCase())) {
           continue
@@ -133,11 +124,7 @@ module.exports = {
     }
 
     const callVisitor = {
-      /**
-       * @param {CallExpression} node
-       * @param {VueObjectData} [info]
-       */
-      CallExpression(node, info) {
+      CallExpression(node: CallExpression, info?: VueObjectData) {
         const callee = utils.skipChainExpression(node.callee)
         const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
@@ -161,7 +148,7 @@ module.exports = {
           if (callee.type === 'Identifier' && emitReferenceIds.has(callee)) {
             // verify setup(props,{emit}) {emit()}
             verifyEmit(nameWithLoc)
-          } else if (emit && emit.name === 'emit') {
+          } else if (emit?.name === 'emit') {
             const memObject = utils.skipChainExpression(emit.member.object)
             if (
               memObject.type === 'Identifier' &&
@@ -174,7 +161,7 @@ module.exports = {
         }
 
         // verify $emit
-        if (emit && emit.name === '$emit') {
+        if (emit?.name === '$emit') {
           const memObject = utils.skipChainExpression(emit.member.object)
           if (utils.isThis(memObject, context)) {
             // verify this.$emit()
@@ -188,7 +175,6 @@ module.exports = {
       utils.defineTemplateBodyVisitor(
         context,
         {
-          /** @param { CallExpression } node */
           CallExpression(node) {
             const callee = utils.skipChainExpression(node.callee)
             const nameWithLoc = getNameParamNode(node)
@@ -215,16 +201,12 @@ module.exports = {
           utils.defineScriptSetupVisitor(context, {
             onDefineEmitsEnter: (node, emits) => {
               verifyEmitDeclaration(emits)
-              if (
-                vueTemplateDefineData &&
-                vueTemplateDefineData.type === 'setup'
-              ) {
+              if (vueTemplateDefineData?.type === 'setup') {
                 vueTemplateDefineData.defineEmits = node
               }
 
               if (
-                !node.parent ||
-                node.parent.type !== 'VariableDeclarator' ||
+                node.parent?.type !== 'VariableDeclarator' ||
                 node.parent.init !== node
               ) {
                 return
@@ -238,8 +220,8 @@ module.exports = {
               if (!variable) {
                 return
               }
-              /** @type {Set<Identifier>} */
-              const emitReferenceIds = new Set()
+
+              const emitReferenceIds = new Set<Identifier>()
               for (const reference of variable.references) {
                 if (!reference.isRead()) {
                   continue
@@ -269,10 +251,8 @@ module.exports = {
                 // cannot check
                 return
               }
-              /** @type {Set<Identifier>} */
-              const contextReferenceIds = new Set()
-              /** @type {Set<Identifier>} */
-              const emitReferenceIds = new Set()
+              const contextReferenceIds = new Set<Identifier>()
+              const emitReferenceIds = new Set<Identifier>()
               if (contextParam.type === 'ObjectPattern') {
                 const emitProperty = utils.findAssignmentProperty(
                   contextParam,
@@ -346,4 +326,4 @@ module.exports = {
       )
     )
   }
-}
+} satisfies Rule.RuleModule

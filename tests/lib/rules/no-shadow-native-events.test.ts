@@ -2,13 +2,9 @@
  * @author Jonathan Carle
  * See LICENSE file in root directory for full license.
  */
-'use strict'
-
-const RuleTester = require('../../eslint-compat').RuleTester
-const rule = require('../../../lib/rules/no-shadow-native-events')
-const {
-  getTypeScriptFixtureTestOptions
-} = require('../../test-utils/typescript')
+import { RuleTester } from '../../eslint-compat'
+import rule from '../../../lib/rules/no-shadow-native-events'
+import { getTypeScriptFixtureTestOptions } from '../../test-utils/typescript'
 
 const tester = new RuleTester({
   languageOptions: {
