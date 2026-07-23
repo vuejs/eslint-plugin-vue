@@ -75,7 +75,6 @@ export default typegen([
     rules: {
       'eslint-plugin/require-meta-default-options': 'off', // TODO: enable when all rules have defaultOptions
       'eslint-plugin/require-meta-docs-recommended': 'off', // use `categories` instead
-      'eslint-plugin/require-meta-languages': 'off',
       'eslint-plugin/require-meta-schema-description': 'off',
       'eslint-plugin/require-test-case-name': 'off',
 
