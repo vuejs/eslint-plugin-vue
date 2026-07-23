@@ -667,10 +667,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 3,
           column: 28,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 3,
-          endColumn: 35,
-          data: { name: 'click' }
+          endColumn: 35
         }
       ]
     },
@@ -690,10 +690,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 7,
           column: 17,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 7,
-          endColumn: 24,
-          data: { name: 'click' }
+          endColumn: 24
         }
       ]
     },
@@ -713,10 +713,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 7,
           column: 17,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 7,
-          endColumn: 26,
-          data: { name: 'click' }
+          endColumn: 26
         }
       ]
     },
@@ -737,10 +737,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 6,
           column: 24,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 6,
-          endColumn: 31,
-          data: { name: 'click' }
+          endColumn: 31
         }
       ]
     },
@@ -763,10 +763,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 8,
           column: 22,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 8,
-          endColumn: 29,
-          data: { name: 'click' }
+          endColumn: 29
         }
       ]
     },
@@ -785,10 +785,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 5,
           column: 24,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 5,
-          endColumn: 31,
-          data: { name: 'click' }
+          endColumn: 31
         }
       ]
     },
@@ -807,10 +807,10 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 5,
           column: 16,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 5,
-          endColumn: 23,
-          data: { name: 'click' }
+          endColumn: 23
         }
       ]
     },
@@ -830,18 +830,18 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 5,
           column: 16,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 5,
-          endColumn: 23,
-          data: { name: 'click' }
+          endColumn: 23
         },
         {
           line: 6,
           column: 16,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 6,
-          endColumn: 25,
-          data: { name: 'keydown' }
+          endColumn: 25
         }
       ]
     },
@@ -862,20 +862,20 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 7,
           column: 25,
           endLine: 7,
-          endColumn: 32,
-          data: { name: 'click' }
+          endColumn: 32
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 8,
           column: 28,
           endLine: 8,
-          endColumn: 37,
-          data: { name: 'keydown' }
+          endColumn: 37
         }
       ]
     },
@@ -893,20 +893,20 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 5,
           column: 21,
           endLine: 5,
-          endColumn: 28,
-          data: { name: 'click' }
+          endColumn: 28
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 6,
           column: 24,
           endLine: 6,
-          endColumn: 33,
-          data: { name: 'keydown' }
+          endColumn: 33
         }
       ]
     },
@@ -923,20 +923,20 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35,
-          data: { name: 'click' }
+          endColumn: 35
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 6,
           column: 20,
           endLine: 6,
-          endColumn: 27,
-          data: { name: 'click' }
+          endColumn: 27
         }
       ]
     },
@@ -959,18 +959,18 @@ tester.run('no-shadow-native-events', rule, {
         {
           line: 3,
           column: 28,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 3,
-          endColumn: 35,
-          data: { name: 'click' }
+          endColumn: 35
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 7,
           column: 9,
           endLine: 7,
-          endColumn: 27,
-          data: { name: 'click' }
+          endColumn: 27
         }
       ]
     },
@@ -989,20 +989,20 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35,
-          data: { name: 'click' }
+          endColumn: 35
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 6,
           column: 19,
           endLine: 6,
-          endColumn: 39,
-          data: { name: 'click' }
+          endColumn: 39
         }
       ]
     },
@@ -1017,12 +1017,12 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 28,
           endLine: 3,
-          endColumn: 35,
-          data: { name: 'click' }
+          endColumn: 35
         }
       ]
     },
@@ -1040,28 +1040,28 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 32,
           endLine: 3,
-          endColumn: 52,
-          data: { name: 'click' }
+          endColumn: 52
         },
         {
           line: 4,
           column: 12,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 4,
-          endColumn: 19,
-          data: { name: 'click' }
+          endColumn: 19
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21,
-          data: { name: 'keydown' }
+          endColumn: 21
         }
       ]
     },
@@ -1076,28 +1076,28 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 33,
           endLine: 3,
-          endColumn: 40,
-          data: { name: 'click' }
+          endColumn: 40
         },
         {
           line: 4,
           column: 12,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 4,
-          endColumn: 19,
-          data: { name: 'click' }
+          endColumn: 19
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21,
-          data: { name: 'keydown' }
+          endColumn: 21
         }
       ]
     },
@@ -1116,20 +1116,20 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 33,
           endLine: 3,
-          endColumn: 42,
-          data: { name: 'click' }
+          endColumn: 42
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 5,
           column: 12,
           endLine: 5,
-          endColumn: 21,
-          data: { name: 'keydown' }
+          endColumn: 21
         }
       ]
     },
@@ -1149,28 +1149,28 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 21,
           endLine: 3,
-          endColumn: 30,
-          data: { name: 'click' }
+          endColumn: 30
         },
         {
           line: 5,
           column: 12,
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           endLine: 5,
-          endColumn: 19,
-          data: { name: 'click' }
+          endColumn: 19
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 6,
           column: 12,
           endLine: 6,
-          endColumn: 21,
-          data: { name: 'keydown' }
+          endColumn: 21
         }
       ]
     },
@@ -1182,20 +1182,20 @@ tester.run('no-shadow-native-events', rule, {
       </script>`,
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 4,
           column: 32,
           endLine: 4,
-          endColumn: 37,
-          data: { name: 'click' }
+          endColumn: 37
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 4,
           column: 32,
           endLine: 4,
-          endColumn: 37,
-          data: { name: 'keydown' }
+          endColumn: 37
         }
       ],
       ...getTypeScriptFixtureTestOptions()
@@ -1215,20 +1215,20 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "keydown". Consider an emit name which communicates the users intent, if applicable.',
           line: 3,
           column: 27,
           endLine: 3,
-          endColumn: 36,
-          data: { name: 'keydown' }
+          endColumn: 36
         },
         {
-          messageId: 'violation',
+          message:
+            'Use a different emit name to avoid shadowing the native event with name "click". Consider an emit name which communicates the users intent, if applicable.',
           line: 6,
           column: 32,
           endLine: 6,
-          endColumn: 52,
-          data: { name: 'click' }
+          endColumn: 52
         }
       ]
     }
