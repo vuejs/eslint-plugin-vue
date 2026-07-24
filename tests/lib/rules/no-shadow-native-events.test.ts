@@ -665,9 +665,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 3,
           column: 28,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 3,
           endColumn: 35
         }
@@ -687,9 +687,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 7,
           column: 17,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 7,
           endColumn: 24
         }
@@ -709,9 +709,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 7,
           column: 17,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 7,
           endColumn: 26
         }
@@ -732,9 +732,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 6,
           column: 24,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 6,
           endColumn: 31
         }
@@ -757,9 +757,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 8,
           column: 22,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 8,
           endColumn: 29
         }
@@ -778,9 +778,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 5,
           column: 24,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 5,
           endColumn: 31
         }
@@ -799,9 +799,9 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 5,
           column: 16,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 5,
           endColumn: 23
         }
@@ -821,16 +821,16 @@ tester.run('no-shadow-native-events', rule, {
       `,
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 5,
           column: 16,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 5,
           endColumn: 23
         },
         {
+          message: 'Avoid shadowing the native event "keydown".',
           line: 6,
           column: 16,
-          message: 'Avoid shadowing the native event "keydown".',
           endLine: 6,
           endColumn: 25
         }
@@ -942,9 +942,9 @@ tester.run('no-shadow-native-events', rule, {
       },
       errors: [
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 3,
           column: 28,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 3,
           endColumn: 35
         },
@@ -1027,9 +1027,9 @@ tester.run('no-shadow-native-events', rule, {
           endColumn: 52
         },
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 4,
           column: 12,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 4,
           endColumn: 19
         },
@@ -1060,9 +1060,9 @@ tester.run('no-shadow-native-events', rule, {
           endColumn: 40
         },
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 4,
           column: 12,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 4,
           endColumn: 19
         },
@@ -1128,9 +1128,9 @@ tester.run('no-shadow-native-events', rule, {
           endColumn: 30
         },
         {
+          message: 'Avoid shadowing the native event "click".',
           line: 5,
           column: 12,
-          message: 'Avoid shadowing the native event "click".',
           endLine: 5,
           endColumn: 19
         },
