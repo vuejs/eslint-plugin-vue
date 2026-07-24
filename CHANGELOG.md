@@ -1,5 +1,15 @@
 # eslint-plugin-vue
 
+## 10.11.0
+
+### Minor Changes
+
+- Added support for SFCs using `@nuxtjs/composition-api`, which is now treated the same as `vue` or `@vue/composition-api` ([#3100](https://github.com/vuejs/eslint-plugin-vue/pull/3100))
+
+### Patch Changes
+
+- Fixed [`vue/use-v-on-exact`](https://eslint.vuejs.org/rules/use-v-on-exact.html) to avoid reporting `@keydown.stop` when paired with an exact key-specific listener ([#3082](https://github.com/vuejs/eslint-plugin-vue/pull/3082))
+
 ## 10.10.0
 
 ### Minor Changes
