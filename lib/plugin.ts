@@ -138,6 +138,7 @@ import noRestrictedVBind from './rules/no-restricted-v-bind.ts'
 import noRestrictedVOn from './rules/no-restricted-v-on.ts'
 import noRootVIf from './rules/no-root-v-if.js'
 import noSetupPropsReactivityLoss from './rules/no-setup-props-reactivity-loss.js'
+import noShadowNativeEvents from './rules/no-shadow-native-events.ts'
 import noSharedComponentData from './rules/no-shared-component-data.js'
 import noSideEffectsInComputedProperties from './rules/no-side-effects-in-computed-properties.js'
 import noSpacesAroundEqualSignsInAttribute from './rules/no-spaces-around-equal-signs-in-attribute.js'
@@ -395,6 +396,7 @@ export default {
     'no-restricted-v-on': noRestrictedVOn,
     'no-root-v-if': noRootVIf,
     'no-setup-props-reactivity-loss': noSetupPropsReactivityLoss,
+    'no-shadow-native-events': noShadowNativeEvents,
     'no-shared-component-data': noSharedComponentData,
     'no-side-effects-in-computed-properties': noSideEffectsInComputedProperties,
     'no-spaces-around-equal-signs-in-attribute':
