@@ -95,7 +95,7 @@ export default {
         loc: nameWithLoc.loc,
         messageId: 'violation',
         data: {
-          name
+          name: nameWithLoc.name
         }
       })
     }

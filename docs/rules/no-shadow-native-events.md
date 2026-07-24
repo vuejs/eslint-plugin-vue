@@ -20,9 +20,9 @@ Using native event names for emits can lead to incorrect assumptions about an em
 - The payload of an emit can be chosen arbitrarily
 - Vue emits do not bubble, while most native events do
 - [Event modifiers](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers) only work on HTML events or when the original event is re-emitted as emit payload.
-- When the native event is re-emitted, the `event.target` might not match the actual event-listeners location.
+- When the native event is re-emitted, the `event.target` might not match the actual event listener's location.
 
-Thus, you should avoid using native event names for Vue emits to avoid confusion, and consider emit names which communicate the users intent, if applicable.
+Thus, you should avoid using native event names for Vue emits to avoid confusion, and consider emit names that communicate the user's intent, if applicable.
 
 The rule is mostly aimed at developers of component libraries.
 
