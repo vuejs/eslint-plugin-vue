@@ -11,6 +11,8 @@ import type {
 import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
 
+const UNKNOWN_TYPE = '__UNKNOWN__'
+
 const NATIVE_TYPES = new Set([
   'String',
   'Number',
@@ -332,6 +334,7 @@ export default {
         }
 
         if (defaultList.length === 0) continue
+        if (typeList.includes(UNKNOWN_TYPE)) continue
 
         const typeNames = new Set(
           typeList.filter((item) => NATIVE_TYPES.has(item))
