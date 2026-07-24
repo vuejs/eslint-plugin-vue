@@ -2,4 +2,4 @@
 "eslint-plugin-vue": patch
 ---
 
-feat: extend `require-default-prop` and `require-valid-default-prop` to check `defineModel`
+Added `defineModel` support to `vue/require-default-prop` and `vue/require-valid-default-prop` rule
