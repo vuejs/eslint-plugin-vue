@@ -1,4 +1,9 @@
 import * as VAST from './ast'
+export type NameWithLoc = {
+  name: string
+  loc: SourceLocation
+  range: Range
+}
 export type VueObjectType = 'mark' | 'export' | 'definition' | 'instance'
 export type VueObjectData = {
   node: ObjectExpression
