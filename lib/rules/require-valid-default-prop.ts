@@ -2,6 +2,7 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
+import type { TSESTree } from '@typescript-eslint/types'
 import type {
   ComponentObjectProp,
   ComponentTypeProp,
@@ -10,7 +11,7 @@ import type {
 } from '../utils/index.js'
 import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
-import tsTypes from '../utils/ts-utils/ts-types.js'
+import tsAST from '../utils/ts-utils/ts-ast.js'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -484,6 +485,8 @@ export default {
           }
         },
         onDefineModelEnter(node, model) {
+          const options =
+            model.options && utils.skipTSAsExpression(model.options)
           let syntheticProp:
             ComponentObjectProp | ComponentInferTypeProp | null = null
           let defaultFromOptions: Property | null = null
@@ -494,23 +497,20 @@ export default {
               propName: model.name.modelName,
               node: model.typeNode,
               required: false,
-              types: tsTypes.inferRuntimeTypeFromTypeNode(
+              types: tsAST.inferRuntimeType(
                 context,
-                model.typeNode
+                model.typeNode as TSESTree.TypeNode
               )
             }
-            if (model.options && model.options.type === 'ObjectExpression') {
-              defaultFromOptions = getPropertyNode(model.options, 'default')
+            if (options?.type === 'ObjectExpression') {
+              defaultFromOptions = getPropertyNode(options, 'default')
             }
-          } else if (
-            model.options &&
-            model.options.type === 'ObjectExpression'
-          ) {
+          } else if (options?.type === 'ObjectExpression') {
             syntheticProp = {
               type: 'object',
               propName: model.name.modelName,
-              key: model.options,
-              value: model.options,
+              key: options,
+              value: options,
               // `node` is only accessed in report() when propName is null,
               // which never occurs here since propName is always modelName.
               node: node as any
