@@ -6,31 +6,15 @@ import domEvents from '../utils/dom-events.json' with { type: 'json' }
 import { findVariable } from '@eslint-community/eslint-utils'
 import utils, {
   type ComponentEmit,
+  type NameWithLoc,
   type VueObjectData,
   type VueObjectType
 } from '../utils/index.js'
-import { type NameWithLoc } from './require-explicit-emits.ts'
 
 interface VueTemplateDefineData {
   type: VueObjectType | 'setup'
   define: ObjectExpression | Program
   defineEmits?: CallExpression
-}
-
-/**
- * Get the name param node from the given CallExpression
- */
-function getNameParamNode(node: CallExpression) {
-  const nameLiteralNode = node.arguments[0]
-  if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
-    const name = utils.getStringLiteralValue(nameLiteralNode)
-    if (name != null) {
-      return { name, loc: nameLiteralNode.loc, range: nameLiteralNode.range }
-    }
-  }
-
-  // cannot check
-  return null
 }
 
 /**
@@ -120,7 +104,7 @@ export default {
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
         const callee = utils.skipChainExpression(node.callee)
-        const nameWithLoc = getNameParamNode(node)
+        const nameWithLoc = utils.getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -294,7 +278,7 @@ export default {
         {
           CallExpression(node) {
             const callee = utils.skipChainExpression(node.callee)
-            const nameWithLoc = getNameParamNode(node)
+            const nameWithLoc = utils.getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return

@@ -2,7 +2,12 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { ComponentEmit, ComponentProp, VueObjectData } from '../utils'
+import type {
+  ComponentEmit,
+  ComponentProp,
+  NameWithLoc,
+  VueObjectData
+} from '../utils'
 import {
   findVariable,
   isOpeningBraceToken,
@@ -39,28 +44,6 @@ const FIX_EMITS_AFTER_OPTIONS = new Set([
   'renderTriggered',
   'errorCaptured'
 ])
-
-export interface NameWithLoc {
-  name: string
-  loc: SourceLocation
-  range: Range
-}
-
-/**
- * Get the name param node from the given CallExpression
- */
-function getNameParamNode(node: CallExpression): NameWithLoc | null {
-  const nameLiteralNode = node.arguments[0]
-  if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
-    const name = utils.getStringLiteralValue(nameLiteralNode)
-    if (name != null) {
-      return { name, loc: nameLiteralNode.loc, range: nameLiteralNode.range }
-    }
-  }
-
-  // cannot check
-  return null
-}
 
 export default {
   meta: {
@@ -167,7 +150,7 @@ export default {
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
         const callee = utils.skipChainExpression(node.callee)
-        const nameWithLoc = getNameParamNode(node)
+        const nameWithLoc = utils.getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -236,7 +219,7 @@ export default {
       {
         CallExpression(node) {
           const callee = utils.skipChainExpression(node.callee)
-          const nameWithLoc = getNameParamNode(node)
+          const nameWithLoc = utils.getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
