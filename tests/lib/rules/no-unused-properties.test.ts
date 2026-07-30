@@ -1541,6 +1541,95 @@ tester.run('no-unused-properties', rule, {
         </script>
       `
     },
+    // Props passed to a function whose implementation is outside this file
+    // may be accessed by that function.
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          import { useExternalProps } from 'external-package'
+
+          export default {
+            props: ['foo', 'bar'],
+            setup (props) {
+              useExternalProps(props)
+            }
+          }
+        </script>
+      `
+    },
+    // Usage remains unknown when a same-file function passes props to an
+    // untraceable function.
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+            }
+          }
+
+          function fn(p) {
+            return fnUnknown(p)
+          }
+        </script>
+      `
+    },
+    // Member calls cannot be traced to a same-file function declaration.
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn.fn(props, props)
+            }
+          }
+
+          function fn(a, b) {
+            return a.foo + b.bar
+          }
+        </script>
+      `
+    },
+    // Mutable function variables cannot be traced reliably.
+    {
+      filename: 'test.vue',
+      code: `
+        <script>
+          let fnLet = function foo(p){p.foo}
+          var fnVar = function foo(p){p.bar}
+          var fnVar = function foo(p){p.bar}
+          export default {
+            props: ['foo', 'bar', 'baz'],
+            setup (props) {
+              fn(props)
+              fn3(props)
+              fn4(props)
+              fnLet(props)
+              fnVar(props)
+            }
+          }
+
+          function fn(a) {
+            a(fn2)
+            return fn2.fn2(a)
+          }
+          function fn2(a) {
+            return a.foo
+          }
+          function fn3(b) {
+            foo[b]
+          }
+          function fn4(b) {
+            const foo = {b}
+          }
+        </script>
+      `
+    },
 
     // render & functional
     {
@@ -4108,49 +4197,6 @@ tester.run('no-unused-properties', rule, {
       filename: 'test.vue',
       code: `
         <script>
-          export default {
-            props: ['foo', 'bar', 'baz'],
-            setup (props) {
-              fn(props)
-            }
-          }
-
-          function fn(p) {
-            return fnUnknown(p)
-          }
-          function fn3(p2) {
-            const {...a} = p2
-          }
-        </script>
-      `,
-      errors: [
-        {
-          message: "'foo' of property found, but never used.",
-          line: 4,
-          column: 21,
-          endLine: 4,
-          endColumn: 26
-        },
-        {
-          message: "'bar' of property found, but never used.",
-          line: 4,
-          column: 28,
-          endLine: 4,
-          endColumn: 33
-        },
-        {
-          message: "'baz' of property found, but never used.",
-          line: 4,
-          column: 35,
-          endLine: 4,
-          endColumn: 40
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
           const fnVar = (p) => p.baz
           export default {
             props: ['foo', 'bar', 'baz'],
@@ -4204,103 +4250,6 @@ tester.run('no-unused-properties', rule, {
           line: 4,
           column: 35,
           endLine: 4,
-          endColumn: 40
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          export default {
-            props: ['foo', 'bar', 'baz'],
-            setup (props) {
-              fn.fn(props, props)
-            }
-          }
-
-          function fn(a, b) {
-            return a.foo + b.bar
-          }
-        </script>
-      `,
-      errors: [
-        {
-          message: "'foo' of property found, but never used.",
-          line: 4,
-          column: 21,
-          endLine: 4,
-          endColumn: 26
-        },
-        {
-          message: "'bar' of property found, but never used.",
-          line: 4,
-          column: 28,
-          endLine: 4,
-          endColumn: 33
-        },
-        {
-          message: "'baz' of property found, but never used.",
-          line: 4,
-          column: 35,
-          endLine: 4,
-          endColumn: 40
-        }
-      ]
-    },
-    {
-      filename: 'test.vue',
-      code: `
-        <script>
-          let fnLet = function foo(p){p.foo}
-          var fnVar = function foo(p){p.bar}
-          var fnVar = function foo(p){p.bar}
-          export default {
-            props: ['foo', 'bar', 'baz'],
-            setup (props) {
-              fn(props)
-              fn3(props)
-              fn4(props)
-              fnLet(props)
-              fnVar(props)
-            }
-          }
-
-          function fn(a) {
-            a(fn2)
-            return fn2.fn2(a)
-          }
-          function fn2(a) {
-            return a.foo
-          }
-          function fn3(b) {
-            foo[b]
-          }
-          function fn4(b) {
-            const foo = {b}
-          }
-        </script>
-      `,
-      errors: [
-        {
-          message: "'foo' of property found, but never used.",
-          line: 7,
-          column: 21,
-          endLine: 7,
-          endColumn: 26
-        },
-        {
-          message: "'bar' of property found, but never used.",
-          line: 7,
-          column: 28,
-          endLine: 7,
-          endColumn: 33
-        },
-        {
-          message: "'baz' of property found, but never used.",
-          line: 7,
-          column: 35,
-          endLine: 7,
           endColumn: 40
         }
       ]

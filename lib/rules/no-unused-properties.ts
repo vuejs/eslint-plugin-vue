@@ -306,7 +306,9 @@ export default {
     ) {
       if (
         (property.groupName === 'props' &&
-          propertyReferencesForProps.hasProperty(property.name)) ||
+          propertyReferencesForProps.hasProperty(property.name, {
+            unknownCallAsAny: true
+          })) ||
         propertyReferences.hasProperty('$props')
       ) {
         // used props
