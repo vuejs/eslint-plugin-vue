@@ -1,15 +1,16 @@
-'use strict'
-
 /*
  This script updates `lib/utils/vue3-export-names.json` file from vue type.
  */
 
-const fs = require('node:fs')
-const path = require('node:path')
-const tsParser = require('@typescript-eslint/parser')
-const { httpGet } = require('./lib/http')
+import fs from 'node:fs'
+import path from 'node:path'
+import tsParser from '@typescript-eslint/parser'
+import httpGetModule from './lib/http.js'
+const __dirname = import.meta.dirname
 
-main()
+const { httpGet } = httpGetModule
+
+await main()
 
 async function main() {
   const names = new Set()

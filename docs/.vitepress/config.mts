@@ -13,8 +13,9 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 // eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
   const rulesPath = '../../tools/lib/rules.js' // Avoid bundle
-  const mod = await import(rulesPath)
-  const rules: typeof import('../../tools/lib/rules.js') = mod.default || mod
+  const { default: rules } = (await import(
+    rulesPath
+  )) as typeof import('../../tools/lib/rules.js')
   const uncategorizedRules = rules.filter(
     (rule) =>
       !rule.meta.docs.categories &&
@@ -162,8 +163,9 @@ export default async () => {
           globby: path.join(dirname, './build-system/shim/empty.mjs'),
           'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
           tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/empty.mjs'),
-          'node:module': path.join(dirname, './build-system/shim/empty.mjs')
+          module: path.join(dirname, './build-system/shim/module.mjs'),
+          'node:module': path.join(dirname, './build-system/shim/module.mjs'),
+          'node:url': path.join(dirname, './build-system/shim/url.mjs')
         }
       },
       define: {
