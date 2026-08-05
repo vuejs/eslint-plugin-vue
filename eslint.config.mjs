@@ -11,6 +11,7 @@ import eslintPluginMarkdownPreferences from 'eslint-plugin-markdown-preferences'
 import eslintPluginTs from '@typescript-eslint/eslint-plugin'
 import tsEslintParser from '@typescript-eslint/parser'
 import vueEslintParser from 'vue-eslint-parser'
+import consistentTestErrors from './eslint-internal-rules/consistent-test-errors.js'
 import noInvalidMeta from './eslint-internal-rules/no-invalid-meta.js'
 import noInvalidMetaDocsCategories from './eslint-internal-rules/no-invalid-meta-docs-categories.js'
 import requireEslintCommunity from './eslint-internal-rules/require-eslint-community.js'
@@ -60,6 +61,7 @@ export default typegen([
     plugins: {
       internal: {
         rules: {
+          'consistent-test-errors': consistentTestErrors,
           'no-invalid-meta': noInvalidMeta,
           'no-invalid-meta-docs-categories': noInvalidMetaDocsCategories,
           'require-eslint-community': requireEslintCommunity
@@ -340,6 +342,12 @@ export default typegen([
     rules: {
       // test fixtures intentionally contain `${...}` in plain strings to exercise the rules
       'unicorn/no-incorrect-template-string-interpolation': 'off'
+    }
+  },
+  {
+    files: ['tests/lib/rules/**/*.test.ts'],
+    rules: {
+      'internal/consistent-test-errors': 'error'
     }
   },
   ...defineConfig({
