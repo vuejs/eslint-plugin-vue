@@ -412,8 +412,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in "foo" computed property.',
           line: 4,
           column: 18,
-          endLine: 6,
-          endColumn: 14
+          endLine: 4,
+          endColumn: 23
         },
         {
           message: 'Unexpected await operator in "foo" computed property.',
@@ -442,8 +442,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in "foo" computed property.',
           line: 4,
           column: 18,
-          endLine: 6,
-          endColumn: 14
+          endLine: 4,
+          endColumn: 23
         },
         {
           message: 'Unexpected Promise object in "foo" computed property.',
@@ -796,9 +796,9 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           message:
             'Unexpected async function declaration in "foo" computed property.',
           line: 4,
-          column: 21,
-          endLine: 8,
-          endColumn: 12
+          column: 11,
+          endLine: 4,
+          endColumn: 16
         },
         {
           message: 'Unexpected await operator in "foo" computed property.',
@@ -1087,8 +1087,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 5,
           column: 34,
-          endLine: 7,
-          endColumn: 12
+          endLine: 5,
+          endColumn: 39
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1103,7 +1103,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           line: 8,
           column: 34,
           endLine: 8,
-          endColumn: 62
+          endColumn: 39
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1117,8 +1117,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 9,
           column: 34,
-          endLine: 11,
-          endColumn: 12
+          endLine: 9,
+          endColumn: 39
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1148,8 +1148,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 5,
           column: 33,
-          endLine: 7,
-          endColumn: 12
+          endLine: 5,
+          endColumn: 38
         },
         {
           message: 'Unexpected Promise object in computed function.',
@@ -1328,8 +1328,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 5,
           column: 33,
-          endLine: 7,
-          endColumn: 12
+          endLine: 5,
+          endColumn: 38
         }
       ]
     },
@@ -1358,8 +1358,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 4,
           column: 30,
-          endLine: 6,
-          endColumn: 8
+          endLine: 5,
+          endColumn: 35
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1374,7 +1374,7 @@ ruleTester.run('no-async-in-computed-properties', rule, {
           line: 7,
           column: 30,
           endLine: 7,
-          endColumn: 58
+          endColumn: 35
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1388,8 +1388,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 8,
           column: 30,
-          endLine: 10,
-          endColumn: 8
+          endLine: 8,
+          endColumn: 35
         },
         {
           message: 'Unexpected await operator in computed function.',
@@ -1420,8 +1420,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 4,
           column: 29,
-          endLine: 6,
-          endColumn: 8
+          endLine: 4,
+          endColumn: 34
         },
         {
           message: 'Unexpected Promise object in computed function.',
@@ -1604,8 +1604,8 @@ ruleTester.run('no-async-in-computed-properties', rule, {
             'Unexpected async function declaration in computed function.',
           line: 4,
           column: 29,
-          endLine: 6,
-          endColumn: 8
+          endLine: 4,
+          endColumn: 34
         }
       ]
     },
