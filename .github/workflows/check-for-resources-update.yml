@@ -25,7 +25,10 @@ jobs:
         run: npm run update-resources
       - uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
-          commit-message: Updates resources
+          commit-message: Update resources
           branch: update-resources
           branch-suffix: timestamp
-          title: Updates resources
+          title: Update resources
+          body: |
+            Created by https://github.com/vuejs/eslint-plugin-vue/blob/master/.github/workflows/check-for-resources-update.yml
+            via the [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action.
