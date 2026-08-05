@@ -62,8 +62,7 @@ export default {
                 { not: { type: 'string', pattern: String.raw`^\s*$` } }
               ]
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false

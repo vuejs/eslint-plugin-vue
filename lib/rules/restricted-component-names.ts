@@ -35,8 +35,7 @@ export default {
           allow: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         }
       }
