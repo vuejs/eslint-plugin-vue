@@ -20,6 +20,21 @@ tester.run('no-undef-properties', rule, {
     {
       filename: 'test.vue',
       code: `
+      <template><div>{{ a }}</div></template>
+      <script>
+      import { reactive, toRefs } from 'vue'
+      export default {
+        setup() {
+          const data = reactive({ a: 1, b: 1 })
+          return { ...toRefs(data) }
+        }
+      }
+      </script>
+      `
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <template>
         <div :attr="foo"> {{ bar }} </div>
       </template>
@@ -811,6 +826,30 @@ tester.run('no-undef-properties', rule, {
   ],
 
   invalid: [
+    {
+      filename: 'test.vue',
+      code: `
+      <template><div>{{ a }}</div></template>
+      <script>
+      import { toRefs } from 'vue'
+      export default {
+        setup() {
+          const data = { a: 1 }
+          return { ...toRefs(data) }
+        }
+      }
+      </script>
+      `,
+      errors: [
+        {
+          message: "'a' is not defined.",
+          line: 2,
+          column: 25,
+          endLine: 2,
+          endColumn: 26
+        }
+      ]
+    },
     // undef property
     {
       filename: 'test.vue',

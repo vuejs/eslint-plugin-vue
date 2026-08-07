@@ -3,6 +3,7 @@
  * @author Yosuke Ota
  */
 import type { IPropertyReferences } from '../utils/property-references.ts'
+import { ReferenceTracker } from '@eslint-community/eslint-utils'
 import utils from '../utils/index.js'
 import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
@@ -96,6 +97,8 @@ export default {
     const isIgnored = toRegExpGroupMatcher(ignores)
     const propertyReferenceExtractor = definePropertyReferenceExtractor(context)
     const programNode = context.sourceCode.ast
+    const toRefsNodes = new Set<CallExpression>()
+    const reactiveNodes = new Set<CallExpression>()
     /**
      * Property names identified as defined via a Vuex or Pinia helpers
      */
@@ -232,9 +235,123 @@ export default {
       return property
     }
 
+    function getReactiveObject(node: Expression): ObjectExpression | null {
+      if (node.type !== 'Identifier') return null
+      const variable = utils.findVariableByIdentifier(context, node)
+      const def = variable && variable.defs.length === 1 && variable.defs[0]
+      if (
+        !def ||
+        def.type !== 'Variable' ||
+        def.parent.kind !== 'const' ||
+        !def.node.init ||
+        def.node.init.type !== 'CallExpression' ||
+        !reactiveNodes.has(def.node.init)
+      ) {
+        return null
+      }
+      const arg = def.node.init.arguments[0]
+      return arg && arg.type === 'ObjectExpression' ? arg : null
+    }
+
+    function getSetupReturnObjects(
+      property: Property | SpreadElement
+    ): ObjectExpression[] {
+      if (
+        property.type !== 'Property' ||
+        utils.getStaticPropertyName(property) !== GROUP_SETUP ||
+        (property.value.type !== 'FunctionExpression' &&
+          property.value.type !== 'ArrowFunctionExpression')
+      ) {
+        return []
+      }
+      const body = property.value.body
+      if (body.type === 'ObjectExpression') {
+        return [body]
+      }
+      if (body.type !== 'BlockStatement') {
+        return []
+      }
+      return body.body
+        .filter(
+          (
+            statement
+          ): statement is ReturnStatement & { argument: ObjectExpression } =>
+            statement.type === 'ReturnStatement' &&
+            statement.argument?.type === 'ObjectExpression'
+        )
+        .map((statement) => statement.argument)
+    }
+
+    function getToRefsReactiveObject(
+      property: Property | SpreadElement
+    ): ObjectExpression | null {
+      if (
+        property.type !== 'SpreadElement' ||
+        property.argument.type !== 'CallExpression' ||
+        !toRefsNodes.has(property.argument)
+      ) {
+        return null
+      }
+      const argument = property.argument.arguments[0]
+      if (!argument || argument.type === 'SpreadElement') {
+        return null
+      }
+      return getReactiveObject(argument)
+    }
+
+    function* iterateReturnedToRefsProperties(node: ObjectExpression) {
+      for (const property of node.properties) {
+        const reactiveObject = getToRefsReactiveObject(property)
+        if (!reactiveObject) {
+          continue
+        }
+        for (const reactiveProperty of reactiveObject.properties) {
+          if (reactiveProperty.type === 'Property') {
+            yield reactiveProperty
+          }
+        }
+      }
+    }
+
+    function* iterateSetupToRefsProperties(node: ObjectExpression) {
+      for (const property of node.properties) {
+        for (const returned of getSetupReturnObjects(property)) {
+          yield* iterateReturnedToRefsProperties(returned)
+        }
+      }
+    }
+
     const scriptVisitor = utils.compositingVisitors(
       {
         Program() {
+          const toRefsTracker = new ReferenceTracker(
+            context.sourceCode.scopeManager.scopes[0]
+          )
+          const toRefsReferences = utils.iterateReferencesTraceMap(
+            toRefsTracker,
+            {
+              toRefs: { [ReferenceTracker.CALL]: true }
+            }
+          )
+          for (const { node } of toRefsReferences) {
+            if (node.type === 'CallExpression') {
+              toRefsNodes.add(node)
+            }
+          }
+          const reactiveTracker = new ReferenceTracker(
+            context.sourceCode.scopeManager.scopes[0]
+          )
+          const reactiveReferences = utils.iterateReferencesTraceMap(
+            reactiveTracker,
+            {
+              reactive: { [ReferenceTracker.CALL]: true }
+            }
+          )
+          for (const { node } of reactiveReferences) {
+            if (node.type === 'CallExpression') {
+              reactiveNodes.add(node)
+            }
+          }
           if (!utils.isScriptSetup(context)) {
             return
           }
@@ -378,6 +495,13 @@ export default {
                 return getPropertyDataFromObjectProperty(propertyMap.get(name))
               }
             })
+          }
+          for (const property of iterateSetupToRefsProperties(node)) {
+            const name = utils.getStaticPropertyName(property)
+            const propertyData = getPropertyDataFromObjectProperty(property)
+            if (name && propertyData) {
+              ctx.defineProperties.set(name, propertyData)
+            }
           }
 
           const watchersAndExposes = utils.iterateProperties(
