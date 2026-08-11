@@ -67,6 +67,19 @@ const PROPERTY_LABEL = {
   expose: 'expose'
 }
 
+/**
+ * Check whether the given prop is explicitly typed as `never`.
+ * Such props are declared to forbid their usage, so they are never
+ * referenced by design and reporting them as unused is noise.
+ */
+function isNeverTypeProp(prop: ComponentProp): boolean {
+  return (
+    prop.type === 'type' &&
+    prop.node.type === 'TSPropertySignature' &&
+    prop.node.typeAnnotation?.typeAnnotation.type === 'TSNeverKeyword'
+  )
+}
+
 function findExpression(context: RuleContext, id: Identifier): Expression {
   const variable = utils.findVariableByIdentifier(context, id)
   if (!variable) {
@@ -403,6 +416,9 @@ export default {
 
           for (const prop of props) {
             if (!prop.propName) {
+              continue
+            }
+            if (isNeverTypeProp(prop)) {
               continue
             }
             if (prop.type === 'object') {
