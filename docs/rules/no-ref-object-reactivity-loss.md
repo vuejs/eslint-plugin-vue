@@ -29,6 +29,21 @@ const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
 
 </eslint-code-block>
 
+The body of an immediately invoked function expression (IIFE) is executed in the same scope, so the values gotten there also lose reactivity.
+
+<eslint-code-block :rules="{'vue/no-ref-object-reactivity-loss': ['error']}" language="javascript" filename="example.js" >
+
+```js
+import { ref } from 'vue'
+const count = ref(0)
+;(() => {
+  const v1 = count.value /* ✗ BAD */
+  const v2 = computed(() => count.value /* ✓ GOOD */)
+})()
+```
+
+</eslint-code-block>
+
 This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.\
 See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Reactivity Transform.
 
