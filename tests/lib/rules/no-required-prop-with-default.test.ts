@@ -285,6 +285,44 @@ tester.run('no-required-prop-with-default', rule, {
       code: `
         <script setup lang="ts">
           interface TestPropType {
+            name: string
+            age?: number
+          }
+          const defaults = { name: "World" }
+          const props = withDefaults(defineProps<TestPropType>(), defaults);
+        </script>
+      `,
+      output: `
+        <script setup lang="ts">
+          interface TestPropType {
+            name?: string
+            age?: number
+          }
+          const defaults = { name: "World" }
+          const props = withDefaults(defineProps<TestPropType>(), defaults);
+        </script>
+      `,
+      options: [{ autofix: true }],
+      languageOptions: {
+        parserOptions: {
+          parser: require.resolve('@typescript-eslint/parser')
+        }
+      },
+      errors: [
+        {
+          message: 'Prop "name" should be optional.',
+          line: 4,
+          column: 13,
+          endLine: 4,
+          endColumn: 25
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+        <script setup lang="ts">
+          interface TestPropType {
             name: string | number
             age?: number
           }
