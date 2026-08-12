@@ -415,10 +415,7 @@ export default {
           )
 
           for (const prop of props) {
-            if (!prop.propName) {
-              continue
-            }
-            if (isNeverTypeProp(prop)) {
+            if (!prop.propName || isNeverTypeProp(prop)) {
               continue
             }
             if (prop.type === 'object') {
