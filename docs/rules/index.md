@@ -292,6 +292,7 @@ For example:
 | [vue/require-typed-ref] | require `ref` and `shallowRef` functions to be strongly typed |  | :hammer: |
 | [vue/restricted-component-names] | enforce using only specific component names |  | :warning: |
 | [vue/script-indent] | enforce consistent indentation in `<script>` | :wrench: | :lipstick: |
+| [vue/single-v-slot-style] | enforce a consistent style for components with a single `v-slot` | :wrench: | :hammer: |
 | [vue/slot-name-casing] | enforce specific casing for slot names |  | :hammer: |
 | [vue/sort-keys] | enforce sort-keys in a manner that is compatible with order-in-components |  | :hammer: |
 | [vue/static-class-names-order] | enforce static class names order | :wrench: | :hammer: |
@@ -595,6 +596,7 @@ The following rules extend the rules provided by ESLint itself and apply them to
 [vue/return-in-computed-property]: ./return-in-computed-property.md
 [vue/return-in-emits-validator]: ./return-in-emits-validator.md
 [vue/script-indent]: ./script-indent.md
+[vue/single-v-slot-style]: ./single-v-slot-style.md
 [vue/singleline-html-element-content-newline]: ./singleline-html-element-content-newline.md
 [vue/slot-name-casing]: ./slot-name-casing.md
 [vue/sort-keys]: ./sort-keys.md
