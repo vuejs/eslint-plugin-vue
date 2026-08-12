@@ -25,21 +25,7 @@ const v3 = computed(() => count.value /* ✓ GOOD */)
 const v4 = fn(count.value) /* ✗ BAD */
 const v5 = fn(count) /* ✓ GOOD */
 const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
-```
-
-</eslint-code-block>
-
-The body of an immediately invoked function expression (IIFE) is executed in the same scope, so the values gotten there also lose reactivity.
-
-<eslint-code-block :rules="{'vue/no-ref-object-reactivity-loss': ['error']}" language="javascript" filename="example.js" >
-
-```js
-import { ref } from 'vue'
-const count = ref(0)
-;(() => {
-  const v1 = count.value /* ✗ BAD */
-  const v2 = computed(() => count.value /* ✓ GOOD */)
-})()
+const v7 = (() => count.value)() /* ✗ BAD */
 ```
 
 </eslint-code-block>
