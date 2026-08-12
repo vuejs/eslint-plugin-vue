@@ -36,8 +36,7 @@ export default {
             items: {
               type: 'string'
             },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           },
           shouldMatchCase: {
             type: 'boolean'
