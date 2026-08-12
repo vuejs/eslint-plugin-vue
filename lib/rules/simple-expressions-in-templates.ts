@@ -25,13 +25,38 @@ export default {
     return utils.defineTemplateBodyVisitor(context, {
       // This pattern matches "mustache" interpolation expressions but not directive expressions.
       'VElement > VExpressionContainer'(node: VExpressionContainer) {
-        if (node.expression?.type === 'CallExpression') {
+        const { expression } = node
+
+        if (!expression) return
+
+        if (expressionComplexity(context.sourceCode, expression) > 1) {
           context.report({
-            node,
+            node: expression,
             messageId: 'simpleExpressions'
           })
         }
       }
     })
   }
+}
+
+function expressionComplexity(sourceCode: SourceCode, node: ASTNode) {
+  let number = node.type === 'CallExpression' ? 1 : 0
+
+  const list =
+    (sourceCode.visitorKeys[node.type] as (keyof typeof node)[]) ?? []
+
+  for (const key of list) {
+    const value = node[key] as ASTNode | ASTNode[]
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        number += expressionComplexity(sourceCode, item)
+      }
+    } else if (value) {
+      number += expressionComplexity(sourceCode, value)
+    }
+  }
+
+  return number
 }

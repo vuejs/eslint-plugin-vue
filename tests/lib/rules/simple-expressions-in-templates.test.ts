@@ -52,12 +52,11 @@ tester.run('simple-expressions-in-templates', rule, {
       `,
       errors: [
         {
-          message:
-            'Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.',
-          line: 3,
-          column: 9,
-          endLine: 10,
-          endColumn: 11
+          message: rule.meta.messages.simpleExpressions,
+          line: 4,
+          column: 11,
+          endLine: 9,
+          endColumn: 23
         }
       ],
       name: 'Invalid Style Guide Example'
