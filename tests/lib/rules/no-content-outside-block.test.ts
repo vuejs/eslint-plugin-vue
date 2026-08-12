@@ -18,58 +18,62 @@ tester.run('no-content-outside-block', rule as RuleModule, {
     },
     {
       filename: 'test.vue',
-      code: `<template>
-  <div>666</div>
-</template>
+      code: `
+        <template>
+          <div>666</div>
+        </template>
 
-<script>
-export default {}
-</script>
+        <script>
+          export default {}
+        </script>
 
-<style>
-div {
-  color: red;
-}
-</style>
-`
+        <style>
+          div {
+            color: red;
+          }
+        </style>
+      `
     },
     {
       // only a `<script>` block
       filename: 'test.vue',
-      code: `<script>
-console.log(1)
-</script>
-`
+      code: `
+        <script>
+          console.log(1)
+        </script>
+      `
     },
     {
       // HTML comments outside of the blocks are allowed
       filename: 'test.vue',
-      code: `<!-- leading comment -->
-<template>
-  <div>666</div>
-</template>
-<!-- comment between the blocks -->
-<script>
-export default {}
-</script>
-<!-- trailing comment -->
-`
+      code: `
+        <!-- leading comment -->
+        <template>
+          <div>666</div>
+        </template>
+        <!-- comment between the blocks -->
+        <script>
+          export default {}
+        </script>
+        <!-- trailing comment -->
+      `
     },
     {
       // custom blocks are elements, not stray content
       filename: 'test.vue',
-      code: `<docs>
-Some documentation.
-</docs>
+      code: `
+        <docs>
+          Some documentation.
+        </docs>
 
-<i18n>
-{ "en": { "hello": "hello" } }
-</i18n>
+        <i18n>
+          { "en": { "hello": "hello" } }
+        </i18n>
 
-<template>
-  <div>666</div>
-</template>
-`
+        <template>
+          <div>666</div>
+        </template>
+      `
     },
     {
       // not a `.vue` file
@@ -81,36 +85,38 @@ Some documentation.
     {
       // content between the blocks
       filename: 'test.vue',
-      code: `<template>
-  <div>666</div>
-</template>
+      code: `
+        <template>
+          <div>666</div>
+        </template>
 
-console.log(1);
+        console.log(1);
 
-<script>
-console.log(2);
-</script>
-`,
+        <script>
+          console.log(2);
+        </script>
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 5,
-          column: 1,
-          endLine: 5,
-          endColumn: 16,
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 24,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<template>
-  <div>666</div>
-</template>
+              output: `
+        <template>
+          <div>666</div>
+        </template>
 
+        
 
-
-<script>
-console.log(2);
-</script>
-`
+        <script>
+          console.log(2);
+        </script>
+      `
             }
           ]
         }
@@ -119,28 +125,30 @@ console.log(2);
     {
       // content before the first block
       filename: 'test.vue',
-      code: `hello world
+      code: `
+        hello world
 
-<template>
-  <div>666</div>
-</template>
-`,
+        <template>
+          <div>666</div>
+        </template>
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 12,
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 20,
           suggestions: [
             {
               messageId: 'removeContent',
               output: `
+        
 
-<template>
-  <div>666</div>
-</template>
-`
+        <template>
+          <div>666</div>
+        </template>
+      `
             }
           ]
         }
@@ -149,28 +157,30 @@ console.log(2);
     {
       // content after the last block
       filename: 'test.vue',
-      code: `<template>
-  <div>666</div>
-</template>
+      code: `
+        <template>
+          <div>666</div>
+        </template>
 
-trailing text
-`,
+        trailing text
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 5,
-          column: 1,
-          endLine: 5,
-          endColumn: 14,
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 22,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<template>
-  <div>666</div>
-</template>
+              output: `
+        <template>
+          <div>666</div>
+        </template>
 
-
-`
+        
+      `
             }
           ]
         }
@@ -179,96 +189,100 @@ trailing text
     {
       // multiple separate runs
       filename: 'test.vue',
-      code: `before
+      code: `
+        before
 
-<template>
-  <div>666</div>
-</template>
+        <template>
+          <div>666</div>
+        </template>
 
-middle
+        middle
 
-<script>
-export default {}
-</script>
+        <script>
+          export default {}
+        </script>
 
-after
-`,
+        after
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 1,
-          column: 1,
-          endLine: 1,
-          endColumn: 7,
+          line: 2,
+          column: 9,
+          endLine: 2,
+          endColumn: 15,
           suggestions: [
             {
               messageId: 'removeContent',
               output: `
+        
 
-<template>
-  <div>666</div>
-</template>
+        <template>
+          <div>666</div>
+        </template>
 
-middle
+        middle
 
-<script>
-export default {}
-</script>
+        <script>
+          export default {}
+        </script>
 
-after
-`
+        after
+      `
             }
           ]
         },
         {
           messageId: 'unexpectedContent',
-          line: 7,
-          column: 1,
-          endLine: 7,
-          endColumn: 7,
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 15,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `before
+              output: `
+        before
 
-<template>
-  <div>666</div>
-</template>
+        <template>
+          <div>666</div>
+        </template>
 
+        
 
+        <script>
+          export default {}
+        </script>
 
-<script>
-export default {}
-</script>
-
-after
-`
+        after
+      `
             }
           ]
         },
         {
           messageId: 'unexpectedContent',
-          line: 13,
-          column: 1,
-          endLine: 13,
-          endColumn: 6,
+          line: 14,
+          column: 9,
+          endLine: 14,
+          endColumn: 14,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `before
+              output: `
+        before
 
-<template>
-  <div>666</div>
-</template>
+        <template>
+          <div>666</div>
+        </template>
 
-middle
+        middle
 
-<script>
-export default {}
-</script>
+        <script>
+          export default {}
+        </script>
 
-
-`
+        
+      `
             }
           ]
         }
@@ -277,37 +291,39 @@ export default {}
     {
       // a multi-line run is reported once, without the surrounding blank lines
       filename: 'test.vue',
-      code: `<template>
-  <div>666</div>
-</template>
+      code: `
+        <template>
+          <div>666</div>
+        </template>
 
-console.log(1);
-console.log(2);
+        console.log(1);
+        console.log(2);
 
-<script>
-export default {}
-</script>
-`,
+        <script>
+          export default {}
+        </script>
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 5,
-          column: 1,
-          endLine: 6,
-          endColumn: 16,
+          line: 6,
+          column: 9,
+          endLine: 7,
+          endColumn: 24,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<template>
-  <div>666</div>
-</template>
+              output: `
+        <template>
+          <div>666</div>
+        </template>
 
+        
 
-
-<script>
-export default {}
-</script>
-`
+        <script>
+          export default {}
+        </script>
+      `
             }
           ]
         }
@@ -336,36 +352,38 @@ export default {}
     {
       // content around a custom block
       filename: 'test.vue',
-      code: `<docs>
-Some documentation.
-</docs>
+      code: `
+        <docs>
+          Some documentation.
+        </docs>
 
-stray
+        stray
 
-<template>
-  <div>666</div>
-</template>
-`,
+        <template>
+          <div>666</div>
+        </template>
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 5,
-          column: 1,
-          endLine: 5,
-          endColumn: 6,
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 14,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<docs>
-Some documentation.
-</docs>
+              output: `
+        <docs>
+          Some documentation.
+        </docs>
 
+        
 
-
-<template>
-  <div>666</div>
-</template>
-`
+        <template>
+          <div>666</div>
+        </template>
+      `
             }
           ]
         }
@@ -374,64 +392,67 @@ Some documentation.
     {
       // an HTML comment splits the content into separate runs
       filename: 'test.vue',
-      code: `<template>
-  <div>666</div>
-</template>
+      code: `
+        <template>
+          <div>666</div>
+        </template>
 
-foo
-<!-- comment -->
-bar
+        foo
+        <!-- comment -->
+        bar
 
-<script>
-export default {}
-</script>
-`,
+        <script>
+          export default {}
+        </script>
+      `,
       errors: [
         {
           messageId: 'unexpectedContent',
-          line: 5,
-          column: 1,
-          endLine: 5,
-          endColumn: 4,
+          line: 6,
+          column: 9,
+          endLine: 6,
+          endColumn: 12,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<template>
-  <div>666</div>
-</template>
+              output: `
+        <template>
+          <div>666</div>
+        </template>
 
+        
+        <!-- comment -->
+        bar
 
-<!-- comment -->
-bar
-
-<script>
-export default {}
-</script>
-`
+        <script>
+          export default {}
+        </script>
+      `
             }
           ]
         },
         {
           messageId: 'unexpectedContent',
-          line: 7,
-          column: 1,
-          endLine: 7,
-          endColumn: 4,
+          line: 8,
+          column: 9,
+          endLine: 8,
+          endColumn: 12,
           suggestions: [
             {
               messageId: 'removeContent',
-              output: `<template>
-  <div>666</div>
-</template>
+              output: `
+        <template>
+          <div>666</div>
+        </template>
 
-foo
-<!-- comment -->
+        foo
+        <!-- comment -->
+        
 
-
-<script>
-export default {}
-</script>
-`
+        <script>
+          export default {}
+        </script>
+      `
             }
           ]
         }
