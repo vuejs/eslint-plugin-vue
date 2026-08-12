@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import type { VueObjectData } from '../utils/index.js'
+import type { NameWithLoc, VueObjectData } from '../utils/index.js'
 import { findVariable } from '@eslint-community/eslint-utils'
 import utils from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
@@ -11,26 +11,6 @@ import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 const ALLOWED_CASE_OPTIONS = ['kebab-case', 'camelCase']
 const DEFAULT_CASE = 'camelCase'
 
-interface NameWithLoc {
-  name: string
-  loc: SourceLocation
-}
-
-/**
- * Get the name param node from the given CallExpression
- */
-function getNameParamNode(node: CallExpression): NameWithLoc | null {
-  const nameLiteralNode = node.arguments[0]
-  if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
-    const name = utils.getStringLiteralValue(nameLiteralNode)
-    if (name != null) {
-      return { name, loc: nameLiteralNode.loc }
-    }
-  }
-
-  // cannot check
-  return null
-}
 /**
  * Get the callee member node from the given CallExpression
  */
@@ -65,8 +45,7 @@ export default {
           ignores: {
             type: 'array',
             items: { type: 'string' },
-            uniqueItems: true,
-            additionalItems: false
+            uniqueItems: true
           }
         },
         additionalProperties: false
@@ -116,7 +95,7 @@ export default {
 
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
-        const nameWithLoc = getNameParamNode(node)
+        const nameWithLoc = utils.getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -153,7 +132,7 @@ export default {
       {
         CallExpression(node) {
           const callee = node.callee
-          const nameWithLoc = getNameParamNode(node)
+          const nameWithLoc = utils.getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
@@ -264,7 +243,7 @@ export default {
         }),
         {
           CallExpression(node) {
-            const nameLiteralNode = getNameParamNode(node)
+            const nameLiteralNode = utils.getNameParamNode(node)
             if (!nameLiteralNode) {
               // cannot check
               return

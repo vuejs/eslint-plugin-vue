@@ -12,7 +12,8 @@ module.exports = {
     messages: {
       useCommunityPackageInstead:
         'Please use `@eslint-community/{{name}}` instead.'
-    }
+    },
+    languages: ['js/js']
   },
 
   /** @param {import('eslint').Rule.RuleContext} context */

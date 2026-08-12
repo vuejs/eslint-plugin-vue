@@ -12,7 +12,7 @@ since: v10.9.0
 
 ## :book: Rule Details
 
-This rule reports when a custom event is emitted or declared with more than one payload argument. When handling an event inline (e.g., `@update="handler"`), the handler only receives the **first** payload argument. Passing multiple arguments is therefore error-prone and hard to consume. Wrapping all values in a single object makes the intent explicit and ensures all data is available to every type of handler.
+This rule reports when a custom event is emitted or declared with more than one payload argument. When handling an event inline (e.g., `@update="handler($event)"`), the handler only receives the **first** payload argument. Passing multiple arguments is therefore error-prone and hard to consume. Wrapping all values in a single object makes the intent explicit and ensures all data is available to every type of handler.
 
 The rule checks both emit **calls** and emit **declarations** (Options API `emits` and `defineEmits`).
 

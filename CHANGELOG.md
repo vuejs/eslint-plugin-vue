@@ -1,5 +1,17 @@
 # eslint-plugin-vue
 
+## 10.10.0
+
+### Minor Changes
+
+- Added support for template literals to [`vue/prefer-separate-static-class`](https://eslint.vuejs.org/rules/prefer-separate-static-class.html) ([#3097](https://github.com/vuejs/eslint-plugin-vue/pull/3097))
+
+- Added `allowLineSeparatedGroups` option to [`vue/sort-keys`](https://eslint.vuejs.org/rules/sort-keys.html) rule ([#3084](https://github.com/vuejs/eslint-plugin-vue/pull/3084))
+
+### Patch Changes
+
+- Updated `@eslint-community/eslint-utils`, `semver` and `xml-name-validator` dependencies ([#3094](https://github.com/vuejs/eslint-plugin-vue/pull/3094))
+
 ## 10.9.2
 
 ### Patch Changes

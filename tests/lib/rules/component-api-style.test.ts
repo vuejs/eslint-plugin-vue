@@ -367,6 +367,35 @@ tester.run('component-api-style', rule, {
       filename: 'test.vue',
       code: `
       <script>
+      import { ref, defineComponent } from '@nuxtjs/composition-api'
+      export default defineComponent({
+        setup() {
+          const msg = ref('Hello World!')
+          // ...
+          return {
+            msg,
+            // ...
+          }
+        }
+      })
+      </script>
+      `,
+      options: [['script-setup']],
+      errors: [
+        {
+          message:
+            'Composition API is not allowed in your project. Use `<script setup>` instead.',
+          line: 5,
+          column: 9,
+          endLine: 5,
+          endColumn: 14
+        }
+      ]
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
       export default {
         data () {
           return {

@@ -2,6 +2,7 @@
  * @fileoverview Enforces props default values to be valid.
  * @author Armano
  */
+import type { TSESTree } from '@typescript-eslint/types'
 import type {
   ComponentObjectProp,
   ComponentTypeProp,
@@ -10,6 +11,7 @@ import type {
 } from '../utils/index.js'
 import utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
+import tsAST from '../utils/ts-utils/ts-ast.js'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -110,6 +112,10 @@ export default {
       PropDefaultFunctionContext[]
     >()
     const scriptSetupPropsContexts: {
+      node: CallExpression
+      props: PropDefaultFunctionContext[]
+    }[] = []
+    const defineModelPropsContexts: {
       node: CallExpression
       props: PropDefaultFunctionContext[]
     }[] = []
@@ -448,19 +454,85 @@ export default {
           node:
             FunctionExpression | FunctionDeclaration | ArrowFunctionExpression
         ) {
-          const data = scriptSetupPropsContexts.at(-1)
-          if (!data || !scopeStack) {
+          if (!scopeStack) {
             return
           }
 
-          for (const { default: defType } of data.props) {
-            if (node.body === defType.functionBody) {
-              scopeStack.returnTypes = defType.returnTypes
+          const propsData = scriptSetupPropsContexts.at(-1)
+          if (propsData) {
+            for (const { default: defType } of propsData.props) {
+              if (node.body === defType.functionBody) {
+                scopeStack.returnTypes = defType.returnTypes
+              }
+            }
+          }
+          const modelData = defineModelPropsContexts.at(-1)
+          if (modelData) {
+            for (const { default: defType } of modelData.props) {
+              if (node.body === defType.functionBody) {
+                scopeStack.returnTypes = defType.returnTypes
+              }
             }
           }
         },
         onDefinePropsExit() {
           const data = scriptSetupPropsContexts.pop()
+          if (!data) {
+            return
+          }
+          for (const propContext of data.props) {
+            verifyReturnTypes(propContext)
+          }
+        },
+        onDefineModelEnter(node, model) {
+          const options =
+            model.options && utils.skipTSAsExpression(model.options)
+          let syntheticProp:
+            ComponentObjectProp | ComponentInferTypeProp | null = null
+          let defaultFromOptions: Property | null = null
+
+          if (model.typeNode) {
+            syntheticProp = {
+              type: 'infer-type',
+              propName: model.name.modelName,
+              node: model.typeNode,
+              required: false,
+              types: tsAST.inferRuntimeType(
+                context,
+                model.typeNode as TSESTree.TypeNode
+              )
+            }
+            if (options?.type === 'ObjectExpression') {
+              defaultFromOptions = getPropertyNode(options, 'default')
+            }
+          } else if (options?.type === 'ObjectExpression') {
+            syntheticProp = {
+              type: 'object',
+              propName: model.name.modelName,
+              key: options,
+              value: options,
+              // `node` is only accessed in report() when propName is null,
+              // which never occurs here since propName is always modelName.
+              node: node as any
+            }
+          }
+
+          if (!syntheticProp) {
+            return
+          }
+
+          const propContexts = processPropDefs([syntheticProp], function* () {
+            if (defaultFromOptions) {
+              yield {
+                src: 'defaultProperty',
+                expression: defaultFromOptions.value
+              }
+            }
+          })
+          defineModelPropsContexts.push({ node, props: propContexts })
+        },
+        onDefineModelExit() {
+          const data = defineModelPropsContexts.pop()
           if (!data) {
             return
           }

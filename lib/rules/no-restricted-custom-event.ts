@@ -3,6 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
+import type { NameWithLoc } from '../utils/index.js'
 import utils from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
@@ -29,26 +30,6 @@ function parseOption(
   return parsed
 }
 
-interface NameWithLoc {
-  name: string
-  loc: SourceLocation
-  range: Range
-}
-/**
- * Get the name param node from the given CallExpression
- */
-function getNameParamNode(node: CallExpression): NameWithLoc | null {
-  const nameLiteralNode = node.arguments[0]
-  if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
-    const name = utils.getStringLiteralValue(nameLiteralNode)
-    if (name != null) {
-      return { name, loc: nameLiteralNode.loc, range: nameLiteralNode.range }
-    }
-  }
-
-  // cannot check
-  return null
-}
 /**
  * Get the callee member node from the given CallExpression
  */
@@ -154,7 +135,7 @@ export default {
       {
         CallExpression(node) {
           const callee = node.callee
-          const nameWithLoc = getNameParamNode(node)
+          const nameWithLoc = utils.getNameParamNode(node)
           if (!nameWithLoc) {
             // cannot check
             return
@@ -220,7 +201,7 @@ export default {
             })
           },
           CallExpression(node, { node: vueNode }) {
-            const nameWithLoc = getNameParamNode(node)
+            const nameWithLoc = utils.getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return
@@ -256,7 +237,7 @@ export default {
         }),
         {
           CallExpression(node) {
-            const nameWithLoc = getNameParamNode(node)
+            const nameWithLoc = utils.getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return
