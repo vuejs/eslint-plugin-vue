@@ -139,7 +139,19 @@ Nothing.
 `
   )
 
-  cp.execSync(`code "${ruleFile}"`)
-  cp.execSync(`code "${testFile}"`)
-  cp.execSync(`code "${docFile}"`)
+  const createdFiles = [ruleFile, testFile, docFile]
+
+  logger.log('Created:')
+  for (const file of createdFiles) {
+    logger.log(`  ${path.relative(process.cwd(), file)}`)
+  }
+
+  try {
+    for (const file of createdFiles) {
+      cp.execSync(`code "${file}"`, { stdio: 'ignore' })
+    }
+  } catch {
+    // The VS Code CLI (`code`) is not available.
+    // The files have already been created, so there is nothing to recover from.
+  }
 })(process.argv[2], process.argv[3])
