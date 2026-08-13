@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import { isVElement, hasInvalidEOF } from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {
@@ -72,14 +72,14 @@ export default {
 
     function getTopLevelHTMLElements() {
       if (documentFragment) {
-        return documentFragment.children.filter(utils.isVElement)
+        return documentFragment.children.filter(isVElement)
       }
       return []
     }
 
     return {
       Program(node: Program) {
-        if (utils.hasInvalidEOF(node)) {
+        if (hasInvalidEOF(node)) {
           return
         }
         for (const block of getTopLevelHTMLElements()) {

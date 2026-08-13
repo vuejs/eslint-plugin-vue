@@ -9,7 +9,18 @@ import type {
 } from '../utils/ref-object-references.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
-import * as utils from '../utils/index.js'
+import {
+  isStringLiteral,
+  getStringLiteralValue,
+  skipChainExpression,
+  getStaticPropertyName,
+  getScope,
+  compositingVisitors,
+  defineScriptSetupVisitor,
+  defineVueVisitor,
+  skipDefaultParamValue,
+  findAssignmentProperty
+} from '../utils/index.js'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.
@@ -29,8 +40,8 @@ function isRefInit(
  */
 function getNameParamNode(node: CallExpression) {
   const nameLiteralNode = node.arguments[0]
-  if (nameLiteralNode && utils.isStringLiteral(nameLiteralNode)) {
-    const name = utils.getStringLiteralValue(nameLiteralNode)
+  if (nameLiteralNode && isStringLiteral(nameLiteralNode)) {
+    const name = getStringLiteralValue(nameLiteralNode)
     if (name != null) {
       return { name, loc: nameLiteralNode.loc }
     }
@@ -44,10 +55,10 @@ function getNameParamNode(node: CallExpression) {
  * Get the callee member node from the given CallExpression
  */
 function getCalleeMemberNode(node: CallExpression) {
-  const callee = utils.skipChainExpression(node.callee)
+  const callee = skipChainExpression(node.callee)
 
   if (callee.type === 'MemberExpression') {
-    const name = utils.getStaticPropertyName(callee)
+    const name = getStaticPropertyName(callee)
     if (name) {
       return { name, member: callee }
     }
@@ -82,7 +93,7 @@ export default {
       node: Identifier,
       referenceIds: Set<Identifier>
     ) {
-      const variable = findVariable(utils.getScope(context, node), node)
+      const variable = findVariable(getScope(context, node), node)
       if (!variable) {
         return
       }
@@ -153,7 +164,7 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
+    return compositingVisitors(
       {
         Program() {
           refReferences = extractRefObjectReferences(context)
@@ -227,7 +238,7 @@ export default {
           if (node.parent.object !== node) {
             return
           }
-          const name = utils.getStaticPropertyName(node.parent)
+          const name = getStaticPropertyName(node.parent)
           if (
             name === 'value' ||
             name == null ||
@@ -239,7 +250,7 @@ export default {
           reportIfRefWrapped(node)
         }
       },
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineEmitsEnter(node) {
           if (
             !node.parent ||
@@ -265,9 +276,9 @@ export default {
         },
         ...callVisitor
       }),
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         onSetupFunctionEnter(node, { node: vueNode }) {
-          const contextParam = utils.skipDefaultParamValue(node.params[1])
+          const contextParam = skipDefaultParamValue(node.params[1])
           if (!contextParam) {
             // no arguments
             return
@@ -283,10 +294,7 @@ export default {
           const contextReferenceIds = new Set<Identifier>()
           const emitReferenceIds = new Set<Identifier>()
           if (contextParam.type === 'ObjectPattern') {
-            const emitProperty = utils.findAssignmentProperty(
-              contextParam,
-              'emit'
-            )
+            const emitProperty = findAssignmentProperty(contextParam, 'emit')
             if (!emitProperty || emitProperty.value.type !== 'Identifier') {
               return
             }

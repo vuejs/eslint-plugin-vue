@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import { isCustomComponent, defineTemplateBodyVisitor } from '../utils/index.js'
 import { pascalCase, kebabCase } from '../utils/casing.ts'
 
 export default {
@@ -62,7 +62,7 @@ export default {
     function verify(node: VDirective) {
       const element = node.parent.parent
       if (
-        utils.isCustomComponent(element, shouldIgnoreElementNamespaces) &&
+        isCustomComponent(element, shouldIgnoreElementNamespaces) &&
         !isAllowedComponent(element)
       ) {
         context.report({
@@ -76,7 +76,7 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true][key.name.name='text']": verify,
       "VAttribute[directive=true][key.name.name='html']": verify
     })

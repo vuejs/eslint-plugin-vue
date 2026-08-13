@@ -3,7 +3,21 @@
  * @author Yosuke Ota
  */
 import type { IPropertyReferences } from '../utils/property-references.ts'
-import * as utils from '../utils/index.js'
+import {
+  getStaticPropertyName,
+  isInExportDefault,
+  isProperty,
+  compositingVisitors,
+  isScriptSetup,
+  defineScriptSetupVisitor,
+  defineVueVisitor,
+  isStringLiteral,
+  getStringLiteralValue,
+  iterateProperties,
+  iterateWatchHandlerValues,
+  isThis,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
 import reserved from '../utils/vue-reserved.json' with { type: 'json' }
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
@@ -33,7 +47,7 @@ function getObjectPropertyMap(
     if (p.type !== 'Property') {
       return null
     }
-    const name = utils.getStaticPropertyName(p)
+    const name = getStaticPropertyName(p)
     if (name == null) {
       return null
     }
@@ -61,6 +75,21 @@ function getPropertyDataFromObjectProperty(
       return getPropertyDataFromObjectProperty(propertyMap.get(name))
     }
   }
+}
+
+function getParentProperty(node: Expression): Property | null {
+  if (
+    !node.parent ||
+    node.parent.type !== 'Property' ||
+    node.parent.value !== node
+  ) {
+    return null
+  }
+  const property = node.parent
+  if (!isProperty(property)) {
+    return null
+  }
+  return property
 }
 
 export default {
@@ -213,29 +242,14 @@ export default {
       VueComponentContext | undefined {
       const keys = [...vueComponentContextMap.keys()]
       const exported =
-        keys.find(isScriptSetupProgram) || keys.find(utils.isInExportDefault)
+        keys.find(isScriptSetupProgram) || keys.find(isInExportDefault)
       return exported && vueComponentContextMap.get(exported)
     }
 
-    function getParentProperty(node: Expression): Property | null {
-      if (
-        !node.parent ||
-        node.parent.type !== 'Property' ||
-        node.parent.value !== node
-      ) {
-        return null
-      }
-      const property = node.parent
-      if (!utils.isProperty(property)) {
-        return null
-      }
-      return property
-    }
-
-    const scriptVisitor = utils.compositingVisitors(
+    const scriptVisitor = compositingVisitors(
       {
         Program() {
-          if (!utils.isScriptSetup(context)) {
+          if (!isScriptSetup(context)) {
             return
           }
 
@@ -255,7 +269,7 @@ export default {
           }
         }
       },
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, props) {
           const ctx = getVueComponentContext(programNode)
 
@@ -303,7 +317,7 @@ export default {
           })
         }
       }),
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         CallExpression(node) {
           if (node.callee.type !== 'Identifier') return
           let groupName: 'methods' | 'computed' | null = null
@@ -327,7 +341,7 @@ export default {
               const name =
                 prop.type === 'SpreadElement'
                   ? null
-                  : utils.getStaticPropertyName(prop)
+                  : getStaticPropertyName(prop)
               if (name) {
                 propertiesDefinedByStoreHelpers.add(name)
               }
@@ -335,10 +349,10 @@ export default {
           } else if (arg.type === 'ArrayExpression') {
             // e.g. `mapMutations(['add'])`
             for (const element of arg.elements) {
-              if (!element || !utils.isStringLiteral(element)) {
+              if (!element || !isStringLiteral(element)) {
                 continue
               }
-              const name = utils.getStringLiteralValue(element)
+              const name = getStringLiteralValue(element)
               if (name) {
                 propertiesDefinedByStoreHelpers.add(name)
               }
@@ -348,7 +362,7 @@ export default {
         onVueObjectEnter(node) {
           const ctx = getVueComponentContext(node)
 
-          const properties = utils.iterateProperties(
+          const properties = iterateProperties(
             node,
             new Set([
               GROUP_PROPERTY,
@@ -380,7 +394,7 @@ export default {
             })
           }
 
-          const watchersAndExposes = utils.iterateProperties(
+          const watchersAndExposes = iterateProperties(
             node,
             new Set([GROUP_WATCHER, GROUP_EXPOSE])
           )
@@ -398,7 +412,7 @@ export default {
               if (watcher.type === 'object') {
                 const property = watcher.property
                 if (property.kind === 'init') {
-                  for (const handlerValueNode of utils.iterateWatchHandlerValues(
+                  for (const handlerValueNode of iterateWatchHandlerValues(
                     property
                   )) {
                     ctx.verifyReferences(
@@ -432,7 +446,7 @@ export default {
           }
           let isProps = false
           if (property.parent === vueData.node) {
-            if (utils.getStaticPropertyName(property) !== 'data') {
+            if (getStaticPropertyName(property) !== 'data') {
               return
             }
             // check { data: (vm) => vm.prop }
@@ -443,7 +457,7 @@ export default {
               return
             }
             if (parentProperty.parent === vueData.node) {
-              if (utils.getStaticPropertyName(parentProperty) !== 'computed') {
+              if (getStaticPropertyName(parentProperty) !== 'computed') {
                 return
               }
               // check { computed: { foo: (vm) => vm.prop } }
@@ -456,9 +470,8 @@ export default {
               }
               if (parentParentProperty.parent === vueData.node) {
                 if (
-                  utils.getStaticPropertyName(parentParentProperty) !==
-                    'computed' ||
-                  utils.getStaticPropertyName(property) !== 'get'
+                  getStaticPropertyName(parentParentProperty) !== 'computed' ||
+                  getStaticPropertyName(property) !== 'get'
                 ) {
                   return
                 }
@@ -502,7 +515,7 @@ export default {
           node: ThisExpression | Identifier,
           vueData
         ) {
-          if (!utils.isThis(node, context)) {
+          if (!isThis(node, context)) {
             return
           }
           const ctx = getVueComponentContext(vueData.node)
@@ -543,10 +556,6 @@ export default {
       }
     }
 
-    return utils.defineTemplateBodyVisitor(
-      context,
-      templateVisitor,
-      scriptVisitor
-    )
+    return defineTemplateBodyVisitor(context, templateVisitor, scriptVisitor)
   }
 }

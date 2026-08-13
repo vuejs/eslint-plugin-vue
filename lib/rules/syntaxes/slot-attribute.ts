@@ -5,7 +5,7 @@
 import canConvertToVSlot from './utils/can-convert-to-v-slot.js'
 import { toRegExpGroupMatcher } from '../../utils/regexp.ts'
 import { pascalCase, kebabCase } from '../../utils/casing.ts'
-import * as utils from '../../utils/index.js'
+import { isVElement } from '../../utils/index.js'
 
 export default {
   deprecated: '2.6.0',
@@ -130,7 +130,7 @@ export default {
       }
 
       const parent = component.parent
-      const parentName = utils.isVElement(parent) ? parent.rawName : null
+      const parentName = isVElement(parent) ? parent.rawName : null
       if (parentName && isParentIgnored(parentName)) {
         return
       }

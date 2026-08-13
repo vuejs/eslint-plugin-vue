@@ -2,7 +2,7 @@
  * @fileoverview disallow using deprecated number (keycode) modifiers
  * @author yoyo930021
  */
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { keyCodeToKey } from '../utils/keycode-to-key.ts'
 
 export default {
@@ -22,7 +22,7 @@ export default {
     }
   },
   create(context: RuleContext) {
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true][key.name.name='on'] > VDirectiveKey"(
         node: VDirectiveKey
       ) {

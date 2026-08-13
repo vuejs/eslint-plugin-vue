@@ -2,7 +2,16 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
-import * as utils from '../utils/index.js'
+import {
+  VUE2_BUILTIN_COMPONENT_NAMES,
+  VUE3_BUILTIN_COMPONENT_NAMES,
+  compositingVisitors,
+  executeOnCallVueComponent,
+  executeOnVue,
+  getRegisteredComponents,
+  findProperty,
+  defineScriptSetupVisitor
+} from '../utils/index.js'
 import { capitalize, pascalCase } from '../utils/casing.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }
@@ -101,18 +110,18 @@ export default {
     const reservedNames = new Set([
       ...RESERVED_NAMES_IN_HTML,
       ...(shouldDisallowVueBuiltInComponents
-        ? utils.VUE2_BUILTIN_COMPONENT_NAMES
+        ? VUE2_BUILTIN_COMPONENT_NAMES
         : []),
       ...(shouldDisallowVue3BuiltInComponents
-        ? utils.VUE3_BUILTIN_COMPONENT_NAMES
+        ? VUE3_BUILTIN_COMPONENT_NAMES
         : []),
       ...RESERVED_NAMES_IN_OTHERS
     ])
 
     function getMessageId(name: string): string {
       if (RESERVED_NAMES_IN_HTML.has(name)) return 'reservedInHtml'
-      if (utils.VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
-      if (utils.VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
+      if (VUE2_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue'
+      if (VUE3_BUILTIN_COMPONENT_NAMES.has(name)) return 'reservedInVue3'
       return 'reserved'
     }
 
@@ -139,8 +148,8 @@ export default {
       })
     }
 
-    return utils.compositingVisitors(
-      utils.executeOnCallVueComponent(context, (node) => {
+    return compositingVisitors(
+      executeOnCallVueComponent(context, (node) => {
         if (node.arguments.length !== 2) {
           return
         }
@@ -151,26 +160,26 @@ export default {
           reportIfInvalid(argument)
         }
       }),
-      utils.executeOnVue(context, (obj) => {
+      executeOnVue(context, (obj) => {
         // Report if a component has been registered locally with a reserved name.
-        for (const { node, name } of utils.getRegisteredComponents(obj)) {
+        for (const { node, name } of getRegisteredComponents(obj)) {
           if (reservedNames.has(name)) {
             report(node, name)
           }
         }
 
-        const node = utils.findProperty(obj, 'name')
+        const node = findProperty(obj, 'name')
 
         if (!node) return
         if (!canVerify(node.value)) return
         reportIfInvalid(node.value)
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           if (node.arguments.length === 0) return
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
-          const nameNode = utils.findProperty(define, 'name')
+          const nameNode = findProperty(define, 'name')
           if (!nameNode) return
           if (!canVerify(nameNode.value)) return
           reportIfInvalid(nameNode.value)

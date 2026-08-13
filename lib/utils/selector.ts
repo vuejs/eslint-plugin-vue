@@ -2,7 +2,7 @@
 
 import parser from 'postcss-selector-parser'
 import nthCheck from 'nth-check'
-import * as utils from './index.js'
+import { isVElement, getAttribute } from './index.js'
 
 export interface VElementSelector {
   test: (element: VElement) => boolean
@@ -488,7 +488,7 @@ function pseudoHasSelectorToVElementMatcher(
   }
   // descendant or child
   return buildVElementMatcher(selectors, (element) =>
-    element.children.filter(utils.isVElement)
+    element.children.filter(isVElement)
   )
 }
 
@@ -504,7 +504,7 @@ function buildVElementMatcher(
       if (selectors(el, element)) {
         return true
       }
-      elements.push(...el.children.filter(utils.isVElement))
+      elements.push(...el.children.filter(isVElement))
     }
     return false
   }
@@ -545,7 +545,7 @@ function buildPseudoNthVElementMatcher(
   testIndex: (index: number, length: number) => boolean
 ): VElementMatcher {
   return (element) => {
-    const elements = element.parent.children.filter(utils.isVElement)
+    const elements = element.parent.children.filter(isVElement)
     return testIndex(elements.indexOf(element), elements.length)
   }
 }
@@ -558,7 +558,7 @@ function buildPseudoNthOfTypeVElementMatcher(
 ): VElementMatcher {
   return (element) => {
     const elements = element.parent.children.filter(
-      (e): e is VElement => utils.isVElement(e) && e.rawName === element.rawName
+      (e): e is VElement => isVElement(e) && e.rawName === element.rawName
     )
     return testIndex(elements.indexOf(element), elements.length)
   }
@@ -571,13 +571,13 @@ function getBeforeElement(element: VElement) {
 function getBeforeElements(element: VElement) {
   const parent = element.parent
   const index = parent.children.indexOf(element)
-  return parent.children.slice(0, index).filter(utils.isVElement)
+  return parent.children.slice(0, index).filter(isVElement)
 }
 
 function getAfterElements(element: VElement) {
   const parent = element.parent
   const index = parent.children.indexOf(element)
-  return parent.children.slice(index + 1).filter(utils.isVElement)
+  return parent.children.slice(index + 1).filter(isVElement)
 }
 
 function compound(a: VElementMatcher, b: VElementMatcher): VElementMatcher {
@@ -588,7 +588,7 @@ function compound(a: VElementMatcher, b: VElementMatcher): VElementMatcher {
  * Get attribute value from given element.
  */
 function getAttributeValue(element: VElement, attribute: string) {
-  const attr = utils.getAttribute(element, attribute)
+  const attr = getAttribute(element, attribute)
   if (attr) {
     return (attr.value && attr.value.value) || ''
   }

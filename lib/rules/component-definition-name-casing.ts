@@ -2,7 +2,13 @@
  * @fileoverview enforce specific casing for component definition name
  * @author Armano
  */
-import * as utils from '../utils/index.js'
+import {
+  compositingVisitors,
+  executeOnCallVueComponent,
+  executeOnVue,
+  findProperty,
+  defineScriptSetupVisitor
+} from '../utils/index.js'
 import { getChecker, getExactConverter } from '../utils/casing.ts'
 
 const allowedCaseOptions = ['PascalCase', 'kebab-case']
@@ -71,8 +77,8 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.executeOnCallVueComponent(context, (node) => {
+    return compositingVisitors(
+      executeOnCallVueComponent(context, (node) => {
         if (node.arguments.length !== 2) {
           return
         }
@@ -83,19 +89,19 @@ export default {
           convertName(argument)
         }
       }),
-      utils.executeOnVue(context, (obj) => {
-        const node = utils.findProperty(obj, 'name')
+      executeOnVue(context, (obj) => {
+        const node = findProperty(obj, 'name')
 
         if (!node) return
         if (!canConvert(node.value)) return
         convertName(node.value)
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           if (node.arguments.length === 0) return
           const define = node.arguments[0]
           if (define.type !== 'ObjectExpression') return
-          const nameNode = utils.findProperty(define, 'name')
+          const nameNode = findProperty(define, 'name')
           if (!nameNode) return
           if (!canConvert(nameNode.value)) return
           convertName(nameNode.value)

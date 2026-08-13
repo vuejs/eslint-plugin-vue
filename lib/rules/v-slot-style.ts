@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { pascalCase } from '../utils/casing.ts'
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 
 interface Options {
   /** The style for the default slot at a custom component directly. */
@@ -108,7 +108,7 @@ export default {
     const sourceCode = context.sourceCode
     const options = normalizeOptions(context.options[0])
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true][key.name.name='slot']"(node) {
         const expected = getExpectedStyle(options, node)
         const actual = getActualStyle(node)

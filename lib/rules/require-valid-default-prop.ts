@@ -9,7 +9,16 @@ import type {
   ComponentInferTypeProp,
   VueObjectData
 } from '../utils/index.js'
-import * as utils from '../utils/index.js'
+import {
+  skipTSAsExpression,
+  skipChainExpression,
+  compositingVisitors,
+  defineVueVisitor,
+  getComponentPropsFromOptions,
+  defineScriptSetupVisitor,
+  getWithDefaultsPropExpressions,
+  getDefaultPropExpressionsForPropsDestructure
+} from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
 import { inferRuntimeType } from '../utils/ts-utils/ts-ast.js'
 
@@ -41,7 +50,7 @@ function getPropertyNode(obj: ObjectExpression, name: string): Property | null {
 }
 
 function getTypes(targetNode: Expression): string[] {
-  const node = utils.skipTSAsExpression(targetNode)
+  const node = skipTSAsExpression(targetNode)
   if (node.type === 'Identifier') {
     return [node.name]
   }
@@ -135,7 +144,7 @@ export default {
     function getValueType(
       targetNode: Expression
     ): StandardValueType | FunctionExprValueType | FunctionValueType | null {
-      const node = utils.skipChainExpression(targetNode)
+      const node = skipChainExpression(targetNode)
       switch (node.type) {
         case 'CallExpression': {
           // Symbol(), Number() ...
@@ -352,7 +361,7 @@ export default {
       return propContexts
     }
 
-    return utils.compositingVisitors(
+    return compositingVisitors(
       {
         ':function'(
           node:
@@ -380,11 +389,10 @@ export default {
         },
         ':function:exit': onFunctionExit
       },
-      utils.defineVueVisitor(context, {
+      defineVueVisitor(context, {
         onVueObjectEnter(obj) {
-          const props: ComponentObjectDefineProp[] = utils
-            .getComponentPropsFromOptions(obj)
-            .filter(
+          const props: ComponentObjectDefineProp[] =
+            getComponentPropsFromOptions(obj).filter(
               (prop): prop is ComponentObjectDefineProp =>
                 prop.type === 'object' && prop.value.type === 'ObjectExpression'
             )
@@ -417,7 +425,7 @@ export default {
           }
         }
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefinePropsEnter(node, baseProps) {
           const props = baseProps.filter(
             (
@@ -428,10 +436,9 @@ export default {
               | ComponentTypeProp =>
               ['type', 'infer-type', 'object'].includes(prop.type)
           )
-          const defaultsByWithDefaults =
-            utils.getWithDefaultsPropExpressions(node)
+          const defaultsByWithDefaults = getWithDefaultsPropExpressions(node)
           const defaultsByAssignmentPatterns =
-            utils.getDefaultPropExpressionsForPropsDestructure(node)
+            getDefaultPropExpressionsForPropsDestructure(node)
           const propContexts = processPropDefs(
             props,
             function* (propName: string) {
@@ -485,8 +492,7 @@ export default {
           }
         },
         onDefineModelEnter(node, model) {
-          const options =
-            model.options && utils.skipTSAsExpression(model.options)
+          const options = model.options && skipTSAsExpression(model.options)
           let syntheticProp:
             ComponentObjectProp | ComponentInferTypeProp | null = null
           let defaultFromOptions: Property | null = null

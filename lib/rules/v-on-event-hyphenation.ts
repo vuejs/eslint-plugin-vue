@@ -1,4 +1,4 @@
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor, isCustomComponent } from '../utils/index.js'
 import { getConverter } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
@@ -102,13 +102,10 @@ export default {
         : !/-/.test(value)
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       "VAttribute[directive=true][key.name.name='on']"(node) {
         const element = node.parent.parent
-        if (
-          !utils.isCustomComponent(element) ||
-          isIgnoredTag(element.rawName)
-        ) {
+        if (!isCustomComponent(element) || isIgnoredTag(element.rawName)) {
           return
         }
         if (!node.key.argument || node.key.argument.type !== 'VIdentifier') {

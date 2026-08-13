@@ -2,7 +2,11 @@
  * @author Marton Csordas
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  defineTemplateBodyVisitor,
+  getAttribute,
+  getDirective
+} from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 
 function getComponentNames(context: RuleContext) {
@@ -53,17 +57,17 @@ export default {
   create(context: RuleContext) {
     const components = getComponentNames(context)
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VElement(node) {
         if (!components.has(node.rawName)) return
 
         let tagKey: VIdentifier | null = null
 
-        const tagAttr = utils.getAttribute(node, 'tag')
+        const tagAttr = getAttribute(node, 'tag')
         if (tagAttr) {
           tagKey = tagAttr.key
         } else {
-          const directive = utils.getDirective(node, 'bind', 'tag')
+          const directive = getDirective(node, 'bind', 'tag')
           if (directive) {
             const arg = directive.key.argument
             if (arg && arg.type === 'VIdentifier') {

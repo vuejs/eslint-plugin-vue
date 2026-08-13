@@ -1,11 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseSelector } from '../../../lib/utils/selector'
-import * as utils from '../../../lib/utils'
+import { defineDocumentVisitor } from '../../../lib/utils'
 import { Linter } from '../../eslint-compat'
 import parser from 'vue-eslint-parser'
 
-const { defineDocumentVisitor } = utils
 const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/utils/selector')
 
 function loadPatterns() {

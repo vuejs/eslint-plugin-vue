@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { camelCase } from '../utils/casing.ts'
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor, isCustomComponent } from '../utils/index.js'
 
 /**
  * Get the static argument name of a directive, or `null` for dynamic arguments.
@@ -102,10 +102,10 @@ export default {
   create(context: RuleContext) {
     const sourceCode = context.sourceCode
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VStartTag(node) {
         const element = node.parent
-        if (!utils.isCustomComponent(element)) {
+        if (!isCustomComponent(element)) {
           return
         }
 

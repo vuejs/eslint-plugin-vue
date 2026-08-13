@@ -2,11 +2,10 @@
  * @author Armano
  */
 import type { Linter } from 'eslint'
-import * as utils from '../../../lib/utils/index'
+import { executeOnVueComponent } from '../../../lib/utils/index'
 import { RuleTester } from '../../eslint-compat'
 import tsEslintParser from '@typescript-eslint/parser'
 
-const { executeOnVueComponent } = utils
 const rule: RuleModule = {
   create(context) {
     return executeOnVueComponent(context, (obj) => {

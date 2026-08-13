@@ -2,7 +2,7 @@
  * @fileoverview Define a style for the props casing in templates.
  * @author Armano
  */
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor, isCustomComponent } from '../utils/index.js'
 import { getExactConverter } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import svgAttributes from '../utils/svg-attributes-weird-case.json' with { type: 'json' }
@@ -126,11 +126,11 @@ export default {
         : !/-/.test(value)
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VAttribute(node) {
         const element = node.parent.parent
         if (
-          (!utils.isCustomComponent(element) && element.name !== 'slot') ||
+          (!isCustomComponent(element) && element.name !== 'slot') ||
           isIgnoredTagName(element.rawName)
         )
           return

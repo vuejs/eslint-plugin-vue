@@ -2,7 +2,11 @@
  * @author Doug Wade <douglas.b.wade@gmail.com>
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  executeOnVueComponent,
+  findProperty,
+  getStaticPropertyName
+} from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 
 function getExpectedNames(identifier: Identifier): string[] {
@@ -26,8 +30,8 @@ export default {
     }
   },
   create(context: RuleContext): RuleListener {
-    return utils.executeOnVueComponent(context, (obj) => {
-      const components = utils.findProperty(obj, 'components')
+    return executeOnVueComponent(context, (obj) => {
+      const components = findProperty(obj, 'components')
       if (
         !components ||
         !components.value ||
@@ -45,7 +49,7 @@ export default {
           continue
         }
 
-        const importedName = utils.getStaticPropertyName(property) || ''
+        const importedName = getStaticPropertyName(property) || ''
         const expectedNames = getExpectedNames(property.value)
         if (!expectedNames.includes(importedName)) {
           context.report({

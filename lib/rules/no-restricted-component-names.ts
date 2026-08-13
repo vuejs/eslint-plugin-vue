@@ -2,7 +2,13 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  findProperty,
+  getStaticPropertyName,
+  compositingVisitors,
+  defineVueVisitor,
+  defineScriptSetupVisitor
+} from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import { isRegExp, toRegExp } from '../utils/regexp.ts'
 
@@ -92,10 +98,10 @@ export default {
     const options: OptionParsed[] = context.options.map(parseOption)
 
     function verify(node: ObjectExpression) {
-      const property = utils.findProperty(node, 'name')
+      const property = findProperty(node, 'name')
       if (!property) return
 
-      const propertyName = utils.getStaticPropertyName(property)
+      const propertyName = getStaticPropertyName(property)
       if (propertyName === 'name' && property.value.type === 'Literal') {
         const componentName = property.value.value?.toString()
         if (!componentName) {
@@ -119,13 +125,13 @@ export default {
       }
     }
 
-    return utils.compositingVisitors(
-      utils.defineVueVisitor(context, {
+    return compositingVisitors(
+      defineVueVisitor(context, {
         onVueObjectEnter(node) {
           verify(node)
         }
       }),
-      utils.defineScriptSetupVisitor(context, {
+      defineScriptSetupVisitor(context, {
         onDefineOptionsEnter(node) {
           const expression = node.arguments[0]
           if (expression.type === 'ObjectExpression') {

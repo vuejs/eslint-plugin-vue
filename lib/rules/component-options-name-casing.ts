@@ -2,7 +2,7 @@
  * @author Pig Fang
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import { executeOnVue, findProperty } from '../utils/index.js'
 import {
   allowedCaseOptions,
   getChecker,
@@ -43,8 +43,8 @@ export default {
     const checkCase = getChecker(caseType)
     const convert = getConverter(caseType)
 
-    return utils.executeOnVue(context, (obj) => {
-      const node = utils.findProperty(obj, 'components')
+    return executeOnVue(context, (obj) => {
+      const node = findProperty(obj, 'components')
       if (!node || node.value.type !== 'ObjectExpression') {
         return
       }

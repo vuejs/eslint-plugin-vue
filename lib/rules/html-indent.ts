@@ -4,7 +4,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { defineVisitor } from '../utils/indent-common.ts'
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 
 export default {
   create(context: RuleContext) {
@@ -16,7 +16,7 @@ export default {
       baseIndent: 1
     })
 
-    return utils.defineTemplateBodyVisitor(context, visitor)
+    return defineTemplateBodyVisitor(context, visitor)
   },
   // eslint-disable-next-line eslint-plugin/prefer-message-ids
   meta: {

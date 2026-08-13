@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import { defineTemplateBodyVisitor } from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import INLINE_ELEMENTS from '../utils/inline-non-void-elements.json' with { type: 'json' }
 
@@ -104,7 +104,7 @@ export default {
       return allowEmptyLines ? lineBreaks === 0 : lineBreaks !== 1
     }
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       VElement(node) {
         if (inIgnoreElement) {
           return

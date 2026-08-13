@@ -3,7 +3,15 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  isCustomComponent,
+  isHtmlElementNode,
+  isHtmlVoidElementName,
+  isSvgElementNode,
+  isMathElementNode,
+  defineTemplateBodyVisitor,
+  hasInvalidEOF as utilsHasInvalidEOF
+} from '../utils/index.js'
 
 /**
  * These strings wil be displayed in error messages.
@@ -44,19 +52,19 @@ function parseOptions(options: any): Options {
  * Get the elementType of the given element.
  */
 function getElementType(node: VElement): keyof Options {
-  if (utils.isCustomComponent(node)) {
+  if (isCustomComponent(node)) {
     return 'COMPONENT'
   }
-  if (utils.isHtmlElementNode(node)) {
-    if (utils.isHtmlVoidElementName(node.name)) {
+  if (isHtmlElementNode(node)) {
+    if (isHtmlVoidElementName(node.name)) {
       return 'VOID'
     }
     return 'NORMAL'
   }
-  if (utils.isSvgElementNode(node)) {
+  if (isSvgElementNode(node)) {
     return 'SVG'
   }
-  if (utils.isMathElementNode(node)) {
+  if (isMathElementNode(node)) {
     return 'MATH'
   }
   return 'UNKNOWN'
@@ -122,7 +130,7 @@ export default {
     const options = parseOptions(context.options[0])
     let hasInvalidEOF = false
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       {
         VElement(node) {
@@ -203,7 +211,7 @@ export default {
       },
       {
         Program(node) {
-          hasInvalidEOF = utils.hasInvalidEOF(node)
+          hasInvalidEOF = utilsHasInvalidEOF(node)
         }
       }
     )

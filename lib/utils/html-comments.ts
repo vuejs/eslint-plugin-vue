@@ -1,4 +1,4 @@
-import * as utils from './index.js'
+import { hasInvalidEOF } from './index.js'
 
 export interface CommentParserConfig {
   exceptions?: string[]
@@ -194,7 +194,7 @@ export function defineVisitor(
   return {
     Program(node) {
       visitorOption ||= {}
-      if (utils.hasInvalidEOF(node)) {
+      if (hasInvalidEOF(node)) {
         return
       }
       if (!node.templateBody) {

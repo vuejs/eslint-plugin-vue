@@ -2,7 +2,14 @@
  * @author rzzf
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  getStaticPropertyName,
+  isBuiltInDirectiveName,
+  isScriptSetup,
+  defineVueVisitor,
+  defineTemplateBodyVisitor,
+  executeOnVue
+} from '../utils/index.js'
 import { camelCase, capitalize, kebabCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
@@ -12,7 +19,7 @@ function getRegisteredDirectives(
   const directivesNode = componentObject.properties.find(
     (p) =>
       p.type === 'Property' &&
-      utils.getStaticPropertyName(p) === 'directives' &&
+      getStaticPropertyName(p) === 'directives' &&
       p.value.type === 'ObjectExpression'
   )
 
@@ -25,8 +32,7 @@ function getRegisteredDirectives(
   }
 
   return directivesNode.value.properties.flatMap((node) => {
-    const name =
-      node.type === 'Property' ? utils.getStaticPropertyName(node) : null
+    const name = node.type === 'Property' ? getStaticPropertyName(node) : null
     return name ? [{ node: node as Property, name }] : []
   })
 }
@@ -92,8 +98,7 @@ export default {
     function isVerifyTargetDirective(rawName: string): boolean {
       const kebabName = kebabCase(rawName)
       return (
-        !utils.isBuiltInDirectiveName(rawName) &&
-        !isAnyIgnored(rawName, kebabName)
+        !isBuiltInDirectiveName(rawName) && !isAnyIgnored(rawName, kebabName)
       )
     }
 
@@ -103,7 +108,7 @@ export default {
       return {
         'VAttribute[directive=true]'(node: VDirective) {
           const name = node.key.name.name
-          if (utils.isBuiltInDirectiveName(name)) {
+          if (isBuiltInDirectiveName(name)) {
             return
           }
           const rawName = node.key.name.rawName || name
@@ -122,7 +127,7 @@ export default {
 
     const definedInOptionDirectives = new Set<string>()
 
-    if (utils.isScriptSetup(context)) {
+    if (isScriptSetup(context)) {
       // For <script setup>
       const definedInSetupDirectives = new Set<string>()
 
@@ -140,7 +145,7 @@ export default {
         }
       }
 
-      const scriptVisitor = utils.defineVueVisitor(context, {
+      const scriptVisitor = defineVueVisitor(context, {
         onVueObjectEnter(node) {
           for (const directive of getRegisteredDirectives(node)) {
             definedInOptionDirectives.add(directive.name)
@@ -154,7 +159,7 @@ export default {
           isDefinedInOptions(rawName, definedInOptionDirectives)
       )
 
-      return utils.defineTemplateBodyVisitor(
+      return defineTemplateBodyVisitor(
         context,
         templateBodyVisitor,
         scriptVisitor
@@ -162,7 +167,7 @@ export default {
     }
 
     // For Options API
-    const scriptVisitor = utils.executeOnVue(context, (obj) => {
+    const scriptVisitor = executeOnVue(context, (obj) => {
       for (const directive of getRegisteredDirectives(obj)) {
         definedInOptionDirectives.add(directive.name)
       }
@@ -172,7 +177,7 @@ export default {
       isDefinedInOptions(rawName, definedInOptionDirectives)
     )
 
-    return utils.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
       context,
       templateBodyVisitor,
       scriptVisitor

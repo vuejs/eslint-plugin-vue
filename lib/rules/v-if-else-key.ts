@@ -2,7 +2,13 @@
  * @author Felipe Melendez
  * See LICENSE file in root directory for full license.
  */
-import * as utils from '../utils/index.js'
+import {
+  hasAttribute,
+  hasDirective,
+  isCustomComponent,
+  defineTemplateBodyVisitor,
+  getDirective
+} from '../utils/index.js'
 import { kebabCase } from '../utils/casing.ts'
 
 /**
@@ -72,7 +78,7 @@ const checkForKey = (
 
   const conditionalFamily = conditionalFamilies.get(node.parent)
 
-  if (!conditionalFamily || utils.hasAttribute(node, 'key')) {
+  if (!conditionalFamily || hasAttribute(node, 'key')) {
     return
   }
 
@@ -107,9 +113,9 @@ const checkForKey = (
  *   false otherwise.
  */
 const hasConditionalDirective = (node: VElement): boolean =>
-  utils.hasDirective(node, 'if') ||
-  utils.hasDirective(node, 'else-if') ||
-  utils.hasDirective(node, 'else')
+  hasDirective(node, 'if') ||
+  hasDirective(node, 'else-if') ||
+  hasDirective(node, 'else')
 
 export default {
   meta: {
@@ -158,7 +164,7 @@ export default {
      */
     const isCustomComponentWithoutCondition = (node: VElement): boolean =>
       node.type === 'VElement' &&
-      utils.isCustomComponent(node) &&
+      isCustomComponent(node) &&
       !hasConditionalDirective(node)
 
     /** Set of built-in Vue components that are exempt from the rule. */
@@ -178,7 +184,7 @@ export default {
       else: null
     })
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       /**
        * Callback to be executed when a Vue element is traversed. This function checks if the
        * element is a component, increments the usage count of the component in the
@@ -192,9 +198,9 @@ export default {
         }
 
         const condition =
-          utils.getDirective(node, 'if') ||
-          utils.getDirective(node, 'else-if') ||
-          utils.getDirective(node, 'else')
+          getDirective(node, 'if') ||
+          getDirective(node, 'else-if') ||
+          getDirective(node, 'else')
 
         if (condition) {
           const conditionType = condition.key.name.name
@@ -232,7 +238,7 @@ export default {
           return
         }
 
-        if (!utils.isCustomComponent(node)) {
+        if (!isCustomComponent(node)) {
           return
         }
 
@@ -288,7 +294,7 @@ export default {
           componentUsageStack.pop()
           return
         }
-        if (!utils.isCustomComponent(node)) {
+        if (!isCustomComponent(node)) {
           return
         }
         if (pushedNodes.has(node)) {

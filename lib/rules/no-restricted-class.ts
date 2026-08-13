@@ -2,7 +2,10 @@
  * @fileoverview Forbid certain classes from being used
  * @author Tao Bojlen
  */
-import * as utils from '../utils/index.js'
+import {
+  getStaticPropertyName,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 
 const reportForbiddenClass = (
@@ -63,7 +66,7 @@ function* extractClassNames(
       if (prop.type !== 'Property') {
         continue
       }
-      const classNames = utils.getStaticPropertyName(prop)
+      const classNames = getStaticPropertyName(prop)
       if (!classNames) {
         continue
       }
@@ -111,7 +114,7 @@ export default {
     const { options = [] } = context
     const isForbiddenClass = toRegExpGroupMatcher(options)
 
-    return utils.defineTemplateBodyVisitor(context, {
+    return defineTemplateBodyVisitor(context, {
       'VAttribute[directive=false][key.name="class"][value!=null]'(
         node: VAttribute & { value: VLiteral }
       ) {

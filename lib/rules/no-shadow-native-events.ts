@@ -10,7 +10,20 @@ import type {
   VueObjectData,
   VueObjectType
 } from '../utils/index.js'
-import * as utils from '../utils/index.js'
+import {
+  isScriptSetup,
+  skipChainExpression,
+  getNameParamNode,
+  getStaticPropertyName,
+  isThis,
+  defineScriptSetupVisitor,
+  getScope,
+  defineVueVisitor,
+  findAssignmentProperty,
+  getComponentEmitsFromOptions,
+  compositingVisitors,
+  defineTemplateBodyVisitor
+} from '../utils/index.js'
 
 interface VueTemplateDefineData {
   type: VueObjectType | 'setup'
@@ -60,7 +73,7 @@ export default {
     let vueTemplateDefineData: VueTemplateDefineData | null = null
 
     const programNode = context.sourceCode.ast
-    if (utils.isScriptSetup(context)) {
+    if (isScriptSetup(context)) {
       // init
       vueTemplateDefineData = {
         type: 'setup',
@@ -104,8 +117,8 @@ export default {
 
     const callVisitor = {
       CallExpression(node: CallExpression, info?: VueObjectData) {
-        const callee = utils.skipChainExpression(node.callee)
-        const nameWithLoc = utils.getNameParamNode(node)
+        const callee = skipChainExpression(node.callee)
+        const nameWithLoc = getNameParamNode(node)
         if (!nameWithLoc) {
           // cannot check
           return
@@ -114,7 +127,7 @@ export default {
 
         let emit
         if (callee.type === 'MemberExpression') {
-          const name = utils.getStaticPropertyName(callee)
+          const name = getStaticPropertyName(callee)
           if (name === 'emit' || name === '$emit') {
             emit = { name, member: callee }
           }
@@ -128,7 +141,7 @@ export default {
             // verify setup(props,{emit}) {emit()}
             verifyEmit(nameWithLoc)
           } else if (emit?.name === 'emit') {
-            const memObject = utils.skipChainExpression(emit.member.object)
+            const memObject = skipChainExpression(emit.member.object)
             if (
               memObject.type === 'Identifier' &&
               contextReferenceIds.has(memObject)
@@ -141,8 +154,8 @@ export default {
 
         // verify $emit
         if (emit?.name === '$emit') {
-          const memObject = utils.skipChainExpression(emit.member.object)
-          if (utils.isThis(memObject, context)) {
+          const memObject = skipChainExpression(emit.member.object)
+          if (isThis(memObject, context)) {
             // verify this.$emit()
             verifyEmit(nameWithLoc)
           }
@@ -150,7 +163,7 @@ export default {
       }
     }
 
-    const scriptSetupVisitor = utils.defineScriptSetupVisitor(context, {
+    const scriptSetupVisitor = defineScriptSetupVisitor(context, {
       onDefineEmitsEnter: (node, emits) => {
         verifyEmitDeclaration(emits)
         if (vueTemplateDefineData?.type === 'setup') {
@@ -167,7 +180,7 @@ export default {
         const emitParam = node.parent.id
         const variable =
           emitParam.type === 'Identifier'
-            ? findVariable(utils.getScope(context, emitParam), emitParam)
+            ? findVariable(getScope(context, emitParam), emitParam)
             : null
         if (!variable) {
           return
@@ -189,7 +202,7 @@ export default {
       ...callVisitor
     })
 
-    const vueVisitor = utils.defineVueVisitor(context, {
+    const vueVisitor = defineVueVisitor(context, {
       onSetupFunctionEnter(node, { node: vueNode }) {
         const contextParam = node.params[1]
         if (!contextParam) {
@@ -207,10 +220,7 @@ export default {
         const contextReferenceIds = new Set<Identifier>()
         const emitReferenceIds = new Set<Identifier>()
         if (contextParam.type === 'ObjectPattern') {
-          const emitProperty = utils.findAssignmentProperty(
-            contextParam,
-            'emit'
-          )
+          const emitProperty = findAssignmentProperty(contextParam, 'emit')
           if (!emitProperty) {
             return
           }
@@ -218,7 +228,7 @@ export default {
           // `setup(props, {emit})`
           const variable =
             emitParam.type === 'Identifier'
-              ? findVariable(utils.getScope(context, emitParam), emitParam)
+              ? findVariable(getScope(context, emitParam), emitParam)
               : null
           if (!variable) {
             return
@@ -233,7 +243,7 @@ export default {
         } else if (contextParam.type === 'Identifier') {
           // `setup(props, context)`
           const variable = findVariable(
-            utils.getScope(context, contextParam),
+            getScope(context, contextParam),
             contextParam
           )
           if (!variable) {
@@ -253,7 +263,7 @@ export default {
         })
       },
       onVueObjectEnter(node) {
-        const emits = utils.getComponentEmitsFromOptions(node)
+        const emits = getComponentEmitsFromOptions(node)
         verifyEmitDeclaration(emits)
       },
       onVueObjectExit(node, { type }) {
@@ -273,13 +283,13 @@ export default {
       ...callVisitor
     })
 
-    return utils.compositingVisitors(
-      utils.defineTemplateBodyVisitor(
+    return compositingVisitors(
+      defineTemplateBodyVisitor(
         context,
         {
           CallExpression(node) {
-            const callee = utils.skipChainExpression(node.callee)
-            const nameWithLoc = utils.getNameParamNode(node)
+            const callee = skipChainExpression(node.callee)
+            const nameWithLoc = getNameParamNode(node)
             if (!nameWithLoc) {
               // cannot check
               return
@@ -299,7 +309,7 @@ export default {
             }
           }
         },
-        utils.compositingVisitors(scriptSetupVisitor, vueVisitor)
+        compositingVisitors(scriptSetupVisitor, vueVisitor)
       )
     )
   }
