@@ -6,8 +6,6 @@ import fs from 'node:fs'
 import path from 'node:path'
 import tsParser from '@typescript-eslint/parser'
 import httpGetModule from './lib/http.js'
-const __dirname = import.meta.dirname
-
 const { httpGet } = httpGetModule
 
 await main()
@@ -20,7 +18,7 @@ async function main() {
   }
   // Update file.
   const filePath = path.resolve(
-    __dirname,
+    import.meta.dirname,
     '../lib/utils/vue3-export-names.json'
   )
 

@@ -12,8 +12,6 @@ import fs from 'node:fs'
 import path from 'node:path'
 import * as ESLintModule from 'eslint'
 import categoriesModule1 from './lib/categories.js'
-const __dirname = import.meta.dirname
-
 const { ESLint } = ESLintModule
 const { categories } = categoriesModule1
 
@@ -98,7 +96,7 @@ export default {
 }
 
 // Update files.
-const ROOT = path.resolve(__dirname, '../lib/configs/')
+const ROOT = path.resolve(import.meta.dirname, '../lib/configs/')
 for (const category of categories) {
   const filePath = path.join(ROOT, `${category.categoryId}.ts`)
   const content = formatCategory(category)

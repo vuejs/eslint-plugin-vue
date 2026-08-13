@@ -9,8 +9,6 @@ import rules from './lib/rules.js'
 import docsUtils from './lib/utils.js'
 import removedRules from '../lib/removed-rules.js'
 import categories from './lib/categories.js'
-const __dirname = import.meta.dirname
-
 const { getPresetIds, formatItems } = docsUtils
 const { getPresetNames } = categories
 
@@ -264,7 +262,10 @@ const releaseLinkDefinitions = releases.map(
 )
 
 // -----------------------------------------------------------------------------
-const readmeFilePath = path.resolve(__dirname, '../docs/rules/index.md')
+const readmeFilePath = path.resolve(
+  import.meta.dirname,
+  '../docs/rules/index.md'
+)
 fs.writeFileSync(
   readmeFilePath,
   `---

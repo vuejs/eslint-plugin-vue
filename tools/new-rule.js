@@ -1,8 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import cp from 'node:child_process'
-const __dirname = import.meta.dirname
-
 const logger = console
 
 // main
@@ -18,12 +16,18 @@ const logger = console
     return
   }
 
-  const ruleFile = path.resolve(__dirname, `../lib/rules/${ruleName}.ts`)
+  const ruleFile = path.resolve(
+    import.meta.dirname,
+    `../lib/rules/${ruleName}.ts`
+  )
   const testFile = path.resolve(
-    __dirname,
+    import.meta.dirname,
     `../tests/lib/rules/${ruleName}.test.ts`
   )
-  const docFile = path.resolve(__dirname, `../docs/rules/${ruleName}.md`)
+  const docFile = path.resolve(
+    import.meta.dirname,
+    `../docs/rules/${ruleName}.md`
+  )
 
   fs.writeFileSync(
     ruleFile,

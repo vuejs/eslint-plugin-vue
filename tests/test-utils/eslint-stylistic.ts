@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 const eslintStylisticPackagePath = path.join(
-  __dirname,
+  import.meta.dirname,
   '../..',
   'node_modules',
   '@stylistic',

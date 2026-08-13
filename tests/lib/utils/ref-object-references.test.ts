@@ -16,7 +16,7 @@ import {
 } from '../../../lib/utils/ref-object-references'
 
 const FIXTURE_ROOT = path.resolve(
-  __dirname,
+  import.meta.dirname,
   '../../fixtures/utils/ref-object-references'
 )
 const REF_OBJECTS_FIXTURE_ROOT = path.resolve(FIXTURE_ROOT, 'ref-objects')

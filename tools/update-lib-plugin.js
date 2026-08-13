@@ -13,12 +13,10 @@ import path from 'node:path'
 import * as ESLintModule from 'eslint'
 import rules from './lib/rules.js'
 import { camelCase } from '../lib/utils/casing.ts'
-const __dirname = import.meta.dirname
-
 const { ESLint } = ESLintModule
 
 // Update files.
-const filePath = path.resolve(__dirname, '../lib/plugin.ts')
+const filePath = path.resolve(import.meta.dirname, '../lib/plugin.ts')
 const content = `/*
  * IMPORTANT!
  * This file has been automatically generated,

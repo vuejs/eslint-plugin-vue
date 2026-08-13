@@ -12,8 +12,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import rules from './lib/rules.js'
-const __dirname = import.meta.dirname
-
 const rulesToDisable = rules.filter(({ meta }) => meta.type === 'layout')
 
 function formatRules(rules) {
@@ -34,6 +32,9 @@ export default {
 }
 
 // Update files.
-const filePath = path.resolve(__dirname, '../lib/configs/no-layout-rules.ts')
+const filePath = path.resolve(
+  import.meta.dirname,
+  '../lib/configs/no-layout-rules.ts'
+)
 const content = generateConfig(rulesToDisable)
 fs.writeFileSync(filePath, content)

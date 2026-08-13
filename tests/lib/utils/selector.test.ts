@@ -5,7 +5,10 @@ import { defineDocumentVisitor } from '../../../lib/utils'
 import { Linter } from '../../eslint-compat'
 import parser from 'vue-eslint-parser'
 
-const FIXTURE_ROOT = path.resolve(__dirname, '../../fixtures/utils/selector')
+const FIXTURE_ROOT = path.resolve(
+  import.meta.dirname,
+  '../../fixtures/utils/selector'
+)
 
 function loadPatterns() {
   return fs.readdirSync(FIXTURE_ROOT).map((name) => {

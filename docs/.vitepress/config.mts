@@ -1,14 +1,11 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import path from 'pathe'
-import { fileURLToPath } from 'node:url'
 import { viteCommonjs, vitePluginRequireResolve } from './vite-plugin.mjs'
 import eslint4b, { requireESLintUseAtYourOwnRisk4b } from 'vite-plugin-eslint4b'
 
 // Pre-build cjs packages that cannot be bundled well.
 import './build-system/build.mjs'
-
-const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line unicorn/no-anonymous-default-export
 export default async () => {
@@ -141,7 +138,7 @@ export default async () => {
     head: [['link', { rel: 'icon', href: '/favicon.png' }]],
 
     vite: {
-      publicDir: path.resolve(dirname, './public'),
+      publicDir: path.resolve(import.meta.dirname, './public'),
       plugins: [
         vitePluginRequireResolve(),
         viteCommonjs(),
@@ -151,21 +148,42 @@ export default async () => {
       resolve: {
         alias: {
           'vue-eslint-parser': path.join(
-            dirname,
+            import.meta.dirname,
             './build-system/shim/vue-eslint-parser.mjs'
           ),
           '@typescript-eslint/parser': path.join(
-            dirname,
+            import.meta.dirname,
             './build-system/shim/@typescript-eslint/parser.mjs'
           ),
 
-          tslib: path.join(dirname, '../../node_modules/tslib/tslib.es6.js'),
-          globby: path.join(dirname, './build-system/shim/empty.mjs'),
-          'fast-glob': path.join(dirname, './build-system/shim/empty.mjs'),
-          tinyglobby: path.join(dirname, './build-system/shim/empty.mjs'),
-          module: path.join(dirname, './build-system/shim/module.mjs'),
-          'node:module': path.join(dirname, './build-system/shim/module.mjs'),
-          'node:url': path.join(dirname, './build-system/shim/url.mjs')
+          tslib: path.join(
+            import.meta.dirname,
+            '../../node_modules/tslib/tslib.es6.js'
+          ),
+          globby: path.join(
+            import.meta.dirname,
+            './build-system/shim/empty.mjs'
+          ),
+          'fast-glob': path.join(
+            import.meta.dirname,
+            './build-system/shim/empty.mjs'
+          ),
+          tinyglobby: path.join(
+            import.meta.dirname,
+            './build-system/shim/empty.mjs'
+          ),
+          module: path.join(
+            import.meta.dirname,
+            './build-system/shim/module.mjs'
+          ),
+          'node:module': path.join(
+            import.meta.dirname,
+            './build-system/shim/module.mjs'
+          ),
+          'node:url': path.join(
+            import.meta.dirname,
+            './build-system/shim/url.mjs'
+          )
         }
       },
       define: {
