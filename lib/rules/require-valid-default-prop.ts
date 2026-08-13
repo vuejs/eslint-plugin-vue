@@ -9,9 +9,9 @@ import type {
   ComponentInferTypeProp,
   VueObjectData
 } from '../utils/index.js'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
-import tsAST from '../utils/ts-utils/ts-ast.js'
+import { inferRuntimeType } from '../utils/ts-utils/ts-ast.js'
 
 const NATIVE_TYPES = new Set([
   'String',
@@ -497,7 +497,7 @@ export default {
               propName: model.name.modelName,
               node: model.typeNode,
               required: false,
-              types: tsAST.inferRuntimeType(
+              types: inferRuntimeType(
                 context,
                 model.typeNode as TSESTree.TypeNode
               )

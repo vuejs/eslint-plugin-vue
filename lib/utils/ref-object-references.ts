@@ -5,7 +5,7 @@
  */
 
 import type { Scope } from 'eslint'
-import utils from './index.js'
+import * as utils from './index.js'
 import { findVariable, ReferenceTracker } from '@eslint-community/eslint-utils'
 import { definePropertyReferenceExtractor } from './property-references.ts'
 

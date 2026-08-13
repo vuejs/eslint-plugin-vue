@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { parseSelector } from '../../../lib/utils/selector'
-import utils from '../../../lib/utils'
+import * as utils from '../../../lib/utils'
 import { Linter } from '../../eslint-compat'
 import parser from 'vue-eslint-parser'
 

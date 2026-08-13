@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { isRegExp, toRegExp, escape } from '../utils/regexp.ts'
 import { isKebabCase, pascalCase } from '../utils/casing.ts'
 

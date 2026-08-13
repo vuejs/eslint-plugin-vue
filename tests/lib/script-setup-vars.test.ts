@@ -1,6 +1,6 @@
 import semver from 'semver'
 import { RuleTester, ESLint } from '../eslint-compat'
-import utils from '../../lib/utils'
+import * as utils from '../../lib/utils'
 import vueEslintParser from 'vue-eslint-parser'
 
 const { getCoreRule } = utils

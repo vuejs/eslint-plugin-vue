@@ -3,7 +3,7 @@
  * @copyright 2016 Toru Nagashima. All rights reserved.
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 /**
  * These strings wil be displayed in error messages.

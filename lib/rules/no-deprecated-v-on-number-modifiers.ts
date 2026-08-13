@@ -2,8 +2,8 @@
  * @fileoverview disallow using deprecated number (keycode) modifiers
  * @author yoyo930021
  */
-import utils from '../utils/index.js'
-import keyCodeToKey from '../utils/keycode-to-key.ts'
+import * as utils from '../utils/index.js'
+import { keyCodeToKey } from '../utils/keycode-to-key.ts'
 
 export default {
   meta: {

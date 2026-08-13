@@ -2,7 +2,7 @@
  * @author ItMaga <https://github.com/ItMaga>
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { kebabCase, pascalCase } from '../utils/casing.ts'
 import { isRegExp, toRegExp } from '../utils/regexp.ts'
 

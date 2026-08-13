@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/250
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { getChecker, getExactConverter, pascalCase } from '../utils/casing.ts'
 import { toRegExpGroupMatcher, isRegExp } from '../utils/regexp.ts'
 

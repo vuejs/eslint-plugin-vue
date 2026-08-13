@@ -3,7 +3,7 @@
  * issue https://github.com/vuejs/eslint-plugin-vue/issues/140
  */
 import type { VElementSelector } from '../utils/selector.ts'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { parseSelector } from '../utils/selector.ts'
 
 const DEFAULT_ORDER = Object.freeze([['script', 'template'], 'style'])

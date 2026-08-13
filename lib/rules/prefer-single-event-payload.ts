@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import type { ComponentEmit, ComponentUnknownEmit } from '../utils'
 import type { ReportSourceLocation } from 'eslint'
 import type * as VNODE from '../../typings/eslint-plugin-vue/util-types/node'

@@ -1,5 +1,5 @@
 import { RuleTester } from '../../../eslint-compat'
-import utils from '../../../../lib/utils/index'
+import * as utils from '../../../../lib/utils/index'
 import vueEslintParser from 'vue-eslint-parser'
 
 const { wrapCoreRule } = utils

@@ -14,7 +14,7 @@ import {
   isClosingBraceToken,
   isOpeningBracketToken
 } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { capitalize } from '../utils/casing.ts'
 
 const FIX_EMITS_AFTER_OPTIONS = new Set([

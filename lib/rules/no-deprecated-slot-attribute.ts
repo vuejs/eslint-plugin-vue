@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import slotAttribute from './syntaxes/slot-attribute.ts'
 
 export default {

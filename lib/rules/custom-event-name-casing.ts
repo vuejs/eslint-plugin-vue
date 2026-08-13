@@ -4,7 +4,7 @@
  */
 import type { NameWithLoc, VueObjectData } from '../utils/index.js'
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { getChecker } from '../utils/casing.ts'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 

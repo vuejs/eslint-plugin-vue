@@ -1,5 +1,5 @@
 import * as espree from 'espree'
-import utils from '../../../lib/utils'
+import * as utils from '../../../lib/utils'
 import assert from 'node:assert'
 
 const {

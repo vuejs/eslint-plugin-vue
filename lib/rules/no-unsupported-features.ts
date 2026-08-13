@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import semver from 'semver'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import slotScopeAttribute from './syntaxes/slot-scope-attribute.js'
 import dynamicDirectiveArguments from './syntaxes/dynamic-directive-arguments.js'
 import vSlot from './syntaxes/v-slot.js'

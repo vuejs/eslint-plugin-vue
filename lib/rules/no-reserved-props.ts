@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import type { ComponentProp } from '../utils/index.js'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { kebabCase } from '../utils/casing.ts'
 
 const RESERVED = {

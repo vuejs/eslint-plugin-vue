@@ -2,7 +2,7 @@
  * @author Armano
  */
 import type { Linter } from 'eslint'
-import utils from '../../../lib/utils/index'
+import * as utils from '../../../lib/utils/index'
 import { RuleTester } from '../../eslint-compat'
 import tsEslintParser from '@typescript-eslint/parser'
 

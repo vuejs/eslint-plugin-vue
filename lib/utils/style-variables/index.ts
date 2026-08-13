@@ -1,4 +1,4 @@
-import utils from '../index.js'
+import * as utils from '../index.js'
 
 export class StyleVariablesContext {
   context: RuleContext

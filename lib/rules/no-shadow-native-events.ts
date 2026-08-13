@@ -4,12 +4,13 @@
  */
 import domEvents from '../utils/dom-events.json' with { type: 'json' }
 import { findVariable } from '@eslint-community/eslint-utils'
-import utils, {
-  type ComponentEmit,
-  type NameWithLoc,
-  type VueObjectData,
-  type VueObjectType
+import type {
+  ComponentEmit,
+  NameWithLoc,
+  VueObjectData,
+  VueObjectType
 } from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 interface VueTemplateDefineData {
   type: VueObjectType | 'setup'

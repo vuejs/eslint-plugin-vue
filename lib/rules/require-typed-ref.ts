@@ -3,7 +3,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { iterateDefineRefs } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 function isNullOrUndefined(node: Expression | SpreadElement) {
   return (

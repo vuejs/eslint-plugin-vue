@@ -2,7 +2,7 @@
  * @author Wayne Zhang
  * See LICENSE file in root directory for full license.
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { toRegExpGroupMatcher } from '../utils/regexp.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }

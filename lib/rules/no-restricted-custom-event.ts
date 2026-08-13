@@ -4,7 +4,7 @@
  */
 import { findVariable } from '@eslint-community/eslint-utils'
 import type { NameWithLoc } from '../utils/index.js'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { toRegExp } from '../utils/regexp.ts'
 
 interface ParsedOption {

@@ -2,7 +2,7 @@
  * @author Yosuke Ota
  */
 import { isParenthesized } from '@eslint-community/eslint-utils'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { getStyleVariablesContext } from '../utils/style-variables/index.ts'
 
 // eslint-disable-next-line internal/no-invalid-meta

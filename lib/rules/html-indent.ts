@@ -4,7 +4,7 @@
  * See LICENSE file in root directory for full license.
  */
 import { defineVisitor } from '../utils/indent-common.ts'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 export default {
   create(context: RuleContext) {

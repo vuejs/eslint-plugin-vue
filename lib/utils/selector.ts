@@ -2,7 +2,7 @@
 
 import parser from 'postcss-selector-parser'
 import nthCheck from 'nth-check'
-import utils from './index.js'
+import * as utils from './index.js'
 
 export interface VElementSelector {
   test: (element: VElement) => boolean

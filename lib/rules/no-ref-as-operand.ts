@@ -9,7 +9,7 @@ import type {
 } from '../utils/ref-object-references.ts'
 import { findVariable } from '@eslint-community/eslint-utils'
 import { extractRefObjectReferences } from '../utils/ref-object-references.ts'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 /**
  * Checks whether the given identifier reference has been initialized with a ref object.

@@ -2,7 +2,7 @@
  * @fileoverview disallow the use of reserved names in component definitions
  * @author Jake Hassel <https://github.com/shadskii>
  */
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 import { capitalize, pascalCase } from '../utils/casing.ts'
 import htmlElements from '../utils/html-elements.json' with { type: 'json' }
 import deprecatedHtmlElements from '../utils/deprecated-html-elements.json' with { type: 'json' }

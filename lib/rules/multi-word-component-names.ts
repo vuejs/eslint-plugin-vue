@@ -4,7 +4,7 @@
  */
 import path from 'node:path'
 import { isPascalCase, kebabCase } from '../utils/casing.ts'
-import utils from '../utils/index.js'
+import * as utils from '../utils/index.js'
 
 export default {
   meta: {
