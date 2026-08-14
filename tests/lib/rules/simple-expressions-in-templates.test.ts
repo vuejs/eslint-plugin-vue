@@ -28,11 +28,54 @@ tester.run('simple-expressions-in-templates', rule, {
     {
       filename: 'test.vue',
       code: `
+      <template>{{ }}</template>
+      `,
+      name: 'Empty Mustache Interpolation'
+    },
+    {
+      filename: 'test.vue',
+      code: `
       <template>
         {{ normalizedFullName }}
       </template>
       `,
       name: 'Valid Style Guide Example'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test() }}
+      </template>
+      `,
+      name: 'CallExpression with Identifier as Callee'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test.test() }}
+      </template>
+      `,
+      name: 'CallExpression with MemberExpression as Callee'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test(' ') }}
+      </template>
+      `,
+      name: 'CallExpression with Literal as Argument'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test(() => {}) }}
+      </template>
+      `,
+      name: 'CallExpression with ArrowFunctionExpression as Argument'
     }
   ],
   invalid: [
