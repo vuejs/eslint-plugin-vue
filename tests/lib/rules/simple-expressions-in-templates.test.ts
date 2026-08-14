@@ -103,6 +103,42 @@ tester.run('simple-expressions-in-templates', rule, {
         }
       ],
       name: 'Invalid Style Guide Example'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test()() }}
+      </template>
+      `,
+      errors: [
+        {
+          message: rule.meta.messages.simpleExpressions,
+          line: 3,
+          column: 12,
+          endLine: 3,
+          endColumn: 20
+        }
+      ],
+      name: 'CallExpression with CallExpression as Callee'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test(test()) }}
+      </template>
+      `,
+      errors: [
+        {
+          message: rule.meta.messages.simpleExpressions,
+          line: 3,
+          column: 12,
+          endLine: 3,
+          endColumn: 24
+        }
+      ],
+      name: 'CallExpression with CallExpression as Argument'
     }
   ]
 })
