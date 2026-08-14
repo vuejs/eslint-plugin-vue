@@ -29,7 +29,7 @@ export default {
 
         if (!expression) return
 
-        if (expressionComplexity(context.sourceCode, expression) > 1) {
+        if (expressionComplexity(context.sourceCode, expression)) {
           context.report({
             node: expression,
             messageId: 'simpleExpressions'
@@ -40,23 +40,40 @@ export default {
   }
 }
 
-function expressionComplexity(sourceCode: SourceCode, node: ASTNode) {
-  let number = node.type === 'CallExpression' ? 1 : 0
+/**
+ * This function calculates the complexity of an expression and returns `true` if the complexity exceeds the given limit.
+ */
+function expressionComplexity(
+  sourceCode: SourceCode,
+  node: ASTNode,
+  complexity = 1
+) {
+  if (complexity < 0) return true
 
-  const list =
-    (sourceCode.visitorKeys[node.type] as (keyof typeof node)[]) ?? []
+  let number = 0
 
-  for (const key of list) {
-    const value = node[key] as ASTNode | ASTNode[]
+  function traverse(node: ASTNode) {
+    // Early Return: Return `true` if `complexity` has been exceeded.
+    if (node.type === 'CallExpression' && ++number > complexity) return true
 
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        number += expressionComplexity(sourceCode, item)
-      }
-    } else if (value) {
-      number += expressionComplexity(sourceCode, value)
+    // If the node type is unknown, its children are ignored.
+    const list =
+      (sourceCode.visitorKeys[node.type] as (keyof typeof node)[]) ?? []
+
+    // Recursive Step: Recursively traverse all children of the current node.
+    for (const key of list) {
+      const value = node[key] as ASTNode | ASTNode[]
+
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          if (traverse(item)) return true
+        }
+      } else if (value && traverse(value)) return true
     }
+
+    // Base Case: Return `false` if there are no more children to traverse.
+    return false
   }
 
-  return number
+  return traverse(node)
 }
