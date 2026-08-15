@@ -29,21 +29,7 @@ const v6 = computed(() => fn(count.value) /* ✓ GOOD */)
 
 </eslint-code-block>
 
-This rule also supports Reactivity Transform, but Reactivity Transform is an experimental feature and may have false positives due to future Vue changes.\
-See the [RFC](https://github.com/vuejs/rfcs/pull/420) for more information on Reactivity Transform.
-
-<eslint-code-block :rules="{'vue/no-ref-object-reactivity-loss': ['error']}" language="javascript" filename="example.js" >
-
-```js
-const count = $ref(0)
-const v1 = count /* ✗ BAD */
-const v2 = $computed(() => count /* ✓ GOOD */)
-const v3 = fn(count) /* ✗ BAD */
-const v4 = fn($$(count)) /* ✓ GOOD */
-const v5 = $computed(() => fn(count) /* ✓ GOOD */)
-```
-
-</eslint-code-block>
+This rule used to also support [Reactivity Transform](https://vuejs.org/guide/extras/reactivity-transform.html) (`$ref()`, `$computed()`, `$$()`, etc.), but that proposal was dropped from Vue, so support for it was removed.
 
 ## :wrench: Options
 
