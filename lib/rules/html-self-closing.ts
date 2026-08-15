@@ -10,7 +10,7 @@ import {
   isSvgElementNode,
   isMathElementNode,
   defineTemplateBodyVisitor,
-  hasInvalidEOF as utilsHasInvalidEOF
+  hasInvalidEOF
 } from '../utils/index.js'
 
 /**
@@ -128,13 +128,13 @@ export default {
   create(context: RuleContext) {
     const sourceCode = context.sourceCode
     const options = parseOptions(context.options[0])
-    let hasInvalidEOF = false
+    let hasTemplateEOFError = false
 
     return defineTemplateBodyVisitor(
       context,
       {
         VElement(node) {
-          if (hasInvalidEOF || node.parent.type === 'VDocumentFragment') {
+          if (hasTemplateEOFError || node.parent.type === 'VDocumentFragment') {
             return
           }
 
@@ -211,7 +211,7 @@ export default {
       },
       {
         Program(node) {
-          hasInvalidEOF = utilsHasInvalidEOF(node)
+          hasTemplateEOFError = hasInvalidEOF(node)
         }
       }
     )

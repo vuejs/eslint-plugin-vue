@@ -12,7 +12,7 @@ import {
   isMathWellKnownElementName,
   isVueBuiltInElementName,
   defineTemplateBodyVisitor,
-  hasInvalidEOF as utilsHasInvalidEOF,
+  hasInvalidEOF,
   executeOnVue,
   getRegisteredComponents
 } from '../utils/index.js'
@@ -157,13 +157,13 @@ export default {
       )
     }
 
-    let hasInvalidEOF = false
+    let hasTemplateEOFError = false
 
     return defineTemplateBodyVisitor(
       context,
       {
         VElement(node) {
-          if (hasInvalidEOF) {
+          if (hasTemplateEOFError) {
             return
           }
 
@@ -198,7 +198,7 @@ export default {
       },
       {
         Program(node) {
-          hasInvalidEOF = utilsHasInvalidEOF(node)
+          hasTemplateEOFError = hasInvalidEOF(node)
         },
         ...(shouldCheckRegisteredComponentsOnly
           ? executeOnVue(context, (obj) => {
