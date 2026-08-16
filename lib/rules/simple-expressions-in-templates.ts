@@ -15,7 +15,18 @@ export default {
       url: 'https://eslint.vuejs.org/rules/simple-expressions-in-templates.html'
     },
     fixable: null,
-    schema: [],
+    schema: {
+      type: 'array',
+      minItems: 0,
+      maxItems: 1,
+      items: [
+        {
+          type: 'number',
+          minimum: 0
+        }
+      ]
+    },
+    defaultOptions: [1],
     messages: {
       simpleExpressions:
         'Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.'
@@ -29,7 +40,9 @@ export default {
 
         if (!expression) return
 
-        if (expressionComplexity(context.sourceCode, expression)) {
+        const [complexity] = context.options as [number]
+
+        if (expressionComplexity(context.sourceCode, expression, complexity)) {
           context.report({
             node: expression,
             messageId: 'simpleExpressions'
@@ -46,7 +59,7 @@ export default {
 function expressionComplexity(
   sourceCode: SourceCode,
   node: ASTNode,
-  complexity = 1
+  complexity: number
 ) {
   if (complexity < 0) return true
 

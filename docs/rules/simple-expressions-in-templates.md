@@ -13,14 +13,20 @@ description: disallow complex template expressions
 
 ## :book: Rule Details
 
-This rule disallows complex template expressions, which are expressions containing more than one function call. As per the [Vue Style Guide](https://vuejs.org/style-guide/rules-strongly-recommended.html#simple-expressions-in-templates):
+This rule disallows complex template expressions. As per the [Vue Style Guide](https://vuejs.org/style-guide/rules-strongly-recommended.html#simple-expressions-in-templates):
 
 > Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.
+
+The complexity of an expression is calculated by counting all function calls.
 
 <eslint-code-block :rules="{'vue/simple-expressions-in-templates': ['error']}">
 
 ```vue
 <template>
+  <!-- eslint "vue/simple-expressions-in-templates": ["error", 1] -->
+
+  {{ normalizedFullName }}
+
   {{
     fullName
       .split(' ')
@@ -36,4 +42,10 @@ This rule disallows complex template expressions, which are expressions containi
 
 ## :wrench: Options
 
-Nothing.
+```json
+{
+  "vue/simple-expressions-in-templates": ["error", 1]
+}
+```
+
+This rule has one option, which is the maximum allowed complexity for a "mustache" template expression.

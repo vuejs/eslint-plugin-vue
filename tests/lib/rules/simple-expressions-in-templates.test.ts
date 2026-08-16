@@ -76,6 +76,33 @@ tester.run('simple-expressions-in-templates', rule, {
       </template>
       `,
       name: 'CallExpression with ArrowFunctionExpression as Argument'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ normalizedFullName }}
+      </template>
+      `,
+      options: [0],
+      name: 'Valid Style Guide Example with Complexity 0'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{
+          fullName
+            .split(' ')
+            .map((word) => {
+              return word[0].toUpperCase() + word.slice(1)
+            })
+            .join(' ')
+        }}
+      </template>
+      `,
+      options: [5],
+      name: 'Invalid Style Guide Example with Complexity 5'
     }
   ],
   invalid: [
@@ -139,6 +166,51 @@ tester.run('simple-expressions-in-templates', rule, {
         }
       ],
       name: 'CallExpression with CallExpression as Argument'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{
+          fullName
+            .split(' ')
+            .map((word) => {
+              return word[0].toUpperCase() + word.slice(1)
+            })
+            .join(' ')
+        }}
+      </template>
+      `,
+      options: [4],
+      errors: [
+        {
+          message: rule.meta.messages.simpleExpressions,
+          line: 4,
+          column: 11,
+          endLine: 9,
+          endColumn: 23
+        }
+      ],
+      name: 'Invalid Style Guide Example with Complexity 4'
+    },
+    {
+      filename: 'test.vue',
+      code: `
+      <template>
+        {{ test() }}
+      </template>
+      `,
+      options: [0],
+      errors: [
+        {
+          message: rule.meta.messages.simpleExpressions,
+          line: 3,
+          column: 12,
+          endLine: 3,
+          endColumn: 18
+        }
+      ],
+      name: 'CallExpression with Complexity 0'
     }
   ]
 })
