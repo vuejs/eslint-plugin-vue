@@ -25,9 +25,17 @@ async function main() {
       require.resolve('../lib/utils/deprecated-html-elements.json')
     const elements = new Set()
 
-    const domDl = jsdom.JSDOM.fragment(obsoleteHtml).querySelector(
+    // `:scope` never matches a `DocumentFragment`, so `obsoleteHtml` has to be
+    // parsed as a document rather than with `jsdom.JSDOM.fragment()`.
+    const { document } = new jsdom.JSDOM(obsoleteHtml).window
+    const domDl = document.querySelector(
       ':scope [id="non-conforming-features"] ~ dl'
     )
+    if (!domDl) {
+      throw new Error(
+        'Could not find the "Non-conforming features" element list in the HTML Standard'
+      )
+    }
     for (const code of domDl.querySelectorAll(':scope dt code')) {
       const name = code.textContent.trim()
       if (name) elements.add(name)
