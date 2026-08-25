@@ -131,6 +131,29 @@ export default {
 
 </eslint-code-block>
 
+This rule also reports mutating a nested property of a [`defineModel()`](https://vuejs.org/api/sfc-script-setup.html#definemodel) ref. `defineModel()` returns a ref that bridges a prop and its `update:modelValue` emit, so you must reassign `model.value` to trigger the emit. Mutating a nested property in place bypasses the emit and silently desyncs the parent.
+
+<eslint-code-block :rules="{'vue/no-mutating-props': ['error']}">
+
+```vue
+<script setup>
+const model = defineModel()
+
+// ✗ BAD
+function bad() {
+  model.value.name = 'test'
+  model.value.items.push(1)
+}
+
+// ✓ GOOD
+function good() {
+  model.value = { ...model.value, name: 'test' }
+}
+</script>
+```
+
+</eslint-code-block>
+
 ## :wrench: Options
 
 ```json

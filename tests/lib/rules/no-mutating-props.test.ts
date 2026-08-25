@@ -428,6 +428,52 @@ ruleTester.run('no-mutating-props', rule, {
           }
         </script>
       `
+    },
+    {
+      // defineModel(): reassigning the ref is the correct update pattern
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      model.value = { ...model.value, foo: 1 }
+      model.value = [...model.value, 1]
+      model.value++
+      </script>
+      `
+    },
+    {
+      // defineModel(): unrelated local variable is not a model mutation
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      const local = { foo: 1 }
+      local.foo = 2
+      </script>
+      `
+    },
+    {
+      // defineModel(): reading nested values is fine
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      const name = model.value.name
+      const first = model.value.items[0]
+      </script>
+      `
+    },
+    {
+      // defineModel() with shallowOnly allows nested mutation
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      model.value.foo = 1
+      model.value.items.push(1)
+      </script>
+      `,
+      options: [{ shallowOnly: true }]
     }
   ],
 
@@ -1458,6 +1504,120 @@ ruleTester.run('no-mutating-props', rule, {
           column: 24,
           endLine: 7,
           endColumn: 68
+        }
+      ]
+    },
+    {
+      // https://github.com/vuejs/eslint-plugin-vue/issues/3130
+      // defineModel(): nested mutation of the ref bypasses update:modelValue
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      model.value.foo = 1
+      model.value.items[0] = 1
+      model.value.items.push(1)
+      model.value.items.splice(0, 1)
+      model.value.a.b.c = 1
+      model.value.count++
+      delete model.value.foo
+      Object.assign(model.value, { foo: 1 })
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 5,
+          column: 7,
+          endLine: 5,
+          endColumn: 31
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 6,
+          column: 7,
+          endLine: 6,
+          endColumn: 32
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 7,
+          column: 7,
+          endLine: 7,
+          endColumn: 37
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 8,
+          column: 7,
+          endLine: 8,
+          endColumn: 28
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 9,
+          column: 7,
+          endLine: 9,
+          endColumn: 26
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 10,
+          column: 7,
+          endLine: 10,
+          endColumn: 29
+        },
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 11,
+          column: 7,
+          endLine: 11,
+          endColumn: 45
+        }
+      ]
+    },
+    {
+      // defineModel('named'): still a model prop ref
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel('title')
+      model.value.foo = 1
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "title" prop.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 26
+        }
+      ]
+    },
+    {
+      // defineModel(): in-place mutating call on the model value itself
+      filename: 'test.vue',
+      code: `
+      <script setup>
+      const model = defineModel()
+      model.value.push(1)
+      </script>
+      `,
+      errors: [
+        {
+          message: 'Unexpected mutation of "modelValue" prop.',
+          line: 4,
+          column: 7,
+          endLine: 4,
+          endColumn: 26
         }
       ]
     }
